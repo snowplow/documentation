@@ -8,14 +8,14 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Snowplow Docs',
   tagline: '[Insert Tag line here]',
-  url: 'https://andy-hay.github.io/',
-  baseUrl: '/docsite-repo.github.io/',
+  url: 'https://andy-hay.github.io',
+  baseUrl: '/docsite-poc.github.io/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   trailingSlash: false,
   organizationName: 'Andy-Hay', // Usually your GitHub org/user name.
-  projectName: 'docsite-repo.github.io', // Usually your repo name.
+  projectName: 'docsite-poc.github.io', // Usually your repo name.
   deploymentBranch: 'main',
   i18n: {
     defaultLocale: 'en',

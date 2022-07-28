@@ -67,6 +67,7 @@ const config = {
           { to: '/blog', label: 'Blog', position: 'left' },
           { to: '/page-with-badges.html', label: 'Badges', position: 'left' },
           { to: '/introduction-to-tracking-design.html', label: 'Tracking', position: 'left' },
+          { to: '/code-syntax.html', label: 'Code', position: 'left' },
           {
             href: 'https://github.com/Andy-Hay/docsite-poc.github.io',
             label: 'GitHub',
@@ -120,8 +121,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: require('prism-react-renderer/themes/dracula'),
       },
     }),
 };

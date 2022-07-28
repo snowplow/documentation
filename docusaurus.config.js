@@ -9,7 +9,7 @@ const config = {
   title: 'Snowplow Docs',
   tagline: '[Insert Tag line here]',
   url: 'https://andy-hay.github.io',
-  baseUrl: '/',
+  baseUrl: '/docsite-poc.github.io/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',

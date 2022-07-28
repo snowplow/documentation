@@ -65,6 +65,7 @@ const config = {
             label: 'Tutorial',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
+          { to: '/page-with-badges.html', label: 'Badges', position: 'left' },
           {
             href: 'https://github.com/Andy-Hay/docsite-poc.github.io',
             label: 'GitHub',

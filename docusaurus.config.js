@@ -79,28 +79,15 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/intro',
-              },
-            ],
-          },
-          {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'GitHub for Open Source Snowplow',
+                href: 'https://github.com/snowplow/snowplow',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'Discourse',
+                href: 'https://discourse.snowplowanalytics.com/',
               },
             ],
           },
@@ -109,10 +96,18 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                to: '/blog',
+                href: 'https://snowplowanalytics.com/blog/',
               },
               {
-                label: 'GitHub',
+                label: 'Meetups',
+                href: 'https://www.meetup.com/topics/snowplow/',
+              },
+              {
+                label: 'Events',
+                href: 'https://snowplowanalytics.com/events/',
+              },
+              {
+                label: 'GitHub for these docs',
                 href: 'https://github.com/Andy-Hay/docsite-poc.github.io',
               },
             ],

@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Snowplow Docs',
-  tagline: '[Insert Tag line here]',
+  tagline: 'Build, deploy, and scale your next data creation project using Snowplow.',
   url: 'https://andy-hay.github.io',
   baseUrl: '/docsite-poc.github.io/',
   onBrokenLinks: 'throw',

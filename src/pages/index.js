@@ -8,7 +8,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
@@ -17,8 +17,14 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            href="https://go.snowplowanalytics.com/l/571483/2021-02-19/3sn5nml">
+            Book a demo 📅
+          </Link>
+          &nbsp;&nbsp;&nbsp;
+          <Link
+            className="button button--secondary button--lg"
+            href="https://try.snowplowanalytics.com/?utm_content=hero-cta&utm_campaign=snowplow-docs">
+            Try Snowplow 🚀
           </Link>
         </div>
       </div>
@@ -27,7 +33,7 @@ function HomepageHeader() {
 }
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}

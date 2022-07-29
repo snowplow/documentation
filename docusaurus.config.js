@@ -60,7 +60,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'migrated/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/index',
             position: 'left',
             label: 'Documentation',
           },

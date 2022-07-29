@@ -6,7 +6,7 @@ const FeatureList = [
   {
     title: 'Getting Started with Snowplow',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    link: "docs/intro",
+    link: "docs/migrated/getting-started-with-snowplow-bdp",
     description: (
       <>
         Information on how to get started with the various flavours of Snowplow.
@@ -16,7 +16,7 @@ const FeatureList = [
   {
     title: 'Understanding your pipeline',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    link: "docs/intro",
+    link: "docs/migrated/understanding-your-pipeline/architecture-overview-aws",
     description: (
       <>
         What is the Snowplow pipeline and what to use to achieve your data needs.
@@ -26,7 +26,7 @@ const FeatureList = [
   {
     title: 'Modelling your data',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    link: "docs/intro",
+    link: "docs/migrated/modeling-your-data/what-is-data-modeling",
     description: (
       <>
         Guidance on how to model your data.
@@ -36,7 +36,7 @@ const FeatureList = [
   {
     title: 'Trackers',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    link: "docs/intro",
+    link: "docs/migrated/collecting-data/collecting-from-own-applications",
     description: (
       <>
         Information on all the trackers available.
@@ -46,7 +46,7 @@ const FeatureList = [
   {
     title: 'Pipeline components and applications',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    link: "docs/intro",
+    link: "docs/migrated/pipeline-components-and-applications",
     description: (
       <>
         Information on all the pipeline components and applications available.
@@ -56,7 +56,7 @@ const FeatureList = [
   {
     title: 'Tutorials',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    link: "docs/intro",
+    link: "docs/migrated/tutorials",
     description: (
       <>
         A number of tutorials on techniques to get your pipelines running.

@@ -1,0 +1,24 @@
+---
+title: "Migrating from 0.1.0"
+date: "2020-04-15"
+sidebar_position: 60
+---
+
+From a user point-of-view changes in recovery process introduced in 0.2.0 boil down to:
+
+- data sinks
+- configuration
+
+### Data Sinks
+
+Since version 0.2 data is delivered to PubSub (GCP) and Kinesis (AWS) and only failed (ones which did not get recovery flows successfully applied) and unrecoverable (ones which are considered faulty beyond fixing) are stored in GCS (GCP) and S3 (AWS) buckets. These require additional command-line output parameters: `--failedOutput` and `--unrecoverableOutput` pointing to bucket paths.
+
+### Configuration
+
+As described in Concepts, configuration is significantly different and instead of introducing specific set of custom JSON configuration objects relies on more generic approach built upon JSON Patch. In order to migrate existing configurations to work with 0.2.0+ versions of recovery they should be migrates as follows:
+
+<table><tbody><tr><td>0.1.x</td><td>0.2.x</td><td>Comments</td></tr><tr><td><code>PassThrough</code></td><td>-</td><td>empty steps mean pass-through</td></tr><tr><td><code>ReplaceInQueryString</code></td><td><code>Replace</code> step</td><td>query string is deconstructed into individual <code>parameters</code> or <code>querystring</code> fields depending on bad row type</td></tr><tr><td><code>RemoveFromQueryString</code></td><td><code>Replace</code> step</td><td>query string is deconstructed into individual <code>parameters</code> or <code>querystring</code> fields depending on bad row type</td></tr><tr><td><code>ReplaceInBase64FieldInQueryString</code></td><td><code>Replace</code> step</td><td>Base64-encoded and inline JSON fields are treated just as any other field. Structure within base64-encoded strings can be accessed by JsonPath.</td></tr><tr><td><code>ReplaceInBody</code></td><td><code>Replace</code> step</td><td></td></tr><tr><td><code>RemoveFromBody</code></td><td><code>Remove</code> step</td><td></td></tr><tr><td><code>ReplaceInBase64FieldInBody</code></td><td><code>Replace</code> step</td><td>Base64-encoded and inline JSON fields are treated just as any other field. Structure within base64-encoded strings can be accessed by JsonPath.</td></tr></tbody></table>
+
+### Examples
+
+<table><tbody><tr><td class="has-text-align-left" data-align="left">0.1.x</td><td class="has-text-align-left" data-align="left"><code>{<br>"name": "ReplaceInBase64FieldInBody",<br>"error": "instance type (object) does not match any allowed primitive type (allowed: [\"null\",\"string\"])\n level: \"error\"\n schema: {\"loadingURI\":\"#\",\"pointer\":\"/properties/device/properties/geo/properties/country_iso2\"}",<br>"base64Field": "ue_px",<br>"toReplace": "\"country_iso2\":\{([^}]+)\}",<br>"replacement": "\"country_iso2\":\"bad_country_iso2.Str\""<br>}</code></td><td></td></tr><tr><td class="has-text-align-left" data-align="left">0.2.x</td><td class="has-text-align-left" data-align="left"><code>{<br>"op": "Replace",<br>"path": "parameters.cx.country_iso2",<br>"match": "(?U)^.*$",<br>"value": "bad_country_iso2.Str"<br>}</code></td><td>If the step is to be applied only to those rows that contain specific values the step may be combined with a condition, ie:<br><code>{<br>"op": "Test",<br>"path": "parameters.cx.country_iso2",<br>"value": { "regex": ".*"}<br>}</code></td></tr></tbody></table>

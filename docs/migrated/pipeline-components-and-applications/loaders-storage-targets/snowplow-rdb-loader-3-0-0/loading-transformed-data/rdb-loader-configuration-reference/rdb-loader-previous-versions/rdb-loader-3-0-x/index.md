@@ -1,0 +1,114 @@
+---
+title: "RDB Loader 3.0.x"
+date: "2022-05-27"
+sidebar_position: 10
+---
+
+An example of the minimal required config for the Redshift loader can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/redshift.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/redshift.config.reference.hocon).
+
+An example of the minimal required config for the Snowflake loader can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/snowflake.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/snowflake.config.reference.hocon).
+
+Both applications use a common module for core functionality, so only the `storage` sections are different in their config.
+
+This is a complete list of the options that can be configured:
+
+## **Redshift Loader** `storage` **section**
+
+|  |  |
+| --- | --- |
+| `type` | Optional. The only valid value is the default: `redshift`. |
+| `host` | Required. Host name of Redshift cluster. |
+| `port` | Required. Port of Redshift cluster. |
+| `database` | Required. Redshift database which the data will be loaded to. |
+| `roleArn` | Required. AWS Role ARN allowing Redshift to load data from S3. |
+| `schema` | Required. Redshift schema name, eg “atomic”. |
+| `username` | Required. DB user with permissions to load data. |
+| `password` | Required. Password of DB user. |
+| `maxError` | Optional. Configures the [Redshift MAXERROR load option](https://docs.aws.amazon.com/redshift/latest/dg/copy-parameters-data-load.html#copy-maxerror). The default is 10. |
+| `jdbc.*` | Optional. Custom JDBC configuration. The default value is `{"ssl": true}`. |
+| `jdbc.BlockingRowsMode` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.DisableIsValidQuery` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.DSILogLevel` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.FilterLevel` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.loginTimeout` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.loglevel` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.socketTimeout` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.ssl` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.sslMode` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.sslRootCert` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.tcpKeepAlive` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+| `jdbc.TCPKeepAliveMinutes` | Optional. Refer to the [Redshift JDBC driver reference](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/1.2.54.1082/Amazon+Redshift+JDBC+Connector+Install+Guide.pdf). |
+
+## **Snowflake Loader** `storage` **section**
+
+|  |  |
+| --- | --- |
+| `type` | Optional. The only valid value is the default: `snowflake`. |
+| `snowflakeRegion` | Required. AWS Region used by Snowflake to access its endpoint. |
+| `username` | Required. Snowflake user with necessary role granted to load data. |
+| `role` | Optional. Snowflake role with permission to load data. If it is not provided, the default role in Snowflake will be used. |
+| `password` | Required. Password of the Snowflake user. Can be plain text, or read from the EC2 parameter store (see below). |
+| `password.ec2ParameterStore.parameterName` | Alternative way for passing in the user password. |
+| `account` | Required. Target Snowflake account. |
+| `warehouse` | Required. Snowflake warehouse which the SQL statements submitted by Snowflake Loader will run on. |
+| `database` | Required. Snowflake database which the data will be loaded to. |
+| `schema` | Required. Target schema |
+| `transformedStage` | Required. Snowflake stage for transformed events. |
+| `folderMonitoringStage` | Required if `monitoring.folders` section is configured. Snowflake stage to load folder monitoring entries into temporary Snowflake table. |
+| `appName` | Optional. Name passed as 'application' property while creating Snowflake connection. The default is `Snowplow_OSS`. |
+| `maxError` | Optional. A table copy statement will skip an input file when the number of errors in it exceeds the specified number. This setting is used during initial loading and thus can filter out only invalid JSONs (which is impossible situation if used with Transformer). |
+| `jdbcHost` | Optional. Host for the JDBC driver that has priority over automatically derived hosts. If it is not given, host will be created automatically according to given `snowflakeRegion`. |
+
+## **Common loader settings**
+
+|  |  |
+| --- | --- |
+| `region` | Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). AWS region of the S3 bucket. |
+| `messageQueue` | Required. The name of the SQS queue used by the transformer and loader to communicate. |
+| `jsonpaths` | Optional. An S3 URI that holds JSONPath files. |
+| `schedules.*` | Optional. Periodic schedules to stop loading, eg for Redshift maintenance window. |
+| `schedules.noOperation.[*]` | Required if `schedules` section is configured. Array of objects which specifies no-operation windows. |
+| `schedules.noOperation.[*].name` | Human-readable name of the no-op window. |
+| `schedules.noOperation.[*].when` | Cron expression with second granularity. |
+| `schedules.noOperation.[*].duration` | For how long the loader should be paused. |
+| `retryQueue.*` | Optional. Additional backlog of recently failed folders that could be automatically retried. Retry queue saves a failed folder and then re-reads the info from `shredding_complete` S3 file. (Despite the legacy name of the message, which is required for backward compatibility, this also works with wide row format data.) |
+| `retryQueue.period` | Required if `retryQueue` section is configured. How often batch of failed folders should be pulled into a discovery queue. |
+| `retryQueue.size` | Required if `retryQueue` section is configured. How many failures should be kept in memory. After the limit is reached new failures are dropped. |
+| `retryQueue.maxAttempts` | Required if `retryQueue` section is configured. How many attempts to make for each folder. After the limit is reached new failures are dropped. |
+| `retryQueue.interval` | Required if `retryQueue` section is configured. Artificial pause after each failed folder being added to the queue. |
+| `retries.*` | Optional. Unlike `retryQueue` these retries happen immediately, without proceeding to another message. |
+| `retries.backoff` | Required if `retries` section is configured. Starting backoff period, eg '30 seconds'. |
+| `retries.strategy` | The only possible value is `EXPONENTIAL` |
+| `retries.attempts` | Optional. How many attempts to make before sending the message into retry queue. If missing, `cumulativeBound` will be used. |
+| `retries.cumulativeBound` | Optional. When backoff reaches this delay, eg '1 hour', the loader will stop retrying. If both this and `attempts` are not set, the loader will retry indefinitely. |
+| `timeouts.loading` | Optional. How long, eg '1 hour', `COPY` statement execution can take before considering Redshift unhealthy. If no progress (ie, moving to a different subfolder) within this period, the loader will abort the transaction. |
+| `timeouts.nonLoading` | Optional. How long, eg '10 mins', non-loading steps such as `ALTER TABLE` can take before considering Redshift unhealthy. |
+| `timeouts.sqsVisibility` | Optional. The time window in which a message must be acknowledged. Otherwise it is considered abandoned. If a message has been pulled, but hasn't been acked, the time before it is again available to consumers is equal to this, eg '5 mins'. Another consequence is that if the loader has failed on processing a message, the next time it will get this (or anything) from the queue has this delay. |
+
+## **Common monitoring settings**
+
+|  |  |
+| --- | --- |
+| `monitoring.webhook.endpoint` | Optional. An HTTP endpoint where monitoring alerts should be sent. |
+| `monitoring.webhook.tags` | Optional. Custom key-value pairs which can be added to the monitoring webhooks. Eg, {"tag1": "label1"}. |
+| `monitoring.snowplow.appId` | Optional. When using Snowplow tracking, set this `appId` in the event. |
+| `monitoring.snowplow.collector` | Optional. Set to a collector URL to turn on Snowplow tracking. |
+| `monitoring.sentry.dsn` | Optional. For tracking runtime exceptions. |
+| `monitoring.metrics.*` | Send metrics to a StatsD server or stdout. |
+| `monitoring.metrics.statsd.*` | Optional. For sending loading metrics (latency and event counts) to a StatsD server. |
+| `monitoring.metrics.statsd.hostname` | Required if `monitoring.metrics.statsd` section is configured. The host name of the StatsD server. |
+| `monitoring.metrics.statsd.port` | Required if `monitoring.metrics.statsd` section is configured. Port of the StatsD server. |
+| `monitoring.metrics.statsd.tags` | Optional. Tags which are used to annotate the StatsD metric with any contextual information. |
+| `monitoring.metrics.statsd.prefix` | Optional. Configures the prefix of StatsD metric names. The default is `snoplow.rdbloader`. |
+| `monitoring.metrics.stdout.*` | Optional. For sending metrics to stdout. |
+| `monitoring.metrics.stdout.prefix` | Optional. Overrides the default metric prefix. |
+| `monitoring.folders.*` | Optional. Configuration for periodic unloaded / corrupted folders checks. |
+| `monitoring.folders.staging` | Required if `monitoring.folders` section is configured. Path where loader could store auxiliary logs for folder monitoring. Loader should be able to write here, storage target should be able to load from here. |
+| `monitoring.folders.period` | Required if `monitoring.folders` section is configured. How often to check for unloaded / corrupted folders. |
+| `monitoring.folders.since` | Optional. Specifies from when folder monitoring will start to monitor. Note that this is a duration, eg `7 days`, relative to when the loader is launched. |
+| `monitoring.folders.until` | Optional. Specifies until when folder monitoring will monitor. Note that this is a duration, eg `7 days`, relative to when the loader is launched. |
+| `monitoring.folders.transformerOutput` | Required if `monitoring.folders` section is configured. Path to transformed archive. |
+| `monitoring.folders.failBeforeAlarm` | Required if `monitoring.folders` section is configured. How many times the check can fail before generating an alarm. Within the specified tolerance, failures will log a `WARNING` instead. |
+| `monitoring.healthCheck.*` | Optional. Periodic DB health check, raising a warning if DB hasn't responded to `SELECT 1`. |
+| `monitoring.healthCheck.frequency` | Required if `monitoring.healthCheck` section is configured. How often to run a periodic DB health check. |
+| `monitoring.healthCheck.timeout` | Required if `monitoring.healthCheck` section is configured. How long to wait for a health check response. |

@@ -43,7 +43,12 @@ wordpress-export-to-markdown/index.js \
     --save-scraped-images=true
 
 # MDX is really strict!
-grep -rl '<br>' $tmpoutput | xargs sed -i'' -e 's!<br>!<br/>!g'
+grep -rl '<br>' $tmpoutput |\
+    xargs sed -i'' -e 's!<br>!<br/>!g'
+
+# Make links relative
+grep -rl 'https://docs.snowplowanalytics.com/docs/' $tmpoutput |\
+    xargs sed -i'' -e 's!https://docs.snowplowanalytics.com/docs/!/docs/migrated/!g'
 
 rm -rf docs/migrated
 mv $tmpoutput/docs docs/migrated

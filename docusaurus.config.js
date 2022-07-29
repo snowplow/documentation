@@ -55,7 +55,7 @@ const config = {
         title: 'Snowplow Docs',
         logo: {
           alt: 'SnowPlow Docs Logo',
-          src: 'img/logo.svg',
+          src: 'img/snowplow-icon-light-purple.svg',
         },
         items: [
           {

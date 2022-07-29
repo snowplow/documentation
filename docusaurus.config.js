@@ -62,11 +62,9 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Documentation',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
           { to: '/page-with-badges.html', label: 'Badges', position: 'left' },
-          { to: '/introduction-to-tracking-design.html', label: 'Tracking', position: 'left' },
           { to: '/code-syntax.html', label: 'Code', position: 'left' },
           {
             href: 'https://github.com/Andy-Hay/docsite-poc.github.io',

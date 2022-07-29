@@ -41,7 +41,32 @@ Push changes back to your branch and then merge into main branch.  The Github
 Actions will deploy the change across into gh_pages branch that GitHub pages
 picks up.
 
-Note that when setting up in GitHub, create two branches:-
+Note that when setting up in GitHub, create two branches:
 
 - main - default branch, protected
 - gh-pages - protected
+
+## Importing from Wordpress
+
+First, initialise the `wordpress-export-to-markdown` submodule:
+
+```bash
+pushd wordpress-export-to-markdown
+npm install
+popd
+```
+
+Next, install some more tools:
+
+```bash
+pip3 install yq
+```
+
+Then export the content from Wordpress (choose “All content”).
+
+Finally, run the import script.
+**WARNING**: it will overwrite `docs/migrated`.
+
+```bash
+./import.sh <your-export-file.xml>
+```

@@ -4,38 +4,68 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: 'Getting Started with Snowplow',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    link: "docs/intro",
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Information on how to get started with the various flavours of Snowplow.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Understanding your pipeline',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    link: "docs/intro",
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        What is the Snowplow pipeline and what to use to achieve your data needs.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Modelling your data',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    link: "docs/intro",
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Guidance on how to model your data.
+      </>
+    ),
+  },
+  {
+    title: 'Trackers',
+    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    link: "docs/intro",
+    description: (
+      <>
+        Information on all the trackers available.
+      </>
+    ),
+  },
+  {
+    title: 'Pipeline components and applications',
+    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    link: "docs/intro",
+    description: (
+      <>
+        Information on all the pipeline components and applications available.
+      </>
+    ),
+  },
+  {
+    title: 'Tutorials',
+    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    link: "docs/intro",
+    description: (
+      <>
+        A number of tutorials on techniques to get your pipelines running.
       </>
     ),
   },
 ];
 
-function Feature({Svg, title, description}) {
+function Feature({ Svg, title, description, link }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
@@ -44,6 +74,7 @@ function Feature({Svg, title, description}) {
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
         <p>{description}</p>
+        <a href={link}><button>Read more</button></a>
       </div>
     </div>
   );

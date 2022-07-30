@@ -114,12 +114,12 @@ You can paste in any Redshift compatible SQL query to generate a specific slice 
 
 ```
 SELECT
-	domain_userid,
-	domain_sessionidx,
-	collector_tstamp,
-	page_urlpath,
-	page_title,
-	event
+ domain_userid,
+ domain_sessionidx,
+ collector_tstamp,
+ page_urlpath,
+ page_title,
+ event
 FROM events
 WHERE domain_userid = '594b77eb9d30435b'
 AND (event = 'page_ping' OR event = 'page_view')
@@ -137,49 +137,49 @@ pv.unique_visitors,
 ab.uniques_that_add_to_basket,
 t.uniques_that_purchase
 FROM (
-	SELECT
-	page_urlpath,
-	COUNT(DISTINCT(domain_userid)) AS unique_visitors,
-	COUNT(*) AS page_views
-	FROM "events"
-	WHERE (                                    # Only display results for *product* pages
-		(page_urlpath LIKE '/tarot-cards/%' )
-		OR ( page_urlpath LIKE '/oracles/%' )
-		OR (page_urlpath LIKE '/pendula/%')
-		OR (page_urlpath LIKE '/jewellery/%')
-	) AND "event" = 'page_view'
-	AND page_urlhost = 'www.psychicbazaar.com' # Only display results for the *production website*
-	GROUP BY page_urlpath
+ SELECT
+ page_urlpath,
+ COUNT(DISTINCT(domain_userid)) AS unique_visitors,
+ COUNT(*) AS page_views
+ FROM "events"
+ WHERE (                                    # Only display results for *product* pages
+  (page_urlpath LIKE '/tarot-cards/%' )
+  OR ( page_urlpath LIKE '/oracles/%' )
+  OR (page_urlpath LIKE '/pendula/%')
+  OR (page_urlpath LIKE '/jewellery/%')
+ ) AND "event" = 'page_view'
+ AND page_urlhost = 'www.psychicbazaar.com' # Only display results for the *production website*
+ GROUP BY page_urlpath
 ) pv
 LEFT JOIN (
-	SELECT
-	page_urlpath,
-	ev_label AS product_sku,
-	COUNT(DISTINCT(domain_userid)) AS uniques_that_add_to_basket,
-	COUNT(*) AS number_of_add_to_baskets,
-	SUM(ev_property) AS number_of_products_added_to_baket
-	FROM events
-	WHERE (                                    # Only display results for *product* pages
-		(page_urlpath LIKE '/tarot-cards/%' )
-		OR ( page_urlpath LIKE '/oracles/%' )
-		OR (page_urlpath LIKE '/pendula/%')
-		OR (page_urlpath LIKE '/jewellery/%'))
-	AND "event" = 'struct'
-	AND "ev_category" = 'ecomm'
-	AND "ev_action" = 'add-to-basket'
-	AND page_urlhost = 'www.psychicbazaar.com'
-	GROUP BY page_urlpath, product_sku
+ SELECT
+ page_urlpath,
+ ev_label AS product_sku,
+ COUNT(DISTINCT(domain_userid)) AS uniques_that_add_to_basket,
+ COUNT(*) AS number_of_add_to_baskets,
+ SUM(ev_property) AS number_of_products_added_to_baket
+ FROM events
+ WHERE (                                    # Only display results for *product* pages
+  (page_urlpath LIKE '/tarot-cards/%' )
+  OR ( page_urlpath LIKE '/oracles/%' )
+  OR (page_urlpath LIKE '/pendula/%')
+  OR (page_urlpath LIKE '/jewellery/%'))
+ AND "event" = 'struct'
+ AND "ev_category" = 'ecomm'
+ AND "ev_action" = 'add-to-basket'
+ AND page_urlhost = 'www.psychicbazaar.com'
+ GROUP BY page_urlpath, product_sku
 ) ab
 ON pv.page_urlpath = ab.page_urlpath
 LEFT JOIN (
-	SELECT
-	ti_sku,
-	COUNT(DISTINCT(domain_userid)) AS uniques_that_purchase,
-	COUNT(DISTINCT(ti_orderid)) AS number_of_orders,
-	SUM(ti_quantity) AS actual_number_sold
-	FROM events
-	WHERE "event" = 'transaction_item'
-	GROUP BY ti_sku
+ SELECT
+ ti_sku,
+ COUNT(DISTINCT(domain_userid)) AS uniques_that_purchase,
+ COUNT(DISTINCT(ti_orderid)) AS number_of_orders,
+ SUM(ti_quantity) AS actual_number_sold
+ FROM events
+ WHERE "event" = 'transaction_item'
+ GROUP BY ti_sku
 ) t
 ON ab.product_sku = t.ti_sku
 ```
@@ -188,7 +188,7 @@ to produce a data set where there was one line of data for every product sold on
 
 When you fetch smaller data sets from Snowplow / Redshift, you can ask Tableau to import these rather than read them directly from Redshift:
 
-![](images/6.JPG)
+![](images/6.jpg)
 
 ## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#5-next-steps)5\. Next steps
 

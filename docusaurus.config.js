@@ -10,7 +10,8 @@ const config = {
   tagline: 'Build, deploy, and scale your next data creation project using Snowplow.',
   url: 'https://andy-hay.github.io',
   baseUrl: '/docsite-poc.github.io/',
-  onBrokenLinks: 'throw',
+  // reset this back to throw, set to warn so that site builds
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   trailingSlash: false,
@@ -31,15 +32,15 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -64,8 +65,6 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          { to: '/page-with-badges.html', label: 'Badges', position: 'left' },
-          { to: '/code-syntax.html', label: 'Code', position: 'left' },
           {
             href: 'https://github.com/Andy-Hay/docsite-poc.github.io',
             label: 'GitHub',

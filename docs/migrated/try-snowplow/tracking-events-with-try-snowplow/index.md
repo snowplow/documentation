@@ -11,7 +11,7 @@ Try Snowplow is a limited trial of the full Snowplow BDP product and has an even
 ## Instrumenting the web tracker in your application
 
 - Copy the JavaScript code snippet from the Try Snowplow console.
-- Paste the tracking code into the page source <head> section of your application and deploy the changes.
+- Paste the tracking code into the page source `<head>` section of your application and deploy the changes.
 - Your pipeline should now capture events from your application.
 
 ## Instrumenting the web tracker via Google Tag Manager

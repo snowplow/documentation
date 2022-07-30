@@ -63,7 +63,6 @@ For a basic example of the Singleton pattern:
   if (self) {
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         
-```
 
 \[builder setUrlEndpoint:@"com.acme"\]
 
@@ -74,6 +73,7 @@ For a basic example of the Singleton pattern:
 ; }\]; } return self; }
 
 @end
+```
 
 You can then access your Tracker via `SnowplowManager *snowplowManager = [SnowplowManager snowplowManager]`.
 
@@ -130,8 +130,6 @@ To instantiate a tracker in your code simply instantiate the `SPTracker` class
 ```
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     
-```
-
 \[builder setEmitter:emitter\]
 
 ; // Required
@@ -167,6 +165,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 \[builder setCheckInterval:10\]
 
 ; // Optional }\];
+```
 
 | **Builder Function** | **Description** |
 | --- | --- |
@@ -205,8 +204,6 @@ By default, no client sessionization is activated. Once enabled the Tracker will
 ```
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     ...
-    
-```
 
 \[builder setForegroundTimeout:600\]
 
@@ -215,6 +212,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 \[builder setBackgroundTimeout:300\]
 
 ; // 5 minutes }\];
+```
 
 #### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#226-pauseeventtracking)2.2.6 `pauseEventTracking`
 
@@ -248,8 +246,6 @@ SPSubject *subject = [[SPSubject alloc] initWithPlatformContext:YES andGeoContex
 // Add it to the Tracker during construction...
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [...]
-    
-```
 
 \[builder setSubject:subject\]
 
@@ -260,6 +256,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 \[tracker setSubject:subject\]
 
 ;
+```
 
 **NOTE**: `initWithPlatformContext` refers to getting the context for the particular platform that the Tracker is running on. In the case of an iOS application, this will then automatically fetch the `mobile_context` for all of your events.
 
@@ -474,8 +471,6 @@ Sending the movie poster context with an event looks like this:
 
 ```
 event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"DemoCategory"\]
 
@@ -492,6 +487,7 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 \[tracker trackStructuredEvent:event\]
 
 ;
+```
 
 _Note that even if there is only one custom context attached to the event, it still needs to be placed in an array._
 
@@ -506,7 +502,6 @@ Here is an example:
 ```
 event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
   
-```
 
 \[builder setCategory:@"DemoCategory"\]
 
@@ -523,6 +518,7 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 \[tracker trackStructuredEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#413-optional-event-id-argument)4.1.3 Optional Event ID argument
 
@@ -534,8 +530,6 @@ Here is an example:
 
 ```
 event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"DemoCategory"\]
 
@@ -552,6 +546,7 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 \[tracker trackStructuredEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#414-tracker-method-return-values)4.1.4 Tracker method return values
 
@@ -573,8 +568,6 @@ Example:
 
 ```
 SPScreenView *event = [SPScreenView build:^(id<SPScreenViewBuilder> builder) {
-  
-```
 
 \[builder setName:@"HUD > Save Game"\]
 
@@ -587,6 +580,7 @@ SPScreenView *event = [SPScreenView build:^(id<SPScreenViewBuilder> builder) {
 \[tracker\_ trackScreenViewEvent:event\]
 
 ;
+```
 
 **NOTE**: You must populate at least one of name or id for the event to build.
 
@@ -610,8 +604,6 @@ Example:
 ```
 SPPageView *event = [SPPageView build:^(id<SPPageViewBuilder> builder) {
   
-```
-
 \[builder setPageUrl:@"DemoPageUrl"\]
 
 ;
@@ -627,6 +619,7 @@ SPPageView *event = [SPPageView build:^(id<SPPageViewBuilder> builder) {
 \[tracker trackPageViewEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#44-track-ecommerce-transactions-with-trackecommerceevent)4.4 Track ecommerce transactions with `trackEcommerceEvent:`
 
@@ -673,8 +666,6 @@ NSString *currency = @"USD";
 NSMutableArray *itemArray = [NSMutableArray array];
 
 [itemArray addObject:[SPEcommerceItem build:^(id<SPEcommTransactionItemBuilder> builder) {
-  
-```
 
 \[builder setItemId:transactionID\]
 
@@ -749,6 +740,7 @@ SPEcommerce \*event = \[SPEcommerce build:^(id<SPEcommTransactionBuilder> builde
 \[tracker trackEcommerceEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#45-track-structured-events-with-trackstructuredevent)4.5 Track structured events with `trackStructuredEvent:`
 
@@ -769,8 +761,6 @@ Example:
 
 ```
 SPStructured *event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"shop"\]
 
@@ -795,6 +785,7 @@ SPStructured *event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 \[tracker trackStructuredEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#46-track-unstructured-events-with-trackunstructuredevent)4.6 Track unstructured events with `trackUnstructuredEvent:`
 
@@ -824,8 +815,6 @@ SPSelfDescribingJson * sdj = [[SPSelfDescribingJson alloc] initWithSchema:@"iglu
                                                                   andData:data];
 
 SPUnstructured *event = [SPUnstructured build:^(id<SPUnstructuredBuilder> builder) {
-  
-```
 
 \[builder setEventData:sdj\]
 
@@ -834,6 +823,7 @@ SPUnstructured *event = [SPUnstructured build:^(id<SPUnstructuredBuilder> builde
 \[tracker trackUnstructuredEvent:event\]
 
 ;
+```
 
 For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
 
@@ -855,8 +845,6 @@ Example:
 
 ```
 SPTiming *event = [SPTiming build:^(id<SPTimingBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"Application"\]
 
@@ -877,6 +865,7 @@ SPTiming *event = [SPTiming build:^(id<SPTimingBuilder> builder) {
 \[tracker trackTimingEvent:event\]
 
 ;
+```
 
 ## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#5-sending-events-spemitter)5\. Sending events: `SPEmitter`
 
@@ -884,8 +873,6 @@ Events created by the Tracker are sent to a collector using a `SnowplowEmitter`
 
 ```
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-    
-```
 
 \[builder setUrlEndpoint:\_url\]
 
@@ -918,6 +905,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 \[builder setByteLimitPost:50000\]
 
 ; // Optional }\];
+```
 
 A key change to the emitter construction is the removal of the `setBufferOption` and the addition of `byteLimit`. In the case of POST requests, we will now add events up until a byte limit rather than an arbitrary event count. However, there are a few more implications:
 
@@ -945,8 +933,6 @@ You can set this during the creation of a `SPEmitter` object or use the setter
 
 ```
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-    
-```
 
 \[builder setUrlEndpoint:\_url\]
 
@@ -959,6 +945,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 \[emitter setProtocol:SPHttps\]
 
 ;
+```
 
 Here are all the possible options that you can use:
 
@@ -1013,8 +1000,6 @@ To implement you will need to:
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-    
-```
 
 \[builder setUrlEndpoint:url\]
 
@@ -1023,6 +1008,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 \[builder setCallback:self\]
 
 ; }\];
+```
 
 The `self` will work only if you have declared the callback functions in the same class as you are creating the Emitter from. Otherwise you will need to pass in the target for the class in which you have defined these functions.
 
@@ -1035,8 +1021,6 @@ NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     
-```
-
 \[builder setUrlEndpoint:url\]
 
 ;
@@ -1050,6 +1034,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 \[builder setHttpMethod:SPRequestGet\]
 
 ; }\];
+```
 
 ## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#6-utility-functions)6\. Utility Functions
 
@@ -1152,8 +1137,6 @@ For a basic example of the Singleton pattern:
   if (self) {
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         
-```
-
 \[builder setUrlEndpoint:@"com.acme"\]
 
 ; }\]; tracker = \[SPTracker build:^(id<SPTrackerBuilder> builder) {
@@ -1163,6 +1146,7 @@ For a basic example of the Singleton pattern:
 ; }\]; } return self; }
 
 @end
+```
 
 You can then access your Tracker via `SnowplowManager *snowplowManager = [SnowplowManager snowplowManager]`.
 
@@ -1291,8 +1275,6 @@ To instantiate a tracker in your code simply instantiate the `SPTracker` class
 
 ```
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
-    
-```
 
 \[builder setEmitter:emitter\]
 
@@ -1329,6 +1311,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 \[builder setCheckInterval:10\]
 
 ; // Optional }\];
+```
 
 | **Builder Function** | **Description** |
 | --- | --- |
@@ -1367,8 +1350,6 @@ By default, no client sessionization is activated. Once enabled the Tracker will
 ```
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     ...
-    
-```
 
 \[builder setForegroundTimeout:600\]
 
@@ -1377,6 +1358,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 \[builder setBackgroundTimeout:300\]
 
 ; // 5 minutes }\];
+```
 
 #### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#226-pauseeventtracking)2.2.6 `pauseEventTracking`
 
@@ -1410,8 +1392,6 @@ SPSubject *subject = [[SPSubject alloc] initWithPlatformContext:YES andGeoContex
 // Add it to the Tracker during construction...
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [...]
-    
-```
 
 \[builder setSubject:subject\]
 
@@ -1422,6 +1402,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 \[tracker setSubject:subject\]
 
 ;
+```
 
 **NOTE**: `initWithPlatformContext` refers to getting the context for the particular platform that the Tracker is running on. In the case of an iOS application, this will then automatically fetch the `mobile_context` for all of your events.
 
@@ -1636,8 +1617,6 @@ Sending the movie poster context with an event looks like this:
 
 ```
 event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"DemoCategory"\]
 
@@ -1654,6 +1633,7 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 \[tracker trackStructuredEvent:event\]
 
 ;
+```
 
 _Note that even if there is only one custom context attached to the event, it still needs to be placed in an array._
 
@@ -1667,8 +1647,6 @@ Here is an example:
 
 ```
 event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"DemoCategory"\]
 
@@ -1685,6 +1663,7 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 \[tracker trackStructuredEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#413-optional-event-id-argument)4.1.3 Optional Event ID argument
 
@@ -1696,8 +1675,6 @@ Here is an example:
 
 ```
 event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"DemoCategory"\]
 
@@ -1714,6 +1691,7 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 \[tracker trackStructuredEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#414-tracker-method-return-values)4.1.4 Tracker method return values
 
@@ -1735,8 +1713,6 @@ Example:
 
 ```
 SPScreenView *event = [SPScreenView build:^(id<SPScreenViewBuilder> builder) {
-  
-```
 
 \[builder setName:@"HUD > Save Game"\]
 
@@ -1749,6 +1725,7 @@ SPScreenView *event = [SPScreenView build:^(id<SPScreenViewBuilder> builder) {
 \[tracker\_ trackScreenViewEvent:event\]
 
 ;
+```
 
 **NOTE**: You must populate at least one of name or id for the event to build.
 
@@ -1771,8 +1748,6 @@ Example:
 
 ```
 SPPageView *event = [SPPageView build:^(id<SPPageViewBuilder> builder) {
-  
-```
 
 \[builder setPageUrl:@"DemoPageUrl"\]
 
@@ -1789,6 +1764,7 @@ SPPageView *event = [SPPageView build:^(id<SPPageViewBuilder> builder) {
 \[tracker trackPageViewEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#44-track-ecommerce-transactions-with-trackecommerceevent)4.4 Track ecommerce transactions with `trackEcommerceEvent:`
 
@@ -1835,8 +1811,6 @@ NSString *currency = @"USD";
 NSMutableArray *itemArray = [NSMutableArray array];
 
 [itemArray addObject:[SPEcommerceItem build:^(id<SPEcommTransactionItemBuilder> builder) {
-  
-```
 
 \[builder setItemId:transactionID\]
 
@@ -1911,6 +1885,7 @@ SPEcommerce \*event = \[SPEcommerce build:^(id<SPEcommTransactionBuilder> builde
 \[tracker trackEcommerceEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#45-track-structured-events-with-trackstructuredevent)4.5 Track structured events with `trackStructuredEvent:`
 
@@ -1931,8 +1906,6 @@ Example:
 
 ```
 SPStructured *event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"shop"\]
 
@@ -1957,6 +1930,7 @@ SPStructured *event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 \[tracker trackStructuredEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#46-track-unstructured-events-with-trackunstructuredevent)4.6 Track unstructured events with `trackUnstructuredEvent:`
 
@@ -1986,8 +1960,6 @@ SPSelfDescribingJson * sdj = [[SPSelfDescribingJson alloc] initWithSchema:@"iglu
                                                                   andData:data];
 
 SPUnstructured *event = [SPUnstructured build:^(id<SPUnstructuredBuilder> builder) {
-  
-```
 
 \[builder setEventData:sdj\]
 
@@ -1996,6 +1968,7 @@ SPUnstructured *event = [SPUnstructured build:^(id<SPUnstructuredBuilder> builde
 \[tracker trackUnstructuredEvent:event\]
 
 ;
+```
 
 For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
 
@@ -2017,8 +1990,6 @@ Example:
 
 ```
 SPTiming *event = [SPTiming build:^(id<SPTimingBuilder> builder) {
-  
-```
 
 \[builder setCategory:@"Application"\]
 
@@ -2039,6 +2010,7 @@ SPTiming *event = [SPTiming build:^(id<SPTimingBuilder> builder) {
 \[tracker trackTimingEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#48-track-opened-push-notifications-with-trackpushnotificationevent)4.8 Track opened push notifications with `trackPushNotificationEvent:`
 
@@ -2085,8 +2057,6 @@ NSArray<NSDictionary *> attachments = [SPUtilities.convertAttachements requestCo
 NSMutableDictionary * userInfo = [[NSMutableDictionary alloc] init];
 
 SPNotificationContent * content = [SPNotificationContent build:^(id<SPNotificationContentBuilder> builder) {
-    
-```
 
 \[builder setTitle:\[requestContent title\]
 
@@ -2155,6 +2125,7 @@ SPPushNotification \* event = \[SPPushNotification build:^(id<SPPushNotification
 \[tracker trackPushNotificationEvent:event\]
 
 ;
+```
 
 The example above can also be found in the [SnowplowSwiftDemo](https://github.com/snowplow/snowplow-objc-tracker/tree/master/SnowplowSwiftDemo/SnowplowSwiftDemo/AppDelegate.swift#L20).
 
@@ -2192,8 +2163,6 @@ NSArray * documents = @[
 ];
 
 SPConsentGranted * event = [SPConsentGranted build:^(id<SPConsentGrantedBuilder> builder) {
-    
-```
 
 \[builder setDocumentId:@"docid1"\]
 
@@ -2222,6 +2191,7 @@ SPConsentGranted * event = [SPConsentGranted build:^(id<SPConsentGrantedBuilder>
 \[tracker trackConsentGrantedEvent:event\]
 
 ;
+```
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#49-track-user-granting-consent-with-trackconsentwithdrawnevent)4.9 Track user granting consent with `trackConsentWithdrawnEvent:`
 
@@ -2259,8 +2229,6 @@ NSArray * documents = @[
 ];
 
 SPConsentWithdrawn * event = [SPConsentWithdrawn build:^(id<SPConsentWithdrawnBuilder> builder) {
-    
-```
 
 \[builder setDocumentId:@"docid1"\]
 
@@ -2289,6 +2257,7 @@ SPConsentWithdrawn * event = [SPConsentWithdrawn build:^(id<SPConsentWithdrawnBu
 \[tracker trackConsentWithdrawnEvent:event\]
 
 ;
+```
 
 ## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#5-sending-events-spemitter)5\. Sending events: `SPEmitter`
 
@@ -2296,8 +2265,6 @@ Events created by the Tracker are sent to a collector using a `SnowplowEmitter`
 
 ```
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-    
-```
 
 \[builder setUrlEndpoint:\_url\]
 
@@ -2330,6 +2297,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 \[builder setByteLimitPost:50000\]
 
 ; // Optional }\];
+```
 
 A key change to the emitter construction is the removal of the `setBufferOption` and the addition of `byteLimit`. In the case of POST requests, we will now add events up until a byte limit rather than an arbitrary event count. However, there are a few more implications:
 
@@ -2357,8 +2325,6 @@ You can set this during the creation of a `SPEmitter` object or use the setter
 
 ```
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-    
-```
 
 \[builder setUrlEndpoint:\_url\]
 
@@ -2371,6 +2337,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 \[emitter setProtocol:SPHttps\]
 
 ;
+```
 
 Here are all the possible options that you can use:
 
@@ -2425,8 +2392,6 @@ To implement you will need to:
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-    
-```
 
 \[builder setUrlEndpoint:url\]
 
@@ -2435,6 +2400,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 \[builder setCallback:self\]
 
 ; }\];
+```
 
 The `self` will work only if you have declared the callback functions in the same class as you are creating the Emitter from. Otherwise you will need to pass in the target for the class in which you have defined these functions.
 
@@ -2446,8 +2412,6 @@ You can set this during the creation of a `SPEmitter` object:
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-    
-```
 
 \[builder setUrlEndpoint:url\]
 
@@ -2462,6 +2426,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 \[builder setHttpMethod:SPRequestGet\]
 
 ; }\];
+```
 
 ## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#6-utility-functions)6\. Utility Functions
 

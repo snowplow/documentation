@@ -8,4 +8,4 @@ Historically, most of Snowplow’s Open Source estate was hosted within a [singl
 
 One of the benefits of the monorepository and the 'big bang' releases was compatibility assurance. To continue to provide this assurance we now periodically mark a Snowplow platform release with a set of compatible components. These platform release compatibility matrices will updated a few times per year, and we also publish a latest compatibility matrix which describes the latest version of each component that are compatible with one another.
 
-Please watch [Discourse](https://discourse.snowplowanalytics.com/c/announcements/new-releases/) or `[snowplow/snowplow](https://github.com/snowplow/snowplow/commits/master)` for the individual repositories for updates!
+Please watch [Discourse](https://discourse.snowplowanalytics.com/c/announcements/new-releases/) or [snowplow/snowplow](https://github.com/snowplow/snowplow/commits/master) for the individual repositories for updates!

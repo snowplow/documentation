@@ -14,7 +14,7 @@ To start managing Enrichments, navigate to the environment you'd like to manage 
 
 When you select navigate to the Enrichments screen you'll see a listing of all Enrichments and see their current status & last edited date for the environment.
 
-![](images/image-1.png)
+![](images/ViewEnrichments.gif)
 
 * * *
 
@@ -29,7 +29,7 @@ You can enable and edit enrichments on any environment, but we recommend the fol
 
 ### Enable the enrichment on a sandbox environment
 
-**Navigate to a Snowplow Mini** and locate the enrichment you wish to enable. In the listing select _Configure and enable / Edit configuration_ from the pop up menu, or click the __Configure and enable / Edit config__ button when viewing the enrichment.
+**Navigate to a Snowplow Mini** and locate the enrichment you wish to enable. In the listing select _Configure and enable / Edit configuration_ from the pop up menu, or click the **Configure and enable / Edit config** button when viewing the enrichment.
 
 **On the configuration screen**, edit the JSON configuration ([refer to each individual enrichments documentation for support](/docs/enriching-your-data/available-enrichments/)) and click _Validate._
 
@@ -37,7 +37,7 @@ If your configuration is valid you will be given the option to _Publish_ the enr
 
 **_Publish_ your configuration** to the environment and then test it by sending some events to the Mini endpoint.
 
-![](images/image-3.png)
+![](images/EnableEnrichment.gif)
 
 Once you are happy with your configuration, follow [Deploying a configuration across environments](#deploy) to deploy the configuration to a pipeline.
 
@@ -54,7 +54,7 @@ You will need to copy a configuration across environments when:
 
 **Click _Deploy_** in either the pop-up menu on the Listing screen, or the button in the View Enrichment screen.
 
-![](images/image-4.png)
+![](images/DisableEnrichment.gif)
 
 In the modal that appears, select which environments you wish to copy to and click _Deploy configuration._
 
@@ -68,7 +68,7 @@ Deployments to pipeline environments currently involve work performed by our Sup
 
 **Navigate to the environment** that contains the Enrichment you wish to disable.
 
-In the listing select _Disable enrichment_ from the pop up menu, or click the __Disable__ button when viewing the enrichment.
+In the listing select _Disable enrichment_ from the pop up menu, or click the **Disable** button when viewing the enrichment.
 
 Confirm that you wish to disable the enrichment.
 

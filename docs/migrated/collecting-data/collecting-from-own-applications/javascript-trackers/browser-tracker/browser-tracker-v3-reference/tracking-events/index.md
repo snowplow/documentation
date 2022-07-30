@@ -608,13 +608,13 @@ All rules and schemas follow a standard form:
 And rules must meet some requirements to be considered valid:
 
 - Two parts are invariant: protocol and format. They are always `iglu` and `jsonschema` respectively.
-    - Wildcards can therefore be used only in `vendor`, `event_name` and `version`.
+  - Wildcards can therefore be used only in `vendor`, `event_name` and `version`.
 - Version matching must be specified like so: `*-*-*`, where any part of the versioning can be defined, e.g. `1-*-*`, but only sequential parts are to be wildcarded, e.g. `1-*-1` is invalid but `1-*-*` is valid.
 - Vendors require the first two "larger parts":
-    - `com.acme.*`
+  - `com.acme.*`
 - Vendors cannot be defined with non-wildcarded parts between wildcarded parts:
-    - `com.acme.*.marketing.*` is invalid
-    - `com.acme.*.*` is valid
+  - `com.acme.*.marketing.*` is invalid
+  - `com.acme.*.*` is valid
 
 #### Global contexts methods
 
@@ -1307,7 +1307,7 @@ We want to be able to identify people who've clicked on ads e.g. in a marketing 
 <a href="http://mysite.com/myproduct.html?utm_source=newsletter-october&utm_medium=email&utm_campaign=cn0201">Visit website</a>
 ```
 
-For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at http://mysite.com/myproduct.html.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
+For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at <http://mysite.com/myproduct.html>.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
 
 #### Anatomy of the query parameters
 
@@ -1913,9 +1913,9 @@ enableErrorTracking({
 
 | **Name** | **Required?** | **Description** | **Type** |
 | --- | --- | --- | --- |
-| `filter` | No | Predicate to filter exceptions | (ErrorEvent) => Boolean |
-| `contextAdder` | No | Function to get dynamic context | (ErrorEvent) => Array<SelfDescribingJson> |
-| context | No | Additional custom context | Array<SelfDescribingJson> |
+| `filter` | No | Predicate to filter exceptions | `(ErrorEvent) => Boolean` |
+| `contextAdder` | No | Function to get dynamic context | `(ErrorEvent) => Array<SelfDescribingJson>` |
+| context | No | Additional custom context | `Array<SelfDescribingJson>` |
 
 Unlike `trackError` you need enable error tracking only once:
 

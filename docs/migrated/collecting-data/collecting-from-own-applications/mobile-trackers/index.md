@@ -5,10 +5,12 @@ sidebar_position: 110
 ---
 
 ```mdx-code-block
-import Block2895 from "@site/docs/reusable/untitled-reusable-block-35/_index.md"
+import Badges from '@site/src/components/Badges';
 
-<Block2895/>
+<Badges badgeType="Actively Maintained"></Badges>
+```
 
+```mdx-code-block
 import DocCardList from '@theme/DocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 

@@ -4,18 +4,11 @@ date: "2020-02-26"
 sidebar_position: 230
 ---
 
-[![Tracker Maintenance Classification](https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Early%20Release&color=014477&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC)](/docs/migrated/collecting-data/collecting-from-own-applications/tracker-maintenance-classification/)
+```mdx-code-block
+import Badges from '@site/src/components/Badges';
 
-[![Latest version](https://img.shields.io/packagist/v/snowplow/snowplow-tracker)](https://packagist.org/packages/snowplow/snowplow-tracker)
-
-[![PHP Version](https://img.shields.io/packagist/php-v/snowplow/snowplow-tracker)](https://packagist.org/packages/snowplow/snowplow-tracker)
-
-  
-  
-  
-  
-  
-  
+<Badges badgeType="Early Release"></Badges>&nbsp;<Badges badgeType="Snowplow Tracker Release"></Badges>&nbsp;<Badges badgeType="Snowplow Tracker PHP Release"></Badges><br/>
+```
 
 The Snowplow PHP Tracker allows you to track Snowplow events from your PHP apps and scripts.
 
@@ -26,3 +19,10 @@ A subject represents a user whose events are tracked. A tracker constructs event
 The current flow of the PHP Tracker is illustrated below:
 
 ![](images/php-tracker-flow.png)
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
+```

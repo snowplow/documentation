@@ -5,7 +5,12 @@ sidebar_position: 150
 ---
 
 ```mdx-code-block
-import Block2901 from "@site/docs/reusable/untitled-reusable-block-37/_index.md"
+import Badges from '@site/src/components/Badges';
 
-<Block2901/>
+<Badges badgeType="Maintained"></Badges>
+
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
 ```

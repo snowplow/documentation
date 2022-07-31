@@ -5,12 +5,13 @@ sidebar_position: 100
 ---
 
 ```mdx-code-block
-import Block2895 from "@site/docs/reusable/untitled-reusable-block-35/_index.md"
+import Badges from '@site/src/components/Badges';
 
-<Block2895/>
+<Badges badgeType="Actively Maintained"></Badges>
 ```
 
-The Snowplow JavaScript Trackers support being used in a number of environments.  
+The Snowplow JavaScript Trackers support being used in a number of environments.
+
 There are currently three trackers:
 
 - **Browser Tracker (v3)** for installation into web apps via npm. Popular when natively integrating tracking into React, Angular and Vue applications.

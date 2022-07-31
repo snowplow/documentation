@@ -13,3 +13,10 @@ import Block2891 from "@site/docs/reusable/untitled-reusable-block-34/_index.md"
 The Snowplow Java Tracker lets you add analytics to your [Java](http://www.java.com/en/)\-based desktop and server apps, servlets and games.
 
 The Tracker should be relatively straightforward to setup if you are familiar with Java development.
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
+```

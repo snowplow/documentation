@@ -1,5 +1,6 @@
 ---
 title: "Snowplow Tracker Protocol"
+description: ""
 date: "2020-02-26"
 sidebar_position: 80
 ---
@@ -34,12 +35,12 @@ Each parameter of the Snowplow Tracker Protocol is described in the tables below
 
 #### Application parameters
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `tna` | `name_tracker` | text | The tracker namespace | Yes | `tracker_1` |
-| `evn` | `event_vendor` (deprecated) | text | The company who developed the event model | deprecated | `com.snowplowanalytics` |
-| `aid` | `app_id` | text | Unique identifier for website / application | Yes | `angry-birds-android` |
-| `p` | `platform` | text | The platform the app runs on | Yes | `web`, `mob`, `app` |
+| **Parameter** | **Maps to**                 | **Type** | **Description**                             | **Implemented?** | **Example values**      |
+|---------------|-----------------------------|----------|---------------------------------------------|------------------|-------------------------|
+| `tna`         | `name_tracker`              | text     | The tracker namespace                       | Yes              | `tracker_1`             |
+| `evn`         | `event_vendor` (deprecated) | text     | The company who developed the event model   | deprecated       | `com.snowplowanalytics` |
+| `aid`         | `app_id`                    | text     | Unique identifier for website / application | Yes              | `angry-birds-android`   |
+| `p`           | `platform`                  | text     | The platform the app runs on                | Yes              | `web`, `mob`, `app`     |
 
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that _does not_ contain a colon or semi-colon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
 
@@ -51,25 +52,25 @@ As a Snowplow user, you can define application IDs for each of your different di
 
 **Allowed platform values**:
 
-| **Platform** | **`p` value** |
-| --- | --- |
-| Web (including Mobile Web) | `web` |
-| Mobile/Tablet | `mob` |
-| Desktop/Laptop/Netbook | `pc` |
-| Server-Side App | `srv` |
-| General App | `app` |
-| Connected TV | `tv` |
-| Games Console | `cnsl` |
-| Internet of Things | `iot` |
+| **Platform**               | **`p` value** |
+|----------------------------|---------------|
+| Web (including Mobile Web) | `web`         |
+| Mobile/Tablet              | `mob`         |
+| Desktop/Laptop/Netbook     | `pc`          |
+| Server-Side App            | `srv`         |
+| General App                | `app`         |
+| Connected TV               | `tv`          |
+| Games Console              | `cnsl`        |
+| Internet of Things         | `iot`         |
 
 #### Date / time parameter
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `dtm` | `dvce_created_tstamp` | int | Timestamp when event occurred, as recorded by client device | Yes | `1361553733313` |
-| `stm` | `dvce_sent_tstamp` | int | Timestamp when event was sent by client device to collector | Yes | `1361553733371` |
-| `ttm` | `true_tstamp` | int | User-set exact timestamp | Yes | `1361553733371` |
-| `tz` | `os_timezone` | text | Time zone of client device's OS | Yes | `Europe%2FLondon` |
+| **Parameter** | **Maps to**           | **Type** | **Description**                                             | **Implemented?** | **Example values** |
+|---------------|-----------------------|----------|-------------------------------------------------------------|------------------|--------------------|
+| `dtm`         | `dvce_created_tstamp` | int      | Timestamp when event occurred, as recorded by client device | Yes              | `1361553733313`    |
+| `stm`         | `dvce_sent_tstamp`    | int      | Timestamp when event was sent by client device to collector | Yes              | `1361553733371`    |
+| `ttm`         | `true_tstamp`         | int      | User-set exact timestamp                                    | Yes              | `1361553733371`    |
+| `tz`          | `os_timezone`         | text     | Time zone of client device's OS                             | Yes              | `Europe%2FLondon`  |
 
 It is possible to record the time that an event occurs on the clients-side (i.e. in the tracker), or server side (i.e. by the collector). When using the JavaScript tracker to track web events, it makes sense to rely on the collector logs to identify the time that events occured, as Snowplow tracking tags are fired as events happen, and so the time they are received server-side should be an accurate representation of the time the event being tracked occured. In other situations (e.g. when using mobile trackers), the time the collector receives the data may be sometime after an event occurred, and so it makes sense to record the timestamp on the client-side, in which case this is handled by the tracker.
 
@@ -79,11 +80,11 @@ The tracker can pass a client-side timestamp to the collector using the above pa
 
 #### Event / transaction parameters
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `e` | `event` | text | Event type | Yes | (See table [below](#events)) |
-| `tid` | `txn_id` (deprecated) | text | Transaction ID | deprecated | `352583` |
-| `eid` | `event_id` | text | Event UUID | Yes | `606adff6-9ccc-41f4-8807-db8fdb600df8` |
+| **Parameter** | **Maps to**           | **Type** | **Description** | **Implemented?** | **Example values**                     |
+|---------------|-----------------------|----------|-----------------|------------------|----------------------------------------|
+| `e`           | `event`               | text     | Event type      | Yes              | (See table [below](#events))           |
+| `tid`         | `txn_id` (deprecated) | text     | Transaction ID  | deprecated       | `352583`                               |
+| `eid`         | `event_id`            | text     | Event UUID      | Yes              | `606adff6-9ccc-41f4-8807-db8fdb600df8` |
 
 Every line of data passed from the tracker should contain an event field (`e`) to denote the type of event being tracked. For details about the potential values that `e` can take, and the corresponding event types that they refer to, see the section detailing [Snowplow events](#events).
 
@@ -93,23 +94,23 @@ The event ID (`eid`) is the unique identifier (UUID) for this row. Historically 
 
 #### Snowplow Tracker Version
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `tv` | `v_tracker` | text | Identifier for Snowplow tracker | Yes | `js-2.16.2` |
+| **Parameter** | **Maps to** | **Type** | **Description**                 | **Implemented?** | **Example values** |
+|---------------|-------------|----------|---------------------------------|------------------|--------------------|
+| `tv`          | `v_tracker` | text     | Identifier for Snowplow tracker | Yes              | `js-2.16.2`        |
 
 For deployments where multiple trackers are used (e.g. for businesses that use the [JavaScript tracker](/docs/migrated/open-source/section-1/child-section-1/javascript-tracker/) to track events on their domains alongside the [Pixel tracker](/docs/migrated/collecting-data/collecting-from-own-applications/pixel-tracker/) to track events on 3rd party domains), it is useful to be able to distinguish data generated from each tracker. It can also be useful when tracker versions are updated, so that it is easier to see if an update in tracker accounts for a feature of the data at analysis time.
 
 #### User related parameters
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `duid` | `domain_userid` | text | Unique identifier for a user, based on a first party cookie (so domain specific) | Yes | `aeb1691c5a0ee5a6` |
-| `nuid` | `network_userid` | text | Unique identifier for a user, based on a cookie from the collector (so set at a network level and shouldn't be set by a tracker) | Yes | `ecdff4d0-9175-40ac-a8bb-325c49733607` |
-| `tnuid` | `network_userid` | text | Can be used be a tracker to overwrite the nuid | Yes | `ecdff4d0-9175-40ac-a8bb-325c49733607` |
-| `uid` | `user_id` | text | Unique identifier for user, set by the business using `setUserId` | Yes | `jon.doe@email.com` |
-| `vid` | `domain_sessionidx` | int | Index of number of visits that this user\_id has made to this domain e.g. `1` is first visit | Yes | `1`, `2`... |
-| `sid` | `domain_sessionid` | text | Unique identifier (UUID) for this visit of this user\_id to this domain | Yes | `9c65e7f3-8e8e-470d-b243-910b5b300da0` |
-| `ip` | `user_ipaddress` | text | IP address | Yes | `37.157.33.178` |
+| **Parameter** | **Maps to**         | **Type** | **Description**                                                                                                                  | **Implemented?** | **Example values**                     |
+|---------------|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------|------------------|----------------------------------------|
+| `duid`        | `domain_userid`     | text     | Unique identifier for a user, based on a first party cookie (so domain specific)                                                 | Yes              | `aeb1691c5a0ee5a6`                     |
+| `nuid`        | `network_userid`    | text     | Unique identifier for a user, based on a cookie from the collector (so set at a network level and shouldn't be set by a tracker) | Yes              | `ecdff4d0-9175-40ac-a8bb-325c49733607` |
+| `tnuid`       | `network_userid`    | text     | Can be used be a tracker to overwrite the nuid                                                                                   | Yes              | `ecdff4d0-9175-40ac-a8bb-325c49733607` |
+| `uid`         | `user_id`           | text     | Unique identifier for user, set by the business using `setUserId`                                                                | Yes              | `jon.doe@email.com`                    |
+| `vid`         | `domain_sessionidx` | int      | Index of number of visits that this user\_id has made to this domain e.g. `1` is first visit                                     | Yes              | `1`, `2`...                            |
+| `sid`         | `domain_sessionid`  | text     | Unique identifier (UUID) for this visit of this user\_id to this domain                                                          | Yes              | `9c65e7f3-8e8e-470d-b243-910b5b300da0` |
+| `ip`          | `user_ipaddress`    | text     | IP address                                                                                                                       | Yes              | `37.157.33.178`                        |
 
 We recommend setting the `uid` / `user_id` parameter: as this is the cornerstone of all user-centric analytics and is a valuable data point alonside `duid` / `domain_userid` and `nuid` / `network_userid` from web tracking.
 
@@ -121,9 +122,9 @@ If you are tracking events both server-side and client-side and you want the `n
 
 #### Device related properties
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `res` | `dvce_screenheight` and `dvce_screenwidth` | text | Screen / monitor resolution | Yes | `1280x1024` |
+| **Parameter** | **Maps to**                                | **Type** | **Description**             | **Implemented?** | **Example values** |
+|---------------|--------------------------------------------|----------|-----------------------------|------------------|--------------------|
+| `res`         | `dvce_screenheight` and `dvce_screenwidth` | text     | Screen / monitor resolution | Yes              | `1280x1024`        |
 
 We intend to build out the list of device related properties over time.
 
@@ -133,54 +134,54 @@ We intend to build out the list of device related properties over time.
 
 In addition, there is a set of browser-specific parameters that only makes sense to record for events that happen on web platforms (`p=web`). These parameters are relevant across **all** web events, regardless of the event type. (E.g. if it is a pageview, pageping, transaction, media play etc...)
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `url` | `page_url` | text | Page URL | Yes | `http%3A%2F%2Ftest.psybazaar.com%2F2-tarot-cards` |
-| `ua` | `useragent` | text | Useragent (a.k.a. browser string) | Yes | Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_9\_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6 Safari/537.78.2 |
-| `page` | `page_title` | text | Page title | Yes | `Tarot%20cards` |
-| `refr` | `page_referrer` | text | Referrer URL | Yes | `http%3A%2F%2Ftest.psybazaar.com%2F` |
-| `fp` | `user_fingerprint` | integer | User identifier based on (hopefully unique) browser features | Yes | `4048966212` |
-| `ctype` | `connection_type` | text | Type of connection | No |  |
-| `cookie` | `br_cookies` | boolean | Does the browser permit cookies? | Yes | `1` |
-| `lang` | `br_lang` | text | Language the browser is set to | Yes | `en-US` |
-| `f_pdf` | `br_features` or `br_features_pdf` | boolean | Adobe PDF plugin installed? | Yes | `1` |
-| `f_qt` | `br_features` or `br_features_quicktime` | boolean | Quicktime plugin installed? | Yes | `0` |
-| `f_realp` | `br_features` or `br_features_realplayer` | boolean | Realplayer plugin installed? | Yes | `0` |
-| `f_wma` | `br_features` or `br_features_windowsmedia` | boolean | Windows media plugin instlaled? | Yes | `0` |
-| `f_dir` | `br_featurse` or `br_features_director` | boolean | Director plugin installed? | Yes | `0` |
-| `f_fla` | `br_featurse` or `br_features_flash` | boolean | Flash plugin installed? | Yes | `1` |
-| `f_java` | `br_featurse` or `br_features_java` | boolean | Java plugin installed? | Yes | `1` |
-| `f_gears` | `br_featurse` or `br_features_gears` | boolean | Google gears installed? | Yes | `1` |
-| `f_ag` | `br_featurse` or `br_features_silverlight` | boolean | Silverlight plugin installed? | Yes | `1` |
-| `cd` | `br_colordepth` | integer | Browser color depth | Yes | `24` |
-| `ds` | `doc_width` and `doc_height` | text | Web page width and height | Yes | `1090x1152` |
-| `cs` | `doc_charset` | text | Web page's character encoding | Yes | `UTF-8` |
-| `vp` | `br_viewwidth` and `br_viewheight` | text | Browser viewport width and height | Yes | `1105x390` |
+| **Parameter** | **Maps to**                                 | **Type** | **Description**                                              | **Implemented?** | **Example values**                                                                                                      |
+|---------------|---------------------------------------------|----------|--------------------------------------------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `url`         | `page_url`                                  | text     | Page URL                                                     | Yes              | `http%3A%2F%2Ftest.psybazaar.com%2F2-tarot-cards`                                                                       |
+| `ua`          | `useragent`                                 | text     | Useragent (a.k.a. browser string)                            | Yes              | Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_9\_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6 Safari/537.78.2 |
+| `page`        | `page_title`                                | text     | Page title                                                   | Yes              | `Tarot%20cards`                                                                                                         |
+| `refr`        | `page_referrer`                             | text     | Referrer URL                                                 | Yes              | `http%3A%2F%2Ftest.psybazaar.com%2F`                                                                                    |
+| `fp`          | `user_fingerprint`                          | integer  | User identifier based on (hopefully unique) browser features | Yes              | `4048966212`                                                                                                            |
+| `ctype`       | `connection_type`                           | text     | Type of connection                                           | No               |                                                                                                                         |
+| `cookie`      | `br_cookies`                                | boolean  | Does the browser permit cookies?                             | Yes              | `1`                                                                                                                     |
+| `lang`        | `br_lang`                                   | text     | Language the browser is set to                               | Yes              | `en-US`                                                                                                                 |
+| `f_pdf`       | `br_features` or `br_features_pdf`          | boolean  | Adobe PDF plugin installed?                                  | Yes              | `1`                                                                                                                     |
+| `f_qt`        | `br_features` or `br_features_quicktime`    | boolean  | Quicktime plugin installed?                                  | Yes              | `0`                                                                                                                     |
+| `f_realp`     | `br_features` or `br_features_realplayer`   | boolean  | Realplayer plugin installed?                                 | Yes              | `0`                                                                                                                     |
+| `f_wma`       | `br_features` or `br_features_windowsmedia` | boolean  | Windows media plugin instlaled?                              | Yes              | `0`                                                                                                                     |
+| `f_dir`       | `br_featurse` or `br_features_director`     | boolean  | Director plugin installed?                                   | Yes              | `0`                                                                                                                     |
+| `f_fla`       | `br_featurse` or `br_features_flash`        | boolean  | Flash plugin installed?                                      | Yes              | `1`                                                                                                                     |
+| `f_java`      | `br_featurse` or `br_features_java`         | boolean  | Java plugin installed?                                       | Yes              | `1`                                                                                                                     |
+| `f_gears`     | `br_featurse` or `br_features_gears`        | boolean  | Google gears installed?                                      | Yes              | `1`                                                                                                                     |
+| `f_ag`        | `br_featurse` or `br_features_silverlight`  | boolean  | Silverlight plugin installed?                                | Yes              | `1`                                                                                                                     |
+| `cd`          | `br_colordepth`                             | integer  | Browser color depth                                          | Yes              | `24`                                                                                                                    |
+| `ds`          | `doc_width` and `doc_height`                | text     | Web page width and height                                    | Yes              | `1090x1152`                                                                                                             |
+| `cs`          | `doc_charset`                               | text     | Web page's character encoding                                | Yes              | `UTF-8`                                                                                                                 |
+| `vp`          | `br_viewwidth` and `br_viewheight`          | text     | Browser viewport width and height                            | Yes              | `1105x390`                                                                                                              |
 
 #### Internet of Things-specific parameters
 
 In addition, there is a set of device-specific parameters that only makes sense to record for events that happen on the Internet of Things (`p=iot`). These parameters are relevant across **all** Internet of Things events, regardless of the event type:
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `mac` | `mac_address` | text | MAC address for the device running the tracker | Yes | `12:34:56:78:9A:BC` |
+| **Parameter** | **Maps to**   | **Type** | **Description**                                | **Implemented?** | **Example values**  |
+|---------------|---------------|----------|------------------------------------------------|------------------|---------------------|
+| `mac`         | `mac_address` | text     | MAC address for the device running the tracker | Yes              | `12:34:56:78:9A:BC` |
 
 ### Snowplow events
 
 At its heart, Snowplow is a platform for granular tracking of events. Currently, Snowplow understands the following events. In the tracker protocol, each event is denoted by an `e=...` parameter.
 
-|  | **Type of tracking** | **Event type (value of `e`)** |
-| --- | --- | --- |
-| 3.1 | [Pageview tracking](#pageview) | `pv` |
-| 3.2 | [Page pings](#pagepings) | `pp` |
-| 3.3 | [Link click](#linkclick) | `ue` |
-| 3.4 | [Ad impression tracking](#adimp) | `ue` |
-| 3.5 | [Ecommerce transaction tracking](#ecomm) | `tr` and `ti` |
-| 3.6 | [Social tracking](#social) | TBD |
-| 3.7 | [Item view](#item) | TBD |
-| 3.8 | [Error tracking](#error) | TBD |
-| 3.9 | [Custom structured event](#event) | `se` |
-| 3.10 | [Custom unstructured event](#unstructevent) | `ue` |
+|      | **Type of tracking**                        | **Event type (value of `e`)** |
+|------|---------------------------------------------|-------------------------------|
+| 3.1  | [Pageview tracking](#pageview)              | `pv`                          |
+| 3.2  | [Page pings](#pagepings)                    | `pp`                          |
+| 3.3  | [Link click](#linkclick)                    | `ue`                          |
+| 3.4  | [Ad impression tracking](#adimp)            | `ue`                          |
+| 3.5  | [Ecommerce transaction tracking](#ecomm)    | `tr` and `ti`                 |
+| 3.6  | [Social tracking](#social)                  | TBD                           |
+| 3.7  | [Item view](#item)                          | TBD                           |
+| 3.8  | [Error tracking](#error)                    | TBD                           |
+| 3.9  | [Custom structured event](#event)           | `se`                          |
+| 3.10 | [Custom unstructured event](#unstructevent) | `ue`                          |
 
 We are working to make the data model for each of the above events richer, and expand the 'Snowplow event library' to support a wider selection of events that businesses running Snowplow wish to track.
 
@@ -245,12 +246,12 @@ If enabled, the page ping function checks for engagement with a page after load.
 
 Page pings are identified by `e=pp`. As well as all the standard web fields, there are four additional fields that `pp` includes, which are used to identify how users are scrolling over web pages:
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `pp_mix` | `pp_xoffset_min` | integer | Minimum page x offset seen in the last ping period | Yes | `0` |
-| `pp_max` | `pp_xoffset_max` | integer | Maximum page x offset seen in the last ping period | Yes | `100` |
-| `pp_miy` | `pp_yoffset_min` | integer | Minimum page y offset seen in the last ping period | Yes | `0` |
-| `pp_may` | `pp_yoffset_max` | integer | Maximum page y offset seen in the last ping period | Yes | `100` |
+| **Parameter** | **Maps to**      | **Type** | **Description**                                    | **Implemented?** | **Example values** |
+|---------------|------------------|----------|----------------------------------------------------|------------------|--------------------|
+| `pp_mix`      | `pp_xoffset_min` | integer  | Minimum page x offset seen in the last ping period | Yes              | `0`                |
+| `pp_max`      | `pp_xoffset_max` | integer  | Maximum page x offset seen in the last ping period | Yes              | `100`              |
+| `pp_miy`      | `pp_yoffset_min` | integer  | Minimum page y offset seen in the last ping period | Yes              | `0`                |
+| `pp_may`      | `pp_yoffset_max` | integer  | Maximum page y offset seen in the last ping period | Yes              | `100`              |
 
 Example:
 
@@ -295,12 +296,12 @@ _[Ad conversion schema](https://github.com/snowplow/iglu-central/blob/master/sch
 
 As well as setting `e=ad`, there are four specific parameters that can be set when an ad impression is tracked:
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `ad_ba` | `adi_bannerid` | text | Banner ID | No | `126422315640` |
-| `ad_ca` | `adi_campaignid` | text | Campaign ID | No | `d-546135` |
-| `ad_ad` | `adi_advertiserid` | text | Advertiser ID | No | `diageo` |
-| `ad_uid` | `adi_userid` | text | User (viewer) ID | No | `0cbffbf8-a9c5-426f-9369-6e53f1677efc` |
+| **Parameter** | **Maps to**        | **Type** | **Description**  | **Implemented?** | **Example values**                     |
+|---------------|--------------------|----------|------------------|------------------|----------------------------------------|
+| `ad_ba`       | `adi_bannerid`     | text     | Banner ID        | No               | `126422315640`                         |
+| `ad_ca`       | `adi_campaignid`   | text     | Campaign ID      | No               | `d-546135`                             |
+| `ad_ad`       | `adi_advertiserid` | text     | Advertiser ID    | No               | `diageo`                               |
+| `ad_uid`      | `adi_userid`       | text     | User (viewer) ID | No               | `0cbffbf8-a9c5-426f-9369-6e53f1677efc` |
 
 Note: if possible, it often makes sense to pass in the `user_id` generated by your ad server into the `ad_uid` field, so that this can be matched with the `user_id` generated by Snowplow at analysis time.
 
@@ -325,17 +326,17 @@ To track an ecommerce transaction, fire a `transaction` event (`e=tr`) to regi
 
 ##### Transaction parameters
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `tr_id` | `tr_orderid` | text | Order ID | Yes | `12345` |
-| `tr_af` | `tr_affiliation` | text | Transaction affiliation (e.g. channel) | Yes | `Web` |
-| `tr_tt` | `tr_total` | decimal | Transaction total value | Yes | `9.99` |
-| `tr_tx` | `tr_tax` | decimal | Transaction tax value (i.e. amount of VAT included) | Yes | `1.98` |
-| `tr_sh` | `tr_shipping` | decimal | Delivery cost charged | Yes | `3.00` |
-| `tr_ci` | `tr_city` | text | Delivery address: city | Yes | `London` |
-| `tr_st` | `tr_state` | text | Delivery address: state | Yes | `Denver` |
-| `tr_co` | `tr_country` | text | Delivery address: country | Yes | `United Kingdom` |
-| `tr_cu` | `tr_currency` | text | Transaction Currency | Yes | `GBP` |
+| **Parameter** | **Maps to**      | **Type** | **Description**                                     | **Implemented?** | **Example values** |
+|---------------|------------------|----------|-----------------------------------------------------|------------------|--------------------|
+| `tr_id`       | `tr_orderid`     | text     | Order ID                                            | Yes              | `12345`            |
+| `tr_af`       | `tr_affiliation` | text     | Transaction affiliation (e.g. channel)              | Yes              | `Web`              |
+| `tr_tt`       | `tr_total`       | decimal  | Transaction total value                             | Yes              | `9.99`             |
+| `tr_tx`       | `tr_tax`         | decimal  | Transaction tax value (i.e. amount of VAT included) | Yes              | `1.98`             |
+| `tr_sh`       | `tr_shipping`    | decimal  | Delivery cost charged                               | Yes              | `3.00`             |
+| `tr_ci`       | `tr_city`        | text     | Delivery address: city                              | Yes              | `London`           |
+| `tr_st`       | `tr_state`       | text     | Delivery address: state                             | Yes              | `Denver`           |
+| `tr_co`       | `tr_country`     | text     | Delivery address: country                           | Yes              | `United Kingdom`   |
+| `tr_cu`       | `tr_currency`    | text     | Transaction Currency                                | Yes              | `GBP`              |
 
 Transaction event example:
 
@@ -358,9 +359,9 @@ duid=aeb1691c5a0ee5a6   // Domain user ID
 
 ##### Transaction item parameters
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `ti_id` | `ti_orderid` | text | Order ID | Yes | `12345` |
+| **Parameter** | **Maps to**  | **Type** | **Description** | **Implemented?** | **Example values** |
+|---------------|--------------|----------|-----------------|------------------|--------------------|
+| `ti_id`       | `ti_orderid` | text     | Order ID        | Yes              | `12345`            |
 | `ti_sk` | `ti_sku` | text | Item SKU | Yes | \`pbz0025' |
 | `ti_nm` | `ti_name` | text | Item name | Yes | `black-tarot` |
 | `ti_ca` | `ti_category` | text | Item category | Yes | `tarot` |
@@ -389,12 +390,12 @@ uid=aeb1691c5a0ee5a6    // User ID
 
 #### Social tracking
 
-| **Parameter** | **Maps to** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- |
-| `sa` | `social_action` | Social action performed | No | `like`, `tweet` |
-| `sn` | `social_network` | Social network involved | No | `facebook`, `twitter` |
-| `st` | `social_target` | Social action target e.g. object _liked_, article _tweeted_ | No | `like`, `tweet` |
-| `sp` | `social_pagepath` | Page path action was performed on | No |  |
+| **Parameter** | **Maps to**       | **Description**                                             | **Implemented?** | **Example values**    |
+|---------------|-------------------|-------------------------------------------------------------|------------------|-----------------------|
+| `sa`          | `social_action`   | Social action performed                                     | No               | `like`, `tweet`       |
+| `sn`          | `social_network`  | Social network involved                                     | No               | `facebook`, `twitter` |
+| `st`          | `social_target`   | Social action target e.g. object _liked_, article _tweeted_ | No               | `like`, `tweet`       |
+| `sp`          | `social_pagepath` | Page path action was performed on                           | No               |                       |
 
 ```
 uid=aeb1691c5a0ee5a6    // User ID  
@@ -415,13 +416,13 @@ Custom event tracking is used to track events that are not natively supported by
 
 As well as setting `e=se`, there are five custom event specific parameters that can be set:
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `se_ca` | `se_category` | text | The category of event | Yes | `Ecomm`, `Media` |
-| `se_ac` | `se_action` | text | The action / event itself | Yes | `add-to-basket`, `play-video` |
-| `se_la` | `se_label` | text | A label often used to refer to the 'object' the action is performed on | Yes | `dog-skateboarding-video` |
-| `se_pr` | `se_property` | text | A property associated with either the action or the object | Yes | `hd` |
-| `se_va` | `se_value` | decimal | A value associated with the user action | Yes | `13.99` |
+| **Parameter** | **Maps to**   | **Type** | **Description**                                                        | **Implemented?** | **Example values**            |
+|---------------|---------------|----------|------------------------------------------------------------------------|------------------|-------------------------------|
+| `se_ca`       | `se_category` | text     | The category of event                                                  | Yes              | `Ecomm`, `Media`              |
+| `se_ac`       | `se_action`   | text     | The action / event itself                                              | Yes              | `add-to-basket`, `play-video` |
+| `se_la`       | `se_label`    | text     | A label often used to refer to the 'object' the action is performed on | Yes              | `dog-skateboarding-video`     |
+| `se_pr`       | `se_property` | text     | A property associated with either the action or the object             | Yes              | `hd`                          |
+| `se_va`       | `se_value`    | decimal  | A value associated with the user action                                | Yes              | `13.99`                       |
 
 _Add-to-basket_ example:
 
@@ -498,10 +499,10 @@ The tracker will wrap this [self-describing JSON](https://github.com/snowplow/i
 
 As well as setting `e=ue`, there are two custom event specific parameters that can be populated with the outer self-describing JSON:
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `ue_pr` | `unstruct_event` | JSON | The properties of the event | Yes | `{ "product_id": "ASO01043", "price": 49.95 }` |
-| `ue_px` | `unstruct_event` | JSON (URL-safe Base64 encoded) | The properties of the event | Yes | `eyAicHJvZHVjdF9pZCI6ICJBU08wMTA0MyIsICJwcmljZSI6IDQ5Ljk1IH0=` |
+| **Parameter** | **Maps to**      | **Type**                       | **Description**             | **Implemented?** | **Example values**                                             |
+|---------------|------------------|--------------------------------|-----------------------------|------------------|----------------------------------------------------------------|
+| `ue_pr`       | `unstruct_event` | JSON                           | The properties of the event | Yes              | `{ "product_id": "ASO01043", "price": 49.95 }`                 |
+| `ue_px`       | `unstruct_event` | JSON (URL-safe Base64 encoded) | The properties of the event | Yes              | `eyAicHJvZHVjdF9pZCI6ICJBU08wMTA0MyIsICJwcmljZSI6IDQ5Ljk1IH0=` |
 
 The tracker can decide to pass the `ue_pr` or the `ue_px` parameter depending on configuration. Encoding properties into URL-safe Base64 allows for more data while sacrificing readability.
 
@@ -592,11 +593,11 @@ All custom contexts to be attached to an event will be wrapped in an array by th
 
 The tracker can be configured to encode the context into URL-safe Base64 to ensure that no data is lost or corrupted. The downside is that the data will be bigger and less readable. Otherwise the data will be percent-encoded.
 
-| **Parameter** | **Maps to** | **Type** | **Description** | **Implemented?** | **Example values** |
-| --- | --- | --- | --- | --- | --- |
-| `cv` | `context_vendor` (deprecated) | String | Vendor for the custom contexts | deprecated | `com.acme` |
-| `co` | `context` | JSON | An array of custom contexts | Yes | `%7B%22schema%22:%22iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0%22,%22data%22:%5B%7B%22schema%22:%22iglu:com.my_company/user/jsonschema/1-0-0%22,%22data%22:%7B%22fb_uid%22:%229999xyz%22%7D%7D%5D%7D` |
-| `cx` | `context` | JSON (URL-safe Base64 encoded) | An array of custom contexts | Yes | `ew0KICBzY2hlbWE6ICdpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy9jb250ZXh0cy9qc29uc2NoZW1hLzEtMC0wJyANCiAgZGF0YToge1sNCiAgICB7DQogICAgICBzY2hlbWE6ICdpZ2x1OmNvbS5teV9jb21wYW55L3VzZXIvanNvbnNjaGVtYS8xLTAtMCcgDQogICAgICBkYXRhOiB7DQogICAgICAgIGZiX3VpZDogJzk5OTl4eXonDQogICAgICB9DQogICAgfQ0KICBdfQ0KfQ==` |
+| **Parameter** | **Maps to**                   | **Type**                       | **Description**                | **Implemented?** | **Example values**                                                                                                                                                                                                                                                                                             |
+|---------------|-------------------------------|--------------------------------|--------------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `cv`          | `context_vendor` (deprecated) | String                         | Vendor for the custom contexts | deprecated       | `com.acme`                                                                                                                                                                                                                                                                                                     |
+| `co`          | `context`                     | JSON                           | An array of custom contexts    | Yes              | `%7B%22schema%22:%22iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0%22,%22data%22:%5B%7B%22schema%22:%22iglu:com.my_company/user/jsonschema/1-0-0%22,%22data%22:%7B%22fb_uid%22:%229999xyz%22%7D%7D%5D%7D`                                                                                       |
+| `cx`          | `context`                     | JSON (URL-safe Base64 encoded) | An array of custom contexts    | Yes              | `ew0KICBzY2hlbWE6ICdpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy9jb250ZXh0cy9qc29uc2NoZW1hLzEtMC0wJyANCiAgZGF0YToge1sNCiAgICB7DQogICAgICBzY2hlbWE6ICdpZ2x1OmNvbS5teV9jb21wYW55L3VzZXIvanNvbnNjaGVtYS8xLTAtMCcgDQogICAgICBkYXRhOiB7DQogICAgICAgIGZiX3VpZDogJzk5OTl4eXonDQogICAgICB9DQogICAgfQ0KICBdfQ0KfQ==` |
 
 Example of a custom context attached to the _watch-video-clip_ structured event from above using percent encoding and the key `co`:
 

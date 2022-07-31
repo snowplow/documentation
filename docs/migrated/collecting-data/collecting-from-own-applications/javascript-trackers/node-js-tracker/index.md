@@ -5,9 +5,9 @@ sidebar_position: 300
 ---
 
 ```mdx-code-block
-import Block2891 from "@site/docs/reusable/untitled-reusable-block-34/_index.md"
+import Badges from '@site/src/components/Badges';
 
-<Block2891/>
+<Badges badgeType="Early Release"></Badges>
 ```
 
 The Snowplow Node.js Tracker allows you to track Snowplow events from your Node.js applications.

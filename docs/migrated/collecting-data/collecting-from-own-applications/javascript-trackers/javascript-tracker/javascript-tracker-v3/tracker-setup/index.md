@@ -8,4 +8,9 @@ sidebar_position: 1000
 import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
 
 <Block5966/>
+
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
 ```

@@ -7,3 +7,10 @@ sidebar_position: 0
 Snowplow Trackers are client- or server-side libraries which enable you to collect events from your own applications.
 
 View our [webhooks for tracking events from third-party applications](/docs/migrated/collecting-data/collecting-data-from-third-parties/).
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
+```

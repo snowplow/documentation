@@ -40,7 +40,7 @@ The example script below will be used as the basis for your tag. There are some 
 
 You can also customize the part of the tag between the comments containing "!!!". The example below creates a tracker instance, sets page pings to fire every 10 seconds, and sends a page view event. See the [JavaScript Tracker page](/docs/migrated/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/) for more information on other tracking methods.
 
-```
+```javascript
 <script>
   // If this tag fires more than once (e.g. page view followed by ecommerce action),
   // we don't want to repeat the trackPageView here

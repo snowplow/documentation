@@ -24,7 +24,7 @@ In spite of its 'unusualness', there is one very good reasons to use R to analyz
 
 To install R on Ubuntu, add the following line to your `/etc/apt/sources.list` file:
 
-```
+```bash
 deb http://<my.favorite.cran.mirror>/bin/linux/ubuntu precise/
 ```
 
@@ -32,14 +32,14 @@ but swap out `<my.favorite.cran.mirror>` for your nearest mirror e.g. `deb http:
 
 Then simply
 
-```
+```bash
 sudo apt-get update
 sudo apt-get install r-base
 ```
 
 You can then launch R by typing
 
-```
+```bash
 R
 ```
 
@@ -51,19 +51,19 @@ You can pull Snowplow data stored in Redshift directly into R using the `RPostgr
 
 First, install the package. (This only needs to be done once for your R installation.) Run at the R command prompt:
 
-```
+```r
 install.packages("RPostgreSQL")
 ```
 
 To use the library (e.g. at the beginning of an R session), enter the following at the command prompt:
 
-```
+```r
 library("RPostgreSQL")
 ```
 
 Then:
 
-```
+```r
 drv <- dbDriver("PostgreSQL")
 con <- dbConnect(drv, host="<<ENTER HOST DETAILS HERE>>", port="<<ENTER PORT DETAILS HERE>>",dbname="<<ENTER DB NAME HERE>>", user="<<ENTER USERNAME HERE>>", password="<<ENTER PASSWORD HERE>>")
 ```
@@ -72,7 +72,7 @@ Note: you can access the relevant host, port, dbname and username fields by logg
 
 You can now fetch Snowplow data directly from Redshift into a dataframe in R, by executing the `dbGetQuery` statement to run a SQL statement against that data and return the data into R as a data frame. For example, the following query returns a list of visits to an ecommerce site, classified by whether the stage in the purchase funnel that each visit got to:
 
-```
+```sql
 SELECT
 a.domain_userid,
 a.first_touch,
@@ -112,7 +112,7 @@ LEFT JOIN (
 
 We can pull that data into R by executing the following at the R command prompt:
 
-```
+```r
 visits <- dbGetQuery(con, "
     SELECT
     a.domain_userid,

@@ -32,7 +32,7 @@ We recommend you create a dedicated 'Looker' user to access your Snowplow data. 
 
 To do so, log into your Snowplow database using admin / super user credentials with your client of choice (e.g. [Navicat](http://www.navicat.com/), [psql](http://www.postgresql.org/docs/9.2/static/app-psql.html) etc.) and execute the following:
 
-```
+```sql
 CREATE USER looker PASSWORD {{ password }};
 GRANT USAGE ON SCHEMA atomic TO looker;
 GRANT SELECT ON atomic.events TO looker;

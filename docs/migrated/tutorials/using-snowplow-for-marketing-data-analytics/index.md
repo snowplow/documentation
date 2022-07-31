@@ -24,7 +24,7 @@ Our blog comes in at number six in terms of lead generation:
 
 Source:
 
-```
+```sql
 WITH prep AS (
 SELECT
     a.company,

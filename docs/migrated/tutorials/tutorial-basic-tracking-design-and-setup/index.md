@@ -19,7 +19,7 @@ We'll give it the following details:
 - We'll set name to `basic_form_tracking`
 - And give it a description of `Schema for tracking our demo form`
 
-```
+```json
 {
     "$schema" : "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     "description": "Schema for tracking our demo form",
@@ -39,7 +39,7 @@ We'll give it the following details:
 
 ### Adding properties
 
-If we take the first field “First Name” and assume that the form owner makes the decisions that:
+If we take the first field “First Name" and assume that the form owner makes the decisions that:
 
 1. The name of the field should be ‘form1\_first\_name’ (so everyone knows how to find it in the database later)
 2. Values entered should be a string (text)
@@ -48,12 +48,12 @@ If we take the first field “First Name” and assume that the form owner makes
 
 Therefore in the schema for this data structure we would display these decisions as properties of the field and specify this field as required:
 
-```
+```json
 ...
     "properties": {
         "form1_first_name": {
             "type": "string",
-            “minLength”: 2,
+            “minLength": 2,
             "maxLength": 100
         },
     },
@@ -65,24 +65,24 @@ Therefore in the schema for this data structure we would display these decisions
 
 For the second form field the form owner might decide:
 
-1. The name of the field should be “form1\_contact\_number”
+1. The name of the field should be “form1\_contact\_number"
 2. The values entered must be a number
 3. The minimum and maximum number length should be 10 digits
 4. This is an optional field
 
 So we would add another field to the properties in the schema as such:
 
-```
+```json
 ...
     "properties": {
         "form1_first_name": {
             "type": "string",
-            “minLength”: 2,
+            "minLength": 2,
             "maxLength": 100
         },
         "form1_contact_number": {
-            "type": ["number",”null”]
-            “minLength”: 10,
+            "type": ["number","null"]
+            "minLength": 10,
             "maxLength": 10
         },
     },
@@ -92,27 +92,27 @@ So we would add another field to the properties in the schema as such:
 ...
 ```
 
-By adding the “null” type above this means that if there is no data value sent across for this field the event will still pass schema validation.
+By adding the “null" type above this means that if there is no data value sent across for this field the event will still pass schema validation.
 
 Finally for the 3rd form field the decisions are as follows:
 
-1. The name of the field should be “opt\_into\_marketing”
+1. The name of the field should be “opt\_into\_marketing"
 2. The values sent are True/False; Yes = true, No = false
 3. This field is required.
 
 Our schema definition would be as follows:
 
-```
+```json
 ...
     "properties": {
         "form1_first_name": {
             "type": "string",
-            “minLength”: 2,
+            "minLength": 2,
             "maxLength": 100
         },
         "form1_contact_number": {
-            "type": ["number",”null”]
-            “minLength”: 10,
+            "type": ["number","null"]
+            "minLength": 10,
             "maxLength": 10
         },
         "opt_into_marketing": {
@@ -130,7 +130,7 @@ Our schema definition would be as follows:
 
 Putting it all together our schema for capturing the additional contexts of individual form fields on the event that someone submits this form might look something like this:
 
-```
+```json
 {
      "$schema" : "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
      "description": "Schema for tracking our demo form",
@@ -144,12 +144,12 @@ Putting it all together our schema for capturing the additional contexts of indi
      "properties": {
          "form1_first_name": {
              "type": "string",
-             “minLength”: 2,
+             "minLength": 2,
              "maxLength": 100
          },
          "form1_contact_number": {
-             "type": ["number",”null”]
-             “minLength”: 10,
+             "type": ["number","null"]
+             "minLength": 10,
              "maxLength": 10
          },
          "opt_into_marketing": {
@@ -182,7 +182,7 @@ Once you have successfully created and published your schema to the development 
 
 #### A note on validating our schema
 
-When you validate the schema you will see a few validation warnings, letting us know that our properties don’t have “descriptions”.
+When you validate the schema you will see a few validation warnings, letting us know that our properties don’t have “descriptions".
 
 ![validation](images/validation.png)
 
@@ -190,7 +190,7 @@ Descriptions within properties, like the description for the overall schema help
 
 Let’s add descriptions to the properties, for example:
 
-```
+```json
 ...
     "form1_contact_number": {
         "type": ["number", "null"],
@@ -216,7 +216,7 @@ To do this we'll need to:
 
 Create a new HTML page with this content:
 
-```
+```html
 <html>
 <body>
 <form class="form-horizontal">
@@ -288,7 +288,7 @@ For our form example we would likely be using the JavaScript Tracker to send acr
 
 Let's add a function into our page, you'll need to pass in the values from your form:
 
-```
+```javascript
 <script>
 function form1submit(){ 
   window.snowplow('trackSelfDescribingEvent', {

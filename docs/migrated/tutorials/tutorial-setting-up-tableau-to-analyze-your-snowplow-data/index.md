@@ -112,7 +112,7 @@ This time, go through the process as before: select Redshift, enter the details 
 
 You can paste in any Redshift compatible SQL query to generate a specific slice of the data. To give a simple example, the following query:
 
-```
+```sql
 SELECT
  domain_userid,
  domain_sessionidx,
@@ -130,7 +130,7 @@ was used to grab the data for a single visitor. That was then used in Tableau to
 
 To give a more complicated example:
 
-```
+```sql
 SELECT
 pv.page_urlpath,
 pv.unique_visitors,

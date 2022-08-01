@@ -8,4 +8,9 @@ sidebar_position: 20
 import Block1303 from "@site/docs/reusable/untitled-reusable-block-20/_index.md"
 
 <Block1303/>
+
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
 ```

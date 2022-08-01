@@ -6,7 +6,7 @@ const FeatureList = [
   {
     title: 'Getting Started with Snowplow',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    link: "docs/migrated/getting-started-with-snowplow-bdp",
+    link: "docs/migrated",
     description: (
       <>
         Information on how to get started with the various flavours of Snowplow.

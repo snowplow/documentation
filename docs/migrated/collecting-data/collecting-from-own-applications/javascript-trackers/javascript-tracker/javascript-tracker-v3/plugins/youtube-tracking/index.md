@@ -4,6 +4,12 @@ date: "2022-01-12"
 sidebar_position: 17000
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 # Snowplow Media Tracking
 
 This plugin will allow the tracking of an embedded YouTube IFrame.

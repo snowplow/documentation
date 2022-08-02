@@ -12,4 +12,10 @@ The documentation listed here is for Version 2 of the JavaScript Tracker. Versio
 
 \- [v2 to v3 Migration Guide](/docs/migrated/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide/)
 
+```mdx-code-block
+import Block1508 from "@site/docs/reusable/untitled-reusable-block-25/_index.md"
+
+<Block1508/>
+```
+
 Once the tracker is loaded via the tag, you can move on to [initializing the tracker](/docs/migrated/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/general-parameters/initializing-the-tracker/).

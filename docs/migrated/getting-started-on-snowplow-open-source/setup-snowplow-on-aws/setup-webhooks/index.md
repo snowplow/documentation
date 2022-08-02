@@ -14,4 +14,10 @@ Webhooks allow this third-party software to send their own internal event stream
 
 The following Webhooks are currently available for setup:
 
+```mdx-code-block
+import Block2941 from "@site/docs/reusable/untitled-reusable-block-39/_index.md"
+
+<Block2941/>
+```
+
 If you are interested in sponsoring a new webhook integration for Snowplow, [let us know](https://snowplowanalytics.com/contact-us/).

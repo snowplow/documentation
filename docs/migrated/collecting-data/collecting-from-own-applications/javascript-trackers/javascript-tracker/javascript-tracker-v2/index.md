@@ -4,6 +4,12 @@ date: "2020-02-19"
 sidebar_position: 1100
 ---
 
+```mdx-code-block
+import Block2895 from "@site/docs/reusable/untitled-reusable-block-35/_index.md"
+
+<Block2895/>
+```
+
 Documentation for latest release
 
 The documentation listed here is for Version 2 of the JavaScript Tracker. Version 3 is now available and upgrading is recommended.

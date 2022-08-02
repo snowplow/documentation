@@ -4,6 +4,12 @@ date: "2021-03-26"
 sidebar_position: 2000
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 If you call `snowplow` with a function as the argument, the function will be executed when sp.js loads:
 
 ```

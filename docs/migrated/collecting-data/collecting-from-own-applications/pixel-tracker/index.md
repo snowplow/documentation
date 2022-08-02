@@ -4,6 +4,12 @@ date: "2020-02-26"
 sidebar_position: 160
 ---
 
+```mdx-code-block
+import Block2901 from "@site/docs/reusable/untitled-reusable-block-37/_index.md"
+
+<Block2901/>
+```
+
 ## What is the Pixel tracker?
 
 The Pixel tracker is an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.

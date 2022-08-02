@@ -4,6 +4,12 @@ date: "2021-04-07"
 sidebar_position: 9000
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 Snowplow automatic form tracking detects three event types: `change_form`, `submit_form` and `focus_form`. To enable automatic form tracking, use the `enableFormTracking` method. This will add event listeners to all form elements and to all interactive elements inside forms (that is, all `input`, `textarea`, and `select` elements).
 
 **Note:** that events on password fields will not be tracked.

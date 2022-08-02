@@ -4,6 +4,12 @@ date: "2021-03-25"
 sidebar_position: 3000
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 #### Toggling Anonymous Tracking
 
 The JavaScript Tracker can be initialised with `anonymousTracking: true` or `anonymousTracking: { withSessionTracking: true }` or `anonymousTracking: { withServerAnonymisation: true }`. You can read more about the anonymous tracking features [here](/docs/migrated/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/#Anonymous_Tracking).

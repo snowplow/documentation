@@ -4,6 +4,12 @@ date: "2021-03-24"
 sidebar_position: 100
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 Getting started with sending events using the Browser Tracker will be familiar for anyone who is used to installing npm packages into their web apps and is designed to work with frameworks such as React, Angular and Vue.
 
 The process involves the following high level steps:

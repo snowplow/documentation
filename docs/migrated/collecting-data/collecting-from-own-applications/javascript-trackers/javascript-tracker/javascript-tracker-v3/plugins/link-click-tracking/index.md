@@ -4,6 +4,12 @@ date: "2021-03-30"
 sidebar_position: 12000
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 | Tracker Distribution | Included |
 | --- | --- |
 | `sp.js` | ✅ |

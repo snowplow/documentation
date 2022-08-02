@@ -11,3 +11,9 @@ Snowplow Trackers are SDKs that are integrated into applications to generate eve
 ## 1\. Choose and setup a Tracker
 
 You can find [documentation for all of the available trackers](/docs/migrated/collecting-data/collecting-from-own-applications/) in the Trackers section, or by selecting from the list below.
+
+```mdx-code-block
+import Block2936 from "@site/docs/reusable/untitled-reusable-block-38/_index.md"
+
+<Block2936/>
+```

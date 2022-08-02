@@ -33,6 +33,12 @@ Each request will need to include your company's `organizationID` which is a UUI
 
 ![](images/orgID.png)
 
+```mdx-code-block
+import Block14551 from "@site/docs/reusable/14551/_index.md"
+
+<Block14551/>
+```
+
 ## Retrieving data structures
 
 The following `GET` requests allow you to retrieve data structures from both your development and production environment registries.

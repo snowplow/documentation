@@ -4,6 +4,12 @@ date: "2021-03-26"
 sidebar_position: 1000
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 Each `track...()` method supports an optional timestamp property; this allows you to manually override the timestamp attached to this event. The timestamp should be in milliseconds since the Unix epoch.
 
 If you do not pass this timestamp in as an argument, then the JavaScript Tracker will use the current time to be the timestamp for the event.

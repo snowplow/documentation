@@ -4,6 +4,12 @@ date: "2021-03-26"
 sidebar_position: 1000
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 Snowplow has been built to enable users to track a wide range of events that occur when consumers interact with their websites and webapps.
 
 Snowplow has a number of "built-in" events but offers unlimited event types through Self Describing Events. In addition to this, events can have additional data properties attached them by adding "context" to each event.

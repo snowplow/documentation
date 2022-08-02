@@ -4,6 +4,12 @@ date: "2020-02-26"
 sidebar_position: 180
 ---
 
+```mdx-code-block
+import Block2901 from "@site/docs/reusable/untitled-reusable-block-37/_index.md"
+
+<Block2901/>
+```
+
 The Snowplow .NET Tracker allows you to track Snowplow events from your .NET websites and desktop applications. It's split into two libraries:
 
 #### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#snowplowtracker)`Snowplow.Tracker`

@@ -4,6 +4,12 @@ date: "2020-02-26"
 sidebar_position: 270
 ---
 
+```mdx-code-block
+import Block2891 from "@site/docs/reusable/untitled-reusable-block-34/_index.md"
+
+<Block2891/>
+```
+
 The Snowplow Lua Tracker allows you to track Snowplow events in your Lua applications.
 
 It is compatible with Lua >= 5.1, along with LuaJIT.

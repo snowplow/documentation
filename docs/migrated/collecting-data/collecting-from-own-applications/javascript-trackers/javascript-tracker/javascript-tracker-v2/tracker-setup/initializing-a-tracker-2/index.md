@@ -34,6 +34,12 @@ _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-fo
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.13) for the corresponding documentation for version 2.13.0._
 
+```mdx-code-block
+import Block3067 from "@site/docs/reusable/untitled-reusable-block-41/_index.md"
+
+<Block3067/>
+```
+
 Documentation for latest release
 
 The documentation listed here is for Version 2 of the JavaScript Tracker. Version 3 is now available and upgrading is recommended.
@@ -41,3 +47,9 @@ The documentation listed here is for Version 2 of the JavaScript Tracker. Versio
 \- [Documentation for Version 3](/docs/migrated/collecting-data/collecting-from-own-applications/javascript-trackers/)
 
 \- [v2 to v3 Migration Guide](/docs/migrated/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide/)
+
+```mdx-code-block
+import Block1512 from "@site/docs/reusable/untitled-reusable-block-26/_index.md"
+
+<Block1512/>
+```

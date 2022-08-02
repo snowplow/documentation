@@ -60,12 +60,15 @@ Next, install some more tools:
 
 ```bash
 pip3 install yq
+# on Mac
+brew install moreutils
+# on Linux use your preferred package manager to install the same
 ```
 
 Then export the content from Wordpress (choose “All content”).
 
 Finally, run the import script.
-**WARNING**: it will overwrite `docs/migrated`.
+**WARNING**: it will overwrite `docs/migrated` and `docs/reusable`!
 
 ```bash
 ./import.sh <your-export-file.xml>

@@ -4,6 +4,12 @@ date: "2021-04-12"
 sidebar_position: 750
 ---
 
+```mdx-code-block
+import Block7289 from "@site/docs/reusable/creating-your-own-plugins/_index.md"
+
+<Block7289/>
+```
+
 ### Example
 
 ```

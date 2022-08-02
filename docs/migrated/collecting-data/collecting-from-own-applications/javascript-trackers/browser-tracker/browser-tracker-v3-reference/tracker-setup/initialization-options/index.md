@@ -4,6 +4,12 @@ date: "2021-03-31"
 sidebar_position: 2000
 ---
 
+```mdx-code-block
+import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
+<Block5966/>
+```
+
 Tracker initialization is started by calling the `"newTracker"` function and takes three arguments:
 
 1. The tracker namespace

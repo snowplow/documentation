@@ -34,6 +34,12 @@ _Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracki
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.13) for the corresponding documentation for version 2.13.0._
 
+```mdx-code-block
+import Block3067 from "@site/docs/reusable/untitled-reusable-block-41/_index.md"
+
+<Block3067/>
+```
+
 Documentation for latest release
 
 The documentation listed here is for Version 2 of the JavaScript Tracker. Version 3 is now available and upgrading is recommended.

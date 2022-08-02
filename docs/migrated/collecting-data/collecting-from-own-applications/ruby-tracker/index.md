@@ -4,6 +4,12 @@ date: "2020-02-26"
 sidebar_position: 220
 ---
 
+```mdx-code-block
+import Block2891 from "@site/docs/reusable/untitled-reusable-block-34/_index.md"
+
+<Block2891/>
+```
+
 The Snowplow Ruby Tracker allows you to track Snowplow events in your Ruby applications and gems and Ruby on Rails web applications.
 
 The Ruby tracker is compatible with Ruby 2.1+, including Ruby 3.0+.

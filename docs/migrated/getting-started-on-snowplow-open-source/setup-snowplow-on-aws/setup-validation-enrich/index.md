@@ -21,6 +21,12 @@ The [Stream Enrich reference](/docs/migrated/pipeline-components-and-application
 
 ## Add any desired Enrichments
 
+```mdx-code-block
+import Block1303 from "@site/docs/reusable/untitled-reusable-block-20/_index.md"
+
+<Block1303/>
+```
+
 Each enrichment is enabled by configuring a JSON config file (one per enrichment), loading these into DynamoDB and then passing the location of the configs in DynamoDB to stream enrich on running it using the `--enrichments` [argument as documented](/docs/migrated/pipeline-components-and-applications/enrichment-components/stream-enrich/run-stream-enrich/).
 
 ## Sink the enriched data to S3 from Kinesis

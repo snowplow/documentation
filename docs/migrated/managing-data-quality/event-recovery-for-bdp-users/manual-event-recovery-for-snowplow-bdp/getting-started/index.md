@@ -4,6 +4,12 @@ date: "2020-07-22"
 sidebar_position: 0
 ---
 
+```mdx-code-block
+import Block3003 from "@site/docs/reusable/untitled-reusable-block-40/_index.md"
+
+<Block3003/>
+```
+
 Event recovery at its core, is the ability to fix events that have failed and replay them through your pipeline.
 
 After inspecting failed events either in the [Snowplow BDP Console](/docs/migrated/managing-data-quality/failed-events-in-the-ui/), or in the [partitioned failure buckets](/docs/migrated/managing-data-quality/accessing-failed-events/failed-events-in-athena-and-bigquery/), you can determine which events are possible to recover based on what the fix entails.

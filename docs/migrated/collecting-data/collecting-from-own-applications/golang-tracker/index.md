@@ -4,6 +4,12 @@ date: "2020-02-26"
 sidebar_position: 170
 ---
 
+```mdx-code-block
+import Block2895 from "@site/docs/reusable/untitled-reusable-block-35/_index.md"
+
+<Block2895/>
+```
+
 The Snowplow Golang Tracker allows you to track Snowplow events from your Golang apps and servers.
 
 There are three basic types of object you will create when using the Snowplow Golang Tracker: subjects, emitters, and trackers.

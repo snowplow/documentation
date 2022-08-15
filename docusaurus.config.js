@@ -6,17 +6,17 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Snowplow Docs',
+  title: 'Snowplow Documentation',
   tagline: 'Build, deploy, and scale your next data creation project using Snowplow.',
-  url: 'https://andy-hay.github.io',
-  baseUrl: '/docsite-poc.github.io/',
+  url: 'https://docs.snowplowanalytics.com',
+  baseUrl: '/',
   // reset this back to throw, set to warn so that site builds
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   trailingSlash: false,
-  organizationName: 'Andy-Hay', // Usually your GitHub org/user name.
-  projectName: 'docsite-poc.github.io', // Usually your repo name.
+  organizationName: 'snowplow',
+  projectName: 'snowplow.github.io',
   deploymentBranch: 'main',
   i18n: {
     defaultLocale: 'en',
@@ -31,17 +31,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           showLastUpdateTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/snowplow/snowplow.github.io/tree/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -56,7 +46,7 @@ const config = {
       navbar: {
         title: 'Snowplow Docs',
         logo: {
-          alt: 'SnowPlow Docs Logo',
+          alt: 'Snowplow Logo',
           src: 'img/snowplow-icon-light-purple.svg',
         },
         items: [
@@ -67,7 +57,7 @@ const config = {
             label: 'Documentation',
           },
           {
-            href: 'https://github.com/Andy-Hay/docsite-poc.github.io',
+            href: 'https://github.com/snowplow/',
             label: 'GitHub',
             position: 'right',
           },
@@ -103,10 +93,6 @@ const config = {
               {
                 label: 'Events',
                 href: 'https://snowplowanalytics.com/events/',
-              },
-              {
-                label: 'GitHub for these docs',
-                href: 'https://github.com/Andy-Hay/docsite-poc.github.io',
               },
             ],
           },

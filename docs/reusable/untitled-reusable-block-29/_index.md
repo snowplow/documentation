@@ -61,7 +61,9 @@ unzip -j igluctl\_0.7.0.zip
 - The Super API Key you created in step 2.2
 - The path to your schemas For example to load the `iglu-central` repository into Iglu Server:
 
+```
 /path/to/igluctl static push iglu-central/schemas http://<public dns>/iglu-server 980ae3ab-3aba-4ffe-a3c2-3b2e24e2ffce --public
+```
 
 Note: this example assumes the `iglu-central` repository has been cloned in the same directory as where executable is run.
 

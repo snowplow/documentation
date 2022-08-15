@@ -32,7 +32,7 @@ We will continue referring to the file as `sp.js` throughout this guide, however
 
 | Option | Value |
 | --- | --- |
-| **Name** (also see [Add DNS Record for bucket](/docs/migrated/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/self-hosting-the-javascript-tracker-on-google-cloud/#add-dns-record-for-bucket-optional)) | For example, `[company-name]-sp-js` |
+| **Name** (also see [Add DNS Record for bucket](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/self-hosting-the-javascript-tracker-on-google-cloud/#add-dns-record-for-bucket-optional)) | For example, `[company-name]-sp-js` |
 | **Storage region** | Select a suitable region, multi-region offers the widest availability and highest SLAs |
 | **Storage class** | Standard |
 | Access control options | Fine grained |

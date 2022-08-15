@@ -52,7 +52,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'migrated/index',
+            docId: 'introduction',
             position: 'left',
             label: 'Documentation',
           },

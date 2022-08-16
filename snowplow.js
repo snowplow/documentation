@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { LinkClickTrackingPlugin, enableLinkClickTracking, refreshLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
+import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { LinkClickTrackingPlugin, enableLinkClickTracking, refreshLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking'
 
 // TODO left here only for discussing the replacement, remove once that's done
 const setupSnowplow = () => {
@@ -49,45 +49,49 @@ window.snowplow && window.snowplow("newTracker", "gtm-eng", "eng-gtm.snowplowana
 }
 
 const setupBrowserTracker = () => {
-  let appId = 'test'
-  const host = window.location.hostname
-  if (host === 'docs.snowplowanalytics.com' || host === 'docs.snowplow.io') {
-    appId = "docs2"
+  if (ExecutionEnvironment.canUseDOM) {
+    let appId = 'test'
+    const host = window.location.hostname
+    if (host === 'docs.snowplowanalytics.com' || host === 'docs.snowplow.io') {
+      appId = "docs2"
+    }
+
+    const snowplowTracker = newTracker('snplow5', 'collector.snowplowanalytics.com', { 
+      appId,
+      plugins: [ LinkClickTrackingPlugin() ], 
+      cookieDomain: ".snowplowanalytics.com",
+      cookieName: "_sp5_",
+      contexts: {
+        webPage: true,
+        performanceTiming: true,
+        gaCookies: true,
+      }
+    })
+
+    newTracker('gtm-eng', 'eng-gtm.snowplowanalytics.com', { 
+      appId,
+      plugins: [ LinkClickTrackingPlugin() ],
+      cookieDomain: ".snowplowanalytics.com",
+      cookieName: "_sp_gtm_",
+      contexts: {
+        webPage: true,
+        performanceTiming: true
+      }
+    })
+
+    enableLinkClickTracking()
+    refreshLinkClickTracking()
+    snowplowTracker.enableActivityTracking({heartbeatDelay: 10, minimumVisitLength: 10})  // precise tracking for the unified log
+    trackPageView()
   }
-
-  const snowplowTracker = newTracker('snplow5', 'collector.snowplowanalytics.com', { 
-    appId,
-    plugins: [ LinkClickTrackingPlugin() ], 
-    cookieDomain: ".snowplowanalytics.com",
-    cookieName: "_sp5_",
-    contexts: {
-      webPage: true,
-      performanceTiming: true,
-      gaCookies: true,
-    }
-  })
-
-  newTracker('gtm-eng', 'eng-gtm.snowplowanalytics.com', { 
-    appId,
-    plugins: [ LinkClickTrackingPlugin() ],
-    cookieDomain: ".snowplowanalytics.com",
-    cookieName: "_sp_gtm_",
-    contexts: {
-      webPage: true,
-      performanceTiming: true
-    }
-  })
-
-  enableLinkClickTracking()
-  refreshLinkClickTracking()
-  snowplowTracker.enableActivityTracking({heartbeatDelay: 10, minimumVisitLength: 10})  // precise tracking for the unified log
-  trackPageView()
 }
 
-// Based on https://docusaurus.io/docs/swizzling#wrapper-your-site-with-root
-export default function Root({children}) {
-  useEffect(setupBrowserTracker, [])
-  return <>
-    {children}
-  </>;
+setupBrowserTracker()
+
+const module = {
+  onRouteDidUpdate() {
+    trackPageView()
+  }
 }
+
+export default module

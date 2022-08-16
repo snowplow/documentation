@@ -23,6 +23,10 @@ const config = {
     locales: ['en'],
   },
 
+  clientModules: [
+    require.resolve('./snowplow.js'),
+  ],
+
   presets: [
     [
       '@docusaurus/preset-classic',

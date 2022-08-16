@@ -25,9 +25,9 @@ const config = {
 
   presets: [
     [
-      'classic',
+      '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           showLastUpdateTime: true,
@@ -46,7 +46,15 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      }),
+        googleAnalytics: {
+          trackingID: 'UA-159566509-1',
+          anonymizeIP: true,
+        },
+        gtag: {
+          trackingID: 'GTM-M24XMJD',
+          anonymizeIP: true,
+        },
+      },
     ],
   ],
 

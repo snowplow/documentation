@@ -57,7 +57,7 @@ const config = {
             label: 'Documentation',
           },
           {
-            href: 'https://github.com/snowplow/',
+            href: 'https://github.com/snowplow/snowplow.github.io',
             label: 'GitHub',
             position: 'right',
           },

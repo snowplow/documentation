@@ -16,20 +16,37 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-background-color: #F5F5F5;
+  --ifm-background-color: #F2F4F7;
   --ifm-color-primary: #6638B8;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary-dark: #522d93;
+  --ifm-color-primary-darker: #472781;
+  --ifm-color-primary-darkest: #29164a;
+  --ifm-color-primary-light: #7345c6;
+  --ifm-color-primary-lighter: #926ed3;
+  --ifm-color-primary-lightest: #b198df;
   --ifm-code-font-size: 95%;
-  --ifm-font-family-base: 'Rubik', Arial, Helvetica, sans-serif;
+  --ifm-font-family-base: 'Roboto', Arial, Helvetica, sans-serif;
   --ifm-menu-color-active: #6638B8;
+  --ifm-font-color-base: #000000;
+  --ifm-toc-padding-horizontal: 20px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -42,6 +59,18 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    padding-left: 16px;
+  }
+}
+
+@media screen and (min-width: 996px) {
+  .container {
+    padding-left: 64px;
+  }
 }
 
 .navbar__brand {
@@ -59,6 +88,7 @@
 
 .navbar__items .navbar__item {
   padding-left: 4px;
+  font-family: 'Rubik';
 }
 
 .navbar__logo {
@@ -94,10 +124,75 @@
   color: #412476;
 }
 
+p {
+  line-height: 24px;
+}
+
 .gh-button:active, .gh-button:hover, .gh-button:focus {
   color: #412476;
 }
 
 .toggle_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module {
   margin-left: 8px;
+}
+
+header, h1, h2, h3, h4, h5 {
+  font-family: 'Rubik';
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 28px;
+  line-height: 32px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.table-of-contents__left-border {
+  border-left-color: #98A2B3;
+}
+
+.theme-doc-sidebar-item-link-level-1 {
+  font-weight: 500;
+}
+
+.theme-doc-sidebar-item-category-level-2, .theme-doc-sidebar-item-link-level-2 {
+  font-weight: 400;
+}
+
+.theme-doc-sidebar-item-category-level-3, .theme-doc-sidebar-item-category-level-4, .theme-doc-sidebar-item-link-level-3, .theme-doc-sidebar-item-link-level-4 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.breadcrumbs__item:not(:last-child):after {
+  content: '/';
+  background: none;
+  color: var(--ifm-color-primary);
+}
+
+.breadcrumbs__item .breadcrumbs__link {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+} 
+
+.breadcrumbs__item .breadcrumbs__link:hover {
+  text-decoration: underline;
+} 
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: #000000;
+  background: none;
+  text-decoration: none;
+}
+
+.breadcrumbs__item--active .breadcrumbs__link:hover {
+  text-decoration: none;
 }

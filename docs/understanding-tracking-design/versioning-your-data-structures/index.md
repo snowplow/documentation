@@ -6,7 +6,7 @@ sidebar_position: 90
 
 Snowplow is designed to make it easy for you to change your tracking design in a safe and backwards-compatible way as your organisational data needs evolve.
 
-Data structures are used to describe the structure your data should be delivered in. The structure itself is described by a [JSON schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/). Each schema carries a version number expressed as three numeric digits. As your schema evolves, all previous versions of that schema remain available to ensure backwards-compatibility.
+Data structures are used to describe the structure your data should be delivered in. The structure itself is described by a [JSON schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md). Each schema carries a version number expressed as three numeric digits. As your schema evolves, all previous versions of that schema remain available to ensure backwards-compatibility.
 
 ## Why is versioning important?
 
@@ -39,4 +39,4 @@ Overwriting in your Production environment is forbidden due to the technology th
 
 For particular workflows you may want to make use of the middle digital as part of your versioning strategy. For simplicity, the UI allows only breaking or non-breaking changes.
 
-Should you wish to use the middle versioning digit this is possible [via the Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api/).
+Should you wish to use the middle versioning digit this is possible [via the Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md).

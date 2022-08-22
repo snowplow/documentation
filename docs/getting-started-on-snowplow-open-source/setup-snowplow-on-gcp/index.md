@@ -8,7 +8,7 @@ Quick Start
 
 We have built a set of [terraform](https://registry.terraform.io/namespaces/snowplow-devops) modules, which automates the setting up & deployment of the required infrastructure & applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side. 
 
-[Quick Start Installation Guide on GCP](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/)
+[Quick Start Installation Guide on GCP](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/index.md)
 
 Setup Snowplow on GCP as per the following steps:
 

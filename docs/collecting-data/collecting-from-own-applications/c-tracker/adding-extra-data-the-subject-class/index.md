@@ -15,7 +15,7 @@ subject.set_user_id("a-user-id");
 auto tracker = Snowplow::create_tracker("ns", "https://com.acme.collector", POST, "events.db", subject);
 ```
 
-You can also attach custom Subject information to individual events. In this way, you may track events describing different users or devices using the same tracker. Events can be assigned a shared C++ pointer to a Subject instance using the `set_subject` method. The following example shows how to attach a subject instance to a structured event (see [Tracking specific events](/docs/collecting-data/collecting-from-own-applications/c-tracker/tracking-specific-events/) for more information on tracking events):
+You can also attach custom Subject information to individual events. In this way, you may track events describing different users or devices using the same tracker. Events can be assigned a shared C++ pointer to a Subject instance using the `set_subject` method. The following example shows how to attach a subject instance to a structured event (see [Tracking specific events](/docs/collecting-data/collecting-from-own-applications/c-tracker/tracking-specific-events/index.md) for more information on tracking events):
 
 ```
 auto subject = std::make_shared<Subject>();

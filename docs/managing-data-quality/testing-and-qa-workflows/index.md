@@ -21,12 +21,12 @@ For more automated testing of your tracking we have a tool called Snowplow Micro
 
 1. [Generate and copy](https://console.snowplowanalytics.com/iglu-keys) an IgluAPI Read key from console
 2. Request your schema registry URLs from Snowplow Support
-3. [Follow this guide](/docs/understanding-your-pipeline/what-is-snowplow-micro/) using the registry URLs to configure Micro, and the API key to run the commands
+3. [Follow this guide](/docs/understanding-your-pipeline/what-is-snowplow-micro/index.md) using the registry URLs to configure Micro, and the API key to run the commands
 
-You'll also find [examples of integrating with Nightwatch and Cypress](/docs/managing-data-quality/set-up-automated-testing-with-snowplow-micro/example-of-automated-tests/) in the guide.
+You'll also find [examples of integrating with Nightwatch and Cypress](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/example-of-automated-tests/index.md) in the guide.
 
 ## Verify schema dependencies using the Data Structures CI tool
 
 The Data Structures CI is a command-line tool which integrates Data Structures API into your CI/CD pipelines and currently has one task which verifies that all schema dependencies for a project are already deployed into a specified environment, thus preventing tracking going live in your application without the required schemas being published in your Snowplow schema registries.
 
-[You can learn about this tool in documentation.](/docs/managing-data-quality/using-the-data-structures-ci-tool-for-data-quality/)
+[You can learn about this tool in documentation.](/docs/managing-data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/index.md)

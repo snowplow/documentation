@@ -37,7 +37,7 @@ Alternatively, you can download and run [a jar file from the github release](htt
 java -jar scala-stream-collector-kinesis-2.7.0.jar --config /path/to/config.hocon
 ```
 
-## Health check[](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-the-snowplow-collector/run-the-scala-stream-collector/#healthcheck)
+## Health check[](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-the-snowplow-collector/run-the-scala-stream-collector/index.md#healthcheck)
 
 Pinging the collector on the /health path should return a 200 OK response:
 

@@ -16,15 +16,15 @@ Under the hood, Iglu Central is built and run as a static Iglu repository, whic
 
 ![iglu-central-img](images/iglu-central.png)
 
-The [deployment process](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/) for Iglu Central is documented on this wiki in case a user wants to setup a public mirror or private instance of Iglu Central.
+The [deployment process](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md) for Iglu Central is documented on this wiki in case a user wants to setup a public mirror or private instance of Iglu Central.
 
-Iglu Central is available for view at [http://iglucentral.com](http://iglucentral.com/). Although Iglu Central is primarily designed to be consumed by [Iglu clients](/docs/pipeline-components-and-applications/iglu/iglu-clients/), the root index page for Iglu Central links to all schemas currently hosted on Iglu Central.
+Iglu Central is available for view at [http://iglucentral.com](http://iglucentral.com/). Although Iglu Central is primarily designed to be consumed by [Iglu clients](/docs/pipeline-components-and-applications/iglu/iglu-clients/index.md), the root index page for Iglu Central links to all schemas currently hosted on Iglu Central.
 
 ## [](https://github.com/snowplow/iglu/wiki/Iglu-Central#existing-and-new-schemas)Self Hosting Iglu Central schemas
 
 The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](https://github.com/snowplow/iglu-central).
 
-Some components of Snowplow require an Iglu Server, and a static repo will not work. This means you'll want to host a mirror of Iglu Central. You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl)`:
+Some components of Snowplow require an Iglu Server, and a static repo will not work. This means you'll want to host a mirror of Iglu Central. You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/previous-versions/index.md)`:
 
 ```
 git clone https://github.com/snowplow/iglu-central
@@ -32,4 +32,4 @@ cd iglu-central
 igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000
 ```
 
-For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/).
+For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md).

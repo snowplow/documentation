@@ -215,7 +215,7 @@ Note: If you don't have a verified certificate, you need to disable SSL verifica
 
 The lack of auto-scaling in Kinesis results in throttled streams in case of traffic spikes and Stream Collector starts accumulating events to retry them later. If accumulation continues long enough, Stream Collector will run out of memory. To prevent the possibility of a broken collector, we decided to make it possible to configure an SQS buffer that can provide additional assurance during extreme traffic spikes.
 
-SQS is used to queue any message that Stream Collector failed to send to the Kinesis and the [`sqs2kinesis` application](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-the-snowplow-collector/optional-run-the-sqs2kinesis-app/) is then responsible for reading the messages from SQS and writing to Kinesis once it is ready. In the event of any AWS API glitches, there is a retry mechanism which retries sending the SQS queue 10 times.
+SQS is used to queue any message that Stream Collector failed to send to the Kinesis and the [`sqs2kinesis` application](/docs/pipeline-components-and-applications/sqs2kinesis/index.md) is then responsible for reading the messages from SQS and writing to Kinesis once it is ready. In the event of any AWS API glitches, there is a retry mechanism which retries sending the SQS queue 10 times.
 
 The keys set up for the Kinesis stream are stored as SQS message attributes in order to preserve the information. Note, the SQS messages cannot be as big as Kinesis messages. The limit is 256kB per message, but we send the messages as Base64 encoded, so the limit goes down to 192kB for the original message.
 

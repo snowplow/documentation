@@ -8,9 +8,9 @@ Documentation for latest release
 
 The documentation listed here is for Version 2 of the JavaScript Tracker. Version 3 is now available and upgrading is recommended.
 
-\- [Documentation for Version 3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/)
+\- [Documentation for Version 3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md)
 
-\- [v2 to v3 Migration Guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide/)
+\- [v2 to v3 Migration Guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide/index.md)
 
 Since 2.7.0 each `track...()` method supports an optional timestamp as its final argument; this allows you to manually override the timestamp attached to this event. The timestamp should be in milliseconds since the Unix epoch.
 
@@ -42,4 +42,4 @@ window.snowplow("trackSelfDescribingEvent", {
 );
 ```
 
-Above will attach `ttm` ([`true_tstamp`](/docs/understanding-your-pipeline/canonical-event/#212_Date_time_fields)) parameter instead of default `dtm`. You can also use, plain number or `{ type: 'dtm', value: tstamp }` to send `` `dvce_created_tstamp` ``.
+Above will attach `ttm` ([`true_tstamp`](/docs/understanding-your-pipeline/canonical-event/index.md#212_Date_time_fields)) parameter instead of default `dtm`. You can also use, plain number or `{ type: 'dtm', value: tstamp }` to send `` `dvce_created_tstamp` ``.

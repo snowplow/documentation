@@ -10,7 +10,7 @@ The [Iglu Server](https://github.com/snowplow-incubator/iglu-server/) is an Ig
 
 ### Setup an Iglu Server
 
-Information on setting up an instance of the Iglu Server can be found in [the setup guide](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/setup/).
+Information on setting up an instance of the Iglu Server can be found in [the setup guide](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/setup/index.md).
 
 ## [](https://github.com/snowplow/iglu/wiki/Iglu-server#1-the-schema-service-apischemas)1\. The schema service (`/api/schemas`)
 
@@ -213,7 +213,7 @@ http://$HOST/static/swagger-ui/index.html
 
 ## [](https://github.com/snowplow/iglu/wiki/Iglu-server#2-schema-validation-and-the-validation-service-apivalidation)2\. Schema validation and the validation service (`/api/validation`)
 
-When adding a schema to the repository, the repository will validate that the provided schema is self-describing - an overview of this concept can be found in the [Self describing JSON schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/) wiki page. In practice this means your schema should contain a `self` property, which itself contains the following properties:
+When adding a schema to the repository, the repository will validate that the provided schema is self-describing - an overview of this concept can be found in the [Self describing JSON schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) wiki page. In practice this means your schema should contain a `self` property, which itself contains the following properties:
 
 - `vendor`
 - `name`

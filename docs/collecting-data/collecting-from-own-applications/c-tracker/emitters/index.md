@@ -13,7 +13,7 @@ Emitters are responsible for sending events to the collector. Each tracker is gi
     - Each request is sent in its thread.
 - Once sent, it will process the results of all the requests sent and will remove all successfully sent events from the database. If the request failed, the events will be retried after a retry delay (see below).
 
-In [Initialisation](/docs/collecting-data/collecting-from-own-applications/c-tracker/initialisation/), we discussed how to create a tracker with an emitter configured using `EmitterConfiguration` or by instantiating an `Emitter` instance directly. Both of these options provide the same configuration functionality (e.g., storage options, byte limits, setting custom HTTP clients) that were discussed previously. This page will go into more detail on some of the configurable emitter properties.
+In [Initialisation](/docs/collecting-data/collecting-from-own-applications/c-tracker/initialisation/index.md), we discussed how to create a tracker with an emitter configured using `EmitterConfiguration` or by instantiating an `Emitter` instance directly. Both of these options provide the same configuration functionality (e.g., storage options, byte limits, setting custom HTTP clients) that were discussed previously. This page will go into more detail on some of the configurable emitter properties.
 
 ## Event store
 

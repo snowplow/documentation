@@ -16,7 +16,7 @@ For example, let's say we have a JSON representing a click on an ad like so:
 }
 ```
 
-which is supposed to conform to this [self-describing JSON Schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/):
+which is supposed to conform to this [self-describing JSON Schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md):
 
 ```
 {
@@ -59,4 +59,4 @@ Notice the two main differences compared to our original JSON:
 
 This way, our JSON becomes de facto self-describing, embedding a link to its JSON Schema.
 
-Back to [Common architecture](/docs/pipeline-components-and-applications/iglu/common-architecture/).
+Back to [Common architecture](/docs/pipeline-components-and-applications/iglu/common-architecture/index.md).

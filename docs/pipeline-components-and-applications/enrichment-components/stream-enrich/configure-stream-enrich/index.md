@@ -29,7 +29,7 @@ You may wish to use Snowplow's configurable enrichments. To do this, create a di
 
 Example configurations could be found at [GitHub repository](https://github.com/snowplow/enrich/tree/master/config/enrichments).
 
-See the documentation on [configuring enrichments](/docs/enriching-your-data/available-enrichments/) for details on the available enrichments.
+See the documentation on [configuring enrichments](/docs/enriching-your-data/available-enrichments/index.md) for details on the available enrichments.
 
 ## Configuration in DynamoDB
 

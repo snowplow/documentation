@@ -47,13 +47,13 @@ With the standard deployment, you will only have a single collector instance. Th
 
 The following enrichments are enabled by default within the Enrich module:
 
-- [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/)
-- [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/) 
-- [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/)
-- [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/) 
-- [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/)
+- [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
+- [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) 
+- [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md)
+- [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) 
+- [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)
 
-Other available enrichments enrichments and the configurations can be found [here.](/docs/enriching-your-data/available-enrichments/)
+Other available enrichments enrichments and the configurations can be found [here.](/docs/enriching-your-data/available-enrichments/index.md)
 
 To enable a different enrichment would need to add the [appropriate terraform inputs](https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest?tab=inputs) to the [`snowplow-devops/enrich-kinesis-ec2/aws` module.](https://github.com/snowplow/quickstart-examples/blob/main/terraform/aws/pipeline/default/main.tf#L111-L139)
 

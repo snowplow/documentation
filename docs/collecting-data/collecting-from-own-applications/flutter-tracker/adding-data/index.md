@@ -54,4 +54,4 @@ This information can be entered during tracker initialization by passing a `Sub
 
 Some subject information is filled automatically by the tracker. This includes the platform of the user, timezone, language, resolution, and viewport.
 
-Please refer to the section on subject configuration on the [Configuration page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/initialization-and-configuration/) to learn more.
+Please refer to the section on subject configuration on the [Configuration page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/initialization-and-configuration/index.md) to learn more.

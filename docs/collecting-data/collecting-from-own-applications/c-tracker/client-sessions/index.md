@@ -8,7 +8,7 @@ You can optionally decide to include Client Sessionization. This object will kee
 
 Activity is determined by how often events are sent with the Tracker – so you will need to send events to keep the current session active. Sessions are updated when new events are tracked. There are two timeouts that are checked: foreground and background timeout. Depending on whether the app is in foreground or backgroud, the relevant timeout is used to compare the time difference since previous event and, in case it surpasses the timeout, a new session is started.
 
-In [Initialisation](/docs/collecting-data/collecting-from-own-applications/c-tracker/initialisation/), we discussed how to create a tracker with optional session tracking enabled and configurable foreground and background timeouts. If you enabled session tracking when creating the tracker, you can access a `ClientSession` instance using the tracker:
+In [Initialisation](/docs/collecting-data/collecting-from-own-applications/c-tracker/initialisation/index.md), we discussed how to create a tracker with optional session tracking enabled and configurable foreground and background timeouts. If you enabled session tracking when creating the tracker, you can access a `ClientSession` instance using the tracker:
 
 ```
 auto client_session = Snowplow::get_default_tracker()->get_client_session();

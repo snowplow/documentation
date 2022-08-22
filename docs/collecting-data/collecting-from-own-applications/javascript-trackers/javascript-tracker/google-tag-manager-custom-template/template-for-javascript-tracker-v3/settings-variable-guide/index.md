@@ -22,7 +22,7 @@ After importing the template, you can follow the normal process of creating a **
 
 ## Instructions
 
-The fields in the template provide a UI for setting the tracker configuration parameters. You are thus encouraged to follow [this link](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/) to understand what each individual field does.
+The fields in the template provide a UI for setting the tracker configuration parameters. You are thus encouraged to follow [this link](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md) to understand what each individual field does.
 
 ### Tracker Name
 
@@ -34,7 +34,7 @@ This means that a tracker configuration is applied **only once** to the tracker.
 
 ### Collector Endpoint Hostname
 
-This needs to be set to the hostname/domain (e.g. `sp.domain.com`) on which you’ve configured your Snowplow collector. Snowplow BDP customers can find this in their [Pipeline Configuration settings](/docs/using-the-snowplow-console/accessing-collector-configuration/).
+This needs to be set to the hostname/domain (e.g. `sp.domain.com`) on which you’ve configured your Snowplow collector. Snowplow BDP customers can find this in their [Pipeline Configuration settings](/docs/using-the-snowplow-console/accessing-collector-configuration/index.md).
 
 ### Acknowledgements
 

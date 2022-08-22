@@ -32,13 +32,13 @@ Note that the Ruby tracker version 0.7.0 had some breaking changes, specifically
 
 ## Tracking design and initialization
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/understanding-tracking-design/introduction-to-tracking-design/).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/understanding-tracking-design/introduction-to-tracking-design/index.md).
 
 We suggest implementing the Ruby tracker as a Singleton global object. This pattern is demonstrated in our [Ruby on Rails example app](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples). Structuring your code in this way avoids wasting bandwidth or processing on reinitializing Trackers and Emitters for every page load or event sent.
 
 Note that the [Rails demo](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) has both the Ruby and JavaScript trackers implemented. This combination of client- and server-side tracking can be highly effective and powerful. For example, you can discover how much effect adblockers are having on your tracking, by comparing the amount of client-side and server-side page view events you collect. It also allows you to track events in the most appropriate way for the event type. Check out this [blog post](https://snowplowanalytics.com/blog/2021/11/09/the-unrivaled-power-of-joining-client-and-server-side-tracking/) for more discussion about tracking client- and server-side.
 
-The Tracker must be initialized with an Emitter or the subclass AsyncEmitter (or an array of Emitters/AsyncEmitters). The only required argument for an Emitter/AsyncEmitter is the endpoint, i.e. the address of the event collector. See "[Configuring how events are sent](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/configuring-how-events-are-sent/)" for more information about configuring Emitters.
+The Tracker must be initialized with an Emitter or the subclass AsyncEmitter (or an array of Emitters/AsyncEmitters). The only required argument for an Emitter/AsyncEmitter is the endpoint, i.e. the address of the event collector. See "[Configuring how events are sent](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/configuring-how-events-are-sent/index.md)" for more information about configuring Emitters.
 
 Initializing a tracker instance:
 
@@ -100,6 +100,6 @@ You can create as many Tracker instances as you like within your app; each one i
 
 Testing that your event tracking is properly configured can be as important as testing the other aspects of your app. It confirms that you are generating the events you expect.
 
-We provide two types of pipeline for testing and debugging. [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/) is especially useful in manual schema and pipeline testing. [Snowplow Micro](/docs/understanding-your-pipeline/what-is-snowplow-micro/) is a minimal pipeline designed to be used as part of your app's automated test suite.
+We provide two types of pipeline for testing and debugging. [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/index.md) is especially useful in manual schema and pipeline testing. [Snowplow Micro](/docs/understanding-your-pipeline/what-is-snowplow-micro/index.md) is a minimal pipeline designed to be used as part of your app's automated test suite.
 
 Check out our [Ruby tracker Rails demo](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) and [Snowplow Micro examples repo](https://github.com/snowplow-incubator/snowplow-micro-examples) for two examples of automated webapp testing using Snowplow Micro and the testing framework [Cypress](https://www.cypress.io/). Any end-to-end testing framework can be used.

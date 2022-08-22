@@ -4,7 +4,7 @@ date: "2022-04-04"
 sidebar_position: 10
 ---
 
-_For a high-level overview of the RDB Loader architecture, of which the transformer is a part, see [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/)._
+_For a high-level overview of the RDB Loader architecture, of which the transformer is a part, see [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/index.md)._
 
 The `transformer` application can have two types of output:
 

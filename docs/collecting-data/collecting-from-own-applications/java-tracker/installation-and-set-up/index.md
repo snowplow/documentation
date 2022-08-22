@@ -101,13 +101,13 @@ These are the required objects for tracking using the Java tracker:
 
 ### Configuring the `Tracker`
 
-The `Tracker` class has the responsibility for tracking [events](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/). Certain properties can also be set when creating a `Tracker` that will be attached to all events. These are `trackerNamespace`, `appId`, and `platform`.
+The `Tracker` class has the responsibility for tracking [events](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md). Certain properties can also be set when creating a `Tracker` that will be attached to all events. These are `trackerNamespace`, `appId`, and `platform`.
 
 Both `trackerNamespace` and `appId` are required arguments for `TrackerBuilder`. Snowplow events are designed to be stored in a single data warehouse/lake, regardless of their source, to make data modelling easier and provide a single valuable source of truth for your business. The tracker namespace allows you to distinguish events sent by this specific `Tracker`, if you are using multiple `Tracker` objects within your app. The `appId` allows you to identify events from this specific application, if you are tracking from multiple places.
 
 The other Tracker property that will be added to all tracked events is `platform`. This is set by default to `srv` - "server-side app". To set another valid platform type, use the optional `TrackerBuilder` method `platform()`.
 
-The final two `TrackerBuilder` methods are `base64()` and `subject()`. By default, JSONs within the event are sent base-64 encoded. This can be set to `false` here at `Tracker` initialization. The `subject()` method is for adding a `Subject` object to the `Tracker`, explained [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-specific-client-side-properties/).
+The final two `TrackerBuilder` methods are `base64()` and `subject()`. By default, JSONs within the event are sent base-64 encoded. This can be set to `false` here at `Tracker` initialization. The `subject()` method is for adding a `Subject` object to the `Tracker`, explained [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-specific-client-side-properties/index.md).
 
 To initialize a `Tracker` with all the options:
 
@@ -125,7 +125,7 @@ See the API docs for the full [TrackerBuilder](https://snowplow.github.io/snowpl
 
 ### Configuring the `Emitter`
 
-The `Emitter` class manages the buffering and sending of tracked events. Event sending configuration is described fully [on this page](/docs/collecting-data/collecting-from-own-applications/java-tracker/configuring-how-events-are-sent/).
+The `Emitter` class manages the buffering and sending of tracked events. Event sending configuration is described fully [on this page](/docs/collecting-data/collecting-from-own-applications/java-tracker/configuring-how-events-are-sent/index.md).
 
 See the API docs for the full [BatchEmitter.Builder](https://snowplow.github.io/snowplow-java-tracker/index.html?com/snowplowanalytics/snowplow/tracker/emitter/BatchEmitter.Builder.html) and [AbstractEmitter.Builder](https://snowplow.github.io/snowplow-java-tracker/index.html?com/snowplowanalytics/snowplow/tracker/emitter/AbstractEmitter.Builder.html) options.
 

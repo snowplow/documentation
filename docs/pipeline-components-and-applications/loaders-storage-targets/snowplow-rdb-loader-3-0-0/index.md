@@ -4,9 +4,9 @@ date: "2022-04-04"
 sidebar_position: 10
 ---
 
-We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift**, **Snowflake** or **Databricks**. For other destinations, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/).
+We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift**, **Snowflake** or **Databricks**. For other destinations, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md).
 
-Loading [enriched](/docs/pipeline-components-and-applications/enrichment-components/) Snowplow data is a two-step process which consists of:
+Loading [enriched](/docs/pipeline-components-and-applications/enrichment-components/index.md) Snowplow data is a two-step process which consists of:
 
 - transforming the enriched tsv-formatted data into a format that can be readily loaded into a target (previously known as 'shredding');
 - loading the transformed data.
@@ -35,7 +35,7 @@ To make the best choice, consider:
 
 ### Based on the importance of deduplication
 
-The transformer is also in charge of [deduplicating](/docs/pipeline-components-and-applications/loaders-storage-targets/deduplication) the data. Currently, only the Spark transformer can do that.
+The transformer is also in charge of [deduplicating](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/deduplication/index.md) the data. Currently, only the Spark transformer can do that.
 
 If duplicates are not a concern, or if you are happy to deal with them after the data has been loaded in the warehouse, then pick a transformer based on your expected volume (see above). Otherwise, use the Spark transformer.
 

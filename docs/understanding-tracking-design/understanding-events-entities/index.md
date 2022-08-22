@@ -4,7 +4,7 @@ date: "2020-02-13"
 sidebar_position: 20
 ---
 
-**Snowplow** is an _event collection platform_. Once you have set up one or more [Snowplow trackers](/docs/collecting-data/), every time an event occurs, Snowplow will generate a packet of data to describe the event and send that event into your Snowplow data pipeline.
+**Snowplow** is an _event collection platform_. Once you have set up one or more [Snowplow trackers](/docs/collecting-data/index.md), every time an event occurs, Snowplow will generate a packet of data to describe the event and send that event into your Snowplow data pipeline.
 
 ## What is an event?
 

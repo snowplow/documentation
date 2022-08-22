@@ -6,7 +6,7 @@ sidebar_position: 10
 
 Enrich app has monitoring built in, to help the pipeline operator.
 
-## Statsd[](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/monitoring/#statsd)
+## Statsd[](/docs/managing-data-quality/event-recovery-for-bdp-users/manual-event-recovery-for-snowplow-bdp/monitoring/index.md#statsd)
 
 [Statsd](https://github.com/statsd/statsd) is a daemon that aggregates and summarizes application metrics. It receives metrics sent by the application over UDP, and then periodically flushes the aggregated metrics to a [pluggable storage backend](https://github.com/statsd/statsd/blob/master/docs/backend.md).
 
@@ -28,7 +28,7 @@ snowplow.enrich.invalid_enriched:0|c|#tag1:value1
 
 Note, the count metrics (`raw`, `good`, `bad` and `invalid_enriched`) refer to the updated count since the previous metric was emitted. A collector payload can carry multiple events, so it is possible for `good` to be larger than `raw`.
 
-Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/):
+Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
 ```
 "monitoring": {
@@ -62,11 +62,11 @@ To do that, this section needs to appear in the configuration file:
 }
 ```
 
-## Sentry[](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/monitoring/#sentry)
+## Sentry[](/docs/managing-data-quality/event-recovery-for-bdp-users/manual-event-recovery-for-snowplow-bdp/monitoring/index.md#sentry)
 
 [Sentry](https://docs.sentry.io/) is a popular error monitoring service, which helps developers diagnose and fix problems in an application. Enrich can send an error report to sentry whenever something unexpected happens when trying to enrich an event. The reasons for the error can then be explored in the sentry server’s UI.
 
-Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/) with the url of your sentry server:
+Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md) with the url of your sentry server:
 
 ```
 "monitoring": {

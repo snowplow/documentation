@@ -4,4 +4,4 @@ date: "2022-04-05"
 sidebar_position: 30
 ---
 
-For documentation on older RDB Loader versions, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-2xx/).
+For documentation on older RDB Loader versions, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-2xx/index.md).

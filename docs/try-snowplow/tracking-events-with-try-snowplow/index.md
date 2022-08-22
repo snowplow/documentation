@@ -27,7 +27,7 @@ Try Snowplow is a limited trial of the full Snowplow BDP product and has an even
 
 ## Tracking in Try Snowplow using other Snowplow trackers
 
-The UI also has instructions for instrumenting Snowplow tracking on mobile using the native iOS and Android SDKs. However, you can use any Snowplow tracker with Try Snowplow. For a full list of supported trackers (and webhooks), check out our [Sources documentation](/docs/collecting-data/collecting-from-own-applications/).
+The UI also has instructions for instrumenting Snowplow tracking on mobile using the native iOS and Android SDKs. However, you can use any Snowplow tracker with Try Snowplow. For a full list of supported trackers (and webhooks), check out our [Sources documentation](/docs/collecting-data/collecting-from-own-applications/index.md).
 
 ## Debugging
 

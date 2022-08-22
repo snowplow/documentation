@@ -281,7 +281,7 @@ Edit and save below as `playbook.json`:
 }
 ```
 
-Bear in mind that `--events-manifest` option is necessary only if you use [cross-batch deduplication](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/cross-batch-deduplication/), you can omit it otherwise.
+Bear in mind that `--events-manifest` option is necessary only if you use [cross-batch deduplication](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/cross-batch-deduplication/index.md), you can omit it otherwise.
 
 To run above configuration you can use following command:
 

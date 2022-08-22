@@ -6,7 +6,7 @@ sidebar_position: 40
 
 The configuration reference in this page is written for RDB Transformer 4.0.0
 
-The configuration reference pages for previous versions can be found [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/rdb-transformer-configuration-reference/rdb-transformer-previous-versions/).
+The configuration reference pages for previous versions can be found [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/rdb-transformer-configuration-reference/rdb-transformer-previous-versions/index.md).
 
 An example of the minimal required config for the Spark transformer can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/transformer.batch.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/transformer.batch.config.reference.hocon).
 
@@ -56,7 +56,7 @@ This is a complete list of the options that can be configured:
 | `queue.topicArn` | Required if queue type is `sns`. ARN of the SNS topic. |
 | `queue.region` | AWS region of the SQS queue or SNS topic. Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). |
 | `formats.*` | Schema-specific format settings. |
-| `formats.transformationType` | Required. Type of transformation, either `shred` or `widerow`. See [Shredded data](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/#shredded-data) and [Wide row format](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/#wide-row-format). |
+| `formats.transformationType` | Required. Type of transformation, either `shred` or `widerow`. See [Shredded data](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/index.md#shredded-data) and [Wide row format](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/index.md#wide-row-format). |
 | `formats.fileFormat` | Optional. The default is `JSON`. Output file format produced when transformation is `widerow`. Either `JSON` or `PARQUET`. |
 | `formats.default` | Optional. The default is `TSV`. Data format produced by default when transformation is `shred`. Either `TSV` or `JSON`. `TSV` is recommended as it enables table autocreation, but requires an Iglu Server to be available with known schemas (including Snowplow schemas). `JSON` does not require an Iglu Server, but requires Redshift JSONPaths to be configured and does not support table autocreation. |
 | `formats.tsv` | Optional. List of Iglu URIs, but can be set to empty list `[]` which is the default. If `default` is set to `JSON` this list of schemas will still be shredded into `TSV`. |

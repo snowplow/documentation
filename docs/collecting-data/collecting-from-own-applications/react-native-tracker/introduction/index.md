@@ -4,7 +4,7 @@ date: "2021-08-06"
 sidebar_position: 0
 ---
 
-[![Tracker Maintenance Classification](https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Actively%20Maintained&color=6638b8&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC)](/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification/)
+[![Tracker Maintenance Classification](https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Actively%20Maintained&color=6638b8&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC)](/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification/index.md)
 
 [![Latest tracker version](https://img.shields.io/npm/v/@snowplow/react-native-tracker)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
@@ -17,9 +17,9 @@ sidebar_position: 0
   
   
 
-The Snowplow React Native Tracker is a module which imports the [Mobile Native Snowplow Trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/) as native modules, available for use in React Native projects.
+The Snowplow React Native Tracker is a module which imports the [Mobile Native Snowplow Trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) as native modules, available for use in React Native projects.
 
-More specifically it is build upon the [Mobile Native Trackers v2](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v2-0/), so as to leverage their tracking capabilities, API and configuration parameters.
+More specifically it is build upon the [Mobile Native Trackers v2](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/mobile-trackers-v2-x/index.md), so as to leverage their tracking capabilities, API and configuration parameters.
 
 ## Initializing a tracker
 
@@ -300,8 +300,8 @@ interface SubjectConfiguration {
 ```
 
 - **userId**: The custom user identifier. Commonly used for user self-identification – for example after sign in.
-- **networkUserId**: Populates the `network_userid` field. Typically used to link native tracking to in-app browser events tracked using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/). Normally one would retrieve the network userid from the browser and pass it to the app. Should contain a valid UUID4 string.
-- **domainUserId**: Populates the `domain_userid` field. Typically used to link native tracking to in-app browser events tracked using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/). Normally one would retrieve the domain userid from the browser and pass it to the app. Should contain a valid UUID4 string.
+- **networkUserId**: Populates the `network_userid` field. Typically used to link native tracking to in-app browser events tracked using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md). Normally one would retrieve the network userid from the browser and pass it to the app. Should contain a valid UUID4 string.
+- **domainUserId**: Populates the `domain_userid` field. Typically used to link native tracking to in-app browser events tracked using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md). Normally one would retrieve the domain userid from the browser and pass it to the app. Should contain a valid UUID4 string.
 - **useragent**: The custom useragent. It populates the `useragent` field.
 - **ipAddress**: The IP address of the user. It populates the `user_ipaddress` field.
 - **timezone** (set by the tracker): The current timezone label. Populates the `os_timezone` field.
@@ -374,7 +374,7 @@ export interface GlobalContext {
 export type GCConfiguration = GlobalContext[];
 ```
 
-Global Contexts can also be set (added or removed) at runtime. In the [Adding or removing global contexts](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/introduction/#adding-or-removing-global-contexts) section below, you can find out more about the available tracker methods to do so.
+Global Contexts can also be set (added or removed) at runtime. In the [Adding or removing global contexts](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/introduction/index.md#adding-or-removing-global-contexts) section below, you can find out more about the available tracker methods to do so.
 
 ## Tracker methods
 
@@ -391,7 +391,7 @@ The React Native Tracker can track the out-of-the-box events as the Mobile Nativ
 - **trackConsentWithdrawnEvent**
 - **trackPageViewEvent**
 
-You can find out about all available track methods with details and examples in the [Tracking events](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/) section that follows.
+You can find out about all available track methods with details and examples in the [Tracking events](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/index.md) section that follows.
 
 ### Adding or removing global contexts
 
@@ -400,7 +400,7 @@ Each set of global contexts is identified by a tag. Through the tag it is possib
 - **addGlobalContexts**
 - **removeGlobalContexts**
 
-You can find out more information and examples about how to add or remove global contexts [here](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/#global-contexts).
+You can find out more information and examples about how to add or remove global contexts [here](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/index.md#global-contexts).
 
 ### Setting the Subject
 
@@ -419,7 +419,7 @@ It is possible to change subject data at runtime, as the user journey evolves. O
 
 Alternatively, you can use the **setSubjectData** method to provide a new SubjectConfiguration.
 
-You can find out more on how to use the tracker's methods to set the subject information at runtime in the corresponding [Tracking events section](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/#setting-the-subject-data).
+You can find out more on how to use the tracker's methods to set the subject information at runtime in the corresponding [Tracking events section](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/index.md#setting-the-subject-data).
 
 ### Getting session context data from the tracker
 
@@ -432,8 +432,8 @@ You can also get back session data from the tracker at runtime, that may be usef
 - **getBackgroundIndex**: To get the number of background transitions in the current session.
 - **getForegroundIndex**: To get the number of foreground transitions in the current session.
 
-You can find out more on how to use the tracker's methods to get session data at runtime in the corresponding [Advanced Usage section](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/advanced-usage/#getting-session-data-from-the-tracker).
+You can find out more on how to use the tracker's methods to get session data at runtime in the corresponding [Advanced Usage section](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/advanced-usage/index.md#getting-session-data-from-the-tracker).
 
 ## Removing a tracker
 
-The React Native Tracker API also provides functions to remove a tracker or remove all trackers at runtime. You can find out how in the [Advanced Usage section](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/advanced-usage/#removing-a-tracker-at-runtime) of the React Native Tracker.
+The React Native Tracker API also provides functions to remove a tracker or remove all trackers at runtime. You can find out how in the [Advanced Usage section](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/advanced-usage/index.md#removing-a-tracker-at-runtime) of the React Native Tracker.

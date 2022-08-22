@@ -4,7 +4,7 @@ date: "2022-04-04"
 sidebar_position: 10
 ---
 
-_For a high-level overview of the Transform process, see [Transforming enriched data](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/). For guidance on picking the right `transformer` app, see [How to pick a transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/#how-to-pick-a-transformer)._
+_For a high-level overview of the Transform process, see [Transforming enriched data](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/index.md). For guidance on picking the right `transformer` app, see [How to pick a transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/index.md#how-to-pick-a-transformer)._
 
 The Spark-based transformer is a batch job designed to be deployed in an EMR cluster and process a bounded data set stored on S3.
 
@@ -15,7 +15,7 @@ In order to run it, you will need:
 - an EMR cluster specification
 - a way to spin up an EMR cluster and submit a job to it.
 
-You can use any suitable tool to periodically submit the transformer job to an EMR cluster. We recommend you use our purpose-built [Dataflow Runner](https://github.com/snowplow/dataflow-runner) tool. All the examples below assume that Dataflow Runner is being used. Refer to the app's [documentation](/docs/pipeline-components-and-applications/dataflow-runner/) for more details.
+You can use any suitable tool to periodically submit the transformer job to an EMR cluster. We recommend you use our purpose-built [Dataflow Runner](https://github.com/snowplow/dataflow-runner) tool. All the examples below assume that Dataflow Runner is being used. Refer to the app's [documentation](/docs/pipeline-components-and-applications/dataflow-runner/index.md) for more details.
 
 ## Downloading the artefact
 
@@ -145,11 +145,11 @@ The transformer takes two configuration files:
 - a `config.hocon` file with application settings
 - an `iglu_resolver.json` file with the resolver configuration for your [Iglu](https://github.com/snowplow/iglu) schema registry.
 
-An example of the minimal required config for the Spark transformer can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/transformer.batch.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/transformer.batch.config.reference.hocon). For details about each setting, see the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/rdb-transformer-configuration-reference/).
+An example of the minimal required config for the Spark transformer can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/transformer.batch.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/transformer.batch.config.reference.hocon). For details about each setting, see the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/rdb-transformer-configuration-reference/index.md).
 
-See [here](/docs/pipeline-components-and-applications/iglu/iglu-resolver/) for details on how to prepare the Iglu resolver file.
+See [here](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) for details on how to prepare the Iglu resolver file.
 
-**NOTE:** All self-describing schemas for events processed by the transformer **must** be hosted on [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/) 0.6.0 or above. [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-central/) is a registry containing Snowplow-authored schemas. If you want to use them alongside your own, you will need to add it to your resolver file. Keep it mind that it could override your own private schemas if you give it higher priority. For details on this see [here](https://discourse.snowplowanalytics.com/t/important-changes-to-iglu-centrals-api-for-schema-lists/5720#how-will-this-affect-my-snowplow-pipeline-3).
+**NOTE:** All self-describing schemas for events processed by the transformer **must** be hosted on [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or above. [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-central/index.md) is a registry containing Snowplow-authored schemas. If you want to use them alongside your own, you will need to add it to your resolver file. Keep it mind that it could override your own private schemas if you give it higher priority. For details on this see [here](https://discourse.snowplowanalytics.com/t/important-changes-to-iglu-centrals-api-for-schema-lists/5720#how-will-this-affect-my-snowplow-pipeline-3).
 
 ## Running the Spark transformer
 
@@ -229,4 +229,4 @@ $ ./dataflow-runner run-transient \
 
 This will spin up the cluster with the above configuration, submit the steps from the playbook, and terminate the cluster once all steps are completed.
 
-For more examples on running EMR jobs with Dataflow Runner, as well as details on cluster configurations and playbooks, see the app's [documentation](/docs/pipeline-components-and-applications/dataflow-runner/). It also details how you can submit steps to a persistent EMR cluster.
+For more examples on running EMR jobs with Dataflow Runner, as well as details on cluster configurations and playbooks, see the app's [documentation](/docs/pipeline-components-and-applications/dataflow-runner/index.md). It also details how you can submit steps to a persistent EMR cluster.

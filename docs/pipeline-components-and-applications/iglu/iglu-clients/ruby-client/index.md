@@ -106,7 +106,7 @@ To just lookup schema without any self-describing JSON, you can use `lookup_sche
 
 ### Core entities
 
-`iglu-ruby-client` gem also provides entities specific to [Iglu core's](/docs/pipeline-components-and-applications/iglu/common-architecture/iglu-core/).  
+`iglu-ruby-client` gem also provides entities specific to [Iglu core's](/docs/pipeline-components-and-applications/iglu/common-architecture/iglu-core/index.md).  
 Specifically, you can initialize and utilize entities such as schema key, self-describing data, SchemaVer etc.  
 Same classes will be included in Iglu Ruby Core library when it'll be released.
 
@@ -118,7 +118,7 @@ schema_key = SchemaKey.parse("iglu:com.acme/event/jsonschema/1-0-2")
 
 ### Embedded registry
 
-Ruby Client supports somewhat similar to [JVM embedded](/docs/pipeline-components-and-applications/iglu/iglu-repositories/jvm-embedded-repo/) registry.  
+Ruby Client supports somewhat similar to [JVM embedded](/docs/pipeline-components-and-applications/iglu/iglu-repositories/jvm-embedded-repo/index.md) registry.  
 It also can be constructed from `embedded` connection using path inside gems and JRuby jars (created using warbler) but it has few important differences with JVM embedded registry:
 
 - It can accept absolute filesystem paths

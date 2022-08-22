@@ -17,6 +17,8 @@
     "@docusaurus/core": "^2.0.1",
     "@docusaurus/preset-classic": "^2.0.1",
     "@mdx-js/react": "^1.6.22",
+    "@snowplow/browser-plugin-link-click-tracking": "^3.5.0",
+    "@snowplow/browser-tracker": "^3.5.0",
     "clsx": "^1.2.1",
     "prism-react-renderer": "^1.3.5",
     "react": "^17.0.2",

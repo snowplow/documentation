@@ -10,22 +10,22 @@
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/Inter-Medium.ttf") format("truetype");
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: url("/fonts/Roboto-Medium.ttf") format("truetype");
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
@@ -68,6 +68,12 @@
   color: var(  --ifm-font-color-base);
   background: none;
   text-decoration: none;
+}
+
+[data-theme='dark'] .gh-button {
+  background: var(--ifm-color-primary-light);
+  border-color: var(--ifm-color-primary-light);
+  color: var(--ifm-color-primary-darkest);
 }
 
 @media screen and (min-width: 1440px) {

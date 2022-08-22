@@ -23,15 +23,16 @@ const setupBrowserTracker = () => {
     enableLinkClickTracking()
     refreshLinkClickTracking()
     snowplowTracker.enableActivityTracking({heartbeatDelay: 10, minimumVisitLength: 10})  // precise tracking for the unified log
-    trackPageView()
   }
 }
 
 setupBrowserTracker()
 
 const module = {
-  onRouteDidUpdate() {
-    trackPageView()
+  onRouteDidUpdate({location, previousLocation}) {
+    if (location.pathname !== previousLocation?.pathname) {
+      trackPageView({ title: document.getElementsByTagName('h1')[0] })
+    }
   }
 }
 

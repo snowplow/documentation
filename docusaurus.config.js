@@ -1,9 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Snowplow Documentation',
@@ -44,21 +41,21 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Snowplow Docs',
         logo: {
           alt: 'Snowplow Logo',
-          src: 'img/snowplow-icon-light-purple.svg',
+          src: 'img/snowplow-logo.svg',
         },
         items: [
           {
             type: 'doc',
             docId: 'introduction',
             position: 'left',
-            label: 'Documentation',
+            label: 'Docs',
           },
           {
             href: 'https://github.com/snowplow/',
             label: 'GitHub',
+            class: 'gh-button',
             position: 'right',
           },
         ],

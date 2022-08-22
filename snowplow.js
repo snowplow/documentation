@@ -31,7 +31,8 @@ setupBrowserTracker()
 const module = {
   onRouteDidUpdate({location, previousLocation}) {
     if (location.pathname !== previousLocation?.pathname) {
-      trackPageView({ title: document.getElementsByTagName('h1')[0] })
+      // see https://github.com/facebook/docusaurus/pull/7424 regarding setTimeout
+      setTimeout(() => trackPageView())
     }
   }
 }

@@ -8,7 +8,7 @@ const setupBrowserTracker = () => {
   if (ExecutionEnvironment.canUseDOM) {
     const appId = docsUrls.includes(window.location.hostname) ? 'docs2' : 'test'
 
-    const snowplowTracker = newTracker('snplow5', 'collector-g.snowplowanalytics.com', { 
+    const snowplowTracker = newTracker('snplow5', 'https://collector-g.snowplowanalytics.com', { 
       appId,
       plugins: [ LinkClickTrackingPlugin() ], 
       cookieDomain: ".snowplowanalytics.com",

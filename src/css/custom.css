@@ -44,6 +44,7 @@
   --ifm-font-family-base: 'Roboto', Arial, Helvetica, sans-serif;
   --ifm-menu-color-active: #6638B8;
   --ifm-font-color-base: #000000;
+  --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
@@ -51,14 +52,22 @@
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-menu-color-active: #b198df;
+  --ifm-color-primary: #b198df;
+  --ifm-color-primary-dark: #522d93;
+  --ifm-color-primary-darker: #472781;
+  --ifm-color-primary-darkest: #29164a;
+  --ifm-color-primary-light: #7345c6;
+  --ifm-color-primary-lighter: #926ed3;
+  --ifm-color-primary-lightest: #b198df;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-font-color-base: rgb(218, 221, 225);
+}
+
+[data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
+  color: var(  --ifm-font-color-base);
+  background: none;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 1440px) {
@@ -188,7 +197,7 @@ h3 {
 } 
 
 .breadcrumbs__item--active .breadcrumbs__link {
-  color: #000000;
+  color: var(  --ifm-font-color-base);
   background: none;
   text-decoration: none;
 }

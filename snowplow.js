@@ -8,7 +8,7 @@ const setupBrowserTracker = () => {
   if (ExecutionEnvironment.canUseDOM) {
     const appId = docsUrls.includes(window.location.hostname) ? 'docs2' : 'test'
 
-    const snowplowTracker = newTracker('snplow5', 'collector-g.snowplowanalytics.com', { 
+    const snowplowTracker = newTracker('snplow5', 'https://collector-g.snowplowanalytics.com', { 
       appId,
       plugins: [ LinkClickTrackingPlugin() ], 
       cookieDomain: ".snowplowanalytics.com",
@@ -23,15 +23,17 @@ const setupBrowserTracker = () => {
     enableLinkClickTracking()
     refreshLinkClickTracking()
     snowplowTracker.enableActivityTracking({heartbeatDelay: 10, minimumVisitLength: 10})  // precise tracking for the unified log
-    trackPageView()
   }
 }
 
 setupBrowserTracker()
 
 const module = {
-  onRouteDidUpdate() {
-    trackPageView()
+  onRouteDidUpdate({location, previousLocation}) {
+    if (location.pathname !== previousLocation?.pathname) {
+      // see https://github.com/facebook/docusaurus/pull/7424 regarding setTimeout
+      setTimeout(() => trackPageView())
+    }
   }
 }
 

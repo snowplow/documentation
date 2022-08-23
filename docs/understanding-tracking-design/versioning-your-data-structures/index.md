@@ -39,4 +39,4 @@ Overwriting in your Production environment is forbidden due to the technology th
 
 For particular workflows you may want to make use of the middle digital as part of your versioning strategy. For simplicity, the UI allows only breaking or non-breaking changes.
 
-Should you wish to use the middle versioning digit this is possible [via the Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api/).
+Should you wish to use the middle versioning digit this is possible [via the Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/).

@@ -28,7 +28,7 @@ We have built a set of [terraform](https://registry.terraform.io/namespaces/snow
 
 The Snowplow collector receives data from Snowplow trackers and webhooks, and writes them to a stream for further processing. Setting up a collector is the first step in the Snowplow setup process.
 
-- [Setup your Snowplow collector](/docs/setup-snowplow-on-aws/setup-the-snowplow-collector/)
+- [Setup your Snowplow collector](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-the-snowplow-collector/)
 
 ## Setup a Data Source
 
@@ -40,7 +40,7 @@ Snowplow supports two types of data sources: trackers (SDKs) for integrating you
 
 Snowplow trackers generate event data and send that data to Snowplow collectors to be captured. The most popular Snowplow tracker to-date is the JavaScript Tracker, which is integrated in websites (either directly or via a tag management solution) the same way that any web analytics tracker (e.g. Google Analytics or Omniture tags) is integrated.
 
-- [Setup your first tracker](/docs/setup-snowplow-on-aws/setup-trackers/)
+- [Setup your first tracker](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-trackers/)
 
 ### Setup a Third-Party Webhook
 
@@ -76,7 +76,7 @@ Most Snowplow users store their web event data in at least two places: S3 for pr
 
 The RDB Loader is an EMR step to regularly transfer data from S3 into other databases e.g. Redshift. If you **only** wish to process your data using Spark on EMR, you do not need to setup the RDB Loader. However, if you would find it convenient to have your data in another data store (e.g. Redshift) then you can set this up at this stage.
 
-- [Setup loading data into different destinations](/docs/setup-snowplow-on-aws/setup-destinations/).
+- [Setup loading data into different destinations](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/).
 
 ## Data modeling
 
@@ -90,7 +90,7 @@ Once your data is stored in S3 and Redshift, the basic setup is complete. You no
 
 We call this process _data modeling_.
 
-- [Get started with data modeling in Snowplow!](/docs/setup-snowplow-on-aws/setup-data-models/)
+- [Get started with data modeling in Snowplow!](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-data-models/)
 
 ## Analyse your data!
 
@@ -98,6 +98,6 @@ We call this process _data modeling_.
 
 Now that data is stored in S3 and potentially also Redshift, you are in a position to start analyzing the event stream or data from the derived tables in Redshift, if a data model has been built. As part of the setup guide we run through the steps necessary to perform some initial analysis and plugin a couple of analytics tools, to get you started.
 
-- [Get started analysing Snowplow data!](/docs/setup-snowplow-on-aws/analytics/)
+- [Get started analysing Snowplow data!](/docs/modeling-your-data/analytics-sdk/)
 
 You now have all six Snowplow subsystems working! The Snowplow setup is complete!

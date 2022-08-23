@@ -12,7 +12,7 @@ import Block2899 from "@site/docs/reusable/untitled-reusable-block-36/_index.md"
 
 The [Snowplow Arduino tracker](https://github.com/snowplow/snowplow-arduino-tracker) allows you to track Snowplow events from an IP-connected [Arduino](http://arduino.cc/) board.
 
-The tracker should be straightforward to use if you are familiar with Arduino development; any prior experience with Snowplow's [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) or Google Analytics (which has a similar API to Snowplow) is helpful but not necessary.
+The tracker should be straightforward to use if you are familiar with Arduino development; any prior experience with Snowplow's [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/) or Google Analytics (which has a similar API to Snowplow) is helpful but not necessary.
 
 Note that this tracker has access to a much more restricted set of Snowplow events than other trackers.
 

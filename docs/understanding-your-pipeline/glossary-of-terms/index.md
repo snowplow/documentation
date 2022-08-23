@@ -189,7 +189,7 @@ There are three great use cases to use the shredding functionality for:
 2. Defining your own _custom unstructured events types_, and processing these through the Snowplow pipeline into dedicated tables in Redshift. Retailers can define their own "product view" or "add to basket" events, for example. Media companies can define their own "video play" events.
 3. Defining your own _custom context types_, and processing these through the Snowplow pipeline into dedicated tables in Redshift. You can define your own "user" type, for example, including whatever fields you capture and want to store related to a user.
 
-__[Read more](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/rdb-shredder/)__
+__[Read more](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/)__
 
 ### Snowplow
 

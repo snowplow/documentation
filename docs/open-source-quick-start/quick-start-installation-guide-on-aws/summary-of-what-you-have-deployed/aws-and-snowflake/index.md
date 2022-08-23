@@ -18,7 +18,7 @@ _For further details on the resources, default and required input variables, and
 
 #### **Stream Collector**
 
-This is a Snowplow event collector that receives raw Snowplow events over HTTP, serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to Kinesis. More details can be found [here](/docs/pipeline-components-and-applications/scala-stream-collector/).
+This is a Snowplow event collector that receives raw Snowplow events over HTTP, serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to Kinesis. More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/).
 
 _Find out more about the Collector terraform module, and explore the full set of variables here: [https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest)_
 
@@ -31,7 +31,7 @@ This is a Snowplow app written in scala which: 
 - Enriches each event (e.g. infers the location of the user from his/her IP address)
 - Writes the enriched Snowplow event to another stream
 
-It is designed to be used downstream of the [Scala Stream Collector](/docs/pipeline-components-and-applications/scala-stream-collector/). More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/). 
+It is designed to be used downstream of the [Scala Stream Collector](/docs/pipeline-components-and-applications/stream-collector/). More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/). 
 
 _FInd out more about the Enrich modules and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest)_
 

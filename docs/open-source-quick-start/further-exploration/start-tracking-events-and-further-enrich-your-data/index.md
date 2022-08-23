@@ -24,7 +24,7 @@ You will track a large number of standard web events out-of-the-box with Snowplo
 
 **Mobile tracking**
 
-- Please see our quick start guide for the Snowplow [iOS and Android tracker](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v2-0/quick-start-guide/)
+- Please see our quick start guide for the Snowplow [iOS and Android tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/quick-start-guide/)
 
 You can find our [full list of our SDKs here](/docs/collecting-data/collecting-from-own-applications/) (including our server side trackers, and 3rd party webhooks)
 
@@ -81,10 +81,10 @@ Learn more [why schemas](/docs/understanding-tracking-design/understanding-schem
     - /`schemas/com.snowplowanalytics/button_click/jsonschema/1-0-0`
     - Note: If you update the `vendor` string in the example, you should update the above path too.
 - Upload your schema to your Iglu registry that you created when setting up your pipeline
-    - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl/) if you haven't already
+    - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/previous-versions/) if you haven't already
     - To upload your schemas on localhost to the Iglu Server, use the following command:
         - `igluctl static push --public <local path to schemas/> <Iglu server endpoint> <iglu_super_api_key>`
-        - You can find more information on the [Igluctl docs page](/docs/pipeline-components-and-applications/iglu/igluctl/igluctl-0-7-2/#static-push)
+        - You can find more information on the [Igluctl docs page](/docs/pipeline-components-and-applications/iglu/igluctl-2/#static-push)
 - To send an event using this schema you'll want to track a Self Describing Event. Here is an example of how to do so with the JavaScript Tracker:
 
 ```

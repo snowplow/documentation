@@ -12,7 +12,7 @@ import Block3003 from "@site/docs/reusable/untitled-reusable-block-40/_index.md"
 
 Event recovery at its core, is the ability to fix events that have failed and replay them through your pipeline.
 
-After inspecting failed events either in the [Snowplow BDP Console](/docs/managing-data-quality/failed-events-in-the-ui/), or in the [partitioned failure buckets](/docs/managing-data-quality/accessing-failed-events/failed-events-in-athena-and-bigquery/), you can determine which events are possible to recover based on what the fix entails.
+After inspecting failed events either in the [Snowplow BDP Console](/docs/managing-data-quality/failed-events/failed-events-in-the-ui/), or in the [partitioned failure buckets](/docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/), you can determine which events are possible to recover based on what the fix entails.
 
 With recovery it is possible to:
 
@@ -27,7 +27,7 @@ If your failed events would not be fixed by applying the above, they currently w
 The typical flow for recovery and some prerequisites to consider would be:  
 **Understanding the failure issue**
 
-- Familiarity with the [failed event types](/docs/managing-data-quality/understanding-failed-events/)
+- Familiarity with the [failed event types](/docs/managing-data-quality/failed-events/understanding-failed-events/)
 - Access to S3 or GCS buckets with failed events
 
 **Configuring a recovery**

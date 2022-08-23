@@ -33,7 +33,7 @@ Steps to get RDB loader up and running:
 
 1. [Configure shredder and loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/configuring-rdb-shredder/)
 2. Create SQS FIFO queue. Content-based deduplication needs to be enabled.
-3. Configure [Iglu Server](/docs/pipeline-components-and-applications/iglu/setting-up-iglu/step-2-setup-an-iglu-repository/2-4-iglu-server/) with the schemas  
+3. Configure [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/setup/) with the schemas  
     **IMPORTANT**: do not forget to add `/api` at the end of the uri in the resolver configuration for the loader
 4. Create `atomic.events` table. Instructions can be found on [this page](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/launch-a-redshift-cluster/setup-the-snowplow-database-and-events-table/)
 5. Run RDB Loader as long-running process with access to message queue:  

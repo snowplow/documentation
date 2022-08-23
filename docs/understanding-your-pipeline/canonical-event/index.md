@@ -251,7 +251,7 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 | `ti_currency` | text | Currency | No | 'EUR' |
 | `base_currency`\* | text | Reporting currency | No | 'GBP' |
 
-\* Set exclusively by the [Currency conversion enrichment](/docs/setup-snowplow-on-gcp/setup-validation-and-enrich-beam-enrich/add-additional-enrichments/currency-conversion-enrichment/).
+\* Set exclusively by the [Currency conversion enrichment](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/).
 
 #### Custom structured events
 

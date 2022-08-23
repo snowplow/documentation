@@ -51,7 +51,7 @@ Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "cf")
 
 #### `emitter`
 
-The emitter to which the tracker will send events. See [Emitters](/docs/collecting-data/collecting-from-own-applications/java-tracker/emitter/) for more on emitter configuration.
+The emitter to which the tracker will send events. See [Emitters](/docs/collecting-data/collecting-from-own-applications/net-tracker/emitter/) for more on emitter configuration.
 
 To attach a new Emitter to the Tracker:
 

@@ -23,7 +23,7 @@ You can find more details on the infrastructure and applications that will be de
         - AdminstratorAccess allows all actions on all AWS services and shouldn't be used in production
 - [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher installed
     - Follow the instructions to make sure the terraform binary is available on your PATH. You can also use [tfenv](https://github.com/tfutils/tfenv) to help manage Terraform installation
-- Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl/) which allows you to publish schemas for your [custom events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/#custom-events) and [entities](/docs/understanding-tracking-design/predefined-vs-custom-entities/#custom-contexts) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/)
+- Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/previous-versions/) which allows you to publish schemas for your [custom events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/#custom-events) and [entities](/docs/understanding-tracking-design/predefined-vs-custom-entities/#custom-contexts) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/)
 - Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your localhost
     - `git clone https://github.com/snowplow/quickstart-examples.git`
 

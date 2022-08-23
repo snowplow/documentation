@@ -4,7 +4,7 @@ date: "2020-07-22"
 sidebar_position: 30
 ---
 
-Snowplow pipelines are "non-lossy", this means if something is wrong with an event during any part of the pipeline, the event is stored in a separate storage environment rather than just discarded. See the [failed events section](/docs/managing-data-quality/understanding-failed-events/) for more information on the types of failures that may occur.
+Snowplow pipelines are "non-lossy", this means if something is wrong with an event during any part of the pipeline, the event is stored in a separate storage environment rather than just discarded. See the [failed events section](/docs/managing-data-quality/failed-events/understanding-failed-events/) for more information on the types of failures that may occur.
 
 Besides allowing for the inspection of failed events to fix the root cause of the problem, you have the option to recover data by running a recovery process to correct an issue and "re-play" the events through your pipeline again.
 

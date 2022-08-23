@@ -8,7 +8,7 @@ Note
 
 This functionality is only available for pipeline versions R118+. If you are unsure of which version your pipeline is running, please contact support.
 
-Snowplow pipelines separate events that are problematic in order to keep data quality high in downstream systems. For more information on understanding failed events see [here](/docs/managing-data-quality/understanding-failed-events/).
+Snowplow pipelines separate events that are problematic in order to keep data quality high in downstream systems. For more information on understanding failed events see [here](/docs/managing-data-quality/failed-events/understanding-failed-events/).
 
 For Snowplow customers that would like to benefit from seeing aggregates of failed events by type, there is an optional feature in the Snowplow BDP Console.
 

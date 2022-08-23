@@ -14,7 +14,7 @@ The documentation listed here is for Version 2 of the JavaScript Tracker. Versio
 
 #### Toggling Anonymous Tracking (2.15.0+)
 
-The JavaScript Tracker can be initialised with `anonymousTracking: true` or `anonymousTracking: { withSessionTracking: true }` or `anonymousTracking: { withServerAnonymisation: true }` (2.17.0+). You can read more about the anonymous tracking features [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/general-parameters/initialization-options/#Anonymous_Tracking_2150).
+The JavaScript Tracker can be initialised with `anonymousTracking: true` or `anonymousTracking: { withSessionTracking: true }` or `anonymousTracking: { withServerAnonymisation: true }` (2.17.0+). You can read more about the anonymous tracking features [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/#Anonymous_Tracking_2150).
 
 You may wish to toggle this functionality on or off during a page visit, for example when a user accepts a cookie banner you may not want to disable anonymous tracking, or when a user logs in to your site.
 

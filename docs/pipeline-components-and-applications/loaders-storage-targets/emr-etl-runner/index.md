@@ -4,7 +4,7 @@ date: "2020-11-09"
 sidebar_position: 9990
 ---
 
-Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/rdb-shredder/). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/r35-upgrade-guide/) for how to migrate away from this application.
+Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/) for how to migrate away from this application.
 
 Historically it was also used for enriching data, but that functionality was deprecated even longer ago in favour of the [streaming versions of Enrich](/docs/pipeline-components-and-applications/enrichment-components/).
 
@@ -78,7 +78,7 @@ The archive should contain a `snowplow-emr-etl-runner` file.
 
 ### Configuration
 
-EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample`](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample). See [Common configuration](/docs/pipeline-components-and-applications/enrichment-components/emr-etl-runner/common-configuration) more information on how to write this file.
+EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample`](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample). See [Common configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/common-configuration/) more information on how to write this file.
 
 #### [](https://github.com/snowplow/snowplow/wiki/1-Installing-EmrEtlRunner#storage-targets)Storage targets
 

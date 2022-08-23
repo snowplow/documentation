@@ -17,7 +17,7 @@ Schemas make it possible for you to:
 
 ## Managing data quality with data structures
 
-Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/), each event is validated against its self-describing schema and only those that pass are allowed to pass through, [failures are sent to a separate queue](/docs/managing-data-quality/what-is-a-failed-event/).
+Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/), each event is validated against its self-describing schema and only those that pass are allowed to pass through, [failures are sent to a separate queue](/docs/managing-data-quality/failed-events/understanding-failed-events/).
 
 Through describing how the data should be structured as part of your schema definition you ensure clean and consistent data landing in your data warehouse or other destinations.
 

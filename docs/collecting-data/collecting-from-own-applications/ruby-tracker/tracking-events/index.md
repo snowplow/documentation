@@ -18,7 +18,7 @@ Tracking methods supported by the Ruby Tracker:
 | [`track_screen_view`](#screen-view) | View of screen |
 | [`track_ecommerce_transaction`](#ecommerce-transaction) | eCommerce transaction (and items in the transaction) |
 
-All the `track_x_event` methods share common features and parameters. Every type of event can have an optional context, Subject, and Page added. A Timestamp can also be provided for all event types to override the default event timestamp. See [the next page](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/enriching-your-events/) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
+All the `track_x_event` methods share common features and parameters. Every type of event can have an optional context, Subject, and Page added. A Timestamp can also be provided for all event types to override the default event timestamp. See [the next page](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/adding-data-events/) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
 
 Snowplow events are all processed into the same format, regardless of the event type (and regardless of the tracker language used). Read about the different properties and fields of events in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/).
 

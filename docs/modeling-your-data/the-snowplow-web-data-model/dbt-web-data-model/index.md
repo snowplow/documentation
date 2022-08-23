@@ -12,14 +12,14 @@ The snowplow-web dbt package provides a means to run the standard web model via 
 
 #### Requirements
 
-- [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) version 2 or later implemented.
+- [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/) version 2 or later implemented.
 - Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/#webPage_context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/#webPage_context)).
 - [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#page-views) implemented.
 
 #### Prerequisites
 
 - [dbt](https://github.com/dbt-labs/dbt) must be installed.
-- A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) must be available in the database.
+- A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/) must be available in the database.
 
 #### Supported Warehouses
 

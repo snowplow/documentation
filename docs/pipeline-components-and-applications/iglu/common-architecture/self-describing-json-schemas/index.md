@@ -13,7 +13,7 @@ In addition to the usual JSON Schema we decided to make it self-describing by ad
 - `vendor` which tells us who created this JSON Schema
 - `name` which is the JSON Schema's name
 - `format` in our case this will be a JSON Schema
-- `version` which is the JSON Schema's version (using [SchemaVer](/docs/pipeline-components-and-applications/iglu/schemaver/))
+- `version` which is the JSON Schema's version (using [SchemaVer](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/))
 
 We encapsulated all this information in a `self` property.
 

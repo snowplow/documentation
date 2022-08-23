@@ -6,7 +6,7 @@ sidebar_position: 70
 
 ### Initial setup
 
-Most of the following workflows come from testing/working with elaborate bad row structures and configurations and rely heavily on the supplied scripting utility. To set it up locally follow [scripting utility intro](/docs/snowplow-event-recovery/test/#scripting) or starting with an empty ammonite script file (ie. `test.sc`), set up Snowplow's repository and dependencies:
+Most of the following workflows come from testing/working with elaborate bad row structures and configurations and rely heavily on the supplied scripting utility. To set it up locally follow [scripting utility intro](/docs/managing-data-quality/snowplow-event-recovery/test/#scripting) or starting with an empty ammonite script file (ie. `test.sc`), set up Snowplow's repository and dependencies:
 
 ```scala
 interp.repositories() ++= Seq(coursierapi.MavenRepository.of("http://maven.snplow.com/releases/"))

@@ -35,7 +35,7 @@ To make the best choice, consider:
 
 ### Based on the importance of deduplication
 
-The transformer is also in charge of [deduplicating](/docs/pipeline-components-and-applications/loaders-storage-targets/deduplication) the data. Currently, only the Spark transformer can do that.
+The transformer is also in charge of [deduplicating](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/deduplication/) the data. Currently, only the Spark transformer can do that.
 
 If duplicates are not a concern, or if you are happy to deal with them after the data has been loaded in the warehouse, then pick a transformer based on your expected volume (see above). Otherwise, use the Spark transformer.
 

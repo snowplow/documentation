@@ -6,7 +6,7 @@ sidebar_position: 0
 
 This documentation page is about a previous version of the React Native tracker. [Go to the latest docs](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/).
 
-The Snowplow React Native Tracker is a module which imports the Native Snowplow [iOS](/docs/collecting-data/collecting-from-own-applications/objective-c-tracker/) and [Android](/docs/collecting-data/collecting-from-own-applications/android-tracker/) trackers as native modules, available for use in React Native projects.
+The Snowplow React Native Tracker is a module which imports the Native Snowplow [iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/) and [Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/) trackers as native modules, available for use in React Native projects.
 
 ## Getting Started[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/#getting-started)
 

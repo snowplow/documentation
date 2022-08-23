@@ -6,7 +6,7 @@ sidebar_position: 10
 
 Enrich app has monitoring built in, to help the pipeline operator.
 
-## Statsd[](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/monitoring/#statsd)
+## Statsd[](/docs/managing-data-quality/event-recovery-for-bdp-users/manual-event-recovery-for-snowplow-bdp/monitoring/#statsd)
 
 [Statsd](https://github.com/statsd/statsd) is a daemon that aggregates and summarizes application metrics. It receives metrics sent by the application over UDP, and then periodically flushes the aggregated metrics to a [pluggable storage backend](https://github.com/statsd/statsd/blob/master/docs/backend.md).
 
@@ -62,7 +62,7 @@ To do that, this section needs to appear in the configuration file:
 }
 ```
 
-## Sentry[](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/monitoring/#sentry)
+## Sentry[](/docs/managing-data-quality/event-recovery-for-bdp-users/manual-event-recovery-for-snowplow-bdp/monitoring/#sentry)
 
 [Sentry](https://docs.sentry.io/) is a popular error monitoring service, which helps developers diagnose and fix problems in an application. Enrich can send an error report to sentry whenever something unexpected happens when trying to enrich an event. The reasons for the error can then be explored in the sentry server’s UI.
 

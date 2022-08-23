@@ -178,4 +178,4 @@ Here you'll need to set:
 - `region`
 - Paths to your enriched data sink (`--src`) and enriched data lake (`--dest`)
 
-See the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/rdb-shredder-configuration-reference/) for a description of how to prepare the `config.hocon` file..
+See the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/rdb-shredder-configuration-reference/) for a description of how to prepare the `config.hocon` file..

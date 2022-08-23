@@ -10,14 +10,14 @@ sidebar_position: 100
 
 #### Requirements
 
-- [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) version 2 or later implemented.
+- [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/) version 2 or later implemented.
 - Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/#webPage_context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/#webPage_context)).
 - [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#page-views) implemented.
 
 #### Prerequisites
 
 - [SQL-runner](https://github.com/snowplow/sql-runner) must be installed ([Setup guide](/docs/modeling-your-data/setup-and-run-sql-runner/)).
-- A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) must be available in the database.
+- A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/) must be available in the database.
 
 #### [](https://github.com/snowplow/data-models/tree/feature-redshift-web-v1/web/v1/redshift#configuration)Configuring and running the model
 

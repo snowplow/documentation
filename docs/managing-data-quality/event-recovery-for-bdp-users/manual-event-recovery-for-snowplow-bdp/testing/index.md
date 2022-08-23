@@ -54,7 +54,7 @@ You can grab the script from our GitHub repo [here](https://github.com/snowplow-
 
 The main sections that need editing are the `val cfg and val badrow` sections. CFG of course refers to the configuration you'd like to test and badrow refers to an example failed event.
 
-Start by adding your flows, conditions and/or steps as described in the [previous section](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/node-js-tracker/node-js-tracker-0-3-0/configuration/).
+Start by adding your flows, conditions and/or steps as described in the [previous section](/docs/managing-data-quality/event-recovery-for-bdp-users/manual-event-recovery-for-snowplow-bdp/configuration/).
 
 Then replace the badrow value with a representative failed event example. Be careful to use actual failed events from your production data as it may contain data that requires specific data access policy requirements. Check with your Data protection officer if you are allowed to copy production data to your local machine.
 

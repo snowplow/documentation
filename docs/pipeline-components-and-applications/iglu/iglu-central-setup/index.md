@@ -19,7 +19,7 @@ This guide is divided into two sections:
 
 ### Hosting an Iglu Server based mirror
 
-Some components of Snowplow require an Iglu Server, and a static repo will not work. This means you'll want to host a mirror of Iglu Central. You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/previous-versions/)`:
+Some components of Snowplow require an Iglu Server, and a static repo will not work. This means you'll want to host a mirror of Iglu Central. You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2)`:
 
 ```
 git clone https://github.com/snowplow/iglu-central

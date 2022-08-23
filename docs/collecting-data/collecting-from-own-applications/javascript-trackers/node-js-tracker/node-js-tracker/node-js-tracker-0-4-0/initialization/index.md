@@ -4,7 +4,7 @@ date: "2020-09-03"
 sidebar_position: 200
 ---
 
-Assuming you have completed the [Node.js Tracker Setup](/docs/collecting-data/collecting-from-own-applications/actionscript3-tracker/setup/) for your project, you are now ready to initialize the Tracker.
+Assuming you have completed the [Node.js Tracker Setup](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/node-js-tracker/node-js-tracker-0-4-0/setup/) for your project, you are now ready to initialize the Tracker.
 
 Require the Node.js Tracker module into your code like so:
 

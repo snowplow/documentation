@@ -4,9 +4,13 @@ date: "2021-04-12"
 sidebar_position: 200
 ---
 
-[iOS Tracker](#tab-ios-tracker)[Android Tracker](#tab-android-tracker)
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
 
-## iOS Tracker
+<Tabs>
+  <TabItem value="ios" label="iOS Tracker" default>
 
 ### Installation
 
@@ -104,7 +108,8 @@ Snowplow.createTracker(
 );
 ```
 
-## Android Tracker
+  </TabItem>
+  <TabItem value="android" label="Android Tracker">
 
 ### Installation
 
@@ -183,3 +188,6 @@ Snowplow.createTracker(context,
     sessionConfig
 );
 ```
+
+  </TabItem>
+</Tabs>

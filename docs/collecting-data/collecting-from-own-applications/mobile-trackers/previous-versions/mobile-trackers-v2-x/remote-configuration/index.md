@@ -4,7 +4,13 @@ date: "2021-06-21"
 sidebar_position: 4000
 ---
 
-[iOS Tracker](#tab-ios-tracker)[Android Tracker](#tab-android-tracker)
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+<Tabs>
+  <TabItem value="ios" label="iOS Tracker" default>
 
 Remote Configuration is a feature of the mobile native trackers that allows for the configuration of the tracker without distributing an app update.
 
@@ -153,6 +159,9 @@ Snowplow.refresh(onSuccess: successCallback)
 /* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
 ```
 
+  </TabItem>
+  <TabItem value="android" label="Android Tracker">
+
 Remote Configuration is a feature of the mobile native trackers that allows for the configuration of the tracker without distributing an app update.
 
 The tracker can be configured traditionally, passing the configuration as explained in the "Instrumentation" section.  
@@ -292,3 +301,6 @@ Snowplow.refresh(context, successCallback)
 
 /* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
 ```
+
+  </TabItem>
+</Tabs>

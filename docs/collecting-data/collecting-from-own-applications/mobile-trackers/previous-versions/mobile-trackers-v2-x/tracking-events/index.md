@@ -4,7 +4,13 @@ date: "2021-06-11"
 sidebar_position: 3000
 ---
 
-[iOS Tracker](#tab-ios-tracker)[Android Tracker](#tab-android-tracker)
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+<Tabs>
+  <TabItem value="ios" label="iOS Tracker" default>
 
 The mobile trackers capture two types of events, automatically captured and manual events.
 
@@ -236,6 +242,9 @@ let event = PushNotification(
 tracker.track(event)
 ```
 
+  </TabItem>
+  <TabItem value="android" label="Android Tracker">
+
 The mobile trackers capture two types of events, automatically captured and manual events.
 
 ## Auto Tracking
@@ -431,3 +440,6 @@ EcommerceTransaction event = new EcommerceTransaction("order-1", 40.00, items)
 
 tracker.track(event);
 ```
+
+  </TabItem>
+</Tabs>

@@ -26,35 +26,7 @@ Until `0.6.0`, Snowplow Mini was being used inside AWS `t2.medium`, `n1-standa
 
 This service is available as an EC2 image within the AWS Community AMIs in the following regions:
 
-[v0.14.0](#tab-v0140)[0.14.1 (Recommended)](#tab-0141-recommended)
-
-| x | large / t2.large | xlarge / t2.xlarge | xxlarge / t2.xxlarge |
-| --- | --- | --- | --- |
-| ap-northeast-1 | ami-0699981675ed9c999 | ami-052d2961881572b1c | ami-0830ef1492f21619c |
-| ap-northeast-2 | ami-01b7ff49f875c81b8 | ami-026db46f90551456d | ami-017322572dc921b27 |
-| ap-south-1 | ami-0ef4b9fbc0ff690ba | ami-067b623a0216e1e44 | ami-05a6488a6bcff8284 |
-| ap-southeast-1 | ami-0feda6596272eca7f | ami-00a90053879a821d4 | ami-00ec336f4855596dd |
-| ap-southeast-2 | ami-0588f96c4863ffe0a | ami-0c610428ba781090e | ami-0b692272c582a3eb8 |
-| ca-central-1 | ami-03b4c06845bf1eba1 | ami-0ab6a6999bf1d6d2e | ami-02d422ca47f0dfbc7 |
-| eu-central-1 | ami-0549a2f67320524a3 | ami-0dff8d91520c7fa25 | ami-0c35885318c16d662 |
-| eu-west-1 | ami-020cf106511665857 | ami-0e10f2f3407d8d4c5 | ami-02799220aac034fd3 |
-| eu-west-2 | ami-03bb6cea6158aed2d | ami-064f02a9989c461ad | ami-08a2d46db6cdfbd65 |
-| sa-east-1 | ami-0099a70b2f9890cb8 | ami-0c95ab97669b9c637 | ami-0127389c36e1db013 |
-| us-east-1 | ami-0697c73ca0f870443 | ami-077617d1114766f26 | ami-010d69261c5646db6 |
-| us-east-2 | ami-0296ed3f8cdd53d74 | ami-08ffe776fcf2a038e | ami-0e0386a0b1d15bd1c |
-| us-west-1 | ami-031de8095ebc535ee | ami-0bb614a0f3a39a260 | ami-0c42abafd5bf4a4a9 |
-| us-west-2 | ami-0f02a9ced0c909656 | ami-05dec128295c05ee9 | ami-04c8d25c2a9dd0499 |
-
-The software stack installed:
-
-- Snowplow Stream Collector NSQ 2.6.0
-- Snowplow Stream Enrich NSQ 3.0.2
-- Snowplow Elasticsearch Loader 1.0.4
-- Snowplow Iglu Server 0.8.4
-- Elasticsearch-OSS 6.8.23
-- Kibana-OSS 6.8.20
-- Postgresql 14.2
-- NSQ v1.2.1
+Version 0.14.1 (Recommended)
 
 | x | large / t2.large | xlarge / t2.xlarge | xxlarge / t2.xxlarge |
 | --- | --- | --- | --- |

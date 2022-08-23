@@ -4,7 +4,13 @@ date: "2021-11-23"
 sidebar_position: 30
 ---
 
-[iOS Tracker](#tab-ios-tracker)[Android Tracker](#tab-android-tracker)
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+<Tabs>
+  <TabItem value="ios" label="iOS Tracker" default>
 
 The mobile trackers capture two types of events, automatically captured and manual events.
 
@@ -301,6 +307,9 @@ let trackerConfig = TrackerConfiguration()
 
 The `DeepLinkReceived` event can be used in pair with a `campaign-attribution-enrichment` appropriately enabled in the Snowplow pipeline. It works exactly like for `PageView` events in the web/JS tracker. When the user taps on an advertising banner or a marketing email or message, it can trigger the launch of the app through the Deep Linking feature. The referral from the advertising campaigns, websites, or other source can be composed by UTM parameters used to attribute the user activity back to the campaign. The Campaign Attribution Enrichment can parse the DeepLinkReceived event extracting the UTM parameters in the deep link url.
 
+  </TabItem>
+  <TabItem value="android" label="Android Tracker">
+
 The mobile trackers capture two types of events, automatically captured and manual events.
 
 # Auto Tracking
@@ -596,3 +605,6 @@ TrackerConfiguration config = new TrackerConfiguration()
 ```
 
 The `DeepLinkReceived` event can be used in pair with a `campaign-attribution-enrichment` appropriately enabled in the Snowplow pipeline. It works exactly like for `PageView` events in the web/JS tracker. When the user taps on an advertising banner or a marketing email or message, it can trigger the launch of the app through the Deep Linking feature. The referral from the advertising campaigns, websites, or other source can be composed by UTM parameters used to attribute the user activity back to the campaign. The Campaign Attribution Enrichment can parse the DeepLinkReceived event extracting the UTM parameters in the deep link url.
+
+  </TabItem>
+</Tabs>

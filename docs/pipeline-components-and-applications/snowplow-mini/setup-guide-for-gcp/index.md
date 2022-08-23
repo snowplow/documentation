@@ -50,11 +50,7 @@ https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-11-0-large-16045110
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
 
-[0.14.0](#tab-0140)[0.14.1 (Recommended)](#tab-0141-recommended)
-
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-14-0-large-1650921280.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-14-0-xlarge-1650921279.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-14-0-xxlarge-1650921243.tar.gz) |
+Version 0.14.1 (Recommended)
 
 | L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
 | --- | --- | --- |

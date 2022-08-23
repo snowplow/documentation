@@ -50,27 +50,7 @@ https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-11-0-large-16045110
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
 
-[0.13.0](#tab-0130)[0.13.1](#tab-0131-1)[0.13.2](#tab-0132)[0.13.3](#tab-0133)[0.13.4](#tab-0134)[0.13.5 (Recommended)](#tab-0135-recommended)
-
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-0-large-1638804903.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-0-xlarge-1638805323.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-0-xxlarge-1638805116.tar.gz) |
-
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-1-large-1639060143.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-1-xlarge-1639060147.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-1-xxlarge-1639060205.tar.gz) |
-
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-2-large-1639576471.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-2-xlarge-1639576437.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-2-xxlarge-1639576436.tar.gz) |
-
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-3-large-1639677917.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-3-xlarge-1639677930.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-3-xxlarge-1639677909.tar.gz) |
-
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-4-large-1640085762.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-4-xlarge-1640085693.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-13-4-xxlarge-1640085690.tar.gz) |
+Version 0.13.5 (Recommended)
 
 | L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
 | --- | --- | --- |

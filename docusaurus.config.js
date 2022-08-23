@@ -62,12 +62,13 @@ const config = {
             type: 'doc',
             docId: 'introduction',
             position: 'left',
+            class: 'snwpl-nav-link snwpl-nav-link__first',
             label: 'Docs',
           },
           {
             href: 'https://discourse.snowplowanalytics.com',
             label: 'Discourse',
-            class: 'snwpl-nav-link snwpl-nav-link__first',
+            class: 'snwpl-nav-link',
             position: 'left',
           },
           {
@@ -92,38 +93,6 @@ const config = {
       },
       footer: {
         style: 'dark',
-        links: [
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'GitHub for Open Source Snowplow',
-                href: 'https://github.com/snowplow/snowplow',
-              },
-              {
-                label: 'Discourse',
-                href: 'https://discourse.snowplowanalytics.com/',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                href: 'https://snowplowanalytics.com/blog/',
-              },
-              {
-                label: 'Meetups',
-                href: 'https://www.meetup.com/topics/snowplow/',
-              },
-              {
-                label: 'Events',
-                href: 'https://snowplowanalytics.com/events/',
-              },
-            ],
-          },
-        ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
       prism: {

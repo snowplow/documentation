@@ -65,9 +65,27 @@ const config = {
             label: 'Docs',
           },
           {
+            href: 'https://discourse.snowplowanalytics.com',
+            label: 'Discourse',
+            class: 'snwpl-nav-link snwpl-nav-link__first',
+            position: 'left',
+          },
+          {
             href: 'https://github.com/snowplow/',
             label: 'GitHub',
-            class: 'gh-button',
+            class: 'snwpl-nav-link',
+            position: 'left',
+          },
+          {
+            to: 'https://try.snowplowanalytics.com/?utm_content=hero-cta&utm_campaign=snowplow-docs',
+            label: 'Try Snowplow',
+            class: 'snwpl-nav-button',
+            position: 'right',
+          },
+          {
+            to: 'https://go.snowplowanalytics.com/l/571483/2021-02-19/3sn5nml',
+            label: 'Book a demo',
+            class: 'snwpl-nav-button',
             position: 'right',
           },
         ],

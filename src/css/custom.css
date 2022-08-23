@@ -211,3 +211,7 @@ h3 {
 .breadcrumbs__item--active .breadcrumbs__link:hover {
   text-decoration: none;
 }
+
+.theme-doc-toc-desktop ul ul {
+  padding-left: 0;
+}

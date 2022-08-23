@@ -1,9 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Snowplow Documentation',
@@ -56,59 +53,46 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Snowplow Docs',
         logo: {
           alt: 'Snowplow Logo',
-          src: 'img/snowplow-icon-light-purple.svg',
+          src: 'img/snowplow-logo.svg',
         },
         items: [
           {
             type: 'doc',
             docId: 'introduction',
             position: 'left',
-            label: 'Documentation',
+            class: 'snwpl-nav-link snwpl-nav-link__first',
+            label: 'Docs',
+          },
+          {
+            href: 'https://discourse.snowplowanalytics.com',
+            label: 'Discourse',
+            class: 'snwpl-nav-link',
+            position: 'left',
           },
           {
             href: 'https://github.com/snowplow/',
             label: 'GitHub',
+            class: 'snwpl-nav-link',
+            position: 'left',
+          },
+          {
+            to: 'https://try.snowplowanalytics.com/?utm_content=hero-cta&utm_campaign=snowplow-docs',
+            label: 'Try Snowplow',
+            class: 'snwpl-nav-button',
+            position: 'right',
+          },
+          {
+            to: 'https://go.snowplowanalytics.com/l/571483/2021-02-19/3sn5nml',
+            label: 'Book a demo',
+            class: 'snwpl-nav-button',
             position: 'right',
           },
         ],
       },
       footer: {
         style: 'dark',
-        links: [
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'GitHub for Open Source Snowplow',
-                href: 'https://github.com/snowplow/snowplow',
-              },
-              {
-                label: 'Discourse',
-                href: 'https://discourse.snowplowanalytics.com/',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                href: 'https://snowplowanalytics.com/blog/',
-              },
-              {
-                label: 'Meetups',
-                href: 'https://www.meetup.com/topics/snowplow/',
-              },
-              {
-                label: 'Events',
-                href: 'https://snowplowanalytics.com/events/',
-              },
-            ],
-          },
-        ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
       prism: {

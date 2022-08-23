@@ -170,4 +170,4 @@ Telemetry can be deactivated by putting the following section in the configurati
 
 ## Enrichments
 
-The list of the enrichments that can be configured can be found on [this page](/docs/enriching-your-data/available-enrichments/).
+The list of the enrichments that can be configured can be found on [this page](/docs/enriching-your-data/available-enrichments/index.md).

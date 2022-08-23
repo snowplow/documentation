@@ -23,7 +23,7 @@ Each parameter of the Snowplow Tracker Protocol is described in the tables below
     
     Note
     
-    When the event is sent from a Snowplow tracker, all parameters should be stringified. Those strings are parsed back to their actual type during [Enrichment](/docs/pipeline-components-and-applications/enrichment-components/).
+    When the event is sent from a Snowplow tracker, all parameters should be stringified. Those strings are parsed back to their actual type during [Enrichment](/docs/pipeline-components-and-applications/enrichment-components/index.md).
     
 - **Description**: A short description for the parameter.
 - **Implemented**: Whether the parameter is implemented, deprecated or not-implemented.
@@ -98,7 +98,7 @@ The event ID (`eid`) is the unique identifier (UUID) for this row. Historically 
 |---------------|-------------|----------|---------------------------------|------------------|--------------------|
 | `tv`          | `v_tracker` | text     | Identifier for Snowplow tracker | Yes              | `js-2.16.2`        |
 
-For deployments where multiple trackers are used (e.g. for businesses that use the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/) to track events on their domains alongside the [Pixel tracker](/docs/collecting-data/collecting-from-own-applications/pixel-tracker/) to track events on 3rd party domains), it is useful to be able to distinguish data generated from each tracker. It can also be useful when tracker versions are updated, so that it is easier to see if an update in tracker accounts for a feature of the data at analysis time.
+For deployments where multiple trackers are used (e.g. for businesses that use the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md) to track events on their domains alongside the [Pixel tracker](/docs/collecting-data/collecting-from-own-applications/pixel-tracker/index.md) to track events on 3rd party domains), it is useful to be able to distinguish data generated from each tracker. It can also be useful when tracker versions are updated, so that it is easier to see if an update in tracker accounts for a feature of the data at analysis time.
 
 #### User related parameters
 

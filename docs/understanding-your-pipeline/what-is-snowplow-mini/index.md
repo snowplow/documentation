@@ -4,7 +4,7 @@ date: "2020-02-24"
 sidebar_position: 20
 ---
 
-[Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/) is a small, single instance version of Snowplow that primarily serves as a development sandbox which gives you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
+[Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/index.md) is a small, single instance version of Snowplow that primarily serves as a development sandbox which gives you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
 
 You might use Snowplow Mini when:
 
@@ -24,7 +24,7 @@ Once you are happy with the changes you have made you would then change the trac
 ## Features of Snowplow Mini
 
 - Data is tracked and processed in real time
-- Your Snowplow Mini speaks to your [Schema registries](/docs/understanding-tracking-design/understanding-schemas-and-validation/) to allow events to be sent against your [custom schemas](/docs/understanding-tracking-design/)
+- Your Snowplow Mini speaks to your [Schema registries](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) to allow events to be sent against your [custom schemas](/docs/understanding-tracking-design/index.md)
 - Data is validated during processing
 - Data is loaded into Elasticsearch and can be queried directly or through a Kibana dashboard
 - Successfully processed events and failed events are in distinct good and bad indexes

@@ -6,7 +6,7 @@ sidebar_position: 10
 
 One of the most powerful features of Snowplow is schemas.
 
-Schemas define the structure of the data that you collect. Each schema defines what fields are recorded with each event that is captured, and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/understanding-tracking-design/understanding-events-entities/).
+Schemas define the structure of the data that you collect. Each schema defines what fields are recorded with each event that is captured, and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/understanding-tracking-design/understanding-events-entities/index.md).
 
 Schemas make it possible for you to:
 
@@ -17,7 +17,7 @@ Schemas make it possible for you to:
 
 ## Managing data quality with data structures
 
-Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/), each event is validated against its self-describing schema and only those that pass are allowed to pass through, [failures are sent to a separate queue](/docs/managing-data-quality/failed-events/understanding-failed-events/).
+Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/index.md), each event is validated against its self-describing schema and only those that pass are allowed to pass through, [failures are sent to a separate queue](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).
 
 Through describing how the data should be structured as part of your schema definition you ensure clean and consistent data landing in your data warehouse or other destinations.
 
@@ -78,7 +78,7 @@ Let’s take a look at an example JSON schema to talk about its constituent part
 - **“vendor”** - This usually refers to the company who has authored the schema. Most times this will be your company’s name. This could also be for organizing schemas from different groups in your organization if you have multiple teams working on different events and contexts (e.g. com.acme.android, com.acme.marketing). Snowplow uses the reversed company internet domain for vendor names (e.g. com.snowplowanalytics).
 - **“name”** - This is the name you want to give your schema. Much like the description above, this is a good chance to help others like data analysts who might be consuming this data know exactly what your schema is meant to capture.
 - **“format”** - This field simply states the format of the schema which will always be `jsonschema`.
-- **“version”** - Snowplow allows you to [increment versions of a schema](/docs/understanding-tracking-design/versioning-your-data-structures/) as your tracking needs evolve and this argument stores the current version.
+- **“version”** - Snowplow allows you to [increment versions of a schema](/docs/understanding-tracking-design/versioning-your-data-structures/index.md) as your tracking needs evolve and this argument stores the current version.
 
 After the self section the remainder of the schema is where you will begin describing the event or context fields that you will be collecting.
 

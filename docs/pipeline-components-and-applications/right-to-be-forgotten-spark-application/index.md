@@ -12,7 +12,7 @@ In terms of data protection this implements the right of data subjects to reques
 
 ## Setup Guide
 
-See [the setup guide](/docs/pipeline-components-and-applications/right-to-be-forgotten-spark-application/right-to-be-forgotten-spark-application-setup-guide/) for running and configuring the app.
+See [the setup guide](/docs/pipeline-components-and-applications/right-to-be-forgotten-spark-application/right-to-be-forgotten-spark-application-setup-guide/index.md) for running and configuring the app.
 
 ## Assumptions
 

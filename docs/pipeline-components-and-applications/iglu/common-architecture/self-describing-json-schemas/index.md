@@ -13,7 +13,7 @@ In addition to the usual JSON Schema we decided to make it self-describing by ad
 - `vendor` which tells us who created this JSON Schema
 - `name` which is the JSON Schema's name
 - `format` in our case this will be a JSON Schema
-- `version` which is the JSON Schema's version (using [SchemaVer](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/))
+- `version` which is the JSON Schema's version (using [SchemaVer](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/index.md))
 
 We encapsulated all this information in a `self` property.
 
@@ -59,4 +59,4 @@ incorporating the aforementioned `self` property.
 
 Notice that we also changed the `$schema` property to [our own JSON Schema](http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#) which enforces the `self` property.
 
-To make our JSONs self-describing we still have to reference this JSON Schema in our JSONs. This process is described in [Self-describing JSONs](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-jsons/).
+To make our JSONs self-describing we still have to reference this JSON Schema in our JSONs. This process is described in [Self-describing JSONs](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-jsons/index.md).

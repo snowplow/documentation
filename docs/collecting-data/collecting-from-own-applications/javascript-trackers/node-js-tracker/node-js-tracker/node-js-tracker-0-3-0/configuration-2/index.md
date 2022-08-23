@@ -18,7 +18,7 @@ Tracking methods supported by the Node.js Tracker at a glance:
 | [`trackStructEvent()`](#struct-event) | Track a Snowplow custom structured event |
 | [`trackUnstructEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event |
 
-Details of other tracking methods are available in the documentation for the [tracker core](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/node-js-tracker/javascript-tracker-core/).
+Details of other tracking methods are available in the documentation for the [tracker core](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/node-js-tracker/javascript-tracker-core/index.md).
 
 ### Common
 

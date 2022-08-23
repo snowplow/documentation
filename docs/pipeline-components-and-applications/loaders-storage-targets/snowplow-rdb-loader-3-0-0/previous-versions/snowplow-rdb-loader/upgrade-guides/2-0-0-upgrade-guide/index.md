@@ -35,6 +35,6 @@ Shredding complete message can be sent to SNS topic with following queue configu
 
 RDB Loader and RDB Shredder were using the same config HOCON until version 2.0.0. Starting from 2.0.0, they will use separate configs. Reference docs for new configs can be found on the following pages:
 
-[RDB Loader configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/)
+[RDB Loader configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md)
 
-[RDB Shredder configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/rdb-shredder-configuration-reference/)
+[RDB Shredder configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/rdb-shredder-configuration-reference/index.md)

@@ -140,7 +140,7 @@ You can add new custom enrichments via the Control Plane tab. The only thing you
 
 #### [](https://github.com/snowplow/snowplow-mini/wiki/Usage-guide---0.5.0#please-note)Please note:
 
-`0.5.0` is the first Snowplow Mini version compatible with the [PII Enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/).
+`0.5.0` is the first Snowplow Mini version compatible with the [PII Enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md).
 
 ## Adding a custom schema
 

@@ -68,7 +68,7 @@ function process(event) {
 
 ## Working with event data
 
-The event variable that is provided to the JavaScript function can be queried to retrieve any information stored in the event. The example below provides an example on how to retrieve a [custom event](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/#Tracking_custom_self-describing_unstructured_events) and a [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/#Custom_contexts) from an event. A full list of the available information can be found by looking at the [class definition of an Event](https://github.com/snowplow/enrich/blob/81d108152b54961867cd1f6218b22465afb5c083/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/outputs/EnrichedEvent.scala).
+The event variable that is provided to the JavaScript function can be queried to retrieve any information stored in the event. The example below provides an example on how to retrieve a [custom event](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#Tracking_custom_self-describing_unstructured_events) and a [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#Custom_contexts) from an event. A full list of the available information can be found by looking at the [class definition of an Event](https://github.com/snowplow/enrich/blob/81d108152b54961867cd1f6218b22465afb5c083/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/outputs/EnrichedEvent.scala).
 
 The JavaScript enrichment can be used to add additional contextual information into the Snowplow event. This is defined as a JSON array where each entry of the array is a custom context. See the example below for how this is formatted.
 
@@ -139,7 +139,7 @@ The Snowplow BDP Console can be used to upload a custom JavaScript enrichment to
 
 You will need to convert your Javascript code to base64, and add it to the script parameter in the configuration.
 
-Then follow the [documentation on uploading enrichments](/docs/enriching-your-data/configuring-enrichments/).
+Then follow the [documentation on uploading enrichments](/docs/enriching-your-data/configuring-enrichments/index.md).
 
 ## Output
 

@@ -20,7 +20,7 @@ snowplow.s3loader.latency_collector_to_load:123.4|g|#tag1:value1
 - `count_good`: the total number of events in the batch that was loaded.
 - `latency_collector_to_load`: this is the time difference between reaching the collector and getting loaded to S3.
 
-Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/):
+Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
 ```
 "monitoring": {
@@ -42,7 +42,7 @@ Statsd monitoring is configured by setting the `monitoring.metrics.statsd` sec
 
 Common reasons might be failure to read or write from Kinesis, or failure to write to S3.
 
-Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/) with the url of your sentry server:
+Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md) with the url of your sentry server:
 
 ```
 "monitoring": {
@@ -54,7 +54,7 @@ Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in�
 
 The loader can emit a Snowplow event to a collector when the application experiences runtime problems. It sends `[app_initialized](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.kinesis/app_initialized/jsonschema/1-0-0)` and `[app_heartbeat](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.kinesis/app_heartbeat/jsonschema/1-0-0)` events to show the application is alive. A [`storage_write_failed` event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.kinesis/storage_write_failed/jsonschema/1-0-0) is sent when a file cannot be written to S3, and a [`app_shutdown` event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.kinesis/app_shutdown/jsonschema/1-0-0) is sent when the application exits due to too many S3 errors.
 
-Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/):
+Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
 ```
 "monitoring": {

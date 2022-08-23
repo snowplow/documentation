@@ -4,7 +4,7 @@ date: "2021-03-26"
 sidebar_position: 50
 ---
 
-This guide is designed for Iglu users wanting to create a public mirror or private clone of [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-central/). There are a couple of reasons you may want to do this:
+This guide is designed for Iglu users wanting to create a public mirror or private clone of [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-central/index.md). There are a couple of reasons you may want to do this:
 
 1. Some Snowplow components require a Iglu Server, so the static Iglu Central repository will not work.
 2. You may want to access Iglu Central from a software system that cannot access the open internet.
@@ -19,7 +19,7 @@ This guide is divided into two sections:
 
 ### Hosting an Iglu Server based mirror
 
-Some components of Snowplow require an Iglu Server, and a static repo will not work. This means you'll want to host a mirror of Iglu Central. You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2)`:
+Some components of Snowplow require an Iglu Server, and a static repo will not work. This means you'll want to host a mirror of Iglu Central. You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md)`:
 
 ```
 git clone https://github.com/snowplow/iglu-central
@@ -27,11 +27,11 @@ cd iglu-central
 igluctl static push --public schemas/ http://MY-IGLU-URL 00000000-0000-0000-0000-000000000000
 ```
 
-For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/).
+For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md).
 
 ### Hosting a Static Repository based mirror
 
-Iglu Central is built on top of the Iglu static repo server, so the first step is to [setup a static repo](/docs/pipeline-components-and-applications/iglu/setting-up-iglu/step-2-setup-an-iglu-repository/2-1-a-static-repo/). You can give your copy of Iglu Central a name like:
+Iglu Central is built on top of the Iglu static repo server, so the first step is to [setup a static repo](/docs/pipeline-components-and-applications/iglu/setting-up-iglu/step-2-setup-an-iglu-repository/2-1-a-static-repo/index.md). You can give your copy of Iglu Central a name like:
 
 ```
 http://iglucentral.acme.com

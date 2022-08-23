@@ -22,7 +22,7 @@ The RDB loader can `POST` an http webhook to a configurable uri whenever there i
 }
 ```
 
-You can configure where the webhook is sent by setting the `monitoring.webhook` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/):
+You can configure where the webhook is sent by setting the `monitoring.webhook` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
 ```
 "monitoring": {
@@ -42,7 +42,7 @@ A webhook alert is sent when the RDB loader identifies inconsistencies between t
 1. Checks if all folders in S3 have a `shredding_complete.json` file inside. A missing json file suggests the shredder failed to complete this step, and so manual intervention is needed to remove the folder in S3.
 2. Checks all folders in S3 are listed in the warehouse manifest table. If a folder is missing from the table, it suggests the loader has previously tried and failed to load the batch. Manual intervention is needed to resend the `shredding_complete.json` message via SQS to trigger re-loading the folder.
 
-Folder monitoring is configured by setting the `monitoring.folders` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/):
+Folder monitoring is configured by setting the `monitoring.folders` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
 ```
 "monitoring": {
@@ -57,7 +57,7 @@ Folder monitoring is configured by setting the `monitoring.folders` section in [
 
 _Added in version 2.1.0._ The RDB loader can send an alert if the warehouse does not respond to a periodic `SELECT 1` statement. For each failed health check, a webhook is `POST`ed to a configurable url. The webhook payload conforms to [the alert json schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.batch/alert/jsonschema/1-0-0) in Iglu Central.
 
-The health check is configured by setting the `monitoring.healthCheck` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/):
+The health check is configured by setting the `monitoring.healthCheck` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
 ```
 "monitoring": {
@@ -84,7 +84,7 @@ snowplow.rdbloader.count_good:42|c|#tag1:value1snowplow.rdbloader.latency_collec
 - `latency_shredder_start_to_load`: time difference between the shredder starting on this batch and the loader completing loading to the warehouse.
 - `latency_shredder_end_to_load`: time difference between the shredder completing this batch and the loader completing loading the the warehouse.
 
-Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/):
+Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
 ```
 "monitoring": {
@@ -106,7 +106,7 @@ Statsd monitoring is configured by setting the `monitoring.metrics.statsd` secti
 
 Common reasons might be lost connection to the database, or an http error fetching a schema from an Iglu server.
 
-Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/) with the url of your sentry server:
+Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md) with the url of your sentry server:
 
 ```
 "monitoring": {
@@ -118,7 +118,7 @@ Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [t
 
 The loader can emit a Snowplow event to a collector when the application crashes with an unexpected error. The event is a [load\_failed event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.batch/load_failed/jsonschema/1-0-0).
 
-Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/):
+Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
 ```
 "monitoring": {

@@ -4,7 +4,7 @@ date: "2021-10-26"
 sidebar_position: 30
 ---
 
-When you [initialize your Tracker object](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/getting-started/#tracking-design-and-initialization), you will need to provide one or more Emitter objects. Remember that we advise using the Singleton pattern, to avoid constantly recreating your objects.
+When you [initialize your Tracker object](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/getting-started/index.md#tracking-design-and-initialization), you will need to provide one or more Emitter objects. Remember that we advise using the Singleton pattern, to avoid constantly recreating your objects.
 
 There are two types of Emitter. The Emitter parent class can only send events synchronously. The AsyncEmitter subclass sends events asynchronously by default. We recommend you use the AsyncEmitter, to avoid slowing down your app.
 

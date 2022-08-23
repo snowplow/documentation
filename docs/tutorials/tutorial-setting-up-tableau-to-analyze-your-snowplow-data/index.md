@@ -15,7 +15,7 @@ Tableau has a number of strengths which account for why we prefer it to other BI
 - The interface is _fast_. You can setup Tableau workbooks to query the data directly in Redshift, in which case the querying speed is determined by the speed at which Redshift works. (Which is pretty good.) You can also, however, import some or all of the data (depending on the volume you're handling) into Tableau's in-memory engine, in which case analysis is blindingly fast
 - Simple to deploy: Tableau desktop can be employed as a standalone application. You connect to directly to Snowplow data (e.g. in Redshift). There is no need to setup associated servers to manage a data pipeline from Snowplow to Tableau (although Tableau server is available as an option). There is no requirement to manage any metadata around Snowplow. Instead, you grab the Snowplow data directly, and start visualizing it instantly
 
-Like most other BI tools: Tableau has limitations when used outside of traditional OLAP analysis: we do not recommend it for statistical analysis (although it has some basic capabilities) or more bespoke graphs. For this type of capability, we recommend [R](/docs/tutorials/setting-up-r-to-perform-more-sophisticated-analysis-on-your-snowplow-data/).
+Like most other BI tools: Tableau has limitations when used outside of traditional OLAP analysis: we do not recommend it for statistical analysis (although it has some basic capabilities) or more bespoke graphs. For this type of capability, we recommend [R](/docs/tutorials/setting-up-r-to-perform-more-sophisticated-analysis-on-your-snowplow-data/index.md).
 
 ## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#2-download-and-get-started-with-tableau)2\. Download and get started with Tableau
 
@@ -61,7 +61,7 @@ We can fetch these details directly from the AWS console. Log into [console.aws
 
 ![](images/7.jpg)
 
-**Troubleshooting your connection**: For security, Amazon only lets computers access a Redshift cluster where those computers are located at an IP address that has been white-listed. Hence, in order to connect Tableau, you must make sure that the machine running Tableau is on a white-listed IP address. Instructions on how to white-list IP addresses in Redshift are given [here](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/launch-a-redshift-cluster/).
+**Troubleshooting your connection**: For security, Amazon only lets computers access a Redshift cluster where those computers are located at an IP address that has been white-listed. Hence, in order to connect Tableau, you must make sure that the machine running Tableau is on a white-listed IP address. Instructions on how to white-list IP addresses in Redshift are given [here](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/launch-a-redshift-cluster/index.md).
 
 ## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#4-getting-started-analyzing-snowplow-data-in-tableau)4\. Getting started analyzing Snowplow data in Tableau
 

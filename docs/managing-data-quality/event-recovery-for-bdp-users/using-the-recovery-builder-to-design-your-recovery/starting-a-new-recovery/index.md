@@ -10,7 +10,7 @@ You'll first be asked to give your event a descriptive name. This must be alphan
 
 ### Uploading example raw data
 
-Next you'll need fetch an example of the failed event you wish to recover. You'll find the raw events in file storage (S3 on AWS, GCS on GCP). Follow the [guides on retrieving raw failed event data](/docs/managing-data-quality/failed-events/accessing-failed-events-in-file-storage/) to download an example raw event.
+Next you'll need fetch an example of the failed event you wish to recover. You'll find the raw events in file storage (S3 on AWS, GCS on GCP). Follow the [guides on retrieving raw failed event data](/docs/managing-data-quality/failed-events/accessing-failed-events-in-file-storage/index.md) to download an example raw event.
 
 Once you have an example of your failed event you have two options for upload.
 

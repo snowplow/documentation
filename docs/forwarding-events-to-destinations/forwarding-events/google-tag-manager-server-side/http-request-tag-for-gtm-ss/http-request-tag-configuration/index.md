@@ -62,7 +62,7 @@ This option allows you to relay the full client event into the body of the reque
 
 ## Snowplow Event Mapping Options
 
-This section includes the mapping rules that concern a Snowplow event as claimed by the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/):
+This section includes the mapping rules that concern a Snowplow event as claimed by the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md):
 
 ### Snowplow Atomic Properties Rules
 
@@ -88,7 +88,7 @@ will result in the following JSON structure:
 }
 ```
 
-Please, note that some of the Snowplow atomic properties are already mapped to [common event properties](https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data) by the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/).
+Please, note that some of the Snowplow atomic properties are already mapped to [common event properties](https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data) by the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md).
 
 ### Snowplow Self-Describing Event Rules
 

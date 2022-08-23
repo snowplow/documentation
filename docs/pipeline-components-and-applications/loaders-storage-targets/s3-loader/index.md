@@ -9,7 +9,7 @@ sidebar_position: 0
 Snowplow S3 Loader consumes records from an [Amazon Kinesis](http://aws.amazon.com/kinesis/) stream and writes them to [S3](http://aws.amazon.com/s3/). A typical Snowplow pipeline would use the S3 loader in several places:
 
 - Load collector payloads from the "raw" stream, to maintain an archive of the original data, before enrichment.
-- Load enriched events from the "enriched" stream. These serve as input for [the RDB loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/) when loading to a warehouse.
+- Load enriched events from the "enriched" stream. These serve as input for [the RDB loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/index.md) when loading to a warehouse.
 - Load failed events from the "bad" stream.
 
 Records that can't be successfully written to S3 are written to a [second Kinesis stream](https://github.com/snowplow/snowplow-s3-loader/blob/master/examples/config.hocon.sample#L75) with the error message.

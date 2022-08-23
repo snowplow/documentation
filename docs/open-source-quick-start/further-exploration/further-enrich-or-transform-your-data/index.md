@@ -8,13 +8,13 @@ Snowplow's out-of-the-box enrichments allow you to add richness, such as geograp
 
 By default, the following enrichments are enabled by default in the Quick Start Enrich module:
 
-- [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/)
-- [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/) 
-- [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/)
-- [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/) 
-- [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/)
+- [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
+- [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) 
+- [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md)
+- [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) 
+- [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)
 
-Our full suite of [enrichments & transformations](/docs/enriching-your-data/available-enrichments/) can be enabled. To enable an enrichment, such as the [IP anonymisation enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/):
+Our full suite of [enrichments & transformations](/docs/enriching-your-data/available-enrichments/index.md) can be enabled. To enable an enrichment, such as the [IP anonymisation enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md):
 
 - Follow [these instructions](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2#inserting-custom-enrichments), updating the `anonOctets` and `anonSegments` according to the number of octets/ segments that you would like to be anonymised
 - Run `terraform apply`
@@ -24,7 +24,7 @@ _Note that the IAB and IP Lookups enrichments require a 3rd party database to fu
 
 **To disable any enrichment**, you can [follow these instructions](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2#disabling-default-enrichments).
 
-#### Next, learn how to deliver marketing attribution, funnel analysis and more with our [Tutorials](/docs/open-source-quick-start/further-exploration/tutorials/) >>
+#### Next, learn how to deliver marketing attribution, funnel analysis and more with our [Tutorials](/docs/open-source-quick-start/further-exploration/tutorials/index.md) >>
 
 * * *
 

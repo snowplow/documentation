@@ -24,7 +24,7 @@ With all web events the Snowplow JavaScript tracker captures the following user 
 
 <table><tbody><tr><td><code>domain_userid</code></td><td>client side cookie ID set against the domain the tracking is on</td></tr><tr><td><code>network_userid</code></td><td>server side cookie ID set against the collector domain</td></tr><tr><td><code>user_ipaddress</code></td><td>the user’s IP address</td></tr></tbody></table>
 
-Please note that in Try Snowplow, these fields (as well as the `domain_sessionid`) are being hashed with Snowplow's [PII enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/) to protect user privacy. With Snowplow BDP, you are able to configure this enrichment to hash (or not hash) any number of out of the box or custom fields.
+Please note that in Try Snowplow, these fields (as well as the `domain_sessionid`) are being hashed with Snowplow's [PII enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md) to protect user privacy. With Snowplow BDP, you are able to configure this enrichment to hash (or not hash) any number of out of the box or custom fields.
 
 Additionally, Snowplow allows you to specify a custom user ID, which you'll be adding in this recipe. You'll then build a user stitching table to explore how you can reliably identify users over time.
 
@@ -98,9 +98,9 @@ SELECT * FROM derived.user_stitching;
 
 This recipe covers a really simple example of user stitching based on Snowplow's out of the box identifiers and the custom user ID only. Next, you might want to
 
-- Create a custom `user` entity to be sent with all events, that captures additional user information such as email address. You can learn more about Snowplow's events and entities [here](/docs/understanding-tracking-design/understanding-events-entities/).
-- Implement tracking on [other platforms](/docs/collecting-data/collecting-from-own-applications/), such as mobile apps and servers, or ingest third party data via [webhooks](/docs/collecting-data/collecting-data-from-third-parties/) (for example from you email service provider). You can then include the identifiers from these sources in your user stitching table to get a 360 view of your customers across platforms.
-- Use the user stitching table alongside other data models, such as the simple user engagement table in the [user engagement recipe](/docs/try-snowplow/recipes/recipe-user-engagement/). Specifically, you could update the SQL in that recipe to aggregate user engagement based on the stitched user identifiers, rather than simply the `domain_userid`.
+- Create a custom `user` entity to be sent with all events, that captures additional user information such as email address. You can learn more about Snowplow's events and entities [here](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+- Implement tracking on [other platforms](/docs/collecting-data/collecting-from-own-applications/index.md), such as mobile apps and servers, or ingest third party data via [webhooks](/docs/collecting-data/collecting-data-from-third-parties/index.md) (for example from you email service provider). You can then include the identifiers from these sources in your user stitching table to get a 360 view of your customers across platforms.
+- Use the user stitching table alongside other data models, such as the simple user engagement table in the [user engagement recipe](/docs/try-snowplow/recipes/recipe-user-engagement/index.md). Specifically, you could update the SQL in that recipe to aggregate user engagement based on the stitched user identifiers, rather than simply the `domain_userid`.
 - Address your obligations as a data controller by learning more about [Snowplow's approach to user privacy](https://snowplowanalytics.com/blog/2020/09/07/2020/user-identification-and-privacy/).
 
 For more information about how to build a single customer view with Snowplow, check out [our blog post on the topic](https://snowplowanalytics.com/blog/2020/06/11/single-customer-view/).

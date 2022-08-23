@@ -12,7 +12,7 @@ In this diagram we show an Iglu client resolving a schema from Iglu Central, one
 
 ![](images/iglu-clients.png)
 
-For more information on the rules governing resolving schemas from multiple repositories, see [Schema resolution](/docs/pipeline-components-and-applications/iglu/common-architecture/schema-resolution/).
+For more information on the rules governing resolving schemas from multiple repositories, see [Schema resolution](/docs/pipeline-components-and-applications/iglu/common-architecture/schema-resolution/index.md).
 
 ## Available Iglu clients
 

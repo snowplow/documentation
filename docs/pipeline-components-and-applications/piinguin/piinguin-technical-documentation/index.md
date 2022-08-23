@@ -24,4 +24,4 @@ Finally the client artifact provides a client API for use from `Scala`. There ar
 
 ## Piinguin relay
 
-The piinguin relay is using the above mentioned Piinguin Client, in an AWS Lambda to forward all PII messages to the Piinguin Server. It uses the [Analytics SDK](/docs/modeling-your-data/analytics-sdk/) to read the Enriched Events that are contained in the stream and extract the relevant fields (currently modified and original value only), and perform a `createRecord` operation.
+The piinguin relay is using the above mentioned Piinguin Client, in an AWS Lambda to forward all PII messages to the Piinguin Server. It uses the [Analytics SDK](/docs/modeling-your-data/analytics-sdk/index.md) to read the Enriched Events that are contained in the stream and extract the relevant fields (currently modified and original value only), and perform a `createRecord` operation.

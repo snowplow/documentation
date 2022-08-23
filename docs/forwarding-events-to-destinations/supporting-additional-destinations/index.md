@@ -13,13 +13,13 @@ There are two core principles of Snowplow to keep in mind when considering wheth
 
 ## Types of Use Case
 
-### [No Processing Required (Event Forwarding)](/docs/forwarding-events-to-destinations/forwarding-events/)
+### [No Processing Required (Event Forwarding)](/docs/forwarding-events-to-destinations/forwarding-events/index.md)
 
 This is the route to take if you want to forwarding individual events to downstream destinations, ideal for use cases where platforms can make use of event data, such as "evented" marketing platforms.
 
 Snowplow recommends using **Google Tag Manager Server Side** to forward events to other platforms. This can be used in two configurations, either before or after the Snowplow pipeline, using the official Snowplow Client and Tags.
 
-### [Processing Required (Reverse ETL)](/docs/forwarding-events-to-destinations/reverse-etl/)
+### [Processing Required (Reverse ETL)](/docs/forwarding-events-to-destinations/reverse-etl/index.md)
 
 This option should be used to forwarding segments or other aggregated data to downstream destinations. Often referred to as Reverse ETL. Snowplow partners with two vendors to offer this capability, [Census](https://www.getcensus.com/) and [Hightouch](https://hightouch.io/), however there are a variety of other vendors which offer alternative solutions in the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/).
 

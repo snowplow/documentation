@@ -53,9 +53,9 @@ java -jar beam-enrich-2.0.5.jar \
   --enrichments=/snowplow/config/enrichments
 ```
 
-## Configuration[](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich/setting-up-beam-enrich/#configuration)
+## Configuration[](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich/setting-up-beam-enrich/index.md#configuration)
 
-### [](https://github.com/snowplow/snowplow/wiki/setting-up-beam-enrich#beam-enrich-specific-options)Beam Enrich specific options[](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich/setting-up-beam-enrich/#beam-enrich-specific-options)
+### [](https://github.com/snowplow/snowplow/wiki/setting-up-beam-enrich#beam-enrich-specific-options)Beam Enrich specific options[](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich/setting-up-beam-enrich/index.md#beam-enrich-specific-options)
 
 Beam Enrich comes with a set of predefined CLI options:
 
@@ -86,7 +86,7 @@ It’s important to note that every enrichment relying on local files will need 
 }
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/setting-up-beam-enrich#dataflow-options)Dataflow options[](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich/setting-up-beam-enrich/#dataflow-options)
+### [](https://github.com/snowplow/snowplow/wiki/setting-up-beam-enrich#dataflow-options)Dataflow options[](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich/setting-up-beam-enrich/index.md#dataflow-options)
 
 To run on Dataflow, Beam Enrich will rely on a set of additional configuration options:
 

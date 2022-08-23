@@ -34,7 +34,7 @@ This API call blocks until all the services have been restarted.
 
 Return status 200 means that services have been successfully restarted.
 
-#### Resetting Elasticsearch indices[](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/#resetting-elasticsearch-indices)
+#### Resetting Elasticsearch indices[](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/index.md#resetting-elasticsearch-indices)
 
 As of 0.13.0, it is possible to reset Elasticsearch indices, along with the corresponding index patterns in Kibana, through Control Plane API.
 
@@ -48,7 +48,7 @@ curl -L \
 
 Note that resetting deletes not only indices and patterns but also all events stored so far.
 
-#### Restart services individually[](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/#restart-services-individually)
+#### Restart services individually[](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/index.md#restart-services-individually)
 
 As of 0.13.0, it is possible to restart services one by one.
 
@@ -62,7 +62,7 @@ curl -L \
 
 where `service_name` can be one of the following: `collector`, `enrich`, `esLoaderGood`, `esLoaderBad`, `iglu`, `kibana`, `elasticsearch`.
 
-#### Configuring telemetry[](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/#configuring-telemetry)
+#### Configuring telemetry[](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/index.md#configuring-telemetry)
 
 As of 0.13.0, Mini comes with telemetry and it is possible to turn it on or off through Control Plane API.
 

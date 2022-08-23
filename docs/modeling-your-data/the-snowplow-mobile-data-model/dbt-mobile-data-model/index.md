@@ -12,7 +12,7 @@ The package can be found in the [snowplow/dbt-snowplow-mobile repo](https://git
 
 ### Requirements
 
-- Snowplow [Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/) or [iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/) mobile tracker version 1.1.0 or later implemented.
+- Snowplow [Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/index.md) or [iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 or later implemented.
 - Mobile session context enabled.
 - Screen view events enabled.
 

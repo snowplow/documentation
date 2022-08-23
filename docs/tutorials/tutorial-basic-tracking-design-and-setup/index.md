@@ -176,7 +176,7 @@ Great! We now have a schema written for our form. Next we need to upload it to o
 
 ### Uploading your schema
 
-For this step, follow the documentation on [using Snowplow Console to manage your data structures](/docs/understanding-tracking-design/managing-data-structures/).
+For this step, follow the documentation on [using Snowplow Console to manage your data structures](/docs/understanding-tracking-design/managing-data-structures/index.md).
 
 Once you have successfully created and published your schema to the development registry you can begin sending test events to your Snowplow Mini.
 
@@ -280,7 +280,7 @@ Create a new HTML page with this content:
 
 #### Initializing the tracker
 
-Follow the Web Quick Start Guide to [download the Javascript Tracker and call it into your HTML](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/).
+Follow the Web Quick Start Guide to [download the Javascript Tracker and call it into your HTML](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md).
 
 #### Setting up tracking
 

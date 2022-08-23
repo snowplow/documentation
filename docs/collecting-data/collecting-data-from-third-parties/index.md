@@ -8,7 +8,7 @@ Snowplow enables you to collect events via the webhooks of supported third-par
 
 Webhooks allow this third-party software to send their own internal event streams to your Snowplow collector for further processing. Webhooks are sometimes referred to as "streaming APIs" or "HTTP response APIs".
 
-View our [set of trackers for tracking events from your own applications](/docs/collecting-data/collecting-from-own-applications/).
+View our [set of trackers for tracking events from your own applications](/docs/collecting-data/collecting-from-own-applications/index.md).
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

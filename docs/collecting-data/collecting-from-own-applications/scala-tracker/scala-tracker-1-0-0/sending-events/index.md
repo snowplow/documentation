@@ -134,7 +134,7 @@ try {
 }
 ```
 
-Note: this tracker should not be used to track exceptions happening in tracker itself, use [callbacks](/docs/collecting-data/collecting-from-own-applications/scala-tracker/scala-tracker-1-0-0/initialization/#callbacks) mechanism for that.
+Note: this tracker should not be used to track exceptions happening in tracker itself, use [callbacks](/docs/collecting-data/collecting-from-own-applications/scala-tracker/scala-tracker-1-0-0/initialization/index.md#callbacks) mechanism for that.
 
 ### `trackAddToCart`
 

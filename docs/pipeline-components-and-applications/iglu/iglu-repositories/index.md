@@ -29,4 +29,4 @@ We currently have two Iglu "repo" technologies available for deploying your Iglu
 
 ## [](https://github.com/snowplow/iglu/wiki/Iglu-repositories#iglu-central)Iglu Central
 
-[Iglu Central](http://iglucentral.com/) is a public repository of JSON Schemas hosted by [Snowplow Analytics](http://snowplowanalytics.com/). For more information on its technical architecture, see [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/).
+[Iglu Central](http://iglucentral.com/) is a public repository of JSON Schemas hosted by [Snowplow Analytics](http://snowplowanalytics.com/). For more information on its technical architecture, see [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md).

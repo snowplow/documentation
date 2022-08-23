@@ -40,4 +40,4 @@ newTracker('sp1', '{{collector_url}}', {
 trackPageView();
 ```
 
-- You can read more about the other tracking functions which are available in the [Browser Tracker and associated Plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/).
+- You can read more about the other tracking functions which are available in the [Browser Tracker and associated Plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/index.md).

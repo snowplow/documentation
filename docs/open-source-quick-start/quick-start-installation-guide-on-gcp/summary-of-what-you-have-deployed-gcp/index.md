@@ -18,7 +18,7 @@ _For further details on the resources, default and required input variables, and
 
 #### **Stream Collector**
 
-This is a Snowplow event collector that receives raw Snowplow events over HTTP, serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to pubsub. More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/).
+This is a Snowplow event collector that receives raw Snowplow events over HTTP, serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to pubsub. More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/index.md).
 
 __For further details on the resources, default and required input variables, and outputs see the [collector-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/collector-pubsub-ce/google/latest) terraform module.__
 
@@ -31,7 +31,7 @@ This is a Snowplow app written in scala which: 
 - Enriches each event (e.g. infers the location of the user from his/her IP address)
 - Writes the enriched Snowplow event to the enriched topic
 
-It is designed to be used downstream of the [Scala Stream Collector](/docs/pipeline-components-and-applications/stream-collector/). More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/). 
+It is designed to be used downstream of the [Scala Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md). More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md). 
 
 __For further details on the resources, default and required input variables, and outputs see the [enrich-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/enrich-pubsub-ce/google/latest) terraform module.__
 
@@ -51,11 +51,11 @@ Events that have been validated and enriched by the Enrich application are writt
 
 **Bad 1 topic**
 
-This bad topic is for events that the collector or enrich fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure.  More details can be found [here](/docs/managing-data-quality/failed-events/understanding-failed-events/). 
+This bad topic is for events that the collector or enrich fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure.  More details can be found [here](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md). 
 
 #### **Iglu** 
 
-[Iglu](/docs/pipeline-components-and-applications/iglu/) allows you to publish, test and serve schemas via an easy-to-use RESTful interface. It is split into a few services.
+[Iglu](/docs/pipeline-components-and-applications/iglu/index.md) allows you to publish, test and serve schemas via an easy-to-use RESTful interface. It is split into a few services.
 
 **Iglu load balancer**
 
@@ -77,13 +77,13 @@ __For further details on the resources, default and required input variables, an
 
 #### **Postgres loader**
 
-The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres.](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/)
+The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres.](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md)
 
 ____For further details on the resources, default and required input variables, and outputs see the [postgres-loader-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-pubsub-ce/google/latest) terraform module.____
 
 ##### Have any questions? Reach out to us on [discourse](https://discourse.snowplowanalytics.com/)!
 
-##### Or start [tracking events from your own application](/docs/open-source-quick-start/further-exploration/start-tracking-events-and-further-enrich-your-data/) >>
+##### Or start [tracking events from your own application](/docs/open-source-quick-start/further-exploration/start-tracking-events-and-further-enrich-your-data/index.md) >>
 
 * * *
 

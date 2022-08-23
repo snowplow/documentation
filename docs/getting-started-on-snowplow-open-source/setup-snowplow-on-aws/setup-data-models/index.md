@@ -20,7 +20,7 @@ The basic data model can be downloaded from [GitHub](https://github.com/snowplow
 
 ## Step 2: Customize the SQL data model
 
-The basic model can then be modified to include business-specific logic. This could mean adding e-commerce fields or aggregating events in different ways, ideally joining Snowplow data with other data sets (e.g. customer data). For more information on this, check out [the relevant section of the documentation](/docs/modeling-your-data/the-snowplow-web-data-model/#Customizing_the_model).
+The basic model can then be modified to include business-specific logic. This could mean adding e-commerce fields or aggregating events in different ways, ideally joining Snowplow data with other data sets (e.g. customer data). For more information on this, check out [the relevant section of the documentation](/docs/modeling-your-data/the-snowplow-web-data-model/index.md#Customizing_the_model).
 
 ## SQLRunner
 

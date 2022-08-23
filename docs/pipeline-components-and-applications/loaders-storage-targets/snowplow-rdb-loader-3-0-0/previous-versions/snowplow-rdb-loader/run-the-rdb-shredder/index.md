@@ -16,7 +16,7 @@ where `region` is one of `us-east-1`, `us-west-1`, `us-west-2`, `sa-east-1`, `eu
 
 ### Dataflow Runner
 
-You can use any suitable tool to periodically submit the Shredder job to EMR cluster. We recommend to use [Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/), here an example of cluster config:
+You can use any suitable tool to periodically submit the Shredder job to EMR cluster. We recommend to use [Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/index.md), here an example of cluster config:
 
 ```
 {
@@ -178,4 +178,4 @@ Here you'll need to set:
 - `region`
 - Paths to your enriched data sink (`--src`) and enriched data lake (`--dest`)
 
-See the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/rdb-shredder-configuration-reference/) for a description of how to prepare the `config.hocon` file..
+See the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/rdb-shredder-configuration-reference/index.md) for a description of how to prepare the `config.hocon` file..

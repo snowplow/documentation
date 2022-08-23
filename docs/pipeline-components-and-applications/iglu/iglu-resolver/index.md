@@ -47,4 +47,4 @@ Above configuration assumes Snowplow-authored schemas (Iglu Central) will be use
 - `cacheSize` determines how many individual schemas we will keep cached in our Iglu client (to save additional lookups)
 - `repositories` is a JSON array of repositories to look up schemas in
 - `name` and `connection` should be self-evident
-- `priority` and `vendorPrefixes` help the resolver to know which repository to check first for a given schema. For details see Iglu's [repository resolution algorithm](/docs/pipeline-components-and-applications/iglu/common-architecture/schema-resolution/#3-registry-priority)
+- `priority` and `vendorPrefixes` help the resolver to know which repository to check first for a given schema. For details see Iglu's [repository resolution algorithm](/docs/pipeline-components-and-applications/iglu/common-architecture/schema-resolution/index.md#3-registry-priority)

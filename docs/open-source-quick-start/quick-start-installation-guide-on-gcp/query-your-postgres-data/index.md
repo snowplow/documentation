@@ -14,19 +14,19 @@ If you were using the `default` or `secure` example scripts unedited in the last
 To query the good data in atomic.events, you will first you need to connect to your Postgres database.
 
 - Connect to the database using the username and password you provided when creating the pipeline, along with the `db_address` and `db_port` you noted down after the pipeline was created.
-    - If you need to reset your username or password you can [follow these steps](/docs/try-snowplow/try-snowplow-faq/#my-database-login-details-are-not-working)
+    - If you need to reset your username or password you can [follow these steps](/docs/try-snowplow/try-snowplow-faq/index.md#my-database-login-details-are-not-working)
     - If your Postgres RDS was configured to be publically accessible, there are a number of tools you can use to connect to a Postgres database from your local machine:
         - [pgAdmin](https://www.pgadmin.org/), [psql](https://www.postgresql.org/docs/current/app-psql.html), [DataGrip](https://www.jetbrains.com/datagrip/), [DBeaver](https://dbeaver.io/)
-- Run a query against your atomic.events table to take a look at the page view event that you generated in the previous step (`where event_name = ‘page_view’`). You can understand more about each field in the canonical event [here](/docs/understanding-your-pipeline/canonical-event/).
+- Run a query against your atomic.events table to take a look at the page view event that you generated in the previous step (`where event_name = ‘page_view’`). You can understand more about each field in the canonical event [here](/docs/understanding-your-pipeline/canonical-event/index.md).
     - `SELECT * FROM atomic.events WHERE event_name = 'page_view';`
 
 By default, there are 5 enrichments enabled, as listed below. These enrichments add extra properties and values to your events in real time as they are being processed by the Enrich application.
 
-- [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/)
-- [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/) 
-- [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/)
-- [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/) 
-- [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/)
+- [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
+- [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) 
+- [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md)
+- [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) 
+- [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)
 
 Some enrichments are _legacy_ and therefore populate your atomic.events table. From the above list, these are the _campaign attribution, referer parser_ and _event fingerprint_ enrichments. The UA parser and YAUAA enrichment also add a separate _entity_ to each event (these are also referred to as contexts since they add additional context to the events in your atomic.events table). The contexts are loaded into separate tables: 
 
@@ -37,7 +37,7 @@ Note: you can join these contexts back to your atomic.events using root\_id = ev
 
 **Step 2. Querying your bad data**
 
-Your atomic\_bad schema holds events that have failed to be processed by your pipeline. These are called [failed events.](/docs/managing-data-quality/failed-events/understanding-failed-events/)
+Your atomic\_bad schema holds events that have failed to be processed by your pipeline. These are called [failed events.](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md)
 
 You will see in Postgres that you have a table called _`atomic_bad.com_snowplowanalytics_snowplow_badrows_schema_violation_1.`_
 
@@ -49,11 +49,11 @@ In the next section, we guide you through creating a custom schema so that your 
 
 Schemas
 
-_Learn more about_ [_self-describing events_](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/) _and_ [_schemas_](/docs/understanding-tracking-design/understanding-schemas-and-validation/)_, and the different types of failures_ [_here._](/docs/managing-data-quality/failed-events/understanding-failed-events/)
+_Learn more about_ [_self-describing events_](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) _and_ [_schemas_](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md)_, and the different types of failures_ [_here._](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md)
 
-**Note**: you might also see _adapter failure_ failed events in Postgres. Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. Find out more [here](/docs/managing-data-quality/failed-events/understanding-failed-events/#adaptor-failure).
+**Note**: you might also see _adapter failure_ failed events in Postgres. Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. Find out more [here](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md#adaptor-failure).
 
-#### Next let's take a [detailed look at what you have deployed](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed-gcp/) >>
+#### Next let's take a [detailed look at what you have deployed](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed-gcp/index.md) >>
 
 * * *
 

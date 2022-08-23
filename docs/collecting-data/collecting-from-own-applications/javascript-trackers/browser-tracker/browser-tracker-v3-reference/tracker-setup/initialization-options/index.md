@@ -163,7 +163,7 @@ This mode will no longer track any user identifiers or session information. Simi
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled.
 
-Anonymous tracking can be toggled on and off. The methods to control this behaviour are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/general-parameters/other-parameters-2/#Toggling_Anonymous_Tracking_2150).
+Anonymous tracking can be toggled on and off. The methods to control this behaviour are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/general-parameters/other-parameters-2/index.md#Toggling_Anonymous_Tracking_2150).
 
 ##### Full Anonymous/Cookieless Tracking
 
@@ -177,7 +177,7 @@ This mode will no longer track any user identifiers or session information, and 
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled. However for an experience that doesn't use any browser storage (cookieless), set `stateStorageStrategy` to `none`. This can be later toggled on, once a user accepts a cookie policy.
 
-Anonymous tracking can be toggled on and off. The methods to control this behaviour are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/general-parameters/other-parameters-2/#Toggling_Anonymous_Tracking_2150).
+Anonymous tracking can be toggled on and off. The methods to control this behaviour are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/general-parameters/other-parameters-2/index.md#Toggling_Anonymous_Tracking_2150).
 
 ##### Anonymous Session Tracking
 
@@ -193,7 +193,7 @@ Whenever the Snowplow Javascript Tracker fires an event, it automatically starts
 
 You can change the pause length (in milliseconds) using the `pageUnloadTimer` of the configuration object. The above example completely eliminates the pause. This does make it unlikely that events triggered by link clicks will be sent.
 
-See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/#Local_Storage) for an explanation of how the tracker can later recover and send unsent events.
+See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/index.md#Local_Storage) for an explanation of how the tracker can later recover and send unsent events.
 
 #### Setting the event request protocol
 
@@ -237,7 +237,7 @@ When the JavaScript Tracker loads on a page, it generates a new page view UUID. 
 
 Enabled by default
 
-From v3 of the JavaScript Tracker, the webPage context is enabled by default. You can disable it if you don't require it but we advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/the-snowplow-web-data-model/).
+From v3 of the JavaScript Tracker, the webPage context is enabled by default. You can disable it if you don't require it but we advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/the-snowplow-web-data-model/index.md).
 
 ##### session context
 

@@ -51,7 +51,7 @@ Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "cf")
 
 #### `emitter`
 
-The emitter to which the tracker will send events. See [Emitters](/docs/collecting-data/collecting-from-own-applications/java-tracker/configuring-how-events-are-sent/) for more on emitter configuration.
+The emitter to which the tracker will send events. See [Emitters](/docs/collecting-data/collecting-from-own-applications/java-tracker/configuring-how-events-are-sent/index.md) for more on emitter configuration.
 
 To attach a new Emitter to the Tracker:
 
@@ -86,4 +86,4 @@ Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "sp")
                     .build();
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/#Common_parameters_platform_and_event_independent).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#Common_parameters_platform_and_event_independent).

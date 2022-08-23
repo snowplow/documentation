@@ -6,7 +6,7 @@ sidebar_position: 1000
 
 Deprecated
 
-Please refer to the [latest version of this tracker.](/docs/collecting-data/collecting-from-own-applications/google-amp-tracker/)
+Please refer to the [latest version of this tracker.](/docs/collecting-data/collecting-from-own-applications/google-amp-tracker/index.md)
 
 ## Overview
 

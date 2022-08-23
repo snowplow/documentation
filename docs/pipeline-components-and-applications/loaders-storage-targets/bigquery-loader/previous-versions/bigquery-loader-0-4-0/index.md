@@ -125,7 +125,7 @@ Loader, Mutator, Repeater and Forwarder accept the same configuration file with 
 }
 ```
 
-- All topics and subscriptions (`input`, `typesTopic`, `typesSubscription`, `badRows` and `failedInserts`) are explained in the [topics and message formats](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-bigquery-destination/#topics-and-message-formats) section.
+- All topics and subscriptions (`input`, `typesTopic`, `typesSubscription`, `badRows` and `failedInserts`) are explained in the [topics and message formats](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-bigquery-destination/index.md#topics-and-message-formats) section.
 - `projectId` is used to group all resources (topics, subscriptions and BigQuery table).
 - `datasetId` and `tableId` (along with `projectId`) specify the target BigQuery table.
 - `name` is an arbitrary human-readable description of the storage target.
@@ -170,7 +170,7 @@ The configuration for using **load jobs** can look like this:
 
 Load jobs do not support `retry` (and streaming inserts do not support `frequency`).
 
-It is generally recommended to stick with the **streaming jobs** API without retries and use [Repeater](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-bigquery-destination/#snowplow-bigquery-repeater) to recover data from `failedInserts`. However, the **load jobs** API is cheaper and generates fewer duplicates.
+It is generally recommended to stick with the **streaming jobs** API without retries and use [Repeater](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-bigquery-destination/index.md#snowplow-bigquery-repeater) to recover data from `failedInserts`. However, the **load jobs** API is cheaper and generates fewer duplicates.
 
 ### Command line options
 

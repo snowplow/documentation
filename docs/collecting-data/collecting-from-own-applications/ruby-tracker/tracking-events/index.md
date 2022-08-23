@@ -18,9 +18,9 @@ Tracking methods supported by the Ruby Tracker:
 | [`track_screen_view`](#screen-view) | View of screen |
 | [`track_ecommerce_transaction`](#ecommerce-transaction) | eCommerce transaction (and items in the transaction) |
 
-All the `track_x_event` methods share common features and parameters. Every type of event can have an optional context, Subject, and Page added. A Timestamp can also be provided for all event types to override the default event timestamp. See [the next page](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/adding-data-events/) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
+All the `track_x_event` methods share common features and parameters. Every type of event can have an optional context, Subject, and Page added. A Timestamp can also be provided for all event types to override the default event timestamp. See [the next page](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/adding-data-events/index.md) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
 
-Snowplow events are all processed into the same format, regardless of the event type (and regardless of the tracker language used). Read about the different properties and fields of events in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/).
+Snowplow events are all processed into the same format, regardless of the event type (and regardless of the tracker language used). Read about the different properties and fields of events in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
 We will first discuss the custom event tracking methods, followed by the out-of-the-box event types. Note that you can also design and create your own page view, screen view, or eCommerce events, using `track_self_describing_event`, to fit your business needs better. The out-of-the-box event types are provided so you can get started with generating event data quickly.
 
@@ -35,11 +35,11 @@ This is particularly useful when:
 - You want to track event types which are proprietary/specific to your business
 - You want to track events which have unpredictable or frequently changing properties
 
-A self-describing JSON has two keys, `schema` and `data`. The `schema` value should point to a valid self-describing JSON schema. They are called self-describing because the schema will specify the fields allowed in the `data` value. Read more about how schemas are used with Snowplow [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/).
+A self-describing JSON has two keys, `schema` and `data`. The `schema` value should point to a valid self-describing JSON schema. They are called self-describing because the schema will specify the fields allowed in the `data` value. Read more about how schemas are used with Snowplow [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md).
 
 After events have been collected by the event collector, they are validated to ensure that the properties match the self-describing JSONs. Mistakes (e.g. extra fields, or incorrect types) will result in events being processed as Bad Events. This means that only high-quality, valid events arrive in your data storage or real-time stream.
 
-Your schemas must be accessible to your pipeline to allow this validation. We provide [Iglu](/docs/pipeline-components-and-applications/iglu/) for schema management. If you are a paid Snowplow customer, you can manage your schemas through your console. Check out our [Ruby tracker Rails example](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) to see how we included schemas in the Snowplow Micro testing pipeline in that app.
+Your schemas must be accessible to your pipeline to allow this validation. We provide [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) for schema management. If you are a paid Snowplow customer, you can manage your schemas through your console. Check out our [Ruby tracker Rails example](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) to see how we included schemas in the Snowplow Micro testing pipeline in that app.
 
 This method was previously called `track_unstruct_event`, as a counterpoint to `track_struct_event`. This name is misleading and we are in the process of depreciating it. An `unstruct` event requires a schema ruleset and therefore can be considered more structured than a `struct` event. However, this method still produces events labelled `unstruct`, as changing the event name in the Tracker Protocol would be a breaking change.
 

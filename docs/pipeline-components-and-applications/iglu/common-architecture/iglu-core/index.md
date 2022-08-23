@@ -18,7 +18,7 @@ It also should have related `parse` functions, which can parse `SchemaKey` f
 
 This also can include appropriate regular expressions to extract and validate schema key. Function for parsing `SchemaKey` from JSON Schemas is optional if there's no default JSON library like in JavaScript, but can be included within some interface.
 
-More information can be found in [Self-describing JSON Schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/) and [Self-describing JSONs](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-jsons/) wiki pages.
+More information can be found in [Self-describing JSON Schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) and [Self-describing JSONs](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-jsons/index.md) wiki pages.
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemamap)SchemaMap
 
@@ -32,7 +32,7 @@ Like, `SchemaKey` it should contain `parse` function with regular expression
 
 It can either _full_ (e.g. `1-2-0`) or _partial_ (e.g. `1-?-?`) suited for schema inference.
 
-More information can be found in dedicated wiki page: [SchemaVer](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/).
+More information can be found in dedicated wiki page: [SchemaVer](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/index.md).
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemacriterion)SchemaCriterion
 

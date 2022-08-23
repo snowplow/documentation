@@ -14,7 +14,7 @@ You can ask any questions about set up, tracking, accessing or modeling data wit
 - Check your input parameters for leading or trailing whitespace or other unsupported characters.
 - If the deployment hangs this is likely due to AWS. Your best bet is to start from scratch with a new deployment. If this fails again reach out to AWS Support.
 - If your stack destroy hangs leave it be: CloudFormation can take several hours to resolve hanging issues. If it has not been cleaned up after 6+ hours reach out to AWS Support for help in destroying the resources.
-- Ensure you have sufficient IAM permissions before beginning the deployment. Partial permissions can cause issues with some resources not being able to be deployed. Speak to your internal SysAdmin / DevOps team to get help with permissions on your company's AWS account. More information on what IAM permissions Try Snowplow requires click [here](/docs/try-snowplow/securing-your-pipeline/#required-iam-roles).
+- Ensure you have sufficient IAM permissions before beginning the deployment. Partial permissions can cause issues with some resources not being able to be deployed. Speak to your internal SysAdmin / DevOps team to get help with permissions on your company's AWS account. More information on what IAM permissions Try Snowplow requires click [here](/docs/try-snowplow/setting-up-your-pipeline/installing-try-snowplow-on-aws/index.md#required-iam-roles).
 
 ### My database login details are not working.
 

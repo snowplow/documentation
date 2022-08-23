@@ -6,7 +6,7 @@ sidebar_position: 500
 
 The configuration reference in this page is written for RDB Loader 4.0.0 or higher
 
-The configuration reference pages for previous versions can be found [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/loading-transformed-data/rdb-loader-configuration-reference/rdb-loader-previous-versions/).
+The configuration reference pages for previous versions can be found [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/loading-transformed-data/rdb-loader-configuration-reference/rdb-loader-previous-versions/index.md).
 
 An example of the minimal required config for the Redshift loader can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/redshift.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/redshift.config.reference.hocon).
 

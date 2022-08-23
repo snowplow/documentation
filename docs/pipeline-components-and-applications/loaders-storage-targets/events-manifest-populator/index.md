@@ -8,7 +8,7 @@ sidebar_position: 2000
 
 [Event Manifest Populator](https://github.com/snowplow/snowplow/tree/master/5-data-modeling/event-manifest-populator/) is an [Apache Spark](http://spark.apache.org/) job allowing you to backpopulate a Snowplow event manifest in DynamoDB with the metadata of some or all enriched events from your archive in S3.
 
-This one-off job solves the "cold start" problem for identifying cross-batch natural deduplicates in Snowplow's [Relational Database Shredder step](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/rdb-shredder/).  
+This one-off job solves the "cold start" problem for identifying cross-batch natural deduplicates in Snowplow's [Relational Database Shredder step](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md).  
 In other words, without running this job you still will be able to deduplicate events across batches, but if Relational Database Shredder encounters duplicate of event that was shredded _before_ you enabled cross-batch deduplication it will land into `shredded/good`.
 
 ## Usage
@@ -36,7 +36,7 @@ Task has three required arguments:
 
 1. Path to enriched events archive. It can be found in `aws.s3.buckets.enriched.archive` setting in your [config.yml](https://github.com/snowplow/emr-etl-runner/blob/master/config/stream_config.yml.sample).
 2. Local path to [Duplicate storage](#dynamodb-duplicate-storage-configuration) configuration JSON.
-3. Local path to [Iglu resolver](/docs/pipeline-components-and-applications/iglu/iglu-resolver/) configuration JSON.
+3. Local path to [Iglu resolver](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) configuration JSON.
 
 Optionally, you can also pass following arguments:
 

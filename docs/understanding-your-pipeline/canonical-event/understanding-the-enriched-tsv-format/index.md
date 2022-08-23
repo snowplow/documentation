@@ -16,7 +16,7 @@ Additionally, Snowplow has a number of Analytics SDKs available which help parse
 - [Analytics SDK Javascript](https://github.com/snowplow-incubator/snowplow-js-analytics-sdk/)
 - [Analytics SDK Golang](https://github.com/snowplow/snowplow-golang-analytics-sdk)
 
-For explanations of what each field represents, please see the [Canonical Event Model](/docs/understanding-your-pipeline/canonical-event/).
+For explanations of what each field represents, please see the [Canonical Event Model](/docs/understanding-your-pipeline/canonical-event/index.md).
 
 | Property Index | Property Name |
 | --- | --- |

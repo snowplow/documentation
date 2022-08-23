@@ -4,7 +4,7 @@ date: "2021-11-16"
 sidebar_position: 1000
 ---
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/understanding-tracking-design/introduction-to-tracking-design/).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/understanding-tracking-design/introduction-to-tracking-design/index.md).
 
 The following steps will guide you through setting up the Roku tracker in your project and tracking a simple event.
 
@@ -60,7 +60,7 @@ m.global.snowplow.init = {
 }
 ```
 
-To learn more about configuring how events are sent, check out [this page](/docs/collecting-data/collecting-from-own-applications/roku-tracker/configuration/).
+To learn more about configuring how events are sent, check out [this page](/docs/collecting-data/collecting-from-own-applications/roku-tracker/configuration/index.md).
 
 ## [](#tracking-events)Tracking events
 
@@ -76,12 +76,12 @@ m.global.snowplow.structured = {
 }
 ```
 
-Visit documentation about [tracking events](/docs/collecting-data/collecting-from-own-applications/roku-tracker/tracking-events/) to learn about other supported event types. You may also want to read about [adding more data to tracked events](/docs/collecting-data/collecting-from-own-applications/roku-tracker/adding-data/).
+Visit documentation about [tracking events](/docs/collecting-data/collecting-from-own-applications/roku-tracker/tracking-events/index.md) to learn about other supported event types. You may also want to read about [adding more data to tracked events](/docs/collecting-data/collecting-from-own-applications/roku-tracker/adding-data/index.md).
 
 ## [](#testing)Testing
 
 Testing that your event tracking is properly configured can be as important as testing the other aspects of your app. It confirms that you are generating the events you expect.
 
-We provide two types of pipeline for testing and debugging. [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/) is especially useful in manual schema and pipeline testing. [Snowplow Micro](/docs/understanding-your-pipeline/what-is-snowplow-micro/) is a minimal pipeline designed to be used as part of your app's automated test suite.
+We provide two types of pipeline for testing and debugging. [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/index.md) is especially useful in manual schema and pipeline testing. [Snowplow Micro](/docs/understanding-your-pipeline/what-is-snowplow-micro/index.md) is a minimal pipeline designed to be used as part of your app's automated test suite.
 
-Check out the [example Roku channel](/docs/collecting-data/collecting-from-own-applications/roku-tracker/example-app/) to see the tracker used with a Snowplow Micro.
+Check out the [example Roku channel](/docs/collecting-data/collecting-from-own-applications/roku-tracker/example-app/index.md) to see the tracker used with a Snowplow Micro.

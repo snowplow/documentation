@@ -4,7 +4,7 @@ date: "2020-02-25"
 sidebar_position: 20
 ---
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/understanding-tracking-design/introduction-to-tracking-design/).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/understanding-tracking-design/introduction-to-tracking-design/index.md).
 
 ## Import the library
 
@@ -188,7 +188,7 @@ The following will explain the individual components shown in the above code sam
 
 ### Storage
 
-The storage has two functions in the example above – it is used by the `emitter` to persist an event queue with events to be sent, and it is used by the `client_session` to persist the current session. The tracker provides an SQL storage (`SqliteStorage`) implementation, but you may introduce your own storage as described in ["Emitters"](/docs/collecting-data/collecting-from-own-applications/c-tracker/emitters/) and ["Client Sessions"](/docs/collecting-data/collecting-from-own-applications/c-tracker/client-sessions/).
+The storage has two functions in the example above – it is used by the `emitter` to persist an event queue with events to be sent, and it is used by the `client_session` to persist the current session. The tracker provides an SQL storage (`SqliteStorage`) implementation, but you may introduce your own storage as described in ["Emitters"](/docs/collecting-data/collecting-from-own-applications/c-tracker/emitters/index.md) and ["Client Sessions"](/docs/collecting-data/collecting-from-own-applications/c-tracker/client-sessions/index.md).
 
 ### Emitter
 

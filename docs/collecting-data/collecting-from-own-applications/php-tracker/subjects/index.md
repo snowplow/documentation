@@ -56,7 +56,7 @@ For example:
 $subject->setPlatform("tv") # Running on a Connected TV
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
 ### `setUserId`
 

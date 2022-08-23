@@ -65,7 +65,7 @@ The archive should contain a `snowplow-emr-etl-runner` file.
 
 ## 4\. Configuration
 
-EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`/3-enrich/emr-etl-runner/config/stream_config.yml.sample`](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/stream_config.yml.sample). See [Common configuration](/docs/open-source/section-1/setup-destinations/setup-redshift/setup-emretlrunner/configuring-emretlrunner/) more information on how to write this file.
+EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`/3-enrich/emr-etl-runner/config/stream_config.yml.sample`](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/stream_config.yml.sample). See [Common configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/index.md#configuration) more information on how to write this file.
 
 ### Storage targets
 

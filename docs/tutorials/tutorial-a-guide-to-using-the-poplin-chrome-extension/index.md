@@ -16,7 +16,7 @@ In the example below two events were fired as HTTP post requests from a test web
 
 ![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/using-poplin-chrome-extension.png?w=1024)
 
-Within the parsed out HTTP requests that comprise the event payload are a variety of [Snowplow canonical event](/docs/understanding-your-pipeline/canonical-event/) fields such as unique event\_ids, timestamps and user and session identifiers, as well as any custom event or entity fields.
+Within the parsed out HTTP requests that comprise the event payload are a variety of [Snowplow canonical event](/docs/understanding-your-pipeline/canonical-event/index.md) fields such as unique event\_ids, timestamps and user and session identifiers, as well as any custom event or entity fields.
 
 **The Role of The Poplin Extension in Event QA** 
 
@@ -80,4 +80,4 @@ An example of an event failing validation is shown below, the reason for this ev
 
 This is useful, but when it comes to the debugging of failed events and the investigation of exactly WHY a particular event has failed validation there are additional tools that should be considered.
 
-For events that failed validation against a schema in the dev registry Snowplow mini is a dedicated tool that has been built to provide real time, actionable feedback on why events are failing validation. For events that failed validation in production see our guides on [how to query failed events](/docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/) from their respective destinations. These failed events have a [specific format](/docs/managing-data-quality/failed-events/understanding-failed-events/) that includes an array of helpful, detailed error messages that explain the exact reasons why the event failed validation.
+For events that failed validation against a schema in the dev registry Snowplow mini is a dedicated tool that has been built to provide real time, actionable feedback on why events are failing validation. For events that failed validation in production see our guides on [how to query failed events](/docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/index.md) from their respective destinations. These failed events have a [specific format](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md) that includes an array of helpful, detailed error messages that explain the exact reasons why the event failed validation.

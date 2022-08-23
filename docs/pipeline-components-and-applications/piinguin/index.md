@@ -34,11 +34,11 @@ If you want to learn more about PII and how they are managed during Snowplow PII
 
 ### Piignuin Relay
 
-The first component that receives that data out of the stream is the Piinguin Relay. That is simply an AWS Lambda function which uses the piinguin-client artifact from piinguin to send data to piinguin. You can read more details about this project in [piinguin technical documentation](/docs/pipeline-components-and-applications/piinguin/piinguin-technical-documentation/) and detailed instructions on how to install and run it under [setting up piinguin](/docs/pipeline-components-and-applications/piinguin/setting-up-piinguin/).
+The first component that receives that data out of the stream is the Piinguin Relay. That is simply an AWS Lambda function which uses the piinguin-client artifact from piinguin to send data to piinguin. You can read more details about this project in [piinguin technical documentation](/docs/pipeline-components-and-applications/piinguin/piinguin-technical-documentation/index.md) and detailed instructions on how to install and run it under [setting up piinguin](/docs/pipeline-components-and-applications/piinguin/setting-up-piinguin/index.md).
 
 ### Piinguin Server
 
-The second component is the piinguin-server itself which has to be in the same secure VPC as the Lambda function. In addition it needs to have access to an AWS Dynamo DB table to store the data. You can read more details about this project in [piinguin technical documentation](/docs/pipeline-components-and-applications/piinguin/piinguin-technical-documentation/) and detailed instructions on how to install and run it under [setting up piinguin](/docs/pipeline-components-and-applications/piinguin/setting-up-piinguin/).
+The second component is the piinguin-server itself which has to be in the same secure VPC as the Lambda function. In addition it needs to have access to an AWS Dynamo DB table to store the data. You can read more details about this project in [piinguin technical documentation](/docs/pipeline-components-and-applications/piinguin/piinguin-technical-documentation/index.md) and detailed instructions on how to install and run it under [setting up piinguin](/docs/pipeline-components-and-applications/piinguin/setting-up-piinguin/index.md).
 
 ### Piinguin client(s)
 

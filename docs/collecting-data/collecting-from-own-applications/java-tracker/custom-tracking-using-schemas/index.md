@@ -4,7 +4,7 @@ date: "2022-03-24"
 sidebar_position: 30
 ---
 
-Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
+Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
 In all our trackers, self-describing JSON are used in two places. One is in the `Unstructured`/`SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features.
 
@@ -26,7 +26,7 @@ Unstructured unstructured = Unstructured.builder()
             .build();
 ```
 
-Event context is sent as a JSON inside the event payload. During [enrichment](/docs/enriching-your-data/what-is-enrichment/), it is separated into columns for each different schema used.
+Event context is sent as a JSON inside the event payload. During [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md), it is separated into columns for each different schema used.
 
 A note on nomenclature: entities were originally called "context", with the context called "contexts". The old nomenclature is still used in some parts of Snowplow, meaning that enriched events in the data warehouse refer to "contexts"/"context" rather than "context"/"entity".
 
@@ -38,7 +38,7 @@ The Java tracker does not yet provide the ability to automatically assign entiti
 
 The Java tracker provides the `SelfDescribingJson` class for custom events and entities. There is no in-built distinction between schemas used for events and those used for entities: they can be used interchangably.
 
-Your schemas must be accessible to your pipeline, within an [Iglu server](/docs/pipeline-components-and-applications/iglu/). Tracked events containing self-describing JSON are validated against their schemas during the enrichment phase of the pipeline. If the data don't match the schema, the events end up in the Bad Rows storage instead of the data warehouse.
+Your schemas must be accessible to your pipeline, within an [Iglu server](/docs/pipeline-components-and-applications/iglu/index.md). Tracked events containing self-describing JSON are validated against their schemas during the enrichment phase of the pipeline. If the data don't match the schema, the events end up in the Bad Rows storage instead of the data warehouse.
 
 A self-describing JSON needs two keys, `schema` and `data`. The `schema` key is the Iglu URI for the schema. The `data` value must match the properties described by the specified schema. It is usually provided as a map.
 
@@ -56,4 +56,4 @@ SelfDescribingJson sdj = new SelfDescribingJson("iglu:com.snowplowanalytics.snow
 
 See the API docs for the full [SelfDescribingJson](https://snowplow.github.io/snowplow-java-tracker/index.html?com/snowplowanalytics/snowplow/tracker/payload/SelfDescribingJson.html) constructor options.
 
-JSON can be sent base-64 encoded or not. By default, they are encoded. This is set as part of the Tracker configuration. See [Setting up](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/#setting-up).
+JSON can be sent base-64 encoded or not. By default, they are encoded. This is set as part of the Tracker configuration. See [Setting up](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md#setting-up).

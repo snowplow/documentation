@@ -4,7 +4,7 @@ date: "2021-11-24"
 sidebar_position: 0
 ---
 
-Snowplow is primarily built for Data Warehouse destinations and supports Redshift, Snowflake and BigQuery via the [Snowplow Loaders](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/). There is also support for S3 and GCS loading, plus the ability to consume directly from Kinesis or PubSub.
+Snowplow is primarily built for Data Warehouse destinations and supports Redshift, Snowflake and BigQuery via the [Snowplow Loaders](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/index.md). There is also support for S3 and GCS loading, plus the ability to consume directly from Kinesis or PubSub.
 
 Snowplow also offers a variety of native integrations which directly consume the real time stream (Kinesis/PubSub) of your Snowplow pipeline. These integrations are listed below.
 
@@ -15,7 +15,7 @@ The Elasticsearch loader reads enriched data from the enriched Kinesis stream an
 | Open Source | Snowplow BDP |
 | --- | --- |
 | ✔️ | ✔️ |
-| [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/elastic/) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
+| [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/elastic/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ## Indicative (AWS only)
 
@@ -24,7 +24,7 @@ The Indicative relay reads Snowplow enriched events from a Kinesis Stream and tr
 | Open Source | Snowplow BDP |
 | --- | --- |
 | ✔️ | ✔️ |
-| [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/indicative/) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
+| [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/indicative/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ## Azure Event Hubs
 
@@ -44,4 +44,4 @@ Kafka Relaying of Enriched JSON is available to Snowplow BDP customers. Open Sou
 | Open Source | Snowplow BDP |
 | --- | --- |
 | ❗(Partial) | ✔️ |
-| [Collector Setup](/docs/pipeline-components-and-applications/stream-collector/setup/) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
+| [Collector Setup](/docs/pipeline-components-and-applications/stream-collector/setup/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |

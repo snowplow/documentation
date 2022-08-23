@@ -98,7 +98,7 @@ If `bufferCapacity` is provided at the same time as `eventStore`, the `bufferCap
 
 We currently offer two different HTTP clients that can be used to send events to your collector: OkHttp or Apache HTTP. Both libraries have broadly the same features, with some differences in their default configurations. If neither of these HTTP clients is suitable, we also provide an `HttpClientAdapter` interface. The `HttpClientAdapter` is a wrapper for HTTP client objects.
 
-Note for Gradle users: [different dependencies](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/) are required if you are using OkHttp or Apache HTTP.
+Note for Gradle users: [different dependencies](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) are required if you are using OkHttp or Apache HTTP.
 
 By default, the Java tracker uses OkHttp; an `OkHttpClientAdapter` object is generated when a `BatchEmitter` is created. To specify a different client adapter, initialize the `BatchEmitter` like this:
 

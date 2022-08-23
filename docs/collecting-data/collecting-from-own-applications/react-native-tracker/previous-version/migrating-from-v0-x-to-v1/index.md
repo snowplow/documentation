@@ -4,15 +4,15 @@ date: "2021-08-09"
 sidebar_position: 10
 ---
 
-This sections describes the differences between v0.2.0 and [v1.0.0](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/) of the Snowplow React Native Tracker and the steps needed to upgrade, which is also recommended.
+This sections describes the differences between v0.2.0 and [v1.0.0](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md) of the Snowplow React Native Tracker and the steps needed to upgrade, which is also recommended.
 
 The v1 introduces a new API for initializing and configuring a tracker, which is a breaking change from v0. There are also few more changes to consider, for which you will find a dedicated section below.
 
-In the following sections we assume a starting version of 0.2.0. If you have instrumented a tracker version prior to v0.2.0, you can begin from the [React Native Tracker v0 reference](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/previous-version/react-native-tracker-v0-reference/) page first.
+In the following sections we assume a starting version of 0.2.0. If you have instrumented a tracker version prior to v0.2.0, you can begin from the [React Native Tracker v0 reference](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/previous-version/react-native-tracker-v0-reference/index.md) page first.
 
 ## Tracker initialization
 
-In the v1 of the React Native Tracker, a tracker is configured with a set of configuration objects, about which you can find detailed information [here](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/introduction/).
+In the v1 of the React Native Tracker, a tracker is configured with a set of configuration objects, about which you can find detailed information [here](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/introduction/index.md).
 
 The `createTracker` function now accepts 3 arguments:
 
@@ -95,7 +95,7 @@ const tracker = createTracker(
 
 ### Initialization options
 
-The tracker initialization options in v0.2.0 are fairly limited compared to the ones [available for v1](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/quick-start-guide/#instrumentation).
+The tracker initialization options in v0.2.0 are fairly limited compared to the ones [available for v1](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/quick-start-guide/index.md#instrumentation).
 
 The following example depicts how to map the configuration options of v0.2.0 to v1 configuration.
 
@@ -225,7 +225,7 @@ The changes to v0.2.0 PageViewEvent properties are:
 
 ## Setting the subject
 
-In v1.0.0, setting the subject can be done both when configuring the tracker (through the [SubjectConfiguration](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/introduction/#subjectconfiguration) object) and at runtime ([using the `set..` tracker methods](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/#setting-the-subject-data)), so the exact migration steps depend on the specifics of your app.
+In v1.0.0, setting the subject can be done both when configuring the tracker (through the [SubjectConfiguration](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/introduction/index.md#subjectconfiguration) object) and at runtime ([using the `set..` tracker methods](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/index.md#setting-the-subject-data)), so the exact migration steps depend on the specifics of your app.
 
 A notable difference between the SubjectConfiguration properties of v1.0.0 from the `SubjectData` properties of v0.2.0 is the way to set screen dimensions either for the screen resolution or for the screen viewport.
 

@@ -4,7 +4,7 @@ date: "2021-03-26"
 sidebar_position: 1000
 ---
 
-For more information on the architecture of the Iglu server, please read [the technical documentation](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/).
+For more information on the architecture of the Iglu server, please read [the technical documentation](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md).
 
 ## Available on Terraform Registry
 
@@ -49,7 +49,7 @@ Here is an example of a minimal configuration file:
 }
 ```
 
-See [the configuration reference](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/reference/) for a complete description of all parameters.
+See [the configuration reference](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/reference/index.md) for a complete description of all parameters.
 
 We also provide a [docker-compose.yml](https://github.com/snowplow-incubator/iglu-server/blob/master/docker/docker-compose.yml) to help you get started.
 
@@ -116,7 +116,7 @@ curl \
   -d 'key=some-uuid'
 ```
 
-You should now be all set up to use the Iglu server, if you would like to know more about the Iglu server, please read the [technical documentation](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/).
+You should now be all set up to use the Iglu server, if you would like to know more about the Iglu server, please read the [technical documentation](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md).
 
 ## [](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-Server#dummy-mode)Dummy mode
 

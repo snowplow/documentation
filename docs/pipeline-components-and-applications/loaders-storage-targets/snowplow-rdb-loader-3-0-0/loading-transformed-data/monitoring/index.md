@@ -6,7 +6,7 @@ sidebar_position: 400
 
 The loader app has several types of monitoring built in to help the pipeline operator: folder monitoring, warehouse health checks, StatsD metrics, Sentry alerts, and Snowplow tracking.
 
-For all monitoring configuration options, see the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/loading-transformed-data/rdb-loader-configuration-reference/).
+For all monitoring configuration options, see the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/loading-transformed-data/rdb-loader-configuration-reference/index.md).
 
 ## Webhook alerts
 

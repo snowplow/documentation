@@ -4,7 +4,7 @@ date: "2021-04-07"
 sidebar_position: 2000
 ---
 
-Assuming you have completed the [Node.js Tracker Setup](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/node-js-tracker-v3/setup/) for your project, you are now ready to initialize the Tracker.
+Assuming you have completed the [Node.js Tracker Setup](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/node-js-tracker-v3/setup/index.md) for your project, you are now ready to initialize the Tracker.
 
 Require the Node.js Tracker module into your code like so:
 
@@ -24,7 +24,7 @@ import { tracker, gotEmitter } from 'snowplow-tracker';
 
 First, initialize an emitter instance. The Snowplow Node.js Tracker is bundled with an emitter based on the [`got`](https://github.com/sindresorhus/got) library. This emitter will be responsible for how and when events are sent to Snowplow.
 
-`got` only works on Node.js applications and does not have browser support, if the `got` library isn't suitable for your project you can [create your own emitter as described below](#create-your-own-emitter). If you want to track users in the browser, you should use the [@snowplow/browser-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/) package.
+`got` only works on Node.js applications and does not have browser support, if the `got` library isn't suitable for your project you can [create your own emitter as described below](#create-your-own-emitter). If you want to track users in the browser, you should use the [@snowplow/browser-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/index.md) package.
 
 A simple set up of this emitter might look like:
 
@@ -83,7 +83,7 @@ The `tracker` function takes four parameters:
 
 The `gotEmitter` is built against a standard `Emitter` interface which means if `got` isn't suitable for your project then you can create your own `Emitter`.
 
-As an example where this might be useful, as `got` only works in Node.js applications if you wanted to track on a browser based application and you have already considered the [@snowplow/browser-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/) package, then you can build your own Emitter - two libraries which might be appropriate are `[ky](https://github.com/sindresorhus/ky)` (built by the same team as `got`) or `[axios](https://github.com/axios/axios)`.
+As an example where this might be useful, as `got` only works in Node.js applications if you wanted to track on a browser based application and you have already considered the [@snowplow/browser-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/index.md) package, then you can build your own Emitter - two libraries which might be appropriate are `[ky](https://github.com/sindresorhus/ky)` (built by the same team as `got`) or `[axios](https://github.com/axios/axios)`.
 
 Emitters must conform to an [`Emitter` interface](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/trackers/node-tracker/docs/markdown/node-tracker.emitter.md), which looks like:
 

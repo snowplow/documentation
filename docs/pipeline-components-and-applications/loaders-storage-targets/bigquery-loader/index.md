@@ -181,7 +181,7 @@ $ docker run \
     -Dconfig.override_with_env_vars=true
 ```
 
-See the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/snowplow-bigquery-loader-configuration-reference/) for more details and advanced settings.
+See the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/snowplow-bigquery-loader-configuration-reference/index.md) for more details and advanced settings.
 
 ### Command line options
 

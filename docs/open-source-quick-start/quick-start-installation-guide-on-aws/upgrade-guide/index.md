@@ -95,4 +95,4 @@ At this stage, you should see the changes that will be made to your infrastructu
 terraform apply
 ```
 
-**Have more questions? Take a look at our [Quick Start FAQs](/docs/open-source-quick-start/quick-start-faqs/) or reach out to us on [discourse](https://discourse.snowplowanalytics.com/)!**
+**Have more questions? Take a look at our [Quick Start FAQs](/docs/open-source-quick-start/quick-start-faqs/index.md) or reach out to us on [discourse](https://discourse.snowplowanalytics.com/)!**

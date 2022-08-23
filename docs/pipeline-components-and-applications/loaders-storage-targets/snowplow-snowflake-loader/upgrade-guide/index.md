@@ -32,8 +32,8 @@ To upgrade Loader from 0.6.x to 0.7.x,
 
 - Drop existing stage at Snowflake
     - Re-creating stage is required to use storage integration
-- Follow [the setup page](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/setup/) and create storage integration
+- Follow [the setup page](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/setup/index.md) and create storage integration
 - Create an external stage per [Snowflake docs](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#step-6-create-an-external-stage) step 6.
-- Follow [the configuration page](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/configuration/) and update loader configuration
+- Follow [the configuration page](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/configuration/index.md) and update loader configuration
 
 The setup page explicitly excludes step 6 for users running the loader for the first time, since loader's `setup` subcommand creates the stage compatible with the storage integration mechanism, along with other required entities. However, we assume that upgrading users have setup their loader previously where stage was created using IAM credentials, hence the need to re-create it.

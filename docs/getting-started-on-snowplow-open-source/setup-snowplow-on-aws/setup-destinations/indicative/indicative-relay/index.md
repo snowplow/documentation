@@ -74,7 +74,7 @@ To find the name of the bucket for your region, consult this table:
     - **3.1 Setting up the API key**: In the first row, first column (the key) type `INDICATIVE_API_KEY`. In the second column (the value) paste your API Key obtained in the beginning of this guide.
     - **3.2 Setting up filters**: The relay lets you configure the following filters:
         - UNUSED\_EVENTS: events that will not be relayed to Indicative;
-        - UNUSED\_ATOMIC\_FIELDS: fields of the [canonical](/docs/understanding-your-pipeline/canonical-event/) Snowplow event that will not be relayed to Indicative;
+        - UNUSED\_ATOMIC\_FIELDS: fields of the [canonical](/docs/understanding-your-pipeline/canonical-event/index.md) Snowplow event that will not be relayed to Indicative;
         - UNUSED\_CONTEXTS: contexts whose fields will not be relayed to Indicative.
 
 Out of the box, the relay is configured to use the following defaults:
@@ -157,7 +157,7 @@ If you only specify the environment variable name but do not provide a list of v
 If you do not set any of the environment variables, the defaults will be used.
 
 - **3.3. Setting up the Indicative API URI**: By default, the relay uses the standard URI. To change that, you can set the `INDICATIVE_URI` environment variable.
-- **3.4. Setting up the field whose value should be used as the event name for `struct` events**: In Snowplow's canonical event model, there's a legacy type of custom structured event, which is known as a `struct` or ['structured event'](/docs/understanding-your-pipeline/canonical-event/#Custom_structured_events). These are still fairly popular with users, however the value of the `event_name` field for those events (which is simply `event`) can be confusing. To help group similar events, Snowplow users often designate one of their special fields (most commonly `se_action`) to be the 'event name field'. Since version 0.5.0 by default `se_action` is used as the event name field for structured events. But you can override that by setting the Lambda environment variable `STRUCTURED_EVENT_NAME_FIELD` to the field whose value you'd rather use, eg `se_category`.
+- **3.4. Setting up the field whose value should be used as the event name for `struct` events**: In Snowplow's canonical event model, there's a legacy type of custom structured event, which is known as a `struct` or ['structured event'](/docs/understanding-your-pipeline/canonical-event/index.md#Custom_structured_events). These are still fairly popular with users, however the value of the `event_name` field for those events (which is simply `event`) can be confusing. To help group similar events, Snowplow users often designate one of their special fields (most commonly `se_action`) to be the 'event name field'. Since version 0.5.0 by default `se_action` is used as the event name field for structured events. But you can override that by setting the Lambda environment variable `STRUCTURED_EVENT_NAME_FIELD` to the field whose value you'd rather use, eg `se_category`.
 
 4. Scroll down a bit and take a look at the _Basic settings_ box. There you can set memory and timeout limits for the Lambda. We recommend setting 256 MB of memory or higher (on AWS Lambda the CPU performance scales linearly with the amount of memory). The timeout should be set quite high - we recommend one and half minute - because of so-called _JVM cold starts_. The cold starts happen when the Lambda function is invoked for the first time on a new instance and it can take a significant amount of time.
 

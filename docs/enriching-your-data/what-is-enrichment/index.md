@@ -73,16 +73,16 @@ Finally, contexts, unstructured events and the relevant configurable enrichments
 
 ### [](https://github.com/snowplow/snowplow/wiki/The-enrichment-process#configurable-enrichment)Configurable enrichment
 
-All configurable enrichments are listed on the [Available Enrichments](/docs/enriching-your-data/available-enrichments/) page.
+All configurable enrichments are listed on the [Available Enrichments](/docs/enriching-your-data/available-enrichments/index.md) page.
 
 The following configurable enrichments write data into `atomic.events` table (legacy enrichments):
 
-- [IP anonymization enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/)
-- [IP lookups enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/)
-- [Campaign attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/)
-- [Currency conversion enrichment](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/)
-- [referer-parser enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/)
-- [Event fingerprint enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/)
+- [IP anonymization enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md)
+- [IP lookups enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md)
+- [Campaign attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md)
+- [Currency conversion enrichment](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/index.md)
+- [referer-parser enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)
+- [Event fingerprint enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md)
 
 All other configurable enrichments create a separate context and thus are loaded into their own dedicated tables.
 

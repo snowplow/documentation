@@ -25,7 +25,7 @@ To setup your cloud environment as required you will need
 - to know which AWS region you’d like us to install your Snowplow pipeline into
 - to know whether or not you want VPC peering, and for which /21 or /22 CIDR range (note: [VPC peering is an additional bolt-on for basecamp and ascent tiers](this is a bolt-on for basecamp / ascent tiers))
 
-We often find our point of contact requires support from their DevOps or Networking colleagues to complete the cloud setup step; in Snowplow BDP Console you can [easily create accounts for colleagues](/docs/using-the-snowplow-console/managing-users/) who can complete this step for you.
+We often find our point of contact requires support from their DevOps or Networking colleagues to complete the cloud setup step; in Snowplow BDP Console you can [easily create accounts for colleagues](/docs/using-the-snowplow-console/managing-users/index.md) who can complete this step for you.
 
 ## Preparing your AWS sub-account
 

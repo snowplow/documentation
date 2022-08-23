@@ -66,7 +66,7 @@ The user which the Tracker will track. This should be an instance of the Subjec
 
 \*\*_**New in v0.9.0**_
 
-Since version 0.9.0, you can also set a different subject per event instead of having to change the default subject. You can read more about it in the Subject documentation [here](/docs/collecting-data/collecting-from-own-applications/python-tracker/adding-extra-data-the-subject-class/).
+Since version 0.9.0, you can also set a different subject per event instead of having to change the default subject. You can read more about it in the Subject documentation [here](/docs/collecting-data/collecting-from-own-applications/python-tracker/adding-extra-data-the-subject-class/index.md).
 
 #### `namespace`
 

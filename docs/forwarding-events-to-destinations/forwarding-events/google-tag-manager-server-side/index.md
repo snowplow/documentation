@@ -28,7 +28,7 @@ Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS a
 | Open Source | Snowplow BDP |
 | --- | --- |
 | ❗ (See documentation) | ✔️ |
-| [Documentation](/docs/forwarding-events-to-destinations/supporting-additional-destinations/google-tag-manager-server-side/building-an-enriched-event-relay-for-gtm-ss/) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
+| [Documentation](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/building-an-enriched-event-relay-for-gtm-ss/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ### Server Side Tag Manager (Pre-pipeline)
 

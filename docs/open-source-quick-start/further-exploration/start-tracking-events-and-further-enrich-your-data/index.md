@@ -10,23 +10,23 @@ In this section, you will add tracking to your own application, as well as learn
 
 **Web tracking**
 
-- See our quick start guide for adding the [Javascript tracker to your application](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/), and how to [self host it](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/)
-- Alternatively you can embed the [Browser tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/) directly into your application
+- See our quick start guide for adding the [Javascript tracker to your application](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md), and how to [self host it](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/index.md)
+- Alternatively you can embed the [Browser tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/index.md) directly into your application
 
 You will track a large number of standard web events out-of-the-box with Snowplow. Implementing the Javascript tracker, for example, will enable you to start tracking the following events:
 
-- [Page views](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#page-views)
-- [Page pings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#activity-tracking-page-pings)
-- [Link clicks](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#link-click-tracking)
-- [Form interactions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#form-tracking)
-- [Transactions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#ecommerce-tracking)
-- [Search](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#tracksitesearch)
+- [Page views](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#page-views)
+- [Page pings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#activity-tracking-page-pings)
+- [Link clicks](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#link-click-tracking)
+- [Form interactions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#form-tracking)
+- [Transactions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#ecommerce-tracking)
+- [Search](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#tracksitesearch)
 
 **Mobile tracking**
 
-- Please see our quick start guide for the Snowplow [iOS and Android tracker](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v2-0/quick-start-guide/)
+- Please see our quick start guide for the Snowplow [iOS and Android tracker](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/quick-start-guide/index.md)
 
-You can find our [full list of our SDKs here](/docs/collecting-data/collecting-from-own-applications/) (including our server side trackers, and 3rd party webhooks)
+You can find our [full list of our SDKs here](/docs/collecting-data/collecting-from-own-applications/index.md) (including our server side trackers, and 3rd party webhooks)
 
 **SSL certificate**
 
@@ -44,7 +44,7 @@ Custom events & entities allow you to track & collect events that better reflect
 
 Schemas
 
-Learn more [why schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/) are a powerful feature of Snowplow, and about [the anatomy of a schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/#the-anatomy-of-a-schema) here.
+Learn more [why schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) are a powerful feature of Snowplow, and about [the anatomy of a schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md#the-anatomy-of-a-schema) here.
 
 - First create the schema for the event
     - The below is an example - you can create your own schema or edit this schema to better suit your needs
@@ -81,10 +81,10 @@ Learn more [why schemas](/docs/understanding-tracking-design/understanding-schem
     - /`schemas/com.snowplowanalytics/button_click/jsonschema/1-0-0`
     - Note: If you update the `vendor` string in the example, you should update the above path too.
 - Upload your schema to your Iglu registry that you created when setting up your pipeline
-    - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl/) if you haven't already
+    - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) if you haven't already
     - To upload your schemas on localhost to the Iglu Server, use the following command:
         - `igluctl static push --public <local path to schemas/> <Iglu server endpoint> <iglu_super_api_key>`
-        - You can find more information on the [Igluctl docs page](/docs/pipeline-components-and-applications/iglu/igluctl/igluctl-0-7-2/#static-push)
+        - You can find more information on the [Igluctl docs page](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static-push)
 - To send an event using this schema you'll want to track a Self Describing Event. Here is an example of how to do so with the JavaScript Tracker:
 
 ```
@@ -104,7 +104,7 @@ Once you've sent this event at least once, you can take a look at this event in 
 
 You can join back to atomic.events using `root_id = event_id`.
 
-##### Next, learn how to further [enrich your data](/docs/open-source-quick-start/further-exploration/further-enrich-or-transform-your-data/) >>
+##### Next, learn how to further [enrich your data](/docs/open-source-quick-start/further-exploration/further-enrich-or-transform-your-data/index.md) >>
 
 * * *
 

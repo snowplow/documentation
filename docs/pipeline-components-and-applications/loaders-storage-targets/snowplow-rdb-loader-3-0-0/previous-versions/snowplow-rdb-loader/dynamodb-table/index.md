@@ -4,11 +4,11 @@ date: "2021-03-26"
 sidebar_position: 30
 ---
 
-In order to perform [deduplication](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/event-deduplication/) in the RDB shredder, a dynamoDB table is needed to store the event manifest.
+In order to perform [deduplication](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md) in the RDB shredder, a dynamoDB table is needed to store the event manifest.
 
 ## 1\. Creating Amazon DynamoDB table
 
-If [Relational Database Shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/rdb-shredder/) doesn't find a specified table - it will try to create it with default provisioned throughput, which might be not sufficient. This step is optional, but recommended.
+If [Relational Database Shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md) doesn't find a specified table - it will try to create it with default provisioned throughput, which might be not sufficient. This step is optional, but recommended.
 
 The table name can be anything, but must be unique.
 

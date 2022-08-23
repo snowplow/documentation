@@ -4,7 +4,7 @@ date: "2020-02-25"
 sidebar_position: 20
 ---
 
-Assuming you have completed the [Actionscript 3 Tracker Setup](/docs/collecting-data/collecting-from-own-applications/actionscript3-tracker/setup/) for your project, you are now ready to initialize the AS3 Tracker.
+Assuming you have completed the [Actionscript 3 Tracker Setup](/docs/collecting-data/collecting-from-own-applications/actionscript3-tracker/setup/index.md) for your project, you are now ready to initialize the AS3 Tracker.
 
 ### Importing the module
 

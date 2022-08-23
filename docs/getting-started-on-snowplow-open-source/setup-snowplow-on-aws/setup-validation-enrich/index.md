@@ -17,7 +17,7 @@ This guide covers how to setup Stream Enrich.
 
 ## Install, configure and run Stream Enrich
 
-The [Stream Enrich reference](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/) describes how to install, run, and configure the application.
+The [Stream Enrich reference](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) describes how to install, run, and configure the application.
 
 ## Add any desired Enrichments
 
@@ -27,12 +27,12 @@ import Block1303 from "@site/docs/reusable/untitled-reusable-block-20/_index.md"
 <Block1303/>
 ```
 
-Each enrichment is enabled by configuring a JSON config file (one per enrichment), loading these into DynamoDB and then passing the location of the configs in DynamoDB to stream enrich on running it using the `--enrichments` [argument as documented](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/run-stream-enrich/).
+Each enrichment is enabled by configuring a JSON config file (one per enrichment), loading these into DynamoDB and then passing the location of the configs in DynamoDB to stream enrich on running it using the `--enrichments` [argument as documented](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/configure-stream-enrich/index.md).
 
 ## Sink the enriched data to S3 from Kinesis
 
 Now that you have Stream Enrich running, you should have validated, enriched data being output into a Kinesis stream.
 
-The next step is to [setup the Snowplow S3 loader](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/load-data-to-s3/) to sink this data to S3.
+The next step is to [setup the Snowplow S3 loader](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/load-data-to-s3/index.md) to sink this data to S3.
 
-Instructions on how to load the data into other data stores e.g. Redshift, SnowflakeDB and Elastic can be found under [Destinations](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/)
+Instructions on how to load the data into other data stores e.g. Redshift, SnowflakeDB and Elastic can be found under [Destinations](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/index.md)

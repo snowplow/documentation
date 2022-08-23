@@ -144,7 +144,7 @@ Union types will be transformed as most general. In the above example (union of 
 
 ### Other options
 
-If you’re not a Snowplow Platform user, don’t use [Self-describing Schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/) or just don’t want anything Iglu-specific, you can produce raw DDL:
+If you’re not a Snowplow Platform user, don’t use [Self-describing Schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) or just don’t want anything Iglu-specific, you can produce raw DDL:
 
 ```
 $ ./igluctl static generate --raw $INPUT

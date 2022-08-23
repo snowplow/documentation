@@ -47,6 +47,7 @@
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --doc-sidebar-width: 310px !important;
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
 }
 
@@ -82,9 +83,13 @@
   }
 }
 
-@media screen and (min-width: 996px) {
+@media screen and (min-width: 997px) {
   .container {
     padding-left: 64px;
+  }
+
+  nav.menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-Content-styles-module {
+    padding-right: 1rem;
   }
 }
 
@@ -109,11 +114,6 @@
 .navbar__logo {
   width: 150px;
   margin-left: 6px;
-}
-
-.navbar.navbar--fixed-top {
-  margin-top: 6px;
-  margin-bottom: 6px;
 }
 
 .gh-button {

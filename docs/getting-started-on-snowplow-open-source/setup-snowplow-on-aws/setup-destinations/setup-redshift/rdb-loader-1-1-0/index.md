@@ -8,7 +8,7 @@ sidebar_position: -10
 
 Enriched events are loaded from S3 to Redshift by the RDB loader, which is in fact made of 2 applications:
 
-- Shredder: Spark batch job reading enriched events from S3 and writing shredded data to S3. Needs to be orchestrated by an external app (e.g. [dataflow-runner](/docs/pipeline-components-and-applications/dataflow-runner/guide-for-devops/index.md)). When shredder is done, it writes a message to SQS with the details about shredded data on S3. Each execution writes one message to SQS.
+- Shredder: Spark batch job reading enriched events from S3 and writing shredded data to S3. Needs to be orchestrated by an external app (e.g. [dataflow-runner](/docs/pipeline-components-and-applications/dataflow-runner/index.md)). When shredder is done, it writes a message to SQS with the details about shredded data on S3. Each execution writes one message to SQS.
 - Loader: long-running app that consumes details about shredded data from SQS and inserts into Redshift
 
 Upstream of the RDB loader, [S3 loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md) must be setup to write enriched events from Kinesis to S3. It's important to **not** partition when doing so ([these parameters](https://github.com/snowplow/snowplow-s3-loader/blob/1.0.0/examples/config.hocon.sample#L92-L97) must not be set).

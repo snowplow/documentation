@@ -22,7 +22,7 @@ Once you are done, click the **'Validate'** button and we'll validate that your 
 
 Click **'Publish to development environment'** to publish your Data Structure to your development environment. As this is the first version of your data structure it will be created as version `1-0-0`. Click publish again on the modal dialog to confirm the action.
 
-Your new Data Structure will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-changes-to-your-pipeline/index.md).
+Your new Data Structure will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-and-qa-workflows/index.md).
 
 * * *
 
@@ -62,7 +62,7 @@ Once you have version 1-0-0 in Production we then advise against patching as a v
 
 For more information see [Versioning your data structures](/docs/understanding-tracking-design/versioning-your-data-structures/index.md).
 
-Once you have selected the appropriate version, click **'Publish to development environment'** and your edits will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-changes-to-your-pipeline/index.md).
+Once you have selected the appropriate version, click **'Publish to development environment'** and your edits will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-and-qa-workflows/index.md).
 
 You can identify Data Structures where the Development version is ahead of the Production version by the yellow background on the version number. In this example both `user` and `alert` have been edited on development.
 

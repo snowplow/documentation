@@ -8,13 +8,14 @@ The Snowplow team works with the open source community to deliver Snowplow, the 
 
 ## Contributing to Snowplow
 
-Snowplow is open source software - we welcome contributors! Some things you might like to help out with:
+Snowplow is open source software — we welcome contributors! Some things you might like to help out with:
 
+- This documentation!
 - Feature development
 - Feature improvement
 - Bugfixes
-- [Creating a new tracker](/docs/contributing/tracker-specification-for-contribution/index.md)
-- [Creating a new webhook](/docs/contributing/webhook-specification-for-contribution/index.md)
+- Creating a new tracker
+- Creating a new webhook
 
 We'd like to extend a huge thanks to everyone who has contributed patches, new code or provided helpful suggestions over the years.
 

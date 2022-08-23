@@ -27,7 +27,7 @@ import Block1303 from "@site/docs/reusable/untitled-reusable-block-20/_index.md"
 <Block1303/>
 ```
 
-Each enrichment is enabled by configuring a JSON config file (one per enrichment), loading these into DynamoDB and then passing the location of the configs in DynamoDB to stream enrich on running it using the `--enrichments` [argument as documented](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/run-stream-enrich/index.md).
+Each enrichment is enabled by configuring a JSON config file (one per enrichment), loading these into DynamoDB and then passing the location of the configs in DynamoDB to stream enrich on running it using the `--enrichments` [argument as documented](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/configure-stream-enrich/index.md).
 
 ## Sink the enriched data to S3 from Kinesis
 

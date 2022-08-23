@@ -31,7 +31,7 @@ For further information on Iglu Central, consult the [Iglu Central setup guide]
 
 ### Hosting a Static Repository based mirror
 
-Iglu Central is built on top of the Iglu static repo server, so the first step is to [setup a static repo](/docs/pipeline-components-and-applications/iglu/setting-up-iglu/step-2-setup-an-iglu-repository/2-1-a-static-repo/index.md). You can give your copy of Iglu Central a name like:
+Iglu Central is built on top of the Iglu static repo server, so the first step is to [setup a static repo](/docs/pipeline-components-and-applications/iglu/iglu-repositories/static-repo/index.md). You can give your copy of Iglu Central a name like:
 
 ```
 http://iglucentral.acme.com

@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   // reset this back to throw, set to warn so that site builds
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
   trailingSlash: false,
   organizationName: 'snowplow',

@@ -155,7 +155,7 @@ This mode will no longer track any user identifiers or session information. Simi
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled.
 
-Anonymous tracking can be toggled on and off. The methods to control this behaviour are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/general-parameters/other-parameters-2/index.md#Toggling_Anonymous_Tracking_2150).
+Anonymous tracking can be toggled on and off. The methods to control this behaviour are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracker-setup/additional-options/index.md).
 
 ##### Full Anonymous/Cookieless Tracking (2.17.0+)
 
@@ -169,7 +169,7 @@ This mode will no longer track any user identifiers or session information, and 
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled. However for an experience that doesn't use any browser storage (cookieless), set `stateStorageStrategy` to `none`. This can be later toggled on, once a user accepts a cookie policy.
 
-Anonymous tracking can be toggled on and off. The methods to control this behaviour are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/general-parameters/other-parameters-2/index.md#Toggling_Anonymous_Tracking_2150).
+Anonymous tracking can be toggled on and off. The methods to control this behaviour are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracker-setup/additional-options/index.md).
 
 ##### Anonymous Session Tracking
 

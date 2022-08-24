@@ -93,6 +93,16 @@ const config = {
       },
       footer: {
         style: 'dark',
+        links: [
+          {
+            label: 'Change cookie settings',
+            href: '/cookie-settings',
+          },
+          {
+            label: 'Terms and conditions',
+            href: '/terms-and-conditions',
+          },
+        ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
       prism: {

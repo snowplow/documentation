@@ -1,0 +1,170 @@
+---
+title: "Cookie Settings"
+date: "2022-01-25"
+---
+
+# Cookie settings
+
+### About this cookie policy.
+
+This Cookie Policy explains what cookies are and how we use them. You should read this policy to understand what cookies are, how we use them, the types of cookies we use i.e, the information we collect using cookies and how that information is used and how to control the cookie preferences. For further information on how we use, store and keep your personal data secure, see our Privacy Policy.
+
+You can at any time change or withdraw your consent from the Cookie Declaration on our website. Learn more about who we are, how you can contact us and how we process personal data in our Privacy Policy. Your consent applies to the following domains: docs.snowplowanalytics.com
+
+### What are cookies ?
+
+Cookies are small text files that are used to store small pieces of information. The cookies are stored on your device when the website is loaded on your browser. These cookies help us make the website function properly, make the website more secure, provide better user experience, and understand how the website performs and to analyze what works and where it needs improvement.
+
+### How do we use cookies ?
+
+As most of the online services, our website uses cookies first-party and third-party cookies for a number of purposes. The first-party cookies are mostly necessary for the website to function the right way, and they do not collect any of your personally identifiable data.
+
+The third-party cookies used on our websites are used mainly for understanding how the website performs, how you interact with our website, keeping our services secure, providing advertisements that are relevant to you, and all in all providing you with a better and improved user experience and help speed up your future interactions with our website.
+
+The below list details the cookies used in our website.
+<table>
+<thead>
+<tr>
+<th scope="col">Cookie</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th colspan="2">Necessary</th>
+</tr>
+<tr>
+<td>PHPSESSID</td>
+<td>This cookie is native to PHP applications. The cookie is used to store and identify a users' unique session ID for the purpose of managing user session on the website. The cookie is a session cookies and is deleted when all the browser windows are closed.</td>
+</tr>
+<tr>
+<td>cookielawinfo-checkbox-advertisement</td>
+<td>Set by the GDPR Cookie Consent plugin, this cookie is used to record the user consent for the cookies in the "Advertisement" category .</td>
+</tr>
+<tr>
+<td>JSESSIONID</td>
+<td>The JSESSIONID cookie is used by New Relic to store a session identifier so that New Relic can monitor session counts for an application.</td>
+</tr>
+<tr>
+<td>viewed_cookie_policy</td>
+<td>The cookie is set by the GDPR Cookie Consent plugin and is used to store whether or not user has consented to the use of cookies. It does not store any personal data.</td>
+</tr>
+<tr>
+<td>cookielawinfo-checkbox-necessary</td>
+<td>This cookie is set by GDPR Cookie Consent plugin. The cookies is used to store the user consent for the cookies in the category "Necessary".</td>
+</tr>
+<tr>
+<td>cookielawinfo-checkbox-functional</td>
+<td>The cookie is set by GDPR cookie consent to record the user consent for the cookies in the category "Functional".</td>
+</tr>
+<tr>
+<td>cookielawinfo-checkbox-performance</td>
+<td>This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Performance".</td>
+</tr>
+<tr>
+<td>cookielawinfo-checkbox-analytics</td>
+<td>This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Analytics".</td>
+</tr>
+<tr>
+<td>cookielawinfo-checkbox-others</td>
+<td>This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Other.</td>
+</tr>
+<tr>
+<th colspan="2">Analytics</th>
+</tr>
+<tr>
+<td>_ga</td>
+<td>The _ga cookie, installed by Google Analytics, calculates visitor, session and campaign data and also keeps track of site usage for the site's analytics report. The cookie stores information anonymously and assigns a randomly generated number to recognize unique visitors.</td>
+</tr>
+<tr>
+<td>_gid</td>
+<td>Installed by Google Analytics, _gid cookie stores information on how visitors use a website, while also creating an analytics report of the website's performance. Some of the data that are collected include the number of visitors, their source, and the pages they visit anonymously.</td>
+</tr>
+<tr>
+<td>_gat_gtag_UA_159566509_1</td>
+<td>Set by Google to distinguish users.</td>
+</tr>
+<tr>
+<td>pardot</td>
+<td>The pardot cookie is set while the visitor is logged in as a Pardot user. The cookie indicates an active session and is not used for tracking.</td>
+</tr>
+<tr>
+<td>tk_ai</td>
+<td>JetPack sets this cookie to store a randomly-generated anonymous ID which is used only within the admin area and for general analytics tracking.</td>
+</tr>
+<tr>
+<td>_gh_sess</td>
+<td>GitHub sets this cookie for temporary application and framework state between pages like what step the user is on in a multiple step form.</td>
+</tr>
+<tr>
+<td>tk_tc</td>
+<td>JetPack sets this cookie to record details on how user's use the website.</td>
+</tr>
+<tr>
+<th colspan="2">Advertisement</th>
+</tr>
+<tr>
+<td>sp</td>
+<td>This cookie is set by the host c.jabmo.app. This cookie is used to serve the content based on user interest and improve content creation.</td>
+</tr>
+<tr>
+<td>driftt_aid</td>
+<td>The driftt_aid cookie is an anonymous identifier token set by Drift.com for tracking purposes and helps to tie the visitor onto the website. The cookie also allows Drift to remember the information provided by the site visitor, through the chat on successive site visits.</td>
+</tr>
+<tr>
+<th colspan="2">Others</th>
+</tr>
+<tr>
+<td>_sp5_ses.e3cb</td>
+<td>No description available.</td>
+</tr>
+<tr>
+<td>_sp5_id.e3cb</td>
+<td>No description available.</td>
+</tr>
+<tr>
+<td>_sp_gtm_ses.e3cb</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>_sp_gtm_id.e3cb</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>drift_campaign_refresh</td>
+<td>No description available.</td>
+</tr>
+<tr>
+<td>visitor_id571483</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>visitor_id571483-hash</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>lpv571483</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>drift_aid</td>
+<td>No description</td>
+</tr>
+<tr>
+<td>_octo</td>
+<td>No description available.</td>
+</tr>
+<tr>
+<td>logged_in</td>
+<td>No description available.</td>
+</tr>
+</tbody>
+</table>
+
+### How can I control the cookie preferences ?
+
+You can manage your cookies preferences by clicking on the "Settings" button and enabling or disabling the cookie categories on the popup according to your preferences.
+
+Should you decide to change your preferences later through your browsing session, you can click on the "Privacy & Cookie Policy" tab on your screen. This will display the consent notice again enabling you to change your preferences or withdraw your consent entirely.
+
+In addition to this, different browsers provide different methods to block and delete cookies used by websites. You can change the settings of your browser to block/delete the cookies. To find out more out more on how to manage and delete cookies, visit wikipedia.org, www.allaboutcookies.org.

@@ -161,8 +161,9 @@ p {
   line-height: 24px;
 }
 
-.gh-button:active, .gh-button:hover, .gh-button:focus {
-  color: #412476;
+.snwpl-nav-button:active, .snwpl-nav-button:hover, .snwpl-nav-button:focus {
+  text-decoration: none;
+  background: #e4dcef;
 }
 
 .toggle_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module {

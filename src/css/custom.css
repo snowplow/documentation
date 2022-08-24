@@ -71,7 +71,7 @@
   text-decoration: none;
 }
 
-[data-theme='dark'] .snwpl-nav-button {
+[data-theme='dark'] .navbar__item.snwpl-nav-button {
   background: var(--ifm-color-primary-light);
   border-color: var(--ifm-color-primary-light);
   color: var(--ifm-font-color-base);
@@ -102,7 +102,7 @@
 }
 
 .navbar__item, .navbar__item:hover {
-  color: #825CC5;
+  color: var(--ifm-color-primary);
 }
 
 .navbar__link:hover {

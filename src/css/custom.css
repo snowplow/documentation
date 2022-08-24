@@ -103,7 +103,10 @@
 
 .navbar__item, .navbar__item:hover {
   color: #825CC5;
-  font-size: 24px;
+}
+
+.navbar__link:hover {
+  text-decoration: underline;
 }
 
 .navbar__items .navbar__item {
@@ -116,12 +119,16 @@
   margin-left: 6px;
 }
 
-.snwpl-nav-button {
+.navbar__item.snwpl-nav-button {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px 16px;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
   gap: 8px;
   background: #F0EBF8;
   width: auto;
@@ -143,17 +150,17 @@
   margin-right: 8px;
 }
 
-.snwpl-nav-link {
+.navbar__item.navbar__link {
   display: flex;
   align-items: center;
   font-size: 14px;
 }
 
-.snwpl-nav-link:not(:last-of-type) {
+.navbar__item.navbar__link:not(:last-of-type) {
   margin-right: 16px;
 }
 
-.snwpl-nav-link__first {
+.nav-link__first {
   margin-left: 20px;
 }
 
@@ -161,8 +168,9 @@ p {
   line-height: 24px;
 }
 
-.gh-button:active, .gh-button:hover, .gh-button:focus {
-  color: #412476;
+.navbar__item.snwpl-nav-button:active, .navbar__item.snwpl-nav-button:hover, .navbar__item.snwpl-nav-button:focus {
+  text-decoration: none;
+  background: #e4dcef;
 }
 
 .toggle_node_modules-\@docusaurus-theme-classic-lib-theme-ColorModeToggle-styles-module {

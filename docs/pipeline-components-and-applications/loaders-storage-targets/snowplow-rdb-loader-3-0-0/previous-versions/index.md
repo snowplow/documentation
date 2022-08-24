@@ -4,4 +4,9 @@ date: "2022-04-05"
 sidebar_position: 30
 ---
 
-For documentation on older RDB Loader versions, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-2xx/).
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
+
+<DocCardList items={useCurrentSidebarCategory().items}/>
+```

@@ -4,7 +4,7 @@ date: "2021-03-26"
 sidebar_position: 5000
 ---
 
-A JVM-embedded repo is an Iglu repository **embedded** inside a Java or Scala application, typically alongside the [Scala client](/docs/modeling-your-data/analytics-sdk/analytics-sdk-scala/).
+A JVM-embedded repo is an Iglu repository **embedded** inside a Java or Scala application, typically alongside the [Scala client](/docs/modeling-your-data/analytics-sdk/analytics-sdk-scala/index.md).
 
 ## [](https://github.com/snowplow/iglu/wiki/JVM-embedded-repo#technical-architecture)Technical architecture
 
@@ -35,7 +35,7 @@ Make the following changes:
 - Leave `jsonschema` as-is (we only support JSON Schemas for now)
 - Replace `1-0-0` with the schema specification of your first JSON Schema
 
-Writing JSON Schemas is out of scope for this setup guide - see [Self-describing-JSONs-and-JSON-Schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/) for details.
+Writing JSON Schemas is out of scope for this setup guide - see [Self-describing-JSONs-and-JSON-Schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) for details.
 
 Done? Now you are ready to embed your files.
 
@@ -53,4 +53,4 @@ myapp/src/main/resources/my-repo/schemas
 
 Finally, update your Iglu client configuration so that it can resolve your new repository.
 
-For details on how to do this, check out the page on [Iglu client configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/). In the case above, the `path` you would specify for your embedded Iglu repository would be simply `/my-repo`.
+For details on how to do this, check out the page on [Iglu client configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md). In the case above, the `path` you would specify for your embedded Iglu repository would be simply `/my-repo`.

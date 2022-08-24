@@ -12,14 +12,14 @@ The snowplow-web dbt package provides a means to run the standard web model via 
 
 #### Requirements
 
-- [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) version 2 or later implemented.
-- Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/#webPage_context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/#webPage_context)).
-- [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#page-views) implemented.
+- [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) version 2 or later implemented.
+- Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/index.md#webPage_context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#webPage_context)).
+- [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#page-views) implemented.
 
 #### Prerequisites
 
 - [dbt](https://github.com/dbt-labs/dbt) must be installed.
-- A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-tracker/) must be available in the database.
+- A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) must be available in the database.
 
 #### Supported Warehouses
 
@@ -48,9 +48,9 @@ vars:
 
 The web package has the option to join in data from the following 3 Snowplow enrichments:
 
-- [IAB enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/)
-- [UA Parser enrichment](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/)
-- [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/)
+- [IAB enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md)
+- [UA Parser enrichment](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
+- [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md)
 
 By default these are **all disabled** in the web package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 
@@ -79,7 +79,7 @@ vars:
 
 ##### 4 - Verify page ping variables
 
-The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](https://snowplow.github.io/dbt-snowplow-web/(/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
+The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](https://snowplow.github.io/dbt-snowplow-web/(/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
 
 ```
 # dbt_project.yml

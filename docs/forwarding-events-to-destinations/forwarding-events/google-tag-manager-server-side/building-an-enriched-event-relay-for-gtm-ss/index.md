@@ -8,15 +8,15 @@ This documentation is for Open Source pipeline installations which want to explo
 
 **Snowplow BDP** customers have access to relay functionality which can forward enriched events to a GTM SS container. **Open Source pipelines** will require a relay to be built which can forward enriched events from a Snowplow pipeline.
 
-To understand the fundamentals that are discussed here, please read the [Custom Integrations documentation](/docs/forwarding-events-to-destinations/supporting-additional-destinations/custom-integrations/).
+To understand the fundamentals that are discussed here, please read the [Custom Integrations documentation](/docs/forwarding-events-to-destinations/forwarding-events/custom-integrations/index.md).
 
 ## GTM SS Snowplow Client as Enriched Destination
 
-The GTM SS Snowplow Client has an enriched endpoint which accepts enriched events in JSON. Before sending events from the Snowplow Enriched Stream, these events should be converted from Enriched TSV events into Enriched JSON using a [Snowplow Analytics SDK](/docs/modeling-your-data/analytics-sdk/).
+The GTM SS Snowplow Client has an enriched endpoint which accepts enriched events in JSON. Before sending events from the Snowplow Enriched Stream, these events should be converted from Enriched TSV events into Enriched JSON using a [Snowplow Analytics SDK](/docs/modeling-your-data/analytics-sdk/index.md).
 
-1. Set up the [Snowplow Client](/docs/forwarding-events-to-destinations/supporting-additional-destinations/google-tag-manager-server-side/snowplow-client-for-gtm-ss/) within your GTM Server Side Container.
-2. Create a [Custom Integration application for AWS or GCP](/docs/forwarding-events-to-destinations/supporting-additional-destinations/custom-integrations/).
-3. Use an [Analytics SDK](/docs/modeling-your-data/analytics-sdk/) to convert to an Enriched JSON.
+1. Set up the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md) within your GTM Server Side Container.
+2. Create a [Custom Integration application for AWS or GCP](/docs/forwarding-events-to-destinations/forwarding-events/custom-integrations/index.md).
+3. Use an [Analytics SDK](/docs/modeling-your-data/analytics-sdk/index.md) to convert to an Enriched JSON.
 4. Send the JSON event as POST request to `https://{{gtm-ss-url}}/com.snowplowanalytics.snowplow/enriched`.
     - The payload can be a single Enriched JSON event, or an array of Enriched JSON events.
 

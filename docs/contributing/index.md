@@ -8,13 +8,14 @@ The Snowplow team works with the open source community to deliver Snowplow, the 
 
 ## Contributing to Snowplow
 
-Snowplow is open source software - we welcome contributors! Some things you might like to help out with:
+Snowplow is open source software — we welcome contributors! Some things you might like to help out with:
 
+- This documentation!
 - Feature development
 - Feature improvement
 - Bugfixes
-- [Creating a new tracker](/docs/contributing/tracker-specification-for-contribution/)
-- [Creating a new webhook](/docs/contributing/webhook-specification-for-contribution/)
+- Creating a new tracker
+- Creating a new webhook
 
 We'd like to extend a huge thanks to everyone who has contributed patches, new code or provided helpful suggestions over the years.
 
@@ -27,7 +28,7 @@ We have two different Contributor License Agreements (CLAs), depending on whethe
 1. [Individual Contributor License Agreement v1.0](https://docs.google.com/forms/d/1J1FNYq9538ndzzcBdlCbxPo1yFiOY4mwalhDTSl1pgg/viewform)
 2. [Software Grant and Corporate Contributor License Agreement v1.0](https://docs.google.com/forms/d/1ZUzz7lQJhs7oZqbkBL1bp0r048hAi7uIN6aLWCyZWWs/viewform)
 
-Please complete and sign the most appropriate CLA for you. For more information, see our dedicated page on our [Contributor License Agreements](/docs/contributing/contributor-license-agreement/).
+Please complete and sign the most appropriate CLA for you. For more information, see our dedicated page on our [Contributor License Agreements](/docs/contributing/contributor-license-agreement/index.md).
 
 ## Join the conversation
 

@@ -6,7 +6,7 @@ sidebar_position: 50
 
 **Warning: This functionality depends on Snowplow JavaScript Tracker v2.6.0 or above**.
 
-Please visit the [technical documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/#Enhanced_Ecommerce_tracking) to see example use of the Enhanced E-commerce functions.
+Please visit the [technical documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#Enhanced_Ecommerce_tracking) to see example use of the Enhanced E-commerce functions.
 
 ### 1\. Overview
 
@@ -14,7 +14,7 @@ This guide will show you how to configure Google Tag Manager to load the Snowplo
 
 We also assume that any ecommerce-related call to `dataLayer.push` which does not contain an "event" field is made before Google Tag Manager loads, as described [here](http://www.simoahava.com/analytics/ecommerce-tips-google-tag-manager/#tip1).
 
-If you are sending very large ecommerce events containing lots of impressions, the size of your events may exceed maximum querystring size for GET requests. In this case we recommend configuring the tracker to use POST instead as described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/).
+If you are sending very large ecommerce events containing lots of impressions, the size of your events may exceed maximum querystring size for GET requests. In this case we recommend configuring the tracker to use POST instead as described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/index.md).
 
 ### 2\. Creating the Data Layer Variable
 
@@ -38,7 +38,7 @@ Whenever ecommerce data is pushed to the data layer, the tag will fire again. It
 
 The example script below will be used as the basis for your tag. There are some changes you should make to this script. In the example "SNOWPLOW\_NAME\_HERE" is used as the name of the Snowplow function. This is the global function used to make API calls to the Snowplow JavaScript Tracker. You should change this string to something unique so that if there is another Snowplow user on the page the namespaces will not collide. Similarly, you should change "MY\_COOKIE\_NAME" to a unique value. You should change "MY\_COLLECTOR" to the URL of your Snowplow collector (minus the http/https scheme), for example "c.mydomain.com".
 
-You can also customize the part of the tag between the comments containing "!!!". The example below creates a tracker instance, sets page pings to fire every 10 seconds, and sends a page view event. See the [JavaScript Tracker page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/) for more information on other tracking methods.
+You can also customize the part of the tag between the comments containing "!!!". The example below creates a tracker instance, sets page pings to fire every 10 seconds, and sends a page view event. See the [JavaScript Tracker page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md) for more information on other tracking methods.
 
 ```javascript
 <script>

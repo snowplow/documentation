@@ -10,7 +10,7 @@ The below defines our principles on how we collect and use telemetry data. _We h
 
 #### Privacy
 
-We do not automatically collect any personally identifiable information other than the IP address of the computer where the terraform is running from. This IP address is subsequently pseudonymised using SHA-256 with the [Snowplow PII pseudonymization enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/).
+We do not automatically collect any personally identifiable information other than the IP address of the computer where the terraform is running from. This IP address is subsequently pseudonymised using SHA-256 with the [Snowplow PII pseudonymization enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md).
 
 The only other data point which could be PII is that which is explicitly provided by the user within the `user_provided_id` field. This field allows us to tie events together across resources so that we are able to get a more complete picture of how the pipeline has been orchestrated.
 

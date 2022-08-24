@@ -30,7 +30,7 @@ let event = ScreenView(name: "DemoScreenName", screenId: UUID())
 tracker.track(event)
 ```
 
-In general, each tracker will have a specific API call for tracking any events that have been defined by the Snowplow team, and you should refer to the [tracker-specific documentation](/docs/collecting-data/collecting-from-own-applications/) to make sure that this is set up correctly.
+In general, each tracker will have a specific API call for tracking any events that have been defined by the Snowplow team, and you should refer to the [tracker-specific documentation](/docs/collecting-data/collecting-from-own-applications/index.md) to make sure that this is set up correctly.
 
 ## [](https://github.com/snowplow/snowplow/wiki/Events-overview#custom-events)Custom events
 
@@ -82,11 +82,11 @@ window.snowplow('trackSelfDescribingEvent', {
 
 Note that with **self-desribing** events, the number of `key: value` pairs can vary and is determined by business model of the entity associated with the event.
 
-Therefore, for Snowplow to be able to validate and extract the data self-describing JSON would have to be sent with the event. By its definition, self-describing JSON includes a [reference to JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/) which has to be in place by the time enrichment process takes place. It allows for maximum customisation of the self describing events.
+Therefore, for Snowplow to be able to validate and extract the data self-describing JSON would have to be sent with the event. By its definition, self-describing JSON includes a [reference to JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) which has to be in place by the time enrichment process takes place. It allows for maximum customisation of the self describing events.
 
 Knowing in advance what the expected structure and format of data should be as a necessity to be able to handle events and contexts.
 
-See [Structuring your data with schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/).
+See [Structuring your data with schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md).
 
 ### Structured events
 

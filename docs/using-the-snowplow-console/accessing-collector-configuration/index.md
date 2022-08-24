@@ -4,7 +4,7 @@ date: "2020-08-10"
 sidebar_position: 20
 ---
 
-Having already set up [collectors in your pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/) and trackers [to submit events](/docs/collecting-data/) to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
+Having already set up [collectors in your pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/index.md) and trackers [to submit events](/docs/collecting-data/index.md) to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
 
 ## Viewing collector configuration in Snowplow BDP Console
 

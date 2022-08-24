@@ -19,9 +19,9 @@ Event classes supported by the Flutter Tracker:
 | `ConsentGranted` | User opting into data collection. |
 | `ConsentWithdrawn` | User withdrawing consent for data collection. |
 
-All the methods share common features and parameters. Every type of event can have an optional context added. See the [next page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/adding-data/) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
+All the methods share common features and parameters. Every type of event can have an optional context added. See the [next page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/adding-data/index.md) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
 
-Snowplow events are all processed into the same format, regardless of the event type (and regardless of the tracker language used). Read about the different properties and fields of events in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/).
+Snowplow events are all processed into the same format, regardless of the event type (and regardless of the tracker language used). Read about the different properties and fields of events in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
 We will first discuss the custom event types, followed by the out-of-the-box event types. Note that you can also design and create your own page view, or screen view, using `selfDescribing`, to fit your business needs better. The out-of-the-box event types are provided so you can get started with generating event data quickly.
 
@@ -36,11 +36,11 @@ This is particularly useful when:
 - You want to track event types which are proprietary/specific to your business
 - You want to track events which have unpredictable or frequently changing properties
 
-A self-describing JSON has two keys, `schema` and `data`. The `schema` value should point to a valid self-describing JSON schema. They are called self-describing because the schema will specify the fields allowed in the data value. Read more about how schemas are used with Snowplow [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/).
+A self-describing JSON has two keys, `schema` and `data`. The `schema` value should point to a valid self-describing JSON schema. They are called self-describing because the schema will specify the fields allowed in the data value. Read more about how schemas are used with Snowplow [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md).
 
 After events have been collected by the event collector, they are validated to ensure that the properties match the self-describing JSONs. Mistakes (e.g. extra fields, or incorrect types) will result in events being processed as Bad Events. This means that only high-quality, valid events arrive in your data storage or real-time stream.
 
-Your schemas must be accessible to your pipeline to allow this validation. We provide [Iglu](/docs/pipeline-components-and-applications/iglu/) for schema management. If you are a paid Snowplow customer, you can manage your schemas through your console. Check out our [Ruby tracker Rails](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) example to see how we included schemas in the Snowplow Micro testing pipeline in that app.
+Your schemas must be accessible to your pipeline to allow this validation. We provide [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) for schema management. If you are a paid Snowplow customer, you can manage your schemas through your console. Check out our [Ruby tracker Rails](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) example to see how we included schemas in the Snowplow Micro testing pipeline in that app.
 
 Creating an instance of `SelfDescribing` takes a schema name and a dictionary of event data.
 
@@ -88,13 +88,13 @@ tracker.track(Structured(
 
 The `PageViewEvent` may be used to track page views on the Web. The event is designed to track web page views and automatically captures page title, referrer and URL. Being Web-only, it is not implemented on Android and iOS where the app is not displayed as a Web page.
 
-Page view events are the basic building blocks for the [Snowplow web data model](/docs/modeling-your-data/the-snowplow-web-data-model/).
+Page view events are the basic building blocks for the [Snowplow web data model](/docs/modeling-your-data/the-snowplow-web-data-model/index.md).
 
 ## Track screen views with `ScreenView`
 
 Use `ScreenView` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages. The arguments are `name`, `id`, `type`, and `transitionType`. The `name` and `id` properties are required. "Name" is the human-readable screen name, and "ID" should be the unique screen ID (UUID v4).
 
-Screen view events are used in the [Snowplow mobile data model](/docs/modeling-your-data/the-snowplow-mobile-model/). Nevertheless, the Flutter tracker also implements them on Web. You may adopt the mobile data model and choose to track screen views instead of page views on Web to provide consistent event tracking across all platforms.
+Screen view events are used in the [Snowplow mobile data model](/docs/modeling-your-data/the-snowplow-mobile-data-model/index.md). Nevertheless, the Flutter tracker also implements them on Web. You may adopt the mobile data model and choose to track screen views instead of page views on Web to provide consistent event tracking across all platforms.
 
 This method creates an unstruct event, by creating and tracking a self-describing event. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen\_view/jsonschema/1-0-0", and the data field will contain the parameters which you provide. That schema is hosted on the schema repository Iglu Central, and so will always be available to your pipeline.
 

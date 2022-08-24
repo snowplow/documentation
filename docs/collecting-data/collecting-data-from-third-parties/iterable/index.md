@@ -18,7 +18,7 @@ Then select **Create webhook** above the list of webhooks on the right and ent
 https://<collector host>/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.iterable%2Fsystem_webhook%2Fjsonschema%2F1-0-0
 ```
 
-You may want to set the snowplow `aid=` parameter in your URL query string to the company for which this webhook has been configured; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/), however this is optional. The company is also contained in the received messages.
+You may want to set the snowplow `aid=` parameter in your URL query string to the company for which this webhook has been configured; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md), however this is optional. The company is also contained in the received messages.
 
 If you want, you can also manually override the event's `platform` parameter by appending a query string to the end of the URL, in combination or separately with aid above. Here is what the final URL would look like for a configured aid and platform:
 

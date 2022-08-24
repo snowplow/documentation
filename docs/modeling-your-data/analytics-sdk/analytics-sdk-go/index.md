@@ -6,7 +6,7 @@ sidebar_position: 300
 
 ## 1\. Overview
 
-The [Snowplow Analytics SDK for Go](https://github.com/snowplow/snowplow-golang-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/) in your Go event processing, data modeling and machine-learning jobs. You can use this SDK with [AWS Lambda](https://aws.amazon.com/lambda/), [Google Cloud Functions](https://cloud.google.com/functions/), [Google App Engine](https://cloud.google.com/appengine) and other Golang-compatible data processing frameworks.
+The [Snowplow Analytics SDK for Go](https://github.com/snowplow/snowplow-golang-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your Go event processing, data modeling and machine-learning jobs. You can use this SDK with [AWS Lambda](https://aws.amazon.com/lambda/), [Google Cloud Functions](https://cloud.google.com/functions/), [Google App Engine](https://cloud.google.com/appengine) and other Golang-compatible data processing frameworks.
 
 ## 2\. Compatibility
 

@@ -4,7 +4,7 @@ date: "2022-01-17"
 sidebar_position: 400
 ---
 
-The Braze Tag for GTM SS allows events to be forwarded to [Braze](https://www.braze.com/). This Tag works best with the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/), but can also work with other GTM SS Clients such as GAv4.
+The Braze Tag for GTM SS allows events to be forwarded to [Braze](https://www.braze.com/). This Tag works best with the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md), but can also work with other GTM SS Clients such as GAv4.
 
 ## Template installation
 
@@ -27,5 +27,5 @@ With the template installed, you can now add the Braze Tag to your GTM SS Contai
 - From the Tag tab, select “New”, then select the Braze Tag as your Tag Configuration
 - Select your desired Trigger for the events you wish to forward to Braze.
 - Enter the required parameters and then optionally
-- [Configure the tag](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/braze-tag-configuration/) to customize your Braze Tag.
+- [Configure the tag](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/braze-tag-configuration/index.md) to customize your Braze Tag.
 - Click Save

@@ -9,7 +9,7 @@ const config = {
   baseUrl: '/',
   // reset this back to throw, set to warn so that site builds
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
   trailingSlash: false,
   organizationName: 'snowplow',
@@ -52,6 +52,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      docs: {
+        sidebar: {
+          autoCollapseCategories: true,
+        },
+      },
       navbar: {
         logo: {
           alt: 'Snowplow Logo',
@@ -93,15 +98,15 @@ const config = {
       },
       footer: {
         style: 'dark',
-        links: [
-          {
+        items: [
+          {             
             label: 'Change cookie settings',
             href: '/cookie-settings',
           },
           {
             label: 'Terms and conditions',
-            href: '/terms-and-conditions',
-          },
+            href: '/terms-and-conditions', 
+          }
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },

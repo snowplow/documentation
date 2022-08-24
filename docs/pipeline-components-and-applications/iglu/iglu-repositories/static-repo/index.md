@@ -4,7 +4,7 @@ date: "2021-03-26"
 sidebar_position: 4000
 ---
 
-A static repo is simply an Iglu repository server structured as a static website. [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/) can be used as an example, [serving](http://iglucentral.com/) its whole content over http.
+A static repo is simply an Iglu repository server structured as a static website. [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md) can be used as an example, [serving](http://iglucentral.com/) its whole content over http.
 
 ## [](https://github.com/snowplow/iglu/wiki/Static-repo-setup#1-choose-a-hosting-partner)1\. Choose a hosting partner
 
@@ -23,7 +23,7 @@ Make the following changes:
 - Leave `jsonschema` as-is (we only support JSON Schemas for now)
 - Replace `1-0-0` with the schema specification of your first JSON Schema
 
-Writing JSON Schemas is out of scope for this setup guide - see [Self-describing-JSONs-and-JSON-Schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/) for details.
+Writing JSON Schemas is out of scope for this setup guide - see [Self-describing-JSONs-and-JSON-Schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) for details.
 
 Done? Now you are ready to host your files.
 
@@ -37,4 +37,4 @@ To host your static schema on an alternative webserving platform, please consult
 
 Finally, update your Iglu client configuration so that it can resolve your new registry.
 
-For details on how to do this, check out the page on [Iglu client configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/).
+For details on how to do this, check out the page on [Iglu client configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md).

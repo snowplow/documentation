@@ -4,13 +4,13 @@ date: "2022-03-24"
 sidebar_position: 60
 ---
 
-See [Tracking events](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/) to learn how to track events with the Java tracker.
+See [Tracking events](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md) to learn how to track events with the Java tracker.
 
-All Snowplow events, regardless of the tracker used, look similar. They all currently contain 137 columns/properties. Some are populated by pipeline enrichments, e.g. the [campaign attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/) populates the `mkt_` columns. Snowplow event structure and columns are explained [here](/docs/understanding-your-pipeline/canonical-event/).
+All Snowplow events, regardless of the tracker used, look similar. They all currently contain 137 columns/properties. Some are populated by pipeline enrichments, e.g. the [campaign attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) populates the `mkt_` columns. Snowplow event structure and columns are explained [here](/docs/understanding-your-pipeline/canonical-event/index.md).
 
-This reference page shows two simple example events generated using the default tracker configuration and a [Snowplow Micro](/docs/understanding-your-pipeline/what-is-snowplow-micro/) testing pipeline. These events were tracked from a simplified version of the "simple-console" demo provided in the [Java tracker Github repository](https://github.com/snowplow/snowplow-java-tracker). While most Snowplow pipelines transform events into table rows, Micro pipelines produce JSON. There are no [pipeline enrichments](/docs/enriching-your-data/what-is-enrichment/) in Micro.
+This reference page shows two simple example events generated using the default tracker configuration and a [Snowplow Micro](/docs/understanding-your-pipeline/what-is-snowplow-micro/index.md) testing pipeline. These events were tracked from a simplified version of the "simple-console" demo provided in the [Java tracker Github repository](https://github.com/snowplow/snowplow-java-tracker). While most Snowplow pipelines transform events into table rows, Micro pipelines produce JSON. There are no [pipeline enrichments](/docs/enriching-your-data/what-is-enrichment/index.md) in Micro.
 
-The JSON below is part of the "event" value for a [ScreenView](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-a-screenview-event) event, which is a type of [Unstructured](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-a-custom-event-unstructured-events) (self-describing) event. The full Micro JSON output includes other data, such as headers. Any columns with `null` values have also been removed.
+The JSON below is part of the "event" value for a [ScreenView](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-screenview-event) event, which is a type of [Unstructured](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-custom-event-unstructured-events) (self-describing) event. The full Micro JSON output includes other data, such as headers. Any columns with `null` values have also been removed.
 
 ```
 // This event was tracked
@@ -54,7 +54,7 @@ ScreenView screenView = ScreenView.builder()
 
 Most of these properties are the default Java tracker properties, which will be present in all Java tracker events. For example, `app_id`,`platform`, and `name_tracker` were set at `Tracker` initialization.
 
-Since this is a `Unstructured` event, the "unstruct\_event" field is also populated. The [self-describing JSON](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/) provided as part of the `Unstructured`/`ScreenView` event has been validated against the [Iglu](/docs/pipeline-components-and-applications/iglu/) schema registry.
+Since this is a `Unstructured` event, the "unstruct\_event" field is also populated. The [self-describing JSON](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md) provided as part of the `Unstructured`/`ScreenView` event has been validated against the [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) schema registry.
 
 Below is an example `PageView` event using the default tracker configuration with Snowplow Micro. Again, the `null` columns and other sections of the payload have been removed.
 
@@ -94,4 +94,4 @@ PageView pageViewEvent = PageView.builder()
 }
 ```
 
-Because PageView is a "primitive" [event type](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/), the provided URL has populated the "atomic" `page_url` column. The different parts of the URL - scheme and host - have been automatically extracted and added to their own columns.
+Because PageView is a "primitive" [event type](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md), the provided URL has populated the "atomic" `page_url` column. The different parts of the URL - scheme and host - have been automatically extracted and added to their own columns.

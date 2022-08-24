@@ -22,7 +22,7 @@ Set this key to the client event property (e.g. `client_id`) that corresponds to
 
 ## Snowplow Event Mapping Options
 
-This section includes the mapping rules that concern a Snowplow event as claimed by the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/):
+This section includes the mapping rules that concern a Snowplow event as claimed by the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md):
 
 ### Include Self Describing event
 

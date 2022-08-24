@@ -4,7 +4,7 @@ date: "2021-11-18"
 sidebar_position: 200
 ---
 
-This template implements the [Snowplow Analytics JavaScript tracker v3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/). The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ sandboxed JavaScript.
+This template implements the [Snowplow Analytics JavaScript tracker v3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/index.md). The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ sandboxed JavaScript.
 
 ## Install the template
 
@@ -28,7 +28,7 @@ To begin with, some of the caveats of using the Custom Template.
 
 ## Instructions
 
-Here are basic instructions for how to instrument the JavaScript tracker v3. You are encouraged to consult the [technical documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/) for more information on each individual feature.
+Here are basic instructions for how to instrument the JavaScript tracker v3. You are encouraged to consult the [technical documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/index.md) for more information on each individual feature.
 
 In general, when the tag fires, it first checks if the Snowplow JavaScript library has been loaded from the self-hosted URL provided in the template settings (more on this below). Then, the tag checks whether a tracker with the given **Tracker Name** has already been initialized. If not, it proceeds to initialize the new tracker.
 

@@ -19,7 +19,7 @@ The Java tracker makes it easy to track different kinds of data. We provide a ra
 
 Every tracked event payload has a unique `event_id` UUID string. Other ubiquitous properties include the `name_tracker` (`trackerNamespace`) and `app_id` (`appId`) set when the `Tracker` was initialized. From version 0.12 onwards, `Tracker.track()` returns the payload's `eventId`.
 
-Snowplow events have a defined structure and [protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/) that is identical regardless of the tracker used. A minimal payload - the raw event - is sent from the tracker to your collector. The raw event is [enriched](/docs/enriching-your-data/what-is-enrichment/) as it passes through your pipeline. By the time the event arrives in your data storage, depending which [enrichments](/docs/enriching-your-data/available-enrichments/) you have enabled, it will have gained different kinds of metadata, and have many more fields than it started with. The default Java tracker event fields are shown [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/what-do-java-tracker-events-look-like/).
+Snowplow events have a defined structure and [protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) that is identical regardless of the tracker used. A minimal payload - the raw event - is sent from the tracker to your collector. The raw event is [enriched](/docs/enriching-your-data/what-is-enrichment/index.md) as it passes through your pipeline. By the time the event arrives in your data storage, depending which [enrichments](/docs/enriching-your-data/available-enrichments/index.md) you have enabled, it will have gained different kinds of metadata, and have many more fields than it started with. The default Java tracker event fields are shown [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/what-do-java-tracker-events-look-like/index.md).
 
 The [Java tracker Github repository](https://github.com/snowplow/snowplow-java-tracker) includes a mini demo, "simple-console". The demo sends one event of each type to your event collector.
 
@@ -33,17 +33,17 @@ The Java tracker provides classes for tracking different types of events. They a
 
 | `Event` class | `e` in raw event | `eventType` in enriched event |
 | --- | --- | --- |
-| [`Unstructured` (custom)](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-a-custom-event-unstructured-events) | ue | unstruct |
-| [`ScreenView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-a-screenview-event) | ue | unstruct |
-| [`Timing`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-a-timing-event) | ue | unstruct |
-| [`PageView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-a-pageview-event) | pv | page\_view |
-| [`Structured`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-a-structured-event) | se | struct |
-| [`EcommerceTransaction`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | tr | transaction |
-| [`EcommerceTransactionItem`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti | transaction\_item |
+| [`Unstructured` (custom)](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-custom-event-unstructured-events) | ue | unstruct |
+| [`ScreenView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-screenview-event) | ue | unstruct |
+| [`Timing`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-timing-event) | ue | unstruct |
+| [`PageView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-pageview-event) | pv | page\_view |
+| [`Structured`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-structured-event) | se | struct |
+| [`EcommerceTransaction`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | tr | transaction |
+| [`EcommerceTransactionItem`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti | transaction\_item |
 
 Note: `EcommerceTransaction`/`EcommerceTransactionItem` are a legacy design and may be deprecated soon.
 
-`Unstructured` events (also called Self-Describing events elsewhere in Snowplow) allow you to track anything that can be described by a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/). The data you provide will be sent as a JSON inside the raw event payload. The specific type of JSON schema needed are described fully on the [next page](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/).
+`Unstructured` events (also called Self-Describing events elsewhere in Snowplow) allow you to track anything that can be described by a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md). The data you provide will be sent as a JSON inside the raw event payload. The specific type of JSON schema needed are described fully on the [next page](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md).
 
 The `ScreenView` and `Timing` out-of-the-box event types are actually wrappers for `Unstructured` events: the method parameters for building those events represent fields in their hidden self-describing JSON schemas. This is why both `ScreenView` and `Timing` events are labelled "unstruct" in the data warehouse.
 
@@ -51,21 +51,21 @@ The `PageView` and `Structured` event types are processed differently from `Unst
 
 `Unstructured` events and primitive/canonical events are loaded into and modelled differently in your data warehouse. The "atomic" fields will always have individual columns.
 
-`EcommerceTransaction` and `EcommerceTransactionItem` events are legacy primitive events. We recommend instead designing your own `Unstructured` events plus [context entities](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/) for eCommerce tracking.
+`EcommerceTransaction` and `EcommerceTransactionItem` events are legacy primitive events. We recommend instead designing your own `Unstructured` events plus [context entities](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md) for eCommerce tracking.
 
 ### Tracking data that is not event-type specific
 
 Some data, such as that relating to the user whose activity is being tracked, is relevant across all event types. The Java tracker provides two mechanisms for tracking this kind of data.
 
-Certain properties, including `userId` or `ipAddress`, can be set as "atomic" properties in the raw event, using the `Subject` class. `Subject` properties relate mainly to client-side tracking. If you are using the Java tracker for server-side tracking, you may wish to pass client-side data for tracking server-side. These properties are discussed [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-specific-client-side-properties/).
+Certain properties, including `userId` or `ipAddress`, can be set as "atomic" properties in the raw event, using the `Subject` class. `Subject` properties relate mainly to client-side tracking. If you are using the Java tracker for server-side tracking, you may wish to pass client-side data for tracking server-side. These properties are discussed [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-specific-client-side-properties/index.md).
 
-A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for `Unstructured` events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/).
+A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for `Unstructured` events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md).
 
-All events also provide the option for setting a custom timestamp, called `trueTimestamp`. See [below](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/#adding-custom-timestamps-to-events) for details.
+All events also provide the option for setting a custom timestamp, called `trueTimestamp`. See [below](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#adding-custom-timestamps-to-events) for details.
 
 ### Creating a custom event (Unstructured events)
 
-To track data using an `Unstructured` event, the data must be structured as a `SelfDescribingJson` object, discussed fully in [Custom tracking with schemas](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/). These require two fields. The first is a URI for a self-describing JSON schema. The second is a data map, and the data must be valid against the schema. `Unstructured` events can be considered wrappers for sending `SelfDescribingJson`.
+To track data using an `Unstructured` event, the data must be structured as a `SelfDescribingJson` object, discussed fully in [Custom tracking with schemas](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md). These require two fields. The first is a URI for a self-describing JSON schema. The second is a data map, and the data must be valid against the schema. `Unstructured` events can be considered wrappers for sending `SelfDescribingJson`.
 
 `Unstructured` is a legacy name. This event type will be renamed the more accurate `SelfDescribing` in the next release.
 
@@ -121,7 +121,7 @@ Track page views with the `PageView` event. This is a "primitive" event type; da
 | page title | page | page\_title |
 | referrer URL | refr | page\_referrer |
 
-The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/enriching-your-data/what-is-enrichment/).
+The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md).
 
 A simple initialisation looks like this:
 
@@ -165,7 +165,7 @@ Both `category` and `action` are required. See the API docs for the full [Struct
 
 ### Creating `EcommerceTransaction` and `EcommerceTransactionItem` events
 
-To track eCommerce data, we recommend designing your own schemas for an `Unstructured` event. We suggest creating one schema for the overall transaction, and another schema for individual items. The transaction schema can be used for the `Unstructured` event. Items in the transaction can be added as [context entities](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/).
+To track eCommerce data, we recommend designing your own schemas for an `Unstructured` event. We suggest creating one schema for the overall transaction, and another schema for individual items. The transaction schema can be used for the `Unstructured` event. Items in the transaction can be added as [context entities](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md).
 
 The `EcommerceTransaction` and `EcommerceTransactionItem` events are legacy events, and it's highly likely they will be deprecated in the future. They are designed to be sent together, with one `EcommerceTransaction` containing an `EcommerceTransactionItem` for every item in the transaction. When the `EcommerceTransaction` event is tracked, the `EcommerceTransactionItem` events are extracted and sent separately. This means that although you have only tracked one event (using `Tracker.track()`), multple events are generated.
 

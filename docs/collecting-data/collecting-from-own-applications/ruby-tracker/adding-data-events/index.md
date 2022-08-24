@@ -15,7 +15,7 @@ You can attach any of these as additional arguments to the `track_x_event` metho
 
 ## Event context
 
-Event context is an incredibly powerful aspect of Snowplow tracking, which allows you to create very rich data. It is based on the same [self-describing JSON schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/) as the [self-describing events](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/tracking-events/#self-describing-event). Using event context, you can add any details you like to your events, as long as you can describe them in a self-describing JSON schema.
+Event context is an incredibly powerful aspect of Snowplow tracking, which allows you to create very rich data. It is based on the same [self-describing JSON schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) as the [self-describing events](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/tracking-events/index.md#self-describing-event). Using event context, you can add any details you like to your events, as long as you can describe them in a self-describing JSON schema.
 
 Each schema will describe a single "entity". All of an event's entities together form the event context. The event context will be sent as one field of the event, finally ending up in one column (`contexts`) in your data storage. There is no limit to how many entities can be attached to one event.
 
@@ -77,7 +77,7 @@ Your server-side code may not have access to all these parameters, or they might
 
 You could create and define a new Subject for every user or every event you want to track. Attaching that Subject to the `track_x_event` method call would add those properties to your event. Alternatively, you could swap the tracker-associated Subject for a more appropriate one before tracking the event, using `set_subject`.
 
-The following table lists all the properties that can be set via Subject. These are all part of the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/). Check out the [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Subject.html) for the details of how to set these parameters.
+The following table lists all the properties that can be set via Subject. These are all part of the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md). Check out the [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Subject.html) for the details of how to set these parameters.
 
 | Property | **Description** |
 | --- | --- |
@@ -140,7 +140,7 @@ tracker.track_page_view('www.example.com')
 
 ### Cookie-based user properties
 
-Several of the user properties listed in the above table are relevant only to web apps, and are intended to derive from cookies. The Snowplow cookies are explained on [this page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/). The client-side Snowplow JavaScript tracker sets first-party cookies, and the event collector sets a third-party cookie. As a server-side tracker, the Ruby tracker doesn't automatically have access to cookies. However, these properties can be extremely useful, e.g. in stitching events together from individual users, or for matching server-side events with client-side events.
+Several of the user properties listed in the above table are relevant only to web apps, and are intended to derive from cookies. The Snowplow cookies are explained on [this page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/index.md). The client-side Snowplow JavaScript tracker sets first-party cookies, and the event collector sets a third-party cookie. As a server-side tracker, the Ruby tracker doesn't automatically have access to cookies. However, these properties can be extremely useful, e.g. in stitching events together from individual users, or for matching server-side events with client-side events.
 
 Read more about sharing data between client-side and server-side trackers in this [blog post](https://snowplowanalytics.com/blog/2021/11/09/the-unrivaled-power-of-joining-client-and-server-side-tracking/).
 

@@ -12,7 +12,7 @@ Sign up on [discourse](https://discourse.snowplowanalytics.com/)! If you run int
 
 If you are interested in receiving the latest updates from Product & Engineering, such as critical bug fixes, security updates, new features and the rest, then [join our mailing list](https://go.snowplowanalytics.com/get-snowplow-technology-updates).
 
-You can find more details on the infrastructure and applications that [will be deployed in your cloud here](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed-gcp/).
+You can find more details on the infrastructure and applications that [will be deployed in your cloud here](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed-gcp/index.md).
 
 ### Prerequisites
 
@@ -25,7 +25,7 @@ You can find more details on the infrastructure and applications that [will be d
         - Create the environment variable by running `export GOOGLE_APPLICATION_CREDENTIALS="KEY PATH"` in terminal
 - [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher installed
     - Follow the instructions to make sure the terraform binary is available on your PATH. You can also use [tfenv](https://github.com/tfutils/tfenv) to help manage Terraform installation
-- Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl/) which allows you to publish schemas for your [custom events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/#custom-events) and [entities](/docs/understanding-tracking-design/predefined-vs-custom-entities/#custom-contexts) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/)
+- Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) which allows you to publish schemas for your [custom events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events) and [entities](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md#custom-contexts) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/index.md)
 - Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your localhost
     - `git clone https://github.com/snowplow/quickstart-examples.git`
 
@@ -40,7 +40,7 @@ The main difference is around the [VPC](https://cloud.google.com/vpc/docs/overvi
 
 ### **Setting up your Iglu Server**
 
-The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
+The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
 
 We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your Postgres loader) can communicate with Iglu. 
 
@@ -67,7 +67,7 @@ To update your input variables, you'll need to know a couple of things:
 
 **Step 2 (optional): Update telemetry settings**
 
-We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/telemetry-principles/).
+We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/telemetry-principles/index.md).
 
 - If you wish to subscribe to our mailing list for updates to these modules or security advisories please set the `user_provided_id` variable to include a valid email address which we can reach you at.
     - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know how we can improve the experience going forward, so we really appreciate it being set!_
@@ -123,7 +123,7 @@ To update your input variables, you'll need to know a couple of things:
 
 **Step 2 (optional): Update telemetry settings**
 
-We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/telemetry-principles/).
+We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/telemetry-principles/index.md).
 
 - If you wish to subscribe to our mailing list for updates to these modules or security advisories please set the `user_provided_id` variable to include a valid email address which we can reach you at.
     - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know where to invest our efforts going forward._
@@ -141,7 +141,7 @@ terraform apply
 
 This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.
 
-#### **Now let's [send some events](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/sending-test-events/) to your pipeline**! >>
+#### **Now let's [send some events](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/sending-test-events/index.md) to your pipeline**! >>
 
 * * *
 

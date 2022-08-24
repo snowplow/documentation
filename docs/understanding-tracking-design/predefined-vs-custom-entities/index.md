@@ -51,7 +51,7 @@ A few dos and don'ts for the _JSON_s inside each context entry JSONs:
 - Do use Snowplow datatype suffixes if the data type would otherwise be unclear
 - Don't nest properties as with custom unstructured events, the structure must be flat
 
-If you want to create your own custom context, you must create a [data structure for it](/docs/understanding-tracking-design/understanding-schemas-and-validation/). Since more than one can be attached to an event, the `context` argument (if it is provided at all) should be a _non-empty array of self-describing JSONs_.
+If you want to create your own custom context, you must create a [data structure for it](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md). Since more than one can be attached to an event, the `context` argument (if it is provided at all) should be a _non-empty array of self-describing JSONs_.
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 

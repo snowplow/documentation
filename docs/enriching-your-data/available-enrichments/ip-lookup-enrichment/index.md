@@ -46,7 +46,7 @@ MaxMind also offer a method to [download and update their databases programmati
 
 ### 3\. Configure the enrichment for your pipeline
 
-Snowplow BDP customers can enable the IP Lookup enrichment for your pipeline [in the Snowplow console.](/docs/enriching-your-data/configuring-enrichments/) Open Source will need to upload the enrichment json for use in their Snowplow pipeline.
+Snowplow BDP customers can enable the IP Lookup enrichment for your pipeline [in the Snowplow console.](/docs/enriching-your-data/configuring-enrichments/index.md) Open Source will need to upload the enrichment json for use in their Snowplow pipeline.
 
 There are four possible fields you can add to the “parameters” section of the enrichment configuration JSON: “geo”, “isp”, “domain”, and “connectionType”:
 

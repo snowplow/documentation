@@ -13,7 +13,7 @@ There are two key steps in understanding user engagement:
 - Capture their behaviour in granular detail, and aggregate that behaviour into an easily consumable format.
 - Consistently identify users across platforms to ensure you are seeing the full picture.
 
-This recipe will focus on capturing and aggregating user behaviour. You might also want to take a look at [our single customer view recipe](/docs/try-snowplow/recipes/recipe-single-customer-view/) that tackles user stitching more specifically.
+This recipe will focus on capturing and aggregating user behaviour. You might also want to take a look at [our single customer view recipe](/docs/try-snowplow/recipes/recipe-single-customer-view/index.md) that tackles user stitching more specifically.
 
 ## What you'll be doing
 
@@ -23,7 +23,7 @@ With all web events the Snowplow JavaScript tracker captures the following user 
 
 <table><tbody><tr><td><code>domain_userid</code></td><td>client side cookie ID set against the domain the tracking is on</td></tr><tr><td><code>network_userid</code></td><td>server side cookie ID set against the collector domain</td></tr><tr><td><code>user_ipaddress</code></td><td>the user’s IP address</td></tr></tbody></table>
 
-Please note that in Try Snowplow, these fields (as well as the `domain_sessionid`) are being hashed with Snowplow's [PII enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/) to protect user privacy. With Snowplow BDP, you are able to configure this enrichment to hash (or not hash) any number of out of the box or custom fields.
+Please note that in Try Snowplow, these fields (as well as the `domain_sessionid`) are being hashed with Snowplow's [PII enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md) to protect user privacy. With Snowplow BDP, you are able to configure this enrichment to hash (or not hash) any number of out of the box or custom fields.
 
 Additionally, Snowplow allows you to specify a custom user ID, which we'll be adding in this recipe. We'll then build a user engagement table to explore how you can develop a better understanding of how your users engage with you over time.
 
@@ -111,6 +111,6 @@ SELECT * FROM derived.user_engagement;
 
 This recipe covers a really simple example of aggregating user engagement based on Snowplow's out of the box events and the custom user ID only. Next, you might want to
 
-- Build a user stitching table to make sure you are including all user activity correctly based on the different identifiers you observe across platforms. You can explore Snowplow's approach to user stitching in [our single customer view recipe](/docs/try-snowplow/recipes/recipe-single-customer-view/).
+- Build a user stitching table to make sure you are including all user activity correctly based on the different identifiers you observe across platforms. You can explore Snowplow's approach to user stitching in [our single customer view recipe](/docs/try-snowplow/recipes/recipe-single-customer-view/index.md).
 - Instrument additional events to better understand how your users are engaging with you.
 - Start to think about how you might use user attributes and user behaviour to segment your user base. Segmentation is the first step towards personalizing user experience.

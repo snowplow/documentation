@@ -16,9 +16,9 @@ We have built a set of [terraform](https://www.terraform.io/docs/language/module
 
 By the end of this guide,  you will be able to: 
 
-- Collect granular, well-structured data with our suite of web, mobile and server side [SDKs](/docs/collecting-data/collecting-from-own-applications/)
-- Create your own [custom events and entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/) 
-- Easily enable and disable our suite of [out-of-the-box enrichments](/docs/enriching-your-data/available-enrichments/) 
+- Collect granular, well-structured data with our suite of web, mobile and server side [SDKs](/docs/collecting-data/collecting-from-own-applications/index.md)
+- Create your own [custom events and entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) 
+- Easily enable and disable our suite of [out-of-the-box enrichments](/docs/enriching-your-data/available-enrichments/index.md) 
 - Consume your rich data in real time from a choice of over 5 supported destinations (kinesis, pubsub, S3, Postgres or ElasticSearch)
 
 ## **How does the quick start edition compare?** 

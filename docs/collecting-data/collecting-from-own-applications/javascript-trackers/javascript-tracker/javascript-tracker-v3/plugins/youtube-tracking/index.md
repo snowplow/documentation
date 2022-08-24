@@ -22,7 +22,7 @@ This plugin will allow the tracking of an embedded YouTube IFrame.
 
 ## Quick Start
 
-To start tracking a YouTube video with default settings, use the snippet below after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/):
+To start tracking a YouTube video with default settings, use the snippet below after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md):
 
 **`index.html`**
 

@@ -4,9 +4,9 @@ date: "2020-11-25"
 sidebar_position: 600
 ---
 
-If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
+If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
 
-When loading enriched events, the resulting JSONs are like the [Snowplow Canonical Event model](/docs/understanding-your-pipeline/canonical-event/) with the following changes:
+When loading enriched events, the resulting JSONs are like the [Snowplow Canonical Event model](/docs/understanding-your-pipeline/canonical-event/index.md) with the following changes:
 
 ### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader#boolean-fields-reformatted)Boolean fields reformatted
 

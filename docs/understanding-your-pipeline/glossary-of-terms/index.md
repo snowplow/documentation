@@ -19,7 +19,7 @@ __[Read more](http://snowplowanalytics.com/documentation/concepts/snowplow-data-
 
 A collector receives data in the form of `GET` or `POST` requests from the trackers, and write the data to either logs or streams (for further processing).
 
-__[Read more](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setting-up-your-aws-environment/)__
+__[Read more](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setting-up-your-aws-environment/index.md)__
 
 ### Context
 
@@ -44,7 +44,7 @@ At this stage, the data that is collected should describe the events as they hav
 
 For each of the above we want to collect as much data describing the event and associated entities as possible.
 
-__[Read more](/docs/collecting-data/)__
+__[Read more](/docs/collecting-data/index.md)__
 
 ### Data modeling
 
@@ -115,18 +115,18 @@ Iglu is a machine-readable, open-source _schema repository_ for JSON Schema from
 
 Snowplow uses Iglu to store all the schemas associated with the different events and contexts that are captured via Snowplow. When an event or context is sent into Snowplow, it is sent with a reference to the schema for the event or context, which points to the location of the schema for the event or context in Iglu.
 
-__[Read more](/docs/pipeline-components-and-applications/iglu/)__
+__[Read more](/docs/pipeline-components-and-applications/iglu/index.md)__
 
 ### Pipeline
 
 The Snowplow pipeline is built to enable a very clean separation of the following steps in the _data processing flow_:
 
-1. [Data collection](/docs/collecting-data/)
-2. [Data enrichment](/docs/enriching-your-data/)
-3. [Data modelling](/docs/modeling-your-data/)
-4. [Data analysis](/docs/tutorials/)
+1. [Data collection](/docs/collecting-data/index.md)
+2. [Data enrichment](/docs/enriching-your-data/index.md)
+3. [Data modelling](/docs/modeling-your-data/index.md)
+4. [Data analysis](/docs/tutorials/index.md)
 
-__[Read more](/docs/understanding-your-pipeline/)__
+__[Read more](/docs/understanding-your-pipeline/index.md)__
 
 ### Schema DDL
 
@@ -142,7 +142,7 @@ SchemaVer is Snowplow Team own schema versioning notion. It is defined as follow
 - `REVISION` when you introduce a schema change which may prevent interaction with some historical data
 - `ADDITION` when you make a schema change that is compatible with all historical data
 
-__[Read more](/docs/understanding-tracking-design/versioning-your-data-structures/)__
+__[Read more](/docs/understanding-tracking-design/versioning-your-data-structures/index.md)__
 
 ### Self-Describing Event
 
@@ -189,7 +189,7 @@ There are three great use cases to use the shredding functionality for:
 2. Defining your own _custom unstructured events types_, and processing these through the Snowplow pipeline into dedicated tables in Redshift. Retailers can define their own "product view" or "add to basket" events, for example. Media companies can define their own "video play" events.
 3. Defining your own _custom context types_, and processing these through the Snowplow pipeline into dedicated tables in Redshift. You can define your own "user" type, for example, including whatever fields you capture and want to store related to a user.
 
-__[Read more](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/rdb-shredder/)__
+__[Read more](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md)__
 
 ### Snowplow
 
@@ -209,7 +209,7 @@ In addition, Snowplow data from those event files could be copied into Amazon Re
 
 There are therefore a number of different potential storage modules that Snowplow users can store their data in.
 
-__[Read more](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/)__
+__[Read more](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/index.md)__
 
 ### Structured event
 
@@ -227,13 +227,13 @@ For example, when tracking a custom structured event the specification for the `
 snowplow_name_here('trackStructEvent', 'category','action','label','property','value');
 ```
 
-__[Read more](/docs/understanding-your-pipeline/canonical-event/)__
+__[Read more](/docs/understanding-your-pipeline/canonical-event/index.md)__
 
 ### Tracker
 
 A tracker is client- or server-side libraries which track customer behaviour by sending Snowplow events to a Collector.
 
-__[Read more](/docs/collecting-data/collecting-from-own-applications/)__
+__[Read more](/docs/collecting-data/collecting-from-own-applications/index.md)__
 
 ### Unstructured event
 
@@ -255,4 +255,4 @@ Snowplow allows you to collect events via the adapters (webhooks) of supported t
 
 Webhooks allow this third-party software to send their own internal event streams to Snowplow collectors for further processing. Webhooks are sometimes referred to as "streaming APIs" or "HTTP response APIs".
 
-__[Read more](/docs/collecting-data/collecting-data-from-third-parties/)__
+__[Read more](/docs/collecting-data/collecting-data-from-third-parties/index.md)__

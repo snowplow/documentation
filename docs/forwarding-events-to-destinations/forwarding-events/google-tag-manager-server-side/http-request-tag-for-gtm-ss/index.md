@@ -30,5 +30,5 @@ With the template installed, you can now add the HTTP Request Tag to your GTM SS
 - From the Tag tab, select “New”, then select the HTTP Request Tag as your Tag Configuration
 - Select your desired Trigger for the events you wish to forward to your custom destination.
 - Enter your destination URL
-- [Configure the tag](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/http-request-tag-for-gtm-ss/http-request-tag-configuration/) to construct the desired JSON request body
+- [Configure the tag](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/http-request-tag-for-gtm-ss/http-request-tag-configuration/index.md) to construct the desired JSON request body
 - Click Save

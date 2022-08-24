@@ -32,4 +32,4 @@ window.snowplow('addPlugin',
 
 ### Properties
 
-This plugin will add Timezone tracking. This allows the tracker to populate the `` `os_timezone` `` field within the [canonical event model](/docs/understanding-your-pipeline/canonical-event/).
+This plugin will add Timezone tracking. This allows the tracker to populate the `` `os_timezone` `` field within the [canonical event model](/docs/understanding-your-pipeline/canonical-event/index.md).

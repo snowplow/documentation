@@ -90,7 +90,7 @@ Notes:
 
 ### `userId`
 
-Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/) [protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) field.
+Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) field.
 
 ```
 "vars": {
@@ -100,7 +100,7 @@ Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://
 
 ### `nameTracker`
 
-Specify the optional "nameTracker" var to set the tna/name\_tracker [Snowplow tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/) field.
+Specify the optional "nameTracker" var to set the tna/name\_tracker [Snowplow tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) field.
 
 ```
 "vars": {

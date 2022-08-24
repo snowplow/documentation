@@ -262,7 +262,7 @@ They can be found in the `Examples` folder:
 
 The two Swift apps share the same codebase. The unique difference is in the configuration for the dependency managers.
 
-For general testing, [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/) can be used as an easily deployable collector with a live web interface for viewing received events.
+For general testing, [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/index.md) can be used as an easily deployable collector with a live web interface for viewing received events.
 
 The apps can be run in an emulator or on an actual Apple device through Xcode.
 
@@ -358,7 +358,7 @@ On the tracker setup you can override the device platform entry calling:
 
 It resets the parameter `p` (platform) to the new value.
 
-[Here](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/) a full list of the supported platform values.
+[Here](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) a full list of the supported platform values.
 
 ### Sending events
 

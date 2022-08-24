@@ -31,7 +31,7 @@ Previous workflow was orchestrated by EmrEtlRunner, along with multiple S3DistCp
 
 In the new architecture there are two EMR steps:
 
-1. S3DistCp, copying enriched data sunk by [S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/), from S3 sink bucket (same as "enriched stream bucket") into _enriched data lake_ (aka shredder input, similar as previously known "enriched archive")
+1. S3DistCp, copying enriched data sunk by [S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md), from S3 sink bucket (same as "enriched stream bucket") into _enriched data lake_ (aka shredder input, similar as previously known "enriched archive")
 2. RDB Shredder, picking up all _unprocessed_ folders in enriched data lake, shredding data there and writing it into _shredded data lake_ (previously known as "shredded archive")
 
 RDB Loader is a stand-alone long-running app, lauched either on EC2 box or Fargate cluster. The loading gets triggered by an SQS message, sent by Shredder after it finished processing a new batch.
@@ -43,7 +43,7 @@ RDB Shredder decides that folder is unprocessed by:
 
 If you're upgrading from R34 or earlier it is strictly recommended to pick new paths for enriched and shredded archives in order to avoid double-loading OR make sure that there's a strict 1:1 correspondence between content of enriched and shredded archive.
 
-We recommend to use either [Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/) or boto3 script to launch scheduled S3DistCp and Shredder jobs. Here's an example of a Dataflow Runner playbook:
+We recommend to use either [Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/index.md) or boto3 script to launch scheduled S3DistCp and Shredder jobs. Here's an example of a Dataflow Runner playbook:
 
 ```
 {
@@ -179,7 +179,7 @@ Here's an example:
 
 If you need to use cross-batch deduplication - the file format remains the same for DynamoDB config.
 
-CLI arguments also have changed. Both applications now accept only `--iglu-config` with base64-encoded string representing [Iglu Resolver JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/) and `--config` with base64-encoded above HOCON. Loader also accepts `--dry-run` flag.
+CLI arguments also have changed. Both applications now accept only `--iglu-config` with base64-encoded string representing [Iglu Resolver JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) and `--config` with base64-encoded above HOCON. Loader also accepts `--dry-run` flag.
 
 ## SQS
 

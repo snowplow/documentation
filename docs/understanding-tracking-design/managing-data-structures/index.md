@@ -10,7 +10,7 @@ To create a new Data Structure, first navigate to **Data Structures** in the men
 
 ![](images/image-1.png)
 
-Now select whether you'd like to create [an Event or an Entity](/docs/understanding-tracking-design/understanding-events-entities/). You can always change this selection at a later date.
+Now select whether you'd like to create [an Event or an Entity](/docs/understanding-tracking-design/understanding-events-entities/index.md). You can always change this selection at a later date.
 
 ![](images/image-2.png)
 
@@ -22,7 +22,7 @@ Once you are done, click the **'Validate'** button and we'll validate that your 
 
 Click **'Publish to development environment'** to publish your Data Structure to your development environment. As this is the first version of your data structure it will be created as version `1-0-0`. Click publish again on the modal dialog to confirm the action.
 
-Your new Data Structure will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-changes-to-your-pipeline/).
+Your new Data Structure will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-and-qa-workflows/index.md).
 
 * * *
 
@@ -60,9 +60,9 @@ When you create a new Data Structure we generally recommend you patch at version
 
 Once you have version 1-0-0 in Production we then advise against patching as a versioning strategy. When deploying a subsequent iteration to Production you will be forced to increment the version.
 
-For more information see [Versioning your data structures](/docs/understanding-tracking-design/versioning-your-data-structures/).
+For more information see [Versioning your data structures](/docs/understanding-tracking-design/versioning-your-data-structures/index.md).
 
-Once you have selected the appropriate version, click **'Publish to development environment'** and your edits will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-changes-to-your-pipeline/).
+Once you have selected the appropriate version, click **'Publish to development environment'** and your edits will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-and-qa-workflows/index.md).
 
 You can identify Data Structures where the Development version is ahead of the Production version by the yellow background on the version number. In this example both `user` and `alert` have been edited on development.
 
@@ -94,7 +94,7 @@ At this stage you will see the publish modal dialog, and depending on how you ve
 
 If you are **publishing a new schema,** or **have incremented** the version whilst editing then you will see a confirmation of the action. Click '**Migrate to Production**' to promote the data structure.
 
-If you **have patched** the version whilst editing then you will see a warning that you must increment before publishing. Patching the version on Production is not a permitted action. [Increment the version number according to the changes you have made](/docs/understanding-tracking-design/versioning-your-data-structures/) and click '**Migrate to production**' to promote the latest version of your Data Structure to your production environment.
+If you **have patched** the version whilst editing then you will see a warning that you must increment before publishing. Patching the version on Production is not a permitted action. [Increment the version number according to the changes you have made](/docs/understanding-tracking-design/versioning-your-data-structures/index.md) and click '**Migrate to production**' to promote the latest version of your Data Structure to your production environment.
 
 Your data structure will now be available in your production environment to send events against.
 

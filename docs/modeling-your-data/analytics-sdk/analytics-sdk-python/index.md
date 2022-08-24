@@ -6,7 +6,7 @@ sidebar_position: 400
 
 ## 1\. Overview
 
-The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-python-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/) in your Python event processing, data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), and other Python-compatible data processing frameworks.
+The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-python-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your Python event processing, data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), and other Python-compatible data processing frameworks.
 
 ## 2\. Compatibility
 

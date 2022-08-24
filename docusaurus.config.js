@@ -98,7 +98,7 @@ const config = {
       },
       footer: {
         style: 'dark',
-        items: [
+        links: [
           {             
             label: 'Change cookie settings',
             href: '/cookie-settings',

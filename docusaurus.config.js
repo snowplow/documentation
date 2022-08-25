@@ -22,6 +22,7 @@ const config = {
 
   clientModules: [
     require.resolve('./snowplow.js'),
+    require.resolve('./cookieConsent.js'),
   ],
 
   presets: [

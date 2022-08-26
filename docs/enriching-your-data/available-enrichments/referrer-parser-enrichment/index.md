@@ -1,7 +1,7 @@
 ---
 title: "Referer parser enrichment"
 date: "2020-02-14"
-sidebar_position: 50
+sidebar_position: 3
 ---
 
 This enrichment uses [snowplow referer-parser](https://github.com/snowplow/referer-parser) library to extract attribution data from referer URLs.

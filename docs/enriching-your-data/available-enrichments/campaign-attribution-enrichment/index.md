@@ -1,7 +1,7 @@
 ---
 title: "Campaign attribution enrichment"
 date: "2020-02-14"
-sidebar_position: 10
+sidebar_position: 3
 ---
 
 This enrichment can be used to link events to marketing campaigns, using the query string parameters.

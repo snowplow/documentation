@@ -1,7 +1,7 @@
 ---
 title: "Custom SQL enrichment"
 date: "2020-02-14"
-sidebar_position: 90
+sidebar_position: 10
 ---
 
 ## Summary

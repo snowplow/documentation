@@ -31,6 +31,13 @@ The below list details the cookies used in our website.
   </thead>
   <tbody>
     <tr>
+      <th colspan="2">Necessary</th>
+    </tr>
+    <tr>
+      <td>cookie-preferences</td>
+      <td>Ironically, to respect your cookie preferences we have to set a cookie for storing and processing them.</td>
+    </tr>
+    <tr>
       <th colspan="2">Analytics</th>
     </tr>
     <tr>
@@ -40,6 +47,10 @@ The below list details the cookies used in our website.
     <tr>
       <td>_gid</td>
       <td>Installed by Google Analytics, _gid cookie stores information on how visitors use a website, while also creating an analytics report of the website's performance. Some of the data that are collected include the number of visitors, their source, and the pages they visit anonymously.</td>
+    </tr>
+    <tr>
+      <td>_gat_gtag_UA_159566509_1</td>
+      <td>Set by Google to distinguish users.</td>
     </tr>
     <tr>
       <td>_sp5_</td>

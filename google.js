@@ -74,7 +74,7 @@ const setupGoogleTrackers = () => {
   const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
   const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
 
-  if (isProd && cookiePreferences && cookiePreferences.includes('analytics:1')) {
+  if (isProd && cookiePreferences && cookiePreferences.includes('analytics:1')) {
     attachGTMHeadScript()
     attachGTMBodyScript()
     attachGAScripts()

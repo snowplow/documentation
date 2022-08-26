@@ -3,7 +3,7 @@ import { newTracker, trackPageView } from '@snowplow/browser-tracker'
 import { LinkClickTrackingPlugin, enableLinkClickTracking, refreshLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking'
 import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
-import { DOCS_SITE_URLS } from './src/constants/config'
+import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
 
 const setupBrowserTracker = () => {
   const appId = DOCS_SITE_URLS.includes(window.location.hostname) ? 'docs2' : 'test'
@@ -20,7 +20,7 @@ const setupBrowserTracker = () => {
     }
   }
 
-  const cookiePreferences = Cookies.get('cookie-preferences')
+  const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
 
   if (!cookiePreferences || cookiePreferences.includes('analytics:0')) {
     trackerConfig.anonymousTracking = { 

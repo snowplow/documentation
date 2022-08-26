@@ -1,5 +1,6 @@
 import { configure, init } from 'cookie-though'
 import Cookies from 'js-cookie'
+import { COOKIE_PREF_KEY } from './src/constants/config'
 
 const cookieConfig = {
   "policies": [
@@ -21,7 +22,7 @@ const cookieConfig = {
     "acceptAll": "Accept all",
     "decline": "Decline"
   },
-  "cookiePreferenceKey": "cookie-preferences",
+  "cookiePreferenceKey": COOKIE_PREF_KEY,
   "header": {
       "title": "cookie though?",
       "subTitle": "You're probably fed up with these banners...",
@@ -42,7 +43,7 @@ const cookieConfig = {
 // See: https://github.com/inthepocket/cookie-though/blob/a90d059e0d2e81d612c9bb4afb40f6612bdf02c3/src/lib.ts#L55
 configure(cookieConfig)
 
-const cookiePreferences = Cookies.get('cookie-preferences')
+const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
 
 if (!cookiePreferences) {
   // this is what displays the cookie preferences popup

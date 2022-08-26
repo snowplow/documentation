@@ -1,10 +1,11 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
 import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
-import { COOKIE_PREF_KEY, DOCS_SITE_URLS, GTM_ID, UA_ID } from './src/constants/config'
+import { DOCS_SITE_URLS, GTM_ID, UA_ID } from './src/constants/config'
 
 // to prevent any possible mess-up with adding the scripts multiple times
 const scriptsAttached = [false, false, false]
+const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
 
 const attachGTMHeadScript = () => {
   if (scriptsAttached[0]) return
@@ -71,10 +72,9 @@ const attachGAScripts = () => {
 }
 
 const setupGoogleTrackers = () => {
-  const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
-  const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
+  const cookiePreferences = Cookies.get('cookie-preferences')
 
-  if (isProd && cookiePreferences && cookiePreferences.includes('analytics:1')) {
+  if (isProd && cookiePreferences && cookiePreferences.includes('analytics:1')) {
     attachGTMHeadScript()
     attachGTMBodyScript()
     attachGAScripts()
@@ -85,8 +85,6 @@ if (ExecutionEnvironment.canUseDOM) {
   setupGoogleTrackers()
 
   onPreferencesChanged((preferences)=> {
-    const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
-
     preferences.cookieOptions.forEach(({id, isEnabled}) => {
       if (id === 'analytics' && isEnabled && isProd) {
         attachGTMHeadScript()

@@ -1,0 +1,24 @@
+.customized {
+  font-weight: 400;
+  color: var(--ifm-color-primary);
+  padding-left: 4px;
+  font-family: 'Rubik';
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.customized:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: underline;
+}
+
+.customized:not(:last-of-type) {
+  margin-right: 16px;
+}
+
+@media screen and (max-width: 996px) {
+  :global(.navbar__inner) .customized {
+    display: none !important;
+  }
+}

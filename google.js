@@ -5,7 +5,6 @@ import { COOKIE_PREF_KEY, DOCS_SITE_URLS, GTM_ID, UA_ID } from './src/constants/
 
 // to prevent any possible mess-up with adding the scripts multiple times
 const scriptsAttached = [false, false, false]
-const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
 
 const attachGTMHeadScript = () => {
   if (scriptsAttached[0]) return
@@ -73,6 +72,7 @@ const attachGAScripts = () => {
 
 const setupGoogleTrackers = () => {
   const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
+  const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
 
   if (isProd && cookiePreferences && cookiePreferences.includes('analytics:1')) {
     attachGTMHeadScript()
@@ -85,6 +85,8 @@ if (ExecutionEnvironment.canUseDOM) {
   setupGoogleTrackers()
 
   onPreferencesChanged((preferences)=> {
+    const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
+
     preferences.cookieOptions.forEach(({id, isEnabled}) => {
       if (id === 'analytics' && isEnabled && isProd) {
         attachGTMHeadScript()

@@ -1,7 +1,7 @@
 ---
 title: "IP anonymization enrichment"
 date: "2020-02-14"
-sidebar_position: 12
+sidebar_position: 13
 ---
 
 This enrichment replaces the end of the user's IP address with "x"s, on a configurable length. For instance 13.54.45.87 could become 13.54.x.x.

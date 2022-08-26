@@ -1,7 +1,7 @@
 ---
 title: "Custom JavaScript enrichment"
 date: "2020-02-14"
-sidebar_position: 9
+sidebar_position: 10
 ---
 
 ## Description

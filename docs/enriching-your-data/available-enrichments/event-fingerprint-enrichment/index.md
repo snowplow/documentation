@@ -1,7 +1,7 @@
 ---
 title: "Event fingerprint enrichment"
 date: "2020-02-14"
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 This enrichment computes the fingerprint of an event using the query string parameters.

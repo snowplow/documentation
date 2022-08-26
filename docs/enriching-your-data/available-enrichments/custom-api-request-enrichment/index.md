@@ -1,7 +1,7 @@
 ---
 title: "Custom API Request enrichment"
 date: "2020-02-14"
-sidebar_position: 140
+sidebar_position: 12
 ---
 
 ## Summary

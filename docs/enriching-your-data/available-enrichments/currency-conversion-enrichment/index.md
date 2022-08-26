@@ -1,7 +1,7 @@
 ---
 title: "Currency conversion enrichment"
 date: "2020-02-14"
-sidebar_position: 130
+sidebar_position: 2
 ---
 
 This enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to convert the currencies used in transactions. It requires an Open Exchange Rates.

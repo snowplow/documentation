@@ -1,7 +1,7 @@
 ---
 title: "HTTP header extractor enrichment"
 date: "2020-02-14"
-sidebar_position: 0
+sidebar_position: 7
 ---
 
 This enrichment can extract name/value pairs from the HTTP headers and attach them to the event as derived contexts.

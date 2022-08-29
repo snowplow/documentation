@@ -157,15 +157,15 @@ Browse to `mini-public-address/kibana` , once Kibana is loaded, you should be ab
 
 You can then inspect any individual event data in the UI by unfolding a payload:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/12/Screen-Shot-2020-04-13-at-13.20.22.jpg?w=1024)
+![](images/Screen-Shot-2020-04-13-at-13.20.22.jpg)
 
 If you want to inspect bad events, click on `good`, placed towards top left of the screen and select `bad` from drop-down list.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/12/Screen-Shot-2020-04-13-at-13.32.26.jpg?w=1024)
+![](images/Screen-Shot-2020-04-13-at-13.32.26.jpg)
 
 Unfold any payload to inspect a bad event in detail.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/12/Screen-Shot-2020-04-13-at-13.23.16.jpg?w=1024)
+![](images/Screen-Shot-2020-04-13-at-13.23.16.jpg)
 
 ## Resetting Elasticsearch indices
 

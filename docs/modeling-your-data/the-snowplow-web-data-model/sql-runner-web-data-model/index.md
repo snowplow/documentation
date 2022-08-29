@@ -35,7 +35,7 @@ You can then run the model, either by running playbooks individually by running 
 
 This model consists of a series of modules, each is idempotent and can be run on independent schedules, and each produces a table which serves as the input to the next module.
 
-[![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/04/web_full_model_structure.jpg?w=583)](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/04/web_full_model_structure.jpg)
+![](images/web_full_model_structure.jpg)
 
 #### The individual modules
 
@@ -45,7 +45,7 @@ Each module produces a table which acts as the input to the subsequent module (t
 
 Each module comes with a `99-{module}-complete playbook`, which marks that module complete by updating any relevant manifests, and truncating the input, and cleaning up temporary tables. The complete steps may be run at the end of each module, or at the end of the run.
 
-[![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/04/web_model_module.jpg?w=1024)](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/04/web_model_module.jpg)
+![](images/web_model_module.jpg)
 
 More detail on each module can be found in the relevant READMEs in the [GitHub repository](https://github.com/snowplow/data-models/tree/master).
 

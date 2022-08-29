@@ -58,6 +58,6 @@ Adding this plugin will automatically start printing out `debug` logs to your De
 
 **Note:** You may need to enable `Verbose` logs in your Developer Tools, as this plugin uses `console.debug` to output results.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/Screenshot-2021-03-28-at-20.08.35.png?w=1024)
+![](images/Screenshot-2021-03-28-at-20.08.35.png)
 
 An example of the output from this plugin

@@ -48,7 +48,7 @@ You can also choose to override some of the parameters specifically for this tag
 
 If you have the Snowplow library [self-hosted](https://github.com/snowplow/snowplow/wiki/Self-hosting-snowplow-js), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-18-at-14.40.16.png?w=1024)
+![](images/Screenshot-2021-11-18-at-14.40.16.png)
 
 [](https://www.simoahava.com/images/2020/05/template-permissions-snowplow.jpg)Unfortunately, modifying permissions **breaks the gallery link** and you will no longer be notified about updates to the template. Being able to modify permissions without having the link break is a feature request I hope will get solved very soon.
 
@@ -88,7 +88,7 @@ function() {
 
 Alternatively, you can set the drop-down to the value `No`, and add the parameters manually instead:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-18-at-14.43.42.png?w=1024)
+![](images/Screenshot-2021-11-18-at-14.43.42.png)
 
 Some tag types will add additional selections to this section. Follow the official tracker documentation for more information about what each option does.
 
@@ -134,15 +134,15 @@ The **Callback Function** is something you can set to a JavaScript function. If 
 
 For any other commands which are supported by the Snowplow JavaScript Tracker v3, you can select the **\[Custom Command\]** option. Once select, you can enter any function name and the associated parameter for that function. The parameter can either be a simple string, in examples such as `setUserId`:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-18-at-14.44.50.png?w=1024)
+![](images/Screenshot-2021-11-18-at-14.44.50.png)
 
 Or it can be set to a Custom JavaScript Variable in the instances where an Object should be passed to the function, such as with `enableAnonymousTracking`:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-18-at-14.48.48.png?w=1024)
+![](images/Screenshot-2021-11-18-at-14.48.48.png)
 
 And then use this variable as your Command Argument:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-18-at-14.50.09.png?w=1024)
+![](images/Screenshot-2021-11-18-at-14.50.09.png)
 
 ### Additional Tracking Parameters
 

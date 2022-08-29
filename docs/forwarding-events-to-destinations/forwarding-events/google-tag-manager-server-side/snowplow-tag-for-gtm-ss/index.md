@@ -26,4 +26,4 @@ With the template installed, you can now add the Snowplow Tag to your GTM SS Con
 - Enter your Snowplow Collector Endpoint, and confirm the Cookie Name matches that of your Collector
 - Click Save
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/tagsetup.gif?w=1024)
+![](images/tagsetup.gif)

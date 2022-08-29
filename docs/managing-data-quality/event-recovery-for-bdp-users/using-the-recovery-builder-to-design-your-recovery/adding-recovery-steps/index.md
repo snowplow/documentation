@@ -23,11 +23,11 @@ To add a recovery step, click the `Add structured step` button. This will allow 
 
 Once added the step will appear in your list of recovery steps, and in the right hand panel you will see the resulting payload as a result of your step.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/10/failed-evs-steps-add-1.jpg?w=1024)
+![](images/failed-evs-steps-add-1.jpg)
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/10/failed-evs-steps-add-2.jpg?w=1024)
+![](images/failed-evs-steps-add-2.jpg)
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/10/failed-evs-steps-add-3.jpg?w=1024)
+![](images/failed-evs-steps-add-3.jpg)
 
 ### Using recommendations
 
@@ -37,4 +37,4 @@ To view recommendations click the `View recommendations` button. This will show 
 
 To apply a recommendation click `Apply this step`. You will be taken to a partially / fully configured step. Check you are happy with the configuration and click `Add this step` to add it to your recovery design.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/10/failed-evs-steps-recomms.jpg?w=1024)
+![](images/failed-evs-steps-recomms.jpg)

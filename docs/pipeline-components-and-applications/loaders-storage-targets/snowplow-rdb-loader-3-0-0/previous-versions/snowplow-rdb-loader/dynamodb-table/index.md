@@ -16,13 +16,13 @@ Partition key must be called `eventId` and have type String. Sort key must be ca
 
 Uncheck "Use default settings" checkbox and set "Write capacity units" to 100. Capacity units value is individual and should tweaked depending on your cluster size.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/create-table.png?w=1024)
+![](images/create-table.png)
 
 Create Table
 
 After table is created, write down "Amazon Resource Name (ARN)" in "Overview" tab. It should look similar to `arn:aws:dynamodb:us-east-1:719197435995:table/one-more-deduplication-test` This ARN will be used in next step.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/table-arn.png?w=1024)
+![](images/table-arn.png)
 
 Finding the Table ARN
 
@@ -57,6 +57,6 @@ Notice element in `Resourse` array. It must be changed to your ARN from previous
 
 `dynamodb:CreateTable` and `dynamodb:DeleteTable` are unnecessary if you already created table.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/policy.png?w=1024)
+![](images/policy.png)
 
 Attach the IAM policy

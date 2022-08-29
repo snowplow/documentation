@@ -83,7 +83,7 @@ Your metadata should now look something like this:
 
 Now scroll to the bottom and click **Upload** to upload the JavaScript file into your bucket. When done, you should have something like this:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/s3-upload.png?w=1024)
+![](images/s3-upload.png)
 
 ### Create your CloudFront distribution
 

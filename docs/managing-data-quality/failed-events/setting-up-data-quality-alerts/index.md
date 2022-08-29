@@ -22,10 +22,10 @@ To receive alerts you must have the Failed Events monitoring feature switched on
 - Find and select `Pipeline configuration`
 - Scroll down to `Pipeline alerts` or use the page navigation to jump to it
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/01/image.png?w=1024)
+![](images/image.png)
 
 - Click `Manage` for the alert you wish to subscribe to
 - Add one or more email addresses by typing them into the input and clicking `Add recipient`
 - Once you have added all recipients, click `Save Changes`
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/01/image-1.png?w=1024)
+![](images/image-1.png)

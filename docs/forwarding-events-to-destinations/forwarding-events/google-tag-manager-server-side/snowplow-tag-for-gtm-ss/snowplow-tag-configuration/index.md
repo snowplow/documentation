@@ -62,7 +62,7 @@ A table of definitions for self-describing data properties. Each row maps a sing
 
 For each Event, you can also read properties off the client event object and add them as properties to the Self Describing Event.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/sdjsetup.png?w=1024)
+![](images/sdjsetup.png)
 
 ### Send selected events as Snowplow Structured Events
 

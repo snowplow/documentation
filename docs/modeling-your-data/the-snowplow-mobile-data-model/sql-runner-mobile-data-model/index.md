@@ -12,7 +12,7 @@ In addition to these 'standard' modules there are optional modules that can be e
 
 Unlike the [web model](/docs/modeling-your-data/the-snowplow-web-data-model/index.md) the level of aggregation is not linear, as shown in the diagram below. This allows the sessions module to consume events other than just screen views, such as app installs or crashes.
 
-![Web vs Mobile](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/04/web_vs_mobile.jpg?w=1024)
+![Web vs Mobile](images/web_vs_mobile.jpg)
 
 The model runs incrementally, only processing new events (and events that have previously been modeled but are part of screen views, sessions or users for which/whom there is new information) with every run. The incremental logic is separate from the logic that calculates the tables so as to make customization of the model easier. More information on the model structure and customization options can be found below.
 
@@ -145,7 +145,7 @@ For further details please refer to the READMEs within each module's playbook di
 
 This model consists of a series of modules, each is idempotent and can be run on independent schedules, and each produces a table which serves as the input to the next module.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/04/mobile_full_model_structure.jpg?w=721)
+![](images/mobile_full_model_structure.jpg)
 
 #### The individual modules
 
@@ -157,7 +157,7 @@ Each module comes with a `99-{module}-complete playbook`, which marks that modu
 
 More detail on each module can be found in the relevant READMEs in the [GitHub repository](https://github.com/snowplow/data-models/tree/master).
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/04/web_model_module-1.jpg?w=1024)
+![](images/web_model_module-1.jpg)
 
 Architecture of an individual mobile module
 

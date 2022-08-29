@@ -42,7 +42,7 @@ As with the IAM Role, we will be using the AWS Console to get our Lambda functio
 
 1. On the Console navigate to `Lambda` section and click `Create a function`. Runtime should be _Java 8_. In the _Role_ dropdown pick _Choose an existing role_, then in the dropdown below choose the name of the role you have created in the previous part of the guide. Click _Create function_.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/6.png?w=1024)
+![](images/6.png)
 
 2. Jars for the Indicative Relay are hosted by us in S3. To find the S3 url to the appropriate hosted asset for the Snowplow Indicative Relay to provide to your Lambda function, you will need to choose the S3 bucket that is in the same region as your AWS Lambda function. For example, if your Lambda is `us-east-1` region, and the latest version `0.4.0`, then the jar you will provide to your Lambda function will be available at the following URL: `s3://snowplow-hosted-assets-us-east-1/relays/indicative/indicative-relay-0.4.0.jar`.
 
@@ -68,7 +68,7 @@ To find the name of the bucket for your region, consult this table:
 2. Although the Lambda has been created, it does not do anything yet. We need to provide the code and configure the function. Take a look at the _Function code_ box. In the _Handler_ textbox paste: `com.snowplowanalytics.indicative.LambdaHandler::recordHandler`  
     From the _Code entry type_ dropdown pick _Upload a file from Amazon S3_. A textbox labeled _S3 Link URL_ will appear. Paste in the S3 url you found in the previous step.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/7.png?w=1024)
+![](images/7.png)
 
 3. Below _Function code_ settings you will find a section called _Environment variables_. You need to use these environment variables to configure some additional settings for the relay, such as the the API key and filters.
     - **3.1 Setting up the API key**: In the first row, first column (the key) type `INDICATIVE_API_KEY`. In the second column (the value) paste your API Key obtained in the beginning of this guide.
@@ -165,7 +165,7 @@ If you do not set any of the environment variables, the defaults will be used.
 
 5. Now let's add our enriched Kinesis stream as an event source for the function. From the list of triggers in the Designer configuration up top, choose Kinesis.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/9.png?w=1024)
+![](images/9.png)
 
 Take a look at the Configure triggers section which just appeared below. Choose your Kinesis stream that contains Snowplow enriched events. Set the batch size to your liking - 100 is a reasonable setting. Note that this a maximum batch size, the function can be triggered with less records. For the starting position we recommend Trim horizon, which starts processing the stream from an observable start. Click Add button to finish the trigger configuration. Make sure Enable trigger is selected.
 

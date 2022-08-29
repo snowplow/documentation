@@ -54,7 +54,7 @@ To add the server:
 - Select the appropriate option for the server running Looker. If this has been setup by either the Looker or Snowplow teams, then they will be able to provide the appropriate details
 - If you've created a new security group just for Looker, you will need to add this to the Cluster. Select **Clusters** from the left hand menu, select your cluster and then click the **Cluster** dropdown at the top and select **Modify**. You should see a list of available security groups:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/2.jpeg?w=1024)
+![](images/2.jpeg)
 
 - Make sure you highlight your new security group then click the **Modify** button
 - Looker should now be ready to access your data!
@@ -66,7 +66,7 @@ To add the server:
 - Click on the **Connections** link on the left hand menu (under **Server Settings**)
 - Press the **New Database Connection** button (top right). The following screen appears:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/1.jpeg?w=1009)
+![](images/1.jpeg)
 
 - Give your connection a name (e.g. "Snowplow")
 - Select either `PostgeSQL` or `Amazon Redshift` for the **Dialect**
@@ -84,15 +84,15 @@ Note: if you are setting up a trial with the Looker or Snowplow teams, they shou
 - Select **Models** on the top menu
 - Select **Generate New Model** on the left hand menu under **Tools**
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/3.jpeg?w=1009)
+![](images/3.jpeg)
 
 Select your connection from the dropdown. Enter 'atomic' under **Schemas** and click the generate button:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/4.jpeg?w=1009)
+![](images/4.jpeg)
 
 You will now see the new model stubbed in the left hand menu. (You may need to refresh the page.)
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/5.jpeg?w=1024)
+![](images/5.jpeg)
 
 We now need to create a file for each of our models. Select the **Edit** link next to **MODELS** in the left-hand menu and then click the _New File_ link (just below) to create a new file. Create the following files:
 
@@ -123,7 +123,7 @@ Let's perform a simple analysis to start getting used to Looker. Let's analyze v
 
 Click on the **Explore** link in the top menu, select your connection and select **Visits**:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/6.jpeg?w=1024)
+![](images/6.jpeg)
 
 Select the following dimensions and metrics from the left hand list. (It may be easier to type them into the search box then scroll through the long list:
 
@@ -134,6 +134,6 @@ Select the following dimensions and metrics from the left hand list. (It may be 
 
 Select the run button. You should see the three metrics given for each landing page:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/7.jpeg?w=1024)
+![](images/7.jpeg)
 
 Easy - huh?

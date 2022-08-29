@@ -89,7 +89,7 @@ The Basic Installer is the quickest and simplest installer and should be suffici
 
 - You will be taken to AWS console to deploy the components in your AWS account; at this point you may need to sign into AWS if you are not already signed in.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/01/Screenshot-2021-01-12-at-08.37.35.jpg?w=1024)
+![](images/Screenshot-2021-01-12-at-08.37.35.jpg)
 
 You'll be taken to AWS Console to start install
 
@@ -135,13 +135,13 @@ If you use the basic installer and later decide you wish to add this security la
 - Navigate to [EC2 Service in your AWS console account](https://console.aws.amazon.com/ec2/v2/home), making sure you are in the same region where you installed your Try Snowplow stack.
 - Go to Security Groups.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2020/10/Screen-Shot-2020-10-20-at-09.45.43.png?w=1024)
+![](images/Screen-Shot-2020-10-20-at-09.45.43.png)
 
 - Find and select the security group named `$snowplow-sg-db` with the description _"Frontend Access to Database"_ (`snowplow` may also be your custom stack name if you provided one).
 - In the panel that opens select the `Inbound rules` tab and click _"Edit inbound rules"_.
 - Remove the existing rule if it is no longer needed (ie. `0.0.0.0/0` filter will allow for anyone with database credentials to initiate connection).
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2020/10/Screen-Shot-2020-10-20-at-09.45.56.png?w=1024)
+![](images/Screen-Shot-2020-10-20-at-09.45.56.png)
 
 - In editor change the `Source` value. There can be many rules applied to the same security group, so you can even set individual IP addresses in separate rules. Set a description for future reference.
 - Accept by clicking the _"Save rules"_ button.

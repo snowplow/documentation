@@ -29,7 +29,7 @@ To add a filter step, click the `Add a filter` button. This will allow you to bu
 
 Once added the step will appear in your list of filters.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/10/Screen-Shot-2021-10-13-at-16.16.42.jpg?w=1024)
+![](images/Screen-Shot-2021-10-13-at-16.16.42.jpg)
 
 ### Testing your filters
 
@@ -37,6 +37,6 @@ As you build up a set of filters they will automatically be run against your exa
 
 You can also test the filters against a batch of events. To do this, simply upload a batch file of events and each event in turn will be tested against your filters. You'll then be able to browse to sense check which were filtered out.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/10/Screen-Shot-2021-10-13-at-16.14.27.jpg?w=1024)
+![](images/Screen-Shot-2021-10-13-at-16.14.27.jpg)
 
 In this example two of the events in our batch did not pass our filters

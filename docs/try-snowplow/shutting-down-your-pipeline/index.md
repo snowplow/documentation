@@ -8,7 +8,7 @@ When you have finished with the Try Snowplow experience, you will want to shut d
 
 Navigate to [the Cloud Formation console](https://console.aws.amazon.com/cloudformation/home) in your AWS account, and select your pipeline stack. There is a delete button at the top of the page.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2020/10/delete-pipeline.png?w=1024)
+![](images/delete-pipeline.png)
 
 When you click the delete button you are shown a warning:
 

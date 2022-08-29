@@ -41,7 +41,7 @@ Tableau then asks for the details of the Redshift cluster we wish to connect to:
 
 We can fetch these details directly from the AWS console. Log into [console.aws.amazon.com](https://console.aws.amazon.com/console/home), select **Redshift** from the list of services and then select the Redshift cluster you want to connect to. The details of the cluster you need to connect Tableau are listed under **Cluster Database Properties**:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/4.jpg?w=1024)
+![](images/4.jpg)
 
 - Copy the database end point from the AWS console and paste it into the **server name** field in Tableau
 - Copy the port number from the console into Tableau

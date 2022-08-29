@@ -24,7 +24,7 @@ There are two methods to install the Snowplow Client.
 - Import `template.tpl` downloaded in Step 1
 - Click Save
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/manualclientinstall.gif?w=1024)
+![](images/manualclientinstall.gif)
 
 ## Snowplow Client Setup
 
@@ -33,4 +33,4 @@ With the template installed, you can now add the Snowplow Client to your GTM SS 
 - From the Clients tab, select "New", then select the Snowplow Client as your Client Configuration
 - Click Save
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/clientsetup.gif?w=1024)
+![](images/clientsetup.gif)

@@ -121,11 +121,11 @@ This way, a playbook organizes on a lower level the SQL scripts to run in linear
 
 Data models can now be configured via the Snowplow BDP Console:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-15-at-20.15.28.png?w=1024)
+![](images/Screenshot-2021-11-15-at-20.15.28.png)
 
 In the first step, you can provide the data model name, a description as well as the owner(s) of the data model that will be alerted in case of failure.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-15-at-20.20.44.png?w=890)
+![](images/Screenshot-2021-11-15-at-20.20.44.png)
 
 Please note that the model name needs to correspond to the corresponding datamodeling subfolder name in GitHub. The SQL and playbooks for the model in the above example would therefore live under:
 
@@ -133,7 +133,7 @@ Please note that the model name needs to correspond to the corresponding datamod
 
 In the second step, you can then add the schedule and configure the lock type:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-15-at-20.24.42.png?w=971)
+![](images/Screenshot-2021-11-15-at-20.24.42.png)
 
 Please note that the cron schedule is in UTC.
 
@@ -147,15 +147,15 @@ Do not change the lock type to "soft" for any data models that either unload or 
 
 In the third and last step you can configure which playbooks you want to run as part of this model, in what order:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-15-at-20.25.13.png?w=1024)
+![](images/Screenshot-2021-11-15-at-20.25.13.png)
 
 You can verify the DAG that will be generated based on the JSON by clicking 'Preview':
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-15-at-20.25.31.png?w=1024)
+![](images/Screenshot-2021-11-15-at-20.25.31.png)
 
 Once you are happy with the playbook configuration, you can create the model. The model will be disabled until you enable it:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/Screenshot-2021-11-15-at-20.25.53.png?w=1024)
+![](images/Screenshot-2021-11-15-at-20.25.53.png)
 
 Please make sure all your SQL and playbooks are merged to `master` in GitHub before enabling the model. Note that this tooling no longer runs a "sync and deploy" process. Any changes merged to `master` are available immediately.
 

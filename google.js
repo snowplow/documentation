@@ -88,10 +88,17 @@ if (ExecutionEnvironment.canUseDOM) {
     const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
 
     preferences.cookieOptions.forEach(({id, isEnabled}) => {
-      if (id === 'analytics' && isEnabled && isProd) {
-        attachGTMHeadScript()
-        attachGTMBodyScript()
-        attachGAScripts()
+      if (id === 'analytics' && isProd) {
+        if (isEnabled) {
+          attachGTMHeadScript()
+          attachGTMBodyScript()
+          attachGAScripts()
+        } else {
+          Cookies.remove('_ga')
+          Cookies.remove('_gid')
+          Cookies.remove('_gat_gtag_UA_159566509_1')
+          window.location.reload()
+        }
       }
     })
   })

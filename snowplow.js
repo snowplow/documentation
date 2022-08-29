@@ -7,11 +7,12 @@ import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
 
 const setupBrowserTracker = () => {
   const appId = DOCS_SITE_URLS.includes(window.location.hostname) ? 'docs2' : 'test'
+  const domain = location.host.split('.').reverse()
 
   const trackerConfig = { 
     appId,
     plugins: [ LinkClickTrackingPlugin() ], 
-    cookieDomain: ".snowplowanalytics.com",
+    cookieDomain: `.${domain[1]}.${domain[0]}`,
     cookieName: "_sp5_",
     contexts: {
       webPage: true,
@@ -28,7 +29,7 @@ const setupBrowserTracker = () => {
     }
   }
 
-  const snowplowTracker = newTracker('snplow5', 'https://collector-g.snowplowanalytics.com', trackerConfig)
+  const snowplowTracker = newTracker('snplow5', 'https://collector.snowplow.io', trackerConfig)
 
   enableLinkClickTracking()
   refreshLinkClickTracking()
@@ -45,10 +46,11 @@ if (ExecutionEnvironment.canUseDOM) {
       if (id === 'analytics') {
         if (isEnabled) {
           tracker.disableAnonymousTracking({ stateStorageStrategy: 'cookieAndLocalStorage' })
+           // to now track it with all the extra data
+          trackPageView()
         } else {
-          tracker.enableAnonymousTracking({
-            withServerAnonymisation: true
-          })
+          Cookies.remove('_sp5_')
+          window.location.reload()
         }
       }
     })

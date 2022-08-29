@@ -26,13 +26,3 @@
   border-color: #e4dcef;
   cursor: pointer;
 }
-
-.consentDesc {
-  display: inline-block;
-  font-weight: 800;
-  margin-right: 10px;
-}
-
-.consentState {
-  font-style: italic;
-}

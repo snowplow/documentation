@@ -143,7 +143,7 @@ The loader takes command line arguments `--config` with a path to the configurat
 ```
 $ docker run \
     -v /path/to/configs:/configs \
-    snowplow/snowplow-bigquery-streamloader:1.4.0 \
+    snowplow/snowplow-bigquery-streamloader:1.4.2 \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json
 ```
@@ -153,7 +153,7 @@ Or you can pass the whole config as a base64-encoded string using the `--config`
 ```
 $ docker run \
     -v /path/to/resolver.json:/resolver.json \
-    snowplow/snowplow-bigquery-streamloader:1.4.0 \
+    snowplow/snowplow-bigquery-streamloader:1.4.2 \
     --config=ewogICJwcm9qZWN0SWQiOiAiY29tLWFjbWUiCgogICJsb2FkZXIiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAiZW5yaWNoZWQtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogewogICAgICAgICJkYXRhc2V0SWQiOiAic25vd3Bsb3ciCiAgICAgICAgInRhYmxlSWQiOiAiZXZlbnRzIgogICAgICB9CgogICAgICAiYmFkIjogewogICAgICAgICJ0b3BpYyI6ICJiYWQtdG9waWMiCiAgICAgIH0KCiAgICAgICJ0eXBlcyI6IHsKICAgICAgICAidG9waWMiOiAidHlwZXMtdG9waWMiCiAgICAgIH0KCiAgICAgICJmYWlsZWRJbnNlcnRzIjogewogICAgICAgICJ0b3BpYyI6ICJmYWlsZWQtaW5zZXJ0cy10b3BpYyIKICAgICAgfQogICAgfQogIH0KCiAgIm11dGF0b3IiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAidHlwZXMtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogJHtsb2FkZXIub3V0cHV0Lmdvb2R9ICMgd2lsbCBiZSBhdXRvbWF0aWNhbGx5IGluZmVycmVkCiAgICB9CiAgfQoKICAicmVwZWF0ZXIiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAiZmFpbGVkLWluc2VydHMtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogJHtsb2FkZXIub3V0cHV0Lmdvb2R9ICMgd2lsbCBiZSBhdXRvbWF0aWNhbGx5IGluZmVycmVkCgogICAgICAiZGVhZExldHRlcnMiOiB7CiAgICAgICAgImJ1Y2tldCI6ICJnczovL2RlYWQtbGV0dGVyLWJ1Y2tldCIKICAgICAgfQogICAgfQogIH0KCiAgIm1vbml0b3JpbmciOiB7fSAjIGRpc2FibGVkCn0= \
     --resolver=/resolver.json
 ```
@@ -165,7 +165,7 @@ For example, to override the `repeater.input.subscription` setting using system 
 ```
 $ docker run \
     -v /path/to/configs:/configs \
-    snowplow/snowplow-bigquery-streamloader:1.4.0 \
+    snowplow/snowplow-bigquery-streamloader:1.4.2 \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
     -Drepeater.input.subscription="failed-inserts-sub"
@@ -176,7 +176,7 @@ Or to use environment variables for every setting:
 ```
 $ docker run \
     -v /path/to/resolver.json:/resolver.json \
-    snowplow/snowplow-bigquery-repeater:1.4.0 \
+    snowplow/snowplow-bigquery-repeater:1.4.2 \
     --resolver=/resolver.json \ 
     -Dconfig.override_with_env_vars=true
 ```
@@ -194,7 +194,7 @@ StreamLoader accepts `--config` and `--resolver` arguments, as well as any JVM s
 ```
 $ docker run \
     -v /path/to/configs:/configs \
-    snowplow/snowplow-bigquery-streamloader:1.4.0 \
+    snowplow/snowplow-bigquery-streamloader:1.4.2 \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
     -Dconfig.override_with_env_vars=true
@@ -209,7 +209,7 @@ The Dataflow Loader accepts the same two arguments as StreamLoader and [any oth
 ```
 $ docker run \
     -v /path/to/configs:/configs \
-    snowplow/snowplow-bigquery-loader:1.4.0 \
+    snowplow/snowplow-bigquery-loader:1.4.2 \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
     --labels={"key1":"val1","key2":"val2"} # optional Dataflow args
@@ -230,7 +230,7 @@ Mutator has three subcommands: `listen`, `create` and `add-column`.
 ```
 $ docker run \
     -v /path/to/configs:/configs \
-    snowplow/snowplow-bigquery-mutator:1.4.0 \
+    snowplow/snowplow-bigquery-mutator:1.4.2 \
     listen \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
@@ -244,7 +244,7 @@ $ docker run \
 ```
 $ docker run \
     -v /path/to/configs:/configs \
-    snowplow/snowplow-bigquery-mutator:1.4.0 \
+    snowplow/snowplow-bigquery-mutator:1.4.2 \
     add-column \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
@@ -261,7 +261,7 @@ The specified schema must be present in one of the Iglu registries in the resolv
 ```
 $ docker run \
     -v /path/to/configs:/configs \
-    snowplow/snowplow-bigquery-mutator:1.4.0 \
+    snowplow/snowplow-bigquery-mutator:1.4.2 \
     create \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
@@ -278,7 +278,7 @@ We recommend constantly running Repeater on a small / cheap node or Docker conta
 ```
 $ docker run \
     -v /path/to/configs:/configs \
-    snowplow/snowplow-bigquery-repeater:1.4.0 \
+    snowplow/snowplow-bigquery-repeater:1.4.2 \
     listen \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
@@ -295,19 +295,19 @@ $ docker run \
 All applications are available as Docker images on Docker Hub, based on Ubuntu Focal and OpenJDK 11:
 
 ```
-$ docker pull snowplow/snowplow-bigquery-streamloader:1.4.0
-$ docker pull snowplow/snowplow-bigquery-loader:1.4.0
-$ docker pull snowplow/snowplow-bigquery-mutator:1.4.0
-$ docker pull snowplow/snowplow-bigquery-repeater:1.4.0
+$ docker pull snowplow/snowplow-bigquery-streamloader:1.4.2
+$ docker pull snowplow/snowplow-bigquery-loader:1.4.2
+$ docker pull snowplow/snowplow-bigquery-mutator:1.4.2
+$ docker pull snowplow/snowplow-bigquery-repeater:1.4.2
 ```
 
-We also provide an alternative lightweight set of images based on [Google's "distroless" base image](https://github.com/GoogleContainerTools/distroless), which may provide some security advantages for carrying fewer dependencies. These images are distinguished with the `1.4.0-distroless` tag:
+We also provide an alternative lightweight set of images based on [Google's "distroless" base image](https://github.com/GoogleContainerTools/distroless), which may provide some security advantages for carrying fewer dependencies. These images are distinguished with the `1.4.2-distroless` tag:
 
 ```
-$ docker pull snowplow/snowplow-bigquery-streamloader:1.4.0-distroless
-$ docker pull snowplow/snowplow-bigquery-loader:1.4.0-distroless
-$ docker pull snowplow/snowplow-bigquery-mutator:1.4.0-distroless
-$ docker pull snowplow/snowplow-bigquery-repeater:1.4.0-distroless
+$ docker pull snowplow/snowplow-bigquery-streamloader:1.4.2-distroless
+$ docker pull snowplow/snowplow-bigquery-loader:1.4.2-distroless
+$ docker pull snowplow/snowplow-bigquery-mutator:1.4.2-distroless
+$ docker pull snowplow/snowplow-bigquery-repeater:1.4.2-distroless
 ```
 
 Mutator, Repeater and Streamloader are also available as fatjar files attached to [releases](https://github.com/snowplow-incubator/snowplow-bigquery-loader/releases) in the project's Github repository.

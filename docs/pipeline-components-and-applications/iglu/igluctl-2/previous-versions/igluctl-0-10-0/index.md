@@ -1,5 +1,5 @@
 ---
-title: "Igluctl (0.10.0)"
+title: "Igluctl (0.10.1)"
 date: "2022-07-05"
 sidebar_position: -40
 ---
@@ -25,8 +25,8 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 Download the latest Igluctl from GitHub releases:
 
 ```
-$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.0/igluctl_0.10.0.zip
-$ unzip igluctl_0.10.0.zip
+$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip
+$ unzip igluctl_0.10.1.zip
 ```
 
 Note that Igluctl expects JRE 8 or later, and Iglu Server 0.6.0 or later to run.

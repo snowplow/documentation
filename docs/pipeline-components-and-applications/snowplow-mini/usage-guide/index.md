@@ -55,14 +55,14 @@ Mini 0.8.0 comes bundled with Iglu Server 0.6.1 which introduced a couple of cha
 
 To add schemas to the Iglu repository bundled with Snowplow Mini, you have to create a dedicated pair of API keys. We have 2 options:
 
-- Use igluctl 0.7.0's `[server keygen](/docs/pipeline-components-and-applications/iglu/igluctl-2/previous-versions/igluctl-0-7-0/index.md#server_keygen)` subcommand
+- Use igluctl 0.10.1's `[server keygen](/docs/pipeline-components-and-applications/iglu/igluctl-2/previous-versions/igluctl-0-10-0/index.md#server-keygen)` subcommand
 - Use any HTTP client e.g. cURL
 
 Let's have examples for both options.
 
-- Download the igluctl 0.7.0 from Github:
+- Download the igluctl 0.10.1 from Github:
 
-`$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl  
+`$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip  
 $ chmod +x igluctl`
 
 Following is a sample execution where `com.acme` is the vendor prefix for which we'll upload our schemas, `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is the super API key created in step 2.2
@@ -90,7 +90,7 @@ To test and send non-standard Snowplow events such as your own custom-contexts a
 2. Download the latest Igluctl from Github:
 
 ```
-$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl
+$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip
 $ chmod +x igluctl
 ```
 

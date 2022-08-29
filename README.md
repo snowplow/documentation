@@ -68,8 +68,13 @@ brew install moreutils
 Then export the content from Wordpress (choose “All content”).
 
 Finally, run the import script.
-**WARNING**: it will overwrite `docs/migrated` and `docs/reusable`!
 
 ```bash
 ./import.sh <your-export-file.xml>
+```
+
+You can now compare the changes introduced by the import by running:
+
+```
+git diff --no-index --stat docs /tmp/docs
 ```

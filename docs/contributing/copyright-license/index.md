@@ -6,7 +6,7 @@ sidebar_position: 10
 
 ## Copyright
 
-Snowplow is copyright 2012-2021 Snowplow Analytics Ltd.
+Snowplow is copyright 2012-2022 Snowplow Analytics Ltd.
 
 ## [](https://github.com/snowplow/snowplow/wiki/Copyright-and-license#license)License
 

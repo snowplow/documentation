@@ -21,7 +21,9 @@ const config = {
   },
 
   clientModules: [
+    require.resolve('./cookieConsent.js'),
     require.resolve('./snowplow.js'),
+    require.resolve('./google.js'),
   ],
 
   presets: [
@@ -36,14 +38,6 @@ const config = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        },
-        googleAnalytics: {
-          trackingID: 'UA-159566509-1',
-          anonymizeIP: true,
-        },
-        gtag: {
-          trackingID: 'GTM-M24XMJD',
-          anonymizeIP: true,
         },
       },
     ],
@@ -98,8 +92,8 @@ const config = {
         style: 'dark',
         links: [
           {             
-            label: 'Change cookie settings',
-            href: '/cookie-settings',
+            label: 'Change cookie preferences',
+            href: '/cookie-preferences',
           },
           {
             label: 'Terms and conditions',

@@ -92,8 +92,8 @@ const config = {
         style: 'dark',
         links: [
           {             
-            label: 'Change cookie settings',
-            href: '/cookie-settings',
+            label: 'Change cookie preferences',
+            href: '/cookie-preferences',
           },
           {
             label: 'Terms and conditions',

@@ -27,7 +27,7 @@ const cookieConfig = {
   "header": {
     "title": "cookie though?",
     "subTitle": "You’re probably fed up with these banners...",
-    "description": "We would like to use cookies to understand how you interact with this documentation, so that we can improve the content and the way it’s structured"
+    "description": "We would like to use cookies to understand how you interact with this documentation, so that we can improve the content and the way it’s structured."
   },
   "cookiePolicy": {
     "url":"/cookie-settings",

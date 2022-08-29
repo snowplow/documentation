@@ -30,7 +30,7 @@ const cookieConfig = {
       "description": "Everybody wants to show their best side - and so do we. That’s why we use cookies to guarantee you a better experience."
   },
   "cookiePolicy": {
-    "url":"/pages/cookie-settings",
+    "url":"/cookie-settings",
     "label":"Read our full cookie policy",
   },
   "customizeLabel": "Edit preferences"

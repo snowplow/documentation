@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import { COOKIE_PREF_KEY } from '../../constants/config'
 import styles from './styles.module.css'
 
-export default function ManageCookieSettings() {
+export default function ManageCookiePreferences() {
   const [consentState, setConsentState] = useState('You currently have no cookies enabled')
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function ManageCookieSettings() {
   return (
     <p>
       <span>{consentState}</span>
-      <button type='button' className={styles.manageButton} onClick={show}>Settings</button>
+      <button type='button' className={styles.manageButton} onClick={show}>Preferences</button>
     </p>
   );
 }

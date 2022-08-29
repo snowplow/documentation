@@ -2,6 +2,7 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
 import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
 import { COOKIE_PREF_KEY, DOCS_SITE_URLS, GTM_ID, UA_ID } from './src/constants/config'
+import { reloadOnce } from './src/helpers/reloadOnce'
 
 // to prevent any possible mess-up with adding the scripts multiple times
 const scriptsAttached = [false, false, false]
@@ -97,7 +98,7 @@ if (ExecutionEnvironment.canUseDOM) {
           Cookies.remove('_ga')
           Cookies.remove('_gid')
           Cookies.remove('_gat_gtag_UA_159566509_1')
-          window.location.reload()
+          reloadOnce()
         }
       }
     })

@@ -4,6 +4,7 @@ import { LinkClickTrackingPlugin, enableLinkClickTracking, refreshLinkClickTrack
 import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
 import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
+import { reloadOnce } from './src/helpers/reloadOnce'
 
 const setupBrowserTracker = () => {
   const appId = DOCS_SITE_URLS.includes(window.location.hostname) ? 'docs2' : 'test'
@@ -50,7 +51,7 @@ if (ExecutionEnvironment.canUseDOM) {
           trackPageView()
         } else {
           Cookies.remove('_sp5_')
-          window.location.reload()
+          reloadOnce()
         }
       }
     })

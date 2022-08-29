@@ -5,7 +5,7 @@
 const config = {
   title: 'Snowplow Documentation',
   tagline: 'Build, deploy, and scale your next data creation project using Snowplow.',
-  url: 'https://docs.snowplowanalytics.com',
+  url: 'https://docs.snowplow.io',
   baseUrl: '/',
   // reset this back to throw, set to warn so that site builds
   onBrokenLinks: 'warn',

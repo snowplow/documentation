@@ -19,7 +19,7 @@ Taking an approach with Snowplow and GTM SS offers many additional flexibility a
 
 GTM SS with Snowplow can be setup in two different configurations.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/gtmssoptions.png?w=1024)
+![](images/gtmssoptions.png)
 
 ### Destinations Hub (Post-pipeline)
 

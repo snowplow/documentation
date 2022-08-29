@@ -14,7 +14,7 @@ As a user browses a webpage they can perform different actions that may be track
 
 In the example below two events were fired as HTTP post requests from a test webpage: a **page\_view** event and a **link\_click** event. 
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/using-poplin-chrome-extension.png?w=1024)
+![](images/using-poplin-chrome-extension.png)
 
 Within the parsed out HTTP requests that comprise the event payload are a variety of [Snowplow canonical event](/docs/understanding-your-pipeline/canonical-event/index.md) fields such as unique event\_ids, timestamps and user and session identifiers, as well as any custom event or entity fields.
 
@@ -28,7 +28,7 @@ By default the extension is able to see jsonschemas for events and entities that
 
 However the extension can be configured to compare events against private schema repositories (that contain your organization's proprietary jsonschemas). If the extension is not configured to point towards your private schema repository then any custom events or entities will not be recognised by the extension. An example of an unrecognized event is shown below: 
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/unrecognized-event.png?w=1024)
+![](images/unrecognized-event.png)
 
 Clicking on the “unrecognised” button and following the steps below will allow you to configure your own Poplin extension to also use jsonschemas from private repositories that you have access to. 
 
@@ -72,11 +72,11 @@ In the example below I have added two example repositories for the Snowplow AWS 
 
 Now that the extension can query your private iglu repositories the extension will be able to tell you in real time whether your events and entities are failing validation from entirely within the browser. An example of an event passing validation is shown below:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/event-passing-validation.png?w=1024)
+![](images/event-passing-validation.png)
 
 An example of an event failing validation is shown below, the reason for this event failing validation is due to “example\_field\_1” being a required field meaning it cannot be null.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/event-validation-failed.png?w=1024)
+![](images/event-validation-failed.png)
 
 This is useful, but when it comes to the debugging of failed events and the investigation of exactly WHY a particular event has failed validation there are additional tools that should be considered.
 

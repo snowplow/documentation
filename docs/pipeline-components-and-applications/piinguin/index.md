@@ -28,7 +28,7 @@ Following the release of [R106](https://snowplowanalytics.com/blog/2018/05/10/sn
 
 If you want to learn more about PII and how they are managed during Snowplow PII enrichment, you can read more in the release post for [R100](https://snowplowanalytics.com/blog/2018/02/27/snowplow-r100-epidaurus-released-with-pii-pseudonymization-support/) and [R106](https://snowplowanalytics.com/blog/2018/05/10/snowplow-r106-acropolis).
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/03/piinguin-diagram.png?w=1024)
+![](images/piinguin-diagram.png)
 
 ## Processing steps in order
 

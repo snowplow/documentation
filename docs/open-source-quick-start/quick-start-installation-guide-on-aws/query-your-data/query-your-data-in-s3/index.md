@@ -13,7 +13,7 @@ S3 provides an important backup of your data and can also serve as your data lak
 
 When you created your pipeline you also created three directories in your S3 bucket: 
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/11/querying-your-data-on-s3.png?w=1024)
+![](images/querying-your-data-on-s3.png)
 
 The `enriched/` and `bad/` directory holds your enriched data, and the data that has failed to be validated by your pipeline. We took a look at this data in Postgres in the last step. 
 

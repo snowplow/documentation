@@ -33,4 +33,4 @@ The UI also has instructions for instrumenting Snowplow tracking on mobile using
 
 In the Try Snowplow UI select "Pipeline status" in the navigation to check the health of the application. As long as the first two lines are checked your pipeline is ready to receive events.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2020/10/Screen-Shot-2020-10-12-at-16.41.59.png?w=1024)
+![](images/Screen-Shot-2020-10-12-at-16.41.59.png)

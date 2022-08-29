@@ -40,7 +40,7 @@ If a hard lock is in place, the job can not be restarted until the lock is remov
 
 Unless the data model is not safe to restart, we recommend using soft locks. Any standard use of the Snowplow v1 data models are safe to restart, and so can use soft locks. This allows you to resolve any issues that occur in your model without needing to wait for any manual action.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/05/image-1.png?w=1024)
+![](images/image-1.png)
 
 #### If your model is running on a soft lock
 
@@ -48,7 +48,7 @@ If your model is running on a soft lock, you do not need to do anything to resum
 
 If there is an issue with the SQL or playbooks of the model when it fails on a soft lock, it will continue to run on schedule, and will continue to send alerts each time it fails. There's nothing wrong with letting this happen, however you can also pause the model until you have fixed the issue and are ready to retry it. This is done by setting the status to `disabled`:
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/05/image-2.png?w=1024)
+![](images/image-2.png)
 
 Once the issue is resolved, simply set it back to `enabled` and the model will run again on its schedule.
 

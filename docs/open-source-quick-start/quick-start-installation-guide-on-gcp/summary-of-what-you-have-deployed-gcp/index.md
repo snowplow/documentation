@@ -8,7 +8,7 @@ sidebar_position: 300
 
 Note: you can very easily edit the script by removing certain modules, giving you the flexibility to design the topology of your pipeline according to your needs.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2021/09/image-4.png?w=1024)
+![](images/image-4.png)
 
 #### **Collector load balancer**
 

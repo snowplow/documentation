@@ -57,4 +57,4 @@ The transformer consumes enriched tsv-formatted Snowplow events from S3 or strea
 
 The loader consumes a stream of these messages and uses them to determine what data needs to be loaded. It issues the necessary SQL commands to the storage target.
 
-![](https://docs.snowplowanalytics.com/wp-content/uploads/2022/04/shredder_loader_interface.png?w=1024)
+![](images/shredder_loader_interface.png)

@@ -4,7 +4,7 @@ date: "2020-02-15"
 sidebar_position: 0
 ---
 
-[![](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2020/10/Screenshot-2020-02-24-at-10.38.12.png?w=1024)](https://docs.snowplowanalytics.com/wp-content/uploads/sites/2/2020/10/Screenshot-2020-02-24-at-10.38.12.png)
+![](images/Screenshot-2020-02-24-at-10.38.12.png)
 
 ## The typical architecture of a Snowplow pipeline
 

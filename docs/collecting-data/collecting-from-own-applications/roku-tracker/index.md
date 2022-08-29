@@ -5,9 +5,9 @@ sidebar_position: 140
 ---
 
 ```mdx-code-block
-import Block2891 from "@site/docs/reusable/untitled-reusable-block-34/_index.md"
+import Badges from '@site/src/components/Badges';
 
-<Block2891/>
+<Badges badgeType="Actively Maintained"></Badges>
 ```
 
 The Snowplow Roku Tracker allows you to track Snowplow events in your BrightScript and BrighterScript applications. The tracker is compatible with SceneGraph channels.

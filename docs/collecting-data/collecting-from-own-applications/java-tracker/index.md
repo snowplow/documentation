@@ -5,9 +5,9 @@ sidebar_position: 190
 ---
 
 ```mdx-code-block
-import Block2891 from "@site/docs/reusable/untitled-reusable-block-34/_index.md"
+import Badges from '@site/src/components/Badges';
 
-<Block2891/>
+<Badges badgeType="Actively Maintained"></Badges>
 ```
 
 The Snowplow Java Tracker lets you add analytics to your [Java](http://www.java.com/en/)\-based desktop and server apps, servlets and games.

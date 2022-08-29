@@ -15,7 +15,7 @@ docker run \
   -it --rm \
   -v $PWD:/snowplow \
   -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/snowplow-gcp-account-11aa55ff6b1b.json \
-  snowplow/snowplow-enrich-pubsub:3.2.2 \
+  snowplow/snowplow-enrich-pubsub:3.2.3 \
   --enrichments /snowplow/enrichments \
   --iglu-config /snowplow/resolver.json \
   --config /snowplow/config.hocon
@@ -31,7 +31,7 @@ Above assumes that you have following directory structure:
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
 ```
-java -jar snowplow-enrich-pubsub-3.2.2.jar \
+java -jar snowplow-enrich-pubsub-3.2.3.jar \
   --enrichments /snowplow/enrichments \
   --iglu-config /snowplow/resolver.json \
   --config /snowplow/config.hocon
@@ -49,7 +49,7 @@ docker run \
   -v $PWD:/snowplow \
   -e AWS_ACCESS_KEY_ID=xxx \
   -e AWS_SECRET_ACCESS_KEY=xxx \
-  snowplow/snowplow-enrich-kinesis:3.2.2 \
+  snowplow/snowplow-enrich-kinesis:3.2.3 \
   --enrichments /snowplow/enrichments \
   --iglu-config /snowplow/resolver.json \
   --config /snowplow/config.hocon
@@ -66,7 +66,7 @@ Depending on where the app runs, `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` might not
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
 ```
-java -jar snowplow-enrich-kinesis-3.2.2.jar \
+java -jar snowplow-enrich-kinesis-3.2.3.jar \
   --enrichments /snowplow/enrichments \
   --iglu-config /snowplow/resolver.json \
   --config /snowplow/config.hocon

@@ -135,7 +135,7 @@ If you choose Snowflake as destination, there is one more additional step. Pipel
 
 It is possible to use Snowflake as the destination in AWS pipelines. However necessary resources need to be created in Snowflake before starting the pipeline.
 
-For this purpose, the [Snowflake Terraform module](https://github.com/snowplow/quickstart-examples/tree/snowflake-loader/terraform/aws/snowflake) has been created. This module creates resources including, but not limited to, Snowflake database, table, user, and role. These resources are needed by the Snowflake Loader to operate correctly.
+For this purpose, the [Snowflake Terraform module](https://github.com/snowplow/quickstart-examples/tree/main/terraform/aws/snowflake) has been created. This module creates resources including, but not limited to, Snowflake database, table, user, and role. These resources are needed by the Snowflake Loader to operate correctly.
 
 #### Prerequisites
 

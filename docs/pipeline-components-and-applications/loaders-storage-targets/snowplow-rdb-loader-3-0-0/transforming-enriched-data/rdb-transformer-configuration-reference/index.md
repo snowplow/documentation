@@ -52,7 +52,7 @@ This is a complete list of the options that can be configured:
 | `output.compression` | Optional. One of `NONE` or `GZIP`. The default is `GZIP`. |
 | `output.region` | AWS region of the S3 bucket. Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). |
 | `queue.type` | Required. Type of the message queue. Can be either `sqs` or `sns`. |
-| `queue.queueName` | Required if queue type is `sqs`. Name of the SQS queue. |
+| `queue.queueName` | Required if queue type is `sqs`. Name of the SQS queue. SQS queue needs to be FIFO. |
 | `queue.topicArn` | Required if queue type is `sns`. ARN of the SNS topic. |
 | `queue.region` | AWS region of the SQS queue or SNS topic. Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). |
 | `formats.*` | Schema-specific format settings. |

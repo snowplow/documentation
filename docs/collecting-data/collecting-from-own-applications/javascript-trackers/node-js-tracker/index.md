@@ -7,7 +7,7 @@ sidebar_position: 300
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
 
-<Badges badgeType="Early Release"></Badges>
+<Badges badgeType="Actively Maintained"></Badges>
 ```
 
 The Snowplow Node.js Tracker allows you to track Snowplow events from your Node.js applications.

@@ -15,6 +15,7 @@ xq -x '
     .rss.channel.item |= map(
         # discard drafts
         select(.["wp:status"] | . == "publish" or . == "inherit") |
+        select(.["wp:post_modified"] > "2022-07-28") |
         if .["wp:post_type"] == "docs" then
             .["wp:post_name"] = (
                 # copy the page path to the name so that the pages are organized in a tree
@@ -57,7 +58,7 @@ done
 
 # Make links relative
 for file in $(grep -rl 'https://docs.snowplowanalytics.com/docs/' $tmpoutput); do
-    sed 's!https://docs.snowplowanalytics.com/docs/!/docs/migrated/!g' $file | sponge $file
+    sed 's!https://docs.snowplowanalytics.com/docs/!/docs/!g' $file | sponge $file
 done
 
 # Prefix blocks with an underscore and remove front matters
@@ -66,8 +67,8 @@ for file in $(ls $tmpoutput/wp_block); do
     rm $tmpoutput/wp_block/$file/index.md
 done
 
-rm -rf docs/migrated docs/reusable
-mv $tmpoutput/docs docs/migrated
-mv $tmpoutput/wp_block docs/reusable
+rm -rf /tmp/docs
+mv $tmpoutput/docs /tmp/.
+mv $tmpoutput/wp_block /tmp/docs/reusable
 
 rm -r $tmpexport

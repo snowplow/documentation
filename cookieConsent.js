@@ -30,7 +30,7 @@ const cookieConfig = {
     "description": "We would like to use cookies to understand how you interact with this documentation, so that we can improve the content and the way it’s structured."
   },
   "cookiePolicy": {
-    "url":"/cookie-settings",
+    "url":"/cookie-preferences",
     "label":"Read our full cookie policy",
   },
   "customizeLabel": "Edit preferences"

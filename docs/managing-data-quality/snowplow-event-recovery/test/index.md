@@ -69,10 +69,10 @@ See the [main script](https://github.com/snowplow-incubator/snowplow-event-recov
 
 You can test a complete recovery, starting from bad rows to getting the data enriched by:
 
-- Modifying the [`bad_rows.json`](https://docs.snowplowanalytics.com/open-source/snowplow/snowplow-event-recovery/0.1.0/core/src/test/resources/bad_rows.json) file which should contain examples of bad rows you want to recover
-- Adding your recovery scenarios to [`recovery_scenarios.json`](https://docs.snowplowanalytics.com/open-source/snowplow/snowplow-event-recovery/0.1.0/core/src/test/resources/recovery_scenarios.json)
-- If your recovery is relying on specific Iglu repositories additionally to Iglu central, you’ll need to specify those repositories in [`resolver.json`](https://docs.snowplowanalytics.com/open-source/snowplow/snowplow-event-recovery/0.1.0/core/src/test/resources/resolver.json)
-- If your recovery is relying on specific enrichments, you’ll need to add them to [`enrichments.json`](https://docs.snowplowanalytics.com/open-source/snowplow/snowplow-event-recovery/0.1.0/core/src/test/resources/enrichments.json)
+- Modifying the [`bad_rows.json`](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/series/0.1/core/src/test/resources/bad_rows.json) file which should contain examples of bad rows you want to recover
+- Adding your recovery scenarios to [`recovery_scenarios.json`](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/series/0.1/core/src/test/resources/recovery_scenarios.json)
+- If your recovery is relying on specific Iglu repositories additionally to Iglu central, you’ll need to specify those repositories in [`resolver.json`](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/series/0.1/core/src/test/resources/resolver.json)
+- If your recovery is relying on specific enrichments, you’ll need to add them to [`enrichments.json`](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/series/0.1/core/src/test/resources/enrichments.json)
 
 Once this is all done, you can run `sbt "project core" "testOnly *IntegrationSpec"`. What this process will do is:
 
@@ -81,7 +81,7 @@ Once this is all done, you can run `sbt "project core" "testOnly *IntegrationSpe
 
 ### A custom recovery scenario
 
-If you’ve written an additional recovery scenario you’ll need to add the corresponding unit tests to [`RecoverScenarioSpec.scala`](https://docs.snowplowanalytics.com/open-source/snowplow/snowplow-event-recovery/0.1.0/core/src/test/scala/com.snowplowanalytics.snowplow.event.recovery/RecoveryScenarioSpec.scala) and then run `sbt test`.
+If you’ve written an additional recovery scenario you’ll need to add the corresponding unit tests to [`RecoverScenarioSpec.scala`](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/series/0.1/core/src/test/scala/com.snowplowanalytics.snowplow.event.recovery/RecoveryScenarioSpec.scala) and then run `sbt test`.
 
 ## Output
 

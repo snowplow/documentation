@@ -28,7 +28,7 @@ In the below diagram we show an Iglu client resolving a schema from Iglu Central
 
 ![Iglu client](images/iglu-clients.png)
 
-An **Iglu registry** acts as a store of data schemas. Hosting JSON schemas in an Iglu registry allows you to use those schemas in Iglu-capable systems such as [Snowplow](https://docs.snowplowanalytics.com/).
+An **Iglu registry** acts as a store of data schemas. Hosting JSON schemas in an Iglu registry allows you to use those schemas in Iglu-capable systems such as Snowplow.
 
 So far we support two types of Iglu registry:
 

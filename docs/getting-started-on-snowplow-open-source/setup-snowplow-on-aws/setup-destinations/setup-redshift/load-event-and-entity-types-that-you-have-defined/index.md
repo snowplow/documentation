@@ -26,7 +26,7 @@ RDB Loader loads each shredded type into its own table in Redshift. You need to 
 
 ### Creating a new table for a new event type
 
-Once you have created a new schema in Iglu corresponding to your new event or entity type, you need to create a table definition for it. This can be automatically generated using `[igluctl](https://docs.snowplowanalytics.com/open-source/iglu/igluctl/0.5.0/#static-generate)`, using the `[static generate](https://docs.snowplowanalytics.com/open-source/iglu/igluctl/0.5.0/#static-generate)` command.
+Once you have created a new schema in Iglu corresponding to your new event or entity type, you need to create a table definition for it. This can be automatically generated using [igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md), using the [static generate](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static-generate) command.
 
 ## Creating and uploading a JSON Paths file
 
@@ -38,7 +38,7 @@ The format is simple - a JSON Paths file consists of a JSON array, where each el
 
 ### Creating a JSON Paths file
 
-JSON Path files should be automatically generated using `[igluctl static generate --with-json-paths](https://docs.snowplowanalytics.com/open-source/iglu/igluctl/0.5.0/#static-generate)`
+JSON Path files should be automatically generated using [igluctl static generate --with-json-paths](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static-generate)
 
 ### Installing the JSON Paths file
 

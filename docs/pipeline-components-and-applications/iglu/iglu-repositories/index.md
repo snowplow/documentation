@@ -4,7 +4,7 @@ date: "2021-03-26"
 sidebar_position: 20
 ---
 
-An Iglu repository acts as a store of data schemas (currently JSON Schemas only). Hosting JSON Schemas in an Iglu repository allows you to use those schemas in Iglu-capable systems such as [Snowplow](https://docs.snowplowanalytics.com/).
+An Iglu repository acts as a store of data schemas (currently JSON Schemas only). Hosting JSON Schemas in an Iglu repository allows you to use those schemas in Iglu-capable systems such as Snowplow.
 
 ## [](https://github.com/snowplow/iglu/wiki/Iglu-repositories#technical-architecture)Technical architecture
 

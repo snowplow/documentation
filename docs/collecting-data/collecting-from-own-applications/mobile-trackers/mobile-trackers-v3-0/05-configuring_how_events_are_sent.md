@@ -63,7 +63,7 @@ let emitterConfig = EmitterConfiguration()
 
 The tracker sends events in batches. The tracker allows only a choice of 1 (`BufferOption.single`), 10 (`BufferOption.defaultGroup`) or 25 (`BufferOption.largeGroup`) events per payload. The tracker sends the events as soon as possible using the `BufferOption.Single` option. Even with a different batching option the events are sent as soon as the event sending is automatically triggered after 5 seconds.
 
-(TODO: This is confusing and terrible, not clearly documented and should be coherent with the other trackers).
+<!-- (TODO: This is confusing and terrible, not clearly documented and should be coherent with the other trackers). -->
 
 Configure the batch size like this:
 

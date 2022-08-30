@@ -18,7 +18,7 @@ The tracker makes it easy to track different kinds of data. We provide a range o
 
 Each event can bring context which is composed by entities. The tracker attaches entities to the events based on the configuration, but you can attach your own custom entities as well.
 
-Every tracked event payload has a unique `event_id` UUID string set by the tracker and a set of timestamps along with other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](TODO).
+Every tracked event payload has a unique `event_id` UUID string set by the tracker and a set of timestamps along with other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol).
 
 ## Auto-tracked events and entities
 
@@ -51,9 +51,9 @@ Snowplow.createTracker(
 )
 ```
 
-You can know more about the `TrackerConfiguration` properties [here](TODO).
+You can know more about the `TrackerConfiguration` properties [here](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_tracker_configuration.html).
 
-### Platform and Application Data Tracking
+### Platform and Application Data Tracking {#platform}
 
 They capture information about the device and the app.
 
@@ -65,9 +65,9 @@ let trackerConfig = TrackerConfiguration()
     .applicationContext(true)
 ```
 
-More details on [Subject](TODO)
+More details on [Subject](04-tracking_specific_client-side_properties.md)
 
-### App Lifecycle Tracking
+### App Lifecycle Tracking {#lifecycle-tracking}
 
 It captures application lifecycle state changes. In particular, when the app changes the state from foreground to background and viceversa.
 
@@ -78,13 +78,13 @@ let trackerConfig = TrackerConfiguration()
     .lifecycleAutotracking(true)
 ```
 
-Once enabled, the tracker will automatically track a [`Background` event](TODO) when the app is moved to background and a [`Foreground` event](TODO) when the app moves back to foreground (becomes visible in the screen).
+Once enabled, the tracker will automatically track a [`Background` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_background.html) when the app is moved to background and a [`Foreground` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_foreground.html) when the app moves back to foreground (becomes visible in the screen).
 
-The tracker attaches a [`LifecycleEntity`](TODO) to all the events tracked by the tracker reporting if the app was visible (foreground state) when the event was tracked.
+The tracker attaches a [`LifecycleEntity`](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1entity_1_1_lifecycle_entity.html) to all the events tracked by the tracker reporting if the app was visible (foreground state) when the event was tracked.
 
 The `LifecycleEntity` value is conditioned by the internal state of the tracker only. To make an example, if the app is in foreground state but the developer tracks a `Background` event intentionally, it would force the generation of a `LifecycleEntity` that mark the app as non visible, even if it's actually visible in the device.
 
-### Session Tracking
+### Session Tracking {#session}
 
 Captures the session which helps to keep track of the user activity in the app.
 
@@ -113,7 +113,7 @@ Snowplow.createTracker(
 )
 ```
 
-The lifecycle events (`Foreground` and `Background` events) have a role in the session expiration. The lifecycle events can be enabled as explained in [App Lifecycle Tracking](TODO). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
+The lifecycle events (`Foreground` and `Background` events) have a role in the session expiration. The lifecycle events can be enabled as explained in [App Lifecycle Tracking](#lifecycle-tracking). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
 
 When the app moves from foreground to background, the `Background` event is fired. If session tracking is enabled, the session entity will be attached to the event checking the session expiration using the foreground timeout.
 When the app moves from background to foreground, the `Foreground` event is fired. If session tracking is enabled, the session entity will be attached to the event checking the session expiration using the background timeout.
@@ -170,8 +170,8 @@ let trackerConfig = TrackerConfiguration()
 
 The configuration is composed by two settings:
 
-- `screenViewAutotracking`: the tracker automatically tracks each screen change (triggered by `viewDidAppear` in a `ViewController`) using a [`ScreenView` event](TODO).
-- `screenContext`: the tracker attaches a [`Screen` entity](TODO) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
+- `screenViewAutotracking`: the tracker automatically tracks each screen change (triggered by `viewDidAppear` in a `ViewController`) using a [`ScreenView` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
+- `screenContext`: the tracker attaches a [`Screen` entity](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
 
 The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event, even if it was manually tracked and the app is in a different screen.
 
@@ -207,7 +207,7 @@ let trackerConfig = TrackerConfiguration()
 
 The tracker provides classes for tracking different types of events.
 The events are divided in two groups: canonical events and self-describing events.
-You can read more about the difference between the two [here](TODO)
+<!-- You can read more about the difference between the two [here](TODO) -->
 
 ### Creating a Structured event
 
@@ -224,7 +224,7 @@ let event = Structured(category: "Example", action: "my-action")
 tracker.track(event)
 ```
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_structured.html).
 
 ### Creating a Timing event
 
@@ -237,7 +237,7 @@ let event = Timing(category: "timing-category", variable: "timing-variable", tim
 tracker.track(event)
 ```
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_timing.html).
 
 ### Creating a ScreenView event
 
@@ -249,7 +249,7 @@ let event = ScreenView(name: "DemoScreenName", screenId: UUID())
 tracker.track(event)
 ```
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
 
 ### Creating a Consent event
 
@@ -265,7 +265,7 @@ let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd
 tracker.track(event)
 ```
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_consent_granted.html).
 
 #### Consent Withdrawn
 
@@ -282,9 +282,10 @@ let event = ConsentWithdrawn()
 tracker.track(event)
 ```
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_consent_withdrawn.html).
 
-### Tracking Ecommerce Transactions  (TODO: Section to remove)
+### Tracking Ecommerce Transactions
+<!-- (TODO: Section to remove) -->
 
 Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three steps that can be used together to track online transactions:
 
@@ -316,7 +317,7 @@ let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
 tracker.track(event)
 ```
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_ecommerce_transaction.html).
 
 ### Tracking Push and Local Notifications
 
@@ -337,7 +338,7 @@ let event = MessageNotification(title: "title", body: "body", trigger: .push)
 tracker.track(event)
 ```
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_message_notification.html).
 
 ### Tracking Deep Links
 
@@ -362,7 +363,7 @@ public func application(_ application: UIApplication,
 }
 ```
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_deep_link_received.html).
 
 The tracker keeps memory of the tracked Deep Link event and will attach a Deep Link entity to the first ScreenView tracked in the tracker.
 This is helpful during the analysis of the data because it will be clear the relation between the content visualized by the user (ScreenView event) and source (DeepLink entity) that originated that visualisation.
@@ -389,7 +390,7 @@ Some data, such as that relating to the user whose activity is being tracked, is
 
 Certain properties, including `userId` or `ipAddress`, can be set as "atomic" properties in the raw event, using the `Subject` class.
 
-A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](TODO).
+A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](03-custom_tracking_using_schemas.md).
 
 All events also provide the option for setting a custom timestamp, called `trueTimestamp`. See below for details.
 

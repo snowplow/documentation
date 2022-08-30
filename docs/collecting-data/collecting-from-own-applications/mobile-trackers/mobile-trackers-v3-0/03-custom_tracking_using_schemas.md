@@ -11,13 +11,13 @@ Self-describing (self-referential) JSON schemas are at the core of Snowplow trac
 In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach entities to any tracked event.
 The entities can describe the context in which the event happen or provide extra information to better describe the event.
 
-[Here](TODO) are some more details on what events and entities are.
+<!-- [Here](TODO) are some more details on what events and entities are. -->
 
 ## Tracking a custom event (SelfDescribing)
 
 You may wish to track events in your app which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by Structured events, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](https://docs.snowplowanalytics.com/docs/understanding-tracking-design/understanding-schemas-and-validation/) and can have arbitrarily many fields.
 
-[Here](TODO) are some more details on how to create a custom entity.
+<!-- [Here](TODO) are some more details on how to create a custom entity. -->
 
 ```swift
 let data = ["targetUrl": "http://a-target-url.com" as NSObject];       
@@ -31,14 +31,14 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 - A `data` field, containing the properties of the event
 - A `schema` field, containing the location of the JSON schema against which the `data` field should be validated.
 
-See the API docs for the full [list of options](TODO).
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_self_describing.html).
 
 ## Tracking a custom entity
 
 Custom entities can be used to augment any standard Snowplow event type with additional data.
 Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom entity, you must create a JSON schema.
 
-[Here](TODO) some more details on how to create a custom entity.
+<!-- [Here](TODO) some more details on how to create a custom entity. -->
 
 Note: Even if only one custom entity is being attached to an event, it still needs to be wrapped in an array.
 
@@ -221,7 +221,7 @@ The parts of a rule are wildcarded with certain guidelines:
 
 ##### Context Generator
 
-In case the logic for filter and generator callbacks are too complex, it’s possible to specify them in a class that implements the [`ContextGenerator` protocol](TODO).
+In case the logic for filter and generator callbacks are too complex, it’s possible to specify them in a class that implements the [`ContextGenerator` protocol](https://docs.snowplow.io/snowplow-android-tracker/interfacecom_1_1snowplowanalytics_1_1snowplow_1_1globalcontexts_1_1_context_generator.html).
 
 In this case the logic for filtering and generation is encapsulated behind a context generator class.
 

@@ -10,7 +10,7 @@ sidebar_position: 60
 
 Anonymous tracking is a tracker feature that enables anonymising various user and session identifiers to support user privacy in case consent for tracking the identifiers is not given.
 
-The affected user and session identifiers are stored in two context entities: [Session](TODO) and [Platform context](TODO). The Session context entity contains user and session identifiers, while the Platform context entity contains user identifiers. Concretely, the following user and session identifiers can be anonymised:
+The affected user and session identifiers are stored in two context entities: [Session](02-tracking_events.md#session) and [Platform context](02-tracking_events.md#platform). The Session context entity contains user and session identifiers, while the Platform context entity contains user identifiers. Concretely, the following user and session identifiers can be anonymised:
 
 1. Client-side user identifiers: the `userId` in Session context entity and the IDFA identifiers (`appleIdfa`, and `appleIdfv`) in the Platform context entity.
 2. Client-side session identifiers: `sessionId` in Session context.

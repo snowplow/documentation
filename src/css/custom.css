@@ -224,5 +224,5 @@ ul.breadcrumbs {
 }
 
 ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
-  top: 3px;
+  top: 2px;
 }

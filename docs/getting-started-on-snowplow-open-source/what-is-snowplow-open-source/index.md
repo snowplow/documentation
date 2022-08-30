@@ -19,7 +19,7 @@ Snowplow has been technically designed to:
 - Give you access, ownership and control of your own web analytics data (no lock in)
 - Be loosely coupled and extensible, so that it is easy to add e.g. new trackers to capture data from new platforms (e.g. mobile, TV) and put the data to new uses
 
-Getting started
+## Getting started
 
 We have built a set of [terraform](https://registry.terraform.io/namespaces/snowplow-devops) modules, which automates the setting up & deployment of the required infrastructure & applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side.
 

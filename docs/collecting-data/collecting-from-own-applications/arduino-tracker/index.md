@@ -88,7 +88,7 @@ You must add some initialization code to the top of your Arduino sketch, before 
 
 Make sure you have the following includes:
 
-```
+```arduino
 #include <SPI.h>
 #include <Ethernet.h>
 #include <SnowplowTracker.h>
@@ -98,7 +98,7 @@ Make sure you have the following includes:
 
 After your includes but before your `setup()` function, initialize your `SnowplowTracker` something like this:
 
-```
+```arduino
 // MAC address of this Arduino. Update with your shield's MAC address.
 const byte mac[] = { 0x90, 0xA2, 0xDA, 0x00, 0xF8, 0xA0 };
 
@@ -121,13 +121,13 @@ If you are using a Cloudfront collector you can use [initCf](https://github.com
 
 You can set the collector endpoint for the Cloudfront collector by adding to your `setup()` function:
 
-```
+```arduino
 snowplow.initCf("{{CLOUDFRONT-SUBDOMAIN}}");
 ```
 
 So if your Cloudfront subdomain is `d3rkrsqld9gmqf`, you would include:
 
-```
+```arduino
 snowplow.initCf("d3rkrsqld9gmqf");
 ```
 
@@ -137,13 +137,13 @@ This completes the initialization of your `SnowplowTracker`.
 
 If you are running a different collector (not the Cloudfront collector) then add to your `setup()` function:
 
-```
+```arduino
 snowplow.initUrl("{{COLLECTOR-URL}}");
 ```
 
 So if your collector endpoint is at 'my-company.c.snplow.com' then you would include:
 
-```
+```arduino
 snowplow.initUrl("my-company.c.snplow.com");
 ```
 
@@ -159,7 +159,7 @@ However you may want to additionally identify a specific Arduino board by a more
 
 To set a business-friendly user ID for this Arduino, use the `setUserId()` method i.e.:
 
-```
+```arduino
 snowplow.setUserId("boardroom-arduino");
 ```
 
@@ -167,8 +167,8 @@ snowplow.setUserId("boardroom-arduino");
 
 Tracking functions supported by the Arduino Tracker at a glance:
 
-| **Function** | **Description** |
-| --- | --- |
+| **Function**                                                                                     | **Description**                          |
+|--------------------------------------------------------------------------------------------------|------------------------------------------|
 | [`trackStructEvent`](https://github.com/snowplow/snowplow/wiki/Arduino-Tracker#trackStructEvent) | Track a Snowplow custom structured event |
 
 ### Common
@@ -183,18 +183,18 @@ All `trackXXX` functions return an integer to report the status of the attempt
 
 The full list of return codes are given below:
 
-| **Constant** | **Integer value** | **Description** |
-| --- | --- | --- |
-| `ERROR_CONNECTION_FAILED` | \-1 | Could not connect to Snowplow collector |
-| `ERROR_TIMED_OUT` | \-2 | Snowplow collector did not respond |
-| `ERROR_INVALID_RESPONSE` | \-3 | Snowplow collector's response couldn't be parsed |
-| `ERROR_MISSING_ARGUMENT` | \-4 | Required argument(s) to `trackXXX` missing |
-| `ERROR_HTTP_STATUS` | \-5 | HTTP status code returned by Snowplow collector was server or client error |
-| N/A | 1-399 | Non-error HTTP status code returned by Snowplow collector |
+| **Constant**              | **Integer value** | **Description**                                                            |
+|---------------------------|-------------------|----------------------------------------------------------------------------|
+| `ERROR_CONNECTION_FAILED` | \-1               | Could not connect to Snowplow collector                                    |
+| `ERROR_TIMED_OUT`         | \-2               | Snowplow collector did not respond                                         |
+| `ERROR_INVALID_RESPONSE`  | \-3               | Snowplow collector's response couldn't be parsed                           |
+| `ERROR_MISSING_ARGUMENT`  | \-4               | Required argument(s) to `trackXXX` missing                                 |
+| `ERROR_HTTP_STATUS`       | \-5               | HTTP status code returned by Snowplow collector was server or client error |
+| N/A                       | 1-399             | Non-error HTTP status code returned by Snowplow collector                  |
 
 You can access these constants in your code by prepending with `SnowplowTracker::`, for example:
 
-```
+```arduino
 int ret_val = snowplow.trackXXX;
 if (ret_val == SnowplowTracker::ERROR_HTTP_STATUS) {
   ...
@@ -215,13 +215,13 @@ Some examples of tracking custom structured events from your Arduino board(s) mi
 
 There are five arguments associated with each structured event. Of them, only the first two are required:
 
-| **Name** | **Required?** | **Description** |
-| --- | --- | --- |
-| `aCategory` | Yes | The name you supply for the group of objects you want to track e.g. 'sensor', 'ecomm' |
-| `aAction` | Yes | A string which defines the type of user interaction for the web object e.g. 'read-temp', 'wifi-strength' |
-| `aLabel` | No | An optional string which identifies the specific object being actioned e.g. ID of the sensor being read |
-| `aProperty` | No | An optional string describing the object or the action performed on it. This might be whether the temperature reading is in Fahrenheit or Celsius |
-| `aValue` | No | An optional float or double to quantify or further describe the user action. This might be the price of an item added-to-basket, or the starting time of the video where play was just pressed |
+| **Name**    | **Required?** | **Description**                                                                                                                                                                                |
+|-------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `aCategory` | Yes           | The name you supply for the group of objects you want to track e.g. 'sensor', 'ecomm'                                                                                                          |
+| `aAction`   | Yes           | A string which defines the type of user interaction for the web object e.g. 'read-temp', 'wifi-strength'                                                                                       |
+| `aLabel`    | No            | An optional string which identifies the specific object being actioned e.g. ID of the sensor being read                                                                                        |
+| `aProperty` | No            | An optional string describing the object or the action performed on it. This might be whether the temperature reading is in Fahrenheit or Celsius                                              |
+| `aValue`    | No            | An optional float or double to quantify or further describe the user action. This might be the price of an item added-to-basket, or the starting time of the video where play was just pressed |
 
 There are four slightly different signatures for the `tractStructEvent`, depending on what type of `aValue` you want to supply:
 
@@ -229,7 +229,7 @@ There are four slightly different signatures for the `tractStructEvent`, depend
 
 The relevant signature for `trackStructEvent` if you have no `aValue` to log is:
 
-```
+```arduino
 int trackStructEvent(const char *aCategory,
                      const char *aAction,
                      const char *aLabel = NULL,
@@ -238,7 +238,7 @@ int trackStructEvent(const char *aCategory,
 
 Note that this version defaults `aLabel` and `aProperty` to `NULL` if you don't set them. Here's an example invocation:
 
-```
+```arduino
 snowplow.trackStructEvent("example", "basic ping");
 ```
 
@@ -246,7 +246,7 @@ snowplow.trackStructEvent("example", "basic ping");
 
 The relevant signature for `trackStructEvent` if `aValue` is an integer is:
 
-```
+```arduino
 int trackStructEvent(const char *aCategory,
                      const char *aAction,
                      const char *aLabel,
@@ -261,7 +261,7 @@ Notes:
 
 Here's an example invocation:
 
-```
+```arduino
 snowplow.trackStructEvent("example", "profile-update", "age", NULL, 22);
 ```
 
@@ -269,7 +269,7 @@ snowplow.trackStructEvent("example", "profile-update", "age", NULL, 22);
 
 The relevant signature for `trackStructEvent` to track a double in `aValue` is:
 
-```
+```arduino
 int trackStructEvent(const char *aCategory,
                      const char *aAction,
                      const char *aLabel,
@@ -282,7 +282,7 @@ int trackStructEvent(const char *aCategory,
 
 Here's an example invocation:
 
-```
+```arduino
 snowplow.trackStructEvent("example", "constant", NULL, "pi", 3.14159, 5);
 ```
 
@@ -290,7 +290,7 @@ snowplow.trackStructEvent("example", "constant", NULL, "pi", 3.14159, 5);
 
 The relevant signature for `trackStructEvent` to track a float in `aValue` is:
 
-```
+```arduino
 int trackStructEvent(const char *aCategory,
                      const char *aAction,
                      const char *aLabel,
@@ -303,7 +303,7 @@ int trackStructEvent(const char *aCategory,
 
 Here's an example invocation:
 
-```
+```arduino
 snowplow.trackStructEvent("example", "temp reading", NULL, "celsius", 15.3f, 1);
 ```
 
@@ -317,7 +317,7 @@ By default, debug logging to your Arduino Serial Monitor console is switched **
 
 To switch off this logging when you are finished testing, edit this line found near the top of your copy of `SnowplowTracker.cpp`:
 
-```
+```arduino
 #define LOG_LEVEL   0x03 // Change to 0x00 when you've finished testing
 ```
 
@@ -325,9 +325,9 @@ As the comment says, change "0x03" to "0x00" to switch off all logging to your A
 
 The full set of logging levels are as follows:
 
-| **Constant** | **Integer value** | **Description** |
-| --- | --- | --- |
-| `NO_LOG` | 0x00 | Don't print any messages to the Serial Monitor console |
-| `ERROR_LEVEL` | 0x01 | Only print errors to the console |
-| `INFO_LEVEL` | 0x02 | Print errors and important messages to the console |
-| `DEBUG_LEVEL` | 0x03 | Print all errors and messages to the console |
+| **Constant**  | **Integer value** | **Description**                                        |
+|---------------|-------------------|--------------------------------------------------------|
+| `NO_LOG`      | 0x00              | Don't print any messages to the Serial Monitor console |
+| `ERROR_LEVEL` | 0x01              | Only print errors to the console                       |
+| `INFO_LEVEL`  | 0x02              | Print errors and important messages to the console     |
+| `DEBUG_LEVEL` | 0x03              | Print all errors and messages to the console           |

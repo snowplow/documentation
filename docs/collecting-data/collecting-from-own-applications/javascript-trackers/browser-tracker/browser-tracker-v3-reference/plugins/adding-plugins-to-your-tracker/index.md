@@ -15,7 +15,7 @@ There are two ways to add plugins:
 
 To add a plugin at tracker intialisation, you include the plugin in the `Plugins` array:
 
-```
+```javascript
 import { newTracker } from '@snowplow/browser-tracker';
 import { PerformanceTimingPlugin } from '@snowplow/browser-plugin-performance-timing';
 
@@ -32,7 +32,7 @@ newTracker('sp', '{{collector_url_here}}', {
 
 To add a plugin after tracker intialisation, you can call `addPlugin` and pass the plugin in:
 
-```
+```javascript
 import { newTracker, addPlugin } from '@snowplow/browser-tracker';
 import { PerformanceTimingPlugin } from '@snowplow/browser-plugin-performance-timing';
 

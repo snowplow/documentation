@@ -8,7 +8,7 @@ sidebar_position: 3000
 
 Since 0.5.0 self-describing events and contexts can be sent with `SchemaKey` wrapper from [Iglu Core](https://github.com/snowplow/iglu/wiki/Scala-iglu-core) for additional type-safety.
 
-```
+```scala
 import com.snowplowanalytics.iglu.core.{SchemaKey, SchemaVer}
 import io.circe.Json
 
@@ -31,15 +31,15 @@ Use `trackSelfDescribingEvent` to track a custom Self-describing events (previ
 
 You can use its alias `trackUnstructEvent`.
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `unstructuredEvent` | Self-describing JSON containing unstructured event | Yes | `SelfDescribingJson` |
-| `contexts` | List of custom contexts for the event | No | `List[SelfDescribingJson]` |
-| `timestamp` | Device created timestamp or true timestamp | No | `Option[Timestamp]` |
+| **Argument**        | **Description**                                    | **Required?** | **Type**                   |
+|---------------------|----------------------------------------------------|---------------|----------------------------|
+| `unstructuredEvent` | Self-describing JSON containing unstructured event | Yes           | `SelfDescribingJson`       |
+| `contexts`          | List of custom contexts for the event              | No            | `List[SelfDescribingJson]` |
+| `timestamp`         | Device created timestamp or true timestamp         | No            | `Option[Timestamp]`        |
 
 Create a Snowplow unstructured event [self-describing JSON](https://github.com/snowplow/iglu/wiki/Self-describing-JSONs):
 
-```
+```scala
 import com.snowplowanalytics.iglu.core.{SchemaKey, SchemaVer}
 import io.circe.Json
 
@@ -53,13 +53,13 @@ val productViewEvent = SelfDescribingJson(
 
 Send it using the `trackSelfDescribingEvent` tracker method:
 
-```
+```scala
 tracker.trackSelfDescribingEvent(productViewEvent)
 ```
 
 You can attach any number of custom contexts to an event:
 
-```
+```scala
 val pageTypeContext = SelfDescribingJson(
   SchemaKey("com.acme", "page_type", "jsonschema", SchemaVer(1,0,0)),
   Json.obj(
@@ -82,19 +82,19 @@ t.trackSelfDescribingEvent(productViewEvent, List(pageTypeContext, userContext))
 
 Use `trackStructEvent` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required).
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | `String` |
-| `action` | Defines the type of user interaction which this event involves | Yes | `String` |
-| `label` | A string to provide additional dimensions to the event data | No | `Option[String]` |
-| `property` | A string describing the object or the action performed on it | No | `Option[String]` |
-| `value` | A value to provide numerical data about the event | No | `Option[Double]` |
-| `contexts` | List of custom contexts for the event | No | `List[SelfDescribingJson]` |
-| `timestamp` | Device created timestamp or true timestamp | No | `Option[Timestamp]` |
+| **Argument** | **Description**                                                  | **Required?** | **Type**                   |
+|--------------|------------------------------------------------------------------|---------------|----------------------------|
+| `category`   | The grouping of structured events which this `action` belongs to | Yes           | `String`                   |
+| `action`     | Defines the type of user interaction which this event involves   | Yes           | `String`                   |
+| `label`      | A string to provide additional dimensions to the event data      | No            | `Option[String]`           |
+| `property`   | A string describing the object or the action performed on it     | No            | `Option[String]`           |
+| `value`      | A value to provide numerical data about the event                | No            | `Option[Double]`           |
+| `contexts`   | List of custom contexts for the event                            | No            | `List[SelfDescribingJson]` |
+| `timestamp`  | Device created timestamp or true timestamp                       | No            | `Option[Timestamp]`        |
 
 Example:
 
-```
+```scala
 val pageTypeContext = SelfDescribingJson(
   SchemaKey("com.acme", "page_type", "jsonschema", SchemaVer(1,0,0)),
   Json.obj(
@@ -117,17 +117,17 @@ t.trackStructEvent("commerce", "order", property=Some("book"), contexts=List(pag
 
 Use `trackPageView` to track a user viewing a page within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `pageUrl` | The URL of the page | Yes | `String` |
-| `pageTitle` | The title of the page | No | `Option[String]` |
-| `referrer` | The address which linked to the page | No | `Option[String]` |
-| `contexts` | Custom contexts for the event | No | `List[SelfDescribingJson]` |
-| `timestamp` | When the pageview occurred | No | `Option[Timestamp]` |
+| **Argument** | **Description**                      | **Required?** | **Validation**             |
+|--------------|--------------------------------------|---------------|----------------------------|
+| `pageUrl`    | The URL of the page                  | Yes           | `String`                   |
+| `pageTitle`  | The title of the page                | No            | `Option[String]`           |
+| `referrer`   | The address which linked to the page | No            | `Option[String]`           |
+| `contexts`   | Custom contexts for the event        | No            | `List[SelfDescribingJson]` |
+| `timestamp`  | When the pageview occurred           | No            | `Option[Timestamp]`        |
 
 Example:
 
-```
+```scala
 t.trackPageView("www.example.com", Some("example"), Some("www.referrer.com"))
 ```
 
@@ -135,15 +135,15 @@ t.trackPageView("www.example.com", Some("example"), Some("www.referrer.com"))
 
 Use `trackError` to track exceptions raised during your app's execution. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `error` | Any throwable need to be tracked | Yes | `Throwable` |
-| `contexts` | Custom contexts for the event | No | `List[SelfDescribingJson]` |
-| `timestamp` | When the pageview occurred | No | `Option[Timestamp]` |
+| **Argument** | **Description**                  | **Required?** | **Validation**             |
+|--------------|----------------------------------|---------------|----------------------------|
+| `error`      | Any throwable need to be tracked | Yes           | `Throwable`                |
+| `contexts`   | Custom contexts for the event    | No            | `List[SelfDescribingJson]` |
+| `timestamp`  | When the pageview occurred       | No            | `Option[Timestamp]`        |
 
 Example:
 
-```
+```scala
 try {
   1 / 0
 } catch {
@@ -174,13 +174,13 @@ To track an ecommerce transaction item. Fire a `trackTransaction` to register 
 
 By default, Scala Tracker will generate a `dvce_created_tstamp` and add it to event payload. You also can manually set it using `timestamp` argument in all tracking methods. It should be in milliseconds since the Unix epoch:
 
-```
+```scala
 tracker.trackSelfDescribingEvent(productViewEvent, Nil, Some(1432806619000L))
 ```
 
 Beside of it, you can set `true_tstamp` if you have more reliable source about event timestamp. You can tag timstamp as "true" using class `TrueTimestamp`:
 
-```
+```scala
 tracker.trackSelfDescribingEvent(productViewEvent, Nil, Some(Tracker.TrueTimestamp(1432806619000L)))
 ```
 

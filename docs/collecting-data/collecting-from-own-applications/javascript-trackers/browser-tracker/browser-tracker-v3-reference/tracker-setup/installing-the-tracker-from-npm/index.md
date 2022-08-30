@@ -13,13 +13,13 @@ Getting started with sending events using the Browser Tracker will be familiar f
 
 - You can then import this library into your application
 
-```
+```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 ```
 
 - Configure an instance of the tracker by calling `newTracker(...)` with your desired properties. This will create a module level instance of your tracker. You don't need to keep a reference to it.
 
-```
+```javascript
 newTracker('sp1', '{{collector_url}}', { 
   appId: 'my-app-id', 
   plugins: [ ],
@@ -28,7 +28,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 - Then you can use the track methods to send some events. You can send a Page View event to all initialised trackers with just:
 
-```
+```javascript
 trackPageView();
 ```
 
@@ -41,13 +41,13 @@ trackPageView();
 
 - You can then import the form tracking library:
 
-```
+```javascript
 import { FormTrackingPlugin, enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
 ```
 
 - Update your tracker initialization code so the tracker knows this plugin exists:
 
-```
+```javascript
 newTracker('sp1', '{{collector_url}}', { 
   appId: 'my-app-id', 
   plugins: [ FormTrackingPlugin() ],
@@ -56,7 +56,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 - And then use the new functions which this plugin includes:
 
-```
+```javascript
 enableFormTracking();
 ```
 

@@ -23,7 +23,7 @@ The tracker provides the `SqliteStorage` class that can be used as the event s
 
 You may also provide a custom event store implementation. To do so, define a class that inherits from the `EventStore` struct:
 
-```
+```cpp
 struct EventStore {
   virtual void add_event(const Payload &payload) = 0;
   virtual void get_event_rows_batch(list<EventRow> *event_list, int number_to_get) = 0;
@@ -33,11 +33,11 @@ struct EventStore {
 
 The `EventStore` struct defines functions to insert, retrieve, and remove events from the queue. Events are represented using their `Payload` instance which is persisted in a `EventRow` wrapper that also assigns IDs to each stored event (these event row IDs are different from event IDs used in the event payloads). There are three supported operations:
 
-| Function | Description |
-| --- | --- |
-| `add_event` | Insert event payload into event queue. |
-| `get_event_rows_batch` | Retrieve event rows from event queue up to the given limit. |
-| `delete_event_rows_with_ids` | Remove event rows with the given event row IDs. |
+| Function                     | Description                                                 |
+|------------------------------|-------------------------------------------------------------|
+| `add_event`                  | Insert event payload into event queue.                      |
+| `get_event_rows_batch`       | Retrieve event rows from event queue up to the given limit. |
+| `delete_event_rows_with_ids` | Remove event rows with the given event row IDs.             |
 
 ## Emitter request callback
 
@@ -49,7 +49,7 @@ The emitter enables you to set a callback function to be called after events are
 
 The callback is given two arguments – list of event IDs, and their emit status. You can only set one callback at once but you can subscribe to multiple emit statuses using binary operations. The following example shows how to set a callback that is called for all three emit statuses and prints to standard output.
 
-```
+```cpp
 emitter_configuration.set_request_callback(
     [](list<string> event_ids, EmitStatus emit_status) {
       switch (emit_status) {
@@ -75,7 +75,7 @@ The Emitter has a retry functionality that repeatedly sends the same events to t
 
 The `Emitter` and `EmitterConfiguration` provide an option to set custom retry behavior for 3xx, 4xx and 5xx HTTP status codes. You can call the `set_retry_for_status_code` function on the `Emitter` or `EmitterConfiguration` instance to define whether to retry or not for a given HTTP status code. Here is an example that overrides the default behavior and enables retries on 422 status code:
 
-```
+```cpp
 emitter_configuration.set_retry_for_status_code(422, true);
 ```
 
@@ -91,7 +91,7 @@ You may want to force an emitter to send all events in its buffer, even if the b
 
 Example:
 
-```
+```cpp
 tracker->flush();
 ```
 

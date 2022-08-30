@@ -20,7 +20,7 @@ If this plugin is used, the tracker will look for Google Analytics cookies (spec
 
 ## Initialization
 
-```
+```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { GaCookiesPlugin } from '@snowplow/browser-plugin-ga-cookies';
 
@@ -34,6 +34,6 @@ newTracker('sp1', '{{collector_url}}', {
 
 Adding this plugin will automatically capture the following context:
 
-| Context | Example |
-| --- | --- |
+| Context                                                                                                                                                          | Example                                           |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
 | [iglu:com.google.analytics/cookies/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.analytics/cookies/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-30-at-22.12.03.png) |

@@ -20,7 +20,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 
 ## Initialization
 
-```
+```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { ClientHintsPlugin } from '@snowplow/browser-plugin-client-hints';
 
@@ -39,6 +39,6 @@ This plugin does not contain any new functions.
 
 Adding this plugin will automatically capture the following context:
 
-| Context | Example |
-| --- | --- |
+| Context                                                                                                                                                        | Example                                           |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
 | [iglu:org.ietf/http\_client\_hints/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-19.58.43.png) |

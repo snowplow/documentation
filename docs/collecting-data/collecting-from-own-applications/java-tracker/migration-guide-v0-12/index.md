@@ -27,7 +27,7 @@ The `BatchEmitter.Builder` configuration options have changed.
 **Example**: creating a BatchEmitter with the relevant options  
 Old API:
 
-```
+```java
 BatchEmitter batchEmitter = BatchEmitter.builder()
         .url("http://collector.url")
         .bufferSize(20)
@@ -38,7 +38,7 @@ BatchEmitter batchEmitter = BatchEmitter.builder()
 
 Version 0.12:
 
-```
+```java
 BatchEmitter batchEmitter = BatchEmitter.builder()
         .url("http://collector.url")
         .batchSize(20)
@@ -55,7 +55,7 @@ BatchEmitter batchEmitter = BatchEmitter.builder()
 **Example**: replacing `SimpleEmitter` with `BatchEmitter`  
 Old API:
 
-```
+```java
 SimpleEmitter simpleEmitter = SimpleEmitter.builder()
         .url("http://collector.url")
         .build();
@@ -66,7 +66,7 @@ Tracker tracker = new Tracker.TrackerBuilder(simpleEmitter, "namespace", "appId"
 
 Version 0.12:
 
-```
+```java
 BatchEmitter batchEmitter = BatchEmitter.builder()
         .url("http://collector.url")
         .batchSize(1)
@@ -93,7 +93,7 @@ We are aware of some use cases involving exporting the `eventId`s of tracked Eve
 **Example**: getting the `eventId`  
 Old API:
 
-```
+```java
 PageView pageView = PageView.builder()
         .pageUrl("https://www.snowplowanalytics.com")
         .build();
@@ -103,7 +103,7 @@ String eventId = pageView.getEventId();
 
 Version 0.12:
 
-```
+```java
 PageView pageView = PageView.builder()
         .pageUrl("https://www.snowplowanalytics.com")
         .build();
@@ -123,7 +123,7 @@ Despite the name, `Event` objects are no longer associated with an `eventId` ; t
 **Example**: creating a PageView with all the options  
 Old API:
 
-```
+```java
 PageView pageViewEvent = PageView.builder()
         .pageTitle("Snowplow Analytics")
         .pageUrl("https://www.snowplowanalytics.com")
@@ -138,7 +138,7 @@ PageView pageViewEvent = PageView.builder()
 
 Version 0.12:
 
-```
+```java
 PageView pageViewEvent = PageView.builder()
         .pageTitle("Snowplow Analytics")
         .pageUrl("https://www.snowplowanalytics.com")

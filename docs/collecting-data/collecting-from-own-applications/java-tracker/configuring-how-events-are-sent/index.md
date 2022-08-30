@@ -12,7 +12,7 @@ The default `Emitter` is the `BatchEmitter`, which sends events asynchronously i
 
 The simplest `BatchEmitter` initialisation looks like this:
 
-```
+```java
 BatchEmitter emitter = BatchEmitter.builder()
                 .url("http://collector-endpoint")
                 .build();
@@ -34,7 +34,7 @@ The `BatchEmitter.Builder` currently has an option for setting response codes no
 
 Configure no-retry response codes like this:
 
-```
+```java
 List<Integer> noRetry = new ArrayList<>();
 noRetry.add(403);
 
@@ -54,7 +54,7 @@ The default batch size is 50 events. If you have a high event volume, larger bat
 
 Configure the batch size like this:
 
-```
+```java
 BatchEmitter emitter = BatchEmitter.builder()
                 .url("http://collector-endpoint")
                 .batchSize(10)
@@ -74,7 +74,7 @@ We recommend setting the maximum capacity of the default event buffer queue at `
 
 Creating a `BatchEmitter` with a specified maximum buffer capacity:
 
-```
+```java
 BatchEmitter emitter = BatchEmitter.builder()
                 .url("http://collector-endpoint")
                 .bufferCapacity(100000)
@@ -85,7 +85,7 @@ This BatchEmitter will store 100 000 events before starting to lose data.
 
 We also provide an `EventStore` interface. To use a custom EventStore:
 
-```
+```java
 BatchEmitter emitter = BatchEmitter.builder()
                 .url("http://collector-endpoint")
                 .eventStore(EventStore)
@@ -102,7 +102,7 @@ Note for Gradle users: [different dependencies](/docs/collecting-data/collecting
 
 By default, the Java tracker uses OkHttp; an `OkHttpClientAdapter` object is generated when a `BatchEmitter` is created. To specify a different client adapter, initialize the `BatchEmitter` like this:
 
-```
+```java
 BatchEmitter emitter = BatchEmitter.builder()
                 .httpClientAdapter(HttpClientAdapter)
                 .build();
@@ -116,13 +116,13 @@ HTTP request retry can be configured within the HTTP clients, on top of the Java
 
 The simplest OkHttpClient initialization looks like this:
 
-```
+```java
 OkHttpClient client = new OkHttpClient();
 ```
 
 This is the default as used in the `BatchEmitter`. To add configuration, instead use the `OkHttpClient.Builder`. For example, setting timeouts:
 
-```
+```java
 OkHttpClient client = new OkHttpClient.Builder()
       .connectTimeout(5, TimeUnit.SECONDS)
       .readTimeout(5, TimeUnit.SECONDS)
@@ -141,13 +141,13 @@ The `url` is the URL for your collector. See [Square's API docs](https://square.
 
 The simplest Apache HTTP Client initialization looks like this:
 
-```
+```java
 CloseableHttpClient client = HttpClients.createDefault();
 ```
 
 You are encouraged to research how best to set up your Apache Client for maximum performance. For example, by default the Apache Client will never time out, and will also allow only two outbound connections at a time. In this code block, a `PoolingHttpClientConnectionManager` is used to allow up to 50 concurrent outbound connections:
 
-```
+```java
 PoolingHttpClientConnectionManager manager = new PoolingHttpClientConnectionManager();
 manager.setDefaultMaxPerRoute(50);
 
@@ -171,7 +171,7 @@ The process of getting events from the buffer, creating a request payload, and s
 
 Specifying the maximum number of event sending threads, in this case to 1:
 
-```
+```java
 BatchEmitter emitter = BatchEmitter.builder()
                 .url("http://collector-endpoint")
                 .threadCount(1)
@@ -180,7 +180,7 @@ BatchEmitter emitter = BatchEmitter.builder()
 
 It's also possible to provide your own `ScheduledExecutorService`:
 
-```
+```java
 BatchEmitter emitter = BatchEmitter.builder()
                 .url("http://collector-endpoint")
                 .requestExecutorService(ScheduledExecutorService)

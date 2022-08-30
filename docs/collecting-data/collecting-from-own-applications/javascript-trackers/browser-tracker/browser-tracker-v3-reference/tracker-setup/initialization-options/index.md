@@ -18,7 +18,7 @@ Tracker initialization is started by calling the `"newTracker"` function and t
 
 Here is a simple example of how to initialise a tracker:
 
-```
+```javascript
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
   discoverRootDomain: true,
@@ -33,7 +33,7 @@ The tracker will be named “sp” and will send events to the a collector url y
 
 Here is a longer example in which every tracker configuration parameter is set:
 
-```
+```javascript
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
   platform: 'web',
@@ -135,21 +135,21 @@ The Snowplow JavaScript tracker offers two techniques where tracking can be done
 
 Recommended configurations when using `anonymousTracking`:
 
-```
+```javascript
 anonymousTracking: true, 
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
 
 or
 
-```
+```javascript
 anonymousTracking: { withSessionTracking: true },
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
 
 or for a completely cookieless experience (from JavaScript Tracker 2.17.0+)
 
-```
+```javascript
 anonymousTracking: { withServerAnonymisation: true },
 stateStorageStrategy: 'none',
 eventMethod: 'post'
@@ -199,7 +199,7 @@ See also [How the Tracker uses `localStorage`](/docs/collecting-data/collectin
 
 Normally the protocol (http or https) used by the Tracker to send events to a collector is the same as the protocol of the current page. You can force the tracker to use https by prefixing the collector endpoint with the protocol. For example:
 
-```
+```javascript
 newTracker('sp', 'https://{{collector_url_here}}', {
   appId: 'my-app-id'
 }
@@ -211,7 +211,7 @@ Whenever an event fires, the Tracker creates a session cookie. If the cookie did
 
 By default the session cookie expires after 30 minutes. This means that a user leaving the site and returning in under 30 minutes does not change the session. You can override this default by setting `sessionCookieTimeout` to a duration (in seconds) in the configuration object. For example,
 
-```
+```json
 {
   ...
   sessionCookieTimeout: 3600
@@ -247,16 +247,16 @@ Anonymous tracking has to be disabled for the session context entities to be add
 
 The [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity consists of the following properties:
 
-| Attribute | Description | Required? |
-| --- | --- | --- |
-| `userId` | An identifier for the user of the session (same as `domain_userid`). | Yes |
-| `sessionId` | An identifier (UUID) for the session (same as `domain_sessionid`). | Yes |
-| `sessionIndex` | The index of the current session for this user (same as `domain_sessionidx`). | Yes |
-| `eventIndex` | Optional index of the current event in the session. Signifies the order of events in which they were tracked. | No |
-| `previousSessionId` | The previous session identifier (UUID) for this user. | No |
-| `storageMechanism` | The mechanism that the session information has been stored on the device. | Yes |
-| `firstEventId` | The optional identifier (UUID) of the first event id for this session. | No |
-| `firstEventTimestamp` | Optional date-time timestamp of when the first event in the session was tracked. | No |
+| Attribute             | Description                                                                                                   | Required? |
+|-----------------------|---------------------------------------------------------------------------------------------------------------|-----------|
+| `userId`              | An identifier for the user of the session (same as `domain_userid`).                                          | Yes       |
+| `sessionId`           | An identifier (UUID) for the session (same as `domain_sessionid`).                                            | Yes       |
+| `sessionIndex`        | The index of the current session for this user (same as `domain_sessionidx`).                                 | Yes       |
+| `eventIndex`          | Optional index of the current event in the session. Signifies the order of events in which they were tracked. | No        |
+| `previousSessionId`   | The previous session identifier (UUID) for this user.                                                         | No        |
+| `storageMechanism`    | The mechanism that the session information has been stored on the device.                                     | Yes       |
+| `firstEventId`        | The optional identifier (UUID) of the first event id for this session.                                        | No        |
+| `firstEventTimestamp` | Optional date-time timestamp of when the first event in the session was tracked.                              | No        |
 
 Please note that the session context entity is only available since version 3.5 of the tracker.
 
@@ -278,7 +278,7 @@ We recommend leaving the `bufferSize` as the default value of 1. This ensure tha
 
 If you have set `bufferSize` to greater than 1, you can flush the buffer using the `flushBuffer` method:
 
-```
+```javascript
 snowplow('flushBuffer');
 ```
 
@@ -312,7 +312,7 @@ The JavaScript Tracker can add an additional parameter named “\_sp” to the q
 
 You can configure which links get decorated this way using the `crossDomainLinker` field of the configuration object. This field should be a function taking one argument (the link element) and return `true` if the link element should be decorated and false otherwise. For example, this function would only decorate those links whose destination is “[http://acme.de](http://acme.de/)” or whose HTML id is “crossDomainLink”:
 
-```
+```javascript
 {
   crossDomainLinker: function (linkElement) {
     return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
@@ -322,7 +322,7 @@ You can configure which links get decorated this way using the `crossDomainLink
 
 If you want to decorate every link to the domain github.com:
 
-```
+```javascript
 {
   crossDomainLinker: function (linkElement) {
     return /^https:\/\/github\.com/.test(linkElement.href);
@@ -332,7 +332,7 @@ If you want to decorate every link to the domain github.com:
 
 If you want to decorate every link, regardless of its destination:
 
-```
+```javascript
 {
   crossDomainLinker: function (linkElement) {
     return true;
@@ -342,7 +342,7 @@ If you want to decorate every link, regardless of its destination:
 
 Note that the above will decorate “links” which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`). To exclude these links:
 
-```
+```javascript
 snowplow('crossDomainLinker', function(linkElement) {
   return linkElement.href.indexOf('javascript:') < 0;
 });
@@ -352,7 +352,7 @@ Note that when the tracker loads, it does not immediately decorate links. Instea
 
 If further links get added to the page after the tracker has loaded, you can use the tracker’s `crossDomainLinker` method to add listeners again. (Listeners won’t be added to links which already have them.)
 
-```
+```javascript
 snowplow('crossDomainLinker', function (linkElement) {
   return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
 });
@@ -391,7 +391,7 @@ If the optional `discoverRootDomain` field of the configuration object is set 
 
 Whenever tracker initialized on your domain – it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` configuration object parameter or `setVisitorCookieTimeout` method.
 
-```
+```javascript
 snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
   cookieLifetime: 86400 * 31,
 });
@@ -399,7 +399,7 @@ snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
 
 or
 
-```
+```javascript
 snowplow('setVisitorCookieTimeout', 86400 * 30);  // 30 days
 ```
 
@@ -427,7 +427,7 @@ This value is configurable when initialising the tracker and is specified in mil
 
 From v3.2.0, you are able to set custom headers with an `eventMethod: "post"` and `eventMethod: "get"` (Except for IE9). This functionality should only be used in the case where a Proxy or other Collector type is being used which allows for custom headers to be set on the request. **CAUTION:** Adding additional headers without returning the appropriate CORS Headers on the OPTIONS request will cause events to fail to send.
 
-```
+```javascript
 customHeaders: {
   'Content-Language': 'de-DE, en-CA',
 }
@@ -437,7 +437,7 @@ customHeaders: {
 
 From v3.2.0, it's now possible to turn off the `withCredentials` flag on all requests to the collector. The default value is `true` which sets `withCredentials` to `true` on requests. Disabling this flag will have impact when using `eventMethod: "post"` and `eventMethod: "get"`. This flag has no effect on same site requests, but disabling it will prevent cookies being sent with requests to a Snowplow Collector running on a different domain. You can read more about this flag at [MDN](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials).
 
-```
+```json
 withCredentials: false
 ```
 
@@ -449,7 +449,7 @@ Prior to version 3.5 of the tracker, requests receiving all 4xx and 5xx HTTP sta
 
 By default, the tracker retries on all 3xx, 4xx, and 5xx status codes except for 400, 401, 403, 410, and 422. The set of status codes for which events should be retried or not is customizable. You can make use of the `retryStatusCodes` and `dontRetryStatusCodes` lists to specify them. Retry behaviour can only be configured for non-successful status codes (i.e., >= 300).
 
-```
+```json
 retryStatusCodes: [403], // override default behavior and retry on 403
 dontRetryStatusCodes: [418] // force retry on 418
 ```

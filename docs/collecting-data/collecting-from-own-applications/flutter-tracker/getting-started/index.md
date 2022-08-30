@@ -12,20 +12,20 @@ The following steps will guide you through setting up the Flutter tracker in you
 
 Add the Snowplow tracker as a dependency to your Flutter application:
 
-```
+```cpp
 flutter pub add snowplow_tracker
 ```
 
 This will add a line with the dependency like to your pubspec.yaml:
 
-```
+```cpp
 dependencies:
     snowplow_tracker: ^0.1.0
 ```
 
 Import the package into your Dart code:
 
-```
+```cpp
 import 'package:snowplow_tracker/snowplow_tracker.dart'
 ```
 
@@ -39,7 +39,7 @@ Make sure to use JavaScript tracker version `3.2` or newer. You may also refer
 
 Instantiate a tracker using the `Snowplow.createTracker` function. You may create the tracker in the `initState()` of your main widget. At its most basic, the function takes two required arguments: `namespace` and `endpoint`. Tracker namespace identifies the tracker instance, you may create multiple trackers with different namespaces. The endpoint is the URI of the Snowplow collector to send the events to.
 
-```
+```cpp
 SnowplowTracker tracker = await Snowplow.createTracker(
     namespace: 'ns1',
     endpoint: 'http://...'
@@ -52,7 +52,7 @@ There are additional optional arguments to configure the tracker. To learn more 
 
 To track events, simply instantiate their respective types (e.g., `ScreenView`, `SelfDescribing`, `Structured`) and pass them to the `tracker.track` or `Snowplow.track` methods.
 
-```
+```cpp
 tracker.track(ScreenView(
     id: '2c295365-eae9-4243-a3ee-5c4b7baccc8f',
     name: 'home',

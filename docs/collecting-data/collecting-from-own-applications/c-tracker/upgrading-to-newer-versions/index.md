@@ -29,7 +29,7 @@ There are a few breaking changes in this release. Please make sure to:
 
 This version adds a `snowplow` namespace to all tracker components. You will need to import specific or all types from the namespace:
 
-```
+```cpp
 using namespace snowplow;
 ```
 

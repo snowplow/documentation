@@ -12,19 +12,19 @@ The fields tracked using `Subject` tend to be most relevant in client-side track
 
 Add these fields to an event using `Subject`:
 
-| Property | Field in raw event | Column(s) in enriched event |
-| --- | --- | --- |
-| userId | uid | user\_id |
-| ipAddress\* | ip | user\_ipaddress |
-| timezone\*\* | tz | os\_timezone |
-| language | lang | br\_lang |
-| useragent\* | ua | useragent |
-| viewport | vp | br\_viewheight, br\_viewwidth |
-| screenResolution | res | dvce\_screenheight, dvce\_screenwidth |
-| colorDepth | cd | br\_colordepth |
-| networkUserId\* | tnuid | network\_userid |
-| domainUserId | duid | domain\_userid |
-| domainSessionId | sid | domain\_sessionid |
+| Property         | Field in raw event | Column(s) in enriched event           |
+|------------------|--------------------|---------------------------------------|
+| userId           | uid                | user\_id                              |
+| ipAddress\*      | ip                 | user\_ipaddress                       |
+| timezone\*\*     | tz                 | os\_timezone                          |
+| language         | lang               | br\_lang                              |
+| useragent\*      | ua                 | useragent                             |
+| viewport         | vp                 | br\_viewheight, br\_viewwidth         |
+| screenResolution | res                | dvce\_screenheight, dvce\_screenwidth |
+| colorDepth       | cd                 | br\_colordepth                        |
+| networkUserId\*  | tnuid              | network\_userid                       |
+| domainUserId     | duid               | domain\_userid                        |
+| domainSessionId  | sid                | domain\_sessionid                     |
 
 Note: the ability to set `domainSessionId` was added in version 0.11.
 
@@ -52,7 +52,7 @@ There are two ways to track the `Subject` "atomic" properties in your events: on
 
 A simple `Subject` initialisation looks like this:
 
-```
+```java
 Subject subject = new Subject.SubjectBuilder()
         .userId("java@snowplowanalytics.com")
         .build();
@@ -62,7 +62,7 @@ There are no required methods for the `SubjectBuilder`.
 
 A `Subject` can be added to any event using the `subject()` `Event.Builder` method:
 
-```
+```java
 // This example shows an Unstructured event, but all events can have a Subject
 Unstructured unstructured = Unstructured.builder()
             .eventData(dataAsSelfDescribingJson)
@@ -72,7 +72,7 @@ Unstructured unstructured = Unstructured.builder()
 
 To set `Subject` properties in all subsequent events, add a `Subject` to your `Tracker` object:
 
-```
+```java
 // A Subject can be provided at Tracker initialisation
 Tracker tracker = new Tracker
         .TrackerBuilder(emitter, "trackerNamespace", "appId")
@@ -90,7 +90,7 @@ Subject properties can be updated or added to after initialization, using setter
 
 It's possible to use both `Event`\-specific and `Tracker`\-associated `Subject` objects simultaneously. Fields from both `Subject` objects are added to the payload, with the `Event`\-specific `Subject` having priority.
 
-```
+```java
 // Adding a global, Tracker-associated Subject
 Subject trackerSubject = new Subject.SubjectBuilder()
         .language("EN")
@@ -118,10 +118,10 @@ tracker.track(unstructured);
 
 The resulting enriched event would have these `Subject` atomic columns populated:
 
-| Column in enriched event | Value / example value | Source |
-| --- | --- | --- |
-| user\_id | "java@snowplowanalytics.com" | eventSubject |
-| os\_timezone | e.g. "Europe/London" | eventSubject |
-| br\_lang | "EN" | trackerSubject |
-| useragent | "Mozilla/5.0" | eventSubject |
-| network\_userid | e.g. "8383057f-2769-4321-ad72-58fa1b22e4b3" | pipeline |
+| Column in enriched event | Value / example value                       | Source         |
+|--------------------------|---------------------------------------------|----------------|
+| user\_id                 | "java@snowplowanalytics.com"                | eventSubject   |
+| os\_timezone             | e.g. "Europe/London"                        | eventSubject   |
+| br\_lang                 | "EN"                                        | trackerSubject |
+| useragent                | "Mozilla/5.0"                               | eventSubject   |
+| network\_userid          | e.g. "8383057f-2769-4321-ad72-58fa1b22e4b3" | pipeline       |

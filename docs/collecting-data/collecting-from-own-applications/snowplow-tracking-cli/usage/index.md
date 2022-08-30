@@ -6,13 +6,13 @@ sidebar_position: 200
 
 The command line interface is as follows:
 
-```
+```bash
 snowplowtrk --collector={{COLLECTOR_DOMAIN}} --appid={{APP_ID}} --method=[POST|GET] --sdjson={{SELF_DESC_JSON}}
 ```
 
 or:
 
-```
+```bash
 snowplowtrk --collector={{COLLECTOR_DOMAIN}} --appid={{APP_ID}} --method=[POST|GET] --schema={{SCHEMA_URI}} --json={{JSON}}
 ```
 
@@ -32,10 +32,10 @@ The idea here is that you can either send in a [**self-describing JSON**](https:
 
 ## Examples
 
-```
+```bash
 snowplowtrk --collector snowplow-collector.acme.com --appid myappid --method POST --schema iglu:com.snowplowanalytics.snowplow/event/jsonschema/1-0-0 --json "{\"hello\":\"world\"}"
 ```
 
-```
+```bash
 snowplowtrk --collector snowplow-collector.acme.com --appid myappid --method POST --sdjson "{\"schema\":\"iglu:com.snowplowanalytics.snowplow/event/jsonschema/1-0-0\", \"data\":{\"hello\":\"world\"}}"
 ```

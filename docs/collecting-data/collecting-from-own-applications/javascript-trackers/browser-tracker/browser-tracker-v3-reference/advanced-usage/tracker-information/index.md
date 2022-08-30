@@ -12,7 +12,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 
 When initialising a tracker, you can use the returned `tracker` instance to access various properties from this tracker instance.
 
-```
+```javascript
 // Configure a tracker instance named "sp"
 const sp = newTracker('sp', '{{COLLECTOR_URL}', {
  appId: 'snowplowExampleApp'
@@ -28,7 +28,7 @@ const domainUserId = sp.getDomainUserId();
 
 The `getDomainUserId` method returns the user ID stored in the first-party cookie:
 
-```
+```javascript
 const domainUserId = sp.getDomainUserId();
 console.log(domainUserId);
 ```
@@ -37,7 +37,7 @@ console.log(domainUserId);
 
 The `getDomainUserInfo` method returns all the information stored in first-party cookie in an array:
 
-```
+```javascript
 const domainUserInfo = sp.getDomainUserInfo();
 console.log(domainUserInfo);
 ```
@@ -60,7 +60,7 @@ The `domainUserInfo` variable will contain an array with 11 elements:
 
 The `getUserId` method returns the user ID which you configured using `setUserId()`:
 
-```
+```javascript
 const userId = sp.getUserId();
 console.log(userId);
 ```
@@ -69,7 +69,7 @@ console.log(userId);
 
 The `getCookieName` method returns the complete cookie name for the domain or session cookie:
 
-```
+```javascript
 const cookieName = sp.getCookieName('id');
 console.log(cookieName);
 ```
@@ -80,7 +80,7 @@ The argument corresponds to the basename of the cookie: 'id' for the domain cook
 
 The `getPageViewId` method returns the page view id:
 
-```
+```javascript
 const pageViewId = sp.getPageViewId();
 console.log(pageViewId);
 ```

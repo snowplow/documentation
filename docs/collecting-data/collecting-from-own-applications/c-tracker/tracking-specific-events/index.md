@@ -10,12 +10,12 @@ We provide several built-in event classes to help you track different kinds of e
 
 The tracker provides the following event classes for tracking events out of the box:
 
-| **Function** | **Description** |
-| --- | --- |
-| `StructuredEvent` | Tracks a Snowplow custom structured event |
-| `SelfDescribingEvent` | Tracks a Snowplow custom unstructured event |
-| `ScreenViewEvent` | Tracks the user viewing a screen within the application |
-| `TimingEvent` | Tracks a timing event |
+| **Function**          | **Description**                                         |
+|-----------------------|---------------------------------------------------------|
+| `StructuredEvent`     | Tracks a Snowplow custom structured event               |
+| `SelfDescribingEvent` | Tracks a Snowplow custom unstructured event             |
+| `ScreenViewEvent`     | Tracks the user viewing a screen within the application |
+| `TimingEvent`         | Tracks a timing event                                   |
 
 Snowplow events are all processed into the same format, regardless of the event type (and regardless of the tracker language used). Read about the different properties and fields of events in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
@@ -33,13 +33,13 @@ Once defined, an entity can be attached to any kind of event. This is also an im
 
 Each tracking type provides a `set_context()` method which accepts a vector of context entities:
 
-```
+```cpp
 vector<SelfDescribingJson> context;
 ```
 
 If a visitor arrives on a page advertising a movie, the dictionary for a single custom context entity in the list might look like this:
 
-```
+```cpp
 vector<SelfDescribingJson> context;
 SelfDescribingJson sdj(
   "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
@@ -50,7 +50,7 @@ context.push_back(sdj);
 
 This is how to fire a structured event with the above custom context entity:
 
-```
+```cpp
 StructuredEvent se("category", "action");
 se.set_context(context);
 
@@ -67,7 +67,7 @@ Each event class supports an optional true-timestamp argument; this allows you 
 
 Here is an example tracking a structured event and supplying the optional true-timestamp argument:
 
-```
+```cpp
 StructuredEvent se("category", "action");
 
 // As it is optional you will need to pass the address for this value
@@ -92,13 +92,13 @@ Your schemas must be accessible to your pipeline to allow this validation. We pr
 
 `SelfDescribingEvent` provides the following properties:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `event` | The properties of the event | Yes | SelfDescribingJson |
+| **Argument** | **Description**             | **Required?** | **Validation**     |
+|--------------|-----------------------------|---------------|--------------------|
+| `event`      | The properties of the event | Yes           | SelfDescribingJson |
 
 Example:
 
-```
+```cpp
 // Create a JSON containing your data
 json data = "{\"level\":5,\"saveId\":\"ju302\",\"hardMode\":true}"_json;
 
@@ -115,10 +115,10 @@ For more on JSON schema, refer to [this page](/docs/understanding-tracking-desi
 
 Use the `ScreenViewEvent` type to track a user viewing a screen (or equivalent) within your app. This is the page view equivalent for apps that are not webpages.
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | \*string |
-| `id` | Unique identifier for this screen | No | \*string |
+| **Argument** | **Description**                     | **Required?** | **Type** |
+|--------------|-------------------------------------|---------------|----------|
+| `name`       | Human-readable name for this screen | No            | \*string |
+| `id`         | Unique identifier for this screen   | No            | \*string |
 
 Although name and id are not individually required, at least one must be provided or the event will fail validation and subsequently throw an exception.
 
@@ -126,7 +126,7 @@ The event uses the following Iglu schema: [iglu:com.snowplowanalytics.snowplow/
 
 Example:
 
-```
+```cpp
 string name = "Screen ID - 5asd56";
 
 ScreenViewEvent sve;
@@ -141,17 +141,17 @@ Use the `StructuredEvent` type to track a custom event happening in your app
 
 As these fields are fairly arbitrary, we recommend following the advice in this table how to define structured events. It's important to be consistent throughout the business about how each field is used.
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | string |
-| `action` | Defines the type of user interaction which this event involves | Yes | string |
-| `label` | A string to provide additional dimensions to the event data | No | \*string |
-| `property` | A string describing the object or the action performed on it | No | \*string |
-| `value` | A value to provide numerical data about the event | No | \*double |
+| **Argument** | **Description**                                                  | **Required?** | **Validation** |
+|--------------|------------------------------------------------------------------|---------------|----------------|
+| `category`   | The grouping of structured events which this `action` belongs to | Yes           | string         |
+| `action`     | Defines the type of user interaction which this event involves   | Yes           | string         |
+| `label`      | A string to provide additional dimensions to the event data      | No            | \*string       |
+| `property`   | A string describing the object or the action performed on it     | No            | \*string       |
+| `value`      | A value to provide numerical data about the event                | No            | \*double       |
 
 Example:
 
-```
+```cpp
 StructuredEvent se("shop", "add-to-basket"); // constructor takes category and action
 se.property = "pcs";
 se.value = 25.6;
@@ -165,18 +165,18 @@ Use the `TimingEvent` type to track user timing events such as how long resour
 
 Its properties are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `category` | The category of the event | Yes | \*string |
-| `variable` | The variable of the event | Yes | \*string |
-| `timing` | The timing of the event | Yes | \*int64 |
-| `label` | The label of the event | No | \*string |
+| **Argument** | **Description**           | **Required?** | **Validation** |
+|--------------|---------------------------|---------------|----------------|
+| `category`   | The category of the event | Yes           | \*string       |
+| `variable`   | The variable of the event | Yes           | \*string       |
+| `timing`     | The timing of the event   | Yes           | \*int64        |
+| `label`      | The label of the event    | No            | \*string       |
 
 The event uses the following Iglu schema: [iglu:com.snowplowanalytics.snowplow/timing/jsonschema/1-0-0](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/timing/jsonschema/1-0-0).
 
 Example:
 
-```
+```cpp
 TimingEvent te("category", "variable", 123);
 Snowplow::get_default_tracker()->track(te);
 ```

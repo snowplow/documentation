@@ -23,7 +23,7 @@ Once defined, an entity can be attached to any kind of event. This is also an im
 
 Example:
 
-```
+```cpp
 tracker.track(
     Structured(category: 'shop', action: 'add-to-basket'),
     contexts: [

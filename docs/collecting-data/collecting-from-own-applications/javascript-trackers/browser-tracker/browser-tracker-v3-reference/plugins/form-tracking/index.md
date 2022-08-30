@@ -22,7 +22,7 @@ Snowplow automatic form tracking detects three event types: `change_form`, `subm
 
 ## Initialization
 
-```
+```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { FormTrackingPlugin, enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
 

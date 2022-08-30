@@ -10,7 +10,7 @@ The Google Analytics plugin allows you to mirror the events sent to GA to your S
 
 You can use the plugin by requiring it and specifying your Snowplow endpoint:
 
-```
+```javascript
 <script>
   // usual isogram
   ga('create', 'UA-XXXXX-Y', 'auto');
@@ -32,7 +32,7 @@ The best way to deploy this using Google Tag Manager is to replicate the plugin 
 
 Create a new Custom JavaScript variable, and name it {{customTask - Snowplow duplicator}}. Add the following code within:
 
-```
+```javascript
 function() {
   // Add your snowplow collector endpoint here
   var endpoint = 'https://mycollector.mydomain.com/';

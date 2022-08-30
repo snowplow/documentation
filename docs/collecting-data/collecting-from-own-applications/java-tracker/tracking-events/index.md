@@ -8,7 +8,7 @@ To track an event, pass an `Event` instance to the `Tracker`.
 
 For example, tracking a `ScreenView`:
 
-```
+```java
 Event event = new ScreenView.builder()
                 .name("screen name")
                 .build();
@@ -31,15 +31,15 @@ The Java tracker does not yet support automatic event tracking. All tracking mus
 
 The Java tracker provides classes for tracking different types of events. They are listed below.
 
-| `Event` class | `e` in raw event | `eventType` in enriched event |
-| --- | --- | --- |
-| [`Unstructured` (custom)](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-custom-event-unstructured-events) | ue | unstruct |
-| [`ScreenView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-screenview-event) | ue | unstruct |
-| [`Timing`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-timing-event) | ue | unstruct |
-| [`PageView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-pageview-event) | pv | page\_view |
-| [`Structured`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-structured-event) | se | struct |
-| [`EcommerceTransaction`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | tr | transaction |
-| [`EcommerceTransactionItem`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti | transaction\_item |
+| `Event` class                                                                                                                                                                                 | `e` in raw event | `eventType` in enriched event |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|-------------------------------|
+| [`Unstructured` (custom)](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-custom-event-unstructured-events)                           | ue               | unstruct                      |
+| [`ScreenView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-screenview-event)                                                      | ue               | unstruct                      |
+| [`Timing`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-timing-event)                                                              | ue               | unstruct                      |
+| [`PageView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-pageview-event)                                                          | pv               | page\_view                    |
+| [`Structured`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-structured-event)                                                      | se               | struct                        |
+| [`EcommerceTransaction`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\*     | tr               | transaction                   |
+| [`EcommerceTransactionItem`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti               | transaction\_item             |
 
 Note: `EcommerceTransaction`/`EcommerceTransactionItem` are a legacy design and may be deprecated soon.
 
@@ -71,7 +71,7 @@ To track data using an `Unstructured` event, the data must be structured as a `S
 
 The simplest initialisation looks like this:
 
-```
+```java
 Unstructured unstructured = Unstructured.builder()
             .eventData(dataAsSelfDescribingJson)
             .build();
@@ -85,7 +85,7 @@ Track screen views with the `ScreenView` event. It's a wrapper around an `Unstru
 
 A simple initialisation looks like this:
 
-```
+```java
 ScreenView screenView = ScreenView.builder()
             .name("human readable screen name")
             .id("unique screen ID")
@@ -100,7 +100,7 @@ Track how long something took with the `Timing` event. It's a wrapper around an 
 
 A simple initialisation looks like this:
 
-```
+```java
 Timing timing = Timing.builder()
             .category("category of the timed event")
             .variable("name of the timed event")
@@ -115,17 +115,17 @@ Provide your `timing` value in milliseconds. The `label` property is optional. S
 
 Track page views with the `PageView` event. This is a "primitive" event type; data will end up in individual "atomic" columns in the data warehouse.
 
-| Property | Field in raw event | Column in enriched event |
-| --- | --- | --- |
-| page URL | url | page\_url |
-| page title | page | page\_title |
-| referrer URL | refr | page\_referrer |
+| Property     | Field in raw event | Column in enriched event |
+|--------------|--------------------|--------------------------|
+| page URL     | url                | page\_url                |
+| page title   | page               | page\_title              |
+| referrer URL | refr               | page\_referrer           |
 
 The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md).
 
 A simple initialisation looks like this:
 
-```
+```java
 PageView pageViewEvent = PageView.builder()
             .pageUrl("https://www.snowplowanalytics.com")
             .pagetitle("Snowplow")
@@ -141,17 +141,17 @@ To track custom data without schemas, use `Structured` events. They are the "pri
 
 The `Structured` event fields have flexible definitions, and what you put into each field is up to you. This is a double-edged sword. It's highly advisable to agree business-wide on definitions for each of these fields, before implementing tracking.
 
-| Property | Often contains data about | Field in raw event | Column in enriched event |
-| --- | --- | --- | --- |
-| category | Grouping for the action | se\_ca | se\_category |
-| action | Type of user activity | se\_ac | se\_action |
-| label | Additional event data | se\_la | se\_label |
-| property | The action or object acted on | se\_pr | se\_property |
-| value | Numerical event data | se\_va | se\_value |
+| Property | Often contains data about     | Field in raw event | Column in enriched event |
+|----------|-------------------------------|--------------------|--------------------------|
+| category | Grouping for the action       | se\_ca             | se\_category             |
+| action   | Type of user activity         | se\_ac             | se\_action               |
+| label    | Additional event data         | se\_la             | se\_label                |
+| property | The action or object acted on | se\_pr             | se\_property             |
+| value    | Numerical event data          | se\_va             | se\_value                |
 
 A simple initialisation looks like this:
 
-```
+```java
 Structured structured = Structured.builder()
                 .category("category e.g. auth")
                 .action("action e.g. logout")
@@ -172,32 +172,32 @@ The `EcommerceTransaction` and `EcommerceTransactionItem` events are legacy even
 `EcommerceTransaction` and `EcommerceTransactionItem` are "primitive" events. The data will end up in individual "atomic" columns in the data warehouse.
 
 | `EcommerceTransaction` property | Field in raw event | Column in enriched event |
-| --- | --- | --- |
-| orderId | tr\_id | tr\_orderid |
-| totalValue | tr\_tt | tr\_total |
-| affiliation | tr\_af | tr\_affiliation |
-| taxValue | tr\_tx | tr\_tax |
-| shipping | tr\_sh | tr\_shipping |
-| city | tr\_ci | tr\_city |
-| state | tr\_st | tr\_state |
-| country | tr\_co | tr\_country |
-| currency | tr\_cu | tr\_currency |
+|---------------------------------|--------------------|--------------------------|
+| orderId                         | tr\_id             | tr\_orderid              |
+| totalValue                      | tr\_tt             | tr\_total                |
+| affiliation                     | tr\_af             | tr\_affiliation          |
+| taxValue                        | tr\_tx             | tr\_tax                  |
+| shipping                        | tr\_sh             | tr\_shipping             |
+| city                            | tr\_ci             | tr\_city                 |
+| state                           | tr\_st             | tr\_state                |
+| country                         | tr\_co             | tr\_country              |
+| currency                        | tr\_cu             | tr\_currency             |
 
 | `EcommerceTransactionItem` property | Field in raw event | Column in enriched event |
-| --- | --- | --- |
-| itemId | ti\_id | ti\_orderid |
-| sku | ti\_sk | ti\_sku |
-| price | ti\_pr | ti\_price |
-| quantity | ti\_qu | ti\_quantity |
-| name | ti\_nm | ti\_name |
-| category | ti\_ca | ti\_category |
-| currency | ti\_cu | ti\_currency |
+|-------------------------------------|--------------------|--------------------------|
+| itemId                              | ti\_id             | ti\_orderid              |
+| sku                                 | ti\_sk             | ti\_sku                  |
+| price                               | ti\_pr             | ti\_price                |
+| quantity                            | ti\_qu             | ti\_quantity             |
+| name                                | ti\_nm             | ti\_name                 |
+| category                            | ti\_ca             | ti\_category             |
+| currency                            | ti\_cu             | ti\_currency             |
 
 The `orderId` and `itemId` should be the same, as it's the most direct way to associate the two events once they are in the warehouse.
 
 A simple initialisation looks like this:
 
-```
+```java
 // Create events for each item in the transaction
 EcommerceTransactionItem item = EcommerceTransactionItem.builder()
         .itemId("should be the same as order_id")
@@ -234,7 +234,7 @@ Every `Event.Builder` in the Java tracker allows for a custom timestamp, called 
 
 A `trueTimestamp` can be added to any event using the `trueTimestamp()` Builder method:
 
-```
+```java
 // This example shows an Unstructured event, but all events can have a trueTimestamp
 Unstructured unstructured = Unstructured.builder()
             .eventData(dataAsSelfDescribingJson)

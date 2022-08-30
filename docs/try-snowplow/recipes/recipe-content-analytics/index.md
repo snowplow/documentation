@@ -38,13 +38,13 @@ The `content` entity has the following fields:
 
 Add the content entity to your `page_view` and `page_ping` events by editing your `trackPageView` events to include the entity. Specifically, update
 
-```
+```javascript
 window.snowplow('trackPageView');
 ```
 
 to
 
-```
+```javascript
 window.snowplow('trackPageView', {
    "context": [{
       "schema": "iglu:com.trysnowplow/content/jsonschema/1-0-1",
@@ -63,7 +63,7 @@ window.snowplow('trackPageView', {
 
 If you are using Google Tag Manager, you can add the variables like so:
 
-```
+```javascript
 window.snowplow('trackPageView', {
    "context": [{
       "schema": "iglu:com.trysnowplow/content/jsonschema/1-0-1",
@@ -88,7 +88,7 @@ For this recipe we'll create a simple table describing content engagement. Once 
 
 #### First generate the table:
 
-```
+```sql
 CREATE TABLE derived.content AS(
 
     WITH content_page_views AS(
@@ -130,7 +130,7 @@ CREATE TABLE derived.content AS(
 
 #### And then view it:
 
-```
+```sql
 SELECT * FROM derived.content;
 ```
 

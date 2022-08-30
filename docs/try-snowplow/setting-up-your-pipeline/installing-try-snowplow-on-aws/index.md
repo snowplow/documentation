@@ -22,7 +22,7 @@ Snowplow will never ask you to disclose your Amazon, Google or database credenti
 
 Setting up Try Snowplow in your AWS account requires following IAM roles:
 
-```
+```bash
 cloudformation:CreateStack
 cloudformation:DescribeStackEvents
 cloudformation:DescribeStacks

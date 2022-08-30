@@ -39,13 +39,13 @@ The `product` entity has the following fields:
 
 Add the product entity to your `page_view` and `page_ping` events by editing your `trackPageView` events to include the entity. Specifically, you'll update
 
-```
+```javascript
 window.snowplow('trackPageView');
 ```
 
 to
 
-```
+```javascript
 window.snowplow('trackPageView', { 
    "context": [{
       "schema": "iglu:com.trysnowplow/product/jsonschema/1-0-0",
@@ -64,7 +64,7 @@ window.snowplow('trackPageView', {
 
 If you are using Google Tag Manager, you can add the variables like so:
 
-```
+```javascript
 window.snowplow('trackPageView', {
    "context": [{
       "schema": "iglu:com.trysnowplow/product/jsonschema/1-0-0",
@@ -93,7 +93,7 @@ When you trigger the `cart_action` event, you'll also want to attach the `produc
 
 Instrument the `cart_action` event when items are added to or removed from the cart on your website.
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/cart_action/jsonschema/1-0-0",
@@ -130,7 +130,7 @@ Instrument the `purchase` event when a purchase is made in your store.
 
 #### Example for a single product purchase
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', { 
    "event": {
       "schema": "iglu:com.trysnowplow/purchase/jsonschema/1-0-0",
@@ -151,7 +151,7 @@ window.snowplow('trackSelfDescribingEvent', {
 
 #### Example for a multi-product purchase
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/purchase/jsonschema/1-0-0",
@@ -191,7 +191,7 @@ Once you have collected some data with your new tracking you can run the followi
 
 #### First generate the table:
 
-```
+```sql
 CREATE TABLE derived.products AS(
 
     SELECT
@@ -220,7 +220,7 @@ CREATE TABLE derived.products AS(
 
 #### And then view it:
 
-```
+```sql
 SELECT * FROM derived.products;
 ```
 

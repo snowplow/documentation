@@ -32,19 +32,19 @@ Additionally, Snowplow allows you to specify a custom user ID, which you'll be a
 
 Adding a custom user ID with the Snowplow JavaScript Tracker is easy. You'll simply add this line to your out of the box tracking:
 
-```
+```javascript
 window.snowplow('setUserId', "example_user_id");
 ```
 
 If you are using Google Tag Manager, you can add the variable like so:
 
-```
+```javascript
 window.snowplow('setUserId', "{{example_user_id_variable}}");
 ```
 
 Make sure you add this method before you start tracking events, i.e.
 
-```
+```javascript
 window.snowplow('setUserId', "example_user_id");
 window.snowplow('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 });
 window.snowplow('enableLinkClickTracking');
@@ -60,7 +60,7 @@ Capturing as many user identifiers as possible is only the first step towards ha
 
 #### First generate the table:
 
-```
+```sql
 CREATE TABLE derived.user_stitching AS(
 
     SELECT
@@ -85,7 +85,7 @@ CREATE TABLE derived.user_stitching AS(
 
 #### And then view it:
 
-```
+```sql
 SELECT * FROM derived.user_stitching;
 ```
 

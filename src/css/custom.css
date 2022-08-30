@@ -90,6 +90,10 @@
   .nav-link__first {
     margin-left: 20px;
   }
+
+  ul.breadcrumbs {
+    margin-bottom: 32px;
+  }
 }
 
 .navbar__brand {
@@ -181,6 +185,7 @@ h3 {
   content: '/';
   background: none;
   color: var(--ifm-color-primary);
+  padding-right: 4px;
 }
 
 .breadcrumbs__item .breadcrumbs__link {
@@ -207,9 +212,17 @@ h3 {
 }
 
 .breadcrumbs__link {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .breadcrumbs__item:not(:last-child):after {
   margin: 0 0 0 3px;
+}
+
+ul.breadcrumbs {
+  --ifm-breadcrumb-size-multiplier: 0.4;
+}
+
+ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
+  top: 2px;
 }

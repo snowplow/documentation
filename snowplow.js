@@ -50,7 +50,10 @@ if (ExecutionEnvironment.canUseDOM) {
            // to now track it with all the extra data
           trackPageView()
         } else {
-          Cookies.remove('_sp5_')
+          const cookieKeys = document.cookie.split(';').reduce((ac, str) => [...ac, str?.split('=')[0].trim()], []);
+          const snowplowCookies = cookieKeys.filter(cookieKey => cookieKey.startsWith('_sp5_'))
+          snowplowCookies.forEach(snowplowCookie => Cookies.remove(snowplowCookie))
+          Cookies.remove('sp')
           reloadOnce()
         }
       }

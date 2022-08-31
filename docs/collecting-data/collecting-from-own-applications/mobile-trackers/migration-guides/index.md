@@ -1,11 +1,11 @@
 ---
 title: "Migration guides"
 date: "2021-04-12"
-sidebar_position: 900
+sidebar_position: 100000
 ---
 
 ```mdx-code-block
-import Block2895 from "@site/docs/reusable/untitled-reusable-block-35/_index.md"
+import {Redirect} from '@docusaurus/router';
 
-<Block2895/>
+<Redirect to="/docs/collecting-data/collecting-from-own-applications/mobile-trackers/migration-guide" />
 ```

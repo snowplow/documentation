@@ -1,11 +1,11 @@
 ---
-title: "Mobile Trackers v4.0"
+title: "Mobile Trackers v3.0"
 date: "2022-08-30"
-sidebar_position: -10
+sidebar_position: 10000000
 ---
 
 ```mdx-code-block
-import Block2895 from "@site/docs/reusable/untitled-reusable-block-35/_index.md"
+import {Redirect} from '@docusaurus/router';
 
-<Block2895/>
+<Redirect to="/docs/collecting-data/collecting-from-own-applications/mobile-trackers" />
 ```

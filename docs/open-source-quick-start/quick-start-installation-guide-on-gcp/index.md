@@ -38,7 +38,7 @@ The Quickstart Examples repository contains two different deployment strategies:
 
 The main difference is around the [VPC](https://cloud.google.com/vpc/docs/overview) that the components are deployed within. In `default` you will deploy everything into a public subnet, this is the easiest route if you want to try out Snowplow as you can use [your default network (auto mode VPC](https://cloud.google.com/vpc/docs/vpc#default-network)). However, to increase the security of your components, it is recommended and best practise to deploy components into private subnets. This ensures they are not available publicly. To use the `` `secure` `` configuration you will need your [own custom VPC network](https://cloud.google.com/vpc/docs/vpc#auto-mode-considerations) with public and private subnets. You can follow [this guide](https://cloud.google.com/vpc/docs/using-vpc#creating_networks) for steps on how to create networks and subnetworks on GCP.
 
-### **Setting up your Iglu Server**
+### Setting up your Iglu Server
 
 The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
 
@@ -48,7 +48,7 @@ We will go into more details on why this is very valuable and how to create your
 
 Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `/gcp/iglu_server` directory to update the input variables in `terraform.tfvars`.
 
-```
+```bash
 git clone https://github.com/snowplow/quickstart-examples.git
 cd quickstart-examples/terraform/gcp/iglu_server/default #or secure
 nano terraform.tfvars #or other text editor of your choosing
@@ -77,7 +77,7 @@ We want to make this experience as easy & as valuable as possible for open sourc
 
 You can now use terraform to create your Iglu Server stack.
 
-```
+```bash
 terraform init
 terraform plan
 terraform apply
@@ -89,13 +89,13 @@ This will output your `iglu_server_dns_name`. Make a note of this, you'll need i
 
 For your pipeline to work, you'll need to seed your Iglu Server with the standard Snowplow Schemas that are hosted in Iglu Central. To do this you will need `igluctl`, your Iglu Servers DNS and your Iglu API key that you created for your `terraform.tfvars`. You should update the `igluctl` command below with the correct values for your Iglu Server.
 
-```
+```bash
 git clone https://github.com/snowplow/iglu-central
 cd iglu-central
 igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000
 ```
 
-### **Setting up your pipeline**
+### Setting up your pipeline
 
 In this section you will update the input variables for the terraform module, and then run the terraform script to set up your pipeline.  At the end you will have a working Snowplow pipeline.
 
@@ -103,7 +103,7 @@ In this section you will update the input variables for the terraform module, an
 
 Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `pipeline` directory to update the input variables in `terraform.tfvars`.
 
-```
+```bash
 git clone https://github.com/snowplow/quickstart-examples.git
 cd quickstart-examples/terraform/gcp/pipeline/default #or secure
 nano terraform.tfvars #or other text editor of your choosing
@@ -133,7 +133,7 @@ We want to make this experience as easy & as valuable as possible for open sourc
 
 You can now use terraform to create your Pipeline stack.
 
-```
+```bash
 terraform init
 terraform plan
 terraform apply
@@ -141,7 +141,7 @@ terraform apply
 
 This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.
 
-#### **Now let's [send some events](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/sending-test-events/index.md) to your pipeline**! >>
+#### Now let's [send some events](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/sending-test-events/index.md) to your pipeline! >>
 
 * * *
 

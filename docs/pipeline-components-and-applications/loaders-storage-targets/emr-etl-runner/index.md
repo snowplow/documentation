@@ -387,54 +387,54 @@ Everything else can be done from CLI.
 
 In the end of this step, you'll have an AWS EC2 instance, SSH access to it and key stored on local machine.
 
-### **Find your Default VPC ID**
+### Find your Default VPC ID
 
 We will refer to it as `{{ VPC_ID }}`.
 
-```
-$ aws ec2 describe-vpcs | jq -r ".Vpcs[0].VpcId"
+```bash
+aws ec2 describe-vpcs | jq -r ".Vpcs[0].VpcId"
 ```
 
 **NOTE**: This step assumes the default VPC will be first in the list. If your environment has multiple VPCs, run the describe command without piping it to `jq` to get the ID of the default VPC. Mixing VPC IDs will result in the creation of an unreachable EC2 instance.
 
-### **Create Security Group for SSH access**
+### Create Security Group for SSH access
 
 On output you'll get `GroupId`. We will refer to it as `{{ SSH_SG }}`.
 
-```
-$ aws ec2 create-security-group \
+```bash
+aws ec2 create-security-group \
     --group-name "EC2 SSH full access" \
     --description "Unsafe. Use for demonstration only" \
     --vpc-id {{ VPC_ID }} \
     | jq -r '.GroupId'
 ```
 
-### **Add rule allowing SSH access from anywhere**
+### Add rule allowing SSH access from anywhere
 
-```
-$ aws ec2 authorize-security-group-ingress \
+```bash
+aws ec2 authorize-security-group-ingress \
     --group-id {{ SSH_SG }} \
     --protocol tcp \
     --port 22 \
     --cidr 0.0.0.0/0
 ```
 
-### **Create SSH key-pair named on the local machine**
+### Create SSH key-pair named on the local machine
 
 We named it "snowplow-ec2" here.
 
-```
-$ aws ec2 create-key-pair --key-name snowplow-ec2 \
+```bash
+aws ec2 create-key-pair --key-name snowplow-ec2 \
     | jq -r ".KeyMaterial" &gt; ~/.ssh/snowplow-ec2.pem
-$ chmod go-rwx ~/.ssh/snowplow-ec2.pem
+chmod go-rwx ~/.ssh/snowplow-ec2.pem
 ```
 
-### **Run t2.small instance with Amazon Linux AMI with previously created SSH-key**
+### Run t2.small instance with Amazon Linux AMI with previously created SSH-key
 
 On output you will get your instance id. We will refer to it as `{{ INSTANCE_ID }}`.
 
-```
-$ aws ec2 run-instances \
+```bash
+aws ec2 run-instances \
     --image-id ami-60b6c60a \
     --count 1 \
     --instance-type t2.small \
@@ -444,28 +444,28 @@ $ aws ec2 run-instances \
 
 _NOTE: you can find available image ID by following this [AWS guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html)._
 
-### **Attach security group to Instance**
+### Attach security group to Instance
 
-```
-$ aws ec2 modify-instance-attribute \
+```bash
+aws ec2 modify-instance-attribute \
     --instance-id {{ INSTANCE_ID }} \
     --groups {{ SSH_SG }}
 ```
 
-### **Check public IP-address of newly created Instance**
+### Check public IP-address of newly created Instance
 
 Further we will refer to it as `{{ PUBLIC_IP }}`.
 
-```
-$ aws ec2 describe-instances \
+```bash
+aws ec2 describe-instances \
     --instance-ids {{ INSTANCE_ID }} \
     | jq '.Reservations[0].Instances[0].PublicDnsName'
 ```
 
-### **Log-in**
+### Log-in
 
 Fill-in `{{ PUBLIC_IP }}` from previous step.
 
-```
-$ ssh -i ~/.ssh/snowplow-ec2.pem ec2-user@{{ PUBLIC_IP }}
+```bash
+ssh -i ~/.ssh/snowplow-ec2.pem ec2-user@{{ PUBLIC_IP }}
 ```

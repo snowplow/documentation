@@ -10,7 +10,7 @@ The Open Source Quick Start is updated in line with the Snowplow OS Distribution
 
 **Note:** You may have deviated from the original Quick Start example Terraform files, if this is the case then the concepts described here still apply however you will want to compare the differences between Quick Start releases to see what you need to update.
 
-## **Updating your repository**
+## Updating your repository
 
 To upgrade to a new Quick Start version, you first need to update your `snowplow/quickstart-examples` repository to the next release. We recommend upgrading one release at a time to ease the transition rather than trying to leap from an older version to the latest, although this should also be possible with some caution.
 
@@ -18,7 +18,7 @@ You'll first need to commit or stash any changes you haven't commited. If you've
 
 To jump to the latest release, you should update your local `main` branch to latest:
 
-```
+```bash
 cd quickstart-examples
 git checkout main
 git pull
@@ -26,7 +26,7 @@ git pull
 
 If you only want to move to a specific version then you should checkout that tag into a new branch.
 
-```
+```bash
 cd quickstart-examples
 git checkout -b 21.08 21.08 // To checkout 21.08
 ```
@@ -67,7 +67,7 @@ If you are using a standard Quick Start deployment, you can follow the steps bel
 
 Now you are ready to update your Iglu Server. The example below is for the `default` configuration on `aws`. You should change to the correct folder for your preferred installation.
 
-```
+```bash
 cd terraform/aws/iglu_server/default
 terraform init
 terraform plan
@@ -75,7 +75,7 @@ terraform plan
 
 At this stage, you should see the changes that will be made to your infrastructure. If everything looks ok and there are no errors you can apply the update.
 
-```
+```bash
 terraform apply
 ```
 
@@ -83,7 +83,7 @@ terraform apply
 
 Now you are ready to update your pipeline components. The example below is for the `default` configuration on `aws`. You should change to the correct folder for your preferred installation.
 
-```
+```bash
 cd terraform/aws/pipeline/default
 terraform init
 terraform plan
@@ -91,7 +91,7 @@ terraform plan
 
 At this stage, you should see the changes that will be made to your infrastructure. If everything looks ok and there are no errors you can apply the update.
 
-```
+```bash
 terraform apply
 ```
 

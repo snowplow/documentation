@@ -479,7 +479,7 @@ customHeaders: {
 }
 ```
 
-#### **Disabling withCredentials flag**
+#### Disabling withCredentials flag
 
 From v3.2.0, it's now possible to turn off the `withCredentials` flag on all requests to the collector. The default value is `true` which sets `withCredentials` to `true` on requests. Disabling this flag will have impact when using `eventMethod: "post"` and `eventMethod: "get"`. This flag has no effect on same site requests, but disabling it will prevent cookies being sent with requests to a Snowplow Collector running on a different domain. You can read more about this flag at [MDN](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials).
 

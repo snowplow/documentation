@@ -15,7 +15,7 @@ A SQL Runner data model consists of:
 - SQL files (containing one or more SQL statements)
 - Playbooks (YAML files organizing the SQL into steps)
 
-### **Playbooks**
+### Playbooks
 
 A playbook consists of one of more _steps_, each of which consists of one or more _queries_. Steps are run in series, queries are run in parallel within the step.
 
@@ -84,7 +84,7 @@ Here is the corresponding playbook template:
       :template: true
 ```
 
-### **SQL files**
+### SQL files
 
 A query file contains one or more SQL statements. These are executed "raw" (i.e. not in a transaction) in series by SQL Runner. If the query file is flagged as a _template_ in the playbook, then the file is pre-processed as a template before being executed.
 
@@ -116,7 +116,7 @@ The following custom functions are also supported:
 
 For an example query file using templating see: [integration/resources/postgres-sql/good/3.sql](https://github.com/snowplow/sql-runner/blob/master/integration/resources/postgres-sql/good/3.sql)
 
-### **Failure modes**
+### Failure modes
 
 If a statement fails in a query file, the query will terminate and report failure.
 
@@ -124,7 +124,7 @@ If a query fails, its sibling queries will continue running, but no further step
 
 Failures in one target do not affect other targets in any way.
 
-### **Return codes**
+### Return codes
 
 ```
 - 0 for no errors
@@ -134,9 +134,9 @@ Failures in one target do not affect other targets in any way.
 - 8 for no queries run
 ```
 
-### **Target configuration**
+### Target configuration
 
-#### **Redshift**
+#### Redshift
 
 If your storage target is Amazon Redshift, then the target configuration in the playbook is:
 
@@ -154,7 +154,7 @@ variables:
   ...
 ```
 
-#### **BigQuery**
+#### BigQuery
 
 To access a BigQuery project, sql-runner will need some Google credentials. These can be set up by creating a new service account in the GCP console, then providing its private key to the application via a GOOGLE\_APPLICATION\_CREDENTIALS environment variable - a detailed walkthrough of this process is available on the [GCP documentation website](https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually).
 
@@ -169,7 +169,7 @@ variables:
     ...
 ```
 
-#### **Snowflake**
+#### Snowflake
 
 If your data warehouse is Snowflake, then the SQL Runner playbooks will have a target configuration as:
 
@@ -192,7 +192,7 @@ variables:
 
 The `query_tag` parameter sets the `QUERY_TAG` [session parameter](https://docs.snowflake.com/en/sql-reference/parameters.html#query-tag) in Snowflake. When set, it will be applied to all queries included in the playbook.
 
-#### **PostgreSQL**
+#### PostgreSQL
 
 Finally, if your storage target is PostgreSQL, then can be configured as:
 

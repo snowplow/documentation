@@ -40,7 +40,7 @@ The main difference is around the [VPC](https://docs.aws.amazon.com/vpc/latest/u
 
 There are also two different storage options for you to select. The steps below will guide you through how to set each up, however you will need to know if you wish to use `postgres` or if you have an external `snowflake` instance you wish to use.
 
-### **Setting up your Iglu Server**
+### Setting up your Iglu Server
 
 The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
 
@@ -96,7 +96,7 @@ To do this you will need `igluctl`, your Iglu Servers DNS and your Iglu API key 
 igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000
 ```
 
-### **Setting up your pipeline**
+### Setting up your pipeline
 
 In this section you will update the input variables for the terraform module, and then run the terraform script to set up your pipeline.  At the end you will have a working Snowplow pipeline that you can send your web, mobile or server side data to.
 
@@ -141,13 +141,13 @@ For this purpose, the [Snowflake Terraform module](https://github.com/snowplow/q
 
 Authentication for the service user is required for the Snowflake Terraform provider - [follow this tutorial](https://quickstarts.snowflake.com/guide/terraforming_snowflake/index.html) to obtain Snowflake connection details:
 
-| Parameter | Description |
-| --- | --- |
-| account | The account name. |
-| username | A snowflake user to perform resource creation. |
-| region | Region for the snowflake deployment. |
-| role | Needs to be ACCOUNTADMIN or similar. |
-| private\_key\_path | Path the private key. |
+| Parameter          | Description                                    |
+|--------------------|------------------------------------------------|
+| account            | The account name.                              |
+| username           | A snowflake user to perform resource creation. |
+| region             | Region for the snowflake deployment.           |
+| role               | Needs to be ACCOUNTADMIN or similar.           |
+| private\_key\_path | Path the private key.                          |
 
 #### Usage
 

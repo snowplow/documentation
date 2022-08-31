@@ -4,7 +4,7 @@ date: "2020-02-14"
 sidebar_position: 0
 ---
 
-The IAB Spiders & Robots enrichment uses the I[AB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.
+The IAB Spiders & Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.
 
 Spiders & bots are sometimes considered a necessary evil of the web. We want search engine crawlers to find our site, but we also don’t want a lot of non-human traffic clouding our reporting.
 
@@ -53,5 +53,13 @@ This enrichment adds a new context to the enriched event with [this schema](http
 Example:
 
 ```json
-{    "schema": "iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0",    "data": {        "spiderOrRobot": false,        "category": "BROWSER",        "reason": "PASSED_ALL",        "primaryImpact": "NONE"    }}
+{
+    "schema": "iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0",
+    "data": {
+        "spiderOrRobot": false,
+        "category": "BROWSER",
+        "reason": "PASSED_ALL",
+        "primaryImpact": "NONE"
+    }
+}
 ```

@@ -25,7 +25,7 @@ There are two ways to install the tracker in your app:
 
 Cmake version 3.14 or greater is required. You may add the library to your project target (`your-target`) using `FetchContent` like so:
 
-```
+```cpp
 include(FetchContent)
 FetchContent_Declare(
     snowplow

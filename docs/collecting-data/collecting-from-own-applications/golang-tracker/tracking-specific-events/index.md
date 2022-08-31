@@ -6,14 +6,14 @@ sidebar_position: 40
 
 Tracking methods supported by the Golang Tracker at a glance:
 
-| **Function** | **Description** |
-| --- | --- |
-| [`TrackSelfDescribingEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event |
-| [`TrackScreenView()`](#screen-view) | Track the user viewing a screen within the application |
-| [`TrackPageView()`](#page-view) | Track and record views of web pages. |
-| [`TrackEcommerceTransaction()`](#ecommerce) | Track an ecommerce transaction |
-| [`TrackStructEvent()`](#struct-event) | Track a Snowplow custom structured event |
-| [`TrackTiming()`](#timing-event) | Track a timing event |
+| **Function**                                    | **Description**                                        |
+|-------------------------------------------------|--------------------------------------------------------|
+| [`TrackSelfDescribingEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event             |
+| [`TrackScreenView()`](#screen-view)             | Track the user viewing a screen within the application |
+| [`TrackPageView()`](#page-view)                 | Track and record views of web pages.                   |
+| [`TrackEcommerceTransaction()`](#ecommerce)     | Track an ecommerce transaction                         |
+| [`TrackStructEvent()`](#struct-event)           | Track a Snowplow custom structured event               |
+| [`TrackTiming()`](#timing-event)                | Track a timing event                                   |
 
 **NOTE**: All event structs require pointer values as a way of asserting properly whether or not a value has been passed that might have been required. As such there are three functions provided that allow you to inline pointer values:
 
@@ -31,13 +31,13 @@ All events are tracked with specific methods on the tracker instance, of the for
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of an array of SelfDescribingJson structs (`[]SelfDescribingJson`). Each tracking method accepts an additional optional contexts parameter, which should be a list of contexts:
 
-```
+```go
 contextArray := []sp.SelfDescribingJson{}
 ```
 
 If a visitor arrives on a page advertising a movie, the dictionary for a single custom context in the list might look like this:
 
-```
+```go
 contextArray := []sp.SelfDescribingJson{
   *sp.InitSelfDescribingJson(
     "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
@@ -51,7 +51,7 @@ contextArray := []sp.SelfDescribingJson{
 
 This is how to fire a page view event with the above custom context:
 
-```
+```go
 tracker.TrackPageView(
   sp.PageViewEvent{
     PageUrl: sp.NewString("acme.com"),
@@ -70,7 +70,7 @@ If you do not pass this timestamp in as an argument, then the Golang Tracker wil
 
 Here is an example tracking a structured event and supplying the optional timestamp argument:
 
-```
+```go
 tracker.TrackStructEvent(sp.StructuredEvent{
   Category: sp.NewString("some category"),
   Action: sp.NewString("some action"),
@@ -84,7 +84,7 @@ Each `Track...()` method supports an optional true-timestamp argument; this al
 
 Here is an example tracking a structured event and supplying the optional true-timestamp argument:
 
-```
+```go
 tracker.TrackStructEvent(sp.StructuredEvent{
   Category: sp.NewString("some category"),
   Action: sp.NewString("some action"),
@@ -98,7 +98,7 @@ Each `Track...()` method supports an optional event id argument; this allows y
 
 Here is an example tracking a structured event and supplying the optional event ID argument:
 
-```
+```go
 tracker.TrackStructEvent(sp.StructuredEvent{
   Category: sp.NewString("some category"),
   Action: sp.NewString("some action"),
@@ -112,7 +112,7 @@ Each `Track...()` method supports an optional Subject argument; this allows you 
 
 Here is an example of tracking a Page View event and supplying the optional Subject argument:
 
-```
+```go
 eventSubject := InitSubject()
 eventSubject.SetUserId("987654321")
 
@@ -131,19 +131,19 @@ Use `TrackSelfDescribingEvent()` to track a custom event which consists of a n
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `Event` | The properties of the event | Yes | \*SelfDescribingJson |
-| `Timestamp` | When the event occurred | No | \*int64 |
-| `EventId` | The event ID | No | \*string |
-| `TrueTimestamp` | The true time of event | No | \*int64 |
+| **Argument**    | **Description**             | **Required?** | **Validation**       |
+|-----------------|-----------------------------|---------------|----------------------|
+| `Event`         | The properties of the event | Yes           | \*SelfDescribingJson |
+| `Timestamp`     | When the event occurred     | No            | \*int64              |
+| `EventId`       | The event ID                | No            | \*string             |
+| `TrueTimestamp` | The true time of event      | No            | \*int64              |
 | `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson  
  |
 | Subject | Event specific Subject | No | Subject |
 
 Example:
 
-```
+```go
 // Create a data map
 data := map[string]interface{}{
   "level": 5,
@@ -165,21 +165,21 @@ For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog
 
 Use `TrackScreenView()` to track a user viewing a screen (or equivalent) within your app:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `Name` | Human-readable name for this screen | No | \*string |
-| `Id` | Unique identifier for this screen | No | \*string |
-| `Timestamp` | When the event occurred | No | \*int64 |
-| `EventId` | The event ID | No | \*string |
-| `TrueTimestamp` | The true time of event | No | \*int64 |
-| `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson |
-| Subject | Event specific Subject | No | Subject |
+| **Argument**    | **Description**                     | **Required?** | **Type**               |
+|-----------------|-------------------------------------|---------------|------------------------|
+| `Name`          | Human-readable name for this screen | No            | \*string               |
+| `Id`            | Unique identifier for this screen   | No            | \*string               |
+| `Timestamp`     | When the event occurred             | No            | \*int64                |
+| `EventId`       | The event ID                        | No            | \*string               |
+| `TrueTimestamp` | The true time of event              | No            | \*int64                |
+| `Contexts`      | Custom contexts for the event       | No            | \[\]SelfDescribingJson |
+| Subject         | Event specific Subject              | No            | Subject                |
 
 Although name and id are not individually required, at least one must be provided or the event will fail validation.
 
 Example:
 
-```
+```go
 tracker.TrackScreenView(sp.ScreenViewEvent{
   Id: sp.NewString("Screen ID"),
 })
@@ -189,20 +189,20 @@ tracker.TrackScreenView(sp.ScreenViewEvent{
 
 Use `TrackPageView()` to track a user viewing a page within your app:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `PageUrl` | The URL of the page | Yes | \*string |
-| `PageTitle` | The title of the page | No | \*string |
-| `Referrer` | The address which linked to the page | No | \*string |
-| `Timestamp` | When the event occurred | No | \*int64 |
-| `EventId` | The event ID | No | \*string |
-| `TrueTimestamp` | The true time of event | No | \*int64 |
-| `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson |
-| Subject | Event specific Subject | No | Subject |
+| **Argument**    | **Description**                      | **Required?** | **Validation**         |
+|-----------------|--------------------------------------|---------------|------------------------|
+| `PageUrl`       | The URL of the page                  | Yes           | \*string               |
+| `PageTitle`     | The title of the page                | No            | \*string               |
+| `Referrer`      | The address which linked to the page | No            | \*string               |
+| `Timestamp`     | When the event occurred              | No            | \*int64                |
+| `EventId`       | The event ID                         | No            | \*string               |
+| `TrueTimestamp` | The true time of event               | No            | \*int64                |
+| `Contexts`      | Custom contexts for the event        | No            | \[\]SelfDescribingJson |
+| Subject         | Event specific Subject               | No            | Subject                |
 
 Example:
 
-```
+```go
 tracker.TrackPageView(sp.PageViewEvent{
   PageUrl: sp.NewString("acme.com"),
 })
@@ -212,42 +212,42 @@ tracker.TrackPageView(sp.PageViewEvent{
 
 Use `TrackEcommerceTransaction()` to track an ecommerce transaction:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `OrderId` | ID of the eCommerce transaction | Yes | \*string |
-| `TotalValue` | Total transaction value | Yes | \*float64 |
-| `Affiliation` | Transaction affiliation | No | \*string |
-| `TaxValue` | Transaction tax value | No | \*float64 |
-| `Shipping` | Delivery cost charged | No | \*float64 |
-| `City` | Delivery address city | No | \*string |
-| `State` | Delivery address state | No | \*string |
-| `Country` | Delivery address country | No | \*string |
-| `Currency` | Transaction currency | No | \*string |
-| `Items` | Items in the transaction | Yes | \[\]EcommerceTransactionItemEvent |
-| `Timestamp` | When the event occurred | No | \*int64 |
-| `EventId` | The event ID | No | \*string |
-| `TrueTimestamp` | The true time of event | No | \*int64 |
-| `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson |
-| Subject | Event specific Subject | No | Subject |
+| **Argument**    | **Description**                 | **Required?** | **Validation**                    |
+|-----------------|---------------------------------|---------------|-----------------------------------|
+| `OrderId`       | ID of the eCommerce transaction | Yes           | \*string                          |
+| `TotalValue`    | Total transaction value         | Yes           | \*float64                         |
+| `Affiliation`   | Transaction affiliation         | No            | \*string                          |
+| `TaxValue`      | Transaction tax value           | No            | \*float64                         |
+| `Shipping`      | Delivery cost charged           | No            | \*float64                         |
+| `City`          | Delivery address city           | No            | \*string                          |
+| `State`         | Delivery address state          | No            | \*string                          |
+| `Country`       | Delivery address country        | No            | \*string                          |
+| `Currency`      | Transaction currency            | No            | \*string                          |
+| `Items`         | Items in the transaction        | Yes           | \[\]EcommerceTransactionItemEvent |
+| `Timestamp`     | When the event occurred         | No            | \*int64                           |
+| `EventId`       | The event ID                    | No            | \*string                          |
+| `TrueTimestamp` | The true time of event          | No            | \*int64                           |
+| `Contexts`      | Custom contexts for the event   | No            | \[\]SelfDescribingJson            |
+| Subject         | Event specific Subject          | No            | Subject                           |
 
 The `items` argument is an Array of TransactionItems. `TrackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `Items` list. Each transaction item event will have the same timestamp, true timestamp, order ID, and currency as the main transaction event.
 
 These are the fields with which a TransactionItem can be created.
 
-| **Field** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `Sku` | Item SKU | Yes | \*string |
-| `Price` | Item price | Yes | \*float64 |
-| `Quantity` | Item quantity | Yes | \*int64 |
-| `Name` | Item name | No | \*string |
-| `Category` | Item category | No | \*string |
-| `EventId` | The event ID | No | \*string |
-| `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson |
-| Subject | Event specific Subject | No | Subject |
+| **Field**  | **Description**               | **Required?** | **Validation**         |
+|------------|-------------------------------|---------------|------------------------|
+| `Sku`      | Item SKU                      | Yes           | \*string               |
+| `Price`    | Item price                    | Yes           | \*float64              |
+| `Quantity` | Item quantity                 | Yes           | \*int64                |
+| `Name`     | Item name                     | No            | \*string               |
+| `Category` | Item category                 | No            | \*string               |
+| `EventId`  | The event ID                  | No            | \*string               |
+| `Contexts` | Custom contexts for the event | No            | \[\]SelfDescribingJson |
+| Subject    | Event specific Subject        | No            | Subject                |
 
 Example of tracking a transaction containing two items:
 
-```
+```go
 items := []sp.EcommerceTransactionItemEvent{
   sp.EcommerceTransactionItemEvent{
     Sku: sp.NewString("pbz0026"),
@@ -281,22 +281,22 @@ tracker.TrackEcommerceTransaction(sp.EcommerceTransactionEvent{
 
 Use `TrackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `Category` | The grouping of structured events which this `action` belongs to | Yes | \*string |
-| `Action` | Defines the type of user interaction which this event involves | Yes | \*string |
-| `Label` | A string to provide additional dimensions to the event data | No | \*string |
-| `Property` | A string describing the object or the action performed on it | No | \*string |
-| `Value` | A value to provide numerical data about the event | No | \*float64 |
-| `Timestamp` | When the event occurred | No | \*int64 |
-| `EventId` | The event ID | No | \*string |
-| `TrueTimestamp` | The true time of event | No | \*int64 |
-| `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson |
-| Subject | Event specific Subject | No | Subject |
+| **Argument**    | **Description**                                                  | **Required?** | **Validation**         |
+|-----------------|------------------------------------------------------------------|---------------|------------------------|
+| `Category`      | The grouping of structured events which this `action` belongs to | Yes           | \*string               |
+| `Action`        | Defines the type of user interaction which this event involves   | Yes           | \*string               |
+| `Label`         | A string to provide additional dimensions to the event data      | No            | \*string               |
+| `Property`      | A string describing the object or the action performed on it     | No            | \*string               |
+| `Value`         | A value to provide numerical data about the event                | No            | \*float64              |
+| `Timestamp`     | When the event occurred                                          | No            | \*int64                |
+| `EventId`       | The event ID                                                     | No            | \*string               |
+| `TrueTimestamp` | The true time of event                                           | No            | \*int64                |
+| `Contexts`      | Custom contexts for the event                                    | No            | \[\]SelfDescribingJson |
+| Subject         | Event specific Subject                                           | No            | Subject                |
 
 Example:
 
-```
+```go
 tracker.TrackStructEvent(sp.StructuredEvent{
   Category: sp.NewString("shop"),
   Action: sp.NewString("add-to-basket"),
@@ -311,21 +311,21 @@ Use `TrackTiming()` to track a timing event.
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `Category` | The category of the event | Yes | \*string |
-| `Variable` | The variable of the event | Yes | \*string |
-| `Timing` | The timing of the event | Yes | \*int64 |
-| `Label` | The label of the event | No | \*string |
-| `Timestamp` | When the event occurred | No | \*int64 |
-| `EventId` | The event ID | No | \*string |
-| `TrueTimestamp` | The true time of event | No | \*int64 |
-| `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson |
-| Subject | Event specific Subject | No | Subject |
+| **Argument**    | **Description**               | **Required?** | **Validation**         |
+|-----------------|-------------------------------|---------------|------------------------|
+| `Category`      | The category of the event     | Yes           | \*string               |
+| `Variable`      | The variable of the event     | Yes           | \*string               |
+| `Timing`        | The timing of the event       | Yes           | \*int64                |
+| `Label`         | The label of the event        | No            | \*string               |
+| `Timestamp`     | When the event occurred       | No            | \*int64                |
+| `EventId`       | The event ID                  | No            | \*string               |
+| `TrueTimestamp` | The true time of event        | No            | \*int64                |
+| `Contexts`      | Custom contexts for the event | No            | \[\]SelfDescribingJson |
+| Subject         | Event specific Subject        | No            | Subject                |
 
 Example:
 
-```
+```go
 tracker.TrackTiming(sp.TimingEvent{
   Category: sp.NewString("Timing Category"),
   Variable: sp.NewString("Some var"),

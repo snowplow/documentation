@@ -10,7 +10,7 @@ Assuming you have completed the Java Tracker Setup for your project, you are n
 
 Import the Java Tracker's classes into your Java code like so:
 
-```
+```java
 import com.snowplowanalytics.snowplow.tracker.*;
 import com.snowplowanalytics.snowplow.tracker.emitter.*;
 import com.snowplowanalytics.snowplow.tracker.http.*;
@@ -22,7 +22,7 @@ That's it - you are now ready to initialize a Tracker instance.
 
 To instantiate a tracker in your code (can be global or local to the process being tracked) simply instantiate the `Tracker` interface with the following builder patterm:
 
-```
+```java
 Tracker.TrackerBuilder(Emitter : emitter, String : namespace, String : appId)
   .subject(Subject)
   .base64(boolean)
@@ -32,7 +32,7 @@ Tracker.TrackerBuilder(Emitter : emitter, String : namespace, String : appId)
 
 For example:
 
-```
+```java
 Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "cf")
                     .subject(user1Subject)
                     .base64(true)
@@ -40,14 +40,14 @@ Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "cf")
                     .build();
 ```
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `emitter` | The Emitter object you create | Yes | Null |
-| `namespace` | The name of the tracker instance | Yes | Null |
-| `appId` | The application ID | Yes | Null |
-| `subject` | The subject that defines a user | No | Null |
-| `base64` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No | True |
-| `platform` | The device the Tracker is running on | No | ServerSideApp |
+| **Argument Name** | **Description**                                                            | **Required?** | **Default**   |
+|-------------------|----------------------------------------------------------------------------|---------------|---------------|
+| `emitter`         | The Emitter object you create                                              | Yes           | Null          |
+| `namespace`       | The name of the tracker instance                                           | Yes           | Null          |
+| `appId`           | The application ID                                                         | Yes           | Null          |
+| `subject`         | The subject that defines a user                                            | No            | Null          |
+| `base64`          | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No            | True          |
+| `platform`        | The device the Tracker is running on                                       | No            | ServerSideApp |
 
 #### `emitter`
 
@@ -55,7 +55,7 @@ The emitter to which the tracker will send events. See [Emitters](/docs/collect
 
 To attach a new Emitter to the Tracker:
 
-```
+```java
 Emitter emitter = BatchEmitter.builder()
         .url(collectorEndpoint)
         .bufferSize(5) 
@@ -74,7 +74,7 @@ In fact, you don't need to create a subject at all. If you don't, though, your e
 
 To attach a new Subject to the Tracker:
 
-```
+```java
 Subject subject = SubjectBuilder.builder()
     .userId("e2479592-4e9a-4d75-948c-7c02d2f718df")
     .build();

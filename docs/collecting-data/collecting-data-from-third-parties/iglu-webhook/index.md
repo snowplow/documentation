@@ -23,7 +23,7 @@ The Iglu webhook adapter supports events send in as `GET` and `POST` request
 
 We use a special path to tell Snowplow that these events should be parsed as Iglu self-describing JSON events:
 
-```
+```markup
 http://{{COLLECTOR_URL}}/com.snowplowanalytics.iglu/v1?schema=<iglu schema uri>&...
 ```
 
@@ -35,7 +35,7 @@ The below examples all use a schema available on Iglu Central. However, you will
 
 The below examples use the `social_interaction` schema:
 
-```
+```text
 iglu:com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0
 ```
 
@@ -43,13 +43,13 @@ iglu:com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0
 
 If you want to specify which app these events belong to, add an `aid` parameter as taken from the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent):
 
-```
+```text
 ...&aid=<company code>&...
 ```
 
 You can also manually override the event's `platform` parameter like so:
 
-```
+```text
 ...&p=<platform code>&...
 ```
 
@@ -59,7 +59,7 @@ Supported platform codes can again be found in the [Snowplow Tracker Protocol](
 
 Here is an example of an Iglu-compatible event sent as a `GET` request, for a [Social Interacton event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0), broken out onto multiple lines to make it easier to read:
 
-```
+```markup
 http://{{COLLECTOR_URL}}/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.snowplowanalytics.snowplow%2Fsocial_interaction%2Fjsonschema%2F1-0-0
   &aid=mobile-attribution
   &p=mob
@@ -69,7 +69,7 @@ http://{{COLLECTOR_URL}}/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.snowplo
 
 This will be converted by the Iglu webhook adapter into a self-describing JSON looking like this:
 
-```
+```json
 {
   "schema":"iglu:com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0",
   "data": {
@@ -99,7 +99,7 @@ The below examples are written as `curl` requests as an example, however you can
 
 To send as a full Self Describing JSON in the body and a Content-Type of `application/json`:
 
-```
+```bash
 curl --request POST \
    --url http://{{COLLECTOR_URL}}/com.snowplowanalytics.iglu/v1 \
    --header 'Content-Type: application/json' \
@@ -114,7 +114,7 @@ curl --request POST \
 
 To send with a `?schema=<iglu schema uri>` in the querystring and a data JSON in the body and Content-Type of `application/json`:
 
-```
+```bash
 curl --request POST \
    --url 'http://{{COLLECTOR_URL}}/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.snowplowanalytics.snowplow%2Fsocial_interaction%2Fjsonschema%2F1-0-0' \
    --header 'Content-Type: application/json' \
@@ -126,7 +126,7 @@ curl --request POST \
 
 To send as a `x-www-form-urlencoded` payload:
 
-```
+```bash
 curl --request POST \
    --url 'http://{{COLLECTOR_URL}}/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.snowplowanalytics.snowplow%2Fsocial_interaction%2Fjsonschema%2F1-0-0' \
    --header 'Content-Type: application/x-www-form-urlencoded' \

@@ -8,7 +8,7 @@ Events are sent using an `Emitter` class. You can initialize a class using a v
 
 Here are the Emitter builder functions that can be used to make either a `SimpleEmitter` or `BatchEmitter`:
 
-```
+```java
 // Simple (GET) Emitter
 Emitter simple = SimpleEmitter.builder()
         .httpClientAdapter( {{ An Adapter }} ) // Required
@@ -27,28 +27,28 @@ Emitter batch = BatchEmitter.builder()
         .build();
 ```
 
-| **Function Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `httpClientAdapter` | The `HttpClientAdapter` to use for all event sending | Yes |
-| `bufferSize` | BatchEmitter Only: Specifies how many events go into a POST | No |
-| `threadCount` | The count of Threads that can be used to send events | No |
-| `requestCallback` | Lets you pass a callback class to handle succes/failure in sending events | No |
-| `requestExecutorService` | Lets you choose an ExecutorService for thread pool creation | No |
+| **Function Name**        | **Description**                                                           | **Required?** |
+|--------------------------|---------------------------------------------------------------------------|---------------|
+| `httpClientAdapter`      | The `HttpClientAdapter` to use for all event sending                      | Yes           |
+| `bufferSize`             | BatchEmitter Only: Specifies how many events go into a POST               | No            |
+| `threadCount`            | The count of Threads that can be used to send events                      | No            |
+| `requestCallback`        | Lets you pass a callback class to handle succes/failure in sending events | No            |
+| `requestExecutorService` | Lets you choose an ExecutorService for thread pool creation               | No            |
 
 ### `HttpClientAdapters`
 
 We currently offer two different Http Clients that can be used to send events to our collectors. Once created they need to be attached to the emitter in the `httpClientAdapter` builder argument.
 
-| **Function Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `url` | The URL of the collector to send events to | Yes |
-| `httpClient` | The http client to use (either OkHttp or Apache) | Yes |
+| **Function Name** | **Description**                                  | **Required?** |
+|-------------------|--------------------------------------------------|---------------|
+| `url`             | The URL of the collector to send events to       | Yes           |
+| `httpClient`      | The http client to use (either OkHttp or Apache) | Yes           |
 
 ### `OkHttpClientAdapter`
 
 You build an `OkHttpClientAdapter` like so:
 
-```
+```java
 // Make a new client
 OkHttpClient client = new OkHttpClient.Builder()
       .connectTimeout(5, TimeUnit.SECONDS)
@@ -67,7 +67,7 @@ HttpClientAdapter adapter = OkHttpClientAdapter.builder()
 
 You build an `ApacheHttpClientAdapter` like so:
 
-```
+```java
 // Make a new client with custom concurrency rules
 PoolingHttpClientConnectionManager manager = new PoolingHttpClientConnectionManager();
 manager.setDefaultMaxPerRoute(50);
@@ -92,7 +92,7 @@ HttpClientAdapter adapter = ApacheHttpClientAdapter.builder()
 
 A buffer is used to group events together in bulk before sending them. This is especially handy to reduce network usage. By default, the Emitter buffers up to 50 events before sending them. You can change this to send events instantly as soon as they are created like so:
 
-```
+```java
 Emitter batch = BatchEmitter.builder()
         .httpClientAdapter( ... )
         .build();
@@ -116,7 +116,7 @@ Since Java tracker v0.11, the threads have informative naming to help with debug
 
 If an event fails to send because of a network issue, you can choose to handle the failure case with a callback class to react accordingly. The callback class needs to implement the `RequestCallback` interface in order to do so. Here is a sample bit of code to show how it could work:
 
-```
+```java
 // Make a RequestCallback
 RequestCallback callback = new RequestCallback() {
   @Override
@@ -141,7 +141,7 @@ In the example, we can see an in-line example of handling the case. If events ar
 
 A common pattern here could be to re-send all failed events if they occur. It is up to the developer to determine whether they want to wait a certain amount of time before re-sending or if they want to re-send at all.
 
-```
+```java
 // Example on-failure function with re-tracking
 RequestCallback callback = new RequestCallback() {
   @Override

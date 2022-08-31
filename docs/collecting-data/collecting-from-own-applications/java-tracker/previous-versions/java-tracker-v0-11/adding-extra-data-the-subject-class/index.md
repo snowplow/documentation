@@ -22,7 +22,7 @@ The Subject class has a set of `set...()` methods to attach extra data relatin
 
 Here are some examples:
 
-```
+```java
 // Init an empty Subject and add some values
 Subject s1 = new Subject.SubjectBuilder().build();
 s1.setUserId("Kevin Gleason");
@@ -39,7 +39,7 @@ Subject s1 = new Subject.SubjectBuilder()
 
 After that, you can add your Subject to your Tracker like so:
 
-```
+```java
 Tracker t1 = new Tracker.TrackerBuilder( ... )
               .subject(s1)
               .build();
@@ -47,7 +47,7 @@ Tracker t1 = new Tracker.TrackerBuilder( ... )
 
 Or when you track an event:
 
-```
+```java
 PageView pageViewEvent = PageView.builder()
     .pageTitle("Snowplow Analytics")
     .pageUrl("https://www.snowplowanalytics.com")
@@ -61,13 +61,13 @@ tracker.track(pageViewEvent);
 
 You can set the user ID to any string:
 
-```
+```java
 s1.setUserId( "{{USER ID}}" )
 ```
 
 Example:
 
-```
+```java
 s1.setUserId("alexd")
 ```
 
@@ -75,13 +75,13 @@ s1.setUserId("alexd")
 
 If your Java code has access to the device's screen resolution, then you can pass this in to Snowplow too:
 
-```
+```java
 s1.setScreenResolution( {{WIDTH}}, {{HEIGHT}} )
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
-```
+```java
 s1.setScreenResolution(1366, 768)
 ```
 
@@ -89,13 +89,13 @@ s1.setScreenResolution(1366, 768)
 
 If your Java code has access to the viewport dimensions, then you can pass this in to Snowplow too:
 
-```
+```java
 s1.setViewport( {{WIDTH}}, {{HEIGHT}} )
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
-```
+```java
 s1.setViewport(300, 200)
 ```
 
@@ -103,13 +103,13 @@ s1.setViewport(300, 200)
 
 If your Java code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
 
-```
+```java
 s1.setColorDepth( {{BITS PER PIXEL}} )
 ```
 
 The number should be a positive integer, in bits per pixel. Example:
 
-```
+```java
 s1.setColorDepth(32)
 ```
 
@@ -117,13 +117,13 @@ s1.setColorDepth(32)
 
 This method lets you pass a user's timezone in to Snowplow:
 
-```
+```java
 s1.setTimezone( {{TIMEZONE}} )
 ```
 
 The timezone should be a string:
 
-```
+```java
 s1.setTimezone("Europe/London")
 ```
 
@@ -131,13 +131,13 @@ s1.setTimezone("Europe/London")
 
 This method lets you pass a user's language in to Snowplow:
 
-```
+```java
 s1.setLanguage( {{LANGUAGE}} )
 ```
 
 The language should be a string:
 
-```
+```java
 s1.setLanguage('en')
 ```
 
@@ -145,13 +145,13 @@ s1.setLanguage('en')
 
 This method lets you pass a user's IP Address in to Snowplow:
 
-```
+```java
 s1.setIpAddress( {{IP ADDRESS}} )
 ```
 
 The IP address should be a string:
 
-```
+```java
 s1.setIpAddress("127.0.0.1");
 ```
 
@@ -159,13 +159,13 @@ s1.setIpAddress("127.0.0.1");
 
 This method lets you pass a useragent in to Snowplow:
 
-```
+```java
 s1.setUseragent( {{USERAGENT}} )
 ```
 
 The useragent should be a string:
 
-```
+```java
 s1.setUseragent("Agent Smith");
 ```
 
@@ -173,13 +173,13 @@ s1.setUseragent("Agent Smith");
 
 This method lets you pass a Network User ID in to Snowplow:
 
-```
+```java
 s1.setNetworkUserId( {{NUID}} )
 ```
 
 The network user id should be a string:
 
-```
+```java
 s1.setNetworkUserId("network-id");
 ```
 
@@ -187,13 +187,13 @@ s1.setNetworkUserId("network-id");
 
 This method lets you pass a Domain User ID in to Snowplow:
 
-```
+```java
 s1.setDomainUserId( {{DUID}} )
 ```
 
 The domain user id should be a string:
 
-```
+```java
 s1.setDomainUserId("domain-id");
 ```
 
@@ -201,12 +201,12 @@ s1.setDomainUserId("domain-id");
 
 This method lets you pass a Domain Session ID in to Snowplow:
 
-```
+```java
 s1.setDomainSessionId( {{SID}} )
 ```
 
 The domain session id should be a string:
 
-```
+```java
 s1.setDomainSessionId("session-id");
 ```

@@ -10,14 +10,14 @@ We provide several built-in event classes to help you track different kinds of e
 
 Event classes supported by the Flutter Tracker:
 
-| Method | Event type tracked |
-| --- | --- |
-| `SelfDescribing` | Custom event based on "self-describing" JSON schema |
-| `Structured` | Semi-custom structured event |
-| `ScreenView` | View of a screen in the app |
-| `Timing` | User timing events such as how long resources take to load. |
-| `ConsentGranted` | User opting into data collection. |
-| `ConsentWithdrawn` | User withdrawing consent for data collection. |
+| Method             | Event type tracked                                          |
+|--------------------|-------------------------------------------------------------|
+| `SelfDescribing`   | Custom event based on "self-describing" JSON schema         |
+| `Structured`       | Semi-custom structured event                                |
+| `ScreenView`       | View of a screen in the app                                 |
+| `Timing`           | User timing events such as how long resources take to load. |
+| `ConsentGranted`   | User opting into data collection.                           |
+| `ConsentWithdrawn` | User withdrawing consent for data collection.               |
 
 All the methods share common features and parameters. Every type of event can have an optional context added. See the [next page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/adding-data/index.md) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
 
@@ -46,7 +46,7 @@ Creating an instance of `SelfDescribing` takes a schema name and a dictionary 
 
 Example (assumes that `tracker` is a tracker instance created using `Snowplow.createTracker`):
 
-```
+```cpp
 tracker.track(SelfDescribing(
     schema: 'iglu:com.example_company/save_game/jsonschema/1-0-2',
     data: {
@@ -64,17 +64,17 @@ This method provides a halfway-house between tracking fully user-defined self-de
 
 As these fields are fairly arbitrary, we recommend following the advice in this table how to define structured events. It's important to be consistent throughout the business about how each field is used.
 
-| Argument | Description | Required in event? |
-| --- | --- | --- |
-| `category` | The grouping of structured events which this action belongs to | Yes |
-| `action` | Defines the type of user interaction which this event involves | Yes |
-| `label` | Often used to refer to the 'object' the action is performed on | No |
-| `property` | Describing the 'object', or the action performed on it | No |
-| `value` | Provides numerical data about the event | No |
+| Argument   | Description                                                    | Required in event? |
+|------------|----------------------------------------------------------------|--------------------|
+| `category` | The grouping of structured events which this action belongs to | Yes                |
+| `action`   | Defines the type of user interaction which this event involves | Yes                |
+| `label`    | Often used to refer to the 'object' the action is performed on | No                 |
+| `property` | Describing the 'object', or the action performed on it         | No                 |
+| `value`    | Provides numerical data about the event                        | No                 |
 
 Example:
 
-```
+```cpp
 tracker.track(Structured(
     category: 'shop',
     action: 'add-to-basket',
@@ -98,19 +98,19 @@ Screen view events are used in the [Snowplow mobile data model](/docs/modeling-
 
 This method creates an unstruct event, by creating and tracking a self-describing event. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen\_view/jsonschema/1-0-0", and the data field will contain the parameters which you provide. That schema is hosted on the schema repository Iglu Central, and so will always be available to your pipeline.
 
-| Argument | Description | Required in event? |
-| --- | --- | --- |
-| `name` | The name of the screen viewed. | Yes |
-| `id` | The id (UUID v4) of screen that was viewed. | Yes |
-| `type` | The type of screen that was viewed. | No |
-| `previousName` | The name of the previous screen that was viewed. | No |
-| `previousType` | The type of screen that was viewed. | No |
-| `previousId` | The id (UUID v4) of the previous screen that was viewed. | No |
-| `transitionType` | The type of transition that led to the screen being viewed. | No |
+| Argument         | Description                                                 | Required in event? |
+|------------------|-------------------------------------------------------------|--------------------|
+| `name`           | The name of the screen viewed.                              | Yes                |
+| `id`             | The id (UUID v4) of screen that was viewed.                 | Yes                |
+| `type`           | The type of screen that was viewed.                         | No                 |
+| `previousName`   | The name of the previous screen that was viewed.            | No                 |
+| `previousType`   | The type of screen that was viewed.                         | No                 |
+| `previousId`     | The id (UUID v4) of the previous screen that was viewed.    | No                 |
+| `transitionType` | The type of transition that led to the screen being viewed. | No                 |
 
 Example:
 
-```
+```cpp
 tracker.track(ScreenView(
     id: '2c295365-eae9-4243-a3ee-5c4b7baccc8f',
     name: 'home',
@@ -122,16 +122,16 @@ tracker.track(ScreenView(
 
 Use the `Timing` type to track user timing events such as how long resources take to load. These events take a timing `category`, the `variable` being measured, and the `timing` time measurement. An optional `label` can be added to further identify the timing event
 
-| Argument | Description | Required in event? |
-| --- | --- | --- |
-| `category` | Defines the timing category. | Yes |
-| `variable` | Defines the timing variable measured. | Yes |
-| `timing` | Represents the time. | Yes |
-| `label` | An optional string to further identify the timing event. | No |
+| Argument   | Description                                              | Required in event? |
+|------------|----------------------------------------------------------|--------------------|
+| `category` | Defines the timing category.                             | Yes                |
+| `variable` | Defines the timing variable measured.                    | Yes                |
+| `timing`   | Represents the time.                                     | Yes                |
+| `label`    | An optional string to further identify the timing event. | No                 |
 
 Example:
 
-```
+```cpp
 tracker.track(Timing(
     category: 'category',
     variable: 'variable',
@@ -148,17 +148,17 @@ For both events, a consent document context will be attached to the event using 
 
 Properties of `ConsentGranted`:
 
-| Argument | Description | Required in event? |
-| --- | --- | --- |
-| `expiry` | The expiry date-time of the consent. | Yes |
-| `documentId` | The consent document ID. | Yes |
-| `version` | The consent document version. | Yes |
-| `name` | Optional consent document name. | No |
-| `documentDescription` | Optional consent document description. | No |
+| Argument              | Description                            | Required in event? |
+|-----------------------|----------------------------------------|--------------------|
+| `expiry`              | The expiry date-time of the consent.   | Yes                |
+| `documentId`          | The consent document ID.               | Yes                |
+| `version`             | The consent document version.          | Yes                |
+| `name`                | Optional consent document name.        | No                 |
+| `documentDescription` | Optional consent document description. | No                 |
 
 Example:
 
-```
+```cpp
 tracker.track(ConsentGranted(
     expiry: DateTime.now(),
     documentId: '1234',
@@ -170,17 +170,17 @@ tracker.track(ConsentGranted(
 
 Properties of `ConsentWithdrawn`:
 
-| Argument | Description | Required in event? |
-| --- | --- | --- |
-| `all` | Whether user opts out of all data collection. | Yes |
-| `documentId` | The consent document ID. | Yes |
-| `version` | The consent document version. | Yes |
-| `name` | Optional consent document name. | No |
-| `documentDescription` | Optional consent document description. | No |
+| Argument              | Description                                   | Required in event? |
+|-----------------------|-----------------------------------------------|--------------------|
+| `all`                 | Whether user opts out of all data collection. | Yes                |
+| `documentId`          | The consent document ID.                      | Yes                |
+| `version`             | The consent document version.                 | Yes                |
+| `name`                | Optional consent document name.               | No                 |
+| `documentDescription` | Optional consent document description.        | No                 |
 
 Example:
 
-```
+```cpp
 tracker.track(ConsentWithdrawn(
     all: false,
     documentId: '1234',
@@ -196,7 +196,7 @@ There is also an option to automatically track view events when currently active
 
 To activate this feature, one has to register a `SnowplowObserver` retrieved from the tracker instance using `SnowplowTracker.getObserver()`. The retrieved observer can be added to `navigatorObservers` in `MaterialApp`:
 
-```
+```cpp
 MaterialApp(
   navigatorObservers: [
     tracker.getObserver()
@@ -207,7 +207,7 @@ MaterialApp(
 
 If using the `Router` API with the `MaterialApp.router` constructor, add the observer to the `observers` of your `Navigator` instance, e.g.:
 
-```
+```cpp
 Navigator(
   observers: [tracker.getObserver()],
   ...
@@ -222,7 +222,7 @@ The `SnowplowTracker.getObserver()` function takes an optional `nameExtractor
 
 The following operations will result in tracking a view event:
 
-```
+```cpp
 Navigator.pushNamed(context, '/contact/123');
 
 Navigator.push<void>(context, MaterialPageRoute(

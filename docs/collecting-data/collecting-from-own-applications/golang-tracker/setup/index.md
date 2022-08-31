@@ -16,7 +16,7 @@ The Tracker is hosted on Github and versions of the Tracker can be fetched using
 
 To get the package, execute:
 
-```
+```go
 $host go get gopkg.in/snowplow/snowplow-golang-tracker.v2/tracker
 
 OR
@@ -26,7 +26,7 @@ $host go get github.com/snowplow/snowplow-golang-tracker/v2/tracker # When using
 
 To import the package, add the following line to your code:
 
-```
+```go
 import "gopkg.in/snowplow/snowplow-golang-tracker.v2/tracker"
 
 OR

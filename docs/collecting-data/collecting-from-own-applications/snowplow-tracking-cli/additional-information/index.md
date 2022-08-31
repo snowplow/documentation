@@ -21,7 +21,7 @@ The Snowplow Tracking CLI will exit once the Snowplow collector has responded. T
 
 Add snowplowtrk and its package dependencies to your go src directory:
 
-```
+```go
 $ go get -v github.com/snowplow/snowplow-tracking-cli
 ```
 
@@ -29,6 +29,6 @@ Once the get completes, you should find your new `snowplowtrk` executable sittin
 
 To update snowplowtrk dependencies, use `go get` with the `-u` option.
 
-```
+```go
 $ go get -u -v github.com/snowplow/snowplow-tracking-cli
 ```

@@ -18,7 +18,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 
 ## Initialization
 
-```
+```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { OptimizelyPlugin } from '@snowplow/browser-plugin-optimizely';
 
@@ -30,7 +30,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 The constructor parameters allow for configuration of the contexts to include. If you do not specify any, all the Optimizely contexts will be included. To alter this behavior you can flip some of the booleans. The constructor has the following definition:
 
-```
+```javascript
 OptimizelyPlugin(
   summary: boolean = true,
   experiments: boolean = true,

@@ -10,7 +10,7 @@ The Tracker is published to Maven Central and JCenter, which should make it easy
 
 Add the Scala Tracker to your build.sbt like this:
 
-```
+```scala
 resolvers += "JCenter" at "https://jcenter.bintray.com/" // you can omit if you're planning to use Maven Central
 
 libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-tracker" % "0.5.0"
@@ -20,7 +20,7 @@ libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-tracker" % "0.
 
 If you are using Gradle in your own Scala application, then add our Maven repository in your `build.gradle` file:
 
-```
+```gradle
 repositories {
     ...
     jcenter()
@@ -29,7 +29,7 @@ repositories {
 
 Then add into the same file:
 
-```
+```gradle
 dependencies {
     ...
     // Snowplow Scala Tracker
@@ -43,7 +43,7 @@ Notice a `_2.12` postfix in artifactId. This is used for Scala libraries and d
 
 If you are using Maven for building your Scala application, then add the following code into your `HOME/.m2/settings.xml` to be able to use this repository:
 
-```
+```xml
 <settings>
   <profiles>
     <profile>
@@ -81,7 +81,7 @@ If you are using Maven for building your Scala application, then add the followi
 
 Then add into your project's `pom.xml`:
 
-```
+```xml
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-scala-tracker_2.12</artifactId>

@@ -26,7 +26,7 @@ You can also manually insert the Tracker by downloading the jar directly: [snow
 
 Add into your project's `pom.xml`:
 
-```
+```xml
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-java-tracker</artifactId>
@@ -38,7 +38,7 @@ Add into your project's `pom.xml`:
 
 Add into your project's `build.gradle`:
 
-```
+```gradle
 dependencies {
     // Snowplow Java Tracker
     implementation 'com.snowplowanalytics:snowplow-java-tracker:0.10.1'
@@ -49,7 +49,7 @@ From 0.10.1 you can also specify the feature variants via Gradle, to pull in the
 
 #### Adding OkHttp Support
 
-```
+```gradle
 dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:0.10.1'
     implementation ('com.snowplowanalytics:snowplow-java-tracker:0.10.1') {
@@ -62,7 +62,7 @@ dependencies {
 
 #### Adding ApacheHttp Support
 
-```
+```gradle
 dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:0.10.1'
     implementation ('com.snowplowanalytics:snowplow-java-tracker:0.10.1') {
@@ -77,7 +77,7 @@ dependencies {
 
 The Snowplow Java Tracker is also usable from Scala. Add this to your SBT config:
 
-```
+```scala
 // Dependency
 val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "0.10.1"
 ```

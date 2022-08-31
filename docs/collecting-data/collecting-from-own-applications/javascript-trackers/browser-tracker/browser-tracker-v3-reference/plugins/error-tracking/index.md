@@ -20,7 +20,7 @@ This tracker plugin provides two ways of tracking exceptions: manual tracking of
 
 ## Initialization
 
-```
+```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { ErrorTrackingPlugin, enableErrorTracking } from '@snowplow/browser-plugin-error-tracking';
 

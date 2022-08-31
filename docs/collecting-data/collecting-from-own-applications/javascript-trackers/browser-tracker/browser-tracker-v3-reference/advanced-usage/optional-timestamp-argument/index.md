@@ -16,7 +16,7 @@ If you do not pass this timestamp in as an argument, then the JavaScript Tracker
 
 Here is an example tracking a self describing event and supplying the optional timestamp argument.
 
-```
+```javascript
 trackSelfDescribingEvent({
   event: {
     schema: 'iglu:com.acme/event/jsonschema/1-0-0', 
@@ -30,7 +30,7 @@ Timestamp is counted in milliseconds since the Unix epoch – the same format as
 
 Also you can attach a true timestamp to the event, replacing the device timestamp. For example:
 
-```
+```javascript
 trackSelfDescribingEvent({
   event: {
     schema: 'iglu:com.acme/event/jsonschema/1-0-0', 

@@ -29,7 +29,7 @@ The guide is illustrative. One of the nice things about Adjust is that it gives 
 
 Log into Adjust and navigate to Settings -> Events screen in the dashboard. Hover over the install event, click the “edit” icon that appears and enter the following, substituting your own collector URL for `mycollector.mydomain.com`:
 
-```
+```markup
 http://mycollector.mydomain.com/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.adjust.snowplow%2Finstall%2Fjsonschema%2F1-0-0&app_id={app_id}&app_name={app_name}&app_name_dashboard={app_name_dashboard}&store={store}&tracker={tracker}&tracker_name={tracker_name}&network_name={network_name}&campaign_name={campaign_name}&adgroup_name={adgroup_name}&creative_name={creative_name}&impression_based={impression_based}&is_organic={is_organic}&gclid={gclid}&rejection_reason={rejection_reason}&click_referer={click_referer}&click_attribution_window={click_attribution_window}&impression_attribution_window={impression_attribution_window}&reattribution_attribution_window={reattribution_attribution_window}&inactive_user_definition={inactive_user_definition}&adid={adid}&idfa={idfa}&android_id={android_id}&android_id_md5={android_id_md5}&mac_sha1={mac_sha1}&mac_md5={mac_md5}&idfa-android-id={idfa||android_id}&idfa-or-gps-adid={idfa||gps_adid}&idfa_md5={idfa_md5}&idfa_md5_hex={idfa_md5_hex}&idfv={idfv}&gps_adid={gps_adid}&gps_adid_md5={gps_adid_md5}&win_udid={win_udid}&win_hwid={win_hwid}&win_naid={win_naid}&win_adid={win_adid}&match_type={match_type}&reftag={reftag}&referrer={referrer}&user_agent={user_agent}&ip_address={ip_address}&click_time={click_time}&engagement_time={engagement_time}&installed_at={installed_at}&installed_at_hour={installed_at_hour}&created_at={created_at}&reattributed_at={reattributed_at}&connection_type={connection_type}&isp={isp}&city={city}&country={country}&language={language}&device_name={device_name}&device_type={device_type}&os_name={os_name}&api_level={api_level}&sdk_version={sdk_version}&os_version={os_version}&environment={environment}&tracking_enabled={tracking_enabled}&timezone={timezone}&fb_campaign_group_name={fb_campaign_group_name}&fb_campaign_group_id={fb_campaign_group_id}&fb_campaign_name={fb_campaign_name}&fb_campaign_id={fb_campaign_id}&fb_adgroup_name={fb_adgroup_name}&fb_adgroup_id={fb_adgroup_id}&tweet_id={tweet_id}&twitter_line_item_id={twitter_line_item_id}&label={label}
 ```
 
@@ -53,7 +53,7 @@ _Refer to the rest of this guide to see how you can write your own custom schema
 
 Upload the following schema to your Iglu repo as `com.adjust.snowplow/install/jsonschema/1-0-0`:
 
-```
+```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for Adjust install event",
@@ -356,19 +356,19 @@ We have included a field for each placeholder that we included in our Adjust cal
 
 Create a corresponding Redshift table for the schema. We recommend autogenerating this [Schema Guru 6](https://github.com/snowplow/schema-guru), e.g. by executing the following in the root of your schema registry:
 
-```
-$ /path/to/schema-guru-0.6.2 ddl --with-json-paths schemas/com.adjust.snowplow/install
+```bash
+/path/to/schema-guru-0.6.2 ddl --with-json-paths schemas/com.adjust.snowplow/install
 ```
 
 Or with [Igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md):
 
-```
-$ /path/to/igluctl static generate --with-json-paths schemas/com.adjust.snowplow/install
+```bash
+/path/to/igluctl static generate --with-json-paths schemas/com.adjust.snowplow/install
 ```
 
 In our case this auto-generated the following table definition. (_Please note that this example might be outdated. Since first publishing this guide, Redshift has introduced the more efficient ZSTD encoding for column compression, which we have adopted as standard in Igluctl._)
 
-```
+```sql
 CREATE TABLE IF NOT EXISTS atomic.com_adjust_snowplow_install_1 (
     "schema_vendor"                    VARCHAR(128)  ENCODE RUNLENGTH NOT NULL,
     "schema_name"                      VARCHAR(128)  ENCODE RUNLENGTH NOT NULL,
@@ -462,7 +462,7 @@ COMMENT ON TABLE com_adjust_snowplow_install_1 IS 'iglu:com.adjust.snowplow/inst
 
 Finally add the following JSONpaths file to your jsonpaths folder (as `com.adjust.snowplow/install_1.json`). Your JSONpaths file should have already been auto-generated using schema-guru or Igluctl:
 
-```
+```json
 {
     "jsonpaths": [
         "$.schema.vendor",

@@ -8,7 +8,7 @@ You may have additional information about your application's environment, curren
 
 Create a subject like this:
 
-```
+```go
 subject := sp.InitSubject()
 ```
 
@@ -31,7 +31,7 @@ The `Subject` can be used into two ways.
 
 When initialising the `Tracker`:
 
-```
+```go
 tracker := sp.InitTracker(
   sp.RequireEmitter(emitter),
   sp.OptionSubject(subject)
@@ -40,7 +40,7 @@ tracker := sp.InitTracker(
 
 Or when you track an event:
 
-```
+```go
 tracker.TrackPageView(sp.PageViewEvent{
   PageUrl: sp.NewString("acme.com"),
   Subject: subject
@@ -53,13 +53,13 @@ When setting the `Subject` as you track as event, you will override the `Tracker
 
 You can set the user ID to any string:
 
-```
+```go
 s.SetUserId( "{{USER ID}}" );
 ```
 
 Example:
 
-```
+```go
 s.SetUserId("alexd");
 ```
 
@@ -67,13 +67,13 @@ s.SetUserId("alexd");
 
 If your code has access to the device's screen resolution, then you can pass this in to Snowplow too:
 
-```
+```go
 s.SetScreenResolution( {{WIDTH}}, {{HEIGHT}} );
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
-```
+```go
 s.SetScreenResolution(1366, 768);
 ```
 
@@ -81,13 +81,13 @@ s.SetScreenResolution(1366, 768);
 
 If your code has access to the viewport dimensions, then you can pass this in to Snowplow too:
 
-```
+```go
 s.SetViewport( {{WIDTH}}, {{HEIGHT}} );
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
-```
+```go
 s.SetViewport(300, 200);
 ```
 
@@ -95,13 +95,13 @@ s.SetViewport(300, 200);
 
 If your code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
 
-```
+```go
 s.SetColorDepth( {{BITS PER PIXEL}} );
 ```
 
 The number should be a positive integer, in bits per pixel. Example:
 
-```
+```go
 s.SetColorDepth(32);
 ```
 
@@ -109,13 +109,13 @@ s.SetColorDepth(32);
 
 This method lets you pass a user's timezone in to Snowplow:
 
-```
+```go
 s.timezone( {{TIMEZONE}} );
 ```
 
 The timezone should be a string:
 
-```
+```go
 s.SetColorDepth("Europe/London");
 ```
 
@@ -123,13 +123,13 @@ s.SetColorDepth("Europe/London");
 
 This method lets you pass a user's language in to Snowplow:
 
-```
+```go
 s.SetLang( {{LANGUAGE}} );
 ```
 
 The language should be a string:
 
-```
+```go
 s.SetLang('en');
 ```
 
@@ -137,13 +137,13 @@ s.SetLang('en');
 
 This method lets you pass a user's IP Address in to Snowplow:
 
-```
+```go
 s.SetIpAddress( {{IP ADDRESS}} );
 ```
 
 The IP Address should be a string:
 
-```
+```go
 s.SetIpAddress('127.0.0.1');
 ```
 
@@ -151,13 +151,13 @@ s.SetIpAddress('127.0.0.1');
 
 This method lets you pass a user's useragent string in to Snowplow:
 
-```
+```go
 s.SetUseragent( {{USERAGENT}} );
 ```
 
 The useragent should be a string:
 
-```
+```go
 s.SetUseragent('some useragent');
 ```
 
@@ -165,13 +165,13 @@ s.SetUseragent('some useragent');
 
 This method lets you pass a user's Domain User ID string in to Snowplow:
 
-```
+```go
 s.SetDomainUserId( {{DOMAIN USER ID}} );
 ```
 
 The Domain User ID should be a string:
 
-```
+```go
 s.SetDomainUserId('domain-uid-12');
 ```
 
@@ -179,12 +179,12 @@ s.SetDomainUserId('domain-uid-12');
 
 This method lets you pass a user's Network User ID string in to Snowplow:
 
-```
+```go
 s.SetNetworkUserId( {{NETWORK USER ID}} );
 ```
 
 The Network User ID should be a string:
 
-```
+```go
 s.SetNetworkUserId('network-uid-12');
 ```

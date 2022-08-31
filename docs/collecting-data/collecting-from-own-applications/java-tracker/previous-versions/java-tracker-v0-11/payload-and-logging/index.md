@@ -18,7 +18,7 @@ This is used under the hood but is also useful for to know about when attaching 
 
 Here's a short example:
 
-```
+```java
 // This is the Map we have created
 Map<String, String> eventData = new HashMap<>();
 eventData.put("Event", "Data")

@@ -18,7 +18,7 @@ Every `Event.Builder` in the Java tracker allows for a list of `SelfDescribingJs
 
 Context entities can be added to any event using the `customContext()` Builder method:
 
-```
+```java
 // This example shows an Unstructured event, but all events can have context
 Unstructured unstructured = Unstructured.builder()
             .eventData(dataAsSelfDescribingJson)
@@ -44,7 +44,7 @@ A self-describing JSON needs two keys, `schema` and `data`. The `schema` key is 
 
 A simple initialisation looks like this:
 
-```
+```java
 // This map will be used for the "data" key
 Map<String, String> eventData = new HashMap<>();
 eventData.put("targetUrl", "https://www.snowplowanalytics.com")

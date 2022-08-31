@@ -14,7 +14,7 @@ The current tracker version is 0.12 ([GitHub](https://github.com/snowplow/snowpl
 
 Add into your project’s `pom.xml`:
 
-```
+```xml
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-java-tracker</artifactId>
@@ -28,7 +28,7 @@ From version 0.10.1 onwards, we have provided out-of-the-box support for sending
 
 Add this into your project’s `build.gradle` for the default installation with OkHttp support:
 
-```
+```gradle
 dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:0.12.0'
     implementation ('com.snowplowanalytics:snowplow-java-tracker:0.12.0') {
@@ -41,7 +41,7 @@ dependencies {
 
 Adding Apache HTTP support instead:
 
-```
+```gradle
 dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:0.12.0'
     implementation ('com.snowplowanalytics:snowplow-java-tracker:0.12.0') {
@@ -54,7 +54,7 @@ dependencies {
 
 If you are using your own `HttpClientAdapter` class:
 
-```
+```gradle
 dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:0.12.0'
 }
@@ -68,7 +68,7 @@ You can also manually insert the tracker by downloading the jar directly from [M
 
 The Snowplow Java tracker is also usable from Scala. Add this to your SBT config:
 
-```
+```scala
 // Dependency
 val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "0.12.0"
 ```
@@ -77,7 +77,7 @@ val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "0.1
 
 The simplest initialization looks like this:
 
-```
+```java
 import com.snowplowanalytics.snowplow.tracker.*;
 import com.snowplowanalytics.snowplow.tracker.emitter.*;
 
@@ -93,11 +93,11 @@ The [Java tracker Github repository](https://github.com/snowplow/snowplow-java-t
 
 These are the required objects for tracking using the Java tracker:
 
-| Class | Function |
-| --- | --- |
-| `Tracker` | Tracks events |
-| `Emitter` (`BatchEmitter`) | Sends event payloads |
-| subclasses of `Event` | What you want to track |
+| Class                      | Function               |
+|----------------------------|------------------------|
+| `Tracker`                  | Tracks events          |
+| `Emitter` (`BatchEmitter`) | Sends event payloads   |
+| subclasses of `Event`      | What you want to track |
 
 ### Configuring the `Tracker`
 
@@ -111,7 +111,7 @@ The final two `TrackerBuilder` methods are `base64()` and `subject()`. By defaul
 
 To initialize a `Tracker` with all the options:
 
-```
+```java
 Tracker tracker = new Tracker.TrackerBuilder(emitter, namespace, appId)
             .base64(false)
             .platform(DevicePlatform.Desktop)

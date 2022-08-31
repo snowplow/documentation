@@ -12,7 +12,7 @@ To learn more about analytics for AMP pages see the [amp-analytics](https://www.
 
 Snowplow is natively integrated into the project, so pages optimized with AMP HTML can be tracked in Snowplow by adding the appropriate `amp-analytics` tag to your pages:
 
-```
+```html
 
 <body>
   ...
@@ -50,7 +50,7 @@ The v2 AMP tracker attaches two custom contexts to all events by defaul. Redshif
 
 `collectorHost` and `appId` must be provided in the `"vars"` section of the tag:
 
-```
+```javascript
 "vars": {
   ...
 },
@@ -62,7 +62,7 @@ The rest are optional
 
 Specify the host to your collector like so:
 
-```
+```javascript
 "vars": {
   "collectorHost": "snowplow-collector.acme.com",
   ...
@@ -78,7 +78,7 @@ Notes:
 
 You must set the application ID for the website you are tracking via AMP:
 
-```
+```javascript
 "vars": {
   "appId": "campaign-microsite",
   ...
@@ -92,7 +92,7 @@ Notes:
 
 Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) field.
 
-```
+```javascript
 "vars": {
   "userId": "someUserId",
   ...
@@ -102,7 +102,7 @@ Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://
 
 Specify the optional "nameTracker" var to set the tna/name\_tracker [Snowplow tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) field.
 
-```
+```javascript
 "vars": {
   "nameTracker": "someTrackerName",
   ...
@@ -112,7 +112,7 @@ Specify the optional "nameTracker" var to set the tna/name\_tracker [Snowplow tr
 
 Custom contexts may be added by including Self-Describing JSON as a `"customContexts"` var, with `"` characters escaped:
 
-```
+```javascript
 "vars": {
   "customContexts":  "{\"schema\":\"iglu:com.acme/first_context/jsonschema/1-0-0\",\"data\":{\"someKey\":\"someValue\"}}"
   ...
@@ -120,7 +120,7 @@ Custom contexts may be added by including Self-Describing JSON as a `"customCont
 
 Multiple custom contexts may be added by separating each self-describing JSON with a comma:
 
-```
+```javascript
 "vars": {
   "customContexts":  "{\"schema\":\"iglu:com.acme/first_context/jsonschema/1-0-0\",\"data\":{\"someKey\":\"someValue\"}},{\"schema\":\"iglu:com.acme/second_context/jsonschema/1-0-0\",\"data\":{\"someOtherKey\":\"someOtherValue\"}}"
   ...
@@ -128,7 +128,7 @@ Multiple custom contexts may be added by separating each self-describing JSON wi
 
 Custom contexts may either be set globally for all events (as a top-level var, see above) or per-event trigger:
 
-```
+```javascript
 ...
 "triggers": {
 ...
@@ -161,7 +161,7 @@ All event tracking is disabled by default; you can enable it on an event-by-even
 
 Enable the page view tracking like so:
 
-```
+```javascript
 <amp-analytics type="snowplow_v2" id="event1">
 <script type="application/json">
 {
@@ -188,7 +188,7 @@ Events can be sent by setting the AMP trigger request value to event and setting
 
 The following example uses the selector attribute of the trigger to send an event when a particular element is clicked:
 
-```
+```javascript
 <amp-analytics type="snowplow_v2" id="event2">
 <script type="application/json">
 {
@@ -214,19 +214,19 @@ The following example uses the selector attribute of the trigger to send an even
 
 You can set key-value pairs for the following event fields in the vars attribute of the trigger:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `structEventCategory` | The grouping of structured events which this `action` belongs to | Yes | String |
-| `structEventAction` | Defines the type of user interaction which this event involves | Yes | String |
-| `structEventLabel` | A string to provide additional dimensions to the event data | No | String |
-| `structEventProperty` | A string describing the object or the action performed on it | No | String |
-| `structEventValue` | A value to provide numerical data about the event | No | Int or Float |
+| **Argument**          | **Description**                                                  | **Required?** | **Validation** |
+|-----------------------|------------------------------------------------------------------|---------------|----------------|
+| `structEventCategory` | The grouping of structured events which this `action` belongs to | Yes           | String         |
+| `structEventAction`   | Defines the type of user interaction which this event involves   | Yes           | String         |
+| `structEventLabel`    | A string to provide additional dimensions to the event data      | No            | String         |
+| `structEventProperty` | A string describing the object or the action performed on it     | No            | String         |
+| `structEventValue`    | A value to provide numerical data about the event                | No            | Int or Float   |
 
 ### Page pings
 
 Enable page ping tracking like so:
 
-```
+```javascript
 <amp-analytics type="snowplow_v2" id="event3">
 <script type="application/json">
 {
@@ -266,7 +266,7 @@ All events are sent with an  [AMP web page](https://github.com/snowplow/iglu-cen
 
 Custom events may be sent via the AMP tracker by passing the schema vendor, and version, and an escaped JSON of the desired data, as follows:
 
-```
+```javascript
 <amp-analytics type="snowplow_v2" id="event3">
 <script type="application/json">
 {
@@ -329,7 +329,7 @@ Where a user moves from a standard web page, tracked by the Javascript tracker, 
 
 The AMP tracker uses a combination of cookies and the AMP linker to attempt to retain the value, however due to the nature of AMP pages, there is no guarantee that the value will be retained across sessions. To ensure best possible retention of the value within the session, make sure the tracker config has linker pages enabled for your AMP domains:
 
-```
+```javascript
 ...
 "linkers": {
   "enabled": true,
@@ -345,7 +345,7 @@ Data models should be designed for an 'at least once' identification structure -
 
 Where a user moves frrom an AMP page to a standard web page which is tracked by the Javascript tracker, the AMP tracker will use AMP's linker functionality to append the AMP CLient ID to the querystring, as long as linkers are enabled for the destination domain:
 
-```
+```javascript
 ...
 "linkers": {
   "enabled": true,

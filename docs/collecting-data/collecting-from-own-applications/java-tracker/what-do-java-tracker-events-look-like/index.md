@@ -12,7 +12,7 @@ This reference page shows two simple example events generated using the default 
 
 The JSON below is part of the "event" value for a [ScreenView](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-screenview-event) event, which is a type of [Unstructured](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-custom-event-unstructured-events) (self-describing) event. The full Micro JSON output includes other data, such as headers. Any columns with `null` values have also been removed.
 
-```
+```java
 // This event was tracked
 ScreenView screenView = ScreenView.builder()
             .name("login")
@@ -20,7 +20,7 @@ ScreenView screenView = ScreenView.builder()
             .build();
 ```
 
-```
+```json
 "ScreenView event (edited)": {
   "app_id": "java-tracker-sample-console-app",
   "platform": "srv",
@@ -58,14 +58,14 @@ Since this is a `Unstructured` event, the "unstruct\_event" field is also popula
 
 Below is an example `PageView` event using the default tracker configuration with Snowplow Micro. Again, the `null` columns and other sections of the payload have been removed.
 
-```
+```java
 // This event was tracked
 PageView pageViewEvent = PageView.builder()
             .pageUrl("https://www.snowplowanalytics.com")
             .build();
 ```
 
-```
+```json
 "PageView event (edited)": {
   "app_id": "java-tracker-sample-console-app",
   "platform": "srv",

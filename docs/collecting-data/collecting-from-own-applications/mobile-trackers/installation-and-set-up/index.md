@@ -34,7 +34,7 @@ To install Snowplow Tracker with Cocoapods:
 2. Add the iOS Tracker SDK among the dependencies of your `Podfile`:
    
    ```ruby
-   pod 'SnowplowTracker', '~> 3.0'
+   pod 'SnowplowTracker', '~> 4.0'
    ```
 
 3. Run the command `pod install` to add the tracker to your app project.
@@ -48,7 +48,7 @@ To install Snowplow Tracker with Carthage:
 2. Add the iOS Tracker SDK among the dependencies of your `Cartfile`:
    
    ```ruby
-   github "snowplow/snowplow-objc-tracker" ~> 3.0
+   github "snowplow/snowplow-objc-tracker" ~> 4.0
    ```
 
 3. Run the command `carthage update` and drag the appropriate frameworks from the `Carthage/build` folder to your app project.
@@ -132,7 +132,7 @@ Add into your `build.gradle` file:
 dependencies {
   ...
   // Snowplow Android Tracker
-  implementation 'com.snowplowanalytics:snowplow-android-tracker:3.+'
+  implementation 'com.snowplowanalytics:snowplow-android-tracker:4.+'
   // In case 'lifecycleAutotracking' is enabled
   implementation 'androidx.lifecycle-extensions:2.2.+'
   ...

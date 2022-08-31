@@ -11,7 +11,7 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.ico',
-  trailingSlash: false,
+  trailingSlash: true,
   organizationName: 'snowplow',
   projectName: 'snowplow.github.io',
   deploymentBranch: 'main',

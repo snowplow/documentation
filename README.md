@@ -1,80 +1,64 @@
-# Snowplow Documentation Website (BETA! coming soon)
+# Snowplow Documentation Website
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern
-static website generator.
+This is the source for https://docs.snowplow.io/docs.
 
-## Possible pre-requisites
+* [Contributing](#contributing)
+* [How to preview locally](#how-to-preview-locally)
+* [Organizing content](#organizing-content)
+* [Formatting content](#formatting-content)
 
-You might need to install some tools to get this running.
+## Contributing
+
+All contributions are welcome, from [reporting issues](https://github.com/snowplow/snowplow.github.io/issues/new) to correcting typos and formatting to full-blown how-tos and guides.
+
+If you are new to Github, the easiest way to propose changes is [via the UI](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files#editing-files-in-another-users-repository).
+
+For more substantial contributions, below you can find tips on how to preview your changes, as well as how to organize and format your content.
+
+## How to preview locally
+
+Step 1. Clone this repository.
+
+Step 2 (one-time setup). Install some tools:
 
 ```bash
 brew install yarn
+# On Linux, use your favorite package manager
 ```
 
-## Installation
+Step 3. Install dependencies and start the preview:
 
 ```bash
 yarn
-```
-
-## Local Development
-
-```bash
 yarn start
 ```
 
-This command starts a local development server and opens up a browser window.
-Most changes are reflected live without having to restart the server.
+Step 4. Go to `localhost:3000` in your browser and enjoy!
 
-## Build
+## Organizing content
 
-```bash
-yarn build
-```
+In this section you’ll find some general tips on how the docs are structured.
 
-This command generates static content into the `build` directory and can be
-served using any static contents hosting service.
+### Sidebar
 
-## Deployment
+The sidebar on the left follows [file structure](https://github.com/snowplow/snowplow.github.io/tree/main/docs) (all docs are in the `/docs` folder). So when you add new pages, create folders as you see fit.
 
-Push changes back to your branch and then merge into main branch.  The Github
-Actions will deploy the change across into gh_pages branch that GitHub pages
-picks up.
+To control the position of a section in the sidebar, go to the `index.md` file for that section and adjust the `sidebar_position` attribute at the top (see [this example](https://github.com/snowplow/snowplow.github.io/blob/main/docs/tutorials/index.md)). Sidebar positions are just numbers, and you can use any number as long as the order is correct.
 
-Note that when setting up in GitHub, create two branches:
+### Links
 
-- main - default branch, protected
-- gh-pages - protected
+For links within this documentation, please end the link with `/index.md`. This way all links will be checked, and you’ll get an error if a link is broken at any point.
 
-## Importing from Wordpress
+### Reusable fragments
 
-First, initialise the `wordpress-export-to-markdown` submodule:
+You can create reusable fragments and include them in multiple files (see [this example](https://github.com/snowplow/snowplow.github.io/blob/main/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/index.md)).
 
-```bash
-pushd wordpress-export-to-markdown
-npm install
-popd
-```
+## Formatting content
 
-Next, install some more tools:
+In this section you’ll find some general tips on how to write the pages.
 
-```bash
-pip3 install yq
-# on Mac
-brew install moreutils
-# on Linux use your preferred package manager to install the same
-```
+The documentation is written in Markdown. In addition, since we are using Docusaurus, [more features are available](https://docusaurus.io/docs/markdown-features). Here are a few of our favorites:
 
-Then export the content from Wordpress (choose “All content”).
-
-Finally, run the import script.
-
-```bash
-./import.sh <your-export-file.xml>
-```
-
-You can now compare the changes introduced by the import by running:
-
-```
-git diff --no-index --stat docs /tmp/docs
-```
+* Use [“admonitions”](https://docusaurus.io/docs/markdown-features/admonitions) (e.g. `:::note`) to draw attention to a certain paragraph.
+* Use [code blocks](https://docusaurus.io/docs/markdown-features/code-blocks) for code, and don’t forget to specify the languange.
+* Use [tabs](https://docusaurus.io/docs/markdown-features/tabs) for content where multiple alternatives are possible (e.g. iOS code vs Android code). Inside the tabs, try to only put the content that differs.

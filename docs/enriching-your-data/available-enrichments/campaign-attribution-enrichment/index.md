@@ -10,7 +10,7 @@ When using online marketing campaigns to drive traffic to our website, it is usu
 
 A link for an online advertisement that brings users back to our site might look like:
 
-```markdown
+```markup
 https://www.acme.com/spring_offer_product?utm_source=influencer&utm_medium=blog&utm_channel=web&utm_campaign=spring_offer
 ```
 

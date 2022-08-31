@@ -6,7 +6,7 @@ sidebar_position: 200
 
 This is a release adding a new experimental Stream Shredder asset and improving independent Loader architecture, introduced in R35.
 
-[Official announcement.](https://discourse.snowplowanalytics.com/t/snowplow-rdb-loader-1-0-0-released/5017)
+[Official announcement.](https://discourse.snowplow.io/t/snowplow-rdb-loader-1-0-0-released/5017)
 
 This is the first release in 1.x branch and no breaking changes will be introduced until 2.x release. If you're upgrading from R34 or earlier it's strictly recommended to follow [R35 Upgrade Guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) first.
 

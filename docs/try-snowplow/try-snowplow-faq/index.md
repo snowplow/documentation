@@ -6,7 +6,7 @@ sidebar_position: 50
 
 ### How can I get help with my Try Snowplow setup?
 
-You can ask any questions about set up, tracking, accessing or modeling data with Try Snowplow in [the dedicated discourse category](https://discourse.snowplowanalytics.com/c/try-snowplow/62) and one of our engineers will get back to you.
+You can ask any questions about set up, tracking, accessing or modeling data with Try Snowplow in [the dedicated discourse category](https://discourse.snowplow.io/c/try-snowplow/62) and one of our engineers will get back to you.
 
 ### I get an error trying to run the CloudFormation. How do I resolve it?
 

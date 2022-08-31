@@ -65,7 +65,7 @@ const config = {
             label: 'Docs',
           },
           {
-            href: 'https://discourse.snowplowanalytics.com',
+            href: 'https://discourse.snowplow.io',
             label: 'Discourse',
             position: 'left',
           },

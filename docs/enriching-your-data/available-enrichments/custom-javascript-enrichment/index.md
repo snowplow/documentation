@@ -35,7 +35,7 @@ Taking this example further, you could do something like notify the user that se
 
 Here’s an example snippet of code relating to the above:
 
-```
+```javascript
 var SECRET_APP_ID = "Joshua";
     
 /**
@@ -72,7 +72,7 @@ The event variable that is provided to the JavaScript function can be queried to
 
 The JavaScript enrichment can be used to add additional contextual information into the Snowplow event. This is defined as a JSON array where each entry of the array is a custom context. See the example below for how this is formatted.
 
-```
+```javascript
 /**
 * process()
 * Entry point for the Javascript enrichment function. Executed using Nashorn

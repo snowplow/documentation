@@ -40,7 +40,7 @@ The configuration JSON for this enrichment contains four sub-objects:
 4. `output` lets you tune how you convert the returned row(s) into one or more self-describing JSONs ready to be attached to your Snowplow event
 5. `cache` improves the enrichment’s performance by storing rows retrieved from your relational database
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow.enrichments/sql_query_enrichment_config/jsonschema/1-0-0",
   "data": {
@@ -171,7 +171,7 @@ A Snowplow enrichment can run many millions of time per hour, effectively launch
 
 With this configuration:
 
-```
+```json
 ...
   "query": {
     "sql": "SELECT username, date_of_birth FROM tbl_users WHERE user = ?"
@@ -189,16 +189,16 @@ With this configuration:
 
 And this query result:
 
-```
+```sql
 SELECT username, date_of_birth FROM tbl_users WHERE user = 123;
 | username | date_of_birth |
 |----------|---------------|
-|     karl |    1980-06-12 |
+| karl     | 1980-06-12    |
 ```
 
 This would be added to the `derived_contexts` array:
 
-```
+```json
 {
   "schema": "iglu:com.acme/user/jsonschema/1-0-0",
   "data": {
@@ -210,7 +210,7 @@ This would be added to the `derived_contexts` array:
 
 With this query result:
 
-```
+```sql
 SELECT username, date_of_birth FROM tbl_users WHERE user = 123;
 | username | date_of_birth |
 |----------|---------------|
@@ -218,12 +218,12 @@ SELECT username, date_of_birth FROM tbl_users WHERE user = 123;
 
 No context would be added to the `derived_contexts` array, but the event would continue processing. With this query result:
 
-```
+```sql
 SELECT username, date_of_birth FROM tbl_users WHERE user = 123;
 | username | date_of_birth |
 |----------|---------------|
-|     karl |    1980-06-12 |
-|     mary |    1975-03-22 |
+| karl     | 1980-06-12    |
+| mary     | 1975-03-22    |
 ```
 
 An error would be triggered, on account of the `AT_MOST_ONE` setting, and the event would be rejected.
@@ -232,7 +232,7 @@ An error would be triggered, on account of the `AT_MOST_ONE` setting, and the 
 
 With this configuration:
 
-```
+```json
 ...
   "query": {
     "sql": "SELECT * FROM product WHERE category = ?"
@@ -250,17 +250,17 @@ With this configuration:
 
 And this query result:
 
-```
+```sql
 SELECT * FROM product WHERE category = 'homeware';
 | SKU | prod_name |
 |-----|-----------|
-| 123 |      iPad |
-| 456 |  Ray-Bans |
+| 123 | iPad      |
+| 456 | Ray-Bans  |
 ```
 
 This single context would be added to the `derived_contexts` array:
 
-```
+```json
 {
   "schema": "iglu:com.acme/products/jsonschema/1-0-0",
   "data": [
@@ -278,7 +278,7 @@ This single context would be added to the `derived_contexts` array:
 
 If we change the configuration to:
 
-```
+```json
 ...
   "output": {
     "expectedRows": "AT_LEAST_ZERO",
@@ -293,7 +293,7 @@ If we change the configuration to:
 
 Then two contexts would be added to the `derived_contexts` array:
 
-```
+```json
 {
   "schema": "iglu:com.acme/product/jsonschema/1-0-0",
   "data": {

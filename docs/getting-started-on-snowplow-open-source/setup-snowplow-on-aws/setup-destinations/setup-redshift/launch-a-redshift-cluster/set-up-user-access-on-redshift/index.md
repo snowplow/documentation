@@ -24,7 +24,7 @@ You can set the user name and password (`storageloader` and `$storageloaderpassw
 
 It's important that both `vacuum` and `analyze` are run on a regular basis. These can only be run by a superuser or the owner of the table. The latter is the more restricted solution, so we transfer ownership on all tables in atomic to the StoreLoader user. This can be done by running the following query against all tables in atomic:
 
-```
+```sql
 ALTER TABLE atomic.events OWNER TO storageloader;
 ```
 
@@ -32,7 +32,7 @@ ALTER TABLE atomic.events OWNER TO storageloader;
 
 To create a new user who can read Snowplow data, but not modify it, connect to the Snowplow database and execute the following SQL:
 
-```
+```sql
 CREATE USER read_only PASSWORD '$read_only_user';
 GRANT USAGE ON SCHEMA atomic TO read_only;
 GRANT SELECT ON TABLE atomic.events TO read_only;

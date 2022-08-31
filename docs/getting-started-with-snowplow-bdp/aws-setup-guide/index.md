@@ -51,7 +51,7 @@ You will need to share this role with us as part of filling out the setup form i
 
 ### **Policy List**
 
-```
+```text
  "acm:*",
  "apigateway:*",
  "application-autoscaling:*",

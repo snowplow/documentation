@@ -46,6 +46,6 @@ Upload the JSON Paths file to a private S3 bucket which is accessible using the 
 
 Store the JSON Paths file in a sub-folder named after the vendor, for example:
 
-```
+```text
 s3://acme-jsonpaths-files/com.acme.website/anonymous_customer_1.json
 ```

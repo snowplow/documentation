@@ -24,7 +24,7 @@ The GTM SS Snowplow Client has an enriched endpoint which accepts enriched event
 
 Below is an example CURL request of what your application should send to GTM SS Snowplow Client:
 
-```
+```bash
 curl --request POST \
   --url https://{{gtm-ss-url}}/com.snowplowanalytics.snowplow/enriched \
   --header 'Content-Type: application/json' \

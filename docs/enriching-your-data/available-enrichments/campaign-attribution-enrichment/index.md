@@ -10,17 +10,17 @@ When using online marketing campaigns to drive traffic to our website, it is usu
 
 A link for an online advertisement that brings users back to our site might look like:
 
-```
+```markup
 https://www.acme.com/spring_offer_product?utm_source=influencer&utm_medium=blog&utm_channel=web&utm_campaign=spring_offer
 ```
 
 This could result in the following fields being added to the enrich event :
 
-| field | value |
-| --- | --- |
-| `mktSource` | "influencer" |
-| `mktMedium` | "blog" |
-| `mktChannel` | "web" |
+| field         | value           |
+|---------------|-----------------|
+| `mktSource`   | "influencer"    |
+| `mktMedium`   | "blog"          |
+| `mktChannel`  | "web"           |
 | `mktCampaign` | "spring\_offer" |
 
 This enrichment automatically knows about Google (corresponding to the “gclid” query string parameter), Microsoft (“msclkid”), and DoubleClick (“dclid”). For example, if the query string contains `&gclid=abc&` then `mkt_clickid` field will be populated with `"abc"` and `mkt_network` field would be populated with `"Google"`.
@@ -32,7 +32,7 @@ This enrichment automatically knows about Google (corresponding to the “gclid�
 
 Example for standard Google parameters:
 
-```
+```json
     "parameters":{
       "mapping":"static",
       "fields":{
@@ -60,7 +60,7 @@ Example customizing `mktClickId` . This particular example:
 1. adds mappings of the `wbraid` and `gbraid` [parameters](https://developers.google.com/google-ads/api/docs/conversions/upload-clicks?hl=en) to `Google` as the corresponding `mkt_network` and
 2. overrides the `msclkid` mapping (the other default mappings for `gclid` and `dclid` remain unaffected) :
 
-```
+```json
     "parameters":{
       "mapping":"static",
       "fields":{
@@ -90,7 +90,7 @@ Example customizing `mktClickId` . This particular example:
 
 Example for Omniture (only `mkt_campaign` can be populated)
 
-```
+```json
     "parameters":{
       "mapping":"static",
       "fields":{
@@ -111,7 +111,7 @@ Example for Omniture (only `mkt_campaign` can be populated)
 
 It is possible to have more than one parameter name in each array. If multiple acceptable parameter names for the same field are found in the query string, the first one listed in the configuration JSON will take precedence. Example:
 
-```
+```json
     "parameters":{
       "mapping":"static",
       "fields":{
@@ -143,14 +143,14 @@ It is possible to have more than one parameter name in each array. If multiple a
 
 This enrichment populates the following fields of the atomic event :
 
-| Field | Purpose |
-| --- | --- |
-| `mkt_medium` | The advertising or marketing medium, for example: `banner`, `email newsletter`. |
-| `mkt_source` | Identifies the advertiser, site, publication, etc. that is sending traffic to your property, for example: `newsletter4`, `billboard`. |
-| `mkt_term` | Identifies keywords (terms). |
-| `mkt_content` | Used to differentiate similar content, or links within the same ad. For example, if you have two call-to-action links within the same email message, you can use `mkt_content` and set different values for each so you can tell which version is more effective. |
-| `mkt_campaign` | The individual campaign name, slogan, promo code, etc. for a product. |
-| `mkt_clickid` | Click ID which resulted in the redirect/follow request |
-| `mkt_network` | The advertising network name, either default determined from parameter for Click ID or custom specifically stated |
+| Field          | Purpose                                                                                                                                                                                                                                                           |
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `mkt_medium`   | The advertising or marketing medium, for example: `banner`, `email newsletter`.                                                                                                                                                                                   |
+| `mkt_source`   | Identifies the advertiser, site, publication, etc. that is sending traffic to your property, for example: `newsletter4`, `billboard`.                                                                                                                             |
+| `mkt_term`     | Identifies keywords (terms).                                                                                                                                                                                                                                      |
+| `mkt_content`  | Used to differentiate similar content, or links within the same ad. For example, if you have two call-to-action links within the same email message, you can use `mkt_content` and set different values for each so you can tell which version is more effective. |
+| `mkt_campaign` | The individual campaign name, slogan, promo code, etc. for a product.                                                                                                                                                                                             |
+| `mkt_clickid`  | Click ID which resulted in the redirect/follow request                                                                                                                                                                                                            |
+| `mkt_network`  | The advertising network name, either default determined from parameter for Click ID or custom specifically stated                                                                                                                                                 |
 
 If the enrichment is not activated, those fields will not be populated.

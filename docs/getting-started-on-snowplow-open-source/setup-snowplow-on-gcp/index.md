@@ -28,10 +28,10 @@ To get started with Google Cloud, first go to [https://console.cloud.google.com
 - For instance, if you need a Google Compute instance (equivalent to an AWS EC2 instance), you'd want to make sure Google Compute Engine API is enabled.
 - To enable/disable APIs, and check your API usage, go to [https://console.cloud.google.com/apis/dashboard](https://console.cloud.google.com/apis/dashboard)
 
-| Service/API needed | Who needs it |
-| --- | --- |
+| Service/API needed    | Who needs it                           |
+|-----------------------|----------------------------------------|
 | Google Compute Engine | Scala Stream Collector / Stream Enrich |
-| Google Cloud Pub/Sub | Scala Stream Collector / Stream Enrich |
+| Google Cloud Pub/Sub  | Scala Stream Collector / Stream Enrich |
 
 - Some services require Billing to be enabled. To enable and manage your billing accounts, go to [https://console.cloud.google.com/billing](https://console.cloud.google.com/billing). A pop-up will show, asking you to select the billing account with which to associate your project. If it doesn't, Billing was enabled by default when you created your project, probably because you have only one active billing account.
 
@@ -57,14 +57,14 @@ On this page, you can create credentials for your existing accounts. If you don'
 
 You can also use the SDK to authenticate (if you want to authenticate with your personal account), doing:
 
-```
-$ gcloud auth login
+```bash
+gcloud auth login
 ```
 
 If you have multiple projects, this will default to the most recent one you worked on. If you need to change the current project, do:
 
-```
-$ gcloud config set project YOUR_PROJECT_ID
+```bash
+gcloud config set project YOUR_PROJECT_ID
 ```
 
 Every gcloud command can be appended with '--help' for more info. For more detailed information on Service Accounts:

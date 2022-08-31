@@ -33,7 +33,7 @@ The only field that will always be present is `deviceClass`.
 
 Here is an example of a derived context attached by this enrichment for a page visited with a Samsung Galaxy S9:
 
-```
+```json
 {
   "schema":"iglu:com.snowplowanalytics.snowplow/yauaa_context/jsonschema/1-0-1",
     "data": {

@@ -22,15 +22,15 @@ Alternatively, you can build it from the source files. To do so, you will need [
 To do so, clone the Elasticsearch loader repo:
 
 ```bash
-$ git clone https://github.com/snowplow/snowplow-elasticsearch-loader.git
+git clone https://github.com/snowplow/snowplow-elasticsearch-loader.git
 ```
 
 Use `sbt` to resolve dependencies, compile the source, and build a fat JAR file with all dependencies.
 
 ```bash
-$ sbt "project http" assembly # if you want to use the HTTP API compatible with every ES versions.
-$ sbt "project tcp" assembly # if you want to use the transport API with a 5.x cluster
-$ sbt "project tcp2x" assembly # if you want to use the transport API with a 2.x cluster
+sbt "project http" assembly # if you want to use the HTTP API compatible with every ES versions.
+sbt "project tcp" assembly # if you want to use the transport API with a 5.x cluster
+sbt "project tcp2x" assembly # if you want to use the transport API with a 2.x cluster
 ```
 
 You will then find the fat jar in the corresponding directory: `{http,tcp,tcp2x}/target/scala-2.11/snowplow-elasticsearch-loader-{http,tcp,tcp-2x}-0.10.0.jar`. It is now ready to be deployed.

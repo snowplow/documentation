@@ -23,40 +23,40 @@ This enrichment uses the field `useragent`.
 
 This enrichment adds a new context to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ua_parser_context/jsonschema/1-0-0).
 
-| Field | Description |
-| --- | --- |
-| `useragent_family` | Useragent family (browser) name |
-| `useragent_major` | Useragent major version |
-| `useragent_minor` | Useragent minor version |
-| `useragent_patch` | Useragent patch version |
-| `useragent_version` | Full version of the useragent |
-| `os_family` | Operation system name |
-| `os_major` | Operation system major version |
-| `os_minor` | Operation system minor version |
-| `os_patch` | Operation system patch version |
-| `os_patch_minor` | Operation system patch minor version |
-| `os_version` | Operation system full version |
-| `device_family` | Device type |
+| Field               | Description                          |
+|---------------------|--------------------------------------|
+| `useragent_family`  | Useragent family (browser) name      |
+| `useragent_major`   | Useragent major version              |
+| `useragent_minor`   | Useragent minor version              |
+| `useragent_patch`   | Useragent patch version              |
+| `useragent_version` | Full version of the useragent        |
+| `os_family`         | Operation system name                |
+| `os_major`          | Operation system major version       |
+| `os_minor`          | Operation system minor version       |
+| `os_patch`          | Operation system patch version       |
+| `os_patch_minor`    | Operation system patch minor version |
+| `os_version`        | Operation system full version        |
+| `device_family`     | Device type                          |
 
 As an example, the useragent string
 
-```
+```text
 Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36
 ```
 
 would be parsed with the following result:
 
-| PARAMETER | VALUE |
-| --- | --- |
-| useragent\_family | Chrome |
-| useragent\_major | 48 |
-| useragent\_minor | \- |
-| useragent\_patch | 2564 |
-| os\_family | Windows 7 |
-| os\_major | \- |
-| os\_minor | \- |
-| os\_patch\_minor | \- |
-| os\_version | Windows 7 |
-| device\_family | Computer |
+| PARAMETER         | VALUE     |
+|-------------------|-----------|
+| useragent\_family | Chrome    |
+| useragent\_major  | 48        |
+| useragent\_minor  | \-        |
+| useragent\_patch  | 2564      |
+| os\_family        | Windows 7 |
+| os\_major         | \-        |
+| os\_minor         | \-        |
+| os\_patch\_minor  | \-        |
+| os\_version       | Windows 7 |
+| device\_family    | Computer  |
 
 _\*empty values denoted by “-“_

@@ -52,13 +52,13 @@ We host EmrEtlRunner on the distribution platform [JFrog Bintray](https://bintra
 **Note**: follow [this link](http://dl.bintray.com/snowplow/snowplow-generic/) to choose your version of the EmrEtlRunner. The distribution name follows the pattern `snowplow_emr_{{RELEASE_VERSION}}.zip`.
 
 ```bash
-$ wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_{{RELEASE_VERSION}}.zip
+wget http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_{{RELEASE_VERSION}}.zip
 ```
 
 The archive contains both EmrEtlRunner and [StorageLoader](https://github.com/snowplow/snowplow/wiki/1-Installing-the-StorageLoader). Unzip the archive:
 
 ```bash
-$ unzip snowplow_emr_{{RELEASE_VERSION}}.zip
+unzip snowplow_emr_{{RELEASE_VERSION}}.zip
 ```
 
 The archive should contain a `snowplow-emr-etl-runner` file.

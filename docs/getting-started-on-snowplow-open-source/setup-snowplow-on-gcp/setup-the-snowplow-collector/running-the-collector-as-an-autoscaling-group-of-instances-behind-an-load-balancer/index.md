@@ -28,7 +28,7 @@ First you’ll have to store your config file in some place that your instances 
 - Under _Networking_, add a tag, such as “collector”. (This is needed to add a Firewall rule)
 - Under _Management_ “Startup script” add the following script (changing the relevant fields for your case):
 
-```
+```bash
 #! /bin/bash
 sudo apt-get update
 sudo apt-get -y install default-jre

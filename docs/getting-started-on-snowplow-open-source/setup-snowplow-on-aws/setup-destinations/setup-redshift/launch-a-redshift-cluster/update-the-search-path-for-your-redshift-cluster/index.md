@@ -18,7 +18,7 @@ Now open up your parameter group, by clicking on the magnifying glass icon next 
 
 Update the **search\_path** section to read the following:
 
-```
+```text
 atomic,  derived
 ```
 

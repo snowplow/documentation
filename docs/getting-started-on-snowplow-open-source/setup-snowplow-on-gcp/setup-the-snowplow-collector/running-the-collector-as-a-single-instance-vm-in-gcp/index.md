@@ -39,17 +39,17 @@ To run the collector on a single GCP instance, you'll first need to spin one up:
 
 Once you have your config file in place, ssh into your instance:
 
-```
-$ gcloud compute ssh your-instance-name --zone your-instance-zone
+```bash
+gcloud compute ssh your-instance-name --zone your-instance-zone
 ```
 
 And then run:
 
-```
-$ sudo apt-get update
-$ sudo apt-get -y install default-jre
-$ sudo apt-get -y install unzip
-$ wget "https://github.com/snowplow/stream-collector/releases/download/2.3.0/snowplow-stream-collector-google-pubsub-<VERSION>.jar"
-$ gsutil cp gs://<YOUR-BUCKET-NAME/<YOUR-CONFIG-FILE-NAME> .
-$ java -jar snowplow-stream-collector-google-pubsub-<VERSION>.jar --config <YOUR-CONFIG-FILE-NAME>
+```bash
+sudo apt-get update
+sudo apt-get -y install default-jre
+sudo apt-get -y install unzip
+wget "https://github.com/snowplow/stream-collector/releases/download/2.3.0/snowplow-stream-collector-google-pubsub-<VERSION>.jar"
+gsutil cp gs://<YOUR-BUCKET-NAME/<YOUR-CONFIG-FILE-NAME> .
+java -jar snowplow-stream-collector-google-pubsub-<VERSION>.jar --config <YOUR-CONFIG-FILE-NAME>
 ```

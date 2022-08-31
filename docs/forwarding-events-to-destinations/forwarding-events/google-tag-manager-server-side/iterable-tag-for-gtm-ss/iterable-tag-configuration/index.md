@@ -38,7 +38,7 @@ To Identify a user to Iterable, you can send a Self Describing `Identify` even
 
 For example, using the JavaScript Tracker v3, this would look like:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
   schema: 'iglu:com.snowplowanalytics.snowplow/identify/jsonschema/1-0-0',
   data: {

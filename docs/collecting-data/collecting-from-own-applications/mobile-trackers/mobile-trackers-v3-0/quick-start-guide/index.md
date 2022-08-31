@@ -12,12 +12,9 @@ import TabItem from '@theme/TabItem';
 <Tabs>
   <TabItem value="ios" label="iOS" default>
 
-# Installation and set-up
-
 The Snowplow iOS Tracker SDK supports iOS 9.0+, macOS 10.9+, tvOS 9.0+ and watchOS 2.0+
 
 ## Installing
-
 
 The iOS Tracker SDK can be installed using various dependency managers.
 
@@ -57,7 +54,7 @@ To install Snowplow Tracker with Carthage:
 3. Run the command `carthage update` and drag the appropriate frameworks from the `Carthage/build` folder to your app project.
 
 
-### Setting up
+## Setting up
 
 Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker:
 
@@ -85,9 +82,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 The tracker has a default configuration where some settings are enabled by default:
 
 - session tracking
-
 - screen tracking
-
 - platform contexts (mobile specific context fields)
 
 You can override the default configuration with a fine grained configuration when you create the tracker:
@@ -123,7 +118,9 @@ The [Examples Github repository](https://github.com/snowplow/snowplow-objc-track
   </TabItem>
   <TabItem value="android" label="Android">
 
-### Installation
+The Android Tracker SDK supports Android 5 (**API level 21+**)
+
+## Installing
 
 The Android Tracker SDK can be installed using Gradle.
 
@@ -142,11 +139,7 @@ dependencies {
 }
 ```
 
-**Supported System Version**
-
-The Android Tracker SDK supports Android 5 (**API level 21+**)
-
-### Instrumentation
+## Setting up
 
 Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker:
 
@@ -172,9 +165,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 The tracker has a default configuration where some settings are enabled by default:
 
 - session tracking
-
 - screen tracking
-
 - platform contexts (mobile specific context fields)
 
 You can override the default configuration with a fine grained configuration when you create the tracker:

@@ -6,6 +6,11 @@ sidebar_position: 50
 
 # Set up the remote configuration
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 Remote Configuration is a feature of the mobile native trackers that allows for the configuration of the tracker without distributing an app update. In fact, the configuration of the tracker lies on the app bundle submitted to the stores for the distribution. Each tracker configuration change would require the resubmission of the whole app bundle.
 
 With remote configuration, the developer just indicates to the tracker how to download the configuration file. The tracker will automatically reconfigure itself based on the downloaded file.
@@ -16,22 +21,48 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
    
-    ```swift
-    // Indicate the URL where to download the config file
-    let remoteConfig = RemoteConfiguration(endpoint: REMOTE_CONFIG_URL, method: .get)
+<Tabs groupId="platform">
+  <TabItem value="ios" label="iOS" default>
 
-    // Default configuration used in case the remote config is not accessible
-    let defaultNetworkConfig = NetworkConfiguration(endpoint: DEFAULT_COLLECTOR_URL, method: .post);
-    let defaultConfig = [ConfigurationBundle(namespace: "defaultNamespace", networkConfiguration: networkConfig)]
+```swift
+// Indicate the URL where to download the config file
+let remoteConfig = RemoteConfiguration(endpoint: REMOTE_CONFIG_URL, method: .get)
 
-    // Callback for when the tracker reconfigures itself passing a list of active namespaces and the state of the configuration describing where it was fetched from
-    let successCallback: ([String]?) -> Void = { namespaces, state in
-      // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
-    }
+// Default configuration used in case the remote config is not accessible
+let defaultNetworkConfig = NetworkConfiguration(endpoint: DEFAULT_COLLECTOR_URL, method: .post);
+let defaultConfig = [ConfigurationBundle(namespace: "defaultNamespace", networkConfiguration: networkConfig)]
 
-    // Setup tracker with remote configuration
-    Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: defaultConfig, onSuccess: successCallback)
-    ```
+// Callback for when the tracker reconfigures itself passing a list of active namespaces and the state of the configuration describing where it was fetched from
+let successCallback: ([String]?) -> Void = { namespaces, state in
+  // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
+}
+
+// Setup tracker with remote configuration
+Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: defaultConfig, onSuccess: successCallback)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android">
+
+```java
+// Indicate the URL where to download the config file
+RemoteConfiguration remoteConfig = new RemoteConfiguration(REMOTE_CONFIG_URL, HttpMethod.get);
+
+// Default configuration used in case the remote config is not accessible
+NetworkConfiguration defaultNetworkConfig = new NetworkConfiguration(DEFAULT_COLLECTOR_URL, HttpMethod.post);
+List<ConfigurationBundle> defaultConfig = Lists.listOf(new ConfigurationBundle("defaultNamespace", networkConfig));
+
+// Setup tracker with remote configuration
+Snowplow.setup(context, remoteConfig, defaultConfig, configurationPair -> {
+  List<String> namespaces = configurationPair.first;
+  ConfigurationState configurationState = configurationPair.second; // either cached, default or fetched from the remote endpoint
+
+  // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
+});
+```
+
+  </TabItem>
+</Tabs>
 
 Once the app starts, the Snowplow tracker initializer will attempt to download the remote configuration file. Meanwhile, it will initialize the tracker instance (or multiple tracker instances) based on the last cached configuration. The cached configuration is the last configuration downloaded remotely. If it's not available, the tracker initializer will spin up the default configuration passed as a parameter. Every time the initializer successfully initializes the tracker instances it calls a callback passing the list of activated namespaces and the state of the configuration which represents the source where the configuration was retrieved from (using default values, cache, or fetched from the remote endpoint). The callback can be used for last minute settings at runtime once the tracker has been instanced.
 
@@ -113,6 +144,9 @@ Note: The `networkConfiguration` is fundamental in order to set the collector en
 As shown above the developer can enforce the download of the configuration file at the start up of the app.
 If the developer wants to check for configuration updates more often, for example at runtime or when the app comes back from background state, it's possible to use the `refresh` method, placing it where the developer wants to perform the download and the configuration check.
 
+<Tabs groupId="platform">
+  <TabItem value="ios" label="iOS" default>
+
 ```swift
 let successCallback: ([String]?) -> Void = { namespaces, state in
     // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
@@ -120,6 +154,21 @@ let successCallback: ([String]?) -> Void = { namespaces, state in
 
 Snowplow.refresh(onSuccess: successCallback)
 ```
+
+  </TabItem>
+  <TabItem value="android" label="Android">
+
+```java
+Snowplow.refresh(context, configurationPair -> {
+  List<String> namespaces = configurationPair.first;
+  ConfigurationState configurationState = configurationPair.second;
+
+  // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
+});
+```
+
+  </TabItem>
+</Tabs>
 
 The method needs only the callback parameter, without any remote configuration url or default configuration, because this is intended just for the configuration updates, not for the initial setup.
 The tracker will be configured only if a new configuration (with a higher `configurationVersion` value) is available at the url indicated in the `RemoteConfiguration` passed earlier at start up of the app in the `setup` method call.
@@ -129,6 +178,9 @@ The tracker will be configured only if a new configuration (with a higher `confi
 When the tracker initializer updates the tracker configuration, it would reset all the previous configuration with the new settings. Obviously, this can cause issues in case some runtime configuration has been applied meanwhile. To avoid this the tracker keeps track of runtime changes in the configuration settings and when a new remote configuration is downloaded and applied, it doesn't override the settings already changed at runtime.
 
 A clear example is a runtime change on `userId` on `SubjectController`:
+
+<Tabs groupId="platform">
+  <TabItem value="ios" label="iOS" default>
 
 ```swift
 // Load configuration with userId = nil
@@ -149,3 +201,29 @@ Snowplow.refresh(onSuccess: successCallback)
 
 /* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
 ```
+
+  </TabItem>
+  <TabItem value="android" label="Android">
+
+```java
+// Load configuration with userId = nil
+Snowplow.setup(context, remoteConfig, defaultConfig, successCallback);
+
+/* userId is set to nil */
+
+...later...
+
+tracker.getSubject().userId = "my-runtime-updated-userId"
+
+/* userId is is set to "my-runtime-updated-userId" */
+
+...later...
+
+// Later refreshing the configuration with userId = nil
+Snowplow.refresh(context, successCallback)
+
+/* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
+```
+
+  </TabItem>
+</Tabs>

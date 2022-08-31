@@ -6,6 +6,11 @@ sidebar_position: 30
 
 # Tracking specific client-side properties
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 An event describes a single, transient activity. The context in which that event occurs - the relatively persistent environment - is also incredibly valuable data. The tracker provides an additional "primitive" method to track a small subset of contextual data, using the `Subject` class.
 
 The fields tracked using `Subject` are relevant in client-side tracking. Some are set automatically in all events during enrichment, even when no `Subject` is added. These properties are marked with `*` below, and discussed below. Timezone, marked with `**`, is only set when a `Subject` is tracked with the event.
@@ -52,10 +57,24 @@ The `Subject` properties can be set globally in the tracker through the `Subject
 
 A simple `SubjectConfiguration` initialisation looks like this:
 
+<Tabs groupId="platform">
+  <TabItem value="ios" label="iOS" default>
+
 ```swift
 let subjectConfig = SubjectConfiguration()
     .userId("username")
 ```
+
+  </TabItem>
+  <TabItem value="android" label="Android">
+
+```java
+SubjectConfiguration subjectConfig = new SubjectConfiguration()
+    .userId("username");
+```
+
+  </TabItem>
+</Tabs>
 
 See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_subject_configuration.html).
 

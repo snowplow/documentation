@@ -16,7 +16,7 @@ The keys set up for the Kinesis stream are stored as SQS message attributes in o
 
 To start using this feature, you will first need to set up the SQS queues. Two separate queues are required for good (raw) events and bad events. The Collector then needs to be informed about the queue names, and this can be done by adding these as entries to `config.hocon:`
 
-```
+```properties
 sqsGoodBuffer = {good-sqs-queue-url}
 sqsBadBuffer = {bad-sqs-queue-url}
 ```

@@ -8,7 +8,7 @@ This guide will take you through how to spin up an open source pipeline using th
 
 ### Before you begin
 
-Sign up on [discourse](https://discourse.snowplowanalytics.com/)! If you run into any problems or have any questions, we are here to help.
+Sign up on [discourse](https://discourse.snowplow.io/)! If you run into any problems or have any questions, we are here to help.
 
 If you are interested in receiving the latest updates from Product & Engineering, such as critical bug fixes, security updates, new features and the rest, then [join our mailing list](https://go.snowplowanalytics.com/get-snowplow-technology-updates).
 

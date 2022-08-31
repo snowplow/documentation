@@ -82,7 +82,7 @@ Server-side anonymisation affects user identifiers set server-side. In particula
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let config = EmitterConfiguraiton()
+let config = EmitterConfiguration()
     .serverAnonymisation(true)
 ```
 
@@ -90,7 +90,7 @@ let config = EmitterConfiguraiton()
   <TabItem value="android" label="Android">
 
 ```java
-EmitterConfiguraiton config = new EmitterConfiguraiton()
+EmitterConfiguration config = new EmitterConfiguration()
     .serverAnonymisation(true);
 ```
 

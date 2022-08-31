@@ -35,7 +35,7 @@ The below examples all use a schema available on Iglu Central. However, you will
 
 The below examples use the `social_interaction` schema:
 
-```bash
+```text
 iglu:com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0
 ```
 
@@ -43,13 +43,13 @@ iglu:com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0
 
 If you want to specify which app these events belong to, add an `aid` parameter as taken from the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent):
 
-```bash
+```text
 ...&aid=<company code>&...
 ```
 
 You can also manually override the event's `platform` parameter like so:
 
-```bash
+```text
 ...&p=<platform code>&...
 ```
 

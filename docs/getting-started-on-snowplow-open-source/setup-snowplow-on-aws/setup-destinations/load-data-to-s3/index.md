@@ -10,8 +10,8 @@ To sink the raw data from Kinesis to S3, follow the instructions below:
 
 To run the Snowplow S3 Loader, you must have installed the native LZO binaries. To do this on Ubuntu, run:
 
-```
-$ sudo apt-get install lzop liblzo2-dev
+```bash
+sudo apt-get install lzop liblzo2-dev
 ```
 
 ## Installation
@@ -61,8 +61,8 @@ An [example](https://github.com/snowplow/snowplow-s3-loader/blob/master/example
 
 The Snowplow S3 Loader is a jarfile. Simply provide the configuration file as a parameter:
 
-```
-$ java -jar snowplow-s3-loader-$VERSION.jar --config my.conf
+```bash
+java -jar snowplow-s3-loader-$VERSION.jar --config my.conf
 ```
 
 This will start the process of reading events from selected source, compressing them, and writing them to S3.

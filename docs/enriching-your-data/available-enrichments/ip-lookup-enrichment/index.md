@@ -72,7 +72,7 @@ It is important to note that accepted database filenames are the strings which a
 
 ##### On AWS
 
-```
+```json
 {
     "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
     "data": {
@@ -91,7 +91,7 @@ It is important to note that accepted database filenames are the strings which a
 
 ##### On GCS
 
-```
+```json
 {
     "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
     "data": {
@@ -116,16 +116,16 @@ When configuring the enrichment you will replace the following string `my-priva
 
 If we were to enable this enrichment as shown, we would see the following columns in our data warehouse get populated with data for a user with the IP Address 37.157.33.178:
 
-| COLUMN NAME | SAMPLE DATA | PURPOSE |
-| --- | --- | --- |
-| `geo_country` | GB | Country of IP origin |
-| `geo_region` | ENG | Region of IP origin |
-| `geo_city` | London | City of IP origin |
-| `geo_zipcode` | EC2A | Zip (postal) code of IP origin |
-| `geo_latitude` | 51.5237 | An approximate latitude (coordinates) |
-| `geo_longitude` | \-0.089 | An approximate longitude (coordinates) |
-| `geo_region_name` | England | Region of IP origin |
-| `geo_timezone` | Europe/London | Timezone of IP origin |
+| COLUMN NAME       | SAMPLE DATA   | PURPOSE                                |
+|-------------------|---------------|----------------------------------------|
+| `geo_country`     | GB            | Country of IP origin                   |
+| `geo_region`      | ENG           | Region of IP origin                    |
+| `geo_city`        | London        | City of IP origin                      |
+| `geo_zipcode`     | EC2A          | Zip (postal) code of IP origin         |
+| `geo_latitude`    | 51.5237       | An approximate latitude (coordinates)  |
+| `geo_longitude`   | \-0.089       | An approximate longitude (coordinates) |
+| `geo_region_name` | England       | Region of IP origin                    |
+| `geo_timezone`    | Europe/London | Timezone of IP origin                  |
 
 #### Example full configuration
 
@@ -133,7 +133,7 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 
 ##### On AWS
 
-```
+```json
 {
     "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
     "data": {
@@ -164,7 +164,7 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 
 ##### On GCS
 
-```
+```json
 {
     "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
     "data": {
@@ -195,12 +195,12 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 
 The data from these databases would then be loaded into the following columns:
 
-| COLUMN NAME | PURPOSE |
-| --- | --- |
-| `ip_isp` | ISP name |
-| `ip_organization` | Organization name for larger networks |
-| `ip_domain` | Second level domain name |
-| `ip_netspeed` | Indication of connection type (dial-up, cellular, cable/DSL) |
+| COLUMN NAME       | PURPOSE                                                      |
+|-------------------|--------------------------------------------------------------|
+| `ip_isp`          | ISP name                                                     |
+| `ip_organization` | Organization name for larger networks                        |
+| `ip_domain`       | Second level domain name                                     |
+| `ip_netspeed`     | Indication of connection type (dial-up, cellular, cable/DSL) |
 
 ## Output
 

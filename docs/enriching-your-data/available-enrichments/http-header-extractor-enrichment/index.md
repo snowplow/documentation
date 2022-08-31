@@ -17,7 +17,7 @@ In the example configuration, all the headers of the request would be attached t
 
 If we are only interested in the host for instance, we could have:
 
-```
+```json
       "headersPattern": "Host"
 ```
 

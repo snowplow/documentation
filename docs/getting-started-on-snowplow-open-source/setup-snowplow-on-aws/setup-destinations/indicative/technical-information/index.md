@@ -8,7 +8,7 @@ sidebar_position: 2000
 
 The relay transforms incoming events into the format expected by Indicative. Let's take this (very simplified for brevity) Snowplow enriched event in a JSON form as an example:
 
-```
+```json
 {
   "app_id": "foo",
   "platform": "web",
@@ -59,7 +59,7 @@ The relay transforms incoming events into the format expected by Indicative. Let
 
 It would be transformed into the following Indicative event:
 
-```
+```json
  {
     "eventName": "page_view",
     "timestamp": "2013-11-26T00:03:57.886",

@@ -53,7 +53,7 @@ The `api` section lets you configure how the enrichment should access your API
 
 For the `uri` field, specify the full URI including the protocol. You can attach a querystring to the end of the URI. You can also embed the keys from your `inputs` section in the URI, by wrapping the key in `{{}}` brackets thus:
 
-```
+```json
 "uri": "http://api.acme.com/users/{{client}}/{{user}}?format=json"
 ```
 
@@ -65,7 +65,7 @@ Currently the only supported `authentication` option is `http-basic`: provide
 
 If your API is unsecured (because for example it is only accessible from inside your private subnet, or using IP address whitelisting), then configure the `authentication` section like so:
 
-```
+```json
 "authentication": { }
 ```
 

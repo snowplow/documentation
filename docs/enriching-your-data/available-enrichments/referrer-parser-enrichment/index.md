@@ -17,7 +17,7 @@ This is particularly useful when looking for specific traffic from search engine
 
 Snowplow has several subdomains like _console.snowplowanalytics.com_ and _discourse.snowplowanalytics.com_. As users move from these subdomains to our main _snowplowanalytics.com_ domain, we would like to capture that traffic as being referred internally. Therefore we would set the configuration as such:
 
-```
+```json
 "internalDomains": [
     "console.snowplowanalytics.com",
     "discourse.snowplowanalytics.com"
@@ -30,18 +30,18 @@ Enabling this enrichment with the above configuration would fill the `refr_mediu
 
 This enrichment populates the following fields of the atomic event :
 
-| Field | Purpose |
-| --- | --- |
+| Field         | Purpose                                                              |
+|---------------|----------------------------------------------------------------------|
 | `refr_medium` | Type of referer. Examples : Search, Internal, Unknown, Social, Email |
-| `refr_source` | Name of referer if recognised. Examples: Google, Facebook |
-| `refr_term` | Keywords if source is a search engine |
+| `refr_source` | Name of referer if recognised. Examples: Google, Facebook            |
+| `refr_term`   | Keywords if source is a search engine                                |
 
 With this information in the data warehouse it's possible to get such insights:
 
 | refr\_medium | number of sessions |
-| --- | --- |
-| Search | 272,699 |
-| Internal | 142,555 |
-| Unknown | 127,335 |
-| Social | 14,525 |
-| Email | 5,345 |
+|--------------|--------------------|
+| Search       | 272,699            |
+| Internal     | 142,555            |
+| Unknown      | 127,335            |
+| Social       | 14,525             |
+| Email        | 5,345              |

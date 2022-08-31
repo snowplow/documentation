@@ -42,7 +42,7 @@ The following permissions are needed for all batch proccessing operations:
 
 Paste the following JSON into the _Policy Document_ text area:
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -89,7 +89,7 @@ For the Kinesis Pipeline ending in an Elasticsearch Cluster you will need these 
 
 Paste the following JSON into the _Policy Document_ text area:
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -138,7 +138,7 @@ For the Kinesis Pipeline ending in the LZO S3 Sink with events from this sink th
 
 Paste the following JSON into the _Policy Document_ text area:
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [

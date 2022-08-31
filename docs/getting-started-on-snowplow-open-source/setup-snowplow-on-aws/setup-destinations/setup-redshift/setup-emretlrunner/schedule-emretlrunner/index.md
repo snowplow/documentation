@@ -19,7 +19,7 @@ To consider your different scheduling options in turn:
 
 The recommended way of scheduling the ETL process is as a daily cronjob.
 
-```bash
+```text
 0 4   * * *   root    cronic /path/to/eer/snowplow-emr-etl-runner run -c config.yml
 ```
 

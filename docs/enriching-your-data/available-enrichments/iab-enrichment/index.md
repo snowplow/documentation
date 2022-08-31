@@ -30,11 +30,11 @@ They correspond to one of the IAB/ABC database files, and need to have two inner
 
 The table below describes the three types of database fields:
 
-| **Field name** | **Database description** | **Database filename** |
-| --- | --- | --- |
-| `ipFile` | Blacklist of IP addresses considered to be robots of spiders | `"ip_exclude_current_cidr.txt"` |
-| `excludeUseragentFile` | Blacklist of useragent strings considered to be robots or spiders | `"exclude_current.txt"` |
-| `includeUseragentFile` | Whitelist of useragent strings considered to be browsers | `"include_current.txt"` |
+| **Field name**         | **Database description**                                          | **Database filename**           |
+|------------------------|-------------------------------------------------------------------|---------------------------------|
+| `ipFile`               | Blacklist of IP addresses considered to be robots of spiders      | `"ip_exclude_current_cidr.txt"` |
+| `excludeUseragentFile` | Blacklist of useragent strings considered to be robots or spiders | `"exclude_current.txt"`         |
+| `includeUseragentFile` | Whitelist of useragent strings considered to be browsers          | `"include_current.txt"`         |
 
 All three of these fields **must** be added to the enrichment JSON, as the IAB lookup process uses all three databases in order to detect robots and spiders. Note that the database files are commercial and proprietary and should not be stored publicly – for instance, on unprotected HTTPS or in a public S3 bucket.
 
@@ -52,6 +52,6 @@ This enrichment adds a new context to the enriched event with [this schema](http
 
 Example:
 
-```
+```json
 {    "schema": "iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0",    "data": {        "spiderOrRobot": false,        "category": "BROWSER",        "reason": "PASSED_ALL",        "primaryImpact": "NONE"    }}
 ```

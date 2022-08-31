@@ -10,7 +10,7 @@ In the following short video a complete example configuration of the Snowplow GT
 
 Scenario: The example assumes that we want to send a POST HTTP Request to an example custom destination endpoint, where we would like the body of the request to have the following structure:
 
-```
+```json
 {
   "api-key": "myApiKey",
   "user_identifier": ...
@@ -46,13 +46,13 @@ Set this to the URL of your custom HTTP endpoint.
 
 By default, the JSON body is an object. For example:
 
-```
+```json
 { "myProperty": "myValue" }
 ```
 
 This option allows you to wrap the resulting object of the request body inside an array:
 
-```
+```json
 [{ "myProperty": "myValue" }]
 ```
 
@@ -76,7 +76,7 @@ As an example, this section configured as:
 
 will result in the following JSON structure:
 
-```
+```json
 {
     ...,
     "snowplow_atomic": {
@@ -102,7 +102,7 @@ As an example, this section configured as:
 
 will result in the following JSON structure:
 
-```
+```json
 {
     ...,
     "self_describing_event_com_acme_test_foo_1": {

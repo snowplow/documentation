@@ -8,7 +8,7 @@ Docker images can be found on [Docker Hub](https://hub.docker.com/r/snowplow/sno
 
 Loader can be run with:
 
-```
+```docker
 docker run \
   -v $PWD/config:/snowplow/config \
   -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/credentials.json \ # if running outside GCP
@@ -33,14 +33,14 @@ docker run \
 
 To display the help message:
 
-```
+```docker
 docker run snowplow/snowplow-google-cloud-storage-loader:0.5.1 \
   --help
 ```
 
 To display documentation about Cloud Storage Loader-specific options:
 
-```
+```docker
 docker run snowplow/snowplow-google-cloud-storage-loader:0.5.1 \
   --help=com.snowplowanalytics.storage.googlecloudstorage.loader.Options
 ```

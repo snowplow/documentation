@@ -25,7 +25,7 @@ The permissions represent the minimum required to keep the Snowplow data pipelin
 
 We now need to create the Amazon policy document to define _just_ the user permissions required to run the Snowplow pipeline. An example permissions policy is given below:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [

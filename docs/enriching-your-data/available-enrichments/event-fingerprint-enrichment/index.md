@@ -25,7 +25,7 @@ This is helpful when de-duplicating events.
 
 The example configuration below would use all the parameters to compute the hash **except** the event ID (`eid`) and the device sent timestamp (`stm`).
 
-```
+```json
     "parameters": {
       "excludeParameters": [
         "eid",

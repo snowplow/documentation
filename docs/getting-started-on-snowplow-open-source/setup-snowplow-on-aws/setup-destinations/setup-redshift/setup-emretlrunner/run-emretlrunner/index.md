@@ -11,7 +11,7 @@ sidebar_position: 30
 The most useful command is the `run` command which allows you to actually run your EMR job:
 
 ```bash
-$ ./snowplow-emr-etl-runner run
+./snowplow-emr-etl-runner run
 ```
 
 The available options are as follows:
@@ -44,7 +44,7 @@ Other useful commands include the `lint` commands which allows you to check the 
 If you want to lint your resolver:
 
 ```bash
-$ ./snowplow-emr-etl-runner lint resolver
+./snowplow-emr-etl-runner lint resolver
 ```
 
 The mandatory options are:
@@ -57,7 +57,7 @@ Usage: lint resolver [options]
 If you want to lint your enrichments:
 
 ```bash
-$ ./snowplow-emr-etl-runner lint enrichments
+./snowplow-emr-etl-runner lint enrichments
 ```
 
 The mandatory options are:

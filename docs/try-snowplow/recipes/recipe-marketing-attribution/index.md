@@ -46,7 +46,7 @@ Trigger the conversion events wherever you have conversions on your site. Some e
 
 #### In the JavaScript Tracker
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/conversion/jsonschema/1-0-0",
@@ -62,7 +62,7 @@ window.snowplow('trackSelfDescribingEvent', {
 
 If you are using Google Tag Manager, you can add the variables like so:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/conversion/jsonschema/1-0-0",
@@ -82,7 +82,7 @@ Now that you are capturing marketing touches and conversions, you can get starte
 
 #### First generate the table:
 
-```
+```sql
 CREATE TABLE derived.marketing_attribution AS(
     WITH session_aggregations AS (
 
@@ -205,7 +205,7 @@ CREATE TABLE derived.marketing_attribution AS(
 
 #### And then view it:
 
-```
+```sql
 SELECT 
     marketing_channel, 
     SUM(conversions) AS conversions,

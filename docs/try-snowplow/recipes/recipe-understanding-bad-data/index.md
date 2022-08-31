@@ -18,7 +18,7 @@ Snowplow BDP comes with a dedicated failed events monitoring tool, you can take 
 
 You can see the different bad data tables by running the following query:
 
-```
+```sql
 SELECT * FROM information_schema.tables
 WHERE table_schema = 'badrows';
 ```
@@ -27,7 +27,7 @@ Please note that not all bad data is actually a source of concern. For example, 
 
 In this recipe, you will focus on schema violations, i.e. errors that occur because data is not tracked as expected. To check if you already have any existing schema violations, you can run the following query:
 
-```
+```sql
 SELECT COUNT(*) AS bad_events FROM badrows.com_snowplowanalytics_snowplow_badrows_schema_violations_2;
 ```
 
@@ -37,7 +37,7 @@ Please note that an issue with an entity attached to an event will cause the ent
 
 If you do not have any bad data yet, you can send some on purpose to see what it looks like. For example, you could send an event with a schema that does not exist:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/example_event/jsonschema/1-0-0",
@@ -50,7 +50,7 @@ window.snowplow('trackSelfDescribingEvent', {
 
 Alternatively, if you have already implemented one of the recipes that involve implementing a custom event or entity, you could try updating the tracking code to purposefully cause bad data. For example, if you have instrumented the [marketing attribution recipe](/docs/try-snowplow/recipes/recipe-marketing-attribution/index.md), you could change the conversion event, either by sending an incorrect type for one property:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/conversion/jsonschema/1-0-0",
@@ -64,7 +64,7 @@ window.snowplow('trackSelfDescribingEvent', {
 
 Or by making a property larger than allowed:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/conversion/jsonschema/1-0-0",
@@ -81,7 +81,7 @@ The custom event in this example does not have any required properties, but if t
 
 Once you have confirmed you have bad data, you want to understand what it means and where it comes from. The following query shows you how many bad events you have by schema (data structure) and error type:
 
-```
+```sql
 SELECT
    "failure.messages"->0->'error'->'error' AS error,
    "failure.messages"->0->'schemaKey' AS schema,

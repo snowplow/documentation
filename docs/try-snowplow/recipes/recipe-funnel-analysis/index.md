@@ -34,7 +34,7 @@ The `funnel_interaction` event has the following fields:
 
 Track the `funnel_interaction` event whenever a user completes a given funnel step:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/funnel_interaction/jsonschema/1-0-0",
@@ -53,7 +53,7 @@ For example, on the [snowplowanalytics.com website](https://snowplowanalytics.co
 
 If you are using Google Tag Manager, you can add the variables like so:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
       "schema": "iglu:com.trysnowplow/funnel_interaction/jsonschema/1-0-0",
@@ -70,7 +70,7 @@ window.snowplow('trackSelfDescribingEvent', {
 
 #### First, classify the funnel steps:
 
-```
+```sql
 -- select all explicitly defined funnel steps (optional)
 CREATE TABLE derived.funnel_step_definitions AS(
 
@@ -98,7 +98,7 @@ SELECT * FROM derived.funnel_step_definitions GROUP BY 1 ORDER BY 3 ASC;
 
 #### Second, build the funnel:
 
-```
+```sql
 CREATE TABLE derived.funnel_interactions AS(
 
     SELECT
@@ -138,7 +138,7 @@ CREATE TABLE derived.funnel_interactions AS(
 
 #### Then, view it:
 
-```
+```sql
 SELECT
     funnel_name,
     step_name,

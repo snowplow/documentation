@@ -4,8 +4,7 @@ date: "2021-01-04"
 sidebar_position: 50
 ---
 
-##   
-Introduction
+## Introduction
 
 Unlike most other analytics solutions, Snowplow runs in your own cloud account, giving you full ownership and control over how and what you track. This is particularly important with respect to user identification and increased user privacy regulation. An overview of user identification with Snowplow can be found [in this blog post](https://snowplowanalytics.com/blog/2020/06/11/single-customer-view/).
 
@@ -35,13 +34,13 @@ You will then verify that events no longer contain any PII.
 
 In your JavaScript tracker implementation, you need to add the following into your tracker initialisation:
 
-```
+```javascript
 anonymousTracking: {withServerAnonymisation: true}
 ```
 
 Therefore, the entire tracker initialization code will look like this:
 
-```
+```javascript
 snowplow("newTracker", "try", "<YOUR_COLLECTOR_ENDPOINT>", {
   appId: "try-snowplow",
   platform: "web",
@@ -57,7 +56,7 @@ snowplow("newTracker", "try", "<YOUR_COLLECTOR_ENDPOINT>", {
 
 Run the following query to verify that no PII is sent with subsequent events:
 
-```
+```sql
 SELECT COUNT(*) FROM atomic.events
 WHERE collector_tstamp > '2021-01-01 00:00:00' -- insert the timestamp from when you toggled anonymous tracking on
   AND domain_userid IS NULL

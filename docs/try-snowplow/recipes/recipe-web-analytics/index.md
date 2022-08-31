@@ -23,7 +23,7 @@ The next step is to aggregate these events into sessions. For that purpose, you'
 
 The Snowplow JavaScript tracker automatically tracks a session identifier and a session index with all web events. Sessions are reset after 30 minutes of inactivity by default, but this can be changed this in the tracker initialization by adding the `sessionCookieTimeout` (in seconds):
 
-```
+```javascript
 window.snowplow("newTracker", "sp", ..., {
     appId: "try-snowplow-tracking",
     platform: "web",
@@ -37,7 +37,7 @@ window.snowplow("newTracker", "sp", ..., {
 
 Furthermore, you can manually reset a session, for example after a conversion, like so:
 
-```
+```javascript
 window.snowplow("newSession");
 ```
 
@@ -51,7 +51,7 @@ For this recipe you'll create a simple session table describing web engagement b
 
 #### First generate the table:
 
-```
+```sql
 CREATE TABLE derived.sessions AS(
     WITH sessions AS (
         SELECT
@@ -98,7 +98,7 @@ CREATE TABLE derived.sessions AS(
 
 #### And then view it:
 
-```
+```sql
 SELECT * FROM derived.sessions;
 ```
 
@@ -106,7 +106,7 @@ SELECT * FROM derived.sessions;
 
 Sessions by marketing channel:
 
-```
+```sql
 SELECT
     marketing_channel,
     COUNT(DISTINCT session_id) AS sessions 
@@ -116,7 +116,7 @@ GROUP BY 1 ORDER BY 2 DESC;
 
 Average number of page views and time engaged in seconds per session:
 
-```
+```sql
 SELECT
     AVG(page_views) AS avg_page_views,
     AVG(time_engaged_in_s) AS avg_time_engaged_in_s 

@@ -198,7 +198,7 @@ An example configuration file with all options provided:
 }
 ```
 
-##### **Required fields**
+##### Required fields
 
 - `"enabled"`: Specifies whether the data modeling job will run (`true`) or not (`false`). This is a way to disable or re-enable your data modeling job, even without changing the schedule.
 - `"storage"`: Specifies your data warehouse. Possible values are:

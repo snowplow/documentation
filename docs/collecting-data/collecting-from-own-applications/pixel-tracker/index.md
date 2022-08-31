@@ -50,21 +50,21 @@ Identify the event you wish to track. This may be opening a particular email tha
 
 Snowplow BDP customers can generate a pixel tracker aimed at structured events via the [Snowplow BDP Console](https://console.snowplowanalytics.com/pixel-tracker).
 
-#### **Choose your collector domain**
+#### Choose your collector domain
 
 Select the collector you'd like events sent to via the dropdown.
 
-#### **Choose the platform**
+#### Choose the platform
 
 Choose the value for the platform the tag will be run on.
 
-#### **Structured event fields**
+#### Structured event fields
 
 The generator is currently built for quickly outputting a pixel tag related to campaign oriented events.
 
 Category, action, label, property and value are all available to input relevant information about your campaign.
 
-#### **Select the \`Generate Pixel tracking tag button**.
+#### Select the \`Generate Pixel tracking tag button.
 
 The tracking code will be displayed. Copy this to the clipboard.
 

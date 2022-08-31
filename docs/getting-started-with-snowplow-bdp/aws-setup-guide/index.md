@@ -31,14 +31,14 @@ We often find our point of contact requires support from their DevOps or Network
 
 These instructions are also provided as part of the setup flow in Snowplow BDP Console.
 
-### **Create sub-account**
+### Create sub-account
 
 1. From your main AWS account, set up an Organisation if you haven't done so already.
 2. Create a member account (the sub-account) in that organization
 3. Sign out and sign into the new sub-account. Everything Snowplow-related will take place within this account from here in.
 4. Follow [these instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-start) to create a policy using the policy list below.
 
-### **Set up Role and IAM permissions**
+### Set up Role and IAM permissions
 
 1. Access the IAM control panel within the sub-account
 2. Go to Access management > Roles and select Create role
@@ -49,7 +49,7 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 
 You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
 
-### **Policy List**
+### Policy List
 
 ```text
  "acm:*",

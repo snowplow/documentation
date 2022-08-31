@@ -21,7 +21,7 @@ By the end of this guide,  you will be able to: 
 - Easily enable and disable our suite of [out-of-the-box enrichments](/docs/enriching-your-data/available-enrichments/index.md) 
 - Consume your rich data in real time from a choice of over 5 supported destinations (kinesis, pubsub, S3, Postgres or ElasticSearch)
 
-## **How does the quick start edition compare?** 
+## How does the quick start edition compare? 
 
 Out-of-the-box, the quick start edition will: 
 

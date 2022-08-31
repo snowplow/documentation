@@ -20,7 +20,7 @@ When an error occurs while enriching an event (that is part of a collector paylo
 
 ## Failure Types
 
-### **Schema Violation**
+### Schema Violation
 
 This failure type is produced during the process of [validation and enrichment](/docs/enriching-your-data/what-is-enrichment/index.md). It concerns the [self-describing events and entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) which can be attached to your snowplow event.
 
@@ -41,7 +41,7 @@ Because this failure is handled during enrichment, events in the real time good 
 
 Schema violation schema can be found [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.badrows/schema_violations/jsonschema).
 
-### **Enrichment failure**
+### Enrichment failure
 
 This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, and it represents any failure to enrich the event by one of your configured enrichments.
 
@@ -61,7 +61,7 @@ Because this failure is handled during enrichment, events in the real time good 
 
 Enrichment failure schema can be found [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema).  
 
-### **Collector Payload Format** **Violation**
+### Collector Payload Format Violation
 
 This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when collector payloads from the raw stream are deserialized from thrift format. Violations could be:
 
@@ -76,7 +76,7 @@ Because this failure is handled during enrichment, events in the real time good 
 
 Collector payload format violation schema can be found [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.badrows/collector_payload_format_violation/jsonschema).
 
-### **Adaptor** **Failure**
+### Adaptor Failure
 
 This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when it tries to interpret a collector payload from the raw stream as a http request from a [3rd party webhook](/docs/collecting-data/collecting-data-from-third-parties/index.md). The failure could be:
 
@@ -89,7 +89,7 @@ Because this failure is handled during enrichment, events in the real time good 
 
 Adapter failure schema can be found [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.badrows/adapter_failures/jsonschema).
 
-### **Tracker Protocol** Violation
+### Tracker Protocol Violation
 
 This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when a http request does not conform to our [tracker protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol).
 
@@ -103,7 +103,7 @@ Because this failure is handled during enrichment, events in the real time good 
 
 Tracker protocol violation schema can be found [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.badrows/tracker_protocol_violations/jsonschema).
 
-### **Size Violation**
+### Size Violation
 
 This failure type can be produced either by the [collector](/docs/pipeline-components-and-applications/stream-collector/index.md) or by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
 

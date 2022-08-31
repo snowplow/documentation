@@ -4,20 +4,20 @@ date: "2021-07-08"
 sidebar_position: 200
 ---
 
-#### **Why is there a limit on throughput?** 
+#### Why is there a limit on throughput? 
 
 Each Snowplow application is deployed as a docker image on a single EC2/ CE instance. This, along with the streams themselves (AWS only), are the limiting factor when it comes to throughput. We made this decision for the following reasons:
 
 - We wanted to keep the costs of this experience low, and using ECS fargate or kubernetes would be more expensive 
 - A single instance per application is more than enough resource for a proof of concept or first production use case and to get you started with our OSS
 
-#### **How do I shut down the pipeline?**
+#### How do I shut down the pipeline?
 
 If you would like to shut down your pipeline then you can easily do so by running `terraform destroy`.
 
 Note that if you want to delete your S3 bucket and Postgres databases you would need to do that from within the AWS or Google cloud console. If you want to maintain these then you can - just be aware that next time you spin up your pipeline you might see errors when the script to create the S3 bucket and Postgres DBs is running.
 
-#### **How do I make the pipeline production ready?**
+#### How do I make the pipeline production ready?
 
 If you are at the point where you would like to deliver higher volume production use cases, then here are some general guidelines on delivering a highly available, auto scaling pipeline:
 
@@ -32,7 +32,7 @@ On AWS:
 - Set the max\_kcl\_capacity for read & write to something substantially higher than the default (it will auto-scale up to that limit) - its the same variables for all Kinesis consumers ([https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85))
 - Ensure your RDS for the Postgres Loaders can auto-scale its capacity - this will mean you won't run out of disk when you start tracking events in: [https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L62-L66](https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L62-L66)
 
-#### **How do I upgrade the version of the application that I am using?** 
+#### How do I upgrade the version of the application that I am using?
 
 We release new versions of our pipeline components very frequently; however the versions used within the terraform modules are updated [in line with our platform releases](https://snowplowanalytics.com/blog/2021/04/29/introducing-snowplow-21-04-pennine-alps/) since these are the most stable and recommended versions of our components. [Sign-up to get the latest updates](https://go.snowplowanalytics.com/get-snowplow-technology-updates) on platform releases and new features.  
 

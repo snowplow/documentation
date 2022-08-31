@@ -6,7 +6,7 @@ sidebar_position: 10
 
 Configuration for event recovery involves the use of reusable components that help map onto specific failure types. The following components are available:
 
-### **Steps**
+### Steps
 
 Steps are individual modifications applied to specific failed event payloads. The steps operate on specific field values and can replace, remove/nullify or cast JSON type values.
 

@@ -550,4 +550,4 @@ Finally add the following JSONpaths file to your jsonpaths folder (as `com.adju
 
 ### 5\. Extending the setup for reattribution events
 
-You’ve now done all that is necessary to log your Adjust installation events (with attribution data) directly into Snowplow. Read [part 2](https://discourse.snowplowanalytics.com/t/integrating-adjust-with-snowplow-to-add-mobile-attribution-data-to-the-rest-of-your-event-data-2-2/270) of our guide to find out how to extend the implementation to cover reattribution events and other Adjust events, as well as other ways to tailor the integration.
+You’ve now done all that is necessary to log your Adjust installation events (with attribution data) directly into Snowplow. Read [part 2](https://discourse.snowplow.io/t/integrating-adjust-with-snowplow-to-add-mobile-attribution-data-to-the-rest-of-your-event-data-2-2/270) of our guide to find out how to extend the implementation to cover reattribution events and other Adjust events, as well as other ways to tailor the integration.

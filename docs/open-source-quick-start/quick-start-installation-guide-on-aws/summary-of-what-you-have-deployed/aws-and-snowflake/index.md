@@ -131,4 +131,4 @@ The DynamoDB autoscaling module enables autoscaling for a target DynamoDB table.
 
 _You can find further details here: [https://registry.terraform.io/modules/snowplow-devops/dynamodb-autoscaling/aws/latest](https://registry.terraform.io/modules/snowplow-devops/dynamodb-autoscaling/aws/latest)_
 
-##### Have more questions? Take a look at our [Quick Start FAQs](/docs/open-source-quick-start/quick-start-faqs/index.md) or reach out to us on [discourse](https://discourse.snowplowanalytics.com/)!
+##### Have more questions? Take a look at our [Quick Start FAQs](/docs/open-source-quick-start/quick-start-faqs/index.md) or reach out to us on [discourse](https://discourse.snowplow.io/)!

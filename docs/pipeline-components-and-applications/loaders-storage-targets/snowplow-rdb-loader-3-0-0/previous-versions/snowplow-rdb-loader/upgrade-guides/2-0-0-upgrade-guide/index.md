@@ -6,7 +6,7 @@ sidebar_position: -10
 
 RDB Loader 2.0.0 brings ability to send shredding complete messages from Shredder to SNS topic and splits configs of RDB Loader and RDB Shredder. From now on, Loader and Shredder will not use same config.
 
-[Official announcement](https://discourse.snowplowanalytics.com/t/snowplow-rdb-loader-2-0-0-released/6034)
+[Official announcement](https://discourse.snowplow.io/t/snowplow-rdb-loader-2-0-0-released/6034)
 
 ## Assets
 

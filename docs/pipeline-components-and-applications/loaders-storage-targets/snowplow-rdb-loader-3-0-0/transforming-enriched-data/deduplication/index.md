@@ -53,7 +53,7 @@ To apply any of these strategies, we need to store information about previously 
 
 We need to store these in a database that allows fast random access, so we chose DynamoDB, a fully managed NoSQL database service.
 
-For more information on how duplicates are created, the difference between 'natural' and 'synthetic' duplicates, and possible mitigation strategies, see [this evergreen Discourse thread](https://discourse.snowplowanalytics.com/t/de-deduplicating-events-in-hadoop-and-redshift-tutorial/248) and [this still-relevant blog post](https://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/).
+For more information on how duplicates are created, the difference between 'natural' and 'synthetic' duplicates, and possible mitigation strategies, see [this evergreen Discourse thread](https://discourse.snowplow.io/t/de-deduplicating-events-in-hadoop-and-redshift-tutorial/248) and [this still-relevant blog post](https://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/).
 
 ### How to enable cross-batch natural deduplication
 

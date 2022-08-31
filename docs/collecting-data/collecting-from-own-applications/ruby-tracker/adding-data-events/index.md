@@ -195,4 +195,4 @@ Processed Snowplow events have five different timestamps. They can have either `
 
 Overriding the default event timestamp (`dvce_created_tstamp`) can be useful in some situations. For example, if the Snowplow event refers to an action that happened previously but is only now being tracked. This can be achieved using the Ruby tracker classes DeviceTimestamp and TrueTimestamp (see [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Timestamp.html)).
 
-This [Discourse forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538) explains why you may wish to use `derived_tstamp` as the main event timestamp rather than `dvce_created_tstamp`.
+This [Discourse forums post](https://discourse.snowplow.io/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538) explains why you may wish to use `derived_tstamp` as the main event timestamp rather than `dvce_created_tstamp`.

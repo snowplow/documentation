@@ -8,7 +8,7 @@ Snowplow supports users creating their own events and entities. Events and entit
 
 When you load Snowplow data into Redshift, the process for loading events and entities that you have authored, vs events and entities that Snowplow has authored, are slightly different.
 
-**Note**: Before RDB Loader R32, user had to deploy SQL tables and so called JSON Path files manually, for both Snowplow-authored and custom entities. [RDB Loader R32](https://discourse.snowplowanalytics.com/t/snowplow-rdb-loader-r32-released/3626) introduced table automigrations, which allow you to define entities only on Iglu Server. Table creation and mapping happen automatically.
+**Note**: Before RDB Loader R32, user had to deploy SQL tables and so called JSON Path files manually, for both Snowplow-authored and custom entities. [RDB Loader R32](https://discourse.snowplow.io/t/snowplow-rdb-loader-r32-released/3626) introduced table automigrations, which allow you to define entities only on Iglu Server. Table creation and mapping happen automatically.
 
 ## Loading Snowplow-authored events and entities
 

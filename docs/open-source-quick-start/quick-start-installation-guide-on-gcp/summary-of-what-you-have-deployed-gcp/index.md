@@ -81,7 +81,7 @@ The Snowplow application responsible for reading the enriched and bad data and [
 
 ____For further details on the resources, default and required input variables, and outputs see the [postgres-loader-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-pubsub-ce/google/latest) terraform module.____
 
-##### Have any questions? Reach out to us on [discourse](https://discourse.snowplowanalytics.com/)!
+##### Have any questions? Reach out to us on [discourse](https://discourse.snowplow.io/)!
 
 ##### Or start [tracking events from your own application](/docs/open-source-quick-start/further-exploration/start-tracking-events-and-further-enrich-your-data/index.md) >>
 

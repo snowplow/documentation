@@ -11,7 +11,7 @@ R35 is a release with major changes in pipeline architecture:
 - Major changes in directory structure
 - New dependency on SQS
 
-[Official announcement.](https://discourse.snowplowanalytics.com/t/snowplow-rdb-loader-r35-relased/4700)
+[Official announcement.](https://discourse.snowplow.io/t/snowplow-rdb-loader-r35-relased/4700)
 
 This is the last release in 0.x branch and breaking changes still might be introduced in 1.0.0 release.
 

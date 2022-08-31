@@ -73,7 +73,7 @@ To kick in the tyres, we'll walk through the process of plotting the number of u
 
 We need to create a "Uniques" measures field. This will be calculated by counting the number of distinct user IDs. (In our example, we're going to count the number of distinct "domain\_userid".) To do this, right click on the "Measures" pane and select "Create calculated field". Name the field "Uniques" and enter the following formula into the formula box:
 
-```
+```r
 COUNTD([domain_userid])
 ```
 

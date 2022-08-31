@@ -103,4 +103,4 @@ m.global.snowplow.structured = {
 }
 ```
 
-This [Discourse forums](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538) post explains why you may wish to use `derived_tstamp` as the main event timestamp rather than `dvce_created_tstamp` (`dtm`).
+This [Discourse forums](https://discourse.snowplow.io/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538) post explains why you may wish to use `derived_tstamp` as the main event timestamp rather than `dvce_created_tstamp` (`dtm`).

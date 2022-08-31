@@ -230,7 +230,7 @@ For `EcommerceTransactionItem` events, `itemId`, `sku`, `price` and `quantity` a
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `Event.Builder` in the Java tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
+Every `Event.Builder` in the Java tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplow.io/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
 
 A `trueTimestamp` can be added to any event using the `trueTimestamp()` Builder method:
 

@@ -10,7 +10,7 @@ Please note, the `x` indicates that we recommend always being on the latest patc
 
 Log4j Advisory
 
-Following the [Log4j advisory in December 2021](https://discourse.snowplowanalytics.com/t/advisory-impact-of-log4j-2-cve-2021-44228-on-snowplow-components/6065), we have updated a number of recommended component versions within the 21.08 North Cascades release. These are **highlighted** and with an \* next to the component name.
+Following the [Log4j advisory in December 2021](https://discourse.snowplow.io/t/advisory-impact-of-log4j-2-cve-2021-44228-on-snowplow-components/6065), we have updated a number of recommended component versions within the 21.08 North Cascades release. These are **highlighted** and with an \* next to the component name.
 
 #### AWS
 
@@ -54,4 +54,4 @@ Following the [Log4j advisory in December 2021](https://discourse.snowplowanalyt
 
 <table class="has-fixed-layout"><tbody><tr><td>Scala</td><td>JavaScript</td><td>Python</td><td>.NET</td><td><strong><span class="has-inline-color has-vivid-purple-color">Golang</span></strong></td></tr><tr><td><a href="https://github.com/snowplow/snowplow-python-analytics-sdk/releases">v2.1.x</a></td><td><a href="https://github.com/snowplow-incubator/snowplow-js-analytics-sdk/releases">v0.3.0</a></td><td><a href="https://github.com/snowplow/snowplow-python-analytics-sdk/releases">v0.2.x</a></td><td><a href="https://github.com/snowplow/snowplow-dotnet-analytics-sdk/releases">v0.2.x</a></td><td><a href="https://github.com/snowplow/snowplow-golang-analytics-sdk/releases" target="_blank" rel="noreferrer noopener">v0.1.x</a></td></tr></tbody></table>
 
-We hope that the above provides clarity on our recommended stack, however if you have any questions or feedback please reach out to us on [discourse](https://discourse.snowplowanalytics.com/).
+We hope that the above provides clarity on our recommended stack, however if you have any questions or feedback please reach out to us on [discourse](https://discourse.snowplow.io/).

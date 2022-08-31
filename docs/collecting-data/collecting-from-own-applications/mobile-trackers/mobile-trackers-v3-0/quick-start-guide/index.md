@@ -4,11 +4,20 @@ date: "2022-08-30"
 sidebar_position: 0
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+<Tabs>
+  <TabItem value="ios" label="iOS" default>
+
 # Installation and set-up
 
 The Snowplow iOS Tracker SDK supports iOS 9.0+, macOS 10.9+, tvOS 9.0+ and watchOS 2.0+
 
 ## Installing
+
 
 The iOS Tracker SDK can be installed using various dependency managers.
 
@@ -110,3 +119,90 @@ Snowplow.createTracker(
 The `createTracker` method allows the creation of multiple trackers in the same app. The `namespace` field lets you distinguish events sent by a specific tracker instance. It is mandatory even in case the app uses just a single tracker instance like in the example above.
 
 The [Examples Github repository](https://github.com/snowplow/snowplow-objc-tracker-examples) includes demo apps for Swift and Objective-C covering the most popular dependencies managers. They are provided as simple reference apps to help you set up the tracker.
+
+  </TabItem>
+  <TabItem value="android" label="Android">
+
+### Installation
+
+The Android Tracker SDK can be installed using Gradle.
+
+**Gradle**
+
+Add into your `build.gradle` file:
+
+```ruby
+dependencies {
+  ...
+  // Snowplow Android Tracker
+  implementation 'com.snowplowanalytics:snowplow-android-tracker:3.+'
+  // In case 'lifecycleAutotracking' is enabled
+  implementation 'androidx.lifecycle-extensions:2.2.+'
+  ...
+}
+```
+
+**Supported System Version**
+
+The Android Tracker SDK supports Android 5 (**API level 21+**)
+
+### Instrumentation
+
+Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker:
+
+1. In your `Application` subclass, set up the SDK as follows:
+   
+   ```java
+   TrackerController tracker = Snowplow.createTracker(context, "appTracker", COLLECTOR_URL, HttpMethod.POST);
+   ```
+
+2. It creates a tracker instance which can be used to track events like this:
+   
+   ```java
+   Event event = new Structured("Category_example", "Action_example");
+   tracker.track(event);
+   ```
+   
+   If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
+   
+   ```java
+   Snowplow.getDefaultTracker().track(event);
+   ```
+
+The tracker has a default configuration where some settings are enabled by default:
+
+- session tracking
+
+- screen tracking
+
+- platform contexts (mobile specific context fields)
+
+You can override the default configuration with a fine grained configuration when you create the tracker:
+
+```java
+NetworkConfiguration networkConfig = new NetworkConfiguration(COLLECTOR_URL, HttpMethod.POST);
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
+    .base64Encoding(false)
+    .sessionContext(true)
+    .platformContext(true)
+    .lifecycleAutotracking(true)
+    .screenViewAutotracking(true)
+    .screenContext(true)
+    .applicationContext(true)
+    .exceptionAutotracking(true)
+    .installAutotracking(true)
+    .userAnonymisation(false);
+SessionConfiguration sessionConfig = new SessionConfiguration(
+    new TimeMeasure(30, TimeUnit.SECONDS),
+    new TimeMeasure(30, TimeUnit.SECONDS)
+);
+Snowplow.createTracker(context,
+    "appTracker",
+    networkConfig,
+    trackerConfig,
+    sessionConfig
+);
+```
+
+  </TabItem>
+</Tabs>

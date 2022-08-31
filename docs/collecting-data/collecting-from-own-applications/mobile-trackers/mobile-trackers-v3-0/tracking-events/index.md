@@ -4,15 +4,35 @@ date: "2022-08-30"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 # Tracking events
 
 To track an event, pass an event to the tracker instance. 
 
 For example, tracking a ScreenView:
+
+<Tabs>
+  <TabItem value="ios" label="iOS" default>
+
 ```swift
 let event = ScreenView(name: "screen name", screenId: nil)
 let eventId = tracker.track(event)
 ```
+
+  </TabItem>
+  <TabItem value="android" label="Android">
+
+```java
+ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());         
+tracker.track(event);
+```
+
+  </TabItem>
+</Tabs>
 
 The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types as well as fully custom events. 
 
@@ -33,6 +53,9 @@ Automatically captured data are:
 
 Autotracking can be enabled in the tracker configuration. In this example, some helpful automatic entities and all autotracking is enabled:
 
+<Tabs>
+  <TabItem value="ios" label="iOS" default>
+
 ```swift
 let trackerConfig = TrackerConfiguration()
     .platformContext(true)
@@ -51,6 +74,13 @@ Snowplow.createTracker(
 )
 ```
 
+  </TabItem>
+  <TabItem value="android" label="Android">
+
+
+  </TabItem>
+</Tabs>
+
 You can know more about the `TrackerConfiguration` properties [here](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_tracker_configuration.html).
 
 ### Platform and Application Data Tracking {#platform}
@@ -65,7 +95,7 @@ let trackerConfig = TrackerConfiguration()
     .applicationContext(true)
 ```
 
-More details on [Subject](04-tracking_specific_client-side_properties.md)
+More details on [Subject](../client-side-properties/index.md)
 
 ### App Lifecycle Tracking {#lifecycle-tracking}
 
@@ -390,7 +420,7 @@ Some data, such as that relating to the user whose activity is being tracked, is
 
 Certain properties, including `userId` or `ipAddress`, can be set as "atomic" properties in the raw event, using the `Subject` class.
 
-A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](03-custom_tracking_using_schemas.md).
+A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](../custom-tracking-using-schemas/index.md).
 
 All events also provide the option for setting a custom timestamp, called `trueTimestamp`. See below for details.
 

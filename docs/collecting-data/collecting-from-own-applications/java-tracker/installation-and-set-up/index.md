@@ -14,7 +14,7 @@ The current tracker version is 0.12 ([GitHub](https://github.com/snowplow/snowpl
 
 Add into your project’s `pom.xml`:
 
-```markup
+```xml
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-java-tracker</artifactId>

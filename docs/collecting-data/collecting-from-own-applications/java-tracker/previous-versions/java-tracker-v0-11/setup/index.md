@@ -12,7 +12,7 @@ The Snowplow Java Tracker has been built and tested using Java versions 8, 11 an
 
 ### Dependencies
 
-To minimize jar bloat, we have tried to keep external dependencies to a minimum. For the full list of dependencies, please see our [Gradle build file](https://github.com/snowplow/snowplow-java-tracker/blob/master/build.gradle).
+To minimize jar bloat, we have tried to keep external dependencies to a minimum. For the full list of dependencies, please see our [Gradle build file](https://github.com/snowplow/snowplow-java-tracker/blob/master/build.gradle).
 
 ## Setup
 
@@ -20,11 +20,11 @@ To minimize jar bloat, we have tried to keep external dependencies to a minimum.
 
 The current version of the Snowplow Java Tracker is **0.10.1**
 
-You can also manually insert the Tracker by downloading the jar directly: [snowplow-java-tracker-0.10.1.jar](https://bintray.com/snowplow/snowplow-maven/download_file?file_path=com%2Fsnowplowanalytics%2Fsnowplow-java-tracker%2F0.9.0%2Fsnowplow-java-tracker-0.9.0.jar)
+You can also manually insert the Tracker by downloading the jar directly: [snowplow-java-tracker-0.10.1.jar](https://bintray.com/snowplow/snowplow-maven/download_file?file_path=com%2Fsnowplowanalytics%2Fsnowplow-java-tracker%2F0.9.0%2Fsnowplow-java-tracker-0.9.0.jar)
 
 ### Maven
 
-Add into your project's `pom.xml`:
+Add into your project's `pom.xml`:
 
 ```xml
 <dependency>

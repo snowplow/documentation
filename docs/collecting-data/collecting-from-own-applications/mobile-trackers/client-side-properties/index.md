@@ -11,9 +11,28 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-An event describes a single, transient activity. The context in which that event occurs - the relatively persistent environment - is also incredibly valuable data. The tracker provides an additional "primitive" method to track a small subset of contextual data, using the `Subject` class.
+An event describes a single, transient activity. The context in which that event occurs - the relatively persistent environment - is also incredibly valuable data. 
 
-The fields tracked using `Subject` are relevant in client-side tracking. Some are set automatically in all events during enrichment, even when no `Subject` is added. These properties are marked with `*` below, and discussed below. Timezone, marked with `**`, is only set when a `Subject` is tracked with the event.
+The tracker allows to add a persistent set of information through the `SubjectConfiguration` which represents the basic information about the user and the app which will be attached on all the events as context entity.
+
+- **userId** = null: The custom user identifier.
+    
+- **useragent** = null: The custom user-agent. It overrides the user-agent used by default.
+    
+- **ipAddress** = null: The IP address (not automatically set).
+    
+- **timezone** (set by the tracker): The current timezone label.
+    
+- **language** (set by the tracker): The language set in the device.
+    
+- **screenResolution** (set by the tracker): The screen resolution.
+    
+- **screenViewPort** = null: The screen viewport.
+    
+- **colorDepth** = null: The color depth.
+
+
+The fields tracked using `SubjectConfiguration` are relevant in client-side tracking. Some are set automatically in all events during enrichment, even when no _subject_  is added. These properties are marked with `*` below, and discussed below. Timezone, marked with `**`, is only set when a `Subject` is tracked with the event.
 
 Add these fields to an event using `Subject`:
 
@@ -28,11 +47,7 @@ Add these fields to an event using `Subject`:
 | screenResolution | res                | dvce_screenheight, dvce_screenwidth |
 | colorDepth       | cd                 | br_colordepth                       |
 | networkUserId*   | tnuid              | network_userid                      |
-| domainUserId     | duid               | domain_userid                       |
-| domainSessionId  | sid                | domain_sessionid                    |
 
-Note: `domainUserId` and `domainSessionId` are typical fields for web trackers. They shouldn't be used in a mobile tracker but they are available in case they are needed.
-<!-- (TODO: Decide if we want to remove them from the tracker). -->
 
 As always, be aware of privacy when tracking [personal identifiable information](https://snowplowanalytics.com/blog/2020/09/06/user-identification-and-privacy/) such as email addresses or IP addresses.
 The tracker provides anonymous tracking functionality to mask certain user identifiers. Refer to the [section on anonymous tracking to learn more](../anonymous-tracking/index.md).

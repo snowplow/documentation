@@ -1,6 +1,6 @@
 ---
-title: "JavaScript Tracker v2 Reference"
-date: "2020-02-19"
+title: 'JavaScript Tracker v2 Reference'
+date: '2020-02-19'
 sidebar_position: 1100
 ---
 

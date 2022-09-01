@@ -1,6 +1,6 @@
 ---
-title: "Quick start guide"
-date: "2021-08-06"
+title: 'Quick start guide'
+date: '2021-08-06'
 sidebar_position: 10
 ---
 
@@ -9,13 +9,6 @@ sidebar_position: 10
 [![Latest tracker version](https://img.shields.io/npm/v/@snowplow/react-native-tracker)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
 [![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
-
-  
-  
-  
-  
-  
-  
 
 In order to start sending events using the Snowplow React Native Tracker, the following steps are involved:
 

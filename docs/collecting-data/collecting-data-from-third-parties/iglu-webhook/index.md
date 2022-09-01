@@ -1,6 +1,6 @@
 ---
-title: "Iglu Webhook"
-date: "2020-02-25"
+title: 'Iglu Webhook'
+date: '2020-02-25'
 sidebar_position: 30
 ---
 
@@ -71,7 +71,7 @@ This will be converted by the Iglu webhook adapter into a self-describing JSON l
 
 ```json
 {
-  "schema":"iglu:com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0",
+  "schema": "iglu:com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0",
   "data": {
     "network": "twitter",
     "action": "retweet"

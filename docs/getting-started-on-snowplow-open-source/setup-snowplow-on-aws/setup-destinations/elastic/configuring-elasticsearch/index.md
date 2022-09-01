@@ -1,6 +1,6 @@
 ---
-title: "Configuring Elasticsearch"
-date: "2020-02-26"
+title: 'Configuring Elasticsearch'
+date: '2020-02-26'
 sidebar_position: 10
 ---
 
@@ -66,7 +66,7 @@ curl -XPUT 'http://localhost:9200/snowplow' -d '{
 }'
 ```
 
-Elasticsearch will then treat the collector\_tstamp field as the timestamp and the geo\_location field as a "geo\_point". Documents will be automatically deleted one week (604800000 milliseconds) after their collector\_tstamp.
+Elasticsearch will then treat the collector_tstamp field as the timestamp and the geo_location field as a "geo_point". Documents will be automatically deleted one week (604800000 milliseconds) after their collector_tstamp.
 
 This initialization sets the default analyzer to "keyword". This means that string fields will not be split into separate tokens for the purposes of searching. This saves space and ensures that URL fields are handled correctly.
 

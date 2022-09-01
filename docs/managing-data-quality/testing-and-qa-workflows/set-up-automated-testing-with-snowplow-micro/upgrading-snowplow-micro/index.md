@@ -1,6 +1,6 @@
 ---
-title: "Upgrading Snowplow Micro"
-date: "2021-03-26"
+title: 'Upgrading Snowplow Micro'
+date: '2021-03-26'
 sidebar_position: 10
 ---
 
@@ -14,7 +14,7 @@ If you have been using the previous version (v0.1.0) in your test suites, you ca
 - Point to the newest v1 version `1.2.1` of Micro in your `docker run` command or in your `docker-compose.yml` file.
 - Modify the configuration for Micro, an example of which can be found in the `micro.conf` file [here](https://github.com/snowplow-incubator/snowplow-micro/blob/master/example/micro.conf).
 - The [response format](https://github.com/snowplow-incubator/snowplow-micro#response-format-1) for `GoodEvents` has changed, since Micro now outputs the post-enrichment event. This means that if in your tests you were filtering on `GoodEvents` through the `/micro/good` endpoint, you will need to change:
-    - the expected values for `eventType`.
+  - the expected values for `eventType`.
 
 <table><tbody><tr><td class="has-text-align-center" data-align="center"><strong>v0</strong></td><td class="has-text-align-center" data-align="center"><strong>v1</strong></td></tr><tr><td class="has-text-align-center" data-align="center"><code>pv</code></td><td class="has-text-align-center" data-align="center"><code>page_view</code></td></tr><tr><td class="has-text-align-center" data-align="center"><code>pp</code></td><td class="has-text-align-center" data-align="center"><code>page_ping</code></td></tr><tr><td class="has-text-align-center" data-align="center"><code>se</code></td><td class="has-text-align-center" data-align="center"><code>struct</code></td></tr><tr><td class="has-text-align-center" data-align="center"><code>ue</code></td><td class="has-text-align-center" data-align="center"><code>unstruct</code></td></tr></tbody></table>
 

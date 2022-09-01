@@ -1,6 +1,6 @@
 ---
-title: "EmrEtlRunner"
-date: "2020-11-09"
+title: 'EmrEtlRunner'
+date: '2020-11-09'
 sidebar_position: 9990
 ---
 
@@ -23,7 +23,7 @@ In this guide you'll also find additional information:
 - A guide for [setting up end to end encryption](#encryption)
 - A guide to [setting up an EC2 instance](#ec2) for EmrEtlRunner
 
-* * *
+---
 
 ## Installing EmrEtlRunner
 
@@ -88,7 +88,7 @@ Storages for data can be configured using storage targets JSONs. Configuration f
 
 You will also need an Iglu resolver configuration file. This is where we list the schema repositories to use to retrieve JSON Schemas for validation. For more information on this, see the [wiki page for Configuring shredding](#shredding).
 
-* * *
+---
 
 ## Using EmrEtlRunner
 
@@ -125,7 +125,7 @@ Usage: run [options]
 
 Note that the `config` and `resolver` options are mandatory.
 
-Note that in _Stream Enrich mode_ you cannot skip nor resume from `staging`, `enrich` and `archive_raw`. Instead of `staging` and `enrich`, in Stream Enrich mode single special `staging_stream_enrich` is used.
+Note that in *Stream Enrich mode* you cannot skip nor resume from `staging`, `enrich` and `archive_raw`. Instead of `staging` and `enrich`, in Stream Enrich mode single special `staging_stream_enrich` is used.
 
 #### Lint commands
 
@@ -164,7 +164,7 @@ Once you have run the EmrEtlRunner you should be able to manually inspect in S3 
 
 Note: most Snowplow users run the 'spark' version of the ETL process, in which case the data generated is saved into subfolders with names of the form `part-000...`. If, however, you are running the legacy 'hive' ETL (because e.g. you want to use Hive as your storage target, rather than Redshift, which is the only storage target the 'spark' etl currently supports), the subfolders names will be of the format `dt=...`.
 
-* * *
+---
 
 ## Scheduling EmrEtlRunner
 
@@ -200,7 +200,7 @@ For Windows servers, in theory it should be possible to use a Windows PowerShell
 
 If you get this working, please let us know!
 
-* * *
+---
 
 ## Configuring shredding
 
@@ -273,7 +273,7 @@ You must add an extra entr(-y/ies) in the `repositories:` array pointing to yo
 
 For more information on how to customize the `iglu_resolver.json` file, please review the [Iglu client configuration](https://github.com/snowplow/iglu/wiki/Iglu-client-configuration) wiki page.
 
-* * *
+---
 
 ## Technical explanation
 
@@ -292,7 +292,7 @@ By setting up a [scheduling job](https://github.com/snowplow/snowplow/wiki/3-Sc
 
 Note: many references are made to the 'Hadoop ETL' and 'Hive ETL' in the documentation and the [config file](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample). 'Hadoop ETL' refers to the current Spark-based Enrichment Process. 'Hive ETL' refers to the legacy Hive-based ETL process. EmrEtlRunner can be setup to instrument either. However, we recommend **all** Snowplow users use the Spark based 'Hadoop ETL', as it is much more robust, as well as being cheaper to run.
 
-* * *
+---
 
 ## Setting up end-to-end encryption
 
@@ -364,7 +364,7 @@ To leverage the security configuration you created, you will need to specify it 
 
 Additionally, you will need to tell EmrEtlRunner that it will have to interact with encrypted buckets through: `aws:s3:buckets:encrypted: true`.
 
-* * *
+---
 
 ## Setting up EC2 instance for EmrEtlRunner and StorageLoader
 

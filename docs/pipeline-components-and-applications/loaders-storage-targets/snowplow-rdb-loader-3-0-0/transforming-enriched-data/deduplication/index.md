@@ -1,6 +1,6 @@
 ---
-title: "Deduplication"
-date: "2022-04-04"
+title: 'Deduplication'
+date: '2022-04-04'
 sidebar_position: 30
 ---
 
@@ -20,12 +20,12 @@ This is less of a concern with [wide row format](/docs/pipeline-components-and-a
 
 This table shows the available deduplication mechanisms:
 
-| Strategy | Batch? | Same event ID? | Same event fingerprint? | Availability |
-| --- | --- | --- | --- | --- |
-| In-batch natural deduplication | In-batch | Yes | Yes | Spark transformer |
-| In-batch synthetic deduplication | In-batch | Yes | No | Spark transformer |
-| Cross-batch natural deduplication | Cross-batch | Yes | Yes | Spark transformer |
-| Cross-batch synthetic deduplication | Cross-batch | Yes | No | Not supported |
+| Strategy                            | Batch?      | Same event ID? | Same event fingerprint? | Availability      |
+| ----------------------------------- | ----------- | -------------- | ----------------------- | ----------------- |
+| In-batch natural deduplication      | In-batch    | Yes            | Yes                     | Spark transformer |
+| In-batch synthetic deduplication    | In-batch    | Yes            | No                      | Spark transformer |
+| Cross-batch natural deduplication   | Cross-batch | Yes            | Yes                     | Spark transformer |
+| Cross-batch synthetic deduplication | Cross-batch | Yes            | No                      | Not supported     |
 
 ## In-batch natural deduplication
 

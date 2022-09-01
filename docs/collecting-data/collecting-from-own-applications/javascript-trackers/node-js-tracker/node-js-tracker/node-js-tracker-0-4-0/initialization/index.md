@@ -1,6 +1,6 @@
 ---
-title: "Initialization"
-date: "2020-09-03"
+title: 'Initialization'
+date: '2020-09-03'
 sidebar_position: 200
 ---
 
@@ -58,7 +58,7 @@ const e = snowplow.gotEmitter(
       console.log('Event Sent');
     }
   },
-  { 
+  {
     http: new http.Agent({ maxSockets: 6 }),
     https: new https.Agent({ maxSockets: 6 })
   } // Node.js agentOptions object to tune performance

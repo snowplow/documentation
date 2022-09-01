@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: Integrating Javascript tags with Enhanced E-commerce"
-date: "2021-03-26"
+title: 'Tutorial: Integrating Javascript tags with Enhanced E-commerce'
+date: '2021-03-26'
 sidebar_position: 50
 ---
 
@@ -36,7 +36,7 @@ When the page loads, the tag will load the Snowplow JavaScript Tracker, make the
 
 Whenever ecommerce data is pushed to the data layer, the tag will fire again. It will not attempt to set up tracking again; instead it will send the ecommerce event to Snowplow.
 
-The example script below will be used as the basis for your tag. There are some changes you should make to this script. In the example "SNOWPLOW\_NAME\_HERE" is used as the name of the Snowplow function. This is the global function used to make API calls to the Snowplow JavaScript Tracker. You should change this string to something unique so that if there is another Snowplow user on the page the namespaces will not collide. Similarly, you should change "MY\_COOKIE\_NAME" to a unique value. You should change "MY\_COLLECTOR" to the URL of your Snowplow collector (minus the http/https scheme), for example "c.mydomain.com".
+The example script below will be used as the basis for your tag. There are some changes you should make to this script. In the example "SNOWPLOW_NAME_HERE" is used as the name of the Snowplow function. This is the global function used to make API calls to the Snowplow JavaScript Tracker. You should change this string to something unique so that if there is another Snowplow user on the page the namespaces will not collide. Similarly, you should change "MY_COOKIE_NAME" to a unique value. You should change "MY_COLLECTOR" to the URL of your Snowplow collector (minus the http/https scheme), for example "c.mydomain.com".
 
 You can also customize the part of the tag between the comments containing "!!!". The example below creates a tracker instance, sets page pings to fire every 10 seconds, and sends a page view event. See the [JavaScript Tracker page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md) for more information on other tracking methods.
 

@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: Content analytics"
-date: "2020-10-12"
+title: 'Tutorial: Content analytics'
+date: '2020-10-12'
 sidebar_position: 30
 ---
 
@@ -39,24 +39,26 @@ The `content` entity has the following fields:
 Add the content entity to your `page_view` and `page_ping` events by editing your `trackPageView` events to include the entity. Specifically, update
 
 ```javascript
-window.snowplow('trackPageView');
+window.snowplow('trackPageView')
 ```
 
 to
 
 ```javascript
 window.snowplow('trackPageView', {
-   "context": [{
-      "schema": "iglu:com.trysnowplow/content/jsonschema/1-0-1",
-      "data": {
-         "name": "example_name",
-         "id": "example_id",
-         "category": "example_category",  
-         "date_published": "01-01-1970",
-         "author": "example_author"
-      }
-   }]
-});
+  context: [
+    {
+      schema: 'iglu:com.trysnowplow/content/jsonschema/1-0-1',
+      data: {
+        name: 'example_name',
+        id: 'example_id',
+        category: 'example_category',
+        date_published: '01-01-1970',
+        author: 'example_author',
+      },
+    },
+  ],
+})
 ```
 
 #### Via Google Tag Manager
@@ -65,17 +67,19 @@ If you are using Google Tag Manager, you can add the variables like so:
 
 ```javascript
 window.snowplow('trackPageView', {
-   "context": [{
-      "schema": "iglu:com.trysnowplow/content/jsonschema/1-0-1",
-      "data": {
-         "name": "{{example_name_variable}}",
-         "id": "{{example_id_variable}}",
-         "category": "{{example_category_variable}}",
-         "date_published": "{{example_date_variable}}",
-         "author": "{{example_author_variable}}"
-      }
-   }]
-});
+  context: [
+    {
+      schema: 'iglu:com.trysnowplow/content/jsonschema/1-0-1',
+      data: {
+        name: '{{example_name_variable}}',
+        id: '{{example_id_variable}}',
+        category: '{{example_category_variable}}',
+        date_published: '{{example_date_variable}}',
+        author: '{{example_author_variable}}',
+      },
+    },
+  ],
+})
 ```
 
 ## Modeling the data you've collected
@@ -95,11 +99,11 @@ CREATE TABLE derived.content AS(
 
         SELECT
             wp.id AS page_view_id,
-            c.category AS content_category, 
-            c.name AS content_name, 
+            c.category AS content_category,
+            c.name AS content_name,
             c.date_published AS date_published,
             c.author AS author,
-            10*SUM(CASE WHEN ev.event_name = 'page_ping' THEN 1 ELSE 0 END) AS time_engaged_in_s, 
+            10*SUM(CASE WHEN ev.event_name = 'page_ping' THEN 1 ELSE 0 END) AS time_engaged_in_s,
             ROUND(100*(LEAST(LEAST(GREATEST(MAX(COALESCE(ev.pp_yoffset_max, 0)), 0), MAX(ev.doc_height)) + ev.br_viewheight, ev.doc_height)/ev.doc_height::FLOAT)) AS percentage_vertical_scroll_depth
 
         FROM atomic.events AS ev
@@ -107,18 +111,18 @@ CREATE TABLE derived.content AS(
             ON ev.event_id = wp.root_id AND ev.collector_tstamp = wp.root_tstamp
         INNER JOIN atomic.com_trysnowplow_content_1 AS c
             ON ev.event_id = c.root_id AND ev.collector_tstamp = c.root_tstamp
-        
+
         GROUP BY 1,2,3,4,5,ev.br_viewheight,ev.doc_height
 
     )
 
     SELECT
-        content_category, 
-        content_name, 
+        content_category,
+        content_name,
         date_published,
         author,
         COUNT(DISTINCT page_view_id) AS page_views,
-        ROUND(SUM(time_engaged_in_s)/COUNT(DISTINCT page_view_id)) AS average_time_engaged_in_s, 
+        ROUND(SUM(time_engaged_in_s)/COUNT(DISTINCT page_view_id)) AS average_time_engaged_in_s,
         ROUND(SUM(percentage_vertical_scroll_depth)/COUNT(DISTINCT page_view_id))AS average_percentage_vertical_scroll_depth
 
     FROM content_page_views

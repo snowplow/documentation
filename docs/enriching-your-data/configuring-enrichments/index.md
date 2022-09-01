@@ -1,6 +1,6 @@
 ---
-title: "Managing enrichments in the console"
-date: "2020-02-15"
+title: 'Managing enrichments in the console'
+date: '2020-02-15'
 sidebar_position: 10
 ---
 
@@ -8,7 +8,7 @@ Snowplow Console enables you to manage the Enrichments that run on each of your 
 
 To start managing Enrichments, navigate to the environment you'd like to manage and select _Enrichments_ in the environment menu.
 
-* * *
+---
 
 ## View which Enrichments are running for an environment
 
@@ -16,7 +16,7 @@ When you select navigate to the Enrichments screen you'll see a listing of all E
 
 ![](images/ViewEnrichments.gif)
 
-* * *
+---
 
 ## Enable /editing an Enrichment
 
@@ -41,7 +41,7 @@ If your configuration is valid you will be given the option to _Publish_ the enr
 
 Once you are happy with your configuration, follow [Deploying a configuration across environments](#deploy) to deploy the configuration to a pipeline.
 
-* * *
+---
 
 ## Deploying an Enrichment configuration across environments
 
@@ -62,7 +62,7 @@ Important!
 
 Deployments to pipeline environments currently involve work performed by our Support team. You can expect your change to be live within 24 hours.
 
-* * *
+---
 
 ## Disable an Enrichment
 
@@ -76,4 +76,4 @@ Important!
 
 Disabling enrichments on pipeline environments currently involves work performed by our Support team. You can expect your change to be live within 24 hours.
 
-* * *
+---

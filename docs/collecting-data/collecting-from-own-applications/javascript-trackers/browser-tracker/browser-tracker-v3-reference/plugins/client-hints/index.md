@@ -1,6 +1,6 @@
 ---
-title: "Client Hints"
-date: "2021-04-07"
+title: 'Client Hints'
+date: '2021-04-07'
 sidebar_position: 3000
 ---
 
@@ -21,14 +21,14 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { ClientHintsPlugin } from '@snowplow/browser-plugin-client-hints';
+import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { ClientHintsPlugin } from '@snowplow/browser-plugin-client-hints'
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ ClientHintsPlugin() ], 
-            // Use ClientHintsPlugin(true) to capture high entropy values
-});
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
+  plugins: [ClientHintsPlugin()],
+  // Use ClientHintsPlugin(true) to capture high entropy values
+})
 ```
 
 ### Functions
@@ -39,6 +39,6 @@ This plugin does not contain any new functions.
 
 Adding this plugin will automatically capture the following context:
 
-| Context                                                                                                                                                        | Example                                           |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| [iglu:org.ietf/http\_client\_hints/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-19.58.43.png) |
+| Context                                                                                                                                                      | Example                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| [iglu:org.ietf/http_client_hints/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-19.58.43.png) |

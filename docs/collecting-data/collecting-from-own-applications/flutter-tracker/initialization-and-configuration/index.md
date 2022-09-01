@@ -1,6 +1,6 @@
 ---
-title: "Initialization and configuration"
-date: "2022-01-31"
+title: 'Initialization and configuration'
+date: '2022-01-31'
 sidebar_position: 2000
 ---
 
@@ -22,7 +22,7 @@ The method returns a `SnowplowTracker` instance. This can be later used for tr
 The only required attributes of the `Snowplow.createTracker` method are `namespace` used to identify the tracker, and the Snowplow collector `endpoint`. Additionally, one can configure the HTTP method to be used when sending events to the collector and provide configuration by instantiating classes for `TrackerConfiguration`, `SubjectConfiguration`, or `GdprConfiguration`. The following arguments are accepted by the `Snowplow.createTracker` method:
 
 | Attribute       | Type                    | Description                                                                          |
-|-----------------|-------------------------|--------------------------------------------------------------------------------------|
+| --------------- | ----------------------- | ------------------------------------------------------------------------------------ |
 | `namespace`     | `String`                | Tracker namespace to identify the tracker.                                           |
 | `endpoint`      | `String`                | URI for the Snowplow collector endpoint.                                             |
 | `method`        | `Method?`               | HTTP method to use. `Method.get` and `Method.post` options are available.            |
@@ -34,16 +34,16 @@ The only required attributes of the `Snowplow.createTracker` method are `name
 
 `TrackerConfiguration` provides options to configure properties and features of the tracker. In addition to setting the app identifier and device platform, the configuration enables turning several automatic context entities on and off.
 
-| Attribute            | Type              | Description                                                                                           | Android | iOS | Web | Default                                       |
-|----------------------|-------------------|-------------------------------------------------------------------------------------------------------|---------|-----|-----|-----------------------------------------------|
-| `appId`              | `String?`         | Identifier of the app.                                                                                | ✔       | ✔   | ✔   | null on Web, bundle identifier on iOS/Android |
-| `devicePlatform`     | `DevicePlatform?` | The device platform the tracker runs on. Available options are provided by the `DevicePlatform` enum. | ✔       | ✔   | ✔   | "web" on Web, "mob" on iOS/Android            |
-| `base64Encoding`     | `bool?`           | Indicates whether payload JSON data should be base64 encoded.                                         | ✔       | ✔   | ✔   | true                                          |
-| `platformContext`    | `bool?`           | Indicates whether platform context should be attached to tracked events.                              | ✔       | ✔   |     | true                                          |
-| `geoLocationContext` | `bool?`           | Indicates whether geo-location context should be attached to tracked events.                          | ✔       | ✔   | ✔   | false                                         |
-| `sessionContext`     | `bool?`           | Indicates whether session context should be attached to tracked events.                               | ✔       | ✔   | ✔   | true                                          |
-| `webPageContext`     | `bool?`           | Indicates whether context about current web page should be attached to tracked events.                |         |     | ✔   | true                                          |
-| `webActivityTracking` | WebActivityTracking?\` | Enables activity tracking using page views and pings on the Web. |  |  | ✔ | true |
+| Attribute             | Type                   | Description                                                                                           | Android | iOS | Web | Default                                       |
+| --------------------- | ---------------------- | ----------------------------------------------------------------------------------------------------- | ------- | --- | --- | --------------------------------------------- |
+| `appId`               | `String?`              | Identifier of the app.                                                                                | ✔       | ✔   | ✔   | null on Web, bundle identifier on iOS/Android |
+| `devicePlatform`      | `DevicePlatform?`      | The device platform the tracker runs on. Available options are provided by the `DevicePlatform` enum. | ✔       | ✔   | ✔   | "web" on Web, "mob" on iOS/Android            |
+| `base64Encoding`      | `bool?`                | Indicates whether payload JSON data should be base64 encoded.                                         | ✔       | ✔   | ✔   | true                                          |
+| `platformContext`     | `bool?`                | Indicates whether platform context should be attached to tracked events.                              | ✔       | ✔   |     | true                                          |
+| `geoLocationContext`  | `bool?`                | Indicates whether geo-location context should be attached to tracked events.                          | ✔       | ✔   | ✔   | false                                         |
+| `sessionContext`      | `bool?`                | Indicates whether session context should be attached to tracked events.                               | ✔       | ✔   | ✔   | true                                          |
+| `webPageContext`      | `bool?`                | Indicates whether context about current web page should be attached to tracked events.                |         |     | ✔   | true                                          |
+| `webActivityTracking` | WebActivityTracking?\` | Enables activity tracking using page views and pings on the Web.                                      |         |     | ✔   | true                                          |
 
 The optional `WebActivityTracking` property configures page tracking on Web. Initializing the configuration will inform `SnowplowObserver` observers (see section on auto-tracking in "Tracking events") to auto track `PageViewEvent` events instead of `ScreenView` events on navigation changes. Further, setting the `minimumVisitLength` and `heartbeatDelay` properties of the `WebActivityTracking` instance will enable activity tracking using 'page ping' events on Web.
 
@@ -56,7 +56,7 @@ Subject information are persistent and global information about the tracked devi
 Some of the properties are only configurable on iOS and Android and are automatically assigned on the Web.
 
 | Attribute          | Type      | Description                                                     | Android | iOS | Web                              | Default |
-|--------------------|-----------|-----------------------------------------------------------------|---------|-----|----------------------------------|---------|
+| ------------------ | --------- | --------------------------------------------------------------- | ------- | --- | -------------------------------- | ------- |
 | `userId`           | `String?` | Business ID of the user.                                        | ✔       | ✔   | ✔                                |         |
 | `networkUserId`    | `String?` | Network user ID (UUIDv4).                                       | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 | `domainUserId`     | `String?` | Domain user ID (UUIDv4).                                        | ✔       | ✔   | Non-configurable, auto-assigned. |         |
@@ -70,7 +70,7 @@ Some of the properties are only configurable on iOS and Android and are automati
 The configured attributes are mapped to Snowplow event properties described in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md). They are mapped as follows:
 
 | Attribute                 | Event Property      |
-|---------------------------|---------------------|
+| ------------------------- | ------------------- |
 | `userId`                  | `uid`               |
 | `networkUserId`           | `network_userid`    |
 | `domainUserId`            | `domain_userid`     |
@@ -88,9 +88,9 @@ The configured attributes are mapped to Snowplow event properties described in t
 
 Determines the GDPR context that will be attached to all events sent by the tracker.
 
-| Attribute            | Type     | Description                  | Android | iOS | Web | Default |
-|----------------------|----------|------------------------------|---------|-----|-----|---------|
-| `basisForProcessing` | `String` | Basis for processing.        | ✔       | ✔   | ✔   |         |
-| `documentId`         | `String` | ID of a GDPR basis document. | ✔       | ✔   | ✔   |         |
-| `documentVersion`    | `String` | Version of the document.     | ✔       | ✔   | ✔   |         |
-| `documentDescription` | `String` | Description of the document. | ✔ | ✔ | ✔ |
+| Attribute             | Type     | Description                  | Android | iOS | Web | Default |
+| --------------------- | -------- | ---------------------------- | ------- | --- | --- | ------- |
+| `basisForProcessing`  | `String` | Basis for processing.        | ✔       | ✔   | ✔   |         |
+| `documentId`          | `String` | ID of a GDPR basis document. | ✔       | ✔   | ✔   |         |
+| `documentVersion`     | `String` | Version of the document.     | ✔       | ✔   | ✔   |         |
+| `documentDescription` | `String` | Description of the document. | ✔       | ✔   | ✔   |

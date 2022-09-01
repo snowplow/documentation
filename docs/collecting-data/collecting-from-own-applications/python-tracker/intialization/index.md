@@ -1,6 +1,6 @@
 ---
-title: "Initialization"
-date: "2020-02-26"
+title: 'Initialization'
+date: '2020-02-26'
 sidebar_position: 20
 ---
 
@@ -27,14 +27,14 @@ t = Tracker(e)
 
 The tracker parameters are:
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `emitters` | The emitter(s) to which events are sent | Yes |  |
-| `subject` | The user being tracked | No | `subject.Subject()` |
-| `namespace` | The name of the tracker instance | No | `None` |
-| `app_id` | The application ID | No | `None` |
-| `encode_base64` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No | `True` |
-| `json_encoder` | Custom JSON serializer | No | `None` |
+| **Argument Name** | **Description**                                                            | **Required?** | **Default**         |
+| ----------------- | -------------------------------------------------------------------------- | ------------- | ------------------- |
+| `emitters`        | The emitter(s) to which events are sent                                    | Yes           |                     |
+| `subject`         | The user being tracked                                                     | No            | `subject.Subject()` |
+| `namespace`       | The name of the tracker instance                                           | No            | `None`              |
+| `app_id`          | The application ID                                                         | No            | `None`              |
+| `encode_base64`   | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No            | `True`              |
+| `json_encoder`    | Custom JSON serializer                                                     | No            | `None`              |
 
 Here is a more complete example in which every tracker parameter is set:
 
@@ -42,10 +42,10 @@ Here is a more complete example in which every tracker parameter is set:
 e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
 s = Subject().set_platform("srv")
 
-tracker = Tracker( e, 
-                   subject=s, 
-                   namespace="cf", 
-                   app_id="aid", 
+tracker = Tracker( e,
+                   subject=s,
+                   namespace="cf",
+                   app_id="aid",
                    encode_base64=False,
                    json_encoder=my_custom_encoder)
 ```

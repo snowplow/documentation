@@ -1,6 +1,6 @@
 ---
-title: "Beam"
-date: "2020-04-14"
+title: 'Beam'
+date: '2020-04-14'
 sidebar_position: 0
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Schedule EmrEtlRunner"
-date: "2020-02-26"
+title: 'Schedule EmrEtlRunner'
+date: '2020-02-26'
 sidebar_position: 30
 ---
 
@@ -14,8 +14,8 @@ To consider your different scheduling options in turn:
 
 ## 2\. cron
 
-|  | Running EmrEtlRunner as _Ruby_ (rather than _JRuby_ apps) is no longer actively supported. The latest version of the EmrEtlRunner is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r91_stonehenge.zip). |
-| --- | --- |
+|     | Running EmrEtlRunner as _Ruby_ (rather than _JRuby_ apps) is no longer actively supported. The latest version of the EmrEtlRunner is available from our Bintray [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_emr_r91_stonehenge.zip). |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 The recommended way of scheduling the ETL process is as a daily cronjob.
 

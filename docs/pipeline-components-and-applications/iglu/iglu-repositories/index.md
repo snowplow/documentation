@@ -1,6 +1,6 @@
 ---
-title: "Iglu Repositories"
-date: "2021-03-26"
+title: 'Iglu Repositories'
+date: '2021-03-26'
 sidebar_position: 20
 ---
 
@@ -21,11 +21,11 @@ In this diagram we show an Iglu client resolving a schema from Iglu Central, one
 
 We currently have two Iglu "repo" technologies available for deploying your Iglu repository - follow the links to find out more:
 
-| **Repository** | **Category** | **Description** | **Status** |
-| --- | --- | --- | --- |
-| Iglu Server | Remote | An Iglu repository server structured as a RESTful API | Production-ready |
-| Static repo | Remote | An Iglu repository server structured as a static website | Production-ready |
-| JVM-embedded repo | Embedded | An Iglu repository embedded in a Java or Scala application | Production-ready |
+| **Repository**    | **Category** | **Description**                                            | **Status**       |
+| ----------------- | ------------ | ---------------------------------------------------------- | ---------------- |
+| Iglu Server       | Remote       | An Iglu repository server structured as a RESTful API      | Production-ready |
+| Static repo       | Remote       | An Iglu repository server structured as a static website   | Production-ready |
+| JVM-embedded repo | Embedded     | An Iglu repository embedded in a Java or Scala application | Production-ready |
 
 ## [](https://github.com/snowplow/iglu/wiki/Iglu-repositories#iglu-central)Iglu Central
 

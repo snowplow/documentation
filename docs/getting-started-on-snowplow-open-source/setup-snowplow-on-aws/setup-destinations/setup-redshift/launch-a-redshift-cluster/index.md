@@ -1,6 +1,6 @@
 ---
-title: "Launch a Redshift cluster"
-date: "2020-02-26"
+title: 'Launch a Redshift cluster'
+date: '2020-02-26'
 sidebar_position: -100
 ---
 

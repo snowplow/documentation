@@ -1,6 +1,6 @@
 ---
-title: "Dataflow Runner"
-date: "2020-03-02"
+title: 'Dataflow Runner'
+date: '2020-03-02'
 sidebar_position: 100
 ---
 
@@ -8,7 +8,7 @@ Dataflow Runner is a system for creating and running [AWS EMR](https://aws.amazo
 
 ### Installation
 
-Dataflow Runner binaries are available from the Github releases page.  
+Dataflow Runner binaries are available from the Github releases page.
 
 ### Cluster Configuration
 
@@ -18,13 +18,13 @@ For the cluster template see: [config/cluster.json.sample](https://github.com/s
 
 ### Playbook Configuration
 
-A playbook consists of one of more _steps_. Steps are added to the cluster and run in series.
+A playbook consists of one of more *steps*. Steps are added to the cluster and run in series.
 
 For the playbook template see: [config/playbook.json.sample](https://github.com/snowplow/dataflow-runner/blob/master/config/playbook.json.sample)
 
 ### Templates
 
-Configuration files are run through Golang’s [text template processor](http://golang.org/pkg/text/template/). The template processor can access all _variables_ defined on the command line using the `--vars` argument.
+Configuration files are run through Golang’s [text template processor](http://golang.org/pkg/text/template/). The template processor can access all *variables* defined on the command line using the `--vars` argument.
 
 For example to use the `--vars` argument with a playbook step:
 
@@ -72,11 +72,11 @@ This would resolve to:
 
 The following custom functions are also supported:
 
-- `nowWithFormat [timeFormat]`: where `timeFormat` is a valid Golang [time format](http://golang.org/pkg/time/#Time.Format)
-- `timeWithFormat [epoch] [timeFormat]`: where `epoch` is the number of seconds elapsed between January 1st 1970 and a certain point in time as a string and `timeFormat` is valid Golang [time format](http://golang.org/pkg/time/#Time.Format)
-- `systemEnv "ENV_VAR"`: where `ENV_VAR` is a key for a valid environment variable
-- `base64 [string]`: will base64-encode the string passed as argument
-- `base64File "path/to/file.txt"`: will base64-encode the content of the file located at the path passed as argument
+- `nowWithFormat [timeFormat]`: where `timeFormat` is a valid Golang [time format](http://golang.org/pkg/time/#Time.Format)
+- `timeWithFormat [epoch] [timeFormat]`: where `epoch` is the number of seconds elapsed between January 1st 1970 and a certain point in time as a string and `timeFormat` is valid Golang [time format](http://golang.org/pkg/time/#Time.Format)
+- `systemEnv "ENV_VAR"`: where `ENV_VAR` is a key for a valid environment variable
+- `base64 [string]`: will base64-encode the string passed as argument
+- `base64File "path/to/file.txt"`: will base64-encode the content of the file located at the path passed as argument
 
 ### CLI Commands
 
@@ -142,7 +142,7 @@ ERRO[0358] 2/2 steps failed to complete successfully
 
 In this case my first step failed which meant that my second step was cancelled. This behaviour is dependent on your `actionOnFailure` - you can choose either to:
 
-1. “CANCEL\_AND\_WAIT”: This will cancel all other currently queued jobs and return the cluster to a waiting state ready for new job submissions.
+1. “CANCEL_AND_WAIT”: This will cancel all other currently queued jobs and return the cluster to a waiting state ready for new job submissions.
 2. “CONTINUE”: This will go to the next step regardless if it failed or not.
 
 **Note**: We have removed the ability to terminate the job flow on failure, to terminate you will need to use the `down` command.

@@ -1,6 +1,6 @@
 ---
-title: "Tracking specific events"
-date: "2020-02-26"
+title: 'Tracking specific events'
+date: '2020-02-26'
 sidebar_position: 40
 ---
 
@@ -8,20 +8,20 @@ As a Snowplow user, you have the ability to define your own event types, upload 
 
 In addition, Snowplow has a wide selection of pre-defined events and associated methods for tracking:
 
-| **Function** | **Description** |
-| --- | --- |
-| [`track_page_view()`](#page-view) | Track views of web pages |
-| [`track_page_ping()`](#page-ping) | Track engagement on web pages over time |
-| [`track_link_click()`](#link-click) | Track link clicks |
-| [`track_form_change()`](#form-change) | Track form changes |
-| [`track_form_submit()`](#form-submit) | Track that a form was submitted |
-| [`track_site_search()`](#site-search) | Track when a user searches your site |
-| [`track_screen_view()`](#screen-view) | Track screen views (non-web e.g. in-app) |
-| [`track_ecommerce_transaction()`](#ecommerce-transaction) | Track ecommerce transaction |
+| **Function**                                                        | **Description**                           |
+| ------------------------------------------------------------------- | ----------------------------------------- |
+| [`track_page_view()`](#page-view)                                   | Track views of web pages                  |
+| [`track_page_ping()`](#page-ping)                                   | Track engagement on web pages over time   |
+| [`track_link_click()`](#link-click)                                 | Track link clicks                         |
+| [`track_form_change()`](#form-change)                               | Track form changes                        |
+| [`track_form_submit()`](#form-submit)                               | Track that a form was submitted           |
+| [`track_site_search()`](#site-search)                               | Track when a user searches your site      |
+| [`track_screen_view()`](#screen-view)                               | Track screen views (non-web e.g. in-app)  |
+| [`track_ecommerce_transaction()`](#ecommerce-transaction)           | Track ecommerce transaction               |
 | [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item) | Track an item of an ecommerce transaction |
-| [`track_add_to_cart()`](#add-to-cart) | Track an add to cart event |
-| [`track_remove_from_cart()`](#remove-from-cart) | Track a remove from cart event |
-| [`track_struct_event()`](#struct-event) | Track a Snowplow custom structured event |
+| [`track_add_to_cart()`](#add-to-cart)                               | Track an add to cart event                |
+| [`track_remove_from_cart()`](#remove-from-cart)                     | Track a remove from cart event            |
+| [`track_struct_event()`](#struct-event)                             | Track a Snowplow custom structured event  |
 
 ### Common tracking parameters
 
@@ -46,13 +46,13 @@ When you track an event, some of the data that you track will be specific to tha
 - User favorites video
 - User reviews video
 
-Whilst each of those events is a different type, all of them involve capturing data about the user and the video. Both the 'user' and 'video' are entities that are tracked across multiple event types. Both are candidates to be "custom context". You as a Snowplow user can define your own custom contexts (including associated schemas) and then send data for as many custom contexts as you wish with _any_ Snowplow event. So if you want, you can define your own "user context", and then send additional user data in that object with any event. Other examples of context include:
+Whilst each of those events is a different type, all of them involve capturing data about the user and the video. Both the 'user' and 'video' are entities that are tracked across multiple event types. Both are candidates to be "custom context". You as a Snowplow user can define your own custom contexts (including associated schemas) and then send data for as many custom contexts as you wish with *any* Snowplow event. So if you want, you can define your own "user context", and then send additional user data in that object with any event. Other examples of context include:
 
 - articles
 - videos
 - products
 - categories
-- pages / page\_types
+- pages / page_types
 - environments
 
 Each tracking method accepts an additional optional context parameter after all the parameters specific to that method:
@@ -135,7 +135,7 @@ Above will attach [`ttm`](https://github.com/snowplow/snowplow/wiki/snowplow-tr
 
 **_\*\*New to v0.9.0_**
 
-Since version 0.9.0, providing the optional timestamp argument will only set the true timestamp (true\_tstamp) of the event. The type of this argument can only be the unix time in milliseconds. If you migrate from previous version, make sure to replace any references to Timestamp objects, since the Timestamp class (along with the TrueTimestamp and DeviceTimestamp subclasses) do not exist.
+Since version 0.9.0, providing the optional timestamp argument will only set the true timestamp (true_tstamp) of the event. The type of this argument can only be the unix time in milliseconds. If you migrate from previous version, make sure to replace any references to Timestamp objects, since the Timestamp class (along with the TrueTimestamp and DeviceTimestamp subclasses) do not exist.
 
 ```
 
@@ -171,12 +171,12 @@ Use `track_self_describing_event()` to track an event types that you have defi
 
 This method's arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `event_json` | The properties of the event | Yes | SelfDescribingJson |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the unstructured event occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                      | **Required?** | **Type**                 |
+| ------------------------------ | ------------------------------------ | ------------- | ------------------------ |
+| `event_json`                   | The properties of the event          | Yes           | SelfDescribingJson       |
+| `context`                      | Custom context for the event         | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the unstructured event occurred | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event            | No            | Subject                  |
 
 Example:
 
@@ -198,20 +198,20 @@ The `event_json` is represented using the SelfDescribingJson class. It has two
 
 For more on JSON schema, see the [blog post](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
 
-Many Snowplow users use the above method to track _all_ their events i.e. only record event types that they have defined. However, there are a number of "out of the box" events that have dedicated tracking methods. These are detailed below:
+Many Snowplow users use the above method to track *all* their events i.e. only record event types that they have defined. However, there are a number of "out of the box" events that have dedicated tracking methods. These are detailed below:
 
 ### Track page view
 
 Use `track_page_view()` to track a user viewing a page within your app or website. The arguments are:
 
-| **Argument** | **Description** | **Required?** | ****Type**** |
-| --- | --- | --- | --- |
-| `page_url` | The URL of the page | Yes | Non-empty string |
-| `page_title` | The title of the page | No | String |
-| `referrer` | The address which linked to the page | No | String |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the pageview occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                      | **Required?** | \***\*Type\*\***         |
+| ------------------------------ | ------------------------------------ | ------------- | ------------------------ |
+| `page_url`                     | The URL of the page                  | Yes           | Non-empty string         |
+| `page_title`                   | The title of the page                | No            | String                   |
+| `referrer`                     | The address which linked to the page | No            | String                   |
+| `context`                      | Custom context for the event         | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the pageview occurred           | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event            | No            | Subject                  |
 
 Example:
 
@@ -225,18 +225,18 @@ Use `track_page_ping()` to track engagement with a web page over time, via a h
 
 Arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `page_url` | The URL of the page | Yes | Non-empty string |
-| `page_title` | The title of the page | No | String |
-| `referrer` | The address which linked to the page | No | String |
-| `min_x` | Minimum page X offset seen in the last ping period | No | Positive integer |
-| `max_x` | Maximum page X offset seen in the last ping period | No | Positive integer |
-| `min_y` | Minimum page Y offset seen in the last ping period | No | Positive integer |
-| `max_y` | Maximum page Y offset seen in the last ping period | No | Positive integer |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the pageview occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                                    | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | -------------------------------------------------- | ------------- | ------------------------ |
+| `page_url`                     | The URL of the page                                | Yes           | Non-empty string         |
+| `page_title`                   | The title of the page                              | No            | String                   |
+| `referrer`                     | The address which linked to the page               | No            | String                   |
+| `min_x`                        | Minimum page X offset seen in the last ping period | No            | Positive integer         |
+| `max_x`                        | Maximum page X offset seen in the last ping period | No            | Positive integer         |
+| `min_y`                        | Minimum page Y offset seen in the last ping period | No            | Positive integer         |
+| `max_y`                        | Maximum page Y offset seen in the last ping period | No            | Positive integer         |
+| `context`                      | Custom context for the event                       | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the pageview occurred                         | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event                          | No            | Subject                  |
 
 Example:
 
@@ -248,13 +248,13 @@ t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.c
 
 Use `track_screen_view()` to track a user viewing a screen (or equivalent) within your app. This is an alternative to the `track_page_view` method which is less web-centric. The arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | Non-empty string |
-| `id_` | Unique identifier for this screen | No | String |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the screen was viewed | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                     | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | ----------------------------------- | ------------- | ------------------------ |
+| `name`                         | Human-readable name for this screen | No            | Non-empty string         |
+| `id_`                          | Unique identifier for this screen   | No            | String                   |
+| `context`                      | Custom context for the event        | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the screen was viewed          | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event           | No            | Subject                  |
 
 Although name and id\_ are not individually required, at least one must be provided or the event will fail validation.
 
@@ -268,34 +268,34 @@ t.track_screen_view("HUD > Save Game", "screen23", None, 1368725287000)
 
 Use `track_ecommerce_transaction()` to track an ecommerce transaction. Arguments:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `order_id` | ID of the eCommerce transaction | Yes | Non-empty string |
-| `total_value` | Total transaction value | Yes | Int or Float |
-| `affiliation` | Transaction affiliation | No | String |
-| `tax_value` | Transaction tax value | No | Int or Float |
-| `shipping` | Delivery cost charged | No | Int or Float |
-| `city` | Delivery address city | No | String |
-| `state` | Delivery address state | No | String |
-| `country` | Delivery address country | No | String |
-| `currency` | Transaction currency | No | String |
-| `items` | Items in the transaction | Yes | List |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the transaction event occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                     | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | ----------------------------------- | ------------- | ------------------------ |
+| `order_id`                     | ID of the eCommerce transaction     | Yes           | Non-empty string         |
+| `total_value`                  | Total transaction value             | Yes           | Int or Float             |
+| `affiliation`                  | Transaction affiliation             | No            | String                   |
+| `tax_value`                    | Transaction tax value               | No            | Int or Float             |
+| `shipping`                     | Delivery cost charged               | No            | Int or Float             |
+| `city`                         | Delivery address city               | No            | String                   |
+| `state`                        | Delivery address state              | No            | String                   |
+| `country`                      | Delivery address country            | No            | String                   |
+| `currency`                     | Transaction currency                | No            | String                   |
+| `items`                        | Items in the transaction            | Yes           | List                     |
+| `context`                      | Custom context for the event        | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the transaction event occurred | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event           | No            | Subject                  |
 
-The `items` argument is an array of Python dictionaries representing the items in the transaction. `track_ecommerce_transaction` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, order\_id, currency (and event\_subject, since v0.9.0) as the main transaction event.
+The `items` argument is an array of Python dictionaries representing the items in the transaction. `track_ecommerce_transaction` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, order_id, currency (and event_subject, since v0.9.0) as the main transaction event.
 
 These are the fields that can appear in a transaction item dictionary:
 
-| **Field** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `"sku"` | Item SKU | Yes | Non-empty string |
-| `"price"` | Item price | Yes | Int or Float |
-| `"quantity"` | Item quantity | Yes | Int |
-| `"name"` | Item name | No | String |
-| `"category"` | Item category | No | String |
-| `"context"` | Custom context for the event | No | List |
+| **Field**    | **Description**              | **Required?** | **\*\***Type**\*\*** |
+| ------------ | ---------------------------- | ------------- | -------------------- |
+| `"sku"`      | Item SKU                     | Yes           | Non-empty string     |
+| `"price"`    | Item price                   | Yes           | Int or Float         |
+| `"quantity"` | Item quantity                | Yes           | Int                  |
+| `"name"`     | Item name                    | No            | String               |
+| `"category"` | Item category                | No            | String               |
+| `"context"`  | Custom context for the event | No            | List                 |
 
 Example of tracking a transaction containing two items:
 
@@ -319,17 +319,17 @@ Use `track_ecommerce_transaction_item()` to track an individual line item.
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `id` | Order ID | Yes | Non-empty string |
-| `sku` | Item SKU | Yes | Non-empty string |
-| `price` | Item price | Yes | Int or Float |
-| `quantity` | Item quantity | Yes | Int |
-| `name` | Item name | No | String |
-| `category` | Item category | No | String |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the transaction event occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                     | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | ----------------------------------- | ------------- | ------------------------ |
+| `id`                           | Order ID                            | Yes           | Non-empty string         |
+| `sku`                          | Item SKU                            | Yes           | Non-empty string         |
+| `price`                        | Item price                          | Yes           | Int or Float             |
+| `quantity`                     | Item quantity                       | Yes           | Int                      |
+| `name`                         | Item name                           | No            | String                   |
+| `category`                     | Item category                       | No            | String                   |
+| `context`                      | Custom context for the event        | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the transaction event occurred | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event           | No            | Subject                  |
 
 Example:
 
@@ -341,16 +341,16 @@ t.track_ecommerce_transaction_item("order-789", "2001", 49.99, 1, "Green shoes",
 
 Use `track_struct_event()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | Non-empty string |
-| `action` | Defines the type of user interaction which this event involves | Yes | Non-empty string |
-| `label` | A string to provide additional dimensions to the event data | No | String |
-| `property` | A string describing the object or the action performed on it | No | String |
-| `value` | A value to provide numerical data about the event | No | Int or Float |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the structured event occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                                                  | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | ---------------------------------------------------------------- | ------------- | ------------------------ |
+| `category`                     | The grouping of structured events which this `action` belongs to | Yes           | Non-empty string         |
+| `action`                       | Defines the type of user interaction which this event involves   | Yes           | Non-empty string         |
+| `label`                        | A string to provide additional dimensions to the event data      | No            | String                   |
+| `property`                     | A string describing the object or the action performed on it     | No            | String                   |
+| `value`                        | A value to provide numerical data about the event                | No            | Int or Float             |
+| `context`                      | Custom context for the event                                     | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the structured event occurred                               | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event                                        | No            | Subject                  |
 
 Example:
 
@@ -362,16 +362,16 @@ t.track_struct_event("shop", "add-to-basket", None, "pcs", 2)
 
 Use `track_link_click()` to track individual link click events. Arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `target_url` | The URL of the page | Yes | Non-empty string |
-| `element_id` | ID attribute of the HTML element | No | String |
-| `element_classes` | Classes of the HTML element | No | List(string) |
-| `element_target` | Target element | No | String |
-| `element_content` | The content of the HTML element | No | String |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the pageview occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                  | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | -------------------------------- | ------------- | ------------------------ |
+| `target_url`                   | The URL of the page              | Yes           | Non-empty string         |
+| `element_id`                   | ID attribute of the HTML element | No            | String                   |
+| `element_classes`              | Classes of the HTML element      | No            | List(string)             |
+| `element_target`               | Target element                   | No            | String                   |
+| `element_content`              | The content of the HTML element  | No            | String                   |
+| `context`                      | Custom context for the event     | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the pageview occurred       | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event        | No            | Subject                  |
 
 Basic example:
 
@@ -389,17 +389,17 @@ t.track_link_click("http://my-target-url2/path", "element id 2", None, "element 
 
 Use `track_add_to_cart()` to track adding items to a cart on an ecommerce site. Arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `sku` | Item SKU or ID | Yes | Non-empty string |
-| `quantity` | Number of items added to cart | Yes | Integer |
-| `name` | Item's name | No | String |
-| `category` | Item's category | No | String |
-| `unit_price` | Item's price | No | Int or Float |
-| `currency` | Currency | No | String |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the pageview occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**               | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | ----------------------------- | ------------- | ------------------------ |
+| `sku`                          | Item SKU or ID                | Yes           | Non-empty string         |
+| `quantity`                     | Number of items added to cart | Yes           | Integer                  |
+| `name`                         | Item's name                   | No            | String                   |
+| `category`                     | Item's category               | No            | String                   |
+| `unit_price`                   | Item's price                  | No            | Int or Float             |
+| `currency`                     | Currency                      | No            | String                   |
+| `context`                      | Custom context for the event  | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the pageview occurred    | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event     | No            | Subject                  |
 
 Example:
 
@@ -411,17 +411,17 @@ t.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
 
 Use `track_remove_from_cart()` to track removing items from a cart on an ecommerce site. Arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `sku` | Item SKU or ID | Yes | Non-empty string |
-| `quantity` | Number of items added to cart | Yes | Integer |
-| `name` | Item's name | No | String |
-| `category` | Item's category | No | String |
-| `unit_price` | Item's price | No | Int or Float |
-| `currency` | Currency | No | String |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the pageview occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**               | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | ----------------------------- | ------------- | ------------------------ |
+| `sku`                          | Item SKU or ID                | Yes           | Non-empty string         |
+| `quantity`                     | Number of items added to cart | Yes           | Integer                  |
+| `name`                         | Item's name                   | No            | String                   |
+| `category`                     | Item's category               | No            | String                   |
+| `unit_price`                   | Item's price                  | No            | Int or Float             |
+| `currency`                     | Currency                      | No            | String                   |
+| `context`                      | Custom context for the event  | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the pageview occurred    | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event     | No            | Subject                  |
 
 Basic example:
 
@@ -439,17 +439,17 @@ t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD")
 
 Use `track_from_change()` to track changes in website form inputs over session. Arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `form_id` | ID attribute of the HTML form | Yes | Non-empty string |
-| `element_id` | ID attribute of the HTML element | Yes | String |
-| `node_name` | Type of input element | Yes | [Valid node\_name](https://github.com/snowplow/iglu-central/blob/53589a5dd41f2f88cabb359488019e0ebb72ec49/schemas/com.snowplowanalytics.snowplow/change_form/jsonschema/1-0-0#L20) |
-| `value` | Value of input element | Yes | String |
-| `type_` | Type of data the element represents | No | Non-empty string |
-| `element_classes` | Classes of the HTML element | No | List(string) |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the pageview occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**                     | **Required?** | **\*\***Type**\*\***                                                                                                                                                              |
+| ------------------------------ | ----------------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `form_id`                      | ID attribute of the HTML form       | Yes           | Non-empty string                                                                                                                                                                  |
+| `element_id`                   | ID attribute of the HTML element    | Yes           | String                                                                                                                                                                            |
+| `node_name`                    | Type of input element               | Yes           | [Valid node_name](https://github.com/snowplow/iglu-central/blob/53589a5dd41f2f88cabb359488019e0ebb72ec49/schemas/com.snowplowanalytics.snowplow/change_form/jsonschema/1-0-0#L20) |
+| `value`                        | Value of input element              | Yes           | String                                                                                                                                                                            |
+| `type_`                        | Type of data the element represents | No            | Non-empty string                                                                                                                                                                  |
+| `element_classes`              | Classes of the HTML element         | No            | List(string)                                                                                                                                                                      |
+| `context`                      | Custom context for the event        | No            | List(SelfDescribingJson)                                                                                                                                                          |
+| `tstamp`                       | When the pageview occurred          | No            | Positive integer                                                                                                                                                                  |
+| `event_subject` (since v0.9.0) | The subject for the event           | No            | Subject                                                                                                                                                                           |
 
 Basic example:
 
@@ -467,14 +467,14 @@ t.track_form_change("signupForm", "ageInput", "age", "24", "number", ["signup__n
 
 Use `track_form_submit()` to track sumbitted forms. Arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `form_id` | ID attribute of the HTML form | Yes | Non-empty string |
-| `form_classes` | Classes of the HTML form | No | List(str) |
-| `elements` | Value of input element | No | List(dict) |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the pageview occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**               | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | ----------------------------- | ------------- | ------------------------ |
+| `form_id`                      | ID attribute of the HTML form | Yes           | Non-empty string         |
+| `form_classes`                 | Classes of the HTML form      | No            | List(str)                |
+| `elements`                     | Value of input element        | No            | List(dict)               |
+| `context`                      | Custom context for the event  | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the pageview occurred    | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event     | No            | Subject                  |
 
 Basic example:
 
@@ -492,15 +492,15 @@ t.track_form_submit("signupForm", ["signup__warning"], {"name": "email", "value"
 
 Use `track_site_search()` to track a what user searches on your website. Arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `terms` | Search terms | Yes | List(str) |
-| `filters` | Filters applied to search | No | List(dict{str:str |
-| `total_results` | Total number of results | No | Integer |
-| `page_results` | Number of pages of results | No | Integer |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the pageview occurred | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
+| **Argument**                   | **Description**              | **Required?** | **\*\***Type**\*\***     |
+| ------------------------------ | ---------------------------- | ------------- | ------------------------ |
+| `terms`                        | Search terms                 | Yes           | List(str)                |
+| `filters`                      | Filters applied to search    | No            | List(dict{str:str        |
+| `total_results`                | Total number of results      | No            | Integer                  |
+| `page_results`                 | Number of pages of results   | No            | Integer                  |
+| `context`                      | Custom context for the event | No            | List(SelfDescribingJson) |
+| `tstamp`                       | When the pageview occurred   | No            | Positive integer         |
+| `event_subject` (since v0.9.0) | The subject for the event    | No            | Subject                  |
 
 Basic example:
 

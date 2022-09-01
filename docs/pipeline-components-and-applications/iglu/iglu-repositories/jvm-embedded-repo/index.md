@@ -1,6 +1,6 @@
 ---
-title: "JVM Embedded Repo"
-date: "2021-03-26"
+title: 'JVM Embedded Repo'
+date: '2021-03-26'
 sidebar_position: 5000
 ---
 

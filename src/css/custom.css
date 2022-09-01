@@ -4,9 +4,9 @@
  * work well for content-centric websites.
  */
 
- @font-face {
+@font-face {
   font-family: 'Rubik';
-  src: url('/fonts/Rubik-Regular.ttf') format("truetype");
+  src: url('/fonts/Rubik-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -32,8 +32,8 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-background-color: #F2F4F7;
-  --ifm-color-primary: #6638B8;
+  --ifm-background-color: #f2f4f7;
+  --ifm-color-primary: #6638b8;
   --ifm-color-primary-dark: #522d93;
   --ifm-color-primary-darker: #472781;
   --ifm-color-primary-darkest: #29164a;
@@ -42,7 +42,7 @@
   --ifm-color-primary-lightest: #b198df;
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: 'Roboto', Arial, Helvetica, sans-serif;
-  --ifm-menu-color-active: #6638B8;
+  --ifm-menu-color-active: #6638b8;
   --ifm-font-color-base: #000000;
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
@@ -66,7 +66,7 @@
 }
 
 [data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
-  color: var(  --ifm-font-color-base);
+  color: var(--ifm-font-color-base);
   background: none;
   text-decoration: none;
 }
@@ -115,12 +115,13 @@
   padding-left: 16px;
   padding-right: 16px;
   gap: 8px;
-  background: #F0EBF8;
+  background: #f0ebf8;
   width: auto;
   height: 40px;
-  box-shadow: 0px 1px 2px 0px #1018280D;
-  border: 1px solid #F0EBF8;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.05), 0px 1px 2px rgba(16, 24, 40, 0.05);
+  box-shadow: 0px 1px 2px 0px #1018280d;
+  border: 1px solid #f0ebf8;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.05),
+    0px 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 4px;
 
   font-family: 'Inter';
@@ -135,7 +136,9 @@
   margin-right: 8px;
 }
 
-.navbar__item.snwpl-nav-button:active, .navbar__item.snwpl-nav-button:hover, .navbar__item.snwpl-nav-button:focus {
+.navbar__item.snwpl-nav-button:active,
+.navbar__item.snwpl-nav-button:hover,
+.navbar__item.snwpl-nav-button:focus {
   text-decoration: none;
   background: #e4dcef;
   border-color: #e4dcef;
@@ -145,7 +148,12 @@ p {
   line-height: 24px;
 }
 
-header, h1, h2, h3, h4, h5 {
+header,
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: 'Rubik';
 }
 
@@ -164,18 +172,22 @@ h3 {
 }
 
 .table-of-contents__left-border {
-  border-left-color: #98A2B3;
+  border-left-color: #98a2b3;
 }
 
 .theme-doc-sidebar-item-link-level-1 {
   font-weight: 500;
 }
 
-.theme-doc-sidebar-item-category-level-2, .theme-doc-sidebar-item-link-level-2 {
+.theme-doc-sidebar-item-category-level-2,
+.theme-doc-sidebar-item-link-level-2 {
   font-weight: 400;
 }
 
-.theme-doc-sidebar-item-category-level-3, .theme-doc-sidebar-item-category-level-4, .theme-doc-sidebar-item-link-level-3, .theme-doc-sidebar-item-link-level-4 {
+.theme-doc-sidebar-item-category-level-3,
+.theme-doc-sidebar-item-category-level-4,
+.theme-doc-sidebar-item-link-level-3,
+.theme-doc-sidebar-item-link-level-4 {
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -191,14 +203,14 @@ h3 {
 .breadcrumbs__item .breadcrumbs__link {
   color: var(--ifm-color-primary);
   text-decoration: underline;
-} 
+}
 
 .breadcrumbs__item .breadcrumbs__link:hover {
   text-decoration: underline;
-} 
+}
 
 .breadcrumbs__item--active .breadcrumbs__link {
-  color: var(  --ifm-font-color-base);
+  color: var(--ifm-font-color-base);
   background: none;
   text-decoration: none;
 }

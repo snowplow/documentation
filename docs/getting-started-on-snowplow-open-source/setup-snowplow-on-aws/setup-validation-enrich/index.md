@@ -1,6 +1,6 @@
 ---
-title: "Setup Validation and Enrich"
-date: "2020-02-26"
+title: 'Setup Validation and Enrich'
+date: '2020-02-26'
 sidebar_position: 40
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Resolving data model failures (via Snowplow BDP)"
-date: "2021-05-04"
+title: 'Resolving data model failures (via Snowplow BDP)'
+date: '2021-05-04'
 sidebar_position: 50
 ---
 

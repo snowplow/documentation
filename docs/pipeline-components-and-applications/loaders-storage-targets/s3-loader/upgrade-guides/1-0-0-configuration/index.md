@@ -1,6 +1,6 @@
 ---
-title: "1.0.0 Configuration"
-date: "2021-07-16"
+title: '1.0.0 Configuration'
+date: '2021-07-16'
 sidebar_position: 0
 ---
 
@@ -9,8 +9,8 @@ The sink is configured using a HOCON file. These are the fields:
 - `source`: Choose kinesis or nsq as a source stream
 - `sink`: Choose between kinesis or nsq as a sink stream for failed events
 - `aws.accessKey` and `aws.secretKey`: Change these to your AWS credentials. You can alternatively leave them as "default", in which case the [DefaultAWSCredentialsProviderChain](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html) will be used.
-- `kinesis.initialPosition`: Where to start reading from the stream the first time the app is run. "TRIM\_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT\_TIMESTAMP" for after the specified timestamp.
-- `kinesis.initialTimestamp`: Timestamp for "AT\_TIMESTAMP" initial position
+- `kinesis.initialPosition`: Where to start reading from the stream the first time the app is run. "TRIM_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT_TIMESTAMP" for after the specified timestamp.
+- `kinesis.initialTimestamp`: Timestamp for "AT_TIMESTAMP" initial position
 - `kinesis.maxRecords`: Maximum number of records to read per GetRecords call
 - `kinesis.region`: The Kinesis region name to use.
 - `kinesis.appName`: Unique identifier for the app which ensures that if it is stopped and restarted, it will restart at the correct location.

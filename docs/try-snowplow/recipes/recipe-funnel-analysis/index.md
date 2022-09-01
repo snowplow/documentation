@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: Funnel analysis"
-date: "2021-01-05"
+title: 'Tutorial: Funnel analysis'
+date: '2021-01-05'
 sidebar_position: 20
 ---
 
@@ -36,15 +36,15 @@ Track the `funnel_interaction` event whenever a user completes a given funnel st
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
-   "event": {
-      "schema": "iglu:com.trysnowplow/funnel_interaction/jsonschema/1-0-0",
-      "data": {
-         "funnel_name": "example_funnel_name",
-         "step_name": "example_step_name",
-         "step_position": 1
-      }
-   }
-});
+  event: {
+    schema: 'iglu:com.trysnowplow/funnel_interaction/jsonschema/1-0-0',
+    data: {
+      funnel_name: 'example_funnel_name',
+      step_name: 'example_step_name',
+      step_position: 1,
+    },
+  },
+})
 ```
 
 For example, on the [snowplowanalytics.com website](https://snowplowanalytics.com/), we might consider a home page view as step 1 , a `/get-started/` page view as step 2 and then the submission of the form as step 3. All three steps can be tracked has `funnel _interaction` events. However, the first two funnel steps are already tracked as page views, so we could also just track the form submission as a `funnel_interaction` event and then classify the other two steps in the modeling step below.
@@ -74,7 +74,7 @@ window.snowplow('trackSelfDescribingEvent', {
 -- select all explicitly defined funnel steps (optional)
 CREATE TABLE derived.funnel_step_definitions AS(
 
-    SELECT 
+    SELECT
         funnel_name,
         step_name,
         step_position,
@@ -112,7 +112,7 @@ CREATE TABLE derived.funnel_interactions AS(
     FROM atomic.events AS ev
     INNER JOIN atomic.com_trysnowplow_funnel_interaction_1 AS fi
         ON ev.event_id = fi.root_id AND ev.collector_tstamp = fi.root_tstamp
-    
+
     GROUP BY 1,2,3,4,5,6
 
     UNION

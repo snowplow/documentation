@@ -1,6 +1,6 @@
 ---
-title: "Configuring how events are sent"
-date: "2022-08-30"
+title: 'Configuring how events are sent'
+date: '2022-08-30'
 sidebar_position: 40
 ---
 
@@ -35,7 +35,6 @@ NetworkConfiguration networkConfig = new NetworkConfiguration("http://collector-
 
   </TabItem>
 </Tabs>
-
 
 The URL path for your collector endpoint should include the protocol, "http" or "https". If not included in the URL, "https" connection will be used by default.
 

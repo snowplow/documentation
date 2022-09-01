@@ -1,7 +1,7 @@
 ---
-title: "Tutorial: Setting up Tableau to analyze your Snowplow data"
-description: "How to set up Tableau to analyze your SNowplow data"
-date: "2021-03-26"
+title: 'Tutorial: Setting up Tableau to analyze your Snowplow data'
+description: 'How to set up Tableau to analyze your SNowplow data'
+date: '2021-03-26'
 sidebar_position: 70
 ---
 
@@ -12,7 +12,7 @@ Tableau is a Business Intelligence program, in the mould of Microstrategy or Pen
 Tableau has a number of strengths which account for why we prefer it to other BI tools like Pentaho, mostly around its simplicity and connectivity:
 
 - The user interface is simple and straightforward to use
-- The interface is _fast_. You can setup Tableau workbooks to query the data directly in Redshift, in which case the querying speed is determined by the speed at which Redshift works. (Which is pretty good.) You can also, however, import some or all of the data (depending on the volume you're handling) into Tableau's in-memory engine, in which case analysis is blindingly fast
+- The interface is *fast*. You can setup Tableau workbooks to query the data directly in Redshift, in which case the querying speed is determined by the speed at which Redshift works. (Which is pretty good.) You can also, however, import some or all of the data (depending on the volume you're handling) into Tableau's in-memory engine, in which case analysis is blindingly fast
 - Simple to deploy: Tableau desktop can be employed as a standalone application. You connect to directly to Snowplow data (e.g. in Redshift). There is no need to setup associated servers to manage a data pipeline from Snowplow to Tableau (although Tableau server is available as an option). There is no requirement to manage any metadata around Snowplow. Instead, you grab the Snowplow data directly, and start visualizing it instantly
 
 Like most other BI tools: Tableau has limitations when used outside of traditional OLAP analysis: we do not recommend it for statistical analysis (although it has some basic capabilities) or more bespoke graphs. For this type of capability, we recommend [R](/docs/tutorials/setting-up-r-to-perform-more-sophisticated-analysis-on-your-snowplow-data/index.md).
@@ -69,9 +69,9 @@ We can fetch these details directly from the AWS console. Log into [console.aws
 
 To kick in the tyres, we'll walk through the process of plotting the number of uniques that visit the site over time.
 
-"Uniques" is a metric. (Or in Tableau terminology - a "measure".) If you look in the list of measures in Tableau, you wont see "Uniques": all the fields you'll see are columns in the Snowplow events table where the data type is numeric. In some case, these really are metrics / measures (e.g. "ev\_value", "ti\_quantity", "ti\_price", "tr\_total", "pp\_yoffset\_max", "pp\_yoffset\_min" etc.) In other cases, Tableau has incorrectly assumed that numeric dimensions are measures (e.g. "domain\_sessionidx", "dvce\_screenheight", "page\_urlport", "txn\_id"). We can simply drag those incorrectly classified fields from the "Measures" pane into the "Dimensions" pane.
+"Uniques" is a metric. (Or in Tableau terminology - a "measure".) If you look in the list of measures in Tableau, you wont see "Uniques": all the fields you'll see are columns in the Snowplow events table where the data type is numeric. In some case, these really are metrics / measures (e.g. "ev_value", "ti_quantity", "ti_price", "tr_total", "pp_yoffset_max", "pp_yoffset_min" etc.) In other cases, Tableau has incorrectly assumed that numeric dimensions are measures (e.g. "domain_sessionidx", "dvce_screenheight", "page_urlport", "txn_id"). We can simply drag those incorrectly classified fields from the "Measures" pane into the "Dimensions" pane.
 
-We need to create a "Uniques" measures field. This will be calculated by counting the number of distinct user IDs. (In our example, we're going to count the number of distinct "domain\_userid".) To do this, right click on the "Measures" pane and select "Create calculated field". Name the field "Uniques" and enter the following formula into the formula box:
+We need to create a "Uniques" measures field. This will be calculated by counting the number of distinct user IDs. (In our example, we're going to count the number of distinct "domain_userid".) To do this, right click on the "Measures" pane and select "Create calculated field". Name the field "Uniques" and enter the following formula into the formula box:
 
 ```r
 COUNTD([domain_userid])
@@ -87,11 +87,11 @@ Select OK. The new field appears in the Measures pane. We can now drag it into t
 
 Note that the total number of uniques for our data set shows on the main part of the screen. Tableau reminds us what the number means: in the **Marks** section of the window, **AGG(Uniques)** is listed next to an icon that indicates that this measure is plotted simply as a label.
 
-Now we want to slice the number of uniques by day. To do this, drag the "collector\_tstamp" dimension from the "Dimensions" pane to columns shelf:
+Now we want to slice the number of uniques by day. To do this, drag the "collector_tstamp" dimension from the "Dimensions" pane to columns shelf:
 
 ![](images/10.jpg)
 
-Tableau has assumed we want to plot uniques by year. To change the level of granularity so we plot it by day, hover over the "YEAR(collector\_tstamp)" dimension in the column pane and then click on the dropdown option that appears. Select the 2nd "Day" option in the dropdown to make this change.
+Tableau has assumed we want to plot uniques by year. To change the level of granularity so we plot it by day, hover over the "YEAR(collector_tstamp)" dimension in the column pane and then click on the dropdown option that appears. Select the 2nd "Day" option in the dropdown to make this change.
 
 Now to make the plot a familiar line graph, click on the **Show me** toolbar at the top right. A toolbar appears. Select the line graph image:
 

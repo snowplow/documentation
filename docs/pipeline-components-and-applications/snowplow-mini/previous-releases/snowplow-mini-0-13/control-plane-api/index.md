@@ -1,6 +1,6 @@
 ---
-title: "Control Plane API"
-date: "2022-04-25"
+title: 'Control Plane API'
+date: '2022-04-25'
 sidebar_position: 0
 ---
 

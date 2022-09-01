@@ -1,6 +1,6 @@
 ---
-title: "Tracking events"
-date: "2022-08-30"
+title: 'Tracking events'
+date: '2022-08-30'
 sidebar_position: 10
 ---
 
@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-To track an event, pass an event to the tracker instance. 
+To track an event, pass an event to the tracker instance.
 
 For example, tracking a ScreenView:
 
@@ -27,14 +27,14 @@ let eventId = tracker.track(event)
   <TabItem value="android" label="Android">
 
 ```java
-ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());         
+ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());
 tracker.track(event);
 ```
 
   </TabItem>
 </Tabs>
 
-The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types as well as fully custom events. 
+The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types as well as fully custom events.
 
 Each event can bring context which is composed by entities. The tracker attaches entities to the events based on the configuration, but you can attach your own custom entities as well.
 
@@ -44,12 +44,12 @@ Every tracked event payload has a unique `event_id` UUID string set by the track
 
 Automatically captured data are:
 
-* **Platform and Application Context Tracking**: Captures contextual information about the device and the app.
-* **Session Tracking**: Captures the session which helps to keep track of the user activity in the app.
-* **App Lifecycle Tracking**: Captures application lifecycle state changes (foreground/background transitions).
-* **Screen View Tracking**: Captures each time a new “screen” is loaded.
-* **Exception Tracking**: Captures any unhandled exceptions within the application.
-* **Installation Tracking**: Captures an install event which occurs the first time an application is opened.
+- **Platform and Application Context Tracking**: Captures contextual information about the device and the app.
+- **Session Tracking**: Captures the session which helps to keep track of the user activity in the app.
+- **App Lifecycle Tracking**: Captures application lifecycle state changes (foreground/background transitions).
+- **Screen View Tracking**: Captures each time a new “screen” is loaded.
+- **Exception Tracking**: Captures any unhandled exceptions within the application.
+- **Installation Tracking**: Captures an install event which occurs the first time an application is opened.
 
 Autotracking can be enabled in the tracker configuration. In this example, some helpful automatic entities and all autotracking is enabled:
 
@@ -125,7 +125,6 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration()
 
   </TabItem>
 </Tabs>
-
 
 More details on [Subject](../client-side-properties/index.md)
 
@@ -234,7 +233,7 @@ For instance, with this configuration:
 SessionConfiguration(
     foregroundTimeout: Measurement(value: 360, unit: .seconds),
     backgroundTimeout: Measurement(value: 15, unit: .seconds)
-)       
+)
 ```
 
   </TabItem>
@@ -404,6 +403,7 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration()
 
 The tracker provides classes for tracking different types of events.
 The events are divided in two groups: canonical events and self-describing events.
+
 <!-- You can read more about the difference between the two [here](TODO) -->
 
 ### Creating a Structured event
@@ -449,7 +449,7 @@ Use the `Timing` events to track user timing events such as how long resources t
 
 ```swift
 let event = Timing(category: "timing-category", variable: "timing-variable", timing: 5)
-    .label("optional-label")       
+    .label("optional-label")
 
 tracker.track(event)
 ```
@@ -506,10 +506,10 @@ Use the `ConsentGranted` event to track a user opting into data collection. A co
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")       
+let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
@@ -540,10 +540,10 @@ Use the `ConsentWithdrawn` event to track a user withdrawing consent for data co
 let event = ConsentWithdrawn()
     .all(true)
     .documentId("1234abcd")
-    .version("1.2")       
+    .version("1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
@@ -564,6 +564,7 @@ tracker.track(event);
 See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_consent_withdrawn.html).
 
 ### Tracking Ecommerce Transactions
+
 <!-- (TODO: Section to remove) -->
 
 Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three steps that can be used together to track online transactions:
@@ -578,14 +579,14 @@ Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three 
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let transactionID = "6a8078be"       
-                
-let itemArray = [       
+let transactionID = "6a8078be"
+
+let itemArray = [
   EcommerceItem(sku: "DemoItemSku", price: 0.75, quantity: 1)
-    .name("DemoItemName")       
-    .category("DemoItemCategory")       
-    .currency("USD")       
-]       
+    .name("DemoItemName")
+    .category("DemoItemCategory")
+    .currency("USD")
+]
 
 let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
     .affiliation("DemoTransactionAffiliation")
@@ -778,7 +779,7 @@ All events also provide the option for setting a custom timestamp, called `trueT
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `Event` in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538). 
+Every `Event` in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
 
 A `trueTimestamp` can be added to any event using the `trueTimestamp()` method:
 

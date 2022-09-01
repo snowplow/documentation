@@ -1,6 +1,6 @@
 ---
-title: "Emitters"
-date: "2020-02-26"
+title: 'Emitters'
+date: '2020-02-26'
 sidebar_position: 50
 ---
 
@@ -14,18 +14,18 @@ emitter := sp.InitEmitter(RequireCollectorUri("com.acme"))
 
 There are other optional builder functions:
 
-| **Function Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `RequireCollectorUri` | The URI to send events to | Yes | `nil` |
-| `OptionRequestType` | The request type to use (GET or POST) | No | `POST` |
-| `OptionProtocol` | The protocol to use (http or https) | No | `http` |
-| `OptionSendLimit` | The maximum amount of events to send at a time | No | `500` |
-| `OptionByteLimitGet` | The byte limit when sending a GET request | No | `40000` |
-| `OptionByteLimitPost` | The byte limit when sending a POST request | No | `40000` |
-| `OptionDbName` | Defines the path and file name of the database | No | `events.db` |
-| `OptionStorage` | Use a custom Storage target | No | `nil` |
-| `OptionCallback` | Defines a custom callback function | No | `nil` |
-| `OptionHttpClient` | A custom HTTP client | No | `&Client{}` |
+| **Function Name**     | **Description**                                | **Required?** | **Default** |
+| --------------------- | ---------------------------------------------- | ------------- | ----------- |
+| `RequireCollectorUri` | The URI to send events to                      | Yes           | `nil`       |
+| `OptionRequestType`   | The request type to use (GET or POST)          | No            | `POST`      |
+| `OptionProtocol`      | The protocol to use (http or https)            | No            | `http`      |
+| `OptionSendLimit`     | The maximum amount of events to send at a time | No            | `500`       |
+| `OptionByteLimitGet`  | The byte limit when sending a GET request      | No            | `40000`     |
+| `OptionByteLimitPost` | The byte limit when sending a POST request     | No            | `40000`     |
+| `OptionDbName`        | Defines the path and file name of the database | No            | `events.db` |
+| `OptionStorage`       | Use a custom Storage target                    | No            | `nil`       |
+| `OptionCallback`      | Defines a custom callback function             | No            | `nil`       |
+| `OptionHttpClient`    | A custom HTTP client                           | No            | `&Client{}` |
 
 A more complete example:
 
@@ -91,7 +91,7 @@ Once the emitter receives an event from the Tracker a few things start to happen
 - A long running go routine is started which will continue to send events as long as they can be found in the database (asynchronous)
 - The emitter loop will grab a range of events from the database up until the `SendLimit` as noted \__above_
 - The emitter will send all of these events as determined by the Request, Protocol and ByteLimits
-    - Each request is sent in its own go routine.
+  - Each request is sent in its own go routine.
 - Once sent it will process the results of all the requests sent and will remove all successfully sent events from the database
 
 **IF** all of the requests failed this loop is terminated eagerly; this is seen as a network failure so attempting to send is a waste of resources. **IF** there are no more events in the database the loop is terminated.

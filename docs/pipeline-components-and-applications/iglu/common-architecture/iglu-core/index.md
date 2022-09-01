@@ -1,6 +1,6 @@
 ---
-title: "Iglu Core"
-date: "2021-03-26"
+title: 'Iglu Core'
+date: '2021-03-26'
 sidebar_position: 120
 ---
 
@@ -22,7 +22,7 @@ More information can be found in [Self-describing JSON Schemas](/docs/pipeline-
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemamap)SchemaMap
 
-This is almost isomorphic entity to `SchemaKey`, which also contains same information: vendor, name, format and version. But unlike `SchemaKey` it supposed to be attached only to Schemas instead of datums. In schemas same information usually has different representation and also version is always _full_ opposed to datum's possibly _partial_.
+This is almost isomorphic entity to `SchemaKey`, which also contains same information: vendor, name, format and version. But unlike `SchemaKey` it supposed to be attached only to Schemas instead of datums. In schemas same information usually has different representation and also version is always *full* opposed to datum's possibly *partial*.
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemaver)SchemaVer
 
@@ -30,13 +30,13 @@ This is a part of `SchemaKey` and `SchemaMap` with information about semanti
 
 Like, `SchemaKey` it should contain `parse` function with regular expressions as well as `asString` method.
 
-It can either _full_ (e.g. `1-2-0`) or _partial_ (e.g. `1-?-?`) suited for schema inference.
+It can either *full* (e.g. `1-2-0`) or *partial* (e.g. `1-?-?`) suited for schema inference.
 
 More information can be found in dedicated wiki page: [SchemaVer](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/index.md).
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemacriterion)SchemaCriterion
 
-Last core data structure is `SchemaCriterion` which is a default way to filter Self-describing entities. Basically it represent `SchemaKey` divided into six parts, where last three (MODEL, REVISION, ADDITION) _can_ be unfilled, thus one can match all entities regardless parts which remain unfilled.
+Last core data structure is `SchemaCriterion` which is a default way to filter Self-describing entities. Basically it represent `SchemaKey` divided into six parts, where last three (MODEL, REVISION, ADDITION) *can* be unfilled, thus one can match all entities regardless parts which remain unfilled.
 
 `SchemaCriterion` also must contain regular expression, `parse` and `asString` (unfilled parts replaced with asterisks) functions. One other required function is `matches` which accepts `SchemaCriterion` and `SchemaKey` and returning boolean value indicating if key was matched. Bear in mind that criterions matching versions like `.../*-1-*` or `.../*-*-0` are absolutely valid, they're useful if want to match all initial Schemas.
 

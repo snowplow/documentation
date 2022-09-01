@@ -1,6 +1,6 @@
 ---
-title: "Analytics SDK - JavaScript"
-date: "2021-10-18"
+title: 'Analytics SDK - JavaScript'
+date: '2021-10-18'
 sidebar_position: 200
 ---
 

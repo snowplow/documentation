@@ -1,6 +1,6 @@
 ---
-title: "Stream transformer"
-date: "2022-04-04"
+title: 'Stream transformer'
+date: '2022-04-04'
 sidebar_position: 20
 ---
 

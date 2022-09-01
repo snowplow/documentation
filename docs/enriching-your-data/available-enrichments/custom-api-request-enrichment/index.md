@@ -1,6 +1,6 @@
 ---
-title: "Custom API Request enrichment"
-date: "2020-02-14"
+title: 'Custom API Request enrichment'
+date: '2020-02-14'
 sidebar_position: 12
 ---
 
@@ -71,7 +71,7 @@ If your API is unsecured (because for example it is only accessible from inside 
 
 #### [](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment#outputs)`outputs`
 
-This enrichment assumes that your API returns a JSON, which will contain one or more _entities_ that you want to add to your event as derived contexts. Within the `outputs` array, each entry is a `json` sub-object that contains a `jsonPath` configuration field that lets you specify which part of the returned JSON you want to add to your enriched event. `$` can be used if you want to attach returned JSON as is.
+This enrichment assumes that your API returns a JSON, which will contain one or more *entities* that you want to add to your event as derived contexts. Within the `outputs` array, each entry is a `json` sub-object that contains a `jsonPath` configuration field that lets you specify which part of the returned JSON you want to add to your enriched event. `$` can be used if you want to attach returned JSON as is.
 
 If the JSON Path specified cannot be not found within the API's returned JSON, then the lookup (and thus the overall event) will be flagged as a failure.
 

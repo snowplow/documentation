@@ -1,6 +1,6 @@
 ---
-title: "Tracker Setup"
-date: "2020-02-21"
+title: 'Tracker Setup'
+date: '2020-02-21'
 sidebar_position: 30
 ---
 

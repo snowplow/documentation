@@ -1,6 +1,6 @@
 ---
-title: "Geolocation"
-date: "2021-04-07"
+title: 'Geolocation'
+date: '2021-04-07'
 sidebar_position: 11000
 ---
 
@@ -15,21 +15,24 @@ If this plugin is enabled, the tracker will attempt to create a context from the
 ## Installation
 
 - `npm install @snowplow/browser-plugin-geolocation`
-- ``yarn add @snowplow/browser-plugin-`geolocation` ``
-- ``pnpm add @snowplow/browser-plugin-`geolocation` ``
+- `` yarn add @snowplow/browser-plugin-`geolocation`  ``
+- `` pnpm add @snowplow/browser-plugin-`geolocation`  ``
 
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { GeolocationPlugin, enableGeolocationContext } from '@snowplow/browser-plugin-geolocation';
+import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import {
+  GeolocationPlugin,
+  enableGeolocationContext,
+} from '@snowplow/browser-plugin-geolocation'
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ GeolocationPlugin() ],
-});
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
+  plugins: [GeolocationPlugin()],
+})
 
-enableGeolocationContext();
+enableGeolocationContext()
 ```
 
 ### Functions
@@ -40,6 +43,6 @@ enableGeolocationContext();
 
 Adding this plugin will automatically capture the following context:
 
-| Context                                                                                                                                                                                                       | Example                                           |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-| [iglu:com.snowplowanalytics.snowplow/geolocation\_context/jsonschema/1-1-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) | ![](images/Screenshot-2021-03-30-at-22.25.13.png) |
+| Context                                                                                                                                                                                                      | Example                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| [iglu:com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) | ![](images/Screenshot-2021-03-30-at-22.25.13.png) |

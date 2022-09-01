@@ -1,6 +1,6 @@
 ---
-title: "Schema Resolution"
-date: "2021-03-26"
+title: 'Schema Resolution'
+date: '2021-03-26'
 sidebar_position: 400
 ---
 
@@ -18,7 +18,7 @@ Resolver is an primary object of Iglu Client library, which contains all logic n
 
 ### [](https://github.com/snowplow/iglu/wiki/Schema-resolution#12-registries)1.2 Registries
 
-**NOTE:** term _repository_ was deprecated. _Registry_ is default term to use when referring to Schema storage. So far, we've not renamed all occurrences, so for now they can be used interchangeable.
+**NOTE:** term *repository* was deprecated. *Registry* is default term to use when referring to Schema storage. So far, we've not renamed all occurrences, so for now they can be used interchangeable.
 
 Each registry in resolver configuration has several values common for all types of registries, such as `name`, `vendorPrefixes` and `priority`. Also each registry has type, which is defined inside `connection` property. The only one important thing here about type of repository is that each type has its own priority hardcoded inside client library. Below we'll refer to this hard-coded priority by `classPriority` and to user-defined priority by `instancePriority` Usually, the "safer" registry - the higher `classPriority` it has, so local repositories are more preferable than remote.
 
@@ -28,7 +28,7 @@ All Iglu clients use internal cache to store registry responses. By virtue of it
 
 #### [](https://github.com/snowplow/iglu/wiki/Schema-resolution#131-cache-algorithm)1.3.1 Cache algorithm
 
-Cache stores not just plain Schemas, but information about responses from each registry. It allows us to make different decisions depending on what exactly went wrong with particular request. Since Schema was successfuly fetched it will be stored until moment it get evicted by [LRU cache](https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_(LRU)) algorithm. This eviction it turn happens only if cache map reached its limit (defined in `cacheSize`) and particular Schema wasn't requested for longer time than all other.
+Cache stores not just plain Schemas, but information about responses from each registry. It allows us to make different decisions depending on what exactly went wrong with particular request. Since Schema was successfuly fetched it will be stored until moment it get evicted by [LRU cache](<https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_(LRU)>) algorithm. This eviction it turn happens only if cache map reached its limit (defined in `cacheSize`) and particular Schema wasn't requested for longer time than all other.
 
 #### [](https://github.com/snowplow/iglu/wiki/Schema-resolution#132-cache-ttl)1.3.2 Cache TTL
 

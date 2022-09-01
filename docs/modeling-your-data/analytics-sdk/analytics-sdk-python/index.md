@@ -1,6 +1,6 @@
 ---
-title: "Analytics SDK - Python"
-date: "2020-11-03"
+title: 'Analytics SDK - Python'
+date: '2020-11-03'
 sidebar_position: 400
 ---
 
@@ -42,9 +42,9 @@ To add the Snowplow Analytics SDK as a dependency to your own Python app, edit y
 snowplow_analytics_sdk==0.2.3
 ```
 
-### 3.3 easy\_install
+### 3.3 easy_install
 
-If you are still using easy\_install:
+If you are still using easy_install:
 
 ```
 $ easy_install -U snowplow_analytics_sdk

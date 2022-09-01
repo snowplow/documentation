@@ -1,6 +1,6 @@
 ---
-title: "Advanced usage"
-date: "2021-08-09"
+title: 'Advanced usage'
+date: '2021-08-09'
 sidebar_position: 40
 ---
 
@@ -9,13 +9,6 @@ sidebar_position: 40
 [![Latest tracker version](https://img.shields.io/npm/v/@snowplow/react-native-tracker)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
 [![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
-
-  
-  
-  
-  
-  
-  
 
 ## Getting session data from the tracker
 
@@ -145,7 +138,7 @@ If you want to track the IDFA you need to follow the guidelines of [AppTrackingT
 
 - Add and follow the guidelines of [AppTrackingTransparency](https://developer.apple.com/documentation/apptrackingtransparency?language=objc) framework in your app.
 - Add `AdSupport` framework to your app. If it’s not added the tracker will not send the IDFA with the events.
-- Again, use a post\_install script in your app's Podfile to pass the `SNOWPLOW_IDFA_ENABLED=1` preprocessor definition to the underlying iOS Tracker
+- Again, use a post_install script in your app's Podfile to pass the `SNOWPLOW_IDFA_ENABLED=1` preprocessor definition to the underlying iOS Tracker
 
 ```
 # ios/Podfile

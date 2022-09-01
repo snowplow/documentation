@@ -1,6 +1,6 @@
 ---
-title: "Custom SQL enrichment"
-date: "2020-02-14"
+title: 'Custom SQL enrichment'
+date: '2020-02-14'
 sidebar_position: 11
 ---
 
@@ -271,7 +271,7 @@ This single context would be added to the `derived_contexts` array:
     {
       "SKU": "456",
       "prod_name": "Ray-Bans"
-    }    
+    }
   ]
 }
 ```

@@ -1,6 +1,6 @@
 ---
-title: "Verify schema dependencies with the Data Structures CI tool"
-date: "2020-06-01"
+title: 'Verify schema dependencies with the Data Structures CI tool'
+date: '2020-06-01'
 sidebar_position: 2000
 ---
 
@@ -77,7 +77,7 @@ jobs:
       with:
         organization-id: ${{ secrets.SNOWPLOW_ORG_ID }}
         api-key: ${{ secrets.SNOWPLOW_API_KEY }}
-        manifest-path: 'snowplow-schemas.json'            
+        manifest-path: 'snowplow-schemas.json'
         environment: ${{ env.ENVIRONMENT }}
 ```
 

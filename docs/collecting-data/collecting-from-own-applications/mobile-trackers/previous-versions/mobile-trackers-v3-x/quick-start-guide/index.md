@@ -1,6 +1,6 @@
 ---
-title: "Quick Start Guide"
-date: "2021-11-23"
+title: 'Quick Start Guide'
+date: '2021-11-23'
 sidebar_position: 20
 ---
 
@@ -28,30 +28,26 @@ To install Snowplow Tracker with SPM:
 To install Snowplow Tracker with Cocoapods:
 
 1. Make sure that Cocoapods is installed on your system and correctly configured for your app.
-    
 2. Add the iOS Tracker SDK among the dependencies of your `Podfile`:
-    
-    ```ruby
-    pod 'SnowplowTracker', '~> 3.0'
-    ```
-    
+
+   ```ruby
+   pod 'SnowplowTracker', '~> 3.0'
+   ```
+
 3. Run the command `pod install` to add the tracker to your app project.
-    
 
 **Carthage**
 
 To install Snowplow Tracker with Carthage:
 
 1. Make sure that Carthage is installed on your system and correctly configured for your app.
-    
 2. Add the iOS Tracker SDK among the dependencies of your `Cartfile`:
-    
-    ```ruby
-    github "snowplow/snowplow-objc-tracker" ~> 3.0
-    ```
-    
+
+   ```ruby
+   github "snowplow/snowplow-objc-tracker" ~> 3.0
+   ```
+
 3. Run the command `carthage update` and drag the appropriate frameworks from the `Carthage/build` folder to your app project.
-    
 
 **Supported System Version**
 
@@ -62,35 +58,30 @@ The iOS Tracker SDK supports **iOS 9.0+**, **macOS 10.9+**, **tvOS 9.0+** and **
 Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker:
 
 1. In your application delegate `AppDelegate.swift` add `import SnowplowTracker`.
-    
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
-    
-    ```swift
-    let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: COLLECTOR_URL, method: .post)
-    ```
-    
+
+   ```swift
+   let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: COLLECTOR_URL, method: .post)
+   ```
+
 3. It creates a tracker instance which can be used to track events like this:
-    
-    ```swift
-    let event = Structured(category: "Category_example", action: "Action_example")
-    tracker.track(event)
-    ```
-    
-    If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
-    
-    ```swift
-    Snowplow.defaultTracker().track(event)
-    ```
-    
+
+   ```swift
+   let event = Structured(category: "Category_example", action: "Action_example")
+   tracker.track(event)
+   ```
+
+   If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
+
+   ```swift
+   Snowplow.defaultTracker().track(event)
+   ```
 
 The tracker has a default configuration where some settings are enabled by default:
 
 - session tracking
-    
 - screen tracking
-    
 - platform contexts (mobile specific context fields)
-    
 
 You can override the default configuration with a fine grained configuration when you create the tracker:
 
@@ -109,7 +100,7 @@ let trackerConfig = TrackerConfiguration()
 let sessionConfig = SessionConfiguration(
     foregroundTimeout: Measurement(value: 30, unit: .minutes),
     backgroundTimeout: Measurement(value: 30, unit: .minutes)
-)       
+)
 Snowplow.createTracker(
     namespace: "appTracker",
     network: networkConfig,
@@ -148,33 +139,29 @@ The Android Tracker SDK supports Android 5 (**API level 21+**)
 Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker:
 
 1. In your `Application` subclass, set up the SDK as follows:
-    
-    ```java
-    TrackerController tracker = Snowplow.createTracker(context, "appTracker", COLLECTOR_URL, HttpMethod.POST);
-    ```
-    
+
+   ```java
+   TrackerController tracker = Snowplow.createTracker(context, "appTracker", COLLECTOR_URL, HttpMethod.POST);
+   ```
+
 2. It creates a tracker instance which can be used to track events like this:
-    
-    ```java
-    Event event = new Structured("Category_example", "Action_example");
-    tracker.track(event);
-    ```
-    
-    If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
-    
-    ```java
-    Snowplow.getDefaultTracker().track(event);
-    ```
-    
+
+   ```java
+   Event event = new Structured("Category_example", "Action_example");
+   tracker.track(event);
+   ```
+
+   If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
+
+   ```java
+   Snowplow.getDefaultTracker().track(event);
+   ```
 
 The tracker has a default configuration where some settings are enabled by default:
 
 - session tracking
-    
 - screen tracking
-    
 - platform contexts (mobile specific context fields)
-    
 
 You can override the default configuration with a fine grained configuration when you create the tracker:
 

@@ -1,6 +1,6 @@
 ---
-title: "(deprecated) Beam Enrich"
-date: "2020-11-09"
+title: '(deprecated) Beam Enrich'
+date: '2020-11-09'
 sidebar_position: 0
 ---
 

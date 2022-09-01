@@ -1,6 +1,6 @@
 ---
-title: "Setup guide for GCP"
-date: "2020-04-03"
+title: 'Setup guide for GCP'
+date: '2020-04-03'
 sidebar_position: 20
 ---
 
@@ -52,8 +52,8 @@ https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-6-2-large-156292973
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
 
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
+| L / 2 vCPUs                                                                                                                                                                          | XL / 4 vCPUs                                                                                                                                                                           | XXL / 8 vCPUs                                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-6-2-large-1562929733.tar.gz](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-6-2-large-1562929733.tar.gz) | [https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-6-2-xlarge-1562930646.tar.gz](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-6-2-xlarge-1562930646.tar.gz) | [https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-6-2-xxlarge-1562931663.tar.gz](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-6-2-xxlarge-1562931663.tar.gz) |
 
 You can find more about `gcloud compute images create` command [here](https://cloud.google.com/sdk/gcloud/reference/compute/images/create) for additional parameters.

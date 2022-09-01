@@ -1,6 +1,6 @@
 ---
-title: "Update the search path for your Redshift cluster"
-date: "2020-02-26"
+title: 'Update the search path for your Redshift cluster'
+date: '2020-02-26'
 sidebar_position: 20
 ---
 
@@ -16,7 +16,7 @@ Now open up your parameter group, by clicking on the magnifying glass icon next 
 
 ![](images/redshift-search-path-2.png)
 
-Update the **search\_path** section to read the following:
+Update the **search_path** section to read the following:
 
 ```text
 atomic,  derived

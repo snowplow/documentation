@@ -1,6 +1,6 @@
 ---
-title: "Concepts"
-date: "2020-04-15"
+title: 'Concepts'
+date: '2020-04-15'
 sidebar_position: 0
 ---
 

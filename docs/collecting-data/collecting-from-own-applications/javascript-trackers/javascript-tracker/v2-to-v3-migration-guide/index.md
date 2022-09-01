@@ -1,6 +1,6 @@
 ---
-title: "Migrating from v2 to v3"
-date: "2021-03-24"
+title: 'Migrating from v2 to v3'
+date: '2021-03-24'
 sidebar_position: 1200
 ---
 
@@ -58,7 +58,7 @@ All references to `whitelist` and `blacklist` have been removed in Link Click tr
 For example, in v2 you would specify:
 
 ```
-window.snowplow('enableLinkClickTracking', 
+window.snowplow('enableLinkClickTracking',
   { blacklist: ['exclude'] },
   true,
   true,
@@ -143,8 +143,8 @@ We also now publish a much smaller version of the JavaScript Tracker, called `sp
 Included in `sp.lite.js` is: Page View, Self Describing and Structured Event tracking as well as Activity Tracking and Anonymous Tracking. All other features can be loaded as separate plugins. So if you wanted sp.lite.js with Form tracking, you could do this:
 
 ```
-<script type="text/javascript" async=1> 
-;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[]; p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments) };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1; n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","https://cdn.jsdelivr.net/npm/@snowplow/javascript-tracker@3.0.0-beta.4/dist/sp.lite.js","snowplow")); 
+<script type="text/javascript" async=1>
+;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[]; p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments) };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1; n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","https://cdn.jsdelivr.net/npm/@snowplow/javascript-tracker@3.0.0-beta.4/dist/sp.lite.js","snowplow"));
 
 window.snowplow('newTracker', 'sp', {});
 window.snowplow('addPlugin', 'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-form-tracking@3.0.0/dist/index.umd.min.js', ['snowplowFormTracking', 'FormTrackingPlugin']);
@@ -160,7 +160,7 @@ To do this, you'll need to install [git](https://git-scm.com/) and [Node.js](htt
 
 ```
 $ git clone https://github.com/snowplow/snowplow-javascript-tracker.git
-$ npm install -g @microsoft/rush 
+$ npm install -g @microsoft/rush
 $ rush update
 ```
 

@@ -1,6 +1,6 @@
 ---
-title: "Structuring your data with schemas"
-date: "2020-02-13"
+title: 'Structuring your data with schemas'
+date: '2020-02-13'
 sidebar_position: 10
 ---
 
@@ -46,7 +46,7 @@ Let’s take a look at an example JSON schema to talk about its constituent part
       "maxLength": 128
     },
     "job_role": {
-      "description": 
+      "description":
       "type": [
         "string",
         "null"

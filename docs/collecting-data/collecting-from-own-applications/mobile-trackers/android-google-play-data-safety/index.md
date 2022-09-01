@@ -1,6 +1,6 @@
 ---
-title: "Android - Google Play Data Safety"
-date: "2021-11-24"
+title: 'Android - Google Play Data Safety'
+date: '2021-11-24'
 sidebar_position: 500
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "UA parser enrichment"
-date: "2020-02-14"
+title: 'UA parser enrichment'
+date: '2020-02-14'
 sidebar_position: 1
 ---
 
@@ -24,7 +24,7 @@ This enrichment uses the field `useragent`.
 This enrichment adds a new context to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ua_parser_context/jsonschema/1-0-0).
 
 | Field               | Description                          |
-|---------------------|--------------------------------------|
+| ------------------- | ------------------------------------ |
 | `useragent_family`  | Useragent family (browser) name      |
 | `useragent_major`   | Useragent major version              |
 | `useragent_minor`   | Useragent minor version              |
@@ -46,17 +46,17 @@ Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.
 
 would be parsed with the following result:
 
-| PARAMETER         | VALUE     |
-|-------------------|-----------|
-| useragent\_family | Chrome    |
-| useragent\_major  | 48        |
-| useragent\_minor  | \-        |
-| useragent\_patch  | 2564      |
-| os\_family        | Windows 7 |
-| os\_major         | \-        |
-| os\_minor         | \-        |
-| os\_patch\_minor  | \-        |
-| os\_version       | Windows 7 |
-| device\_family    | Computer  |
+| PARAMETER        | VALUE     |
+| ---------------- | --------- |
+| useragent_family | Chrome    |
+| useragent_major  | 48        |
+| useragent_minor  | \-        |
+| useragent_patch  | 2564      |
+| os_family        | Windows 7 |
+| os_major         | \-        |
+| os_minor         | \-        |
+| os_patch_minor   | \-        |
+| os_version       | Windows 7 |
+| device_family    | Computer  |
 
 _\*empty values denoted by “-“_

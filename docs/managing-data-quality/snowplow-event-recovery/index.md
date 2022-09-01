@@ -1,6 +1,6 @@
 ---
-title: "Event Recovery for Open Source"
-date: "2020-03-02"
+title: 'Event Recovery for Open Source'
+date: '2020-03-02'
 sidebar_position: 40
 ---
 

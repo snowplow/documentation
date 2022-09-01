@@ -1,6 +1,6 @@
 ---
-title: "Tracking Events"
-date: "2021-06-11"
+title: 'Tracking Events'
+date: '2021-06-11'
 sidebar_position: 3000
 ---
 
@@ -19,13 +19,13 @@ The mobile trackers capture two types of events, automatically captured and manu
 Automatically captured events in the iOS Tracker are:
 
 - App Lifecycle Tracking
-    - Captures application foreground and application background events
+  - Captures application foreground and application background events
 - Screen View Tracking
-    - Captures each time a new "screen" is loaded
+  - Captures each time a new "screen" is loaded
 - Exception Tracking
-    - Captures any unhandled exceptions within the application
+  - Captures any unhandled exceptions within the application
 - Installation Tracking
-    - Captures an install event which occurs the first time an application is opened
+  - Captures an install event which occurs the first time an application is opened
 
 These are enabled in the tracker configuration. In this example, some helpful automatic contexts and all Autotracking is enabled:
 
@@ -85,9 +85,9 @@ event.contexts.add(
         andDictionary: [
              "screenType": "test",
              "lastUpdated": "2021-06-11"
-        ])!)     
+        ])!)
 event.contexts.add(
-    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0", 
+    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0",
         andDictionary: [
              "userType": "tester"
         ])!)
@@ -106,8 +106,8 @@ You may wish to track events in your app which are not directly supported by Sno
 To define your own custom event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
 ```
-let data = ["targetUrl": "http://a-target-url.com" as NSObject];       
-let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)       
+let data = ["targetUrl": "http://a-target-url.com" as NSObject];
+let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
 
 tracker.track(event)
 ```
@@ -138,7 +138,7 @@ Use the `Timing` events to track user timing events such as how long resources
 
 ```
 let event = Timing(category: "timing-category", variable: "timing-variable", timing: 5)
-    .label("optional-label")       
+    .label("optional-label")
 
 tracker.track(event)
 ```
@@ -160,10 +160,10 @@ tracker.track(event)
 Use the `ConsentGranted` event to track a user opting into data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied.
 
 ```
-let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")       
+let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
@@ -175,10 +175,10 @@ Use the `ConsentWithdrawn` event to track a user withdrawing consent for data 
 let event = ConsentWithdrawn()
     .all(true)
     .documentId("1234abcd")
-    .version("1.2")       
+    .version("1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
@@ -191,16 +191,16 @@ Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three 
 3. **Submit the transaction to Snowplow** using the track() method, once all the relevant data has been loaded into the object.
 
 ```
-let transactionID = "6a8078be"       
-                
-let itemArray = [       
+let transactionID = "6a8078be"
+
+let itemArray = [
   EcommerceItem(sku: "DemoItemSku", price: 0.75, quantity: 1)
-    .name("DemoItemName")       
-    .category("DemoItemCategory")       
-    .currency("USD")       
-]       
-                
-let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)   
+    .name("DemoItemName")
+    .category("DemoItemCategory")
+    .currency("USD")
+]
+
+let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
     .affiliation("DemoTransactionAffiliation")
     .taxValue(10)
     .shipping(15)
@@ -217,8 +217,8 @@ tracker.track(event)
 To track an event when a push notification is used, it is possible to use the `PushNotification` event which contains a `NotificationContent` object:
 
 ```
-let attachments = [["identifier": "testidentifier",       
-                    "url": "testurl",       
+let attachments = [["identifier": "testidentifier",
+                    "url": "testurl",
                     "type": "testtype"]]
 
 var userInfo = Dictionary<String, Any>()
@@ -231,12 +231,12 @@ let content = NotificationContent(title: "title", body: "body", badge: 5)
     .userInfo(userInfo)
     .attachments(attachments)
 
-let event = PushNotification(       
-    date: "date",       
-    action: "action",       
-    trigger: "PUSH",       
-    category: "category",       
-    thread: "thread",       
+let event = PushNotification(
+    date: "date",
+    action: "action",
+    trigger: "PUSH",
+    category: "category",
+    thread: "thread",
     notification: content)
 
 tracker.track(event)
@@ -252,18 +252,18 @@ The mobile trackers capture two types of events, automatically captured and manu
 Automatically captured events in the iOS Tracker are:
 
 - App Lifecycle Tracking
-    - Captures application foreground and application background events
+  - Captures application foreground and application background events
 - Screen View Tracking
-    - Captures each time a new "screen" is loaded
+  - Captures each time a new "screen" is loaded
 - Exception Tracking
-    - Captures any unhandled exceptions within the application
+  - Captures any unhandled exceptions within the application
 - Installation Tracking
-    - Captures an install event which occurs the first time an application is opened
+  - Captures an install event which occurs the first time an application is opened
 
 These are enabled in the tracker configuration. In this example, some helpful automatic contexts and all Autotracking is enabled:
 
 ```
-TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)       
+TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)
     .sessionContext(true)
     .platformContext(true)
     .applicationContext(true)
@@ -312,10 +312,10 @@ and the other describes a user on that screen:
 How to track a **screen view** with both of these contexts attached:
 
 ```
-ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());         
+ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());
 
 event.customContexts.add(
-    new SelfDescribingJson("iglu:com.example/screen/jsonschema/1-2-1",                         
+    new SelfDescribingJson("iglu:com.example/screen/jsonschema/1-2-1",
         new HashMap<String, String>() {{
             put("screenType", "test");
             put("lastUpdated", "2021-06-11");
@@ -323,7 +323,7 @@ event.customContexts.add(
 );
 
 event.customContexts.add(
-    new SelfDescribingJson("iglu:com.example/user/jsonschema/2-0-0",                         
+    new SelfDescribingJson("iglu:com.example/user/jsonschema/2-0-0",
         new HashMap<String, String>() {{
             put("userType", "tester");
         }})
@@ -379,7 +379,7 @@ Use the `Timing` events to track user timing events such as how long resources
 ```
 Timing event = new Timing("timing-category", "timing-variable", 5)
     .label("optional-label");
-                
+
 tracker.track(event);
 ```
 

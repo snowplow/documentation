@@ -1,6 +1,6 @@
 ---
-title: "Managing multiple trackers"
-date: "2020-03-03"
+title: 'Managing multiple trackers'
+date: '2020-03-03'
 sidebar_position: 40
 ---
 
@@ -35,7 +35,7 @@ snowplow('trackStructEvent', 'Mixes', 'Play', 'MrC/fabric-0503-mix', '', '0.0');
 snowplow('trackStructEvent:sp1', 'Mixes', 'Play', 'MrC/fabric-0503-mix', '', '0.0');
 
 // Only the second tracker will fire this self-describing event
-snowplow('trackSelfDescribingEvent:sp2', 
+snowplow('trackSelfDescribingEvent:sp2',
     'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
     {
         product_id: 'ASO01043',

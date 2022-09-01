@@ -1,6 +1,6 @@
 ---
-title: "Shutting down Try Snowplow (old version)"
-date: "2020-10-09"
+title: 'Shutting down Try Snowplow (old version)'
+date: '2020-10-09'
 sidebar_position: 70
 ---
 

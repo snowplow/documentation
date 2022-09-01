@@ -1,6 +1,6 @@
 ---
-title: "Community & contributing"
-date: "2020-10-28"
+title: 'Community & contributing'
+date: '2020-10-28'
 sidebar_position: 140
 ---
 

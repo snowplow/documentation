@@ -1,6 +1,6 @@
 ---
-title: "Cross-batch deduplication"
-date: "2020-04-25"
+title: 'Cross-batch deduplication'
+date: '2020-04-25'
 sidebar_position: 20
 ---
 
@@ -11,7 +11,7 @@ Since version 0.4.0, Snowflake Transformer supports optional cross-batch dedupli
 - Event id - used to uniquely identify an event
 - Event fingerprint - used in conjunction with the event ID to uniquely identify duplicates
 - ETL timestamp - used to check if an event is being reprocessed due to a previous run being aborted
-- Time to live - timestamp allowing DynamoDB automatically clean-up stale objects (set to etl\_tstamp plus 180 days)
+- Time to live - timestamp allowing DynamoDB automatically clean-up stale objects (set to etl_tstamp plus 180 days)
 
 Cross-batch deduplication can be enabled by creating an additional config file with the following properties:
 

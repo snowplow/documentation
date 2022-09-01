@@ -1,6 +1,6 @@
 ---
-title: "Objective-C (iOS) (0.9.0)"
-date: "2020-03-05"
+title: 'Objective-C (iOS) (0.9.0)'
+date: '2020-03-05'
 sidebar_position: 920
 ---
 
@@ -24,7 +24,7 @@ The tracker can be used in your project by adding `SnowplowTracker` to your pr
 pod 'SnowplowTracker', '~> 1.2'
 ```
 
-Now you can install the dependency in your project with the command: `pod install`.
+Now you can install the dependency in your project with the command: `pod install`.
 
 Make sure to always open the Xcode workspace instead of the project file when building your project:
 
@@ -49,7 +49,7 @@ In order to add the tracker to a project that uses Carthage, add the line to you
 github "snowplow/snowplow-objc-tracker" ~> 1.2
 ```
 
-Run `carthage update` and drag the appropriate frameworks to your project from the `Carthage/build` folder found in the project’s folder.
+Run `carthage update` and drag the appropriate frameworks to your project from the `Carthage/build` folder found in the project’s folder.
 
 The tracker can be imported like this:
 
@@ -160,7 +160,7 @@ To import the library headers into your project you will need to add them with t
 
 This portion was based on the developers guide from Apple on [importing static libraries](https://developer.apple.com/library/ios/technotes/iOSStaticLibraries/Articles/configuration.html).
 
-_Please note_ that you will need to add in all Tracker dependencies manually as they are not included in the static download.
+*Please note* that you will need to add in all Tracker dependencies manually as they are not included in the static download.
 
 #### Add the OpenIDFA dependency
 
@@ -248,7 +248,7 @@ For a basic example of the Singleton pattern:
 ﻿
 ```
 
-You can then access your Tracker via `SnowplowManager *snowplowManager = [SnowplowManager snowplowManager]`.
+You can then access your Tracker via `SnowplowManager *snowplowManager = [SnowplowManager snowplowManager]`.
 
 ## Demo apps
 
@@ -266,7 +266,7 @@ For general testing, [Snowplow Mini](/docs/understanding-your-pipeline/what-is-
 
 The apps can be run in an emulator or on an actual Apple device through Xcode.
 
-Simply enter the endpoint of the collector in the app’s interface once it’s launched and press `"send events"`!
+Simply enter the endpoint of the collector in the app’s interface once it’s launched and press `"send events"`!
 
 ## Tracker Structure
 
@@ -462,7 +462,7 @@ Note: even if there is only one custom context attached to the event, it still n
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -769,12 +769,10 @@ If you want to track the IDFA you need:
 If you add the `AdSupport` framework but you don’t want get the IDFA with the events:
 
 - Disable the IDFA tracking with a preprocessor flag:
-    
-    1. Go to _Build Settings_ of the imported Snowplow Obj-C Tracker
-    2. Search for Preprocessor Macros
-    3. Add a macro defined as `SNOWPLOW_NO_IFA=1`
-    
-    - Remember: it must be added in the Build Settings of the SnowplowTracker framework. If you set it in the app’s Build Settings it won’t work.
+  1. Go to *Build Settings* of the imported Snowplow Obj-C Tracker
+  2. Search for Preprocessor Macros
+  3. Add a macro defined as `SNOWPLOW_NO_IFA=1`
+  - Remember: it must be added in the Build Settings of the SnowplowTracker framework. If you set it in the app’s Build Settings it won’t work.
 
 The user has the ability to limit ad-tracking from the device’s Settings. If the user enable the limitations the tracker will not be able to track the IDFA.
 

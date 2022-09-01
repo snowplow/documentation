@@ -1,6 +1,6 @@
 ---
-title: "Piinguin technical documentation"
-date: "2021-03-26"
+title: 'Piinguin technical documentation'
+date: '2021-03-26'
 sidebar_position: 10
 ---
 

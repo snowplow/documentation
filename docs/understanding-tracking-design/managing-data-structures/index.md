@@ -1,6 +1,6 @@
 ---
-title: "Managing data structures in the console"
-date: "2020-02-15"
+title: 'Managing data structures in the console'
+date: '2020-02-15'
 sidebar_position: 80
 ---
 
@@ -24,7 +24,7 @@ Click **'Publish to development environment'** to publish your Data Structure to
 
 Your new Data Structure will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-and-qa-workflows/index.md).
 
-* * *
+---
 
 ## Editing a data structure
 
@@ -68,7 +68,7 @@ You can identify Data Structures where the Development version is ahead of the P
 
 ![](images/image-10.png)
 
-* * *
+---
 
 ## Promoting a data structure
 
@@ -86,7 +86,7 @@ Navigate to **Data Structures** and locate the Data Structure you wish to promot
 - Ordering the Name column alphabetically
 - Filtering the listing by Type and / or Vendor
 
-Once located either click on the name to view the Data Structure and then click the '**Migrate to production**' button, or click the three dots to bring up the action menu where you can select **'**Migrate to production****'.
+Once located either click on the name to view the Data Structure and then click the '**Migrate to production**' button, or click the three dots to bring up the action menu where you can select **'**Migrate to production\*\*\*\*'.
 
 ![](images/image-8.png)
 
@@ -98,7 +98,7 @@ If you **have patched** the version whilst editing then you will see a warning t
 
 Your data structure will now be available in your production environment to send events against.
 
-* * *
+---
 
 ## Hiding a data structure
 
@@ -110,7 +110,7 @@ Navigate to **Data Structures** and locate the Data Structure you wish to hide. 
 - Ordering the Name column alphabetically
 - Filtering the listing by Type and / or Vendor
 
-Once located either click on the name to view the Data Structure and then click the '**Hide**' button, or click the three dots to bring up the action menu where you can select **'**Hide Data Structure****'.
+Once located either click on the name to view the Data Structure and then click the '**Hide**' button, or click the three dots to bring up the action menu where you can select **'**Hide Data Structure\*\*\*\*'.
 
 Follow the modal instructions to confirm the action.
 

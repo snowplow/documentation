@@ -1,6 +1,6 @@
 ---
-title: "RDB loader configuration reference"
-date: "2021-06-08"
+title: 'RDB loader configuration reference'
+date: '2021-06-08'
 sidebar_position: 380
 ---
 
@@ -9,7 +9,7 @@ Shredder and loader use different configurations starting from 2.0.0. An example
 This is a complete list of the options that can be configured
 
 | region                                         | Optional if it can be resolved with AWS region provider chain. AWS region of the S3 bucket.                                                                                                                                                              |
-|------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | messageQueue                                   | Required. A SQS topic name used by the shredder and loader to communicate.                                                                                                                                                                               |
 | jsonpaths                                      | Optional. A S3 URI that holds JSONPath files.                                                                                                                                                                                                            |
 | storage.host                                   | Required. Host name of redshift.                                                                                                                                                                                                                         |

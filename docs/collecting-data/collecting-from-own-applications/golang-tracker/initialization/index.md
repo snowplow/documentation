@@ -1,6 +1,6 @@
 ---
-title: "Initialization"
-date: "2020-02-26"
+title: 'Initialization'
+date: '2020-02-26'
 sidebar_position: 20
 ---
 
@@ -43,14 +43,14 @@ tracker := sp.InitTracker(sp.RequireEmitter(emitter))
 
 There are other optional builder functions:
 
-| **Function Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `RequireEmitter` | The emitter to which events are sent | Yes | `nil` |
-| `OptionSubject` | The user being tracked | No | `nil` |
-| `OptionNamespace` | The name of the tracker instance | No | \`\` |
-| `OptionAppId` | The application ID | No | \`\` |
-| `OptionPlatform` | The platform the Tracker is running on | No | `srv` |
-| `OptionBase64Encode` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No | `true` |
+| **Function Name**    | **Description**                                                            | **Required?** | **Default** |
+| -------------------- | -------------------------------------------------------------------------- | ------------- | ----------- |
+| `RequireEmitter`     | The emitter to which events are sent                                       | Yes           | `nil`       |
+| `OptionSubject`      | The user being tracked                                                     | No            | `nil`       |
+| `OptionNamespace`    | The name of the tracker instance                                           | No            | \`\`        |
+| `OptionAppId`        | The application ID                                                         | No            | \`\`        |
+| `OptionPlatform`     | The platform the Tracker is running on                                     | No            | `srv`       |
+| `OptionBase64Encode` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No            | `true`      |
 
 A more complete example:
 

@@ -1,6 +1,6 @@
 ---
-title: "Setup Guide for AWS"
-date: "2021-12-16"
+title: 'Setup Guide for AWS'
+date: '2021-12-16'
 sidebar_position: 20
 ---
 
@@ -26,22 +26,22 @@ Until `0.6.0`, Snowplow Mini was being used inside AWS `t2.medium`, `n1-standa
 
 This service is available as an EC2 image within the AWS Community AMIs in the following regions:
 
-|  | large / t2.large | xlarge / t2.xlarge | xxlarge / t2.xxlarge |
-| --- | --- | --- | --- |
+|                | large / t2.large      | xlarge / t2.xlarge    | xxlarge / t2.xxlarge  |
+| -------------- | --------------------- | --------------------- | --------------------- |
 | ap-northeast-1 | ami-009a1d6f3cdc79df5 | ami-0e1b33e69ad45308d | ami-05042cb5acccb2431 |
 | ap-northeast-2 | ami-0852e34a4eb7d69e6 | ami-0f82892b9c34188f3 | ami-003aa3243efa14d0f |
-| ap-south-1 | ami-08801862338eee4c7 | ami-02d6fd313305c80a3 | ami-003fc9a9bbb0fa174 |
+| ap-south-1     | ami-08801862338eee4c7 | ami-02d6fd313305c80a3 | ami-003fc9a9bbb0fa174 |
 | ap-southeast-1 | ami-09513a918310e5cd1 | ami-0b1dccc72081ab134 | ami-002859e99f439f074 |
 | ap-southeast-2 | ami-03cfcbeaabab1d7b6 | ami-06c7f149a52014601 | ami-08f67a4cf04fcafe3 |
-| ca-central-1 | ami-0de7a9257cd031eb3 | ami-055f003317625f128 | ami-04351978e36a0c26a |
-| eu-central-1 | ami-09d507e6dc940fa21 | ami-0a9c56e19c921dcd9 | ami-09dbd059d3b447766 |
-| eu-west-1 | ami-0bd095d8d349081ca | ami-0390c713b4961e39a | ami-09adc9a332e82b4e7 |
-| eu-west-2 | ami-0f5ec5ae7cc0e41a4 | ami-020c3bebfe933d861 | ami-0beea426cfa878384 |
-| sa-east-1 | ami-0668c89191783d5f8 | ami-0644dfec0ea950295 | ami-00d5126c4ea88c646 |
-| us-east-1 | ami-0325b0c997f6f57ee | ami-0bd1aac98a20d14dc | ami-0f3c8b7b623103250 |
-| us-east-2 | ami-0973715ae5d5adb8a | ami-03fc97b1a03b7355e | ami-00679a0be5a652f93 |
-| us-west-1 | ami-084a75de56b67e759 | ami-001cb30ba85f72c27 | ami-0a3018e66bdd21e70 |
-| us-west-2 | ami-0cbbe71ea6813bf18 | ami-0f3b56055fa7bfaf7 | ami-03031d525cfdc6cdb |
+| ca-central-1   | ami-0de7a9257cd031eb3 | ami-055f003317625f128 | ami-04351978e36a0c26a |
+| eu-central-1   | ami-09d507e6dc940fa21 | ami-0a9c56e19c921dcd9 | ami-09dbd059d3b447766 |
+| eu-west-1      | ami-0bd095d8d349081ca | ami-0390c713b4961e39a | ami-09adc9a332e82b4e7 |
+| eu-west-2      | ami-0f5ec5ae7cc0e41a4 | ami-020c3bebfe933d861 | ami-0beea426cfa878384 |
+| sa-east-1      | ami-0668c89191783d5f8 | ami-0644dfec0ea950295 | ami-00d5126c4ea88c646 |
+| us-east-1      | ami-0325b0c997f6f57ee | ami-0bd1aac98a20d14dc | ami-0f3c8b7b623103250 |
+| us-east-2      | ami-0973715ae5d5adb8a | ami-03fc97b1a03b7355e | ami-00679a0be5a652f93 |
+| us-west-1      | ami-084a75de56b67e759 | ami-001cb30ba85f72c27 | ami-0a3018e66bdd21e70 |
+| us-west-2      | ami-0cbbe71ea6813bf18 | ami-0f3b56055fa7bfaf7 | ami-03031d525cfdc6cdb |
 
 The software stack installed:
 
@@ -109,8 +109,8 @@ You will then need to add the following InBound rules:
 - Custom TCP Rule | Port Range (443)
 - CIDR range `0.0.0.0/0`
 - SSH (optional):
-    - Custom TCP Rule | Port Range (22)
-    - CIDR range `{{ YOUR IP HERE }}/32`
+  - Custom TCP Rule | Port Range (22)
+  - CIDR range `{{ YOUR IP HERE }}/32`
 
 For OutBound you can leave the default to allow everything out.
 

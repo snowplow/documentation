@@ -4,39 +4,42 @@ import Cookies from 'js-cookie'
 import { COOKIE_PREF_KEY } from './src/constants/config'
 
 const cookieConfig = {
-  "policies": [
+  policies: [
     {
-      "id": "essential",
-      "label": "Essential Cookies",
-      "description": "We need to save some technical cookies, for the website to function properly.",
-      "category": "essential",
+      id: 'essential',
+      label: 'Essential Cookies',
+      description:
+        'We need to save some technical cookies, for the website to function properly.',
+      category: 'essential',
     },
     {
-      "id": "analytics",
-      "label": "Analytics",
-      "category": "analytics",
-      "description": "We would like to collect some data about how our visitors use the documentation to improve it.",
+      id: 'analytics',
+      label: 'Analytics',
+      category: 'analytics',
+      description:
+        'We would like to collect some data about how our visitors use the documentation to improve it.',
     },
   ],
-  "permissionLabels": {
-    "accept": "Accept",
-    "acceptAll": "Accept all",
-    "decline": "Decline"
+  permissionLabels: {
+    accept: 'Accept',
+    acceptAll: 'Accept all',
+    decline: 'Decline',
   },
-  "cookiePreferenceKey": COOKIE_PREF_KEY,
-  "header": {
-    "title": "cookie though?",
-    "subTitle": "You’re probably fed up with these banners...",
-    "description": "We would like to use cookies to understand how you interact with this documentation, so that we can improve the content and the way it’s structured."
+  cookiePreferenceKey: COOKIE_PREF_KEY,
+  header: {
+    title: 'cookie though?',
+    subTitle: 'You’re probably fed up with these banners...',
+    description:
+      'We would like to use cookies to understand how you interact with this documentation, so that we can improve the content and the way it’s structured.',
   },
-  "cookiePolicy": {
-    "url":"/cookie-preferences",
-    "label":"Read our full cookie policy",
+  cookiePolicy: {
+    url: '/cookie-preferences',
+    label: 'Read our full cookie policy',
   },
-  "customizeLabel": "Edit preferences"
+  customizeLabel: 'Edit preferences',
 }
 
-if(ExecutionEnvironment.canUseDOM) {
+if (ExecutionEnvironment.canUseDOM) {
   // It's necessary to call this function first before using any of the exported methods from the cookie-though package
   // as each method checks if there's a config object set already and if there isn't they show the popup
   // even when preferences were already set previously. So we can prevent that with this call.

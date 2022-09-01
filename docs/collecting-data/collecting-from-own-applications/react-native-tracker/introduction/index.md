@@ -1,6 +1,6 @@
 ---
-title: "Introduction"
-date: "2021-08-06"
+title: 'Introduction'
+date: '2021-08-06'
 sidebar_position: 0
 ---
 
@@ -9,13 +9,6 @@ sidebar_position: 0
 [![Latest tracker version](https://img.shields.io/npm/v/@snowplow/react-native-tracker)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
 [![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
-
-  
-  
-  
-  
-  
-  
 
 The Snowplow React Native Tracker is a module which imports the [Mobile Native Snowplow Trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) as native modules, available for use in React Native projects.
 
@@ -146,23 +139,23 @@ interface TrackerConfiguration {
 
 - **appId**: Identifer of the app.
 - **devicePlatform**: The device platform the app runs on. Default value: `'mob'`. Allowed platform values are:
-    
-    - `'mob'`: Mobile/Tablet
-    - `'web'`: Web(including mobile web)
-    - `'pc'`: Desktop/Laptop/Netbook
-    
-    - `'srv'`: Server-side app
-    - `'app'`: General app
-    - `'tv'`: Connected TV
-    - `'cnsl'`: Games Console
-    - `'iot'`: Internet of things
+
+  - `'mob'`: Mobile/Tablet
+  - `'web'`: Web(including mobile web)
+  - `'pc'`: Desktop/Laptop/Netbook
+
+  - `'srv'`: Server-side app
+  - `'app'`: General app
+  - `'tv'`: Connected TV
+  - `'cnsl'`: Games Console
+  - `'iot'`: Internet of things
 
 - **base64encoding**: It indicates whether the JSON data in the payload should be base64 encoded. Default value: `true`.
 - **logLevel**: The log level of tracker logs. Default value: `'off'`. Allowed logLevel values are:
-    - `'off'`
-    - `'error'`
-    - `'debug'`
-    - `'verbose'`
+  - `'off'`
+  - `'error'`
+  - `'debug'`
+  - `'verbose'`
 - **sessionContext**: Whether session context is sent with all the tracked events. Default value: `true`.
 - **applicationContext**: Whether application context is sent with all the tracked events. Default value: `true`.
 - **platformContext**: Whether mobile/platform context is sent with all the tracked events. Default value: `true`.
@@ -240,9 +233,9 @@ interface EmitterConfiguration {
 ```
 
 - **bufferOption**: Sets the emitter's buffer behavior concerning whether the events should be sent instantly or after the buffer has reached it’s limit. Default value: `'single'`. Allowed bufferOption values are:
-    - `'single'`: Sends events instantly.
-    - `'default'`: (Affects only POST method). Sets buffer limit to 10 events.
-    - `'large'`: (Affects only POST method). Sets buffer limit to 25 events.
+  - `'single'`: Sends events instantly.
+  - `'default'`: (Affects only POST method). Sets buffer limit to 10 events.
+  - `'large'`: (Affects only POST method). Sets buffer limit to 25 events.
 - **emitRange**: Maximum number of events collected to be sent in a request. Default value: `150`
 - **threadPoolSize**: Maximum number of threads working in parallel in the tracker to send requests. Default value: `15`
 - **byteLimitGet**: Maximum amount of bytes allowed to be sent in a payload in a GET request. Default value: `40000`
@@ -340,12 +333,12 @@ export interface GdprConfiguration {
 ```
 
 - **basisForProcessing**: Required. Represents the basis for processing according to GDPR. Allowed values for `basisForProcessing` are:
-    - `'consent'`
-    - `'contract'`
-    - `'legal_obligation'`
-    - `'legitimate_interests'`
-    - `'public_task'`
-    - `'vital_interests'`
+  - `'consent'`
+  - `'contract'`
+  - `'legal_obligation'`
+  - `'legitimate_interests'`
+  - `'public_task'`
+  - `'vital_interests'`
 - **documentId**: Required. The GDPR document id.
 - **documentVersion**: Required. The GDPR document version.
 - **documentDescription**: Required. The GDPR document description.

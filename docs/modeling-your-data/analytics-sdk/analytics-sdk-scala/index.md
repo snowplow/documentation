@@ -1,6 +1,6 @@
 ---
-title: "Analytics SDK - Scala"
-date: "2020-11-02"
+title: 'Analytics SDK - Scala'
+date: '2020-11-02'
 sidebar_position: 100
 ---
 
@@ -13,7 +13,7 @@ The Scala Analytics SDK makes it significantly easier to build applications that
 
 ## 2\. Compatibility
 
-Snowplow Scala Analytics SDK was compiled against Scala versions 2.12 and 2.13. 
+Snowplow Scala Analytics SDK was compiled against Scala versions 2.12 and 2.13.
 Minimum required Java Runtime is JRE8.
 
 ## 3\. Setup
@@ -129,8 +129,8 @@ The most complex piece of processing is the handling of the self-describing JSON
 Along with the `Event` case class, the JSON Event Transformer comes with the following functions:
 
 - `Event.parse(line)` - similar to the old `transform` function, this method accepts an enriched Snowplow event as a string and returns an `Event` instance as a result.
-- `event.toJson(lossy)` - similar to the old `getValidatedJsonEvent` function, it transforms an `Event` into a validated JSON whose keys are the field names corresponding to the EnrichedEvent POJO of the Scala Common Enrich project. If the lossy argument is true, any self-describing events in the fields (unstruct\_event, contexts and derived\_contexts) are returned in a "shredded" format, e.g. `"unstruct_event_com_acme_1_myField": "value"`. If it is set to false, they are not flattened into underscore-separated top-level fields, using a standard self-describing format instead.
-- `event.inventory` - extracts metadata from the event containing information about the types and Iglu URIs of its shred properties (unstruct\_event, contexts and derived\_contexts). Unlike version 0.3.0, it no longer requires a `transformWithInventory` call and can be obtained from any `Event` instance.
+- `event.toJson(lossy)` - similar to the old `getValidatedJsonEvent` function, it transforms an `Event` into a validated JSON whose keys are the field names corresponding to the EnrichedEvent POJO of the Scala Common Enrich project. If the lossy argument is true, any self-describing events in the fields (unstruct_event, contexts and derived_contexts) are returned in a "shredded" format, e.g. `"unstruct_event_com_acme_1_myField": "value"`. If it is set to false, they are not flattened into underscore-separated top-level fields, using a standard self-describing format instead.
+- `event.inventory` - extracts metadata from the event containing information about the types and Iglu URIs of its shred properties (unstruct_event, contexts and derived_contexts). Unlike version 0.3.0, it no longer requires a `transformWithInventory` call and can be obtained from any `Event` instance.
 - `atomic` - returns the event as a map of keys to Circe JSON values, while dropping inventory fields. This method can be used to modify an event's JSON AST before converting it into a final result.
 - `ordered` - returns the event as a list of key/Circe JSON value pairs. Unlike `atomic`, which has randomized key ordering, this method returns the keys in the order of the canonical event model, and is particularly useful for working with relational databases.
 
@@ -153,7 +153,7 @@ Here’s the code we use internally for our own data modeling jobs:
 import cats.data.Validated
 import com.snowplowanalytics.snowplow.analytics.scalasdk.Event
 
-val events = input.flatMap(line => 
+val events = input.flatMap(line =>
   Event.parse(line) match {
     case Validated.Valid(event) => Some(event.toJson(true).noSpaces)
     case Validated.Invalid(_) => None

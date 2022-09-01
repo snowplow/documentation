@@ -1,6 +1,6 @@
 ---
-title: "Tracker"
-date: "2020-02-26"
+title: 'Tracker'
+date: '2020-02-26'
 sidebar_position: 40
 ---
 
@@ -8,15 +8,15 @@ The Tracker object is responsible for co-ordinating the saving and sending of ev
 
 ### Constructor
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| [`emitter`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#emitter) | The Emitter object you create | Yes | Null |
-| `trackerNamespace` | The name of the tracker instance | Yes | Null |
-| `appId` | The application ID | Yes | Null |
-| [`subject`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#subject) | The Subject that defines a user | No | Null |
-| [`session`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#session) | The Session object you create | No | Null |
-| `platform` | The device the Tracker is running on | No | Mobile |
-| `base64Encoded` | If we [base 64 encode](https://en.wikipedia.org/wiki/Base64) json values | No | True |
+| **Argument Name**                                                            | **Description**                                                          | **Required?** | **Default** |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------- | ----------- |
+| [`emitter`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#emitter) | The Emitter object you create                                            | Yes           | Null        |
+| `trackerNamespace`                                                           | The name of the tracker instance                                         | Yes           | Null        |
+| `appId`                                                                      | The application ID                                                       | Yes           | Null        |
+| [`subject`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#subject) | The Subject that defines a user                                          | No            | Null        |
+| [`session`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#session) | The Session object you create                                            | No            | Null        |
+| `platform`                                                                   | The device the Tracker is running on                                     | No            | Mobile      |
+| `base64Encoded`                                                              | If we [base 64 encode](https://en.wikipedia.org/wiki/Base64) json values | No            | True        |
 
 A full Tracker construction should look like the following:
 

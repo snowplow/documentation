@@ -1,6 +1,6 @@
 ---
-title: "sql-runner: Web data model"
-date: "2021-07-27"
+title: 'sql-runner: Web data model'
+date: '2021-07-27'
 sidebar_position: 100
 ---
 
@@ -23,7 +23,7 @@ sidebar_position: 100
 
 First, fill in the connection details for the target database in the relevant template in `.scripts/templates/redshift.yml.tmpl`.
 
-Password can be left as a `PASSWORD_PLACEHOLDER`, and set as an environment variable or passed as an argument to the run\_playbooks script. See the README in `.scripts` for more detail.
+Password can be left as a `PASSWORD_PLACEHOLDER`, and set as an environment variable or passed as an argument to the run_playbooks script. See the README in `.scripts` for more detail.
 
 Variables in each module's playbook can also optionally be configured also. See each playbook directory's README for more detail on configuration of each module.
 
@@ -53,11 +53,11 @@ More detail on each module can be found in the relevant READMEs in the [GitHub r
 
 Custom modules can fit into the incremental structure by consuming the same inputs, and running before the `99-{module}-complete` playbook runs. Custom modules may also consume and intermediary tables of the standard module, which will not be dropped until the `99-{module}-complete` playbook runs.
 
-Any custom SQL that depends on a `_staged` table as its input should run before the complete step of the module which handles that same input. For example, custom logic which takes events\_staged as an input should run before the `99-page-views-complete` playbook.
+Any custom SQL that depends on a `_staged` table as its input should run before the complete step of the module which handles that same input. For example, custom logic which takes events_staged as an input should run before the `99-page-views-complete` playbook.
 
 As an introductory example, if there is a requirement to include data from custom events and entities for page views, for example, we would write a custom module which:
 
-- Reads events (i.e. event\_ids) from the `scratch.events_staged` table
+- Reads events (i.e. event_ids) from the `scratch.events_staged` table
 - Aggregates to one row per `page_view_id`
 - Deletes and inserts this to a custom table which can join to the `derived.page_views table` on `page_view_id`
 

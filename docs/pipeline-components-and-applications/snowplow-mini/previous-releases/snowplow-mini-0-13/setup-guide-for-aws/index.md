@@ -1,6 +1,6 @@
 ---
-title: "Setup Guide for AWS"
-date: "2022-04-25"
+title: 'Setup Guide for AWS'
+date: '2022-04-25'
 sidebar_position: 20
 ---
 
@@ -28,22 +28,22 @@ This service is available as an EC2 image within the AWS Community AMIs in the f
 
 Version 0.13.5 (Recommended)
 
-|  | large / t2.large | xlarge / t2.xlarge | xxlarge / t2.xxlarge |
-| --- | --- | --- | --- |
+|                | large / t2.large      | xlarge / t2.xlarge    | xxlarge / t2.xxlarge  |
+| -------------- | --------------------- | --------------------- | --------------------- |
 | ap-northeast-1 | ami-0b998030bcb246d2a | ami-0e00375205b1312af | ami-07b9b4aad780ab926 |
 | ap-northeast-2 | ami-0ee6fb654958b68bc | ami-05a0e4fabf0c6a58d | ami-01ff52fadaaa80c59 |
-| ap-south-1 | ami-08eec435e7aae1309 | ami-03a68cdc5f4ec1b3c | ami-0eff78e40bc1c6746 |
+| ap-south-1     | ami-08eec435e7aae1309 | ami-03a68cdc5f4ec1b3c | ami-0eff78e40bc1c6746 |
 | ap-southeast-1 | ami-0c67f13daab0c00a4 | ami-0bfce74fd1926be01 | ami-090df3c82c7076269 |
 | ap-southeast-2 | ami-0e7a3363bfb29a301 | ami-0e739b890a08d1aaf | ami-03b0a762d7cae8513 |
-| ca-central-1 | ami-050ce4447089edb1b | ami-048e203115f264a08 | ami-0956541c5fb585e2b |
-| eu-central-1 | ami-0fcbb911c8df4c913 | ami-0ffe36b2ad05ed9ca | ami-09fa209fa03c3bd14 |
-| eu-west-1 | ami-056a3df8d97c3aa1e | ami-083735ad33fb59d1d | ami-07ec8739cec3109c0 |
-| eu-west-2 | ami-09db0d9a9a97f9feb | ami-05cc1549857edf2d7 | ami-03adf56e7562bcfed |
-| sa-east-1 | ami-0e7212fc5f84dd1bb | ami-07159002b2c284384 | ami-01e4f39375c78340e |
-| us-east-1 | ami-067a9ebc93850bc58 | ami-0f5b572b63b07af90 | ami-02138989e754cb7ff |
-| us-east-2 | ami-0ebe570b24306d5a2 | ami-014952c0f594f0ed0 | ami-06e67b80bc00dcb78 |
-| us-west-1 | ami-092cb4be1975d8fc1 | ami-01a161a94fe8255a6 | ami-06fb662db882996b4 |
-| us-west-2 | ami-02d86bfe49056128e | ami-00f70b4c5b84c8590 | ami-0a7fd3a9abcefdae5 |
+| ca-central-1   | ami-050ce4447089edb1b | ami-048e203115f264a08 | ami-0956541c5fb585e2b |
+| eu-central-1   | ami-0fcbb911c8df4c913 | ami-0ffe36b2ad05ed9ca | ami-09fa209fa03c3bd14 |
+| eu-west-1      | ami-056a3df8d97c3aa1e | ami-083735ad33fb59d1d | ami-07ec8739cec3109c0 |
+| eu-west-2      | ami-09db0d9a9a97f9feb | ami-05cc1549857edf2d7 | ami-03adf56e7562bcfed |
+| sa-east-1      | ami-0e7212fc5f84dd1bb | ami-07159002b2c284384 | ami-01e4f39375c78340e |
+| us-east-1      | ami-067a9ebc93850bc58 | ami-0f5b572b63b07af90 | ami-02138989e754cb7ff |
+| us-east-2      | ami-0ebe570b24306d5a2 | ami-014952c0f594f0ed0 | ami-06e67b80bc00dcb78 |
+| us-west-1      | ami-092cb4be1975d8fc1 | ami-01a161a94fe8255a6 | ami-06fb662db882996b4 |
+| us-west-2      | ami-02d86bfe49056128e | ami-00f70b4c5b84c8590 | ami-0a7fd3a9abcefdae5 |
 
 The software stack installed:
 
@@ -111,8 +111,8 @@ You will then need to add the following InBound rules:
 - Custom TCP Rule | Port Range (443)
 - CIDR range `0.0.0.0/0`
 - SSH (optional):
-    - Custom TCP Rule | Port Range (22)
-    - CIDR range `{{ YOUR IP HERE }}/32`
+  - Custom TCP Rule | Port Range (22)
+  - CIDR range `{{ YOUR IP HERE }}/32`
 
 For OutBound you can leave the default to allow everything out.
 

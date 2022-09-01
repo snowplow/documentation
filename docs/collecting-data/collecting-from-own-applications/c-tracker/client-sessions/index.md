@@ -1,6 +1,6 @@
 ---
-title: "Client Sessions"
-date: "2020-02-25"
+title: 'Client Sessions'
+date: '2020-02-25'
 sidebar_position: 70
 ---
 
@@ -23,7 +23,7 @@ client_session.set_is_background(true || false);
 When client sessions are used, the [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity is added to all tracked event. This entity consists of the following properties:
 
 | Attribute             | Description                                                                                                   | Required? |
-|-----------------------|---------------------------------------------------------------------------------------------------------------|-----------|
+| --------------------- | ------------------------------------------------------------------------------------------------------------- | --------- |
 | `userId`              | An identifier for the user of the session.                                                                    | Yes       |
 | `sessionId`           | An identifier (UUID) for the session.                                                                         | Yes       |
 | `sessionIndex`        | The index of the current session for this user.                                                               | Yes       |
@@ -50,7 +50,7 @@ struct SessionStore {
 The `SessionStore` struct defines functions to retrieve, set, and delete the current session. It represents sessions in their JSON format. The three operations have the following behavior:
 
 | Function         | Description                                                                    |
-|------------------|--------------------------------------------------------------------------------|
+| ---------------- | ------------------------------------------------------------------------------ |
 | `get_session`    | Return a unique pointer to the current session or nullptr if it doesn't exist. |
 | `set_session`    | Persist the current session.                                                   |
 | `delete_session` | Remove and reset the current session.                                          |

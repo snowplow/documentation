@@ -1,6 +1,6 @@
 ---
-title: "Track events & entities"
-date: "2021-10-06"
+title: 'Track events & entities'
+date: '2021-10-06'
 sidebar_position: 100
 ---
 
@@ -40,14 +40,14 @@ We recommend installing the [Snowplow Inspector](https://chrome.google.com/webst
 
 **Step 2: Track custom events & entities**
 
-Custom events & entities allow you to track & collect events that better reflect your business. In this step, you will define your custom event by creating a schema for it and uploading it to Iglu - your schema repository - and then start tracking it from your application. 
+Custom events & entities allow you to track & collect events that better reflect your business. In this step, you will define your custom event by creating a schema for it and uploading it to Iglu - your schema repository - and then start tracking it from your application.
 
 Schemas
 
 Learn more [why schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) are a powerful feature of Snowplow, and about [the anatomy of a schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md#the-anatomy-of-a-schema) here.
 
 - First create the schema for the event
-    - The below is an example - you can create your own schema or edit this schema to better suit your needs
+  - The below is an example - you can create your own schema or edit this schema to better suit your needs
 
 ```
 {
@@ -78,13 +78,13 @@ Learn more [why schemas](/docs/understanding-tracking-design/understanding-schem
 ```
 
 - You should then save this schema in the following folder structure, with a filename of `1-0-0`:
-    - /`schemas/com.snowplowanalytics/button_click/jsonschema/1-0-0`
-    - Note: If you update the `vendor` string in the example, you should update the above path too.
+  - /`schemas/com.snowplowanalytics/button_click/jsonschema/1-0-0`
+  - Note: If you update the `vendor` string in the example, you should update the above path too.
 - Upload your schema to your Iglu registry that you created when setting up your pipeline
-    - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) if you haven't already
-    - To upload your schemas on localhost to the Iglu Server, use the following command:
-        - `igluctl static push --public <local path to schemas/> <Iglu server endpoint> <iglu_super_api_key>`
-        - You can find more information on the [Igluctl docs page](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static-push)
+  - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) if you haven't already
+  - To upload your schemas on localhost to the Iglu Server, use the following command:
+    - `igluctl static push --public <local path to schemas/> <Iglu server endpoint> <iglu_super_api_key>`
+    - You can find more information on the [Igluctl docs page](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static-push)
 - To send an event using this schema you'll want to track a Self Describing Event. Here is an example of how to do so with the JavaScript Tracker:
 
 ```
@@ -106,7 +106,7 @@ You can join back to atomic.events using `root_id = event_id`.
 
 ##### Next, learn how to further [enrich your data](/docs/open-source-quick-start/further-exploration/further-enrich-or-transform-your-data/index.md) >>
 
-* * *
+---
 
 Do you have any feedback for us?
 

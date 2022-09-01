@@ -1,6 +1,6 @@
 ---
-title: "Ruby client"
-date: "2021-03-26"
+title: 'Ruby client'
+date: '2021-03-26'
 sidebar_position: 60
 ---
 
@@ -112,7 +112,7 @@ Same classes will be included in Iglu Ruby Core library when it'll be released.
 
 ```
 schema_key = SchemaKey.new("com.acme", "event", "jsonschema", SchemaVer.new(1,0,2))
-# or 
+# or
 schema_key = SchemaKey.parse("iglu:com.acme/event/jsonschema/1-0-2")
 ```
 

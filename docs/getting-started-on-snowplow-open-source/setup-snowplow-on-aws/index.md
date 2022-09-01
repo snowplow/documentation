@@ -1,12 +1,12 @@
 ---
-title: "Setup Snowplow Open Source on AWS"
-date: "2020-02-25"
+title: 'Setup Snowplow Open Source on AWS'
+date: '2020-02-25'
 sidebar_position: 10
 ---
 
 Quick Start
 
-We have built a set of [terraform](https://registry.terraform.io/namespaces/snowplow-devops) modules, which automates the setting up & deployment of the required infrastructure & applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side. 
+We have built a set of [terraform](https://registry.terraform.io/namespaces/snowplow-devops) modules, which automates the setting up & deployment of the required infrastructure & applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side.
 
 [Quick Start Installation Guide on AWS](/docs/open-source-quick-start/quick-start-installation-guide-on-aws/index.md)
 

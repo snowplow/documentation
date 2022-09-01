@@ -1,6 +1,6 @@
 ---
-title: "R32 Upgrade Guide"
-date: "2020-03-06"
+title: 'R32 Upgrade Guide'
+date: '2020-03-06'
 sidebar_position: 700
 ---
 
@@ -10,14 +10,14 @@ We recommend to go through the upgrade routine in several independent steps. Aft
 
 1. Upgrade EmrEtlRunner to R116 or higher
 2. In your `redshift_config.json`
-    1. Update SchemaVer to `4-0-0`
-    2. Add `"blacklistTabular": null` field into `data` payload
+   1. Update SchemaVer to `4-0-0`
+   2. Add `"blacklistTabular": null` field into `data` payload
 3. Update your `config.yml` file
 
 ```
 aws:
   emr:
-    ami_version: 5.19.0     # was 5.9.0; Required by RDB Shredder 
+    ami_version: 5.19.0     # was 5.9.0; Required by RDB Shredder
 storage:
   versions:
     rdb_loader: 0.17.0      # was 0.16.0

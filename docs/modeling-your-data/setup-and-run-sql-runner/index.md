@@ -1,6 +1,6 @@
 ---
-title: "Setup and run SQL Runner"
-date: "2020-12-01"
+title: 'Setup and run SQL Runner'
+date: '2020-12-01'
 sidebar_position: 30
 ---
 
@@ -19,7 +19,7 @@ A SQL Runner data model consists of:
 
 A playbook consists of one of more _steps_, each of which consists of one or more _queries_. Steps are run in series, queries are run in parallel within the step.
 
-Each query contains the path to a _query file_. 
+Each query contains the path to a _query file_.
 
 All steps are applied against all _targets_. All targets are processed in parallel.
 
@@ -156,7 +156,7 @@ variables:
 
 #### BigQuery
 
-To access a BigQuery project, sql-runner will need some Google credentials. These can be set up by creating a new service account in the GCP console, then providing its private key to the application via a GOOGLE\_APPLICATION\_CREDENTIALS environment variable - a detailed walkthrough of this process is available on the [GCP documentation website](https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually).
+To access a BigQuery project, sql-runner will need some Google credentials. These can be set up by creating a new service account in the GCP console, then providing its private key to the application via a GOOGLE_APPLICATION_CREDENTIALS environment variable - a detailed walkthrough of this process is available on the [GCP documentation website](https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually).
 
 After the credentials are set up, simply create a playbook with the following BigQuery-specific target configuration:
 
@@ -288,4 +288,4 @@ This results in:
 
 - Looking for your playbook file at this key `sql-runner/playbook/1`
 - Expecting all your SQL file keys to begin with `sql-runner/playbook/1/<SQL path from playbook>`
-    - The data node is used as a folder node as well.
+  - The data node is used as a folder node as well.

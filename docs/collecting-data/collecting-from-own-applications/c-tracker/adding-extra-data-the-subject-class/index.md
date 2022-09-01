@@ -1,6 +1,6 @@
 ---
-title: "Adding extra data: the Subject class"
-date: "2020-02-25"
+title: 'Adding extra data: the Subject class'
+date: '2020-02-25'
 sidebar_position: 30
 ---
 
@@ -38,7 +38,7 @@ The Subject class has a set of `set...()` methods to attach extra data relatin
 
 We will discuss each of these in turn below:
 
-## Set user ID with "set\_user\_id"
+## Set user ID with "set_user_id"
 
 You can set the user ID to any string:
 
@@ -52,7 +52,7 @@ Example:
 subject->set_user_id("alexd");
 ```
 
-## Set screen resolution with "set\_screen\_resolution"
+## Set screen resolution with "set_screen_resolution"
 
 If your code has access to the device’s screen resolution, then you can pass this in to Snowplow too:
 
@@ -66,7 +66,7 @@ Both numbers should be positive integers; note the order is width followed by he
 subject->set_screen_resolution(1366, 768);
 ```
 
-## Set viewport dimensions with "set\_viewport"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-viewport-dimensions-with-set_viewport)
+## Set viewport dimensions with "set_viewport"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-viewport-dimensions-with-set_viewport)
 
 If your code has access to the viewport dimensions, then you can pass this in to Snowplow too:
 
@@ -80,7 +80,7 @@ Both numbers should be positive integers; note the order is width followed by he
 subject->set_viewport(300, 200);
 ```
 
-## Set color depth with "set\_color\_depth"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-color-depth-with-set_color_depth)
+## Set color depth with "set_color_depth"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-color-depth-with-set_color_depth)
 
 If your code has access to the bit depth of the device’s color palette for displaying images, then you can pass this in to Snowplow too:
 
@@ -94,7 +94,7 @@ The number should be a positive integer, in bits per pixel. Example:
 subject->set_color_depth(32);
 ```
 
-## Set timezone with "set\_timezone"
+## Set timezone with "set_timezone"
 
 This method lets you pass a user’s timezone in to Snowplow:
 
@@ -108,7 +108,7 @@ The timezone should be a string:
 subject->set_timezone("Europe/London");
 ```
 
-## Set the language with "set\_language"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-the-language-with-set_language)
+## Set the language with "set_language"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-the-language-with-set_language)
 
 This method lets you pass a user’s language in to Snowplow:
 
@@ -122,7 +122,7 @@ The language should be a string:
 subject->set_language('en');
 ```
 
-## Set custom user-agent with "set\_useragent"
+## Set custom user-agent with "set_useragent"
 
 To change the [user-agent string](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) sent along with events to identify the application and system, you may set custom useragent using this method:
 
@@ -136,7 +136,7 @@ The user-agent should be a string:
 subject->set_useragent("YourApp/5.0 (Macintosh; Intel Mac OS X 10_15_7)");
 ```
 
-## Set user's IP address with "set\_ip\_address"
+## Set user's IP address with "set_ip_address"
 
 To set the user's IP address, you may use this method:
 

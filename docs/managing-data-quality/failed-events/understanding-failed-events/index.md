@@ -1,6 +1,6 @@
 ---
-title: "Understanding failed events"
-date: "2020-02-15"
+title: 'Understanding failed events'
+date: '2020-02-15'
 sidebar_position: 0
 ---
 
@@ -59,7 +59,7 @@ Once you have fixed your enrichment configuration, Once you have fixed your trac
 
 Because this failure is handled during enrichment, events in the real time good stream are free of this violation type.
 
-Enrichment failure schema can be found [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema).  
+Enrichment failure schema can be found [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema).
 
 ### Collector Payload Format Violation
 
@@ -113,7 +113,7 @@ Size violation schema can be found [here](https://github.com/snowplow/iglu-centr
 
 ### Loader Parsing Error
 
-This failure type can be produced by [any loader](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md), if the enriched event in the real time good stream cannot be parsed as a canonical TSV event format. For example, if line has not enough columns (not 131) or event\_id is not UUID.
+This failure type can be produced by [any loader](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md), if the enriched event in the real time good stream cannot be parsed as a canonical TSV event format. For example, if line has not enough columns (not 131) or event_id is not UUID.
 
 This error type is uncommon and unexpected, because it can only be caused by an invalid message in the stream of validated enriched events. This failure type cannot be [recovered](/docs/managing-data-quality/snowplow-event-recovery/index.md).
 

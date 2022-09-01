@@ -1,6 +1,6 @@
 ---
-title: "What do Java tracker events look like?"
-date: "2022-03-24"
+title: 'What do Java tracker events look like?'
+date: '2022-03-24'
 sidebar_position: 60
 ---
 
@@ -54,7 +54,7 @@ ScreenView screenView = ScreenView.builder()
 
 Most of these properties are the default Java tracker properties, which will be present in all Java tracker events. For example, `app_id`,`platform`, and `name_tracker` were set at `Tracker` initialization.
 
-Since this is a `Unstructured` event, the "unstruct\_event" field is also populated. The [self-describing JSON](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md) provided as part of the `Unstructured`/`ScreenView` event has been validated against the [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) schema registry.
+Since this is a `Unstructured` event, the "unstruct_event" field is also populated. The [self-describing JSON](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md) provided as part of the `Unstructured`/`ScreenView` event has been validated against the [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) schema registry.
 
 Below is an example `PageView` event using the default tracker configuration with Snowplow Micro. Again, the `null` columns and other sections of the payload have been removed.
 

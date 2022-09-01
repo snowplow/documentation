@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: first and last touch attribution with SQL"
-date: "2020-02-26"
+title: 'Tutorial: first and last touch attribution with SQL'
+date: '2020-02-26'
 sidebar_position: 20
 ---
 
@@ -19,7 +19,7 @@ create table derived.marketing_touches as (
   select
     domain_userid,
     derived_tstamp,
-    event_id, 
+    event_id,
     mkt_medium,
     mkt_source,
     mkt_term,
@@ -74,7 +74,7 @@ create table derived.first_marketing_touch as (
   select
     m.domain_userid,
     m.derived_tstamp,
-    m.event_id, 
+    m.event_id,
     m.mkt_medium,
     m.mkt_source,
     m.mkt_term,
@@ -84,7 +84,7 @@ create table derived.first_marketing_touch as (
     m.refr_source,
     m.refr_term
   from derived.marketing_touches m
-  join first_touch_tstamps f            
+  join first_touch_tstamps f
     -- only return first touch tstamps
   on m.domain_userid = f.domain_userid
   and m.derived_tstamp = f.first_touch_tstamp
@@ -98,7 +98,7 @@ select
   f.*,
   r.tr_total
 from derived.first_marketing_touch f
-right join derived.revenue_events r    
+right join derived.revenue_events r
   -- right join in case there is no marketing touch event to join to the revenue event
 on f.domain_userid = r.domain_userid
 ﻿
@@ -165,7 +165,7 @@ The window function is doing a lot of work for us, so it is worth explaining wha
 
 - First, it partitions our marketing touch and revenue events by user ID
 - Then it orders the event stream by time
-- Then for each event, it fetches the most recent not null marketing\_event\_id value. Note that this will be applied to every row in the table i.e. marketing touch events and transaction events.
+- Then for each event, it fetches the most recent not null marketing_event_id value. Note that this will be applied to every row in the table i.e. marketing touch events and transaction events.
 
 Where it is applied to marketing events, the most recent marketing event ID will be the marketing event ID for the current event. That doesn’t matter (we’re going to filter these events out of the event stream in the next step). The important thing is that for revenue events, it will correctly fetch the most recent marketing event ID. (Because the marketing event ID for the current row will be null, so will be ignored.)
 
@@ -184,7 +184,7 @@ with last_touch_event_ids_calculated as (
     revenue_event_id,
     event_type,
     tr_total
-  from derived.marketing_touches_and_revenue_events  
+  from derived.marketing_touches_and_revenue_events
 )
 select
   r.domain_userid,
@@ -202,9 +202,9 @@ select
   m.refr_term
 from last_touch_event_ids_calculated r
 right join derived.marketing_touches m
-on r.last_marketing_event_id = m.event_id  
+on r.last_marketing_event_id = m.event_id
   -- only perform the join for the last touch event
-where r.event_type = 'revenue event'    
+where r.event_type = 'revenue event'
   -- only fetch revenue events from the last_touch_event_ids_calculated table
 ```
 

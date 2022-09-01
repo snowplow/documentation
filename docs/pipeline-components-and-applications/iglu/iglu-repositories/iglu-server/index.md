@@ -1,6 +1,6 @@
 ---
-title: "Iglu Server"
-date: "2021-03-26"
+title: 'Iglu Server'
+date: '2021-03-26'
 sidebar_position: 2000
 ---
 
@@ -58,7 +58,7 @@ By default, the schema will not be public (available to others) - this can be ch
 For example, the following request:
 
 ```
-curl HOST/api/schemas -X POST -H "apikey: YOUR_APIKEY" -d @myschema.json 
+curl HOST/api/schemas -X POST -H "apikey: YOUR_APIKEY" -d @myschema.json
 ```
 
 will produce a response like this one, if no errors are encountered:
@@ -72,7 +72,7 @@ will produce a response like this one, if no errors are encountered:
 }
 ```
 
-_Please note:_ This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
+*Please note:* This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-server#12-put-requests)1.2 PUT requests
 
@@ -83,10 +83,10 @@ However, this means that a schema included in the request's body can be non-self
 For example:
 
 ```
-curl HOST/api/schemas/com.acme/ad_click/jsonschema/1-0-0 -X PUT -H "apikey: YOUR_APIKEY" -d @myschema.json 
+curl HOST/api/schemas/com.acme/ad_click/jsonschema/1-0-0 -X PUT -H "apikey: YOUR_APIKEY" -d @myschema.json
 ```
 
-_Please note:_ This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
+*Please note:* This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-server#13-single-schema-get-requests)1.3 Single-schema GET requests
 
@@ -161,7 +161,7 @@ GET requests support a `repr` URL parameter, allowing you to specify three dif
 "iglu:com.acme/ad_click/jsonschema/1-0-0"
 ```
 
-_Please note:_ While `metadata`/`body` query parameters used in previous versions of the Iglu Server are supported, they have been deprecated in favor of the single `repr` parameter.
+*Please note:* While `metadata`/`body` query parameters used in previous versions of the Iglu Server are supported, they have been deprecated in favor of the single `repr` parameter.
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-server#14-multiple-get-requests)1.4 Multiple GET requests
 
@@ -201,7 +201,7 @@ or `/api/schemas/public` in pre-0.5.0 releases.
 curl HOST/api/schemas -X GET -H "apikey: YOUR_APIKEY"
 ```
 
-_Please note:_ you can only retrieve schemas that can be read by your API key. This means that if you do not own a vendor you're requesting schemas for, you will only be able to retrieve the vendor's public schemas (if any exist).
+*Please note:* you can only retrieve schemas that can be read by your API key. This means that if you do not own a vendor you're requesting schemas for, you will only be able to retrieve the vendor's public schemas (if any exist).
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-server#15-swagger-support)1.5 Swagger support
 
@@ -235,30 +235,30 @@ curl HOST/api/validation/validate/schema/jsonschema -X POST -d @myevent.json
 The response received will be a detailed report containing information about the schema's validity, as well as potential errors or warnings:
 
 ```
-{  
+{
   "message": "The schema has some issues",
-  "report": [  
-    {  
+  "report": [
+    {
       "message": "The schema is missing the \"description\" property",
       "level": "INFO",
       "pointer": "/properties/targetUrl"
     },
-    {  
+    {
       "message": "A string type in the schema doesn't contain \"maxLength\" or format which is required",
       "level": "WARNING",
       "pointer": "/properties/targetUrl"
     },
-    {  
+    {
       "message": "The schema is missing the \"description\" property",
       "level": "INFO",
       "pointer": "/properties/clickId"
     },
-    {  
+    {
       "message": "A string type in the schema doesn't contain \"maxLength\" or format which is required",
       "level": "WARNING",
       "pointer": "/properties/clickId"
     },
-    {  
+    {
       "message": "Use \"type: null\" to indicate a field as optional for properties clickId",
       "level": "INFO",
       "pointer": "/"
@@ -267,7 +267,7 @@ The response received will be a detailed report containing information about the
 }
 ```
 
-Another endpoint in the validation service allows you to validate self-describing _data_ against a schema already located in the Iglu Server repository, if it is accessible to your API key:
+Another endpoint in the validation service allows you to validate self-describing *data* against a schema already located in the Iglu Server repository, if it is accessible to your API key:
 
 ```
 POST HOST/api/schemas/validation/validate/instance
@@ -288,10 +288,10 @@ The service will then either confirm the schema's validity:
 Or, if it has some issues, return a detailed report about its problems:
 
 ```
-{  
+{
   "message":"The instance is invalid against its schema",
-  "report":[  
-    {  
+  "report":[
+    {
       "message": "$.targetUrl: must be at least 1 characters long",
       "path": "$.targetUrl",
       "keyword": "minLength",
@@ -363,7 +363,7 @@ will produce a response like this one, if no errors are encountered:
 }
 ```
 
-_Please note:_ This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
+*Please note:* This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
 
 ### [](https://github.com/snowplow/iglu/wiki/Iglu-server#32-single-draft-get-requests)3.2 Single-draft GET requests
 
@@ -438,7 +438,7 @@ GET requests support a `repr` URL parameter, allowing you to specify three dif
 "iglu:com.acme/ad_click/jsonschema/1-0-0"
 ```
 
-_Please note:_ While `metadata`/`body` query parameters used in previous versions of the Iglu Server are supported, they have been deprecated in favor of the single `repr` parameter.
+*Please note:* While `metadata`/`body` query parameters used in previous versions of the Iglu Server are supported, they have been deprecated in favor of the single `repr` parameter.
 
 ## [](https://github.com/snowplow/iglu/wiki/Iglu-server#4-debug-apidebug-and-metadata-apimeta-services)4\. Debug (`/api/debug`) and metadata (`/api/meta`) services
 

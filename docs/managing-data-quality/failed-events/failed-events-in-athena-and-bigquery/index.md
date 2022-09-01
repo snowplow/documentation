@@ -1,6 +1,6 @@
 ---
-title: "Querying failed events in Athena and BigQuery"
-date: "2020-04-30"
+title: 'Querying failed events in Athena and BigQuery'
+date: '2020-04-30'
 sidebar_position: 5000
 ---
 
@@ -26,7 +26,6 @@ CREATE DATABASE IF NOT EXISTS {{ DATABASE }}
 Then run each sql statement provided in the [badrows-tables repo](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/athena) by copying them into the Athena query editor:
 
 - ![](images/athena-create-table.png)
-    
 
 Create table in Athena
 
@@ -38,7 +37,6 @@ WHERE from_iso8601_timestamp(data.failure.timestamp) > DATE_ADD('day', -7, now()
 ```
 
 - ![](images/athena-count.png)
-    
 
 Athena query
 
@@ -131,7 +129,6 @@ WHERE DATE(PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%S', LTRIM(REGEXP_EXTRACT(_FILE_NAME,
 You can repeat that query for each table you created in your bad rows dataset.
 
 - ![](images/bigquery-count.png)
-    
 
 If you have schema violations, you might want to find which tracker sent the event:
 

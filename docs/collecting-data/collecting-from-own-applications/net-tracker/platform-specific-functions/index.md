@@ -1,6 +1,6 @@
 ---
-title: "Platform specific functions"
-date: "2020-02-26"
+title: 'Platform specific functions'
+date: '2020-02-26'
 sidebar_position: 70
 ---
 

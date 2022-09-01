@@ -1,6 +1,6 @@
 ---
-title: "Adding extra data: The Subject class"
-date: "2020-02-26"
+title: 'Adding extra data: The Subject class'
+date: '2020-02-26'
 sidebar_position: 30
 ---
 
@@ -228,8 +228,6 @@ t.track_page_view("http://www.example.com")
 t.set_subject(s1).track_struct_event("Ecomm", "add-to-basket", "dog-skateboarding-video", "hd", 13.99)
 ```
 
-  
-
 **_\*\*New in v0.9.0_**
 
 Since version 0.9.0, it is now possible to set the subject per event, instead of having to mutate the Tracker's subject. This enables a fine-grained control of the information you may want to add during the user journeys. It also makes the tracking of events idempotent even for multi-threaded applications, since it avoids mutating a shared state. The Tracker-level subject will only be used for events that don't specify an event subject.
@@ -241,8 +239,8 @@ from snowplow_tracker import Emitter, Tracker, Subject
 
 e = Emitter("0.0.0.0", port=9090)
 default_subject = Subject().set_platform("srv")
-t = Tracker([e], s) 
-# at this point the Tracker's subject is the default_subject. 
+t = Tracker([e], s)
+# at this point the Tracker's subject is the default_subject.
 # The default_subject will be used in cases where an event_subject is not provided
 
 # specifying event_subject - supported by all track methods

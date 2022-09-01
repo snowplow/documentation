@@ -1,6 +1,6 @@
 ---
-title: "Tracking Events"
-date: "2021-03-26"
+title: 'Tracking Events'
+date: '2021-03-26'
 sidebar_position: 1000
 ---
 
@@ -66,7 +66,7 @@ snowplow('trackPageView');
 Track pageview is called using the simple:
 
 ```javascript
-snowplow('trackPageView');
+snowplow('trackPageView')
 ```
 
 This method automatically captures the URL, referrer and page title (inferred from the `Title` tag.
@@ -74,7 +74,7 @@ This method automatically captures the URL, referrer and page title (inferred fr
 If you wish, you can override the title with a custom value:
 
 ```javascript
-snowplow('trackPageView', { title: 'my custom page title' });
+snowplow('trackPageView', { title: 'my custom page title' })
 ```
 
 `trackPageView` can also be passed an array of custom context as an additional final parameter. See [custom context](#custom-context) for more information.
@@ -87,31 +87,35 @@ For example:
 // Turn on page pings every 10 seconds
 snowplow('enableActivityTracking', {
   minimumVisitLength: 10,
-  heartbeatDelay: 10
-});
+  heartbeatDelay: 10,
+})
 
 snowplow('trackPageView', {
   // The usual array of static contexts
-  context: [{
-    schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
-    data: {
-      staticValue: new Date().toString()
-    }
-  }],
+  context: [
+    {
+      schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
+      data: {
+        staticValue: new Date().toString(),
+      },
+    },
+  ],
   // Function which returns an array of custom context
   // Gets called once per page view / page ping
-  contextCallback: function() {
-    return [{
-      schema: 'iglu:com.acme/dynamic_context/jsonschema/1-0-0',
-      data: {
-        dynamicValue: new Date().toString()
-      }
-    }];
-  }
-});
+  contextCallback: function () {
+    return [
+      {
+        schema: 'iglu:com.acme/dynamic_context/jsonschema/1-0-0',
+        data: {
+          dynamicValue: new Date().toString(),
+        },
+      },
+    ]
+  },
+})
 ```
 
-The page view and every subsequent page ping will have both a static\_context and a dynamic\_context attached. The static\_contexts will all have the same staticValue, but the dynamic\_contexts will have different dynamicValues since a new context is created for every event.
+The page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
 
 ### Activity Tracking: page pings
 
@@ -124,21 +128,21 @@ That is accomplished using 'page ping' events. If activity tracking is enabled, 
 Page pings are enabled by:
 
 ```javascript
-snowplow('enableActivityTracking', { 
-  minimumVisitLength: number, 
-  heartbeatDelay: number 
-});
+snowplow('enableActivityTracking', {
+  minimumVisitLength: number,
+  heartbeatDelay: number,
+})
 ```
 
 where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. So, if you executed:
 
 ```javascript
-snowplow('enableActivityTracking', { 
-  minimumVisitLength: 30, 
-  heartbeatDelay: 10 
-});
+snowplow('enableActivityTracking', {
+  minimumVisitLength: 30,
+  heartbeatDelay: 10,
+})
 
-snowplow('trackPageView');
+snowplow('trackPageView')
 ```
 
 The first ping would occur after 30 seconds, and subsequent pings every 10 seconds as long as the user continued to browse the page actively.
@@ -146,7 +150,7 @@ The first ping would occur after 30 seconds, and subsequent pings every 10 secon
 Notes:
 
 - In general this is executed as part of the main Snowplow tracking tag. As a result, you can elect to enable this on specific pages.
-- The `enableActivityTracking` method **must** be called _before_ the `trackPageView` method.
+- The `enableActivityTracking` method **must** be called *before* the `trackPageView` method.
 - Activity tracking will be disabled if either `minimumVisitLength` or `heartbeatDelay` is not integer. This is to prevent relentless callbacks.
 
 #### `enableActivityTrackingCallback`
@@ -154,33 +158,33 @@ Notes:
 You can now perform edge analytics in the browser to reduce the number of events sent to you collector whilst still tracking user activity. The Snowplow JavaScript Tracker enabled this by allowing a callback to be specified in place of a page ping being sent. This is enabled by:
 
 ```javascript
-snowplow('enableActivityTrackingCallback', { 
-  minimumVisitLength: number, 
-  heartbeatDelay: number, 
+snowplow('enableActivityTrackingCallback', {
+  minimumVisitLength: number,
+  heartbeatDelay: number,
   callback: (data: ActivityCallbackData) => void
 });
 ```
 
-where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. The `callback` should be a function which will receive an event object containing the page ping activity information, including pageivew\_id, and any Page View contexts.
+where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. The `callback` should be a function which will receive an event object containing the page ping activity information, including pageivew_id, and any Page View contexts.
 
 ```javascript
 type ActivityCallbackData = {
-    /**
-     * All context for the activity tracking
-     * Often generated by the page view events context callback
-     */
-    context: Array<SelfDescribingJson>;
-    /** The current page view id */
-    pageViewId: string;
-    /** The minimum X scroll position for the current page view */
-    minXOffset: number;
-    /** The maximum X scroll position for the current page view */
-    minYOffset: number;
-    /** The minimum Y scroll position for the current page view */
-    maxXOffset: number;
-    /** The maximum Y scroll position for the current page view */
-    maxYOffset: number;
-};
+  /**
+   * All context for the activity tracking
+   * Often generated by the page view events context callback
+   */
+  context: Array<SelfDescribingJson>,
+  /** The current page view id */
+  pageViewId: string,
+  /** The minimum X scroll position for the current page view */
+  minXOffset: number,
+  /** The maximum X scroll position for the current page view */
+  minYOffset: number,
+  /** The minimum Y scroll position for the current page view */
+  maxXOffset: number,
+  /** The maximum Y scroll position for the current page view */
+  maxYOffset: number,
+}
 ```
 
 A full example of how this might be used to aggregate page ping information and then send an event on page unload is below:
@@ -198,9 +202,9 @@ var aggregatedEvent = {
     maxYOffset: 0,
     numEvents: 0
 };
-snowplow('enableActivityTrackingCallback', { 
-  minimumVisitLength: 10, 
-  heartbeatDelay: 10, 
+snowplow('enableActivityTrackingCallback', {
+  minimumVisitLength: 10,
+  heartbeatDelay: 10,
   callback: function (event) {
     aggregatedEvent = {
         pageViewId: event.pageViewId,
@@ -239,7 +243,7 @@ We are using `visibilitychange` events as `beforeunload` isn't a reliable option
 You can also trigger a page ping manually with:
 
 ```javascript
-snowplow('updatePageActivity');
+snowplow('updatePageActivity')
 ```
 
 This is particularly useful when a user is passively engaging with your content, e.g. watching a video.
@@ -265,16 +269,16 @@ snowplow('trackSelfDescribingEvent', {
   event: {
     schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
     data: {
-        productId: 'ASO01043',
-        category: 'Dresses',
-        brand: 'ACME',
-        returning: true,
-        price: 49.95,
-        sizes: ['xs', 's', 'l', 'xl', 'xxl'],
-        availableSince: new Date(2013,3,7)
-    }
-  }
-});
+      productId: 'ASO01043',
+      category: 'Dresses',
+      brand: 'ACME',
+      returning: true,
+      price: 49.95,
+      sizes: ['xs', 's', 'l', 'xl', 'xxl'],
+      availableSince: new Date(2013, 3, 7),
+    },
+  },
+})
 ```
 
 The second argument is a [self-describing JSON](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/). It has two fields:
@@ -299,7 +303,7 @@ However, as part of a Snowplow implementation there may be interactons where cus
 There are five parameters can be associated with each structured event. Of them, only the first two are required:
 
 | **Name**   | **Required?** | **Description**                                                                                                                                                                      |
-|------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `Category` | Yes           | The name you supply for the group of objects you want to track e.g. 'media', 'ecomm'                                                                                                 |
 | `Action`   | Yes           | A string which defines the type of user interaction for the web object e.g. 'play-video', 'add-to-basket'                                                                            |
 | `Label`    | No            | An optional string which identifies the specific object being actioned e.g. ID of the video being played, or the SKU or the product added-to-basket                                  |
@@ -314,20 +318,20 @@ snowplow('trackStructEvent', {
   action: 'action',
   label: 'label',
   property: 'property',
-  value: 0.0
-});
+  value: 0.0,
+})
 ```
 
 An example of tracking a user listening to a music mix:
 
 ```javascript
 snowplow('trackStructEvent', {
-  category: 'Mixes', 
-  action: 'Play', 
-  label: 'MrC/fabric-0503-mix', 
+  category: 'Mixes',
+  action: 'Play',
+  label: 'MrC/fabric-0503-mix',
   property: '',
-  value: 0.0
-});
+  value: 0.0,
+})
 ```
 
 Note that in the above example no value is set for the `event property`.
@@ -373,20 +377,22 @@ How to track a **page view** with both of these contexts attached:
 
 ```javascript
 snowplow('trackPageView', {
-  context: [{
-    schema: "iglu:com.example_company/page/jsonschema/1-2-1",
-    data: {
-      pageType: 'test',
-      lastUpdated: new Date(2021,04,01)
-    }
-  },
-  {
-    schema: "iglu:com.example_company/user/jsonschema/2-0-0",
-    data: {
-      userType: 'tester'
-    }
-  }]
-});
+  context: [
+    {
+      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      data: {
+        pageType: 'test',
+        lastUpdated: new Date(2021, 04, 01),
+      },
+    },
+    {
+      schema: 'iglu:com.example_company/user/jsonschema/2-0-0',
+      data: {
+        userType: 'tester',
+      },
+    },
+  ],
+})
 ```
 
 How to track a **self describing event** with both of these contexts attached:
@@ -397,23 +403,25 @@ snowplow('trackSelfDescribingEvent', {
     schema: 'iglu:com.example_company/product_viewed/jsonschema/1-0-1',
     data: {
       productId: '12345',
-      price: 10.99
-    }
+      price: 10.99,
+    },
   },
-  context: [{
-    schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
-    data: {
-      pageType: 'test',
-      lastUpdated: new Date(2021,04,01)
-    }
-  },
-  {
-    schema: "iglu:com.example_company/user/jsonschema/2-0-0",
-    data: {
-      userType: 'tester'
-    }
-  }]
-});
+  context: [
+    {
+      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      data: {
+        pageType: 'test',
+        lastUpdated: new Date(2021, 04, 01),
+      },
+    },
+    {
+      schema: 'iglu:com.example_company/user/jsonschema/2-0-0',
+      data: {
+        userType: 'tester',
+      },
+    },
+  ],
+})
 ```
 
 For more information on custom context, see [here](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md).
@@ -428,12 +436,12 @@ Here is an example that adds a global context entity to all subsequently tracked
 // Create a context entity and add it to global context
 let contextEntity = {
   schema: 'iglu:com.acme/user_context/jsonschema/1-0-0',
-  data: { userid: 1234, name: 'John Doe' }
-};
-window.snowplow('addGlobalContexts', [contextEntity]);
+  data: { userid: 1234, name: 'John Doe' },
+}
+window.snowplow('addGlobalContexts', [contextEntity])
 
 // The global context will be added to this page view event as well
-window.snowplow('trackPageView');
+window.snowplow('trackPageView')
 ```
 
 You may not want to add the same context entity to all tracked events. There are several ways to make global context dynamic:
@@ -450,14 +458,14 @@ A sample context generator that conditionally generates a context entity could l
 
 ```javascript
 const contextGenerator = (args) => {
-    if (args.eventType == 'pv') {
-        return {
-            schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
-            data: { test: 1 },
-        };
+  if (args.eventType == 'pv') {
+    return {
+      schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+      data: { test: 1 },
     }
-};
-window.snowplow('addGlobalContexts', [contextGenerator]);
+  }
+}
+window.snowplow('addGlobalContexts', [contextGenerator])
 ```
 
 The optional input is an associative array that contains three elements:
@@ -475,7 +483,7 @@ This argument is a string taken from the event payload field, `e`.
 `eventType` takes the following values:
 
 | Type                           | `e`       |
-|--------------------------------|-----------|
+| ------------------------------ | --------- |
 | Pageview tracking              | pv        |
 | Page pings                     | pp        |
 | Link click                     | ue        |
@@ -516,10 +524,10 @@ Filter functions take the standard callback arguments defined for context genera
 ```javascript
 // A filter that will only attach contexts to structured events
 function structuredEventFilter(args) {
-  return args['eventType'] === 'se';
+  return args['eventType'] === 'se'
 }
-var globalContextDefinition = [structuredEventFilter, contextEntityToBeAdded];
-window.snowplow('addGlobalContexts', [globalContextDefinition]);
+var globalContextDefinition = [structuredEventFilter, contextEntityToBeAdded]
+window.snowplow('addGlobalContexts', [globalContextDefinition])
 ```
 
 #### Rulesets
@@ -540,36 +548,38 @@ Some examples, take note that wild-card matching URI path components is defined 
 ```javascript
 // Only attaches contexts to this one schema
 var ruleSetAcceptOne = {
-  accept: ['iglu:com.mailchimp/cleaned_email/jsonschema/1-0-0']
-};
+  accept: ['iglu:com.mailchimp/cleaned_email/jsonschema/1-0-0'],
+}
 
 // Only attaches contexts to these schemas
 var ruleSetAcceptTwo = {
-  accept: ['iglu:com.mailchimp/cleaned_email/jsonschema/1-0-0',
-  'iglu:com.mailchimp/subscribe/jsonschema/1-0-0']
-};
+  accept: [
+    'iglu:com.mailchimp/cleaned_email/jsonschema/1-0-0',
+    'iglu:com.mailchimp/subscribe/jsonschema/1-0-0',
+  ],
+}
 
 // Only attaches contexts to schemas with mailchimp vendor
 var ruleSetAcceptVendor = {
-  accept: ['iglu:com.mailchimp/*/jsonschema/*-*-*']
-};
+  accept: ['iglu:com.mailchimp/*/jsonschema/*-*-*'],
+}
 
 // Only attaches contexts to schemas that aren't mailchimp vendor
 var ruleSetRejectVendor = {
-  reject: ['iglu:com.mailchimp/*/jsonschema/*-*-*']
-};
+  reject: ['iglu:com.mailchimp/*/jsonschema/*-*-*'],
+}
 
 // Only attach to Snowplow first class events
 var ruleSet = {
-  accept: ['iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4']
-};
+  accept: ['iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4'],
+}
 ```
 
 You can add a global context entity with a ruleset as follows:
 
 ```javascript
-var globalContextDefinition = [ruleSet, contextEntityToAdd];
-window.snowplow('addGlobalContexts', [globalContextDefinition]);
+var globalContextDefinition = [ruleSet, contextEntityToAdd]
+window.snowplow('addGlobalContexts', [globalContextDefinition])
 ```
 
 #### [](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#rule-requirements)Rule requirements
@@ -609,9 +619,9 @@ For example:
 var entity = {
   schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
   data: { test: 1 },
-};
-window.snowplow('addGlobalContexts', [entity]); // add a global context
-window.snowplow('removeGlobalContexts', [entity]); // remove the global context
+}
+window.snowplow('addGlobalContexts', [entity]) // add a global context
+window.snowplow('removeGlobalContexts', [entity]) // remove the global context
 ```
 
 #### `clearGlobalContexts`
@@ -629,15 +639,15 @@ Link click tracking is enabled using the `enableLinkClickTracking` method. Use
 Turn on link click tracking like this:
 
 ```javascript
-snowplow('enableLinkClickTracking');
+snowplow('enableLinkClickTracking')
 ```
 
 This is its signature (Where `?` defines an optional property):
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
-  options?: FilterCriterion, 
-  pseudoClicks?: boolean, 
+snowplow('enableLinkClickTracking', {
+  options?: FilterCriterion,
+  pseudoClicks?: boolean,
   trackContent?: boolean
   context?: SelfDescribingJson[]
 });
@@ -647,12 +657,12 @@ Where FilterCriterion is an object:
 
 ```javascript
 interface FilterCriterion {
-    /** A collection of class names to include */
-    allowlist?: string[];
-    /** A collector of class names to exclude */
-    denylist?: string[];
-    /** A callback which returns a boolean as to whether the element should be included */
-    filter?: (elt: HTMLElement) => boolean;
+  /** A collection of class names to include */
+  allowlist?: string[];
+  /** A collector of class names to exclude */
+  denylist?: string[];
+  /** A callback which returns a boolean as to whether the element should be included */
+  filter?: (elt: HTMLElement) => boolean;
 }
 ```
 
@@ -663,17 +673,17 @@ You can control which links are tracked using the second argument. There are thr
 This is an array of CSS classes which should be ignored by link click tracking. For example, the below code will stop link click events firing for links with the class "barred" or "untracked", but will fire link click events for all other links:
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
+snowplow('enableLinkClickTracking', {
   options: {
-    denylist: ['barred', 'untracked']
-  }
-});
+    denylist: ['barred', 'untracked'],
+  },
+})
 ```
 
 If there is only one class name you wish to deny, you should still put it in an array:
 
 ```javascript
-snowplow('enableLinkClickTracking', { options: { 'denylist': ['barred'] } });
+snowplow('enableLinkClickTracking', { options: { denylist: ['barred'] } })
 ```
 
 **Allowlists**
@@ -681,17 +691,17 @@ snowplow('enableLinkClickTracking', { options: { 'denylist': ['barred'] } });
 The opposite of a denylist. This is an array of the CSS classes of links which you do want to be tracked. Only clicks on links with a class in the list will be tracked.
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
-  options: { 
-    'allowlist': ['unbarred', 'tracked']
-  }
-});
+snowplow('enableLinkClickTracking', {
+  options: {
+    allowlist: ['unbarred', 'tracked'],
+  },
+})
 ```
 
 If there is only one class name you wish to whitelist, you should still put it in an array:
 
 ```javascript
-snowplow('enableLinkClickTracking', { options: { 'allowlist': ['unbarred'] } });
+snowplow('enableLinkClickTracking', { options: { allowlist: ['unbarred'] } })
 ```
 
 **Filter functions**
@@ -701,23 +711,23 @@ You can provide a filter function which determines which links should be tracked
 The following code will track clicks on those and only those links whose id contains the string "interesting":
 
 ```javascript
-function myFilter (linkElement) {
-  return linkElement.id.indexOf('interesting') > -1;
+function myFilter(linkElement) {
+  return linkElement.id.indexOf('interesting') > -1
 }
 
-snowplow('enableLinkClickTracking', { options: { 'filter': myFilter } });
+snowplow('enableLinkClickTracking', { options: { filter: myFilter } })
 ```
 
 An optional parameter is `pseudoClicks`. If this is not turned on, Firefox will not recognise middle clicks. If it is turned on, there is a small possibility of false positives (click events firing when they shouldn't). **Turning this feature on is recommended**:
 
 ```javascript
-snowplow('enableLinkClickTracking', { pseudoClicks: true });
+snowplow('enableLinkClickTracking', { pseudoClicks: true })
 ```
 
 Another optional parameter is `trackContent`. Set it to `true` if you want link click events to capture the innerHTML of the clicked link:
 
 ```javascript
-snowplow('enableLinkClickTracking', { trackContent: true });
+snowplow('enableLinkClickTracking', { trackContent: true })
 ```
 
 The innerHTML of a link is all the text between the `a` tags. Note that if you use a base 64 encoded image as a link, the entire base 64 string will be included in the event.
@@ -735,10 +745,10 @@ A dynamic context could therefore look something like this for link click events
 ```javascript
 let dynamicContext = function (element) {
   // perform operations here to construct the context
-  return context;
-};
+  return context
+}
 
-snowplow('enableLinkClickTracking', { context: [dynamicContext] });
+snowplow('enableLinkClickTracking', { context: [dynamicContext] })
 ```
 
 See [custom context](#custom-context) for more information.
@@ -748,7 +758,7 @@ See [custom context](#custom-context) for more information.
 `enableLinkClickTracking` only tracks clicks on links which exist when the page has loaded. If new links can be added to the page after then which you wish to track, just use `refreshLinkClickTracking`. This will add Snowplow click listeners to all links which do not already have them (and which match the denylist, allowlist, or filter function you specified when `enableLinkClickTracking` was originally called). Use it like this:
 
 ```javascript
-snowplow('refreshLinkClickTracking');
+snowplow('refreshLinkClickTracking')
 ```
 
 #### `trackLinkClick`
@@ -774,12 +784,12 @@ Of these arguments, only `targetUrl` is required. This is how to use `trackLi
 
 ```javascript
 snowplow('trackLinkClick', {
-  targetUrl: 'http://www.example.com', 
-  elementId: 'first-link', 
-  elementClasses: ['class-1', 'class-2'], 
-  elementTarget: '', 
-  elementContent: 'this page'
-});
+  targetUrl: 'http://www.example.com',
+  elementId: 'first-link',
+  elementClasses: ['class-1', 'class-2'],
+  elementTarget: '',
+  elementContent: 'this page',
+})
 ```
 
 `trackLinkClick` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
@@ -796,10 +806,10 @@ By default, all three event types are tracked. However, it is possible to subscr
 
 ```javascript
 snowplow('enableFormTracking', {
-    options: {
-        events: ['submit_form', 'focus_form', 'change_form']
-    },
-});
+  options: {
+    events: ['submit_form', 'focus_form', 'change_form'],
+  },
+})
 ```
 
 ##### [](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#change_form)`change_form`
@@ -821,7 +831,7 @@ When a user focuses on a form element, a [`focus_form`](https://github.com/snow
 Use the `enableFormTracking` method to add event listeners to turn on form tracking by adding event listeners to all form elements and to all interactive elements inside forms (that is, all `input`, `textarea`, and `select` elements).
 
 ```javascript
-snowplow('enableFormTracking');
+snowplow('enableFormTracking')
 ```
 
 This will only work for form elements which exist when it is called. If you are creating a form programatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
@@ -853,7 +863,7 @@ This is a function used to transform data in each form field. The value and elem
 Contexts can be sent with all form tracking events by supplying them in an array in the `contexts` argument.
 
 ```javascript
-snowplow('enableFormTracking', { options: {}, context: [] });
+snowplow('enableFormTracking', { options: {}, context: [] })
 ```
 
 These contexts can be dynamic, i.e. they can be traditional self-describing JSON objects, or callbacks that generate valid self-describing JSON objects.
@@ -865,10 +875,10 @@ A dynamic context could therefore look something like this for form change event
 ```javascript
 let dynamicContext = function (elt, type, value) {
   // perform operations here to construct the context
-  return context;
-};
+  return context
+}
 
-snowplow('enableFormTracking', { options: {}, context: [dynamicContext] });
+snowplow('enableFormTracking', { options: {}, context: [dynamicContext] })
 ```
 
 **Examples**
@@ -878,14 +888,14 @@ To track every form element and every field except those fields named "password"
 ```javascript
 var opts = {
   forms: {
-    denylist: []
+    denylist: [],
   },
   fields: {
-    denylist: ['password']
-  }
-};
+    denylist: ['password'],
+  },
+}
 
-snowplow('enableFormTracking', { options: opts });
+snowplow('enableFormTracking', { options: opts })
 ```
 
 To track only the forms with CSS class "tracked", and only those fields whose ID is not "private":
@@ -893,16 +903,16 @@ To track only the forms with CSS class "tracked", and only those fields whose ID
 ```javascript
 var opts = {
   forms: {
-    allowlist: ["tracked"]
+    allowlist: ['tracked'],
   },
   fields: {
     filter: function (elt) {
-      return elt.id !== "private";
-    }
-  }
-};
+      return elt.id !== 'private'
+    },
+  },
+}
 
-snowplow('enableFormTracking', { options: opts });
+snowplow('enableFormTracking', { options: opts })
 ```
 
 To transform the form fields with an MD5 hashing function:
@@ -910,20 +920,20 @@ To transform the form fields with an MD5 hashing function:
 ```javascript
 var opts = {
   forms: {
-    allowlist: ["tracked"]
+    allowlist: ['tracked'],
   },
   fields: {
     filter: function (elt) {
-      return elt.id !== "private";
+      return elt.id !== 'private'
     },
     transform: function (value, elt) {
       // can use elt to make transformation decisions
-      return MD5(value);
-    }
-  }
-};
+      return MD5(value)
+    },
+  },
+}
 
-snowplow('enableFormTracking', { options: opts });
+snowplow('enableFormTracking', { options: opts })
 ```
 
 #### Tracking forms embedded inside iframes
@@ -935,13 +945,13 @@ In case you are able to access form elements inside an iframe, you can pass them
 The following example shows how to identify the form elements inside an iframe and pass them to the `enableFormTracking` function:
 
 ```javascript
-let iframe = document.getElementById('form_iframe'); // find the element for the iframe
-let forms = iframe.contentWindow.document.getElementsByTagName('form'); // find form elements inside the iframe
+let iframe = document.getElementById('form_iframe') // find the element for the iframe
+let forms = iframe.contentWindow.document.getElementsByTagName('form') // find form elements inside the iframe
 snowplow('enableFormTracking', {
-    options: {
-        forms: forms // pass the embedded forms when enabling form tracking
-    },
-});
+  options: {
+    forms: forms, // pass the embedded forms when enabling form tracking
+  },
+})
 ```
 
 ### Ecommerce tracking
@@ -957,7 +967,7 @@ Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three 
 The `addTrans` method creates a transaction object. It takes nine possible parameters, two of which are required:
 
 | **Parameter** | **Description**                                      | **Required?** | **Example value** |
-|---------------|------------------------------------------------------|---------------|-------------------|
+| ------------- | ---------------------------------------------------- | ------------- | ----------------- |
 | `orderId`     | Internal unique order id number for this transaction | Yes           | '1234'            |
 | `affiliation` | Partner or store affiliation                         | No            | 'Womens Apparel'  |
 | `total`       | Total amount of the transaction                      | Yes           | '19.99'           |
@@ -972,16 +982,16 @@ For example:
 
 ```javascript
 snowplow('addTrans', {
-    orderId: '1234',  // required
-    total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
-    tax: 1.29,
-    shipping: 5,
-    city: 'San Jose',
-    state: 'California',
-    country: 'USA',
-    currency: 'USD'
-});
+  orderId: '1234', // required
+  total: 11.99, // required
+  affiliation: 'Acme Clothing',
+  tax: 1.29,
+  shipping: 5,
+  city: 'San Jose',
+  state: 'California',
+  country: 'USA',
+  currency: 'USD',
+})
 ```
 
 `addTrans` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
@@ -993,7 +1003,7 @@ The `addItem` method is used to capture the details of each product item inclu
 There are six potential parameters that can be passed with each call, four of which are required:
 
 | **Parameter** | **Description**                                    | **Required?**                                       | **Example value** |
-|---------------|----------------------------------------------------|-----------------------------------------------------|-------------------|
+| ------------- | -------------------------------------------------- | --------------------------------------------------- | ----------------- |
 | `orderId`     | Order ID of the transaction to associate with item | Yes                                                 | '1234'            |
 | `sku`         | Item's SKU code                                    | Yes                                                 | 'pbz0001234'      |
 | `name`        | Product name                                       | No, but advisable (to make interpreting SKU easier) | 'Black Tarot'     |
@@ -1006,14 +1016,14 @@ For example:
 
 ```javascript
 snowplow('addItem', {
-    orderId: '1234', // required
-    sku: 'DD44',     // required
-    name: 'T-Shirt',      
-    category: 'Green Medium',
-    price: 11.99,
-    quantity: 1,
-    currency: 'USD'
-});
+  orderId: '1234', // required
+  sku: 'DD44', // required
+  name: 'T-Shirt',
+  category: 'Green Medium',
+  price: 11.99,
+  quantity: 1,
+  currency: 'USD',
+})
 ```
 
 `addItem` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
@@ -1023,66 +1033,76 @@ snowplow('addItem', {
 Once the transaction object has been created (using `addTrans`) and the relevant item data added to it using the `addItem` method, we are ready to send the data to the collector. This is initiated using the `trackTrans` method:
 
 ```javascript
-snowplow('trackTrans');
+snowplow('trackTrans')
 ```
 
 #### Putting the three methods together: a complete example
 
 ```html
 <html>
-<head>
-<title>Receipt for your clothing purchase from Acme Clothing</title>
-<script type="text/javascript">
+  <head>
+    <title>Receipt for your clothing purchase from Acme Clothing</title>
+    <script type="text/javascript">
+      ;(function (p, l, o, w, i, n, g) {
+        if (!p[i]) {
+          p.GlobalSnowplowNamespace = p.GlobalSnowplowNamespace || []
+          p.GlobalSnowplowNamespace.push(i)
+          p[i] = function () {
+            ;(p[i].q = p[i].q || []).push(arguments)
+          }
+          p[i].q = p[i].q || []
+          n = l.createElement(o)
+          g = l.getElementsByTagName(o)[0]
+          n.async = 1
+          n.src = w
+          g.parentNode.insertBefore(n, g)
+        }
+      })(window, document, 'script', '{{URL to sp.js}}', 'snowplow')
 
-  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
-  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
-  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
+      snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+        appId: 'my-store',
+      })
+      snowplow('enableActivityTracking', {
+        minimumVisitLength: 30,
+        heartbeatDelay: 10,
+      })
+      snowplow('trackPageView')
+      snowplow('enableLinkClickTracking')
 
-  snowplow('newTracker', 'sp', '{{collector_url_here}}', { appId: 'my-store' });
-  snowplow('enableActivityTracking',{ 
-    minimumVisitLength: 30, 
-    heartbeatDelay: 10 
-  });
-  snowplow('trackPageView');
-  snowplow('enableLinkClickTracking');
+      snowplow('addTrans', {
+        orderId: '1234', // required
+        total: 11.99, // required
+        affiliation: 'Acme Clothing',
+        tax: 1.29,
+        shipping: 5,
+        city: 'San Jose',
+        state: 'California',
+        country: 'USA',
+        currency: 'USD',
+      })
 
-  snowplow('addTrans', {
-    orderId: '1234',  // required
-    total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
-    tax: 1.29,
-    shipping: 5,
-    city: 'San Jose',
-    state: 'California',
-    country: 'USA',
-    currency: 'USD'
-  });
+      // add item might be called for every item in the shopping cart
+      // where your ecommerce engine loops through each item in the cart and
+      // prints out _addItem for each
+      snowplow('addItem', {
+        orderId: '1234', // required
+        sku: 'DD44', // required
+        name: 'T-Shirt',
+        category: 'Green Medium',
+        price: 11.99,
+        quantity: 1,
+        currency: 'USD',
+      })
 
-   // add item might be called for every item in the shopping cart
-   // where your ecommerce engine loops through each item in the cart and
-   // prints out _addItem for each
-  snowplow('addItem', {
-    orderId: '1234', // required
-    sku: 'DD44',     // required
-    name: 'T-Shirt',      
-    category: 'Green Medium',
-    price: 11.99,
-    quantity: 1,
-    currency: 'USD'
-  });
-
-  // trackTrans sends the transaction to Snowplow tracking servers.
-  // Must be called last to commit the transaction.
-  snowplow('trackTrans'); //submits transaction to the collector
-
-</script>
-</head>
-<body>
-
-  Thank you for your order.  You will receive an email containing all your order details.
-
-</body>
+      // trackTrans sends the transaction to Snowplow tracking servers.
+      // Must be called last to commit the transaction.
+      snowplow('trackTrans') //submits transaction to the collector
+    </script>
+  </head>
+  <body>
+    Thank you for your order. You will receive an email containing all your
+    order details.
+  </body>
 </html>
 ```
 
@@ -1091,7 +1111,7 @@ snowplow('trackTrans');
 These methods let you track users adding and removing items from a cart on an ecommerce site. Their arguments are identical:
 
 | **Name**    | **Required?** | **Description**                        | **Type** |
-|-------------|---------------|----------------------------------------|----------|
+| ----------- | ------------- | -------------------------------------- | -------- |
 | `sku`       | Yes           | Item SKU                               | string   |
 | `name`      | No            | Item name                              | string   |
 | `category`  | No            | Item category                          | string   |
@@ -1103,22 +1123,22 @@ An example:
 
 ```javascript
 snowplow('trackAddToCart', {
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
-  currency: 'GBP'
-});
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
+  currency: 'GBP',
+})
 
 snowplow('trackRemoveFromCart', {
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
-  currency: 'GBP'
-});
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
+  currency: 'GBP',
+})
 ```
 
 Both methods are implemented as Snowplow self describing events. You can see schemas for the [`add_to_cart`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/add_to_cart/jsonschema/1-0-0) and [`remove_from_cart`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/remove_from_cart/jsonschema/1-0-0) events.
@@ -1134,7 +1154,7 @@ Social tracking will be used to track the way users interact with Facebook, Twit
 The `trackSocialInteraction` method takes three parameters:
 
 | **Parameter** | **Description**                                               | **Required?** | **Example value**     |
-|---------------|---------------------------------------------------------------|---------------|-----------------------|
+| ------------- | ------------------------------------------------------------- | ------------- | --------------------- |
 | `action`      | Social action performed                                       | Yes           | 'like', 'retweet'     |
 | `network`     | Social network                                                | Yes           | 'facebook', 'twitter' |
 | `target`      | Object social action is performed on e.g. page ID, product ID | No            | '19.99'               |
@@ -1142,21 +1162,21 @@ The `trackSocialInteraction` method takes three parameters:
 The method is executed in as:
 
 ```javascript
-snowplow('trackSocialInteraction', { 
-  action: string, 
-  network: string, 
-  target: string 
-});
+snowplow('trackSocialInteraction', {
+  action: string,
+  network: string,
+  target: string,
+})
 ```
 
 For example:
 
 ```javascript
 snowplow('trackSocialInteraction', {
-  action: 'like', 
-  network: 'facebook', 
-  target: 'pbz00123'
-});
+  action: 'like',
+  network: 'facebook',
+  target: 'pbz00123',
+})
 ```
 
 `trackSocialInteraction` can also be passed an array of custom context as an additional parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
@@ -1185,7 +1205,10 @@ Your different ad campaigns (PPC campaigns, display ads, email marketing message
 We want to be able to identify people who've clicked on ads e.g. in a marketing email as having come to the site having clicked on a link in that particular marketing email. To do that, we modify the link in the marketing email with query parameters, like so:
 
 ```html
-<a href="http://mysite.com/myproduct.html?utm_source=newsletter-october&utm_medium=email&utm_campaign=cn0201">Visit website</a>
+<a
+  href="http://mysite.com/myproduct.html?utm_source=newsletter-october&utm_medium=email&utm_campaign=cn0201"
+  >Visit website</a
+>
 ```
 
 For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at <http://mysite.com/myproduct.html>.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
@@ -1195,7 +1218,7 @@ For the prospective customer clicking on the link, adding the query parameters d
 Snowplow uses the same query parameters used by Google Analytics. Because of this, Snowplow users who are also using GA do not need to do any additional work to make their campaigns trackable in Snowplow as well as GA. Those parameters are:
 
 | **Parameter**  | **Name**         | **Description**                                                                                                                                       |
-|----------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `utm_source`   | Campaign source  | Identify the advertiser driving traffic to your site e.g. Google, Facebook, autumn-newsletter etc.                                                    |
 | `utm_medium`   | Campaign medium  | The advertising / marketing medium e.g. cpc, banner, email newsletter, in-app ad, cpa                                                                 |
 | `utm_campaign` | Campaign id      | A unique campaign id. This can be a descriptive name or a number / string that is then looked up against a campaign table as part of the analysis     |
@@ -1262,7 +1285,7 @@ Even if several copies of the above script appear on a page, the trackers create
 Ad impression tracking is accomplished using the `trackAdImpression` method. Here are the arguments it accepts:
 
 | **Name**       | **Required?** | **Description**                                                      | **Type** |
-|----------------|---------------|----------------------------------------------------------------------|----------|
+| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
 | `impressionId` | No            | Identifier for the particular impression instance                    | string   |
 | `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
 | `cost`         | No            | Ad cost                                                              | number   |
@@ -1278,15 +1301,15 @@ An example:
 
 ```javascript
 snowplow('trackAdImpression', {
-    impressionId: '67965967893',
-    costModel: 'cpm', // 'cpa', 'cpc', or 'cpm'
-    cost: 5.5,
-    targetUrl: 'http://www.example.com',
-    bannerId: '23',
-    zoneId: '7',
-    advertiserId: '201',
-    campaignId: '12'
-});
+  impressionId: '67965967893',
+  costModel: 'cpm', // 'cpa', 'cpc', or 'cpm'
+  cost: 5.5,
+  targetUrl: 'http://www.example.com',
+  bannerId: '23',
+  zoneId: '7',
+  advertiserId: '201',
+  campaignId: '12',
+})
 ```
 
 Ad impression events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ad_impression/jsonschema/1-0-0) is the JSON schema for an ad impression event.
@@ -1298,7 +1321,7 @@ Ad impression events are implemented as Snowplow self describing events. [Here]
 Ad click tracking is accomplished using the `trackAdClick` method. Here are the arguments it accepts:
 
 | **Name**       | **Required?** | **Description**                                                      | **Type** |
-|----------------|---------------|----------------------------------------------------------------------|----------|
+| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
 | `targetUrl`    | Yes           | The destination URL                                                  | string   |
 | `clickId`      | No            | Identifier for the particular click instance                         | string   |
 | `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
@@ -1333,7 +1356,7 @@ Ad click events are implemented as Snowplow self describing events.[Here](https:
 Use the `trackAdConversion` method to track ad conversions. Here are the arguments it accepts:
 
 | **Name**       | **Required?** | **Description**                                                      | **Type** |
-|----------------|---------------|----------------------------------------------------------------------|----------|
+| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
 | `conversionId` | No            | Identifier for the particular conversion instance                    | string   |
 | `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
 | `cost`         | No            | Ad cost                                                              | number   |
@@ -1350,16 +1373,16 @@ An example:
 
 ```javascript
 snowplow('trackAdConversion', {
-    conversionId: '743560297',
-    costModel: 'cpa',
-    cost: 10,
-    category: 'ecommerce',
-    action: 'purchase',
-    property: '',
-    initialValue: 99,
-    advertiserId: '201',
-    campaignId: '12'
-});
+  conversionId: '743560297',
+  costModel: 'cpa',
+  cost: 10,
+  category: 'ecommerce',
+  action: 'purchase',
+  property: '',
+  initialValue: 99,
+  advertiserId: '201',
+  campaignId: '12',
+})
 ```
 
 Ad conversion events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ad_conversion/jsonschema/1-0-0) is the schema for an ad conversion event.
@@ -1371,7 +1394,7 @@ Ad conversion events are implemented as Snowplow self describing events. [Here]
 Use the `trackSiteSearch` method to track users searching your website. Here are its arguments:
 
 | **Name**       | **Required?** | **Description**                 | **Type** |
-|----------------|---------------|---------------------------------|----------|
+| -------------- | ------------- | ------------------------------- | -------- |
 | `terms`        | Yes           | Search terms                    | array    |
 | `filters`      | No            | Search filters                  | JSON     |
 | `totalResults` | No            | Results found                   | number   |
@@ -1397,7 +1420,7 @@ Site search events are implemented as Snowplow self describing events. [Here](h
 Use the `trackTiming` method to track user timing events such as how long resources take to load. Here are its arguments:
 
 | **Name**   | **Required?** | **Description**                | **Type** |
-|------------|---------------|--------------------------------|----------|
+| ---------- | ------------- | ------------------------------ | -------- |
 | `category` | Yes           | Timing category                | string   |
 | `variable` | Yes           | Timed variable                 | string   |
 | `timing`   | Yes           | Number of milliseconds elapsed | number   |
@@ -1410,8 +1433,8 @@ snowplow('trackTiming', {
   category: 'load',
   variable: 'map_loaded',
   timing: 50,
-  label: 'Map loading time'
-});
+  label: 'Map loading time',
+})
 ```
 
 Site search events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/timing/jsonschema/1-0-0) is the schema for a `timing` event.
@@ -1427,7 +1450,7 @@ For more information on the Enhanced Ecommerce functions please see the Google A
 Use the `addEnhancedEcommerceActionContext` method to add a GA Enhanced Ecommerce Action Context to the Tracker:
 
 | **Name**      | **Required?** | **Type**          |
-|---------------|---------------|-------------------|
+| ------------- | ------------- | ----------------- |
 | `id`          | Yes           | string            |
 | `affiliation` | No            | string            |
 | `revenue`     | No            | number OR string  |
@@ -1443,13 +1466,13 @@ Adding an action using Google Analytics:
 
 ```javascript
 ga('ec:setAction', 'purchase', {
-  'id': 'T12345',
-  'affiliation': 'Google Store - Online',
-  'revenue': '37.39',
-  'tax': '2.85',
-  'shipping': '5.34',
-  'coupon': 'SUMMER2013'
-});
+  id: 'T12345',
+  affiliation: 'Google Store - Online',
+  revenue: '37.39',
+  tax: '2.85',
+  shipping: '5.34',
+  coupon: 'SUMMER2013',
+})
 ```
 
 **NOTE**: The action type is passed with the action context in the Google Analytics example. We have seperated this by asking you to call the trackEnhancedEcommerceAction function to actually send the context and the action.
@@ -1463,8 +1486,8 @@ snowplow('addEnhancedEcommerceActionContext', {
   revenue: '37.39', // Can also pass as number
   tax: '2.85', // Can also pass as number
   shipping: '5.34', // Can also pass as number
-  coupon: 'WINTER2016'
-});
+  coupon: 'WINTER2016',
+})
 ```
 
 #### `addEnhancedEcommerceImpressionContext`
@@ -1472,7 +1495,7 @@ snowplow('addEnhancedEcommerceActionContext', {
 Use the `addEnhancedEcommerceImpressionContext` method to add a GA Enhanced Ecommerce Impression Context to the Tracker:
 
 | **Name**   | **Required?** | **Type**          |
-|------------|---------------|-------------------|
+| ---------- | ------------- | ----------------- |
 | `id`       | Yes           | string            |
 | `name`     | No            | string            |
 | `list`     | No            | string            |
@@ -1487,14 +1510,14 @@ Adding an impression using Google Analytics:
 
 ```javascript
 ga('ec:addImpression', {
-  'id': 'P12345',
-  'name': 'Android Warhol T-Shirt',
-  'list': 'Search Results',
-  'brand': 'Google',
-  'category': 'Apparel/T-Shirts',
-  'variant': 'Black',
-  'position': 1
-});
+  id: 'P12345',
+  name: 'Android Warhol T-Shirt',
+  list: 'Search Results',
+  brand: 'Google',
+  category: 'Apparel/T-Shirts',
+  variant: 'Black',
+  position: 1,
+})
 ```
 
 Adding an impression using Snowplow:
@@ -1507,8 +1530,8 @@ snowplow('addEnhancedEcommerceImpressionContext', {
   brand: 'Google',
   category: 'Apparel/T-Shirts',
   variant: 'Black',
-  position: 1
-});
+  position: 1,
+})
 ```
 
 #### `addEnhancedEcommerceProductContext`
@@ -1516,7 +1539,7 @@ snowplow('addEnhancedEcommerceImpressionContext', {
 Use the `addEnhancedEcommerceProductContext` method to add a GA Enhanced Ecommerce Product Field Context:
 
 | **Name**   | **Required?** | **Type**          |
-|------------|---------------|-------------------|
+| ---------- | ------------- | ----------------- |
 | `id`       | Yes           | string            |
 | `name`     | No            | string            |
 | `list`     | No            | string            |
@@ -1533,13 +1556,13 @@ Adding a product using Google Analytics:
 
 ```javascript
 ga('ec:addProduct', {
-  'id': 'P12345',
-  'name': 'Android Warhol T-Shirt',
-  'brand': 'Google',
-  'category': 'Apparel/T-Shirts',
-  'variant': 'Black',
-  'position': 1
-});
+  id: 'P12345',
+  name: 'Android Warhol T-Shirt',
+  brand: 'Google',
+  category: 'Apparel/T-Shirts',
+  variant: 'Black',
+  position: 1,
+})
 ```
 
 Adding a product using Snowplow:
@@ -1552,8 +1575,8 @@ snowplow('addEnhancedEcommerceProductContext', {
   brand: 'Google',
   category: 'Apparel/T-Shirts',
   variant: 'Black',
-  quantity: 1
-});
+  quantity: 1,
+})
 ```
 
 #### `addEnhancedEcommercePromoContext`
@@ -1561,7 +1584,7 @@ snowplow('addEnhancedEcommerceProductContext', {
 Use the `addEnhancedEcommercePromoContext` method to add a GA Enhanced Ecommerce Promotion Field Context:
 
 | **Name**   | **Required?** | **Type** |
-|------------|---------------|----------|
+| ---------- | ------------- | -------- |
 | `id`       | Yes           | string   |
 | `name`     | No            | string   |
 | `creative` | No            | string   |
@@ -1572,11 +1595,11 @@ Adding a promotion using Google Analytics:
 
 ```javascript
 ga('ec:addPromo', {
-  'id': 'PROMO_1234',
-  'name': 'Summer Sale',
-  'creative': 'summer_banner2',
-  'position': 'banner_slot1'
-});
+  id: 'PROMO_1234',
+  name: 'Summer Sale',
+  creative: 'summer_banner2',
+  position: 'banner_slot1',
+})
 ```
 
 Adding a promotion using Snowplow:
@@ -1586,8 +1609,8 @@ snowplow('addEnhancedEcommercePromoContext', {
   id: 'PROMO_1234', // The Promotion ID
   name: 'Summer Sale', // The name
   creative: 'summer_banner2', // The name of the creative
-  position: 'banner_slot1' // The position
-});
+  position: 'banner_slot1', // The position
+})
 ```
 
 #### `trackEnhancedEcommerceAction`
@@ -1595,7 +1618,7 @@ snowplow('addEnhancedEcommercePromoContext', {
 Use the `trackEnhancedEcommerceAction` method to track a GA Enhanced Ecommerce Action. When this function is called all of the added Ecommerce Contexts are attached to this action and flushed from the Tracker.
 
 | **Name** | **Required?** | **Type** |
-|----------|---------------|----------|
+| -------- | ------------- | -------- |
 | `action` | Yes           | string   |
 
 The allowed actions:
@@ -1615,19 +1638,19 @@ Adding an action using Google Analytics:
 
 ```javascript
 ga('ec:setAction', 'refund', {
-  'id': 'T12345'
-});
+  id: 'T12345',
+})
 ```
 
 Adding an action using Snowplow:
 
 ```javascript
 snowplow('addEnhancedEcommerceActionContext', {
-  id: 'T12345'
-});
+  id: 'T12345',
+})
 snowplow('trackEnhancedEcommerceAction', {
-  action: 'refund'
-});
+  action: 'refund',
+})
 ```
 
 ### Consent tracking
@@ -1637,7 +1660,7 @@ snowplow('trackEnhancedEcommerceAction', {
 Use the `trackConsentGranted` method to track a user opting into data collection. A consent document context will be attached to the event if at least the `id` and `version` arguments are supplied. The method arguments are:
 
 | **Name**      | **Description**                                           | **Required?** | **Type**         |
-|---------------|-----------------------------------------------------------|---------------|------------------|
+| ------------- | --------------------------------------------------------- | ------------- | ---------------- |
 | `id`          | Identifier for the document granting consent              | Yes           | String           |
 | `version`     | Version of the document granting consent                  | Yes           | String           |
 | `name`        | Name of the document granting consent                     | No            | String           |
@@ -1656,8 +1679,8 @@ snowplow('trackConsentGranted', {
   version: '5',
   name: 'consent_document',
   description: 'a document granting consent',
-  expiry: '2020-11-21T08:00:00.000Z'
-});
+  expiry: '2020-11-21T08:00:00.000Z',
+})
 ```
 
 #### `trackConsentWithdrawn`
@@ -1667,7 +1690,7 @@ Use the `trackConsentWithdrawn` method to track a user withdrawing consent for
 The method arguments are:
 
 | **Name**      | **Description**                                   | **Required?** | **Type**         |
-|---------------|---------------------------------------------------|---------------|------------------|
+| ------------- | ------------------------------------------------- | ------------- | ---------------- |
 | `all`         | Specifies whether all consent should be withdrawn | No            | Boolean          |
 | `id`          | Identifier for the document withdrawing consent   | No            | String           |
 | `version`     | Version of the document withdrawing consent       | No            | string           |
@@ -1684,8 +1707,8 @@ snowplow('trackConsentWithdrawn', {
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document withdrawing consent'
-});
+  description: 'a document withdrawing consent',
+})
 ```
 
 #### Consent documents
@@ -1695,7 +1718,7 @@ Consent documents are stored in the context of a consent event. Each consent met
 The fields of a consent document are:
 
 | **Name**      | **Description**             | **Required?** | **Type** |
-|---------------|-----------------------------|---------------|----------|
+| ------------- | --------------------------- | ------------- | -------- |
 | `id`          | Identifier for the document | Yes           | String   |
 | `version`     | Version of the document     | Yes           | String   |
 | `name`        | Name of the document        | No            | String   |
@@ -1705,12 +1728,12 @@ A consent document self-describing JSON looks like this:
 
 ```json
 {
-  schema: 'iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0',
-  data: {
-    id: '1234',
-    version: '5',
-    name: 'consent_document_name',
-    description: 'here is a description'
+  "schema": "iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0",
+  "data": {
+    "id": "1234",
+    "version": "5",
+    "name": "consent_document_name",
+    "description": "here is a description"
   }
 }
 ```
@@ -1719,10 +1742,10 @@ As an example, `trackConsentGranted` will store one consent document as a cust
 
 ```javascript
 snowplow('trackConsentGranted',
-  id: '1234', 
-  version: '5', 
-  name: 'consent_document', 
-  description: 'a document granting consent', 
+  id: '1234',
+  version: '5',
+  name: 'consent_document',
+  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 );
 ```
@@ -1731,25 +1754,25 @@ The method call will generate this event:
 
 ```json
 {
-  e: 'ue',
-  ue_pr: {
-    schema: 'iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0',
-    data: {
-      schema: 'iglu:com.snowplowanalytics.snowplow/consent_granted/jsonschema/1-0-0',
-      data: {
-        expiry: '2020-11-21T08:00:00.000Z'
+  "e": "ue",
+  "ue_pr": {
+    "schema": "iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0",
+    "data": {
+      "schema": "iglu:com.snowplowanalytics.snowplow/consent_granted/jsonschema/1-0-0",
+      "data": {
+        "expiry": "2020-11-21T08:00:00.000Z"
       }
     }
   },
-  co: {
-    schema: 'iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0',
-    data: {
-      schema: 'iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0',
-      data: {
-        id: '1234',
-        version: '5',
-        name: 'consent_document',
-        description: 'a document granting consent'
+  "co": {
+    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+    "data": {
+      "schema": "iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0",
+      "data": {
+        "id": "1234",
+        "version": "5",
+        "name": "consent_document",
+        "description": "a document granting consent"
       }
     }
   }
@@ -1763,7 +1786,7 @@ The GDPR context attaches a context with the GDPR basis for processing and the d
 It takes the following arguments:
 
 | **Name**              | **Description**             | **Required?** | **Type**    |
-|-----------------------|-----------------------------|---------------|-------------|
+| --------------------- | --------------------------- | ------------- | ----------- |
 | `basisForProcessing`  | GDPR Basis for processing   | Yes           | Enum String |
 | `documentId`          | ID of a GDPR basis document | No            | String      |
 | `documentVersion`     | Version of the document     | No            | String      |
@@ -1771,25 +1794,25 @@ It takes the following arguments:
 
 ```json
 {
-  e: 'ue',
-  ue_pr: {
-    schema: 'iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0',
-    data: {
-      schema: 'iglu:com.snowplowanalytics.snowplow/consent_granted/jsonschema/1-0-0',
-      data: {
-        expiry: '2020-11-21T08:00:00.000Z'
+  "e": "ue",
+  "ue_pr": {
+    "schema": "iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0",
+    "data": {
+      "schema": "iglu:com.snowplowanalytics.snowplow/consent_granted/jsonschema/1-0-0",
+      "data": {
+        "expiry": "2020-11-21T08:00:00.000Z"
       }
     }
   },
-  co: {
-    schema: 'iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0',
-    data: {
-      schema: 'iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0',
-      data: {
-        id: '1234',
-        version: '5',
-        name: 'consent_document',
-        description: 'a document granting consent'
+  "co": {
+    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+    "data": {
+      "schema": "iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0",
+      "data": {
+        "id": "1234",
+        "version": "5",
+        "name": "consent_document",
+        "description": "a document granting consent"
       }
     }
   }
@@ -1805,8 +1828,8 @@ snowplow('enableGdprContext', {
   basisForProcessing: 'consent',
   documentId: 'consentDoc-abc123',
   documentVersion: '0.1.0',
-  documentDescription: 'this document describes consent basis for processing'
-});
+  documentDescription: 'this document describes consent basis for processing',
+})
 ```
 
 #### Error tracking
@@ -1833,7 +1856,7 @@ snowplow('trackError', {
 ```
 
 | **Name**   | **Required?** | **Description**                     | **Type**   |
-|------------|---------------|-------------------------------------|------------|
+| ---------- | ------------- | ----------------------------------- | ---------- |
 | `message`  | Yes           | Error message                       | string     |
 | `filename` | No            | Filename or URL                     | string     |
 | `lineno`   | No            | Line number of problem code chunk   | number     |
@@ -1845,12 +1868,12 @@ Of these arguments, only `message` is required. Signature of this method defin
 ```javascript
 try {
   var user = getUser()
-} catch(e) {
+} catch (e) {
   snowplow('trackError', {
-    message: 'Cannot get user object', 
-    filename: 'shop.js', 
-    error: e
-  });
+    message: 'Cannot get user object',
+    filename: 'shop.js',
+    error: e,
+  })
 }
 ```
 
@@ -1874,7 +1897,7 @@ snowplow('enableErrorTracking', {
 ```
 
 | **Name**       | **Required?** | **Description**                 | **Type**                                    |
-|----------------|---------------|---------------------------------|---------------------------------------------|
+| -------------- | ------------- | ------------------------------- | ------------------------------------------- |
 | `filter`       | No            | Predicate to filter exceptions  | `(ErrorEvent) => Boolean`                   |
 | `contextAdder` | No            | Function to get dynamic context | `(ErrorEvent) => Array<SelfDescribingJson>` |
 | context        | No            | Additional custom context       | `Array<SelfDescribingJson>`                 |
@@ -1908,8 +1931,8 @@ e.g. to set a true timestamp with a page view event:
 
 ```javascript
 snowplow('trackPageView', {
-  timestamp: { type: 'ttm', value: 1361553733371 }
-});
+  timestamp: { type: 'ttm', value: 1361553733371 },
+})
 ```
 
 e.g. to set a true timestamp for a self-describing event:
@@ -1919,15 +1942,15 @@ snowplow('trackSelfDescribingEvent', {
   event: {
     schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
     data: {
-        productId: 'ASO01043',
-        category: 'Dresses',
-        brand: 'ACME',
-        returning: true,
-        price: 49.95,
-        sizes: ['xs', 's', 'l', 'xl', 'xxl'],
-        availableSince: new Date(2013,3,7)
-    }
+      productId: 'ASO01043',
+      category: 'Dresses',
+      brand: 'ACME',
+      returning: true,
+      price: 49.95,
+      sizes: ['xs', 's', 'l', 'xl', 'xxl'],
+      availableSince: new Date(2013, 3, 7),
+    },
   },
-  timestamp: { type: 'ttm', value: 1361553733371 }
-});
+  timestamp: { type: 'ttm', value: 1361553733371 },
+})
 ```

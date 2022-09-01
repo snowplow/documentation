@@ -1,6 +1,6 @@
 ---
-title: "Session"
-date: "2020-02-26"
+title: 'Session'
+date: '2020-02-26'
 sidebar_position: 70
 ---
 
@@ -8,11 +8,11 @@ The Session object is responsible for maintaining persistent data around user se
 
 ### Constructor
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `foregroundTimeout` | The time until a session expires in focus | No | 600 (s) |
-| `backgroundTimeout` | The time until a session expires in back | No | 300 (s) |
-| `checkInterval` | How often to validate the session timeout | No | 15 (s) |
+| **Argument Name**   | **Description**                           | **Required?** | **Default** |
+| ------------------- | ----------------------------------------- | ------------- | ----------- |
+| `foregroundTimeout` | The time until a session expires in focus | No            | 600 (s)     |
+| `backgroundTimeout` | The time until a session expires in back  | No            | 300 (s)     |
+| `checkInterval`     | How often to validate the session timeout | No            | 15 (s)      |
 
 A full Session construction should look like the following:
 

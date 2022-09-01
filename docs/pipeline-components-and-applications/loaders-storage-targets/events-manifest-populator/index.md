@@ -1,6 +1,6 @@
 ---
-title: "Events Manifest Populator"
-date: "2020-12-01"
+title: 'Events Manifest Populator'
+date: '2020-12-01'
 sidebar_position: 2000
 ---
 
@@ -41,11 +41,11 @@ Task has three required arguments:
 Optionally, you can also pass following arguments:
 
 - `--since` to reduce amount of data to be stored in DynamodDB.  
-    If this option was passed Manifest Populator will process enriched events only after specified date.  
-    Input date supports two formats: `YYYY-MM-dd` and `YYYY-MM-dd-HH-mm-ss`.
+   If this option was passed Manifest Populator will process enriched events only after specified date.  
+   Input date supports two formats: `YYYY-MM-dd` and `YYYY-MM-dd-HH-mm-ss`.
 - `--log-path` to store EMR job logs on S3. Normally, Manifest Populator does not  
-    produce any logs or output, but if some error occured you'll be able to  
-    inspect it in EMR logs stored in this path.
+   produce any logs or output, but if some error occured you'll be able to  
+   inspect it in EMR logs stored in this path.
 - `--profile` to specify AWS profile to create this EMR job.
 - `--jar` to specify S3 path to custom JAR
 

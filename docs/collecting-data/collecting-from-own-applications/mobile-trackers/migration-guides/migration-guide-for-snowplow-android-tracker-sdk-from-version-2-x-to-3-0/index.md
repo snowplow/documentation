@@ -1,6 +1,6 @@
 ---
-title: "From version 2.x to 3.0 for Android"
-date: "2021-11-23"
+title: 'From version 2.x to 3.0 for Android'
+date: '2021-11-23'
 sidebar_position: -1
 ---
 
@@ -15,9 +15,6 @@ In this release we've marked as deprecated:
 In this release there are some breaking changes:
 
 - The v1 API has been removed from this new version of the trackers, which means the v1 components (Tracker, Emitter, Subject, Session) used to set up the tracker are no longer available. If you have already migrated your instrumentation to the v2 API there aren't breaking changes.
-    
 - The events can be built using the constructor and builder methods. The builder classes available with v1 are no longer available. If you already build events using events' constructor suggested with the v2 API, there aren't breaking changes.
-    
 - Session callbacks have been removed. They will be reintroduced soon in one of the next minor versions. More details will be provided at the release.
-    
 - Utilities or Utils methods, available in v1 API, have been removed.

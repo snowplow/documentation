@@ -1,6 +1,6 @@
 ---
-title: "Set up the stream collector"
-date: "2021-08-04"
+title: 'Set up the stream collector'
+date: '2021-08-04'
 sidebar_position: -10
 ---
 

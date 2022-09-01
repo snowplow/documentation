@@ -1,6 +1,6 @@
 ---
-title: "Link Click Tracking"
-date: "2021-03-30"
+title: 'Link Click Tracking'
+date: '2021-03-30'
 sidebar_position: 12000
 ---
 
@@ -11,9 +11,9 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ```
 
 | Tracker Distribution | Included |
-| --- | --- |
-| `sp.js` | ✅ |
-| `sp.lite.js` | ❌ |
+| -------------------- | -------- |
+| `sp.js`              | ✅       |
+| `sp.lite.js`         | ❌       |
 
 ## Download
 
@@ -24,7 +24,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@latest/dist/index.umd.min.js",
   ["snowplowLinkClickTracking", "LinkClickTrackingPlugin"]
 );

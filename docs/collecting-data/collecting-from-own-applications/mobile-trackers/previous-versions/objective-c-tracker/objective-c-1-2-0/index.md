@@ -1,6 +1,6 @@
 ---
-title: "Objective-C (iOS) (1.2.0)"
-date: "2020-03-19"
+title: 'Objective-C (iOS) (1.2.0)'
+date: '2020-03-19'
 sidebar_position: 840
 ---
 
@@ -360,7 +360,7 @@ Note: even if there is only one custom context attached to the event, it still n
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -664,10 +664,10 @@ If you want to track the IDFA you need:
 - If you add the `AdSupport` framework, please, be aware of the correct way to submit the app to the App Store. If you make use of IDFA you have to declare it during the App submission (More details [here](https://help.apple.com/app-store-connect/#/dev301cb2b3e)).
 - The simulators can’t generate a proper IDFA, instead they generate a sequence of zeros. If you want to test IDFA with a real code, please, use the physical device.If you add the `AdSupport` framework but you don't want get the IDFA with the events:
 - Disable the IDFA tracking with a preprocessor flag:
-    1. Go to _Build Settings_ of the imported Snowplow Obj-C Tracker
-    2. Search for Preprocessor Macros
-    3. Add a macro defined as `SNOWPLOW_NO_IFA=1`
-    4. Remember: it must be added in the Build Settings of the SnowplowTracker framework. If you set it in the app's Build Settings it won't work.
+  1. Go to _Build Settings_ of the imported Snowplow Obj-C Tracker
+  2. Search for Preprocessor Macros
+  3. Add a macro defined as `SNOWPLOW_NO_IFA=1`
+  4. Remember: it must be added in the Build Settings of the SnowplowTracker framework. If you set it in the app's Build Settings it won't work.
 
 The user has the ability to limit ad-tracking from the device's Settings. If the user enable the limitations the tracker will not be able to track the IDFA.
 

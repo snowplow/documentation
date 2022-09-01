@@ -1,6 +1,6 @@
 ---
-title: "Sending event: Emitter"
-date: "2020-02-25"
+title: 'Sending event: Emitter'
+date: '2020-02-25'
 sidebar_position: 60
 ---
 
@@ -17,10 +17,10 @@ var e1:Emitter = new Emitter("d3rkrsqld9gmqf.cloudfront.net");
 var e2:Emitter = new Emitter("d3rkrsqld9gmqf.cloudfront.net", URLRequestMethod.POST);
 ```
 
-| **Argument Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `uri` | The collector endpoint URI events will be sent to | Yes |
-| `httpMethod` | The HTTP method to use when sending events | No |
+| **Argument Name** | **Description**                                   | **Required?** |
+| ----------------- | ------------------------------------------------- | ------------- |
+| `uri`             | The collector endpoint URI events will be sent to | Yes           |
+| `httpMethod`      | The HTTP method to use when sending events        | No            |
 
 ### Using a buffer
 
@@ -33,10 +33,10 @@ e1.setBufferOption(BufferOption.BATCH);
 
 There are two predefined constants but you can use any integer value:
 
-| **Option** | **Description** |
-| --- | --- |
-| BufferOption.DEFAULT | 1\. Events are sent as soon as they are created |
-| BufferOption.BATCH | 10\. Sends events in a group when 10 events are created |
+| **Option**           | **Description**                                         |
+| -------------------- | ------------------------------------------------------- |
+| BufferOption.DEFAULT | 1\. Events are sent as soon as they are created         |
+| BufferOption.BATCH   | 10\. Sends events in a group when 10 events are created |
 
 ### Choosing the HTTP method
 
@@ -76,4 +76,4 @@ emitter.addEventListener(EmitterEvent.FAILURE, function (successCount:int, faile
 );
 ```
 
-In the example, we can see in-line handling of the both cases. If events are all successfully sent, the success callback method receives the number of successful events sent. If there were any failures, the failure callback method receives the number of successful events sent (if any) and a _Array of events_ that failed to be sent (i.e. the HTTP state code did not return 200). In addition, in the case of failure, an additional parameter is provided with the text of the network or security error that caused the failure.
+In the example, we can see in-line handling of the both cases. If events are all successfully sent, the success callback method receives the number of successful events sent. If there were any failures, the failure callback method receives the number of successful events sent (if any) and a *Array of events* that failed to be sent (i.e. the HTTP state code did not return 200). In addition, in the case of failure, an additional parameter is provided with the text of the network or security error that caused the failure.

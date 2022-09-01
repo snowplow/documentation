@@ -1,6 +1,6 @@
 ---
-title: "Snowplow Mini"
-date: "2021-08-14"
+title: 'Snowplow Mini'
+date: '2021-08-14'
 sidebar_position: 120
 ---
 

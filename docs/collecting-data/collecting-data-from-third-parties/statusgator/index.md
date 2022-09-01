@@ -1,6 +1,6 @@
 ---
-title: "StatusGator"
-date: "2020-02-26"
+title: 'StatusGator'
+date: '2020-02-26'
 sidebar_position: 120
 ---
 
@@ -26,7 +26,7 @@ First login to StatusGator and setup one or more of the cloud services you want 
 
 ![](images/statusgator-1.png)
 
-Once you have selected your cloud providers, click on _Notifications_\* on the top panel and set **Webhooks** to "ON" and then add the webhook URL for your collector in the field **Web Hook URL**, like so:
+Once you have selected your cloud providers, click on *Notifications*\* on the top panel and set **Webhooks** to "ON" and then add the webhook URL for your collector in the field **Web Hook URL**, like so:
 
 ![](images/statusgator-2.png)
 

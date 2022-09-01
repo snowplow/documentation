@@ -1,6 +1,6 @@
 ---
-title: "Setup Guide for GCP"
-date: "2020-08-10"
+title: 'Setup Guide for GCP'
+date: '2020-08-10'
 sidebar_position: 140
 ---
 
@@ -50,8 +50,8 @@ https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-10-0-large-15970565
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
 
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
+| L / 2 vCPUs                                                                                        | XL / 4 vCPUs                                                                                         | XXL / 8 vCPUs                                                                                          |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-10-0-large-1597056525.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-10-0-xlarge-1597056678.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-10-0-xxlarge-1597057668.tar.gz) |
 
 You can find more about `gcloud compute images create` command [here](https://cloud.google.com/sdk/gcloud/reference/compute/images/create) for additional parameters.

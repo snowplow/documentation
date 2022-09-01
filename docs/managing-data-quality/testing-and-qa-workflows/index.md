@@ -1,6 +1,6 @@
 ---
-title: "Testing and QA workflows"
-date: "2021-08-02"
+title: 'Testing and QA workflows'
+date: '2021-08-02'
 sidebar_position: 0
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Android (0.3.0)"
-date: "2020-03-02"
+title: 'Android (0.3.0)'
+date: '2020-03-02'
 sidebar_position: 980
 ---
 
@@ -65,19 +65,19 @@ As you can see there is a fair amount of modularity to the Trackers creation.
 
 The below are required arguments for the 'TrackerBuilder({{ ... }})' segment of the constructor:
 
-| **Argument Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `emitter` | The emitter which sends the events | Yes |
-| `namespace` | The name of the tracker instance | Yes |
-| `appId` | The application ID | Yes |
+| **Argument Name** | **Description**                    | **Required?** |
+| ----------------- | ---------------------------------- | ------------- |
+| `emitter`         | The emitter which sends the events | Yes           |
+| `namespace`       | The name of the tracker instance   | Yes           |
+| `appId`           | The application ID                 | Yes           |
 
 We also have several extra builder options:
 
-| **Function** | **Description** | **Options** | **Default** |
-| --- | --- | --- | --- |
-| `subject` | The subject that defines a user | `Subject, null` | `null` |
-| `platform` | The platform that the Tracker is running on | `DevicePlatforms.{{ Enum Option }}` | `DevicePlatforms.Mobile` |
-| `base64` | Whether to enable [Base64 encoding](https://en.wikipedia.org/wiki/Base64) | `True, False` | `True` |
+| **Function** | **Description**                                                           | **Options**                         | **Default**              |
+| ------------ | ------------------------------------------------------------------------- | ----------------------------------- | ------------------------ |
+| `subject`    | The subject that defines a user                                           | `Subject, null`                     | `null`                   |
+| `platform`   | The platform that the Tracker is running on                               | `DevicePlatforms.{{ Enum Option }}` | `DevicePlatforms.Mobile` |
+| `base64`     | Whether to enable [Base64 encoding](https://en.wikipedia.org/wiki/Base64) | `True, False`                       | `True`                   |
 
 ##### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#231-emitter)2.3.1 `emitter`
 
@@ -383,13 +383,13 @@ Snowplow has been built to enable you to track a wide range of events that occur
 
 Tracking methods supported by the Android Tracker at a glance:
 
-| **Function** | \*_Description_ |
-| --- | --- |
-| [`trackScreenView()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageView()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#page-view) | Track and record views of web pages. |
-| [`trackEcommerceTransaction()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#ecommerce-transaction) | Track an ecommerce transaction and its items |
-| [`trackStructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#unstruct-event) | Track a Snowplow custom unstructured event |
+| **Function**                                                                                                           | \*_Description_                                        |
+| ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [`trackScreenView()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#screen-view)                     | Track the user viewing a screen within the application |
+| [`trackPageView()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#page-view)                         | Track and record views of web pages.                   |
+| [`trackEcommerceTransaction()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#ecommerce-transaction) | Track an ecommerce transaction and its items           |
+| [`trackStructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#struct-event)               | Track a Snowplow custom structured event               |
+| [`trackUnstructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#unstruct-event)           | Track a Snowplow custom unstructured event             |
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#41-common)4.1 Common
 
@@ -410,10 +410,10 @@ SelfDescribingJson json = new SelfDescribingJson("iglu:com.acme/example/jsonsche
 
 You can create a SelfDescribingJson with the following arguments:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `schema` | JsonSchema that describes the data | Yes | `String` |
-| `data` | Data that will be validated by the schema | No | `Map<String, String>, Map<String, Object>, TrackerPayload, SelfDescribingJson` |
+| **Argument** | **Description**                           | **Required?** | **Type**                                                                       |
+| ------------ | ----------------------------------------- | ------------- | ------------------------------------------------------------------------------ |
+| `schema`     | JsonSchema that describes the data        | Yes           | `String`                                                                       |
+| `data`       | Data that will be validated by the schema | No            | `Map<String, String>, Map<String, Object>, TrackerPayload, SelfDescribingJson` |
 
 `SelfDescribingJson` is used for recording [custom contexts](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#custom-contexts) and [unstructured events](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#unstruct-event).
 
@@ -479,12 +479,12 @@ t1.trackPageView("www.page.com", "Example Page", "www.referrer.com", 14235836550
 
 Use `trackScreenView()` to track a user viewing a screen (or equivalent) within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | `String` |
-| `id` | Unique identifier for this screen | No | `String` |
-| `context` | Custom context for the event | No | `List<SelfDescribingJson>` |
-| `timestamp` | Optional timestamp for the event | No | `Long` |
+| **Argument** | **Description**                     | **Required?** | **Type**                   |
+| ------------ | ----------------------------------- | ------------- | -------------------------- |
+| `name`       | Human-readable name for this screen | No            | `String`                   |
+| `id`         | Unique identifier for this screen   | No            | `String`                   |
+| `context`    | Custom context for the event        | No            | `List<SelfDescribingJson>` |
+| `timestamp`  | Optional timestamp for the event    | No            | `Long`                     |
 
 Examples:
 
@@ -499,13 +499,13 @@ You can use `trackPageView()` to track a user viewing a web page within your a
 
 Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `page_url` | The URL of the page | Yes | `String` |
-| `page_title` | The title of the page | Yes | `String` |
-| `referrer` | The address which linked to the page | Yes | `String` |
-| `context` | Custom context for the event | No | `List<SelfDescribingJson>` |
-| `timestamp` | Optional timestamp for the event | No | `Long` |
+| **Argument** | **Description**                      | **Required?** | **Type**                   |
+| ------------ | ------------------------------------ | ------------- | -------------------------- |
+| `page_url`   | The URL of the page                  | Yes           | `String`                   |
+| `page_title` | The title of the page                | Yes           | `String`                   |
+| `referrer`   | The address which linked to the page | Yes           | `String`                   |
+| `context`    | Custom context for the event         | No            | `List<SelfDescribingJson>` |
+| `timestamp`  | Optional timestamp for the event     | No            | `Long`                     |
 
 Examples:
 
@@ -520,22 +520,22 @@ Use `trackEcommerceTransaction()` to track an ecommerce transaction.
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `order_id` | ID of the eCommerce transaction | Yes | `String` |
-| `total_value` | Total transaction value | Yes | `Double` |
-| `affiliation` | Transaction affiliation | Yes | `String` |
-| `tax_value` | Transaction tax value | Yes | `Double` |
-| `shipping` | Delivery cost charged | Yes | `Double` |
-| `city` | Delivery address city | Yes | `String` |
-| `state` | Delivery address state | Yes | `String` |
-| `country` | Delivery address country | Yes | `String` |
-| `currency` | Transaction currency | Yes | `String` |
-| `items` | Items in the transaction | Yes | `List<TransactionItem>` |
-| `context` | Custom context for the event | No | `List<SelfDescribingJson>` |
-| `timestamp` | Optional timestamp for the event | No | `Long` |
+| **Argument**  | **Description**                  | **Required?** | **Type**                   |
+| ------------- | -------------------------------- | ------------- | -------------------------- |
+| `order_id`    | ID of the eCommerce transaction  | Yes           | `String`                   |
+| `total_value` | Total transaction value          | Yes           | `Double`                   |
+| `affiliation` | Transaction affiliation          | Yes           | `String`                   |
+| `tax_value`   | Transaction tax value            | Yes           | `Double`                   |
+| `shipping`    | Delivery cost charged            | Yes           | `Double`                   |
+| `city`        | Delivery address city            | Yes           | `String`                   |
+| `state`       | Delivery address state           | Yes           | `String`                   |
+| `country`     | Delivery address country         | Yes           | `String`                   |
+| `currency`    | Transaction currency             | Yes           | `String`                   |
+| `items`       | Items in the transaction         | Yes           | `List<TransactionItem>`    |
+| `context`     | Custom context for the event     | No            | `List<SelfDescribingJson>` |
+| `timestamp`   | Optional timestamp for the event | No            | `Long`                     |
 
-The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#441-transactionitem)4.4.1 `TransactionItem`
 
@@ -547,17 +547,17 @@ TransactionItem item = new TransactionItem("item_id", "item_sku", 1.00, 1, "item
 
 These are the fields that can appear as elements in each `TransactionItem` element of the transaction item's `List`:
 
-| **Field** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `item_id` | Item ID | Yes | `String` |
-| `sku` | Item SKU | No | `String` |
-| `price` | Item price | No | `double` |
-| `quantity` | Item quantity | No | `int` |
-| `name` | Item name | No | `String` |
-| `category` | Item category | No | `String` |
-| `currency` | Item currency | No | `String` |
-| `context` | Item context | No | `List<SelfDescribingJson>` |
-| `timestamp` | Optional timestamp for the event | No | `Long` |
+| **Field**   | **Description**                  | **Required?** | **Type**                   |
+| ----------- | -------------------------------- | ------------- | -------------------------- |
+| `item_id`   | Item ID                          | Yes           | `String`                   |
+| `sku`       | Item SKU                         | No            | `String`                   |
+| `price`     | Item price                       | No            | `double`                   |
+| `quantity`  | Item quantity                    | No            | `int`                      |
+| `name`      | Item name                        | No            | `String`                   |
+| `category`  | Item category                    | No            | `String`                   |
+| `currency`  | Item currency                    | No            | `String`                   |
+| `context`   | Item context                     | No            | `List<SelfDescribingJson>` |
+| `timestamp` | Optional timestamp for the event | No            | `Long`                     |
 
 Example of tracking a transaction containing two items:
 
@@ -579,15 +579,15 @@ t1.trackEcommerceTransaction("6a8078be", 300, "my_affiliate", 30, 10, "Boston", 
 
 Use `trackStructuredEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | `String` |
-| `action` | Defines the type of user interaction which this event involves | Yes | `String` |
-| `label` | A string to provide additional dimensions to the event data | Yes | `String` |
-| `property` | A string describing the object or the action performed on it | Yes | `String` |
-| `value` | A value to provide numerical data about the event | Yes | `int` |
-| `context` | Custom context for the event | No | `List<SelfDescribingJson>` |
-| `timestamp` | Optional timestamp for the event | No | `Long` |
+| **Argument** | **Description**                                                  | **Required?** | **Type**                   |
+| ------------ | ---------------------------------------------------------------- | ------------- | -------------------------- |
+| `category`   | The grouping of structured events which this `action` belongs to | Yes           | `String`                   |
+| `action`     | Defines the type of user interaction which this event involves   | Yes           | `String`                   |
+| `label`      | A string to provide additional dimensions to the event data      | Yes           | `String`                   |
+| `property`   | A string describing the object or the action performed on it     | Yes           | `String`                   |
+| `value`      | A value to provide numerical data about the event                | Yes           | `int`                      |
+| `context`    | Custom context for the event                                     | No            | `List<SelfDescribingJson>` |
+| `timestamp`  | Optional timestamp for the event                                 | No            | `Long`                     |
 
 Examples:
 
@@ -609,11 +609,11 @@ Use `trackUnstructuredEvent()` to track a custom event which consists of a nam
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `eventData` | The properties of the event | Yes | `SelfDescribingJson` |
-| `context` | Custom context for the event | No | `List<SelfDescribingJson>` |
-| `timestamp` | Optional timestamp for the event | No | `Long` |
+| **Argument** | **Description**                  | **Required?** | **Type**                   |
+| ------------ | -------------------------------- | ------------- | -------------------------- |
+| `eventData`  | The properties of the event      | Yes           | `SelfDescribingJson`       |
+| `context`    | Custom context for the event     | No            | `List<SelfDescribingJson>` |
+| `timestamp`  | Optional timestamp for the event | No            | `Long`                     |
 
 Example event json to track:
 
@@ -664,19 +664,19 @@ Don't confuse the Android context with Snowplow's own custom contexts - they are
 
 The below are required arguments for the 'EmitterBuilder({{ ... }})' segment of the constructor:
 
-| **Argument Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `URI` | The collector endpoint URI events will be sent to | Yes |
-| `context` | Used to use to open or create an SQLite database | Yes |
+| **Argument Name** | **Description**                                   | **Required?** |
+| ----------------- | ------------------------------------------------- | ------------- |
+| `URI`             | The collector endpoint URI events will be sent to | Yes           |
+| `context`         | Used to use to open or create an SQLite database  | Yes           |
 
 We also have several extra builder options such as:
 
-| **Function** | **Description** | **Options** | **Default** |
-| --- | --- | --- | --- |
-| `method` | The request method to use | `HttpMethod.GET, .POST` | `HttpMethod.POST` |
-| `option` | The amount of events sent in a POST request | `BufferOption.{{ Enum Option}}` | `BufferOption.DefaultGroup` |
-| `security` | Whether to send over HTTP or HTTPS | `RequestSecurity.HTTP, .HTTPS` | `RequestSecurity.HTTP` |
-| `callback` | A callback to output successes and failures | `new RequestCallback{ ... }` | `null` |
+| **Function** | **Description**                             | **Options**                     | **Default**                 |
+| ------------ | ------------------------------------------- | ------------------------------- | --------------------------- |
+| `method`     | The request method to use                   | `HttpMethod.GET, .POST`         | `HttpMethod.POST`           |
+| `option`     | The amount of events sent in a POST request | `BufferOption.{{ Enum Option}}` | `BufferOption.DefaultGroup` |
+| `security`   | Whether to send over HTTP or HTTPS          | `RequestSecurity.HTTP, .HTTPS`  | `RequestSecurity.HTTP`      |
+| `callback`   | A callback to output successes and failures | `new RequestCallback{ ... }`    | `null`                      |
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#51-how-the-emitter-works)5.1 How the Emitter works
 
@@ -687,7 +687,7 @@ The current Emitter flow goes as follows:
 1. Emitter is created
 2. Emitter will check if it has access to the internet
 3. If it is it will begin a recurring check for events to send to the configured collector
-    - This is currently set to be every 5 seconds. (# Constant-1)
+   - This is currently set to be every 5 seconds. (# Constant-1)
 4. If there are events in the SQlite database the emitter will grab up to 250 events from the database and begin sending. (# Constant-2)
 5. Once it has finished sending it will again check for events
 6. If there are no events to be sent 5 times in a row, it will shut itself down (# Constant-3)
@@ -696,9 +696,9 @@ The current Emitter flow goes as follows:
 
 All constants can be found in the 'constants/TrackerConstants.java' class with the following names:
 
-- EMITTER\_TICK
-- EMITTER\_SEND\_LIMIT
-- EMITTER\_EMPTY\_EVENTS\_LIMIT
+- EMITTER_TICK
+- EMITTER_SEND_LIMIT
+- EMITTER_EMPTY_EVENTS_LIMIT
 
 To alter these values you will need to edit and recompile the Trackers source, pending an upcoming release where this will be configurable when initializing an Emitter object.
 
@@ -716,11 +716,11 @@ e1.setBufferOption(BufferOption.HeavyGroup); // 25
 
 Here are all the posibile options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `Single` | Events are sent individually |
+| **Option**     | **Description**                             |
+| -------------- | ------------------------------------------- |
+| `Single`       | Events are sent individually                |
 | `DefaultGroup` | Sends events in groups of 10 events or less |
-| `HeavyGroup` | Sends events in groups of 25 events or less |
+| `HeavyGroup`   | Sends events in groups of 25 events or less |
 
 Buffer options will only ever influence how POST request are sent however. All GET requests will be sent individually.
 
@@ -739,10 +739,10 @@ Emitter e2 = new Emitter
 
 Here are all the posibile options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `GET` | Sends events as GET requests |
-| `POST` | Sends events as POST requests |
+| **Option** | **Description**               |
+| ---------- | ----------------------------- |
+| `GET`      | Sends events as GET requests  |
+| `POST`     | Sends events as POST requests |
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#54-emitter-callback)5.4 Emitter callback
 
@@ -768,7 +768,7 @@ Emitter emitter = new Emitter
 
 ## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#6-logging)6\. Logging
 
-Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'. All logging is actioned based on whether or not the 'DEBUG\_MODE' constant is set to true in the 'constants/TrackerConstants.java' class.
+Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'. All logging is actioned based on whether or not the 'DEBUG_MODE' constant is set to true in the 'constants/TrackerConstants.java' class.
 
 This class also utilizes the standard Android logging API, removing the prior versions dependency on an extra logging library.
 

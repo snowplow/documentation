@@ -1,12 +1,12 @@
 ---
-title: "What is Try Snowplow?"
-date: "2020-11-23"
+title: 'What is Try Snowplow?'
+date: '2020-11-23'
 sidebar_position: 0
 ---
 
 Try Snowplow enables you to explore how Snowplow can help you solve your data use cases by:
 
-- Collecting granular, well-structured data from your digital products and model, analyse and visualize it in your BI tool of choice. 
+- Collecting granular, well-structured data from your digital products and model, analyse and visualize it in your BI tool of choice.
 - Exploring the recipe library to see how Snowplow approaches common data use cases such as marketing attribution, content recommendations or building a single customer view.
 
 [Sign up for Try Snowplow](https://try.snowplowanalytics.com)

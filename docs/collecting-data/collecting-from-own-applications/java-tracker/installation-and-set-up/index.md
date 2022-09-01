@@ -1,6 +1,6 @@
 ---
-title: "Installation and set-up"
-date: "2022-03-24"
+title: 'Installation and set-up'
+date: '2022-03-24'
 sidebar_position: 10
 ---
 
@@ -94,7 +94,7 @@ The [Java tracker Github repository](https://github.com/snowplow/snowplow-java-t
 These are the required objects for tracking using the Java tracker:
 
 | Class                      | Function               |
-|----------------------------|------------------------|
+| -------------------------- | ---------------------- |
 | `Tracker`                  | Tracks events          |
 | `Emitter` (`BatchEmitter`) | Sends event payloads   |
 | subclasses of `Event`      | What you want to track |

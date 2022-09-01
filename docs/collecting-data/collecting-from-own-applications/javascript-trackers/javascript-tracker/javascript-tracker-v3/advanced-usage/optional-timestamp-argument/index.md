@@ -1,6 +1,6 @@
 ---
-title: "Optional timestamp argument"
-date: "2021-03-26"
+title: 'Optional timestamp argument'
+date: '2021-03-26'
 sidebar_position: 1000
 ---
 
@@ -19,9 +19,9 @@ Here is an example tracking a self describing event and supplying the optional t
 ```
 snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: "iglu:com.acme/event/jsonschema/1-0-0", 
+    schema: "iglu:com.acme/event/jsonschema/1-0-0",
     data: { type: "user_action" }
-  }, 
+  },
   timestamp: 1368725287000
 });
 ```
@@ -33,7 +33,7 @@ Also you can attach a true timestamp to the event, replacing the device timestam
 ```
 snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: "iglu:com.acme/event/jsonschema/1-0-0", 
+    schema: "iglu:com.acme/event/jsonschema/1-0-0",
     data: { type: "user_action" }
   },
   timestamp: { type: 'ttm', value: 1368725287000 }

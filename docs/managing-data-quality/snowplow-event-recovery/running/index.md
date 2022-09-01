@@ -1,6 +1,6 @@
 ---
-title: "Running"
-date: "2020-04-13"
+title: 'Running'
+date: '2020-04-13'
 sidebar_position: 10
 ---
 

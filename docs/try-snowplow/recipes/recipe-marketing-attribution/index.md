@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: Marketing attribution"
-date: "2020-10-12"
+title: 'Tutorial: Marketing attribution'
+date: '2020-10-12'
 sidebar_position: 10
 ---
 
@@ -48,14 +48,14 @@ Trigger the conversion events wherever you have conversions on your site. Some e
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
-   "event": {
-      "schema": "iglu:com.trysnowplow/conversion/jsonschema/1-0-0",
-      "data": {
-         "name": "email-signup",
-         "value": 10
-      }
-   }
-});
+  event: {
+    schema: 'iglu:com.trysnowplow/conversion/jsonschema/1-0-0',
+    data: {
+      name: 'email-signup',
+      value: 10,
+    },
+  },
+})
 ```
 
 #### Via Google Tag Manager
@@ -88,8 +88,8 @@ CREATE TABLE derived.marketing_attribution AS(
 
         SELECT
             ev.domain_userid AS domain_userid,
-            ev.domain_sessionid AS session_id, 
-            MIN(ev.derived_tstamp) AS session_start, 
+            ev.domain_sessionid AS session_id,
+            MIN(ev.derived_tstamp) AS session_start,
             SUM(CASE WHEN ev.event_name = 'page_view' THEN 1 ELSE 0 END) AS page_views,
             SUM(CASE WHEN ev.event_name = 'conversion' THEN 1 ELSE 0 END) AS conversions,
             SUM(c.value) AS conversions_value
@@ -103,8 +103,8 @@ CREATE TABLE derived.marketing_attribution AS(
 
     ), session_count AS(
 
-        SELECT 
-            domain_userid, 
+        SELECT
+            domain_userid,
             COUNT(DISTINCT session_id) AS session_count
 
         FROM session_aggregations
@@ -120,18 +120,18 @@ CREATE TABLE derived.marketing_attribution AS(
             s.session_start,
             s.page_views,
 
-            -- marketing information 
-            ev.mkt_medium, 
+            -- marketing information
+            ev.mkt_medium,
             ev.mkt_source,
-            ev.mkt_term, 
+            ev.mkt_term,
             ev.mkt_content,
-            ev.mkt_campaign, 
-            ev.mkt_network, 
+            ev.mkt_campaign,
+            ev.mkt_network,
             ev.mkt_clickid,
 
             -- referer information
-            ev.refr_medium, 
-            ev.refr_source, 
+            ev.refr_medium,
+            ev.refr_source,
             ev.refr_term,
 
             -- marketing channel
@@ -160,8 +160,8 @@ CREATE TABLE derived.marketing_attribution AS(
             ON s.domain_userid = c.domain_userid
 
         GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,19
-    
-    ) 
+
+    )
 
     SELECT
         -- session information
@@ -170,18 +170,18 @@ CREATE TABLE derived.marketing_attribution AS(
         session_start,
         page_views,
 
-        -- marketing information 
-        mkt_medium, 
+        -- marketing information
+        mkt_medium,
         mkt_source,
-        mkt_term, 
+        mkt_term,
         mkt_content,
-        mkt_campaign, 
-        mkt_network, 
+        mkt_campaign,
+        mkt_network,
         mkt_clickid,
 
         -- referer information
-        refr_medium, 
-        refr_source, 
+        refr_medium,
+        refr_source,
         refr_term,
 
         -- marketing channel
@@ -195,7 +195,7 @@ CREATE TABLE derived.marketing_attribution AS(
         CASE WHEN position = 1 THEN 1 ELSE 0 END AS first_touch,
         CASE WHEN position = session_count THEN 1 ELSE 0 END AS last_touch,
         1/session_count AS linear
-    
+
     FROM marketing_infos
 
     GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
@@ -206,8 +206,8 @@ CREATE TABLE derived.marketing_attribution AS(
 #### And then view it:
 
 ```sql
-SELECT 
-    marketing_channel, 
+SELECT
+    marketing_channel,
     SUM(conversions) AS conversions,
     SUM(conversions*first_touch) AS first_touch_attribution,
     SUM(conversions*last_touch) AS last_touch_attribution,

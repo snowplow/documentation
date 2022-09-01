@@ -1,6 +1,6 @@
 ---
-title: "Technical information"
-date: "2021-03-26"
+title: 'Technical information'
+date: '2021-03-26'
 sidebar_position: 2000
 ---
 
@@ -31,17 +31,17 @@ The relay transforms incoming events into the format expected by Indicative. Let
         "schema": "iglu:com.snowplowanalytics.snowplow/ua_parser_context/jsonschema/1-0-0",
         "data": {
           "useragentFamily": "Chrome",
-            "useragentMajor": "67",
-            "useragentMinor": "0",
-            "useragentPatch": "3396",
-            "useragentVersion": "Chrome 67.0.3396",
-            "osFamily": "Windows 7",
-            "osMajor": null,
-            "osMinor": null,
-            "osPatch": null,
-            "osPatchMinor": null,
-            "osVersion": "Windows 7",
-            "deviceFamily": "Other"
+          "useragentMajor": "67",
+          "useragentMinor": "0",
+          "useragentPatch": "3396",
+          "useragentVersion": "Chrome 67.0.3396",
+          "osFamily": "Windows 7",
+          "osMajor": null,
+          "osMinor": null,
+          "osPatch": null,
+          "osPatchMinor": null,
+          "osVersion": "Windows 7",
+          "deviceFamily": "Other"
         }
       }
     ]
@@ -60,43 +60,43 @@ The relay transforms incoming events into the format expected by Indicative. Let
 It would be transformed into the following Indicative event:
 
 ```json
- {
-    "eventName": "page_view",
-    "timestamp": "2013-11-26T00:03:57.886",
-    "eventUniqueId": "jon.doe@email.com",
-    "properties": {
-        "app_id": "foo",
-        "platform": "web",
-        "etl_tstamp": "2017-01-26 00:01:25.292",
-        "collector_tstamp": "2013-11-26 00:02:05",
-        "dvce_created_tstamp": "2013-11-26 00:03:57.885",
-        "event": "page_view",
-        "event_id": "c6ef3124-b53a-4b13-a233-0088f79dcbcb",
-        "user_id": "jon.doe@email.com",
-        "user_fingerprint": "2161814971",
-        "domain_userid": "bc2e92ec6c204a14",
-        "network_userid": "ecdff4d0-9175-40ac-a8bb-325c49733607",
-        "geo_country": "US",
-        "geo_city": "New York",
-        "page_url": "http://www.snowplowanalytics.com",
-        "domain_sessionid": "2b15e5c8-d3b1-11e4-b9d6-1681e6b88ec1",
-        "derived_tstamp": "2013-11-26 00:03:57.886",
-        "event_vendor": "com.snowplowanalytics.snowplow",
-        "event_name": "page_view",
-        "event_format": "jsonschema",
-        "event_version": "1-0-0",
-        "event_fingerprint": "e3dbfa9cca0412c3d4052863cefb547f",
-        "true_tstamp": "2013-11-26 00:03:57.886",
-        "ua_parser_context_useragentFamily": "Chrome",
-        "ua_parser_context_useragentMajor": "67",
-        "ua_parser_context_useragentMinor": "0",
-        "ua_parser_context_useragentPatch": "3396",
-        "ua_parser_context_useragentVersion": "Chrome 67.0.3396",
-        "ua_parser_context_osFamily": "Windows 7",
-        "ua_parser_context_osVersion": "Windows 7",
-        "ua_parser_context_deviceFamily": "Other"  
-    }
- }
+{
+  "eventName": "page_view",
+  "timestamp": "2013-11-26T00:03:57.886",
+  "eventUniqueId": "jon.doe@email.com",
+  "properties": {
+    "app_id": "foo",
+    "platform": "web",
+    "etl_tstamp": "2017-01-26 00:01:25.292",
+    "collector_tstamp": "2013-11-26 00:02:05",
+    "dvce_created_tstamp": "2013-11-26 00:03:57.885",
+    "event": "page_view",
+    "event_id": "c6ef3124-b53a-4b13-a233-0088f79dcbcb",
+    "user_id": "jon.doe@email.com",
+    "user_fingerprint": "2161814971",
+    "domain_userid": "bc2e92ec6c204a14",
+    "network_userid": "ecdff4d0-9175-40ac-a8bb-325c49733607",
+    "geo_country": "US",
+    "geo_city": "New York",
+    "page_url": "http://www.snowplowanalytics.com",
+    "domain_sessionid": "2b15e5c8-d3b1-11e4-b9d6-1681e6b88ec1",
+    "derived_tstamp": "2013-11-26 00:03:57.886",
+    "event_vendor": "com.snowplowanalytics.snowplow",
+    "event_name": "page_view",
+    "event_format": "jsonschema",
+    "event_version": "1-0-0",
+    "event_fingerprint": "e3dbfa9cca0412c3d4052863cefb547f",
+    "true_tstamp": "2013-11-26 00:03:57.886",
+    "ua_parser_context_useragentFamily": "Chrome",
+    "ua_parser_context_useragentMajor": "67",
+    "ua_parser_context_useragentMinor": "0",
+    "ua_parser_context_useragentPatch": "3396",
+    "ua_parser_context_useragentVersion": "Chrome 67.0.3396",
+    "ua_parser_context_osFamily": "Windows 7",
+    "ua_parser_context_osVersion": "Windows 7",
+    "ua_parser_context_deviceFamily": "Other"
+  }
+}
 ```
 
 As the example shows, any `null` values in the original event get removed, to make the corresponding Indicative event as compact as possible.

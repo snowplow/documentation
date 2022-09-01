@@ -1,6 +1,6 @@
 ---
-title: "RDB shredder configuration reference"
-date: "2021-12-01"
+title: 'RDB shredder configuration reference'
+date: '2021-12-01'
 sidebar_position: 450
 ---
 
@@ -9,7 +9,7 @@ Shredder and loader use different configurations starting from 2.0.0. An example
 This is a complete list of the options that can be configured
 
 | input                 | Required. S3 url the enriched archive. It must be populated separately with run=YYYY-MM-DD-hh-mm-ss directories.                                                                                                                                                                                                                                          |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | output.path           | Required. S3 url of the shredded output.                                                                                                                                                                                                                                                                                                                  |
 | output.compression    | Optional. One of "NONE" or "GZIP". Default value GZIP.                                                                                                                                                                                                                                                                                                    |
 | output.region         | Optional if it can be resolved with AWS region provider chain. AWS region of the S3 bucket.                                                                                                                                                                                                                                                               |

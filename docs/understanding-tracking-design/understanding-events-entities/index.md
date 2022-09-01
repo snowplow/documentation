@@ -1,10 +1,10 @@
 ---
-title: "Understanding events and entities"
-date: "2020-02-13"
+title: 'Understanding events and entities'
+date: '2020-02-13'
 sidebar_position: 20
 ---
 
-**Snowplow** is an _event collection platform_. Once you have set up one or more [Snowplow trackers](/docs/collecting-data/index.md), every time an event occurs, Snowplow will generate a packet of data to describe the event and send that event into your Snowplow data pipeline.
+**Snowplow** is an *event collection platform*. Once you have set up one or more [Snowplow trackers](/docs/collecting-data/index.md), every time an event occurs, Snowplow will generate a packet of data to describe the event and send that event into your Snowplow data pipeline.
 
 ## What is an event?
 
@@ -56,4 +56,4 @@ Rather than define all the set of product-related fields for all the different p
 
 Contexts provide a convenient way in Snowplow to schema common entities once, and then use those schemas across all the different events where those entities are relevant.
 
-Moreover, _multiple_ contexts of either different or the same type can be sent with a single event. For example, you could send multiple product impressions (one for each product) with a page view event (say, if a user has loaded a catalogue page) or a transaction event (if a user has multiple line items in a transaction).
+Moreover, *multiple* contexts of either different or the same type can be sent with a single event. For example, you could send multiple product impressions (one for each product) with a page view event (say, if a user has loaded a catalogue page) or a transaction event (if a user has multiple line items in a transaction).

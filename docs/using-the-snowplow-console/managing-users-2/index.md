@@ -1,6 +1,6 @@
 ---
-title: "Adding and removing users in Console"
-date: "2020-02-15"
+title: 'Adding and removing users in Console'
+date: '2020-02-15'
 sidebar_position: 30
 ---
 
@@ -32,11 +32,11 @@ Setting up SSO for your account requires some information to be exchanged betwee
 
 Depending on your Identity Provider the information that is required is slightly different.
 
-To enable SSO for Snowplow **please contact your Customer Success representative or send a support ticket requesting SSO to be enabled**. We will then work with you to exchange the relevant information and set up the SSO connection. 
+To enable SSO for Snowplow **please contact your Customer Success representative or send a support ticket requesting SSO to be enabled**. We will then work with you to exchange the relevant information and set up the SSO connection.
 
 ### Which Identity Providers (IdPs) are supported?
 
-Snowplow’s SSO capability enables connections with many IdPs, including: 
+Snowplow’s SSO capability enables connections with many IdPs, including:
 
 - Active Directory/LDAP
 - ADFS

@@ -1,6 +1,6 @@
 ---
-title: "Site Tracking"
-date: "2021-03-31"
+title: 'Site Tracking'
+date: '2021-03-31'
 sidebar_position: 16000
 ---
 
@@ -11,9 +11,9 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ```
 
 | Tracker Distribution | Included |
-| --- | --- |
-| `sp.js` | ✅ |
-| `sp.lite.js` | ❌ |
+| -------------------- | -------- |
+| `sp.js`              | ✅       |
+| `sp.lite.js`         | ❌       |
 
 ## Download
 
@@ -24,7 +24,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-site-tracking@latest/dist/index.umd.min.js",
   ["snowplowSiteTracking", "SiteTrackingPlugin"]
 );

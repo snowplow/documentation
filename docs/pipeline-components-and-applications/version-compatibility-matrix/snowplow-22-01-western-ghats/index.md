@@ -1,6 +1,6 @@
 ---
-title: "Snowplow 22.01 Western Ghats"
-date: "2022-01-31"
+title: 'Snowplow 22.01 Western Ghats'
+date: '2022-01-31'
 sidebar_position: 99970
 ---
 

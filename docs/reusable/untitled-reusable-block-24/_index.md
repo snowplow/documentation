@@ -28,11 +28,11 @@ We will continue referring to the file as `sp.js` throughout this guide, however
 
 Navigate to [S3 within AWS](https://s3.console.aws.amazon.com/s3/home) and then create a new bucket within your Amazon S3 account to store `sp.js`.
 
-| Option                                           | Value                                       |
-|--------------------------------------------------|---------------------------------------------|
-| **Bucket Name**                                  | For example, `[company-name]-sp-js`         |
-| **AWS Region**                                   | For example, `EU (London) eu-west-2`        |
-| **Block Public Access settings for this bucket** | Deselect: ****Block _all_ public access**** |
+| Option                                           | Value                                           |
+| ------------------------------------------------ | ----------------------------------------------- |
+| **Bucket Name**                                  | For example, `[company-name]-sp-js`             |
+| **AWS Region**                                   | For example, `EU (London) eu-west-2`            |
+| **Block Public Access settings for this bucket** | Deselect: \***\*Block _all_ public access\*\*** |
 
 You can leave all other settings as their defaults.
 
@@ -46,7 +46,7 @@ Now you're ready to upload the JavaScript Tracker into your S3 bucket.
 
 1. Navigate to your new bucket by clicking on your Buckets name
 2. Click `Create folder` and create a new folder which represents the version of the JavaScript Tracker you are uploading. This will help with any browser caching issues as you update your tracker in the future.  
-    If you downloaded Version 3.0.0 then create a folder called `3.0.0`
+   If you downloaded Version 3.0.0 then create a folder called `3.0.0`
 3. Navigate into your new folder, click **Upload**, click **Add Files** and browse to your file
 4. Your file should now be present in the **Files and folders** section
 5. Click on **Additoinal upload options** to drop down to extra settings
@@ -69,14 +69,14 @@ Now we will add the `Cache-Control` header.
 
 This sets your items to expire in 10 years, that is 10x365x24x60x60 = 315,360,000.
 
-We recommend that you set the `Cache-Control max-age` property on the file. This property determines _both_ how long Cloudfront caches `sp.js` in its edge locations, and crucially, how long individual browsers cache `sp.js` before repinging Cloudfront for a fresh copy. By setting a long expiration date, you can reduce the number of browser requests for `sp.js`, which can significantly decrease your Cloudfront costs.
+We recommend that you set the `Cache-Control max-age` property on the file. This property determines *both* how long Cloudfront caches `sp.js` in its edge locations, and crucially, how long individual browsers cache `sp.js` before repinging Cloudfront for a fresh copy. By setting a long expiration date, you can reduce the number of browser requests for `sp.js`, which can significantly decrease your Cloudfront costs.
 
-The only disadvantage of a long expiration is that you need to find a way to _force_ end users to fetch a fresh copy of `sp.js` when you upgrade to a newer version. However as you have created a versioned folder, this is easily managed by saving your new version to a new folder in your S3 bucket, and updating your Snowplow tags to point to the new version.
+The only disadvantage of a long expiration is that you need to find a way to *force* end users to fetch a fresh copy of `sp.js` when you upgrade to a newer version. However as you have created a versioned folder, this is easily managed by saving your new version to a new folder in your S3 bucket, and updating your Snowplow tags to point to the new version.
 
 Your metadata should now look something like this:
 
 | Type           | Key             | Value                  |
-|----------------|-----------------|------------------------|
+| -------------- | --------------- | ---------------------- |
 | System defined | Cache-Control   | max-age=315360000      |
 | System defined | Content-Type    | application/javascript |
 | System defined | Cotent-Encoding | gzip                   |
@@ -92,11 +92,11 @@ Now you are ready to create the CloudFront distribution which will serve your Ja
 1. Click **Create Distribution** and then **Get Started**
 2. Use the table below to set all the required options
 
-| Option | Value |
-| --- | --- |
-| Origin Domain Name | **\[Bucket Name\].s3.amazonaws.com**  
-e.g. snowplow-static-js.s3.amazonaws.com |
-| Other options | Leave as default |
+| Option                                   | Value                                |
+| ---------------------------------------- | ------------------------------------ |
+| Origin Domain Name                       | **\[Bucket Name\].s3.amazonaws.com** |
+| e.g. snowplow-static-js.s3.amazonaws.com |
+| Other options                            | Leave as default                     |
 
 Click **Create Distribution** and then you should see AWS beginning to create the distribution.
 

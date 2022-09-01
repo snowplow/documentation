@@ -30,12 +30,12 @@ We will continue referring to the file as `sp.js` throughout this guide, however
 2. Navigate to the [Storage section](https://console.cloud.google.com/storage/browser) of Google Cloud Console
 3. Create a new bucket with the following settings
 
-| Option | Value |
-| --- | --- |
-| **Name** (also see [Add DNS Record for bucket](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/self-hosting-the-javascript-tracker-on-google-cloud/index.md#add-dns-record-for-bucket-optional)) | For example, `[company-name]-sp-js` |
-| **Storage region** | Select a suitable region, multi-region offers the widest availability and highest SLAs |
-| **Storage class** | Standard |
-| Access control options | Fine grained |
+| Option                                                                                                                                                                                                                                                                             | Value                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **Name** (also see [Add DNS Record for bucket](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/self-hosting-the-javascript-tracker-on-google-cloud/index.md#add-dns-record-for-bucket-optional)) | For example, `[company-name]-sp-js`                                                    |
+| **Storage region**                                                                                                                                                                                                                                                                 | Select a suitable region, multi-region offers the widest availability and highest SLAs |
+| **Storage class**                                                                                                                                                                                                                                                                  | Standard                                                                               |
+| Access control options                                                                                                                                                                                                                                                             | Fine grained                                                                           |
 
 Connecting your domain to your storage bucket (optional)
 
@@ -65,13 +65,13 @@ Open the _Edit Permissions_ popup using the file menu.
 
 Add a new item in the table, enter the following details and click Save.
 
-| Option | Value |
-| --- | --- |
-| Entity | Group |
-| Name | allUsers |
-| Access | Reader |
+| Option | Value    |
+| ------ | -------- |
+| Entity | Group    |
+| Name   | allUsers |
+| Access | Reader   |
 
-Click the link icon next to _Public to internet_ to get the file URL e.g. [https://storage.googleapis.com/company-name-sp-js/gh7rnghq.js](https://storage.googleapis.com/company-name-sp-js/gh7rnghq.js) 
+Click the link icon next to _Public to internet_ to get the file URL e.g. [https://storage.googleapis.com/company-name-sp-js/gh7rnghq.js](https://storage.googleapis.com/company-name-sp-js/gh7rnghq.js)
 
 ### Add DNS Record for bucket (optional)
 
@@ -82,11 +82,11 @@ This will only work correctly if:
 
 To connect your domain to your Cloud Storage bucket, you will need to create a `CNAME` record as below:
 
-| Option | Value |
-| --- | --- |
-| Name | \[your domain\] |
-| Type | CNAME |
-| Data | c.storage.googleapis.com. |
+| Option | Value                     |
+| ------ | ------------------------- |
+| Name   | \[your domain\]           |
+| Type   | CNAME                     |
+| Data   | c.storage.googleapis.com. |
 
 CNAME redirection only works on HTTP, to ensure this works on HTTPS you must follow [this troubleshooting guide](https://cloud.google.com/storage/docs/troubleshooting#https).
 

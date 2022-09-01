@@ -1,6 +1,6 @@
 ---
-title: "Example Roku app with Snowplow tracking"
-date: "2021-11-16"
+title: 'Example Roku app with Snowplow tracking'
+date: '2021-11-16'
 sidebar_position: 5000
 ---
 
@@ -13,11 +13,11 @@ The project in included in the [tracker repository](https://github.com/snowplow
 3. Install ropm `npm i ropm -g`.
 4. Install ropm packages `ropm install`.
 5. Create `.env` file with environment variables in the root of this repository with the following content:  
-    `ROKU_IP=192.168.100.129`  
-    `ROKU_PASSWORD=XXXX`
+   `ROKU_IP=192.168.100.129`  
+   `ROKU_PASSWORD=XXXX`
 6. Add configuration for Snowplow collector to `src-demo-app/manifest`:  
-    `snowplow_collector=http://192.168.100.127:9090`  
-    `snowplow_method=POST`
+   `snowplow_collector=http://192.168.100.127:9090`  
+   `snowplow_method=POST`
 7. Start the demo app using `npm run demo-app`.
 
 Alternatively, you may run the demo app from Visual Studio Code as the debug configuration is already prepared. Install the BrightScript extension to Visual Studio Code and choose "Run demo app" in the debug options.

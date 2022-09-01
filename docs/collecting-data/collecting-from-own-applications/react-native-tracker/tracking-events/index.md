@@ -1,6 +1,6 @@
 ---
-title: "Tracking events"
-date: "2021-08-06"
+title: 'Tracking events'
+date: '2021-08-06'
 sidebar_position: 20
 ---
 
@@ -9,13 +9,6 @@ sidebar_position: 20
 [![Latest tracker version](https://img.shields.io/npm/v/@snowplow/react-native-tracker)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
 [![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
-
-  
-  
-  
-  
-  
-  
 
 The React Native tracker captures two types of events, automatically captured and manual events.
 
@@ -28,17 +21,17 @@ Many of the automatic tracking options available on iOS and Android are also ava
 The React Native Tracker can be configured to automatically track the following events:
 
 - App Lifecycle Tracking
-    - Captures application foreground and application background events
+  - Captures application foreground and application background events
 - Screen View Tracking
-    - Captures each time a new “screen” is loaded
+  - Captures each time a new “screen” is loaded
 - Exception Tracking
-    - Captures any unhandled exceptions within the application
+  - Captures any unhandled exceptions within the application
 - Installation Tracking
-    - Captures an install event which occurs the first time an application is opened
+  - Captures an install event which occurs the first time an application is opened
 - Deep Link Received
-    - Captures a deep link event which is passed to the app
+  - Captures a deep link event which is passed to the app
 - Message (push or local) Notification
-    - Captures a notification received by the app
+  - Captures a notification received by the app
 
 ### Contexts
 

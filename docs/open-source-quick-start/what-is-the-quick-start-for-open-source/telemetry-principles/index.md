@@ -1,6 +1,6 @@
 ---
-title: "Telemetry Principles"
-date: "2021-07-09"
+title: 'Telemetry Principles'
+date: '2021-07-09'
 sidebar_position: 200
 ---
 

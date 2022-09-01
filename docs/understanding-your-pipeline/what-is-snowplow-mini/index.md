@@ -1,6 +1,6 @@
 ---
-title: "What is Snowplow Mini?"
-date: "2020-02-24"
+title: 'What is Snowplow Mini?'
+date: '2020-02-24'
 sidebar_position: 20
 ---
 
@@ -34,20 +34,20 @@ Once you are happy with the changes you have made you would then change the trac
 Snowplow-Mini runs several distinct applications on the same box which are all linked by NSQ topics. In a production deployment each instance could be an Autoscaling Group and each NSQ topic would be a distinct Kinesis Stream.
 
 - Scala Stream Collector:
-    - Starts server listening on `http://< sp mini public ip>/` which events can be sent to.
-    - Sends "good" events to the `RawEvents` NSQ topic
-    - Sends "bad" events to the `BadEvents` NSQ topic
+  - Starts server listening on `http://< sp mini public ip>/` which events can be sent to.
+  - Sends "good" events to the `RawEvents` NSQ topic
+  - Sends "bad" events to the `BadEvents` NSQ topic
 - Stream Enrich:
-    - Reads events in from the `RawEvents` NSQ topic
-    - Sends events which passed the enrichment process to the `EnrichedEvents` NSQ topic
-    - Sends events which failed the enrichment process to the `BadEvents` NSQ topic
+  - Reads events in from the `RawEvents` NSQ topic
+  - Sends events which passed the enrichment process to the `EnrichedEvents` NSQ topic
+  - Sends events which failed the enrichment process to the `BadEvents` NSQ topic
 - Elasticsearch Sink Good:
-    - Reads events from the `EnrichedEvents` NSQ topic
-    - Sends those events to the `good` Elasticsearch index
-    - On failure to insert, writes errors to `BadElasticsearchEvents` NSQ topic
+  - Reads events from the `EnrichedEvents` NSQ topic
+  - Sends those events to the `good` Elasticsearch index
+  - On failure to insert, writes errors to `BadElasticsearchEvents` NSQ topic
 - Elasticsearch Sink Bad:
-    - Reads events from the `BadEvents` NSQ topic
-    - Sends those events to the `bad` Elasticsearch index
-    - On failure to insert, writes errors to `BadElasticsearchEvents` NSQ topic
+  - Reads events from the `BadEvents` NSQ topic
+  - Sends those events to the `bad` Elasticsearch index
+  - On failure to insert, writes errors to `BadElasticsearchEvents` NSQ topic
 
 These events can then be viewed in Kibana at `http://< sp mini public ip>/kibana`.

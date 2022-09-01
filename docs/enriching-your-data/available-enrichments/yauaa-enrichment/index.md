@@ -1,6 +1,6 @@
 ---
-title: "YAUAA enrichment"
-date: "2020-02-14"
+title: 'YAUAA enrichment'
+date: '2020-02-14'
 sidebar_position: 8
 ---
 
@@ -27,7 +27,7 @@ This enrichment uses the field `useragent`.
 
 This enrichment adds a new derived context to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/nl.basjes/yauaa_context/jsonschema/1-0-1) (since enrich 1.4.0).
 
-If a field can't be figured out by the algorithm, it won't be in the output. But some fields can have value _UNKNOWN_.
+If a field can't be figured out by the algorithm, it won't be in the output. But some fields can have value *UNKNOWN*.
 
 The only field that will always be present is `deviceClass`.
 
@@ -35,29 +35,29 @@ Here is an example of a derived context attached by this enrichment for a page v
 
 ```json
 {
-  "schema":"iglu:com.snowplowanalytics.snowplow/yauaa_context/jsonschema/1-0-1",
-    "data": {
-        "deviceClass":"Phone",
-        "deviceName":"Samsung SM-G960F",
-        "deviceBrand":"Samsung",
-        "operatingSystemClass":"Mobile",
-        "operatingSystemName":"Android",
-        "operatingSystemVersion":"8.0.0",
-        "operatingSystemNameVersion":"Android 8.0.0",
-        "operatingSystemVersionBuild":"R16NW",
-        "layoutEngineClass":"Browser",
-        "layoutEngineName":"Blink",
-        "layoutEngineVersion":"62.0",
-        "layoutEngineVersionMajor":"62",
-        "layoutEngineNameVersion":"Blink 62.0",
-        "layoutEngineNameVersionMajor":"Blink 62",
-        "agentClass":"Browser",
-        "agentName":"Chrome",
-        "agentVersion":"62.0.3202.84",
-        "agentVersionMajor":"62",
-        "agentNameVersion":"Chrome 62.0.3202.84",
-        "agentNameVersionMajor":"Chrome 62"
-   }
+  "schema": "iglu:com.snowplowanalytics.snowplow/yauaa_context/jsonschema/1-0-1",
+  "data": {
+    "deviceClass": "Phone",
+    "deviceName": "Samsung SM-G960F",
+    "deviceBrand": "Samsung",
+    "operatingSystemClass": "Mobile",
+    "operatingSystemName": "Android",
+    "operatingSystemVersion": "8.0.0",
+    "operatingSystemNameVersion": "Android 8.0.0",
+    "operatingSystemVersionBuild": "R16NW",
+    "layoutEngineClass": "Browser",
+    "layoutEngineName": "Blink",
+    "layoutEngineVersion": "62.0",
+    "layoutEngineVersionMajor": "62",
+    "layoutEngineNameVersion": "Blink 62.0",
+    "layoutEngineNameVersionMajor": "Blink 62",
+    "agentClass": "Browser",
+    "agentName": "Chrome",
+    "agentVersion": "62.0.3202.84",
+    "agentVersionMajor": "62",
+    "agentNameVersion": "Chrome 62.0.3202.84",
+    "agentNameVersionMajor": "Chrome 62"
+  }
 }
 ```
 

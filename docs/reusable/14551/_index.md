@@ -13,7 +13,7 @@ curl \
 This command will return an access token wrapped in json.
 
 ```json
-{"accessToken":"<access token value>"}
+{ "accessToken": "<access token value>" }
 ```
 
 You may then use this access token value to supply authorization headers for subsequent api requests.

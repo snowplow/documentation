@@ -1,12 +1,13 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const redirects = require('./redirects');
+const redirects = require('./redirects')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Snowplow Documentation',
-  tagline: 'Build, deploy, and scale your next data creation project using Snowplow.',
+  tagline:
+    'Build, deploy, and scale your next data creation project using Snowplow.',
   url: 'https://docs.snowplow.io',
   baseUrl: '/',
   // reset this back to throw, set to warn so that site builds
@@ -93,14 +94,14 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          {             
+          {
             label: 'Change cookie preferences',
             href: '/cookie-preferences',
           },
           {
             label: 'Terms and conditions',
-            href: '/terms-and-conditions', 
-          }
+            href: '/terms-and-conditions',
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
@@ -115,12 +116,7 @@ const config = {
       },
     }),
 
-    plugins: [
-      [
-        '@docusaurus/plugin-client-redirects',
-        redirects,
-      ],
-    ]
-};
+  plugins: [['@docusaurus/plugin-client-redirects', redirects]],
+}
 
-module.exports = config;
+module.exports = config

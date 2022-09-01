@@ -1,6 +1,6 @@
 ---
-title: "JavaScript Trackers (Web and Node.js)"
-date: "2021-03-24"
+title: 'JavaScript Trackers (Web and Node.js)'
+date: '2021-03-24'
 sidebar_position: 100
 ---
 

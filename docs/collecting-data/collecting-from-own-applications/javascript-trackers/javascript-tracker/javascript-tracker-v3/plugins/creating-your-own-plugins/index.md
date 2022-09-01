@@ -1,6 +1,6 @@
 ---
-title: "Creating your own plugins"
-date: "2021-04-12"
+title: 'Creating your own plugins'
+date: '2021-04-12'
 sidebar_position: 500
 ---
 

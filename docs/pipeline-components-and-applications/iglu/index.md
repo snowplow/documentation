@@ -1,12 +1,12 @@
 ---
-title: "Iglu"
-date: "2020-10-22"
+title: 'Iglu'
+date: '2020-10-22'
 sidebar_position: 90
 ---
 
 ## Overview
 
-**Iglu** is a machine-readable, open-source schema registry for [JSON schema](http://json-schema.org/) and Thrift schema from the team at [Snowplow Analytics](http://snowplowanalytics.com/). A schema registry is like _npm_ or _Maven_ or _git_ but holds data schemas instead of software or code.
+**Iglu** is a machine-readable, open-source schema registry for [JSON schema](http://json-schema.org/) and Thrift schema from the team at [Snowplow Analytics](http://snowplowanalytics.com/). A schema registry is like *npm* or *Maven* or *git* but holds data schemas instead of software or code.
 
 Iglu consists of three key technical aspects:
 
@@ -20,7 +20,7 @@ Iglu consists of three key technical aspects:
 
 - [**Self-describing JSON schema**](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) - simple extensions to JSON schema which semantically identify and version a given JSON schema
 - [**Self-describing JSON**](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-jsons/index.md) - a standardized JSON format which co-locates a reference to the instance's JSON schema alongside the instance's data
-- [**SchemaVer**](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/index.md) - how we semantically version schemas - _Schema resolution_ - our public algorithm for how we determine in which order we check Iglu registries for a given schema
+- [**SchemaVer**](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/index.md) - how we semantically version schemas - *Schema resolution* - our public algorithm for how we determine in which order we check Iglu registries for a given schema
 
 **Iglu clients** are used for interacting with Iglu server repos and for resolving schemas in embedded and remote Iglu schema registries.
 

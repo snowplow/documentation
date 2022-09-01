@@ -1,6 +1,6 @@
 ---
-title: "Installing Try Snowplow on AWS (old version)"
-date: "2020-11-23"
+title: 'Installing Try Snowplow on AWS (old version)'
+date: '2020-11-23'
 sidebar_position: 10
 ---
 
@@ -94,11 +94,11 @@ The Basic Installer is the quickest and simplest installer and should be suffici
 You'll be taken to AWS Console to start install
 
 - Most fields on the installation script are pre-filled, but you can
-    - optionally edit the stack name, should you wish to
-    - set a login username for the database that will be created
-    - set a login password for the database that will be created
-    - set an IP allow list for database access _(advanced template only)_
-    - set an AWS permission boundary _(advanced template only)_
+  - optionally edit the stack name, should you wish to
+  - set a login username for the database that will be created
+  - set a login password for the database that will be created
+  - set an IP allow list for database access _(advanced template only)_
+  - set an AWS permission boundary _(advanced template only)_
 - Check the boxes under _"Capabilities"_ to allow the creation of an IAM security role for pushing CloudWatch logs
 - Click _"Create stack"_ to start the deployment of your Try Snowplow application
 
@@ -118,7 +118,7 @@ Try Snowplow is designed to be secure by default, however if you wish to further
 
 Some organizations impose limited access policies by using AWS Permissions Boundary. If your organization has this setup you can specify the Permissions Boundary ARN during setup in the `PermissionsBoundaryArn` field.
 
-_Requires you to select the Advanced Install _option_._
+_Requires you to select the Advanced Install \_option_.\_
 
 #### Restricting access to the database
 

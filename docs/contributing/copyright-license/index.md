@@ -1,6 +1,6 @@
 ---
-title: "Copyright & License"
-date: "2020-11-24"
+title: 'Copyright & License'
+date: '2020-11-24'
 sidebar_position: 10
 ---
 

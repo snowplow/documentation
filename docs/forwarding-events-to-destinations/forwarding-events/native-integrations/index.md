@@ -1,6 +1,6 @@
 ---
-title: "Native Integrations"
-date: "2021-11-24"
+title: 'Native Integrations'
+date: '2021-11-24'
 sidebar_position: 0
 ---
 
@@ -12,28 +12,28 @@ Snowplow also offers a variety of native integrations which directly consume the
 
 The Elasticsearch loader reads enriched data from the enriched Kinesis stream and streams it into Elasticsearch in near real-time.
 
-| Open Source | Snowplow BDP |
-| --- | --- |
-| ✔️ | ✔️ |
+| Open Source                                                                                                              | Snowplow BDP                                                                |
+| ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| ✔️                                                                                                                       | ✔️                                                                          |
 | [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/elastic/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ## Indicative (AWS only)
 
 The Indicative relay reads Snowplow enriched events from a Kinesis Stream and transfers them to Indicative.
 
-| Open Source | Snowplow BDP |
-| --- | --- |
-| ✔️ | ✔️ |
+| Open Source                                                                                                                 | Snowplow BDP                                                                |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| ✔️                                                                                                                          | ✔️                                                                          |
 | [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/indicative/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ## Azure Event Hubs
 
 Event Hubs is a fully managed, real-time data ingestion service that’s simple, trusted and scalable. Snowplow BDP can relay transformed and enriched JSON into Event Hubs.
 
-| Open Source | Snowplow BDP |
-| --- | --- |
-| ❌ | ✔️ |
-|  | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
+| Open Source | Snowplow BDP                                                                |
+| ----------- | --------------------------------------------------------------------------- |
+| ❌          | ✔️                                                                          |
+|             | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ## Apache Kafka
 
@@ -41,7 +41,7 @@ Apache Kafka is an open-source distributed event streaming platform used by thou
 
 Kafka Relaying of Enriched JSON is available to Snowplow BDP customers. Open Source users can get Kafka support for Enriched events by running their Snowplow pipelines on Apache Kafka.
 
-| Open Source | Snowplow BDP |
-| --- | --- |
-| ❗(Partial) | ✔️ |
+| Open Source                                                                                   | Snowplow BDP                                                                |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| ❗(Partial)                                                                                   | ✔️                                                                          |
 | [Collector Setup](/docs/pipeline-components-and-applications/stream-collector/setup/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |

@@ -1,6 +1,6 @@
 ---
-title: "Objective-C (iOS) (1.1.0)"
-date: "2020-03-05"
+title: 'Objective-C (iOS) (1.1.0)'
+date: '2020-03-05'
 sidebar_position: 900
 ---
 
@@ -336,7 +336,7 @@ Note: even if there is only one custom context attached to the event, it still n
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 

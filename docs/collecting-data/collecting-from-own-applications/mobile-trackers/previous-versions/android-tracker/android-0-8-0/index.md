@@ -1,6 +1,6 @@
 ---
-title: "Android (0.8.0)"
-date: "2020-03-05"
+title: 'Android (0.8.0)'
+date: '2020-03-05'
 sidebar_position: 930
 ---
 
@@ -46,7 +46,7 @@ For general testing, [Snowplow Mini](https://github.com/snowplow/snowplow-mini)
 
 The app can be run in the Android Studio emulator or on an actual device.
 
-Simply enter the endpoint of the collector in the app’s interface once it’s launched and press `"send events"`!
+Simply enter the endpoint of the collector in the app’s interface once it’s launched and press `"send events"`!
 
 ## Quick start guide
 
@@ -86,7 +86,7 @@ public class SnowplowTrackerBuilder {
 To send the events, you need to update your AndroidManifest.xml with the following permission:
 
 ```
-<uses-permission android:name="android.permission.INTERNET" /> 
+<uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 
@@ -132,7 +132,7 @@ An SDJ has a `schema` field that holds a URI (string) that identifies the stru
 
 All events sent to the collector are self-describing JSONs.
 
-When sending your own custom events, you will want to create a `SelfDescribingJson` object given two arguments: the schema, and a `Map<String, String>` or `Map<String, Object>` that holds the data you’d like to track.
+When sending your own custom events, you will want to create a `SelfDescribingJson` object given two arguments: the schema, and a `Map<String, String>` or `Map<String, Object>` that holds the data you’d like to track.
 
 ### Subject
 
@@ -294,7 +294,7 @@ tracker.track(PageView.builder()
 
 Use an e-commerce transaction event to track things like online purchases. Transaction items are attached to an e-commerce event in order to record individual items in a transaction.
 
-**Note**: that tracking an e-commerce transaction sends multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the items list. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+**Note**: that tracking an e-commerce transaction sends multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the items list. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 Here is an example:
 
@@ -473,7 +473,7 @@ t1.track(ConsentGranted.builder()
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -690,11 +690,11 @@ Emitter e2 = new Emitter
         .build();
 ```
 
-| OPTION | DESCRIPTION |
-| --- | --- |
-| Single | Events are sent individually |
+| OPTION       | DESCRIPTION                                 |
+| ------------ | ------------------------------------------- |
+| Single       | Events are sent individually                |
 | DefaultGroup | Sends events in groups of 10 events or less |
-| HeavyGroup | Sends events in groups of 25 events or less |
+| HeavyGroup   | Sends events in groups of 25 events or less |
 
 Note: Buffer options will only ever influence how POST request are sent however. All GET requests will be sent individually.
 

@@ -1,6 +1,6 @@
 ---
-title: "Emitters"
-date: "2020-02-25"
+title: 'Emitters'
+date: '2020-02-25'
 sidebar_position: 60
 ---
 
@@ -10,7 +10,7 @@ Emitters are responsible for sending events to the collector. Each tracker is gi
 - A long running daemon thread is started which will continue to send events as long as they can be found in the database (asynchronous).
 - The emitter loop will grab a range of events from the database up until the `batch_size` passed to it as configuration.
 - The emitter will send all of these events as determined by the Request, Protocol and ByteLimits.
-    - Each request is sent in its thread.
+  - Each request is sent in its thread.
 - Once sent, it will process the results of all the requests sent and will remove all successfully sent events from the database. If the request failed, the events will be retried after a retry delay (see below).
 
 In [Initialisation](/docs/collecting-data/collecting-from-own-applications/c-tracker/initialisation/index.md), we discussed how to create a tracker with an emitter configured using `EmitterConfiguration` or by instantiating an `Emitter` instance directly. Both of these options provide the same configuration functionality (e.g., storage options, byte limits, setting custom HTTP clients) that were discussed previously. This page will go into more detail on some of the configurable emitter properties.
@@ -34,7 +34,7 @@ struct EventStore {
 The `EventStore` struct defines functions to insert, retrieve, and remove events from the queue. Events are represented using their `Payload` instance which is persisted in a `EventRow` wrapper that also assigns IDs to each stored event (these event row IDs are different from event IDs used in the event payloads). There are three supported operations:
 
 | Function                     | Description                                                 |
-|------------------------------|-------------------------------------------------------------|
+| ---------------------------- | ----------------------------------------------------------- |
 | `add_event`                  | Insert event payload into event queue.                      |
 | `get_event_rows_batch`       | Retrieve event rows from event queue up to the given limit. |
 | `delete_event_rows_with_ids` | Remove event rows with the given event row IDs.             |

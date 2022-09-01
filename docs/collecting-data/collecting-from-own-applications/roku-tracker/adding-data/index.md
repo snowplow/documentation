@@ -1,6 +1,6 @@
 ---
-title: "Adding data to your events: context and more"
-date: "2021-11-16"
+title: 'Adding data to your events: context and more'
+date: '2021-11-16'
 sidebar_position: 3000
 ---
 
@@ -59,11 +59,11 @@ Some subject information is filled automatically by the tracker. This includes t
 
 The following table lists all the properties that can be set in tracker initialization. These are all part of the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
-| Property | Description |
-| --- | --- |
-| `domainUserId` | Cookie-based unique identifier for user |
+| Property        | Description                             |
+| --------------- | --------------------------------------- |
+| `domainUserId`  | Cookie-based unique identifier for user |
 | `networkUserId` | Cookie-based unique identifier for user |
-| `appId` | Unique identifier for application |
+| `appId`         | Unique identifier for application       |
 
 Example:
 
@@ -81,14 +81,14 @@ m.global.snowplow.init = {
 
 Processed Snowplow events have five different timestamps.
 
-| Timestamp name | Description |
-| --- | --- |
-| `dtm` | Device timestamp. Added automatically during event creation. |
-| `ttm` | True timestamp. This can be manually set as an alternative to `dtm`. |
-| `stm` | Sent timestamp. Added automatically on event sending. |
-| `collector_tstamp` | Added by the event collector. |
-| `etl_tstamp` | Added after event enrichment during the processing pipeline. |
-| `derived_tstamp` | Either a calculated value (`collector_tstamp` - (`stm` - `dtm`)) or the same as `ttm` |
+| Timestamp name     | Description                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------- |
+| `dtm`              | Device timestamp. Added automatically during event creation.                          |
+| `ttm`              | True timestamp. This can be manually set as an alternative to `dtm`.                  |
+| `stm`              | Sent timestamp. Added automatically on event sending.                                 |
+| `collector_tstamp` | Added by the event collector.                                                         |
+| `etl_tstamp`       | Added after event enrichment during the processing pipeline.                          |
+| `derived_tstamp`   | Either a calculated value (`collector_tstamp` - (`stm` - `dtm`)) or the same as `ttm` |
 
 Overriding the default event timestamp (`dtm`) with `ttm` can be useful in some situations. For example, if the Snowplow event refers to an action that happened previously but is only now being tracked. The type of the timestamp is a string with number of milliseconds since the Unix epoch.
 

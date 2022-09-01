@@ -1,6 +1,6 @@
 ---
-title: "What is installed into my cloud? (old version)"
-date: "2020-11-23"
+title: 'What is installed into my cloud? (old version)'
+date: '2020-11-23'
 sidebar_position: 0
 ---
 
@@ -30,7 +30,7 @@ Try Snowplow uses the following AWS services:
 
 #### The agent
 
-The agent has an http API that can expose details of your pipeline. 
+The agent has an http API that can expose details of your pipeline.
 
 The Try Snowplow UI communicates with the agent to populate information fields in the UI. Requests to the agent must contain an authorization header with an access token signed by AWS Cognito, and belong to the specific user who deployed the infrastructure.
 

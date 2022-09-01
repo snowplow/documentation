@@ -1,6 +1,6 @@
 ---
-title: "RDB Transformer configuration reference"
-date: "2022-04-04"
+title: 'RDB Transformer configuration reference'
+date: '2022-04-04'
 sidebar_position: 40
 ---
 
@@ -17,7 +17,7 @@ This is a complete list of the options that can be configured:
 ## Spark transformer only
 
 |                              |                                                                                                                                                                                                                                          |
-|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `input`                      | Required. S3 URI of the enriched archive. It must be populated separately with `run=YYYY-MM-DD-hh-mm-ss` directories.                                                                                                                    |
 | `runInterval.*`              | Specifies interval to process.                                                                                                                                                                                                           |
 | `runInterval.sinceTimestamp` | Optional. Start processing after this timestamp.                                                                                                                                                                                         |
@@ -28,7 +28,7 @@ This is a complete list of the options that can be configured:
 ## Stream transformer only
 
 |                                      |                                                                                                                                                                                                                           |
-|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `input.type`                         | Optional. The only supported values are `kinesis` and `file`. The default is `kinesis`                                                                                                                                    |
 | `input.appName`                      | Optional. KCL app name. The default is `snowplow-rdb-transformer`.                                                                                                                                                        |
 | `input.streamName`                   | Required for `kinesis`. Enriched Kinesis stream name.                                                                                                                                                                     |
@@ -47,7 +47,7 @@ This is a complete list of the options that can be configured:
 ## Common settings
 
 |                                    |                                                                                                                                                                                                                                                                                                                                                                                                               |
-|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `output.path`                      | Required. S3 URI of the transformed output.                                                                                                                                                                                                                                                                                                                                                                   |
 | `output.compression`               | Optional. One of `NONE` or `GZIP`. The default is `GZIP`.                                                                                                                                                                                                                                                                                                                                                     |
 | `output.region`                    | AWS region of the S3 bucket. Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html).                                                                                                                                                                                          |
@@ -72,6 +72,6 @@ This is a complete list of the options that can be configured:
 The below settings exist for the purposes of benchmarking only and we strongly discourage changing the preset defaults:
 
 |                                       |                                                                                                  |
-|---------------------------------------|--------------------------------------------------------------------------------------------------|
+| ------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `deduplication.synthetic.type`        | Can be `NONE` (disable), `BROADCAST` (default) and `JOIN` (different low-level implementations). |
 | `deduplication.synthetic.cardinality` | Do not deduplicate pairs with less-or-equal cardinality. The default is 1.                       |

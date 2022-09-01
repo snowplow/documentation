@@ -1,6 +1,6 @@
 ---
-title: "Out-of-the-box vs custom events"
-date: "2020-02-24"
+title: 'Out-of-the-box vs custom events'
+date: '2020-02-24'
 sidebar_position: 30
 ---
 
@@ -53,11 +53,11 @@ The set of `key: value` properties in self-describing events is represented wi
 For example, to track a self-describing event with Javascript tracker (v3), you make use of the `trackSelfDescribingEvent` method with the pattern shown below:
 
 ```
-window.snowplow('trackSelfDescribingEvent', { 
-  event: { 
-    schema: '...', 
-    data: { ... } 
-  } 
+window.snowplow('trackSelfDescribingEvent', {
+  event: {
+    schema: '...',
+    data: { ... }
+  }
 });
 ```
 

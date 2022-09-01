@@ -41,8 +41,8 @@ To add schemas to the Iglu repository bundled with Snowplow Mini, you have to cr
 - You should receive a JSON similar to:
 
 {
-  "read": "deadbeef-dead-beef-dead-beefdeadbeef",
-  "write": "deadbeef-dead-beef-dead-beefdeadbeef"
+"read": "deadbeef-dead-beef-dead-beefdeadbeef",
+"write": "deadbeef-dead-beef-dead-beefdeadbeef"
 }
 
 ### Copying your Iglu repository to Snowplow Mini (optional)
@@ -53,7 +53,7 @@ To test and send non-standard Snowplow events such as your own custom-contexts a
 2. Download the latest Igluctl from Bintray:
 
 wget http://dl.bintray.com/snowplow/snowplow-generic/igluctl\_0.7.0.zip
-unzip -j igluctl\_0.7.0.zip
+unzip -j igluctl_0.7.0.zip
 
 1. Run the executable with the following input:
 

@@ -1,6 +1,6 @@
 ---
-title: "Version compatibility matrix"
-date: "2020-06-11"
+title: 'Version compatibility matrix'
+date: '2020-06-11'
 sidebar_position: 0
 ---
 

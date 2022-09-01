@@ -1,6 +1,6 @@
 ---
-title: "Static repo"
-date: "2021-03-26"
+title: 'Static repo'
+date: '2021-03-26'
 sidebar_position: 4000
 ---
 

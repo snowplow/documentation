@@ -1,6 +1,6 @@
 ---
-title: "Setup"
-date: "2020-10-28"
+title: 'Setup'
+date: '2020-10-28'
 sidebar_position: 1000
 ---
 

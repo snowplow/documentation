@@ -1,6 +1,6 @@
 ---
-title: "Configuring how events are sent"
-date: "2021-10-26"
+title: 'Configuring how events are sent'
+date: '2021-10-26'
 sidebar_position: 30
 ---
 
@@ -36,17 +36,17 @@ tracker.add_emitter(emitter3)
 
 Optional Emitter settings:
 
-| **Optional parameter** | **Description** |
-| --- | --- |
-| `path` | Override the default path for appending to the endpoint |
-| `protocol` | HTTP or HTTPS |
-| `port` | The port for the connection |
-| `method` | GET or POST |
-| `buffer_size` | The size of the buffer, i.e. the number of events to send at once |
-| `on_success` | A method to call if events were all sent successfully |
-| `on_failure` | A method to call if any events did not send |
-| `thread_count` | Number of threads to use (relevant to AsyncEmitters only) |
-| `logger` | Log somewhere other than STDERR |
+| **Optional parameter** | **Description**                                                   |
+| ---------------------- | ----------------------------------------------------------------- |
+| `path`                 | Override the default path for appending to the endpoint           |
+| `protocol`             | HTTP or HTTPS                                                     |
+| `port`                 | The port for the connection                                       |
+| `method`               | GET or POST                                                       |
+| `buffer_size`          | The size of the buffer, i.e. the number of events to send at once |
+| `on_success`           | A method to call if events were all sent successfully             |
+| `on_failure`           | A method to call if any events did not send                       |
+| `thread_count`         | Number of threads to use (relevant to AsyncEmitters only)         |
+| `logger`               | Log somewhere other than STDERR                                   |
 
 Response status codes of 2xx or 3xx status codes are considered successful.
 

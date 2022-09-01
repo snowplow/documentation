@@ -1,6 +1,6 @@
 ---
-title: "SchemaVer"
-date: "2021-03-26"
+title: 'SchemaVer'
+date: '2021-03-26'
 sidebar_position: 10
 ---
 
@@ -62,8 +62,8 @@ and introduce a new `impressionId` property to obtain the following JSON Schema:
 }
 ```
 
-Because the new `impressionId` is **not** a required property and because the `additionalProperties` in our `1-0-0` version was set to `false`, any historical data following the `1-0-0` schema will work with this new schema.  
-  
+Because the new `impressionId` is **not** a required property and because the `additionalProperties` in our `1-0-0` version was set to `false`, any historical data following the `1-0-0` schema will work with this new schema.
+
 According to our definition of SchemaVer, we are consequently looking at an `ADDITION` and the schema's version becomes `1-0-1`.
 
 ### Revision example
@@ -110,8 +110,8 @@ We are now at version `1-0-2`. After a while, we decide to add a new `cost` prop
 }
 ```
 
-The problem now is that since we modified the `additionalProperties` to true before adding the `cost` field, someone might have added another `cost` field in the meantime following a different set of rules (for example it could be an amount followed by the currency such as 1.00$, the effective type would be string and not number) and so we cannot be sure that this new schema validate all historical data.  
-  
+The problem now is that since we modified the `additionalProperties` to true before adding the `cost` field, someone might have added another `cost` field in the meantime following a different set of rules (for example it could be an amount followed by the currency such as 1.00$, the effective type would be string and not number) and so we cannot be sure that this new schema validate all historical data.
+
 As a result, this new JSON Schema is a `REVISION` of the previous one, its version becomes `1-1-0`.
 
 ### Model example
@@ -136,8 +136,8 @@ Times goes by and we choose to completely review our JSON Schema identifying an 
 }
 ```
 
-The change is so important that we cannot realistically expect our historical data to interact with this new JSON Schema, consequently, the `MODEL` is changed and the schema's version becomes `2-0-0`.  
-  
+The change is so important that we cannot realistically expect our historical data to interact with this new JSON Schema, consequently, the `MODEL` is changed and the schema's version becomes `2-0-0`.
+
 Another important thing to notice is that we switched the `additionalProperties` back to false in order to avoid unnecessary future revisions.
 
 ### Additional differences

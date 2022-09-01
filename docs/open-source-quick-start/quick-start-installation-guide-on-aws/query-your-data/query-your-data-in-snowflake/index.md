@@ -1,6 +1,6 @@
 ---
-title: "Query your data in Snowflake"
-date: "2022-05-10"
+title: 'Query your data in Snowflake'
+date: '2022-05-10'
 sidebar_position: 200
 ---
 
@@ -27,5 +27,5 @@ By default, there are 5 enrichments enabled, as listed below. These enrichments 
 
 Some enrichments are legacy and therefore populate your atomic columns. From the above list, these are the campaign attribution, referer parser and event fingerprint enrichments. The UA parser and YAUAA enrichment also add a separate entity to each event (these are also referred to as contexts since they add additional context to the events). The contexts are loaded into separate columns:
 
-- contexts\_com\_snowplowanalytics\_snowplow\_ua\_parser\_context\_1
-- contexts\_nl\_basjes\_yauaa\_context\_1
+- contexts_com_snowplowanalytics_snowplow_ua_parser_context_1
+- contexts_nl_basjes_yauaa_context_1

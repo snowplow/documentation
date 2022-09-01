@@ -1,6 +1,6 @@
 ---
-title: "Snowplow event extractor"
-date: "2021-03-26"
+title: 'Snowplow event extractor'
+date: '2021-03-26'
 sidebar_position: 1040
 ---
 
@@ -24,7 +24,7 @@ public class EventExtractor : IExtractor
     {
        //split the input based on ROW_DELIMITER
        //set the output data on the output object
-       //EventExtractor only outputs columns and values that are defined with the output. 
+       //EventExtractor only outputs columns and values that are defined with the output.
     }
 }
 ```
@@ -44,7 +44,7 @@ DECLARE @input_file string = @"\snowplow\event.tsv";
     USING new Snowplow.EventExtractor();
 ```
 
-The most complex piece of processing is the handling of the self-describing JSONs found in the enriched event's unstruct\_event, contexts and derived\_contexts fields.  
+The most complex piece of processing is the handling of the self-describing JSONs found in the enriched event's unstruct_event, contexts and derived_contexts fields.  
 Consider contexts found in the tsv:
 
 ```

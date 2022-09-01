@@ -1,6 +1,6 @@
 ---
-title: "Snowplow 21.04 Pennine Alps"
-date: "2021-04-29"
+title: 'Snowplow 21.04 Pennine Alps'
+date: '2021-04-29'
 sidebar_position: 99990
 ---
 

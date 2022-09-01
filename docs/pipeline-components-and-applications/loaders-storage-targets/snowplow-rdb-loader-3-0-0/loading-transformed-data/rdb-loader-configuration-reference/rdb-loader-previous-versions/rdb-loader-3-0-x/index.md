@@ -1,6 +1,6 @@
 ---
-title: "RDB Loader 3.0.x"
-date: "2022-05-27"
+title: 'RDB Loader 3.0.x'
+date: '2022-05-27'
 sidebar_position: 10
 ---
 
@@ -15,7 +15,7 @@ This is a complete list of the options that can be configured:
 ## Redshift Loader `storage` section
 
 |                            |                                                                                                                                                                                 |
-|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`                     | Optional. The only valid value is the default: `redshift`.                                                                                                                      |
 | `host`                     | Required. Host name of Redshift cluster.                                                                                                                                        |
 | `port`                     | Required. Port of Redshift cluster.                                                                                                                                             |
@@ -42,7 +42,7 @@ This is a complete list of the options that can be configured:
 ## Snowflake Loader `storage` section
 
 |                                            |                                                                                                                                                                                                                                                                         |
-|--------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`                                     | Optional. The only valid value is the default: `snowflake`.                                                                                                                                                                                                             |
 | `snowflakeRegion`                          | Required. AWS Region used by Snowflake to access its endpoint.                                                                                                                                                                                                          |
 | `username`                                 | Required. Snowflake user with necessary role granted to load data.                                                                                                                                                                                                      |
@@ -62,7 +62,7 @@ This is a complete list of the options that can be configured:
 ## Common loader settings
 
 |                                      |                                                                                                                                                                                                                                                                                                                                                                                                           |
-|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `region`                             | Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). AWS region of the S3 bucket.                                                                                                                                                                                      |
 | `messageQueue`                       | Required. The name of the SQS queue used by the transformer and loader to communicate.                                                                                                                                                                                                                                                                                                                    |
 | `jsonpaths`                          | Optional. An S3 URI that holds JSONPath files.                                                                                                                                                                                                                                                                                                                                                            |
@@ -88,7 +88,7 @@ This is a complete list of the options that can be configured:
 ## Common monitoring settings
 
 |                                        |                                                                                                                                                                                                                   |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `monitoring.webhook.endpoint`          | Optional. An HTTP endpoint where monitoring alerts should be sent.                                                                                                                                                |
 | `monitoring.webhook.tags`              | Optional. Custom key-value pairs which can be added to the monitoring webhooks. Eg, {"tag1": "label1"}.                                                                                                           |
 | `monitoring.snowplow.appId`            | Optional. When using Snowplow tracking, set this `appId` in the event.                                                                                                                                            |

@@ -1,6 +1,6 @@
 ---
-title: "Android (0.1.0) / Java (0.5.0)"
-date: "2020-03-02"
+title: 'Android (0.1.0) / Java (0.5.0)'
+date: '2020-03-02'
 sidebar_position: 1000
 ---
 
@@ -52,13 +52,13 @@ Tracker t1 = new Tracker(emitter, user1Subject, "AF003", "cf", true);
 Tracker t2 = new Tracker(emitter, "AF003", "cf");
 ```
 
-| **Argument Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `emitter` | The Emitter object you create | Yes |
-| `subject` | The subject that defines a user | No |
-| `namespace` | The name of the tracker instance | Yes |
-| `appId` | The application ID | Yes |
-| `base64Encoded` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No (Default true) |
+| **Argument Name** | **Description**                                                            | **Required?**     |
+| ----------------- | -------------------------------------------------------------------------- | ----------------- |
+| `emitter`         | The Emitter object you create                                              | Yes               |
+| `subject`         | The subject that defines a user                                            | No                |
+| `namespace`       | The name of the tracker instance                                           | Yes               |
+| `appId`           | The application ID                                                         | Yes               |
+| `base64Encoded`   | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No (Default true) |
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#231-emitter)2.3.1 `emitter`
 
@@ -211,13 +211,13 @@ Snowplow has been built to enable you to track a wide range of events that occur
 
 Tracking methods supported by the Java Tracker at a glance:
 
-| **Function** | \*_Description_ |
-| --- | --- |
-| [`trackScreenView()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageView()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#page-view) | Track and record views of web pages. |
-| [`trackEcommerceTransaction()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#ecommerce-transaction) | Track an ecommerce transaction and its items |
-| [`trackStructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#unstruct-event) | Track a Snowplow custom unstructured event |
+| **Function**                                                                                                                        | \*_Description_                                        |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [`trackScreenView()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#screen-view)                     | Track the user viewing a screen within the application |
+| [`trackPageView()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#page-view)                         | Track and record views of web pages.                   |
+| [`trackEcommerceTransaction()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#ecommerce-transaction) | Track an ecommerce transaction and its items           |
+| [`trackStructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#struct-event)               | Track a Snowplow custom structured event               |
+| [`trackUnstructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#unstruct-event)           | Track a Snowplow custom unstructured event             |
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#41-common)4.1 Common
 
@@ -272,12 +272,12 @@ To be confirmed. As of now, trackers do not return anything.
 
 Use `trackScreenView()` to track a user viewing a screen (or equivalent) within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | String |
-| `id` | Unique identifier for this screen | No | String |
-| `context` | Custom context for the event | No | Map |
-| `timestamp` | Optional timestamp for the event | No | Long |
+| **Argument** | **Description**                     | **Required?** | **Validation** |
+| ------------ | ----------------------------------- | ------------- | -------------- |
+| `name`       | Human-readable name for this screen | No            | String         |
+| `id`         | Unique identifier for this screen   | No            | String         |
+| `context`    | Custom context for the event        | No            | Map            |
+| `timestamp`  | Optional timestamp for the event    | No            | Long           |
 
 Example:
 
@@ -292,13 +292,13 @@ If you are using Java servlet technology or similar to serve webpages to a brows
 
 Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `page_url` | The URL of the page | Yes | String |
-| `page_title` | The title of the page | Yes | String |
-| `referrer` | The address which linked to the page | Yes | String |
-| `context` | Custom context for the event | No | Map |
-| `timestamp` | Optional timestamp for the event | No | Long |
+| **Argument** | **Description**                      | **Required?** | **Validation** |
+| ------------ | ------------------------------------ | ------------- | -------------- |
+| `page_url`   | The URL of the page                  | Yes           | String         |
+| `page_title` | The title of the page                | Yes           | String         |
+| `referrer`   | The address which linked to the page | Yes           | String         |
+| `context`    | Custom context for the event         | No            | Map            |
+| `timestamp`  | Optional timestamp for the event     | No            | Long           |
 
 Example:
 
@@ -313,22 +313,22 @@ Use `trackEcommerceTransaction()` to track an ecommerce transaction.
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `order_id` | ID of the eCommerce transaction | Yes | String |
-| `total_value` | Total transaction value | Yes | Double |
-| `affiliation` | Transaction affiliation | Yes | String |
-| `tax_value` | Transaction tax value | Yes | Double |
-| `shipping` | Delivery cost charged | Yes | Double |
-| `city` | Delivery address city | Yes | String |
-| `state` | Delivery address state | Yes | String |
-| `country` | Delivery address country | Yes | String |
-| `currency` | Transaction currency | Yes | String |
-| `items` | Items in the transaction | Yes | List |
-| `context` | Custom context for the event | No | Map |
-| `timestamp` | Optional timestamp for the event | No | Long |
+| **Argument**  | **Description**                  | **Required?** | **Validation** |
+| ------------- | -------------------------------- | ------------- | -------------- |
+| `order_id`    | ID of the eCommerce transaction  | Yes           | String         |
+| `total_value` | Total transaction value          | Yes           | Double         |
+| `affiliation` | Transaction affiliation          | Yes           | String         |
+| `tax_value`   | Transaction tax value            | Yes           | Double         |
+| `shipping`    | Delivery cost charged            | Yes           | Double         |
+| `city`        | Delivery address city            | Yes           | String         |
+| `state`       | Delivery address state           | Yes           | String         |
+| `country`     | Delivery address country         | Yes           | String         |
+| `currency`    | Transaction currency             | Yes           | String         |
+| `items`       | Items in the transaction         | Yes           | List           |
+| `context`     | Custom context for the event     | No            | Map            |
+| `timestamp`   | Optional timestamp for the event | No            | Long           |
 
-The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#441-ecommerce-transactionitem-with-trackecommercetransaction)4.4.1 Ecommerce TransactionItem with `trackEcommerceTransaction()`
 
@@ -340,17 +340,17 @@ trackEcommerceTransactionItem(String order_id, String sku, Double price, Integer
 
 These are the fields that can appear as elements in each `TransactionItem` element of the transaction item `List`:
 
-| **Field** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `order_id` | Order ID | Yes | String |
-| `sku` | Item SKU | No | String |
-| `price` | Item price | No | double |
-| `quantity` | Item quantity | No | int |
-| `name` | Item name | No | String |
-| `category` | Item category | No | String |
-| `currency` | Item currency | No | String |
-| `context` | Item context | No | Map |
-| `timestamp` | Optional timestamp for the event | No | Long |
+| **Field**   | **Description**                  | **Required?** | **Validation** |
+| ----------- | -------------------------------- | ------------- | -------------- |
+| `order_id`  | Order ID                         | Yes           | String         |
+| `sku`       | Item SKU                         | No            | String         |
+| `price`     | Item price                       | No            | double         |
+| `quantity`  | Item quantity                    | No            | int            |
+| `name`      | Item name                        | No            | String         |
+| `category`  | Item category                    | No            | String         |
+| `currency`  | Item currency                    | No            | String         |
+| `context`   | Item context                     | No            | Map            |
+| `timestamp` | Optional timestamp for the event | No            | Long           |
 
 Example of tracking a transaction containing two items:
 
@@ -364,15 +364,15 @@ t1.trackEcommerceTransaction("6a8078be", 300, "my_affiliate", 30, 10, "Boston", 
 
 Use `trackStructuredEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | String |
-| `action` | Defines the type of user interaction which this event involves | Yes | String |
-| `label` | A string to provide additional dimensions to the event data | Yes | String |
-| `property` | A string describing the object or the action performed on it | Yes | String |
-| `value` | A value to provide numerical data about the event | Yes | Int |
-| `context` | Custom context for the event | No | Map |
-| `timestamp` | Optional timestamp for the event | No | Long |
+| **Argument** | **Description**                                                  | **Required?** | **Validation** |
+| ------------ | ---------------------------------------------------------------- | ------------- | -------------- |
+| `category`   | The grouping of structured events which this `action` belongs to | Yes           | String         |
+| `action`     | Defines the type of user interaction which this event involves   | Yes           | String         |
+| `label`      | A string to provide additional dimensions to the event data      | Yes           | String         |
+| `property`   | A string describing the object or the action performed on it     | Yes           | String         |
+| `value`      | A value to provide numerical data about the event                | Yes           | Int            |
+| `context`    | Custom context for the event                                     | No            | Map            |
+| `timestamp`  | Optional timestamp for the event                                 | No            | Long           |
 
 Example:
 
@@ -394,11 +394,11 @@ Use `trackUnstructuredEvent()` to track a custom event which consists of a nam
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `eventData` | The properties of the event | Yes | Map<String, Object> |
-| `context` | Custom context for the event | No | Map |
-| `timestamp` | Optional timestamp for the event | No | Long |
+| **Argument** | **Description**                  | **Required?** | **Validation**      |
+| ------------ | -------------------------------- | ------------- | ------------------- |
+| `eventData`  | The properties of the event      | Yes           | Map<String, Object> |
+| `context`    | Custom context for the event     | No            | Map                 |
+| `timestamp`  | Optional timestamp for the event | No            | Long                |
 
 Example:
 
@@ -436,11 +436,11 @@ Emitter e3 = new Emitter("d3rkrsqld9gmqf.cloudfront.net", new RequestCallback() 
 Emitter e4 = new Emitter("d3rkrsqld9gmqf.cloudfront.net", HttpMethod.POST, new RequestCallback() {...});
 ```
 
-| **Argument Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `URI` | The collector endpoint URI events will be sent to | Yes |
-| `httpMethod` | The HTTP method events should be sent | No |
-| `callback` | Lets you pass a callback class to handle succes/failure in sending events. | No |
+| **Argument Name** | **Description**                                                            | **Required?** |
+| ----------------- | -------------------------------------------------------------------------- | ------------- |
+| `URI`             | The collector endpoint URI events will be sent to                          | Yes           |
+| `httpMethod`      | The HTTP method events should be sent                                      | No            |
+| `callback`        | Lets you pass a callback class to handle succes/failure in sending events. | No            |
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#android-only)Android Only
 
@@ -464,12 +464,12 @@ Emitter e3 = new Emitter("snowplow-collector.acme.com", this, new RequestCallbac
 Emitter e4 = new Emitter("snowplow-collector.acme.com", this, HttpMethod.POST, new RequestCallback() {...});
 ```
 
-| **Argument Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `URI` | The collector endpoint URI events will be sent to | Yes |
-| `context` | Used to use to open or create an SQLite database | Yes |
-| `httpMethod` | The HTTP method events should be sent | No |
-| `callback` | Lets you pass a callback class to handle succes/failure in sending events. | No |
+| **Argument Name** | **Description**                                                            | **Required?** |
+| ----------------- | -------------------------------------------------------------------------- | ------------- |
+| `URI`             | The collector endpoint URI events will be sent to                          | Yes           |
+| `context`         | Used to use to open or create an SQLite database                           | Yes           |
+| `httpMethod`      | The HTTP method events should be sent                                      | No            |
+| `callback`        | Lets you pass a callback class to handle succes/failure in sending events. | No            |
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#51-using-a-buffer)5.1 Using a buffer
 
@@ -484,10 +484,10 @@ e1.setBufferOption(BufferOption.Default);
 
 Here are all the posibile options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `Instant` | Events are sent as soon as they are created |
-| `Default` | Sends events in a group when 10 events are created |
+| **Option** | **Description**                                    |
+| ---------- | -------------------------------------------------- |
+| `Instant`  | Events are sent as soon as they are created        |
+| `Default`  | Sends events in a group when 10 events are created |
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#52-choosing-the-http-method)5.2 Choosing the HTTP method
 
@@ -501,10 +501,10 @@ Emitter e1 = new Emitter("d3rkrsqld9gmqf.cloudfront.net", HttpMethod.POST);
 
 Here are all the posibile options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `GET` | Sends events as GET requests |
-| `POST` | Sends events as POST requests |
+| **Option** | **Description**               |
+| ---------- | ----------------------------- |
+| `GET`      | Sends events as GET requests  |
+| `POST`     | Sends events as POST requests |
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#53-method-of-sending-http-requests)5.3 Method of sending HTTP requests
 
@@ -517,9 +517,9 @@ e1.setRequestMethod(RequestMethod.Asynchronous);
 
 Here are all the possible options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `Synchronous` | Sends events synchronously |
+| **Option**     | **Description**             |
+| -------------- | --------------------------- |
+| `Synchronous`  | Sends events synchronously  |
 | `Asynchronous` | Sends events asynchronously |
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#android-only-1)Android Only
@@ -544,7 +544,7 @@ Emitter emitter = new Emitter(testURL, HttpMethod.GET, new RequestCallback() {
 });
 ```
 
-In the example, we we can see an in-line example of handling the case. If events are all successfully sent, the `onSuccess` method returns the number of successful events sent. If there were any failures, the `onFailure` method returns the successful events sent (if any) and a _list of events_ that failed to be sent (i.e. the HTTP state code did not return 200).
+In the example, we we can see an in-line example of handling the case. If events are all successfully sent, the `onSuccess` method returns the number of successful events sent. If there were any failures, the `onFailure` method returns the successful events sent (if any) and a *list of events* that failed to be sent (i.e. the HTTP state code did not return 200).
 
 ## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#6-payload)6\. Payload
 

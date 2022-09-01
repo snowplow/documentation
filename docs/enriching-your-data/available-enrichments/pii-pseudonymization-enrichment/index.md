@@ -1,6 +1,6 @@
 ---
-title: "PII pseudonymization enrichment"
-date: "2020-02-14"
+title: 'PII pseudonymization enrichment'
+date: '2020-02-14'
 sidebar_position: 14
 ---
 
@@ -24,7 +24,7 @@ With the configuration example, the fields `user_id` and `user_ipaddress` of the
 
 At the moment only `"pseudonymize"` strategy is available and the available hashing algorithms can be found below:
 
-- `_MD2_`: the 128-bit algorithm [MD2](https://en.wikipedia.org/wiki/MD2_(cryptography)#MD2_hashes) (not-recommended due to performance reasons see [RFC6149](https://tools.ietf.org/html/rfc6149))
+- `_MD2_`: the 128-bit algorithm [MD2](<https://en.wikipedia.org/wiki/MD2_(cryptography)#MD2_hashes>) (not-recommended due to performance reasons see [RFC6149](https://tools.ietf.org/html/rfc6149))
 - `_MD5_`: the 128-bit algorithm [MD5](https://en.wikipedia.org/wiki/MD5#MD5_hashes)
 - `_SHA-1_:` the 160-bit algorithm [SHA-1](https://en.wikipedia.org/wiki/SHA-1#Example_hashes)
 - `_SHA-256_`: 256-bit variant of the [SHA-2](https://en.wikipedia.org/wiki/SHA-2#Comparison_of_SHA_functions) algorithm

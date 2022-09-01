@@ -1,13 +1,13 @@
 ---
-title: "Tracking specific events"
-date: "2020-02-26"
+title: 'Tracking specific events'
+date: '2020-02-26'
 sidebar_position: 40
 ---
 
 Tracking methods supported by the Golang Tracker at a glance:
 
 | **Function**                                    | **Description**                                        |
-|-------------------------------------------------|--------------------------------------------------------|
+| ----------------------------------------------- | ------------------------------------------------------ |
 | [`TrackSelfDescribingEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event             |
 | [`TrackScreenView()`](#screen-view)             | Track the user viewing a screen within the application |
 | [`TrackPageView()`](#page-view)                 | Track and record views of web pages.                   |
@@ -131,15 +131,15 @@ Use `TrackSelfDescribingEvent()` to track a custom event which consists of a n
 
 The arguments are as follows:
 
-| **Argument**    | **Description**             | **Required?** | **Validation**       |
-|-----------------|-----------------------------|---------------|----------------------|
-| `Event`         | The properties of the event | Yes           | \*SelfDescribingJson |
-| `Timestamp`     | When the event occurred     | No            | \*int64              |
-| `EventId`       | The event ID                | No            | \*string             |
-| `TrueTimestamp` | The true time of event      | No            | \*int64              |
-| `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson  
- |
-| Subject | Event specific Subject | No | Subject |
+| **Argument**    | **Description**               | **Required?** | **Validation**         |
+| --------------- | ----------------------------- | ------------- | ---------------------- |
+| `Event`         | The properties of the event   | Yes           | \*SelfDescribingJson   |
+| `Timestamp`     | When the event occurred       | No            | \*int64                |
+| `EventId`       | The event ID                  | No            | \*string               |
+| `TrueTimestamp` | The true time of event        | No            | \*int64                |
+| `Contexts`      | Custom contexts for the event | No            | \[\]SelfDescribingJson |
+|  |
+| Subject         | Event specific Subject        | No            | Subject                |
 
 Example:
 
@@ -166,7 +166,7 @@ For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog
 Use `TrackScreenView()` to track a user viewing a screen (or equivalent) within your app:
 
 | **Argument**    | **Description**                     | **Required?** | **Type**               |
-|-----------------|-------------------------------------|---------------|------------------------|
+| --------------- | ----------------------------------- | ------------- | ---------------------- |
 | `Name`          | Human-readable name for this screen | No            | \*string               |
 | `Id`            | Unique identifier for this screen   | No            | \*string               |
 | `Timestamp`     | When the event occurred             | No            | \*int64                |
@@ -190,7 +190,7 @@ tracker.TrackScreenView(sp.ScreenViewEvent{
 Use `TrackPageView()` to track a user viewing a page within your app:
 
 | **Argument**    | **Description**                      | **Required?** | **Validation**         |
-|-----------------|--------------------------------------|---------------|------------------------|
+| --------------- | ------------------------------------ | ------------- | ---------------------- |
 | `PageUrl`       | The URL of the page                  | Yes           | \*string               |
 | `PageTitle`     | The title of the page                | No            | \*string               |
 | `Referrer`      | The address which linked to the page | No            | \*string               |
@@ -213,7 +213,7 @@ tracker.TrackPageView(sp.PageViewEvent{
 Use `TrackEcommerceTransaction()` to track an ecommerce transaction:
 
 | **Argument**    | **Description**                 | **Required?** | **Validation**                    |
-|-----------------|---------------------------------|---------------|-----------------------------------|
+| --------------- | ------------------------------- | ------------- | --------------------------------- |
 | `OrderId`       | ID of the eCommerce transaction | Yes           | \*string                          |
 | `TotalValue`    | Total transaction value         | Yes           | \*float64                         |
 | `Affiliation`   | Transaction affiliation         | No            | \*string                          |
@@ -235,7 +235,7 @@ The `items` argument is an Array of TransactionItems. `TrackEcommerceTransact
 These are the fields with which a TransactionItem can be created.
 
 | **Field**  | **Description**               | **Required?** | **Validation**         |
-|------------|-------------------------------|---------------|------------------------|
+| ---------- | ----------------------------- | ------------- | ---------------------- |
 | `Sku`      | Item SKU                      | Yes           | \*string               |
 | `Price`    | Item price                    | Yes           | \*float64              |
 | `Quantity` | Item quantity                 | Yes           | \*int64                |
@@ -282,7 +282,7 @@ tracker.TrackEcommerceTransaction(sp.EcommerceTransactionEvent{
 Use `TrackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
 | **Argument**    | **Description**                                                  | **Required?** | **Validation**         |
-|-----------------|------------------------------------------------------------------|---------------|------------------------|
+| --------------- | ---------------------------------------------------------------- | ------------- | ---------------------- |
 | `Category`      | The grouping of structured events which this `action` belongs to | Yes           | \*string               |
 | `Action`        | Defines the type of user interaction which this event involves   | Yes           | \*string               |
 | `Label`         | A string to provide additional dimensions to the event data      | No            | \*string               |
@@ -312,7 +312,7 @@ Use `TrackTiming()` to track a timing event.
 The arguments are as follows:
 
 | **Argument**    | **Description**               | **Required?** | **Validation**         |
-|-----------------|-------------------------------|---------------|------------------------|
+| --------------- | ----------------------------- | ------------- | ---------------------- |
 | `Category`      | The category of the event     | Yes           | \*string               |
 | `Variable`      | The variable of the event     | Yes           | \*string               |
 | `Timing`        | The timing of the event       | Yes           | \*int64                |

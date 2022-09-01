@@ -1,6 +1,6 @@
 ---
-title: "Initialization"
-date: "2020-02-26"
+title: 'Initialization'
+date: '2020-02-26'
 sidebar_position: 20
 ---
 
@@ -28,13 +28,13 @@ $tracker = new Tracker($emitter, $subject);
 
 Other Tracker arguments:
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `emitters` | The emitter to which events are sent | Yes | `None` |
-| `subject` | The user being tracked | Yes | `Subject()` |
-| `namespace` | The name of the tracker instance | No | `None` |
-| `app_id` | The application ID | No | `None` |
-| `encode_base64` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No | `True` |
+| **Argument Name** | **Description**                                                            | **Required?** | **Default** |
+| ----------------- | -------------------------------------------------------------------------- | ------------- | ----------- |
+| `emitters`        | The emitter to which events are sent                                       | Yes           | `None`      |
+| `subject`         | The user being tracked                                                     | Yes           | `Subject()` |
+| `namespace`       | The name of the tracker instance                                           | No            | `None`      |
+| `app_id`          | The application ID                                                         | No            | `None`      |
+| `encode_base64`   | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No            | `True`      |
 
 Another example using all of the allowed arguments:
 

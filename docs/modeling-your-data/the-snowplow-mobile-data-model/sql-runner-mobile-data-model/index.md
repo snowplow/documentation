@@ -1,6 +1,6 @@
 ---
-title: "sql-runner: Mobile data model"
-date: "2020-10-30"
+title: 'sql-runner: Mobile data model'
+date: '2020-10-30'
 sidebar_position: 10
 ---
 
@@ -53,13 +53,13 @@ Within the base module's main playbook, `01-base-main.yml.tmpl`:
 
 1. Set the `start_date` as desired.
 2. Enable the following contexts as desired by setting to `True`:
-    - Mobile - Device type, OS etc.
-    - Geolocation - Device latitude, longitude, bearing etc.
-    - Application - App version and build.
-    - Screen - Screen details associated with a mobile event.
+   - Mobile - Device type, OS etc.
+   - Geolocation - Device latitude, longitude, bearing etc.
+   - Application - App version and build.
+   - Screen - Screen details associated with a mobile event.
 3. Adjust filtering of events if required:
-    - `platform_filters`: Default - `platform = 'mob'`. Override if required.
-    - `app_id`: Default - No filter on `app_id`. Add if required.
+   - `platform_filters`: Default - `platform = 'mob'`. Override if required.
+   - `app_id`: Default - No filter on `app_id`. Add if required.
 
 ```
 # 01-base-main.yml.tmpl
@@ -68,7 +68,7 @@ Within the base module's main playbook, `01-base-main.yml.tmpl`:
    :start_date:         2020-01-01 #Set as required
    ...
    #Enable contexts if desired
-   :mobile_context: false 
+   :mobile_context: false
    :geolocation_context: false
    :application_context: false
    :screen_context: false
@@ -89,11 +89,11 @@ Optional modules are disabled by default. Please enable where appropriate by set
 ##### Authentication
 
 1. Set database password as an environmental variable.
-    - Redshift: Set environmental variable, `REDSHIFT_PASSWORD`, to your database password.
-    - BigQuery: Set environmental variable, `GOOGLE_APPLICATION_CREDENTIALS`, to the path of your GBQ json credential file
-    - Snowflake: Set environmental variable, `SNOWFLAKE_PASSWORD`, to your database password.
+   - Redshift: Set environmental variable, `REDSHIFT_PASSWORD`, to your database password.
+   - BigQuery: Set environmental variable, `GOOGLE_APPLICATION_CREDENTIALS`, to the path of your GBQ json credential file
+   - Snowflake: Set environmental variable, `SNOWFLAKE_PASSWORD`, to your database password.
 2. Fill in the relevant template in `.scripts/templates` with your database details.
-    - Redshift & Snowflake: Leave `PASSWORD_PLACEHOLDER` as is. This placeholder will be replaced at run time with the credentials from env var `{WAREHOUSE}_PASSWORD`, set in step 1.
+   - Redshift & Snowflake: Leave `PASSWORD_PLACEHOLDER` as is. This placeholder will be replaced at run time with the credentials from env var `{WAREHOUSE}_PASSWORD`, set in step 1.
 
 ##### Execution
 
@@ -165,7 +165,7 @@ Architecture of an individual mobile module
 
 Custom modules can fit into the incremental structure by consuming the same inputs, and running before the `99-{module}-complete` playbook runs. Custom modules may also consume and intermediary tables of the standard module, which will not be dropped until the `99-{module}-complete` playbook runs.
 
-Any custom SQL that depends on a `_staged` table as its input should run before the complete step of the module which handles that same input. For example, custom logic which takes mobile\_events\_staged as an input should run before the `99-sessions-complete` playbook which truncates mobile\_events\_staged.
+Any custom SQL that depends on a `_staged` table as its input should run before the complete step of the module which handles that same input. For example, custom logic which takes mobile_events_staged as an input should run before the `99-sessions-complete` playbook which truncates mobile_events_staged.
 
 An example custom module has been included in `mobile/v1/redshift/sql-runner/sql/custom`. In this module we:
 

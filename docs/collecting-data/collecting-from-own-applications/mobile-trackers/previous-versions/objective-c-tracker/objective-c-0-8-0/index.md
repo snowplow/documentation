@@ -1,6 +1,6 @@
 ---
-title: "Objective-C (iOS) (0.8.0)"
-date: "2020-03-02"
+title: 'Objective-C (iOS) (0.8.0)'
+date: '2020-03-02'
 sidebar_position: 930
 ---
 
@@ -62,7 +62,7 @@ For a basic example of the Singleton pattern:
   self = [super init];
   if (self) {
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-        
+
 
 \[builder setUrlEndpoint:@"com.acme"\]
 
@@ -129,7 +129,7 @@ To instantiate a tracker in your code simply instantiate the `SPTracker` class
 
 ```
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
-    
+
 \[builder setEmitter:emitter\]
 
 ; // Required
@@ -167,17 +167,17 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 ; // Optional }\];
 ```
 
-| **Builder Function** | **Description** |
-| --- | --- |
-| `setEmitter` | The SPEmitter object you create |
-| `setSubject` | The SPSubject object you create |
-| `setAppId` | The application ID |
-| `setTrackerNamespace` | The name of the tracker instance |
-| `setBase64Encoded` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) |
-| `setSessionContext` | Whether to enable client sessions |
-| `setForegroundTimeout` | The session foreground timeout |
-| `setBackgroundTimeout` | The session background timeout |
-| `setCheckInterval` | The session checking interval |
+| **Builder Function**   | **Description**                                                            |
+| ---------------------- | -------------------------------------------------------------------------- |
+| `setEmitter`           | The SPEmitter object you create                                            |
+| `setSubject`           | The SPSubject object you create                                            |
+| `setAppId`             | The application ID                                                         |
+| `setTrackerNamespace`  | The name of the tracker instance                                           |
+| `setBase64Encoded`     | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) |
+| `setSessionContext`    | Whether to enable client sessions                                          |
+| `setForegroundTimeout` | The session foreground timeout                                             |
+| `setBackgroundTimeout` | The session background timeout                                             |
+| `setCheckInterval`     | The session checking interval                                              |
 
 #### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#221-emitter)2.2.1 `emitter`
 
@@ -422,14 +422,14 @@ Snowplow has been built to enable you to track a wide range of events that occur
 
 Tracking methods supported by the Objective-C Tracker at a glance:
 
-| **Function** | \*_Description_ |
-| --- | --- |
-| [`trackScreenViewEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageViewEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#page-view) | Track and record views of web pages. |
-| [`trackEcommerceEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#ecommerce-transaction) | Track an ecommerce transaction and its items |
-| [`trackStructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#unstruct-event) | Track a Snowplow custom unstructured event |
-| [`trackTimingEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#timing) | Track a Snowplow user timing event |
+| **Function**                                                                                               | \*_Description_                                        |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [`trackScreenViewEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#screen-view)          | Track the user viewing a screen within the application |
+| [`trackPageViewEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#page-view)              | Track and record views of web pages.                   |
+| [`trackEcommerceEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#ecommerce-transaction) | Track an ecommerce transaction and its items           |
+| [`trackStructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#struct-event)         | Track a Snowplow custom structured event               |
+| [`trackUnstructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#unstruct-event)     | Track a Snowplow custom unstructured event             |
+| [`trackTimingEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#timing)                   | Track a Snowplow user timing event                     |
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#41-common)4.1 Common
 
@@ -501,7 +501,7 @@ Here is an example:
 
 ```
 event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
-  
+
 
 \[builder setCategory:@"DemoCategory"\]
 
@@ -556,13 +556,13 @@ To be confirmed. As of now, trackers do not return anything.
 
 Use `trackScreenViewEvent:` to track a user viewing a screen (or equivalent) within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setName` | Human-readable name for this screen | No | NSString\* |
-| `setId` | Unique identifier for this screen | No | NSString\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**   | **Description**                     | **Required?** | **Validation**   |
+| -------------- | ----------------------------------- | ------------- | ---------------- |
+| `setName`      | Human-readable name for this screen | No            | NSString\*       |
+| `setId`        | Unique identifier for this screen   | No            | NSString\*       |
+| `setContexts`  | Custom context for the event        | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event    | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event     | No            | NSString\*       |
 
 Example:
 
@@ -590,20 +590,20 @@ Use `trackPageViewEvent:` to track a user viewing a page within your app.
 
 Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setPageUrl` | The URL of the page | Yes | NSString\* |
-| `setPageTitle` | The title of the page | No | NSString\* |
-| `setReferrer` | The address which linked to the page | No | NSString\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**   | **Description**                      | **Required?** | **Validation**   |
+| -------------- | ------------------------------------ | ------------- | ---------------- |
+| `setPageUrl`   | The URL of the page                  | Yes           | NSString\*       |
+| `setPageTitle` | The title of the page                | No            | NSString\*       |
+| `setReferrer`  | The address which linked to the page | No            | NSString\*       |
+| `setContexts`  | Custom context for the event         | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event     | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event      | No            | NSString\*       |
 
 Example:
 
 ```
 SPPageView *event = [SPPageView build:^(id<SPPageViewBuilder> builder) {
-  
+
 \[builder setPageUrl:@"DemoPageUrl"\]
 
 ;
@@ -625,38 +625,38 @@ SPPageView *event = [SPPageView build:^(id<SPPageViewBuilder> builder) {
 
 Use `trackEcommerceEvent:` to track an ecommerce transaction. Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setOrderId` | ID of the eCommerce transaction | Yes | NSString\* |
-| `setTotalValue` | Total transaction value | Yes | double |
-| `setAffiliation` | Transaction affiliation | No | NSString\* |
-| `setTaxValue` | Transaction tax value | No | double |
-| `setShipping` | Delivery cost charged | No | double |
-| `setCity` | Delivery address city | No | NSString\* |
-| `setState` | Delivery address state | No | NSString\* |
-| `setCountry` | Delivery address country | No | NSString\* |
-| `setCurrency` | Transaction currency | No | NSString\* |
-| `setItems` | Items in the transaction | Yes | NSArray\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**     | **Description**                  | **Required?** | **Validation**   |
+| ---------------- | -------------------------------- | ------------- | ---------------- |
+| `setOrderId`     | ID of the eCommerce transaction  | Yes           | NSString\*       |
+| `setTotalValue`  | Total transaction value          | Yes           | double           |
+| `setAffiliation` | Transaction affiliation          | No            | NSString\*       |
+| `setTaxValue`    | Transaction tax value            | No            | double           |
+| `setShipping`    | Delivery cost charged            | No            | double           |
+| `setCity`        | Delivery address city            | No            | NSString\*       |
+| `setState`       | Delivery address state           | No            | NSString\*       |
+| `setCountry`     | Delivery address country         | No            | NSString\*       |
+| `setCurrency`    | Transaction currency             | No            | NSString\*       |
+| `setItems`       | Items in the transaction         | Yes           | NSArray\*        |
+| `setContexts`    | Custom context for the event     | No            | NSMutableArray\* |
+| `setTimestamp`   | Optional timestamp for the event | No            | NSInteger        |
+| `setEventId`     | Optional event id for the event  | No            | NSString\*       |
 
 `trackEcommerceEvent:` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, orderId, and currency as the main transaction event.
 
 The `items` argument is an `NSArray` containing an `SPEcommerceItem` for each item in the transaction. There is a convenience object for each item called `SPEcommerceItem:`. Arguments:
 
-| **Field** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setItemId` | ID of the eCommerce transaction | Yes | NSString\* |
-| `setSku` | Item SKU | Yes | NSString\* |
-| `setPrice` | Item price | Yes | double |
-| `setQuantity` | Item quantity | Yes | NSInteger |
-| `setName` | Item name | No | NSString\* |
-| `setCategory` | Item category | No | NSString\* |
-| `setCurrency` | Transaction currency | No | NSString\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Field**      | **Description**                  | **Required?** | **Validation**   |
+| -------------- | -------------------------------- | ------------- | ---------------- |
+| `setItemId`    | ID of the eCommerce transaction  | Yes           | NSString\*       |
+| `setSku`       | Item SKU                         | Yes           | NSString\*       |
+| `setPrice`     | Item price                       | Yes           | double           |
+| `setQuantity`  | Item quantity                    | Yes           | NSInteger        |
+| `setName`      | Item name                        | No            | NSString\*       |
+| `setCategory`  | Item category                    | No            | NSString\*       |
+| `setCurrency`  | Transaction currency             | No            | NSString\*       |
+| `setContexts`  | Custom context for the event     | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event  | No            | NSString\*       |
 
 Example of tracking a transaction containing one item:
 
@@ -746,16 +746,16 @@ SPEcommerce \*event = \[SPEcommerce build:^(id<SPEcommTransactionBuilder> builde
 
 Use `trackStructuredEvent:` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setCategory` | The grouping of structured events which this `action` belongs to | Yes | NSString\* |
-| `setAction` | Defines the type of user interaction which this event involves | Yes | NSString\* |
-| `setLabel` | A string to provide additional dimensions to the event data | No | NSString\* |
-| `setProperty` | A string describing the object or the action performed on it | No | NSString\* |
-| `setValue` | A value to provide numerical data about the event | No | NSInteger |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**   | **Description**                                                  | **Required?** | **Validation**   |
+| -------------- | ---------------------------------------------------------------- | ------------- | ---------------- |
+| `setCategory`  | The grouping of structured events which this `action` belongs to | Yes           | NSString\*       |
+| `setAction`    | Defines the type of user interaction which this event involves   | Yes           | NSString\*       |
+| `setLabel`     | A string to provide additional dimensions to the event data      | No            | NSString\*       |
+| `setProperty`  | A string describing the object or the action performed on it     | No            | NSString\*       |
+| `setValue`     | A value to provide numerical data about the event                | No            | NSInteger        |
+| `setContexts`  | Custom context for the event                                     | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event                                 | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event                                  | No            | NSString\*       |
 
 Example:
 
@@ -800,12 +800,12 @@ Use `trackUnstructuredEvent:` to track a custom event which consists of a name
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setEventData` | The properties of the event | Yes | SPSelfDescribingJson\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString |
+| **Argument**   | **Description**                  | **Required?** | **Validation**         |
+| -------------- | -------------------------------- | ------------- | ---------------------- |
+| `setEventData` | The properties of the event      | Yes           | SPSelfDescribingJson\* |
+| `setContexts`  | Custom context for the event     | No            | NSMutableArray\*       |
+| `setTimestamp` | Optional timestamp for the event | No            | NSInteger              |
+| `setEventId`   | Optional event id for the event  | No            | NSString               |
 
 Example:
 
@@ -831,15 +831,15 @@ For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/1
 
 Use `trackTimingEvent:` to track a user timing in your app - for example, how long a game took to load, or how long an in-app purchase took to download. The fields are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setCategory` | Categorizing timing variables into logical groups (e.g API calls, asset loading) | Yes | NSString\* |
-| `setVariable` | Identify the timing being recorded | Yes | NSString\* |
-| `setTiming` | The number of milliseconds in elapsed time to report | Yes | NSInteger |
-| `setLabel` | Optional description of this timing | Yes | NSString\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**   | **Description**                                                                  | **Required?** | **Validation**   |
+| -------------- | -------------------------------------------------------------------------------- | ------------- | ---------------- |
+| `setCategory`  | Categorizing timing variables into logical groups (e.g API calls, asset loading) | Yes           | NSString\*       |
+| `setVariable`  | Identify the timing being recorded                                               | Yes           | NSString\*       |
+| `setTiming`    | The number of milliseconds in elapsed time to report                             | Yes           | NSInteger        |
+| `setLabel`     | Optional description of this timing                                              | Yes           | NSString\*       |
+| `setContexts`  | Custom context for the event                                                     | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event                                                 | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event                                                  | No            | NSString\*       |
 
 Example:
 
@@ -914,16 +914,16 @@ A key change to the emitter construction is the removal of the `setBufferOption
 
 **NOTE**: The current safe maximum byte threshold is 52000, however, this may change in the future.
 
-| **Builder Function** | **Description** |
-| --- | --- |
-| `setUrlEndpoint` | The collector resource name to use for sending events |
-| `setHttpMethod` | The method sending; either GET or POST |
-| `setProtocol` | The protocol option; HTTP or HTTPS |
-| `setCallback` | The optional emitter callback |
-| `setEmitRange` | The count of events that are retrieved from the database |
-| `setEmitThreadPoolSize` | The size of the emitting Thread Pool |
-| `setByteLimitGet` | The max bytes in a GET request |
-| `setByteLimitPost` | The max bytes in a POST request |
+| **Builder Function**    | **Description**                                          |
+| ----------------------- | -------------------------------------------------------- |
+| `setUrlEndpoint`        | The collector resource name to use for sending events    |
+| `setHttpMethod`         | The method sending; either GET or POST                   |
+| `setProtocol`           | The protocol option; HTTP or HTTPS                       |
+| `setCallback`           | The optional emitter callback                            |
+| `setEmitRange`          | The count of events that are retrieved from the database |
+| `setEmitThreadPoolSize` | The size of the emitting Thread Pool                     |
+| `setByteLimitGet`       | The max bytes in a GET request                           |
+| `setByteLimitPost`      | The max bytes in a POST request                          |
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#51-using-a-protocol)5.1 Using a protocol
 
@@ -949,10 +949,10 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 Here are all the possible options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `SPHttp` | Sends events as HTTP |
-| `SPHttps` | Sends events as HTTPs |
+| **Option** | **Description**       |
+| ---------- | --------------------- |
+| `SPHttp`   | Sends events as HTTP  |
+| `SPHttps`  | Sends events as HTTPs |
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#52-choosing-the-http-method)5.2 Choosing the HTTP method
 
@@ -960,9 +960,9 @@ Snowplow supports receiving events via GET and POST requests. In a GET request, 
 
 Here are all the posibile options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `SPRequestGet` | Events are sent individually as GET requests |
+| **Option**      | **Description**                                                            |
+| --------------- | -------------------------------------------------------------------------- |
+| `SPRequestGet`  | Events are sent individually as GET requests                               |
 | `SPRequestPost` | Events are sent in a group when 10 events are received in one POST request |
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.7#53-adding-an-emitter-callback)5.3 Adding an Emitter Callback
@@ -1020,7 +1020,7 @@ You can set this during the creation of a `SPEmitter` object:
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-    
+
 \[builder setUrlEndpoint:url\]
 
 ;
@@ -1136,7 +1136,7 @@ For a basic example of the Singleton pattern:
   self = [super init];
   if (self) {
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
-        
+
 \[builder setUrlEndpoint:@"com.acme"\]
 
 ; }\]; tracker = \[SPTracker build:^(id<SPTrackerBuilder> builder) {
@@ -1313,17 +1313,17 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 ; // Optional }\];
 ```
 
-| **Builder Function** | **Description** |
-| --- | --- |
-| `setEmitter` | The SPEmitter object you create |
-| `setSubject` | The SPSubject object you create |
-| `setAppId` | The application ID |
-| `setTrackerNamespace` | The name of the tracker instance |
-| `setBase64Encoded` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) |
-| `setSessionContext` | Whether to enable client sessions |
-| `setForegroundTimeout` | The session foreground timeout |
-| `setBackgroundTimeout` | The session background timeout |
-| `setCheckInterval` | The session checking interval |
+| **Builder Function**   | **Description**                                                            |
+| ---------------------- | -------------------------------------------------------------------------- |
+| `setEmitter`           | The SPEmitter object you create                                            |
+| `setSubject`           | The SPSubject object you create                                            |
+| `setAppId`             | The application ID                                                         |
+| `setTrackerNamespace`  | The name of the tracker instance                                           |
+| `setBase64Encoded`     | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) |
+| `setSessionContext`    | Whether to enable client sessions                                          |
+| `setForegroundTimeout` | The session foreground timeout                                             |
+| `setBackgroundTimeout` | The session background timeout                                             |
+| `setCheckInterval`     | The session checking interval                                              |
 
 #### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#221-emitter)2.2.1 `emitter`
 
@@ -1568,14 +1568,14 @@ Snowplow has been built to enable you to track a wide range of events that occur
 
 Tracking methods supported by the Objective-C Tracker at a glance:
 
-| **Function** | \*_Description_ |
-| --- | --- |
-| [`trackScreenViewEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageViewEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#page-view) | Track and record views of web pages. |
-| [`trackEcommerceEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#ecommerce-transaction) | Track an ecommerce transaction and its items |
-| [`trackStructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#unstruct-event) | Track a Snowplow custom unstructured event |
-| [`trackTimingEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#timing) | Track a Snowplow user timing event |
+| **Function**                                                                                               | \*_Description_                                        |
+| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [`trackScreenViewEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#screen-view)          | Track the user viewing a screen within the application |
+| [`trackPageViewEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#page-view)              | Track and record views of web pages.                   |
+| [`trackEcommerceEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#ecommerce-transaction) | Track an ecommerce transaction and its items           |
+| [`trackStructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#struct-event)         | Track a Snowplow custom structured event               |
+| [`trackUnstructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#unstruct-event)     | Track a Snowplow custom unstructured event             |
+| [`trackTimingEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#timing)                   | Track a Snowplow user timing event                     |
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#41-common)4.1 Common
 
@@ -1701,13 +1701,13 @@ To be confirmed. As of now, trackers do not return anything.
 
 Use `trackScreenViewEvent:` to track a user viewing a screen (or equivalent) within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setName` | Human-readable name for this screen | No | NSString\* |
-| `setId` | Unique identifier for this screen | No | NSString\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**   | **Description**                     | **Required?** | **Validation**   |
+| -------------- | ----------------------------------- | ------------- | ---------------- |
+| `setName`      | Human-readable name for this screen | No            | NSString\*       |
+| `setId`        | Unique identifier for this screen   | No            | NSString\*       |
+| `setContexts`  | Custom context for the event        | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event    | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event     | No            | NSString\*       |
 
 Example:
 
@@ -1735,14 +1735,14 @@ Use `trackPageViewEvent:` to track a user viewing a page within your app.
 
 Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setPageUrl` | The URL of the page | Yes | NSString\* |
-| `setPageTitle` | The title of the page | No | NSString\* |
-| `setReferrer` | The address which linked to the page | No | NSString\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**   | **Description**                      | **Required?** | **Validation**   |
+| -------------- | ------------------------------------ | ------------- | ---------------- |
+| `setPageUrl`   | The URL of the page                  | Yes           | NSString\*       |
+| `setPageTitle` | The title of the page                | No            | NSString\*       |
+| `setReferrer`  | The address which linked to the page | No            | NSString\*       |
+| `setContexts`  | Custom context for the event         | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event     | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event      | No            | NSString\*       |
 
 Example:
 
@@ -1770,38 +1770,38 @@ SPPageView *event = [SPPageView build:^(id<SPPageViewBuilder> builder) {
 
 Use `trackEcommerceEvent:` to track an ecommerce transaction. Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setOrderId` | ID of the eCommerce transaction | Yes | NSString\* |
-| `setTotalValue` | Total transaction value | Yes | double |
-| `setAffiliation` | Transaction affiliation | No | NSString\* |
-| `setTaxValue` | Transaction tax value | No | double |
-| `setShipping` | Delivery cost charged | No | double |
-| `setCity` | Delivery address city | No | NSString\* |
-| `setState` | Delivery address state | No | NSString\* |
-| `setCountry` | Delivery address country | No | NSString\* |
-| `setCurrency` | Transaction currency | No | NSString\* |
-| `setItems` | Items in the transaction | Yes | NSArray\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**     | **Description**                  | **Required?** | **Validation**   |
+| ---------------- | -------------------------------- | ------------- | ---------------- |
+| `setOrderId`     | ID of the eCommerce transaction  | Yes           | NSString\*       |
+| `setTotalValue`  | Total transaction value          | Yes           | double           |
+| `setAffiliation` | Transaction affiliation          | No            | NSString\*       |
+| `setTaxValue`    | Transaction tax value            | No            | double           |
+| `setShipping`    | Delivery cost charged            | No            | double           |
+| `setCity`        | Delivery address city            | No            | NSString\*       |
+| `setState`       | Delivery address state           | No            | NSString\*       |
+| `setCountry`     | Delivery address country         | No            | NSString\*       |
+| `setCurrency`    | Transaction currency             | No            | NSString\*       |
+| `setItems`       | Items in the transaction         | Yes           | NSArray\*        |
+| `setContexts`    | Custom context for the event     | No            | NSMutableArray\* |
+| `setTimestamp`   | Optional timestamp for the event | No            | NSInteger        |
+| `setEventId`     | Optional event id for the event  | No            | NSString\*       |
 
 `trackEcommerceEvent:` fires multiple events: one "transaction" event for the transaction as a whole, and one "transaction item" event for each element of the `items` array. Each transaction item event will have the same timestamp, orderId, and currency as the main transaction event.
 
 The `items` argument is an `NSArray` containing an `SPEcommerceItem` for each item in the transaction. There is a convenience object for each item called `SPEcommerceItem:`. Arguments:
 
-| **Field** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setItemId` | ID of the eCommerce transaction | Yes | NSString\* |
-| `setSku` | Item SKU | Yes | NSString\* |
-| `setPrice` | Item price | Yes | double |
-| `setQuantity` | Item quantity | Yes | NSInteger |
-| `setName` | Item name | No | NSString\* |
-| `setCategory` | Item category | No | NSString\* |
-| `setCurrency` | Transaction currency | No | NSString\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Field**      | **Description**                  | **Required?** | **Validation**   |
+| -------------- | -------------------------------- | ------------- | ---------------- |
+| `setItemId`    | ID of the eCommerce transaction  | Yes           | NSString\*       |
+| `setSku`       | Item SKU                         | Yes           | NSString\*       |
+| `setPrice`     | Item price                       | Yes           | double           |
+| `setQuantity`  | Item quantity                    | Yes           | NSInteger        |
+| `setName`      | Item name                        | No            | NSString\*       |
+| `setCategory`  | Item category                    | No            | NSString\*       |
+| `setCurrency`  | Transaction currency             | No            | NSString\*       |
+| `setContexts`  | Custom context for the event     | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event  | No            | NSString\*       |
 
 Example of tracking a transaction containing one item:
 
@@ -1891,16 +1891,16 @@ SPEcommerce \*event = \[SPEcommerce build:^(id<SPEcommTransactionBuilder> builde
 
 Use `trackStructuredEvent:` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setCategory` | The grouping of structured events which this `action` belongs to | Yes | NSString\* |
-| `setAction` | Defines the type of user interaction which this event involves | Yes | NSString\* |
-| `setLabel` | A string to provide additional dimensions to the event data | No | NSString\* |
-| `setProperty` | A string describing the object or the action performed on it | No | NSString\* |
-| `setValue` | A value to provide numerical data about the event | No | NSInteger |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**   | **Description**                                                  | **Required?** | **Validation**   |
+| -------------- | ---------------------------------------------------------------- | ------------- | ---------------- |
+| `setCategory`  | The grouping of structured events which this `action` belongs to | Yes           | NSString\*       |
+| `setAction`    | Defines the type of user interaction which this event involves   | Yes           | NSString\*       |
+| `setLabel`     | A string to provide additional dimensions to the event data      | No            | NSString\*       |
+| `setProperty`  | A string describing the object or the action performed on it     | No            | NSString\*       |
+| `setValue`     | A value to provide numerical data about the event                | No            | NSInteger        |
+| `setContexts`  | Custom context for the event                                     | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event                                 | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event                                  | No            | NSString\*       |
 
 Example:
 
@@ -1945,12 +1945,12 @@ Use `trackUnstructuredEvent:` to track a custom event which consists of a name
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setEventData` | The properties of the event | Yes | SPSelfDescribingJson\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString |
+| **Argument**   | **Description**                  | **Required?** | **Validation**         |
+| -------------- | -------------------------------- | ------------- | ---------------------- |
+| `setEventData` | The properties of the event      | Yes           | SPSelfDescribingJson\* |
+| `setContexts`  | Custom context for the event     | No            | NSMutableArray\*       |
+| `setTimestamp` | Optional timestamp for the event | No            | NSInteger              |
+| `setEventId`   | Optional event id for the event  | No            | NSString               |
 
 Example:
 
@@ -1976,15 +1976,15 @@ For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/1
 
 Use `trackTimingEvent:` to track a user timing in your app - for example, how long a game took to load, or how long an in-app purchase took to download. The fields are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setCategory` | Categorizing timing variables into logical groups (e.g API calls, asset loading) | Yes | NSString\* |
-| `setVariable` | Identify the timing being recorded | Yes | NSString\* |
-| `setTiming` | The number of milliseconds in elapsed time to report | Yes | NSInteger |
-| `setLabel` | Optional description of this timing | Yes | NSString\* |
-| `setContexts` | Custom context for the event | No | NSMutableArray\* |
-| `setTimestamp` | Optional timestamp for the event | No | NSInteger |
-| `setEventId` | Optional event id for the event | No | NSString\* |
+| **Argument**   | **Description**                                                                  | **Required?** | **Validation**   |
+| -------------- | -------------------------------------------------------------------------------- | ------------- | ---------------- |
+| `setCategory`  | Categorizing timing variables into logical groups (e.g API calls, asset loading) | Yes           | NSString\*       |
+| `setVariable`  | Identify the timing being recorded                                               | Yes           | NSString\*       |
+| `setTiming`    | The number of milliseconds in elapsed time to report                             | Yes           | NSInteger        |
+| `setLabel`     | Optional description of this timing                                              | Yes           | NSString\*       |
+| `setContexts`  | Custom context for the event                                                     | No            | NSMutableArray\* |
+| `setTimestamp` | Optional timestamp for the event                                                 | No            | NSInteger        |
+| `setEventId`   | Optional event id for the event                                                  | No            | NSString\*       |
 
 Example:
 
@@ -2018,14 +2018,14 @@ Use `trackPushNotificationEvent:` to track when push notifications are opened.
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setAction` | Action taken by the user | Yes | NSString\* |
-| `setDate` | The date the notification was delivered | Yes | NSString\* |
-| `setTrigger` | Event trigger (i.e. push or local trigger) | Yes | NSString\* |
-| `setCategoryIdentifier` | Category Id of the notification | Yes | NSString\* |
-| `setThreadIdentifier` | Thread Id of the notification | Yes | NSString\* |
-| `setNotification` | Notification content event | Yes | SPNotificationContent\* |
+| **Argument**            | **Description**                            | **Required?** | **Validation**          |
+| ----------------------- | ------------------------------------------ | ------------- | ----------------------- |
+| `setAction`             | Action taken by the user                   | Yes           | NSString\*              |
+| `setDate`               | The date the notification was delivered    | Yes           | NSString\*              |
+| `setTrigger`            | Event trigger (i.e. push or local trigger) | Yes           | NSString\*              |
+| `setCategoryIdentifier` | Category Id of the notification            | Yes           | NSString\*              |
+| `setThreadIdentifier`   | Thread Id of the notification              | Yes           | NSString\*              |
+| `setNotification`       | Notification content event                 | Yes           | SPNotificationContent\* |
 
 There is a convenience object for storing all the information available in a notification, `SPNotificationContent`.
 
@@ -2033,16 +2033,16 @@ There is a convenience object for storing all the information available in a not
 
 Arguments:
 
-| **Field** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setTitle` | Title displayed in notification | Yes | NSString\* |
-| `setSubtitle` | Subtitle displayed | Yes | NSString\* |
-| `setBody` | Body message | Yes | double |
-| `setBadge` | Badge count of app | Yes | NSInteger |
-| `setSound` | Name of the notification sound | No | NSString\* |
-| `setLaunchImageName` | Item category | No | NSString\* |
-| `setUserInfo` | UserInfo dictionary | No | NSString\* |
-| `setAttachments` | Attachments displayed with notification | No | NSMutableArray\* |
+| **Field**            | **Description**                         | **Required?** | **Validation**   |
+| -------------------- | --------------------------------------- | ------------- | ---------------- |
+| `setTitle`           | Title displayed in notification         | Yes           | NSString\*       |
+| `setSubtitle`        | Subtitle displayed                      | Yes           | NSString\*       |
+| `setBody`            | Body message                            | Yes           | double           |
+| `setBadge`           | Badge count of app                      | Yes           | NSInteger        |
+| `setSound`           | Name of the notification sound          | No            | NSString\*       |
+| `setLaunchImageName` | Item category                           | No            | NSString\*       |
+| `setUserInfo`        | UserInfo dictionary                     | No            | NSString\*       |
+| `setAttachments`     | Attachments displayed with notification | No            | NSMutableArray\* |
 
 For example, tracking a notification:
 
@@ -2135,14 +2135,14 @@ Use `trackConsentGrantedEvent:` to track when a user grants consent to data co
 
 Arguments:
 
-| **Field** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setDocumentId` | ID of the consent document | Yes | NSString\* |
-| `setVersion` | Version of the consent document | Yes | NSString\* |
-| `setName` | Name of the consent document | No | NSString\* |
-| `setDescription` | Description of the consent document | No | NSString\* |
-| `setExpiry` | Date after which the user no longer consents | No | NSString\* |
-| `setDocuments` | Additional consent documents | No | NSArray\* |
+| **Field**        | **Description**                              | **Required?** | **Validation** |
+| ---------------- | -------------------------------------------- | ------------- | -------------- |
+| `setDocumentId`  | ID of the consent document                   | Yes           | NSString\*     |
+| `setVersion`     | Version of the consent document              | Yes           | NSString\*     |
+| `setName`        | Name of the consent document                 | No            | NSString\*     |
+| `setDescription` | Description of the consent document          | No            | NSString\*     |
+| `setExpiry`      | Date after which the user no longer consents | No            | NSString\*     |
+| `setDocuments`   | Additional consent documents                 | No            | NSArray\*      |
 
 Additional consent documents are supplied to the `setDocuments` field. The field accepts an NSArray of NSDictionaries(the key-value pairs must be strings). The valid dictionary keys are: "id", "version", "name", and "description".
 
@@ -2199,14 +2199,14 @@ Use `trackConsentWithdrawnEvent:` to track when a user withdraws consent to da
 
 Arguments:
 
-| **Field** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `setDocumentId` | ID of the consent document | No | NSString\* |
-| `setVersion` | Version of the consent document | No | NSString\* |
-| `setName` | Name of the consent document | No | NSString\* |
-| `setDescription` | Description of the consent document | No | NSString\* |
-| `setAll` | Specifies if all consent is revoked | Yes | NSString\* |
-| `setDocuments` | Additional consent documents | No | NSArray\* |
+| **Field**        | **Description**                     | **Required?** | **Validation** |
+| ---------------- | ----------------------------------- | ------------- | -------------- |
+| `setDocumentId`  | ID of the consent document          | No            | NSString\*     |
+| `setVersion`     | Version of the consent document     | No            | NSString\*     |
+| `setName`        | Name of the consent document        | No            | NSString\*     |
+| `setDescription` | Description of the consent document | No            | NSString\*     |
+| `setAll`         | Specifies if all consent is revoked | Yes           | NSString\*     |
+| `setDocuments`   | Additional consent documents        | No            | NSArray\*      |
 
 As with `trackConsentGrantedEvent`, additional consent documents are added by supplying an NSArray of NSDictionaries to the `setDocuments` field.
 
@@ -2306,16 +2306,16 @@ A key change to the emitter construction is the removal of the `setBufferOption
 
 **NOTE**: The current safe maximum byte threshold is 52000, however, this may change in the future.
 
-| **Builder Function** | **Description** |
-| --- | --- |
-| `setUrlEndpoint` | The collector resource name to use for sending events |
-| `setHttpMethod` | The method sending; either GET or POST |
-| `setProtocol` | The protocol option; HTTP or HTTPS |
-| `setCallback` | The optional emitter callback |
-| `setEmitRange` | The count of events that are retrieved from the database |
-| `setEmitThreadPoolSize` | The size of the emitting Thread Pool |
-| `setByteLimitGet` | The max bytes in a GET request |
-| `setByteLimitPost` | The max bytes in a POST request |
+| **Builder Function**    | **Description**                                          |
+| ----------------------- | -------------------------------------------------------- |
+| `setUrlEndpoint`        | The collector resource name to use for sending events    |
+| `setHttpMethod`         | The method sending; either GET or POST                   |
+| `setProtocol`           | The protocol option; HTTP or HTTPS                       |
+| `setCallback`           | The optional emitter callback                            |
+| `setEmitRange`          | The count of events that are retrieved from the database |
+| `setEmitThreadPoolSize` | The size of the emitting Thread Pool                     |
+| `setByteLimitGet`       | The max bytes in a GET request                           |
+| `setByteLimitPost`      | The max bytes in a POST request                          |
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#51-using-a-protocol)5.1 Using a protocol
 
@@ -2341,10 +2341,10 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 Here are all the possible options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `SPHttp` | Sends events as HTTP |
-| `SPHttps` | Sends events as HTTPs |
+| **Option** | **Description**       |
+| ---------- | --------------------- |
+| `SPHttp`   | Sends events as HTTP  |
+| `SPHttps`  | Sends events as HTTPs |
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#52-choosing-the-http-method)5.2 Choosing the HTTP method
 
@@ -2352,9 +2352,9 @@ Snowplow supports receiving events via GET and POST requests. In a GET request, 
 
 Here are all the posibile options that you can use:
 
-| **Option** | **Description** |
-| --- | --- |
-| `SPRequestGet` | Events are sent individually as GET requests |
+| **Option**      | **Description**                                                            |
+| --------------- | -------------------------------------------------------------------------- |
+| `SPRequestGet`  | Events are sent individually as GET requests                               |
 | `SPRequestPost` | Events are sent in a group when 10 events are received in one POST request |
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.8#53-adding-an-emitter-callback)5.3 Adding an Emitter Callback

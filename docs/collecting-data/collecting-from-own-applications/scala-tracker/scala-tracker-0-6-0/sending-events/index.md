@@ -1,6 +1,6 @@
 ---
-title: "Sending events"
-date: "2020-10-28"
+title: 'Sending events'
+date: '2020-10-28'
 sidebar_position: 3000
 ---
 
@@ -32,7 +32,7 @@ Use `trackSelfDescribingEvent` to track a custom Self-describing events (previ
 You can use its alias `trackUnstructEvent`.
 
 | **Argument**        | **Description**                                    | **Required?** | **Type**                   |
-|---------------------|----------------------------------------------------|---------------|----------------------------|
+| ------------------- | -------------------------------------------------- | ------------- | -------------------------- |
 | `unstructuredEvent` | Self-describing JSON containing unstructured event | Yes           | `SelfDescribingJson`       |
 | `contexts`          | List of custom contexts for the event              | No            | `List[SelfDescribingJson]` |
 | `timestamp`         | Device created timestamp or true timestamp         | No            | `Option[Timestamp]`        |
@@ -83,7 +83,7 @@ t.trackSelfDescribingEvent(productViewEvent, List(pageTypeContext, userContext))
 Use `trackStructEvent` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required).
 
 | **Argument** | **Description**                                                  | **Required?** | **Type**                   |
-|--------------|------------------------------------------------------------------|---------------|----------------------------|
+| ------------ | ---------------------------------------------------------------- | ------------- | -------------------------- |
 | `category`   | The grouping of structured events which this `action` belongs to | Yes           | `String`                   |
 | `action`     | Defines the type of user interaction which this event involves   | Yes           | `String`                   |
 | `label`      | A string to provide additional dimensions to the event data      | No            | `Option[String]`           |
@@ -118,7 +118,7 @@ t.trackStructEvent("commerce", "order", property=Some("book"), contexts=List(pag
 Use `trackPageView` to track a user viewing a page within your app. Arguments are:
 
 | **Argument** | **Description**                      | **Required?** | **Validation**             |
-|--------------|--------------------------------------|---------------|----------------------------|
+| ------------ | ------------------------------------ | ------------- | -------------------------- |
 | `pageUrl`    | The URL of the page                  | Yes           | `String`                   |
 | `pageTitle`  | The title of the page                | No            | `Option[String]`           |
 | `referrer`   | The address which linked to the page | No            | `Option[String]`           |
@@ -136,7 +136,7 @@ t.trackPageView("www.example.com", Some("example"), Some("www.referrer.com"))
 Use `trackError` to track exceptions raised during your app's execution. Arguments are:
 
 | **Argument** | **Description**                  | **Required?** | **Validation**             |
-|--------------|----------------------------------|---------------|----------------------------|
+| ------------ | -------------------------------- | ------------- | -------------------------- |
 | `error`      | Any throwable need to be tracked | Yes           | `Throwable`                |
 | `contexts`   | Custom contexts for the event    | No            | `List[SelfDescribingJson]` |
 | `timestamp`  | When the pageview occurred       | No            | `Option[Timestamp]`        |

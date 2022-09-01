@@ -1,6 +1,6 @@
 ---
-title: "Run the RDB shredder"
-date: "2021-09-14"
+title: 'Run the RDB shredder'
+date: '2021-09-14'
 sidebar_position: 40
 ---
 
@@ -70,7 +70,7 @@ You can use any suitable tool to periodically submit the Shredder job to EMR clu
             "Io.file.buffer.size":"65536"
          },
          "configurations":[
-   
+
          ]
       },
       {
@@ -81,7 +81,7 @@ You can use any suitable tool to periodically submit the Shredder job to EMR clu
             "yarn.nodemanager.vmem-check-enabled":"false"
          },
          "configurations":[
-   
+
          ]
       },
       {
@@ -90,7 +90,7 @@ You can use any suitable tool to periodically submit the Shredder job to EMR clu
             "maximizeResourceAllocation":"false"
          },
          "configurations":[
-   
+
          ]
       },
       {
@@ -107,7 +107,7 @@ You can use any suitable tool to periodically submit the Shredder job to EMR clu
             "spark.dynamicAllocation.enabled":"false"
          },
          "configurations":[
-   
+
          ]
       }
    ],

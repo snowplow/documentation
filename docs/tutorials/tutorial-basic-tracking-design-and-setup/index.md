@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: basic tracking design and setup"
-date: "2020-02-27"
+title: 'Tutorial: basic tracking design and setup'
+date: '2020-02-27'
 sidebar_position: 30
 ---
 
@@ -24,13 +24,13 @@ We'll give it the following details:
     "$schema" : "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     "description": "Schema for tracking our demo form",
     "self": {
-        "vendor": "com.snowplowanalytics",		
-	"name": "basic_form_tracking",						
+        "vendor": "com.snowplowanalytics",
+	"name": "basic_form_tracking",
 	"format": "jsonschema",
 	"version": "1-0-0"
     },
     "type": "object",
-    "properties": {	
+    "properties": {
         ...
     },
     "additionalProperties": false
@@ -41,7 +41,7 @@ We'll give it the following details:
 
 If we take the first field “First Name" and assume that the form owner makes the decisions that:
 
-1. The name of the field should be ‘form1\_first\_name’ (so everyone knows how to find it in the database later)
+1. The name of the field should be ‘form1_first_name’ (so everyone knows how to find it in the database later)
 2. Values entered should be a string (text)
 3. The string should have a minimum of two characters (to avoid initials) and a maximum of 100 characters.
 4. This field is required.
@@ -65,7 +65,7 @@ Therefore in the schema for this data structure we would display these decisions
 
 For the second form field the form owner might decide:
 
-1. The name of the field should be “form1\_contact\_number"
+1. The name of the field should be “form1_contact_number"
 2. The values entered must be a number
 3. The minimum and maximum number length should be 10 digits
 4. This is an optional field
@@ -96,7 +96,7 @@ By adding the “null" type above this means that if there is no data value sent
 
 Finally for the 3rd form field the decisions are as follows:
 
-1. The name of the field should be “opt\_into\_marketing"
+1. The name of the field should be “opt_into_marketing"
 2. The values sent are True/False; Yes = true, No = false
 3. This field is required.
 
@@ -135,8 +135,8 @@ Putting it all together our schema for capturing the additional contexts of indi
      "$schema" : "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
      "description": "Schema for tracking our demo form",
      "self": {
-         "vendor": "com.snowplowanalytics",        
-     "name": "basic_form_tracking",                      
+         "vendor": "com.snowplowanalytics",
+     "name": "basic_form_tracking",
      "format": "jsonschema",
      "version": "1-0-0"
      },
@@ -218,61 +218,93 @@ Create a new HTML page with this content:
 
 ```html
 <html>
-<body>
-<form class="form-horizontal">
-<fieldset>
+  <body>
+    <form class="form-horizontal">
+      <fieldset>
+        <!-- Form Name -->
+        <legend>Form Name</legend>
 
-<!-- Form Name -->
-<legend>Form Name</legend>
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="form1_first_name"
+            >First name</label
+          >
+          <div class="col-md-4">
+            <input
+              id="form1_first_name"
+              name="form1_first_name"
+              type="text"
+              placeholder=""
+              class="form-control input-md"
+              required=""
+            />
+          </div>
+        </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="form1_first_name">First name</label>  
-  <div class="col-md-4">
-  <input id="form1_first_name" name="form1_first_name" type="text" placeholder="" class="form-control input-md" required="">
-    
-  </div>
-</div>
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="form1_contact_number"
+            >Contact number</label
+          >
+          <div class="col-md-4">
+            <input
+              id="form1_contact_number"
+              name="form1_contact_number"
+              type="text"
+              placeholder=""
+              class="form-control input-md"
+            />
+          </div>
+        </div>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="form1_contact_number">Contact number</label>  
-  <div class="col-md-4">
-  <input id="form1_contact_number" name="form1_contact_number" type="text" placeholder="" class="form-control input-md">
-    
-  </div>
-</div>
+        <!-- Multiple Checkboxes -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="opt_into_marketing"
+            >Receive marketing info?</label
+          >
+          <div class="col-md-4">
+            <div class="checkbox">
+              <label for="opt_into_marketing-0">
+                <input
+                  type="checkbox"
+                  name="opt_into_marketing"
+                  id="opt_into_marketing-0"
+                  value="1"
+                />
+                Yes
+              </label>
+            </div>
+            <div class="checkbox">
+              <label for="opt_into_marketing-1">
+                <input
+                  type="checkbox"
+                  name="opt_into_marketing"
+                  id="opt_into_marketing-1"
+                  value="0"
+                />
+                No
+              </label>
+            </div>
+          </div>
+        </div>
 
-<!-- Multiple Checkboxes -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="opt_into_marketing">Receive marketing info?</label>
-  <div class="col-md-4">
-  <div class="checkbox">
-    <label for="opt_into_marketing-0">
-      <input type="checkbox" name="opt_into_marketing" id="opt_into_marketing-0" value="1">
-      Yes
-    </label>
-	</div>
-  <div class="checkbox">
-    <label for="opt_into_marketing-1">
-      <input type="checkbox" name="opt_into_marketing" id="opt_into_marketing-1" value="0">
-      No
-    </label>
-	</div>
-  </div>
-</div>
-
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="button"></label>
-  <div class="col-md-4">
-    <button id="button" name="button" class="btn btn-primary" onclick="form1submit()">Submit</button>
-  </div>
-</div>
-
-</fieldset>
-</form>
-</body>
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="button"></label>
+          <div class="col-md-4">
+            <button
+              id="button"
+              name="button"
+              class="btn btn-primary"
+              onclick="form1submit()"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </body>
 </html>
 ```
 
@@ -290,7 +322,7 @@ Let's add a function into our page, you'll need to pass in the values from your 
 
 ```javascript
 <script>
-function form1submit(){ 
+function form1submit(){
   window.snowplow('trackSelfDescribingEvent', {
     schema: 'iglu:com.snowplowanalytics/form1_fields/jsonschema/1-0-0',
     data: {

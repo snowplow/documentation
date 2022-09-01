@@ -1,6 +1,6 @@
 ---
-title: "R35 Upgrade Guide"
-date: "2021-01-27"
+title: 'R35 Upgrade Guide'
+date: '2021-01-27'
 sidebar_position: 300
 ---
 
@@ -139,7 +139,7 @@ Here's an example:
     "skip": [ ]
   },
 
-  # Warehouse connection details, identical to storage target config 
+  # Warehouse connection details, identical to storage target config
   "storage": {
     # Database, redshift is the only acceptable option
     "type": "redshift",

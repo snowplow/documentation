@@ -1,6 +1,6 @@
 ---
-title: "Predefined vs custom entities"
-date: "2020-02-27"
+title: 'Predefined vs custom entities'
+date: '2020-02-27'
 sidebar_position: 40
 ---
 
@@ -25,7 +25,7 @@ window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
 
 Custom contexts let you add additional information about the circumstances surrounding an event by attaching context through entities represented with a [self-describing JSON](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
 
-The `contexts` argument to any method is always _optional_. If set, it must be a self-describing JSON including at least one `name: property` pair in JSON provided as a value to `data` property of the self-describing JSON, where `data` is the name for an individual context entry.
+The `contexts` argument to any method is always *optional*. If set, it must be a self-describing JSON including at least one `name: property` pair in JSON provided as a value to `data` property of the self-describing JSON, where `data` is the name for an individual context entry.
 
 It generally looks like the one below:
 
@@ -38,7 +38,7 @@ It generally looks like the one below:
 }
 ```
 
-A few dos and don'ts for _context names_:
+A few dos and don'ts for *context names*:
 
 - Do name each context entry however you like
 - Do use a context name to identify a set of associated data points which make sense to your business
@@ -51,7 +51,7 @@ A few dos and don'ts for the _JSON_s inside each context entry JSONs:
 - Do use Snowplow datatype suffixes if the data type would otherwise be unclear
 - Don't nest properties as with custom unstructured events, the structure must be flat
 
-If you want to create your own custom context, you must create a [data structure for it](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md). Since more than one can be attached to an event, the `context` argument (if it is provided at all) should be a _non-empty array of self-describing JSONs_.
+If you want to create your own custom context, you must create a [data structure for it](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md). Since more than one can be attached to an event, the `context` argument (if it is provided at all) should be a *non-empty array of self-describing JSONs*.
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 

@@ -1,6 +1,6 @@
 ---
-title: "Run EmrEtlRunner"
-date: "2020-02-26"
+title: 'Run EmrEtlRunner'
+date: '2020-02-26'
 sidebar_position: 30
 ---
 

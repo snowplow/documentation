@@ -1,6 +1,6 @@
 ---
-title: "Iglu Central"
-date: "2021-03-26"
+title: 'Iglu Central'
+date: '2021-03-26'
 sidebar_position: 1000
 ---
 

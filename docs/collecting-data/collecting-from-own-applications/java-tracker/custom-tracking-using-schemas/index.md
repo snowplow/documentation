@@ -1,6 +1,6 @@
 ---
-title: "Custom tracking using schemas"
-date: "2022-03-24"
+title: 'Custom tracking using schemas'
+date: '2022-03-24'
 sidebar_position: 30
 ---
 

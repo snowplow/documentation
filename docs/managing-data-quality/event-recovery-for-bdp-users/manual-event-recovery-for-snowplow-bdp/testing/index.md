@@ -1,6 +1,6 @@
 ---
-title: "Testing"
-date: "2020-08-26"
+title: 'Testing'
+date: '2020-08-26'
 sidebar_position: 20
 ---
 
@@ -18,7 +18,7 @@ Prerequisite:
 To make use of scripting utility only a single dependency is required – [ammonite](https://amonite.io/). To install it simply run:
 
 ```
-sudo sh -c '(echo "#!/usr/bin/env sh" && curl -L https://github.com/lihaoyi/Ammonite/releases/download/2.1.1/2.12-2.1.1) > /usr/local/bin/amm && chmod +x /usr/local/bin/amm' 
+sudo sh -c '(echo "#!/usr/bin/env sh" && curl -L https://github.com/lihaoyi/Ammonite/releases/download/2.1.1/2.12-2.1.1) > /usr/local/bin/amm && chmod +x /usr/local/bin/amm'
 ```
 
 Now your are able to use a prebuilt script that will allow you to run the configuration against a sample data payload.

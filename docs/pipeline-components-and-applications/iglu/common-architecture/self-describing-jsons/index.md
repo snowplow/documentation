@@ -1,6 +1,6 @@
 ---
-title: "Self describing JSONs"
-date: "2021-03-26"
+title: 'Self describing JSONs'
+date: '2021-03-26'
 sidebar_position: 50
 ---
 

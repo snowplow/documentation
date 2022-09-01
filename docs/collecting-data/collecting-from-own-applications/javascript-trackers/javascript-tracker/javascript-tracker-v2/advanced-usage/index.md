@@ -1,6 +1,6 @@
 ---
-title: "Advanced Usage"
-date: "2020-02-21"
+title: 'Advanced Usage'
+date: '2020-02-21'
 sidebar_position: 60
 ---
 

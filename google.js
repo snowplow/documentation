@@ -1,7 +1,12 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
 import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
-import { COOKIE_PREF_KEY, DOCS_SITE_URLS, GTM_ID, UA_ID } from './src/constants/config'
+import {
+  COOKIE_PREF_KEY,
+  DOCS_SITE_URLS,
+  GTM_ID,
+  UA_ID,
+} from './src/constants/config'
 import { reloadOnce } from './src/helpers/reloadOnce'
 
 // to prevent any possible mess-up with adding the scripts multiple times
@@ -19,7 +24,7 @@ const attachGTMHeadScript = () => {
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','${GTM_ID}');
   `
-  headScript.type='text/javascript'
+  headScript.type = 'text/javascript'
 
   document.head.appendChild(headScript)
 
@@ -31,7 +36,10 @@ const attachGTMBodyScript = () => {
   const noScript = document.createElement('noscript')
   const iframe = document.createElement('iframe')
 
-  iframe.setAttribute('src', `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`)
+  iframe.setAttribute(
+    'src',
+    `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`
+  )
   iframe.setAttribute('height', 0)
   iframe.setAttribute('width', 0)
   iframe.setAttribute('style', 'display:none;visibility:hidden;')
@@ -48,8 +56,11 @@ const attachGAScripts = () => {
   const firstScript = document.createElement('script')
 
   firstScript.setAttribute('async', '')
-  firstScript.setAttribute('src', `https://www.googletagmanager.com/gtag/js?id=${UA_ID}`)
-  firstScript.type='text/javascript'
+  firstScript.setAttribute(
+    'src',
+    `https://www.googletagmanager.com/gtag/js?id=${UA_ID}`
+  )
+  firstScript.type = 'text/javascript'
 
   firstScript.onload = () => {
     const secondScript = document.createElement('script')
@@ -61,7 +72,7 @@ const attachGAScripts = () => {
 
       gtag('config', '${UA_ID}');
     `
-    secondScript.type='text/javascript'
+    secondScript.type = 'text/javascript'
 
     document.body.insertBefore(secondScript, document.body.children[1])
   }
@@ -75,7 +86,11 @@ const setupGoogleTrackers = () => {
   const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
   const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
 
-  if (isProd && cookiePreferences && cookiePreferences.includes('analytics:1')) {
+  if (
+    isProd &&
+    cookiePreferences &&
+    cookiePreferences.includes('analytics:1')
+  ) {
     attachGTMHeadScript()
     attachGTMBodyScript()
     attachGAScripts()
@@ -85,10 +100,10 @@ const setupGoogleTrackers = () => {
 if (ExecutionEnvironment.canUseDOM) {
   setupGoogleTrackers()
 
-  onPreferencesChanged((preferences)=> {
+  onPreferencesChanged((preferences) => {
     const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
 
-    preferences.cookieOptions.forEach(({id, isEnabled}) => {
+    preferences.cookieOptions.forEach(({ id, isEnabled }) => {
       if (id === 'analytics' && isProd) {
         if (isEnabled) {
           attachGTMHeadScript()

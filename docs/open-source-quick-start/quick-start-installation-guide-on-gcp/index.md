@@ -1,6 +1,6 @@
 ---
-title: "Quick Start Installation Guide on GCP"
-date: "2021-09-21"
+title: 'Quick Start Installation Guide on GCP'
+date: '2021-09-21'
 sidebar_position: 100
 ---
 
@@ -18,16 +18,16 @@ You can find more details on the infrastructure and applications that [will be d
 
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed
 - A Google cloud service account
-    - See [details on using the service account with the Cloud SDK](https://cloud.google.com/docs/authentication/getting-started#setting_the_environment_variable)
-    - You will need to:
-        - Navigate to your service account on Google Cloud Console
-        - Create a new JSON Key and store locally
-        - Create the environment variable by running `export GOOGLE_APPLICATION_CREDENTIALS="KEY PATH"` in terminal
+  - See [details on using the service account with the Cloud SDK](https://cloud.google.com/docs/authentication/getting-started#setting_the_environment_variable)
+  - You will need to:
+    - Navigate to your service account on Google Cloud Console
+    - Create a new JSON Key and store locally
+    - Create the environment variable by running `export GOOGLE_APPLICATION_CREDENTIALS="KEY PATH"` in terminal
 - [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher installed
-    - Follow the instructions to make sure the terraform binary is available on your PATH. You can also use [tfenv](https://github.com/tfutils/tfenv) to help manage Terraform installation
+  - Follow the instructions to make sure the terraform binary is available on your PATH. You can also use [tfenv](https://github.com/tfutils/tfenv) to help manage Terraform installation
 - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) which allows you to publish schemas for your [custom events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events) and [entities](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md#custom-contexts) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/index.md)
 - Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your localhost
-    - `git clone https://github.com/snowplow/quickstart-examples.git`
+  - `git clone https://github.com/snowplow/quickstart-examples.git`
 
 ### Select which example you want to use
 
@@ -40,9 +40,9 @@ The main difference is around the [VPC](https://cloud.google.com/vpc/docs/overvi
 
 ### Setting up your Iglu Server
 
-The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
+The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline.
 
-We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your Postgres loader) can communicate with Iglu. 
+We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your Postgres loader) can communicate with Iglu.
 
 **Step 1: Update your input variables**
 
@@ -59,18 +59,18 @@ To update your input variables, you'll need to know a couple of things:
 - Your IP Address. [Help](https://duckduckgo.com/?q=ip+address&t=ffab&ia=answer).
 - A UUID for your Iglu Servers API Key. [Help](https://duckduckgo.com/?t=ffab&q=uuid&ia=answer).
 - If you have opted for `secure`, the network and subnetworks you will deploy your Iglu Server into.
-    - If you are deploying to your default network then set `network = default` and leave subnetworks empty
+  - If you are deploying to your default network then set `network = default` and leave subnetworks empty
 - How to generate a SSH Key.
-    - On most systems you can generate a SSH Key with: `ssh-keygen -t rsa -b 4096`
-    - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
-    - You can get the value with `cat ~/.ssh/id_rsa.pub`
+  - On most systems you can generate a SSH Key with: `ssh-keygen -t rsa -b 4096`
+  - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
+  - You can get the value with `cat ~/.ssh/id_rsa.pub`
 
 **Step 2 (optional): Update telemetry settings**
 
 We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/telemetry-principles/index.md).
 
 - If you wish to subscribe to our mailing list for updates to these modules or security advisories please set the `user_provided_id` variable to include a valid email address which we can reach you at.
-    - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know how we can improve the experience going forward, so we really appreciate it being set!_
+  - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know how we can improve the experience going forward, so we really appreciate it being set!_
 - To disable telemetry simply set variable `telemetry_enabled = false`.
 
 **Step 3: Run the terraform script to set up your Iglu stack**
@@ -115,18 +115,18 @@ To update your input variables, you'll need to know a couple of things:
 - Your Iglu Servers DNS from [Setting up your Iglu Server.](#iglu-setup)
 - Your UUID for your Iglu Servers API Key. [Help](https://duckduckgo.com/?t=ffab&q=uuid&ia=answer).
 - If you have opted for `secure`, the network and subnetworks you will deploy your Iglu Server into.
-    - If you are deploying to your default network then set `network = default` and leave subnetworks empty.
+  - If you are deploying to your default network then set `network = default` and leave subnetworks empty.
 - How to generate a SSH Key.
-    - On most systems you can generate a SSH Key with: `ssh-keygen -t rsa -b 4096`
-    - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
-    - You can get the value with `cat ~/.ssh/id_rsa.pub`
+  - On most systems you can generate a SSH Key with: `ssh-keygen -t rsa -b 4096`
+  - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
+  - You can get the value with `cat ~/.ssh/id_rsa.pub`
 
 **Step 2 (optional): Update telemetry settings**
 
 We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/telemetry-principles/index.md).
 
 - If you wish to subscribe to our mailing list for updates to these modules or security advisories please set the `user_provided_id` variable to include a valid email address which we can reach you at.
-    - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know where to invest our efforts going forward._
+  - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know where to invest our efforts going forward._
 - To disable telemetry simply set variable `telemetry_enabled = false`.
 
 **Step 3: Run the terraform script to set up your Pipeline stack**
@@ -143,7 +143,7 @@ This will output your `collector_dns_name`, `db_address`, `db_port` and `db
 
 #### Now let's [send some events](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/sending-test-events/index.md) to your pipeline! >>
 
-* * *
+---
 
 Do you have any feedback for us?
 

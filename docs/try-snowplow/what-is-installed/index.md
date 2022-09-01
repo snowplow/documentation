@@ -1,6 +1,6 @@
 ---
-title: "What is installed?"
-date: "2021-09-17"
+title: 'What is installed?'
+date: '2021-09-17'
 sidebar_position: 10
 ---
 

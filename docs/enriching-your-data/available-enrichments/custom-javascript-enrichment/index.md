@@ -1,6 +1,6 @@
 ---
-title: "Custom JavaScript enrichment"
-date: "2020-02-14"
+title: 'Custom JavaScript enrichment'
+date: '2020-02-14'
 sidebar_position: 10
 ---
 
@@ -29,15 +29,15 @@ JavaScript enrichment uses [Nashorn Engine](https://docs.oracle.com/javase/10/na
 
 Although the use cases for this enrichment can be endless, they don’t need to only serve analytics purposes. A very useful case might be in anti-spoofing for instance. You might want to make sure that the events being sent over are from your app or website rather than one spoofed by a hacker.
 
-To do so you might write a Javascript function that checks if a secret key is valid server side, and only then set the event with the correct “app\_id” variable that denotes it is a valid event from your property.
+To do so you might write a Javascript function that checks if a secret key is valid server side, and only then set the event with the correct “app_id” variable that denotes it is a valid event from your property.
 
 Taking this example further, you could do something like notify the user that sent the event that they are likely on a spoofing website.
 
 Here’s an example snippet of code relating to the above:
 
 ```javascript
-var SECRET_APP_ID = "Joshua";
-    
+var SECRET_APP_ID = 'Joshua'
+
 /**
  * Performs two roles:
  * 1. If this is a server-side event, we
@@ -48,21 +48,25 @@ var SECRET_APP_ID = "Joshua";
  *    Acme context, derived_app_id, which
  *    contains the upper-cased app_id
  */
- 
+
 function process(event) {
-    var appId = event.getApp_id();
-  
-    if (platform == "server" && appId != SECRET_APP_ID) {
-        throw "Server-side event has invalid app_id: " + appId;
-    }
-  
-    if (appId == null) {
-        return [];
-    }
-  
-    var appIdUpper = new String(appId.toUpperCase());
-    return [ { schema: "iglu:com.acme/derived_app_id/jsonschema/1-0-0",
-               data:  { appIdUpper: appIdUpper } } ];
+  var appId = event.getApp_id()
+
+  if (platform == 'server' && appId != SECRET_APP_ID) {
+    throw 'Server-side event has invalid app_id: ' + appId
+  }
+
+  if (appId == null) {
+    return []
+  }
+
+  var appIdUpper = new String(appId.toUpperCase())
+  return [
+    {
+      schema: 'iglu:com.acme/derived_app_id/jsonschema/1-0-0',
+      data: { appIdUpper: appIdUpper },
+    },
+  ]
 }
 ```
 
@@ -74,36 +78,36 @@ The JavaScript enrichment can be used to add additional contextual information i
 
 ```javascript
 /**
-* process()
-* Entry point for the Javascript enrichment function. Executed using Nashorn
-* @param {EnrichedEvent} event Snowplow event to perform enrichment on.
-* @returns {JSON Array} additional custom context to add to the event
-*/
+ * process()
+ * Entry point for the Javascript enrichment function. Executed using Nashorn
+ * @param {EnrichedEvent} event Snowplow event to perform enrichment on.
+ * @returns {JSON Array} additional custom context to add to the event
+ */
 function process(event) {
+  // get a custom event (if available) in JSON format from the snowplow event
+  var customEvent = JSON.parse(event.getUnstruct_event())
 
-    // get a custom event (if available) in JSON format from the snowplow event
-    var customEvent = JSON.parse(event.getUnstruct_event());
+  // get the schema from the custom event
+  var customEventSchema = customEvent.data.schema
+  // get the data from the custom event
+  var customEventData = customEvent.data.data
 
-    // get the schema from the custom event
-    var customEventSchema = customEvent.data.schema;
-    // get the data from the custom event
-    var customEventData = customEvent.data.data;
+  // get contexts (if available) in JSON format from the snowplow event
+  var contexts = JSON.parse(event.getContexts())
+  var contextArray = contexts.data
+  // get the schema for the first custom context
+  var firstCustomContextSchema = contextArray[0].schema
 
-    // get contexts (if available) in JSON format from the snowplow event
-    var contexts = JSON.parse(event.getContexts());
-    var contextArray = contexts.data;
-    // get the schema for the first custom context
-    var firstCustomContextSchema = contextArray[0].schema;
+  // default response to return if not adding any additional custom contexts
+  var responseJSON = []
 
-    // default response to return if not adding any additional custom contexts
-    var responseJSON = [];
+  // add a custom context to the array
+  responseString =
+    '{"schema": "iglu:com.example/example_entity/jsonschema/1-0-0", "data": {"content": "content", "task_id": "a439e001-c058-4f06-b975-89733096df35", "timestamp": "2020-09-25 15:47:25"}}'
+  responseJSON.push(JSON.parse(responseString))
 
-    // add a custom context to the array
-    responseString = '{"schema": "iglu:com.example/example_entity/jsonschema/1-0-0", "data": {"content": "content", "task_id": "a439e001-c058-4f06-b975-89733096df35", "timestamp": "2020-09-25 15:47:25"}}';
-    responseJSON.push(JSON.parse(responseString));
-
-    // return the new custom contexts to Snowplow for validation
-    return responseJSON;
+  // return the new custom contexts to Snowplow for validation
+  return responseJSON
 }
 ```
 

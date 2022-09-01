@@ -1,6 +1,6 @@
 ---
-title: "Tracking Events"
-date: "2020-02-21"
+title: 'Tracking Events'
+date: '2020-02-21'
 sidebar_position: 40
 ---
 
@@ -138,7 +138,7 @@ snowplow(
 );
 ```
 
-The page view and every subsequent page ping will have both a static\_context and a dynamic\_context attached. The static\_contexts will all have the same staticValue, but the dynamic\_contexts will have different dynamicValues since a new context is created for every event.
+The page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
 
 ### Activity Tracking: page pings
 
@@ -167,7 +167,7 @@ The first ping would occur after 30 seconds, and subsequent pings every 10 secon
 Notes:
 
 - In general this is executed as part of the main Snowplow tracking tag. As a result, you can elect to enable this on specific pages.
-- The `enableActivityTracking` method **must** be called _before_ the `trackPageView` method.
+- The `enableActivityTracking` method **must** be called *before* the `trackPageView` method.
 - Activity tracking will be disabled if either `minimumVisitLength` or `heartbeatDelay` is not integer. This is to prevent relentless callbacks.
 
 #### `enableActivityTrackingCallback`
@@ -178,7 +178,7 @@ You can now perform edge analytics in the browser to reduce the number of events
 snowplow('enableActivityTrackingCallback', minimumVisitLength, heartbeatDelay, callback);
 ```
 
-where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. The `callback` should be a function which will receive an event object containing the page ping activity information, including pageivew\_id, and any Page View contexts.
+where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. The `callback` should be a function which will receive an event object containing the page ping activity information, including pageivew_id, and any Page View contexts.
 
 A full example of how this might be used to aggregate page ping information and then send an event on page unload is below:
 
@@ -291,13 +291,13 @@ However, as part of a Snowplow implementation there may be interactons where cus
 
 There are five parameters can be associated with each structured event. Of them, only the first two are required:
 
-| **Name** | **Required?** | **Description** |
-| --- | --- | --- |
-| `Category` | Yes | The name you supply for the group of objects you want to track e.g. 'media', 'ecomm' |
-| `Action` | Yes | A string which defines the type of user interaction for the web object e.g. 'play-video', 'add-to-basket' |
-| `Label` | No | An optional string which identifies the specific object being actioned e.g. ID of the video being played, or the SKU or the product added-to-basket |
-| `Property` | No | An optional string describing the object or the action performed on it. This might be the quantity of an item added to basket |
-| `Value` | No | An optional float to quantify or further describe the user action. This might be the price of an item added-to-basket, or the starting time of the video where play was just pressed |
+| **Name**   | **Required?** | **Description**                                                                                                                                                                      |
+| ---------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Category` | Yes           | The name you supply for the group of objects you want to track e.g. 'media', 'ecomm'                                                                                                 |
+| `Action`   | Yes           | A string which defines the type of user interaction for the web object e.g. 'play-video', 'add-to-basket'                                                                            |
+| `Label`    | No            | An optional string which identifies the specific object being actioned e.g. ID of the video being played, or the SKU or the product added-to-basket                                  |
+| `Property` | No            | An optional string describing the object or the action performed on it. This might be the quantity of an item added to basket                                                        |
+| `Value`    | No            | An optional float to quantify or further describe the user action. This might be the price of an item added-to-basket, or the starting time of the video where play was just pressed |
 
 The async specification for the `trackStructEvent` method is:
 
@@ -651,15 +651,15 @@ This argument is a string taken from the event payload field, `e`.
 
 `eventType` takes the following values:
 
-| Type | `e` |
-| --- | --- |
-| Pageview tracking | pv |
-| Page pings | pp |
-| Link click | ue |
-| Ad impression tracking | ue |
+| Type                           | `e`       |
+| ------------------------------ | --------- |
+| Pageview tracking              | pv        |
+| Page pings                     | pp        |
+| Link click                     | ue        |
+| Ad impression tracking         | ue        |
 | Ecommerce transaction tracking | tr and ti |
-| Custom structured event | se |
-| Custom self describing event | ue |
+| Custom structured event        | se        |
+| Custom self describing event   | ue        |
 
 Further information about the event payload can be found in the [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol documentation](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#3-snowplow-events).
 
@@ -749,13 +749,13 @@ All rules and schemas follow a standard form:
 And rules must meet some requirements to be considered valid:
 
 - Two parts are invariant: protocol and format. They are always `iglu` and `jsonschema` respectively.
-    - Wildcards can therefore be used only in `vendor`, `event_name` and `version`.
+  - Wildcards can therefore be used only in `vendor`, `event_name` and `version`.
 - Version matching must be specified like so: `*-*-*`, where any part of the versioning can be defined, e.g. `1-*-*`, but only sequential parts are to be wildcarded, e.g. `1-*-1` is invalid but `1-*-*` is valid.
 - Vendors require the first two "larger parts":
-    - `com.acme.*`
+  - `com.acme.*`
 - Vendors cannot be defined with non-wildcarded parts between wildcarded parts:
-    - `com.acme.*.marketing.*` is invalid
-    - `com.acme.*.*` is valid
+  - `com.acme.*.marketing.*` is invalid
+  - `com.acme.*.*` is valid
 
 #### Global contexts methods
 
@@ -785,17 +785,17 @@ Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three 
 
 The `addTrans` method creates a transaction object. It takes nine possible parameters, two of which are required:
 
-| **Parameter** | **Description** | **Required?** | **Example value** |
-| --- | --- | --- | --- |
-| `orderId` | Internal unique order id number for this transaction | Yes | '1234' |
-| `affiliation` | Partner or store affiliation | No | 'Womens Apparel' |
-| `total` | Total amount of the transaction | Yes | '19.99' |
-| `tax` | Tax amount of the transaction | No | '1.00' |
-| `shipping` | Shipping charge for the transaction | No | '2.99' |
-| `city` | City to associate with transaction | No | 'San Jose' |
-| `state` | State or province to associate with transaction | No | 'California' |
-| `country` | Country to associate with transaction | No | 'USA' |
-| `currency` | Currency to associate with this transaction | No | 'USD' |
+| **Parameter** | **Description**                                      | **Required?** | **Example value** |
+| ------------- | ---------------------------------------------------- | ------------- | ----------------- |
+| `orderId`     | Internal unique order id number for this transaction | Yes           | '1234'            |
+| `affiliation` | Partner or store affiliation                         | No            | 'Womens Apparel'  |
+| `total`       | Total amount of the transaction                      | Yes           | '19.99'           |
+| `tax`         | Tax amount of the transaction                        | No            | '1.00'            |
+| `shipping`    | Shipping charge for the transaction                  | No            | '2.99'            |
+| `city`        | City to associate with transaction                   | No            | 'San Jose'        |
+| `state`       | State or province to associate with transaction      | No            | 'California'      |
+| `country`     | Country to associate with transaction                | No            | 'USA'             |
+| `currency`    | Currency to associate with this transaction          | No            | 'USD'             |
 
 For example:
 
@@ -821,15 +821,15 @@ The `addItem` method is used to capture the details of each product item inclu
 
 There are six potential parameters that can be passed with each call, four of which are required:
 
-| **Parameter** | **Description** | **Required?** | **Example value** |
-| --- | --- | --- | --- |
-| `orderId` | Order ID of the transaction to associate with item | Yes | '1234' |
-| `sku` | Item's SKU code | Yes | 'pbz0001234' |
-| `name` | Product name | No, but advisable (to make interpreting SKU easier) | 'Black Tarot' |
-| `category` | Product category | No | 'Large' |
-| `price` | Product price | Yes | '9.99' |
-| `quantity` | Purchase quantity | Yes | '1' |
-| `currency` | Product price currency | No | 'USD' |
+| **Parameter** | **Description**                                    | **Required?**                                       | **Example value** |
+| ------------- | -------------------------------------------------- | --------------------------------------------------- | ----------------- |
+| `orderId`     | Order ID of the transaction to associate with item | Yes                                                 | '1234'            |
+| `sku`         | Item's SKU code                                    | Yes                                                 | 'pbz0001234'      |
+| `name`        | Product name                                       | No, but advisable (to make interpreting SKU easier) | 'Black Tarot'     |
+| `category`    | Product category                                   | No                                                  | 'Large'           |
+| `price`       | Product price                                      | Yes                                                 | '9.99'            |
+| `quantity`    | Purchase quantity                                  | Yes                                                 | '1'               |
+| `currency`    | Product price currency                             | No                                                  | 'USD'             |
 
 For example:
 
@@ -914,14 +914,14 @@ snowplow('trackTrans');
 
 These methods let you track users adding and removing items from a cart on an ecommerce site. Their arguments are identical:
 
-| **Name** | **Required?** | **Description** | **Type** |
-| --- | --- | --- | --- |
-| `sku` | Yes | Item SKU | string |
-| `name` | No | Item name | string |
-| `category` | No | Item category | string |
-| `unitPrice` | Yes | Item price | number |
-| `quantity` | Yes | Quantity added to or removed from cart | number |
-| `currency` | No | Item price currency | string |
+| **Name**    | **Required?** | **Description**                        | **Type** |
+| ----------- | ------------- | -------------------------------------- | -------- |
+| `sku`       | Yes           | Item SKU                               | string   |
+| `name`      | No            | Item name                              | string   |
+| `category`  | No            | Item category                          | string   |
+| `unitPrice` | Yes           | Item price                             | number   |
+| `quantity`  | Yes           | Quantity added to or removed from cart | number   |
+| `currency`  | No            | Item price currency                    | string   |
 
 An example:
 
@@ -942,11 +942,11 @@ Social tracking will be used to track the way users interact with Facebook, Twit
 
 The `trackSocialInteraction` method takes three parameters:
 
-| **Parameter** | **Description** | **Required?** | **Example value** |
-| --- | --- | --- | --- |
-| `action` | Social action performed | Yes | 'like', 'retweet' |
-| `network` | Social network | Yes | 'facebook', 'twitter' |
-| `target` | Object social action is performed on e.g. page ID, product ID | No | '19.99' |
+| **Parameter** | **Description**                                               | **Required?** | **Example value**     |
+| ------------- | ------------------------------------------------------------- | ------------- | --------------------- |
+| `action`      | Social action performed                                       | Yes           | 'like', 'retweet'     |
+| `network`     | Social network                                                | Yes           | 'facebook', 'twitter' |
+| `target`      | Object social action is performed on e.g. page ID, product ID | No            | '19.99'               |
 
 The method is executed in as:
 
@@ -1001,13 +1001,13 @@ For the prospective customer clicking on the link, adding the query parameters d
 
 Snowplow uses the same query parameters used by Google Analytics. Because of this, Snowplow users who are also using GA do not need to do any additional work to make their campaigns trackable in Snowplow as well as GA. Those parameters are:
 
-| **Parameter** | **Name** | **Description** |
-| --- | --- | --- |
-| `utm_source` | Campaign source | Identify the advertiser driving traffic to your site e.g. Google, Facebook, autumn-newsletter etc. |
-| `utm_medium` | Campaign medium | The advertising / marketing medium e.g. cpc, banner, email newsletter, in-app ad, cpa |
-| `utm_campaign` | Campaign id | A unique campaign id. This can be a descriptive name or a number / string that is then looked up against a campaign table as part of the analysis |
-| `utm_term` | Campaign term(s) | Used for search marketing in particular, this field is used to identify the search terms that triggered the ad being displayed in the search results. |
-| `utm_content` | Campaign content | Used either to differentiate similar content or two links in the same ad. (So that it is possible to identify which is generating more traffic.) |
+| **Parameter**  | **Name**         | **Description**                                                                                                                                       |
+| -------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `utm_source`   | Campaign source  | Identify the advertiser driving traffic to your site e.g. Google, Facebook, autumn-newsletter etc.                                                    |
+| `utm_medium`   | Campaign medium  | The advertising / marketing medium e.g. cpc, banner, email newsletter, in-app ad, cpa                                                                 |
+| `utm_campaign` | Campaign id      | A unique campaign id. This can be a descriptive name or a number / string that is then looked up against a campaign table as part of the analysis     |
+| `utm_term`     | Campaign term(s) | Used for search marketing in particular, this field is used to identify the search terms that triggered the ad being displayed in the search results. |
+| `utm_content`  | Campaign content | Used either to differentiate similar content or two links in the same ad. (So that it is possible to identify which is generating more traffic.)      |
 
 The parameters are descibed in the [Google Analytics help page](https://support.google.com/analytics/answer/1033863). Google also provides a [urlbuilder](https://support.google.com/analytics/answer/1033867?hl=en) which can be used to construct the URL incl. query parameters to use in your campaigns.
 
@@ -1069,16 +1069,16 @@ Even if several copies of the above script appear on a page, the trackers create
 
 Ad impression tracking is accomplished using the `trackAdImpression` method. Here are the arguments it accepts:
 
-| **Name** | **Required?** | **Description** | **Type** |
-| --- | --- | --- | --- |
-| `impressionId` | No | Identifier for the particular impression instance | string |
-| `costModel` | No | The cost model for the campaign: 'cpc', 'cpm', or 'cpa' | string |
-| `cost` | No | Ad cost | number |
-| `targetUrl` | No | The destination URL | string |
-| `bannerId` | No | Adserver identifier for the ad banner (creative) being displayed | string |
-| `zoneId` | No | Adserver identifier for the zone where the ad banner is located | string |
-| `advertiserID` | No | Adserver identifier for the advertiser which the campaign belongs to | string |
-| `campaignId` | No | Adserver identifier for the ad campaign which the banner belongs to | string |
+| **Name**       | **Required?** | **Description**                                                      | **Type** |
+| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
+| `impressionId` | No            | Identifier for the particular impression instance                    | string   |
+| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
+| `cost`         | No            | Ad cost                                                              | number   |
+| `targetUrl`    | No            | The destination URL                                                  | string   |
+| `bannerId`     | No            | Adserver identifier for the ad banner (creative) being displayed     | string   |
+| `zoneId`       | No            | Adserver identifier for the zone where the ad banner is located      | string   |
+| `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
+| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
 
 NOTE: All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdImpression`.
 
@@ -1108,16 +1108,16 @@ You will want to set these arguments programmatically, across all of your ad zon
 
 Ad click tracking is accomplished using the `trackAdClick` method. Here are the arguments it accepts:
 
-| **Name** | **Required?** | **Description** | **Type** |
-| --- | --- | --- | --- |
-| `targetUrl` | Yes | The destination URL | string |
-| `clickId` | No | Identifier for the particular click instance | string |
-| `costModel` | No | The cost model for the campaign: 'cpc', 'cpm', or 'cpa' | string |
-| `cost` | No | Ad cost | number |
-| `bannerId` | No | Adserver identifier for the ad banner (creative) being displayed | string |
-| `zoneId` | No | Adserver identifier for the zone where the ad banner is located | string |
-| `advertiserID` | No | Adserver identifier for the advertiser which the campaign belongs to | string |
-| `campaignId` | No | Adserver identifier for the ad campaign which the banner belongs to | string |
+| **Name**       | **Required?** | **Description**                                                      | **Type** |
+| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
+| `targetUrl`    | Yes           | The destination URL                                                  | string   |
+| `clickId`      | No            | Identifier for the particular click instance                         | string   |
+| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
+| `cost`         | No            | Ad cost                                                              | number   |
+| `bannerId`     | No            | Adserver identifier for the ad banner (creative) being displayed     | string   |
+| `zoneId`       | No            | Adserver identifier for the zone where the ad banner is located      | string   |
+| `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
+| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
 
 An example:
 
@@ -1144,17 +1144,17 @@ Ad click events are implemented as Snowplow self describing events.[Here](https:
 
 Use the `trackAdConversion` method to track ad conversions. Here are the arguments it accepts:
 
-| **Name** | **Required?** | **Description** | **Type** |
-| --- | --- | --- | --- |
-| `conversionId` | No | Identifier for the particular conversion instance | string |
-| `costModel` | No | The cost model for the campaign: 'cpc', 'cpm', or 'cpa' | string |
-| `cost` | No | Ad cost | number |
-| `category` | No | Conversion category | number |
-| `action` | No | The type of user interaction, e.g. 'purchase' | string |
-| `property` | No | Describes the object of the conversion | string |
-| `initialValue` | No | How much the conversion is initially worth | number |
-| `advertiserID` | No | Adserver identifier for the advertiser which the campaign belongs to | string |
-| `campaignId` | No | Adserver identifier for the ad campaign which the banner belongs to | string |
+| **Name**       | **Required?** | **Description**                                                      | **Type** |
+| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
+| `conversionId` | No            | Identifier for the particular conversion instance                    | string   |
+| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
+| `cost`         | No            | Ad cost                                                              | number   |
+| `category`     | No            | Conversion category                                                  | number   |
+| `action`       | No            | The type of user interaction, e.g. 'purchase'                        | string   |
+| `property`     | No            | Describes the object of the conversion                               | string   |
+| `initialValue` | No            | How much the conversion is initially worth                           | number   |
+| `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
+| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
 
 NOTE: All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdConversion`.
 
@@ -1213,12 +1213,12 @@ Once you have appended this code to all of your active ad zones, Snowplow should
 
 Use the `trackSiteSearch` method to track users searching your website. Here are its arguments:
 
-| **Name** | **Required?** | **Description** | **Type** |
-| --- | --- | --- | --- |
-| `terms` | Yes | Search terms | array |
-| `filters` | No | Search filters | JSON |
-| `totalResults` | No | Results found | number |
-| `pageResults` | No | Results displayed on first page | number |
+| **Name**       | **Required?** | **Description**                 | **Type** |
+| -------------- | ------------- | ------------------------------- | -------- |
+| `terms`        | Yes           | Search terms                    | array    |
+| `filters`      | No            | Search filters                  | JSON     |
+| `totalResults` | No            | Results found                   | number   |
+| `pageResults`  | No            | Results displayed on first page | number   |
 
 An example:
 
@@ -1239,12 +1239,12 @@ Site search events are implemented as Snowplow self describing events. [Here](h
 
 Use the `trackTiming` method to track user timing events such as how long resources take to load. Here are its arguments:
 
-| **Name** | **Required?** | **Description** | **Type** |
-| --- | --- | --- | --- |
-| `category` | Yes | Timing category | string |
-| `variable` | Yes | Timed variable | string |
-| `timing` | Yes | Number of milliseconds elapsed | number |
-| `label` | No | Label for the event | string |
+| **Name**   | **Required?** | **Description**                | **Type** |
+| ---------- | ------------- | ------------------------------ | -------- |
+| `category` | Yes           | Timing category                | string   |
+| `variable` | Yes           | Timed variable                 | string   |
+| `timing`   | Yes           | Number of milliseconds elapsed | number   |
+| `label`    | No            | Label for the event            | string   |
 
 An example:
 
@@ -1269,18 +1269,18 @@ For more information on the Enhanced Ecommerce functions please see the Google A
 
 Use the `addEnhancedEcommerceActionContext` method to add a GA Enhanced Ecommerce Action Context to the Tracker:
 
-| **Name** | **Required?** | **Type** |
-| --- | --- | --- |
-| `id` | Yes | string |
-| `affiliation` | No | string |
-| `revenue` | No | number OR string |
-| `tax` | No | number OR string |
-| `shipping` | No | number OR string |
-| `coupon` | No | string |
-| `list` | No | string |
-| `step` | No | integer OR string |
-| `option` | No | string |
-| `currency` | No | string |
+| **Name**      | **Required?** | **Type**          |
+| ------------- | ------------- | ----------------- |
+| `id`          | Yes           | string            |
+| `affiliation` | No            | string            |
+| `revenue`     | No            | number OR string  |
+| `tax`         | No            | number OR string  |
+| `shipping`    | No            | number OR string  |
+| `coupon`      | No            | string            |
+| `list`        | No            | string            |
+| `step`        | No            | integer OR string |
+| `option`      | No            | string            |
+| `currency`    | No            | string            |
 
 Adding an action using Google Analytics:
 
@@ -1314,17 +1314,17 @@ snowplow('addEnhancedEcommerceActionContext',
 
 Use the `addEnhancedEcommerceImpressionContext` method to add a GA Enhanced Ecommerce Impression Context to the Tracker:
 
-| **Name** | **Required?** | **Type** |
-| --- | --- | --- |
-| `id` | Yes | string |
-| `name` | No | string |
-| `list` | No | string |
-| `brand` | No | string |
-| `category` | No | string |
-| `variant` | No | string |
-| `position` | No | integer OR string |
-| `price` | No | number OR string |
-| `currency` | No | string |
+| **Name**   | **Required?** | **Type**          |
+| ---------- | ------------- | ----------------- |
+| `id`       | Yes           | string            |
+| `name`     | No            | string            |
+| `list`     | No            | string            |
+| `brand`    | No            | string            |
+| `category` | No            | string            |
+| `variant`  | No            | string            |
+| `position` | No            | integer OR string |
+| `price`    | No            | number OR string  |
+| `currency` | No            | string            |
 
 Adding an impression using Google Analytics:
 
@@ -1358,19 +1358,19 @@ snowplow('addEnhancedEcommerceImpressionContext',
 
 Use the `addEnhancedEcommerceProductContext` method to add a GA Enhanced Ecommerce Product Field Context:
 
-| **Name** | **Required?** | **Type** |
-| --- | --- | --- |
-| `id` | Yes | string |
-| `name` | No | string |
-| `list` | No | string |
-| `brand` | No | string |
-| `category` | No | string |
-| `variant` | No | string |
-| `price` | No | number OR string |
-| `quantity` | No | integer OR string |
-| `coupon` | No | string |
-| `position` | No | integer OR string |
-| `currency` | No | string |
+| **Name**   | **Required?** | **Type**          |
+| ---------- | ------------- | ----------------- |
+| `id`       | Yes           | string            |
+| `name`     | No            | string            |
+| `list`     | No            | string            |
+| `brand`    | No            | string            |
+| `category` | No            | string            |
+| `variant`  | No            | string            |
+| `price`    | No            | number OR string  |
+| `quantity` | No            | integer OR string |
+| `coupon`   | No            | string            |
+| `position` | No            | integer OR string |
+| `currency` | No            | string            |
 
 Adding a product using Google Analytics:
 
@@ -1403,13 +1403,13 @@ snowplow('addEnhancedEcommerceProductContext',
 
 Use the `addEnhancedEcommercePromoContext` method to add a GA Enhanced Ecommerce Promotion Field Context:
 
-| **Name** | **Required?** | **Type** |
-| --- | --- | --- |
-| `id` | Yes | string |
-| `name` | No | string |
-| `creative` | No | string |
-| `position` | No | string |
-| `currency` | No | string |
+| **Name**   | **Required?** | **Type** |
+| ---------- | ------------- | -------- |
+| `id`       | Yes           | string   |
+| `name`     | No            | string   |
+| `creative` | No            | string   |
+| `position` | No            | string   |
+| `currency` | No            | string   |
 
 Adding a promotion using Google Analytics:
 
@@ -1438,8 +1438,8 @@ snowplow('addEnhancedEcommercePromoContext',
 Use the `trackEnhancedEcommerceAction` method to track a GA Enhanced Ecommerce Action. When this function is called all of the added Ecommerce Contexts are attached to this action and flushed from the Tracker.
 
 | **Name** | **Required?** | **Type** |
-| --- | --- | --- |
-| `action` | Yes | string |
+| -------- | ------------- | -------- |
+| `action` | Yes           | string   |
 
 The allowed actions:
 
@@ -1479,15 +1479,15 @@ snowplow('trackEnhancedEcommerceAction',
 
 Use the `trackConsentGranted` method to track a user opting into data collection. A consent document context will be attached to the event if at least the `id` and `version` arguments are supplied. The method arguments are:
 
-| **Name** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `id` | Identifier for the document granting consent | Yes | String |
-| `version` | Version of the document granting consent | Yes | String |
-| `name` | Name of the document granting consent | No | String |
-| `description` | Description of the document granting consent | No | String |
-| `expiry` | Date-time string specifying when consent document expires | No | String |
-| `context` | Custom context for the event | No | Array |
-| `tstamp` | When the event occurred | No | Positive integer |
+| **Name**      | **Description**                                           | **Required?** | **Type**         |
+| ------------- | --------------------------------------------------------- | ------------- | ---------------- |
+| `id`          | Identifier for the document granting consent              | Yes           | String           |
+| `version`     | Version of the document granting consent                  | Yes           | String           |
+| `name`        | Name of the document granting consent                     | No            | String           |
+| `description` | Description of the document granting consent              | No            | String           |
+| `expiry`      | Date-time string specifying when consent document expires | No            | String           |
+| `context`     | Custom context for the event                              | No            | Array            |
+| `tstamp`      | When the event occurred                                   | No            | Positive integer |
 
 The `expiry` field specifies that the user consents to the attached documents until the date-time provided, after which the consent is no longer valid.
 
@@ -1509,15 +1509,15 @@ Use the `trackConsentWithdrawn` method to track a user withdrawing consent for
 
 The method arguments are:
 
-| **Name** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `all` | Specifies whether all consent should be withdrawn | No | Boolean |
-| `id` | Identifier for the document withdrawing consent | No | String |
-| `version` | Version of the document withdrawing consent | No | string |
-| `name` | Name of the document withdrawing consent | No | String |
-| `description` | Description of the document withdrawing consent | No | String |
-| `context` | Custom context for the event | No | Array |
-| `tstamp` | When the event occurred | No | Positive integer |
+| **Name**      | **Description**                                   | **Required?** | **Type**         |
+| ------------- | ------------------------------------------------- | ------------- | ---------------- |
+| `all`         | Specifies whether all consent should be withdrawn | No            | Boolean          |
+| `id`          | Identifier for the document withdrawing consent   | No            | String           |
+| `version`     | Version of the document withdrawing consent       | No            | string           |
+| `name`        | Name of the document withdrawing consent          | No            | String           |
+| `description` | Description of the document withdrawing consent   | No            | String           |
+| `context`     | Custom context for the event                      | No            | Array            |
+| `tstamp`      | When the event occurred                           | No            | Positive integer |
 
 Tracking a consent withdrawn event:
 
@@ -1537,12 +1537,12 @@ Consent documents are stored in the context of a consent event. Each consent met
 
 The fields of a consent document are:
 
-| **Name** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `id` | Identifier for the document | Yes | String |
-| `version` | Version of the document | Yes | String |
-| `name` | Name of the document | No | String |
-| `description` | Description of the document | No | String |
+| **Name**      | **Description**             | **Required?** | **Type** |
+| ------------- | --------------------------- | ------------- | -------- |
+| `id`          | Identifier for the document | Yes           | String   |
+| `version`     | Version of the document     | Yes           | String   |
+| `name`        | Name of the document        | No            | String   |
+| `description` | Description of the document | No            | String   |
 
 A consent document self-describing JSON looks like this:
 
@@ -1605,12 +1605,12 @@ The GDPR context attaches a context with the GDPR basis for processing and the d
 
 It takes the following arguments:
 
-| **Name** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `basisForProcessing` | GDPR Basis for processing | Yes | Enum String |
-| `documentId` | ID of a GDPR basis document | No | String |
-| `documentVersion` | Version of the document | No | String |
-| `documentDescription` | Description of the document | No | String |
+| **Name**              | **Description**             | **Required?** | **Type**    |
+| --------------------- | --------------------------- | ------------- | ----------- |
+| `basisForProcessing`  | GDPR Basis for processing   | Yes           | Enum String |
+| `documentId`          | ID of a GDPR basis document | No            | String      |
+| `documentVersion`     | Version of the document     | No            | String      |
+| `documentDescription` | Description of the document | No            | String      |
 
 ```
 {
@@ -1664,13 +1664,13 @@ Use the `trackError` method to track handled exceptions (application errors) i
 function (message, filename, lineno, colno, error, contexts)
 ```
 
-| **Name** | **Required?** | **Description** | **Type** |
-| --- | --- | --- | --- |
-| `message` | Yes | Error message | string |
-| `filename` | No | Filename or URL | string |
-| `lineno` | No | Line number of problem code chunk | number |
-| `colno` | No | Column number of problem code chunk | number |
-| `error` | No | JS `ErrorEvent` | ErrorEvent |
+| **Name**   | **Required?** | **Description**                     | **Type**   |
+| ---------- | ------------- | ----------------------------------- | ---------- |
+| `message`  | Yes           | Error message                       | string     |
+| `filename` | No            | Filename or URL                     | string     |
+| `lineno`   | No            | Line number of problem code chunk   | number     |
+| `colno`    | No            | Column number of problem code chunk | number     |
+| `error`    | No            | JS `ErrorEvent`                     | ErrorEvent |
 
 Of these arguments, only `message` is required. Signature of this method defined to match `window.onerror` callback in modern browsers.
 
@@ -1694,10 +1694,10 @@ Use the `enableErrorTracking` method to track unhandled exceptions (applicatio
 function (filter, contextAdder)
 ```
 
-| **Name** | **Required?** | **Description** | **Type** |
-| --- | --- | --- | --- |
-| `filter` | No | Predicate function to filter exceptions | Function ErrorEvent => Boolean |
-| `contextAdder` | No | Function to grab custom context | Function ErrorEvent => Array |
+| **Name**       | **Required?** | **Description**                         | **Type**                       |
+| -------------- | ------------- | --------------------------------------- | ------------------------------ |
+| `filter`       | No            | Predicate function to filter exceptions | Function ErrorEvent => Boolean |
+| `contextAdder` | No            | Function to grab custom context         | Function ErrorEvent => Array   |
 
 Unlike `trackError` you need enable error tracking only once:
 

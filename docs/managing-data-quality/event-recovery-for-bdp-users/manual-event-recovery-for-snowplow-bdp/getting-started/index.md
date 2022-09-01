@@ -1,6 +1,6 @@
 ---
-title: "Getting Started"
-date: "2020-07-22"
+title: 'Getting Started'
+date: '2020-07-22'
 sidebar_position: 0
 ---
 
@@ -22,7 +22,7 @@ With recovery it is possible to:
 
 If your failed events would not be fixed by applying the above, they currently would be considered unrecoverable. Due to the fact that there might be a mix of recoverable and unrecoverable data in your storage, event recovery uses configuration in order to process only a subset of the failed events.
 
-### What you'll need to get started  
+### What you'll need to get started
 
 The typical flow for recovery and some prerequisites to consider would be:  
 **Understanding the failure issue**

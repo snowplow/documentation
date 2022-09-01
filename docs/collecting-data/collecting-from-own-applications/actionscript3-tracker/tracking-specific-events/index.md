@@ -1,15 +1,15 @@
 ---
-title: "Tracking specific events"
-date: "2020-02-25"
+title: 'Tracking specific events'
+date: '2020-02-25'
 sidebar_position: 50
 ---
 
-| **Function** | \*_Description_ |
-| --- | --- |
-| `trackScreenView()` | Track the user viewing a screen within the application |
-| `trackEcommerceTransaction()` | Track an ecommerce transaction and its items |
-| `trackStructuredEvent()` | Track a Snowplow custom structured event |
-| `trackUnstructuredEvent()` | Track a Snowplow custom unstructured event |
+| **Function**                  | \*_Description_                                        |
+| ----------------------------- | ------------------------------------------------------ |
+| `trackScreenView()`           | Track the user viewing a screen within the application |
+| `trackEcommerceTransaction()` | Track an ecommerce transaction and its items           |
+| `trackStructuredEvent()`      | Track a Snowplow custom structured event               |
+| `trackUnstructuredEvent()`    | Track a Snowplow custom unstructured event             |
 
 ### Common
 
@@ -58,12 +58,12 @@ To be confirmed. As of now, trackers do not return anything.
 
 Use `trackPageView()` to track a user viewing a screen within your Flash app, in the case where the screen behaves like a web page and has its own unique URL that appears in the browser's address bar. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | String |
-| `id` | Unique identifier for this screen | No | String |
-| `context` | Custom context for the event | No | Array |
-| `timestamp` | Optional timestamp for the event | No | Number |
+| **Argument** | **Description**                     | **Required?** | **Validation** |
+| ------------ | ----------------------------------- | ------------- | -------------- |
+| `name`       | Human-readable name for this screen | No            | String         |
+| `id`         | Unique identifier for this screen   | No            | String         |
+| `context`    | Custom context for the event        | No            | Array          |
+| `timestamp`  | Optional timestamp for the event    | No            | Number         |
 
 Example:
 
@@ -77,12 +77,12 @@ In Flash, the more common case is to use `trackScreenView`.
 
 Use `trackScreenView()` to track a user viewing a screen (or equivalent) within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | String |
-| `id` | Unique identifier for this screen | No | String |
-| `context` | Custom context for the event | No | Array |
-| `timestamp` | Optional timestamp for the event | No | Number |
+| **Argument** | **Description**                     | **Required?** | **Validation** |
+| ------------ | ----------------------------------- | ------------- | -------------- |
+| `name`       | Human-readable name for this screen | No            | String         |
+| `id`         | Unique identifier for this screen   | No            | String         |
+| `context`    | Custom context for the event        | No            | Array          |
+| `timestamp`  | Optional timestamp for the event    | No            | Number         |
 
 Example:
 
@@ -94,22 +94,22 @@ t1.trackScreenView("HUD > Save Game", "screen23", contextList, 123456);
 
 Use `trackEcommerceTransaction()` to track an ecommerce transaction.
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `order_id` | ID of the eCommerce transaction | Yes | String |
-| `total_value` | Total transaction value | Yes | Number |
-| `affiliation` | Transaction affiliation | Yes | String |
-| `tax_value` | Transaction tax value | Yes | Number |
-| `shipping` | Delivery cost charged | Yes | Number |
-| `city` | Delivery address city | Yes | String |
-| `state` | Delivery address state | Yes | String |
-| `country` | Delivery address country | Yes | String |
-| `currency` | Transaction currency | Yes | String |
-| `items` | Items in the transaction | Yes | Array |
-| `context` | Custom context for the event | No | Object |
-| `timestamp` | Optional timestamp for the event | No | Number |
+| **Argument**  | **Description**                  | **Required?** | **Validation** |
+| ------------- | -------------------------------- | ------------- | -------------- |
+| `order_id`    | ID of the eCommerce transaction  | Yes           | String         |
+| `total_value` | Total transaction value          | Yes           | Number         |
+| `affiliation` | Transaction affiliation          | Yes           | String         |
+| `tax_value`   | Transaction tax value            | Yes           | Number         |
+| `shipping`    | Delivery cost charged            | Yes           | Number         |
+| `city`        | Delivery address city            | Yes           | String         |
+| `state`       | Delivery address state           | Yes           | String         |
+| `country`     | Delivery address country         | Yes           | String         |
+| `currency`    | Transaction currency             | Yes           | String         |
+| `items`       | Items in the transaction         | Yes           | Array          |
+| `context`     | Custom context for the event     | No            | Object         |
+| `timestamp`   | Optional timestamp for the event | No            | Number         |
 
-The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 #### Ecommerce TransactionItem with `trackEcommerceTransaction()`
 
@@ -121,17 +121,17 @@ trackEcommerceTransactionItem(order_id:String, sku:String, price:Number, quantit
 
 These are the fields that can appear as elements in each `TransactionItem` element of the transaction item `Array`:
 
-| **Field** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `order_id` | Order ID | Yes | String |
-| `sku` | Item SKU | No | String |
-| `price` | Item price | No | Number |
-| `quantity` | Item quantity | No | int |
-| `name` | Item name | No | String |
-| `category` | Item category | No | String |
-| `currency` | Item currency | No | String |
-| `context` | Item context | No | Array |
-| `timestamp` | Optional timestamp for the event | No | Number |
+| **Field**   | **Description**                  | **Required?** | **Validation** |
+| ----------- | -------------------------------- | ------------- | -------------- |
+| `order_id`  | Order ID                         | Yes           | String         |
+| `sku`       | Item SKU                         | No            | String         |
+| `price`     | Item price                       | No            | Number         |
+| `quantity`  | Item quantity                    | No            | int            |
+| `name`      | Item name                        | No            | String         |
+| `category`  | Item category                    | No            | String         |
+| `currency`  | Item currency                    | No            | String         |
+| `context`   | Item context                     | No            | Array          |
+| `timestamp` | Optional timestamp for the event | No            | Number         |
 
 Example of tracking a transaction containing two items:
 
@@ -145,15 +145,15 @@ t1.trackEcommerceTransaction("6a8078be", 300, "my_affiliate", 30, 10, "Boston", 
 
 Use `trackStructuredEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | String |
-| `action` | Defines the type of user interaction which this event involves | Yes | String |
-| `label` | A string to provide additional dimensions to the event data | Yes | String |
-| `property` | A string describing the object or the action performed on it | Yes | String |
-| `value` | A value to provide numerical data about the event | Yes | int |
-| `context` | Custom context for the event | No | Array |
-| `timestamp` | Optional timestamp for the event | No | Number |
+| **Argument** | **Description**                                                  | **Required?** | **Validation** |
+| ------------ | ---------------------------------------------------------------- | ------------- | -------------- |
+| `category`   | The grouping of structured events which this `action` belongs to | Yes           | String         |
+| `action`     | Defines the type of user interaction which this event involves   | Yes           | String         |
+| `label`      | A string to provide additional dimensions to the event data      | Yes           | String         |
+| `property`   | A string describing the object or the action performed on it     | Yes           | String         |
+| `value`      | A value to provide numerical data about the event                | Yes           | int            |
+| `context`    | Custom context for the event                                     | No            | Array          |
+| `timestamp`  | Optional timestamp for the event                                 | No            | Number         |
 
 Example:
 
@@ -174,11 +174,11 @@ Use `trackUnstructuredEvent()` to track a custom event which consists of a nam
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `eventData` | The properties of the event | Yes | SchemaPayload |
-| `context` | Custom context for the event | No | Array |
-| `timestamp` | Optional timestamp for the event | No | Number |
+| **Argument** | **Description**                  | **Required?** | **Validation** |
+| ------------ | -------------------------------- | ------------- | -------------- |
+| `eventData`  | The properties of the event      | Yes           | SchemaPayload  |
+| `context`    | Custom context for the event     | No            | Array          |
+| `timestamp`  | Optional timestamp for the event | No            | Number         |
 
 Example:
 

@@ -1,6 +1,6 @@
 ---
-title: "Campaign attribution enrichment"
-date: "2020-02-14"
+title: 'Campaign attribution enrichment'
+date: '2020-02-14'
 sidebar_position: 4
 ---
 
@@ -16,12 +16,12 @@ https://www.acme.com/spring_offer_product?utm_source=influencer&utm_medium=blog&
 
 This could result in the following fields being added to the enrich event :
 
-| field         | value           |
-|---------------|-----------------|
-| `mktSource`   | "influencer"    |
-| `mktMedium`   | "blog"          |
-| `mktChannel`  | "web"           |
-| `mktCampaign` | "spring\_offer" |
+| field         | value          |
+| ------------- | -------------- |
+| `mktSource`   | "influencer"   |
+| `mktMedium`   | "blog"         |
+| `mktChannel`  | "web"          |
+| `mktCampaign` | "spring_offer" |
 
 This enrichment automatically knows about Google (corresponding to the “gclid” query string parameter), Microsoft (“msclkid”), and DoubleClick (“dclid”). For example, if the query string contains `&gclid=abc&` then `mkt_clickid` field will be populated with `"abc"` and `mkt_network` field would be populated with `"Google"`.
 
@@ -144,7 +144,7 @@ It is possible to have more than one parameter name in each array. If multiple a
 This enrichment populates the following fields of the atomic event :
 
 | Field          | Purpose                                                                                                                                                                                                                                                           |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `mkt_medium`   | The advertising or marketing medium, for example: `banner`, `email newsletter`.                                                                                                                                                                                   |
 | `mkt_source`   | Identifies the advertiser, site, publication, etc. that is sending traffic to your property, for example: `newsletter4`, `billboard`.                                                                                                                             |
 | `mkt_term`     | Identifies keywords (terms).                                                                                                                                                                                                                                      |

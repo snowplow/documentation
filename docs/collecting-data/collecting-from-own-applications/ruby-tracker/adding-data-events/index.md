@@ -1,6 +1,6 @@
 ---
-title: "Adding data to your events: context and more"
-date: "2021-10-19"
+title: 'Adding data to your events: context and more'
+date: '2021-10-19'
 sidebar_position: 20
 ---
 
@@ -79,22 +79,22 @@ You could create and define a new Subject for every user or every event you want
 
 The following table lists all the properties that can be set via Subject. These are all part of the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md). Check out the [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Subject.html) for the details of how to set these parameters.
 
-| Property | **Description** |
-| --- | --- |
-| `platform` | The platform the app runs on |
-| `user_id` | Unique identifier for user |
-| `domain_userid` | Cookie-based unique identifier for user |
-| `network_userid` | Cookie-based unique identifier for user |
-| `domain_sessionid` | Cookie-based unique identifier for a visit/session of a `user_id` |
-| `domain_sessionidx` | Cookie-based count of separate visits/sessions from a `user_id` |
-| `user_fingerprint` | User identifier based on (hopefully unique) browser features |
-| `user_ipaddress` | User's IP address |
-| `useragent` | User agent or browser string |
-| `br_lang` | The device/browser language |
-| `os_timezone` | The device OS's timezone |
-| `dvce_screenheight` and `dvce_screenwidth` | The device screen resolution |
-| `br_viewwidth` and `br_viewheight` | The browser viewport size |
-| `br_colordepth` | The browser color depth |
+| Property                                   | **Description**                                                   |
+| ------------------------------------------ | ----------------------------------------------------------------- |
+| `platform`                                 | The platform the app runs on                                      |
+| `user_id`                                  | Unique identifier for user                                        |
+| `domain_userid`                            | Cookie-based unique identifier for user                           |
+| `network_userid`                           | Cookie-based unique identifier for user                           |
+| `domain_sessionid`                         | Cookie-based unique identifier for a visit/session of a `user_id` |
+| `domain_sessionidx`                        | Cookie-based count of separate visits/sessions from a `user_id`   |
+| `user_fingerprint`                         | User identifier based on (hopefully unique) browser features      |
+| `user_ipaddress`                           | User's IP address                                                 |
+| `useragent`                                | User agent or browser string                                      |
+| `br_lang`                                  | The device/browser language                                       |
+| `os_timezone`                              | The device OS's timezone                                          |
+| `dvce_screenheight` and `dvce_screenwidth` | The device screen resolution                                      |
+| `br_viewwidth` and `br_viewheight`         | The browser viewport size                                         |
+| `br_colordepth`                            | The browser color depth                                           |
 
 Note: the methods for defining `domain_sessionid` and `domain_sessionidx` were added in tracker version 0.7.0.
 
@@ -184,14 +184,14 @@ The Page class was added in tracker version 0.7.0.
 
 Processed Snowplow events have five different timestamps. They can have either `dvce_created_tstamp` or `true_tstamp`.
 
-| **Timestamp name** | **Description** |
-| --- | --- |
-| `dvce_created_tstamp` | Added during event creation |
-| `true_tstamp` | This can be manually set as an alternative to `dvce_created_tstamp` |
-| `dvce_sent_tstamp` | Added by the Emitter on event sending |
-| `collector_tstamp` | Added by the event collector |
-| `etl_tstamp` | Added after event enrichment during the processing pipeline |
-| `derived_tstamp` | Either a calculated value (`collector_tstamp - (dvce_sent_tstamp - dvce_created_tstamp)`) or the same as `true_tstamp` |
+| **Timestamp name**    | **Description**                                                                                                        |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `dvce_created_tstamp` | Added during event creation                                                                                            |
+| `true_tstamp`         | This can be manually set as an alternative to `dvce_created_tstamp`                                                    |
+| `dvce_sent_tstamp`    | Added by the Emitter on event sending                                                                                  |
+| `collector_tstamp`    | Added by the event collector                                                                                           |
+| `etl_tstamp`          | Added after event enrichment during the processing pipeline                                                            |
+| `derived_tstamp`      | Either a calculated value (`collector_tstamp - (dvce_sent_tstamp - dvce_created_tstamp)`) or the same as `true_tstamp` |
 
 Overriding the default event timestamp (`dvce_created_tstamp`) can be useful in some situations. For example, if the Snowplow event refers to an action that happened previously but is only now being tracked. This can be achieved using the Ruby tracker classes DeviceTimestamp and TrueTimestamp (see [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Timestamp.html)).
 

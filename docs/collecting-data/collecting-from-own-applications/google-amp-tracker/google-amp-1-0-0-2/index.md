@@ -1,41 +1,40 @@
 ---
-title: "Google AMP (1.0.3)"
-date: "2020-03-19"
+title: 'Google AMP (1.0.3)'
+date: '2020-03-19'
 sidebar_position: 990
 ---
 
 ## Overview
 
-Snowplow is collaborating with Google on their  [Accelerated Mobile Pages Project](https://www.ampproject.org/) (AMPP or AMP for short). AMP is an open source (Apache License 2.0) initiative to improve the mobile web experience by optimizing web pages for mobile devices.
+Snowplow is collaborating with Google on their [Accelerated Mobile Pages Project](https://www.ampproject.org/) (AMPP or AMP for short). AMP is an open source (Apache License 2.0) initiative to improve the mobile web experience by optimizing web pages for mobile devices.
 
 To learn more about analytics for AMP pages see the [amp-analytics](https://www.ampproject.org/docs/reference/extended/amp-analytics.html) reference. For general information about AMP see [What Is AMP?](https://www.ampproject.org/docs/get_started/about-amp.html) on the [Accelerated Mobile Pages (AMP) Project](https://www.ampproject.org/) site.
 
 Snowplow is natively integrated into the project, so pages optimized with AMP HTML can be tracked in Snowplow by adding the appropriate `amp-analytics` tag to your pages:
 
 ```html
-
 <body>
   ...
   <amp-analytics type="snowplow_v2" id="snowplow_v2">
-  <script type="application/json">
-  {
-    "vars": {
-     "collectorHost": "collector.snplow.net",
-     "appId": "amp-examples-v2.0.2",
-     ...
-    },
-    "linkers": {
-     "enabled": true,
-     ...
-    },
-    "triggers": {
-     "defaultPageview": {
-       "on": "visible",
-       "request": "pageView"
-     }
-    }
-  }
-  </script>
+    <script type="application/json">
+      {
+        "vars": {
+         "collectorHost": "collector.snplow.net",
+         "appId": "amp-examples-v2.0.2",
+         ...
+        },
+        "linkers": {
+         "enabled": true,
+         ...
+        },
+        "triggers": {
+         "defaultPageview": {
+           "on": "visible",
+           "request": "pageView"
+         }
+        }
+      }
+    </script>
   </amp-analytics>
 </body>
 ```
@@ -86,11 +85,11 @@ You must set the application ID for the website you are tracking via AMP:
 
 Notes:
 
-- You do not have to use the `appId` to distinguish AMP traffic from other web traffic (unless you want to) - see the  [Analytics](#analytics) section for an alternative approach
+- You do not have to use the `appId` to distinguish AMP traffic from other web traffic (unless you want to) - see the [Analytics](#analytics) section for an alternative approach
 
 ### `userId`
 
-Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) field.
+Specify the optional `"userId"` var to set the uid/user_id [Snowplow](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) field.
 
 ```javascript
 "vars": {
@@ -100,7 +99,7 @@ Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://
 
 ### `nameTracker`
 
-Specify the optional "nameTracker" var to set the tna/name\_tracker [Snowplow tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) field.
+Specify the optional "nameTracker" var to set the tna/name_tracker [Snowplow tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) field.
 
 ```javascript
 "vars": {
@@ -215,7 +214,7 @@ The following example uses the selector attribute of the trigger to send an even
 You can set key-value pairs for the following event fields in the vars attribute of the trigger:
 
 | **Argument**          | **Description**                                                  | **Required?** | **Validation** |
-|-----------------------|------------------------------------------------------------------|---------------|----------------|
+| --------------------- | ---------------------------------------------------------------- | ------------- | -------------- |
 | `structEventCategory` | The grouping of structured events which this `action` belongs to | Yes           | String         |
 | `structEventAction`   | Defines the type of user interaction which this event involves   | Yes           | String         |
 | `structEventLabel`    | A string to provide additional dimensions to the event data      | No            | String         |
@@ -258,9 +257,9 @@ Enable page ping tracking like so:
 </amp-analytics>
 ```
 
-AMP page ping events will be sent as AMP-specific page ping events (rather than Javascript tracker page pings), against the [AMP page ping schema](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_page_ping/jsonschema/1-0-0), since the data available on AMP is defined differently to Javascript tracker page pings.  
-  
-All events are sent with an  [AMP web page](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_web_page/jsonschema/1-0-0) context, for aggregation of pings by page view id.
+AMP page ping events will be sent as AMP-specific page ping events (rather than Javascript tracker page pings), against the [AMP page ping schema](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_page_ping/jsonschema/1-0-0), since the data available on AMP is defined differently to Javascript tracker page pings.
+
+All events are sent with an [AMP web page](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_web_page/jsonschema/1-0-0) context, for aggregation of pings by page view id.
 
 ### Custom events
 
@@ -307,7 +306,7 @@ If you want to analyze events sent via this tracker, you may prefer to query for
 
 ### Page view and ping aggregation
 
-By default, the  [AMP web page context](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_web_page/jsonschema/1-0-0) is attached to every event. This will contain the AMP-defined [PAGE\_VIEW\_ID\_64](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#page-view-id-64), which defined as "intended to be random with a high entropy and likely to be unique per URL, user and day".
+By default, the [AMP web page context](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_web_page/jsonschema/1-0-0) is attached to every event. This will contain the AMP-defined [PAGE_VIEW_ID_64](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#page-view-id-64), which defined as "intended to be random with a high entropy and likely to be unique per URL, user and day".
 
 Users can aggregate page views, page pings and other events on-page by this ID to aggregate engaged time, and model events to a page view level, by combining it with the url, amp client ID, and date.
 
@@ -315,7 +314,7 @@ Note that page pings and the page view ID itself are not defined by Snowplow's l
 
 ### User Identification
 
-By default, the  [AMP ID](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_id/jsonschema/1-0-0) context is attached to every event. This contains the [AMP Client ID](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#client-id), the `user_id` (if set via the `userId` var), and the domain\_userid (if passed to an AMP page via cross-domain linking - more detail below).
+By default, the [AMP ID](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_id/jsonschema/1-0-0) context is attached to every event. This contains the [AMP Client ID](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#client-id), the `user_id` (if set via the `userId` var), and the domain_userid (if passed to an AMP page via cross-domain linking - more detail below).
 
 This provides a map between the main relevant identifiers, which can be used to model user journeys across platforms. Users can choose to instrument further user identification methods using custom contexts.
 
@@ -325,7 +324,7 @@ The tracker is designed to handle user journeys as follows:
 
 #### JS-tracker page to AMP page
 
-Where a user moves from a standard web page, tracked by the Javascript tracker, to an AMP page, the domain userid from the Javascript tracker can be passed to the AMP tracker by enabling the  [Javascript tracker's crossDomainLinker](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#2217-configuring-cross-domain-tracking). The AMP tracker will parse the value from the querystring, and attach it to all events, along with the AMP client ID, via the AMP ID context.
+Where a user moves from a standard web page, tracked by the Javascript tracker, to an AMP page, the domain userid from the Javascript tracker can be passed to the AMP tracker by enabling the [Javascript tracker's crossDomainLinker](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#2217-configuring-cross-domain-tracking). The AMP tracker will parse the value from the querystring, and attach it to all events, along with the AMP client ID, via the AMP ID context.
 
 The AMP tracker uses a combination of cookies and the AMP linker to attempt to retain the value, however due to the nature of AMP pages, there is no guarantee that the value will be retained across sessions. To ensure best possible retention of the value within the session, make sure the tracker config has linker pages enabled for your AMP domains:
 
@@ -355,7 +354,7 @@ Where a user moves frrom an AMP page to a standard web page which is tracked by 
 ...
 ```
 
-This will add a querystring parameter 'linker=' to the destination url, which contains the amp\_id value, base-64 encoded. This will look something like this: `?sp_amp_linker=1*1c1wx43*amp_id*amp-a1b23cDEfGhIjkl4mnoPqr`.
+This will add a querystring parameter 'linker=' to the destination url, which contains the amp_id value, base-64 encoded. This will look something like this: `?sp_amp_linker=1*1c1wx43*amp_id*amp-a1b23cDEfGhIjkl4mnoPqr`.
 
 The structure of this param is explained in the [AMP documentation](https://github.com/ampproject/amphtml/blob/master/extensions/amp-analytics/linker-id-receiving.md) - models can extract the base64-encoded AMP Client ID, decode it, and map it to the domain userid (or any other user value) from the Javascript tracker.
 

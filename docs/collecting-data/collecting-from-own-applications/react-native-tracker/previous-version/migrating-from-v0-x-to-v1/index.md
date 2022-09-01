@@ -1,6 +1,6 @@
 ---
-title: "Migrating from v0 to v1"
-date: "2021-08-09"
+title: 'Migrating from v0 to v1'
+date: '2021-08-09'
 sidebar_position: 10
 ---
 
@@ -30,7 +30,7 @@ In the following examples, the changes needed are described:
 import { createTracker } from '@snowplow/react-native-tracker';
 
 const tracker = createTracker(
-    'my-tracker-namespace', 
+    'my-tracker-namespace',
     {
         endpoint: 'my-endpoint.com',
         appId: 'my-app-id'
@@ -68,7 +68,7 @@ In v1, the `protocol` property has been removed. The collector URL can include t
 
 ```
 const tracker = createTracker(
-    'my-tracker-namespace', 
+    'my-tracker-namespace',
     {
         endpoint: 'my-endpoint.com',
         protocol: 'http',

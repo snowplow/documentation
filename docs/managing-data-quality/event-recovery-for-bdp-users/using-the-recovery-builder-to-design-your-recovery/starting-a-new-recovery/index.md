@@ -1,6 +1,6 @@
 ---
-title: "Starting a new recovery"
-date: "2021-10-13"
+title: 'Starting a new recovery'
+date: '2021-10-13'
 sidebar_position: 1000
 ---
 

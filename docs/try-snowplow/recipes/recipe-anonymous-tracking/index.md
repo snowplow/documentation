@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: Anonymous tracking"
-date: "2021-01-04"
+title: 'Tutorial: Anonymous tracking'
+date: '2021-01-04'
 sidebar_position: 50
 ---
 
@@ -35,7 +35,9 @@ You will then verify that events no longer contain any PII.
 In your JavaScript tracker implementation, you need to add the following into your tracker initialisation:
 
 ```javascript
-anonymousTracking: {withServerAnonymisation: true}
+anonymousTracking: {
+  withServerAnonymisation: true
+}
 ```
 
 Therefore, the entire tracker initialization code will look like this:

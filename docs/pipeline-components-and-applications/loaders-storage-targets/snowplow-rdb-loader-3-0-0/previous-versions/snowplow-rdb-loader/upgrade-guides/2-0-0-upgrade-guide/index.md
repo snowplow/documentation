@@ -1,6 +1,6 @@
 ---
-title: "2.0.0 Upgrade Guide"
-date: "2021-12-01"
+title: '2.0.0 Upgrade Guide'
+date: '2021-12-01'
 sidebar_position: -10
 ---
 

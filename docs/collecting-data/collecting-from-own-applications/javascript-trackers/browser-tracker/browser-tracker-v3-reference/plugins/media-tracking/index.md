@@ -1,6 +1,6 @@
 ---
-title: "Media Tracking"
-date: "2022-01-11"
+title: 'Media Tracking'
+date: '2022-01-11'
 sidebar_position: 12500
 ---
 
@@ -29,7 +29,7 @@ To start tracking media with default settings, use the snippet below, using your
     <title>Snowplow Media Tracking Example</title>
   </head>
   <body>
-    <video id='example-id' src='./example-video.mp4'></video>
+    <video id="example-id" src="./example-video.mp4"></video>
   </body>
 </html>
 ```
@@ -40,7 +40,7 @@ To start tracking media with default settings, use the snippet below, using your
 import { enableMediaTracking } from '@snowplow/browser-plugin-media-tracking'
 
 enableMediaTracking({
-  id: 'example-id'
+  id: 'example-id',
 })
 ```
 
@@ -49,19 +49,19 @@ enableMediaTracking({
 The `enableMediaTracking` function takes the form:
 
 ```javascript
-enableMediaTracking({ 
-  id, 
-  options?: { 
-    label?, 
-    captureEvents?, 
-    boundaries?, 
-    volumeChangeTrackingInterval? 
+enableMediaTracking({
+  id,
+  options?: {
+    label?,
+    captureEvents?,
+    boundaries?,
+    volumeChangeTrackingInterval?
   }
 })
 ```
 
 | Parameter                              | Type       | Default             | Description                                                                                                    | Required |
-|----------------------------------------|------------|---------------------|----------------------------------------------------------------------------------------------------------------|----------|
+| -------------------------------------- | ---------- | ------------------- | -------------------------------------------------------------------------------------------------------------- | -------- |
 | `id`                                   | `string`   | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`                        | `string`   | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents`                | `string[]` | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
@@ -78,7 +78,7 @@ enableMediaTracking({
     captureEvents: ['play', 'pause', 'ended'],
     boundaries: [20, 80],
     volumeChangeTrackingInterval: 200,
-  }
+  },
 })
 ```
 
@@ -93,14 +93,14 @@ The `<audio>` or `<video>` element has the HTML id passed into `enableMedia
 **`index.html`**
 
 ```html
-<video id='example-id'></video>
+<video id="example-id"></video>
 ```
 
 **`main.js`**
 
 ```javascript
 enableMediaTracking({
-  id: 'example-id'
+  id: 'example-id',
 })
 ```
 
@@ -111,8 +111,8 @@ The media element is the only `<audio>` or `<video>` child of a parent eleme
 **`index.html`**
 
 ```html
-<div id='example-id'>
-  <video src='./example-video.mp4'></video>
+<div id="example-id">
+  <video src="./example-video.mp4"></video>
 </div>
 ```
 
@@ -120,7 +120,7 @@ The media element is the only `<audio>` or `<video>` child of a parent eleme
 
 ```javascript
 enableMediaTracking({
-  id: 'example-id'
+  id: 'example-id',
 })
 ```
 
@@ -131,7 +131,7 @@ enableMediaTracking({
 Below is a table of all the events that can be used in `options.captureEvents`
 
 | Name                  | Fire Condition                                                                                                                                                                |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | abort                 | The resource was not fully loaded, but not as the result of an error.                                                                                                         |
 | canplay               | The user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content |
 | canplaythrough        | The user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.    |
@@ -164,16 +164,16 @@ Note
 
 Not all events are available in all browsers (though most are). To check, use the following links:
 
-[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser\_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
+[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
 
-[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser\_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
+[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
 
 ### Event Groups
 
 You can also use a pre-made event group in `options.captureEvents`:
 
 | Name            | Events                                                                                                      |
-|-----------------|-------------------------------------------------------------------------------------------------------------|
+| --------------- | ----------------------------------------------------------------------------------------------------------- |
 | `DefaultEvents` | `['pause', 'play', 'seeked', 'ratechange', 'volumechange', 'ended', 'fullscreenchange', 'percentprogress']` |
 | `AllEvents`     | Every event listed in [Capturable Events](#capturable-events)                                               |
 
@@ -184,7 +184,7 @@ enableMediaTracking({
   id: 'example-video',
   options: {
     captureEvents: ['DefaultEvents', 'emptied'],
-  }
+  },
 })
 ```
 
@@ -196,8 +196,8 @@ Four schemas are used with this plugin:
 
 ```json
 {
-    "type": "play",
-    "label": "Identifying Label"
+  "type": "play",
+  "label": "Identifying Label"
 }
 ```
 
@@ -205,14 +205,14 @@ Four schemas are used with this plugin:
 
 ```json
 {
-    "currentTime": 12.32,
-    "duration": 20,
-    "ended": false,
-    "loop": false,
-    "muted": true,
-    "paused": false,
-    "playbackRate": 1,
-    "volume": 100
+  "currentTime": 12.32,
+  "duration": 20,
+  "ended": false,
+  "loop": false,
+  "muted": true,
+  "paused": false,
+  "playbackRate": 1,
+  "volume": 100
 }
 ```
 
@@ -220,41 +220,43 @@ Four schemas are used with this plugin:
 
 ```json
 {
-    "htmlId": "my-video",
-    "mediaType": "VIDEO",
-    "autoPlay": false,
-    "buffered": [
-        {
-            "start": 0, "end" : 20
-        }
-    ],
-    "controls": true,
-    "currentSrc": "http://example.com/video.mp4",
-    "defaultMuted": true,
-    "defaultPlaybackRate": 1,
-    "disableRemotePlayback": false,
-    "error": null,
-    "networkState": "IDLE",
-    "preload": "metadata",
-    "readyState": "ENOUGH_DATA",
-    "seekable": [
-        {
-            "start": 0, "end" : 20
-        }
-    ],
-    "seeking": false,
-    "src": "http://example.com/video.mp4",
-    "textTracks": [
-        {
-            "label": "English",
-            "language": "en",
-            "kind": "captions",
-            "mode": "showing",
-        },
-    ],
-    "fileExtension": "mp4",
-    "fullscreen": false,
-    "pictureInPicture": false
+  "htmlId": "my-video",
+  "mediaType": "VIDEO",
+  "autoPlay": false,
+  "buffered": [
+    {
+      "start": 0,
+      "end": 20
+    }
+  ],
+  "controls": true,
+  "currentSrc": "http://example.com/video.mp4",
+  "defaultMuted": true,
+  "defaultPlaybackRate": 1,
+  "disableRemotePlayback": false,
+  "error": null,
+  "networkState": "IDLE",
+  "preload": "metadata",
+  "readyState": "ENOUGH_DATA",
+  "seekable": [
+    {
+      "start": 0,
+      "end": 20
+    }
+  ],
+  "seeking": false,
+  "src": "http://example.com/video.mp4",
+  "textTracks": [
+    {
+      "label": "English",
+      "language": "en",
+      "kind": "captions",
+      "mode": "showing"
+    }
+  ],
+  "fileExtension": "mp4",
+  "fullscreen": false,
+  "pictureInPicture": false
 }
 ```
 
@@ -262,11 +264,11 @@ Four schemas are used with this plugin:
 
 ```json
 {
-    "autoPictureInPicture": false,
-    "disablePictureInPicture": false,
-    "poster": "http://www.example.com/poster.jpg",
-    "videoHeight": 300,
-    "videoWidth": 400
+  "autoPictureInPicture": false,
+  "disablePictureInPicture": false,
+  "poster": "http://www.example.com/poster.jpg",
+  "videoHeight": 300,
+  "videoWidth": 400
 }
 ```
 
@@ -274,15 +276,15 @@ Note
 
 Not all properties in the HTML5 Media/Video specific schemas will be available on all browsers. Use the following links to check availability:
 
-[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser\_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
+[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
 
-[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser\_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
+[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
 
 ### Video Frameworks
 
 This plugin has been tested with [VideoJS](https://videojs.com/) and [Plyr](https://plyr.io/), but should work with almost any player framework that results in a `<video>` or `<audio>` element). You may find that some frameworks render out in a way that means the id given to the component doesn't exist in the actual DOM.
 
-* * *
+---
 
 1. To track when a video ends, use the 'ended' event.
 

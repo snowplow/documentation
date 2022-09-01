@@ -1,6 +1,6 @@
 ---
-title: "1.0.0 Upgrade Guide"
-date: "2021-04-14"
+title: '1.0.0 Upgrade Guide'
+date: '2021-04-14'
 sidebar_position: 200
 ---
 
@@ -36,15 +36,13 @@ Since we added another type of a shredder, one has to specify the type explicitl
 }
 ```
 
-_
+\_
 
 The major API change in 1.0.0 is the new partitioning scheme unifying `good` and `bad` output. Whereas previously it was necessary to specify `output` and `outputBad`, now there's only `path` in `shredder.output` object:
 
-_
+\_
 
-_`"output": {                                  # Was a string in R35
-  "path": "s3://snowplow-shredded-archive/", # Path to shredded output
-  "compression": "GZIP"                      # Output compression, GZIP or NONE`_ `}`
+_`"output": { # Was a string in R35 "path": "s3://snowplow-shredded-archive/", # Path to shredded output "compression": "GZIP" # Output compression, GZIP or NONE`_ `}`
 
 In Dataflow Runner playbook you have to specify new Main classpath for RDB Shredder:
 
@@ -65,32 +63,32 @@ You only need to choose one Shredder: batch or stream. **For production environm
 Stream Shredder is configured within same configuration file as RDB Loader and RDB Batch Shredder, but using following properties:
 
 ```
-  "shredder": {       
+  "shredder": {
     # A batch loader would fail, if stream type encountered
-    "type" : "stream",       
-    # Input stream information         
-    "input": {                
-      # file is another option, but used for debugging only               
-      "type": "kinesis",        
-      # KCL app name - a DynamoDB table will be created with the same name       
-      "appName": "acme-rdb-shredder",       
-      # Kinesis Stream name, must exist     
-      "streamName": "enriched-events",       
-      # Kinesis region       
-      "region": "us-east-1",       
+    "type" : "stream",
+    # Input stream information
+    "input": {
+      # file is another option, but used for debugging only
+      "type": "kinesis",
+      # KCL app name - a DynamoDB table will be created with the same name
+      "appName": "acme-rdb-shredder",
+      # Kinesis Stream name, must exist
+      "streamName": "enriched-events",
+      # Kinesis region
+      "region": "us-east-1",
       # Kinesis position: LATEST or TRIM_HORIZON
-      "position": "LATEST"       
-    },       
-                
+      "position": "LATEST"
+    },
+
     # A frequency to emit loading finished message - 5,10,15,20,30,60 etc minutes, this is what controls how often your data will be loaded
-    "windowing": "10 minutes",       
-                
-    # Path to shredded archive, same as for batch      
-    "output": {       
-      # Path to shredded output       
-      "path": "s3://bucket/good/",       
-      # Shredder output compression, GZIP or NONE       
-      "compression": "GZIP"       
+    "windowing": "10 minutes",
+
+    # Path to shredded archive, same as for batch
+    "output": {
+      # Path to shredded output
+      "path": "s3://bucket/good/",
+      # Shredder output compression, GZIP or NONE
+      "compression": "GZIP"
     }
 }
 ```

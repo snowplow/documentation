@@ -1,6 +1,6 @@
 ---
-title: "RDB Loader 1.0.0"
-date: "2021-01-28"
+title: 'RDB Loader 1.0.0'
+date: '2021-01-28'
 sidebar_position: -10
 ---
 
@@ -18,9 +18,9 @@ Upstream of the RDB loader, [S3 loader](/docs/pipeline-components-and-applicatio
 ![](images/architecture.png)
 
 1. Enriched files copied from _enriched/_ to _archive/enriched/_ with S3DistCp on EMR.
-2. Shredder is run as an EMR step. It reads the directory from step 1. 
-    Step 1 and 2 are orchestrated by Dataflow Runner (or any other orchestration tool).  
-    Shredder is stateless. It knows which data to shred by comparing directories in _archive/enriched/_ and _shredded/_.
+2. Shredder is run as an EMR step. It reads the directory from step 1.
+   Step 1 and 2 are orchestrated by Dataflow Runner (or any other orchestration tool).  
+   Shredder is stateless. It knows which data to shred by comparing directories in _archive/enriched/_ and _shredded/_.
 3. Shredder writes shredded data to S3.
 4. When the writing is done, it sends the metadata about shredding data to SQS with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/shredding_complete/jsonschema/1-0-0).
 5. Loader in a long-running app running app (e.g. on ECS fargate) that consumes messages from SQS.
@@ -34,10 +34,10 @@ Steps to get RDB loader up and running:
 1. [Configure Transformer (formerly Shredder) and loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/index.md)
 2. Create SQS FIFO queue. Content-based deduplication needs to be enabled.
 3. Configure [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/setup/index.md) with the schemas  
-    **IMPORTANT**: do not forget to add `/api` at the end of the uri in the resolver configuration for the loader
+   **IMPORTANT**: do not forget to add `/api` at the end of the uri in the resolver configuration for the loader
 4. Create `atomic.events` table. Instructions can be found on [this page](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/launch-a-redshift-cluster/setup-the-snowplow-database-and-events-table/index.md)
 5. Run RDB Loader as long-running process with access to message queue:  
-    `docker run snowplow/snowplow-rdb-loader:1.0.0 --config config.hocon.base64 --iglu-config resolver.json.base64`
+   `docker run snowplow/snowplow-rdb-loader:1.0.0 --config config.hocon.base64 --iglu-config resolver.json.base64`
 6. [Schedule EMR jobs with S3DistCp and Shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/spark-transformer/index.md)
 
 ## 4\. Shredder stateless algorithm
@@ -54,10 +54,10 @@ When shredder starts, it lists the content of _archive/enriched_/.
 
 It then lists the content of _shredded/_ and compares.
 
-If all enriched events in _archive/enriched/_ have already been successfully shredded, then each folder in _archive/_ must exist in _shredded/_ with the same name and inside each of them, a file _shredded\_complete.json_ must exist. The content of this file is a SDJ with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/shredding_complete/jsonschema/1-0-0) and is exactly what is sent to SQS for the loader.
+If all enriched events in _archive/enriched/_ have already been successfully shredded, then each folder in _archive/_ must exist in _shredded/_ with the same name and inside each of them, a file _shredded_complete.json_ must exist. The content of this file is a SDJ with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/shredding_complete/jsonschema/1-0-0) and is exactly what is sent to SQS for the loader.
 
 When a folder exists in _archive/enriched/_ but not in _shredded/_, it means that the folder needs to get shredded.
 
-If a folder exists in both _archive/_ and _shredded/_ but there is no _shredded\_complete.json_ in _shredded/_, it means that shredded has failed for this folder in a past run. In this case shredder [logs an error](https://github.com/snowplow/snowplow-rdb-loader/blob/1.0.0/modules/shredder/src/main/scala/com/snowplowanalytics/snowplow/rdbloader/shredder/batch/ShredJob.scala#L224).
+If a folder exists in both _archive/_ and _shredded/_ but there is no _shredded_complete.json_ in _shredded/_, it means that shredded has failed for this folder in a past run. In this case shredder [logs an error](https://github.com/snowplow/snowplow-rdb-loader/blob/1.0.0/modules/shredder/src/main/scala/com/snowplowanalytics/snowplow/rdbloader/shredder/batch/ShredJob.scala#L224).
 
-**IMPORTANT**: when rolling out to this version, the existing state needs to get "sealed", by creating _shredded\_complete.json_ file (can be empty) inside each folder in _shredded/_.
+**IMPORTANT**: when rolling out to this version, the existing state needs to get "sealed", by creating _shredded_complete.json_ file (can be empty) inside each folder in _shredded/_.

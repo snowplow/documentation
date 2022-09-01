@@ -1,6 +1,6 @@
 ---
-title: "Introduction"
-date: "2021-11-23"
+title: 'Introduction'
+date: '2021-11-23'
 sidebar_position: -10
 ---
 
@@ -33,17 +33,11 @@ Many of these settings can be changed at runtime through the tracker instance (`
 Represents the network communication configuration allowing the tracker to be able to send events to the Snowplow collector.
 
 - **endpoint**: URL of the collector that is going to receive the events tracked by the tracker. The URL can include the schema/protocol (e.g.: `http://collector-url.com`). In case the URL doesn't include the schema/protocol, the HTTPS protocol is automatically selected.
-    
 - **method**: The method used to send the requests (GET or POST).
-    
 - **networkConnection**: (optional) The NetworkConnection component which will control the communication between the tracker and the collector.
-    
 - **customPostPath**: A custom path which will be added to the endpoint URL to specify the complete URL of the collector when paired with the POST method.
-    
 - **okHttpClient** (Android only): An OkHttp client that will be used in the emitter, you can provide your own if you want to share your Singleton client's interceptors, connection pool etc.. Otherwise a new one is created.
-    
 - **okHttpCookieJar** (Android only, version 3.2+): An OkHttp cookie jar to override the default cookie jar that stores cookies in SharedPreferences. The cookie jar will be ignored in case custom `okHttpClient` is configured.
-    
 
 Please note that cookies set by the Collector are maintained both in the iOS and Android trackers (Android starting with version 3.2) by default, which enables the `network_userid` property to be consistent within requests from the same device.
 
@@ -52,9 +46,7 @@ Please note that cookies set by the Collector are maintained both in the iOS and
 Represents the configuration of the tracker and the core tracker properties. The TrackerConfiguration can be used to setup the tracker behaviour indicating what should be tracked in term of automatic tracking and contexts/entities to track with the events.
 
 - **appId**: Identifer of the app.
-    
 - **devicePlatform** = mobile: It sets the device platform the tracker is running on.
-    
 
 - **base64encoding** = true: It indicates whether the JSON data in the payload should be base64 encoded.
 - **logLevel** = OFF: It sets the log level of tracker logs.
@@ -79,9 +71,7 @@ Represents the configuration of a Session object which gets appended to each eve
 Session data is maintained for the life of the application being installed on a device. Essentially it will update if it is not accessed within a configurable timeout.
 
 - **foregroundTimeout** = 30 min: The amount of time that can elapse before the session id is updated while the app is in the foreground.
-    
 - **backgroundTimeout** = 30 min: The amount of time that can elapse before the session id is updated while the app is in the background.
-    
 
 The app can be notified through a callback when the session is renewed.
 
@@ -94,17 +84,11 @@ There is a distinction between session renewed and session expired. The session 
 Represents the tracker configuration from the emission perspective. It can be used to setup details about how the tracker should treat the events once they have been processed but not yet sent.
 
 - **bufferOption** = single: Sets whether the buffer should send events instantly or after the buffer has reached it's limit. By default, this is set to BufferOption Default.
-    
 - **emitRange** = 150: Maximum number of events collected from the EventStore to be sent in a request.
-    
 - **threadPoolSize** = 15: Maximum number of threads working in parallel in the tracker to send requests.
-    
 - **byteLimitGet** = 40000: Maximum amount of bytes allowed to be sent in a payload in a GET request.
-    
 - **byteLimitPost** = 40000: Maximum amount of bytes allowed to be sent in a payload in a POST request.
-    
 - **eventStore** (optional): Custom component with full ownership for persisting events before to be sent to the collector. If it's not set the tracker will use a SQLite database as default EventStore.
-    
 - **customRetryForStatusCodes** (optional, available since v3.2): Custom retry rules for HTTP status codes received in emit responses from the Collector – dictionary that maps integers (status codes) to booleans (true for retry and false for not retry). By default, the tracker retries sending events on all 3xx, 4xx, and 5xx status codes except for 400, 401, 403, 410, and 422. You may override the default behaviour using the `customRetryForStatusCodes`. Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent.
 
 #### SubjectConfiguration
@@ -112,21 +96,13 @@ Represents the tracker configuration from the emission perspective. It can be us
 Represents the configuration of the subject. The SubjectConfiguration can be used to setup the tracker with the basic information about the user and the app which will be attached on all the events as contexts.
 
 - **userId** = null: The custom user identifier.
-    
 - **useragent** = null: The custom user-agent. It overrides the user-agent used by default.
-    
 - **ipAddress** = null: The IP address (not automatically set).
-    
 - **timezone** (set by the tracker): The current timezone label.
-    
 - **language** (set by the tracker): The language set in the device.
-    
 - **screenResolution** (set by the tracker): The screen resolution.
-    
 - **screenViewPort** = null: The screen viewport.
-    
 - **colorDepth** = null: The color depth.
-    
 
 #### GdprConfiguration
 

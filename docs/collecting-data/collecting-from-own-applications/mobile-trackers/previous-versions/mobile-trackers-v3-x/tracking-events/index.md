@@ -1,6 +1,6 @@
 ---
-title: "Tracking Events"
-date: "2021-11-23"
+title: 'Tracking Events'
+date: '2021-11-23'
 sidebar_position: 30
 ---
 
@@ -39,7 +39,7 @@ let trackerConfig = TrackerConfiguration()
 
 ## Session Context
 
-Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
+Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -126,9 +126,9 @@ event.contexts.add(
         andDictionary: [
              "screenType": "test",
              "lastUpdated": "2021-06-11"
-        ])!)     
+        ])!)
 event.contexts.add(
-    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0", 
+    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0",
         andDictionary: [
              "userType": "tester"
         ])!)
@@ -146,8 +146,8 @@ You may wish to track events in your app which are not directly supported by Sno
 To define your own custom event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP Console UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
 ```
-let data = ["targetUrl": "http://a-target-url.com" as NSObject];       
-let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)       
+let data = ["targetUrl": "http://a-target-url.com" as NSObject];
+let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
 tracker.track(event)
 ```
 
@@ -176,7 +176,7 @@ Use the `Timing` events to track user timing events such as how long resources t
 
 ```
 let event = Timing(category: "timing-category", variable: "timing-variable", timing: 5)
-    .label("optional-label")       
+    .label("optional-label")
 tracker.track(event)
 ```
 
@@ -196,10 +196,10 @@ tracker.track(event)
 Use the `ConsentGranted` event to track a user opting into data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied.
 
 ```
-let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")       
+let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
@@ -211,10 +211,10 @@ Use the `ConsentWithdrawn` event to track a user withdrawing consent for data co
 let event = ConsentWithdrawn()
     .all(true)
     .documentId("1234abcd")
-    .version("1.2")       
+    .version("1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
@@ -223,23 +223,20 @@ tracker.track(event)
 Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three steps that can be used together to track online transactions:
 
 1. **Create a Ecommerce event.** Use `Ecommerce` to initialize a transaction object. This will be the object that is loaded with all the data relevant to the specific transaction that is being tracked including all the items in the order, the prices of the items, the price of shipping and the `order_id`.
-    
 2. **Add items to the transaction.** Create an array of `EcommerceItem` to pass to the `Ecommerce` object.
-    
 3. **Submit the transaction to Snowplow** using the `track()` method, once all the relevant data has been loaded into the object.
-    
 
 ```
-let transactionID = "6a8078be"       
-                
-let itemArray = [       
+let transactionID = "6a8078be"
+
+let itemArray = [
   EcommerceItem(sku: "DemoItemSku", price: 0.75, quantity: 1)
-    .name("DemoItemName")       
-    .category("DemoItemCategory")       
-    .currency("USD")       
-]       
-                
-let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)   
+    .name("DemoItemName")
+    .category("DemoItemCategory")
+    .currency("USD")
+]
+
+let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
     .affiliation("DemoTransactionAffiliation")
     .taxValue(10)
     .shipping(15)
@@ -324,7 +321,7 @@ Automatically captured events in the Android Tracker are:
 These are enabled in the tracker configuration. In this example, some helpful automatic contexts and all Autotracking is enabled:
 
 ```
-TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)       
+TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)
     .sessionContext(true)
     .platformContext(true)
     .applicationContext(true)
@@ -337,7 +334,7 @@ TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)
 
 ## Session Context
 
-Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
+Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -423,16 +420,16 @@ and the other describes a user on that screen:
 How to track a screen view with both of these contexts attached:
 
 ```
-ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());         
+ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());
 event.customContexts.add(
-    new SelfDescribingJson("iglu:com.example/screen/jsonschema/1-2-1",                         
+    new SelfDescribingJson("iglu:com.example/screen/jsonschema/1-2-1",
         new HashMap() {{
             put("screenType", "test");
             put("lastUpdated", "2021-06-11");
         }})
 );
 event.customContexts.add(
-    new SelfDescribingJson("iglu:com.example/user/jsonschema/2-0-0",                         
+    new SelfDescribingJson("iglu:com.example/user/jsonschema/2-0-0",
         new HashMap() {{
             put("userType", "tester");
         }})
@@ -484,7 +481,7 @@ Use the `Timing` events to track user timing events such as how long resources t
 ```
 Timing event = new Timing("timing-category", "timing-variable", 5)
     .label("optional-label");
-                
+
 tracker.track(event);
 ```
 
@@ -526,11 +523,8 @@ tracker.track(event);
 Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three steps that can be used together to track online transactions:
 
 1. **Create a Ecommerce event.** Use `Ecommerce` to initialize a transaction object. This will be the object that is loaded with all the data relevant to the specific transaction that is being tracked including all the items in the order, the prices of the items, the price of shipping and the `order_id`.
-    
 2. **Add items to the transaction.** Create an array of `EcommerceItem` to pass to the `Ecommerce` object.
-    
 3. **Submit the transaction to Snowplow** using the `track()` method, once all the relevant data has been loaded into the object.
-    
 
 ```
 EcommerceTransactionItem item = new EcommerceTransactionItem("sku-1", 35.00, 1)

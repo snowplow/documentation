@@ -1,6 +1,6 @@
 ---
-title: "Setting up Piinguin"
-date: "2021-03-26"
+title: 'Setting up Piinguin'
+date: '2021-03-26'
 sidebar_position: 0
 ---
 
@@ -37,7 +37,7 @@ As the server writes its data to DynamoDB its will need to have access to it wit
 
 ## Deploying relay
 
-You can obtain the relay artifact from [our S3 public assets buckets](https://github.com/snowplow/snowplow/wiki/Hosted-assets) appropriate for your region. In order for you to create an AWS Lambda function, please follow the detailed [developer guide](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html). When you are creating the Lambda, you will need to specify as trigger the AWS Kinesis stream that contains your PII data. In addition you will need to have the VPC id where you are running the Piinguin Server and provide that in the form too. Finally in the `Environment variables` section you will need to add the PIINGUIN\_HOST, PIINGUIN\_PORT and PIINGUIN\_TIMEOUT\_SEC. The PIINGUIN\_TIMEOUT\_SEC value should be lower than the AWS Lambda timeout in order to get a meaningful error message if the client times out while communicating with the server. Here is an example of that configuration:
+You can obtain the relay artifact from [our S3 public assets buckets](https://github.com/snowplow/snowplow/wiki/Hosted-assets) appropriate for your region. In order for you to create an AWS Lambda function, please follow the detailed [developer guide](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html). When you are creating the Lambda, you will need to specify as trigger the AWS Kinesis stream that contains your PII data. In addition you will need to have the VPC id where you are running the Piinguin Server and provide that in the form too. Finally in the `Environment variables` section you will need to add the PIINGUIN_HOST, PIINGUIN_PORT and PIINGUIN_TIMEOUT_SEC. The PIINGUIN_TIMEOUT_SEC value should be lower than the AWS Lambda timeout in order to get a meaningful error message if the client times out while communicating with the server. Here is an example of that configuration:
 
 ```
 PIINGUIN_HOST        = ec2-1-2-3-4.eu-west-1.compute.amazonaws.com

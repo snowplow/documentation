@@ -1,6 +1,6 @@
 ---
-title: "Custom tracking using schemas"
-date: "2022-08-30"
+title: 'Custom tracking using schemas'
+date: '2022-08-30'
 sidebar_position: 20
 ---
 
@@ -28,8 +28,8 @@ You may wish to track events in your app which are not directly supported by Sno
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let data = ["targetUrl": "http://a-target-url.com" as NSObject];       
-let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)       
+let data = ["targetUrl": "http://a-target-url.com" as NSObject];
+let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
 
 tracker.track(event)
 ```
@@ -125,9 +125,9 @@ event.contexts.add(
         andDictionary: [
              "screenType": "test",
              "lastUpdated": "2021-06-11"
-        ])!)     
+        ])!)
 event.contexts.add(
-    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0", 
+    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0",
         andDictionary: [
              "userType": "tester"
         ])!)
@@ -398,7 +398,7 @@ They follow the same five-part format as an Iglu URI `protocol:vendor/event_name
 The parts of a rule are wildcarded with certain guidelines:
 
 - asterisks cannot be used for the protocol (i.e. schemas always start with `iglu:`);
-- version matching must be specified like so: *–*–*, where any part of the versioning can be defined, e.g. 1-*–*, but only sequential parts can be wildcarded, e.g. 1-*-1 is invalid but 1-1–* is valid;
+- version matching must be specified like so: _–_–_, where any part of the versioning can be defined, e.g. 1-_–_, but only sequential parts can be wildcarded, e.g. 1-_-1 is invalid but 1-1–\* is valid;
 - at least two parts: `com.acme.*` is valid, while `com.*` is not;
 - vendors cannot be defined with non-wildcarded parts between wildcarded parts: `com.acme.*.marketing.*` is invalid, while `com.acme.*.*` is valid.
 

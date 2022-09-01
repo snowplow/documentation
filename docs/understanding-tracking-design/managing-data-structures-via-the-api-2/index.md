@@ -1,6 +1,6 @@
 ---
-title: "Managing data structures via the API"
-date: "2021-12-22"
+title: 'Managing data structures via the API'
+date: '2021-12-22'
 sidebar_position: 70
 ---
 
@@ -76,7 +76,7 @@ To use the commands to retrieve information about a specific Data Structure, you
 `organization ID: _38e97db9-f3cb-404d-8250-cd227506e544_`  
 `vendor_: com.acme.event_`  
 `schema name: _search_`  
-`format: _jsonschema_` 
+`format: _jsonschema_`
 
 First concatenate the information with a dash (-) as the separator:  
 `_38e97db9-f3cb-404d-8250-cd227506e544_-_com.acme.event_-_search_-jsonschema`
@@ -129,8 +129,8 @@ curl 'https://console.snowplowanalytics.com/api/msc/v1/organizations/cad39ca5-3e
 Please note:
 
 - the request's body has two parts:
-    - one for data structure metadata as value to the `meta` key
-    - one for the schema itself as value to the `data` key
+  - one for data structure metadata as value to the `meta` key
+  - one for the schema itself as value to the `data` key
 - this example uses the synchronous version of validation that responds with the result immediately. There is also an asynchronous version available that returns a request ID that you can later poll to get the result.
 - you can add metadata specific to your organisation to the schema as key/value pairs in the `customData` object. See '[Managing Meta Data](#managing-meta-data)' for more information.
 

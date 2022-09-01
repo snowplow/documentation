@@ -1,10 +1,10 @@
 ---
-title: "Usage Guide"
-date: "2020-04-03"
+title: 'Usage Guide'
+date: '2020-04-03'
 sidebar_position: 20
 ---
 
-This page refers to version 0.4.0 of Snowplow Mini for AWS. It also assumes an already running Snowplow Mini instance. 
+This page refers to version 0.4.0 of Snowplow Mini for AWS. It also assumes an already running Snowplow Mini instance.
 
 ## Overview
 
@@ -103,11 +103,11 @@ You can instrument any other Snowplow tracker by specifying the collector URL as
 Snowplow Mini makes the Elasticsearch HTTP API available at `http://<public dns>/elasticsearch`, you can check it's working by:
 
 - Checking the Elasticsearch API is available:
-    - `curl --user username:password http://<public dns>/elasticsearch`
-    - You should see a `200 OK` response
+  - `curl --user username:password http://<public dns>/elasticsearch`
+  - You should see a `200 OK` response
 - Checking the number of good events we sent in step 3:
-    - `curl --user username:password http://<public dns>/elasticsearch/good/good/_count`
-    - You should see the appropriate count of sent events
+  - `curl --user username:password http://<public dns>/elasticsearch/good/good/_count`
+  - You should see the appropriate count of sent events
 
 ## Viewing the data in Kibana
 

@@ -1,6 +1,6 @@
 ---
-title: "dbt: Web data model"
-date: "2021-07-27"
+title: 'dbt: Web data model'
+date: '2021-07-27'
 sidebar_position: 200
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Managing user permissions in Console"
-date: "2022-03-17"
+title: 'Managing user permissions in Console'
+date: '2022-03-17'
 sidebar_position: 30
 ---
 
@@ -38,9 +38,9 @@ A note on API keys and permissions
 
 Please note:
 
-1) Any API keys you create have full admin permissions
+1. Any API keys you create have full admin permissions
 
-2) Any existing Iglu API keys allow permissions to be side-stepped by connecting directly to Iglu servers
+2. Any existing Iglu API keys allow permissions to be side-stepped by connecting directly to Iglu servers
 
 Our recommendation is to remove all existing API keys and Iglu keys, and set the API keys permission respectively so that only trusted users can create new keys.
 

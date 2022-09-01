@@ -1,6 +1,6 @@
 ---
-title: "Quick Start Guide"
-date: "2021-04-12"
+title: 'Quick Start Guide'
+date: '2021-04-12'
 sidebar_position: 200
 ---
 
@@ -100,7 +100,7 @@ let trackerConfig = TrackerConfiguration()
 let sessionConfig = SessionConfiguration(
     foregroundTimeout: Measurement(value: 30, unit: .minutes),
     backgroundTimeout: Measurement(value: 30, unit: .minutes)
-)       
+)
 Snowplow.createTracker(
     namespace: "appTracker",
     network: networkConfig,

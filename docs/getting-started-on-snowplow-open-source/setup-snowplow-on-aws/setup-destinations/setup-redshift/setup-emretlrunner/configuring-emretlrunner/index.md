@@ -1,6 +1,6 @@
 ---
-title: "Configure EmrEtlRunner"
-date: "2020-02-26"
+title: 'Configure EmrEtlRunner'
+date: '2020-02-26'
 sidebar_position: 30
 ---
 
@@ -14,7 +14,7 @@ You can and should use the same file for both applications.
 
 ### Using environment variables
 
-You can use environment variables rather than hardcoding strings in the configuration file. For example, load your AWS access key from an environment variable named "AWS\_SNOWPLOW\_SECRET\_KEY":
+You can use environment variables rather than hardcoding strings in the configuration file. For example, load your AWS access key from an environment variable named "AWS_SNOWPLOW_SECRET_KEY":
 
 ```text
 secret_access_key: <%= ENV['AWS_SNOWPLOW_SECRET_KEY'] %>
@@ -37,28 +37,28 @@ aws:
       log: ADD HERE
       encrypted: false
       enriched:
-        good: ADD HERE       # e.g. s3://my-out-bucket/enriched/good
-        archive: ADD HERE    # Where to archive enriched events to, e.g. s3://my-archive-bucket/enriched
-        stream: ADD HERE     # S3 Loader's output folder with enriched data. If present raw buckets will be discarded
+        good: ADD HERE # e.g. s3://my-out-bucket/enriched/good
+        archive: ADD HERE # Where to archive enriched events to, e.g. s3://my-archive-bucket/enriched
+        stream: ADD HERE # S3 Loader's output folder with enriched data. If present raw buckets will be discarded
       shredded:
-        good: ADD HERE       # e.g. s3://my-out-bucket/shredded/good
-        bad: ADD HERE        # e.g. s3://my-out-bucket/shredded/bad
-        errors: ADD HERE     # Leave blank unless :continue_on_unexpected_error: set to true below
-        archive: ADD HERE    # Where to archive shredded events to, e.g. s3://my-archive-bucket/shredded
+        good: ADD HERE # e.g. s3://my-out-bucket/shredded/good
+        bad: ADD HERE # e.g. s3://my-out-bucket/shredded/bad
+        errors: ADD HERE # Leave blank unless :continue_on_unexpected_error: set to true below
+        archive: ADD HERE # Where to archive shredded events to, e.g. s3://my-archive-bucket/shredded
     consolidate_shredded_output: false # Whether to combine files when copying from hdfs to s3
   emr:
     ami_version: 5.9.0
-    region: ADD HERE        # Always set this
+    region: ADD HERE # Always set this
     jobflow_role: EMR_EC2_DefaultRole # Created using $ aws emr create-default-roles
-    service_role: EMR_DefaultRole     # Created using $ aws emr create-default-roles
-    placement: ADD HERE     # Set this if not running in VPC. Leave blank otherwise
+    service_role: EMR_DefaultRole # Created using $ aws emr create-default-roles
+    placement: ADD HERE # Set this if not running in VPC. Leave blank otherwise
     ec2_subnet_id: ADD HERE # Set this if running in VPC. Leave blank otherwise
     ec2_key_name: ADD HERE
     security_configuration: ADD HERE # Specify your EMR security configuration if needed. Leave blank otherwise
-    bootstrap: []           # Set this to specify custom boostrap actions. Leave empty otherwise
+    bootstrap: [] # Set this to specify custom boostrap actions. Leave empty otherwise
     software:
-      hbase:                # Optional. To launch on cluster, provide version, "0.92.0", keep quotes. Leave empty otherwise.
-      lingual:              # Optional. To launch on cluster, provide version, "1.1", keep quotes. Leave empty otherwise.
+      hbase: # Optional. To launch on cluster, provide version, "0.92.0", keep quotes. Leave empty otherwise.
+      lingual: # Optional. To launch on cluster, provide version, "1.1", keep quotes. Leave empty otherwise.
     # Adjust your Hadoop cluster below
     jobflow:
       job_name: Snowplow ETL # Give your job a name
@@ -66,10 +66,10 @@ aws:
       core_instance_count: 2
       core_instance_type: m1.medium
       core_instance_bid: 0.015 # In USD. Adjust bid, or leave blank for on-demand core instances
-      core_instance_ebs:    # Optional. Attach an EBS volume to each core instance.
-        volume_size: 100    # Gigabytes
-        volume_type: "gp2"
-        volume_iops: 400    # Optional. Will only be used if volume_type is "io1"
+      core_instance_ebs: # Optional. Attach an EBS volume to each core instance.
+        volume_size: 100 # Gigabytes
+        volume_type: 'gp2'
+        volume_iops: 400 # Optional. Will only be used if volume_type is "io1"
         ebs_optimized: false # Optional. Will default to true
       task_instance_count: 0 # Increase to use spot instances
       task_instance_type: m1.medium
@@ -77,10 +77,10 @@ aws:
     bootstrap_failure_tries: 3 # Number of times to attempt the job in the event of bootstrap failures
     configuration:
       yarn-site:
-        yarn.resourcemanager.am.max-attempts: "1"
+        yarn.resourcemanager.am.max-attempts: '1'
       spark:
-        maximizeResourceAllocation: "true"
-    additional_info:        # Optional JSON string for selecting additional features
+        maximizeResourceAllocation: 'true'
+    additional_info: # Optional JSON string for selecting additional features
 enrich:
   versions:
     spark_enrich: 1.18.0 # Version of the Spark Enrichment process
@@ -88,7 +88,7 @@ enrich:
 storage:
   versions:
     rdb_loader: 0.14.0
-    rdb_shredder: 0.13.1        # Version of the Spark Shredding process
+    rdb_shredder: 0.13.1 # Version of the Spark Shredding process
     hadoop_elasticsearch: 0.1.0 # Version of the Hadoop to Elasticsearch copying process
 monitoring:
   tags: {} # Name-value pairs describing this job
@@ -124,7 +124,7 @@ For `good:`, **always include a sub-folder on this variable (see below for why)*
 
 Each of the bucket variables must start with an S3 protocol - either `s3://` or `s3n://`. Each variable can include a sub-folder within the bucket as required, and a trailing slash is optional.
 
-The `bad:` entries will store any raw Snowplow log lines which did not pass the enrichment or JSON validation, along with their validation errors. The `errors:` entries will contain any raw Snowplow log lines which caused an unexpected error, but only if you set continue\_on\_unexpected\_error to true (see below).
+The `bad:` entries will store any raw Snowplow log lines which did not pass the enrichment or JSON validation, along with their validation errors. The `errors:` entries will contain any raw Snowplow log lines which caused an unexpected error, but only if you set continue_on_unexpected_error to true (see below).
 
 **Important:** there is a bug in Hive on Amazon EMR where Hive dies if you attempt to read or write data to the root of an S3 bucket. **Therefore always specify a sub-folder (e.g. `/events/`) for the `raw:processing`, `enriched:good` and `shredded:good` locations.**
 
@@ -178,8 +178,8 @@ The `software:` section lets you start up Lingual and/or HBase when you start up
 
 ```yaml
 software:
-  hbase: "0.92.0"
-  lingual: "1.1"
+  hbase: '0.92.0'
+  lingual: '1.1'
 ```
 
 ### storage

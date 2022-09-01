@@ -1,6 +1,6 @@
 ---
-title: "Getting the most out of performance timing"
-date: "2021-03-26"
+title: 'Getting the most out of performance timing'
+date: '2021-03-26'
 sidebar_position: 3000
 ---
 

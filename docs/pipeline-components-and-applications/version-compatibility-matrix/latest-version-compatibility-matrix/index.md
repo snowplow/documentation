@@ -1,6 +1,6 @@
 ---
-title: "Latest compatibility matrix"
-date: "2021-04-29"
+title: 'Latest compatibility matrix'
+date: '2021-04-29'
 sidebar_position: -1000
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "IAB enrichment"
-date: "2020-02-14"
+title: 'IAB enrichment'
+date: '2020-02-14'
 sidebar_position: 0
 ---
 
@@ -31,7 +31,7 @@ They correspond to one of the IAB/ABC database files, and need to have two inner
 The table below describes the three types of database fields:
 
 | **Field name**         | **Database description**                                          | **Database filename**           |
-|------------------------|-------------------------------------------------------------------|---------------------------------|
+| ---------------------- | ----------------------------------------------------------------- | ------------------------------- |
 | `ipFile`               | Blacklist of IP addresses considered to be robots of spiders      | `"ip_exclude_current_cidr.txt"` |
 | `excludeUseragentFile` | Blacklist of useragent strings considered to be robots or spiders | `"exclude_current.txt"`         |
 | `includeUseragentFile` | Whitelist of useragent strings considered to be browsers          | `"include_current.txt"`         |
@@ -53,5 +53,13 @@ This enrichment adds a new context to the enriched event with [this schema](http
 Example:
 
 ```json
-{    "schema": "iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0",    "data": {        "spiderOrRobot": false,        "category": "BROWSER",        "reason": "PASSED_ALL",        "primaryImpact": "NONE"    }}
+{
+  "schema": "iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0",
+  "data": {
+    "spiderOrRobot": false,
+    "category": "BROWSER",
+    "reason": "PASSED_ALL",
+    "primaryImpact": "NONE"
+  }
+}
 ```

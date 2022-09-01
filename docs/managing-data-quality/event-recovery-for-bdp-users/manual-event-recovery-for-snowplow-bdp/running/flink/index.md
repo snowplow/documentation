@@ -1,6 +1,6 @@
 ---
-title: "Flink"
-date: "2020-08-26"
+title: 'Flink'
+date: '2020-08-26'
 sidebar_position: 10
 ---
 
@@ -22,7 +22,7 @@ Using flink CLI:
 flink run \
   snowplow-event-recovery-flink-0.2.0.jar \
   --input s3://bad-rows-location/** \
-  --output recovered-kinesis-topic \  
+  --output recovered-kinesis-topic \
   --failedOutput s3://unrecovered-collector-payloads-location/ \
   --unrecoverableOutput s3://unrecoverable-collector-payloads-location/ \
   --config $JOB_CONFIG \

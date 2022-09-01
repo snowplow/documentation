@@ -1,6 +1,6 @@
 ---
-title: "Glossary of Terms"
-date: "2021-03-26"
+title: 'Glossary of Terms'
+date: '2021-03-26'
 sidebar_position: 40
 ---
 
@@ -13,13 +13,13 @@ Most companies that use Snowplow will perform analytics using a number of differ
 1. It is common to implement a Business Intelligence tool on top of Snowplow data to enable users (particularly non-technical users) to slice and dice (pivot) on the data. For many companies, the BI tool will be the primary way that most users interface with Snowplow data.
 2. Often a data scientist or data science team will often crunch the underlying event-level data to perform more sophisticated analysis including building predictive models, perform marketing attribution etc. The data scientist(s) will use one or more specialist tools e.g. Python for Data Science or R.
 
-__[Read more](http://snowplowanalytics.com/documentation/concepts/snowplow-data-pipeline/#data-analysis)__
+**[Read more](http://snowplowanalytics.com/documentation/concepts/snowplow-data-pipeline/#data-analysis)**
 
 ### Collector
 
 A collector receives data in the form of `GET` or `POST` requests from the trackers, and write the data to either logs or streams (for further processing).
 
-__[Read more](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setting-up-your-aws-environment/index.md)__
+**[Read more](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setting-up-your-aws-environment/index.md)**
 
 ### Context
 
@@ -29,7 +29,7 @@ A context is the group of entities associated with or describing the setting in 
 
 Across all our trackers, the approach is the same. Each context is a self-describing JSON. We create an array of all the different contexts that we wish to pass into Snowplow, and then we pass those contexts in generally as the final argument on any track method that we call to capture the event.
 
-__[Read more](http://snowplowanalytics.com/documentation/concepts/contexts)__
+**[Read more](http://snowplowanalytics.com/documentation/concepts/contexts)**
 
 ### Data collection
 
@@ -44,7 +44,7 @@ At this stage, the data that is collected should describe the events as they hav
 
 For each of the above we want to collect as much data describing the event and associated entities as possible.
 
-__[Read more](/docs/collecting-data/index.md)__
+**[Read more](/docs/collecting-data/index.md)**
 
 ### Data modeling
 
@@ -60,7 +60,7 @@ What tables are produced, and the different fields available in each, varies wid
 
 We call this process of aggregating a "data modeling". At the end of the data modeling process, a clean set of tables is available to make it easier to perform analysis on the data.
 
-__[Read more](http://snowplowanalytics.com/documentation/concepts/snowplow-data-pipeline/#data-modeling)__
+**[Read more](http://snowplowanalytics.com/documentation/concepts/snowplow-data-pipeline/#data-modeling)**
 
 ### Entity
 
@@ -70,7 +70,7 @@ An entity is the group of entities associated with or describing the setting in 
 
 Across all our trackers, the approach is the same. Each entity is a self-describing JSON. We create an array of all the different entities that we wish to pass into Snowplow, and then we pass those entities in generally as the final argument on any track method that we call to capture the event.
 
-__[Read more](http://snowplowanalytics.com/documentation/concepts/contexts)__
+**[Read more](http://snowplowanalytics.com/documentation/concepts/contexts)**
 
 ### Event
 
@@ -85,7 +85,7 @@ An event is something that occurred in a particular point in time. Examples of e
 
 Snowplow is an event analytics platform. Once you have setup one or more Snowplow trackers, every time an event occurs, Snowplow should spot the event, generate a packet of data to describe the event, and send that event into the Snowplow data pipeline.
 
-__[Read more](http://snowplowanalytics.com/documentation/concepts/contexts)__
+**[Read more](http://snowplowanalytics.com/documentation/concepts/contexts)**
 
 ### Event Dictionary
 
@@ -95,7 +95,7 @@ When we come to analyse Snowplow data, we need to be able to look at the event d
 
 An event dictionary is a crucial tool in both cases. It is a document that defines the universe of events that a company is interested in tracking.
 
-__[Read more](http://snowplowanalytics.com/documentation/concepts/event-dictionaries-and-schemas)__
+**[Read more](http://snowplowanalytics.com/documentation/concepts/event-dictionaries-and-schemas)**
 
 ### Enrichment
 
@@ -107,7 +107,7 @@ Snowplow supports the following enrichments out-of-the-box. We are working on ma
 2. Referrer query string -> source of traffic
 3. User agent string -> classifying devices, operating systems and browsers
 
-__[Read more](http://snowplowanalytics.com/documentation/concepts/snowplow-data-pipeline/#data-enrichment)__
+**[Read more](http://snowplowanalytics.com/documentation/concepts/snowplow-data-pipeline/#data-enrichment)**
 
 ### Iglu
 
@@ -115,7 +115,7 @@ Iglu is a machine-readable, open-source _schema repository_ for JSON Schema from
 
 Snowplow uses Iglu to store all the schemas associated with the different events and contexts that are captured via Snowplow. When an event or context is sent into Snowplow, it is sent with a reference to the schema for the event or context, which points to the location of the schema for the event or context in Iglu.
 
-__[Read more](/docs/pipeline-components-and-applications/iglu/index.md)__
+**[Read more](/docs/pipeline-components-and-applications/iglu/index.md)**
 
 ### Pipeline
 
@@ -126,13 +126,13 @@ The Snowplow pipeline is built to enable a very clean separation of the followin
 3. [Data modelling](/docs/modeling-your-data/index.md)
 4. [Data analysis](/docs/tutorials/index.md)
 
-__[Read more](/docs/understanding-your-pipeline/index.md)__
+**[Read more](/docs/understanding-your-pipeline/index.md)**
 
 ### Schema DDL
 
 Schema DDL is a set of generators for producing various DDL formats from JSON Schemas. It's tightly coupled with other tools from Snowplow Platform like Iglu and Self-describing JSON and used mostly in Schema Guru.
 
-__[Read more](https://github.com/snowplow-incubator/schema-ddl)__
+**[Read more](https://github.com/snowplow-incubator/schema-ddl)**
 
 ### SchemaVer
 
@@ -142,7 +142,7 @@ SchemaVer is Snowplow Team own schema versioning notion. It is defined as follow
 - `REVISION` when you introduce a schema change which may prevent interaction with some historical data
 - `ADDITION` when you make a schema change that is compatible with all historical data
 
-__[Read more](/docs/understanding-tracking-design/versioning-your-data-structures/index.md)__
+**[Read more](/docs/understanding-tracking-design/versioning-your-data-structures/index.md)**
 
 ### Self-Describing Event
 
@@ -156,7 +156,7 @@ For example, to track an unstructured event with Javascript tracker, you make us
 snowplow_name_here('trackSelfDescribingEvent', <<SELF-DESCRIBING EVENT JSON>>);
 ```
 
-__[Read more](http://snowplowanalytics.com/blog/2013/05/14/snowplow-unstructured-events-guide/)__
+**[Read more](http://snowplowanalytics.com/blog/2013/05/14/snowplow-unstructured-events-guide/)**
 
 ### Self-describing JSON
 
@@ -164,10 +164,10 @@ Self-describing JSON is an individual JSON with its JSON Schema. It generally lo
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics/ad_click/jsonschema/1-0-0",
-    "data": {
-        "bannerId": "4732ce23d345"
-    }
+  "schema": "iglu:com.snowplowanalytics/ad_click/jsonschema/1-0-0",
+  "data": {
+    "bannerId": "4732ce23d345"
+  }
 }
 ```
 
@@ -189,7 +189,7 @@ There are three great use cases to use the shredding functionality for:
 2. Defining your own _custom unstructured events types_, and processing these through the Snowplow pipeline into dedicated tables in Redshift. Retailers can define their own "product view" or "add to basket" events, for example. Media companies can define their own "video play" events.
 3. Defining your own _custom context types_, and processing these through the Snowplow pipeline into dedicated tables in Redshift. You can define your own "user" type, for example, including whatever fields you capture and want to store related to a user.
 
-__[Read more](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md)__
+**[Read more](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md)**
 
 ### Snowplow
 
@@ -199,17 +199,17 @@ Snowplow is an enterprise-strength marketing and product analytics platform. It 
 - Stores your users' behavioural data in a scalable "event data warehouse" you control: in Amazon S3 and (optionally) Amazon Redshift or Postgres
 - Lets you leverage the biggest range of tools to analyze that data, including big data tools (e.g. Hive, Pig, Mahout) via EMR or more traditional tools e.g. Tableau, R, Looker, Chartio to analyze that behavioural data
 
-__[Read more](http://snowplowanalytics.com/)__
+**[Read more](http://snowplowanalytics.com/)**
 
 ### Storage
 
-The  enrichment process takes raw Snowplow collector logs, tidies them up, enriches them (e.g. by adding Geo-IP data, and performing referrer parsing) and then writes the output of that process back to S3 as a cleaned up set of Snowplow event files. The data in these files can be analysed directly by any big data tool that runs on EMR.
+The enrichment process takes raw Snowplow collector logs, tidies them up, enriches them (e.g. by adding Geo-IP data, and performing referrer parsing) and then writes the output of that process back to S3 as a cleaned up set of Snowplow event files. The data in these files can be analysed directly by any big data tool that runs on EMR.
 
 In addition, Snowplow data from those event files could be copied into Amazon Redshift, where it can be analysed using any tool that talks to PostgreSQL.
 
 There are therefore a number of different potential storage modules that Snowplow users can store their data in.
 
-__[Read more](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/index.md)__
+**[Read more](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/index.md)**
 
 ### Structured event
 
@@ -224,16 +224,23 @@ We follow Google five-variable tracking event structure. When you track a struct
 For example, when tracking a custom structured event the specification for the `trackStructEvent` method (Javascript tracker) would follow the pattern:
 
 ```javascript
-snowplow_name_here('trackStructEvent', 'category','action','label','property','value');
+snowplow_name_here(
+  'trackStructEvent',
+  'category',
+  'action',
+  'label',
+  'property',
+  'value'
+)
 ```
 
-__[Read more](/docs/understanding-your-pipeline/canonical-event/index.md)__
+**[Read more](/docs/understanding-your-pipeline/canonical-event/index.md)**
 
 ### Tracker
 
 A tracker is client- or server-side libraries which track customer behaviour by sending Snowplow events to a Collector.
 
-__[Read more](/docs/collecting-data/collecting-from-own-applications/index.md)__
+**[Read more](/docs/collecting-data/collecting-from-own-applications/index.md)**
 
 ### Unstructured event
 
@@ -247,7 +254,7 @@ For example, to track an unstructured event with Javascript tracker, you make us
 snowplow_name_here('trackSelfDescribingEvent', <<SELF-DESCRIBING EVENT JSON>>);
 ```
 
-__[Read more](http://snowplowanalytics.com/blog/2013/05/14/snowplow-unstructured-events-guide/)__
+**[Read more](http://snowplowanalytics.com/blog/2013/05/14/snowplow-unstructured-events-guide/)**
 
 ### Webhook
 
@@ -255,4 +262,4 @@ Snowplow allows you to collect events via the adapters (webhooks) of supported t
 
 Webhooks allow this third-party software to send their own internal event streams to Snowplow collectors for further processing. Webhooks are sometimes referred to as "streaming APIs" or "HTTP response APIs".
 
-__[Read more](/docs/collecting-data/collecting-data-from-third-parties/index.md)__
+**[Read more](/docs/collecting-data/collecting-data-from-third-parties/index.md)**

@@ -1,6 +1,6 @@
 ---
-title: "Running Google Cloud Storage Loader"
-date: "2020-03-02"
+title: 'Running Google Cloud Storage Loader'
+date: '2020-03-02'
 sidebar_position: 0
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Shredding Overview"
-date: "2020-03-06"
+title: 'Shredding Overview'
+date: '2020-03-06'
 sidebar_position: 10
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Emitter"
-date: "2020-02-26"
+title: 'Emitter'
+date: '2020-02-26'
 sidebar_position: 50
 ---
 
@@ -13,14 +13,14 @@ We have two emitters available currently:
 
 ### Constructor
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `endpoint` | The collector uri the emitter should use | Yes | Null |
-| `protocol` | The request Protocol (HTTP or HTTPS) | No | HTTP |
-| `method` | The HTTP Method (GET or POST) | No | POST |
-| `sendLimit` | The amount of events to send at a time | No | 500 |
-| `byteLimitGet` | The byte limit for a GET request | No | 52000 |
-| `byteLimitPost` | The byte limit for a POST request | No | 52000 |
+| **Argument Name** | **Description**                          | **Required?** | **Default** |
+| ----------------- | ---------------------------------------- | ------------- | ----------- |
+| `endpoint`        | The collector uri the emitter should use | Yes           | Null        |
+| `protocol`        | The request Protocol (HTTP or HTTPS)     | No            | HTTP        |
+| `method`          | The HTTP Method (GET or POST)            | No            | POST        |
+| `sendLimit`       | The amount of events to send at a time   | No            | 500         |
+| `byteLimitGet`    | The byte limit for a GET request         | No            | 52000       |
+| `byteLimitPost`   | The byte limit for a POST request        | No            | 52000       |
 
 A full Emitter construction should look like the following:
 

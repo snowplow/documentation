@@ -1,6 +1,6 @@
 ---
-title: "Emitters"
-date: "2020-02-26"
+title: 'Emitters'
+date: '2020-02-26'
 sidebar_position: 40
 ---
 
@@ -38,13 +38,13 @@ public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size =
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$uri` | Collector URI | Yes | Non-empty string |
-| `$protocol` | Collector Protocol (HTTP or HTTPS) | No | String |
-| `$type` | Request Type (POST or GET) | No | String |
-| `$buffer_size` | Amount of events to store before flush | No | Int |
-| `$debug` | Whether or not to log errors | No | Boolean |
+| **Argument**   | **Description**                        | **Required?** | **Validation**   |
+| -------------- | -------------------------------------- | ------------- | ---------------- |
+| `$uri`         | Collector URI                          | Yes           | Non-empty string |
+| `$protocol`    | Collector Protocol (HTTP or HTTPS)     | No            | String           |
+| `$type`        | Request Type (POST or GET)             | No            | String           |
+| `$buffer_size` | Amount of events to store before flush | No            | Int              |
+| `$debug`       | Whether or not to log errors           | No            | Boolean          |
 
 ### Socket
 
@@ -66,14 +66,14 @@ public function __construct($uri, $ssl = NULL, $type = NULL, $timeout = NULL, $b
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$uri` | Collector URI | Yes | Non-empty string |
-| `$ssl` | Whether to use SSL encryption | No | Boolean |
-| `$type` | Request Type (POST or GET) | No | String |
-| `$timeout` | Socket Timeout Limit | No | Int or Float |
-| `$buffer_size` | Amount of events to store before flush | No | Int |
-| `$debug` | Whether or not to log errors | No | Boolean |
+| **Argument**   | **Description**                        | **Required?** | **Validation**   |
+| -------------- | -------------------------------------- | ------------- | ---------------- |
+| `$uri`         | Collector URI                          | Yes           | Non-empty string |
+| `$ssl`         | Whether to use SSL encryption          | No            | Boolean          |
+| `$type`        | Request Type (POST or GET)             | No            | String           |
+| `$timeout`     | Socket Timeout Limit                   | No            | Int or Float     |
+| `$buffer_size` | Amount of events to store before flush | No            | Int              |
+| `$debug`       | Whether or not to log errors           | No            | Boolean          |
 
 ### Curl
 
@@ -97,24 +97,24 @@ public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size =
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$uri` | Collector URI | Yes | Non-empty string |
-| `$protocol` | Collector Protocol (HTTP or HTTPS) | No | String |
-| `$type` | Request Type (POST or GET) | No | String |
-| `$buffer_size` | Amount of events to store before flush | No | Int |
-| `$debug` | Whether or not to log errors | No | Boolean |
+| **Argument**   | **Description**                        | **Required?** | **Validation**   |
+| -------------- | -------------------------------------- | ------------- | ---------------- |
+| `$uri`         | Collector URI                          | Yes           | Non-empty string |
+| `$protocol`    | Collector Protocol (HTTP or HTTPS)     | No            | String           |
+| `$type`        | Request Type (POST or GET)             | No            | String           |
+| `$buffer_size` | Amount of events to store before flush | No            | Int              |
+| `$debug`       | Whether or not to log errors           | No            | Boolean          |
 
 #### Curl Default Settings
 
 The internal emitter default settings are as follows:
 
 - Rolling Window (Number of concurrent requests)
-    - POST: 10
-    - GET: 30
+  - POST: 10
+  - GET: 30
 - Curl Buffer (Number of times we need to hit the emitters buffer size before sending)
-    - POST: 50
-    - GET: 250
+  - POST: 50
+  - GET: 250
 
 These settings are currently not editable from the constructor; however, the values are stored within a `Constants.class` if you must make changes.
 
@@ -146,16 +146,16 @@ public function __construct($uri, $protocol = NULL, $type = NULL, $workers = NUL
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$uri` | Collector URI | Yes | Non-empty string |
-| `$protocol` | Collector Protocol (HTTP or HTTPS) | No | String |
-| `$type` | Request Type (POST or GET) | No | String |
-| `$workers` | Amount of background workers | No | Int |
-| `$timeout` | Worker Timeout | No | Int or Float |
-| `$buffer_size` | Amount of events to store before flush | No | Int |
-| `$debug` | Whether or not to log errors | No | Boolean |
-| `$log_dir` | The directory for event log and worker log subdirectories to be created in | No | String |
+| **Argument**   | **Description**                                                            | **Required?** | **Validation**   |
+| -------------- | -------------------------------------------------------------------------- | ------------- | ---------------- |
+| `$uri`         | Collector URI                                                              | Yes           | Non-empty string |
+| `$protocol`    | Collector Protocol (HTTP or HTTPS)                                         | No            | String           |
+| `$type`        | Request Type (POST or GET)                                                 | No            | String           |
+| `$workers`     | Amount of background workers                                               | No            | Int              |
+| `$timeout`     | Worker Timeout                                                             | No            | Int or Float     |
+| `$buffer_size` | Amount of events to store before flush                                     | No            | Int              |
+| `$debug`       | Whether or not to log errors                                               | No            | Boolean          |
+| `$log_dir`     | The directory for event log and worker log subdirectories to be created in | No            | String           |
 
 ### Emitter Debug Mode
 

@@ -1,6 +1,6 @@
 ---
-title: "Debugger"
-date: "2021-03-28"
+title: 'Debugger'
+date: '2021-03-28'
 sidebar_position: 5000
 ---
 
@@ -11,9 +11,9 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ```
 
 | Tracker Distribution | Included |
-| --- | --- |
-| `sp.js` | ❌ |
-| `sp.lite.js` | ❌ |
+| -------------------- | -------- |
+| `sp.js`              | ❌       |
+| `sp.lite.js`         | ❌       |
 
 ## Download
 
@@ -24,7 +24,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-debugger@latest/dist/index.umd.min.js",
   ["snowplowDebugger", "DebuggerPlugin"]
 );
@@ -45,7 +45,7 @@ info = 4
 Then you can pass your chosen log level when adding the plugin:
 
 ```
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-debugger@latest/dist/index.umd.min.js",
   ["snowplowDebugger", "DebuggerPlugin"],
   [ 4 ]

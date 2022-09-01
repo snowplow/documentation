@@ -1,8 +1,8 @@
 ---
-title: "Setup Snowplow BDP on GCP"
-date: "2020-01-30"
+title: 'Setup Snowplow BDP on GCP'
+date: '2020-01-30'
 sidebar_position: 20
-coverImage: "gcp_logo.png"
+coverImage: 'gcp_logo.png'
 ---
 
 ## Request your pipeline through Snowplow BDP Console

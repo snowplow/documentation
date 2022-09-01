@@ -1,6 +1,6 @@
 ---
-title: "Query your data"
-date: "2021-10-06"
+title: 'Query your data'
+date: '2021-10-06'
 sidebar_position: 200
 ---
 

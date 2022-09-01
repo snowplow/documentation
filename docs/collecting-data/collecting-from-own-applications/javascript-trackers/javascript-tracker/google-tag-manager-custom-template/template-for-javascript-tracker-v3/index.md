@@ -1,6 +1,6 @@
 ---
-title: "Template for JavaScript Tracker v3"
-date: "2021-11-18"
+title: 'Template for JavaScript Tracker v3'
+date: '2021-11-18'
 sidebar_position: 100
 ---
 

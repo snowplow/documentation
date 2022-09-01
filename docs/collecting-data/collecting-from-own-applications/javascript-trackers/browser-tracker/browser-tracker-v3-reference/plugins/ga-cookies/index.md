@@ -1,6 +1,6 @@
 ---
-title: "GA Cookies"
-date: "2021-04-07"
+title: 'GA Cookies'
+date: '2021-04-07'
 sidebar_position: 10000
 ---
 
@@ -21,13 +21,13 @@ If this plugin is used, the tracker will look for Google Analytics cookies (spec
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { GaCookiesPlugin } from '@snowplow/browser-plugin-ga-cookies';
+import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { GaCookiesPlugin } from '@snowplow/browser-plugin-ga-cookies'
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ GaCookiesPlugin() ],
-});
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
+  plugins: [GaCookiesPlugin()],
+})
 ```
 
 ### Context
@@ -35,5 +35,5 @@ newTracker('sp1', '{{collector_url}}', {
 Adding this plugin will automatically capture the following context:
 
 | Context                                                                                                                                                          | Example                                           |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
 | [iglu:com.google.analytics/cookies/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.analytics/cookies/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-30-at-22.12.03.png) |

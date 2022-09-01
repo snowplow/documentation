@@ -1,6 +1,6 @@
 ---
-title: "Google Analytics Plugin"
-date: "2020-08-21"
+title: 'Google Analytics Plugin'
+date: '2020-08-21'
 sidebar_position: 280
 ---
 
@@ -24,7 +24,7 @@ Where `https://mycollector.mydomain.net` is your Snowplow collector endpoint.
 
 ## [](https://github.com/snowplow-incubator/snowplow-google-analytics-plugin#deployment-with-google-tag-manager)Deployment with Google Tag Manager
 
-Google Tag Manager does not currently support loading plugins when using Google Analytics tag templates. A common workaround is to use a Custom HTML tag to load the tracker with the plugin, but this has the unfortunate consequence of requiring that _all_ tags to which the plugin should be applied use the same tracker name. This is difficult to do with Google Tag Manager in a way that doesn't compromise data collection quality.
+Google Tag Manager does not currently support loading plugins when using Google Analytics tag templates. A common workaround is to use a Custom HTML tag to load the tracker with the plugin, but this has the unfortunate consequence of requiring that *all* tags to which the plugin should be applied use the same tracker name. This is difficult to do with Google Tag Manager in a way that doesn't compromise data collection quality.
 
 The best way to deploy this using Google Tag Manager is to replicate the plugin functionality by overwriting the relevant task in the GA hit builder task queue. But instead of modifying `sendHitTask` directly, a safer way is to approach it via `customTask`.
 
@@ -36,16 +36,16 @@ Create a new Custom JavaScript variable, and name it {{customTask - Snowplow dup
 function() {
   // Add your snowplow collector endpoint here
   var endpoint = 'https://mycollector.mydomain.com/';
-  
+
   return function(model) {
     var vendor = 'com.google.analytics';
     var version = 'v1';
     var path = ((endpoint.substr(-1) !== '/') ? endpoint + '/' : endpoint) + vendor + '/' + version;
-    
+
     var globalSendTaskName = '_' + model.get('trackingId') + '_sendHitTask';
-    
+
     var originalSendHitTask = window[globalSendTaskName] = window[globalSendTaskName] || model.get('sendHitTask');
-    
+
     model.set('sendHitTask', function(sendModel) {
       var payload = sendModel.get('hitPayload');
       originalSendHitTask(sendModel);
@@ -70,8 +70,8 @@ Regardless of whether you choose to add this variable directly to the tags' sett
 
 1. Browse to the tags' **More Settings** option, expand it, and then expand **Fields to set**. If you are editing the tag directly (i.e. not using a Google Analytics Settings variable), you will need to check "Enable overriding settings in this tag" first.
 2. Add a new field with:
-    - **Field name**: customTask
-    - **Value**: {{customTask - Snowplow duplicator}}
+   - **Field name**: customTask
+   - **Value**: {{customTask - Snowplow duplicator}}
 
 All tags which have this field set will now send the Google Analytics payload to the Snowplow endpoint.
 

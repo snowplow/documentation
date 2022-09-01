@@ -1,6 +1,6 @@
 ---
-title: "Getting the domain user information from the Snowplow Cookie"
-date: "2020-03-03"
+title: 'Getting the domain user information from the Snowplow Cookie'
+date: '2020-03-03'
 sidebar_position: 500
 ---
 
@@ -21,9 +21,9 @@ function getSnowplowDuid(cookieName) {
   var match = document.cookie.match(matcher);
   var split = match[1].split('.');
   if (match && match[1]) {
-    return { 
-      'domain_userid': split[0], 
-      'domain_sessionidx': split[2], 
+    return {
+      'domain_userid': split[0],
+      'domain_sessionidx': split[2],
       'domain_sessionid': split[5]
     }
   } else {

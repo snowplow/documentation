@@ -1,6 +1,6 @@
 ---
-title: "Tracking Events"
-date: "2020-09-03"
+title: 'Tracking Events'
+date: '2020-09-03'
 sidebar_position: 400
 ---
 
@@ -10,13 +10,13 @@ Snowplow has been built to enable you to track a wide range of events that occur
 
 Tracking methods supported by the Node.js Tracker at a glance:
 
-| **Function** | **Description** |
-| --- | --- |
-| [`trackScreenView()`](#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageView()`](#page-view) | Track and record views of web pages. |
-| [`trackEcommerceTransactionWithItems()`](#ecommerce-transaction) | Track an ecommerce transaction with items |
-| [`trackStructEvent()`](#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event |
+| **Function**                                                     | **Description**                                        |
+| ---------------------------------------------------------------- | ------------------------------------------------------ |
+| [`trackScreenView()`](#screen-view)                              | Track the user viewing a screen within the application |
+| [`trackPageView()`](#page-view)                                  | Track and record views of web pages.                   |
+| [`trackEcommerceTransactionWithItems()`](#ecommerce-transaction) | Track an ecommerce transaction with items              |
+| [`trackStructEvent()`](#struct-event)                            | Track a Snowplow custom structured event               |
+| [`trackUnstructEvent()`](#unstruct-event)                        | Track a Snowplow custom unstructured event             |
 
 Details of other tracking methods are available in the documentation for the [tracker core](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/node-js-tracker/javascript-tracker-core/index.md).
 
@@ -88,12 +88,12 @@ Timestamp is counted in milliseconds since the Unix epoch - the same format as g
 
 Use `trackScreenView()` to track a user viewing a screen (or equivalent) within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | Non-empty string |
-| `id` | Unique identifier for this screen | No | String |
-| `context` | Custom context | No | Array |
-| `tstamp` | When the screen was viewed | No | Positive integer |
+| **Argument** | **Description**                     | **Required?** | **Type**         |
+| ------------ | ----------------------------------- | ------------- | ---------------- |
+| `name`       | Human-readable name for this screen | No            | Non-empty string |
+| `id`         | Unique identifier for this screen   | No            | String           |
+| `context`    | Custom context                      | No            | Array            |
+| `tstamp`     | When the screen was viewed          | No            | Positive integer |
 
 `name` and `id` are not individually required, but you must provide at least one of them.
 
@@ -107,13 +107,13 @@ t.trackScreenView("HUD > Save Game", "screen23", null, 1368725287000);
 
 Use `trackPageView()` to track a user viewing a page within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `pageUrl` | The URL of the page | Yes | Non-empty string |
-| `pageTitle` | The title of the page | No | String |
-| `referrer` | The address which linked to the page | No | String |
-| `context` | Custom context | No | Array |
-| `tstamp` | When the screen was viewed | No | Positive integer |
+| **Argument** | **Description**                      | **Required?** | **Type**         |
+| ------------ | ------------------------------------ | ------------- | ---------------- |
+| `pageUrl`    | The URL of the page                  | Yes           | Non-empty string |
+| `pageTitle`  | The title of the page                | No            | String           |
+| `referrer`   | The address which linked to the page | No            | String           |
+| `context`    | Custom context                       | No            | Array            |
+| `tstamp`     | When the screen was viewed           | No            | Positive integer |
 
 Example:
 
@@ -125,31 +125,31 @@ t.trackPageView("www.example.com", "example", "www.referrer.com");
 
 Use `trackEcommerceTransactionWithItems()` to track an ecommerce transaction on the transaction level. Arguments:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `orderId` | ID of the eCommerce transaction | Yes | Non-empty string |
-| `affiliation` | Transaction affiliation | No | String |
-| `totalValue` | Total transaction value | Yes | Number |
-| `taxValue` | Transaction tax value | No | Number |
-| `shipping` | Delivery cost charged | No | Number |
-| `city` | Delivery address city | No | String |
-| `state` | Delivery address state | No | String |
-| `country` | Delivery address country | No | String |
-| `currency` | Currency | No | String |
-| `items` | Array of items in the transaction | No | Array |
-| `context` | Custom context | No | Array |
-| `tstamp` | When the transaction event occurred | No | Positive integer |
+| **Argument**  | **Description**                     | **Required?** | **Type**         |
+| ------------- | ----------------------------------- | ------------- | ---------------- |
+| `orderId`     | ID of the eCommerce transaction     | Yes           | Non-empty string |
+| `affiliation` | Transaction affiliation             | No            | String           |
+| `totalValue`  | Total transaction value             | Yes           | Number           |
+| `taxValue`    | Transaction tax value               | No            | Number           |
+| `shipping`    | Delivery cost charged               | No            | Number           |
+| `city`        | Delivery address city               | No            | String           |
+| `state`       | Delivery address state              | No            | String           |
+| `country`     | Delivery address country            | No            | String           |
+| `currency`    | Currency                            | No            | String           |
+| `items`       | Array of items in the transaction   | No            | Array            |
+| `context`     | Custom context                      | No            | Array            |
+| `tstamp`      | When the transaction event occurred | No            | Positive integer |
 
 The `items` argument is an array of dictionaries. Each dictionary represents one item in the transaction. These are the keys which may appear in the dictionary:
 
-| **Field** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `"sku"` | Item SKU | Yes | Non-empty string |
-| `"price"` | Item price | Yes | Number |
-| `"quantity"` | Item quantity | Yes | Int |
-| `"name"` | Item name | No | String |
-| `"category"` | Item category | No | String |
-| `"context"` | Custom context for the event | No | Array |
+| **Field**    | **Description**              | **Required?** | **Type**         |
+| ------------ | ---------------------------- | ------------- | ---------------- |
+| `"sku"`      | Item SKU                     | Yes           | Non-empty string |
+| `"price"`    | Item price                   | Yes           | Number           |
+| `"quantity"` | Item quantity                | Yes           | Int              |
+| `"name"`     | Item name                    | No            | String           |
+| `"category"` | Item category                | No            | String           |
+| `"context"`  | Custom context for the event | No            | Array            |
 
 Example:
 
@@ -170,15 +170,15 @@ t.trackEcommerceTransaction("order-456", null, 142, 20, 12.99, "London", null, "
 
 Use `trackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | Non-empty string |
-| `action` | Defines the type of user interaction which this event involves | Yes | Non-empty string |
-| `label` | A string to provide additional dimensions to the event data | No | String |
-| `property` | A string describing the object or the action performed on it | No | String |
-| `value` | A value to provide numerical data about the event | No | Number |
-| `context` | Custom context for the event | No | Array |
-| `tstamp` | When the structured event occurred | No | Positive integer |
+| **Argument** | **Description**                                                  | **Required?** | **Type**         |
+| ------------ | ---------------------------------------------------------------- | ------------- | ---------------- |
+| `category`   | The grouping of structured events which this `action` belongs to | Yes           | Non-empty string |
+| `action`     | Defines the type of user interaction which this event involves   | Yes           | Non-empty string |
+| `label`      | A string to provide additional dimensions to the event data      | No            | String           |
+| `property`   | A string describing the object or the action performed on it     | No            | String           |
+| `value`      | A value to provide numerical data about the event                | No            | Number           |
+| `context`    | Custom context for the event                                     | No            | Array            |
+| `tstamp`     | When the structured event occurred                               | No            | Positive integer |
 
 Example:
 
@@ -192,11 +192,11 @@ Use `trackUnstructEvent()` to track a custom event which consists of a name an
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `properties` | The properties of the event | Yes | JSON |
-| `context` | Custom context for the event | No | Array |
-| `tstamp` | When the unstructured event occurred | No | Positive integer |
+| **Argument** | **Description**                      | **Required?** | **Type**         |
+| ------------ | ------------------------------------ | ------------- | ---------------- |
+| `properties` | The properties of the event          | Yes           | JSON             |
+| `context`    | Custom context for the event         | No            | Array            |
+| `tstamp`     | When the unstructured event occurred | No            | Positive integer |
 
 Example:
 

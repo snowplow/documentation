@@ -1,14 +1,14 @@
 ---
-title: "Send a test event"
-date: "2021-07-08"
+title: 'Send a test event'
+date: '2021-07-08'
 sidebar_position: 100
 ---
 
-Now your pipeline is up and running, we can send a simple page\_view event to it to validate that it is working.
+Now your pipeline is up and running, we can send a simple page_view event to it to validate that it is working.
 
 ##### Using cURL
 
-Send a simple request using cURL from your terminal. This example is a typical page\_view event, which has been taken from this website.
+Send a simple request using cURL from your terminal. This example is a typical page_view event, which has been taken from this website.
 
 The example will also send a sample "failed event" (a custom `product_view` event that will fail due to an appropriate schema not being available to validate against) so that you can get a better understanding of how bad events are generated and what they look like.
 

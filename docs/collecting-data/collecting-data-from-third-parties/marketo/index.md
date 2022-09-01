@@ -1,6 +1,6 @@
 ---
-title: "Marketo"
-date: "2020-02-26"
+title: 'Marketo'
+date: '2020-02-26'
 sidebar_position: 70
 ---
 
@@ -40,10 +40,10 @@ To further distinguish the webhooks 3 additional fields are included: “name”
 
 In the below example the webhook is called at the 3rd step in Campaign A’s flow.
 
-**_NOTE:_ change the token names for the first 3 fields to align with the event your own webhook is activated on.**
+***NOTE:* change the token names for the first 3 fields to align with the event your own webhook is activated on.**
 
 ```json
-{   
+{
    "name": {{my.Campaign A}},
    "description": {{my.Campaign A desc}},
    "step": {{my.Campaign A step}},
@@ -198,7 +198,7 @@ In the below example the webhook is called at the 3rd step in Campaign A’s flo
 1. Create or edit an existing smart campaign.
 2. Go to the **Flow** tab and drag in the **Call Webhook** flow action.
 3. Select the name of the webhook from the first step.
-    - You can also use webhooks in a smart list.
-    - You can also use webhooks in **Add Choice** in a flow step.
+   - You can also use webhooks in a smart list.
+   - You can also use webhooks in **Add Choice** in a flow step.
 
 The selected webhook will now be called whenever people enter the smart campaign flow. If you’d like to test a webhook before sending to Snowplow we recommend substituting the Snowplow webhook URL with a [Request Bin](https://requestb.in/)

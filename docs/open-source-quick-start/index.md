@@ -1,6 +1,6 @@
 ---
-title: "Snowplow Open Source Quick Start"
-date: "2021-07-08"
+title: 'Snowplow Open Source Quick Start'
+date: '2021-07-08'
 sidebar_position: 40
 ---
 

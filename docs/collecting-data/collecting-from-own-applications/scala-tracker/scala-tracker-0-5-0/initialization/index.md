@@ -1,6 +1,6 @@
 ---
-title: "Initialization"
-date: "2020-02-26"
+title: 'Initialization'
+date: '2020-02-26'
 sidebar_position: 20
 ---
 
@@ -76,9 +76,9 @@ To add a callback to `AsyncBatchEmitter` you can use following approach:
 def emitterCallback(params: CollectorParams, req: CollectorRequest, res: CollectorResponse): Unit = {
   res match {
     case TEmitter.CollectorSuccess(_) => ()
-    case TEmitter.CollectorFailure(code) => 
+    case TEmitter.CollectorFailure(code) =>
       devopsIncident(s"Scala Tracker got unexpected HTTP code $code from ${params.getUri}")
-    case TEmitter.TrackerFailure(exception) => 
+    case TEmitter.TrackerFailure(exception) =>
       devopsIncident(s"Scala Tracker failed to reach ${params.getUri} with following exception $exception after ${req.attempt} attempt")
     case TEmitter.RetriesExceeded(failure) =>
       devopsIncident(s"Scala Tracker has stopped trying to deliver payload after following failure: $failure")

@@ -1,6 +1,6 @@
 ---
-title: "Snowplow Client Configuration"
-date: "2021-11-24"
+title: 'Snowplow Client Configuration'
+date: '2021-11-24'
 sidebar_position: 100
 ---
 
@@ -22,7 +22,7 @@ It is recommended to rename `sp.js` if enabling this setting, as many adblocke
 
 ![](images/spjssettings.png)
 
-You can request _any_ version of the Snowplow JavaScript Tracker with this setting enabled. e.g. `https://{{gtm-ss-url}}/3.1.6/776b5b25.js` will load v3.1.6, or `https://{{gtm-ss-url}}/2.18.2/776b5b25.js` will load v2.18.2.
+You can request *any* version of the Snowplow JavaScript Tracker with this setting enabled. e.g. `https://{{gtm-ss-url}}/3.1.6/776b5b25.js` will load v3.1.6, or `https://{{gtm-ss-url}}/2.18.2/776b5b25.js` will load v2.18.2.
 
 ## Additional Options
 

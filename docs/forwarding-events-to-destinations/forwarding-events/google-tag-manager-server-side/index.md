@@ -1,6 +1,6 @@
 ---
-title: "Google Tag Manager Server Side"
-date: "2021-11-24"
+title: 'Google Tag Manager Server Side'
+date: '2021-11-24'
 sidebar_position: 10
 ---
 
@@ -25,9 +25,9 @@ GTM SS with Snowplow can be setup in two different configurations.
 
 Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS after being processed by your Snowplow Pipeline.
 
-| Open Source | Snowplow BDP |
-| --- | --- |
-| ❗ (See documentation) | ✔️ |
+| Open Source                                                                                                                                                    | Snowplow BDP                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| ❗ (See documentation)                                                                                                                                         | ✔️                                                                          |
 | [Documentation](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/building-an-enriched-event-relay-for-gtm-ss/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ### Server Side Tag Manager (Pre-pipeline)
@@ -35,8 +35,8 @@ Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS a
 Use GTM SS to relay raw events before the Snowplow pipeline to destinations, including to your Snowplow pipeline.
 
 | Open Source | Snowplow BDP |
-| --- | --- |
-| ✔️ | ✔️ |
+| ----------- | ------------ |
+| ✔️          | ✔️           |
 
 ## Deploying Google Tag Manager Server Side
 

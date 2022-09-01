@@ -1,8 +1,8 @@
 ---
-title: "Setup Snowplow BDP on AWS"
-date: "2020-01-30"
+title: 'Setup Snowplow BDP on AWS'
+date: '2020-01-30'
 sidebar_position: 10
-coverImage: "aws_logo_0.png"
+coverImage: 'aws_logo_0.png'
 ---
 
 To setup Snowplow, simply follow the ['Getting Started' steps in the Snowplow BDP Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
@@ -43,7 +43,7 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 1. Access the IAM control panel within the sub-account
 2. Go to Access management > Roles and select Create role
 3. Select "Another AWS account"  
-    (Account ID: 793733611312 Require MFA: true)
+   (Account ID: 793733611312 Require MFA: true)
 4. Select the policy you created earlier
 5. Call the role "SnowplowAdmin" or similar
 
@@ -89,10 +89,10 @@ You will need to share this role with us as part of filling out the setup form i
  "secretsmanager:DescribeSecret",
  "secretsmanager:GetResourcePolicy",
  "secretsmanager:PutSecretValue",
- "secretsmanager:GetSecretValue" 
+ "secretsmanager:GetSecretValue"
 ```
 
-For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html). 
+For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
 
 ### Set up Role and IAM Permissions with **CloudFormation**
 

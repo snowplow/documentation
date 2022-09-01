@@ -1,6 +1,6 @@
 ---
-title: "Adding filters to your recovery"
-date: "2021-10-13"
+title: 'Adding filters to your recovery'
+date: '2021-10-13'
 sidebar_position: 3000
 ---
 
@@ -12,8 +12,8 @@ You want your recovery steps to apply only to events that need these recovery st
 
 As examples you could target one or more of:
 
-- Certain Schema e.g. only where schema name = add\_to\_cart\_1\_0\_0
-- Certain keyword (For example, app\_id, or URL) e.g. only where app\_id = website
+- Certain Schema e.g. only where schema name = add_to_cart_1_0_0
+- Certain keyword (For example, app_id, or URL) e.g. only where app_id = website
 - Certain value for a specific field, etc e.g. only where currency < 3
 
 If there is a match the event will be processed (it will be filtered in), if there is not a match it will not be process (it will be filtered out).

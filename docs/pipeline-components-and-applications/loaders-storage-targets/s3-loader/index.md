@@ -1,6 +1,6 @@
 ---
-title: "S3 Loader"
-date: "2020-11-24"
+title: 'S3 Loader'
+date: '2020-11-24'
 sidebar_position: 0
 ---
 
@@ -63,9 +63,9 @@ docker run \
       --log-opt awslogs-group=snowplow-s3-loader \
       --log-opt awslogs-stream=`ec2metadata --instance-id` \
       --network host \
-      -v $(pwd):/snowplow/config \      
-      -e 'JAVA_OPTS=-Xms512M -Xmx1024M -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN' \           
-      snowplow/snowplow-s3-loader:2.2.1 \       
+      -v $(pwd):/snowplow/config \
+      -e 'JAVA_OPTS=-Xms512M -Xmx1024M -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN' \
+      snowplow/snowplow-s3-loader:2.2.1 \
       --config /snowplow/config/config.hocon
 ```
 

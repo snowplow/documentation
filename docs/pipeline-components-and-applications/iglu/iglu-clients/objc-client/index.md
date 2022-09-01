@@ -1,6 +1,6 @@
 ---
-title: "ObjC client"
-date: "2021-03-26"
+title: 'ObjC client'
+date: '2021-03-26'
 sidebar_position: 30
 ---
 
@@ -18,7 +18,7 @@ The Obj-C client is compatible with OSX 10.9+ and iOS 7.0+.
 
 ### Dependencies
 
-The library is dependant on  [KiteJSONValidator](https://github.com/samskiter/KiteJSONValidator) for all JSONSchema validation.
+The library is dependant on [KiteJSONValidator](https://github.com/samskiter/KiteJSONValidator) for all JSONSchema validation.
 
 ## Setup
 
@@ -122,7 +122,7 @@ For example; grabbing your resolver-config from a local source and creating the 
 // Create Client
 NSString * resolverAsString = [IGLUUtilities
   getStringWithFilePath:@"your_iglu_resolver.json"
-  andDirectory:@"Your_Directory" 
+  andDirectory:@"Your_Directory"
   andBundle:[NSBundle bundleForClass:[self class]]];
 
 IGLUClient * client = [[IGLUClient alloc]

@@ -1,6 +1,6 @@
 ---
-title: "Set up the remote configuration"
-date: "2022-08-30"
+title: 'Set up the remote configuration'
+date: '2022-08-30'
 sidebar_position: 50
 ---
 
@@ -20,7 +20,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 1. In your application delegate `AppDelegate.swift` add `import SnowplowTracker`.
 
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
-   
+
 <Tabs groupId="platform">
   <TabItem value="ios" label="iOS" default>
 

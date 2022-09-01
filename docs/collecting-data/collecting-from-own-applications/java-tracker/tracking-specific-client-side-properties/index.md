@@ -1,6 +1,6 @@
 ---
-title: "Tracking specific client-side properties"
-date: "2022-03-24"
+title: 'Tracking specific client-side properties'
+date: '2022-03-24'
 sidebar_position: 40
 ---
 
@@ -12,19 +12,19 @@ The fields tracked using `Subject` tend to be most relevant in client-side track
 
 Add these fields to an event using `Subject`:
 
-| Property         | Field in raw event | Column(s) in enriched event           |
-|------------------|--------------------|---------------------------------------|
-| userId           | uid                | user\_id                              |
-| ipAddress\*      | ip                 | user\_ipaddress                       |
-| timezone\*\*     | tz                 | os\_timezone                          |
-| language         | lang               | br\_lang                              |
-| useragent\*      | ua                 | useragent                             |
-| viewport         | vp                 | br\_viewheight, br\_viewwidth         |
-| screenResolution | res                | dvce\_screenheight, dvce\_screenwidth |
-| colorDepth       | cd                 | br\_colordepth                        |
-| networkUserId\*  | tnuid              | network\_userid                       |
-| domainUserId     | duid               | domain\_userid                        |
-| domainSessionId  | sid                | domain\_sessionid                     |
+| Property         | Field in raw event | Column(s) in enriched event         |
+| ---------------- | ------------------ | ----------------------------------- |
+| userId           | uid                | user_id                             |
+| ipAddress\*      | ip                 | user_ipaddress                      |
+| timezone\*\*     | tz                 | os_timezone                         |
+| language         | lang               | br_lang                             |
+| useragent\*      | ua                 | useragent                           |
+| viewport         | vp                 | br_viewheight, br_viewwidth         |
+| screenResolution | res                | dvce_screenheight, dvce_screenwidth |
+| colorDepth       | cd                 | br_colordepth                       |
+| networkUserId\*  | tnuid              | network_userid                      |
+| domainUserId     | duid               | domain_userid                       |
+| domainSessionId  | sid                | domain_sessionid                    |
 
 Note: the ability to set `domainSessionId` was added in version 0.11.
 
@@ -119,9 +119,9 @@ tracker.track(unstructured);
 The resulting enriched event would have these `Subject` atomic columns populated:
 
 | Column in enriched event | Value / example value                       | Source         |
-|--------------------------|---------------------------------------------|----------------|
-| user\_id                 | "java@snowplowanalytics.com"                | eventSubject   |
-| os\_timezone             | e.g. "Europe/London"                        | eventSubject   |
-| br\_lang                 | "EN"                                        | trackerSubject |
+| ------------------------ | ------------------------------------------- | -------------- |
+| user_id                  | "java@snowplowanalytics.com"                | eventSubject   |
+| os_timezone              | e.g. "Europe/London"                        | eventSubject   |
+| br_lang                  | "EN"                                        | trackerSubject |
 | useragent                | "Mozilla/5.0"                               | eventSubject   |
-| network\_userid          | e.g. "8383057f-2769-4321-ad72-58fa1b22e4b3" | pipeline       |
+| network_userid           | e.g. "8383057f-2769-4321-ad72-58fa1b22e4b3" | pipeline       |

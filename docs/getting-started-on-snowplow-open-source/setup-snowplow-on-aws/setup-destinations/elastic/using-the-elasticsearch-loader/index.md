@@ -1,6 +1,6 @@
 ---
-title: "Using the Elasticsearch Loader"
-date: "2020-02-26"
+title: 'Using the Elasticsearch Loader'
+date: '2020-02-26'
 sidebar_position: 30
 ---
 
@@ -13,8 +13,8 @@ The sink is configured using a HOCON file, for which you can find an example [he
 - `sink.bad`: Where to write error JSONs for bad events. "kinesis", "stderr" or "nsq" (or "none" to ignore bad events).
 - `enabled`: "good" if the input stream contains successfully enriched events; "bad" if it contains bad rows; "plain-json" if it contains plain JSON.
 - `aws.accessKey` and `aws.secretKey`: Change these to your AWS credentials. You can alternatively leave them as "default", in which case the [DefaultAWSCredentialsProviderChain](http://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/auth/DefaultAWSCredentialsProviderChain.html) will be used.
-- `kinesis.initialPosition`: Where to start reading from the stream the first time the app is run. "TRIM\_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT\_TIMESTAMP" for after specified timestamp.
-- `kinesis.initialTimestamp`: Need to be specified when initial position is "AT\_TIMESTAMP"
+- `kinesis.initialPosition`: Where to start reading from the stream the first time the app is run. "TRIM_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT_TIMESTAMP" for after specified timestamp.
+- `kinesis.initialTimestamp`: Need to be specified when initial position is "AT_TIMESTAMP"
 - `kinesis.maxRecords`: Maximum number of records fetched in a single request.
 - `kinesis.region`: The AWS region where the streams are located.
 - `kinesis.appName`: Unique identifier for the app which ensures that if it is stopped and restarted, it will restart at the correct location.

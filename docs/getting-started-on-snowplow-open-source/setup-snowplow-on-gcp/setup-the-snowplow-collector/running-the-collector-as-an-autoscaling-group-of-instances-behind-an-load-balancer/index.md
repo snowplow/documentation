@@ -1,6 +1,6 @@
 ---
-title: "Run the collector as an autoscaling group of instances behind an Load Balancer"
-date: "2020-02-27"
+title: 'Run the collector as an autoscaling group of instances behind an Load Balancer'
+date: '2020-02-27'
 sidebar_position: 30
 ---
 
@@ -19,14 +19,14 @@ First you’ll have to store your config file in some place that your instances 
 - Click the hamburger on the top left corner and find “Compute Engine”, under _Compute_
 - Go to “Instance templates” on the sidebar. Click “Create instance template”
 - Choose the appropriate settings for your case. Do (at least) the following:
-    - Under _Access scopes_, select “Set access for each API” and enable “Cloud PubSub”
-    - Under _Firewall_, select “Allow HTTP traffic”
-    - Click _Management, disk, networking, SSH keys_
+  - Under _Access scopes_, select “Set access for each API” and enable “Cloud PubSub”
+  - Under _Firewall_, select “Allow HTTP traffic”
+  - Click _Management, disk, networking, SSH keys_
 
 ![](images/gcloud-create-instance-template-1.png)
 
-- Under _Networking_, add a tag, such as “collector”. (This is needed to add a Firewall rule)
-- Under _Management_ “Startup script” add the following script (changing the relevant fields for your case):
+- Under *Networking*, add a tag, such as “collector”. (This is needed to add a Firewall rule)
+- Under *Management* “Startup script” add the following script (changing the relevant fields for your case):
 
 ```bash
 #! /bin/bash
@@ -46,13 +46,13 @@ java -jar snowplow-stream-collector-google-pubsub-<VERSION>.jar --config <YOUR-C
 - On the side bar, click “Instance groups”
 - Click “Create instance group”
 - Fill in with the appropriate values. We named our instance group “collectors”.
-- Under _Instance template_ pick the instance template you created previously
-- Set _Autoscaling_ to “On”. By default the Autoscale is based on CPU usage and set with default settings. We’ll leave them as they are for now.
-- Under _Health Check_, pick “Create health check”
-    - Name your health check
-    - Under _Port_ add 8080 or the port you configured above
-    - Under _Request path_ add “/health”
-    - Click “Save and Continue”
+- Under *Instance template* pick the instance template you created previously
+- Set *Autoscaling* to “On”. By default the Autoscale is based on CPU usage and set with default settings. We’ll leave them as they are for now.
+- Under *Health Check*, pick “Create health check”
+  - Name your health check
+  - Under *Port* add 8080 or the port you configured above
+  - Under *Request path* add “/health”
+  - Click “Save and Continue”
 - Click “Create”
 
 ![](images/gcloud-create-instance-group-1.png)
@@ -61,24 +61,24 @@ java -jar snowplow-stream-collector-google-pubsub-<VERSION>.jar --config <YOUR-C
 
 ### Configure the load balancer
 
-- Click the hamburger on the top left corner, and find “Network services” under _Networking_
+- Click the hamburger on the top left corner, and find “Network services” under *Networking*
 - On the side bar, click “Load Balancing”
 - Click “Create load balancer”
 - Select “HTTP load balancing” and click “Start configuration”
 
 ![](images/gcloud-configure-load-balancer-1.png)
 
-- Under _Backend configuration_:
-    - Click “Create a backend service”
-    - Pick an appropriate name
-    - Pick the instance group we created above
-    - Pick the port number we configured earlier
-    - Input a maximum number of requests per second per instance
-    - You can input “Maximum CPU utilization” and “Capacity” at your discretion
-    - Under _Health check_ pick the health check you created previously
-- Under _Host and path rules_: you can just make sure that the backend service selected is the one we just created
-- Under _Frontend configuration_:
-    - Leave _IP_ as “Ephemeral” and leave _Port_ to 80
+- Under *Backend configuration*:
+  - Click “Create a backend service”
+  - Pick an appropriate name
+  - Pick the instance group we created above
+  - Pick the port number we configured earlier
+  - Input a maximum number of requests per second per instance
+  - You can input “Maximum CPU utilization” and “Capacity” at your discretion
+  - Under *Health check* pick the health check you created previously
+- Under *Host and path rules*: you can just make sure that the backend service selected is the one we just created
+- Under *Frontend configuration*:
+  - Leave *IP* as “Ephemeral” and leave *Port* to 80
 - Click “Review and finalize” to check everything is OK.
 - Click “Create”
 - You’ll be able to check out this load balancer IP and port by clicking on it

@@ -1,6 +1,6 @@
 ---
-title: "Igluctl (0.5.0)"
-date: "2020-03-24"
+title: 'Igluctl (0.5.0)'
+date: '2020-03-24'
 sidebar_position: 40
 ---
 
@@ -12,9 +12,9 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 
 - `lint` - validate set of JSON Schemas for syntax and consistency of their properties
 - `static` - work with static Iglu registry
-    - `generate` - generate DDLs and migrations (only for Redshift now) from set of JSON Schemas
-    - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
-    - `s3cp` - copy JSONPaths or schemas to S3 bucket
+  - `generate` - generate DDLs and migrations (only for Redshift now) from set of JSON Schemas
+  - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
+  - `s3cp` - copy JSONPaths or schemas to S3 bucket
 
 Download the latest Igluctl from Github:
 
@@ -33,11 +33,11 @@ Note that Igluctl supports only JRE/JDK8.
 
 ## lint
 
-`igluctl lint` validates JSON Schemas.
+`igluctl lint` validates JSON Schemas.
 
 It is designed to be run against schema registries with a folder structure that follows the [iglu-example-schema-registry](https://github.com/snowplow/iglu-example-schema-registry).
 
-You can validate _all_ the schemas in the registry:
+You can validate *all* the schemas in the registry:
 
 ```
 $ /path/to/igluctl lint /path/to/schema/registry/schemas
@@ -54,14 +54,14 @@ Examples of errors that are identified:
 - JSON Schema has inconsistent self-describing information and path on filesystem
 - JSON Schema has invalid `$schema` keyword. It should be always set to [iglu-specific](http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#), while users tend to set it to Draft v4 or even to self-referencing Iglu URI
 - JSON Schema is invalid against its standard (empty `required`, string `maximum` and similar)
-- JSON Schema contains properties which contradict each other, like `{"type": "integer", "maxLength": 0}` or `{"maximum": 0, "minimum": 10'}`. These schemas are inherently useless as for some valiators there is no JSON instance they can validate
+- JSON Schema contains properties which contradict each other, like `{"type": "integer", "maxLength": 0}` or `{"maximum": 0, "minimum": 10'}`. These schemas are inherently useless as for some valiators there is no JSON instance they can validate
 
 The above cases can very hard to spot without a specialized tool as they are still valid JSONs and in last case it is even valid JSON Schemas - so will validate against a standard JSON schema validator.
 
 `lint` has two options:
 
 - `--skip-warnings` which will omit warnings like unknown properties. However we strongly advise to not use this option.
-- `--skip-checks` which will lint without specified linters, given comma separated. To see available linters and their explanations, `$ /path/to/igluctl --help`
+- `--skip-checks` which will lint without specified linters, given comma separated. To see available linters and their explanations, `$ /path/to/igluctl --help`
 
 Note: `--severityLevel` option is deprecated and removed as of version 0.4.0.
 
@@ -69,14 +69,14 @@ Below are two groups of linters; allowed to be skipped and not allowed to be ski
 
 Igluctl let you skip below checks:
 
-| NAME | DEFINITION |
-| --- | --- |
-| `rootObject` | Check that root of schema has object type and contains properties |
-| `unknownFormats` | Check that schema doesn’t contain unknown formats |
-| `numericMinMax` | Check that schema with numeric type contains both minimum and maximum properties |
-| `stringLength` | Check that schema with string type contains maxLength property or other ways to extract max length |
-| `optionalNull` | Check that non-required fields have null type |
-| `description` | Check that property contains description |
+| NAME             | DEFINITION                                                                                         |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| `rootObject`     | Check that root of schema has object type and contains properties                                  |
+| `unknownFormats` | Check that schema doesn’t contain unknown formats                                                  |
+| `numericMinMax`  | Check that schema with numeric type contains both minimum and maximum properties                   |
+| `stringLength`   | Check that schema with string type contains maxLength property or other ways to extract max length |
+| `optionalNull`   | Check that non-required fields have null type                                                      |
+| `description`    | Check that property contains description                                                           |
 
 A sample usage could be as following:
 
@@ -88,13 +88,13 @@ Note that linter names are case sensitive
 
 Igluctl also includes many checks proving that schemas doesn’t have conflicting expectations (such as `minimum` value bigger than `maximum`). Schemas with such expectations are valid according to specification, but do not make any sense in real-world use cases. These checks are mandatory and cannot be disabled.
 
-`igluctl lint` will exit with status code 1 if encounter at least one error.
+`igluctl lint` will exit with status code 1 if encounter at least one error.
 
 ## static generate
 
-`igluctl static generate` generates corresponding [Redshift](http://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html) DDL files (`CREATE TABLE` statements) and migration scripts (`ALTER TABLE` statements).
+`igluctl static generate` generates corresponding [Redshift](http://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html) DDL files (`CREATE TABLE` statements) and migration scripts (`ALTER TABLE` statements).
 
-This command previously was a part of [Schema Guru](http://github.com/snowplow/schema-guru) and was known as `schema-guru ddl`, but has been moved into iglu in r5 release.
+This command previously was a part of [Schema Guru](http://github.com/snowplow/schema-guru) and was known as `schema-guru ddl`, but has been moved into iglu in r5 release.
 
 ```
 $ ./igluctl static generate $INPUT
@@ -112,34 +112,34 @@ If an input directory is specified with several self-describing JSON schemas wit
 
 For example, having the following Self-describing JSON Schemas as an input:
 
-- schemas/com.acme/click\_event/1-0-0
-- schemas/com.acme/click\_event/1-0-1
-- schemas/com.acme/click\_event/1-0-2
+- schemas/com.acme/click_event/1-0-0
+- schemas/com.acme/click_event/1-0-1
+- schemas/com.acme/click_event/1-0-2
 
 Igluctl will generate the following migration scripts:
 
-- sql/com.acme/click\_event/1-0-0/1-0-1 to alter table from 1-0-0 to 1-0-1
-- sql/com.acme/click\_event/1-0-0/1-0-2 to alter table from 1-0-0 to 1-0-2
-- sql/com.acme/click\_event/1-0-1/1-0-2 to alter table from 1-0-1 to 1-0-2
+- sql/com.acme/click_event/1-0-0/1-0-1 to alter table from 1-0-0 to 1-0-1
+- sql/com.acme/click_event/1-0-0/1-0-2 to alter table from 1-0-0 to 1-0-2
+- sql/com.acme/click_event/1-0-1/1-0-2 to alter table from 1-0-1 to 1-0-2
 
-This migrations (and all subsequent table definitions) are aware of column order and will ensure that new columns are added at the end of the table definition. This means that the tables can be updated in-place with single `ALTER TABLE` statements.
+This migrations (and all subsequent table definitions) are aware of column order and will ensure that new columns are added at the end of the table definition. This means that the tables can be updated in-place with single `ALTER TABLE` statements.
 
 **NOTE**: migrations support is in early beta. Only single alter-table case is supported, particularly “add optional field”.
 
 ### Handling union types
 
-One of the more problematic scenarios to handle when generating Redshift table definitions is handling `UNION` field types e.g. `["integer", "string"]`.
+One of the more problematic scenarios to handle when generating Redshift table definitions is handling `UNION` field types e.g. `["integer", "string"]`.
 
 How should these be represented in SQL DDL? It’s a tough question and we believe there is no perfect solution.
 
 Igluctl provides two options:
 
 1. Union types will be transformed as most general. In the above example (union of an integer and string type) the corresponding Redshift column will be a `VARCHAR(4096)`. This is the default behaviour.
-2. Alternative approach: split the column with product types into separate ones with it’s types as postfix. In the case of a field with type `["string", "integer"]` two corresponding columns will be generated in Redshift: `model_string` and `model_integer`. To get Igluctl to split columns add the following flag: `--split-product-types`.
+2. Alternative approach: split the column with product types into separate ones with it’s types as postfix. In the case of a field with type `["string", "integer"]` two corresponding columns will be generated in Redshift: `model_string` and `model_integer`. To get Igluctl to split columns add the following flag: `--split-product-types`.
 
 ### Missing schema versions
 
-`static generate` command will check versions of schemas inside `input` as following:
+`static generate` command will check versions of schemas inside `input` as following:
 
 - If user specified folder and one of schemas has no 1-0-0 or misses any other schemas in between (like it has 1-0-0 and 1-0-2) - refuse to do anything (but proceed with –force option)
 - If user specified full path to file with schema and this file is not 1-0-0 - just print a warning
@@ -193,7 +193,7 @@ $ ./igluctl static generate $INPUT --no-header
 
 ## static push
 
-`igluctl static push` publishes schemas stored locally to a remote [Scala Iglu Registry](https://github.com/snowplow/iglu/tree/master/2-repositories/iglu-server).
+`igluctl static push` publishes schemas stored locally to a remote [Scala Iglu Registry](https://github.com/snowplow/iglu/tree/master/2-repositories/iglu-server).
 
 It accept three required arguments:
 
@@ -209,9 +209,9 @@ $ ./igluctl static push /path/to/static/registry iglu.acme.com:80/iglu-server f8
 
 ## static s3cp
 
-`igluctl static s3cp` is basically a wrapper around AWS Java SDK and closely follows semantics of `aws s3 cp` command from AWS CLI (you don’t have to install it!). It enables you to upload JSON Schemas or any other files to chosen S3 bucket. Note that it doesn’t perform any syntax/linting checks as it suited to work like simple cp command.
+`igluctl static s3cp` is basically a wrapper around AWS Java SDK and closely follows semantics of `aws s3 cp` command from AWS CLI (you don’t have to install it!). It enables you to upload JSON Schemas or any other files to chosen S3 bucket. Note that it doesn’t perform any syntax/linting checks as it suited to work like simple cp command.
 
-`igluctl static s3cp` accepts two required arguments and several options:
+`igluctl static s3cp` accepts two required arguments and several options:
 
 - `input` - path to your files. Required.
 - `bucket` - S3 bucket name. Required.
@@ -221,11 +221,11 @@ $ ./igluctl static push /path/to/static/registry iglu.acme.com:80/iglu-server f8
 - `profile` - your AWS profile name. This may or or may not be required, depending on your preferred authentication option.
 - `region` - AWS S3 region. Default: `us-west-2`
 
-`igluctl static s3cp` tries to closely follow AWS CLI authentication process. First it checks if profile name or `accessKeyId`/`secretAccessKey` pair provided and uses it. If neither of above provided - it looks into `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` environment variables. If above aren’t available as well - it `~/.aws/config` file. If all above failed - it exits with error.
+`igluctl static s3cp` tries to closely follow AWS CLI authentication process. First it checks if profile name or `accessKeyId`/`secretAccessKey` pair provided and uses it. If neither of above provided - it looks into `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` environment variables. If above aren’t available as well - it `~/.aws/config` file. If all above failed - it exits with error.
 
 ## static deploy
 
-`igluctl static deploy` performs whole schema workflow at once.
+`igluctl static deploy` performs whole schema workflow at once.
 
 It accepts one required arguments:
 

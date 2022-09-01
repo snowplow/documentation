@@ -1,6 +1,6 @@
 ---
-title: "Migration guide: v0.12"
-date: "2022-03-24"
+title: 'Migration guide: v0.12'
+date: '2022-03-24'
 sidebar_position: 70
 ---
 

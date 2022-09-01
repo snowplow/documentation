@@ -1,6 +1,6 @@
 ---
-title: "BigQuery Loader"
-date: "2020-09-29"
+title: 'BigQuery Loader'
+date: '2020-09-29'
 sidebar_position: 500
 ---
 
@@ -12,7 +12,8 @@ There are currently four applications, which are described in detail below. A ty
 - a Mutator app, which keeps track of the fields present in the enriched data and updates the BigQuery table accordingly;
 - a Repeater app, which handles so-called failed inserts.
 
-##   
+##
+
 Technical Architecture
 
 The available tools are:
@@ -20,7 +21,7 @@ The available tools are:
 1. **Snowplow BigQuery StreamLoader**, a standalone Scala app that can be deployed on [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine).
 2. **Snowplow BigQuery Loader**, an alternative to StreamLoader, in the form of a [Google Cloud Dataflow](https://cloud.google.com/dataflow) job.
 3. **Snowplow BigQuery Mutator**, a Scala app that performs table updates to add new columns as required.
-4. **Snowplow BigQuery Repeater**, a Scala app that reads failed inserts (caused by _table update lag_) and re-tries inserting them into BigQuery after some delay, sinking failures into a dead-letter bucket.
+4. **Snowplow BigQuery Repeater**, a Scala app that reads failed inserts (caused by *table update lag*) and re-tries inserting them into BigQuery after some delay, sinking failures into a dead-letter bucket.
 
 ![](images/BQL_100_technical_diagram.png)
 
@@ -58,7 +59,7 @@ The Repeater app is in charge of handling failed inserts. It reads ready-to-load
 
 The loader app inserts data into BigQuery in near real-time. At the same time, it sinks messages containing information about the fields of an event into the `types` topic. It can take up to 10-15 seconds for Mutator to fetch, parse the message and execute an `ALTER TABLE` statement against the table. Additionally, the new column takes some time to propagate and become visible to all workers trying to write to it.
 
-If a new type arrives from the input subscription in this period of time, BigQuery might reject the row containing it and it will be sent to the `failedInserts` topic. This topic contains JSON objects _ready to be loaded into BigQuery_ (ie not canonical Snowplow Enriched event format).
+If a new type arrives from the input subscription in this period of time, BigQuery might reject the row containing it and it will be sent to the `failedInserts` topic. This topic contains JSON objects *ready to be loaded into BigQuery* (ie not canonical Snowplow Enriched event format).
 
 In order to load this data again from `failedInserts` to BigQuery you can use Repeater, which reads a subscription on `failedInserts` and performs `INSERT` statements.
 
@@ -177,7 +178,7 @@ Or to use environment variables for every setting:
 $ docker run \
     -v /path/to/resolver.json:/resolver.json \
     snowplow/snowplow-bigquery-repeater:1.4.2 \
-    --resolver=/resolver.json \ 
+    --resolver=/resolver.json \
     -Dconfig.override_with_env_vars=true
 ```
 
@@ -283,7 +284,7 @@ $ docker run \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
     --bufferSize=20 \ # size of the batch to send to the dead-letter bucket
-    --timeout=20 \ # duration after which bad rows will be sunk into the dead-letter bucket  
+    --timeout=20 \ # duration after which bad rows will be sunk into the dead-letter bucket
     --backoffPeriod=900 # seconds to wait before attempting an insert (calculated against etl_tstamp)
     --verbose # optional, for debugging only
 ```

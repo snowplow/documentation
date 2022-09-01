@@ -1,6 +1,6 @@
 ---
-title: "Upgrade guide"
-date: "2020-04-25"
+title: 'Upgrade guide'
+date: '2020-04-25'
 sidebar_position: 40
 ---
 
@@ -31,7 +31,7 @@ Nothing required unless we want to authenticate loader via storage integration.
 To upgrade Loader from 0.6.x to 0.7.x,
 
 - Drop existing stage at Snowflake
-    - Re-creating stage is required to use storage integration
+  - Re-creating stage is required to use storage integration
 - Follow [the setup page](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/setup/index.md) and create storage integration
 - Create an external stage per [Snowflake docs](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#step-6-create-an-external-stage) step 6.
 - Follow [the configuration page](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/configuration/index.md) and update loader configuration

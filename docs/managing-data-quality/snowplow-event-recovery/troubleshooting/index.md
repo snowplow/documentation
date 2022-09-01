@@ -1,6 +1,6 @@
 ---
-title: "Troubleshooting"
-date: "2020-04-14"
+title: 'Troubleshooting'
+date: '2020-04-14'
 sidebar_position: 50
 ---
 

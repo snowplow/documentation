@@ -1,6 +1,6 @@
 ---
-title: "Set up an SQS buffer"
-date: "2021-08-04"
+title: 'Set up an SQS buffer'
+date: '2021-08-04'
 sidebar_position: 100
 ---
 

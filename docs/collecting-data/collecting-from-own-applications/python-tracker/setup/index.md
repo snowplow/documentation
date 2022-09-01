@@ -1,6 +1,6 @@
 ---
-title: "Setup"
-date: "2020-02-26"
+title: 'Setup'
+date: '2020-02-26'
 sidebar_position: 10
 ---
 
@@ -51,17 +51,15 @@ $ pip install snowplow-tracker[redis]
 $ pip install snowplow-tracker[celery]
 ```
 
-  
-
 To add the Snowplow Tracker as a dependency to your own Python app, edit your `requirements.txt` and add:
 
 ```
 snowplow-tracker==0.10.0
 ```
 
-### easy\_install
+### easy_install
 
-If you are still using easy\_install:
+If you are still using easy_install:
 
 ```
 $ easy_install -U snowplow-tracker
@@ -72,6 +70,6 @@ $ easy_install -U snowplow-tracker
 Please refer to the table below to identify the recommended tracker version for your Python version.
 
 | Python version | snowplow-tracker version |
-| --- | --- |
-| \>=3.5 | 0.10.0 |
-| 2.7 | 0.9.1 |
+| -------------- | ------------------------ |
+| \>=3.5         | 0.10.0                   |
+| 2.7            | 0.9.1                    |

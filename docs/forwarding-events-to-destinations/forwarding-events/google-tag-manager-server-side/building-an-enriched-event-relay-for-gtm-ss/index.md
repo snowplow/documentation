@@ -1,6 +1,6 @@
 ---
-title: "Building an Enriched event relay for GTM SS"
-date: "2021-11-24"
+title: 'Building an Enriched event relay for GTM SS'
+date: '2021-11-24'
 sidebar_position: 999990
 ---
 
@@ -18,7 +18,7 @@ The GTM SS Snowplow Client has an enriched endpoint which accepts enriched event
 2. Create a [Custom Integration application for AWS or GCP](/docs/forwarding-events-to-destinations/forwarding-events/custom-integrations/index.md).
 3. Use an [Analytics SDK](/docs/modeling-your-data/analytics-sdk/index.md) to convert to an Enriched JSON.
 4. Send the JSON event as POST request to `https://{{gtm-ss-url}}/com.snowplowanalytics.snowplow/enriched`.
-    - The payload can be a single Enriched JSON event, or an array of Enriched JSON events.
+   - The payload can be a single Enriched JSON event, or an array of Enriched JSON events.
 
 ### Example CURL request
 

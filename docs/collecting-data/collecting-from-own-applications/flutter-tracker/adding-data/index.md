@@ -1,6 +1,6 @@
 ---
-title: "Adding data to your events: context and more"
-date: "2022-01-31"
+title: 'Adding data to your events: context and more'
+date: '2022-01-31'
 sidebar_position: 4000
 ---
 

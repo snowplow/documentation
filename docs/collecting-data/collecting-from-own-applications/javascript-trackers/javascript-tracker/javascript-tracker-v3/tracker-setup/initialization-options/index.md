@@ -1,6 +1,6 @@
 ---
-title: "Initialization options"
-date: "2021-03-25"
+title: 'Initialization options'
+date: '2021-03-25'
 sidebar_position: 2000
 ---
 
@@ -24,9 +24,9 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   discoverRootDomain: true,
   cookieSameSite: 'Lax', // Recommended
   contexts: {
-    webPage: true // default, can be omitted
-  }
-});
+    webPage: true, // default, can be omitted
+  },
+})
 ```
 
 The tracker will be named “sp” and will send events to the a collector url you specify by replacing `{{collector_url_here}}`. The final argument is the configuration object. Here it is just used to set the app ID and the common webPage context for each event. Each event the tracker sends will have an app ID field set to “my-app-id”.
@@ -50,7 +50,10 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   maxGetBytes: 1000, // available in v3.4+
   postPath: '/custom/path', // Collector must be configured
   crossDomainLinker: function (linkElement) {
-    return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
+    return (
+      linkElement.href === 'http://acme.de' ||
+      linkElement.id === 'crossDomainLink'
+    )
   },
   cookieLifetime: 63072000,
   stateStorageStrategy: 'cookieAndLocalStorage',
@@ -72,8 +75,8 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
     // clientHints: { includeHighEntropy: true }, // Optional
   },
   retryStatusCodes: [],
-  dontRetryStatusCodes: []
-});
+  dontRetryStatusCodes: [],
+})
 ```
 
 We will now go through the various configuration parameters. Note that these are all optional. In fact, you aren’t required to provide any configuration object at all.
@@ -100,11 +103,11 @@ It is recommended that you enable [automatic discovery and setting of the root 
 
 Otherwise, set the cookie domain for the tracker instance using the `cookieDomain` field of the configuration object. If this field is not set, the cookies will not be given a domain.
 
-**WARNING**: _Changing the cookie domain will reset all existing cookies. As a result, it might be a major one-time disruption to data analytics because all visitors to the website will receive a new `domain_userid`._
+**WARNING**: *Changing the cookie domain will reset all existing cookies. As a result, it might be a major one-time disruption to data analytics because all visitors to the website will receive a new `domain_userid`.*
 
 #### Configuring the cookie name
 
-Set the cookie name for the tracker instance using the `cookieName` field of the configuration object. The default is “_sp_“. Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are “\_sp\_id” and “\_sp\_ses” respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
+Set the cookie name for the tracker instance using the `cookieName` field of the configuration object. The default is “_sp_“. Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are “\_sp_id” and “\_sp_ses” respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
 
 Once set, you can retrieve a cookie name thanks to the `getCookieName(basename)` method where basename is id or ses for the domain and session cookie respectively. As an example, you can retrieve the complete name of the domain cookie with `getCookieName('id')`.
 
@@ -143,7 +146,7 @@ The Snowplow JavaScript tracker offers two techniques where tracking can be done
 Recommended configurations when using `anonymousTracking`:
 
 ```javascript
-anonymousTracking: true, 
+anonymousTracking: true,
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
 
@@ -255,7 +258,7 @@ Anonymous tracking has to be disabled for the session context entities to be add
 The [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity consists of the following properties:
 
 | Attribute             | Description                                                                                                   | Required? |
-|-----------------------|---------------------------------------------------------------------------------------------------------------|-----------|
+| --------------------- | ------------------------------------------------------------------------------------------------------------- | --------- |
 | `userId`              | An identifier for the user of the session (same as `domain_userid`).                                          | Yes       |
 | `sessionId`           | An identifier (UUID) for the session (same as `domain_sessionid`).                                            | Yes       |
 | `sessionIndex`        | The index of the current session for this user (same as `domain_sessionidx`).                                 | Yes       |
@@ -288,11 +291,11 @@ This is useful data to capture as browsers are moving away from high entropy Use
 This context be enabled in two ways:
 
 1. `clientHints: true`
-    - This will capture the "basic" client hints
+   - This will capture the "basic" client hints
 2. `clientHints: { includeHighEntropy: true }`
-    - This will capture the "basic" client hints as well as hints that are deemed "High Entropy" and could be used to fingerprint users. Browsers may choose to prompt the user before making this data available.
+   - This will capture the "basic" client hints as well as hints that are deemed "High Entropy" and could be used to fingerprint users. Browsers may choose to prompt the user before making this data available.
 
-To see what will be captured please see the JsonSchema file [org.ietf/http\_client\_hints/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0).
+To see what will be captured please see the JsonSchema file [org.ietf/http_client_hints/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0).
 
 ##### geolocation context
 
@@ -325,7 +328,7 @@ We recommend leaving the `bufferSize` as the default value of 1. This ensure tha
 If you have set `bufferSize` to greater than 1, you can flush the buffer using the `flushBuffer` method:
 
 ```javascript
-snowplow('flushBuffer');
+snowplow('flushBuffer')
 ```
 
 For instance, if you wish to send several events at once, you might make the API calls to create the events and store them and then and call `flushBuffer` afterwards to ensure they are all sent before the user leaves the page.
@@ -389,9 +392,9 @@ If you want to decorate every link, regardless of its destination:
 Note that the above will decorate “links” which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`). To exclude these links:
 
 ```javascript
-snowplow('crossDomainLinker', function(linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0;
-});
+snowplow('crossDomainLinker', function (linkElement) {
+  return linkElement.href.indexOf('javascript:') < 0
+})
 ```
 
 Note that when the tracker loads, it does not immediately decorate links. Instead it adds event listeners to links which decorate them as soon as a user clicks on them or navigates to them using the keyboard. This ensures that the timestamp added to the querystring is fresh.
@@ -400,11 +403,14 @@ If further links get added to the page after the tracker has loaded, you can use
 
 ```javascript
 snowplow('crossDomainLinker', function (linkElement) {
-  return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-});
+  return (
+    linkElement.href === 'http://acme.de' ||
+    linkElement.id === 'crossDomainLink'
+  )
+})
 ```
 
-_Warning_: If you enable link decoration, you should also make sure that at least one event is fired on the page. Firing an event causes the tracker to write the domain\_userid to a cookie. If the cookie doesn’t exist when the user leaves the page, the tracker will generate a new ID for them when they return rather than keeping the old ID.
+_Warning_: If you enable link decoration, you should also make sure that at least one event is fired on the page. Firing an event causes the tracker to write the domain_userid to a cookie. If the cookie doesn’t exist when the user leaves the page, the tracker will generate a new ID for them when they return rather than keeping the old ID.
 
 #### Configuring the maximum payload size in bytes
 
@@ -440,13 +446,13 @@ Whenever tracker initialized on your domain – it will set domain-specific visi
 ```javascript
 snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
   cookieLifetime: 86400 * 31,
-});
+})
 ```
 
 or
 
 ```javascript
-snowplow('setVisitorCookieTimeout', 86400 * 30);  // 30 days
+snowplow('setVisitorCookieTimeout', 86400 * 30) // 30 days
 ```
 
 If `cookieLifetime` is set to `0`, the cookie will expire at the end of the session (when the browser closes). If set to `-1`, the first-party cookies will be disabled.

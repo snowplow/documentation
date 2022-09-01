@@ -1,6 +1,6 @@
 ---
-title: "Tracking Events"
-date: "2021-11-16"
+title: 'Tracking Events'
+date: '2021-11-16'
 sidebar_position: 2000
 ---
 
@@ -10,11 +10,11 @@ We provide several built-in methods to help you track different kinds of events.
 
 Tracking methods supported by the Roku Tracker:
 
-| Method | Event type tracked |
-| --- | --- |
+| Method           | Event type tracked                                  |
+| ---------------- | --------------------------------------------------- |
 | `selfDescribing` | Custom event based on "self-describing" JSON schema |
-| `structured` | Semi-custom structured event |
-| `screenView` | View of screen |
+| `structured`     | Semi-custom structured event                        |
+| `screenView`     | View of screen                                      |
 
 All the methods share common features and parameters. Every type of event can have an optional context added. A Timestamp can also be provided for all event types to override the default event timestamp. See the next page to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
 
@@ -61,13 +61,13 @@ This method provides a halfway-house between tracking fully user-defined self-de
 
 As these fields are fairly arbitrary, we recommend following the advice in this table how to define structured events. It's important to be consistent throughout the business about how each field is used.
 
-| Argument | Description | Required in event? |
-| --- | --- | --- |
-| `se_ca` | The grouping of structured events which this action belongs to | Yes |
-| `se_ac` | Defines the type of user interaction which this event involves | Yes |
-| `se_la` | Often used to refer to the 'object' the action is performed on | No |
-| `se_pr` | Describing the 'object', or the action performed on it | No |
-| `se_va` | Provides numerical data about the event | No |
+| Argument | Description                                                    | Required in event? |
+| -------- | -------------------------------------------------------------- | ------------------ |
+| `se_ca`  | The grouping of structured events which this action belongs to | Yes                |
+| `se_ac`  | Defines the type of user interaction which this event involves | Yes                |
+| `se_la`  | Often used to refer to the 'object' the action is performed on | No                 |
+| `se_pr`  | Describing the 'object', or the action performed on it         | No                 |
+| `se_va`  | Provides numerical data about the event                        | No                 |
 
 Example:
 
@@ -84,7 +84,7 @@ m.global.snowplow.structured = {
 
 Use `screenView` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages. The arguments are `name`, `id`, `type`, and `transitionType`; while all are optional, you must provided at least one of either `name` or `id` to create a valid event. "Name" is the human-readable screen name, and "ID" should be the unique screen ID.
 
-This method creates an unstruct event, by creating and tracking a self-describing event. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen\_view/jsonschema/1-0-0", and the data field will contain the parameters which you provide. That schema is hosted on the schema repository Iglu Central, and so will always be available to your pipeline.
+This method creates an unstruct event, by creating and tracking a self-describing event. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", and the data field will contain the parameters which you provide. That schema is hosted on the schema repository Iglu Central, and so will always be available to your pipeline.
 
 Example:
 

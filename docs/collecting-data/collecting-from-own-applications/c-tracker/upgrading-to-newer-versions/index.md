@@ -1,6 +1,6 @@
 ---
-title: "Upgrading to Newer Versions"
-date: "2022-04-21"
+title: 'Upgrading to Newer Versions'
+date: '2022-04-21'
 sidebar_position: 100
 ---
 

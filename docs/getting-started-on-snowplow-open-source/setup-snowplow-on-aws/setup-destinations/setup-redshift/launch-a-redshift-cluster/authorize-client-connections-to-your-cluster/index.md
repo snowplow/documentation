@@ -1,6 +1,6 @@
 ---
-title: "Authorize client connections to your cluster"
-date: "2020-02-26"
+title: 'Authorize client connections to your cluster'
+date: '2020-02-26'
 sidebar_position: 0
 ---
 

@@ -45,7 +45,7 @@ interface BrowserPlugin {
  to the active logger
  */
  logger?: (logger: Logger) => void;
-} 
+}
 ```
 
 ## Plugin Templates

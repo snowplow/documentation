@@ -1,6 +1,6 @@
 ---
-title: "Redshift loader"
-date: "2022-04-05"
+title: 'Redshift loader'
+date: '2022-04-05'
 sidebar_position: 10
 ---
 

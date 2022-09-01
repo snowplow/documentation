@@ -1,6 +1,6 @@
 ---
-title: "Configuring and running data models via Snowplow BDP"
-date: "2020-12-01"
+title: 'Configuring and running data models via Snowplow BDP'
+date: '2020-12-01'
 sidebar_position: 40
 ---
 
@@ -202,14 +202,14 @@ An example configuration file with all options provided:
 
 - `"enabled"`: Specifies whether the data modeling job will run (`true`) or not (`false`). This is a way to disable or re-enable your data modeling job, even without changing the schedule.
 - `"storage"`: Specifies your data warehouse. Possible values are:
-    - `"Default"`: When your storage target is Redshift or Snowflake.
-    - `"BigQuery"`: When your storage target is BigQuery.
+  - `"Default"`: When your storage target is Redshift or Snowflake.
+  - `"BigQuery"`: When your storage target is BigQuery.
 - `"playbooks"`: This is the array that specifies the playbooks to run and their inter-dependencies. Every playbook, as a JSON object, needs to specify the fields:
-    - `"name"`: the playbook name and
-    - `"dependsOn"`: an array denoting any other playbook names, that this playbook depends on (can be empty).
+  - `"name"`: the playbook name and
+  - `"dependsOn"`: an array denoting any other playbook names, that this playbook depends on (can be empty).
 - `"lockType"`: This specifies what happens when your data model fails. Possible values:
-    - `"hard"`
-    - `"soft"`
+  - `"hard"`
+  - `"soft"`
 
 When a SQL Runner DAG fails there are cases when it is not safe for the model to re-run. That is what a `"hard"` lock does: The data model cannot re-run after a failure, unless it is explicitly unlocked. For it to be unlocked, you will need to make the necessary changes and then contact the Snowplow Support team to unlock it.
 

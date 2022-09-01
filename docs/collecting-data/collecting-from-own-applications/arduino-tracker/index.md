@@ -1,6 +1,6 @@
 ---
-title: "Arduino Tracker"
-date: "2020-02-25"
+title: 'Arduino Tracker'
+date: '2020-02-25'
 sidebar_position: 290
 ---
 
@@ -168,7 +168,7 @@ snowplow.setUserId("boardroom-arduino");
 Tracking functions supported by the Arduino Tracker at a glance:
 
 | **Function**                                                                                     | **Description**                          |
-|--------------------------------------------------------------------------------------------------|------------------------------------------|
+| ------------------------------------------------------------------------------------------------ | ---------------------------------------- |
 | [`trackStructEvent`](https://github.com/snowplow/snowplow/wiki/Arduino-Tracker#trackStructEvent) | Track a Snowplow custom structured event |
 
 ### Common
@@ -184,7 +184,7 @@ All `trackXXX` functions return an integer to report the status of the attempt
 The full list of return codes are given below:
 
 | **Constant**              | **Integer value** | **Description**                                                            |
-|---------------------------|-------------------|----------------------------------------------------------------------------|
+| ------------------------- | ----------------- | -------------------------------------------------------------------------- |
 | `ERROR_CONNECTION_FAILED` | \-1               | Could not connect to Snowplow collector                                    |
 | `ERROR_TIMED_OUT`         | \-2               | Snowplow collector did not respond                                         |
 | `ERROR_INVALID_RESPONSE`  | \-3               | Snowplow collector's response couldn't be parsed                           |
@@ -216,7 +216,7 @@ Some examples of tracking custom structured events from your Arduino board(s) mi
 There are five arguments associated with each structured event. Of them, only the first two are required:
 
 | **Name**    | **Required?** | **Description**                                                                                                                                                                                |
-|-------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `aCategory` | Yes           | The name you supply for the group of objects you want to track e.g. 'sensor', 'ecomm'                                                                                                          |
 | `aAction`   | Yes           | A string which defines the type of user interaction for the web object e.g. 'read-temp', 'wifi-strength'                                                                                       |
 | `aLabel`    | No            | An optional string which identifies the specific object being actioned e.g. ID of the sensor being read                                                                                        |
@@ -326,7 +326,7 @@ As the comment says, change "0x03" to "0x00" to switch off all logging to your A
 The full set of logging levels are as follows:
 
 | **Constant**  | **Integer value** | **Description**                                        |
-|---------------|-------------------|--------------------------------------------------------|
+| ------------- | ----------------- | ------------------------------------------------------ |
 | `NO_LOG`      | 0x00              | Don't print any messages to the Serial Monitor console |
 | `ERROR_LEVEL` | 0x01              | Only print errors to the console                       |
 | `INFO_LEVEL`  | 0x02              | Print errors and important messages to the console     |

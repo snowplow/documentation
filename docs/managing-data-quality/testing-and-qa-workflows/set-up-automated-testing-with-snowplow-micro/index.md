@@ -1,6 +1,6 @@
 ---
-title: "Set up automated testing with Snowplow Micro"
-date: "2021-03-26"
+title: 'Set up automated testing with Snowplow Micro'
+date: '2021-03-26'
 sidebar_position: 1000
 ---
 
@@ -9,11 +9,6 @@ sidebar_position: 1000
 [![Latest Docker image version](https://img.shields.io/docker/v/snowplow/snowplow-micro?sort=semver)](https://hub.docker.com/r/snowplow/snowplow-micro)
 
 [![Latest Docker image version](https://img.shields.io/docker/pulls/snowplow/snowplow-micro)](https://hub.docker.com/r/snowplow/snowplow-micro)
-
-  
-  
-  
-  
 
 ## What is Snowplow Micro for?
 
@@ -89,7 +84,7 @@ This endpoint queries the good events, which are the events that have been succe
 
 #### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#http-method-1)HTTP method
 
-- `GET`: get _all_ the good events from the cache.
+- `GET`: get *all* the good events from the cache.
 - `POST`: get the good events with the possibility to filter.
 
 #### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#response-format-1)Response format
@@ -320,7 +315,7 @@ An example of a response with one event can be found below:
 
 When querying `/micro/good` with `POST` (`Content-Type: application/json` needs to be set in the headers of the request), it's possible to specify filters, thanks to a JSON in the data of the HTTP request.
 
-Example of command to query the good events: 
+Example of command to query the good events:
 
 ```
 curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/good -d '<JSON>'
@@ -329,7 +324,7 @@ curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/good -d '<JSON>
 An example of JSON with filters could be:
 
 ```
-{ 
+{
   "schema": "iglu:com.acme/example/jsonschema/1-0-0",
   "contexts": [
     "com.snowplowanalytics.mobile/application/jsonschema/1-0-0",
@@ -354,7 +349,7 @@ This endpoint queries the bad events, which are the events that failed validatio
 
 #### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#http-method-2)HTTP method
 
-- `GET`: get _all_ the bad events from the cache.
+- `GET`: get *all* the bad events from the cache.
 - `POST`: get the bad events with the possibility to filter.
 
 #### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#response-format-2)Response format
@@ -474,7 +469,7 @@ An example of a response with one bad event can be found below:
 
 When querying `/micro/bad` with `POST` (`Content-Type: application/json` needs to be set in the headers of the request), it's possible to specify filters, thanks to a JSON in the data of the HTTP request.
 
-Example of command to query the bad events: 
+Example of command to query the bad events:
 
 ```
 curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/bad -d '<JSON>'

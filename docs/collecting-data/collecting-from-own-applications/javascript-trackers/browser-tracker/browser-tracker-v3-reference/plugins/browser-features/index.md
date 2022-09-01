@@ -1,6 +1,6 @@
 ---
-title: "Browser Features"
-date: "2021-04-07"
+title: 'Browser Features'
+date: '2021-04-07'
 sidebar_position: 2000
 ---
 
@@ -24,8 +24,8 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { BrowserFeaturesPlugin } from '@snowplow/browser-plugin-browser-features';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ BrowserFeaturesPlugin() ],
 });
 

@@ -1,6 +1,6 @@
 ---
-title: "Consent"
-date: "2021-03-28"
+title: 'Consent'
+date: '2021-03-28'
 sidebar_position: 4000
 ---
 
@@ -11,9 +11,9 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ```
 
 | Tracker Distribution | Included |
-| --- | --- |
-| `sp.js` | ✅ |
-| `sp.lite.js` | ❌ |
+| -------------------- | -------- |
+| `sp.js`              | ✅       |
+| `sp.lite.js`         | ❌       |
 
 ## Download
 
@@ -24,7 +24,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-consent@latest/dist/index.umd.min.js",
   ["snowplowConsent", "ConsentPlugin"]
 );
@@ -38,6 +38,6 @@ window.snowplow('addPlugin',
 
 Adding this plugin will automatically capture the following context:
 
-| Context | Example |
-| --- | --- |
-| [iglu:com.snowplowanalytics.snowplow/consent\_document/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-20.04.43.png) |
+| Context                                                                                                                                                                                                | Example                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| [iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-20.04.43.png) |

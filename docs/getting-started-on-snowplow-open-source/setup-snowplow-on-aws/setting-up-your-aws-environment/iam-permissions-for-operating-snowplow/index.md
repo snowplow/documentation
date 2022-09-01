@@ -1,6 +1,6 @@
 ---
-title: "IAM permissions for operating Snowplow"
-date: "2020-11-24"
+title: 'IAM permissions for operating Snowplow'
+date: '2020-11-24'
 sidebar_position: 80
 ---
 
@@ -15,37 +15,37 @@ The permissions represent the minimum required to keep the Snowplow data pipelin
 ### [](https://github.com/snowplow/snowplow/wiki/Setup-IAM-permissions-for-operating-Snowplow#initial-group-configuration)Initial group configuration
 
 - First click on the IAM icon on the AWS dashboard:
-- Click on the _Create a New Group of Users_ button
-- Enter a _Group Name_ of `snowplow-data-pipeline` and click _Continue_
+- Click on the *Create a New Group of Users* button
+- Enter a *Group Name* of `snowplow-data-pipeline` and click _Continue_
 
 ## Set the permissions for the group
 
-- Choose the _Custom Policy_ option and click _Select_
-- Give it a _Policy Name_ of `snowplow-policy-operate-datapipeline`
+- Choose the *Custom Policy* option and click *Select*
+- Give it a *Policy Name* of `snowplow-policy-operate-datapipeline`
 
-We now need to create the Amazon policy document to define _just_ the user permissions required to run the Snowplow pipeline. An example permissions policy is given below:
+We now need to create the Amazon policy document to define *just* the user permissions required to run the Snowplow pipeline. An example permissions policy is given below:
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Action": [
-                "ec2:*",
-                "elasticbeanstalk:*",
-                "elasticmapreduce:*",
-                "s3:*",
-                "sns:*",
-                "iam:passrole",
-                "cloudformation:ListStackResources",
-                "cloudformation:DescribeStacks",
-                "autoscaling:DescribeAutoScalingGroups",
-                "redshift:DescribeClusters"
-            ],
-            "Resource": "*",
-            "Effect": "Allow"
-        }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:*",
+        "elasticbeanstalk:*",
+        "elasticmapreduce:*",
+        "s3:*",
+        "sns:*",
+        "iam:passrole",
+        "cloudformation:ListStackResources",
+        "cloudformation:DescribeStacks",
+        "autoscaling:DescribeAutoScalingGroups",
+        "redshift:DescribeClusters"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
 }
 ```
 
@@ -54,9 +54,9 @@ Note that there should be opportunities to lock these permissions down further e
 1. Place them on specific resources rather than `*`
 2. Remove e.g. `sns` permissions if you are not using SNS to monitor your Snowplow infrastructure
 
-- Copy and paste the JSON into the policy document field and click _Continue_
+- Copy and paste the JSON into the policy document field and click *Continue*
 - **Do not add an existing user**. We want to create a new user with these permissions, who **only** has these permissions.
-- Review the final settings before pressing _Continue_ to complete the process. Your new group is now setup.
+- Review the final settings before pressing *Continue* to complete the process. Your new group is now setup.
 
 ### Running Kinesis Applications
 
@@ -66,10 +66,10 @@ Our Kinesis Applications are designed so that you can launch them all with IAM R
 
 Now that our group has been created, we need to add a new user to it.
 
-- In the IAM console, click on the _Users_ section on the left hand menu
-- Click on the _Create New Users_ button:
+- In the IAM console, click on the *Users* section on the left hand menu
+- Click on the *Create New Users* button:
 - Give your new user a suitable name e.g. `snowplow-operator`.
-- Click _Create_
+- Click *Create*
 
 AWS gives you the chance to either show or download the credentials. Whichever you do, make sure you **store these credentials safely**. You will need them in later in this guide.
 
@@ -79,8 +79,8 @@ Now close the window: your new user is setup.
 
 The user we have created has no permissions so we need to add them to the new group we created to give her those permissions.
 
-- Click on the _Groups_ section on the AWS console, and select the new group you created
-- Click on the _Add Users to Group_ button
+- Click on the *Groups* section on the AWS console, and select the new group you created
+- Click on the *Add Users to Group* button
 - The user now has the required permissions.
 
 ## Update the EmrEtlRunner config files with the new credentials
@@ -94,7 +94,7 @@ Those files should be accessible on the server setup to run EmrEtlRunner. (Examp
 Now that we have created a new user with just the permissions required to run the Snowplow data pipeline, and used her credentials in in the EmrEtlRunner config files, we can delete the user that we created to setup/install Snowplow originally.
 
 - In the IAM console, go into the `snowplow-setup` group you created when you created user credentials for the individual who setup Snowplow.
-- Select the user in that group e.g. `snowplow-setup` and click the _Remove User from Group_ link:
-- Click _Remove from Group_ when AWS asks you to confirm.
+- Select the user in that group e.g. `snowplow-setup` and click the *Remove User from Group* link:
+- Click *Remove from Group* when AWS asks you to confirm.
 
 In the event that you need to update your Snowplow setup in the future, you can simply create a new user, fetch their credentials, then add them to the `setup-snowplow` group to give them the relevant permissions.

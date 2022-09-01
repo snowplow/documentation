@@ -1,6 +1,6 @@
 ---
-title: "What is deployed on AWS?"
-date: "2021-07-08"
+title: 'What is deployed on AWS?'
+date: '2021-07-08'
 sidebar_position: 300
 ---
 

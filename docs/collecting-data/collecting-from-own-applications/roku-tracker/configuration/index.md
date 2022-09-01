@@ -1,6 +1,6 @@
 ---
-title: "Configuring how events are sent"
-date: "2021-11-16"
+title: 'Configuring how events are sent'
+date: '2021-11-16'
 sidebar_position: 4000
 ---
 
@@ -19,10 +19,10 @@ m.global.snowplow.init = {
 
 Properties of the network configuration:
 
-| Network configuration parameter | Description |
-| --- | --- |
-| `collector` | URI for the Snowplow collector endpoint. |
-| `method` | HTTP method to use. `GET` and `POST` methods are supported. |
+| Network configuration parameter | Description                                                 |
+| ------------------------------- | ----------------------------------------------------------- |
+| `collector`                     | URI for the Snowplow collector endpoint.                    |
+| `method`                        | HTTP method to use. `GET` and `POST` methods are supported. |
 
 ## [](#tracker-namespaces)Tracker namespaces
 

@@ -1,6 +1,6 @@
 ---
-title: "The Snowplow mobile data model"
-date: "2022-04-04"
+title: 'The Snowplow mobile data model'
+date: '2022-04-04'
 sidebar_position: 20
 ---
 

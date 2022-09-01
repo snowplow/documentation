@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: Single customer view"
-date: "2020-10-12"
+title: 'Tutorial: Single customer view'
+date: '2020-10-12'
 sidebar_position: 60
 ---
 
@@ -33,23 +33,26 @@ Additionally, Snowplow allows you to specify a custom user ID, which you'll be a
 Adding a custom user ID with the Snowplow JavaScript Tracker is easy. You'll simply add this line to your out of the box tracking:
 
 ```javascript
-window.snowplow('setUserId', "example_user_id");
+window.snowplow('setUserId', 'example_user_id')
 ```
 
 If you are using Google Tag Manager, you can add the variable like so:
 
 ```javascript
-window.snowplow('setUserId', "{{example_user_id_variable}}");
+window.snowplow('setUserId', '{{example_user_id_variable}}')
 ```
 
 Make sure you add this method before you start tracking events, i.e.
 
 ```javascript
-window.snowplow('setUserId', "example_user_id");
-window.snowplow('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 });
-window.snowplow('enableLinkClickTracking');
-window.snowplow('trackPageView');
-window.snowplow('enableFormTracking');
+window.snowplow('setUserId', 'example_user_id')
+window.snowplow('enableActivityTracking', {
+  minimumVisitLength: 10,
+  heartbeatDelay: 10,
+})
+window.snowplow('enableLinkClickTracking')
+window.snowplow('trackPageView')
+window.snowplow('enableFormTracking')
 ```
 
 ## Modeling the data you've collected
@@ -77,7 +80,7 @@ CREATE TABLE derived.user_stitching AS(
         MAX(ev.derived_tstamp) AS last_active
 
     FROM atomic.events AS ev
-    
+
     GROUP BY 2, ev.user_id, ev.network_userid, ev.derived_tstamp
 
 );

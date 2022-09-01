@@ -1,6 +1,6 @@
 ---
-title: "Subject methods"
-date: "2020-02-26"
+title: 'Subject methods'
+date: '2020-02-26'
 sidebar_position: 40
 ---
 

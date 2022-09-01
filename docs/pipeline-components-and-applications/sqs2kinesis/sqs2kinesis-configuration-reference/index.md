@@ -1,6 +1,6 @@
 ---
-title: "sqs2kinesis configuration reference"
-date: "2021-07-16"
+title: 'sqs2kinesis configuration reference'
+date: '2021-07-16'
 sidebar_position: 0
 ---
 

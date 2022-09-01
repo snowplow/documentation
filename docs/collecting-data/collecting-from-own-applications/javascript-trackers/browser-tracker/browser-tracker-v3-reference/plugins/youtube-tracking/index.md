@@ -1,6 +1,6 @@
 ---
-title: "YouTube Tracking"
-date: "2022-01-12"
+title: 'YouTube Tracking'
+date: '2022-01-12'
 sidebar_position: 17000
 ---
 
@@ -21,13 +21,13 @@ To start tracking a YouTube video with default settings, use the snippet below:
 <html>
   <head>
     <title>Snowplow YouTube Tracking Example</title>
-    <script src="main.js"></script> 
+    <script src="main.js"></script>
   </head>
   <body>
     <iframe
       id="example-id"
       src="https://www.youtube.com/embed/zSM4ZyVe8xs"
-    ></iframe>  
+    ></iframe>
   </body>
 </html>
 ```
@@ -41,8 +41,8 @@ enableYouTubeTracking({
   id: 'example-id',
   options: {
     label: 'My Video Title',
-    boundaries: [10, 25, 50, 75]
-  }
+    boundaries: [10, 25, 50, 75],
+  },
 })
 ```
 
@@ -55,7 +55,7 @@ enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, upd
 ```
 
 | Parameter               | Type       | Default             | Description                                                                                                    | Required |
-|-------------------------|------------|---------------------|----------------------------------------------------------------------------------------------------------------|----------|
+| ----------------------- | ---------- | ------------------- | -------------------------------------------------------------------------------------------------------------- | -------- |
 | `id`                    | `string`   | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`         | `string`   | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents` | `string[]` | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
@@ -72,7 +72,7 @@ enableYouTubeTracking({
     captureEvents: ['play', 'pause', 'ended'],
     boundaries: [20, 80],
     updateRate: 200,
-  }
+  },
 })
 ```
 
@@ -83,10 +83,10 @@ For this plugin to find your media element, your IFrame must be given the id tha
 **`index.html`**
 
 ```html
- <iframe
-      id="example-id"
-      src="https://www.youtube.com/embed/zSM4ZyVe8xs"
-></iframe>  
+<iframe
+  id="example-id"
+  src="https://www.youtube.com/embed/zSM4ZyVe8xs"
+></iframe>
 ```
 
 **`main.js`**
@@ -96,8 +96,8 @@ enableYouTubeTracking({
   id: 'example-id',
   options: {
     label: 'My Video Title',
-    boundaries: [10, 25, 50, 75]
-  }
+    boundaries: [10, 25, 50, 75],
+  },
 })
 ```
 
@@ -108,7 +108,7 @@ enableYouTubeTracking({
 Below is a table of all the events that can be used in `options.captureEvents`
 
 | Name                  | Fire Condition                                                    |
-|-----------------------|-------------------------------------------------------------------|
+| --------------------- | ----------------------------------------------------------------- |
 | play                  | The video is played                                               |
 | pause                 | The video is paused                                               |
 | seek                  | On seek                                                           |
@@ -124,7 +124,7 @@ Below is a table of all the events that can be used in `options.captureEvents`
 You can also use a pre-made event group in `options.captureEvents`:
 
 | Name            | Events                                                                                                                 |
-|-----------------|------------------------------------------------------------------------------------------------------------------------|
+| --------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `DefaultEvents` | `['play', 'pause', 'seek', 'volumechange', 'ended', 'percentprogress', 'playbackratechange', 'playbackqualitychange']` |
 | `AllEvents`     | Every event listed in [Capturable Events](#capturable-events)                                                          |
 
@@ -135,7 +135,7 @@ enableYouTubeTracking({
   id: 'example-video',
   options: {
     captureEvents: ['DefaultEvents', 'error'],
-  }
+  },
 })
 ```
 
@@ -147,8 +147,8 @@ Three schemas are used with this plugin:
 
 ```json
 {
-    "type": "play",
-    "label": "Identifying Label"
+  "type": "play",
+  "label": "Identifying Label"
 }
 ```
 
@@ -156,14 +156,14 @@ Three schemas are used with this plugin:
 
 ```json
 {
-    "currentTime": 12.32,
-    "duration": 20,
-    "ended": false,
-    "loop": false,
-    "muted": true,
-    "paused": false,
-    "playbackRate": 1,
-    "volume": 100
+  "currentTime": 12.32,
+  "duration": 20,
+  "ended": false,
+  "loop": false,
+  "muted": true,
+  "paused": false,
+  "playbackRate": 1,
+  "volume": 100
 }
 ```
 
@@ -172,9 +172,7 @@ Three schemas are used with this plugin:
 ```json
 {
   "autoPlay": false,
-  "avaliablePlaybackRates": [
-    0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2
-  ],
+  "avaliablePlaybackRates": [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
   "buffering": false,
   "controls": true,
   "cued": false,
@@ -201,7 +199,7 @@ Three schemas are used with this plugin:
 }
 ```
 
-* * *
+---
 
 1. To track when a video ends, use the 'ended' event.
 

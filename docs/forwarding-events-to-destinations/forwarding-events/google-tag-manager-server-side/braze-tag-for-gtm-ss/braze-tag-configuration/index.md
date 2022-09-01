@@ -1,6 +1,6 @@
 ---
-title: "Braze Tag Configuration"
-date: "2022-01-17"
+title: 'Braze Tag Configuration'
+date: '2022-01-17'
 sidebar_position: 100
 ---
 
@@ -16,7 +16,7 @@ Set this to your Braze [API Key](https://www.braze.com/docs/api/basics/#app-grou
 
 ![](images/key_permission.png)
 
-### Braze external\_id (required)
+### Braze external_id (required)
 
 Set this key to the client event property (e.g. `client_id`) that corresponds to your users' `external_id` and will be used as the [Braze User Identifier](https://www.braze.com/docs/api/basics/#external-user-id-explanation).
 

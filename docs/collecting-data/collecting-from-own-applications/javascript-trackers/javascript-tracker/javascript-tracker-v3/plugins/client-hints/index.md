@@ -1,6 +1,6 @@
 ---
-title: "Client Hints"
-date: "2021-03-28"
+title: 'Client Hints'
+date: '2021-03-28'
 sidebar_position: 3000
 ---
 
@@ -13,9 +13,9 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 [Client Hints](https://www.chromium.org/updates/ua-ch) are being rolled out across a number of browsers and are an alternative the tracking the User Agent, which is particularly useful in those browsers which are freezing the User Agent string.
 
 | Tracker Distribution | Included |
-| --- | --- |
-| `sp.js` | ✅ |
-| `sp.lite.js` | ❌ |
+| -------------------- | -------- |
+| `sp.js`              | ✅       |
+| `sp.lite.js`         | ❌       |
 
 ## Download
 
@@ -26,7 +26,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-client-hints@latest/dist/index.umd.min.js",
   ["snowplowClientHints", "ClientHintsPlugin"]
 );
@@ -40,6 +40,6 @@ This plugin does not contain any new functions.
 
 Adding this plugin will automatically capture the following context:
 
-| Context | Example |
-| --- | --- |
-| [iglu:org.ietf/http\_client\_hints/jsonschema/1-0-0](org.ietf/http_client_hints/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-19.58.43.png) |
+| Context                                                                                         | Example                                           |
+| ----------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [iglu:org.ietf/http_client_hints/jsonschema/1-0-0](org.ietf/http_client_hints/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-19.58.43.png) |

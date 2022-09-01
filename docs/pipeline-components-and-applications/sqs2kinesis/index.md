@@ -1,6 +1,6 @@
 ---
-title: "Sqs2kinesis"
-date: "2021-07-16"
+title: 'Sqs2kinesis'
+date: '2021-07-16'
 sidebar_position: 40
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: "Initialization"
-date: "2022-05-12"
+title: 'Initialization'
+date: '2022-05-12'
 sidebar_position: 20
 ---
 
@@ -41,7 +41,7 @@ Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "cf")
 ```
 
 | **Argument Name** | **Description**                                                            | **Required?** | **Default**   |
-|-------------------|----------------------------------------------------------------------------|---------------|---------------|
+| ----------------- | -------------------------------------------------------------------------- | ------------- | ------------- |
 | `emitter`         | The Emitter object you create                                              | Yes           | Null          |
 | `namespace`       | The name of the tracker instance                                           | Yes           | Null          |
 | `appId`           | The application ID                                                         | Yes           | Null          |
@@ -58,7 +58,7 @@ To attach a new Emitter to the Tracker:
 ```java
 Emitter emitter = BatchEmitter.builder()
         .url(collectorEndpoint)
-        .bufferSize(5) 
+        .bufferSize(5)
         .build();
 
 Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "sp")

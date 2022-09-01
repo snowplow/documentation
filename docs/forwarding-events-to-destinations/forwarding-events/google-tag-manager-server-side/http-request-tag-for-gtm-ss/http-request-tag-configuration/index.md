@@ -1,6 +1,6 @@
 ---
-title: "HTTP Request Tag Configuration"
-date: "2022-01-06"
+title: 'HTTP Request Tag Configuration'
+date: '2022-01-06'
 sidebar_position: 100
 ---
 
@@ -28,10 +28,10 @@ where, for this example:
 - Our endpoint expects the `api-key` inside the request body.
 - As our `user_identifier` we want to map the value of the `client_id` from the client event.
 - Inside `event_data` we want to include:
-    - the common event data
-    - the Self-Describing event data
-    - the performance timing data from the Snowplow [Performance Timing Context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceTiming/jsonschema/1-0-0)), with `performance_timing` as the property name
-    - the page view id from the Snowplow [web\_page context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0), with `page_view_id` as the property name.
+  - the common event data
+  - the Self-Describing event data
+  - the performance timing data from the Snowplow [Performance Timing Context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceTiming/jsonschema/1-0-0)), with `performance_timing` as the property name
+  - the page view id from the Snowplow [web_page context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0), with `page_view_id` as the property name.
 - Under `user_data` we want to map the `user_data` from the client event.
 
 You can read on below for more details on each configuration option.

@@ -1,6 +1,6 @@
 ---
-title: "Install EmrEtlRunner"
-date: "2020-02-26"
+title: 'Install EmrEtlRunner'
+date: '2020-02-26'
 sidebar_position: 20
 ---
 
@@ -73,22 +73,22 @@ In order to load Redshift, in addition to configuring the config file described 
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/2-1-0",
-    "data": {
-        "name": "AWS Redshift enriched events storage",
-        "host": "ADD HERE",
-        "database": "ADD HERE",
-        "port": 5439,
-        "sslMode": "DISABLE",
-        "username": "ADD HERE",
-        "password": "ADD HERE",
-        "roleArn": "ADD HERE",
-        "schema": "atomic",
-        "maxError": 1,
-        "compRows": 20000,
-        "sshTunnel": null,
-        "purpose": "ENRICHED_EVENTS"
-    }
+  "schema": "iglu:com.snowplowanalytics.snowplow.storage/redshift_config/jsonschema/2-1-0",
+  "data": {
+    "name": "AWS Redshift enriched events storage",
+    "host": "ADD HERE",
+    "database": "ADD HERE",
+    "port": 5439,
+    "sslMode": "DISABLE",
+    "username": "ADD HERE",
+    "password": "ADD HERE",
+    "roleArn": "ADD HERE",
+    "schema": "atomic",
+    "maxError": 1,
+    "compRows": 20000,
+    "sshTunnel": null,
+    "purpose": "ENRICHED_EVENTS"
+  }
 }
 ```
 

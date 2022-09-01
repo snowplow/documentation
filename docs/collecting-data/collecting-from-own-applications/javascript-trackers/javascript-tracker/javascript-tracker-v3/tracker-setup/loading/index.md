@@ -1,6 +1,6 @@
 ---
-title: "Loading tracker with the Snowplow tag"
-date: "2021-03-25"
+title: 'Loading tracker with the Snowplow tag'
+date: '2021-03-25'
 sidebar_position: 1000
 ---
 

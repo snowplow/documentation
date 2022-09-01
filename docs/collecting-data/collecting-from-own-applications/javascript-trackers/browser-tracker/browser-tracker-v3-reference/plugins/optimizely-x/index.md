@@ -1,6 +1,6 @@
 ---
-title: "Optimizely X"
-date: "2021-04-07"
+title: 'Optimizely X'
+date: '2021-04-07'
 sidebar_position: 14000
 ---
 
@@ -19,13 +19,13 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { OptimizelyXPlugin } from '@snowplow/browser-plugin-optimizely-x';
+import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { OptimizelyXPlugin } from '@snowplow/browser-plugin-optimizely-x'
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ OptimizelyXPlugin() ],
-});
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
+  plugins: [OptimizelyXPlugin()],
+})
 ```
 
 ### Context
@@ -33,5 +33,5 @@ newTracker('sp1', '{{collector_url}}', {
 Adding this plugin will automatically capture the following context:
 
 | Context                                                                                                                                                                      |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [iglu:com.optimizely.optimizelyx/summary/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.optimizely.optimizelyx/summary/jsonschema/1-0-0) |

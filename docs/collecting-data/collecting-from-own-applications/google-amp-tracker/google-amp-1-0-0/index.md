@@ -1,6 +1,6 @@
 ---
-title: "Google AMP (0.1.0)"
-date: "2020-03-13"
+title: 'Google AMP (0.1.0)'
+date: '2020-03-13'
 sidebar_position: 1000
 ---
 
@@ -19,8 +19,8 @@ Snowplow is natively integrated into the project, so pages optimized with AMP HT
 ```markup
 <amp-analytics type="snowplow" id="snowplow1">
     <script type="application/json">
-      {     ...   }   
-    </script>   
+      {     ...   }
+    </script>
   </amp-analytics>
 </body>
 ```
@@ -45,8 +45,8 @@ Specify the host to your collector like so:
 
 **Notes:**
 
-- Do _not_ include the protocol aka schema (`http(s)://`)
-- Do _not_ include a trailing slash
+- Do *not* include the protocol aka schema (`http(s)://`)
+- Do *not* include a trailing slash
 - Use of HTTPS is mandatory in AMP, so your Snowplow collector **must** support HTTPS
 
 ### `appId`
@@ -129,13 +129,13 @@ The following example uses the selector attribute of the trigger to send an even
 
 You can set key-value pairs for the following event fields in the vars attribute of the trigger:
 
-| Argument | Description | Required? | Validation |
-| --- | --- | --- | --- |
-| `structEventCategory` | The grouping of structured events which this `action` belongs to | Yes | String |
-| `structEventAction` | Defines the type of user interaction which this event involves | Yes | String |
-| `structEventLabel` | A string to provide additional dimensions to the event data | No | String |
-| `structEventProperty` | A string describing the object or the action performed on it | No | String |
-| `structEventValue` | A value to provide numerical data about the event | No | Int or Float |
+| Argument              | Description                                                      | Required? | Validation   |
+| --------------------- | ---------------------------------------------------------------- | --------- | ------------ |
+| `structEventCategory` | The grouping of structured events which this `action` belongs to | Yes       | String       |
+| `structEventAction`   | Defines the type of user interaction which this event involves   | Yes       | String       |
+| `structEventLabel`    | A string to provide additional dimensions to the event data      | No        | String       |
+| `structEventProperty` | A string describing the object or the action performed on it     | No        | String       |
+| `structEventValue`    | A value to provide numerical data about the event                | No        | Int or Float |
 
 ### Analytics
 

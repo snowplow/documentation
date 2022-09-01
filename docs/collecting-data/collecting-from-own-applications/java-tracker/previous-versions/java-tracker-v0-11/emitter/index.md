@@ -1,6 +1,6 @@
 ---
-title: "Emitter"
-date: "2022-05-12"
+title: 'Emitter'
+date: '2022-05-12'
 sidebar_position: 80
 ---
 
@@ -28,7 +28,7 @@ Emitter batch = BatchEmitter.builder()
 ```
 
 | **Function Name**        | **Description**                                                           | **Required?** |
-|--------------------------|---------------------------------------------------------------------------|---------------|
+| ------------------------ | ------------------------------------------------------------------------- | ------------- |
 | `httpClientAdapter`      | The `HttpClientAdapter` to use for all event sending                      | Yes           |
 | `bufferSize`             | BatchEmitter Only: Specifies how many events go into a POST               | No            |
 | `threadCount`            | The count of Threads that can be used to send events                      | No            |
@@ -40,7 +40,7 @@ Emitter batch = BatchEmitter.builder()
 We currently offer two different Http Clients that can be used to send events to our collectors. Once created they need to be attached to the emitter in the `httpClientAdapter` builder argument.
 
 | **Function Name** | **Description**                                  | **Required?** |
-|-------------------|--------------------------------------------------|---------------|
+| ----------------- | ------------------------------------------------ | ------------- |
 | `url`             | The URL of the collector to send events to       | Yes           |
 | `httpClient`      | The http client to use (either OkHttp or Apache) | Yes           |
 
@@ -137,7 +137,7 @@ Emitter e1 = BatchEmitter.builder()
         .build();
 ```
 
-In the example, we can see an in-line example of handling the case. If events are all successfully sent, the `onSuccess` method returns the number of successful events sent. If there were any failures, the `onFailure` method returns the successful events sent (if any) and a _list of events_ that failed to be sent (i.e. the HTTP state code did not return 200).
+In the example, we can see an in-line example of handling the case. If events are all successfully sent, the `onSuccess` method returns the number of successful events sent. If there were any failures, the `onFailure` method returns the successful events sent (if any) and a *list of events* that failed to be sent (i.e. the HTTP state code did not return 200).
 
 A common pattern here could be to re-send all failed events if they occur. It is up to the developer to determine whether they want to wait a certain amount of time before re-sending or if they want to re-send at all.
 

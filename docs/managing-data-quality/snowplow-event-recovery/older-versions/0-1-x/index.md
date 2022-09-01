@@ -1,6 +1,6 @@
 ---
-title: "0.1.x"
-date: "2020-05-25"
+title: '0.1.x'
+date: '2020-05-25'
 sidebar_position: 0
 ---
 
@@ -22,28 +22,28 @@ For example, if we wanted to recover a set of bad rows consisting of:
 We would use a different recovery scenario for each of them, so three in total:
 
 - a first recovery scenario consisting of
-    - an error filter checking for missing schema errors
-    - a mutate function which does nothing (assuming the schema has been added since the bad rows occurred)
+  - an error filter checking for missing schema errors
+  - a mutate function which does nothing (assuming the schema has been added since the bad rows occurred)
 - a second recovery scenario consisting of
-    - an error filter checking for payloads not conforming to their schema errors
-    - a mutate function which makes the payloads fit their schema
+  - an error filter checking for payloads not conforming to their schema errors
+  - a mutate function which makes the payloads fit their schema
 - a third recovery scenario consisting of
-    - an error filter checking for a particular enrichment failing errors
-    - a mutate function which does nothing (assuming the enrichment was misconfigured and we just want to rerun it)
+  - an error filter checking for a particular enrichment failing errors
+  - a mutate function which does nothing (assuming the enrichment was misconfigured and we just want to rerun it)
 
 ### Out of the box recovery scenarios
 
 For the most common recovery scenarios, it makes sense to support them out of the box and make them accessible through the recovery job’s configuration which is covered in the next section.
 
-| Name | Mutation | Example use case | Parameters |
-| --- | --- | --- | --- |
-| Pass through | Does not mutate the payload in any way | A missing schema that was added after the fact | `error` |
-| Replace in query string | Replaces part of the query string according to a regex | Misspecified a schema when using the Iglu webhook | `error`, `toReplace`, `replacement` |
-| Remove from query string | Removes part of the query string according to a regex | Property was wrongfully tracked and is not part of the schema | `error`, `toRemove` |
-| Replace in base64 field in query string | Replaces part of a base64 field in the query string according to a regex | Property was sent as a string but should be an numeric | `error`, `base64Field` (`cx` or `ue_px`), `toReplace`, `replacement` |
-| Replace in body | Replaces part of the body according to a regex | Misspecified a schema when using the Iglu webhook | `error`, `toReplace`, `replacement` |
-| Remove from body | Removes part of the body according to a regex | Property was wrongfully tracked and is not part of the schema | `error`, `toRemove` |
-| Replace in base64 field in body | Replaces part of a base64 field in the body according to a regex | Property was sent as a string but should be an numeric | `error`, `base64Field` (`cx` or `ue_px`), `toReplace`, `replacement` |
+| Name                                    | Mutation                                                                 | Example use case                                              | Parameters                                                           |
+| --------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Pass through                            | Does not mutate the payload in any way                                   | A missing schema that was added after the fact                | `error`                                                              |
+| Replace in query string                 | Replaces part of the query string according to a regex                   | Misspecified a schema when using the Iglu webhook             | `error`, `toReplace`, `replacement`                                  |
+| Remove from query string                | Removes part of the query string according to a regex                    | Property was wrongfully tracked and is not part of the schema | `error`, `toRemove`                                                  |
+| Replace in base64 field in query string | Replaces part of a base64 field in the query string according to a regex | Property was sent as a string but should be an numeric        | `error`, `base64Field` (`cx` or `ue_px`), `toReplace`, `replacement` |
+| Replace in body                         | Replaces part of the body according to a regex                           | Misspecified a schema when using the Iglu webhook             | `error`, `toReplace`, `replacement`                                  |
+| Remove from body                        | Removes part of the body according to a regex                            | Property was wrongfully tracked and is not part of the schema | `error`, `toRemove`                                                  |
+| Replace in base64 field in body         | Replaces part of a base64 field in the body according to a regex         | Property was sent as a string but should be an numeric        | `error`, `base64Field` (`cx` or `ue_px`), `toReplace`, `replacement` |
 
 Note that, for every recovery scenario leveraging a regex, it’s possible to use capture groups. For example, to remove brackets but keep their content we would have a `toReplace` argument containing `\\{.*\\}` and a `replacement` argument containing `$1` (capture groups are one-based numbered).
 

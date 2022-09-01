@@ -1,6 +1,6 @@
 ---
-title: "Example of automated tests"
-date: "2021-03-26"
+title: 'Example of automated tests'
+date: '2021-03-26'
 sidebar_position: 0
 ---
 
@@ -30,9 +30,9 @@ This will:
 
 1. Start serving the app on `localhost:8000`
 2. Launch Snowplow Micro, mounting the `micro` directory and setting the port 9090 for accessing Micro's [REST API](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/index.md?preview_id=6151&preview_nonce=51ab1bb706&preview=true#REST_API) endpoints. Inside the `micro` directory are:
-    1. The [configuration for Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/micro.conf).
-    2. The [configuration for Iglu resolvers](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu.json).
-    3. The `iglu-client-embedded` directory containing the custom schemas used for tracking.
+   1. The [configuration for Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/micro.conf).
+   2. The [configuration for Iglu resolvers](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu.json).
+   3. The `iglu-client-embedded` directory containing the custom schemas used for tracking.
 
 ### Install npm dependencies
 
@@ -123,17 +123,17 @@ n.src=w;g.parentNode.insertBefore(n,g)}}(window, document, "script", "{% static 
 The tracking implemented consists of:
 
 - Pageview tracking
-    - This event happens when a user visits a page.
-    - It is a predefined Snowplow event, that automatically captures the URL, referrer and page title.
+  - This event happens when a user visits a page.
+  - It is a predefined Snowplow event, that automatically captures the URL, referrer and page title.
 
 ```
 window.snowplow('trackPageView');
 ```
 
 - Activity Tracking
-    - This event happens when a user engages with a page (e.g. user scrolls).
-    - It is a predefined Snowplow event, that automatically records the maximum scroll left-right, up-down in the last ping period.
-    - Method call - before the trackPageView method call:
+  - This event happens when a user engages with a page (e.g. user scrolls).
+  - It is a predefined Snowplow event, that automatically records the maximum scroll left-right, up-down in the last ping period.
+  - Method call - before the trackPageView method call:
 
 ```
 // login-page
@@ -150,12 +150,12 @@ window.snowplow('enableActivityTracking', {
 ```
 
 - Form Tracking
-    - This set of events happens when a user interacts with a web form (e.g. focus on an form element, change a value of input-textarea-select element form, submit a form)
-    - These are predefined Snowplow events that are of unstructured eventType and can be customized. Data captured:
-        - **focus\_form**: id, classes of the form and name, type, value of the form element that received focus.
-        - **change\_form**: name, type, new value of the element, id of the parent form
-        - **submit\_form**: id, classes of the form and name, type, value of all form elements
-    - **Note**: _By default, Form Tracking does not track password fields. We used the `options` to demonstrate how you can ensure the Non-tracking of sensitive fields. With Snowplow Micro we can also later test that any denylisting of forms is implemented correctly and that no sensitive fields are tracked._
+  - This set of events happens when a user interacts with a web form (e.g. focus on an form element, change a value of input-textarea-select element form, submit a form)
+  - These are predefined Snowplow events that are of unstructured eventType and can be customized. Data captured:
+    - **focus_form**: id, classes of the form and name, type, value of the form element that received focus.
+    - **change_form**: name, type, new value of the element, id of the parent form
+    - **submit_form**: id, classes of the form and name, type, value of all form elements
+  - **Note**: _By default, Form Tracking does not track password fields. We used the `options` to demonstrate how you can ensure the Non-tracking of sensitive fields. With Snowplow Micro we can also later test that any denylisting of forms is implemented correctly and that no sensitive fields are tracked._
 
 ```
 var options = {
@@ -171,11 +171,11 @@ window.snowplow('enableFormTracking', { options: options });
 ```
 
 - Tracking custom self-describing(unstructured) events
-    1. cart-events ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/cart_action_event/jsonschema/1-0-0))
-        - These events happen when a user interacts with the cart, adding or removing items, using the Add-to-cart or Remove buttons.
-        - This is a self-describing event that captures the type of cart interaction: "add" versus "remove".
-        - We also want to add as [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#Custom_context) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
-        - Implemented in the shop-page (see file [shoppage.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/app/static/ecommerce/js/shoppage.js)):
+  1. cart-events ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/cart_action_event/jsonschema/1-0-0))
+     - These events happen when a user interacts with the cart, adding or removing items, using the Add-to-cart or Remove buttons.
+     - This is a self-describing event that captures the type of cart interaction: "add" versus "remove".
+     - We also want to add as [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#Custom_context) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
+     - Implemented in the shop-page (see file [shoppage.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/app/static/ecommerce/js/shoppage.js)):
 
 ```
 // TRACK cart_action_event (add)
@@ -222,10 +222,10 @@ window.snowplow('trackSelfDescribingEvent', {
 ```
 
 - purchase-event ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/purchase_event/jsonschema/1-0-0))
-    1. - These events happen when a user completes the purchase of the products in their cart by clicking the Purchase button.
-        - This is a self-describing event that captures the total amount of the transaction.
-        - We also want to add as custom contexts the products involved, each of which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0))
-        - Implemented in the shop-page as well
+  1. - These events happen when a user completes the purchase of the products in their cart by clicking the Purchase button.
+     - This is a self-describing event that captures the total amount of the transaction.
+     - We also want to add as custom contexts the products involved, each of which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0))
+     - Implemented in the shop-page as well
 
 ```
 // create the contexts array
@@ -277,7 +277,7 @@ In this repo you can also find information on how to set up trackers, how to mak
 3. Ensuring that total number of events is right - expected number of good events + bad events (noBadEvents = True)
 4. Checking proper values of structured and unstructured events are sent to Micro
 5. Event With Property test - context, event type and schema
-    - user puts in an event and we match by all 3 conditions (contexts, properties and schema - this determines whether or not the fake test event is equal to the one on micro - for both structured and unstructured)
+   - user puts in an event and we match by all 3 conditions (contexts, properties and schema - this determines whether or not the fake test event is equal to the one on micro - for both structured and unstructured)
 6. Race condition test - to ensure that event x is always sent to Micro before event y (in our case we wanted to ensure cart action occurred before purchase)
 7. Form tracking test to ensure blacklisted form fields are not tracked, and to ensure the right properties are sent for each field
 
@@ -327,8 +327,8 @@ When using Nightwatch, one testing strategy is to simluate a user interaction wi
 In Nightwatch a test involves 3 phases:
 
 1. Preparing a state:
-    1. Reset Micro command - deleting the cache in Micro so that each test has independent events from other tests
-    2. Configure Nightwatch to interact with your app
+   1. Reset Micro command - deleting the cache in Micro so that each test has independent events from other tests
+   2. Configure Nightwatch to interact with your app
 2. Taking an action: Nightwatch interacts with the app creating events
 3. Making an assertion on the resulting state: Nighwatch requests the state of Micro and based on a test performs the corresponding assertions
 
@@ -368,7 +368,7 @@ this.command = (callback) => {
         {
             url: 'http://localhost:9090/micro/all',
             json: true
-        }, 
+        },
         (err, res, body) => {
             if (err) {
                 console.warn(error);
@@ -427,7 +427,7 @@ browser.assert.orderOfEvents(events_list);
 
 ```
 
-_Arguments_: events\_list
+_Arguments_: events_list
 
 Checks for when one event must be before the other so that your application works as expected. This works by retrieving the derived timestamps for each event, and asserting that events fired in the specified order. In our case we use this to test that a cart action occurs before purchasing an item. If our application didn't get this order of events correct, then the application does not act as expected. This can also be considered a race condition test.
 
@@ -457,13 +457,13 @@ browser.assert.successfulEvent(
 );
 ```
 
-_Arguments_: test\_event (with schema, eventType, values and context), number\_of\_occurences
+_Arguments_: test_event (with schema, eventType, values and context), number_of_occurences
 
 Ensures that when an event is sent to Micro the correct parameters are sent as expected. In our case we check that the schema, properties and contexts are correct:
 
 - We match what the user expects to be sent to what is received on Micro.
 - In the end, the number of matched events is retrieved and asserted to the expected number of occurrences.
-- By doing that, we can also specify which events we don't expect on Micro by setting the argument number\_of\_occurences=0.
+- By doing that, we can also specify which events we don't expect on Micro by setting the argument number_of_occurences=0.
 
 ## Snowplow Micro and Cypress
 
@@ -497,8 +497,8 @@ cy.request({
 So, following on the 3 test's phases:
 
 1. Preparing state:
-    1. Reset Micro
-    2. Configure Cypress to visit your app
+   1. Reset Micro
+   2. Configure Cypress to visit your app
 2. Actions: Cypress interacts with the app creating events
 3. Assertions: Cypress sends requests to Micro, and attempts assertions on the responses
 
@@ -596,8 +596,8 @@ cy.eventsWithParams(
         "se_category": "Media",
         "se_action": "Play video",
         "se_label": "Surfing"
-    }, 
-    3 
+    },
+    3
 );
 ```
 
@@ -639,8 +639,8 @@ cy.eventsWithContexts(
                 "categories": ["sports", "history", "food"]
             }
         }
-    ], 
-    2 
+    ],
+    2
 );
 ```
 
@@ -673,8 +673,8 @@ cy.eventsWithProperties(
                 },
             }
         ]
-    }, 
-    1 
+    },
+    1
 );
 ```
 
@@ -705,7 +705,7 @@ cy.eventsWithOrder([
 ]);
 ```
 
-With this command you can assert that events happened in a specified (ascending) order. For example, in the call above, we can assert that the focus\_form event happened before the corresponding change\_form event, which in turn happened before the submit\_form event. The argument to this command is an array of at least 2 event "descriptions", which are exactly like the properties' object argument of `eventsWithProperties`. Those event descriptions need to uniquely identify exactly one Snowplow event. Internally, this command compares events' `derived_tstamp`.
+With this command you can assert that events happened in a specified (ascending) order. For example, in the call above, we can assert that the focus_form event happened before the corresponding change_form event, which in turn happened before the submit_form event. The argument to this command is an array of at least 2 event "descriptions", which are exactly like the properties' object argument of `eventsWithProperties`. Those event descriptions need to uniquely identify exactly one Snowplow event. Internally, this command compares events' `derived_tstamp`.
 
 ### Some further notes
 
@@ -729,7 +729,7 @@ testing/cypress/
 ```
 
 1. Helpers
-    - In the `commands.js` file, the commands are defined based on the `Micro` [helper module](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/jsm/helpers.js)
-    - The `integration/helpers_spec.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/integration/helpers_spec.js) tests the helper functions that define the matching logic. For a different custom matching logic, you can tweak the helper functions, and then test them.
+   - In the `commands.js` file, the commands are defined based on the `Micro` [helper module](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/jsm/helpers.js)
+   - The `integration/helpers_spec.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/integration/helpers_spec.js) tests the helper functions that define the matching logic. For a different custom matching logic, you can tweak the helper functions, and then test them.
 2. Environment variables.
-    - Cypress allows for [many ways](https://docs.cypress.io/guides/guides/environment-variables.html) to set environment variables. In this example we set them in the `plugins/index.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/plugins/index.js).
+   - Cypress allows for [many ways](https://docs.cypress.io/guides/guides/environment-variables.html) to set environment variables. In this example we set them in the `plugins/index.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/plugins/index.js).

@@ -1,6 +1,6 @@
 ---
-title: "Run the collector as a single instance VM in GCP"
-date: "2020-02-27"
+title: 'Run the collector as a single instance VM in GCP'
+date: '2020-02-27'
 sidebar_position: 20
 ---
 
@@ -13,9 +13,9 @@ To run the collector on a single GCP instance, you'll first need to spin one up:
 ![](images/gcloud-create-instance-1.png)
 
 - Click “Create instance” and pick the apropriate settings for your case, making sure of, at least the following:
-    - Under _Access scopes_, select “Set access for each API” and enable “Cloud PubSub”
-    - Under _Firewall_, select “Allow HTTP traffic”
-    - _Optional_ Click _Management, disk, networking, SSH keys_Under _Networking_, add a Tag, such as “collector”. (This is needed to add a tagged Firewall rule, explained below)
+  - Under _Access scopes_, select “Set access for each API” and enable “Cloud PubSub”
+  - Under _Firewall_, select “Allow HTTP traffic”
+  - _Optional_ Click _Management, disk, networking, SSH keys_Under \_Networking_, add a Tag, such as “collector”. (This is needed to add a tagged Firewall rule, explained below)
 
 ![](images/gcloud-create-instance-2.png)
 
@@ -27,7 +27,7 @@ To run the collector on a single GCP instance, you'll first need to spin one up:
 - Name your rule
 - Under _Source filter_ pick “IP ranges” and specify "0.0.0.0/0" (to allow traffic from everywhere)
 - Under _Protocols and ports_ add “tcp:8080”
-    - Note that 8080 is the port assigned to the collector in the configuration file. If you choose another port here, make sure you change the config file
+  - Note that 8080 is the port assigned to the collector in the configuration file. If you choose another port here, make sure you change the config file
 - Under _Target tags_ add the Tag with which you labeled your instance (here `collector`)
 - Click “Create”
 - Now prepare your collector config file by following [the configuration guide](/docs/pipeline-components-and-applications/stream-collector/configure/index.md).

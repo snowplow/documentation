@@ -1,6 +1,6 @@
 ---
-title: "Quick start guide"
-date: "2021-03-24"
+title: 'Quick start guide'
+date: '2021-03-24'
 sidebar_position: 100
 ---
 
@@ -15,9 +15,10 @@ Getting started with sending events using the Browser Tracker will be familiar f
 The process involves the following high level steps:
 
 - Install the `@snowplow/browser-tracker` package using your preferred package manager
-    - `npm install @snowplow/browser-tracker`
-    - `yarn add @snowplow/browser-tracker`
-    - `pnpm add @snowplow/browser-tracker`
+
+  - `npm install @snowplow/browser-tracker`
+  - `yarn add @snowplow/browser-tracker`
+  - `pnpm add @snowplow/browser-tracker`
 
 - You can then import this library into your application
 
@@ -28,8 +29,8 @@ import { newTracker, trackPageView } from "@snowplow/browser-tracker";
 - Configure an instance of the tracker by calling `newTracker(...)` with your desired properties. This will create a module level instance of your tracker. You don't need to keep a reference to it.
 
 ```
-newTracker('sp1', '{{collector_url}}', { 
-  appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
   plugins: [ ],
 })
 ```

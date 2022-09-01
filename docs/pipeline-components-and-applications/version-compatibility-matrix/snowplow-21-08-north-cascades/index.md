@@ -1,6 +1,6 @@
 ---
-title: "Snowplow 21.08 North Cascades"
-date: "2021-08-28"
+title: 'Snowplow 21.08 North Cascades'
+date: '2021-08-28'
 sidebar_position: 99980
 ---
 

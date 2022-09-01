@@ -1,6 +1,6 @@
 ---
-title: "1.0.x upgrade guide"
-date: "2021-10-07"
+title: '1.0.x upgrade guide'
+date: '2021-10-07'
 sidebar_position: 0
 ---
 
@@ -101,7 +101,7 @@ $ ./snowplow-bigquery-repeater \
     --failedInsertsSub="failed-inserts-sub" \
     --deadEndBucket="gs://dead-letter-bucket"
     --desperatesBufferSize=20 \
-    --desperatesWindow=20 \  
+    --desperatesWindow=20 \
     --backoffPeriod=900 \
     --verbose
 ```

@@ -1,6 +1,6 @@
 ---
-title: "Performance Timing"
-date: "2021-03-31"
+title: 'Performance Timing'
+date: '2021-03-31'
 sidebar_position: 15000
 ---
 
@@ -11,9 +11,9 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ```
 
 | Tracker Distribution | Included |
-| --- | --- |
-| `sp.js` | ✅ |
-| `sp.lite.js` | ❌ |
+| -------------------- | -------- |
+| `sp.js`              | ✅       |
+| `sp.lite.js`         | ❌       |
 
 ## Download
 
@@ -24,7 +24,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-timing@latest/dist/index.umd.min.js",
   ["snowplowPerformanceTiming", "PerformanceTimingPlugin"]
 );
@@ -34,6 +34,6 @@ window.snowplow('addPlugin',
 
 Adding this plugin will automatically capture the following context:
 
-| Context |
-| --- |
+| Context                                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [iglu:org.w3/PerformanceTiming/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceTiming/jsonschema/1-0-0) |

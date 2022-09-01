@@ -1,6 +1,6 @@
 ---
-title: "Tutorial: Web analytics"
-date: "2020-10-12"
+title: 'Tutorial: Web analytics'
+date: '2020-10-12'
 sidebar_position: 0
 ---
 
@@ -38,7 +38,7 @@ window.snowplow("newTracker", "sp", ..., {
 Furthermore, you can manually reset a session, for example after a conversion, like so:
 
 ```javascript
-window.snowplow("newSession");
+window.snowplow('newSession')
 ```
 
 Go ahead and update the sessionization logic in your tracker implementation if you would like to. More information on the Snowplow session cookie can be found [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/how-the-tracker-stores-state/index.md#The_session_cookie).
@@ -55,13 +55,13 @@ For this recipe you'll create a simple session table describing web engagement b
 CREATE TABLE derived.sessions AS(
     WITH sessions AS (
         SELECT
-            ev.domain_sessionid AS session_id, 
-            MIN(ev.derived_tstamp) AS session_start, 
+            ev.domain_sessionid AS session_id,
+            MIN(ev.derived_tstamp) AS session_start,
             MAX(ev.derived_tstamp) AS session_end,
             SUM(CASE WHEN ev.event_name = 'page_view' THEN 1 ELSE 0 END) AS page_views,
             SUM(CASE WHEN ev.event_name = 'link_click' THEN 1 ELSE 0 END) AS link_clicks,
             10*SUM(CASE WHEN ev.event_name = 'page_ping' THEN 1 ELSE 0 END) AS time_engaged_in_s
-        
+
         FROM atomic.events AS ev
         GROUP BY 1
     )
@@ -109,7 +109,7 @@ Sessions by marketing channel:
 ```sql
 SELECT
     marketing_channel,
-    COUNT(DISTINCT session_id) AS sessions 
+    COUNT(DISTINCT session_id) AS sessions
 FROM derived.sessions
 GROUP BY 1 ORDER BY 2 DESC;
 ```
@@ -119,7 +119,7 @@ Average number of page views and time engaged in seconds per session:
 ```sql
 SELECT
     AVG(page_views) AS avg_page_views,
-    AVG(time_engaged_in_s) AS avg_time_engaged_in_s 
+    AVG(time_engaged_in_s) AS avg_time_engaged_in_s
 FROM derived.sessions;
 ```
 

@@ -1,6 +1,6 @@
 ---
-title: "Setup"
-date: "2020-02-26"
+title: 'Setup'
+date: '2020-02-26'
 sidebar_position: 10
 ---
 
@@ -14,9 +14,9 @@ Using Composer to manage your dependencies, simply add the Snowplow PHP Tracker 
 
 ```json
 {
-    "require": {
-        "snowplow/snowplow-tracker": "0.4.0"
-    }
+  "require": {
+    "snowplow/snowplow-tracker": "0.4.0"
+  }
 }
 ```
 
@@ -31,7 +31,7 @@ This will install the Snowplow Tracker and allow you to initialize a Tracker obj
 
 ```php
 // Bare minimum Tracker initialization.
- 
+
 use Snowplow\Tracker\Tracker;
 use Snowplow\Tracker\Subject;
 use Snowplow\Tracker\Emitters\SyncEmitter;

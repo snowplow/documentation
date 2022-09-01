@@ -1,6 +1,6 @@
 ---
-title: "Tracking events"
-date: "2021-10-15"
+title: 'Tracking events'
+date: '2021-10-15'
 sidebar_position: 10
 ---
 
@@ -10,12 +10,12 @@ We provide several built-in methods to help you track different kinds of events.
 
 Tracking methods supported by the Ruby Tracker:
 
-| **Method** | **Event type tracked** |
-| --- | --- |
-| [`track_self_describing_event`](#self-describing-event) | Custom event based on "self-describing" JSON schema |
-| [`track_struct_event`](#struct-event) | Semi-custom structured event |
-| [`track_page_view`](#page-view) | View of web page |
-| [`track_screen_view`](#screen-view) | View of screen |
+| **Method**                                              | **Event type tracked**                               |
+| ------------------------------------------------------- | ---------------------------------------------------- |
+| [`track_self_describing_event`](#self-describing-event) | Custom event based on "self-describing" JSON schema  |
+| [`track_struct_event`](#struct-event)                   | Semi-custom structured event                         |
+| [`track_page_view`](#page-view)                         | View of web page                                     |
+| [`track_screen_view`](#screen-view)                     | View of screen                                       |
 | [`track_ecommerce_transaction`](#ecommerce-transaction) | eCommerce transaction (and items in the transaction) |
 
 All the `track_x_event` methods share common features and parameters. Every type of event can have an optional context, Subject, and Page added. A Timestamp can also be provided for all event types to override the default event timestamp. See [the next page](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/adding-data-events/index.md) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
@@ -85,13 +85,13 @@ This method provides a halfway-house between tracking fully user-defined self-de
 
 As these fields are fairly arbitrary, we recommend following the advice in this table how to define structured events. It's important to be consistent throughout the business about how each field is used.
 
-| **Argument** | **Description** | **Required in event?** |
-| --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes |
-| `action` | Defines the type of user interaction which this event involves | Yes |
-| `label` | Often used to refer to the 'object' the action is performed on | No |
-| `property` | Describing the 'object', or the action performed on it | No |
-| `value` | Provides numerical data about the event | No |
+| **Argument** | **Description**                                                  | **Required in event?** |
+| ------------ | ---------------------------------------------------------------- | ---------------------- |
+| `category`   | The grouping of structured events which this `action` belongs to | Yes                    |
+| `action`     | Defines the type of user interaction which this event involves   | Yes                    |
+| `label`      | Often used to refer to the 'object' the action is performed on   | No                     |
+| `property`   | Describing the 'object', or the action performed on it           | No                     |
+| `value`      | Provides numerical data about the event                          | No                     |
 
 Example:
 
@@ -132,7 +132,7 @@ tracker.track_page_view('www.example.com', 'example', 'www.referrer.com')
 
 Use `track_screen_view` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages. The arguments are `name` and `id`; while both are optional, you must provided at least one of them to create a valid event. "Name" is the human-readable screen name, and "ID" should be the unique screen ID.
 
-This method creates an `unstruct` event, by creating a SelfDescribingJson and calling `track_self_describing_event`. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen\_view/jsonschema/1-0-0", and the data field will contain the name and/or ID which you provide. That schema is hosted on the schema repository [Iglu Central](http://iglucentral.com/), and so will always be available to your pipeline.
+This method creates an `unstruct` event, by creating a SelfDescribingJson and calling `track_self_describing_event`. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", and the data field will contain the name and/or ID which you provide. That schema is hosted on the schema repository [Iglu Central](http://iglucentral.com/), and so will always be available to your pipeline.
 
 Example:
 

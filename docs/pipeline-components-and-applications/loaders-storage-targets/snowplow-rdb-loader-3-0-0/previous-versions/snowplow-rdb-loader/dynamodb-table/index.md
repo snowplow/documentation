@@ -1,6 +1,6 @@
 ---
-title: "DynamoDB Table"
-date: "2021-03-26"
+title: 'DynamoDB Table'
+date: '2021-03-26'
 sidebar_position: 30
 ---
 

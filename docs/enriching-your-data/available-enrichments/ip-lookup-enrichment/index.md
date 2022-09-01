@@ -1,6 +1,6 @@
 ---
-title: "IP Lookup enrichment"
-date: "2020-02-14"
+title: 'IP Lookup enrichment'
+date: '2020-02-14'
 sidebar_position: 9
 ---
 
@@ -55,13 +55,13 @@ There are four possible fields you can add to the “parameters” section of th
 
 It is important to note that accepted database filenames are the strings which are allowed in the `database` subfield. If the file name you provide is not one of these, the enrichment JSON will fail validation.
 
-| ENRICHMENT PARAMETER | VALID DATABASE NAMES |
-| --- | --- |
-| `geo` | "GeoLite2-City.mmdb"  
-"GeoIP2-City.mmdb" |
-| `isp` | "GeoIP2-ISP.mmdb" |
-| `domain` | "GeoIP2-Domain.mmdb" |
-| `connectionType` | "GeoIP2-Connection-Type.mmdb" |
+| ENRICHMENT PARAMETER | VALID DATABASE NAMES          |
+| -------------------- | ----------------------------- |
+| `geo`                | "GeoLite2-City.mmdb"          |
+| "GeoIP2-City.mmdb"   |
+| `isp`                | "GeoIP2-ISP.mmdb"             |
+| `domain`             | "GeoIP2-Domain.mmdb"          |
+| `connectionType`     | "GeoIP2-Connection-Type.mmdb" |
 
 ### Configuration
 
@@ -74,18 +74,18 @@ It is important to note that accepted database filenames are the strings which a
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
-    "data": {
-        "name": "ip_lookups",
-        "vendor": "com.snowplowanalytics.snowplow",
-        "enabled": true,
-        "parameters": {
-            "geo": {
-                "database": "GeoLite2-City.mmdb",
-                "uri": "s3://my-private-bucket/third-party/maxmind"
-            }
-        }
+  "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
+  "data": {
+    "name": "ip_lookups",
+    "vendor": "com.snowplowanalytics.snowplow",
+    "enabled": true,
+    "parameters": {
+      "geo": {
+        "database": "GeoLite2-City.mmdb",
+        "uri": "s3://my-private-bucket/third-party/maxmind"
+      }
     }
+  }
 }
 ```
 
@@ -93,18 +93,18 @@ It is important to note that accepted database filenames are the strings which a
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
-    "data": {
-        "name": "ip_lookups",
-        "vendor": "com.snowplowanalytics.snowplow",
-        "enabled": true,
-        "parameters": {
-            "geo": {
-                "database": "GeoLite2-City.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            }
-        }
+  "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
+  "data": {
+    "name": "ip_lookups",
+    "vendor": "com.snowplowanalytics.snowplow",
+    "enabled": true,
+    "parameters": {
+      "geo": {
+        "database": "GeoLite2-City.mmdb",
+        "uri": "gs://my-private-bucket/third-party/maxmind"
+      }
     }
+  }
 }
 ```
 
@@ -117,7 +117,7 @@ When configuring the enrichment you will replace the following string `my-priva
 If we were to enable this enrichment as shown, we would see the following columns in our data warehouse get populated with data for a user with the IP Address 37.157.33.178:
 
 | COLUMN NAME       | SAMPLE DATA   | PURPOSE                                |
-|-------------------|---------------|----------------------------------------|
+| ----------------- | ------------- | -------------------------------------- |
 | `geo_country`     | GB            | Country of IP origin                   |
 | `geo_region`      | ENG           | Region of IP origin                    |
 | `geo_city`        | London        | City of IP origin                      |
@@ -135,30 +135,30 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
-    "data": {
-        "name": "ip_lookups",
-        "vendor": "com.snowplowanalytics.snowplow",
-        "enabled": true,
-        "parameters": {
-            "geo": {
-                "database": "GeoIP2-City.mmdb",
-                "uri": "s3://my-private-bucket/third-party/maxmind"
-            },
-            "isp": {
-                "database": "GeoIP2-ISP.mmdb",
-                "uri": "s3://my-private-bucket/third-party/maxmind"
-            },
-            "domain": {
-                "database": "GeoIP2-Domain.mmdb",
-                "uri": "s3://my-private-bucket/third-party/maxmind"
-            },
-            "connectionType": {
-                "database": "GeoIP2-Connection-Type.mmdb",
-                "uri": "s3://my-private-bucket/third-party/maxmind"
-            }
-        }
+  "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
+  "data": {
+    "name": "ip_lookups",
+    "vendor": "com.snowplowanalytics.snowplow",
+    "enabled": true,
+    "parameters": {
+      "geo": {
+        "database": "GeoIP2-City.mmdb",
+        "uri": "s3://my-private-bucket/third-party/maxmind"
+      },
+      "isp": {
+        "database": "GeoIP2-ISP.mmdb",
+        "uri": "s3://my-private-bucket/third-party/maxmind"
+      },
+      "domain": {
+        "database": "GeoIP2-Domain.mmdb",
+        "uri": "s3://my-private-bucket/third-party/maxmind"
+      },
+      "connectionType": {
+        "database": "GeoIP2-Connection-Type.mmdb",
+        "uri": "s3://my-private-bucket/third-party/maxmind"
+      }
     }
+  }
 }
 ```
 
@@ -166,37 +166,37 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
-    "data": {
-        "name": "ip_lookups",
-        "vendor": "com.snowplowanalytics.snowplow",
-        "enabled": true,
-        "parameters": {
-            "geo": {
-                "database": "GeoIP2-City.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            },
-            "isp": {
-                "database": "GeoIP2-ISP.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            },
-            "domain": {
-                "database": "GeoIP2-Domain.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            },
-            "connectionType": {
-                "database": "GeoIP2-Connection-Type.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            }
-        }
+  "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
+  "data": {
+    "name": "ip_lookups",
+    "vendor": "com.snowplowanalytics.snowplow",
+    "enabled": true,
+    "parameters": {
+      "geo": {
+        "database": "GeoIP2-City.mmdb",
+        "uri": "gs://my-private-bucket/third-party/maxmind"
+      },
+      "isp": {
+        "database": "GeoIP2-ISP.mmdb",
+        "uri": "gs://my-private-bucket/third-party/maxmind"
+      },
+      "domain": {
+        "database": "GeoIP2-Domain.mmdb",
+        "uri": "gs://my-private-bucket/third-party/maxmind"
+      },
+      "connectionType": {
+        "database": "GeoIP2-Connection-Type.mmdb",
+        "uri": "gs://my-private-bucket/third-party/maxmind"
+      }
     }
+  }
 }
 ```
 
 The data from these databases would then be loaded into the following columns:
 
 | COLUMN NAME       | PURPOSE                                                      |
-|-------------------|--------------------------------------------------------------|
+| ----------------- | ------------------------------------------------------------ |
 | `ip_isp`          | ISP name                                                     |
 | `ip_organization` | Organization name for larger networks                        |
 | `ip_domain`       | Second level domain name                                     |

@@ -1,6 +1,6 @@
 ---
-title: "Tracking events"
-date: "2022-03-24"
+title: 'Tracking events'
+date: '2022-03-24'
 sidebar_position: 20
 ---
 
@@ -32,14 +32,14 @@ The Java tracker does not yet support automatic event tracking. All tracking mus
 The Java tracker provides classes for tracking different types of events. They are listed below.
 
 | `Event` class                                                                                                                                                                                 | `e` in raw event | `eventType` in enriched event |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|-------------------------------|
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------- |
 | [`Unstructured` (custom)](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-custom-event-unstructured-events)                           | ue               | unstruct                      |
 | [`ScreenView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-screenview-event)                                                      | ue               | unstruct                      |
 | [`Timing`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-timing-event)                                                              | ue               | unstruct                      |
-| [`PageView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-pageview-event)                                                          | pv               | page\_view                    |
+| [`PageView`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-pageview-event)                                                          | pv               | page_view                     |
 | [`Structured`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-a-structured-event)                                                      | se               | struct                        |
 | [`EcommerceTransaction`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\*     | tr               | transaction                   |
-| [`EcommerceTransactionItem`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti               | transaction\_item             |
+| [`EcommerceTransactionItem`](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti               | transaction_item              |
 
 Note: `EcommerceTransaction`/`EcommerceTransactionItem` are a legacy design and may be deprecated soon.
 
@@ -116,10 +116,10 @@ Provide your `timing` value in milliseconds. The `label` property is optional. S
 Track page views with the `PageView` event. This is a "primitive" event type; data will end up in individual "atomic" columns in the data warehouse.
 
 | Property     | Field in raw event | Column in enriched event |
-|--------------|--------------------|--------------------------|
-| page URL     | url                | page\_url                |
-| page title   | page               | page\_title              |
-| referrer URL | refr               | page\_referrer           |
+| ------------ | ------------------ | ------------------------ |
+| page URL     | url                | page_url                 |
+| page title   | page               | page_title               |
+| referrer URL | refr               | page_referrer            |
 
 The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md).
 
@@ -142,12 +142,12 @@ To track custom data without schemas, use `Structured` events. They are the "pri
 The `Structured` event fields have flexible definitions, and what you put into each field is up to you. This is a double-edged sword. It's highly advisable to agree business-wide on definitions for each of these fields, before implementing tracking.
 
 | Property | Often contains data about     | Field in raw event | Column in enriched event |
-|----------|-------------------------------|--------------------|--------------------------|
-| category | Grouping for the action       | se\_ca             | se\_category             |
-| action   | Type of user activity         | se\_ac             | se\_action               |
-| label    | Additional event data         | se\_la             | se\_label                |
-| property | The action or object acted on | se\_pr             | se\_property             |
-| value    | Numerical event data          | se\_va             | se\_value                |
+| -------- | ----------------------------- | ------------------ | ------------------------ |
+| category | Grouping for the action       | se_ca              | se_category              |
+| action   | Type of user activity         | se_ac              | se_action                |
+| label    | Additional event data         | se_la              | se_label                 |
+| property | The action or object acted on | se_pr              | se_property              |
+| value    | Numerical event data          | se_va              | se_value                 |
 
 A simple initialisation looks like this:
 
@@ -172,26 +172,26 @@ The `EcommerceTransaction` and `EcommerceTransactionItem` events are legacy even
 `EcommerceTransaction` and `EcommerceTransactionItem` are "primitive" events. The data will end up in individual "atomic" columns in the data warehouse.
 
 | `EcommerceTransaction` property | Field in raw event | Column in enriched event |
-|---------------------------------|--------------------|--------------------------|
-| orderId                         | tr\_id             | tr\_orderid              |
-| totalValue                      | tr\_tt             | tr\_total                |
-| affiliation                     | tr\_af             | tr\_affiliation          |
-| taxValue                        | tr\_tx             | tr\_tax                  |
-| shipping                        | tr\_sh             | tr\_shipping             |
-| city                            | tr\_ci             | tr\_city                 |
-| state                           | tr\_st             | tr\_state                |
-| country                         | tr\_co             | tr\_country              |
-| currency                        | tr\_cu             | tr\_currency             |
+| ------------------------------- | ------------------ | ------------------------ |
+| orderId                         | tr_id              | tr_orderid               |
+| totalValue                      | tr_tt              | tr_total                 |
+| affiliation                     | tr_af              | tr_affiliation           |
+| taxValue                        | tr_tx              | tr_tax                   |
+| shipping                        | tr_sh              | tr_shipping              |
+| city                            | tr_ci              | tr_city                  |
+| state                           | tr_st              | tr_state                 |
+| country                         | tr_co              | tr_country               |
+| currency                        | tr_cu              | tr_currency              |
 
 | `EcommerceTransactionItem` property | Field in raw event | Column in enriched event |
-|-------------------------------------|--------------------|--------------------------|
-| itemId                              | ti\_id             | ti\_orderid              |
-| sku                                 | ti\_sk             | ti\_sku                  |
-| price                               | ti\_pr             | ti\_price                |
-| quantity                            | ti\_qu             | ti\_quantity             |
-| name                                | ti\_nm             | ti\_name                 |
-| category                            | ti\_ca             | ti\_category             |
-| currency                            | ti\_cu             | ti\_currency             |
+| ----------------------------------- | ------------------ | ------------------------ |
+| itemId                              | ti_id              | ti_orderid               |
+| sku                                 | ti_sk              | ti_sku                   |
+| price                               | ti_pr              | ti_price                 |
+| quantity                            | ti_qu              | ti_quantity              |
+| name                                | ti_nm              | ti_name                  |
+| category                            | ti_ca              | ti_category              |
+| currency                            | ti_cu              | ti_currency              |
 
 The `orderId` and `itemId` should be the same, as it's the most direct way to associate the two events once they are in the warehouse.
 

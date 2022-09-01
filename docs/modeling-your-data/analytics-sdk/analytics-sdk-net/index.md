@@ -1,6 +1,6 @@
 ---
-title: "Analytics SDK - .NET"
-date: "2020-11-03"
+title: 'Analytics SDK - .NET'
+date: '2020-11-03'
 sidebar_position: 500
 ---
 
@@ -44,7 +44,7 @@ The JSON Event Transformer takes a Snowplow enriched event and converts it into 
 The JSON Event Transformer converts a Snowplow enriched event into a single JSON like so:
 
 ```
-{ 
+{
   "app_id":"demo",
   "platform":"web",
   "etl_tstamp":"2015-12-01T08:32:35.048Z",
@@ -63,7 +63,7 @@ The most complex piece of processing is the handling of the self-describing JSON
 For example, if an enriched event contained a `com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1`, then the final JSON would contain:
 
 ```
-{ 
+{
   "app_id":"demo",
   "platform":"web",
   "etl_tstamp":"2015-12-01T08:32:35.048Z",

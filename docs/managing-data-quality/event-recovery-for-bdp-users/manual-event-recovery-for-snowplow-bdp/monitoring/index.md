@@ -1,6 +1,6 @@
 ---
-title: "Monitoring"
-date: "2020-08-26"
+title: 'Monitoring'
+date: '2020-08-26'
 sidebar_position: 40
 ---
 

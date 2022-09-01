@@ -1,6 +1,6 @@
 ---
-title: "Setting up your AWS environment"
-date: "2020-11-24"
+title: 'Setting up your AWS environment'
+date: '2020-11-24'
 sidebar_position: 0
 ---
 
@@ -62,7 +62,7 @@ You need to setup different groups / users in IAMs at different stages of your S
 
 ![](images/setup-flow-cropped.png)
 
-1. [A user to setup Snowplow on your AWS account (the _Snowplow Installer_)](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setting-up-your-aws-environment/iam-permissions-for-installing-snowplow/index.md). Create credentials for a user to install Snowplow on your AWS account. This user has lots of permissions, as she will need to setup all the relevant collectors, buckets on Amazon S3 and Redshift cluster, if required.
-2. [A user to run the Snowplow data pipeline (the _Snowplow Operator_)](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setting-up-your-aws-environment/iam-permissions-for-operating-snowplow/index.md). _Once_ your Snowplow stack has been setup, you create a new user with much more limited permissions than those allocated to the user who installed Snowplow, and use these credentials for EmrEtlRunner to manage your data pipeline over time.
+1. [A user to setup Snowplow on your AWS account (the *Snowplow Installer*)](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setting-up-your-aws-environment/iam-permissions-for-installing-snowplow/index.md). Create credentials for a user to install Snowplow on your AWS account. This user has lots of permissions, as she will need to setup all the relevant collectors, buckets on Amazon S3 and Redshift cluster, if required.
+2. [A user to run the Snowplow data pipeline (the *Snowplow Operator*)](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setting-up-your-aws-environment/iam-permissions-for-operating-snowplow/index.md). *Once* your Snowplow stack has been setup, you create a new user with much more limited permissions than those allocated to the user who installed Snowplow, and use these credentials for EmrEtlRunner to manage your data pipeline over time.
 
 **Disclaimer: Snowplow Analytics Ltd will not be liable for any problems caused by the full or partial implementation of these instructions on your Amazon Web Services account. If in doubt, please consult an independent AWS security expert.**

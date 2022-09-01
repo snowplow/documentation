@@ -1,6 +1,6 @@
 ---
-title: "Initialisation"
-date: "2020-02-25"
+title: 'Initialisation'
+date: '2020-02-25'
 sidebar_position: 20
 ---
 
@@ -32,14 +32,14 @@ For example:
 var t1:Tracker = new Tracker(emitter, "AF003", "cf", user1Subject, this.stage, true);
 ```
 
-| **Argument Name** | **Description** | **Required?** |
-| --- | --- | --- |
-| `emitter` | The Emitter object you create | Yes |
-| `namespace` | The name of the Tracker instance | Yes |
-| `appId` | The application ID | Yes |
-| `subject` | The Subject that defines a user | No (default null) |
-| `stage` | The stage property of a DisplayObject | No (Default null) |
-| `base64Encoded` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No (Default true) |
+| **Argument Name** | **Description**                                                            | **Required?**     |
+| ----------------- | -------------------------------------------------------------------------- | ----------------- |
+| `emitter`         | The Emitter object you create                                              | Yes               |
+| `namespace`       | The name of the Tracker instance                                           | Yes               |
+| `appId`           | The application ID                                                         | Yes               |
+| `subject`         | The Subject that defines a user                                            | No (default null) |
+| `stage`           | The stage property of a DisplayObject                                      | No (Default null) |
+| `base64Encoded`   | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No (Default true) |
 
 #### `emitter`
 

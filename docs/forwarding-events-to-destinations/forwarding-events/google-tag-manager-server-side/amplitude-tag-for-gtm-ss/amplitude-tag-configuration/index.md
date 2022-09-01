@@ -1,6 +1,6 @@
 ---
-title: "Amplitude Tag Configuration"
-date: "2021-11-24"
+title: 'Amplitude Tag Configuration'
+date: '2021-11-24'
 sidebar_position: 100
 ---
 
@@ -34,7 +34,7 @@ This section describes how the Amplitude tag will use the context Entities attac
 
 Snowplow Entities are always in Arrays, as multiple of the same entity can be attached to an event. This option will pick the single element from the array if the array only contains a single element.
 
-#### Include Snowplow Entities in event\_properties
+#### Include Snowplow Entities in event_properties
 
 Using this drop-down menu you can specify whether you want to Include `All` or `None` of the Snowplow context entities in Amplitude's `event_properties`.
 
@@ -74,7 +74,7 @@ Depending on the value set for the **Apply to all versions** column, the major v
 
 ### Pre-v0.2.0
 
-##### Include all Entities in event\_properties
+##### Include all Entities in event_properties
 
 Leaving this option enabled ensures that all Entities on an event will be included within the Event Properties of the Amplitude event.
 
@@ -83,7 +83,7 @@ If disabling this, individual entities can be selected for inclusion. These enti
 - Major version match: `x-sp-contexts_com_snowplowanalytics_snowplow_web_page_1` where `com_snowplowanalytics_snowplow` is the event vendor, `web_page` is the schema name and `1` is the Major version number. `x-sp-` can also be omitted from this if desired
 - Full schema match: `iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0`
 
-##### Include unmapped entities in event\_properties
+##### Include unmapped entities in event_properties
 
 If remapping or moving some entities to User Properties with the above customization, you may wish to ensure all unmapped entities are still included in the event. Enabling this option will ensure that all entities are mapped into the Amplitude event.
 
@@ -109,7 +109,7 @@ Specify the Property Key from the Client Event, and then the key you could like 
 
 ##### Include common user properties
 
-Enabling this ensures user\_data properties from the [Common Event](https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data) are automatically mapped to the Amplitude Event Properties.
+Enabling this ensures user_data properties from the [Common Event](https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data) are automatically mapped to the Amplitude Event Properties.
 
 ##### Map Snowplow mkt fields (standard UTM parameters) to user properties
 
@@ -174,7 +174,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

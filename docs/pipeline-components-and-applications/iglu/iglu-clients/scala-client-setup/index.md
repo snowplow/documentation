@@ -1,6 +1,6 @@
 ---
-title: "Scala client"
-date: "2021-03-26"
+title: 'Scala client'
+date: '2021-03-26'
 sidebar_position: 70
 ---
 
@@ -44,4 +44,4 @@ dependencies {
 }
 ```
 
-Now read the  [Scala client API](https://github.com/snowplow/iglu-scala-client) to start using the Scala client.
+Now read the [Scala client API](https://github.com/snowplow/iglu-scala-client) to start using the Scala client.

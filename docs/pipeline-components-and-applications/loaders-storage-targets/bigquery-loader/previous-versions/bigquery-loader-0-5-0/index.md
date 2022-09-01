@@ -1,6 +1,6 @@
 ---
-title: "BigQuery Loader (0.5.x)"
-date: "2020-05-18"
+title: 'BigQuery Loader (0.5.x)'
+date: '2020-05-18'
 sidebar_position: 10
 ---
 
@@ -10,7 +10,7 @@ The available tools are:
 
 1. **Snowplow BigQuery Loader**, an [Apache Beam](https://beam.apache.org/) job that reads Snowplow enriched data from Google Pub/Sub, transforms it into BigQuery-friendly format and loads it. It also writes information about encountered data types into an auxiliary `typesTopic` Pub/Sub topic.
 2. **Snowplow BigQuery Mutator**, a Scala app that reads the `typesTopic` (via `typesSubscription`) and performs table mutations to add new columns as required.
-3. **Snowplow BigQuery Repeater**, a Scala app that reads `failedInserts` (caused by _mutation lag_) and tries to re-insert them into BigQuery after some delay, sinking failures into a dead-end bucket.
+3. **Snowplow BigQuery Repeater**, a Scala app that reads `failedInserts` (caused by *mutation lag*) and tries to re-insert them into BigQuery after some delay, sinking failures into a dead-end bucket.
 4. **\[DEPRECATED\] Snowplow BigQuery Forwarder**, an alternative to Repeater implemented as an Apache Beam job. This component has been deprecated from version 0.5.0. Please use Repeater instead.
 
 ![](images/bigquery-microservices-architecture.png)
@@ -66,7 +66,7 @@ Repeater has several important behaviour aspects:
 
 Loader inserts data into BigQuery in near real-time. At the same time, it sinks `shredded_type` payloads into the `typesTopic` approximately every 5 seconds. It also can take up to 10-15 seconds for Mutator to fetch, parse the message and execute an `ALTER TABLE` statement against the table.
 
-If a new type arrives from `input` subscription in this period of time and Mutator fails to handle it, BigQuery will reject the row containing it and it will be sent to the `failedInserts` topic. This topic contains JSON objects _ready to be loaded into BigQuery_ (ie not canonical Snowplow Enriched event format).
+If a new type arrives from `input` subscription in this period of time and Mutator fails to handle it, BigQuery will reject the row containing it and it will be sent to the `failedInserts` topic. This topic contains JSON objects *ready to be loaded into BigQuery* (ie not canonical Snowplow Enriched event format).
 
 In order to load this data again from `failedInserts` to BigQuery you can use Repeater or Forwarder (see below). Both read a subscription from `failedInserts` and perform `INSERT` statements.
 
@@ -98,7 +98,7 @@ Snowplow BigQuery Loader uses Google Pub/Sub topics and subscriptions to store i
 
 ### Configuration file
 
-Loader, Mutator and Repeater (Forwarder has been deprecated) accept the same configuration file with [iglu:com.snowplowanalytics.snowplow.storage/bigquery\_config/jsonschema/](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema) schema, which looks like this:
+Loader, Mutator and Repeater (Forwarder has been deprecated) accept the same configuration file with [iglu:com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema/](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema) schema, which looks like this:
 
 ```
 {
@@ -266,7 +266,7 @@ $ ./snowplow-bigquery-forwarder \
     --failedInsertsSub=$FAILED_INSERTS_SUB
 ```
 
-Its only unique option is `failedInsertsSub`, which is a subscription (that must be created _upfront_) to the `failedInserts` topic.
+Its only unique option is `failedInsertsSub`, which is a subscription (that must be created *upfront*) to the `failedInserts` topic.
 
 The `labels` argument works the same as with Loader.
 

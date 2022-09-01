@@ -1,6 +1,6 @@
 ---
-title: "Payload and logging"
-date: "2022-05-12"
+title: 'Payload and logging'
+date: '2022-05-12'
 sidebar_position: 100
 ---
 

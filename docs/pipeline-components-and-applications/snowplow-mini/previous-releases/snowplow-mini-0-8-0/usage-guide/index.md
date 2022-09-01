@@ -1,6 +1,6 @@
 ---
-title: "Usage Guide"
-date: "2020-04-03"
+title: 'Usage Guide'
+date: '2020-04-03'
 sidebar_position: 30
 ---
 
@@ -19,12 +19,12 @@ Jump to [First Time Usage](#first-time-usage) if it is your first time with a Mi
 Mini 0.8.0 updated some of the internal components resulting in some breaking changes as following:
 
 - _Iglu Server is updated from 0.3.0 to 0.6.1_ :
-    - Swagger UI is deprecated which means `repo-server.baseURL` configuration field in Iglu Server configuration is deprecated too.
-    - We've overhauled Iglu Server in 0.6.0 release and introduced breaking API changes. Please check [API Changes section](https://snowplowanalytics.com/blog/2019/10/11/iglu-server-0.6.0-released/#api-changes) of the blog post to learn about them.
-    - In addition to 0.6.0, Iglu Server 0.6.1 deprecated query parameter support for `POST iglu-server/api/auth/keygen` endpoint. vendor\_prefix must be provided
-    - **Note** that browsing to the same endpoint ( /iglu-server ) in an internet browser will yield an error message stating that endpoint doesn't exist, we'll address this in upcoming releases but one can safely ignore that for now and server health can be checked at `GET iglu-server/api/meta/health` endpoint.
+  - Swagger UI is deprecated which means `repo-server.baseURL` configuration field in Iglu Server configuration is deprecated too.
+  - We've overhauled Iglu Server in 0.6.0 release and introduced breaking API changes. Please check [API Changes section](https://snowplowanalytics.com/blog/2019/10/11/iglu-server-0.6.0-released/#api-changes) of the blog post to learn about them.
+  - In addition to 0.6.0, Iglu Server 0.6.1 deprecated query parameter support for `POST iglu-server/api/auth/keygen` endpoint. vendor_prefix must be provided
+  - **Note** that browsing to the same endpoint ( /iglu-server ) in an internet browser will yield an error message stating that endpoint doesn't exist, we'll address this in upcoming releases but one can safely ignore that for now and server health can be checked at `GET iglu-server/api/meta/health` endpoint.
 - _Stream Enrich is updated from 0.21.0 to 1.0.0_ :
-    - Please check [Upgrade Guide](https://github.com/snowplow/snowplow/wiki/Upgrade-Guide#enrich) to see updated enrichment configuration.
+  - Please check [Upgrade Guide](https://github.com/snowplow/snowplow/wiki/Upgrade-Guide#enrich) to see updated enrichment configuration.
 
 ## First time usage
 
@@ -62,8 +62,7 @@ Let's have examples for both options.
 
 - Download the igluctl 0.7.0 from Github:
 
-`$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.0/igluctl_0.7.0.zip  
-$ unzip -j igluctl_0.7.0.zip`
+`$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.0/igluctl_0.7.0.zip $ unzip -j igluctl_0.7.0.zip`
 
 Following is a sample execution where `com.acme` is the vendor prefix for which we'll upload our schemas, `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is the super API key created in step 2.2
 
@@ -134,11 +133,11 @@ You can instrument any other Snowplow tracker by specifying the collector URL as
 Snowplow Mini makes the Elasticsearch HTTP API available at `http://<public dns>/elasticsearch`, you can check it's working by:
 
 - Checking the Elasticsearch API is available:
-    - `curl --user username:password http://<public dns>/elasticsearch`
-    - You should see a `200 OK` response
+  - `curl --user username:password http://<public dns>/elasticsearch`
+  - You should see a `200 OK` response
 - Checking the number of good events we sent in step 3:
-    - `curl --user username:password http://<public dns>/elasticsearch/good/good/_count`
-    - You should see the appropriate count of sent events
+  - `curl --user username:password http://<public dns>/elasticsearch/good/good/_count`
+  - You should see the appropriate count of sent events
 
 ## Viewing the data in Kibana
 
@@ -182,8 +181,7 @@ Let's have examples for both options.
 
 - Download the igluctl 0.7.0 from Github:
 
-`$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.0/igluctl_0.7.0.zip  
-$ unzip -j igluctl_0.7.0.zip`
+`$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.0/igluctl_0.7.0.zip $ unzip -j igluctl_0.7.0.zip`
 
 Following is a sample execution where `path-to-schema(s)` is the path to custom schema(s) , `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is the super API key created in step 2.2
 

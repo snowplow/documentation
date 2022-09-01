@@ -1,6 +1,6 @@
 ---
-title: "Accessing Collector Configuration"
-date: "2020-08-10"
+title: 'Accessing Collector Configuration'
+date: '2020-08-10'
 sidebar_position: 20
 ---
 
@@ -76,29 +76,29 @@ The Pipeline ID is the second UUID in the location bar.
 Invoking this API will return an object of the following form:
 
 ```
-{ 
-    "cookieDomains": 
-    { 
-        "fallback": "mydomain.com", 
-        "domains": [] 
-    }, 
-    "paths": { 
-        "post": { 
-            "paths": [] 
-        }, 
-        "webhook": { 
-            "paths": [] 
-        }, 
-        "redirect": { 
-            "paths": [], 
-            "enabled": true 
-        } 
-    }, 
-    "cookieAttributes": { 
-        "secure": true, 
-        "sameSite": "None", 
-        "httpOnly": false 
-    }, 
+{
+    "cookieDomains":
+    {
+        "fallback": "mydomain.com",
+        "domains": []
+    },
+    "paths": {
+        "post": {
+            "paths": []
+        },
+        "webhook": {
+            "paths": []
+        },
+        "redirect": {
+            "paths": [],
+            "enabled": true
+        }
+    },
+    "cookieAttributes": {
+        "secure": true,
+        "sameSite": "None",
+        "httpOnly": false
+    },
     "blockUnencrypted": false
 }
 ```
@@ -114,8 +114,8 @@ The `paths` object is always expected to be available and holds the following th
 
 - `post` contains a non-optional list of paths that accept Tracker Protocol 2 compatible POST requests
 - `redirect` contains
-    - a non-optional flag weather redirect-based tracking is enabled, and
-    - a non-optional list of paths that support this kind of tracking
+  - a non-optional flag weather redirect-based tracking is enabled, and
+  - a non-optional list of paths that support this kind of tracking
 - `webhook` contains a non-optional list of paths for tracking events sent via a `GET` or `POST` request containing an [Iglu](https://github.com/snowplow/iglu)\-compatible event payload.
 
 The `cookieAttributes` object is always expected to be available and contains three non-optional properties:
@@ -123,8 +123,8 @@ The `cookieAttributes` object is always expected to be available and contains th
 - `secure` is a boolean value indicating whether secure connections should be enforced;
 - `httpOnly` is a boolean value set to true if the cookie must be inaccessible to non-HTTP requests; and
 - `sameSite` is a string that can take one of the following values:
-    - `lax`
-    - `none`
-    - `strict`
+  - `lax`
+  - `none`
+  - `strict`
 
 Finally, `blockUnencrypted` is an optional boolean property indicating whether un-encrypted traffic should be allowed or not. If not available, the default is `false` (i.e. "do not block").

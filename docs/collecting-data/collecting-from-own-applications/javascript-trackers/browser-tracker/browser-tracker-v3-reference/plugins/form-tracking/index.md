@@ -1,6 +1,6 @@
 ---
-title: "Form Tracking"
-date: "2021-04-07"
+title: 'Form Tracking'
+date: '2021-04-07'
 sidebar_position: 9000
 ---
 
@@ -23,15 +23,18 @@ Snowplow automatic form tracking detects three event types: `change_form`, `subm
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { FormTrackingPlugin, enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
+import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import {
+  FormTrackingPlugin,
+  enableFormTracking,
+} from '@snowplow/browser-plugin-form-tracking'
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ FormTrackingPlugin() ],
-});
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
+  plugins: [FormTrackingPlugin()],
+})
 
-enableFormTracking();
+enableFormTracking()
 ```
 
 ### Functions

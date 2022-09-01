@@ -1,6 +1,6 @@
 ---
-title: "Emitters"
-date: "2020-02-26"
+title: 'Emitters'
+date: '2020-02-26'
 sidebar_position: 60
 ---
 
@@ -32,17 +32,17 @@ def __init__(
         request_timeout: Optional[Union[float, Tuple[float, float]]] = None) -> None:
 ```
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `endpoint` | The collector URI | Yes | Dict |
-| `protocol` | Request protocol: HTTP or HTTPS | No | List |
-| `port` | The port to connect to | No | Positive integer |
-| `method` | The method to use: “get” or “post” | No | String |
-| `buffer_size` | Number of events to store before flushing | No | Positive integer |
-| `on_success` | Callback executed when a flush is successful | No | Function taking 1 argument |
-| `on_failure` | Callback executed when a flush is unsuccessful | No | Function taking 2 arguments |
-| `byte_limit` | Number of bytes to store before flushing | No | Positive integer |
-| `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers |
+| **Argument**      | **Description**                                | **Required?** | **Type**                                |
+| ----------------- | ---------------------------------------------- | ------------- | --------------------------------------- |
+| `endpoint`        | The collector URI                              | Yes           | Dict                                    |
+| `protocol`        | Request protocol: HTTP or HTTPS                | No            | List                                    |
+| `port`            | The port to connect to                         | No            | Positive integer                        |
+| `method`          | The method to use: “get” or “post”             | No            | String                                  |
+| `buffer_size`     | Number of events to store before flushing      | No            | Positive integer                        |
+| `on_success`      | Callback executed when a flush is successful   | No            | Function taking 1 argument              |
+| `on_failure`      | Callback executed when a flush is unsuccessful | No            | Function taking 2 arguments             |
+| `byte_limit`      | Number of bytes to store before flushing       | No            | Positive integer                        |
+| `request_timeout` | Timeout for HTTP requests                      | No            | Positive integer or tuple of 2 integers |
 
 - `protocol`
 
@@ -54,7 +54,7 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 
 - `byte_limit`
 
-`byte_limit` is similar to `buffer_size`, but instead of counting events - it takes into account only the amount of bytes to be sent over the network. _Warning_: this limit is approximate with infelicity < 1%.
+`byte_limit` is similar to `buffer_size`, but instead of counting events - it takes into account only the amount of bytes to be sent over the network. *Warning*: this limit is approximate with infelicity < 1%.
 
 - `on_success`
 
@@ -62,9 +62,9 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 
 **_\*\*New in v0.9.0_**
 
-Since version 0.9.0, the on\_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
+Since version 0.9.0, the on_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
 
-- `on_failure` 
+- `on_failure`
 
 `on_failure` is similar, but executes when the flush is not wholly successful. It will be passed two arguments: the number of events that were successfully sent, and an array of unsent events.
 
@@ -85,7 +85,7 @@ def failure(num, arr):
     print("These events were not sent successfully:")
     for event_dict in arr:
         print(event_dict)
-     
+
 # prior to v0.9.0
 # e = Emitter("d3rkrsqld9gmqf.cloudfront.net", buffer_size=3, on_success=success, on_failure=failure)
 
@@ -127,7 +127,7 @@ Here is a complete example with all constructor parameters set:
 ```
 from snowplow_tracker import AsyncEmitter
 
-e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net", 
+e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net",
             protocol="https",
             port=None,
             method="post",
@@ -146,9 +146,7 @@ e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net",
 $ pip install snowplow-tracker[celery]
 ```
 
-  
-
-The `CeleryEmitter` class works just like the base `Emitter` class, but it registers sending requests as a task for a [Celery](http://www.celeryproject.org/) worker. If there is a module named snowplow\_celery\_config.py on your PYTHONPATH, it will be used as the Celery configuration file; otherwise, a default configuration will be used. You can run the worker using this command:
+The `CeleryEmitter` class works just like the base `Emitter` class, but it registers sending requests as a task for a [Celery](http://www.celeryproject.org/) worker. If there is a module named snowplow_celery_config.py on your PYTHONPATH, it will be used as the Celery configuration file; otherwise, a default configuration will be used. You can run the worker using this command:
 
 ```
 celery -A snowplow_tracker.emitters worker --loglevel=debug
@@ -163,8 +161,6 @@ Note that `on_success` and `on_failure` callbacks cannot be supplied to this
 ```
 $ pip install snowplow-tracker[redis]
 ```
-
-  
 
 Use a RedisEmitter instance to store events in a [Redis](http://redis.io/) database for later use. This is the RedisEmitter constructor function:
 
@@ -208,7 +204,7 @@ You can alternatively perform an asynchronous flush, which tells the tracker to 
 t.flush(False)
 ```
 
-If you are using the AsyncEmitter, you shouldn't perform a synchronous flush inside an on\_success or on\_failure callback function as this can cause a deadlock.
+If you are using the AsyncEmitter, you shouldn't perform a synchronous flush inside an on_success or on_failure callback function as this can cause a deadlock.
 
 ### Multiple emitters
 

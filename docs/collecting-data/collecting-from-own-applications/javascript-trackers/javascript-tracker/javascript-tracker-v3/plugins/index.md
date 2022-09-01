@@ -1,6 +1,6 @@
 ---
-title: "Plugins"
-date: "2021-03-28"
+title: 'Plugins'
+date: '2021-03-28'
 sidebar_position: 4000
 ---
 
@@ -16,24 +16,24 @@ There are a number of Snowplow maintained plugins, however you are also free to 
 
 The UMD files (which work in the browser) can be downloaded from [GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) or they are available via [third party CDNs](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/third-party-cdn-hosting/index.md).
 
-| Plugin | `sp.js` | `sp.lite.js` |
-| --- | --- | --- |
-| Ad Tracking | ✅ | ❌ |
-| Browser Features | ❌ | ❌ |
-| Client Hints | ✅ | ❌ |
-| Consent | ✅ | ❌ |
-| Debugger | ❌ | ❌ |
-| Ecommerce | ✅ | ❌ |
-| Enhanced Ecommerce | ✅ | ❌ |
-| Error Tracking | ✅ | ❌ |
-| Form Tracking | ✅ | ❌ |
-| GA Cookies | ✅ | ❌ |
-| Geolocation | ✅ | ❌ |
-| Link Click Tracking | ✅ | ❌ |
-| Media Tracking | ❌ | ❌ |
-| Optimizely | ❌ | ❌ |
-| Optimizely X | ✅ | ❌ |
-| Performance Timing | ✅ | ❌ |
-| Site Tracking | ✅ | ❌ |
-| Timezone | ✅ | ❌ |
-| YouTube Tracking | ❌ | ❌ |
+| Plugin              | `sp.js` | `sp.lite.js` |
+| ------------------- | ------- | ------------ |
+| Ad Tracking         | ✅      | ❌           |
+| Browser Features    | ❌      | ❌           |
+| Client Hints        | ✅      | ❌           |
+| Consent             | ✅      | ❌           |
+| Debugger            | ❌      | ❌           |
+| Ecommerce           | ✅      | ❌           |
+| Enhanced Ecommerce  | ✅      | ❌           |
+| Error Tracking      | ✅      | ❌           |
+| Form Tracking       | ✅      | ❌           |
+| GA Cookies          | ✅      | ❌           |
+| Geolocation         | ✅      | ❌           |
+| Link Click Tracking | ✅      | ❌           |
+| Media Tracking      | ❌      | ❌           |
+| Optimizely          | ❌      | ❌           |
+| Optimizely X        | ✅      | ❌           |
+| Performance Timing  | ✅      | ❌           |
+| Site Tracking       | ✅      | ❌           |
+| Timezone            | ✅      | ❌           |
+| YouTube Tracking    | ❌      | ❌           |

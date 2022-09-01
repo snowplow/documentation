@@ -106,6 +106,9 @@ const config = {
       },
       prism: {
         theme: require('prism-react-renderer/themes/dracula'),
+        // Docusaurus comes with a subset of commonly used languages -https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js.
+        // To add syntax highlighting for additional Prism supported languages, add reference from https://prismjs.com/#supported-languages.
+        // NOTE: do a `yarn build` to ensure that it does build properly
         additionalLanguages: ['arduino', 'csharp', 'docker', 'gradle', 'java', 'php', 'properties', 'r', 'ruby', 'scala', 'swift'],
       },
       algolia: {

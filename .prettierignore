@@ -18,9 +18,8 @@
 .env.test.local
 .env.production.local
 .gitignore
-,gitmodules
+.gitmodules
 .docusaurus
-.github
 
 npm-debug.log*
 yarn-debug.log*

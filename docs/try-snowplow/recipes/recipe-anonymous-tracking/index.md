@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: Anonymous tracking'
-date: '2021-01-04'
+title: "Tutorial: Anonymous tracking"
+date: "2021-01-04"
 sidebar_position: 50
 ---
 

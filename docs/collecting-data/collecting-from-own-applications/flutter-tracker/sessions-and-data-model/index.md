@@ -1,6 +1,6 @@
 ---
-title: 'Sessions and data model'
-date: '2022-01-31'
+title: "Sessions and data model"
+date: "2022-01-31"
 sidebar_position: 5000
 ---
 

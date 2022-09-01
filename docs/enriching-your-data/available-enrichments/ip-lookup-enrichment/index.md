@@ -1,6 +1,6 @@
 ---
-title: 'IP Lookup enrichment'
-date: '2020-02-14'
+title: "IP Lookup enrichment"
+date: "2020-02-14"
 sidebar_position: 9
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'MailChimp'
-date: '2020-02-25'
+title: "MailChimp"
+date: "2020-02-25"
 sidebar_position: 40
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Ad Tracking'
-date: '2021-04-07'
+title: "Ad Tracking"
+date: "2021-04-07"
 sidebar_position: 1000
 ---
 
@@ -19,14 +19,14 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
 import {
   AdTrackingPlugin,
   trackAdClick,
-} from '@snowplow/browser-plugin-ad-tracking'
+} from "@snowplow/browser-plugin-ad-tracking"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [AdTrackingPlugin()],
 })
 ```

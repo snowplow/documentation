@@ -1,6 +1,6 @@
 ---
-title: 'Getting the domain user information from the Snowplow Cookie'
-date: '2020-03-03'
+title: "Getting the domain user information from the Snowplow Cookie"
+date: "2020-03-03"
 sidebar_position: 500
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Monitoring failed events in the Console'
-date: '2020-06-03'
+title: "Monitoring failed events in the Console"
+date: "2020-06-03"
 sidebar_position: 2000
 ---
 

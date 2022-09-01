@@ -1,6 +1,6 @@
 ---
-title: 'Schema Resolution'
-date: '2021-03-26'
+title: "Schema Resolution"
+date: "2021-03-26"
 sidebar_position: 400
 ---
 

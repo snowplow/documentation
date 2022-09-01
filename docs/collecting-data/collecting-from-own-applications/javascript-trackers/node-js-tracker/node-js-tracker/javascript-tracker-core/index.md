@@ -1,6 +1,6 @@
 ---
-title: 'Javascript Tracker Core'
-date: '2020-02-26'
+title: "Javascript Tracker Core"
+date: "2020-02-26"
 sidebar_position: 400
 ---
 

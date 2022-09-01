@@ -1,6 +1,6 @@
 ---
-title: 'Setup Snowplow Open Source on AWS'
-date: '2020-02-25'
+title: "Setup Snowplow Open Source on AWS"
+date: "2020-02-25"
 sidebar_position: 10
 ---
 

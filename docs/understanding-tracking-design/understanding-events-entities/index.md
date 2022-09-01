@@ -1,6 +1,6 @@
 ---
-title: 'Understanding events and entities'
-date: '2020-02-13'
+title: "Understanding events and entities"
+date: "2020-02-13"
 sidebar_position: 20
 ---
 

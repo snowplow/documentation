@@ -1,6 +1,6 @@
 ---
-title: 'Optimizely Classic'
-date: '2021-04-07'
+title: "Optimizely Classic"
+date: "2021-04-07"
 sidebar_position: 13000
 ---
 
@@ -19,11 +19,11 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
-import { OptimizelyPlugin } from '@snowplow/browser-plugin-optimizely'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
+import { OptimizelyPlugin } from "@snowplow/browser-plugin-optimizely"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [OptimizelyPlugin()],
 })
 ```

@@ -1,6 +1,6 @@
 ---
-title: 'Right to be Forgotten Spark Application Setup Guide'
-date: '2021-03-26'
+title: "Right to be Forgotten Spark Application Setup Guide"
+date: "2021-03-26"
 sidebar_position: 10
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: Content analytics'
-date: '2020-10-12'
+title: "Tutorial: Content analytics"
+date: "2020-10-12"
 sidebar_position: 30
 ---
 
@@ -39,22 +39,22 @@ The `content` entity has the following fields:
 Add the content entity to your `page_view` and `page_ping` events by editing your `trackPageView` events to include the entity. Specifically, update
 
 ```javascript
-window.snowplow('trackPageView')
+window.snowplow("trackPageView")
 ```
 
 to
 
 ```javascript
-window.snowplow('trackPageView', {
+window.snowplow("trackPageView", {
   context: [
     {
-      schema: 'iglu:com.trysnowplow/content/jsonschema/1-0-1',
+      schema: "iglu:com.trysnowplow/content/jsonschema/1-0-1",
       data: {
-        name: 'example_name',
-        id: 'example_id',
-        category: 'example_category',
-        date_published: '01-01-1970',
-        author: 'example_author',
+        name: "example_name",
+        id: "example_id",
+        category: "example_category",
+        date_published: "01-01-1970",
+        author: "example_author",
       },
     },
   ],
@@ -66,16 +66,16 @@ window.snowplow('trackPageView', {
 If you are using Google Tag Manager, you can add the variables like so:
 
 ```javascript
-window.snowplow('trackPageView', {
+window.snowplow("trackPageView", {
   context: [
     {
-      schema: 'iglu:com.trysnowplow/content/jsonschema/1-0-1',
+      schema: "iglu:com.trysnowplow/content/jsonschema/1-0-1",
       data: {
-        name: '{{example_name_variable}}',
-        id: '{{example_id_variable}}',
-        category: '{{example_category_variable}}',
-        date_published: '{{example_date_variable}}',
-        author: '{{example_author_variable}}',
+        name: "{{example_name_variable}}",
+        id: "{{example_id_variable}}",
+        category: "{{example_category_variable}}",
+        date_published: "{{example_date_variable}}",
+        author: "{{example_author_variable}}",
       },
     },
   ],

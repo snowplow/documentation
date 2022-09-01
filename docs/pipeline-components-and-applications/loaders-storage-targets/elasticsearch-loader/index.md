@@ -1,6 +1,6 @@
 ---
-title: 'Elasticsearch Loader'
-date: '2020-11-25'
+title: "Elasticsearch Loader"
+date: "2020-11-25"
 sidebar_position: 600
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Custom JavaScript enrichment'
-date: '2020-02-14'
+title: "Custom JavaScript enrichment"
+date: "2020-02-14"
 sidebar_position: 10
 ---
 
@@ -36,7 +36,7 @@ Taking this example further, you could do something like notify the user that se
 Here’s an example snippet of code relating to the above:
 
 ```javascript
-var SECRET_APP_ID = 'Joshua'
+var SECRET_APP_ID = "Joshua"
 
 /**
  * Performs two roles:
@@ -52,8 +52,8 @@ var SECRET_APP_ID = 'Joshua'
 function process(event) {
   var appId = event.getApp_id()
 
-  if (platform == 'server' && appId != SECRET_APP_ID) {
-    throw 'Server-side event has invalid app_id: ' + appId
+  if (platform == "server" && appId != SECRET_APP_ID) {
+    throw "Server-side event has invalid app_id: " + appId
   }
 
   if (appId == null) {
@@ -63,7 +63,7 @@ function process(event) {
   var appIdUpper = new String(appId.toUpperCase())
   return [
     {
-      schema: 'iglu:com.acme/derived_app_id/jsonschema/1-0-0',
+      schema: "iglu:com.acme/derived_app_id/jsonschema/1-0-0",
       data: { appIdUpper: appIdUpper },
     },
   ]

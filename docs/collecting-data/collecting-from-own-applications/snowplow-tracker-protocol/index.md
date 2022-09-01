@@ -1,7 +1,7 @@
 ---
-title: 'Snowplow Tracker Protocol'
-description: ''
-date: '2020-02-26'
+title: "Snowplow Tracker Protocol"
+description: ""
+date: "2020-02-26"
 sidebar_position: 80
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Update the search path for your Redshift cluster'
-date: '2020-02-26'
+title: "Update the search path for your Redshift cluster"
+date: "2020-02-26"
 sidebar_position: 20
 ---
 

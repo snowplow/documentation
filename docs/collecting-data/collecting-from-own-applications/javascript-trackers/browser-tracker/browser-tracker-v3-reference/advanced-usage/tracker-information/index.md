@@ -1,6 +1,6 @@
 ---
-title: 'Tracker Information'
-date: '2021-04-07'
+title: "Tracker Information"
+date: "2021-04-07"
 sidebar_position: 2000
 ---
 
@@ -14,8 +14,8 @@ When initialising a tracker, you can use the returned `tracker` instance to acce
 
 ```javascript
 // Configure a tracker instance named "sp"
-const sp = newTracker('sp', '{{COLLECTOR_URL}', {
-  appId: 'snowplowExampleApp',
+const sp = newTracker("sp", "{{COLLECTOR_URL}", {
+  appId: "snowplowExampleApp",
 })
 
 // Access the tracker properties
@@ -70,7 +70,7 @@ console.log(userId)
 The `getCookieName` method returns the complete cookie name for the domain or session cookie:
 
 ```javascript
-const cookieName = sp.getCookieName('id')
+const cookieName = sp.getCookieName("id")
 console.log(cookieName)
 ```
 

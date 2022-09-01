@@ -1,6 +1,6 @@
 ---
-title: 'Common configuration'
-date: '2021-03-26'
+title: "Common configuration"
+date: "2021-03-26"
 sidebar_position: 1000
 ---
 

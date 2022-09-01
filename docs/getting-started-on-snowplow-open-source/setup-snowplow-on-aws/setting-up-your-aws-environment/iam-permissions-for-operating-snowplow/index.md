@@ -1,6 +1,6 @@
 ---
-title: 'IAM permissions for operating Snowplow'
-date: '2020-11-24'
+title: "IAM permissions for operating Snowplow"
+date: "2020-11-24"
 sidebar_position: 80
 ---
 

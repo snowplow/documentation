@@ -1,6 +1,6 @@
 ---
-title: 'Installing Try Snowplow on AWS (old version)'
-date: '2020-11-23'
+title: "Installing Try Snowplow on AWS (old version)"
+date: "2020-11-23"
 sidebar_position: 10
 ---
 

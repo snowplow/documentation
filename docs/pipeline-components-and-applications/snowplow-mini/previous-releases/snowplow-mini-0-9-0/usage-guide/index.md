@@ -1,6 +1,6 @@
 ---
-title: 'Usage Guide'
-date: '2020-05-25'
+title: "Usage Guide"
+date: "2020-05-25"
 sidebar_position: 20
 ---
 

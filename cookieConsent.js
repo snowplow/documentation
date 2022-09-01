@@ -1,42 +1,42 @@
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
-import { configure, init } from 'cookie-though'
-import Cookies from 'js-cookie'
-import { COOKIE_PREF_KEY } from './src/constants/config'
+import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment"
+import { configure, init } from "cookie-though"
+import Cookies from "js-cookie"
+import { COOKIE_PREF_KEY } from "./src/constants/config"
 
 const cookieConfig = {
   policies: [
     {
-      id: 'essential',
-      label: 'Essential Cookies',
+      id: "essential",
+      label: "Essential Cookies",
       description:
-        'We need to save some technical cookies, for the website to function properly.',
-      category: 'essential',
+        "We need to save some technical cookies, for the website to function properly.",
+      category: "essential",
     },
     {
-      id: 'analytics',
-      label: 'Analytics',
-      category: 'analytics',
+      id: "analytics",
+      label: "Analytics",
+      category: "analytics",
       description:
-        'We would like to collect some data about how our visitors use the documentation to improve it.',
+        "We would like to collect some data about how our visitors use the documentation to improve it.",
     },
   ],
   permissionLabels: {
-    accept: 'Accept',
-    acceptAll: 'Accept all',
-    decline: 'Decline',
+    accept: "Accept",
+    acceptAll: "Accept all",
+    decline: "Decline",
   },
   cookiePreferenceKey: COOKIE_PREF_KEY,
   header: {
-    title: 'cookie though?',
-    subTitle: 'You’re probably fed up with these banners...',
+    title: "cookie though?",
+    subTitle: "You’re probably fed up with these banners...",
     description:
-      'We would like to use cookies to understand how you interact with this documentation, so that we can improve the content and the way it’s structured.',
+      "We would like to use cookies to understand how you interact with this documentation, so that we can improve the content and the way it’s structured.",
   },
   cookiePolicy: {
-    url: '/cookie-preferences',
-    label: 'Read our full cookie policy',
+    url: "/cookie-preferences",
+    label: "Read our full cookie policy",
   },
-  customizeLabel: 'Edit preferences',
+  customizeLabel: "Edit preferences",
 }
 
 if (ExecutionEnvironment.canUseDOM) {

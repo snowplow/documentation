@@ -1,6 +1,6 @@
 ---
-title: 'Snowplow event extractor'
-date: '2021-03-26'
+title: "Snowplow event extractor"
+date: "2021-03-26"
 sidebar_position: 1040
 ---
 

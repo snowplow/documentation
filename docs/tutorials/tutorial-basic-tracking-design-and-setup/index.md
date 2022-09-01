@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: basic tracking design and setup'
-date: '2020-02-27'
+title: "Tutorial: basic tracking design and setup"
+date: "2020-02-27"
 sidebar_position: 30
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'React Native Tracker'
-date: '2020-07-09'
+title: "React Native Tracker"
+date: "2020-07-09"
 sidebar_position: 120
 ---
 

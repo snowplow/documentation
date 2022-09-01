@@ -1,6 +1,6 @@
 ---
-title: 'Link Click Tracking'
-date: '2021-04-07'
+title: "Link Click Tracking"
+date: "2021-04-07"
 sidebar_position: 12000
 ---
 
@@ -21,14 +21,14 @@ Link click tracking is enabled using the `enableLinkClickTracking` method. Use
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
 import {
   LinkClickTrackingPlugin,
   enableLinkClickTracking,
-} from '@snowplow/browser-plugin-link-click-tracking'
+} from "@snowplow/browser-plugin-link-click-tracking"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [LinkClickTrackingPlugin()],
 })
 

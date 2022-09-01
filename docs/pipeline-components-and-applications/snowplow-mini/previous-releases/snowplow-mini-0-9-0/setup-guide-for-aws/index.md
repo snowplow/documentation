@@ -1,6 +1,6 @@
 ---
-title: 'Setup guide for AWS'
-date: '2020-05-25'
+title: "Setup guide for AWS"
+date: "2020-05-25"
 sidebar_position: 0
 ---
 

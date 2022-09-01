@@ -1,6 +1,6 @@
 ---
-title: 'S3 loader configuration reference'
-date: '2021-10-04'
+title: "S3 loader configuration reference"
+date: "2021-10-04"
 sidebar_position: 50
 ---
 

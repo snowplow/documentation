@@ -1,6 +1,6 @@
 ---
-title: 'Trackers - collecting data from your own applications'
-date: '2020-02-15'
+title: "Trackers - collecting data from your own applications"
+date: "2020-02-15"
 sidebar_position: 0
 ---
 

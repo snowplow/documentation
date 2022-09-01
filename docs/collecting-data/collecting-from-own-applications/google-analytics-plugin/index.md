@@ -1,6 +1,6 @@
 ---
-title: 'Google Analytics Plugin'
-date: '2020-08-21'
+title: "Google Analytics Plugin"
+date: "2020-08-21"
 sidebar_position: 280
 ---
 

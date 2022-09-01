@@ -1,6 +1,6 @@
 ---
-title: 'Optimizely X'
-date: '2021-03-31'
+title: "Optimizely X"
+date: "2021-03-31"
 sidebar_position: 14000
 ---
 

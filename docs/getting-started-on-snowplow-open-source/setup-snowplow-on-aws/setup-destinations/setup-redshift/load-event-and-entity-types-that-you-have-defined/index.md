@@ -1,6 +1,6 @@
 ---
-title: 'Load event and entity types that you have defined'
-date: '2020-02-26'
+title: "Load event and entity types that you have defined"
+date: "2020-02-26"
 sidebar_position: 30
 ---
 

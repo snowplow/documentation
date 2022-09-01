@@ -1,6 +1,6 @@
 ---
-title: 'Campaign attribution enrichment'
-date: '2020-02-14'
+title: "Campaign attribution enrichment"
+date: "2020-02-14"
 sidebar_position: 4
 ---
 

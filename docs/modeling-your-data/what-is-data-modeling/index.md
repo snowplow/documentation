@@ -1,6 +1,6 @@
 ---
-title: 'What is data modeling?'
-date: '2020-10-30'
+title: "What is data modeling?"
+date: "2020-10-30"
 sidebar_position: 0
 ---
 

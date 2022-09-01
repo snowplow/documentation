@@ -1,6 +1,6 @@
 ---
-title: 'What do Java tracker events look like?'
-date: '2022-03-24'
+title: "What do Java tracker events look like?"
+date: "2022-03-24"
 sidebar_position: 60
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Webhooks - collecting data from third parties'
-date: '2020-02-15'
+title: "Webhooks - collecting data from third parties"
+date: "2020-02-15"
 sidebar_position: 10
 ---
 

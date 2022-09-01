@@ -1,6 +1,6 @@
 ---
-title: 'Setup BigQuery Destination'
-date: '2020-03-02'
+title: "Setup BigQuery Destination"
+date: "2020-03-02"
 sidebar_position: 50
 ---
 

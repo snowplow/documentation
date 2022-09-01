@@ -1,6 +1,6 @@
 ---
-title: 'Third Party CDN Hosting'
-date: '2020-10-12'
+title: "Third Party CDN Hosting"
+date: "2020-10-12"
 sidebar_position: 4100
 ---
 

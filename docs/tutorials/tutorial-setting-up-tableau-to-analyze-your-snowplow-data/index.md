@@ -1,7 +1,7 @@
 ---
-title: 'Tutorial: Setting up Tableau to analyze your Snowplow data'
-description: 'How to set up Tableau to analyze your SNowplow data'
-date: '2021-03-26'
+title: "Tutorial: Setting up Tableau to analyze your Snowplow data"
+description: "How to set up Tableau to analyze your SNowplow data"
+date: "2021-03-26"
 sidebar_position: 70
 ---
 

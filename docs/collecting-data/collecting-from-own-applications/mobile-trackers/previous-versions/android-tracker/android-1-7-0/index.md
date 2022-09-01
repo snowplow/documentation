@@ -1,6 +1,6 @@
 ---
-title: 'Android (1.7.0)'
-date: '2020-10-05'
+title: "Android (1.7.0)"
+date: "2020-10-05"
 sidebar_position: 840
 ---
 

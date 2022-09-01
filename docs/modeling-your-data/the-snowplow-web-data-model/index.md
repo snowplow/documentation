@@ -1,6 +1,6 @@
 ---
-title: 'The Snowplow web data model'
-date: '2020-10-30'
+title: "The Snowplow web data model"
+date: "2020-10-30"
 sidebar_position: 10
 ---
 

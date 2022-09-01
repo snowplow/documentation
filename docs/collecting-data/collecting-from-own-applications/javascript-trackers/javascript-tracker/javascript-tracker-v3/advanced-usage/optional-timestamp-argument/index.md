@@ -1,6 +1,6 @@
 ---
-title: 'Optional timestamp argument'
-date: '2021-03-26'
+title: "Optional timestamp argument"
+date: "2021-03-26"
 sidebar_position: 1000
 ---
 

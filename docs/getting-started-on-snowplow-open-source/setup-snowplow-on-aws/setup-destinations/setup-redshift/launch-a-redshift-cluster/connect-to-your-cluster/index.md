@@ -1,6 +1,6 @@
 ---
-title: 'Connect to your cluster'
-date: '2020-02-26'
+title: "Connect to your cluster"
+date: "2020-02-26"
 sidebar_position: 10
 ---
 

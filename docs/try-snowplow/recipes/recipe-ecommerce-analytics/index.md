@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: E-commerce analytics'
-date: '2020-10-12'
+title: "Tutorial: E-commerce analytics"
+date: "2020-10-12"
 sidebar_position: 40
 ---
 
@@ -40,22 +40,22 @@ The `product` entity has the following fields:
 Add the product entity to your `page_view` and `page_ping` events by editing your `trackPageView` events to include the entity. Specifically, you'll update
 
 ```javascript
-window.snowplow('trackPageView')
+window.snowplow("trackPageView")
 ```
 
 to
 
 ```javascript
-window.snowplow('trackPageView', {
+window.snowplow("trackPageView", {
   context: [
     {
-      schema: 'iglu:com.trysnowplow/product/jsonschema/1-0-0',
+      schema: "iglu:com.trysnowplow/product/jsonschema/1-0-0",
       data: {
-        name: 'example_name',
+        name: "example_name",
         quantity: 1,
         price: 100,
-        category: 'example_category',
-        sku: 'example_sku',
+        category: "example_category",
+        sku: "example_sku",
       },
     },
   ],
@@ -96,22 +96,22 @@ When you trigger the `cart_action` event, you'll also want to attach the `produc
 Instrument the `cart_action` event when items are added to or removed from the cart on your website.
 
 ```javascript
-window.snowplow('trackSelfDescribingEvent', {
+window.snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: 'iglu:com.trysnowplow/cart_action/jsonschema/1-0-0',
+    schema: "iglu:com.trysnowplow/cart_action/jsonschema/1-0-0",
     data: {
-      type: 'add', // or "remove"
+      type: "add", // or "remove"
     },
   },
   context: [
     {
-      schema: 'iglu:com.trysnowplow/product/jsonschema/1-0-0',
+      schema: "iglu:com.trysnowplow/product/jsonschema/1-0-0",
       data: {
-        name: 'example_name',
+        name: "example_name",
         quantity: 1,
         price: 100,
-        category: 'example_category',
-        sku: 'example_sku',
+        category: "example_category",
+        sku: "example_sku",
       },
     },
   ],
@@ -135,20 +135,20 @@ Instrument the `purchase` event when a purchase is made in your store.
 #### Example for a single product purchase
 
 ```javascript
-window.snowplow('trackSelfDescribingEvent', {
+window.snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: 'iglu:com.trysnowplow/purchase/jsonschema/1-0-0',
+    schema: "iglu:com.trysnowplow/purchase/jsonschema/1-0-0",
     data: {},
   },
   context: [
     {
-      schema: 'iglu:com.trysnowplow/product/jsonschema/1-0-0',
+      schema: "iglu:com.trysnowplow/product/jsonschema/1-0-0",
       data: {
-        name: 'example_name',
+        name: "example_name",
         quantity: 1,
         price: 100,
-        category: 'example_category',
-        sku: 'example_sku',
+        category: "example_category",
+        sku: "example_sku",
       },
     },
   ],
@@ -158,30 +158,30 @@ window.snowplow('trackSelfDescribingEvent', {
 #### Example for a multi-product purchase
 
 ```javascript
-window.snowplow('trackSelfDescribingEvent', {
+window.snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: 'iglu:com.trysnowplow/purchase/jsonschema/1-0-0',
+    schema: "iglu:com.trysnowplow/purchase/jsonschema/1-0-0",
     data: {},
   },
   context: [
     {
-      schema: 'iglu:com.trysnowplow/product/jsonschema/1-0-0',
+      schema: "iglu:com.trysnowplow/product/jsonschema/1-0-0",
       data: {
-        name: 'example_name',
+        name: "example_name",
         quantity: 1,
         price: 100,
-        category: 'example_category',
-        sku: 'example_sku',
+        category: "example_category",
+        sku: "example_sku",
       },
     },
     {
-      schema: 'iglu:com.trysnowplow/product/jsonschema/1-0-0',
+      schema: "iglu:com.trysnowplow/product/jsonschema/1-0-0",
       data: {
-        name: 'example_name_2',
+        name: "example_name_2",
         quantity: 1,
         price: 50,
-        category: 'example_category_2',
-        sku: 'example_sku_2',
+        category: "example_category_2",
+        sku: "example_sku_2",
       },
     },
   ],

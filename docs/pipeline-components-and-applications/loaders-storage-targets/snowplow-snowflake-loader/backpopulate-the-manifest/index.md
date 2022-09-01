@@ -1,6 +1,6 @@
 ---
-title: 'Backpopulate the manifest'
-date: '2020-04-25'
+title: "Backpopulate the manifest"
+date: "2020-04-25"
 sidebar_position: 30
 ---
 

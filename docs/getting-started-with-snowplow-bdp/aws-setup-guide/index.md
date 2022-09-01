@@ -1,8 +1,8 @@
 ---
-title: 'Setup Snowplow BDP on AWS'
-date: '2020-01-30'
+title: "Setup Snowplow BDP on AWS"
+date: "2020-01-30"
 sidebar_position: 10
-coverImage: 'aws_logo_0.png'
+coverImage: "aws_logo_0.png"
 ---
 
 To setup Snowplow, simply follow the ['Getting Started' steps in the Snowplow BDP Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.

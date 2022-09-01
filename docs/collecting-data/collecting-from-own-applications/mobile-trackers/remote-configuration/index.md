@@ -1,6 +1,6 @@
 ---
-title: 'Set up the remote configuration'
-date: '2022-08-30'
+title: "Set up the remote configuration"
+date: "2022-08-30"
 sidebar_position: 50
 ---
 

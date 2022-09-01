@@ -1,6 +1,6 @@
 ---
-title: 'dbt: Mobile data model'
-date: '2022-05-14'
+title: "dbt: Mobile data model"
+date: "2022-05-14"
 sidebar_position: 2000
 ---
 

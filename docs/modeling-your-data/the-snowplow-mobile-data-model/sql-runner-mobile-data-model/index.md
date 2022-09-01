@@ -1,6 +1,6 @@
 ---
-title: 'sql-runner: Mobile data model'
-date: '2020-10-30'
+title: "sql-runner: Mobile data model"
+date: "2020-10-30"
 sidebar_position: 10
 ---
 

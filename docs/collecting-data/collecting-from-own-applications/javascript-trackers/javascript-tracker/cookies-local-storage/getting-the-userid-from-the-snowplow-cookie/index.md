@@ -1,6 +1,6 @@
 ---
-title: 'Getting the domain user information from the Snowplow Cookie'
-date: '2021-03-24'
+title: "Getting the domain user information from the Snowplow Cookie"
+date: "2021-03-24"
 sidebar_position: 500
 ---
 
@@ -16,10 +16,10 @@ You can use the following function to extract the Domain User Information from t
  * @return string or bool The ID string if the cookie exists or false if the cookie has not been set yet
  */
 function getSnowplowDuid(cookieName) {
-  var cookieName = cookieName || '_sp_'
-  var matcher = new RegExp(cookieName + 'id\\.[a-f0-9]+=([^;]+);?')
+  var cookieName = cookieName || "_sp_"
+  var matcher = new RegExp(cookieName + "id\\.[a-f0-9]+=([^;]+);?")
   var match = document.cookie.match(matcher)
-  var split = match[1].split('.')
+  var split = match[1].split(".")
   if (match && match[1]) {
     return {
       domain_userid: split[0],

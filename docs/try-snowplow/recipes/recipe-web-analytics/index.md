@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: Web analytics'
-date: '2020-10-12'
+title: "Tutorial: Web analytics"
+date: "2020-10-12"
 sidebar_position: 0
 ---
 
@@ -38,7 +38,7 @@ window.snowplow("newTracker", "sp", ..., {
 Furthermore, you can manually reset a session, for example after a conversion, like so:
 
 ```javascript
-window.snowplow('newSession')
+window.snowplow("newSession")
 ```
 
 Go ahead and update the sessionization logic in your tracker implementation if you would like to. More information on the Snowplow session cookie can be found [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/how-the-tracker-stores-state/index.md#The_session_cookie).

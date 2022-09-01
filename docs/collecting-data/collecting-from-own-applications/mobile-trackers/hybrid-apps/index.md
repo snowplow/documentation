@@ -1,6 +1,6 @@
 ---
-title: 'Hybrid Apps'
-date: '2022-08-30'
+title: "Hybrid Apps"
+date: "2022-08-30"
 sidebar_position: 70
 ---
 

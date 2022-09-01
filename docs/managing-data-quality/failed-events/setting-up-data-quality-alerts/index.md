@@ -1,6 +1,6 @@
 ---
-title: 'Setting up data quality alerts'
-date: '2021-01-14'
+title: "Setting up data quality alerts"
+date: "2021-01-14"
 sidebar_position: 2500
 ---
 

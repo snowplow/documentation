@@ -1,6 +1,6 @@
 ---
-title: 'Configure EmrEtlRunner'
-date: '2020-02-26'
+title: "Configure EmrEtlRunner"
+date: "2020-02-26"
 sidebar_position: 30
 ---
 
@@ -68,7 +68,7 @@ aws:
       core_instance_bid: 0.015 # In USD. Adjust bid, or leave blank for on-demand core instances
       core_instance_ebs: # Optional. Attach an EBS volume to each core instance.
         volume_size: 100 # Gigabytes
-        volume_type: 'gp2'
+        volume_type: "gp2"
         volume_iops: 400 # Optional. Will only be used if volume_type is "io1"
         ebs_optimized: false # Optional. Will default to true
       task_instance_count: 0 # Increase to use spot instances
@@ -77,9 +77,9 @@ aws:
     bootstrap_failure_tries: 3 # Number of times to attempt the job in the event of bootstrap failures
     configuration:
       yarn-site:
-        yarn.resourcemanager.am.max-attempts: '1'
+        yarn.resourcemanager.am.max-attempts: "1"
       spark:
-        maximizeResourceAllocation: 'true'
+        maximizeResourceAllocation: "true"
     additional_info: # Optional JSON string for selecting additional features
 enrich:
   versions:
@@ -178,8 +178,8 @@ The `software:` section lets you start up Lingual and/or HBase when you start up
 
 ```yaml
 software:
-  hbase: '0.92.0'
-  lingual: '1.1'
+  hbase: "0.92.0"
+  lingual: "1.1"
 ```
 
 ### storage

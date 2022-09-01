@@ -1,6 +1,6 @@
 ---
-title: 'Self hosting the JavaScript Tracker'
-date: '2021-03-24'
+title: "Self hosting the JavaScript Tracker"
+date: "2021-03-24"
 sidebar_position: 4000
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Verify schema dependencies with the Data Structures CI tool'
-date: '2020-06-01'
+title: "Verify schema dependencies with the Data Structures CI tool"
+date: "2020-06-01"
 sidebar_position: 2000
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Query your data in S3'
-date: '2022-05-10'
+title: "Query your data in S3"
+date: "2022-05-10"
 sidebar_position: 300
 ---
 

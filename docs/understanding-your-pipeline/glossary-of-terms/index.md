@@ -1,6 +1,6 @@
 ---
-title: 'Glossary of Terms'
-date: '2021-03-26'
+title: "Glossary of Terms"
+date: "2021-03-26"
 sidebar_position: 40
 ---
 
@@ -225,12 +225,12 @@ For example, when tracking a custom structured event the specification for the `
 
 ```javascript
 snowplow_name_here(
-  'trackStructEvent',
-  'category',
-  'action',
-  'label',
-  'property',
-  'value'
+  "trackStructEvent",
+  "category",
+  "action",
+  "label",
+  "property",
+  "value"
 )
 ```
 

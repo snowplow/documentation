@@ -1,6 +1,6 @@
 ---
-title: 'Run the collector as a single instance VM in GCP'
-date: '2020-02-27'
+title: "Run the collector as a single instance VM in GCP"
+date: "2020-02-27"
 sidebar_position: 20
 ---
 

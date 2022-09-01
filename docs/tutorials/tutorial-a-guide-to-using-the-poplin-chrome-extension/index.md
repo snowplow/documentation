@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: A Guide to Using the Poplin Chrome Extension'
-date: '2021-06-09'
+title: "Tutorial: A Guide to Using the Poplin Chrome Extension"
+date: "2021-06-09"
 sidebar_position: 90
 ---
 

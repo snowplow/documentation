@@ -1,6 +1,6 @@
 ---
-title: 'Event Recovery for BDP customers'
-date: '2021-10-13'
+title: "Event Recovery for BDP customers"
+date: "2021-10-13"
 sidebar_position: 20
 ---
 

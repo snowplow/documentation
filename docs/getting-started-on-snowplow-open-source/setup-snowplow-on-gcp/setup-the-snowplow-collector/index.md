@@ -1,6 +1,6 @@
 ---
-title: 'Setup the collector (GCP)'
-date: '2020-02-27'
+title: "Setup the collector (GCP)"
+date: "2020-02-27"
 sidebar_position: 0
 ---
 

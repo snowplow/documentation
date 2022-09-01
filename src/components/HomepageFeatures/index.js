@@ -1,12 +1,12 @@
-import React from 'react'
-import clsx from 'clsx'
-import styles from './styles.module.css'
+import React from "react"
+import clsx from "clsx"
+import styles from "./styles.module.css"
 
 const FeatureList = [
   {
-    title: 'Getting Started with Snowplow',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    link: 'docs',
+    title: "Getting Started with Snowplow",
+    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
+    link: "docs",
     description: (
       <>
         Information on how to get started with the various flavours of Snowplow.
@@ -14,9 +14,9 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Understanding your pipeline',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    link: 'docs/understanding-your-pipeline/architecture-overview-aws',
+    title: "Understanding your pipeline",
+    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    link: "docs/understanding-your-pipeline/architecture-overview-aws",
     description: (
       <>
         What is the Snowplow pipeline and what to use to achieve your data
@@ -25,21 +25,21 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Modelling your data',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    link: 'docs/modeling-your-data/what-is-data-modeling',
+    title: "Modelling your data",
+    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
+    link: "docs/modeling-your-data/what-is-data-modeling",
     description: <>Guidance on how to model your data.</>,
   },
   {
-    title: 'Trackers',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    link: 'docs/collecting-data/collecting-from-own-applications',
+    title: "Trackers",
+    Svg: require("@site/static/img/undraw_docusaurus_react.svg").default,
+    link: "docs/collecting-data/collecting-from-own-applications",
     description: <>Information on all the trackers available.</>,
   },
   {
-    title: 'Pipeline components and applications',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    link: 'docs/pipeline-components-and-applications',
+    title: "Pipeline components and applications",
+    Svg: require("@site/static/img/undraw_docusaurus_tree.svg").default,
+    link: "docs/pipeline-components-and-applications",
     description: (
       <>
         Information on all the pipeline components and applications available.
@@ -47,9 +47,9 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Tutorials',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    link: 'docs/tutorials',
+    title: "Tutorials",
+    Svg: require("@site/static/img/undraw_docusaurus_mountain.svg").default,
+    link: "docs/tutorials",
     description: (
       <>A number of tutorials on techniques to get your pipelines running.</>
     ),
@@ -58,7 +58,7 @@ const FeatureList = [
 
 function Feature({ Svg, title, description, link }) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={clsx("col col--4")}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
       </div>

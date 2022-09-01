@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: Marketing attribution'
-date: '2020-10-12'
+title: "Tutorial: Marketing attribution"
+date: "2020-10-12"
 sidebar_position: 10
 ---
 
@@ -47,11 +47,11 @@ Trigger the conversion events wherever you have conversions on your site. Some e
 #### In the JavaScript Tracker
 
 ```javascript
-window.snowplow('trackSelfDescribingEvent', {
+window.snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: 'iglu:com.trysnowplow/conversion/jsonschema/1-0-0',
+    schema: "iglu:com.trysnowplow/conversion/jsonschema/1-0-0",
     data: {
-      name: 'email-signup',
+      name: "email-signup",
       value: 10,
     },
   },

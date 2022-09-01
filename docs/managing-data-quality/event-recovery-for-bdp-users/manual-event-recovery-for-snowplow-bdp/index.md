@@ -1,6 +1,6 @@
 ---
-title: 'Manual Event Recovery for Snowplow BDP'
-date: '2020-07-22'
+title: "Manual Event Recovery for Snowplow BDP"
+date: "2020-07-22"
 sidebar_position: 30
 ---
 

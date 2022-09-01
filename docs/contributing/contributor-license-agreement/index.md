@@ -1,6 +1,6 @@
 ---
-title: 'Contributor License Agreement'
-date: '2020-11-24'
+title: "Contributor License Agreement"
+date: "2020-11-24"
 sidebar_position: 0
 ---
 

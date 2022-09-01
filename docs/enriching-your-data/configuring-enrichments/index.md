@@ -1,6 +1,6 @@
 ---
-title: 'Managing enrichments in the console'
-date: '2020-02-15'
+title: "Managing enrichments in the console"
+date: "2020-02-15"
 sidebar_position: 10
 ---
 

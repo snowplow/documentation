@@ -1,6 +1,6 @@
 ---
-title: 'What is the Quick Start for Open Source?'
-date: '2021-07-08'
+title: "What is the Quick Start for Open Source?"
+date: "2021-07-08"
 sidebar_position: 50
 ---
 

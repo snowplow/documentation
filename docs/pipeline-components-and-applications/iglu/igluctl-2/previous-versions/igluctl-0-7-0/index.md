@@ -1,6 +1,6 @@
 ---
-title: 'Igluctl (0.7.0)'
-date: '2020-04-02'
+title: "Igluctl (0.7.0)"
+date: "2020-04-02"
 sidebar_position: 20
 ---
 

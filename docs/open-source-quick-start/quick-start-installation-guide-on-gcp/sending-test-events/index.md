@@ -1,6 +1,6 @@
 ---
-title: 'Send a test event'
-date: '2021-09-23'
+title: "Send a test event"
+date: "2021-09-23"
 sidebar_position: 100
 ---
 

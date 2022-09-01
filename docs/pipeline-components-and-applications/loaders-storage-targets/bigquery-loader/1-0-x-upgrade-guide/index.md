@@ -1,6 +1,6 @@
 ---
-title: '1.0.x upgrade guide'
-date: '2021-10-07'
+title: "1.0.x upgrade guide"
+date: "2021-10-07"
 sidebar_position: 0
 ---
 

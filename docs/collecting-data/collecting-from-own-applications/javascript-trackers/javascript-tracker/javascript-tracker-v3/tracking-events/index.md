@@ -1,6 +1,6 @@
 ---
-title: 'Tracking Events'
-date: '2021-03-26'
+title: "Tracking Events"
+date: "2021-03-26"
 sidebar_position: 1000
 ---
 
@@ -66,7 +66,7 @@ snowplow('trackPageView');
 Track pageview is called using the simple:
 
 ```javascript
-snowplow('trackPageView')
+snowplow("trackPageView")
 ```
 
 This method automatically captures the URL, referrer and page title (inferred from the `Title` tag.
@@ -74,7 +74,7 @@ This method automatically captures the URL, referrer and page title (inferred fr
 If you wish, you can override the title with a custom value:
 
 ```javascript
-snowplow('trackPageView', { title: 'my custom page title' })
+snowplow("trackPageView", { title: "my custom page title" })
 ```
 
 `trackPageView` can also be passed an array of custom context as an additional final parameter. See [custom context](#custom-context) for more information.
@@ -85,16 +85,16 @@ For example:
 
 ```javascript
 // Turn on page pings every 10 seconds
-snowplow('enableActivityTracking', {
+snowplow("enableActivityTracking", {
   minimumVisitLength: 10,
   heartbeatDelay: 10,
 })
 
-snowplow('trackPageView', {
+snowplow("trackPageView", {
   // The usual array of static contexts
   context: [
     {
-      schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
+      schema: "iglu:com.acme/static_context/jsonschema/1-0-0",
       data: {
         staticValue: new Date().toString(),
       },
@@ -105,7 +105,7 @@ snowplow('trackPageView', {
   contextCallback: function () {
     return [
       {
-        schema: 'iglu:com.acme/dynamic_context/jsonschema/1-0-0',
+        schema: "iglu:com.acme/dynamic_context/jsonschema/1-0-0",
         data: {
           dynamicValue: new Date().toString(),
         },
@@ -128,7 +128,7 @@ That is accomplished using 'page ping' events. If activity tracking is enabled, 
 Page pings are enabled by:
 
 ```javascript
-snowplow('enableActivityTracking', {
+snowplow("enableActivityTracking", {
   minimumVisitLength: number,
   heartbeatDelay: number,
 })
@@ -137,12 +137,12 @@ snowplow('enableActivityTracking', {
 where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. So, if you executed:
 
 ```javascript
-snowplow('enableActivityTracking', {
+snowplow("enableActivityTracking", {
   minimumVisitLength: 30,
   heartbeatDelay: 10,
 })
 
-snowplow('trackPageView')
+snowplow("trackPageView")
 ```
 
 The first ping would occur after 30 seconds, and subsequent pings every 10 seconds as long as the user continued to browse the page actively.
@@ -243,7 +243,7 @@ We are using `visibilitychange` events as `beforeunload` isn't a reliable option
 You can also trigger a page ping manually with:
 
 ```javascript
-snowplow('updatePageActivity')
+snowplow("updatePageActivity")
 ```
 
 This is particularly useful when a user is passively engaging with your content, e.g. watching a video.
@@ -265,16 +265,16 @@ snowplow('trackSelfDescribingEvent', {{SELF-DESCRIBING EVENT JSON}});
 For example:
 
 ```javascript
-snowplow('trackSelfDescribingEvent', {
+snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
+    schema: "iglu:com.acme_company/viewed_product/jsonschema/1-0-0",
     data: {
-      productId: 'ASO01043',
-      category: 'Dresses',
-      brand: 'ACME',
+      productId: "ASO01043",
+      category: "Dresses",
+      brand: "ACME",
       returning: true,
       price: 49.95,
-      sizes: ['xs', 's', 'l', 'xl', 'xxl'],
+      sizes: ["xs", "s", "l", "xl", "xxl"],
       availableSince: new Date(2013, 3, 7),
     },
   },
@@ -313,11 +313,11 @@ There are five parameters can be associated with each structured event. Of them,
 The async specification for the `trackStructEvent` method is:
 
 ```javascript
-snowplow('trackStructEvent', {
-  category: 'category',
-  action: 'action',
-  label: 'label',
-  property: 'property',
+snowplow("trackStructEvent", {
+  category: "category",
+  action: "action",
+  label: "label",
+  property: "property",
   value: 0.0,
 })
 ```
@@ -325,11 +325,11 @@ snowplow('trackStructEvent', {
 An example of tracking a user listening to a music mix:
 
 ```javascript
-snowplow('trackStructEvent', {
-  category: 'Mixes',
-  action: 'Play',
-  label: 'MrC/fabric-0503-mix',
-  property: '',
+snowplow("trackStructEvent", {
+  category: "Mixes",
+  action: "Play",
+  label: "MrC/fabric-0503-mix",
+  property: "",
   value: 0.0,
 })
 ```
@@ -376,19 +376,19 @@ and the other describes a user on that page:
 How to track a **page view** with both of these contexts attached:
 
 ```javascript
-snowplow('trackPageView', {
+snowplow("trackPageView", {
   context: [
     {
-      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      schema: "iglu:com.example_company/page/jsonschema/1-2-1",
       data: {
-        pageType: 'test',
+        pageType: "test",
         lastUpdated: new Date(2021, 04, 01),
       },
     },
     {
-      schema: 'iglu:com.example_company/user/jsonschema/2-0-0',
+      schema: "iglu:com.example_company/user/jsonschema/2-0-0",
       data: {
-        userType: 'tester',
+        userType: "tester",
       },
     },
   ],
@@ -398,26 +398,26 @@ snowplow('trackPageView', {
 How to track a **self describing event** with both of these contexts attached:
 
 ```javascript
-snowplow('trackSelfDescribingEvent', {
+snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: 'iglu:com.example_company/product_viewed/jsonschema/1-0-1',
+    schema: "iglu:com.example_company/product_viewed/jsonschema/1-0-1",
     data: {
-      productId: '12345',
+      productId: "12345",
       price: 10.99,
     },
   },
   context: [
     {
-      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      schema: "iglu:com.example_company/page/jsonschema/1-2-1",
       data: {
-        pageType: 'test',
+        pageType: "test",
         lastUpdated: new Date(2021, 04, 01),
       },
     },
     {
-      schema: 'iglu:com.example_company/user/jsonschema/2-0-0',
+      schema: "iglu:com.example_company/user/jsonschema/2-0-0",
       data: {
-        userType: 'tester',
+        userType: "tester",
       },
     },
   ],
@@ -435,13 +435,13 @@ Here is an example that adds a global context entity to all subsequently tracked
 ```javascript
 // Create a context entity and add it to global context
 let contextEntity = {
-  schema: 'iglu:com.acme/user_context/jsonschema/1-0-0',
-  data: { userid: 1234, name: 'John Doe' },
+  schema: "iglu:com.acme/user_context/jsonschema/1-0-0",
+  data: { userid: 1234, name: "John Doe" },
 }
-window.snowplow('addGlobalContexts', [contextEntity])
+window.snowplow("addGlobalContexts", [contextEntity])
 
 // The global context will be added to this page view event as well
-window.snowplow('trackPageView')
+window.snowplow("trackPageView")
 ```
 
 You may not want to add the same context entity to all tracked events. There are several ways to make global context dynamic:
@@ -458,14 +458,14 @@ A sample context generator that conditionally generates a context entity could l
 
 ```javascript
 const contextGenerator = (args) => {
-  if (args.eventType == 'pv') {
+  if (args.eventType == "pv") {
     return {
-      schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+      schema: "iglu:com.acme.marketing/some_event/jsonschema/1-0-0",
       data: { test: 1 },
     }
   }
 }
-window.snowplow('addGlobalContexts', [contextGenerator])
+window.snowplow("addGlobalContexts", [contextGenerator])
 ```
 
 The optional input is an associative array that contains three elements:
@@ -524,10 +524,10 @@ Filter functions take the standard callback arguments defined for context genera
 ```javascript
 // A filter that will only attach contexts to structured events
 function structuredEventFilter(args) {
-  return args['eventType'] === 'se'
+  return args["eventType"] === "se"
 }
 var globalContextDefinition = [structuredEventFilter, contextEntityToBeAdded]
-window.snowplow('addGlobalContexts', [globalContextDefinition])
+window.snowplow("addGlobalContexts", [globalContextDefinition])
 ```
 
 #### Rulesets
@@ -548,30 +548,30 @@ Some examples, take note that wild-card matching URI path components is defined 
 ```javascript
 // Only attaches contexts to this one schema
 var ruleSetAcceptOne = {
-  accept: ['iglu:com.mailchimp/cleaned_email/jsonschema/1-0-0'],
+  accept: ["iglu:com.mailchimp/cleaned_email/jsonschema/1-0-0"],
 }
 
 // Only attaches contexts to these schemas
 var ruleSetAcceptTwo = {
   accept: [
-    'iglu:com.mailchimp/cleaned_email/jsonschema/1-0-0',
-    'iglu:com.mailchimp/subscribe/jsonschema/1-0-0',
+    "iglu:com.mailchimp/cleaned_email/jsonschema/1-0-0",
+    "iglu:com.mailchimp/subscribe/jsonschema/1-0-0",
   ],
 }
 
 // Only attaches contexts to schemas with mailchimp vendor
 var ruleSetAcceptVendor = {
-  accept: ['iglu:com.mailchimp/*/jsonschema/*-*-*'],
+  accept: ["iglu:com.mailchimp/*/jsonschema/*-*-*"],
 }
 
 // Only attaches contexts to schemas that aren't mailchimp vendor
 var ruleSetRejectVendor = {
-  reject: ['iglu:com.mailchimp/*/jsonschema/*-*-*'],
+  reject: ["iglu:com.mailchimp/*/jsonschema/*-*-*"],
 }
 
 // Only attach to Snowplow first class events
 var ruleSet = {
-  accept: ['iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4'],
+  accept: ["iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4"],
 }
 ```
 
@@ -579,7 +579,7 @@ You can add a global context entity with a ruleset as follows:
 
 ```javascript
 var globalContextDefinition = [ruleSet, contextEntityToAdd]
-window.snowplow('addGlobalContexts', [globalContextDefinition])
+window.snowplow("addGlobalContexts", [globalContextDefinition])
 ```
 
 #### [](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#rule-requirements)Rule requirements
@@ -617,11 +617,11 @@ For example:
 
 ```javascript
 var entity = {
-  schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+  schema: "iglu:com.acme.marketing/some_event/jsonschema/1-0-0",
   data: { test: 1 },
 }
-window.snowplow('addGlobalContexts', [entity]) // add a global context
-window.snowplow('removeGlobalContexts', [entity]) // remove the global context
+window.snowplow("addGlobalContexts", [entity]) // add a global context
+window.snowplow("removeGlobalContexts", [entity]) // remove the global context
 ```
 
 #### `clearGlobalContexts`
@@ -639,7 +639,7 @@ Link click tracking is enabled using the `enableLinkClickTracking` method. Use
 Turn on link click tracking like this:
 
 ```javascript
-snowplow('enableLinkClickTracking')
+snowplow("enableLinkClickTracking")
 ```
 
 This is its signature (Where `?` defines an optional property):
@@ -673,9 +673,9 @@ You can control which links are tracked using the second argument. There are thr
 This is an array of CSS classes which should be ignored by link click tracking. For example, the below code will stop link click events firing for links with the class "barred" or "untracked", but will fire link click events for all other links:
 
 ```javascript
-snowplow('enableLinkClickTracking', {
+snowplow("enableLinkClickTracking", {
   options: {
-    denylist: ['barred', 'untracked'],
+    denylist: ["barred", "untracked"],
   },
 })
 ```
@@ -683,7 +683,7 @@ snowplow('enableLinkClickTracking', {
 If there is only one class name you wish to deny, you should still put it in an array:
 
 ```javascript
-snowplow('enableLinkClickTracking', { options: { denylist: ['barred'] } })
+snowplow("enableLinkClickTracking", { options: { denylist: ["barred"] } })
 ```
 
 **Allowlists**
@@ -691,9 +691,9 @@ snowplow('enableLinkClickTracking', { options: { denylist: ['barred'] } })
 The opposite of a denylist. This is an array of the CSS classes of links which you do want to be tracked. Only clicks on links with a class in the list will be tracked.
 
 ```javascript
-snowplow('enableLinkClickTracking', {
+snowplow("enableLinkClickTracking", {
   options: {
-    allowlist: ['unbarred', 'tracked'],
+    allowlist: ["unbarred", "tracked"],
   },
 })
 ```
@@ -701,7 +701,7 @@ snowplow('enableLinkClickTracking', {
 If there is only one class name you wish to whitelist, you should still put it in an array:
 
 ```javascript
-snowplow('enableLinkClickTracking', { options: { allowlist: ['unbarred'] } })
+snowplow("enableLinkClickTracking", { options: { allowlist: ["unbarred"] } })
 ```
 
 **Filter functions**
@@ -712,22 +712,22 @@ The following code will track clicks on those and only those links whose id cont
 
 ```javascript
 function myFilter(linkElement) {
-  return linkElement.id.indexOf('interesting') > -1
+  return linkElement.id.indexOf("interesting") > -1
 }
 
-snowplow('enableLinkClickTracking', { options: { filter: myFilter } })
+snowplow("enableLinkClickTracking", { options: { filter: myFilter } })
 ```
 
 An optional parameter is `pseudoClicks`. If this is not turned on, Firefox will not recognise middle clicks. If it is turned on, there is a small possibility of false positives (click events firing when they shouldn't). **Turning this feature on is recommended**:
 
 ```javascript
-snowplow('enableLinkClickTracking', { pseudoClicks: true })
+snowplow("enableLinkClickTracking", { pseudoClicks: true })
 ```
 
 Another optional parameter is `trackContent`. Set it to `true` if you want link click events to capture the innerHTML of the clicked link:
 
 ```javascript
-snowplow('enableLinkClickTracking', { trackContent: true })
+snowplow("enableLinkClickTracking", { trackContent: true })
 ```
 
 The innerHTML of a link is all the text between the `a` tags. Note that if you use a base 64 encoded image as a link, the entire base 64 string will be included in the event.
@@ -748,7 +748,7 @@ let dynamicContext = function (element) {
   return context
 }
 
-snowplow('enableLinkClickTracking', { context: [dynamicContext] })
+snowplow("enableLinkClickTracking", { context: [dynamicContext] })
 ```
 
 See [custom context](#custom-context) for more information.
@@ -758,7 +758,7 @@ See [custom context](#custom-context) for more information.
 `enableLinkClickTracking` only tracks clicks on links which exist when the page has loaded. If new links can be added to the page after then which you wish to track, just use `refreshLinkClickTracking`. This will add Snowplow click listeners to all links which do not already have them (and which match the denylist, allowlist, or filter function you specified when `enableLinkClickTracking` was originally called). Use it like this:
 
 ```javascript
-snowplow('refreshLinkClickTracking')
+snowplow("refreshLinkClickTracking")
 ```
 
 #### `trackLinkClick`
@@ -783,12 +783,12 @@ snowplow('trackLinkClick, {
 Of these arguments, only `targetUrl` is required. This is how to use `trackLinkClick`:
 
 ```javascript
-snowplow('trackLinkClick', {
-  targetUrl: 'http://www.example.com',
-  elementId: 'first-link',
-  elementClasses: ['class-1', 'class-2'],
-  elementTarget: '',
-  elementContent: 'this page',
+snowplow("trackLinkClick", {
+  targetUrl: "http://www.example.com",
+  elementId: "first-link",
+  elementClasses: ["class-1", "class-2"],
+  elementTarget: "",
+  elementContent: "this page",
 })
 ```
 
@@ -805,9 +805,9 @@ Snowplow automatic form tracking detects three event types:
 By default, all three event types are tracked. However, it is possible to subscribe only to specific event types using the `options.events` option when enabling form tracking:
 
 ```javascript
-snowplow('enableFormTracking', {
+snowplow("enableFormTracking", {
   options: {
-    events: ['submit_form', 'focus_form', 'change_form'],
+    events: ["submit_form", "focus_form", "change_form"],
   },
 })
 ```
@@ -831,7 +831,7 @@ When a user focuses on a form element, a [`focus_form`](https://github.com/snow
 Use the `enableFormTracking` method to add event listeners to turn on form tracking by adding event listeners to all form elements and to all interactive elements inside forms (that is, all `input`, `textarea`, and `select` elements).
 
 ```javascript
-snowplow('enableFormTracking')
+snowplow("enableFormTracking")
 ```
 
 This will only work for form elements which exist when it is called. If you are creating a form programatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
@@ -863,7 +863,7 @@ This is a function used to transform data in each form field. The value and elem
 Contexts can be sent with all form tracking events by supplying them in an array in the `contexts` argument.
 
 ```javascript
-snowplow('enableFormTracking', { options: {}, context: [] })
+snowplow("enableFormTracking", { options: {}, context: [] })
 ```
 
 These contexts can be dynamic, i.e. they can be traditional self-describing JSON objects, or callbacks that generate valid self-describing JSON objects.
@@ -878,7 +878,7 @@ let dynamicContext = function (elt, type, value) {
   return context
 }
 
-snowplow('enableFormTracking', { options: {}, context: [dynamicContext] })
+snowplow("enableFormTracking", { options: {}, context: [dynamicContext] })
 ```
 
 **Examples**
@@ -891,11 +891,11 @@ var opts = {
     denylist: [],
   },
   fields: {
-    denylist: ['password'],
+    denylist: ["password"],
   },
 }
 
-snowplow('enableFormTracking', { options: opts })
+snowplow("enableFormTracking", { options: opts })
 ```
 
 To track only the forms with CSS class "tracked", and only those fields whose ID is not "private":
@@ -903,16 +903,16 @@ To track only the forms with CSS class "tracked", and only those fields whose ID
 ```javascript
 var opts = {
   forms: {
-    allowlist: ['tracked'],
+    allowlist: ["tracked"],
   },
   fields: {
     filter: function (elt) {
-      return elt.id !== 'private'
+      return elt.id !== "private"
     },
   },
 }
 
-snowplow('enableFormTracking', { options: opts })
+snowplow("enableFormTracking", { options: opts })
 ```
 
 To transform the form fields with an MD5 hashing function:
@@ -920,11 +920,11 @@ To transform the form fields with an MD5 hashing function:
 ```javascript
 var opts = {
   forms: {
-    allowlist: ['tracked'],
+    allowlist: ["tracked"],
   },
   fields: {
     filter: function (elt) {
-      return elt.id !== 'private'
+      return elt.id !== "private"
     },
     transform: function (value, elt) {
       // can use elt to make transformation decisions
@@ -933,7 +933,7 @@ var opts = {
   },
 }
 
-snowplow('enableFormTracking', { options: opts })
+snowplow("enableFormTracking", { options: opts })
 ```
 
 #### Tracking forms embedded inside iframes
@@ -945,9 +945,9 @@ In case you are able to access form elements inside an iframe, you can pass them
 The following example shows how to identify the form elements inside an iframe and pass them to the `enableFormTracking` function:
 
 ```javascript
-let iframe = document.getElementById('form_iframe') // find the element for the iframe
-let forms = iframe.contentWindow.document.getElementsByTagName('form') // find form elements inside the iframe
-snowplow('enableFormTracking', {
+let iframe = document.getElementById("form_iframe") // find the element for the iframe
+let forms = iframe.contentWindow.document.getElementsByTagName("form") // find form elements inside the iframe
+snowplow("enableFormTracking", {
   options: {
     forms: forms, // pass the embedded forms when enabling form tracking
   },
@@ -981,16 +981,16 @@ The `addTrans` method creates a transaction object. It takes nine possible par
 For example:
 
 ```javascript
-snowplow('addTrans', {
-  orderId: '1234', // required
+snowplow("addTrans", {
+  orderId: "1234", // required
   total: 11.99, // required
-  affiliation: 'Acme Clothing',
+  affiliation: "Acme Clothing",
   tax: 1.29,
   shipping: 5,
-  city: 'San Jose',
-  state: 'California',
-  country: 'USA',
-  currency: 'USD',
+  city: "San Jose",
+  state: "California",
+  country: "USA",
+  currency: "USD",
 })
 ```
 
@@ -1015,14 +1015,14 @@ There are six potential parameters that can be passed with each call, four of wh
 For example:
 
 ```javascript
-snowplow('addItem', {
-  orderId: '1234', // required
-  sku: 'DD44', // required
-  name: 'T-Shirt',
-  category: 'Green Medium',
+snowplow("addItem", {
+  orderId: "1234", // required
+  sku: "DD44", // required
+  name: "T-Shirt",
+  category: "Green Medium",
   price: 11.99,
   quantity: 1,
-  currency: 'USD',
+  currency: "USD",
 })
 ```
 
@@ -1033,7 +1033,7 @@ snowplow('addItem', {
 Once the transaction object has been created (using `addTrans`) and the relevant item data added to it using the `addItem` method, we are ready to send the data to the collector. This is initiated using the `trackTrans` method:
 
 ```javascript
-snowplow('trackTrans')
+snowplow("trackTrans")
 ```
 
 #### Putting the three methods together: a complete example
@@ -1057,46 +1057,46 @@ snowplow('trackTrans')
           n.src = w
           g.parentNode.insertBefore(n, g)
         }
-      })(window, document, 'script', '{{URL to sp.js}}', 'snowplow')
+      })(window, document, "script", "{{URL to sp.js}}", "snowplow")
 
-      snowplow('newTracker', 'sp', '{{collector_url_here}}', {
-        appId: 'my-store',
+      snowplow("newTracker", "sp", "{{collector_url_here}}", {
+        appId: "my-store",
       })
-      snowplow('enableActivityTracking', {
+      snowplow("enableActivityTracking", {
         minimumVisitLength: 30,
         heartbeatDelay: 10,
       })
-      snowplow('trackPageView')
-      snowplow('enableLinkClickTracking')
+      snowplow("trackPageView")
+      snowplow("enableLinkClickTracking")
 
-      snowplow('addTrans', {
-        orderId: '1234', // required
+      snowplow("addTrans", {
+        orderId: "1234", // required
         total: 11.99, // required
-        affiliation: 'Acme Clothing',
+        affiliation: "Acme Clothing",
         tax: 1.29,
         shipping: 5,
-        city: 'San Jose',
-        state: 'California',
-        country: 'USA',
-        currency: 'USD',
+        city: "San Jose",
+        state: "California",
+        country: "USA",
+        currency: "USD",
       })
 
       // add item might be called for every item in the shopping cart
       // where your ecommerce engine loops through each item in the cart and
       // prints out _addItem for each
-      snowplow('addItem', {
-        orderId: '1234', // required
-        sku: 'DD44', // required
-        name: 'T-Shirt',
-        category: 'Green Medium',
+      snowplow("addItem", {
+        orderId: "1234", // required
+        sku: "DD44", // required
+        name: "T-Shirt",
+        category: "Green Medium",
         price: 11.99,
         quantity: 1,
-        currency: 'USD',
+        currency: "USD",
       })
 
       // trackTrans sends the transaction to Snowplow tracking servers.
       // Must be called last to commit the transaction.
-      snowplow('trackTrans') //submits transaction to the collector
+      snowplow("trackTrans") //submits transaction to the collector
     </script>
   </head>
   <body>
@@ -1122,22 +1122,22 @@ These methods let you track users adding and removing items from a cart on an ec
 An example:
 
 ```javascript
-snowplow('trackAddToCart', {
-  sku: '000345',
-  name: 'blue tie',
-  category: 'clothing',
+snowplow("trackAddToCart", {
+  sku: "000345",
+  name: "blue tie",
+  category: "clothing",
   unitPrice: 3.49,
   quantity: 2,
-  currency: 'GBP',
+  currency: "GBP",
 })
 
-snowplow('trackRemoveFromCart', {
-  sku: '000345',
-  name: 'blue tie',
-  category: 'clothing',
+snowplow("trackRemoveFromCart", {
+  sku: "000345",
+  name: "blue tie",
+  category: "clothing",
   unitPrice: 3.49,
   quantity: 2,
-  currency: 'GBP',
+  currency: "GBP",
 })
 ```
 
@@ -1162,7 +1162,7 @@ The `trackSocialInteraction` method takes three parameters:
 The method is executed in as:
 
 ```javascript
-snowplow('trackSocialInteraction', {
+snowplow("trackSocialInteraction", {
   action: string,
   network: string,
   target: string,
@@ -1172,10 +1172,10 @@ snowplow('trackSocialInteraction', {
 For example:
 
 ```javascript
-snowplow('trackSocialInteraction', {
-  action: 'like',
-  network: 'facebook',
-  target: 'pbz00123',
+snowplow("trackSocialInteraction", {
+  action: "like",
+  network: "facebook",
+  target: "pbz00123",
 })
 ```
 
@@ -1300,15 +1300,15 @@ NOTE: All properties are optional but you must specify at least 1 for this to be
 An example:
 
 ```javascript
-snowplow('trackAdImpression', {
-  impressionId: '67965967893',
-  costModel: 'cpm', // 'cpa', 'cpc', or 'cpm'
+snowplow("trackAdImpression", {
+  impressionId: "67965967893",
+  costModel: "cpm", // 'cpa', 'cpc', or 'cpm'
   cost: 5.5,
-  targetUrl: 'http://www.example.com',
-  bannerId: '23',
-  zoneId: '7',
-  advertiserId: '201',
-  campaignId: '12',
+  targetUrl: "http://www.example.com",
+  bannerId: "23",
+  zoneId: "7",
+  advertiserId: "201",
+  campaignId: "12",
 })
 ```
 
@@ -1372,16 +1372,16 @@ NOTE: All properties are optional but you must specify at least 1 for this to be
 An example:
 
 ```javascript
-snowplow('trackAdConversion', {
-  conversionId: '743560297',
-  costModel: 'cpa',
+snowplow("trackAdConversion", {
+  conversionId: "743560297",
+  costModel: "cpa",
   cost: 10,
-  category: 'ecommerce',
-  action: 'purchase',
-  property: '',
+  category: "ecommerce",
+  action: "purchase",
+  property: "",
   initialValue: 99,
-  advertiserId: '201',
-  campaignId: '12',
+  advertiserId: "201",
+  campaignId: "12",
 })
 ```
 
@@ -1429,11 +1429,11 @@ Use the `trackTiming` method to track user timing events such as how long reso
 An example:
 
 ```javascript
-snowplow('trackTiming', {
-  category: 'load',
-  variable: 'map_loaded',
+snowplow("trackTiming", {
+  category: "load",
+  variable: "map_loaded",
   timing: 50,
-  label: 'Map loading time',
+  label: "Map loading time",
 })
 ```
 
@@ -1465,13 +1465,13 @@ Use the `addEnhancedEcommerceActionContext` method to add a GA Enhanced Ecomme
 Adding an action using Google Analytics:
 
 ```javascript
-ga('ec:setAction', 'purchase', {
-  id: 'T12345',
-  affiliation: 'Google Store - Online',
-  revenue: '37.39',
-  tax: '2.85',
-  shipping: '5.34',
-  coupon: 'SUMMER2013',
+ga("ec:setAction", "purchase", {
+  id: "T12345",
+  affiliation: "Google Store - Online",
+  revenue: "37.39",
+  tax: "2.85",
+  shipping: "5.34",
+  coupon: "SUMMER2013",
 })
 ```
 
@@ -1480,13 +1480,13 @@ ga('ec:setAction', 'purchase', {
 Adding an action using Snowplow:
 
 ```javascript
-snowplow('addEnhancedEcommerceActionContext', {
-  id: 'T12345',
-  affiliation: 'Google Store - Online',
-  revenue: '37.39', // Can also pass as number
-  tax: '2.85', // Can also pass as number
-  shipping: '5.34', // Can also pass as number
-  coupon: 'WINTER2016',
+snowplow("addEnhancedEcommerceActionContext", {
+  id: "T12345",
+  affiliation: "Google Store - Online",
+  revenue: "37.39", // Can also pass as number
+  tax: "2.85", // Can also pass as number
+  shipping: "5.34", // Can also pass as number
+  coupon: "WINTER2016",
 })
 ```
 
@@ -1509,13 +1509,13 @@ Use the `addEnhancedEcommerceImpressionContext` method to add a GA Enhanced Ec
 Adding an impression using Google Analytics:
 
 ```javascript
-ga('ec:addImpression', {
-  id: 'P12345',
-  name: 'Android Warhol T-Shirt',
-  list: 'Search Results',
-  brand: 'Google',
-  category: 'Apparel/T-Shirts',
-  variant: 'Black',
+ga("ec:addImpression", {
+  id: "P12345",
+  name: "Android Warhol T-Shirt",
+  list: "Search Results",
+  brand: "Google",
+  category: "Apparel/T-Shirts",
+  variant: "Black",
   position: 1,
 })
 ```
@@ -1523,13 +1523,13 @@ ga('ec:addImpression', {
 Adding an impression using Snowplow:
 
 ```javascript
-snowplow('addEnhancedEcommerceImpressionContext', {
-  id: 'P12345',
-  name: 'Android Warhol T-Shirt',
-  list: 'Search Results',
-  brand: 'Google',
-  category: 'Apparel/T-Shirts',
-  variant: 'Black',
+snowplow("addEnhancedEcommerceImpressionContext", {
+  id: "P12345",
+  name: "Android Warhol T-Shirt",
+  list: "Search Results",
+  brand: "Google",
+  category: "Apparel/T-Shirts",
+  variant: "Black",
   position: 1,
 })
 ```
@@ -1555,12 +1555,12 @@ Use the `addEnhancedEcommerceProductContext` method to add a GA Enhanced Ecomm
 Adding a product using Google Analytics:
 
 ```javascript
-ga('ec:addProduct', {
-  id: 'P12345',
-  name: 'Android Warhol T-Shirt',
-  brand: 'Google',
-  category: 'Apparel/T-Shirts',
-  variant: 'Black',
+ga("ec:addProduct", {
+  id: "P12345",
+  name: "Android Warhol T-Shirt",
+  brand: "Google",
+  category: "Apparel/T-Shirts",
+  variant: "Black",
   position: 1,
 })
 ```
@@ -1568,13 +1568,13 @@ ga('ec:addProduct', {
 Adding a product using Snowplow:
 
 ```javascript
-snowplow('addEnhancedEcommerceProductContext', {
-  id: 'P12345',
-  name: 'Android Warhol T-Shirt',
-  list: 'Search Results',
-  brand: 'Google',
-  category: 'Apparel/T-Shirts',
-  variant: 'Black',
+snowplow("addEnhancedEcommerceProductContext", {
+  id: "P12345",
+  name: "Android Warhol T-Shirt",
+  list: "Search Results",
+  brand: "Google",
+  category: "Apparel/T-Shirts",
+  variant: "Black",
   quantity: 1,
 })
 ```
@@ -1594,22 +1594,22 @@ Use the `addEnhancedEcommercePromoContext` method to add a GA Enhanced Ecommer
 Adding a promotion using Google Analytics:
 
 ```javascript
-ga('ec:addPromo', {
-  id: 'PROMO_1234',
-  name: 'Summer Sale',
-  creative: 'summer_banner2',
-  position: 'banner_slot1',
+ga("ec:addPromo", {
+  id: "PROMO_1234",
+  name: "Summer Sale",
+  creative: "summer_banner2",
+  position: "banner_slot1",
 })
 ```
 
 Adding a promotion using Snowplow:
 
 ```javascript
-snowplow('addEnhancedEcommercePromoContext', {
-  id: 'PROMO_1234', // The Promotion ID
-  name: 'Summer Sale', // The name
-  creative: 'summer_banner2', // The name of the creative
-  position: 'banner_slot1', // The position
+snowplow("addEnhancedEcommercePromoContext", {
+  id: "PROMO_1234", // The Promotion ID
+  name: "Summer Sale", // The name
+  creative: "summer_banner2", // The name of the creative
+  position: "banner_slot1", // The position
 })
 ```
 
@@ -1637,19 +1637,19 @@ The allowed actions:
 Adding an action using Google Analytics:
 
 ```javascript
-ga('ec:setAction', 'refund', {
-  id: 'T12345',
+ga("ec:setAction", "refund", {
+  id: "T12345",
 })
 ```
 
 Adding an action using Snowplow:
 
 ```javascript
-snowplow('addEnhancedEcommerceActionContext', {
-  id: 'T12345',
+snowplow("addEnhancedEcommerceActionContext", {
+  id: "T12345",
 })
-snowplow('trackEnhancedEcommerceAction', {
-  action: 'refund',
+snowplow("trackEnhancedEcommerceAction", {
+  action: "refund",
 })
 ```
 
@@ -1674,12 +1674,12 @@ The `expiry` field specifies that the user consents to the attached documents 
 Tracking a consent granted event:
 
 ```javascript
-snowplow('trackConsentGranted', {
-  id: '1234',
-  version: '5',
-  name: 'consent_document',
-  description: 'a document granting consent',
-  expiry: '2020-11-21T08:00:00.000Z',
+snowplow("trackConsentGranted", {
+  id: "1234",
+  version: "5",
+  name: "consent_document",
+  description: "a document granting consent",
+  expiry: "2020-11-21T08:00:00.000Z",
 })
 ```
 
@@ -1702,12 +1702,12 @@ The method arguments are:
 Tracking a consent withdrawn event:
 
 ```javascript
-snowplow('trackConsentWithdrawn', {
+snowplow("trackConsentWithdrawn", {
   all: false,
-  id: '1234',
-  version: '5',
-  name: 'consent_document',
-  description: 'a document withdrawing consent',
+  id: "1234",
+  version: "5",
+  name: "consent_document",
+  description: "a document withdrawing consent",
 })
 ```
 
@@ -1824,11 +1824,11 @@ The required basisForProcessing accepts only the following literals: `consent`,
 The GDPR context is enabled by calling the `enableGdprContext` method once the tracker has been initialised, for example:
 
 ```javascript
-snowplow('enableGdprContext', {
-  basisForProcessing: 'consent',
-  documentId: 'consentDoc-abc123',
-  documentVersion: '0.1.0',
-  documentDescription: 'this document describes consent basis for processing',
+snowplow("enableGdprContext", {
+  basisForProcessing: "consent",
+  documentId: "consentDoc-abc123",
+  documentVersion: "0.1.0",
+  documentDescription: "this document describes consent basis for processing",
 })
 ```
 
@@ -1869,9 +1869,9 @@ Of these arguments, only `message` is required. Signature of this method defin
 try {
   var user = getUser()
 } catch (e) {
-  snowplow('trackError', {
-    message: 'Cannot get user object',
-    filename: 'shop.js',
+  snowplow("trackError", {
+    message: "Cannot get user object",
+    filename: "shop.js",
     error: e,
   })
 }
@@ -1905,7 +1905,7 @@ snowplow('enableErrorTracking', {
 Unlike `trackError` you need enable error tracking only once:
 
 ```javascript
-snowplow('enableErrorTracking')
+snowplow("enableErrorTracking")
 ```
 
 Application error events are implemented as Snowplow self describing events. [Here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/application_error/jsonschema/1-0-1) is the schema for a `application_error` event.
@@ -1930,27 +1930,27 @@ To set the true timestamp add an extra argument to your track method:
 e.g. to set a true timestamp with a page view event:
 
 ```javascript
-snowplow('trackPageView', {
-  timestamp: { type: 'ttm', value: 1361553733371 },
+snowplow("trackPageView", {
+  timestamp: { type: "ttm", value: 1361553733371 },
 })
 ```
 
 e.g. to set a true timestamp for a self-describing event:
 
 ```javascript
-snowplow('trackSelfDescribingEvent', {
+snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+    schema: "iglu:com.acme_company/viewed_product/jsonschema/2-0-0",
     data: {
-      productId: 'ASO01043',
-      category: 'Dresses',
-      brand: 'ACME',
+      productId: "ASO01043",
+      category: "Dresses",
+      brand: "ACME",
       returning: true,
       price: 49.95,
-      sizes: ['xs', 's', 'l', 'xl', 'xxl'],
+      sizes: ["xs", "s", "l", "xl", "xxl"],
       availableSince: new Date(2013, 3, 7),
     },
   },
-  timestamp: { type: 'ttm', value: 1361553733371 },
+  timestamp: { type: "ttm", value: 1361553733371 },
 })
 ```

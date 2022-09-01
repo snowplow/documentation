@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: Integrating Javascript tags with Enhanced E-commerce'
-date: '2021-03-26'
+title: "Tutorial: Integrating Javascript tags with Enhanced E-commerce"
+date: "2021-03-26"
 sidebar_position: 50
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: Funnel analysis'
-date: '2021-01-05'
+title: "Tutorial: Funnel analysis"
+date: "2021-01-05"
 sidebar_position: 20
 ---
 
@@ -35,12 +35,12 @@ The `funnel_interaction` event has the following fields:
 Track the `funnel_interaction` event whenever a user completes a given funnel step:
 
 ```javascript
-window.snowplow('trackSelfDescribingEvent', {
+window.snowplow("trackSelfDescribingEvent", {
   event: {
-    schema: 'iglu:com.trysnowplow/funnel_interaction/jsonschema/1-0-0',
+    schema: "iglu:com.trysnowplow/funnel_interaction/jsonschema/1-0-0",
     data: {
-      funnel_name: 'example_funnel_name',
-      step_name: 'example_step_name',
+      funnel_name: "example_funnel_name",
+      step_name: "example_step_name",
       step_position: 1,
     },
   },

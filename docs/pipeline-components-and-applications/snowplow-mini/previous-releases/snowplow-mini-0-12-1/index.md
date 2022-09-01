@@ -1,6 +1,6 @@
 ---
-title: 'Snowplow Mini 0.12.1'
-date: '2021-02-04'
+title: "Snowplow Mini 0.12.1"
+date: "2021-02-04"
 sidebar_position: 20
 ---
 

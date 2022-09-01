@@ -1,6 +1,6 @@
 ---
-title: '.NET Tracker'
-date: '2020-02-26'
+title: ".NET Tracker"
+date: "2020-02-26"
 sidebar_position: 180
 ---
 

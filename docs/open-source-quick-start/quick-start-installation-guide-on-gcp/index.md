@@ -1,6 +1,6 @@
 ---
-title: 'Quick Start Installation Guide on GCP'
-date: '2021-09-21'
+title: "Quick Start Installation Guide on GCP"
+date: "2021-09-21"
 sidebar_position: 100
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Iglu Server configuration reference'
-date: '2021-08-03'
+title: "Iglu Server configuration reference"
+date: "2021-08-03"
 sidebar_position: 0
 ---
 

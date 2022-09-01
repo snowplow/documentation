@@ -1,6 +1,6 @@
 ---
-title: 'Snowplow Client for GTM SS'
-date: '2021-11-24'
+title: "Snowplow Client for GTM SS"
+date: "2021-11-24"
 sidebar_position: 100
 ---
 

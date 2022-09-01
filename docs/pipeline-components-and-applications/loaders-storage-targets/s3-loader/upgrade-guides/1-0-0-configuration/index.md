@@ -1,6 +1,6 @@
 ---
-title: '1.0.0 Configuration'
-date: '2021-07-16'
+title: "1.0.0 Configuration"
+date: "2021-07-16"
 sidebar_position: 0
 ---
 

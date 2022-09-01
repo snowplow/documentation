@@ -1,6 +1,6 @@
 ---
-title: 'Geolocation'
-date: '2021-04-07'
+title: "Geolocation"
+date: "2021-04-07"
 sidebar_position: 11000
 ---
 
@@ -21,14 +21,14 @@ If this plugin is enabled, the tracker will attempt to create a context from the
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
 import {
   GeolocationPlugin,
   enableGeolocationContext,
-} from '@snowplow/browser-plugin-geolocation'
+} from "@snowplow/browser-plugin-geolocation"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [GeolocationPlugin()],
 })
 

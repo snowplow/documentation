@@ -1,6 +1,6 @@
 ---
-title: 'Tracking events'
-date: '2020-02-26'
+title: "Tracking events"
+date: "2020-02-26"
 sidebar_position: 40
 ---
 

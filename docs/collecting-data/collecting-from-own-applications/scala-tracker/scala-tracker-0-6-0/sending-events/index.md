@@ -1,6 +1,6 @@
 ---
-title: 'Sending events'
-date: '2020-10-28'
+title: "Sending events"
+date: "2020-10-28"
 sidebar_position: 3000
 ---
 

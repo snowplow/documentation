@@ -1,6 +1,6 @@
 ---
-title: 'Example Roku app with Snowplow tracking'
-date: '2021-11-16'
+title: "Example Roku app with Snowplow tracking"
+date: "2021-11-16"
 sidebar_position: 5000
 ---
 

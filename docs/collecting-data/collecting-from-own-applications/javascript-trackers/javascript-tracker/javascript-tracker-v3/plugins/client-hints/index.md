@@ -1,6 +1,6 @@
 ---
-title: 'Client Hints'
-date: '2021-03-28'
+title: "Client Hints"
+date: "2021-03-28"
 sidebar_position: 3000
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Analytics SDK - Scala'
-date: '2020-11-02'
+title: "Analytics SDK - Scala"
+date: "2020-11-02"
 sidebar_position: 100
 ---
 

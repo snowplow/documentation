@@ -1,6 +1,6 @@
 ---
-title: 'Understanding the structure of Snowplow data'
-date: '2020-10-29'
+title: "Understanding the structure of Snowplow data"
+date: "2020-10-29"
 sidebar_position: 10
 ---
 

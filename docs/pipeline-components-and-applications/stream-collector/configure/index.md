@@ -1,6 +1,6 @@
 ---
-title: 'Configure the Stream Collector'
-date: '2020-09-16'
+title: "Configure the Stream Collector"
+date: "2020-09-16"
 sidebar_position: 30
 ---
 

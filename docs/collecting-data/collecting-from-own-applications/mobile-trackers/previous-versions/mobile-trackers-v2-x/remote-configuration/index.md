@@ -1,6 +1,6 @@
 ---
-title: 'Remote Configuration'
-date: '2021-06-21'
+title: "Remote Configuration"
+date: "2021-06-21"
 sidebar_position: 4000
 ---
 

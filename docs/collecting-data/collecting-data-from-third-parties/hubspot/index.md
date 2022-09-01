@@ -1,6 +1,6 @@
 ---
-title: 'HubSpot'
-date: '2020-08-10'
+title: "HubSpot"
+date: "2020-08-10"
 sidebar_position: 20
 ---
 

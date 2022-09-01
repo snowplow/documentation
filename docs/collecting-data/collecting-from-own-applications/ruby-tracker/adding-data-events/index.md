@@ -1,6 +1,6 @@
 ---
-title: 'Adding data to your events: context and more'
-date: '2021-10-19'
+title: "Adding data to your events: context and more"
+date: "2021-10-19"
 sidebar_position: 20
 ---
 

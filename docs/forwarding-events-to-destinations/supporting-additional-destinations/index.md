@@ -1,6 +1,6 @@
 ---
-title: 'Supporting additional destinations'
-date: '2021-11-23'
+title: "Supporting additional destinations"
+date: "2021-11-23"
 sidebar_position: 100
 ---
 

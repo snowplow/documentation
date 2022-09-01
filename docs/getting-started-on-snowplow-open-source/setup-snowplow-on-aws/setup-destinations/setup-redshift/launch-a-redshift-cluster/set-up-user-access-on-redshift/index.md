@@ -1,6 +1,6 @@
 ---
-title: 'Setup user access on Redshift'
-date: '2020-02-26'
+title: "Setup user access on Redshift"
+date: "2020-02-26"
 sidebar_position: 20
 ---
 

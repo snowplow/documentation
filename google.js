@@ -1,13 +1,13 @@
-import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
-import { onPreferencesChanged } from 'cookie-though'
-import Cookies from 'js-cookie'
+import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment"
+import { onPreferencesChanged } from "cookie-though"
+import Cookies from "js-cookie"
 import {
   COOKIE_PREF_KEY,
   DOCS_SITE_URLS,
   GTM_ID,
   UA_ID,
-} from './src/constants/config'
-import { reloadOnce } from './src/helpers/reloadOnce'
+} from "./src/constants/config"
+import { reloadOnce } from "./src/helpers/reloadOnce"
 
 // to prevent any possible mess-up with adding the scripts multiple times
 const scriptsAttached = [false, false, false]
@@ -15,7 +15,7 @@ const scriptsAttached = [false, false, false]
 const attachGTMHeadScript = () => {
   if (scriptsAttached[0]) return
 
-  const headScript = document.createElement('script')
+  const headScript = document.createElement("script")
 
   headScript.textContent = `
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -24,7 +24,7 @@ const attachGTMHeadScript = () => {
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','${GTM_ID}');
   `
-  headScript.type = 'text/javascript'
+  headScript.type = "text/javascript"
 
   document.head.appendChild(headScript)
 
@@ -33,16 +33,16 @@ const attachGTMHeadScript = () => {
 
 const attachGTMBodyScript = () => {
   if (scriptsAttached[1]) return
-  const noScript = document.createElement('noscript')
-  const iframe = document.createElement('iframe')
+  const noScript = document.createElement("noscript")
+  const iframe = document.createElement("iframe")
 
   iframe.setAttribute(
-    'src',
+    "src",
     `https://www.googletagmanager.com/ns.html?id=${GTM_ID}`
   )
-  iframe.setAttribute('height', 0)
-  iframe.setAttribute('width', 0)
-  iframe.setAttribute('style', 'display:none;visibility:hidden;')
+  iframe.setAttribute("height", 0)
+  iframe.setAttribute("width", 0)
+  iframe.setAttribute("style", "display:none;visibility:hidden;")
 
   noScript.appendChild(iframe)
 
@@ -53,17 +53,17 @@ const attachGTMBodyScript = () => {
 
 const attachGAScripts = () => {
   if (scriptsAttached[2]) return
-  const firstScript = document.createElement('script')
+  const firstScript = document.createElement("script")
 
-  firstScript.setAttribute('async', '')
+  firstScript.setAttribute("async", "")
   firstScript.setAttribute(
-    'src',
+    "src",
     `https://www.googletagmanager.com/gtag/js?id=${UA_ID}`
   )
-  firstScript.type = 'text/javascript'
+  firstScript.type = "text/javascript"
 
   firstScript.onload = () => {
-    const secondScript = document.createElement('script')
+    const secondScript = document.createElement("script")
 
     secondScript.textContent = `
       window.dataLayer = window.dataLayer || [];
@@ -72,7 +72,7 @@ const attachGAScripts = () => {
 
       gtag('config', '${UA_ID}');
     `
-    secondScript.type = 'text/javascript'
+    secondScript.type = "text/javascript"
 
     document.body.insertBefore(secondScript, document.body.children[1])
   }
@@ -89,7 +89,7 @@ const setupGoogleTrackers = () => {
   if (
     isProd &&
     cookiePreferences &&
-    cookiePreferences.includes('analytics:1')
+    cookiePreferences.includes("analytics:1")
   ) {
     attachGTMHeadScript()
     attachGTMBodyScript()
@@ -104,15 +104,15 @@ if (ExecutionEnvironment.canUseDOM) {
     const isProd = DOCS_SITE_URLS.includes(window.location.hostname)
 
     preferences.cookieOptions.forEach(({ id, isEnabled }) => {
-      if (id === 'analytics' && isProd) {
+      if (id === "analytics" && isProd) {
         if (isEnabled) {
           attachGTMHeadScript()
           attachGTMBodyScript()
           attachGAScripts()
         } else {
-          Cookies.remove('_ga')
-          Cookies.remove('_gid')
-          Cookies.remove('_gat_gtag_UA_159566509_1')
+          Cookies.remove("_ga")
+          Cookies.remove("_gid")
+          Cookies.remove("_gat_gtag_UA_159566509_1")
           reloadOnce()
         }
       }

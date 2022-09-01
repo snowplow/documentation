@@ -1,6 +1,6 @@
 ---
-title: 'Quick start guide'
-date: '2020-01-30'
+title: "Quick start guide"
+date: "2020-01-30"
 sidebar_position: 0
 ---
 

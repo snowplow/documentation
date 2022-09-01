@@ -1,6 +1,6 @@
 ---
-title: 'Accessing failed events in file storage'
-date: '2021-10-13'
+title: "Accessing failed events in file storage"
+date: "2021-10-13"
 sidebar_position: 50
 ---
 

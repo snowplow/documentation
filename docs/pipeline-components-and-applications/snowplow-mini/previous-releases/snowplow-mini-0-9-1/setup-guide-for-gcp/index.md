@@ -1,6 +1,6 @@
 ---
-title: 'Setup Guide for GCP'
-date: '2020-06-17'
+title: "Setup Guide for GCP"
+date: "2020-06-17"
 sidebar_position: 0
 ---
 

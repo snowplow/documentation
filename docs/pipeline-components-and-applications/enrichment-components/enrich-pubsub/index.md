@@ -1,6 +1,6 @@
 ---
-title: 'enrich-pubsub (GCP) and enrich-kinesis (AWS)'
-date: '2020-10-22'
+title: "enrich-pubsub (GCP) and enrich-kinesis (AWS)"
+date: "2020-10-22"
 sidebar_position: 10
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Installing the tracker from npm'
-date: '2021-03-31'
+title: "Installing the tracker from npm"
+date: "2021-03-31"
 sidebar_position: -10
 ---
 
@@ -15,14 +15,14 @@ Getting started with sending events using the Browser Tracker will be familiar f
 - You can then import this library into your application
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
 ```
 
 - Configure an instance of the tracker by calling `newTracker(...)` with your desired properties. This will create a module level instance of your tracker. You don't need to keep a reference to it.
 
 ```javascript
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [],
 })
 ```
@@ -47,14 +47,14 @@ trackPageView()
 import {
   FormTrackingPlugin,
   enableFormTracking,
-} from '@snowplow/browser-plugin-form-tracking'
+} from "@snowplow/browser-plugin-form-tracking"
 ```
 
 - Update your tracker initialization code so the tracker knows this plugin exists:
 
 ```javascript
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [FormTrackingPlugin()],
 })
 ```

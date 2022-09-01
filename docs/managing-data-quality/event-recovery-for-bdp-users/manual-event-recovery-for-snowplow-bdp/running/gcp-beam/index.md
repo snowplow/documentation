@@ -1,6 +1,6 @@
 ---
-title: 'GCP - Beam'
-date: '2020-08-03'
+title: "GCP - Beam"
+date: "2020-08-03"
 sidebar_position: 0
 ---
 

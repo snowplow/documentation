@@ -1,6 +1,6 @@
 ---
-title: 'Set up automated testing with Snowplow Micro'
-date: '2021-03-26'
+title: "Set up automated testing with Snowplow Micro"
+date: "2021-03-26"
 sidebar_position: 1000
 ---
 

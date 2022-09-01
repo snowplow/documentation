@@ -1,6 +1,6 @@
 ---
-title: 'Run the collector as an autoscaling group of instances behind an Load Balancer'
-date: '2020-02-27'
+title: "Run the collector as an autoscaling group of instances behind an Load Balancer"
+date: "2020-02-27"
 sidebar_position: 30
 ---
 

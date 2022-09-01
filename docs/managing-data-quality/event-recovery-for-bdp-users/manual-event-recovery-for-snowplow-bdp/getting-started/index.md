@@ -1,6 +1,6 @@
 ---
-title: 'Getting Started'
-date: '2020-07-22'
+title: "Getting Started"
+date: "2020-07-22"
 sidebar_position: 0
 ---
 

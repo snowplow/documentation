@@ -1,6 +1,6 @@
 ---
-title: 'What is Snowplow Micro?'
-date: '2020-02-24'
+title: "What is Snowplow Micro?"
+date: "2020-02-24"
 sidebar_position: 30
 ---
 

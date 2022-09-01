@@ -1,6 +1,6 @@
 ---
-title: 'Enhanced Ecommerce'
-date: '2021-03-30'
+title: "Enhanced Ecommerce"
+date: "2021-03-30"
 sidebar_position: 7000
 ---
 

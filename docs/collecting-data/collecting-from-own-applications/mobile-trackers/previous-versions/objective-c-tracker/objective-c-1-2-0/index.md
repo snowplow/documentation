@@ -1,6 +1,6 @@
 ---
-title: 'Objective-C (iOS) (1.2.0)'
-date: '2020-03-19'
+title: "Objective-C (iOS) (1.2.0)"
+date: "2020-03-19"
 sidebar_position: 840
 ---
 

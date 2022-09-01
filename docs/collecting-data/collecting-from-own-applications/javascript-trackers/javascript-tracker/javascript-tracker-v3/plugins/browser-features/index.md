@@ -1,6 +1,6 @@
 ---
-title: 'Browser Features'
-date: '2021-03-28'
+title: "Browser Features"
+date: "2021-03-28"
 sidebar_position: 2000
 ---
 

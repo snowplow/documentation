@@ -1,6 +1,6 @@
 ---
-title: 'Google AMP (1.0.3)'
-date: '2020-03-19'
+title: "Google AMP (1.0.3)"
+date: "2020-03-19"
 sidebar_position: 990
 ---
 

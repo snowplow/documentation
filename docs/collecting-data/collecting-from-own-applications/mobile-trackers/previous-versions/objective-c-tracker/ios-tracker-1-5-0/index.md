@@ -1,6 +1,6 @@
 ---
-title: 'iOS Tracker (1.5.0)'
-date: '2020-09-07'
+title: "iOS Tracker (1.5.0)"
+date: "2020-09-07"
 sidebar_position: 10
 ---
 

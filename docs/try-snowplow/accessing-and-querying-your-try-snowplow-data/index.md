@@ -1,6 +1,6 @@
 ---
-title: 'Querying your Try Snowplow data'
-date: '2020-11-23'
+title: "Querying your Try Snowplow data"
+date: "2020-11-23"
 sidebar_position: 30
 ---
 

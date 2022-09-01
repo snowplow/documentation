@@ -1,6 +1,6 @@
 ---
-title: 'Ruby client'
-date: '2021-03-26'
+title: "Ruby client"
+date: "2021-03-26"
 sidebar_position: 60
 ---
 

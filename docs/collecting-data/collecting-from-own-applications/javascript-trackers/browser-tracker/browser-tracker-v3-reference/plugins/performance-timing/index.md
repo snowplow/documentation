@@ -1,6 +1,6 @@
 ---
-title: 'Performance Timing'
-date: '2021-04-07'
+title: "Performance Timing"
+date: "2021-04-07"
 sidebar_position: 14000
 ---
 
@@ -19,11 +19,11 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
-import { PerformanceTimingPlugin } from '@snowplow/browser-plugin-performance-timing'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
+import { PerformanceTimingPlugin } from "@snowplow/browser-plugin-performance-timing"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [PerformanceTimingPlugin()],
 })
 ```

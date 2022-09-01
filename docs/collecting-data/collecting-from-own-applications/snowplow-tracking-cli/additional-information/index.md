@@ -1,6 +1,6 @@
 ---
-title: 'Additional Information'
-date: '2020-10-12'
+title: "Additional Information"
+date: "2020-10-12"
 sidebar_position: 300
 ---
 

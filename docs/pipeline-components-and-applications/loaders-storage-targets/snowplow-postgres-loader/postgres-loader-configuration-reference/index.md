@@ -1,6 +1,6 @@
 ---
-title: 'Postgres Loader Configuration Reference'
-date: '2021-07-07'
+title: "Postgres Loader Configuration Reference"
+date: "2021-07-07"
 sidebar_position: 0
 ---
 

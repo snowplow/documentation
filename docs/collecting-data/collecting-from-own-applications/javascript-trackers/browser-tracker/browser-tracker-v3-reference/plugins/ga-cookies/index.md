@@ -1,6 +1,6 @@
 ---
-title: 'GA Cookies'
-date: '2021-04-07'
+title: "GA Cookies"
+date: "2021-04-07"
 sidebar_position: 10000
 ---
 
@@ -21,11 +21,11 @@ If this plugin is used, the tracker will look for Google Analytics cookies (spec
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
-import { GaCookiesPlugin } from '@snowplow/browser-plugin-ga-cookies'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
+import { GaCookiesPlugin } from "@snowplow/browser-plugin-ga-cookies"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [GaCookiesPlugin()],
 })
 ```

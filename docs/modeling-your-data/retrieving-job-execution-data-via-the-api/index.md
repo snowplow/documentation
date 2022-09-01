@@ -1,6 +1,6 @@
 ---
-title: 'Retrieving data model execution data via the API'
-date: '2020-12-28'
+title: "Retrieving data model execution data via the API"
+date: "2020-12-28"
 sidebar_position: 70
 ---
 

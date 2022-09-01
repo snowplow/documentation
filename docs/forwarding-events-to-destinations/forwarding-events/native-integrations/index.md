@@ -1,6 +1,6 @@
 ---
-title: 'Native Integrations'
-date: '2021-11-24'
+title: "Native Integrations"
+date: "2021-11-24"
 sidebar_position: 0
 ---
 

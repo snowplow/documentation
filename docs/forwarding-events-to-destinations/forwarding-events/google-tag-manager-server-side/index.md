@@ -1,6 +1,6 @@
 ---
-title: 'Google Tag Manager Server Side'
-date: '2021-11-24'
+title: "Google Tag Manager Server Side"
+date: "2021-11-24"
 sidebar_position: 10
 ---
 

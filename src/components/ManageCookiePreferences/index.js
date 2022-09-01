@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { onPreferencesChanged, show } from 'cookie-though'
-import Cookies from 'js-cookie'
-import { COOKIE_PREF_KEY } from '../../constants/config'
-import styles from './styles.module.css'
+import React, { useEffect, useState } from "react"
+import { onPreferencesChanged, show } from "cookie-though"
+import Cookies from "js-cookie"
+import { COOKIE_PREF_KEY } from "../../constants/config"
+import styles from "./styles.module.css"
 
 export default function ManageCookiePreferences() {
   const [consentState, setConsentState] = useState(
-    'You currently have no cookies enabled'
+    "You currently have no cookies enabled"
   )
 
   useEffect(() => {
     onPreferencesChanged((preferences) => {
       preferences.cookieOptions.forEach(({ id, isEnabled }) => {
-        if (id === 'analytics') {
+        if (id === "analytics") {
           if (isEnabled) {
             setConsentState(
-              'You currently have Necessary and Analytics cookies enabled'
+              "You currently have Necessary and Analytics cookies enabled"
             )
           } else {
             setConsentState(
-              'You currently have only the Necessary cookies enabled'
+              "You currently have only the Necessary cookies enabled"
             )
           }
         }
@@ -28,12 +28,12 @@ export default function ManageCookiePreferences() {
 
     const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
     if (cookiePreferences) {
-      if (cookiePreferences.includes('analytics:1')) {
+      if (cookiePreferences.includes("analytics:1")) {
         setConsentState(
-          'You currently have Necessary and Analytics cookies enabled'
+          "You currently have Necessary and Analytics cookies enabled"
         )
       } else {
-        setConsentState('You currently have only the Necessary cookies enabled')
+        setConsentState("You currently have only the Necessary cookies enabled")
       }
     }
   }, [])

@@ -1,6 +1,6 @@
 ---
-title: 'Adding extra data: the Subject class'
-date: '2022-05-12'
+title: "Adding extra data: the Subject class"
+date: "2022-05-12"
 sidebar_position: 70
 ---
 

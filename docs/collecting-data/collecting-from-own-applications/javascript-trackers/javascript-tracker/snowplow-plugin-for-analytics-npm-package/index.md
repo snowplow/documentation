@@ -1,6 +1,6 @@
 ---
-title: 'Snowplow Plugin for getanalytics.io'
-date: '2020-08-10'
+title: "Snowplow Plugin for getanalytics.io"
+date: "2020-08-10"
 sidebar_position: 6000
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Installing the Elasticsearch Loader'
-date: '2020-02-26'
+title: "Installing the Elasticsearch Loader"
+date: "2020-02-26"
 sidebar_position: 10
 ---
 

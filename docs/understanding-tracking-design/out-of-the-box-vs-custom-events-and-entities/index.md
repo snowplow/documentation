@@ -1,6 +1,6 @@
 ---
-title: 'Out-of-the-box vs custom events'
-date: '2020-02-24'
+title: "Out-of-the-box vs custom events"
+date: "2020-02-24"
 sidebar_position: 30
 ---
 

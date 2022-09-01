@@ -7,10 +7,10 @@ Tracker initialization is started by calling the `"newTracker"` function and t
 Here is a simple example of how to initialise a tracker:
 
 ```javascript
-snowplow('newTracker', 'sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
+snowplow("newTracker", "sp", "{{collector_url_here}}", {
+  appId: "my-app-id",
   discoverRootDomain: true,
-  cookieSameSite: 'Lax', // Recommended
+  cookieSameSite: "Lax", // Recommended
   contexts: {
     webPage: true,
   },
@@ -22,30 +22,30 @@ The tracker will be named “sp” and will send events to the a collector url y
 Here is a longer example in which every tracker configuration parameter is set:
 
 ```javascript
-snowplow('newTracker', 'sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
-  platform: 'web',
+snowplow("newTracker", "sp", "{{collector_url_here}}", {
+  appId: "my-app-id",
+  platform: "web",
   cookieDomain: null,
   discoverRootDomain: true,
-  cookieName: '_sp_',
-  cookieSameSite: 'Lax', // Recommended
+  cookieName: "_sp_",
+  cookieSameSite: "Lax", // Recommended
   cookieSecure: true,
   encodeBase64: true,
   respectDoNotTrack: false,
   pageUnloadTimer: 500,
   forceSecureTracker: false,
-  eventMethod: 'post',
+  eventMethod: "post",
   bufferSize: 1,
   maxPostBytes: 40000,
-  postPath: '/custom/path',
+  postPath: "/custom/path",
   crossDomainLinker: function (linkElement) {
     return (
-      linkElement.href === 'http://acme.de' ||
-      linkElement.id === 'crossDomainLink'
+      linkElement.href === "http://acme.de" ||
+      linkElement.id === "crossDomainLink"
     )
   },
   cookieLifetime: 63072000,
-  stateStorageStrategy: 'cookieAndLocalStorage',
+  stateStorageStrategy: "cookieAndLocalStorage",
   maxLocalStorageQueueSize: 1000,
   resetActivityTrackingOnPageView: true,
   connectionTimeout: 5000, // Available from 2.15.0
@@ -332,7 +332,7 @@ You can also batch events sent by POST by setting a numeric `bufferSize` field
 If you have set `bufferSize` to greater than 1, you can flush the buffer using the `flushBuffer` method:
 
 ```javascript
-snowplow('flushBuffer')
+snowplow("flushBuffer")
 ```
 
 For instance, if you wish to send several events at once, you might make the API calls to create the events and store them and then and call `flushBuffer` afterwards to ensure they are all sent before the user leaves the page.
@@ -396,8 +396,8 @@ If you want to decorate every link, regardless of its destination:
 Note that the above will decorate “links” which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`). To exclude these links:
 
 ```javascript
-snowplow('crossDomainLinker', function (linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0
+snowplow("crossDomainLinker", function (linkElement) {
+  return linkElement.href.indexOf("javascript:") < 0
 })
 ```
 
@@ -406,10 +406,10 @@ Note that when the tracker loads, it does not immediately decorate links. Instea
 If further links get added to the page after the tracker has loaded, you can use the tracker’s `crossDomainLinker` method to add listeners again. (Listeners won’t be added to links which already have them.)
 
 ```javascript
-snowplow('crossDomainLinker', function (linkElement) {
+snowplow("crossDomainLinker", function (linkElement) {
   return (
-    linkElement.href === 'http://acme.de' ||
-    linkElement.id === 'crossDomainLink'
+    linkElement.href === "http://acme.de" ||
+    linkElement.id === "crossDomainLink"
   )
 })
 ```
@@ -435,7 +435,7 @@ If the optional `discoverRootDomain` field of the configuration object is set 
 Whenever tracker initialized on your domain – it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` configuration object parameter or `setVisitorCookieTimeout` method.
 
 ```javascript
-snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
+snowplow("newTracker", "cf", "{{COLLECTOR_URL}}", {
   cookieLifetime: 86400 * 31,
 })
 ```
@@ -443,7 +443,7 @@ snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
 or
 
 ```javascript
-snowplow('setVisitorCookieTimeout', 86400 * 30) // 30 days
+snowplow("setVisitorCookieTimeout", 86400 * 30) // 30 days
 ```
 
 If `cookieLifetime` is set to `0`, the cookie will expire at the end of the session (when the browser closes). If set to `-1`, the first-party cookies will be disabled.
@@ -457,7 +457,7 @@ JS Tracker by default doesn’t fire events when page is preloaded, but sets cal
 To explicitly enable tracking for prerendered pages you can use `setCountPreRendered` function:
 
 ```javascript
-snowplow('setCountPreRendered', true)
+snowplow("setCountPreRendered", true)
 ```
 
 #### Limiting Local Storage queue size

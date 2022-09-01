@@ -1,6 +1,6 @@
 ---
-title: 'Device info context'
-date: '2021-12-23'
+title: "Device info context"
+date: "2021-12-23"
 sidebar_position: 4750
 ---
 

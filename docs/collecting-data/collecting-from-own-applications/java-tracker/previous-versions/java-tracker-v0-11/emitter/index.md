@@ -1,6 +1,6 @@
 ---
-title: 'Emitter'
-date: '2022-05-12'
+title: "Emitter"
+date: "2022-05-12"
 sidebar_position: 80
 ---
 

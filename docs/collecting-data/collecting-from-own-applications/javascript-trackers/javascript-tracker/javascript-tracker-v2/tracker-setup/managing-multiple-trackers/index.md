@@ -1,6 +1,6 @@
 ---
-title: 'Managing multiple trackers'
-date: '2020-03-03'
+title: "Managing multiple trackers"
+date: "2020-03-03"
 sidebar_position: 40
 ---
 

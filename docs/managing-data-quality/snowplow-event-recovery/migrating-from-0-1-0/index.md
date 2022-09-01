@@ -1,6 +1,6 @@
 ---
-title: 'Migrating from 0.1.0'
-date: '2020-04-15'
+title: "Migrating from 0.1.0"
+date: "2020-04-15"
 sidebar_position: 60
 ---
 

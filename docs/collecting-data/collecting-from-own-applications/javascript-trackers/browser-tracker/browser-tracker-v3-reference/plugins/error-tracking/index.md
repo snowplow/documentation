@@ -1,6 +1,6 @@
 ---
-title: 'Error Tracking'
-date: '2021-04-07'
+title: "Error Tracking"
+date: "2021-04-07"
 sidebar_position: 8000
 ---
 
@@ -21,14 +21,14 @@ This tracker plugin provides two ways of tracking exceptions: manual tracking of
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
 import {
   ErrorTrackingPlugin,
   enableErrorTracking,
-} from '@snowplow/browser-plugin-error-tracking'
+} from "@snowplow/browser-plugin-error-tracking"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [ErrorTrackingPlugin()],
 })
 

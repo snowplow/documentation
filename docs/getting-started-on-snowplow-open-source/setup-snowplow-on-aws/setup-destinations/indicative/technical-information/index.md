@@ -1,6 +1,6 @@
 ---
-title: 'Technical information'
-date: '2021-03-26'
+title: "Technical information"
+date: "2021-03-26"
 sidebar_position: 2000
 ---
 

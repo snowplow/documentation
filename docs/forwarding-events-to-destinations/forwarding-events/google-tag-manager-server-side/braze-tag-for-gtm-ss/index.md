@@ -1,6 +1,6 @@
 ---
-title: 'Braze Tag for GTM SS'
-date: '2022-01-17'
+title: "Braze Tag for GTM SS"
+date: "2022-01-17"
 sidebar_position: 400
 ---
 

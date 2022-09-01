@@ -5,27 +5,27 @@
  */
 
 @font-face {
-  font-family: 'Rubik';
-  src: url('/fonts/Rubik-Regular.ttf') format('truetype');
+  font-family: "Rubik";
+  src: url("/fonts/Rubik-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Medium.ttf') format('truetype');
+  font-family: "Inter";
+  src: url("/fonts/Inter-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-Regular.ttf') format('truetype');
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-Medium.ttf') format('truetype');
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
 }
@@ -41,7 +41,7 @@
   --ifm-color-primary-lighter: #926ed3;
   --ifm-color-primary-lightest: #b198df;
   --ifm-code-font-size: 95%;
-  --ifm-font-family-base: 'Roboto', Arial, Helvetica, sans-serif;
+  --ifm-font-family-base: "Roboto", Arial, Helvetica, sans-serif;
   --ifm-menu-color-active: #6638b8;
   --ifm-font-color-base: #000000;
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
@@ -52,7 +52,7 @@
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+[data-theme="dark"] {
   --ifm-menu-color-active: #b198df;
   --ifm-color-primary: #b198df;
   --ifm-color-primary-dark: #522d93;
@@ -65,19 +65,19 @@
   --ifm-font-color-base: rgb(218, 221, 225);
 }
 
-[data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
+[data-theme="dark"] .breadcrumbs__item--active .breadcrumbs__link {
   color: var(--ifm-font-color-base);
   background: none;
   text-decoration: none;
 }
 
-[data-theme='dark'] .navbar__item.snwpl-nav-button {
+[data-theme="dark"] .navbar__item.snwpl-nav-button {
   background: var(--ifm-color-primary-light);
   border-color: var(--ifm-color-primary-light);
   color: var(--ifm-font-color-base);
 }
 
-[data-theme='dark'] .navbar__item.snwpl-nav-button:hover {
+[data-theme="dark"] .navbar__item.snwpl-nav-button:hover {
   background: var(--ifm-color-primary-lighter);
   border-color: var(--ifm-color-primary-lighter);
 }
@@ -124,7 +124,7 @@
     0px 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 4px;
 
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -154,7 +154,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'Rubik';
+  font-family: "Rubik";
 }
 
 h1 {
@@ -194,7 +194,7 @@ h3 {
 }
 
 .breadcrumbs__item:not(:last-child):after {
-  content: '/';
+  content: "/";
   background: none;
   color: var(--ifm-color-primary);
   padding-right: 4px;

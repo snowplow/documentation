@@ -1,6 +1,6 @@
 ---
-title: 'Migrating from v2 to v3'
-date: '2021-03-24'
+title: "Migrating from v2 to v3"
+date: "2021-03-24"
 sidebar_position: 1200
 ---
 

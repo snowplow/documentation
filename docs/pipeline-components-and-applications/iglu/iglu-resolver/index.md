@@ -1,6 +1,6 @@
 ---
-title: 'Iglu Resolver'
-date: '2020-10-22'
+title: "Iglu Resolver"
+date: "2020-10-22"
 sidebar_position: 30
 ---
 

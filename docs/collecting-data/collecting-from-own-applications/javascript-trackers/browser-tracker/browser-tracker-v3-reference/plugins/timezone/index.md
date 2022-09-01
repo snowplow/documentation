@@ -1,6 +1,6 @@
 ---
-title: 'Timezone'
-date: '2021-04-07'
+title: "Timezone"
+date: "2021-04-07"
 sidebar_position: 16000
 ---
 
@@ -19,11 +19,11 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
-import { TimezonePlugin } from '@snowplow/browser-plugin-timezone'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
+import { TimezonePlugin } from "@snowplow/browser-plugin-timezone"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [TimezonePlugin()],
 })
 ```

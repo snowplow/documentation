@@ -1,6 +1,6 @@
 ---
-title: 'Accessing failed event aggregates via the API'
-date: '2020-06-12'
+title: "Accessing failed event aggregates via the API"
+date: "2020-06-12"
 sidebar_position: 3000
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Events Manifest Populator'
-date: '2020-12-01'
+title: "Events Manifest Populator"
+date: "2020-12-01"
 sidebar_position: 2000
 ---
 

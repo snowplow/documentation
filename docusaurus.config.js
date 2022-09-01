@@ -1,46 +1,46 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const redirects = require('./redirects')
+const redirects = require("./redirects")
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Snowplow Documentation',
+  title: "Snowplow Documentation",
   tagline:
-    'Build, deploy, and scale your next data creation project using Snowplow.',
-  url: 'https://docs.snowplow.io',
-  baseUrl: '/',
+    "Build, deploy, and scale your next data creation project using Snowplow.",
+  url: "https://docs.snowplow.io",
+  baseUrl: "/",
   // reset this back to throw, set to warn so that site builds
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'throw',
-  favicon: 'img/favicon.ico',
+  onBrokenLinks: "warn",
+  onBrokenMarkdownLinks: "throw",
+  favicon: "img/favicon.ico",
   trailingSlash: true,
-  organizationName: 'snowplow',
-  projectName: 'snowplow.github.io',
-  deploymentBranch: 'main',
+  organizationName: "snowplow",
+  projectName: "snowplow.github.io",
+  deploymentBranch: "main",
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   clientModules: [
-    require.resolve('./cookieConsent.js'),
-    require.resolve('./snowplow.js'),
-    require.resolve('./google.js'),
+    require.resolve("./cookieConsent.js"),
+    require.resolve("./snowplow.js"),
+    require.resolve("./google.js"),
   ],
 
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateTime: true,
-          editUrl: 'https://github.com/snowplow/snowplow.github.io/tree/main/',
+          editUrl: "https://github.com/snowplow/snowplow.github.io/tree/main/",
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve("./src/css/custom.css"),
         },
       },
     ],
@@ -56,67 +56,67 @@ const config = {
       },
       navbar: {
         logo: {
-          alt: 'Snowplow Logo',
-          src: 'img/snowplow-logo.svg',
+          alt: "Snowplow Logo",
+          src: "img/snowplow-logo.svg",
         },
         items: [
           {
-            type: 'doc',
-            docId: 'introduction',
-            position: 'left',
-            className: 'nav-link__first',
-            label: 'Docs',
+            type: "doc",
+            docId: "introduction",
+            position: "left",
+            className: "nav-link__first",
+            label: "Docs",
           },
           {
-            href: 'https://discourse.snowplow.io',
-            label: 'Discourse',
-            position: 'left',
+            href: "https://discourse.snowplow.io",
+            label: "Discourse",
+            position: "left",
           },
           {
-            href: 'https://github.com/snowplow/',
-            label: 'GitHub',
-            position: 'left',
+            href: "https://github.com/snowplow/",
+            label: "GitHub",
+            position: "left",
           },
           {
-            to: 'https://try.snowplowanalytics.com/?utm_content=hero-cta&utm_campaign=snowplow-docs',
-            label: 'Try Snowplow',
-            className: 'snwpl-nav-button',
-            position: 'right',
+            to: "https://try.snowplowanalytics.com/?utm_content=hero-cta&utm_campaign=snowplow-docs",
+            label: "Try Snowplow",
+            className: "snwpl-nav-button",
+            position: "right",
           },
           {
-            to: 'https://go.snowplowanalytics.com/l/571483/2021-02-19/3sn5nml',
-            label: 'Book a demo',
-            className: 'snwpl-nav-button',
-            position: 'right',
+            to: "https://go.snowplowanalytics.com/l/571483/2021-02-19/3sn5nml",
+            label: "Book a demo",
+            className: "snwpl-nav-button",
+            position: "right",
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            label: 'Change cookie preferences',
-            href: '/cookie-preferences',
+            label: "Change cookie preferences",
+            href: "/cookie-preferences",
           },
           {
-            label: 'Terms and conditions',
-            href: '/terms-and-conditions',
+            label: "Terms and conditions",
+            href: "/terms-and-conditions",
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
       prism: {
-        theme: require('prism-react-renderer/themes/dracula'),
+        theme: require("prism-react-renderer/themes/dracula"),
       },
       algolia: {
-        appId: '9HS3C2MKTH',
-        apiKey: 'f22e24c1b333034a75914759b0f045c3',
-        indexName: 'snowplow',
+        appId: "9HS3C2MKTH",
+        apiKey: "f22e24c1b333034a75914759b0f045c3",
+        indexName: "snowplow",
         contextualSearch: true,
       },
     }),
 
-  plugins: [['@docusaurus/plugin-client-redirects', redirects]],
+  plugins: [["@docusaurus/plugin-client-redirects", redirects]],
 }
 
 module.exports = config

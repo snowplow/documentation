@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: first and last touch attribution with SQL'
-date: '2020-02-26'
+title: "Tutorial: first and last touch attribution with SQL"
+date: "2020-02-26"
 sidebar_position: 20
 ---
 

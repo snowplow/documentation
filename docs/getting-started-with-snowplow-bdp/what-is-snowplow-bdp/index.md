@@ -1,6 +1,6 @@
 ---
-title: 'What is Snowplow BDP?'
-date: '2021-03-09'
+title: "What is Snowplow BDP?"
+date: "2021-03-09"
 sidebar_position: 0
 ---
 

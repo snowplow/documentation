@@ -1,6 +1,6 @@
 ---
-title: 'Loading transformed data'
-date: '2022-04-05'
+title: "Loading transformed data"
+date: "2022-04-05"
 sidebar_position: 20
 ---
 

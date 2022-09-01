@@ -1,6 +1,6 @@
 ---
-title: 'Snowflake loader'
-date: '2022-04-05'
+title: "Snowflake loader"
+date: "2022-04-05"
 sidebar_position: 20
 ---
 

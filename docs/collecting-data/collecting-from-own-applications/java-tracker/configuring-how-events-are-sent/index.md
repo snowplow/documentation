@@ -1,6 +1,6 @@
 ---
-title: 'Configuring how events are sent'
-date: '2022-03-24'
+title: "Configuring how events are sent"
+date: "2022-03-24"
 sidebar_position: 50
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'From version 1.x to 2.0 for iOS'
-date: '2021-03-24'
+title: "From version 1.x to 2.0 for iOS"
+date: "2021-03-24"
 sidebar_position: -1
 ---
 

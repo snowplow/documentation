@@ -1,6 +1,6 @@
 ---
-title: 'Custom SQL enrichment'
-date: '2020-02-14'
+title: "Custom SQL enrichment"
+date: "2020-02-14"
 sidebar_position: 11
 ---
 

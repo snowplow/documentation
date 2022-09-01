@@ -1,6 +1,6 @@
 ---
-title: 'Analytics SDK - Go'
-date: '2021-05-26'
+title: "Analytics SDK - Go"
+date: "2021-05-26"
 sidebar_position: 300
 ---
 

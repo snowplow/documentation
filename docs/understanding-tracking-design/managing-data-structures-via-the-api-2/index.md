@@ -1,6 +1,6 @@
 ---
-title: 'Managing data structures via the API'
-date: '2021-12-22'
+title: "Managing data structures via the API"
+date: "2021-12-22"
 sidebar_position: 70
 ---
 

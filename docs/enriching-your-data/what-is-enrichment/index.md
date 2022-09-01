@@ -1,6 +1,6 @@
 ---
-title: 'What is the enrichment process?'
-date: '2020-02-15'
+title: "What is the enrichment process?"
+date: "2020-02-15"
 sidebar_position: 0
 ---
 

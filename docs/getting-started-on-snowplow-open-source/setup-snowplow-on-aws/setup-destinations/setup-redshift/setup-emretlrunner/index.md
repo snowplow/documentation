@@ -1,6 +1,6 @@
 ---
-title: 'Setup EmrEtlRunner (pre-R35)'
-date: '2020-02-26'
+title: "Setup EmrEtlRunner (pre-R35)"
+date: "2020-02-26"
 sidebar_position: 20
 ---
 

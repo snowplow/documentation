@@ -1,6 +1,6 @@
 ---
-title: 'The Snowplow Collector on AWS'
-date: '2020-02-26'
+title: "The Snowplow Collector on AWS"
+date: "2020-02-26"
 sidebar_position: 10
 ---
 

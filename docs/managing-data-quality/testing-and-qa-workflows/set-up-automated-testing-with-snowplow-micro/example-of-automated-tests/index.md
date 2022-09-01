@@ -1,6 +1,6 @@
 ---
-title: 'Example of automated tests'
-date: '2021-03-26'
+title: "Example of automated tests"
+date: "2021-03-26"
 sidebar_position: 0
 ---
 

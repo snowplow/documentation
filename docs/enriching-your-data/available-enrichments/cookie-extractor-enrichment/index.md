@@ -1,6 +1,6 @@
 ---
-title: 'Cookie extractor enrichment'
-date: '2020-02-14'
+title: "Cookie extractor enrichment"
+date: "2020-02-14"
 sidebar_position: 6
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'What is deployed on GCP?'
-date: '2021-09-23'
+title: "What is deployed on GCP?"
+date: "2021-09-23"
 sidebar_position: 300
 ---
 

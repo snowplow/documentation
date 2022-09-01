@@ -1,6 +1,6 @@
 ---
-title: 'Setting up your AWS environment'
-date: '2020-11-24'
+title: "Setting up your AWS environment"
+date: "2020-11-24"
 sidebar_position: 0
 ---
 

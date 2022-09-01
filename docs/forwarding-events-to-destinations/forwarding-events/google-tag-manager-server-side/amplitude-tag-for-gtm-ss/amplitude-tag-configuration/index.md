@@ -1,6 +1,6 @@
 ---
-title: 'Amplitude Tag Configuration'
-date: '2021-11-24'
+title: "Amplitude Tag Configuration"
+date: "2021-11-24"
 sidebar_position: 100
 ---
 

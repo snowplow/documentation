@@ -1,6 +1,6 @@
 ---
-title: 'Setup Data Models'
-date: '2020-02-26'
+title: "Setup Data Models"
+date: "2020-02-26"
 sidebar_position: 60
 ---
 

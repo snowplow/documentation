@@ -1,6 +1,6 @@
 ---
-title: 'Cross-batch deduplication'
-date: '2020-04-25'
+title: "Cross-batch deduplication"
+date: "2020-04-25"
 sidebar_position: 20
 ---
 

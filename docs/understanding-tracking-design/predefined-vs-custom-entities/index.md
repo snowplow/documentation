@@ -1,6 +1,6 @@
 ---
-title: 'Predefined vs custom entities'
-date: '2020-02-27'
+title: "Predefined vs custom entities"
+date: "2020-02-27"
 sidebar_position: 40
 ---
 

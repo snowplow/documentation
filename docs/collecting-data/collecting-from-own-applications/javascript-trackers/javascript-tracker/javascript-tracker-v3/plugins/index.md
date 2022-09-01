@@ -1,6 +1,6 @@
 ---
-title: 'Plugins'
-date: '2021-03-28'
+title: "Plugins"
+date: "2021-03-28"
 sidebar_position: 4000
 ---
 

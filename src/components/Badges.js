@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react"
 
 export default function Badges(props) {
-  if (props.badgeType === 'Actively Maintained') {
+  if (props.badgeType === "Actively Maintained") {
     return (
       <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">
         <img
@@ -14,7 +14,7 @@ export default function Badges(props) {
       </a>
     )
   }
-  if (props.badgeType === 'Maintained') {
+  if (props.badgeType === "Maintained") {
     return (
       <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">
         <img
@@ -27,7 +27,7 @@ export default function Badges(props) {
       </a>
     )
   }
-  if (props.badgeType === 'Early Release') {
+  if (props.badgeType === "Early Release") {
     return (
       <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">
         <img
@@ -40,7 +40,7 @@ export default function Badges(props) {
       </a>
     )
   }
-  if (props.badgeType === 'Unsupported') {
+  if (props.badgeType === "Unsupported") {
     return (
       <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">
         <img
@@ -53,7 +53,7 @@ export default function Badges(props) {
       </a>
     )
   }
-  if (props.badgeType === 'Snowplow Tracker Release') {
+  if (props.badgeType === "Snowplow Tracker Release") {
     return (
       <img
         src="https://img.shields.io/packagist/v/snowplow/snowplow-tracker"
@@ -61,7 +61,7 @@ export default function Badges(props) {
       ></img>
     )
   }
-  if (props.badgeType === 'React Native Tracker Release') {
+  if (props.badgeType === "React Native Tracker Release") {
     return (
       <a href="https://www.npmjs.com/package/@snowplow/react-native-tracker">
         <img
@@ -71,7 +71,7 @@ export default function Badges(props) {
       </a>
     )
   }
-  if (props.badgeType === 'Pypi Tracker Release') {
+  if (props.badgeType === "Pypi Tracker Release") {
     return (
       <a href="https://pypi.org/project/snowplow-tracker/">
         <img
@@ -82,7 +82,7 @@ export default function Badges(props) {
     )
   }
 
-  if (props.badgeType === 'Snowplow Tracker PHP Release') {
+  if (props.badgeType === "Snowplow Tracker PHP Release") {
     return (
       <img
         src="https://img.shields.io/packagist/php-v/snowplow/snowplow-tracker"
@@ -90,7 +90,7 @@ export default function Badges(props) {
       ></img>
     )
   }
-  if (props.badgeType === 'Snowplow Tracker React Native Release') {
+  if (props.badgeType === "Snowplow Tracker React Native Release") {
     return (
       <a href="https://www.npmjs.com/package/@snowplow/react-native-tracker">
         <img
@@ -100,7 +100,7 @@ export default function Badges(props) {
       </a>
     )
   }
-  if (props.badgeType === 'Snowplow Tracker Pypi Release') {
+  if (props.badgeType === "Snowplow Tracker Pypi Release") {
     return (
       <a href="https://pypi.org/project/snowplow-tracker/">
         <img

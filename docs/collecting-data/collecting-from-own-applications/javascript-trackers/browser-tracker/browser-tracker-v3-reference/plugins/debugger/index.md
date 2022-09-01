@@ -1,6 +1,6 @@
 ---
-title: 'Debugger'
-date: '2021-04-07'
+title: "Debugger"
+date: "2021-04-07"
 sidebar_position: 5000
 ---
 
@@ -19,11 +19,11 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
-import { DebuggerPlugin } from '@snowplow/browser-plugin-debugger'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
+import { DebuggerPlugin } from "@snowplow/browser-plugin-debugger"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [DebuggerPlugin()],
 })
 ```

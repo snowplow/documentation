@@ -1,6 +1,6 @@
 ---
-title: 'Structuring your data with schemas'
-date: '2020-02-13'
+title: "Structuring your data with schemas"
+date: "2020-02-13"
 sidebar_position: 10
 ---
 

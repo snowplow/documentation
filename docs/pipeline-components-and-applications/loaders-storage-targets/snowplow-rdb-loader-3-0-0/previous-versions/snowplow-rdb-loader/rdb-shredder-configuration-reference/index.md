@@ -1,6 +1,6 @@
 ---
-title: 'RDB shredder configuration reference'
-date: '2021-12-01'
+title: "RDB shredder configuration reference"
+date: "2021-12-01"
 sidebar_position: 450
 ---
 

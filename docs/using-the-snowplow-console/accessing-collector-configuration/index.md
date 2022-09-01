@@ -1,6 +1,6 @@
 ---
-title: 'Accessing Collector Configuration'
-date: '2020-08-10'
+title: "Accessing Collector Configuration"
+date: "2020-08-10"
 sidebar_position: 20
 ---
 

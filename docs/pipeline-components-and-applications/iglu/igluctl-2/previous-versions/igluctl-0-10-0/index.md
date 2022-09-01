@@ -1,6 +1,6 @@
 ---
-title: 'Igluctl (0.10.1)'
-date: '2022-07-05'
+title: "Igluctl (0.10.1)"
+date: "2022-07-05"
 sidebar_position: -40
 ---
 

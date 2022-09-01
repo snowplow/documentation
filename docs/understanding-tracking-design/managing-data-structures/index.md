@@ -1,6 +1,6 @@
 ---
-title: 'Managing data structures in the console'
-date: '2020-02-15'
+title: "Managing data structures in the console"
+date: "2020-02-15"
 sidebar_position: 80
 ---
 

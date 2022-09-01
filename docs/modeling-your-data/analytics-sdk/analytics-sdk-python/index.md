@@ -1,6 +1,6 @@
 ---
-title: 'Analytics SDK - Python'
-date: '2020-11-03'
+title: "Analytics SDK - Python"
+date: "2020-11-03"
 sidebar_position: 400
 ---
 

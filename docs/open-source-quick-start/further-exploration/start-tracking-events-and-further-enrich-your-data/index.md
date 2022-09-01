@@ -1,6 +1,6 @@
 ---
-title: 'Track events & entities'
-date: '2021-10-06'
+title: "Track events & entities"
+date: "2021-10-06"
 sidebar_position: 100
 ---
 

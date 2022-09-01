@@ -1,6 +1,6 @@
 ---
-title: 'Media Tracking'
-date: '2022-01-11'
+title: "Media Tracking"
+date: "2022-01-11"
 sidebar_position: 12500
 ---
 
@@ -37,10 +37,10 @@ To start tracking media with default settings, use the snippet below, using your
 **`main.js`**
 
 ```javascript
-import { enableMediaTracking } from '@snowplow/browser-plugin-media-tracking'
+import { enableMediaTracking } from "@snowplow/browser-plugin-media-tracking"
 
 enableMediaTracking({
-  id: 'example-id',
+  id: "example-id",
 })
 ```
 
@@ -72,10 +72,10 @@ Below is an example of the full `enableMediaTracking` function:
 
 ```javascript
 enableMediaTracking({
-  id: 'example-video',
+  id: "example-video",
   options: {
-    label: 'My Custom Video Label',
-    captureEvents: ['play', 'pause', 'ended'],
+    label: "My Custom Video Label",
+    captureEvents: ["play", "pause", "ended"],
     boundaries: [20, 80],
     volumeChangeTrackingInterval: 200,
   },
@@ -100,7 +100,7 @@ The `<audio>` or `<video>` element has the HTML id passed into `enableMedia
 
 ```javascript
 enableMediaTracking({
-  id: 'example-id',
+  id: "example-id",
 })
 ```
 
@@ -120,7 +120,7 @@ The media element is the only `<audio>` or `<video>` child of a parent eleme
 
 ```javascript
 enableMediaTracking({
-  id: 'example-id',
+  id: "example-id",
 })
 ```
 
@@ -181,9 +181,9 @@ It is possible to extend an event group with any event in the Events table above
 
 ```javascript
 enableMediaTracking({
-  id: 'example-video',
+  id: "example-video",
   options: {
-    captureEvents: ['DefaultEvents', 'emptied'],
+    captureEvents: ["DefaultEvents", "emptied"],
   },
 })
 ```

@@ -1,6 +1,6 @@
 ---
-title: 'Managing users'
-date: '2020-02-15'
+title: "Managing users"
+date: "2020-02-15"
 sidebar_position: 30
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Querying failed events in Athena and BigQuery'
-date: '2020-04-30'
+title: "Querying failed events in Athena and BigQuery"
+date: "2020-04-30"
 sidebar_position: 5000
 ---
 

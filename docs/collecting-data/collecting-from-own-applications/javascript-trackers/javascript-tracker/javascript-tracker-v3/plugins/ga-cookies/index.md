@@ -1,6 +1,6 @@
 ---
-title: 'GA Cookies'
-date: '2021-03-30'
+title: "GA Cookies"
+date: "2021-03-30"
 sidebar_position: 10000
 ---
 

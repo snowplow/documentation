@@ -1,6 +1,6 @@
 ---
-title: 'Tracking specific client-side properties'
-date: '2022-08-30'
+title: "Tracking specific client-side properties"
+date: "2022-08-30"
 sidebar_position: 30
 ---
 

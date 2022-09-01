@@ -1,6 +1,6 @@
 ---
-title: 'Enhanced Ecommerce'
-date: '2021-04-07'
+title: "Enhanced Ecommerce"
+date: "2021-04-07"
 sidebar_position: 7000
 ---
 
@@ -19,14 +19,14 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 ## Initialization
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import { newTracker, trackPageView } from "@snowplow/browser-tracker"
 import {
   EnhancedEcommercePlugin,
   trackEnhancedEcommerceAction,
-} from '@snowplow/browser-plugin-enhanced-ecommerce'
+} from "@snowplow/browser-plugin-enhanced-ecommerce"
 
-newTracker('sp1', '{{collector_url}}', {
-  appId: 'my-app-id',
+newTracker("sp1", "{{collector_url}}", {
+  appId: "my-app-id",
   plugins: [EnhancedEcommercePlugin()],
 })
 ```

@@ -1,6 +1,6 @@
 ---
-title: 'Google Tag Manager Custom Template'
-date: '2020-08-10'
+title: "Google Tag Manager Custom Template"
+date: "2020-08-10"
 sidebar_position: 5000
 ---
 

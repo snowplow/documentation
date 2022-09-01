@@ -1,6 +1,6 @@
 ---
-title: 'What is Snowplow Open Source?'
-date: '2020-11-24'
+title: "What is Snowplow Open Source?"
+date: "2020-11-24"
 sidebar_position: 0
 ---
 

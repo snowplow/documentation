@@ -1,6 +1,6 @@
 ---
-title: 'Building an Enriched event relay for GTM SS'
-date: '2021-11-24'
+title: "Building an Enriched event relay for GTM SS"
+date: "2021-11-24"
 sidebar_position: 999990
 ---
 

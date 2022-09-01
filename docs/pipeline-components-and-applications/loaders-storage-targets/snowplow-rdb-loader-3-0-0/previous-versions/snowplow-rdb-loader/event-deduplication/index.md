@@ -1,6 +1,6 @@
 ---
-title: 'Event deduplication'
-date: '2020-03-05'
+title: "Event deduplication"
+date: "2020-03-05"
 sidebar_position: 20
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'Sendgrid'
-date: '2020-02-26'
+title: "Sendgrid"
+date: "2020-02-26"
 sidebar_position: 110
 ---
 

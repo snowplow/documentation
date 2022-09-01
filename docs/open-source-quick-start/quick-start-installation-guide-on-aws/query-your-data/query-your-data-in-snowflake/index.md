@@ -1,6 +1,6 @@
 ---
-title: 'Query your data in Snowflake'
-date: '2022-05-10'
+title: "Query your data in Snowflake"
+date: "2022-05-10"
 sidebar_position: 200
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: 'YouTube Tracking'
-date: '2022-01-12'
+title: "YouTube Tracking"
+date: "2022-01-12"
 sidebar_position: 17000
 ---
 
@@ -35,12 +35,12 @@ To start tracking a YouTube video with default settings, use the snippet below:
 **`main.js`**
 
 ```javascript
-import { enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking'
+import { enableYouTubeTracking } from "@snowplow/browser-plugin-youtube-tracking"
 
 enableYouTubeTracking({
-  id: 'example-id',
+  id: "example-id",
   options: {
-    label: 'My Video Title',
+    label: "My Video Title",
     boundaries: [10, 25, 50, 75],
   },
 })
@@ -66,10 +66,10 @@ Below is an example of the full `enableYouTubeTracking` function:
 
 ```javascript
 enableYouTubeTracking({
-  id: 'example-video',
+  id: "example-video",
   options: {
-    label: 'My Custom Video Label',
-    captureEvents: ['play', 'pause', 'ended'],
+    label: "My Custom Video Label",
+    captureEvents: ["play", "pause", "ended"],
     boundaries: [20, 80],
     updateRate: 200,
   },
@@ -93,9 +93,9 @@ For this plugin to find your media element, your IFrame must be given the id tha
 
 ```javascript
 enableYouTubeTracking({
-  id: 'example-id',
+  id: "example-id",
   options: {
-    label: 'My Video Title',
+    label: "My Video Title",
     boundaries: [10, 25, 50, 75],
   },
 })
@@ -132,9 +132,9 @@ It is possible to extend an event group with any event in the Events table above
 
 ```javascript
 enableYouTubeTracking({
-  id: 'example-video',
+  id: "example-video",
   options: {
-    captureEvents: ['DefaultEvents', 'error'],
+    captureEvents: ["DefaultEvents", "error"],
   },
 })
 ```

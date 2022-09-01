@@ -1,6 +1,6 @@
 ---
-title: 'BigQuery Loader'
-date: '2020-09-29'
+title: "BigQuery Loader"
+date: "2020-09-29"
 sidebar_position: 500
 ---
 

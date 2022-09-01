@@ -1,6 +1,6 @@
 ---
-title: 'HTTP Request Tag for GTM SS'
-date: '2022-01-06'
+title: "HTTP Request Tag for GTM SS"
+date: "2022-01-06"
 sidebar_position: 700
 ---
 

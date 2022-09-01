@@ -1,6 +1,6 @@
 ---
-title: 'Initialization and configuration'
-date: '2022-01-31'
+title: "Initialization and configuration"
+date: "2022-01-31"
 sidebar_position: 2000
 ---
 

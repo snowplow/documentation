@@ -66,10 +66,7 @@ The `network_userid` is stored in the tracker and it's kept the same until the a
 
 A further property, `timezone`, is generated automatically during Subject initialization, based on `Calendar.getInstance().getTimeZone()`. Therefore, this will be added to all events with a `Subject` attached. The default will be overriden if `timezone` is provided explicitly. 
 
-## Adding `Subject` properties to events
-
-The `Subject` properties can be set globally in the tracker through the `SubjectConfiguration`.
-
+## Set the `SubjectConfiguration`
 A simple `SubjectConfiguration` initialisation looks like this:
 
 <Tabs groupId="platform">

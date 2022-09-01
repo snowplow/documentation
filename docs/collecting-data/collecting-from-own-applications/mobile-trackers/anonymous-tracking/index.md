@@ -11,7 +11,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-(Available since v4)
+:::info
+
+This feature is available since v4.
+
+:::
 
 Anonymous tracking is a tracker feature that enables anonymising various user and session identifiers to support user privacy in case consent for tracking the identifiers is not given.
 

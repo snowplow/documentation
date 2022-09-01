@@ -262,7 +262,11 @@ In the above example, the `Foreground` event triggers a new session because the 
 
 #### Session callback
 
-(Available from v3.1)
+:::info
+
+This feature is available since v3.1.
+
+:::
 
 The tracker allows the configuration of a callback to inform the app every time a new session is created (in correspondence of a session timeout check).
 This can be configured in the `SessionConfiguration` and it provides the `SessionState` where all the info already tracked in the session can be accessed.

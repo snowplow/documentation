@@ -12,7 +12,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "prettier": "prettier --write ."
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.1",

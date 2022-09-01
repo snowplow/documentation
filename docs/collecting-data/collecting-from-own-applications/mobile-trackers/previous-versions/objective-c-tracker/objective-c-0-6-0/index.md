@@ -823,7 +823,7 @@ SPUnstructured *event = [SPUnstructured build:^(id<SPUnstructuredBuilder> builde
 ;
 ```
 
-For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
+For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#47-track-user-timings-with-tracktimingevent)4.7 Track user timings with `trackTimingEvent:`
 

@@ -1,6 +1,8 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+const redirects = require('./redirects');
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Snowplow Documentation',
@@ -112,6 +114,13 @@ const config = {
         contextualSearch: true,
       },
     }),
+
+    plugins: [
+      [
+        '@docusaurus/plugin-client-redirects',
+        redirects,
+      ],
+    ]
 };
 
 module.exports = config;

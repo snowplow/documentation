@@ -579,7 +579,7 @@ tracker trackUnstructuredEvent:event
                       timestamp:1446542245000;
 ```
 
-For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
+For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.5#47-track-user-timings-with-tracktimingwithcategory)4.7 Track user timings with `trackTimingWithCategory:`
 

@@ -5,7 +5,8 @@ sidebar_position: 900
 ---
 
 ```mdx-code-block
-import Block2895 from "@site/docs/reusable/untitled-reusable-block-35/_index.md"
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<Block2895/>
+<DocCardList items={useCurrentSidebarCategory().items}/>
 ```

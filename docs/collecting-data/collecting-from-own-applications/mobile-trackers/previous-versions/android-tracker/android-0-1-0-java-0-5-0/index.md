@@ -414,7 +414,7 @@ Example:
 t1.trackUnstructuredEvent(String eventVendor, String eventName, Map<String, Object> eventData, String context);
 ```
 
-For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
+For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
 ## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#5-sending-event-emitter)5\. Sending event: `Emitter`
 

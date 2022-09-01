@@ -43,7 +43,7 @@ Client session tracking is activated by default but it can be disabled through t
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
-The lifecycle events (`application_foreground` and `application_background` events) have a role in the session expiration. The lifecycle events can be enabled in the [TrackerConfiguration](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/introduction/index.md#TrackerConfiguration) enabling `lifecycleAutotracking` (Note: on Android it requires `androidx.lifecycle:lifecycle-extensions`). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
+The lifecycle events (`application_foreground` and `application_background` events) have a role in the session expiration. The lifecycle events can be enabled in the [TrackerConfiguration](../introduction/index.md#TrackerConfiguration) enabling `lifecycleAutotracking` (Note: on Android it requires `androidx.lifecycle:lifecycle-extensions`). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
 
 When the app moves from foreground to background the `application_background` event is fired. If session tracking is enabled, the session context will be attached to the event checking the session expiration using the foreground timeout. When the app moves from background to foreground the `application_foreground` event is fired. If session tracking is enabled, the session context will be attached to the event checking the session expiration using the background timeout.
 
@@ -88,7 +88,7 @@ let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConf
 
 Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to this custom context as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md).
 
-Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported Iglu clients.
+Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplow.io/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported Iglu clients.
 
 Note: Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
@@ -135,7 +135,7 @@ event.contexts.add(
 tracker.track(event)
 ```
 
-It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/introduction/index.md)), so that they are applied to all (or a subset of) events within an application.
+It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](../introduction/index.md)), so that they are applied to all (or a subset of) events within an application.
 
 # Manual Tracking
 
@@ -264,7 +264,7 @@ let event = MessageNotification(title: "title", body: "body", trigger: .push)
     .notificationCount(9)
     .category("category1")
     .attachments([
-        MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplowanalytics.com")
+        MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplow.io")
     ]);
 tracker.track(event)
 ```
@@ -341,7 +341,7 @@ Client session tracking is activated by default but it can be disabled through t
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
-The lifecycle events (`application_foreground` and `application_background` events) have a role in the session expiration. The lifecycle events can be enabled in the [TrackerConfiguration](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/introduction/index.md#TrackerConfiguration) enabling `lifecycleAutotracking` (Note: on Android it requires `androidx.lifecycle:lifecycle-extensions`). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
+The lifecycle events (`application_foreground` and `application_background` events) have a role in the session expiration. The lifecycle events can be enabled in the [TrackerConfiguration](../introduction/index.md#TrackerConfiguration) enabling `lifecycleAutotracking` (Note: on Android it requires `androidx.lifecycle:lifecycle-extensions`). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
 
 When the app moves from foreground to background the `application_background` event is fired. If session tracking is enabled, the session context will be attached to the event checking the session expiration using the foreground timeout. When the app moves from background to foreground the `application_foreground` event is fired. If session tracking is enabled, the session context will be attached to the event checking the session expiration using the background timeout.
 
@@ -391,7 +391,7 @@ Snowplow.createTracker(getApplicationContext(),
 
 Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to this custom context as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md).
 
-Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported Iglu clients.
+Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplow.io/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported Iglu clients.
 
 Note: Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
@@ -440,7 +440,7 @@ event.customContexts.add(
 tracker.track(event);
 ```
 
-It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/introduction/index.md)), so that they are applied to all (or a subset of) events within an application.
+It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](../introduction/index.md)), so that they are applied to all (or a subset of) events within an application.
 
 # Manual Tracking
 

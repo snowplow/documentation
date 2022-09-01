@@ -24,7 +24,7 @@ You will track a large number of standard web events out-of-the-box with Snowplo
 
 **Mobile tracking**
 
-- Please see our quick start guide for the Snowplow [iOS and Android tracker](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/quick-start-guide/index.md)
+- Please see our quick start guide for the Snowplow [iOS and Android tracker](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md)
 
 You can find our [full list of our SDKs here](/docs/collecting-data/collecting-from-own-applications/index.md) (including our server side trackers, and 3rd party webhooks)
 

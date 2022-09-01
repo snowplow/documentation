@@ -672,7 +672,7 @@ SelfDescribingJson eventData = new SelfDescribingJson("iglu:com.acme/save_game/j
 t1.trackUnstructuredEvent(eventData, contextList);
 ```
 
-For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
+For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
 ## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#5-sending-event-emitter)5\. Sending event: `Emitter`
 

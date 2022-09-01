@@ -1,8 +1,10 @@
 ---
-title: "Migration guide for Snowplow Android Tracker SDK from version 1.x to 2.0"
+title: "From version 1.x to 2.0 for Android"
 date: "2021-03-19"
-sidebar_position: 20
+sidebar_position: -1
 ---
+
+# Migration guide for Snowplow Android Tracker SDK from version 1.x to 2.0
 
 This section describes the main changes when converting an applications instrumentation of the Snowplow Android tracker SDK from version 1.x to version 2.0.
 

@@ -989,7 +989,7 @@ t1.track(Unstructured.builder()
     .build();
 ```
 
-For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
+For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#47-track-timing-events-with-tracktimingwithcategory-event)4.7 Track timing events with `track(TimingWithCategory event)`
 

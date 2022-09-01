@@ -138,7 +138,7 @@ The arguments are as follows:
 | `EventId`       | The event ID                  | No            | \*string               |
 | `TrueTimestamp` | The true time of event        | No            | \*int64                |
 | `Contexts`      | Custom contexts for the event | No            | \[\]SelfDescribingJson |
-|  |
+|                 |
 | Subject         | Event specific Subject        | No            | Subject                |
 
 Example:

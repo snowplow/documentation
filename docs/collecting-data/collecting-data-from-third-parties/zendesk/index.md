@@ -30,7 +30,7 @@ You can optionally have `?aid={{my_zendesk_namespace}}` added to this URL, whe
 
 Set the **Method** field to "POST" and the **Content type** to "JSON" from the drop-down lists.
 
-Select "Create Target" and click the ***Submit*** button.
+Select "Create Target" and click the **_Submit_** button.
 
 ![](images/extension-form.png)
 
@@ -46,15 +46,15 @@ From the *Admin* page, select "Triggers" from the "BUSINESS RULES" menu and cl
 
 Name the trigger something like "Ticket created or updated" to reflect Zendesk data will be send on ticket creation and update events.
 
-Under "Meet ANY of the following conditions" header click ***Add condition*** button to add 2 "Ticket: Is..." conditions and set them to "Created" and "Updated" respectively.
+Under "Meet ANY of the following conditions" header click **_Add condition_** button to add 2 "Ticket: Is..." conditions and set them to "Created" and "Updated" respectively.
 
 ![](images/trigger-conditions.png)
 
 ### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-body-for-ticket-event)Setting up body for ticket event
 
-In the "Actions" section, click on ***Add action*** button and select "Notify target" and "Snowplow Collector - Iglu POST" (the extension you set up in [Setting up a collector as a Zendesk extension](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#extension) section above).
+In the "Actions" section, click on **_Add action_** button and select "Notify target" and "Snowplow Collector - Iglu POST" (the extension you set up in [Setting up a collector as a Zendesk extension](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#extension) section above).
 
-In the ***JSON body*** box, paste the following:
+In the **_JSON body_** box, paste the following:
 
 ```json
 {
@@ -88,7 +88,7 @@ In the ***JSON body*** box, paste the following:
 
 ![](images/json-body.png)
 
-*NOTE:* Ignore the warning on the left-hand side of the ***JSON body*** textbox. It is due to usage of [Liquid markup](https://shopify.github.io/liquid/) in JSON.
+*NOTE:* Ignore the warning on the left-hand side of the **_JSON body_** textbox. It is due to usage of [Liquid markup](https://shopify.github.io/liquid/) in JSON.
 
 ### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-user-contexts)Setting up user contexts
 
@@ -96,7 +96,7 @@ In the ***JSON body*** box, paste the following:
 
 In the "Actions" section, select the 2nd "Notify target" and "Snowplow Collector - Iglu POST" extension.
 
-In the ***JSON body*** box, paste the following:
+In the **_JSON body_** box, paste the following:
 
 ```json
 {
@@ -129,7 +129,7 @@ In the ***JSON body*** box, paste the following:
 
 In the "Actions" section, select the 3nd "Notify target" and "Snowplow Collector - Iglu POST" extension.
 
-In the ***JSON body*** box, paste the following:
+In the **_JSON body_** box, paste the following:
 
 ```json
 {
@@ -162,7 +162,7 @@ In the ***JSON body*** box, paste the following:
 
 In the "Actions" section, select the 4th "Notify target" and "Snowplow Collector - Iglu POST" extension.
 
-In the ***JSON body*** box, paste the following:
+In the **_JSON body_** box, paste the following:
 
 ```json
 {
@@ -195,7 +195,7 @@ In the ***JSON body*** box, paste the following:
 
 In the "Actions" section, select the 5th (final) "Notify target" and "Snowplow Collector - Iglu POST" extention.
 
-In the ***JSON body*** box, paste the following:
+In the **_JSON body_** box, paste the following:
 
 ```json
 {
@@ -224,6 +224,6 @@ In the ***JSON body*** box, paste the following:
 }
 ```
 
-Submit the new trigger by clicking ***Create*** button. It should look something like this:
+Submit the new trigger by clicking **_Create_** button. It should look something like this:
 
 ![](images/submit-target.png)

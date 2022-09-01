@@ -28,10 +28,10 @@ We will continue referring to the file as `sp.js` throughout this guide, however
 
 Navigate to [S3 within AWS](https://s3.console.aws.amazon.com/s3/home) and then create a new bucket within your Amazon S3 account to store `sp.js`.
 
-| Option | Value |
-| --- | --- |
-| **Bucket Name** | For example, `[company-name]-sp-js` |
-| **AWS Region** | For example, `EU (London) eu-west-2` |
+| Option                                           | Value                                       |
+|--------------------------------------------------|---------------------------------------------|
+| **Bucket Name**                                  | For example, `[company-name]-sp-js`         |
+| **AWS Region**                                   | For example, `EU (London) eu-west-2`        |
 | **Block Public Access settings for this bucket** | Deselect: ****Block _all_ public access**** |
 
 You can leave all other settings as their defaults.
@@ -75,11 +75,11 @@ The only disadvantage of a long expiration is that you need to find a way to _f
 
 Your metadata should now look something like this:
 
-| Type | Key | Value |
-| --- | --- | --- |
-| System defined | Cache-Control | max-age=315360000 |
-| System defined | Content-Type | application/javascript |
-| System defined | Cotent-Encoding | gzip |
+| Type           | Key             | Value                  |
+|----------------|-----------------|------------------------|
+| System defined | Cache-Control   | max-age=315360000      |
+| System defined | Content-Type    | application/javascript |
+| System defined | Cotent-Encoding | gzip                   |
 
 Now scroll to the bottom and click **Upload** to upload the JavaScript file into your bucket. When done, you should have something like this:
 
@@ -109,7 +109,7 @@ Before testing, take a 10 minute coffee break (that's how long CloudFront takes 
 
 Done? Now just check that you can access your JavaScript file over both HTTP and HTTPS using a browser, `wget` or `curl`:
 
-```
+```text
 http://{{SUBDOMAIN}}.cloudfront.net/{{VERSION}}/sp.js
 https://{{SUBDOMAIN}}.cloudfront.net/{{VERSION}}/sp.js
 ```

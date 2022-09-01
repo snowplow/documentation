@@ -6,7 +6,7 @@ Tracker initialization is started by calling the `"newTracker"` function and t
 
 Here is a simple example of how to initialise a tracker:
 
-```
+```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
   discoverRootDomain: true,
@@ -21,7 +21,7 @@ The tracker will be named “sp” and will send events to the a collector url y
 
 Here is a longer example in which every tracker configuration parameter is set:
 
-```
+```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
   platform: 'web',
@@ -127,21 +127,21 @@ The Snowplow JavaScript tracker offers two techniques where tracking can be done
 
 Recommended configurations when using `anonymousTracking`:
 
-```
+```javascript
 anonymousTracking: true, 
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
 
 or
 
-```
+```javascript
 anonymousTracking: { withSessionTracking: true },
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
 
 or for a completely cookieless experience (from JavaScript Tracker 2.17.0+)
 
-```
+```javascript
 anonymousTracking: { withServerAnonymisation: true },
 stateStorageStrategy: 'none',
 eventMethod: 'post'
@@ -203,7 +203,7 @@ Whenever an event fires, the Tracker creates a session cookie. If the cookie did
 
 By default the session cookie expires after 30 minutes. This means that a user leaving the site and returning in under 30 minutes does not change the session. You can override this default by setting `sessionCookieTimeout` to a duration (in seconds) in the configuration object. For example,
 
-```
+```javascript
 {
   ...
   sessionCookieTimeout: 3600
@@ -328,7 +328,7 @@ You can also batch events sent by POST by setting a numeric `bufferSize` field
 
 If you have set `bufferSize` to greater than 1, you can flush the buffer using the `flushBuffer` method:
 
-```
+```javascript
 snowplow('flushBuffer');
 ```
 
@@ -362,7 +362,7 @@ The JavaScript Tracker can add an additional parameter named “\_sp” to the q
 
 You can configure which links get decorated this way using the `crossDomainLinker` field of the configuration object. This field should be a function taking one argument (the link element) and return `true` if the link element should be decorated and false otherwise. For example, this function would only decorate those links whose destination is “[http://acme.de](http://acme.de/)” or whose HTML id is “crossDomainLink”:
 
-```
+```javascript
 {
   crossDomainLinker: function (linkElement) {
     return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
@@ -372,7 +372,7 @@ You can configure which links get decorated this way using the `crossDomainLink
 
 If you want to decorate every link to the domain github.com:
 
-```
+```javascript
 {
   crossDomainLinker: function (linkElement) {
     return /^https:\/\/github\.com/.test(linkElement.href);
@@ -382,7 +382,7 @@ If you want to decorate every link to the domain github.com:
 
 If you want to decorate every link, regardless of its destination:
 
-```
+```javascript
 {
   crossDomainLinker: function (linkElement) {
     return true;
@@ -392,7 +392,7 @@ If you want to decorate every link, regardless of its destination:
 
 Note that the above will decorate “links” which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`). To exclude these links:
 
-```
+```javascript
 snowplow('crossDomainLinker', function(linkElement) {
   return linkElement.href.indexOf('javascript:') < 0;
 });
@@ -402,7 +402,7 @@ Note that when the tracker loads, it does not immediately decorate links. Instea
 
 If further links get added to the page after the tracker has loaded, you can use the tracker’s `crossDomainLinker` method to add listeners again. (Listeners won’t be added to links which already have them.)
 
-```
+```javascript
 snowplow('crossDomainLinker', function (linkElement) {
   return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
 });
@@ -428,7 +428,7 @@ If the optional `discoverRootDomain` field of the configuration object is set 
 
 Whenever tracker initialized on your domain – it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` configuration object parameter or `setVisitorCookieTimeout` method.
 
-```
+```javascript
 snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
   cookieLifetime: 86400 * 31,
 });
@@ -436,7 +436,7 @@ snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
 
 or
 
-```
+```javascript
 snowplow('setVisitorCookieTimeout', 86400 * 30);  // 30 days
 ```
 
@@ -450,7 +450,7 @@ JS Tracker by default doesn’t fire events when page is preloaded, but sets cal
 
 To explicitly enable tracking for prerendered pages you can use `setCountPreRendered` function:
 
-```
+```javascript
 snowplow('setCountPreRendered', true);
 ```
 

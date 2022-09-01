@@ -61,7 +61,7 @@ unzip -j igluctl\_0.7.0.zip
 - The Super API Key you created in step 2.2
 - The path to your schemas For example to load the `iglu-central` repository into Iglu Server:
 
-```
+```bash
 /path/to/igluctl static push iglu-central/schemas http://<public dns>/iglu-server 980ae3ab-3aba-4ffe-a3c2-3b2e24e2ffce --public
 ```
 
@@ -113,11 +113,11 @@ You can instrument any other Snowplow tracker by specifying the collector URL as
 Snowplow Mini makes the Elasticsearch HTTP API available at `http://<public dns>/elasticsearch`, you can check it's working by:
 
 - Checking the Elasticsearch API is available:
-    - `curl --user username:password http://<public dns>/elasticsearch`
-    - You should see a `200 OK` response
+  - `curl --user username:password http://<public dns>/elasticsearch`
+  - You should see a `200 OK` response
 - Checking the number of good events we sent in step 3:
-    - `curl --user username:password http://<public dns>/elasticsearch/good/good/_count`
-    - You should see the appropriate count of sent events
+  - `curl --user username:password http://<public dns>/elasticsearch/good/good/_count`
+  - You should see the appropriate count of sent events
 
 ## Viewing the data in Kibana
 
@@ -174,8 +174,8 @@ Assuming it is a clean and fresh Postgres instance, 2 tables, `apikeys` and `
 
 Let's create `apikeys` table.
 
-```
-$ psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d iglu -U snowplow << EOF
+```bash
+psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d iglu -U snowplow << EOF
 > CREATE TABLE public.apikeys (uid uuid NOT NULL, vendor_prefix character varying(200) NOT NULL, permission character varying(20) DEFAULT 'read'::character varying NOT NULL, createdat timestamp without time zone NOT NULL);
 > ALTER TABLE public.apikeys OWNER TO snowplow;
 > ALTER TABLE ONLY public.apikeys ADD CONSTRAINT apikeys_pkey PRIMARY KEY (uid);
@@ -188,8 +188,8 @@ Instead of executing multiple psql commands with each of these commands, this is
 
 Let's create `schemas` table similarly.
 
-```
-$ psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d iglu -U snowplow << EOF
+```bash
+psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d iglu -U snowplow << EOF
 > CREATE TABLE public.schemas (schemaid integer NOT NULL, vendor character varying(200) NOT NULL, name character varying(50) NOT NULL, format character varying(50) NOT NULL, version character varying(50) NOT NULL, schema text NOT NULL, createdat timestamp without time zone NOT NULL, updatedat timestamp without time zone NOT NULL, ispublic boolean NOT NULL);
 > ALTER TABLE public.schemas OWNER TO snowplow;
 > CREATE SEQUENCE public.schemas_schemaid_seq START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE CACHE 1;
@@ -202,7 +202,7 @@ $ psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d igl
 
 Now that we have our tables, we need to insert a super api key into `apikeys` table.
 
-```
+```bash
 psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d iglu -U snowplow \
 -c "insert into apikeys(uid, vendor_prefix, permission, createdat) values ('8de87fb0-8b8c-4c3a-b30e-6c425bf9d268', '*', 'super', current_timestamp);"
 ```

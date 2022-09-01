@@ -4,7 +4,7 @@
 
 Use the generated api key to obtain an authorization token.
 
-```
+```bash
 curl \
   --header 'X-API-Key: $API_KEY' \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/$ORGANIZATION_ID/credentials/v2/token
@@ -12,13 +12,13 @@ curl \
 
 This command will return an access token wrapped in json.
 
-```
+```json
 {"accessToken":"<access token value>"}
 ```
 
 You may then use this access token value to supply authorization headers for subsequent api requests.
 
-```
+```bash
 curl \
   --header 'authorization: Bearer $ACCESS_TOKEN_VALUE'
 ```

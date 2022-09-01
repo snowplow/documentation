@@ -4,7 +4,7 @@ The Snowplow JavaScript Trackers v3 allow extension via plugins. There a number 
 
 The Browser Plugins conform to a common interface which describes a number of functions you can optionally use to create your own plugin.
 
-```
+```javascript
 interface BrowserPlugin {
  /**
  Called when the plugin is initialised during the Tracker construction

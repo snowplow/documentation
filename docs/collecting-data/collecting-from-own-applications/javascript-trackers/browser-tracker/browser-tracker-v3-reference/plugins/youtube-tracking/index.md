@@ -17,7 +17,7 @@ To start tracking a YouTube video with default settings, use the snippet below:
 
 **`index.html`**
 
-```markup
+```html
 <html>
   <head>
     <title>Snowplow YouTube Tracking Example</title>
@@ -82,7 +82,7 @@ For this plugin to find your media element, your IFrame must be given the id tha
 
 **`index.html`**
 
-```markup
+```html
  <iframe
       id="example-id"
       src="https://www.youtube.com/embed/zSM4ZyVe8xs"

@@ -12,7 +12,8 @@ To learn more about analytics for AMP pages see the [amp-analytics](https://www.
 
 Snowplow is natively integrated into the project, so pages optimized with AMP HTML can be tracked in Snowplow by adding the appropriate `amp-analytics` tag to your pages:
 
-```markup
+```html
+
 <body>
   ...
   <amp-analytics type="snowplow_v2" id="snowplow_v2">

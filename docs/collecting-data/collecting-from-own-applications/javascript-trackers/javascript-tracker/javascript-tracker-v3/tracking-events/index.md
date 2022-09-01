@@ -1028,7 +1028,7 @@ snowplow('trackTrans');
 
 #### Putting the three methods together: a complete example
 
-```markup
+```html
 <html>
 <head>
 <title>Receipt for your clothing purchase from Acme Clothing</title>
@@ -1178,13 +1178,13 @@ If the query parameters are not present, Snowplow reasons that the user is from 
 
 Your different ad campaigns (PPC campaigns, display ads, email marketing messages, Facebook campaigns etc.) will include one or more links to your website e.g.:
 
-```markup
+```html
 <a href="http://mysite.com/myproduct.html">Visit website</a>
 ```
 
 We want to be able to identify people who've clicked on ads e.g. in a marketing email as having come to the site having clicked on a link in that particular marketing email. To do that, we modify the link in the marketing email with query parameters, like so:
 
-```markup
+```html
 <a href="http://mysite.com/myproduct.html?utm_source=newsletter-october&utm_medium=email&utm_campaign=cn0201">Visit website</a>
 ```
 

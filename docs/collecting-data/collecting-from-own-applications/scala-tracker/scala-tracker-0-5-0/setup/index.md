@@ -43,7 +43,7 @@ Notice a `_2.12` postfix in artifactId. This is used for Scala libraries and d
 
 If you are using Maven for building your Scala application, then add the following code into your `HOME/.m2/settings.xml` to be able to use this repository:
 
-```markup
+```xml
 <settings>
   <profiles>
     <profile>
@@ -81,7 +81,7 @@ If you are using Maven for building your Scala application, then add the followi
 
 Then add into your project's `pom.xml`:
 
-```markup
+```xml
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-scala-tracker_2.12</artifactId>

@@ -1,12 +1,13 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const redirects = require('./redirects');
+const redirects = require('./redirects')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Snowplow Documentation',
-  tagline: 'Build, deploy, and scale your next data creation project using Snowplow.',
+  tagline:
+    'Build, deploy, and scale your next data creation project using Snowplow.',
   url: 'https://docs.snowplow.io',
   baseUrl: '/',
   // reset this back to throw, set to warn so that site builds
@@ -100,7 +101,7 @@ const config = {
           {
             label: 'Terms and conditions',
             href: '/terms-and-conditions',
-          }
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
@@ -109,7 +110,19 @@ const config = {
         // Docusaurus comes with a subset of commonly used languages -https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js.
         // To add syntax highlighting for additional Prism supported languages, add reference from https://prismjs.com/#supported-languages.
         // NOTE: do a `yarn build` to ensure that it does build properly
-        additionalLanguages: ['arduino', 'csharp', 'docker', 'gradle', 'java', 'php', 'properties', 'r', 'ruby', 'scala', 'swift'],
+        additionalLanguages: [
+          'arduino',
+          'csharp',
+          'docker',
+          'gradle',
+          'java',
+          'php',
+          'properties',
+          'r',
+          'ruby',
+          'scala',
+          'swift',
+        ],
       },
       algolia: {
         appId: '9HS3C2MKTH',
@@ -119,12 +132,7 @@ const config = {
       },
     }),
 
-  plugins: [
-    [
-      '@docusaurus/plugin-client-redirects',
-      redirects,
-    ],
-  ]
-};
+  plugins: [['@docusaurus/plugin-client-redirects', redirects]],
+}
 
-module.exports = config;
+module.exports = config

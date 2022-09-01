@@ -404,7 +404,7 @@ The events are divided in two groups: canonical events and self-describing event
 
 ### Creating a Structured event
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](https://docs.snowplowanalytics.com/docs/understanding-tracking-design/). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](https://docs.snowplow.io/docs/understanding-tracking-design/). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
 
 However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 
@@ -642,7 +642,7 @@ let event = MessageNotification(title: "title", body: "body", trigger: .push)
     .notificationCount(9)
     .category("category1")
     .attachments([
-        MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplowanalytics.com")
+        MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplow.io")
     ]);
 tracker.track(event)
 ```

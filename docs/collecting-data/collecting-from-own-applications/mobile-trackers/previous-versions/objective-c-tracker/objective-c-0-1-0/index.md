@@ -331,7 +331,7 @@ tracker trackUnstructuredEvent:eventJson
                       timestamp:12345678;
 ```
 
-For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
+For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
 ## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#5-sending-events-snowplowrequest)5\. Sending events: `SnowplowRequest`
 

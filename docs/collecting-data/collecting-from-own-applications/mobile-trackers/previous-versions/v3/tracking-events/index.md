@@ -88,7 +88,7 @@ let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConf
 
 Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to this custom context as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md).
 
-Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported Iglu clients.
+Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplow.io/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported Iglu clients.
 
 Note: Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
@@ -264,7 +264,7 @@ let event = MessageNotification(title: "title", body: "body", trigger: .push)
     .notificationCount(9)
     .category("category1")
     .attachments([
-        MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplowanalytics.com")
+        MessageNotificationAttachment(identifier: "id", type: "type", url: "https://snowplow.io")
     ]);
 tracker.track(event)
 ```
@@ -391,7 +391,7 @@ Snowplow.createTracker(getApplicationContext(),
 
 Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to this custom context as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md).
 
-Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported Iglu clients.
+Each custom context is an array of self-describing JSON following the same pattern as a self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplow.io/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported Iglu clients.
 
 Note: Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 

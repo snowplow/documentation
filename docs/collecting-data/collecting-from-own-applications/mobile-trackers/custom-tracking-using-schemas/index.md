@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](https://docs.snowplowanalytics.com/docs/understanding-tracking-design/understanding-schemas-and-validation/). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
+Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](https://docs.snowplow.io/docs/understanding-tracking-design/understanding-schemas-and-validation/). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
 In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach entities to any tracked event.
 The entities can describe the context in which the event happen or provide extra information to better describe the event.
@@ -20,7 +20,7 @@ The entities can describe the context in which the event happen or provide extra
 
 ## Tracking a custom event (SelfDescribing)
 
-You may wish to track events in your app which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by Structured events, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](https://docs.snowplowanalytics.com/docs/understanding-tracking-design/understanding-schemas-and-validation/) and can have arbitrarily many fields.
+You may wish to track events in your app which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by Structured events, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](https://docs.snowplow.io/docs/understanding-tracking-design/understanding-schemas-and-validation/) and can have arbitrarily many fields.
 
 <!-- [Here](TODO) are some more details on how to create a custom entity. -->
 
@@ -162,7 +162,7 @@ tracker.track(event);
 
 ### Adding custom entities to any event (Global Contexts)
 
-It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/introduction/)), so that they are applied to all (or a subset of) events within an application.
+It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/introduction/)), so that they are applied to all (or a subset of) events within an application.
 
 This can be done at tracker setup declaring the contexts generator and the suitable subset of events.
 

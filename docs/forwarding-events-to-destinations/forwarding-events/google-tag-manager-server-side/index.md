@@ -25,9 +25,9 @@ GTM SS with Snowplow can be setup in two different configurations.
 
 Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS after being processed by your Snowplow Pipeline.
 
-| Open Source | Snowplow BDP |
-| --- | --- |
-| ❗ (See documentation) | ✔️ |
+|                                                                          Open Source                                                                           |                                Snowplow BDP                                 |
+|:--------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------:|
+|                                                                     ❗ (See documentation)                                                                      |                                     ✔️                                      |
 | [Documentation](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/building-an-enriched-event-relay-for-gtm-ss/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ### Server Side Tag Manager (Pre-pipeline)
@@ -35,8 +35,16 @@ Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS a
 Use GTM SS to relay raw events before the Snowplow pipeline to destinations, including to your Snowplow pipeline.
 
 | Open Source | Snowplow BDP |
-| --- | --- |
-| ✔️ | ✔️ |
+|:-----------:|:------------:|
+|     ✔️      |      ✔️      |
+
+### Principles for AWS deployment
+
+GTM SS **should** be deployed into a different account to the Snowplow sub-account to maintain full segmentation of the infrastructure that Snowplow manages from that which is managed by the Snowplow customer.  
+
+It would be possible to set up a separate VPC within the Snowplow sub-account but it is discouraged. VPC peering would be required to keep the traffic private otherwise traffic would go over public internet.
+
+GTM SS as a Destination Hub is normally intended to be public facing, however as a Server Side Tag Manager it could use both public internet routes and VPC peering to fan out traffic via private routes.
 
 ## Deploying Google Tag Manager Server Side
 

@@ -93,19 +93,20 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          {             
+          {
             label: 'Change cookie preferences',
             href: '/cookie-preferences',
           },
           {
             label: 'Terms and conditions',
-            href: '/terms-and-conditions', 
+            href: '/terms-and-conditions',
           }
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
       prism: {
         theme: require('prism-react-renderer/themes/dracula'),
+        additionalLanguages: ['arduino', 'csharp', 'docker', 'gradle', 'java', 'php', 'properties', 'r', 'ruby', 'scala', 'swift'],
       },
       algolia: {
         appId: '9HS3C2MKTH',
@@ -115,12 +116,12 @@ const config = {
       },
     }),
 
-    plugins: [
-      [
-        '@docusaurus/plugin-client-redirects',
-        redirects,
-      ],
-    ]
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      redirects,
+    ],
+  ]
 };
 
 module.exports = config;

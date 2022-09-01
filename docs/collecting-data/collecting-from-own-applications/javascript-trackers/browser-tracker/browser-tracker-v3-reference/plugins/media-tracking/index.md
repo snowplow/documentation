@@ -23,7 +23,7 @@ To start tracking media with default settings, use the snippet below, using your
 
 **`index.html`**
 
-```html
+```markup
 <html>
   <head>
     <title>Snowplow Media Tracking Example</title>
@@ -92,7 +92,7 @@ The `<audio>` or `<video>` element has the HTML id passed into `enableMedia
 
 **`index.html`**
 
-```html
+```markup
 <video id='example-id'></video>
 ```
 
@@ -110,7 +110,7 @@ The media element is the only `<audio>` or `<video>` child of a parent eleme
 
 **`index.html`**
 
-```html
+```markup
 <div id='example-id'>
   <video src='./example-video.mp4'></video>
 </div>

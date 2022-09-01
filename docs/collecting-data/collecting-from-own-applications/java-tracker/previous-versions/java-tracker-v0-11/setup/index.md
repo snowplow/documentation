@@ -26,7 +26,7 @@ You can also manually insert the Tracker by downloading the jar directly: [snow
 
 Add into your project's `pom.xml`:
 
-```xml
+```markup
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-java-tracker</artifactId>

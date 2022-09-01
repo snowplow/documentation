@@ -216,7 +216,7 @@ To do this we'll need to:
 
 Create a new HTML page with this content:
 
-```html
+```markup
 <html>
 <body>
 <form class="form-horizontal">

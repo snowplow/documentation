@@ -93,19 +93,23 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          {             
+          {
             label: 'Change cookie preferences',
             href: '/cookie-preferences',
           },
           {
             label: 'Terms and conditions',
-            href: '/terms-and-conditions', 
+            href: '/terms-and-conditions',
           }
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
       },
       prism: {
         theme: require('prism-react-renderer/themes/dracula'),
+        // Docusaurus comes with a subset of commonly used languages -https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js.
+        // To add syntax highlighting for additional Prism supported languages, add reference from https://prismjs.com/#supported-languages.
+        // NOTE: do a `yarn build` to ensure that it does build properly
+        additionalLanguages: ['arduino', 'csharp', 'docker', 'gradle', 'java', 'php', 'properties', 'r', 'ruby', 'scala', 'swift'],
       },
       algolia: {
         appId: '9HS3C2MKTH',
@@ -115,12 +119,12 @@ const config = {
       },
     }),
 
-    plugins: [
-      [
-        '@docusaurus/plugin-client-redirects',
-        redirects,
-      ],
-    ]
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      redirects,
+    ],
+  ]
 };
 
 module.exports = config;

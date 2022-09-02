@@ -1,6 +1,6 @@
 ---
-title: 'Terms and conditions'
-date: '2020-11-24'
+title: "Terms and conditions"
+date: "2020-11-24"
 ---
 
 # Terms and conditions

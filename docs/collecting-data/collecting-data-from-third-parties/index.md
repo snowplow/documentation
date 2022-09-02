@@ -11,8 +11,8 @@ Webhooks allow this third-party software to send their own internal event stream
 View our [set of trackers for tracking events from your own applications](/docs/collecting-data/collecting-from-own-applications/index.md).
 
 ```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
 ```

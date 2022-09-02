@@ -5,8 +5,8 @@ sidebar_position: 70
 ---
 
 ```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
 ```

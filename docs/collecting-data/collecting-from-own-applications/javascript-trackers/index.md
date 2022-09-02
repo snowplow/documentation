@@ -19,8 +19,8 @@ There are currently three trackers:
 - **Node.js Tracker (v3)** for use in server-side Node.js environments via npm.
 
 ```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
 ```

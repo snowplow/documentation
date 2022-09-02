@@ -69,8 +69,8 @@ tracker:track_struct_event("category", "action", "label", "property", 10)
 Visit documentation about [tracking events](/docs/collecting-data/collecting-from-own-applications/lua-tracker/tracking-specific-events/index.md) to learn about other supported event types.
 
 ```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
 ```

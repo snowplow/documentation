@@ -21,8 +21,8 @@ A subject represents a user whose events are tracked. A tracker constructs event
 See [here for instructions](http://blog.ralch.com/tutorial/design-patterns/golang-singleton/) on building a Singleton in Golang.
 
 ```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
 ```

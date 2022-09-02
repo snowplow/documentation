@@ -13,8 +13,8 @@ import Badges from '@site/src/components/Badges';
 The Browser Tracker is available via `npm` and can be directly bundled into your application. It supports core tracking methods out of the box and can be extended through plugins.
 
 ```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
 ```

@@ -15,8 +15,8 @@ The Snowplow Java Tracker lets you add analytics to your [Java](http://www.ja
 The Tracker should be relatively straightforward to setup if you are familiar with Java development.
 
 ```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
 import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
 ```

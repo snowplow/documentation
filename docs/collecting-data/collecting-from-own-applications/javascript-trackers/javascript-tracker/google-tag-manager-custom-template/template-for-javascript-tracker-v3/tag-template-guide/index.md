@@ -4,19 +4,19 @@ date: "2021-11-18"
 sidebar_position: 200
 ---
 
-This template implements the [Snowplow Analytics JavaScript tracker v3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/index.md). The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ sandboxed JavaScript.
+This template implements the [Snowplow JavaScript tracker v3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/index.md). The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ sandboxed JavaScript.
 
 ## Install the template
 
 To **install the template**, browse to **Templates** in the Google Tag Manager user interface.
 
-Under **Tag Templates**, click **Search Gallery**, and type `snowplow analytics v3` into the gallery overlay search bar.
+Under **Tag Templates**, click **Search Gallery**, and type `Snowplow v3` into the gallery overlay search bar.
 
-![](images/Screenshot-2021-11-18-at-10.30.35.png)
+![search Snowplow v3 in GTM gallery](images/search_snowplow_v3.png)
 
-Click the **Snowplow Analytics v3** template name, and then click **Add to Workspace** in the next screen. Review the permissions and click **Add** to finalize the import.
+Click the **Snowplow v3** template name, and then click **Add to Workspace** in the next screen. Review the permissions and click **Add** to finalize the import.
 
-After importing the template, you can follow the normal process of creating a **new tag** in Google Tag Manager, and the **Snowplow Analytics v3** template will be listed among the **Custom** tag types you can choose from.
+After importing the template, you can follow the normal process of creating a **new tag** in Google Tag Manager, and the **Snowplow v3** template will be listed among the **Custom** tag types you can choose from.
 
 ## Caveats
 
@@ -24,7 +24,7 @@ To begin with, some of the caveats of using the Custom Template.
 
 - Any methods that require the parsing of HTML elements (e.g. link tracking filter functions, cross domain linking) will not work and are thus disabled.
 - Automatic error tracking does not work due to lack of support for the `ErrorEvent` API.
-- There is no implementation for the [standard ecommerce](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#ecommerce) events. Users are encouraged to implement the [enhanced ecommerce](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#enhanced-ecommerce) setup instead.
+- There is no implementation for the [standard ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
 
 ## Instructions
 
@@ -36,23 +36,23 @@ Finally, the tag bundles a **command** from the settings in the tag, and sends i
 
 ### Settings Configuration
 
-The Tag template requires a Settings Variable template to be configured which can be referenced within the Tag. This settings template contains the information required for the Tag to appropriate initialize the tracker.
+The Tag template requires a [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/google-tag-manager-custom-template/template-for-javascript-tracker-v3/settings-variable-guide/index.md) Variable template to be configured which can be referenced within the Tag. This settings template contains the information required for the Tag to appropriate initialize the tracker.
 
 Once a settings variable has been configured, it can be attached to the Tag in the **Tracker Initialisation** section.
 
-![](images/Screenshot-2021-11-18-at-14.31.55.png)
+![tracker initialization](images/tracker_initialization.png)
 
-You can also choose to override some of the parameters specifically for this tag if you wish to, such as sending the creating a new tracker by overriding the Tracker Name and a new Collector Endpoint.
+You can also choose to override some of the parameters specifically for this tag if you wish to, such as the Tracker Name or the Collector Endpoint.
 
-**Self Hosted JavaScript Tracker**
+#### Self Hosted JavaScript Tracker
 
-If you have the Snowplow library [self-hosted](https://github.com/snowplow/snowplow/wiki/Self-hosting-snowplow-js), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
+If you have the Snowplow library [self-hosted](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
 
-![](images/Screenshot-2021-11-18-at-14.40.16.png)
+![modifying permissions](images/modifying_permissions.png)
 
-[](https://www.simoahava.com/images/2020/05/template-permissions-snowplow.jpg)Unfortunately, modifying permissions **breaks the gallery link** and you will no longer be notified about updates to the template. Being able to modify permissions without having the link break is a feature request I hope will get solved very soon.
+Modifying permissions **breaks the gallery link** and you will no longer be notified about updates to the template.
 
-![](images/Screenshot-2021-11-18-at-14.40.47.png)
+![modifying permissions breaks gallery link](images/modifying_breaks_gallery_link.png)
 
 ### Tag Type
 
@@ -72,9 +72,9 @@ Tags that can derive their parameters from a Google Tag Manager variable are:
 - Structured Event
 - Timing
 
-You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker). For example, to have the variable populate an [Error event](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#trackError), you could use a Custom JavaScript variable like this:
+You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
 
-```
+```javascript
 function() {
   return {
     message: 'Some Error Happened',
@@ -88,9 +88,9 @@ function() {
 
 Alternatively, you can set the drop-down to the value `No`, and add the parameters manually instead:
 
-![](images/Screenshot-2021-11-18-at-14.43.42.png)
+![adding parameters manually](images/adding_parameters_manually.png)
 
-Some tag types will add additional selections to this section. Follow the official tracker documentation for more information about what each option does.
+Some tag types will add additional selections to this section. Follow the [official tracker documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md) for more information about what each option does.
 
 #### Special tags
 
@@ -124,7 +124,7 @@ If you check **Track HTML Content Of Clicked Link**, then the full text content 
 
 ##### Page View
 
-You can provide a **Custom Page Title** if you wish, and you can add a [custom context function](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#trackPageView) to the request.
+You can provide a **Custom Page Title** if you wish, and you can add a [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#custom-context) to the request, as also described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#trackpageview).
 
 If you enable **Page Activity Tracking**, the tag will setup a _heartbeat_ tracker, and send page pings to Snowplow at intervals that you can specify.
 
@@ -134,19 +134,19 @@ The **Callback Function** is something you can set to a JavaScript function. If 
 
 For any other commands which are supported by the Snowplow JavaScript Tracker v3, you can select the **\[Custom Command\]** option. Once select, you can enter any function name and the associated parameter for that function. The parameter can either be a simple string, in examples such as `setUserId`:
 
-![](images/Screenshot-2021-11-18-at-14.44.50.png)
+![setUserId](images/setUserId.png)
 
 Or it can be set to a Custom JavaScript Variable in the instances where an Object should be passed to the function, such as with `enableAnonymousTracking`:
 
-![](images/Screenshot-2021-11-18-at-14.48.48.png)
+![enableAnonymousTracking Custom JavaScript variable](images/enableAnonymousTracking_custom_variable.png)
 
 And then use this variable as your Command Argument:
 
-![](images/Screenshot-2021-11-18-at-14.50.09.png)
+![enableAnonymousTracking Custom Command argument](images/enableAnonymousTracking_argument.png)
 
 ### Additional Tracking Parameters
 
-You can choose a Google Tag Manager variable from the drop-down titled **Add Custom Contexts**. This lets you add [custom contexts](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#custom-contexts) to the current hit. The variable **must** return an array of valid context objects.
+You can choose a Google Tag Manager variable from the drop-down titled **Add Custom Contexts**. This lets you add [custom contexts](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#custom-context) to the current hit. The variable **must** return an array of valid context objects.
 
 You can also choose to override the device timestamp with the **Set Custom Timestamp** field. The format must be UNIX time in milliseconds.
 

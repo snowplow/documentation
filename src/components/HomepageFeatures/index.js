@@ -1,12 +1,12 @@
-import React from 'react';
-import clsx from 'clsx';
-import styles from './styles.module.css';
+import React from 'react'
+import clsx from 'clsx'
+import styles from './styles.module.css'
 
 const FeatureList = [
   {
     title: 'Getting Started with Snowplow',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    link: "docs",
+    link: 'docs',
     description: (
       <>
         Information on how to get started with the various flavours of Snowplow.
@@ -16,37 +16,30 @@ const FeatureList = [
   {
     title: 'Understanding your pipeline',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    link: "docs/understanding-your-pipeline/architecture-overview-aws",
+    link: 'docs/understanding-your-pipeline/architecture-overview-aws',
     description: (
       <>
-        What is the Snowplow pipeline and what to use to achieve your data needs.
+        What is the Snowplow pipeline and what to use to achieve your data
+        needs.
       </>
     ),
   },
   {
     title: 'Modelling your data',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    link: "docs/modeling-your-data/what-is-data-modeling",
-    description: (
-      <>
-        Guidance on how to model your data.
-      </>
-    ),
+    link: 'docs/modeling-your-data/what-is-data-modeling',
+    description: <>Guidance on how to model your data.</>,
   },
   {
     title: 'Trackers',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    link: "docs/collecting-data/collecting-from-own-applications",
-    description: (
-      <>
-        Information on all the trackers available.
-      </>
-    ),
+    link: 'docs/collecting-data/collecting-from-own-applications',
+    description: <>Information on all the trackers available.</>,
   },
   {
     title: 'Pipeline components and applications',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    link: "docs/pipeline-components-and-applications",
+    link: 'docs/pipeline-components-and-applications',
     description: (
       <>
         Information on all the pipeline components and applications available.
@@ -56,14 +49,12 @@ const FeatureList = [
   {
     title: 'Tutorials',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    link: "docs/tutorials",
+    link: 'docs/tutorials',
     description: (
-      <>
-        A number of tutorials on techniques to get your pipelines running.
-      </>
+      <>A number of tutorials on techniques to get your pipelines running.</>
     ),
   },
-];
+]
 
 function Feature({ Svg, title, description, link }) {
   return (
@@ -74,10 +65,12 @@ function Feature({ Svg, title, description, link }) {
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
         <p>{description}</p>
-        <a href={link}><button>Read more</button></a>
+        <a href={link}>
+          <button>Read more</button>
+        </a>
       </div>
     </div>
-  );
+  )
 }
 
 export default function HomepageFeatures() {
@@ -91,5 +84,5 @@ export default function HomepageFeatures() {
         </div>
       </div>
     </section>
-  );
+  )
 }

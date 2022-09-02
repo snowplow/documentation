@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default function Badges(props) {
   if (props.badgeType === 'Actively Maintained') {
@@ -12,7 +12,7 @@ export default function Badges(props) {
           className="img_ev3q"
         ></img>
       </a>
-    );
+    )
   }
   if (props.badgeType === 'Maintained') {
     return (
@@ -25,7 +25,7 @@ export default function Badges(props) {
           className="img_ev3q"
         ></img>
       </a>
-    );
+    )
   }
   if (props.badgeType === 'Early Release') {
     return (
@@ -38,7 +38,7 @@ export default function Badges(props) {
           className="img_ev3q"
         ></img>
       </a>
-    );
+    )
   }
   if (props.badgeType === 'Unsupported') {
     return (
@@ -51,7 +51,7 @@ export default function Badges(props) {
           className="img_ev3q"
         ></img>
       </a>
-    );
+    )
   }
   if (props.badgeType === 'Snowplow Tracker Release') {
     return (
@@ -59,7 +59,7 @@ export default function Badges(props) {
         src="https://img.shields.io/packagist/v/snowplow/snowplow-tracker"
         alt="Latest version"
       ></img>
-    );
+    )
   }
   if (props.badgeType === 'React Native Tracker Release') {
     return (
@@ -69,7 +69,7 @@ export default function Badges(props) {
           alt="Latest version"
         ></img>
       </a>
-    );
+    )
   }
   if (props.badgeType === 'Pypi Tracker Release') {
     return (
@@ -79,7 +79,7 @@ export default function Badges(props) {
           alt="Latest version"
         ></img>
       </a>
-    );
+    )
   }
 
   if (props.badgeType === 'Snowplow Tracker PHP Release') {
@@ -88,7 +88,7 @@ export default function Badges(props) {
         src="https://img.shields.io/packagist/php-v/snowplow/snowplow-tracker"
         alt="PHP Version"
       ></img>
-    );
+    )
   }
   if (props.badgeType === 'Snowplow Tracker React Native Release') {
     return (
@@ -98,7 +98,7 @@ export default function Badges(props) {
           alt="React Native Version"
         ></img>
       </a>
-    );
+    )
   }
   if (props.badgeType === 'Snowplow Tracker Pypi Release') {
     return (
@@ -108,6 +108,6 @@ export default function Badges(props) {
           alt="React Native Version"
         ></img>
       </a>
-    );
+    )
   }
 }

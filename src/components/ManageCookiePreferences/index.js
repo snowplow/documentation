@@ -5,16 +5,22 @@ import { COOKIE_PREF_KEY } from '../../constants/config'
 import styles from './styles.module.css'
 
 export default function ManageCookiePreferences() {
-  const [consentState, setConsentState] = useState('You currently have no cookies enabled')
+  const [consentState, setConsentState] = useState(
+    'You currently have no cookies enabled'
+  )
 
   useEffect(() => {
     onPreferencesChanged((preferences) => {
-      preferences.cookieOptions.forEach(({id, isEnabled}) => {
+      preferences.cookieOptions.forEach(({ id, isEnabled }) => {
         if (id === 'analytics') {
           if (isEnabled) {
-            setConsentState('You currently have Necessary and Analytics cookies enabled')
+            setConsentState(
+              'You currently have Necessary and Analytics cookies enabled'
+            )
           } else {
-            setConsentState('You currently have only the Necessary cookies enabled')
+            setConsentState(
+              'You currently have only the Necessary cookies enabled'
+            )
           }
         }
       })
@@ -23,18 +29,21 @@ export default function ManageCookiePreferences() {
     const cookiePreferences = Cookies.get(COOKIE_PREF_KEY)
     if (cookiePreferences) {
       if (cookiePreferences.includes('analytics:1')) {
-        setConsentState('You currently have Necessary and Analytics cookies enabled')
+        setConsentState(
+          'You currently have Necessary and Analytics cookies enabled'
+        )
       } else {
         setConsentState('You currently have only the Necessary cookies enabled')
       }
     }
-
   }, [])
 
   return (
     <p>
       <span>{consentState}</span>
-      <button type='button' className={styles.manageButton} onClick={show}>Preferences</button>
+      <button type="button" className={styles.manageButton} onClick={show}>
+        Preferences
+      </button>
     </p>
-  );
+  )
 }

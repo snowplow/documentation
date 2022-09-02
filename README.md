@@ -3,7 +3,7 @@
 This is the source for https://docs.snowplow.io/docs.
 
 * [Contributing](#contributing)
-* [How to preview locally](#how-to-preview-locally)
+* [How to preview locally](#how*to-preview-locally)
 * [Organizing content](#organizing-content)
 * [Formatting content](#formatting-content)
 
@@ -62,3 +62,14 @@ The documentation is written in Markdown. In addition, since we are using Docusa
 * Use [“admonitions”](https://docusaurus.io/docs/markdown-features/admonitions) (e.g. `:::note`) to draw attention to a certain paragraph.
 * Use [code blocks](https://docusaurus.io/docs/markdown-features/code-blocks) for code, and don’t forget to specify the languange.
 * Use [tabs](https://docusaurus.io/docs/markdown-features/tabs) for content where multiple alternatives are possible (e.g. iOS code vs Android code). Inside the tabs, try to only put the content that differs.
+
+### Formatting your work using prettier
+To ensure consistency of our codebase we also utilize [prettier](https://prettier.io) to format our source files and enforce correctness in a CI step.
+
+For the best experience set up your IDE to automatically format files on save. Here's a [guide for VSCode](https://blog.yogeshchavan.dev/automatically-format-code-on-file-save-in-visual-studio-code-using-prettier).
+
+You can also run the formatter command before committing changes manually:
+
+```bash
+yarn format
+```

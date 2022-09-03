@@ -10,7 +10,6 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 <Block5966/>
 
 import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList />
 ```

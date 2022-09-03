@@ -14,7 +14,6 @@ The Browser Tracker is available via `npm` and can be directly bundled into your
 
 ```mdx-code-block
 import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList />
 ```

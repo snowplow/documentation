@@ -16,7 +16,6 @@ The tracker should be straightforward to use if you are comfortable with JavaScr
 
 ```mdx-code-block
 import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList />
 ```

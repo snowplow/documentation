@@ -22,7 +22,6 @@ See [here for instructions](http://blog.ralch.com/tutorial/design-patterns/gola
 
 ```mdx-code-block
 import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList />
 ```

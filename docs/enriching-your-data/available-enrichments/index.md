@@ -10,7 +10,6 @@ import Block1303 from "@site/docs/reusable/untitled-reusable-block-20/_index.md"
 <Block1303/>
 
 import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList />
 ```

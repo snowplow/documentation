@@ -8,7 +8,6 @@ We have built a set of [Terraform](https://registry.terraform.io/namespaces/snow
 
 ```mdx-code-block
 import SnowplowDocCardList from '@site/src/components/SnowplowDocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<SnowplowDocCardList items={useCurrentSidebarCategory().items}/>
+<SnowplowDocCardList />
 ```

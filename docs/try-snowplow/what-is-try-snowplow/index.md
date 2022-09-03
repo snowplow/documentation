@@ -2,6 +2,7 @@
 title: "What is Try Snowplow?"
 date: "2020-11-23"
 sidebar_position: 0
+description: "What is Snowplow?"
 ---
 
 Try Snowplow enables you to explore how Snowplow can help you solve your data use cases by:

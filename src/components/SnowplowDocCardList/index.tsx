@@ -5,7 +5,7 @@ import {
   filterDocCardListItems,
 } from '@docusaurus/theme-common'
 import SnowplowDocCard from '@site/src/components/SnowplowDocCard'
-import type { Props } from '@theme/DocCardList'
+import type { Props } from '../SnowplowDocCardList'
 
 function SnowplowDocCardListForCurrentSidebarCategory({ className }: Props) {
   const category = useCurrentSidebarCategory()

@@ -1,12 +1,5 @@
 ---
-title: "API reference"
-date: "2021-10-27"
+title: API reference
 sidebar_position: 1000
-description: Jump to external API reference
+href: https://docs.snowplow.io/snowplow-ruby-tracker/
 ---
-
-```mdx-code-block
-import ExternalRedirect from '@site/src/components/ExternalRedirect';
-
-<ExternalRedirect to="https://docs.snowplow.io/snowplow-ruby-tracker/" />
-```

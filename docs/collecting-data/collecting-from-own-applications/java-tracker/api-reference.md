@@ -1,12 +1,5 @@
 ---
-title: "API reference"
-date: "2022-03-25"
+title: API reference
 sidebar_position: 80
-description: Jump to external API reference
+href: https://snowplow.github.io/snowplow-java-tracker
 ---
-
-```mdx-code-block
-import ExternalRedirect from '@site/src/components/ExternalRedirect';
-
-<ExternalRedirect to="https://snowplow.github.io/snowplow-java-tracker" />
-```

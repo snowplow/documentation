@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const redirects = require('./redirects')
+const sidebar = require('./sidebars')
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -35,9 +36,17 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
           showLastUpdateTime: true,
           editUrl: 'https://github.com/snowplow/snowplow.github.io/tree/main/',
+          async sidebarItemsGenerator({
+            defaultSidebarItemsGenerator,
+            ...args
+          }) {
+            return sidebar.swapDocItemsToLinkItems(
+              await defaultSidebarItemsGenerator(args),
+              args.docs
+            )
+          },
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

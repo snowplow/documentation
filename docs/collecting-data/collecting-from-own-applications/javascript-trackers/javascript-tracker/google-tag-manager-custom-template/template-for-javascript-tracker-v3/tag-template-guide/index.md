@@ -54,6 +54,16 @@ Modifying permissions **breaks the gallery link** and you will no longer be noti
 
 ![modifying permissions breaks gallery link](images/modifying_breaks_gallery_link.png)
 
+:::note
+
+Since v1.1.0, an alternative to prevent breaking the gallery update link is to use the `Do not load` option from the corresponding drop down menu:
+
+![library host drop down 'Do not load' option](images/host_drop_down_no_load.png)
+
+Using this option means that the Snowplow v3 Tag will not inject the Snowplow JavaScript Tracker library on the page and can be used **only** when the Tracker Snippet is loaded with another technique, e.g. directly on the page or through another GTM tag. (This is also supported as a configuration option since v1.2.0 of the [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/google-tag-manager-custom-template/template-for-javascript-tracker-v3/settings-variable-guide/index.md) Variable.)
+
+:::
+
 ### Tag Type
 
 Under **Tag Type**, you can choose what type of command is compiled and sent to the endpoint. The tag types are split here into three groups: commands that utilize a common **parameters** object, commands that have **special conditions**, and **custom commands**.

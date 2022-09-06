@@ -4,9 +4,11 @@ date: "2020-11-23"
 sidebar_position: 20
 ---
 
-Event volume cap
+:::caution Event volume cap
 
-Try Snowplow is a limited trial of the full Snowplow BDP product and has an event volume cap of 50 events per second.
+Try Snowplow is a limited trial of the full Snowplow BDP product and has an event volume cap of 50 events per second. Any events above this cap will be dropped.
+
+:::
 
 ## Instrumenting the web tracker in your application
 

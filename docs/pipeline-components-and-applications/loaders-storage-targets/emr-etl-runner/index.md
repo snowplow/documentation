@@ -194,7 +194,7 @@ Describing how to do this is out of scope for this guide, but the blog post [Lo
 
 ## Configuring shredding
 
-Snowplow has a [Shredding process](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/shredding-overview/) for Redshift which contributes to the following three phases:
+Snowplow has a [Shredding process](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/shredding-overview/index.md) for Redshift which contributes to the following three phases:
 
 1. Extracting unstructured event JSONs and context JSONs from enriched event files into their own files
 2. Removing endogenous duplicate records, which are sometimes introduced within the Snowplow pipeline (feature added to r76)
@@ -261,7 +261,7 @@ Next, we let EmrEtlRunner know about your Iglu schema registry, so that schemas 
 
 You must add an extra entr(-y/ies) in the `repositories:` array pointing to your own Iglu schema registry. If you are not submitting custom events and contexts and are not interested in shredding then there's no need in adding the custom section but the `iglu_resolver.json` file is still required and is referenced with `--resolver` option to EmrEtlRunner.
 
-For more information on how to customize the `iglu_resolver.json` file, please review the [Iglu resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/) page.
+For more information on how to customize the `iglu_resolver.json` file, please review the [Iglu resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) page.
 
 ## Technical explanation
 

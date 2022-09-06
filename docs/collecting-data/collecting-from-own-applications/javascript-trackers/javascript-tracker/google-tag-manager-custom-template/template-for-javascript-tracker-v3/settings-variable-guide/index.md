@@ -4,21 +4,21 @@ date: "2021-11-18"
 sidebar_position: 100
 ---
 
-The **Snowplow Analytics Settings** custom variable template is meant to be used with the Snowplow Analytics tag template.
+The **Snowplow v3 Settings** custom variable template is meant to be used with the Snowplow v3 tag template.
 
-With this template, you can compile a **tracker configuration object**, which you can then load into your Snowplow Analytics tags to avoid the need to manually enter the same tracker settings across all your tags.
+With this template, you can compile a **tracker configuration object**, which you can then load into your Snowplow tags to avoid the need to manually enter the same tracker settings across all your tags.
 
 ## Install the template
 
 To **install the template**, browse to **Templates** in the Google Tag Manager user interface.
 
-Under **Variable Templates**, click **Search Gallery**, and type `snowplow analytics v3` into the gallery overlay search bar.
+Under **Variable Templates**, click **Search Gallery**, and type `Snowplow v3` into the gallery overlay search bar.
 
-![](images/Screenshot-2021-11-18-at-12.32.11.png)
+![search Snowplow v3 Settings in GTM gallery](images/search_snowplow_v3_settings.png)
 
-Click the **Snowplow Analytics v3 Settings** template name, and then click **Add to Workspace** in the next screen. Review the permissions and click **Add** to finalize the import.
+Click the **Snowplow v3 Settings** template name, and then click **Add to Workspace** in the next screen. Review the permissions and click **Add** to finalize the import.
 
-After importing the template, you can follow the normal process of creating a **new variable** in Google Tag Manager, and the **Snowplow Analytics Settings** template will be listed among the **Custom** variable types you can choose from.
+After importing the template, you can follow the normal process of creating a **new variable** in Google Tag Manager, and the **Snowplow v3 Settings** template will be listed among the **Custom** variable types you can choose from.
 
 ## Instructions
 

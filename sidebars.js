@@ -20,11 +20,10 @@ const swap = (allItems, linkItems) => {
     if (linkItems[item.id]) {
       return {
         type: 'link',
-        label:
-          linkItems[item.id]['sidebar_label'] ?? linkItems[item.id]['title'],
-        href: linkItems[item.id]['href'],
-        className: linkItems[item.id]['sidebar_class_name'],
-        customProps: linkItems[item.id]['sidebar_custom_props'],
+        label: linkItems[item.id].sidebar_label ?? linkItems[item.id].title,
+        href: linkItems[item.id].href,
+        className: linkItems[item.id].sidebar_class_name,
+        customProps: linkItems[item.id].sidebar_custom_props,
       }
     }
 
@@ -39,7 +38,7 @@ const swapDocItemsToLinkItems = (generatedDocs, originalDocs) => {
   const linkItems = {}
 
   for (const docItem of originalDocs) {
-    if (docItem.frontMatter['type'] === 'link') {
+    if (docItem.frontMatter.type === 'link') {
       linkItems[docItem.id] = docItem.frontMatter
     }
   }

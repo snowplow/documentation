@@ -4,9 +4,13 @@ date: "2020-11-09"
 sidebar_position: 9990
 ---
 
-Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/shredding-overview/). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
+:::danger
+
+Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/shredding-overview/index.md). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
 
 Historically it was also used for enriching data, but that functionality was deprecated even longer ago in favour of the [streaming versions of Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md).
+
+:::
 
 ## Setting up EmrEtlRunner
 
@@ -22,8 +26,6 @@ In this guide you'll also find additional information:
 - A [deeper technical explanation](#technical-explanation) of EtlEmrRunner
 - A guide for [setting up end to end encryption](#setting-up-end-to-end-encryption)
 - A guide to [setting up an EC2 instance](#setting-up-ec2-instance-for-emretlrunner-and-storageloader) for EmrEtlRunner
-
-* * *
 
 ## Installing EmrEtlRunner
 
@@ -86,9 +88,7 @@ Storages for data can be configured using storage targets JSONs. Configuration f
 
 #### Iglu
 
-You will also need an Iglu resolver configuration file. This is where we list the schema repositories to use to retrieve JSON Schemas for validation. For more information on this, see the [wiki page for Configuring shredding](#shredding).
-
-* * *
+You will also need an Iglu resolver configuration file. This is where we list the schema repositories to use to retrieve JSON Schemas for validation. For more information on this, see the [wiki page for Configuring shredding](#configuring-shredding).
 
 ## Using EmrEtlRunner
 
@@ -163,8 +163,6 @@ Usage: lint enrichments [options]
 Once you have run the EmrEtlRunner you should be able to manually inspect in S3 the folder specified in the `:out:` parameter in your `config.yml` file and see new files generated, which will contain the cleaned data either for uploading into a storage target (e.g. Redshift) or for analysing directly using Hive or Spark or some other querying tool on EMR.
 
 Note: most Snowplow users run the 'spark' version of the ETL process, in which case the data generated is saved into subfolders with names of the form `part-000...`. If, however, you are running the legacy 'hive' ETL (because e.g. you want to use Hive as your storage target, rather than Redshift, which is the only storage target the 'spark' etl currently supports), the subfolders names will be of the format `dt=...`.
-
-* * *
 
 ## Scheduling EmrEtlRunner
 
@@ -280,7 +278,10 @@ EmrEtlRunner then triggers the Enrichment process to run. It spins up an EMR clu
 
 By setting up a [scheduling job](#scheduling-emretlrunner) to run EmrEtlRunner regularly, Snowplow users can ensure that the event data regularly flows through the Snowplow data pipeline from the collector to storage.
 
-Note: many references are made to the 'Hadoop ETL' and 'Hive ETL' in the documentation and the [config file](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample). 'Hadoop ETL' refers to the current Spark-based Enrichment Process. 'Hive ETL' refers to the legacy Hive-based ETL process. EmrEtlRunner can be setup to instrument either. However, we recommend **all** Snowplow users use the Spark based 'Hadoop ETL', as it is much more robust, as well as being cheaper to run.
+:::note
+Many references are made to the 'Hadoop ETL' and 'Hive ETL' in the documentation and the [config file](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample). 'Hadoop ETL' refers to the current Spark-based Enrichment Process. 'Hive ETL' refers to the legacy Hive-based ETL process. EmrEtlRunner can be setup to instrument either. However, we recommend **all** Snowplow users use the Spark based 'Hadoop ETL', as it is much more robust, as well as being cheaper to run.
+
+:::
 
 ## Setting up end-to-end encryption
 
@@ -351,8 +352,6 @@ For more information, on all those types of encryption, you can refer to the ded
 To leverage the security configuration you created, you will need to specify it in the EmrEtlRunner configuration at: `aws:emr:security_configuration`.
 
 Additionally, you will need to tell EmrEtlRunner that it will have to interact with encrypted buckets through: `aws:s3:buckets:encrypted: true`.
-
-* * *
 
 ## Setting up EC2 instance for EmrEtlRunner and StorageLoader
 

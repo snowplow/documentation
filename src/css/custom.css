@@ -238,3 +238,13 @@ ul.breadcrumbs {
 ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
   top: 2px;
 }
+
+.card .text--truncate {
+  overflow: visible;
+  text-overflow: initial;
+  white-space: normal;
+}
+
+.col .card {
+  height: 100%;
+}

@@ -11,17 +11,20 @@
 
 // @ts-check
 
-const swap = (items, itemsWithHref) => {
-  const result = items.map((item) => {
+const swap = (allItems, linkItems) => {
+  const result = allItems.map((item) => {
     if (item.type === 'category') {
-      return { ...item, items: swap(item.items, itemsWithHref) }
+      return { ...item, items: swap(item.items, linkItems) }
     }
 
-    if (itemsWithHref[item.id]) {
-      item = {
+    if (linkItems[item.id]) {
+      return {
         type: 'link',
-        label: itemsWithHref[item.id].title,
-        href: itemsWithHref[item.id].href,
+        label:
+          linkItems[item.id]['sidebar_label'] ?? linkItems[item.id]['title'],
+        href: linkItems[item.id]['href'],
+        className: linkItems[item.id]['sidebar_class_name'],
+        customProps: linkItems[item.id]['sidebar_custom_props'],
       }
     }
 
@@ -32,16 +35,16 @@ const swap = (items, itemsWithHref) => {
 }
 
 // Switch out doc items for external links where required
-const swapDocItemsToLinkItems = (items, docs) => {
-  const itemsWithHref = {}
+const swapDocItemsToLinkItems = (generatedDocs, originalDocs) => {
+  const linkItems = {}
 
-  for (const docItem of docs) {
-    if (docItem.frontMatter['href']) {
-      itemsWithHref[docItem.id] = docItem.frontMatter
+  for (const docItem of originalDocs) {
+    if (docItem.frontMatter['type'] === 'link') {
+      linkItems[docItem.id] = docItem.frontMatter
     }
   }
 
-  return swap(items, itemsWithHref)
+  return swap(generatedDocs, linkItems)
 }
 
 module.exports = { swapDocItemsToLinkItems }

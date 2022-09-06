@@ -107,7 +107,7 @@ The `region` variable should hold the AWS region in which your four data buckets
 
 Within the `s3` section, the `buckets` variables are as follows:
 
-- `assets:` holds the ETL job's static assets (HiveQL script plus Hive deserializer). You can leave this as-is (pointing to Snowplow Analytics' [own public bucket containing these assets](Hosted-assets)) or replace this with your own private bucket containing the assets
+- `assets:` holds the ETL job's static assets (HiveQL script plus Hive deserializer). You can leave this as-is (pointing to Snowplow Analytics' own public bucket containing these assets (`s3://snowplow-hosted-assets`)) or replace this with your own private bucket containing the assets
 - `log:` is the bucket in which Amazon EMR will record processing information for this job run, including logging any errors
 - `raw:` is where you specify the paths through which your raw Snowplow events will flow. `in` is an array of one or more buckets containing raw events. For `processing:`, **always include a sub-folder on this variable (see below for why)**. `archive:` is where your raw Snowplow events will be moved after they have been successfully processed by Elastic MapReduce
 - `enriched:` is where you specify the paths through which your enriched Snowplow events will flow.

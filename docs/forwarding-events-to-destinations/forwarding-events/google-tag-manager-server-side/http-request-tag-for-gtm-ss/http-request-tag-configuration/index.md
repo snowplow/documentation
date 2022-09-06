@@ -5,7 +5,7 @@ sidebar_position: 100
 ---
 
 ## Video Walkthrough
-
+<!-- 2022-09-06: where is the video ? -->
 In the following short video a complete example configuration of the Snowplow GTM-SS HTTP Request Tag is presented.
 
 Scenario: The example assumes that we want to send a POST HTTP Request to an example custom destination endpoint, where we would like the body of the request to have the following structure:

@@ -58,6 +58,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: 'announcementBar-1', // Increment on change
+        content: `👓 Participate in research that will shape the future of Snowplow Open Source! <a target="_blank" rel="noopener noreferrer" href="https://docs.google.com/forms/d/e/1FAIpQLSeZ1WIQO50N5bb6nIVb6CqIolkCrunimkQtMLpSU31wNKC6GQ/viewform">Apply here.</a>`,
+      },
       docs: {
         sidebar: {
           autoCollapseCategories: true,

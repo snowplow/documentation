@@ -40,6 +40,7 @@
   --ifm-color-primary-light: #7345c6;
   --ifm-color-primary-lighter: #926ed3;
   --ifm-color-primary-lightest: #b198df;
+  --ifm-color-announcement: #e6f6fe;
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: 'Roboto', Arial, Helvetica, sans-serif;
   --ifm-menu-color-active: #6638b8;
@@ -247,4 +248,8 @@ ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
 
 .col .card {
   height: 100%;
+}
+
+div[class^='announcementBar_'] {
+  background: var(--ifm-color-announcement);
 }

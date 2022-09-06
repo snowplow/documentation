@@ -8,6 +8,14 @@ sidebar_position: 100
 
 In the following short video a complete example configuration of the Snowplow GTM-SS HTTP Request Tag is presented.
 
+```mdx-code-block
+import ReactPlayer from 'react-player'
+import videoUrl from './images/http_request_tag_example_configuration.mp4'
+
+<ReactPlayer controls url={videoUrl} />
+<br/>
+```
+
 Scenario: The example assumes that we want to send a POST HTTP Request to an example custom destination endpoint, where we would like the body of the request to have the following structure:
 
 ```json

@@ -151,7 +151,7 @@ Authentication for the service user is required for the Snowflake Terraform prov
 
 #### Usage
 
-1. Fill variables in [terraform.tfvars](terraform.tfvars) within the `aws/snowflake` folder. Snowflake connection details found in the [Prerequisites](#Prerequisites) section need to be assigned to respective variables in `terraform.tfvars`.
+1. Fill variables in [terraform.tfvars](https://github.com/snowplow/quickstart-examples/blob/main/terraform/aws/snowflake/terraform.tfvars) within the `aws/snowflake` folder. Snowflake connection details found in the [Prerequisites](#Prerequisites) section need to be assigned to respective variables in `terraform.tfvars`.
 2. Run `terraform init`
 3. Run `terraform apply`
 

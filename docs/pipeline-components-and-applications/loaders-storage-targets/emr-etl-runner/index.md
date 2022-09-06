@@ -4,26 +4,28 @@ date: "2020-11-09"
 sidebar_position: 9990
 ---
 
-Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
+:::caution
+
+Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/shredding-overview/index.md). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
 
 Historically it was also used for enriching data, but that functionality was deprecated even longer ago in favour of the [streaming versions of Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md).
+
+:::
 
 ## Setting up EmrEtlRunner
 
 This guide covers:
 
-1. [Installation](#installing). You need to install EmrEtlRunner on your own server. It will interact with Amazon Elastic MapReduce and S3 via the Amazon API
-2. [Usage](#using). How to use EmrEtlRunner at the command line, to instruct it to process data from your collector
-3. [Scheduling](#scheduling). How to schedule the tool so that you always have an up to date set of cleaned, enriched data available for analysis
-4. [Configuring shredding](#shredding). How to configure Snowplow to shred custom self-describing events (also called unstructured events) and contexts ready for loading into dedicated tables in Redshift
+1. [Installation](#installation). You need to install EmrEtlRunner on your own server. It will interact with Amazon Elastic MapReduce and S3 via the Amazon API
+2. [Usage](#using-emretlrunner). How to use EmrEtlRunner at the command line, to instruct it to process data from your collector
+3. [Scheduling](#scheduling-emretlrunner). How to schedule the tool so that you always have an up to date set of cleaned, enriched data available for analysis
+4. [Configuring shredding](#configuring-shredding). How to configure Snowplow to shred custom self-describing events (also called unstructured events) and contexts ready for loading into dedicated tables in Redshift
 
 In this guide you'll also find additional information:
 
-- A [deeper technical explanation](#technical) of EtlEmrRunner
-- A guide for [setting up end to end encryption](#encryption)
-- A guide to [setting up an EC2 instance](#ec2) for EmrEtlRunner
-
-* * *
+- A [deeper technical explanation](#technical-explanation) of EtlEmrRunner
+- A guide for [setting up end to end encryption](#setting-up-end-to-end-encryption)
+- A guide to [setting up an EC2 instance](#setting-up-ec2-instance-for-emretlrunner-and-storageloader) for EmrEtlRunner
 
 ## Installing EmrEtlRunner
 
@@ -31,7 +33,7 @@ In this guide you'll also find additional information:
 
 This guide assumes that you have administrator access to a Unix-based server (e.g. Ubuntu, OS X, Fedora) on which you can install EmrEtlRunner and schedule a regular cronjob.
 
-You might wish to try out the [steps](https://github.com/snowplow/snowplow/wiki/Setting-up-EC2-instance-for-EmrEtlRunner-and-StorageLoader) showing you how an EC2 instance could be set up via [AWS CLI](https://aws.amazon.com/cli/).
+You might wish to try out the [steps](#setting-up-ec2-instance-for-emretlrunner-and-storageloader) showing you how an EC2 instance could be set up via [AWS CLI](https://aws.amazon.com/cli/).
 
 _In theory EmrEtlRunner can be deployed onto a Windows-based server, using the Windows Task Scheduler instead of cron, but this has not been tested or documented._
 
@@ -64,14 +66,14 @@ Done? Right, now we can install EmrEtlRunner.
 
 EmrEtlRunner is hosted in the Releases section of the [Github repo](https://github.com/snowplow/emr-etl-runner/releases).
 
-```
-$ wget https://github.com/snowplow/emr-etl-runner/releases/download/1.0.4/snowplow_emr_1.0.4.zip
+```bash
+wget https://github.com/snowplow/emr-etl-runner/releases/download/1.0.4/snowplow_emr_1.0.4.zip
 ```
 
 The archive contains both EmrEtlRunner and StorageLoader. Unzip the archive:
 
-```
-$ unzip snowplow_emr_{{RELEASE_VERSION}}.zip
+```bash
+unzip snowplow_emr_{{RELEASE_VERSION}}.zip
 ```
 
 The archive should contain a `snowplow-emr-etl-runner` file.
@@ -80,15 +82,13 @@ The archive should contain a `snowplow-emr-etl-runner` file.
 
 EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample`](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample). See [Common configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/common-configuration/index.md) more information on how to write this file.
 
-#### [](https://github.com/snowplow/snowplow/wiki/1-Installing-EmrEtlRunner#storage-targets)Storage targets
+#### Storage targets
 
 Storages for data can be configured using storage targets JSONs. Configuration file templates available in the Snowplow GitHub repository at [`/4-storage/config/targets` directory](https://github.com/snowplow/snowplow/blob/master/4-storage/config/targets/)
 
-#### [](https://github.com/snowplow/snowplow/wiki/1-Installing-EmrEtlRunner#iglu)Iglu
+#### Iglu
 
-You will also need an Iglu resolver configuration file. This is where we list the schema repositories to use to retrieve JSON Schemas for validation. For more information on this, see the [wiki page for Configuring shredding](#shredding).
-
-* * *
+You will also need an Iglu resolver configuration file. This is where we list the schema repositories to use to retrieve JSON Schemas for validation. For more information on this, see the [wiki page for Configuring shredding](#configuring-shredding).
 
 ## Using EmrEtlRunner
 
@@ -100,13 +100,13 @@ EmrEtlRunner works in **Rolling mode** where it processes whatever raw Snowplo
 
 The most useful command is the `run` command which allows you to actually run your EMR job:
 
-```
-$ ./snowplow-emr-etl-runner run
+```bash
+./snowplow-emr-etl-runner run
 ```
 
 The available options are as follows:
 
-```
+```bash
 Usage: run [options]
     -c, --config CONFIG              configuration file
     -n, --enrichments ENRICHMENTS    enrichments directory
@@ -133,26 +133,26 @@ Other useful commands include the `lint` commands which allows you to check th
 
 If you want to lint your resolver:
 
-```
-$ ./snowplow-emr-etl-runner lint resolver
+```bash
+./snowplow-emr-etl-runner lint resolver
 ```
 
 The mandatory options are:
 
-```
+```bash
 Usage: lint resolver [options]
     -r, --resolver RESOLVER          Iglu resolver file
 ```
 
 If you want to lint your enrichments:
 
-```
-$ ./snowplow-emr-etl-runner lint enrichments
+```bash
+./snowplow-emr-etl-runner lint enrichments
 ```
 
 The mandatory options are:
 
-```
+```bash
 Usage: lint enrichments [options]
     -r, --resolver RESOLVER          Iglu resolver file
     -n, --enrichments ENRICHMENTS    enrichments directory
@@ -163,8 +163,6 @@ Usage: lint enrichments [options]
 Once you have run the EmrEtlRunner you should be able to manually inspect in S3 the folder specified in the `:out:` parameter in your `config.yml` file and see new files generated, which will contain the cleaned data either for uploading into a storage target (e.g. Redshift) or for analysing directly using Hive or Spark or some other querying tool on EMR.
 
 Note: most Snowplow users run the 'spark' version of the ETL process, in which case the data generated is saved into subfolders with names of the form `part-000...`. If, however, you are running the legacy 'hive' ETL (because e.g. you want to use Hive as your storage target, rather than Redshift, which is the only storage target the 'spark' etl currently supports), the subfolders names will be of the format `dt=...`.
-
-* * *
 
 ## Scheduling EmrEtlRunner
 
@@ -182,7 +180,7 @@ Running EmrEtlRunner as Ruby (rather than JRuby apps) is no longer actively supp
 
 The recommended way of scheduling the ETL process is as a daily cronjob.
 
-```
+```bash
 0 4   * * *   root    cronic /path/to/eer/snowplow-emr-etl-runner run -c config.yml
 ```
 
@@ -190,21 +188,13 @@ This will run the ETL job daily at 4 AM, emailing any failures to you via cronic
 
 ### Jenkins
 
-Some developers use the [Jenkins](http://jenkins-ci.org/) continuous integration server (or [Hudson](http://hudson-ci.org/), which is very similar) to schedule their Hadoop and Hive jobs.
+Some developers use the [Jenkins](http://jenkins-ci.org/) continuous integration server, which is very similar) to schedule their Hadoop and Hive jobs.
 
 Describing how to do this is out of scope for this guide, but the blog post [Lowtech Monitoring with Jenkins](http://blog.lusis.org/blog/2012/01/23/lowtech-monitoring-with-jenkins/) is a great tutorial on using Jenkins for non-CI-related tasks, and could be easily adapted to schedule EmrEtlRunner.
 
-### Windows Task Scheduler
-
-For Windows servers, in theory it should be possible to use a Windows PowerShell script plus [Windows Task Scheduler](http://en.wikipedia.org/wiki/Windows_Task_Scheduler#Task_Scheduler_2.0) instead of bash and cron. However, this has not been tested or documented.
-
-If you get this working, please let us know!
-
-* * *
-
 ## Configuring shredding
 
-Snowplow has a [Shredding process](https://github.com/snowplow/snowplow/wiki/Shredding) for Redshift which contributes to the following three phases:
+Snowplow has a [Shredding process](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/shredding-overview/index.md) for Redshift which contributes to the following three phases:
 
 1. Extracting unstructured event JSONs and context JSONs from enriched event files into their own files
 2. Removing endogenous duplicate records, which are sometimes introduced within the Snowplow pipeline (feature added to r76)
@@ -212,7 +202,7 @@ Snowplow has a [Shredding process](https://github.com/snowplow/snowplow/wiki/Sh
 
 The first two phases are instrumented by EmrEtlRunner; in this page we will explain how to configure the shredding process to operate smoothly with EmrEtlRunner.
 
-**Note: Even though the first phase is required only if you want to shred your own unstructured event JSONs and context JSONs, the second phase will be beneficial to data modeling and analysis. If none of it is required and you are only shredding Snowplow-authored JSONs like link clicks and ad impressions, then you can skip this page and go straight to [Loading shredded types](https://github.com/snowplow/snowplow/wiki/4-Loading-shredded-types).**
+**Note: Even though the first phase is required only if you want to shred your own unstructured event JSONs and context JSONs, the second phase will be beneficial to data modeling and analysis. If none of it is required and you are only shredding Snowplow-authored JSONs like link clicks and ad impressions, then you can skip this step and go straight to loading shredded types.
 
 ### Pre-requisites
 
@@ -226,9 +216,9 @@ This guide assumes that
 
 ### Configuring EmrEtlRunner for shredding
 
-The relevant section of the EmrEtlRunner's [`config.yml`](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample) is:
+The relevant section of the EmrEtlRunner's [`config.yml`](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample) is:
 
-```
+```text
 shredded:
   good: s3://my-out-bucket/shredded/good       # e.g. s3://my-out-bucket/shredded/good
   bad: s3://my-out-bucket/shredded/bad        # e.g. s3://my-out-bucket/shredded/bad
@@ -240,9 +230,9 @@ The configuration file is referenced with `--config` option to EmrEtlRunner.
 
 Please make sure that these shredded buckets are set correctly.
 
-Next, we let EmrEtlRunner know about your Iglu schema registry, so that schemas can be retrieved from there as well as from Iglu Central. Add your own registry to the repositories array in [`iglu_resolver.json`](https://github.com/snowplow/snowplow/blob/master/3-enrich/config/iglu_resolver.json) file:
+Next, we let EmrEtlRunner know about your Iglu schema registry, so that schemas can be retrieved from there as well as from Iglu Central. Add your own registry to the repositories array in [`iglu_resolver.json`](https://github.com/snowplow/emr-etl-runner/blob/master/spec/snowplow-emr-etl-runner/resources/iglu_resolver.json) file:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-0",
   "data": {
@@ -271,28 +261,27 @@ Next, we let EmrEtlRunner know about your Iglu schema registry, so that schemas 
 
 You must add an extra entr(-y/ies) in the `repositories:` array pointing to your own Iglu schema registry. If you are not submitting custom events and contexts and are not interested in shredding then there's no need in adding the custom section but the `iglu_resolver.json` file is still required and is referenced with `--resolver` option to EmrEtlRunner.
 
-For more information on how to customize the `iglu_resolver.json` file, please review the [Iglu client configuration](https://github.com/snowplow/iglu/wiki/Iglu-client-configuration) wiki page.
-
-* * *
+For more information on how to customize the `iglu_resolver.json` file, please review the [Iglu resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) page.
 
 ## Technical explanation
 
 ![](images/emr-etl-runner-steps.png)
 
-Raw collector logs that need to be processed are identified in the in-bucket. (This is the bucket that the collector log files are generated in: it's location is specified in the [EmrEtlRunner config file](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample).)
+Raw collector logs that need to be processed are identified in the in-bucket. (This is the bucket that the collector log files are generated in: it's location is specified in the [EmrEtlRunner config file](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample).)
 
-EmrEtlRunner then triggers the Enrichment process to run. It spins up an EMR cluster (the size of which is determined by the [config file](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample)), uploads the JAR with the Spark Enrichment process on, and instructs EMR to:
+EmrEtlRunner then triggers the Enrichment process to run. It spins up an EMR cluster (the size of which is determined by the [config file](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample)), uploads the JAR with the Spark Enrichment process on, and instructs EMR to:
 
 1. Use S3DistCopy to aggregate the collector log files and write them to HDFS
 2. Run the Enrichment process on those aggregated files in HDFS
-3. Write the output of that Enrichment to the Out-bucket in S3. (As specified in the [config file](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample)).
-4. When the job has completed, EmrEtlRunner moves the processed collector log files from the in-bucket to the archive bucket. (This, again, is specified in the [config file](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample).)
+3. Write the output of that Enrichment to the Out-bucket in S3. (As specified in the [config file](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample)).
+4. When the job has completed, EmrEtlRunner moves the processed collector log files from the in-bucket to the archive bucket. (This, again, is specified in the [config file](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample).)
 
-By setting up a [scheduling job](https://github.com/snowplow/snowplow/wiki/3-Scheduling-EmrEtlRunner) to run EmrEtlRunner regularly, Snowplow users can ensure that the event data regularly flows through the Snowplow data pipeline from the collector to storage.
+By setting up a [scheduling job](#scheduling-emretlrunner) to run EmrEtlRunner regularly, Snowplow users can ensure that the event data regularly flows through the Snowplow data pipeline from the collector to storage.
 
-Note: many references are made to the 'Hadoop ETL' and 'Hive ETL' in the documentation and the [config file](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/config.yml.sample). 'Hadoop ETL' refers to the current Spark-based Enrichment Process. 'Hive ETL' refers to the legacy Hive-based ETL process. EmrEtlRunner can be setup to instrument either. However, we recommend **all** Snowplow users use the Spark based 'Hadoop ETL', as it is much more robust, as well as being cheaper to run.
+:::note
+Many references are made to the 'Hadoop ETL' and 'Hive ETL' in the documentation and the [config file](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample). 'Hadoop ETL' refers to the current Spark-based Enrichment Process. 'Hive ETL' refers to the legacy Hive-based ETL process. EmrEtlRunner can be setup to instrument either. However, we recommend **all** Snowplow users use the Spark based 'Hadoop ETL', as it is much more robust, as well as being cheaper to run.
 
-* * *
+:::
 
 ## Setting up end-to-end encryption
 
@@ -364,13 +353,11 @@ To leverage the security configuration you created, you will need to specify it 
 
 Additionally, you will need to tell EmrEtlRunner that it will have to interact with encrypted buckets through: `aws:s3:buckets:encrypted: true`.
 
-* * *
-
 ## Setting up EC2 instance for EmrEtlRunner and StorageLoader
 
 This tutorial assumes it's your first installation and you probably just want to checkout the platform. Thus many steps describe low-performance and unsecured installation. In real-world scenario you may want to fix that.
 
-### [](https://github.com/snowplow/snowplow/wiki/Setting-up-EC2-instance-for-EmrEtlRunner-and-StorageLoader#prepare-your-system)Prepare your system
+### Prepare your system
 
 Before getting started you need to have:
 
@@ -383,7 +370,7 @@ Before getting started you need to have:
 
 Everything else can be done from CLI.
 
-### [](https://github.com/snowplow/snowplow/wiki/Setting-up-EC2-instance-for-EmrEtlRunner-and-StorageLoader#setting-up-ec2-instance-for-emretlrunnerstorageloader)Setting up EC2 instance for EmrEtlRunner/StorageLoader
+### Setting up EC2 instance for EmrEtlRunner/StorageLoader
 
 In the end of this step, you'll have an AWS EC2 instance, SSH access to it and key stored on local machine.
 

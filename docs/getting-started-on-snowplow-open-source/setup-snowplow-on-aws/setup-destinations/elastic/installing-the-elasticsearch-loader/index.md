@@ -13,7 +13,7 @@ You can choose to either:
 
 ### Downloading the jarfile
 
-To get a local copy, you can download the executable jarfile directly from our Hosted Assets bucket on Amazon S3 - please see our [Hosted assets](https://github.com/snowplow/snowplow/wiki/Hosted-assets) page for details.
+To get a local copy, you can download the executable jarfile [directly from GitHub](https://github.com/snowplow/snowplow-elasticsearch-loader/releases).
 
 ### Compiling from source
 

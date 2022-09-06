@@ -14,7 +14,7 @@ If you were using the `default` or `secure` example scripts unedited in the last
 To query the good data in atomic.events, you will first you need to connect to your Postgres database.
 
 - Connect to the database using the username and password you provided when creating the pipeline, along with the `db_address` and `db_port` you noted down after the pipeline was created.
-    - If you need to reset your username or password you can [follow these steps](/docs/try-snowplow/try-snowplow-faq/index.md#my-database-login-details-are-not-working)
+    - If you need to reset your username or password you can [follow these steps](https://aws.amazon.com/premiumsupport/knowledge-center/reset-master-user-password-rds/)
     - If your Postgres RDS was configured to be publically accessible, there are a number of tools you can use to connect to a Postgres database from your local machine:
         - [pgAdmin](https://www.pgadmin.org/), [psql](https://www.postgresql.org/docs/current/app-psql.html), [DataGrip](https://www.jetbrains.com/datagrip/), [DBeaver](https://dbeaver.io/)
 - Run a query against your atomic.events table to take a look at the page view event that you generated in the previous step (`where event_name = ‘page_view’`). You can understand more about each field in the canonical event [here](/docs/understanding-your-pipeline/canonical-event/index.md).

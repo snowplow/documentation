@@ -36,11 +36,19 @@ disableAnonymousTracking({
 });
 ```
 
-**Note:** If configuring the tracker with `stateStorageStrategy: 'localStorage'` and anonymous tracking using `withSessionTracking: true`, then if you change to a `stateStorageStrategy` which prefer cookies such as `cookie` or `cookieAndLocalStorage` then the session identifiers will reset. To maintain session identifiers, ensure you use the same `stateStorageStrategy`.
+:::note
+
+If configuring the tracker with `stateStorageStrategy: 'localStorage'` and anonymous tracking using `withSessionTracking: true`, then if you change to a `stateStorageStrategy` which prefer cookies such as `cookie` or `cookieAndLocalStorage` then the session identifiers will reset. To maintain session identifiers, ensure you use the same `stateStorageStrategy`.
+
+:::
 
 ##### Enable Anonymous Tracking
 
-**Note:** Enabling Anonymous tracking will clear all current user, session and page data.
+:::note
+
+Enabling Anonymous tracking will clear all current user, session and page data from events sent to the collector. Although not sent in requests to collector, existing user and session identifiers will not be removed from cookies or local storage. See below for information on how to clear user data.
+
+:::
 
 If you wish to enable Anonymous Tracking, you can call:
 
@@ -107,7 +115,11 @@ There are many situations, however, when you will want to identify a specific us
 
 Typically, companies do this at points in the customer journey when the user identifies him / herself e.g. if he / she logs in.
 
-Note: this will only set the user ID on further events fired while the user is on this page; if you want events on another page to record this user ID too, you must call `setUserId` on the other page as well.
+:::note
+
+This will only set the user ID on further events fired while the user is on this page; if you want events on another page to record this user ID too, you must call `setUserId` on the other page as well.
+
+:::
 
 ##### `setUserId`
 
@@ -117,7 +129,11 @@ Note: this will only set the user ID on further events fired while the user is o
 setUserId('joe.blogs@email.com');
 ```
 
-Note: `setUserId` can also be called using the alias `identifyUser`.
+:::note
+
+`setUserId` can also be called using the alias `identifyUser`.
+
+:::
 
 ##### `setUserIdFromLocation`
 

@@ -127,7 +127,7 @@ A simple initialisation looks like this:
 
 ```java
 PageView pageViewEvent = PageView.builder()
-            .pageUrl("https://www.snowplowanalytics.com")
+            .pageUrl("https://snowplow.io")
             .pagetitle("Snowplow")
             .referrer("https://github.com/snowplow/snowplow-java-tracker")
             .build();

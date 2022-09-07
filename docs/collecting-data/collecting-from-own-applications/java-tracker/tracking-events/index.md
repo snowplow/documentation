@@ -18,7 +18,7 @@ The Java tracker makes it easy to track different kinds of data. We provide a ra
 
 Every tracked event payload has a unique `event_id` UUID string. Other ubiquitous properties include the `name_tracker` (`trackerNamespace`) and `app_id` (`appId`) set when the `Tracker` was initialized. From version 0.12 onwards, `Tracker.track()` returns the payload's `eventId`.
 
-Snowplow events have a defined structure and [protocol](https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/) that is identical regardless of the tracker used. A minimal payload - the raw event - is sent from the tracker to your collector. The raw event is [enriched](https://docs.snowplowanalytics.com/docs/enriching-your-data/what-is-enrichment/) as it passes through your pipeline. By the time the event arrives in your data storage, depending which [enrichments](https://docs.snowplowanalytics.com/docs/enriching-your-data/available-enrichments/) you have enabled, it will have gained different kinds of metadata, and have many more fields than it started with. The default Java tracker event fields are shown [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/what-do-java-tracker-events-look-like/index.md). 
+Snowplow events have a defined structure and [protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) that is identical regardless of the tracker used. A minimal payload - the raw event - is sent from the tracker to your collector. The raw event is [enriched](/docs/enriching-your-data/what-is-enrichment/index.md) as it passes through your pipeline. By the time the event arrives in your data storage, depending which [enrichments](/docs/enriching-your-data/available-enrichments/index.md) you have enabled, it will have gained different kinds of metadata, and have many more fields than it started with. The default Java tracker event fields are shown [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/what-do-java-tracker-events-look-like/index.md). 
 
 The [Java tracker Github repository](https://github.com/snowplow/snowplow-java-tracker) includes a mini demo, "simple-console". The demo sends one event of each type to your event collector.
 
@@ -42,7 +42,7 @@ The Java tracker provides classes for tracking different types of events. They a
 `EcommerceTransaction`/`EcommerceTransactionItem` are a legacy design and will be deprecated soon.
 :::
 
-`SelfDescribing` events (called `Unstructured` prior to v1) allow you to track anything that can be described by a [JSON schema](https://docs.snowplowanalytics.com/docs/understanding-tracking-design/understanding-schemas-and-validation/). The data you provide will be sent as a JSON inside the raw event payload. The specific type of JSON schema needed are described fully on the [next page](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md).
+`SelfDescribing` events (called `Unstructured` prior to v1) allow you to track anything that can be described by a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md). The data you provide will be sent as a JSON inside the raw event payload. The specific type of JSON schema needed are described fully on the [next page](/docs/collecting-data/collecting-from-own-applications/java-tracker/custom-tracking-using-schemas/index.md).
 
 The `ScreenView` and `Timing` out-of-the-box event types are actually wrappers for `SelfDescribing` events: the methods for building those events represent fields in their hidden self-describing JSON schemas. This is why both `ScreenView` and `Timing` events are labelled "unstruct" in the data warehouse.
 
@@ -114,7 +114,7 @@ Track page views with the `PageView` event. This is a "canonical" event type; da
 | page title   | page               | page_title               |
 | referrer URL | refr               | page_referrer            |
 
-The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](https://docs.snowplowanalytics.com/docs/enriching-your-data/what-is-enrichment/).
+The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md).
 
 A simple initialisation looks like this:
 ```java
@@ -223,7 +223,7 @@ For `EcommerceTransactionItem` events, `itemId`, `sku`, `price` and `quantity` a
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `Event.Builder` in the Java tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538). 
+Every `Event.Builder` in the Java tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplow.io/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
 
 A `trueTimestamp` can be added to any event using the `trueTimestamp()` Builder method:
 ```java

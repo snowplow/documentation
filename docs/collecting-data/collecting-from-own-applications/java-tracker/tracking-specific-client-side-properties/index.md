@@ -30,7 +30,7 @@ Note: the ability to set `domainSessionId` was added in version 0.11.
 
 These properties are especially useful for client-side tracking, or for linking client-side and server-side tracking. We highly recommend tracking in both client-side and server-side, if it's relevant to your application. Read more about this in these [blog](https://snowplowanalytics.com/blog/2019/02/05/how-server-side-tracking-fills-holes-in-your-data-and-improves-your-analytics/) [posts](https://snowplowanalytics.com/blog/2021/11/09/the-unrivaled-power-of-joining-client-and-server-side-tracking/).
 
-If you are also using the Javascript tracker, it will set [cookies](https://docs.snowplowanalytics.com/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/cookies-and-local-storage/) in the browser. The `Subject` properties `domainUserId`, and `domainSessionId` are intended to be used for extracted cookie values passed to the Java tracker. If you want to track other identification tokens, we recommend creating schemas and using context entities.
+If you are also using the Javascript tracker, it will set [cookies](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/cookies-and-local-storage/index.md) in the browser. The `Subject` properties `domainUserId`, and `domainSessionId` are intended to be used for extracted cookie values passed to the Java tracker. If you want to track other identification tokens, we recommend creating schemas and using context entities.
 
 As always, be aware of privacy when tracking [personal identifiable information](https://snowplowanalytics.com/blog/2020/09/06/user-identification-and-privacy/) such as email addresses or IP addresses.
 
@@ -38,9 +38,9 @@ As always, be aware of privacy when tracking [personal identifiable information]
 
 All enriched Snowplow events contain values for `user_ipaddress`, `useragent`, and `network_userid`. 
 
-The `user_ipaddress` is automatically added to all enriched events. To manually override this, use a `Subject` and set a `ipAddress` string; use an empty string to prevent IP address tracking. Alternatively, use the [IP anonymization enrichment](https://docs.snowplowanalytics.com/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/).
+The `user_ipaddress` is automatically added to all enriched events. To manually override this, use a `Subject` and set a `ipAddress` string; use an empty string to prevent IP address tracking. Alternatively, use the [IP anonymization enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md).
 
-The `useragent` is also automatically added during enrichment. Snowplow pipelines provide multiple useragent-parsing [enrichments](https://docs.snowplowanalytics.com/docs/enriching-your-data/available-enrichments/). To manually override the detected useragent, use a `Subject` and set a `useragent` string. For the default Tracker configuration with OkHttp, the default `useragent` will be "okhttp/4.2.2".
+The `useragent` is also automatically added during enrichment. Snowplow pipelines provide multiple useragent-parsing [enrichments](/docs/enriching-your-data/available-enrichments/index.md). To manually override the detected useragent, use a `Subject` and set a `useragent` string. For the default Tracker configuration with OkHttp, the default `useragent` will be "okhttp/4.2.2".
 
 The `network_userid` is the cookie value for the event collector’s third-party cookie. It is the server-side user identifier. The cookie is named `sp` (or `micro` for Snowplow Micro pipelines). The default behaviour is for the collector to provide a new cookie/`network_userid` for each event it receives. To override the collector cookie’s value with your own generated ID, use a `Subject` object and set `networkUserId`. Alternatively, configure a `CookieJar` to persist the `sp` cookie, and the `network_userid`, across requests (see [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/configuring-how-events-are-sent/index.md#persisting-cookies-using-a-cookiejar)).
 

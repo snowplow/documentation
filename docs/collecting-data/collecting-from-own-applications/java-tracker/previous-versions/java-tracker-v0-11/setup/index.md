@@ -5,7 +5,7 @@ sidebar_position: 10
 ---
 
 :::info These pages are for version 0.11
-See [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/) for the documentation for the latest version.
+See [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) for the documentation for the latest version.
 :::
 
 ## Integration options

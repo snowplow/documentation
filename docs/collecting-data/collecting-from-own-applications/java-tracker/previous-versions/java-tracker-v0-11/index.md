@@ -15,7 +15,7 @@ The Snowplow Java Tracker lets you add analytics to your [Java](http://www.ja
 The Tracker should be relatively straightforward to setup if you are familiar with Java development.
 
 :::info These pages are for version 0.11
-See [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/) for the documentation for the latest version.
+See [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) for the documentation for the latest version.
 :::
 
 ```mdx-code-block

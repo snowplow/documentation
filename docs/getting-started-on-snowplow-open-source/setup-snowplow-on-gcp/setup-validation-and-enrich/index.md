@@ -14,4 +14,4 @@ Both options provide same functionality but with different performance/managemen
 
 ## Run Enrich
 
-The [Enrich applications reference](/docs/pipeline-components-and-applications/enrichment-components/index.md) has instructions for setting up and running [Enrich PubSub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md) or [Beam Enrich](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich/index.md)
+The [Enrich applications reference](/docs/pipeline-components-and-applications/enrichment-components/index.md) has instructions for setting up and running [Enrich PubSub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md) or [Beam Enrich](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich.md)

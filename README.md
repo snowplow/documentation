@@ -39,19 +39,60 @@ Step 4. Go to `localhost:3000` in your browser and enjoy!
 
 In this section you’ll find some general tips on how the docs are structured.
 
+### File naming
+
+Take a look at the [file structure](https://github.com/snowplow/snowplow.github.io/tree/main/docs) (all docs are in the `docs` folder).
+
+If you are adding a new page, there are 2 options for how to name the file:
+
+If the page does not contain any subpages or images, name it `<page>.md`. For example:
+
+```
+docs/collecting-data/collecting-from-own-applications/flutter-tracker/
+├── adding-data.md
+├── getting-started.md
+...
+├── initialization-and-configuration.md
+├── sessions-and-data-model.md
+└── tracking-events.md
+```
+
+Otherwise, create a directory for the page, and name the page itself `index.md`. For example:
+
+```
+docs/collecting-data/collecting-data-from-third-parties/mailgun/
+├── images
+│   ├── mailgun-1.png
+│   ├── mailgun-2.png
+│   └── mailgun-3.png
+└── index.md
+```
+
+You can of course mix the two approaches:
+
+```
+docs/understanding-tracking-design/
+├── introduction-to-tracking-design.md                 ← using a file
+├── managing-data-structures                           ← using a directory
+│   ├── images
+│   └── index.md
+...
+└── versioning-your-data-structures.md
+```
+
 ### Sidebar
 
-The sidebar on the left follows [file structure](https://github.com/snowplow/snowplow.github.io/tree/main/docs) (all docs are in the `/docs` folder). So when you add new pages, create folders as you see fit.
+The sidebar on the left follows the [file structure](https://github.com/snowplow/snowplow.github.io/tree/main/docs) automatically.
 
-To control the position of a section in the sidebar, go to the `index.md` file for that section and adjust the `sidebar_position` attribute at the top (see [this example](https://github.com/snowplow/snowplow.github.io/blob/main/docs/tutorials/index.md)). Sidebar positions are just numbers, and you can use any number as long as the order is correct.
+To control the position of a section in the sidebar, go to the Markdown file for that section (either a `<page>.md` or an `index.md`) and adjust the `sidebar_position` attribute at the top (see [this example](https://github.com/snowplow/snowplow.github.io/blob/main/docs/tutorials/index.md)). Sidebar positions are just numbers, and you can use any number as long as the order is correct.
 
 ### Links
 
-For links within this documentation, please end the link with `/index.md`. This way all links will be checked, and you’ll get an error if a link is broken at any point.
+For links within this documentation, please end the link with `.md` (i.e. `<page>/index.md` or `<page>.md`, depending on how the files are structured). This way all links will be checked, and you’ll get an error if a link is broken at any point.
 
 ### Reusable fragments
 
-You can create reusable fragments and include them in multiple files (see [this example](https://github.com/snowplow/snowplow.github.io/blob/main/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/index.md)).
+You can create reusable fragments and include them in multiple files (see [this example](https://github.com/snowplow/snowplow.github.io/blob/main/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison.md)).
 
 ## Formatting content
 

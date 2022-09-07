@@ -30,7 +30,7 @@ To run the collector on a single GCP instance, you'll first need to spin one up:
     - Note that 8080 is the port assigned to the collector in the configuration file. If you choose another port here, make sure you change the config file
 - Under _Target tags_ add the Tag with which you labeled your instance (here `collector`)
 - Click “Create”
-- Now prepare your collector config file by following [the configuration guide](/docs/pipeline-components-and-applications/stream-collector/configure/index.md).
+- Now prepare your collector config file by following [the configuration guide](/docs/pipeline-components-and-applications/stream-collector/configure.md).
 - Create a Google Cloud Storage bucket that will host this configuration file for the collector
 
 ![](images/gcloud-create-bucket-1.png)

@@ -83,7 +83,7 @@ ____For further details on the resources, default and required input variables, 
 
 ##### Have any questions? Reach out to us on [discourse](https://discourse.snowplow.io/)!
 
-##### Or start [tracking events from your own application](/docs/open-source-quick-start/further-exploration/start-tracking-events-and-further-enrich-your-data/index.md) >>
+##### Or start [tracking events from your own application](/docs/open-source-quick-start/further-exploration/start-tracking-events-and-further-enrich-your-data.md) >>
 
 * * *
 

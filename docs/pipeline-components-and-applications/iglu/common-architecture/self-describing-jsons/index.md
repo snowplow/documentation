@@ -16,7 +16,7 @@ For example, let's say we have a JSON representing a click on an ad like so:
 }
 ```
 
-which is supposed to conform to this [self-describing JSON Schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md):
+which is supposed to conform to this [self-describing JSON Schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas.md):
 
 ```
 {

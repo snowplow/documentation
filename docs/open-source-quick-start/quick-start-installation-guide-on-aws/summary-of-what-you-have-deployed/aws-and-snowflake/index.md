@@ -113,13 +113,13 @@ Transformer Kinesis sends SQS message to Snowflake Loader after finishing transf
 
 This is Snowplow application reads the enriched data from Kinesis stream, transforms it to format expected by Loader and write it to S3 bucket.
 
-After transforming is finished, it sends SQS message to Loader to notify that it can load the transformed data. More details can be found in the [Stream Transformer documentation](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/stream-transformer/index.md).
+After transforming is finished, it sends SQS message to Loader to notify that it can load the transformed data. More details can be found in the [Stream Transformer documentation](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/stream-transformer.md).
 
 Find out more about the Transformer Kinesis module and explore the full set of variables available here: [_https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest_](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
 
 #### Snowflake Loader
 
-The Snowplow application responsible for [loading transformed enriched data from S3 to Snowflake](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/loading-transformed-data/snowflake-loader/index.md).
+The Snowplow application responsible for [loading transformed enriched data from S3 to Snowflake](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/loading-transformed-data/snowflake-loader.md).
 
 Find out more about the Snowflake Loader module and explore the full set of variables available here: [_https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest_](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest)
 
@@ -131,4 +131,4 @@ The DynamoDB autoscaling module enables autoscaling for a target DynamoDB table.
 
 _You can find further details here: [https://registry.terraform.io/modules/snowplow-devops/dynamodb-autoscaling/aws/latest](https://registry.terraform.io/modules/snowplow-devops/dynamodb-autoscaling/aws/latest)_
 
-##### Have more questions? Take a look at our [Quick Start FAQs](/docs/open-source-quick-start/quick-start-faqs/index.md) or reach out to us on [discourse](https://discourse.snowplow.io/)!
+##### Have more questions? Take a look at our [Quick Start FAQs](/docs/open-source-quick-start/quick-start-faqs.md) or reach out to us on [discourse](https://discourse.snowplow.io/)!

@@ -342,7 +342,7 @@ An example of JSON with filters could be:
 List of possible fields for the filters:
 
 - `event_type`: type of the event (in `e` param);
-- `schema`: corresponds to the shema of an [unstructured event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#Custom_unstructured_event_tracking) (schema of the self-describing JSON contained in `ue_pr` or `ue_px`). It automatically implies `event_type` = `ue`.
+- `schema`: corresponds to the shema of an [unstructured event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol.md#Custom_unstructured_event_tracking) (schema of the self-describing JSON contained in `ue_pr` or `ue_px`). It automatically implies `event_type` = `ue`.
 - `contexts`: list of the schemas contained in the contexts of an event (parameters `co` or `cx`). An event must contain **all** the contexts of the list to be returned. It can also contain more contexts than the ones specified in the request.
 - `limit`: limit the number of events in the response (most recent events are returned).
 

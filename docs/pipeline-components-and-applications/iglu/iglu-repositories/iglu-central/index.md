@@ -16,7 +16,7 @@ Under the hood, Iglu Central is built and run as a static Iglu repository, whic
 
 ![iglu-central-img](images/iglu-central.png)
 
-The [deployment process](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md) for Iglu Central is documented on this wiki in case a user wants to setup a public mirror or private instance of Iglu Central.
+The [deployment process](/docs/pipeline-components-and-applications/iglu/iglu-central-setup.md) for Iglu Central is documented on this wiki in case a user wants to setup a public mirror or private instance of Iglu Central.
 
 Iglu Central is available for view at [http://iglucentral.com](http://iglucentral.com/). Although Iglu Central is primarily designed to be consumed by [Iglu clients](/docs/pipeline-components-and-applications/iglu/iglu-clients/index.md), the root index page for Iglu Central links to all schemas currently hosted on Iglu Central.
 
@@ -32,4 +32,4 @@ cd iglu-central
 igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000
 ```
 
-For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md).
+For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/pipeline-components-and-applications/iglu/iglu-central-setup.md).

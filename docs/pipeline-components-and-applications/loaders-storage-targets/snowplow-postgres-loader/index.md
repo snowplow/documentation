@@ -32,7 +32,7 @@ docker run --rm \
 
 ## Iglu
 
-Where `resolver.json` is a typical [Iglu Client](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) configuration.
+Where `resolver.json` is a typical [Iglu Client](/docs/pipeline-components-and-applications/iglu/iglu-resolver.md) configuration.
 
 **Please pay attention that schemas for all self-describing JSONs flowing through Postgres Loader must be hosted on Iglu Server 0.6.0 or above.**  
 Iglu Central is static registry and if you use Snowplow-authored schemas - you need to upload all schemas from there as well.
@@ -71,7 +71,7 @@ The `input` section can alternatively specify a GCP PubSub subscription, instead
   }
 ```
 
-See [the configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/postgres-loader-configuration-reference/index.md) for a complete description of all parameters.
+See [the configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/postgres-loader-configuration-reference.md) for a complete description of all parameters.
 
 ## Other
 

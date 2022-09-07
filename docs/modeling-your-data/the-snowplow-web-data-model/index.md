@@ -14,7 +14,7 @@ The model runs incrementally, only processing new events (and events that have p
 
 Deprecation notice
 
-Please note that [snowplow/snowplow-web-data-model](https://github.com/snowplow/snowplow-web-data-model) has been deprecated. Please refer to the [sql-runner](/docs/modeling-your-data/the-snowplow-web-data-model/sql-runner-web-data-model/index.md) or [dbt sections](/docs/modeling-your-data/the-snowplow-web-data-model/dbt-web-data-model/index.md) for the new repositories.
+Please note that [snowplow/snowplow-web-data-model](https://github.com/snowplow/snowplow-web-data-model) has been deprecated. Please refer to the [sql-runner](/docs/modeling-your-data/the-snowplow-web-data-model/sql-runner-web-data-model/index.md) or [dbt sections](/docs/modeling-your-data/the-snowplow-web-data-model/dbt-web-data-model.md) for the new repositories.
 
 ## Running the web data model
 

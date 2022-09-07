@@ -10,6 +10,6 @@ The documentation listed here is for Version 2 of the JavaScript Tracker. Versio
 
 \- [Documentation for Version 3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md)
 
-\- [v2 to v3 Migration Guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide/index.md)
+\- [v2 to v3 Migration Guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide.md)
 
 This section covers the more advanced elements of the JavaScript Tracker.

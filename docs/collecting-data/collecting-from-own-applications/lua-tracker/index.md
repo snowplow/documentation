@@ -57,7 +57,7 @@ dependencies = {
 
 ### Tracking Events
 
-To track an event, simply create a tracker instance and call one of the `track_*` methods. For example, simple tracking of a [structured event](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#structured-events):
+To track an event, simply create a tracker instance and call one of the `track_*` methods. For example, simple tracking of a [structured event](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities.md#structured-events):
 
 ```
 local snowplow = require("snowplow")
@@ -66,7 +66,7 @@ local tracker = snowplow.new_tracker("{{ collector_url }}")
 tracker:track_struct_event("category", "action", "label", "property", 10)
 ```
 
-Visit documentation about [tracking events](/docs/collecting-data/collecting-from-own-applications/lua-tracker/tracking-specific-events/index.md) to learn about other supported event types.
+Visit documentation about [tracking events](/docs/collecting-data/collecting-from-own-applications/lua-tracker/tracking-specific-events.md) to learn about other supported event types.
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

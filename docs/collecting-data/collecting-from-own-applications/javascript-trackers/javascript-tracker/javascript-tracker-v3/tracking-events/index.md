@@ -246,9 +246,9 @@ This is particularly useful when a user is passively engaging with your content,
 
 ### Tracking custom self-describing events
 
-You may wish to track events on your website or application which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) and can have arbitrarily many fields.
+You may wish to track events on your website or application which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation.md) and can have arbitrarily many fields.
 
-To define your own custom event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP Console UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
+To define your own custom event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP Console UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
 #### `trackSelfDescribingEvent`
 
@@ -336,11 +336,11 @@ Note that in the above example no value is set for the `event property`.
 
 ### Custom context
 
-Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to this custom context as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to this custom context as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities.md).
 
 Custom context can be added as an extra argument to any of Snowplow's `track..()` methods and to `addItem` and `addTrans`.
 
-Each custom context is an array of self-describing JSON following the same pattern as an self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported [Iglu clients](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-client). Since more than one (of either different or the same type) can be attached to an event, the `context` argument (if it is provided at all) should be a non-empty array of self-describing JSONs.
+Each custom context is an array of self-describing JSON following the same pattern as an self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported [Iglu clients](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-client). Since more than one (of either different or the same type) can be attached to an event, the `context` argument (if it is provided at all) should be a non-empty array of self-describing JSONs.
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
@@ -416,7 +416,7 @@ snowplow('trackSelfDescribingEvent', {
 });
 ```
 
-For more information on custom context, see [here](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md).
+For more information on custom context, see [here](/docs/understanding-tracking-design/predefined-vs-custom-entities.md).
 
 ### Global context
 
@@ -484,7 +484,7 @@ This argument is a string taken from the event payload field, `e`.
 | Custom structured event        | se        |
 | Custom self describing event   | ue        |
 
-Further information about the event payload can be found in the [tracker protocol documentation](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
+Further information about the event payload can be found in the [tracker protocol documentation](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol.md).
 
 ##### `eventSchema`
 
@@ -1159,7 +1159,7 @@ snowplow('trackSocialInteraction', {
 });
 ```
 
-`trackSocialInteraction` can also be passed an array of custom context as an additional parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
+`trackSocialInteraction` can also be passed an array of custom context as an additional parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events.md#custom-contexts) for more information.
 
 ### Campaign tracking
 
@@ -1210,7 +1210,7 @@ Snowplow tracking code can be included in ad tags in order to track impressions 
 
 Each ad tracking method has a `costModel` field and a `cost` field. If you provide the `cost` field, you must also provide one of `'cpa'`, `'cpc'`, and `'cpm'` for the `costModel` field.
 
-It may be the case that multiple ads from the same source end up on a single page. If this happens, it is important that the different Snowplow code snippets associated with those ads not interfere with one another. The best way to prevent this is to randomly name each tracker instance you create so that the probability of a name collision is negligible. See [Managing multiple trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/managing-multiple-trackers/index.md) for more on having more than one tracker instance on a single page.
+It may be the case that multiple ads from the same source end up on a single page. If this happens, it is important that the different Snowplow code snippets associated with those ads not interfere with one another. The best way to prevent this is to randomly name each tracker instance you create so that the probability of a name collision is negligible. See [Managing multiple trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/managing-multiple-trackers.md) for more on having more than one tracker instance on a single page.
 
 Below is an example of how to achieve this when using Snowplow ad impression tracking.
 

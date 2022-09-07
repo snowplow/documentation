@@ -4,7 +4,7 @@ date: "2020-11-09"
 sidebar_position: 50
 ---
 
-This is the technical documentation for enrichment. If you are not familiar yet with this step of the pipeline, please refer to [this page](/docs/enriching-your-data/what-is-enrichment/index.md).
+This is the technical documentation for enrichment. If you are not familiar yet with this step of the pipeline, please refer to [this page](/docs/enriching-your-data/what-is-enrichment.md).
 
 Here is the list of the enrichment assets:
 
@@ -22,7 +22,7 @@ Standalone JVM application that reads collector payloads from a Kinesis stream a
 
 In some future this app will get deprecated in favor of `enrich-kinesis`.
 
-## [Beam Enrich](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich/index.md) (GCP)
+## [Beam Enrich](/docs/pipeline-components-and-applications/enrichment-components/beam-enrich.md) (GCP)
 
 [Dataflow](https://cloud.google.com/dataflow/) job that reads collector payloads from a PubSub subscription and outputs back to PubSub.
 

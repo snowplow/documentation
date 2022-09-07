@@ -6,7 +6,7 @@ sidebar_position: 9990
 
 :::caution
 
-Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/shredding-overview/index.md). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
+Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/shredding-overview/index.md). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide.md) for how to migrate away from this application.
 
 Historically it was also used for enriching data, but that functionality was deprecated even longer ago in favour of the [streaming versions of Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md).
 
@@ -80,7 +80,7 @@ The archive should contain a `snowplow-emr-etl-runner` file.
 
 ### Configuration
 
-EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample`](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample). See [Common configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/common-configuration/index.md) more information on how to write this file.
+EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample`](https://github.com/snowplow/emr-etl-runner/blob/master/config/config.yml.sample). See [Common configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/common-configuration.md) more information on how to write this file.
 
 #### Storage targets
 
@@ -261,7 +261,7 @@ Next, we let EmrEtlRunner know about your Iglu schema registry, so that schemas 
 
 You must add an extra entr(-y/ies) in the `repositories:` array pointing to your own Iglu schema registry. If you are not submitting custom events and contexts and are not interested in shredding then there's no need in adding the custom section but the `iglu_resolver.json` file is still required and is referenced with `--resolver` option to EmrEtlRunner.
 
-For more information on how to customize the `iglu_resolver.json` file, please review the [Iglu resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) page.
+For more information on how to customize the `iglu_resolver.json` file, please review the [Iglu resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver.md) page.
 
 ## Technical explanation
 

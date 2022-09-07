@@ -23,7 +23,7 @@ For more automated testing of your tracking we have a tool called Snowplow Micro
 2. Request your schema registry URLs from Snowplow Support
 3. [Follow this guide](/docs/understanding-your-pipeline/what-is-snowplow-micro/index.md) using the registry URLs to configure Micro, and the API key to run the commands
 
-You'll also find [examples of integrating with Nightwatch and Cypress](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/example-of-automated-tests/index.md) in the guide.
+You'll also find [examples of integrating with Nightwatch and Cypress](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/example-of-automated-tests.md) in the guide.
 
 ## Verify schema dependencies using the Data Structures CI tool
 

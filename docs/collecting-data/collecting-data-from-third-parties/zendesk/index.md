@@ -22,7 +22,7 @@ Choose "HTTP target" from the list of target types to add:
 
 ![](images/http-target.png)
 
-Name the new extension something like "Snowplow Collector - Iglu POST". The "Iglu POST" here represents the fact we will be sending Zendesk events and contexts to [Iglu webhook adapter](/docs/collecting-data/collecting-data-from-third-parties/iglu-webhook/index.md) via `POST` request.
+Name the new extension something like "Snowplow Collector - Iglu POST". The "Iglu POST" here represents the fact we will be sending Zendesk events and contexts to [Iglu webhook adapter](/docs/collecting-data/collecting-data-from-third-parties/iglu-webhook.md) via `POST` request.
 
 In the **URL** field, enter "https://{{collctor\_domain}}/com.snowplowanalytics.iglu/v1?aid=zendesk", replacing `{{collctor_domain}}` with your collector domain.
 

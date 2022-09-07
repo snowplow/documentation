@@ -11,12 +11,12 @@ sidebar_position: 100
 #### Requirements
 
 - [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/index.md#webPage_context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#webPage_context)).
+- Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2.md#webPage_context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options.md#webPage_context)).
 - [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#page-views) implemented.
 
 #### Prerequisites
 
-- [SQL-runner](https://github.com/snowplow/sql-runner) must be installed ([Setup guide](/docs/modeling-your-data/setup-and-run-sql-runner/index.md)).
+- [SQL-runner](https://github.com/snowplow/sql-runner) must be installed ([Setup guide](/docs/modeling-your-data/setup-and-run-sql-runner.md)).
 - A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) must be available in the database.
 
 #### [](https://github.com/snowplow/data-models/tree/feature-redshift-web-v1/web/v1/redshift#configuration)Configuring and running the model

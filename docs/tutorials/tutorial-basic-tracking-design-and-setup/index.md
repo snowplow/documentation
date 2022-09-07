@@ -280,7 +280,7 @@ Create a new HTML page with this content:
 
 #### Initializing the tracker
 
-Follow the Web Quick Start Guide to [download the Javascript Tracker and call it into your HTML](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md).
+Follow the Web Quick Start Guide to [download the Javascript Tracker and call it into your HTML](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide.md).
 
 #### Setting up tracking
 

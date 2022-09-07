@@ -24,9 +24,9 @@ docker run \
 Above assumes that you have following directory structure:
 
 1. GCP credentials [JSON file](https://cloud.google.com/docs/authentication/getting-started)
-2. `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-validation-and-enrich/add-additional-enrichments/index.md)
-3. Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)
-4. enrich-pubSub [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/configuration-reference/index.md)
+2. `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-validation-and-enrich/add-additional-enrichments.md)
+3. Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver.md)
+4. enrich-pubSub [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/configuration-reference.md)
 
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
@@ -57,9 +57,9 @@ docker run \
 
 Above assumes that you have following directory structure:
 
-- `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-validation-and-enrich/add-additional-enrichments/index.md)
-- Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)
-- enrich-kinesis [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/configuration-reference/index.md)
+- `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-validation-and-enrich/add-additional-enrichments.md)
+- Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver.md)
+- enrich-kinesis [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/configuration-reference.md)
 
 Depending on where the app runs, `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` might not be required.
 

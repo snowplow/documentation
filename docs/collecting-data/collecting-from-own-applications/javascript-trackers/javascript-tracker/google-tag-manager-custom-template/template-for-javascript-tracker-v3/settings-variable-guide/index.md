@@ -22,7 +22,7 @@ After importing the template, you can follow the normal process of creating a **
 
 ## Instructions
 
-The fields in the template provide a UI for setting the tracker configuration parameters. You are thus encouraged to follow [this link](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md) to understand what each individual field does.
+The fields in the template provide a UI for setting the tracker configuration parameters. You are thus encouraged to follow [this link](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options.md) to understand what each individual field does.
 
 ### Tracker Name
 

@@ -154,7 +154,7 @@ Add any tags you like here.
 
 ## Configure Security Group
 
-Select the Security Group you created in Step 2.
+Select the Security Group you created [above](#security-group).
 
 ## Review
 

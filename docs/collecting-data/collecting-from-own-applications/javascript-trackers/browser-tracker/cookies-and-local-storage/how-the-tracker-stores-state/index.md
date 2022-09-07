@@ -1,7 +1,7 @@
 ---
 title: "How the tracker stores state"
 date: "2021-03-24"
-sidebar_position: 100
+sidebar_position: 200
 ---
 
 ```mdx-code-block

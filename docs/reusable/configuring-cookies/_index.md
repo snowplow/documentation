@@ -1,0 +1,6 @@
+Snowplow allows for a highly configurable cookie set up. This allows for you to create optimal first party tracking in a privacy-first world, including configurations for anonymous tracking.
+
+Below you'll find a flow chart to help you with your cookie configuration, guiding you through the configuration options for both your [Snowplow Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) and the [Snowplow JavaScript Tracker](/docs//collecting-data/collecting-from-own-applications/javascript-trackers/index.md).
+
+- [Cookie configuration for open source](/assets/config-calculator-snowplow-open-source.pdf)
+- [Cookie configuration for Snowplow BDP](/assets/config-calculator-snowplow-bdp.pdf)

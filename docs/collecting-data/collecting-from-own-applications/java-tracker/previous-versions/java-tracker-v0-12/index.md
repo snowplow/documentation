@@ -1,5 +1,5 @@
 ---
-title: "Java Tracker (v0.12)"
+title: "Java Tracker v0.12"
 date: "2020-02-26"
 sidebar_position: 100
 ---

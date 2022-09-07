@@ -42,6 +42,7 @@
   --ifm-color-primary-lightest: #b198df;
   --ifm-color-announcement: #e6f6fe;
   --ifm-code-font-size: 95%;
+  --ifm-code-padding-vertical: 0.05rem;
   --ifm-font-family-base: 'Roboto', Arial, Helvetica, sans-serif;
   --ifm-menu-color-active: #6638b8;
   --ifm-font-color-base: #000000;
@@ -252,4 +253,8 @@ ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
 
 div[class^='announcementBar_'] {
   background: var(--ifm-color-announcement);
+}
+
+code {
+  vertical-align: baseline;
 }

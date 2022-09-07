@@ -4,6 +4,10 @@ date: "2022-05-12"
 sidebar_position: 10
 ---
 
+:::info These pages are for version 0.11
+See [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/) for the documentation for the latest version.
+:::
+
 ## Integration options
 
 ### Tracker compatibility
@@ -18,9 +22,9 @@ To minimize jar bloat, we have tried to keep external dependencies to a minimum.
 
 ### Installation
 
-The current version of the Snowplow Java Tracker is **0.10.1**
+These instructions are for version 0.11 of the Snowplow Java Tracker.
 
-You can also manually insert the Tracker by downloading the jar directly: [snowplow-java-tracker-0.10.1.jar](https://bintray.com/snowplow/snowplow-maven/download_file?file_path=com%2Fsnowplowanalytics%2Fsnowplow-java-tracker%2F0.9.0%2Fsnowplow-java-tracker-0.9.0.jar)
+You can also manually insert the Tracker by downloading the jar directly: [snowplow-java-tracker-0.11.0.jar](https://bintray.com/snowplow/snowplow-maven/download_file?file_path=com%2Fsnowplowanalytics%2Fsnowplow-java-tracker%2F0.11.0%2Fsnowplow-java-tracker-0.11.0.jar)
 
 ### Maven
 
@@ -30,7 +34,7 @@ Add into your project's `pom.xml`:
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-java-tracker</artifactId>
-    <version>0.10.1</version>
+    <version>0.11.0</version>
 </dependency>
 ```
 
@@ -41,20 +45,20 @@ Add into your project's `build.gradle`:
 ```gradle
 dependencies {
     // Snowplow Java Tracker
-    implementation 'com.snowplowanalytics:snowplow-java-tracker:0.10.1'
+    implementation 'com.snowplowanalytics:snowplow-java-tracker:0.11.0'
 }
 ```
 
-From 0.10.1 you can also specify the feature variants via Gradle, to pull in the required optional dependencies.
+From v0.10.1 you can also specify the feature variants via Gradle, to pull in the required optional dependencies.
 
 #### Adding OkHttp Support
 
 ```gradle
 dependencies {
-    implementation 'com.snowplowanalytics:snowplow-java-tracker:0.10.1'
-    implementation ('com.snowplowanalytics:snowplow-java-tracker:0.10.1') {
+    implementation 'com.snowplowanalytics:snowplow-java-tracker:0.11.0'
+    implementation ('com.snowplowanalytics:snowplow-java-tracker:0.11.0') {
         capabilities {
-            requireCapability 'com.snowplowanalytics:snowplow-java-tracker-okhttp-support:0.10.1'
+            requireCapability 'com.snowplowanalytics:snowplow-java-tracker-okhttp-support:0.11.0'
         }
     }
 }
@@ -64,10 +68,10 @@ dependencies {
 
 ```gradle
 dependencies {
-    implementation 'com.snowplowanalytics:snowplow-java-tracker:0.10.1'
-    implementation ('com.snowplowanalytics:snowplow-java-tracker:0.10.1') {
+    implementation 'com.snowplowanalytics:snowplow-java-tracker:0.11.0'
+    implementation ('com.snowplowanalytics:snowplow-java-tracker:0.11.0') {
         capabilities {
-            requireCapability 'com.snowplowanalytics:snowplow-java-tracker-apachehttp-support:0.10.1'
+            requireCapability 'com.snowplowanalytics:snowplow-java-tracker-apachehttp-support:0.11.0'
         }
     }
 }
@@ -79,5 +83,5 @@ The Snowplow Java Tracker is also usable from Scala. Add this to your SBT config
 
 ```scala
 // Dependency
-val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "0.10.1"
+val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "0.11.0"
 ```

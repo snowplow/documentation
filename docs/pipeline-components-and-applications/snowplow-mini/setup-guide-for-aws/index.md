@@ -154,7 +154,7 @@ Add any tags you like here.
 
 ## Configure Security Group
 
-Select the Security Group you created [above](https://docs.snowplow.io/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-aws/#security-group).
+Select the Security Group you created [above](#security-group).
 
 ## Review
 

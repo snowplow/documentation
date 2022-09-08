@@ -25,10 +25,6 @@ const redirects = [
     from: '/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub',
     to: '/docs/pipeline-components-and-applications/enrichment-components/enrich',
   },
-  {
-    from: '/docs/setup-snowplow-on-aws/setup-validation-and-enrich',
-    to: '/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-validation-enrich',
-  },
 ]
 
 module.exports = {

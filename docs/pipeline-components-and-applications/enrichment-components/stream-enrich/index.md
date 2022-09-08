@@ -1,8 +1,14 @@
 ---
-title: "(to be deprecated) Stream Enrich"
+title: "Stream Enrich"
 date: "2020-11-09"
-sidebar_position: 10
+sidebar_position: 800
 ---
+
+:::note
+
+Stream Enrich will soon be deprecated in favor of [enrich-kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich/index.md). We recommend switching when you have the opportunity.
+
+:::
 
 ## Available on Terraform Registry[](/docs/pipeline-components-and-applications/stream-collector/setup/index.md#available-on-terraform-registry)
 

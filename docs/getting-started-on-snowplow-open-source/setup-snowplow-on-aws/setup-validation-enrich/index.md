@@ -13,11 +13,11 @@ sidebar_position: 40
 3. **Enriches** each event (e.g. infers the location of the user from his/her IP address)
 4. **Writes** the enriched Snowplow event to another stream
 
-This guide covers how to setup Stream Enrich.
+This guide covers how to setup enrich-kinesis.
 
-## Install, configure and run Stream Enrich
+## Install, configure and run enrich-kinesis
 
-The [Stream Enrich reference](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) describes how to install, run, and configure the application.
+The [enrich-kinesis reference](/docs/pipeline-components-and-applications/enrichment-components/enrich/index.md) describes how to install, run, and configure the application.
 
 ## Add any desired Enrichments
 

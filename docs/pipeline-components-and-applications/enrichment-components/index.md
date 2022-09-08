@@ -8,11 +8,11 @@ This is the technical documentation for enrichment. If you are not familiar yet 
 
 Here is the list of the enrichment assets:
 
-## [enrich-kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md) (AWS)
+## [enrich-kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich/index.md) (AWS)
 
 Standalone JVM application that reads collector payloads events from a Kinesis stream and outputs back to Kinesis.
 
-## [enrich-pubsub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md) (GCP)
+## [enrich-pubsub](/docs/pipeline-components-and-applications/enrichment-components/enrich/index.md) (GCP)
 
 Standalone JVM application that reads collector payloads from a PubSub subscription and outputs back to PubSub.
 

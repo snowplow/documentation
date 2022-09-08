@@ -1,8 +1,14 @@
 ---
-title: "(deprecated) Beam Enrich"
+title: "Beam Enrich"
 date: "2020-11-09"
-sidebar_position: 0
+sidebar_position: 900
 ---
+
+:::caution
+
+Beam Enrich is deprecated in favor of [enrich-pubsub](/docs/pipeline-components-and-applications/enrichment-components/enrich/index.md). We recommend switching as soon as possible.
+
+:::
 
 Beam Enrich is built on top of [Apache Beam](https://beam.apache.org/) and it runs on [GCP's Dataflow](https://cloud.google.com/dataflow/). It can be run from anywhere, as long as it can communicate with Dataflow and have enough permissions to create a Dataflow job. For example, run it as a [Kubernetes](https://cloud.google.com/kubernetes-engine/) job or from a [Compute Engine](https://cloud.google.com/compute/) instance.
 

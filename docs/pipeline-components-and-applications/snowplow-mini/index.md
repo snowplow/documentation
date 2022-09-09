@@ -8,7 +8,6 @@ This is the technical documentation for **Snowplow Mini Version 0.14.x**. For an
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<DocCardList />
 ```

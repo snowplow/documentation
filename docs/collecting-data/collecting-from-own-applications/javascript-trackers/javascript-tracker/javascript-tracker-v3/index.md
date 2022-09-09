@@ -14,7 +14,6 @@ The JavaScript Tracker supports both synchronous and asynchronous tags. We recom
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<DocCardList />
 ```

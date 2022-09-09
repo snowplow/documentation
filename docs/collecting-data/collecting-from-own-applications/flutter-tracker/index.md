@@ -16,7 +16,6 @@ The tracker is published on pub.dev as [snowplow\_tracker](https://pub.dev/pack
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<DocCardList />
 ```

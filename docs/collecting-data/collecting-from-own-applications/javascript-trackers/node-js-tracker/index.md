@@ -16,7 +16,6 @@ The tracker should be straightforward to use if you are comfortable with JavaScr
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<DocCardList />
 ```

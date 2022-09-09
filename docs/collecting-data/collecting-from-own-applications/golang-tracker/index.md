@@ -22,7 +22,6 @@ See [here for instructions](http://blog.ralch.com/tutorial/design-patterns/gola
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<DocCardList />
 ```

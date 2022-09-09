@@ -16,7 +16,6 @@ The Tracker should be relatively straightforward to setup if you are familiar wi
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
-import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-<DocCardList items={useCurrentSidebarCategory().items}/>
+<DocCardList />
 ```

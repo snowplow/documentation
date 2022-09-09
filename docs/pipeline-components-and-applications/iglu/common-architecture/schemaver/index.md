@@ -29,7 +29,7 @@ SchemaVer is defined as follows: `MODEL-REVISION-ADDITION`
 
 By way of example, if we were to modify an existing JSON Schema representing an ad click with version `1-0-0` defined as follows:
 
-```
+```json
 {
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
@@ -45,7 +45,7 @@ By way of example, if we were to modify an existing JSON Schema representing an 
 
 and introduce a new `impressionId` property to obtain the following JSON Schema:
 
-```
+```json
 {
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
@@ -70,7 +70,7 @@ According to our definition of SchemaVer, we are consequently looking at an `ADD
 
 If we continue with the same example, but modify the `additionalProperties` property to true to get the following schema:
 
-```
+```json
 {
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
@@ -89,7 +89,7 @@ If we continue with the same example, but modify the `additionalProperties` prop
 
 We are now at version `1-0-2`. After a while, we decide to add a new `cost` property:
 
-```
+```json
 {
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
@@ -118,7 +118,7 @@ As a result, this new JSON Schema is a `REVISION` of the previous one, its versi
 
 Times goes by and we choose to completely review our JSON Schema identifying an ad click only through a `clickId` property so our schema becomes:
 
-```
+```json
 {
     "$schema": "http://json-schema.org/schema#",
     "type": "object",

@@ -199,11 +199,8 @@ The sink is configured using a HOCON file, for which you can find examples [her
 
 | Name | Description |
 | --- | --- |
-| purpose | Required. "ENRICHED\_EVENTS" for a stream of successfully enriched events  
-"BAD\_ROWS" for a stream of bad events  
-"JSON" for writing plain json |
-| input.type | Required. Configures where input events will be read from.  
-Can be “kinesis”, “stdin” or “nsq” |
+| purpose | Required. "ENRICHED\_EVENTS" for a stream of successfully enriched events<br/>"BAD\_ROWS" for a stream of bad events<br/>"JSON" for writing plain json |
+| input.type | Required. Configures where input events will be read from.<br/> Can be “kinesis”, “stdin” or “nsq” |
 | input.streamName | Required when `input.type` is kinesis or nsq. Name of the stream to read from. |
 | input.initialPosition | Required when `input.type` is kinesis. Used when `input.type` is Kinesis. Specifies where to start reading from the stream the first time the app is run. "TRIM\_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT\_TIMESTAMP" for after specified timestamp. |
 | input.initialTimestamp | Used when `input.type` is kinesis. Required when `input.initialTimestamp` is "AT\_TIMESTAMP". Specifies the timestamp to start read. |

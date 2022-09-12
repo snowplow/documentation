@@ -18,8 +18,6 @@ Set this to your Braze [API Key](https://www.braze.com/docs/api/basics/#app-grou
 
 ### Identity settings
 
-_Note: Since v0.2.0 this section of the configuration has changed. Below you can read about the latest configuration options. If you are interested about pre-0.2.0 versions, there is a section at the end of this one._
-
 #### Braze User Identifier
 
 This section allows you to select which Braze user identifier (external user ID (`external_id`) or [User Alias](https://www.braze.com/docs/api/objects_filters/user_alias_object#user-alias-object-specification) `user_alias`) will be used by the tag. The default value is `external_id`.
@@ -70,15 +68,17 @@ When enabled(default), this option will only update existing users. Uncheck this
 
   Depending on the previous selection, here you can specify the value or the client event property that corresponds to the User Alias Label.
 
-:::info
+<details>
 
-### Pre-v0.2.0
+<summary><i>pre-v0.2.0</i></summary>
 
-#### Braze external\_id (required)
+#### Identity settings
+
+##### Braze external\_id (required)
 
 Set this key to the client event property (e.g. `client_id`) that corresponds to your users' `external_id` and will be used as the [Braze User Identifier](https://www.braze.com/docs/api/basics/#external-user-id-explanation).
 
-:::
+</details>
 
 ## Snowplow Event Mapping Options
 
@@ -89,8 +89,6 @@ This section includes the mapping rules that concern a Snowplow event as claimed
 This option indicates if the Snowplow Self-Describing event data will be included in the event's properties object that will be sent to Braze. By default, this option is enabled.
 
 ### Snowplow Event Context Rules
-
-_Note: Since v0.2.0 this section of the configuration has changed. Below you can read about the latest configuration options. If you are interested about pre-0.2.0 versions, there is a section at the end of this one._
 
 This section describes how the Braze Tag will use the context Entities attached to a Snowplow Event.
 
@@ -134,28 +132,34 @@ Depending on the value set for the **Apply to all versions** column, the major v
 
 :::
 
-:::info
+<details>
 
-### Pre-v0.2.0
+<summary><i>pre-v0.2.0</i></summary>
 
-#### Include all Entities in event object
+#### Snowplow Event Context Rules
+
+##### Extract entity from Array if single element
+
+Snowplow Entities are always in Arrays, as multiple of the same entity can be attached to an event. This option will pick the single element from the array if the array only contains a single element.
+
+##### Include all Entities in event object
 
 Leaving this option enabled (default) ensures that all Entities on an event will be included within the Braze event's properties object.
 
 Disabling this option, reveals the options so that individual entities can be selected for inclusion.
 
-#### Snowplow Entity Mapping
+##### Snowplow Entity Mapping
 
 Using the "Snowplow Entity Mapping" table, the entities can also be remapped to have different names in the Braze and can be included in either event's properties or user attributes object.. The entity can be specified in two different formats:
 
 - Major version match: `x-sp-contexts_com_snowplowanalytics_snowplow_web_page_1` where `com_snowplowanalytics_snowplow` is the event vendor, `web_page` is the schema name and `1` is the Major version number. `x-sp-` can also be omitted from this if desired
 - Full schema match: `iglu:com.snowplowanalytics.snowplow/webPage/jsonschema/1-0-0`
 
-#### Include unmapped entities in event
+##### Include unmapped entities in event
 
 When remapping or moving some entities to User Attributes with the above customization, this option enables you to ensure that all unmapped entities (i.e. any entites not found in the "Snowplow Entity Mapping" rules above) will be included in the properties object of the Braze event.
 
-:::
+</details>
 
 ## Additional Event Mapping Options
 

@@ -18,7 +18,7 @@ If you do not pass this timestamp in as an argument, then the JavaScript Tracker
 
 Here is an example tracking a structured event and supplying the optional timestamp argument.
 
-```
+```javascript
 window.snowplow("trackSelfDescribingEvent", {
     schema: "iglu:com.acme/event/jsonschema/1-0-0", 
     data: {"type": "user_action"}
@@ -32,7 +32,7 @@ Timestamp is counted in milliseconds since the Unix epoch – the same format as
 
 Also you can attach a true timestamp to the event, replacing the device timestamp. For example:
 
-```
+```javascript
 window.snowplow("trackSelfDescribingEvent", {
     schema: "iglu:com.acme/event/jsonschema/1-0-0", 
     data: {"type": "user_action"}

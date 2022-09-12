@@ -12,14 +12,14 @@ Snowplow recommends using the official `[@snowplow/browser-tracker](/docs/collec
 
 ### Quick Start
 
-```
+```bash
 npm install analytics
 npm install @analytics/snowplow
 ```
 
 Initialise the plugin:
 
-```
+```javascript
 import Analytics from 'analytics'
 import snowplowPlugin from '@analytics/snowplow'
 
@@ -43,7 +43,7 @@ const analytics = Analytics({
 
 Then track a page view event:
 
-```
+```javascript
 analytics.page()
 ```
 

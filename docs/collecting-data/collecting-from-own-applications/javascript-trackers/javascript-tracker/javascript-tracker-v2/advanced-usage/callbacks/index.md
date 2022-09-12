@@ -14,7 +14,7 @@ The documentation listed here is for Version 2 of the JavaScript Tracker. Versio
 
 If you call `snowplow` with a function as the argument, the function will be executed when sp.js loads:
 
-```
+```javascript
 snowplow(function () {
   console.log("sp.js has loaded");
 });
@@ -22,7 +22,7 @@ snowplow(function () {
 
 Or equivalently:
 
-```
+```javascript
 snowplow(function (x) {
   console.log(x);
 }, "sp.js has loaded");
@@ -30,7 +30,7 @@ snowplow(function (x) {
 
 The callback you provide is executed as a method on the internal `trackerDictionary` object. This means that you can access the `trackerDictionary` using `this`.
 
-```
+```javascript
 // Configure a tracker instance named "cf"
 snowplow('newTracker', 'sp', '{{COLLECTOR_URL}}', {
  appId: 'snowplowExampleApp'
@@ -46,7 +46,7 @@ snowplow(function () {
 
 The callback function should not be a method:
 
-```
+```javascript
 // TypeError: Illegal invocation
 snowplow(console.log, "sp.js has loaded");
 ```
@@ -55,7 +55,7 @@ will not work, because the value of `this` in the `console.log` function wil
 
 You can get around this problem using `Function.prototoype.bind` as follows:
 
-```
+```javascript
 snowplow(console.log.bind(console), "sp.js has loaded");
 ```
 
@@ -67,7 +67,7 @@ For more on execution context in JavaScript, see the [MDN page](https://develop
 
 The `getDomainUserId` method returns the user ID stored in the first-party cookie:
 
-```
+```javascript
 // Access the tracker instance inside a callback
 snowplow(function () {
  var sp = this.sp;
@@ -80,7 +80,7 @@ snowplow(function () {
 
 The `getDomainUserInfo` method returns all the information stored in first-party cookie in an array:
 
-```
+```javascript
 // Access the tracker instance inside a callback
 snowplow(function () {
  var sp = this.sp;
@@ -103,7 +103,7 @@ The `domainUserInfo` variable will contain an array with 7 elements:
 
 The `getUserId` method returns the user ID which you configured using `setUserId()`:
 
-```
+```javascript
 // Access the tracker instance inside a callback
 snowplow(function () {
  var sp = this.sp;
@@ -116,7 +116,7 @@ snowplow(function () {
 
 The `getCookieName` method returns the complete cookie name for the domain or session cookie:
 
-```
+```javascript
 // Access the tracker instance inside a callback
 snowplow(function () {
  var sp = this.sp;
@@ -131,7 +131,7 @@ The argument corresponds to the basename of the cookie: 'id' for the domain cook
 
 The `getPageViewId` method returns the page view id:
 
-```
+```javascript
 // Access the tracker instance inside a callback
 snowplow(function () {
  var sp = this.sp;

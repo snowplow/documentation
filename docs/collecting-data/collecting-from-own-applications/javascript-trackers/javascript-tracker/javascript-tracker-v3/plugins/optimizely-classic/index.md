@@ -23,7 +23,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 
 ## Initialization
 
-```
+```javascript
 window.snowplow('addPlugin', 
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-optimizely@latest/dist/index.umd.min.js",
   ["snowplowOptimizely", "OptimizelyPlugin"],
@@ -33,7 +33,7 @@ window.snowplow('addPlugin',
 
 The parameter array of booleans is used to initialize the plugin. If you do not include this, all the Optimizely contexts will be included. To alter this behavior you can flip some of the booleans. The array represent enabling the following contexts:
 
-```
+```javascript
 [ 
   summary: boolean, 
   experiments: boolean,  

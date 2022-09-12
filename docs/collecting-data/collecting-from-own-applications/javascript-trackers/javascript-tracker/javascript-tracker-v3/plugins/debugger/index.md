@@ -23,7 +23,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 
 ## Initialization
 
-```
+```javascript
 window.snowplow('addPlugin', 
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-debugger@latest/dist/index.umd.min.js",
   ["snowplowDebugger", "DebuggerPlugin"]
@@ -34,7 +34,7 @@ window.snowplow('addPlugin',
 
 There are various log levels which can be used when initializing the plugin:
 
-```
+```javascript
 none = 0,
 error = 1,
 warn = 2,
@@ -44,7 +44,7 @@ info = 4
 
 Then you can pass your chosen log level when adding the plugin:
 
-```
+```javascript
 window.snowplow('addPlugin', 
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-debugger@latest/dist/index.umd.min.js",
   ["snowplowDebugger", "DebuggerPlugin"],

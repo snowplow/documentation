@@ -12,7 +12,7 @@ import Block7289 from "@site/docs/reusable/creating-your-own-plugins/_index.md"
 
 ### Example
 
-```
+```javascript
 const myPlugin = {
   SimpleContextPlugin: function () {
     return {

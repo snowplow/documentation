@@ -12,13 +12,13 @@ The Snowplow Node.js Tracker is tested and compatible with Node.js 10, 12 and 14
 
 Setting up the tracker should be straightforward if you are familiar with npm:
 
-```
+```bash
 npm install snowplow-tracker
 ```
 
 or
 
-```
+```bash
 yarn add snowplow-tracker
 ```
 

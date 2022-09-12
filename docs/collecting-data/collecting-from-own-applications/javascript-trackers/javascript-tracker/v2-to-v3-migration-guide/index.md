@@ -45,7 +45,7 @@ This improves the readability of the tracking code, removing the need for commen
 
 All functions that previously accepted multiple arguments now accept an Object instead. Functions which have a single parameter, such as the setters, have remained as they are as they will never have multiple parameters. For example:
 
-```
+```javascript
 window.snowplow('setUserId', 'alex-d-123');
 ```
 

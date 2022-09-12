@@ -57,7 +57,7 @@ You can also manually insert the tracker by downloading the jar directly from [M
 
 ### Install in Scala project (SBT)
 The Snowplow Java tracker is also usable from Scala. Add this to your SBT config:
-```
+```scala
 // Dependency
 val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "1.0.0"
 ```

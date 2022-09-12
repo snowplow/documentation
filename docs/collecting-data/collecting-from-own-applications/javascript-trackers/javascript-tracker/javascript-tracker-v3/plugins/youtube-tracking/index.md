@@ -26,7 +26,7 @@ To start tracking a YouTube video with default settings, use the snippet below a
 
 **`index.html`**
 
-```
+```html
 <html>
   <head>
     <title>Snowplow YouTube Tracking Example</title>
@@ -43,7 +43,7 @@ To start tracking a YouTube video with default settings, use the snippet below a
 
 **`main.js`**
 
-```
+```javascript
 window.snowplow(
     'addPlugin',
     'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
@@ -63,7 +63,7 @@ window.snowplow('enableYouTubeTracking', {
 
 The `enableYouTubeTracking` function takes the form:
 
-```
+```javascript
 window.snowplow("enableYouTubeTracking", { id, options?: { label?, captureEvents?, boundaries?, updateRate? } })
 ```
 
@@ -77,7 +77,7 @@ window.snowplow("enableYouTubeTracking", { id, options?: { label?, captureEvents
 
 Below is an example of the full `enableYouTubeTracking` function:
 
-```
+```javascript
 window.snowplow('enableYouTubeTracking', {
   id: 'example-video',
   options: {
@@ -95,7 +95,7 @@ For this plugin to find your media element, your IFrame must be given the id tha
 
 **`index.html`**
 
-```
+```html
  <iframe
       id="example-id"
       src="https://www.youtube.com/embed/zSM4ZyVe8xs"
@@ -104,7 +104,7 @@ For this plugin to find your media element, your IFrame must be given the id tha
 
 **`main.js`**
 
-```
+```javascript
 window.snowplow('enableYouTubeTracking', {
   id: "example-id"
 })
@@ -139,7 +139,7 @@ You can also use a pre-made event group in `options.captureEvents`:
 
 It is possible to extend an event group with any event in the Events table above. This could be useful if you want, for example, all the events contained in the "DefaultEvents" group, along with the "error" event. This is expressed in the following way:
 
-```
+```javascript
 window.snowplow('enableYouTubeTracking', {
   id: "example-video",
   options: {
@@ -154,7 +154,7 @@ Three schemas are used with this plugin:
 
 ### [An unstructured event with identifying information](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "type": "play",
     "label": "Identifying Label"
@@ -163,7 +163,7 @@ Three schemas are used with this plugin:
 
 ### [Snowplow platform-agnostic media context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "currentTime": 12.32,
     "duration": 20,
@@ -178,7 +178,7 @@ Three schemas are used with this plugin:
 
 ### [YouTube player specific context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0)
 
-```
+```javascript
 {
   "autoPlay": false,
   "avaliablePlaybackRates": [

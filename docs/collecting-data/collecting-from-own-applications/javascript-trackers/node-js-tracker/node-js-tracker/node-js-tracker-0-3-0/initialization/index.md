@@ -8,7 +8,7 @@ Assuming you have completed the [Node.js Tracker Setup](/docs/collecting-data/c
 
 Require the Node.js Tracker module into your code like so:
 
-```
+```javascript
 var snowplow = require('snowplow-tracker');
 var emitter = snowplow.emitter;
 var tracker = snowplow.tracker;
@@ -16,7 +16,7 @@ var tracker = snowplow.tracker;
 
 First, initialize an emitter instance. This object will be responsible for how and when events are sent to Snowplow.
 
-```
+```javascript
 var e = emitter(
   'myscalastreamcollector.net', // Collector endpoint
   'http', // Optionally specify a method - http is the default
@@ -36,7 +36,7 @@ Note that last emitter's argument [`agentOptions`](https://nodejs.org/api/http.
 
 Initialise a tracker instance like this:
 
-```
+```javascript
 var t = tracker([e], 'myTracker', 'myApp', false);
 ```
 

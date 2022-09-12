@@ -29,7 +29,7 @@ To start tracking media with default settings, use the snippet below, using your
 
 **`main.js`**
 
-```
+```javascript
 window.snowplow('addPlugin', 
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
   ["snowplowMediaTracking", "MediaTrackingPlugin"]
@@ -42,7 +42,7 @@ window.snowplow('enableMediaTracking', {
 
 **`index.html`**
 
-```
+```html
 <html>
   <head>
     <title>Snowplow Media Tracking Example</title>
@@ -57,7 +57,7 @@ window.snowplow('enableMediaTracking', {
 
 The `enableMediaTracking` function takes the form:
 
-```
+```javascript
 window.snowplow('enableMediaTracking', { id, options?: { label?, captureEvents?, boundaries?, volumeChangeTrackingInterval? } })
 ```
 
@@ -71,7 +71,7 @@ window.snowplow('enableMediaTracking', { id, options?: { label?, captureEvents?,
 
 Below is an example of the full `enableMediaTracking` function:
 
-```
+```javascript
 window.snowplow('enableMediaTracking', {
   id: 'example-video',
   options: {
@@ -91,7 +91,7 @@ For this plugin to find your media element, one of the following conditions must
 
 **`index.html`**
 
-```
+```html
 ...
   <body>
     <video id='example-id' src='./example-video.mp4'></video>
@@ -110,7 +110,7 @@ Or
 
 **`index.html`**
 
-```
+```html
 ...
   <body>
     <div id="example-id">
@@ -180,7 +180,7 @@ You can also use a pre-made event group in `options.captureEvents`:
 
 It is possible to extend an event group with any event in the Events table above. This could be useful, for example, if you want all the events contained in the 'DefaultEvents' group, along with the 'emptied' event. This is expressed in the following way:
 
-```
+```javascript
 window.snowplow('enableMediaTracking', {
   id: 'example-video',
   options: {
@@ -195,7 +195,7 @@ Four schemas are used with this plugin:
 
 ### [An unstructured event with identifying information](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "type": "play",
     "label": "Identifying Label"
@@ -204,7 +204,7 @@ Four schemas are used with this plugin:
 
 ### [Snowplow platform-agnostic media context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "currentTime": 12.32,
     "duration": 20,
@@ -219,7 +219,7 @@ Four schemas are used with this plugin:
 
 ### [HTML5 Media specific context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "htmlId": "my-video",
     "mediaType": "VIDEO",
@@ -261,7 +261,7 @@ Four schemas are used with this plugin:
 
 ### [HTML5 Video specific context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/video_element/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "autoPictureInPicture": false,
     "disablePictureInPicture": false,

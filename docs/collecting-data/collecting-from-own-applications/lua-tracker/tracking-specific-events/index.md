@@ -8,7 +8,7 @@ sidebar_position: 40
 
 Creating a tracking instance is as simple as calling `snowplow.new_tracker` and providing a URL for your collector:
 
-```
+```lua
 local snowplow = require("snowplow")
 local tracker = snowplow.new_tracker("{{ collector_url }}")
 ```
@@ -33,7 +33,7 @@ This method provides a halfway-house between tracking fully user-defined self-de
 | property | Describing the ‘object’, or the action performed on it | No |
 | value | Provides numerical data about the event | No |
 
-```
+```lua
 tracker:track_struct_event("shop", "add-to-basket", "book", "pcs", 2)
 ```
 
@@ -46,7 +46,7 @@ Use `track_self_describing_event` to track a custom event. This is the most ad
 | schema | The schema to use | Yes |
 | action | The data to send along with the schema | Yes |
 
-```
+```lua
 tracker:track_self_describing_event(
   "iglu:com.snowplowanalytics.snowplow/add_to_cart/jsonschema/1-0-0",
   { sku = "ASO01043", unitPrice = 49.95, quantity = 1000 }
@@ -59,7 +59,7 @@ Use track\_screen\_view to track a user viewing a screen (or similar) within you
 
 This method uses a self-describing event with the [`com.snowplowanalytics.snowplow/screen_view` schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0).
 
-```
+```lua
 tracker:track_screen_view("Character Creation - Step 1", "c1")
 ```
 
@@ -81,14 +81,14 @@ A call to a `track_*` method will return two values, a boolean if the request 
 
 An example of the values returned from a failed request:
 
-```
+```lua
 local ok, err = tracker:track_screen_view("Character Configuration - Part 1", "c1")
 -- false, Host [https://test.invalid/com.snowplowanalytics.snowplow/tp2] not found (possible connectivity error)
 ```
 
 An example of the values returned from a successful request:
 
-```
+```lua
 local ok, err = tracker:track_screen_view("Character Configuration - Part 1", "c1")
 -- true, nil
 ```

@@ -10,7 +10,10 @@ The Braze Tag for GTM SS allows events to be forwarded to [Braze](https://www.br
 
 ### Tag Manager Gallery
 
-**Coming Soon** - This tag is pending approval to be included in the GTM Gallery.
+1. From the Templates tab in GTM Server Side, click "Search Gallery" in the Tag Templates section
+2. Search for "Braze" and select the official "By Snowplow" tag
+3. Click Add to Workspace
+4. Accept the permissions dialog by clicking "Add"
 
 ### Manual Installation
 

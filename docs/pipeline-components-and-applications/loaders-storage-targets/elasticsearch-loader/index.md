@@ -173,7 +173,7 @@ curl -XPUT 'http://localhost:9200/snowplow' -d '{
 The Elasticsearch Loader is published on Docker Hub:
 
 ```
-docker pull snowplow/snowplow-elasticsearch-loader:2.0.6
+docker pull snowplow/snowplow-elasticsearch-loader:2.0.7
 ```
 
 The container can be run with the following command:
@@ -181,14 +181,14 @@ The container can be run with the following command:
 ```
 docker run \
   -v /path/to/config.hocon:/snowplow/config.hocon \
-  snowplow/snowplow-elasticsearch-loader:2.0.6 \
+  snowplow/snowplow-elasticsearch-loader:2.0.7 \
   --config /snowplow/config.hocon
 ```
 
 Alternatively you can download and run a [jar file from the github release](https://github.com/snowplow/snowplow-elasticsearch-loader/releases):
 
 ```
-java -jar snowplow-elasticsearch-loader-2.0.6.jar --config /path/to/config.hocon
+java -jar snowplow-elasticsearch-loader-2.0.7.jar --config /path/to/config.hocon
 ```
 
 ### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader-Setup#using-the-elasticsearch-loader)Using the Elasticsearch Loader

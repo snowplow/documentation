@@ -22,7 +22,7 @@ In an environment where JavaScript is not permitted, these values need to be set
 
 An example tag is shown below:
 
-```
+```html
 <!--Snowplow start plowing-->
 <img src="http://collector.acme.com/i?&e=pv&page=Root%20README&url=http%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow&aid=snowplow&p=web&tv=no-js-0.1.0" />
 <!--Snowplow stop plowing-->
@@ -87,7 +87,7 @@ You should also restrict values which are allowed within the `u` parameter to pr
 
 Example:
 
-```
+```html
 Check out <a href="http://collector.acme.com/r/tp2?u=https%3A%2F%2Fgithub.com%2Fsnowplow%2Fhuskimo">Huskimo</a>
 ```
 

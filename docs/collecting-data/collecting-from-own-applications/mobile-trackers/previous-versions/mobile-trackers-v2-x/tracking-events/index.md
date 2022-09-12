@@ -29,7 +29,7 @@ Automatically captured events in the iOS Tracker are:
 
 These are enabled in the tracker configuration. In this example, some helpful automatic contexts and all Autotracking is enabled:
 
-```
+```swift
 let trackerConfig = TrackerConfiguration()
     .sessionContext(true)
     .platformContext(true)
@@ -53,7 +53,7 @@ Each custom context is an array of self-describing JSON following the same patte
 
 Here are two example custom context JSONs. One describes a screen:
 
-```
+```javascript
 {
     schema: 'iglu:com.example/screen/jsonschema/1-2-1',
     data: {
@@ -65,7 +65,7 @@ Here are two example custom context JSONs. One describes a screen:
 
 and the other describes a user on that screen:
 
-```
+```javascript
 {
     schema: 'iglu:com.example/user/jsonschema/2-0-0',
     data: {
@@ -78,7 +78,7 @@ and the other describes a user on that screen:
 
 How to track a **screen view** with both of these contexts attached:
 
-```
+```swift
 let event = ScreenView(name: "DemoScreenName", screenId: UUID())
 event.contexts.add(
     SelfDescribingJson(schema: "iglu:com.example/screen/jsonschema/1-2-1",
@@ -105,7 +105,7 @@ You may wish to track events in your app which are not directly supported by Sno
 
 To define your own custom event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
-```
+```swift
 let data = ["targetUrl": "http://a-target-url.com" as NSObject];       
 let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)       
 
@@ -123,7 +123,7 @@ Our philosophy in creating Snowplow is that users should capture important consu
 
 However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 
-```
+```swift
 let event = Structured(category: "Example", action: "my-action")
     .label("my-label")
     .property("my-property")
@@ -136,7 +136,7 @@ tracker.track(event)
 
 Use the `Timing` events to track user timing events such as how long resources take to load.
 
-```
+```swift
 let event = Timing(category: "timing-category", variable: "timing-variable", timing: 5)
     .label("optional-label")       
 
@@ -147,7 +147,7 @@ tracker.track(event)
 
 Track the user viewing a screen within the application. This type of tracking is typically used when automatic screen view tracking is not suitable within your application.
 
-```
+```swift
 let event = ScreenView(name: "DemoScreenName", screenId: UUID())
 
 tracker.track(event)
@@ -159,7 +159,7 @@ tracker.track(event)
 
 Use the `ConsentGranted` event to track a user opting into data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied.
 
-```
+```swift
 let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")       
     .name("document-name")
     .documentDescription("document-description")
@@ -171,7 +171,7 @@ tracker.track(event)
 
 Use the `ConsentWithdrawn` event to track a user withdrawing consent for data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied. To specify that a user opts out of all data collection, `all` should be set to `true`.
 
-```
+```swift
 let event = ConsentWithdrawn()
     .all(true)
     .documentId("1234abcd")
@@ -190,7 +190,7 @@ Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three 
 2. **Add items to the transaction.** Create an array of `EcommerceItem` to pass to the `Ecommerce` object.
 3. **Submit the transaction to Snowplow** using the track() method, once all the relevant data has been loaded into the object.
 
-```
+```swift
 let transactionID = "6a8078be"       
                 
 let itemArray = [       
@@ -200,7 +200,7 @@ let itemArray = [
     .currency("USD")       
 ]       
                 
-let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)   
+let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
     .affiliation("DemoTransactionAffiliation")
     .taxValue(10)
     .shipping(15)
@@ -216,7 +216,7 @@ tracker.track(event)
 
 To track an event when a push notification is used, it is possible to use the `PushNotification` event which contains a `NotificationContent` object:
 
-```
+```swift
 let attachments = [["identifier": "testidentifier",       
                     "url": "testurl",       
                     "type": "testtype"]]
@@ -262,7 +262,7 @@ Automatically captured events in the iOS Tracker are:
 
 These are enabled in the tracker configuration. In this example, some helpful automatic contexts and all Autotracking is enabled:
 
-```
+```java
 TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)       
     .sessionContext(true)
     .platformContext(true)
@@ -286,7 +286,7 @@ Each custom context is an array of self-describing JSON following the same patte
 
 Here are two example custom context JSONs. One describes a screen:
 
-```
+```javascript
 {
     schema: 'iglu:com.example/screen/jsonschema/1-2-1',
     data: {
@@ -298,7 +298,7 @@ Here are two example custom context JSONs. One describes a screen:
 
 and the other describes a user on that screen:
 
-```
+```javascript
 {
     schema: 'iglu:com.example/user/jsonschema/2-0-0',
     data: {
@@ -311,11 +311,11 @@ and the other describes a user on that screen:
 
 How to track a **screen view** with both of these contexts attached:
 
-```
-ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());         
+```java
+ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());
 
 event.customContexts.add(
-    new SelfDescribingJson("iglu:com.example/screen/jsonschema/1-2-1",                         
+    new SelfDescribingJson("iglu:com.example/screen/jsonschema/1-2-1",
         new HashMap<String, String>() {{
             put("screenType", "test");
             put("lastUpdated", "2021-06-11");
@@ -323,7 +323,7 @@ event.customContexts.add(
 );
 
 event.customContexts.add(
-    new SelfDescribingJson("iglu:com.example/user/jsonschema/2-0-0",                         
+    new SelfDescribingJson("iglu:com.example/user/jsonschema/2-0-0",
         new HashMap<String, String>() {{
             put("userType", "tester");
         }})
@@ -342,7 +342,7 @@ You may wish to track events in your app which are not directly supported by Sno
 
 To define your own custom event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP Console UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
-```
+```java
 Map<String, String> properties = new HashMap<>();
 properties.put("targetUrl", "http://a-target-url.com");
 SelfDescribingJson sdj = new SelfDescribingJson("iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", attributes);
@@ -363,7 +363,7 @@ Our philosophy in creating Snowplow is that users should capture important consu
 
 However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 
-```
+```java
 Structured event = Structured("my-category", "my-action")
     .label("my-label")
     .property("my-property")
@@ -376,7 +376,7 @@ tracker.track(event);
 
 Use the `Timing` events to track user timing events such as how long resources take to load.
 
-```
+```java
 Timing event = new Timing("timing-category", "timing-variable", 5)
     .label("optional-label");
                 
@@ -387,7 +387,7 @@ tracker.track(event);
 
 Track the user viewing a screen within the application. This type of tracking is typically used when automatic screen view tracking is not suitable within your application.
 
-```
+```java
 ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());
 
 tracker.track(event);
@@ -399,7 +399,7 @@ tracker.track(event);
 
 Use the `ConsentGranted` event to track a user opting into data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied.
 
-```
+```java
 ConsentGranted event = new ConsentGranted("2018-05-08T18:12:02+00:00", "doc id", "1.2")
         .documentDescription("doc description")
         .documentName("doc name");
@@ -411,7 +411,7 @@ tracker.track(event);
 
 Use the `ConsentWithdrawn` event to track a user withdrawing consent for data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied. To specify that a user opts out of all data collection, `all` should be set to `true`.
 
-```
+```java
 ConsentWithdrawn event = new ConsentWithdrawn(true, "doc id", "1.2")
         .documentDescription("doc description")
         .documentName("doc name");
@@ -427,7 +427,7 @@ Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three 
 2. **Add items to the transaction.** Create an array of `EcommerceItem` to pass to the `Ecommerce` object.
 3. **Submit the transaction to Snowplow** using the track() method, once all the relevant data has been loaded into the object.
 
-```
+```java
 EcommerceTransactionItem item = new EcommerceTransactionItem("sku-1", 35.00, 1)
     .name("Acme 1")
     .category("Stuff")

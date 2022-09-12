@@ -8,6 +8,18 @@ This page refers to version 0.3.0 of the Snowplow Android Tracker.
 
 **Please note** that this version of the Android Tracker is dependent upon the [Snowplow 0.9.14 release](https://github.com/snowplow/snowplow/releases/tag/0.9.14), you will need to be running this version or higher of Snowplow for events sent by the tracker to be successfully processed. Snowplow 0.9.14+ contains updates to the Hadoop Enrich and Scala Hadoop Shred jobs to allow newer self-describing JSON versions, as sent by Android Tracker 0.3.0. For more information, please refer to tickets [#1220](https://github.com/snowplow/snowplow/issues/1220) and [#1231](https://github.com/snowplow/snowplow/issues/1231).
 
+<details><summary>CLICK ME</summary>
+<p>
+
+#### yes, even hidden code blocks!
+
+```python
+print("hello world!")
+```
+
+</p>
+</details>
+
 ## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#1-overview)1\. Overview
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.

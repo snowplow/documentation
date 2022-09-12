@@ -252,7 +252,7 @@ SessionConfiguration sessionConfig = new SessionConfiguration(
 
 the session would expire if the app is in background for more than 15 seconds, like in this example:
 
-```
+```text
 time: 0s - ScreenView event - foreground timeout session check - session 1
 time: 3s - Background event - foreground timeout session check (3 < 360) - session 1
 time: 30s - Foreground event - background timeout session check (30 > 15) - session 2

@@ -18,7 +18,7 @@ If you use Gradle, here's how to add the tracker to your project.
 
 Start by adding `jcenter()` to your `build.gradle` file:
 
-```
+```groovy
 repositories {
     ...
     jcenter()
@@ -27,7 +27,7 @@ repositories {
 
 Then add into the same file:
 
-```
+```groovy
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -37,7 +37,7 @@ dependencies {
 
 This will install version 1.2.0 of the Android tracker. If you would like to ensure that all bug fixes and patches for version 1.2.0 are installed, simply change 1.2.0 into 1.2.+.
 
-```
+```groovy
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -49,7 +49,7 @@ dependencies {
 
 A complete Gradle file may look like this:
 
-```
+```groovy
 repositories {
     maven {
         url "http://maven.snplow.com/releases"
@@ -88,7 +88,7 @@ Simply enter the endpoint of the collector in the app's interface once it's laun
 
 Add the following snippet to a file (e.g. `SnowplowTracker.java`):
 
-```
+```java
 import com.snowplowanalytics.snowplow.tracker.*;
 import android.content.Context;
 
@@ -121,14 +121,14 @@ public class SnowplowTrackerBuilder {
 
 To send the events, you need to update your AndroidManifest.xml with the following permission:
 
-```
+```xml
 <uses-permission android:name="android.permission.INTERNET" /> 
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 ```
 
 If you want to send location information with each event you will need to add the following permissions to your AndroidManifest.xml:
 
-```
+```xml
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
@@ -137,7 +137,7 @@ If you want to send location information with each event you will need to add th
 
 Now you can try to track events:
 
-```
+```java
 Tracker tracker = SnowplowTrackerBuilder.getTracker(activity, context);
 tracker.track(ScreenView.builder().name("screenName").id("screenId").build());
 ```
@@ -197,7 +197,7 @@ Events are sent by providing them as arguments to the tracking methods found in 
 
 A screenview event can be manually tracked like this:
 
-```
+```java
 tracker.track(ScreenView.builder()
     .name("Product list")
     .id("UUID string")
@@ -223,7 +223,7 @@ Note: the URL endpoint is the only required parameter.
 
 Here's an example that creates an emitter:
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .method(HttpMethod.GET) // Optional - Defines how we send the request
@@ -238,7 +238,7 @@ Emitter e2 = new Emitter
 
 To instantiate a tracker in your code simply instantiate the `Tracker` class with the following builder pattern:
 
-```
+```java
 // Create a Tracker with all options
 Tracker.init(new Tracker
   .TrackerBuilder(e2, "myNamespace", "myAppId", getContext())
@@ -263,7 +263,7 @@ The custom context argument should consist of a List of SelfDescribingJson repre
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
-```
+```json
 {
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
@@ -276,7 +276,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 The corresponding `Map` can be used to create a `SelfDescribingJson`:
 
-```
+```java
 // Create a Map of the data you want to include...
 Map<String, String> dataMap = new HashMap<>();
 dataMap.put("movie_name", "solaris");
@@ -289,7 +289,7 @@ SelfDescribingJson context1 = new SelfDescribingJson("iglu:com.acme/movie_poster
 
 Sending the movie poster context with an event looks like this:
 
-```
+```java
 // Now add this JSON into a list of SelfDescribingJsons...
 List<SelfDescribingJson> contexts = new ArrayList<>();
 contexts.add(context1);
@@ -307,7 +307,7 @@ Note: even if there is only one custom context attached to the event, it still n
 
 Auto-tracking can be enabled to send screen view events whenever a screen is changed in the app.
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder(...)
   .screenviewEvents(true)
   .build()
@@ -318,7 +318,7 @@ Tracker.init(new Tracker.TrackerBuilder(...)
 
 Use PageView events to track a user viewing a web page within your app:
 
-```
+```java
 tracker.track(PageView.builder()
     .pageUrl("www.example.com")
     .pageTitle("example")
@@ -334,7 +334,7 @@ Use an e-commerce transaction event to track things like online purchases. Trans
 
 Here is an example:
 
-```
+```java
 // Create some Transaction Items
 EcommerceTransactionItem item1 = EcommerceTransactionItem.builder()
     .itemId("item_id_1")
@@ -394,7 +394,7 @@ tracker.track(EcommerceTransaction.builder()
 
 Use structured events to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-```
+```java
 tracker.track(Structured.builder()
     .category("shop")
     .action("add-to-basket")
@@ -408,7 +408,7 @@ tracker.track(Structured.builder()
 
 A `SelfDescribingJson` is used as a wrapper around either a `TrackerPayload`, another `SelfDescribingJson` or a `Map` object. After creating the object you want to wrap, you can create a `SelfDescribingJson` and track it like this:
 
-```
+```java
 // This is the Map we have created
 Map<String, String> eventData = new HashMap<>();
 eventData.put("Event", "Data")
@@ -424,7 +424,7 @@ tracker.track(json);
 
 Use a timing event to track a custom timing:
 
-```
+```java
 tracker.track(Timing.builder()
     .category("category")
     .variable("variable")
@@ -437,7 +437,7 @@ tracker.track(Timing.builder()
 
 Consent-granted events are used to track when a user consents to data collection:
 
-```
+```java
 t1.track(ConsentGranted.builder()
     .expiry("Monday, 19-Aug-05 15:52:01 UTC")
     .documentVersion("5")
@@ -449,7 +449,7 @@ t1.track(ConsentGranted.builder()
 
 Consent-withdrawn events are used to track when a user withdraws consent to data collection:
 
-```
+```java
 t1.track(ConsentWithdrawn.builder()
     .all(true)
     .build());
@@ -474,7 +474,7 @@ When a consent event is sent for collection, the consent documents will be added
 
 For example:
 
-```
+```java
 // Create some consent documents
 ConsentDocument document1 = ConsentDocument.builder()
     .documentId("doc-id1")
@@ -513,7 +513,7 @@ By default, no client session tracking is activated. Once enabled the tracker wi
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder( ... )
   .sessionContext(true)     // To use the session context
   .sessionCheckInterval(10) // Checks every 10 seconds (default is 15)
@@ -529,7 +529,7 @@ Events can be sent whenever the app is foregrounded and backgrounded.
 
 In order to enable these events, use the builder method `lifecycleEvents` during initialization of the tracker:
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder(emitter, namespace, appId, this.getApplicationContext())
                 .lifecycleEvents(true)
                 .build()
@@ -548,7 +548,7 @@ Auto-tracking can be enabled to send an install event whenever the tracker is us
 
 If install auto-tracking is not enabled, the tracker will still keep track of when the app was first installed, so that when enabled, the tracker will send the recorded install event with a timestamp reflecting when it was first installed.
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder(...)
   .installTracking(true)
   .build()
@@ -559,7 +559,7 @@ Tracker.init(new Tracker.TrackerBuilder(...)
 
 Auto-tracking for application crashes can be enabled to send events that capture exception information.
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder(...)
   .applicationCrash(true)
   .build()
@@ -574,7 +574,7 @@ These are out-of-the-box tracker options that when enabled will attach useful co
 
 The [session context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) includes sessionization information like user ID and session ID that can be used to relate user activity patterns to events.
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder( ... )
   .sessionContext(true)     // To use the session context
   .sessionCheckInterval(10) // Checks every 10 seconds (default is 15)
@@ -590,7 +590,7 @@ The [mobile](https://github.com/snowplow/iglu-central/blob/master/schemas/com.sn
 
 It is enabled when creating the tracker:
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder(...)
   .mobileContext(true)
   .build()
@@ -603,7 +603,7 @@ The [geolocation context](https://github.com/snowplow/iglu-central/blob/master/s
 
 It is enabled when creating the tracker:
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder(...)
   .geoLocationContext(true)
   .build()
@@ -616,7 +616,7 @@ Note: permissions are required in your application for accessing geolocation inf
 
 The [application context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) includes app build and version number.
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder(...)
   .applicationContext(true)
   .build()
@@ -627,7 +627,7 @@ Tracker.init(new Tracker.TrackerBuilder(...)
 
 The [screen context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) contains information related to the current screen being viewed on the device when the event is created.
 
-```
+```java
 Tracker.init(new Tracker.TrackerBuilder(...)
   .screenContext(true)
   .build()
@@ -642,7 +642,7 @@ These options are used to fine-tune the emitter.
 
 The request method used to connect to the collector, either: `HttpMethod.GET`, or `HttpMethod.POST`.
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .method(HttpMethod.GET) // Optional - Defines how we send the request
@@ -655,7 +655,7 @@ In a GET request, each event is sent in an individual request. In a POST request
 
 The maximum timeout for emitting events
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .emitTimeout(5)
@@ -668,7 +668,7 @@ A buffer is used to group events together in bulk before sending them. This is e
 
 The buffer can be configured when creating the emitter:
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .option(BufferOption.Single) // Optional - Defines how many events we bundle in a POST
@@ -687,7 +687,7 @@ Note: Buffer options will only ever influence how POST request are sent however.
 
 The protocol used to connect to the collector, either: `RequestSecurity.HTTP`, or `RequestSecurity.HTTPS`.
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .security(RequestSecurity.HTTPS) // Optional - Defines what protocol used to send events
@@ -700,7 +700,7 @@ Emitter e2 = new Emitter
 
 To specify a specific version, supply `TLSVersion` (or for multiple versions, `EnumSet<TLSVersion>`) to the `tls` builder method:
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .tls(TLSVersion.TLSv1_2) // Optional - Defines what TLS versions are used for the request
@@ -713,7 +713,7 @@ An emitter callback can be set which will be called with the count of successful
 
 First create the callback you'd like to define, and then supply it to an emitter:
 
-```
+```java
 RequestCallback callback = new RequestCallback() {
   @Override
   public void onSuccess(int successCount) {
@@ -735,7 +735,7 @@ Emitter emitter = new Emitter
 
 The number of events retrieved from storage in the database whenever the emitter needs more to send.
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .sendLimit(250)
@@ -746,7 +746,7 @@ Emitter e2 = new Emitter
 
 The maximum data size of GET requests made by the emitter to send events.
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .byteLimitGet(40000)
@@ -757,7 +757,7 @@ Emitter e2 = new Emitter
 
 The maximum data size of POST requests made by the emitter to send events.
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .byteLimitGet(40000)
@@ -776,7 +776,7 @@ Context primitive is a term for anything that can be used as a context. A contex
 
 Custom contexts are represented as self describing JSONs and they can be used as a global context when you'd like define a context that is attached to every event and its' content never changes.
 
-```
+```java
 Map<String, String> attributes = new HashMap<>();
 attributes.put("test-key-1", "test-value-1");
 GlobalContext testCtx = new SelfDescribingJson("sdjExample", "iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1", attributes);
@@ -787,7 +787,7 @@ Tracker.instance().addGlobalContext(testCtx);
 
 A context generator is a callback that returns a self describing JSON, representing a context. They are evaluated each time an event is sent, hence they meet the case where we would like to send a context based on event payload.
 
-```
+```java
 GlobalContext testCtx = new ContextGenerator() {
     @Override
     public SelfDescribingJson generate(TrackerPayload payload, String eventType, String eventSchema) {
@@ -812,7 +812,7 @@ A Filter Provider is used to discriminate between events so we can attach global
 
 A Filter Provider has a callback, `filter`, returning a `boolean` which determines the events that this context primitive(s) will be added.
 
-```
+```java
 ContextPrimitive primitive = new SelfDescribingJson("iglu:com.acme/test_event/jsonschema/1-0-0");
 GlobalContext testCtx = new FilterProvider("test-tag", new ContextFilter() {
     @Override
@@ -831,7 +831,7 @@ A Ruleset Provider has a RuleSet which has an allow list and a deny list. Both l
 
 In this example, the Ruleset Provider will attach the context `primitive` to events with the schema `iglu:com.acme.*/*/jsonschema/*-*-*`, but not to `iglu:com.acme.marketing/*/jsonschema/*-*-*`.
 
-```
+```java
 ContextPrimitive primitive = new SelfDescribingJson("iglu:com.acme/test_event/jsonschema/1-0-0");
 RuleSet ruleSet = new RuleSet("iglu:com.acme.*/*/jsonschema/*-*-*", "iglu:com.acme.marketing/*/jsonschema/*-*-*");
 
@@ -846,7 +846,7 @@ RuleSet's rules are the strings used to match against certain schemas, such as `
 
 They follow the same five-part format as an Iglu URI:
 
-```
+```text
 protocol:vendor/event_name/format/version
 ```
 

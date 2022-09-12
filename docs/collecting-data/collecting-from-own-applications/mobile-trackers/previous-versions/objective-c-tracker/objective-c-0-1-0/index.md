@@ -20,7 +20,7 @@ Assuming you have completed the [iOS Tracker Setup](https://github.com/snowplow
 
 Adding the library into your project is as simple as adding the headers into your class file:
 
-```
+```objc
 #import <SnowplowTracker.h>
 #import <SnowplowRequest.h>
 ```
@@ -31,7 +31,7 @@ That's it - you are now ready to initialize a tracker instance.
 
 To instantiate a tracker in your code simply instantiate the `SnowplowTracker` class with the constructor:
 
-```
+```objc
 - (id) initWithCollector:(SnowplowRequest *)collector_
                    appId:(NSString *)appId_
            base64Encoded:(Boolean)encoded
@@ -40,7 +40,7 @@ To instantiate a tracker in your code simply instantiate the `SnowplowTracker`�
 
 For example:
 
-```
+```objc
 SnowplowTracker *t1 = [[SnowplowTracker alloc] initWithCollector:collector appId:@"AF003" base64Encoded:false namespace:@"cloudfront"];
 ```
 
@@ -81,13 +81,13 @@ You can track a given user of your app by setting their user IDt to any string:
 
 You can set the user ID :
 
-```
+```objc
 s1.setUserId( "{{USER ID}}" )
 ```
 
 Example:
 
-```
+```objc
 [tracker setUserId:@"alexd"];
 ```
 
@@ -113,7 +113,7 @@ All events are tracked with specific methods on the tracker instance, of the for
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of an NSDictionary object. Each tracking method accepts an additional optional contexts parameter after all the parameters specific to that method:
 
-```
+```objc
 - (void) trackPageView:(NSString *)pageUrl
                  title:(NSString *)pageTitle
               referrer:(NSString *)referrer;
@@ -136,7 +136,7 @@ The `context` argument should consist of a `NSArray` of `NSDictionary` rep
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
-```
+```json
 {
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
   "data": {
@@ -155,21 +155,12 @@ In all the trackers, we offer a way to set the timestamp if you want the event t
 
 Here is an example:
 
-```
+```objc
 [tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com"];
+[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray];
+[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" timestamp:1234567890];
+[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray timestamp:1234567890];
 ```
-
-\[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray\]
-
-;
-
-\[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" timestamp:1234567890\]
-
-;
-
-\[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray timestamp:1234567890\]
-
-;
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#413-tracker-method-return-values)4.1.3 Tracker method return values
 
@@ -188,17 +179,11 @@ Use `trackScreenView:` to track a user viewing a screen (or equivalent) within
 
 Example:
 
-```
+```objc
 [t1 trackScreenView:@"HUD > Save Game" screen:@"screen23"];
+[t1 trackScreenView:@"HUD > Save Game" screen:nil timestamp:12435678];
+[t1 trackScreenView:@"HUD > Save Game" screen:@"screen23" timestamp:12435678];
 ```
-
-\[t1 trackScreenView:@"HUD > Save Game" screen:nil timestamp:12435678\]
-
-;
-
-\[t1 trackScreenView:@"HUD > Save Game" screen:@"screen23" timestamp:12435678\]
-
-;
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#43-track-pageviews-with-trackpageview)4.3 Track pageviews with `trackPageView:`
 
@@ -216,13 +201,10 @@ Arguments are:
 
 Example:
 
-```
+```objc
 [t1 trackPageView:@"www.example.com" title:@"example" referrer:@"www.referrer.com" context:contextList];
+[t1 trackPageView:@"www.example.com" title:@"example" referrer:@"www.referrer.com"];
 ```
-
-\[t1 trackPageView:@"www.example.com" title:@"example" referrer:@"www.referrer.com"\]
-
-;
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#44-track-ecommerce-transactions-with-trackecommercetransaction)4.4 Track ecommerce transactions with `trackEcommerceTransaction:`
 
@@ -258,14 +240,11 @@ These are the fields that can appear in a transaction item dictionary:
 
 Example of tracking a transaction containing two items:
 
-```
+```objc
 NSMutableArray *itemArray = [NSMutableArray array];
 [itemArray addObject:[t trackEcommerceTransaction:@"6a8078be" sku:@"pbz0026" name:"Hot Chocolate" category:@"Drink" price:50 quantity:1 currency:@"USD"]];
+[t trackEcommerceTransaction:@"6a8078be" totalValue:350 affiliation:@"no_affiliate" taxValue:10 shipping:15 city:@"Boston" state:@"Massachusetts" country:@"USA" items=itemArray];
 ```
-
-\[t trackEcommerceTransaction:@"6a8078be" totalValue:350 affiliation:@"no\_affiliate" taxValue:10 shipping:15 city:@"Boston" state:@"Massachusetts" country:@"USA" items=itemArray\]
-
-;
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#45-track-structured-events-with-trackstructuredevent)4.5 Track structured events with `trackStructuredEvent:`
 
@@ -283,13 +262,10 @@ Use `trackStructuredEvent:` to track a custom event happening in your app whic
 
 Example:
 
-```
+```objc
 [t1 trackStructuredEvent:@"shop" action:@"add-to-basket" label:@"Add To Basket" property:@"pcs" value:27];
+[t1 trackStructuredEvent:@"shop" action:@"add-to-basket" label:@"Add To Basket" property:@"pcs" value:27 timestamp:1234569];
 ```
-
-\[t1 trackStructuredEvent:@"shop" action:@"add-to-basket" label:@"Add To Basket" property:@"pcs" value:27 timestamp:1234569\]
-
-;
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#46-track-unstructured-events-with-trackunstructuredevent)4.6 Track unstructured events with `trackUnstructuredEvent:`
 
@@ -312,7 +288,7 @@ The arguments are as follows:
 
 Example:
 
-```
+```objc
 - (void) trackUnstructuredEvent:(NSDictionary *)eventJson
                         context:(NSMutableArray *)context
                       timestamp:(double)timestamp;
@@ -322,7 +298,7 @@ If you supply a `NSDictionary*`, make sure that this top-level contains your `
 
 Example:
 
-```
+```objc
 NSDictionary* eventJson = [NSDictionary dictionaryWithObjectsAndKeys:
                             "iglu:com.snowplowanalytics.snowplow/example/jsonschema/1-0-0", "schema",
                             "data", "{\"src\": \"Images\/Sun.png\", \"name\": \"sun1\", \"hOffset\": 250, \"vOffset\": 250, \"alignment\": \"center\"}"];
@@ -337,7 +313,7 @@ For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/1
 
 Events created by the Tracker are sent to a collector using a `SnowplowRequest` instance. You can create one using one of the init methods:
 
-```
+```objc
 - (id) initWithURLRequest:(NSURL *)url
                httpMethod:(NSString *)method
              bufferOption:(enum SnowplowBufferOptions)option;
@@ -347,7 +323,7 @@ Events created by the Tracker are sent to a collector using a `SnowplowRequest`
 
 For example:
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 SnowplowRequest emitter = [[SnowplowRequest alloc] initWithURLRequest:url
                                                            httpMethod:@"POST"
@@ -362,7 +338,7 @@ A buffer is used to group events together in bulk before sending them. This is e
 
 You can set this during the creation of a `SnowplowRequest` object or using the setter `-(void)setBufferOption:`
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 SnowplowRequest emitter = [[SnowplowRequest alloc] initWithURLRequest:url
                                                            httpMethod:@"POST"
@@ -370,11 +346,8 @@ SnowplowRequest emitter = [[SnowplowRequest alloc] initWithURLRequest:url
 SnowplowRequest emitter2 = [[SnowplowRequest alloc] initWithURLRequest:url
                                                            httpMethod:@"POST"
                                                          bufferOption:SnowplowBufferDefault];
+[emitter setBufferOption:SnowplowBufferInstant];
 ```
-
-\[emitter setBufferOption:SnowplowBufferInstant\]
-
-;
 
 Here are all the posibile options that you can use:
 
@@ -398,7 +371,7 @@ Here are all the posibile options that you can use:
 
 You can set this during the creation of a `SnowplowRequest` object:
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 SnowplowRequest emitter = [[SnowplowRequest alloc] initWithURLRequest:url
                                                            httpMethod:@"POST"

@@ -30,7 +30,7 @@ To install Snowplow Tracker with Cocoapods:
 1. Make sure that Cocoapods is installed on your system and correctly configured for your app.
 2. Add the iOS Tracker SDK among the dependencies of your `Podfile`:
 
-```
+```ruby
    pod 'SnowplowTracker', '~> 2.0'
 ```
 
@@ -43,7 +43,7 @@ To install Snowplow Tracker with Carthage:
 1. Make sure that Carthage is installed on your system and correctly configured for your app.
 2. Add the iOS Tracker SDK among the dependencies of your `Cartfile`:
 
-```
+```ruby
    github "snowplow/snowplow-objc-tracker" ~> 2.0
 ```
 
@@ -60,20 +60,20 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 1. In your application delegate `AppDelegate.swift` add `import SnowplowTracker`.
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
 
-```
+```swift
    let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: COLLECTOR_URL, method: .post)
 ```
 
 3. It creates a tracker instance which can be used to track events like this:
 
-```
+```swift
    let event = Structured(category: "Category_example", action: "Action_example")
    tracker.track(event)
 ```
 
 If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
 
-```
+```swift
    Snowplow.defaultTracker().track(event)
 ```
 
@@ -85,7 +85,7 @@ The tracker has a default configuration where some settings are enabled by defau
 
 You can override the default configuration with a fine grained configuration when you create the tracker:
 
-```
+```swift
 let networkConfig = NetworkConfiguration(endpoint: COLLECTOR_URL, method: .post)
 let trackerConfig = TrackerConfiguration()
     .base64Encoding(false)
@@ -119,7 +119,7 @@ The Android Tracker SDK is available on [Maven Central](https://search.maven.org
 
 Add into your `build.gradle` file:
 
-```
+```gradle
 dependencies {
   ...
   // Snowplow Android Tracker
@@ -140,20 +140,20 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 
 1. In your `Application` subclass, set up the SDK as follows:
 
-```
+```java
    TrackerController tracker = Snowplow.createTracker(context, "appTracker", COLLECTOR_URL, HttpMethod.POST);
 ```
 
 2. It creates a tracker instance which can be used to track events like this:
 
-```
+```java
    Event event = new Structured("Category_example", "Action_example");
    tracker.track(event);
 ```
 
 If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
 
-```
+```java
    Snowplow.getDefaultTracker().track(event);
 ```
 
@@ -165,7 +165,7 @@ The tracker has a default configuration where some settings are enabled by defau
 
 You can override the default configuration with a fine grained configuration when you create the tracker:
 
-```
+```java
 NetworkConfiguration networkConfig = new NetworkConfiguration(COLLECTOR_URL, HttpMethod.POST);
 TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .base64Encoding(false)

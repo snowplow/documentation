@@ -29,7 +29,7 @@ For a walkthrough go [here](https://github.com/snowplow/snowplow/wiki/Android-a
 
 To activate client sessionization please enter the following builder arguments to your tracker:
 
-```
+```java
 Tracker tracker = new Tracker.TrackerBuilder( ... )
     .sessionContext(true)     // To use the session context
     .sessionCheckInterval(10) // Checks every 10 seconds (default is 15)
@@ -51,7 +51,7 @@ Once sessionization has been turned on several things will begin to happen:
 
 An important note here is that the tracker does not automatically detect if the application is in the background or not from a library standpoint. You will have to update your applications onPause() and onResume() functions to manually flag this change. The following samples can be copied into an application activity to set the background state of the application for the session checker:
 
-```
+```java
 @Override
 protected void onPause() {
     super.onPause();
@@ -73,7 +73,7 @@ Assuming you have completed the [Android Tracker Setup](https://github.com/snow
 
 Import the Android Tracker's classes into your Android code like so:
 
-```
+```java
 import com.snowplowanalytics.snowplow.tracker.*;
 ```
 
@@ -83,7 +83,7 @@ That's it - you are now ready to initialize a Tracker instance.
 
 To instantiate a tracker in your code (can be global or local to the process being tracked) simply instantiate the `Tracker` interface with one of the following:
 
-```
+```java
 // Create an Emitter
 Emitter e1 = new Emitter
         .EmitterBuilder("com.collector.acme", getContext())
@@ -97,7 +97,7 @@ Tracker t1 = new Tracker
 
 This is the most basic Tracker creation possible. Note that `getContext()` is an Android global function. You can expand on this creation with the following builder options:
 
-```
+```java
 // Create an Emitter
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", getContext())
@@ -216,7 +216,7 @@ Returns this Trackers version as a String.
 
 You can change the platform by calling:
 
-```
+```java
 tracker.setPlatform(DevicePlatforms.Mobile);
 // OR
 tracker.setPlatform(DevicePlatforms.Desktop);
@@ -232,7 +232,7 @@ For a full list of supported platforms, please see the [Snowplow Tracker Protoc
 
 You can change the subject by creating a new `Subject` object and then calling:
 
-```
+```java
 tracker.setSubject(newSubject);
 ```
 
@@ -242,7 +242,7 @@ See [Adding extra data: the Subject class](https://github.com/snowplow/snowplow
 
 You can change the emitter by creating a new `Emitter` object and then calling:
 
-```
+```java
 tracker.setEmitter(newEmitter);
 ```
 
@@ -258,7 +258,7 @@ This function resumes a polling session checker service. This will query the Tra
 
 This function is started if the argument to `.sessionContext` is `True`, and will only ever be able to run if this argument is `True`.
 
-```
+```java
 tracker.resumeSessionChecking();
 ```
 
@@ -266,7 +266,7 @@ tracker.resumeSessionChecking();
 
 This functions stops the session checker from running. Essentially preventing the current session from ever timing out. Please note that if the application is restarted this paused state will not persist and checking will begin again.
 
-```
+```java
 tracker.pauseSessionChecking();
 ```
 
@@ -278,7 +278,7 @@ If event tracking has been switched off this will reinstate the Tracker back to 
 - Events will be sent to the collector.
 - Session checking will begin to occur again (if enabled)
 
-```
+```java
 tracker.resumeEventTracking();
 ```
 
@@ -292,7 +292,7 @@ If event tracking is switched on (it is by default), then the Tracker will have 
 
 Essentially the entire Tracker will halt operation until event tracking is turned back on.
 
-```
+```java
 tracker.pauseEventTracking();
 ```
 
@@ -321,7 +321,7 @@ The Subject class has a set of `set...()` methods to attach extra data relatin
 
 Here are some examples:
 
-```
+```java
 Subject s1 = new Subject.SubjectBuilder().build();
 
 s1.setUserID("Kevin Gleason");
@@ -331,7 +331,7 @@ s1.setScreenResolution(1920, 1080);
 
 After that, you can add your Subject to your Tracker like so:
 
-```
+```java
 Tracker t1 = new Tracker
         .TrackerBuilder(emitter, "myNamespace", "myAppId")
         .subject(s1) // Include your subject here!
@@ -345,7 +345,7 @@ t1.setSubject(s1);
 
 To update the Trackers subject without changing the subject attached already you can use the following:
 
-```
+```java
 t1.getSubject().setUserId("Gleason Kevin"); // Because object references are passed by value in Java
 ```
 
@@ -353,13 +353,13 @@ t1.getSubject().setUserId("Gleason Kevin"); // Because object references are pas
 
 You can set the user ID to any string:
 
-```
+```java
 setUserId(String userId)
 ```
 
 Example:
 
-```
+```java
 subj.setUserId("alexd");
 ```
 
@@ -367,13 +367,13 @@ subj.setUserId("alexd");
 
 If your Java code has access to the device's screen resolution, then you can pass this in to Snowplow too:
 
-```
+```java
 setScreenResolution(int width, int height)
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
-```
+```java
 subj.setScreenResolution(1366, 768);
 ```
 
@@ -381,13 +381,13 @@ subj.setScreenResolution(1366, 768);
 
 If your Java code has access to the viewport dimensions, then you can pass this in to Snowplow too:
 
-```
+```java
 setViewport(int width, int height)
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
-```
+```java
 subj.setViewport(300, 200);
 ```
 
@@ -395,13 +395,13 @@ subj.setViewport(300, 200);
 
 If your Java code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
 
-```
+```java
 setColorDepth(int depth)
 ```
 
 The number should be a positive integer, measured in bits per pixel. Example:
 
-```
+```java
 subj.setColorDepth(32);
 ```
 
@@ -409,13 +409,13 @@ subj.setColorDepth(32);
 
 This method lets you pass a user's timezone in to Snowplow:
 
-```
+```java
 setTimezone(String timezone)
 ```
 
 The timezone should be a string:
 
-```
+```java
 subj.setTimezone("Europe/London");
 ```
 
@@ -423,13 +423,13 @@ subj.setTimezone("Europe/London");
 
 This method lets you pass a user's language in to Snowplow:
 
-```
+```java
 setLanguage(String language)
 ```
 
 The language should be a string:
 
-```
+```java
 subj.setLanguage("en");
 ```
 
@@ -437,13 +437,13 @@ subj.setLanguage("en");
 
 This method lets you pass a user's IP Address in to Snowplow:
 
-```
+```java
 setIpAddress(String ipAddress)
 ```
 
 The IP address should be a string:
 
-```
+```java
 subj.setIpAddress("127.0.0.1");
 ```
 
@@ -451,13 +451,13 @@ subj.setIpAddress("127.0.0.1");
 
 This method lets you pass a useragent in to Snowplow:
 
-```
+```java
 setUseragent(String useragent)
 ```
 
 The useragent should be a string:
 
-```
+```java
 subj.setUseragent("Agent Smith");
 ```
 
@@ -465,13 +465,13 @@ subj.setUseragent("Agent Smith");
 
 This method lets you pass a Network User ID in to Snowplow:
 
-```
+```java
 setNetworkUserId(String networkUserId)
 ```
 
 The network user id should be a string:
 
-```
+```java
 subj.setNetworkUserId("network-id");
 ```
 
@@ -479,13 +479,13 @@ subj.setNetworkUserId("network-id");
 
 This method lets you pass a Domain User ID in to Snowplow:
 
-```
+```java
 setDomainUserId(String domainUserId)
 ```
 
 The domain user id should be a string:
 
-```
+```java
 subj.setDomainUserId("domain-id");
 ```
 
@@ -493,13 +493,13 @@ subj.setDomainUserId("domain-id");
 
 This method lets you set the Advertising ID
 
-```
+```java
 setAdvertisingID(Context context)
 ```
 
 You will need to pass in the application's context as a parameter.
 
-```
+```java
 subj.setAdvertisingID(context);
 ```
 
@@ -507,13 +507,13 @@ subj.setAdvertisingID(context);
 
 This method lets you set the mobile carrier.
 
-```
+```java
 setCarrier(Context context)
 ```
 
 You will need to pass in the application's context as a parameter.
 
-```
+```java
 subj.setCarrier(context);
 ```
 
@@ -521,13 +521,13 @@ subj.setCarrier(context);
 
 This method lets you set the mobile location.
 
-```
+```java
 setLocation(Context context)
 ```
 
 You will need to pass in the application's context as a parameter.
 
-```
+```java
 subj.setLocation(context);
 ```
 
@@ -535,13 +535,13 @@ subj.setLocation(context);
 
 This method lets you set the default screen resolution using the application context.
 
-```
+```java
 setDefaultScreenResolution(Context context)
 ```
 
 You will need to pass in the application's context as a parameter.
 
-```
+```java
 subj.setDefaultScreenResolution(context);
 ```
 
@@ -562,7 +562,7 @@ The `mobile_context` is comprised of the following fields:
 
 To ensure you gather all of this information you will need to create your Subject with the following argument:
 
-```
+```java
 Subject subject = new Subject.SubjectBuilder().context(getContext()).build();
 ```
 
@@ -581,7 +581,7 @@ The `geolocation_context` is comprised of the following fields:
 
 To ensure you gather all of this information you will need to create your Subject with the following argument:
 
-```
+```java
 Subject subject = new Subject.SubjectBuilder().context(getContext()).build();
 ```
 
@@ -589,7 +589,7 @@ Note that `getContext()` is an Android global function.
 
 You will also need to include the following in your `AndroidManifest.xml` file:
 
-```
+```xml
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ```
@@ -606,7 +606,7 @@ The Android Idfa code is a unique identifier for google advertising. You can get
 
 1. Use the utility function available:
 
-```
+```java
 import com.snowplowanalytics.snowplow.tracker.utils.Util;
 
 // Context is your application context object
@@ -619,7 +619,7 @@ Please note that this function will only work when run from a different thread t
 
 If you created a Tracker Subject with your application's context then the ID will have already been populated.
 
-```
+```java
 String androidIdfa = tracker.getSubject().getSubjectMobile().get("androidIdfa");
 ```
 
@@ -646,7 +646,7 @@ All events are tracked with specific methods on the tracker instance, of the for
 
 A `SelfDescribingJson` is used as a wrapper around either a `TrackerPayload`, another `SelfDescribingJson` or a `Map` object. After creating the object you want to wrap, you can create a `SelfDescribingJson` using the following:
 
-```
+```java
 // This is the Map we have created
 Map<String, String> eventData = new HashMap<>();
 eventData.put("Event", "Data")
@@ -668,7 +668,7 @@ You can create a SelfDescribingJson with the following arguments:
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of a Map object. Each tracking method accepts an additional optional contexts parameter:
 
-```
+```java
 t1.track(PageView.builder().( ... ).customContext(List<SelfDescribingJson> context).build());
 ```
 
@@ -676,7 +676,7 @@ The `customContext` argument should consist of a `List` of `SelfDescribingJ
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
-```
+```json
 {
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
   "data": {
@@ -689,7 +689,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 To construct this as a `SelfDescribingJson`:
 
-```
+```java
 // Create a Map of the data you want to include...
 Map<String, String> dataMap = new HashMap<>();
 dataMap.put("movie_name", "solaris");
@@ -712,7 +712,7 @@ In all the trackers, we offer a way to override the timestamp if you want the ev
 
 Here is an example:
 
-```
+```java
 t1.track(PageView.builder().( ... ).timestamp(1423583655000).build());
 ```
 
@@ -730,7 +730,7 @@ Use `track(ScreenView event)` to track a user viewing a screen (or equivalent)
 
 Examples:
 
-```
+```java
 t1.track(ScreenView.builder()
     .name("HUD > Save Game")
     .id("screen23")
@@ -762,7 +762,7 @@ Arguments are:
 
 Examples:
 
-```
+```java
 t1.track(PageView.builder()
     .pageUrl("www.example.com")
     .pageTitle("example")
@@ -808,7 +808,7 @@ The `items` argument is a `List` of individual `EcommerceTransactionItem` 
 
 To instantiate a `EcommerceTransactionItem` in your code, simply use the following constructor signature:
 
-```
+```java
 EcommerceTransactionItem item = EcommerceTransactionItem.builder()
     .itemId("item_id")
     .sku("item_sku")
@@ -837,7 +837,7 @@ These are the fields that can appear as elements in each `EcommerceTransactionI
 
 Example of tracking a transaction containing two items:
 
-```
+```java
 // Create some Transaction Items
 EcommerceTransactionItem item1 = EcommerceTransactionItem.builder()
     .itemId("item_id_1")
@@ -910,7 +910,7 @@ Use `track(Structured event)` to track a custom event happening in your app wh
 
 Examples:
 
-```
+```java
 t1.track(Structured.builder()
     .category("shop")
     .action("add-to-basket")
@@ -953,7 +953,7 @@ The arguments are as follows:
 
 Example event json to track:
 
-```
+```json
 {
   "schema": "iglu:com.acme/save_game/jsonschema/1-0-0",
   "data": {
@@ -965,7 +965,7 @@ Example event json to track:
 
 How to set it up?
 
-```
+```java
 // Create a Map of your event data
 Map<String, Object> eventMap = new HashMap<>();
 eventMap.put("levelName", "Barrels o' Fun")
@@ -1007,7 +1007,7 @@ Use `track(TimingWithCategory event)` to track an event related to a custom ti
 
 Examples:
 
-```
+```java
 t1.track(TimingWithCategory.builder()
     .category("category")
     .variable("variable")
@@ -1030,7 +1030,7 @@ t1.track(TimingWithCategory.builder()
 
 Events are sent using an `Emitter` class. You can initialize a class with a collector endpoint URL with various options to choose how these events should be sent. Here are the `Emitter` interfaces that can be used:
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context) // Required
         .method(HttpMethod.GET) // Optional - Defines how we send the request
@@ -1110,7 +1110,7 @@ The current Emitter flow goes as follows:
 
 A buffer is used to group events together in bulk before sending them. This is especially handy to reduce network usage. By default, the Emitter buffers up to 10 events together before sending them; only available if you are using POST as your request type.
 
-```
+```java
 e1.setBufferOption(BufferOption.Single); // 1
 // OR
 e1.setBufferOption(BufferOption.DefaultGroup); // 10
@@ -1134,7 +1134,7 @@ Snowplow supports receiving events via both GET and POST requests. In a GET requ
 
 You can set the HTTP method in the Emitter constructor:
 
-```
+```java
 Emitter e2 = new Emitter
         .EmitterBuilder("com.collector.acme", Context context)
         .method(HttpMethod.GET)
@@ -1152,7 +1152,7 @@ Here are all the posibile options that you can use:
 
 If an event fails to send because of a network issue, you can choose to handle the failure case with a callback class to react accordingly. The callback class needs to implement the `EmitterCallback` interface in order to do so. Here is a sample bit of code to show how it could work:
 
-```
+```java
 RequestCallback callback = new RequestCallback() {
   @Override
   public void onSuccess(int successCount) {
@@ -1174,7 +1174,7 @@ Emitter emitter = new Emitter
 
 If you want to ensure that there are no events left in the local database for sending simply run the emitter `flush()` function like so:
 
-```
+```java
 tracker.getEmitter().flush();
 ```
 
@@ -1192,7 +1192,7 @@ Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'.
 
 You will need to have imported the following library into your project:
 
-```
+```groovy
 dependencies {
     ...
     // Snowplow Android Tracker Classic
@@ -1202,7 +1202,7 @@ dependencies {
 
 Example class to return an Android Classic Tracker:
 
-```
+```java
 import com.snowplowanalytics.snowplow.tracker.*;
 import android.content.Context;
 
@@ -1239,7 +1239,7 @@ public class TrackerBuilderClassic {
 
 You will need to have imported the following library into your project:
 
-```
+```groovy
 dependencies {
     ...
     // Snowplow Android Tracker Rx
@@ -1249,7 +1249,7 @@ dependencies {
 
 Example class to return an Android RxJava Tracker:
 
-```
+```java
 import com.snowplowanalytics.snowplow.tracker.*;
 import android.content.Context;
 
@@ -1286,7 +1286,7 @@ public class TrackerBuilderRx {
 
 Once you have successfully built your Tracker object you can track events with calls like the following:
 
-```
+```java
 Tracker tracker = getClassicTracker(context);
 tracker.track(ScreenView.builder().name("screenName").id("screenId").build());
 ```
@@ -1299,7 +1299,7 @@ The Tracker Session object can be tuned to timeout in `foreground` and `backg
 
 The current implementation we are using is to override the `onPause()` and `onResume()` functions of an application activity to notify the session when we change states.
 
-```
+```java
 @Override
 protected void onPause() {
     super.onPause();
@@ -1333,7 +1333,7 @@ When you visit the Ngrok Web Interface you will see the tunnel URL that you can 
 
 To actually set this up you will need to follow these steps:
 
-```
+```bash
  host$ git clone https://github.com/snowplow/snowplow-android-tracker.git
  host$ cd snowplow-android-tracker
  host$ vagrant up && vagrant ssh
@@ -1356,7 +1356,7 @@ If you are already using ports `2525` or `4040` your vagrant up will fail. E
 
 However if this is not an option you will need to edit the `Vagrantfile` in the root of the project:
 
-```
+```bash
 config.vm.network "forwarded_port", guest: 4040, host: 4040 ## Change the host to something free
 config.vm.network "forwarded_port", guest: 2525, host: 2525 ## Change the host to something free
 ```
@@ -1367,7 +1367,7 @@ If you have successfully started Ngrok and you have an endpoint but your events 
 
 To resolve:
 
-```
+```bash
 guest$ curl -X DELETE http://localhost:2525/imposters/4545
 guest$ curl -i -X POST -H 'Content-Type: application/json' -d@/vagrant/testing/imposter.json http://localhost:2525/imposters
 ```
@@ -1376,7 +1376,7 @@ This will delete the imposter and create a new one in its place.
 
 If you you cannot get to the Ngrok Web Interface at all the best way to resolve is the following:
 
-```
+```bash
 host$ cd snowplow-android-tracker
 host$ vagrant halt
 host$ vagrant up && vagrant ssh

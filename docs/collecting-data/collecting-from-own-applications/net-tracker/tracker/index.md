@@ -24,7 +24,7 @@ The Tracker object is responsible for co-ordinating the saving and sending of ev
 
 A full Tracker construction should look like the following:
 
-```
+```csharp
 var logger = new ConsoleLogger();
 var endpoint = new SnowplowHttpCollectorEndpoint(emitterUri, method: method, port: port, protocol: protocol, l: logger);
 var storage = new LiteDBStorage("events.db");
@@ -69,6 +69,6 @@ If you need to halt the Tracker from tracking events you can run this function. 
 
 This is the function used for Tracking all events.
 
-```
+```csharp
 Tracker.Instance.Track(IEvent newEvent, Subject eventSubject = null);
 ```

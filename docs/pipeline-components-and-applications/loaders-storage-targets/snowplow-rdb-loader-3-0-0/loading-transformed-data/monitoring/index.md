@@ -37,7 +37,7 @@ The health check is configured by setting the `monitoring.healthCheck` section i
 
 The loader can emit metrics to a StatsD daemon describing every batch it processes. Here is a string representation of the metrics it sends:
 
-```
+```text
 snowplow.rdbloader.count_good:42|c|#tag1:value1
 snowplow.rdbloader.latency_collector_to_load_min:123.4|g|#tag1:value1
 snowplow.rdbloader.latency_collector_to_load_max:234.5|g|#tag1:value1

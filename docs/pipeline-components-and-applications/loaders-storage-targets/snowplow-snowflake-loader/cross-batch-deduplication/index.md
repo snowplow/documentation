@@ -24,7 +24,7 @@ Cross-batch deduplication can be enabled by creating an additional config file w
 
 An example of this auxiliary configuration is as follows:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow.storage/amazon_dynamodb_config/jsonschema/2-0-0",
   "data": {

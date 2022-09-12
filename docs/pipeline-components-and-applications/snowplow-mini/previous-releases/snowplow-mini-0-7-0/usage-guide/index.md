@@ -44,7 +44,7 @@ To add schemas to the Iglu repository bundled with Snowplow Mini, you have to cr
 - Click `Try it out!`
 - You should receive a JSON similar to:
 
-```
+```json
 {
   "read":"bfa90866-ab14-4b92-b6ef-d421fd688b54",
   "write":"6175aa41-d3a7-4e4f-9fb4-3a170f3c6c16"
@@ -58,7 +58,7 @@ To test and send non-standard Snowplow events such as your own custom-contexts a
 1. Get a local copy of your Iglu repository which contains your schemas. This should be modelled after [this folder](https://github.com/snowplow/iglu-central/tree/master/schemas)
 2. Download the latest Igluctl from Github:
 
-```
+```bash
 wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.0/igluctl_0.7.0.zip
 unzip -j igluctl_0.7.0.zip
 ```
@@ -69,7 +69,7 @@ unzip -j igluctl_0.7.0.zip
 - The Super API Key you created in step 2.2
 - The path to your schemas For example to load the `iglu-central` repository into Iglu Server:
 
-```
+```bash
 /path/to/igluctl static push iglu-central/schemas http://<public dns>/iglu-server 980ae3ab-3aba- 4ffe-a3c2-3b2e24e2ffce --public
 ```
 
@@ -182,7 +182,7 @@ Assuming it is a clean and fresh Postgres instance, 2 tables, `apikeys` and `
 
 Let's create `apikeys` table.
 
-```
+```bash
 $ psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d iglu -U snowplow << EOF
 > CREATE TABLE public.apikeys (uid uuid NOT NULL, vendor_prefix character varying(200) NOT NULL, permission character varying(20) DEFAULT 'read'::character varying NOT NULL, createdat timestamp without time zone NOT NULL);
 > ALTER TABLE public.apikeys OWNER TO snowplow;
@@ -196,7 +196,7 @@ Instead of executing multiple psql commands with each of these commands, this is
 
 Let's create `schemas` table similarly.
 
-```
+```bash
 $ psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d iglu -U snowplow << EOF
 > CREATE TABLE public.schemas (schemaid integer NOT NULL, vendor character varying(200) NOT NULL, name character varying(50) NOT NULL, format character varying(50) NOT NULL, version character varying(50) NOT NULL, schema text NOT NULL, createdat timestamp without time zone NOT NULL, updatedat timestamp without time zone NOT NULL, ispublic boolean NOT NULL);
 > ALTER TABLE public.schemas OWNER TO snowplow;
@@ -210,7 +210,7 @@ $ psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d igl
 
 Now that we have our tables, we need to insert a super api key into `apikeys` table.
 
-```
+```bash
 psql -h "mydbinstance.cyb6dd6wajhe.us-east-1.rds.amazonaws.com" -p 5432 -d iglu -U snowplow \
 -c "insert into apikeys(uid, vendor_prefix, permission, createdat) values ('8de87fb0-8b8c-4c3a-b30e-6c425bf9d268', '*', 'super', current_timestamp);"
 ```

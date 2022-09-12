@@ -10,7 +10,7 @@ Starting from the 2.2.0 release we started publishing three different flavours o
 - Pull the `:2.2.0-lzo` tag if you also need LZO output format
 - Pull the `:2.2.0-distroless` tag for an lightweight alternative to `:2.2.0`
 
-```
+```bash
 docker pull snowplow/snowplow-s3-loader:2.2.0
 docker pull snowplow/snowplow-s3-loader:2.2.0-lzo
 docker pull snowplow/snowplow-s3-loader:2.2.0-distroless

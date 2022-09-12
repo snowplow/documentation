@@ -8,7 +8,7 @@ sidebar_position: 40
 
 Predefined contexts are Snowplow authored web contexts and are available with the JavaScript tracker. They are enabled at the tracker initialization step and thus the associated data will be added automatically to any Snowplow event fired on the page.
 
-```
+```javascript
 window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
     appId: "cfe23a"
   },
@@ -29,7 +29,7 @@ The `contexts` argument to any method is always _optional_. If set, it must b
 
 It generally looks like the one below:
 
-```
+```json
 {
     "schema": "iglu:com.snowplowanalytics/ad_click/jsonschema/1-0-0",
     "data": {
@@ -57,7 +57,7 @@ If you want to create your own custom context, you must create a [data structur
 
 Here are two examples of custom context JSONs. One describes a page:
 
-```
+```javascript
 {
     schema: "iglu:com.example_company/page/jsonschema/1-2-1",
     data: {
@@ -69,7 +69,7 @@ Here are two examples of custom context JSONs. One describes a page:
 
 and the other describes a user on that page:
 
-```
+```javascript
 {
     schema: "iglu:com.example_company/user/jsonschema/2-0-0",
     data: {
@@ -82,7 +82,7 @@ Below is a JavaScript tracker example how the above custom contexts could be att
 
 ##### Snowplow JavaScript Tracker v3
 
-```
+```javascript
 // Snowplow JavaScript Tracker v3 API
 window.snowplow(
     'trackPageView',
@@ -105,7 +105,7 @@ window.snowplow(
 
 ##### Snowplow JavaScript Tracker v2
 
-```
+```javascript
 // Snowplow JavaScript Tracker v2 API
 window.snowplow(
     'trackPageView',

@@ -41,7 +41,7 @@ Assuming you have `gcloud` setup and configured for your GCP project, use `gc
 
 A sample usage would be as following.
 
-```
+```bash
 gcloud compute images create \
 imported-sp-mini \
 --source-uri \

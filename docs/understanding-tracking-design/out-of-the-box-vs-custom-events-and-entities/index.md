@@ -19,13 +19,13 @@ Examples of events that we support include:
 
 For events that Snowplow natively supports, there is generally a specific API for tracking that event type in Snowplow. For example, if you want to track a page view using the Javascript tracker, you do so with the following Javascript:
 
-```
+```javascript
 window.snowplow('trackPageView');
 ```
 
 Whereas if you were tracking a screen view in an iOS app using the iOS tracker, you’d do so like this:
 
-```
+```swift
 let event = ScreenView(name: "DemoScreenName", screenId: UUID())
 tracker.track(event)
 ```
@@ -52,7 +52,7 @@ The set of `key: value` properties in self-describing events is represented wi
 
 For example, to track a self-describing event with Javascript tracker (v3), you make use of the `trackSelfDescribingEvent` method with the pattern shown below:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', { 
   event: { 
     schema: '...', 
@@ -63,7 +63,7 @@ window.snowplow('trackSelfDescribingEvent', {
 
 More specific example using JavaScript tracker:
 
-```
+```javascript
 window.snowplow('trackSelfDescribingEvent', {
     event: {
         schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',

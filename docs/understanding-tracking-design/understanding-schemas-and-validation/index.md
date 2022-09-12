@@ -29,7 +29,7 @@ Rather than just leaving your data open to interpretation by the many different 
 
 Let’s take a look at an example JSON schema to talk about its constituent parts:
 
-```
+```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for an example event",

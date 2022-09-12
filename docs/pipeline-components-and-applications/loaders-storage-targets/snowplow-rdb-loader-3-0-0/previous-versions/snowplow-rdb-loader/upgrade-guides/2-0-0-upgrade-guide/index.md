@@ -23,7 +23,7 @@ RDB Loader and RDB Stream Shredder distributed as Docker images, published on Do
 
 Shredding complete message can be sent to SNS topic with following queue configuration:
 
-```
+```json
 "queue": {
   "type": "sns",
   "topicArn": "arn:aws:sns:eu-central-1:123456789:test-sns-topic",

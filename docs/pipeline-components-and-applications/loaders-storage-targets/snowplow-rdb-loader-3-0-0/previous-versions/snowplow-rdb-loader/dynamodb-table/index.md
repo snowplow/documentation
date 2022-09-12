@@ -32,7 +32,7 @@ Log into the AWS console, navigate to the IAM section and go to **Policies**:
 
 Select **Create Your Own Policy** and choose descriptive name. Paste following JSON as Policy Document:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [

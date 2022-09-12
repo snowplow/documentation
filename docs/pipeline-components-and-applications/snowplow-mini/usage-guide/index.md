@@ -75,7 +75,7 @@ Following is a sample execution where `com.acme` is the vendor prefix for which 
 
 should return a read key and a write key.
 
-```
+```json
 {
   "read":"bfa90866-ab14-4b92-b6ef-d421fd688b54",
   "write":"6175aa41-d3a7-4e4f-9fb4-3a170f3c6c16"
@@ -89,7 +89,7 @@ To test and send non-standard Snowplow events such as your own custom-contexts a
 1. Get a local copy of your Iglu repository which contains your schemas. This should be modelled after [this folder](https://github.com/snowplow/iglu-central/tree/master/schemas)
 2. Download the latest Igluctl from Github:
 
-```
+```bash
 $ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip
 $ chmod +x igluctl
 ```
@@ -100,7 +100,7 @@ $ chmod +x igluctl
 - The Super API Key you created in step 2.2
 - The path to your schemas For example to load the `iglu-central` repository into Iglu Server:
 
-```
+```bash
 /path/to/igluctl static push iglu-central/schemas http://[public_dns]/iglu-server 980ae3ab-3aba-4ffe-a3c2-3b2e24e2ffce --public
 ```
 
@@ -171,7 +171,7 @@ Unfold any payload to inspect a bad event in detail.
 
 As of 0.13.0, it is possible to reset Elasticsearch indices, along with the corresponding index patterns in Kibana, through Control Plane API.
 
-```
+```bash
 curl -L \
 -X POST '<mini-address>/control-plane/reset-service' \
 -u '<username>:<password>' \
@@ -185,7 +185,7 @@ Note that resetting deletes not only indices and patterns but also all events st
 
 As of 0.13.0, it is possible to restart services one by one.
 
-```
+```bash
 curl -L \
 -X PUT '<mini-address>/control-plane/restart-service' \
 -u '<username>:<password>' \
@@ -201,13 +201,13 @@ As of 0.13.0, Mini comes with telemetry and it is possible to turn it on or off 
 
 HTTP GET to get current configuration
 
-```
+```bash
 curl -L -X GET '<mini-address>/control-plane/telemetry' -u '<username>:<password>'
 ```
 
 HTTP PUT to set it (use true or false as value of key `disable` to turn it on or off)
 
-```
+```bash
 curl -L -X PUT '<mini-address>/control-plane/telemetry' -u '<username>:<password>' -H 'Content-Type: application/x-www-form-urlencoded' --data-urlencode 'disable=false'
 ```
 
@@ -226,20 +226,26 @@ Let's have examples for both options.
 
 - Download the igluctl 0.7.0 from Github:
 
-`` `$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl  
-$ chmod +x igluctl` ``
+```bash
+$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl
+$ chmod +x igluctl
+```
 
 Following is a sample execution where `path-to-schema(s)` is the path to custom schema(s) , `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is the super API key created in step 2.2
 
-`$ ./igluctl static push path-to-schema(s) mini-address/iglu-server 53b4c441-84f7-467e-af4c-074ced53eb20`
+```bash
+$ ./igluctl static push path-to-schema(s) mini-address/iglu-server 53b4c441-84f7-467e-af4c-074ced53eb20
+```
 
 - Let's also see how one can use `cURL` to interact with the Iglu Server
 
-`$ curl mini-address/iglu-server/api/schemas -X POST -H "apikey: YOUR_APIKEY" -d '{"json": YOUR_JSON}'`
+```bash
+$ curl mini-address/iglu-server/api/schemas -X POST -H "apikey: YOUR_APIKEY" -d '{"json": YOUR_JSON}'
+```
 
 will produce a response like this one, if no errors are encountered:
 
-```
+```json
 {
   "message": "Schema created",
   "updated": false,

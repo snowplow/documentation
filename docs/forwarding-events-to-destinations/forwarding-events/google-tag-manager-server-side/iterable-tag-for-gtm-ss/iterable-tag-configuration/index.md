@@ -62,11 +62,65 @@ Indicates if a Snowplow Self Describing event should be in the `dataFields` ob
 
 This section describes how the Iterable tag will use the context Entities attached to a Snowplow Event.
 
+![snowplow event context rules](images/context_rules.png)
+
 #### Extract entity from Array if single element
 
 Snowplow Entities are always in Arrays, as multiple of the same entity can be attached to an event. This option will pick the single element from the array if the array only contains a single element.
 
-#### Include all Entities in event\_properties
+#### Include Snowplow Entities in event properties
+
+Using this drop-down menu you can specify whether you want to Include `All` or `None` of the Snowplow context entities in Iterable's within the Event Data fields of the Iterable event.
+
+
+If disabling this, individual entities can be selected for inclusion. These entities can also be remapped to have different names in the Iterable event, and can be included in either event data or user data. The entity can be specified in two different formats:
+
+- Major version match: `x-sp-contexts_com_snowplowanalytics_snowplow_webPage_1` where `com_snowplowanalytics_snowplow` is the event vendor, `webPage` is the schema name and `1` is the Major version number. `x-sp-` can also be omitted from this if desired
+- Full schema match: `iglu:com.snowplowanalytics.snowplow/webPage/jsonschema/1-0-0`
+
+#### Snowplow Entities to Add/Edit mapping
+
+Using this table you can specify in each row a specific mapping for a particular context entity. In the columns provided you can specify:
+
+- The Entity name to add/edit-mapping (required).¹
+- The key you could like to map it to (optional: leaving the mapped key blank keeps the same name).
+- Whether to add in event data fields or user data fields of the Iterable event (default value is `event data`).
+- Whether you wish the mapping to apply to all versions of the entity (default value is `False`).¹
+
+#### Snowplow Entities to Exclude
+
+Using this table (which is only available if `Include Snowplow Entities in event properties` is set to `All`), you can specify the context entities you want to exclude from the Iterable event. In its columns you can specify:
+
+- The Entity name (required).¹
+- Whether the exclusion applies to all versions of the entity (default value is `False`).¹
+
+:::note
+
+¹ How to specify the **Entity Name** and its relation to **Apply to all versions** option:
+
+Entity Names can be specified in 3 ways:
+
+1\. By their Iglu Schema tracking URI (e.g. `iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2`)
+
+2\. By their enriched name (e.g. `contexts_com_snowplowanalytics_snowplow_client_session_1`)
+
+3\. By their key in the client event object, which is the GTM-SS Snowplow prefix (`x-sp-`) followed by the enriched entity name (e.g. `x-sp-contexts_com_snowplowanalytics_snowplow_client_session_1`)
+
+Depending on the value set for the **Apply to all versions** column, the major version number from the 2nd and 3rd naming option above may be excluded. More specifically, this is only permitted if **Apply to all versions** is set to `True`.
+
+:::
+
+<details>
+
+<summary><i>pre-v0.2.0</i></summary>
+
+#### Snowplow Event Context Rules
+
+##### Extract entity from Array if single element
+
+Snowplow Entities are always in Arrays, as multiple of the same entity can be attached to an event. This option will pick the single element from the array if the array only contains a single element.
+
+##### Include all Entities in event\_properties
 
 Leaving this option enabled ensures that all Entities on an event will be included within the Event Data of the Iterable event.
 
@@ -75,9 +129,11 @@ If disabling this, individual entities can be selected for inclusion. These enti
 - Major version match: `x-sp-contexts_com_snowplowanalytics_snowplow_webPage_1` where `com_snowplowanalytics_snowplow` is the event vendor, `webPage` is the schema name and `1` is the Major version number. `x-sp-` can also be omitted from this if desired
 - Full schema match: `iglu:com.snowplowanalytics.snowplow/webPage/jsonschema/1-0-0`
 
-#### Include unmapped entities in event\_properties
+##### Include unmapped entities in event\_properties
 
 If remapping or moving some entities to User Data with the above customization, you may wish to ensure all unmapped entities are still included in the event. Enabling this option will ensure that all entities are mapped into the Iterable event.
+
+</details>
 
 ### Additional Event Mapping Options
 
@@ -108,3 +164,35 @@ Specify the Property Key from the Client Event, and then the key you could like 
 ### Merge user dataFields
 
 Enabling this option will merge the user dataFields when updating an Iterable user, instead of replacing with the new user data, which is the default behavior.
+
+## Logs Settings
+
+_(Available since v0.2.0)_
+
+Through the Logs Settings you can control the logging behaviour of the Iterable Tag. The available options are:
+
+- `Do not log`: This option allows you to completely disable logging. No logs will be generated by the Tag.
+- `Log to console during debug and preview`: This option enables logging only in debug and preview containers. This is the **default** option.
+- `Always`: This option enables logging regardless of container mode.
+
+_Note_: Please take into consideration that the logs generated may contain event data.
+
+The logs generated by the Iterable GTM-SS Tag are standardized JSON strings.
+The standard log properties are:
+
+```txt
+{
+    "Name": "Iterable",  // the name of the tag
+    "Type": "Message",   // the type of log (one of "Message", "Request", "Response")
+    "TraceId": "xxx",    // the "trace-id" header if exists
+    "EventName" "xxx"    // the name of the event the tag fired at
+}
+```
+
+Depending on the type of log, additional properties are logged:
+
+| Type of log | Additional information                                         |
+|-------------|----------------------------------------------------------------|
+| Message     | “Message”                                                      |
+| Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
+| Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

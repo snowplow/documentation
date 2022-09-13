@@ -168,10 +168,10 @@ The standard log properties are:
 
 ```json
 {
-    "Name": "Amplitude HTTP API V2"  // the name of the tag
-    "Type": "Message"   // the type of log (one of "Message", "Request", "Response")
-    "TraceId": "xxx"    // the "trace-id" header if exists
-    "EventName" "xxx"   // the name of the event the tag fired at
+    "Name": "Amplitude HTTP API V2", // the name of the tag
+    "Type": "Message",   // the type of log (one of "Message", "Request", "Response")
+    "TraceId": "xxx",    // the "trace-id" header if exists
+    "EventName": "xxx"   // the name of the event the tag fired at
 }
 ```
 

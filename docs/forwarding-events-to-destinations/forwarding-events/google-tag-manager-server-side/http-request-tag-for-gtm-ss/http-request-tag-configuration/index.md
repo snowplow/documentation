@@ -80,7 +80,7 @@ If enabled, an additional text field optionally allows you to specify a key unde
 
 As an example, this section configured as:
 
-![](images/snowplow_atomic_nest.png)
+![snowplow atomic properties rules](images/snowplow_atomic_nest.png)
 
 will result in the following JSON structure:
 
@@ -106,7 +106,7 @@ Similarly to the above section, you can also specify a key under which the self-
 
 As an example, this section configured as:
 
-![](images/snowplow_self_desc_no_nest.png)
+![snowplow self-describing event rules](images/snowplow_self_desc_no_nest.png)
 
 will result in the following JSON structure:
 
@@ -125,11 +125,68 @@ will result in the following JSON structure:
 
 This section describes how the HTTP Request tag will use the context Entities attached to a Snowplow Event.
 
+![snowplow event context rules](images/context_rules.png)
+
 #### Extract entity from Array if single element
 
 Snowplow Entities are always in Arrays, as multiple of the same entity can be attached to an event. This option will pick the single element from the array if the array only contains a single element.
 
-#### Include all Entities in request body
+#### Include Snowplow Entities in request body
+
+Using this drop-down menu you can specify whether you want to Include `All` (default) or `None` of the Snowplow context entities in HTTP Request's body.
+
+#### Nest all unmapped Entities under key
+
+This option is available only if the previous option ([Include Snowplow Entities in request body](#include-snowplow-entities-in-request-body)) is set to `All`.
+
+It applies **only** to unmapped entities, i.e. all included entities whose mapping is not edited in the following ([Snowplow Entities to Add/Edit mapping](#snowplow-entities-to-addedit-mapping)) table.
+
+With this setting you can specify a key under which the Snowplow event's unmapped entities will be nested. Alternatively, leaving it blank adds the unmapped entities in the request body without nesting. You can also use dot notation in this value.
+
+#### Snowplow Entities to Add/Edit mapping
+
+Using this table you can specify in each row a specific mapping for a particular context entity. In the columns provided you can specify:
+
+- **Entity Name**: The Entity name to add/edit-mapping (required).¹
+- **Destination Mapped Name**: The key you could like to map it to in the request body (optional: leaving the mapped key blank keeps the same name). You can use dot notation here as well to signify further nesting. This value is independent of the [nesting of unmapped entities](#nest-all-unmapped-entities-under-key) setting above.
+- **Apply to all versions**: Whether you wish the mapping to apply to all versions of the entity (default value is `False`).¹
+
+#### Snowplow Entities to Exclude
+
+Using this table (which is only available if [Include Snowplow Entities in request body](#include-snowplow-entities-in-request-body) is set to `All`), you can specify the context entities you want to exclude from the HTTP Request body. In its columns you can specify:
+
+- **Entity Name**: The Entity name (required).¹
+- **Apply to all versions**: Whether the exclusion applies to all versions of the entity (default value is `False`).¹
+
+:::note
+
+¹ How to specify the **Entity Name** and its relation to **Apply to all versions** option:
+
+Entity Names can be specified in 3 ways:
+
+1. By their Iglu Schema tracking URI (e.g. `iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2`)
+
+2. By their enriched name (e.g. `contexts_com_snowplowanalytics_snowplow_client_session_1`)
+
+3. By their key in the client event object, which is the GTM-SS Snowplow prefix (`x-sp-`) followed by the enriched entity name (e.g. `x-sp-contexts_com_snowplowanalytics_snowplow_client_session_1`)
+
+Depending on the value set for the **Apply to all versions** column, the major version number from the 2nd and 3rd naming option above may be excluded. More specifically, this is only permitted if **Apply to all versions** is set to `True`.
+
+:::
+
+<details>
+
+<summary><i>pre-v0.2.0</i></summary>
+
+#### Snowplow Event Context Rules
+
+This section describes how the HTTP Request tag will use the context Entities attached to a Snowplow Event.
+
+##### Extract entity from Array if single element
+
+Snowplow Entities are always in Arrays, as multiple of the same entity can be attached to an event. This option will pick the single element from the array if the array only contains a single element.
+
+##### Include all Entities in request body
 
 Leaving this option enabled (default) ensures that all Entities on an event will be included within the request data.
 
@@ -140,11 +197,13 @@ Disabling this option, reveals the options so that individual entities can be se
 - Major version match: `x-sp-contexts_com_snowplowanalytics_snowplow_web_page_1` where `com_snowplowanalytics_snowplow` is the event vendor, `web_page` is the schema name and `1` is the Major version number. `x-sp-` can also be omitted from this if desired
 - Full schema match: `iglu:com.snowplowanalytics.snowplow/webPage/jsonschema/1-0-0`
 
-#### Include unmapped entities in request body
+##### Include unmapped entities in request body
 
 This option enables you to ensure that all unmapped entities (i.e. any entites not found in the "Snowplow Entity Mapping" rules above) will be included in the request body.
 
 Again, optionally, you can also specify a key under which the Snowplow event's unmapped entities will be nested. Alternatively, leaving it blank adds the unmapped entities in the request body without nesting.
+
+</details>
 
 ## Additional Event Mapping Options
 
@@ -182,3 +241,35 @@ Finally, this section offers two additional configuration options:
 
 - Changing the HTTP request method from POST (default) to PUT.
 - Changing the default request timeout (5000 seconds)
+
+## Logs Settings
+
+_(Available since v0.2.0)_
+
+Through the Logs Settings you can control the logging behaviour of the HTTP Request Tag. The available options are:
+
+- `Do not log`: This option allows you to completely disable logging. No logs will be generated by the Tag.
+- `Log to console during debug and preview`: This option enables logging only in debug and preview containers. This is the **default** option.
+- `Always`: This option enables logging regardless of container mode.
+
+_Note_: Please take into consideration that the logs generated may contain event data.
+
+The logs generated by the HTTP Request GTM-SS Tag are standardized JSON strings.
+The standard log properties are:
+
+```json
+{
+    "Name": "HTTP Request", // the name of the tag
+    "Type": "Message",      // the type of log (one of "Message", "Request", "Response")
+    "TraceId": "xxx",       // the "trace-id" header if exists
+    "EventName": "xxx"      // the name of the event the tag fired at
+}
+```
+
+Depending on the type of log, additional properties are logged:
+
+| Type of log | Additional information                                         |
+|-------------|----------------------------------------------------------------|
+| Message     | “Message”                                                      |
+| Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
+| Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

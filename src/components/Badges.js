@@ -110,4 +110,14 @@ export default function Badges(props) {
       </a>
     )
   }
+  if (props.badgeType === 'Snowplow Tracker JavaScript Release') {
+    return (
+      <a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">
+        <img
+          src="https://img.shields.io/github/v/release/snowplow/snowplow-javascript-tracker?include_prereleases&sort=semver&style=flat"
+          alt="JavaScript version"
+        ></img>
+      </a>
+    )
+  }
 }

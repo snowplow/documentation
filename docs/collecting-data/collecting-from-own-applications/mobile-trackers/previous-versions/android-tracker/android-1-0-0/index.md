@@ -14,7 +14,7 @@ If you use Gradle, here's how to add the tracker to your project.
 
 Add into your `build.gradle` file:
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -24,7 +24,7 @@ dependencies {
 
 This will install version 1.0.0 of the Android tracker. If you would like to ensure that all bug fixes and patches for version 1.0.0 are installed, simply change 1.0.0 into 1.0.+.
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -36,7 +36,7 @@ dependencies {
 
 A complete Gradle file may look like this:
 
-```groovy
+```gradle
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'android.arch.lifecycle:extensions:$project.archLifecycleVersion'

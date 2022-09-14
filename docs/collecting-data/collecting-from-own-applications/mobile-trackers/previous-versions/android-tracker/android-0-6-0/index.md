@@ -1241,7 +1241,7 @@ Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'.
 
 You will need to have imported the following library into your project:
 
-```groovy
+```gradle
 dependencies {
     ...
     compile 'com.snowplowanalytics:snowplow-android-tracker:0.6.0@aar'

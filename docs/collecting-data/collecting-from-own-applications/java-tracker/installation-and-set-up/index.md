@@ -23,7 +23,7 @@ Add into your project’s `pom.xml`:
 From version 0.10.1 onwards, we provide out-of-the-box support for sending events via OkHttp or Apache HTTP. The appropriate dependencies must be specified. The default tracker configuration uses OkHttp.  
 
 Add this into your project’s `build.gradle` for the default installation with OkHttp support:
-```groovy
+```gradle
 dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:1.0.0'
     implementation ('com.snowplowanalytics:snowplow-java-tracker:1.0.0') {
@@ -34,7 +34,7 @@ dependencies {
 }
 ```
 Adding Apache HTTP support instead:
-```groovy
+```gradle
 dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:1.0.0'
     implementation ('com.snowplowanalytics:snowplow-java-tracker:1.0.0') {
@@ -46,7 +46,7 @@ dependencies {
 ```
 
 If you are using your own `HttpClientAdapter` class:
-```groovy
+```gradle
 dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:1.0.0'
 }

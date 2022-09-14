@@ -18,7 +18,7 @@ If you use Gradle, here’s how to add the tracker to your project.
 
 Add into your `build.gradle` file:
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -28,7 +28,7 @@ dependencies {
 
 This will install version 0.8.0 of the Android tracker. If you would like to ensure that all bug fixes and patches for version 0.8.0 are installed, simply change 0.8.0 into 0.8.+.
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker

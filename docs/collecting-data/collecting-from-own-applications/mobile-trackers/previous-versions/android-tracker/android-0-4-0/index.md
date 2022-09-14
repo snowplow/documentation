@@ -814,7 +814,7 @@ The following example classes are using the bare minimum of settings for buildin
 
 You will need to have imported the following library into your project:
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker Classic
@@ -861,7 +861,7 @@ public class TrackerBuilderClassic {
 
 You will need to have imported the following library into your project:
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker Rx

@@ -18,7 +18,7 @@ If you use Gradle, here's how to add the tracker to your project.
 
 Add into your `build.gradle` file:
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -28,7 +28,7 @@ dependencies {
 
 This will install version 1.4.0 of the Android tracker. If you would like to ensure that all bug fixes and patches for version 1.4.0 are installed, simply change 1.4.0 into 1.4.+.
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -887,7 +887,7 @@ For privacy purposes the user can reset the identifier at any moment. In that ca
 
 If you want to track the AAID, you need to add the Google Mobile Ads library to your app. If it isn't included, the tracker will not send the AAID with the events. The Google Mobile Ads can be imported in the `dependencies` section of the `build.gradle` adding:
 
-```groovy
+```gradle
 dependencies {
     ...
     implementation 'com.google.android.gms:play-services-ads:19.0.0'

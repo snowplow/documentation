@@ -48,7 +48,7 @@ luarocks install snowplowtracker CURL_DIR=/usr/local/Cellar/curl/7.82.0/
 
 Or, add the Snowplow Tracker to the dependencies section of your rockspec (Note: you may still have to pass `CURL_DIR` when installing):
 
-```groovy
+```gradle
 dependencies = {
   ...
   "SnowplowTracker"

@@ -18,7 +18,7 @@ If you use Gradle, here's how to add the tracker to your project.
 
 Start by adding `jcenter()` to your `build.gradle` file:
 
-```groovy
+```gradle
 repositories {
     ...
     jcenter()
@@ -27,7 +27,7 @@ repositories {
 
 Then add into the same file:
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -37,7 +37,7 @@ dependencies {
 
 This will install version 1.2.0 of the Android tracker. If you would like to ensure that all bug fixes and patches for version 1.2.0 are installed, simply change 1.2.0 into 1.2.+.
 
-```groovy
+```gradle
 dependencies {
     ...
     // Snowplow Android Tracker
@@ -49,7 +49,7 @@ dependencies {
 
 A complete Gradle file may look like this:
 
-```groovy
+```gradle
 repositories {
     maven {
         url "http://maven.snplow.com/releases"

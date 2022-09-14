@@ -12,7 +12,7 @@ For more information on the architecture of the Iglu server, please read [the t
 
 A Terraform module is available which deploys an Iglu Server on AWS EC2 without the need for this manual setup.
 
-## 1\. Run the Iglu server
+## 1. Run the Iglu server
 
 Iglu Server is [published on Docker Hub](https://hub.docker.com/repository/docker/snowplow/iglu-server).
 
@@ -53,7 +53,7 @@ See [the configuration reference](/docs/pipeline-components-and-applications/igl
 
 We also provide a [docker-compose.yml](https://github.com/snowplow-incubator/iglu-server/blob/master/docker/docker-compose.yml) to help you get started.
 
-## 2\. Initialize the database
+## 2. Initialize the database
 
 With a fresh install you need to manually create the database:
 
@@ -69,7 +69,7 @@ docker run --rm \
   snowplow/iglu-server:0.8.4 setup --config /iglu/config.hocon
 ```
 
-## 3\. Use the API key generation service
+## 3. Use the API key generation service
 
 The super API key you put in the configuration file is able to generate further API keys for your clients through the API key generation service.
 

@@ -18,7 +18,7 @@ Some of the databases MaxMind maintains require a commercial subscription with M
 
 ## Setting up this Enrichment
 
-### 1\. Decide which databases you’d like to use and download them
+### 1. Decide which databases you’d like to use and download them
 
 MaxMind offers five different databases with information on different IP addresses which can be used with Snowplow, one free:
 
@@ -33,7 +33,7 @@ And four paid for databases:
 
 You need to decide which of the different Maxmind databases listed above you wish to enrich your data with, download the .mmdb files and then setup the enrichment configuration accordingly.
 
-### 2\. Upload the databases to a location on your cloud
+### 2. Upload the databases to a location on your cloud
 
 Once downloaded, take the .mmdb file(s) and upload them to a location on your cloud:
 
@@ -44,7 +44,7 @@ When the database(s) need updating in future you can simply download the latest 
 
 MaxMind also offer a method to [download and update their databases programmatically](https://dev.maxmind.com/geoip/geoipupdate/).
 
-### 3\. Configure the enrichment for your pipeline
+### 3. Configure the enrichment for your pipeline
 
 Snowplow BDP customers can enable the IP Lookup enrichment for your pipeline [in the Snowplow console.](/docs/enriching-your-data/configuring-enrichments/index.md) Open Source will need to upload the enrichment json for use in their Snowplow pipeline.
 

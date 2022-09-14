@@ -165,7 +165,7 @@ Architecture of an individual mobile module
 
 Custom modules can fit into the incremental structure by consuming the same inputs, and running before the `99-{module}-complete` playbook runs. Custom modules may also consume and intermediary tables of the standard module, which will not be dropped until the `99-{module}-complete` playbook runs.
 
-Any custom SQL that depends on a `_staged` table as its input should run before the complete step of the module which handles that same input. For example, custom logic which takes mobile\_events\_staged as an input should run before the `99-sessions-complete` playbook which truncates mobile\_events\_staged.
+Any custom SQL that depends on a `_staged` table as its input should run before the complete step of the module which handles that same input. For example, custom logic which takes mobile_events_staged as an input should run before the `99-sessions-complete` playbook which truncates mobile_events_staged.
 
 An example custom module has been included in `mobile/v1/redshift/sql-runner/sql/custom`. In this module we:
 

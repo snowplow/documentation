@@ -6,7 +6,7 @@ sidebar_position: 400
 
 This page describes the Schema resolution algorithm which is standard for all Iglu clients. Currently only [Iglu Scala client](https://github.com/snowplow/iglu-scala-client) fully follow this algorithm, while other clients may miss some parts, but we're working on making their behaviour consistent.
 
-## [](https://github.com/snowplow/iglu/wiki/Schema-resolution#1-prerequisites)1\. Prerequisites
+## [](https://github.com/snowplow/iglu/wiki/Schema-resolution#1-prerequisites)1. Prerequisites
 
 Before going further it is important to understand basic Iglu client configuration and essential concepts like Resolver, Registry (or Repository), Schema. Here is a quick overview of these concepts, if you're familiar with them you may want to skip this section.
 
@@ -36,7 +36,7 @@ Since version 0.5.0, Iglu Scala Client supports `cacheTtl` property. It is esp
 
 `cacheTtl` is available since [`1-0-2` version](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-2) of resolver config.
 
-## [](https://github.com/snowplow/iglu/wiki/Schema-resolution#2-lookup-algorithm)2\. Lookup algorithm
+## [](https://github.com/snowplow/iglu/wiki/Schema-resolution#2-lookup-algorithm)2. Lookup algorithm
 
 Overall, Schema Resolution algorithm can be described by following flowchart:
 
@@ -48,7 +48,7 @@ Few important things to note:
 - If registry responded with error other than "NotFound", for example "TimeoutError", "NetworkError", "ServerFault" etc - "needToRetry" value will be cached and Resolver will give this registry 3 chances more. After three failed lookups - "missing" value will be cached
 - These "missing" and "needToRetry" values in cache are per-registry, not per-schema, which means if `registryA` responded "NotFound" for Schema `iglu:com.acme/event/jsonschema/1-0-0` and `registryB` responded with TimeoutError - resolver will immediately abandon `registryA` and keep try to query `registryB` for 3 more times.
 
-## [](https://github.com/snowplow/iglu/wiki/Schema-resolution#3-registry-priority)3\. Registry priority
+## [](https://github.com/snowplow/iglu/wiki/Schema-resolution#3-registry-priority)3. Registry priority
 
 For each particular Schema lookup, registries will be prioritized. In other words they will be sorted according following input parameters (ordered by their significance):
 

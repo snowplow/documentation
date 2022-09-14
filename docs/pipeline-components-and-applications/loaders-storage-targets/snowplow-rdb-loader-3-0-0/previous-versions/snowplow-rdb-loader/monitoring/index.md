@@ -116,7 +116,7 @@ Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [t
 
 ## Snowplow Tracking
 
-The loader can emit a Snowplow event to a collector when the application crashes with an unexpected error. The event is a [load\_failed event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.batch/load_failed/jsonschema/1-0-0).
+The loader can emit a Snowplow event to a collector when the application crashes with an unexpected error. The event is a [load_failed event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.batch/load_failed/jsonschema/1-0-0).
 
 Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 

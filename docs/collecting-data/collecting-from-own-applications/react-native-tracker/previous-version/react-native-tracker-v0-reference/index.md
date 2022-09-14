@@ -386,7 +386,7 @@ To follow a similar model of aggregation to that of a web model, one can:
 
 - aggregate to screen view level using the screen view ID from the screen view context
 - aggregate to the session level the session id from the client session context
-- aggregate to a user level the user\_id from the client session context.
+- aggregate to a user level the user_id from the client session context.
 
 The screen view and session context is attached to all events and so these can be used to attribute events to their screen views and sessions.
 

@@ -4,11 +4,11 @@ date: "2020-11-03"
 sidebar_position: 400
 ---
 
-## 1\. Overview
+## 1. Overview
 
 The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-python-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your Python event processing, data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), and other Python-compatible data processing frameworks.
 
-## 2\. Compatibility
+## 2. Compatibility
 
 Snowplow Python Analytics SDK was tested with Python of versions: 2.7, 3.3, 3.4, 3.5.
 
@@ -20,7 +20,7 @@ There are only one external dependency currently:
 
 These dependencies can be installed from the package manager of the host system or through PyPi.
 
-## 3\. Setup
+## 3. Setup
 
 ### [](https://github.com/snowplow/snowplow/wiki/Python-Analytics-SDK-setup#31-pypi)3.1 PyPI
 
@@ -50,7 +50,7 @@ If you are still using easy_install:
 $ easy_install -U snowplow_analytics_sdk
 ```
 
-## 4\. Run Manifests
+## 4. Run Manifests
 
 ### 4.1 Overview
 
@@ -87,7 +87,7 @@ for run_id in list_runids(s3, enriched_events_archive):
         pass
 ```
 
-In above example, we create two AWS service clients for S3 (to list job runs) and for DynamoDB (to access manifests). These cliens are provided via \[boto3\]\[boto3\] Python AWS SDK and can be initialized with static credentials or with system-provided credentials.
+In above example, we create two AWS service clients for S3 (to list job runs) and for DynamoDB (to access manifests). These cliens are provided via [boto3][boto3] Python AWS SDK and can be initialized with static credentials or with system-provided credentials.
 
 Then we list all run ids in particular S3 path and process (by user-provided `process` function) only those that were not processed already. Note that `run_id` is simple string with S3 key of particular job run.
 

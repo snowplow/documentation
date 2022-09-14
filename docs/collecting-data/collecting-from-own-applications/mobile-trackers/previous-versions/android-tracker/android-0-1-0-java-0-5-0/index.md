@@ -4,7 +4,7 @@ date: "2020-03-02"
 sidebar_position: 1000
 ---
 
-## 1\. Overview
+## 1. Overview
 
 The [Snowplow Java Tracker](https://github.com/snowplow/snowplow-java-tracker) allows you to track Snowplow events from your Java-based desktop and server apps, servlets and games. It supports JDK6+.
 
@@ -80,7 +80,7 @@ The `appId` argument lets you set the application ID to any string.
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` argument.
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#3-adding-extra-data-the-subject-class)3\. Adding extra data: the Subject class
+## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#3-adding-extra-data-the-subject-class)3. Adding extra data: the Subject class
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
 
@@ -205,7 +205,7 @@ The language should be a string:
 s.setLanguage('en')
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#4-tracking-specific-events)4\. Tracking specific events
+## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#4-tracking-specific-events)4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
 
@@ -328,7 +328,7 @@ Arguments:
 | `context` | Custom context for the event | No | Map |
 | `timestamp` | Optional timestamp for the event | No | Long |
 
-The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#441-ecommerce-transactionitem-with-trackecommercetransaction)4.4.1 Ecommerce TransactionItem with `trackEcommerceTransaction()`
 
@@ -416,7 +416,7 @@ t1.trackUnstructuredEvent(String eventVendor, String eventName, Map<String, Obje
 
 For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#5-sending-event-emitter)5\. Sending event: `Emitter`
+## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#5-sending-event-emitter)5. Sending event: `Emitter`
 
 Events are sent using an `Emitter` class. You can initialize an class with a collector endpoint URL with various options to choose how these events should be sent. Here are the Emitter interfaces that can be used:
 
@@ -546,7 +546,7 @@ Emitter emitter = new Emitter(testURL, HttpMethod.GET, new RequestCallback() {
 
 In the example, we we can see an in-line example of handling the case. If events are all successfully sent, the `onSuccess` method returns the number of successful events sent. If there were any failures, the `onFailure` method returns the successful events sent (if any) and a _list of events_ that failed to be sent (i.e. the HTTP state code did not return 200).
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#6-payload)6\. Payload
+## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#6-payload)6. Payload
 
 A Payload interface is used for implementing a [TrackerPayload](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#tracker-payload) and [SchemaPayload](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#schema-payload), but accordingly, can be used to implement your own Payload class if you choose.
 
@@ -573,13 +573,13 @@ schemaPayload.setData(trackerPayload);
 schemaPayload.setSchema("iglu:com.snowplowanalytics.snowplow/example/jsonschema/1-0-0");
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#7-logging)7\. Logging
+## [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#7-logging)7. Logging
 
 Logging in the Tracker is done using SLF4J. Majority of the logging set as `DEBUG` so will not overly populate your own logging.
 
 ### [](https://github.com/snowplow/snowplow/wiki/Android-v0.1-and-Java-Tracker-v0.5#android-only-2)Android Only
 
-Logging in the Android Tracker uses Android's [native logger](https://developer.android.com/reference/android/util/Log.html) set as `DEBUG` or `ERROR` with the \[`tag`\]([https://developer.android.com/reference/android/util/Log.html#d(java.lang.String](https://developer.android.com/reference/android/util/Log.html#d(java.lang.String), java.lang.String)) as the class name.
+Logging in the Android Tracker uses Android's [native logger](https://developer.android.com/reference/android/util/Log.html) set as `DEBUG` or `ERROR` with the [`tag`]([https://developer.android.com/reference/android/util/Log.html#d(java.lang.String](https://developer.android.com/reference/android/util/Log.html#d(java.lang.String), java.lang.String)) as the class name.
 
 For example:
 

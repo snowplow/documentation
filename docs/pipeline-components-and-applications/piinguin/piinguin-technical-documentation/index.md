@@ -12,7 +12,7 @@ The Piinguin project consists of three parts. Those are the:
 
 ### Protocol
 
-Piinguin is based on GRPC \[grpc\] which is a protobuf based RPC framework. The protocol in the project specifies the interface between the client and server. There is a `.proto` file which describes the interactions between the client and the server for reading, writing and deleting records. That file is used with the excellent [scalapb](https://github.com/thesamet/sbt-protoc) scala compiler plug-in to generate `Java` code stubs for both the server and the client. These can then be used to implement any behavior based on that interface.
+Piinguin is based on GRPC [grpc] which is a protobuf based RPC framework. The protocol in the project specifies the interface between the client and server. There is a `.proto` file which describes the interactions between the client and the server for reading, writing and deleting records. That file is used with the excellent [scalapb](https://github.com/thesamet/sbt-protoc) scala compiler plug-in to generate `Java` code stubs for both the server and the client. These can then be used to implement any behavior based on that interface.
 
 ### Server
 

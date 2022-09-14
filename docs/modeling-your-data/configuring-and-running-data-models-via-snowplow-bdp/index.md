@@ -53,7 +53,7 @@ Behind the scenes, what happens is:
 
 Read below for more details on the steps to configure and run your data models with Snowplow BDP.
 
-### 1\. Writing playbooks for your SQL scripts
+### 1. Writing playbooks for your SQL scripts
 
 As an example, one of the playbooks for [the Snowplow web data model](https://github.com/snowplow/data-models/tree/master/web/v1) against Redshift:
 
@@ -115,7 +115,7 @@ As an example, one of the playbooks for [the Snowplow web data model](https://gi
 
 This way, a playbook organizes on a lower level the SQL scripts to run in linear fashion or in parallel, defines the variables and provides the credentials to run the queries against your storage target.
 
-### 2\. The data modeling configuration
+### 2. The data modeling configuration
 
 #### 2.1 Configuring data models via the data modeling UI (new)
 
@@ -219,14 +219,14 @@ Warning
 
 Do not change the lock type to "soft" for any data models that either unload or delete atomic data as this may cause data loss!
 
-- `"owners"`: \[This field is required, if the `"lockType"` is `"soft"`.\]
+- `"owners"`: [This field is required, if the `"lockType"` is `"soft"`.]
 
 The `"owners"` field allows Snowplow BDP customers to specify one or more owners (`"name"` and `"email"`) when deploying a data model. The model owners will get email notifications as soon as there is a data modeling failure. Along with the `"lockType"`, these options give you more control over your data models, since they enable you to know immediately when a data model fails, deploy fixes faster and resolve any issues directly.
 
 ##### Additional optional fields
 
-- `"dagName"`: \[Default value: `"datamodeling"`\]. The name of the data modeling DAG.
-- `"sqlRunner"`: \[Default value: `"0.9.1"`\]. The SQL Runner version that runs your playbooks.
+- `"dagName"`: [Default value: `"datamodeling"`]. The name of the data modeling DAG.
+- `"sqlRunner"`: [Default value: `"0.9.1"`]. The SQL Runner version that runs your playbooks.
 
 ##### Make a schedule
 
@@ -264,6 +264,6 @@ If the filename of the configuration of your data model is other than `datamodel
 }
 ```
 
-### 3\. Monitor your model in the Snowplow BDP Console
+### 3. Monitor your model in the Snowplow BDP Console
 
 Everything is set and you can now monitor your data models running against your data warehouse from the Snowplow BDP Console, in the Jobs UI! There you can see the data modeling DAG generated, and monitor the status, duration and run times both at the data model and at the playbook level.

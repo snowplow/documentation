@@ -8,7 +8,7 @@ sidebar_position: 50
 
 Please visit the [technical documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#Enhanced_Ecommerce_tracking) to see example use of the Enhanced E-commerce functions.
 
-### 1\. Overview
+### 1. Overview
 
 This guide will show you how to configure Google Tag Manager to load the Snowplow JavaScript Tracker and send Enhanced E-commerce data to Snowplow as well as Google without changing any of your calls to `dataLayer.push`. We will assume that you have already implemented the GTM `dataLayer` for Enhanced E-commerce as described in the Enhanced E-commerce (UA) Developer Guide.
 
@@ -16,11 +16,11 @@ We also assume that any ecommerce-related call to `dataLayer.push` which does no
 
 If you are sending very large ecommerce events containing lots of impressions, the size of your events may exceed maximum querystring size for GET requests. In this case we recommend configuring the tracker to use POST instead as described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/index.md).
 
-### 2\. Creating the Data Layer Variable
+### 2. Creating the Data Layer Variable
 
 In the Variables tab, create a Data Layer Variable. Set the name of this variable to "ecommerce". This variable will hold all ecommerce-related data and will be updated when you call `dataLayer.push` with a JSON containing the key "ecommerce".
 
-### 3\. Creating the trigger
+### 3. Creating the trigger
 
 The trigger will detect ecommerce data pushed into the data layer and cause the main tag to fire.
 
@@ -28,7 +28,7 @@ In the Triggers tab, Create a new trigger named "Enhanced Ecommerce". In the "Ch
 
 The regex should consist of "gtm.dom" together with every string which you set as a the value of the "event" key in the enhanced ecommerce objects you push to the data layer, separated by the "|" pipe character.
 
-### 4\. Writing the JavaScript
+### 4. Writing the JavaScript
 
 Your tag will fire both when the page loads and also every time an ecommerce event is pushed to the data layer.
 
@@ -36,7 +36,7 @@ When the page loads, the tag will load the Snowplow JavaScript Tracker, make the
 
 Whenever ecommerce data is pushed to the data layer, the tag will fire again. It will not attempt to set up tracking again; instead it will send the ecommerce event to Snowplow.
 
-The example script below will be used as the basis for your tag. There are some changes you should make to this script. In the example "SNOWPLOW\_NAME\_HERE" is used as the name of the Snowplow function. This is the global function used to make API calls to the Snowplow JavaScript Tracker. You should change this string to something unique so that if there is another Snowplow user on the page the namespaces will not collide. Similarly, you should change "MY\_COOKIE\_NAME" to a unique value. You should change "MY\_COLLECTOR" to the URL of your Snowplow collector (minus the http/https scheme), for example "c.mydomain.com".
+The example script below will be used as the basis for your tag. There are some changes you should make to this script. In the example "SNOWPLOW_NAME_HERE" is used as the name of the Snowplow function. This is the global function used to make API calls to the Snowplow JavaScript Tracker. You should change this string to something unique so that if there is another Snowplow user on the page the namespaces will not collide. Similarly, you should change "MY_COOKIE_NAME" to a unique value. You should change "MY_COLLECTOR" to the URL of your Snowplow collector (minus the http/https scheme), for example "c.mydomain.com".
 
 You can also customize the part of the tag between the comments containing "!!!". The example below creates a tracker instance, sets page pings to fire every 10 seconds, and sends a page view event. See the [JavaScript Tracker page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md) for more information on other tracking methods.
 
@@ -163,7 +163,7 @@ You can also customize the part of the tag between the comments containing "!!!"
 </script>
 ```
 
-### 5\. Creating the tag
+### 5. Creating the tag
 
 In the Tags tab, create a new tag. Name it something like "Enhanced Ecommerce Pageview". In the "Choose Product" section, select "Custom HTML Tag". Copy and paste the JavaScript you wrote in the previous section into the textbox.
 

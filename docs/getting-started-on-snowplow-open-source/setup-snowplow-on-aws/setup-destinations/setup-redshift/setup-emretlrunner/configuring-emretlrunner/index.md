@@ -14,7 +14,7 @@ You can and should use the same file for both applications.
 
 ### Using environment variables
 
-You can use environment variables rather than hardcoding strings in the configuration file. For example, load your AWS access key from an environment variable named "AWS\_SNOWPLOW\_SECRET\_KEY":
+You can use environment variables rather than hardcoding strings in the configuration file. For example, load your AWS access key from an environment variable named "AWS_SNOWPLOW_SECRET_KEY":
 
 ```text
 secret_access_key: <%= ENV['AWS_SNOWPLOW_SECRET_KEY'] %>
@@ -124,7 +124,7 @@ For `good:`, **always include a sub-folder on this variable (see below for why)*
 
 Each of the bucket variables must start with an S3 protocol - either `s3://` or `s3n://`. Each variable can include a sub-folder within the bucket as required, and a trailing slash is optional.
 
-The `bad:` entries will store any raw Snowplow log lines which did not pass the enrichment or JSON validation, along with their validation errors. The `errors:` entries will contain any raw Snowplow log lines which caused an unexpected error, but only if you set continue\_on\_unexpected\_error to true (see below).
+The `bad:` entries will store any raw Snowplow log lines which did not pass the enrichment or JSON validation, along with their validation errors. The `errors:` entries will contain any raw Snowplow log lines which caused an unexpected error, but only if you set continue_on_unexpected_error to true (see below).
 
 **Important:** there is a bug in Hive on Amazon EMR where Hive dies if you attempt to read or write data to the root of an S3 bucket. **Therefore always specify a sub-folder (e.g. `/events/`) for the `raw:processing`, `enriched:good` and `shredded:good` locations.**
 

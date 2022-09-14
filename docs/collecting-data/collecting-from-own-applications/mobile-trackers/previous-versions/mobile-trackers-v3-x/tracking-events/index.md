@@ -39,7 +39,7 @@ let trackerConfig = TrackerConfiguration()
 
 ## Session Context
 
-Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
+Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -337,7 +337,7 @@ TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)
 
 ## Session Context
 
-Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
+Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 

@@ -12,7 +12,7 @@ To create a new subject:
 $subject = new Subject();
 ```
 
-By default the subject has one piece information in it already, the platform \["p" => "srv"\].
+By default the subject has one piece information in it already, the platform ["p" => "srv"].
 
 The Subject class contains a variety of 'set' methods to attach extra data to your event.
 

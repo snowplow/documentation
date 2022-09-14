@@ -109,7 +109,7 @@ Use `trackEcommerceTransaction()` to track an ecommerce transaction.
 | `context` | Custom context for the event | No | Object |
 | `timestamp` | Optional timestamp for the event | No | Number |
 
-The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 #### Ecommerce TransactionItem with `trackEcommerceTransaction()`
 

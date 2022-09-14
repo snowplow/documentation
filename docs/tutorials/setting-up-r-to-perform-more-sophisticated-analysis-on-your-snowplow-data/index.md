@@ -5,7 +5,7 @@ date: "2021-03-26"
 sidebar_position: 80
 ---
 
-## 1\. What is R, and why use it to analyze / visualize Snowplow data?
+## 1. What is R, and why use it to analyze / visualize Snowplow data?
 
 R is free, open source software for performing statistical and graphical analysis.
 
@@ -19,7 +19,7 @@ In spite of its 'unusualness', there is one very good reasons to use R to analyz
 2. **Statistical analysis**. R supports a staggering array of statistical analyzes: making it easy to run standard statistical tests on data to see if e.g. two groups of visitors behave in a way that is significantly different
 3. **Algorithmic analysis**. R libraries include a wide range of algorithmic analytical techniques including market basket analyzes, principle component analysis, to give just two that are relevant with web analytics data.
 
-## 2\. Download and get started with R
+## 2. Download and get started with R
 
 [To download and install R on Windows or Mac, visit the download page](https://www.r-project.org/), choose a nearby mirror and select the download appropriate for your platform. Then run the installer once the download is completed. You can then launch R from your start/applications menu.
 
@@ -46,7 +46,7 @@ R
 
 at the prompt.
 
-## 3\. Connecting R to Snowplow data in Redshift
+## 3. Connecting R to Snowplow data in Redshift
 
 You can pull Snowplow data stored in Redshift directly into R using the `RPostgreSQL` package.
 

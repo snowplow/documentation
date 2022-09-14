@@ -62,7 +62,7 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 
 **_\*\*New in v0.9.0_**
 
-Since version 0.9.0, the on\_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
+Since version 0.9.0, the on_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
 
 - `on_failure` 
 
@@ -148,7 +148,7 @@ $ pip install snowplow-tracker[celery]
 
   
 
-The `CeleryEmitter` class works just like the base `Emitter` class, but it registers sending requests as a task for a [Celery](http://www.celeryproject.org/) worker. If there is a module named snowplow\_celery\_config.py on your PYTHONPATH, it will be used as the Celery configuration file; otherwise, a default configuration will be used. You can run the worker using this command:
+The `CeleryEmitter` class works just like the base `Emitter` class, but it registers sending requests as a task for a [Celery](http://www.celeryproject.org/) worker. If there is a module named snowplow_celery_config.py on your PYTHONPATH, it will be used as the Celery configuration file; otherwise, a default configuration will be used. You can run the worker using this command:
 
 ```bash
 celery -A snowplow_tracker.emitters worker --loglevel=debug
@@ -208,7 +208,7 @@ You can alternatively perform an asynchronous flush, which tells the tracker to 
 t.flush(False)
 ```
 
-If you are using the AsyncEmitter, you shouldn't perform a synchronous flush inside an on\_success or on\_failure callback function as this can cause a deadlock.
+If you are using the AsyncEmitter, you shouldn't perform a synchronous flush inside an on_success or on_failure callback function as this can cause a deadlock.
 
 ### Multiple emitters
 

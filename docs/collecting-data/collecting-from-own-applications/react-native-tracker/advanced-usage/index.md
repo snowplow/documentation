@@ -138,7 +138,7 @@ If you want to track the IDFA you need to follow the guidelines of [AppTrackingT
 
 - Add and follow the guidelines of [AppTrackingTransparency](https://developer.apple.com/documentation/apptrackingtransparency?language=objc) framework in your app.
 - Add `AdSupport` framework to your app. If it’s not added the tracker will not send the IDFA with the events.
-- Again, use a post\_install script in your app's Podfile to pass the `SNOWPLOW_IDFA_ENABLED=1` preprocessor definition to the underlying iOS Tracker
+- Again, use a post_install script in your app's Podfile to pass the `SNOWPLOW_IDFA_ENABLED=1` preprocessor definition to the underlying iOS Tracker
 
 ```ruby
 # ios/Podfile

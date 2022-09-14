@@ -6,13 +6,13 @@ sidebar_position: 1000
 
 Please follow these steps to setup the Snowplow Indicative Relay on AWS Lambda:
 
-### 1\. Create your Indicative account
+### 1. Create your Indicative account
 
 If you do not have an Indicative account, go to [Indicative](https://app.indicative.com/#/login/register) to create an account.
 
 ![](images/1.png)
 
-### 2\. Obtain an API key from Indicative
+### 2. Obtain an API key from Indicative
 
 - If you are a new Indicative user, go to [https://app.indicative.com/#/onboarding/snowplow](https://app.indicative.com/#/onboarding/snowplow). Then select _Snowplow_ and copy the API Key. Save it, you will need it later
 
@@ -22,7 +22,7 @@ If you do not have an Indicative account, go to [Indicative](https://app.indicat
 
 ![](images/3.png)
 
-### 3\. Create an IAM Role for the Lambda
+### 3. Create an IAM Role for the Lambda
 
 Your AWS Lambda needs to have an Execution Role that allows it to use the Kinesis Stream and CloudWatch. Open the AWS Management Console and follow these steps:
 
@@ -36,7 +36,7 @@ Your AWS Lambda needs to have an Execution Role that allows it to use the Kinesi
 
 ![](images/5.png)
 
-### 4\. Create the Lambda function
+### 4. Create the Lambda function
 
 As with the IAM Role, we will be using the AWS Console to get our Lambda function up and running.
 
@@ -73,82 +73,82 @@ To find the name of the bucket for your region, consult this table:
 3. Below _Function code_ settings you will find a section called _Environment variables_. You need to use these environment variables to configure some additional settings for the relay, such as the the API key and filters.
     - **3.1 Setting up the API key**: In the first row, first column (the key) type `INDICATIVE_API_KEY`. In the second column (the value) paste your API Key obtained in the beginning of this guide.
     - **3.2 Setting up filters**: The relay lets you configure the following filters:
-        - UNUSED\_EVENTS: events that will not be relayed to Indicative;
-        - UNUSED\_ATOMIC\_FIELDS: fields of the [canonical](/docs/understanding-your-pipeline/canonical-event/index.md) Snowplow event that will not be relayed to Indicative;
-        - UNUSED\_CONTEXTS: contexts whose fields will not be relayed to Indicative.
+        - UNUSED_EVENTS: events that will not be relayed to Indicative;
+        - UNUSED_ATOMIC_FIELDS: fields of the [canonical](/docs/understanding-your-pipeline/canonical-event/index.md) Snowplow event that will not be relayed to Indicative;
+        - UNUSED_CONTEXTS: contexts whose fields will not be relayed to Indicative.
 
 Out of the box, the relay is configured to use the following defaults:
 
 | Unused events | Unused atomic fields | Unused contexts |
 | --- | --- | --- |
-| app\_heartbeat | etl\_tstamp | application\_context |
-| app\_initialized | collector\_tstamp | application\_error |
-| app\_shutdown | dvce\_created\_tstamp | duplicate |
-| app\_warning | event | geolocation\_context |
-| create\_event | txn\_id | instance\_identity\_document |
-| emr\_job\_failed | name\_tracker | java\_context |
-| emr\_job\_started | v\_tracker | jobflow\_step\_status |
-| emr\_job\_status | v\_collector | parent\_event |
-| emr\_job\_succeeded | v\_etl | performance\_timing |
-| incident | user\_fingerprint | timing |
-| incident\_assign | geo\_latitude |  |
-| incident\_notify\_of\_close | geo\_longitude |  |
-| incident\_notify\_user | ip\_isp |  |
-| job\_update | ip\_organization |  |
-| load\_failed | ip\_domain |  |
-| load\_succeeded | ip\_netspeed |  |
-| page\_ping | page\_urlscheme |  |
-| s3\_notification\_event | page\_urlport |  |
-| send\_email | page\_urlquery |  |
-| send\_message | page\_urlfragment |  |
-| storage\_write\_failed | refr\_urlscheme |  |
-| stream\_write\_failed | refr\_urlport |  |
-| task\_update | refr\_urlquery |  |
-| wd\_access\_log | refr\_urlfragment |  |
-|  | pp\_xoffset\_min |  |
-|  | pp\_xoffset\_max |  |
-|  | pp\_yoffset\_min |  |
-|  | pp\_yoffset\_max |  |
-|  | br\_features\_pdf |  |
-|  | br\_features\_flash |  |
-|  | br\_features\_java |  |
-|  | br\_features\_director |  |
-|  | br\_features\_quicktime |  |
-|  | br\_features\_realplayer |  |
-|  | br\_features\_windowsmedia |  |
-|  | br\_features\_gears |  |
-|  | br\_features\_silverlight |  |
-|  | br\_cookies |  |
-|  | br\_colordepth |  |
-|  | br\_viewwidth |  |
-|  | br\_viewheight |  |
-|  | dvce\_ismobile |  |
-|  | dvce\_screenwidth |  |
-|  | dvce\_screenheight |  |
-|  | doc\_charset |  |
-|  | doc\_width |  |
-|  | doc\_height |  |
-|  | tr\_currency |  |
-|  | mkt\_clickid |  |
-|  | etl\_tags |  |
-|  | dvce\_sent\_tstamp |  |
-|  | refr\_domain\_userid |  |
-|  | refr\_device\_tstamp |  |
-|  | derived\_tstamp |  |
-|  | event\_vendor |  |
-|  | event\_name |  |
-|  | event\_format |  |
-|  | event\_version |  |
-|  | event\_fingerprint |  |
-|  | true\_tstamp |  |
+| app_heartbeat | etl_tstamp | application_context |
+| app_initialized | collector_tstamp | application_error |
+| app_shutdown | dvce_created_tstamp | duplicate |
+| app_warning | event | geolocation_context |
+| create_event | txn_id | instance_identity_document |
+| emr_job_failed | name_tracker | java_context |
+| emr_job_started | v_tracker | jobflow_step_status |
+| emr_job_status | v_collector | parent_event |
+| emr_job_succeeded | v_etl | performance_timing |
+| incident | user_fingerprint | timing |
+| incident_assign | geo_latitude |  |
+| incident_notify_of_close | geo_longitude |  |
+| incident_notify_user | ip_isp |  |
+| job_update | ip_organization |  |
+| load_failed | ip_domain |  |
+| load_succeeded | ip_netspeed |  |
+| page_ping | page_urlscheme |  |
+| s3_notification_event | page_urlport |  |
+| send_email | page_urlquery |  |
+| send_message | page_urlfragment |  |
+| storage_write_failed | refr_urlscheme |  |
+| stream_write_failed | refr_urlport |  |
+| task_update | refr_urlquery |  |
+| wd_access_log | refr_urlfragment |  |
+|  | pp_xoffset_min |  |
+|  | pp_xoffset_max |  |
+|  | pp_yoffset_min |  |
+|  | pp_yoffset_max |  |
+|  | br_features_pdf |  |
+|  | br_features_flash |  |
+|  | br_features_java |  |
+|  | br_features_director |  |
+|  | br_features_quicktime |  |
+|  | br_features_realplayer |  |
+|  | br_features_windowsmedia |  |
+|  | br_features_gears |  |
+|  | br_features_silverlight |  |
+|  | br_cookies |  |
+|  | br_colordepth |  |
+|  | br_viewwidth |  |
+|  | br_viewheight |  |
+|  | dvce_ismobile |  |
+|  | dvce_screenwidth |  |
+|  | dvce_screenheight |  |
+|  | doc_charset |  |
+|  | doc_width |  |
+|  | doc_height |  |
+|  | tr_currency |  |
+|  | mkt_clickid |  |
+|  | etl_tags |  |
+|  | dvce_sent_tstamp |  |
+|  | refr_domain_userid |  |
+|  | refr_device_tstamp |  |
+|  | derived_tstamp |  |
+|  | event_vendor |  |
+|  | event_name |  |
+|  | event_format |  |
+|  | event_version |  |
+|  | event_fingerprint |  |
+|  | true_tstamp |  |
 
 To change the defaults, you can pass in your own lists of events, atomic fields or contexts to be filtered out. For example:
 
 | Environment variable key | Environment variable value |
 | --- | --- |
-| UNUSED\_EVENTS | page\_ping,file\_download |
-| UNUSED\_ATOMIC\_FIELDS | name\_tracker,event\_vendor |
-| UNUSED\_CONTEXTS | performance\_timing,client\_context |
+| UNUSED_EVENTS | page_ping,file_download |
+| UNUSED_ATOMIC_FIELDS | name_tracker,event_vendor |
+| UNUSED_CONTEXTS | performance_timing,client_context |
 
 Similarly to setting up the API key, the first column (key) needs to be set to the specified environment variable name in ALLCAPS. The second column (value) is your own list as a comma-separated string with no spaces.
 
@@ -171,7 +171,7 @@ Take a look at the Configure triggers section which just appeared below. Choose 
 
 6. Save the changes by clicking the Save button in the top-right part of the page.
 
-## 5\. Observe the events in Indicative
+## 5. Observe the events in Indicative
 
 After a while the events should start flowing into Indicative. You can go _Settings -> Events and Properties_ to see incoming event types, change their labels, descriptions and categories.
 

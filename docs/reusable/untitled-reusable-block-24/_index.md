@@ -94,7 +94,7 @@ Now you are ready to create the CloudFront distribution which will serve your Ja
 
 | Option | Value |
 | --- | --- |
-| Origin Domain Name | **\[Bucket Name\].s3.amazonaws.com**  
+| Origin Domain Name | **[Bucket Name].s3.amazonaws.com**  
 e.g. snowplow-static-js.s3.amazonaws.com |
 | Other options | Leave as default |
 

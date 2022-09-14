@@ -59,7 +59,7 @@ The tracker can be imported like this:
 
 #### Swift Package Manager
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 **Note**: At the moment it supports only the iOS platform due to technical limitations.
 
@@ -367,7 +367,7 @@ Note: even if there is only one custom context attached to the event, it still n
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -470,7 +470,7 @@ The [screen context](https://github.com/snowplow/iglu-central/blob/master/schema
 
 ##### Platform context
 
-The platform context will either be a [mobile](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-1) or \[[desktop](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0) context depending on which platform sends the event. It is enabled by adding an `SPSubject` to the tracker.
+The platform context will either be a [mobile](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-1) or [[desktop](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0) context depending on which platform sends the event. It is enabled by adding an `SPSubject` to the tracker.
 
 ```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
@@ -618,7 +618,7 @@ The maximum data size of POST requests made by the emitter to send events.
 
 ### Global contexts
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 #### Getting started with Global Contexts
 
@@ -801,7 +801,7 @@ SPGlobalContext *contextGeneratorGC = [[SPGlobalContext alloc] initWithContextGe
 
 ### Tracking GDPR basis for processing with the GDPR context
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 This release introduces the `gdprContext` and the `enableGdprContext` methods, which append a GDPR context to all events once enabled.  
 This allows users to easily record the basis for data collection and relevant documentation, and enables a straightforward audit flow for all events.
@@ -841,7 +841,7 @@ The tracker allow to get the IDFA sending it as part of the `mobile_context` JSO
 If you want to track the IDFA you need:
 
 - Add `AdSupport` framework to your app. If it's not added the tracker will not send the IDFA with the events.
-- If you add the `AdSupport` framework, please, be aware of the correct way to submit the app to the App Store. If you make use of IDFA you have to declare it during the App submission (More details \[[here](https://help.apple.com/app-store-connect/#/dev301cb2b3e)).
+- If you add the `AdSupport` framework, please, be aware of the correct way to submit the app to the App Store. If you make use of IDFA you have to declare it during the App submission (More details [[here](https://help.apple.com/app-store-connect/#/dev301cb2b3e)).
 - The simulators can’t generate a proper IDFA, instead they generate a sequence of zeros. If you want to test IDFA with a real code, please, use the physical device.If you add the `AdSupport` framework but you don't want get the IDFA with the events:
 - Disable the IDFA tracking with a preprocessor flag:
     1. Go to _Build Settings_ of the imported Snowplow iOS Tracker

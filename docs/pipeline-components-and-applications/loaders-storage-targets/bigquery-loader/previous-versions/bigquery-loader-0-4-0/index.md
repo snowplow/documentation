@@ -96,7 +96,7 @@ Snowplow BigQuery Loader uses Google Pub/Sub topics and subscriptions to store i
 
 ### Configuration file
 
-Loader, Mutator, Repeater and Forwarder accept the same configuration file with [iglu:com.snowplowanalytics.snowplow.storage/bigquery\_config/jsonschema/](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema) schema, which looks like this:
+Loader, Mutator, Repeater and Forwarder accept the same configuration file with [iglu:com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema/](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema) schema, which looks like this:
 
 ```json
 {

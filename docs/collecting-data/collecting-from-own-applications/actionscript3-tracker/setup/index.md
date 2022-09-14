@@ -34,7 +34,7 @@ If you are using FlashBuilder for building your Flash application, then either:
 
 The binary is available for download from our public BinTray repository. Installation steps as follows:
 
-1. Download the [snowplow\_actionscript3\_tracker\_0.1.0.zip](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_actionscript3_tracker_0.1.0.zip) file
+1. Download the [snowplow_actionscript3_tracker_0.1.0.zip](http://dl.bintray.com/snowplow/snowplow-generic/snowplow_actionscript3_tracker_0.1.0.zip) file
 2. Unzip the binary (.SWC) file
 3. Include it in your project under "Properties > Build Path > Library Path > Add SWC..."
 

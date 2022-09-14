@@ -40,7 +40,7 @@ Once these are installed, you can install the tracker using LuaRocks:
 luarocks install snowplowtracker
 ```
 
-Note: You may find that you need to pass in the CURL\_DIR flag if Lua cannot find `curl` by itself. Below is an example if `curl` was installed using `brew` on an Intel Mac.
+Note: You may find that you need to pass in the CURL_DIR flag if Lua cannot find `curl` by itself. Below is an example if `curl` was installed using `brew` on an Intel Mac.
 
 ```bash
 luarocks install snowplowtracker CURL_DIR=/usr/local/Cellar/curl/7.82.0/

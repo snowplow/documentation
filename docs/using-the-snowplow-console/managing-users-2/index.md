@@ -57,8 +57,8 @@ This will differ depending on your Identity Provider, but typically will include
 - **Entity ID -** the URL that identifies the identity provider issuing a SAML request,  this will be specific to your identity provider.
 - **Metadata URL** - the URL that allows access to obtain SSO configuration data,  this will be specific to your identity provider.
 - **Redirect Login URL** - the URL where users in the company sign in to the identity provider.
-- **Security Certificate Fingerprint** \- the SHA-1 or SHA-256 fingerprint of the SAML certificate that can be obtained from your identity provider and allows us to create a secure connection.
-- **User information mapping** \- locations of information required by Snowplow console such as first name, last name and, optionally, job title.
+- **Security Certificate Fingerprint** - the SHA-1 or SHA-256 fingerprint of the SAML certificate that can be obtained from your identity provider and allows us to create a secure connection.
+- **User information mapping** - locations of information required by Snowplow console such as first name, last name and, optionally, job title.
 
 ### What happens when SSO is enabled?
 
@@ -66,7 +66,7 @@ This will differ depending on your Identity Provider, but typically will include
 
 Snowplow supports just-in-time provisioning with SSO connections. When a user logs in for the first time, a corresponding user account with the same email is created in Snowplow.
 
-A new user created via SSO will have a custom permissions set that allows them to view-only, as outlined below. This can then be edited by anyone with the Admin role on your account. For more details on setting user access, see \[LINK\](Setting User Permissions).
+A new user created via SSO will have a custom permissions set that allows them to view-only, as outlined below. This can then be edited by anyone with the Admin role on your account. For more details on setting user access, see [LINK](Setting User Permissions).
 
 <table><tbody><tr><td><strong>Console feature</strong></td><td><strong>Permissions</strong></td></tr><tr><td>User management</td><td>No access</td></tr><tr><td>Environments</td><td>View access</td></tr><tr><td>Data structures</td><td>View access</td></tr><tr><td>Data models &amp; jobs</td><td>View access</td></tr><tr><td>API keys</td><td>View access</td></tr></tbody></table>
 

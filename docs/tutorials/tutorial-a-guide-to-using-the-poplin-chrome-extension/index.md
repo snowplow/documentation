@@ -12,11 +12,11 @@ Once added to chrome the extension can be opened by opening developer tools (ctr
 
 As a user browses a webpage they can perform different actions that may be tracked as Snowplow events. These events are sent as HTTP requests to the Snowplow collector that the tracker on the webpage is pointed towards. Simply put, what the Poplin extension does is parse these same HTTP requests into a more easily readable format. This allows anyone with the extension to more easily see what actions on a webpage with Snowplow tracking trigger what events to be sent to a Snowplow pipeline. 
 
-In the example below two events were fired as HTTP post requests from a test webpage: a **page\_view** event and a **link\_click** event. 
+In the example below two events were fired as HTTP post requests from a test webpage: a **page_view** event and a **link_click** event. 
 
 ![](images/using-poplin-chrome-extension.png)
 
-Within the parsed out HTTP requests that comprise the event payload are a variety of [Snowplow canonical event](/docs/understanding-your-pipeline/canonical-event/index.md) fields such as unique event\_ids, timestamps and user and session identifiers, as well as any custom event or entity fields.
+Within the parsed out HTTP requests that comprise the event payload are a variety of [Snowplow canonical event](/docs/understanding-your-pipeline/canonical-event/index.md) fields such as unique event_ids, timestamps and user and session identifiers, as well as any custom event or entity fields.
 
 **The Role of The Poplin Extension in Event QA** 
 
@@ -74,7 +74,7 @@ Now that the extension can query your private iglu repositories the extension wi
 
 ![](images/event-passing-validation.png)
 
-An example of an event failing validation is shown below, the reason for this event failing validation is due to “example\_field\_1” being a required field meaning it cannot be null.
+An example of an event failing validation is shown below, the reason for this event failing validation is due to “example_field_1” being a required field meaning it cannot be null.
 
 ![](images/event-validation-failed.png)
 

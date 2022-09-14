@@ -52,7 +52,7 @@ An environment is the collective name for your Production pipelines, QA pipeline
 
 An environment has three permissions:
 
-- **No access** \- the user will not see the environment management screens.
+- **No access** - the user will not see the environment management screens.
 - **View** - the user can see the environment management screen, but cannot edit anything. This is the default setting for the User role.
 - **Edit / Publish** - the user can make and publish edits to the environment. This includes configuration such as enrichment enablement, enrichment configuration and collector configuration. This is the default setting for the Admin role.
 
@@ -60,28 +60,28 @@ An environment has three permissions:
 
 Data structures have five permissions:
 
-- **No access** \- the user will not see the data structure management screen
+- **No access** - the user will not see the data structure management screen
 - **View** - the user can see the data structure management screen, but cannot edit anything.
-- **Edit on development** \- the user can see the data structure management screen, and can make edits to data structures but only publish them to the development registry. This is the default setting for the User role.
-- **Edit on production** \- the user can see the data structure management screen, and can make edits to data structures, and can publish changes to the production registry. This is the default setting for the Admin role.
-- **Create** \- the user can create new data structures. Both the User and Admin roles have this permission.
+- **Edit on development** - the user can see the data structure management screen, and can make edits to data structures but only publish them to the development registry. This is the default setting for the User role.
+- **Edit on production** - the user can see the data structure management screen, and can make edits to data structures, and can publish changes to the production registry. This is the default setting for the Admin role.
+- **Create** - the user can create new data structures. Both the User and Admin roles have this permission.
 
 ### Data models
 
 Data models and jobs have four permissions:
 
-- **No access** \- the user will not see the data model management screens
+- **No access** - the user will not see the data model management screens
 - **View** - the user can see the data model management screens, but cannot edit anything. This is the default setting for the User role.
-- **Edit** \- the user can see the data model management and can make edits to data models in production. This is the default setting for the Admin role.
-- **Create** \- the user can create new data models. The Admin role has this permission.
+- **Edit** - the user can see the data model management and can make edits to data models in production. This is the default setting for the Admin role.
+- **Create** - the user can create new data models. The Admin role has this permission.
 
 ### API keys
 
 API keys have three permissions:
 
 - **View** - the user can see the API key descriptions but cannot see the keys themselves or manage them
-- **Manage** \- the user can see and manage the API keys. This is the default setting for the Admin role.
-- **Create** \- the user can generate new API keys. The Admin role has this permission.
+- **Manage** - the user can see and manage the API keys. This is the default setting for the Admin role.
+- **Create** - the user can generate new API keys. The Admin role has this permission.
 
 ## Troubleshooting
 

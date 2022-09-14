@@ -4,7 +4,7 @@ date: "2020-02-26"
 sidebar_position: 20
 ---
 
-## 1\. Assumptions
+## 1. Assumptions
 
 This guide assumes that you have administrator access to a Unix-based server (e.g. Ubuntu, OS X, Fedora) on which you can install EmrEtlRunner and schedule a regular cronjob.
 
@@ -12,7 +12,7 @@ You might wish to try out the [steps](https://github.com/snowplow/snowplow/wiki/
 
 _In theory EmrEtlRunner can be deployed onto a Windows-based server, using the Windows Task Scheduler instead of cron, but this has not been tested or documented._
 
-## 2\. Dependencies
+## 2. Dependencies
 
 ### 2.1 Hardware
 
@@ -45,7 +45,7 @@ An example configuration for EmrEtlRunner is given [here](https://github.com/sno
 
 Done? Right, now we can install EmrEtlRunner.
 
-## 3\. Installation
+## 3. Installation
 
 We host EmrEtlRunner on the distribution platform [JFrog Bintray](https://bintray.com/). You can get a copy of it as shown below.
 
@@ -63,7 +63,7 @@ unzip snowplow_emr_{{RELEASE_VERSION}}.zip
 
 The archive should contain a `snowplow-emr-etl-runner` file.
 
-## 4\. Configuration
+## 4. Configuration
 
 EmrEtlRunner requires a YAML format configuration file to run. There is a configuration file template available in the Snowplow GitHub repository at [`/3-enrich/emr-etl-runner/config/stream_config.yml.sample`](https://github.com/snowplow/snowplow/blob/master/3-enrich/emr-etl-runner/config/stream_config.yml.sample). See [Common configuration](/docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/index.md#configuration) more information on how to write this file.
 

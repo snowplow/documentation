@@ -108,8 +108,8 @@ For deployments where multiple trackers are used (e.g. for businesses that use t
 | `nuid`        | `network_userid`    | text     | Unique identifier for a user, based on a cookie from the collector (so set at a network level and shouldn't be set by a tracker) | Yes              | `ecdff4d0-9175-40ac-a8bb-325c49733607` |
 | `tnuid`       | `network_userid`    | text     | Can be used be a tracker to overwrite the nuid                                                                                   | Yes              | `ecdff4d0-9175-40ac-a8bb-325c49733607` |
 | `uid`         | `user_id`           | text     | Unique identifier for user, set by the business using `setUserId`                                                                | Yes              | `jon.doe@email.com`                    |
-| `vid`         | `domain_sessionidx` | int      | Index of number of visits that this user\_id has made to this domain e.g. `1` is first visit                                     | Yes              | `1`, `2`...                            |
-| `sid`         | `domain_sessionid`  | text     | Unique identifier (UUID) for this visit of this user\_id to this domain                                                          | Yes              | `9c65e7f3-8e8e-470d-b243-910b5b300da0` |
+| `vid`         | `domain_sessionidx` | int      | Index of number of visits that this user_id has made to this domain e.g. `1` is first visit                                     | Yes              | `1`, `2`...                            |
+| `sid`         | `domain_sessionid`  | text     | Unique identifier (UUID) for this visit of this user_id to this domain                                                          | Yes              | `9c65e7f3-8e8e-470d-b243-910b5b300da0` |
 | `ip`          | `user_ipaddress`    | text     | IP address                                                                                                                       | Yes              | `37.157.33.178`                        |
 
 We recommend setting the `uid` / `user_id` parameter: as this is the cornerstone of all user-centric analytics and is a valuable data point alonside `duid` / `domain_userid` and `nuid` / `network_userid` from web tracking.
@@ -137,7 +137,7 @@ In addition, there is a set of browser-specific parameters that only makes sense
 | **Parameter** | **Maps to**                                 | **Type** | **Description**                                              | **Implemented?** | **Example values**                                                                                                      |
 |---------------|---------------------------------------------|----------|--------------------------------------------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------|
 | `url`         | `page_url`                                  | text     | Page URL                                                     | Yes              | `http%3A%2F%2Ftest.psybazaar.com%2F2-tarot-cards`                                                                       |
-| `ua`          | `useragent`                                 | text     | Useragent (a.k.a. browser string)                            | Yes              | Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_9\_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6 Safari/537.78.2 |
+| `ua`          | `useragent`                                 | text     | Useragent (a.k.a. browser string)                            | Yes              | Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6 Safari/537.78.2 |
 | `page`        | `page_title`                                | text     | Page title                                                   | Yes              | `Tarot%20cards`                                                                                                         |
 | `refr`        | `page_referrer`                             | text     | Referrer URL                                                 | Yes              | `http%3A%2F%2Ftest.psybazaar.com%2F`                                                                                    |
 | `fp`          | `user_fingerprint`                          | integer  | User identifier based on (hopefully unique) browser features | Yes              | `4048966212`                                                                                                            |
@@ -504,7 +504,7 @@ As well as setting `e=ue`, there are two custom event specific parameters that 
 
 The tracker can decide to pass the `ue_pr` or the `ue_px` parameter depending on configuration. Encoding properties into URL-safe Base64 allows for more data while sacrificing readability.
 
-_viewed\_product_ example (using percent encoding and the key `ue_pr`):
+_viewed_product_ example (using percent encoding and the key `ue_pr`):
 
 ```text
 uid=aeb1691c5a0ee5a6   // User ID  
@@ -527,7 +527,7 @@ uid=aeb1691c5a0ee5a6   // User ID
                                               }
 ```
 
-_viewed\_product_ example (using base 64 encoding and the key `ue_px`):
+_viewed_product_ example (using base 64 encoding and the key `ue_px`):
 
 ```text
 uid=aeb1691c5a0ee5a6   // User ID  

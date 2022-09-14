@@ -125,15 +125,15 @@ If an input directory is specified with several self-describing JSON schemas wit
 
 For example, having the following Self-describing JSON Schemas as an input:
 
-- schemas/com.acme/click\_event/1-0-0
-- schemas/com.acme/click\_event/1-0-1
-- schemas/com.acme/click\_event/1-0-2
+- schemas/com.acme/click_event/1-0-0
+- schemas/com.acme/click_event/1-0-1
+- schemas/com.acme/click_event/1-0-2
 
 Igluctl will generate the following migration scripts:
 
-- sql/com.acme/click\_event/1-0-0/1-0-1 to alter table from 1-0-0 to 1-0-1
-- sql/com.acme/click\_event/1-0-0/1-0-2 to alter table from 1-0-0 to 1-0-2
-- sql/com.acme/click\_event/1-0-1/1-0-2 to alter table from 1-0-1 to 1-0-2
+- sql/com.acme/click_event/1-0-0/1-0-1 to alter table from 1-0-0 to 1-0-1
+- sql/com.acme/click_event/1-0-0/1-0-2 to alter table from 1-0-0 to 1-0-2
+- sql/com.acme/click_event/1-0-1/1-0-2 to alter table from 1-0-1 to 1-0-2
 
 This migrations (and all subsequent table definitions) are aware of column order and will ensure that new columns are added at the end of the table definition. This means that the tables can be updated in-place with single `ALTER TABLE` statements.
 

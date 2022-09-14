@@ -137,7 +137,7 @@ The arguments are as follows:
 | `Timestamp`     | When the event occurred     | No            | \*int64              |
 | `EventId`       | The event ID                | No            | \*string             |
 | `TrueTimestamp` | The true time of event      | No            | \*int64              |
-| `Contexts` | Custom contexts for the event | No | \[\]SelfDescribingJson  
+| `Contexts` | Custom contexts for the event | No | []SelfDescribingJson  
  |
 | Subject | Event specific Subject | No | Subject |
 
@@ -172,7 +172,7 @@ Use `TrackScreenView()` to track a user viewing a screen (or equivalent) withi
 | `Timestamp`     | When the event occurred             | No            | \*int64                |
 | `EventId`       | The event ID                        | No            | \*string               |
 | `TrueTimestamp` | The true time of event              | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event       | No            | \[\]SelfDescribingJson |
+| `Contexts`      | Custom contexts for the event       | No            | []SelfDescribingJson |
 | Subject         | Event specific Subject              | No            | Subject                |
 
 Although name and id are not individually required, at least one must be provided or the event will fail validation.
@@ -197,7 +197,7 @@ Use `TrackPageView()` to track a user viewing a page within your app:
 | `Timestamp`     | When the event occurred              | No            | \*int64                |
 | `EventId`       | The event ID                         | No            | \*string               |
 | `TrueTimestamp` | The true time of event               | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event        | No            | \[\]SelfDescribingJson |
+| `Contexts`      | Custom contexts for the event        | No            | []SelfDescribingJson |
 | Subject         | Event specific Subject               | No            | Subject                |
 
 Example:
@@ -223,11 +223,11 @@ Use `TrackEcommerceTransaction()` to track an ecommerce transaction:
 | `State`         | Delivery address state          | No            | \*string                          |
 | `Country`       | Delivery address country        | No            | \*string                          |
 | `Currency`      | Transaction currency            | No            | \*string                          |
-| `Items`         | Items in the transaction        | Yes           | \[\]EcommerceTransactionItemEvent |
+| `Items`         | Items in the transaction        | Yes           | []EcommerceTransactionItemEvent |
 | `Timestamp`     | When the event occurred         | No            | \*int64                           |
 | `EventId`       | The event ID                    | No            | \*string                          |
 | `TrueTimestamp` | The true time of event          | No            | \*int64                           |
-| `Contexts`      | Custom contexts for the event   | No            | \[\]SelfDescribingJson            |
+| `Contexts`      | Custom contexts for the event   | No            | []SelfDescribingJson            |
 | Subject         | Event specific Subject          | No            | Subject                           |
 
 The `items` argument is an Array of TransactionItems. `TrackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `Items` list. Each transaction item event will have the same timestamp, true timestamp, order ID, and currency as the main transaction event.
@@ -242,7 +242,7 @@ These are the fields with which a TransactionItem can be created.
 | `Name`     | Item name                     | No            | \*string               |
 | `Category` | Item category                 | No            | \*string               |
 | `EventId`  | The event ID                  | No            | \*string               |
-| `Contexts` | Custom contexts for the event | No            | \[\]SelfDescribingJson |
+| `Contexts` | Custom contexts for the event | No            | []SelfDescribingJson |
 | Subject    | Event specific Subject        | No            | Subject                |
 
 Example of tracking a transaction containing two items:
@@ -291,7 +291,7 @@ Use `TrackStructEvent()` to track a custom event happening in your app which f
 | `Timestamp`     | When the event occurred                                          | No            | \*int64                |
 | `EventId`       | The event ID                                                     | No            | \*string               |
 | `TrueTimestamp` | The true time of event                                           | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event                                    | No            | \[\]SelfDescribingJson |
+| `Contexts`      | Custom contexts for the event                                    | No            | []SelfDescribingJson |
 | Subject         | Event specific Subject                                           | No            | Subject                |
 
 Example:
@@ -320,7 +320,7 @@ The arguments are as follows:
 | `Timestamp`     | When the event occurred       | No            | \*int64                |
 | `EventId`       | The event ID                  | No            | \*string               |
 | `TrueTimestamp` | The true time of event        | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event | No            | \[\]SelfDescribingJson |
+| `Contexts`      | Custom contexts for the event | No            | []SelfDescribingJson |
 | Subject         | Event specific Subject        | No            | Subject                |
 
 Example:

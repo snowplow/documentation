@@ -147,7 +147,7 @@ Authentication for the service user is required for the Snowflake Terraform prov
 | username           | A snowflake user to perform resource creation. |
 | region             | Region for the snowflake deployment.           |
 | role               | Needs to be ACCOUNTADMIN or similar.           |
-| private\_key\_path | Path the private key.                          |
+| private_key_path | Path the private key.                          |
 
 #### Usage
 

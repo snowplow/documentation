@@ -500,7 +500,7 @@ With this method you can set the userId to a new string. To unset the userId, pa
 tracker.setUserId('newUser');
 ```
 
-2\. `setNetworkUserId`
+2. `setNetworkUserId`
 
 With this method you can set the `network_userid` to a new string(UUIDv4). To unset, pass a null value as an argument.
 
@@ -508,7 +508,7 @@ With this method you can set the `network_userid` to a new string(UUIDv4). To un
 tracker.setNetworkUserId('44df44bc-8844-4067-9a89-f83c4fe1e62f');
 ```
 
-3\. `setDomainUserId`
+3. `setDomainUserId`
 
 With this method you can set the `domain_userid` to a new string(UUIDv4). To unset, pass a null value as an argument.
 
@@ -516,7 +516,7 @@ With this method you can set the `domain_userid` to a new string(UUIDv4). To uns
 tracker.setDomainUserId('0526be47-32cb-44b2-a9e6-fefeaa5ec6fa');
 ```
 
-4\. `setIpAddress`
+4. `setIpAddress`
 
 With this method you can set the `user_ipaddress` to a new string. To unset, pass a null value as an argument.
 
@@ -524,7 +524,7 @@ With this method you can set the `user_ipaddress` to a new string. To unset, pas
 tracker.setIpAddress('123.45.67.89');
 ```
 
-5\. `setUseragent`
+5. `setUseragent`
 
 With this method you can set the `useragent` to a new string. To unset, pass a null value as an argument.
 
@@ -532,7 +532,7 @@ With this method you can set the `useragent` to a new string. To unset, pass a n
 tracker.setUseragent('some-useragent-string');
 ```
 
-6\. `setTimezone`
+6. `setTimezone`
 
 With this method you can set the `os_timezone` to a new string. To unset, pass a null value as an argument.
 
@@ -540,7 +540,7 @@ With this method you can set the `os_timezone` to a new string. To unset, pass a
 tracker.setTimezone('Africa/Cairo');
 ```
 
-7\. `setLanguage`
+7. `setLanguage`
 
 With this method you can set the `br_lang` to a new string. To unset, pass a null value as an argument.
 
@@ -548,7 +548,7 @@ With this method you can set the `br_lang` to a new string. To unset, pass a nul
 tracker.setLanguage('fr');
 ```
 
-8\. `setScreenResolution`
+8. `setScreenResolution`
 
 With this method you can set the `dvce_screenwidth` and `dvce_screenheight` fields to new integer values. The argument to this method is an array that represents the ScreenSize as `[width, height]`. For example:
 
@@ -556,7 +556,7 @@ With this method you can set the `dvce_screenwidth` and `dvce_screenheight` fiel
 tracker.setScreenResolution([123, 456]);
 ```
 
-9\. `setScreenViewport`
+9. `setScreenViewport`
 
 With this method you can set the `br_viewwidth` and `br_viewheight` fields to new integer values. The argument to this method is an array that represents the ScreenSize as `[width, height]`. For example:
 
@@ -564,7 +564,7 @@ With this method you can set the `br_viewwidth` and `br_viewheight` fields to ne
 tracker.setScreenViewport([123, 456]);
 ```
 
-10\. `setColorDepth`
+10. `setColorDepth`
 
 With this method you can set the `br_colordepth` to a new value. For example:
 

@@ -10,7 +10,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 <Block5966/>
 ```
 
-If this plugin is used, the tracker will look for Google Analytics cookies (specifically the “\_\_utma”, “\_\_utmb”, “\_\_utmc”, “\_\_utmv”, “\_\_utmz”, and “\_ga” cookies) and combine their values into an event context which gets sent with every event.
+If this plugin is used, the tracker will look for Google Analytics cookies (specifically the “__utma”, “__utmb”, “__utmc”, “__utmv”, “__utmz”, and “_ga” cookies) and combine their values into an event context which gets sent with every event.
 
 ## Installation
 

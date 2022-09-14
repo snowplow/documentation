@@ -46,7 +46,7 @@ For now, it only runs on [GCP's Dataflow](https://cloud.google.com/dataflow/).
 
 #### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#cloud-storage-loader-specific-options)Cloud Storage Loader specific options
 
-- `--inputSubscription=String` The Cloud Pub/Sub subscription to read from, formatted as projects/\[PROJECT\]/subscriptions/\[SUB\]
+- `--inputSubscription=String` The Cloud Pub/Sub subscription to read from, formatted as projects/[PROJECT]/subscriptions/[SUB]
 - `--outputDirectory=String` The Cloud Storage directory to output files to, ends with /
 - `--outputFilenamePrefix=String` Default: output The Cloud Storage prefix to output files to
 - `--shardTemplate=String` Default: -W-P-SSSSS-of-NNNNN The shard template which will be part of the filenames

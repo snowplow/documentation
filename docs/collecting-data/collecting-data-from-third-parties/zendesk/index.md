@@ -24,7 +24,7 @@ Choose "HTTP target" from the list of target types to add:
 
 Name the new extension something like "Snowplow Collector - Iglu POST". The "Iglu POST" here represents the fact we will be sending Zendesk events and contexts to [Iglu webhook adapter](/docs/collecting-data/collecting-data-from-third-parties/iglu-webhook/index.md) via `POST` request.
 
-In the **URL** field, enter "https://{{collctor\_domain}}/com.snowplowanalytics.iglu/v1?aid=zendesk", replacing `{{collctor_domain}}` with your collector domain.
+In the **URL** field, enter "https://{{collctor_domain}}/com.snowplowanalytics.iglu/v1?aid=zendesk", replacing `{{collctor_domain}}` with your collector domain.
 
 You can optionally have `?aid={{my_zendesk_namespace}}` added to this URL, where `{{my_zendesk_namespace}}` is a label for the application (here: "zendesk"). This label will be attached to all events fired by the extension, so you can later check where a given event came from (useful if you have more than one Zendesk account).
 
@@ -36,7 +36,7 @@ Select "Create Target" and click the _**Submit**_ button.
 
 We have set up our collector as a Zendesk extension. We can now add a trigger which sends `POST` requests to the collector whenever certain events occur.
 
-## [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#2-setting-up-a-trigger-for-zendesk-event)2\. Setting up a trigger for Zendesk event
+## [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#2-setting-up-a-trigger-for-zendesk-event)2. Setting up a trigger for Zendesk event
 
 ### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-trigger-conditions)Setting up trigger conditions
 

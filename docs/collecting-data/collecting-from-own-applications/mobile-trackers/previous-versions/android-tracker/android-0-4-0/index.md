@@ -6,7 +6,7 @@ sidebar_position: 970
 
 ## Tracker
 
-## 1\. Overview
+## 1. Overview
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.
 
@@ -144,7 +144,7 @@ You can change the emitter by creating a new `Emitter` object and then calling
 tracker.setEmitter(newEmitter);
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#3-adding-extra-data-the-subject-class)3\. Adding extra data: the Subject class
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#3-adding-extra-data-the-subject-class)3. Adding extra data: the Subject class
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event. The Subject appended to the Tracker allows you to easily add information to each event that is sent from the Tracker.
 
@@ -407,7 +407,7 @@ If you created a Tracker Subject with your application's context then the ID wil
 String androidIdfa = tracker.getSubject().getSubjectMobile().get("androidIdfa");
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#4-tracking-specific-events)4\. Tracking specific events
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#4-tracking-specific-events)4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
 
@@ -565,7 +565,7 @@ Arguments:
 | `context` | Custom context for the event | No | `List<SelfDescribingJson>` |
 | `timestamp` | Optional timestamp for the event | No | `Long` |
 
-The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#441-transactionitem)4.4.1 `TransactionItem`
 
@@ -674,7 +674,7 @@ t1.trackUnstructuredEvent(eventData, contextList);
 
 For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#5-sending-event-emitter)5\. Sending event: `Emitter`
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#5-sending-event-emitter)5. Sending event: `Emitter`
 
 Events are sent using an `Emitter` class. You can initialize a class with a collector endpoint URL with various options to choose how these events should be sent. Here are the `Emitter` interfaces that can be used:
 
@@ -794,7 +794,7 @@ Emitter emitter = new Emitter
         .build();
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#6-logging)6\. Logging
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#6-logging)6. Logging
 
 Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'. All logging is actioned based on what `LogLevel` was set in the Tracker creation. This level can be configured to `VERBOSE`, `DEBUG`, `ERROR` or `OFF`. By default logging is not enabled.
 
@@ -810,7 +810,7 @@ The following example classes are using the bare minimum of settings for buildin
 
 1. [Classic Tracker](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0#classic)
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0#1-classic-tracker)1\. Classic Tracker
+## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0#1-classic-tracker)1. Classic Tracker
 
 You will need to have imported the following library into your project:
 
@@ -857,7 +857,7 @@ public class TrackerBuilderClassic {
 }
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0#2-rxjava-tracker)2\. RxJava tracker
+## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0#2-rxjava-tracker)2. RxJava tracker
 
 You will need to have imported the following library into your project:
 
@@ -904,7 +904,7 @@ public class TrackerBuilderRx {
 }
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0#3-tracking-events)3\. Tracking Events
+## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0#3-tracking-events)3. Tracking Events
 
 Once you have successfully built your Tracker object you can track events with calls like the following:
 
@@ -919,7 +919,7 @@ For an outline of all available tracking combinations have a look [here](https:
 
 ## Testing locally
 
-## 1\. Testing Locally
+## 1. Testing Locally
 
 To test the Android Tracker locally we use a combination of two softwares: [Mountebank](http://www.mbtest.org/) and [Ngrok](https://ngrok.com/).
 
@@ -948,7 +948,7 @@ The `setup.bash` script starts Mountebank and starts the imposter we want and 
 
 Once you have it running you can supply the tunnel URL for all logging of events until you are ready to switch to a collector!
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Testing-locally-and-Debugging-0.4.0#2-common-issues)2\. Common Issues
+## [](https://github.com/snowplow/snowplow/wiki/Android-Testing-locally-and-Debugging-0.4.0#2-common-issues)2. Common Issues
 
 This section will detail how to handle common problems with running the local testing setup.
 

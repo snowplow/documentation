@@ -35,8 +35,8 @@ There are two predefined constants but you can use any integer value:
 
 | **Option** | **Description** |
 | --- | --- |
-| BufferOption.DEFAULT | 1\. Events are sent as soon as they are created |
-| BufferOption.BATCH | 10\. Sends events in a group when 10 events are created |
+| BufferOption.DEFAULT | 1. Events are sent as soon as they are created |
+| BufferOption.BATCH | 10. Sends events in a group when 10 events are created |
 
 ### Choosing the HTTP method
 

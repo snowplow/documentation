@@ -306,8 +306,8 @@ interface SubjectConfiguration {
 - **ipAddress**: The IP address of the user. It populates the `user_ipaddress` field.
 - **timezone** (set by the tracker): The current timezone label. Populates the `os_timezone` field.
 - **language** (set by the tracker): The language set in the device.
-- **screenResolution** (set by the tracker): The screen resolution. The screen resolution size can be set as an array of \[width, height\]. Populates the event fields `dvce_screenwidth` and `dvce_screenheight`.
-- **screenViewport**: The screen viewport. The screen viewport size can be set as an array of \[width, height\]. Populates the event fields `br_viewwidth` and `br_viewheight`.
+- **screenResolution** (set by the tracker): The screen resolution. The screen resolution size can be set as an array of [width, height]. Populates the event fields `dvce_screenwidth` and `dvce_screenheight`.
+- **screenViewport**: The screen viewport. The screen viewport size can be set as an array of [width, height]. Populates the event fields `br_viewwidth` and `br_viewheight`.
 - **colorDepth**: The color depth. Populates the `br_colordepth` field.
 
 Information about the subject can also be set at runtime. In the "Setting the subject" section below, you can find out more about the available tracker methods to do so.

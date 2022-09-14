@@ -34,7 +34,8 @@ This is a secret, equivalent to a username and a password combined, and should b
 
 ```bash
 curl \
-  --header 'X-API-Key: <API_KEY>' \   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
+  --header 'X-API-Key: <API_KEY>' \   
+  https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
 ```
 
 You can find your organization's ID within the BDP Console URL:

@@ -156,7 +156,7 @@ variables:
 
 #### BigQuery
 
-To access a BigQuery project, sql-runner will need some Google credentials. These can be set up by creating a new service account in the GCP console, then providing its private key to the application via a GOOGLE\_APPLICATION\_CREDENTIALS environment variable - a detailed walkthrough of this process is available on the [GCP documentation website](https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually).
+To access a BigQuery project, sql-runner will need some Google credentials. These can be set up by creating a new service account in the GCP console, then providing its private key to the application via a GOOGLE_APPLICATION_CREDENTIALS environment variable - a detailed walkthrough of this process is available on the [GCP documentation website](https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually).
 
 After the credentials are set up, simply create a playbook with the following BigQuery-specific target configuration:
 

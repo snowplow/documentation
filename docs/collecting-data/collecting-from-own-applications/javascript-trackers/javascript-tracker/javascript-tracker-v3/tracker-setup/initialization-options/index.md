@@ -104,7 +104,7 @@ Otherwise, set the cookie domain for the tracker instance using the `cookieDoma
 
 #### Configuring the cookie name
 
-Set the cookie name for the tracker instance using the `cookieName` field of the configuration object. The default is “_sp_“. Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are “\_sp\_id” and “\_sp\_ses” respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
+Set the cookie name for the tracker instance using the `cookieName` field of the configuration object. The default is “_sp_“. Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are “_sp_id” and “_sp_ses” respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
 
 Once set, you can retrieve a cookie name thanks to the `getCookieName(basename)` method where basename is id or ses for the domain and session cookie respectively. As an example, you can retrieve the complete name of the domain cookie with `getCookieName('id')`.
 
@@ -277,7 +277,7 @@ For more information on the Navigation Timing API, see [the specification](http
 
 ##### gaCookies context
 
-If this context is enabled, the JavaScript Tracker will look for Google Analytics cookies (specifically the “\_\_utma”, “\_\_utmb”, “\_\_utmc”, “\_\_utmv”, “\_\_utmz”, and “\_ga” cookies) and combine their values into a JSON which gets sent with every event.
+If this context is enabled, the JavaScript Tracker will look for Google Analytics cookies (specifically the “__utma”, “__utmb”, “__utmc”, “__utmv”, “__utmz”, and “_ga” cookies) and combine their values into a JSON which gets sent with every event.
 
 ##### clientHints context
 
@@ -292,7 +292,7 @@ This context be enabled in two ways:
 2. `clientHints: { includeHighEntropy: true }`
     - This will capture the "basic" client hints as well as hints that are deemed "High Entropy" and could be used to fingerprint users. Browsers may choose to prompt the user before making this data available.
 
-To see what will be captured please see the JsonSchema file [org.ietf/http\_client\_hints/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0).
+To see what will be captured please see the JsonSchema file [org.ietf/http_client_hints/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0).
 
 ##### geolocation context
 
@@ -354,7 +354,7 @@ Care must be taken to ensure that requests are supported by your collector confi
 
 #### Configuring cross-domain tracking
 
-The JavaScript Tracker can add an additional parameter named “\_sp” to the querystring of outbound links. Its value includes the domain user ID for the current page and the time at which the link was clicked. This makes these values visible in the “url” field of events sent by an instance of the JavaScript Tracker on the destination page. The enrichment process will use these values to populate the `refr_domain_userid` and `refr_dvce_tstamp` fields in Redshift for all events fired on the destination page.
+The JavaScript Tracker can add an additional parameter named “_sp” to the querystring of outbound links. Its value includes the domain user ID for the current page and the time at which the link was clicked. This makes these values visible in the “url” field of events sent by an instance of the JavaScript Tracker on the destination page. The enrichment process will use these values to populate the `refr_domain_userid` and `refr_dvce_tstamp` fields in Redshift for all events fired on the destination page.
 
 You can configure which links get decorated this way using the `crossDomainLinker` field of the configuration object. This field should be a function taking one argument (the link element) and return `true` if the link element should be decorated and false otherwise. For example, this function would only decorate those links whose destination is “[http://acme.de](http://acme.de/)” or whose HTML id is “crossDomainLink”:
 
@@ -404,7 +404,7 @@ snowplow('crossDomainLinker', function (linkElement) {
 });
 ```
 
-_Warning_: If you enable link decoration, you should also make sure that at least one event is fired on the page. Firing an event causes the tracker to write the domain\_userid to a cookie. If the cookie doesn’t exist when the user leaves the page, the tracker will generate a new ID for them when they return rather than keeping the old ID.
+_Warning_: If you enable link decoration, you should also make sure that at least one event is fired on the page. Firing an event causes the tracker to write the domain_userid to a cookie. If the cookie doesn’t exist when the user leaves the page, the tracker will generate a new ID for them when they return rather than keeping the old ID.
 
 #### Configuring the maximum payload size in bytes
 

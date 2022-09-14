@@ -48,10 +48,10 @@ Adding this plugin will automatically capture the following context:
 
 | Context |
 | --- |
-| [iglu:com.optimizely.snowplow/optimizely\_summary/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.optimizely.snowplow/optimizely_summary/jsonschema/1-0-0)  
+| [iglu:com.optimizely.snowplow/optimizely_summary/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.optimizely.snowplow/optimizely_summary/jsonschema/1-0-0)  
 [iglu:com.optimizely/experiment/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/tree/master/schemas/com.optimizely/experiment/jsonschema)  
 [iglu:com.optimizely/state/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/tree/master/schemas/com.optimizely/state/jsonschema/1-0-0)  
 [iglu:com.optimizely/variation/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/tree/master/schemas/com.optimizely/variation/jsonschema/1-0-0)  
 [iglu:com.optimizely/visitor/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/tree/master/schemas/com.optimizely/visitor/jsonschema/1-0-0)  
-[iglu:com.optimizely/visitor\_audience/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/tree/master/schemas/com.optimizely/visitor_audience/jsonschema/1-0-0)  
-[iglu:com.optimizely/visitor\_dimension/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/tree/master/schemas/com.optimizely/visitor_dimension/jsonschema/1-0-0) |
+[iglu:com.optimizely/visitor_audience/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/tree/master/schemas/com.optimizely/visitor_audience/jsonschema/1-0-0)  
+[iglu:com.optimizely/visitor_dimension/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/tree/master/schemas/com.optimizely/visitor_dimension/jsonschema/1-0-0) |

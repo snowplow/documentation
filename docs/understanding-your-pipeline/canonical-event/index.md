@@ -47,7 +47,7 @@ The platform ID is used to distinguish the same app running on different platfor
 
 | **Field** | **Type** | **Description** | **Reqd?** | **Example** |
 | --- | --- | --- | --- | --- |
-| `event` | text | The type of event recorded | Yes | 'page\_view' |
+| `event` | text | The type of event recorded | Yes | 'page_view' |
 | `event_id` | text | A UUID for each event | Yes | 'c6ef3124-b53a-4b13-a233-0088f79dcbcb' |
 | `txn_id` | int | Transaction ID set client-side, used to de-dupe records | No | 421828 |
 | `event_fingerprint` | text | Hash client-set event fields | No | AADCE520E20C2899F4CED228A79A3083 |
@@ -62,7 +62,7 @@ A complete list of event types is given [here](#Event-specific_fields).
 | `v_collector` | text | Collector version | Yes | 'ssc-2.1.0-kinesis' |
 | `v_etl` | text | ETL version | Yes | 'snowplow-micro-1.1.0-common-1.4.2' |
 | `name_tracker` | text | Tracker namespace | No | 'sp1' |
-| `etl_tags` | text | JSON of tags for this ETL run | No | "\['prod'\]" |
+| `etl_tags` | text | JSON of tags for this ETL run | No | "['prod']" |
 
 Some Snowplow Trackers allow the user to name each specific Tracker instance. `name_tracker` corresponds to this name, and can be used to distinguish which tracker generated which events.
 
@@ -101,7 +101,7 @@ Some Snowplow Trackers allow the user to name each specific Tracker instance. `n
 | `geo_city` | text | City the visitor is in | No | 'New York', 'London' |
 | `geo_zipcode` | text | Postcode the visitor is in | No | '94109' |
 | `geo_latitude` | text | Visitor location latitude | No | 37.443604 |
-| `geo_longitude` | text | Visitor location longitude | No | \-122.4124 |
+| `geo_longitude` | text | Visitor location longitude | No | -122.4124 |
 | `geo_region_name` | text | Visitor region name | No | 'Florida' |
 | `geo_timezone` | text | Visitor timezone name | No | 'Europe/London' |
 
@@ -121,7 +121,7 @@ Fields containing information about the event type.
 | **Field** | **Type** | **Description** | **Reqd?** | **Example** |
 | --- | --- | --- | --- | --- |
 | `event_vendor` | text | Who defined the event | No | 'com.acme' |
-| `event_name` | text | Event name | No | 'link\_click' |
+| `event_name` | text | Event name | No | 'link_click' |
 | `event_format` | text | Format for event | No | 'jsonschema' |
 | `event_version` | text | Version of event schema | No | '1-0-2' |
 
@@ -150,8 +150,8 @@ Fields containing information about the event type.
 | `refr_medium` | text | Type of referer | No | 'search', 'internal' |
 | `refr_source` | text | Name of referer if recognised | No | 'Bing images' |
 | `refr_term` | text | Keywords if source is a search engine | No | 'psychic oracle cards' |
-| `refr_domain_userid` | text | The Snowplow domain\_userid of the referring website | No | 'bc2e92ec6c204a14' |
-| `refr_dvce_tstamp` | timestamp | The time of attaching the domain\_userid to the inbound link | No | '2013-11-26 00:02:05' |
+| `refr_domain_userid` | text | The Snowplow domain_userid of the referring website | No | 'bc2e92ec6c204a14' |
+| `refr_dvce_tstamp` | timestamp | The time of attaching the domain_userid to the inbound link | No | '2013-11-26 00:02:05' |
 | **Document fields** |  |  |  |  |
 | `doc_charset` | text | The page’s character encoding | No | , 'UTF-8' |
 | `doc_width` | int | The page's width in pixels | No | 1024 |
@@ -198,9 +198,9 @@ Snowplow currently supports (or will support in the near future) the following e
 
 |  | **Event type** | **Value of `event` field in model** |
 | --- | --- | --- |
-| 2.3.1 | [Page views](#Page_views) | 'page\_view' |
-| 2.3.2 | [Page pings](#Page_pings) | 'page\_ping' |
-| 2.3.3 | [Ecommerce transactions](#Ecommerce_transactions) | 'transaction' and 'transaction\_item' |
+| 2.3.1 | [Page views](#Page_views) | 'page_view' |
+| 2.3.2 | [Page pings](#Page_pings) | 'page_ping' |
+| 2.3.3 | [Ecommerce transactions](#Ecommerce_transactions) | 'transaction' and 'transaction_item' |
 | 2.3.4 | [Custom structured events](#Custom_structured_events) | 'struct' |
 | 2.3.5 | [Custom unstructured events](#Custom_unstructured_events) | 'unstruct' |
 
@@ -234,9 +234,9 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 | `tr_total` | decimal | Total transaction value | Yes | 12.99 |
 | `tr_tax` | decimal | Total tax included in transaction value | No | 3.00 |
 | `tr_shipping` | decimal | Delivery cost charged | No | 0.00 |
-| `tr_total_base`\* | decimal | Total in base currency | No | 12.99 |
-| `tr_tax_base`\* | decimal | Total tax in base currency | No | 3.00 |
-| `tr_shipping_base`\* | decimal | Delivery cost in base currency | No | 0.00 |
+| `tr_total_base`* | decimal | Total in base currency | No | 12.99 |
+| `tr_tax_base`* | decimal | Total tax in base currency | No | 3.00 |
+| `tr_shipping_base`* | decimal | Delivery cost in base currency | No | 0.00 |
 | `tr_city` | text | Delivery address, city | No | 'London' |
 | `tr_state` | text | Delivery address, state | No | 'Washington' |
 | `tr_country` | text | Delivery address, country | No | 'France' |
@@ -246,10 +246,10 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 | `ti_name` | text | Product name | No | 'Cone pendulum' |
 | `ti_category` | text | Product category | No | 'New Age' |
 | `ti_price` | decimal | Product unit price | Yes | 9.99 |
-| `ti_price_base`\* | decimal | Price in base currency | No | 9.99 |
+| `ti_price_base`* | decimal | Price in base currency | No | 9.99 |
 | `ti_quantity` | integer | Number of product in transaction | Yes | 2 |
 | `ti_currency` | text | Currency | No | 'EUR' |
-| `base_currency`\* | text | Reporting currency | No | 'GBP' |
+| `base_currency`* | text | Reporting currency | No | 'GBP' |
 
 \* Set exclusively by the [Currency conversion enrichment](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/index.md).
 

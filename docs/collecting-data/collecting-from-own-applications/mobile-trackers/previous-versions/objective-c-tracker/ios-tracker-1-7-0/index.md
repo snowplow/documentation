@@ -59,7 +59,7 @@ The tracker can be imported like this:
 
 #### Swift Package Manager
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 **Note**: At the moment it supports only the iOS platform due to technical limitations.
 
@@ -367,7 +367,7 @@ Note: even if there is only one custom context attached to the event, it still n
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -470,7 +470,7 @@ The [screen context](https://github.com/snowplow/iglu-central/blob/master/schema
 
 ##### Platform context
 
-The platform context will either be a [mobile](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-1) or \[[desktop](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0) context depending on which platform sends the event. It is enabled by adding an `SPSubject` to the tracker.
+The platform context will either be a [mobile](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-1) or [[desktop](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0) context depending on which platform sends the event. It is enabled by adding an `SPSubject` to the tracker.
 
 ```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
@@ -500,7 +500,7 @@ The [geolocation context](https://github.com/snowplow/iglu-central/blob/master/s
 
 ### Global contexts
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 #### Getting started with Global Contexts
 
@@ -801,7 +801,7 @@ The maximum data size of POST requests made by the emitter to send events.
 
 #### Configure the buffer
 
-_\[Available from v.1.5.0\]_
+_[Available from v.1.5.0]_
 
 A buffer is used to group events together in bulk before sending them. This is especially handy to reduce network usage. By default, the Emitter buffers up to 10 events together before sending them; only available if you are using POST as your request type.
 
@@ -827,7 +827,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 ### Advanced Emitter options
 
-_\[Available from 1.5.0\]_
+_[Available from 1.5.0]_
 
 The Emitter can be configured to delegate to separate components the events persistence (EventStore) and the network connection to the collector (NetworkConnection).
 
@@ -867,7 +867,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 ## Tracking GDPR basis for processing with the GDPR context
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 This release introduces the `gdprContext` and the `enableGdprContext` methods, which append a GDPR context to all events once enabled.  
 This allows users to easily record the basis for data collection and relevant documentation, and enables a straightforward audit flow for all events.
@@ -920,7 +920,7 @@ If you want to track the IDFA you need to follow the guidelines of [AppTrackingT
 
 ## Troubleshooting
 
-_\[Available from v.1.5.0\]_
+_[Available from v.1.5.0]_
 
 The tracker is tested with different platforms and versions but there are rare situations where an error can be generated. The tracker will manage these errors to avoid crashes of the app and assure that the events are not lost.
 

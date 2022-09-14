@@ -44,7 +44,7 @@ DECLARE @input_file string = @"\snowplow\event.tsv";
     USING new Snowplow.EventExtractor();
 ```
 
-The most complex piece of processing is the handling of the self-describing JSONs found in the enriched event's unstruct\_event, contexts and derived\_contexts fields.  
+The most complex piece of processing is the handling of the self-describing JSONs found in the enriched event's unstruct_event, contexts and derived_contexts fields.  
 Consider contexts found in the tsv:
 
 ```json

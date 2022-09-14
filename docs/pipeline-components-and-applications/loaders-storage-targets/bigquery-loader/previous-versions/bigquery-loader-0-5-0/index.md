@@ -11,7 +11,7 @@ The available tools are:
 1. **Snowplow BigQuery Loader**, an [Apache Beam](https://beam.apache.org/) job that reads Snowplow enriched data from Google Pub/Sub, transforms it into BigQuery-friendly format and loads it. It also writes information about encountered data types into an auxiliary `typesTopic` Pub/Sub topic.
 2. **Snowplow BigQuery Mutator**, a Scala app that reads the `typesTopic` (via `typesSubscription`) and performs table mutations to add new columns as required.
 3. **Snowplow BigQuery Repeater**, a Scala app that reads `failedInserts` (caused by _mutation lag_) and tries to re-insert them into BigQuery after some delay, sinking failures into a dead-end bucket.
-4. **\[DEPRECATED\] Snowplow BigQuery Forwarder**, an alternative to Repeater implemented as an Apache Beam job. This component has been deprecated from version 0.5.0. Please use Repeater instead.
+4. **[DEPRECATED] Snowplow BigQuery Forwarder**, an alternative to Repeater implemented as an Apache Beam job. This component has been deprecated from version 0.5.0. Please use Repeater instead.
 
 ![](images/bigquery-microservices-architecture.png)
 
@@ -70,7 +70,7 @@ If a new type arrives from `input` subscription in this period of time and Mut
 
 In order to load this data again from `failedInserts` to BigQuery you can use Repeater or Forwarder (see below). Both read a subscription from `failedInserts` and perform `INSERT` statements.
 
-### \[DEPRECATED\] Snowplow BigQuery Forwarder
+### [DEPRECATED] Snowplow BigQuery Forwarder
 
 This component has been deprecated from version 0.5.0. Please use Repeater instead. The documentation on Forwarder that follows is outdated and no longer maintained. It will be removed in future versions.
 
@@ -98,7 +98,7 @@ Snowplow BigQuery Loader uses Google Pub/Sub topics and subscriptions to store i
 
 ### Configuration file
 
-Loader, Mutator and Repeater (Forwarder has been deprecated) accept the same configuration file with [iglu:com.snowplowanalytics.snowplow.storage/bigquery\_config/jsonschema/](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema) schema, which looks like this:
+Loader, Mutator and Repeater (Forwarder has been deprecated) accept the same configuration file with [iglu:com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema/](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema) schema, which looks like this:
 
 ```json
 {
@@ -252,7 +252,7 @@ $ ./snowplow-bigquery-repeater \
 
 `desperatesBufferSize`, `desperatesWindow` and `backoffPeriod` are optional parameters.
 
-#### \[DEPRECATED\] Forwarder
+#### [DEPRECATED] Forwarder
 
 This component has been deprecated from version 0.5.0. Please use Repeater instead. The documentation on Forwarder that follows is outdated and no longer maintained. It will be removed in future versions.
 

@@ -17,9 +17,9 @@ Tracking methods supported by the Lua Tracker:
 
 | Method | Event type tracked |
 | --- | --- |
-| track\_screen\_view | View of screen |
-| track\_struct\_event | Semi-custom structured event |
-| track\_self\_describing\_event | Custom event based on “self-describing” JSON schema |
+| track_screen_view | View of screen |
+| track_struct_event | Semi-custom structured event |
+| track_self_describing_event | Custom event based on “self-describing” JSON schema |
 
 ## Track structured events with `track_struct_event`
 
@@ -55,7 +55,7 @@ tracker:track_self_describing_event(
 
 ## Track screen views with `track_screen_view`
 
-Use track\_screen\_view to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages.
+Use track_screen_view to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages.
 
 This method uses a self-describing event with the [`com.snowplowanalytics.snowplow/screen_view` schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0).
 
@@ -70,8 +70,8 @@ The `new_tracker` method has a couple of other parameters that can be used to 
 | Parameter | Description | Required | Default |
 | --- | --- | --- | --- |
 | url | The Snowplow Collector URL | Yes | \- |
-| request\_type | The request type to use ("GET" or "POST") | No | "POST" |
-| encode\_base64 | If self-describing event payloads are base64 encoded | No | true |
+| request_type | The request type to use ("GET" or "POST") | No | "POST" |
+| encode_base64 | If self-describing event payloads are base64 encoded | No | true |
 
 Note: It's generally recommended to use the default values as `encode_base64 = true` can reduce the size of payloads and `POST` will receive more future support (such as batched requests), but you can change these if your use case calls for it.
 

@@ -8,7 +8,7 @@ This page refers to version 0.3.0 of the Snowplow Android Tracker.
 
 **Please note** that this version of the Android Tracker is dependent upon the [Snowplow 0.9.14 release](https://github.com/snowplow/snowplow/releases/tag/0.9.14), you will need to be running this version or higher of Snowplow for events sent by the tracker to be successfully processed. Snowplow 0.9.14+ contains updates to the Hadoop Enrich and Scala Hadoop Shred jobs to allow newer self-describing JSON versions, as sent by Android Tracker 0.3.0. For more information, please refer to tickets [#1220](https://github.com/snowplow/snowplow/issues/1220) and [#1231](https://github.com/snowplow/snowplow/issues/1231).
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#1-overview)1\. Overview
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#1-overview)1. Overview
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.
 
@@ -137,7 +137,7 @@ You can change the emitter by creating a new `Emitter` object and then calling
 tracker.setEmitter(newEmitter);
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#3-adding-extra-data-the-subject-class)3\. Adding extra data: the Subject class
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#3-adding-extra-data-the-subject-class)3. Adding extra data: the Subject class
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event. The Subject appended to the Tracker allows you to easily add information to each event that is sent from the Tracker.
 
@@ -377,7 +377,7 @@ You will also need to include the following in your `AndroidManifest.xml` file
 
 This will make the functions for checking these metrics available for the tracker to use.
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#4-tracking-specific-events)4\. Tracking specific events
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#4-tracking-specific-events)4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
 
@@ -535,7 +535,7 @@ Arguments:
 | `context` | Custom context for the event | No | `List<SelfDescribingJson>` |
 | `timestamp` | Optional timestamp for the event | No | `Long` |
 
-The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+The `items` argument is a `List` of individual `TransactionItem` elements representing the items in the e-commerce transaction. Note that `trackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#441-transactionitem)4.4.1 `TransactionItem`
 
@@ -644,7 +644,7 @@ t1.trackUnstructuredEvent(eventData, contextList);
 
 For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#5-sending-event-emitter)5\. Sending event: `Emitter`
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#5-sending-event-emitter)5. Sending event: `Emitter`
 
 Events are sent using an `Emitter` class. You can initialize a class with a collector endpoint URL with various options to choose how these events should be sent. Here are the `Emitter` interfaces that can be used:
 
@@ -696,9 +696,9 @@ The current Emitter flow goes as follows:
 
 All constants can be found in the 'constants/TrackerConstants.java' class with the following names:
 
-- EMITTER\_TICK
-- EMITTER\_SEND\_LIMIT
-- EMITTER\_EMPTY\_EVENTS\_LIMIT
+- EMITTER_TICK
+- EMITTER_SEND_LIMIT
+- EMITTER_EMPTY_EVENTS_LIMIT
 
 To alter these values you will need to edit and recompile the Trackers source, pending an upcoming release where this will be configurable when initializing an Emitter object.
 
@@ -766,9 +766,9 @@ Emitter emitter = new Emitter
         .build();
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#6-logging)6\. Logging
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.3.0#6-logging)6. Logging
 
-Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'. All logging is actioned based on whether or not the 'DEBUG\_MODE' constant is set to true in the 'constants/TrackerConstants.java' class.
+Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'. All logging is actioned based on whether or not the 'DEBUG_MODE' constant is set to true in the 'constants/TrackerConstants.java' class.
 
 This class also utilizes the standard Android logging API, removing the prior versions dependency on an extra logging library.
 

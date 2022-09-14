@@ -22,7 +22,7 @@ This embedded repository is used to bootstrap the Iglu Scala client with JSON Sc
 
 ## [](https://github.com/snowplow/iglu/wiki/JVM-embedded-repo#setup)Setup
 
-### [](https://github.com/snowplow/iglu/wiki/JVM-embedded-repo-setup#1-prepare-your-files)1\. Prepare your files
+### [](https://github.com/snowplow/iglu/wiki/JVM-embedded-repo-setup#1-prepare-your-files)1. Prepare your files
 
 You need to create a file structure for your JSON Schemas. Please check out the template we provide here:
 
@@ -39,7 +39,7 @@ Writing JSON Schemas is out of scope for this setup guide - see [Self-describin
 
 Done? Now you are ready to embed your files.
 
-### [](https://github.com/snowplow/iglu/wiki/JVM-embedded-repo-setup#2-embed-your-files)2\. Embed your files
+### [](https://github.com/snowplow/iglu/wiki/JVM-embedded-repo-setup#2-embed-your-files)2. Embed your files
 
 You now need to embed your JSON Schema files into your Java or Scala application.
 
@@ -49,7 +49,7 @@ The Iglu Scala client will expect to find these JSON Schema files included in th
 myapp/src/main/resources/my-repo/schemas
 ```
 
-### [](https://github.com/snowplow/iglu/wiki/JVM-embedded-repo-setup#3-update-your-iglu-client-configuration)3\. Update your Iglu client configuration
+### [](https://github.com/snowplow/iglu/wiki/JVM-embedded-repo-setup#3-update-your-iglu-client-configuration)3. Update your Iglu client configuration
 
 Finally, update your Iglu client configuration so that it can resolve your new repository.
 

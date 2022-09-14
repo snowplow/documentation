@@ -13,7 +13,7 @@ sidebar_position: 950
 
 ## Tracker
 
-## 1\. Overview
+## 1. Overview
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.
 
@@ -43,7 +43,7 @@ Tracker.init(new Tracker.TrackerBuilder( ... )
 
 Once sessionization has been turned on several things will begin to happen:
 
-- A client\_session context will be appended to each event that is sent
+- A client_session context will be appended to each event that is sent
 - A polling check will be started to check whether or not the session has timed out
     - You can configure how often to check with the sessionCheckInterval method
     - If your app is in the foreground and no events have been sent for the foregroundTimeout period, the session will be updated and a new session started
@@ -327,7 +327,7 @@ Essentially the entire Tracker will halt operation until event tracking is turne
 tracker.pauseEventTracking();
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#3-adding-extra-data-the-subject-class)3\. Adding extra data: the Subject class
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#3-adding-extra-data-the-subject-class)3. Adding extra data: the Subject class
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event. The Subject appended to the Tracker allows you to easily add information to each event that is sent from the Tracker.
 
@@ -653,7 +653,7 @@ String androidIdfa = Util.getAndroidIdfa(context);
 
 Please note that this function will only work when run from a different thread than the UI/Main thread of your application.
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#4-tracking-specific-events)4\. Tracking specific events
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#4-tracking-specific-events)4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
 
@@ -847,7 +847,7 @@ Arguments:
 | `trueTimestamp` | Optional timestamp | No | `Long` |
 | `eventId` | Optional custom event id | No | `String` |
 
-The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the e-commerce transaction or it can be a `varargs` argument of many individual items. Note that `track(EcommerceTransaction event)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the e-commerce transaction or it can be a `varargs` argument of many individual items. Note that `track(EcommerceTransaction event)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 #### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#441-ecommercetransactionitem)4.4.1 `EcommerceTransactionItem`
 
@@ -1075,7 +1075,7 @@ t1.track(Timing.builder()
     .build());
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#5-sending-event-emitter)5\. Sending event: `Emitter`
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#5-sending-event-emitter)5. Sending event: `Emitter`
 
 Events are sent using an `Emitter` class. You can initialize a class with a collector endpoint URL with various options to choose how these events should be sent. Here are the `Emitter` interfaces that can be used:
 
@@ -1229,7 +1229,7 @@ tracker.getEmitter().flush();
 
 This will attempt to start the emitter process; however, it will fail if the emitter is already running or if the application is offline.
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#6-logging)6\. Logging
+## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.6.0#6-logging)6. Logging
 
 Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'. All logging is actioned based on what `LogLevel` was set in the Tracker creation. This level can be configured to `VERBOSE`, `DEBUG`, `ERROR` or `OFF`. By default, logging is not enabled.
 
@@ -1237,7 +1237,7 @@ Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'.
 
 ## Integration
 
-## 1\. Init Tracker
+## 1. Init Tracker
 
 You will need to have imported the following library into your project:
 
@@ -1279,7 +1279,7 @@ public class SnowplowTrackerBuilder {
 }
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.6.0#2-tracking-events)2\. Tracking Events
+## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.6.0#2-tracking-events)2. Tracking Events
 
 Once you have successfully built your Tracker object you can track events with calls like the following:
 
@@ -1290,7 +1290,7 @@ tracker.track(ScreenView.builder().name("screenName").id("screenId").build());
 
 For an outline of all available tracking combinations have a look [here](https://raw.githubusercontent.com/snowplow/snowplow-android-tracker/master/snowplow-demo-app/src/main/java/com/snowplowanalytics/snowplowtrackerdemo/utils/TrackerEvents.java).
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.6.0#3-application-focus)3\. Application Focus
+## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.6.0#3-application-focus)3. Application Focus
 
 The Tracker Session object can be tuned to timeout in `foreground` and `background` scenarios, but you are required to tell us when your application is in these states. Unfortunately it is not possible to do so from a library standpoint.
 

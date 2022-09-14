@@ -295,7 +295,7 @@ tracker.track(PageView.builder()
 
 Use an e-commerce transaction event to track things like online purchases. Transaction items are attached to an e-commerce event in order to record individual items in a transaction.
 
-**Note**: that tracking an e-commerce transaction sends multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the items list. Each transaction item event will have the same timestamp, order\_id, and currency as the main transaction event.
+**Note**: that tracking an e-commerce transaction sends multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the items list. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
 Here is an example:
 
@@ -474,7 +474,7 @@ t1.track(ConsentGranted.builder()
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 

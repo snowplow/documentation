@@ -37,10 +37,10 @@ The context entity reflects the [ifDeviceInfo interface](https://developer.roku
 | `videoMode` | String | Video playback resolution | yes |
 | `displayWidth` | Integer | Physical width of the attached display in centimeters | yes |
 | `displayHeight` | Integer | Physical height of the attached display in centimeters | yes |
-| `displayProperties` | String\[\] | List of keys for display properties of the screen | yes |
+| `displayProperties` | String[] | List of keys for display properties of the screen | yes |
 | `connectionType` | String | Type of internet connection the device is using (e.g., WiFiConnection) | yes |
 | `internetStatus` | Boolean | Internet connection status of the device (Roku OS ≥ 10.0) . | no |
-| `features` | String\[\] | List of features that the current device/firmware supports | yes |
+| `features` | String[] | List of features that the current device/firmware supports | yes |
 
 The `displayProperties` list may include keys for the following display properties: `Internal` (display part of Roku player), `Hdr10` (display supports HDR10), `Hdr10Plus` (display supports HDR10), `DolbyVision` (display supports Dolby Vision). The `features` list of activated features of the device may include `5.1_surround_sound`, `can_output_5.1_surround_sound`, `sd_only_hardware`, `usb_hardware`, `sdcard_hardware`, `ethernet_hardware`, `gaming_hardware`, `energy_star_compliant`, `soundbar_hardware`, and `handsfree_voice`.
 

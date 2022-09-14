@@ -10,7 +10,7 @@ Please note, the `x` indicates that we recommend always being on the latest patc
 
 Log4j Advisory
 
-Following the [Log4j advisory in December 2021](https://discourse.snowplow.io/t/advisory-impact-of-log4j-2-cve-2021-44228-on-snowplow-components/6065), we have updated a number of recommended component versions within the 21.08 North Cascades release. These are **highlighted** and with an \* next to the component name.
+Following the [Log4j advisory in December 2021](https://discourse.snowplow.io/t/advisory-impact-of-log4j-2-cve-2021-44228-on-snowplow-components/6065), we have updated a number of recommended component versions within the 21.08 North Cascades release. These are **highlighted** and with an * next to the component name.
 
 #### AWS
 

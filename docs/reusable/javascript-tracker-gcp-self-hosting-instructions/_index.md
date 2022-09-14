@@ -84,7 +84,7 @@ To connect your domain to your Cloud Storage bucket, you will need to create a `
 
 | Option | Value |
 | --- | --- |
-| Name | \[your domain\] |
+| Name | [your domain] |
 | Type | CNAME |
 | Data | c.storage.googleapis.com. |
 

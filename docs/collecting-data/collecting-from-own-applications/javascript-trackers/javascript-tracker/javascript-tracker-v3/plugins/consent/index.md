@@ -40,4 +40,4 @@ Adding this plugin will automatically capture the following context:
 
 | Context | Example |
 | --- | --- |
-| [iglu:com.snowplowanalytics.snowplow/consent\_document/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-20.04.43.png) |
+| [iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-28-at-20.04.43.png) |

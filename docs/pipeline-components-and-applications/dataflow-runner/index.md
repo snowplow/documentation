@@ -142,7 +142,7 @@ ERRO[0358] 2/2 steps failed to complete successfully
 
 In this case my first step failed which meant that my second step was cancelled. This behaviour is dependent on your `actionOnFailure` - you can choose either to:
 
-1. “CANCEL\_AND\_WAIT”: This will cancel all other currently queued jobs and return the cluster to a waiting state ready for new job submissions.
+1. “CANCEL_AND_WAIT”: This will cancel all other currently queued jobs and return the cluster to a waiting state ready for new job submissions.
 2. “CONTINUE”: This will go to the next step regardless if it failed or not.
 
 **Note**: We have removed the ability to terminate the job flow on failure, to terminate you will need to use the `down` command.

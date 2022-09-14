@@ -12,7 +12,7 @@ The [Iglu Server](https://github.com/snowplow-incubator/iglu-server/) is an Ig
 
 Information on setting up an instance of the Iglu Server can be found in [the setup guide](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/setup/index.md).
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#1-the-schema-service-apischemas)1\. The schema service (`/api/schemas`)
+## [](https://github.com/snowplow/iglu/wiki/Iglu-server#1-the-schema-service-apischemas)1. The schema service (`/api/schemas`)
 
 The schema service allows you to interact with Iglu schemas using simple HTTP requests.
 
@@ -211,7 +211,7 @@ We have added [Swagger](https://swagger.io/) support to our API so you can exp
 http://$HOST/static/swagger-ui/index.html
 ```
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#2-schema-validation-and-the-validation-service-apivalidation)2\. Schema validation and the validation service (`/api/validation`)
+## [](https://github.com/snowplow/iglu/wiki/Iglu-server#2-schema-validation-and-the-validation-service-apivalidation)2. Schema validation and the validation service (`/api/validation`)
 
 When adding a schema to the repository, the repository will validate that the provided schema is self-describing - an overview of this concept can be found in the [Self describing JSON schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) wiki page. In practice this means your schema should contain a `self` property, which itself contains the following properties:
 
@@ -303,7 +303,7 @@ Or, if it has some issues, return a detailed report about its problems:
 
 Like the schema service, the validation service is also accessible through Swagger UI.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#3-drafts-service-apidrafts)3\. Drafts service (`/api/drafts`)
+## [](https://github.com/snowplow/iglu/wiki/Iglu-server#3-drafts-service-apidrafts)3. Drafts service (`/api/drafts`)
 
 The draft schema service lets you interact with draft schemas using simple HTTP requests. Draft schemas are variants of Iglu schemas with simple versions that start with `1` and can be increased as needed.
 
@@ -440,7 +440,7 @@ GET requests support a `repr` URL parameter, allowing you to specify three dif
 
 _Please note:_ While `metadata`/`body` query parameters used in previous versions of the Iglu Server are supported, they have been deprecated in favor of the single `repr` parameter.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#4-debug-apidebug-and-metadata-apimeta-services)4\. Debug (`/api/debug`) and metadata (`/api/meta`) services
+## [](https://github.com/snowplow/iglu/wiki/Iglu-server#4-debug-apidebug-and-metadata-apimeta-services)4. Debug (`/api/debug`) and metadata (`/api/meta`) services
 
 The Iglu Server includes several endpoints for inspecting its own state.
 
@@ -478,7 +478,7 @@ curl HOST/api/meta/server -H 'apikey: YOUR_APIKEY'
 }
 ```
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#5-api-keys-and-the-authentication-service-apiauth)5\. API keys and the authentication service (`/api/auth`)
+## [](https://github.com/snowplow/iglu/wiki/Iglu-server#5-api-keys-and-the-authentication-service-apiauth)5. API keys and the authentication service (`/api/auth`)
 
 In order to use the routes of the Iglu Server's API that require either write access to the repository or readaccess to non-public schemas, you will need an API key, passed as an `apiKey` HTTP header to relevant calls of those services.
 

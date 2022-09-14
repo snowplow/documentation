@@ -152,9 +152,9 @@ window.snowplow('enableActivityTracking', {
 - Form Tracking
     - This set of events happens when a user interacts with a web form (e.g. focus on an form element, change a value of input-textarea-select element form, submit a form)
     - These are predefined Snowplow events that are of unstructured eventType and can be customized. Data captured:
-        - **focus\_form**: id, classes of the form and name, type, value of the form element that received focus.
-        - **change\_form**: name, type, new value of the element, id of the parent form
-        - **submit\_form**: id, classes of the form and name, type, value of all form elements
+        - **focus_form**: id, classes of the form and name, type, value of the form element that received focus.
+        - **change_form**: name, type, new value of the element, id of the parent form
+        - **submit_form**: id, classes of the form and name, type, value of all form elements
     - **Note**: _By default, Form Tracking does not track password fields. We used the `options` to demonstrate how you can ensure the Non-tracking of sensitive fields. With Snowplow Micro we can also later test that any denylisting of forms is implemented correctly and that no sensitive fields are tracked._
 
 ```javascript
@@ -427,7 +427,7 @@ browser.assert.orderOfEvents(events_list);
 
 ```javascript
 
-_Arguments_: events\_list
+_Arguments_: events_list
 
 Checks for when one event must be before the other so that your application works as expected. This works by retrieving the derived timestamps for each event, and asserting that events fired in the specified order. In our case we use this to test that a cart action occurs before purchasing an item. If our application didn't get this order of events correct, then the application does not act as expected. This can also be considered a race condition test.
 
@@ -457,13 +457,13 @@ browser.assert.successfulEvent(
 );
 ```
 
-_Arguments_: test\_event (with schema, eventType, values and context), number\_of\_occurences
+_Arguments_: test_event (with schema, eventType, values and context), number_of_occurences
 
 Ensures that when an event is sent to Micro the correct parameters are sent as expected. In our case we check that the schema, properties and contexts are correct:
 
 - We match what the user expects to be sent to what is received on Micro.
 - In the end, the number of matched events is retrieved and asserted to the expected number of occurrences.
-- By doing that, we can also specify which events we don't expect on Micro by setting the argument number\_of\_occurences=0.
+- By doing that, we can also specify which events we don't expect on Micro by setting the argument number_of_occurences=0.
 
 ## Snowplow Micro and Cypress
 
@@ -705,7 +705,7 @@ cy.eventsWithOrder([
 ]);
 ```
 
-With this command you can assert that events happened in a specified (ascending) order. For example, in the call above, we can assert that the focus\_form event happened before the corresponding change\_form event, which in turn happened before the submit\_form event. The argument to this command is an array of at least 2 event "descriptions", which are exactly like the properties' object argument of `eventsWithProperties`. Those event descriptions need to uniquely identify exactly one Snowplow event. Internally, this command compares events' `derived_tstamp`.
+With this command you can assert that events happened in a specified (ascending) order. For example, in the call above, we can assert that the focus_form event happened before the corresponding change_form event, which in turn happened before the submit_form event. The argument to this command is an array of at least 2 event "descriptions", which are exactly like the properties' object argument of `eventsWithProperties`. Those event descriptions need to uniquely identify exactly one Snowplow event. Internally, this command compares events' `derived_tstamp`.
 
 ### Some further notes
 

@@ -76,7 +76,7 @@ Next, you need to create an IAM role that will provide credentials.
 1. `IAM -> Roles -> Create role -> AWS service -> EC2`
 2. Attach just created `SnowflakeLoadPolicy`
 3. `Trust relationships -> Edit Trust relationship`
-4. Insert following document (replacing 123456789123 with your account id and EMR\_EC2\_DefaultRole with your EMR role) and save it:
+4. Insert following document (replacing 123456789123 with your account id and EMR_EC2_DefaultRole with your EMR role) and save it:
 
 ```json
 {

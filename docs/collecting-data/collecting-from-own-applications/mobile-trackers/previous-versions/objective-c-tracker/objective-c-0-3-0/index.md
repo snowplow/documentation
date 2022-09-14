@@ -4,7 +4,7 @@ date: "2020-03-02"
 sidebar_position: 980
 ---
 
-## 1\. Overview
+## 1. Overview
 
 The [Snowplow iOS Tracker](https://github.com/snowplow/snowplow-ios-tracker) allows you to track Snowplow events from your iOS apps and games. It supports iOS 7.0+.
 
@@ -12,7 +12,7 @@ The tracker should be straightforward to use if you are comfortable with iOS dev
 
 You can also find detailed documentation for the method calls in the tracker classes available as part of the [CocoaPods documentation](http://cocoadocs.org/docsets/SnowplowTracker/).
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.3#2-initialization)2\. Initialization
+## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.3#2-initialization)2. Initialization
 
 Assuming you have completed the [iOS Tracker Setup](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup) for your project, you are now ready to initialze the Snowplow Tracker.
 
@@ -74,7 +74,7 @@ The `appId` argument lets you set the application ID to any string.
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` argument.
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.3#3-adding-extra-data)3\. Adding extra data
+## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.3#3-adding-extra-data)3. Adding extra data
 
 Unlike the other Trackers, the iOS tracker automatically collects your platform, screen resolution, viewport, color depth, timezone and language from the device. You can still however, set your user ID to properly track different users if you require it.
 
@@ -105,7 +105,7 @@ For the avoidance of doubt, you can also avoid sending IFA regardless of your ad
 - Search for **Preprocessor Macros**
 - Add a macro defined as`SNOWPLOW_NO_IFA = 1`
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.3#4-tracking-specific-events)4\. Tracking specific events
+## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.3#4-tracking-specific-events)4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
 
@@ -388,7 +388,7 @@ Example:
 [t1 trackTimingWithCategory:@"Application" variable:@"Background" timing:324 label:@"5231804123" timestamp:1234569];
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.3#5-sending-events-snowplowemitter)5\. Sending events: `SnowplowEmitter`
+## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.3#5-sending-events-snowplowemitter)5. Sending events: `SnowplowEmitter`
 
 Events created by the Tracker are sent to a collector using a `SnowplowEmitter` instance. You can create one using one of the init methods:
 

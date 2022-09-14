@@ -138,7 +138,7 @@ snowplow(
 );
 ```
 
-The page view and every subsequent page ping will have both a static\_context and a dynamic\_context attached. The static\_contexts will all have the same staticValue, but the dynamic\_contexts will have different dynamicValues since a new context is created for every event.
+The page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
 
 ### Activity Tracking: page pings
 
@@ -178,7 +178,7 @@ You can now perform edge analytics in the browser to reduce the number of events
 snowplow('enableActivityTrackingCallback', minimumVisitLength, heartbeatDelay, callback);
 ```
 
-where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. The `callback` should be a function which will receive an event object containing the page ping activity information, including pageivew\_id, and any Page View contexts.
+where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. The `callback` should be a function which will receive an event object containing the page ping activity information, including pageivew_id, and any Page View contexts.
 
 A full example of how this might be used to aggregate page ping information and then send an event on page unload is below:
 

@@ -24,7 +24,7 @@ This section allows you to select which Braze user identifier (external user ID 
 
 ![identity settings dropdown](images/identity_settings.png)
 
-##### Braze external\_id
+##### Braze external_id
 
 This configuration section is enabled if you have selected the `external_id` as the **Braze User Identifier**.
 
@@ -34,7 +34,7 @@ This configuration section is enabled if you have selected the `external_id` as 
 
   Use this option to select how you want to set the `external_id`, either from the Event Property you specify or directly from the Value you provide.
 
-- **external\_id**
+- **external_id**
 
   Depending on the previous selection, here you can specify the value or the client event property (e.g. client_id) that corresponds to the `external_id` user identifier for Braze API.
 
@@ -74,7 +74,7 @@ When enabled(default), this option will only update existing users. Uncheck this
 
 #### Identity settings
 
-##### Braze external\_id (required)
+##### Braze external_id (required)
 
 Set this key to the client event property (e.g. `client_id`) that corresponds to your users' `external_id` and will be used as the [Braze User Identifier](https://www.braze.com/docs/api/basics/#external-user-id-explanation).
 

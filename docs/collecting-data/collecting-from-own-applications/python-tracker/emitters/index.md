@@ -10,7 +10,7 @@ Tracker instances must be initialized with an emitter. This section will go into
 
 At its most basic, the Emitter class only needs a collector URI:
 
-```
+```python
 from snowplow_tracker import Emitter
 
 e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
@@ -18,7 +18,7 @@ e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
 
 This is the signature of the constructor for the base Emitter class:
 
-```
+```python
 def __init__(
         self,
         endpoint: str,
@@ -70,7 +70,7 @@ Since version 0.9.0, the on\_success callback function will be passed the array 
 
 An example:
 
-```
+```python
 # Prior to v0.9.0, the on_success callback receives only the number of successfully sent events
 def success(num):
     print(str(num) + " events sent successfully!")
@@ -112,7 +112,7 @@ Timeout for HTTP requests. Can be set either as single float value which applies
 
 ## The AsyncEmitter class
 
-```
+```python
 from snowplow_tracker import AsyncEmitter
 
 e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net", thread_count=10)
@@ -124,7 +124,7 @@ The AsyncEmitter uses a fixed-size thread pool to perform network I/O. By defaul
 
 Here is a complete example with all constructor parameters set:
 
-```
+```python
 from snowplow_tracker import AsyncEmitter
 
 e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net", 
@@ -142,7 +142,7 @@ e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net",
 
 **Important note**: Since version 0.9.0, the CeleryEmitter is only available as an extra module. To use it, you need to install the snowplow-tracker as:
 
-```
+```bash
 $ pip install snowplow-tracker[celery]
 ```
 
@@ -150,7 +150,7 @@ $ pip install snowplow-tracker[celery]
 
 The `CeleryEmitter` class works just like the base `Emitter` class, but it registers sending requests as a task for a [Celery](http://www.celeryproject.org/) worker. If there is a module named snowplow\_celery\_config.py on your PYTHONPATH, it will be used as the Celery configuration file; otherwise, a default configuration will be used. You can run the worker using this command:
 
-```
+```bash
 celery -A snowplow_tracker.emitters worker --loglevel=debug
 ```
 
@@ -160,7 +160,7 @@ Note that `on_success` and `on_failure` callbacks cannot be supplied to this
 
 **Important note**: Since version 0.9.0, the RedisEmitter is only available as an extra module. To use it, you need to install the snowplow-tracker as:
 
-```
+```bash
 $ pip install snowplow-tracker[redis]
 ```
 
@@ -168,7 +168,7 @@ $ pip install snowplow-tracker[redis]
 
 Use a RedisEmitter instance to store events in a [Redis](http://redis.io/) database for later use. This is the RedisEmitter constructor function:
 
-```
+```python
 def __init__(self, rdb=None, key="snowplow"):
 ```
 
@@ -176,7 +176,7 @@ def __init__(self, rdb=None, key="snowplow"):
 
 An example:
 
-```
+```python
 from snowplow_tracker import RedisEmitter, Tracker
 import redis
 
@@ -198,13 +198,13 @@ print(rdb.lrange("my_snowplowkey", 0, -1))
 
 You can flush the emitter manually using the `flush` method of the `Tracker` instance which is sending events to the emitter. This is a blocking call which synchronously sends all events in the emitter's buffer.
 
-```
+```python
 t.flush()
 ```
 
 You can alternatively perform an asynchronous flush, which tells the tracker to send all buffered events but doesn't wait for the sending to complete:
 
-```
+```python
 t.flush(False)
 ```
 
@@ -214,7 +214,7 @@ If you are using the AsyncEmitter, you shouldn't perform a synchronous flush ins
 
 You can configure a tracker instance to send events to multiple emitters by passing the `Tracker` constructor function an array of emitters instead of a single emitter, or by using the `addEmitter` method:
 
-```
+```python
 from snowplow_tracker import Subject, Tracker, AsyncEmitter, RedisEmitter
 import redis
 
@@ -238,7 +238,7 @@ You can create your own custom emitter class, either from scratch or by subclass
 
 You can use the following function as the `on_failure` callback to immediately retry failed events:
 
-```
+```python
 def on_failure_retry(failed_event_count, failed_events):
   # possible backoff-and-retry timeout here
   for e in failed_events:
@@ -251,13 +251,13 @@ You may wish to add backoff logic to delay the resending.
 
 You can flush your emitter based on some time interval:
 
-```
+```python
 e1 = AsyncEmitter("collector1.cloudfront.net", method="post")
 e1.set_flush_timer(5)  # flush each 5 seconds
 ```
 
 Automatic flush can also be cancelled:
 
-```
+```python
 e1.cancel_flush()
 ```

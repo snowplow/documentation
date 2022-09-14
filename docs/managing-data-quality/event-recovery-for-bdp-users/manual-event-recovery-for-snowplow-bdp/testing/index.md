@@ -17,7 +17,7 @@ Prerequisite:
 
 To make use of scripting utility only a single dependency is required – [ammonite](https://amonite.io/). To install it simply run:
 
-```
+```bash
 sudo sh -c '(echo "#!/usr/bin/env sh" && curl -L https://github.com/lihaoyi/Ammonite/releases/download/2.1.1/2.12-2.1.1) > /usr/local/bin/amm && chmod +x /usr/local/bin/amm' 
 ```
 
@@ -25,7 +25,7 @@ Now your are able to use a prebuilt script that will allow you to run the config
 
 The test script sets up a local version of the recovery job and applies configuration settings against a specific "bad row":
 
-```
+```scala
 // REQUIRED SETUP
 interp.repositories() ++= Seq(coursierapi.MavenRepository.of("http://maven.snplow.com/releases/"))
 

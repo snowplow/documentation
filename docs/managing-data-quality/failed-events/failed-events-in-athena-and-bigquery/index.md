@@ -6,7 +6,7 @@ sidebar_position: 5000
 
 [Athena](https://aws.amazon.com/athena/) on AWS and [BigQuery](https://cloud.google.com/bigquery) on GCP are tools that let you query your failed events, using the cloud storage files as a back-end data source.
 
-```
+```sql
 SELECT data.failure.messages FROM adapter_failures
 WHERE from_iso8601_timestamp(data.failure.timestamp) > timestamp '2020-04-01'
 ```
@@ -19,7 +19,7 @@ The [snowplow-badrows-tables repo](https://github.com/snowplow-incubator/snowplo
 
 Go to [the Athena dashboard](https://eu-central-1.console.aws.amazon.com/athena/home) and use the query editor. Start by creating a database named after your pipeline (e.g. prod1 or qa1):
 
-```
+```sql
 CREATE DATABASE IF NOT EXISTS {{ DATABASE }}
 ```
 
@@ -32,7 +32,7 @@ Create table in Athena
 
 As example of using your Athena tables, you might start by getting counts of each failed event type from the last week. Repeat this query for each table you have created:
 
-```
+```sql
 SELECT COUNT(*) FROM schema_violations
 WHERE from_iso8601_timestamp(data.failure.timestamp) > DATE_ADD('day', -7, now())
 ```
@@ -44,7 +44,7 @@ Athena query
 
 If you have schema violations, you might want to find which tracker sent the event:
 
-```
+```sql
 SELECT data.payload.enriched.app_id, COUNT(*) FROM schema_violations
 WHERE from_iso8601_timestamp(data.failure.timestamp) > DATE_ADD('day', -7, now())
 GROUP BY data.payload.enriched.app_id
@@ -52,7 +52,7 @@ GROUP BY data.payload.enriched.app_id
 
 You can do a deeper dive into the error messages to get a explanation of the last 10 failures:
 
-```
+```sql
 SELECT data.failure.messages[1].field AS field,
        data.failure.messages[1].value AS value,
        data.failure.messages[1].error AS error,
@@ -82,7 +82,7 @@ _We have omitted fields from the table definitions if they are "polymorphic", e.
 
 Create a dataset to contain your failed event tables:
 
-```
+```bash
 bq mk --data_location=EU bad_rows_prod1
 # Dataset 'my-snowplow-project:bad_rows_prod1' successfully created.
 ```
@@ -91,7 +91,7 @@ The `--data-location` should match the location of your bad rows bucket. Also 
 
 Now run `bq mk` for each table definition in the badrows-tables repo. Use the `--external_table_definition` parameter so that bigquery uses the bucket as the back-end data source. Here is how to run the command for the first three tables (note you should change the dataset name `bad_rows_prod1` to match the dataset you just created):
 
-```
+```bash
 bq mk \
   --display_name="Adapter failures" \
   --external_table_definition=./adapter_failures.json \
@@ -116,14 +116,14 @@ bq mk \
 
 You can query your tables from the query editor in the [BigQuery console](https://console.cloud.google.com/bigquery). You might want to start by getting counts of each failed event type from the last week. This query will work, but it is relatively expensive because it will scan all files in the `schema_violations` directory:
 
-```
+```sql
 SELECT COUNT(*) FROM bad_rows_prod1.schema_violations
 WHERE data.failure.timestamp > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 7 DAY);
 ```
 
 You can construct a more economical query by using the `_FILE_NAME` pseudo column to restrict the scan to files from the last week:
 
-```
+```sql
 SELECT COUNT(*) FROM bad_rows_prod1.schema_violations
 WHERE DATE(PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%S', LTRIM(REGEXP_EXTRACT(_FILE_NAME, 'output-[0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+:[0-9]+'), 'output-'))) >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY);
 ```
@@ -135,7 +135,7 @@ You can repeat that query for each table you created in your bad rows dataset.
 
 If you have schema violations, you might want to find which tracker sent the event:
 
-```
+```sql
 SELECT data.payload.enriched.app_id, COUNT(*) FROM bad_rows_prod1.schema_violations
 WHERE DATE(PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%S', LTRIM(REGEXP_EXTRACT(_FILE_NAME, 'output-[0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+:[0-9]+'), 'output-'))) >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)
 GROUP BY data.payload.enriched.app_id;
@@ -143,7 +143,7 @@ GROUP BY data.payload.enriched.app_id;
 
 If you have tracker protocol failures, you can do a deeper dive into the error messages to get a explanation of the last 10 failures:
 
-```
+```sql
 SELECT data.failure.messages[OFFSET(0)].field AS field,
        data.failure.messages[OFFSET(0)].value AS value,
        data.failure.messages[OFFSET(0)].expectation AS expectation,

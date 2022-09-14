@@ -26,7 +26,7 @@ The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](h
 
 Some components of Snowplow require an Iglu Server, and a static repo will not work. This means you'll want to host a mirror of Iglu Central. You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md)`:
 
-```
+```bash
 git clone https://github.com/snowplow/iglu-central
 cd iglu-central
 igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000

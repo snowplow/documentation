@@ -16,7 +16,7 @@ It groups messages from an input PubSub subscription into configurable windows a
 
 It also optionally partitions the output by date so that you can easily see what was outputted when in your cloud storage bucket, for example we could see the following hierarchy:
 
-```
+```bash
 gs://bucket/
 --2018
 ----10
@@ -84,7 +84,7 @@ Refer to [the documentation on executing templates](https://cloud.google.com/da
 
 Here, we provide an example using `gcloud`:
 
-```
+```bash
 gcloud dataflow jobs run [JOB-NAME] \
   --gcs-location gs://sp-hosted-assets/4-storage/snowplow-google-cloud-storage-loader/0.5.0/SnowplowGoogleCloudStorageLoaderTemplate-0.5.0 \
   --parameters \
@@ -104,7 +104,7 @@ You can find the archive hosted on [Github](https://github.com/snowplow-incubat
 
 Once unzipped the artifact can be run as follows:
 
-```
+```bash
 ./bin/snowplow-google-cloud-storage-loader \
   --runner=DataFlowRunner \
   --project=[PROJECT] \
@@ -122,13 +122,13 @@ Once unzipped the artifact can be run as follows:
 
 To display the help message:
 
-```
+```bash
 ./bin/snowplow-google-cloud-storage-loader --help
 ```
 
 To display documentation about Cloud Storage Loader-specific options:
 
-```
+```bash
 ./bin/snowplow-google-cloud-storage-loader --help=com.snowplowanalytics.storage.googlecloudstorage.loader.Options
 ```
 
@@ -138,7 +138,7 @@ You can find the image in [Docker Hub](https://hub.docker.com/r/snowplow/snowpl
 
 A container can be run as follows:
 
-```
+```bash
 docker run \
   -v $PWD/config:/snowplow/config \ # if running outside GCP
   -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/credentials.json \ # if running outside GCP
@@ -160,14 +160,14 @@ docker run \
 
 To display the help message:
 
-```
+```bash
 docker run snowplow/snowplow-google-cloud-storage-loader:0.5.0 \
   --help
 ```
 
 To display documentation about Cloud Storage Loader-specific options:
 
-```
+```bash
 docker run snowplow/snowplow-google-cloud-storage-loader:0.5.0 \
   --help=com.snowplowanalytics.storage.googlecloudstorage.loader.Options
 ```

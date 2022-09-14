@@ -23,7 +23,7 @@ The asset is published as a jar file attached to the [Github release notes](http
 
 It's also available in several S3 buckets that are accessible to an EMR cluster:
 
-```
+```text
 s3://snowplow-hosted-assets/4-storage/transformer-batch/snowplow-transformer-batch-4.1.0.jar
 
 -- or --
@@ -37,7 +37,7 @@ where `region` is one of `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`, `eu
 
 Here's an example of an EMR cluster config file that can be used with Dataflow Runner:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.dataflowrunner/ClusterConfig/avro/1-1-0",
   "data": {
@@ -162,7 +162,7 @@ To run the transformer on EMR with Dataflow Runner, you need:
 
 A typical playbook can look like:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.dataflowrunner/PlaybookConfig/avro/1-0-1",
   "data": {
@@ -221,7 +221,7 @@ You need to change the following settings with your own values:
 
 Here's an example of putting all of the above together on a transient EMR cluster:
 
-```
+```bash
 $ ./dataflow-runner run-transient \
   --emr-config path/to/cluster.conig \
   --emr-playbook path/to/playbook

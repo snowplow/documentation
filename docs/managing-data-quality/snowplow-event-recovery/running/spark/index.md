@@ -14,7 +14,7 @@ To build the fat jar, run:
 
 #### [](https://github.com/snowplow-incubator/snowplow-event-recovery#running)
 
-```
+```bash
 sbt spark/assembly
 ```
 
@@ -22,7 +22,7 @@ sbt spark/assembly
 
 Using the JAR directly (which is hosted at `s3://snowplow-hosted-assets/3-enrich/snowplow-event-recovery/`):
 
-```
+```bash
 spark-submit \
   --class com.snowplowanalytcs.snowplow.event.recovery.Main \
   --master master-url \
@@ -38,7 +38,7 @@ spark-submit \
 
 Or through an EMR step:
 
-```
+```bash
 aws emr add-steps --cluster-id j-XXXXXXXX --steps \
   Name=snowplow-event-recovery,\
   Type=CUSTOM_JAR,\
@@ -50,7 +50,7 @@ aws emr add-steps --cluster-id j-XXXXXXXX --steps \
 
 Or using Dataflow Runner, with `emr-config.json`:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.dataflowrunner/ClusterConfig/avro/1-1-0",
   "data": {
@@ -118,7 +118,7 @@ Or using Dataflow Runner, with `emr-config.json`:
 
 And `emr-playbook.json`:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.dataflowrunner/PlaybookConfig/avro/1-0-1",
   "data": {
@@ -215,6 +215,6 @@ And `emr-playbook.json`:
 
 Run:
 
-```
+```bash
 dataflow-runner run-transient --emr-config ./emr-config.json --emr-playbook ./emr-playbook.json
 ```

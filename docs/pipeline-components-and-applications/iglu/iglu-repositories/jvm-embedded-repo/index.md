@@ -45,7 +45,7 @@ You now need to embed your JSON Schema files into your Java or Scala application
 
 The Iglu Scala client will expect to find these JSON Schema files included in the application as resources. Therefore, you should store the files in a path something like this:
 
-```
+```text
 myapp/src/main/resources/my-repo/schemas
 ```
 

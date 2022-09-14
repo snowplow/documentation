@@ -25,7 +25,7 @@ All steps are applied against all _targets_. All targets are processed in parall
 
 In the following example, a.sql, b.sql and c.sql are run in parallel.
 
-```
+```yaml
 :steps:
   - :name: "Run a,b and c in parallel"
     :queries:
@@ -39,7 +39,7 @@ In the following example, a.sql, b.sql and c.sql are run in parallel.
 
 By contrast, in the example below, the three SQL files are executed in sequence.
 
-```
+```yaml
 :steps:
   - :name: "Run a..."
     :queries:
@@ -57,13 +57,13 @@ By contrast, in the example below, the three SQL files are executed in sequence.
 
 Playbooks can be templated, and corresponding variables can be passed in with the var flag like this:
 
-```
+```bash
 sql-runner -var host=value,username=value2,password=value3
 ```
 
 Here is the corresponding playbook template:
 
-```
+```yaml
 :targets:
 - :name: "My Postgres database 1"
   :type: postgres
@@ -90,7 +90,7 @@ A query file contains one or more SQL statements. These are executed "raw" (i.e.
 
 **Note**: If your query is a template that requires pre-processing, you must add `template: true` to the query definition in the playbook yml file, for example:
 
-```
+```yaml
 :name: "Run a.."
     :queries:
       - :name: a
@@ -126,7 +126,7 @@ Failures in one target do not affect other targets in any way.
 
 ### Return codes
 
-```
+```text
 - 0 for no errors
 - 5 for target initialization errors
 - 6 for query errors
@@ -140,7 +140,7 @@ Failures in one target do not affect other targets in any way.
 
 If your storage target is Amazon Redshift, then the target configuration in the playbook is:
 
-```
+```yaml
 targets:
   - name: "My Redshift database"
     type: redshift
@@ -160,7 +160,7 @@ To access a BigQuery project, sql-runner will need some Google credentials. Thes
 
 After the credentials are set up, simply create a playbook with the following BigQuery-specific target configuration:
 
-```
+```yaml
 targets:
   - name: "My BigQuery database"
     type: bigquery
@@ -173,7 +173,7 @@ variables:
 
 If your data warehouse is Snowflake, then the SQL Runner playbooks will have a target configuration as:
 
-```
+```yaml
 targets:
   - name: "My Snowflake database"
     type: snowflake
@@ -196,7 +196,7 @@ The `query_tag` parameter sets the `QUERY_TAG` [session parameter](https://docs.
 
 Finally, if your storage target is PostgreSQL, then can be configured as:
 
-```
+```yaml
 targets:
   - name: "My Postgres database"
     type: postgres
@@ -221,7 +221,7 @@ SQL Runner is a zero-dependency binary and can be found as a [release asset](htt
 
 ### CLI Arguments
 
-```
+```bash
 ./sql-runner --help
 sql-runner version: 0.10.0
 Run playbooks of SQL scripts in series and parallel on Redshift, Postgres, BigQuery and Snowflake

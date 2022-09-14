@@ -30,7 +30,7 @@ We support installing the Obj-C Client via CocoaPods since it's the easiest way 
 2. Create the file `Podfile` in the root of your XCode project directory, if you don't have one already
 3. Add the following line into it:
 
-```
+```bash
 pod 'SnowplowIgluClient'
 ```
 
@@ -44,7 +44,7 @@ If you prefer not to use CocoaPods, you can grab the client from our [GitHub rep
 
 First, git clone the latest version of the client to your local machine:
 
-```
+```bash
 git clone https://github.com/snowplow/iglu-objc-client.git
 ```
 
@@ -54,7 +54,7 @@ If you don't have git installed locally, [install it](http://git-scm.com/downloa
 
 You first need to copy the client's `SnowplowIgluClient` sub-folder into your XCode project's folder. The command will look something like this:
 
-```
+```bash
 cp -r iglu-objc-client/SnowplowIgluClient MyObjcApp/MyObjcApp/
 ```
 
@@ -75,7 +75,7 @@ To get this bundle you will need to:
 
 Alternatively you can also include the standard Snowplow repository in your resolver-config:
 
-```
+```json
 {
   "name": "Iglu Central",
   "vendorPrefixes": [
@@ -102,7 +102,7 @@ All interactions are handled through the ObjC client's `IGLUClient` class.
 
 Import the header for the client like so:
 
-```
+```objc
 #import "IGLUClient.h"
 ```
 
@@ -116,7 +116,7 @@ To make this step a touch easier we have included several utility functions for 
 
 For example; grabbing your resolver-config from a local source and creating the client could look like this:
 
-```
+```objc
 #import "IGLUUtilities.h"
 
 // Create Client
@@ -132,7 +132,7 @@ IGLUClient * client = [[IGLUClient alloc]
 
 To create a client from a URL:
 
-```
+```objc
 // The URL is passed as an NSString
 IGLUClient * client = [[IGLUClient alloc] initWithUrlPath:@"https://raw.githubusercontent.com/snowplow/snowplow/master/3-enrich/config/iglu_resolver.json" andBundles:nil];
 ```
@@ -141,7 +141,7 @@ The `andBundle:` argument of the client init accepts an `NSMutableArray` of bund
 
 To add to the available bundles you can use:
 
-```
+```objc
 [client addToBundles:yourBundleObject];
 ```
 
@@ -153,13 +153,13 @@ Once you have successfully created a client you can start validating your self-d
 
 To parse your JSON String as an `NSDictionary` you can use `IGLUUtilities` like so:
 
-```
+```objc
 NSDictionary * jsonDictionary = [IGLUUtilities parseToJsonWithString:yourStringHere];
 ```
 
 To validate your JSON:
 
-```
+```objc
 BOOL result = [client validateJson:jsonDictionary];
 ```
 

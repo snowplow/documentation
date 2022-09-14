@@ -28,13 +28,13 @@ Ruby Iglu Client is published on [RubyGems.org](https://rubygems.org/).
 
 You can either install it in shell via `gem`:
 
-```
+```bash
 $ gem install iglu-ruby-client
 ```
 
 or add it to `Gemfile`:
 
-```
+```ruby
 gem 'iglu-ruby-client'
 ```
 
@@ -46,7 +46,7 @@ You can also build and install gem locally in case you need to introduce some ch
 
 First, git clone the latest version of the client to your local machine:
 
-```
+```bash
 $ git clone https://github.com/snowplow/iglu-ruby-client.git
 ```
 
@@ -54,7 +54,7 @@ If you don't have git installed locally, [install it](http://git-scm.com/downlo
 
 #### [](https://github.com/snowplow/iglu/wiki/Ruby-client-setup#build-a-gem)Build a gem
 
-```
+```bash
 $ cd iglu-ruby-client
 $ gem build iglu-ruby-client.gemspec
 $ gem install iglu-ruby-client-0.1.0.gem
@@ -73,7 +73,7 @@ You are now ready to instantiate a Ruby Client.
 
 ### JSON-based initialization
 
-```
+```ruby
 require 'iglu-client'
 
 resolver_config = {:schema => "iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-2",
@@ -94,7 +94,7 @@ Note that it is highly recommended to use JSONs as hashes with symbolized keys, 
 
 Once you have successfully created a client you can start validating your self-describing JSON.
 
-```
+```ruby
 json = resolver_config      # resolver config is plain self-describing JSON!
 resolver.validate(json)     # this will return same `json` value in case of success or throw IgluError in case of any failure
 ```
@@ -110,7 +110,7 @@ To just lookup schema without any self-describing JSON, you can use `lookup_sche
 Specifically, you can initialize and utilize entities such as schema key, self-describing data, SchemaVer etc.  
 Same classes will be included in Iglu Ruby Core library when it'll be released.
 
-```
+```ruby
 schema_key = SchemaKey.new("com.acme", "event", "jsonschema", SchemaVer.new(1,0,2))
 # or 
 schema_key = SchemaKey.parse("iglu:com.acme/event/jsonschema/1-0-2")

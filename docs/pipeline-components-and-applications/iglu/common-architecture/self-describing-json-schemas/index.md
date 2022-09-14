@@ -19,7 +19,7 @@ We encapsulated all this information in a `self` property.
 
 As an example, we would go from this JSON Schema:
 
-```
+```json
 {
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
@@ -35,7 +35,7 @@ As an example, we would go from this JSON Schema:
 
 to this one:
 
-```
+```json
 {
     "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     "self": {

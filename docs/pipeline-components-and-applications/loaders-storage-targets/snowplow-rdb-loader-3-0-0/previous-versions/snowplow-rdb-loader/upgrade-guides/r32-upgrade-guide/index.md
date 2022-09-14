@@ -14,7 +14,7 @@ We recommend to go through the upgrade routine in several independent steps. Aft
     2. Add `"blacklistTabular": null` field into `data` payload
 3. Update your `config.yml` file
 
-```
+```yaml
 aws:
   emr:
     ami_version: 5.19.0     # was 5.9.0; Required by RDB Shredder 
@@ -32,7 +32,7 @@ Automigrations work only with Iglu Server 0.6.0. This component provides informa
 
 You still can use static registries as a backup, they will continue to work for validatioin purposes, but won't work for TSV shredding. Snowplow does not provide a public Iglu Server hosting Iglu Central schemas, so we recommend you to mirror Iglu Central with your own Iglu Server:
 
-```
+```bash
 $ git clone https://github.com/snowplow/iglu-central.git
 $ igluctl static push iglu-central/schemas $YOUR_SERVER_URL $YOU_API_KEY
 $ igluctl static push com.acme-iglu-registry/schemas $YOUR_SERVER_URL $YOU_API_KEY
@@ -49,7 +49,7 @@ Every table that have an incompatible order will have to be "blacklisted" in Red
 
 Here's an example of a black list containing several schemas from Iglu Central:
 
-```
+```json
   "blacklistTabular": [
     "iglu:org.w3/PerformanceTiming/jsonschema/1-*-*",
 

@@ -61,7 +61,7 @@ The `context` argument should consist of an array of one or more instances of�
 
 For example, if a server-side Python application can determine visitor's geoposition, this can be attached to the event, using the `geolocation_context` that is predefined on [Iglu Central](https://github.com/snowplow/iglu-central):
 
-```
+```python
 from snowplow_tracker import SelfDescribingJson
 
 geo_context = SelfDescribingJson(
@@ -75,7 +75,7 @@ geo_context = SelfDescribingJson(
 
 As another example, if a visitor arrives on a page advertising a movie, the context object might look like this (`movie_poster` is custom context, not predefined):
 
-```
+```python
 poster_context = SelfDescribingJson(
   "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   {
@@ -88,7 +88,7 @@ poster_context = SelfDescribingJson(
 
 This is how to fire a page view event with both above contexts:
 
-```
+```python
 t.track_page_view("http://www.films.com", "Homepage", context=[poster_context, geo_context])
 ```
 
@@ -112,13 +112,13 @@ The optional timestamp argument is for the cases where you might want to set the
 
 Here is an example tracking a structured event and supplying the optional timestamp argument. We can explicitly supply `None` for the intervening arguments which are empty:
 
-```
+```python
 t.track_struct_event("some cat", "save action", None, None, None, 1368725287000)
 ```
 
 Alternatively, we can use the argument name:
 
-```
+```python
 t.track_struct_event("some cat", "save action", tstamp=1368725287000)
 ```
 
@@ -126,7 +126,7 @@ t.track_struct_event("some cat", "save action", tstamp=1368725287000)
 
 Before version 0.9.0 of the Python Tracker, providing a `snowplow_tracker.timestamp.TrueTimestamp` object as the timestamp argument will attach a true timestamp to the event, replacing the device timestamp. For example:
 
-```
+```python
 from snowplow_tracker.tracker import TrueTimestamp
 t.track_struct_event("some cat", "save action", tstamp=TrueTimestamp(1368725287000))
 ```
@@ -137,7 +137,7 @@ Above will attach [`ttm`](https://github.com/snowplow/snowplow/wiki/snowplow-tr
 
 Since version 0.9.0, providing the optional timestamp argument will only set the true timestamp (true\_tstamp) of the event. The type of this argument can only be the unix time in milliseconds. If you migrate from previous version, make sure to replace any references to Timestamp objects, since the Timestamp class (along with the TrueTimestamp and DeviceTimestamp subclasses) do not exist.
 
-```
+```python
 
 t.track_struct_event("some cat", "save action", tstamp=1368725287000)
 ```
@@ -148,7 +148,7 @@ Since version 0.9.0, it is possible to set the Subject per-event, in order to au
 
 This is supported as an optional keyword argument by all track methods. For example:
 
-```
+```python
 
 evSubject = Subject().set_user_id("1234")
 t.track_page_view("www.example.com", event_subject=evSubject)
@@ -158,7 +158,7 @@ t.track_page_view("www.example.com", event_subject=evSubject)
 
 All tracker methods will return the tracker instance, allowing tracker methods to be chained:
 
-```
+```python
 e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net")
 t = Tracker(e)
 
@@ -180,7 +180,7 @@ This method's arguments are:
 
 Example:
 
-```
+```python
 from snowplow_tracker import SelfDescribingJson
 
 t.track_self_describing_event(SelfDescribingJson(
@@ -215,7 +215,7 @@ Use `track_page_view()` to track a user viewing a page within your app or webs
 
 Example:
 
-```
+```python
 t.track_page_view("www.example.com", "example", "www.referrer.com")
 ```
 
@@ -240,7 +240,7 @@ Arguments are:
 
 Example:
 
-```
+```python
 t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.com", 0, 100, 0, 500, None)
 ```
 
@@ -260,7 +260,7 @@ Although name and id\_ are not individually required, at least one must be provi
 
 Example:
 
-```
+```python
 t.track_screen_view("HUD > Save Game", "screen23", None, 1368725287000)
 ```
 
@@ -299,7 +299,7 @@ These are the fields that can appear in a transaction item dictionary:
 
 Example of tracking a transaction containing two items:
 
-```
+```python
 t.track_ecommerce_transaction("6a8078be", 35, city="London", currency="GBP", items=
     [{
         "sku": "pbz0026",
@@ -333,7 +333,7 @@ Arguments:
 
 Example:
 
-```
+```python
 t.track_ecommerce_transaction_item("order-789", "2001", 49.99, 1, "Green shoes", "clothing")
 ```
 
@@ -354,7 +354,7 @@ Use `track_struct_event()` to track a custom event happening in your app which
 
 Example:
 
-```
+```python
 t.track_struct_event("shop", "add-to-basket", None, "pcs", 2)
 ```
 
@@ -375,13 +375,13 @@ Use `track_link_click()` to track individual link click events. Arguments are:
 
 Basic example:
 
-```
+```python
 t.track_link_click("http://my-target-url2/path")
 ```
 
 Advanced example:
 
-```
+```python
 t.track_link_click("http://my-target-url2/path", "element id 2", None, "element target", "element content")
 ```
 
@@ -403,7 +403,7 @@ Use `track_add_to_cart()` to track adding items to a cart on an ecommerce site
 
 Example:
 
-```
+```python
 t.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
 ```
 
@@ -425,13 +425,13 @@ Use `track_remove_from_cart()` to track removing items from a cart on an ecomm
 
 Basic example:
 
-```
+```python
 t.track_remove_from_cart("123", 1)
 ```
 
 Advanced example:
 
-```
+```python
 t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD")
 ```
 
@@ -453,13 +453,13 @@ Use `track_from_change()` to track changes in website form inputs over session
 
 Basic example:
 
-```
+```python
 t.track_form_change("signupForm", "ageInput", "age", "24")
 ```
 
 Advanced example:
 
-```
+```python
 t.track_form_change("signupForm", "ageInput", "age", "24", "number", ["signup__number", "form__red"])
 ```
 
@@ -478,13 +478,13 @@ Use `track_form_submit()` to track sumbitted forms. Arguments are:
 
 Basic example:
 
-```
+```python
 t.track_form_submit("registrationForm")
 ```
 
 Advanced example:
 
-```
+```python
 t.track_form_submit("signupForm", ["signup__warning"], {"name": "email", "value": "tracker@example.com", "nodeName": "INPUT", "type": "email"})
 ```
 
@@ -504,13 +504,13 @@ Use `track_site_search()` to track a what user searches on your website. Argum
 
 Basic example:
 
-```
+```python
 t.track_site_search(["analytics", "snowplow", "tracker"])
 ```
 
 Advanced example:
 
-```
+```python
 t.track_site_search(["pulp fiction", "reviews"], {"nswf": true}, 215, 22)
 ```
 

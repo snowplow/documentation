@@ -49,7 +49,7 @@ Learn more [why schemas](/docs/understanding-tracking-design/understanding-schem
 - First create the schema for the event
     - The below is an example - you can create your own schema or edit this schema to better suit your needs
 
-```
+```json
 {
      "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
      "description": "Schema for a button click event",
@@ -87,7 +87,7 @@ Learn more [why schemas](/docs/understanding-tracking-design/understanding-schem
         - You can find more information on the [Igluctl docs page](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static-push)
 - To send an event using this schema you'll want to track a Self Describing Event. Here is an example of how to do so with the JavaScript Tracker:
 
-```
+```javascript
 snowplow('trackSelfDescribingEvent', {
    event: {
      schema: 'iglu:com.snowplowanalytics/button_click/jsonschema/1-0-0',

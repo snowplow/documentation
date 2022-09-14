@@ -18,13 +18,13 @@ This means that you need to add "-u username:password" to all `curl` commands,
 
 #### Service restart
 
-```
+```bash
 /control-plane/restart-services﻿
 ```
 
 Example using `curl`:
 
-```
+```bash
 $ curl -XPUT http://${snowplow_mini_ip}/control-plane/restart-services \       -u username:password﻿
 ```
 
@@ -36,13 +36,13 @@ Return status 200 means that services have been successfully restarted.
 
 #### Adding external Iglu Server
 
-```
-/control-plane/external-iglu﻿
+```bash
+/control-plane/external-iglu
 ```
 
 Example using `curl`:
 
-```
+```bash
 curl -XPOST http://${snowplow_mini_ip}/control-plane/external-iglu \    -d "uri=${external_iglu_uri}&apikey=${external_iglu_server_apikey}&vendor_prefix=${vendor_prefix}&name=${iglu_server_name}&priority=${priority}" \    -u username:password﻿
 ```
 
@@ -56,13 +56,13 @@ Return status 200 means that pieces of information are added to iglu resolver js
 
 #### Uploading custom enrichments
 
-```
+```bash
 /control-plane/enrichments﻿
 ```
 
 Example using `curl`:
 
-```
+```bash
 curl http://${snowplow_mini_ip}/control-plane/enrichments \    -F "enrichmentjson=@${path_of_the_custom_enrichment_dir}" \    -u username:password﻿
 ```
 
@@ -72,13 +72,13 @@ Return status 200 means that custom enrichment json file is placed in the enrich
 
 #### Adding apikey for local Iglu Server
 
-```
+```bash
 /control-plane/local-iglu-apikey﻿
 ```
 
 Example using `curl`:
 
-```
+```bash
 curl -XPOST http://${snowplow_mini_ip}/control-plane/local-iglu-apikey \    -d "local_iglu_apikey=${new_local_iglu_apikey}" \    -u username:password﻿
 ```
 
@@ -90,13 +90,13 @@ Return status 200 means that apikey is added and Stream Enrich is restarted succ
 
 #### Changing credentials for basic HTTP authentication
 
-```
+```bash
 /control-plane/credentials﻿
 ```
 
 Example using `curl`:
 
-```
+```bash
 curl -XPOST http://${snowplow_mini_ip}/control-plane/credentials \    -d "new_username=${new_username}&new_password=${new_password}" \    -u username:password﻿
 ```
 
@@ -106,13 +106,13 @@ You will get always empty reply from the server because caddy server will be res
 
 #### Add domain name
 
-```
+```bash
 /control-plane/domain-name﻿
 ```
 
 Example using `curl`:
 
-```
+```bash
 curl -XPOST http://${snowplow_mini_ip}/control-plane/domain-name \    -d "domain_name=${registered_domain_name}" \    -u username:password﻿
 ```
 
@@ -122,13 +122,13 @@ You will get always empty reply from the server because caddy server will be res
 
 #### Get Snowplow Mini version
 
-```
+```bash
 /control-plane/version﻿
 ```
 
 Example using `curl`:
 
-```
+```bash
 curl -XGET http://${snowplow_mini_ip}/control-plane/version \    -u username:password﻿
 ```
 
@@ -136,13 +136,13 @@ Returns version of the running Snowplow Mini instance.
 
 #### Uploading Iglu Server configuration
 
-```
+```bash
 /control-plane/iglu-config﻿
 ```
 
 Example using `curl`:
 
-```
+```bash
 curl http://${snowplow_mini_ip}/control-plane/iglu-config \    -F "igluserverhocon=@${path_of_the_iglu_server_config}" \    -u username:password﻿
 ```
 

@@ -29,7 +29,7 @@ Once defined, an entity can be attached to any kind of event. This is also an im
 
 Example:
 
-```
+```ruby
 # Tracking a screen view with context made up of two entities
 entity1 = SnowplowTracker::SelfDescribingJson.new(
   'iglu:com.my_company/movie_poster/jsonschema/1-0-0',
@@ -48,7 +48,7 @@ tracker.track_screen_view(id: 'sci-123-abc', context: [entity1, entity2])
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
 
-```
+```ruby
 # Tracking a screen view with context made up of two entities
 entity1 = SnowplowTracker::SelfDescribingJson.new(
   'iglu:com.my_company/movie_poster/jsonschema/1-0-0',
@@ -100,7 +100,7 @@ Note: the methods for defining `domain_sessionid` and `domain_sessionidx` were a
 
 Example:
 
-```
+```ruby
 # Creating a Subject and adding user data
 subject = SnowplowTracker::Subject.new
 subject.set_user_id('12345').set_timezone('Europe/London')
@@ -123,7 +123,7 @@ tracker.track_page_view(page_url: 'www.example.com')
 
 Note: the ability to add Subjects to `track_x_event` method calls was added in version 0.7.0.
 
-```
+```ruby
 # Creating a Subject and adding user data
 subject = SnowplowTracker::Subject.new
 subject.set_user_id('12345').set_timezone('Europe/London')
@@ -148,7 +148,7 @@ If you have implemented the Ruby tracker as well as the JavaScript tracker in yo
 
 Extracting the `domain_user_id` from the `_sp_id` cookie in Rails:
 
-```
+```ruby
 def snowplow_domain_userid
   sp_cookie = cookies.find { |key, _value| key =~ /^_sp_id/ }
   sp_cookie.last.split(".").first if sp_cookie.present?
@@ -169,7 +169,7 @@ Add page URL, page title and referrer URL to any event by adding a Page object t
 
 Example:
 
-```
+```ruby
 # Adding Page data to a struct event
 page = SnowplowTracker::Page.new(page_url: 'http://www.example.com/register')
 

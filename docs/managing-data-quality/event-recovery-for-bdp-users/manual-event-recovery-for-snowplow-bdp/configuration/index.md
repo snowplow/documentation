@@ -22,7 +22,7 @@ Steps are constructed in JSON object format consisting of four individual parts:
 - `value` – a new value to be set
 - `from` / `to` - used for casting types _from_ one type _to_ another
 
-```
+```json
 // Replace
 {
   "op": "Replace",
@@ -60,7 +60,7 @@ Much like steps, conditions are constructed with the following JSON object forma
 - `path` – JSON Path to object, the path can contain specific field names (ie. `raw`) , array ids (ie. `[1]`) or filters (by regex: `[?(@.schema=~iglu://\\.*)]`).
 - `value` – a value matcher to match against: match a regular expression, compare directly (object equality), check size for equality, less or greater than
 
-```
+```json
 // Compare values
 {
   "op": "Test",
@@ -113,7 +113,7 @@ Much like steps, conditions are constructed with the following JSON object forma
 
 Flows are sequences of Steps applied one by one. Flows are mapped onto specific steps and conditions.
 
-```
+```json
 {
   "name": "main flow",
   "conditions": [],

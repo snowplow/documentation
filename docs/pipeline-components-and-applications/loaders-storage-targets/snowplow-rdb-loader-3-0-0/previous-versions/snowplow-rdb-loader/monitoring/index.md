@@ -10,7 +10,7 @@ The RDB loader has several types of monitoring built in, to help the pipeline op
 
 The RDB loader can `POST` an http webhook to a configurable uri whenever there is an issue which needs investigation by the pipeline operator. The webhook payload conforms to [the alert json schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.batch/alert/jsonschema/1-0-0) in Iglu Central.
 
-```
+```json
 {
   "application": "1.2.0",
   "folder": "s3://mybucket/shredded/run=2021-09-10-13-41-27",
@@ -24,7 +24,7 @@ The RDB loader can `POST` an http webhook to a configurable uri whenever there i
 
 You can configure where the webhook is sent by setting the `monitoring.webhook` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```
+```json
 "monitoring": {
   "webhook": {
     "endpoint": "http://example.com/receiver"
@@ -44,7 +44,7 @@ A webhook alert is sent when the RDB loader identifies inconsistencies between t
 
 Folder monitoring is configured by setting the `monitoring.folders` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```
+```json
 "monitoring": {
   "folders": {
     "staging": "s3://mybucket/loader/logs"
@@ -59,7 +59,7 @@ _Added in version 2.1.0._ The RDB loader can send an alert if the warehouse does
 
 The health check is configured by setting the `monitoring.healthCheck` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```
+```json
 "monitoring": {
   "healthCheck": {
     "frequency": "20 minutes"
@@ -74,7 +74,7 @@ The health check is configured by setting the `monitoring.healthCheck` section i
 
 The RDB loader can emit metrics to a statsd daemon describing every batch it processes. Here is a string representation of the metrics it sends:
 
-```
+```text
 snowplow.rdbloader.count_good:42|c|#tag1:value1snowplow.rdbloader.latency_collector_to_load_min:123.4|g|#tag1:value1snowplow.rdbloader.latency_collector_to_load_max:234.5|g|#tag1:value1snowplow.rdbloader.latency_shredder_start_to_load:66.6|g|#tag1:value1snowplow.rdbloader.latency_shredder_end_to_load:44.4|g|#tag1:value1
 ```
 
@@ -86,7 +86,7 @@ snowplow.rdbloader.count_good:42|c|#tag1:value1snowplow.rdbloader.latency_collec
 
 Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```
+```json
 "monitoring": {
   "metrics": {
     "hostname": "localhost"
@@ -108,7 +108,7 @@ Common reasons might be lost connection to the database, or an http error fetchi
 
 Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md) with the url of your sentry server:
 
-```
+```json
 "monitoring": {
   "dsn": "http://sentry.acme.com"
 }
@@ -120,7 +120,7 @@ The loader can emit a Snowplow event to a collector when the application crashes
 
 Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/configuration-reference/index.md):
 
-```
+```json
 "monitoring": {
   "appId": "redshift-loader"
   "collector": "collector.acme.com"

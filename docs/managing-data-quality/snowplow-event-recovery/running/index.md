@@ -10,13 +10,13 @@ The configuration consists of
 
 `resolver-config.json`, for example:
 
-```
+```json
 {"schema":"iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-1","data":{"cacheSize":0,"repositories":[{"name":"Iglu-Central","priority":1,"vendorPrefixes":["com.snowplowanalytics"],"connection":{"http":{"uri":"http://iglu-central.com"}}}]}}
 ```
 
 `job-config.json`, for example:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/2-0-0",
   "data": {
@@ -35,7 +35,7 @@ The configuration consists of
 
 Configuration is supplied to recovery jobs as a Base64-encoded string. Encode your configuration. You can use following [ammonite](http://ammonite.io) script to do this for you:
 
-```
+```scala
 import java.util.Base64
 import java.nio.charset.StandardCharsets
 import ammonite.ops._
@@ -53,7 +53,7 @@ val encode = (str: String)  => Base64.getEncoder.encodeToString(str.getBytes(Sta
 
 And then just run (assuming ammonite is on your path and above script is called `encode.sc`:
 
-```
+```bash
 amm ./encode.sc resolver-config.json
 amm ./encode.sc job-config.json
 ```

@@ -14,7 +14,7 @@ The Snowplow React Native Tracker is a module which imports the Native Snowplow 
 
 Install the tracker with:
 
-```
+```bash
 npm install @snowplow/react-native-tracker --save
 ```
 
@@ -22,7 +22,7 @@ npm install @snowplow/react-native-tracker --save
 
 Minimal setup – initialise the tracker and track a screen view:
 
-```
+```typescript
 import { createTracker } from '@snowplow/react-native-tracker';
 
 const tracker = createTracker('namespace', {
@@ -37,7 +37,7 @@ tracker.trackScreenViewEvent({screenName: 'myScreenName'});
 
 In the previous 0.1.x releases, initializing the tracker was done differently. As an example describing the API change for a quick migration to v0.2.0:
 
-```
+```typescript
 /* Previous API (v0.1.x) 
 import Tracker from '@snowplow/react-native-tracker';                       // (a)
 
@@ -72,7 +72,7 @@ In short:
 
 Many of the automatic tracking options available on iOS and Android are also available in React Native – these can be enabled in the configuration passed to `createTracker`. For example, to set up tracking of lifecycle events, with the mobile context and session context enabled:
 
-```
+```typescript
 import { createTracker } from '@snowplow/react-native-tracker';
 
 const tracker = createTracker('my-namespace', {
@@ -92,7 +92,7 @@ See the configuration section below for a full list of options.
 
 Custom events may be tracked using the `trackSelfDescribingEvent()` method:
 
-```
+```typescript
 tracker.trackSelfDescribingEvent({
   schema: 'iglu:com.acme/example/jsonschema/1-0-0',
   data: {someExampleField: 'Hello World'}
@@ -105,7 +105,7 @@ See Custom Event Tracking Section below for more detail.
 
 All tracker methods take two arguments: A JSON of key-value pairs for the event’s properties, and an optional array of contexts, i.e. of self-describing JSONs to be attached as entities. For example:
 
-```
+```typescript
 tracker.trackScreenViewEvent(
    { screenName: 'myScreenName' },
    [
@@ -143,7 +143,7 @@ An empty array is acceptable, which will attach no entities to the event.
 - the tracker namespace
 - the tracker configuration object
 
-```
+```typescript
 const tracker = createTracker('my-namespace', {
   // required
   endpoint: 'my-endpoint.com',
@@ -192,7 +192,7 @@ const tracker = createTracker('my-namespace', {
 
 The subject is a persistent object containing global data that applies to all events, such as a manually set userId. Set the subject data using the `setSubjectData()` method. All parameters are optional.
 
-```
+```typescript
 tracker.setSubjectData({
   userId: 'my-user-id',
   screenWidth: 123,
@@ -230,7 +230,7 @@ tracker.setSubjectData({
 
 Track a screen view with the `trackScreenViewEvent()` method. Screen view events will auotomatically be populated with a screen view ID (UUID4), which increments each time a new screen view event fires. This id is also attached to the screen view context if enabled, which enables users to tie screen view events to all other events which happen on the screen, and to aggregate data per screen view.
 
-```
+```typescript
 tracker.trackScreenViewEvent({
   screenName: 'my-screen',
   screenType: 'my-type',
@@ -249,7 +249,7 @@ tracker.trackScreenViewEvent({
 
 To attach custom contexts, pass a second argument to the function, containing an array of self-describing JSON.
 
-```
+```typescript
 tracker.trackScreenViewEvent(
   {screenName: 'myScreenName'},
   [{
@@ -263,7 +263,7 @@ tracker.trackScreenViewEvent(
 
 Track Custom events using the `trackSelfDescribingEvent()` method.
 
-```
+```typescript
 tracker.trackSelfDescribingEvent({
   schema: 'iglu:com.acme/example/jsonschema/1-0-0',
   data: {someExampleField: 'Hello World'}
@@ -277,7 +277,7 @@ tracker.trackSelfDescribingEvent({
 
 To attach custom contexts, pass a second argument to the function, containing an array of self-describing JSON.
 
-```
+```typescript
 tracker.trackSelfDescribingEvent(
   {
     schema: 'iglu:com.acme/example_event/jsonschema/1-0-0',
@@ -294,7 +294,7 @@ tracker.trackSelfDescribingEvent(
 
 Track a structured event with the `trackStructuredEvent()` method.
 
-```
+```typescript
 tracker.trackStructuredEvent({
   category: 'my-category',
   action: 'my-action',
@@ -317,7 +317,7 @@ tracker.trackStructuredEvent({
 
 To attach custom contexts, pass a second argument to the function, containing an array of self-describing JSON.
 
-```
+```typescript
 tracker.trackStructuredEvent(
   {
     category: 'my-category',
@@ -337,7 +337,7 @@ tracker.trackStructuredEvent(
 
 Track a page view event with the `trackPageViewEvent()` method. Typically this is uncommon in apps, but is sometimes used where fitting data into an existing page views model is required. To track page views from an in-app browser, it is advisable to use the javascript tracker in-browser.
 
-```
+```typescript
 tracker.trackPageViewEvent({
   pageUrl: 'https://my-url.com',
   pageTitle: 'My page title',
@@ -360,7 +360,7 @@ tracker.trackPageViewEvent({
 
 For most use cases, the recommended setup is to enable at least the session context, screen context, and platform context. These will enable most of the common information in modeling mobile events in a standard way.
 
-```
+```typescript
 createTracker('my-namespace', {
   endpoint: 'my-endpoint.com',
   appId: 'my-app-id',

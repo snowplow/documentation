@@ -46,7 +46,7 @@ We publish three different flavours of the docker image.
 - Pull the `:2.2.1-lzo` tag if you also need LZO output format
 - Pull the `:2.2.1-distroless` tag for an lightweight alternative to `:2.2.1`
 
-```
+```bash
 docker pull snowplow/snowplow-s3-loader:2.2.1
 docker pull snowplow/snowplow-s3-loader:2.2.1-lzo
 docker pull snowplow/snowplow-s3-loader:2.2.1-distroless
@@ -54,7 +54,7 @@ docker pull snowplow/snowplow-s3-loader:2.2.1-distroless
 
 Here is a standard command to run the loader on a EC2 instance in AWS:
 
-```
+```bash
 docker run \
       -d \
       --name snowplow-s3-loader \
@@ -73,13 +73,13 @@ docker run \
 
 JARs can be found attached to the [Github release](https://github.com/snowplow/snowplow-s3-loader/releases). Only pick the `-lzo` version of the JAR file if you need to output in LZO format
 
-```
+```bash
 java -jar snowplow-s3-loader-2.2.1.jar --config config.hocon
 java -jar snowplow-s3-loader-lzo-2.2.1.jar --config config.hocon
 ```
 
 Running the jar requires to have the native LZO binaries installed. For example for Debian this can be done with:
 
-```
+```bash
 sudo apt-get install lzop liblzo2-dev
 ```

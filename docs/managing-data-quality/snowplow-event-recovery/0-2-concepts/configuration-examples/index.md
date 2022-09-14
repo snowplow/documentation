@@ -10,7 +10,7 @@ Below configuration examples incorporate most of the available features.
 
 The most basic configuration that will run for particular bad row type in particular version and mark all the other as `failed` because of missing configuration mappings.
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/2-0-0",
   "data": {
@@ -31,7 +31,7 @@ In above scenario we want to resubmit all the received `adapter_failures` withou
 
 Following example shows a way of setting up multiple configuration flows for specific bad row types. Configurations will be matched top to bottom and the first from the to will be chosen.
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/2-0-0",
   "data": {
@@ -72,7 +72,7 @@ In above scenario we want to process `1-0`\-series of `enrichment_failures` bad 
 
 An advanced example making use of most of the features that will perform multiple operations on very specific subset of bad rows.
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/2-0-0",
   "data": {

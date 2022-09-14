@@ -8,7 +8,7 @@ Iglu Resolver is a component embedded into many Snowplow applications, including
 
 Most of the time, configuring Iglu Resolver (or Client) means adding following JSON file:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-1",
   "data": {

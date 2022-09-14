@@ -45,7 +45,7 @@ Represents the network communication configuration allowing the tracker to be ab
 
 Its type definition is:
 
-```
+```typescript
 interface NetworkConfiguration {
   /**
    * The collector endpoint
@@ -70,7 +70,7 @@ Represents the configuration of the tracker and the core tracker properties. The
 
 Its type definition is:
 
-```
+```typescript
 interface TrackerConfiguration {
   /**
    * Identifier of the app.
@@ -181,7 +181,7 @@ Session data is maintained for the life of the application being installed on a 
 
 Its type definition is:
 
-```
+```typescript
 interface SessionConfiguration {
   /**
    * The amount of time in seconds before the session id is updated while the app is in the foreground
@@ -205,7 +205,7 @@ Represents the tracker configuration from the emission perspective. It can be us
 
 Its type definition is:
 
-```
+```typescript
 interface EmitterConfiguration {
   /**
    * The buffer option for post requests.
@@ -254,7 +254,7 @@ Represents the configuration of the subject. The SubjectConfiguration can be use
 
 Its type definition is:
 
-```
+```typescript
 interface SubjectConfiguration {
   /**
    * user id
@@ -318,7 +318,7 @@ It represents the GDPR configuration of the tracker, and if set, the tracker wil
 
 Its type definition is:
 
-```
+```typescript
 export interface GdprConfiguration {
   /**
    * Basis for processing
@@ -356,7 +356,7 @@ It represents the static Global Contexts which will be attached to all events. E
 
 The relevant type definitions are:
 
-```
+```typescript
 export interface GlobalContext {
   /**
    * tag

@@ -119,7 +119,7 @@ Snowplow BigQuery Loader uses Google Pub/Sub topics and subscriptions to store i
 
 Loader / StreamLoader, Mutator and Repeater (Forwarder has been deprecated) accept the same configuration file with [iglu:com.snowplowanalytics.snowplow.storage/bigquery\_config/jsonschema/](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema) schema, which looks like this:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema/1-0-0",
   "data": {
@@ -161,7 +161,7 @@ You can use the `load` property to configure Loader to use one of them.
 
 For example, the configuration for using **streaming inserts** can look like this:
 
-```
+```json
 {
   "load": {
     "mode": "STREAMING_INSERTS",
@@ -174,7 +174,7 @@ For example, the configuration for using **streaming inserts** can look like t
 
 The configuration for using **load jobs** can look like this:
 
-```
+```json
 {
   "load": {
     "mode": "FILE_LOADS",
@@ -197,7 +197,7 @@ All apps accept a path to a config file as specified above, and to an Iglu resol
 
 Loader accepts two required arguments and [any other](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options) supported by Google Cloud Dataflow.
 
-```
+```bash
 $ ./snowplow-bigquery-loader \
   --config=$CONFIG \
   --resolver=$RESOLVER \
@@ -212,7 +212,7 @@ This can be launched from any machine authenticated to submit Dataflow jobs.
 
 StreamLoader accepts the same two required arguments as Loader.
 
-```
+```bash
 $ ./snowplow-bigquery-streamloader \
   --config=$CONFIG \
   --resolver=$RESOLVER
@@ -228,7 +228,7 @@ Mutator has three subcommands: `listen`, `create` and `add-column`.
 
 `listen` is the primary command and is used to automate table migrations.
 
-```
+```bash
 $ ./snowplow-bigquery-mutator \
   listen \
   --config $CONFIG \
@@ -240,7 +240,7 @@ $ ./snowplow-bigquery-mutator \
 
 `add-column` can be used once to add a column manually. This should eliminate the risk of mutation lag and the necessity to run a Repeater or Forwarder job.
 
-```
+```bash
 $ ./snowplow-bigquery-mutator \
     add-column \
     --config $CONFIG \
@@ -255,7 +255,7 @@ The specified schema must be present in one of the Iglu registries in the resolv
 
 `create` creates an empty table with `atomic` structure.
 
-```
+```bash
 $ ./snowplow-bigquery-mutator \
     create \
     --config $CONFIG \
@@ -266,7 +266,7 @@ $ ./snowplow-bigquery-mutator \
 
 We recommend constantly running Repeater on a small / cheap node or Docker container.
 
-```
+```bash
 $ ./snowplow-bigquery-repeater \
     create \
     --config $CONFIG \
@@ -286,7 +286,7 @@ This component has been deprecated from version 0.5.0. Please use Repeater inste
 
 Like Loader, Forwarder can be submitted from any machine authenticated to submit Dataflow jobs.
 
-```
+```bash
 $ ./snowplow-bigquery-forwarder \
     --config=$CONFIG \
     --resolver=$RESOLVER \

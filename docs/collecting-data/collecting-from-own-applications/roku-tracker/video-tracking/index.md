@@ -10,7 +10,7 @@ Video tracking enables collecting events about video playback from the [Video n
 
 To start video tracking for a Video node, assign a `roAssociativeArray` with the video node to the `enableVideoTracking` property:
 
-```
+```brightscript
 m.global.snowplow.enableVideoTracking = {
     label: "videoLabel", ' optional
     video: m.Video
@@ -29,7 +29,7 @@ In addition to the video node, the `enableVideoTracking` property accepts seve
 
 To stop tracking events from the video node, set the `disableVideoTracking` property. The tracker will then stop observing and tracking events from the video node. The property should be set with an `roAssociativeArray` with exactly one attribute, `video`, like so:
 
-```
+```brightscript
 m.global.snowplow.disableVideoTracking = {
     video: m.video
 }
@@ -84,7 +84,7 @@ The second is the Roku `video` context with these properties:
 
 The tracker automatically captures several types of events. You may configure which types of events to track by passing a list of the types into the `options.captureEvents` property during tracker initialization:
 
-```
+```brightscript
 m.global.snowplow.enableVideoTracking = {
     video: m.Video,
     options: {
@@ -106,7 +106,7 @@ These "ping" events report changes in the playback position of the video while p
 
 Percent progress events are sent when predefined percentage boundaries in playback are reached. The boundaries may be configured using a `boundaries` list when initializing video tracking:
 
-```
+```brightscript
 m.global.snowplow.enableVideoTracking = {
     video: m.Video,
     options: {
@@ -126,7 +126,7 @@ Position events report the current playback position in regular intervals. These
 
 The events are sent whenever the playback head changes by more than the predefined position interval. The interval defaults to 5 seconds. It can be configured using the `options.positionInterval` property:
 
-```
+```brightscript
 m.global.snowplow.enableVideoTracking = {
     video: m.Video,
     options: {
@@ -154,7 +154,7 @@ The event type of the events (`type` property) reflects the current state.
 
 All of the state changes are reported by default. In order to capture only selected states, use the `options.captureEvents` property:
 
-```
+```brightscript
 m.global.snowplow.enableVideoTracking = {
     video: m.Video,
     options: {

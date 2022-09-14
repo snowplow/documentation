@@ -10,7 +10,7 @@ If you are a Snowplow BDP customer, SQL Runner is already setup for you as part 
 
 As an initial overview, in your snowplow-pipeline repository, your data models reside in the sql-runner directory. If you already have the data modeling UI enabled, your GitHub repository will look like this:
 
-```
+```text
 .
 ├── datamodeling
 |   ├── datamodel_name
@@ -21,7 +21,7 @@ As an initial overview, in your snowplow-pipeline repository, your data models r
 
 If you do not have the data modeling UI enabled, your GitHub repository will look like this:
 
-```
+```text
 .
 ├── jobs
 |   ├── datamodel_name
@@ -57,7 +57,7 @@ Read below for more details on the steps to configure and run your data models w
 
 As an example, one of the playbooks for [the Snowplow web data model](https://github.com/snowplow/data-models/tree/master/web/v1) against Redshift:
 
-```
+```yaml
 :targets:
 - :name:
   :type:     redshift
@@ -165,7 +165,7 @@ The data modeling configuration is a JSON file that allows you to specify which 
 
 An example configuration file with all options provided:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.datamodeling/config/jsonschema/1-0-0",
   "data": {
@@ -232,7 +232,7 @@ The `"owners"` field allows Snowplow BDP customers to specify one or more owners
 
 The schedule is a JSON file in the `schedules` directory through which you can specify the cron schedule that you want SQL Runner to run your data model. It also specifies the corresponding configuration file. As an example:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.managed-service/job_schedule/jsonschema/1-0-0",
   "data": {
@@ -247,7 +247,7 @@ The above schedule specifies that your data model will run every hour past 15 mi
 
 If the filename of the configuration of your data model is other than `datamodeling.json`, then it just needs to be specified:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.managed-service/job_schedule/jsonschema/1-0-0",
   "data": {

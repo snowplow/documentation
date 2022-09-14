@@ -8,7 +8,7 @@ sidebar_position: 0
 
 The most basic configuration that will run for the particular failure type: `adapter-failure`, in a particular version, and mark all others as `failed` because of missing configuration mappings would look like this:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/4-0-0",
   "data": {
@@ -29,7 +29,7 @@ In above scenario we would be resubmitting all the received `adapter_failures`�
 
 The next example shows a way of setting up multiple configuration flows for specific failure types. Configurations will be matched top to bottom and the first from the top will be chosen.
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/4-0-0",
   "data": {
@@ -70,7 +70,7 @@ In above scenario we would only process the `1-0-0` version of `enrichment_fai
 
 Below is an advanced example making use of most of the features and performing multiple operations on a very specific subset of failed events.
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/4-0-0",
   "data": {

@@ -18,7 +18,7 @@ Snowplow .NET Analytics SDK targets [.NET Standard 1.3](https://github.com/dotne
 
 To add the .NET Analytics as a dependency to your project, install it in the Visual Studio Package Manager Console using [NuGet](https://www.nuget.org/):
 
-```
+```powershell
 Install-Package Snowplow.Analytics
 ```
 
@@ -43,7 +43,7 @@ The JSON Event Transformer takes a Snowplow enriched event and converts it into 
 
 The JSON Event Transformer converts a Snowplow enriched event into a single JSON like so:
 
-```
+```json
 { 
   "app_id":"demo",
   "platform":"web",
@@ -62,7 +62,7 @@ The most complex piece of processing is the handling of the self-describing JSON
 
 For example, if an enriched event contained a `com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1`, then the final JSON would contain:
 
-```
+```json
 { 
   "app_id":"demo",
   "platform":"web",
@@ -78,7 +78,7 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
 
 You can convert an enriched event TSV string to a JSON like this:
 
-```
+```csharp
 using Snowplow.Analytics.Json;
 using Snowplow.Analytics.Exceptions;
 

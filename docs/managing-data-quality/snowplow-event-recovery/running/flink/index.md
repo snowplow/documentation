@@ -12,7 +12,7 @@ To build the fat jar, run:
 
 #### [](https://github.com/snowplow-incubator/snowplow-event-recovery#running)
 
-```
+```bash
 sbt flink/assembly
 ```
 
@@ -20,7 +20,7 @@ sbt flink/assembly
 
 Using flink CLI:
 
-```
+```bash
 flink run \
   snowplow-event-recovery-flink-0.2.0.jar \
   --input s3://bad-rows-location/** \

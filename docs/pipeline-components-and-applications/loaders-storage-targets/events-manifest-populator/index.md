@@ -15,20 +15,20 @@ In other words, without running this job you still will be able to deduplicate e
 
 In order to use Event Manifest Populator, you need to have [boto2](http://boto.cloudhackers.com/en/latest/) installed:
 
-```
+```bash
 $ pip install boto
 ```
 
 As next step you need to grab `run.py` file with instructions to run job on AWS EMR.  
 You can do it by downloading it directly from Github:
 
-```
+```bash
 $ wget https://raw.githubusercontent.com/snowplow/snowplow/master/5-data-modeling/event-manifest-populator/run.py
 ```
 
 Now you can run Event Manifest Populator with a single command (inside a directory with `run.py`):
 
-```
+```bash
 $ python run.py $ENRICHED_ARCHIVE_S3_PATH $STORAGE_CONFIG_PATH $IGLU_RESOLVER_PATH
 ```
 

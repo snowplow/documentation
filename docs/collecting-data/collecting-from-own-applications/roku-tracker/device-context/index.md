@@ -8,7 +8,7 @@ Device Info Context is an entity attached to events that provides information ab
 
 The context is automatically added to all tracked events by default. If you prefer not to add the context to events, you may disable it using the `subject.deviceContext` option during tracker initialization:
 
-```
+```brightscript
 m.global.snowplow.init = {
    subject: {
       deviceContext: false ' disabling device info context
@@ -52,7 +52,7 @@ Users can disable RIDA tracking by selecting "Limit ad tracking" in the device s
 
 RIDA is tracked by the tracker by default. However, there may be cases where you may not want to track the identifier. To disable tracking RIDA, deactivate the `subject.RIDATracking` option during tracker initialization:
 
-```
+```brightscript
 m.global.snowplow.init = {
    subject: {
       RIDATracking: false ' disabling tracking RIDA

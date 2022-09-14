@@ -26,7 +26,7 @@ Once defined, an entity can be attached to any kind of event. This is also an im
 
 Example:
 
-```
+```brightscript
 m.global.snowplow.screenView = {
     id: "screen23",
     context: [
@@ -67,7 +67,7 @@ The following table lists all the properties that can be set in tracker initiali
 
 Example:
 
-```
+```brightscript
 m.global.snowplow.init = {
     subject: {
         domainUserId: "...",
@@ -94,7 +94,7 @@ Overriding the default event timestamp (`dtm`) with `ttm` can be useful in som
 
 Example:
 
-```
+```brightscript
 m.global.snowplow.structured = {
     se_ca: "category",
     se_ac: "action",

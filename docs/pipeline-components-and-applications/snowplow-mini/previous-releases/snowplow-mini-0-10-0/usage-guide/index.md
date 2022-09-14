@@ -75,7 +75,7 @@ Following is a sample execution where `com.acme` is the vendor prefix for which 
 
 should return a read key and a write key.
 
-```
+```json
 {
   "read":"bfa90866-ab14-4b92-b6ef-d421fd688b54",
   "write":"6175aa41-d3a7-4e4f-9fb4-3a170f3c6c16"
@@ -89,7 +89,7 @@ To test and send non-standard Snowplow events such as your own custom-contexts a
 1. Get a local copy of your Iglu repository which contains your schemas. This should be modelled after [this folder](https://github.com/snowplow/iglu-central/tree/master/schemas)
 2. Download the latest Igluctl from Github:
 
-```
+```bash
 $ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl 
 $ chmod +x igluctl
 ```
@@ -100,7 +100,7 @@ $ chmod +x igluctl
 - The Super API Key you created in step 2.2
 - The path to your schemas For example to load the `iglu-central` repository into Iglu Server:
 
-```
+```bash
 /path/to/igluctl static push iglu-central/schemas http://[public_dns]/iglu-server 980ae3ab-3aba-4ffe-a3c2-3b2e24e2ffce --public
 ```
 
@@ -195,7 +195,7 @@ Following is a sample execution where `path-to-schema(s)` is the path to custom 
 
 will produce a response like this one, if no errors are encountered:
 
-```
+```json
 {
   "message": "Schema created",
   "updated": false,

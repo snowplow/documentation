@@ -30,7 +30,7 @@ The `--config` command option is actually optional. For some setups it is more c
 
 Here is an example of a minimal configuration file:
 
-```json5
+```json
 {
   "input": {
     "queue": "https://sqs.eu-central-1.amazonaws.com/000000000000/snowplow-buffer"

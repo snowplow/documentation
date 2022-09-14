@@ -43,7 +43,7 @@ The `selfDescribing` method takes a `roAssociativeArray`. This array takes a 
 
 Example (assumes that you mounted the Snowplow instance in `m.global.snowplow`):
 
-```
+```brightscript
 m.global.snowplow.selfDescribing = {
     data: {
         saveId: "4321",
@@ -71,7 +71,7 @@ As these fields are fairly arbitrary, we recommend following the advice in this 
 
 Example:
 
-```
+```brightscript
 m.global.snowplow.structured = {
     se_ca: "shop",
     se_ac: "add-to-basket",
@@ -88,7 +88,7 @@ This method creates an unstruct event, by creating and tracking a self-describin
 
 Example:
 
-```
+```brightscript
 m.global.snowplow.screenView = {
     id: "screen23",
     name: "HUD > Save Game"

@@ -12,13 +12,13 @@ This page describes the format for the YAML file which is used to configure the 
 
 You can use environment variables rather than hardcoding strings in the configuration file. For example, load your AWS access key from an environment variable named "AWS\_SNOWPLOW\_SECRET\_KEY":
 
-```
+```yaml
 secret_access_key: <%= ENV['AWS_SNOWPLOW_SECRET_KEY'] %>
 ```
 
 ### Example configuration
 
-```
+```yaml
 aws:
   # Credentials can be hardcoded or set in environment variables
   access_key_id: <%= ENV['AWS_SNOWPLOW_ACCESS_KEY'] %>
@@ -127,7 +127,7 @@ The `bad:` entries will store any raw Snowplow log lines which did not pass the 
 
 Here is an example configuration:
 
-```
+```yaml
 buckets:
   assets: s3://snowplow-hosted-assets
   log: s3n://my-snowplow-etl/logs/
@@ -162,7 +162,7 @@ Make sure that the EC2 key you specify belongs in the region you specify, or els
 
 Since 6th April 2015, all new Elastic MapReduce users have been required to use IAM roles with EMR. You can leave the two `..._role` fields as they are, however you must first create these default EMR roles using the AWS Command Line Interface ([installation-instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)), like so:
 
-```
+```bash
 $ aws emr create-default-roles
 ```
 
@@ -177,7 +177,7 @@ You only need to set one of these (they are mutually exclusive settings), but yo
 
 The `software:` section lets you start up Lingual and/or HBase when you start up your Elastic MapReduce cluster. This is the configuration to start up both, specifying the versions to start:
 
-```
+```yaml
 software:
   hbase: "0.92.0"
   lingual: "1.1"

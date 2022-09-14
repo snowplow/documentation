@@ -10,7 +10,7 @@ In this section, we will be describing the approach we chose to link together a 
 
 For example, let's say we have a JSON representing a click on an ad like so:
 
-```
+```json
 {
     "bannerId": "4acd518feb82"
 }
@@ -18,7 +18,7 @@ For example, let's say we have a JSON representing a click on an ad like so:
 
 which is supposed to conform to this [self-describing JSON Schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md):
 
-```
+```json
 {
     "$schema": "http://json-schema.org/schema#",
     "self": {
@@ -40,7 +40,7 @@ which is supposed to conform to this [self-describing JSON Schema](/docs/pipelin
 
 Our self-describing JSON will look like this:
 
-```
+```json
 {
     "schema": "iglu:com.snowplowanalytics/ad_click/jsonschema/1-0-0",
     "data": {

@@ -35,7 +35,7 @@ Add the snowplow-web package to your `packages.yml` file. For more information r
 
 This package will by default assume your Snowplow events data is contained in the `atomic` schema of your [target.database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). In order to change this, please add the following to your `dbt_project.yml` file:
 
-```
+```yaml
 # dbt_project.yml
 ...
 vars:
@@ -54,7 +54,7 @@ The web package has the option to join in data from the following 3 Snowplow enr
 
 By default these are **all disabled** in the web package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 
-```
+```yaml
 # dbt_project.yml
 ...
 vars:
@@ -68,7 +68,7 @@ vars:
 
 You can specify both `start_date` at which to start processing events and the `app_id`'s to filter for. By default the `start_date` is set to `2020-01-01` and all `app_id`'s are selected. To change this please add the following to your `dbt_project.yml` file:
 
-```
+```yaml
 # dbt_project.yml
 ...
 vars:
@@ -81,7 +81,7 @@ vars:
 
 The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](https://snowplow.github.io/dbt-snowplow-web/(/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
 
-```
+```yaml
 # dbt_project.yml
 ...
 vars:
@@ -100,7 +100,7 @@ For more details please refer to the [snowplow-web package documentation](https:
 
 The Snowplow web model is designed to be run as a whole, which ensures all incremental tables are kept in sync. As such, we suggest running the model using:
 
-```
+```bash
 dbt run --models snowplow_web tag:snowplow_web_incremental
 ```
 

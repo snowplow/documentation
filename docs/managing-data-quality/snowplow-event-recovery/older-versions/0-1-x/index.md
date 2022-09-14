@@ -56,7 +56,7 @@ If your recovery scenario is not covered by the ones listed above, you can defin
 
 As an example, we can define a path mutating recovery scenario in [`RecoveryScenario.scala`](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/series/0.1/core/src/main/scala/com.snowplowanalytics.snowplow.event.recovery/RecoveryScenario.scala):
 
-```
+```scala
 final case class ReplaceInPath(
   error: String,
   toReplace: String,
@@ -104,7 +104,7 @@ The output of Snowplow Event Recovery can be fed into an enrichment platform to 
 
 Once you have identified the different recovery scenarios you will want to run, you can construct the configuration that will be leveraging them. Here, we make use of each and every one of them as a showcase.
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/1-0-0",
   "data": [
@@ -190,7 +190,7 @@ To build the docker image, run: `sbt "project beam" docker:publishLocal`.
 
 Using the JAR directly (which is hosted at `s3://snowplow-hosted-assets/3-enrich/snowplow-event-recovery/`):
 
-```
+```bash
 spark-submit \
   --class com.snowplowanalytcs.snowplow.event.recovery.Main \
   --master master-url \
@@ -203,7 +203,7 @@ spark-submit \
 
 Or through an EMR step:
 
-```
+```bash
 aws emr add-steps --cluster-id j-XXXXXXXX --steps \
   Name=snowplow-event-recovery,\
   Type=CUSTOM_JAR,\
@@ -217,7 +217,7 @@ aws emr add-steps --cluster-id j-XXXXXXXX --steps \
 
 Using the zip archive which can be [downloaded from Github](https://github.com/snowplow-incubator/snowplow-event-recovery/releases/tag/0.3.1):
 
-```
+```bash
 ./bin/snowplow-event-recovery-beam \
   --runner=DataFlowRunner \
   --project=project-id \
@@ -230,7 +230,7 @@ Using the zip archive which can be [downloaded from Github](https://github.com/s
 
 Using a Docker container, for which the image is available from [Docker Hub](https://hub.docker.com/r/snowplow/snowplow-event-recovery-beam):
 
-```
+```bash
 docker run \
   -v $PWD/config:/snowplow/config \ # if running outside GCP
   -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/credentials.json \ # if running outside GCP

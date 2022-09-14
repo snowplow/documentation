@@ -42,7 +42,7 @@ Snowplow Micro is hosted on Docker Hub: [snowplow/snowplow-micro](https://hub.do
 
 The configuration files must be placed in a folder that is mounted in the Docker container, and the port configured for Micro needs to be exposed. For example, with configuration files in `./example` directory and to bind port `9090`:
 
-```
+```bash
 docker run \
   --mount type=bind,source=$(pwd)/example,destination=/config \
   -p 9090:9090 \
@@ -55,7 +55,7 @@ docker run \
 
 Alternatively, a Snowplow Micro jar file is hosted on the [Github release](https://github.com/snowplow-incubator/snowplow-micro/releases) page.
 
-```
+```bash
 java -jar snowplow-micro-1.3.1.jar --collector-config example/micro.conf --iglu example/iglu.json
 ```
 
@@ -75,7 +75,7 @@ This endpoint responds with a summary JSON object of the number of total, good a
 
 Example:
 
-```
+```json
 {
   "total": 7,
   "good": 5,
@@ -104,7 +104,7 @@ JSON array of [GoodEvent](https://github.com/snowplow-incubator/snowplow-micro/
 
 An example of a response with one event can be found below:
 
-```
+```json
 [
   {
     "rawEvent":{
@@ -322,13 +322,13 @@ When querying `/micro/good` with `POST` (`Content-Type: application/json` n
 
 Example of command to query the good events: 
 
-```
+```json
 curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/good -d '<JSON>'
 ```
 
 An example of JSON with filters could be:
 
-```
+```json
 { 
   "schema": "iglu:com.acme/example/jsonschema/1-0-0",
   "contexts": [
@@ -367,7 +367,7 @@ JSON array of [BadEvent](https://github.com/snowplow-incubator/snowplow-micro/b
 
 An example of a response with one bad event can be found below:
 
-```
+```json
 [
   {
     "collectorPayload":{
@@ -476,13 +476,13 @@ When querying `/micro/bad` with `POST` (`Content-Type: application/json` ne
 
 Example of command to query the bad events: 
 
-```
+```bash
 curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/bad -d '<JSON>'
 ```
 
 An example of JSON with filters could be:
 
-```
+```json
 {
     "vendor":"com.snowplowanalytics.snowplow",
     "version":"tp2",
@@ -510,7 +510,7 @@ Sending a request to this endpoint resets Micro's cache.
 
 Expected:
 
-```
+```json
 {
   "total": 0,
   "good": 0,
@@ -526,19 +526,19 @@ The `/micro/iglu` endpoint can be used in order to check whether a schema can be
 
 Schema lookup should be in format:
 
-```
+```text
 /micro/iglu/{vendor}/{schemaName}/jsonschema/{schemaVersion}
 ```
 
 Or more specifically:
 
-```
+```text
 /micro/iglu/{vendor}/{schemaName}/jsonschema/{model}-{revision}-{addition}
 ```
 
 For example, assuming Micro running on localhost port `9090`:
 
-```
+```bash
 curl -X GET http://localhost:9090/micro/iglu/com.myvendor/myschema/jsonschema/1-0-0
 ```
 
@@ -550,7 +550,7 @@ GET
 
 The JSON schema itself, if resolved:
 
-```
+```json
 {
   "$schema":"http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description":"A template for a self-describing JSON Schema for use with Iglu",
@@ -576,7 +576,7 @@ The JSON schema itself, if resolved:
 
 If a schema cannot be resolved, a JSON indicating the Iglu repositories searched:
 
-```
+```json
 {
   "value": {
     "Iglu Central": {
@@ -601,7 +601,7 @@ In order to support a broader range of test workflows, it is possible to use an 
 
 In order to do so, they simply need an `iglu-client-embedded` directory (templated as an Iglu repository) under the same directory that is mounted when starting Micro.
 
-```
+```text
 example
 ├── iglu-client-embedded
 │   └── schemas
@@ -617,7 +617,7 @@ example
 
 Using Docker, in order to use the embedded Iglu capabilities, the command remains the same:
 
-```
+```bash
 docker run \
   --mount type=bind,source=$(pwd)/example,destination=/config \
   -p 9090:9090 \
@@ -630,7 +630,7 @@ docker run \
 
 If you cannot use Docker and you also want an embedded Iglu, apply the same directory structure as shown above and run for this example:
 
-```
+```bash
 # Unix
 java -cp snowplow-micro-1.3.1.jar:example com.snowplowanalytics.snowplow.micro.Main --collector-config example/micro.conf --iglu example/iglu.json
 # Windows

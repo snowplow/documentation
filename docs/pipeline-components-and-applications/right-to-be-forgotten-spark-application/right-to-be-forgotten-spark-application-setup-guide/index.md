@@ -10,7 +10,7 @@ sidebar_position: 10
 
 Assuming you already have SBT installed:
 
-```
+```bash
 $ git clone git://github.com/snowplow-incubator/right-to-be-forgotten-spark-job.git
 ..
 $ sbt assembly
@@ -19,7 +19,7 @@ $ sbt assembly
 
 The 'fat jar' is now available as:
 
-```
+```bash
 target/snowplow-right-to-be-forgotten-job-x.x.x.jar
 ```
 
@@ -37,7 +37,7 @@ To avoid that, an additional argument needs to be provided to the spark job that
 
 So in your spark installation (assumed to be EMR for this example) all you would need to do is:
 
-```
+```bash
 spark-submit \
     --master yarn \
     --deploy-mode client ./snowplow-right-to-be-forgotten-job-0.1.0.jar \

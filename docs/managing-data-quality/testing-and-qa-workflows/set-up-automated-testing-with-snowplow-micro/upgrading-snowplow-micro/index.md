@@ -24,7 +24,7 @@ If you have been using the previous version (v0.1.0) in your test suites, you ca
 
 - the structure you expect. The event that was the output of Micro's v0, now corresponds to the `rawEvent` field of the event output of v1. A _partial_ example of a `GoodEvent` follows, showing the structure and highlight the differences described above:
 
-```
+```json
 // raw event parameters
 "rawEvent": {
     "parameters": {

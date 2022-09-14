@@ -16,13 +16,13 @@ A Terraform module which deploys the Snowplow Postgres Loader on AWS EC2 for use
 
 Snowplow Postgres Loader is [published on DockerHub](https://hub.docker.com/r/snowplow/snowplow-postgres-loader):
 
-```
+```bash
 docker pull snowplow/snowplow-postgres-loader:0.3.2
 ```
 
 It accepts very typical configuration for Snowplow Loader:
 
-```
+```bash
 docker run --rm \
   -v $PWD/config:/snowplow/config \
   snowplow/snowplow-postgres-loader:0.3.2 \
@@ -41,7 +41,7 @@ Iglu Central is static registry and if you use Snowplow-authored schemas - you n
 
 The configuration file is in HOCON format, and it specifies connection details for the target database and the input stream of events.
 
-```
+```json
 {
   "input": {
     "type": "Kinesis"
@@ -63,7 +63,7 @@ The configuration file is in HOCON format, and it specifies connection details f
 
 The `input` section can alternatively specify a GCP PubSub subscription, instead of a kinesis stream like in the example above.
 
-```
+```json
   "input": {
     "type": "PubSub"
     "projectId": "my-project"

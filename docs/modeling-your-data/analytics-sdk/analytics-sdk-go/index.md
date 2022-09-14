@@ -32,11 +32,11 @@ The [Snowplow Analytics SDK for Go](https://github.com/snowplow/snowplow-golang-
 
 ### 4.2 Summary of example usage
 
-```
+```bash
 go get github.com/snowplow/snowplow-golang-analytics-sdk
 ```
 
-```
+```go
 import "github.com/snowplow/snowplow-golang-analytics-sdk/analytics"
 
 
@@ -54,25 +54,25 @@ parsed.GetSubsetJson("page_url", "unstruct_event") // Get a JSON of values for a
 
 ### 4.3 API
 
-```
+```go
 func ParseEvent(event string) (ParsedEvent, error)
 ```
 
 ParseEvent takes a Snowplow Enriched event tsv string as input, and returns a 'ParsedEvent' typed slice of strings. Methods may then be called on the resulting ParsedEvent type to transform the event, or a subset of the event to Map or Json.
 
-```
+```go
 func (event ParsedEvent) ToJson() ([]byte, error)
 ```
 
 ToJson transforms a valid Snowplow ParsedEvent to a JSON object.
 
-```
+```go
 func (event ParsedEvent) ToMap() (map[string]interface{}, error)
 ```
 
 ToMap transforms a valid Snowplow ParsedEvent to a Go map.
 
-```
+```go
 func (event ParsedEvent) GetSubsetJson(fields ...string) ([]byte, error)
 ```
 
@@ -82,7 +82,7 @@ For custom events and contexts, only "unstruct\_event", "contexts", or "derived\
 
 For contexts, the resultant map will contain all occurrences of all contexts within the provided field.
 
-```
+```go
 func (event ParsedEvent) GetSubsetMap(fields ...string) (map[string]interface{}, error)
 ```
 
@@ -92,19 +92,19 @@ For custom events and entites, only "unstruct\_event", "contexts", or "derived\_
 
 For contexts, the resultant map will contain all occurrences of all contexts within the provided field.
 
-```
+```go
 func (event ParsedEvent) GetValue(field string) (interface{}, error)
 ```
 
 GetValue returns the value for a provided atomic field, without processing the rest of the event. For unstruct\_event, it returns a map of only the data for the unstruct event. For contexts and derived\_contexts, it returns the data for all contexts or derived\_contexts in the event.
 
-```
+```go
 func (event ParsedEvent) ToJsonWithGeo() ([]byte, error)
 ```
 
 ToJsonWithGeo adds the geo\_location field, and transforms a valid Snowplow ParsedEvent to a JSON object.
 
-```
+```go
 func (event ParsedEvent) ToMapWithGeo() (map[string]interface{}, error)
 ```
 

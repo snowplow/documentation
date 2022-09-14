@@ -12,7 +12,7 @@ The S3 loader has several types of monitoring built in, to help the pipeline ope
 
 When processing enriched events, the S3 loader can emit metrics to a statsd daemon describing every S3 file it writes. Here is a string representation of the metrics it sends:
 
-```
+```text
 snowplow.s3loader.count:42|c|#tag1:value1
 snowplow.s3loader.latency_collector_to_load:123.4|g|#tag1:value1
 ```
@@ -22,7 +22,7 @@ snowplow.s3loader.latency_collector_to_load:123.4|g|#tag1:value1
 
 Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
-```
+```json
 "monitoring": {
   "metrics": {
     "hostname": "localhost"
@@ -44,7 +44,7 @@ Common reasons might be failure to read or write from Kinesis, or failure to wri
 
 Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md) with the url of your sentry server:
 
-```
+```json
 "monitoring": {
   "dsn": "http://sentry.acme.com"
 }
@@ -56,7 +56,7 @@ The loader can emit a Snowplow event to a collector when the application experie
 
 Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
-```
+```json
 "monitoring": {
   "appId": "redshift-loader"
   "collector": "collector.acme.com"

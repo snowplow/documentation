@@ -8,7 +8,7 @@ sidebar_position: 2000
 
 Assuming you have completed the Scala Tracker Setup, you are ready to initialize the Scala Tracker.
 
-```
+```scala
 import scala.concurrent.ExecutionContext.Implicits.global
 
 import com.snowplowanalytics.snowplow.scalatracker._
@@ -31,7 +31,7 @@ The above code:
 
 You can configure a subject with extra data and attach it to the tracker so that the data will be attached to every event:
 
-```
+```scala
 val subject = new Subject()
   .setUserId("user-00035")
   .setPlatform(Desktop)
@@ -42,7 +42,7 @@ tracker.setSubject(subject)
 
 Amazon [Elastic Cloud](https://aws.amazon.com/ec2/) can provide basic information about instance running your app. You can add this informational as additional custom context to all sent events by enabling it in Tracker after initializaiton of your tracker:
 
-```
+```scala
 tracker.enableEc2Context()
 ```
 
@@ -50,7 +50,7 @@ tracker.enableEc2Context()
 
 Google \[Cloud Compute Engine\]\[gce\] can provide basic information about instance running your app. You can add this informational as additional custom context to all sent events by enabling it in Tracker after initializaiton of your tracker:
 
-```
+```scala
 tracker.enableGceContext()
 ```
 
@@ -62,7 +62,7 @@ All emitters supplied with Scala Tracker support callbacks invoked after every s
 
 Callbacks should have following signature:
 
-```
+```scala
 type Callback = (CollectorParams, CollectorRequest, CollectorResponse) => Unit
 ```
 
@@ -72,7 +72,7 @@ type Callback = (CollectorParams, CollectorRequest, CollectorResponse) => Unit
 
 To add a callback to `AsyncBatchEmitter` you can use following approach:
 
-```
+```scala
 def emitterCallback(params: CollectorParams, req: CollectorRequest, res: CollectorResponse): Unit = {
   res match {
     case TEmitter.CollectorSuccess(_) => ()

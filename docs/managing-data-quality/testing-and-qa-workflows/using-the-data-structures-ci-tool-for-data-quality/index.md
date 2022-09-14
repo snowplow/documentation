@@ -30,7 +30,7 @@ Here is an example manifest file where our application has dependencies on three
 - `user` version `1-0-1`
 - `product` version `2-0-0`
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.insights/data_structures_dependencies/jsonschema/1-0-0",
   "data": {
@@ -64,7 +64,7 @@ The manifest must adhere to this [self-describing JSON Schema](http://iglucentra
 
 To use the Github Action simply add this snippet as a step on your existing GitHub Actions pipeline, replacing the relevant variables:
 
-```
+```yaml
 name: Example workflow using Snowplow's Data Structures CI
 on: push
 jobs:
@@ -93,7 +93,7 @@ View the [Github Action repository](https://github.com/snowplow-product/msc-sche
 
 You can download Data Structures CI from our Bintray repository, using the following command:
 
-```
+```bash
 $ curl -L https://github.com/snowplow-product/msc-schema-ci-tool/releases/download/1.0.0/data_structures_ci_1.0.0.zip | jar xv && chmod +x ./data-structures-ci
 ```
 
@@ -101,7 +101,7 @@ $ curl -L https://github.com/snowplow-product/msc-schema-ci-tool/releases/downlo
 
 You can run the task using the following syntax:
 
-```
+```bash
 $ export ORGANIZATION_ID=<organization-id>
 $ export API_KEY=<api-key>
 $ ./data-structures-ci check \

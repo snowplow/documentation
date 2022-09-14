@@ -14,7 +14,7 @@ Snowplow Event Extractor is an ADLA custom extractor that allows you to parse **
 
 EventExtractor implements IExtractor interface:
 
-```
+```csharp
 [SqlUserDefinedExtractor]
 public class EventExtractor : IExtractor
 {
@@ -33,7 +33,7 @@ public class EventExtractor : IExtractor
 
 Following is base U-SQL script that uses a Event Extractor:
 
-```
+```sql
 DECLARE @input_file string = @"\snowplow\event.tsv";
 
 @rs0 =
@@ -47,7 +47,7 @@ DECLARE @input_file string = @"\snowplow\event.tsv";
 The most complex piece of processing is the handling of the self-describing JSONs found in the enriched event's unstruct\_event, contexts and derived\_contexts fields.  
 Consider contexts found in the tsv:
 
-```
+```json
 {
     'schema': 'iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0',
     'data': [{
@@ -74,7 +74,7 @@ Consider contexts found in the tsv:
 
 One of the ways to fetch data from context would be to use user-defined function(UDF):
 
-```
+```sql
 DECLARE @input_file string = @"\snowplow\event.tsv";
 
 //extract context from tsv
@@ -102,7 +102,7 @@ The nested data array inside context consists of an array from which we parse th
 The above process can get quite complex.  
 So to abstract away the complexity, Snowplow Event Extractor follows a simple mapping:
 
-```
+```sql
 DECLARE @input_file string = @"\snowplow\event.tsv";
 
 //extract genre from context directly

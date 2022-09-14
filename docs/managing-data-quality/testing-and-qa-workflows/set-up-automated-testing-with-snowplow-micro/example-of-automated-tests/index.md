@@ -18,7 +18,7 @@ We recommend setting up the following tools before starting:
 
 ### Clone the repo, start Snowplow Micro and serve the app
 
-```
+```bash
 git clone https://github.com/snowplow-incubator/snowplow-micro-examples.git
 
 cd snowplow-micro-examples
@@ -36,7 +36,7 @@ This will:
 
 ### Install npm dependencies
 
-```
+```bash
 npm install
 ```
 
@@ -48,19 +48,19 @@ Our demo web app uses snowplow to track user activity. We will be testing that t
 
 To run all tests:
 
-```
+```bash
 npm test
 ```
 
 For running only [Nightwatch](https://nightwatchjs.org/) tests:
 
-```
+```bash
 npm run test:nightwatch
 ```
 
 For running only [Cypress](https://www.cypress.io/) tests:
 
-```
+```bash
 # From the command line
 npm run cypress:run
 
@@ -72,7 +72,7 @@ npm run cypress:open
 
 Inside the `.github/workflows/` directory you can find the `.yml` files we use to test this exaple app with Micro and Nightwatch/Cypress. A general workflow file would definitely use the [Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro) step, which for our example is:
 
-```
+```yaml
 - name: Start Micro
     run: docker-compose up -d
     working-directory: snowplow-micro-examples
@@ -85,7 +85,7 @@ In order to use it, just make sure that:
 
 If you wanted to use `docker run` instead of `docker-compose`, the same step would be:
 
-```
+```yaml
 - name: Start Micro
     run: docker run --mount type=bind,source=$(pwd)/micro,destination=/config -p 9090:9090 snowplow/snowplow-micro:1.3.1 --collector-config /config/micro.conf --iglu /config/iglu.json &
     working-directory: snowplow-micro-examples
@@ -111,7 +111,7 @@ Each page serves the purpose of demonstrating possible event-tracking, which wil
 
 Using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md):
 
-```
+```html
 <!-- Snowplow starts plowing -->
 <script type="text/javascript">
 ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
@@ -126,7 +126,7 @@ The tracking implemented consists of:
     - This event happens when a user visits a page.
     - It is a predefined Snowplow event, that automatically captures the URL, referrer and page title.
 
-```
+```javascript
 window.snowplow('trackPageView');
 ```
 
@@ -135,7 +135,7 @@ window.snowplow('trackPageView');
     - It is a predefined Snowplow event, that automatically records the maximum scroll left-right, up-down in the last ping period.
     - Method call - before the trackPageView method call:
 
-```
+```javascript
 // login-page
 window.snowplow('enableActivityTracking', {
     minimumVisitLength: 20,
@@ -157,7 +157,7 @@ window.snowplow('enableActivityTracking', {
         - **submit\_form**: id, classes of the form and name, type, value of all form elements
     - **Note**: _By default, Form Tracking does not track password fields. We used the `options` to demonstrate how you can ensure the Non-tracking of sensitive fields. With Snowplow Micro we can also later test that any denylisting of forms is implemented correctly and that no sensitive fields are tracked._
 
-```
+```javascript
 var options = {
     forms: {
         denylist: []
@@ -177,7 +177,7 @@ window.snowplow('enableFormTracking', { options: options });
         - We also want to add as [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#Custom_context) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
         - Implemented in the shop-page (see file [shoppage.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/app/static/ecommerce/js/shoppage.js)):
 
-```
+```javascript
 // TRACK cart_action_event (add)
 window.snowplow('trackSelfDescribingEvent', {
     event: {
@@ -227,7 +227,7 @@ window.snowplow('trackSelfDescribingEvent', {
         - We also want to add as custom contexts the products involved, each of which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0))
         - Implemented in the shop-page as well
 
-```
+```javascript
 // create the contexts array
 let productsContext = [];
 userCart.forEach(function(elt) {
@@ -302,7 +302,7 @@ If you want to isolate Nightwatch JS testing, follow these steps below.
 
 Install nightwatch and a chrome driver which enables nightwatch to interact with the Chrome browser:
 
-```
+```bash
 npm install nightwatch --save-dev
 npm install chromedriver --save-dev
 ```
@@ -316,7 +316,7 @@ npm install chromedriver --save-dev
 
 Running nightwatch:
 
-```
+```bash
 npm run test:nightwatch
 ```
 
@@ -342,7 +342,7 @@ The resetMicro command can be added before each test as the beforeEach hook: [N
 
 _Example call_:
 
-```
+```javascript
 module.exports = {
     beforeEach: function(browser) {
         browser
@@ -360,7 +360,7 @@ This command utilises the ability to reset Micro through the `/micro/reset` en
 
 This is the general structure of how to create a command which aims to request information from Snowplow Micro using Nightwatch:
 
-```
+```javascript
 this.command = (callback) => {
     const request = require('request');
 
@@ -386,7 +386,7 @@ this.command = (callback) => {
 
 _Example call_:
 
-```
+```javascript
 browser.assert.noBadEvents();
 ```
 
@@ -398,7 +398,7 @@ This is arguably the most important assertion, if you only implement one this is
 
 _Example call_:
 
-```
+```javascript
 browser.assert.noOfGoodEvents(2);
 ```
 
@@ -410,7 +410,7 @@ An extension of noBadEvents, asserts that you sent the correct number of good ev
 
 _Example call_:
 
-```
+```javascript
 browser.assert.noOfTotalEvents(2);
 ```
 
@@ -422,10 +422,10 @@ A further extension on noOfGoodEvents, this assertion ensures that both the corr
 
 _Example call_:
 
-```
+```javascript
 browser.assert.orderOfEvents(events_list);
 
-```
+```javascript
 
 _Arguments_: events\_list
 
@@ -435,7 +435,7 @@ Checks for when one event must be before the other so that your application work
 
 _Example call_:
 
-```
+```javascript
 browser.assert.successfulEvent(
     {
         "eventType": "unstruct",
@@ -487,7 +487,7 @@ Cypress, even though it considers as [best practice](https://docs.cypress.io/gu
 - Expects the server to exist and provide a response
 - Does not retry its assertions (as that could affect external state) , which makes it great to use for querying Snowplow Micro's endpoints. For example:
 
-```
+```javascript
 cy.request({
     url: 'http://localhost:9090/micro/all',
     json:true
@@ -517,7 +517,7 @@ The consequences of this decision are:
 - `xx_app_spec.js` for the spec files that visit the app and create events
 - `xx_micro_spec.js` for the spec files that query Micro and make the assertions on those events , where `xx` stands for numbering (but it could be anything as long as it matches uniquely).
 
-```
+```javascript
 $ tree testing/cypress/integration
 
 testing/cypress/integration/
@@ -536,13 +536,13 @@ Example usage:
 
 1. To run all spec files in your `cypress/integration` directory (in alphabetical order)
 
-```
+```bash
 npm run cypress:run
 ```
 
 2. To run an app-micro pair of spec files given a name pattern
 
-```
+```bash
 PAIR_PATTERN=03 npm run cy-micro:pair-run  # will run first the 03_app_spec.js and then the 03_micro_spec.js
 ```
 
@@ -558,7 +558,7 @@ Since Cypress allows to define your own [custom commands](https://docs.cypress.
 
 _Example call_:
 
-```
+```javascript
 cy.noBadEvents();
 ```
 
@@ -568,7 +568,7 @@ Even if this is the only thing that you check in your tests, you are already bri
 
 _Example call_:
 
-```
+```javascript
 cy.numGoodEvents( 19 );
 ```
 
@@ -578,7 +578,7 @@ This command ensures that all the events you want to track, actually get tracked
 
 _Example call_:
 
-```
+```javascript
 cy.eventsWithEventType( "page_view", 8 );
 cy.eventsWithEventType( "struct", 45 );
 ```
@@ -589,7 +589,7 @@ This command is useful when you want to ensure that a particular type of events 
 
 _Example call_:
 
-```
+```javascript
 cy.eventsWithParams(
     {
         "event": "struct",
@@ -607,7 +607,7 @@ This command accepts as first argument an object with the expected event's field
 
 _Example call_:
 
-```
+```javascript
 cy.eventsWithSchema( "iglu:com.snowplowanalytics.snowplow/submit_form/jsonschema/1-0-0", 5 );
 ```
 
@@ -617,7 +617,7 @@ With this command you can look specifically for [unstructured events](/docs/und
 
 _Example call_:
 
-```
+```javascript
 cy.eventsWithContexts( [ { "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0" } ], 10 );
 
 cy.eventsWithContexts(
@@ -650,7 +650,7 @@ With this command you can check whether the predefined(e.g. webpage, geolocation
 
 _Example call_:
 
-```
+```javascript
 cy.eventsWithProperties(
     {
         "parameters": {
@@ -689,7 +689,7 @@ This is a command that combines some of the above (eventsWithSchema, eventsWithP
 
 _Example call_:
 
-```
+```javascript
 cy.eventsWithOrder([
     {
         "schema": "iglu:com.snowplowanalytics.snowplow/focus_form/jsonschema/1-0-0",
@@ -709,7 +709,7 @@ With this command you can assert that events happened in a specified (ascending)
 
 ### Some further notes
 
-```
+```bash
 $ tree testing/cypress/
 
 testing/cypress/

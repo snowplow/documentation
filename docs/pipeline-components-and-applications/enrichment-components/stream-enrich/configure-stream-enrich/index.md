@@ -35,7 +35,7 @@ See the documentation on [configuring enrichments](/docs/enriching-your-data/ava
 
 When using with Kinesis, it’s possible to store the configuration of the resolver and/or enrichments in DynamoDB. In this case `dynamodb:` prefix needs to be used in place of `file:` prefix:
 
-```
+```bash
   --resolver dynamodb:eu-west-1/configuration_table/resolver \
   --enrichments dynamodb:eu-west-1/configuration_table/enrichment_
 ```

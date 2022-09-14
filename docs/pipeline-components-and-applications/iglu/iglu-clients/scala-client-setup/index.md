@@ -27,7 +27,7 @@ The current version of the Scala client is 1.0.2.
 
 Add this to your SBT config:
 
-```
+```scala
 // Dependency
 val igluClient = "com.snowplowanalytics" %% "iglu-scala-client"  % "1.0.2"
 ```
@@ -36,7 +36,7 @@ val igluClient = "com.snowplowanalytics" %% "iglu-scala-client"  % "1.0.2"
 
 Add into `build.gradle`:
 
-```
+```gradle
 dependencies {
     ...
     // Iglu client

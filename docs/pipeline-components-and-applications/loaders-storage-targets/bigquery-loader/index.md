@@ -279,7 +279,6 @@ We recommend constantly running Repeater on a small / cheap node or Docker conta
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-repeater:1.4.2 \
-    listen \
     --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json \
     --bufferSize=20 \ # size of the batch to send to the dead-letter bucket

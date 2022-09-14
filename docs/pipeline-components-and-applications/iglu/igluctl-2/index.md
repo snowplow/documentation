@@ -23,7 +23,8 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
     - `table-migrate` is optional and allows removal of incompatible tables by migrating them as opposed to just "blacklisting".
 
 Download the latest Igluctl from GitHub releases:
-bash
+
+```bash
 $ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip
 $ unzip igluctl_0.10.1.zip
 ```

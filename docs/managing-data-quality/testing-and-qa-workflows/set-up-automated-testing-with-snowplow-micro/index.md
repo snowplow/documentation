@@ -322,7 +322,7 @@ When querying `/micro/good` with `POST` (`Content-Type: application/json` n
 
 Example of command to query the good events: 
 
-```json
+```bash
 curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/good -d '<JSON>'
 ```
 

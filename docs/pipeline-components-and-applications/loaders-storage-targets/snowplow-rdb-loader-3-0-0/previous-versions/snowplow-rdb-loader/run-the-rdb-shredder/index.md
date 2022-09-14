@@ -6,9 +6,11 @@ sidebar_position: 40
 
 The RDB shredder is published as a jar file attached to the [github release page](https://github.com/snowplow/snowplow-rdb-loader/releases). We also push it to several S3 buckets, from where it is accessible to an EMR cluster:
 
-```bash
+```text
 s3://snowplow-hosted-assets/4-storage/rdb-shredder/snowplow-rdb-shredder-{{ version }}.jar
+
 -- or --
+
 s3://snowplow-hosted-{{ region }}/4-storage/rdb-shredder/snowplow-rdb-shredder-{{ version }}.jar
 ```
 

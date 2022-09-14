@@ -88,7 +88,7 @@ You should also restrict values which are allowed within the `u` parameter to pr
 Example:
 
 ```html
-Check out <a href="http://collector.acme.com/r/tp2?u=https%3A%2F%2Fgithub.com%2Fsnowplow%2Fhuskimo">Huskimo</a>
+Check out <a href="http://collector.acme.com/r/tp2?u=https%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow">Snowplow</a>
 ```
 
 Snowplow converts the `&u={{uri}}` argument into a `com.snowplowanalytics.snowplow/uri_direct` self-describing JSON.

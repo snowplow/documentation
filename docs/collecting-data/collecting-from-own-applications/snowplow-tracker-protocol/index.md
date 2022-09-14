@@ -464,7 +464,7 @@ Custom unstructured event tracking is used to track events that are not natively
 
 An example of an unstructured event for a product view event:
 
-```text
+```json
 {
   "schema": "iglu:com.my_company/viewed_product/jsonschema/1-0-0",
   "data": {
@@ -554,7 +554,7 @@ uid=aeb1691c5a0ee5a6   // User ID
 
 Custom contexts can be used to attach additional data in the form of a JSON to any Snowplow event.
 
-Each individual custom context is a [self-describing JSON](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/) such as:
+Each individual custom context is a [self-describing JSON](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) such as:
 
 ```json
 {

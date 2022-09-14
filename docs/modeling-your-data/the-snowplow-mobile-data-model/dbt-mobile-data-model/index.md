@@ -104,7 +104,7 @@ For more details, please refer to the [snowplow-mobile package documentation](h
 
 The Snowplow mobile model is designed to be run as a whole, which ensures all incremental tables are kept in sync. As such, we suggest running the model using:
 
-```yaml
+```bash
 dbt run --models snowplow_mobile tag:snowplow_mobile_incremental
 ```
 

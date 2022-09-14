@@ -74,7 +74,7 @@ As stated before, both the Relay and the Server need to reside in the same VPC. 
 
 As the Lambda will be reading its data form Kinesis it will also need to have permissions to do that with a policy document such as:
 
-```bash
+```json
 {
     "Version": "2012-10-17",
     "Statement": [

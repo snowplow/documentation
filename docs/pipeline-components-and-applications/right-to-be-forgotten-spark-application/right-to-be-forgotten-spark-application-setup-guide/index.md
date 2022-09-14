@@ -19,7 +19,7 @@ $ sbt assembly
 
 The 'fat jar' is now available as:
 
-```bash
+```text
 target/snowplow-right-to-be-forgotten-job-x.x.x.jar
 ```
 

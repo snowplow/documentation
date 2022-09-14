@@ -30,7 +30,7 @@ We support installing the Obj-C Client via CocoaPods since it's the easiest way 
 2. Create the file `Podfile` in the root of your XCode project directory, if you don't have one already
 3. Add the following line into it:
 
-```bash
+```ruby
 pod 'SnowplowIgluClient'
 ```
 

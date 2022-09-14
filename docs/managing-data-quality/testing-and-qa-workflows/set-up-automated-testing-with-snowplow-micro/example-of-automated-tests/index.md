@@ -517,7 +517,7 @@ The consequences of this decision are:
 - `xx_app_spec.js` for the spec files that visit the app and create events
 - `xx_micro_spec.js` for the spec files that query Micro and make the assertions on those events , where `xx` stands for numbering (but it could be anything as long as it matches uniquely).
 
-```javascript
+```bash
 $ tree testing/cypress/integration
 
 testing/cypress/integration/

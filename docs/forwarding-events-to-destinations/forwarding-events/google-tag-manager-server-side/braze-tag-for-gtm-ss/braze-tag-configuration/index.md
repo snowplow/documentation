@@ -122,11 +122,11 @@ Using this table (which is only available if `Include Snowplow Entities in event
 
 Entity Names can be specified in 3 ways:
 
-1\. By their Iglu Schema tracking URI (e.g. `iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2`)
+1. By their Iglu Schema tracking URI (e.g. `iglu:com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2`)
 
-2\. By their enriched name (e.g. `contexts_com_snowplowanalytics_snowplow_client_session_1`)
+2. By their enriched name (e.g. `contexts_com_snowplowanalytics_snowplow_client_session_1`)
 
-3\. By their key in the client event object, which is the GTM-SS Snowplow prefix (`x-sp-`) followed by the enriched entity name (e.g. `x-sp-contexts_com_snowplowanalytics_snowplow_client_session_1`)
+3. By their key in the client event object, which is the GTM-SS Snowplow prefix (`x-sp-`) followed by the enriched entity name (e.g. `x-sp-contexts_com_snowplowanalytics_snowplow_client_session_1`)
 
 Depending on the value set for the **Apply to all versions** column, the major version number from the 2nd and 3rd naming option above may be excluded. More specifically, this is only permitted if **Apply to all versions** is set to `True`.
 

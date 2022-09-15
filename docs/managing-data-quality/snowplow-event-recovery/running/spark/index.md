@@ -6,13 +6,13 @@ sidebar_position: 20
 
 The Spark job reads bad rows from an S3 location and stores the recovered payloads in Kinesis, unrecovered and unrecoverable in other S3 buckets.
 
-#### [](https://github.com/snowplow-incubator/snowplow-event-recovery#building)
+#### 
 
 #### Building
 
 To build the fat jar, run:
 
-#### [](https://github.com/snowplow-incubator/snowplow-event-recovery#running)
+#### 
 
 ```bash
 sbt spark/assembly

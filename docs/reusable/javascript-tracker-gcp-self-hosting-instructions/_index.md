@@ -1,4 +1,4 @@
-## [](https://github.com/snowplow/snowplow/wiki/self-hosting-snowplow-js#pre-requisites)Pre-requisites
+## Pre-requisites
 
 For the purposes of this guide, we are going to assume that you want to serve the standard `sp.js` from Google Cloud Storage. To accomplish this, you will need the following:
 

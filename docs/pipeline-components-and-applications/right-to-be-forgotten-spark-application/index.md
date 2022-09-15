@@ -16,7 +16,7 @@ See [the setup guide](/docs/pipeline-components-and-applications/right-to-be-for
 
 ## Assumptions
 
-### [](https://github.com/snowplow-incubator/right-to-be-forgotten-spark-job/wiki/Technical-documentation#data-loss)Data Loss
+### Data Loss
 
 There is an argument called `maximum-matching-proportion` which is a safeguard for the case that you have chosen a value as removal criterion that corresponds to many rows.
 
@@ -24,6 +24,6 @@ This is a very coarse filter that will only catch the worst cases where that hap
 
 Of course in order to recover from such an issue you need to have a backup of the data which is hard to do while also meeting the requirement to erase all data for a certain client. One solution is to keep the old archive in another bucket or prefix (in the case of S3) which will automatically expire through some sort of object life cycle policy and/or versioning. Whichever solution to this problem you choose, we would like to hear about your experience on [discourse](https://discourse.snowplow.io/).
 
-### [](https://github.com/snowplow-incubator/right-to-be-forgotten-spark-job/wiki/Technical-documentation#size-of-removal-criteria-file)Size of removal criteria file
+### Size of removal criteria file
 
 It is assumed that the file is small enough to fit in memory in each executor. Back of the envelope calculations show that this is a reasonable assumption. If that is not the case for you please submit a [new issue on github](https://github.com/snowplow-incubator/right-to-be-forgotten-spark-job/issues) or even better a PR. This assumption simplifies the code but also should make execution very fast.

@@ -240,7 +240,7 @@ Each transaction item event will have the same device created timestamp, true ti
 
 #### `EcommerceTransactionItem`
 
-#### [](#using-snowplowtracker-net-standard-or-snowplowtrackerplatformextensions-pcl-32)Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
 
 To instantiate a `EcommerceTransactionItem` in your code, simply use the following constructor signature:
 

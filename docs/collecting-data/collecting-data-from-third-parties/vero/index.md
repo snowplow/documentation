@@ -31,7 +31,7 @@ Integrating Vero's webhooks into Snowplow is a two-stage process:
 1. Configure Vero to send events to Snowplow
 2. (Optional) Create the Vero events tables for Amazon Redshift
 
-## [](https://github.com/snowplow/snowplow/wiki/Vero-webhook-setup#21-vero)Configure Vero
+## Configure Vero
 
 First login to Vero. Select **Settings** from the menu panel along the left-hand side of the screen, then navigate to **Integrations** in the Settings menu.
 

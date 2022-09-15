@@ -61,7 +61,7 @@ import <SnowplowTracker/SPTracker.h>
 
 If you prefer not to use CocoaPods, you can grab the tracker from our [GitHub repo](https://github.com/snowplow/snowplow-objc-tracker) and import it into your project.
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup#clone-the-tracker)Clone the tracker
+#### Clone the tracker
 
 First, git clone the latest version of the tracker to your local machine:
 
@@ -69,7 +69,7 @@ First, git clone the latest version of the tracker to your local machine:
 git clone https://github.com/snowplow/snowplow-objc-tracker.git
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup#copy-the-tracker-into-your-project)Copy the tracker into your project
+#### Copy the tracker into your project
 
 You only need to copy the tracker's `Snowplow` sub-folder into your XCode project's folder. The command will look something like this:
 
@@ -122,7 +122,7 @@ Go to **Target** > **General** tab > **Linked Frameworks and Libraries** s
 1. All of the frameworks for your target platform, as returned by the `grep` above
 2. `libsqlite3.dylib`
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup#building)Building
+#### Building
 
 Now **Build** your project and you should see **Build Succeeded**. If you get a build error, check that you added Snowplow and fmdb as Groups, not just as Folders.
 

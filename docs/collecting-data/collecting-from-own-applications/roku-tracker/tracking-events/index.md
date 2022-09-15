@@ -55,7 +55,7 @@ m.global.snowplow.selfDescribing = {
 }
 ```
 
-## [](#track-structured-events-with-structured)Track structured events with `structured`
+## Track structured events with `structured`
 
 This method provides a halfway-house between tracking fully user-defined self-describing events and out-of-the box predefined events. This event type can be used to track many types of user activity, as it is somewhat customizable. "Struct" events closely mirror the structure of Google Analytics events, with "category" (`se_ca`), "action" (`se_ac`), "label" (`se_la`), and "value" (`se_va`) properties.
 
@@ -80,7 +80,7 @@ m.global.snowplow.structured = {
 }
 ```
 
-## [](#track-screen-views-with-screenview)Track screen views with `screenView`
+## Track screen views with `screenView`
 
 Use `screenView` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages. The arguments are `name`, `id`, `type`, and `transitionType`; while all are optional, you must provided at least one of either `name` or `id` to create a valid event. "Name" is the human-readable screen name, and "ID" should be the unique screen ID.
 

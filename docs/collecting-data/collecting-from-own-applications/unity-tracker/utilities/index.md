@@ -21,7 +21,7 @@ Log.SetLogLevel({0,1,2 or 3});
 - `2` : Error and Debug
 - `3` : Error, Debug and Verbose
 
-### [](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#82-concurrentqueue)8.2 ConcurrentQueue
+### 8.2 ConcurrentQueue
 
 Due to the .NET 2.0 limitations in earlier versions of the Snowplow Unity Tracker we have had to implement our own ThreadSafe queue which can be found in the following package:
 

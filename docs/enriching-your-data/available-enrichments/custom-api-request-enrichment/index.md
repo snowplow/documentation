@@ -30,11 +30,11 @@ The configuration JSON for this enrichment contains four sub-objects:
 3. `outputs` lets you tune how you convert the returned JSON into one or more self-describing JSONs ready to be attached to your Snowplow event
 4. `cache` improves the enrichment's performance by storing values retrieved from the API
 
-### [](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment#configuration)Configuration
+### Configuration
 
 To go through each of sub-objects in more detail:
 
-#### [](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment#inputs)`inputs`
+#### `inputs`
 
 Specify an array of `inputs` to use as keys when performing your API lookup. Each input consists of a `key` and a source: either `pojo` if the datapoint comes from the Snowplow enriched event POJO, or `json` if the datapoint comes from a self-describing JSON inside one of the three JSON fields. The `key` can be referred to later in the `api.http.uri` property. Note that key name can contain only alphanumeric symbols, hyphens and underscores.
 
@@ -47,7 +47,7 @@ For `json`, you must specify the field name as either `unstruct_event`, `cont
 
 The lookup algorithm is short-circuiting: the first match for a given key will be used.
 
-#### [](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment#api)`api`
+#### `api`
 
 The `api` section lets you configure how the enrichment should access your API. At the moment only `http` is supported, with this option covering both HTTP and HTTPS - the protocol on the `uri` field will determine which to use. Before R113, only `GET` was supported as the HTTP `method` for the lookup. Now it supports both `GET` and `POST`.
 
@@ -69,7 +69,7 @@ If your API is unsecured (because for example it is only accessible from inside 
 "authentication": { }
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment#outputs)`outputs`
+#### `outputs`
 
 This enrichment assumes that your API returns a JSON, which will contain one or more _entities_ that you want to add to your event as derived contexts. Within the `outputs` array, each entry is a `json` sub-object that contains a `jsonPath` configuration field that lets you specify which part of the returned JSON you want to add to your enriched event. `$` can be used if you want to attach returned JSON as is.
 
@@ -118,7 +118,7 @@ This would be added to the `derived_contexts` array:
 
 The `outputs` array must have at least one entry in it.
 
-#### [](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment#cache)`cache`
+#### `cache`
 
 A Snowplow enrichment can run many millions of time per hour, effectively launching a DoS attack on a data source if we are not careful. The `cache` configuration attempts to minimize the number of lookups performed.
 
@@ -140,7 +140,7 @@ The data source for this enrichment is the entire `enriched/good` event. More pr
 
 More precise usage of these data sources is described in inputs section.
 
-### [](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment#algorithm)Algorithm
+### Algorithm
 
 This enrichment uses any 3rd party RESTful service to fetch data in JSON format. In most cases however you probably want to use your own private server to maintain acceptable performance since third-party service may cause serious slowdown of your enrichment process.
 
@@ -155,7 +155,7 @@ Here are some clues on how this enrichment will handle some exceptional cases:
 - if server response returned JSON which invalidated by schema provided in output - event will be sent to `shredded/bad`
 - if input JSONPath will match non-primitive value in context or unstructured event, enrichment will try to stringify it. Array will be concatenated with commas, `null` will be transformed to string "null", object will be just stringified and will inevitable result in invalid URL
 
-### [](https://github.com/snowplow/snowplow/wiki/API-Request-enrichment#data-generated)Data generated
+### Data generated
 
 This enrichment adds a new context to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ua_parser_context/jsonschema/1-0-0).
 

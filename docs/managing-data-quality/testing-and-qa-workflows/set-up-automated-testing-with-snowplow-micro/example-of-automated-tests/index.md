@@ -334,9 +334,9 @@ In Nightwatch a test involves 3 phases:
 
 ### Organisation of tests
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#commands)Commands
+#### Commands
 
-##### [](https://github.com/snowplow-incubator/snowplow-micro-examples#resetmicro)resetMicro
+##### resetMicro
 
 The resetMicro command can be added before each test as the beforeEach hook: [Nightwatch Test Hooks](https://github.com/nightwatchjs/nightwatch-docs/blob/643e9a63a94deba6bd84bf2dd78cb27693620e20/guide/using-nightwatch/using-test-hooks.md)
 
@@ -380,9 +380,9 @@ this.command = (callback) => {
 };
 ```
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#assertions)Assertions
+#### Assertions
 
-##### [](https://github.com/snowplow-incubator/snowplow-micro-examples#nobadevents).noBadEvents
+##### .noBadEvents
 
 _Example call_:
 
@@ -394,7 +394,7 @@ _Arguments_: None
 
 This is arguably the most important assertion, if you only implement one this is a great place to start. It ensures that all of your data is sent to Micro and ends up in good events, so all of your data is in your warehouse and you can interpret it as expected.
 
-##### [](https://github.com/snowplow-incubator/snowplow-micro-examples#noofgoodevents).noOfGoodEvents
+##### .noOfGoodEvents
 
 _Example call_:
 
@@ -406,7 +406,7 @@ _Arguments_: Number of expected good events to be sent to Micro
 
 An extension of noBadEvents, asserts that you sent the correct number of good events to Micro for a given event. For example, you might expect the onClick() action to send 2 good events, then you can make sure 2 are sent to good events and call noBadEvents on the same assertion as total number of events = number of good events + number of bad events.
 
-##### [](https://github.com/snowplow-incubator/snowplow-micro-examples#nooftotalevents).noOfTotalEvents
+##### .noOfTotalEvents
 
 _Example call_:
 
@@ -418,7 +418,7 @@ _Arguments_: Number of expected total events sent to Micro
 
 A further extension on noOfGoodEvents, this assertion ensures that both the correct number events are sent to Micro, and that no bad events are sent. Using all 3 of these assertions consecutively provides the best assurance that every event you send is sent to your warehouse properly.
 
-##### [](https://github.com/snowplow-incubator/snowplow-micro-examples#orderofevents).orderOfEvents
+##### .orderOfEvents
 
 _Example call_:
 
@@ -431,7 +431,7 @@ _Arguments_: events_list
 
 Checks for when one event must be before the other so that your application works as expected. This works by retrieving the derived timestamps for each event, and asserting that events fired in the specified order. In our case we use this to test that a cart action occurs before purchasing an item. If our application didn't get this order of events correct, then the application does not act as expected. This can also be considered a race condition test.
 
-##### [](https://github.com/snowplow-incubator/snowplow-micro-examples#successfulevent).successfulEvent
+##### .successfulEvent
 
 _Example call_:
 
@@ -554,7 +554,7 @@ This kind of organization also has the benefit, that you can keep having the tes
 
 Since Cypress allows to define your own [custom commands](https://docs.cypress.io/api/cypress-api/custom-commands.html), in this repo you can find commands specifically for use with Snowplow Micro and assertions of events. You can see them all in [commands.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/support/commands.js).
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#nobadevents-1)cy.noBadEvents
+#### cy.noBadEvents
 
 _Example call_:
 
@@ -564,7 +564,7 @@ cy.noBadEvents();
 
 Even if this is the only thing that you check in your tests, you are already brilliant. It is going to ensure that your app is not sending any bad events, in other words you ensure that all your events end up in your warehouse. There are no more gaps in your data or in your analytics and no recovery jobs to get those bad events back, jobs that are not going to be trivial, especially if you are dealing with high volume of events.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#numgoodevents)cy.numGoodEvents
+#### cy.numGoodEvents
 
 _Example call_:
 
@@ -574,7 +574,7 @@ cy.numGoodEvents( 19 );
 
 This command ensures that all the events you want to track, actually get tracked. Because there may be not bad events, but maybe your tracker is not implemented correctly into the app's logic.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#eventswitheventtype)cy.eventsWithEventType
+#### cy.eventsWithEventType
 
 _Example call_:
 
@@ -585,7 +585,7 @@ cy.eventsWithEventType( "struct", 45 );
 
 This command is useful when you want to ensure that a particular type of events got tracked as many times as it should.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#eventswithparams)cy.eventsWithParams
+#### cy.eventsWithParams
 
 _Example call_:
 
@@ -603,7 +603,7 @@ cy.eventsWithParams(
 
 This command accepts as first argument an object with the expected event's field-value pairs. You can read about all the fields in Snowplow docs [here](/docs/understanding-your-pipeline/canonical-event/index.md). This command is particularly useful when checking on [structured events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#Tracking_custom_structured_events).
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#eventswithschema)cy.eventsWithSchema
+#### cy.eventsWithSchema
 
 _Example call_:
 
@@ -613,7 +613,7 @@ cy.eventsWithSchema( "iglu:com.snowplowanalytics.snowplow/submit_form/jsonschema
 
 With this command you can look specifically for [unstructured events](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), which include both custom unstructured events and all other default Snowplow events that are of "unstruct" eventType (link-click, submit-form, ad-impression etc.)
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#eventswithcontexts)cy.eventsWithContexts
+#### cy.eventsWithContexts
 
 _Example call_:
 
@@ -646,7 +646,7 @@ cy.eventsWithContexts(
 
 With this command you can check whether the predefined(e.g. webpage, geolocation) or custom contexts/entities got properly attached to events. You can not only check by the schema of the entities but also by their data. Note that the first argument to this command should be an array of objects, like the contexts' array that can be attached to any Snowplow event. The keys of these objects can be either "schema" or "data". For "schema" the value should be a string (the schema). For "data" the value should be an object of key-value pairs, depending on the context.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#eventswithproperties)cy.eventsWithProperties
+#### cy.eventsWithProperties
 
 _Example call_:
 
@@ -685,7 +685,7 @@ This is a command that combines some of the above (eventsWithSchema, eventsWithP
 - "contexts" : matches by contexts
 - "parameters" matches by the event's fields It will return the events that have all those properties. As shown in the examples above, you do not have to use all the properties, and the command works accordingly.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro-examples#eventswithorder)cy.eventsWithOrder
+#### cy.eventsWithOrder
 
 _Example call_:
 

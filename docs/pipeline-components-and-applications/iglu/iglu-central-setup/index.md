@@ -45,7 +45,7 @@ Once you have done this, check that your schemas are publically accessible, for 
 http://iglucentral.acme.com/schemas/com.snowplowanalytics.self-desc/instance/jsonschema/1-0-2
 ```
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-Central-setup#update-your-iglu-client-configuration)Update your Iglu client configuration
+## Update your Iglu client configuration
 
 You now need to update your Iglu client configuration to point to your Iglu Central mirror, rather than the original.
 

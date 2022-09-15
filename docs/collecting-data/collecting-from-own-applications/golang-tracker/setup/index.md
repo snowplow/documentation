@@ -8,7 +8,7 @@ sidebar_position: 10
 
 The Snowplow Golang Tracker has been built and tested using Golang versions 1.9.x, 1.10.x, 1.11.x, 1.12.x and 1.13.x.
 
-## [](https://github.com/snowplow/snowplow/wiki/Golang-tracker-setup#3-setup)3. Setup
+## 3. Setup
 
 The Tracker is hosted on Github and versions of the Tracker can be fetched using [gopkg](http://labix.org/gopkg.in).
 

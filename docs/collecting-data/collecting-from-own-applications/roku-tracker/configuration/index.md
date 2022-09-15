@@ -24,7 +24,7 @@ Properties of the network configuration:
 | `collector` | URI for the Snowplow collector endpoint. |
 | `method` | HTTP method to use. `GET` and `POST` methods are supported. |
 
-## [](#tracker-namespaces)Tracker namespaces
+## Tracker namespaces
 
 You may initialize multiple trackers, each with a different namespace. In this way, you can send events to multiple Snowplow collectors from your application. An example scenario for this would be sending events to both a staging and production pipeline. Each tracker processes events in its own background thread.
 
@@ -55,6 +55,6 @@ m.global.snowplow.screenView = {
 }
 ```
 
-## [](#logging)Logging
+## Logging
 
 The package makes use of [roku-log](https://github.com/georgejecook/roku-log), a logging framework for Roku Scenegraph apps. roku-log enables configuring the logging output and setting log levels for the severity of the output. Under the `debug` log level, the tracker outputs information about each request. On the other hand, setting the log level to `error` will only output crashes and tracking errors. Please refer to the roku-log [instructions](https://github.com/georgejecook/roku-log) to learn about setting it up.

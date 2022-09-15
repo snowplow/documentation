@@ -6,7 +6,7 @@ sidebar_position: 40
 
 Iglu clients are used for interacting with Iglu server repos and for resolving schemas in embedded and remote Iglu schema repositories.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-clients#technical-architecture)Technical architecture
+## Technical architecture
 
 In this diagram we show an Iglu client resolving a schema from Iglu Central, one embedded repository and a further two remote HTTP repositories:
 

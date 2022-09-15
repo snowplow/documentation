@@ -6,7 +6,7 @@ sidebar_position: 20
 
 ## Basic configuration
 
-### [](https://github.com/snowplow/snowplow/wiki/Configure-Stream-Enrich#template)Template
+### Template
 
 Template configuration for Kafka can be found [here](https://github.com/snowplow/enrich/blob/3.2.0/config/stream-enrich-kafka.hocon).
 

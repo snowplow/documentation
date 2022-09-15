@@ -8,7 +8,7 @@ sidebar_position: 10
 
 Snowplow is copyright 2012-2022 Snowplow Analytics Ltd.
 
-## [](https://github.com/snowplow/snowplow/wiki/Copyright-and-license#license)License
+## License
 
 The majority of the Snowplow project is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0) (the "License"); you may not use this software except in compliance with the License.
 
@@ -18,7 +18,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 The Snowplow JavaScript Tracker mono-repository is distributed under [BSD 3 Clause](https://opensource.org/licenses/BSD-3-Clause). The Snowplow JavaScript Tracker was originally based on Anthon Pang's `piwik.js`, and has maintained the same license for distribution.
 
-## [](https://github.com/snowplow/snowplow/wiki/Copyright-and-license#third-party-git-submoduled-contributions)Third-party, git-submoduled contributions
+## Third-party, git-submoduled contributions
 
 The loosely-coupled architecture of Snowplow makes it easy to swap out individual sub-system implementations for first- or third-party alternatives.
 

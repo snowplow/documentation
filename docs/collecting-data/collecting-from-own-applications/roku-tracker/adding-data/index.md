@@ -12,7 +12,7 @@ There are multiple ways to add extra data to your tracked events, adding richnes
 
 You can attach any of these as additional arguments to the track event methods.
 
-## [](#event-context)Event context
+## Event context
 
 Event context is an incredibly powerful aspect of Snowplow tracking, which allows you to create very rich data. It is based on the same self-describing JSON schemas as the self-describing events. Using event context, you can add any details you like to your events, as long as you can describe them in a self-describing JSON schema.
 
@@ -49,7 +49,7 @@ m.global.snowplow.screenView = {
 }
 ```
 
-## [](#adding-user-and-platform-data-with-subject)Adding user and platform data with Subject
+## Adding user and platform data with Subject
 
 Subject information describes the user and device associated with the event, such as their user ID, what type of device they used, or what size screen that device had.
 
@@ -77,7 +77,7 @@ m.global.snowplow.init = {
 }
 ```
 
-## [](#event-timestamps)Event timestamps
+## Event timestamps
 
 Processed Snowplow events have five different timestamps.
 

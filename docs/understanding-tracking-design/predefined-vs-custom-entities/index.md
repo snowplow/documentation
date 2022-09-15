@@ -4,7 +4,7 @@ date: "2020-02-27"
 sidebar_position: 40
 ---
 
-## [](https://github.com/snowplow/snowplow/wiki/Contexts-overview#predefined-contexts)Predefined contexts
+## Predefined contexts
 
 Predefined contexts are Snowplow authored web contexts and are available with the JavaScript tracker. They are enabled at the tracker initialization step and thus the associated data will be added automatically to any Snowplow event fired on the page.
 
@@ -21,7 +21,7 @@ window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
 });
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Contexts-overview#custom-contexts)Custom contexts
+## Custom contexts
 
 Custom contexts let you add additional information about the circumstances surrounding an event by attaching context through entities represented with a [self-describing JSON](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
 

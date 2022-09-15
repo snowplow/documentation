@@ -25,7 +25,7 @@ Integrating Olark's webhooks into Snowplow is a two-stage process:
 1. Configure Olark to send events to Snowplow
 2. (Optional) Create the Olark events tables into Amazon Redshift
 
-## [](https://github.com/snowplow/snowplow/wiki/Olark-webhook-setup#21-olark)Configure Olark
+## Configure Olark
 
 First login to Olark and click on **Integrations**:
 

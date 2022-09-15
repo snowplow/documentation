@@ -12,11 +12,11 @@ The [Iglu Server](https://github.com/snowplow-incubator/iglu-server/) is an Ig
 
 Information on setting up an instance of the Iglu Server can be found in [the setup guide](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/setup/index.md).
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#1-the-schema-service-apischemas)1. The schema service (`/api/schemas`)
+## 1. The schema service (`/api/schemas`)
 
 The schema service allows you to interact with Iglu schemas using simple HTTP requests.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-server#11-post-requests)1.1 POST requests
+### 1.1 POST requests
 
 Sending a `POST` request to the schema service allows you to publish a new self-describing schema to the repository.
 
@@ -74,7 +74,7 @@ will produce a response like this one, if no errors are encountered:
 
 _Please note:_ This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-server#12-put-requests)1.2 PUT requests
+### 1.2 PUT requests
 
 Another way of adding schemas is using a `PUT` request. Just like a `POST` request, it allows you to publish a schema to the Iglu Server by including it in the request's body, with an optional `isPublic` parameter used to set the visibility of a schema. Unlike `POST` requests, `PUT` requests require a schema's Iglu URI to be included in the request URI (i.e. `HOST/api/schemas/vendor/name/format/version`.
 
@@ -88,7 +88,7 @@ curl HOST/api/schemas/com.acme/ad_click/jsonschema/1-0-0 -X PUT -H "apikey: YOUR
 
 _Please note:_ This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-server#13-single-schema-get-requests)1.3 Single-schema GET requests
+### 1.3 Single-schema GET requests
 
 A schema previously added to the repository can be retrieved by making a `GET` request:
 
@@ -163,11 +163,11 @@ GET requests support a `repr` URL parameter, allowing you to specify three dif
 
 _Please note:_ While `metadata`/`body` query parameters used in previous versions of the Iglu Server are supported, they have been deprecated in favor of the single `repr` parameter.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-server#14-multiple-get-requests)1.4 Multiple GET requests
+### 1.4 Multiple GET requests
 
 You can also retrieve multiple schemas in a single `GET` request using a few different endpoints
 
-#### [](https://github.com/snowplow/iglu/wiki/Iglu-server#vendor-based-requests)Vendor-based requests
+#### Vendor-based requests
 
 Every schema belonging to a single vendor can be retrieved by sending a `GET` request to the following endpoint:
 
@@ -203,7 +203,7 @@ curl HOST/api/schemas -X GET -H "apikey: YOUR_APIKEY"
 
 _Please note:_ you can only retrieve schemas that can be read by your API key. This means that if you do not own a vendor you're requesting schemas for, you will only be able to retrieve the vendor's public schemas (if any exist).
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-server#15-swagger-support)1.5 Swagger support
+### 1.5 Swagger support
 
 We have added [Swagger](https://swagger.io/) support to our API so you can explore the repository server’s API interactively. The Swagger UI is available at the following URL:
 
@@ -211,7 +211,7 @@ We have added [Swagger](https://swagger.io/) support to our API so you can exp
 http://$HOST/static/swagger-ui/index.html
 ```
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#2-schema-validation-and-the-validation-service-apivalidation)2. Schema validation and the validation service (`/api/validation`)
+## 2. Schema validation and the validation service (`/api/validation`)
 
 When adding a schema to the repository, the repository will validate that the provided schema is self-describing - an overview of this concept can be found in the [Self describing JSON schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) wiki page. In practice this means your schema should contain a `self` property, which itself contains the following properties:
 
@@ -303,11 +303,11 @@ Or, if it has some issues, return a detailed report about its problems:
 
 Like the schema service, the validation service is also accessible through Swagger UI.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#3-drafts-service-apidrafts)3. Drafts service (`/api/drafts`)
+## 3. Drafts service (`/api/drafts`)
 
 The draft schema service lets you interact with draft schemas using simple HTTP requests. Draft schemas are variants of Iglu schemas with simple versions that start with `1` and can be increased as needed.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-server#31-post-requests)3.1 POST requests
+### 3.1 POST requests
 
 Sending a `POST` request to the draft service allows you to publish a new self-describing schema to the repository.
 
@@ -365,7 +365,7 @@ will produce a response like this one, if no errors are encountered:
 
 _Please note:_ This endpoint must be used with an API key with a `schema_action` permission of `CREATE`.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-server#32-single-draft-get-requests)3.2 Single-draft GET requests
+### 3.2 Single-draft GET requests
 
 A schema draft previously added to the repository can be retrieved by making a `GET` request:
 
@@ -440,7 +440,7 @@ GET requests support a `repr` URL parameter, allowing you to specify three dif
 
 _Please note:_ While `metadata`/`body` query parameters used in previous versions of the Iglu Server are supported, they have been deprecated in favor of the single `repr` parameter.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#4-debug-apidebug-and-metadata-apimeta-services)4. Debug (`/api/debug`) and metadata (`/api/meta`) services
+## 4. Debug (`/api/debug`) and metadata (`/api/meta`) services
 
 The Iglu Server includes several endpoints for inspecting its own state.
 
@@ -478,7 +478,7 @@ curl HOST/api/meta/server -H 'apikey: YOUR_APIKEY'
 }
 ```
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-server#5-api-keys-and-the-authentication-service-apiauth)5. API keys and the authentication service (`/api/auth`)
+## 5. API keys and the authentication service (`/api/auth`)
 
 In order to use the routes of the Iglu Server's API that require either write access to the repository or readaccess to non-public schemas, you will need an API key, passed as an `apiKey` HTTP header to relevant calls of those services.
 

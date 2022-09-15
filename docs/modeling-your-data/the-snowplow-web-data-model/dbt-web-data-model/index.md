@@ -90,7 +90,7 @@ vars:
     snowplow__heartbeat: 10 # Default value
 ```
 
-#### [](https://github.com/snowplow/data-models/tree/feature-redshift-web-v1/web/v1/redshift#configuration)Further configuration
+#### Further configuration
 
 There are many additional configurations you can make to the model such as changing destination schemas, disabling modules and removing bot traffic.
 

@@ -101,13 +101,13 @@ It would be transformed into the following Indicative event:
 
 As the example shows, any `null` values in the original event get removed, to make the corresponding Indicative event as compact as possible.
 
-### [](https://github.com/snowplow-incubator/snowplow-indicative-relay/wiki/Technical-Information#batching)
+### 
 
 ### Batching
 
 The Lambda does not process the records one by one. Instead, it uses features of Kinesis and Indicative REST API to both read and write the events in batches. You can set the maximum batch size when creating the function. There is no minimum batch size, so the lambda can be triggered with fewer records than configured.
 
-### [](https://github.com/snowplow-incubator/snowplow-indicative-relay/wiki/Technical-Information#error-handling)
+### 
 
 ### Error handling
 
@@ -115,7 +115,7 @@ During mapping of events into Indicative event format, a failure of one event do
 
 Each failed case is separately logged into _CloudWatch_, while the rest are successfully submitted to Indicative. Any HTTP errors are also logged into _CloudWatch_. As of version `0.4.0`, there is no retry mechanism built in.
 
-### [](https://github.com/snowplow-incubator/snowplow-indicative-relay/wiki/Technical-Information#filtering)
+### 
 
 ### Filtering
 

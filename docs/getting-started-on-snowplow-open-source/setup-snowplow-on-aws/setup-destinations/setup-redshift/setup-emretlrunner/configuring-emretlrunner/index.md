@@ -10,7 +10,7 @@ This page describes the format for the YAML file which is used to configure the 
 
 You can and should use the same file for both applications.
 
-### [](https://github.com/snowplow/snowplow/wiki/Common-configuration#using-environment-variables)
+### 
 
 ### Using environment variables
 
@@ -20,7 +20,7 @@ You can use environment variables rather than hardcoding strings in the configur
 secret_access_key: <%= ENV['AWS_SNOWPLOW_SECRET_KEY'] %>
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Common-configuration#example-configuration)
+### 
 
 ### Example configuration
 

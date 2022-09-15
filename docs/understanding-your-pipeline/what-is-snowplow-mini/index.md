@@ -29,7 +29,7 @@ Once you are happy with the changes you have made you would then change the trac
 - Data is loaded into Elasticsearch and can be queried directly or through a Kibana dashboard
 - Successfully processed events and failed events are in distinct good and bad indexes
 
-## [](https://github.com/snowplow/snowplow-mini#topology)Topology
+## Topology
 
 Snowplow-Mini runs several distinct applications on the same box which are all linked by NSQ topics. In a production deployment each instance could be an Autoscaling Group and each NSQ topic would be a distinct Kinesis Stream.
 

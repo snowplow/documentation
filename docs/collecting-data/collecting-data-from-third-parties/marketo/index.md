@@ -193,7 +193,7 @@ In the below example the webhook is called at the 3rd step in Campaign A’s flo
 }
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Marketo-webhook-setup#213-using-the-webhook)2.1.3 Using the webhook
+### 2.1.3 Using the webhook
 
 1. Create or edit an existing smart campaign.
 2. Go to the **Flow** tab and drag in the **Call Webhook** flow action.

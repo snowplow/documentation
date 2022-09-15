@@ -62,7 +62,7 @@ m.global.snowplow.init = {
 
 To learn more about configuring how events are sent, check out [this page](/docs/collecting-data/collecting-from-own-applications/roku-tracker/configuration/index.md).
 
-## [](#tracking-events)Tracking events
+## Tracking events
 
 To track an event, simply assign its properties as a `roAssociativeArray` to a field corresponding to the event type. For instance, to track a structured event, assign the `structured` property:
 
@@ -78,7 +78,7 @@ m.global.snowplow.structured = {
 
 Visit documentation about [tracking events](/docs/collecting-data/collecting-from-own-applications/roku-tracker/tracking-events/index.md) to learn about other supported event types. You may also want to read about [adding more data to tracked events](/docs/collecting-data/collecting-from-own-applications/roku-tracker/adding-data/index.md).
 
-## [](#testing)Testing
+## Testing
 
 Testing that your event tracking is properly configured can be as important as testing the other aspects of your app. It confirms that you are generating the events you expect.
 

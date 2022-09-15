@@ -10,7 +10,7 @@ As far as we know, Iglu Central is the first public **machine-readable** schem
 
 Think of Iglu Central as like [RubyGems.org](http://rubygems.org/) or [Maven Central](http://central.maven.org/) but for storing publically-available JSON Schemas.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-Central#technical-architecture)Technical architecture
+## Technical architecture
 
 Under the hood, Iglu Central is built and run as a static Iglu repository, which is simply an Iglu repository server structured as a static website serving its whole content over http, and is hosted on Amazon S3.
 
@@ -20,7 +20,7 @@ The [deployment process](/docs/pipeline-components-and-applications/iglu/iglu-c
 
 Iglu Central is available for view at [http://iglucentral.com](http://iglucentral.com/). Although Iglu Central is primarily designed to be consumed by [Iglu clients](/docs/pipeline-components-and-applications/iglu/iglu-clients/index.md), the root index page for Iglu Central links to all schemas currently hosted on Iglu Central.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-Central#existing-and-new-schemas)Self Hosting Iglu Central schemas
+## Self Hosting Iglu Central schemas
 
 The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](https://github.com/snowplow/iglu-central).
 

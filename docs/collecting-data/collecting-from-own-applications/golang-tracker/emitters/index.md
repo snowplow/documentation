@@ -96,9 +96,9 @@ Once the emitter receives an event from the Tracker a few things start to happen
 
 **IF** all of the requests failed this loop is terminated eagerly; this is seen as a network failure so attempting to send is a waste of resources. **IF** there are no more events in the database the loop is terminated.
 
-### [](https://github.com/snowplow/snowplow/wiki/Golang-tracker#52-builder-methods)5.2 Builder methods
+### 5.2 Builder methods
 
-#### [](https://github.com/snowplow/snowplow/wiki/Golang-tracker#521-optionhttpclient)5.2.1 `OptionHttpClient`
+#### 5.2.1 `OptionHttpClient`
 
 An HTTP client can be set with custom settings appropriate for the use-case, such as timeouts and other connection settings.
 

@@ -10,15 +10,15 @@ sidebar_position: 0
 
 We recommend that Snowplow users create an AWS sub-account and sandbox all of their Snowplow operations into that account.
 
-### [](https://github.com/snowplow/snowplow/wiki/AWS-sub-account-setup#setting-up-an-aws-sub-account)Setting up an AWS sub-account
+### Setting up an AWS sub-account
 
-#### [](https://github.com/snowplow/snowplow/wiki/AWS-sub-account-setup#1-setup-consolidated-billing)1. Setup Consolidated Billing
+#### 1. Setup Consolidated Billing
 
 As a first step, log into your AWS account and click the "Sign up for Consolidated Billing" button:
 
 [https://portal.aws.amazon.com/gp/aws/developer/account?ie=UTF8...](https://portal.aws.amazon.com/gp/aws/developer/account?ie=UTF8...)
 
-#### [](https://github.com/snowplow/snowplow/wiki/AWS-sub-account-setup#2-create-a-new-account)2. Create a new account
+#### 2. Create a new account
 
 From a non-logged in browser, you will then want to sign up again to AWS again like this:
 
@@ -26,7 +26,7 @@ From a non-logged in browser, you will then want to sign up again to AWS again l
 
 Call this new account `snowplow-acme` (where Acme is your company name). Note the email address you signed up with.
 
-#### [](https://github.com/snowplow/snowplow/wiki/AWS-sub-account-setup#3-link-the-accounts)3. Link the accounts
+#### 3. Link the accounts
 
 In your main account, head back to ConsolidatedBilling and click the Send a Request button. Provide the email address for your new sub-account.
 
@@ -34,7 +34,7 @@ You should receive an email to the email address for your new sub-account. Copy 
 
 Your accounts are now linked! This will allow us to spin up instances, create new S3 buckets etc.
 
-#### [](https://github.com/snowplow/snowplow/wiki/AWS-sub-account-setup#4-enable-the-services-that-snowplow-requires)4. Enable the services that Snowplow requires
+#### 4. Enable the services that Snowplow requires
 
 Next, you need to enable the services Snowplow will require in the new subaccount.
 

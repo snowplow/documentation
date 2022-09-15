@@ -8,7 +8,7 @@ sidebar_position: 500
 
 Cloud Storage Loader is a [Dataflow](https://cloud.google.com/dataflow/) job which dumps event from an input [PubSub](https://cloud.google.com/pubsub/) subscription into a [Cloud Storage](https://cloud.google.com/storage/) bucket.
 
-## [](https://github.com/snowplow/snowplow/wiki/Snowplow-Google-Cloud-Storage-Loader#technical-details)Technical details
+## Technical details
 
 Cloud Storage loader is built on top of [Apache Beam](https://beam.apache.org/) and its Scala wrapper [SCIO](https://github.com/spotify/scio).
 
@@ -36,15 +36,15 @@ Do note, however, that bz2-compressed data cannot be loaded directly into BigQue
 
 For now, it only runs on [GCP's Dataflow](https://cloud.google.com/dataflow/).
 
-### [](https://github.com/snowplow/snowplow/wiki/Snowplow-Google-Cloud-Storage-Loader#see-also)See also:
+### See also:
 
 - [Repository](https://github.com/snowplow-incubator/snowplow-google-cloud-storage-loader/)
 
 ## Setup guide
 
-### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#configuration)Configuration
+### Configuration
 
-#### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#cloud-storage-loader-specific-options)Cloud Storage Loader specific options
+#### Cloud Storage Loader specific options
 
 - `--inputSubscription=String` The Cloud Pub/Sub subscription to read from, formatted as projects/[PROJECT]/subscriptions/[SUB]
 - `--outputDirectory=String` The Cloud Storage directory to output files to, ends with /
@@ -55,7 +55,7 @@ For now, it only runs on [GCP's Dataflow](https://cloud.google.com/dataflow/).
 - `--compression=String` Default: none The compression used (gzip, bz2 or none), bz2 can't be loaded into BigQuery
 - `--numShards=int` Default: 1 The maximum number of output shards produced when writing
 
-#### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#dataflow-options)Dataflow options
+#### Dataflow options
 
 To run on Dataflow, Beam Enrich will rely on a set of additional configuration options:
 
@@ -68,11 +68,11 @@ To run on Dataflow, Beam Enrich will rely on a set of additional configuration o
 
 The list of all the options can be found at [https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options).
 
-### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#running)Running
+### Running
 
 Cloud Storage Loader comes as a ZIP archive, a Docker image or a [Cloud Dataflow template](https://cloud.google.com/dataflow/docs/templates/overview), feel free to choose the one which fits your use case the most.
 
-#### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#template)Template
+#### Template
 
 You can run Dataflow templates using a variety of means:
 
@@ -98,7 +98,7 @@ gcloud dataflow jobs run [JOB-NAME] \
     numShards=1 # optional
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#zip-archive)ZIP archive
+#### ZIP archive
 
 You can find the archive hosted on [Github](https://github.com/snowplow-incubator/snowplow-google-cloud-storage-loader/releases/download/0.3.2/snowplow-google-cloud-storage-loader-0.3.2.zip).
 
@@ -132,7 +132,7 @@ To display documentation about Cloud Storage Loader-specific options:
 ./bin/snowplow-google-cloud-storage-loader --help=com.snowplowanalytics.storage.googlecloudstorage.loader.Options
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#docker-image)Docker image
+#### Docker image
 
 You can find the image in [Docker Hub](https://hub.docker.com/r/snowplow/snowplow-google-cloud-storage-loader).
 
@@ -172,16 +172,16 @@ docker run snowplow/snowplow-google-cloud-storage-loader:0.5.0 \
   --help=com.snowplowanalytics.storage.googlecloudstorage.loader.Options
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#additional-information)Additional information
+#### Additional information
 
 A full list of all the Beam CLI options can be found at: [https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options).
 
-### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#tests-and-debugging)Tests and debugging
+### Tests and debugging
 
-#### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#testing)Testing
+#### Testing
 
 The tests for this codebase can be run with `sbt test`.
 
-#### [](https://github.com/snowplow/snowplow/wiki/setting-up-snowplow-google-cloud-storage-loader#debugging)Debugging
+#### Debugging
 
 You can run the job locally and experiment with its different parts using the [SCIO REPL](https://github.com/spotify/scio/wiki/Scio-REPL) by running `sbt repl/run`.

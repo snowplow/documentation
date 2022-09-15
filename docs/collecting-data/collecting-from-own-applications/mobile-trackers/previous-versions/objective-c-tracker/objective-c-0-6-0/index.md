@@ -12,7 +12,7 @@ The tracker should be straightforward to use if you are comfortable with iOS dev
 
 You can also find detailed documentation for the method calls in the tracker classes available as part of the [CocoaPods documentation](http://cocoadocs.org/docsets/SnowplowTracker/).
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#implementation)Implementation
+## Implementation
 
 The Tracker is designed to be used as a Singleton object. Meaning that within your application you should only have to create one Tracker for the lifecycle of your application. Without setting this up:
 
@@ -76,7 +76,7 @@ For a basic example of the Singleton pattern:
 
 You can then access your Tracker via `SnowplowManager *snowplowManager = [SnowplowManager snowplowManager]`.
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#11-demonstration-app)1.1 Demonstration App
+### 1.1 Demonstration App
 
 If you would like to see the Tracker in action you can launch the demo app like so:
 
@@ -86,18 +86,18 @@ If you would like to see the Tracker in action you can launch the demo app like 
 
 You will then need to simply enter a valid endpoint URL and hit the `Start Demo!` button.
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#12-https-and-certificates)1.2 HTTPs and Certificates
+### 1.2 HTTPs and Certificates
 
 Please note that with the release of iOS 9, tvOS 9 and OS-x 10.11 Apple's Application Transport Security now requires:
 
 1. That all network communication be done using HTTPs by default. There are [ways around this](https://forums.developer.apple.com/thread/3544) if need be.
 2. We have noticed that for the Application Transport Security to work with your certificates you will need to supply the whole certificate chain.
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#2-initialization)2. Initialization
+## 2. Initialization
 
 Assuming you have completed the [iOS Tracker Setup](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup) for your project, you are now ready to initialze the Snowplow Tracker.
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#21-importing-the-library)2.1 Importing the library
+## 2.1 Importing the library
 
 Adding the library into your project is as simple as adding the headers into your class file:
 
@@ -122,7 +122,7 @@ If you have statically added the library you will need to further amend your syn
 
 That's it - you are now ready to initialize a tracker instance.
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#22-creating-a-tracker)2.2 Creating a tracker
+### 2.2 Creating a tracker
 
 To instantiate a tracker in your code simply instantiate the `SPTracker` class with the following builder pattern:
 
@@ -152,23 +152,23 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 | `setBackgroundTimeout` | The session background timeout |
 | `setCheckInterval` | The session checking interval |
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#221-emitter)2.2.1 `emitter`
+#### 2.2.1 `emitter`
 
 This is a single `SPEmitter` object that will be used to send all the tracking events created by the `SPTracker` to a collector. See [Sending events](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#emitters) for more on its configuration.
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#222-namespace)2.2.2 `namespace`
+#### 2.2.2 `namespace`
 
 If provided, the `namespace` argument will be attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#223-appid)2.2.3 `appId`
+#### 2.2.3 `appId`
 
 The `appId` argument lets you set the application ID to any string.
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#224-base64encoded)2.2.4 `base64Encoded`
+#### 2.2.4 `base64Encoded`
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` argument.
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#225-client_session)2.2.5 `client_session`
+#### 2.2.5 `client_session`
 
 By default, no client sessionization is activated. Once enabled the Tracker will start appending a `client_session` context to each event it sends and it will maintain this session information for the life of the application; i.e. as long as the application is installed on the device.
 
@@ -182,7 +182,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 }];
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#226-pauseeventtracking)2.2.6 `pauseEventTracking`
+#### 2.2.6 `pauseEventTracking`
 
 This function when called will pause all event tracking and sessionization actions until resume is called.
 
@@ -190,7 +190,7 @@ This function when called will pause all event tracking and sessionization actio
 [tracker pauseEventTracking];
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#227-resumeeventtracking)2.2.7 `resumeEventTracking`
+#### 2.2.7 `resumeEventTracking`
 
 This function will resume all event tracking when called (if it was paused) and will also re-enable sessionization if it was already on.
 
@@ -198,7 +198,7 @@ This function will resume all event tracking when called (if it was paused) and 
 [tracker resumeEventTracking];
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#3-adding-extra-data)3. Adding extra data
+## 3. Adding extra data
 
 To add extra data to the Tracker you will need to append an `SPSubject` object to the Tracker. This can be done either during Tracker creation or added later.
 
@@ -225,7 +225,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 
 - [Sending IFA](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#sending-ifa)
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#standard-pairs)Standard Pairs
+#### Standard Pairs
 
 - [`setUserId`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#set-user-id)
 - [`setResolutionWithWidth`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#set-res)
@@ -238,11 +238,11 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 - [`setNetworkUserId`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#set-nuid)
 - [`setDomainUserId`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#set-duid)
 
-#### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#geo-location)Geo-Location
+#### Geo-Location
 
 - [Setting the Geo-Location](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#set-geo)
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#31-sending-ifa)3.1 Sending IFA
+### 3.1 Sending IFA
 
 Apps that do not display advertisements are not allowed to access Apple's Identifier For Advertisers (IFA). For this reason, the Snowplow Objective-C Tracker will only send IFA as part of the `mobile_context` which is attached to each event **if** you have the `AdSupport.framework` included in your app (and are therefore intending to serve ads).
 
@@ -252,7 +252,7 @@ For the avoidance of doubt, you can also avoid sending IFA regardless of your ad
 - Search for **Preprocessor Macros**
 - Add a macro defined as`SNOWPLOW_NO_IFA = 1`
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#32-set-user-id-with-setuserid)3.2 Set user ID with `setUserId`
+### 3.2 Set user ID with `setUserId`
 
 You can set the user ID to any string:
 
@@ -266,7 +266,7 @@ Example:
 [subject setUserId:@"alexd"];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#33-set-screen-resolution-with-setresolutionwithwidth)3.3 Set Screen Resolution with `setResolutionWithWidth`
+### 3.3 Set Screen Resolution with `setResolutionWithWidth`
 
 You can set the screen resolution to any width and height.
 
@@ -276,7 +276,7 @@ Example:
 [subject setResolutionWithWidth:1920 andHeight:1080];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#34-set-view-port-with-setviewportwithwidth)3.4 Set View Port with `setViewPortWithWidth`
+### 3.4 Set View Port with `setViewPortWithWidth`
 
 You can set the viewport to any width and height.
 
@@ -286,7 +286,7 @@ Example:
 [subject setViewPortWithWidth:1920 andHeight:1080];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#35-set-color-dpeth-with-setcolordepth)3.5 Set Color Dpeth with `setColorDepth`
+### 3.5 Set Color Dpeth with `setColorDepth`
 
 You can set the color depth to any integer.
 
@@ -296,7 +296,7 @@ Example:
 [subject setColorDepth:20];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#36-set-timezone-with-settimezone)3.6 Set Timezone with `setTimezone`
+### 3.6 Set Timezone with `setTimezone`
 
 You can set the timezone to any string.
 
@@ -306,7 +306,7 @@ Example:
 [subject setTimezone:@"UTC"];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#37-set-language-with-setlanguage)3.7 Set Language with `setLanguage`
+### 3.7 Set Language with `setLanguage`
 
 You can set the language to any string.
 
@@ -316,7 +316,7 @@ Example:
 [subject setLanguage:@"en"];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#38-set-ip-address-with-setipaddress)3.8 Set IP Address with `setIpAddress`
+### 3.8 Set IP Address with `setIpAddress`
 
 You can set the user IP Address to any string.
 
@@ -326,7 +326,7 @@ Example:
 [subject setIpAddress:@"127.0.0.1"];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#39-set-the-useragent-with-setuseragent)3.9 Set the Useragent with `setUseragent`
+### 3.9 Set the Useragent with `setUseragent`
 
 You can set the Useragent to any string.
 
@@ -336,7 +336,7 @@ Example:
 [subject setUseragent:@"aUseragent"];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#310-set-the-network-user-id-with-setnetworkuserid)3.10 Set the Network User ID with `setNetworkUserId`
+### 3.10 Set the Network User ID with `setNetworkUserId`
 
 You can set the Network User ID to any string.
 
@@ -346,7 +346,7 @@ Example:
 [subject setNetworkUserId:@"nuid"];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#311-set-the-domain-user-id-with-setdomainuserid)3.11 Set the Domain User ID with `setDomainUserId`
+### 3.11 Set the Domain User ID with `setDomainUserId`
 
 You can set the Domain User ID to any string.
 
@@ -356,7 +356,7 @@ Example:
 [subject setDomainUserId:@"duid"];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#312-set-geo-location-variables)3.12 Set Geo-Location variables
+### 3.12 Set Geo-Location variables
 
 Due to difficulty in getting these variables automatically, we are depending on the developer to pass in these values for us if they wish to populate the geo-location. This will hopefully change in the future.
 
@@ -379,7 +379,7 @@ These are the available functions for geo-location which are all called directly
 
 Once this is set it will be automatically attached to all events being sent.
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#4-tracking-specific-events)4. Tracking specific events
+## 4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
 
@@ -394,11 +394,11 @@ Tracking methods supported by the Objective-C Tracker at a glance:
 | [`trackUnstructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#unstruct-event) | Track a Snowplow custom unstructured event |
 | [`trackTimingEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#timing) | Track a Snowplow user timing event |
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#41-common)4.1 Common
+### 4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `trackXXX()`, where `XXX` is the name of the event to track.
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#411-custom-contexts)4.1.1 Custom contexts
+### 4.1.1 Custom contexts
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of an NSDictionary object. Each tracking method accepts an additional optional contexts builder method.
 
@@ -444,7 +444,7 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 
 _Note that even if there is only one custom context attached to the event, it still needs to be placed in an array._
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#412-optional-timestamp-argument)4.1.2 Optional timestamp argument
+### 4.1.2 Optional timestamp argument
 
 In all the trackers, we offer a way to set the timestamp if you want the event to show as tracked at a specific time. If you don't, we create a timestamp while the event is being tracked.
 
@@ -462,7 +462,7 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 [tracker trackStructuredEvent:event];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#413-optional-event-id-argument)4.1.3 Optional Event ID argument
+### 4.1.3 Optional Event ID argument
 
 This Tracker also offers a way to set a custom Event ID with each event you send to snowplow. If you do not populate this field we will do it automatically.
 
@@ -480,11 +480,11 @@ event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 [tracker trackStructuredEvent:event];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#414-tracker-method-return-values)4.1.4 Tracker method return values
+### 4.1.4 Tracker method return values
 
 To be confirmed. As of now, trackers do not return anything.
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#42-track-screen-views-with-trackscreenviewevent)4.2 Track screen views with `trackScreenViewEvent:`
+### 4.2 Track screen views with `trackScreenViewEvent:`
 
 Use `trackScreenViewEvent:` to track a user viewing a screen (or equivalent) within your app. Arguments are:
 
@@ -509,7 +509,7 @@ SPScreenView *event = [SPScreenView build:^(id<SPScreenViewBuilder> builder) {
 
 **NOTE**: You must populate at least one of name or id for the event to build.
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#43-track-pageviews-with-trackpageviewevent)4.3 Track pageviews with `trackPageViewEvent:`
+### 4.3 Track pageviews with `trackPageViewEvent:`
 
 Use `trackPageViewEvent:` to track a user viewing a page within your app.
 
@@ -536,7 +536,7 @@ SPPageView *event = [SPPageView build:^(id<SPPageViewBuilder> builder) {
 [tracker trackPageViewEvent:event];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#44-track-ecommerce-transactions-with-trackecommerceevent)4.4 Track ecommerce transactions with `trackEcommerceEvent:`
+### 4.4 Track ecommerce transactions with `trackEcommerceEvent:`
 
 Use `trackEcommerceEvent:` to track an ecommerce transaction. Arguments:
 
@@ -606,7 +606,7 @@ SPEcommerce *event = [SPEcommerce build:^(id<SPEcommTransactionBuilder> builder)
 [tracker trackEcommerceEvent:event];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#45-track-structured-events-with-trackstructuredevent)4.5 Track structured events with `trackStructuredEvent:`
+### 4.5 Track structured events with `trackStructuredEvent:`
 
 Use `trackStructuredEvent:` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
@@ -635,7 +635,7 @@ SPStructured *event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
 [tracker trackStructuredEvent:event];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#46-track-unstructured-events-with-trackunstructuredevent)4.6 Track unstructured events with `trackUnstructuredEvent:`
+### 4.6 Track unstructured events with `trackUnstructuredEvent:`
 
 Custom unstructured events are a flexible tool that enables Snowplow users to define their own event types and send them into Snowplow.
 
@@ -671,7 +671,7 @@ SPUnstructured *event = [SPUnstructured build:^(id<SPUnstructuredBuilder> builde
 
 For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#47-track-user-timings-with-tracktimingevent)4.7 Track user timings with `trackTimingEvent:`
+### 4.7 Track user timings with `trackTimingEvent:`
 
 Use `trackTimingEvent:` to track a user timing in your app - for example, how long a game took to load, or how long an in-app purchase took to download. The fields are as follows:
 
@@ -698,7 +698,7 @@ SPTiming *event = [SPTiming build:^(id<SPTimingBuilder> builder) {
 [tracker trackTimingEvent:event];
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#5-sending-events-spemitter)5. Sending events: `SPEmitter`
+## 5. Sending events: `SPEmitter`
 
 Events created by the Tracker are sent to a collector using a `SnowplowEmitter` instance. You can create one using the following builder example:
 
@@ -733,7 +733,7 @@ A key change to the emitter construction is the removal of the `setBufferOption
 | `setByteLimitGet` | The max bytes in a GET request |
 | `setByteLimitPost` | The max bytes in a POST request |
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#51-using-a-protocol)5.1 Using a protocol
+### 5.1 Using a protocol
 
 The protocol argument determines if the event is sent over HTTP or HTTPS. In the case of iOS 9.0 all events are automatically sent with HTTPS.
 
@@ -755,7 +755,7 @@ Here are all the possible options that you can use:
 | `SPHttp` | Sends events as HTTP |
 | `SPHttps` | Sends events as HTTPs |
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#52-choosing-the-http-method)5.2 Choosing the HTTP method
+### 5.2 Choosing the HTTP method
 
 Snowplow supports receiving events via GET and POST requests. In a GET request, each event is sent in an individual request. With POST requests, events can be bundled together in one request.
 
@@ -766,7 +766,7 @@ Here are all the posibile options that you can use:
 | `SPRequestGet` | Events are sent individually as GET requests |
 | `SPRequestPost` | Events are sent in a group when 10 events are received in one POST request |
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#53-adding-an-emitter-callback)5.3 Adding an Emitter Callback
+### 5.3 Adding an Emitter Callback
 
 You are now also able to include an emitter callback which will return the count of successful and failed events.
 
@@ -808,7 +808,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 The `self` will work only if you have declared the callback functions in the same class as you are creating the Emitter from. Otherwise you will need to pass in the target for the class in which you have defined these functions.
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#54-sending-http-requests)5.4 Sending HTTP requests
+### 5.4 Sending HTTP requests
 
 You can set this during the creation of a `SPEmitter` object:
 
@@ -825,11 +825,11 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 }];
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#6-utility-functions)6. Utility Functions
+## 6. Utility Functions
 
 The `SPUtilities` class contains a host of static functions which are used throughout the Tracker. To see all of the available functions please consult the [`SPUtilities.h`](https://github.com/snowplow/snowplow-objc-tracker/blob/master/Snowplow/SPUtilities.h) file.
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#61-getappleidfa)6.1 `getAppleIdfa`
+### 6.1 `getAppleIdfa`
 
 This function will only return the IDFA under the following conditions:
 
@@ -842,7 +842,7 @@ To use:
 NSString* appleIdfa = [SPUtilities getAppleIdfa];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#62-getappleidfv)6.2 `getAppleIdfv`
+### 6.2 `getAppleIdfv`
 
 This function will only return the IDFV under the following conditions:
 
@@ -854,7 +854,7 @@ To use:
 NSString* appleIdfv = [SPUtilities getAppleIdfv];
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.6#63-getopenidfa)6.3 `getOpenIdfa`
+### 6.3 `getOpenIdfa`
 
 This function will only return the OpenIDFA under the following conditions:
 

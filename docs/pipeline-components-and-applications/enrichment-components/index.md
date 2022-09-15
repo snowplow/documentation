@@ -27,5 +27,3 @@ In some future this app will get deprecated in favor of `enrich-kinesis`.
 [Dataflow](https://cloud.google.com/dataflow/) job that reads collector payloads from a PubSub subscription and outputs back to PubSub.
 
 It is now deprecated, in favor of `enrich-pubsub`.
-
-[](https://github.com/snowplow/snowplow/wiki/_Footer/_edit)

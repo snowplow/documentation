@@ -85,5 +85,3 @@ The following configurable enrichments write data into `atomic.events` table (
 - [Event fingerprint enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md)
 
 All other configurable enrichments create a separate context and thus are loaded into their own dedicated tables.
-
-[](https://github.com/snowplow/snowplow/wiki/_Footer/_edit)

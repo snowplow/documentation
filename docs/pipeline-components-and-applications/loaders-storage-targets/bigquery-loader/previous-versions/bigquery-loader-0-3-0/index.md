@@ -59,7 +59,7 @@ This is a Scala app that reads data from the `typesTopic` via a `typesSubscri
 
 A JVM application that reads a `failedInserts` subscription and tries to re-insert them into BigQuery to overcome mutation lag.
 
-#### Overview[](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki#overview-3)
+#### Overview
 
 Repeater has several important behaviour aspects:
 

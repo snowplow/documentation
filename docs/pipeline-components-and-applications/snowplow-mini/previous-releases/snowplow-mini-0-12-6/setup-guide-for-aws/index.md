@@ -67,7 +67,7 @@ Create a role with the following configuration
 - Step 1: For `Select type of trusted entity` , select `EC2`
 - Step 2.1: For `Attach permissions policies` , create a policy with the following
 
-```
+```json
 {
   "Version" : "2012-10-17",
   "Statement": [

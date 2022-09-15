@@ -50,7 +50,7 @@ We will go into more details on why this is very valuable and how to create your
 
 Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `iglu_server` directory to update the input variables in `terraform.tfvars`.
 
-```
+```bash
 git clone https://github.com/snowplow/quickstart-examples.git
 cd quickstart-examples/terraform/aws/iglu_server/default #or secure
 nano terraform.tfvars #or other text editor of your choosing
@@ -78,7 +78,7 @@ We want to make this experience as easy & as valuable as possible for open sourc
 
 You can now use terraform to create your Iglu Server stack. You will be asked to select a region, you can find more information about [available regions here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
 
-```
+```bash
 terraform init
 terraform plan
 terraform apply
@@ -92,7 +92,7 @@ You can skip this step for now, however if you want to track custom events using
 
 To do this you will need `igluctl`, your Iglu Servers DNS and your Iglu API key that you created for your `terraform.tfvars`. You should update the `igluctl` command below with the correct values for your Iglu Server (assuming your schemas are in a `schemas/` folder local to where you're running `icluctl`)
 
-```
+```bash
 igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000
 ```
 
@@ -104,7 +104,7 @@ In this section you will update the input variables for the terraform module, an
 
 Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `pipeline` directory to update the input variables in either `postgres.terraform.tfvars` or `snowflake.terraform.tfvars` according to the chosen destination. How to choose the destination and configure it will be explained in detail in the next section.
 
-```
+```bash
 git clone https://github.com/snowplow/quickstart-examples.git
 cd quickstart-examples/terraform/aws/pipeline/default #or secure
 nano terraform.tfvars #or other text editor of your choosing
@@ -147,7 +147,7 @@ Authentication for the service user is required for the Snowflake Terraform prov
 | username           | A snowflake user to perform resource creation. |
 | region             | Region for the snowflake deployment.           |
 | role               | Needs to be ACCOUNTADMIN or similar.           |
-| private\_key\_path | Path the private key.                          |
+| private_key_path | Path the private key.                          |
 
 #### Usage
 
@@ -175,7 +175,7 @@ You can now use terraform to create your Pipeline stack. You will be asked to se
 
 The below example points to the postrgres tfvars file, you should switch this to \`snowflake\` if you're using Snowflake loading.
 
-```
+```bash
 terraform init
 terraform plan -var-file=postgres.terraform.tfvars
 terraform apply -var-file=postgres.terraform.tfvars

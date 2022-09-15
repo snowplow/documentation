@@ -39,8 +39,16 @@ Once you have these you can exchange credentials for a token.
 
 Here is an example CURL to use to fetch the token:
 
-```
-curl --request POST \ --url 'https://id.snowplowanalytics.com/oauth/token' \ --header 'content-type: application/x-www-form-urlencoded' \ --data grant_type=password \ --data username=USER@DOMAIN.COM \ --data password='PASSWORD' \ --data audience=https://snowplowanalytics.com/api/ \ --data client_id='YOUR_CLIENT_ID' \ --data client_secret='YOUR_CLIENT_SECRET'
+```bash
+curl --request POST \ 
+  --url 'https://id.snowplowanalytics.com/oauth/token' \ 
+  --header 'content-type: application/x-www-form-urlencoded' \ 
+  --data grant_type=password \ 
+  --data username=USER@DOMAIN.COM \ 
+  --data password='PASSWORD' \ 
+  --data audience=https://snowplowanalytics.com/api/ \ 
+  --data client_id='YOUR_CLIENT_ID' \ 
+  --data client_secret='YOUR_CLIENT_SECRET'
 ```
 
 This token will be needed in any request to the API in the form of `Authorization: Bearer {{token}}`
@@ -75,7 +83,7 @@ The Pipeline ID is the second UUID in the location bar.
 
 Invoking this API will return an object of the following form:
 
-```
+```json
 { 
     "cookieDomains": 
     { 

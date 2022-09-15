@@ -29,7 +29,7 @@ Due to the nature of _custom_ (as well as Snowplow authored) events/entities t
 
 JSON schema plays a significant part in this mechanism. Both events and entities have schemas which define what data is recorded about the event, or entity, at data capture time.
 
-> **JSON schema** specifies a _JSON_\-based format to define the structure of JSON data for validation, documentation, and interaction control.
+> **JSON schema** specifies a _JSON_-based format to define the structure of JSON data for validation, documentation, and interaction control.
 
 > **JSON** (JavaScript Object Notation) is an open-standard format that uses human-readable text to transmit data objects consisting of attribute–value pairs.
 

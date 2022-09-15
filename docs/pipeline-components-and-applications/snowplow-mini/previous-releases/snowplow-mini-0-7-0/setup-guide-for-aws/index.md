@@ -62,7 +62,7 @@ To understand the flow of data please refer to the following diagram:
 
 ![snowplow-mini-topology](images/snowplow-mini-topology.jpg)
 
-## [](https://github.com/snowplow/snowplow-mini/wiki/Setup-guide-AWS---0.7.0#2-security-group)2\. Security Group
+## [](https://github.com/snowplow/snowplow-mini/wiki/Setup-guide-AWS---0.7.0#2-security-group)2. Security Group
 
 In the EC2 Console UI select `Security Groups` from the panel on the left.
 

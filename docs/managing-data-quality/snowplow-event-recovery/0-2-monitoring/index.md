@@ -22,7 +22,7 @@ To enable desired sink set EMR's `spark-metrics` classification parameters follo
 
 To expose metrics over http accessible at `http://${SPARK_HOST}:4040/metrics/json`:
 
-```
+```json
   {
     "classification": "spark-metrics",
     "properties": {
@@ -40,7 +40,7 @@ To expose metrics over http accessible at `http://${SPARK_HOST}:4040/metrics/jso
 
 To push metrics to output logs to console appender:
 
-```
+```json
   {
     "classification": "spark-metrics",
     "properties": {

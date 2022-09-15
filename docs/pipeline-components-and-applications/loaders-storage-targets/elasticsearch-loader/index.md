@@ -14,13 +14,13 @@ All boolean fields like `br_features_java` are either `"0"` or `"1"` in th
 
 ### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader#new-geo_location-field)New `geo_location` field
 
-The `geo_latitude` and `geo_longitude` fields are combined into a single `geo_location` field of Elasticsearch's ["geo\_point" type](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html).
+The `geo_latitude` and `geo_longitude` fields are combined into a single `geo_location` field of Elasticsearch's ["geo_point" type](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html).
 
 ### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader#unstructured-events)Unstructured events
 
 Unstructured events are expanded into full JSONs. For example, the event
 
-```
+```json
 {
     "schema": "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1",
     "data": {
@@ -34,7 +34,7 @@ Unstructured events are expanded into full JSONs. For example, the event
 
 would be converted to the field
 
-```
+```json
 {
     "unstruct_com_snowplowanalytics_snowplow_link_click_1": {
         "targetUrl": "http://snowplowanalytics.com/analytics/index.html",
@@ -49,7 +49,7 @@ would be converted to the field
 
 Each custom context in an array is similarly expanded to a JSON with its own field. For example, the array
 
-```
+```json
 [
     {
         "schema": "iglu:com.acme/contextOne/jsonschema/1-0-0",
@@ -68,7 +68,7 @@ Each custom context in an array is similarly expanded to a JSON with its own fie
 
 would be converted to
 
-```
+```json
 {
     "contexts_com_acme_context_one_1": {
         "key": "value"
@@ -91,13 +91,13 @@ First off, install and set up Elasticsearch version 7.x or 6.x. For more informa
 
 Elasticsearch keeps a lot of files open simultaneously so you will need to increase the maximum number of files a user can have open. To do this:
 
-```
+```bash
 sudo vim /etc/security/limits.conf
 ```
 
 Append the following lines to the file:
 
-```
+```bash
 {{USERNAME}} soft nofile 32000
 {{USERNAME}} hard nofile 32000
 ```
@@ -106,7 +106,7 @@ Where {{USERNAME}} is the name of the user running Elasticsearch. You will need 
 
 To check that this new limit has taken effect you can run the following command from the terminal:
 
-```
+```bash
 curl localhost:9200/_nodes/process?pretty
 ```
 
@@ -116,7 +116,7 @@ If the `max_file_descriptors` equals 32000 it is running with the new limit.
 
 Use the following request to create the mapping with Elasticsearch 7.x:
 
-```
+```bash
 curl -XPUT 'http://localhost:9200/snowplow' -d '{
     "settings": {
         "analysis": {
@@ -143,7 +143,7 @@ This initialization sets the default analyzer to "keyword". This means that stri
 
 If you want to tokenize specific string fields, you can change the "properties" field in the mapping like this:
 
-```
+```bash
 curl -XPUT 'http://localhost:9200/snowplow' -d '{
     "settings": {
         "analysis": {
@@ -172,13 +172,13 @@ curl -XPUT 'http://localhost:9200/snowplow' -d '{
 
 The Elasticsearch Loader is published on Docker Hub:
 
-```
+```bash
 docker pull snowplow/snowplow-elasticsearch-loader:2.0.7
 ```
 
 The container can be run with the following command:
 
-```
+```bash
 docker run \
   -v /path/to/config.hocon:/snowplow/config.hocon \
   snowplow/snowplow-elasticsearch-loader:2.0.7 \
@@ -187,7 +187,7 @@ docker run \
 
 Alternatively you can download and run a [jar file from the github release](https://github.com/snowplow/snowplow-elasticsearch-loader/releases):
 
-```
+```bash
 java -jar snowplow-elasticsearch-loader-2.0.7.jar --config /path/to/config.hocon
 ```
 
@@ -199,11 +199,11 @@ The sink is configured using a HOCON file, for which you can find examples [her
 
 | Name | Description |
 | --- | --- |
-| purpose | Required. "ENRICHED\_EVENTS" for a stream of successfully enriched events<br/>"BAD\_ROWS" for a stream of bad events<br/>"JSON" for writing plain json |
+| purpose | Required. "ENRICHED_EVENTS" for a stream of successfully enriched events<br/>"BAD_ROWS" for a stream of bad events<br/>"JSON" for writing plain json |
 | input.type | Required. Configures where input events will be read from.<br/> Can be “kinesis”, “stdin” or “nsq” |
 | input.streamName | Required when `input.type` is kinesis or nsq. Name of the stream to read from. |
-| input.initialPosition | Required when `input.type` is kinesis. Used when `input.type` is Kinesis. Specifies where to start reading from the stream the first time the app is run. "TRIM\_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT\_TIMESTAMP" for after specified timestamp. |
-| input.initialTimestamp | Used when `input.type` is kinesis. Required when `input.initialTimestamp` is "AT\_TIMESTAMP". Specifies the timestamp to start read. |
+| input.initialPosition | Required when `input.type` is kinesis. Used when `input.type` is Kinesis. Specifies where to start reading from the stream the first time the app is run. "TRIM_HORIZON" for as far back as possible, "LATEST" for as recent as possibly, "AT_TIMESTAMP" for after specified timestamp. |
+| input.initialTimestamp | Used when `input.type` is kinesis. Required when `input.initialTimestamp` is "AT_TIMESTAMP". Specifies the timestamp to start read. |
 | input.maxRecords | Used when `input.type` is kinesis. Optional. Maximum number of records fetched in a single request. Default value 10000. |
 | input.region | Used when `input.type` is kinesis. Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). Region where the Kinesis stream is located. |
 | input.customEndpoint | Used when `input.type` is kinesis. Optional. Custom endpoint to override AWS Kinesis endpoints, this can be used to specify local endpoints when using localstack. |
@@ -220,8 +220,8 @@ The sink is configured using a HOCON file, for which you can find examples [her
 | output.good.client.port | Optional. The port the Elasticsearch cluster can be accessed on. Default value 9200. |
 | output.good.client.username | Optional. HTTP Basic Auth username. Can be removed if not active. |
 | output.good.client.password | Optional. HTTP Basic Auth password. Can be removed if not active. |
-| output.good.client.shardDateFormat | Optional. Formatting used for sharding good stream, i.e. \_yyyy-MM-dd. Can be removed if not needed. |
-| output.good.client.shardDateField | Optional. Timestamp field for sharding good stream. If not specified derived\_tstamp is used. |
+| output.good.client.shardDateFormat | Optional. Formatting used for sharding good stream, i.e. _yyyy-MM-dd. Can be removed if not needed. |
+| output.good.client.shardDateField | Optional. Timestamp field for sharding good stream. If not specified derived_tstamp is used. |
 | output.good.client.maxRetries | Optional. The maximum number of request attempts before giving up. Default value 6. |
 | output.good.client.ssl | Optional. Whether to use ssl or not. Default value false. |
 | output.good.aws.signing | Optional. Whether to activate AWS signing or not. It should be activated if AWS OpenSearch service is used. Default value false. |

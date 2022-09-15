@@ -35,7 +35,7 @@ See the documentation on [configuring enrichments](/docs/enriching-your-data/ava
 
 When using with Kinesis, it’s possible to store the configuration of the resolver and/or enrichments in DynamoDB. In this case `dynamodb:` prefix needs to be used in place of `file:` prefix:
 
-```
+```bash
   --resolver dynamodb:eu-west-1/configuration_table/resolver \
   --enrichments dynamodb:eu-west-1/configuration_table/enrichment_
 ```
@@ -48,20 +48,20 @@ There must be one line with `resolver` as `id` and the content in the `json
 
 `enrichment_` is the prefix used in the `id` column to configure an enrichment, and then the content must be put in the `json` column. Here is the list of all the enrichments (with `enrichment_` prefix) in `id` column :
 
-- enrichment\_api\_request\_enrichment\_config
-- enrichment\_http\_header\_extractor\_config
-- enrichment\_iab\_spiders\_and\_robots\_enrichment
-- enrichment\_pii\_enrichment\_config
-- enrichment\_sql\_query\_enrichment\_config
-- enrichment\_weather\_enrichment\_config
-- enrichment\_yauaa\_enrichment\_config
-- enrichment\_anon\_ip
-- enrichment\_campaign\_attribution
-- enrichment\_cookie\_extractor\_config
-- enrichment\_currency\_conversion\_config
-- enrichment\_event\_fingerprint\_config
-- enrichment\_ip\_lookups
-- enrichment\_javascript\_script\_config
-- enrichment\_referer\_parser
-- enrichment\_ua\_parser\_config
-- enrichment\_user\_agent\_utils\_config
+- enrichment_api_request_enrichment_config
+- enrichment_http_header_extractor_config
+- enrichment_iab_spiders_and_robots_enrichment
+- enrichment_pii_enrichment_config
+- enrichment_sql_query_enrichment_config
+- enrichment_weather_enrichment_config
+- enrichment_yauaa_enrichment_config
+- enrichment_anon_ip
+- enrichment_campaign_attribution
+- enrichment_cookie_extractor_config
+- enrichment_currency_conversion_config
+- enrichment_event_fingerprint_config
+- enrichment_ip_lookups
+- enrichment_javascript_script_config
+- enrichment_referer_parser
+- enrichment_ua_parser_config
+- enrichment_user_agent_utils_config

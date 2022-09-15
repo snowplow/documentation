@@ -165,7 +165,7 @@ The window function is doing a lot of work for us, so it is worth explaining wha
 
 - First, it partitions our marketing touch and revenue events by user ID
 - Then it orders the event stream by time
-- Then for each event, it fetches the most recent not null marketing\_event\_id value. Note that this will be applied to every row in the table i.e. marketing touch events and transaction events.
+- Then for each event, it fetches the most recent not null marketing_event_id value. Note that this will be applied to every row in the table i.e. marketing touch events and transaction events.
 
 Where it is applied to marketing events, the most recent marketing event ID will be the marketing event ID for the current event. That doesn’t matter (we’re going to filter these events out of the event stream in the next step). The important thing is that for revenue events, it will correctly fetch the most recent marketing event ID. (Because the marketing event ID for the current row will be null, so will be ignored.)
 

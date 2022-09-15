@@ -6,7 +6,7 @@ sidebar_position: 10
 
 ### Cloud Storage Loader specific options
 
-- `--inputSubscription=String` The Cloud Pub/Sub subscription to read from, formatted as projects/\[PROJECT\]/subscriptions/\[SUB\]
+- `--inputSubscription=String` The Cloud Pub/Sub subscription to read from, formatted as projects/[PROJECT]/subscriptions/[SUB]
 - `--outputDirectory=String` The Cloud Storage directory to output files to, ends with /
 - `--outputFilenamePrefix=String` Default: output The Cloud Storage prefix to output files to
 - `--shardTemplate=String` Default: -W-P-SSSSS-of-NNNNN The shard template which will be part of the filenames

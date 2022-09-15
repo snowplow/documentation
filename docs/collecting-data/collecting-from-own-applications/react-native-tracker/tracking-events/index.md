@@ -10,13 +10,6 @@ sidebar_position: 20
 
 [![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
-  
-  
-  
-  
-  
-  
-
 The React Native tracker captures two types of events, automatically captured and manual events.
 
 ## Auto Tracking Features
@@ -66,7 +59,7 @@ Custom contexts can be optionally added as an extra argument to any of the Track
 
 For example, a custom context to describe a screen could be:
 
-```
+```typescript
 const myScreenContext: EventContext = {
     schema: 'iglu:com.example/screen/jsonschema/1-2-1',
     data: {
@@ -78,7 +71,7 @@ const myScreenContext: EventContext = {
 
 Another example custom context to describe a user on a screen could be:
 
-```
+```typescript
 const myUserEntity: EventContext = {
     schema: 'iglu:com.example/user/jsonschema/2-0-0',
     data: {
@@ -89,7 +82,7 @@ const myUserEntity: EventContext = {
 
 Then, to track, for example, a screenViewEvent with both of these contexts attached:
 
-```
+```typescript
 tracker.trackScreenViewEvent(
    { name: 'myScreenName' },
    [ myScreenContext, myUserEntity ]
@@ -117,7 +110,7 @@ To track a custom self-describing event, use the `trackSelfDescribingEvent` meth
 
 For example, to track a link-click event, which is one whose schema is already published in [Iglu Central](https://github.com/snowplow/iglu-central):
 
-```
+```typescript
 tracker.trackSelfDescribingEvent({
     schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
     data: {targetUrl: 'http://a-target-url.com'}
@@ -132,7 +125,7 @@ However, as part of a Snowplow implementation there may be interactons where cus
 
 For example:
 
-```
+```typescript
 tracker.trackStructuredEvent({
   category: 'my-category',
   action: 'my-action',
@@ -159,7 +152,7 @@ Use the `trackTimingEvent` tracker method to track user timing events such as ho
 
 For example:
 
-```
+```typescript
 tracker.trackTimingEvent({
     category: 'timing-category',
     variable: 'timing-variable',
@@ -184,7 +177,7 @@ Track the user viewing a screen within the application. This type of tracking is
 
 To track a ScreenViewEvent, use the `trackScreenViewEvent` tracker method. For example:
 
-```
+```typescript
 tracker.trackScreenViewEvent({
     name: 'my-screen-name',
     id: '5d79770b-015b-4af8-8c91-b2ed6faf4b1e',
@@ -215,7 +208,7 @@ Track a page view event with the `trackPageViewEvent()` method. Typically this i
 
 An example:
 
-```
+```typescript
 tracker.trackPageViewEvent({
   pageUrl: 'https://my-url.com',
   pageTitle: 'My page title',
@@ -238,7 +231,7 @@ Use the `trackConsentGrantedEvent` method to track a user opting into data colle
 
 For example:
 
-```
+```typescript
 tracker.trackConsentGrantedEvent({
     expiry: '2022-01-01T00:00:00Z',
     documentId: 'doc-id',
@@ -265,7 +258,7 @@ Use the `trackConsentWithdrawnEvent` method to track a user withdrawing consent 
 
 For example:
 
-```
+```typescript
 tracker.trackConsentWithdrawnEvent({
     all: true,
     documentId: 'doc-id',
@@ -316,7 +309,7 @@ More specifically, to start with, the properties of an `EcommerceItem` are:
 
 For example:
 
-```
+```typescript
 const ecomItem: EcommerceItem = {
     sku: 'DD44',
     name: 'T-Shirt',
@@ -347,7 +340,7 @@ An ecommerce transaction object has the following properties:
 - `country`: (string)
 - `currency`: (string)
 
-```
+```typescript
 const ecomTransaction: EcommerceTransactionProps = {
     orderId: '1234',
     totalValue: 15,
@@ -366,7 +359,7 @@ const ecomTransaction: EcommerceTransactionProps = {
 
 Then, to track the ecommerce transaction as described in the above examples:
 
-```
+```typescript
 tracker.trackEcommerceTransactionEvent(ecomTransaction);
 ```
 
@@ -378,7 +371,7 @@ It will be the duty of the tracker to automatically attach the information of th
 
 In practice, when the app receives a Deep Link the developer can track it through the `trackDeepLinkReceivedEvent` endpoint:
 
-```
+```typescript
 tracker.trackDeepLinkReceivedEvent({
     url: 'https://deeplink.com',
     referrer: 'http://refr.com',
@@ -391,7 +384,7 @@ The tracker keeps memory of the tracked Deep Link event and will attach a Deep L
 
 This behaviour is enabled by default but it can be disabled using the `deepLinkContext` boolean property when passing `trackerConfig` to `createTracker`:
 
-```
+```typescript
 const tracker = createTracker(
     namespace, networkConfig,
     {
@@ -418,7 +411,7 @@ Push Notifications are a cornerstone of the user experience on mobile. A Push No
 
 To track an event when a push (or local) notification is used, it is possible to use the `trackMessageNotificationEvent` endpoint:
 
-```
+```typescript
 tracker.trackMessageNotificationEvent({
     title: 'title',
     body: 'body',
@@ -485,7 +478,7 @@ Attachment object that identifies an attachment in the Message Notification even
 
 For example:
 
-```
+```typescript
 const attachment: MessageNotificationAttachmentProps = {
     identifier: 'id',
     type: 'type',
@@ -503,79 +496,79 @@ It is also possible to set or change the subject properties at runtime, using th
 
 With this method you can set the userId to a new string. To unset the userId, pass a null value as an argument.
 
-```
+```typescript
 tracker.setUserId('newUser');
 ```
 
-2\. `setNetworkUserId`
+2. `setNetworkUserId`
 
 With this method you can set the `network_userid` to a new string(UUIDv4). To unset, pass a null value as an argument.
 
-```
+```typescript
 tracker.setNetworkUserId('44df44bc-8844-4067-9a89-f83c4fe1e62f');
 ```
 
-3\. `setDomainUserId`
+3. `setDomainUserId`
 
 With this method you can set the `domain_userid` to a new string(UUIDv4). To unset, pass a null value as an argument.
 
-```
+```typescript
 tracker.setDomainUserId('0526be47-32cb-44b2-a9e6-fefeaa5ec6fa');
 ```
 
-4\. `setIpAddress`
+4. `setIpAddress`
 
 With this method you can set the `user_ipaddress` to a new string. To unset, pass a null value as an argument.
 
-```
+```typescript
 tracker.setIpAddress('123.45.67.89');
 ```
 
-5\. `setUseragent`
+5. `setUseragent`
 
 With this method you can set the `useragent` to a new string. To unset, pass a null value as an argument.
 
-```
+```typescript
 tracker.setUseragent('some-useragent-string');
 ```
 
-6\. `setTimezone`
+6. `setTimezone`
 
 With this method you can set the `os_timezone` to a new string. To unset, pass a null value as an argument.
 
-```
+```typescript
 tracker.setTimezone('Africa/Cairo');
 ```
 
-7\. `setLanguage`
+7. `setLanguage`
 
 With this method you can set the `br_lang` to a new string. To unset, pass a null value as an argument.
 
-```
+```typescript
 tracker.setLanguage('fr');
 ```
 
-8\. `setScreenResolution`
+8. `setScreenResolution`
 
 With this method you can set the `dvce_screenwidth` and `dvce_screenheight` fields to new integer values. The argument to this method is an array that represents the ScreenSize as `[width, height]`. For example:
 
-```
+```typescript
 tracker.setScreenResolution([123, 456]);
 ```
 
-9\. `setScreenViewport`
+9. `setScreenViewport`
 
 With this method you can set the `br_viewwidth` and `br_viewheight` fields to new integer values. The argument to this method is an array that represents the ScreenSize as `[width, height]`. For example:
 
-```
+```typescript
 tracker.setScreenViewport([123, 456]);
 ```
 
-10\. `setColorDepth`
+10. `setColorDepth`
 
 With this method you can set the `br_colordepth` to a new value. For example:
 
-```
+```typescript
 tracker.setColorDepth(20);
 ```
 
@@ -585,7 +578,7 @@ Finally, there is an extra "wrapper" method to set may subject properties at onc
 
 This method accepts as an argument a SubjectConfiguration, with the new values as needed. For example:
 
-```
+```typescript
 tracker.setSubjectData({
     userId: 'tester',
     domainUserId: '5d79770b-015b-4af8-8c91-b2ed6faf4b1e',
@@ -607,7 +600,7 @@ A set of global contexts is identified by its tag, which was set when the global
 
 To remove the global contexts associated with a tag, you can use the `removeGlobalContexts` tracker method, which takes as argument the tag. For example:
 
-```
+```typescript
 tracker.removeGlobalContexts('my-old-tag');
 ```
 
@@ -617,7 +610,7 @@ Similarly, you can add global contexts at runtime using the `addGlobalContexts` 
 
 For example:
 
-```
+```typescript
 tracker.addGlobalContexts({
     tag: 'my-new-tag',
     globalContexts: [

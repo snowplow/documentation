@@ -8,7 +8,7 @@ When you initialize your tracker (using the `init` method), you will need to p
 
 Example:
 
-```
+```brightscript
 m.global.snowplow.init = {
     network: {
         collector: "http://...",
@@ -30,7 +30,7 @@ You may initialize multiple trackers, each with a different namespace. In this w
 
 To initialize a tracker with a custom namespace, set the `namespace` property in the associative array passed to the `init` method. When no namespace is given, a default namespace is assigned to the tracker. Reinitializing trackers with the same namespace results in updating the configuration for the already initialized trackers. The following example initializes a tracker with the namespace "ns1":
 
-```
+```brightscript
 m.global.snowplow.init = {
     namespace: "ns1",
     network: { ... }
@@ -39,7 +39,7 @@ m.global.snowplow.init = {
 
 Trackers can be individually addressed using their namespaces when tracking events. To send events to a specific tracker, call its namespace as follows: `m.global.snowplow.trackerNamespace.structured = {...}`. Here is an example of tracking a screen view event using a tracker with the namespace "ns1":
 
-```
+```brightscript
 m.global.snowplow.ns1.screenView = {
     id: "screen23",
     name: "HUD > Save Game"
@@ -48,7 +48,7 @@ m.global.snowplow.ns1.screenView = {
 
 To track events with all initialized trackers, simply call methods to track events on the Snowplow instance without specifying a tracker namespace. The following example tracks a screen view event using all initialized trackers:
 
-```
+```brightscript
 m.global.snowplow.screenView = {
     id: "screen23",
     name: "HUD > Save Game"

@@ -22,13 +22,13 @@ We will discuss each of these in turn below:
 
 You can set the platform:
 
-```
+```javascript
 t.setPlatform( "{{PLATFORM}}" );
 ```
 
 Example:
 
-```
+```javascript
 t.setPlatform("mob");
 ```
 
@@ -40,13 +40,13 @@ For a full list of supported platforms, please see the [Snowplow Tracker Protoc
 
 You can set the user ID to any string:
 
-```
+```javascript
 t.setUserId( "{{USER ID}}" );
 ```
 
 Example:
 
-```
+```javascript
 t.setUserId("alexd");
 ```
 
@@ -54,13 +54,13 @@ t.setUserId("alexd");
 
 If your code has access to the device's screen resolution, then you can pass this in to Snowplow too:
 
-```
+```javascript
 t.setScreenResolution( {{WIDTH}}, {{HEIGHT}} );
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
-```
+```javascript
 t.setScreenResolution(1366, 768);
 ```
 
@@ -68,13 +68,13 @@ t.setScreenResolution(1366, 768);
 
 If your code has access to the device's screen resolution, then you can pass this in to Snowplow too:
 
-```
+```javascript
 t.setViewport( {{WIDTH}}, {{HEIGHT}} );
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
-```
+```javascript
 t.setViewport(300, 200);
 ```
 
@@ -82,13 +82,13 @@ t.setViewport(300, 200);
 
 If your code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
 
-```
+```javascript
 t.setColorDepth( {{BITS PER PIXEL}} );
 ```
 
 The number should be a positive integer, in bits per pixel. Example:
 
-```
+```javascript
 t.setColorDepth(32);
 ```
 
@@ -96,13 +96,13 @@ t.setColorDepth(32);
 
 This method lets you pass a user's language in to Snowplow:
 
-```
+```javascript
 t.setTimezone( {{TIMEZONE}} );
 ```
 
 Example:
 
-```
+```javascript
 t.setTimezone('Europe/London');
 ```
 
@@ -110,12 +110,12 @@ t.setTimezone('Europe/London');
 
 This method lets you pass a user's language in to Snowplow:
 
-```
+```javascript
 t.setLang( {{LANGUAGE}} );
 ```
 
 The number should be a positive integer, in bits per pixel. Example:
 
-```
+```javascript
 t.setLang('en');
 ```

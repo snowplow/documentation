@@ -10,7 +10,7 @@ The Flink job reads bad rows from an S3 location and stores the recovered payloa
 
 To build the fat jar, run:
 
-```
+```bash
 sbt flink/assembly
 ```
 
@@ -18,7 +18,7 @@ sbt flink/assembly
 
 Using flink CLI:
 
-```
+```bash
 flink run \
   snowplow-event-recovery-flink-0.2.0.jar \
   --input s3://bad-rows-location/** \

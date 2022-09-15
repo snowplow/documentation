@@ -45,7 +45,7 @@ If you're upgrading from R34 or earlier it is strictly recommended to pick new p
 
 We recommend to use either [Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/index.md) or boto3 script to launch scheduled S3DistCp and Shredder jobs. Here's an example of a Dataflow Runner playbook:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.dataflowrunner/PlaybookConfig/avro/1-0-1",
   "data": {
@@ -99,7 +99,7 @@ Common configuration file, previously known as `config.yml` and target JSON conf
 
 Here's an example:
 
-```
+```json
 {
   # Human-readable identificator, can be random
   "name": "Acme Redshift",
@@ -195,7 +195,7 @@ There are several major changes in shredder output directory structure:
 
 Structure of the typical shredded folder now looks like following:
 
-```
+```text
 run=2021-01-27-18-35-00/
    vendor=com.snowplowanalytics.snowplow/
      name=atomic/

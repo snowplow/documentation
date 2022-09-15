@@ -26,7 +26,7 @@ In the following examples, the changes needed are described:
 
 **v0.2.0**
 
-```
+```typescript
 import { createTracker } from '@snowplow/react-native-tracker';
 
 const tracker = createTracker(
@@ -40,7 +40,7 @@ const tracker = createTracker(
 
 **v1.0.0**
 
-```
+```typescript
 import { createTracker } from '@snowplow/react-native-tracker';
 
 const tracker = createTracker(
@@ -66,7 +66,7 @@ In v1, the `protocol` property has been removed. The collector URL can include t
 
 **v0.2.0 - example http**
 
-```
+```typescript
 const tracker = createTracker(
     'my-tracker-namespace', 
     {
@@ -79,7 +79,7 @@ const tracker = createTracker(
 
 **v1.0.0 - example http**
 
-```
+```typescript
 const tracker = createTracker(
     'my-tracker-namespace',
     {
@@ -101,7 +101,7 @@ The following example depicts how to map the configuration options of v0.2.0 to 
 
 **v0.2.0**
 
-```
+```typescript
 const tracker = createTracker('my-namespace', {
     endpoint: 'my-endpoint.com',
     appId: 'my-app-id',
@@ -122,7 +122,7 @@ const tracker = createTracker('my-namespace', {
 
 **v1.0.0**
 
-```
+```typescript
 const tracker = createTracker(
     'my-namespace',
     {
@@ -159,7 +159,7 @@ const tracker = createTracker(
 
 Generally, the tracking methods of v1 continue to have the same argument logic:
 
-```
+```typescript
 // pseudocode
 tracker.track..(eventData, eventContexts);
 ```
@@ -170,7 +170,7 @@ The differences are about the eventData properties, where they now match the cor
 
 **v0.2.0**
 
-```
+```typescript
 tracker.trackScreenViewEvent({
   screenName: 'my-screen-name',   // (a)
   screenType: 'carousel',         // (b)
@@ -180,7 +180,7 @@ tracker.trackScreenViewEvent({
 
 **v1.0.0**
 
-```
+```typescript
 tracker.trackScreenViewEvent({
     name: 'my-screen-name',                      // (a)
     id: '5d79770b-015b-4af8-8c91-b2ed6faf4b1e',
@@ -201,7 +201,7 @@ Apart from the fact that more ScreenViewEvent properties are available, the chan
 
 **v0.2.0**
 
-```
+```typescript
 tracker.trackPageViewEvent({
   pageUrl: 'https://my-url.com',
   pageTitle: 'My page title',
@@ -211,7 +211,7 @@ tracker.trackPageViewEvent({
 
 **v1.0.0**
 
-```
+```typescript
 tracker.trackPageViewEvent({
   pageUrl: 'https://my-url.com',
   pageTitle: 'My page title',
@@ -231,7 +231,7 @@ A notable difference between the SubjectConfiguration properties of v1.0.0 from 
 
 **v0.2.0**
 
-```
+```typescript
 tracker.setSubjectData({
     screenWidth: 111,
     screenHeight: 222,
@@ -242,7 +242,7 @@ tracker.setSubjectData({
 
 **v1.0.0**
 
-```
+```typescript
 tracker.setSubjectData({
     screenResolution: [111, 222],
     screenViewport: [333, 444]
@@ -259,7 +259,7 @@ In v1.0.0, the screen dimensions are not specified separately. Instead, the Scre
 
 Because of a version mismatch [issue](https://github.com/snowplow-incubator/snowplow-react-native-tracker/issues/110) that existed in v0.2.0 between the package version and the podspec version of the React Native Tracker, the following steps are needed in order to make sure the RNSnowplowTracker Pod references the new v1.0.0.
 
-```
+```bash
 # remove olds Pods and Podfile.lock
 rm -rf Pods
 rm Podfile.lock

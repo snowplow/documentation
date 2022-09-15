@@ -12,7 +12,7 @@ Enrich app has monitoring built in, to help the pipeline operator.
 
 Enrich can periodically emit event-based metrics to a statsd daemon. Here is a string representation of the metrics it sends:
 
-```
+```text
 snowplow.enrich.raw:42|c|#tag1:value1
 snowplow.enrich.good:30|c|#tag1:value1
 snowplow.enrich.bad:12|c|#tag1:value1
@@ -30,7 +30,7 @@ Note, the count metrics (`raw`, `good`, `bad` and `invalid_enriched`) refer to t
 
 Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
-```
+```json
 "monitoring": {
   "metrics": {
     "hostname": "localhost"
@@ -51,7 +51,7 @@ Above metrics can also be printed in the logs (with log level `info`).
 
 To do that, this section needs to appear in the configuration file:
 
-```
+```json
 "monitoring": {
   "metrics": {
     "stdout": {
@@ -68,7 +68,7 @@ To do that, this section needs to appear in the configuration file:
 
 Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in [the hocon file](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/configuration-reference/index.md) with the url of your sentry server:
 
-```
+```json
 "monitoring": {
   "dsn": "http://sentry.acme.com"
 }
@@ -78,7 +78,7 @@ Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in�
 
 It's possible to send KCL and KPL metrics to Cloudwatch by adding this section to the config file:
 
-```
+```json
 "monitoring": {
   "cloudwatch": true
 }

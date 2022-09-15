@@ -10,7 +10,7 @@ The Beam job reads data from a GCS location specified through a pattern and stor
 
 To build the docker image, run:
 
-```
+```bash
 sbt beam/docker:publishLocal
 ```
 
@@ -18,7 +18,7 @@ sbt beam/docker:publishLocal
 
 To run on Apache Beam in GCP Dataflow run it through a docker-deployment like so:
 
-```
+```bash
 docker run \
   snowplow-event-recovery-beam:0.2.0 \
    --runner=DataFlowRunner \

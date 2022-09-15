@@ -41,11 +41,11 @@ Clicking the links below will show all the Terraform differences between each ve
 
 ### [22.01 to 22.01-Patch.1](https://github.com/snowplow/quickstart-examples/compare/22.01...22.01-patch.1)
 
-#### Changing the name of the pipeline\_db\* variables
+#### Changing the name of the pipeline_db\* variables
 
-Since we have two destination database options (`postgres` and `snowflake`) starting with this release, we've replaced 'pipeline\_db' part in the variable names with 'postgres\_db'. You need to change your variable names accordingly.
+Since we have two destination database options (`postgres` and `snowflake`) starting with this release, we've replaced 'pipeline_db' part in the variable names with 'postgres_db'. You need to change your variable names accordingly.
 
-Also, new 'pipeline\_db' variable is introduced. This variable specifies the database that will be used as destination in the pipeline. It can be either 'postgres' or 'snowflake'. Since all existing pipelines are using Postgres if they aren't modified, this variable should be set to 'postgres' in those pipelines.
+Also, new 'pipeline_db' variable is introduced. This variable specifies the database that will be used as destination in the pipeline. It can be either 'postgres' or 'snowflake'. Since all existing pipelines are using Postgres if they aren't modified, this variable should be set to 'postgres' in those pipelines.
 
 ### [21.04 to 21.08](https://github.com/snowplow/quickstart-examples/compare/21.04...21.08)
 

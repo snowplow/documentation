@@ -309,7 +309,7 @@ snowplow.trackStructEvent("example", "temp reading", NULL, "celsius", 15.3f, 1);
 
 ## Testing and debugging
 
-Arduino is a difficult platform to test and debug software on, so it's important to understand what options the Snowplow Arduino Tracker has for debugging.[Back to top](https://github.com/snowplow/snowplow/wiki/Arduino-Tracker#top)
+Arduino is a difficult platform to test and debug software on, so it's important to understand what options the Snowplow Arduino Tracker has for debugging.
 
 ### Setup debugging
 

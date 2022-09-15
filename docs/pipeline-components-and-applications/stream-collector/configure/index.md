@@ -109,13 +109,13 @@ If no domain is specified, the cookie will be set against the full collector dom
 
 In earlier versions, you could specify a `domain` to tie the cookie to. For example, if set to `.snplow.com`, the cookie would have been accessible to other applications running on `*.snplow.com`. To do the same in this version, use the `fallbackDomain` setting but **make sure** that you no longer include a leading dot:
 
-```
+```properties
 fallbackDomain = "snplow.com"
 ```
 
 The cookie set by the collector can be treated differently by browsers, depending on whether it's considered to be a first-party or a third-party cookie. In earlier versions (0.15.0 and earlier), if you had two collector endpoints, one on `collector.snplow.com` and one on `collector.snplow.net`, you could only specify one of those domains in the configuration. That meant that you were only able to set a first-party cookie server-side on either `.snplow.com` or `.snplow.net`, but not on both. From version 0.16.0, you can specify a list of domains to be used for the cookie (**note the lack of a leading dot**):
 
-```
+```properties
 domains = [
   "snplow.com"
   "snplow.net"
@@ -141,7 +141,7 @@ The collector responds with a cookie to requests with a path that matches the `v
 
 You can also map any valid (ie, two-segment) path to one of the three defaults via the `collector.paths` section of the configuration file. Your custom path must be the key and the value must be one of the corresponding default paths. Both must be full valid paths starting with a leading slash:
 
-```
+```properties
 paths {
   "/com.acme/track"    = "/com.snowplowanalytics.snowplow/tp2"
   "/com.acme/redirect" = "/r/tp2"
@@ -165,7 +165,7 @@ The following JVM properties are the ones to be used most of the time.
 
 A deployment would need a TLS certificate, preferably issued by a trusted CA, however, for test purposes, a TLS cert could be generated as follows
 
-```
+```bash
 ssl_dir=/opt/snowplow/ssl
 mkdir -p ${ssl_dir}
 
@@ -190,7 +190,7 @@ sudo chmod 644 ${ssl_dir}/collector.p12
 
 and then the collector (kinesis as example) could be started as follows
 
-```
+```bash
 config_dir=/opt/snowplow/config
 
 docker run \
@@ -223,7 +223,7 @@ The keys set up for the Kinesis stream are stored as SQS message attributes in o
 
 To start using this feature, you will first need to set up the SQS queues. Two separate queues are required for good (raw) events and bad events. The Collector then needs to be informed about the queue names, and this can be done by adding these as entries to `config.hocon:`
 
-```
+```properties
 sqsGoodBuffer = {good-sqs-queue-url}
 sqsBadBuffer = {bad-sqs-queue-url}
 ```
@@ -234,7 +234,7 @@ Starting with version 2.4.0 of the collector snowplow will be collecting the hea
 
 At the base, telemetry is sending the application name and version every hour. This is done to help us to improve the product, we need to understand what is popular, so we could focus our development effort in the right place. You can help us by providing `userProvidedId` in the config file.
 
-```
+```properties
 telemetry {
     userProvidedId = myCompany
  }
@@ -242,7 +242,7 @@ telemetry {
 
 Put the following entry into your configuration file to disable the telemetry.
 
-```
+```properties
 telemetry {
     disable = true
  }

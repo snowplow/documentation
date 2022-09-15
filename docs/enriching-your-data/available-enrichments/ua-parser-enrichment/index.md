@@ -48,15 +48,15 @@ would be parsed with the following result:
 
 | PARAMETER         | VALUE     |
 |-------------------|-----------|
-| useragent\_family | Chrome    |
-| useragent\_major  | 48        |
-| useragent\_minor  | \-        |
-| useragent\_patch  | 2564      |
-| os\_family        | Windows 7 |
-| os\_major         | \-        |
-| os\_minor         | \-        |
-| os\_patch\_minor  | \-        |
-| os\_version       | Windows 7 |
-| device\_family    | Computer  |
+| useragent_family | Chrome    |
+| useragent_major  | 48        |
+| useragent_minor  | \-        |
+| useragent_patch  | 2564      |
+| os_family        | Windows 7 |
+| os_major         | \-        |
+| os_minor         | \-        |
+| os_patch_minor  | \-        |
+| os_version       | Windows 7 |
+| device_family    | Computer  |
 
 _\*empty values denoted by “-“_

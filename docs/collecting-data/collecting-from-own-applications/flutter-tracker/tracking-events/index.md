@@ -96,7 +96,7 @@ Use `ScreenView` to track a user viewing a screen (or similar) within your app
 
 Screen view events are used in the [Snowplow mobile data model](/docs/modeling-your-data/the-snowplow-mobile-data-model/index.md). Nevertheless, the Flutter tracker also implements them on Web. You may adopt the mobile data model and choose to track screen views instead of page views on Web to provide consistent event tracking across all platforms.
 
-This method creates an unstruct event, by creating and tracking a self-describing event. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen\_view/jsonschema/1-0-0", and the data field will contain the parameters which you provide. That schema is hosted on the schema repository Iglu Central, and so will always be available to your pipeline.
+This method creates an unstruct event, by creating and tracking a self-describing event. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", and the data field will contain the parameters which you provide. That schema is hosted on the schema repository Iglu Central, and so will always be available to your pipeline.
 
 | Argument         | Description                                                 | Required in event? |
 |------------------|-------------------------------------------------------------|--------------------|

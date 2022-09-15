@@ -81,7 +81,7 @@ The Snowplow BigQuery Loader apps use Pub/Sub topics and subscriptions to store 
 
 Loader / StreamLoader, Mutator and Repeater accept the same configuration file in HOCON format. An example of a minimal configuration file can look like this:
 
-```
+```json
 {
   "projectId": "com-acme"
 
@@ -140,7 +140,7 @@ Loader / StreamLoader, Mutator and Repeater accept the same configuration file i
 
 The loader takes command line arguments `--config` with a path to the configuration hocon file and `--resolver` with a path to the Iglu resolver file. If you are running the docker image then you should mount the configuration files into the container:
 
-```
+```bash
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-streamloader:1.4.2 \
@@ -150,7 +150,7 @@ $ docker run \
 
 Or you can pass the whole config as a base64-encoded string using the `--config` option, like so:
 
-```
+```bash
 $ docker run \
     -v /path/to/resolver.json:/resolver.json \
     snowplow/snowplow-bigquery-streamloader:1.4.2 \
@@ -162,7 +162,7 @@ The `--config` command option is actually optional. For some setups it is more
 
 For example, to override the `repeater.input.subscription` setting using system properties:
 
-```
+```bash
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-streamloader:1.4.2 \
@@ -173,7 +173,7 @@ $ docker run \
 
 Or to use environment variables for every setting:
 
-```
+```bash
 $ docker run \
     -v /path/to/resolver.json:/resolver.json \
     snowplow/snowplow-bigquery-repeater:1.4.2 \
@@ -191,7 +191,7 @@ All apps accept a config HOCON as specified above, and an Iglu resolver config p
 
 StreamLoader accepts `--config` and `--resolver` arguments, as well as any JVM system properties that can be used to override the configuration.
 
-```
+```bash
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-streamloader:1.4.2 \
@@ -206,7 +206,7 @@ The `--config` flag is optional, but if missing, all configuration options must 
 
 The Dataflow Loader accepts the same two arguments as StreamLoader and [any other](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options) supported by Google Cloud Dataflow.
 
-```
+```bash
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-loader:1.4.2 \
@@ -227,7 +227,7 @@ Mutator has three subcommands: `listen`, `create` and `add-column`.
 
 `listen` is the primary command and is used to automate table migrations.
 
-```
+```bash
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-mutator:1.4.2 \
@@ -241,7 +241,7 @@ $ docker run \
 
 `add-column` can be used once to add a column to the table specified via the `loader.output.good` setting. This should eliminate the risk of table update lag and the necessity to run a Repeater, but requires 'manual' intervention.
 
-```
+```bash
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-mutator:1.4.2 \
@@ -258,7 +258,7 @@ The specified schema must be present in one of the Iglu registries in the resolv
 
 `create` creates an empty table with `atomic` structure. It can optionally be partitioned by a `TIMESTAMP` field.
 
-```
+```bash
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-mutator:1.4.2 \
@@ -275,7 +275,7 @@ See the Google documentation for more information about [partitioned tables](htt
 
 We recommend constantly running Repeater on a small / cheap node or Docker container.
 
-```
+```bash
 $ docker run \
     -v /path/to/configs:/configs \
     snowplow/snowplow-bigquery-repeater:1.4.2 \
@@ -293,7 +293,7 @@ $ docker run \
 
 All applications are available as Docker images on Docker Hub, based on Ubuntu Focal and OpenJDK 11:
 
-```
+```bash
 $ docker pull snowplow/snowplow-bigquery-streamloader:1.4.2
 $ docker pull snowplow/snowplow-bigquery-loader:1.4.2
 $ docker pull snowplow/snowplow-bigquery-mutator:1.4.2
@@ -302,7 +302,7 @@ $ docker pull snowplow/snowplow-bigquery-repeater:1.4.2
 
 We also provide an alternative lightweight set of images based on [Google's "distroless" base image](https://github.com/GoogleContainerTools/distroless), which may provide some security advantages for carrying fewer dependencies. These images are distinguished with the `1.4.2-distroless` tag:
 
-```
+```bash
 $ docker pull snowplow/snowplow-bigquery-streamloader:1.4.2-distroless
 $ docker pull snowplow/snowplow-bigquery-loader:1.4.2-distroless
 $ docker pull snowplow/snowplow-bigquery-mutator:1.4.2-distroless

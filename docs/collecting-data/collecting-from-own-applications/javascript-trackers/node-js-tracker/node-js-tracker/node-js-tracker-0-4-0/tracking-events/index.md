@@ -28,7 +28,7 @@ All events are tracked with specific methods on the tracker instance, of the for
 
 Each tracker method has both default and optional arguments. If you don't want to provide a value for an optional argument, just pass `null` and it will be ignored. For example, if you want to track a page view event with a referrer but without a title:
 
-```
+```javascript
 t.trackPageView('http://www.example.com', null, 'http://www.referer.com');
 ```
 
@@ -36,7 +36,7 @@ t.trackPageView('http://www.example.com', null, 'http://www.referer.com');
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of a JavaScript dictionary object. Each tracking method accepts an additional optional contexts parameter after all the parameters specific to that method:
 
-```
+```javascript
 t.trackPageView('myUrl', 'myPage', 'myReferrer', myCustomContexts);
 ```
 
@@ -46,7 +46,7 @@ The `context` argument should consist of an array of one or more dictionaries.
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
-```
+```json
 {
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
@@ -58,7 +58,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 This is how to fire a page view event with the above custom context:
 
-```
+```javascript
 t.trackPageView("http://www.films.com", "Homepage", null, [{
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
@@ -78,7 +78,7 @@ If you do not pass this timestamp in as an argument, then the Tracker will use t
 
 Here is an example tracking a structured event and supplying the optional timestamp argument. We can explicitly supply `null`s for the intervening arguments which are empty:
 
-```
+```javascript
 t.trackStructEvent("game action", "save", null, null, null, 1368725287000);
 ```
 
@@ -99,7 +99,7 @@ Use `trackScreenView()` to track a user viewing a screen (or equivalent) withi
 
 Example:
 
-```
+```javascript
 t.trackScreenView("HUD > Save Game", "screen23", null, 1368725287000);
 ```
 
@@ -117,7 +117,7 @@ Use `trackPageView()` to track a user viewing a page within your app. Argument
 
 Example:
 
-```
+```javascript
 t.trackPageView("www.example.com", "example", "www.referrer.com");
 ```
 
@@ -153,7 +153,7 @@ The `items` argument is an array of dictionaries. Each dictionary represents o
 
 Example:
 
-```
+```javascript
 t.trackEcommerceTransaction("order-456", null, 142, 20, 12.99, "London", null, "United Kingdom", [{
     "sku": "pbz0026",
     "price": 20,
@@ -182,7 +182,7 @@ Use `trackStructEvent()` to track a custom event happening in your app which f
 
 Example:
 
-```
+```javascript
 t.trackStructEvent("shop", "add-to-basket", null, "pcs", 2);
 ```
 
@@ -200,7 +200,7 @@ The arguments are as follows:
 
 Example:
 
-```
+```javascript
 t.trackUnstructEvent({
   "schema": "iglu:com.example_company/save-game/jsonschema/1-0-2",
   "data": {

@@ -10,7 +10,7 @@ enrich-pubsub is a standalone JVM application that reads from and writes to PubS
 
 It is published on Docker Hub and can be run with the following command:
 
-```
+```bash
 docker run \
   -it --rm \
   -v $PWD:/snowplow \
@@ -30,7 +30,7 @@ Above assumes that you have following directory structure:
 
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
-```
+```bash
 java -jar snowplow-enrich-pubsub-3.2.3.jar \
   --enrichments /snowplow/enrichments \
   --iglu-config /snowplow/resolver.json \
@@ -43,7 +43,7 @@ enrich-kinesis is a standalone JVM application that reads from and writes to Kin
 
 It is published on Docker Hub and can be run with the following command:
 
-```
+```bash
 docker run \
   -it --rm \
   -v $PWD:/snowplow \
@@ -65,7 +65,7 @@ Depending on where the app runs, `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` might not
 
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
-```
+```bash
 java -jar snowplow-enrich-kinesis-3.2.3.jar \
   --enrichments /snowplow/enrichments \
   --iglu-config /snowplow/resolver.json \

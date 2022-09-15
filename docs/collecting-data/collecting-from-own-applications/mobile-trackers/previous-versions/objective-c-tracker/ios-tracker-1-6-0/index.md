@@ -20,7 +20,7 @@ For instructions, refer to the official Cocoapods guide [here](https://guides.co
 
 The tracker can be used in your project by adding `SnowplowTracker` to your project's `Podfile`:
 
-```
+```ruby
     pod 'SnowplowTracker', '~> 1.6'
 ```
 
@@ -28,13 +28,13 @@ Now you can install the dependency in your project with the command: `pod instal
 
 Make sure to always open the Xcode workspace instead of the project file when building your project:
 
-```
+```bash
     $ open App.xcworkspace
 ```
 
 Now you can import classes in order to use the tracker e.g.:
 
-```
+```objc
     #import "SPPayload.h"
     #import "SPTracker.h"
     #import "SPSelfDescribingJson.h"
@@ -45,7 +45,7 @@ Now you can import classes in order to use the tracker e.g.:
 
 In order to add the tracker to a project that uses Carthage, add the line to your `Cartfile`:
 
-```
+```swift
     github "snowplow/snowplow-objc-tracker" ~> 1.6
 ```
 
@@ -53,13 +53,13 @@ Run `carthage update` and drag the appropriate frameworks to your project from t
 
 The tracker can be imported like this:
 
-```
+```objc
     import <SnowplowTracker/SPTracker.h>
 ```
 
 #### Swift Package Manager
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 **Note**: At the moment it supports only the iOS platform due to technical limitations.
 
@@ -98,7 +98,7 @@ The Tracker is designed to be used as a Singleton object, meaning that you shoul
 
 For a basic example of the Singleton pattern:
 
-```
+```objc
     // --- Header File 'SnowplowManager.h'
 
     @class SPTracker;
@@ -156,7 +156,7 @@ You can then access your Tracker via `SnowplowManager *snowplowManager = [Snowpl
 
 Here's the minimum code needed to create a tracker and send an event to a collector.
 
-```
+```objc
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         [builder setUrlEndpoint:@"example.com"]; // Required
     }];
@@ -238,7 +238,7 @@ Every tracker must have an emitter, so an emitter must be created first.
 
 The URL endpoint must be defined.
 
-```
+```objc
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         [builder setUrlEndpoint:_url];
         [builder setProtocol:SPHttp];
@@ -249,13 +249,13 @@ The URL endpoint must be defined.
 
 You can set the user ID to any string:
 
-```
+```objc
     [subject setUserId:userId];
 ```
 
 Example:
 
-```
+```objc
     [subject setUserId:@"alexd"];
 ```
 
@@ -263,7 +263,7 @@ Example:
 
 To instantiate a tracker in your code simply instantiate the `SPTracker` class with the following builder pattern:
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
     }];
@@ -273,7 +273,7 @@ By default iOS app sets automatically the parameter `p` (platform) as `mob` and 
 
 On the tracker setup you can override the device platform entry calling:
 
-```
+```objc
     [tracker setDevicePlatform: SPDevicePlatformGameConsole];
 ```
 
@@ -287,7 +287,7 @@ In order to send an event, an event must first be made, and then supplied to a t
 
 Here's an example of constructing and sending a custom event:
 
-```
+```objc
     NSDictionary * data = @{@"level": @23, @"score": @56473};
     SPSelfDescribingJson * sdj = [[SPSelfDescribingJson alloc] initWithSchema:@"iglu:com.acme/save_game/jsonschema/1-0-0"
                                                                       andData:data];
@@ -303,7 +303,7 @@ Here's an example of constructing and sending a custom event:
 
 A screenview event can be manually tracked like this:
 
-```
+```objc
     SPScreenView *event = [SPScreenView build:^(id<SPScreenViewBuilder> builder) {
       [builder setName:@"Home screen"];
       [builder setType:@"Navigation bar"];
@@ -323,7 +323,7 @@ The custom context argument should consist of a NSMutableArray of NSDictionary r
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
-```
+```json
     {
       "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
       "data": {
@@ -336,7 +336,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 The corresponding NSDictionary would look like this:
 
-```
+```objc
     NSDictionary *poster =
         @{
             @"schema":@"iglu:com.acme_company/movie_poster/jsonschema/1-0-0",
@@ -350,7 +350,7 @@ The corresponding NSDictionary would look like this:
 
 Sending the movie poster context with an event looks like this:
 
-```
+```objc
     event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
         [builder setCategory:@"DemoCategory"];
         [builder setAction:@"DemoAction"];
@@ -367,11 +367,11 @@ Note: even if there is only one custom context attached to the event, it still n
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         ...
         [builder setForegroundTimeout:600]; // 10 minutes
@@ -383,7 +383,7 @@ Sessions correspond to tracked user activity. A session expires when no tracking
 
 In order to enable these events, use the method `setLifecycleEvents` during initialization of the tracker:
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setLifecycleEvents:YES];
@@ -400,7 +400,7 @@ Events are not sent on app close since the OS cannot guarantee advance notice of
 
 Auto-tracking can be enabled to send screen view events whenever a screen is changed in the app (a screen change corresponds to when `viewDidAppear()` is called on a view controller).
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setScreenViewEvents:YES];
@@ -411,7 +411,7 @@ Auto-tracking can be enabled to send screen view events whenever a screen is cha
 
 Auto-tracking can be enabled to send an event for exceptions that are raised. The only caveat is that the exception event will be sent when the tracker is restarted.
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setExceptionEvents:YES];
@@ -424,7 +424,7 @@ Auto-tracking can be enabled to send an install event whenever the tracker is us
 
 If install auto-tracking is not enabled, the tracker will still keep track of when the app was first installed, so that when enabled, the tracker will send the recorded install event with a timestamp reflecting when it was first installed.
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setInstallEvents:YES];
@@ -439,7 +439,7 @@ These are out-of-the-box tracker options that when enabled will attach useful co
 
 The [session context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) includes sessionization information like user ID and session ID that can be used to relate user activity patterns to events.
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setSessionContext:YES];
@@ -450,7 +450,7 @@ The [session context](https://github.com/snowplow/iglu-central/blob/master/schem
 
 The [application context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) includes app build and version number.
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setApplicationContext:YES];
@@ -461,7 +461,7 @@ The [application context](https://github.com/snowplow/iglu-central/blob/master/s
 
 The [screen context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) contains information related to the current screen being viewed on the device when the event is created.
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setScreenContext:YES];
@@ -470,9 +470,9 @@ The [screen context](https://github.com/snowplow/iglu-central/blob/master/schema
 
 ##### Platform context
 
-The platform context will either be a [mobile](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-1) or \[[desktop](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0) context depending on which platform sends the event. It is enabled by adding an `SPSubject` to the tracker.
+The platform context will either be a [mobile](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-1) or [[desktop](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0) context depending on which platform sends the event. It is enabled by adding an `SPSubject` to the tracker.
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setPlatformContext:YES];
@@ -487,7 +487,7 @@ The platform context will either be a [mobile](https://github.com/snowplow/iglu-
 
 The [geolocation context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) is enabled by adding an `SPSubject` to the tracker.
 
-```
+```objc
     SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
         [builder setEmitter:emitter];
         [builder setPlatformContext:YES];
@@ -500,14 +500,14 @@ The [geolocation context](https://github.com/snowplow/iglu-central/blob/master/s
 
 ### Global contexts
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 #### Getting started with Global Contexts
 
 As explained above, the _global contexts_ are particularly helpful when the developer wants to associate specific contexts to all the events or a subset of them, rather than adding the contexts manually to each event tracked.  
 This can be done at tracker setup declaring the contexts generator and the suitable subset of events.
 
-```
+```objc
 // Instance a global contexts generator
 SPSelfDescribingJson *staticContext =
     [[SPSelfDescribingJson alloc] initWithSchema:@"iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1"
@@ -531,7 +531,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 The method `setGlobalContextGenerators:` can be used to set up the generators which are able to create contexts. Each context generator is associated to a tag string.  
 The tag string can be used to remove a generator at runtime using the method `removeGlobalContext`.
 
-```
+```objc
 SPGlobalContext *globalContext = [tracker removeGlobalContext:@"tag1"];
 ```
 
@@ -539,7 +539,7 @@ It returns `nil` in case there aren't global contexts stored with the specified 
 
 It's possible to add global contexts at runtime with the method `addGlobalContext`.
 
-```
+```objc
 BOOL isAdded = [tracker addGlobalContext:globalContext tag:@"tag1"];
 ```
 
@@ -551,7 +551,7 @@ Context primitive is a term for anything that can be used as a context. A contex
 
 This is useful in cases where the context is static and it's always the same.
 
-```
+```objc
 SPGlobalContext *staticGC = [[SPGlobalContext alloc] initWithStaticContexts:@[
     [[SPSelfDescribingJson alloc] initWithSchema:@"iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1" andData:@{@"key": @"value"}]
 ]];
@@ -564,7 +564,7 @@ A context generator callback returns an array of self describing JSONs, represen
 They are evaluated each time an event is sent, hence they meet the case where we would like to send a context based on event information.  
 `SPInspectableEvent` is an interface that exposes internal data of the event processed: event name, schema and payload.
 
-```
+```objc
 SPGlobalContext *blockGC = [[SPGlobalContext alloc] initWithGenerator:^NSArray<SPSelfDescribingJson *> *(id<SPInspectableEvent> event) {
     ... Computing using event informations ...
     return @[
@@ -583,7 +583,7 @@ However, there are cases where the contexts should only be applied to certain ev
 
 A filter callback is used to discriminate between events so we can attach global contexts only to certain events.
 
-```
+```objc
 SPGlobalContext *filteredGC = [[SPGlobalContext alloc] initWithStaticContexts:@[[[SPSelfDescribingJson alloc] initWithSchema:@"iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1" andData:@{@"key": @"value"}]]
     filter:^BOOL(id<SPInspectableEvent> event) {
         return ["se" isEqualToString:event.name];
@@ -600,7 +600,7 @@ A ruleset provider has a ruleset which has a list of allowed schemas and a list 
 
 In this example, the ruleset provider will attach the generated contexts (as described in the previous section) to events with the schema `iglu:com.acme.*/*/jsonschema/*-*-*`, but not to `iglu:com.acme.marketing/*/jsonschema/*-*-*`.
 
-```
+```objc
 NSString *allowed = @"iglu:com.snowplowanalytics.*/*/jsonschema/*-*-*";
 NSString *denied = @"iglu:com.snowplowanalytics.mobile/*/jsonschema/*-*-*";
 
@@ -616,7 +616,7 @@ RuleSet's rules are the strings used to match against certain schemas, such as `
 
 They follow the same five-part format as an Iglu URI:
 
-```
+```text
 protocol:vendor/event_name/format/version
 ```
 
@@ -633,7 +633,7 @@ The parts of a rule are wildcarded with certain guidelines:
 
 In case the logic for filter and generator callbacks are too complex, it's possible to specify them in a class that implements `SPContextGenerator` protocol.
 
-```
+```objc
 @protocol SPContextGenerator <NSObject>
 
 /*!
@@ -655,7 +655,7 @@ In case the logic for filter and generator callbacks are too complex, it's possi
 
 In this case the logic for filtering and generation is encapsulated behind a context generator class.
 
-```
+```objc
 @interface GlobalContextGenerator: NSObject <SPContextGenerator>
 @end
 
@@ -676,7 +676,7 @@ In this case the logic for filtering and generation is encapsulated behind a con
 
 It can be passed to the tracker as usual:
 
-```
+```objc
 SPGlobalContext *contextGeneratorGC = [[SPGlobalContext alloc] initWithContextGenerator:[GlobalContextGenerator new]];
 [tracker addGlobalContext:rulesetGC tag:@"tag1"];
 ```
@@ -689,7 +689,7 @@ These options are used to fine-tune the emitter.
 
 The request method used to connect to the collector, either: `SPRequestGet`, or `SPRequestPost`.
 
-```
+```objc
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         [builder setUrlEndpoint:_url];
         [builder setHttpMethod:SPRequestPost];
@@ -702,7 +702,7 @@ In a GET request, each event is sent in an individual request. In a POST request
 
 The protocol used to connect to the collector, either: `SPHttp`, or `SPHttps`.
 
-```
+```objc
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         [builder setUrlEndpoint:_url];
         [builder setProtocol:SPHttps];
@@ -717,7 +717,7 @@ To implement you will need to:
 
 Add the RequestCallback protocol to your header file:
 
-```
+```objc
     // Example from the SnowplowDemo -> ViewController.h file:
     @interface ViewController : UIViewController <UITextFieldDelegate, RequestCallback>
 
@@ -727,7 +727,7 @@ Add the RequestCallback protocol to your header file:
 
 In your paired .m file add the following functions:
 
-```
+```objc
     // Define Callback Functions
     - (void) onSuccessWithCount:(NSInteger)successCount {
         // Do something with result
@@ -740,7 +740,7 @@ In your paired .m file add the following functions:
 
 Construct the SPEmitter like so:
 
-```
+```objc
     NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
@@ -755,7 +755,7 @@ The self will work only if you have declared the callback functions in the same 
 
 The number of events retrieved from storage in the database whenever the emitter needs more to send.
 
-```
+```objc
     NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
@@ -768,7 +768,7 @@ The number of events retrieved from storage in the database whenever the emitter
 
 This is the number of threads created to make requests for sending events:
 
-```
+```objc
     NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
@@ -781,7 +781,7 @@ This is the number of threads created to make requests for sending events:
 
 The maximum data size of GET requests made by the emitter to send events.
 
-```
+```objc
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         [builder setUrlEndpoint:_url]; // Required
         [builder setByteLimitGet:50000]; // Optional
@@ -792,7 +792,7 @@ The maximum data size of GET requests made by the emitter to send events.
 
 The maximum data size of POST requests made by the emitter to send events.
 
-```
+```objc
     SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
         [builder setUrlEndpoint:_url]; // Required
         [builder setByteLimitPost:50000]; // Optional
@@ -801,7 +801,7 @@ The maximum data size of POST requests made by the emitter to send events.
 
 #### Configure the buffer
 
-_\[Available from v.1.5.0\]_
+_[Available from v.1.5.0]_
 
 A buffer is used to group events together in bulk before sending them. This is especially handy to reduce network usage. By default, the Emitter buffers up to 10 events together before sending them; only available if you are using POST as your request type.
 
@@ -809,7 +809,7 @@ The emitter sends the events as soon as it receives them. In case some of them h
 
 The buffer can be configured when creating the emitter:
 
-```
+```objc
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     ...
     [builder setBufferOption:SPBufferOptionSingle];
@@ -827,7 +827,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 ### Advanced Emitter options
 
-_\[Available from 1.5.0\]_
+_[Available from 1.5.0]_
 
 The Emitter can be configured to delegate to separate components the events persistence (EventStore) and the network connection to the collector (NetworkConnection).
 
@@ -837,7 +837,7 @@ The EventStore is the component in charge for storing the events before to be se
 
 The Emitter can be configured to use a custom EventStore that implements the protocol SPEventStore.
 
-```
+```objc
 id<SPEventStore> customEventStore = [MyCustomEventStore new];
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     ...
@@ -854,7 +854,7 @@ The NetworkConnection is the component in charge for sending the events to the c
 
 The Emitter can be configured to use a custom NetworkConnection that implements the protocol SPNetworkConnection.
 
-```
+```objc
 id<SPNetworkConnection> customNetworkConnection = [MyNetworkConnection new];
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     ...
@@ -867,7 +867,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 ## Tracking GDPR basis for processing with the GDPR context
 
-_\[Available from v.1.3.0\]_
+_[Available from v.1.3.0]_
 
 This release introduces the `gdprContext` and the `enableGdprContext` methods, which append a GDPR context to all events once enabled.  
 This allows users to easily record the basis for data collection and relevant documentation, and enables a straightforward audit flow for all events.
@@ -887,7 +887,7 @@ The GDPR context is enabled by calling the `setGdprContextWithBasis:documentId:d
 
 It is called as follows:
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     ...
@@ -907,7 +907,7 @@ The tracker allow to get the IDFA sending it as part of the `mobile_context` JSO
 If you want to track the IDFA you need:
 
 - Add `AdSupport` framework to your app. If it's not added the tracker will not send the IDFA with the events.
-- If you add the `AdSupport` framework, please, be aware of the correct way to submit the app to the App Store. If you make use of IDFA you have to declare it during the App submission (More details \[[here](https://help.apple.com/app-store-connect/#/dev301cb2b3e)).
+- If you add the `AdSupport` framework, please, be aware of the correct way to submit the app to the App Store. If you make use of IDFA you have to declare it during the App submission (More details [[here](https://help.apple.com/app-store-connect/#/dev301cb2b3e)).
 - The simulators can’t generate a proper IDFA, instead they generate a sequence of zeros. If you want to test IDFA with a real code, please, use the physical device.If you add the `AdSupport` framework but you don't want get the IDFA with the events:
 - Disable the IDFA tracking with a preprocessor flag:
     1. Go to _Build Settings_ of the imported Snowplow iOS Tracker
@@ -919,7 +919,7 @@ The user has the ability to limit ad-tracking from the device's Settings. If the
 
 ## Troubleshooting
 
-_\[Available from v.1.5.0\]_
+_[Available from v.1.5.0]_
 
 The tracker is tested with different platforms and versions but there are rare situations where an error can be generated. The tracker will manage these errors to avoid crashes of the app and assure that the events are not lost.
 
@@ -929,7 +929,7 @@ We allow the developer to have a full visibility of the tracker logs. _Please, t
 
 At tracker configuration you can decide which log level you want to filter logs to:
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     ...
     [builder setLogLevel:SPLogLevelVerbose];
@@ -944,7 +944,7 @@ In the example above, all logs will be sent to the system logs. Usually visible 
 It's also possible to handle the tracker logs directly in the app for troubleshooting purposes. You need to implement the interface `LoggerDelegate` where you will receive all the log messages based on the log level selected.  
 In the tracker configuration you have to set the log level and register the logger delegate. Pass a reference of a class instance that implements the LoggerDelegate interface.
 
-```
+```objc
 @interface MyApp () <SPLoggerDelegate>
 @end
 
@@ -978,7 +978,7 @@ If you enable the diagnostic feature the log level will be automatically set to 
 
 To activate this feature you only need to enable `trackerDiagnostic`:
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     ...
     [builder setDiagnosticLogger:self];

@@ -12,7 +12,7 @@ First we'll need to define configuration:
 
 The configuration consists of the `resolver-config.json` that your pipeline uses to resolve events against corresponding schema, for example:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-1",
   "data": {
@@ -37,7 +37,7 @@ The configuration consists of the `resolver-config.json` that your pipeline uses
 
 Also, the`job-config.json` which describes the recovery job to be done, for example:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/4-0-0",
   "data": {
@@ -56,7 +56,7 @@ Also, the`job-config.json` which describes the recovery job to be done, for exam
 
 Configuration is supplied to recovery jobs as a Base64-encoded string. You can use your encoding plugin of choice, but here is an example [ammonite](http://ammonite.io/) script you can use to encode your configuration:
 
-```
+```scala
 import java.util.Base64
 import java.nio.charset.StandardCharsets
 import ammonite.ops._
@@ -74,7 +74,7 @@ val encode = (str: String)  => Base64.getEncoder.encodeToString(str.getBytes(Sta
 
 And then just run (assuming ammonite is on your path and above script is called `encode.sc`:
 
-```
+```bash
 amm ./encode.sc resolver-config.json
 amm ./encode.sc job-config.json
 ```

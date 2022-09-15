@@ -28,7 +28,7 @@ Configuration files are run through Golang’s [text template processor](http:/
 
 For example to use the `--vars` argument with a playbook step:
 
-```
+```json
 {
   "type": "CUSTOM_JAR",
   "name": "Combine Months",
@@ -47,13 +47,13 @@ For example to use the `--vars` argument with a playbook step:
 
 You would then pass the following command:
 
-```
+```bash
 host> ./dataflow-runner run --emr-playbook ${emr-playbook-path} --emr-cluster j-2DPBXD87LSGP9 --vars inputVariable,input,outputVariable,output
 ```
 
 This would resolve to:
 
-```
+```json
 {
   "type": "CUSTOM_JAR",
   "name": "Combine Months",
@@ -84,7 +84,7 @@ There are several commands that can be used to manage your data-flow fabric.
 
 #### `up`: Launches a new EMR cluster
 
-```
+```text
 NAME:
    dataflow-runner up - Launches a new EMR cluster
 
@@ -98,7 +98,7 @@ OPTIONS:
 
 This command will launch a new cluster ready for step execution, the output should look something like the following:
 
-```
+```text
 NAME:
    dataflow-runner run - Adds jobflow steps to a running EMR cluster
 
@@ -117,7 +117,7 @@ OPTIONS:
 
 #### `run`: Adds jobflow steps to a running EMR cluster
 
-```
+```bash
 host> ./dataflow-runner up --emr-config ${emr-config-path}
 INFO[0001] Launching EMR cluster with name 'dataflow-runner - sample name'...
 INFO[0001] EMR cluster is in state STARTING - need state WAITING, checking again in 20 seconds...
@@ -132,7 +132,7 @@ INFO[0310] EMR cluster launched successfully; Jobflow ID: j-2DPBXD87LSGP9
 
 This command adds new steps to the already running cluster. By default this command is blocking - however if you wish to submit and forget simply supply the `--async` argument, the output should look something like the following:
 
-```
+```bash
 host> ./dataflow-runner run --emr-playbook ${emr-playbook-path} --emr-cluster j-2DPBXD87LSGP9
 INFO[0310] Successfully added 2 steps to the EMR cluster with jobflow id 'j-2DPBXD87LSGP9'...
 ERRO[0357] Step 'Combine Months' with id 's-9WZ0VFKC770J' was FAILED
@@ -142,7 +142,7 @@ ERRO[0358] 2/2 steps failed to complete successfully
 
 In this case my first step failed which meant that my second step was cancelled. This behaviour is dependent on your `actionOnFailure` - you can choose either to:
 
-1. “CANCEL\_AND\_WAIT”: This will cancel all other currently queued jobs and return the cluster to a waiting state ready for new job submissions.
+1. “CANCEL_AND_WAIT”: This will cancel all other currently queued jobs and return the cluster to a waiting state ready for new job submissions.
 2. “CONTINUE”: This will go to the next step regardless if it failed or not.
 
 **Note**: We have removed the ability to terminate the job flow on failure, to terminate you will need to use the `down` command.
@@ -160,7 +160,7 @@ When the `--consul` flag is used, the lock will be materialized by a key-value
 
 #### `down`: Terminates a running EMR cluster
 
-```
+```text
 NAME:
    dataflow-runner down - Terminates a running EMR cluster
 
@@ -175,7 +175,7 @@ OPTIONS:
 
 When you are done with the EMR cluster you can terminate it by using the `down` command. This takes the original emr configuration and the job flow id to then go and terminate the cluster, the output should look something like the following:
 
-```
+```bash
 host> ./dataflow-runner down --emr-config ${emr-config-path} --emr-cluster j-2DPBXD87LSGP9
 INFO[0358] Terminating EMR cluster with jobflow id 'j-2DPBXD87LSGP9'...
 INFO[0358] EMR cluster is in state TERMINATING - need state TERMINATED, checking again in 20 seconds...
@@ -187,7 +187,7 @@ INFO[0440] Transient EMR run completed successfully
 
 #### `run-transient`: Launches, runs and then terminates an EMR cluster
 
-```
+```text
 NAME:
    dataflow-runner run-transient - Launches, runs and then terminates an EMR cluster
 

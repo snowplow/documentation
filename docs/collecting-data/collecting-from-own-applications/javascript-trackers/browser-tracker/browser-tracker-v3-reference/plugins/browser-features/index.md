@@ -20,7 +20,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 
 ## Initialization
 
-```
+```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { BrowserFeaturesPlugin } from '@snowplow/browser-plugin-browser-features';
 

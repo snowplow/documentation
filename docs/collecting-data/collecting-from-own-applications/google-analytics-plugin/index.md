@@ -28,7 +28,7 @@ Google Tag Manager does not currently support loading plugins when using Google 
 
 The best way to deploy this using Google Tag Manager is to replicate the plugin functionality by overwriting the relevant task in the GA hit builder task queue. But instead of modifying `sendHitTask` directly, a safer way is to approach it via `customTask`.
 
-### [](https://github.com/snowplow-incubator/snowplow-google-analytics-plugin#1-create-a-new-custom-javascript-variable)1\. Create a new Custom JavaScript variable
+### [](https://github.com/snowplow-incubator/snowplow-google-analytics-plugin#1-create-a-new-custom-javascript-variable)1. Create a new Custom JavaScript variable
 
 Create a new Custom JavaScript variable, and name it {{customTask - Snowplow duplicator}}. Add the following code within:
 
@@ -60,7 +60,7 @@ function() {
 
 This stores a reference to the original `sendHitTask` in a globally scoped variable (e.g. `window['_UA-12345-1_sendHitTask']`) to avoid multiple runs of this `customTask` from cascading on each other.
 
-### [](https://github.com/snowplow-incubator/snowplow-google-analytics-plugin#2-add-customtask---snowplow-duplicator-to-google-analytics-tags)2\. Add {{customTask - Snowplow duplicator}} to Google Analytics tags
+### [](https://github.com/snowplow-incubator/snowplow-google-analytics-plugin#2-add-customtask---snowplow-duplicator-to-google-analytics-tags)2. Add {{customTask - Snowplow duplicator}} to Google Analytics tags
 
 This variable must be added to every single Google Analytics tag in the GTM container, whose hits you want to duplicate to Snowplow.
 

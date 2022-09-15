@@ -38,7 +38,7 @@ This enrichment populates the following fields of the atomic event :
 
 With this information in the data warehouse it's possible to get such insights:
 
-| refr\_medium | number of sessions |
+| refr_medium | number of sessions |
 |--------------|--------------------|
 | Search       | 272,699            |
 | Internal     | 142,555            |

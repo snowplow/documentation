@@ -6,7 +6,7 @@ sidebar_position: 500
 
 You can use the following function to extract the Domain User Information from the ID cookie:
 
-```
+```javascript
 /*
 * Function to extract the Snowplow Domain User Information from the first-party cookie set by the Snowplow JavaScript Tracker
 *

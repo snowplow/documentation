@@ -122,7 +122,7 @@ Use the `ScreenViewEvent` type to track a user viewing a screen (or equivale
 
 Although name and id are not individually required, at least one must be provided or the event will fail validation and subsequently throw an exception.
 
-The event uses the following Iglu schema: [iglu:com.snowplowanalytics.snowplow/screen\_view/jsonschema/1-0-0](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0).
+The event uses the following Iglu schema: [iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0).
 
 Example:
 

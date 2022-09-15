@@ -13,7 +13,7 @@ The process involves the following high level steps:
 - Once you have a JS tracker available, you can add the tag snippet to your site. There are also alternative options described below for adding the tracker to your website.
   - If manually inserting the tag into your website or tag management solution: Snowplow BDP users can generate a tag snippet in the Snowplow BDP Console [here](https://console.snowplowanalytics.com/tag-generator). Other users can use and edit the standard tag [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/loading/index.md).
 
-```
+```javascript
  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[]; p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments) };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1; n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow")); 
 ```
 
@@ -24,7 +24,7 @@ The process involves the following high level steps:
 
 - Configure an instance of the tracker by calling `newTracker` with your desired properties.
 
-```
+```javascript
 window.snowplow('newTracker', 'sp1', '{{collector_url}}', { 
   appId: 'my-app-id'
 })
@@ -32,7 +32,7 @@ window.snowplow('newTracker', 'sp1', '{{collector_url}}', {
 
 - Then you can use the track methods to send some events. You can send a Page View event to all initialised trackers with just:
 
-```
+```javascript
 window.snowplow('trackPageView');
 ```
 

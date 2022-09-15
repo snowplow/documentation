@@ -27,7 +27,7 @@ All configuration changes are scoped to `shredder` property.
 
 Since we added another type of a shredder, one has to specify the type explicitly:
 
-```
+```json
 
 "shredder": {
   "type" : "batch",                                  # Was not necessary in R35
@@ -48,7 +48,7 @@ _`"output": {                                  # Was a string in R35
 
 In Dataflow Runner playbook you have to specify new Main classpath for RDB Shredder:
 
-```
+```text
 "--class", "com.snowplowanalytics.snowplow.rdbloader.shredder.batch.Main"
 ```
 
@@ -64,7 +64,7 @@ You only need to choose one Shredder: batch or stream. **For production environm
 
 Stream Shredder is configured within same configuration file as RDB Loader and RDB Batch Shredder, but using following properties:
 
-```
+```json
   "shredder": {       
     # A batch loader would fail, if stream type encountered
     "type" : "stream",       
@@ -103,7 +103,7 @@ If you're using a 3rd-party query engine such as Amazon Athena to query shredded
 
 Structure of the typical shredded folder now looks like following:
 
-```
+```text
 run=2021-03-29-15-40-30/
     shredding_complete.json
     output=good/

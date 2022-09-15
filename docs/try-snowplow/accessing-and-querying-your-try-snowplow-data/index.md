@@ -6,7 +6,7 @@ sidebar_position: 30
 
 ## Accessing your data
 
-Try Snowplow creates a Postgres database where any events you capture are stored. This database contains the standard Snowplow schemas: atomic (for raw data), bad\_rows (for data that has failed pipeline validation) and derived (for modeled tables).
+Try Snowplow creates a Postgres database where any events you capture are stored. This database contains the standard Snowplow schemas: atomic (for raw data), bad_rows (for data that has failed pipeline validation) and derived (for modeled tables).
 
 Details for accessing this data are available in the Try Snowplow console. You will also need to request the password from within the UI - please bear in mind you will only be able to do this once for security reasons.
 

@@ -35,7 +35,7 @@ Steps are constructed with following JSON object format consisting of four indiv
 - `match` - an expression applied when replacing field's values with new value
 - `value` - a new value to be set
 
-```
+```json
 // Replace
 {
   "op": "Replace",
@@ -71,7 +71,7 @@ Much like steps, conditions are constructed with following JSON object format co
 - `path` - JSON Path to object, the path can contain specific field names (ie. `raw`) , array ids (ie. `[1]`) or filters (by regex: `[?(@.schema=~iglu://\\.*)]`).
 - `value` - a value matcher to match against: match a regular expression, compare directly (object equality), check size for equality, less or greater than
 
-```
+```json
 // Compare values
 {
   "op": "Test",
@@ -124,7 +124,7 @@ Much like steps, conditions are constructed with following JSON object format co
 
 Flows are sequences of Steps applied one by one. Flows are mapped onto specific
 
-```
+```json
 {
   "name": "main flow",
   "conditions": [],

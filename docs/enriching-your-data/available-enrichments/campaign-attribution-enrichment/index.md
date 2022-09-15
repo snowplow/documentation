@@ -21,7 +21,7 @@ This could result in the following fields being added to the enrich event :
 | `mktSource`   | "influencer"    |
 | `mktMedium`   | "blog"          |
 | `mktChannel`  | "web"           |
-| `mktCampaign` | "spring\_offer" |
+| `mktCampaign` | "spring_offer" |
 
 This enrichment automatically knows about Google (corresponding to the “gclid” query string parameter), Microsoft (“msclkid”), and DoubleClick (“dclid”). For example, if the query string contains `&gclid=abc&` then `mkt_clickid` field will be populated with `"abc"` and `mkt_network` field would be populated with `"Google"`.
 

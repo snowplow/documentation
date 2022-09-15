@@ -41,7 +41,7 @@ We'll give it the following details:
 
 If we take the first field “First Name" and assume that the form owner makes the decisions that:
 
-1. The name of the field should be ‘form1\_first\_name’ (so everyone knows how to find it in the database later)
+1. The name of the field should be ‘form1_first_name’ (so everyone knows how to find it in the database later)
 2. Values entered should be a string (text)
 3. The string should have a minimum of two characters (to avoid initials) and a maximum of 100 characters.
 4. This field is required.
@@ -65,7 +65,7 @@ Therefore in the schema for this data structure we would display these decisions
 
 For the second form field the form owner might decide:
 
-1. The name of the field should be “form1\_contact\_number"
+1. The name of the field should be “form1_contact_number"
 2. The values entered must be a number
 3. The minimum and maximum number length should be 10 digits
 4. This is an optional field
@@ -96,7 +96,7 @@ By adding the “null" type above this means that if there is no data value sent
 
 Finally for the 3rd form field the decisions are as follows:
 
-1. The name of the field should be “opt\_into\_marketing"
+1. The name of the field should be “opt_into_marketing"
 2. The values sent are True/False; Yes = true, No = false
 3. This field is required.
 
@@ -201,7 +201,7 @@ Let’s add descriptions to the properties, for example:
 ...
 ```
 
-## 2\. Testing Your Schema
+## 2. Testing Your Schema
 
 Now that you have written your schema and published to the development registry, the next step is to test it to ensure that it works the way you want.
 

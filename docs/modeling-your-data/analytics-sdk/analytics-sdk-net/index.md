@@ -4,25 +4,25 @@ date: "2020-11-03"
 sidebar_position: 500
 ---
 
-## 1\. Overview
+## 1. Overview
 
 The [Snowplow Analytics SDK for .NET](https://github.com/snowplow/snowplow-dotnet-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your .NET event processing, data modeling and machine-learning jobs. You can use this SDK with [Azure Data Lake Analytics](https://azure.microsoft.com/en-gb/services/data-lake-analytics/), [Azure Functions](https://azure.microsoft.com/en-gb/services/functions/), [AWS Lambda](https://aws.amazon.com/lambda/), [Microsoft Orleans](https://dotnet.github.io/orleans/) and other .NET-compatible data processing frameworks.
 
 The .NET Analytics SDK makes it significantly easier to build applications that consume Snowplow enriched data directly from Event Hubs or Azure Blob Storage.
 
-## 2\. Compatibility
+## 2. Compatibility
 
 Snowplow .NET Analytics SDK targets [.NET Standard 1.3](https://github.com/dotnet/standard/blob/master/docs/versions.md).
 
-## 3\. Setup
+## 3. Setup
 
 To add the .NET Analytics as a dependency to your project, install it in the Visual Studio Package Manager Console using [NuGet](https://www.nuget.org/):
 
-```
+```powershell
 Install-Package Snowplow.Analytics
 ```
 
-## 4\. Event Transformer
+## 4. Event Transformer
 
 ### 4.1 Overview
 
@@ -43,7 +43,7 @@ The JSON Event Transformer takes a Snowplow enriched event and converts it into 
 
 The JSON Event Transformer converts a Snowplow enriched event into a single JSON like so:
 
-```
+```json
 { 
   "app_id":"demo",
   "platform":"web",
@@ -62,7 +62,7 @@ The most complex piece of processing is the handling of the self-describing JSON
 
 For example, if an enriched event contained a `com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1`, then the final JSON would contain:
 
-```
+```json
 { 
   "app_id":"demo",
   "platform":"web",
@@ -78,7 +78,7 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
 
 You can convert an enriched event TSV string to a JSON like this:
 
-```
+```csharp
 using Snowplow.Analytics.Json;
 using Snowplow.Analytics.Exceptions;
 

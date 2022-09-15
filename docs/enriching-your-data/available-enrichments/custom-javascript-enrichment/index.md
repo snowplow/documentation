@@ -29,7 +29,7 @@ JavaScript enrichment uses [Nashorn Engine](https://docs.oracle.com/javase/10/na
 
 Although the use cases for this enrichment can be endless, they don’t need to only serve analytics purposes. A very useful case might be in anti-spoofing for instance. You might want to make sure that the events being sent over are from your app or website rather than one spoofed by a hacker.
 
-To do so you might write a Javascript function that checks if a secret key is valid server side, and only then set the event with the correct “app\_id” variable that denotes it is a valid event from your property.
+To do so you might write a Javascript function that checks if a secret key is valid server side, and only then set the event with the correct “app_id” variable that denotes it is a valid event from your property.
 
 Taking this example further, you could do something like notify the user that sent the event that they are likely on a spoofing website.
 

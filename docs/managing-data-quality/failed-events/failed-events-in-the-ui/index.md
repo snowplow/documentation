@@ -32,7 +32,7 @@ By selecting a particular error you are able to get more detail:
 
 Example failed event detail view.
 
-The detailed view shows the error message as well as other useful meta data (when available) like app\_id as an example to help quickly diagnose the source and root cause of the error, as well as a bar chart indicating how the volume of failures varies over time for this particular failed event.
+The detailed view shows the error message as well as other useful meta data (when available) like app_id as an example to help quickly diagnose the source and root cause of the error, as well as a bar chart indicating how the volume of failures varies over time for this particular failed event.
 
 ## Additional infrastructure cost
 

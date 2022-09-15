@@ -25,7 +25,7 @@ The guide is illustrative. One of the nice things about Adjust is that it gives 
 
 ## Step-by-step guide
 
-### 1\. Setup the Adjust webhook
+### 1. Setup the Adjust webhook
 
 Log into Adjust and navigate to Settings -> Events screen in the dashboard. Hover over the install event, click the “edit” icon that appears and enter the following, substituting your own collector URL for `mycollector.mydomain.com`:
 
@@ -43,7 +43,7 @@ For a complete list of data Adjust can send, see the [Adjust placeholder docume
 
 At the end of this post we’ll describe how you can tailor your setup to grab just a subset.
 
-### 2\. Create the corresponding jsonschema
+### 2. Create the corresponding jsonschema
 
 In order for Snowplow to process the data sent to the Iglu webhook, we need to schema it.
 
@@ -352,7 +352,7 @@ Upload the following schema to your Iglu repo as `com.adjust.snowplow/install/j
 
 We have included a field for each placeholder that we included in our Adjust callback. Although here we’ve used the same spelling for property names as the placeholders, there is no requirement to do so in your own schema.
 
-### 3\. Create the table in Redshift
+### 3. Create the table in Redshift
 
 Create a corresponding Redshift table for the schema. We recommend autogenerating this [Schema Guru 6](https://github.com/snowplow/schema-guru), e.g. by executing the following in the root of your schema registry:
 
@@ -458,7 +458,7 @@ SORTKEY (root_tstamp);
 COMMENT ON TABLE com_adjust_snowplow_install_1 IS 'iglu:com.adjust.snowplow/install/jsonschema/1-0-0';
 ```
 
-### 4\. Create the correpsonding JSONpaths file
+### 4. Create the correpsonding JSONpaths file
 
 Finally add the following JSONpaths file to your jsonpaths folder (as `com.adjust.snowplow/install_1.json`). Your JSONpaths file should have already been auto-generated using schema-guru or Igluctl:
 
@@ -548,6 +548,6 @@ Finally add the following JSONpaths file to your jsonpaths folder (as `com.adju
 }
 ```
 
-### 5\. Extending the setup for reattribution events
+### 5. Extending the setup for reattribution events
 
 You’ve now done all that is necessary to log your Adjust installation events (with attribution data) directly into Snowplow. Read [part 2](https://discourse.snowplow.io/t/integrating-adjust-with-snowplow-to-add-mobile-attribution-data-to-the-rest-of-your-event-data-2-2/270) of our guide to find out how to extend the implementation to cover reattribution events and other Adjust events, as well as other ways to tailor the integration.

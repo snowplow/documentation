@@ -209,4 +209,4 @@ Now, provide the following details in a secure way to whoever is setting up Snow
 
 - Login URL: [https://snplow.signin.aws.amazon.com/console](https://snplow.signin.aws.amazon.com/console)
 - Username: `snowplow`
-- Password: _\[as downloaded\]_
+- Password: _[as downloaded]_

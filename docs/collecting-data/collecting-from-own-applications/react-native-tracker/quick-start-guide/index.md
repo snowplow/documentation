@@ -10,20 +10,13 @@ sidebar_position: 10
 
 [![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
-  
-  
-  
-  
-  
-  
-
 In order to start sending events using the Snowplow React Native Tracker, the following steps are involved:
 
 ## Installation
 
 To install the tracker, add it as a dependency to your React Native app:
 
-```
+```bash
 npm install --save @snowplow/react-native-tracker
 ```
 
@@ -31,7 +24,7 @@ npm install --save @snowplow/react-native-tracker
 
 Next, in your app create a new tracker using the `createTracker` method. As a minimal example:
 
-```
+```typescript
 import { createTracker } from '@snowplow/react-native-tracker';
 
 const tracker = createTracker(
@@ -50,7 +43,7 @@ The `createTracker` function takes as arguments:
 
 The optional Tracker Controller configuration has as type definition:
 
-```
+```typescript
 interface TrackerControllerConfiguration {
   trackerConfig?: TrackerConfiguration,
   sessionConfig?: SessionConfiguration,
@@ -65,7 +58,7 @@ In other words, it provides a way for a fine grained tracker configuration.
 
 As an example to create a tracker with all configurations provided (wherever applicable, the default values are shown):
 
-```
+```typescript
 const tracker = createTracker(
     'appTracker',
     {

@@ -16,13 +16,13 @@ Beam Enrich is built on top of [Apache Beam](https://beam.apache.org/) and it r
 
 Beam Enrich is published [on Docker Hub](https://hub.docker.com/repository/docker/snowplow/beam-enrich).
 
-```
+```bash
 docker pull snowplow/beam-enrich:2.0.5
 ```
 
 The docker container can be run with the following command:
 
-```
+```bash
 docker run \
   -v $PWD/config:/snowplow/config \
   -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/credentials.json \ # if running outside GCP
@@ -43,7 +43,7 @@ docker run \
 
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
-```
+```bash
 java -jar beam-enrich-2.0.5.jar \
   -runner=DataFlowRunner \
   --project=project-id \
@@ -75,7 +75,7 @@ Beam Enrich comes with a set of predefined CLI options:
 
 It’s important to note that every enrichment relying on local files will need to have the necessary files stored in [Google Cloud Storage](https://cloud.google.com/storage/), e.g. the IP lookups enrichment:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
   "data": {

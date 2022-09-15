@@ -10,7 +10,7 @@ sidebar_position: 10
 
 Assuming you already have SBT installed:
 
-```
+```bash
 $ git clone git://github.com/snowplow-incubator/right-to-be-forgotten-spark-job.git
 ..
 $ sbt assembly
@@ -19,25 +19,25 @@ $ sbt assembly
 
 The 'fat jar' is now available as:
 
-```
+```text
 target/snowplow-right-to-be-forgotten-job-x.x.x.jar
 ```
 
 ## Deploying
 
-Deploying will depend on where you have chosen to run the spark job. Assuming that are running on \[Amazon Elastic MapReduce\]\[emr\], then deploying is consists of copying the jar to S3 or directly to the master node.
+Deploying will depend on where you have chosen to run the spark job. Assuming that are running on [Amazon Elastic MapReduce][emr], then deploying is consists of copying the jar to S3 or directly to the master node.
 
 The example on running below assumes that you have copied the jar to the master node.
 
 ## Running
 
-Running R2F requires a "removal criteria" file in order to match the rows to be erased. The file consists of rows of a single JSON self-describing datum which conforms to the \[iglu schema here\]\[removal-criteria-iglu-schema\].  
+Running R2F requires a "removal criteria" file in order to match the rows to be erased. The file consists of rows of a single JSON self-describing datum which conforms to the [iglu schema here][removal-criteria-iglu-schema].  
 As can be seen from the schema, it expects a single criterion of either `json` or `pojo` fields. Special care needs to be taken that the value uniquely identifies an individual as there is a chance (e.g. when using an IP address) that it does not and more data than intended is erased.  
 To avoid that, an additional argument needs to be provided to the spark job that specifies the maximum proportion of rows from the archive that you expect to be matched in that execution (e.g. 0.5 for half), as a safeguard. The job will fail if that number is exceeded.
 
 So in your spark installation (assumed to be EMR for this example) all you would need to do is:
 
-```
+```bash
 spark-submit \
     --master yarn \
     --deploy-mode client ./snowplow-right-to-be-forgotten-job-0.1.0.jar \

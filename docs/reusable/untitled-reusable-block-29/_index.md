@@ -52,8 +52,8 @@ To test and send non-standard Snowplow events such as your own custom-contexts a
 1. Get a local copy of your Iglu repository which contains your schemas. This should be modelled after [this folder](https://github.com/snowplow/iglu-central/tree/master/schemas)
 2. Download the latest Igluctl from Bintray:
 
-wget http://dl.bintray.com/snowplow/snowplow-generic/igluctl\_0.7.0.zip
-unzip -j igluctl\_0.7.0.zip
+wget http://dl.bintray.com/snowplow/snowplow-generic/igluctl_0.7.0.zip
+unzip -j igluctl_0.7.0.zip
 
 1. Run the executable with the following input:
 

@@ -61,7 +61,7 @@ Within the base module's main playbook, `01-base-main.yml.tmpl`:
     - `platform_filters`: Default - `platform = 'mob'`. Override if required.
     - `app_id`: Default - No filter on `app_id`. Add if required.
 
-```
+```yaml
 # 01-base-main.yml.tmpl
 :variables:
    ...
@@ -99,7 +99,7 @@ Optional modules are disabled by default. Please enable where appropriate by set
 
 For a full run of the model:
 
-```
+```bash
 bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c mobile/v1/{warehouse}/sql-runner/configs/datamodeling.json -t .scripts/templates/{warehouse}.yml.tmpl;
 ```
 
@@ -115,7 +115,7 @@ There are many tools available to schedule and run SQL jobs such as the mobile m
 
 A series of tasks will need to be set to execute SQL Runner against each individual playbook of the model in turn. For example, to run the main playbook of the base module:
 
-```
+```bash
 bash {sql-runner-path} -playbook sql-runner/playbooks/standard/01-base/01-base-main.yml.tmpl -sqlroot sql-runner/sql
 ```
 
@@ -165,7 +165,7 @@ Architecture of an individual mobile module
 
 Custom modules can fit into the incremental structure by consuming the same inputs, and running before the `99-{module}-complete` playbook runs. Custom modules may also consume and intermediary tables of the standard module, which will not be dropped until the `99-{module}-complete` playbook runs.
 
-Any custom SQL that depends on a `_staged` table as its input should run before the complete step of the module which handles that same input. For example, custom logic which takes mobile\_events\_staged as an input should run before the `99-sessions-complete` playbook which truncates mobile\_events\_staged.
+Any custom SQL that depends on a `_staged` table as its input should run before the complete step of the module which handles that same input. For example, custom logic which takes mobile_events_staged as an input should run before the `99-sessions-complete` playbook which truncates mobile_events_staged.
 
 An example custom module has been included in `mobile/v1/redshift/sql-runner/sql/custom`. In this module we:
 
@@ -175,7 +175,7 @@ An example custom module has been included in `mobile/v1/redshift/sql-runner/sql
 
 The playbooks should then be run in the following order:
 
-```
+```text
 standard/01-base/01-base-main
 standard/01-base/99-base-complete
 standard/02-screen-views/01-screen-views-main

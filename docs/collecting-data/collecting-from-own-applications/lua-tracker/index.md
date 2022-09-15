@@ -28,7 +28,7 @@ Ensure you have the following installed on your system:
 
 If using `brew`, simply run:
 
-```
+```bash
 brew install lua luarocks curl
 ```
 
@@ -36,19 +36,19 @@ brew install lua luarocks curl
 
 Once these are installed, you can install the tracker using LuaRocks:
 
-```
+```bash
 luarocks install snowplowtracker
 ```
 
-Note: You may find that you need to pass in the CURL\_DIR flag if Lua cannot find `curl` by itself. Below is an example if `curl` was installed using `brew` on an Intel Mac.
+Note: You may find that you need to pass in the CURL_DIR flag if Lua cannot find `curl` by itself. Below is an example if `curl` was installed using `brew` on an Intel Mac.
 
-```
+```bash
 luarocks install snowplowtracker CURL_DIR=/usr/local/Cellar/curl/7.82.0/
 ```
 
 Or, add the Snowplow Tracker to the dependencies section of your rockspec (Note: you may still have to pass `CURL_DIR` when installing):
 
-```
+```gradle
 dependencies = {
   ...
   "SnowplowTracker"
@@ -59,7 +59,7 @@ dependencies = {
 
 To track an event, simply create a tracker instance and call one of the `track_*` methods. For example, simple tracking of a [structured event](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#structured-events):
 
-```
+```lua
 local snowplow = require("snowplow")
 local tracker = snowplow.new_tracker("{{ collector_url }}")
 

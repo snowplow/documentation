@@ -131,7 +131,7 @@ If an event is not valid against `atomic` schema, a bad row should be emitted in
 However, this is a breaking change, and we want to give some time to users to adapt, in case today they are working downstream with enriched events that are not valid against `atomic`.  
 For this reason, this new validation was added as a feature that can be deactivated like that:
 
-```
+```json
 "featureFlags": {
   "acceptInvalid": true
 }
@@ -154,7 +154,7 @@ Starting with version 3.0.0 of enrich, snowplow will be collecting the heartbeat
 
 At the base, telemetry is sending the application name and version every hour. You can help us by providing `userProvidedId` in the config file :
 
-```
+```json
 "telemetry" {
   "userProvidedId": "myCompany"
 }
@@ -162,7 +162,7 @@ At the base, telemetry is sending the application name and version every hour. Y
 
 Telemetry can be deactivated by putting the following section in the configuration file :
 
-```
+```json
 "telemetry": {
   "disable": true
 }

@@ -29,8 +29,6 @@ To understand the flow of data please refer to the following diagram:
 
 ![snowplow-mini-topology](images/snowplow-mini-topology.jpg)
 
-[Back to top](https://github.com/snowplow/snowplow-mini/wiki/Setup-guide-GCP---0.6.1#top)
-
 ## Importing public tarballs to a GCP project
 
 Our offering for GCP is 3 compressed tarballs for 3 different sized Snowplow Mini, produced through `gcloud`'s [`export`](https://cloud.google.com/sdk/gcloud/reference/compute/images/export) command. Simply put, they are Virtual Disk images exported in GCP format, a `disk.raw` file that has been tarred and gzipped.
@@ -43,7 +41,7 @@ Assuming you have `gcloud` setup and configured for your GCP project, use `gc
 
 A sample usage would be as following.
 
-```
+```bash
 gcloud compute images create \
 imported-sp-mini \
 --source-uri \

@@ -10,7 +10,7 @@ The only breaking change from the 0.6.x series is the new format of the configur
 
 Using Repeater as an example, if your configuration for 0.6.x looked like this:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow.storage/bigquery_config/jsonschema/1-0-0",
   "data": {
@@ -35,7 +35,7 @@ Using Repeater as an example, if your configuration for 0.6.x looked like this:
 
 it will now look like this:
 
-```
+```json
 {
   "projectId": "com-acme"
 
@@ -94,7 +94,7 @@ it will now look like this:
 
 And instead of running it like this:
 
-```
+```bash
 $ ./snowplow-bigquery-repeater \
     --config=$CONFIG \
     --resolver=$RESOLVER \
@@ -108,7 +108,7 @@ $ ./snowplow-bigquery-repeater \
 
 you will run it like this:
 
-```
+```bash
 $ docker run \
   -v /path/to/resolver.json:/resolver.json \
   snowplow/snowplow-bigquery-repeater:1.0.1 \

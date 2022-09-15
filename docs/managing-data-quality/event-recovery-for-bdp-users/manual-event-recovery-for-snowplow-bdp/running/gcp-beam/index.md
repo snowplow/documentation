@@ -20,7 +20,7 @@ Generate a new key for the service account and save down to your local machine.
 
 To build the docker image, run:
 
-```
+```bash
 sbt beam/docker:publishLocal
 ```
 
@@ -28,7 +28,7 @@ sbt beam/docker:publishLocal
 
 To run on Apache Beam in GCP Dataflow run it through a docker-deployment the options to set are shown below.
 
-```
+```bash
 -v {{path-to-local-key-file}}.json:/snowplow/config/credentials.json \
 -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/credentials.json \
   snowplow/snowplow-event-recovery-beam:0.3.0-rc14 \

@@ -38,32 +38,30 @@ This makes it easy to either install the tracker locally, or to add it as a depe
 
 To install the Snowplow Python Tracker locally, assuming you already have Pip installed:
 
-```
+```bash
 $ pip install snowplow-tracker --upgrade
 ```
 
 **_\*\*New in v0.9.0_** : To install the Snowplow Tracker with extras:
 
-```
+```bash
 # Redis extra
 $ pip install snowplow-tracker[redis]
 # Celery extra
 $ pip install snowplow-tracker[celery]
 ```
 
-  
-
 To add the Snowplow Tracker as a dependency to your own Python app, edit your `requirements.txt` and add:
 
-```
+```text
 snowplow-tracker==0.10.0
 ```
 
-### easy\_install
+### easy_install
 
-If you are still using easy\_install:
+If you are still using easy_install:
 
-```
+```bash
 $ easy_install -U snowplow-tracker
 ```
 
@@ -73,5 +71,5 @@ Please refer to the table below to identify the recommended tracker version for 
 
 | Python version | snowplow-tracker version |
 | --- | --- |
-| \>=3.5 | 0.10.0 |
+| >=3.5 | 0.10.0 |
 | 2.7 | 0.9.1 |

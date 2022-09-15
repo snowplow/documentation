@@ -4,19 +4,19 @@ date: "2020-11-02"
 sidebar_position: 100
 ---
 
-## 1\. Overview
+## 1. Overview
 
 The [Snowplow Analytics SDK for Scala](https://github.com/snowplow/snowplow-scala-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your Scala event processing,  
 data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), [Apache Flink](https://flink.apache.org/), [Scalding](https://github.com/twitter/scalding), [Apache Samza](http://samza.apache.org/) and other JVM-compatible data processing frameworks.
 
 The Scala Analytics SDK makes it significantly easier to build applications that consume Snowplow enriched data directly from Kinesis or S3.
 
-## 2\. Compatibility
+## 2. Compatibility
 
 Snowplow Scala Analytics SDK was compiled against Scala versions 2.12 and 2.13. 
 Minimum required Java Runtime is JRE8.
 
-## 3\. Setup
+## 3. Setup
 
 The latest version of Snowplow Scala Analytics SDK is 2.1.0 and it is available on Maven Central.
 
@@ -24,7 +24,7 @@ The latest version of Snowplow Scala Analytics SDK is 2.1.0 and it is available 
 
 If you’re using SBT, add the following lines to your build file:
 
-```
+```scala
 // Dependency
 libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-analytics-sdk" % "2.1.0"
 ```
@@ -35,7 +35,7 @@ Note the double percent (`%%`) between the group and artifactId. This will ensur
 
 If you are using Gradle in your own job, then add following lines in your `build.gradle` file:
 
-```
+```gradle
 dependencies {
     ...
     // Snowplow Scala Analytics SDK
@@ -49,7 +49,7 @@ Note that you need to change `_2.12` to `_2.13` in artifactId if you're using Sc
 
 If you are using Maven in your own job, then add following lines in your `pom.xml` file:
 
-```
+```xml
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-scala-analytics-sdk_2.12</artifactId>
@@ -59,7 +59,7 @@ If you are using Maven in your own job, then add following lines in your `pom.xm
 
 Note that you need to change `_2.12` to `_2.13` in artifactId if you're using Scala 2.13.
 
-## 4\. Scala Analytics SDK Event Transformer
+## 4. Scala Analytics SDK Event Transformer
 
 ### 4.1 Overview
 
@@ -81,7 +81,7 @@ The JSON Event Transformer takes a Snowplow enriched event and converts it into 
 
 The JSON Event Transformer converts a Snowplow enriched event into an instance of the `Event` case class, a representation of a canonical Snowplow event, like so:
 
-```
+```scala
 Event(
   app_id = Some("angry-birds"),
   platform = Some("web"),
@@ -105,7 +105,7 @@ The most complex piece of processing is the handling of the self-describing JSON
 
 1. Under the original "lossy" behavior, if an enriched event contained a `com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1`, then the unstructured event field would be rendered in the final JSON like this:
 
-```
+```json
 "unstruct_event_com_snowplowanalytics_snowplow_link_click_1": {
   "targetUrl": "http://www.example.com",
   "elementClasses": ["foreground"],
@@ -115,7 +115,7 @@ The most complex piece of processing is the handling of the self-describing JSON
 
 2. Under the new "lossless" behavior, available since 0.3.1, if an enriched event contained a `com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1`, then the final JSON (if turned into a string) would contain a self-describing JSON object instead:
 
-```
+```json
 "unstruct_event": {
   "schema": "iglu:com.snowplowanalytics.snowplow/link_click/1-0-1",
   "data": {
@@ -129,8 +129,8 @@ The most complex piece of processing is the handling of the self-describing JSON
 Along with the `Event` case class, the JSON Event Transformer comes with the following functions:
 
 - `Event.parse(line)` - similar to the old `transform` function, this method accepts an enriched Snowplow event as a string and returns an `Event` instance as a result.
-- `event.toJson(lossy)` - similar to the old `getValidatedJsonEvent` function, it transforms an `Event` into a validated JSON whose keys are the field names corresponding to the EnrichedEvent POJO of the Scala Common Enrich project. If the lossy argument is true, any self-describing events in the fields (unstruct\_event, contexts and derived\_contexts) are returned in a "shredded" format, e.g. `"unstruct_event_com_acme_1_myField": "value"`. If it is set to false, they are not flattened into underscore-separated top-level fields, using a standard self-describing format instead.
-- `event.inventory` - extracts metadata from the event containing information about the types and Iglu URIs of its shred properties (unstruct\_event, contexts and derived\_contexts). Unlike version 0.3.0, it no longer requires a `transformWithInventory` call and can be obtained from any `Event` instance.
+- `event.toJson(lossy)` - similar to the old `getValidatedJsonEvent` function, it transforms an `Event` into a validated JSON whose keys are the field names corresponding to the EnrichedEvent POJO of the Scala Common Enrich project. If the lossy argument is true, any self-describing events in the fields (unstruct_event, contexts and derived_contexts) are returned in a "shredded" format, e.g. `"unstruct_event_com_acme_1_myField": "value"`. If it is set to false, they are not flattened into underscore-separated top-level fields, using a standard self-describing format instead.
+- `event.inventory` - extracts metadata from the event containing information about the types and Iglu URIs of its shred properties (unstruct_event, contexts and derived_contexts). Unlike version 0.3.0, it no longer requires a `transformWithInventory` call and can be obtained from any `Event` instance.
 - `atomic` - returns the event as a map of keys to Circe JSON values, while dropping inventory fields. This method can be used to modify an event's JSON AST before converting it into a final result.
 - `ordered` - returns the event as a list of key/Circe JSON value pairs. Unlike `atomic`, which has randomized key ordering, this method returns the keys in the order of the canonical event model, and is particularly useful for working with relational databases.
 
@@ -149,7 +149,7 @@ The Scala Analytics SDK is a great fit for performing Snowplow [event data model
 
 Here’s the code we use internally for our own data modeling jobs:
 
-```
+```scala
 import cats.data.Validated
 import com.snowplowanalytics.snowplow.analytics.scalasdk.Event
 
@@ -169,7 +169,7 @@ The Scala Analytics SDK is a great fit for performing analytics-on-write, monito
 
 Here’s some sample code for transforming enriched events into JSON inside a Scala Lambda:
 
-```
+```scala
 import com.snowplowanalytics.snowplow.analytics.scalasdk.Event
 
 def recordHandler(event: KinesisEvent) {

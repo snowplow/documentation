@@ -5,7 +5,7 @@ date: "2021-03-26"
 sidebar_position: 70
 ---
 
-## 1\. What is Tableau, and why use it to analyze / visualize Snowplow data?
+## 1. What is Tableau, and why use it to analyze / visualize Snowplow data?
 
 Tableau is a Business Intelligence program, in the mould of Microstrategy or Pentaho. These types of software make it possible for users to perform OLAP analysis, which typically involves aggregating data by different dimensions and metrics, visualizing that data graphically, and then exploring relationships in the data by slicing and dicing different metrics by different dimensions.
 
@@ -17,7 +17,7 @@ Tableau has a number of strengths which account for why we prefer it to other BI
 
 Like most other BI tools: Tableau has limitations when used outside of traditional OLAP analysis: we do not recommend it for statistical analysis (although it has some basic capabilities) or more bespoke graphs. For this type of capability, we recommend [R](/docs/tutorials/setting-up-r-to-perform-more-sophisticated-analysis-on-your-snowplow-data/index.md).
 
-## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#2-download-and-get-started-with-tableau)2\. Download and get started with Tableau
+## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#2-download-and-get-started-with-tableau)2. Download and get started with Tableau
 
 If you are not already using Tableau, you can download a 30 day trial version of the desktop product from the [Tableau website](http://www.tableausoftware.com/products/trial).
 
@@ -25,13 +25,13 @@ Note: Tableau desktop **only** works on Windows. If you're using Linux or a Ma
 
 Installing Tableau desktop for windows is straightforward: simply [download the executable](http://www.tableausoftware.com/products/trial) and run it.
 
-## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#3-connecting-tableau-to-snowplow-data-in-redshift)3\. Connecting Tableau to Snowplow data in Redshift
+## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#3-connecting-tableau-to-snowplow-data-in-redshift)3. Connecting Tableau to Snowplow data in Redshift
 
 Launch Tableau, and select **Connect to data** from the left hand menu
 
 ![](images/1.jpg)
 
-Tableau presents a list of data sources to connect to. Select \*\*Amazon Redshift" from the **On a server** list:
+Tableau presents a list of data sources to connect to. Select "Amazon Redshift" from the **On a server** list:
 
 ![](images/2.jpg)
 
@@ -63,15 +63,15 @@ We can fetch these details directly from the AWS console. Log into [console.aws
 
 **Troubleshooting your connection**: For security, Amazon only lets computers access a Redshift cluster where those computers are located at an IP address that has been white-listed. Hence, in order to connect Tableau, you must make sure that the machine running Tableau is on a white-listed IP address. Instructions on how to white-list IP addresses in Redshift are given [here](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/launch-a-redshift-cluster/index.md).
 
-## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#4-getting-started-analyzing-snowplow-data-in-tableau)4\. Getting started analyzing Snowplow data in Tableau
+## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#4-getting-started-analyzing-snowplow-data-in-tableau)4. Getting started analyzing Snowplow data in Tableau
 
 ### [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#41-plotting-our-first-graph-number-of-uniques-over-time)4.1 Plotting our first graph: number of uniques over time
 
 To kick in the tyres, we'll walk through the process of plotting the number of uniques that visit the site over time.
 
-"Uniques" is a metric. (Or in Tableau terminology - a "measure".) If you look in the list of measures in Tableau, you wont see "Uniques": all the fields you'll see are columns in the Snowplow events table where the data type is numeric. In some case, these really are metrics / measures (e.g. "ev\_value", "ti\_quantity", "ti\_price", "tr\_total", "pp\_yoffset\_max", "pp\_yoffset\_min" etc.) In other cases, Tableau has incorrectly assumed that numeric dimensions are measures (e.g. "domain\_sessionidx", "dvce\_screenheight", "page\_urlport", "txn\_id"). We can simply drag those incorrectly classified fields from the "Measures" pane into the "Dimensions" pane.
+"Uniques" is a metric. (Or in Tableau terminology - a "measure".) If you look in the list of measures in Tableau, you wont see "Uniques": all the fields you'll see are columns in the Snowplow events table where the data type is numeric. In some case, these really are metrics / measures (e.g. "ev_value", "ti_quantity", "ti_price", "tr_total", "pp_yoffset_max", "pp_yoffset_min" etc.) In other cases, Tableau has incorrectly assumed that numeric dimensions are measures (e.g. "domain_sessionidx", "dvce_screenheight", "page_urlport", "txn_id"). We can simply drag those incorrectly classified fields from the "Measures" pane into the "Dimensions" pane.
 
-We need to create a "Uniques" measures field. This will be calculated by counting the number of distinct user IDs. (In our example, we're going to count the number of distinct "domain\_userid".) To do this, right click on the "Measures" pane and select "Create calculated field". Name the field "Uniques" and enter the following formula into the formula box:
+We need to create a "Uniques" measures field. This will be calculated by counting the number of distinct user IDs. (In our example, we're going to count the number of distinct "domain_userid".) To do this, right click on the "Measures" pane and select "Create calculated field". Name the field "Uniques" and enter the following formula into the formula box:
 
 ```r
 COUNTD([domain_userid])
@@ -87,11 +87,11 @@ Select OK. The new field appears in the Measures pane. We can now drag it into t
 
 Note that the total number of uniques for our data set shows on the main part of the screen. Tableau reminds us what the number means: in the **Marks** section of the window, **AGG(Uniques)** is listed next to an icon that indicates that this measure is plotted simply as a label.
 
-Now we want to slice the number of uniques by day. To do this, drag the "collector\_tstamp" dimension from the "Dimensions" pane to columns shelf:
+Now we want to slice the number of uniques by day. To do this, drag the "collector_tstamp" dimension from the "Dimensions" pane to columns shelf:
 
 ![](images/10.jpg)
 
-Tableau has assumed we want to plot uniques by year. To change the level of granularity so we plot it by day, hover over the "YEAR(collector\_tstamp)" dimension in the column pane and then click on the dropdown option that appears. Select the 2nd "Day" option in the dropdown to make this change.
+Tableau has assumed we want to plot uniques by year. To change the level of granularity so we plot it by day, hover over the "YEAR(collector_tstamp)" dimension in the column pane and then click on the dropdown option that appears. Select the 2nd "Day" option in the dropdown to make this change.
 
 Now to make the plot a familiar line graph, click on the **Show me** toolbar at the top right. A toolbar appears. Select the line graph image:
 
@@ -191,7 +191,7 @@ When you fetch smaller data sets from Snowplow / Redshift, you can ask Tableau t
 
 ![](images/6.jpg)
 
-## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#5-next-steps)5\. Next steps
+## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#5-next-steps)5. Next steps
 
 There is a huge number of ways you can interrogate Snowplow data using Tableau. For some ideas, see the following blog posts for some examples:
 

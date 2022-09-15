@@ -61,7 +61,7 @@ To enable cross-batch natural deduplication, you must provide a third configurat
 
 An example step definition can look like this:
 
-```
+```json
 {
   "type": "CUSTOM_JAR",
   "name": "RDB Transformer",
@@ -121,7 +121,7 @@ If you provide a `duplicate-storage-config` that specifies a DynamoDB table but 
 4. After the table is created, note down its ARN in the "Overview" tab.
 5. Create the IAM policy In the AWS console, navigate to IAM and go to "Policies". Select "Create Your Own Policy" and choose a descriptive name. Here's an example Policy Document that you can paste:
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [

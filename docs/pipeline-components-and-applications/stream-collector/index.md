@@ -25,7 +25,7 @@ In a nutshell: the Stream Collector receives events from a tracker, sets/updates
 
 In pseudocode terms:
 
-```
+```text
 if (request contains an "sp" cookie) {
     Record that cookie as the user identifier
     Set that cookie with a now+1 year cookie expiry
@@ -49,7 +49,7 @@ Binary serialization allows for:
 
 The Snowplow Thrift raw event format conforms to [this Thrift schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/CollectorPayload/thrift/1-0-0). For easier perception, the structure of the collector payload is depicted below.
 
-```
+```text
 struct CollectorPayload {
 	31337: string schema
 

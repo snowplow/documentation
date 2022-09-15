@@ -14,7 +14,7 @@ Each tracker instance must be initialized with an Emitter which is responsible f
 
 Backed by a [Http4s](https://http4s.org/) client, this emitter captures actions in the context of a functional effect type, such as a cats IO, ZIO or Monix Task. This is the recommended emitter if you are familiar with functional programming and the cats ecosystem of type classes.
 
-```
+```scala
 import org.http4s.client.blaze.BlazeClientBuilder
 import com.snowplowanalytics.snowplow.scalatracker.Tracker
 import com.snowplowanalytics.snowplow.scalatracker.Emitter.EndpointParams
@@ -49,7 +49,7 @@ The above code:
 
 Your application might then use the tracker by flatMapping over the functional effect:
 
-```
+```scala
 for {
   _ <- tracker.trackPageView("http://example.com")
   _ <- tracker.trackTransaction("order1234", 42.0)
@@ -66,7 +66,7 @@ The above code:
 - Creates a blocking emitter `emitter2` which sends events to “myothercollector.com” on port 8080
 - Creates a tracker which can be used to send events to all emitters
 
-```
+```scala
 import scala.concurrent.ExecutionContext.Implicits.global
 
 import com.snowplowanalytics.snowplow.scalatracker.idimplicits._
@@ -82,7 +82,7 @@ val tracker = new Tracker(NonEmptyList.of(emitter1, emitter2), "mytrackername", 
 
 When using this emitter, the methods on the tracker all return `Unit`, so there is no requirement to flatMap over effect types.
 
-```
+```scala
 tracker.trackPageView("http://example.com") // returns Unit
 tracker.trackTransaction("order1234", 42.0) // returns Unit
 ```
@@ -93,7 +93,7 @@ The `SyncEmitter` blocks the whole thread when it sends events to the collector.
 
 You can configure a subject with extra data and attach it to the tracker so that the data will be attached to every event:
 
-```
+```scala
 val subject = new Subject()
   .setUserId("user-00035")
   .setPlatform(Desktop)
@@ -106,7 +106,7 @@ Alternatively, you can set the subject for each event individually.
 
 Emitters use a buffer, so they can send larger payloads comprising several events, instead of sending each event immediately. You can choose the behaviour of your emitter's buffering by passing in a `BufferConfig` during initialisation. For example:
 
-```
+```scala
 val emitter = Http4sEmitter.build(endpoint, bufferConfig = PayloadSize(40000))
 ```
 
@@ -120,7 +120,7 @@ The available configs are:
 
 Emitters can be configured to retry sending events to the collector if the initial attempt fails. For example:
 
-```
+```scala
 val emitter = Http4sEmitter.build(endpoint, retryPolicy = MaxAttempts(10))
 ```
 
@@ -140,7 +140,7 @@ An EventQueuePolicy can be paired with an appropriate `RetryPolicy`, which contr
 
 For example:
 
-```
+```scala
 val emitter = new Http4sEmitter(endpoint, queuePolicy = IgnoreWhenFull(100))
 ```
 
@@ -155,7 +155,7 @@ The available policies are:
 
 You can configure your tracker to add a context to every event sent:
 
-```
+```scala
 val tracker = Tracker(emitters, namespace, appId).addContext(selfDescribingJson)
 ```
 
@@ -165,7 +165,7 @@ There is also syntax for adding EC2 or GCE contexts automatically:
 
 Amazon [Elastic Cloud](https://aws.amazon.com/ec2/) can provide basic information about instance running your app. You can add this informational as additional custom context to all sent events by enabling it in Tracker after initializaiton of your tracker:
 
-```
+```scala
 import com.snowplowanalytics.snowplow.scalatracker.metadata._
 val tracker = Tracker(emitters, ns, appId).enableEc2Context()
 ```
@@ -174,7 +174,7 @@ val tracker = Tracker(emitters, ns, appId).enableEc2Context()
 
 Google [Cloud Compute Engine](https://cloud.google.com/compute) can provide basic information about instance running your app. You can add this informational as additional custom context to all sent events by enabling it in Tracker after initializaiton of your tracker:
 
-```
+```scala
 import com.snowplowanalytics.snowplow.scalatracker.metadata._
 val tracker = Tracker(emitters, ns, appId).enableGceContext()
 ```
@@ -187,7 +187,7 @@ All emitters supplied with Scala Tracker support callbacks invoked after every s
 
 Callbacks should have following signature:
 
-```
+```scala
 type Callback = (Emitter.EndpointParams, Emitter.Request, Emitter.Result) => Unit
 ```
 
@@ -197,7 +197,7 @@ type Callback = (Emitter.EndpointParams, Emitter.Request, Emitter.Result) => Uni
 
 To add a callback to `AsyncBatchEmitter` you can use following approach:
 
-```
+```scala
 import com.snowplowanalytics.snowplow.scalatracker.Emitter._
 
 def emitterCallback(params: EndpointParams, req: Request, res: Result): Unit = {

@@ -8,13 +8,13 @@ sidebar_position: 0
 
 The Snowplow Ruby Tracker is compatible with Ruby 2.1+, including 3.0+. To install it locally:
 
-```
+```bash
 $ gem install snowplow-tracker
 ```
 
 To add the Snowplow Tracker to your Ruby app or gem, add this line to your Gemfile:
 
-```
+```ruby
 gem 'snowplow-tracker', '~> 0.8.0'
 ```
 
@@ -42,7 +42,7 @@ The Tracker must be initialized with an Emitter or the subclass AsyncEmitter (or
 
 Initializing a tracker instance:
 
-```
+```ruby
 require 'snowplow-tracker'
 
 emitter = SnowplowTracker::Emitter.new(endpoint: 'collector.example.com')
@@ -53,7 +53,7 @@ tracker = SnowplowTracker::Tracker.new(emitters: [emitter])
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
 
-```
+```ruby
 require 'snowplow-tracker'
 
 emitter = SnowplowTracker::Emitter.new('collector.example.com')
@@ -72,7 +72,7 @@ The final initialization parameter is a setting for the base64-encoding of any J
 
 Initializing a tracker instance with all possible settings used:
 
-```
+```ruby
 require 'snowplow-tracker'
 
 SnowplowTracker::Tracker.new(emitters: SnowplowTracker::Emitter.new(endpoint: 'collector.example.com'),
@@ -84,7 +84,7 @@ SnowplowTracker::Tracker.new(emitters: SnowplowTracker::Emitter.new(endpoint: 'c
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this-1)
 
-```
+```ruby
 require 'snowplow-tracker'
 
 SnowplowTracker::Tracker.new(SnowplowTracker::Emitter.new('collector.example.com'),

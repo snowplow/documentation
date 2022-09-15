@@ -12,7 +12,7 @@ To create a new subject:
 $subject = new Subject();
 ```
 
-By default the subject has one piece information in it already, the platform \["p" => "srv"\].
+By default the subject has one piece information in it already, the platform ["p" => "srv"].
 
 The Subject class contains a variety of 'set' methods to attach extra data to your event.
 
@@ -202,13 +202,13 @@ $subject->setDomainUserId("domain-id");
 
 This method lets you pass a session ID in to Snowplow:
 
-```
+```php
 $subject->setSessionId($sessionId);
 ```
 
 The session ID should be a string:
 
-```
+```php
 $subject->setSessionId("759e1c9a-6b74-403c-8b6f-18eb9f0c2f02");
 ```
 
@@ -216,12 +216,12 @@ $subject->setSessionId("759e1c9a-6b74-403c-8b6f-18eb9f0c2f02");
 
 This method lets you pass a session index in to Snowplow:
 
-```
+```php
 $subject->setSessionIndex($sessionIndex);
 ```
 
 The session index should be a number:
 
-```
+```php
 $subject->setSessionIndex(1);
 ```

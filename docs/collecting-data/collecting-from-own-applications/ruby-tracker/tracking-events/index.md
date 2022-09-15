@@ -47,7 +47,7 @@ The `track_self_describing_event` method has one required argument, which must b
 
 Example:
 
-```
+```ruby
 self_desc_json = SnowplowTracker::SelfDescribingJson.new(
   "iglu:com.example_company/save_game/jsonschema/1-0-2",
   {
@@ -63,7 +63,7 @@ tracker.track_self_describing_event(event_json: self_desc_json)
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
 
-```
+```ruby
 self_desc_json = SnowplowTracker::SelfDescribingJson.new(
   "iglu:com.example_company/save_game/jsonschema/1-0-2",
   {
@@ -95,7 +95,7 @@ As these fields are fairly arbitrary, we recommend following the advice in this 
 
 Example:
 
-```
+```ruby
 tracker.track_struct_event(category: 'shop',
                            action: 'add-to-basket',
                            property: 'pcs',
@@ -104,7 +104,7 @@ tracker.track_struct_event(category: 'shop',
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
 
-```
+```ruby
 tracker.track_struct_event('shop', 'add-to-basket', nil, 'pcs', 2)
 ```
 
@@ -116,7 +116,7 @@ As a server-side language, your Ruby code won't automatically have access to the
 
 Example:
 
-```
+```ruby
 tracker.track_page_view(page_url: 'www.example.com',
                         page_title: 'example',
                         referrer: 'www.referrer.com')
@@ -124,7 +124,7 @@ tracker.track_page_view(page_url: 'www.example.com',
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
 
-```
+```ruby
 tracker.track_page_view('www.example.com', 'example', 'www.referrer.com')
 ```
 
@@ -132,18 +132,18 @@ tracker.track_page_view('www.example.com', 'example', 'www.referrer.com')
 
 Use `track_screen_view` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages. The arguments are `name` and `id`; while both are optional, you must provided at least one of them to create a valid event. "Name" is the human-readable screen name, and "ID" should be the unique screen ID.
 
-This method creates an `unstruct` event, by creating a SelfDescribingJson and calling `track_self_describing_event`. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen\_view/jsonschema/1-0-0", and the data field will contain the name and/or ID which you provide. That schema is hosted on the schema repository [Iglu Central](http://iglucentral.com/), and so will always be available to your pipeline.
+This method creates an `unstruct` event, by creating a SelfDescribingJson and calling `track_self_describing_event`. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", and the data field will contain the name and/or ID which you provide. That schema is hosted on the schema repository [Iglu Central](http://iglucentral.com/), and so will always be available to your pipeline.
 
 Example:
 
-```
+```ruby
 tracker.track_screen_view(name: 'HUD > Save Game',
                           id: 'screen23')
 ```
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
 
-```
+```ruby
 tracker.track_screen_view('HUD > Save Game', 'screen23')
 ```
 
@@ -159,7 +159,7 @@ The "item" hash records each item's unique SKU identifier, value, and how many w
 
 Example:
 
-```
+```ruby
 transaction = {
   order_id: '12345',
   total_value: 35,
@@ -187,7 +187,7 @@ tracker.track_ecommerce_transaction(transaction: transaction,
 
 Note: older versions of the Ruby tracker have a bug in `track_ecommerce_transaction`: hashes with symbols for keys are not accepted. The event will fail silently. You must use only string keys. This was fixed in version 0.7.0.
 
-```
+```ruby
 transaction = {
   'order_id' => '12345',
   'total_value' => 35,

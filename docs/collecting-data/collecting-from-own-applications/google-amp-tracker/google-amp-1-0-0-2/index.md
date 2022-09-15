@@ -90,7 +90,7 @@ Notes:
 
 ### `userId`
 
-Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) field.
+Specify the optional `"userId"` var to set the uid/user_id  [Snowplow](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) field.
 
 ```javascript
 "vars": {
@@ -100,7 +100,7 @@ Specify the optional `"userId"` var to set the uid/user\_id  [Snowplow](https://
 
 ### `nameTracker`
 
-Specify the optional "nameTracker" var to set the tna/name\_tracker [Snowplow tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) field.
+Specify the optional "nameTracker" var to set the tna/name_tracker [Snowplow tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) field.
 
 ```javascript
 "vars": {
@@ -307,7 +307,7 @@ If you want to analyze events sent via this tracker, you may prefer to query for
 
 ### Page view and ping aggregation
 
-By default, the  [AMP web page context](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_web_page/jsonschema/1-0-0) is attached to every event. This will contain the AMP-defined [PAGE\_VIEW\_ID\_64](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#page-view-id-64), which defined as "intended to be random with a high entropy and likely to be unique per URL, user and day".
+By default, the  [AMP web page context](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_web_page/jsonschema/1-0-0) is attached to every event. This will contain the AMP-defined [PAGE_VIEW_ID_64](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#page-view-id-64), which defined as "intended to be random with a high entropy and likely to be unique per URL, user and day".
 
 Users can aggregate page views, page pings and other events on-page by this ID to aggregate engaged time, and model events to a page view level, by combining it with the url, amp client ID, and date.
 
@@ -315,7 +315,7 @@ Note that page pings and the page view ID itself are not defined by Snowplow's l
 
 ### User Identification
 
-By default, the  [AMP ID](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_id/jsonschema/1-0-0) context is attached to every event. This contains the [AMP Client ID](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#client-id), the `user_id` (if set via the `userId` var), and the domain\_userid (if passed to an AMP page via cross-domain linking - more detail below).
+By default, the  [AMP ID](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_id/jsonschema/1-0-0) context is attached to every event. This contains the [AMP Client ID](https://github.com/ampproject/amphtml/blob/master/spec/amp-var-substitutions.md#client-id), the `user_id` (if set via the `userId` var), and the domain_userid (if passed to an AMP page via cross-domain linking - more detail below).
 
 This provides a map between the main relevant identifiers, which can be used to model user journeys across platforms. Users can choose to instrument further user identification methods using custom contexts.
 
@@ -355,7 +355,7 @@ Where a user moves frrom an AMP page to a standard web page which is tracked by 
 ...
 ```
 
-This will add a querystring parameter 'linker=' to the destination url, which contains the amp\_id value, base-64 encoded. This will look something like this: `?sp_amp_linker=1*1c1wx43*amp_id*amp-a1b23cDEfGhIjkl4mnoPqr`.
+This will add a querystring parameter 'linker=' to the destination url, which contains the amp_id value, base-64 encoded. This will look something like this: `?sp_amp_linker=1*1c1wx43*amp_id*amp-a1b23cDEfGhIjkl4mnoPqr`.
 
 The structure of this param is explained in the [AMP documentation](https://github.com/ampproject/amphtml/blob/master/extensions/amp-analytics/linker-id-receiving.md) - models can extract the base64-encoded AMP Client ID, decode it, and map it to the domain userid (or any other user value) from the Javascript tracker.
 

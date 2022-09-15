@@ -132,7 +132,7 @@ If the worker for any reason fails to successfully send a request it will rename
 
 Example Emitter creation:
 
-```
+```php
 $emitter = new FileEmitter($collector_uri, false, "POST", 2, 15, 100, "/tmp/snowplow");
 ```
 
@@ -140,7 +140,7 @@ The buffer for the file emitter works a bit differently to the other emitters in
 
 Constructor:
 
-```
+```php
 public function __construct($uri, $protocol = NULL, $type = NULL, $workers = NULL, $timeout = NULL, $buffer_size = NULL, $debug = false, $log_dir = NULL)
 ```
 
@@ -161,7 +161,7 @@ Arguments:
 
 Debug mode is enabled on emitters by setting the `$debug` argument in the emitter constructor to `true`:
 
-```
+```php
 $emitter = new SyncEmitter($collector_uri, "http", "POST", 50, true);
 ```
 
@@ -169,7 +169,7 @@ By default, debug mode will create a new directory called `/debug/` in the roo
 
 If physically storing the information is not possible due to not having the correct write permissions or simply not wanted it can be turned off by updating the following value in the Constants class:
 
-```
+```php
 const DEBUG_LOG_FILES = false;
 ```
 

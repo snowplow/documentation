@@ -108,8 +108,8 @@ For deployments where multiple trackers are used (e.g. for businesses that use t
 | `nuid`        | `network_userid`    | text     | Unique identifier for a user, based on a cookie from the collector (so set at a network level and shouldn't be set by a tracker) | Yes              | `ecdff4d0-9175-40ac-a8bb-325c49733607` |
 | `tnuid`       | `network_userid`    | text     | Can be used be a tracker to overwrite the nuid                                                                                   | Yes              | `ecdff4d0-9175-40ac-a8bb-325c49733607` |
 | `uid`         | `user_id`           | text     | Unique identifier for user, set by the business using `setUserId`                                                                | Yes              | `jon.doe@email.com`                    |
-| `vid`         | `domain_sessionidx` | int      | Index of number of visits that this user\_id has made to this domain e.g. `1` is first visit                                     | Yes              | `1`, `2`...                            |
-| `sid`         | `domain_sessionid`  | text     | Unique identifier (UUID) for this visit of this user\_id to this domain                                                          | Yes              | `9c65e7f3-8e8e-470d-b243-910b5b300da0` |
+| `vid`         | `domain_sessionidx` | int      | Index of number of visits that this user_id has made to this domain e.g. `1` is first visit                                     | Yes              | `1`, `2`...                            |
+| `sid`         | `domain_sessionid`  | text     | Unique identifier (UUID) for this visit of this user_id to this domain                                                          | Yes              | `9c65e7f3-8e8e-470d-b243-910b5b300da0` |
 | `ip`          | `user_ipaddress`    | text     | IP address                                                                                                                       | Yes              | `37.157.33.178`                        |
 
 We recommend setting the `uid` / `user_id` parameter: as this is the cornerstone of all user-centric analytics and is a valuable data point alonside `duid` / `domain_userid` and `nuid` / `network_userid` from web tracking.
@@ -137,7 +137,7 @@ In addition, there is a set of browser-specific parameters that only makes sense
 | **Parameter** | **Maps to**                                 | **Type** | **Description**                                              | **Implemented?** | **Example values**                                                                                                      |
 |---------------|---------------------------------------------|----------|--------------------------------------------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------|
 | `url`         | `page_url`                                  | text     | Page URL                                                     | Yes              | `http%3A%2F%2Ftest.psybazaar.com%2F2-tarot-cards`                                                                       |
-| `ua`          | `useragent`                                 | text     | Useragent (a.k.a. browser string)                            | Yes              | Mozilla/5.0 (Macintosh; Intel Mac OS X 10\_9\_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6 Safari/537.78.2 |
+| `ua`          | `useragent`                                 | text     | Useragent (a.k.a. browser string)                            | Yes              | Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko) Version/7.0.6 Safari/537.78.2 |
 | `page`        | `page_title`                                | text     | Page title                                                   | Yes              | `Tarot%20cards`                                                                                                         |
 | `refr`        | `page_referrer`                             | text     | Referrer URL                                                 | Yes              | `http%3A%2F%2Ftest.psybazaar.com%2F`                                                                                    |
 | `fp`          | `user_fingerprint`                          | integer  | User identifier based on (hopefully unique) browser features | Yes              | `4048966212`                                                                                                            |
@@ -193,7 +193,7 @@ Pageview tracking is used to record views of web pages.
 
 Currently, recording a pageview involves recording an event where `e=pv`. All the fields associated with web events can be tracked. There are no other pageview specific fields:
 
-```
+```text
 // Key common parameters
 duid=aeb1691c5a0ee5a6    // Domain user ID
 &vid=2                  // Domain session index
@@ -255,7 +255,7 @@ Page pings are identified by `e=pp`. As well as all the standard web fields, th
 
 Example:
 
-```
+```text
 e=pp        // Page ping
 // Max and min x and y offsets
 pp_mix=0    
@@ -307,7 +307,7 @@ Note: if possible, it often makes sense to pass in the `user_id` generated by 
 
 Example:
 
-```
+```text
 duid=aeb1691c5a0ee5a6   // Domain user ID  
 &vid=2                  // Domain session ID
 &tid=508780             // Transaction ID  
@@ -340,7 +340,7 @@ To track an ecommerce transaction, fire a `transaction` event (`e=tr`) to regi
 
 Transaction event example:
 
-```
+```text
 duid=aeb1691c5a0ee5a6   // Domain user ID  
 &vid=2                  // Domain session index
 &aid=1                  // App ID
@@ -371,7 +371,7 @@ duid=aeb1691c5a0ee5a6   // Domain user ID
 
 Item hit example:
 
-```
+```text
 uid=aeb1691c5a0ee5a6    // User ID  
 &vid=2                  // Visit ID (i.e. session number for this user_id)  
 &tid=508780             // Transaction ID  
@@ -397,7 +397,7 @@ uid=aeb1691c5a0ee5a6    // User ID
 | `st`          | `social_target`   | Social action target e.g. object _liked_, article _tweeted_ | No               | `like`, `tweet`       |
 | `sp`          | `social_pagepath` | Page path action was performed on                           | No               |                       |
 
-```
+```text
 uid=aeb1691c5a0ee5a6    // User ID  
 &vid=2                  // Visit ID (i.e. session number for this user_id)  
 &tid=508780             // Transaction ID  
@@ -426,7 +426,7 @@ As well as setting `e=se`, there are five custom event specific parameters that
 
 _Add-to-basket_ example:
 
-```
+```text
 uid=aeb1691c5a0ee5a6    // User ID  
 &vid=2                  // Visit ID (i.e. session number for this user_id)  
 &tid=508780             // Transaction ID  
@@ -439,12 +439,11 @@ uid=aeb1691c5a0ee5a6    // User ID
 &se_la=178              // event_label = 178 (product_id of item added to basket)  
 &se_pr=1                // event_property = 1 (quantity of item added to basket)  
 &se_va=14.99            // event_value = 14.99 (price of item added to basket)  
-
 ```
 
 _Watch-video-clip_ example:
 
-```
+```text
 uid=aeb1691c5a0ee5a6    // User ID  
 &vid=2                  // Visit ID (i.e. session number for this user_id)  
 &tid=508780             // Transaction ID  
@@ -457,7 +456,6 @@ uid=aeb1691c5a0ee5a6    // User ID
 &se_la=291              // event_label = 291 (video_id of video played)  
 &se_pr=13.2             // event_property = 13.2 (number of seconds into video that clip starts playing)  
 &se_va=0.0025           // event_value = 0.0025 (ad revenue associated with view)  
-
 ```
 
 #### Custom unstructured event tracking
@@ -466,7 +464,7 @@ Custom unstructured event tracking is used to track events that are not natively
 
 An example of an unstructured event for a product view event:
 
-```
+```json
 {
   "schema": "iglu:com.my_company/viewed_product/jsonschema/1-0-0",
   "data": {
@@ -478,7 +476,7 @@ An example of an unstructured event for a product view event:
 
 The tracker will wrap this [self-describing JSON](https://github.com/snowplow/iglu/wiki/Self-describing-JSONs) in an outer self-describing JSON, which is what gets sent:
 
-```
+```json
 {
 
   // Tells Snowplow this is an unstructured event
@@ -506,9 +504,9 @@ As well as setting `e=ue`, there are two custom event specific parameters that 
 
 The tracker can decide to pass the `ue_pr` or the `ue_px` parameter depending on configuration. Encoding properties into URL-safe Base64 allows for more data while sacrificing readability.
 
-_viewed\_product_ example (using percent encoding and the key `ue_pr`):
+_viewed_product_ example (using percent encoding and the key `ue_pr`):
 
-```
+```text
 uid=aeb1691c5a0ee5a6   // User ID  
 &vid=2                 // Visit ID (i.e. session number for this user_id)  
 &tid=508780            // Transaction ID  
@@ -527,12 +525,11 @@ uid=aeb1691c5a0ee5a6   // User ID
                                                   }
                                                 }
                                               }
-
 ```
 
-_viewed\_product_ example (using base 64 encoding and the key `ue_px`):
+_viewed_product_ example (using base 64 encoding and the key `ue_px`):
 
-```
+```text
 uid=aeb1691c5a0ee5a6   // User ID  
 &vid=2                 // Visit ID (i.e. session number for this user_id)  
 &tid=508780            // Transaction ID  
@@ -551,40 +548,39 @@ uid=aeb1691c5a0ee5a6   // User ID
                                                   }
                                                 }
                                               }
-
 ```
 
 #### Custom contexts
 
 Custom contexts can be used to attach additional data in the form of a JSON to any Snowplow event.
 
-Each individual custom context is a [self-describing JSON](https://github.com/snowplow/iglu/wiki/Self-describing-JSONs) such as:
+Each individual custom context is a [self-describing JSON](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) such as:
 
-```
+```json
 {
-  schema: 'iglu:com.my_company/user/jsonschema/1-0-0'
-  data: {
-    fb_uid: '9999xyz'
+  "schema": "iglu:com.my_company/user/jsonschema/1-0-0",
+  "data": {
+    "fb_uid": "9999xyz"
   }
 }
 ```
 
 All custom contexts to be attached to an event will be wrapped in an array by the user and passed to the tracker, which will wrap them in a self-describing JSON:
 
-```
+```json
 {
 
   // Tells Snowplow this is an array of custom contexts
-  schema: 'iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0'
-  data: [
+  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+  "data": [
     {
 
       // Tells Snowplow that this is a "user" context
-      schema: 'iglu:com.my_company/user/jsonschema/1-0-0',
-      data: {
+      "schema": "iglu:com.my_company/user/jsonschema/1-0-0",
+      "data": {
 
         // The context data itself
-        fb_uid: '9999xyz'
+        "fb_uid": "9999xyz"
       }
     }
   ]
@@ -601,7 +597,7 @@ The tracker can be configured to encode the context into URL-safe Base64 to ensu
 
 Example of a custom context attached to the _watch-video-clip_ structured event from above using percent encoding and the key `co`:
 
-```
+```text
 uid=aeb1691c5a0ee5a6    // User ID  
 &vid=2                  // Visit ID (i.e. session number for this user_id)  
 &tid=508780             // Transaction ID  
@@ -631,7 +627,7 @@ uid=aeb1691c5a0ee5a6    // User ID
 
 Example of a custom context attached to the _watch-video-clip_ structured event from above using URL-safe Base64 encoding and the key `cx`:
 
-```
+```text
 uid=aeb1691c5a0ee5a6    // User ID  
 &vid=2                  // Visit ID (i.e. session number for this user_id)  
 &tid=508780             // Transaction ID  

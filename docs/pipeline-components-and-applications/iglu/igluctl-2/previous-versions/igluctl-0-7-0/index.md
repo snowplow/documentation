@@ -24,14 +24,14 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 
 Download the latest Igluctl from Github:
 
-```
+```bash
 wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.0/igluctl_0.7.0.zip
 $ unzip -j igluctl_0.7.0.zip
 ```
 
 Now you can use executable:
 
-```
+```bash
 $ ./igluctl --help
 ```
 
@@ -45,13 +45,13 @@ It is designed to be run against schema registries with a folder structure that 
 
 You can validate _all_ the schemas in the registry:
 
-```
+```bash
 $ /path/to/igluctl lint /path/to/schema/registry/schemas
 ```
 
 Alternatively you can validate an individual schema e.g.:
 
-```
+```bash
 $ /path/to/igluctl lint /path/to/schema/registry/schemas/com.example_company/example_event/jsonschema/1-0-0
 ```
 
@@ -86,7 +86,7 @@ Igluctl let you skip below checks:
 
 A sample usage could be as following:
 
-```
+```bash
 $ ./igluctl lint --skip-checks description,rootObject /path/to/schema/registry/schemas
 ```
 
@@ -102,13 +102,13 @@ Igluctl also includes many checks proving that schemas doesn’t have conflictin
 
 This command previously was a part of [Schema Guru](http://github.com/snowplow/schema-guru) and was known as `schema-guru ddl`, but has been moved into iglu in r5 release.
 
-```
+```bash
 $ ./igluctl static generate $INPUT
 ```
 
 You also can specify directory for output (current dir is used as default):
 
-```
+```bash
 $ ./igluctl static generate --output $DDL_DIR $INPUT
 ```
 
@@ -118,15 +118,15 @@ If an input directory is specified with several self-describing JSON schemas wit
 
 For example, having the following Self-describing JSON Schemas as an input:
 
-- schemas/com.acme/click\_event/1-0-0
-- schemas/com.acme/click\_event/1-0-1
-- schemas/com.acme/click\_event/1-0-2
+- schemas/com.acme/click_event/1-0-0
+- schemas/com.acme/click_event/1-0-1
+- schemas/com.acme/click_event/1-0-2
 
 Igluctl will generate the following migration scripts:
 
-- sql/com.acme/click\_event/1-0-0/1-0-1 to alter table from 1-0-0 to 1-0-1
-- sql/com.acme/click\_event/1-0-0/1-0-2 to alter table from 1-0-0 to 1-0-2
-- sql/com.acme/click\_event/1-0-1/1-0-2 to alter table from 1-0-1 to 1-0-2
+- sql/com.acme/click_event/1-0-0/1-0-1 to alter table from 1-0-0 to 1-0-1
+- sql/com.acme/click_event/1-0-0/1-0-2 to alter table from 1-0-0 to 1-0-2
+- sql/com.acme/click_event/1-0-1/1-0-2 to alter table from 1-0-1 to 1-0-2
 
 This migrations (and all subsequent table definitions) are aware of column order and will ensure that new columns are added at the end of the table definition. This means that the tables can be updated in-place with single `ALTER TABLE` statements.
 
@@ -155,7 +155,7 @@ Igluctl provides two options:
 
 If you’re not a Snowplow Platform user, don’t use [Self-describing Schema](https://github.com/snowplow/iglu/wiki/Self-describing-JSON-Schemas) or just don’t want anything Iglu-specific, you can produce raw DDL:
 
-```
+```bash
 $ ./igluctl static generate --raw $INPUT
 ```
 
@@ -163,37 +163,37 @@ But bear in mind that Self-describing Schemas bring many benefits. For example, 
 
 You may also want to get JSONPaths file for Redshift’s [COPY](http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html) command. It will place `jsonpaths` dir alongside with `sql`:
 
-```
+```bash
 $ ./igluctl static generate --with-json-paths $INPUT
 ```
 
 If there’s no clues about string length (e.g. `maxLength` specifications in the schema), Igluctl will set the length of `VARCHAR` columns to 4096 by default . You can also specify this your own VARCHAR size used by default:
 
-```
+```bash
 $ ./igluctl static generate --varchar-size 32 $INPUT
 ```
 
 You can also specify Redshift Schema for your table (don’t confuse database [schema](http://docs.aws.amazon.com/redshift/latest/dg/r_Schemas_and_tables.html) and schemas like JSON). For non-raw mode `atomic` used as default.
 
-```
+```bash
 $ ./igluctl static generate --raw --dbschema business $INPUT
 ```
 
 Some users do not full rely on Igluctl for DDL generation and edit their DDLs manually. By default, Igluctl will not override your files (either DDLs and migrations) if user made any significant changes (comments and whitespaces are not significant). Instead Igluctl will print warning that file has been changed manually. To change this behavior you may specify `--force` flag.
 
-```
+```bash
 $ ./igluctl static generate --force $INPUT
 ```
 
 It is possible to forget about ownership once table is created. It could be achieved within igluctl as following.
 
-```
+```bash
 $ ./igluctl static generate $INPUT --set-owner <owner>
 ```
 
 igluctl also has an option `--no-header` which will not place header comments into output DDL.
 
-```
+```bash
 $ ./igluctl static generate $INPUT --no-header
 ```
 
@@ -211,7 +211,7 @@ Also it accepts optional `--public` argument which makes schemas available wit
 
 You can find out more about Master API key\`and how to get on [Scala Registry Setup Guide](https://github.com/snowplow/iglu/wiki/Scala-repo-server-setup).
 
-```
+```bash
 $ ./igluctl static push /path/to/static/registry iglu.acme.com:80/iglu-server f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 
@@ -225,7 +225,7 @@ It accepts three required arguments:
 - `apikey` - master API key, used to create temporary write and read keys
 - `path` - path to your static registry (local folder to download to)
 
-```
+```bash
 $ ./igluctl static pull /path/to/static/registry iglu.acme.com:80/iglu-server f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 
@@ -253,7 +253,7 @@ It accepts one required arguments:
 
 - `config` - Path to configuration file
 
-```
+```bash
 $ ./igluctl static deploy /path/to/config/file
 ```
 
@@ -261,7 +261,7 @@ Your configuration file should be a self describing json document compatible wit
 
 Example:
 
-```
+```json
 {
     "$schema": "iglu:com.snowplowanalytics.iglu/igluctl_config/jsonschema/1-0-0",
     "data": {
@@ -330,7 +330,7 @@ Also it accepts `--vendor-prefix` argument which will be associated with generat
 
 You can find out more about Master API key\`and how to get on [Scala Registry Setup Guide](https://github.com/snowplow/iglu/wiki/Scala-repo-server-setup).
 
-```
+```bash
 $ ./igluctl server keygen --vendor-prefix com.acme iglu.acme.com:80/iglu-server f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 
@@ -345,7 +345,7 @@ It supports two interfaces:
 
 It also accepts a number of arguments:
 
-```
+```bash
 --resolver <path>
     Iglu resolver config path
 --schema <schemaKey>
@@ -368,13 +368,13 @@ It also accepts a number of arguments:
     Database password
 ```
 
-```
+```bash
 $ ./igluctl rdbms table-check --resolver <path> --schema <schemaKey>
 ```
 
 or
 
-```
+```bash
 $ ./igluctl rdbms table-check --server <uri>
 ```
 
@@ -386,7 +386,7 @@ $ ./igluctl rdbms table-check --server <uri>
 
 It also accepts a number of arguments:
 
-```
+```bash
 --help
     Display this help text.
 --resolver <path>
@@ -413,6 +413,6 @@ It also accepts a number of arguments:
     Database password
 ```
 
-```
+```bash
 $ ./igluctl rdbms table-migrate --resolver <path> --schema <schemaKey>
 ```

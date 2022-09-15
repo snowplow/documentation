@@ -21,7 +21,7 @@ To setup an integration, we recommend following [Snowflake's tutorial](https://d
 
 Now you can configure your loader where top level `auth` looks like following as an example:
 
-```
+```json
 "auth": {
     "integrationName": "SNOWPLOW_S3_INTEGRATION"
 }
@@ -39,7 +39,7 @@ First step is to [create necessary AWS IAM entities](https://docs.snowflake.net/
 
 Create following IAM Policy, called `SnowflakeLoadPolicy`:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -76,9 +76,9 @@ Next, you need to create an IAM role that will provide credentials.
 1. `IAM -> Roles -> Create role -> AWS service -> EC2`
 2. Attach just created `SnowflakeLoadPolicy`
 3. `Trust relationships -> Edit Trust relationship`
-4. Insert following document (replacing 123456789123 with your account id and EMR\_EC2\_DefaultRole with your EMR role) and save it:
+4. Insert following document (replacing 123456789123 with your account id and EMR_EC2_DefaultRole with your EMR role) and save it:
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -115,7 +115,7 @@ Two things you need to create manually are Snowflake database and DynamoDB table
 
 To do this you need to use `setup` CLI action for Snowflake Loader:
 
-```
+```bash
 $ wget https://github.com/snowplow-incubator/snowplow-snowflake-loader/releases/download/0.9.0/snowplow-snowflake-loader-0.9.0.jar
 
 $ java -jar snowplow-snowflake-loader-0.9.0.jar \
@@ -154,7 +154,7 @@ Dataflow Runner used to run Snowplow Snowflake Transformer Spark job on EMR clus
 
 EMR Cluster has default configuration. Only `ec2.keyName` and `logUri` must be changed. Everything else is optional. Edit and save below as `cluster.json`:
 
-```
+```json
 {
    "schema":"iglu:com.snowplowanalytics.dataflowrunner/ClusterConfig/avro/1-1-0",
    "data":{
@@ -227,7 +227,7 @@ EMR Cluster has default configuration. Only `ec2.keyName` and `logUri` must be c
 
 Edit and save below as `playbook.json`:
 
-```
+```json
 {
    "schema":"iglu:com.snowplowanalytics.dataflowrunner/PlaybookConfig/avro/1-0-1",
    "data":{
@@ -285,7 +285,7 @@ Bear in mind that `--events-manifest` option is necessary only if you use [cross
 
 To run above configuration you can use following command:
 
-```
+```bash
 $ dataflow-runner run-transient --emr-config cluster.json --emr-playbook playbook.json
 ```
 
@@ -297,7 +297,7 @@ Note that loader also can be launched on local machine, with paths specified for
 
 Snowflake Transformer (and Loader) expects certain structure in `stageUrl`.
 
-```
+```bash
 s3://snowplow-data/enriched/archive/
   + run=2020-12-01-16-30-50
   + run=2020-12-01-17-31-02
@@ -306,7 +306,7 @@ s3://snowplow-data/enriched/archive/
 
 If your pipelilne uses EmrEtlRunner, those folders will be created as part of data archivation. However without EmrEtlRunner, you need to create this folder structure yourself before running Snowflake Transformer and Loader. We recommend to create this structure with auxiliary S3DistCp step _before_ transformer (add as first step in `playbook.json`):
 
-```
+```json
         {
             "type": "CUSTOM_JAR",
             "name": "Staging enriched data",

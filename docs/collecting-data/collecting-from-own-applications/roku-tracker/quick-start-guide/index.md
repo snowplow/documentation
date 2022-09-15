@@ -19,7 +19,7 @@ There are two options to install the Roku tracker package to your project:
 
 [ropm](https://github.com/rokucommunity/ropm) is a package manager for the Roku platform. If you are using ropm in your project, you may install the Roku tracker using the following command:
 
-```
+```bash
 ropm install snowplow@npm:@snowplow/roku-tracker
 ```
 
@@ -36,14 +36,14 @@ It is recommended that you instantiate Snowplow and add it to the global scope. 
 
 If you installed the package using ropm, mount the component as follows:
 
-```
+```brightscript
 m.global.AddField("snowplow", "node", false)
 m.global.snowplow = CreateObject("roSGNode", "snowplow_Snowplow")
 ```
 
 If you installed the package manually, mount the component as follows:
 
-```
+```brightscript
 m.global.AddField("snowplow", "node", false)
 m.global.snowplow = CreateObject("roSGNode", "Snowplow")
 ```
@@ -52,7 +52,7 @@ m.global.snowplow = CreateObject("roSGNode", "Snowplow")
 
 Trackers are initialized by setting the `init` property with configuration of the tracker. This configuration takes the form of a `roAssociativeArray`. At its most basic, the configuration takes a Snowplow collector endpoint like so:
 
-```
+```brightscript
 m.global.snowplow.init = {
     network: {
         collector: "http://..."
@@ -66,7 +66,7 @@ To learn more about configuring how events are sent, check out [this page](/doc
 
 To track an event, simply assign its properties as a `roAssociativeArray` to a field corresponding to the event type. For instance, to track a structured event, assign the `structured` property:
 
-```
+```brightscript
 m.global.snowplow.structured = {
     se_ca: "category",
     se_ac: "action",

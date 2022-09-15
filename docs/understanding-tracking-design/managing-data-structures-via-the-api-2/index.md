@@ -91,7 +91,7 @@ To validate that your schema is in proper JSON format and complies with warehous
 
 ### Example
 
-```
+```bash
 curl 'https://console.snowplowanalytics.com/api/msc/v1/organizations/cad39ca5-3e1e-4e88-91af-87d977a4acd8/data-structures/v1/validation-requests' \
   -H 'authorization: Bearer YOUR_TOKEN' \
   -H 'content-type: application/json' \
@@ -144,7 +144,7 @@ The deployment endpoints deal with getting a new or edited version of your data 
 
 ### Example
 
-```
+```bash
 curl 'https://console.snowplowanalytics.com/api/msc/v1/organizations/cad39ca5-3e1e-4e88-91af-87d977a4acd8/data-structures/v1/deployment-requests' \
   -H 'authorization: Bearer MY_TOKEN' \
   -H 'content-type: application/json' \
@@ -171,7 +171,7 @@ Please note:
 
 Meta data is used to add additional information to a Data Structure.
 
-```
+```json
 "meta": {
   "hidden": false,
   "schemaType": "event",
@@ -187,7 +187,7 @@ The `customData` property is mapped as `[string, string]` and can be used to sen
 
 For example if you wanted to specify departmental ownership through meta data:
 
-```
+```json
 "customData": { "department": "marketing" }
 ```
 

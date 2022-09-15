@@ -14,7 +14,7 @@ A Terraform module is available which deploys the stream collector on a AWS EC2 
 
 The stream collector is on docker hub with several different flavours. Pull the image that matches the sink you are using:
 
-```
+```bash
 docker pull snowplow/scala-stream-collector-kinesis:2.7.0
 docker pull snowplow/scala-stream-collector-pubsub:2.7.0
 docker pull snowplow/scala-stream-collector-kafka:2.7.0
@@ -24,7 +24,7 @@ docker pull snowplow/scala-stream-collector-stdout:2.7.0
 
 The application is configured by passing a hocon file on the command line:
 
-```
+```bash
 docker run --rm \
   -v $PWD/config.hocon:/snowplow/config.hocon \
   -p 8080:8080 \
@@ -33,7 +33,7 @@ docker run --rm \
 
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/stream-collector/releases).
 
-```
+```bash
 java -jar scala-stream-collector-kinesis-2.7.0.jar --config /path/to/config.hocon
 ```
 
@@ -41,6 +41,6 @@ java -jar scala-stream-collector-kinesis-2.7.0.jar --config /path/to/config.hoco
 
 Pinging the collector on the /health path should return a 200 OK response:
 
-```
+```bash
 curl http://localhost:8080/health
 ```

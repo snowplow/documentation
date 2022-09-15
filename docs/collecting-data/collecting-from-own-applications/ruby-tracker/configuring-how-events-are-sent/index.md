@@ -12,7 +12,7 @@ Emitters and AsyncEmitters are initialized in the same way. An event collector e
 
 Example:
 
-```
+```ruby
 emitter1 = SnowplowTracker::Emitter.new(endpoint: 'collector.example.com')
 emitter2 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector2.example.com')
 emitter3 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector.elsewhere.com',
@@ -24,7 +24,7 @@ tracker.add_emitter(emitter3)
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
 
-```
+```ruby
 emitter1 = SnowplowTracker::Emitter.new('collector.example.com')
 emitter2 = SnowplowTracker::AsyncEmitter.new('collector2.example.com')
 emitter3 = SnowplowTracker::AsyncEmitter.new('collector.elsewhere.com',
@@ -56,7 +56,7 @@ You may want to force an emitter to send all events in its buffer, even if the b
 
 Example:
 
-```
+```ruby
 # Synchronous flush
 tracker.flush
 
@@ -66,7 +66,7 @@ tracker.flush(async: true)
 
 [Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
 
-```
+```ruby
 # Synchronous flush
 tracker.flush
 

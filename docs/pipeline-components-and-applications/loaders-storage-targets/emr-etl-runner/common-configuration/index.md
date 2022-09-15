@@ -10,15 +10,15 @@ This page describes the format for the YAML file which is used to configure the 
 
 ### Using environment variables
 
-You can use environment variables rather than hardcoding strings in the configuration file. For example, load your AWS access key from an environment variable named "AWS\_SNOWPLOW\_SECRET\_KEY":
+You can use environment variables rather than hardcoding strings in the configuration file. For example, load your AWS access key from an environment variable named "AWS_SNOWPLOW_SECRET_KEY":
 
-```
+```yaml
 secret_access_key: <%= ENV['AWS_SNOWPLOW_SECRET_KEY'] %>
 ```
 
 ### Example configuration
 
-```
+```yaml
 aws:
   # Credentials can be hardcoded or set in environment variables
   access_key_id: <%= ENV['AWS_SNOWPLOW_ACCESS_KEY'] %>
@@ -117,7 +117,7 @@ For `good:`, **always include a sub-folder on this variable (see below for why)*
 
 Each of the bucket variables must start with an S3 protocol - either `s3://` or `s3n://`. Each variable can include a sub-folder within the bucket as required, and a trailing slash is optional.
 
-The `bad:` entries will store any raw Snowplow log lines which did not pass the enrichment or JSON validation, along with their validation errors. The `errors:` entries will contain any raw Snowplow log lines which caused an unexpected error, but only if you set continue\_on\_unexpected\_error to true (see below).
+The `bad:` entries will store any raw Snowplow log lines which did not pass the enrichment or JSON validation, along with their validation errors. The `errors:` entries will contain any raw Snowplow log lines which caused an unexpected error, but only if you set continue_on_unexpected_error to true (see below).
 
 **Important 1:** there is a bug in Hive on Amazon EMR where Hive dies if you attempt to read or write data to the root of an S3 bucket. **Therefore always specify a sub-folder (e.g. `/events/`) for the `raw:processing`, `enriched:good` and `shredded:good` locations.**
 
@@ -127,7 +127,7 @@ The `bad:` entries will store any raw Snowplow log lines which did not pass the 
 
 Here is an example configuration:
 
-```
+```yaml
 buckets:
   assets: s3://snowplow-hosted-assets
   log: s3n://my-snowplow-etl/logs/
@@ -156,13 +156,13 @@ This section of the config file is where we configure the operation of EMR. The 
 
 1. `region`, which is the Amazon EC2 region in which the job should run, e.g. "us-east-1" or "eu-west-1"
 2. `ec2_key_name`, which is the name of the Amazon EC2 key that you  
-    set up in the \[\[Dependencies|1-Installing-EmrEtlRunner#dependencies\]\] above
+    set up in the [[Dependencies|1-Installing-EmrEtlRunner#dependencies]] above
 
 Make sure that the EC2 key you specify belongs in the region you specify, or else EMR won't be able to find the key. **It's strongly recommended that you choose the same Amazon region as your S3 buckets are located in.**
 
 Since 6th April 2015, all new Elastic MapReduce users have been required to use IAM roles with EMR. You can leave the two `..._role` fields as they are, however you must first create these default EMR roles using the AWS Command Line Interface ([installation-instructions](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)), like so:
 
-```
+```bash
 $ aws emr create-default-roles
 ```
 
@@ -177,7 +177,7 @@ You only need to set one of these (they are mutually exclusive settings), but yo
 
 The `software:` section lets you start up Lingual and/or HBase when you start up your Elastic MapReduce cluster. This is the configuration to start up both, specifying the versions to start:
 
-```
+```yaml
 software:
   hbase: "0.92.0"
   lingual: "1.1"
@@ -190,9 +190,9 @@ The `format` field describes the format of the EmrEtlRunner's input. The options
 - "cloudfront" for the Cloudfront Collector
 - "clj-tomcat" for the Clojure Collector
 - "thrift" for Thrift raw events
-- "tsv/com.amazon.aws.cloudfront/wd\_access\_log" for Cloudfront access logs
+- "tsv/com.amazon.aws.cloudfront/wd_access_log" for Cloudfront access logs
 
-See the \[\[EmrEtlRunner Input Formats\]\] page.
+See the [[EmrEtlRunner Input Formats]] page.
 
 ### enrich
 

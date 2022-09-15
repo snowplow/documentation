@@ -12,7 +12,7 @@ It is automatically included when using the Node.js or JavaScript trackers.
 
 It has two main types of method: setter methods and tracking methods. Setter methods like `setUserId` store a name-value pair to be added to all future events, while tracking methods like `trackPageView` track a specific event.
 
-## 1\. Setup
+## 1. Setup
 
 ### Compatibility
 
@@ -24,29 +24,29 @@ The current release of Snowplow Tracker Core is compatible with [Node.js](http:
 
 Setting up the tracker should be straightforward if you are familiar with npm:
 
-```
+```bash
 npm install snowplow-tracker-core
 ```
 
 or
 
-```
+```bash
 yarn add snowplow-tracker-core
 ```
 
-## 2\. Initialization
+## 2. Initialization
 
 ### Requiring the module
 
 Require the Snowplow Tracker Core module into your code like so:
 
-```
+```javascript
 var trackerCore = require('snowplow-tracker-core');
 ```
 
 or if using ES Modules, import like so:
 
-```
+```javascript
 import { trackerCore } from 'snowplow-tracker-core';
 ```
 
@@ -57,13 +57,13 @@ The tracker core constructor takes two parameters:
 - A boolean value indicating whether unstructured events and custom contexts should be base 64 encoded (which defaults to `true`)
 - An optional callback to be executed on every payload before it is returned
 
-```
+```javascript
 const t = trackerCore(false, console.log);
 ```
 
 The above example would create a tracker core instance which doesn't use base 64 encoding and which logs all payloads it creates to the console.
 
-## [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Core#3-setter-methods)3\. Setter methods
+## [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Core#3-setter-methods)3. Setter methods
 
 The core instance maintains a dictionary called `payloadPairs` containing persistent name-value pairs which are added to every payload. You can interact with these through the following methods:
 
@@ -71,7 +71,7 @@ The core instance maintains a dictionary called `payloadPairs` containing pers
 
 Adds a single name-value pair to `payloadPairs`.
 
-```
+```javascript
 t.addPayloadPair('myKey', 'myValue');
 ```
 
@@ -79,7 +79,7 @@ t.addPayloadPair('myKey', 'myValue');
 
 Adds all the name-value pairs in a dictionary to `payloadPairs`.
 
-```
+```javascript
 t.addPayloadDict({
  key1: 'value1',
  key2: 'value2'
@@ -90,7 +90,7 @@ t.addPayloadDict({
 
 Creates a new dictionary of payload pairs, removing all pre-existing name-value pairs. If no argument is provided, creates an empty dictionary.
 
-```
+```javascript
 t.resetPayloadPairs({
  key1: 'value1',
  key2: 'value2'
@@ -118,7 +118,7 @@ For convenience, other setter methods are provided for certain fields. They all 
 
 Some calls to setter methds, along with comments indicating the current state of the `payloadPairs` dictionary:
 
-```
+```javascript
 var snowplowTrackerCore = require('snowplow-tracker-core');
 var t = snowplowTrackerCore(); // {}
 t.addPayloadPair('a', 'one');  // {a: 'one'}
@@ -136,7 +136,7 @@ t.resetPayloadPairs({
 });                            // {d: 'four', e: 'five'}
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Core#4-tracking-methods)4\. Tracking methods
+## [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Core#4-tracking-methods)4. Tracking methods
 
 ### Common features
 
@@ -148,7 +148,7 @@ Each tracking method's penultimate argument is an optional array of custom conte
 
 Example:
 
-```
+```javascript
 var myContexts = [{
   'schema': 'iglu:com.acme/viewed_product/1-0-1',
   'data': {
@@ -187,7 +187,7 @@ When called, a tracker method will assemble a payload dictionary based on the ar
 
 Example:
 
-```
+```javascript
 t.trackScreenView("HUD > Save Game", "screen23", null, 1368725287000);
 ```
 
@@ -203,7 +203,7 @@ t.trackScreenView("HUD > Save Game", "screen23", null, 1368725287000);
 
 Example:
 
-```
+```javascript
 t.trackPageView("www.example.com", "example", "www.referrer.com");
 ```
 
@@ -225,7 +225,7 @@ t.trackPageView("www.example.com", "example", "www.referrer.com");
 
 Example:
 
-```
+```javascript
 t.trackEcommerceTransaction(
     "order-456",       // order ID
     null,              // affiliation
@@ -255,7 +255,7 @@ t.trackEcommerceTransaction(
 
 Example:
 
-```
+```javascript
 t.trackEcommerceTransactionItem(
     "order-456", // order ID
     "570634",    // SKU
@@ -281,7 +281,7 @@ t.trackEcommerceTransactionItem(
 
 Example:
 
-```
+```javascript
 t.trackStructEvent("shop", "add-to-basket", null, "pcs", 2);
 ```
 
@@ -295,7 +295,7 @@ t.trackStructEvent("shop", "add-to-basket", null, "pcs", 2);
 
 Example:
 
-```
+```javascript
 t.trackUnstructEvent({
   "schema": "com.example_company/save-game/jsonschema/1.0.2",
   "data": {
@@ -318,7 +318,7 @@ t.trackUnstructEvent({
 | `context` | Custom context for the event | No | Array |
 | `tstamp` | Item price | No | Number |
 
-```
+```javascript
 t.trackLinkClick(
     'http://www.example.com',  // URL
     'first header',            // id
@@ -342,7 +342,7 @@ t.trackLinkClick(
 
 Example:
 
-```
+```javascript
 t.trackAdImpression(
     '67965967893',             // impressionId
     'cpm',                     // costModel - 'cpa', 'cpc', or 'cpm'
@@ -370,7 +370,7 @@ t.trackAdImpression(
 
 Example:
 
-```
+```javascript
 t.trackAdClick(
     'http://www.example.com',  // targetUrl
     '12243253',                // clickId
@@ -400,7 +400,7 @@ t.trackAdClick(
 
 Example:
 
-```
+```javascript
 t.trackAdConversion(
     '743560297', // conversionId
     10,          // cost
@@ -428,7 +428,7 @@ t.trackAdConversion(
 
 Example:
 
-```
+```javascript
 t.trackConsentGranted(
     743560297,                     // id
     10,                            // version
@@ -452,7 +452,7 @@ t.trackConsentGranted(
 
 Example:
 
-```
+```javascript
 t.trackConsentWithdrawn(
     743560297,                        // id
     10,                               // version

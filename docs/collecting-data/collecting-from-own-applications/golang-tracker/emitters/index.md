@@ -89,7 +89,7 @@ Once the emitter receives an event from the Tracker a few things start to happen
 
 - The event is added to a local Sqlite3 database (blocking execution)
 - A long running go routine is started which will continue to send events as long as they can be found in the database (asynchronous)
-- The emitter loop will grab a range of events from the database up until the `SendLimit` as noted \__above_
+- The emitter loop will grab a range of events from the database up until the `SendLimit` as noted __above_
 - The emitter will send all of these events as determined by the Request, Protocol and ByteLimits
     - Each request is sent in its own go routine.
 - Once sent it will process the results of all the requests sent and will remove all successfully sent events from the database

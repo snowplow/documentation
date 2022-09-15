@@ -6,7 +6,7 @@ sidebar_position: 30
 
 In order to perform [deduplication](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md) in the RDB shredder, a dynamoDB table is needed to store the event manifest.
 
-## 1\. Creating Amazon DynamoDB table
+## 1. Creating Amazon DynamoDB table
 
 If [Relational Database Shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/previous-versions/snowplow-rdb-loader/event-deduplication/index.md) doesn't find a specified table - it will try to create it with default provisioned throughput, which might be not sufficient. This step is optional, but recommended.
 
@@ -26,13 +26,13 @@ After table is created, write down "Amazon Resource Name (ARN)" in "Overview" ta
 
 Finding the Table ARN
 
-## 2\. Setting up IAM Policy
+## 2. Setting up IAM Policy
 
 Log into the AWS console, navigate to the IAM section and go to **Policies**:
 
 Select **Create Your Own Policy** and choose descriptive name. Paste following JSON as Policy Document:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [

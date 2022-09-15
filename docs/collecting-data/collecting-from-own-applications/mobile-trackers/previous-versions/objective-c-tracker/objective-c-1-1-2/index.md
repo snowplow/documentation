@@ -18,7 +18,7 @@ For instructions, refer to the official Cocoapods guide [here](https://guides.co
 
 The tracker can be used in your project by adding `SnowplowTracker` to your project's `Podfile`:
 
-```
+```ruby
 pod 'SnowplowTracker', '~> 1.1'
 ```
 
@@ -26,13 +26,13 @@ Now you can install the dependency in your project with the command: `pod instal
 
 Make sure to always open the Xcode workspace instead of the project file when building your project:
 
-```
+```bash
 $ open App.xcworkspace
 ```
 
 Now you can import classes in order to use the tracker e.g.:
 
-```
+```objc
 #import "SPPayload.h"
 #import "SPTracker.h"
 #import "SPSelfDescribingJson.h"
@@ -43,7 +43,7 @@ Now you can import classes in order to use the tracker e.g.:
 
 In order to add the tracker to a project that uses Carthage, add the line to your `Cartfile`:
 
-```
+```swift
 github "snowplow/snowplow-objc-tracker" ~> 1.1.2
 ```
 
@@ -51,7 +51,7 @@ Run `carthage update` and drag the appropriate frameworks to your project from t
 
 The tracker can be imported like this:
 
-```
+```objc
 import <SnowplowTracker/SPTracker.h>
 ```
 
@@ -75,7 +75,7 @@ The Tracker is designed to be used as a Singleton object, meaning that you shoul
 
 For a basic example of the Singleton pattern:
 
-```
+```objc
 // --- Header File 'SnowplowManager.h'
 
 @class SPTracker;
@@ -133,7 +133,7 @@ You can then access your Tracker via `SnowplowManager *snowplowManager = [Snowpl
 
 Here's the minimum code needed to create a tracker and send an event to a collector.
 
-```
+```objc
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     [builder setUrlEndpoint:@"example.com"]; // Required
 }];
@@ -215,7 +215,7 @@ Every tracker must have an emitter, so an emitter must be created first.
 
 The URL endpoint must be defined.
 
-```
+```objc
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     [builder setUrlEndpoint:_url];
     [builder setProtocol:SPHttp];
@@ -228,7 +228,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 To instantiate a tracker in your code simply instantiate the `SPTracker` class with the following builder pattern:
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
 }];
@@ -253,7 +253,7 @@ In order to send an event, an event must first be made, and then supplied to a t
 
 Here's an example of constructing and sending a custom event:
 
-```
+```objc
 NSDictionary * data = @{@"level": @23, @"score": @56473};
 SPSelfDescribingJson * sdj = [[SPSelfDescribingJson alloc] initWithSchema:@"iglu:com.acme/save_game/jsonschema/1-0-0"
                                                                   andData:data];
@@ -269,7 +269,7 @@ SPUnstructured *event = [SPUnstructured build:^(id<SPUnstructuredBuilder> builde
 
 A screenview event can be manually tracked like this:
 
-```
+```objc
 SPScreenView *event = [SPScreenView build:^(id<SPScreenViewBuilder> builder) {
   [builder setName:@"Home screen"];
   [builder setType:@"Navigation bar"];
@@ -293,7 +293,7 @@ The custom context argument should consist of a NSMutableArray of NSDictionary r
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
-```
+```json
 {
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
@@ -306,7 +306,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 The corresponding NSDictionary would look like this:
 
-```
+```objc
 NSDictionary *poster = @{
                          @"schema":@"iglu:com.acme_company/movie_poster/jsonschema/1-0-0",
                          @"data": @{
@@ -319,7 +319,7 @@ NSDictionary *poster = @{
 
 Sending the movie poster context with an event looks like this:
 
-```
+```objc
 event = [SPStructured build:^(id<SPStructuredBuilder> builder) {
   [builder setCategory:@"DemoCategory"];
   [builder setAction:@"DemoAction"];
@@ -336,11 +336,11 @@ Note: even if there is only one custom context attached to the event, it still n
 
 #### Session tracking
 
-By default, no client session tracking is activated. Once enabled the tracker will start appending a [client\_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
+By default, no client session tracking is activated. Once enabled the tracker will start appending a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) context to each event it sends and it will maintain this session information for the life of the application, i.e. as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout. When a session expires, the session ID is incremented and session checking will stop. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     ...
     [builder setForegroundTimeout:600]; // 10 minutes
@@ -352,7 +352,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 
 In order to enable these events, use the method `setLifecycleEvents` during initialization of the tracker:
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setLifecycleEvents:YES];
@@ -369,7 +369,7 @@ Events are not sent on app close since the OS cannot guarantee advance notice of
 
 Auto-tracking can be enabled to send screen view events whenever a screen is changed in the app (a screen change corresponds to when `viewDidAppear()` is called on a view controller).
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setScreenViewEvents:YES];
@@ -380,7 +380,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 
 Auto-tracking can be enabled to send an event for exceptions that are raised. The only caveat is that the exception event will be sent when the tracker is restarted.
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setExceptionEvents:YES];
@@ -393,7 +393,7 @@ Auto-tracking can be enabled to send an install event whenever the tracker is us
 
 If install auto-tracking is not enabled, the tracker will still keep track of when the app was first installed, so that when enabled, the tracker will send the recorded install event with a timestamp reflecting when it was first installed.
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setInstallEvents:YES];
@@ -408,7 +408,7 @@ These are out-of-the-box tracker options that when enabled will attach useful co
 
 The [session context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-1) includes sessionization information like user ID and session ID that can be used to relate user activity patterns to events.
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setSessionContext:YES];
@@ -419,7 +419,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 
 The [application context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) includes app build and version number.
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setApplicationContext:YES];
@@ -430,7 +430,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 
 The [screen context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) contains information related to the current screen being viewed on the device when the event is created.
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setScreenContext:YES];
@@ -441,7 +441,7 @@ SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
 
 The platform context will either be a [mobile](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-1) or [desktop](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/desktop_context/jsonschema/1-0-0) context depending on which platform sends the event. It is enabled by adding an `SPSubject` to the tracker.
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setPlatformContext:YES];
@@ -456,7 +456,7 @@ SPSubject *subject = [[SPSubject alloc] initWithPlatformContext:YES andGeoContex
 
 The [geolocation context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) is enabled by adding an `SPSubject` to the tracker.
 
-```
+```objc
 SPTracker *tracker = [SPTracker build:^(id<SPTrackerBuilder> builder) {
     [builder setEmitter:emitter];
     [builder setPlatformContext:YES];
@@ -475,7 +475,7 @@ These options are used to fine-tune the emitter.
 
 The request method used to connect to the collector, either: `SPRequestGet`, or `SPRequestPost`.
 
-```
+```objc
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     [builder setUrlEndpoint:_url];
     [builder setHttpMethod:SPRequestPost];
@@ -488,7 +488,7 @@ In a GET request, each event is sent in an individual request. In a POST request
 
 The protocol used to connect to the collector, either: `SPHttp`, or `SPHttps`.
 
-```
+```objc
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     [builder setUrlEndpoint:_url];
     [builder setProtocol:SPHttps];
@@ -503,7 +503,7 @@ To implement you will need to:
 
 Add the RequestCallback protocol to your header file:
 
-```
+```objc
 // Example from the SnowplowDemo -> ViewController.h file:
 @interface ViewController : UIViewController <UITextFieldDelegate, RequestCallback>
 
@@ -513,7 +513,7 @@ Add the RequestCallback protocol to your header file:
 
 In your paired .m file add the following functions:
 
-```
+```objc
 // Define Callback Functions
 - (void) onSuccessWithCount:(NSInteger)successCount {
     // Do something with result
@@ -526,7 +526,7 @@ In your paired .m file add the following functions:
 
 Construct the SPEmitter like so:
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
@@ -541,7 +541,7 @@ The self will work only if you have declared the callback functions in the same 
 
 The number of events retrieved from storage in the database whenever the emitter needs more to send.
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
@@ -554,7 +554,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 This is the number of threads created to make requests for sending events:
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
@@ -567,7 +567,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 The maximum data size of GET requests made by the emitter to send events.
 
-```
+```objc
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     [builder setUrlEndpoint:_url]; // Required
     [builder setByteLimitGet:50000]; // Optional
@@ -578,7 +578,7 @@ SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
 
 The maximum data size of POST requests made by the emitter to send events.
 
-```
+```objc
 SPEmitter *emitter = [SPEmitter build:^(id<SPEmitterBuilder> builder) {
     [builder setUrlEndpoint:_url]; // Required
     [builder setByteLimitPost:50000]; // Optional

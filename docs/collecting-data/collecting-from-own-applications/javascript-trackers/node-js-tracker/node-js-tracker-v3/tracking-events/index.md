@@ -26,7 +26,7 @@ All events are tracked through the `track()` function on the tracker instance. T
 
 Each build method which is passed to the `track()` function has both default and optional arguments. If you don't want to provide a value for an optional argument, just ignore it in the object or pass `null` and it will be ignored. For example, if you want to track a page view event with a referrer but without a title:
 
-```
+```javascript
 t.track(buildPageView({ 
   pageUrl: 'http://www.example.com', 
   referrer: 'http://www.referer.com'
@@ -37,7 +37,7 @@ t.track(buildPageView({
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event. Each call to `track()` accepts an additional optional context parameter:
 
-```
+```javascript
 t.track(buildPageView({ 
   pageUrl: 'http://www.example.com', 
   referrer: 'http://www.referer.com'
@@ -51,7 +51,7 @@ The `context` argument should consist of an array of zero or more context obje
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
-```
+```json
 {
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
@@ -63,7 +63,7 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 This is how to fire a page view event with the above custom context:
 
-```
+```javascript
 t.track(buildPageView({ 
   pageUrl: 'http://www.example.com', 
   referrer: 'http://www.referer.com'
@@ -87,7 +87,7 @@ If you do not pass this timestamp in as an argument, then the Tracker will use t
 
 Here is an example tracking a structured event and supplying the optional timestamp argument:
 
-```
+```javascript
 t.track(buildStructEvent({
   category: "game action", 
   action: "save"
@@ -109,7 +109,7 @@ Use `buildScreenView()` to build a user viewing a screen (or equivalent) withi
 
 Example:
 
-```
+```javascript
 t.track(buildScreenView({
   name: "HUD > Save Game", 
   id: "screen23"
@@ -128,7 +128,7 @@ Use `buildPageView()` to track a user viewing a page within your app. Argument
 
 Example:
 
-```
+```javascript
 t.track(buildPageView({
   pageUrl: "www.example.com", 
   url: "example",
@@ -148,7 +148,7 @@ The arguments are as follows:
 
 Example:
 
-```
+```javascript
 t.track(buildSelfDescribingEvent({
   event: {
     schema: "iglu:com.example_company/save-game/jsonschema/1-0-2",
@@ -178,7 +178,7 @@ Use `buildStructEvent()` to track a custom event happening in your app which f
 
 Example:
 
-```
+```javascript
 t.track(buildStructEvent({
   category: "shop", 
   action: "add-to-basket", 

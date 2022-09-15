@@ -4,7 +4,7 @@ date: "2020-03-02"
 sidebar_position: 990
 ---
 
-## 1\. Overview
+## 1. Overview
 
 The [Snowplow iOS Tracker](https://github.com/snowplow/snowplow-ios-tracker) allows you to track Snowplow events from your iOS apps and games. It supports iOS 7.0+.
 
@@ -12,9 +12,7 @@ The tracker should be straightforward to use if you are comfortable with iOS dev
 
 You can also find detailed documentation for the method calls in the tracker classes available as part of the [CocoaPods documentation](http://cocoadocs.org/docsets/SnowplowTracker/).
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#2-initialization)2\. Initialization
+## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#2-initialization)2. Initialization
 
 Assuming you have completed the [iOS Tracker Setup](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup) for your project, you are now ready to initialze the Snowplow Tracker.
 
@@ -22,20 +20,18 @@ Assuming you have completed the [iOS Tracker Setup](https://github.com/snowplow
 
 Adding the library into your project is as simple as adding the headers into your class file:
 
-```
+```objc
 #import <SnowplowTracker.h>
 #import <SnowplowRequest.h>
 ```
 
 That's it - you are now ready to initialize a tracker instance.
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#22-creating-a-tracker)2.2 Creating a tracker
 
 To instantiate a tracker in your code simply instantiate the `SnowplowTracker` class with the constructor:
 
-```
+```objc
 - (id) initWithCollector:(SnowplowRequest *)collector_
                    appId:(NSString *)appId_
            base64Encoded:(Boolean)encoded
@@ -44,7 +40,7 @@ To instantiate a tracker in your code simply instantiate the `SnowplowTracker`�
 
 For example:
 
-```
+```objc
 SnowplowTracker *t1 = [[SnowplowTracker alloc] initWithCollector:collector appId:@"AF003" base64Encoded:false namespace:@"cloudfront"];
 ```
 
@@ -54,8 +50,6 @@ SnowplowTracker *t1 = [[SnowplowTracker alloc] initWithCollector:collector appId
 | `namespace` | The name of the tracker instance |
 | `appId` | The application ID |
 | `base64Encoded` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) |
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 #### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#221-collector)2.2.1 `collector`
 
@@ -73,28 +67,24 @@ The `appId` argument lets you set the application ID to any string.
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` argument.
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#3-adding-extra-data)3\. Adding extra data
+## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#3-adding-extra-data)3. Adding extra data
 
 Unlike the other Trackers, the iOS tracker automatically collects your platform, screen resolution, viewport, color depth, timezone and language from the device. You can still however, set your user ID to properly track different users if you require it.
 
 - [`setUserId`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#set-user-id)
 - [Sending IFA](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#sending-ifa)
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#31-set-user-id-with-setuserid)3.1 Set user ID with `setUserId`
 
 You can set the user ID to any string:
 
-```
+```objc
 s1.setUserId( "{{USER ID}}" )
 ```
 
 Example:
 
-```
+```objc
 [tracker setUserId:@"alexd"];
 ```
 
@@ -108,7 +98,7 @@ For the avoidance of doubt, you can also avoid sending IFA regardless of your ad
 - Search for **Preprocessor Macros**
 - Add a macro defined as`SNOWPLOW_NO_IFA = 1`
 
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#4-tracking-specific-events)4\. Tracking specific events
+## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#4-tracking-specific-events)4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
 
@@ -122,19 +112,15 @@ Tracking methods supported by the iOS Tracker at a glance:
 | [`trackStructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#struct-event) | Track a Snowplow custom structured event |
 | [`trackUnstructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#unstruct-event) | Track a Snowplow custom unstructured event |
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#41-common)4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `trackXXX()`, where `XXX` is the name of the event to track.
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#411-custom-contexts)4.1.1 Custom contexts
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of an NSDictionary object. Each tracking method accepts an additional optional contexts parameter after all the parameters specific to that method:
 
-```
+```objc
 - (void) trackPageView:(NSString *)pageUrl
                  title:(NSString *)pageTitle
               referrer:(NSString *)referrer;
@@ -157,7 +143,7 @@ The `context` argument should consist of a `NSArray` of `NSDictionary` rep
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
-```
+```json
 {
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2.1.1",
   "data": {
@@ -170,37 +156,22 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 _Note that even if there is only one custom context attached to the event, it still needs to be placed in an array._
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#412-optional-timestamp--context-argument)4.1.2 Optional timestamp & context argument
 
 In all the trackers, we offer a way to set the timestamp if you want the event to show as tracked at a specific time. If you don't, we create a timestamp while the event is being tracked.
 
 Here is an example:
 
-```
+```objc
 [tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com"];
+[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray];
+[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" timestamp:1234567890];
+[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray timestamp:1234567890\;
 ```
-
-\[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray\]
-
-;
-
-\[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" timestamp:1234567890\]
-
-;
-
-\[tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray timestamp:1234567890\]
-
-;
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#413-tracker-method-return-values)4.1.3 Tracker method return values
 
 To be confirmed. As of now, trackers do not return anything.
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#42-track-screen-views-with-trackscreenview)4.2 Track screen views with `trackScreenView:`
 
@@ -215,19 +186,11 @@ Use `trackScreenView:` to track a user viewing a screen (or equivalent) within
 
 Example:
 
-```
+```objc
 [t1 trackScreenView:@"HUD > Save Game" screen:@"screen23"];
+[t1 trackScreenView:@"HUD > Save Game" screen:nil timestamp:12435678];
+[t1 trackScreenView:@"HUD > Save Game" screen:@"screen23" timestamp:12435678];
 ```
-
-\[t1 trackScreenView:@"HUD > Save Game" screen:nil timestamp:12435678\]
-
-;
-
-\[t1 trackScreenView:@"HUD > Save Game" screen:@"screen23" timestamp:12435678\]
-
-;
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#43-track-pageviews-with-trackpageview)4.3 Track pageviews with `trackPageView:`
 
@@ -245,15 +208,10 @@ Arguments are:
 
 Example:
 
-```
+```objc
 [t1 trackPageView:@"www.example.com" title:@"example" referrer:@"www.referrer.com" context:contextList];
+[t1 trackPageView:@"www.example.com" title:@"example" referrer:@"www.referrer.com"];
 ```
-
-\[t1 trackPageView:@"www.example.com" title:@"example" referrer:@"www.referrer.com"\]
-
-;
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#44-track-ecommerce-transactions-with-trackecommercetransaction)4.4 Track ecommerce transactions with `trackEcommerceTransaction:`
 
@@ -292,7 +250,7 @@ The `items` argument is an `NSMutableArray` containing an `NSDictionary` f
 
 Example of tracking a transaction containing one item:
 
-```
+```objc
 NSString *transactionID = @"6a8078be";
 NSMutableArray *itemArray = [NSMutableArray array];
 
@@ -303,13 +261,9 @@ NSMutableArray *itemArray = [NSMutableArray array];
                                                 price:0.75F
                                              quantity:1
                                              currency:@"USD"]];
+
+[t trackEcommerceTransaction:transactionID totalValue:350 affiliation:@"no_affiliate" taxValue:10 shipping:15 city:@"Boston" state:@"Massachusetts" country:@"USA" currency:@"USD" items:itemArray];
 ```
-
-\[t trackEcommerceTransaction:transactionID totalValue:350 affiliation:@"no\_affiliate" taxValue:10 shipping:15 city:@"Boston" state:@"Massachusetts" country:@"USA" currency:@"USD" items:itemArray\]
-
-;
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#45-track-structured-events-with-trackstructuredevent)4.5 Track structured events with `trackStructuredEvent:`
 
@@ -327,15 +281,10 @@ Use `trackStructuredEvent:` to track a custom event happening in your app whic
 
 Example:
 
-```
+```objc
 [t1 trackStructuredEvent:@"shop" action:@"add-to-basket" label:@"Add To Basket" property:@"pcs" value:27];
+[t1 trackStructuredEvent:@"shop" action:@"add-to-basket" label:@"Add To Basket" property:@"pcs" value:27 timestamp:1234569];
 ```
-
-\[t1 trackStructuredEvent:@"shop" action:@"add-to-basket" label:@"Add To Basket" property:@"pcs" value:27 timestamp:1234569\]
-
-;
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#46-track-unstructured-events-with-trackunstructuredevent)4.6 Track unstructured events with `trackUnstructuredEvent:`
 
@@ -358,7 +307,7 @@ The arguments are as follows:
 
 Example:
 
-```
+```objc
 - (void) trackUnstructuredEvent:(NSDictionary *)eventJson
                         context:(NSMutableArray *)context
                       timestamp:(double)timestamp;
@@ -368,7 +317,7 @@ If you supply a `NSDictionary*`, make sure that this top-level contains your `
 
 Example:
 
-```
+```objc
 NSDictionary* eventJson = [NSDictionary dictionaryWithObjectsAndKeys:
                             "iglu:com.snowplowanalytics.snowplow/example/jsonschema/1-0-0", "schema",
                             "data", "{\"src\": \"Images\/Sun.png\", \"name\": \"sun1\", \"hOffset\": 250, \"vOffset\": 250, \"alignment\": \"center\"}"];
@@ -379,13 +328,11 @@ tracker trackUnstructuredEvent:eventJson
 
 For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
-## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#5-sending-events-snowplowrequest)5\. Sending events: `SnowplowRequest`
+## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#5-sending-events-snowplowrequest)5. Sending events: `SnowplowRequest`
 
 Events created by the Tracker are sent to a collector using a `SnowplowRequest` instance. You can create one using one of the init methods:
 
-```
+```objc
 - (id) initWithURLRequest:(NSURL *)url
                httpMethod:(NSString *)method
              bufferOption:(enum SnowplowBufferOptions)option;
@@ -395,7 +342,7 @@ Events created by the Tracker are sent to a collector using a `SnowplowRequest`
 
 For example:
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 SnowplowRequest emitter = [[SnowplowRequest alloc] initWithURLRequest:url
                                                            httpMethod:@"POST"
@@ -410,7 +357,7 @@ A buffer is used to group events together in bulk before sending them. This is e
 
 You can set this during the creation of a `SnowplowRequest` object or using the setter `-(void)setBufferOption:`
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 SnowplowRequest emitter = [[SnowplowRequest alloc] initWithURLRequest:url
                                                            httpMethod:@"POST"
@@ -420,7 +367,7 @@ SnowplowRequest emitter2 = [[SnowplowRequest alloc] initWithURLRequest:url
                                                          bufferOption:SnowplowBufferDefault];
 ```
 
-\[emitter setBufferOption:SnowplowBufferInstant\]
+[emitter setBufferOption:SnowplowBufferInstant]
 
 ;
 
@@ -446,7 +393,7 @@ Here are all the posibile options that you can use:
 
 You can set this during the creation of a `SnowplowRequest` object:
 
-```
+```objc
 NSURL *url = [[NSURL alloc] initWithString:@"https://collector.acme.net"];
 SnowplowRequest emitter = [[SnowplowRequest alloc] initWithURLRequest:url
                                                            httpMethod:@"POST"

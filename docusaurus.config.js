@@ -135,6 +135,7 @@ const config = {
           'ruby',
           'scala',
           'swift',
+          'brightscript',
         ],
       },
       algolia: {

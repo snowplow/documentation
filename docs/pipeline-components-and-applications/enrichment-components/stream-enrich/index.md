@@ -20,7 +20,7 @@ A Terraform module is available which deploys Stream Enrich on a AWS EC2 without
 
 Stream Enrich is on docker hub with several different flavours. Pull the image that matches the source/sink you are using:
 
-```
+```bash
 docker pull snowplow/stream-enrich-kinesis:3.2.3
 docker pull snowplow/stream-enrich-kafka:3.2.3
 docker pull snowplow/stream-enrich-nsq:3.2.3
@@ -28,7 +28,7 @@ docker pull snowplow/stream-enrich-nsq:3.2.3
 
 The application is configured by passing a hocon file on the command line:
 
-```
+```bash
 docker run --rm \
       --log-driver awslogs \
       --log-opt awslogs-group=${log_group_name} \
@@ -42,7 +42,7 @@ docker run --rm \
 
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
-```
+```bash
 java -jar snowplow-stream-enrich-kinesis-3.2.3.jar \
   --config /path/to/config.hocon \
   --enrichments file:/path/to/enrichments/ \

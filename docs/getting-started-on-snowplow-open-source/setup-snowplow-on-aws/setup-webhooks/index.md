@@ -10,7 +10,7 @@ Snowplow allows you to collect events via the [webhooks](http://en.wikipedia.org
 
 Webhooks allow this third-party software to send their own internal event streams to Snowplow Collectors for further processing. Webhooks are sometimes referred to as "streaming APIs" or "HTTP response APIs".
 
-## 1\. Choose and configure a Webhook
+## 1. Choose and configure a Webhook
 
 The following Webhooks are currently available for setup:
 

@@ -12,7 +12,7 @@ The [Snowplow JavaScript and TypeScript Analytics SDK](https://github.com/snowpl
 
 Install using your preferred package manager, such as npm:
 
-```
+```bash
 npm install --save snowplow-analytics-sdk
 ```
 
@@ -26,7 +26,7 @@ The [](https://github.com/snowplow-incubator/snowplow-js-analytics-sdk)[Snowplow
 
 To consume in an AWS lambda you would do something like this in your `app.js`:
 
-```
+```javascript
 const { transform } = require('snowplow-analytics-sdk');
 
 module.exports.handler = (input) => {
@@ -40,7 +40,7 @@ module.exports.handler = (input) => {
 
 Or in `app.ts`:
 
-```
+```javascript
 import { transform } from 'snowplow-analytics-sdk';
 
 export function handler(input: any) {

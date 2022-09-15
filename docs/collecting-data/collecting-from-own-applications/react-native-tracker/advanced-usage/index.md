@@ -10,13 +10,6 @@ sidebar_position: 40
 
 [![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
-  
-  
-  
-  
-  
-  
-
 ## Getting session data from the tracker
 
 The React Native tracker has implemented callbacks that enable you to get session data back from the tracker at runtime. The way to do so is by using a tracker's `get..` methods. As with all tracker methods, these callbacks are also asynchronous, and they return a Promise that resolves to the respective value (or `undefined`) when fulfilled.
@@ -27,7 +20,7 @@ The available methods, are:
 
 This method returns a promise that resolves to the identifier (string UUIDv4) for the user of the session.
 
-```
+```javascript
 const sessionUserId = await tracker.getSessionUserId();
 ```
 
@@ -35,7 +28,7 @@ const sessionUserId = await tracker.getSessionUserId();
 
 This method returns a promise that resolves to the identifier (string UUIDv4) for the session.
 
-```
+```javascript
 const sessionId = await tracker.getSessionId();
 ```
 
@@ -43,7 +36,7 @@ const sessionId = await tracker.getSessionId();
 
 This method returns a promise to resolve to the index (number) of the current session for this user.
 
-```
+```javascript
 const sessionIdx = await tracker.getSessionIndex();
 ```
 
@@ -51,7 +44,7 @@ const sessionIdx = await tracker.getSessionIndex();
 
 This method returns a promise to resolve to whether (boolean) the app is currently in background.
 
-```
+```javascript
 const isInBackground = await tracker.getIsInBackground();
 ```
 
@@ -59,7 +52,7 @@ const isInBackground = await tracker.getIsInBackground();
 
 This method returns a promise to resolve to the number of background transitions in the current session.
 
-```
+```javascript
 const bgIndex = await tracker.getBackgroundIndex();
 ```
 
@@ -67,7 +60,7 @@ const bgIndex = await tracker.getBackgroundIndex();
 
 This method returns a promise to resolve to the number of foreground transitions in the current session.
 
-```
+```javascript
 const fgIndex = await tracker.getForegroundIndex();
 ```
 
@@ -81,7 +74,7 @@ As each tracker is identified by its namespace, in order to remove a tracker at 
 
 For example, assuming an existing tracker with namespace `sp1` :
 
-```
+```javascript
 import { createTracker, removeTracker } from '@snowplow/react-native-tracker';
 
 // ...
@@ -93,7 +86,7 @@ removeTracker('sp1');
 
 The function removeAllTrackers, which accepts no arguments, will remove all trackers created in your app.
 
-```
+```javascript
 import { removeAllTrackers } from '@snowplow/react-native-tracker';
 
 removeAllTrackers();
@@ -122,7 +115,7 @@ As mentioned above, by default, the IDFV is being tracked.
 
 If you do **not** want to track the IDFV, you'll need to pass the `SNOWPLOW_NO_IDFV` preprocessor definition to the iOS Tracker build settings:
 
-```
+```ruby
 # ios/Podfile
 # ...
   post_install do |installer|
@@ -145,9 +138,9 @@ If you want to track the IDFA you need to follow the guidelines of [AppTrackingT
 
 - Add and follow the guidelines of [AppTrackingTransparency](https://developer.apple.com/documentation/apptrackingtransparency?language=objc) framework in your app.
 - Add `AdSupport` framework to your app. If it’s not added the tracker will not send the IDFA with the events.
-- Again, use a post\_install script in your app's Podfile to pass the `SNOWPLOW_IDFA_ENABLED=1` preprocessor definition to the underlying iOS Tracker
+- Again, use a post_install script in your app's Podfile to pass the `SNOWPLOW_IDFA_ENABLED=1` preprocessor definition to the underlying iOS Tracker
 
-```
+```ruby
 # ios/Podfile
 # ...
   post_install do |installer|
@@ -180,7 +173,7 @@ If you want to track the AAID, you need to add the Google Mobile Ads library to 
 
 The Google Mobile Ads can be imported in the `dependencies` section of the `build.gradle` adding:
 
-```
+```gradle
 dependencies {
     ...
     implementation 'com.google.android.gms:play-services-ads:19.0.0'
@@ -194,7 +187,7 @@ The Google Mobile Ads SDK v.17.0.0 introduced some [changes](https://ads-develop
 
 AdMob publishers have to add the AdMob app ID in the `AndroidManifest.xml` file:
 
-```
+```xml
 <manifest>
     <application>
         <!-- TODO: Replace with your real AdMob app ID -->
@@ -211,7 +204,7 @@ Failure to add this tag will result in the app crashing at app launch with a mes
 
 Publishers using Google Ad Manager have to declare the app an “Ad Manager app” in the `AndroidManifest.xml` file:
 
-```
+```xml
 <manifest>
     <application>
         <meta-data

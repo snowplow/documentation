@@ -39,7 +39,7 @@ Following authentication options (`auth`) are possible:
 
 Final configuration can look like following:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.snowplow.storage/snowflake_config/jsonschema/1-0-3",
   "data": {

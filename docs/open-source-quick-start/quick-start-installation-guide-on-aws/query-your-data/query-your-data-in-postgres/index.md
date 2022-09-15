@@ -30,14 +30,14 @@ By default, there are 5 enrichments enabled, as listed below. These enrichments 
 
 Some enrichments are _legacy_ and therefore populate your atomic.events table. From the above list, these are the _campaign attribution, referer parser_ and _event fingerprint_ enrichments. The UA parser and YAUAA enrichment also add a separate _entity_ to each event (these are also referred to as contexts since they add additional context to the events in your atomic.events table). The contexts are loaded into separate tables: 
 
-- _atomic.com\_snowplowanalytics\_snowplow\_ua\_parser\_context\_1_
-- _atomic.nl\_basjes\_yauaa\_context\_1_
+- _atomic.com_snowplowanalytics_snowplow_ua_parser_context_1_
+- _atomic.nl_basjes_yauaa_context_1_
 
-Note: you can join these contexts back to your atomic.events using root\_id = event\_id.
+Note: you can join these contexts back to your atomic.events using root_id = event_id.
 
 **Step 2. Querying your bad data** **in Postgres**
 
-Your atomic\_bad schema holds events that have failed to be processed by your pipeline. These are called [failed events.](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md)
+Your atomic_bad schema holds events that have failed to be processed by your pipeline. These are called [failed events.](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md)
 
 You will see in Postgres that you have a table called _`atomic_bad.com_snowplowanalytics_snowplow_badrows_schema_violation_1.`_
 

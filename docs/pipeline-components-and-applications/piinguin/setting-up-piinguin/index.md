@@ -16,7 +16,7 @@ As stated before, both the Relay and the Server need to reside in the same VPC. 
 
 As the server writes its data to DynamoDB its will need to have access to it with a policy document such as:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -37,9 +37,9 @@ As the server writes its data to DynamoDB its will need to have access to it wit
 
 ## Deploying relay
 
-You can obtain the relay artifact from [our S3 public assets buckets](https://github.com/snowplow/snowplow/wiki/Hosted-assets) appropriate for your region. In order for you to create an AWS Lambda function, please follow the detailed [developer guide](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html). When you are creating the Lambda, you will need to specify as trigger the AWS Kinesis stream that contains your PII data. In addition you will need to have the VPC id where you are running the Piinguin Server and provide that in the form too. Finally in the `Environment variables` section you will need to add the PIINGUIN\_HOST, PIINGUIN\_PORT and PIINGUIN\_TIMEOUT\_SEC. The PIINGUIN\_TIMEOUT\_SEC value should be lower than the AWS Lambda timeout in order to get a meaningful error message if the client times out while communicating with the server. Here is an example of that configuration:
+You can obtain the relay artifact from [our S3 public assets buckets](https://github.com/snowplow/snowplow/wiki/Hosted-assets) appropriate for your region. In order for you to create an AWS Lambda function, please follow the detailed [developer guide](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html). When you are creating the Lambda, you will need to specify as trigger the AWS Kinesis stream that contains your PII data. In addition you will need to have the VPC id where you are running the Piinguin Server and provide that in the form too. Finally in the `Environment variables` section you will need to add the PIINGUIN_HOST, PIINGUIN_PORT and PIINGUIN_TIMEOUT_SEC. The PIINGUIN_TIMEOUT_SEC value should be lower than the AWS Lambda timeout in order to get a meaningful error message if the client times out while communicating with the server. Here is an example of that configuration:
 
-```
+```bash
 PIINGUIN_HOST        = ec2-1-2-3-4.eu-west-1.compute.amazonaws.com
 PIINGUIN_PORT        = 8080
 PIINGUIN_TIMEOUT_SEC = 10
@@ -49,7 +49,7 @@ PIINGUIN_TIMEOUT_SEC = 10
 
 As stated before, both the Relay and the Server need to reside in the same VPC. in addition the lambda needs to have sufficient access from IAM to run. You should create a service role and attach policies that will permit it to run following [this guide](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html). As all Lambda functions it needs to have permission to send its output to CloudWatch Logs so and example IAM policy that permits that is:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -74,7 +74,7 @@ As stated before, both the Relay and the Server need to reside in the same VPC. 
 
 As the Lambda will be reading its data form Kinesis it will also need to have permissions to do that with a policy document such as:
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [

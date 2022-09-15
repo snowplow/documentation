@@ -24,7 +24,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 1. In your application delegate `AppDelegate.swift` add `import SnowplowTracker`.
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
 
-```
+```swift
   // Indicate the URL where to download the config file
   let remoteConfig = RemoteConfiguration(endpoint: REMOTE_CONFIG_URL, method: .get)
 
@@ -49,14 +49,14 @@ The `onSuccess` callback is called for each successful configuration. For exampl
 
 ### The remote configuration file
 
-In the `RemoteConfiguration` object passed to the `setup` method is specified the REMOTE\_CONFIG\_URL, which is the url where the developer hosts the configuration file.  
+In the `RemoteConfiguration` object passed to the `setup` method is specified the REMOTE_CONFIG_URL, which is the url where the developer hosts the configuration file.  
 There aren't restrictions about where to host the file but possible solutions may be S3 with Cloudfront or a Google Cloud Storage bucket.
 
 The configuration file is simply a JSON file compliant with the [Remote Config JSONSchema](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0).
 
 An example of remote config specification:
 
-```
+```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0",
   "configurationVersion": 1,
@@ -121,7 +121,7 @@ Note: The `networkConfiguration` is fundamental in order to set the collector en
 As shown above the developer can enforce the download of the configuration file at the start up of the app.  
 If the developer wants to check for configuration updates more often, for example at runtime or when the app comes back from background state, it's possible to use the `refresh` method, placing it where the developer wants to perform the download and the configuration check.
 
-```
+```swift
 let successCallback: ([String]?) -> Void = { namespaces in
     // This callback can be used for last minute, post-configuration,
     // updates once the tracker instance is enabled and configured.
@@ -139,7 +139,7 @@ When the tracker initializer updates the tracker configuration it would reset al
 
 A clear example is a runtime change on `userId` on `SubjectController`:
 
-```
+```swift
 // Load configuration with userId = nil
 Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: defaultConfig, onSuccess: successCallback)
 
@@ -173,7 +173,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 
 In your `Application` subclass, set up the SDK as follows:
 
-```
+```java
   // Indicate the URL where to download the config file
   RemoteConfiguration remoteConfig = new RemoteConfiguration(REMOTE_CONFIG_URL, HttpMethod.get);
 
@@ -195,14 +195,14 @@ The `onSuccess` callback is called for each successful configuration. For exampl
 
 ### The remote configuration file
 
-In the `RemoteConfiguration` object passed to the `setup` method is specified the REMOTE\_CONFIG\_URL, which is the url where the developer hosts the configuration file.  
+In the `RemoteConfiguration` object passed to the `setup` method is specified the REMOTE_CONFIG_URL, which is the url where the developer hosts the configuration file.  
 There aren't restrictions about where to host the file but possible solutions may be S3 with Cloudfront or a Google Cloud Storage bucket.
 
 The configuration file is simply a JSON file compliant with the [Remote Config JSONSchema](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0).
 
 An example of remote config specification:
 
-```
+```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0",
   "configurationVersion": 1,
@@ -267,7 +267,7 @@ Note: The `networkConfiguration` is fundamental in order to set the collector en
 As shown above the developer can enforce the download of the configuration file at the start up of the app.  
 If the developer wants to check for configuration updates more often, for example at runtime or when the app comes back from background state, it's possible to use the `refresh` method, placing it where the developer wants to perform the download and the configuration check.
 
-```
+```java
 Snowplow.refresh(context, namespaces -> {
   // This callback can be used for last minute, post-configuration, 
   // updates once the tracker instance is enabled and configured.
@@ -283,7 +283,7 @@ When the tracker initializer updates the tracker configuration it would reset al
 
 A clear example is a runtime change on `userId` on `SubjectController`:
 
-```
+```java
 // Load configuration with userId = nil
 Snowplow.setup(context, remoteConfig, defaultConfig, successCallback);
 /* userId is set to nil */

@@ -14,7 +14,7 @@ Version 1.0.0+ marks the conversion of the core library to .NET Standard 1.4. Th
 
 To add the .NET Tracker as a dependency to your project, install it in the Visual Studio Package Manager Console using [NuGet](https://www.nuget.org/):
 
-```
+```powershell
 Install-Package Snowplow.Tracker
 ```
 
@@ -22,7 +22,7 @@ Install-Package Snowplow.Tracker
 
 To add the .NET Tracker as a dependency to your project, install it in the Visual Studio Package Manager Console using [NuGet](https://www.nuget.org/):
 
-```
+```powershell
 Install-Package Snowplow.Tracker.PlatformExtensions
 ```
 

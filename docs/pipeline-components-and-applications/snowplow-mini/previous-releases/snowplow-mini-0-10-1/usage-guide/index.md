@@ -21,7 +21,7 @@ Mini 0.8.0 updated some of the internal components resulting in some breaking ch
 - _Iglu Server is updated from 0.3.0 to 0.6.1_ :
     - Swagger UI is deprecated which means `repo-server.baseURL` configuration field in Iglu Server configuration is deprecated too.
     - We've overhauled Iglu Server in 0.6.0 release and introduced breaking API changes. Please check [API Changes section](https://snowplowanalytics.com/blog/2019/10/11/iglu-server-0.6.0-released/#api-changes) of the blog post to learn about them.
-    - In addition to 0.6.0, Iglu Server 0.6.1 deprecated query parameter support for `POST iglu-server/api/auth/keygen` endpoint. vendor\_prefix must be provided
+    - In addition to 0.6.0, Iglu Server 0.6.1 deprecated query parameter support for `POST iglu-server/api/auth/keygen` endpoint. vendor_prefix must be provided
     - **Note** that browsing to the same endpoint ( /iglu-server ) in an internet browser will yield an error message stating that endpoint doesn't exist, we'll address this in upcoming releases but one can safely ignore that for now and server health can be checked at `GET iglu-server/api/meta/health` endpoint.
 - _Stream Enrich is updated from 0.21.0 to 1.0.0_ :
     - Please check [Upgrade Guide](https://github.com/snowplow/snowplow/wiki/Upgrade-Guide#enrich) to see updated enrichment configuration.
@@ -62,8 +62,10 @@ Let's have examples for both options.
 
 - Download the igluctl 0.7.0 from Github:
 
-`` `$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl  
-$ chmod +x igluctl` ``
+```bash
+$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl  
+$ chmod +x igluctl
+```
 
 Following is a sample execution where `com.acme` is the vendor prefix for which we'll upload our schemas, `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is the super API key created in step 2.2
 
@@ -75,7 +77,7 @@ Following is a sample execution where `com.acme` is the vendor prefix for which 
 
 should return a read key and a write key.
 
-```
+```json
 {
   "read":"bfa90866-ab14-4b92-b6ef-d421fd688b54",
   "write":"6175aa41-d3a7-4e4f-9fb4-3a170f3c6c16"
@@ -89,7 +91,7 @@ To test and send non-standard Snowplow events such as your own custom-contexts a
 1. Get a local copy of your Iglu repository which contains your schemas. This should be modelled after [this folder](https://github.com/snowplow/iglu-central/tree/master/schemas)
 2. Download the latest Igluctl from Github:
 
-```
+```bash
 $ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl 
 $ chmod +x igluctl
 ```
@@ -100,7 +102,7 @@ $ chmod +x igluctl
 - The Super API Key you created in step 2.2
 - The path to your schemas For example to load the `iglu-central` repository into Iglu Server:
 
-```
+```bash
 /path/to/igluctl static push iglu-central/schemas http://[public_dns]/iglu-server 980ae3ab-3aba-4ffe-a3c2-3b2e24e2ffce --public
 ```
 
@@ -182,8 +184,10 @@ Let's have examples for both options.
 
 - Download the igluctl 0.7.0 from Github:
 
-`` `$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl  
-$ chmod +x igluctl` ``
+```bash
+$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl  
+$ chmod +x igluctl
+```
 
 Following is a sample execution where `path-to-schema(s)` is the path to custom schema(s) , `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is the super API key created in step 2.2
 
@@ -195,7 +199,7 @@ Following is a sample execution where `path-to-schema(s)` is the path to custom 
 
 will produce a response like this one, if no errors are encountered:
 
-```
+```json
 {
   "message": "Schema created",
   "updated": false,

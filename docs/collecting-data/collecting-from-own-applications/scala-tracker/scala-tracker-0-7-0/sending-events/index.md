@@ -8,7 +8,7 @@ sidebar_position: 3000
 
 Since 0.5.0 self-describing events and contexts can be sent with `SchemaKey` wrapper from [Iglu Core](https://github.com/snowplow/iglu/wiki/Scala-iglu-core) for additional type-safety.
 
-```
+```scala
 import com.snowplowanalytics.iglu.core.{SchemaKey, SchemaVer}
 import io.circe.Json
 
@@ -39,7 +39,7 @@ You can use its alias `trackUnstructEvent`.
 
 Create a Snowplow unstructured event [self-describing JSON](https://github.com/snowplow/iglu/wiki/Self-describing-JSONs):
 
-```
+```scala
 import com.snowplowanalytics.iglu.core.{SchemaKey, SchemaVer}
 import io.circe.Json
 
@@ -53,13 +53,13 @@ val productViewEvent = SelfDescribingJson(
 
 Send it using the `trackSelfDescribingEvent` tracker method:
 
-```
+```scala
 tracker.trackSelfDescribingEvent(productViewEvent)
 ```
 
 You can attach any number of custom contexts to an event:
 
-```
+```scala
 val pageTypeContext = SelfDescribingJson(
   SchemaKey("com.acme", "page_type", "jsonschema", SchemaVer(1,0,0)),
   Json.obj(
@@ -94,7 +94,7 @@ Use `trackStructEvent` to track a custom event happening in your app which fit
 
 Example:
 
-```
+```scala
 val pageTypeContext = SelfDescribingJson(
   SchemaKey("com.acme", "page_type", "jsonschema", SchemaVer(1,0,0)),
   Json.obj(
@@ -127,7 +127,7 @@ Use `trackPageView` to track a user viewing a page within your app. Arguments 
 
 Example:
 
-```
+```scala
 t.trackPageView("www.example.com", Some("example"), Some("www.referrer.com"))
 ```
 
@@ -143,7 +143,7 @@ Use `trackError` to track exceptions raised during your app's execution. Argum
 
 Example:
 
-```
+```scala
 try {
   1 / 0
 } catch {
@@ -174,13 +174,13 @@ To track an ecommerce transaction item. Fire a `trackTransaction` to register 
 
 By default, Scala Tracker will generate a `dvce_created_tstamp` and add it to event payload. You also can manually set it using `timestamp` argument in all tracking methods. It should be in milliseconds since the Unix epoch:
 
-```
+```scala
 tracker.trackSelfDescribingEvent(productViewEvent, Nil, Some(1432806619000L))
 ```
 
 Beside of it, you can set `true_tstamp` if you have more reliable source about event timestamp. You can tag timstamp as "true" using class `TrueTimestamp`:
 
-```
+```scala
 tracker.trackSelfDescribingEvent(productViewEvent, Nil, Some(Tracker.TrueTimestamp(1432806619000L)))
 ```
 

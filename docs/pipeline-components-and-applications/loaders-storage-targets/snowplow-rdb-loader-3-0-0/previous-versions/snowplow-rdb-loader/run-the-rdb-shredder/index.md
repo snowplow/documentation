@@ -6,9 +6,11 @@ sidebar_position: 40
 
 The RDB shredder is published as a jar file attached to the [github release page](https://github.com/snowplow/snowplow-rdb-loader/releases). We also push it to several S3 buckets, from where it is accessible to an EMR cluster:
 
-```
+```text
 s3://snowplow-hosted-assets/4-storage/rdb-shredder/snowplow-rdb-shredder-{{ version }}.jar
+
 -- or --
+
 s3://snowplow-hosted-{{ region }}/4-storage/rdb-shredder/snowplow-rdb-shredder-{{ version }}.jar
 ```
 
@@ -18,7 +20,7 @@ where `region` is one of `us-east-1`, `us-west-1`, `us-west-2`, `sa-east-1`, `eu
 
 You can use any suitable tool to periodically submit the Shredder job to EMR cluster. We recommend to use [Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/index.md), here an example of cluster config:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.dataflowrunner/ClusterConfig/avro/1-1-0",
   "data": {
@@ -126,7 +128,7 @@ You need to change following settings to match your configuration:
 
 Here's a typical playbook:
 
-```
+```json
 {
   "schema": "iglu:com.snowplowanalytics.dataflowrunner/PlaybookConfig/avro/1-0-1",
   "data": {

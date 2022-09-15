@@ -35,7 +35,7 @@ Add the snowplow-mobile package to your `packages.yml` file. For more informat
 
 This package will by default assume your Snowplow events data is contained in the `atomic` schema of your [target.database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). In order to change this, please add the following to your `dbt_project.yml` file:
 
-```
+```yaml
 # dbt_project.yml
 ...
 vars:
@@ -55,7 +55,7 @@ The mobile package has the option to join in data from the following 4 Snowplow 
 
 By default, these are **all disabled** in the mobile package. Assuming you have the contexts turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 
-```
+```yaml
 # dbt_project.yml
 ...
 vars:
@@ -73,7 +73,7 @@ The mobile package also has the option to join in data from the following 1 Snow
 
 By default this module is **disabled** in the mobile package. Assuming you have the module turned on in your Snowplow pipeline, to enable the module within the package please add the following to your `dbt_project.yml` file:
 
-```
+```yaml
 # dbt_project.yml
 ...
 vars:
@@ -85,7 +85,7 @@ vars:
 
 You can specify both the `start_date` at which to start processing events and the `app_id`'s to filter for. By default, the `start_date` is set to `2020-01-01` and all `app_id`'s are selected. To change this, please add the following to your `dbt_project.yml` file:
 
-```
+```yaml
 # dbt_project.yml
 ...
 vars:
@@ -104,7 +104,7 @@ For more details, please refer to the [snowplow-mobile package documentation](h
 
 The Snowplow mobile model is designed to be run as a whole, which ensures all incremental tables are kept in sync. As such, we suggest running the model using:
 
-```
+```bash
 dbt run --models snowplow_mobile tag:snowplow_mobile_incremental
 ```
 

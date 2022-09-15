@@ -26,10 +26,10 @@ On AWS:
 - Ensure you are using the `secure` variant of the Quick Start
 - Setting up CloudWatch alarms and Auto-scaling for each pipeline component
     - You can find extensive documentation on AWS CloudWatch which will guide you on what needs to be done to deliver a highly available, autoscaling pipeline
-- Set your Collector min\_size to 2 at a minimum to ensure availability in case of availability zone outages: [https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70](https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70)
-- Set up your max\_size for all the EC2 groups to a number bigger than 2 to ensure they can scale horizontally
+- Set your Collector min_size to 2 at a minimum to ensure availability in case of availability zone outages: [https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70](https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70)
+- Set up your max_size for all the EC2 groups to a number bigger than 2 to ensure they can scale horizontally
 - Ensure your RDS instances are setup with multi availability zones configured: [https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L92-L96](https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L92-L96)
-- Set the max\_kcl\_capacity for read & write to something substantially higher than the default (it will auto-scale up to that limit) - its the same variables for all Kinesis consumers ([https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85))
+- Set the max_kcl_capacity for read & write to something substantially higher than the default (it will auto-scale up to that limit) - its the same variables for all Kinesis consumers ([https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85))
 - Ensure your RDS for the Postgres Loaders can auto-scale its capacity - this will mean you won't run out of disk when you start tracking events in: [https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L62-L66](https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L62-L66)
 
 #### How do I upgrade the version of the application that I am using?
@@ -81,7 +81,7 @@ AWS:
 
 **Solution**: Add subnets to cover at least 2 availability zones. See this [AWS guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-public-private-vpc.html) on how to set this up.
 
-After this step, add the two freshly created subnets to your `terraform.tfvars` file like this: public\_subnet\_ids = \["subnet-00000000", "subnet-00000001"\] and run `terraform apply` again.
+After this step, add the two freshly created subnets to your `terraform.tfvars` file like this: public_subnet_ids = ["subnet-00000000", "subnet-00000001"] and run `terraform apply` again.
 
 **Error creating DB Subnet Group**
 
@@ -89,10 +89,10 @@ After this step, add the two freshly created subnets to your `terraform.tfvars` 
 
 **Solution**: Add subnets to cover at least 2 availability zones. See this [AWS guide](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-public-private-vpc.html) on how to set this up.
 
-After this step, add the two freshly created subnets to your `terraform.tfvars` file like this: public\_subnet\_ids = \["subnet-00000000", "subnet-00000001"\] and run `terraform apply` again. 
+After this step, add the two freshly created subnets to your `terraform.tfvars` file like this: public_subnet_ids = ["subnet-00000000", "subnet-00000001"] and run `terraform apply` again. 
 
 **Error creating DB Instance: InvalidParameterValue**
 
 `The parameter MasterUserPassword is not a valid password. Only printable ASCII characters besides '/', '@', '"', ' ' may be used.`
 
-**Solution**: Modify the iglu\_db\_password in your terraform.tfvars file so that it does not contain any forbidden characters like '\_', '\*'. Make sure the password is not longer than 13 characters.
+**Solution**: Modify the iglu_db_password in your terraform.tfvars file so that it does not contain any forbidden characters like '_', '\*'. Make sure the password is not longer than 13 characters.

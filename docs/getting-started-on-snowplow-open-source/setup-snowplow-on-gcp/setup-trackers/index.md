@@ -8,7 +8,7 @@ sidebar_position: 10
 
 Snowplow Trackers are SDKs that are integrated into applications to generate event-data and send that data to [Snowplow Collectors](https://github.com/snowplow/snowplow/wiki/Setting-up-a-Collector).
 
-## 1\. Choose and setup a Tracker
+## 1. Choose and setup a Tracker
 
 ```mdx-code-block
 import Block2936 from "@site/docs/reusable/untitled-reusable-block-38/_index.md"

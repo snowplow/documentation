@@ -29,7 +29,7 @@ To start tracking media with default settings, use the snippet below, using your
 
 **`main.js`**
 
-```
+```javascript
 window.snowplow('addPlugin', 
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
   ["snowplowMediaTracking", "MediaTrackingPlugin"]
@@ -42,7 +42,7 @@ window.snowplow('enableMediaTracking', {
 
 **`index.html`**
 
-```
+```html
 <html>
   <head>
     <title>Snowplow Media Tracking Example</title>
@@ -57,7 +57,7 @@ window.snowplow('enableMediaTracking', {
 
 The `enableMediaTracking` function takes the form:
 
-```
+```javascript
 window.snowplow('enableMediaTracking', { id, options?: { label?, captureEvents?, boundaries?, volumeChangeTrackingInterval? } })
 ```
 
@@ -66,12 +66,12 @@ window.snowplow('enableMediaTracking', { id, options?: { label?, captureEvents?,
 | `id` | `string` | \- | The HTML id attribute of the media element | Yes |
 | `options.label` | `string` | \- | An identifiable custom label sent with the event | No |
 | `options.captureEvents` | `string[]` | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No |
-| `options.boundaries` | `number[]` | `[10, 25, 50, 75]` | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [\[1\]](#1) | No |
-| `options.volumeChangeTrackingInterval` | `number` | `250` | The rate at which volume events can be sent [\[2\]](#2) | No |
+| `options.boundaries` | `number[]` | `[10, 25, 50, 75]` | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1) | No |
+| `options.volumeChangeTrackingInterval` | `number` | `250` | The rate at which volume events can be sent [[2]](#2) | No |
 
 Below is an example of the full `enableMediaTracking` function:
 
-```
+```javascript
 window.snowplow('enableMediaTracking', {
   id: 'example-video',
   options: {
@@ -91,7 +91,7 @@ For this plugin to find your media element, one of the following conditions must
 
 **`index.html`**
 
-```
+```html
 ...
   <body>
     <video id='example-id' src='./example-video.mp4'></video>
@@ -110,7 +110,7 @@ Or
 
 **`index.html`**
 
-```
+```html
 ...
   <body>
     <div id="example-id">
@@ -165,9 +165,9 @@ Note
 
 Not all events are available in all browsers (though most are). To check, use the following links:
 
-[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser\_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
+[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
 
-[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser\_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
+[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
 
 ### Event Groups
 
@@ -180,7 +180,7 @@ You can also use a pre-made event group in `options.captureEvents`:
 
 It is possible to extend an event group with any event in the Events table above. This could be useful, for example, if you want all the events contained in the 'DefaultEvents' group, along with the 'emptied' event. This is expressed in the following way:
 
-```
+```javascript
 window.snowplow('enableMediaTracking', {
   id: 'example-video',
   options: {
@@ -195,7 +195,7 @@ Four schemas are used with this plugin:
 
 ### [An unstructured event with identifying information](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "type": "play",
     "label": "Identifying Label"
@@ -204,7 +204,7 @@ Four schemas are used with this plugin:
 
 ### [Snowplow platform-agnostic media context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "currentTime": 12.32,
     "duration": 20,
@@ -219,7 +219,7 @@ Four schemas are used with this plugin:
 
 ### [HTML5 Media specific context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "htmlId": "my-video",
     "mediaType": "VIDEO",
@@ -261,7 +261,7 @@ Four schemas are used with this plugin:
 
 ### [HTML5 Video specific context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/video_element/jsonschema/1-0-0)
 
-```
+```javascript
 {
     "autoPictureInPicture": false,
     "disablePictureInPicture": false,
@@ -275,9 +275,9 @@ Note
 
 Not all properties in the HTML5 Media/Video specific schemas will be available on all browsers. Use the following links to check availability:
 
-[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser\_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
+[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
 
-[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser\_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
+[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
 
 ### Video Frameworks
 
@@ -287,4 +287,4 @@ This plugin has been tested with [VideoJS](https://videojs.com/) and [Plyr](h
 
 1. To track when a video ends, use the 'ended' event. 
 
-2\. When holding and dragging the volume slider, 'volumechange' events would be fired extremely quickly. This is used to limit the rate they can be sent out at. The default value is likely to be appropriate, but you can adjust it if you find you want fewer/more volume events through.
+2. When holding and dragging the volume slider, 'volumechange' events would be fired extremely quickly. This is used to limit the rate they can be sent out at. The default value is likely to be appropriate, but you can adjust it if you find you want fewer/more volume events through.

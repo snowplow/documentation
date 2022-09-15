@@ -12,7 +12,7 @@ R34 is a release with bugfixes and performance improvements. R33 was almost iden
 2. Your `redshift_config.json` should have 4-0-0 version
 3. Update your `config.yml` file
 
-```
+```yaml
 aws:
   emr:
     ami_version: 6.1.0     # was 5.19.0; Required by Spark 3

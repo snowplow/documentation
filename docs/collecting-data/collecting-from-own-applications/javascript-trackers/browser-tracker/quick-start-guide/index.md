@@ -21,13 +21,13 @@ The process involves the following high level steps:
 
 - You can then import this library into your application
 
-```
+```javascript
 import { newTracker, trackPageView } from "@snowplow/browser-tracker";
 ```
 
 - Configure an instance of the tracker by calling `newTracker(...)` with your desired properties. This will create a module level instance of your tracker. You don't need to keep a reference to it.
 
-```
+```javascript
 newTracker('sp1', '{{collector_url}}', { 
   appId: 'my-app-id', 
   plugins: [ ],
@@ -36,7 +36,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 - Then you can use the track methods to send some events. You can send a Page View event to all initialised trackers with just:
 
-```
+```javascript
 trackPageView();
 ```
 

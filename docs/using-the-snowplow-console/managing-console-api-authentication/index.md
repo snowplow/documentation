@@ -32,9 +32,10 @@ Showing a newly created API key
 
 This is a secret, equivalent to a username and a password combined, and should be handled as such at all times. As soon as you have an API key, it is straightforward to exchange it for a JWT. If you would do that using curl, it would look as follows:
 
-```
+```bash
 curl \
-  --header 'X-API-Key: <API_KEY>' \   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
+  --header 'X-API-Key: <API_KEY>' \   
+  https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
 ```
 
 You can find your organization's ID within the BDP Console URL:
@@ -45,12 +46,12 @@ The organization ID is the UUID in the first URL segment after the host
 
 The curl command above will return a JWT as follows:
 
-```
+```json
 {"accessToken":"<JWT>"}
 ```
 
 You may then use this access token value to supply authorization headers for subsequent api requests:
 
-```
+```bash
 curl --header 'Authorization: Bearer <JWT>'
 ```

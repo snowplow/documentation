@@ -8,7 +8,7 @@ Assuming you have completed the [Node.js Tracker Setup](/docs/collecting-data/c
 
 Require the Node.js Tracker module into your code like so:
 
-```
+```javascript
 var snowplow = require('@snowplow/node-tracker');
 var gotEmitter = snowplow.gotEmitter;
 var tracker = snowplow.tracker;
@@ -16,7 +16,7 @@ var tracker = snowplow.tracker;
 
 or, if using ES Modules, you can import the module like so:
 
-```
+```javascript
 import { tracker, gotEmitter } from '@snowplow/node-tracker';
 ```
 
@@ -28,7 +28,7 @@ First, initialize an emitter instance. The Snowplow Node.js Tracker is bundled w
 
 A simple set up of this emitter might look like:
 
-```
+```javascript
 const e = gotEmitter(
   'collector.mydomain.net', // Collector endpoint
   snowplow.HttpProtocol.HTTPS, // Optionally specify a method - https is the default
@@ -42,7 +42,7 @@ There are a number of additional parameters that the `gotEmitter` allows to be c
 
 The full set of `gotEmitter` parameters can be found in our [API Documentation](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/trackers/node-tracker/docs/markdown/node-tracker.gotemitter.md). A complete example might look like:
 
-```
+```javascript
 const e = snowplow.gotEmitter(
   'collector.mydomain.net', // Endpoint
   snowplow.HttpProtocol.HTTPS, // Protocol
@@ -68,7 +68,7 @@ const e = snowplow.gotEmitter(
 
 Initialise a tracker instance like this:
 
-```
+```javascript
 const t = tracker([e], 'myTracker', 'myApp', false);
 ```
 
@@ -87,7 +87,7 @@ As an example where this might be useful, as `got` only works in Node.js applica
 
 Emitters must conform to an [`Emitter` interface](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/trackers/node-tracker/docs/markdown/node-tracker.emitter.md), which looks like:
 
-```
+```typescript
 interface Emitter {
   flush: () => void;
   input: (payload: PayloadDictionary) => void;

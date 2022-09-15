@@ -63,7 +63,7 @@ const t = trackerCore(false, console.log);
 
 The above example would create a tracker core instance which doesn't use base 64 encoding and which logs all payloads it creates to the console.
 
-## [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Core#3-setter-methods)3. Setter methods
+## 3. Setter methods
 
 The core instance maintains a dictionary called `payloadPairs` containing persistent name-value pairs which are added to every payload. You can interact with these through the following methods:
 
@@ -136,7 +136,7 @@ t.resetPayloadPairs({
 });                            // {d: 'four', e: 'five'}
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Core#4-tracking-methods)4. Tracking methods
+## 4. Tracking methods
 
 ### Common features
 

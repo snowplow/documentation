@@ -6,11 +6,11 @@ sidebar_position: 120
 
 Iglu is designed to be not dependent on any particular programming language or platform. But there's growing set of applications beside clients and registries using different concepts originated from Iglu. To have consistent data structures and behavior among different applications, we're developing Iglu core libraries for different languages.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-core#basic-data-structures)Basic data structures
+## Basic data structures
 
 All languages have their own unique features and particular Iglu Core implementation may or may not use these features. One common rule for all Iglu core implementations is to minimize dependencies. Ideally Iglu core should have no external dependencies. Another rule is to implement the required basic data structures (in form of classes, structs, ADTs or any other appropriate form) and functions.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemakey)SchemaKey
+### SchemaKey
 
 This data structure contains information about Self-describing datum, such as Snowplow unstructured event or context.
 
@@ -20,11 +20,11 @@ This also can include appropriate regular expressions to extract and validate sc
 
 More information can be found in [Self-describing JSON Schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) and [Self-describing JSONs](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-jsons/index.md) wiki pages.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemamap)SchemaMap
+### SchemaMap
 
 This is almost isomorphic entity to `SchemaKey`, which also contains same information: vendor, name, format and version. But unlike `SchemaKey` it supposed to be attached only to Schemas instead of datums. In schemas same information usually has different representation and also version is always _full_ opposed to datum's possibly _partial_.
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemaver)SchemaVer
+### SchemaVer
 
 This is a part of `SchemaKey` and `SchemaMap` with information about semantic Schema version, basically triplet of MODEL, REVISION, ADDITION.
 
@@ -34,12 +34,12 @@ It can either _full_ (e.g. `1-2-0`) or _partial_ (e.g. `1-?-?`) suited for
 
 More information can be found in dedicated wiki page: [SchemaVer](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/index.md).
 
-### [](https://github.com/snowplow/iglu/wiki/Iglu-core#schemacriterion)SchemaCriterion
+### SchemaCriterion
 
 Last core data structure is `SchemaCriterion` which is a default way to filter Self-describing entities. Basically it represent `SchemaKey` divided into six parts, where last three (MODEL, REVISION, ADDITION) _can_ be unfilled, thus one can match all entities regardless parts which remain unfilled.
 
 `SchemaCriterion` also must contain regular expression, `parse` and `asString` (unfilled parts replaced with asterisks) functions. One other required function is `matches` which accepts `SchemaCriterion` and `SchemaKey` and returning boolean value indicating if key was matched. Bear in mind that criterions matching versions like `.../*-1-*` or `.../*-*-0` are absolutely valid, they're useful if want to match all initial Schemas.
 
-## [](https://github.com/snowplow/iglu/wiki/Iglu-core#implementations)Implementations
+## Implementations
 
 Currently we have only [Scala Iglu Core](https://github.com/snowplow/iglu/wiki/Scala-Iglu-Core) which can be considered as reference implementation. Among described above data structures it includes type classes and container classes to improve type-safety. These type classes and containers are completely optional in other implementations.

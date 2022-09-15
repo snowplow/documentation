@@ -18,7 +18,7 @@ As of `0.6.0`, we offer 3 different images for 3 new sizes of Snowplow Mini.
 
 To decide on which size of Snowplow Mini to choose, read on.
 
-### [](https://github.com/snowplow/snowplow-mini/wiki/Setup-guide-AWS#large--xlarge--xxlarge)large & xlarge & xxlarge
+### large & xlarge & xxlarge
 
 Until `0.6.0`, Snowplow Mini was being used inside AWS `t2.medium`, `n1-standard-1` in GCP, instances and it served well for demonstration purposes. However, we observed that Snowplow Mini started exceeding its initial motivation and machine resources started to become an obstacle, causing issues with Elasticsearch etc. This is why, Mini is available at 3 different sizes.
 

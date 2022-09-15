@@ -25,7 +25,7 @@ You should now be able to setup the Tracker!
 
 ### Creating a tracker
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#using-snowplowtracker-net-standard-or-snowplowtrackerplatformextensions-pcl)Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
 
 To use the Tracker in your code simply instantiate the Tracker interface with the following:
 

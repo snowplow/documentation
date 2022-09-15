@@ -14,7 +14,7 @@ Iglu consists of three key technical aspects:
 2. [Iglu registries](/docs/pipeline-components-and-applications/iglu/iglu-repositories/index.md) that can host a set of [self-describing JSON schemas](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md)
 3. [Iglu clients](/docs/pipeline-components-and-applications/iglu/iglu-clients/index.md) that can resolve schemas from one or more Iglu registries
 
-## [](https://github.com/snowplow/snowplow/wiki/Iglu-registry#iglu-explained)Iglu explained
+## Iglu explained
 
 **Iglu** is built on a set of technical design decisions. It is this set of design decisions that allow Iglu clients and registries to interoperate. Please review the following design documents:
 

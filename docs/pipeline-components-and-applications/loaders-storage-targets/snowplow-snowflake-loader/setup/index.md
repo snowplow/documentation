@@ -93,9 +93,7 @@ Next, you need to create an IAM role that will provide credentials.
 }
 ```
 
-1. Now save Role ARN as your `roleArn` in target configuration
-
-#### [](https://github.com/snowplow-incubator/snowplow-snowflake-loader/wiki/Setup-Guide#setting-up-snowflake)
+5. Now save Role ARN as your `roleArn` in target configuration
 
 #### Setting up Snowflake
 

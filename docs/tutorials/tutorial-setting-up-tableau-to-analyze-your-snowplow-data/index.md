@@ -17,7 +17,7 @@ Tableau has a number of strengths which account for why we prefer it to other BI
 
 Like most other BI tools: Tableau has limitations when used outside of traditional OLAP analysis: we do not recommend it for statistical analysis (although it has some basic capabilities) or more bespoke graphs. For this type of capability, we recommend [R](/docs/tutorials/setting-up-r-to-perform-more-sophisticated-analysis-on-your-snowplow-data/index.md).
 
-## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#2-download-and-get-started-with-tableau)2. Download and get started with Tableau
+## 2. Download and get started with Tableau
 
 If you are not already using Tableau, you can download a 30 day trial version of the desktop product from the [Tableau website](http://www.tableausoftware.com/products/trial).
 
@@ -25,7 +25,7 @@ Note: Tableau desktop **only** works on Windows. If you're using Linux or a Ma
 
 Installing Tableau desktop for windows is straightforward: simply [download the executable](http://www.tableausoftware.com/products/trial) and run it.
 
-## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#3-connecting-tableau-to-snowplow-data-in-redshift)3. Connecting Tableau to Snowplow data in Redshift
+## 3. Connecting Tableau to Snowplow data in Redshift
 
 Launch Tableau, and select **Connect to data** from the left hand menu
 
@@ -63,9 +63,9 @@ We can fetch these details directly from the AWS console. Log into [console.aws
 
 **Troubleshooting your connection**: For security, Amazon only lets computers access a Redshift cluster where those computers are located at an IP address that has been white-listed. Hence, in order to connect Tableau, you must make sure that the machine running Tableau is on a white-listed IP address. Instructions on how to white-list IP addresses in Redshift are given [here](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/launch-a-redshift-cluster/index.md).
 
-## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#4-getting-started-analyzing-snowplow-data-in-tableau)4. Getting started analyzing Snowplow data in Tableau
+## 4. Getting started analyzing Snowplow data in Tableau
 
-### [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#41-plotting-our-first-graph-number-of-uniques-over-time)4.1 Plotting our first graph: number of uniques over time
+### 4.1 Plotting our first graph: number of uniques over time
 
 To kick in the tyres, we'll walk through the process of plotting the number of uniques that visit the site over time.
 
@@ -99,7 +99,7 @@ Now to make the plot a familiar line graph, click on the **Show me** toolbar a
 
 Bingo! Our line graph appears!
 
-### [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#42-further-analysis-best-practice-when-using-tableau-with-snowplow)4.2 Further analysis: best practice when using Tableau with Snowplow
+### 4.2 Further analysis: best practice when using Tableau with Snowplow
 
 In the above example, we used Tableau to connect to the complete Snowplow events data table. This can, potentially, be an enormous volume of data. For that reason, when asked whether we wanted to import the data into Tableau, we declined, instead connecting "live" to Redshift. As a result, every time we performed an operation in Redshift (e.g. dragging a metric or dimension around the screen), Tableau went off and ran a query against Redshift to fetch the appropriate cut of data necessary to perform the operation we specified. Redshift, rather than Tableau, did all the heavy data lifting.
 
@@ -191,7 +191,7 @@ When you fetch smaller data sets from Snowplow / Redshift, you can ask Tableau t
 
 ![](images/6.jpg)
 
-## [](https://github.com/snowplow/snowplow/wiki/Setting-up-Tableau-to-analyze-your-Snowplow-data/7d7d8fbf27acb2d443e760e6d08b5a7fdee80139#5-next-steps)5. Next steps
+## 5. Next steps
 
 There is a huge number of ways you can interrogate Snowplow data using Tableau. For some ideas, see the following blog posts for some examples:
 

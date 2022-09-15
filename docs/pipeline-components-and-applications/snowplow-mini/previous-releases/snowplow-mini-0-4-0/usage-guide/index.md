@@ -130,7 +130,7 @@ You can view the number of events recorded over time on the histogram at the top
 
 You can add new custom enrichments via the Control Plane tab. The only thing you have to do is submit the enrichment file which you created according to this [wiki page](https://github.com/snowplow/snowplow/wiki/Configurable-enrichments). If the enrichment relies on additional schemas these should be uploaded to the Iglu repository.
 
-#### [](https://github.com/snowplow/snowplow-mini/wiki/Usage-guide---0.4.0#please-note)Please note:
+#### Please note:
 
 The [PII Enrichment](https://github.com/snowplow/snowplow/wiki/PII-pseudonymization-enrichment) is not compatible with this version of Snowplow Mini. A new version which will work with the PII enrichment is expected to be released before the 28th of May 2018.
 

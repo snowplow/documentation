@@ -36,9 +36,9 @@ Select "Create Target" and click the _**Submit**_ button.
 
 We have set up our collector as a Zendesk extension. We can now add a trigger which sends `POST` requests to the collector whenever certain events occur.
 
-## [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#2-setting-up-a-trigger-for-zendesk-event)2. Setting up a trigger for Zendesk event
+## 2. Setting up a trigger for Zendesk event
 
-### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-trigger-conditions)Setting up trigger conditions
+### Setting up trigger conditions
 
 From the _Admin_ page, select "Triggers" from the "BUSINESS RULES" menu and click "add trigger":
 
@@ -50,7 +50,7 @@ Under "Meet ANY of the following conditions" header click _**Add condition**_ 
 
 ![](images/trigger-conditions.png)
 
-### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-body-for-ticket-event)Setting up body for ticket event
+### Setting up body for ticket event
 
 In the "Actions" section, click on _**Add action**_ button and select "Notify target" and "Snowplow Collector - Iglu POST" (the extension you set up in [Setting up a collector as a Zendesk extension](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#extension) section above).
 
@@ -90,9 +90,9 @@ In the _**JSON body**_ box, paste the following:
 
 _NOTE:_ Ignore the warning on the left-hand side of the _**JSON body**_ textbox. It is due to usage of [Liquid markup](https://shopify.github.io/liquid/) in JSON.
 
-### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-user-contexts)Setting up user contexts
+### Setting up user contexts
 
-#### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-body-for-ticket-requester)Setting up body for ticket requester
+#### Setting up body for ticket requester
 
 In the "Actions" section, select the 2nd "Notify target" and "Snowplow Collector - Iglu POST" extension.
 
@@ -125,7 +125,7 @@ In the _**JSON body**_ box, paste the following:
 }
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-body-for-ticket-assignee)Setting up body for ticket assignee
+#### Setting up body for ticket assignee
 
 In the "Actions" section, select the 3nd "Notify target" and "Snowplow Collector - Iglu POST" extension.
 
@@ -158,7 +158,7 @@ In the _**JSON body**_ box, paste the following:
 }
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-body-for-ticket-submitter)Setting up body for ticket submitter
+#### Setting up body for ticket submitter
 
 In the "Actions" section, select the 4th "Notify target" and "Snowplow Collector - Iglu POST" extension.
 
@@ -191,7 +191,7 @@ In the _**JSON body**_ box, paste the following:
 }
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Zendesk-webhook-setup#setting-up-body-for-current-user)Setting up body for current user
+#### Setting up body for current user
 
 In the "Actions" section, select the 5th (final) "Notify target" and "Snowplow Collector - Iglu POST" extention.
 

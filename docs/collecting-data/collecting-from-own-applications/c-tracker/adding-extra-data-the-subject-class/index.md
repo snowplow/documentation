@@ -66,7 +66,7 @@ Both numbers should be positive integers; note the order is width followed by he
 subject->set_screen_resolution(1366, 768);
 ```
 
-## Set viewport dimensions with "set_viewport"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-viewport-dimensions-with-set_viewport)
+## Set viewport dimensions with "set_viewport"
 
 If your code has access to the viewport dimensions, then you can pass this in to Snowplow too:
 
@@ -80,7 +80,7 @@ Both numbers should be positive integers; note the order is width followed by he
 subject->set_viewport(300, 200);
 ```
 
-## Set color depth with "set_color_depth"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-color-depth-with-set_color_depth)
+## Set color depth with "set_color_depth"
 
 If your code has access to the bit depth of the device’s color palette for displaying images, then you can pass this in to Snowplow too:
 
@@ -108,7 +108,7 @@ The timezone should be a string:
 subject->set_timezone("Europe/London");
 ```
 
-## Set the language with "set_language"[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/03-adding-data.md#set-the-language-with-set_language)
+## Set the language with "set_language"
 
 This method lets you pass a user’s language in to Snowplow:
 

@@ -135,7 +135,7 @@ sve.name = &name;
 Snowplow::get_default_tracker()->track(sve);
 ```
 
-## Track structured events with `StructuredEvent`[](https://file+.vscode-resource.vscode-cdn.net/Users/matus/Projects/Snowplow/snowplow-cpp-tracker/docs/04-tracking-events.md#track-structured-events-with-trackstructevent)
+## Track structured events with `StructuredEvent`
 
 Use the `StructuredEvent` type to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required). This method provides a halfway-house between tracking fully user-defined self-describing events and out-of-the box predefined events. This event type can be used to track many types of user activity, as it is somewhat customizable.
 

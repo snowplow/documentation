@@ -24,7 +24,7 @@ The `tracker` instance has a set of `set...()` methods to attach extra data to
 
 The full listing of available functions on the `Tracker` interface can be found in our [API Documentation](https://snowplow.github.io/snowplow-nodejs-tracker/interfaces/_tracker_.tracker.html).
 
-### [](#31-set-the-platform-id-with-setplatform)3.1 Set the platform ID with `setPlatform()`
+### 3.1 Set the platform ID with `setPlatform()`
 
 You can set the platform:
 

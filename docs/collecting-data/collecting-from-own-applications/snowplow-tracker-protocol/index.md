@@ -5,7 +5,7 @@ date: "2020-02-26"
 sidebar_position: 80
 ---
 
-## [](#overview)Overview
+## Overview
 
 Snowplow trackers fire _events_, which are either `GET` or `POST` requests of a Snowplow collector, whenever an event on a website or application takes place. By appending events' parameters and values to the end of those `GET` requests or adding them into the body of `POST` messages, trackers can pass data into the collectors, for processing by Snowplow.
 
@@ -29,7 +29,7 @@ Each parameter of the Snowplow Tracker Protocol is described in the tables below
 - **Implemented**: Whether the parameter is implemented, deprecated or not-implemented.
 - **Example values**: Examples of valid values for the parameter.
 
-## [](#the-snowplow-tracker-protocol-individual-parameters)The Snowplow Tracker protocol: individual parameters
+## The Snowplow Tracker protocol: individual parameters
 
 ## Common parameters (platform and event independent)
 

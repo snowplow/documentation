@@ -86,7 +86,7 @@ HttpClientAdapter adapter = ApacheHttpClientAdapter.builder()
 
 **NOTE**: it is encouraged to research how best you want to setup your `ApacheClient` for maximum performance. By default the Apache Client will never timeout and will also allow only two outbound connections at a time. We have used a `PoolingHttpClientConnectionManager` here to override that setting to allow up to 50 concurrent outbound connections.
 
-### [](https://github.com/snowplow/snowplow/wiki/Java-Tracker#52-using-a-buffer)5.2 Using a buffer
+### 5.2 Using a buffer
 
 **NOTE**: Only applies to the `BatchEmitter`
 

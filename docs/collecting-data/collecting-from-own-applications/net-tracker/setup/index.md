@@ -10,7 +10,7 @@ Version 1.0.0+ marks the conversion of the core library to .NET Standard 1.4. Th
 
 ## Setup
 
-### [](https://github.com/snowplow/snowplow/wiki/.NET-tracker-setup#net-standard-users).NET Standard users
+### .NET Standard users
 
 To add the .NET Tracker as a dependency to your project, install it in the Visual Studio Package Manager Console using [NuGet](https://www.nuget.org/):
 
@@ -18,7 +18,7 @@ To add the .NET Tracker as a dependency to your project, install it in the Visua
 Install-Package Snowplow.Tracker
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/.NET-tracker-setup#xamarin-users)Xamarin users
+### Xamarin users
 
 To add the .NET Tracker as a dependency to your project, install it in the Visual Studio Package Manager Console using [NuGet](https://www.nuget.org/):
 

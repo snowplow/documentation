@@ -8,15 +8,15 @@ If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enr
 
 When loading enriched events, the resulting JSONs are like the [Snowplow Canonical Event model](/docs/understanding-your-pipeline/canonical-event/index.md) with the following changes:
 
-### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader#boolean-fields-reformatted)Boolean fields reformatted
+### Boolean fields reformatted
 
 All boolean fields like `br_features_java` are either `"0"` or `"1"` in the canonical event model. The JSON converts these values to `false` and `true`.
 
-### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader#new-geo_location-field)New `geo_location` field
+### New `geo_location` field
 
 The `geo_latitude` and `geo_longitude` fields are combined into a single `geo_location` field of Elasticsearch's ["geo_point" type](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html).
 
-### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader#unstructured-events)Unstructured events
+### Unstructured events
 
 Unstructured events are expanded into full JSONs. For example, the event
 
@@ -45,7 +45,7 @@ would be converted to the field
 }
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader#custom-contexts)Custom contexts
+### Custom contexts
 
 Each custom context in an array is similarly expanded to a JSON with its own field. For example, the array
 
@@ -83,11 +83,11 @@ would be converted to
 
 ### Configuring Elasticsearch
 
-#### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader-Setup#getting-started)Getting started
+#### Getting started
 
 First off, install and set up Elasticsearch version 7.x or 6.x. For more information check out the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html).
 
-#### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader-Setup#raising-the-file-limit)Raising the file limit
+#### Raising the file limit
 
 Elasticsearch keeps a lot of files open simultaneously so you will need to increase the maximum number of files a user can have open. To do this:
 
@@ -112,7 +112,7 @@ curl localhost:9200/_nodes/process?pretty
 
 If the `max_file_descriptors` equals 32000 it is running with the new limit.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader-Setup#defining-the-mapping)Defining the mapping
+#### Defining the mapping
 
 Use the following request to create the mapping with Elasticsearch 7.x:
 
@@ -168,7 +168,7 @@ curl -XPUT 'http://localhost:9200/snowplow' -d '{
 }'
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader-Setup#installing-the-elasticsearch-loader)Installing the Elasticsearch Loader
+### Installing the Elasticsearch Loader
 
 The Elasticsearch Loader is published on Docker Hub:
 
@@ -191,9 +191,9 @@ Alternatively you can download and run a [jar file from the github release](http
 java -jar snowplow-elasticsearch-loader-2.0.7.jar --config /path/to/config.hocon
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader-Setup#using-the-elasticsearch-loader)Using the Elasticsearch Loader
+### Using the Elasticsearch Loader
 
-#### [](https://github.com/snowplow/snowplow/wiki/Elasticsearch-Loader-Setup#configuration)Configuration
+#### Configuration
 
 The sink is configured using a HOCON file, for which you can find examples [here](https://github.com/snowplow/snowplow-elasticsearch-loader/tree/master/config). These are the fields:
 

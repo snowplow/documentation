@@ -52,7 +52,7 @@ Webhooks allow this third-party software to send their own internal event stream
 
 - [Setup your first webhook](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-webhooks/index.md)
 
-**Note: once you have setup a collector and tracker or webhook, you can pause and perform the remainder of the setup steps later**. That is because your data is being successfully generated and logged. When you eventually setup enrich[](#step-3-setup-enrich), you will be able to process all the data you have logged since setup.
+**Note: once you have setup a collector and tracker or webhook, you can pause and perform the remainder of the setup steps later**. That is because your data is being successfully generated and logged. When you eventually setup enrich, you will be able to process all the data you have logged since setup.
 
 ## Setup Enrich
 

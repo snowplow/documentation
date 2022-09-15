@@ -19,7 +19,7 @@ sidebar_position: 100
 - [SQL-runner](https://github.com/snowplow/sql-runner) must be installed ([Setup guide](/docs/modeling-your-data/setup-and-run-sql-runner/index.md)).
 - A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) must be available in the database.
 
-#### [](https://github.com/snowplow/data-models/tree/feature-redshift-web-v1/web/v1/redshift#configuration)Configuring and running the model
+#### Configuring and running the model
 
 First, fill in the connection details for the target database in the relevant template in `.scripts/templates/redshift.yml.tmpl`.
 

@@ -10,13 +10,13 @@ Stream Enrich will soon be deprecated in favor of [enrich-kinesis](/docs/pipelin
 
 :::
 
-## Available on Terraform Registry[](/docs/pipeline-components-and-applications/stream-collector/setup/index.md#available-on-terraform-registry)
+## Available on Terraform Registry
 
 [![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest)
 
 A Terraform module is available which deploys Stream Enrich on a AWS EC2 without the need for this manual setup.
 
-## Run Stream Enrich[](/docs/pipeline-components-and-applications/stream-collector/setup/index.md#run-the-collector)
+## Run Stream Enrich
 
 Stream Enrich is on docker hub with several different flavours. Pull the image that matches the source/sink you are using:
 

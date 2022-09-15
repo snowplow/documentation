@@ -12,11 +12,11 @@ import Block2901 from "@site/docs/reusable/untitled-reusable-block-37/_index.md"
 
 The Snowplow .NET Tracker allows you to track Snowplow events from your .NET websites and desktop applications. It's split into two libraries:
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#snowplowtracker)`Snowplow.Tracker`
+#### `Snowplow.Tracker`
 
 This is a fully functional .NET Standard 1.4 tracking library - it will work on any platform that supports .NET Standard 1.4+ (including .NET 461+).
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#snowplowtrackerplatformextensions)`Snowplow.Tracker.PlatformExtensions`
+#### `Snowplow.Tracker.PlatformExtensions`
 
 This is a Portable Class Library (PCL) wrapper around the core `Snowplow.Tracker` library that extends functionality in platform specific ways, for example to provide geo-location information when tracking users in a Xamarin mobile application. If you're using Xamarin we encourage you to use this library.
 

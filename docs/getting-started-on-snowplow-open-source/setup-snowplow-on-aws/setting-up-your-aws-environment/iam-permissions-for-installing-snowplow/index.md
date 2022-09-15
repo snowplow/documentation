@@ -10,7 +10,7 @@ Setting up permissions in IAM for the user(s) installing Snowplow is an 3 step p
 
 ## Setup the IAM group
 
-### [](https://github.com/snowplow/snowplow/wiki/Setup-IAM-permissions-for-users-installing-Snowplow#initial-group-configuration)Initial group configuration
+### Initial group configuration
 
 - Find and click on the IAM icon on the AWS dashboard
 - Click on the _Create a New Group of Users_ button
@@ -22,7 +22,7 @@ Setting up permissions in IAM for the user(s) installing Snowplow is an 3 step p
 
 Depending on what Pipeline needs to be setup you will need slightly varying permissions.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Setup-IAM-permissions-for-users-installing-Snowplow#batch-permissions)Batch Permissions
+#### Batch Permissions
 
 The following permissions are needed for all batch proccessing operations:
 
@@ -74,7 +74,7 @@ Paste the following JSON into the _Policy Document_ text area:
 }
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Setup-IAM-permissions-for-users-installing-Snowplow#kinesis-permissions)Kinesis Permissions
+#### Kinesis Permissions
 
 For the Kinesis Pipeline ending in an Elasticsearch Cluster you will need these permissions:
 
@@ -118,7 +118,7 @@ Paste the following JSON into the _Policy Document_ text area:
 }
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Setup-IAM-permissions-for-users-installing-Snowplow#kinesis--batch-permissions)Kinesis & Batch Permissions
+#### Kinesis & Batch Permissions
 
 For the Kinesis Pipeline ending in the LZO S3 Sink with events from this sink then being processed in batches you will need these permissions:
 
@@ -182,7 +182,7 @@ Paste the following JSON into the _Policy Document_ text area:
 - Now enter a _User Name_ - for example `snowplow-setup`
 - Keep the option _Generate an access key for each User_ checked, and then click _Continue_.
 
-### [](https://github.com/snowplow/snowplow/wiki/Setup-IAM-permissions-for-users-installing-Snowplow#review)Review
+### Review
 
 Check that the configuration for your new IAM group looks something like this:
 

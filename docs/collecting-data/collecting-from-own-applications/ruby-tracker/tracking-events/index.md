@@ -108,7 +108,7 @@ tracker.track_struct_event(category: 'shop',
 tracker.track_struct_event('shop', 'add-to-basket', nil, 'pcs', 2)
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Ruby-Tracker#track-page-views-with-track_page_view)Track page views with `track_page_view`
+### Track page views with `track_page_view`
 
 This is a simple, single-use method for tracking a user viewing a page within your app. You can record the page URL, the page title, and the referrer URL. Only the page URL is strictly required.
 
@@ -128,7 +128,7 @@ tracker.track_page_view(page_url: 'www.example.com',
 tracker.track_page_view('www.example.com', 'example', 'www.referrer.com')
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Ruby-Tracker#track-screen-views-with-track_screen_view)Track screen views with `track_screen_view`
+### Track screen views with `track_screen_view`
 
 Use `track_screen_view` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages. The arguments are `name` and `id`; while both are optional, you must provided at least one of them to create a valid event. "Name" is the human-readable screen name, and "ID" should be the unique screen ID.
 

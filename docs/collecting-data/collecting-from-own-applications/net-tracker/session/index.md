@@ -49,7 +49,7 @@ public string GetLocalFilePath(string filename)
 }
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#62-functions)6.2 Functions
+### 6.2 Functions
 
 #### `SetBackground(bool)`
 

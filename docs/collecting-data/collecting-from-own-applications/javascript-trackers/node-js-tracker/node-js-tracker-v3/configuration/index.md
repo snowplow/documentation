@@ -22,7 +22,7 @@ The `tracker` instance has a set of `set...()` methods to attach extra data to
 - `[setIpAddress()](#set-ip-address)`
 - `[setUseragent()](#set-useragent)`
 
-### [](#31-set-the-platform-id-with-setplatform)3.1 Set the platform ID with `setPlatform()`
+### 3.1 Set the platform ID with `setPlatform()`
 
 You can set the platform:
 

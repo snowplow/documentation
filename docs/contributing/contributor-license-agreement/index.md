@@ -10,7 +10,7 @@ As the project sponsor, Snowplow Analytics Ltd would like to ensure the long-ter
 
 Specifically, our Contributor License Agreements (CLAs) grant the contributor and Snowplow Analytics Ltd joint copyright interest in contributed code. Further, it provides assurance from the contributor that contributions are original work that does not violate any third-party license agreement. The agreement between contributors and project is explicit, so Snowplow users can be confident in the legal status of the source code and their right to use it.
 
-## [](https://github.com/snowplow/snowplow/wiki/CLA#our-clas)Our CLAs
+## Our CLAs
 
 For all contributions to Snowplow (be they software, bug fixes, configuration changes, documentation, or any other materials), we ask that contributors complete and sign a Contributor License Agreement.
 
@@ -19,7 +19,7 @@ We have two different CLAs, depending on whether you are contributing to Snowplo
 1. [Individual Contributor License Agreement v1.0](https://docs.google.com/forms/d/1J1FNYq9538ndzzcBdlCbxPo1yFiOY4mwalhDTSl1pgg/viewform)
 2. [Software Grant and Corporate Contributor License Agreement v1.0](https://docs.google.com/forms/d/1ZUzz7lQJhs7oZqbkBL1bp0r048hAi7uIN6aLWCyZWWs/viewform)
 
-## [](https://github.com/snowplow/snowplow/wiki/CLA#for-lawyers)For lawyers
+## For lawyers
 
 Our individual and corporate CLAs are based on the Contributor License Agreements published by the [Apache Software Foundation](http://www.apache.org/), with modifications:
 

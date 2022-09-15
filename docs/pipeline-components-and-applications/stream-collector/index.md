@@ -17,7 +17,7 @@ The Stream Collector supports cross-domain Snowplow deployments, setting a `use
 
 ## How it works
 
-### [](https://github.com/snowplow/snowplow/wiki/Scala-stream-collector#user-identification)User identification
+### User identification
 
 The Stream Collector allows the use of a third-party cookie, making user tracking across domains possible.
 

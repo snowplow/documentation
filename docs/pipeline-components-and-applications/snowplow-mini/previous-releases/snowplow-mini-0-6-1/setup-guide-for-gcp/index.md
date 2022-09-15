@@ -60,7 +60,7 @@ After importing our tarball of your choice into your project, you should see it 
 
 To decide on which size of Snowplow Mini to choose, read on.
 
-### [](https://github.com/snowplow/snowplow-mini/wiki/Setup-guide-GCP---0.6.1#large--xlarge--xxlarge)large & xlarge & xxlarge
+### large & xlarge & xxlarge
 
 Until today, Snowplow Mini was being used inside AWS `t2.medium`, `n1-standard-1` in GCP, instances and it served well for demonstration purposes. However, we observed that Snowplow Mini started exceeding its initial motivation and machine resources started to become an obstacle, causing issues with Elasticsearch etc. This is why, Mini is available at 3 different sizes.
 

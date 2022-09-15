@@ -42,7 +42,7 @@ gem 'iglu-ruby-client'
 
 You can also build and install gem locally in case you need to introduce some changes.
 
-#### [](https://github.com/snowplow/iglu/wiki/Ruby-client-setup#clone-the-client)Clone the client
+#### Clone the client
 
 First, git clone the latest version of the client to your local machine:
 
@@ -52,7 +52,7 @@ $ git clone https://github.com/snowplow/iglu-ruby-client.git
 
 If you don't have git installed locally, [install it](http://git-scm.com/downloads) first.
 
-#### [](https://github.com/snowplow/iglu/wiki/Ruby-client-setup#build-a-gem)Build a gem
+#### Build a gem
 
 ```bash
 $ cd iglu-ruby-client

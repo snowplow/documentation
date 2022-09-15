@@ -17,7 +17,7 @@ The tracker should be straightforward to use if you are comfortable with Java de
 1. Double (or more) sending of events.
 2. Constant session expiration (as old Tracker services continually fail to see any new events being created).
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#11-demo-app)1.1. Demo App
+### 1.1. Demo App
 
 If you would like to see the Tracker in action you can download our demonstration android app [here](http://dl.bintray.com/snowplow/snowplow-generic/snowplow-demo-app-release-0.2.1.apk). You will need to enable installation of applications from [unknown sources](http://developer.android.com/distribute/tools/open-distribution.html).
 
@@ -25,7 +25,7 @@ Within the app you will simply need to supply an endpoint and hit start! The app
 
 For a walkthrough go [here](https://github.com/snowplow/snowplow/wiki/Android-app-walkthrough).
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#12-client-sessions)1.2. Client Sessions
+### 1.2. Client Sessions
 
 To activate client sessionization please enter the following builder arguments to your tracker:
 
@@ -65,11 +65,11 @@ protected void onResume() {
 }
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#2-initialization)2 Initialization
+## 2 Initialization
 
 Assuming you have completed the [Android Tracker Setup](https://github.com/snowplow/snowplow/wiki/Android-Tracker-Setup) for your project, you are now ready to initialize the Android Tracker.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#21-importing-the-module)2.1 Importing the module
+#### 2.1 Importing the module
 
 Import the Android Tracker's classes into your Android code like so:
 
@@ -79,7 +79,7 @@ import com.snowplowanalytics.snowplow.tracker.*;
 
 That's it - you are now ready to initialize a Tracker instance.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#22-creating-a-tracker)2.2 Creating a Tracker
+#### 2.2 Creating a Tracker
 
 To instantiate a tracker in your code (can be global or local to the process being tracked) simply instantiate the `Tracker` interface with one of the following:
 
@@ -138,22 +138,22 @@ We also have several extra builder options:
 | `threadCount` | The amount of threads to use | Any valid `Integer` | `10` threads |
 | `timeUnit` | The TimeUnit that time measurements are in | `TimeUnit.{{ Enum Option }}` | `TimeUnit.SECONDS` |
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#221-constructor-options-explained)2.2.1 Constructor Options Explained
+#### 2.2.1 Constructor Options Explained
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#required)Required
+#### Required
 
 - `emitter` : The pre created Emitter object which is required for all sending and storing of events by the Tracker. See [Emitters](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#emitter) for information.
 - `namespace` : The name of this Tracker instance to include with events sent to the collector.
 - `appId` : The ID of this application to include with events sent to the collector.
 - `context` : The Android Application context object.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#event-decoration)Event Decoration
+#### Event Decoration
 
 - `subject` : An optional Subject object which will add extra decoration to events sent from the Tracker.
 - `platform` : The platform that the Tracker is running on (defaults to `MOBILE`)
 - `base64` : Whether to encode `unstructured` events and `custom contexts` in base64 formatting.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#session-parameters)Session Parameters
+#### Session Parameters
 
 - `sessionContext` : Needs to be set to `True` if you wish to activate any of the Trackers Sessionization functionality.
 - `foregroundTimeout` : The amount of time that needs to elapse without any events being tracked before the session is incremented (while application is in the foreground).
@@ -161,58 +161,58 @@ We also have several extra builder options:
 - `sessionCheckInterval` : How often the Tracker queries the session object to see if it needs to be incremented. It is currently set to 15 seconds.
 - `timeUnit` : The unit of time that the previous three options are computed on. By default it is in `SECONDS`, as such to set a `sessionCheckInterval` of 2 minutes you would need to put in `120` for that option. Or you could change the `timeUnit` to be `MINUTES` and put a `2` instead.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#functional-settings)Functional Settings
+#### Functional Settings
 
 - `threadCount` : The amount of threads that the Tracker will have available to it to process information in. By default we use 10 Threads, however it is recommended to figure out the optimal amount of Threads on a device by device basis as more Threads will have a direct correlation with performance.
 - `level` : The amount of logging done by the Tracker.
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#23-tracker-functions)2.3 Tracker Functions
+### 2.3 Tracker Functions
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#231-getemitter)2.3.1 `getEmitter`
+#### 2.3.1 `getEmitter`
 
 Returns the emitter to which the tracker will send events. See [Emitters](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#emitter) for more on emitter configuration.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#232-getsubject)2.3.2 `getSubject`
+#### 2.3.2 `getSubject`
 
 Returns the user which the Tracker will track. This must be an instance of the [Subject](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#subject) class. You don't need to set this during Tracker construction; you can use the `Tracker.setSubject` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#233-getnamespace)2.3.3 `getNamespace`
+#### 2.3.3 `getNamespace`
 
 Returns the `namespace` argument attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#234-getappid)2.3.4 `getAppId`
+#### 2.3.4 `getAppId`
 
 Returns the `appId` argument that you passed in Tracker construction.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#235-getbase64encoded)2.3.5 `getBase64Encoded`
+#### 2.3.5 `getBase64Encoded`
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` builder option.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#236-getplatform)2.3.6 `getPlatform`
+#### 2.3.6 `getPlatform`
 
 Returns the 'platform' that was set in Tracker construction, the builder allows you to pick from a list of allowed platforms which define what type of device/service the event is being sent from.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#237-getsession)2.3.7 `getSession`
+#### 2.3.7 `getSession`
 
 Returns the `session` object created for the Tracker (if `sessionContext` was enabled).
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#238-getdatacollection)2.3.8 `getDataCollection`
+#### 2.3.8 `getDataCollection`
 
 Returns the state of data collection in the Tracker; either `True` or `False`.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#239-getloglevel)2.3.9 `getLogLevel`
+#### 2.3.9 `getLogLevel`
 
 Returns the `LogLevel` being used by the Tracker.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#2310-getthreadcount)2.3.10 `getThreadCount`
+#### 2.3.10 `getThreadCount`
 
 Returns the amount of threads that the tracker is consuming.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#2311-gettrackerversion)2.3.11 `getTrackerVersion`
+#### 2.3.11 `getTrackerVersion`
 
 Returns this Trackers version as a String.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#2312-change-the-trackers-platform-with-setplatform)2.3.12 Change the tracker's platform with `setPlatform`
+#### 2.3.12 Change the tracker's platform with `setPlatform`
 
 You can change the platform by calling:
 
@@ -228,7 +228,7 @@ There are several different DevicePlatforms options to choose from.
 
 For a full list of supported platforms, please see the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/Snowplow-Tracker-Protocol).
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#2313-change-the-trackers-subject-with-setsubject)2.3.13 Change the tracker's subject with `setSubject`
+#### 2.3.13 Change the tracker's subject with `setSubject`
 
 You can change the subject by creating a new `Subject` object and then calling:
 
@@ -238,7 +238,7 @@ tracker.setSubject(newSubject);
 
 See [Adding extra data: the Subject class](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#add-data-subject) for more information on the `Subject`.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#2314-change-the-trackers-emitter-with-setemitter)2.3.14 Change the tracker's emitter with `setEmitter`
+#### 2.3.14 Change the tracker's emitter with `setEmitter`
 
 You can change the emitter by creating a new `Emitter` object and then calling:
 
@@ -246,13 +246,13 @@ You can change the emitter by creating a new `Emitter` object and then calling
 tracker.setEmitter(newEmitter);
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#24-extra-tracker-functions)2.4 Extra Tracker Functions
+### 2.4 Extra Tracker Functions
 
 These are extra functions for controlling the Tracker. The Tracker is designed to be run without ever using any of these functions however they are there for any special use cases where you need to shutdown or otherwise control the Tracker.
 
 For example if you wish to artificially extend the time a session is active you can simply `pauseSessionChecking` for an undetermined amount of time. To resume automatic session checking and updating simply run `resumeSessionChecking`.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#241-resumesessionchecking)2.4.1 `resumeSessionChecking`
+#### 2.4.1 `resumeSessionChecking`
 
 This function resumes a polling session checker service. This will query the Trackers session object at pre-configured intervals to see whether or not the session needs to be updated if it has not been accessed within a certain amount of time.
 
@@ -262,7 +262,7 @@ This function is started if the argument to `.sessionContext` is `True`, and 
 tracker.resumeSessionChecking();
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#242-pausesessionchecking)2.4.2 `pauseSessionChecking`
+#### 2.4.2 `pauseSessionChecking`
 
 This functions stops the session checker from running. Essentially preventing the current session from ever timing out. Please note that if the application is restarted this paused state will not persist and checking will begin again.
 
@@ -270,7 +270,7 @@ This functions stops the session checker from running. Essentially preventing th
 tracker.pauseSessionChecking();
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#243-resumeeventtracking)2.4.3 `resumeEventTracking`
+#### 2.4.3 `resumeEventTracking`
 
 If event tracking has been switched off this will reinstate the Tracker back to full operation. This means that:
 
@@ -282,7 +282,7 @@ If event tracking has been switched off this will reinstate the Tracker back to 
 tracker.resumeEventTracking();
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#244-pauseeventtracking)2.4.4 `pauseEventTracking`
+#### 2.4.4 `pauseEventTracking`
 
 If event tracking is switched on (it is by default), then the Tracker will have all event tracking paused. What this means is that:
 
@@ -296,11 +296,11 @@ Essentially the entire Tracker will halt operation until event tracking is turne
 tracker.pauseEventTracking();
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#3-adding-extra-data-the-subject-class)3. Adding extra data: the Subject class
+## 3. Adding extra data: the Subject class
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event. The Subject appended to the Tracker allows you to easily add information to each event that is sent from the Tracker.
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#31-subject-setter-functions)3.1 Subject setter functions
+### 3.1 Subject setter functions
 
 The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events:
 
@@ -349,7 +349,7 @@ To update the Trackers subject without changing the subject attached already you
 t1.getSubject().setUserId("Gleason Kevin"); // Because object references are passed by value in Java
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#311-set-user-id-with-setuserid)3.1.1 Set user ID with `setUserId`
+#### 3.1.1 Set user ID with `setUserId`
 
 You can set the user ID to any string:
 
@@ -363,7 +363,7 @@ Example:
 subj.setUserId("alexd");
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#312-set-screen-resolution-with-setscreenresolution)3.1.2 Set screen resolution with `setScreenResolution`
+#### 3.1.2 Set screen resolution with `setScreenResolution`
 
 If your Java code has access to the device's screen resolution, then you can pass this in to Snowplow too:
 
@@ -377,7 +377,7 @@ Both numbers should be positive integers; note the order is width followed by he
 subj.setScreenResolution(1366, 768);
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#313-set-viewport-dimensions-with-setviewport)3.1.3 Set viewport dimensions with `setViewport`
+#### 3.1.3 Set viewport dimensions with `setViewport`
 
 If your Java code has access to the viewport dimensions, then you can pass this in to Snowplow too:
 
@@ -391,7 +391,7 @@ Both numbers should be positive integers; note the order is width followed by he
 subj.setViewport(300, 200);
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#314-set-color-depth-with-setcolordepth)3.1.4 Set color depth with `setColorDepth`
+#### 3.1.4 Set color depth with `setColorDepth`
 
 If your Java code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to Snowplow too:
 
@@ -405,7 +405,7 @@ The number should be a positive integer, measured in bits per pixel. Example:
 subj.setColorDepth(32);
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#315-set-timezone-with-settimezone)3.1.5 Set timezone with `setTimezone`
+#### 3.1.5 Set timezone with `setTimezone`
 
 This method lets you pass a user's timezone in to Snowplow:
 
@@ -419,7 +419,7 @@ The timezone should be a string:
 subj.setTimezone("Europe/London");
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#316-set-the-language-with-setlanguage)3.1.6 Set the language with `setLanguage`
+#### 3.1.6 Set the language with `setLanguage`
 
 This method lets you pass a user's language in to Snowplow:
 
@@ -433,7 +433,7 @@ The language should be a string:
 subj.setLanguage("en");
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#317-setipaddress)3.1.7 `setIpAddress`
+### 3.1.7 `setIpAddress`
 
 This method lets you pass a user's IP Address in to Snowplow:
 
@@ -447,7 +447,7 @@ The IP address should be a string:
 subj.setIpAddress("127.0.0.1");
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#318-setuseragent)3.1.8 `setUseragent`
+### 3.1.8 `setUseragent`
 
 This method lets you pass a useragent in to Snowplow:
 
@@ -461,7 +461,7 @@ The useragent should be a string:
 subj.setUseragent("Agent Smith");
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#319-setnetworkuserid)3.1.9 `setNetworkUserId`
+### 3.1.9 `setNetworkUserId`
 
 This method lets you pass a Network User ID in to Snowplow:
 
@@ -475,7 +475,7 @@ The network user id should be a string:
 subj.setNetworkUserId("network-id");
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#3110-setdomainuserid)3.1.10 `setDomainUserId`
+### 3.1.10 `setDomainUserId`
 
 This method lets you pass a Domain User ID in to Snowplow:
 
@@ -489,7 +489,7 @@ The domain user id should be a string:
 subj.setDomainUserId("domain-id");
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#3111-setadvertisingid)3.1.11 `setAdvertisingID`
+### 3.1.11 `setAdvertisingID`
 
 This method lets you set the Advertising ID
 
@@ -503,7 +503,7 @@ You will need to pass in the application's context as a parameter.
 subj.setAdvertisingID(context);
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#3112-setcarrier)3.1.12 `setCarrier`
+### 3.1.12 `setCarrier`
 
 This method lets you set the mobile carrier.
 
@@ -517,7 +517,7 @@ You will need to pass in the application's context as a parameter.
 subj.setCarrier(context);
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#3113-setlocation)3.1.13 `setLocation`
+### 3.1.13 `setLocation`
 
 This method lets you set the mobile location.
 
@@ -531,7 +531,7 @@ You will need to pass in the application's context as a parameter.
 subj.setLocation(context);
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#3114-setdefaultscreenresolution)3.1.14 `setDefaultScreenResolution`
+### 3.1.14 `setDefaultScreenResolution`
 
 This method lets you set the default screen resolution using the application context.
 
@@ -545,11 +545,11 @@ You will need to pass in the application's context as a parameter.
 subj.setDefaultScreenResolution(context);
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#32-additional-contexts-sent-by-this-tracker)3.2 Additional contexts sent by this tracker
+### 3.2 Additional contexts sent by this tracker
 
 This Tracker not only appends the [generic](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#subject-setters) subject information to each event; it will also attempt to gather more specific information about the mobile it is hosted on.
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#321-mobile_context)3.2.1 `mobile_context`
+### 3.2.1 `mobile_context`
 
 The `mobile_context` is comprised of the following fields:
 
@@ -568,7 +568,7 @@ Subject subject = new Subject.SubjectBuilder().context(getContext()).build();
 
 Note that `getContext()` is an Android global function. It is needed to grab information that is related to the client specifically.
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#322-geolocation_context)3.2.2 `geolocation_context`
+### 3.2.2 `geolocation_context`
 
 The `geolocation_context` is comprised of the following fields:
 
@@ -596,7 +596,7 @@ You will also need to include the following in your `AndroidManifest.xml` file
 
 This will make the functions for checking these metrics available for the tracker to use.
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#33-getting-the-android-idfa-code)3.3 Getting the Android Idfa Code
+## 3.3 Getting the Android Idfa Code
 
 **NOTE**: For this code to be available you must include the following library dependency:
 
@@ -623,7 +623,7 @@ If you created a Tracker Subject with your application's context then the ID wil
 String androidIdfa = tracker.getSubject().getSubjectMobile().get("androidIdfa");
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#4-tracking-specific-events)4. Tracking specific events
+## 4. Tracking specific events
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps. We are constantly growing the range of functions available in order to capture that data more richly.
 
@@ -638,11 +638,11 @@ Tracking methods supported by the Android Tracker at a glance:
 | [`track(Unstructured event)`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#unstruct-event) | Track a Snowplow custom unstructured event |
 | [`track(TimingWithCategory event)`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#timing) | Track a Timing with Category event |
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#41-common)4.1 Common
+#### 4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `track(XXX)`, where `XXX` is the type of event to track.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#411-selfdescribingjson)4.1.1 SelfDescribingJson
+#### 4.1.1 SelfDescribingJson
 
 A `SelfDescribingJson` is used as a wrapper around either a `TrackerPayload`, another `SelfDescribingJson` or a `Map` object. After creating the object you want to wrap, you can create a `SelfDescribingJson` using the following:
 
@@ -664,7 +664,7 @@ You can create a SelfDescribingJson with the following arguments:
 
 `SelfDescribingJson` is used for recording [custom contexts](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#custom-contexts) and [unstructured events](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#unstruct-event).
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#412-custom-contexts)4.1.2 Custom contexts
+#### 4.1.2 Custom contexts
 
 In short, custom contexts let you add additional information about the circumstances surrounding an event in the form of a Map object. Each tracking method accepts an additional optional contexts parameter:
 
@@ -706,7 +706,7 @@ contexts.add(context1);
 
 Note that even if there is only one custom context attached to the event, it still needs to be placed in an array.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#413-timestamp-override)4.1.3 Timestamp override
+#### 4.1.3 Timestamp override
 
 In all the trackers, we offer a way to override the timestamp if you want the event to show as tracked at a specific time. If you don't, we create a timestamp while the event is being tracked.
 
@@ -716,7 +716,7 @@ Here is an example:
 t1.track(PageView.builder().( ... ).timestamp(1423583655000).build());
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#42-track-screen-views-with-trackscreenview-event)4.2 Track screen views with `track(ScreenView event)`
+#### 4.2 Track screen views with `track(ScreenView event)`
 
 Use `track(ScreenView event)` to track a user viewing a screen (or equivalent) within your app. You must use either `name` or `id`. Arguments are:
 
@@ -745,7 +745,7 @@ t1.track(ScreenView.builder()
     .build());
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#43-track-pageviews-with-trackpageview-event)4.3 Track pageviews with `track(PageView event)`
+#### 4.3 Track pageviews with `track(PageView event)`
 
 You can use `track(PageView event)` to track a user viewing a web page within your app.
 
@@ -779,7 +779,7 @@ t1.track(PageView.builder()
     .build());
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#44-track-ecommerce-transactions-with-trackecommercetransaction-event)4.4 Track ecommerce transactions with `track(EcommerceTransaction event)`
+#### 4.4 Track ecommerce transactions with `track(EcommerceTransaction event)`
 
 Use `track(EcommerceTransaction event)` to track an ecommerce transaction.
 
@@ -804,7 +804,7 @@ Arguments:
 
 The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the e-commerce transaction or it can be a `varargs` argument of many individual items. Note that `track(EcommerceTransaction event)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`. Each transaction item event will have the same timestamp, order_id, and currency as the main transaction event.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#441-ecommercetransactionitem)4.4.1 `EcommerceTransactionItem`
+#### 4.4.1 `EcommerceTransactionItem`
 
 To instantiate a `EcommerceTransactionItem` in your code, simply use the following constructor signature:
 
@@ -893,7 +893,7 @@ tracker.track(EcommerceTransaction.builder()
     .build());
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#45-track-structured-events-with-trackstructured-event)4.5 Track structured events with `track(Structured event)`
+#### 4.5 Track structured events with `track(Structured event)`
 
 Use `track(Structured event)` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
@@ -931,7 +931,7 @@ t1.track(Structured.builder()
     .build());
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#46-track-unstructured-events-with-trackunstructured-event)4.6 Track unstructured events with `track(Unstructured event)`
+#### 4.6 Track unstructured events with `track(Unstructured event)`
 
 Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 
@@ -991,7 +991,7 @@ t1.track(Unstructured.builder()
 
 For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#47-track-timing-events-with-tracktimingwithcategory-event)4.7 Track timing events with `track(TimingWithCategory event)`
+#### 4.7 Track timing events with `track(TimingWithCategory event)`
 
 Use `track(TimingWithCategory event)` to track an event related to a custom timing.
 
@@ -1026,7 +1026,7 @@ t1.track(TimingWithCategory.builder()
     .build());
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#5-sending-event-emitter)5. Sending event: `Emitter`
+## 5. Sending event: `Emitter`
 
 Events are sent using an `Emitter` class. You can initialize a class with a collector endpoint URL with various options to choose how these events should be sent. Here are the `Emitter` interfaces that can be used:
 
@@ -1066,14 +1066,14 @@ We also have several extra builder options such as:
 | `byteLimitPost` | The maximum amount of bytes to send in a POST | Any positive int | `40000` |
 | `timeUnit` | The TimeUnit that time measurements are in | `TimeUnit.{{ Enum Option }}` | `TimeUnit.SECONDS` |
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#51-emitter-constructor-explained)5.1 Emitter Constructor Explained
+### 5.1 Emitter Constructor Explained
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#required-1)Required
+#### Required
 
 - `uri` : The collector endpoint that all events will be sent to. Needs to be the raw path in the sense that you will not include any `http://` or `https://` with the address. Rather something like: `www.fake.io` in place of `http://www.fake.io`. The http security setting is configured in a seperate option.
 - `context` : The Android Application context object.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#sending)Sending
+#### Sending
 
 - `method` : Whether to send requests via `GET` or `POST`; essentially whether to send each event individually or to send many events together in a `POST`. The default `POST` setting is recommended as it has huge performance gains over sending individually as a `GET`.
 - `option` : How many events can be parcelled together in a `POST`, this can be increased to a maximum of `25` per event. If you require larger volumes please raise a ticket to have this limit increased!
@@ -1082,14 +1082,14 @@ We also have several extra builder options such as:
 - `byteLimitGet` : Allows you to set an upper limit for the maximal size of a single `GET` request. Meaning that if an event exceeds this size we will attempt to send it but will then delete it from the database regardless of success to send.
 - `byteLimitPost` : Allows you to set an upper limit for the maximal size of a single `POST` request. Meaning that if an event exceeds this size we will attempt to send it but will then delete it from the database regardless of success to send.
 
-#### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#functional-settings-1)Functional Settings
+#### Functional Settings
 
 - `tick` : The interval at which the emitter will check for more events.
 - `timeUnit` : The timeunit that the aforementioned `tick` is measured in. By default we measure this in seconds.
 - `sendLimit` : The upper limit of events that can be grabbed from the database per sending session, this in place to avoid consuming overt amounts of memory in case of huge event ingress. On weaker devices this can be tuned down to and on beefier devices can be greatly increased.
 - `emptyLimit` : The amount of times that the emitter is allowed to fail a check before it will release its Thread back to the pool.
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#52-how-the-emitter-works)5.2 How the Emitter works
+### 5.2 How the Emitter works
 
 The Emitter is configured and setup to run as a background process so it never blocks on the Main Thread or on the UI Thread of the device it is on.
 
@@ -1106,7 +1106,7 @@ The current Emitter flow goes as follows:
 8. If there are only errors in sending, the events will not be deleted from the database and the emitter will then be shutdown
     - If there are some successes it will not shutdown.
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#53-using-a-buffer)5.3 Using a buffer
+### 5.3 Using a buffer
 
 A buffer is used to group events together in bulk before sending them. This is especially handy to reduce network usage. By default, the Emitter buffers up to 10 events together before sending them; only available if you are using POST as your request type.
 
@@ -1128,7 +1128,7 @@ Here are all the posibile options that you can use:
 
 Buffer options will only ever influence how POST request are sent however. All GET requests will be sent individually.
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#54-choosing-the-http-method)5.4 Choosing the HTTP method
+### 5.4 Choosing the HTTP method
 
 Snowplow supports receiving events via both GET and POST requests. In a GET request, each event is sent in individual request. With POST requests, events are bundled together in one request.
 
@@ -1148,7 +1148,7 @@ Here are all the posibile options that you can use:
 | `GET` | Sends events as GET requests |
 | `POST` | Sends events as POST requests |
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#55-emitter-callback)5.5 Emitter callback
+### 5.5 Emitter callback
 
 If an event fails to send because of a network issue, you can choose to handle the failure case with a callback class to react accordingly. The callback class needs to implement the `EmitterCallback` interface in order to do so. Here is a sample bit of code to show how it could work:
 
@@ -1170,7 +1170,7 @@ Emitter emitter = new Emitter
         .build();
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#56-emitter-flush)5.6 Emitter Flush
+### 5.6 Emitter Flush
 
 If you want to ensure that there are no events left in the local database for sending simply run the emitter `flush()` function like so:
 
@@ -1180,7 +1180,7 @@ tracker.getEmitter().flush();
 
 This will attempt to start the emitter process; however it will fail if the emitter is already running or if the application is offline.
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.5.0#6-logging)6. Logging
+## 6. Logging
 
 Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'. All logging is actioned based on what `LogLevel` was set in the Tracker creation. This level can be configured to `VERBOSE`, `DEBUG`, `ERROR` or `OFF`. By default logging is not enabled.
 
@@ -1235,7 +1235,7 @@ public class TrackerBuilderClassic {
 }
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.5.0#2-rxjava-tracker)2. RxJava tracker
+## 2. RxJava tracker
 
 You will need to have imported the following library into your project:
 
@@ -1282,7 +1282,7 @@ public class TrackerBuilderRx {
 }
 ```
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.5.0#3-tracking-events)3. Tracking Events
+## 3. Tracking Events
 
 Once you have successfully built your Tracker object you can track events with calls like the following:
 
@@ -1293,7 +1293,7 @@ tracker.track(ScreenView.builder().name("screenName").id("screenId").build());
 
 For an outline of all available tracking combinations have a look [here](https://raw.githubusercontent.com/snowplow/snowplow-android-tracker/master/snowplow-demo-app/src/main/java/com/snowplowanalytics/snowplowtrackerdemo/utils/TrackerEvents.java).
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.5.0#4-application-focus)4. Application Focus
+## 4. Application Focus
 
 The Tracker Session object can be tuned to timeout in `foreground` and `background` scenarios, but you are required to tell us when your application is in these states. Unfortunately it is not possible to do so from a library standpoint.
 
@@ -1346,11 +1346,11 @@ The `setup.bash` script starts Mountebank and starts the imposter we want and 
 
 Once you have it running you can supply the tunnel URL for all logging of events until you are ready to switch to a collector!
 
-## [](https://github.com/snowplow/snowplow/wiki/Android-Testing-locally-and-Debugging-0.5.0#2-common-issues)2. Common Issues
+## 2. Common Issues
 
 This section will detail how to handle common problems with running the local testing setup.
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Testing-locally-and-Debugging-0.5.0#21-port-conflicts)2.1 Port Conflicts
+### 2.1 Port Conflicts
 
 If you are already using ports `2525` or `4040` your vagrant up will fail. Easiest way to resolve this is to stop any services running on these ports and then attempt to vagrant up again.
 
@@ -1361,7 +1361,7 @@ config.vm.network "forwarded_port", guest: 4040, host: 4040 ## Change the host t
 config.vm.network "forwarded_port", guest: 2525, host: 2525 ## Change the host to something free
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/Android-Testing-locally-and-Debugging-0.5.0#22-sending-failures)2.2 Sending failures
+### 2.2 Sending failures
 
 If you have successfully started Ngrok and you have an endpoint but your events are not getting there chances are that Mountebank as failed to start properly.
 

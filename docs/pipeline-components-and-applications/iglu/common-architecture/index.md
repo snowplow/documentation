@@ -6,7 +6,7 @@ sidebar_position: 0
 
 Iglu is built on a set of technical design decisions which are documented in this section. It is this set of design decisions that allow Iglu clients and repositories to interoperate.
 
-## [](https://github.com/snowplow/iglu/wiki/Common-architecture#common-architecture-aspects)Common architecture aspects
+## Common architecture aspects
 
 Please review the following design documents:
 

@@ -18,7 +18,7 @@ _Legacy enrichments_ are those which populate `atomic.events` table as oppose
 
 _Configurable enrichments_ often depend on the data produced by the common enrichment process.
 
-### [](https://github.com/snowplow/snowplow/wiki/The-enrichment-process#hardcoded-enrichment)Hardcoded enrichments
+### Hardcoded enrichments
 
 The following fields are populated depending on whether the tracker provided the corresponding value or not.
 
@@ -71,7 +71,7 @@ Additionally the derived timestamp is calculated, `derived_tstamp`. See [this 
 
 Finally, contexts, unstructured events and the relevant configurable enrichments (if enabled) are validated against their corresponding JSON schemas and the array of the derived contexts is assembled.
 
-### [](https://github.com/snowplow/snowplow/wiki/The-enrichment-process#configurable-enrichment)Configurable enrichment
+### Configurable enrichment
 
 All configurable enrichments are listed on the [Available Enrichments](/docs/enriching-your-data/available-enrichments/index.md) page.
 
@@ -85,5 +85,3 @@ The following configurable enrichments write data into `atomic.events` table (
 - [Event fingerprint enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md)
 
 All other configurable enrichments create a separate context and thus are loaded into their own dedicated tables.
-
-[](https://github.com/snowplow/snowplow/wiki/_Footer/_edit)

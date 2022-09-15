@@ -1,4 +1,4 @@
-## [](https://github.com/snowplow/snowplow/wiki/self-hosting-snowplow-js#pre-requisites)Pre-requisites
+## Pre-requisites
 
 For the purposes of this guide, we are going to assume that you want to serve the standard `sp.js` from CloudFront. To accomplish this, you will need the following:
 
@@ -22,7 +22,7 @@ From a terminal / command prompt window, navigate to where you have downloaded t
 
 We will continue referring to the file as `sp.js` throughout this guide, however where `sp.js` is mentioned we are referring to your renamed and gzipped file.
 
-## [](https://github.com/snowplow/snowplow/wiki/self-hosting-snowplow-js#self-hosting-instructions)Uploading to Amazon Web Services
+## Uploading to Amazon Web Services
 
 ### Create a bucket for the JavaScript Tracker
 

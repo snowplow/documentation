@@ -4,8 +4,7 @@ date: "2021-10-06"
 sidebar_position: 0
 ---
 
-##   
-Technical Architecture
+## Technical Architecture
 
 The available tools are:
 

@@ -4,7 +4,7 @@ date: "2020-02-26"
 sidebar_position: 40
 ---
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#using-snowplowtracker-net-standard-or-snowplowtrackerplatformextensions-pcl-5)Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
 
 The Emitter object is responsible for sending and storing all events.
 
@@ -21,7 +21,7 @@ The Emitter depends on four other objects being built:
 
 ### Emitter Constructor
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#using-snowplowtracker-net-standard-or-snowplowtrackerplatformextensions-pcl-6)Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
 
 | **Argument Name** | **Description** | **Required?** | **Default** |
 | --- | --- | --- | --- |
@@ -49,7 +49,7 @@ AsyncEmitter emitter = new AsyncEmitter(endpoint, queue, l: logger);
 
 ### Endpoint Constructor
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#using-snowplowtracker-net-standard-or-snowplowtrackerplatformextensions-pcl-7)Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
 
 This is a container for information about how to reach your collector.
 
@@ -79,7 +79,7 @@ SnowplowHttpCollectorEndpoint endpoint = new SnowplowHttpCollectorEndpoint("com.
 
 ### Storage Constructor
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#using-snowplowtracker-net-standard-or-snowplowtrackerplatformextensions-pcl-8)Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
 
 | **Argument Name** | **Description** | **Required?** | **Default** |
 | --- | --- | --- | --- |
@@ -122,7 +122,7 @@ public string GetLocalFilePath(string filename)
 
 ### Queue Constructor
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#using-snowplowtracker-net-standard-or-snowplowtrackerplatformextensions-pcl-9)Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
 
 | **Argument Name** | **Description** | **Required?** | **Default** |
 | --- | --- | --- | --- |
@@ -141,7 +141,7 @@ PersistentBlockingQueue queue = new PersistentBlockingQueue(storage, new Payload
 
 ### Payload Serializer Constructor
 
-#### [](https://github.com/snowplow/snowplow/wiki/.NET-Tracker#using-snowplowtracker-net-standard-or-snowplowtrackerplatformextensions-pcl-10)Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
 
 We have one payload serializer available currently:
 

@@ -1,6 +1,6 @@
 By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and Local Storage. The behaviour of each of these cookies and local storage keys are described here. The base name of each cookie can be configured by following these [instructions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Configuring_the_cookie_name).
 
-# [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Cookies-and-Local-Storage#cookies)Cookies
+# Cookies
 
 Cookies are only stored if `stateStorageStrategy` is set to `cookie`, `cookieAndLocalStorage` (default) or if the deprecated tracker initialisation argument `configUseCookies` is set to `true` (default). When using `cookieAndLocalStorage` this will prefer cookie storage for `_sp_id` and `_sp_ses`.
 
@@ -13,7 +13,7 @@ When using `anonymousTracking: { withSessionTracking: true }` (2.15.0+) this key
 
 `_sp_id` is stored in the format: `{domainUserId}.{createdTime}.{visitCount}.{nowTime}.{lastVisitTime}.{sessionId}.{previousSessionId}.{firstEventId}.{firstEventTsInMs}.{eventIndex}`. Please note that the last 4 parts of the cookie (`previousSessionId`, `firstEventId`, `firstEventTsInMs`, `eventIndex`) are only available since version 3.5 of the tracker.
 
-# [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Cookies-and-Local-Storage#local-storage)Local Storage
+# Local Storage
 
 Local Storage will only be used if `stateStorageStrategy` is set to `localStorage`, `cookieAndLocalStorage` (default) or if the deprecated tracker initialisation argument `configUseLocaStorage` is set to `true` (default). Both cookies listed above can be stored in local storage rather than as cookies by setting `stateStorageStrategy` to `localStorage`. Local storage can be disabled by setting `stateStorageStrategy` to `cookie` or `none`.
 
@@ -22,7 +22,7 @@ Local Storage will only be used if `stateStorageStrategy` is set to `localSto
 | snowplowOutQueue_{namespace}_post2 | Used to store a cache of unsent events. This is used to reduce the chance of events to be lost due to page navigation and events not being set to the collector before the navigation event occurs. Where GET requests are used, this key will end in `_get` rather than `_post2`. |
 | snowplowOutQueue_{namespace}_post2.expires | Used to match the concept of cookie expiry within Local Storage. This ensures a consistent behaviour between cookie and local storage. Where GET requests are used, this key will end in `_get` rather than `_post2`. |
 
-# [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Cookies-and-Local-Storage#mapping-values-to-tracker-protocol)Mapping Values to Tracker Protocol
+# Mapping Values to Tracker Protocol
 
 The values stored in the cookies listed above are mapped into the [tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) when events are sent to a Snowplow Collector.
 
@@ -35,7 +35,7 @@ The below table shows which parameters the cookie values map to:
 | vid | domain_sessionidx | _sp_id.visitCount |
 | sid | domain_sessionid | _sp_id.sessionId |
 
-# [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Cookies-and-Local-Storage#allowing-users-to-opt-out)Allowing users to Opt Out
+# Allowing users to Opt Out
 
 The JavaScript tracker offers two methods that allow the users to opt out of using cookies (and local storage in the case of _sp_id and _sp_ses).
 
@@ -43,6 +43,6 @@ The JavaScript tracker offers two methods that allow the users to opt out of usi
 - [Respecting Do Not Track](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Respecting_Do_Not_Track)
 - [Set an opt out cookie](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Opt-out_cookie)
 
-# [](https://github.com/snowplow/snowplow/wiki/Javascript-Tracker-Cookies-and-Local-Storage#further-information)Further Information
+# Further Information
 
 How the JavaScript tracker utilises these cookies to store state as well as information on how to retrieve the values can be found below.

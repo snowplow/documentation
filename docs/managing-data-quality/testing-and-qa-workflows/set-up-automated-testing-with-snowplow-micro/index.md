@@ -67,11 +67,11 @@ Snowplow Micro offers the following endpoints to query the data recorded.
 
 This endpoint responds with a summary JSON object of the number of total, good and bad events currently in the cache.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#http-method)HTTP method
+#### HTTP method
 
 `GET`, `POST`, `OPTIONS`
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#response-format)Response format
+#### Response format
 
 Example:
 
@@ -87,12 +87,12 @@ Example:
 
 This endpoint queries the good events, which are the events that have been successfully validated.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#http-method-1)HTTP method
+#### HTTP method
 
 - `GET`: get _all_ the good events from the cache.
 - `POST`: get the good events with the possibility to filter.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#response-format-1)Response format
+#### Response format
 
 JSON array of [GoodEvent](https://github.com/snowplow-incubator/snowplow-micro/blob/master/src/main/scala/com.snowplowanalytics.snowplow.micro/model.scala#L19)s. A `GoodEvent` contains 4 fields:
 
@@ -316,7 +316,7 @@ An example of a response with one event can be found below:
 ]
 ```
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#filters)Filters
+#### Filters
 
 When querying `/micro/good` with `POST` (`Content-Type: application/json` needs to be set in the headers of the request), it's possible to specify filters, thanks to a JSON in the data of the HTTP request.
 
@@ -352,12 +352,12 @@ It's not necessary to specify all the fields in a request, only the ones that ne
 
 This endpoint queries the bad events, which are the events that failed validation.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#http-method-2)HTTP method
+#### HTTP method
 
 - `GET`: get _all_ the bad events from the cache.
 - `POST`: get the bad events with the possibility to filter.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#response-format-2)Response format
+#### Response format
 
 JSON array of [BadEvent](https://github.com/snowplow-incubator/snowplow-micro/blob/master/src/main/scala/com.snowplowanalytics.snowplow.micro/model.scala#L28)s. A `BadEvent` contains 3 fields:
 
@@ -470,7 +470,7 @@ An example of a response with one bad event can be found below:
 ]
 ```
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#filters-1)Filters
+#### Filters
 
 When querying `/micro/bad` with `POST` (`Content-Type: application/json` needs to be set in the headers of the request), it's possible to specify filters, thanks to a JSON in the data of the HTTP request.
 
@@ -502,11 +502,11 @@ It's not necessary to specify all the fields in each request, only the ones that
 
 Sending a request to this endpoint resets Micro's cache.
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#http-method-3)HTTP method
+#### HTTP method
 
 `GET`, `POST`
 
-#### [](https://github.com/snowplow-incubator/snowplow-micro/blob/master/README.md#response-format-3)Response format
+#### Response format
 
 Expected:
 

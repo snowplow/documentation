@@ -74,7 +74,7 @@ For example, if an enriched event contained a `com.snowplowanalytics.snowplow/li
   },...
 ```
 
-### [](https://github.com/snowplow/snowplow/wiki/.NET-Analytics-SDK-Event-Transformer#examples)4.3 Examples
+### 4.3 Examples
 
 You can convert an enriched event TSV string to a JSON like this:
 

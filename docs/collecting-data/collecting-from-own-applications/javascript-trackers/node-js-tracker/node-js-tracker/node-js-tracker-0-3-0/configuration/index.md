@@ -18,7 +18,7 @@ The tracker instance has a set of `set...()` methods to attach extra data to a
 
 We will discuss each of these in turn below:
 
-### [](#31-set-the-platform-id-with-setplatform)3.1 Set the platform ID with `setPlatform()`
+### 3.1 Set the platform ID with `setPlatform()`
 
 You can set the platform:
 

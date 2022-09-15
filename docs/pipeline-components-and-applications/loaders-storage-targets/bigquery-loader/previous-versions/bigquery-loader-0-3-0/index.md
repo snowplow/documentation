@@ -59,7 +59,7 @@ This is a Scala app that reads data from the `typesTopic` via a `typesSubscri
 
 A JVM application that reads a `failedInserts` subscription and tries to re-insert them into BigQuery to overcome mutation lag.
 
-#### Overview[](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki#overview-3)
+#### Overview
 
 Repeater has several important behaviour aspects:
 
@@ -139,7 +139,7 @@ Loader, Mutator, Repeater and Forwarder accept the same configuration file with�
 - `load` specifies the loading mode and is explained in the dedicated section below.
 - `purpose` is a standard storage configuration. Its only valid value currently is `ENRICHED_EVENTS`.
 
-#### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#loading-mode)Loading mode
+#### Loading mode
 
 BigQuery supports two loading APIs:
 
@@ -178,11 +178,11 @@ Load jobs do not support `retry` (and streaming inserts do not support `frequ
 
 It is generally recommended to stick with the **streaming jobs** API without retries and use [Repeater](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-0-3-0/index.md#repeater) to recover data from `failedInserts`. However, the **load jobs** API is cheaper and generates fewer duplicates.
 
-#### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#command-line-options)Command line options
+#### Command line options
 
 All four apps accept a path to a config file as specified above, and to an Iglu resolver config.
 
-#### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#loader)Loader
+#### Loader
 
 Loader accepts two required arguments, one optional argument, and [any other](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options) supported by Google Cloud Dataflow.
 
@@ -197,11 +197,11 @@ The optional `labels` argument accepts a JSON with key-value pairs that will b
 
 This can be launched from any machine authenticated to submit Dataflow jobs.
 
-#### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#mutator)Mutator
+#### Mutator
 
 Mutator has three subcommands: `listen`, `create` and `add-column`.
 
-##### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#listen)`listen`
+##### `listen`
 
 `listen` is the primary command and is used to automate table migrations.
 
@@ -213,7 +213,7 @@ $ ./snowplow-bigquery-mutator \
     --verbose               # Optional, for debugging only
 ```
 
-##### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#add-column)`add-column`
+##### `add-column`
 
 `add-column` can be used once to add a column manually. This should eliminate the risk of mutation lag and the necessity to run a Repeater or Forwarder job.
 
@@ -227,7 +227,7 @@ $ ./snowplow-bigquery-mutator \
 
 The specified schema must be present in one of the Iglu registries in the resolver configuration.
 
-##### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#create)`create`
+##### `create`
 
 `create` creates an empty table with `atomic` structure.
 
@@ -238,7 +238,7 @@ $ ./snowplow-bigquery-mutator \
     --resolver $RESOLVER
 ```
 
-### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#repeater)Repeater
+### Repeater
 
 We recommend constantly running Repeater on a small / cheap node or Docker container.
 
@@ -256,7 +256,7 @@ $ ./snowplow-bigquery-repeater \
 
 `desperatesBufferSize`, `desperatesWindow` and `backoffPeriod` are optional parameters.
 
-#### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#forwarder)Forwarder
+#### Forwarder
 
 Like Loader, Forwarder can be submitted from any machine authenticated to submit Dataflow jobs.
 
@@ -274,7 +274,7 @@ The `labels` argument works the same as with Loader.
 
 By convention both Dataflow jobs (Forwarder and Loader) accept CLI options with `=` symbol and camelCase, while Mutator and Repeater accept them in UNIX style (without `=`).
 
-### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#docker-support)Docker support
+### Docker support
 
 All four applications are available as Docker images.
 
@@ -283,6 +283,6 @@ All four applications are available as Docker images.
 - `snowplow-docker-registry.bintray.io/snowplow/snowplow-bigquery-repeater:0.3.0`
 - `snowplow-docker-registry.bintray.io/snowplow/snowplow-bigquery-forwarder:0.3.0`
 
-### [](https://github.com/snowplow-incubator/snowplow-bigquery-loader/wiki/Setup-guide#partitioning)Partitioning
+### Partitioning
 
 During initial setup it is strongly recommended to [setup partitioning](https://cloud.google.com/bigquery/docs/creating-column-partitions) on the `derived_tstamp` property. Mutator's `create` command does not automatically add partitioning yet.

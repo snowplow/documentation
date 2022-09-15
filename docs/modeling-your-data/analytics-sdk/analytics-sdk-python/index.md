@@ -22,13 +22,13 @@ These dependencies can be installed from the package manager of the host system 
 
 ## 3. Setup
 
-### [](https://github.com/snowplow/snowplow/wiki/Python-Analytics-SDK-setup#31-pypi)3.1 PyPI
+### 3.1 PyPI
 
 The Snowplow Python Analytics SDK is published to [PyPI](https://pypi.python.org/), the the official third-party software repository for the Python programming language.
 
 This makes it easy to either install the SDK locally, or to add it as a dependency into your own Python app or Spark job.
 
-### [](https://github.com/snowplow/snowplow/wiki/Python-Analytics-SDK-setup#32-pip)3.2 pip
+### 3.2 pip
 
 To install the Snowplow Python Analytics SDK locally, assuming you already have Pip installed:
 

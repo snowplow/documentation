@@ -118,7 +118,7 @@ curl \
 
 You should now be all set up to use the Iglu server, if you would like to know more about the Iglu server, please read the [technical documentation](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md).
 
-## [](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-Server#dummy-mode)Dummy mode
+## Dummy mode
 
 Since 0.6.0 Iglu Server supports new dummy DB mode. In this mode, Server does not require persistent storage as PostgreSQL and stores all data in memory. Use this for debug purposes only, all your data will be lost after restart.
 
@@ -126,7 +126,7 @@ To enable dummy mode, you need to set `database.type` setting to `"dummy"`.
 
 Dummy Iglu Server works with single hardcoded master API key - `48b267d7-cd2b-4f22-bae4-0f002008b5ad`, which you can use to upload your schemas and create new api keys.
 
-## [](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-Server#logging)Logging
+## Logging
 
 Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html) underneath. Which can be configured via system properties.
 

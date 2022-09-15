@@ -12,7 +12,7 @@ The permissions represent the minimum required to keep the Snowplow data pipelin
 
 ## Setup the IAM group
 
-### [](https://github.com/snowplow/snowplow/wiki/Setup-IAM-permissions-for-operating-Snowplow#initial-group-configuration)Initial group configuration
+### Initial group configuration
 
 - First click on the IAM icon on the AWS dashboard:
 - Click on the _Create a New Group of Users_ button

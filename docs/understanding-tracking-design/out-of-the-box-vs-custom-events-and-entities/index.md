@@ -32,7 +32,7 @@ tracker.track(event)
 
 In general, each tracker will have a specific API call for tracking any events that have been defined by the Snowplow team, and you should refer to the [tracker-specific documentation](/docs/collecting-data/collecting-from-own-applications/index.md) to make sure that this is set up correctly.
 
-## [](https://github.com/snowplow/snowplow/wiki/Events-overview#custom-events)Custom events
+## Custom events
 
 If you wish to track an event that you have designed yourself, and therefore isn't a Snowplow authered event, then you can track them using the approach of _self-describing events_.
 

@@ -20,7 +20,7 @@ npm install --save snowplow-analytics-sdk
 
 ### Overview
 
-The [](https://github.com/snowplow-incubator/snowplow-js-analytics-sdk)[Snowplow JavaScript and TypeScript Analytics SDK](https://github.com/snowplow-incubator/snowplow-js-analytics-sdk) provides you an API to parse an enriched event from it's TSV-string form to a `JSON` string.
+The [Snowplow JavaScript and TypeScript Analytics SDK](https://github.com/snowplow-incubator/snowplow-js-analytics-sdk) provides you an API to parse an enriched event from it's TSV-string form to a `JSON` string.
 
 ### Example
 

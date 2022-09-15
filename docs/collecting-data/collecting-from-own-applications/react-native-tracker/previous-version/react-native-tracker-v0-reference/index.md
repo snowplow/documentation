@@ -8,9 +8,9 @@ This documentation page is about a previous version of the React Native tracker.
 
 The Snowplow React Native Tracker is a module which imports the Native Snowplow [iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/index.md) and [Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/index.md) trackers as native modules, available for use in React Native projects.
 
-## Getting Started[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#getting-started)
+## Getting Started
 
-### Installation[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#installation)
+### Installation
 
 Install the tracker with:
 
@@ -18,7 +18,7 @@ Install the tracker with:
 npm install @snowplow/react-native-tracker --save
 ```
 
-### Quickstart Guide[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#quickstart-guide)
+### Quickstart Guide
 
 Minimal setup – initialise the tracker and track a screen view:
 
@@ -66,7 +66,7 @@ In short:
 - (c) In v0.2.0 there is no need to await tracker initialization, since async issues are now handled internally.
 - (d) The `track..` methods are now properties of the tracker object instead of static class methods.
 
-### What’s next?[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#what’s-next)
+### What’s next?
 
 #### Automatic Tracking Features
 
@@ -86,7 +86,7 @@ const tracker = createTracker('my-namespace', {
 
 See the configuration section below for a full list of options.
 
-### Examples[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#examples)
+### Examples
 
 #### Tracking custom events
 
@@ -132,9 +132,9 @@ tracker.trackScreenViewEvent(
 
 An empty array is acceptable, which will attach no entities to the event.
 
-## Features[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#features)
+## Features
 
-### Configuration[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#configuration)
+### Configuration
 
 #### Initialisation Options
 
@@ -224,7 +224,7 @@ tracker.setSubjectData({
 - `networkUserId`: (string) – Populates the `network_userid` field. Typically used to link native tracking to in-app browser events tracked using the javascript Normally one would retrieve the network userid from the browser and pass it to the app. Should contain a valid UUID4 string.
 - `domainUserId`: (string) – Populates the `domain_userid` field. Typically used to link native tracking to in-app browser events tracked using the javascript Normally one would retrieve the domain userid from the browser and pass it to the app. Should contain a valid UUID4 string.
 
-### Tracking Methods[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#tracking-methods)
+### Tracking Methods
 
 #### Screen View Tracking
 
@@ -354,9 +354,9 @@ tracker.trackPageViewEvent({
 - `pageTitle`: (string) – Page Title for the page view event.
 - `pageReferrer`: (string) – Url for the referring page to the page view event. Must be a vaild url.
 
-## Data Modelling[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#data-modelling)
+## Data Modelling
 
-### Important features for Data Modelling[](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md#important-features-for-data-modelling)
+### Important features for Data Modelling
 
 For most use cases, the recommended setup is to enable at least the session context, screen context, and platform context. These will enable most of the common information in modeling mobile events in a standard way.
 

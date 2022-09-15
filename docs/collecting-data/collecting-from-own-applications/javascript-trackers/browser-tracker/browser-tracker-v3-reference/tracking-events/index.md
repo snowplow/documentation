@@ -538,7 +538,7 @@ The conditional part is standardized into two options:
 
 Filter functions take the standard callback arguments defined for context generators, but instead of returning a Self Describing JSON, return a boolean value. As should be expected: `true` will attach the context part, `false` will not attach the context part.
 
-#### [](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#example)Example
+#### Example
 
 ```javascript
 // A filter that will only attach contexts to structured events
@@ -599,7 +599,7 @@ var globalContextDefinition = [ruleSet, contextEntityToAdd];
 addGlobalContexts([globalContextDefinition]);
 ```
 
-#### [](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#rule-requirements)Rule requirements
+#### Rule requirements
 
 All rules and schemas follow a standard form:
 
@@ -881,17 +881,17 @@ enableFormTracking({
 });
 ```
 
-##### [](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#change_form)`change_form`
+##### `change_form`
 
 When a user changes the value of a `textarea`, `input`, or `select` element inside a form, a [`change_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/change_form/jsonschema/1-0-0) event will be fired. It will capture the name, type, and new value of the element, and the id of the parent form.
 
-##### [](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#submit_form)`submit_form`
+##### `submit_form`
 
 When a user submits a form, a [`submit_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/submit_form/jsonschema/1-0-0) event will be fired. It will capture the id and classes of the form and the name, type, and value of all `textarea`, `input`, and `select` elements inside the form.
 
 Note that this will only work if the original form submission event is actually fired. If you prevent it from firing, for example by using a jQuery event handler which returns `false` to handle clicks on the form's submission button, the Snowplow `submit_form` event will not be fired.
 
-##### [](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#focus_form)`focus_form`
+##### `focus_form`
 
 When a user focuses on a form element, a [`focus_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/focus_form/jsonschema/1-0-0) event will be fired. It will capture the id and classes of the form and the name, type, and value of the `textarea`, `input`, or `select` element inside the form that received focus.
 

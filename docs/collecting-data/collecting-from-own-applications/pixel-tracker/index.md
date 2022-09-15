@@ -98,6 +98,6 @@ How Snowplow attaches the `uri_redirect` to the event depends on what other Tr
 1. If you attached an `&e={{event type}}` to your event, then the `uri_redirect` will be added to the contexts array of your event
 2. If you did not attach an `&e={{event type}}` to your event, then this event will be treated as an unstructured event and the `uri_redirect` will be attached as the event itself
 
-## [](https://github.com/snowplow/snowplow/wiki/pixel-tracker-setup#further-sources-of-information)Further sources of information
+## Further sources of information
 
 For further information on the Pixel tracker, see this [introductory blog post](http://snowplowanalytics.com/blog/2013/01/29/introducing-the-pixel-tracker/).

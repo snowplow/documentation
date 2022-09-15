@@ -129,7 +129,7 @@ If you choose Postgres as destination, there is no additional step. Respective v
 
 ##### Snowflake
 
-If you choose Snowflake as destination, there is one more additional step. Pipeline Terraform module doesn't create necessary Snowflake resources, unlike Postgres resources. It only deploys the Snowflake Loader. Therefore Snowflake resources need to be created before deploying the pipeline. We've created [another Terraform module](https://github.com/snowplow/quickstart-examples/tree/snowflake-loader/terraform/aws/snowflake) for this purpose. You can follow the Optional Step 2 below[](https://github.com/snowplow/engineering-announcements/blob/cac7a9c26100fc84e38d19298f63e88a682b22bd/quickstart-snowflake/aws/snowflake-setup.md) to learn how to use Snowflake Terraform module. Snowflake Terraform module will give outputs after it is applied. These outputs need to be passed to `snowflake.terraform.tfvars`.
+If you choose Snowflake as destination, there is one more additional step. Pipeline Terraform module doesn't create necessary Snowflake resources, unlike Postgres resources. It only deploys the Snowflake Loader. Therefore Snowflake resources need to be created before deploying the pipeline. We've created [another Terraform module](https://github.com/snowplow/quickstart-examples/tree/snowflake-loader/terraform/aws/snowflake) for this purpose. You can follow the Optional Step 2 below to learn how to use Snowflake Terraform module. Snowflake Terraform module will give outputs after it is applied. These outputs need to be passed to `snowflake.terraform.tfvars`.
 
 **Step 2 (Snowflake only): Run Snowflake terraform module**
 

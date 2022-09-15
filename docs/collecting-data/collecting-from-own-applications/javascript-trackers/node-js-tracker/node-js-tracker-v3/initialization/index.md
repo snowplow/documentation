@@ -17,7 +17,7 @@ var tracker = snowplow.tracker;
 or, if using ES Modules, you can import the module like so:
 
 ```javascript
-import { tracker, gotEmitter } from 'snowplow-tracker';
+import { tracker, gotEmitter } from '@snowplow/node-tracker';
 ```
 
 ### Configure Emitter
@@ -31,7 +31,7 @@ A simple set up of this emitter might look like:
 ```javascript
 const e = gotEmitter(
   'collector.mydomain.net', // Collector endpoint
-  snowplow.HttpProtocol.HTTPS, // Optionally specify a method - http is the default
+  snowplow.HttpProtocol.HTTPS, // Optionally specify a method - https is the default
   8080, // Optionally specify a port
   snowplow.HttpMethod.POST, // Method - defaults to GET
   5 // Only send events once n are buffered. Defaults to 1 for GET requests and 10 for POST requests.
@@ -45,7 +45,7 @@ The full set of `gotEmitter` parameters can be found in our [API Documentation](
 ```javascript
 const e = snowplow.gotEmitter(
   'collector.mydomain.net', // Endpoint
-  snowplow.HttpProtocol.HTTP, // Protocol
+  snowplow.HttpProtocol.HTTPS, // Protocol
   8080, // Port
   snowplow.HttpMethod.POST, // Method
   1, // Buffer Size
@@ -58,7 +58,7 @@ const e = snowplow.gotEmitter(
       console.log('Event Sent');
     }
   },
-  { 
+  {
     http: new http.Agent({ maxSockets: 6 }),
     https: new https.Agent({ maxSockets: 6 })
   } // Node.js agentOptions object to tune performance

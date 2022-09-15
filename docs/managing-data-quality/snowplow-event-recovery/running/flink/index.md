@@ -10,8 +10,6 @@ The Flink job reads bad rows from an S3 location and stores the recovered payloa
 
 To build the fat jar, run:
 
-#### 
-
 ```bash
 sbt flink/assembly
 ```

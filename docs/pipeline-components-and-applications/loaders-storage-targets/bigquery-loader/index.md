@@ -12,8 +12,7 @@ There are currently four applications, which are described in detail below. A ty
 - a Mutator app, which keeps track of the fields present in the enriched data and updates the BigQuery table accordingly;
 - a Repeater app, which handles so-called failed inserts.
 
-##   
-Technical Architecture
+## Technical Architecture
 
 The available tools are:
 

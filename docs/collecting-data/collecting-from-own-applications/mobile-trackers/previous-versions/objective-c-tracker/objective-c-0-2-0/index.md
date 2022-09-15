@@ -12,8 +12,6 @@ The tracker should be straightforward to use if you are comfortable with iOS dev
 
 You can also find detailed documentation for the method calls in the tracker classes available as part of the [CocoaPods documentation](http://cocoadocs.org/docsets/SnowplowTracker/).
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#2-initialization)2. Initialization
 
 Assuming you have completed the [iOS Tracker Setup](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup) for your project, you are now ready to initialze the Snowplow Tracker.
@@ -28,8 +26,6 @@ Adding the library into your project is as simple as adding the headers into you
 ```
 
 That's it - you are now ready to initialize a tracker instance.
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#22-creating-a-tracker)2.2 Creating a tracker
 
@@ -55,8 +51,6 @@ SnowplowTracker *t1 = [[SnowplowTracker alloc] initWithCollector:collector appId
 | `appId` | The application ID |
 | `base64Encoded` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) |
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 #### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#221-collector)2.2.1 `collector`
 
 This is a single `SnowplowRequest` object that will be used to send all the tracking events created by the `SnowplowTracker` to a collector. See [Sending events](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#emitters) for more on its configuration.
@@ -73,16 +67,12 @@ The `appId` argument lets you set the application ID to any string.
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `base64Encoded` argument.
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#3-adding-extra-data)3. Adding extra data
 
 Unlike the other Trackers, the iOS tracker automatically collects your platform, screen resolution, viewport, color depth, timezone and language from the device. You can still however, set your user ID to properly track different users if you require it.
 
 - [`setUserId`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#set-user-id)
 - [Sending IFA](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#sending-ifa)
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#31-set-user-id-with-setuserid)3.1 Set user ID with `setUserId`
 
@@ -122,13 +112,9 @@ Tracking methods supported by the iOS Tracker at a glance:
 | [`trackStructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#struct-event) | Track a Snowplow custom structured event |
 | [`trackUnstructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#unstruct-event) | Track a Snowplow custom unstructured event |
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#41-common)4.1 Common
 
 All events are tracked with specific methods on the tracker instance, of the form `trackXXX()`, where `XXX` is the name of the event to track.
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#411-custom-contexts)4.1.1 Custom contexts
 
@@ -170,8 +156,6 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 
 _Note that even if there is only one custom context attached to the event, it still needs to be placed in an array._
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#412-optional-timestamp--context-argument)4.1.2 Optional timestamp & context argument
 
 In all the trackers, we offer a way to set the timestamp if you want the event to show as tracked at a specific time. If you don't, we create a timestamp while the event is being tracked.
@@ -185,13 +169,9 @@ Here is an example:
 [tracker trackPageView:@"www.page.com" title:@"Example Page" referrer:@"www.referrer.com" context:contextArray timestamp:1234567890\;
 ```
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#413-tracker-method-return-values)4.1.3 Tracker method return values
 
 To be confirmed. As of now, trackers do not return anything.
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#42-track-screen-views-with-trackscreenview)4.2 Track screen views with `trackScreenView:`
 
@@ -211,8 +191,6 @@ Example:
 [t1 trackScreenView:@"HUD > Save Game" screen:nil timestamp:12435678];
 [t1 trackScreenView:@"HUD > Save Game" screen:@"screen23" timestamp:12435678];
 ```
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#43-track-pageviews-with-trackpageview)4.3 Track pageviews with `trackPageView:`
 
@@ -234,8 +212,6 @@ Example:
 [t1 trackPageView:@"www.example.com" title:@"example" referrer:@"www.referrer.com" context:contextList];
 [t1 trackPageView:@"www.example.com" title:@"example" referrer:@"www.referrer.com"];
 ```
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#44-track-ecommerce-transactions-with-trackecommercetransaction)4.4 Track ecommerce transactions with `trackEcommerceTransaction:`
 
@@ -289,8 +265,6 @@ NSMutableArray *itemArray = [NSMutableArray array];
 [t trackEcommerceTransaction:transactionID totalValue:350 affiliation:@"no_affiliate" taxValue:10 shipping:15 city:@"Boston" state:@"Massachusetts" country:@"USA" currency:@"USD" items:itemArray];
 ```
 
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
-
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#45-track-structured-events-with-trackstructuredevent)4.5 Track structured events with `trackStructuredEvent:`
 
 Use `trackStructuredEvent:` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
@@ -311,8 +285,6 @@ Example:
 [t1 trackStructuredEvent:@"shop" action:@"add-to-basket" label:@"Add To Basket" property:@"pcs" value:27];
 [t1 trackStructuredEvent:@"shop" action:@"add-to-basket" label:@"Add To Basket" property:@"pcs" value:27 timestamp:1234569];
 ```
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ### [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#46-track-unstructured-events-with-trackunstructuredevent)4.6 Track unstructured events with `trackUnstructuredEvent:`
 
@@ -355,8 +327,6 @@ tracker trackUnstructuredEvent:eventJson
 ```
 
 For more on JSON schema, see the [blog post](https://snowplow.io/blog/2014/05/15/introducing-self-describing-jsons/).
-
-[Back to top](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#top)
 
 ## [](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.2#5-sending-events-snowplowrequest)5. Sending events: `SnowplowRequest`
 

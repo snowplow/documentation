@@ -4,6 +4,11 @@ date: "2021-03-26"
 sidebar_position: 1000
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 # Snowplow Micro
 
 [![Latest Docker image version](https://img.shields.io/docker/v/snowplow/snowplow-micro?sort=semver)](https://hub.docker.com/r/snowplow/snowplow-micro)
@@ -42,22 +47,22 @@ Snowplow Micro is hosted on Docker Hub: [snowplow/snowplow-micro](https://hub.do
 
 The configuration files must be placed in a folder that is mounted in the Docker container, and the port configured for Micro needs to be exposed. For example, with configuration files in `./example` directory and to bind port `9090`:
 
-```bash
-docker run \
-  --mount type=bind,source=$(pwd)/example,destination=/config \
-  -p 9090:9090 \
-  snowplow/snowplow-micro:1.3.1 \
-  --collector-config /config/micro.conf \
-  --iglu /config/iglu.json
-```
+<CodeBlock language="bash">{
+`docker run \\
+  --mount type=bind,source=$(pwd)/example,destination=/config \\
+  -p 9090:9090 \\
+  snowplow/snowplow-micro:${versions.snowplowMicro} \\
+  --collector-config /config/micro.conf \\
+  --iglu /config/iglu.json`
+}</CodeBlock>
 
 #### Using Java
 
 Alternatively, a Snowplow Micro jar file is hosted on the [Github release](https://github.com/snowplow-incubator/snowplow-micro/releases) page.
 
-```bash
-java -jar snowplow-micro-1.3.1.jar --collector-config example/micro.conf --iglu example/iglu.json
-```
+<CodeBlock Language="bash">{
+`java -jar snowplow-micro-${versions.snowplowMicro}.jar --collector-config example/micro.conf --iglu example/iglu.json`
+}</CodeBlock>
 
 ## REST API
 
@@ -617,24 +622,24 @@ example
 
 Using Docker, in order to use the embedded Iglu capabilities, the command remains the same:
 
-```bash
-docker run \
-  --mount type=bind,source=$(pwd)/example,destination=/config \
-  -p 9090:9090 \
-  snowplow/snowplow-micro:1.3.1 \
-  --collector-config /config/micro.conf \
-  --iglu /config/iglu.json
-```
+<CodeBlock language="bash">{
+`docker run \\
+  --mount type=bind,source=$(pwd)/example,destination=/config \\
+  -p 9090:9090 \\
+  snowplow/snowplow-micro:${versions.snowplowMicro} \\
+  --collector-config /config/micro.conf \\
+  --iglu /config/iglu.json`
+}</CodeBlock>
 
 #### Using Java
 
 If you cannot use Docker and you also want an embedded Iglu, apply the same directory structure as shown above and run for this example:
 
-```bash
-# Unix
-java -cp snowplow-micro-1.3.1.jar:example com.snowplowanalytics.snowplow.micro.Main --collector-config example/micro.conf --iglu example/iglu.json
+<CodeBlock language="bash">{
+`# Unix
+java -cp snowplow-micro-${versions.snowplowMicro}.jar:example com.snowplowanalytics.snowplow.micro.Main --collector-config example/micro.conf --iglu example/iglu.json
 # Windows
-java -cp snowplow-micro-1.3.1.jar;example com.snowplowanalytics.snowplow.micro.Main --collector-config example/micro.conf --iglu example/iglu.json
-```
+java -cp snowplow-micro-${versions.snowplowMicro}.jar;example com.snowplowanalytics.snowplow.micro.Main --collector-config example/micro.conf --iglu example/iglu.json`
+}</CodeBlock>
 
 Now you can also check that your embedded schemas can be resolved by using the `/micro/iglu` endpoint.

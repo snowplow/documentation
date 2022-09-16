@@ -4,6 +4,11 @@ date: "2021-03-26"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Upgrading from v0.x to v1
 
 - Snowplow Micro v1 uses the exact same validation with a production Snowplow pipeline, which is even stricter and so ensures that if Micro validates an event, then it cannot fail during the enrichment in production.
@@ -11,7 +16,7 @@ sidebar_position: 10
 
 If you have been using the previous version (v0.1.0) in your test suites, you can easily upgrade to the new version (recommended). The steps include:
 
-- Point to the newest v1 version `1.2.1` of Micro in your `docker run` command or in your `docker-compose.yml` file.
+- <span>Point to the newest v1 version <code>{versions.snowplowMicro}</code> of Micro in your <code>docker run</code> command or in your <code>docker-compose.yml</code> file.</span>
 - Modify the configuration for Micro, an example of which can be found in the `micro.conf` file [here](https://github.com/snowplow-incubator/snowplow-micro/blob/master/example/micro.conf).
 - The [response format](https://github.com/snowplow-incubator/snowplow-micro#response-format-1) for `GoodEvents` has changed, since Micro now outputs the post-enrichment event. This means that if in your tests you were filtering on `GoodEvents` through the `/micro/good` endpoint, you will need to change:
     - the expected values for `eventType`.

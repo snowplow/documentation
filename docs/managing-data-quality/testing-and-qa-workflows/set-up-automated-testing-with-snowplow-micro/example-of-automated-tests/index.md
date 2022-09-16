@@ -4,7 +4,12 @@ date: "2021-03-26"
 sidebar_position: 0
 ---
 
-The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository aims to show in detail all the steps to setting up automated tests for your Snowplow event tracking (using Nightwatch and Cypress as examples of test tools), to build end-to-end GitHub Actions testing workflows.
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
+The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository aims to show in detail all the steps to setting up automated tests for your Snowplow event tracking (using Nightwatch and Cypress as examples of test tools), to build end-to-end GitHub Actions testing workflows.[](https://github.com/snowplow-incubator/snowplow-micro-examples#1-local-setup)
 
 ## Local setup
 
@@ -85,11 +90,11 @@ In order to use it, just make sure that:
 
 If you wanted to use `docker run` instead of `docker-compose`, the same step would be:
 
-```yaml
-- name: Start Micro
-    run: docker run --mount type=bind,source=$(pwd)/micro,destination=/config -p 9090:9090 snowplow/snowplow-micro:1.3.1 --collector-config /config/micro.conf --iglu /config/iglu.json &
-    working-directory: snowplow-micro-examples
-```
+<CodeBlock language="yaml">{
+`- name: Start Micro
+    run: docker run --mount type=bind,source=$(pwd)/micro,destination=/config -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --collector-config /config/micro.conf --iglu /config/iglu.json & \\
+    working-directory: snowplow-micro-examples`
+}</CodeBlock>
 
 ## Tracking design
 

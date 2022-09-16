@@ -37,7 +37,7 @@ Make sure to use JavaScript tracker version `3.2` or newer. You may also refer
 
 ## Initialization
 
-Instantiate a tracker using the `Snowplow.createTracker` function. You may create the tracker in the `initState()` of your main widget. At its most basic, the function takes two required arguments: `namespace` and `endpoint`. Tracker namespace identifies the tracker instance, you may create multiple trackers with different namespaces. The endpoint is the URI of the Snowplow collector to send the events to.
+Instantiate a tracker using the `Snowplow.createTracker` function. At its most basic, the function takes two required arguments: `namespace` and `endpoint`. Tracker namespace identifies the tracker instance, you may create multiple trackers with different namespaces. The endpoint is the URI of the Snowplow collector to send the events to. This tracker creation is asynchronous and uses the `await` keyword; therefore it must occur inside a function labelled `async`. You could create the tracker in the `main()` of your main widget. 
 
 ```cpp
 SnowplowTracker tracker = await Snowplow.createTracker(

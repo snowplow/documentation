@@ -115,6 +115,7 @@ SelfDescribing selfDescribing = SelfDescribing.builder()
 tracker.track(selfDescribing);
 ```
 The resulting enriched event would have these `Subject` atomic columns populated:
+
  | Column in enriched event | Value / example value                       | Source         |
  |--------------------------|---------------------------------------------|----------------|
  | user_id                  | "java@snowplowanalytics.com"                | eventSubject   |

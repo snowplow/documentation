@@ -44,6 +44,18 @@ SnowplowTracker tracker = await Snowplow.createTracker(
     namespace: 'ns1',
     endpoint: 'http://...'
 );
+
+// Creating a tracker in the main() function
+// It is passed to the other widgets as necessary
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SnowplowTracker tracker = await Snowplow.createTracker(
+      namespace: "namespace", 
+      endpoint: "http://0.0.0.0:9090");
+
+  runApp(MyApp(tracker: tracker));
+}
 ```
 
 There are additional optional arguments to configure the tracker. To learn more about configuring how events are sent, check out [this page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/initialization-and-configuration/index.md).

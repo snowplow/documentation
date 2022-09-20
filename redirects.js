@@ -25,6 +25,10 @@ const redirects = [
     from: '/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub',
     to: '/docs/pipeline-components-and-applications/enrichment-components/enrich',
   },
+  {
+    from: '/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2',
+    to: '/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup',
+  },
 ]
 
 module.exports = {

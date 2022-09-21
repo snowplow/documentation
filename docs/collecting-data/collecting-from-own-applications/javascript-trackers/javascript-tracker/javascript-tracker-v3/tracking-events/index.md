@@ -230,7 +230,17 @@ document.addEventListener('visibilitychange', function() {
 window.snowplow('trackPageView');
 ```
 
-Note: For this technique of sending on visibility change to work reliably, we recommend initialising the Snowplow tracker with `eventMethod: 'beacon'` and/or `stateStorageStrategy: 'cookieAndLocalStorage'` (if navigating to a page that also contains the JS Tracker). Using the visibility change technique may not work as expected for Single Page Applications (SPA), you would need to send the aggregated event to the Snowplow collector on navigation within your application.
+:::note
+
+For this technique of sending on visibility change to work reliably, we recommend initialising the Snowplow tracker with `eventMethod: 'beacon'` and/or `stateStorageStrategy: 'cookieAndLocalStorage'` (if navigating to a page that also contains the JS Tracker). Using the visibility change technique may not work as expected for Single Page Applications (SPA), you would need to send the aggregated event to the Snowplow collector on navigation within your application.
+
+:::
+
+:::caution
+
+The `iglu:com.acme_company/page_unload/jsonschema/1-0-0` schema used in the example is not a valid schema. Please define your own schema for these events. Otherwise, they will fail validation and go to the bad event queue.
+
+:::
 
 We are using `visibilitychange` events as `beforeunload` isn't a reliable option for mobile devices when using `beacon`. You can read more about this on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon#description). An idea on the different levels of compatibility of the different Page Visiblity API across browsers and mobile can here found [here](https://www.igvita.com/2015/11/20/dont-lose-user-and-app-state-use-page-visibility/).
 
@@ -826,7 +836,11 @@ snowplow('enableFormTracking');
 
 This will only work for form elements which exist when it is called. If you are creating a form programatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
 
-**Note:** that events on password fields will not be tracked.
+:::note
+
+Events on password fields will not be tracked.
+
+:::
 
 #### Custom form tracking
 
@@ -1272,7 +1286,11 @@ Ad impression tracking is accomplished using the `trackAdImpression` method. H
 | `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
 | `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
 
-NOTE: All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdImpression`.
+:::note
+
+All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdImpression`.
+
+:::
 
 An example:
 
@@ -1344,7 +1362,11 @@ Use the `trackAdConversion` method to track ad conversions. Here are the argum
 | `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
 | `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
 
-NOTE: All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdConversion`.
+:::note
+
+All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdConversion`.
+
+:::
 
 An example:
 
@@ -1452,7 +1474,11 @@ ga('ec:setAction', 'purchase', {
 });
 ```
 
-**NOTE**: The action type is passed with the action context in the Google Analytics example. We have seperated this by asking you to call the trackEnhancedEcommerceAction function to actually send the context and the action.
+:::note
+
+The action type is passed with the action context in the Google Analytics example. We have seperated this by asking you to call the trackEnhancedEcommerceAction function to actually send the context and the action.
+
+:::
 
 Adding an action using Snowplow:
 

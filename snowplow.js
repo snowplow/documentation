@@ -1,5 +1,10 @@
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
-import { newTracker, trackPageView } from '@snowplow/browser-tracker'
+import {
+  newTracker,
+  trackPageView,
+  enableActivityTracking,
+  disableAnonymousTracking,
+} from '@snowplow/browser-tracker'
 import {
   LinkClickTrackingPlugin,
   enableLinkClickTracking,
@@ -36,30 +41,25 @@ const setupBrowserTracker = () => {
     }
   }
 
-  const snowplowTracker = newTracker(
-    'snplow5',
-    'https://collector.snowplow.io',
-    trackerConfig
-  )
+  newTracker('snplow5', 'https://collector.snowplow.io', trackerConfig)
+  newTracker('biz1', 'https://c.snowplow.io', trackerConfig)
 
   enableLinkClickTracking()
   refreshLinkClickTracking()
-  snowplowTracker.enableActivityTracking({
+  enableActivityTracking({
     heartbeatDelay: 10,
     minimumVisitLength: 10,
   }) // precise tracking for the unified log
-
-  return snowplowTracker
 }
 
 if (ExecutionEnvironment.canUseDOM) {
-  const tracker = setupBrowserTracker()
+  setupBrowserTracker()
 
   onPreferencesChanged((preferences) => {
     preferences.cookieOptions.forEach(({ id, isEnabled }) => {
       if (id === 'analytics') {
         if (isEnabled) {
-          tracker.disableAnonymousTracking({
+          disableAnonymousTracking({
             stateStorageStrategy: 'cookieAndLocalStorage',
           })
           // to now track it with all the extra data

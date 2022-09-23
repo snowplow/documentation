@@ -29,6 +29,10 @@ const redirects = [
     from: '/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2',
     to: '/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup',
   },
+  {
+    from: '/docs/pipeline-components-and-applications/enrichment-components/snowplow-rdb-loader-3-0-0',
+    to: '/docs/pipeline-components-and-applications/enrichment-components/snowplow-rdb-loader',
+  },
 ]
 
 module.exports = {

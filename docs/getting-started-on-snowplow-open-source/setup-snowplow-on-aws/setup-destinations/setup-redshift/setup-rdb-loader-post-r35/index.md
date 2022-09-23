@@ -31,14 +31,14 @@ Upstream of the RDB loader, [S3 loader](/docs/pipeline-components-and-applicatio
 
 Steps to get RDB loader up and running:
 
-1. [Configure Transformer (formerly Shredder) and loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/index.md)
+1. [Configure Transformer (formerly Shredder) and loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md)
 2. Create SQS FIFO queue. Content-based deduplication needs to be enabled.
 3. Configure [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/setup/index.md) with the schemas  
     **IMPORTANT**: do not forget to add `/api` at the end of the uri in the resolver configuration for the loader
 4. Create `atomic.events` table. Instructions can be found on [this page](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/launch-a-redshift-cluster/setup-the-snowplow-database-and-events-table/index.md)
 5. Run RDB Loader as long-running process with access to message queue:  
     `docker run snowplow/snowplow-rdb-loader:1.0.0 --config config.hocon.base64 --iglu-config resolver.json.base64`
-6. [Schedule EMR jobs with S3DistCp and Shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/transforming-enriched-data/spark-transformer/index.md)
+6. [Schedule EMR jobs with S3DistCp and Shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md)
 
 ## 4. Shredder stateless algorithm
 

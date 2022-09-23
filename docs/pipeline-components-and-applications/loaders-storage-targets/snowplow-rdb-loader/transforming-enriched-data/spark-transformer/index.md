@@ -9,7 +9,11 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-_For a high-level overview of the Transform process, see [Transforming enriched data](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md). For guidance on picking the right `transformer` app, see [How to pick a transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-to-pick-a-transformer)._
+:::info
+
+For a high-level overview of the Transform process, see [Transforming enriched data](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md). For guidance on picking the right `transformer` app, see [How to pick a transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-to-pick-a-transformer).
+
+:::
 
 The Spark-based transformer is a batch job designed to be deployed in an EMR cluster and process a bounded data set stored on S3.
 

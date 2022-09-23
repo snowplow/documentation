@@ -40,7 +40,7 @@ See [here](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.m
 
 The two config files need to be passed in as base64-encoded strings:
 
-<CodeBlock language="bash" title="docker command">{
+<CodeBlock language="bash">{
 `$ docker run snowplow/transformer-kinesis:${versions.rdbLoader} \
 --iglu-config $RESOLVER_BASE64 \
 --config $CONFIG_BASE64

@@ -10,4 +10,4 @@ Both applications consume the raw data from the raw Pub/Sub topic (outputted by 
 
 ## Run Enrich
 
-The [Enrich applications reference](/docs/pipeline-components-and-applications/enrichment-components/index.md) has instructions for setting up and running [Enrich PubSub](/docs/pipeline-components-and-applications/enrichment-components/enrich/index.md).
+The [Enrich applications reference](/docs/pipeline-components-and-applications/enrichment-components/index.md) has instructions for setting up and running [Enrich PubSub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md).

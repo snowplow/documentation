@@ -83,7 +83,7 @@ See [here](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.m
 The two config files need to be passed in as base64-encoded strings:
 
 <CodeBlock language="bash">{
-`$ docker run snowplow/rdb-loader-snowflake:${versions.rdbLoader} \
+`$ docker run snowplow/rdb-loader-snowflake:${versions.rdbLoader} \\
 --iglu-config $RESOLVER_BASE64 \
 --config $CONFIG_BASE64
 `}</CodeBlock>

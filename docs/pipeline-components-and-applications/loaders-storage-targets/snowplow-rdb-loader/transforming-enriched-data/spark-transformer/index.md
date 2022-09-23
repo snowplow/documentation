@@ -168,7 +168,7 @@ To run the transformer on EMR with Dataflow Runner, you need:
 
 A typical playbook can look like:
 
-<CodeBlock language="json" title="typical playbook">{`
+<CodeBlock language="json">{`
 {
   "schema": "iglu:com.snowplowanalytics.dataflowrunner/PlaybookConfig/avro/1-0-1",
   "data": {

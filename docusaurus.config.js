@@ -146,7 +146,17 @@ const config = {
       },
     }),
 
-  plugins: [['@docusaurus/plugin-client-redirects', redirects]],
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: redirects.redirects,
+        createRedirects(srcPath) {
+          return redirects.redirectsRuleFn(srcPath)
+        },
+      },
+    ],
+  ],
 }
 
 module.exports = config

@@ -1,5 +1,5 @@
 ---
-title: "enrich-pubsub (GCP)"
+title: "Enrich Pubsub (GCP)"
 date: "2020-10-22"
 sidebar_position: 10
 ---

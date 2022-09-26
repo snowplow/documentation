@@ -4,4 +4,5 @@ export const versions = {
   rdbLoader: '4.3.0',
   collector: '2.8.0',
   enrich: '3.4.0',
+  bqLoader: '1.5.0',
 }

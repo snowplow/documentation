@@ -1,13 +1,8 @@
 ---
-title: "BigQuery Loader"
-date: "2020-09-29"
-sidebar_position: 500
+title: "BigQuery Loader (1.4.x)"
+date: "2022-09-26"
+sidebar_position: 40
 ---
-
-```mdx-code-block
-import {versions} from '@site/src/componentVersions';
-import CodeBlock from '@theme/CodeBlock';
-```
 
 Under the umbrella of Snowplow BigQuery Loader, we have a family of applications that can be used to load enriched Snowplow data into BigQuery.
 
@@ -144,46 +139,46 @@ Loader / StreamLoader, Mutator and Repeater accept the same configuration file i
 
 The loader takes command line arguments `--config` with a path to the configuration hocon file and `--resolver` with a path to the Iglu resolver file. If you are running the docker image then you should mount the configuration files into the container:
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/configs:/configs \\
-    snowplow/snowplow-bigquery-streamloader:${versions.bqLoader} \\
-    --config=/configs/bigquery.hocon \\
+```bash
+$ docker run \
+    -v /path/to/configs:/configs \
+    snowplow/snowplow-bigquery-streamloader:1.4.2 \
+    --config=/configs/bigquery.hocon \
     --resolver=/configs/resolver.json
-`}</CodeBlock>
+```
 
 Or you can pass the whole config as a base64-encoded string using the `--config` option, like so:
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/resolver.json:/resolver.json \\
-    snowplow/snowplow-bigquery-streamloader:${versions.bqLoader} \\
-    --config=ewogICJwcm9qZWN0SWQiOiAiY29tLWFjbWUiCgogICJsb2FkZXIiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAiZW5yaWNoZWQtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogewogICAgICAgICJkYXRhc2V0SWQiOiAic25vd3Bsb3ciCiAgICAgICAgInRhYmxlSWQiOiAiZXZlbnRzIgogICAgICB9CgogICAgICAiYmFkIjogewogICAgICAgICJ0b3BpYyI6ICJiYWQtdG9waWMiCiAgICAgIH0KCiAgICAgICJ0eXBlcyI6IHsKICAgICAgICAidG9waWMiOiAidHlwZXMtdG9waWMiCiAgICAgIH0KCiAgICAgICJmYWlsZWRJbnNlcnRzIjogewogICAgICAgICJ0b3BpYyI6ICJmYWlsZWQtaW5zZXJ0cy10b3BpYyIKICAgICAgfQogICAgfQogIH0KCiAgIm11dGF0b3IiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAidHlwZXMtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogJHtsb2FkZXIub3V0cHV0Lmdvb2R9ICMgd2lsbCBiZSBhdXRvbWF0aWNhbGx5IGluZmVycmVkCiAgICB9CiAgfQoKICAicmVwZWF0ZXIiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAiZmFpbGVkLWluc2VydHMtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogJHtsb2FkZXIub3V0cHV0Lmdvb2R9ICMgd2lsbCBiZSBhdXRvbWF0aWNhbGx5IGluZmVycmVkCgogICAgICAiZGVhZExldHRlcnMiOiB7CiAgICAgICAgImJ1Y2tldCI6ICJnczovL2RlYWQtbGV0dGVyLWJ1Y2tldCIKICAgICAgfQogICAgfQogIH0KCiAgIm1vbml0b3JpbmciOiB7fSAjIGRpc2FibGVkCn0= \\
+```bash
+$ docker run \
+    -v /path/to/resolver.json:/resolver.json \
+    snowplow/snowplow-bigquery-streamloader:1.4.2 \
+    --config=ewogICJwcm9qZWN0SWQiOiAiY29tLWFjbWUiCgogICJsb2FkZXIiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAiZW5yaWNoZWQtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogewogICAgICAgICJkYXRhc2V0SWQiOiAic25vd3Bsb3ciCiAgICAgICAgInRhYmxlSWQiOiAiZXZlbnRzIgogICAgICB9CgogICAgICAiYmFkIjogewogICAgICAgICJ0b3BpYyI6ICJiYWQtdG9waWMiCiAgICAgIH0KCiAgICAgICJ0eXBlcyI6IHsKICAgICAgICAidG9waWMiOiAidHlwZXMtdG9waWMiCiAgICAgIH0KCiAgICAgICJmYWlsZWRJbnNlcnRzIjogewogICAgICAgICJ0b3BpYyI6ICJmYWlsZWQtaW5zZXJ0cy10b3BpYyIKICAgICAgfQogICAgfQogIH0KCiAgIm11dGF0b3IiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAidHlwZXMtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogJHtsb2FkZXIub3V0cHV0Lmdvb2R9ICMgd2lsbCBiZSBhdXRvbWF0aWNhbGx5IGluZmVycmVkCiAgICB9CiAgfQoKICAicmVwZWF0ZXIiOiB7CiAgICAiaW5wdXQiOiB7CiAgICAgICJzdWJzY3JpcHRpb24iOiAiZmFpbGVkLWluc2VydHMtc3ViIgogICAgfQoKICAgICJvdXRwdXQiOiB7CiAgICAgICJnb29kIjogJHtsb2FkZXIub3V0cHV0Lmdvb2R9ICMgd2lsbCBiZSBhdXRvbWF0aWNhbGx5IGluZmVycmVkCgogICAgICAiZGVhZExldHRlcnMiOiB7CiAgICAgICAgImJ1Y2tldCI6ICJnczovL2RlYWQtbGV0dGVyLWJ1Y2tldCIKICAgICAgfQogICAgfQogIH0KCiAgIm1vbml0b3JpbmciOiB7fSAjIGRpc2FibGVkCn0= \
     --resolver=/resolver.json
-`}</CodeBlock>
+```
 
 The `--config` command option is actually optional. For some setups it is more convenient to provide configuration parameters using JVM system properties or environment variables, as documented in [the Lightbend config readme](https://github.com/lightbend/config/blob/v1.4.1/README.md).
 
 For example, to override the `repeater.input.subscription` setting using system properties:
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/configs:/configs \\
-    snowplow/snowplow-bigquery-streamloader:${versions.bqLoader} \\
-    --config=/configs/bigquery.hocon \\
-    --resolver=/configs/resolver.json \\
+```bash
+$ docker run \
+    -v /path/to/configs:/configs \
+    snowplow/snowplow-bigquery-streamloader:1.4.2 \
+    --config=/configs/bigquery.hocon \
+    --resolver=/configs/resolver.json \
     -Drepeater.input.subscription="failed-inserts-sub"
-`}</CodeBlock>
+```
 
 Or to use environment variables for every setting:
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/resolver.json:/resolver.json \\
-    snowplow/snowplow-bigquery-repeater:${versions.bqLoader} \\
-    --resolver=/resolver.json \\
+```bash
+$ docker run \
+    -v /path/to/resolver.json:/resolver.json \
+    snowplow/snowplow-bigquery-repeater:1.4.2 \
+    --resolver=/resolver.json \ 
     -Dconfig.override_with_env_vars=true
-`}</CodeBlock>
+```
 
 See the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/snowplow-bigquery-loader-configuration-reference/index.md) for more details and advanced settings.
 
@@ -195,14 +190,14 @@ All apps accept a config HOCON as specified above, and an Iglu resolver config p
 
 StreamLoader accepts `--config` and `--resolver` arguments, as well as any JVM system properties that can be used to override the configuration.
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/configs:/configs \\
-    snowplow/snowplow-bigquery-streamloader:${versions.bqLoader} \\
-    --config=/configs/bigquery.hocon \\
-    --resolver=/configs/resolver.json \\
+```bash
+$ docker run \
+    -v /path/to/configs:/configs \
+    snowplow/snowplow-bigquery-streamloader:1.4.2 \
+    --config=/configs/bigquery.hocon \
+    --resolver=/configs/resolver.json \
     -Dconfig.override_with_env_vars=true
-`}</CodeBlock>
+```
 
 The `--config` flag is optional, but if missing, all configuration options must be specified in some other way (system properties or environment variables).
 
@@ -210,14 +205,14 @@ The `--config` flag is optional, but if missing, all configuration options must 
 
 The Dataflow Loader accepts the same two arguments as StreamLoader and [any other](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options) supported by Google Cloud Dataflow.
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/configs:/configs \\
-    snowplow/snowplow-bigquery-loader:${versions.bqLoader} \\
-    --config=/configs/bigquery.hocon \\
-    --resolver=/configs/resolver.json \\
+```bash
+$ docker run \
+    -v /path/to/configs:/configs \
+    snowplow/snowplow-bigquery-loader:1.4.2 \
+    --config=/configs/bigquery.hocon \
+    --resolver=/configs/resolver.json \
     --labels={"key1":"val1","key2":"val2"} # optional Dataflow args
-`}</CodeBlock>
+```
 
 The optional `labels` argument is an example of a Dataflow natively supported argument. It accepts a JSON with key-value pairs that will be used as [labels](https://cloud.google.com/compute/docs/labeling-resources) to the Cloud Dataflow job.
 
@@ -231,30 +226,30 @@ Mutator has three subcommands: `listen`, `create` and `add-column`.
 
 `listen` is the primary command and is used to automate table migrations.
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/configs:/configs \\
-    snowplow/snowplow-bigquery-mutator:${versions.bqLoader} \\
-    listen \\
-    --config=/configs/bigquery.hocon \\
-    --resolver=/configs/resolver.json \\
+```bash
+$ docker run \
+    -v /path/to/configs:/configs \
+    snowplow/snowplow-bigquery-mutator:1.4.2 \
+    listen \
+    --config=/configs/bigquery.hocon \
+    --resolver=/configs/resolver.json \
     --verbose # optional, for debugging only
-`}</CodeBlock>
+```
 
 ##### `add-column`
 
 `add-column` can be used once to add a column to the table specified via the `loader.output.good` setting. This should eliminate the risk of table update lag and the necessity to run a Repeater, but requires 'manual' intervention.
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/configs:/configs \\
-    snowplow/snowplow-bigquery-mutator:${versions.bqLoader} \\
-    add-column \\
-    --config=/configs/bigquery.hocon \\
-    --resolver=/configs/resolver.json \\
-    --shred-property=CONTEXTS \\
+```bash
+$ docker run \
+    -v /path/to/configs:/configs \
+    snowplow/snowplow-bigquery-mutator:1.4.2 \
+    add-column \
+    --config=/configs/bigquery.hocon \
+    --resolver=/configs/resolver.json \
+    --shred-property=CONTEXTS \
     --schema="iglu:com.acme/app_context/jsonschema/1-0-0"
-`}</CodeBlock>
+```
 
 The specified schema must be present in one of the Iglu registries in the resolver configuration.
 
@@ -262,16 +257,16 @@ The specified schema must be present in one of the Iglu registries in the resolv
 
 `create` creates an empty table with `atomic` structure. It can optionally be partitioned by a `TIMESTAMP` field.
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/configs:/configs \\
-    snowplow/snowplow-bigquery-mutator:${versions.bqLoader} \\
-    create \\
-    --config=/configs/bigquery.hocon \\
-    --resolver=/configs/resolver.json \\
-    --partitionColumn=load_tstamp \\ # optional TIMESTAMP column by which to partition the table
+```bash
+$ docker run \
+    -v /path/to/configs:/configs \
+    snowplow/snowplow-bigquery-mutator:1.4.2 \
+    create \
+    --config=/configs/bigquery.hocon \
+    --resolver=/configs/resolver.json \
+    --partitionColumn=load_tstamp \ # optional TIMESTAMP column by which to partition the table
     --requirePartitionFilter # optionally require a filter on the partition column in all queries
-`}</CodeBlock>
+```
 
 See the Google documentation for more information about [partitioned tables](https://cloud.google.com/bigquery/docs/creating-partitioned-tables).
 
@@ -279,17 +274,17 @@ See the Google documentation for more information about [partitioned tables](htt
 
 We recommend constantly running Repeater on a small / cheap node or Docker container.
 
-<CodeBlock language="bash">{
-`docker run \\
-    -v /path/to/configs:/configs \\
-    snowplow/snowplow-bigquery-repeater:${versions.bqLoader} \\
-    --config=/configs/bigquery.hocon \\
-    --resolver=/configs/resolver.json \\
-    --bufferSize=20 \\ # size of the batch to send to the dead-letter bucket
-    --timeout=20 \\ # duration after which bad rows will be sunk into the dead-letter bucket  
-    --backoffPeriod=900 \\ # seconds to wait before attempting an insert (calculated against etl_tstamp)
+```bash
+$ docker run \
+    -v /path/to/configs:/configs \
+    snowplow/snowplow-bigquery-repeater:1.4.2 \
+    --config=/configs/bigquery.hocon \
+    --resolver=/configs/resolver.json \
+    --bufferSize=20 \ # size of the batch to send to the dead-letter bucket
+    --timeout=20 \ # duration after which bad rows will be sunk into the dead-letter bucket  
+    --backoffPeriod=900 # seconds to wait before attempting an insert (calculated against etl_tstamp)
     --verbose # optional, for debugging only
-`}</CodeBlock>
+```
 
 `bufferSize`, `timeout` and `backoffPeriod` are optional parameters.
 
@@ -297,20 +292,20 @@ We recommend constantly running Repeater on a small / cheap node or Docker conta
 
 All applications are available as Docker images on Docker Hub, based on Ubuntu Focal and OpenJDK 11:
 
-<CodeBlock language="bash">{
-`$ docker pull snowplow/snowplow-bigquery-streamloader:${versions.bqLoader}
-$ docker pull snowplow/snowplow-bigquery-loader:${versions.bqLoader}
-$ docker pull snowplow/snowplow-bigquery-mutator:${versions.bqLoader}
-$ docker pull snowplow/snowplow-bigquery-repeater:${versions.bqLoader}
-`}</CodeBlock>
+```bash
+$ docker pull snowplow/snowplow-bigquery-streamloader:1.4.2
+$ docker pull snowplow/snowplow-bigquery-loader:1.4.2
+$ docker pull snowplow/snowplow-bigquery-mutator:1.4.2
+$ docker pull snowplow/snowplow-bigquery-repeater:1.4.2
+```
 
-We also provide an alternative lightweight set of images based on [Google's "distroless" base image](https://github.com/GoogleContainerTools/distroless), which may provide some security advantages for carrying fewer dependencies. These images are distinguished with the `${versions.bqLoader}-distroless` tag:
+We also provide an alternative lightweight set of images based on [Google's "distroless" base image](https://github.com/GoogleContainerTools/distroless), which may provide some security advantages for carrying fewer dependencies. These images are distinguished with the `1.4.2-distroless` tag:
 
-<CodeBlock language="bash">{
-`$ docker pull snowplow/snowplow-bigquery-streamloader:${versions.bqLoader}-distroless
-$ docker pull snowplow/snowplow-bigquery-loader:${versions.bqLoader}-distroless
-$ docker pull snowplow/snowplow-bigquery-mutator:${versions.bqLoader}-distroless
-$ docker pull snowplow/snowplow-bigquery-repeater:${versions.bqLoader}-distroless
-`}</CodeBlock>
+```bash
+$ docker pull snowplow/snowplow-bigquery-streamloader:1.4.2-distroless
+$ docker pull snowplow/snowplow-bigquery-loader:1.4.2-distroless
+$ docker pull snowplow/snowplow-bigquery-mutator:1.4.2-distroless
+$ docker pull snowplow/snowplow-bigquery-repeater:1.4.2-distroless
+```
 
 Mutator, Repeater and Streamloader are also available as fatjar files attached to [releases](https://github.com/snowplow-incubator/snowplow-bigquery-loader/releases) in the project's Github repository.

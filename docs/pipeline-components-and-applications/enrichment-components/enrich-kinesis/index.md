@@ -1,5 +1,5 @@
 ---
-title: "enrich-kinesis (AWS)"
+title: "Enrich Kinesis (AWS)"
 date: "2020-10-22"
 sidebar_position: 10
 ---

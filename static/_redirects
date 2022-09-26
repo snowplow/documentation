@@ -1,0 +1,12 @@
+# Sister websites
+/advanced-analytics-web-accelerator/* https://snowplow.github.io/advanced-analytics-web-accelerator/:splat 302
+/snowplow-android-tracker/* https://snowplow.github.io/snowplow-android-tracker/:splat 302
+/snowplow-cpp-tracker/* https://snowplow.github.io/snowplow-cpp-tracker/:splat 302
+/snowplow-lua-tracker/* https://snowplow.github.io/snowplow-lua-tracker/:splat 302
+/snowplow-python-tracker/* https://snowplow.github.io/snowplow-python-tracker/:splat 302
+/snowplow-ruby-tracker/* https://snowplow.github.io/snowplow-ruby-tracker/:splat 302
+
+# Page renaming
+/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
+/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/:splat 301

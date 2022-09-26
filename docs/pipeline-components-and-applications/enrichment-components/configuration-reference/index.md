@@ -226,7 +226,7 @@ When we'll know that all our customers don't have any invalid enriched events an
 
 ## Telemetry
 
-Starting with version 3.0.0 of enrich, snowplow will be collecting the heartbeats with some meta-information about the application (schema [here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.oss/oss_context/jsonschema/1-0-1)). This is done to help us to improve the product, we need to understand what is popular, so we could focus our development effort in the right place.
+Starting with version 3.0.0 of enrich, Snowplow collects heartbeats with some meta-information about the application (schema [here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.oss/oss_context/jsonschema/1-0-1)). This is done to help us to improve the product, we need to understand what is popular, so we could focus our development effort in the right place.
 
 At the base, telemetry is sending the application name and version every hour. You can help us by providing `userProvidedId` in the config file :
 

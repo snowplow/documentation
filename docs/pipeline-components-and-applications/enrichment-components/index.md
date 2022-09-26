@@ -24,11 +24,19 @@ Standalone JVM application that reads collector payloads from a RabbitMQ subscri
 
 Standalone JVM application that reads collector payloads from a Kafka topic and outputs back to Kafka.
 
-In some near future this app will get deprecated in favor of a new `enrich-kafka`.
+:::caution
+
+In near future, this app will get deprecated in favor of a new `enrich-kafka`.
+
+:::
 
 ## [stream-enrich-kinesis](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) (AWS)
 
 Standalone JVM application that reads collector payloads from a Kinesis stream and outputs back to Kinesis.
 
-In some near future this app will get deprecated in favor of `enrich-kinesis`.
+:::caution
+
+In near future, this app will get deprecated in favor of `enrich-kinesis`.
+
+:::
 

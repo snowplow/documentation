@@ -8,7 +8,7 @@ PII (personally identifiable information) pseudonymization enrichment runs after
 
 It enables the users of Snowplow to better protect the privacy rights of data subjects, therefore aiding in compliance for regulatory measures.
 
-In Europe the obligations regarding PIIs handling have been outlined on the [EU GDPR website](https://www.eugdpr.org/).
+In Europe the obligations regarding Personal Data handling have been outlined on the [GDPR EU website](https://www.gdpreu.org/the-regulation/key-concepts/personal-data/).
 
 ## Configuration
 

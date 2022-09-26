@@ -53,6 +53,16 @@ For links within this documentation, please end the link with `/index.md`. This 
 
 You can create reusable fragments and include them in multiple files (see [this example](https://github.com/snowplow/snowplow.github.io/blob/main/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/index.md)).
 
+### Versioned modules
+
+Some of our modules are versioned (e.g. trackers, loaders). Here are a few simple rules to follow.
+
+* Within pages for versioned modules, use **relative links** (e.g. `../setup/index.md`) when pointing to pages for the same version. This helps moving directories around without breaking the links.
+* For the latest docs, **don’t include the version number in the URL**. Otherwise we’d need to update internal links to it with every version change (also, it would get indexed and we’ll need to add a redirect later to avoid breaking external links). For example, see the [Scala tracker docs](https://github.com/snowplow/snowplow.github.io/tree/main/docs/collecting-data/collecting-from-own-applications/scala-tracker) — the path ends with `scala-tracker` rather than `scala-tracker-2-0`.
+* **Put older versions under `previous-versions/`**. This automatically enables the “you are looking at an old version” warning. See the [Scala tracker docs](https://github.com/snowplow/snowplow.github.io/tree/main/docs/collecting-data/collecting-from-own-applications/scala-tracker) for an example of how to add the `previous-versions` directory and what to put there.
+* When a new version is released, you can either update the latest version pages, or move them to `previous-versions` and replace with the new content. If there are not too many breaking changes, you might want to do the former to avoid having too many previous version directories.
+* Put the latest bugfix version for each component into [componentVersions.js](https://github.com/snowplow/snowplow.github.io/blob/main/src/componentVersions.js). This way you only need to update it in one place when a new bugfix release comes out. See the [Scala tracker docs](https://raw.githubusercontent.com/snowplow/snowplow.github.io/main/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup/index.md) for how to then use this on the page.
+
 ## Formatting content
 
 In this section you’ll find some general tips on how to write the pages.

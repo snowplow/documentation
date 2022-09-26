@@ -21,7 +21,7 @@ In addition, Snowplow has a wide selection of pre-defined events and associated 
 | [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item) | Track an item of an ecommerce transaction |
 | [`track_add_to_cart()`](#add-to-cart) | Track an add to cart event |
 | [`track_remove_from_cart()`](#remove-from-cart) | Track a remove from cart event |
-| [`track_struct_event()`](#struct-event) | Track a Snowplow custom structured event |
+| [`track_unstruct_event()`](#unstruct-event) | Track a Snowplow custom unstructured event |
 
 ### Common tracking parameters
 

@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 :::caution
 
-This asset is experimental. It might get drop in some future depending on the results of our experiments.
+This asset is experimental. It might get dropped in the future depending on the results of our experiments.
 
 :::
 

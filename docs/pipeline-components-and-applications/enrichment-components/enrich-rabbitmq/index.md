@@ -46,5 +46,5 @@ Alternatively, you can download and run [a jar file from the github release](ht
   --config /snowplow/config.hocon
 `}</CodeBlock>
 
-Configuration guide can be find on [this page](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/pipeline-components-and-applications/enrichment-components/monitoring/index.md).
+Configuration guide can be found on [this page](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/pipeline-components-and-applications/enrichment-components/monitoring/index.md).
 

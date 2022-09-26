@@ -1,5 +1,5 @@
 ---
-title: "Enrich RabbitMQ Experimental (cloud agnostic)"
+title: "🧪 Enrich RabbitMQ (cloud agnostic)"
 date: "2020-10-22"
 sidebar_position: 10
 ---

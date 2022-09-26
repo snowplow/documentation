@@ -4,7 +4,7 @@ date: "2020-11-09"
 sidebar_position: 50
 ---
 
-This is the technical documentation for the enriching step. If you are not familiar yet with this step of the pipeline, please refer to [this page](/docs/enriching-your-data/what-is-enrichment/index.md).
+This is the technical documentation for the enrichment step. If you are not familiar yet with this step of the pipeline, please refer to [this page](/docs/enriching-your-data/what-is-enrichment/index.md).
 
 Here is the list of the enrichment assets:
 

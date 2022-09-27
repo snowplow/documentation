@@ -5,4 +5,5 @@ export const versions = {
   collector: '2.8.0',
   enrich: '3.4.0',
   bqLoader: '1.5.0',
+  sqs2kinesis: '1.0.4',
 }

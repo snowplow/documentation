@@ -304,7 +304,7 @@ $ docker pull snowplow/snowplow-bigquery-mutator:${versions.bqLoader}
 $ docker pull snowplow/snowplow-bigquery-repeater:${versions.bqLoader}
 `}</CodeBlock>
 
-We also provide an alternative lightweight set of images based on [Google's "distroless" base image](https://github.com/GoogleContainerTools/distroless), which may provide some security advantages for carrying fewer dependencies. These images are distinguished with the `${versions.bqLoader}-distroless` tag:
+<p>We also provide an alternative lightweight set of images based on <a href="https://github.com/GoogleContainerTools/distroless">Google's "distroless" base image</a>, which may provide some security advantages for carrying fewer dependencies. These images are distinguished with the <code>{`${versions.bqLoader}-distroless`}</code> tag:</p>
 
 <CodeBlock language="bash">{
 `$ docker pull snowplow/snowplow-bigquery-streamloader:${versions.bqLoader}-distroless

@@ -16,7 +16,7 @@ Standalone JVM application that reads collector payloads events from a Kinesis s
 
 Standalone JVM application that reads collector payloads from a PubSub subscription and outputs back to PubSub.
 
-## [enrich-rabbitmq (experimental)](/docs/pipeline-components-and-applications/enrichment-components/enrich-rabbitmq/index.md) (cloud agnostic)
+## [enrich-rabbitmq-experimental](/docs/pipeline-components-and-applications/enrichment-components/enrich-rabbitmq/index.md) (cloud agnostic)
 
 Standalone JVM application that reads collector payloads from a RabbitMQ subscription and outputs back to RabbitMQ.
 

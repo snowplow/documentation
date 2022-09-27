@@ -3,4 +3,5 @@ export const versions = {
   scalaTracker: '2.0.0',
   rdbLoader: '4.3.0',
   collector: '2.8.0',
+  enrich: '3.4.0',
 }

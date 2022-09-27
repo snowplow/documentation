@@ -17,7 +17,7 @@ This guide covers how to setup enrich-kinesis.
 
 ## Install, configure and run enrich-kinesis
 
-The [enrich-kinesis reference](/docs/pipeline-components-and-applications/enrichment-components/enrich/index.md) describes how to install, run, and configure the application.
+The [enrich-kinesis reference](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md) describes how to install, run, and configure the application.
 
 ## Add any desired Enrichments
 

@@ -98,9 +98,9 @@ This is a complete list of the options that can be configured in the collector H
 | `collector.streams.sink.backoffPolicy.initialRpcTimeout` (since *2.5.0*)   | Optional. Default: `10000`. Time (in milliseconds) before a RPC call to Pubsub is aborted and retried.                                                                      |
 | `collector.streams.sink.backoffPolicy.maxRpcTimeout` (since *2.5.0*)       | Optional. Default: `10000`. Maximum time (in milliseconds) before RPC call to Pubsub is aborted and retried.                                                                |
 | `collector.streams.sink.backoffPolicy.rpcTimeoutMultipler` (since *2.5.0*) | Optional. Default: `2`. How RPC timeouts increase as they are retried.                                                                                                      |
-| `collector.streams.buffer.byteLimit                                        | Optional. Default: `1000000`. Incoming events are stored in an internal buffer before being sent to Pubsub. This configures the maximum total size of pending events        |
-| `collector.streams.buffer.recordLimit                                      | Optional. Default: `40.` Maximum number of pending events before flushing to Pubsub.                                                                                        |
-| `collector.streams.buffer.timeLimit                                        | Optional. Default: `1000`. Maximum time (in milliseconds) before flushing pending buffered events to Pubsub.                                                                |
+| `collector.streams.buffer.byteLimit`                                       | Optional. Default: `1000000`. Incoming events are stored in an internal buffer before being sent to Pubsub. This configures the maximum total size of pending events        |
+| `collector.streams.buffer.recordLimit`                                     | Optional. Default: `40.` Maximum number of pending events before flushing to Pubsub.                                                                                        |
+| `collector.streams.buffer.timeLimit`                                       | Optional. Default: `1000`. Maximum time (in milliseconds) before flushing pending buffered events to Pubsub.                                                                |
 
 ### RabbitMQ collector options (experimental, available since 2.8.0)
 

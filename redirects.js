@@ -22,10 +22,6 @@ const redirects = [
     to: '/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events',
   },
   {
-    from: '/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub',
-    to: '/docs/pipeline-components-and-applications/enrichment-components/enrich',
-  },
-  {
     from: '/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2',
     to: '/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup',
   },

@@ -4,6 +4,11 @@ date: "2021-03-26"
 sidebar_position: 1000
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 For more information on the architecture of the Iglu server, please read [the technical documentation](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md).
 
 ## Available on Terraform Registry
@@ -16,23 +21,23 @@ A Terraform module is available which deploys an Iglu Server on AWS EC2 without 
 
 Iglu Server is [published on Docker Hub](https://hub.docker.com/repository/docker/snowplow/iglu-server).
 
-```bash
-$ docker pull snowplow/iglu-server:0.8.4
-```
+<CodeBlock language="bash">{
+`$ docker pull snowplow/iglu-server:${versions.igluServer}
+`}</CodeBlock>
 
 The application is configured by passing a hocon file on the command line:
 
-```bash
-docker run --rm \
-  -v $PWD/config.hocon:/iglu/config.hocon \
-  snowplow/iglu-server:0.8.4 --config /iglu/config.hocon
-```
+<CodeBlock language="bash">{
+`$ docker run --rm \\
+  -v $PWD/config.hocon:/iglu/config.hocon \\
+  snowplow/iglu-server:${versions.igluServer} --config /iglu/config.hocon
+`}</CodeBlock>
 
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow-incubator/iglu-server/releases).
 
-```bash
-java -jar iglu-server-0.8.4.jar --config /path/to/config.hocon
-```
+<CodeBlock language="bash">{
+`$ java -jar iglu-server-${versions.igluServer}.jar --config /path/to/config.hocon
+`}</CodeBlock>
 
 Here is an example of a minimal configuration file:
 
@@ -63,11 +68,11 @@ $ psql -U postgres -c "CREATE DATABASE igludb"
 
 And then use the `setup` command of the iglu server to create the database tables:
 
-```bash
-docker run --rm \
-  -v $PWD/config.hocon:/iglu/config.hocon \
-  snowplow/iglu-server:0.8.4 setup --config /iglu/config.hocon
-```
+<CodeBlock language="bash">{
+`$ docker run --rm \\
+  -v $PWD/config.hocon:/iglu/config.hocon \\
+  snowplow/iglu-server:${versions.igluServer} setup --config /iglu/config.hocon
+`}</CodeBlock>
 
 ## 3. Use the API key generation service
 
@@ -132,10 +137,10 @@ Iglu Server uses [SLF4J Simple Logger](https://www.slf4j.org/api/org/slf4j/impl
 
 For example:
 
-```bash
-$ iglu-server-0.8.4.jar \
-  -Dorg.slf4j.simpleLogger.logFile=server.log                                   # In order to redirect logs
+<CodeBlock language="bash">{
+`$ iglu-server-${versions.igluServer}.jar \\
+  -Dorg.slf4j.simpleLogger.logFile=server.log                                   # In order to redirect logs \\
   -Dorg.slf4j.simpleLogger.log.org.http4s.blaze.channel.nio1.SelectorLoop=warn  # To suppress very verbose SelectorLoop output
-```
+`}</CodeBlock>
 
 On debug loglevel `SchemaService` will print all HTTP requests and responses.

@@ -63,6 +63,11 @@ Some of our modules are versioned (e.g. trackers, loaders). Here are a few simpl
 * When a new version is released, you can either update the latest version pages, or move them to `previous-versions` and replace with the new content. If there are not too many breaking changes, you might want to do the former to avoid having too many previous version directories.
 * Put the latest bugfix version for each component into [componentVersions.js](https://github.com/snowplow/snowplow.github.io/blob/main/src/componentVersions.js). This way you only need to update it in one place when a new bugfix release comes out. See the [Scala tracker docs](https://raw.githubusercontent.com/snowplow/snowplow.github.io/main/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup/index.md) for how to then use this on the page.
 
+### Moving pages around
+
+When you move pages around, make sure to add a redirect in `static/_redirects`.
+This ensures that any external links pointing to the old URL still work.
+
 ## Formatting content
 
 In this section you’ll find some general tips on how to write the pages.

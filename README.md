@@ -22,6 +22,7 @@ Step 1. Clone this repository.
 Step 2 (one-time setup). Install some tools:
 
 ```bash
+brew install node
 brew install yarn
 # On Linux, use your favorite package manager
 ```

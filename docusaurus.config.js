@@ -1,7 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const redirects = require('./redirects')
 const sidebar = require('./sidebars')
 
 /** @type {import('@docusaurus/types').Config} */
@@ -145,18 +144,6 @@ const config = {
         contextualSearch: true,
       },
     }),
-
-  plugins: [
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        redirects: redirects.redirects,
-        createRedirects(srcPath) {
-          return redirects.redirectsRuleFn(srcPath)
-        },
-      },
-    ],
-  ],
 }
 
 module.exports = config

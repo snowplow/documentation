@@ -4,6 +4,11 @@ date: "2020-11-24"
 sidebar_position: 0
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Overview
 
 Snowplow S3 Loader consumes records from an [Amazon Kinesis](http://aws.amazon.com/kinesis/) stream and writes them to [S3](http://aws.amazon.com/s3/). A typical Snowplow pipeline would use the S3 loader in several places:
@@ -42,41 +47,41 @@ A Terraform module which deploys the Snowplow S3 Loader on AWS EC2 for use with 
 
 We publish three different flavours of the docker image.
 
-- Pull the `:2.2.1` tag if you only need GZip output format
-- Pull the `:2.2.1-lzo` tag if you also need LZO output format
-- Pull the `:2.2.1-distroless` tag for an lightweight alternative to `:2.2.1`
+- <p> Pull the <code>{`:${versions.s3Loader}`}</code> tag if you only need GZip output format </p>
+- <p> Pull the <code>{`:${versions.s3Loader}-lzo`}</code> tag if you also need LZO output format </p>
+- <p> Pull the <code>{`:${versions.s3Loader}-distroless`}</code> tag for an lightweight alternative to <code>{`:${versions.s3Loader}`}</code> </p>
 
-```bash
-docker pull snowplow/snowplow-s3-loader:2.2.1
-docker pull snowplow/snowplow-s3-loader:2.2.1-lzo
-docker pull snowplow/snowplow-s3-loader:2.2.1-distroless
-```
+<CodeBlock language="bash">{
+`docker pull snowplow/snowplow-s3-loader:${versions.s3Loader}
+docker pull snowplow/snowplow-s3-loader:${versions.s3Loader}-lzo
+docker pull snowplow/snowplow-s3-loader:${versions.s3Loader}-distroless
+`}</CodeBlock>
 
 Here is a standard command to run the loader on a EC2 instance in AWS:
 
-```bash
-docker run \
-      -d \
-      --name snowplow-s3-loader \
-      --restart always \
-      --log-driver awslogs \
-      --log-opt awslogs-group=snowplow-s3-loader \
-      --log-opt awslogs-stream=`ec2metadata --instance-id` \
-      --network host \
-      -v $(pwd):/snowplow/config \      
-      -e 'JAVA_OPTS=-Xms512M -Xmx1024M -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN' \           
-      snowplow/snowplow-s3-loader:2.2.1 \       
+<CodeBlock language="bash">{
+`docker run \\
+      -d \\
+      --name snowplow-s3-loader \\
+      --restart always \\
+      --log-driver awslogs \\
+      --log-opt awslogs-group=snowplow-s3-loader \\
+      --log-opt awslogs-stream='ec2metadata --instance-id' \\
+      --network host \\
+      -v $(pwd):/snowplow/config \\      
+      -e 'JAVA_OPTS=-Xms512M -Xmx1024M -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN' \\   
+      snowplow/snowplow-s3-loader:${versions.s3Loader} \\
       --config /snowplow/config/config.hocon
-```
+`}</CodeBlock>
 
 ### Jar
 
 JARs can be found attached to the [Github release](https://github.com/snowplow/snowplow-s3-loader/releases). Only pick the `-lzo` version of the JAR file if you need to output in LZO format
 
-```bash
-java -jar snowplow-s3-loader-2.2.1.jar --config config.hocon
-java -jar snowplow-s3-loader-lzo-2.2.1.jar --config config.hocon
-```
+<CodeBlock language="bash">{
+`java -jar snowplow-s3-loader-${versions.s3Loader}.jar --config config.hocon
+java -jar snowplow-s3-loader-lzo-${versions.s3Loader}.jar --config config.hocon
+`}</CodeBlock>
 
 Running the jar requires to have the native LZO binaries installed. For example for Debian this can be done with:
 

@@ -1,20 +1,25 @@
 ---
-title: "2.2.0 Upgrade Guide"
+title: "2.2.x Upgrade Guide"
 date: "2022-05-19"
-sidebar_position: 0
+sidebar_position: 20
 ---
+
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
 
 Starting from the 2.2.0 release we started publishing three different flavours of the docker image.
 
-- Pull the `:2.2.0` tag if you only need GZip output format
-- Pull the `:2.2.0-lzo` tag if you also need LZO output format
-- Pull the `:2.2.0-distroless` tag for an lightweight alternative to `:2.2.0`
+- <p> Pull the <code>{`:${versions.s3Loader22x}`}</code> tag if you only need GZip output format </p>
+- <p> Pull the <code>{`:${versions.s3Loader22x}-lzo`}</code> tag if you also need LZO output format </p>
+- <p> Pull the <code>{`:${versions.s3Loader22x}-distroless`}</code> tag for an lightweight alternative to `:2.2.0` </p>
 
-```bash
-docker pull snowplow/snowplow-s3-loader:2.2.0
-docker pull snowplow/snowplow-s3-loader:2.2.0-lzo
-docker pull snowplow/snowplow-s3-loader:2.2.0-distroless
-```
+<CodeBlock language="bash">{
+`docker pull snowplow/snowplow-s3-loader:${versions.s3Loader22x}
+docker pull snowplow/snowplow-s3-loader:${versions.s3Loader22x}-lzo
+docker pull snowplow/snowplow-s3-loader:${versions.s3Loader22x}-distroless
+`}</CodeBlock>
 
 We removed LZO support from the standard image, because it means we can more easily eliminate security vulnerabilities that are brought in from a dependency on hadoop version 2.
 

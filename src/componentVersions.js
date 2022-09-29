@@ -7,4 +7,6 @@ export const versions = {
   bqLoader: '1.5.0',
   sqs2kinesis: '1.0.4',
   igluServer: '0.8.6',
+  s3Loader: '2.2.3',
+  s3Loader22x: '2.2.3',
 }

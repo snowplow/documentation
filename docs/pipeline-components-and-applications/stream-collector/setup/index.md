@@ -24,6 +24,7 @@ docker pull snowplow/scala-stream-collector-pubsub:${versions.collector}
 docker pull snowplow/scala-stream-collector-kafka:${versions.collector}
 docker pull snowplow/scala-stream-collector-rabbitmq-experimental:${versions.collector}
 docker pull snowplow/scala-stream-collector-nsq:${versions.collector}
+docker pull snowplow/scala-stream-collector-sqs:${versions.collector}
 docker pull snowplow/scala-stream-collector-stdout:${versions.collector}
 `}</CodeBlock>
 

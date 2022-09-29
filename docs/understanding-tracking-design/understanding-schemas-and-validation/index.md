@@ -46,7 +46,7 @@ Let’s take a look at an example JSON schema to talk about its constituent part
       "maxLength": 128
     },
     "job_role": {
-      "description": 
+      "description": "",
       "type": [
         "string",
         "null"
@@ -54,12 +54,13 @@ Let’s take a look at an example JSON schema to talk about its constituent part
       "maxLength": 128
     },
     "promo_code": {
+      "description": "",
       "type": [
         "string",
         "null"
       ],
       "minLength": 8,
-      "maxLength": 20,
+      "maxLength": 20
     }
   },
   "additionalProperties": false,

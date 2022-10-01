@@ -9,4 +9,5 @@ export const versions = {
   igluServer: '0.8.6',
   s3Loader: '2.2.3',
   s3Loader22x: '2.2.3',
+  postgresLoader: '0.3.3',
 }

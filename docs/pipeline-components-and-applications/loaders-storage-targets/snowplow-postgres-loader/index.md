@@ -4,6 +4,12 @@ date: "2020-07-02"
 sidebar_position: 1000
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
+
 With Snowplow Postgres Loader you can load enriched data or plain self-describing JSONs into PostgreSQL database.
 
 ## Available on Terraform Registry
@@ -16,19 +22,19 @@ A Terraform module which deploys the Snowplow Postgres Loader on AWS EC2 for use
 
 Snowplow Postgres Loader is [published on DockerHub](https://hub.docker.com/r/snowplow/snowplow-postgres-loader):
 
-```bash
-docker pull snowplow/snowplow-postgres-loader:0.3.2
-```
+<CodeBlock language="bash">{
+`docker pull snowplow/snowplow-postgres-loader:${versions.postgresLoader}
+`}</CodeBlock>
 
 It accepts very typical configuration for Snowplow Loader:
 
-```bash
-docker run --rm \
-  -v $PWD/config:/snowplow/config \
-  snowplow/snowplow-postgres-loader:0.3.2 \
-  --resolver /snowplow/config/resolver.json \
+<CodeBlock language="bash">{
+`docker run --rm \\
+  -v $PWD/config:/snowplow/config \\
+  snowplow/snowplow-postgres-loader:${versions.postgresLoader} \\
+  --resolver /snowplow/config/resolver.json \\
   --config /snowplow/config/config.hocon
-```
+`}</CodeBlock>
 
 ## Iglu
 

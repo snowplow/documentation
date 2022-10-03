@@ -1,10 +1,10 @@
 ---
 title: "Resolving data model failures (via Snowplow BDP)"
 date: "2021-05-04"
-sidebar_position: 50
+sidebar_position: 300
 ---
 
-Please note this documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for configuring and running data models via Snowplow BDP](/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/index.md#21_Configuring_data_models_via_the_data_modeling_UI_new).
+Please note this documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for configuring and running data models via Snowplow BDP](/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/using-sql-runner-on-snowplow-bdp/index.md#21_Configuring_data_models_via_the_data_modeling_UI_new).
 
 ### Receiving alerts
 

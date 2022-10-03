@@ -16,7 +16,7 @@ sidebar_position: 100
 
 #### Prerequisites
 
-- [SQL-runner](https://github.com/snowplow/sql-runner) must be installed ([Setup guide](/docs/modeling-your-data/setup-and-run-sql-runner/index.md)).
+- [SQL-runner](https://github.com/snowplow/sql-runner) must be installed ([Setup guide](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md)).
 - A dataset of web events from the [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) must be available in the database.
 
 #### Configuring and running the model

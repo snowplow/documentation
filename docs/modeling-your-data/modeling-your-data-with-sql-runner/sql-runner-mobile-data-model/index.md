@@ -1,7 +1,7 @@
 ---
 title: "sql-runner: Mobile data model"
 date: "2020-10-30"
-sidebar_position: 10
+sidebar_position: 200
 ---
 
 ## Overview
@@ -107,7 +107,7 @@ For more details please see the README within the `.scripts` directory.
 
 ##### Authentication
 
-For each playbook within `mobile/v1/{warehouse}/sql-runner/playbooks/standard` fill in your database connection details. For more details please refer to the [SQL Runner Docs](/docs/modeling-your-data/setup-and-run-sql-runner/index.md#target-configuration).
+For each playbook within `mobile/v1/{warehouse}/sql-runner/playbooks/standard` fill in your database connection details. For more details please refer to the [SQL Runner Docs](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md#target-configuration).
 
 ##### Execution
 

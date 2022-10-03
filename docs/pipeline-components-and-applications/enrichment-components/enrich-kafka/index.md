@@ -1,7 +1,7 @@
 ---
 title: "Enrich Kafka (cloud agnostic)"
 date: "2022-10-03"
-sidebar_position: 10
+sidebar_position: 30
 ---
 
 ```mdx-code-block

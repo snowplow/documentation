@@ -1,7 +1,7 @@
 ---
 title: "Monitoring"
 date: "2021-10-04"
-sidebar_position: 10
+sidebar_position: 60
 ---
 
 Enrich app has monitoring built in, to help the pipeline operator.

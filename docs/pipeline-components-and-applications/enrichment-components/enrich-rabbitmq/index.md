@@ -1,7 +1,7 @@
 ---
 title: "🧪 Enrich RabbitMQ (cloud agnostic)"
 date: "2020-10-22"
-sidebar_position: 10
+sidebar_position: 40
 ---
 
 ```mdx-code-block

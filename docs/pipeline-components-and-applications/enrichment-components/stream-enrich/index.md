@@ -1,7 +1,7 @@
 ---
 title: "Stream Enrich"
 date: "2020-11-09"
-sidebar_position: 800
+sidebar_position: 100
 ---
 
 ```mdx-code-block

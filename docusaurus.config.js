@@ -16,7 +16,7 @@ const config = {
   favicon: 'img/favicon.ico',
   trailingSlash: true,
   organizationName: 'snowplow',
-  projectName: 'snowplow.github.io',
+  projectName: 'documentation',
   deploymentBranch: 'main',
   i18n: {
     defaultLocale: 'en',
@@ -36,7 +36,7 @@ const config = {
       {
         docs: {
           showLastUpdateTime: true,
-          editUrl: 'https://github.com/snowplow/snowplow.github.io/tree/main/',
+          editUrl: 'https://github.com/snowplow/documentation/tree/main/',
           async sidebarItemsGenerator({
             defaultSidebarItemsGenerator,
             ...args

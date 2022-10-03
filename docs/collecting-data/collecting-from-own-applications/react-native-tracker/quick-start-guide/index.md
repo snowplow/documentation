@@ -81,7 +81,8 @@ const tracker = createTracker(
             lifecycleAutotracking: false,
             installAutotracking: true,
             exceptionAutotracking: true,
-            diagnosticAutotracking: false
+            diagnosticAutotracking: false,
+            userAnonymisation: false // Whether to anonymise client-side user identifiers in session and platform context entities
         },
         sessionConfig: {
             foregroundTimeout: 1800,
@@ -92,7 +93,8 @@ const tracker = createTracker(
             emitRange: 150,
             threadPoolSize: 15,
             byteLimitPost: 40000,
-            byteLimitGet: 40000
+            byteLimitGet: 40000,
+            serverAnonymisation: false // Whether to anonymise server-side user identifiers including the `network_userid` and `user_ipaddress`
         },
         subjectConfig: {
             userId: 'my-user-id',

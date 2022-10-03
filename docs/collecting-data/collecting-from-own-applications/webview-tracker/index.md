@@ -76,12 +76,9 @@ To track events, simply call their corresponding functions given the event data:
 ```javascript
 trackSelfDescribingEvent({
     event: {
-        schema: 'iglu:com.example_company/save_game/jsonschema/1-0-2',
+        schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
         data: {
-            'saveId': '4321',
-            'level': 23,
-            'difficultyLevel': 'HARD',
-            'dlContent': true
+            targetUrl: 'http://a-target-url.com'
         }
     }
 });
@@ -93,12 +90,9 @@ trackSelfDescribingEvent({
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
     event: {
-        schema: 'iglu:com.example_company/save_game/jsonschema/1-0-2',
+        schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
         data: {
-            'saveId': '4321',
-            'level': 23,
-            'difficultyLevel': 'HARD',
-            'dlContent': true
+            targetUrl: 'http://a-target-url.com'
         }
     }
 });

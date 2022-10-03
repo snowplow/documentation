@@ -139,6 +139,6 @@ The `SimpleEmitter` class, deprecated in v0.12, has been removed. The default `E
 We also removed the [Guava](https://github.com/google/guava) dependency.
 
 ## New features
-New and improved callbacks! You can now add custom callbacks using the `EmitterCallback` interface, for example to create tracker metrics. The `EmitterCallback` will be called when events are successfully sent, and also in response to several different failures. It's described fully [here](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/java-tracker/configuring-how-events-are-sent/#using-the-emitter-callback).
+New and improved callbacks! You can now add custom callbacks using the `EmitterCallback` interface, for example to create tracker metrics. The `EmitterCallback` will be called when events are successfully sent, and also in response to several different failures. It's described fully [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/configuring-how-events-are-sent/index.md#using-the-emitter-callback).
 
 You can now add a `CookieJar` to persist the third-party event collector `sp` cookie across requests. This allows all events to have the same `network_userid`.

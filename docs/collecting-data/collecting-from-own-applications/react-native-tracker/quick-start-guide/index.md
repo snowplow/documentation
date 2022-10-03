@@ -63,7 +63,9 @@ const tracker = createTracker(
     'appTracker',
     {
       endpoint: COLLECTOR_URL,
-      method: 'post'
+      method: 'post',
+      customPostPath: 'com.snowplowanalytics.snowplow/tp2', // A custom path which will be added to the endpoint URL to specify the complete URL of the collector when paired with the POST method.
+      requestHeaders: {} // Custom headers for HTTP requests to the Collector
     },
     {
         trackerConfig: {

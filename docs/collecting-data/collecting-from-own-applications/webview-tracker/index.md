@@ -23,7 +23,34 @@ The tracker provides APIs to track Snowplow events.
 It forwards the events to the native app code to be tracked by the Snowplow mobile trackers ([iOS, Android tracker](../mobile-trackers/hybrid-apps/index.md), or [React Native](../react-native-tracker/hybrid-apps/index.md)).
 The diagram below shows the interaction of the WebView and mobile trackers in hybrid apps.
 
-![](images/hybrid-app-tracking.svg)
+```mermaid
+flowchart TB
+
+subgraph hybridApp[Hybrid Mobile App]
+
+    subgraph webView[Web View]
+        webViewCode[App logic]
+        webViewTracker[Snowplow WebView tracker]
+
+        webViewCode -- "Tracks events" --> webViewTracker
+    end
+
+    subgraph nativeCode[Native Code]
+        nativeAppCode[App logic]
+        nativeTracker[Snowplow iOS/Android/React Native tracker]
+
+        nativeAppCode -- "Tracks events" --> nativeTracker
+    end
+
+    webViewTracker -- "Forwards events" --> nativeTracker
+end
+
+subgraph cloud[Cloud]
+    collector[Snowplow Collector]
+end
+
+nativeTracker -- "Sends tracked events" --> collector
+```
 
 ## Installation
 

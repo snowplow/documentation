@@ -130,4 +130,4 @@ window.snowplow('trackSelfDescribingEvent', {
 
 ## Accelerator guide
 
-For a step-by-step guide on how to instrument hybrid apps and model the mobile data, please visit the [Mobile & Hybrid App Analytics accelerator](https://docs.snowplow.io/snowplow-hybrid-apps-accelerator).
+For a step-by-step guide on how to instrument hybrid apps and model the mobile data, please visit the [Mobile & Hybrid App Analytics accelerator](https://docs.snowplow.io/accelerators/hybrid).

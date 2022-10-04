@@ -1,5 +1,5 @@
 # Sister websites
-/accelerators/advanced-analytics-web/* https://snowplow-axl-advanced-analytics-web.netlify.app/accelerators/advanced-analytics-web/:splat 200
+/accelerators/advanced-analytics-web/* https://snowplow-axl-advanced-analytics-web.netlify.app/accelerators/web/:splat 200
 /snowplow-android-tracker/* https://snowplow.github.io/snowplow-android-tracker/:splat 302
 /snowplow-cpp-tracker/* https://snowplow.github.io/snowplow-cpp-tracker/:splat 302
 /snowplow-lua-tracker/* https://snowplow.github.io/snowplow-lua-tracker/:splat 302

@@ -4,7 +4,7 @@ export const versions = {
   rdbLoader: '4.3.0',
   collector: '2.8.0',
   enrich: '3.4.0',
-  bqLoader: '1.5.0',
+  bqLoader: '1.5.1',
   sqs2kinesis: '1.0.4',
   igluServer: '0.8.6',
   s3Loader: '2.2.3',

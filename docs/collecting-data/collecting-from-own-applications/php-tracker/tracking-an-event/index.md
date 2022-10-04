@@ -254,7 +254,7 @@ Example:
 ```php
 $tracker->trackUnstructEvent(
     array(
-        "schema" => "com.example_company/save-game/jsonschema/1.0.2",
+        "schema" => "com.example_company/save-game/jsonschema/1-0-2",
         "data" => array(
             "save_id" => "4321",
             "level" => 23,

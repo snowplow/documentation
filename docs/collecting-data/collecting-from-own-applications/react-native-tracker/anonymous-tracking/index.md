@@ -46,7 +46,7 @@ const tracker = createTracker(
 
 ## 2. Client-side anonymisation with session tracking
 
-This setting disables client-side user identifiers are but tracks session information. In practice, this means that events track the Session context entity but the `userId` property is a null UUID (`00000000-0000-0000-0000-000000000000`). In case Platform context is enabled, the IDFA identifiers will not be present.
+This setting disables client-side user identifiers but tracks session information. In practice, this means that events track the Session context entity but the `userId` property is a null UUID (`00000000-0000-0000-0000-000000000000`). In case Platform context is enabled, the IDFA identifiers will not be present.
 
 ```typescript
 const tracker = createTracker(

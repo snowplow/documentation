@@ -17,15 +17,11 @@ This feature is available since v4.
 
 :::
 
-Anonymous tracking is a tracker feature that enables anonymising various user and session identifiers to support user privacy in case consent for tracking the identifiers is not given.
+```mdx-code-block
+import Block8155 from "@site/docs/reusable/anonymous-tracking-mobile/_index.md"
 
-The affected user and session identifiers are stored in two context entities: [Session](../tracking-events/index.md#session) and [Platform context](../tracking-events/index.md#platform). The Session context entity contains user and session identifiers, while the Platform context entity contains user identifiers. Concretely, the following user and session identifiers can be anonymised:
-
-1. Client-side user identifiers: the `userId` in Session context entity and the IDFA identifiers (`appleIdfa`, and `appleIdfv`) in the Platform context entity.
-2. Client-side session identifiers: `sessionId` in Session context.
-3. Server-side user identifiers: `network_userid` and `user_ipaddress` event properties.
-
-There are several levels to the anonymisation depending on which of the three categories are affected:
+<Block8155/>
+```
 
 ## 1. Full client-side anonymisation
 

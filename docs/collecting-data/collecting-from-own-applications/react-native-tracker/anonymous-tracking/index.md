@@ -18,9 +18,9 @@ This feature is available since v1.3.
 :::
 
 ```mdx-code-block
-import Block8155 from "@site/docs/reusable/anonymous-tracking-mobile/_index.md"
+import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking-mobile/_index.md"
 
-<Block8155/>
+<AnonymousTrackingSharedBlock/>
 ```
 
 ## 1. Full client-side anonymisation

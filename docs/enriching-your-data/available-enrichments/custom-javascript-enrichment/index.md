@@ -123,7 +123,6 @@ Manipulating your event stream with Javascript is bother powerful and can be dan
 - include minified, self-contained JavaScript libraries that your `process(event)` function needs
 - test this enrichment on sample sets of events before putting it into production
 - ensure your new contexts are defined in Iglu, Redshift, JSON Paths etc
-- use es5 javascript features
 
 ### Don’t:
 
@@ -131,7 +130,6 @@ Manipulating your event stream with Javascript is bother powerful and can be dan
 - try to share state across multiple enriched events – write your own Scalding or Spark job instead
 - include CPU-intensive tasks without being aware of the impact on your event processing time
 - allow untrusted parties to write your script – the script has access to the Java standard library and therefore to your filesystem.
-- use es6 javascript features
 
 ## Uploading a custom JavaScript enrichment to Snowplow BDP
 

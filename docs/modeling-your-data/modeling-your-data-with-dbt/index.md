@@ -135,7 +135,7 @@ Check [dbt Hub](https://hub.getdbt.com/snowplow/snowplow_web/latest/) for the la
 
 #### 1. Adding the `selector.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](./index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-web/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -228,7 +228,7 @@ vars:
 ```
 Depending on the use case it should either be the catalog (for Unity Catalog users from databricks connector 1.1.1 onwards, defaulted to 'hive_metastore') or the same value as your `snowplow__atomic_schema` (unless changed it should be 'atomic'). This is needed to handle the database property within `models/base/src_base.yml`.
 
-**A more detailed explanation for how to set up your Databricks configuration properly can be found in [Unity Catalog support](./index.md#unity-catalog-support).**
+**A more detailed explanation for how to set up your Databricks configuration properly can be found in [Unity Catalog support](#unity-catalog-support).**
 
 :::
 
@@ -237,7 +237,7 @@ Depending on the use case it should either be the catalog (for Unity Catalog use
 
 #### 1. Adding the `selector.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](./index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-mobile/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -334,7 +334,7 @@ vars:
 ```
 Depending on the use case it should either be the catalog (for Unity Catalog users from databricks connector 1.1.1 onwards, defaulted to 'hive_metastore') or the same value as your `snowplow__atomic_schema` (unless changed it should be 'atomic'). This is needed to handle the database property within m`odels/base/src_base.yml`.
 
-**A more detailed explanation for how to set up your Databricks configuration properly can be found in [Unity Catalog support](./index.md#unity-catalog-support).**
+**A more detailed explanation for how to set up your Databricks configuration properly can be found in [Unity Catalog support](#unity-catalog-support).**
 
 :::
 
@@ -343,7 +343,7 @@ Depending on the use case it should either be the catalog (for Unity Catalog use
 
 #### 1. Adding the `selector.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](./index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-media-player/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -370,7 +370,7 @@ vars:
     snowplow__enable_whatwg_video: true
 ```
 
-For other variables you can configure please see the [model configuration](./index.md#model-configuration) section.
+For other variables you can configure please see the [model configuration](#model-configuration) section.
 
 </TabItem>
 </Tabs>
@@ -592,7 +592,7 @@ dbt run --select snowplow_web tag:snowplow_web_incremental
 ```
 The `snowplow_web` selection will execute all nodes within the relevant Snowplow package, while the `tag:snowplow_web_incremental` will execute all custom modules that you may have created.
 
-Given the verbose nature of this command we suggest using the [YAML selectors](./index.md#yaml-selectors) we have provided. The equivalent command using the selector flag would be:
+Given the verbose nature of this command we suggest using the [YAML selectors](#yaml-selectors) we have provided. The equivalent command using the selector flag would be:
 
 ```bash
 dbt run --selector snowplow_web
@@ -607,7 +607,7 @@ dbt run --select snowplow_mobile tag:snowplow_mobile_incremental
 
 The `snowplow_mobile` selection will execute all nodes within the Snowplow mobile package, while the `tag:snowplow_mobile_incremental` will execute all custom modules that you may have created.
 
-Given the verbose nature of this command we suggest using the [YAML selectors](./index.md#yaml-selectors) we have provided. The equivalent command using the selector flag would be:
+Given the verbose nature of this command we suggest using the [YAML selectors](#yaml-selectors) we have provided. The equivalent command using the selector flag would be:
 
 ```bash
 dbt run --selector snowplow_mobile
@@ -673,7 +673,7 @@ There are 2 manifest tables included in this package:
 
 ------
 
-Please refer to the [Incremental Logic](./index.md#incremental-logic) section more details on the purpose of each of these tables.
+Please refer to the [Incremental Logic](#incremental-logic) section more details on the purpose of each of these tables.
 
 These manifest models are critical to the package **and as such are protected from full refreshes, i.e. being dropped, by default when running in production, while in development refreshes are allowed.**
 
@@ -681,7 +681,7 @@ The `allow_refresh()` macro defines this behavior. As [dbt recommends](https://d
 
 To full refresh any of the manifest models in production, set the `snowplow__allow_refresh` to `true` at run time (see below).
 
-Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](./index.md#overriding-macros) section for more details.
+Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](#overriding-macros) section for more details.
 
 ### Complete refresh of Snowplow package
 
@@ -712,64 +712,6 @@ dbt run --selector snowplow_mobile --full-refresh --vars 'snowplow__allow_refres
 
 ------
 
-### Back-filling custom modules
-
-Overtime you may wish to add custom modules to extend the functionality of this package. As you introduce new custom modules into your project, assuming they are tagged correctly (see page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md)), the web and mobile models will automatically replay all events up until the latest event to have been processed by the other modules.
-
-Note that the batch size of this back-fill is limited as outlined in the [identification of events to process](./index.md#identification-of-events-to-process) section. This means it might take several runs to complete the back-fill, **during which time no new events will be processed by the main model**.
-
-During back-filling, the derived page/screen views, sessions and users tables are blocked from updating. This is to protect against a batched back-fill temporarily introducing incomplete data into these derived tables.
-
-Back-filling a module can be performed either as part of the entire run of the Snowplow package, or in isolation to reduce cost (recommended):
-
-<Tabs groupId="dbt-packages">
-<TabItem value="web" label="Snowplow Web" default>
-
-```bash
-dbt run --select snowplow_web tag:snowplow_web_incremental # Will execute all Snowplow web modules, as well as custom.
-dbt run --select +my_custom_module # Will execute only your custom module + any upstream nodes.
-```
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-```bash
-dbt run --select snowplow_mobile tag:snowplow_mobile_incremental # Will execute all Snowplow mobile modules, as well as custom.
-dbt run --select +my_custom_module # Will execute only your custom module + any upstream nodes.
-```
-
-</TabItem>
-</Tabs>
-
-------
-
-### Tearing down a subset of models
-
-As the code base for your custom modules evolves, you will likely need to replay events through a given module. In order to do so, you first need to manually drop the models within your custom module from your database. Then these models need to be removed from the incremental manifest table. See the [Complete refresh](./index.md#complete-refresh-of-snowplow-package) section for an explanation as to why. This removal can be achieved by passing the model's name to the `models_to_remove` var at run time. If you want to replay events through a series of dependent models, you only need to pass the name of the endmost model within the run:
-
-
-<Tabs groupId="dbt-packages">
-<TabItem value="web" label="Snowplow Web" default>
-
-```bash
-dbt run --select +snowplow_web_custom_incremental_model --vars '{snowplow__start_date: your_backfill_start_date, models_to_remove: snowplow_web_custom_incremental_model}'
-```
-
-By removing the `snowplow_web_custom_incremental_model` model from the manifest the web packages will be in state 2 (see the section on [incremental logic](./index.md#incremental-logic)) and will replay all events.
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-```bash
-dbt run --select +snowplow_mobile_custom_incremental_model --full-refresh --vars 'models_to_remove: snowplow_mobile_custom_incremental_model'
-```
-
-By removing the `snowplow_mobile_custom_incremental_model` model from the manifest the mobile packages will be in state 2 and will replay all events.
-
-</TabItem>
-</Tabs>
-
-------
 
 
 
@@ -785,7 +727,7 @@ The packages contains tests for both the scratch and derived models. Depending o
 
 For example if your derived tables are very large you may want to run the full test suite on the `this_run` tables, which act as the input for the derived tables, but only primary key schema tests on the derived tables to ensure no duplicates. If using such a set up, we would also recommend including the `page/screen_view_in_session_value` data test for the page/screen views derived tables. For Media Player tests depending on the selector chosen it will include the web tests as well as the bespoke media tests.
 
-This is our recommended approach to testing and can be implemented using the selector flag (see [YAML selectors](./index.md#yaml-selectors) section for more details) as follows:
+This is our recommended approach to testing and can be implemented using the selector flag (see [YAML selectors](#yaml-selectors) section for more details) as follows:
 
 <Tabs groupId="dbt-packages">
 <TabItem value="web" label="Snowplow Web" default>
@@ -1021,7 +963,7 @@ Please refer to the [snowplow-utils](https://github.com/snowplow/dbt-snowplow-ut
 #### Usage Notes
 
 - If using this the `snowplow_incremental` materialization, the native dbt `is_incremental()` macro will not recognize the model as incremental. Please use the `snowplow_utils.snowplow_is_incremental()` macro instead, which operates in the same way.
-- If you would rather use an alternative incremental materialization for all incremental models within the package, set the variable `snowplow__incremental_materialization` to your preferred materialization. See the [Configuration](./index.md#configuration) section for more details.
+- If you would rather use an alternative incremental materialization for all incremental models within the package, set the variable `snowplow__incremental_materialization` to your preferred materialization. See the [Configuration](#configuration) section for more details.
 
 ## Duplicates
 
@@ -1137,7 +1079,7 @@ dbt run --select +snowplow_web.page_views --vars "{'models_to_run': '$(dbt ls --
 To run just the screen views module asynchronously:
 
 ```bash
-dbt run --model +snowplow_mobile.screen_views --vars "{'models_to_run': '$(dbt ls --m  +snowplow_mobile.screen_views --output name)'}"
+dbt run --select +snowplow_mobile.screen_views --vars "{'models_to_run': '$(dbt ls --m  +snowplow_mobile.screen_views --output name)'}"
 ```
 
 </TabItem>

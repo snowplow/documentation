@@ -4,6 +4,10 @@ date: "2021-07-27"
 sidebar_position: 100
 ---
 
+The Snowplow web data model aggregates Snowplow's out of the box page view and page ping events to create a set of derived tables - page views, sessions and users - that contain many useful dimensions as well as calculated measures such as time engaged and scroll depth.
+
+![](images/image-3.png)
+
 **The Snowplow web data model v1.0.0 can be found in the [snowplow/data-models GitHub repository](https://github.com/snowplow/data-models/tree/master).**
 
 ## Quickstart

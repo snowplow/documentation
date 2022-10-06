@@ -54,7 +54,7 @@ $ pip install snowplow-tracker[celery]
 To add the Snowplow Tracker as a dependency to your own Python app, edit your `requirements.txt` and add:
 
 ```text
-snowplow-tracker==0.10.0
+snowplow-tracker==0.11.0
 ```
 
 ### easy_install
@@ -71,5 +71,5 @@ Please refer to the table below to identify the recommended tracker version for 
 
 | Python version | snowplow-tracker version |
 | --- | --- |
-| >=3.5 | 0.10.0 |
+| >=3.5 | 0.11.0 |
 | 2.7 | 0.9.1 |

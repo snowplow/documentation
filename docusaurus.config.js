@@ -40,6 +40,7 @@ async function createConfig() {
           docs: {
             showLastUpdateTime: true,
             editUrl: 'https://github.com/snowplow/documentation/tree/main/',
+            remarkPlugins: [mdxMermaid.default],
             async sidebarItemsGenerator({
               defaultSidebarItemsGenerator,
               ...args

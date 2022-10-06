@@ -154,7 +154,7 @@ Results:
 |-------------------------|------------------------|------------------------|
 | `wbraid=abc`            | `abc`                  | `Google`               |
 | `msclkid=abc`           | `abc`                  | `NotMicrosoft`         |
-| `wbraid=abc&gbraid=def` | `abc` or `def`         | `Google`               |
+| `wbraid=abc&gbraid=def` | `abc` or `def` ⚠️        | `Google`               |
 
 ## Output
 

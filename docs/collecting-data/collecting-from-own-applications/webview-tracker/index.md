@@ -76,7 +76,7 @@ In addition, you will need to install the iOS or Android tracker in your native 
   </TabItem>
   <TabItem value="tag" label="Using Snowplow tag">
 
-You may download the `sp.js` file from the Releases section Github, self-host it, and load to your page using the following tag:
+You may download the `sp.js` file from the [Releases section on Github](https://github.com/snowplow-incubator/snowplow-webview-tracker/releases), self-host it, and load to your page using the following tag:
 
 ```html
 <script type="text/javascript" async=1>

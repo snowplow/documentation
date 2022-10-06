@@ -123,7 +123,7 @@ Results:
 ### Click and network attribution
 
 In the next example, we will customize the `mktClickId` configuration:
-* First, we add support for `wbraid` and `gbraid` [parameters](https://developers.google.com/google-ads/api/docs/conversions/upload-clicks?hl=en), which will be mapped to `Google` as the corresponding `mkt_network`.
+* First, we add support for `wbraid` and `gbraid` [parameters](https://support.google.com/analytics/answer/11367152?hl=en), which will be mapped to `Google` as the corresponding `mkt_network`.
 * Second, we override the `msclkid` parameter, so that it maps to `NotMicrosoft` as the marketing network (instead of the default `Microsoft`).
 * Other default mappings for `gclid` and `dclid` remain unaffected.
 

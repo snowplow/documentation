@@ -30,7 +30,7 @@ The only required attributes of the `Snowplow.createTracker` method are `namespa
 | `gdprConfig`     | `GdprConfiguration?`    | Determines the GDPR context that will be attached to all events sent by the tracker. |
 | `subjectConfig`  | `SubjectConfiguration?` | Subject information about tracked user and device that is added to events.           |
 
-Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
+Note: the ability to set customPostPath was added in v0.2.0. Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
 
 ## Configuration of tracker properties: `TrackerConfiguration`
 

@@ -10,25 +10,27 @@ The package provides a single method to initialize and configure a new tracker, 
 SnowplowTracker tracker = await Snowplow.createTracker(
     namespace: 'ns1',
     endpoint: 'http://...',
-    method: Method.post,
     trackerConfig: const TrackerConfiguration(...),
     gdprConfig: const GdprConfiguration(...),
     subjectConfig: const SubjectConfiguration(...));
 );
 ```
 
-The method returns a `SnowplowTracker` instance. This can be later used for tracking events, or accessing tracker properties. However, all methods provided by the `SnowplowTracker` instance are also available as static functions in the `Snowplow` class but they require passing the tracker namespace as string.
+The method returns a `SnowplowTracker` instance. This can be later used for tracking events, or accessing tracker properties. However, all methods provided by the `SnowplowTracker` instance are also available as static functions in the `Snowplow` class but they require passing the tracker namespace as string.
 
-The only required attributes of the `Snowplow.createTracker` method are `namespace` used to identify the tracker, and the Snowplow collector `endpoint`. Additionally, one can configure the HTTP method to be used when sending events to the collector and provide configuration by instantiating classes for `TrackerConfiguration`, `SubjectConfiguration`, or `GdprConfiguration`. The following arguments are accepted by the `Snowplow.createTracker` method:
+The only required attributes of the `Snowplow.createTracker` method are `namespace` used to identify the tracker, and the Snowplow collector `endpoint`. Additionally, one can configure the HTTP method to be used when sending events to the collector, as well as a custom POST path, and provide configuration by instantiating classes for `TrackerConfiguration`, `SubjectConfiguration`, or `GdprConfiguration`. By default, events are sent by POST. The following arguments are accepted by the `Snowplow.createTracker` method:
 
-| Attribute       | Type                    | Description                                                                          |
-|-----------------|-------------------------|--------------------------------------------------------------------------------------|
-| `namespace`     | `String`                | Tracker namespace to identify the tracker.                                           |
-| `endpoint`      | `String`                | URI for the Snowplow collector endpoint.                                             |
-| `method`        | `Method?`               | HTTP method to use. `Method.get` and `Method.post` options are available.            |
-| `trackerConfig` | `TrackerConfiguration?` | Configuration of the tracker and the core tracker properties.                        |
-| `gdprConfig`    | `GdprConfiguration?`    | Determines the GDPR context that will be attached to all events sent by the tracker. |
-| `subjectConfig` | `SubjectConfiguration?` | Subject information about tracked user and device that is added to events.           |
+| Attribute        | Type                    | Description                                                                          |
+|------------------|-------------------------|--------------------------------------------------------------------------------------|
+| `namespace`      | `String`                | Tracker namespace to identify the tracker.                                           |
+| `endpoint`       | `String`                | URI for the Snowplow collector endpoint.                                             |
+| `method`         | `Method?`               | HTTP method to use: `Method.get` or `Method.post` (`Method.post` is default).        |
+| `customPostPath` | `String?`               | Custom POST path.                                                                    |
+| `trackerConfig`  | `TrackerConfiguration?` | Configuration of the tracker and the core tracker properties.                        |
+| `gdprConfig`     | `GdprConfiguration?`    | Determines the GDPR context that will be attached to all events sent by the tracker. |
+| `subjectConfig`  | `SubjectConfiguration?` | Subject information about tracked user and device that is added to events.           |
+
+Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
 
 ## Configuration of tracker properties: `TrackerConfiguration`
 

@@ -20,7 +20,7 @@ This will add a line with the dependency like to your pubspec.yaml:
 
 ```cpp
 dependencies:
-    snowplow_tracker: ^0.1.0
+    snowplow_tracker: ^0.2.0
 ```
 
 Import the package into your Dart code:
@@ -33,7 +33,7 @@ import 'package:snowplow_tracker/snowplow_tracker.dart'
 
 If using the tracker within a Flutter app for Web, you will also need to import the Snowplow JavaScript Tracker in your `index.html` file. Please load the JS tracker with the Snowplow tag as [described in the official documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/loading/index.md). Do not change the global function name `snowplow` that is used to access the tracker – the Flutter APIs assume that it remains the default as shown in documentation.
 
-Make sure to use JavaScript tracker version `3.2` or newer. You may also refer to the [example project](https://github.com/snowplow-incubator/snowplow-flutter-tracker/tree/main/example) in the Flutter tracker repository to see this in action.
+Make sure to use JavaScript tracker version `3.5` or newer. You may also refer to the [example project](https://github.com/snowplow-incubator/snowplow-flutter-tracker/tree/main/example) in the Flutter tracker repository to see this in action.
 
 ## Initialization
 

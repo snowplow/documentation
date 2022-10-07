@@ -4,6 +4,11 @@ date: "2022-01-31"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/understanding-tracking-design/introduction-to-tracking-design/index.md).
 
 The following steps will guide you through setting up the Flutter tracker in your project and tracking a simple event.
@@ -12,16 +17,17 @@ The following steps will guide you through setting up the Flutter tracker in you
 
 Add the Snowplow tracker as a dependency to your Flutter application:
 
-```cpp
+```bash
 flutter pub add snowplow_tracker
 ```
 
-This will add a line with the dependency like to your pubspec.yaml:
+This will add a line with the dependency to your pubspec.yaml:
 
-```dart
-dependencies:
-    snowplow_tracker: ^0.2.0
-```
+<CodeBlock language="yaml">{
+`dependencies:
+    snowplow_tracker: ^${versions.flutterTracker}
+`}</CodeBlock>
+
 
 Import the package into your Dart code:
 

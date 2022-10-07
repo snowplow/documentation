@@ -6,7 +6,7 @@ sidebar_position: 2000
 
 The package provides a single method to initialize and configure a new tracker, the `Snowplow.createTracker` method. It accepts configuration parameters for the tracker and returns a `SnowplowTracker` instance.
 
-```cpp
+```dart
 SnowplowTracker tracker = await Snowplow.createTracker(
     namespace: 'ns1',
     endpoint: 'http://...',
@@ -30,7 +30,10 @@ The only required attributes of the `Snowplow.createTracker` method are `namespa
 | `gdprConfig`     | `GdprConfiguration?`    | Determines the GDPR context that will be attached to all events sent by the tracker. |
 | `subjectConfig`  | `SubjectConfiguration?` | Subject information about tracked user and device that is added to events.           |
 
-Note: the ability to set customPostPath was added in v0.2.0. Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
+:::note
+The ability to set customPostPath was added in v0.2.0. Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
+
+:::
 
 ## Configuration of tracker properties: `TrackerConfiguration`
 

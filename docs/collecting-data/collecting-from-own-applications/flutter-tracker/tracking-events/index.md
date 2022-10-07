@@ -46,7 +46,7 @@ Creating an instance of `SelfDescribing` takes a schema name and a dictionary 
 
 Example (assumes that `tracker` is a tracker instance created using `Snowplow.createTracker`):
 
-```cpp
+```dart
 tracker.track(SelfDescribing(
     schema: 'iglu:com.example_company/save_game/jsonschema/1-0-2',
     data: {
@@ -74,7 +74,7 @@ As these fields are fairly arbitrary, we recommend following the advice in this 
 
 Example:
 
-```cpp
+```dart
 tracker.track(Structured(
     category: 'shop',
     action: 'add-to-basket',
@@ -110,7 +110,7 @@ This method creates an unstruct event, by creating and tracking a self-describin
 
 Example:
 
-```cpp
+```dart
 tracker.track(ScreenView(
     id: '2c295365-eae9-4243-a3ee-5c4b7baccc8f',
     name: 'home',
@@ -131,7 +131,7 @@ Use the `Timing` type to track user timing events such as how long resources t
 
 Example:
 
-```cpp
+```dart
 tracker.track(Timing(
     category: 'category',
     variable: 'variable',
@@ -158,7 +158,7 @@ Properties of `ConsentGranted`:
 
 Example:
 
-```cpp
+```dart
 tracker.track(ConsentGranted(
     expiry: DateTime.now(),
     documentId: '1234',
@@ -180,7 +180,7 @@ Properties of `ConsentWithdrawn`:
 
 Example:
 
-```cpp
+```dart
 tracker.track(ConsentWithdrawn(
     all: false,
     documentId: '1234',
@@ -196,7 +196,7 @@ There is also an option to automatically track view events when currently active
 
 To activate this feature, one has to register a `SnowplowObserver` retrieved from the tracker instance using `SnowplowTracker.getObserver()`. The retrieved observer can be added to `navigatorObservers` in `MaterialApp`:
 
-```cpp
+```dart
 MaterialApp(
   navigatorObservers: [
     tracker.getObserver()
@@ -207,7 +207,7 @@ MaterialApp(
 
 If using the `Router` API with the `MaterialApp.router` constructor, add the observer to the `observers` of your `Navigator` instance, e.g.:
 
-```cpp
+```dart
 Navigator(
   observers: [tracker.getObserver()],
   ...
@@ -222,7 +222,7 @@ The `SnowplowTracker.getObserver()` function takes an optional `nameExtractor
 
 The following operations will result in tracking a view event:
 
-```cpp
+```dart
 Navigator.pushNamed(context, '/contact/123');
 
 Navigator.push<void>(context, MaterialPageRoute(

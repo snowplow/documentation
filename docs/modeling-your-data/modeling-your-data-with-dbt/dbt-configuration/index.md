@@ -1,7 +1,7 @@
 ---
-title: "Configuring your Snowplow dbt models and tests"
+title: "Configuring your Snowplow dbt models"
 date: "2022-10-05"
-sidebar_position: 200
+sidebar_position: 350
 ---
 
 ```mdx-code-block
@@ -9,10 +9,27 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-## Configuration
+:::caution
+
+When using multiple dbt packages you must be careful to specify which scope a variable or configuration is defined within. In general, always specify each value in your `dbt_project.yml` nested under the specific package e.g.
+
+```yml
+# dbt_project.yml
+...
+vars:
+  snowplow_web:
+    snowplow__atomic_schema: schema_with_snowplow_web_events
+  snowplow_mobile:
+    snowplow__atomic_schema: schema_with_snowplow_mobile_events
+```
+
+You can read more about variable scoping in dbt's docs around [variable precedence](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/using-variables#variable-precedence).
+
+:::
+
 Each model has specific configuration variables, however some variables are applied across multiple packages and in some cases may have the same name. Ensure you provide the variable and/or configuration value for each package you are using by defining them in the scope of the package. 
 
-### Output Schemas
+## Output Schemas
 By default all scratch/staging tables will be created in the `<target.schema>_scratch` schema, the derived tables ( e.g. `snowplow_web_page_views`, `snowplow_web_sessions`, `snowplow_web_users`) will be created in `<target.schema>_derived` and all manifest tables in `<target.schema>_snowplow_manifest`. Some of these schemas are only used by specific packages, ensure you add the correct configurations for each packages you are using. To change, please add the following to your `dbt_project.yml` file:
 
 <Tabs groupId="dbt-packages">
@@ -97,7 +114,7 @@ models:
 
 ------
 
-### Disabling a standard module
+## Disabling a standard module
 
 If you do not require certain modules provided by the package you have the option to disable them. For instance to disable the users module in the `snowplow_web` package:
 
@@ -112,7 +129,7 @@ models:
 
 Note that any dependent modules will also need to be disabled - for instance if you disabled the sessions module in the web package, you will also have to disable the users module.
 
-### Model Configuration
+## Model Configuration
 
 This packages make use of a series of other variables, which are all set to the recommend values for the operation of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
@@ -189,7 +206,8 @@ In addition the mobile package has some contexts that can be enabled depending o
 </Tabs>
 
 ------
-### Postgres Only
+## Warehouse specific configurations
+### Postgres
 
 In most modern analytical data warehouses constraints are usually either unsupported or unenforced. For this reason it is better to use dbt to assert the data constraints without actually materializing them in the database using `dbt test`. Here you can test the constraint is unique and not null. The snowplow_web package already includes these dbt tests for primary keys, see the testing section for more details.
 
@@ -205,7 +223,7 @@ To optimism performance of large Postgres datasets you can create [indexes](http
 }}
 ```
 
-### Databricks Only
+### Databricks
 
 
 You can connect to Databricks using either the `dbt-spark` or the `dbt-databricks` connectors. The `dbt-spark` adapter does not allow dbt to take advantage of certain features that are unique to Databricks, which you can take advantage of when using the `dbt-databricks` adapter. Where possible, we would recommend using the `dbt-databricks` adapter.
@@ -230,80 +248,14 @@ ALTER TABLE {TABLE_NAME} SET TBLPROPERTIES (delta.autoOptimize.optimizeWrite = t
 ```
 
 
-## Tests
+### BigQuery
 
-The packages contains tests for both the scratch and derived models. Depending on your use case you might not want to run all tests in production, for example to save costs. There are several tags included in the packages to help select subsets of tests. Tags:
+As mentioned in the [Quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) You can verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
 
-- `this_run`: Any model with the `_this_run` suffix
-- `scratch`: Any model in the scratch sub directories.
-- `derived`: Any of the derived models i.e. page views, sessions and users.
-- `primary-key`: Any test on the primary keys of all models in this package.
-
-For example if your derived tables are very large you may want to run the full test suite on the `this_run` tables, which act as the input for the derived tables, but only primary key schema tests on the derived tables to ensure no duplicates. If using such a set up, we would also recommend including the `page/screen_view_in_session_value` data test for the page/screen views derived tables. For Media Player tests depending on the selector chosen it will include the web tests as well as the bespoke media tests.
-
-This is our recommended approach to testing and can be implemented using the selector flag (see [YAML selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart-and-operation/index.md#yaml-selectors) section for more details) as follows:
-
-<Tabs groupId="dbt-packages">
-<TabItem value="web" label="Snowplow Web" default>
-
-```bash
-dbt test --selector snowplow_web_lean_tests
+```yml
+# dbt_project.yml
+...
+vars:
+  snowplow_mobile:
+    snowplow__derived_tstamp_partitioned: false
 ```
-
-This is equivalent to:
-
-```bash
-dbt test --select snowplow_web,tag:this_run # Full tests on _this_run models
-dbt test --select snowplow_web,tag:manifest # Full tests on manifest models
-dbt test --select snowplow_web,tag:primary-key,tag:derived # Primary key tests only on derived tables.
-dbt test --select snowplow_web,tag:derived,test_type:data  # Include the page_view_in_session_value data test
-```
-
-Alternatively, if you wanted to run all available tests in both the Snowplow web package and your custom modules:
-
-```bash
-dbt test --selector snowplow_web
-```
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-```bash
-dbt test --selector snowplow_mobile_lean_tests
-```
-
-This is equivalent to:
-
-```bash
-dbt test --select snowplow_mobile,tag:this_run # Full tests on _this_run models
-dbt test --select snowplow_mobile,tag:manifest # Full tests on manifest models
-dbt test --select snowplow_mobile,tag:primary-key,tag:derived # Primary key tests only on derived tables.
-dbt test --select snowplow_mobile,tag:derived,test_type:data  # Include the screen_view_in_session_values data test
-```
-
-Alternatively, if you wanted to run all available tests in both the Snowplow web package and your custom modules:
-
-```bash
-dbt test --selector snowplow_mobile
-```
-
-</TabItem>
-<TabItem value="media" label="Snowplow Media Player">
-
-```bash
-dbt test --selector snowplow_web_lean_and_media_player_tests
-```
-
-This is equivalent to running the lean tests on the web-model as well as all media_player tests and any tests on any custom models tagged `snowplow_media_player`.
-
-Alternatively, if you wanted to run all available tests in both the Snowplow Web and Media Player package (plus any tests on any custom models tagged `snowplow_media_player`):
-
-```bash
-dbt test --selector snowplow_media_player_tests
-```
-
-</TabItem>
-</Tabs>
-
-------
-

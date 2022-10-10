@@ -1,7 +1,7 @@
 ---
 title: "Creating custom modules with Snowplow dbt packages"
 date: "2022-10-05"
-sidebar_position: 400
+sidebar_position: 500
 ---
 
 ```mdx-code-block

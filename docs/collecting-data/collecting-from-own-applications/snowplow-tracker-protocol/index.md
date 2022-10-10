@@ -43,7 +43,7 @@ Historically, custom self-describing events were called “unstructured” and t
 | [Ecommerce transaction tracking](#transaction-parameters)    | `tr` and `ti`                 |
 | [Custom structured event](#structured-event-tracking)        | `se`                          |
 
-Additionally, [entities can be attached to events](#event-entitiy-tracking) which gives additional context to the event.
+Additionally, [entities can be attached to events](#event-entity-tracking) which gives additional context to the event.
 
 ### Self-describing events
 

@@ -97,7 +97,7 @@ The `ttm` field is used for a timestamp set on the client which should be take
 | `sid`         | `domain_sessionid`  | text     | Unique identifier (UUID) for this visit of this user_id to this domain                                                                                             | `9c65e7f3-8e8e-470d-b243-910b5b300da0` |
 | `ip`          | `user_ipaddress`    | text     | IP address override. This is useful, if traffic is being proxied to a Snowplow collector (optional, as IP Address will be automatically captured by collector)     | `37.157.33.178`                        |
 
-::: info
+:::info
 
 `network_userid` is captured via a cookie set by the Snowplow Collector. It can be overriden by setting `tnuid` on a Tracker request payload but is typically expected to be populated by the collector cookies.
 

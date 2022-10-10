@@ -50,7 +50,7 @@ jobs.test(cfg, badrow)
 jobs.testMany(cfg, List(badrow))
 ```
 
-You can grab the script from our GitHub repo [here](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/feature/recovery-typeclasses/scripts/test.sc).
+You can grab the script from our GitHub repo [here](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/master/scripts/test.sc).
 
 The main sections that need editing are the `val cfg and val badrow` sections. CFG of course refers to the configuration you'd like to test and badrow refers to an example failed event.
 
@@ -62,7 +62,7 @@ To run above example, assuming the file is named locally as `test.sc`, run: `a
 
 This will run the operation that you specified in your configuration (e.g. \`replace\` and output to console the result. You should then be able to check the collector payload should now be modified as expected based on your configuration.
 
-See the [main script](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/feature/recovery-typeclasses/scripts/Recovery.sc) for additional available convenience functions.
+See the [main script](https://github.com/snowplow-incubator/snowplow-event-recovery/blob/master/scripts/Recovery.sc) for additional available convenience functions.
 
 ## A complete recovery
 

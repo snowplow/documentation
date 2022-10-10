@@ -129,21 +129,21 @@ The `ttm` field is used for a timestamp set on the client which should be take
 
 At its heart, Snowplow is a platform for granular tracking of events. In the tracker protocol, each event is denoted by an `e=...` parameter.
 
-| **Type of tracking**                           | **Event type (value of `e`)** |
-|------------------------------------------------|-------------------------------|
-| [Self describing event](#unstructevent)        | `ue`                          |
-| [Pageview tracking](#pageview)                 | `pv`                          |
-| [Page pings](#pagepings)                       | `pp`                          |
-| [Ecommerce transaction tracking](#ecomm)       | `tr` and `ti`                 |
-| [Custom structured event](#event)              | `se`                          |
+| **Type of tracking**                                         | **Event type (value of `e`)** |
+|--------------------------------------------------------------|-------------------------------|
+| [Self-describing event](#self-describing-event-tracking)     | `ue`                          |
+| [Pageview tracking](#pageview-tracking)                      | `pv`                          |
+| [Page pings](#page-pings)                                    | `pp`                          |
+| [Ecommerce transaction tracking](#transaction-parameters)    | `tr` and `ti`                 |
+| [Custom structured event](#structured-event-tracking)        | `se`                          |
 
 Additionally, [entities can be attached to events](#event-entitiy-tracking) which gives additional context to the event.
 
-### Self describing event tracking
+### Self-describing event tracking
 
-[Structuring your data with schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) to perform self describing event tracking is the defacto way to track events with Snowplow and allows any arbitrary name: value pairs to be captured with the event.
+[Structuring your data with schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) to perform self-describing event tracking is the defacto way to track events with Snowplow and allows any arbitrary name: value pairs to be captured with the event.
 
-An example of an unstructured event for a product view event:
+An example of a self-describing event for a product view event:
 
 ```json
 {
@@ -166,7 +166,7 @@ The tracker will wrap this self-describing JSON in an outer self-describing JS
 ```json
 {
 
-  // Tells Snowplow this is an unstructured event
+  // Tells Snowplow this is an self-describing event
   "schema": "iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0",
   "data": {
 
@@ -193,7 +193,7 @@ The tracker can decide to pass the `ue_px` or the `ue_pr` parameter. Encodin
 
 ### Other Events
 
-There are a number of core Snowplow events which do not follow the self describing event format.
+There are a number of core Snowplow events which do not follow the self-describing event format.
 
 #### Pageview tracking
 
@@ -248,7 +248,7 @@ Page pings are identified by `e=pp`. As well as all the standard web fields, th
 
 Structured event tracking is a legacy format used to track events that are not natively supported by Snowplow.
 
-We recommend using [Self Describing events](#self-describing-event-tracking) for custom event tracking.
+We recommend using [self-describing events](#self-describing-event-tracking) for custom event tracking.
 
 :::
 

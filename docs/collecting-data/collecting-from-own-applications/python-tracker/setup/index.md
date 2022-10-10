@@ -4,6 +4,11 @@ date: "2020-02-26"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Integration options
 
 ### Tracker compatibility
@@ -53,9 +58,11 @@ $ pip install snowplow-tracker[celery]
 
 To add the Snowplow Tracker as a dependency to your own Python app, edit your `requirements.txt` and add:
 
-```text
-snowplow-tracker==0.11.0
-```
+
+<CodeBlock language="bash">{
+`snowplow-tracker==${versions.pythonTracker}`
+}</CodeBlock>
+
 
 ### easy_install
 
@@ -69,7 +76,17 @@ $ easy_install -U snowplow-tracker
 
 Please refer to the table below to identify the recommended tracker version for your Python version.
 
-| Python version | snowplow-tracker version |
-| --- | --- |
-| >=3.5 | 0.11.0 |
-| 2.7 | 0.9.1 |
+<table>
+    <tr>
+        <th>Python Version</th>
+        <th>snowplow-tracker Version</th>
+    </tr>
+    <tr>
+        <td>>=3.5</td>
+        <td>{versions.pythonTracker}</td>
+    </tr>
+    <tr>
+        <td>2.7</td>
+        <td>0.9.1</td>
+    </tr>
+</table>

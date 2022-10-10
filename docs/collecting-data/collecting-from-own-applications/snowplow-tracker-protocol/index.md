@@ -26,7 +26,7 @@ At its heart, Snowplow is a platform for granular tracking of events. In the tra
 There are 3 categories of events:
 
 - Standard events, such as page views, page pings and transactions
-- Custom self-describing events based on a [schema](https://docs.snowplow.io/docs/understanding-tracking-design/understanding-schemas-and-validation/)
+- Custom self-describing events based on a [schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md)
 - Legacy custom structured events, which we don’t recommend using
 
 :::info

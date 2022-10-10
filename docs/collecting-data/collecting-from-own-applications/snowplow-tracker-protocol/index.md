@@ -23,6 +23,18 @@ When the event is sent from a Snowplow tracker, all parameters should be stringi
 
 At its heart, Snowplow is a platform for granular tracking of events. In the tracker protocol, each event is denoted by an `e=...` parameter.
 
+There are 3 categories of events:
+
+- Standard events, such as page views, page pings and transactions
+- Custom self-describing events based on a [schema](https://docs.snowplow.io/docs/understanding-tracking-design/understanding-schemas-and-validation/)
+- Legacy custom structured events, which we don’t recommend using
+
+:::info
+
+Historically, custom self-describing events were called “unstructured” and the legacy custom events were called “structured”. This terminology can be confusing, so we don’t use it anymore. However, you might find its remnants in some of the APIs.
+
+:::
+
 | **Type of tracking**                                         | **Event type (value of `e`)** |
 |--------------------------------------------------------------|-------------------------------|
 | [Self-describing event](#self-describing-event-tracking)     | `ue`                          |
@@ -33,7 +45,7 @@ At its heart, Snowplow is a platform for granular tracking of events. In the tra
 
 Additionally, [entities can be attached to events](#event-entitiy-tracking) which gives additional context to the event.
 
-### Self-describing event tracking
+### Self-describing events
 
 [Structuring your data with schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) to perform self-describing event tracking is the defacto way to track events with Snowplow and allows any arbitrary name: value pairs to be captured with the event.
 
@@ -89,13 +101,13 @@ The tracker can decide to pass the `ue_px` or the `ue_pr` parameter. Encodin
 
 There are a number of core Snowplow events which do not follow the self-describing event format.
 
-#### Pageview tracking
+#### Page Views
 
 Pageview tracking is used to record views of web pages.
 
 Currently, recording a pageview involves recording an event where `e=pv`. All the fields associated with web events can be tracked. There are no other pageview specific fields.
 
-#### Page pings
+#### Page Pings
 
 Page pings are used to record users engaging with content on a web page after it has originally loaded. For example, it can be used to track how far down an article a user scrolls.
 
@@ -110,7 +122,9 @@ Page pings are identified by `e=pp`. As well as all the standard web fields, th
 | `pp_miy`      | `pp_yoffset_min` | integer  | Minimum page y offset seen in the last ping period  | `0`                |
 | `pp_may`      | `pp_yoffset_max` | integer  | Maximum page y offset seen in the last ping period  | `100`              |
 
-#### Transaction parameters
+#### Transaction tracking
+
+Trnasaction events allow you to track a transaction. The items of the transaction can be tracked using [Transaction Item events](#transaction-item-events).
 
 | **Parameter** | **Table Column**      | **Type** | **Description**                                      | **Example values** |
 |----------------|----------|------------------------------------------------------|--------------------|
@@ -124,23 +138,25 @@ Page pings are identified by `e=pp`. As well as all the standard web fields, th
 | `tr_co`       | `tr_country`     | text     | Delivery address: country                            | `United Kingdom`   |
 | `tr_cu`       | `tr_currency`    | text     | Transaction Currency                                 | `GBP`              |
 
-#### Transaction item parameters
+#### Transaction item events
+
+Transaction item events are separate events, representing the items of a transaction, which are linked to a Transaction event via `ti_id` which should map to `tr_id` of a transaction event.
 
 | **Parameter** | **Table Column**  | **Type** | **Description**  | **Example values** |
-|---------------|--------------|----------|------------------|--------------------|
-| `ti_id`       | `ti_orderid` | text     | Order ID         | `12345`            |
-| `ti_sk` | `ti_sku` | text | Item SKU | Yes | \`pbz0025' |
-| `ti_nm` | `ti_name` | text | Item name | Yes | `black-tarot` |
-| `ti_ca` | `ti_category` | text | Item category | Yes | `tarot` |
-| `ti_pr` | `ti_price` | decimal | Item price | Yes | `7.99` |
-| `ti_qu` | `ti_quantity` | integer | Item quantity | Yes | `2` |
-| `ti_cu` | `ti_currency` | text | Currency | Yes | `USD` |
+|---------------|---------------|----------|------------------|--------------------|
+| `ti_id`       | `ti_orderid`  | text     | Order ID         | `12345`            |
+| `ti_sk`       | `ti_sku`      | text | Item SKU | Yes | \`pbz0025' |
+| `ti_nm`       | `ti_name`     | text | Item name | Yes | `black-tarot` |
+| `ti_ca`       | `ti_category` | text | Item category | Yes | `tarot` |
+| `ti_pr`       | `ti_price`    | decimal | Item price | Yes | `7.99` |
+| `ti_qu`       | `ti_quantity` | integer | Item quantity | Yes | `2` |
+| `ti_cu`       | `ti_currency` | text | Currency | Yes | `USD` |
 
 #### Structured event tracking
 
 :::info
 
-Structured event tracking is a legacy format used to track events that are not natively supported by Snowplow.
+Structured event tracking is a legacy format used to track events that were not natively supported by Snowplow.
 
 We recommend using [self-describing events](#self-describing-event-tracking) for custom event tracking.
 

@@ -129,6 +129,7 @@ async function createConfig() {
           additionalLanguages: [
             'arduino',
             'csharp',
+            'dart',
             'docker',
             'gradle',
             'java',

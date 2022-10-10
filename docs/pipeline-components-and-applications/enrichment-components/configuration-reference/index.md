@@ -112,9 +112,11 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.streamName` | Required. E.g. `enriched`. Name of the Kinesis stream to write to the enriched events. |
 | `output.good.region` | Same as input.region for enriched events stream. |
 | `output.good.partitionKey` | Optional. How the output stream will be partitioned in Kinesis. Events with the same partition key value will go to the same shard. Possible values: `event_id`, `event_fingerprint`, `domain_userid`, `network_userid`, `user_ipaddress`, `domain_sessionid`, `user_fingerprint`. If not specified, the partition key will be a random UUID. |
-| `output.good.backoffPolicy.minBackoff` | Optional. Default: `100 milliseconds`. Minimum backoff before retrying when writing fails. |
-| `output.good.backoffPolicy.maxBackoff` | Optional. Default: `10 seconds`. Maximum backoff before retrying when writing fails. |
-| `output.good.backoffPolicy.maxRetries` | Optional. Default: `10`. Maximum number of retries. |
+| `output.good.backoffPolicy.minBackoff` | Optional. Default: `100 milliseconds`. Minimum backoff before retrying when writing fails with internal errors. |
+| `output.good.backoffPolicy.maxBackoff` | Optional. Default: `10 seconds`. Maximum backoff before retrying when writing fails with internal errors. |
+| `output.good.backoffPolicy.maxRetries` | Optional. Default: `10`. Maximum number of retries for internal errors. |
+| `output.good.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Optional. Default: `100 milliseconds`. Minimum backoff before retrying when writing fails in case of throughput exceeded. |
+| `output.good.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Optional. Default: `1 second`. Maximum backoff before retrying when writing fails in case of throughput exceeded. Writing is retried forever. |
 | `output.good.recordLimit` | Optional. Default: `500` (maximum allowed). Limits the number of events in a single PutRecords request. Several requests are made in parallel. |
 | `output.good.customEndpoint` | Optional. E.g. `http://localhost:4566`. To use a custom Kinesis endpoint. |
 | `output.bad.streamName` | Required. E.g. `bad`. Name of the Kinesis stream to write to the bad rows. |
@@ -122,6 +124,8 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.bad.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for bad rows. |
 | `output.bad.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for bad rows. |
 | `output.bad.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for bad rows. |
+| `output.bad.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for bad rows. |
+| `output.bad.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for bad rows. |
 | `output.bad.recordLimit` | Same as `output.good.recordLimit` for bad rows. |
 | `output.bad.customEndpoint` | Same as `output.good.customEndpoint` for pii events. |
 | `output.pii.streamName` | Optional. E.g. `pii`. Should be used in conjunction with the PII pseudonymization enrichment. When configured, enables an extra output stream for writing a `pii_transformation` event. |
@@ -130,6 +134,8 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.pii.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for pii events. |
 | `output.pii.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for pii events. |
 | `output.pii.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for pii events. |
+| `output.pii.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for pii events. |
+| `output.pii.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for pii events. |
 | `output.pii.recordLimit` | Same as `output.good.recordLimit` for pii events. |
 | `output.pii.customEndpoint` | Same as `output.good.customEndpoint` for pii events. |
 

@@ -1,7 +1,7 @@
 ---
-title: "dbt: Web data model"
+title: "The Web data model"
 date: "2021-07-27"
-sidebar_position: 100
+sidebar_position: 501
 ---
 
 # Snowplow Web Package

@@ -1,7 +1,7 @@
 ---
-title: "dbt: Mobile data model"
+title: "The Mobile data model"
 date: "2022-05-14"
-sidebar_position: 200
+sidebar_position: 502
 ---
 # Snowplow Mobile Package
 

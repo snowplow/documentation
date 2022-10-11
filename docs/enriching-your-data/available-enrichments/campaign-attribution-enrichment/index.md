@@ -14,23 +14,32 @@ A link for an online advertisement that brings users back to our site might look
 https://www.acme.com/spring_offer_product?utm_source=influencer&utm_medium=blog&utm_channel=web&utm_campaign=spring_offer
 ```
 
-This could result in the following fields being added to the enrich event :
+This could result in the following fields being added to the enrich event:
+
+| field          | value           |
+|----------------|-----------------|
+| `mkt_source`   | `influencer`    |
+| `mkt_medium`   | `blog`          |
+| `mkt_channel`  | `web`           |
+| `mkt_campaign` | `spring_offer`  |
+
+The configuration of the enrichment defines which parameters in the URL (e.g. `utm_source`) map to which fields in the event (e.g. `mkt_source`) — see examples below.
+
+In addition, this enrichment automatically knows about Google (corresponding to the `gclid` query string parameter), Microsoft (`msclkid`), and DoubleClick (`dclid`). For example, if the query string contains `&gclid=abc`, this will be the result:
 
 | field         | value           |
 |---------------|-----------------|
-| `mktSource`   | "influencer"    |
-| `mktMedium`   | "blog"          |
-| `mktChannel`  | "web"           |
-| `mktCampaign` | "spring_offer" |
-
-This enrichment automatically knows about Google (corresponding to the “gclid” query string parameter), Microsoft (“msclkid”), and DoubleClick (“dclid”). For example, if the query string contains `&gclid=abc&` then `mkt_clickid` field will be populated with `"abc"` and `mkt_network` field would be populated with `"Google"`.
+| `mkt_clickid` | `abc`           |
+| `mkt_network` | `Google`        |
 
 ## Configuration
 
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-1)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/campaign_attribution.json)
 
-Example for standard Google parameters:
+### Basic usage
+
+Here’s an example for standard Google parameters. It specifies that the `utm_medium` parameter in the query string will map to the `mkt_medium` field in the event, and so on.
 
 ```json
     "parameters":{
@@ -55,40 +64,7 @@ Example for standard Google parameters:
     }
 ```
 
-Example customizing `mktClickId` . This particular example:
-
-1. adds mappings of the `wbraid` and `gbraid` [parameters](https://developers.google.com/google-ads/api/docs/conversions/upload-clicks?hl=en) to `Google` as the corresponding `mkt_network` and
-2. overrides the `msclkid` mapping (the other default mappings for `gclid` and `dclid` remain unaffected) :
-
-```json
-    "parameters":{
-      "mapping":"static",
-      "fields":{
-        "mktMedium":[
-          "utm_medium"
-        ],
-        "mktSource":[
-          "utm_source"
-        ],
-        "mktTerm":[
-          "utm_term"
-        ],
-        "mktContent":[
-          "utm_content"
-        ],
-        "mktCampaign":[
-          "utm_campaign"
-        ],
-        "mktClickId": {
-          "wbraid": "Google",
-          "gbraid": "Google",
-          "msclkid": "Override"
-        }
-      }
-    }
-```
-
-Example for Omniture (only `mkt_campaign` can be populated)
+And here’s an example for Omniture (only the `mkt_campaign` field will be populated):
 
 ```json
     "parameters":{
@@ -109,35 +85,76 @@ Example for Omniture (only `mkt_campaign` can be populated)
     }
 ```
 
-It is possible to have more than one parameter name in each array. If multiple acceptable parameter names for the same field are found in the query string, the first one listed in the configuration JSON will take precedence. Example:
+### Supporting multiple parameters
+
+What if some of your links use `utm_campaign=...` and some use `legacy_campaign=...`?
+In this case, you can configure more than one parameter name in the array, like so:
 
 ```json
     "parameters":{
       "mapping":"static",
       "fields":{
-        "mktMedium":[
-          "utm_medium",
-          "medium"
-        ],
-        "mktSource":[
-          "utm_source",
-          "source"
-        ],
-        "mktTerm":[
-          "utm_term",
-          "legacy_term"
-        ],
-        "mktContent":[
-          "utm_content"
-        ],
+        ...
         "mktCampaign":[
           "utm_campaign",
-          "cid",
           "legacy_campaign"
         ]
+        ...
       }
     }
 ```
+
+The same applies to other configuration options, namely `mktMedium`, `mktSource`, `mktTerm` and `mktContent`.
+
+:::note
+
+If the query string includes multiple acceptable parameters (e.g. both `utm_campaign` and `legacy_campaign`), the **first one listed in the configuration** will be used (_not_ the first one present in the query string).
+
+:::
+
+Results:
+
+| query string                           | value of `mkt_campaign` |
+|----------------------------------------|-------------------------|
+| `utm_campaign=abc`                     | `abc`                   |
+| `legacy_campaign=abc`                  | `abc`                   |
+| `legacy_campaign=abc&utm_campaign=def` | `def`                   |
+
+### Click and network attribution
+
+In the next example, we will customize the `mktClickId` configuration:
+* First, we add support for `wbraid` and `gbraid` [parameters](https://support.google.com/analytics/answer/11367152?hl=en), which will be mapped to `Google` as the corresponding `mkt_network`.
+* Second, we override the `msclkid` parameter, so that it maps to `NotMicrosoft` as the marketing network (instead of the default `Microsoft`).
+* Other default mappings for `gclid` and `dclid` remain unaffected.
+
+```json
+    "parameters":{
+      "mapping":"static",
+      "fields":{
+        ...
+        "mktClickId": {
+          "wbraid": "Google",
+          "gbraid": "Google",
+          "msclkid": "NotMicrosoft"
+        }
+        ...
+      }
+    }
+```
+
+:::caution
+
+You should not use more than one click parameter in the query string (e.g. both `wbraid` and `gbraid`). If you do, one of them will be picked arbitrarily.
+
+:::
+
+Results:
+
+| query string            | value of `mkt_clickid` | value of `mkt_network` |
+|-------------------------|------------------------|------------------------|
+| `wbraid=abc`            | `abc`                  | `Google`               |
+| `msclkid=abc`           | `abc`                  | `NotMicrosoft`         |
+| `wbraid=abc&gbraid=def` | `abc` or `def` ⚠️        | `Google`               |
 
 ## Output
 

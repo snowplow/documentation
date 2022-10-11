@@ -63,7 +63,9 @@ const tracker = createTracker(
     'appTracker',
     {
       endpoint: COLLECTOR_URL,
-      method: 'post'
+      method: 'post',
+      customPostPath: 'com.snowplowanalytics.snowplow/tp2', // A custom path which will be added to the endpoint URL to specify the complete URL of the collector when paired with the POST method.
+      requestHeaders: {} // Custom headers for HTTP requests to the Collector
     },
     {
         trackerConfig: {
@@ -81,7 +83,8 @@ const tracker = createTracker(
             lifecycleAutotracking: false,
             installAutotracking: true,
             exceptionAutotracking: true,
-            diagnosticAutotracking: false
+            diagnosticAutotracking: false,
+            userAnonymisation: false // Whether to anonymise client-side user identifiers in session and platform context entities
         },
         sessionConfig: {
             foregroundTimeout: 1800,
@@ -92,7 +95,8 @@ const tracker = createTracker(
             emitRange: 150,
             threadPoolSize: 15,
             byteLimitPost: 40000,
-            byteLimitGet: 40000
+            byteLimitGet: 40000,
+            serverAnonymisation: false // Whether to anonymise server-side user identifiers including the `network_userid` and `user_ipaddress`
         },
         subjectConfig: {
             userId: 'my-user-id',

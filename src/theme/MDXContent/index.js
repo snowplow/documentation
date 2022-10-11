@@ -1,6 +1,7 @@
 import React from 'react'
 import MDXContent from '@theme-original/MDXContent'
 import Admonition from '@theme-original/Admonition'
+import Head from '@docusaurus/Head'
 import { useLocation } from '@docusaurus/router'
 
 // yeah, we need to standardize things!
@@ -13,13 +14,18 @@ export default function MDXContentWrapper(props) {
   return (
     <>
       {previousVersionPattern.test(location.pathname) && (
-        <Admonition type="caution">
-          You are reading documentation for an outdated version. Here’s the{' '}
-          <a href={location.pathname.split(previousVersionPattern)[0]}>
-            latest one
-          </a>
-          !
-        </Admonition>
+        <>
+          <Head>
+            <meta name="robots" content="noindex, follow" />
+          </Head>
+          <Admonition type="caution">
+            You are reading documentation for an outdated version. Here’s the{' '}
+            <a href={location.pathname.split(previousVersionPattern)[0]}>
+              latest one
+            </a>
+            !
+          </Admonition>
+        </>
       )}
       <MDXContent {...props} />
     </>

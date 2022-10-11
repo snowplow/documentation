@@ -1,5 +1,5 @@
 ---
-title: "Quickstart"
+title: "Quick Start"
 date: "2022-10-05"
 sidebar_position: 200
 ---
@@ -71,7 +71,7 @@ You can read more about variable scoping in dbt's docs around [variable preceden
 
 :::
 
-## Quickstart
+## Setup
 
 <Tabs groupId="dbt-packages">
 <TabItem value="web" label="Snowplow Web" default>

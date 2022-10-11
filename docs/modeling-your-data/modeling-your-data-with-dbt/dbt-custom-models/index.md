@@ -1,5 +1,5 @@
 ---
-title: "Creating custom modules with Snowplow dbt packages"
+title: "Creating custom models"
 date: "2022-10-05"
 sidebar_position: 500
 ---

@@ -1,5 +1,5 @@
 ---
-title: "snowplow_incremental Materialization"
+title: "Snowplow Materialization"
 date: "2022-10-05"
 sidebar_position: 400
 ---
@@ -8,9 +8,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This package makes use of the `snowplow_incremental` materialization from the `snowplow_utils` package for the incremental models. This builds upon the out-of-the-box incremental materialization provided by dbt. Its key advantage is that it limits table scans on the target table when updating/inserting based on the new data. This improves performance and reduces cost.
+This package makes use of the `snowplow_incremental` [materialization](https://docs.getdbt.com/guides/legacy/creating-new-materializations) from the `snowplow_utils` package for the incremental models. This builds upon the out-of-the-box [incremental materialization](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/materializations#incremental) provided by dbt. Its key advantage is that it limits table scans on the target table when updating/inserting based on the new data. This improves performance and reduces cost.
 
-As is the case with the native incremental materialization, the strategy varies between adapters.
+All models built by Snowplow use this materialization by default, any [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) are also able to make use of it. As is the case with the native incremental materialization, the strategy varies between adapters.
 
 Please refer to the [snowplow-utils](https://github.com/snowplow/dbt-snowplow-utils) docs for the full documentation on `snowplow_incremental` materialization.
 

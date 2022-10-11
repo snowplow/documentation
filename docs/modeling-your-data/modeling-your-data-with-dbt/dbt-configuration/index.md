@@ -1,5 +1,5 @@
 ---
-title: "Configuring your Snowplow dbt models"
+title: "Configuration"
 date: "2022-10-05"
 sidebar_position: 350
 ---

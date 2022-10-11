@@ -1,5 +1,5 @@
 ---
-title: "Tests in the Snowplow dbt packages"
+title: "dbt Tests"
 date: "2022-10-05"
 sidebar_position: 400
 ---

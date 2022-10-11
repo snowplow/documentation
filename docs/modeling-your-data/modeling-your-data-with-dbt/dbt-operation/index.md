@@ -1,5 +1,5 @@
 ---
-title: "Operation of the dbt packages"
+title: "Operation"
 date: "2022-10-05"
 sidebar_position: 300
 ---
@@ -105,7 +105,7 @@ There are 2 manifest tables included in this package:
 
 ------
 
-Please refer to the [Incremental Logic](#incremental-logic) section more details on the purpose of each of these tables.
+Please refer to the [Incremental Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) section more details on the purpose of each of these tables.
 
 These manifest models are critical to the package **and as such are protected from full refreshes, i.e. being dropped, by default when running in production, while in development refreshes are allowed.**
 

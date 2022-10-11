@@ -38,7 +38,7 @@ By default they are disabled. They can be enabled by configuring the `dbt_projec
 
 ## Optional Modules
 
-Currently the app errors module for crash reporting is the only optional module. More will be added in the future as the tracker's functionality expands.
+Currently the App Errors module, used for crash reporting, is the only optional module. More will be added in the future as the tracker's functionality expands.
 
 ### App Errors
 

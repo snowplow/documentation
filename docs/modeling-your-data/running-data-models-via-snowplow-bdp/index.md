@@ -1,5 +1,5 @@
 ---
-title: "Configuring and running data models via Snowplow BDP"
+title: "Running data models via Snowplow BDP"
 date: "2020-12-01"
 sidebar_position: 30
 ---

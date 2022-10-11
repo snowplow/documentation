@@ -1,5 +1,5 @@
 ---
-title: "Using SQL runner on Snowplow BDP"
+title: "Using SQL runner"
 date: "2020-12-01"
 sidebar_position: 200
 ---

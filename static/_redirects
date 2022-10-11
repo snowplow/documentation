@@ -11,4 +11,4 @@
 /advanced-analytics-web-accelerator/* /accelerators/web/:splat 301
 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
 /docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301

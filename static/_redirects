@@ -11,4 +11,14 @@
 /advanced-analytics-web-accelerator/* /accelerators/web/:splat 301
 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
 /docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
+/docs/modeling-your-data/resolving-data-model-failures-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/resolving-data-model-failures/ 301
+/docs/modeling-your-data/retrieving-job-execution-data-via-the-api/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-execution-data-via-the-api/ 301
+/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/using-sql-runner/ 301
+/docs/modeling-your-data/setup-and-run-sql-runner/ /docs/modeling-your-data/modeling-your-data-with-sql-runner/ 301
+/docs/modeling-your-data/the-snowplow-web-data-model/sql-runner-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-web-data-model/ 301
+/docs/modeling-your-data/the-snowplow-mobile-data-model/sql-runner-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/ 301
+/docs/modeling-your-data/the-snowplow-mobile-data-model/dbt-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/ 301
+/docs/modeling-your-data/the-snowplow-web-data-model/dbt-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/ 301
+/docs/modeling-your-data/the-snowplow-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-mobile-data-model/ 301
+/docs/modeling-your-data/the-snowplow-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-web-data-model/ 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301

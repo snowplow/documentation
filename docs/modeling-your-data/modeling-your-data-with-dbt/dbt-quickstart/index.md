@@ -94,8 +94,11 @@ vars:
     snowplow__atomic_schema: schema_with_snowplow_events
     snowplow__database: database_with_snowplow_events
 ```
+:::info Databricks only 
 
-**Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.**
+Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
+
+:::
 
 #### 3. Enabled desired contexts
 
@@ -206,7 +209,11 @@ vars:
     snowplow__events_table: table_of_snowplow_events
 ```
 
-**Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.**
+:::info Databricks only 
+
+Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
+
+:::
 #### 3. Enabled desired contexts
 
 The mobile package has the option to join in data from the following 4 Snowplow contexts:

@@ -244,7 +244,7 @@ When the JavaScript Tracker loads on a page, it generates a new page view UUID. 
 
 Enabled by default
 
-From v3 of the JavaScript Tracker, the webPage context is enabled by default. You can disable it if you don't require it but we advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/the-snowplow-web-data-model/index.md).
+From v3 of the JavaScript Tracker, the webPage context is enabled by default. You can disable it if you don't require it but we advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-web-data-model/index.md).
 
 ##### session context
 

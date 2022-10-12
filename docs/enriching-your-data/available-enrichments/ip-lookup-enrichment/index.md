@@ -57,8 +57,7 @@ It is important to note that accepted database filenames are the strings which a
 
 | ENRICHMENT PARAMETER | VALID DATABASE NAMES |
 | --- | --- |
-| `geo` | "GeoLite2-City.mmdb"  
-"GeoIP2-City.mmdb" |
+| `geo` | "GeoLite2-City.mmdb" (free)  "GeoIP2-City.mmdb" (paid) |
 | `isp` | "GeoIP2-ISP.mmdb" |
 | `domain` | "GeoIP2-Domain.mmdb" |
 | `connectionType` | "GeoIP2-Connection-Type.mmdb" |

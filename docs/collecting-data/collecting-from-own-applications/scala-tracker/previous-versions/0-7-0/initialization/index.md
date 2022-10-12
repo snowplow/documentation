@@ -48,7 +48,7 @@ tracker.enableEc2Context()
 
 ## Google Compute Engine Metadata context
 
-Google [Cloud Compute Engine][gce] can provide basic information about instance running your app. You can add this informational as additional custom context to all sent events by enabling it in Tracker after initializaiton of your tracker:
+Google [Cloud Compute Engine](https://cloud.google.com/compute) can provide basic information about instance running your app. You can add this informational as additional custom context to all sent events by enabling it in Tracker after initializaiton of your tracker:
 
 ```scala
 tracker.enableGceContext()

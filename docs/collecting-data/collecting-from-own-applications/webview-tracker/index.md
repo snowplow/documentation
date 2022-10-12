@@ -71,7 +71,7 @@ You will then be able to use the functions provided by the WebView tracker as fo
 import { trackSelfDescribingEvent } from '@snowplow/webview-tracker';
 ```
 
-In addition, you will need to install the iOS or Android tracker in your native code and configure and initialize a tracker (see the [mobile tracker docs][mobile-tracker-setup-docs]). Afterwards, you will be able to subscribe to and track the events from the WebView tracker in a Web view by calling `Snowplow.subscribeToWebViewEvents(webView)`.
+In addition, you will need to install the iOS or Android tracker in your native code and configure and initialize a tracker (see the [mobile tracker docs](../mobile-trackers/installation-and-set-up/index.md)). Afterwards, you will be able to subscribe to and track the events from the WebView tracker in a Web view by calling `Snowplow.subscribeToWebViewEvents(webView)`.
 
   </TabItem>
   <TabItem value="tag" label="Using Snowplow tag">

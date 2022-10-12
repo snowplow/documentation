@@ -394,4 +394,4 @@ These contexts also contain identifiers for the previous screens and sessions, t
 
 The session context contains the first event id for the session in order to make it easier to identify the start time for a given session.
 
-See also the official [Snowplow mobile data model](/docs/modeling-your-data/the-snowplow-mobile-data-model/index.md)!
+See also the official [Snowplow mobile data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-mobile-data-model/index.md)!

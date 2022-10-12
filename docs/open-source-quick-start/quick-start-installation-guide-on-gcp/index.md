@@ -14,6 +14,12 @@ If you are interested in receiving the latest updates from Product & Engineering
 
 You can find more details on the infrastructure and applications that [will be deployed in your cloud here](/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed-gcp/index.md).
 
+```mdx-code-block
+import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
+
+<PocketEdition/>
+```
+
 ### Prerequisites
 
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed

@@ -87,7 +87,7 @@ for run_id in list_runids(s3, enriched_events_archive):
         pass
 ```
 
-In above example, we create two AWS service clients for S3 (to list job runs) and for DynamoDB (to access manifests). These cliens are provided via [boto3][boto3] Python AWS SDK and can be initialized with static credentials or with system-provided credentials.
+In above example, we create two AWS service clients for S3 (to list job runs) and for DynamoDB (to access manifests). These clients are provided via [boto3](https://aws.amazon.com/sdk-for-python/) Python AWS SDK and can be initialized with static credentials or with system-provided credentials.
 
 Then we list all run ids in particular S3 path and process (by user-provided `process` function) only those that were not processed already. Note that `run_id` is simple string with S3 key of particular job run.
 

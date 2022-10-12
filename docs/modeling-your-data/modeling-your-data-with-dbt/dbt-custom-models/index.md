@@ -165,7 +165,7 @@ By removing the `snowplow_web_custom_incremental_model` model from the manifest 
 dbt run --select +snowplow_mobile_custom_incremental_model --vars '{snowplow__start_date: "yyyy-mm-dd", models_to_remove: snowplow_mobile_custom_incremental_model}'
 ```
 
-By removing the `snowplow_mobile_custom_incremental_model` model from the manifest the mobile packages will be in state 2 (see the section on [incremental logic][incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md#incremental-logic))  and will replay all events.
+By removing the `snowplow_mobile_custom_incremental_model` model from the manifest the mobile packages will be in state 2 (see the section on [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md#incremental-logic))  and will replay all events.
 
 </TabItem>
 </Tabs>

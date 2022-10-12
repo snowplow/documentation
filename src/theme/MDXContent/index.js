@@ -6,27 +6,24 @@ import { useLocation } from '@docusaurus/router'
 
 // yeah, we need to standardize things!
 const previousVersionPattern = new RegExp(
-  '[^/]*(previous-|older-)(versions?|releases?)/.'
+  '[^/]*(?:previous-|older-)(?:versions?|releases?)/'
 )
 
 export default function MDXContentWrapper(props) {
   const location = useLocation()
+  const outdated = previousVersionPattern.test(location.pathname)
+  if (!outdated) return <MDXContent {...props} />
+  const [latest, subpage] = location.pathname.split(previousVersionPattern)
   return (
     <>
-      {previousVersionPattern.test(location.pathname) && (
-        <>
-          <Head>
-            <meta name="robots" content="noindex, follow" />
-            <meta name="docsearch:outdated" content="true" />
-          </Head>
-          <Admonition type="caution">
-            You are reading documentation for an outdated version. Here’s the{' '}
-            <a href={location.pathname.split(previousVersionPattern)[0]}>
-              latest one
-            </a>
-            !
-          </Admonition>
-        </>
+      <Head>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
+      {subpage.length > 0 && (
+        <Admonition type="caution">
+          You are reading documentation for an outdated version. Here’s the{' '}
+          <a href={latest}>latest one</a>!
+        </Admonition>
       )}
       <MDXContent {...props} />
     </>

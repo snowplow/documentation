@@ -17,6 +17,7 @@ export default function MDXContentWrapper(props) {
         <>
           <Head>
             <meta name="robots" content="noindex, follow" />
+            <meta name="docsearch:outdated" content="true" />
           </Head>
           <Admonition type="caution">
             You are reading documentation for an outdated version. Here’s the{' '}

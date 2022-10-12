@@ -37,10 +37,10 @@ Historically, custom self-describing events were called “unstructured” and t
 
 | **Type of tracking**                                         | **Event type (value of `e`)** |
 |--------------------------------------------------------------|-------------------------------|
-| [Self-describing event](#self-describing-event-tracking)     | `ue`                          |
-| [Pageview tracking](#pageview-tracking)                      | `pv`                          |
+| [Self-describing event](#self-describing-events)     | `ue`                          |
+| [Pageview tracking](#page-views)                      | `pv`                          |
 | [Page pings](#page-pings)                                    | `pp`                          |
-| [Ecommerce transaction tracking](#transaction-parameters)    | `tr` and `ti`                 |
+| [Ecommerce transaction tracking](#transaction-tracking)    | `tr` and `ti`                 |
 | [Custom structured event](#structured-event-tracking)        | `se`                          |
 
 Additionally, [entities can be attached to events](#event-entity-tracking) which gives additional context to the event.
@@ -158,7 +158,7 @@ Transaction item events are separate events, representing the items of a transac
 
 Structured event tracking is a legacy format used to track events that were not natively supported by Snowplow.
 
-We recommend using [self-describing events](#self-describing-event-tracking) for custom event tracking.
+We recommend using [self-describing events](#self-describing-events) for custom event tracking.
 
 :::
 
@@ -228,7 +228,7 @@ Trackers can be configured to encode the context into URL-safe Base64 to ensure 
 
 | **Parameter** | **Table Column**           | **Type** | **Description**  | **Example values**                     |
 |---------------|-----------------------|----------|------------------|----------------------------------------|
-| `e`           | `event`               | text     | Event type       | (See table [below](#events))           |
+| `e`           | `event`               | text     | Event type       | (See table [above](#snowplow-events))           |
 | `eid`         | `event_id`            | text     | Event UUID       | `606adff6-9ccc-41f4-8807-db8fdb600df8` |
 
 :::caution

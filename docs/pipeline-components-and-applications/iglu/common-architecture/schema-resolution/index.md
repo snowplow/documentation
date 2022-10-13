@@ -4,13 +4,13 @@ date: "2021-03-26"
 sidebar_position: 400
 ---
 
-This page describes the Schema resolution algorithm which is standard for all Iglu clients. Currently only [Iglu Scala client](https://github.com/snowplow/iglu-scala-client) fully follow this algorithm, while other clients may miss some parts, but we're working on making their behaviour consistent.
+This page describes the Schema resolution algorithm which is standard for all Iglu clients. Currently only [Iglu Scala client](https://github.com/snowplow/iglu-scala-client) fully follow this algorithm, while other clients may miss some parts, but we're working on making their behavior consistent.
 
 ## 1. Prerequisites
 
 Before going further it is important to understand basic Iglu client configuration and essential concepts like Resolver, Registry (or Repository), Schema. Here is a quick overview of these concepts, if you're familiar with them you may want to skip this section.
 
-Iglu clients are configured via JSON object described in dedicated Schema called [resolver-config](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.iglu/resolver-config/jsonschema). Here we'll be ussing JSON resolver configuration which is platform independent and most wide-spread.
+Iglu clients are configured via JSON object described in dedicated Schema called [resolver-config](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.iglu/resolver-config/jsonschema). Here we'll be using JSON resolver configuration which is platform independent and most wide-spread.
 
 ### 1.1 Resolver
 
@@ -53,7 +53,7 @@ Few important things to note:
 For each particular Schema lookup, registries will be prioritized. In other words they will be sorted according following input parameters (ordered by their significance):
 
 - `vendorPrefix` - Resolver always will look first into those registries which `vendorPrefix`es matches `SchemaKey`'s vendor. It **does not** mean registries with unmatched `vendorPrefix` will be skipped, it means they will be queried last.
-- `classPriority` - hardcoded in client library value for each type of registry. It means that whatever high priority (low integer value) was seted up in configuration for particular registry - it will be overriden by `classPriority`, so embedded repository will always be checked before HTTP (unless priority influenced by `vendorPrefix`)
+- `classPriority` - hardcoded in client library value for each type of registry. It means that whatever high priority (low integer value) was set up in configuration for a particular registry - it will be overridden by `classPriority`, so embedded repository will always be checked before HTTP (unless priority influenced by `vendorPrefix`)
 - `instancePriority` - user-defined value. Influence only repositories within same `classPriority`.
 
 One important thing to note is that both priorities (`classPriority` and `instancePriority`) order registries in ascending order. That means lower number means higher priority. Think of it as ascending list of number: `[1,2,3,4]` - smaller will be always first.

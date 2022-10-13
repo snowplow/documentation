@@ -1,0 +1,20 @@
+<tr>
+    <td><code>input.appName</code></td>
+    <td>Optional. KCL app name. The default is <code>snowplow-rdb-transformer</code></td>
+</tr>
+<tr>
+    <td><code>input.streamName</code></td>
+    <td>Required for <code>kinesis</code>. Enriched Kinesis stream name.</td>
+</tr>
+<tr>
+    <td><code>input.region</code></td>
+    <td>AWS region of the Kinesis stream. Optional if it can be resolved with <a href="https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html">AWS region provider chain</a>.</td>
+</tr>
+<tr>
+    <td><code>input.position</code></td>
+    <td>Optional. Kinesis position: <code>LATEST</code> or <code>TRIM_HORIZON</code>. The default is <code>LATEST</code>.</td>
+</tr>
+<tr>
+    <td><code>windowing</code></td>
+    <td>Optional. Frequency to emit shredding complete message. The default is <code>10 minutes</code>.</td>
+</tr>

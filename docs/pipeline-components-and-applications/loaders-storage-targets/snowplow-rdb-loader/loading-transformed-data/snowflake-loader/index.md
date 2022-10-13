@@ -9,14 +9,23 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-There are two ways to set up the necessary Snowflake resources and run the loader:
+It is possible to run Snowflake Loader on both AWS and GCP.
+
+### Running on AWS
+
+There are two ways to set up the necessary Snowflake resources and run the loader on AWS:
 
 - using our dedicated open source Terraform modules to create the resources and deploy the loader on EC2
 - creating the resources and running the application manually.
 
 We recommend the first way.
 
-## Using the Terraform modules
+### Running on GCP
+
+At the moment, terraform modules for deploying Snowflake Loader on GCP aren't implemented. Therefore necessary Snowflake resources needs to be created and application needs to be deployed manually.
+
+
+## Using the Terraform modules (for AWS)
 
 ### Requirements
 
@@ -53,13 +62,13 @@ The following resources need to be created:
 
 The Snowflake stage is the most complicated one to create from the resources listed above.
 
-To create a Snowflake stage, you need a Snowflake database, Snowflake schema, Snowflake storage integration, Snowflake file format, and the S3 path to the transformed events bucket.
+To create a Snowflake stage, you need a Snowflake database, Snowflake schema, Snowflake storage integration, Snowflake file format, and the blob storage (S3 or GCS) path to the transformed events bucket.
 
 You can follow [this tutorial](https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration.html) to create the storage integration.
 
 Assuming you created the other required resources for it, you can create the Snowflake stage by following [this document](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html).
 
-### Downloading the artefact
+### Downloading the artifact
 
 The asset is published as a jar file attached to the [Github release notes](https://github.com/snowplow/snowplow-rdb-loader/releases) for each version.
 
@@ -72,11 +81,20 @@ The loader takes two configuration files:
 - a `config.hocon` file with application settings
 - an `iglu_resolver.json` file with the resolver configuration for your [Iglu](https://github.com/snowplow/iglu) schema registry.
 
-An example of the minimal required config for the Snowflake loader can be found [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/snowflake.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/snowflake.config.reference.hocon). For details about each setting, see the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md).
+|Minimal Configuration|Extended Configuration|
+|-|-|
+|[aws/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/snowflake.config.minimal.hocon)|[aws/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/snowflake.config.reference.hocon)|
+|[gcp/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.minimal.hocon)|[gcp/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.reference.hocon)|
+
+For details about each setting, see the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md).
 
 See [here](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) for details on how to prepare the Iglu resolver file.
 
-**NOTE:** All self-describing schemas for events processed by RDB Loader **must** be hosted on [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or above. [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-central/index.md) is a registry containing Snowplow-authored schemas. If you want to use them alongside your own, you will need to add it to your resolver file. Keep it mind that it could override your own private schemas if you give it higher priority. For details on this see [here](https://discourse.snowplow.io/t/important-changes-to-iglu-centrals-api-for-schema-lists/5720#how-will-this-affect-my-snowplow-pipeline-3).
+:::tip
+
+All self-describing schemas for events processed by RDB Loader **must** be hosted on [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or above. [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-central/index.md) is a registry containing Snowplow-authored schemas. If you want to use them alongside your own, you will need to add it to your resolver file. Keep it mind that it could override your own private schemas if you give it higher priority. For details on this see [here](https://discourse.snowplow.io/t/important-changes-to-iglu-centrals-api-for-schema-lists/5720#how-will-this-affect-my-snowplow-pipeline-3).
+
+:::
 
 ### Running the Snowflake loader
 

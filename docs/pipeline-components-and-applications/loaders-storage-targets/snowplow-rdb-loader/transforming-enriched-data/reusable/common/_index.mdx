@@ -1,0 +1,16 @@
+<tr>
+    <td><code>validations.*</code></td>
+    <td>Optional. Criteria to validate events against</td>
+</tr>
+<tr>
+    <td><code>validations.minimumTimestamp</code></td>
+    <td>This is currently the only validation criterion. It checks that all timestamps in the event are older than a specific point in time, eg <code>2021-11-18T11:00:00.00Z</code>.</td>
+</tr>
+<tr>
+    <td><code>featureFlags.*</code></td>
+    <td>Optional. Enable features that are still in beta, or which aim to enable smoother upgrades.</td>
+</tr>
+<tr>
+    <td><code>featureFlags.legacyMessageFormat</code></td>
+    <td>This currently the only feature flag. Setting this to <code>true</code> allows you to use a new version of the transformer with an older version of the loader.</td>
+</tr>

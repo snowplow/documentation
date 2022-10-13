@@ -8,7 +8,7 @@ _For a high-level overview of the RDB Loader architecture, of which the loader i
 
 The loader applications are specialised to a specific storage target. Each one performs 3 key tasks:
 
-- Consume messages from SQS / SNS to discover information about transformed data: where it is stored and what it looks like.
+- Consume messages from SQS / SNS / Pubsub to discover information about transformed data: where it is stored and what it looks like.
 - Use the information from the message to determine if any changes to the target table(s) are required, eg to add a column for a new event field. If required, submit the appropriate SQL statement for execution by the storage target.
 - Prepare and submit for execution the appropriate SQL `COPY` statement.
 
@@ -17,3 +17,9 @@ For loading into **Redshift**, use the [Redshift loader](/docs/pipeline-componen
 For loading into **Snowflake**, use the [Snowflake loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/snowflake-loader/index.md). This loads [wide row JSON format data](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#wide-row-format) into a single Snowflake table. (This is not to be confused with [Snowplow Snowflake Loader](https://github.com/snowplow-incubator/snowplow-snowflake-loader), which is a completely separate application, not part of the RDB Loader architecture. In the long run, `snowplow-snowflake-loader` will be phased out in favour of RDB Loader.)
 
 For loading into **Databricks**, use the [Databricks loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/databricks-loader/index.md). This loads [wide row Parquet format data](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#wide-row-format) into a single Databricks table.
+
+:::note
+
+AWS is fully supported for both Snowflake and Databricks. GCP is supported for Snowflake (since 5.0.0.).
+
+:::

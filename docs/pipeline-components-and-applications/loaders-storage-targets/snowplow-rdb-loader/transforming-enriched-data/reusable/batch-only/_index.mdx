@@ -1,0 +1,22 @@
+<tr>
+    <td><code>input</code></td>
+    <td>Required. S3 URI of the enriched archive. It must be populated separately with <code>run=YYYY-MM-DD-hh-mm-ss</code> directories.</td>
+</tr>
+<tr>
+    <td><code>runInterval.*</code></td>
+    <td>Specifies interval to process.</td>
+</tr>
+<tr>
+    <td><code>runInterval.sinceAge</code></td>
+    <td>Optional. A duration that specifies the maximum age of folders that should get processed. If <code>sinceAge</code> and <code>sinceTimestamp</code> are both specified, then the latest value of the two determines the earliest folder that will be processed.</td>
+</tr>
+<tr>
+    <td><code>runInterval.until</code></td>
+    <td>Optional. Process until this timestamp.</td>
+</tr>
+<tr>
+    <td><code>monitoring.sentry.dsn</code></td>
+    <td>Optional. For tracking runtime exceptions.</td>
+</tr>
+
+

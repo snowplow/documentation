@@ -1,0 +1,40 @@
+<tr>
+    <td><code>input.subscription</code></td>
+    <td>Name of the Pubsub subscription with the enriched events</td>
+</tr>
+<tr>
+    <td><code>input.parallelPullCount</code></td>
+    <td>Optional. Default value 1. Number of threads used internally by permutive library to handle incoming messages. These threads do very little "work" apart from writing the message to a concurrent Queue.</td>
+</tr>
+<tr>
+    <td><code>input.bufferSize</code></td>
+    <td>Optional. Default value 500. The max size of the buffer queue used between fs2-pubsub and java-pubsub libraries.</td>
+</tr>
+<tr>
+    <td><code>input.maxAckExtensionPeriod</code></td>
+    <td>Optional. Default value '1 hour'. The maximum period a message ack deadline will be extended.</td>
+</tr>
+<tr>
+    <td><code>output.path</code></td>
+    <td>Required. GCS URI of the transformed output. It needs to have <code>gs://</code> URI scheme</td>
+</tr>
+<tr>
+    <td><code>output.compression</code></td>
+    <td>Optional. One of <code>NONE</code> or <code>GZIP</code>. The default is <code>GZIP</code>.</td>
+</tr>
+<tr>
+    <td><code>output.bufferSize</code></td>
+    <td>Optional. Default value 4096. During the window period, processed items are stored in a buffer. This value determines the size of this buffer. When its limit is reached, buffer content is flushed to blob storage.</td>
+</tr>
+<tr>
+    <td><code>queue.topic</code></td>
+    <td>Name of the Pubsub topic used to communicate with Loader</td>
+</tr>
+<tr>
+    <td><code>formats.fileFormat</code></td>
+    <td>Optional. The default and only option at the moment is <code>JSON</code>.</td>
+</tr>
+<tr>
+    <td><code>windowing</code></td>
+    <td>Optional. Frequency to emit shredding complete message. The default is <code>5 minutes</code>. Note that there is a problem with acking messages when window period is greater than 10 minute in transformer-pubsub. Therefore, it is advisable to make window period equal or less than 10 minutes.</td>
+</tr>

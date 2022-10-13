@@ -17,16 +17,23 @@ Each step is handled by a dedicated application: `transformer` or `loader`. To l
 
 The transformer app currently comes in two flavours: a Spark job that processes data in batches, and a long-running streaming app.
 
-The process of transforming the data is not dependent on the storage target. Which one is best for your use case depends on two factors:
+The process of transforming the data is not dependent on the storage target. Which one is best for your use case depends on three factors:
 
+- cloud provider you want to use (AWS or GCP)
 - your expected data volume
 - how much importance you place on deduplicating the data before loading it into the data warehouse.
+
+### Based on cloud provider
+
+If you want to run the transformer on AWS, you can use Spark transformer (`snowplow-transformer-batch`) or Transformer Kinesis (`snowplow-transformer-kinesis`).
+
+If you want to run the transformer on GCP, you can use Transformer Pubsub (`snowplow-transformer-pubsub`).
 
 ### Based on expected data volume
 
 The Spark transformer (`snowplow-transformer-batch`) is the best choice for big volumes, as the work can be split across multiple workers. However, the need to run it on EMR creates some overhead that is not justified for low-volume pipelines.
 
-The stream transformer (`snowplow-transformer-kinesis`) is a much leaner alternative and suggested for use with low volumes that can be comfortably processed on a single node. Keep in mind that in a multi-node setup you might run into race conditions between the different workers.
+The stream transformer (`snowplow-transformer-kinesis` and `snowplow-transformer-pubsub`) is a much leaner alternative and suggested for use with low volumes that can be comfortably processed on a single node. However, multiple stream transformers can be run parallel therefore it is possible to process big data volume with stream transformer too.
 
 To make the best choice, consider:
 
@@ -43,18 +50,30 @@ If duplicates are not a concern, or if you are happy to deal with them after the
 
 There are different loader applications depending on the storage target. Currently, RDB Loader supports Redshift, Snowflake and Databricks.
 
-For loading into **Redshift**, use the `snowplow-rdb-loader-redshift` artefact.
+For loading into **Redshift**, use the `snowplow-rdb-loader-redshift` artifact.
 
-For loading into **Snowflake**, use the `snowplow-rdb-loader-snowflake` artefact.
+For loading into **Snowflake**, use the `snowplow-rdb-loader-snowflake` artifact.
 
-For loading into **Databricks**, use the `snowplow-rdb-loader-databricks` artefact.
+For loading into **Databricks**, use the `snowplow-rdb-loader-databricks` artifact.
+
+:::note
+
+AWS is fully supported for both Snowflake and Databricks. GCP is supported for Snowflake (since 5.0.0.).
+
+:::
 
 ## How `transformer` and `loader` interface with other Snowplow components and each other
 
 The applications communicate through messages.
 
-The transformer consumes enriched tsv-formatted Snowplow events from S3 or stream. It writes its output to S3. Once it's finished processing a batch of data, it issues a message with details about the run.
+The transformer consumes enriched tsv-formatted Snowplow events from S3 (AWS) or stream (AWS and GCP). It writes its output to blob storage (S3 or GCS). Once it's finished processing a batch of data, it issues a message with details about the run.
 
 The loader consumes a stream of these messages and uses them to determine what data needs to be loaded. It issues the necessary SQL commands to the storage target.
 
 ![](images/shredder_loader_interface.png)
+
+:::info
+
+Snowplow collects telemetry data about the use of the application. The data allows Snowplow to improve the software offering and support. More information can be found in [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/telemetry/index.md).
+
+:::

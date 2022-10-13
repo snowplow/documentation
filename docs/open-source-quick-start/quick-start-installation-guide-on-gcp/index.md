@@ -23,6 +23,11 @@ import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
 ### Prerequisites
 
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) installed
+- The following APIs active in your GCP account (*note*: this list might not be exhaustive and is subject to change as GCP APIs evolve):
+    - [Compute Engine API](https://console.cloud.google.com/apis/api/compute.googleapis.com)
+    - [Cloud Resource Manager API](https://console.cloud.google.com/apis/api/cloudresourcemanager.googleapis.com)
+    - [Identity and Access Management (IAM) API](https://console.cloud.google.com/apis/api/iam.googleapis.com)
+    - [Cloud Pub/Sub API](https://console.cloud.google.com/apis/api/pubsub.googleapis.com)
 - A Google cloud service account
     - See [details on using the service account with the Cloud SDK](https://cloud.google.com/docs/authentication/getting-started#setting_the_environment_variable)
     - You will need to:

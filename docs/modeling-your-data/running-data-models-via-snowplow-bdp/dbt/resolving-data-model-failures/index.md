@@ -4,7 +4,11 @@ date: "2022-10-14"
 sidebar_position: 200
 ---
 
-Please note this documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for running data models via Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md#2-the-data-modeling-configuration).
+:::note
+
+This documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for running data models via Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md#2-the-data-modeling-configuration).
+
+:::
 
 ### Receiving alerts
 

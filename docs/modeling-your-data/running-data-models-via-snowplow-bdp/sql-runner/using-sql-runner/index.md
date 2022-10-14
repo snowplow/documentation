@@ -1,7 +1,7 @@
 ---
 title: "Using SQL runner"
 date: "2020-12-01"
-sidebar_position: 200
+sidebar_position: 100
 ---
 
 ### Overview
@@ -125,7 +125,7 @@ Data models can now be configured via the Snowplow BDP Console:
 
 In the first step, you can provide the data model name, a description as well as the owner(s) of the data model that will be alerted in case of failure.
 
-![](images/Screenshot-2021-11-15-at-20.20.44.png)
+![](images/data-model-create-step-1.png)
 
 Please note that the model name needs to correspond to the corresponding datamodeling subfolder name in GitHub. The SQL and playbooks for the model in the above example would therefore live under:
 
@@ -157,7 +157,7 @@ Once you are happy with the playbook configuration, you can create the model. Th
 
 ![](images/Screenshot-2021-11-15-at-20.25.53.png)
 
-Please make sure all your SQL and playbooks are merged to `master` in GitHub before enabling the model. Note that this tooling no longer runs a "sync and deploy" process. Any changes merged to `master` are available immediately.
+Please make sure all your SQL and playbooks are merged to the default branch in GitHub before enabling the model. Note that this tooling no longer runs a "sync and deploy" process. Any changes merged to the default branch are available immediately.
 
 #### 2.2 Configuring data models via GitHub (old)
 

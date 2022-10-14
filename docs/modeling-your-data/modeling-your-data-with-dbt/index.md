@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 To setup dbt, Snowplow open source users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.
 
-For Snowplow BDP customers, currently dbt is not supported in the console, but this is in development and we expect to be able to support dbt models in BDP soon. 
+For Snowplow BDP customers, scheduling dbt projects in the console is supported and you can read more about it [here](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md)
 
 # Snowplow dbt Packages
 

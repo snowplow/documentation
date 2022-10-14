@@ -53,7 +53,7 @@ Read below for more details on the steps to configure and run your dbt data mode
 You need to provide your prod connection profile for the warehouse you are connecting to in the `profiles.yml` file for **each datamodel**. Ensure that your profile and target are set to `prod`. See [the dbt adapters docs](https://docs.getdbt.com/docs/supported-data-platforms#verified-adapters) for more specific configuration information for each database.
 
 <Tabs groupId="dbt-packages">
-<TabItem value="redshift" label="redshift" default>
+<TabItem value="redshift" label="Redshift" default>
 
 See [dbt connection setup](https://docs.getdbt.com/reference/warehouse-setups/redshift-setup) for more information.
 
@@ -100,7 +100,6 @@ profile_name:
 
 See [dbt connection setup](https://docs.getdbt.com/reference/warehouse-setups/bigquery-setup) for more information.
 
-#TODO Work out what the actual variable is
 
 ```yaml
 profile_name:
@@ -111,7 +110,7 @@ profile_name:
       project: [GCP project id]
       dataset: [the name of your dbt dataset] # You can also use "schema" here
       threads: [1 or more]
-      keyfile: {{ env_var('BIGQUERY_DATAMODELING_PASSWORD') }}" 
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}" 
   target: prod
 ```
 
@@ -119,8 +118,6 @@ profile_name:
 <TabItem value="databricks" label="Databricks">
 
 See [dbt connection setup](https://docs.getdbt.com/reference/warehouse-setups/databricks-setup) for more information.
-
-#TODO
 
 ```yaml
 profile_name:
@@ -131,7 +128,7 @@ profile_name:
       schema: [schema name]
       host: [yourorg.databrickshost.com]
       http_path: [/sql/your/http/path]
-      token: "{{ env_var('DATABRICKS_DATAMODELING_PASSWORD') }}" # Personal Access Token (PAT)
+      token: "{{ env_var('DATABRICKS_DATAMODELING_TOKEN') }}" # Personal Access Token (PAT)
       threads: [1 or more]  # optional, default 1
   target: prod
 ```
@@ -160,9 +157,9 @@ In the second step, you can then add the schedule:
 
 Please note that the cron schedule is in UTC.
 
-:::warn
+:::caution
 
-dbt data models run on Snowplow BDP do not have a lock mechanism like [sql-runner](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/sql-runner/using-sql-runner/) does. You should write your dbt models in such a way that if they fail part way through they can be re-run without issue. All Snowplow models are written in this way and if you write your models following the [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/) documentation you can take advantage of this.
+You should write your dbt models in such a way that if they fail part way through they can be re-run without issue. All Snowplow models are written in this way and if you write your models following the [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/) documentation you can take advantage of this.
 
 :::
 

@@ -4,7 +4,7 @@ date: "2021-05-04"
 sidebar_position: 300
 ---
 
-Please note this documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for running data models via Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/using-sql-runner/index.md#21_Configuring_data_models_via_the_data_modeling_UI_new).
+Please note this documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for running data models via Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/sql-runner/using-sql-runner/index.md#21-configuring-data-models-via-the-data-modeling-ui-new).
 
 ### Receiving alerts
 

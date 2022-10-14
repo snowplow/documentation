@@ -1,5 +1,5 @@
 ---
-title: "Running sql-runner data models via Snowplow BDP"
+title: "sql-runner"
 date: "2022-10-14"
 sidebar_position: 20
 ---

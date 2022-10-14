@@ -1,5 +1,5 @@
 ---
-title: "Running dbt data models via Snowplow BDP"
+title: "dbt"
 date: "2022-10-14"
 sidebar_position: 10
 ---

@@ -172,7 +172,7 @@ Once you are happy with the configuration, you can create the model. The model w
 
 ![](images/Screenshot-2021-11-15-at-20.25.53.png)
 
-Please make sure all your dbt project files are merged to the default branch in GitHub before enabling the model. Note that this tooling does not run a "sync and deploy" process. Any changes merged to the default branch are available immediately.
+Please make sure all your dbt project files are merged to the default branch in GitHub before enabling the model. Any changes merged to the default branch are available immediately.
 
 ### 3. Monitor your model in the Snowplow BDP Console
 

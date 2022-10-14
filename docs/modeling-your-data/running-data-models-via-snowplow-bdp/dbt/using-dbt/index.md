@@ -167,7 +167,6 @@ In the third and last step you can configure the models and variables your `dbt 
 
 ![](images/data-model-create-step-3.png)
 
-
 Once you are happy with the configuration, you can create the model. The model will be disabled until you enable it:
 
 ![](images/Screenshot-2021-11-15-at-20.25.53.png)

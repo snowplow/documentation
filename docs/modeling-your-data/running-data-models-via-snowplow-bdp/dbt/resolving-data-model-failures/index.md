@@ -26,10 +26,12 @@ The 'Error Output' will show you the error logs from the `dbt run` call. These l
 
 ### Understanding and resolving issues
 
-An error output message such as a 'connection refused' related message, or for example an `EOF` error is typically down to some external database process, or a network connection error. These errors do not need to be resolved, however you might still need to resume the model (more details on this in the next section).
+An error output message such as a 'connection refused' related message, or for example an `EOF` error is typically down to some external database process, or a network connection error. These errors often do not need any interaction to be resolved.
 
-If the error output shows a dbt call with a model ERROR, you will need to identify the issue in your model files and push the changes to the default branch in github. For help debugging dbt errors please see the [dbt docs](https://docs.getdbt.com/guides/legacy/debugging-errors) and ensure your models run correctly locally before pushing changes.
+If the error output shows a dbt call with a model ERROR, you will need to identify the issue in your model files and push the changes to the default branch in Github. For help debugging dbt errors please see the [dbt docs](https://docs.getdbt.com/guides/legacy/debugging-errors) and ensure your models run correctly locally before pushing changes.
 
-### Resuming data models
+:::note
 
-Models are automatically retried on your schedule regardless of the last run outcome. 
+Models are automatically retried on your schedule regardless of the last run outcome; if an issue is identified it is recommended to disable your model in the UI while you work on a fix. 
+
+:::

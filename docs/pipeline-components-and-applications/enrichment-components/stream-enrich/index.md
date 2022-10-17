@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 :::note
 
-`stream-enrich-kinesis` will soon be deprecated in favor of [enrich-kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md). We recommend switching when you have the opportunity.
+`stream-enrich-kinesis` and `stream-enrich-kafka` will soon be deprecated in favor of [enrich-kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md) and [enrich-kafka](/docs/pipeline-components-and-applications/enrichment-components/enrich-kafka/index.md), respectively. We recommend switching when you have the opportunity.
 
 :::
 

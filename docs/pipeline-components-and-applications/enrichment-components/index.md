@@ -30,7 +30,7 @@ Standalone JVM application that reads collector payloads from a Kafka topic and 
 
 :::caution
 
-In near future, this app will get deprecated in favor of a new `enrich-kafka`.
+In the near future, this app will get deprecated in favor of `enrich-kafka`.
 
 :::
 
@@ -40,7 +40,7 @@ Standalone JVM application that reads collector payloads from a Kinesis stream a
 
 :::caution
 
-In near future, this app will get deprecated in favor of `enrich-kinesis`.
+In the near future, this app will get deprecated in favor of `enrich-kinesis`.
 
 :::
 

@@ -139,6 +139,29 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.pii.recordLimit` | Same as `output.good.recordLimit` for pii events. |
 | `output.pii.customEndpoint` | Same as `output.good.customEndpoint` for pii events. |
 
+## enrich-kafka
+
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kafka.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kafka.extended.hocon).
+
+| parameter | description |
+|-|-|
+| `input.topicName` | Required. Name of the Kafka topic to read collector payloads from. |
+| `input.bootstrapServers` | Required. A list of `host:port` pairs to use for establishing the initial connection to the Kafka cluster |
+| `input.consumerConf` | Optional. Kafka consumer configuration. See [the docs](https://kafka.apache.org/documentation/#consumerconfigs) for all properties. |
+| `output.good.topicName` | Required. Name of the Kafka topic to write to |
+| `output.good.bootstrapServers` | Required. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
+| `output.good.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
+| `output.good.partitionKey` | Optional. Enriched event field to use as Kafka partition key |
+| `output.good.headers` | Optional. Enriched event fields to add as Kafka record headers |
+| `output.pii.topicName` | Optional. Name of the Kafka topic to write to |
+| `output.pii.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
+| `output.pii.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
+| `output.pii.partitionKey` | Optional. Enriched event field to use as Kafka partition key |
+| `output.pii.headers` | Optional. Enriched event fields to add as Kafka record headers |
+| `output.bad.topicName` | Optional. Name of the Kafka topic to write to |
+| `output.bad.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
+| `output.bad.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
+
 ## enrich-rabbitmq-experimental
 
 A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.rabbitmq.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.rabbitmq.extended.hocon).

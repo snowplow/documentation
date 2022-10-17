@@ -1,7 +1,7 @@
 ---
-title: "🧪 Enrich RabbitMQ (cloud agnostic)"
-date: "2020-10-22"
-sidebar_position: 40
+title: "Enrich Kafka (cloud agnostic)"
+date: "2022-10-03"
+sidebar_position: 30
 ---
 
 ```mdx-code-block
@@ -9,14 +9,8 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-:::caution
-
-This asset is experimental. It might get dropped in the future depending on the results of our experiments.
-
-:::
-
-`enrich-rabbitmq` is a standalone JVM application that reads from and writes to RabbitMQ.
-It can be run from anywhere, as long as it can communicate with RabbitMQ cluster.
+`enrich-kafka` is a standalone JVM application that reads from and writes to Kafka.
+It can be run from anywhere, as long as it can communicate with your Kafka cluster.
 
 It is published on Docker Hub and can be run with the following command:
 
@@ -24,7 +18,7 @@ It is published on Docker Hub and can be run with the following command:
 `docker run \\
   -it --rm \\
   -v $PWD:/snowplow \\
-  snowplow/snowplow-enrich-rabbitmq-experimental:${versions.enrich} \\
+  snowplow/snowplow-enrich-kafka:${versions.enrich} \\
   --enrichments /snowplow/enrichments \\
   --iglu-config /snowplow/resolver.json \\
   --config /snowplow/config.hocon
@@ -40,11 +34,10 @@ Above assumes that you have following directory structure:
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
 <CodeBlock language="bash">{
-`java -jar snowplow-enrich-rabbitmq-${versions.enrich}.jar \\
+`java -jar snowplow-enrich-kafka-${versions.enrich}.jar \\
   --enrichments /snowplow/enrichments \\
   --iglu-config /snowplow/resolver.json \\
   --config /snowplow/config.hocon
 `}</CodeBlock>
 
 Configuration guide can be found on [this page](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/pipeline-components-and-applications/enrichment-components/monitoring/index.md).
-

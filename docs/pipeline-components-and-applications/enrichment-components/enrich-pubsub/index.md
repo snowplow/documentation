@@ -1,7 +1,7 @@
 ---
 title: "Enrich Pubsub (GCP)"
 date: "2020-10-22"
-sidebar_position: 10
+sidebar_position: 20
 ---
 
 ```mdx-code-block

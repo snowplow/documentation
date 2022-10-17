@@ -8,7 +8,7 @@ sidebar_position: 20
 
 To set up SQL Runner, Snowplow open source users can start from the [User guide](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md#user-guide) .
 
-For Snowplow BDP customers, SQL Runner is already setup as part of your pipeline, so you can [get started](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/using-sql-runner/index.md) with configuring and deploying your SQL data models immediately.
+For Snowplow BDP customers, SQL Runner is already setup as part of your pipeline, so you can [get started](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/sql-runner/using-sql-runner/index.md) with configuring and deploying your SQL data models immediately.
 
 A SQL Runner data model consists of:
 

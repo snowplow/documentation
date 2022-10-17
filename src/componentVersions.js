@@ -4,7 +4,7 @@ export const versions = {
   flutterTracker: '0.2.0',
   rdbLoader: '4.3.0',
   collector: '2.8.0',
-  enrich: '3.4.1',
+  enrich: '3.5.0',
   bqLoader: '1.5.1',
   sqs2kinesis: '1.0.4',
   igluServer: '0.8.6',

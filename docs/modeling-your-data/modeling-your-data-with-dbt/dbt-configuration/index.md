@@ -116,6 +116,21 @@ models:
       +schema: my_scratch_schema
 ```
 </TabItem>
+<TabItem value="normalize" label="Snowplow Normalize">
+
+```yml
+# dbt_project.yml
+...
+models:
+  snowplow_normalize:
+    base:
+      manifest:
+        +schema: my_manifest_schema
+      scratch:
+        +schema: my_scratch_schema
+        +tags: my_scratch_schema
+```
+</TabItem>
 </Tabs>
 
 ------
@@ -207,6 +222,20 @@ In addition the mobile package has some contexts that can be enabled depending o
 | `snowplow__enable_youtube`              | `false`          | Set to `true` if the HTML5 media element context schema is enabled. This variable is used to handle syntax depending on whether the context fields are available in the database or not.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `snowplow__enable_whatwg_media`         | `false`          | Set to `true` if the HTML5 video element context schema is enabled. This variable is used to handle syntax depending on whether the context fields are available in the database or not.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `snowplow__enable_whatwg_video`         | `false`          | Set to `true` if the HTML5 video element context schema is enabled. This variable is used to handle syntax depending on whether the context fields are available in the database or not.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+
+</TabItem>
+
+<TabItem value="normalize" label="Snowplow Normalize">
+
+| Variable Name                           | Default          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `snowplow__lookback_window_hours`       | 6                                       | The number of hours to look before the latest event processed - to account for late arriving data, which comes out of order.                                                                                                                                                                                                                                                                                                         |
+| `snowplow__backfill_limit_days`         | 30                                      | The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the back-filling section for more details.                                                                                                                                                                                                                                                                                 |
+| `snowplow__upsert_lookback_days`        | 30                                      | Number of day to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the incremental materialization section for more details.                                                                                                                                         |
+| `snowplow__query_tag`                   | `snowplow_dbt`                          | This sets the value of the query_tag for Snowflake database use. This is used internally for metric gathering in Snowflake and its value should not be changed.                                                                                                                                                                                                                                                                      |
+| `snowplow__incremental_materialization` | `snowplow_incremental`                  | The materialization used for all incremental models within the package. `snowplow_incremental` builds upon the default incremental materialization provided by dbt, improving performance when modeling event data. If however you prefer to use the native dbt incremental materialization, or any other, then adjust accordingly.                                                                                                  |
+| `snowplow__allow_refresh`               | `false`                                 | Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the 'Manifest Tables' section for more details.                                                                                                                                                                                                  |
+| `snowplow__dev_target_name`             | `dev`                                   | The [target name](https://docs.getdbt.com/reference/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the 'Manifest Tables' section for more details.                                                                                                                                                                                                                                        |
 
 </TabItem>
 </Tabs>

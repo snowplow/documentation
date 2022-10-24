@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`
+On this page, `<package>` can be one of: `web`, `mobile`, `normalize`
 
 :::
 
@@ -34,7 +34,7 @@ Given the large nature of event tables, Step 3 can be an expensive operation. To
 Most packages use centralized manifest tables, `snowplow_<package>_incremental_manifest`, to record what events have already been processed and by which model/node. This allows for easy identification of what events to process in subsequent runs of the package. The manifest table is updated as part of an `on-run-end` hook, which calls the `snowplow_incremental_post_hook()` macro.
 
 
-Example from the `snowplow_web_incremental_manifest`:
+Example from the from the `snowplow_web_incremental_manifest`:
 
 | model                            | last_success |
 |----------------------------------|--------------|

@@ -16,6 +16,21 @@ This plugin will allow the tracking of any HTML5 `<video>` or `<audio>` elem
 
 - `npm install @snowplow/browser-plugin-media-tracking`
 - `yarn add @snowplow/browser-plugin-media-tracking`
+- `pnpm add @snowplow/browser-plugin-media-tracking`
+
+## Initialization
+
+```javascript
+import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { MediaTrackingPlugin, enableMediaTracking } from '@snowplow/browser-plugin-media-tracking';
+
+newTracker('sp1', '{{collector_url}}', { 
+   appId: 'my-app-id', 
+   plugins: [ MediaTrackingPlugin() ],
+});
+
+enableMediaTracking(/* options */);
+```
 
 ## Quick Start
 

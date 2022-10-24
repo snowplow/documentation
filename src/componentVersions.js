@@ -11,5 +11,5 @@ export const versions = {
   s3Loader: '2.2.3',
   s3Loader22x: '2.2.3',
   postgresLoader: '0.3.3',
-  pythonTracker: '0.11.0'
+  pythonTracker: '0.11.0',
 }

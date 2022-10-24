@@ -274,7 +274,9 @@ code {
   vertical-align: baseline;
 }
 
-input[type=text], input[type=email], textarea {
+input[type='text'],
+input[type='email'],
+textarea {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: 14px;
 }

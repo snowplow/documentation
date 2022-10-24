@@ -10,6 +10,21 @@ This plugin will allow the tracking of an embedded YouTube IFrame.
 
 - `npm install @snowplow/browser-plugin-youtube-tracking`
 - `yarn add @snowplow/browser-plugin-youtube-tracking`
+- `pnpm add @snowplow/browser-plugin-youtube-tracking`
+
+## Initialization
+
+```javascript
+import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { YouTubeTrackingPlugin, enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
+
+newTracker('sp1', '{{collector_url}}', { 
+   appId: 'my-app-id', 
+   plugins: [ YouTubeTrackingPlugin() ],
+});
+
+enableYouTubeTracking(/* options */);
+```
 
 ## Quick Start
 

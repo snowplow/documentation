@@ -185,7 +185,13 @@ Using this table, you can additionally specify the Property Key from the Client 
 
 ## Advanced Event Settings
 
-Finally, this section offers an additional configuration option:
+![advanced event settings](images/advanced_event_settings.png)
+
+This section offers additional configuration options on the Braze event object:
+
+### Event Name Override
+
+You can use this option to override the name of the Braze event object or leave it blank to inherit from common event properties, which is the default. Please note that the `name` property of the [Braze event object](https://www.braze.com/docs/api/objects_filters/event_object/#event-object), that this option populates, is a required property according to Braze API.
 
 ### Event time property
 

@@ -136,6 +136,8 @@ async function createConfig() {
             'scala',
             'swift',
             'brightscript',
+            'rust',
+            'toml',
           ],
         },
         algolia: {

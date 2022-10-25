@@ -12,8 +12,6 @@ Set this to the API of your Amplitude HTTP API Data Source.
 
 ### Use Amplitude's EU servers
 
-_(Available since v0.2.0)_
-
 Enable this option to send the data to Amplitude's EU Residency Server [endpoint](https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/#endpoints), instead of the default standard server endpoint.
 
 ## Snowplow Event Mapping Options
@@ -117,8 +115,6 @@ Enabling this ensures user_data properties from the [Common Event](https://deve
 
 ##### Map Snowplow mkt fields (standard UTM parameters) to user properties
 
-_(Available since v0.2.0)_
-
 Enabling this option automatically maps all the marketing (`mkt_` prefixed) fields of the Snowplow event to the standard UTM parameters in Amplitude's user properties.
 
 ##### Additional User Property Mapping Rules
@@ -129,7 +125,7 @@ Specify the Property Key from the Client Event, and then the key you could like 
 
 In this section you can find advanced configuration parameters.
 
-![](images/04-gtm-ss-amplitude.png)
+![advanced event settings](images/04-gtm-ss-amplitude.png)
 
 ### Forward User IP address
 
@@ -141,8 +137,6 @@ If there is no Platform property on the Client event, this is the value which th
 
 ### Amplitude time setting
 
-_(Available since v0.2.0)_
-
 This option allows you to decide whether the event time of the Amplitude event will be set. The available options are:
 
 - `Do not set` (default): this means the event time will be set automatically by Amplitude.
@@ -151,9 +145,19 @@ This option allows you to decide whether the event time of the Amplitude event w
 
 ![](images/07-gtm-ss-amplitude.png)
 
-## Logs Settings
+### Device Identifier
 
-_(Available since v0.2.0)_
+#### Inherit Amplitude `device_id` from common event `client_id`
+
+By default the Amplitude tag sets the `device_id` property of the Amplitude event from the `client_id` property of the common event. Unchecking this tick box allows you to override the value for `device_id` in Amplitude event payload.
+
+### User Identifier
+
+#### Inherit Amplitude `user_id` from common event `user_id`
+
+By default the Amplitude tag sets the `user_id` property of the Amplitude event from the `user_id` property of the common event. Unchecking this tick box allows you to override the value for `user_id` in Amplitude event payload.
+
+## Logs Settings
 
 Through the Logs Settings you can control the logging behaviour of the Amplitude Tag. The available options are:
 

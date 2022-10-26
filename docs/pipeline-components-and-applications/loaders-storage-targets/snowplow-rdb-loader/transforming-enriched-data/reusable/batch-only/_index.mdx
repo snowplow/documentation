@@ -18,5 +18,19 @@
     <td><code>monitoring.sentry.dsn</code></td>
     <td>Optional. For tracking runtime exceptions.</td>
 </tr>
-
-
+<tr>
+    <td><code>deduplication.*</code></td>
+    <td>Configure the way in-batch deduplication is performed</td>
+</tr>
+<tr>
+    <td><code>deduplication.synthetic.type</code></td>
+    <td>Optional. The default is <code>BROADCAST</code>. Can be <code>NONE</code> (disable), <code>BROADCAST</code> (default) and <code>JOIN</code> (different low-level implementations).</td>
+</tr>
+<tr>
+    <td><code>deduplication.synthetic.cardinality</code></td>
+    <td>Optional. The default is 1. Do not deduplicate pairs with less-or-equal cardinality.</td>
+</tr>
+<tr>
+    <td><code>deduplication.natural</code></td>
+    <td>Optional. The default is 'true'. Enable or disable natural deduplication. Available since <code>5.1.0</code></td>
+</tr>

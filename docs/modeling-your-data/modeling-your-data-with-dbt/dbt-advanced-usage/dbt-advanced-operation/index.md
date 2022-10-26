@@ -69,6 +69,13 @@ All the incremental models in the Snowplow packages have recommended cluster key
 
 ## Overriding Macros
 
-Both the cluster key macros (see above) and the `allow_refresh()` macro can be overridden. These are both [dispatched macros](https://docs.getdbt.com/reference/dbt-jinja-functions/dispatch) and can be overridden by creating your own version of the macro and setting a project level dispatch config. More details can be found in [dbt's docs](https://docs.getdbt.com/reference/dbt-jinja-functions/dispatch#overriding-package-macros).
+The cluster key macros (see above), the `allow_refresh()` and the `filter_bots` macro can be overridden. These are all [dispatched macros](https://docs.getdbt.com/reference/dbt-jinja-functions/dispatch) and can be overridden by creating your own version of the macro and setting a project level dispatch config. More details can be found in [dbt's docs](https://docs.getdbt.com/reference/dbt-jinja-functions/dispatch#overriding-package-macros)
+
+``` yaml
+# Your_dbt_project/macros/filter_bots.sql
+{% macro default__filter_bots() %}
+and ev.useragent not similar to '%(YOUR_CUSTOM_PATTERN|bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)%'
+{% endmacro %}
+```
 
 

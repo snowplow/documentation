@@ -2,6 +2,7 @@
 title: "Tracking catalog"
 date: "2022-10-26"
 sidebar_position: 0
+description: "The Tracking Catalog will provide your team with easy and self serve access to the events you’re tracking, creating greater transparency and autonomy. This can help improve the data culture in your organisation and foster a more collaborative approach to create Data Products."
 ---
 
 :::note
@@ -62,7 +63,7 @@ For both Events and Entities, the Tracking Catalog also displays a log of versio
 
 Often, data consumers only have high level information to guide their data discovery process, and are not aware of the exact name of the Data Structure used for tracking certain data.
 
-When you search through the Tracking Catalog, it will look for matches in the Data Structure names, descriptions and fields names. In addition, for properties with a fixed set of allowed values (e.g. a `stage` property with values `checkout` and `payment`) Tracking Catalog will look for matches in the values.
+When you search through the Tracking Catalog, it will look for matches in the Data Structure names, descriptions and property names. In addition, for properties with a fixed set of allowed values (e.g. a `stage` property with values `checkout` and `payment`) Tracking Catalog will look for matches in the values.
 You can find the reason behind the match on the right.
 
 ![Screenshot of the BDP Console Tracking catalog page showing the results of executing a search](images/search.png)

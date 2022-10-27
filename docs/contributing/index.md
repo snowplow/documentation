@@ -1,7 +1,7 @@
 ---
 title: "Community & contributing"
 date: "2020-10-28"
-sidebar_position: 150
+sidebar_position: 140
 ---
 
 The Snowplow team works with the open source community to deliver Snowplow, the world's most powerful analytics platform. We are proud to be involved in developing, releasing and nurturing open source projects, helping to build and sustain communities (of analysts as well as coders) around them.

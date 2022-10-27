@@ -1,7 +1,7 @@
 ---
-title: "Data Discovery"
+title: "Data discovery"
 date: "2022-10-26"
-sidebar_position: 120
+sidebar_position: 111
 ---
 
 ```mdx-code-block

@@ -8,7 +8,8 @@ Dataflow Runner is a system for creating and running [AWS EMR](https://aws.amazo
 
 ### Installation
 
-Dataflow Runner binaries are available from the Github releases page.  
+- Platform native binaries are available from the GitHub releases [page](https://github.com/snowplow/dataflow-runner/releases).
+- Docker images are available at [DockerHub](https://hub.docker.com/r/snowplow/dataflow-runner) as of version `0.7.3`.
 
 ### Cluster Configuration
 

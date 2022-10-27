@@ -19,10 +19,10 @@ We know that in many cases, Data Analysts, Data Scientists and Product Managers 
 However, through the Tracking Catalog, all users can have a holistic view of all their tracking in an always up-to-date and easy to consume view.
 
 ### What can you achieve with the Tracking Catalog?
-* Check which events and entities you are tracking;
-* See what entities are tracked with each event;
-* See what events a certain entity is tracked with;
-* See what properties are tracked for each event and entity;
+* Check which events and entities you are tracking.
+* See what entities are tracked with each event.
+* See what events a certain entity is tracked with.
+* See what properties are tracked for each event and entity.
 * Discover if you are tracking a particular event through searching by name, property or value.
 
 * * *

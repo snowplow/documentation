@@ -29,10 +29,10 @@ The only required attributes of the `Snowplow.createTracker` method are `namespa
 | `trackerConfig`  | `TrackerConfiguration?` | Configuration of the tracker and the core tracker properties.                        |
 | `gdprConfig`     | `GdprConfiguration?`    | Determines the GDPR context that will be attached to all events sent by the tracker. |
 | `subjectConfig`  | `SubjectConfiguration?` | Subject information about tracked user and device that is added to events.           |
+| `emitterConfig` | `EmitterConfiguration?` | Configuration for how the events are sent.           |
 
 :::note
 The ability to set customPostPath was added in v0.2.0. Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
-
 :::
 
 ## Configuration of tracker properties: `TrackerConfiguration`
@@ -44,15 +44,32 @@ The ability to set customPostPath was added in v0.2.0. Setting a custom POST pat
 | `appId`              | `String?`         | Identifier of the app.                                                                                | ✔       | ✔   | ✔   | null on Web, bundle identifier on iOS/Android |
 | `devicePlatform`     | `DevicePlatform?` | The device platform the tracker runs on. Available options are provided by the `DevicePlatform` enum. | ✔       | ✔   | ✔   | "web" on Web, "mob" on iOS/Android            |
 | `base64Encoding`     | `bool?`           | Indicates whether payload JSON data should be base64 encoded.                                         | ✔       | ✔   | ✔   | true                                          |
-| `platformContext`    | `bool?`           | Indicates whether platform context should be attached to tracked events.                              | ✔       | ✔   |     | true                                          |
-| `geoLocationContext` | `bool?`           | Indicates whether geo-location context should be attached to tracked events.                          | ✔       | ✔   | ✔   | false                                         |
-| `sessionContext`     | `bool?`           | Indicates whether session context should be attached to tracked events.                               | ✔       | ✔   | ✔   | true                                          |
-| `webPageContext`     | `bool?`           | Indicates whether context about current web page should be attached to tracked events.                |         |     | ✔   | true                                          |
-| `webActivityTracking` | WebActivityTracking?\` | Enables activity tracking using page views and pings on the Web. |  |  | ✔ | true |
+| `platformContext` | `bool?` | Indicates whether [platform](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-2) (mobile) context should be attached to tracked events. | ✔ | ✔ | | true |
+| `geoLocationContext` | `bool?` | Indicates whether [geo-location](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) context should be attached to tracked events. | ✔ | ✔ | ✔ | false |
+| `sessionContext` | `bool?` | Indicates whether [session](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context should be attached to tracked events. | ✔ | ✔ | ✔ | true |
+| `webPageContext` | `bool?` | Indicates whether context about current [web page](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) should be attached to tracked events. | | | ✔ | true |
+| `screenContext` | `bool?` | Indicates whether [screen](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) context should be attached to tracked events. | ✔ | ✔ | | true |
+| `applicationContext` | `bool?` | Indicates whether [application](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) context should be attached to tracked events. | ✔ | ✔ | | true |
+| `webActivityTracking` | `WebActivityTracking?` | Enables activity tracking using page views and pings on the Web. |  |  | ✔ | true |
+| `userAnonymisation` | `bool?` | Anonymises certain user identifiers. | ✔ | ✔ | ✔ | false |
+
+:::note
+The ability to enable `userAnonymisation`, or the screen and application context entities, was added in v0.3.0.
+:::
 
 The optional `WebActivityTracking` property configures page tracking on Web. Initializing the configuration will inform `SnowplowObserver` observers (see section on auto-tracking in "Tracking events") to auto track `PageViewEvent` events instead of `ScreenView` events on navigation changes. Further, setting the `minimumVisitLength` and `heartbeatDelay` properties of the `WebActivityTracking` instance will enable activity tracking using 'page ping' events on Web.
 
 Activity tracking monitors whether a user continues to engage with a page over time, and record how he / she digests content on the page over time. That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll etc.) If any of these things occur in a set period of time (`minimumVisitLength` seconds from page load and every `heartbeatDelay` seconds after that), a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different tab in his / her browser), no page ping fires.
+
+See [this page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/anonymous-tracking/index.md) for information about anonymous tracking.
+
+## Configuration of emitter properties: `EmitterConfiguration`
+
+This Configuration class was added in v0.3.0. Currently, the only property is `serverAnonymisation`.
+
+| Attribute             | Type    | Description                                        | Android | iOS | Web | Default |
+|-----------------------|---------|----------------------------------------------------|---------|-----|-----|---------|
+| `serverAnonymisation` | `bool?` | Prevents tracking of server-side user identifiers. | ✔       | ✔   | ✔   | false   |
 
 ## Configuration of subject information: `SubjectConfiguration`
 

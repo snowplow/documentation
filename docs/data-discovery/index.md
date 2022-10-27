@@ -1,5 +1,5 @@
 ---
-title: "Data discovery"
+title: "Discovering data"
 date: "2022-10-26"
 sidebar_position: 111
 ---

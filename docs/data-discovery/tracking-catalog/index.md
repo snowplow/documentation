@@ -17,9 +17,16 @@ We know that in many cases, Data Analysts, Data Scientists and Product Managers 
 
 However, through the Tracking Catalog, all users can have a holistic view of all their tracking in an always up-to-date and easy to consume view.
 
+### What can you achieve with the Tracking Catalog?
+* Check which events and entities you are tracking;
+* See what entities are tracked with each event;
+* See what events a certain entity is tracked with;
+* See what properties are tracked for each event and entity;
+* Discover if you are tracking a particular event through searching by name, property or value.
+
 * * *
 
-## Browsing the Tracking Catalog
+## Understanding what data is tracked
 
 Once logged in Snowplow Console, you will see a link on the left hand side navigation, called Tracking Catalog. 
 
@@ -43,7 +50,7 @@ It also helps data consumers to make sense of how data is structured in the data
 
 ![Screenshot of the BDP Console showing the event entities diagram](images/event-map.png)
 
-Similarly, you can navigate to an Entity by selecting one from the map or the list view. This shows you how it’s structured and what Events are tracking it.
+Similarly, you can navigate to an Entity by selecting one from the map or the list view. This shows you how it’s structured and what Events include it.
 
 For both Events and Entities, the Tracking Catalog also displays a log of version changes to help users understand how the data is evolving through time.
 
@@ -54,10 +61,9 @@ For both Events and Entities, the Tracking Catalog also displays a log of versio
 ## Discovery through the Tracking Catalog
 
 Often, data consumers only have high level information to guide their data discovery process, and are not aware of the exact name of the Data Structure used for tracking certain data.
-This is why the Tracking Catalog search function will map results of a search to various potential properties. 
 
-When a search is carried out, the Tracking Catalog will try and find results matching the searched text in both the Data Structure name, its description, its properties's names and potential enumeration of values.
-If a match is found, it will highlight the reason behind the match.
+When you search through the Tracking Catalog, it will look for matches in the Data Structure names, descriptions and fields names. In addition, for properties with a fixed set of allowed values (e.g. a `stage` property with values `checkout` and `payment`) Tracking Catalog will look for matches in the values.
+You can find the reason behind the match on the right.
 
 ![Screenshot of the BDP Console Tracking catalog page showing the results of executing a search](images/search.png)
 

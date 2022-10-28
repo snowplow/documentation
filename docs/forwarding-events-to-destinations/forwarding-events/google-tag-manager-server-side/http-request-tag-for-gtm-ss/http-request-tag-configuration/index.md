@@ -68,6 +68,45 @@ This option allows you to wrap the resulting object of the request body inside a
 
 This option allows you to relay the full client event into the body of the request. Enabling this option, consequently disables both the Snowplow and the Additional Event Mapping Options, which allow to cherry-pick event properties and customize the request body.
 
+### Use alternative separator to dot notation
+
+Enable this option to use an alternative separator to dot notation when specifying possibly nested object paths. This setting **applies everywhere dot notation can be used** and it is useful when you want to allow dots or special characters in key names. Enabling this option reveals the text-box where you can specify the character you wish to use to denote nested paths.
+
+#### Example
+
+Let's imagine this property name: `user_data.address.city`
+
+This is by default being interpreted as a nested path, where the dot character denotes a change in nesting level:
+
+```json
+  "user_data": {
+      "address": {
+          "city": "Foobar City"
+      }
+  }
+```
+
+If you wish it to denote a different nesting path where a key name may include a dot, for example:
+
+```json
+  "user_data.address": {
+      "city": "Foobar City"
+  }
+```
+
+then you can use this setting to set a different separator for nesting. As an example, if you set:
+
+![first alternative separator example](images/first_alt_separator_example.png)
+
+then the tilde character (`~`) denotes nesting everywhere "dot notation" can be used. You can now denote the example path above as `user_data.address~city`.
+
+It is also possible to use more than one character as alternative separator, for example:
+
+![second alternative separator example](images/second_alt_separator_example.png)
+
+Now, you can denote nesting by using 2 dots, and the example path above can be denoted as `user_data.address..city`.
+
+
 ## Snowplow Event Mapping Options
 
 This section includes the mapping rules that concern a Snowplow event as claimed by the [Snowplow Client](/docs/forwarding-events-to-destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md):
@@ -231,6 +270,20 @@ Using this table, you can additionally specify the Property Key from the Client 
 
 This section allows you to add custom properties in the request body that are "external" to the event, in other words it provides the ability to add custom constant or variable request data.
 
+## Post-processing
+
+![post processing](images/post_processing.png)
+
+This section provides a way to easily configure some basic post-processing of values in the constructed HTTP request payload. The order of the subsections denotes the post-processing order. For more advanced use cases you can still use the **Additional Request Data** section above and provide values through GTM server-side variables.
+
+### JSON Stringify
+
+In this table you can specify the property names or paths of the HTTP request payload whose values you want to transform into JSON strings. Dot notation can also be used to denote nested paths.
+
+### Encode base64url
+
+In this table you can specify the property names or paths of the HTTP request payload whose values you want to encode to base64url. Encoding is only applied to string values. Dot notation can also be used to denote nested paths.
+
 ## Request Headers
 
 Similarly to the above, this section allows you to add custom headers to the HTTP request towards your custom endpoint.
@@ -243,8 +296,6 @@ Finally, this section offers two additional configuration options:
 - Changing the default request timeout (5000 seconds)
 
 ## Logs Settings
-
-_(Available since v0.2.0)_
 
 Through the Logs Settings you can control the logging behaviour of the HTTP Request Tag. The available options are:
 

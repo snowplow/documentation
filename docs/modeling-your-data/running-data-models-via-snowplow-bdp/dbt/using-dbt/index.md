@@ -159,7 +159,7 @@ Please note that the cron schedule is in UTC.
 
 :::caution
 
-You should write your dbt models in such a way that if they fail part way through they can be re-run without issue. All Snowplow models are written in this way and if you write your models following the [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/) documentation you can take advantage of this.
+You should write your dbt models in such a way that if they fail part way through they can be re-run without issue. All Snowplow models are written in this way and if you write your models following the [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) documentation you can take advantage of this.
 
 :::
 

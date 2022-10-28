@@ -1,5 +1,6 @@
 # Sister websites
 /accelerators/web/* https://snowplow-axl-web.netlify.app/accelerators/web/:splat 200
+/accelerators/mobile/* https://snowplow-axl-mobile.netlify.app/accelerators/mobile/:splat 200
 /accelerators/hybrid/* https://snowplow-axl-hybrid.netlify.app/accelerators/hybrid/:splat 200
 /accelerators/template/* https://snowplow-axl-template.netlify.app/accelerators/template/:splat 200
 /accelerators/composable-cdp-with-predictive-ml-modeling/* https://snowplow-axl-cdp-ml-modeling.netlify.app/accelerators/composable-cdp-with-predictive-ml-modeling/:splat 200

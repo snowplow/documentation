@@ -15,7 +15,7 @@ import Cookies from 'js-cookie'
 import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
 import { reloadOnce } from './src/helpers/reloadOnce'
 
-const setupBrowserTracker = () => {
+const createTrackerConfig = (cookieName) => {
   const appId = DOCS_SITE_URLS.includes(window.location.hostname)
     ? 'docs2'
     : 'test'
@@ -23,9 +23,11 @@ const setupBrowserTracker = () => {
 
   const trackerConfig = {
     appId,
+    eventMethod: 'post',
     plugins: [LinkClickTrackingPlugin()],
     cookieDomain: `.${domain[1]}.${domain[0]}`,
-    cookieName: '_sp5_',
+    cookieName,
+    cookieSameSite: 'Lax',
     contexts: {
       webPage: true,
       performanceTiming: true,
@@ -41,8 +43,12 @@ const setupBrowserTracker = () => {
     }
   }
 
-  newTracker('snplow5', 'https://collector.snowplow.io', trackerConfig)
-  newTracker('biz1', 'https://c.snowplow.io', trackerConfig)
+  return trackerConfig;
+};
+
+const setupBrowserTracker = () => {
+  newTracker('snplow5', 'https://collector.snowplow.io', createTrackerConfig('_sp5_'))
+  newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig('_sp_biz1_'))
 
   enableLinkClickTracking()
   refreshLinkClickTracking()

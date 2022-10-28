@@ -14,4 +14,4 @@ Details for accessing this data are available in the Try Snowplow console. You w
 
 Like Snowplow BDP, Try Snowplow encourages you to connect your your BI or query tool of choice to access the database and query your data.
 
-You can either copy a sample query from the console tutorial, [check out the Recipes](/docs/try-snowplow/recipes/index.md) or start exploring your data with your own queries.
+You can either copy a sample query from the console tutorial, [check out the Recipes](/docs/recipes/index.md) or start exploring your data with your own queries.

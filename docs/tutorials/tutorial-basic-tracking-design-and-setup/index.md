@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: basic tracking design and setup"
+title: "Basic tracking design and setup"
 date: "2020-02-27"
 sidebar_position: 30
 ---
@@ -201,7 +201,7 @@ Let’s add descriptions to the properties, for example:
 ...
 ```
 
-## 2. Testing Your Schema
+## Testing Your Schema
 
 Now that you have written your schema and published to the development registry, the next step is to test it to ensure that it works the way you want.
 

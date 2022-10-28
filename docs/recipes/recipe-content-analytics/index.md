@@ -1,5 +1,6 @@
 ---
-title: "Tutorial: Content analytics"
+title: "Content analytics"
+description: "Get better insights into how your content is performing"
 date: "2020-10-12"
 sidebar_position: 30
 ---
@@ -22,11 +23,11 @@ For this purpose, you can add a content entity which will be sent every time the
 
 #### Designing the entity
 
-We have already created a custom `content` entity for you, and uploaded its data structure to [your Iglu server](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md).
+We have already created a custom `content` entity for you in [Iglu Central](http://iglucentral.com/).
 
 Snowplow uses self-describing JSON schemas to structure events and entities so that they can be validated in the pipeline and loaded into tidy tables in the warehouse. You can learn more about these data structures [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), and about why we take this approach [here](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/).
 
-While Try Snowplow only ships with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-data-structures/index.md) (and API).
+While Try Snowplow and BDP Cloud Preview only ship with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-data-structures/index.md) (and API). Custom events and entities will come soon to BDP Cloud.
 
 The `content` entity has the following fields:
 
@@ -47,7 +48,7 @@ to
 ```javascript
 window.snowplow('trackPageView', {
    "context": [{
-      "schema": "iglu:com.trysnowplow/content/jsonschema/1-0-1",
+      "schema": "iglu:io.snowplow.foundation/content/jsonschema/1-0-0",
       "data": {
          "name": "example_name",
          "id": "example_id",
@@ -66,7 +67,7 @@ If you are using Google Tag Manager, you can add the variables like so:
 ```javascript
 window.snowplow('trackPageView', {
    "context": [{
-      "schema": "iglu:com.trysnowplow/content/jsonschema/1-0-1",
+      "schema": "iglu:io.snowplow.foundation/content/jsonschema/1-0-0",
       "data": {
          "name": "{{example_name_variable}}",
          "id": "{{example_id_variable}}",
@@ -105,7 +106,7 @@ CREATE TABLE derived.content AS(
         FROM atomic.events AS ev
         INNER JOIN atomic.com_snowplowanalytics_snowplow_web_page_1 AS wp
             ON ev.event_id = wp.root_id AND ev.collector_tstamp = wp.root_tstamp
-        INNER JOIN atomic.com_trysnowplow_content_1 AS c
+        INNER JOIN atomic.io_snowplow_foundation_content_1 AS c
             ON ev.event_id = c.root_id AND ev.collector_tstamp = c.root_tstamp
         
         GROUP BY 1,2,3,4,5,ev.br_viewheight,ev.doc_height

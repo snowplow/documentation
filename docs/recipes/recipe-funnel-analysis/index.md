@@ -1,5 +1,6 @@
 ---
-title: "Tutorial: Funnel analysis"
+title: "Funnel analysis"
+description: "Identify where your users might be struggling or dropping off"
 date: "2021-01-05"
 sidebar_position: 20
 ---
@@ -18,11 +19,11 @@ You will then collect all funnel step interactions (whether they are page views 
 
 #### Designing the event
 
-We have already created the custom `funnel_interaction` event for you, and uploaded its data structure to [your Iglu server](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md).
+We have already created a custom `funnel_interaction` event for you in [Iglu Central](http://iglucentral.com/).
 
 Snowplow uses self-describing JSON schemas to structure events and entities so that they can be validated in the pipeline and loaded into tidy tables in the warehouse. You can learn more about these data structures [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), and about why we take this approach [here](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/).
 
-While Try Snowplow only ships with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-data-structures/index.md) (and API).
+While Try Snowplow and BDP Cloud Preview only ship with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-data-structures/index.md) (and API). Custom events and entities will come soon to BDP Cloud.
 
 The `funnel_interaction` event has the following fields:
 
@@ -37,7 +38,7 @@ Track the `funnel_interaction` event whenever a user completes a given funnel st
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
-      "schema": "iglu:com.trysnowplow/funnel_interaction/jsonschema/1-0-0",
+      "schema": "iglu:io.snowplow.foundation/funnel_interaction/jsonschema/1-0-0",
       "data": {
          "funnel_name": "example_funnel_name",
          "step_name": "example_step_name",
@@ -47,7 +48,7 @@ window.snowplow('trackSelfDescribingEvent', {
 });
 ```
 
-For example, on the [snowplowanalytics.com website](https://snowplowanalytics.com/), we might consider a home page view as step 1 , a `/get-started/` page view as step 2 and then the submission of the form as step 3. All three steps can be tracked has `funnel _interaction` events. However, the first two funnel steps are already tracked as page views, so we could also just track the form submission as a `funnel_interaction` event and then classify the other two steps in the modeling step below.
+For example, on the [snowplow.io website](https://snowplow.io/), we might consider a home page view as step 1 , a `/get-started/` page view as step 2 and then the submission of the form as step 3. All three steps can be tracked has `funnel _interaction` events. However, the first two funnel steps are already tracked as page views, so we could also just track the form submission as a `funnel_interaction` event and then classify the other two steps in the modeling step below.
 
 #### Via Google Tag Manager
 
@@ -56,7 +57,7 @@ If you are using Google Tag Manager, you can add the variables like so:
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
-      "schema": "iglu:com.trysnowplow/funnel_interaction/jsonschema/1-0-0",
+      "schema": "iglu:io.snowplow.foundation/funnel_interaction/jsonschema/1-0-0",
       "data": {
          "funnel_name": "{{example_funnel_name_variable}}",
          "step_name": "{{example_step_name_variable}}",
@@ -79,7 +80,7 @@ CREATE TABLE derived.funnel_step_definitions AS(
         step_name,
         step_position,
         NULL AS page_urlpath
-    FROM atomic.com_trysnowplow_funnel_interaction_1
+    FROM atomic.io_snowplow_foundation_funnel_interaction_1
     GROUP BY 1,2,3,4
 
 );
@@ -110,7 +111,7 @@ CREATE TABLE derived.funnel_interactions AS(
         fi.step_position
 
     FROM atomic.events AS ev
-    INNER JOIN atomic.com_trysnowplow_funnel_interaction_1 AS fi
+    INNER JOIN atomic.io_snowplow_foundation_funnel_interaction_1 AS fi
         ON ev.event_id = fi.root_id AND ev.collector_tstamp = fi.root_tstamp
     
     GROUP BY 1,2,3,4,5,6

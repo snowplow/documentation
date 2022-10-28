@@ -1,8 +1,15 @@
 ---
-title: "Tutorial: Understanding bad data"
+title: "Understanding bad data"
+description: "Learn how to access and understand any bad Snowplow data you might have collected"
 date: "2021-01-05"
 sidebar_position: 80
 ---
+
+:::note
+
+This recipe is currently specific to Try Snowplow.
+
+:::
 
 ## Introduction
 
@@ -40,7 +47,7 @@ If you do not have any bad data yet, you can send some on purpose to see what it
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
-      "schema": "iglu:com.trysnowplow/example_event/jsonschema/1-0-0",
+      "schema": "iglu:io.snowplow.foundation/example_event/jsonschema/1-0-0",
       "data": {
          "example_field": "This is a bad data test!"
       }
@@ -48,12 +55,12 @@ window.snowplow('trackSelfDescribingEvent', {
  });
 ```
 
-Alternatively, if you have already implemented one of the recipes that involve implementing a custom event or entity, you could try updating the tracking code to purposefully cause bad data. For example, if you have instrumented the [marketing attribution recipe](/docs/try-snowplow/recipes/recipe-marketing-attribution/index.md), you could change the conversion event, either by sending an incorrect type for one property:
+Alternatively, if you have already implemented one of the recipes that involve implementing a custom event or entity, you could try updating the tracking code to purposefully cause bad data. For example, if you have instrumented the [marketing attribution recipe](/docs/recipes/recipe-marketing-attribution/index.md), you could change the conversion event, either by sending an incorrect type for one property:
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
-      "schema": "iglu:com.trysnowplow/conversion/jsonschema/1-0-0",
+      "schema": "iglu:io.snowplow.foundation/conversion/jsonschema/1-0-0",
       "data": {
          "name": "email-signup",
          "value": "10" // this is meant to be an integer
@@ -67,7 +74,7 @@ Or by making a property larger than allowed:
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
    "event": {
-      "schema": "iglu:com.trysnowplow/conversion/jsonschema/1-0-0",
+      "schema": "iglu:io.snowplow.foundation/conversion/jsonschema/1-0-0",
       "data": {
          "name": "This property is only meant to be 255 characters long. When you send a value that is longer, the event will fail validation and end up as a bad event. In this case that is on purpose, as an exercise to understand Snowplow's concept of bad data. In real life, bad data typically means you need to either update your data structure definitions or your tracking code to resolve the issue."
      }

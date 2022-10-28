@@ -1,5 +1,6 @@
 ---
-title: "Tutorial: Web analytics"
+title: "Web analytics"
+description: "Learn how to aggregated user data into sessions"
 date: "2020-10-12"
 sidebar_position: 0
 ---
@@ -25,7 +26,7 @@ The Snowplow JavaScript tracker automatically tracks a session identifier and a 
 
 ```javascript
 window.snowplow("newTracker", "sp", ..., {
-    appId: "try-snowplow-tracking",
+    appId: "hosted-snowplow",
     platform: "web",
     sessionCookieTimeout: 3600,
     contexts: {
@@ -76,10 +77,10 @@ CREATE TABLE derived.sessions AS(
         CASE
             WHEN ev.refr_medium IS NULL AND ev.page_url NOT ILIKE '%utm_%' THEN 'Direct'
             WHEN (ev.refr_medium = 'search' AND ev.mkt_medium IS NULL) OR (ev.refr_medium = 'search' AND ev.mkt_medium = 'organic') THEN 'Organic Search'
-            WHEN ev.refr_medium = 'search' AND ev.mkt_medium SIMILAR TO '%(cpc|ppc|paidsearch)%' THEN 'Paid Search'
-            WHEN ev.refr_medium = 'social' OR ev.mkt_medium SIMILAR TO '%(social|social-network|social-media|sm|social network|social media)%' THEN 'Social'
+            WHEN ev.refr_medium = 'search' AND ev.mkt_medium ILIKE '%(cpc|ppc|paidsearch)%' THEN 'Paid Search'
+            WHEN ev.refr_medium = 'social' OR ev.mkt_medium ILIKE '%(social|social-network|social-media|sm|social network|social media)%' THEN 'Social'
             WHEN ev.refr_medium = 'email' OR ev.mkt_medium ILIKE 'email' THEN 'Email'
-            WHEN ev.mkt_medium SIMILAR TO '%(display|cpm|banner)%' THEN 'Display'
+            WHEN ev.mkt_medium ILIKE '%(display|cpm|banner)%' THEN 'Display'
             ELSE 'Other'
         END AS marketing_channel,
 

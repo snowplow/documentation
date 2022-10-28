@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Getting started with Looker"
+title: "Getting started with Looker"
 date: "2021-03-26"
 sidebar_position: 60
 ---

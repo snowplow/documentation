@@ -1,14 +1,13 @@
 ---
-title: "Tutorial: Anonymous tracking"
+title: "Anonymous tracking"
+description: "Capture Snowplow web events without user or session identifiers, without IP addresses and without setting any cookies"
 date: "2021-01-04"
 sidebar_position: 50
 ---
 
 ## Introduction
 
-Unlike most other analytics solutions, Snowplow runs in your own cloud account, giving you full ownership and control over how and what you track. This is particularly important with respect to user identification and increased user privacy regulation. An overview of user identification with Snowplow can be found [in this blog post](https://snowplowanalytics.com/blog/2020/06/11/single-customer-view/).
-
-By default, Snowplow captures identifiers with all events that can be considered PII - user and session cookie IDs as well as the IP address. However, Snowplow also allows you to track data without these identifiers. This recipe explains how you can capture Snowplow web events without:
+By default, Snowplow captures identifiers with all events that can be considered personal identifiable information (PII) — user and session cookie IDs as well as the IP address. However, Snowplow also allows you to track data without these identifiers. This tutorial explains how you can capture Snowplow web events without:
 
 - setting any cookies
 - capturing any user or session IDs
@@ -19,7 +18,7 @@ By default, Snowplow captures identifiers with all events that can be considered
 Snowplow provides two ways for limiting the amount of PII you capture and store:
 
 - Not collecting the PII in the first place (this is covered in this recipe)
-- Pseudonymizing the PII during enrichment (on by default in Try Snowplow, but configurable with Snowplow BDP)
+- Pseudonymizing the PII during enrichment (on by default in Try Snowplow and BDP Cloud, but configurable with Snowplow BDP)
 
 You will be updating your JavaScript tracker implementation to stop setting and collecting the following four fields:
 
@@ -41,8 +40,8 @@ anonymousTracking: {withServerAnonymisation: true}
 Therefore, the entire tracker initialization code will look like this:
 
 ```javascript
-snowplow("newTracker", "try", "<YOUR_COLLECTOR_ENDPOINT>", {
-  appId: "try-snowplow",
+snowplow("newTracker", "sp", "<YOUR_COLLECTOR_ENDPOINT>", {
+  appId: "hosted-snowplow",
   platform: "web",
   anonymousTracking: {withServerAnonymisation: true}
   contexts: {

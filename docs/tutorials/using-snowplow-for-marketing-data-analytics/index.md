@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: using Snowplow for marketing data analytics"
+title: "Using Snowplow for marketing data analytics"
 date: "2020-02-26"
 sidebar_position: 10
 ---

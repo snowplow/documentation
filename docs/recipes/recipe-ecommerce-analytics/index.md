@@ -1,8 +1,15 @@
 ---
-title: "Tutorial: E-commerce analytics"
+title: "E-commerce analytics"
+description: "See how different products are performing in an e-commerce store"
 date: "2020-10-12"
 sidebar_position: 40
 ---
+
+:::note
+
+This recipe is currently specific to Try Snowplow.
+
+:::
 
 ## Introduction
 

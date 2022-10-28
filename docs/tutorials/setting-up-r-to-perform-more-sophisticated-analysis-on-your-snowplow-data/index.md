@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Setting up R to perform more sophisticated analysis on your Snowplow data"
+title: "Setting up R to perform more sophisticated analysis on your Snowplow data"
 description: "How to set up R for analysis of Snowplow data"
 date: "2021-03-26"
 sidebar_position: 80

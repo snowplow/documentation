@@ -21,7 +21,7 @@ const createTrackerConfig = (cookieName) => {
     : 'test'
   const domain = location.host.split('.').reverse()
 
-  let trackerConfig = {
+  const trackerConfig = {
     appId,
     eventMethod: 'post',
     plugins: [LinkClickTrackingPlugin()],

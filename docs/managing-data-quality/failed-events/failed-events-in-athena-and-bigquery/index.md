@@ -89,7 +89,9 @@ bq mk --data_location=EU bad_rows_prod1
 
 The `--data-location` should match the location of your bad rows bucket. Also replace `prod1` with the name of your pipeline.
 
-Now run `bq mk` for each table definition in the badrows-tables repo. Use the `--external_table_definition` parameter so that bigquery uses the bucket as the back-end data source. Here is how to run the command for the first three tables (note you should change the dataset name `bad_rows_prod1` to match the dataset you just created):
+Now run `bq mk` for each table definition in the badrows-tables repo. Depending on the failures you would like to check, the relevant table definition(s) need to be downloaded from [snowplow-badrows-tables](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/bigquery). Each table definition contains a `{{ BUCKET }}` placeholder which needs to be changed to the GCS bucket where your bad rows files are stored (e.g. sp-storage-loader-bad-prod1-com_acme).
+
+Then add the local path to the table definition json file which you have downloaded and edited above to the `--external_table_definition` parameter. BigQuery uses the bucket as the back-end data source. Here is how to run the command for the first three tables (note you should change the dataset name `bad_rows_prod1` to match the dataset you just created):
 
 ```bash
 bq mk \

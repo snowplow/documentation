@@ -1,5 +1,5 @@
 ---
-title: "Managing enrichments in the console"
+title: "Managing enrichments in BDP Console"
 date: "2020-02-15"
 sidebar_position: 10
 ---

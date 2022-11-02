@@ -8,6 +8,54 @@ Snowplow has been built to enable you to track a wide range of events that occur
 
 We provide several built-in event classes to help you track different kinds of events. When instantiated, their objects can be passed to the `Snowplow.track()` method to send events to the Snowplow collector. The event classes range from single purpose ones, such as `ScreenView`, to the more complex but flexible `SelfDescribing`, which can be used to track any kind of user behaviour. We strongly recommend using `SelfDescribing` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
 
+## Auto-tracked view events
+
+There is an option to automatically track view events when currently active pages change through the [Navigator API](https://api.flutter.dev/flutter/widgets/Navigator-class.html).
+
+To activate this feature, one has to register a `SnowplowObserver` retrieved from the tracker instance using `SnowplowTracker.getObserver()`. The retrieved observer can be added to `navigatorObservers` in `MaterialApp`:
+
+```dart
+MaterialApp(
+  navigatorObservers: [
+    tracker.getObserver()
+  ],
+  ...
+);
+```
+
+If using the `Router` API with the `MaterialApp.router` constructor, add the observer to the `observers` of your `Navigator` instance, e.g.:
+
+```dart
+Navigator(
+  observers: [tracker.getObserver()],
+  ...
+);
+```
+
+The `SnowplowObserver` automatically tracks `PageViewEvent` and `ScreenView` events when the currently active `ModalRoute` of the navigator changes.
+
+By default, `ScreenView` events are tracked on all platforms. In case `TrackerConfiguration.webActivityTracking` is configured when creating the tracker, `PageViewEvent` events will be tracked on Web instead of `ScreenView` events (`ScreenView` events will still be tracked on other platforms).
+
+The `SnowplowTracker.getObserver()` function takes an optional `nameExtractor` function as argument which is used to extract a name from new routes that is used in tracked `ScreenView` or `PageViewEvent` events.
+
+The following operations will result in tracking a view event:
+
+```dart
+Navigator.pushNamed(context, '/contact/123');
+
+Navigator.push<void>(context, MaterialPageRoute(
+  settings: RouteSettings(name: '/contact/123'),
+  builder: (_) => ContactDetail(123)));
+
+Navigator.pushReplacement<void>(context, MaterialPageRoute(
+  settings: RouteSettings(name: '/contact/123'),
+  builder: (_) => ContactDetail(123)));
+
+Navigator.pop(context);
+```
+
+## Manually-tracked events
+
 Event classes supported by the Flutter Tracker:
 
 | Method             | Event type tracked                                          |
@@ -188,50 +236,4 @@ tracker.track(ConsentWithdrawn(
     name: 'name1',
     documentDescription: 'description1',
 ));
-```
-
-## Automatically tracking view events using navigator observer
-
-There is also an option to automatically track view events when currently active pages change through the [Navigator API](https://api.flutter.dev/flutter/widgets/Navigator-class.html).
-
-To activate this feature, one has to register a `SnowplowObserver` retrieved from the tracker instance using `SnowplowTracker.getObserver()`. The retrieved observer can be added to `navigatorObservers` in `MaterialApp`:
-
-```dart
-MaterialApp(
-  navigatorObservers: [
-    tracker.getObserver()
-  ],
-  ...
-);
-```
-
-If using the `Router` API with the `MaterialApp.router` constructor, add the observer to the `observers` of your `Navigator` instance, e.g.:
-
-```dart
-Navigator(
-  observers: [tracker.getObserver()],
-  ...
-);
-```
-
-The `SnowplowObserver` automatically tracks `PageViewEvent` and `ScreenView` events when the currently active `ModalRoute` of the navigator changes.
-
-By default, `ScreenView` events are tracked on all platforms. In case `TrackerConfiguration.webActivityTracking` is configured when creating the tracker, `PageViewEvent` events will be tracked on Web instead of `ScreenView` events (`ScreenView` events will still be tracked on other platforms).
-
-The `SnowplowTracker.getObserver()` function takes an optional `nameExtractor` function as argument which is used to extract a name from new routes that is used in tracked `ScreenView` or `PageViewEvent` events.
-
-The following operations will result in tracking a view event:
-
-```dart
-Navigator.pushNamed(context, '/contact/123');
-
-Navigator.push<void>(context, MaterialPageRoute(
-  settings: RouteSettings(name: '/contact/123'),
-  builder: (_) => ContactDetail(123)));
-
-Navigator.pushReplacement<void>(context, MaterialPageRoute(
-  settings: RouteSettings(name: '/contact/123'),
-  builder: (_) => ContactDetail(123)));
-
-Navigator.pop(context);
 ```

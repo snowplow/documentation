@@ -1,7 +1,7 @@
 ---
-title: "Tutorials"
-date: "2020-02-24"
-sidebar_position: 56
+title: "Recipes"
+date: "2020-10-08"
+sidebar_position: 55
 ---
 
 ```mdx-code-block

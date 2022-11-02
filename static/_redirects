@@ -26,3 +26,8 @@
 /docs/modeling-your-data/the-snowplow-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-web-data-model/ 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/ 301
+/docs/try-snowplow/recipes/* /docs/recipes/:splat 301
+/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-with-snowplow-bdp/enterprise/ 301
+/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/ /docs/getting-started-on-snowplow-open-source/what-is-snowplow-open-source/feature-comparison/ 302
+/docs/getting-started-with-snowplow-bdp/aws-setup-guide/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-aws/:splat 301
+/docs/getting-started-with-snowplow-bdp/setup-guide-gcp/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-gcp/:splat 301

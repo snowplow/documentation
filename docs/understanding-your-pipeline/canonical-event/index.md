@@ -4,17 +4,41 @@ date: "2020-10-29"
 sidebar_position: 10
 ---
 
-## Overview - Canonical Event Model
+## Overview
 
 In order to analyze Snowplow data, it is important to understand how it is structured. We have tried to make the structure of Snowplow data as simple, logical, and easy-to-query as possible.
 
-- **Each line represents one event**. Each line in the Snowplow events table represents a single _event_, be that a _page view_, _add to basket_, _play video_, _like_ etc.
-- **Structured data**. Snowplow data is structured: individual fields are stored in their own columns, making writing sophisticated queries on the data easy, and making it straightforward for analysts to plugin any kind of analysis tool into their Snowplow data to compose and execute queries
-- **Extensible schema**. Snowplow started life as a web analytics data warehousing platform, and has a basic schema suitable for performing web analytics, with a wide range of web-specific dimensions (related to page URLs, browsers, operating systems, devices, IP addresses, cookie IDs) and web-specfic events (page views, page pings, transactions). All of these fields can be found in the `atomic.events` table, which is a "fat" (many columns) table. As Snowplow has evolved into a general purpose event analytics platform, we've enabled Snowplow users to define additional event types (we call these _custom unstructured events_) and define their own entities (we call these _custom contexts_) so that they can extend the schema to suit their own businesses. For Snowplow users running Amazon Redshift, each custom unstructured event and custom context will be stored in its own dedicated table, again with one line per event. These additional tables can be joined back to the core `atomic.events` table, by joining on th e `root_id` field in the custom unstructured event / custom context table with the `event_id` in the `atomic.events` table
-- **Single table**. All the events are effectively stored in a single table, making running queries across the data very easy. Even if you're running Snowplow with Redshift and have extended the schema as described above, you can still query the data as if it were in a single fat table. This is because:
-    - The joins from the additional tables to the core `atomic.events` table are one-to-one
-    - The field joined on is the distribution key for both tables, so queries are as fast as if the data were in a single table
-- **Immutable log**. The Snowplow data table is designed to be immutable: the data in each line should not change over time. Data points that we would expect to change over time (e.g. what cohort a particular user belongs to, how we classify a particular visitor) can be derived from Snowplow data. However, our recommendation is that these derived fields should be defined and calculated at analysis time, stored in a separate table and joined to the _Snowplow events table_ when performing any analysis
+### Each line represents one event
+
+Each line in the Snowplow events table represents a single _event_, be that a _page view_, _add to basket_, _play video_, _like_ etc.
+
+### Structured data
+
+Snowplow data is structured: individual fields are stored in their own columns, making writing sophisticated queries on the data easy, and making it straightforward for analysts to plugin any kind of analysis tool into their Snowplow data to compose and execute queries.
+
+### Extensible schema
+
+Snowplow started life as a web analytics data warehousing platform, and has a basic schema suitable for performing web analytics, with a wide range of web-specific dimensions (related to page URLs, browsers, operating systems, devices, IP addresses, cookie IDs) and web-specfic events (page views, page pings, transactions). All of these fields can be found in the `atomic.events` table, which is a "fat" (many columns) table.
+
+As Snowplow has evolved into a general purpose event analytics platform, we've enabled Snowplow users to define additional event types (we call these _custom unstructured events_) and define their own entities (we call these _custom contexts_) so that they can extend the schema to suit their own businesses.
+
+:::note
+
+Currently, custom events and custom contexts are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
+
+:::
+
+For Snowplow users running Amazon Redshift, each custom unstructured event and custom context will be stored in its own dedicated table, again with one line per event. These additional tables can be joined back to the core `atomic.events` table, by joining on th e `root_id` field in the custom unstructured event / custom context table with the `event_id` in the `atomic.events` table.
+
+### Single table
+
+All the events are effectively stored in a single table, making running queries across the data very easy. Even if you're running Snowplow with Redshift and have extended the schema as described above, you can still query the data as if it were in a single fat table. This is because:
+- The joins from the additional tables to the core `atomic.events` table are one-to-one.
+- The field joined on is the distribution key for both tables, so queries are as fast as if the data were in a single table.
+
+### Immutable log
+
+The Snowplow data table is designed to be immutable: the data in each line should not change over time. Data points that we would expect to change over time (e.g. what cohort a particular user belongs to, how we classify a particular visitor) can be derived from Snowplow data. However, our recommendation is that these derived fields should be defined and calculated at analysis time, stored in a separate table and joined to the _Snowplow events table_ when performing any analysis.
 
 ## Understanding the individual fields
 
@@ -39,7 +63,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | `dvce_created_tstamp` | timestamp | Timestamp for the event recorded on the client device | No | '2013-11-26 00:03:57.885' |
 | `dvce_sent_tstamp` | timestamp | When the event was actually sent by the client device | No | '2013-11-26 00:03:58.032' |
 | `etl_tstamp` | timestamp | Timestamp for when the event was validated and enriched. Note: the name is historical and _does not mean_ that the event is loaded at this point (this is further downstream). | No | '2017-01-26 00:01:25.292' |
-| `os_timezone` | text | Client operating system timezone | No | 'Europe/London' |
+| `os_timezone` _(not available in BDP Cloud)_ | text | Client operating system timezone | No | 'Europe/London' |
 | `derived_tstamp` | timestamp | Timestamp making allowance for innaccurate device clock | No | '2013-11-26 00:02:04' |
 | `true_tstamp` | timestamp | User-set "true timestamp" for the event | No | '2013-11-26 00:02:04' |
 
@@ -62,7 +86,7 @@ A complete list of event types is given [here](#Event-specific_fields).
 | `v_collector` | text | Collector version | Yes | 'ssc-2.1.0-kinesis' |
 | `v_etl` | text | ETL version | Yes | 'snowplow-micro-1.1.0-common-1.4.2' |
 | `name_tracker` | text | Tracker namespace | No | 'sp1' |
-| `etl_tags` | text | JSON of tags for this ETL run | No | "['prod']" |
+| `etl_tags` _(not available in BDP Cloud)_ | text | JSON of tags for this ETL run | No | "['prod']" |
 
 Some Snowplow Trackers allow the user to name each specific Tracker instance. `name_tracker` corresponds to this name, and can be used to distinguish which tracker generated which events.
 
@@ -84,13 +108,13 @@ Some Snowplow Trackers allow the user to name each specific Tracker instance. `n
 | **Field** | **Type** | **Description** | **Reqd?** | **Example** |
 | --- | --- | --- | --- | --- |
 | `useragent` | text | Raw useragent | Yes |  |
-| `dvce_type` | text | Type of device | No | 'Computer' |
-| `dvce_ismobile` | boolean | Is the device mobile? | No | 1 |
+| `dvce_type` _(not available in BDP Cloud)_ | text | Type of device | No | 'Computer' |
+| `dvce_ismobile` _(not available in BDP Cloud)_ | boolean | Is the device mobile? | No | 1 |
 | `dvce_screenheight` | int | Screen height in pixels | No | 1024 |
 | `dvce_screenwidth` | int | Screen width in pixels | No | 1900 |
-| `os_name` | text | Name of operating system | No | 'Android' |
-| `os_family` | text | Operating system family | No | 'Linux' |
-| `os_manufacturer` | text | Company responsible for OS | No | 'Apple' |
+| `os_name` _(not available in BDP Cloud)_ | text | Name of operating system | No | 'Android' |
+| `os_family` _(not available in BDP Cloud)_ | text | Operating system family | No | 'Linux' |
+| `os_manufacturer` _(not available in BDP Cloud)_ | text | Company responsible for OS | No | 'Apple' |
 
 #### Location fields
 
@@ -165,24 +189,24 @@ Fields containing information about the event type.
 | `mkt_clickid` | text | The click ID | No | 'ac3d8e459' |
 | `mkt_network` | text | The ad network to which the click ID belongs | No | 'DoubleClick' |
 | **Browser fields** |  |  |  |  |
-| `user_fingerprint` | int | A user fingerprint generated by looking at the individual browser features | No | 2161814971 |
-| `connection_type` | text | Type of internet connection | No | No |
-| `cookie` | boolean | Does the browser support persistent cookies? | No | 1 |
-| `br_name` | text | Browser name | No | 'Firefox 12' |
-| `br_version` | text | Browser version | No | '12.0' |
-| `br_family` | text | Browser family | No | 'Firefox' |
-| `br_type` | text | Browser type | No | 'Browser' |
-| `br_renderengine` | text | Browser rendering engine | No | 'GECKO' |
+| `user_fingerprint` _(not available in BDP Cloud)_ | int | A user fingerprint generated by looking at the individual browser features | No | 2161814971 |
+| `connection_type` _(not available in BDP Cloud)_ | text | Type of internet connection | No | No |
+| `cookie` _(not available in BDP Cloud)_ | boolean | Does the browser support persistent cookies? | No | 1 |
+| `br_name` _(not available in BDP Cloud)_ | text | Browser name | No | 'Firefox 12' |
+| `br_version` _(not available in BDP Cloud)_ | text | Browser version | No | '12.0' |
+| `br_family` _(not available in BDP Cloud)_ | text | Browser family | No | 'Firefox' |
+| `br_type` _(not available in BDP Cloud)_ | text | Browser type | No | 'Browser' |
+| `br_renderengine` _(not available in BDP Cloud)_ | text | Browser rendering engine | No | 'GECKO' |
 | `br_lang` | text | Language the browser is set to | No | 'en-GB' |
-| `br_features_pdf` | boolean | Whether the browser recognizes PDFs | No | 1 |
-| `br_features_flash` | boolean | Whether Flash is installed | No | 1 |
-| `br_features_java` | boolean | Whether Java is installed | No | 1 |
-| `br_features_director` | boolean | Whether Adobe Shockwave is installed | No | 1 |
-| `br_features_quicktime` | boolean | Whether QuickTime is installed | No | 1 |
-| `br_features_realplayer` | boolean | Whether RealPlayer is installed | No | 1 |
-| `br_features_windowsmedia` | boolean | Whether mplayer2 is installed | No | 1 |
-| `br_features_gears` | boolean | Whether Google Gears is installed | No | 1 |
-| `br_features_silverlight` | boolean | Whether Microsoft Silverlight is installed | No | 1 |
+| `br_features_pdf` _(not available in BDP Cloud)_ | boolean | Whether the browser recognizes PDFs | No | 1 |
+| `br_features_flash` _(not available in BDP Cloud)_ | boolean | Whether Flash is installed | No | 1 |
+| `br_features_java` _(not available in BDP Cloud)_ | boolean | Whether Java is installed | No | 1 |
+| `br_features_director` _(not available in BDP Cloud)_ | boolean | Whether Adobe Shockwave is installed | No | 1 |
+| `br_features_quicktime` _(not available in BDP Cloud)_ | boolean | Whether QuickTime is installed | No | 1 |
+| `br_features_realplayer` _(not available in BDP Cloud)_ | boolean | Whether RealPlayer is installed | No | 1 |
+| `br_features_windowsmedia` _(not available in BDP Cloud)_ | boolean | Whether mplayer2 is installed | No | 1 |
+| `br_features_gears` _(not available in BDP Cloud)_ | boolean | Whether Google Gears is installed | No | 1 |
+| `br_features_silverlight` _(not available in BDP Cloud)_ | boolean | Whether Microsoft Silverlight is installed | No | 1 |
 | `br_cookies` | boolean | Whether cookies are enabled | No | 1 |
 | `br_colordepth` | int | Bit depth of the browser color palette | No | 24 |
 | `br_viewheight` | int | Viewport height | No | 1000 |
@@ -196,13 +220,13 @@ Note that to date, all event types have been defined by Snowplow. Also note that
 
 Snowplow currently supports (or will support in the near future) the following event types:
 
-|  | **Event type** | **Value of `event` field in model** |
-| --- | --- | --- |
-| 2.3.1 | [Page views](#Page_views) | 'page_view' |
-| 2.3.2 | [Page pings](#Page_pings) | 'page_ping' |
-| 2.3.3 | [Ecommerce transactions](#Ecommerce_transactions) | 'transaction' and 'transaction_item' |
-| 2.3.4 | [Custom structured events](#Custom_structured_events) | 'struct' |
-| 2.3.5 | [Custom unstructured events](#Custom_unstructured_events) | 'unstruct' |
+| **Event type** | **Value of `event` field in model** |
+| --- | --- |
+| [Page views](#page-views) | 'page_view' |
+| [Page pings](#page-pings) | 'page_ping' |
+| [Ecommerce transactions](#ecommerce-transactions) | 'transaction' and 'transaction_item' |
+| [Custom structured events](#custom-structured-events) | 'struct' |
+|[Custom unstructured events](#custom-unstructured-events) | 'unstruct' |
 
 Details of which fields are available for which events are given below.
 
@@ -255,6 +279,12 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 
 #### Custom structured events
 
+:::note
+
+Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
+
+:::
+
 If you wish to track an event that Snowplow does not recognise as a first class citizen (i.e. one of the events listed above), then you can track them using the generic 'custom structured events'. There are five fields that are available to store data related to custom events:
 
 | **Field** | **Type** | **Description** | **Reqd?** | **Example** |
@@ -266,6 +296,12 @@ If you wish to track an event that Snowplow does not recognise as a first class 
 | `se_value` | decimal | A value associated with the event / action e.g. the value of goods added-to-basket | No | 9.99 |
 
 #### Custom unstructured events
+
+:::note
+
+Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
+
+:::
 
 Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 
@@ -291,6 +327,4 @@ These are also a variety of unstructured events and custom contexts defined by S
 
 ## A note about storage data formats
 
-- Currently, Snowplow data is stored in S3, Google Cloud Storage (GCS), Redshift, BigQuery, Snowflake and PostgreSQL.
-- There are some differences between the structure of data in both formats. These relate to data structures that BigQuery, Snowflake and PostgreSQL support (e.g. JSON/Record columns) that Redshift does not
-- Nevertheless, the structure of both is similar: representing a fat table
+Currently, Snowplow data can be stored in S3, Google Cloud Storage (GCS), Redshift, BigQuery, Snowflake, Databricks and PostgreSQL. There are some differences between the structure of data in both formats. These relate to data structures that BigQuery, Snowflake and PostgreSQL support while Redshift does not (e.g. JSON/Record columns). Nevertheless, the structure of both is similar: representing a “fat” table.

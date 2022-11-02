@@ -4,6 +4,12 @@ date: "2020-11-25"
 sidebar_position: 500
 ---
 
+
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Overview
 
 Cloud Storage Loader is a [Dataflow](https://cloud.google.com/dataflow/) job which dumps event from an input [PubSub](https://cloud.google.com/pubsub/) subscription into a [Cloud Storage](https://cloud.google.com/storage/) bucket.
@@ -84,19 +90,19 @@ Refer to [the documentation on executing templates](https://cloud.google.com/da
 
 Here, we provide an example using `gcloud`:
 
-```bash
-gcloud dataflow jobs run [JOB-NAME] \
-  --gcs-location gs://sp-hosted-assets/4-storage/snowplow-google-cloud-storage-loader/0.5.0/SnowplowGoogleCloudStorageLoaderTemplate-0.5.0 \
-  --parameters \
-    inputSubscription=projects/[PROJECT]/subscriptions/[SUBSCRIPTION],\
-    outputDirectory=gs://[BUCKET]/YYYY/MM/dd/HH/,\ # partitions by date
-    outputFilenamePrefix=output,\ # optional
-    shardTemplate=-W-P-SSSSS-of-NNNNN,\ # optional
-    outputFilenameSuffix=.txt,\ # optional
-    windowDuration=5,\ # optional, in minutes
-    compression=none,\ # optional, gzip, bz2 or none
+<CodeBlock language="bash">{
+`gcloud dataflow jobs run [JOB-NAME] \\
+  --gcs-location gs://sp-hosted-assets/4-storage/snowplow-google-cloud-storage-loader/${versions.gcsLoader}/SnowplowGoogleCloudStorageLoaderTemplate-${versions.gcsLoader} \\
+  --parameters \\
+    inputSubscription=projects/[PROJECT]/subscriptions/[SUBSCRIPTION],\\
+    outputDirectory=gs://[BUCKET]/YYYY/MM/dd/HH/,\\ # partitions by date
+    outputFilenamePrefix=output,\\ # optional
+    shardTemplate=-W-P-SSSSS-of-NNNNN,\\ # optional
+    outputFilenameSuffix=.txt,\\ # optional
+    windowDuration=5,\\ # optional, in minutes
+    compression=none,\\ # optional, gzip, bz2 or none
     numShards=1 # optional
-```
+`}</CodeBlock>
 
 #### ZIP archive
 
@@ -104,21 +110,21 @@ You can find the archive hosted on [Github](https://github.com/snowplow-incubat
 
 Once unzipped the artifact can be run as follows:
 
-```bash
-./bin/snowplow-google-cloud-storage-loader \
-  --runner=DataFlowRunner \
-  --project=[PROJECT] \
-  --streaming=true \
-  --workerZone=europe-west2-a \
-  --inputSubscription=projects/[PROJECT]/subscriptions/[SUBSCRIPTION] \
-  --outputDirectory=gs://[BUCKET]/YYYY/MM/dd/HH/ \ # partitions by date
-  --outputFilenamePrefix=output \ # optional
-  --shardTemplate=-W-P-SSSSS-of-NNNNN \ # optional
-  --outputFilenameSuffix=.txt \ # optional
-  --windowDuration=5 \ # optional, in minutes
-  --compression=none \ # optional, gzip, bz2 or none
+<CodeBlock language="bash">{
+`./bin/snowplow-google-cloud-storage-loader \\
+  --runner=DataFlowRunner \\
+  --project=[PROJECT] \\
+  --streaming=true \\
+  --workerZone=europe-west2-a \\
+  --inputSubscription=projects/[PROJECT]/subscriptions/[SUBSCRIPTION] \\
+  --outputDirectory=gs://[BUCKET]/YYYY/MM/dd/HH/ \\ # partitions by date
+  --outputFilenamePrefix=output \\ # optional
+  --shardTemplate=-W-P-SSSSS-of-NNNNN \\ # optional
+  --outputFilenameSuffix=.txt \\ # optional
+  --windowDuration=5 \\ # optional, in minutes
+  --compression=none \\ # optional, gzip, bz2 or none
   --numShards=1 # optional
-```
+`}</CodeBlock>
 
 To display the help message:
 
@@ -138,39 +144,39 @@ You can find the image in [Docker Hub](https://hub.docker.com/r/snowplow/snowpl
 
 A container can be run as follows:
 
-```bash
-docker run \
-  -v $PWD/config:/snowplow/config \ # if running outside GCP
-  -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/credentials.json \ # if running outside GCP
-  snowplow/snowplow-google-cloud-storage-loader:0.5.0 \
-  --runner=DataFlowRunner \
-  --jobName=[JOB-NAME] \
-  --project=[PROJECT] \
-  --streaming=true \
-  --workerZone=[ZONE] \
-  --inputSubscription=projects/[PROJECT]/subscriptions/[SUBSCRIPTION] \
-  --outputDirectory=gs://[BUCKET]/YYYY/MM/dd/HH/ \ # partitions by date
-  --outputFilenamePrefix=output \ # optional
-  --shardTemplate=-W-P-SSSSS-of-NNNNN \ # optional
-  --outputFilenameSuffix=.txt \ # optional
-  --windowDuration=5 \ # optional, in minutes
-  --compression=none \ # optional, gzip, bz2 or none
+<CodeBlock language="bash">{
+`docker run \\
+  -v $PWD/config:/snowplow/config \\ # if running outside GCP
+  -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/credentials.json \\ # if running outside GCP
+  snowplow/snowplow-google-cloud-storage-loader:${versions.gcsLoader} \\
+  --runner=DataFlowRunner \\
+  --jobName=[JOB-NAME] \\
+  --project=[PROJECT] \\
+  --streaming=true \\
+  --workerZone=[ZONE] \\
+  --inputSubscription=projects/[PROJECT]/subscriptions/[SUBSCRIPTION] \\
+  --outputDirectory=gs://[BUCKET]/YYYY/MM/dd/HH/ \\ # partitions by date
+  --outputFilenamePrefix=output \\ # optional
+  --shardTemplate=-W-P-SSSSS-of-NNNNN \\ # optional
+  --outputFilenameSuffix=.txt \\ # optional
+  --windowDuration=5 \\ # optional, in minutes
+  --compression=none \\ # optional, gzip, bz2 or none
   --numShards=1 # optional
-```
+`}</CodeBlock>
 
 To display the help message:
 
-```bash
-docker run snowplow/snowplow-google-cloud-storage-loader:0.5.0 \
+<CodeBlock language="bash">{
+`docker run snowplow/snowplow-google-cloud-storage-loader:${versions.gcsLoader} \\
   --help
-```
+`}</CodeBlock>
 
 To display documentation about Cloud Storage Loader-specific options:
 
-```bash
-docker run snowplow/snowplow-google-cloud-storage-loader:0.5.0 \
+<CodeBlock language="bash">{
+`docker run snowplow/snowplow-google-cloud-storage-loader:${versions.gcsLoader} \\
   --help=com.snowplowanalytics.storage.googlecloudstorage.loader.Options
-```
+`}</CodeBlock>
 
 #### Additional information
 

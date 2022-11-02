@@ -22,6 +22,7 @@ import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking
 
 <AnonymousTrackingSharedBlock/>
 ```
+There are several levels to the anonymisation depending on which of the three categories are affected:
 
 ## 1. Full client-side anonymisation
 

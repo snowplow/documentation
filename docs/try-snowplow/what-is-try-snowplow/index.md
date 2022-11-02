@@ -29,4 +29,4 @@ There are only a handful of steps you need to take to get started with Try Snowp
 
 - [Sign up for Try Snowplow](https://try.snowplowanalytics.com)
 - [Instrument tracking](/docs/try-snowplow/tracking-events-with-try-snowplow/index.md)
-- [Query your data](/docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/index.md) and [explore recipes](/docs/try-snowplow/recipes/index.md)
+- [Query your data](/docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/index.md) and [explore recipes](/docs/recipes/index.md)

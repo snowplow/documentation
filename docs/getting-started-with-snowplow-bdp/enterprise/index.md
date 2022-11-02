@@ -1,5 +1,5 @@
 ---
-title: "What is Snowplow BDP?"
+title: "BDP Enterprise"
 date: "2021-03-09"
 sidebar_position: 0
 ---

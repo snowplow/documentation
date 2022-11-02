@@ -1,11 +1,11 @@
 ---
-title: "Getting started on Snowplow BDP Cloud"
+title: "BDP Cloud"
 date: "2020-01-30"
 sidebar_position: 1
-sidebar_label: "🆕 Getting started on Snowplow BDP Cloud"
+sidebar_label: "🆕 BDP Cloud"
 ---
 
-# Introduction to BDP Cloud
+# Introduction
 
 BDP Cloud is a hosted and lightweight version of [Snowplow](https://snowplow.io), designed to get your organization up and running and delivering value from behavioural data as quickly as possible. It enables you to create rich and well-structured data to power your advanced analytics and AI use cases.
 

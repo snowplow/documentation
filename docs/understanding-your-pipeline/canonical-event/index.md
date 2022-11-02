@@ -24,7 +24,7 @@ As Snowplow has evolved into a general purpose event analytics platform, we've e
 
 :::note
 
-Currently, custom events and custom contexts are not available in [BDP Cloud](/docs/getting-started-with-bdp-cloud/index.md).
+Currently, custom events and custom contexts are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
 
 :::
 
@@ -281,7 +281,7 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 
 :::note
 
-Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-bdp-cloud/index.md).
+Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
 
 :::
 
@@ -299,7 +299,7 @@ If you wish to track an event that Snowplow does not recognise as a first class 
 
 :::note
 
-Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-bdp-cloud/index.md).
+Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
 
 :::
 

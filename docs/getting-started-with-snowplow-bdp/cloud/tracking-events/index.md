@@ -19,7 +19,7 @@ Please note that BDP Cloud pipelines by default have an event volume cap of 60 e
 
 ## Instrumenting the web tracker via Google Tag Manager
 
-![google-tag-manager-setup](../../try-snowplow/tracking-events-with-try-snowplow/images/step3-2.gif)
+![google-tag-manager-setup](../../../try-snowplow/tracking-events-with-try-snowplow/images/step3-2.gif)
 
 - Copy the JavaScript code snippet from the BDP Cloud Snowplow console.
 - Navigate to the Google Tag Manager account you wish to instrument tracking to

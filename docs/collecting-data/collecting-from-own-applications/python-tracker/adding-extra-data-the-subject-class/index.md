@@ -183,6 +183,17 @@ The `network_user_id` field of the Snowplow event model corresponds to the ID 
 ```python
 s.set_network_user_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
 ```
+### Setting Domain Session ID with `set_domain_session_id`
+This method lets you pass a Domain Session ID in to Snowplow:
+
+```python
+s.set_domain_session_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
+```
+### Setting Domain Session index with `set_domain_session_index`
+This method lets you pass a Domain Session index in to Snowplow:
+```python
+s.set_domain_session_index(4)
+```
 
 ## Tracking multiple subjects
 

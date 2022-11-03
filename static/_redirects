@@ -12,8 +12,10 @@
 
 # Page renaming
 /advanced-analytics-web-accelerator/* /accelerators/web/:splat 301
+
 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
 /docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
+
 /docs/modeling-your-data/resolving-data-model-failures-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/sql-runner/resolving-data-model-failures/ 301
 /docs/modeling-your-data/retrieving-job-execution-data-via-the-api/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-execution-data-via-the-api/ 301
 /docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/sql-runner/using-sql-runner/ 301
@@ -24,10 +26,24 @@
 /docs/modeling-your-data/the-snowplow-web-data-model/dbt-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/ 301
 /docs/modeling-your-data/the-snowplow-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-mobile-data-model/ 301
 /docs/modeling-your-data/the-snowplow-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-web-data-model/ 301
+
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/ 301
+
 /docs/try-snowplow/recipes/* /docs/recipes/:splat 301
+
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-with-snowplow-bdp/enterprise/ 301
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/ /docs/getting-started-on-snowplow-open-source/what-is-snowplow-open-source/feature-comparison/ 302
 /docs/getting-started-with-snowplow-bdp/aws-setup-guide/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-aws/:splat 301
 /docs/getting-started-with-snowplow-bdp/setup-guide-gcp/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-gcp/:splat 301
+
+
+/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/ /docs/getting-started-on-snowplow-open-source/what-is-quick-start/ 301
+/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/feature-comparison/ /docs/getting-started-on-snowplow-open-source/what-is-snowplow-open-source/feature-comparison/ 302
+/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/telemetry-principles/ /docs/getting-started-on-snowplow-open-source/telemetry/ 301
+/docs/open-source-quick-start/quick-start-installation-guide-on-aws/* /docs/getting-started-on-snowplow-open-source/quick-start-aws/:splat 301
+/docs/open-source-quick-start/quick-start-installation-guide-on-gcp/* /docs/getting-started-on-snowplow-open-source/quick-start-gcp/:splat 301
+/docs/open-source-quick-start/further-exploration/start-tracking-events-and-further-enrich-your-data/ /docs/getting-started-on-snowplow-open-source/tracking-events/ 301
+/docs/open-source-quick-start/further-exploration/further-enrich-or-transform-your-data/ /docs/enriching-your-data/configuring-enrichments-open-source/ 301
+/docs/open-source-quick-start/quick-start-faqs/ /docs/getting-started-on-snowplow-open-source/what-is-quick-start/faq/ 301
+/docs/open-source-quick-start/* /docs/getting-started-on-snowplow-open-source/what-is-quick-start/ 301

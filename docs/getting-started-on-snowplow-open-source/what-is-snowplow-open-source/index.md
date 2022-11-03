@@ -21,12 +21,12 @@ Snowplow has been technically designed to:
 
 ## Getting started
 
-We have built a set of [terraform](https://registry.terraform.io/namespaces/snowplow-devops) modules, which automates the setting up & deployment of the required infrastructure & applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side.
+Our [Quick Start guides](/docs/getting-started-on-snowplow-open-source/what-is-quick-start/index.md) are the easiest way to get started with Snowplow Open Source:
 
-[Quick Start Installation Guide on AWS](/docs/open-source-quick-start/quick-start-installation-guide-on-aws/index.md)
+* [Quick Start on AWS](/docs/getting-started-on-snowplow-open-source/quick-start-aws/index.md)
+* [Quick Start on GCP](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/index.md)
 
-You can also follow our guides to understand how to set up and configure Snowplow pipeline components across AWS or GCP.
+If you need more flexibility (see [Quick Start limitations](/docs/getting-started-on-snowplow-open-source/what-is-quick-start/index.md#quick-start-vs-manual-setup)), you can also start from scratch:
 
-[Setup Snowplow on AWS](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/index.md)
-
-[Setup Snowplow on GCP](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/index.md)
+* [Manual Setup on AWS](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/index.md)
+* [Manual Setup on GCP](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/index.md)

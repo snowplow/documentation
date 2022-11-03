@@ -32,7 +32,9 @@ def __init__(
         request_timeout: Optional[Union[float, Tuple[float, float]]] = None) -> None:
 ```
 
-**_\*\*Prior to v0.12.0_**
+:::note
+Prior to v0.12.0
+:::
 Before version 0.12.0 the default values for the emitter `protocol` and `method` were `http` and `get` respectively.
 
 | **Argument** | **Description** | **Required?** | **Type** |

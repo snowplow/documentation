@@ -191,7 +191,7 @@ You may want to track more than one subject concurrently. To avoid data about on
 ```python
 from snowplow_tracker import Subject, Emitter, Tracker
 
-# Create a simple Emitter which will log events to http://d3rkrsqld9gmqf.cloudfront.net/i
+# Create a simple Emitter which will log events to https://d3rkrsqld9gmqf.cloudfront.net/com.snowplowanalytics.snowplow/tp2
 e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
 
 # Create a Tracker instance

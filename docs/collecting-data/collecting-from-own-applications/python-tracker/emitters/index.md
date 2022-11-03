@@ -22,15 +22,18 @@ This is the signature of the constructor for the base Emitter class:
 def __init__(
         self,
         endpoint: str,
-        protocol: Literal["http", "https"] = "http",
+        protocol: Literal["http", "https"] = "https",
         port: Optional[int] = None,
-        method: Literal["get", "post"] = "get",
+        method: Literal["get", "post"] = "post",
         buffer_size: Optional[int] = None,
         on_success: Optional[Callable[[PayloadDictList], None]] = None,
         on_failure: Optional[Callable[[int, PayloadDictList], None]] = None,
         byte_limit: Optional[int] = None,
         request_timeout: Optional[Union[float, Tuple[float, float]]] = None) -> None:
 ```
+
+**_\*\*Prior to v0.12.0_**
+Before version 0.12.0 the default values for the emitter `protocol` and `method` were `http` and `get` respectively.
 
 | **Argument** | **Description** | **Required?** | **Type** |
 | --- | --- | --- | --- |
@@ -46,7 +49,7 @@ def __init__(
 
 - `protocol`
 
-`protocol` defaults to "http" but also supports "https".
+`protocol` defaults to "https" but also supports "http". **_\*\*(Since v0.12.0_)**
 
 - `buffer_size`
 
@@ -128,9 +131,7 @@ Here is a complete example with all constructor parameters set:
 from snowplow_tracker import AsyncEmitter
 
 e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net", 
-            protocol="https",
             port=None,
-            method="post",
             buffer_size=10,
             byte_limit=None,
             on_success=None,

@@ -1,5 +1,5 @@
 ---
-title: "Frequently Asked Questions"
+title: "Quick Start FAQ"
 date: "2021-07-08"
 sidebar_position: 0
 ---

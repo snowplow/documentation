@@ -39,7 +39,7 @@ Before version 0.12.0 the default values for the emitter `protocol` and `method`
 :::
 | **Argument** | **Description** | **Required?** | **Type** | **Default** |
 | --- | --- | --- | --- |
-| `endpoint` | The collector URI | Yes | Dict | |
+| `endpoint` | The collector URI | Yes | String | |
 | `protocol` | Request protocol: http or https | No | String | `https` |
 | `port` | The port to connect to | No | Positive integer | `None` |
 | `method` | The method to use: “get” or “post” | No | String | `post` |

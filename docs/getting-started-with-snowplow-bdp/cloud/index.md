@@ -18,7 +18,7 @@ BDP Cloud differs from Snowplow BDP Enterprise in the following ways:
 - It has an event cap of 10m events per month
 - We only support Snowflake as a destination currently (although more destinations will be added soon)
 
-![Cloud-Enterprise-Compared.jpg](images/Cloud-Enterprise-Compared.jpg)
+For more details, see our [feature comparison page](/docs/feature-comparison/index.md).
 
 ## Where is the Snowplow pipeline hosted?
     

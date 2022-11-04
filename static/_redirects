@@ -33,13 +33,12 @@
 /docs/try-snowplow/recipes/* /docs/recipes/:splat 301
 
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-with-snowplow-bdp/enterprise/ 301
-/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/ /docs/getting-started-on-snowplow-open-source/what-is-snowplow-open-source/feature-comparison/ 302
+/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/ /docs/feature-comparison/ 302
 /docs/getting-started-with-snowplow-bdp/aws-setup-guide/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-aws/:splat 301
 /docs/getting-started-with-snowplow-bdp/setup-guide-gcp/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-gcp/:splat 301
 
-
 /docs/open-source-quick-start/what-is-the-quick-start-for-open-source/ /docs/getting-started-on-snowplow-open-source/what-is-quick-start/ 301
-/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/feature-comparison/ /docs/getting-started-on-snowplow-open-source/what-is-snowplow-open-source/feature-comparison/ 302
+/docs/open-source-quick-start/what-is-the-quick-start-for-open-source/feature-comparison/ /docs/feature-comparison/ 302
 /docs/open-source-quick-start/what-is-the-quick-start-for-open-source/telemetry-principles/ /docs/getting-started-on-snowplow-open-source/telemetry/ 301
 /docs/open-source-quick-start/quick-start-installation-guide-on-aws/* /docs/getting-started-on-snowplow-open-source/quick-start-aws/:splat 301
 /docs/open-source-quick-start/quick-start-installation-guide-on-gcp/* /docs/getting-started-on-snowplow-open-source/quick-start-gcp/:splat 301
@@ -47,3 +46,5 @@
 /docs/open-source-quick-start/further-exploration/further-enrich-or-transform-your-data/ /docs/enriching-your-data/configuring-enrichments-open-source/ 301
 /docs/open-source-quick-start/quick-start-faqs/ /docs/getting-started-on-snowplow-open-source/what-is-quick-start/faq/ 301
 /docs/open-source-quick-start/* /docs/getting-started-on-snowplow-open-source/what-is-quick-start/ 301
+
+/docs/getting-started-on-snowplow-open-source/what-is-snowplow-open-source/feature-comparison/ /docs/feature-comparison/ 302

@@ -51,7 +51,13 @@ Before version 0.12.0 the default values for the emitter `protocol` and `method`
 
 - `protocol`
 
-`protocol` defaults to "https" but also supports "http". **_\*\*(Since v0.12.0_)**
+`protocol` defaults to "https" but also supports "http".
+
+:::note Prior to v0.12.0
+
+In older versions, `protocol` defaulted to `http`.
+
+:::
 
 - `buffer_size`
 

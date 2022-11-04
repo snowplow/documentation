@@ -37,17 +37,17 @@ def __init__(
 Before version 0.12.0 the default values for the emitter `protocol` and `method` were `http` and `get` respectively.
 
 :::
-| **Argument** | **Description** | **Required?** | **Type** |
+| **Argument** | **Description** | **Required?** | **Type** | **Default** |
 | --- | --- | --- | --- |
-| `endpoint` | The collector URI | Yes | Dict |
-| `protocol` | Request protocol: HTTP or HTTPS | No | List |
-| `port` | The port to connect to | No | Positive integer |
-| `method` | The method to use: “get” or “post” | No | String |
-| `buffer_size` | Number of events to store before flushing | No | Positive integer |
-| `on_success` | Callback executed when a flush is successful | No | Function taking 1 argument |
-| `on_failure` | Callback executed when a flush is unsuccessful | No | Function taking 2 arguments |
-| `byte_limit` | Number of bytes to store before flushing | No | Positive integer |
-| `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers |
+| `endpoint` | The collector URI | Yes | Dict | |
+| `protocol` | Request protocol: http or https | No | String | `https` |
+| `port` | The port to connect to | No | Positive integer | `None` |
+| `method` | The method to use: “get” or “post” | No | String | `post` |
+| `buffer_size` | Number of events to store before flushing | No | Positive integer | `10` |
+| `on_success` | Callback executed when a flush is successful | No | Function taking 1 argument | `None` |
+| `on_failure` | Callback executed when a flush is unsuccessful | No | Function taking 2 arguments | `None` |
+| `byte_limit` | Number of bytes to store before flushing | No | Positive integer | `None` |
+| `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers | `None` |
 
 - `protocol`
 

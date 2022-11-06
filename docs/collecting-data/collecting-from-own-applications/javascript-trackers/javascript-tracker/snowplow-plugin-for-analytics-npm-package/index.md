@@ -8,7 +8,7 @@ The Snowplow JavaScript Tracker can now be deployed directly into your web and n
 
 Recommendation
 
-Snowplow recommends using the official `[@snowplow/browser-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/index.md)` or `[@snowplow/node-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/index.md)` instead of this package as you will receive updates faster and install a smaller dependency into your application, unless you wish to send your events to multiple providers which is where the @analytics packages are particularly useful.
+Snowplow recommends using the official [@snowplow/browser-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/index.md) or [@snowplow/node-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/index.md) instead of this package as you will receive updates faster and install a smaller dependency into your application, unless you wish to send your events to multiple providers which is where the @analytics packages are particularly useful.
 
 ### Quick Start
 

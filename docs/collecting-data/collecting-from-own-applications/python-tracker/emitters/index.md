@@ -13,7 +13,7 @@ At its most basic, the Emitter class only needs a collector URI:
 ```python
 from snowplow_tracker import Emitter
 
-e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
+e = Emitter("collector.example.com")
 ```
 
 This is the signature of the constructor for the base Emitter class:
@@ -22,9 +22,9 @@ This is the signature of the constructor for the base Emitter class:
 def __init__(
         self,
         endpoint: str,
-        protocol: Literal["http", "https"] = "http",
+        protocol: Literal["http", "https"] = "https",
         port: Optional[int] = None,
-        method: Literal["get", "post"] = "get",
+        method: Literal["get", "post"] = "post",
         buffer_size: Optional[int] = None,
         on_success: Optional[Callable[[PayloadDictList], None]] = None,
         on_failure: Optional[Callable[[int, PayloadDictList], None]] = None,
@@ -32,21 +32,32 @@ def __init__(
         request_timeout: Optional[Union[float, Tuple[float, float]]] = None) -> None:
 ```
 
-| **Argument** | **Description** | **Required?** | **Type** |
+:::note Prior to v0.12.0
+
+Before version 0.12.0 the default values for the emitter `protocol` and `method` were `http` and `get` respectively.
+
+:::
+| **Argument** | **Description** | **Required?** | **Type** | **Default** |
 | --- | --- | --- | --- |
-| `endpoint` | The collector URI | Yes | Dict |
-| `protocol` | Request protocol: HTTP or HTTPS | No | List |
-| `port` | The port to connect to | No | Positive integer |
-| `method` | The method to use: “get” or “post” | No | String |
-| `buffer_size` | Number of events to store before flushing | No | Positive integer |
-| `on_success` | Callback executed when a flush is successful | No | Function taking 1 argument |
-| `on_failure` | Callback executed when a flush is unsuccessful | No | Function taking 2 arguments |
-| `byte_limit` | Number of bytes to store before flushing | No | Positive integer |
-| `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers |
+| `endpoint` | The collector URI | Yes | String | |
+| `protocol` | Request protocol: http or https | No | String | `https` |
+| `port` | The port to connect to | No | Positive integer | `None` |
+| `method` | The method to use: “get” or “post” | No | String | `post` |
+| `buffer_size` | Number of events to store before flushing | No | Positive integer | `10` |
+| `on_success` | Callback executed when a flush is successful | No | Function taking 1 argument | `None` |
+| `on_failure` | Callback executed when a flush is unsuccessful | No | Function taking 2 arguments | `None` |
+| `byte_limit` | Number of bytes to store before flushing | No | Positive integer | `None` |
+| `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers | `None` |
 
 - `protocol`
 
-`protocol` defaults to "http" but also supports "https".
+`protocol` defaults to "https" but also supports "http".
+
+:::note Prior to v0.12.0
+
+In older versions, `protocol` defaulted to `http`.
+
+:::
 
 - `buffer_size`
 
@@ -60,9 +71,11 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 
 `on_success` is an optional callback that will execute whenever the queue is flushed successfully, that is, whenever every request sent has status code 200. It will be passed one argument: the number of events that were successfully sent.
 
-**_\*\*New in v0.9.0_**
+:::note New in v0.9.0
 
 Since version 0.9.0, the on_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
+
+:::
 
 - `on_failure` 
 
@@ -87,10 +100,10 @@ def failure(num, arr):
         print(event_dict)
      
 # prior to v0.9.0
-# e = Emitter("d3rkrsqld9gmqf.cloudfront.net", buffer_size=3, on_success=success, on_failure=failure)
+# e = Emitter("collector.example.com", buffer_size=3, on_success=success, on_failure=failure)
 
 # since v0.9.0
-e = Emitter("d3rkrsqld9gmqf.cloudfront.net", buffer_size=3, on_success=new_success, on_failure=failure)
+e = Emitter("collector.example.com", buffer_size=3, on_success=new_success, on_failure=failure)
 
 t = Tracker(e)
 
@@ -102,10 +115,11 @@ t.track_page_view("http://www.example.com/page1")
 t.track_page_view("http://www.example.com/page2")
 ```
 
-**_\*\*New in v0.10.0_**
+:::note New in v0.10.0
 
 Since version 0.10.0, the constructors takes another `request_timeout` argument.
 
+:::
 - `request_timeout`
 
 Timeout for HTTP requests. Can be set either as single float value which applies to both "connect" AND "read" timeout, or as tuple with two float values which specify the "connect" and "read" timeouts separately.
@@ -115,7 +129,7 @@ Timeout for HTTP requests. Can be set either as single float value which applies
 ```python
 from snowplow_tracker import AsyncEmitter
 
-e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net", thread_count=10)
+e = AsyncEmitter("collector.example.com", thread_count=10)
 ```
 
 The `AsyncEmitter` class works just like the Emitter class, which is its parent class. It has one advantage, though: HTTP(S) requests are sent asynchronously, so the Tracker won't be blocked while the Emitter waits for a response. For this reason, the AsyncEmitter is recommended over the base `Emitter` class.
@@ -127,10 +141,8 @@ Here is a complete example with all constructor parameters set:
 ```python
 from snowplow_tracker import AsyncEmitter
 
-e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net", 
-            protocol="https",
+e = AsyncEmitter("collector.example.com", 
             port=None,
-            method="post",
             buffer_size=10,
             byte_limit=None,
             on_success=None,

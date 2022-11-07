@@ -1,4 +1,5 @@
 # Sister websites
+/accelerators/ https://snowplow.io/data-product-accelerators/ 302
 /accelerators/web/* https://snowplow-axl-web.netlify.app/accelerators/web/:splat 200
 /accelerators/mobile/* https://snowplow-axl-mobile.netlify.app/accelerators/mobile/:splat 200
 /accelerators/hybrid/* https://snowplow-axl-hybrid.netlify.app/accelerators/hybrid/:splat 200

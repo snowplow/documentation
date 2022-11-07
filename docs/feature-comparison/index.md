@@ -33,7 +33,7 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | • Kafka | ❌ | ❌ | bolt-on |
 | • Azure Eventhubs | ❌ | ❌ | bolt-on |
 
-## Build trust in your data
+## Build more trust in your data
 
 | Feature | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) | 
 |:--|:-:|:-:|:-:|

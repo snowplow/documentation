@@ -28,6 +28,8 @@ Please add **techops-cloud-admin@snowplowanalytics.com** to your project with 
 - `Roles/monitoring.admin`
 - `Roles/iam.roleAdmin`
 - `Roles/iam.serviceAccountAdmin`
+- `Roles/secretmanager.secretAccessor`
+- `Roles/secretmanager.secretVersionAdder`
 
 ### Enable billing for the project
 

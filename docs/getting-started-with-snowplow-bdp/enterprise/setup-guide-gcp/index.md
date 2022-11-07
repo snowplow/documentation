@@ -28,6 +28,9 @@ Please add **techops-cloud-admin@snowplowanalytics.com** to your project with 
 - `Roles/monitoring.admin`
 - `Roles/iam.roleAdmin`
 - `Roles/iam.serviceAccountAdmin`
+
+The following roles are also required if using [RDB-Loader](docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) within GCP:
+
 - `Roles/secretmanager.secretAccessor`
 - `Roles/secretmanager.secretVersionAdder`
 

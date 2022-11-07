@@ -44,7 +44,6 @@ let config = TrackerConfiguration()
 TrackerConfiguration config = new TrackerConfiguration()
     .sessionContext(false) // Session context entity won't be added to events
     .userAnonymisation(true); // User identifiers in Platform context (IDFA and IDFV) will be anonymised
-});
 ```
 
   </TabItem>

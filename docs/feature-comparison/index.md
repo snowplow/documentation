@@ -10,9 +10,9 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | Feature | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) | 
 |:--|:-:|:-:|:-:|
 | [35+ trackers & webhooks](/docs/collecting-data/index.md) | ✅ | ✅ | ✅ |
-| 1st party tracking | ✅ | ❌ | ✅ |
+| 1st party tracking | ✅ | _coming soon_ | ✅ |
 | [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ | ✅ |
-| [Custom events & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) | ✅ | ❌ | ✅ |
+| [Custom events & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) | ✅ | _coming soon_ | ✅ |
 | [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ | ✅ |
 | Advanced stream transformations (JS, API, SQL enrichments) | ✅ | ❌ | ✅ |
 | [Out-of-the-box data models](/docs/modeling-your-data/what-is-data-modeling/index.md)  | ✅ | ✅ | ✅ |
@@ -20,9 +20,9 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | [Destinations hub](https://snowplow.io/destination-hub/) | ❌ | ❌ | ✅ |
 | **Warehouse / lake destinations** | | | |
 | • Snowflake | ✅ | ✅ | ✅ |
-| • Redshift | ✅ | ❌ | ✅ |
+| • Redshift | ✅ | _coming soon_ | ✅ |
 | • BigQuery | ✅ | ❌ | ✅ |
-| • Databricks | ✅ | ❌ | ✅ |
+| • Databricks | ✅ | _coming soon_ | ✅ |
 | • Elasticsearch | ✅ | ❌ | bolt-on |
 | • Postgres | ✅ | ❌ | ❌ |
 | • S3 | ✅ | ❌ | ✅ |
@@ -54,7 +54,7 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 |:--|:-:|:-:|:-:|
 | Seats | N/A | unlimited | unlimited |
 | [Data structures tooling & API](/docs/understanding-tracking-design/managing-data-structures/index.md) | ❌ | ❌ | ✅ |
-| [Data modelling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md) | ❌ | ❌ | ✅ |
+| [Data modelling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md) | ❌ | _coming soon_ | ✅ |
 | [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ❌ | ❌ | ✅ |
 
 ## Deployment & security

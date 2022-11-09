@@ -51,7 +51,7 @@ In this situation it is highly recommended to ensure you set your `snowplow__bac
 
 :::danger
 
-Manipulating the values in the manifest tables will cause that and all downstream models to run from the new dates provided (with some buffers, see [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md)). Any custom models must have been built a way that this approach would work to correct historic records.
+Manipulating the values in the manifest tables for a given model will impact not only that model, but also _all downstream models_. Namely, they will all run from the new dates provided (with some buffers, see [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md)). If you are using any custom models, they should be built in a way that supports this approach.
 
 This method is also only suitable if the value of your source data in your `upsert` key has not changed, if this is not the case there is no choice but to run a full refresh of the model.
 

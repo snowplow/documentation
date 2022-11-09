@@ -41,19 +41,34 @@ dbt run --select +snowplow_mobile.screen_views --vars "{'models_to_run': '$(dbt 
 </TabItem>
 </Tabs>
 
-## Custom Re-running of models
+## Custom re-running of specific models
 
-For any models that use the [snowplow incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md), and have a defined `upsert` key, it is *possible* to re-run these models from a particular date in the past by manipulating the date stored in the manifest table for each of the relevant models. This will update and overwrite data that was generated from this date without you needing to do a full refresh. This feature is **not** directly supported and should be used at your own risk due to the high complexity involved, but those with advanced experience and understanding of the processing that package does may wish to do this in the case of incorrect data processing due to either invalid input data or dbt models changes where a full refresh would be too costly.
-
-In this situation it is highly recommended to ensure you set your `snowplow__backfill_limit_days` large enough to complete this in a single run to avoid your data being left in a state where you have incorrect future calculated information; this is particularly a concern for any aggregation or rolling aggregation fields e.g. the users table, and if you have any reporting or visualizations based off this data.
-
-![](images/data_progress_example.drawio.png)
+There may be times where you need to re-run some or all of the models that for a period of data, potentially due to incorrect supplemental data brought into a model, or an error that was made in your model code itself. There are two methods to do this; one is simpler but must complete in a single run, the second is more complex but be processed over multiple runs. Either will work for any custom models assuming they were built using the [snowplow incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md).
 
 :::danger
 
-Manipulating the values in the manifest tables for a given model will impact not only that model, but also _all downstream models_. Namely, they will all run from the new dates provided (with some buffers, see [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md)). If you are using any custom models, they should be built in a way that supports this approach.
+Both methods are only suitable if the value of your source data in your `upsert` and date keys have not changed (e.g. `page_view_id` and `derived_tstamp` for the `snowplow_web_page_views` model). If this is not the case, or your custom models are not built using this approach, there is no choice but to run a full refresh of the model.
 
-This method is also only suitable if the value of your source data in your `upsert` key has not changed, if this is not the case there is no choice but to run a full refresh of the model.
+:::
+### Option 1: Altering the look back window
+
+As defined in the [standard run incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/#state-4-standard-run) the lower limit for the events to be processed in the models is `max_last_success - snowplow__lookback_window_hours`. By increasing the value of `snowplow__lookback_window_hours` to such a number that this will take you beyond the period you wish to re-run from, then all events from that time will be reprocessed and feed through all models in the package.
+
+For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00` you would set your `snowplow__lookback_window_hours` to `137` (5*24+11+6, the 6 for an additional buffer the look back window would usually provide). This will reprocess all the events in a single run, which may be larger than the value you have set in `snowplow__backfill_limit_days`. Don't forget to change your value back once the run has completed!
+
+![](images/data_progress_example1.drawio.png)
+
+### Option 2: Manipulating the manifest table
+
+It is possible to update the value in the [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#manifest-tables) so that the `max_last_success` for the model(s) you need are set to the date you wish to re-run from. In this case it may take multiple runs for your data to be completely re-run, based on your `snowplow__backfill_limit_days` value, and you may be left with abnormal data until all runs are completed. In the case where you have aggregations in your models (such as the `snowplow_web_users` model), or have downstream reports/visualization/ML models based on these tables, we recommend setting the `snowplow__backfill_limit_days` to a large enough value that it can be completed in one run to minimize downstream issues, or to use option 1 where this happens by default.
+
+For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00` you would set the value in your manifest table for the model(s) to `2022-10-25 02:00:00`. This will then process data from then (minus the `snowplow__lookback_window_hours` buffer) until either the current date, or for your `snowplow__backfill_limit_days`, whichever is earlier. This will repeat until the data is all fully reprocessed.
+
+![](images/data_progress_example2.drawio.png)
+
+:::danger
+
+Manipulating the values in the manifest tables can cause unexpected outcomes if you don't understand the Snowplow [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md)). Where possible use option 1.
 
 :::
 

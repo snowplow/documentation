@@ -1,11 +1,12 @@
 ---
-title: "Advanced Operation"
-date: "2022-10-05"
+title: 'Advanced Operation'
+date: '2022-10-05'
 sidebar_position: 999
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
 ```
 
 ## Asynchronous Runs
@@ -56,7 +57,7 @@ As defined in the [standard run incremental logic](/docs/modeling-your-data/mode
 
 For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00` you would set your `snowplow__lookback_window_hours` to `137` (5*24+11+6, the 6 for an additional buffer the look back window would usually provide). This will reprocess all the events in a single run, which may be larger than the value you have set in `snowplow__backfill_limit_days`. Don't forget to change your value back once the run has completed!
 
-![](images/data_progress_example1.drawio.png)
+<ThemedImage alt="Docusaurus themed image" sources={{light: require('./images/data_progress_example1_light.drawio.png').default, dark: require('./images/data_progress_example1_dark.drawio.png').default}}/>
 
 ### Option 2: Manipulating the manifest table
 
@@ -64,14 +65,19 @@ It is possible to update the value in the [manifest tables](/docs/modeling-your-
 
 For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00` you would set the value in your manifest table for the model(s) to `2022-10-25 02:00:00`. This will then process data from then (minus the `snowplow__lookback_window_hours` buffer) until either the current date, or for your `snowplow__backfill_limit_days`, whichever is earlier. This will repeat until the data is all fully reprocessed.
 
-![](images/data_progress_example2.drawio.png)
+<ThemedImage 
+    alt="Docusaurus themed image" 
+    sources={{
+        light: require('./images/data_progress_example2_light.drawio.png').default, 
+        dark: require('./images/data_progress_example2_dark.drawio.png').default
+        }}
+/>
 
 :::danger
 
 Manipulating the values in the manifest tables can cause unexpected outcomes if you don't understand the Snowplow [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md)). Where possible use option 1.
 
 :::
-
 
 ## Cluster Keys
 

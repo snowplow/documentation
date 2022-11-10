@@ -4,24 +4,23 @@ date: "2020-02-26"
 sidebar_position: 40
 ---
 
-As a Snowplow user, you have the ability to define your own event types, upload the associated schemas for those types to your own Iglu schema registry and then track those events in Snowplow using the `track_self_describing_event()` method.
-
-In addition, Snowplow has a wide selection of pre-defined events and associated methods for tracking:
+As a Snowplow user, you have the access to a wide selection of event types and associated methods for tracking as well as the ability to define your own event types:
 
 | **Function** | **Description** |
 | --- | --- |
-| [`track_page_view()`](#page-view) | Track views of web pages |
-| [`track_page_ping()`](#page-ping) | Track engagement on web pages over time |
-| [`track_link_click()`](#link-click) | Track link clicks |
-| [`track_form_change()`](#form-change) | Track form changes |
-| [`track_form_submit()`](#form-submit) | Track that a form was submitted |
-| [`track_site_search()`](#site-search) | Track when a user searches your site |
-| [`track_screen_view()`](#screen-view) | Track screen views (non-web e.g. in-app) |
-| [`track_ecommerce_transaction()`](#ecommerce-transaction) | Track ecommerce transaction |
-| [`track_ecommerce_transaction_item()`](#ecommerce-transaction-item) | Track an item of an ecommerce transaction |
-| [`track_add_to_cart()`](#add-to-cart) | Track an add to cart event |
-| [`track_remove_from_cart()`](#remove-from-cart) | Track a remove from cart event |
-| [`track_struct_event()`](#struct-event) | Track a Snowplow custom structured event |
+| [`track_page_view()`](#track-page-view) | Track views of web pages |
+| [`track_page_ping()`](#track-page-pings) | Track engagement on web pages over time |
+| [`track_link_click()`](#track-link-clicks) | Track link clicks |
+| [`track_form_change()`](#track-form-change) | Track form changes |
+| [`track_form_submit()`](#track-submitted-forms) | Track that a form was submitted |
+| [`track_site_search()`](#track-site-searches) | Track when a user searches your site |
+| [`track_screen_view()`](#track-screen-view) | Track screen views (non-web e.g. in-app) |
+| [`track_ecommerce_transaction()`](#track-ecommerce-transactions) | Track ecommerce transaction |
+| [`track_ecommerce_transaction_item()`](#track-ecommerce-transaction-items) | Track an item of an ecommerce transaction |
+| [`track_add_to_cart()`](#track-add-to-cart-events) | Track an add to cart event |
+| [`track_remove_from_cart()`](#track-remove-from-cart-events) | Track a remove from cart event |
+| [`track_struct_event()`](#track-structured-events) | Track a Snowplow custom structured event |
+| [`track_self_describing_event()`](#track-self-describing-event) | Track an event that you have defined yourself |
 
 ### Common tracking parameters
 
@@ -263,7 +262,6 @@ Example:
 ```python
 t.track_screen_view("HUD > Save Game", "screen23", None, 1368725287000)
 ```
-
 ### Track ecommerce transactions
 
 Use `track_ecommerce_transaction()` to track an ecommerce transaction. Arguments:

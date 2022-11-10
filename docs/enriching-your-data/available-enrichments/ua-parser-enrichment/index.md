@@ -14,7 +14,7 @@ With the device family field which is part of the context you can also benefit f
 
 The [YAUAA Enrichment](../yauaa-enrichment/index.md) supersedes this enrichment and is preferable in most cases as it will generate a richer dataset. 
 
-You can continue to use the UA Parser Enrichment. It is useful if you have memory constraints running the Enrich application as the YAUAA enrichment uses significantly more memory. Additionally, the UA Parser enrichment does further parsing of the Operating System and Browser Version numbers.
+You can continue to use the UA Parser Enrichment. It is handy if you have memory constraints running the Enrich application, as it uses significantly less memory than the YAUAA enrichment. Additionally, the UA Parser enrichment does further parsing of the Operating System and Browser Version numbers.
 
 Both enrichments will produce an additional entity attached to an event based on the information available in the `User-Agent` header of the request from a users browser.
 

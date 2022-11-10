@@ -21,7 +21,6 @@
 			"body": [
 				"---",
 				"title: \"$1\"",
-				"date: \"$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE\"",
 				"sidebar_position: 10",
 				"---",
 				""
@@ -46,10 +45,10 @@
 		"prefix": "theme",
 		"body": [
 			"<ThemedImage ",
-				"alt='Docusaurus themed image'",
+				"alt='$1'",
 				"sources={{",
-					"light: require('./images/$1').default, ",
-					"dark: require('./images/$2').default",
+					"light: require('./images/$2').default, ",
+					"dark: require('./images/$3').default",
 					"}}",
 			"/>",
 			""
@@ -89,4 +88,64 @@
 		],
 		"description": "Additional tab item block"
 	},
+	"Note Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_note",
+		"body": [
+			":::note",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Note admonition"
+	},
+	"Tip Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_tip",
+		"body": [
+			":::tip",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Tip admonition"
+	},
+	"Info Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_info",
+		"body": [
+			":::info",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Info admonition"
+	},
+	"Caution Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_caution",
+		"body": [
+			":::caution",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Caution admonition"
+	},
+	"Danger Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_danger",
+		"body": [
+			":::danger",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Danger admonition"
+	}
 }

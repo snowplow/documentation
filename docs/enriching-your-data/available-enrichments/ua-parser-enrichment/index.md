@@ -22,7 +22,7 @@ Both enrichments will produce an additional entity attached to an event, based o
 
 <summary>UA Parser vs YAUAA Output</summary>
 
-| UA Parser Output  | YAUAA Output                                 | Example (Firefox 106 on Mac OS X)       |
+| UA Parser Field  | YAUAA Field                                 | Example (Firefox 106 on Mac OS X)       |
 |-------------------|----------------------------------------------|-----------------------------------------|
 | device_family     | deviceClass                                  | Desktop                                 |
 | ❌                | deviceName                                   | Apple Macintosh                         |

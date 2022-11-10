@@ -10,18 +10,18 @@ In addition, Snowplow has a wide selection of pre-defined events and associated 
 
 | **Function** | **Description** |
 | --- | --- |
-| [`track_page_view()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-page-view) | Track views of web pages |
-| [`track_page_ping()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-page-pings) | Track engagement on web pages over time |
-| [`track_link_click()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-link-clicks) | Track link clicks |
-| [`track_form_change()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-form-change) | Track form changes |
-| [`track_form_submit()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-submitted-forms) | Track that a form was submitted |
-| [`track_site_search()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-site-searches) | Track when a user searches your site |
-| [`track_screen_view()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-screen-view) | Track screen views (non-web e.g. in-app) |
-| [`track_ecommerce_transaction()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-ecommerce-transactions) | Track ecommerce transaction |
-| [`track_ecommerce_transaction_item()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-ecommerce-transaction-items) | Track an item of an ecommerce transaction |
-| [`track_add_to_cart()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-add-to-cart-events) | Track an add to cart event |
-| [`track_remove_from_cart()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-remove-from-cart-events) | Track a remove from cart event |
-| [`track_struct_event()`](/docs/collecting-data/collecting-from-own-applications/python-tracker/tracking-specific-events/#track-structured-events) | Track a Snowplow custom structured event |
+| [`track_page_view()`](#track-page-view) | Track views of web pages |
+| [`track_page_ping()`](#track-page-pings) | Track engagement on web pages over time |
+| [`track_link_click()`](#track-link-clicks) | Track link clicks |
+| [`track_form_change()`](#track-form-change) | Track form changes |
+| [`track_form_submit()`](#track-submitted-forms) | Track that a form was submitted |
+| [`track_site_search()`](#track-site-searches) | Track when a user searches your site |
+| [`track_screen_view()`](#track-screen-view) | Track screen views (non-web e.g. in-app) |
+| [`track_ecommerce_transaction()`](#track-ecommerce-transactions) | Track ecommerce transaction |
+| [`track_ecommerce_transaction_item()`](#track-ecommerce-transaction-items) | Track an item of an ecommerce transaction |
+| [`track_add_to_cart()`](#track-add-to-cart-events) | Track an add to cart event |
+| [`track_remove_from_cart()`](#track-remove-from-cart-events) | Track a remove from cart event |
+| [`track_struct_event()`](#track-structured-events) | Track a Snowplow custom structured event |
 
 ### Common tracking parameters
 

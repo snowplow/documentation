@@ -4,9 +4,7 @@ date: "2020-02-26"
 sidebar_position: 40
 ---
 
-As a Snowplow user, you have the ability to define your own event types, upload the associated schemas for those types to your own Iglu schema registry and then track those events in Snowplow using the `track_self_describing_event()` method.
-
-In addition, Snowplow has a wide selection of pre-defined events and associated methods for tracking:
+As a Snowplow user, you have the access to a wide selection of event types and associated methods for tracking as well as the ability to define your own event types:
 
 | **Function** | **Description** |
 | --- | --- |
@@ -22,6 +20,7 @@ In addition, Snowplow has a wide selection of pre-defined events and associated 
 | [`track_add_to_cart()`](#track-add-to-cart-events) | Track an add to cart event |
 | [`track_remove_from_cart()`](#track-remove-from-cart-events) | Track a remove from cart event |
 | [`track_struct_event()`](#track-structured-events) | Track a Snowplow custom structured event |
+| [`track_self_describing_event()`](#track-self-describing-event) | Track an event that you have defined yourself |
 
 ### Common tracking parameters
 

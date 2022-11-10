@@ -16,7 +16,7 @@ The [YAUAA Enrichment](../yauaa-enrichment/index.md) supersedes this enrichment 
 
 You can continue to use the UA Parser Enrichment. It is handy if you have memory constraints running the Enrich application, as it uses significantly less memory than the YAUAA enrichment. Additionally, the UA Parser enrichment does further parsing of the Operating System and Browser Version numbers.
 
-Both enrichments will produce an additional entity attached to an event based on the information available in the `User-Agent` header of the request from a users browser.
+Both enrichments will produce an additional entity attached to an event, based on the information available in the `User-Agent` header of the request from a user’s browser.
 
 <details>
 

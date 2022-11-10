@@ -1,5 +1,5 @@
 ---
-title: 'Advanced Operation'
+title: "Advanced Operation"
 date: '2022-10-05'
 sidebar_position: 999
 ---
@@ -55,10 +55,9 @@ Both methods are only suitable if the value of your source data in your `upsert`
 
 As defined in the [standard run incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/#state-4-standard-run) the lower limit for the events to be processed in the models is `max_last_success - snowplow__lookback_window_hours`. If you increase the value of `snowplow__lookback_window_hours` to a number that goes beyond the period you wish to re-run from, then all events from that time will be reprocessed and fed through all models in the package.
 
-For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00` you would set your `snowplow__lookback_window_hours` to `137` (5 days 
-× 24 hours + 11 hours, and 6 hours of an additional buffer the look back window would usually provide). This will reprocess all the events in a single run, which may be larger than the value you have set in `snowplow__backfill_limit_days` - if you wish to avoid going over the backfill limit you have set please use option 2. Don't forget to change your value back once the run has completed!
+For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00` you would set your `snowplow__lookback_window_hours` to `137` (5 days × 24 hours + 11 hours, and 6 hours of an additional buffer the look back window would usually provide). This will reprocess all the events in a single run, which may be larger than the value you have set in `snowplow__backfill_limit_days`. If you wish to avoid going over the backfill limit you have set please use option 2. Don't forget to change your value back once the run has completed!
 
-<ThemedImage alt="Docusaurus themed image" sources={{light: require('./images/data_progress_example1_light.drawio.png').default, dark: require('./images/data_progress_example1_dark.drawio.png').default}}/>
+<ThemedImage alt="Demonstration of data processing through option 1 approach" sources={{light: require('./images/data_progress_example1_light.drawio.png').default, dark: require('./images/data_progress_example1_dark.drawio.png').default}}/>
 
 ### Option 2: Manipulating the manifest table
 
@@ -67,7 +66,7 @@ It is possible to update the value in the [manifest tables](/docs/modeling-your-
 For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00` you would set the value in your manifest table for the model(s) to `2022-10-25 02:00:00`. This will then process data from that point (minus the `snowplow__lookback_window_hours` buffer) until either the current date, or according to your `snowplow__backfill_limit_days`, whichever yields a smaller time period. This will repeat until the data is fully reprocessed.
 
 <ThemedImage 
-    alt="Docusaurus themed image" 
+    alt="Demonstration of data processing through multiple runs of the option 2 approach" 
     sources={{
         light: require('./images/data_progress_example2_light.drawio.png').default, 
         dark: require('./images/data_progress_example2_dark.drawio.png').default

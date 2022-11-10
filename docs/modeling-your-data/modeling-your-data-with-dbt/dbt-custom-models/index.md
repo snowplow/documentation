@@ -31,13 +31,9 @@ The `_this_run` and derived tables are considered part of the 'public' class of 
 
 ## What denotes a custom module?
 
-**Does:**
+In short, **a custom module is** anything that plugs into the incremental framework provided by this package. Generally speaking any models you create that reference any of the `_this_run` tables from the standard modules are leveraging this framework and therefore need to be tagged with `snowplow_web/mobile_incremental` (see the [tagging](#tagging-custom-models) section). Such models will typically be materialized as incremental, although for more complex custom modules there may be a series of staging models that ultimately produce a derived incremental model. In this case, all staging models also need to be tagged correctly.
 
-In short, anything that plugs into the incremental framework provided by this package. Generally speaking any models you create that reference any of the `_this_run` tables from the standard modules are leveraging this framework and therefore need to be tagged with `snowplow_web/mobile_incremental` (see the [tagging](#tagging-custom-models) section). Such models will typically be materialized as incremental, although for more complex custom modules there may be a series of staging models that ultimately produce a derived incremental model. In this case, all staging models also need to be tagged correctly.
-
-**Doesn't:**
-
-Models that only reference a Snowplow web derived table as their input, rather than a `_this_run` table. Since these derived tables are materialized as incremental they contain all historic events. Any models you build that reference these tables can therefore by written in a drop and recompute manner i.e. materialized as a table. This means they do not leverage the incremental framework of this package and therefore **should not be tagged.**
+On the other hand, **what does not count as a custom module is** a model that only references a Snowplow web derived table as its input, rather than a `_this_run` table. Since such derived tables are materialized as incremental, they contain all historic events. Any models you build that reference these tables can therefore be written in a “drop and recompute” manner i.e. materialized as a table. This means they do not leverage the incremental framework of this package and therefore **should not be tagged.**
 
 ## Inputs for custom modules
 
@@ -106,7 +102,7 @@ If you want to retire a custom module, you should:
 
 ## Back-filling custom modules
 
-Overtime you may wish to add custom modules to extend the functionality of this package. As you introduce new custom modules into your project, assuming they are [tagged correctly](#tagging-custom-models), the web and mobile models will automatically replay all events up until the latest event to have been processed by the other modules.
+Over time you may wish to add custom modules to extend the functionality of this package. As you introduce new custom modules into your project, assuming they are [tagged correctly](#tagging-custom-models), the web and mobile models will automatically replay all events up until the latest event to have been processed by the other modules.
 
 Note that the batch size of this back-fill is limited as outlined in the [identification of events to process](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md#identification-of-events-to-process) section. This means it might take several runs to complete the back-fill, **during which time no new events will be processed by the main model**.
 

@@ -121,6 +121,20 @@ Enabling this option automatically maps all the marketing (`mkt_` prefixed) fiel
 
 Specify the Property Key from the Client Event, and then the key you could like to map it to or leave the mapped key blank to keep the same name. You can use Key Path notation here (e.g. `x-sp-tp2.p` for a Snowplow events platform or `x-sp-contexts.com_snowplowanalytics_snowplow_web_page_1.0.id` for a Snowplow events page view id (in array index 0) or pick non-Snowplow properties if using an alternative Client. These keys will populate the Amplitude `eventProperties` object.
 
+## Additional Properties
+
+In this section you can additionally set specified event or user properties to custom values (e.g. through a GTM Server-side variable).
+
+![additional_properties](images/05-gtm-ss-amplitude.png)
+
+### Event Properties
+
+Using the **Additional Event Properties** table allows you to set additional **event** properties in Amplitude payload. To do so add a row and simply specify the property name for Amplitude `event_properties` and then the value you would like to set it to.
+
+### User Properties
+
+Using the **Additional User Properties** table allows you to set additional **user** properties in Amplitude payload. Similarly to the previous table in the section, add a row and specify the property name for Amplitude `user_properties` and then the value you would like to set it to.
+
 ## Advanced Event Settings
 
 In this section you can find advanced configuration parameters.

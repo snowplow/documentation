@@ -6,11 +6,29 @@ sidebar_position: 8
 
 YAUAA (Yet Another User Agent Analyzer) enrichment is a powerful user agent parser and analyzer.
 
-It uses [YAUAA API](https://yauaa.basjes.nl/) to parse and analyze the user agent string of an HTTP request and extract as many relevant information as possible about the user's device and browser, like for instance the device class (Phone, Tablet, etc.).
+It uses [YAUAA API](https://yauaa.basjes.nl/) to parse and analyze all user agent information of an HTTP request and extract as many relevant information as possible about the user's device and browser, like for instance the device class (Phone, Tablet, etc.).
 
 <table class="has-fixed-layout"><tbody><tr><td class="has-text-align-center" data-align="center"><strong>YAUAA parsing relies entirely on in-memory <em>HashMap</em>s and require roughly 400 MB of RAM (see </strong><a href="https://yauaa.basjes.nl/README-MemoryUsage.html">here</a><strong>). Additional memory is also needed if caching is enabled (by default).</strong></td></tr></tbody></table>
 
 There is no interaction with an external system.
+
+## Configure your website to send client hints
+
+The YAUAA enrichment does not require you to make any changes to your website. However, it is possible to improve the accuracy of the user agent data produced by YAUAA, if you are able to configure your website to send [high entropy client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) to the collector.
+
+The current trend in web browsers is to reduce the amount of information sent to servers in the `User-Agent` HTTP header, to help with user privacy.  Client Hints are a way for sites to opt in to sending the extra information which previously would have been part of the user agent header.
+
+There are two ways for your website to opt-in to sending client hints to the collector.  You can either configure your webserver to set a [`Permissions-Policy` HTTP header](https://www.w3.org/TR/permissions-policy-1/) when serving the page's main HTML page:
+
+```
+Permissions-Policy: ch-ua-full-version-list=(self "https://<YOUR COLLECTOR DOMAIN>")
+```
+
+Or you can put a `meta` tag in the header secion of your site's HTML:
+
+```
+<meta http-equiv="delegate-ch" content="sec-ch-ua-full-version-list https://<YOUR COLLECTOR DOMAIN>;">
+```
 
 ## Configuration
 
@@ -21,7 +39,10 @@ Only one parameter can be set in the configuration : `cacheSize`. This field det
 
 ## Input
 
-This enrichment uses the field `useragent`.
+This enrichment uses the following inputs:
+
+- The `useragent` field from the Snowplow event.  Typically this field is taken from the `User-Agent` HTTP header.  But Snowplow trackers can also override the user agent by setting the `ua` field [in the tracker payload](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
+- Client hint HTTP headers.  These are [a set of standard headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) such as `Sec-CH-UA` which provide extra detail about the user agent.
 
 ## Output
 

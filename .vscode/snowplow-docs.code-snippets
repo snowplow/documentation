@@ -1,0 +1,175 @@
+{
+	// Place your Documentation workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Front Matter": {
+			"scope": "markdown",
+			"prefix": "front_matter",
+			"body": [
+				"---",
+				"title: \"$1\"",
+				"sidebar_position: $2",
+				"description: $3",
+				"---",
+				""
+			],
+			"description": "Docusaurus Front Matter"
+		},
+	"mdx code block": {
+		"scope": "markdown",
+		"prefix": "mdx",
+		"body": [
+			"```mdx-code-block",
+			"import Tabs from '@theme/Tabs';",
+			"import TabItem from '@theme/TabItem';",
+			"import ThemedImage from '@theme/ThemedImage';",
+			"```",
+			""
+		],
+		"description": "Docusaurus mdx block for tabs and themed images"
+	},
+	"Doc card block": {
+		"scope": "markdown",
+		"prefix": "doc_card",
+		"body": [
+			"```mdx-code-block",
+			"import DocCardList from '@theme/DocCardList';",
+			"<DocCardList />",
+			"```",
+			""
+		],
+		"description": "Docusaurus doc card block for empty hierarchy pages"
+	},
+	"Themed image block": {
+		"scope": "markdown",
+		"prefix": "theme",
+		"body": [
+			"<ThemedImage ",
+				"alt='$1'",
+				"sources={{",
+					"light: require('./images/$2').default, ",
+					"dark: require('./images/$3').default",
+					"}}",
+			"/>",
+			""
+		],
+		"description": "Themed image tag for light mode and dark mode images"
+	},
+	"Tabs block": {
+		"scope": "markdown",
+		"prefix": "tab",
+		"body": [
+			"<Tabs groupId=\"$1\">",
+			"<TabItem value=\"$2\" label=\"$3\" default>",
+"",
+			"$4",
+"",
+			"</TabItem>",
+			"<TabItem value=\"$4\" label=\"$5\">",
+"",
+			"$6",
+"",
+			"</TabItem>",
+"",
+			"</Tabs>",
+			""
+		],
+		"description": "Full Tab block for toggling"
+	},
+	"Tabs Item": {
+		"scope": "markdown",
+		"prefix": "tabitem",
+		"body": [
+			"<TabItem value=\"$1\" label=\"$2\">",
+"",
+			"$3",
+"",
+			"</TabItem>"
+		],
+		"description": "Additional tab item block"
+	},
+	"Note Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_note",
+		"body": [
+			":::note",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Note admonition"
+	},
+	"Tip Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_tip",
+		"body": [
+			":::tip",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Tip admonition"
+	},
+	"Info Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_info",
+		"body": [
+			":::info",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Info admonition"
+	},
+	"Caution Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_caution",
+		"body": [
+			":::caution",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Caution admonition"
+	},
+	"Danger Admonition": {
+		"scope": "markdown",
+		"prefix": "admon_danger",
+		"body": [
+			":::danger",
+			"",
+			"$0",
+			"",
+			":::"
+		],
+		"description": "Danger admonition"
+	},
+	"Collapsable Details Block": {
+		"scope": "markdown",
+		"prefix": "details_block",
+		"body": [
+				"<details>",
+				"<summary>$1</summary>",
+					"$2",
+				"</details>",
+				""
+		]
+	}
+}

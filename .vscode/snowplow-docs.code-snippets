@@ -15,9 +15,9 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	"Header": {
+	"Front Matter": {
 			"scope": "markdown",
-			"prefix": "head",
+			"prefix": "front_matter",
 			"body": [
 				"---",
 				"title: \"$1\"",
@@ -26,7 +26,7 @@
 				"---",
 				""
 			],
-			"description": "Docusaurus Header"
+			"description": "Docusaurus Front Matter"
 		},
 	"mdx code block": {
 		"scope": "markdown",
@@ -160,5 +160,16 @@
 			":::"
 		],
 		"description": "Danger admonition"
+	},
+	"Collapsable Details Block": {
+		"scope": "markdown",
+		"prefix": "details_block",
+		"body": [
+				"<details>",
+				"<summary>$1</summary>",
+					"$2",
+				"</details>",
+				""
+		]
 	}
 }

@@ -36,6 +36,17 @@ yarn start
 
 Step 4. Go to `localhost:3000` in your browser and enjoy!
 
+## VSCode Snippets
+
+We have created a selection of [VSCode Snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets) that cover some of the common, but fiddly, blocks of code you may require when writing docs. You can trigger these by starting to type their name and then pressing tab or use `Insert Snippet` in the Command Palette. All snippets we have created can be found [here](https://github.com/snowplow/documentation/blob/main/.vscode/snowplow-docs.code-snippets) and we currently have ones for:
+- [Admonitions](https://docusaurus.io/docs/markdown-features/admonitions) 
+- [Collapsible blocks](https://docusaurus.io/docs/markdown-features#details)
+- [Tabs](https://docusaurus.io/docs/markdown-features/tabs) 
+- [Themed images](https://docusaurus.io/docs/next/markdown-features/assets#themed-images)
+- [DocCards](https://docusaurus.io/docs/sidebar/items#embedding-generated-index-in-doc-page)
+- [Mdx blocks](https://docusaurus.io/docs/markdown-features/react#importing-components) for enabling tabs and themed images
+- [Front matter](https://docusaurus.io/docs/markdown-features#front-matter) 
+
 ## Organizing content
 
 In this section you’ll find some general tips on how the docs are structured.

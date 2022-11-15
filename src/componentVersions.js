@@ -2,7 +2,7 @@ export const versions = {
   snowplowMicro: '1.3.3',
   scalaTracker: '2.0.0',
   flutterTracker: '0.3.0',
-  rdbLoader: '5.1.1',
+  rdbLoader: '5.1.2',
   collector: '2.8.2',
   enrich: '3.5.1',
   bqLoader: '1.5.2',

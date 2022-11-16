@@ -72,6 +72,7 @@ You will need to share this role with us as part of filling out the setup form i
  "es:*",
  "execute-api:*",
  "events:*",
+ "globalaccelerator:*",
  "iam:*",
  "kinesis:*",
  "kinesisanalytics:*",

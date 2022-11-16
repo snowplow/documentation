@@ -74,6 +74,12 @@ TrackerConfiguration config = new TrackerConfiguration()
   </TabItem>
 </Tabs>
 
+:::note
+
+When anonymous tracking is enabled or disabled using `tracker.setUserAnonymisation(true | false)`, the tracker starts a new session which results in a new `sessionId`.
+
+:::
+
 ## 3. Server-side anonymisation
 
 Server-side anonymisation affects user identifiers set server-side. In particular, these are the `network_userid` property set in server-side cookie and the user IP address. You can anonymise the properties using the `serverAnonymisation` flag in `EmitterConfiguration`:

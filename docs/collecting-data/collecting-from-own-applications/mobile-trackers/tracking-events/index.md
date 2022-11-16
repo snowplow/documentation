@@ -764,6 +764,8 @@ It works exactly like for `PageView` events in the web/JS tracker.
 When the user taps on an advertising banner or a marketing email or message, it can trigger the launch of the app through the Deep Linking feature. The referral from the advertising campaigns, websites, or other source can be composed by UTM parameters used to attribute the user activity back to the campaign.
 The Campaign Attribution Enrichment can parse the DeepLinkReceived event extracting the UTM parameters in the deep link url.
 
+The tracked `DeepLinkReceived` event and each subsequent `ScreenView` event also have the URL and referrer information added in the `page_url` and `page_referrer` atomic properties. This makes them compatible with data models and enrichments built for events tracked on the Web.
+
 ## Tracking data that is not event-type specific
 
 Some data, such as that relating to the user whose activity is being tracked, is relevant across all event types. The tracker provides two mechanisms for tracking this kind of data.

@@ -170,7 +170,7 @@ Also, `events` table needs to be created before starting the application for the
   refr_domain_userid          VARCHAR(128),
   refr_dvce_tstamp            TIMESTAMP,
   -- Session ID
-  domain_sessionid            CHAR(128),
+  domain_sessionid            VARCHAR(128),
   -- Derived timestamp
   derived_tstamp              TIMESTAMP,
   -- Event schema

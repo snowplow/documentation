@@ -18,4 +18,3 @@ Please refer to the [snowplow-utils](https://github.com/snowplow/dbt-snowplow-ut
 
 - If using this the `snowplow_incremental` materialization, the native dbt `is_incremental()` macro will not recognize the model as incremental. Please use the `snowplow_utils.snowplow_is_incremental()` macro instead, which operates in the same way.
 - If you would rather use an alternative incremental materialization for all incremental models within the package, set the variable `snowplow__incremental_materialization` to your preferred materialization. See the [Configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for more details.
-

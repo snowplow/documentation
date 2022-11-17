@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`, `normalize`
+On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce`, `normalize`
 
 :::
 
@@ -143,7 +143,7 @@ We have provided the `get_value_by_target` macro to dynamically switch the backf
 # dbt_project.yml
 ...
 vars:
-  snowplow_web:
+  snowplow_<package>:
     snowplow__backfill_limit_days: "{{ snowplow_utils.get_value_by_target(
                                             dev_value=1,
                                             default_value=30,
@@ -158,12 +158,13 @@ This can be achieved by setting `snowplow__start_date` to a recent date. To dyna
 # dbt_project.yml
 ...
 vars:
-  snowplow_web:
+  snowplow_<package>:
     snowplow__start_date: "{{ snowplow_utils.get_value_by_target(
                                       dev_value=snowplow_utils.n_timedeltas_ago(1, 'weeks'),
                                       default_value='2020-01-01',
                                       dev_target_name='dev') }}"
 ```
+
 
 ### 3. Handling of schema evolution
 

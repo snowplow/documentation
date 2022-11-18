@@ -159,3 +159,13 @@ Select the Security Group you created [above](#security-group).
 ## Review
 
 Press the `Launch` button and select an existing key-pair, or create a new one, if you want to be able to SSH into the box.
+
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
+
+<Telemetry name="Mini" since="0.13.0">
+
+  If you wish to disable telemetry, you can do so via the [API](../control-plane-api/#configuring-telemetry).
+
+</Telemetry>
+```

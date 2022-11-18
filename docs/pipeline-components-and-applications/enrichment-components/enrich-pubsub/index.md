@@ -43,3 +43,8 @@ Alternatively, you can download and run [a jar file from the github release](ht
 
 Configuration guide can be found on [this page](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/pipeline-components-and-applications/enrichment-components/monitoring/index.md).
 
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
+
+<Telemetry name="Enrich PubSub" since="3.0.0" idSetting="telemetry.userProvidedId" disableSetting="telemetry.disable" />
+```

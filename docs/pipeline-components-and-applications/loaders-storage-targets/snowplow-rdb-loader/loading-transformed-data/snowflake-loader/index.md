@@ -106,3 +106,8 @@ The two config files need to be passed in as base64-encoded strings:
 --config $CONFIG_BASE64
 `}</CodeBlock>
 
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
+
+<Telemetry name="Snowflake Loader" since="5.0.0" idSetting="telemetry.userProvidedId" disableSetting="telemetry.disable" />
+```

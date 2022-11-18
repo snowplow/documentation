@@ -76,15 +76,13 @@ To update your input variables, you'll need to know a couple of things:
     - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
     - You can get the value with `cat ~/.ssh/id_rsa.pub`
 
-**Step 2 (optional): Update telemetry settings**
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
 
-We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/getting-started-on-snowplow-open-source/telemetry/index.md).
+<Telemetry name="each of the Quick Start Terraform modules" idSetting="user_provided_id" enableSetting="telemetry_enabled" settingWord="variable" />
+```
 
-- If you wish to subscribe to our mailing list for updates to these modules or security advisories please set the `user_provided_id` variable to include a valid email address which we can reach you at.
-    - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know how we can improve the experience going forward, so we really appreciate it being set!_
-- To disable telemetry simply set variable `telemetry_enabled = false`.
-
-**Step 3: Run the terraform script to set up your Iglu stack**
+**Step 2: Run the terraform script to set up your Iglu stack**
 
 You can now use terraform to create your Iglu Server stack.
 
@@ -96,7 +94,7 @@ terraform apply
 
 This will output your `iglu_server_dns_name`. Make a note of this, you'll need it when setting up your pipeline. If you have attached a custom ssl certificate and set up your own DNS records then you don't need this value.
 
-**Step 4: Seed your Iglu Server from Iglu Central**
+**Step 3: Seed your Iglu Server from Iglu Central**
 
 For your pipeline to work, you'll need to seed your Iglu Server with the standard Snowplow Schemas that are hosted in Iglu Central. To do this you will need `igluctl`, your Iglu Servers DNS and your Iglu API key that you created for your `terraform.tfvars`. You should update the `igluctl` command below with the correct values for your Iglu Server.
 
@@ -132,15 +130,7 @@ To update your input variables, you'll need to know a couple of things:
     - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
     - You can get the value with `cat ~/.ssh/id_rsa.pub`
 
-**Step 2 (optional): Update telemetry settings**
-
-We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/getting-started-on-snowplow-open-source/telemetry/index.md).
-
-- If you wish to subscribe to our mailing list for updates to these modules or security advisories please set the `user_provided_id` variable to include a valid email address which we can reach you at.
-    - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know where to invest our efforts going forward._
-- To disable telemetry simply set variable `telemetry_enabled = false`.
-
-**Step 3: Run the terraform script to set up your Pipeline stack**
+**Step 2: Run the terraform script to set up your Pipeline stack**
 
 You can now use terraform to create your Pipeline stack.
 
@@ -153,4 +143,3 @@ terraform apply
 This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.
 
 Now let's [send some events](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/sending-test-events/index.md) to your pipeline!
-

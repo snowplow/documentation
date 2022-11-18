@@ -1,36 +1,55 @@
 ---
-title: "Telemetry Principles"
+title: "Telemetry principles"
 date: "2021-07-09"
 sidebar_position: 200
 ---
 
-Telemetry can be a valuable way of understanding and tailoring our products to better meet your needs. It gives us some insight into which applications are being used, for how long and the topology of your pipeline so that we have a better understanding of where to invest our efforts going forward.
+Telemetry helps us better understand how our applications are used:
 
-The below defines our principles on how we collect and use telemetry data. _We have only implemented telemetry into the open source Quick Start edition to date, and so the below applies to this version of open source only._
+* Which applications, clouds and warehouses are more popular than others?
+* What are the most common pipeline topologies?
+* Are users successful in running our stack over long periods of time?
+* And so on.
 
-#### Privacy
+This data is important for us when deciding where to invest our efforts to build a better product for our users (including you!).
 
-We do not automatically collect any personally identifiable information other than the IP address of the computer where the terraform is running from. This IP address is subsequently pseudonymised using SHA-256 with the [Snowplow PII pseudonymization enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md).
+## What data is collected?
 
-The only other data point which could be PII is that which is explicitly provided by the user within the `user_provided_id` field. This field allows us to tie events together across resources so that we are able to get a more complete picture of how the pipeline has been orchestrated.
+In general, we track:
+* Heartbeat events that tell us Snowplow applications are alive.
+* Events regarding installation, startup, shutdown, etc, of our Terraform modules and applications.
+* Metadata such as application version, cloud and region.
 
-In general, other than those two data points, we track:
+You can always disable telemetry if you prefer.
 
-- Installation and usage data of the terraform modules, and the VMs an application is running on
-- Terraform module and Snowplow application metadata such as versions, cloud and region
+## Our principles
 
-#### Right to be forgotten
+### Privacy
 
-If an email address has been provided as the `user_provided_id`, we will only ever contact you with Product & Engineering updates. In the case that you have provided a `user_provided_id` and you wish to submit a right to be forgotten request, please [let us know](https://snowplowanalytics.com/contact-us/).
+We do not automatically collect any personally identifiable information (PII) other than the IP address of the computer where a Snowplow application or a terraform module is running. This IP address is subsequently pseudonymised using SHA-256 with the [Snowplow PII pseudonymization enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md).
 
-#### Transparency
+### Minimalism
 
-The [telemetry terraform module](https://github.com/snowplow-devops/terraform-snowplow-telemetry) is open source; you have the ability to inspect the code, understand to which Snowplow endpoint we are sending the data, and what we are capturing at all times. Any changes to the telemetry will be highlighted in the release notes for the module. You can subscribe to updates by watching the [/snowplow-devops/terraform-snowplow-telemetry](https://github.com/snowplow-devops/terraform-snowplow-telemetry) repo on github.
+We only ever collect what is required at any given point in time. We do not pre-empt future requirements or collect anything “just in case”. We also make sure telemetry does not affect application performance in any way.
 
-#### Control
+### Transparency
 
-Telemetry in the terraform modules (i.e. the quick start edition) is **opt-out**. We have not yet added telemetry to the Snowplow applications themselves, but when we do it will be opt-in. We will always be transparent about where telemetry has been added and provide documentation on how to disable it.
+Not only is our telemetry code open source (e.g. this [terraform module](https://github.com/snowplow-devops/terraform-snowplow-telemetry)), you can also inspect the schema we use for our telemetry events [here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.oss/oss_context/jsonschema/1-0-1).
 
-#### Minimalism
+## How can I help?
 
-We only ever collect what is required at any given point in time. We do not pre-empt future requirements, or collect anything 'just in case'.
+It helps our product development immensely if you keep telemetry enabled. We promise to keep it anonymous and as minimal as possible!
+
+We also appreciate if you provide your email (or just a UUID) in the `user_provided_id` (or `userProvidedId`) setting. This allows us to tie events together across resources and offers a more complete picture of how the pipeline has been orchestrated. If you do provide an email address, we will only ever contact you with exciting Product & Engineering updates and Research studies. You can always exercise your right to be forgotten by [contacting us](https://snowplow.io/contact-us/).
+
+## Which components have telemetry?
+
+At the moment, opt-out telemetry is present in the following:
+* Terraform modules for Quick Start on [AWS](/docs/getting-started-on-snowplow-open-source/quick-start-aws/index.md) and on [GCP](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/index.md).
+* [Collector](/docs/pipeline-components-and-applications/stream-collector/setup/index.md).
+* Enrich ([Enrich Kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md), [Enrich PubSub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md), [Enrich Kafka](/docs/pipeline-components-and-applications/enrichment-components/enrich-kafka/index.md), [Enrich RabbitMQ](/docs/pipeline-components-and-applications/enrichment-components/enrich-rabbitmq/index.md)).
+* RDB Loader ([Transofmer Kinesis](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-kinesis/index.md), [Transformer PubSub](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-pubsub/index.md), [Redshift Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/redshift-loader/index.md), [Snowflake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/snowflake-loader/index.md), [Databricks Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/databricks-loader/index.md)).
+* Snowplow Mini for [AWS](/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-gcp/index.md).
+
+
+See the telemetry notice for each component linked above for more details.

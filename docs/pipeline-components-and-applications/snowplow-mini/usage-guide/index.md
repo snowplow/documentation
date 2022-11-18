@@ -197,7 +197,7 @@ where `service_name` can be one of the following: `collector`, `enrich`, `esLoad
 
 ## Configuring telemetry
 
-As of 0.13.0, Mini comes with telemetry and it is possible to turn it on or off through Control Plane API.  
+See our [telemetry principles](/docs/getting-started-on-snowplow-open-source/telemetry/index.md) for more information on telemetry.
 
 HTTP GET to get current configuration
 

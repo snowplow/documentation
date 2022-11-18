@@ -43,6 +43,12 @@ Alternatively, you can download and run [a jar file from the github release](htt
 `java -jar scala-stream-collector-kinesis-${versions.collector}.jar --config /path/to/config.hocon
 `}</CodeBlock>
 
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
+
+<Telemetry name="Collector" since="2.4.0" idSetting="collector.telemetry.userProvidedId" disableSetting="collector.telemetry.disable" />
+```
+
 ## Health check
 
 Pinging the collector on the /health path should return a 200 OK response:

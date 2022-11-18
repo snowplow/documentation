@@ -83,3 +83,13 @@ Go to `Compute Engine` on GCP console, select `Images` from menu on the left
 Click `Create`.
 
 These images show setup for `large` image. To setup `xlarge` or `xxlarge`, you should increase memory per above explanation of different sizes.
+
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
+
+<Telemetry name="Mini" since="0.13.0">
+
+  If you wish to disable telemetry, you can do so via the [API](../control-plane-api/#configuring-telemetry).
+
+</Telemetry>
+```

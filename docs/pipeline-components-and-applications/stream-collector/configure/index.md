@@ -56,8 +56,8 @@ This is a complete list of the options that can be configured in the collector H
 | `collector.terminationDeadline` (since *2.5.0*)                | Optional. Default: `10 seconds`. The akka server's deadline for closing connections during graceful shutdown.                                                                                                                                                                                                                                                   |
 | `collector.prometheusMetrics.enabled` (deprecated since *2.6.0*) | Optional. Default: `false`. When enabled, all requests are logged as prometheus metrics and the `/metrics` endpoint returns the report about the metrics.                                                                                                                                                                                                       |
 | `collector.prometheusMetrics.durationBucketsInSeconds` (deprecated since *2.6.0*) | Optional. E.g. `[0.1, 3, 10]`. Custom buckets for the `http_request_duration_seconds_bucket` duration prometheus metric.                                                                                                                                                                                                                                        |
-| `collector.telemetry.disable`                                  | Optional. Default: `false`. Disable collecting meta-information about the running application. We use telemetry to help us improve the Snowplow product.                                                                                                                                                                                                        |
-| `collector.telemetry.userProvidedId`                           | Optional. It would help us out a lot if you provide a string unique to you, e.g. a uuid or your company name.                                                                                                                                                                                                                                                   |
+| `collector.telemetry.disable`                                  | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-snowplow-open-source/telemetry/index.md).                                                                                                                                                                                                       |
+| `collector.telemetry.userProvidedId`                           | Optional. See [here](/docs/getting-started-on-snowplow-open-source/telemetry/index.md#how-can-i-help) for more information.                                                                                                                                                                                     |
 | `collector.experimental.warmup.enable` (since *2.7.0*)         | Optional. Default: `false`. Experimental feature. When enabled, the collector sends some "warm-up" requests to its own `/health` endpoint during start up. We have found from experiment this can cut down the number of `502`s returned from a load balancer in front of the collector in Kubernetes deployments.                                              |
 | `collector.experimental.warmup.numRequests` (since *2.7.0*)    | Optional. Default: `2000`. Number of requests to send if using the experimental warmup feature.                                                                                                                                                                                                                                                                 |
 | `collector.experimental.warmup.maxConnections` (since *2.7.0*) | Optional. Default: `2000`. How many TCP connections to open simultaneously when using the experimental warmup feature.                                                                                                                                                                                                                                          |
@@ -265,24 +265,4 @@ To start using this feature, you will first need to set up the SQS queues. Two s
 ```properties
 sqsGoodBuffer = {good-sqs-queue-url}
 sqsBadBuffer = {bad-sqs-queue-url}
-```
-
-#### Telemetry
-
-Starting with version 2.4.0 of the collector, Snowplow will be collecting the heartbeats with some meta-information about the application. This is an opt-out feature, meaning that it has to be explicitly disabled to stop it. Schema is available [here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.oss/oss_context/jsonschema/1-0-1).
-
-At the base, telemetry is sending the application name and version every hour. This is done to help us to improve the product, we need to understand what is popular, so we could focus our development effort in the right place. You can help us by providing `userProvidedId` in the config file.
-
-```properties
-telemetry {
-    userProvidedId = myCompany
- }
-```
-
-Put the following entry into your configuration file to disable the telemetry.
-
-```properties
-telemetry {
-    disable = true
- }
 ```

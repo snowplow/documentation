@@ -72,15 +72,13 @@ To update your input variables, you'll need to know a couple of things:
     - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
     - You can get the value with `cat ~/.ssh/id_rsa.pub`
 
-**Step 2 (optional): Update telemetry settings**
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
 
-We want to make this experience as easy & as valuable as possible for open source users new to Snowplow, and so we have added (optional) telemetry. You can find further details on [what we track here](https://github.com/snowplow-devops/terraform-snowplow-telemetry), along with our [telemetry principles](/docs/getting-started-on-snowplow-open-source/telemetry/index.md).
+<Telemetry name="each of the Quick Start Terraform modules" idSetting="user_provided_id" enableSetting="telemetry_enabled" settingWord="variable" />
+```
 
-- If you wish to subscribe to our mailing list for updates to these modules or security advisories please set the `user_provided_id` variable to include a valid email address which we can reach you at.
-    - _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know where to invest our efforts going forward._
-- To disable telemetry simply set variable `telemetry_enabled = false`.
-
-**Step 3: Run the terraform script to set up your Iglu stack**
+**Step 2: Run the terraform script to set up your Iglu stack**
 
 You can now use terraform to create your Iglu Server stack. You will be asked to select a region, you can find more information about [available regions here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
 
@@ -92,7 +90,7 @@ terraform apply
 
 This will output your `iglu_server_dns_name`. Make a note of this, you'll need it when setting up your pipeline. If you have attached a custom ssl certificate and set up your own DNS records then you don't need this value.
 
-**Step 4 (optional): Add your schemas to Iglu Server**
+**Step 3 (optional): Add your schemas to Iglu Server**
 
 You can skip this step for now, however if you want to track custom events using Snowplow, you'll need to add the schemas for your events to your Iglu Server.
 
@@ -168,15 +166,7 @@ Snowflake Terraform module will output the name of the created resources. Full l
 
 These output values need to be passed to `aws/pipeline` modules as a variable when Snowflake is selected as pipeline's destination.
 
-**Step 3 (optional): Update telemetry settings**
-
-If you wish to subscribe to our mailing list for updates to these modules or security advisories please set the `user_provided_id` variable to include a valid email address which we can reach you at
-
-- _Providing a consistent `user_provided_id` across your modules allows us to tie events together across applications so we can get a better understanding of unique users, and the topology of open source pipelines. This helps us to know where to invest our efforts going forward._
-
-To disable telemetry simply set variable `telemetry_enabled = false`.
-
-**Step 4: Run the terraform script to set up your Pipeline stack**
+**Step 3: Run the terraform script to set up your Pipeline stack**
 
 You can now use terraform to create your Pipeline stack. You will be asked to select a region, you can find more information about [available regions here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
 

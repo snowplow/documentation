@@ -71,9 +71,3 @@ The transformer consumes enriched tsv-formatted Snowplow events from S3 (AWS) or
 The loader consumes a stream of these messages and uses them to determine what data needs to be loaded. It issues the necessary SQL commands to the storage target.
 
 ![](images/shredder_loader_interface.png)
-
-:::info
-
-Snowplow collects telemetry data about the use of the application. The data allows Snowplow to improve the software offering and support. More information can be found in [here](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/telemetry/index.md).
-
-:::

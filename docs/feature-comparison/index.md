@@ -51,7 +51,7 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | Deployment method | self-hosted<br/>(AWS, GCP) | Snowplow-hosted cloud | private cloud<br/>(AWS, GCP) |
 | SSO | ❌ | ❌ | ✅ |
 | Fine grained user permissions (ACLs) | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| Custom VPC peering | ❌ | ❌ | ✅<br/>_(top tier only)_ |
+| Custom VPC integration | ❌ | ❌ | bolt-on |
 | AWS Infra security bundle | ❌ | ❌ | ✅<br/>_(top tier only)_ |
 | <h3>Support</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
 | Community support via Discourse | ✅ | ✅ | ✅ |

@@ -22,8 +22,8 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | • Redshift | ✅ | _coming soon_ | ✅ |
 | • BigQuery | ✅ | ❌ | ✅ |
 | • Databricks | ✅ | _coming soon_ | ✅ |
-| • Elasticsearch | ✅ | ❌ | bolt-on |
-| • Postgres | ✅ | ❌ | ❌ |
+| • Elasticsearch | ✅ | ❌ | ✅ |
+| • Postgres | ✅<br/>_(not suitable for high volumes)_ | ❌ | ❌ |
 | • S3 | ✅ | ❌ | ✅ |
 | • GCS | ✅ | ❌ | ✅ |
 | **Real-time streams** | | | |
@@ -50,9 +50,9 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | <h3>Deployment & security</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) | 
 | Deployment method | self-hosted<br/>(AWS, GCP) | Snowplow-hosted cloud | private cloud<br/>(AWS, GCP) |
 | SSO | ❌ | ❌ | ✅ |
-| Fine grained user permissions (ACLs) | ❌ | ❌ | ✅ |
-| Custom VPC peering | ❌ | ❌ | bolt-on |
-| AWS Infra security bundle | ❌ | ❌ | bolt-on |
+| Fine grained user permissions (ACLs) | ❌ | ❌ | ✅<br/>_(top tier only)_ |
+| Custom VPC peering | ❌ | ❌ | ✅<br/>_(top tier only)_ |
+| AWS Infra security bundle | ❌ | ❌ | ✅<br/>_(top tier only)_ |
 | <h3>Support</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
 | Community support via Discourse | ✅ | ✅ | ✅ |
 | Snowplow support via Zendesk | ❌ | ✅ | ✅ |

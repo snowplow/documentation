@@ -14,27 +14,55 @@ Iterable provides four different types of API keys, each of which can access a d
 
 Iterable requires users to be identified to work best. The options in this section configure how you wish to identify users to Iterable based on your Snowplow events.
 
-### Use client_id for anonymous users
+### Identifiers
 
-Specify whether client_id is used to create a placeholder email for anonymous users. This is useful for implementations where there is no identifiers for a user besides device identifiers (such as Browser Cookies).
+#### Use client_id for anonymous users
 
-### Use email_address from common user data
+Specify whether `client_id` is used to create a placeholder email for anonymous users. This is useful for implementations where there is no identifiers for a user besides device identifiers (such as Browser Cookies).
 
-Use email_address from common user data. For Snowplow Tracking, the common user data can be populated by using the `iglu:com.google.tag-manager.server-side/user_data/jsonschema/1-0-0` context entity. This schema is available on [Iglu Central](https://github.com/snowplow/iglu-central/blob/853357452300b172ebc113d1d75d1997f595142a/schemas/com.google.tag-manager.server-side/user_data/jsonschema/1-0-0).
+#### email
 
-Deselecting this option allows for any other properties of the event to be selected for the e-mail_address property on the Iterable event.
+##### Use email_address from common user data
 
-### Use user_id from common user data
+For Snowplow Tracking, the common user data can be populated by using the `iglu:com.google.tag-manager.server-side/user_data/jsonschema/1-0-0` context entity. This schema is available on [Iglu Central](https://github.com/snowplow/iglu-central/blob/853357452300b172ebc113d1d75d1997f595142a/schemas/com.google.tag-manager.server-side/user_data/jsonschema/1-0-0).
 
-Iterable can also accept a User Id, rather than the preferred e-mail address. Enabling this property will use the user_id property from the server-side common event as the userId identifier of the user.
+This option is enabled by default. Disabling it allows for any other properties of the event to be selected for the `email` property on the Iterable event.
 
-## Identify Event
+##### Specify email
 
-Iterable allows for user information to be updated once a user has identified themselves. For example, to update their placeholder email to their real email address.
+As mentioned above, this table is revealed when disabling the "Use email_address from common user data" configuration option. Using this table allows you to specify key paths to look for the `email` value. You can also set the search priority to denote the preference for the value to use.
 
-### Use the default `identify` event
+The columns of this table are:
 
-To Identify a user to Iterable, you can send a Self Describing `Identify` event. This schema is available on Iglu Central.
+- **Search Priority**: The priority of a key path when looking for `email` (higher number means higher priority).
+- **Property Name or Path**: The key path to look for in the server-side common event.
+
+#### userId
+
+##### Use user_id from common user data
+
+Iterable can also accept a User Id, rather than the preferred e-mail address. Enabling this property will use the `user_id` property from the server-side common event as the `userId` identifier of the user.
+
+##### Specify userId
+
+This table is revealed when disabling the "Use user_id from common user data" configuration option. Using this table allows you to specify key paths to look for the `userId` value. You can also set the search priority to denote the preference for the value to use.
+
+The columns of this table are:
+
+- **Search Priority**: The priority of a key path when looking for `userId` (higher number means higher priority).
+- **Property Name or Path**: The key path to look for in the server-side common event.
+
+As an example of how Search Priority works, according to the following setup, in order to set the value for Iterable's `userId`, the Tag will first look for `user_id` in common event. If that is not found, then it will use the value of `user_data.email_address`:
+
+![userId identifier example](images/user_id_example.png)
+
+### Identity Events
+
+#### Use the default `identify` event
+
+Iterable allows for user information to be updated once a user has identified themselves (for example, to update their placeholder email to their real email address).
+
+To Identify a user to Iterable, you can send a Self Describing `identify` event. This schema is [available on Iglu Central](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/identify/jsonschema/1-0-0).
 
 For example, using the JavaScript Tracker v3, this would look like:
 
@@ -50,7 +78,11 @@ window.snowplow('trackSelfDescribingEvent', {
 
 If you would like to specify your own event, disabling this option allows you to select your own event name and properties which can used to fire identity updates to Iterable.
 
-In general, "identity events" are the event names which will make the Iterable Tag call the `/users/update` [API endpoint](https://api.iterable.com/api/docs#users_updateUser) (create or update a user), using the identifiers and the user_data specified by the tag configuration. These events might be different than the default Snowplow Identify schema, for example sign_up, login etc, from your own custom event schemas.
+#### Specify identity event(s) by event name
+
+This multi-line text box is revealed when disabling the "Use the default `identify` event" configuration option above.
+
+In general, "identity events" are the event names which will make the Iterable Tag call the `/users/update` [API endpoint](https://api.iterable.com/api/docs#users_updateUser) (create or update a user), using the identifiers and the user\_data specified by the tag configuration. These events might be different than the default Snowplow Identify schema, for example sign\_up, login etc, from your own custom event schemas.
 
 ## Snowplow Event Mapping Options
 

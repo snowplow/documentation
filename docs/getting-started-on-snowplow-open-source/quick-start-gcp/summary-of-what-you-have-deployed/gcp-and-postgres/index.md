@@ -1,7 +1,7 @@
 ---
 title: "GCP and Postgres"
 date: "2022-11-21"
-sidebar_position: 300
+sidebar_position: 100
 ---
 
 **Let’s take a look at what's deployed on GCP upon running the quick start example script.**

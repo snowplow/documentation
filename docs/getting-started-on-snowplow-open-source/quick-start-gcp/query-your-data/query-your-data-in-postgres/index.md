@@ -1,7 +1,7 @@
 ---
 title: "Query your data in Postgres"
 date: "2022-11-21"
-sidebar_position: 300
+sidebar_position: 100
 ---
 
 If you were using the `default` or `secure` example scripts unedited in the last section, you will have created a Postgres database where all of your data is stored. Your Postgres database will contain the following standard Snowplow schemas:

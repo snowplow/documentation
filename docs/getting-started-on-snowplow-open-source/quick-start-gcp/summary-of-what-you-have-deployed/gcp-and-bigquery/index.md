@@ -59,7 +59,7 @@ This bad topic contains events that could not be inserted into BigQuery by the l
 
 #### BigQuery datasets
 
-There will be one new dataset available with the suffice `_pipeline_db`.  Within which there will be a table called `events` - all of your collected events will be available here generally within a few seconds after they are sent into the pipeline.
+There will be one new dataset available with the suffix `_pipeline_db`.  Within which there will be a table called `events` - all of your collected events will be available here generally within a few seconds after they are sent into the pipeline.
 
 #### GCS buckets
 

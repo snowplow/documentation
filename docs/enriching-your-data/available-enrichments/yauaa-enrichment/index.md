@@ -14,17 +14,18 @@ There is no interaction with an external system.
 
 ## Configure your website to send client hints
 
-The YAUAA enrichment does not require you to make any changes to your website. However, it is possible to improve the accuracy of the user agent data produced by YAUAA, if you are able to configure your website to send [high entropy client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) to the collector.
+The current trend in web browsers is to reduce the amount of information sent to servers in the `User-Agent` HTTP header, to help with user privacy. [Client Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) are a way for sites to opt in to sending the extra information which previously would have been part of the user agent header.
 
-The current trend in web browsers is to reduce the amount of information sent to servers in the `User-Agent` HTTP header, to help with user privacy.  Client Hints are a way for sites to opt in to sending the extra information which previously would have been part of the user agent header.
+The YAUAA enrichment does not require you to make any changes to your website, if you are happy with the level of detail you get from the reduced user agent.  However, it is possible to improve the accuracy of the user agent data produced by YAUAA, if you are able to configure your website to send [high entropy client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Client_hints) to the collector by following these instructions.
 
-There are two ways for your website to opt-in to sending client hints to the collector.  You can either configure your webserver to set a [`Permissions-Policy` HTTP header](https://www.w3.org/TR/permissions-policy-1/) when serving the page's main HTML page:
+There are two ways for your website to opt-in to sending client hints to the collector.  In the first method, you must configure your webserver to set both a [`Accept-CH` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH) and a [`Permissions-Policy` HTTP header](https://www.w3.org/TR/permissions-policy-1/) when serving the your site's main HTML pages:
 
 ```
-Permissions-Policy: ch-ua-full-version-list=(self "https://<YOUR COLLECTOR DOMAIN>")
+Accept-CH: sec-ch-ua-full-version-list
+Permissions-Policy: ch-ua-full-version-list=("https://<YOUR COLLECTOR DOMAIN>")
 ```
 
-Or you can put a `meta` tag in the header secion of your site's HTML:
+Alternatively, in the second method, you can put a `meta` tag in the header secion of your site's HTML:
 
 ```
 <meta http-equiv="delegate-ch" content="sec-ch-ua-full-version-list https://<YOUR COLLECTOR DOMAIN>;">

@@ -1,6 +1,6 @@
 ---
-title: "What is deployed on GCP?"
-date: "2021-09-23"
+title: "GCP and Postgres"
+date: "2022-11-21"
 sidebar_position: 300
 ---
 
@@ -12,7 +12,7 @@ Note: you can very easily edit the script by removing certain modules, giving yo
 
 #### Collector load balancer
 
-This is an application load balancer for your inbound HTTP/S traffic. Traffic is routed from the load balancer to the collector. 
+This is an application load balancer for your inbound HTTP/S traffic. Traffic is routed from the load balancer to the collector.
 
 For further details on the resources, default and required input variables, and outputs see the [terraform-google-lb](https://registry.terraform.io/modules/snowplow-devops/lb/google/latest) terraform module.
 
@@ -24,26 +24,26 @@ For further details on the resources, default and required input variables, and 
 
 #### Stream Enrich
 
-This is a Snowplow app written in scala which: 
+This is a Snowplow app written in scala which:
 
 - Reads raw Snowplow events off a Pubsub topic populated by the Scala Stream Collector
 - Validates each raw event
 - Enriches each event (e.g. infers the location of the user from his/her IP address)
 - Writes the enriched Snowplow event to the enriched topic
 
-It is designed to be used downstream of the [Scala Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md). More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md). 
+It is designed to be used downstream of the [Scala Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md). More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md).
 
 For further details on the resources, default and required input variables, and outputs see the [enrich-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/enrich-pubsub-ce/google/latest) terraform module.
 
 #### Pubsub topics
 
-Your pubsub topics are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream. 
+Your pubsub topics are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
 
 For further details on the resources, default and required input variables, and outputs see the [pubsub-topic](https://registry.terraform.io/modules/snowplow-devops/pubsub-topic/google/latest) terraform module.
 
 **Raw stream**
 
-Collector payloads are written to this raw pubsub topic, before being picked up by the Enrich application. 
+Collector payloads are written to this raw pubsub topic, before being picked up by the Enrich application.
 
 **Enriched topic**
 
@@ -51,7 +51,7 @@ Events that have been validated and enriched by the Enrich application are writt
 
 **Bad 1 topic**
 
-This bad topic is for events that the collector or enrich fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure.  More details can be found [here](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md). 
+This bad topic is for events that the collector or enrich fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure. More details can be found [here](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).
 
 #### Iglu 
 
@@ -59,7 +59,7 @@ This bad topic is for events that the collector or enrich fail to process. An ev
 
 **Iglu load balancer**
 
-This load balances the inbound traffic and routes traffic to the Iglu Server. 
+This load balances the inbound traffic and routes traffic to the Iglu Server.
 
 For further details on the resources, default and required input variables, and outputs see the [google-lb](https://registry.terraform.io/modules/snowplow-devops/collector-pubsub-ce/google/latest) terraform module.
 
@@ -71,7 +71,7 @@ For further details on the resources, default and required input variables, and 
 
 **Iglu cloudSQL**
 
-This is the Iglu Server database where the Iglu schemas themselves are stored. 
+This is the Iglu Server database where the Iglu schemas themselves are stored.
 
 For further details on the resources, default and required input variables, and outputs see the [cloud-sql](https://registry.terraform.io/modules/snowplow-devops/cloud-sql/google/latest) terraform module.
 

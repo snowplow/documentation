@@ -1,6 +1,6 @@
 ---
-title: "Query your Postgres data"
-date: "2021-10-06"
+title: "Query your data in Postgres"
+date: "2022-11-21"
 sidebar_position: 300
 ---
 
@@ -58,4 +58,4 @@ You might also see _adapter failure_ failed events in Postgres. Many adaptor fai
 
 :::
 
-Next, let's take a [detailed look at what you have deployed](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/summary-of-what-you-have-deployed-gcp/index.md).
+Next, let's take a [detailed look at what you have deployed](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/summary-of-what-you-have-deployed/gcp-and-postgres/index.md).

@@ -7,7 +7,7 @@ export const versions = {
   enrich: '3.6.0',
   bqLoader: '1.5.2',
   sqs2kinesis: '1.0.4',
-  igluServer: '0.8.6',
+  igluServer: '0.8.7',
   s3Loader: '2.2.4',
   s3Loader22x: '2.2.4',
   postgresLoader: '0.3.3',

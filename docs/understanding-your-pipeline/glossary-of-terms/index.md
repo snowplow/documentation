@@ -237,7 +237,7 @@ __[Read more](/docs/collecting-data/collecting-from-own-applications/index.md)__
 
 ### Unstructured event
 
-Unsturctured event is a legacy term for Self-Describing Event
+Unstructured event is a legacy term for Self-Describing Event
 
 You may wish to track events on your website or application which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by `trackStructEvent`, or its fields may not fit into the _category-action-label-property-value_ model. The solution is Snowplow's custom unstructured events. Unstructured events use self-describing JSON which can have arbitrarily many fields.
 

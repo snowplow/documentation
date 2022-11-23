@@ -43,11 +43,15 @@ const createTrackerConfig = (cookieName) => {
     }
   }
 
-  return trackerConfig;
-};
+  return trackerConfig
+}
 
 const setupBrowserTracker = () => {
-  newTracker('snplow5', 'https://collector.snowplow.io', createTrackerConfig('_sp5_'))
+  newTracker(
+    'snplow5',
+    'https://collector.snowplow.io',
+    createTrackerConfig('_sp5_')
+  )
   newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig('_sp_biz1_'))
 
   enableLinkClickTracking()
@@ -92,7 +96,12 @@ const module = {
   onRouteDidUpdate({ location, previousLocation }) {
     if (location.pathname !== previousLocation?.pathname) {
       // see https://github.com/facebook/docusaurus/pull/7424 regarding setTimeout
-      setTimeout(() => trackPageView())
+      setTimeout(() => {
+        trackPageView()
+        // we need to call it whenever a new link appears on the page
+        // see https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#refreshlinkclicktracking
+        refreshLinkClickTracking()
+      })
     }
   },
 }

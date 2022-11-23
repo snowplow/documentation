@@ -64,7 +64,7 @@ profile_name:
       type: redshift
       threads: [1 or more]
       host: [hostname.region.redshift.amazonaws.com]
-      port: 5348
+      port: 5439
       user: datamodeling
       pass: "{{ env_var('REDSHIFT_DATAMODELING_PASSWORD') }}"
       dbname: [database name]
@@ -106,7 +106,7 @@ profile_name:
   outputs:
     prod:
       type: bigquery
-      method: oauth
+      method: service-account
       project: [GCP project id]
       dataset: [the name of your dbt dataset] # You can also use "schema" here
       threads: [1 or more]
@@ -128,7 +128,7 @@ profile_name:
       schema: [schema name]
       host: [yourorg.databrickshost.com]
       http_path: [/sql/your/http/path]
-      token: "{{ env_var('DATABRICKS_DATAMODELING_TOKEN') }}" # Personal Access Token (PAT)
+      token: "{{ env_var('DATABRICKS_DATAMODELING_PASSWORD') }}"
       threads: [1 or more]  # optional, default 1
   target: prod
 ```

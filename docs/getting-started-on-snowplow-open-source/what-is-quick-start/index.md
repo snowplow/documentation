@@ -43,7 +43,7 @@ Having completed a Quick Start guide, you can tweak our terraform modules or the
 | Hosted in your own cloud | AWS, GCP | AWS, GCP |
 | First party server cookies | :white_check_mark: | :white_check_mark: |
 | Installation | Automated via Terraform | Docker images available for each component |
-| Data warehouse destinations | Postgres, Snowflake, _BigQuery coming soon_ | Postgres, Snowflake, **Redshift**, **BigQuery**, **Databricks** |
+| Data warehouse destinations | Postgres, (AWS→)Snowflake, (GCP→)BigQuery | Postgres, Snowflake, (GCP→)BigQuery, (AWS→)**Redshift**, (AWS→)**Databricks** |
 | Data lake destinations | S3 | S3, **GCS** |
 | Streaming destinations | Kinesis, Pubsub | Kinesis, Pubsub, <nobr>**Kafka _(alpha)_**</nobr> |
 | [Surge protection](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-the-snowplow-collector/set-up-an-sqs-buffer/index.md)<br/>_(AWS-specific)_ | :x: | :white_check_mark: |

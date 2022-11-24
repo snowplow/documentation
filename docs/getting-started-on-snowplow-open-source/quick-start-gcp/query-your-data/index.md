@@ -46,14 +46,14 @@ To query the good data, you will first you need to connect to your database.
 Within GCP:
 
 1. Navigate to the BigQuery UI: https://console.cloud.google.com/bigquery
-2. In the Explorer open up the available datasets and select your newly created one `<prefix>_pipeline_db`
+2. In the Explorer open up the available datasets and select your newly created one `<prefix>_snowplow_db`
 3. Select the `events` table (this should show all the fields available for querying)
 4. Select `query` the top panel and open in a `new tab`
 5. Execute the following (this should almost exactly resemble the default query GCP produces):
-  - `SELECT * FROM '<project_id>.<prefix>_pipeline_db.events' WHERE DATE(collector_tstamp) = "YYYY-MM-DD" LIMIT 1000`
+  - `SELECT * FROM '<project_id>.<prefix>_snowplow_db.events' WHERE DATE(collector_tstamp) = "YYYY-MM-DD" LIMIT 1000`
 
 To run a query against your events table to take a look at the page view event that you generated in the previous step (`where event_name = 'page_view'`). You can understand more about each field in the canonical event [here](/docs/understanding-your-pipeline/canonical-event/index.md).
-  - `SELECT * FROM '<project_id>.<prefix>_pipeline_db.events' WHERE DATE(collector_tstamp) = "YYYY-MM-DD" AND event = 'page_view' LIMIT 1000`
+  - `SELECT * FROM '<project_id>.<prefix>_snowplow_db.events' WHERE DATE(collector_tstamp) = "YYYY-MM-DD" AND event = 'page_view' LIMIT 1000`
 
 
 </TabItem>

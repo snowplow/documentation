@@ -49,3 +49,6 @@
 /docs/open-source-quick-start/* /docs/getting-started-on-snowplow-open-source/what-is-quick-start/ 301
 
 /docs/getting-started-on-snowplow-open-source/what-is-snowplow-open-source/feature-comparison/ /docs/feature-comparison/ 302
+
+/docs/open-source-quick-start/quick-start-installation-guide-on-aws/summary-of-what-you-have-deployed/aws-and-snowflake/ /docs/open-source-quick-start/quick-start-installation-guide-on-aws/summary-of-what-you-have-deployed/ 301
+/docs/open-source-quick-start/quick-start-installation-guide-on-aws/summary-of-what-you-have-deployed/aws-and-postgres/ /docs/open-source-quick-start/quick-start-installation-guide-on-aws/summary-of-what-you-have-deployed/ 301

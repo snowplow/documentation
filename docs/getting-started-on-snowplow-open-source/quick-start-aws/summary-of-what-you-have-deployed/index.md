@@ -6,31 +6,45 @@ sidebar_position: 300
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Diagram from '@site/docs/getting-started-on-snowplow-open-source/_diagram.md';
 ```
 
 **Let’s take a look at what is deployed on AWS upon running the quick start example script.**
 
 You can very easily edit the script or run each of the terraform modules independently, giving you the flexibility to design the topology of your pipeline according to your needs.
 
-<Tabs groupId="warehouse" queryString>
+<!-- see https://github.com/facebook/docusaurus/issues/8357 -->
+<Tabs groupId="warehouse" queryString lazy>
   <TabItem value="postgres" label="Postgres" default>
 
-![](images/postgres.png)
-
-  </TabItem>
-  <TabItem value="snowflake" label="Snowflake">
-
-![](images/snowflake.png)
-
-  </TabItem>
-  <TabItem value="databricks" label="Databricks">
-
-![](images/snowflake.png)
+<Diagram warehouse="Postgres" compute="EC2" stream="Kinesis" bucket="S3"/>
 
   </TabItem>
   <TabItem value="redshift" label="Redshift">
 
-![](images/snowflake.png)
+<Diagram warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3"/>
+
+#### Redshift Loader
+
+For more information about the Redshift Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=redshift&cloud=aws-micro-batching).
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+<Diagram warehouse="Snowflake" compute="EC2" stream="Kinesis" bucket="S3"/>
+
+#### Snowflake Loader
+
+For more information about the Snowflake Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=snowflake&cloud=aws-micro-batching).
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+<Diagram warehouse="Databricks" compute="EC2" stream="Kinesis" bucket="S3"/>
+
+#### Databricks Loader
+
+For more information about the Databricks Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=databricks&cloud=aws-micro-batching).
 
   </TabItem>
 </Tabs>

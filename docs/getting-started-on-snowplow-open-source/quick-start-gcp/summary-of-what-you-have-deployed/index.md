@@ -7,21 +7,27 @@ sidebar_position: 300
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Diagram from '@site/docs/getting-started-on-snowplow-open-source/_diagram.md';
 ```
 
 **Let’s take a look at what's deployed on GCP upon running the quick start example script.**
 
 Note: you can very easily edit the script by removing certain modules, giving you the flexibility to design the topology of your pipeline according to your needs.
 
-<Tabs groupId="warehouse" queryString>
+<!-- see https://github.com/facebook/docusaurus/issues/8357 -->
+<Tabs groupId="warehouse" queryString lazy>
   <TabItem value="postgres" label="Postgres" default>
 
-![](images/postgres.png)
+<Diagram warehouse="Postgres" compute="CE" stream="Pub/Sub" bucket="GCS"/>
 
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
 
-![](images/bigquery.png)
+<Diagram warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS"/>
+
+#### BigQuery Loader
+
+For more information about the BigQuery Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=bigquery&cloud=aws-micro-batching).
 
   </TabItem>
 </Tabs>

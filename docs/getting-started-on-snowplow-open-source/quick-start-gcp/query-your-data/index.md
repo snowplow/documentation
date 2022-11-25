@@ -121,7 +121,7 @@ Currently the Quick Start guide pipelines do not load bad data into BigQuery dir
 
 To query it, you will need to follow a few additional steps manually:
 
-- Configure the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) to load bad data from the `Bad Rows` topic into GCS.
+- Configure the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) to load bad data from the _Bad 1_ (`<prefix>-bad-1-topic`) and _Bad Rows_ (`<prefix>-bq-bad-rows-topic`) pubsub topics into GCS.
 - Create external tables in BigQuery to read the data from GCS as described [here](/docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/index.md).
 
 

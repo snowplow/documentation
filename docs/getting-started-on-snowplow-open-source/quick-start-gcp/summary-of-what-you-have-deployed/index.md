@@ -83,7 +83,7 @@ This bad topic contains events that could not be inserted into BigQuery by the l
 
 ## BigQuery datasets
 
-There will be one new dataset available with the suffix `_pipeline_db`.  Within which there will be a table called `events` - all of your collected events will be available here generally within a few seconds after they are sent into the pipeline.
+There will be one new dataset available with the suffix `_snowplow_db`.  Within which there will be a table called `events` - all of your collected events will be available here generally within a few seconds after they are sent into the pipeline.
 
 ## GCS buckets
 
@@ -108,7 +108,7 @@ The [Iglu Server](https://github.com/snowplow-incubator/iglu-server/) serves req
 
 For further details on the resources, default and required input variables, and outputs see the [iglu-server-ce](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ce/google/latest) terraform module.
 
-### Iglu cloudSQL
+### Iglu CloudSQL
 
 This is the Iglu Server database where the Iglu schemas themselves are stored.
 

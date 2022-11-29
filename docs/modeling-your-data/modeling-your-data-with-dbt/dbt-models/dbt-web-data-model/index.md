@@ -79,13 +79,10 @@ models:
 ```
 
 ####  Run the module
-If it is the first time you would like to process the snowplow_web package then you can run the package the recommended way either through your CLI or from within dbt Cloud with the following command:
+If you have previously run the web model without this optional module enabled, you can simply enable the module and run `dbt run --selector snowplow_web` as many times as needed for this module to catch up with your other data. If you only wish to process this from a specific date, be sure to change your `snowplow__start_date`, or refer to the [Custom module](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) section for a detailed guide on how to achieve this the most efficient way.
 
-```
-dbt run --selector snowplow_web
-```
+If you haven't run the web package before, then you can run it using `dbt run --selector snowplow_web` either through your CLI, within dbt Cloud, or for Enterprise customers you can use the BDP console. In this situation, all models will start in-sync as no events have been processed.
 
-However, assuming that you already have a working snowplow_web package and you would like to enable consent tracking and modeling at a later stage, you do not need to rebuild the whole model from scratch. Please refer to the [Custom module](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) section for a detailed guide on how to achieve this the most efficient way.
 
 #### Good-to-know
 Whenever a new consent version is added to be tracked, the model expects an `allow_all` event in order to attribute the events to the full list of latest consent scopes. It is advisable to send a test event of that kind straight after deployment so that the model can process the data accurately.

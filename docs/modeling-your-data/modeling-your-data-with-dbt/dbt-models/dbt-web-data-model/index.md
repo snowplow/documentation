@@ -41,13 +41,13 @@ To enable this optional module, the web package must be correctly configured. Pl
 
 ### Overview
 
-This custom module consists of a series of dbt models with the goal to produce the following aggregated models from the raw consent tracking events:
+This custom module consists of a series of dbt models which produce the following aggregated models from the raw consent tracking events:
 
   - `snowplow_web_consent_log`: Snowplow incremental table showing the audit trail of consent and Consent Management Platform (cmp) events
 
   - `snowplow_web_consent_users`: Incremental table of user consent tracking stats
 
-  - `snowplow_web_consent_totals`: Summary of the latest consent status as per consent version
+  - `snowplow_web_consent_totals`: Summary of the latest consent status, per consent version
 
   - `snowplow_web_consent_scope_status`: Aggregate of current number of users consented to each consent scope
 

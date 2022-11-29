@@ -19,47 +19,41 @@ For Snowplow BDP customers, dbt projects can be configured and scheduled in the 
 # Snowplow dbt Packages
 
 There are 3 core snowplow dbt packages:
--  [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web))
--  [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile))
--  [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-media-player-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player))
+-  [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web))
+-  [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile))
+-  [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player))
 
 _The Snowplow Media Player package is designed to be used with the Snowplow Web package and not as a standalone package._
 
 Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/collecting-data/collecting-from-own-applications/index.md) and produce tables aggregated to levels such as Users, Sessions, and Page Views. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
 
-The latest versions of all packages support BigQuery, Databricks, Postgres, Redshift, and Snowflake warehouses.
-
+The supported data warehouses per version can be seen below:
 
 <Tabs groupId="dbt-packages">
 <TabItem value="web" label="Snowplow Web" default>
 
 | snowplow-web version | dbt versions        | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
 | -------------------- | ------------------- | --------- | ----------- | --------- | ---------- | --------- |
-| 0.9.2                | >=1.0.0 to <2.0.0   | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.5.1                | >=0.20.0 to <1.0.0  | ✅        | ❌          | ✅        | ✅         | ✅        |
-| 0.4.1                | >=0.18.0 to <0.20.0 | ✅        | ❌          | ✅        | ✅         | ❌        |
-| 0.4.1                | >=0.19.0 to <0.20.0 | ❌        | ❌          | ❌        | ❌         | ✅        |
+| 0.9.2                | >=1.0.0 to <2.0.0   | ✅        | ✅           | ✅        | ✅         | ✅         |
+| 0.5.1                | >=0.20.0 to <1.0.0  | ✅        | ❌           | ✅        | ✅         | ✅         |
+| 0.4.1                | >=0.18.0 to <0.20.0 | ✅        | ❌           | ✅        | ✅         | ❌         |
+| 0.4.1                | >=0.19.0 to <0.20.0 | ❌        | ❌           | ❌        | ❌         | ✅         |
 
 </TabItem>
 <TabItem value="mobile" label="Snowplow Mobile">
 
 | snowplow-mobile version | dbt versions       | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
 | ----------------------- | ------------------ | --------- | ----------- | --------- | ---------- | --------- |
-| 0.5.4                   | >=1.0.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.2.0                   | >=0.20.0 to <1.0.0 | ✅        | ❌          | ✅        | ✅         | ✅        |
+| 0.5.4                   | >=1.0.0 to <2.0.0  | ✅         | ✅          | ✅        | ✅          | ✅        |
+| 0.2.0                   | >=0.20.0 to <1.0.0 | ✅         | ❌          | ✅        | ✅          | ✅        |
 
 </TabItem>
 <TabItem value="media" label="Snowplow Media Player">
 
-| snowplow-media-player version | snowplow-web version | dbt versions       | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
-| ----------------------------- | -------------------- | ------------------ | --------- | ----------- | --------- | ---------- | --------- |
-| 0.3.1                         | >=0.9.0 to <0.10.0   | >=1.0.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.1.0                         | >=0.6.0 to <0.7.0    | >=0.20.0 to <1.1.0 | ❌        | ❌          | ✅        | ❌         | ✅        |
+| snowplow-media-player version | snowplow-web version | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| ----------------------------- | -------------------- | ------------------ | -------- | ---------- | -------- | --------- | -------- |
+| 0.3.1                         | >=0.9.0 to <0.10.0   | >=1.0.0 to <2.0.0  | ✅       | ✅          | ✅       | ✅        | ✅        |
+| 0.1.0                         | >=0.6.0 to <0.7.0    | >=0.20.0 to <1.1.0 | ❌       | ❌          | ✅       | ❌        | ✅        |
 
 </TabItem>
 </Tabs>
-
-------
-
-
-

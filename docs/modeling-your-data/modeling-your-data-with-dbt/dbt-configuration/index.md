@@ -176,7 +176,7 @@ vars:
 </TabItem>
 <TabItem value="mobile" label="Snowplow Mobile">
 
-In addition the mobile package has some contexts that can be enabled depending on your tracker configuration, see the [mobile package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-mobile-data-model/index.md) for more information.
+In addition the mobile package has some contexts that can be enabled depending on your tracker configuration, see the [mobile package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) for more information.
 
 | Variable Name                           | Default                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | --------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

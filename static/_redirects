@@ -25,8 +25,8 @@
 /docs/modeling-your-data/the-snowplow-mobile-data-model/sql-runner-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/ 301
 /docs/modeling-your-data/the-snowplow-mobile-data-model/dbt-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/ 301
 /docs/modeling-your-data/the-snowplow-web-data-model/dbt-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/ 301
-/docs/modeling-your-data/the-snowplow-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-mobile-data-model/ 301
-/docs/modeling-your-data/the-snowplow-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-web-data-model/ 301
+/docs/modeling-your-data/the-snowplow-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/ 301
+/docs/modeling-your-data/the-snowplow-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/ 301
 
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/ 301

@@ -21,27 +21,12 @@ Currently however it is not possible during a dbt jobs start phase to deduce exa
 
 However we can leverage dbt's `ls` command in conjunction with shell substitution to explicitly state what models to run, allowing a subset of models to be selected from the manifest and thus run independently.
 
-<Tabs groupId="dbt-packages">
-<TabItem value="web" label="Snowplow Web" default>
 
-To run just the page views module asynchronously:
-
-```bash
-dbt run --select +snowplow_web.page_views --vars "{'models_to_run': '$(dbt ls --m  +snowplow_web.page_views --output name)'}"
-```
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-To run just the screen views module asynchronously:
+For example to run just the screen views module asynchronously:
 
 ```bash
 dbt run --select +snowplow_mobile.screen_views --vars "{'models_to_run': '$(dbt ls --m  +snowplow_mobile.screen_views --output name)'}"
 ```
-
-</TabItem>
-</Tabs>
-
 ## Custom re-running of specific models
 
 There may be times where you need to re-run some or all of the models for a period of data, potentially due to incorrect supplemental data brought into a model, or in case of a mistake in your model code itself. There are two methods to do this: one is simpler but must complete in a single run, the other is more complex but can be executed over multiple runs. Either will work for any custom models, assuming they were built using [Snowplow incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md).

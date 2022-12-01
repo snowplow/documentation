@@ -9,6 +9,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+:::tip
+On this page, `<package>` can be one of: `web`, `mobile`
+
+:::
+
 ## Custom Modules
 
 The Snowplow packages are designed to be easily customized or extended within your own dbt project, by building your own 'custom modules'. The 'standard modules' we provide (base, page/screen views, sessions and users) are not designed to be modified by you. An example dbt project with custom modules can be seen in the custom example directory of the [snowplow-web repo](https://github.com/snowplow/dbt-snowplow-web/tree/main/custom_example) and [snowplow-mobile repo](https://github.com/snowplow/dbt-snowplow-mobile/tree/main/custom_example).
@@ -60,35 +65,15 @@ Listed below are the recommended tables to reference as your input for a custom 
 
 ## Tagging custom models
 
-<Tabs groupId="dbt-packages2">
-<TabItem value="web" label="Snowplow Web" default>
-
-All models within custom modules need to be tagged with `snowplow_web_incremental` in order to leverage the incremental logic of this package. We recommend creating a sub directory of your `/models` directory to contain all your custom modules. In this example we created the sub directory `snowplow_web_custom_modules`. We can then apply the tag to all models in this directory:
+All models within custom modules need to be tagged with `snowplow_<package>_incremental` in order to leverage the incremental logic of this package. We recommend creating a sub directory of your `/models` directory to contain all your custom modules. In this example we created the sub directory `snowplow_<package>_custom_modules`. We can then apply the tag to all models in this directory:
 
 ```yml
 # dbt_project.yml
 models:
   your_dbt_project:
-    snowplow_web_custom_modules:
-      +tags: snowplow_web_incremental #Adds tag to all models in the 'snowplow_web_custom_modules' directory
+    snowplow_<package>_custom_modules:
+      +tags: snowplow_<package>_incremental #Adds tag to all models in the 'snowplow_<package>_custom_modules' directory
 ```
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-All models within custom modules need to be tagged with `snowplow_mobile_incremental` in order to leverage the incremental logic of this package. We recommend creating a sub directory of your `/models` directory to contain all your custom modules. In this example we created the sub directory `snowplow_mobile_custom_modules`. We can then apply the tag to all models in this directory:
-
-```yml
-# dbt_project.yml
-models:
-  your_dbt_project:
-    snowplow_mobile_custom_modules:
-      +tags: snowplow_mobile_incremental #Adds tag to all models in the 'snowplow_mobile_custom_modules' directory
-```
-
-</TabItem>
-</Tabs>
-
 
 ## Retiring Custom Modules
 
@@ -97,8 +82,6 @@ If you want to retire a custom module, you should:
 1. Delete the models from your project or [disable](https://docs.getdbt.com/reference/resource-configs/enabled#disable-a-model-in-a-package-in-order-to-use-your-own-version-of-the-model) the models.
 2. Not worry about removing the models from the `snowplow_web/mobile_incremental_manifest` manifest table. The packages identifies **enabled** models tagged with `snowplow_web/mobile_incremental` within your project and selects these models from the manifest in order to calculate the state of the web model as described above.
 3. Not simply exclude the retired models from your Snowplow web job in production. Currently the packages is unable to identify which models are due to be executed in a given run. As a result, if you exclude a model the package will get stuck in State 3 as outlined in the identification of events to process section and continue to attempt to sync your excluded with the remaining models.
-
-
 
 ## Back-filling custom modules
 
@@ -114,63 +97,28 @@ We have created a macro `snowplow_utils.is_run_with_new_events(package_name)`, w
 select
   ...
 from
-where {{ snowplow_utils.is_run_with_new_events("snowplow_web") }}
+where {{ snowplow_utils.is_run_with_new_events("snowplow_<package>") }}
 ```
 
 A full example of this can be seen in the `custom_example` directory.
 
 Back-filling a module can be performed either as part of the entire run of the Snowplow package, or in isolation to reduce cost (recommended):
 
-<Tabs groupId="dbt-packages">
-<TabItem value="web" label="Snowplow Web" default>
-
 ```bash
-dbt run --select snowplow_web tag:snowplow_web_incremental # Will execute all Snowplow web modules, as well as custom.
+dbt run --select snowplow_<package> tag:snowplow_<package>_incremental # Will execute all Snowplow <package> modules, as well as custom.
 dbt run --select +my_custom_module # Will execute only your custom module + any upstream nodes.
 ```
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-```bash
-dbt run --select snowplow_mobile tag:snowplow_mobile_incremental # Will execute all Snowplow mobile modules, as well as custom.
-dbt run --select +my_custom_module # Will execute only your custom module + any upstream nodes.
-```
-
-</TabItem>
-</Tabs>
-
-------
 
 ## Tearing down and restarting a subset of models
 
 As the code base for your custom modules evolves, you will likely need to replay events through a given module. In order to do so, you first need to manually drop the models within your custom module from your database. Then these models need to be removed from the incremental manifest table. See the [Complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#complete-refresh-of-snowplow-package) section for an explanation as to why. This removal can be achieved by passing the model's name to the `models_to_remove` var at run time. If you want to replay events through a series of dependent models, you only need to pass the name of the endmost model within the run:
 
 
-<Tabs groupId="dbt-packages">
-<TabItem value="web" label="Snowplow Web" default>
-
 ```bash
-dbt run --select +snowplow_web_custom_incremental_model --vars '{snowplow__start_date: "yyyy-mm-dd", models_to_remove: snowplow_web_custom_incremental_model}'
+dbt run --select +snowplow_<package>_custom_incremental_model --vars '{snowplow__start_date: "yyyy-mm-dd", models_to_remove: snowplow_<package>_custom_incremental_model}'
 ```
 
-By removing the `snowplow_web_custom_incremental_model` model from the manifest the web packages will be in state 2 (see the section on [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md#incremental-logic)) and will replay all events.
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-```bash
-dbt run --select +snowplow_mobile_custom_incremental_model --vars '{snowplow__start_date: "yyyy-mm-dd", models_to_remove: snowplow_mobile_custom_incremental_model}'
-```
-
-By removing the `snowplow_mobile_custom_incremental_model` model from the manifest the mobile packages will be in state 2 (see the section on [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md#incremental-logic))  and will replay all events.
-
-</TabItem>
-</Tabs>
-
-------
-
-
+By removing the `snowplow_<package>_custom_incremental_model` model from the manifest the <package\> packages will be in state 2 (see the section on [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md#incremental-logic)) and will replay all events.
 
 ## Tips for developing custom modules
 

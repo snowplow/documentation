@@ -1,5 +1,5 @@
 ---
-title: "dbt Tests"
+title: "Tests"
 date: "2022-10-05"
 sidebar_position: 400
 ---
@@ -8,6 +8,11 @@ sidebar_position: 400
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+:::tip
+On this page, `<package>` can be one of: `web`, `mobile`
+
+:::
 
 The packages contains tests for both the scratch and derived models. Depending on your use case you might not want to run all tests in production, for example to save costs. There are several tags included in the packages to help select subsets of tests. Tags:
 
@@ -21,47 +26,25 @@ For example if your derived tables are very large you may want to run the full t
 This is our recommended approach to testing and can be implemented using the selector flag (see [YAML selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section for more details) as follows:
 
 <Tabs groupId="dbt-packages">
-<TabItem value="web" label="Snowplow Web" default>
+<TabItem value="web+mobile" label="Snowplow Web/Mobile" default>
 
 ```bash
-dbt test --selector snowplow_web_lean_tests
+dbt test --selector snowplow_<package>_lean_tests
 ```
 
 This is equivalent to:
 
 ```bash
-dbt test --select snowplow_web,tag:this_run # Full tests on _this_run models
-dbt test --select snowplow_web,tag:manifest # Full tests on manifest models
-dbt test --select snowplow_web,tag:primary-key,tag:derived # Primary key tests only on derived tables.
-dbt test --select snowplow_web,tag:derived,test_type:data  # Include the page_view_in_session_value data test
+dbt test --select snowplow_<package>,tag:this_run # Full tests on _this_run models
+dbt test --select snowplow_<package>,tag:manifest # Full tests on manifest models
+dbt test --select snowplow_<package>,tag:primary-key,tag:derived # Primary key tests only on derived tables.
+dbt test --select snowplow_<package>,tag:derived,test_type:data  # Include the page/screen_view_in_session_value data test
 ```
 
-Alternatively, if you wanted to run all available tests in both the Snowplow web package and your custom modules:
+Alternatively, if you wanted to run all available tests both in the Snowplow package, and your custom modules:
 
 ```bash
-dbt test --selector snowplow_web
-```
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-```bash
-dbt test --selector snowplow_mobile_lean_tests
-```
-
-This is equivalent to:
-
-```bash
-dbt test --select snowplow_mobile,tag:this_run # Full tests on _this_run models
-dbt test --select snowplow_mobile,tag:manifest # Full tests on manifest models
-dbt test --select snowplow_mobile,tag:primary-key,tag:derived # Primary key tests only on derived tables.
-dbt test --select snowplow_mobile,tag:derived,test_type:data  # Include the screen_view_in_session_values data test
-```
-
-Alternatively, if you wanted to run all available tests in both the Snowplow web package and your custom modules:
-
-```bash
-dbt test --selector snowplow_mobile
+dbt test --selector snowplow_<package>
 ```
 
 </TabItem>

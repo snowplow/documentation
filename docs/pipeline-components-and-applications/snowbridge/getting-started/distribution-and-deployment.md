@@ -30,3 +30,9 @@ The app can be deployed via services like EC2, ECS or Kubernetes using docker.
 
 Configuration and authentication can be done by mounting the relevant files, and/or setting the relevant environment variables as per the standard authentication methods for cloud services.
 
+
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
+
+<Telemetry name="Snowbridge" since="1.0.0" idSetting="user_provided_id" disableSetting="disable_telemetry" />
+```

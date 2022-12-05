@@ -40,7 +40,9 @@ All the events are effectively stored in a single table, making running queries 
 
 The Snowplow data table is designed to be immutable: the data in each line should not change over time. Data points that we would expect to change over time (e.g. what cohort a particular user belongs to, how we classify a particular visitor) can be derived from Snowplow data. However, our recommendation is that these derived fields should be defined and calculated at analysis time, stored in a separate table and joined to the _Snowplow events table_ when performing any analysis.
 
-## Understanding the individual fields
+## Canonical event model
+
+The sections below go over the standard fields found in all Snowplow events.
 
 ### Common fields (platform and event independent)
 

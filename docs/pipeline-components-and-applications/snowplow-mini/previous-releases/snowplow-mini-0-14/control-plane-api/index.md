@@ -34,9 +34,9 @@ This API call blocks until all the services have been restarted.
 
 Return status 200 means that services have been successfully restarted.
 
-#### Resetting Opensearch indices
+#### Resetting Elasticsearch indices
 
-As of 0.13.0, it is possible to reset Opensearch (or previously Elasticsearch) indices, along with the corresponding index patterns in Opensearch Dashboards, through Control Plane API.
+As of 0.13.0, it is possible to reset Elasticsearch indices, along with the corresponding index patterns in Kibana, through Control Plane API.
 
 ```bash
 curl -L \

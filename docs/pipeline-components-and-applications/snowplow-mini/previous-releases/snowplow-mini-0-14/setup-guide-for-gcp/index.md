@@ -12,15 +12,15 @@ Snowplow Mini is, in essence, the Snowplow real time stack inside of a single im
 2. Giving developers new to Snowplow an easy way to start with Snowplow and understand how the different pieces fit together
 3. Giving people running Snowplow a quick way to debug tracker updates (because they can)
 
-The software stack installed (0.15.0):
+The software stack installed (0.14.2):
 
-- Snowplow Stream Collector NSQ 2.8.2
-- Snowplow Stream Enrich NSQ 3.6.0
-- Snowplow Elasticsearch Loader 2.0.8
-- Snowplow Iglu Server 0.8.7
-- Opensearch 2.4.0
-- Opensearch Dashboards 2.4.0
-- Postgresql 15.1
+- Snowplow Stream Collector NSQ 2.7.0
+- Snowplow Stream Enrich NSQ 3.2.5
+- Snowplow Elasticsearch Loader 1.0.7
+- Snowplow Iglu Server 0.8.4
+- Elasticsearch-OSS 6.8.23
+- Kibana-OSS 6.8.20
+- Postgresql 14.2
 - NSQ v1.2.1
 
 Note: All services are configured to start automatically so everything should happily survive restarts/shutdowns.
@@ -50,11 +50,11 @@ https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-14-2-large-16609107
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
 
-Version 0.15.0 (Recommended)
+Version 0.14.2 (Recommended)
 
 | L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
 | --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-0-large-1670252078.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-0-xlarge-1670255918.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-0-xxlarge-1670251500.tar.gz) |
+| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-14-2-large-1660910771.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-14-2-xlarge-1660913170.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-14-2-xxlarge-1660913099.tar.gz) |
 
 You can find more about `gcloud compute images create` command [here](https://cloud.google.com/sdk/gcloud/reference/compute/images/create) for additional parameters.
 
@@ -64,11 +64,11 @@ To decide on which size of Snowplow Mini to choose, read on.
 
 ### large & xlarge & xxlarge
 
-Mini is available in 3 different sizes:
+Until today, Snowplow Mini was being used inside AWS `t2.medium`, `n1-standard-1` in GCP, instances and it served well for demonstration purposes. However, we observed that Snowplow Mini started exceeding its initial motivation and machine resources started to become an obstacle, causing issues with Elasticsearch etc. This is why, Mini is available at 3 different sizes.
 
-- `large` : Opensearch has `4g` heap size and Snowplow apps has `0.5g` heap size. Recommended machine RAM is `8g`.
-- `xlarge` : Double the large image. Opensearch has `8g` heap size and Snowplow apps has `1.5g` heap size. Recommended machine RAM is `16g`.
-- `xxlarge` : Double the xlarge image. Opensearch has `16g` heap size and Snowplow apps has `3g` heap size. Recommended machine RAM is `32g`.
+- `large` : Same image published so far. Elasticsearch has `4g` heap size and Snowplow apps has `0.5g` heap size. Recommended machine RAM is `8g`.
+- `xlarge` : Double the large image. Elasticsearch has `8g` heap size and Snowplow apps has `1.5g` heap size. Recommended machine RAM is `16g`.
+- `xxlarge` : Double the xlarge image. Elasticsearch has `16g` heap size and Snowplow apps has `3g` heap size. Recommended machine RAM is `32g`.
 
 ## Create instance
 

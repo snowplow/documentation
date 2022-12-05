@@ -16,11 +16,15 @@ Jump to [First Time Usage](#first-time-usage) if it is your first time with a Mi
 
 ## Upgrading
 
-Until version 0.15.0, Snowplow data was loaded to Elasticsearch 6.x in the Mini. However, a [licensing change](https://www.elastic.co/blog/licensing-change) in Elasticsearch prevented us from upgrading it to more recent versions. To make sure we stay up to date with important security fixes, we've decided to replace Elasticsearch with [Opensearch](https://opensearch.org/). Also, Kibana is replaced with [Opensearch Dashboards](https://opensearch.org/docs/latest/dashboards/index/).
+Mini 0.8.0 updated some of the internal components resulting in some breaking changes as following:
 
-[Opensearch](https://opensearch.org/) is a fork of open source Elasticsearch 7.10. Therefore this change shouldn't affect Mini users much. To minimize the impact further, we've tried to make as minimal a change as possible. In Mini, you can still access Opensearch with the `/elasticsearch` endpoint and Opensearch Dashboards with the `/kibana` endpoint.
-
-The only breaking change this migration would bring is the removal of mapping types. It means that you don't have to provide a mapping type in your search queries anymore when accessing your data in good or bad indices. For example, good events count can be found using the following endpoint in previous versions: `/elasticsearch/good/good/_count`. Starting with 0.15.0, it can be found using this endpoint: `/elasticsearch/good/_count`.
+- _Iglu Server is updated from 0.3.0 to 0.6.1_ :
+    - Swagger UI is deprecated which means `repo-server.baseURL` configuration field in Iglu Server configuration is deprecated too.
+    - We've overhauled Iglu Server in 0.6.0 release and introduced breaking API changes. Please check [API Changes section](https://snowplowanalytics.com/blog/2019/10/11/iglu-server-0.6.0-released/#api-changes) of the blog post to learn about them.
+    - In addition to 0.6.0, Iglu Server 0.6.1 deprecated query parameter support for `POST iglu-server/api/auth/keygen` endpoint. vendor_prefix must be provided
+    - **Note** that browsing to the same endpoint ( /iglu-server ) in an internet browser will yield an error message stating that endpoint doesn't exist, we'll address this in upcoming releases but one can safely ignore that for now and server health can be checked at `GET iglu-server/api/meta/health` endpoint.
+- _Stream Enrich is updated from 0.21.0 to 1.0.0_ :
+    - Please check [Upgrade Guide](https://github.com/snowplow/snowplow/wiki/Upgrade-Guide#enrich) to see updated enrichment configuration.
 
 ## First time usage
 
@@ -125,20 +129,20 @@ An easy way to quickly send a few test events is to use our example web page.
 
 You can instrument any other Snowplow tracker by specifying the collector URL as the public DNS of the Snowplow Mini instance.
 
-## Accessing the Opensearch API
+## Accessing the Elasticsearch API
 
-Snowplow Mini makes the Opensearch (or previously Elasticsearch) HTTP API available at `http://[public_dns]/elasticsearch`, you can check it's working by:
+Snowplow Mini makes the Elasticsearch HTTP API available at `http://[public_dns]/elasticsearch`, you can check it's working by:
 
-- Checking the Opensearch API is available:
+- Checking the Elasticsearch API is available:
     - `curl --user username:password http://[public_dns]/elasticsearch`
     - You should see a `200 OK` response
 - Checking the number of good events we sent in step 3:
-    - `curl --user username:password http://[public_dns]/elasticsearch/good/_count`
+    - `curl --user username:password http://[public_dns]/elasticsearch/good/good/_count`
     - You should see the appropriate count of sent events
 
-## Viewing the data in Opensearch Dashboards
+## Viewing the data in Kibana
 
-Data sent to Snowplow Mini will be processed and loaded into Opensearch in real time. In turn, it will be made available in Opensearch Dashboards. To view the data in Opensearch Dashboards, navigate in your browser to `mini-public-address/kibana`.
+Data sent to Snowplow Mini will be processed and loaded into Elasticsearch in real time. In turn, it will be made available in Kibana. To view the data in Kibana, navigate in your browser to `mini-public-address/kibana`.
 
 ### Index patterns
 
@@ -149,7 +153,7 @@ Snowplow Mini comes with two index patterns:
 
 ### Discover your data
 
-Browse to `mini-public-address/kibana` , once Opensearch Dashboards is loaded, you should be able to view most recently sent good events via the discover interface:
+Browse to `mini-public-address/kibana` , once Kibana is loaded, you should be able to view most recently sent good events via the discover interface:
 
 You can then inspect any individual event data in the UI by unfolding a payload:
 
@@ -163,9 +167,9 @@ Unfold any payload to inspect a bad event in detail.
 
 ![](images/Screen-Shot-2020-04-13-at-13.23.16.jpg)
 
-## Resetting Opensearch indices
+## Resetting Elasticsearch indices
 
-As of 0.13.0, it is possible to reset Opensearch (or previously Elasticsearch) indices, along with the corresponding index patterns in Opensearch Dashboards, through Control Plane API.
+As of 0.13.0, it is possible to reset Elasticsearch indices, along with the corresponding index patterns in Kibana, through Control Plane API.
 
 ```bash
 curl -L \

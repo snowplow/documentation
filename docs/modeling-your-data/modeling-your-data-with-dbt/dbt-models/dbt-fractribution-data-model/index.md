@@ -13,7 +13,7 @@ Snowplow Fractribution is a marketing attribution model for dbt. The name itself
 
 This package consists of a series of dbt models with the goal to produce the following models:
 
-- **snowplow_fractribution_channel_counts**: Number of events grouped by channel, campaign, source and medium.
+- **snowplow_fractribution_channel_counts**: Number of sessions grouped by channel, campaign, source and medium.
 - **snowplow_fractribution_channel_spend**: Spend on each channel, used in ROAS calculations.
 - **snowplow_fractribution_conversions_by_customer_id**: Conversion revenue for each conversion, along with the associated customerid.
 - **snowplow_fractribution_path_summary**: Summary of different path combinations and associated conversion/non-conversions.
@@ -21,7 +21,7 @@ This package consists of a series of dbt models with the goal to produce the fol
 - **snowplow_fractribution_paths_to_non_conversion**: Path combinations leading to non-conversion.
 - **snowplow_fractribution_sessions_by_customer_id**: Channel information by session timestamp, where an event timestamp is considered as the session start.
 
-
+Once the models are generated, the next step is to run a python script which is included in the package to run the fractribution calculations.
 ### Differences to Fractribution
 
 There are some changes from the [original](https://github.com/google/fractribution) Fractribution code that have been noted below.

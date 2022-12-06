@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`
+On this page, `<package>` can be one of: `web`, `mobile`, `normalize`
 
 :::
 
@@ -59,6 +59,11 @@ Listed below are the recommended tables to reference as your input for a custom 
 - Screen view level: `snowplow_mobile_screen_views_this_run`
 - Session level: `snowplow_mobile_sessions_this_run`
 - User level: `snowplow_mobile_users_this_run`
+
+</TabItem>
+<TabItem value="normalize" label="Snowplow Normalize">
+
+- Event level: `snowplow_normalize_base_events_this_run`
 
 </TabItem>
 </Tabs>

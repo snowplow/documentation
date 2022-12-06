@@ -15,7 +15,7 @@ Due to its unique relationship with the web package, the media player package op
 :::
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`
+On this page, `<package>` can be one of: `web`, `mobile`, `normalize`
 
 :::
 
@@ -57,6 +57,11 @@ Within the packages we have provided a suite of suggested selectors to run and t
 - `snowplow_web_and_media_player_tests`: Runs all tests within the Snowplow Web and Snowplow Media Player Package and any custom models tagged with `snowplow_media_player` or `snowplow_web_incremental`.
 
 </TabItem>
+<TabItem value="normalize" label="Snowplow Normalize">
+
+- `snowplow_normalize`:  Recommended way to run the package. This selection includes all models within the Snowplow Normalize package as well as any custom models you have created.
+
+</TabItem>
 </Tabs>
 
 ------
@@ -80,6 +85,13 @@ There are 2 manifest tables included in this package:
 
 - `snowplow_mobile_incremental_manifest`: Records the current state of the package.
 - `snowplow_mobile_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions.
+
+</TabItem>
+<TabItem value="normalize" label="Snowplow Normalize">
+
+There is 1 manifest table included in this package:
+
+- `snowplow_normalize_incremental_manifest`: Records the current state of the package.
 
 </TabItem>
 </Tabs>

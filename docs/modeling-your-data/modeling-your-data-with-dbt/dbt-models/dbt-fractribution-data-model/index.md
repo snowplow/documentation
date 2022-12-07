@@ -33,6 +33,29 @@ There are some changes from the [original](https://github.com/google/fractributi
 - Templating is now run almost entirely within dbt rather than the custom SQL / Jinja templating in the original Fractribution project
 - Channel changes and contributions within a session can be considered using the `consider_intrasession_channels` variable.
 
-### Intrasession channels
+### Intrasession Channels
 
 In Google Analytics (Universal Analytics) a new session is started if a campaign source changes (referrer of campaign tagged URL) which is used in Fractribution. Snowplow utilises activity based sessionisation rather than campaign based sessionisation. Setting `consider_intrasession_channels` to `false` will take only the campaign information from the first page view in a given Snowplow session and not give credit to other channels in the converting session if they occur after the initial page view.
+
+ ### Path Transform Options
+
+ Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm.
+
+ There are five path transform options available:
+
+ 1. **Exposure (default in this package)**: the same events in succession are reduced to one: A -> A -> B becomes A -> B. A compromise between first and unique.
+ 2. **Unique**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting.
+ 3. **First**: keep only the first occurrence of any event: A -> B -> A becomes A -> B. Best for brand awareness marketing.
+ 4. **Frequency**: keep a count of the events’ frequency: A -> A -> B becomes A(2) -> B. Best when there is a lot of retargeting.
+
+
+### Attribution Models
+- **shapley** (default): Takes the weighted average of the marginal contributions of each channel to a conversion
+- **first_touch**: Assigns 100% attribution to the first channel in each path.
+- **last_touch**: Assigns 100% attribution to the last channel in each path.
+- **position_based**: The first and last channels get 40% of the credit each, with the remaining channels getting the leftover 20% distributed evenly.
+- **linear**: Assigns attribution evenly between all channels on the path.
+
+| ![](images/attribution_models.png) |
+|:--:|
+| Attribution Models |

@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-[dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. 
+[dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements.
 
 To setup dbt, Snowplow open source users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.
 
@@ -37,17 +37,16 @@ The supported data warehouses per version can be seen below:
 
 | snowplow-web version | dbt versions        | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
 | -------------------- | ------------------- | --------- | ----------- | --------- | ---------- | --------- |
-| 0.9.2                | >=1.0.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
+| 0.11.0              | >=1.0.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
 | 0.5.1                | >=0.20.0 to <1.0.0  | ✅        | ❌            | ✅        | ✅         | ✅          |
 | 0.4.1                | >=0.18.0 to <0.20.0 | ✅        | ❌            | ✅        | ✅         | ❌          |
-| 0.4.1                | >=0.19.0 to <0.20.0 | ❌        | ❌            | ❌        | ❌         | ✅          |
 
 </TabItem>
 <TabItem value="mobile" label="Snowplow Mobile">
 
 | snowplow-mobile version | dbt versions       | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
 | ----------------------- | ------------------ | --------- | ----------- | --------- | ---------- | --------- |
-| 0.5.4                   | >=1.0.0 to <2.0.0  | ✅          | ✅          | ✅        | ✅           | ✅        |
+| 0.5.5                   | >=1.0.0 to <2.0.0  | ✅          | ✅          | ✅        | ✅           | ✅        |
 | 0.2.0                   | >=0.20.0 to <1.0.0 | ✅          | ❌          | ✅        | ✅           | ✅        |
 
 </TabItem>
@@ -55,7 +54,7 @@ The supported data warehouses per version can be seen below:
 
 | snowplow-media-player version | snowplow-web version | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | ----------------------------- | -------------------- | ------------------ | -------- | ---------- | -------- | --------- | -------- |
-| 0.3.1                         | >=0.9.0 to <0.10.0   | >=1.0.0 to <2.0.0  | ✅       | ✅          | ✅       | ✅        | ✅        |
+| 0.3.3                         | >=0.9.0 to <0.12.0   | >=1.0.0 to <2.0.0  | ✅       | ✅          | ✅       | ✅        | ✅        |
 | 0.1.0                         | >=0.6.0 to <0.7.0    | >=0.20.0 to <1.1.0 | ❌       | ❌          | ✅       | ❌        | ✅        |
 
 </TabItem>

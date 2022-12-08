@@ -111,9 +111,9 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 The web package has the option to join in data from the following 3 Snowplow enrichments:
 
-- [IAB enrichment](https://docs.snowplowanalytics.com/docs/enriching-your-data/available-enrichments/iab-enrichment/)
-- [UA Parser enrichment](https://docs.snowplowanalytics.com/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/)
-- [YAUAA enrichment](https://docs.snowplowanalytics.com/docs/enriching-your-data/available-enrichments/yauaa-enrichment/)
+- [IAB enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md)
+- [UA Parser enrichment](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
+- [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md)
 
 By default these are **all disabled** in the web package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 

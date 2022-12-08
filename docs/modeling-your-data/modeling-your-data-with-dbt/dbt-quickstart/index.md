@@ -600,6 +600,7 @@ conda activate fractribution_env
 
 **M1 Instructions**
 
+:::caution
 There is an issue with running Snowpark on M1 chips. A workaround recommended by Snowflake is to set up a virtual environment that uses x86 Python:
 
 ```
@@ -607,6 +608,7 @@ CONDA_SUBDIR=osx-64 conda create -n fractribution_env python=3.8 absl-py -c http
 conda activate fractribution_env
 conda config --env --set subdir osx-64
 ```
+:::
 ***
 
 Install snowpark in this environment (all computers):

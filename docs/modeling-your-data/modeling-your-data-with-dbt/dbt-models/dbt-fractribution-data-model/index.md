@@ -6,32 +6,23 @@ sidebar_position: 105
 
 # Snowplow Fractribution Package
 
+**The package source code can be found in the [snowplow/dbt-snowplow-fractribution repo](https://github.com/snowplow/dbt-snowplow-fractribution), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-fractribution/#/overview/snowplow_fractribution).**
 
 ## Overview
 
-Snowplow Fractribution is a marketing attribution model for dbt. The name itself comes from `Fractional attribution`, which allows you to attribute the value of a conversion to one or more channels depending on the conversion pathway. As a result, it becomes possible to determine the revenue per channel, as well as ROAS once you have cost data for each marketing channel.
+Snowplow Fractribution is a marketing attribution model for dbt. The name itself comes from `Fractional attribution`, which allows you to attribute the value of a conversion to one or more channels depending on the conversion pathway. As a result, it becomes possible to determine the revenue per channel, as well as ROAS (the amount of revenue that is earned for every dollar spent on advertising) once you have cost data for each marketing channel.
 
 This package consists of a series of dbt models that produce the following tables:
 
-- **snowplow_fractribution_channel_counts**: Number of sessions grouped by channel, campaign, source and medium.
-- **snowplow_fractribution_channel_spend**: Spend on each channel, used in ROAS calculations.
-- **snowplow_fractribution_conversions_by_customer_id**: Conversion revenue for each conversion, along with the associated customerid.
-- **snowplow_fractribution_path_summary**: Summary of different path combinations and associated conversion/non-conversions.
-- **snowplow_fractribution_paths_to_conversion**: Path combinations leading to conversion.
-- **snowplow_fractribution_paths_to_non_conversion**: Path combinations leading to non-conversion.
-- **snowplow_fractribution_sessions_by_customer_id**: Channel information by session timestamp, where an event timestamp is considered as the session start.
+- **snowplow_fractribution_channel_counts**: Number of sessions grouped by channel, campaign, source and medium
+- **snowplow_fractribution_channel_spend**: Spend on each channel, used in ROAS calculations
+- **snowplow_fractribution_conversions_by_customer_id**: Conversion revenue for each conversion, along with the associated customerid
+- **snowplow_fractribution_path_summary**: Summary of different path combinations and associated conversion/non-conversions
+- **snowplow_fractribution_paths_to_conversion**: Path combinations leading to conversion
+- **snowplow_fractribution_paths_to_non_conversion**: Path combinations leading to non-conversion
+- **snowplow_fractribution_sessions_by_customer_id**: Channel information by session timestamp, where an event timestamp is considered as the session start
 
-Once the models are generated, the next step is to run a python script which is included in the package to run the fractribution calculations.
-### Differences to Fractribution
-
-There are some changes from the [original](https://github.com/google/fractribution) Fractribution code that have been noted below.
-
-- Temporary UDFs have been converted to persistent / permanent UDFs
-- Some temporary tables converted to permanent tables
-- Users without a user_id are treated as 'anonymous' ('f') users and the domain_userid is used to identify these sessions
-- Users with a user_id are treated as identified ('u') users
-- Templating is now run almost entirely within dbt rather than the custom SQL / Jinja templating in the original Fractribution project
-- Channel changes and contributions within a session can be considered using the `consider_intrasession_channels` variable.
+Once the models are generated, the next step is to run a python script which is included in the package to run the fractribution calculations. In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) section you will find a detailed step-by-step guide on how to operate the package as a whole.
 
 ### Intrasession Channels
 
@@ -43,10 +34,10 @@ In Google Analytics (Universal Analytics) a new session is started if a campaign
 
  There are five path transform options available:
 
- 1. **Exposure (default in this package)**: the same events in succession are reduced to one: A -> A -> B becomes A -> B. A compromise between first and unique.
- 2. **Unique**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting.
- 3. **First**: keep only the first occurrence of any event: A -> B -> A becomes A -> B. Best for brand awareness marketing.
- 4. **Frequency**: keep a count of the events’ frequency: A -> A -> B becomes A(2) -> B. Best when there is a lot of retargeting.
+ 1. **Exposure (default in this package)**: the same events in succession are reduced to one: `A → A → B becomes A → B A compromise between first and unique`
+ 2. **Unique**: all events in a path are treated as unique (no reduction of complexity) Best for smaller datasets (small lookback window) without a lot of retargeting
+ 3. **First**: keep only the first occurrence of any event: `A → B → A becomes A → B` Best for brand awareness marketing
+ 4. **Frequency**: keep a count of the events’ frequency: `A → A → B becomes A(2) → B` Best when there is a lot of retargeting
 
 
 ### Attribution Models
@@ -59,3 +50,15 @@ In Google Analytics (Universal Analytics) a new session is started if a campaign
 | ![](images/attribution_models.png) |
 |:--:|
 | Attribution Models |
+
+### Differences to Google's Fractribution
+
+There are some changes from [Google's](https://github.com/google/fractribution) Fractribution code that have been noted below.
+
+- Temporary UDFs have been converted to persistent / permanent UDFs
+- Some temporary tables converted to permanent tables
+- Users without a user_id are treated as 'anonymous' ('f') users and the domain_userid is used to identify these sessions
+- Users with a user_id are treated as identified ('u') users
+- Templating is now run almost entirely within dbt rather than the custom SQL / Jinja templating in the original Fractribution project
+- Channel changes and contributions within a session can be considered using the `consider_intrasession_channels` variable
+

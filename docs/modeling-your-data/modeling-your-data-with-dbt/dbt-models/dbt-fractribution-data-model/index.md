@@ -11,7 +11,7 @@ sidebar_position: 105
 
 Snowplow Fractribution is a marketing attribution model for dbt. The name itself comes from `Fractional attribution`, which allows you to attribute the value of a conversion to one or more channels depending on the conversion pathway. As a result, it becomes possible to determine the revenue per channel, as well as ROAS once you have cost data for each marketing channel.
 
-This package consists of a series of dbt models with the goal to produce the following models:
+This package consists of a series of dbt models that produce the following tables:
 
 - **snowplow_fractribution_channel_counts**: Number of sessions grouped by channel, campaign, source and medium.
 - **snowplow_fractribution_channel_spend**: Spend on each channel, used in ROAS calculations.

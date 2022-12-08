@@ -563,21 +563,21 @@ dbt run --selector snowplow_ecommerce
 
 ##### Configure the conversion_clause macro
 
- The `conversion_macro` specifies how to filter Snowplow events to only conversion events. How this is filtered will depend on your definition of a conversion. The default is filtering to events where tr_total > 0, but this could instead filter on event_name = 'checkout', for example. If you are using the ecommerce model, you will still need to set this for the fractribution code to run (even though all events are conversions in the ecommerce model), just change it to transaction_revenue > 0.
+ The `conversion_macro` specifies how to filter Snowplow events to only conversion events. How this is filtered will depend on your definition of a conversion. The default is filtering to events where `tr_total > 0`, but this could instead filter on `event_name = 'checkout'`, for example. If you are using the ecommerce model, you will still need to set this for the fractribution code to run (even though all events are conversions in the ecommerce model), in this case change it to `transaction_revenue > 0`.
 
- If you wish to change this filter, copy the conversion_clause.sql file from the macros folder in the snowplow_fractribution package (at [dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_clause.sql) and add it to the macros folder of your own dbt project. Update the filter and save the file.
+ If you wish to change this filter, copy the `conversion_clause.sql` file from the macros folder in the `snowplow_fractribution` package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_clause.sql`) and add it to the macros folder of your own dbt project. Update the filter and save the file.
 
 ##### Configure the conversion_value macro
 
- The `conversion_value` macro specifies either a single column or a calculated value that represents the value associated with that conversion. The default is tr_total, but revenue or a calculation using revenue and discount_amount from the default ecommerce schema, for example, could similarly be used.
+ The `conversion_value` macro specifies either a single column or a calculated value that represents the value associated with that conversion. The default is `tr_total`, but revenue or a calculation using revenue and discount_amount from the default ecommerce schema, for example, could similarly be used.
 
- If you wish to change this value, copy the conversion_value.sql file from the macros folder in the snowplow_fractribution package (at [dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_value.sql) and add it to the macros folder of your own dbt project. Update the value and save the file.
+ If you wish to change this value, copy the `conversion_value.sql` file from the macros folder in the snowplow_fractribution package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_value.sql`) and add it to the macros folder of your own dbt project. Update the value and save the file.
 
 ##### Configure the default channel_classification macro
 
  The `channel_classification` macro is used to perform channel classifications. This can be altered to generate your expected channels if they differ from the channels generated in the default macro. It is highly recommended that you examine and configure this macro when using your own data, as the default values will not consider any custom marketing parameters.
 
- If you wish to change the channel classification macro, copy the channel_classification.sql file from the macros folder in the snowplow_fractribution package (at [dbt_project_name]/dbt_packages/snowplow_fractribution/macros/channel_classification.sql) and add it to the macros folder of your own dbt project. Update the SQL and save the file.
+ If you wish to change the channel classification macro, copy the `channel_classification.sql` file from the macros folder in the snowplow_fractribution package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/channel_classification.sql`) and add it to the macros folder of your own dbt project. Update the SQL and save the file.
 
  #### 3. Run the model
 

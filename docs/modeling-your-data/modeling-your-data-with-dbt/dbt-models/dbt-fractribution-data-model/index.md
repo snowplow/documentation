@@ -4,6 +4,10 @@ date: "2022-12-01"
 sidebar_position: 105
 ---
 
+```mdx-code-block
+import ThemedImage from '@theme/ThemedImage';
+```
+
 # Snowplow Fractribution Package
 
 **The package source code can be found in the [snowplow/dbt-snowplow-fractribution repo](https://github.com/snowplow/dbt-snowplow-fractribution), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-fractribution/#/overview/snowplow_fractribution).**
@@ -45,9 +49,15 @@ In Google Analytics (Universal Analytics) a new session is started if a campaign
 - **position_based**: The first and last channels get 40% of the credit each, with the remaining channels getting the leftover 20% distributed evenly.
 - **linear**: Assigns attribution evenly between all channels on the path.
 
-| ![](images/attribution_models.png) |
-|:--:|
-| Attribution Models |
+***
+**Attribution models:**
+<ThemedImage
+        alt='Data processing model for the normalize package'
+        sources={{
+          light: require('./images/attribution_models_light.png').default,
+          dark: require('./images/attribution_models_dark.png').default
+          }}
+      />
 
 ### Differences to Google's Fractribution
 

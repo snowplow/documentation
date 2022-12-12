@@ -34,6 +34,8 @@ yarn
 yarn start
 ```
 
+(Hitting an error with `yarn start`? `brew upgrade yarn` and try again. Yarn might also suggest further commands to update `docusaurus`.)
+
 Step 4. Go to `localhost:3000` in your browser and enjoy!
 
 ## Organizing content

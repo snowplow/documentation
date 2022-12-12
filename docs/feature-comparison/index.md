@@ -21,7 +21,7 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | • Snowflake | ✅ | ✅ | ✅ |
 | • Redshift | ✅ | _coming soon_ | ✅ |
 | • BigQuery | ✅ | ❌ | ✅ |
-| • Databricks | ✅ | _coming soon_ | ✅ |
+| • Databricks | ✅ | ✅ | ✅ |
 | • Elasticsearch | ✅ | ❌ | ✅ |
 | • Postgres | ✅<br/>_(not suitable for high volumes)_ | ❌ | ❌ |
 | • S3 | ✅ | ❌ | ✅ |

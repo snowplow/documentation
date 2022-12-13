@@ -63,7 +63,7 @@ dbt test --selector snowplow_media_player_tests
 ```
 
 </TabItem>
-<TabItem value="ecommerce" label="Snowplow Ecommerce">
+<TabItem value="ecommerce" label="Snowplow E-commerce">
 
 ```bash
 dbt test --selector snowplow_ecommerce_lean_tests
@@ -77,7 +77,7 @@ dbt test --select snowplow_ecommerce,tag:manifest # Full tests on manifest model
 dbt test --select snowplow_ecommerce,tag:primary-key,tag:derived # Primary key tests only on derived tables.
 ```
 
-Alternatively, if you wanted to run all available tests in both the Snowplow ecommerce package and your custom modules:
+Alternatively, if you wanted to run all available tests in both the Snowplow e-commerce package and your custom modules:
 
 ```bash
 dbt test --selector snowplow_ecommerce

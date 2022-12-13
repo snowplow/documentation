@@ -71,7 +71,7 @@ con <- dbConnect(drv, host="<<ENTER HOST DETAILS HERE>>", port="<<ENTER PORT DET
 
 Note: you can access the relevant host, port, dbname and username fields by logging into the AWS console [console.aws.amazon.com](http://console.aws.amazon.com/), selecting Redshift and then clicking on the cluster you use for Snowplow:
 
-You can now fetch Snowplow data directly from Redshift into a dataframe in R, by executing the `dbGetQuery` statement to run a SQL statement against that data and return the data into R as a data frame. For example, the following query returns a list of visits to an ecommerce site, classified by whether the stage in the purchase funnel that each visit got to:
+You can now fetch Snowplow data directly from Redshift into a dataframe in R, by executing the `dbGetQuery` statement to run a SQL statement against that data and return the data into R as a data frame. For example, the following query returns a list of visits to an e-commerce site, classified by whether the stage in the purchase funnel that each visit got to:
 
 ```sql
 SELECT
@@ -153,7 +153,7 @@ visits <- dbGetQuery(con, "
 ")
 ```
 
-[r](http://www.r-project.org/)  
-[download-r](http://www.r-project.org/)  
-[aws-console](https://console.aws.amazon.com/console/home)  
+[r](http://www.r-project.org/)
+[download-r](http://www.r-project.org/)
+[aws-console](https://console.aws.amazon.com/console/home)
 [get-started-with-r](http://snowplowanalytics.com/analytics/tools-and-techniques/get-started-analysing-snowplow-data-with-r.html)

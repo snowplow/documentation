@@ -15,7 +15,7 @@ Due to its unique relationship with the web package, the media player package op
 :::
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce,` `normalize`
+On this page, `<package>` can be one of: `web`, `mobile`, `e-commerce,` `normalize`
 
 :::
 
@@ -63,9 +63,9 @@ Within the packages we have provided a suite of suggested selectors to run and t
 
 </TabItem>
 
-<TabItem value="ecommerce" label="Snowplow Ecommerce">
+<TabItem value="ecommerce" label="Snowplow E-commerce">
 
-- `snowplow_ecommerce`: Recommended way to run the package. This selection includes all models within the Snowplow Ecommerce as well as any custom models you have created.
+- `snowplow_ecommerce`: Recommended way to run the package. This selection includes all models within the Snowplow E-commerce as well as any custom models you have created.
 - `snowplow_ecommerce_lean_tests`: Recommended way to test the models within the package. See the testing section for more details.
 
 </TabItem>
@@ -101,7 +101,7 @@ There is 1 manifest table included in this package:
 - `snowplow_normalize_incremental_manifest`: Records the current state of the package.
 
 </TabItem>
-<TabItem value="ecommerce" label="Snowplow Ecommerce">
+<TabItem value="ecommerce" label="Snowplow E-commerce">
 
 There are 2 manifest tables included in this package:
 

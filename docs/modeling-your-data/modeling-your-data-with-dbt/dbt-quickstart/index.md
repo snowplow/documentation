@@ -52,14 +52,14 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed:
 - Python 3.7 or later
 
 </TabItem>
-<TabItem value="ecommerce" label="Snowplow Ecommerce">
+<TabItem value="ecommerce" label="Snowplow E-commerce">
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
 
-- A dataset of ecommerce web events from the [Snowplow JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md)] must be available in the database.
+- A dataset of e-commerce web events from the [Snowplow JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md)] must be available in the database.
 - Have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled.
 - Have the following e-commerce contexts enabled: user, checkout_step, page, transaction, cart
-- Track the ecommerce tracking action events on your website
+- Track the e-commerce tracking action events on your website
 
 </TabItem>
 </Tabs>
@@ -464,7 +464,7 @@ dbt run --selector snowplow_normalize
 ```
 
 </TabItem>
-<TabItem value="ecommerce" label="Snowplow Ecommerce">
+<TabItem value="ecommerce" label="Snowplow E-commerce">
 
 #### 1. Adding the `selector.yml` file
 
@@ -494,11 +494,11 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 #### 3. Enable desired modules
 
-The ecommerce package has the option to join in data from the following 1 Snowplow module:
+The e-commerce package has the option to join in data from the following 1 Snowplow module:
 
 - App Errors module -- Details relating to app errors that occur during sessions
 
-By default this module is **disabled** in the ecommerce package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the module within the package please modify the following in your `dbt_project.yml` file:
+By default this module is **disabled** in the e-commerce package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the module within the package please modify the following in your `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml

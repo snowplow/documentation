@@ -15,7 +15,7 @@ Due to its unique relationship with the web package, the media player package op
 :::
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`, `e-commerce,` `normalize`
+On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce,` `normalize`
 
 :::
 

@@ -71,9 +71,9 @@ The supported data warehouses per version can be seen below:
 </TabItem>
 <TabItem value="ecommerce" label="Snowplow E-commerce">
 
-| snowplow-normalize version | snowplow-web version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| ----------------------------- | -------------------- | ----------------- | -------- | ---------- | -------- | --------- | -------- |
-| 0.1.0                         | >=0.9.0 to <1.0.0    | >=1.0.0 to <2.0.0 | ✅        |  ❌       | ❌        | ❌        | ❌        |
+| snowplow-ecommerce version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| ----------------------------- ----------------- | -------- | ---------- | -------- | --------- | -------- |
+| 0.1.0   |  >=1.0.0 to <2.0.0 | ✅        |  ❌       | ❌        | ❌        | ❌        |
 
 </TabItem>
 </Tabs>

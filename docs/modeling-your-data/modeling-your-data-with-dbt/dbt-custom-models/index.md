@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`, `normalize`
+On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce`, `normalize`
 
 :::
 
@@ -64,6 +64,16 @@ Listed below are the recommended tables to reference as your input for a custom 
 <TabItem value="normalize" label="Snowplow Normalize">
 
 - Event level: `snowplow_normalize_base_events_this_run`
+
+</TabItem>
+<TabItem value="ecommerce" label="Snowplow E-commerce">
+
+- Event level: `snowplow_ecommerce_base_events_this_run`
+- Cart level: `snowplow_ecommerce_cart_interactions_this_run`
+- Checkout level: `snowplow_ecommerce_checkout_interactions_this_run`
+- Product level: `snowplow_ecommerce_product_interactions_this_run`
+- Session level: `snowplow_ecommerce_sessions_this_run`
+- Transaction level: `snowplow_ecommerce_transaction_interactions_this_run`
 
 </TabItem>
 </Tabs>
@@ -143,7 +153,7 @@ We have provided the `get_value_by_target` macro to dynamically switch the backf
 # dbt_project.yml
 ...
 vars:
-  snowplow_web:
+  snowplow_<package>:
     snowplow__backfill_limit_days: "{{ snowplow_utils.get_value_by_target(
                                             dev_value=1,
                                             default_value=30,
@@ -158,12 +168,13 @@ This can be achieved by setting `snowplow__start_date` to a recent date. To dyna
 # dbt_project.yml
 ...
 vars:
-  snowplow_web:
+  snowplow_<package>:
     snowplow__start_date: "{{ snowplow_utils.get_value_by_target(
                                       dev_value=snowplow_utils.n_timedeltas_ago(1, 'weeks'),
                                       default_value='2020-01-01',
                                       dev_target_name='dev') }}"
 ```
+
 
 ### 3. Handling of schema evolution
 

@@ -226,7 +226,7 @@ Snowplow currently supports (or will support in the near future) the following e
 | --- | --- |
 | [Page views](#page-views) | 'page_view' |
 | [Page pings](#page-pings) | 'page_ping' |
-| [Ecommerce transactions](#ecommerce-transactions) | 'transaction' and 'transaction_item' |
+| [E-commerce transactions](#ecommerce-transactions) | 'transaction' and 'transaction_item' |
 | [Custom structured events](#custom-structured-events) | 'struct' |
 |[Custom unstructured events](#custom-unstructured-events) | 'unstruct' |
 
@@ -247,7 +247,7 @@ There are four additional fields included with page pings that indicate how a us
 | `pp_yoffset_min` | integer | Minimum page y offset seen in the last ping period | No | 0 |
 | `pp_yoffset_max` | integer | Maximum page y offset seen in the last ping period | No | 200 |
 
-#### Ecommerce transactions
+#### E-commerce transactions
 
 There are a large number of fields specifically for transaction events.
 

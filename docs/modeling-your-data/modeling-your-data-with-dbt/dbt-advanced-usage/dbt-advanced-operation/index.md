@@ -50,10 +50,10 @@ It is possible to update the value in the [manifest tables](/docs/modeling-your-
 
 For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00`, you would set the value in your manifest table for the model(s) to `2022-10-25 02:00:00`. This will then process data from that point (minus the `snowplow__lookback_window_hours` buffer) until either the current date, or according to your `snowplow__backfill_limit_days`, whichever yields a smaller time period. This will repeat until the data is fully reprocessed.
 
-<ThemedImage 
-    alt="Demonstration of data processing through multiple runs of the option 2 approach" 
+<ThemedImage
+    alt="Demonstration of data processing through multiple runs of the option 2 approach"
     sources={{
-        light: require('./images/data_progress_example2_light.drawio.png').default, 
+        light: require('./images/data_progress_example2_light.drawio.png').default,
         dark: require('./images/data_progress_example2_dark.drawio.png').default
         }}
 />

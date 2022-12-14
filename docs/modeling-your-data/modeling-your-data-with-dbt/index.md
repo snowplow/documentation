@@ -18,10 +18,11 @@ For Snowplow BDP customers, dbt projects can be configured and scheduled in the 
 
 # Snowplow dbt Packages
 
-There are 3 core snowplow dbt packages:
+There are 4 core snowplow dbt packages:
 -  [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web))
 -  [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile))
 -  [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player))
+-  [Snowplow E-commerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce))
 
 _The Snowplow Media Player package is designed to be used with the Snowplow Web package and not as a standalone package._
 
@@ -63,9 +64,16 @@ The supported data warehouses per version can be seen below:
 </TabItem>
 <TabItem value="normalize" label="Snowplow Normalize">
 
-| snowplow-normalize version | snowplow-web version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| ----------------------------- | -------------------- | ----------------- | -------- | ---------- | -------- | --------- | -------- |
-| 0.1.0                         | >=0.9.0 to <1.0.0    | >=1.0.0 to <2.0.0 | ✅        | ✅        | ❌        | ✅        | ❌        |
+| snowplow-normalize version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| ----------------------------- | ----------------- | -------- | ---------- | -------- | --------- | -------- |
+| 0.1.0                         | >=1.0.0 to <2.0.0 | ✅        | ✅        | ❌        | ✅        | ❌        |
+
+</TabItem>
+<TabItem value="ecommerce" label="Snowplow E-commerce">
+
+| snowplow-ecommerce version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| ----------------------------- | ----------------- | -------- | ---------- | -------- | --------- | -------- |
+| 0.1.0   |  >=1.0.0 to <2.0.0 | ✅        |  ❌       | ❌        | ❌        | ❌        |❌        |
 
 </TabItem>
 </Tabs>

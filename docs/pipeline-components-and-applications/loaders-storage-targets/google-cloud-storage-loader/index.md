@@ -14,37 +14,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 Cloud Storage Loader is a [Dataflow](https://cloud.google.com/dataflow/) job which dumps event from an input [PubSub](https://cloud.google.com/pubsub/) subscription into a [Cloud Storage](https://cloud.google.com/storage/) bucket.
 
-## Technical details
-
 Cloud Storage loader is built on top of [Apache Beam](https://beam.apache.org/) and its Scala wrapper [SCIO](https://github.com/spotify/scio).
-
-It groups messages from an input PubSub subscription into configurable windows and write them out to Google Cloud Storage.
-
-It also optionally partitions the output by date so that you can easily see what was outputted when in your cloud storage bucket, for example we could see the following hierarchy:
-
-```bash
-gs://bucket/
---2018
-----10
-------31
---------18
---------19
---------20
-```
-
-It can also compress the output data. For now, the supported output compressions are:
-
-- gzip
-- bz2
-- none
-
-Do note, however, that bz2-compressed data cannot be loaded directly into BigQuery.
-
-For now, it only runs on [GCP's Dataflow](https://cloud.google.com/dataflow/).
-
-### See also:
-
-- [Repository](https://github.com/snowplow-incubator/snowplow-google-cloud-storage-loader/)
 
 ## Setup guide
 
@@ -52,25 +22,42 @@ For now, it only runs on [GCP's Dataflow](https://cloud.google.com/dataflow/).
 
 #### Cloud Storage Loader specific options
 
-- `--inputSubscription=String` The Cloud Pub/Sub subscription to read from, formatted as projects/[PROJECT]/subscriptions/[SUB]
-- `--outputDirectory=String` The Cloud Storage directory to output files to, ends with /
-- `--outputFilenamePrefix=String` Default: output The Cloud Storage prefix to output files to
-- `--shardTemplate=String` Default: -W-P-SSSSS-of-NNNNN The shard template which will be part of the filenames
-- `--outputFilenameSuffix=String` Default: .txt The suffix of the filenames written out
-- `--windowDuration=Int` Default: 5 The window duration in minutes
-- `--compression=String` Default: none The compression used (gzip, bz2 or none), bz2 can't be loaded into BigQuery
-- `--numShards=int` Default: 1 The maximum number of output shards produced when writing
+- `--inputSubscription=String` The Cloud Pub/Sub subscription to read from, formatted like projects/[PROJECT]/subscriptions/[SUB]. Required. 
+- `--outputDirectory=gs://[BUCKET]/` The Cloud Storage directory to output files to, ending in /. Required.  
+- `--outputFilenamePrefix=String` The prefix for output files. Default: output. Optional.
+- `--shardTemplate=String` A valid shard template as described [here](https://javadoc.io/static/com.google.cloud.dataflow/google-cloud-dataflow-java-sdk-all/1.7.0/com/google/cloud/dataflow/sdk/io/ShardNameTemplate.html), which will be part of the filenames. Default: `-W-P-SSSSS-of-NNNNN`. Optional.
+- `--outputFilenameSuffix=String` The suffix for output files. Default: .txt. Optional.
+- `--windowDuration=Int` The window duration in minutes. Default: 5. Optional.
+- `--compression=String` The compression used (gzip, bz2 or none). Note that bz2 can't be loaded into BigQuery. Default: no compression. Optional.        
+- `--numShards=Int` The maximum number of output shards produced when writing. Default: 1. Optional.
+- `--dateFormat=YYYY/MM/dd/HH/`  A date format string used for partitioning via date in `outputDirectory` and `partitionedOutputDirectory`. Default: `YYYY/MM/dd/HH/`. Optional. 
+For example, the date format `YYYY/MM/dd/HH/` would produce a directory structure like this:
+  ```bash
+  gs://bucket/ 
+    └── 2022 
+      └── 12 
+        └── 15 
+          ├── ... 
+          ├── 18 
+          ├── 19 
+          ├── 20 
+          └── ...
+  ```
+- `--partitionedOutputDirectory=gs://[BUCKET]/` The Cloud Storage directory to output files to, partitioned by schema, ending with /. Unpartitioned data will be sent to `outputDirectory`. Optional.
+
+
 
 #### Dataflow options
 
-To run on Dataflow, Beam Enrich will rely on a set of additional configuration options:
+To run the Cloud Storage Loader on Dataflow, it is also necessary to specify additional configuration options. None of these options have default values, and they are all required.
 
-- `--runner=DataFlowRunner` which specifies that we want to run on Dataflow
-- `--project=[PROJECT]`, the name of the GCP project
-- `--streaming=true` to notify Dataflow that we're running a streaming application
-- `--workerZone=europe-west2-a`, the zone where the Dataflow nodes (effectively [GCP Compute Engine](https://cloud.google.com/compute/) nodes) will be launched
-- `--region=europe-west2`, the region where the Dataflow job will be launched
-- `--gcpTempLocation=gs://[BUCKET]/`, the GCS bucket where temporary files necessary to run the job (e.g. JARs) will be stored
+- `--runner=DataFlowRunner` Passing the string `DataFlowRunner` specifies that we want to run on Dataflow.
+- `--jobName=[NAME]` Specify a name for your Dataflow job that will be created.
+- `--project=[PROJECT]` The name of your GCP project.
+- `--streaming=true` Pass `true` to notify Dataflow that we're running a streaming application.
+- `--workerZone=[ZONE]` The [zone](https://cloud.google.com/compute/docs/regions-zones) where the Dataflow nodes (effectively [GCP Compute Engine](https://cloud.google.com/compute/) nodes) will be launched.
+- `--region=[REGION]` The [region](https://cloud.google.com/compute/docs/regions-zones) where the Dataflow job will be launched.
+- `--gcpTempLocation=gs://[BUCKET]/` The GCS bucket where temporary files necessary to run the job (e.g. JARs) will be stored.
 
 The list of all the options can be found at [https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options).
 
@@ -106,7 +93,10 @@ Here, we provide an example using `gcloud`:
 
 #### ZIP archive
 
-You can find the archive hosted on [Github](https://github.com/snowplow-incubator/snowplow-google-cloud-storage-loader/releases/download/0.3.2/snowplow-google-cloud-storage-loader-0.3.2.zip).
+You can find the archive hosted on GitHub:
+<CodeBlock language="bash">{
+`https://github.com/snowplow-incubator/snowplow-google-cloud-storage-loader/releases/download/${versions.gcsLoader}/snowplow-google-cloud-storage-loader-${versions.gcsLoader}.zip`
+}</CodeBlock>
 
 Once unzipped the artifact can be run as follows:
 
@@ -115,7 +105,7 @@ Once unzipped the artifact can be run as follows:
   --runner=DataFlowRunner \\
   --project=[PROJECT] \\
   --streaming=true \\
-  --workerZone=europe-west2-a \\
+  --workerZone=[ZONE] \\
   --inputSubscription=projects/[PROJECT]/subscriptions/[SUBSCRIPTION] \\
   --outputDirectory=gs://[BUCKET]/YYYY/MM/dd/HH/ \\ # partitions by date
   --outputFilenamePrefix=output \\ # optional
@@ -182,12 +172,4 @@ To display documentation about Cloud Storage Loader-specific options:
 
 A full list of all the Beam CLI options can be found at: [https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options](https://cloud.google.com/dataflow/pipelines/specifying-exec-params#setting-other-cloud-pipeline-options).
 
-### Tests and debugging
-
-#### Testing
-
-The tests for this codebase can be run with `sbt test`.
-
-#### Debugging
-
-You can run the job locally and experiment with its different parts using the [SCIO REPL](https://github.com/spotify/scio/wiki/Scio-REPL) by running `sbt repl/run`.
+The repository can be found [here](https://github.com/snowplow-incubator/snowplow-google-cloud-storage-loader/).

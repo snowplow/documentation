@@ -58,3 +58,6 @@
 
 /docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed-gcp/ /docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-postgres-data/ /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-data/ 301
+
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/downloading-google-cloud-storage-loader/ /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/configuration-options/ /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/ 301

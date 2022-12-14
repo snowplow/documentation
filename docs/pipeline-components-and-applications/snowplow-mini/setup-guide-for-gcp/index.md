@@ -12,10 +12,10 @@ Snowplow Mini is, in essence, the Snowplow real time stack inside of a single im
 2. Giving developers new to Snowplow an easy way to start with Snowplow and understand how the different pieces fit together
 3. Giving people running Snowplow a quick way to debug tracker updates (because they can)
 
-The software stack installed (0.15.0):
+The software stack installed (0.15.1):
 
 - Snowplow Stream Collector NSQ 2.8.2
-- Snowplow Stream Enrich NSQ 3.6.0
+- Snowplow Stream Enrich NSQ 3.6.1
 - Snowplow Elasticsearch Loader 2.0.8
 - Snowplow Iglu Server 0.8.7
 - Opensearch 2.4.0
@@ -50,11 +50,11 @@ https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-14-2-large-16609107
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
 
-Version 0.15.0 (Recommended)
+Version 0.15.1 (Recommended)
 
 | L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
 | --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-0-large-1670252078.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-0-xlarge-1670255918.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-0-xxlarge-1670251500.tar.gz) |
+| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-1-large-1671030371.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-1-xlarge-1671030122.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-15-1-xxlarge-1671029456.tar.gz) |
 
 You can find more about `gcloud compute images create` command [here](https://cloud.google.com/sdk/gcloud/reference/compute/images/create) for additional parameters.
 

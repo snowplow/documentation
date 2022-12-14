@@ -26,29 +26,29 @@ Mini is available in 3 different sizes:
 
 This service is available as an EC2 image within the AWS Community AMIs in the following regions:
 
-Version 0.15.0 (Recommended)
+Version 0.15.1 (Recommended)
 
-| x | large / t2.large | xlarge / t2.xlarge | xxlarge / t2.xxlarge |
-| --- | --- | --- | --- |
-| ap-northeast-1 | ami-0917bc0532d0db144 | ami-0271f5455de6ad622 | ami-0d433d4d00bff1693 |
-| ap-northeast-2 | ami-05fc9975599e3f1ff | ami-07f577c827881feca | ami-023758651f508f771 |
-| ap-south-1     | ami-0bacd6f0a122e8718 | ami-0d92cfc80c99601af | ami-0b8569bde75e3f222 |
-| ap-southeast-1 | ami-04efd227d051337bb | ami-062700959095923b8 | ami-07d30f1519131a48e |
-| ap-southeast-2 | ami-04780a23c25ccdf59 | ami-07a6b27dee007754a | ami-0a4e36387ae19d231 |
-| ca-central-1   | ami-0128319d3c3ba7ec3 | ami-0d5de2294a5649044 | ami-054cd8cd9f4964000 |
-| eu-central-1   | ami-07fb8c0723a45af12 | ami-03b7b7a8c998a934b | ami-061ffff53d02d32e1 |
-| eu-west-1      | ami-03eab4540c05d310b | ami-06f7fff39ee545ede | ami-02fb7cf96c7df4ce5 |
-| eu-west-2      | ami-09cced2ee46007d0f | ami-02f480f413bc1207d | ami-0bb89f86579c9c0a9 |
-| sa-east-1      | ami-0853ea0058be93749 | ami-013718dcdf11787bc | ami-058d52a6448831082 |
-| us-east-1      | ami-018b166b0e0a89666 | ami-036cc8d3125ee4122 | ami-064c226742391a15a |
-| us-east-2      | ami-0d39d65a4a8ddef2c | ami-019f6029dcf2c6cca | ami-0e68dfc07be2737b6 |
-| us-west-1      | ami-072308c23149a086f | ami-0b0e5d95f66db7122 | ami-0c988abf05a185ed0 |
-| us-west-2      | ami-049a130c74d5c5fda | ami-0dc2ee7da6779a976 | ami-0e792363a3c84d7b0 |
+| region         | large / t2.large      | xlarge / t2.xlarge    | xxlarge / t2.xxlarge  |
+| ---            | ---                   | ---                   | ---                   |
+| ap-northeast-1 | ami-0158e0fab2c8e6e65 | ami-02c8bc6c0972ab714 | ami-0e9c2659cf4ffd908 |
+| ap-northeast-2 | ami-09a04e181a5de15bd | ami-0c407c2324287b631 | ami-0e16065214735e004 |
+| ap-south-1     | ami-05b4b3d599b1b0b2a | ami-08922b559d6d5632c | ami-01632963dacfbbfef |
+| ap-southeast-1 | ami-08e5e96ce93bef1d6 | ami-00ea092138a7cb44a | ami-0bc8f4fdd09686edb |
+| ap-southeast-2 | ami-0f352ba78d75f5772 | ami-069a0da7a93d82fd7 | ami-09d98c0b4d44572f3 |
+| ca-central-1   | ami-03887e17dd665d5e6 | ami-006bbee3099ee35ce | ami-0e978a3b52e4de249 |
+| eu-central-1   | ami-02c88c24820cdde69 | ami-022f28d1e79f2e920 | ami-0333d939f89191723 |
+| eu-west-1      | ami-09cf7e5acdbc9e8ad | ami-0923e4c14bf9f589e | ami-0e2fed0c9cbc61e30 |
+| eu-west-2      | ami-0178b420c5b099ea2 | ami-018549cc21741ad02 | ami-01bd2ff1da1016d4c |
+| sa-east-1      | ami-0f8ce9d7dfd9bfd80 | ami-0e02a0a64b0c1311f | ami-00bdbe42884c14148 |
+| us-east-1      | ami-0dcc21519a5e648a8 | ami-0452d8233d5246d86 | ami-01165ee3a5fa44a93 |
+| us-east-2      | ami-0244938cf238eedda | ami-03491c53c6505e179 | ami-08b98725a7ccf7628 |
+| us-west-1      | ami-0ae6e88dfc5986a3a | ami-0b54fd197b9a3361a | ami-041fc48a39008a9cc |
+| us-west-2      | ami-0c460da85e5c76945 | ami-03c0097dd40222c64 | ami-0462172d15246aa5f |
 
 The software stack installed:
 
 - Snowplow Stream Collector NSQ 2.8.2
-- Snowplow Stream Enrich NSQ 3.6.0
+- Snowplow Stream Enrich NSQ 3.6.1
 - Snowplow Elasticsearch Loader 2.0.8
 - Snowplow Iglu Server 0.8.7
 - Opensearch 2.4.0
@@ -122,11 +122,11 @@ In the EC2 Console UI select the `Launch Instance` button then select the `Co
 
 ## Choose Instance Type
 
-`0.15.0` AMI names explicitly specifies which instance type to use.
+`0.15.1` AMI names explicitly specifies which instance type to use.
 
-- `0.15.0-large` needs `t2.large`
-- `0.15.0-xlarge` needs `t2.xlarge`
-- `0.15.0-xxlarge` needs `t2.2xlarge`
+- `0.15.1-large` needs `t2.large`
+- `0.15.1-xlarge` needs `t2.xlarge`
+- `0.15.1-xxlarge` needs `t2.2xlarge`
 
 ## Configure Instance
 

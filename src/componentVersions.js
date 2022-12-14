@@ -14,4 +14,5 @@ export const versions = {
   pythonTracker: '0.12.0',
   rustTracker: '0.1.0',
   gcsLoader: '0.5.4',
+  snowplowMini: '0.15.1',
 }

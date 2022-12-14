@@ -66,6 +66,16 @@ Listed below are the recommended tables to reference as your input for a custom 
 - Event level: `snowplow_normalize_base_events_this_run`
 
 </TabItem>
+<TabItem value="ecommerce" label="Snowplow E-commerce">
+
+- Event level: `snowplow_ecommerce_base_events_this_run`
+- Cart level: `snowplow_ecommerce_cart_interactions_this_run`
+- Checkout level: `snowplow_ecommerce_checkout_interactions_this_run`
+- Product level: `snowplow_ecommerce_product_interactions_this_run`
+- Session level: `snowplow_ecommerce_sessions_this_run`
+- Transaction level: `snowplow_ecommerce_transaction_interactions_this_run`
+
+</TabItem>
 </Tabs>
 
 ## Tagging custom models

@@ -575,6 +575,14 @@ dbt run --selector snowplow_ecommerce
 
  If you wish to change the channel classification macro, copy the `channel_classification.sql` file from the macros folder in the snowplow_fractribution package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/channel_classification.sql`) and add it to the macros folder of your own dbt project. Update the SQL and save the file.
 
+ ##### Configure the channel_spend macro
+
+ The `channel_spend` macro is used to query the spend by channels. It requires a user supplied SQL script to extract the total ad spend by channel, by replacing the SQL query in the default__channel_spend() macro in the macros folder of your own dbt project.
+
+ Required output schema:
+ - channel: STRING NOT NULL
+ - spend: FLOAT64 (Use the same monetary units as conversion revenue, and NULL if unknown.)
+
  #### 3. Run the model
 
  Execute the following either through your CLI, within dbt Cloud, or within [Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md)

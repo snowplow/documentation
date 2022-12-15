@@ -35,4 +35,4 @@ Now that you have Stream Enrich running, you should have validated, enriched dat
 
 The next step is to [setup the Snowplow S3 loader](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/load-data-to-s3/index.md) to sink this data to S3.
 
-Instructions on how to load the data into other data stores e.g. Redshift, SnowflakeDB and Elastic can be found under [Destinations](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/index.md)
+Instructions on how to load the data into other data stores e.g. Redshift, Snowflake and Elastic can be found under [Destinations](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/index.md).

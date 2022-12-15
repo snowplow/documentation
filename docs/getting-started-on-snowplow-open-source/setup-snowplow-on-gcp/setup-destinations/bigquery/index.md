@@ -1,7 +1,7 @@
 ---
-title: "Setup BigQuery Destination"
+title: "BigQuery"
 date: "2020-03-02"
-sidebar_position: 50
+sidebar_position: 0
 ---
 
 Snowplow supports streaming data into BigQuery in near real-time.

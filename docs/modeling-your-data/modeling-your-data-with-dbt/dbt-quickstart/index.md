@@ -583,7 +583,7 @@ dbt run --selector snowplow_ecommerce
  - channel: STRING NOT NULL
  - spend: FLOAT64 (Use the same monetary units as conversion revenue, and NULL if unknown.)
 
-If you wish to change the channel classification macro, copy the `channel_classification.sql` file from the macros folder in the snowplow_fractribution package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/channel_classification.sql`) and add it to the macros folder of your own dbt project. Update the SQL and save the file.
+If you wish to change the channel classification macro, copy the `channel_spend.sql` file from the macros folder in the snowplow_fractribution package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/channel_spend.sql`) and add it to the macros folder of your own dbt project. Update the SQL and save the file.
 
  #### 3. Run the model
 

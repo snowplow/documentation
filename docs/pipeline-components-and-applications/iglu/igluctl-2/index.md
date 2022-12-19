@@ -25,7 +25,7 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 Download the latest Igluctl from GitHub releases:
 
 ```bash
-$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip
+$ wget https://github.com/snowplow/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip
 $ unzip igluctl_0.10.1.zip
 ```
 
@@ -188,7 +188,7 @@ $ ./igluctl static generate $INPUT --no-header
 
 ## static push
 
-`igluctl static push` publishes schemas stored locally to a remote [Iglu Server](https://github.com/snowplow-incubator/iglu-server).
+`igluctl static push` publishes schemas stored locally to a remote [Iglu Server](https://github.com/snowplow/iglu-server).
 
 It accepts three required arguments:
 
@@ -204,7 +204,7 @@ $ ./igluctl static push /path/to/static/registry iglu.acme.com:80/iglu-server f8
 
 ## static pull
 
-`igluctl static pull` downloads schemas stored on a remote [](https://github.com/snowplow/iglu/tree/master/2-repositories/iglu-server)[Iglu Server](https://github.com/snowplow-incubator/iglu-server) to a local folder.
+`igluctl static pull` downloads schemas stored on a remote [](https://github.com/snowplow/iglu/tree/master/2-repositories/iglu-server)[Iglu Server](https://github.com/snowplow/iglu-server) to a local folder.
 
 It accepts three required arguments:
 
@@ -245,7 +245,7 @@ It accepts one required arguments:
 $ ./igluctl static deploy /path/to/config/file
 ```
 
-Your configuration file should be a hocon file, following the [reference example](https://github.com/snowplow-incubator/igluctl/blob/0.8.0/config/deploy.reference.hocon). For backwards compatibility with previous versions, you could also provide a [self-describing json](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.iglu/igluctl_config/jsonschema/1-0-0).
+Your configuration file should be a hocon file, following the [reference example](https://github.com/snowplow/igluctl/blob/0.8.0/config/deploy.reference.hocon). For backwards compatibility with previous versions, you could also provide a [self-describing json](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.iglu/igluctl_config/jsonschema/1-0-0).
 
 Example:
 

@@ -4,6 +4,11 @@ date: "2020-04-30"
 sidebar_position: 5000
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 [Athena](https://aws.amazon.com/athena/) on AWS and [BigQuery](https://cloud.google.com/bigquery) on GCP are tools that let you query your failed events, using the cloud storage files as a back-end data source.
 
 ```sql
@@ -11,74 +16,42 @@ SELECT data.failure.messages FROM adapter_failures
 WHERE from_iso8601_timestamp(data.failure.timestamp) > timestamp '2020-04-01'
 ```
 
-This is great for debugging your pipeline without the need to load your failed events into a separate database.
+This approach is great for debugging your pipeline without the need to load your failed events into a separate database.
 
-The [snowplow-badrows-tables repo](https://github.com/snowplow-incubator/snowplow-badrows-tables) contains resources and instructions to set up Athena/BigQuery for your pipeline. To create tables, you need to provide a table definition corresponding to the JSON schema for each of your failed event files. Each different failed event type (e.g. schema violations, adapter failures) has its own JSON schema, and therefore requires its own separate table.
+Before you can query this data, you need to create corresponding tables in Athena or BigQuery as we explain below. Each different failed event type (e.g. schema violations, adapter failures) has a different schema, so you will need one table per event type.
 
-## Athena instructions
+## Creating the tables
 
-Go to [the Athena dashboard](https://eu-central-1.console.aws.amazon.com/athena/home) and use the query editor. Start by creating a database named after your pipeline (e.g. prod1 or qa1):
+<Tabs groupId="platform">
+  <TabItem value="athena" label="Athena" default>
+
+Go to [the Athena dashboard](https://eu-central-1.console.aws.amazon.com/athena/home) and use the query editor. Start by creating a database (replace `{{ DATABASE }}` with the name of your pipeline, e.g. `prod1` or `qa1`):
 
 ```sql
 CREATE DATABASE IF NOT EXISTS {{ DATABASE }}
 ```
 
-Then run each sql statement provided in the [badrows-tables repo](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/athena) by copying them into the Athena query editor:
+Then run each sql statement provided in the [badrows-tables repository](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/athena) by copying them into the Athena query editor. We recommend creating all tables, although you can skip the ones you are not interested in.
 
-- ![](images/athena-create-table.png)
-    
+:::info Placeholders
 
-Create table in Athena
+Note that the sql statements contain a few placeholders which you will need to edit before you can create the tables:
 
-As example of using your Athena tables, you might start by getting counts of each failed event type from the last week. Repeat this query for each table you have created:
+* `{{ DATABASE }}` — as above, change this to the name of your pipeline, e.g. `prod1` or `qa1`.
+* `s3://{{ BUCKET }}/{{ PIPELINE }}` — this should point to the directory in S3 where your bad rows files are stored.
 
-```sql
-SELECT COUNT(*) FROM schema_violations
-WHERE from_iso8601_timestamp(data.failure.timestamp) > DATE_ADD('day', -7, now())
-```
+:::
 
-- ![](images/athena-count.png)
-    
+![Creating a table in Athena](images/athena-create-table.png)
 
-Athena query
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
 
-If you have schema violations, you might want to find which tracker sent the event:
-
-```sql
-SELECT data.payload.enriched.app_id, COUNT(*) FROM schema_violations
-WHERE from_iso8601_timestamp(data.failure.timestamp) > DATE_ADD('day', -7, now())
-GROUP BY data.payload.enriched.app_id
-```
-
-You can do a deeper dive into the error messages to get a explanation of the last 10 failures:
-
-```sql
-SELECT data.failure.messages[1].field AS field,
-       data.failure.messages[1].value AS value,
-       data.failure.messages[1].error AS error,
-       data.failure.messages[1].json AS json,
-       data.failure.messages[1].schemaKey AS schemaKey,
-       data.failure.messages[1].schemaCriterion AS schemaCriterion
-FROM schema_violations
-ORDER BY data.failure.timestamp DESC
-LIMIT 10
-```
-
-## BigQuery instructions
+:::note
 
 These instructions make use of the [bq command-line tool](https://cloud.google.com/bigquery/docs/bq-command-line-tool) which is packaged with the [google cloud sdk](https://cloud.google.com/sdk/docs). Follow the sdk instructions for how to [initialize and authenticate the sdk](https://cloud.google.com/sdk/docs/initializing). Also take a look at the [BigQuery dashboard](https://console.cloud.google.com/bigquery) as you run these commands, so you can see your tables as you create them.
 
-##### Missing fields ⚠️
-
-_The following fields are missing from the bigquery table definitions:_
-
-- _Enrichment failures: `data.failure.message.error`_
-- _Loader iglu error: `data.failure.dataReports.targets`_
-- _Loader recovery error: `data.failure.error.location`_
-- _Schema violations: `data.failure.messages.error`_
-- _Tracker protocol violations: `data.failure.messages.error`_
-
-_We have omitted fields from the table definitions if they are "polymorphic", e.g. where they can be a string or an object depending on the context. Unfortunately this makes the fields inaccessible in BigQuery. This problem will be fixed in future versions of Snowplow, by removing polymorphic fields (see issues in [snowplow-badrows](https://github.com/snowplow-incubator/snowplow-badrows/issues/50) and [iglu-central](https://github.com/snowplow/iglu-central/issues/1075))._
+:::
 
 Create a dataset to contain your failed event tables:
 
@@ -89,9 +62,15 @@ bq mk --data_location=EU bad_rows_prod1
 
 The `--data-location` should match the location of your bad rows bucket. Also replace `prod1` with the name of your pipeline.
 
-Now run `bq mk` for each table definition in the badrows-tables repo. Depending on the failures you would like to check, the relevant table definition(s) need to be downloaded from [snowplow-badrows-tables](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/bigquery). Each table definition contains a `{{ BUCKET }}` placeholder which needs to be changed to the GCS bucket where your bad rows files are stored (e.g. sp-storage-loader-bad-prod1-com_acme).
+Next, download the table definitions provided in the [badrows-tables repository](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/bigquery) in JSON format.
 
-Then add the local path to the table definition json file which you have downloaded and edited above to the `--external_table_definition` parameter. BigQuery uses the bucket as the back-end data source. Here is how to run the command for the first three tables (note you should change the dataset name `bad_rows_prod1` to match the dataset you just created):
+:::info Placeholders
+
+Each table definition contains a `{{ BUCKET }}` placeholder which needs to be changed to the GCS bucket where your bad rows files are stored (e.g. `sp-storage-loader-bad-prod1-com_acme`).
+
+:::
+
+Now run `bq mk` for each table definition in turn. Use the `--external_table_definition` parameter so that BigQuery uses the bucket as the back-end data source. Here is how to run the command for the first three tables (note that you should change the dataset name `bad_rows_prod1` to match the dataset you just created):
 
 ```bash
 bq mk \
@@ -116,6 +95,62 @@ bq mk \
 # Table 'my-snowplow-project:bad_rows_prod1.tracker_protocol_violations' successfully created.
 ```
 
+Run the corresponding commands for the remaining table definitions. We recommend creating all tables, although you can skip the ones you are not interested in.
+
+:::tip Why not just auto-detect the schemas?
+
+BigQuery has an “Auto-detect” feature to automatically generate the table definition for you by inspecting the file contents. So you might wonder why it is necessary to provide explicit schema definitions for your tables.
+
+There are two potential pitfalls when using the autogenerated schema with the Snowplow bad rows files:
+
+- _Optional fields_. BigQuery might not “notice” that a field exists, depending on the sample of data used to detect the schema.
+- _Polymorphic fields_, e.g. `error` that can be either a string or an object. BigQuery will throw an exception if it sees an unexpected value for a field. Our table definitions use the `JSON` data type for these fields.
+
+:::
+
+  </TabItem>
+</Tabs>
+
+## Querying the data
+
+<Tabs groupId="platform">
+  <TabItem value="athena" label="Athena" default>
+
+As example of using your Athena tables, you might start by getting counts of each failed event type from the last week. Repeat this query for each table you have created:
+
+```sql
+SELECT COUNT(*) FROM schema_violations
+WHERE from_iso8601_timestamp(data.failure.timestamp) > DATE_ADD('day', -7, now())
+```
+
+![Athena query](images/athena-count.png)
+
+If you have schema violations, you might want to find which tracker sent the event:
+
+```sql
+SELECT data.payload.enriched.app_id, COUNT(*) FROM schema_violations
+WHERE from_iso8601_timestamp(data.failure.timestamp) > DATE_ADD('day', -7, now())
+GROUP BY data.payload.enriched.app_id
+```
+
+You can do a deeper dive into the error messages to get a explanation of the last 10 failures:
+
+```sql
+SELECT message.field AS field,
+       message.value AS value,
+       message.error AS error,
+       message.json AS json,
+       message.schemaKey AS schemaKey,
+       message.schemaCriterion AS schemaCriterion
+FROM schema_violations
+CROSS JOIN UNNEST(data.failure.messages) AS t(message)
+ORDER BY data.failure.timestamp DESC
+LIMIT 10
+```
+
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
+
 You can query your tables from the query editor in the [BigQuery console](https://console.cloud.google.com/bigquery). You might want to start by getting counts of each failed event type from the last week. This query will work, but it is relatively expensive because it will scan all files in the `schema_violations` directory:
 
 ```sql
@@ -132,8 +167,7 @@ WHERE DATE(PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%S', LTRIM(REGEXP_EXTRACT(_FILE_NAME,
 
 You can repeat that query for each table you created in your bad rows dataset.
 
-- ![](images/bigquery-count.png)
-    
+![BigQuery query](images/bigquery-count.png)
 
 If you have schema violations, you might want to find which tracker sent the event:
 
@@ -146,22 +180,91 @@ GROUP BY data.payload.enriched.app_id;
 If you have tracker protocol failures, you can do a deeper dive into the error messages to get a explanation of the last 10 failures:
 
 ```sql
-SELECT data.failure.messages[OFFSET(0)].field AS field,
-       data.failure.messages[OFFSET(0)].value AS value,
-       data.failure.messages[OFFSET(0)].expectation AS expectation,
-       data.failure.messages[OFFSET(0)].schemaKey AS schemaKey,
-       data.failure.messages[OFFSET(0)].schemaCriterion AS schemaCriterion
-FROM bad_rows_prod1.tracker_protocol_violations
+SELECT message.field AS field,
+       message.value AS value,
+       message.error AS error,
+       message.expectation AS expectation,
+       message.schemaKey AS schemaKey,
+       message.schemaCriterion AS schemaCriterion
+FROM bad_rows_prod1.tracker_protocol_violations,
+UNNEST(data.failure.messages) AS message
 WHERE DATE(PARSE_TIMESTAMP('%Y-%m-%dT%H:%M:%S', LTRIM(REGEXP_EXTRACT(_FILE_NAME, 'output-[0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+:[0-9]+'), 'output-'))) >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY)
 ORDER BY data.failure.timestamp DESC
 LIMIT 10;
 ```
 
-#### But why bother with schemas?
+<details>
+  <summary>Digging deeper</summary>
 
-BigQuery has a 'Auto-detect' feature to automatically generate the table definition for you by inspecting the file contents. So you might wonder why it is necessary to provide explicit schema definitions for your tables.
+You might notice that the `error` field in the result of the query above has the `JSON` type.
+This is because depending on the variety of the failed event, the `error` might be a simple string or a complex object with additional detail.
 
-There are two potential pitfalls when using the autogenerated schema with the Snowplow bad rows files:
+For example, the “invalid JSON” message might have this `error`:
 
-- Optional fields. BigQuery might not "notice" that a field exists, depending on the sample of data used to detect the schema.
-- Polymorphic fields, i.e. a field that can be either a string or an object. BigQuery will throw an exception if it sees an unexpected value for a field.
+```json
+"invalid json: expected false got 'foo' (line 1, column 1)"
+```
+
+In contrast, in case of a failure to resolve Iglu server, the value in the `error` field would look like this, with “sub-errors” inside:
+
+```json
+{
+  "error": "ResolutionError",
+  "lookupHistory": [
+    {
+      "attempts": 1,
+      "errors": [
+        {
+          "error": "RepoFailure",
+          "message": "Unexpected exception fetching: org.http4s.client.UnexpectedStatus: unexpected HTTP status: 404 Not Found"
+        }
+      ],
+      "lastAttempt": "2021-10-16T17:20:52.626Z",
+      "repository": "Iglu Central"
+    },
+    ...
+  ]
+}
+```
+
+You can figure out what to expect from such a field by looking at the JSON schema for the respective type of failed events, in this case the [tracker protocol violations schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.badrows/tracker_protocol_violations/jsonschema/1-0-0). The mapping between the various failed event tables and the corresponding JSON schemas is [here](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/bigquery).
+
+BigQuery has a variety of JSON functions that allow you to extract data from within complex objects. For instance, if you are interested in Iglu repositories that failed to resolve, you can use something like this:
+
+```sql
+SELECT DISTINCT(JSON_VALUE(message.error.lookupHistory[0].repository))
+FROM ...
+WHERE ...
+AND message.error.lookupHistory IS NOT NULL
+```
+
+It’s also possible, although unwieldy, to reduce all `error`s to a single string:
+
+```sql
+-- Unnest individual messages for each failed event
+WITH unnested_messages AS (
+  SELECT message, CASE
+    -- resolution errors
+    WHEN message.error.lookupHistory IS NOT NULL THEN JSON_QUERY_ARRAY(message.error.lookupHistory[0].errors)
+    -- event validation errors
+    WHEN message.error.dataReports IS NOT NULL THEN JSON_QUERY_ARRAY(message.error.dataReports)
+    -- schema validation errors
+    WHEN message.error.schemaIssues IS NOT NULL THEN JSON_QUERY_ARRAY(message.error.schemaIssues)
+    -- other errors
+    ELSE [TO_JSON(STRUCT(message.error as message))]
+  END AS errors
+FROM bad_rows_prod1.tracker_protocol_violations,
+UNNEST(data.failure.messages) AS message
+WHERE ...)
+
+SELECT JSON_VALUE(error.message) AS error
+FROM unnested_messages,
+UNNEST(errors) AS error
+```
+
+In the future, we plan to simplify the schemas of failed events so that they are more uniform and straightforward to query.
+
+</details>
+
+  </TabItem>
+</Tabs>

@@ -51,6 +51,16 @@ let screen_view_event = ScreenViewEvent::builder()
 let screen_view_event_id = tracker.track(screen_view_event, None)?;
 ```
 
+## Safely closing the emitter
+
+The emitter spawns its own thread to send events using a Tokio runtime. To allow the tracker to drop, the emitter must be closed. This can be done by calling `Tracker.close_emitter()`.
+
+```rust
+let mut tracker = Snowplow::create_tracker("ns", "app_id", "https://...", None);
+// track some events...
+tracker.close_emitter();
+```
+
 Visit documentation about [tracking events](/docs/collecting-data/collecting-from-own-applications/rust-tracker/tracking-events/index.md) to learn about other supported event types. You may also want to read about [adding more data to tracked events](/docs/collecting-data/collecting-from-own-applications/rust-tracker/adding-data/index.md).
 
 ## Logging

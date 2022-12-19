@@ -559,7 +559,7 @@ dbt run --selector snowplow_ecommerce
 
 ##### Configure the conversion_clause macro
 
- The `conversion_macro` specifies how to filter Snowplow events to only conversion events. How this is filtered will depend on your definition of a conversion. The default is filtering to events where `tr_total > 0`, but this could instead filter on `event_name = 'checkout'`, for example. If you are using the e-commerce model, you will still need to set this for the fractribution code to run (even though all events are conversions in the e-commerce model), in this case change it to `transaction_revenue > 0`.
+ The `conversion_clause` specifies how to filter Snowplow events to only conversion events. How this is filtered will depend on your definition of a conversion. The default is filtering to events where `tr_total > 0`, but this could instead filter on `event_name = 'checkout'`, for example. If you are using the e-commerce model, you will still need to set this for the fractribution code to run (even though all events are conversions in the e-commerce model), in this case change it to `transaction_revenue > 0`.
 
  If you wish to change this filter, copy the `conversion_clause.sql` file from the macros folder in the `snowplow_fractribution` package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_clause.sql`) and add it to the macros folder of your own dbt project. Update the filter and save the file.
 

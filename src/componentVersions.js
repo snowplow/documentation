@@ -12,7 +12,7 @@ export const versions = {
   s3Loader22x: '2.2.4',
   postgresLoader: '0.3.3',
   pythonTracker: '0.12.0',
-  rustTracker: '0.1.0',
+  rustTracker: '0.2.0',
   gcsLoader: '0.5.4',
   snowplowMini: '0.15.1',
 }

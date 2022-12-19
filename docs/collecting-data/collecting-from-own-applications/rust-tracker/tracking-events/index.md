@@ -57,7 +57,7 @@ let event_context = Some(vec![SelfDescribingJson::new(
     json!({"keywords": ["tester"]}),
 )]);
 
-let self_desc_event_id = tracker.track(self_describing_event, event_context).await?;
+let self_desc_event_id = tracker.track(self_describing_event, event_context)?;
 ```
 
 ## Track structured events with `StructuredEvent`
@@ -86,7 +86,7 @@ let structured_event = StructuredEvent::builder()
     .value(2.0)
     .build()?;
 
-let struct_event_id = tracker.track(structured_event, None).await?;
+let struct_event_id = tracker.track(structured_event, None)?;
 ```
 
 ## Track screen views with `ScreenViewEvent`
@@ -115,7 +115,7 @@ let screen_view_event = ScreenViewEvent::builder()
     .previous_name("previous name")
     .build()?;
 
-let screen_view_event_id = tracker.track(screen_view_event, None).await?;
+let screen_view_event_id = tracker.track(screen_view_event, None)?;
 ```
 
 ## Track timing events with `TimingEvent`
@@ -139,5 +139,5 @@ let timing_event = TimingEvent::builder()
     .label("Time to fetch map resource")
     .build()?;
 
-let timing_event_id = tracker.track(timing_event, None).await?;
+let timing_event_id = tracker.track(timing_event, None)?;
 ```

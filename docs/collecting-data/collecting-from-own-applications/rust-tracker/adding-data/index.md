@@ -35,7 +35,7 @@ let event_context = Some(vec![SelfDescribingJson::new(
     json!({"keywords": ["tester"]}),
 )]);
 
-let self_desc_event_id = tracker.track(self_describing_event, event_context).await?;
+let self_desc_event_id = tracker.track(self_describing_event, event_context)?;
 ```
 
 ## Adding user and platform data with Subject

@@ -92,18 +92,19 @@ Whilst you can force the buffer size to be greater than 1 for a GET request, it 
 Constructor:
 
 ```php
-public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size = NULL, $debug = false)
+public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size = NULL, $debug = false, $curl_timeout = NULL)
 ```
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$uri` | Collector URI | Yes | Non-empty string |
-| `$protocol` | Collector Protocol (HTTP or HTTPS) | No | String |
-| `$type` | Request Type (POST or GET) | No | String |
-| `$buffer_size` | Amount of events to store before flush | No | Int |
-| `$debug` | Whether or not to log errors | No | Boolean |
+| **Argument**    | **Description**                                         | **Required?** | **Validation**   |
+|-----------------|---------------------------------------------------------|---------------|------------------|
+| `$uri`          | Collector URI                                           | Yes           | Non-empty string |
+| `$protocol`     | Collector Protocol (HTTP or HTTPS)                      | No            | String           |
+| `$type`         | Request Type (POST or GET)                              | No            | String           |
+| `$buffer_size`  | Amount of events to store before flush                  | No            | Int              |
+| `$debug`        | Whether or not to log errors                            | No            | Boolean          |
+| `$curl_timeout` | Maximum time the request is allowed to take, in seconds | No            | Int              |
 
 #### Curl Default Settings
 
@@ -120,9 +121,11 @@ These settings are currently not editable from the constructor; however, the val
 
 ### File
 
-Important
+:::caution
 
 When running under Windows, PHP cannot spawn truly separate processes, and slowly eats more and more resources when more processes are spawned. Thus, Windows might crash under high load when using the File Emitter.
+
+:::
 
 The File Emitter is the only true non-blocking solution. The File Emitter works via spawning workers which grab created files of logged events from a local temporary folder. The workers then load the events using the same asynchronous curl properties from the above emitter.
 

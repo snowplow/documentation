@@ -142,7 +142,7 @@ Data models can be configured via the Snowplow BDP Console:
 
 ![](images/Screenshot-2021-11-15-at-20.15.28.png)
 
-In the first step, you can provide the data model name, a description, and the owner(s) of the data model that will be alerted in case of failure and finally select the engine that should run your datamodel (DBT in this case):
+In the first step, you can provide the data model name, a description, and the owner(s) of the data model that will be alerted in case of failure and finally select the engine and version that should run your datamodel (DBT in this case):
 
 ![](images/data-model-create-step-1.png)
 
@@ -163,7 +163,7 @@ You should write your dbt models in such a way that if they fail part way throug
 
 :::
 
-In the third and last step you can configure the models and variables your `dbt run` call is excecuted with. The `modelArgs` follows a [`--select` flag](https://docs.getdbt.com/reference/node-selection/syntax#shorthand), and `varArgs` follow the [`--vars` flag](https://docs.getdbt.com/docs/build/project-variables#defining-variables-on-the-command-line) in the call:
+In the third and last step you can configure the arguments and variables your `dbt run` call is excecuted with. The arguments (`--selector` or `--select` / `--exclude`) follow the syntax described on [dbt docs](https://docs.getdbt.com/reference/node-selection/syntax), and so do variables ([`--vars` flag](https://docs.getdbt.com/docs/build/project-variables#defining-variables-on-the-command-line)):
 
 ![](images/data-model-create-step-3.png)
 

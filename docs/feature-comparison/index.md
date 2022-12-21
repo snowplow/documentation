@@ -59,8 +59,8 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | 24/7/365 Support through email / Help Centre | ❌ | ✅ | ✅ |
 | Support SLAs (first response time) [*](https://snowplow.io/snowplow-bdp-product-description/#slas) | ❌ | ❌ | ✅ |
 | Infrastructure management | ❌ | ✅ | ✅ |
-| Regular infrastructure reviews | ❌ | ❌ | ✅<br/>_(certain tiers only)_ |
-| Deferred upgrades | ❌ | ❌ | ✅<br/>_(certain tiers only)_ |
+| Regular infrastructure reviews | ❌ | ❌ | ✅<br/>_(select tiers)_ |
+| Deferred upgrades | ❌ | ❌ | ✅<br/>_(select tiers)_ |
 | Provision of news / updates / ideas / customer stories | ✅ | ✅ | ✅ |
-| Success management | ❌ | ❌ | ✅<br/>_(certain tiers only)_ |
-| Data strategy and consultation sessions | ❌ | ❌ | ✅<br/>_(certain tiers only)_ |
+| Success management | ❌ | ❌ | ✅<br/>_(select tiers)_ |
+| Data strategy and consultation sessions | ❌ | ❌ | ✅<br/>_(select tiers)_ |

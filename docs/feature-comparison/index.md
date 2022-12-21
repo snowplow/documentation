@@ -53,13 +53,14 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | Fine grained user permissions (ACLs) | ❌ | ❌ | ✅<br/>_(top tier only)_ |
 | Custom VPC integration | ❌ | ❌ | bolt-on |
 | AWS Infra security bundle | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| <h3>Support</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
+| <h3>Services</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
+| Self-help support website, FAQs and educational materials | ✅ | ✅ | ✅ |
 | Community support via Discourse | ✅ | ✅ | ✅ |
-| Snowplow support via Zendesk | ❌ | ✅ | ✅ |
-| First response time SLAs | ❌ | ❌ | ✅ |
-| Dedicated customer success team | ❌ | ❌ | ✅ |
-| Kickstarter (implementation) | ❌ | ❌ | ✅ |
-| Strategic Success Manager | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| Managed upgrades | ❌ | ✅ | ✅ |
-| Elective upgrades | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| Quarterly infrastructure reviews | ❌ | ❌ | ✅<br/>_(top tier only)_ |
+| 24/7/365 Support through email / Help Centre | ❌ | ✅ | ✅ |
+| Support SLAs (first response time) [*](https://snowplow.io/snowplow-bdp-product-description/#slas) | ❌ | ❌ | ✅ |
+| Infrastructure management | ❌ | ✅ | ✅ |
+| Regular infrastructure reviews | ❌ | ❌ | ✅<br/>_(select tiers)_ |
+| Deferred upgrades | ❌ | ❌ | ✅<br/>_(select tiers)_ |
+| Provision of news / updates / ideas / customer stories | ✅ | ✅ | ✅ |
+| Success management | ❌ | ❌ | ✅<br/>_(select tiers)_ |
+| Data strategy and consultation sessions | ❌ | ❌ | ✅<br/>_(select tiers)_ |

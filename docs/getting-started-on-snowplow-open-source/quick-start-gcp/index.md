@@ -141,6 +141,6 @@ terraform plan -var-file=postgres.terraform.tfvars -var-file=bigquery.terraform.
 terraform apply -var-file=postgres.terraform.tfvars -var-file=bigquery.terraform.tfvars
 ```
 
-This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.
+This will output your `collector_ip_address`, `bigquery_db_dataset_id`, `bq_loader_bad_rows_topic_name`, `bq_loader_dead_letter_bucket_name`, `postgres_db_ip_address`, and `postgres_db_port`. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_ip_address` as you will use your own DNS record to send events from the Snowplow trackers.
 
 Now let's [send some events](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/sending-test-events/index.md) to your pipeline!

@@ -4,7 +4,7 @@ sidebar_position: -0.5
 hide_table_of_contents: true
 ---
 
-Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-source/index.md), [Snowplow BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md) or [Snowplow BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md)?
+Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-source/index.md), [Snowplow BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md) or [Snowplow BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md)? Below you can find a detailed feature comparison. Still not sure? Check out [our guide](https://snowplow.io/os-or-bdp/).
 
 | <h3>Create & consume behavioral data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
 |:--|:-:|:-:|:-:|

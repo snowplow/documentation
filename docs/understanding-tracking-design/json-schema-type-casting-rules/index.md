@@ -1,5 +1,5 @@
 ---
-title: "Type casting rules for json schemas"
+title: "How schemas translate to database types"
 date: "2021-12-30"
 sidebar_position: 100
 hide_table_of_contents: true
@@ -23,13 +23,21 @@ _The row order in this table is important.  Type lookup stops after first match 
 <tbody>
 <tr>
 <td >
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": ["null", T1, ...]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": ["null", T1, ...]
+}
+```
+
 OR
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"enum": ["null", E1, ...]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "enum": ["null", E1, ...]
+}
+```
+
 </td>
 <td >
 <code>NULLABLE</code>
@@ -39,24 +47,32 @@ OR
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"enum": [E1, E2, ...]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "enum": [E1, E2, ...]
+}
+```
+
 </td>
 <td><code>VARCHAR(M)</code></td>
 <td> Where <code>M</code> is maximum size of <code>json.stringify(E*)</code><br/><br/>
 The <code>enum</code> can contain more than <b>one</b> JavaScript type: <code>string</code>, <code>number|integer</code>, <code>boolean</code>.<br/>
 For the purposes of this  <code>number</code> and <code>integer</code> are the same.<br/>
 <br/>
-<code>array</code>, <code>object</code>, <code>NaN</code> and other types in enum will error.   
+<code>array</code>, <code>object</code>, <code>NaN</code> and other types in enum will be cast as fallback <code>VARCHAR(65535)</code>.   
 
 </td>
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": [T1, T2, ...]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": [T1, T2, ...]
+}
+```
+
 </td>
 <td>
 <code>VARCHAR(10)</code>
@@ -67,9 +83,13 @@ Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": [T1, T2, ...]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": [T1, T2, ...]
+}
+```
+
 </td>
 <td>
 <code>VARCHAR(4096)</code>
@@ -78,10 +98,14 @@ Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "string",<br/>
-    &nbsp;&nbsp;"format": "date-time"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "string",
+    "format": "date-time"
+}
+```
+
 </td>
 <td>
 <code>TIMESTAMP</code>
@@ -90,10 +114,14 @@ Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "string",<br/>
-    &nbsp;&nbsp;"format": "date"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "string",
+    "format": "date"
+}
+```
+
 </td>
 <td>
 <code>DATE</code>
@@ -101,9 +129,13 @@ Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "array"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "array"
+}
+```
+
 </td>
 <td>
 <code>VARCHAR(65535)</code>
@@ -111,10 +143,14 @@ Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "integer",<br/>
-    &nbsp;&nbsp;"maximum": M<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "integer",
+    "maximum": M
+}
+```
+
 </td>
 <td>
 <code>SMALLINT</code>
@@ -125,10 +161,14 @@ Where <code>M</code> &le; 32767
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "integer",<br/>
-    &nbsp;&nbsp;"maximum": M<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "integer",
+    "maximum": M
+}
+```
+
 </td>
 <td>
 <code>INT</code>
@@ -139,10 +179,14 @@ Where 32767 &lt; <code>M</code> &le; 2147483647
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "integer",<br/>
-    &nbsp;&nbsp;"maximum": M<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "integer",
+    "maximum": M
+}
+```
+
 </td>
 <td>
 <code>BIGINT</code>
@@ -153,10 +197,14 @@ Where <code>M</code> > 2147483647
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "integer",<br/>
-    &nbsp;&nbsp;"enum": [E1, E2, ...]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "integer",
+    "enum": [E1, E2, ...]
+}
+```
+
 </td>
 <td>
 <code>SMALLINT</code>
@@ -167,10 +215,14 @@ Where maximum <code>E*</code> &le; 32767
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "integer",<br/>
-    &nbsp;&nbsp;"enum": [E1, E2, ...]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "integer",
+    "enum": [E1, E2, ...]
+}
+```
+
 </td>
 <td>
 <code>INT</code>
@@ -181,10 +233,14 @@ Where maximum <code>E*</code> &le; 32767
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "integer",<br/>
-    &nbsp;&nbsp;"enum": [E1, E2, ...]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "integer",
+    "enum": [E1, E2, ...]
+}
+```
+
 </td>
 <td>
 <code>BIGINT</code>
@@ -195,9 +251,13 @@ maximum <code>E*</code> &gt; 2147483647
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "integer"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "integer"
+}
+```
+
 </td>
 <td>
 <code>BIGINT</code>
@@ -205,9 +265,13 @@ maximum <code>E*</code> &gt; 2147483647
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"multipleOf": B<br/>
-&#125;</pre>
+
+  ```json
+{
+    "multipleOf": B
+}
+```
+
 </td>
 <td>
 <code>INT</code>
@@ -215,10 +279,14 @@ maximum <code>E*</code> &gt; 2147483647
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "number",<br/>
-    &nbsp;&nbsp;"multipleOf": B<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "number",
+    "multipleOf": B
+}
+```
+
 </td>
 <td>
 <code>DECIMAL(36,2)</code>
@@ -229,9 +297,13 @@ Only works for <code>B</code>=2
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": ["number", "integer"]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": ["number", "integer"]
+}
+```
+
 </td>
 <td>
 <code>DOUBLE</code>
@@ -239,9 +311,13 @@ Only works for <code>B</code>=2
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "number"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "number"
+}
+```
+
 </td>
 <td>
 <code>DOUBLE</code>
@@ -249,19 +325,27 @@ Only works for <code>B</code>=2
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "boolean"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "boolean"
+}
+```
+
 </td>
 <td><code>BOOLEAN</code></td><td></td>
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "string",<br/>
-    &nbsp;&nbsp;"minimum": M,<br/>
-    &nbsp;&nbsp;"maximum": M<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "string",
+    "minimum": M,
+    "maximum": M
+}
+```
+
 </td>
 <td>
 <code>CHAR(M)</code>
@@ -272,10 +356,14 @@ Where <code>M</code> is the same in maximum and maximum
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "string",<br/>
-    &nbsp;&nbsp;"format": "uuid"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "string",
+    "format": "uuid"
+}
+```
+
 </td>
 <td>
 <code>CHAR(36)</code>
@@ -283,10 +371,14 @@ Where <code>M</code> is the same in maximum and maximum
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "string",<br/>
-    &nbsp;&nbsp;"format": "ipv6"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "string",
+    "format": "ipv6"
+}
+```
+
 </td>
 <td>
 <code>VARCHAR(39)</code>
@@ -294,10 +386,14 @@ Where <code>M</code> is the same in maximum and maximum
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "string",<br/>
-    &nbsp;&nbsp;"format": "ipv4"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "string",
+    "format": "ipv4"
+}
+```
+
 </td>
 <td>
 <code>VARCHAR(15)</code>
@@ -305,10 +401,14 @@ Where <code>M</code> is the same in maximum and maximum
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "string",<br/>
-    &nbsp;&nbsp;"format": "email"<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "string",
+    "format": "email"
+}
+```
+
 </td>
 <td>
 <code>VARCHAR(255)</code>
@@ -316,10 +416,14 @@ Where <code>M</code> is the same in maximum and maximum
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"type": "string",<br/>
-    &nbsp;&nbsp;"maxLength": M<br/>
-&#125;</pre>
+
+  ```json
+{
+    "type": "string",
+    "maxLength": M
+}
+```
+
 </td>
 <td>
 <code>VARCHAR(M)</code>
@@ -330,12 +434,16 @@ Where <code>M</code> is the same in maximum and maximum
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"enum": ["E1"]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "enum": ["E1"]
+}
+```
+
 </td>
 <td>
-<code>CHAR(M))</code>
+<code>CHAR(M)</code>
 </td>
 <td>
 Where <code>M</code> is the size of json.stringify("E1"). <br/>
@@ -344,9 +452,13 @@ Where <code>M</code> is the size of json.stringify("E1"). <br/>
 </tr>
 <tr>
 <td>
-<pre lang="json">&#123;<br/>
-    &nbsp;&nbsp;"enum": ["E1", "E2"]<br/>
-&#125;</pre>
+
+  ```json
+{
+    "enum": ["E1", "E2"]
+}
+```
+
 </td>
 <td>
 <code>VARCHAR(M)</code>

@@ -11,18 +11,11 @@ sidebar_position: 200
 Snowbridge is available on docker:
 
 ```bash
-docker pull snowplow/stream-replicator-aws:{version}
-docker run snowplow/stream-replicator-aws:{version}
+docker pull snowplow/snowbridge:{version}
+docker run snowplow/snowbridge:{version}
 ```
 
-```bash
-docker pull snowplow/stream-replicator-gcp:{version}
-docker run snowplow/stream-replicator-gcp:{version}
-```
-
-Note that there are two versions of the build - `aws` may only be deployed to AWS services, due to the restrictive licence of the [kinsumer](https://github.com/twitchscience/kinsumer) package, which we use to consume from Kinesis.
-
-The `gcp` build strips that source out, and so can be run on any platform.
+Note that due to the restrictive licenc of [a dependency](https://github.com/twitchscience/kinsumer/blob/master/LICENSE), the kinesis source may only be used on AWS infrastructure. For the version which includes this dependency, append `-aws-only` to the version. For example, the `2.0.1` version may be used with kinesis source via the `2.0.1-aws-only` asset. The `2.0.1` asset excludes kinesis source, and may be run on any platform.
 
 ## Deployment
 

@@ -45,7 +45,7 @@ OR
 </td>
 <td><code>VARCHAR(M)</code></td>
 <td> Where <code>M</code> is maximum size of <code>json.stringify(E*)</code><br/><br/>
-<code>enum</code> contains more than <b>one</b> JavaScript type - <code>string</code>, <code>number|integer</code>, <code>boolean</code>.<br/>
+The <code>enum</code> can contain more than <b>one</b> JavaScript type: <code>string</code>, <code>number|integer</code>, <code>boolean</code>.<br/>
 For the purposes of this  <code>number</code> and <code>integer</code> are the same.<br/>
 <br/>
 <code>array</code>, <code>object</code>, <code>NaN</code> and other types in enum will error.   

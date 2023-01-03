@@ -355,7 +355,7 @@ Where <code>M</code> is the size of json.stringify("E1"). <br/>
 </tr>
 <tr>
 <td>
-fallback
+Anything else
 </td>
 <td>
 <code>VARCHAR(65535)</code>

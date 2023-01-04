@@ -341,8 +341,8 @@ Only works for <code>B</code>=2
   ```json
 {
     "type": "string",
-    "minimum": M,
-    "maximum": M
+    "minLength": M,
+    "maxLength": M
 }
 ```
 
@@ -351,7 +351,7 @@ Only works for <code>B</code>=2
 <code>CHAR(M)</code>
 </td>
 <td>
-Where <code>M</code> is the same in maximum and maximum
+Where <code>M</code> is the same in minLength and maxLength
 </td>
 </tr>
 <tr>
@@ -467,13 +467,586 @@ Where <code>M</code> is the size of json.stringify("E1"). <br/>
 </tr>
 <tr>
 <td>
-Anything else
+fallback
 </td>
 <td>
 <code>VARCHAR(65535)</code>
 </td>
 <td>
+Values will be quoted.
 Used when none of the rules above match.
+</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+
+ <TabItem value="databricks" label="Databricks" default>
+
+All fields in databricks are `nullable`. Having `"null"` in the `"type"` or `"enum"` does not affect the warehouse type,
+and ignored for the purposes of type casting as per the table below.
+
+<table>
+<thead>
+<td>Json Schema</td>
+<td>Databricks Type</td>
+<td>Notes</td>
+</thead>
+<tbody>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "string",
+    "format": "date-time"
+}
+```
+
+</td>
+<td>
+<code>TIMESTAMP</code>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "string",
+    "format": "date"
+}
+```
+
+</td>
+<td>
+<code>DATE</code>
+</td><td></td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "boolean"
+}
+```
+
+</td>
+<td><code>BOOLEAN</code></td><td></td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "string"
+}
+```
+
+</td>
+<td><code>STRING</code></td><td></td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "integer",
+    "minimum": N,
+    "maximum": M
+}
+```
+
+</td>
+<td>
+
+`INT`
+
+</td>
+<td>
+
+- `M` <= 2147483647
+- `N` >= -2147483648
+
+</td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "integer",
+    "minimum": N,
+    "maximum": M
+}
+```
+
+</td>
+<td>
+
+`BIGINT`
+
+</td>
+<td>
+
+- `M` <= 9223372036854775807
+- `N` >= -9223372036854775808
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "integer",
+    "minimum": N,
+    "maximum": M
+}
+```
+
+</td>
+<td>
+
+`DECIMAL(38,0)`
+
+</td>
+<td>
+
+- `M` > 1e38-1
+- `N` < -1e38
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "integer",
+    "minimum": N,
+    "maximum": M
+}
+```
+
+</td>
+<td>
+
+`DOUBLE`
+
+</td>
+<td>
+
+- `M` < 1e38-1
+- `N` > -1e38
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "integer"
+}
+```
+
+</td>
+<td>
+
+`BIGINT`
+
+</td>
+<td></td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number", // OR ["number", "integer"]
+    "minimum": N,
+    "maximum": M,
+    "multipleOf": F
+}
+```
+
+</td>
+<td>
+
+`INT`
+
+</td>
+<td>
+
+- `M` <= 2147483647
+- `N` >= -2147483648
+- `F` is integer
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number", // OR ["number", "integer"]
+    "minimum": N,
+    "maximum": M,
+    "multipleOf": F
+}
+```
+
+</td>
+<td>
+
+`BIGINT`
+
+</td>
+<td>
+
+- `M` <= 9223372036854775807
+- `N` >= -9223372036854775808
+- `F` is integer
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number", // OR ["number", "integer"]
+    "minimum": N,
+    "maximum": M,
+    "multipleOf": F
+}
+```
+
+</td>
+<td>
+
+`DECIMAL(38,0)`
+
+</td>
+<td>
+
+- `M` > 1e38-1
+- `N` < -1e38
+- `F` is integer
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number", // OR ["number", "integer"]
+    "minimum": N,
+    "maximum": M,
+    "multipleOf": F
+}
+```
+
+</td>
+<td>
+
+`DOUBLE`
+
+</td>
+<td>
+
+- `M` < 1e38-1
+- `N` > -1e38
+- `F` is integer
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number", // OR ["number", "integer"]
+    "multipleOf": F
+}
+```
+
+</td>
+<td>
+
+`BIGINT`
+
+</td>
+<td>
+
+`F` is integer
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number", // OR ["number", "integer"]
+    "minimum": N,
+    "maximum": M,
+    "multipleOf": F
+}
+```
+
+</td>
+<td>
+
+`DECIMAL(P,S)`
+
+</td>
+<td>
+
+- `P` <= 38
+
+Where `P` is maximum precision of `M` and `N`, adjusted for scale of `F`.
+
+`P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
+
+`S` = `F.scale`
+
+For example, `M=10.9999, N=-10, F=0.1` will be `DECIMAL(3,1)`. Calculation as follows:
+
+`M` is `DECIMAL(6,4)`, `N` is `DECIMAL(2,0)`, `F` is `DECIMAL(2,1)`
+
+`P` = `MAX`(6 - 4 + 1, 2 + 1) = 3
+
+`S` = 1
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number", // OR ["number", "integer"]
+    "minimum": N,
+    "maximum": M,
+    "multipleOf": F
+}
+```
+
+</td>
+<td>
+
+`DOUBLE`
+
+</td>
+<td>
+
+-`P` > 38
+
+Where `P` is maximum precision of `M` and `N`, adjusted for scale of `F`.
+
+`P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
+
+For example, `M=10.9999, N=-1e50, F=0.1` will be `DECIMAL(3,1)`. Calculation as follows:
+
+`M` is `DECIMAL(6,4)`, `N` is `DECIMAL(2,0)`, `F` is `DECIMAL(2,1)`
+
+`P` = `MAX`(6 - 4 + 1, 50 + 1) = 51
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number", // OR ["number", "integer"]
+    "minimum": N,
+    "maximum": M,
+    "multipleOf": F
+}
+```
+
+</td>
+<td>
+
+`DOUBLE`
+
+</td>
+<td>
+
+- `M` < 1e38-1
+- `N` > -1e38
+- `F` is integer
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number" // OR ["number", "integer"]
+}
+```
+
+</td>
+<td>
+
+`DOUBLE`
+
+</td>
+<td></td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [N1, I1, ...]
+}
+```
+</td>
+<td>
+
+`INT`
+
+</td>
+<td>
+
+- **`S` = 0**
+- **All** `Nx` and `Ix` are of types number or integer.
+- `M` < 2147483647
+
+Where:
+- `S` is maximum scale (number of digits after the `.`) in the enum list.
+- `M` is maximum absolute value of the enum list.
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [N1, I1, ...]
+}
+```
+</td>
+<td>
+
+`BIGINT`
+
+</td>
+<td>
+
+- **`S` = 0**
+- **All** `Nx` and `Ix` are of types number or integer.
+- `M` <= 9223372036854775807
+
+Where:
+- `S` is maximum scale (number of digits after the `.`) in the enum list.
+- `M` is maximum absolute value of the enum list.
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [N1, I1, ...]
+}
+```
+</td>
+<td>
+
+`BIGINT`
+
+</td>
+<td>
+
+- **`S` = 0**
+- **All** `Nx` and `Ix` are of types number or integer.
+- `M` <= 9223372036854775807
+
+Where:
+- `S` is maximum scale (number of digits after the `.`) in the enum list.
+- `M` is maximum absolute value of the enum list.
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [N1, I1, ...]
+}
+```
+</td>
+<td>
+
+`DECIMAL(P,S)`
+
+</td>
+<td>
+
+- `S` > 0
+- **All** `Nx` and `Ix` are of types number or integer.
+- `M` < 1e38
+
+Where:
+- `S` is maximum scale (number of digits after the `.`) in the enum list.
+- `M` is maximum absolute value of the enum list.
+- `P` is precision (total number of digits in `M`).
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [S1, S2, ...]
+}
+```
+</td>
+<td>
+
+`STRING`
+
+</td>
+<td>
+
+**All** `Sx` are string
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [A1, A2, ...]
+}
+```
+</td>
+<td>
+
+`STRING`
+
+</td>
+<td>
+
+- `Ax` are mix of different types.
+
+*Values will be quoted.*
+
+
+
 </td>
 </tr>
 </tbody>

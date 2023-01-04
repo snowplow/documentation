@@ -23,7 +23,7 @@ We have two different CLAs, depending on whether you are contributing to Snowplo
 
 Our individual and corporate CLAs are based on the Contributor License Agreements published by the [Apache Software Foundation](http://www.apache.org/), with modifications:
 
-1. [Individual Contributor License Agreement ("Agreement") V2.0](http://www.apache.org/licenses/icla.txt)
+1. Individual Contributor License Agreement ("Agreement") V2.0 ([cached here](pathname:///assets/apache-cla-2.0.pdf), or see the [newer V2.2 here](https://apache.org/licenses/icla.pdf))
 2. [Software Grant and Corporate Contributor License Agreement ("Agreement") v r190612](http://www.apache.org/licenses/cla-corporate.txt)
 
 If you have questions about Snowplow's own CLAs, please contact us at [legal@snowplowanalytics.com](mailto:legal@snowplowanalytics.com).

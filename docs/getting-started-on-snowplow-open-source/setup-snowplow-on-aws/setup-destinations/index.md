@@ -14,5 +14,4 @@ Snowplow supports loading data into a number of different destinations:
 | [Redshift](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/index.md) | A columnar database offered by AWS | Production-ready |
 | [SnowflakeDB](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/snowflakedb/index.md) | A columnar database available on AWS (but also GCP and Azure) | Production-ready |
 | [Elasticsearch](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/elastic/index.md) | A search server for JSON documents | Production-ready |
-| [Indicative](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/indicative/index.md) | A product / customer analytics tool | Production-ready |
 | [Postgres](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/postgres/index.md) | An open source relational database that can be deployed via Amazon RDS | Early release |

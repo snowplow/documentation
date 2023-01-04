@@ -149,7 +149,7 @@ Loader runtime error schema can be found [here](https://github.com/snowplow/iglu
 
 ### Relay Failure
 
-This failure type is only produced by relay jobs (e.g. the [Indicative relay](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/indicative/index.md)), which transfer Snowplow data into a 3rd party platform. This error type is uncommon and unexpected, and it probably indicates a mistake in the configuration or a bug in the software. This failure type cannot be [recovered](/docs/managing-data-quality/snowplow-event-recovery/index.md).
+This failure type is only produced by relay jobs, which transfer Snowplow data into a 3rd party platform. This error type is uncommon and unexpected, and it probably indicates a mistake in the configuration or a bug in the software. This failure type cannot be [recovered](/docs/managing-data-quality/snowplow-event-recovery/index.md).
 
 Relay failure schema can be found [here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.badrows/relay_failure/jsonschema/1-0-0).
 

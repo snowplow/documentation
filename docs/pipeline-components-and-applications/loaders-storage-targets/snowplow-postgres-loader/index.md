@@ -82,3 +82,5 @@ See [the configuration reference](/docs/pipeline-components-and-applications/loa
 ## Other
 
 Loader creates `events` table on the start and every other table when it first encounters its corresponding schema.
+
+You should ensure that the database and schema specified in the configuration exist before starting the loader.

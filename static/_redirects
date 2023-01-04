@@ -63,3 +63,5 @@
 
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/downloading-google-cloud-storage-loader/ /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/configuration-options/ /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-destinations/google-cloud-storage/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-bigquery-destination/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-destinations/bigquery/ 301

@@ -1,7 +1,7 @@
 ---
-title: "Setup Google Cloud Storage (GCS) Destination"
+title: "Google Cloud Storage"
 date: "2020-03-02"
-sidebar_position: 60
+sidebar_position: 10
 ---
 
 Snowplow supports streaming data (either raw or enriched data) from [Pub/Sub](https://cloud.google.com/pubsub/) into [Google Cloud Storage (GCS)](https://cloud.google.com/storage/) with the [Google Cloud Storage Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md). 

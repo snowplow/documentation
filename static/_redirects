@@ -6,7 +6,7 @@
 /accelerators/template/* https://snowplow-axl-template.netlify.app/accelerators/template/:splat 200
 /accelerators/composable-cdp-with-predictive-ml-modeling/* https://snowplow-axl-cdp-ml-modeling.netlify.app/accelerators/composable-cdp-with-predictive-ml-modeling/:splat 200
 /accelerators/ecommerce/* https://snowplow-axl-ecom.netlify.app/accelerators/ecommerce/:splat 200
-/accelerators/snowplow_fractribution/* https://main--snowplow-axl-mkt-attribution.netlify.app/accelerators/snowplow_fractribution/:splat 200
+/accelerators/snowplow-fractribution/* https://main--snowplow-axl-mkt-attribution.netlify.app/accelerators/snowplow-fractribution/:splat 200
 /accelerators/consent/* https://snowplow-axl-consent.netlify.app/accelerators/consent/:splat 200
 /snowplow-android-tracker/* https://snowplow.github.io/snowplow-android-tracker/:splat 302
 /snowplow-cpp-tracker/* https://snowplow.github.io/snowplow-cpp-tracker/:splat 302
@@ -16,6 +16,8 @@
 
 # Page renaming
 /advanced-analytics-web-accelerator/* /accelerators/web/:splat 301
+/accelerators/snowplow_fractribution/* /accelerators/snowplow-fractribution/:splat 301
+
 
 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
 /docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301

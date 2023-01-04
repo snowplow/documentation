@@ -17,15 +17,6 @@ The Elasticsearch loader reads enriched data from the enriched Kinesis stream an
 | ✔️ | ✔️ |
 | [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/elastic/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
-## Indicative (AWS only)
-
-The Indicative relay reads Snowplow enriched events from a Kinesis Stream and transfers them to Indicative.
-
-| Open Source | Snowplow BDP |
-| --- | --- |
-| ✔️ | ✔️ |
-| [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/indicative/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
-
 ## Azure Event Hubs
 
 Event Hubs is a fully managed, real-time data ingestion service that’s simple, trusted and scalable. Snowplow BDP can relay transformed and enriched JSON into Event Hubs.

@@ -45,12 +45,10 @@ In particular cases it can be useful to have a full control of the component in 
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let network = DefaultNetworkConnection.build { (builder) in
-      builder.setUrlEndpoint(url)
-      builder.setHttpMethod(method)
-      builder.setEmitThreadPoolSize(20)
-      builder.setByteLimitPost(52000)
-}
+let network = DefaultNetworkConnection(urlString: url, httpMethod: method)
+network.emitThreadPoolSize = 20
+network.byteLimitPost = 52000
+
 let networkConfig = NetworkConfiguration(networkConnection: network)
 ```
 
@@ -82,7 +80,7 @@ The tracker sends events asynchrounously in batches using POST requests. In case
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let eventStore = SQLiteEventStore(namespace: kNamespace);
+let eventStore = CustomEventStore(namespace: kNamespace);
 let emitterConfig = EmitterConfiguration()
       .eventStore(eventStore)
 ```
@@ -91,7 +89,7 @@ let emitterConfig = EmitterConfiguration()
   <TabItem value="android" label="Android">
 
 ```java
-EventStore eventStore = new SQLiteEventStore(getApplicationContext(), kNamespace);
+EventStore eventStore = new CustomEventStore(getApplicationContext(), kNamespace);
 
 EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
       .eventStore(eventStore);
@@ -100,7 +98,7 @@ EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
   </TabItem>
 </Tabs>
 
-In the example above we used the `SQLiteEventStore` but it can be used any custom component that implements the `EventStore` interface.
+In the example above the `CustomEventStore` is your implementation of the `EventStore` interface.
 
 ## What happens if an event fails to send?
 

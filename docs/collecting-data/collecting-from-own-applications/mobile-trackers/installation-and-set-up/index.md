@@ -12,7 +12,8 @@ import TabItem from '@theme/TabItem';
 <Tabs>
   <TabItem value="ios" label="iOS" default>
 
-The Snowplow iOS Tracker SDK supports iOS 9.0+, macOS 10.9+, tvOS 9.0+ and watchOS 2.0+
+The Snowplow iOS Tracker SDK supports iOS 11.0+, macOS 10.13+, tvOS 12.0+ and watchOS 6.0+
+It can be used both in Swift as well as in Objective-C code.
 
 ## Installing
 
@@ -34,25 +35,14 @@ To install Snowplow Tracker with Cocoapods:
 2. Add the iOS Tracker SDK among the dependencies of your `Podfile`:
    
    ```ruby
-   pod 'SnowplowTracker', '~> 4.0'
+   pod 'SnowplowTracker', '~> 5.0'
    ```
 
 3. Run the command `pod install` to add the tracker to your app project.
 
-**Carthage**
-
-To install Snowplow Tracker with Carthage:
-
-1. Make sure that Carthage is installed on your system and correctly configured for your app.
-
-2. Add the iOS Tracker SDK among the dependencies of your `Cartfile`:
-   
-   ```ruby
-   github "snowplow/snowplow-objc-tracker" ~> 4.0
-   ```
-
-3. Run the command `carthage update` and drag the appropriate frameworks from the `Carthage/build` folder to your app project.
-
+:::note
+Support for installing the tracker using Carthage has been dropped in version 5 of the tracker.
+:::
 
 ## Setting up
 
@@ -63,20 +53,20 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
    
    ```swift
-   let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: COLLECTOR_URL, method: .post)
+   let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: COLLECTOR_URL)
    ```
 
 3. It creates a tracker instance which can be used to track events like this:
    
    ```swift
    let event = Structured(category: "Category_example", action: "Action_example")
-   tracker.track(event)
+   tracker?.track(event)
    ```
    
    If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
    
    ```swift
-   Snowplow.defaultTracker().track(event)
+   Snowplow.defaultTracker()?.track(event)
    ```
 
 The tracker has a default configuration where some settings are enabled by default:
@@ -88,27 +78,23 @@ The tracker has a default configuration where some settings are enabled by defau
 You can override the default configuration with a fine grained configuration when you create the tracker:
 
 ```swift
-let networkConfig = NetworkConfiguration(endpoint: COLLECTOR_URL, method: .post)
-let trackerConfig = TrackerConfiguration()
-    .base64Encoding(false)
-    .sessionContext(true)
-    .platformContext(true)
-    .lifecycleAutotracking(true)
-    .screenViewAutotracking(true)
-    .screenContext(true)
-    .applicationContext(true)
-    .exceptionAutotracking(true)
-    .installAutotracking(true)
-    .userAnonymisation(false)
-let sessionConfig = SessionConfiguration(
-    foregroundTimeout: Measurement(value: 30, unit: .minutes),
-    backgroundTimeout: Measurement(value: 30, unit: .minutes)
-)       
-Snowplow.createTracker(
-    namespace: "appTracker",
-    network: networkConfig,
-    configurations: [trackerConfig, sessionConfig]
-)
+Snowplow.createTracker(namespace: "appTracker", endpoint: COLLECTOR_URL) {
+  TrackerConfiguration()
+      .base64Encoding(false)
+      .sessionContext(true)
+      .platformContext(true)
+      .lifecycleAutotracking(true)
+      .screenViewAutotracking(true)
+      .screenContext(true)
+      .applicationContext(true)
+      .exceptionAutotracking(true)
+      .installAutotracking(true)
+      .userAnonymisation(false)
+  SessionConfiguration(
+      foregroundTimeout: Measurement(value: 30, unit: .minutes),
+      backgroundTimeout: Measurement(value: 30, unit: .minutes)
+  )
+}
 ```
 
 The `createTracker` method allows the creation of multiple trackers in the same app. The `namespace` field lets you distinguish events sent by a specific tracker instance. It is mandatory even in case the app uses just a single tracker instance like in the example above.

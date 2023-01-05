@@ -84,8 +84,11 @@
 /docs/forwarding-events-to-destinations/ /docs/destinations/ 301
 
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-snowflake-destination/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-destinations/snowflake/ 301
+
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/rdb-loader-1-1-0/ /docs/destinations/warehouses-and-lakes/rdb/previous-versions/rdb-loader-1-1-0/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/setup-rdb-loader-post-r35/ /docs/destinations/warehouses-and-lakes/rdb/previous-versions/rdb-loader-1-0-0/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/setup-emretlrunner/* /docs/pipeline-components-and-applications/legacy/emr-etl-runner/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/load-event-and-entity-types-that-you-have-defined/ /docs/destinations/warehouses-and-lakes/rdb/previous-versions/rdb-loader-r35-earlier/load-event-and-entity-types-that-you-have-defined/ 301
 /docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/upgrade-guides/* /docs/destinations/warehouses-and-lakes/rdb/upgrade-guides/:splat 301
+
+/docs/destinations/forwarding-events/google-tag-manager-server-side/building-an-enriched-event-relay-for-gtm-ss/ /docs/pipeline-components-and-applications/snowbridge/ 301

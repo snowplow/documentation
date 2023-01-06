@@ -539,7 +539,7 @@ _Values will be quoted as in JSON._
 <TabItem value="databricks" label="Databricks" default>
 
 All fields in databricks are `nullable`. Having `"null"` in the `"type"` or `"enum"` does not affect the warehouse type,
-and ignored for the purposes of type casting as per the table below.
+and is ignored for the purposes of type casting as per the table below.
 
 <table>
 <thead>

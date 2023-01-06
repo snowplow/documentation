@@ -1058,7 +1058,7 @@ Where:
 }
 ```
 
-- `Ax` are mix of different types.
+- `Ax` are a mix of different types
 
 
 </td>

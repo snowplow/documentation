@@ -528,7 +528,7 @@ If nothing matches above, this is a catch-all.
 `VARCHAR(65535)`
 
 
-_Values will be quoted as in json._
+_Values will be quoted as in JSON._
 
 </td>
 </tr>

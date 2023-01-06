@@ -836,7 +836,7 @@ and ignored for the purposes of type casting as per the table below.
 
 
 - `P` &le; 38, where `P` is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
-- `P` Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
+- `P` is rounded up to `9`, `18` or `38`, i.e. it can only take one of those 3 values.
 
 <details>
 

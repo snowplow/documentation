@@ -148,12 +148,12 @@ For the purposes of this  `number` and `integer` are the same.
 }
 ```
 
-_Content is strigified and quoted._
-
 </td>
 <td>
 
 `VARCHAR(65535)`
+
+_Content is strigified and quoted._
 
 </td>
 </tr>
@@ -516,12 +516,15 @@ _Content is strigified and quoted._
 <tr>
 <td>
 
-If nothing matches above, this is a catch all. Values will be quoted.`
+If nothing matches above, this is a catch all.`
 
 </td>
 <td>
 
 `VARCHAR(65535)`
+
+
+_Values will be quoted as in json._
 
 </td>
 </tr>
@@ -585,6 +588,7 @@ and ignored for the purposes of type casting as per the table below.
 <td>
 
 `BOOLEAN`
+
 </td>
 </tr>
 <tr>
@@ -830,17 +834,23 @@ and ignored for the purposes of type casting as per the table below.
 - `P` &le; 38, where `P` is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 - `P` Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
 
+<details>
+
 `P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
 
 `S` = `F.scale`
+
+</details>
 
 For example, `M=10.9999, N=-10, F=0.1` will be `DECIMAL(3,1)`. Calculation as follows:
 
 `M` is `DECIMAL(6,4)`, `N` is `DECIMAL(2,0)`, `F` is `DECIMAL(2,1)`
 
-`P` = `MAX`(6 - 4 + 1, 2 + 1) = 3
+`P` = `MAX`(6 - 4 + 1, 2 + 1) = 3, rounded up to 9
 
 `S` = 1
+
+result is `DECIMAL(9,1)`
 
 </td>
 <td>
@@ -863,7 +873,11 @@ For example, `M=10.9999, N=-10, F=0.1` will be `DECIMAL(3,1)`. Calculation as fo
         
 - `P` &gt;38, where is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 
+<details>
+
 `P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
+
+</details>
 
 For example, `M=10.9999, N=-1e50, F=0.1` will be `DECIMAL(3,1)`. Calculation as follows:
 
@@ -1042,22 +1056,25 @@ Where:
 
 - `Ax` are mix of different types.
 
-*Values will be quoted.*
 
 </td>
 <td>
 
 `STRING`
+
+_Values will be quoted as in json._
 
 </td>
 </tr>
 <tr>
 <td>
-If nothing matches above, this is a catch all. Values will be quoted.`
+If nothing matches above, this is a catch all.`
 </td>
 <td>
 
 `STRING`
+
+_Values will be quoted as in json._
 
 </td>
 </tr>
@@ -1092,13 +1109,13 @@ OR
 }
 ```
 
-_`"null"` is not considered for type casting logic. Only for nullability constraint. Type lookup will continue down the table._
-
-
 </td>
 <td>
 
 `NULLABLE`
+
+
+_`"null"` is not considered for type casting logic. Only for nullability constraint. Type lookup will continue down the table._
 
 </td>
 </tr>
@@ -1264,11 +1281,13 @@ OR
 </tr>
 <tr>
 <td >
-If nothing matches above, this is a catch all. Values will be quoted.`
+If nothing matches above, this is a catch all.`
 </td>
 <td>
 
 `STRING`
+
+_Values will be quoted as in json._
 
 </td>
 </tr>

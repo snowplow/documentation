@@ -491,7 +491,7 @@ _Content is strigified and quoted._
 }
 ```
 
-- `E1` is only element
+- `E1` is the only element
 
 </td>
 <td>

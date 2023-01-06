@@ -119,7 +119,7 @@ For further details on the resources, default and required input variables, and 
 
 ## Postgres loader
 
-The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md).
+The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres](/docs/destinations/warehouses-and-lakes/postgres/index.md).
 
 For further details on the resources, default and required input variables, and outputs see the [postgres-loader-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-pubsub-ce/google/latest) terraform module.
 
@@ -128,7 +128,7 @@ For further details on the resources, default and required input variables, and 
 
 ## BigQuery loader
 
-The Snowplow application responsible for reading the enriched data and [loading to BigQuery](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md).
+The Snowplow application responsible for reading the enriched data and [loading to BigQuery](/docs/destinations/warehouses-and-lakes/bigquery/index.md).
 
 For further details on the resources, default and required input variables, and outputs see the [bigquery-loader-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/bigquery-loader-pubsub-ce/google/latest) terraform module.
 

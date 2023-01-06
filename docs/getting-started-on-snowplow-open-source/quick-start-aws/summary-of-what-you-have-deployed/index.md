@@ -123,7 +123,7 @@ Find out more about the S3 bucket module and explore the full set of variables a
 
 ## Postgres loader
 
-The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md).
+The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres](/docs/destinations/warehouses-and-lakes/postgres/index.md).
 
 Find out more about the Postgres loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest).
 
@@ -134,19 +134,19 @@ Find out more about the Postgres loader module and explore the full set of varia
 
 SQS queue is used for communication between Transformer Kinesis and Snowflake Loader.
 
-Transformer Kinesis sends SQS message to Snowflake Loader after finishing transforming some window of data. Snowflake Loader listens to SQS queue. When a new message is received, it extracts necessary information from the message and loads data to Snowflake. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-transformer-and-loader-interface-with-other-snowplow-compone).
+Transformer Kinesis sends SQS message to Snowflake Loader after finishing transforming some window of data. Snowflake Loader listens to SQS queue. When a new message is received, it extracts necessary information from the message and loads data to Snowflake. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/destinations/warehouses-and-lakes/rdb/index.md#how-transformer-and-loader-interface-with-other-snowplow-compone).
 
 ## Transformer Kinesis
 
 This is a Snowplow application that reads the enriched data from Kinesis stream, transforms it to format expected by Loader and write it to S3 bucket.
 
-After transforming is finished, it sends SQS message to Loader to notify that it can load the transformed data. More details can be found in the [Stream Transformer documentation](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/index.md).
+After transforming is finished, it sends SQS message to Loader to notify that it can load the transformed data. More details can be found in the [Stream Transformer documentation](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/stream-transformer/index.md).
 
 Find out more about the Transformer Kinesis module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest).
 
 ## Snowflake Loader
 
-The Snowplow application responsible for [loading transformed enriched data from S3 to Snowflake](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/snowflake-loader/index.md).
+The Snowplow application responsible for [loading transformed enriched data from S3 to Snowflake](/docs/destinations/warehouses-and-lakes/rdb/loading-transformed-data/snowflake-loader/index.md).
 
 Find out more about the Snowflake Loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest).
 

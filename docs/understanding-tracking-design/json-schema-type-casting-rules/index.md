@@ -1304,7 +1304,7 @@ _Values will be quoted as in JSON._
 </TabItem>
 <TabItem value="snowflake" label="Snowflake" default>
 
-- All types are JSON
+All types are `JSON`.
 
 </TabItem>
 <TabItem value="elastic" label="Elastic" default>

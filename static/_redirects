@@ -33,8 +33,9 @@
 /docs/modeling-your-data/the-snowplow-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/ 301
 /docs/modeling-your-data/the-snowplow-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/ 301
 
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/ 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/destinations/warehouses-and-lakes/rdb/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/previous-versions/snowplow-rdb-loader-2/ /docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/ 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/ 301
 
 /docs/try-snowplow/recipes/* /docs/recipes/:splat 301
 
@@ -61,9 +62,23 @@
 /docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed-gcp/ /docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-postgres-data/ /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-data/ 301
 
-/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/downloading-google-cloud-storage-loader/ /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/ 301
-/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/configuration-options/ /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/downloading-google-cloud-storage-loader/ /docs/destinations/warehouses-and-lakes/google-cloud-storage/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/configuration-options/ /docs/destinations/warehouses-and-lakes/google-cloud-storage/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-destinations/google-cloud-storage/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-bigquery-destination/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-destinations/bigquery/ 301
 
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/snowflakedb/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/snowflake/ 301
+
+/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/* /docs/destinations/warehouses-and-lakes/bigquery/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/* /docs/destinations/warehouses-and-lakes/google-cloud-storage/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/* /docs/destinations/warehouses-and-lakes/s3/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/* /docs/destinations/warehouses-and-lakes/postgres/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/* /docs/destinations/warehouses-and-lakes/rdb/:splat 301
+/docs/forwarding-events-to-destinations/reverse-etl/* /docs/destinations/reverse-etl/:splat 301
+/docs/forwarding-events-to-destinations/supporting-additional-destinations/* /docs/destinations/overview/:splat 301
+/docs/forwarding-events-to-destinations/forwarding-events/* /docs/destinations/forwarding-events/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/elasticsearch-loader/* /docs/destinations/forwarding-events/elasticsearch/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/* /docs/pipeline-components-and-applications/legacy/snowflake-loader/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/events-manifest-populator/* /docs/pipeline-components-and-applications/legacy/events-manifest-populator/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/* /docs/pipeline-components-and-applications/legacy/emr-etl-runner/:splat 301
+/docs/forwarding-events-to-destinations/ /docs/destinations/ 301

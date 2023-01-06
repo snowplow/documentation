@@ -508,7 +508,7 @@ _Content is strigified and quoted._
     "enum": ["E1", "E2"]
 }
 ```
-- `M` maximum size of `json.stringify("E*")`
+- `M` is the maximum size of `json.stringify("E*")`
 
 </td>
 <td>

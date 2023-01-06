@@ -140,7 +140,7 @@ This can be added manually (if stage already exists). Snowflake Console -> Datab
 
 To use DynamoDB table as processing manifest you need to create table with partition key `RunId` with string type and fill `manifest` property in configuration with newly created table name.
 
-#### Snowflake
+#### Snowflake table
 
 Snowplow data in Snowflake is stored in single fat table called `atomic.events` (schema can be changed, table name cannot).
 

@@ -1295,7 +1295,7 @@ If nothing matches above, this is a catch-all.
 
 `STRING`
 
-_Values will be quoted as in json._
+_Values will be quoted as in JSON._
 
 </td>
 </tr>

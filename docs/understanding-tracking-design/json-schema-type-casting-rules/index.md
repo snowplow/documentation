@@ -10,7 +10,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-_The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" - first row in the table)_
+:::note
+
+The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table)
+
+:::
 <Tabs groupId="type-casting">
   <TabItem value="redshift" label="Redshift and Postgres" default>
 

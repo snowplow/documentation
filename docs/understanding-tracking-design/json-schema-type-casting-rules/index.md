@@ -498,7 +498,7 @@ _Content is strigified and quoted._
 
 `CHAR(M)`
 
-`M` is the size of `json.stringify("E1")`
+- `M` is the size of `json.stringify("E1")`
 
 </td>
 </tr>

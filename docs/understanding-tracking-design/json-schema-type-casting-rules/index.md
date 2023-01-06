@@ -516,7 +516,7 @@ _Content is strigified and quoted._
 
 `VARCHAR(M)`
 
-`M` is the maximum size of `json.stringify("E*")`
+- `M` is the maximum size of `json.stringify("E*")`
 
 </td>
 </tr>

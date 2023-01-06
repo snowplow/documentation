@@ -4,9 +4,7 @@ date: "2021-11-24"
 sidebar_position: 0
 ---
 
-Snowplow is primarily built for Data Warehouse destinations and supports Redshift, Snowflake and BigQuery via the [Snowplow Loaders](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/index.md). There is also support for S3 and GCS loading, plus the ability to consume directly from Kinesis or PubSub.
-
-Snowplow also offers a variety of native integrations which directly consume the real time stream (Kinesis/PubSub) of your Snowplow pipeline. These integrations are listed below.
+Snowplow offers a variety of native integrations which directly consume the real time stream (Kinesis/PubSub) of your Snowplow pipeline. These integrations are listed below.
 
 ## ElasticSearch (AWS only)
 
@@ -15,7 +13,7 @@ The Elasticsearch loader reads enriched data from the enriched Kinesis stream an
 | Open Source | Snowplow BDP |
 | --- | --- |
 | ✔️ | ✔️ |
-| [Documentation](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/elastic/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
+| [Documentation](/docs/destinations/forwarding-events/elasticsearch/index.md) | [Request Setup](https://console.snowplowanalytics.com/destinations/catalog) |
 
 ## Azure Event Hubs
 

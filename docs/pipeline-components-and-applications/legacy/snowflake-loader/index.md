@@ -1,5 +1,5 @@
 ---
-title: "Snowflake Loader"
+title: "Snowflake Loader (legacy)"
 date: "2020-04-25"
 sidebar_position: 200
 ---

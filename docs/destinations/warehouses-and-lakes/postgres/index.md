@@ -1,7 +1,6 @@
 ---
 title: "Postgres Loader"
-date: "2020-07-02"
-sidebar_position: 1000
+sidebar_position: 5
 ---
 
 ```mdx-code-block

@@ -1,7 +1,6 @@
 ---
 title: "Google Cloud Storage Loader"
-date: "2020-11-25"
-sidebar_position: 500
+sidebar_position: 4
 ---
 
 

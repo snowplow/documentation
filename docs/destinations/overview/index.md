@@ -1,17 +1,24 @@
 ---
-title: "Supporting additional destinations"
-date: "2021-11-23"
-sidebar_position: 100
+title: "Overview"
+sidebar_position: 1
 ---
 
+![](images/usecasearch.png)
+
+We can summarize our philosophy with regards to data destinations like so:
+
+- Businesses can get the most value out of their data when they build a deep understanding of their customers **in one place**, such as your Data Warehouse (this allows you to avoid silos and build the deepest possible understanding by combining datasets).
+- Businesses should hold their customers’ privacy close to their hearts. It is something that is hard won and easily lost, so only the data that needs to be shared with third parties, should be.
+
+Here you will find an overview of what’s available.
+
+## Data warehouses and lakes
+
+Snowplow is primarily built for data warehouse and lake destinations and supports Redshift, BigQuery, Snowflake and Databricks, as well as S3 and GCS, via the [various loaders](/docs/destinations/warehouses-and-lakes/index.md).
+
+## Additional destinations
+
 Snowplow supports sending your data to additional destinations through a variety of different options and tools.
-
-There are two core principles of Snowplow to keep in mind when considering whether to send data to additional destinations:
-
-- Businesses can get the most value out of their data when they build a deep understanding of their customers in one place, such as your Data Warehouse (this allows you to avoid silos and build the deepest possible understanding by combining datasets).
-- Businesses should hold their customers’ privacy close to their hearts, it is something that is hard won and easily lost, so only the data that needs to be shared with third parties, should be.
-
-## Types of Use Case
 
 ### [No Processing Required (Event Forwarding)](/docs/destinations/forwarding-events/index.md)
 
@@ -21,6 +28,4 @@ Snowplow recommends using **Google Tag Manager Server Side** to forward events
 
 ### [Processing Required (Reverse ETL)](/docs/destinations/reverse-etl/index.md)
 
-This option should be used to forwarding segments or other aggregated data to downstream destinations. Often referred to as Reverse ETL. Snowplow partners with two vendors to offer this capability, [Census](https://www.getcensus.com/) and [Hightouch](https://hightouch.io/), however there are a variety of other vendors which offer alternative solutions in the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/).
-
-![](images/usecasearch.png)
+This option should be used to forwarding segments or other aggregated data to downstream destinations. Snowplow partners with two vendors to offer this capability, [Census](https://www.getcensus.com/) and [Hightouch](https://hightouch.io/), however there are a variety of other vendors which offer alternative solutions in the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/).

@@ -1,7 +1,6 @@
 ---
 title: "Reverse ETL"
-date: "2021-11-23"
-sidebar_position: 300
+sidebar_position: 4
 ---
 
 Snowplow and Reverse ETL represents best in class tooling for companies executing more sophisticated use cases with their behavioral data.

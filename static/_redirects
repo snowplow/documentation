@@ -33,8 +33,8 @@
 /docs/modeling-your-data/the-snowplow-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/ 301
 /docs/modeling-your-data/the-snowplow-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/ 301
 
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/ 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/destinations/warehouses-and-lakes/rdb/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/ 301
 
 /docs/try-snowplow/recipes/* /docs/recipes/:splat 301
 
@@ -61,8 +61,8 @@
 /docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed-gcp/ /docs/open-source-quick-start/quick-start-installation-guide-on-gcp/summary-of-what-you-have-deployed/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-postgres-data/ /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-data/ 301
 
-/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/downloading-google-cloud-storage-loader/ /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/ 301
-/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/configuration-options/ /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/downloading-google-cloud-storage-loader/ /docs/destinations/warehouses-and-lakes/google-cloud-storage/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/configuration-options/ /docs/destinations/warehouses-and-lakes/google-cloud-storage/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-google-cloud-storage-gcs-destination/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-destinations/google-cloud-storage/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-bigquery-destination/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-destinations/bigquery/ 301
 

@@ -1,6 +1,6 @@
 ---
-title: "Storing and forwarding the data"
-sidebar_position: 85
+title: "Data warehouses and lakes"
+sidebar_position: 2
 ---
 
 ```mdx-code-block

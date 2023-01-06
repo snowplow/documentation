@@ -1,7 +1,6 @@
 ---
-title: "RDB Loader"
-date: "2022-04-04"
-sidebar_position: 10
+title: "RDB Loader (Redshift, Snowflake, Databricks)"
+sidebar_position: 1
 ---
 
 We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift**, **Snowflake** or **Databricks**. For other destinations, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md).

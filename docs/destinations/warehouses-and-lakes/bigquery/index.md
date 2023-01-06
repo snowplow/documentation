@@ -1,7 +1,6 @@
 ---
 title: "BigQuery Loader"
-date: "2020-09-29"
-sidebar_position: 500
+sidebar_position: 2
 ---
 
 ```mdx-code-block

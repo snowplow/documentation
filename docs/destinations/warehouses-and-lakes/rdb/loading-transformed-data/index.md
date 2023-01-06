@@ -20,6 +20,6 @@ For loading into **Databricks**, use the [Databricks loader](/docs/destinations/
 
 :::note
 
-AWS is fully supported for both Snowflake and Databricks. GCP is supported for Snowflake (since 5.0.0.).
+AWS is fully supported for both Snowflake and Databricks. GCP is supported for Snowflake (since 5.0.0).
 
 :::

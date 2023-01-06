@@ -1,6 +1,6 @@
 ---
-title: "Storing and forwarding the data"
-sidebar_position: 85
+title: "Legacy applications"
+sidebar_position: 10000
 ---
 
 ```mdx-code-block

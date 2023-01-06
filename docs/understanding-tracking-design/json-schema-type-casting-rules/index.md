@@ -850,7 +850,7 @@ The row order in this table is important.  Type lookup stops after first match i
 
 `DECIMAL(P,S)`
 
-- `P` &le; 38, where `P` is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
+- `P` &le; 38, where `P` is the maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 - `P` is rounded up to `9`, `18` or `38`, i.e. it can only take one of those 3 values.
 
 <details>

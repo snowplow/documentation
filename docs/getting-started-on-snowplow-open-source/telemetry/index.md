@@ -50,7 +50,7 @@ At the moment, opt-out telemetry is present in the following:
 * Enrich ([Enrich Kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md), [Enrich PubSub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md), [Enrich Kafka](/docs/pipeline-components-and-applications/enrichment-components/enrich-kafka/index.md), [Enrich RabbitMQ](/docs/pipeline-components-and-applications/enrichment-components/enrich-rabbitmq/index.md)).
 * RDB Loader ([Transofmer Kinesis](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/stream-transformer/transformer-kinesis/index.md), [Transformer PubSub](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/stream-transformer/transformer-pubsub/index.md), [Redshift Loader](/docs/destinations/warehouses-and-lakes/rdb/loading-transformed-data/redshift-loader/index.md), [Snowflake Loader](/docs/destinations/warehouses-and-lakes/rdb/loading-transformed-data/snowflake-loader/index.md), [Databricks Loader](/docs/destinations/warehouses-and-lakes/rdb/loading-transformed-data/databricks-loader/index.md)).
 * Snowplow Mini for [AWS](/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-gcp/index.md).
-* [Snowbridge](/docs/pipeline-components-and-applications/snowbridge/getting-started/distribution-and-deployment.md).
+* [Snowbridge](/docs/destinations/forwarding-events/snowbridge/getting-started/distribution-and-deployment.md).
 
 
 See the telemetry notice for each component linked above for more details.

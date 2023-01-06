@@ -1,7 +1,7 @@
 ---
 title: "Elasticsearch Loader"
 date: "2020-11-25"
-sidebar_position: 600
+sidebar_position: 50
 ---
 
 ```mdx-code-block

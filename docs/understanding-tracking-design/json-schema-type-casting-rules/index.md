@@ -72,7 +72,7 @@ For the purposes of this  `number` and `integer` are the same.
 
 `VARCHAR(M)`
 
-`M` is maximum size of `json.stringify(E*)`
+- `M` is the maximum size of `json.stringify(E*)`
 
 </td>
 </tr>

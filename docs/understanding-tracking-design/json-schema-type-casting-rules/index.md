@@ -10,13 +10,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+
+<Tabs groupId="type-casting">
+  <TabItem value="redshift" label="Redshift and Postgres" default>
+
 :::note
 
 The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table)
 
 :::
-<Tabs groupId="type-casting">
-  <TabItem value="redshift" label="Redshift and Postgres" default>
 
 <table>
 <thead>
@@ -59,9 +61,6 @@ OR
 }
 ```
 
--  `M` is maximum size of `json.stringify(E*)`
-
-
 The `enum` can contain more than **one** JavaScript type: `string`, `number|integer`, `boolean`.
 For the purposes of this  `number` and `integer` are the same.
 
@@ -72,6 +71,8 @@ For the purposes of this  `number` and `integer` are the same.
 <td>
 
 `VARCHAR(M)`
+
+`M` is maximum size of `json.stringify(E*)`
 
 </td>
 </tr>
@@ -490,13 +491,14 @@ _Content is strigified and quoted._
 }
 ```
 
-- `M` is the size of `json.stringify("E1")`
 - `E1` is only element
 
 </td>
 <td>
 
 `CHAR(M)`
+
+`M` is the size of `json.stringify("E1")`
 
 </td>
 </tr>
@@ -508,12 +510,13 @@ _Content is strigified and quoted._
     "enum": ["E1", "E2"]
 }
 ```
-- `M` is the maximum size of `json.stringify("E*")`
 
 </td>
 <td>
 
 `VARCHAR(M)`
+
+`M` is the maximum size of `json.stringify("E*")`
 
 </td>
 </tr>
@@ -528,7 +531,7 @@ If nothing matches above, this is a catch-all.
 `VARCHAR(65535)`
 
 
-_Values will be quoted as in JSON._
+_Values will be quoted as in json._
 
 </td>
 </tr>
@@ -538,8 +541,14 @@ _Values will be quoted as in JSON._
 
 <TabItem value="databricks" label="Databricks" default>
 
+:::note
+
 All fields in databricks are `nullable`. Having `"null"` in the `"type"` or `"enum"` does not affect the warehouse type,
 and is ignored for the purposes of type casting as per the table below.
+
+The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table)
+
+:::
 
 <table>
 <thead>
@@ -559,7 +568,9 @@ and is ignored for the purposes of type casting as per the table below.
 
 </td>
 <td>
+
 `TIMESTAMP`
+
 </td>
 </tr>
 <tr>
@@ -834,19 +845,22 @@ and is ignored for the purposes of type casting as per the table below.
 }
 ```
 
+</td>
+<td>
+
+`DECIMAL(P,S)`
 
 - `P` &le; 38, where `P` is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 - `P` is rounded up to `9`, `18` or `38`, i.e. it can only take one of those 3 values.
 
 <details>
+<summary>The formulas</summary>
 
 `P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
 
 `S` = `F.scale`
 
-</details>
-
-For example, `M=10.9999, N=-10, F=0.1` will be `DECIMAL(3,1)`. Calculation as follows:
+For example, `M=10.9999, N=-10, F=0.1` will be `DECIMAL(9,1)`. Calculation as follows:
 
 `M` is `DECIMAL(6,4)`, `N` is `DECIMAL(2,0)`, `F` is `DECIMAL(2,1)`
 
@@ -856,10 +870,7 @@ For example, `M=10.9999, N=-10, F=0.1` will be `DECIMAL(3,1)`. Calculation as fo
 
 result is `DECIMAL(9,1)`
 
-</td>
-<td>
-
-`DECIMAL(P,S)`
+</details>
 
 </td>
 </tr>
@@ -874,24 +885,25 @@ result is `DECIMAL(9,1)`
     "multipleOf": F
 }
 ```
-        
-- `P` &gt;38, where is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 
-<details>
-
-`P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
-
-</details>
-
-For example, `M=10.9999, N=-1e50, F=0.1` will be `DECIMAL(3,1)`. Calculation as follows:
-
-`M` is `DECIMAL(6,4)`, `N` is `DECIMAL(2,0)`, `F` is `DECIMAL(2,1)`
-
-`P` = `MAX`(6 - 4 + 1, 50 + 1) = 51
 </td>
 <td>
 
 `DOUBLE`
+
+- `P` &gt;38, where is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
+
+<details>
+<summary>The formulas</summary>
+
+`P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
+
+For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follows:
+
+`M` is `DECIMAL(6,4)`, `N` is `DECIMAL(2,0)`, `F` is `DECIMAL(2,1)`
+
+`P` = `MAX`(6 - 4 + 1, 50 + 1) = 51 &gt;38
+</details>
 
 </td>
 </tr>
@@ -943,13 +955,9 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DECIMAL(3,1)`. Calculation as 
 }
 ```
 
-- **`S` = 0**
-- **All** `Nx` and `Ix` are of types number or integer.
-- `M` &lt; 2147483647
-
-Where:
-- `S` is maximum scale (number of digits after the `.`) in the enum list.
-- `M` is maximum absolute value of the enum list.
+- All `Nx` and `Ix` are of types number or integer.
+- Maximum scale (number of digits after the `.`) in the enum list is 0.
+- Maximum absolute value of the enum list is lesser or equal than 2147483647
 
 </td>
 <td>
@@ -967,13 +975,9 @@ Where:
 }
 ```
 
-- **`S` = 0**
-- **All** `Nx` and `Ix` are of types number or integer.
-- `M` &le; 9223372036854775807
-
-Where:
-- `S` is maximum scale (number of digits after the `.`) in the enum list.
-- `M` is maximum absolute value of the enum list.
+- All `Nx` and `Ix` are of types number or integer.
+- Maximum scale (number of digits after the `.`) in the enum list is 0.
+- Maximum absolute value of the enum list is lesser or equal than 9223372036854775807
 
 </td>
 <td>
@@ -991,13 +995,9 @@ Where:
 }
 ```
 
-- **`S` = 0**
-- **All** `Nx` and `Ix` are of types number or integer.
-- `M` &le; 9223372036854775807
-
-Where:
-- `S` is maximum scale (number of digits after the `.`) in the enum list.
-- `M` is maximum absolute value of the enum list.
+- All `Nx` and `Ix` are of types number or integer.
+- Maximum scale (number of digits after the `.`) in the enum list is 0.
+- Maximum absolute value of the enum list is greater than 9223372036854775807
 
 </td>
 <td>
@@ -1015,19 +1015,16 @@ Where:
 }
 ```
 
-- `S` &gt;0
 - **All** `Nx` and `Ix` are of types number or integer.
-- `M` &lt; 1e38
-
-Where:
-- `S` is maximum scale (number of digits after the `.`) in the enum list.
-- `M` is maximum absolute value of the enum list.
-- `P` is precision (total number of digits in `M`). Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
+- Absolute maximum value of the enum list and less then 1e38.
 
 </td>
 <td>
 
 `DECIMAL(P,S)`
+
+- `S` is maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
+- `P` is precision (total number of digits in `M`). Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
 
 </td>
 </tr>
@@ -1059,7 +1056,6 @@ Where:
 ```
 
 - `Ax` are a mix of different types
-
 
 </td>
 <td>
@@ -1285,6 +1281,8 @@ OR
 
 `STRING`
 
+_Values will be quoted as in json._
+
 </td>
 </tr>
 <tr>
@@ -1295,7 +1293,7 @@ If nothing matches above, this is a catch-all.
 
 `STRING`
 
-_Values will be quoted as in JSON._
+_Values will be quoted as in json._
 
 </td>
 </tr>

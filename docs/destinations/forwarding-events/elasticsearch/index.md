@@ -6,7 +6,11 @@ sidebar_position: 600
 
 If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
 
-Type reference for our loaders could be found [here](/docs/understanding-tracking-design/json-schema-type-casting-rules).
+:::tip Schemas in ElasticSearch
+
+For more information on how events are stored in ElasticSearch, check the [mapping between Snowplow schemas and the corresponding ElasticSearch types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md).
+
+:::
 
 ## Setup guide
 

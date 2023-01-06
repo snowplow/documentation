@@ -66,7 +66,7 @@ The `enum` can contain more than **one** JavaScript type: `string`, `number|inte
 For the purposes of this  `number` and `integer` are the same.
 
 
-`array`, `object`, `NaN` and other types in enum will be cast as fallback `VARCHAR(65535)`.
+`array`, `object`, `NaN` and other types in the `enum` will be cast as fallback `VARCHAR(65535)`.
 
 </td>
 <td>

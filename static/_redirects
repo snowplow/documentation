@@ -34,6 +34,7 @@
 /docs/modeling-your-data/the-snowplow-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/ 301
 
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/destinations/warehouses-and-lakes/rdb/:splat 301
+/docs/pipeline-components-and-applications/loaders-storage-targets/previous-versions/snowplow-rdb-loader-2/ /docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/ 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/ 301
 
 /docs/try-snowplow/recipes/* /docs/recipes/:splat 301

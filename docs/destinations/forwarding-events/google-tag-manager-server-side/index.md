@@ -25,7 +25,7 @@ GTM SS with Snowplow can be setup in two different configurations.
 
 Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS after being processed by your Snowplow Pipeline.
 
-* For Open Source, see [Snowbridge](/docs/pipeline-components-and-applications/snowbridge/index.md).
+* For Open Source, see [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
 * For Snowplow BDP, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through the Console.
 
 ### Server Side Tag Manager (Pre-pipeline)

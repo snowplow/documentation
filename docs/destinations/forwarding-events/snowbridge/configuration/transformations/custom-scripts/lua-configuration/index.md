@@ -12,7 +12,7 @@ You can also find some complete example use cases in [the examples section](../e
 
 The Custom Lua Script transformation uses the [gopher-lua](https://pkg.go.dev/github.com/yuin/gopher-lua) embedded Lua engine to run scripts upon the data.
 
-If a script errors or times out, a [transformation failre](/docs/pipeline-components-and-applications/snowbridge/concepts/failure-model/index.md#transformation-failure) occurs.
+If a script errors or times out, a [transformation failre](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#transformation-failure) occurs.
 
 Scripts must be available to the runtime of the application at the path provided in the `script_path` configuration option. For docker, this means mounting the script to the container and providing that path.
 

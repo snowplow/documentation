@@ -17,12 +17,12 @@ The Elasticsearch loader reads enriched data from the enriched Kinesis stream an
 
 Event Hubs is a fully managed, real-time data ingestion service that’s simple, trusted and scalable. Snowplow can forward enriched data to Event Hubs from Kinesis or PubSub, depending on whether your pipeline is in AWS or GCP.
 
-* For Open Source, see [Snowbridge](/docs/pipeline-components-and-applications/snowbridge/index.md).
+* For Open Source, see [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
 * For Snowplow BDP, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through the Console.
 
 ## Apache Kafka
 
 Apache Kafka is an open-source distributed event streaming platform used by thousands of companies for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. Snowplow can forward enriched data to Kafka from Kinesis or PubSub, depending on whether your pipeline is in AWS or GCP.
 
-* For Open Source, see [Snowbridge](/docs/pipeline-components-and-applications/snowbridge/index.md).
+* For Open Source, see [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
 * For Snowplow BDP, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through the Console.

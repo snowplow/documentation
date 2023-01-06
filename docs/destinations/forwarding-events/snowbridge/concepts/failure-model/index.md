@@ -10,7 +10,7 @@ sidebar_position: 600
 
 When Snowbridge hits an unrecoverable error — for example [oversized](#oversized-data) or [invalid](#invalid-data) data — it will emit a [failed event](/docs/managing-data-quality/failed-events/understanding-failed-events#what-is-a-failed-event) to the configured failure target. A failure target is the same as a target, the only difference is that the configured destination will receive failed events.
 
-You can find more detail on setting up a failure target, in the [configuration section](/docs/pipeline-components-and-applications/snowbridge/configuration/targets/index.md).
+You can find more detail on setting up a failure target, in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/targets/index.md).
 
 ## Failure cases
 

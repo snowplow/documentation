@@ -15,7 +15,7 @@ The defaults for the app are stdin source, no transformations, and stdout target
 
 Next, the app can be configured using HCL - simply create a configuration file, and provide the path to it using the `SNOWBRIDGE_CONFIG_FILE` environment variable. 
 
-You can find a guide to configuration in the [configuration section](/docs/pipeline-components-and-applications/snowbridge/configuration/index.md), and a guide to deployment in the [deployment page](./distribution-and-deployment.md).
+You can find a guide to configuration in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/index.md), and a guide to deployment in the [deployment page](./distribution-and-deployment.md).
 
 
 ```mdx-code-block

@@ -490,7 +490,7 @@ _Content is strigified and quoted._
 }
 ```
 
-- `M` is the size of json.stringify("E1").
+- `M` is the size of `json.stringify("E1")`
 - `E1` is only element
 
 </td>

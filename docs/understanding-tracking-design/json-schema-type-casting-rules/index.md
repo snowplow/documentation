@@ -1088,7 +1088,11 @@ _Values will be quoted as in json._
 
 <TabItem value="bigquery" label="BigQuery" default>
 
-_The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" - first row in the table)_
+:::note
+
+The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
+
+:::
 
 <table>
 <thead>

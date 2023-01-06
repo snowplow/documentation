@@ -8,7 +8,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-Under the umbrella of Snowplow BigQuery Loader, we have a family of applications that can be used to load enriched Snowplow data into BigQuery.
+Under the umbrella of Snowplow BigQuery Loader, we have a family of applications that can be used to load enriched Snowplow data into BigQuery. Type reference for our loaders could be found [here](/docs/understanding-tracking-design/json-schema-type-casting-rules).
 
 There are currently four applications, which are described in detail below. A typical deployment would consist of three of them:
 

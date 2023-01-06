@@ -11,6 +11,8 @@ import CodeBlock from '@theme/CodeBlock';
 
 With Snowplow Postgres Loader you can load enriched data or plain self-describing JSONs into PostgreSQL database.
 
+Type reference for our loaders could be found [here](/docs/understanding-tracking-design/json-schema-type-casting-rules).
+
 ## Available on Terraform Registry
 
 [![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest)

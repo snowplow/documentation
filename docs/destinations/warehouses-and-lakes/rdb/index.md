@@ -12,6 +12,8 @@ Loading [enriched](/docs/pipeline-components-and-applications/enrichment-compone
 
 Each step is handled by a dedicated application: `transformer` or `loader`. To load Snowplow data with RDB Loader, you'll need to run one of each.
 
+Type reference for our loaders could be found [here](/docs/understanding-tracking-design/json-schema-type-casting-rules).
+
 ## How to pick a transformer
 
 The transformer app currently comes in two flavours: a Spark job that processes data in batches, and a long-running streaming app.

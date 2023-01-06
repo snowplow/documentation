@@ -6,78 +6,7 @@ sidebar_position: 600
 
 If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
 
-When loading enriched events, the resulting JSONs are like the [Snowplow Canonical Event model](/docs/understanding-your-pipeline/canonical-event/index.md) with the following changes:
-
-### Boolean fields reformatted
-
-All boolean fields like `br_features_java` are either `"0"` or `"1"` in the canonical event model. The JSON converts these values to `false` and `true`.
-
-### New `geo_location` field
-
-The `geo_latitude` and `geo_longitude` fields are combined into a single `geo_location` field of Elasticsearch's ["geo_point" type](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html).
-
-### Unstructured events
-
-Unstructured events are expanded into full JSONs. For example, the event
-
-```json
-{
-    "schema": "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1",
-    "data": {
-        "targetUrl": "http://snowplowanalytics.com/analytics/index.html",
-        "elementId": "action",
-        "elementClasses": [],
-        "elementTarget": ""
-	}
-}
-```
-
-would be converted to the field
-
-```json
-{
-    "unstruct_com_snowplowanalytics_snowplow_link_click_1": {
-        "targetUrl": "http://snowplowanalytics.com/analytics/index.html",
-        "elementId": "action",
-        "elementClasses": [],
-        "elementTarget": ""
-    }
-}
-```
-
-### Custom contexts
-
-Each custom context in an array is similarly expanded to a JSON with its own field. For example, the array
-
-```json
-[
-    {
-        "schema": "iglu:com.acme/contextOne/jsonschema/1-0-0",
-        "data": {
-            "key": "value"
-        }
-    }
-    {
-        "schema": "iglu:com.acme/contextTwo/jsonschema/3-0-0",
-        "data": {
-            "name": "second"
-        }
-    }
-]
-```
-
-would be converted to
-
-```json
-{
-    "contexts_com_acme_context_one_1": {
-        "key": "value"
-    },
-    "contexts_com_acme_context_two_3": {
-        "name": "second"
-    }
-}
-```
+Type reference for our loaders could be found [here](/docs/understanding-tracking-design/json-schema-type-casting-rules).
 
 ## Setup guide
 

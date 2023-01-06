@@ -12,13 +12,12 @@ import TabItem from '@theme/TabItem';
 
 _The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" - first row in the table)_
 <Tabs groupId="type-casting">
-  <TabItem value="redshift" label="Redshift" default>
+  <TabItem value="redshift" label="Redshift and Postgres" default>
 
 <table>
 <thead>
 <td>Json Schema</td>
-<td>Redshift Type</td>
-<td>Notes</td>
+<td>Redshift/Postgres Type</td>
 </thead>
 <tbody>
 <tr>
@@ -38,11 +37,13 @@ OR
 }
 ```
 
+`"null"` is not considered for type casting logic. Only for nullability constraint. Type lookup will continue down the table.
+
 </td>
-<td >
-<code>NULLABLE</code>
-</td>
-<td><code>"null"</code> is not considered for type casting logic. Only for nullability constraint. Type lookup will continue down the table.
+<td>
+
+`NULLABLE`
+
 </td>
 </tr>
 <tr>
@@ -54,13 +55,37 @@ OR
 }
 ```
 
+-  `M` is maximum size of `json.stringify(E*)`
+
+
+The `enum` can contain more than **one** JavaScript type: `string`, `number|integer`, `boolean`.
+For the purposes of this  `number` and `integer` are the same.
+
+
+`array`, `object`, `NaN` and other types in enum will be cast as fallback `VARCHAR(65535)`.
+
 </td>
-<td><code>VARCHAR(M)</code></td>
-<td> Where <code>M</code> is maximum size of <code>json.stringify(E*)</code><br/><br/>
-The <code>enum</code> can contain more than <b>one</b> JavaScript type: <code>string</code>, <code>number|integer</code>, <code>boolean</code>.<br/>
-For the purposes of this  <code>number</code> and <code>integer</code> are the same.<br/>
-<br/>
-<code>array</code>, <code>object</code>, <code>NaN</code> and other types in enum will be cast as fallback <code>VARCHAR(65535)</code>.   
+<td>
+
+`VARCHAR(M)`
+
+</td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": [T1, T2, ...]
+}
+```
+
+- `T1, T2, ..`. only contains `"boolean"` **and** `"integer"`
+
+</td>
+<td>
+
+`VARCHAR(10)`
 
 </td>
 </tr>
@@ -75,26 +100,10 @@ For the purposes of this  <code>number</code> and <code>integer</code> are the s
 
 </td>
 <td>
-<code>VARCHAR(10)</code>
-</td>
-<td>
-Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <code>"integer"</code>
-</td>
-</tr>
-<tr>
-<td>
 
-  ```json
-{
-    "type": [T1, T2, ...]
-}
-```
+`VARCHAR(4096)`
 
 </td>
-<td>
-<code>VARCHAR(4096)</code>
-</td>
-<td></td>
 </tr>
 <tr>
 <td>
@@ -108,9 +117,10 @@ Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <
 
 </td>
 <td>
-<code>TIMESTAMP</code>
+
+`TIMESTAMP`
+
 </td>
-<td></td>
 </tr>
 <tr>
 <td>
@@ -124,8 +134,10 @@ Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <
 
 </td>
 <td>
-<code>DATE</code>
-</td><td></td>
+
+`DATE`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -136,27 +148,13 @@ Where <code>T1, T2, ..</code>. only contains <code>"boolean"</code> <b>and</b> <
 }
 ```
 
-</td>
-<td>
-<code>VARCHAR(65535)</code>
-</td><td></td>
-</tr>
-<tr>
-<td>
-
-  ```json
-{
-    "type": "integer",
-    "maximum": M
-}
-```
+_Content is strigified and quoted._
 
 </td>
 <td>
-<code>SMALLINT</code>
-</td>
-<td>
-Where <code>M</code> &le; 32767
+
+`VARCHAR(65535)`
+
 </td>
 </tr>
 <tr>
@@ -169,12 +167,13 @@ Where <code>M</code> &le; 32767
 }
 ```
 
+- `M` &le; 32767
+
 </td>
 <td>
-<code>INT</code>
-</td>
-<td>
-Where 32767 &lt; <code>M</code> &le; 2147483647
+
+`SMALLINT`
+
 </td>
 </tr>
 <tr>
@@ -187,12 +186,32 @@ Where 32767 &lt; <code>M</code> &le; 2147483647
 }
 ```
 
+- 32767 &lt; `M` &le; 2147483647
+
 </td>
 <td>
-<code>BIGINT</code>
+
+`INT`
+
+</td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "integer",
+    "maximum": M
+}
+```
+
+- `M` &gt;2147483647
+
 </td>
 <td>
-Where <code>M</code> > 2147483647
+
+`BIGINT`
+
 </td>
 </tr>
 <tr>
@@ -205,12 +224,13 @@ Where <code>M</code> > 2147483647
 }
 ```
 
+- Maximum `E*` &le; 32767
+
 </td>
 <td>
-<code>SMALLINT</code>
-</td>
-<td>
-Where maximum <code>E*</code> &le; 32767
+
+`SMALLINT`
+
 </td>
 </tr>
 <tr>
@@ -223,36 +243,38 @@ Where maximum <code>E*</code> &le; 32767
 }
 ```
 
+- 32767 &lt; maximum `E*` &le; 2147483647
+
 </td>
 <td>
-<code>INT</code>
-</td>
-<td>
-32767 &lt; maximum <code>E*</code> &le; 2147483647
+
+`INT`
+
 </td>
 </tr>
 <tr>
 <td>
 
-  ```json
+```json
 {
     "type": "integer",
     "enum": [E1, E2, ...]
 }
 ```
 
+- Maximum `E*` &gt; 2147483647
+
 </td>
 <td>
-<code>BIGINT</code>
-</td>
-<td>
-maximum <code>E*</code> &gt; 2147483647
+
+`BIGINT`
+
 </td>
 </tr>
 <tr>
 <td>
 
-  ```json
+```json
 {
     "type": "integer"
 }
@@ -260,8 +282,10 @@ maximum <code>E*</code> &gt; 2147483647
 
 </td>
 <td>
-<code>BIGINT</code>
-</td><td></td>
+
+`BIGINT`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -274,25 +298,28 @@ maximum <code>E*</code> &gt; 2147483647
 
 </td>
 <td>
-<code>INT</code>
-</td><td></td>
+
+`INT`
+
+</td>
 </tr>
 <tr>
 <td>
 
-  ```json
+```json
 {
     "type": "number",
     "multipleOf": B
 }
 ```
 
+- Only works for `B`=2
+
 </td>
 <td>
-<code>DECIMAL(36,2)</code>
-</td>
-<td>
-Only works for <code>B</code>=2
+
+`DECIMAL(36,2)`
+
 </td>
 </tr>
 <tr>
@@ -306,8 +333,10 @@ Only works for <code>B</code>=2
 
 </td>
 <td>
-<code>DOUBLE</code>
-</td><td></td>
+
+`DOUBLE`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -320,8 +349,10 @@ Only works for <code>B</code>=2
 
 </td>
 <td>
-<code>DOUBLE</code>
-</td><td></td>
+
+`DOUBLE`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -333,7 +364,11 @@ Only works for <code>B</code>=2
 ```
 
 </td>
-<td><code>BOOLEAN</code></td><td></td>
+<td>
+
+`BOOLEAN`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -346,12 +381,13 @@ Only works for <code>B</code>=2
 }
 ```
 
+- `M` is the same in minLength and maxLength
+
 </td>
 <td>
-<code>CHAR(M)</code>
-</td>
-<td>
-Where <code>M</code> is the same in minLength and maxLength
+
+`CHAR(M)`
+
 </td>
 </tr>
 <tr>
@@ -366,7 +402,9 @@ Where <code>M</code> is the same in minLength and maxLength
 
 </td>
 <td>
-<code>CHAR(36)</code>
+
+`CHAR(36)`
+
 </td>
 </tr>
 <tr>
@@ -381,8 +419,10 @@ Where <code>M</code> is the same in minLength and maxLength
 
 </td>
 <td>
-<code>VARCHAR(39)</code>
-</td><td></td>
+
+`VARCHAR(39)`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -396,8 +436,10 @@ Where <code>M</code> is the same in minLength and maxLength
 
 </td>
 <td>
-<code>VARCHAR(15)</code>
-</td><td></td>
+
+`VARCHAR(15)`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -411,8 +453,10 @@ Where <code>M</code> is the same in minLength and maxLength
 
 </td>
 <td>
-<code>VARCHAR(255)</code>
-</td><td></td>
+
+`VARCHAR(255)`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -424,12 +468,13 @@ Where <code>M</code> is the same in minLength and maxLength
 }
 ```
 
+- `enum` is not defined
+
 </td>
 <td>
-<code>VARCHAR(M)</code>
-</td>
-<td>
-<code>enum</code> is not defined
+
+`VARCHAR(M)`
+
 </td>
 </tr>
 <tr>
@@ -441,13 +486,14 @@ Where <code>M</code> is the same in minLength and maxLength
 }
 ```
 
+- `M` is the size of json.stringify("E1").
+- `E1` is only element
+
 </td>
 <td>
-<code>CHAR(M)</code>
-</td>
-<td>
-Where <code>M</code> is the size of json.stringify("E1"). <br/>
-<code>E1</code> is only element
+
+`CHAR(M)`
+
 </td>
 </tr>
 <tr>
@@ -458,30 +504,32 @@ Where <code>M</code> is the size of json.stringify("E1"). <br/>
     "enum": ["E1", "E2"]
 }
 ```
+- `M` maximum size of `json.stringify("E*")`
 
 </td>
 <td>
-<code>VARCHAR(M)</code>
+
+`VARCHAR(M)`
+
 </td>
-<td>Where <code>M</code> maximum size of <code>json.stringify("E*")</code></td>
 </tr>
 <tr>
 <td>
-fallback
+
+If nothing matches above, this is a catch all. Values will be quoted.`
+
 </td>
 <td>
-<code>VARCHAR(65535)</code>
-</td>
-<td>
-Values will be quoted.
-Used when none of the rules above match.
+
+`VARCHAR(65535)`
+
 </td>
 </tr>
 </tbody>
 </table>
 </TabItem>
 
- <TabItem value="databricks" label="Databricks" default>
+<TabItem value="databricks" label="Databricks" default>
 
 All fields in databricks are `nullable`. Having `"null"` in the `"type"` or `"enum"` does not affect the warehouse type,
 and ignored for the purposes of type casting as per the table below.
@@ -490,7 +538,6 @@ and ignored for the purposes of type casting as per the table below.
 <thead>
 <td>Json Schema</td>
 <td>Databricks Type</td>
-<td>Notes</td>
 </thead>
 <tbody>
 <tr>
@@ -505,9 +552,8 @@ and ignored for the purposes of type casting as per the table below.
 
 </td>
 <td>
-<code>TIMESTAMP</code>
+`TIMESTAMP`
 </td>
-<td></td>
 </tr>
 <tr>
 <td>
@@ -521,8 +567,10 @@ and ignored for the purposes of type casting as per the table below.
 
 </td>
 <td>
-<code>DATE</code>
-</td><td></td>
+
+`DATE`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -534,7 +582,10 @@ and ignored for the purposes of type casting as per the table below.
 ```
 
 </td>
-<td><code>BOOLEAN</code></td><td></td>
+<td>
+
+`BOOLEAN`
+</td>
 </tr>
 <tr>
 <td>
@@ -546,7 +597,11 @@ and ignored for the purposes of type casting as per the table below.
 ```
 
 </td>
-<td><code>STRING</code></td><td></td>
+<td>
+
+`STRING`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -558,6 +613,9 @@ and ignored for the purposes of type casting as per the table below.
     "maximum": M
 }
 ```
+
+- `M` &le; 2147483647
+- `N` &ge; -2147483648
 
 </td>
 <td>
@@ -565,12 +623,6 @@ and ignored for the purposes of type casting as per the table below.
 `INT`
 
 </td>
-<td>
-
-- `M` <= 2147483647
-- `N` >= -2147483648
-
-</td>
 </tr>
 <tr>
 <td>
@@ -583,16 +635,13 @@ and ignored for the purposes of type casting as per the table below.
 }
 ```
 
+- `M` &le; 9223372036854775807
+- `N` &ge; -9223372036854775808
+
 </td>
 <td>
 
 `BIGINT`
-
-</td>
-<td>
-
-- `M` <= 9223372036854775807
-- `N` >= -9223372036854775808
 
 </td>
 </tr>
@@ -606,6 +655,9 @@ and ignored for the purposes of type casting as per the table below.
     "maximum": M
 }
 ```
+
+- `M` &gt;1e38-1
+- `N` &lt;-1e38
 
 </td>
 <td>
@@ -613,12 +665,6 @@ and ignored for the purposes of type casting as per the table below.
 `DECIMAL(38,0)`
 
 </td>
-<td>
-
-- `M` > 1e38-1
-- `N` < -1e38
-
-</td>
 </tr>
 <tr>
 <td>
@@ -631,16 +677,13 @@ and ignored for the purposes of type casting as per the table below.
 }
 ```
 
+- `M` &lt; 1e38-1
+- `N` &gt;-1e38
+
 </td>
 <td>
 
 `DOUBLE`
-
-</td>
-<td>
-
-- `M` < 1e38-1
-- `N` > -1e38
 
 </td>
 </tr>
@@ -659,7 +702,6 @@ and ignored for the purposes of type casting as per the table below.
 `BIGINT`
 
 </td>
-<td></td>
 </tr>
 <tr>
 <td>
@@ -672,6 +714,10 @@ and ignored for the purposes of type casting as per the table below.
     "multipleOf": F
 }
 ```
+
+- `M` &le; 2147483647
+- `N` &ge; -2147483648
+- `F` is integer
 
 </td>
 <td>
@@ -679,13 +725,6 @@ and ignored for the purposes of type casting as per the table below.
 `INT`
 
 </td>
-<td>
-
-- `M` <= 2147483647
-- `N` >= -2147483648
-- `F` is integer
-
-</td>
 </tr>
 <tr>
 <td>
@@ -698,6 +737,10 @@ and ignored for the purposes of type casting as per the table below.
     "multipleOf": F
 }
 ```
+
+- `M` &le; 9223372036854775807
+- `N` &ge; -9223372036854775808
+- `F` is integer
 
 </td>
 <td>
@@ -705,13 +748,6 @@ and ignored for the purposes of type casting as per the table below.
 `BIGINT`
 
 </td>
-<td>
-
-- `M` <= 9223372036854775807
-- `N` >= -9223372036854775808
-- `F` is integer
-
-</td>
 </tr>
 <tr>
 <td>
@@ -724,6 +760,10 @@ and ignored for the purposes of type casting as per the table below.
     "multipleOf": F
 }
 ```
+
+- `M` &gt; 1e38-1
+- `N` &lt; -1e38
+- `F` is integer
 
 </td>
 <td>
@@ -731,13 +771,6 @@ and ignored for the purposes of type casting as per the table below.
 `DECIMAL(38,0)`
 
 </td>
-<td>
-
-- `M` > 1e38-1
-- `N` < -1e38
-- `F` is integer
-
-</td>
 </tr>
 <tr>
 <td>
@@ -750,6 +783,10 @@ and ignored for the purposes of type casting as per the table below.
     "multipleOf": F
 }
 ```
+
+- `M` &lt; 1e38-1
+- `N` &gt; -1e38
+- `F` is integer
 
 </td>
 <td>
@@ -757,13 +794,6 @@ and ignored for the purposes of type casting as per the table below.
 `DOUBLE`
 
 </td>
-<td>
-
-- `M` < 1e38-1
-- `N` > -1e38
-- `F` is integer
-
-</td>
 </tr>
 <tr>
 <td>
@@ -775,15 +805,12 @@ and ignored for the purposes of type casting as per the table below.
 }
 ```
 
+- `F` is integer
+
 </td>
 <td>
 
 `BIGINT`
-
-</td>
-<td>
-
-`F` is integer
 
 </td>
 </tr>
@@ -799,17 +826,9 @@ and ignored for the purposes of type casting as per the table below.
 }
 ```
 
-</td>
-<td>
 
-`DECIMAL(P,S)`
-
-</td>
-<td>
-
-- `P` <= 38
-
-Where `P` is maximum precision of `M` and `N`, adjusted for scale of `F`.
+- `P` &le; 38, where `P` is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
+- `P` Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
 
 `P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
 
@@ -822,6 +841,12 @@ For example, `M=10.9999, N=-10, F=0.1` will be `DECIMAL(3,1)`. Calculation as fo
 `P` = `MAX`(6 - 4 + 1, 2 + 1) = 3
 
 `S` = 1
+
+</td>
+<td>
+
+`DECIMAL(P,S)`
+
 </td>
 </tr>
 <tr>
@@ -835,18 +860,8 @@ For example, `M=10.9999, N=-10, F=0.1` will be `DECIMAL(3,1)`. Calculation as fo
     "multipleOf": F
 }
 ```
-
-</td>
-<td>
-
-`DOUBLE`
-
-</td>
-<td>
-
--`P` > 38
-
-Where `P` is maximum precision of `M` and `N`, adjusted for scale of `F`.
+        
+- `P` &gt;38, where is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 
 `P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
 
@@ -856,6 +871,11 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DECIMAL(3,1)`. Calculation as 
 
 `P` = `MAX`(6 - 4 + 1, 50 + 1) = 51
 </td>
+<td>
+
+`DOUBLE`
+
+</td>
 </tr>
 <tr>
 <td>
@@ -869,17 +889,14 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DECIMAL(3,1)`. Calculation as 
 }
 ```
 
+- `M` &lt; 1e38-1
+- `N` &gt; -1e38
+- `F` is integer
+
 </td>
 <td>
 
 `DOUBLE`
-
-</td>
-<td>
-
-- `M` < 1e38-1
-- `N` > -1e38
-- `F` is integer
 
 </td>
 </tr>
@@ -898,7 +915,6 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DECIMAL(3,1)`. Calculation as 
 `DOUBLE`
 
 </td>
-<td></td>
 </tr>
 <tr>
 <td >
@@ -908,23 +924,21 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DECIMAL(3,1)`. Calculation as 
     "enum": [N1, I1, ...]
 }
 ```
+
+- **`S` = 0**
+- **All** `Nx` and `Ix` are of types number or integer.
+- `M` &lt; 2147483647
+
+Where:
+- `S` is maximum scale (number of digits after the `.`) in the enum list.
+- `M` is maximum absolute value of the enum list.
+
 </td>
 <td>
 
 `INT`
 
 </td>
-<td>
-
-- **`S` = 0**
-- **All** `Nx` and `Ix` are of types number or integer.
-- `M` < 2147483647
-
-Where:
-- `S` is maximum scale (number of digits after the `.`) in the enum list.
-- `M` is maximum absolute value of the enum list.
-
-</td>
 </tr>
 <tr>
 <td >
@@ -934,23 +948,21 @@ Where:
     "enum": [N1, I1, ...]
 }
 ```
+
+- **`S` = 0**
+- **All** `Nx` and `Ix` are of types number or integer.
+- `M` &le; 9223372036854775807
+
+Where:
+- `S` is maximum scale (number of digits after the `.`) in the enum list.
+- `M` is maximum absolute value of the enum list.
+
 </td>
 <td>
 
 `BIGINT`
 
 </td>
-<td>
-
-- **`S` = 0**
-- **All** `Nx` and `Ix` are of types number or integer.
-- `M` <= 9223372036854775807
-
-Where:
-- `S` is maximum scale (number of digits after the `.`) in the enum list.
-- `M` is maximum absolute value of the enum list.
-
-</td>
 </tr>
 <tr>
 <td >
@@ -960,68 +972,62 @@ Where:
     "enum": [N1, I1, ...]
 }
 ```
+
+- **`S` = 0**
+- **All** `Nx` and `Ix` are of types number or integer.
+- `M` &le; 9223372036854775807
+
+Where:
+- `S` is maximum scale (number of digits after the `.`) in the enum list.
+- `M` is maximum absolute value of the enum list.
+
 </td>
 <td>
 
 `BIGINT`
 
 </td>
-<td>
-
-- **`S` = 0**
-- **All** `Nx` and `Ix` are of types number or integer.
-- `M` <= 9223372036854775807
-
-Where:
-- `S` is maximum scale (number of digits after the `.`) in the enum list.
-- `M` is maximum absolute value of the enum list.
-
-</td>
 </tr>
 <tr>
-<td >
+<td>
 
 ```json
 {
     "enum": [N1, I1, ...]
 }
 ```
+
+- `S` &gt;0
+- **All** `Nx` and `Ix` are of types number or integer.
+- `M` &lt; 1e38
+
+Where:
+- `S` is maximum scale (number of digits after the `.`) in the enum list.
+- `M` is maximum absolute value of the enum list.
+- `P` is precision (total number of digits in `M`). Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
+
 </td>
 <td>
 
 `DECIMAL(P,S)`
 
 </td>
-<td>
-
-- `S` > 0
-- **All** `Nx` and `Ix` are of types number or integer.
-- `M` < 1e38
-
-Where:
-- `S` is maximum scale (number of digits after the `.`) in the enum list.
-- `M` is maximum absolute value of the enum list.
-- `P` is precision (total number of digits in `M`).
-
-</td>
 </tr>
 <tr>
-<td >
+<td>
 
 ```json
 {
     "enum": [S1, S2, ...]
 }
 ```
+
+- **All** `Sx` are string
+
 </td>
 <td>
 
 `STRING`
-
-</td>
-<td>
-
-**All** `Sx` are string
 
 </td>
 </tr>
@@ -1033,23 +1039,321 @@ Where:
     "enum": [A1, A2, ...]
 }
 ```
+
+- `Ax` are mix of different types.
+
+*Values will be quoted.*
+
 </td>
 <td>
 
 `STRING`
 
 </td>
+</tr>
+<tr>
+<td>
+If nothing matches above, this is a catch all. Values will be quoted.`
+</td>
 <td>
 
-- `Ax` are mix of different types.
-
-*Values will be quoted.*
-
-
+`STRING`
 
 </td>
 </tr>
 </tbody>
 </table>
+</TabItem>
+
+<TabItem value="bigquery" label="BigQuery" default>
+
+_The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" - first row in the table)_
+
+<table>
+<thead>
+<td>Json Schema</td>
+<td>BigQuery Type</td>
+</thead>
+<tbody>
+<tr>
+<td >
+
+  ```json
+{
+    "type": ["null", T1, ...]
+}
+```
+
+OR
+
+  ```json
+{
+    "enum": ["null", E1, ...]
+}
+```
+
+_`"null"` is not considered for type casting logic. Only for nullability constraint. Type lookup will continue down the table._
+
+
+</td>
+<td>
+
+`NULLABLE`
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "string",
+    "format": "date-time"
+}
+```
+
+</td>
+<td>
+
+`TIMESTAMP`
+
+</td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "string",
+    "format": "date"
+}
+```
+
+</td>
+<td>
+
+`DATE`
+
+</td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "boolean"
+}
+```
+
+</td>
+<td>
+
+`BOOLEAN`
+
+</td>
+</tr>
+<tr>
+<td>
+
+  ```json
+{
+    "type": "string"
+}
+```
+
+</td>
+<td>
+
+`STRING`
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "integer"
+}
+```
+
+</td>
+<td>
+
+`INT`
+
+</td>
+</tr>
+<tr>
+<td>
+
+```json
+{
+    "type": "number"
+}
+```
+
+OR 
+
+```json
+{
+    "type": [ "integer", "number"]
+}
+```
+
+</td>
+<td>
+
+`FLOAT`
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [I1, I2, ...]
+}
+```
+
+- All `Ix` are integer.
+
+</td>
+<td>
+
+`INT`
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [I1, N1, ...]
+}
+```
+
+- All `Ix`, `Nx` are integer or number.
+
+</td>
+<td>
+
+`FLOAT`
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "enum": [A1, A2, ...]
+}
+```
+
+- Any of `Ax`, `Ax` has a type other than integer or number.
+
+</td>
+<td>
+
+`STRING`
+
+</td>
+</tr>
+<tr>
+<td >
+If nothing matches above, this is a catch all. Values will be quoted.`
+</td>
+<td>
+
+`STRING`
+
+</td>
+</tr>
+</tbody>
+</table>
+</TabItem>
+<TabItem value="snowflake" label="Snowflake" default>
+
+- All types are JSON
+
+</TabItem>
+<TabItem value="elastic" label="Elastic" default>
+
+When loading enriched events, the resulting JSONs are like the [Snowplow Canonical Event model](/docs/understanding-your-pipeline/canonical-event/index.md) with the following changes:
+
+### Boolean fields reformatted
+
+All boolean fields like `br_features_java` are either `"0"` or `"1"` in the canonical event model. The JSON converts these values to `false` and `true`.
+
+### New `geo_location` field
+
+The `geo_latitude` and `geo_longitude` fields are combined into a single `geo_location` field of Elasticsearch's ["geo_point" type](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html).
+
+### Unstructured events
+
+Unstructured events are expanded into full JSONs. For example, the event
+
+```json
+{
+    "schema": "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1",
+    "data": {
+        "targetUrl": "http://snowplowanalytics.com/analytics/index.html",
+        "elementId": "action",
+        "elementClasses": [],
+        "elementTarget": ""
+	}
+}
+```
+
+would be converted to the field
+
+```json
+{
+    "unstruct_com_snowplowanalytics_snowplow_link_click_1": {
+        "targetUrl": "http://snowplowanalytics.com/analytics/index.html",
+        "elementId": "action",
+        "elementClasses": [],
+        "elementTarget": ""
+    }
+}
+```
+
+### Custom contexts
+
+Each custom context in an array is similarly expanded to a JSON with its own field. For example, the array
+
+```json
+[
+    {
+        "schema": "iglu:com.acme/contextOne/jsonschema/1-0-0",
+        "data": {
+            "key": "value"
+        }
+    }
+    {
+        "schema": "iglu:com.acme/contextTwo/jsonschema/3-0-0",
+        "data": {
+            "name": "second"
+        }
+    }
+]
+```
+
+would be converted to
+
+```json
+{
+    "contexts_com_acme_context_one_1": {
+        "key": "value"
+    },
+    "contexts_com_acme_context_two_3": {
+        "name": "second"
+    }
+}
+```
+
 </TabItem>
 </Tabs>

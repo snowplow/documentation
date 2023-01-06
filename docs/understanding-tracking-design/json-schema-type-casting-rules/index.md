@@ -41,7 +41,7 @@ OR
 }
 ```
 
-`"null"` is not considered for type casting logic. Only for nullability constraint. Type lookup will continue down the table.
+`"null"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
 
 </td>
 <td>

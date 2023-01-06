@@ -891,7 +891,7 @@ result is `DECIMAL(9,1)`
 
 `DOUBLE`
 
-- `P` &gt;38, where is maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
+- `P` &gt;38, where is the maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 
 <details>
 <summary>The formulas</summary>

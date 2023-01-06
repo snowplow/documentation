@@ -1289,7 +1289,7 @@ OR
 </tr>
 <tr>
 <td >
-If nothing matches above, this is a catch all.`
+If nothing matches above, this is a catch-all.
 </td>
 <td>
 

@@ -72,7 +72,7 @@ For the purposes of this  `number` and `integer` are the same.
 
 `VARCHAR(M)`
 
-- `M` is the maximum size of `json.stringify(E*)`
+`M` is the maximum size of `json.stringify(E*)`
 
 </td>
 </tr>
@@ -498,7 +498,7 @@ _Content is strigified and quoted._
 
 `CHAR(M)`
 
-- `M` is the size of `json.stringify("E1")`
+`M` is the size of `json.stringify("E1")`
 
 </td>
 </tr>
@@ -516,7 +516,7 @@ _Content is strigified and quoted._
 
 `VARCHAR(M)`
 
-- `M` is the maximum size of `json.stringify("E*")`
+`M` is the maximum size of `json.stringify("E*")`
 
 </td>
 </tr>
@@ -531,7 +531,7 @@ If nothing matches above, this is a catch-all.
 `VARCHAR(65535)`
 
 
-_Values will be quoted as in json._
+_Values will be quoted as in JSON._
 
 </td>
 </tr>
@@ -845,11 +845,6 @@ The row order in this table is important.  Type lookup stops after first match i
 }
 ```
 
-</td>
-<td>
-
-`DECIMAL(P,S)`
-
 - `P` &le; 38, where `P` is the maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 - `P` is rounded up to `9`, `18` or `38`, i.e. it can only take one of those 3 values.
 
@@ -873,6 +868,13 @@ result is `DECIMAL(9,1)`
 </details>
 
 </td>
+<td>
+
+`DECIMAL(P,S)`
+
+_`P` could only be 9, 18 or 38_
+
+</td>
 </tr>
 <tr>
 <td>
@@ -885,11 +887,6 @@ result is `DECIMAL(9,1)`
     "multipleOf": F
 }
 ```
-
-</td>
-<td>
-
-`DOUBLE`
 
 - `P` &gt;38, where is the maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 
@@ -904,6 +901,11 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 `P` = `MAX`(6 - 4 + 1, 50 + 1) = 51 &gt;38
 </details>
+
+</td>
+<td>
+
+`DOUBLE`
 
 </td>
 </tr>
@@ -1016,15 +1018,16 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 ```
 
 - **All** `Nx` and `Ix` are of types number or integer.
-- Absolute maximum value of the enum list and less then 1e38.
+- Absolute maximum value of the enum list and less than 1e38.
+- `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
+- `P` is precision (total number of digits in `M`). Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
 
 </td>
 <td>
 
 `DECIMAL(P,S)`
 
-- `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
-- `P` is precision (total number of digits in `M`). Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
+_`P` could only be 9, 18 or 38_
 
 </td>
 </tr>
@@ -1062,7 +1065,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 `STRING`
 
-_Values will be quoted as in json._
+_Values will be quoted as in JSON._
 
 </td>
 </tr>
@@ -1074,7 +1077,7 @@ If nothing matches above, this is a catch all.`
 
 `STRING`
 
-_Values will be quoted as in json._
+_Values will be quoted as in JSON._
 
 </td>
 </tr>
@@ -1281,7 +1284,7 @@ OR
 
 `STRING`
 
-_Values will be quoted as in json._
+_Values will be quoted as in JSON._
 
 </td>
 </tr>
@@ -1293,7 +1296,7 @@ If nothing matches above, this is a catch-all.
 
 `STRING`
 
-_Values will be quoted as in json._
+_Values will be quoted as in JSON._
 
 </td>
 </tr>

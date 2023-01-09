@@ -181,7 +181,7 @@ To track a ScreenViewEvent, use the `trackScreenViewEvent` tracker method. For e
 tracker.trackScreenViewEvent({
     name: 'my-screen-name',
     id: '5d79770b-015b-4af8-8c91-b2ed6faf4b1e',
-    type: 'carousel'
+    type: 'carousel',
     transitionType: 'basic'
 });
 ```
@@ -201,12 +201,12 @@ The tracker will automatically assign references to the previously tracked scree
 - `previousType`: (string) - The type of screen that was viewed (assigned automatically)
 - `transitionType`: (string) - The type of transition that led to the screen being viewed
 
-#### Tracking screen views in React Navigation
+##### Tracking screen views in React Navigation
 
 If you are using the [React Navigation](https://reactnavigation.org/) library for navigation in your app, you can implement automatic screen view tracking by adding a callback to your `NavigationContainer`.
 The steps are explained [in the documentation for React Navigation](https://reactnavigation.org/docs/screen-tracking/).
 
-#### Tracking screen views in React Native Navigation
+##### Tracking screen views in React Native Navigation
 
 When using the [React Native Navigation](https://wix.github.io/react-native-navigation/docs/before-you-start/) library for navigation in your app, you can automatically track screen views by registering a listener when your component appears on screen.
 Use the `Navigation.events().registerComponentDidAppearListener` callback to subscribe the listener and track screen views as [documented here](https://wix.github.io/react-native-navigation/api/events/#componentdidappear).

@@ -247,8 +247,8 @@ These are the fields with which a TransactionItem can be created.
 | `Name`     | Item name                     | No            | \*string               |
 | `Category` | Item category                 | No            | \*string               |
 | `EventId`  | The event ID                  | No            | \*string               |
-| `Contexts` | Custom contexts for the event | No            | []SelfDescribingJson |
-| Subject    | Event specific Subject        | No            | Subject                |
+| `Contexts` | Custom contexts for the event | No            | []SelfDescribingJson   |
+| `Subject`  | Event specific Subject        | No            | Subject                |
 
 Example of tracking a transaction containing two items:
 

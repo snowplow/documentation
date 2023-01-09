@@ -44,7 +44,7 @@ The simplest tracker initialization only requires you to provide the URI of the 
 import storagememory "github.com/snowplow/snowplow-golang-tracker/v3/pkg/storage/memory"
 import sp "github.com/snowplow/snowplow-golang-tracker/v3/tracker"
 
-emitter := sp.InitEmitter(sp.RequireCollectorUri("com.acme"), *sp.RequireStorage(storagememory.Init()))
+emitter := sp.InitEmitter(sp.RequireCollectorUri("com.acme"), sp.RequireStorage(*storagememory.Init()))
 tracker := sp.InitTracker(sp.RequireEmitter(emitter))
 ```
 
@@ -63,7 +63,10 @@ A more complete example:
 
 ```go
 subject := sp.InitSubject()
-emitter := sp.InitEmitter(sp.RequireCollectorUri("com.acme"), *sp.RequireStorage(storagememory.Init())
+emitter := sp.InitEmitter(
+  sp.RequireCollectorUri("com.acme"),
+  sp.RequireStorage(*storagememory.Init()),
+)
 tracker := sp.InitTracker(
   sp.RequireEmitter(emitter),
   sp.OptionSubject(subject),

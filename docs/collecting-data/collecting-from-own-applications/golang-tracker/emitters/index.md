@@ -9,7 +9,7 @@ Tracker instances must be initialized with an emitter. This section will go into
 The simplest Emitter setup requires only the collector URI to be passed to it:
 
 ```go
-emitter := sp.InitEmitter(RequireCollectorUri("com.acme"), *sp.RequireStorage(storagememory.Init()))
+emitter := sp.InitEmitter(RequireCollectorUri("com.acme"), sp.RequireStorage(*storagememory.Init()))
 ```
 
 There are other optional builder functions:
@@ -31,13 +31,13 @@ A more complete example:
 ```go
 emitter := sp.InitEmitter(
   sp.RequireCollectorUri("com.acme"),
-  sp.RequireStorage(*storagememory.Init(),
+  sp.RequireStorage(*storagememory.Init()),
   sp.OptionRequestType("GET"),
   sp.OptionProtocol("https"),
   sp.OptionSendLimit(50),
   sp.OptionByteLimitGet(52000),
   sp.OptionByteLimitPost(52000),
-  sp.OptionCallback(func(g []CallbackResult, b []CallbackResult)) {
+  sp.OptionCallback(func(g []CallbackResult, b []CallbackResult) {
     log.Println("Successes: " + IntToString(len(g)))
     log.Println("Failures: " + IntToString(len(b)))
   }),
@@ -68,13 +68,13 @@ import storagememory "github.com/snowplow/snowplow-golang-tracker/v3/pkg/storage
 
 emitter := sp.InitEmitter(
   sp.RequireCollectorUri("com.acme"),
-  sp.RequireStorage(*storagememory.Init(),
+  sp.RequireStorage(*storagememory.Init()),
   sp.OptionRequestType("GET"),
   sp.OptionProtocol("https"),
   sp.OptionSendLimit(50),
   sp.OptionByteLimitGet(52000),
   sp.OptionByteLimitPost(52000),
-  sp.OptionCallback(func(g []CallbackResult, b []CallbackResult)) {
+  sp.OptionCallback(func(g []CallbackResult, b []CallbackResult) {
     log.Println("Successes: " + IntToString(len(g)))
     log.Println("Failures: " + IntToString(len(b)))
   }),
@@ -88,13 +88,13 @@ import storagesqlite3 "github.com/snowplow/snowplow-golang-tracker/v3/pkg/storag
 
 emitter := sp.InitEmitter(
   sp.RequireCollectorUri("com.acme"),
-  sp.RequireStorage(*storagesqlite3.Init("dbname_path.db"),
+  sp.RequireStorage(*storagesqlite3.Init("dbname_path.db")),
   sp.OptionRequestType("GET"),
   sp.OptionProtocol("https"),
   sp.OptionSendLimit(50),
   sp.OptionByteLimitGet(52000),
   sp.OptionByteLimitPost(52000),
-  sp.OptionCallback(func(g []CallbackResult, b []CallbackResult)) {
+  sp.OptionCallback(func(g []CallbackResult, b []CallbackResult) {
     log.Println("Successes: " + IntToString(len(g)))
     log.Println("Failures: " + IntToString(len(b)))
   }),

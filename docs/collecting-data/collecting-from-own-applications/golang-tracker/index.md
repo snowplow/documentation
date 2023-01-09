@@ -10,11 +10,19 @@ import Block2895 from "@site/docs/reusable/untitled-reusable-block-35/_index.md"
 <Block2895/>
 ```
 
-The Snowplow Golang Tracker allows you to track Snowplow events from your Golang apps and servers.
+```mdx-code-block
+import Badges from '@site/src/components/Badges';
+
+<Badges badgeType="Actively Maintained"></Badges>
+```
+
+The [Snowplow Golang Tracker](https://github.com/snowplow/snowplow-golang-tracker) allows you to track Snowplow events from your Golang apps and servers.
 
 There are four basic types of object you will create when using the Snowplow Golang Tracker: subjects, emitters, storage and trackers.
 
-A subject represents a user whose events are tracked. A tracker constructs events and sends them to an emitter. The emitter then sends the event to the endpoint you configure, a valid Snowplow Collector, and leverages a storage implementation to store them securely before sending to allow for recovery from failure.
+* A subject represents a user whose events are tracked.
+* A tracker constructs events and sends them to an emitter.
+* The emitter then sends the event to the endpoint you configure, a valid Snowplow Collector, which leverages a storage implementation to store them securely before sending to allow for recovery from failure.
 
 :::note
 

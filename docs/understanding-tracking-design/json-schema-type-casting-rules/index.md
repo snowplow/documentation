@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 
 :::note
 
-The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
+The row order in this table is important.  Type lookup stops after the first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
 
 :::
 
@@ -158,7 +158,7 @@ For the purposes of this  `number` and `integer` are the same.
 
 `VARCHAR(65535)`
 
-_Content is strigified and quoted._
+_Content is stringified and quoted._
 
 </td>
 </tr>
@@ -546,7 +546,7 @@ _Values will be quoted as in JSON._
 All fields in databricks are `nullable`. Having `"null"` in the `"type"` or `"enum"` does not affect the warehouse type,
 and is ignored for the purposes of type casting as per the table below.
 
-The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
+The row order in this table is important.  Type lookup stops after the first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
 
 :::
 

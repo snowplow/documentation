@@ -42,7 +42,7 @@ Or when you track an event:
 
 ```go
 tracker.TrackPageView(sp.PageViewEvent{
-  PageUrl: sp.NewString("acme.com"),
+  PageUrl: sphelp.NewString("acme.com"),
   Subject: subject
 })
 ```

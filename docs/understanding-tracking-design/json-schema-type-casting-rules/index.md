@@ -846,7 +846,8 @@ The row order in this table is important.  Type lookup stops after first match i
 ```
 
 - `P` &le; 38, where `P` is the maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
-- `P` is rounded up to `9`, `18` or `38`, i.e. it can only take one of those 3 values.
+- `P` is rounded up to `9`, `18` or `38`.
+- `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
 
 <details>
 <summary>The formulas</summary>
@@ -889,7 +890,8 @@ _`P` could only be 9, 18 or 38_
 ```
 
 - `P` &gt;38, where is the maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
-
+- `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
+ 
 <details>
 <summary>The formulas</summary>
 
@@ -1020,7 +1022,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 - **All** `Nx` and `Ix` are of types number or integer.
 - Absolute maximum value of the enum list and less than 1e38.
 - `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
-- `P` is precision (total number of digits in `M`). Rounded up to `9`, `18` or `38`, e.g. it could only take one of those 3 values.
+- `P` is precision (total number of digits in `M`). Rounded up to `9`, `18` or `38`.
 
 </td>
 <td>

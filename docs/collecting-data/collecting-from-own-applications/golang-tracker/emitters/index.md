@@ -9,7 +9,7 @@ Tracker instances must be initialized with an emitter. This section will go into
 The simplest Emitter setup requires only the collector URI to be passed to it:
 
 ```go
-emitter := sp.InitEmitter(RequireCollectorUri("com.acme"), sp.RequireStorage(storagememory.Init()))
+emitter := sp.InitEmitter(RequireCollectorUri("com.acme"), *sp.RequireStorage(storagememory.Init()))
 ```
 
 There are other optional builder functions:
@@ -17,7 +17,7 @@ There are other optional builder functions:
 | **Function Name** | **Description** | **Required?** | **Default** |
 | --- | --- | --- | --- |
 | `RequireCollectorUri` | The URI to send events to | Yes | `nil` |
-| `RequireStorage` | Use a custom Storage target | Yes | `nil` |
+| `RequireStorage` | The storage integration to use | Yes | `nil` |
 | `OptionRequestType` | The request type to use (GET or POST) | No | `POST` |
 | `OptionProtocol` | The protocol to use (http or https) | No | `http` |
 | `OptionSendLimit` | The maximum amount of events to send at a time | No | `500` |
@@ -31,7 +31,7 @@ A more complete example:
 ```go
 emitter := sp.InitEmitter(
   sp.RequireCollectorUri("com.acme"),
-  sp.RequireStorage(storagememory.Init(),
+  sp.RequireStorage(*storagememory.Init(),
   sp.OptionRequestType("GET"),
   sp.OptionProtocol("https"),
   sp.OptionSendLimit(50),

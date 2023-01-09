@@ -20,4 +20,6 @@ The Snowflake Loader consists of two independent applications:
 
 Both applications communicate through DynamoDB table, called "processing manifest" and used to maintain pipeline state. Both applications use same self-describing JSON configuration file of [schema](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow.storage/snowflake_config/jsonschema/1-0-3) `com.snowplowanalytics.snowplow.storage/snowflake_config/jsonschema/1-0-3`, which contain both transformer- and loader-specific properties.
 
+Type reference for our loaders could be found [here](/docs/understanding-tracking-design/json-schema-type-casting-rules).
+
 The Snowflake loader is publicly available since version 0.3.1.

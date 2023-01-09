@@ -12,6 +12,12 @@ Loading [enriched](/docs/pipeline-components-and-applications/enrichment-compone
 
 Each step is handled by a dedicated application: `transformer` or `loader`. To load Snowplow data with RDB Loader, you'll need to run one of each.
 
+:::tip Schemas in Redshift, Snowflake and Databricks
+
+For more information on how events are stored in the warehouse, check the [mapping between Snowplow schemas and the corresponding warehouse column types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md).
+
+:::
+
 ## How to pick a transformer
 
 The transformer app currently comes in two flavours: a Spark job that processes data in batches, and a long-running streaming app.

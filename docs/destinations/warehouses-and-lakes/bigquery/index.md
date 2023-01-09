@@ -10,6 +10,12 @@ import CodeBlock from '@theme/CodeBlock';
 
 Under the umbrella of Snowplow BigQuery Loader, we have a family of applications that can be used to load enriched Snowplow data into BigQuery.
 
+:::tip Schemas in BigQuery
+
+For more information on how events are stored in BigQuery, check the [mapping between Snowplow schemas and the corresponding BigQuery column types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md).
+
+:::
+
 There are currently four applications, which are described in detail below. A typical deployment would consist of three of them:
 
 - a loader app, which consumes the enriched stream and loads the data into the storage target. This comes in two flavours (Loader and StreamLoader) that are alternatives to each other and should not both be used at the same time.

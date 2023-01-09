@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 
 :::note
 
-The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table)
+The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
 
 :::
 
@@ -546,7 +546,7 @@ _Values will be quoted as in JSON._
 All fields in databricks are `nullable`. Having `"null"` in the `"type"` or `"enum"` does not affect the warehouse type,
 and is ignored for the purposes of type casting as per the table below.
 
-The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table)
+The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
 
 :::
 
@@ -846,11 +846,10 @@ The row order in this table is important.  Type lookup stops after first match i
 ```
 
 - `P` &le; 38, where `P` is the maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
-- `P` is rounded up to `9`, `18` or `38`.
 - `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
 
 <details>
-<summary>The formulas</summary>
+<summary>More details</summary>
 
 `P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
 
@@ -873,7 +872,7 @@ result is `DECIMAL(9,1)`
 
 `DECIMAL(P,S)`
 
-_`P` could only be 9, 18 or 38_
+_`P` is rounded up to either `9`, `18` or `38`._
 
 </td>
 </tr>
@@ -893,7 +892,7 @@ _`P` could only be 9, 18 or 38_
 - `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
  
 <details>
-<summary>The formulas</summary>
+<summary>More details</summary>
 
 `P` = `MAX`(`M.precision` - `M.scale` + `F.scale`,  `N.precision` - `N.scale` + `F.scale`)
 
@@ -961,7 +960,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 - All `Nx` and `Ix` are of types number or integer.
 - Maximum scale (number of digits after the `.`) in the enum list is 0.
-- Maximum absolute value of the enum list is lesser or equal than 2147483647
+- Maximum absolute value of the enum list is lesser or equal than 2147483647.
 
 </td>
 <td>
@@ -981,7 +980,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 - All `Nx` and `Ix` are of types number or integer.
 - Maximum scale (number of digits after the `.`) in the enum list is 0.
-- Maximum absolute value of the enum list is lesser or equal than 9223372036854775807
+- Maximum absolute value of the enum list is lesser or equal than 9223372036854775807.
 
 </td>
 <td>
@@ -1001,7 +1000,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 - All `Nx` and `Ix` are of types number or integer.
 - Maximum scale (number of digits after the `.`) in the enum list is 0.
-- Maximum absolute value of the enum list is greater than 9223372036854775807
+- Maximum absolute value of the enum list is greater than 9223372036854775807.
 
 </td>
 <td>
@@ -1019,7 +1018,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 }
 ```
 
-- **All** `Nx` and `Ix` are of types number or integer.
+- All `Nx` and `Ix` are of types number or integer.
 - Absolute maximum value of the enum list and less than 1e38.
 - `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
 - `P` is precision (total number of digits in `M`). Rounded up to `9`, `18` or `38`.
@@ -1029,7 +1028,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 `DECIMAL(P,S)`
 
-_`P` could only be 9, 18 or 38_
+_`P` is rounded up to either `9`, `18` or `38`._
 
 </td>
 </tr>
@@ -1042,7 +1041,7 @@ _`P` could only be 9, 18 or 38_
 }
 ```
 
-- **All** `Sx` are string
+- All `Sx` are string
 
 </td>
 <td>
@@ -1073,7 +1072,7 @@ _Values will be quoted as in JSON._
 </tr>
 <tr>
 <td>
-If nothing matches above, this is a catch all.`
+If nothing matches above, this is a catch-all.
 </td>
 <td>
 
@@ -1312,17 +1311,17 @@ All types are `JSON`.
 </TabItem>
 <TabItem value="elastic" label="Elastic" default>
 
-When loading enriched events, the resulting JSONs are like the [Snowplow Canonical Event model](/docs/understanding-your-pipeline/canonical-event/index.md) with the following changes:
+When loading enriched events, the resulting JSONs are like the [Snowplow Canonical Event model](/docs/understanding-your-pipeline/canonical-event/index.md) with the following changes.
 
-### Boolean fields reformatted
+#### Boolean fields reformatted
 
 All boolean fields like `br_features_java` are either `"0"` or `"1"` in the canonical event model. The JSON converts these values to `false` and `true`.
 
-### New `geo_location` field
+#### New `geo_location` field
 
 The `geo_latitude` and `geo_longitude` fields are combined into a single `geo_location` field of Elasticsearch's ["geo_point" type](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html).
 
-### Unstructured events
+#### Unstructured events
 
 Unstructured events are expanded into full JSONs. For example, the event
 
@@ -1351,7 +1350,7 @@ would be converted to the field
 }
 ```
 
-### Custom contexts
+#### Custom contexts
 
 Each custom context in an array is similarly expanded to a JSON with its own field. For example, the array
 

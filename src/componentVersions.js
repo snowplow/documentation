@@ -15,5 +15,4 @@ export const versions = {
   rustTracker: '0.2.0',
   gcsLoader: '0.5.4',
   snowplowMini: '0.15.1',
-  golangTracker: '3.0.0',
 }

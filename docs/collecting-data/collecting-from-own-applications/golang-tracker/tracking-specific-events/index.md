@@ -15,7 +15,9 @@ Tracking methods supported by the Golang Tracker at a glance:
 | [`TrackStructEvent()`](#struct-event)           | Track a Snowplow custom structured event               |
 | [`TrackTiming()`](#timing-event)                | Track a timing event                                   |
 
-**NOTE**: All event structs require pointer values as a way of asserting properly whether or not a value has been passed that might have been required. As such there are three functions provided in `helper` package that allow you to inline pointer values:
+:::note
+
+All event structs require pointer values as a way of asserting properly whether or not a value has been passed that might have been required. As such there are three functions provided in `helper` package that allow you to inline pointer values:
 
 - `NewString`
 - `NewInt64`
@@ -28,6 +30,8 @@ To import the helper package:
 ```
 import sphelp "github.com/snowplow/snowplow-golang-tracker/v3/pkg/common"
 ```
+
+:::
 
 ### Common
 

@@ -20,9 +20,9 @@ import sp "github.com/snowplow/snowplow-golang-tracker/v3/tracker"
 
 The package can now be referred to as `sp` rather than `tracker`.
 
-You will also need to import a `storage` implementation for the `emitter` - you can select from two that we have created or implement your own following the defined interface.
+You will also need to import a `storage` implementation for the `emitter` - you can select from two that we have created or implement your own following the supplied interface.
 
-The in-memory or SQLite3 implementations can be pulled from the following packages:
+The `in-memory` or `SQLite3` implementations can be pulled from the following packages:
 
 ```go
 import storagememory "github.com/snowplow/snowplow-golang-tracker/v3/pkg/storage/memory" // Maps to tracker.InitStorageMemory() in v2
@@ -32,7 +32,7 @@ OR
 import storagesqlite3 "github.com/snowplow/snowplow-golang-tracker/v3/pkg/storage/sqlite3" // Maps to tracker.InitStorageSQLite3(<dbname>) in v2
 ```
 
-The `Storage` interface can be found in "github.com/snowplow/snowplow-golang-tracker/v3/pkg/storage/storageiface".
+The `Storage` interface can be found in `github.com/snowplow/snowplow-golang-tracker/v3/pkg/storage/storageiface`.
 
 That's it - you are now ready to initialize a tracker instance.
 

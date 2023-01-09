@@ -126,8 +126,6 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration()
   </TabItem>
 </Tabs>
 
-More details on [Subject](../client-side-properties/index.md)
-
 #### Application context
 
 The [application context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) contains two properties:
@@ -923,7 +921,7 @@ The tracked `DeepLinkReceived` event and each subsequent `ScreenView` event also
 
 Some data, such as that relating to the user whose activity is being tracked, is relevant across all event types. The tracker provides two mechanisms for tracking this kind of data.
 
-Certain properties, including `userId` or `ipAddress`, can be set as "atomic" properties in the raw event, using the `Subject` class.
+Certain properties, including `userId` or `ipAddress`, can be set as "atomic" properties in the raw event, using the [`Subject` class](../client-side-properties/index.md).
 
 A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](../custom-tracking-using-schemas/index.md).
 

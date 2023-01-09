@@ -6,32 +6,22 @@ sidebar_position: 10
 
 ## Tracker compatibility
 
-The Snowplow Golang Tracker has been built and tested using Golang versions 1.9.x, 1.10.x, 1.11.x, 1.12.x and 1.13.x.
+The latest version of the Snowplow Golang Tracker has been built and tested using Golang versions 1.19.x, 1.18.x and 1.17.x.
 
-## 3. Setup
+## Setup
 
-The Tracker is hosted on Github and versions of the Tracker can be fetched using [gopkg](http://labix.org/gopkg.in).
-
-**Note:** As of version 2.2.1 you can also leverage `go modules`.
+The Tracker is hosted on GitHub and versions of the Tracker can be fetched using Golang modules with both `v2` and `v3` available via this method.
 
 To get the package, execute:
 
 ```go
-$host go get gopkg.in/snowplow/snowplow-golang-tracker.v2/tracker
-
-OR
-
-$host go get github.com/snowplow/snowplow-golang-tracker/v2/tracker # When using modules
+$host go get github.com/snowplow/snowplow-golang-tracker/v3/tracker
 ```
 
 To import the package, add the following line to your code:
 
 ```go
-import "gopkg.in/snowplow/snowplow-golang-tracker.v2/tracker"
-
-OR
-
-import "github.com/snowplow/snowplow-golang-tracker/v2/tracker" # When using modules
+import "github.com/snowplow/snowplow-golang-tracker/v3/tracker"
 ```
 
-The current version of the Snowplow Golang Tracker is 2.4.0.
+The current version of the Snowplow Golang Tracker is v3.0.0.

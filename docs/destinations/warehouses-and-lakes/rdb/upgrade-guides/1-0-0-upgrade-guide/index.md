@@ -8,7 +8,7 @@ This is a release adding a new experimental Stream Shredder asset and improving 
 
 [Official announcement.](https://discourse.snowplow.io/t/snowplow-rdb-loader-1-0-0-released/5017)
 
-This is the first release in 1.x branch and no breaking changes will be introduced until 2.x release. If you're upgrading from R34 or earlier it's strictly recommended to follow [R35 Upgrade Guide](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) first.
+This is the first release in 1.x branch and no breaking changes will be introduced until 2.x release. If you're upgrading from R34 or earlier it's strictly recommended to follow [R35 Upgrade Guide](/docs/destinations/warehouses-and-lakes/rdb/upgrade-guides/r35-upgrade-guide/index.md) first.
 
 ## Assets
 

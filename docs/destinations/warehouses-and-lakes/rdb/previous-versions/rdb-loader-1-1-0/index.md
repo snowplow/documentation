@@ -1,7 +1,7 @@
 ---
 title: "RDB Loader 1.1.0"
 date: "2021-06-08"
-sidebar_position: -10
+sidebar_position: 10
 ---
 
 ## 1. Overview

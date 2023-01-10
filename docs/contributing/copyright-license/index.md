@@ -14,9 +14,13 @@ The majority of the Snowplow project is licensed under the [Apache License, Ver
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
+#### Snowbridge
+
+[Snowbridge](https://github.com/snowplow/snowbridge) is distributed under [Snowplow Community License](/community-license-1.0/).
+
 #### Snowplow JavaScript Tracker
 
-The Snowplow JavaScript Tracker mono-repository is distributed under [BSD 3 Clause](https://opensource.org/licenses/BSD-3-Clause). The Snowplow JavaScript Tracker was originally based on Anthon Pang's `piwik.js`, and has maintained the same license for distribution.
+[Snowplow JavaScript Tracker](https://github.com/snowplow/snowplow-javascript-tracker) is distributed under [BSD 3 Clause](https://opensource.org/licenses/BSD-3-Clause). This tracker was originally based on Anthon Pang's `piwik.js`, and has maintained the same license for distribution.
 
 ## Third-party, git-submoduled contributions
 

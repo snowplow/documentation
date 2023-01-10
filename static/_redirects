@@ -82,3 +82,5 @@
 /docs/pipeline-components-and-applications/loaders-storage-targets/events-manifest-populator/* /docs/pipeline-components-and-applications/legacy/events-manifest-populator/:splat 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/* /docs/pipeline-components-and-applications/legacy/emr-etl-runner/:splat 301
 /docs/forwarding-events-to-destinations/ /docs/destinations/ 301
+
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-snowflake-destination/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-destinations/snowflake/ 301

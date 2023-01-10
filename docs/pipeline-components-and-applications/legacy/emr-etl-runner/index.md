@@ -6,7 +6,7 @@ sidebar_position: 9990
 
 :::caution
 
-Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/shredding-overview/index.md). See the [RDB loader R35 upgrade guide](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
+Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/shredding-overview/index.md). See the [RDB loader R35 upgrade guide](/docs/destinations/warehouses-and-lakes/rdb/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
 
 Historically it was also used for enriching data, but that functionality was deprecated even longer ago in favour of the [streaming versions of Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md).
 

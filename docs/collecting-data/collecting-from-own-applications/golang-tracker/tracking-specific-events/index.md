@@ -15,7 +15,9 @@ Tracking methods supported by the Golang Tracker at a glance:
 | [`TrackStructEvent()`](#struct-event)           | Track a Snowplow custom structured event               |
 | [`TrackTiming()`](#timing-event)                | Track a timing event                                   |
 
-**NOTE**: All event structs require pointer values as a way of asserting properly whether or not a value has been passed that might have been required. As such there are three functions provided that allow you to inline pointer values:
+:::note
+
+All event structs require pointer values as a way of asserting properly whether or not a value has been passed that might have been required. As such there are three functions provided in `helper` package that allow you to inline pointer values:
 
 - `NewString`
 - `NewInt64`
@@ -23,9 +25,17 @@ Tracking methods supported by the Golang Tracker at a glance:
 
 These all accept their respective raw value and return a pointer to this value.
 
+To import the helper package:
+
+```
+import sphelp "github.com/snowplow/snowplow-golang-tracker/v3/pkg/common"
+```
+
+:::
+
 ### Common
 
-All events are tracked with specific methods on the tracker instance, of the form `TrackXXX()`, where `XXX` is the name of the event to track.
+All events are tracked with specific methods on the tracker instance, of the form `TrackXXX()`, where `XXX` is the name of the event to track.
 
 ### Custom contexts
 
@@ -54,7 +64,7 @@ This is how to fire a page view event with the above custom context:
 ```go
 tracker.TrackPageView(
   sp.PageViewEvent{
-    PageUrl: sp.NewString("acme.com"),
+    PageUrl: sphelp.NewString("acme.com"),
     Contexts: contextArray,
   },
 )
@@ -64,7 +74,7 @@ Note that even though there is only one custom context attached to the event, it
 
 ### Optional timestamp argument
 
-Each `Track...()` method supports an optional timestamp argument; this allows you to manually override the timestamp attached to this event. The timestamp should be in milliseconds since the Unix epoch.
+Each `Track...()` method supports an optional timestamp argument; this allows you to manually override the timestamp attached to this event. The timestamp should be in milliseconds since the Unix epoch.
 
 If you do not pass this timestamp in as an argument, then the Golang Tracker will use the current time to be the timestamp for the event.
 
@@ -72,37 +82,37 @@ Here is an example tracking a structured event and supplying the optional timest
 
 ```go
 tracker.TrackStructEvent(sp.StructuredEvent{
-  Category: sp.NewString("some category"),
-  Action: sp.NewString("some action"),
-  Timestamp: sp.NewInt64(1368725287000),
+  Category: sphelp.NewString("some category"),
+  Action: sphelp.NewString("some action"),
+  Timestamp: sphelp.NewInt64(1368725287000),
 })
 ```
 
 ### Optional true-timestamp argument
 
-Each `Track...()` method supports an optional true-timestamp argument; this allows you to provide the true-timestamp attached to this event to help with the timing of events in multiple timezones. The timestamp should be in milliseconds since the Unix epoch.
+Each `Track...()` method supports an optional true-timestamp argument; this allows you to provide the true-timestamp attached to this event to help with the timing of events in multiple timezones. The timestamp should be in milliseconds since the Unix epoch.
 
 Here is an example tracking a structured event and supplying the optional true-timestamp argument:
 
 ```go
 tracker.TrackStructEvent(sp.StructuredEvent{
-  Category: sp.NewString("some category"),
-  Action: sp.NewString("some action"),
-  TrueTimestamp: sp.NewInt64(1368725287000),
+  Category: sphelp.NewString("some category"),
+  Action: sphelp.NewString("some action"),
+  TrueTimestamp: sphelp.NewInt64(1368725287000),
 })
 ```
 
 ### Optional event ID argument
 
-Each `Track...()` method supports an optional event id argument; this allows you to manually override the event ID attached to this event. The event ID should be a valid version 4 UUID string.
+Each `Track...()` method supports an optional event id argument; this allows you to manually override the event ID attached to this event. The event ID should be a valid version 4 UUID string.
 
 Here is an example tracking a structured event and supplying the optional event ID argument:
 
 ```go
 tracker.TrackStructEvent(sp.StructuredEvent{
-  Category: sp.NewString("some category"),
-  Action: sp.NewString("some action"),
-  EventId: sp.NewString("486820fb-e722-4311-b33d-d2f319b511f6"),
+  Category: sphelp.NewString("some category"),
+  Action: sphelp.NewString("some action"),
+  EventId: sphelp.NewString("486820fb-e722-4311-b33d-d2f319b511f6"),
 })
 ```
 
@@ -113,18 +123,18 @@ Each `Track...()` method supports an optional Subject argument; this allows you 
 Here is an example of tracking a Page View event and supplying the optional Subject argument:
 
 ```go
-eventSubject := InitSubject()
+eventSubject := sp.InitSubject()
 eventSubject.SetUserId("987654321")
 
-tracker.TrackPageView(PageViewEvent{
-	PageUrl:  NewString("acme.com"),
+tracker.TrackPageView(sp.PageViewEvent{
+	PageUrl:  sphelp.NewString("acme.com"),
 	Subject:  eventSubject,
 })
 ```
 
-### Track SelfDescribing/Unstructured events with `TrackSelfDescribingEvent()`
+### Track SelfDescribing/Unstructured events with `TrackSelfDescribingEvent()`
 
-Use `TrackSelfDescribingEvent()` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
+Use `TrackSelfDescribingEvent()` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
 
 - You want to track event types which are proprietary/specific to your business (i.e. not already part of Snowplow), or
 - You want to track events which have unpredictable or frequently changing properties
@@ -137,9 +147,8 @@ The arguments are as follows:
 | `Timestamp`     | When the event occurred     | No            | \*int64              |
 | `EventId`       | The event ID                | No            | \*string             |
 | `TrueTimestamp` | The true time of event      | No            | \*int64              |
-| `Contexts` | Custom contexts for the event | No | []SelfDescribingJson  
- |
-| Subject | Event specific Subject | No | Subject |
+| `Contexts`      | Custom contexts for the event | No          | []SelfDescribingJson |
+| `Subject`       | Event specific Subject      | No            | Subject              |
 
 Example:
 
@@ -159,11 +168,11 @@ tracker.TrackSelfDescribingEvent(sp.SelfDescribingEvent{
 })
 ```
 
-For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
+For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
 
-### Track screen views with `TrackScreenView()`
+### Track screen views with `TrackScreenView()`
 
-Use `TrackScreenView()` to track a user viewing a screen (or equivalent) within your app:
+Use `TrackScreenView()` to track a user viewing a screen (or equivalent) within your app:
 
 | **Argument**    | **Description**                     | **Required?** | **Type**               |
 |-----------------|-------------------------------------|---------------|------------------------|
@@ -172,8 +181,8 @@ Use `TrackScreenView()` to track a user viewing a screen (or equivalent) withi
 | `Timestamp`     | When the event occurred             | No            | \*int64                |
 | `EventId`       | The event ID                        | No            | \*string               |
 | `TrueTimestamp` | The true time of event              | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event       | No            | []SelfDescribingJson |
-| Subject         | Event specific Subject              | No            | Subject                |
+| `Contexts`      | Custom contexts for the event       | No            | []SelfDescribingJson   |
+| `Subject`       | Event specific Subject              | No            | Subject                |
 
 Although name and id are not individually required, at least one must be provided or the event will fail validation.
 
@@ -181,13 +190,13 @@ Example:
 
 ```go
 tracker.TrackScreenView(sp.ScreenViewEvent{
-  Id: sp.NewString("Screen ID"),
+  Id: sphelp.NewString("Screen ID"),
 })
 ```
 
-### Track pageviews with `TrackPageView()`
+### Track pageviews with `TrackPageView()`
 
-Use `TrackPageView()` to track a user viewing a page within your app:
+Use `TrackPageView()` to track a user viewing a page within your app:
 
 | **Argument**    | **Description**                      | **Required?** | **Validation**         |
 |-----------------|--------------------------------------|---------------|------------------------|
@@ -197,20 +206,20 @@ Use `TrackPageView()` to track a user viewing a page within your app:
 | `Timestamp`     | When the event occurred              | No            | \*int64                |
 | `EventId`       | The event ID                         | No            | \*string               |
 | `TrueTimestamp` | The true time of event               | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event        | No            | []SelfDescribingJson |
-| Subject         | Event specific Subject               | No            | Subject                |
+| `Contexts`      | Custom contexts for the event        | No            | []SelfDescribingJson   |
+| `Subject`       | Event specific Subject               | No            | Subject                |
 
 Example:
 
 ```go
 tracker.TrackPageView(sp.PageViewEvent{
-  PageUrl: sp.NewString("acme.com"),
+  PageUrl: sphelp.NewString("acme.com"),
 })
 ```
 
-### Track ecommerce transactions with `TrackEcommerceTransaction()`
+### Track ecommerce transactions with `TrackEcommerceTransaction()`
 
-Use `TrackEcommerceTransaction()` to track an ecommerce transaction:
+Use `TrackEcommerceTransaction()` to track an ecommerce transaction:
 
 | **Argument**    | **Description**                 | **Required?** | **Validation**                    |
 |-----------------|---------------------------------|---------------|-----------------------------------|
@@ -223,14 +232,14 @@ Use `TrackEcommerceTransaction()` to track an ecommerce transaction:
 | `State`         | Delivery address state          | No            | \*string                          |
 | `Country`       | Delivery address country        | No            | \*string                          |
 | `Currency`      | Transaction currency            | No            | \*string                          |
-| `Items`         | Items in the transaction        | Yes           | []EcommerceTransactionItemEvent |
+| `Items`         | Items in the transaction        | Yes           | []EcommerceTransactionItemEvent   |
 | `Timestamp`     | When the event occurred         | No            | \*int64                           |
 | `EventId`       | The event ID                    | No            | \*string                          |
 | `TrueTimestamp` | The true time of event          | No            | \*int64                           |
-| `Contexts`      | Custom contexts for the event   | No            | []SelfDescribingJson            |
-| Subject         | Event specific Subject          | No            | Subject                           |
+| `Contexts`      | Custom contexts for the event   | No            | []SelfDescribingJson              |
+| `Subject`       | Event specific Subject          | No            | Subject                           |
 
-The `items` argument is an Array of TransactionItems. `TrackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `Items` list. Each transaction item event will have the same timestamp, true timestamp, order ID, and currency as the main transaction event.
+The `items` argument is an Array of TransactionItems. `TrackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `Items` list. Each transaction item event will have the same timestamp, true timestamp, order ID, and currency as the main transaction event.
 
 These are the fields with which a TransactionItem can be created.
 
@@ -242,48 +251,48 @@ These are the fields with which a TransactionItem can be created.
 | `Name`     | Item name                     | No            | \*string               |
 | `Category` | Item category                 | No            | \*string               |
 | `EventId`  | The event ID                  | No            | \*string               |
-| `Contexts` | Custom contexts for the event | No            | []SelfDescribingJson |
-| Subject    | Event specific Subject        | No            | Subject                |
+| `Contexts` | Custom contexts for the event | No            | []SelfDescribingJson   |
+| `Subject`  | Event specific Subject        | No            | Subject                |
 
 Example of tracking a transaction containing two items:
 
 ```go
 items := []sp.EcommerceTransactionItemEvent{
   sp.EcommerceTransactionItemEvent{
-    Sku: sp.NewString("pbz0026"),
-    Price: sp.NewFloat64(20),
-    Quantity: sp.NewInt64(1),
+    Sku: sphelp.NewString("pbz0026"),
+    Price: sphelp.NewFloat64(20),
+    Quantity: sphelp.NewInt64(1),
   },
   sp.EcommerceTransactionItemEvent{
-    Sku: sp.NewString("pbz0038"),
-    Price: sp.NewFloat64(15),
-    Quantity: sp.NewInt64(1),
-    Name: sp.NewString("red hat"),
-    Category: sp.NewString("menswear"),
+    Sku: sphelp.NewString("pbz0038"),
+    Price: sphelp.NewFloat64(15),
+    Quantity: sphelp.NewInt64(1),
+    Name: sphelp.NewString("red hat"),
+    Category: sphelp.NewString("menswear"),
   },
 }
 
 tracker.TrackEcommerceTransaction(sp.EcommerceTransactionEvent{
-  OrderId: sp.NewString("6a8078be"),
-  TotalValue: sp.NewFloat64(35),
-  Affiliation: sp.NewString("some-affiliation"),
-  TaxValue: sp.NewFloat64(6.12),
-  Shipping: sp.NewFloat64(30),
-  City: sp.NewString("Dijon"),
-  State: sp.NewString("Bourgogne"),
-  Country: sp.NewString("France"),
-  Currency: sp.NewString("EUR"),
+  OrderId: sphelp.NewString("6a8078be"),
+  TotalValue: sphelp.NewFloat64(35),
+  Affiliation: sphelp.NewString("some-affiliation"),
+  TaxValue: sphelp.NewFloat64(6.12),
+  Shipping: sphelp.NewFloat64(30),
+  City: sphelp.NewString("Dijon"),
+  State: sphelp.NewString("Bourgogne"),
+  Country: sphelp.NewString("France"),
+  Currency: sphelp.NewString("EUR"),
   Items: items,
 })
 ```
 
-### Track structured events with `TrackStructEvent()`
+### Track structured events with `TrackStructEvent()`
 
-Use `TrackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
+Use `TrackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
 | **Argument**    | **Description**                                                  | **Required?** | **Validation**         |
 |-----------------|------------------------------------------------------------------|---------------|------------------------|
-| `Category`      | The grouping of structured events which this `action` belongs to | Yes           | \*string               |
+| `Category`      | The grouping of structured events which this `action` belongs to | Yes           | \*string               |
 | `Action`        | Defines the type of user interaction which this event involves   | Yes           | \*string               |
 | `Label`         | A string to provide additional dimensions to the event data      | No            | \*string               |
 | `Property`      | A string describing the object or the action performed on it     | No            | \*string               |
@@ -291,23 +300,23 @@ Use `TrackStructEvent()` to track a custom event happening in your app which f
 | `Timestamp`     | When the event occurred                                          | No            | \*int64                |
 | `EventId`       | The event ID                                                     | No            | \*string               |
 | `TrueTimestamp` | The true time of event                                           | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event                                    | No            | []SelfDescribingJson |
-| Subject         | Event specific Subject                                           | No            | Subject                |
+| `Contexts`      | Custom contexts for the event                                    | No            | []SelfDescribingJson   |
+| `Subject`       | Event specific Subject                                           | No            | Subject                |
 
 Example:
 
 ```go
 tracker.TrackStructEvent(sp.StructuredEvent{
-  Category: sp.NewString("shop"),
-  Action: sp.NewString("add-to-basket"),
-  Property: sp.NewString("pcs"),
-  Value: sp.NewFloat64(2),
+  Category: sphelp.NewString("shop"),
+  Action: sphelp.NewString("add-to-basket"),
+  Property: sphelp.NewString("pcs"),
+  Value: sphelp.NewFloat64(2),
 })
 ```
 
-### Track timing events with `TrackTiming()`
+### Track timing events with `TrackTiming()`
 
-Use `TrackTiming()` to track a timing event.
+Use `TrackTiming()` to track a timing event.
 
 The arguments are as follows:
 
@@ -320,15 +329,15 @@ The arguments are as follows:
 | `Timestamp`     | When the event occurred       | No            | \*int64                |
 | `EventId`       | The event ID                  | No            | \*string               |
 | `TrueTimestamp` | The true time of event        | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event | No            | []SelfDescribingJson |
-| Subject         | Event specific Subject        | No            | Subject                |
+| `Contexts`      | Custom contexts for the event | No            | []SelfDescribingJson   |
+| `Subject`       | Event specific Subject        | No            | Subject                |
 
 Example:
 
 ```go
 tracker.TrackTiming(sp.TimingEvent{
-  Category: sp.NewString("Timing Category"),
-  Variable: sp.NewString("Some var"),
-  Timing: sp.NewInt64(124578),
+  Category: sphelp.NewString("Timing Category"),
+  Variable: sphelp.NewString("Some var"),
+  Timing: sphelp.NewInt64(124578),
 })
 ```

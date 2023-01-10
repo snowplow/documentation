@@ -25,16 +25,19 @@ StructuredEvent se("category", "action");
 se.set_subject(subject);
 ```
 
-The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events:
+The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events.
+The below table maps the setter functions to the event properties that they affect.
 
-- `set_user_id`
-- `set_screen_resolution`
-- `set_viewport`
-- `set_color_depth`
-- `set_timezone`
-- `set_language`
-- `set_useragent`
-- `set_ip_address`
+| Setter method | Resulting event property |
+| --- | --- |
+| `set_user_id` | `user_id` |
+| `set_screen_resolution` | `dvce_screenwidth` and `dvce_screenheight` |
+| `set_viewport` | `br_viewwidth` and `br_viewheight` |
+| `set_color_depth` | `br_colordepth` |
+| `set_timezone` | `os_timezone` |
+| ``set_language` | `br_lang` |
+| `set_useragent` | `useragent` |
+| `set_ip_address` | `user_ipaddress` |
 
 We will discuss each of these in turn below:
 

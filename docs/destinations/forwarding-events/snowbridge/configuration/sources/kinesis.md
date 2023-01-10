@@ -1,5 +1,11 @@
 # Kinesis Source
 
+:::note
+
+To use this source, you need the AWS-specific version of Snowbridge that can only be run on AWS. See [the page on Snowbridge distributions](/docs/destinations/forwarding-events/snowbridge/getting-started/distribution-and-deployment.md) for more information.
+
+:::
+
 ## Authentication
 
 Authentication is done via the [AWS authentication environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html). Optionally, you can use the `role_arn` option to specify an ARN to use on the stream.

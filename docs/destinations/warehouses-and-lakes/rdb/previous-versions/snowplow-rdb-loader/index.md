@@ -1,7 +1,7 @@
 ---
 title: "RDB Loader 2.x.x"
 date: "2020-03-05"
-sidebar_position: 200
+sidebar_position: 0
 ---
 
 RDB (Relational Database) Loader is a pair of applications that work in tandem to load Snowplow events into a Redshift cluster.

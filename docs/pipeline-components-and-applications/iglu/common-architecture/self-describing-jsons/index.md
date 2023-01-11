@@ -53,10 +53,8 @@ Notice the two main differences compared to our original JSON:
 
 1. There is a new `schema` field located at the root of the JSON which contains (in a space-efficient format) all the information required to uniquely identify the associated JSON Schema. The schema's URI follows the following pattern:
 
-![](images/iglu-schema-key.png)
+    ![](images/iglu-schema-key.png)
 
 1. The data contained in the original JSON has been encapsulated in a `data` field to prevent any accidental collisions should the JSON already have a `schema` field
 
 This way, our JSON becomes de facto self-describing, embedding a link to its JSON Schema.
-
-Back to [Common architecture](/docs/pipeline-components-and-applications/iglu/common-architecture/index.md).

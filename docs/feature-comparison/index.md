@@ -16,7 +16,7 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | Advanced stream transformations (JS, API, SQL enrichments) | ✅ | ❌ | ✅ |
 | [Out-of-the-box data models](/docs/modeling-your-data/what-is-data-modeling/index.md)  | ✅ | ✅ | ✅ |
 | [Data Product Accelerators](https://snowplow.io/data-product-accelerators/) | ✅ | ✅ | ✅ |
-| [Destinations hub](https://snowplow.io/destination-hub/) | ❌ | ❌ | ✅ |
+| [Destinations hub](https://snowplow.io/destination-hub/) | do-it-yourself | ❌ | ✅ |
 | **Warehouse / lake destinations** | | | |
 | • Snowflake | ✅ | ✅ | ✅ |
 | • Redshift | ✅ | _coming soon_ | ✅ |
@@ -29,8 +29,8 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | **Real-time streams** | | | |
 | • Kinesis | ✅ | ❌ | ✅ |
 | • Pubsub | ✅ | ❌ | ✅ |
-| • Kafka | ❌ | ❌ | bolt-on |
-| • Azure Eventhubs | ❌ | ❌ | bolt-on |
+| • Kafka | do-it-yourself | ❌ | bolt-on |
+| • Azure Eventhubs | do-it-yourself | ❌ | bolt-on |
 | <h3>Build more trust in your data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
 | [Failed Events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md) | ✅ | ❌ | ✅ |
 | [Data quality monitoring & API](/docs/managing-data-quality/failed-events/failed-events-in-the-ui/index.md) | ❌ | ❌ | ✅ |

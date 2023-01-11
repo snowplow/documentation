@@ -31,6 +31,10 @@ async function createConfig() {
       require.resolve('./snowplow.js'),
       require.resolve('./google.js'),
     ],
+    
+    themes : [
+      '@saucelabs/theme-github-codeblock'
+    ],
 
     presets: [
       [
@@ -129,7 +133,9 @@ async function createConfig() {
             'dart',
             'docker',
             'gradle',
+            'hcl',
             'java',
+            'lua',
             'php',
             'properties',
             'r',

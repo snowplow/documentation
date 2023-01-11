@@ -1,7 +1,7 @@
 ---
 title: "Elasticsearch Loader"
 date: "2020-11-25"
-sidebar_position: 600
+sidebar_position: 50
 ---
 
 If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.

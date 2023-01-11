@@ -115,7 +115,8 @@ Once you have cloned the `quickstart-examples` repository, you will need to navi
 ```bash
 git clone https://github.com/snowplow/quickstart-examples.git
 cd quickstart-examples/terraform/gcp/pipeline/default #or secure
-nano terraform.tfvars #or other text editor of your choosing
+nano bigquery.terraform.tfvars #or other text editor of your choosing
+nano postgres.terraform.tfvars #or other text editor of your choosing
 ```
 
 To update your input variables, you'll need to know a couple of things:
@@ -136,10 +137,10 @@ You can now use terraform to create your Pipeline stack.
 
 ```bash
 terraform init
-terraform plan
-terraform apply
+terraform plan -var-file=postgres.terraform.tfvars -var-file=bigquery.terraform.tfvars
+terraform apply -var-file=postgres.terraform.tfvars -var-file=bigquery.terraform.tfvars
 ```
 
-This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.
+This will output your `collector_ip_address`, `bigquery_db_dataset_id`, `bq_loader_bad_rows_topic_name`, `bq_loader_dead_letter_bucket_name`, `postgres_db_ip_address`, and `postgres_db_port`. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_ip_address` as you will use your own DNS record to send events from the Snowplow trackers.
 
 Now let's [send some events](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/sending-test-events/index.md) to your pipeline!

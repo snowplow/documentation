@@ -10,7 +10,7 @@ Authentication is done using a [GCP Service Account](https://cloud.google.com/do
 The PubSub Target has only two required options, and no optional ones.
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/targets/pubsub-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/pubsub-full-example.hcl
 ```
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.

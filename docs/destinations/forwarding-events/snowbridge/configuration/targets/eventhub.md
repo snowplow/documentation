@@ -9,14 +9,14 @@ Authentication for the EventHub target is done by configuring any valid combinat
 Here is an example of the minimum required configuration:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/targets/eventhub-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/eventhub-minimal-example.hcl
 ```
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.
 Here is an example of every configuration option:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/targets/eventhub-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/eventhub-full-example.hcl
 ```
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.

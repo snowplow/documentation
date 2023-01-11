@@ -29,7 +29,7 @@ Example:
 The below first filters out any `event_name` which does not match the regex `^page_view$`, then runs a custom javascript script to change the app_id value to `"1"`
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/transformations-overview-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/transformations-overview-example.hcl
 ```
 
 ```mdx-code-block

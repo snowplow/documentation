@@ -7,7 +7,7 @@
 Example:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/snowplow-builtin/spEnrichedSetPk-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedSetPk-minimal-example.hcl
 ```
 
 Note: currently, setting partition key to fields in custom events and contexts is unsupported.

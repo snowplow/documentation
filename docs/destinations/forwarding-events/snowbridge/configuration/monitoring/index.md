@@ -15,16 +15,16 @@ Snowbridge comes with configurable logging, [pprof](https://github.com/google/pp
 Use the log_level parameter to specify the log level.
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/monitoring/log-level-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/log-level-example.hcl
 ```
 
 ### Sentry Configuration
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/monitoring/sentry-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/sentry-example.hcl
 ```
 ### StatsD stats reciever 
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/monitoring/statsd-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/statsd-example.hcl
 ```

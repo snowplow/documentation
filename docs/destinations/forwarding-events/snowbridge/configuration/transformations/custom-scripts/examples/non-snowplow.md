@@ -21,14 +21,14 @@ The script filters out any data with a `batmobileCount` less than 1, otherwise i
   <TabItem value="js" label="Javascript" default>
 
 ```js reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/custom-scripts/examples/js-non-snowplow-script-example.js
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/examples/js-non-snowplow-script-example.js
 ```
 
   </TabItem>
   <TabItem value="lua" label="Lua">
 
 ```lua reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/custom-scripts/examples/lua-non-snowplow-script-example.lua
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/examples/lua-script-example.lua
 ```
 
   </TabItem>
@@ -40,14 +40,14 @@ The configuration for this script is:
   <TabItem value="js" label="Javascript" default>
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/custom-scripts/examples/js-non-snowplow-config-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/examples/js-non-snowplow-config-example.hcl
 ```
 
   </TabItem>
   <TabItem value="lua" label="Lua">
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/custom-scripts/examples/lua-non-snowplow-config-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/examples/lua-config-example.hcl
 ```
 
   </TabItem>

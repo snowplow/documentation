@@ -19,11 +19,11 @@ Scripts must be available to the runtime of the application at the path provided
 Here is an example of a minimal configuration for the custom Javascript script transformation:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/custom-scripts/js-configuration-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/js-configuration-minimal-example.hcl
 ```
 
 Here is an example of every configuration option:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/custom-scripts/js-configuration-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/js-configuration-full-example.hcl
 ```

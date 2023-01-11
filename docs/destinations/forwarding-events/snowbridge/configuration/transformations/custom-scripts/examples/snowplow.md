@@ -7,11 +7,11 @@ The script below filters out non-web data, based on the `platform` value, otherw
 It also sets the partitionKey to `app_id`.
 
 ```js reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/custom-scripts/examples/js-snowplow-script-example.js
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/examples/js-snowplow-script-example.js
 ```     
 
 The configuration for this script is:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/custom-scripts/examples/js-snowplow-config-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/examples/js-snowplow-config-example.hcl
 ```

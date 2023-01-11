@@ -17,11 +17,11 @@ The below example keeps messages which contain `prod` in the `environment` field
 Minimal configuration:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-minimal-example.hcl
 ```
 
 Every configuration option:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-full-example.hcl
 ```

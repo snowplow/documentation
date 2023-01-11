@@ -13,14 +13,14 @@ TLS may be configured by providing the `key_file`, `cert_file` and `ca_file` opt
 Here is an example of the minimum required configuration:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/targets/http-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/http-minimal-example.hcl
 ```
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.
 Here is an example of every configuration option:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/targets/http-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/http-full-example.hcl
 ```
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.

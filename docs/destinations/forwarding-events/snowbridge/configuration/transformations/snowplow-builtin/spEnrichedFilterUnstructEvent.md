@@ -17,13 +17,13 @@ This example keeps all events whose `add_to_cart` event data at the `sku` field 
 Minimal configuration:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-minimal-example.hcl
 ```
 
 Every configuration option:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-full-example.hcl
 ```
 
 

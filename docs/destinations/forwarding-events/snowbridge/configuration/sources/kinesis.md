@@ -32,11 +32,11 @@ Assuming your AWS credentials have sufficient permission for Kinesis and DynamoD
 Here is an example of the minimum required configuration:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/sources/kinesis-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/sources/kinesis-minimal-example.hcl
 ```
 
 Here is an example of every configuration option:
 
 ```hcl reference
-https://github.com/snowplow-incubator/stream-replicator-examples-temp/blob/main/docs/docs/documentation-examples/configuration/sources/kinesis-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/sources/kinesis-full-example.hcl
 ```

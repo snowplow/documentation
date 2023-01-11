@@ -8,7 +8,7 @@ sidebar_position: 100
 
 The fastest way to get started and experiment with Snowbridge is to run it via the command line:
 
-1. Download the pre-compiled ZIP from the [releases](https://github.com/snowplow-devops/snowbridge/releases/)
+1. Download the pre-compiled ZIP from the [releases](https://github.com/snowplow/snowbridge/releases/)
 2. Unzip and run the binary with eg. `echo "hello world" | ./snowbridge`
 
 The defaults for the app are stdin source, no transformations, and stdout target - so this should print the message 'hello world' along with some logging data to the console.

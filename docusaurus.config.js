@@ -139,6 +139,8 @@ async function createConfig() {
             'brightscript',
             'rust',
             'toml',
+            'django',
+            'yaml',
           ],
         },
         algolia: {

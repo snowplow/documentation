@@ -13,8 +13,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 The following resources need to be created:
 
-- [AWS instance profile](https://docs.databricks.com/administration-guide/cloud-configurations/aws/instance-profiles.html) for giving permission to Databricks cluster to access S3 buckets securely
-- [Databricks cluster](https://docs.databricks.com/administration-guide/cloud-configurations/aws/instance-profiles.html#step-5-add-the-instance-profile-to-databricks) configured with the instance profile created above
+- [Databricks cluster](https://docs.databricks.com/clusters/create-cluster.html)
 - [Databricks access token](https://docs.databricks.com/dev-tools/api/latest/authentication.html)
 
 Also, `events` table needs to be created before starting the application for the first time:
@@ -32,7 +31,7 @@ Also, `events` table needs to be created before starting the application for the
   dvce_created_tstamp         TIMESTAMP,
   -- Event
   event                       VARCHAR(128),
-  event_id                    CHAR(36)        NOT NULL,
+  event_id                    VARCHAR(36)     NOT NULL,
   txn_id                      INTEGER,
   -- Namespacing and versioning
   name_tracker                VARCHAR(128),
@@ -47,8 +46,8 @@ Also, `events` table needs to be created before starting the application for the
   domain_sessionidx           SMALLINT,
   network_userid              VARCHAR(128),
   -- Location
-  geo_country                 CHAR(2),
-  geo_region                  CHAR(3),
+  geo_country                 VARCHAR(2),
+  geo_region                  VARCHAR(3),
   geo_city                    VARCHAR(75),
   geo_zipcode                 VARCHAR(15),
   geo_latitude                DOUBLE,
@@ -150,13 +149,13 @@ Also, `events` table needs to be created before starting the application for the
   doc_width                   INTEGER,
   doc_height                  INTEGER,
   -- Currency
-  tr_currency                 CHAR(3),
+  tr_currency                 VARCHAR(3),
   tr_total_base               DECIMAL(18, 2),
   tr_tax_base                 DECIMAL(18, 2),
   tr_shipping_base            DECIMAL(18, 2),
-  ti_currency                 CHAR(3),
+  ti_currency                 VARCHAR(3),
   ti_price_base               DECIMAL(18, 2),
-  base_currency               CHAR(3),
+  base_currency               VARCHAR(3),
   -- Geolocation
   geo_timezone                VARCHAR(64),
   -- Click ID

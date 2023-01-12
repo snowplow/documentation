@@ -113,7 +113,7 @@ The JavaScript enrichment in Snowplow is executed using Nashorn. This provides m
 
 ## Do's and Don'ts
 
-Manipulating your event stream with Javascript is bother powerful and can be dangerous.
+Manipulating your event stream with Javascript is powerful but can be dangerous.
 
 ### Do:
 

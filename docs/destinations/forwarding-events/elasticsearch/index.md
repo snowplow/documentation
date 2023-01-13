@@ -4,6 +4,11 @@ date: "2020-11-25"
 sidebar_position: 600
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
 
 :::tip Schemas in ElasticSearch
@@ -24,24 +29,24 @@ First off, install and set up Elasticsearch version 7.x or 6.x. For more informa
 
 Elasticsearch keeps a lot of files open simultaneously so you will need to increase the maximum number of files a user can have open. To do this:
 
-```bash
-sudo vim /etc/security/limits.conf
-```
+<CodeBlock language="bash">{
+`sudo vim /etc/security/limits.conf
+`}</CodeBlock>
 
 Append the following lines to the file:
 
-```bash
-{{USERNAME}} soft nofile 32000
+<CodeBlock language="bash">{
+`{{USERNAME}} soft nofile 32000
 {{USERNAME}} hard nofile 32000
-```
+`}</CodeBlock>
 
 Where {{USERNAME}} is the name of the user running Elasticsearch. You will need to logout and restart Elasticsearch before the new file limit takes effect.
 
 To check that this new limit has taken effect you can run the following command from the terminal:
 
-```bash
-curl localhost:9200/_nodes/process?pretty
-```
+<CodeBlock language="bash">{
+`curl localhost:9200/_nodes/process?pretty
+`}</CodeBlock>
 
 If the `max_file_descriptors` equals 32000 it is running with the new limit.
 
@@ -49,8 +54,8 @@ If the `max_file_descriptors` equals 32000 it is running with the new limit.
 
 Use the following request to create the mapping with Elasticsearch 7.x:
 
-```bash
-curl -XPUT 'http://localhost:9200/snowplow' -d '{
+<CodeBlock language="bash">{
+`curl -XPUT 'http://localhost:9200/snowplow' -d '{
     "settings": {
         "analysis": {
             "analyzer": {
@@ -68,7 +73,7 @@ curl -XPUT 'http://localhost:9200/snowplow' -d '{
         }
     }
 }'
-```
+`}</CodeBlock>
 
 Note that [mapping types are removed](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html) starting from Elasticsearch 7.0.0. If you use any older version, you might need to include mapping type also.
 
@@ -76,8 +81,8 @@ This initialization sets the default analyzer to "keyword". This means that stri
 
 If you want to tokenize specific string fields, you can change the "properties" field in the mapping like this:
 
-```bash
-curl -XPUT 'http://localhost:9200/snowplow' -d '{
+<CodeBlock language="bash">{
+`curl -XPUT 'http://localhost:9200/snowplow' -d '{
     "settings": {
         "analysis": {
             "analyzer": {
@@ -99,30 +104,30 @@ curl -XPUT 'http://localhost:9200/snowplow' -d '{
         }
     }
 }'
-```
+`}</CodeBlock>
 
 ### Installing the Elasticsearch Loader
 
 The Elasticsearch Loader is published on Docker Hub:
 
-```bash
-docker pull snowplow/snowplow-elasticsearch-loader:2.0.7
-```
+<CodeBlock language="bash">{
+`docker pull snowplow/snowplow-elasticsearch-loader:${versions.esLoader}
+`}</CodeBlock>
 
 The container can be run with the following command:
 
-```bash
-docker run \
-  -v /path/to/config.hocon:/snowplow/config.hocon \
-  snowplow/snowplow-elasticsearch-loader:2.0.7 \
+<CodeBlock language="bash">{
+`docker run \\
+  -v /path/to/config.hocon:/snowplow/config.hocon \\
+  snowplow/snowplow-elasticsearch-loader:${versions.esLoader} \\
   --config /snowplow/config.hocon
-```
+`}</CodeBlock>
 
 Alternatively you can download and run a [jar file from the github release](https://github.com/snowplow/snowplow-elasticsearch-loader/releases):
 
-```bash
-java -jar snowplow-elasticsearch-loader-2.0.7.jar --config /path/to/config.hocon
-```
+<CodeBlock language="bash">{
+`java -jar snowplow-elasticsearch-loader-${versions.esLoader}.jar --config /path/to/config.hocon
+`}</CodeBlock>
 
 ### Using the Elasticsearch Loader
 

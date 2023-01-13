@@ -25,7 +25,7 @@ Available events are:
 ### Compatibility
 
 - The support of the latest version of Sendgrid webhook has been introduced in [Snowplow R114 Polonnaruwa](https://github.com/snowplow/snowplow/releases/tag/r114-polonnaruwa)
-- [SendGrid webhook API](https://sendgrid.com/docs/API_Reference/Webhooks/index.html)
+- [SendGrid webhook API](https://docs.sendgrid.com/for-developers/tracking-events/event)
 
 ## Setup
 

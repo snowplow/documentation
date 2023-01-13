@@ -71,10 +71,19 @@ models:
     optional_modules:
       consent:
         enabled: true
-        bigquery:
-          enabled: "{{ target.type == 'bigquery' | as_bool() }}"
-        snowflake:
-          enabled: "{{ target.type == 'snowflake' | as_bool() }}"
+        +schema: "derived"
+        +tags: ["snowplow_web_incremental", "derived"]
+        scratch:
+          +schema: "scratch"
+          +tags: "scratch"
+          bigquery:
+            enabled: "{{ target.type == 'bigquery' | as_bool() }}"
+          databricks:
+            enabled: "{{ target.type in ['databricks', 'spark'] | as_bool() }}"
+          default:
+            enabled: "{{ target.type in ['redshift', 'postgres'] | as_bool() }}"
+          snowflake:
+            enabled: "{{ target.type == 'snowflake' | as_bool() }}"
 ```
 
 ####  Run the module

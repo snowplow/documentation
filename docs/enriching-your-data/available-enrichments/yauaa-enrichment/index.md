@@ -8,7 +8,11 @@ YAUAA (Yet Another User Agent Analyzer) enrichment is a powerful user agent pars
 
 It uses [YAUAA API](https://yauaa.basjes.nl/) to parse and analyze all user agent information of an HTTP request and extract as many relevant information as possible about the user's device and browser, like for instance the device class (Phone, Tablet, etc.).
 
-<table class="has-fixed-layout"><tbody><tr><td class="has-text-align-center" data-align="center"><strong>YAUAA parsing relies entirely on in-memory <em>HashMap</em>s and require roughly 400 MB of RAM (see </strong><a href="https://yauaa.basjes.nl/README-MemoryUsage.html">here</a><strong>). Additional memory is also needed if caching is enabled (by default).</strong></td></tr></tbody></table>
+:::caution
+
+YAUAA parsing relies entirely on in-memory _HashMaps_ and requires roughly 400 MB of RAM (see [here](https://yauaa.basjes.nl/README-MemoryUsage.html)). Additional memory is also needed if caching is enabled (by default).
+
+:::
 
 There is no interaction with an external system.
 
@@ -21,14 +25,14 @@ The YAUAA enrichment does not require you to make any changes to your website, i
 There are two ways for your website to opt-in to sending client hints to the collector.  In the first method, you must configure your webserver to set both a [`Accept-CH` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH) and a [`Permissions-Policy` HTTP header](https://www.w3.org/TR/permissions-policy-1/) when serving the your site's main HTML pages:
 
 ```
-Accept-CH: sec-ch-ua-full-version-list
-Permissions-Policy: ch-ua-full-version-list=("https://<YOUR COLLECTOR DOMAIN>")
+Accept-CH: sec-ch-ua, sec-ch-ua-full-version-list, sec-ch-ua-full-version, sec-ch-ua-mobile, sec-ch-ua-platform, sec-ch-ua-platform-version, sec-ch-ua-arch, sec-ch-ua-bitness, sec-ch-ua-model, sec-ch-ua-wow64
+Permissions-Policy: ch-ua=("https://<YOUR COLLECTOR>"), ch-ua-full-version-list=("https://<YOUR COLLECTOR>"), ch-ua-full-version=("https://<YOUR COLLECTOR>"), ch-ua-mobile=("https://<YOUR COLLECTOR>"), ch-ua-platform=("https://<YOUR COLLECTOR>"), ch-ua-platform-version=("https://<YOUR COLLECTOR>"), ch-ua-arch=("https://<YOUR COLLECTOR>"), ch-ua-bitness=("https://<YOUR COLLECTOR>"), ch-ua-model=("https://<YOUR COLLECTOR>"), ch-ua-wow64=("https://<YOUR COLLECTOR>"),
 ```
 
 Alternatively, in the second method, you can put a `meta` tag in the header secion of your site's HTML:
 
 ```
-<meta http-equiv="delegate-ch" content="sec-ch-ua-full-version-list https://<YOUR COLLECTOR DOMAIN>;">
+<meta http-equiv="delegate-ch" content="sec-ch-ua https://<YOUR COLLECTOR>; sec-ch-ua-full-version-list https://<YOUR COLLECTOR>; sec-ch-ua-full-version https://<YOUR COLLECTOR>; sec-ch-ua-mobile https://<YOUR COLLECTOR>; sec-ch-ua-platform https://<YOUR COLLECTOR>; sec-ch-ua-platform-version https://<YOUR COLLECTOR>; sec-ch-ua-arch https://<YOUR COLLECTOR>; sec-ch-ua-bitness https://<YOUR COLLECTOR>; sec-ch-ua-model https://<YOUR COLLECTOR>; sec-ch-ua-wow64 https://<YOUR COLLECTOR>;">
 ```
 
 ## Configuration

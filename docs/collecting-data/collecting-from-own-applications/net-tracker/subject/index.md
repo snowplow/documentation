@@ -6,19 +6,7 @@ sidebar_position: 50
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
 
-The Subject class has a set of `Set...()` methods to attach extra data relating to the user to all tracked events:
-
-- [`SetUserId`](#set-user-id)
-- [`SetScreenResolution`](#set-screen-resolution)
-- [`SetViewport`](#set-viewport)
-- [`SetColorDepth`](#set-color-depth)
-- [`SetTimezone`](#set-timezone)
-- [`SetLang`](#set-lang)
-- [`SetIpAddress`](#set-ip-address)
-- [`SetUseragent`](#set-useragent)
-- [`SetNetworkUserId`](#set-network-user-id)
-- [`SetDomainUserId`](#set-domain-user-id)
-- [`SetPlatform`](#set-platform)
+The Subject class has a number of `Set...()` methods to attach extra data relating to the user of the tracked events.
 
 Here are some examples:
 
@@ -138,7 +126,7 @@ s.SetUseragent( {{USERAGENT}} )
 The useragent should be a string:
 
 ```csharp
-s.SetUseragent("Agent Smith");
+s.SetUseragent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:108.0) Gecko/20100101 Firefox/108.0");
 ```
 
 ### `SetNetworkUserId`
@@ -149,10 +137,10 @@ This method lets you pass a Network User ID in to Snowplow:
 s.SetNetworkUserId( {{NUID}} )
 ```
 
-The network user id should be a string:
+The network user id should be a string, typically a UUID:
 
 ```csharp
-s.SetNetworkUserId("network-id");
+s.SetNetworkUserId("a57c0cac-4aab-49c5-8e70-790f415080b0");
 ```
 
 ### `SetDomainUserId`
@@ -163,10 +151,38 @@ This method lets you pass a Domain User ID in to Snowplow:
 s.SetDomainUserId( {{DUID}} )
 ```
 
-The domain user id should be a string:
+The domain user id should be a string, typically a UUID:
 
 ```csharp
-s.SetDomainUserId("domain-id");
+s.SetDomainUserId("be0999db-8e4e-4f0c-9f3e-fe5e5de1669a");
+```
+
+### `SetDomainSessionId`
+
+This method lets you pass a Domain Session ID in to Snowplow:
+
+```csharp
+s.SetDomainSessionId( {{SID}} )
+```
+
+The domain session id should be a string, typically a UUID:
+
+```csharp
+s.SetDomainSessionId("8b107139-5b38-45cc-a0eb-be2550e32904");
+```
+
+### `SetDomainSessionIndex`
+
+This method lets you pass a Domain Session Index in to Snowplow:
+
+```csharp
+s.SetDomainSessionIndex( {{VID}} )
+```
+
+The domain user id should be an int:
+
+```csharp
+s.SetDomainSessionIndex(1);
 ```
 
 ### `SetPlatform`

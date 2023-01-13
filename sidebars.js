@@ -12,22 +12,32 @@
 // @ts-check
 
 const swap = (allItems, linkItems) => {
-  const result = allItems.map((item) => {
+  const result = allItems.flatMap((item) => {
+    if (item.customProps?.header) {
+      const header = {
+        type: 'html',
+        value: item.customProps.header,
+        defaultStyle: true,
+        className: "header",
+      }
+      return [header, { ...item, items: swap(item.items, linkItems) }]
+    }
+
     if (item.type === 'category') {
-      return { ...item, items: swap(item.items, linkItems) }
+      return [{ ...item, items: swap(item.items, linkItems) }]
     }
 
     if (linkItems[item.id]) {
-      return {
+      return [{
         type: 'link',
         label: linkItems[item.id].sidebar_label ?? linkItems[item.id].title,
         href: linkItems[item.id].href,
         className: linkItems[item.id].sidebar_class_name,
         customProps: linkItems[item.id].sidebar_custom_props,
-      }
+      }]
     }
 
-    return item
+    return [item]
   })
 
   return result

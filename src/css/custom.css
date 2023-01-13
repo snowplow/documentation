@@ -305,6 +305,10 @@ textarea {
   max-width: 100%;
 }
 
+[data-theme='light'] .dbt details {
+  --ifm-alert-background-color: null;
+}
+
 img.shield {
   vertical-align: text-bottom;
 }

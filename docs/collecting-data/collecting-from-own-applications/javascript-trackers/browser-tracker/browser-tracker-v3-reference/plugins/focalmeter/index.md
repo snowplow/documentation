@@ -1,6 +1,5 @@
 ---
 title: "Kantar FocalMeter"
-date: "2023-01-16"
 sidebar_position: 12000
 ---
 

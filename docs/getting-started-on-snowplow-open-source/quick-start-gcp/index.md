@@ -37,7 +37,7 @@ import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
 - [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher installed
     - Follow the instructions to make sure the terraform binary is available on your PATH. You can also use [tfenv](https://github.com/tfutils/tfenv) to help manage Terraform installation
 - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) which allows you to publish schemas for your [custom events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events) and [entities](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md#custom-contexts) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/index.md)
-- Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your localhost
+- Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your localhost
     - `git clone https://github.com/snowplow/quickstart-examples.git`
 
 ### Select which example you want to use
@@ -51,9 +51,9 @@ The main difference is around the [VPC](https://cloud.google.com/vpc/docs/overvi
 
 ### Setting up your Iglu Server
 
-The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
+The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
 
-We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your Postgres loader) can communicate with Iglu. 
+We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your loader) can communicate with Iglu. 
 
 **Step 1: Update your input variables**
 
@@ -101,21 +101,21 @@ For your pipeline to work, you'll need to seed your Iglu Server with the standar
 ```bash
 git clone https://github.com/snowplow/iglu-central
 cd iglu-central
-igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000
+igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-IP 00000000-0000-0000-0000-000000000000
 ```
 
 ### Setting up your pipeline
 
-In this section you will update the input variables for the terraform module, and then run the terraform script to set up your pipeline.  At the end you will have a working Snowplow pipeline.
+In this section you will update the input variables for the terraform module, and then run the terraform script to set up your pipeline. At the end you will have a working Snowplow pipeline that you can send your web, mobile or server side data to.
 
 **Step 1: Update your input variables**
 
-Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `pipeline` directory to update the input variables in `terraform.tfvars`.
+Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `pipeline` directory to update the input variables in either `postgres.terraform.tfvars` or `bigquery.terraform.tfvars` according to the chosen destination. How to choose the destination and configure it will be explained in detail in the next section.
 
 ```bash
 git clone https://github.com/snowplow/quickstart-examples.git
 cd quickstart-examples/terraform/gcp/pipeline/default #or secure
-nano terraform.tfvars #or other text editor of your choosing
+nano <destination>.terraform.tfvars #or other text editor of your choosing
 ```
 
 To update your input variables, you'll need to know a couple of things:
@@ -130,16 +130,26 @@ To update your input variables, you'll need to know a couple of things:
     - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
     - You can get the value with `cat ~/.ssh/id_rsa.pub`
 
+As mentioned above, there are two options for pipeline's destination database. These are Postgres and BigQuery. Your chosen database needs to be specified with the `postgres_db_enabled` or `bigquery_db_enabled` variables. Respective `<destination>.terraform.tfvars` file should be filled in according to the chosen database. Only database specific variables are different in those two tfvars files.
+
+##### Postgres
+
+If you choose Postgres as destination, there is no additional step. Respective variables need to be filled according to the desired setup. Necessary resources like Postgres instance, database, table, user will be created by Pipeline Terraform module.
+
+##### BigQuery
+
+If you choose BigQuery as destination, there is no additional step nor additional variables that need to be setup.
+
 **Step 2: Run the terraform script to set up your Pipeline stack**
 
 You can now use terraform to create your Pipeline stack.
 
 ```bash
 terraform init
-terraform plan
-terraform apply
+terraform plan -var-file=<destination>.terraform.tfvars
+terraform apply -var-file=<destination>.terraform.tfvars
 ```
 
-This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.
+This will output your `collector_dns_name`, `db_address`, `db_port`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`. Depending on your destination some of these outputs will be empty. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.
 
 Now let's [send some events](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/sending-test-events/index.md) to your pipeline!

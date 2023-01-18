@@ -30,7 +30,7 @@ import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
 - [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher installed
     - Follow the instructions to make sure the terraform binary is available on your PATH. You can also use [tfenv](https://github.com/tfutils/tfenv) to help manage Terraform installation
 - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) which allows you to publish schemas for your [custom events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events) and [entities](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md#custom-contexts) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/index.md)
-- Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your localhost
+- Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your localhost
     - `git clone https://github.com/snowplow/quickstart-examples.git`
 
 ### Select which example you want to use
@@ -48,9 +48,9 @@ There are also two different storage options for you to select. The steps below 
 
 ### Setting up your Iglu Server
 
-The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
+The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
 
-We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your Postgres loader) can communicate with Iglu. 
+We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your loader) can communicate with Iglu. 
 
 **Step 1: Update your input variables**
 
@@ -102,7 +102,7 @@ igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws
 
 ### Setting up your pipeline
 
-In this section you will update the input variables for the terraform module, and then run the terraform script to set up your pipeline.  At the end you will have a working Snowplow pipeline that you can send your web, mobile or server side data to.
+In this section you will update the input variables for the terraform module, and then run the terraform script to set up your pipeline. At the end you will have a working Snowplow pipeline that you can send your web, mobile or server side data to.
 
 **Step 1: Update your input variables**
 
@@ -111,7 +111,7 @@ Once you have cloned the `quickstart-examples` repository, you will need to navi
 ```bash
 git clone https://github.com/snowplow/quickstart-examples.git
 cd quickstart-examples/terraform/aws/pipeline/default #or secure
-nano terraform.tfvars #or other text editor of your choosing
+nano <destination>.terraform.tfvars #or other text editor of your choosing
 ```
 
 To update your input variables, you'll need to know a couple of things:
@@ -126,7 +126,7 @@ To update your input variables, you'll need to know a couple of things:
     - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
     - You can get the value with `cat ~/.ssh/id_rsa.pub`
 
-As mentioned above, there are two options for pipeline's destination database. These are Postgres and Snowflake. Your chosen database needs to be specified with `pipeline_db` variable. Allowed values for that variable are `postgres` and `snowflake`. Respective `terraform.tfvars` file should be filled in according to the chosen database. Only database specific variables are different in those two tfvars files.
+As mentioned above, there are two options for pipeline's destination database. These are Postgres and Snowflake. Your chosen database needs to be specified with `pipeline_db` variable. Allowed values for that variable are `postgres` and `snowflake`. Respective `<destination>.terraform.tfvars` file should be filled in according to the chosen database. Only database specific variables are different in those two tfvars files.
 
 ##### Postgres
 
@@ -170,12 +170,10 @@ These output values need to be passed to `aws/pipeline` modules as a variable wh
 
 You can now use terraform to create your Pipeline stack. You will be asked to select a region, you can find more information about [available regions here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
 
-The below example points to the postrgres tfvars file, you should switch this to \`snowflake\` if you're using Snowflake loading.
-
 ```bash
 terraform init
-terraform plan -var-file=postgres.terraform.tfvars
-terraform apply -var-file=postgres.terraform.tfvars
+terraform plan -var-file=<destination>.terraform.tfvars
+terraform apply -var-file=<destination>.terraform.tfvars
 ```
 
 This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`. Make a note of these, you'll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don't need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.

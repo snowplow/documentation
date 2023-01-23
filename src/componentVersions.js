@@ -2,7 +2,7 @@ export const versions = {
   // Trackers
   scalaTracker: '2.0.0',
   flutterTracker: '0.3.0',
-  pythonTracker: '0.12.0',
+  pythonTracker: '0.13.0',
   rustTracker: '0.2.0',
 
   // Loaders

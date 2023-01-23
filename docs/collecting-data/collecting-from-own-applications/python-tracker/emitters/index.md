@@ -48,7 +48,7 @@ Before version 0.13.0 `batch_size` was named `buffer_size`
 
 :::
 | **Argument** | **Description** | **Required?** | **Type** | **Default** | **Version** | 
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | `endpoint` | The collector URI | Yes | String | |
 | `protocol` | Request protocol: http or https | No | String | `https` | |
 | `port` | The port to connect to | No | Positive integer | `None` | |

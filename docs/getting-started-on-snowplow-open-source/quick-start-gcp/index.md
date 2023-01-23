@@ -28,6 +28,7 @@ import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
     - [Cloud Resource Manager API](https://console.cloud.google.com/apis/api/cloudresourcemanager.googleapis.com)
     - [Identity and Access Management (IAM) API](https://console.cloud.google.com/apis/api/iam.googleapis.com)
     - [Cloud Pub/Sub API](https://console.cloud.google.com/apis/api/pubsub.googleapis.com)
+    - [Cloud SQL Admin API](https://console.cloud.google.com/apis/api/sqladmin.googleapis.com)
 - A Google cloud service account
     - See [details on using the service account with the Cloud SDK](https://cloud.google.com/docs/authentication/getting-started#setting_the_environment_variable)
     - You will need to:

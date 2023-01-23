@@ -34,7 +34,7 @@ For further details on the resources, default and required input variables, and 
 
 ## Stream Collector
 
-This is a Snowplow event collector that receives raw Snowplow events over HTTP, serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to pubsub. More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/index.md).
+This is a Snowplow event collector that receives raw Snowplow events over HTTP, serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to pubsub. More details can be found [here](/docs/collecting-data/stream-collector/index.md).
 
 For further details on the resources, default and required input variables, and outputs see the [collector-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/collector-pubsub-ce/google/latest) terraform module.
 
@@ -47,7 +47,7 @@ This is a Snowplow app written in scala which:
 - Enriches each event (e.g. infers the location of the user from his/her IP address)
 - Writes the enriched Snowplow event to the enriched topic
 
-It is designed to be used downstream of the [Scala Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md). More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md).
+It is designed to be used downstream of the [Scala Stream Collector](/docs/collecting-data/stream-collector/index.md). More details can be found [here](/docs/enriching-your-data/enrichment-components/stream-enrich/index.md).
 
 For further details on the resources, default and required input variables, and outputs see the [enrich-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/enrich-pubsub-ce/google/latest) terraform module.
 

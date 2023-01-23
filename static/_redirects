@@ -92,3 +92,7 @@
 /docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/upgrade-guides/* /docs/destinations/warehouses-and-lakes/rdb/upgrade-guides/:splat 301
 
 /docs/destinations/forwarding-events/google-tag-manager-server-side/building-an-enriched-event-relay-for-gtm-ss/ /docs/destinations/forwarding-events/snowbridge/ 301
+
+
+/docs/pipeline-components-and-applications/stream-collector/* /docs/collecting-data/stream-collector/:splat 301
+/docs/pipeline-components-and-applications/enrichment-components/* /docs/enriching-your-data/enrichment-components/:splat 301

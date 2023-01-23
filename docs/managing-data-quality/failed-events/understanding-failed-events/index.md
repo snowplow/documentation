@@ -10,7 +10,7 @@ A Failed Event is simply what we label any event that was not able to be process
 
 While an event is being processed by the pipeline it is checked to ensure it meets the specific formatting or configuration expectations; these include checks like: does it match the schema it is associated with, were Enrichments successfully applied and was the payload sent by the tracker acceptable.
 
-Generally, the [collector](/docs/pipeline-components-and-applications/stream-collector/index.md) tries to write any payload to the raw stream, no matter its content, and no matter whether it is valid. This explains why many of the failure types are filtered out by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, and not any earlier.
+Generally, the [collector](/docs/collecting-data/stream-collector/index.md) tries to write any payload to the raw stream, no matter its content, and no matter whether it is valid. This explains why many of the failure types are filtered out by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, and not any earlier.
 
 All failed events are routed to storage (AWS S3 or GCP cloud storage).
 
@@ -105,7 +105,7 @@ Tracker protocol violation schema can be found [here](https://github.com/snowplo
 
 ### Size Violation
 
-This failure type can be produced either by the [collector](/docs/pipeline-components-and-applications/stream-collector/index.md) or by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
+This failure type can be produced either by the [collector](/docs/collecting-data/stream-collector/index.md) or by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
 
 Failures of this type cannot be [recovered](/docs/managing-data-quality/snowplow-event-recovery/index.md). The best you can do is to fix any application that is sending over-sized events.
 

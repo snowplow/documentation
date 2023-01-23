@@ -10,4 +10,4 @@ It consumes the raw data from the raw Pub/Sub topic (outputted by the collector)
 
 ## Run Enrich
 
-[Enrich PubSub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md) has instructions for setting up and running it.
+[Enrich PubSub](/docs/enriching-your-data/enrichment-components/enrich-pubsub/index.md) has instructions for setting up and running it.

@@ -1,5 +1,5 @@
 ---
-title: "Stream Collector"
+title: "Stream Collector application"
 date: "2020-11-02"
 sidebar_position: 20
 ---

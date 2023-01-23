@@ -35,7 +35,7 @@ Above assumes that you have following directory structure:
 
 1. `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-validation-and-enrich/add-additional-enrichments/index.md)
 2. Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)
-3. [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md)
+3. [configuration HOCON](/docs/enriching-your-data/enrichment-components/configuration-reference/index.md)
 
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
@@ -46,7 +46,7 @@ Alternatively, you can download and run [a jar file from the github release](ht
   --config /snowplow/config.hocon
 `}</CodeBlock>
 
-Configuration guide can be found on [this page](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/pipeline-components-and-applications/enrichment-components/monitoring/index.md).
+Configuration guide can be found on [this page](/docs/enriching-your-data/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/enriching-your-data/enrichment-components/monitoring/index.md).
 
 ```mdx-code-block
 import Telemetry from "@site/docs/reusable/telemetry/_index.md"

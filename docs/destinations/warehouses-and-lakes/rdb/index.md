@@ -5,7 +5,7 @@ sidebar_position: 1
 
 We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift**, **Snowflake** or **Databricks**. For other destinations, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md).
 
-Loading [enriched](/docs/pipeline-components-and-applications/enrichment-components/index.md) Snowplow data is a two-step process which consists of:
+Loading [enriched](/docs/enriching-your-data/enrichment-components/index.md) Snowplow data is a two-step process which consists of:
 
 - transforming the enriched tsv-formatted data into a format that can be readily loaded into a target (previously known as 'shredding');
 - loading the transformed data.

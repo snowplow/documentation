@@ -29,7 +29,7 @@ Above assumes that you have following directory structure:
 
 - `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-validation-and-enrich/add-additional-enrichments/index.md)
 - Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)
-- [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md)
+- [configuration HOCON](/docs/enriching-your-data/enrichment-components/configuration-reference/index.md)
 
 Depending on where the app runs, `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` might not be required.
 
@@ -42,7 +42,7 @@ Alternatively, you can download and run [a jar file from the github release](ht
   --config /snowplow/config.hocon
 `}</CodeBlock>
 
-Configuration guide can be found on [this page](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/pipeline-components-and-applications/enrichment-components/monitoring/index.md).
+Configuration guide can be found on [this page](/docs/enriching-your-data/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/enriching-your-data/enrichment-components/monitoring/index.md).
 
 ```mdx-code-block
 import Telemetry from "@site/docs/reusable/telemetry/_index.md"

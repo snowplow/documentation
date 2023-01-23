@@ -6,7 +6,7 @@ sidebar_position: 0
 
 On a GCP pipeline, the Snowplow Stream Collector receives events sent over HTTP(S), and writes them a raw Pub/Sub topic. From there, the data is picked up and processed by the Snowplow validation and enrichment job.
 
-The main [collector documentation](/docs/pipeline-components-and-applications/stream-collector/index.md) describes the core concepts of how the collector works, and the configuration options when running it.
+The main [collector documentation](/docs/collecting-data/stream-collector/index.md) describes the core concepts of how the collector works, and the configuration options when running it.
 
 In this guide for GCP we are going to:
 

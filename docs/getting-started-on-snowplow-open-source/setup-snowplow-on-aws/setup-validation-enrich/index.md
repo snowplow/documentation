@@ -17,7 +17,7 @@ This guide covers how to setup enrich-kinesis.
 
 ## Install, configure and run enrich-kinesis
 
-The [enrich-kinesis reference](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md) describes how to install, run, and configure the application.
+The [enrich-kinesis reference](/docs/enriching-your-data/enrichment-components/enrich-kinesis/index.md) describes how to install, run, and configure the application.
 
 ## Add any desired Enrichments
 
@@ -27,7 +27,7 @@ import Block1303 from "@site/docs/reusable/untitled-reusable-block-20/_index.md"
 <Block1303/>
 ```
 
-Each enrichment is enabled by configuring a JSON config file (one per enrichment), loading these into DynamoDB and then passing the location of the configs in DynamoDB to stream enrich on running it using the `--enrichments` [argument as documented](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/configure-stream-enrich/index.md).
+Each enrichment is enabled by configuring a JSON config file (one per enrichment), loading these into DynamoDB and then passing the location of the configs in DynamoDB to stream enrich on running it using the `--enrichments` [argument as documented](/docs/enriching-your-data/enrichment-components/stream-enrich/configure-stream-enrich/index.md).
 
 ## Sink the enriched data to S3 from Kinesis
 

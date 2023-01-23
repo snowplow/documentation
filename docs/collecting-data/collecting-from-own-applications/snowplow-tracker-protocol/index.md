@@ -15,7 +15,7 @@ This page is for you if you want to understand the tracker payload in more detai
 
 :::caution
 
-When the event is sent from a Snowplow tracker, all parameters should be stringified. Those strings are parsed back to their actual type during [Enrichment](/docs/pipeline-components-and-applications/enrichment-components/index.md).
+When the event is sent from a Snowplow tracker, all parameters should be stringified. Those strings are parsed back to their actual type during [Enrichment](/docs/enriching-your-data/enrichment-components/index.md).
 
 :::
 

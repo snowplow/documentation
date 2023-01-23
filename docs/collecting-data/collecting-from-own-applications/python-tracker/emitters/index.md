@@ -123,12 +123,17 @@ Here is a complete example with all constructor parameters set:
 from snowplow_tracker import AsyncEmitter
 
 e = AsyncEmitter("collector.example.com", 
-            port=None,
-            buffer_size=10,
-            byte_limit=None,
+            protocol = "https",
+            port=9090,
+            method='post',
+            batch_size=10,
             on_success=None,
             on_failure=None,
-            thread_count=1)
+            thread_count=1,
+            byte_limit=None,
+            max_retry_delay_seconds = 60,
+            buffer_capacity = 5000,
+            event_store = None)
 ```
 
 ## The CeleryEmitter class
@@ -138,8 +143,6 @@ e = AsyncEmitter("collector.example.com",
 ```bash
 $ pip install snowplow-tracker[celery]
 ```
-
-  
 
 The `CeleryEmitter` class works just like the base `Emitter` class, but it registers sending requests as a task for a [Celery](http://www.celeryproject.org/) worker. If there is a module named snowplow_celery_config.py on your PYTHONPATH, it will be used as the Celery configuration file; otherwise, a default configuration will be used. You can run the worker using this command:
 

@@ -48,7 +48,7 @@ Before version 0.13.0 `batch_size` was named `buffer_size`
 
 :::
 | **Argument** | **Description** | **Required?** | **Type** | **Default** | **Version** | 
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | `endpoint` | The collector URI | Yes | String | |
 | `protocol` | Request protocol: http or https | No | String | `https` | |
 | `port` | The port to connect to | No | Positive integer | `None` | |
@@ -60,7 +60,7 @@ Before version 0.13.0 `batch_size` was named `buffer_size`
 | `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers | `None` | v0.10.0 |
 | `max_retry_delay_seconds` | The maximum time between attempts to send failed events to the collector | No | int | 60s | v0.13.0 |
 | `buffer_capacity` | The maximum capacity of the event buffer | No | int | `None` | v0.13.0 |
-| `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | v0.13.0 |
+| `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | `None` | v0.13.0 |
 | `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None` | v0.13.0 |
 
 See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for more information on the individual parameters. 

@@ -74,7 +74,7 @@ To prevent unnecessary requests being made while the collector is unavailable, a
 
 The status codes 400 Bad Request, 401 Unauthorised, 403 Forbidden, 410 Gone, or 422 Unprocessable Entity are the exceptions: they are not retried by default. Payloads in requests receiving these responses are not returned to the buffer for retry. They are just deleted.
 
-Configure which codes to retry on or not using the EmitterConfiguration when creating your tracker. This method takes a dictionary of status codes and booleans (True for retry and False for not retry). 
+Configure which codes to retry on or not using the `EmitterConfiguration` when creating your tracker. This method takes a dictionary of status codes and booleans (True for retry and False for not retry). 
 
 ```python
     

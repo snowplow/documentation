@@ -10,10 +10,10 @@ Assuming you have completed the Python Tracker Setup for your Python project, 
 Version 0.13.0 introduces the Snowplow interface, making tracker creation and management simpler, for versions `<0.13.0` go to [`Importing the module`](#importing-the-module)
 :::
 
-### The Snowplow Interface
-The Snowplow interface contains `static` methods to help manage `Tracker` objects. 
+### The Snowplow Class
+The Snowplow class contains `static` methods to help manage `Tracker` objects. 
 
-Import the Snowplow interface along with the required configuration objects:
+Import the Snowplow class along with the required configuration objects:
 
 ```python
 from snowplow_tracker import Snowplow, EmitterConfiguration, Subject, TrackerConfiguration
@@ -33,7 +33,7 @@ You can access a tracker in the following way:
 Snowplow.get_tracker('ns')
 ```
 
-The Snowplow interface can be used to initialize trackers using the following properties:
+The Snowplow class can be used to initialize trackers using the following properties:
 
 | **Argument Name** | **Description** | **Required?** | **Default** |
 | --- | --- | --- | --- |

@@ -4,11 +4,19 @@ date: "2020-02-14"
 sidebar_position: 6
 ---
 
-This enrichment can extract name/value pairs from a cookie set on the domain and attach them to the event as derived contexts.
+This enrichment extracts name-value pairs from cookies set on the collector domain, attaching them to the event as derived contexts.
 
-A powerful attribute of having Snowplow event collection on our own domain is the ability to capture values in first-party cookies set by other services such as ad servers or content management software (CMS).
+A powerful attribute of using a custom collector domain is the ability to capture values in first-party cookies set by other services such as ad servers or content management software (CMS). By capturing these cookie fields and attaching them to the event, you can use the data to better identify users of your website.
 
-By capturing these cookie fields set by third parties on our domain and attaching them to the event we can potentially use the identifiers to better identify users of our site.
+## Examples
+
+The following table provides examples of how the cookie and collector domains interact, indicating whether or not the cookies can be accessed with this enrichment.
+
+| Collector Domain | Cookie Domain | Cookies Extracted |
+| ---------------- | ------------- | ----------------- |
+| c.snowplow.io | acme.com | ❌ |
+| t.acme.com | acme.com | ✅ |
+| sp.track.acme.com | acme.com | ✅ |
 
 ## Configuration
 

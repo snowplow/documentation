@@ -63,29 +63,31 @@ Before version 0.13.0 `batch_size` was named `buffer_size`
 | `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | v0.13.0 |
 | `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None` | v0.13.0 |
 
-- `protocol`
-
-`protocol` defaults to "https" but also supports "http".
-
-:::note Prior to v0.12.0
-
-In older versions, `protocol` defaulted to `http`.
-
+## What happens if an event fails to send?
+:::note New in v0.13.0
+Retry capabilities are new in v0.13.0
 :::
+After trying to send a batch of events the collector will return an http status code. A 2xx code is always considered successful. If a failure code is returned (anything other than 2xx, with certain exceptions, see below), the events (as PayloadDictList objects) are returned to the buffer. They will be retried in future sending attempts. 
 
-- `buffer_size`
+To prevent unnecessary requests being made while the collector is unavailable, an exponential backoff is added to all subsequent event sending attempts. This resets after a request is successful. The default maximum backoff time between attempts is 1 minute but this can be configured by setting `max_retry_delay_seconds`.
 
-When the emitter receives an event, it adds it to a buffer. When the queue is full, all events in the queue get sent to the collector. The `buffer_size` argument allows you to customize the queue size. By default, it is 1 for GET requests and 10 for POST requests. (So in the case of GET requests, each event is fired as soon as the emitter receives it.) If the emitter is configured to send POST requests, then instead of sending one for every event in the buffer, it will send a single request containing all those events in JSON format.
+The status codes 400 Bad Request, 401 Unauthorised, 403 Forbidden, 410 Gone, or 422 Unprocessable Entity are the exceptions: they are not retried by default. Payloads in requests receiving these responses are not returned to the buffer for retry. They are just deleted.
 
-- `byte_limit`
+Configure which codes to retry on or not using the EmitterConfiguration when creating your tracker. This method takes a dictionary of status codes and booleans (True for retry and False for not retry). 
 
-`byte_limit` is similar to `buffer_size`, but instead of counting events - it takes into account only the amount of bytes to be sent over the network. _Warning_: this limit is approximate with infelicity < 1%.
+```python
+    
+    # by default 401 isn't retried, but 500 is
+    custom_retry_codes = {500: False, 401: True}
+    emitter_config = EmitterConfiguration(custom_retry_codes=custom_retry_codes)
 
-- `on_success`
+    Snowplow.create_tracker(
+        namespace="ns",
+        endpoint="collector.example.com",
+        emitter_config=emitter_config,
+    )
 
-`on_success` is an optional callback that will execute whenever the queue is flushed successfully, that is, whenever every request sent has status code 200. It will be passed one argument: the number of events that were successfully sent.
-
-:::note New in v0.9.0
+```
 
 Since version 0.9.0, the on_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
 

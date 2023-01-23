@@ -8,6 +8,16 @@ This enrichment extracts name-value pairs from cookies set on the collector doma
 
 A powerful attribute of using a custom collector domain is the ability to capture values in first-party cookies set by other services such as ad servers or content management software (CMS). By capturing these cookie fields and attaching them to the event, you can use the data to better identify users of your website.
 
+## Examples
+
+The following table provides examples of how the cookie and collector domains interact, indicating whether or not the cookies can be accessed with this enrichment.
+
+| Collector Domain | Cookie Domain | Cookies Extracted |
+| ---------------- | ------------- | ----------------- |
+| c.snowplow.io | acme.com | ❌ |
+| t.acme.com | acme.com | ✅ |
+| sp.track.acme.com | acme.com | ✅ |
+
 ## Configuration
 
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/cookie_extractor_config/jsonschema/1-0-0)

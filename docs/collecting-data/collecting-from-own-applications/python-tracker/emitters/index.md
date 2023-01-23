@@ -89,57 +89,22 @@ Configure which codes to retry on or not using the EmitterConfiguration when cre
 
 ```
 
-Since version 0.9.0, the on_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
+## Configuring how events are buffered
+As events are collected, the are stored in a buffer until there are enough to send. By default, tracked events are stored in the `InMemoryEventStore` introduced in v0.13.0. This is an implemenation of the `EventStore` protocol and stores payloads in a `List` object and is cleared once the buffer capacity is reached. 
 
-:::
-
-- `on_failure` 
-
-`on_failure` is similar, but executes when the flush is not wholly successful. It will be passed two arguments: the number of events that were successfully sent, and an array of unsent events.
-
-An example:
+The default buffer capacity is 10,000 events. This is the number of events that can be stored. When the buffer is full, new tracked payloads are dropped, so choosing the right capacity is important. You can set the buffer capacity through the `EmitterConfiguration` object, for example:
 
 ```python
-# Prior to v0.9.0, the on_success callback receives only the number of successfully sent events
-def success(num):
-    print(str(num) + " events sent successfully!")
+    
+    emitter_config = EmitterConfiguration(buffer_capacity=25,000)
 
-# Since v0.9.0, the on_success callback receives the array of successfully sent events
-def new_success(arr):
-    for event_dict in arr:
-        print(event_dict)
-
-def failure(num, arr):
-    print(str(num) + " events sent successfully!")
-    print("These events were not sent successfully:")
-    for event_dict in arr:
-        print(event_dict)
-     
-# prior to v0.9.0
-# e = Emitter("collector.example.com", buffer_size=3, on_success=success, on_failure=failure)
-
-# since v0.9.0
-e = Emitter("collector.example.com", buffer_size=3, on_success=new_success, on_failure=failure)
-
-t = Tracker(e)
-
-# This doesn't cause the emitter to send a request because the buffer_size was set to 3, not 1
-t.track_page_view("http://www.example.com")
-t.track_page_view("http://www.example.com/page1")
-
-# This does cause the emitter to try to send all 3 events
-t.track_page_view("http://www.example.com/page2")
+    Snowplow.create_tracker(
+        namespace="ns",
+        endpoint="collector.example.com",
+        emitter_config=emitter_config,
+    )
 ```
-
-:::note New in v0.10.0
-
-Since version 0.10.0, the constructors takes another `request_timeout` argument.
-
-:::
-- `request_timeout`
-
-Timeout for HTTP requests. Can be set either as single float value which applies to both "connect" AND "read" timeout, or as tuple with two float values which specify the "connect" and "read" timeouts separately.
-
+The emitter will store 25,000 events before starting to lose data.
 ## The AsyncEmitter class
 
 ```python

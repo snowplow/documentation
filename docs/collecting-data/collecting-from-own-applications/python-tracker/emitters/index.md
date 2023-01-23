@@ -22,32 +22,46 @@ This is the signature of the constructor for the base Emitter class:
 def __init__(
         self,
         endpoint: str,
-        protocol: Literal["http", "https"] = "https",
+        protocol: HttpProtocol = "https",
         port: Optional[int] = None,
-        method: Literal["get", "post"] = "post",
-        buffer_size: Optional[int] = None,
-        on_success: Optional[Callable[[PayloadDictList], None]] = None,
-        on_failure: Optional[Callable[[int, PayloadDictList], None]] = None,
+        method: Method = "post",
+        batch_size: Optional[int] = None,
+        on_success: Optional[SuccessCallback] = None,
+        on_failure: Optional[FailureCallback] = None,
         byte_limit: Optional[int] = None,
-        request_timeout: Optional[Union[float, Tuple[float, float]]] = None) -> None:
+        request_timeout: Optional[Union[float, Tuple[float, float]]] = None,
+        max_retry_delay_seconds: int = 60,
+        buffer_capacity: Optional[int] = None,
+        custom_retry_codes: Dict[int, bool] = {},
+        event_store: Optional[EventStore] = None
+    )-> None:
 ```
 
 :::note Prior to v0.12.0
 
-Before version 0.12.0 the default values for the emitter `protocol` and `method` were `http` and `get` respectively.
+Before version 0.12.0 the default values for the emitter `protocol` and `method` were `http` and `get` respectively. 
 
 :::
-| **Argument** | **Description** | **Required?** | **Type** | **Default** |
+:::note Prior to v0.13.0
+
+Before version 0.13.0 `batch_size` was named `buffer_size`
+
+:::
+| **Argument** | **Description** | **Required?** | **Type** | **Default** | **Version** | 
 | --- | --- | --- | --- |
 | `endpoint` | The collector URI | Yes | String | |
-| `protocol` | Request protocol: http or https | No | String | `https` |
-| `port` | The port to connect to | No | Positive integer | `None` |
-| `method` | The method to use: “get” or “post” | No | String | `post` |
-| `buffer_size` | Number of events to store before flushing | No | Positive integer | `10` |
-| `on_success` | Callback executed when a flush is successful | No | Function taking 1 argument | `None` |
+| `protocol` | Request protocol: http or https | No | String | `https` | |
+| `port` | The port to connect to | No | Positive integer | `None` | |
+| `method` | The method to use: “get” or “post” | No | String | `post` | |
+| `batch_size` | Number of events to store before flushing | No | Positive integer | `10` | |
+| `on_success` | Callback executed when a flush is successful | No | Function taking 1 argument | `None` | |
 | `on_failure` | Callback executed when a flush is unsuccessful | No | Function taking 2 arguments | `None` |
 | `byte_limit` | Number of bytes to store before flushing | No | Positive integer | `None` |
-| `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers | `None` |
+| `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers | `None` | v0.10.0 |
+| `max_retry_delay_seconds` | The maximum time between attempts to send failed events to the collector | No | int | 60s | v0.13.0 |
+| `buffer_capacity` | The maximum capacity of the event buffer | No | int | `None` | v0.13.0 |
+| `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | v0.13.0 |
+| `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None` | v0.13.0 |
 
 - `protocol`
 

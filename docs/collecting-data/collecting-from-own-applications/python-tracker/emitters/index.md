@@ -63,6 +63,7 @@ Before version 0.13.0 `batch_size` was named `buffer_size`
 | `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | v0.13.0 |
 | `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None` | v0.13.0 |
 
+See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for more information on the individual parameters. 
 ## What happens if an event fails to send?
 :::note New in v0.13.0
 Retry capabilities are new in v0.13.0

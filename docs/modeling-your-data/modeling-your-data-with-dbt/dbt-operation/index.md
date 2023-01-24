@@ -103,7 +103,7 @@ There is 1 manifest table included in this package:
 </TabItem>
 <TabItem value="ecommerce" label="Snowplow E-commerce">
 
-There are 2 manifest tables included in this package:
+There are 3 manifest tables included in this package:
 
 - `snowplow_ecommerce_incremental_manifest`: Records the current state of the package.
 - `snowplow_ecommerce_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions.

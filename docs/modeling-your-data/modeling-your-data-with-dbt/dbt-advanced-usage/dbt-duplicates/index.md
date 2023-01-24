@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 
-The web and mobile packages performs de-duplication on both `event_id`'s and `page/screen_view_id`'s, in the base and page/screen views modules respectively. The normalize package only de-dupes on `event_id`. The de-duplication method for Redshift & Postgres is different to BigQuery, Snowflake, & Databricks due to their federated table design. The key difference between the two methodologies is that for Redshift and Postgres an `event_id` may be removed entirely during de-duplication, where as for BigQuery & Snowflake we keep all `event_id`'s. See below for a detailed explanation.
+The e-commerce, web, and mobile packages perform de-duplication on both `event_id`'s and `page/screen_view_id`'s, in the base and page/screen views modules respectively. The normalize package only de-dupes on `event_id`. The de-duplication method for Redshift & Postgres is different to BigQuery, Snowflake, & Databricks due to their federated table design. The key difference between the two methodologies is that for Redshift and Postgres an `event_id` may be removed entirely during de-duplication, where as for BigQuery & Snowflake we keep all `event_id`'s. See below for a detailed explanation.
 
 ## Redshift & Postgres
 Using `event_id` de-duplication as an example, for duplicates we:

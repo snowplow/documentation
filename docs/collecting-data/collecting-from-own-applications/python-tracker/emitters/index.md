@@ -77,16 +77,15 @@ The status codes 400 Bad Request, 401 Unauthorised, 403 Forbidden, 410 Gone, or 
 Configure which codes to retry on or not using the `EmitterConfiguration` when creating your tracker. This method takes a dictionary of status codes and booleans (True for retry and False for not retry). 
 
 ```python
-    
-    # by default 401 isn't retried, but 500 is
-    custom_retry_codes = {500: False, 401: True}
-    emitter_config = EmitterConfiguration(custom_retry_codes=custom_retry_codes)
+# by default 401 isn't retried, but 500 is
+custom_retry_codes = {500: False, 401: True}
+emitter_config = EmitterConfiguration(custom_retry_codes=custom_retry_codes)
 
-    Snowplow.create_tracker(
-        namespace="ns",
-        endpoint="collector.example.com",
-        emitter_config=emitter_config,
-    )
+Snowplow.create_tracker(
+    namespace="ns",
+    endpoint="collector.example.com",
+    emitter_config=emitter_config,
+)
 
 ```
 
@@ -95,15 +94,14 @@ As events are collected, the are stored in a buffer until there are enough to se
 
 The default buffer capacity is 10,000 events. This is the number of events that can be stored. When the buffer is full, new tracked payloads are dropped, so choosing the right capacity is important. You can set the buffer capacity through the `EmitterConfiguration` object, for example:
 
-```python
-    
-    emitter_config = EmitterConfiguration(buffer_capacity=25,000)
+```python    
+emitter_config = EmitterConfiguration(buffer_capacity=25,000)
 
-    Snowplow.create_tracker(
-        namespace="ns",
-        endpoint="collector.example.com",
-        emitter_config=emitter_config,
-    )
+Snowplow.create_tracker(
+    namespace="ns",
+    endpoint="collector.example.com",
+    emitter_config=emitter_config,
+)
 ```
 The emitter will store 25,000 events before starting to lose data.
 ## The AsyncEmitter class

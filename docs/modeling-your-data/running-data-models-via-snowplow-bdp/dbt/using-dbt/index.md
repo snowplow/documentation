@@ -138,7 +138,7 @@ profile_name:
 
 :::info 
 
-The warehouse password should be sent by [secure form](https://console.snowplowanalytics.com/secure-messaging/freeform) from the console in order to set the environment variables.
+The warehouse password should be sent by [secure form from the Snowplow BDP Console](https://console.snowplowanalytics.com/secure-messaging/freeform) in order to set the environment variables.
 
 :::
 ### 2. The data modeling configuration

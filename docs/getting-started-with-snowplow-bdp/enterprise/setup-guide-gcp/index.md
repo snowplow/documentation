@@ -36,4 +36,4 @@ The following roles are also required if using [RDB Loader](/docs/destinations/w
 
 ### Enable billing for the project
 
-Please enable billing on the project as failing to do so will prevent the pipeline from being installed.
+Please enable billing on the project as failing to do so will prevent the pipeline from being installed. For details on enabling billing for your project, please refer to the GCP documentation for [APIs and billing](https://support.google.com/googleapi/answer/6158867).

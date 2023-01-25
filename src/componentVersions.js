@@ -20,5 +20,6 @@ export const versions = {
   enrich: '3.6.1',
   sqs2kinesis: '1.0.4',
   igluServer: '0.9.0',
+  igluctl: '0.10.2',
   snowplowMini: '0.15.1',
 }

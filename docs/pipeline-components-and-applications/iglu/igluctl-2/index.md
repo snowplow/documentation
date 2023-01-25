@@ -4,6 +4,11 @@ date: "2021-01-21"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 Iglu is a schema repository for JSON Schema. A schema repository (sometimes called a registry) is like npm or Maven or git but holds data schemas instead of software or code. Iglu is used extensively in Snowplow.
 
 ## Igluctl
@@ -22,14 +27,28 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
     - `table-check` - will check a given schema's table structure against schema
     - `table-migrate` is optional and allows removal of incompatible tables by migrating them as opposed to just "blacklisting".
 
-Download the latest Igluctl from GitHub releases:
+## Downloading and running Igluctl 
 
+Download the latest Igluctl from GitHub releases and unzip the file:
+
+<CodeBlock language="bash">{
+`$ wget https://github.com/snowplow/igluctl/releases/download/${versions.igluctl}/igluctl_${versions.igluctl}.zip
+$ unzip igluctl_${versions.igluctl}.zip
+`}</CodeBlock>
+
+To run Igluctl you can, for example, can pass the `--help` option to see information on the different commands and flags like this:
 ```bash
-$ wget https://github.com/snowplow/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip
-$ unzip igluctl_0.10.1.zip
+$ ./igluctl --help
 ```
+:::note
+If you are on Windows, then you'll need to run Igluctl like this:
+```bash
+$ java -jar igluctl --help
+```
+Below and everywhere in documentation you'll find example commands without this `java -jar` prefix, so please remember to add it when running Igluctl.
+:::
 
-Note that Igluctl expects JRE 8 or later, and Iglu Server 0.6.0 or later to run.
+Note that Igluctl expects [JRE 8](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html) or later, and [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) 0.6.0 or later to run.
 
 ## lint
 

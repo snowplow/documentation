@@ -246,30 +246,6 @@ t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.c
 
 ### Track screen view
 
-:::note
-Since v0.13.0 we recommend using `track_mobile_screen_view()` 
-:::
-
-Use `track_screen_view()` to track a user viewing a screen (or equivalent) within your app. This is an alternative to the `track_page_view` method which is less web-centric. The arguments are:
-
-| **Argument** | **Description** | **Required?** | ******Type****** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | Non-empty string |
-| `id_` | Unique identifier for this screen | No | String |
-| `context` | Custom context for the event | No | List(SelfDescribingJson) |
-| `tstamp` | When the screen was viewed | No | Positive integer |
-| `event_subject` (since v0.9.0) | The subject for the event | No | Subject |
-
-Although name and id_ are not individually required, at least one must be provided or the event will fail validation.
-
-Example:
-
-```python
-t.track_screen_view("HUD > Save Game", "screen23", None, 1368725287000)
-```
-
-### Track mobile screen view
-
 Use `track_mobile_screen_view()` to track a user viewing a screen (or equivalent) within your app.
 
 | **Argument** | **Description** | **Required?** | ******Type****** |
@@ -290,6 +266,10 @@ Example:
 ```python
 t.track_mobile_screen_view(id_="1368725287001", name="Profile Page", type="feed", previous_name="Home Page", previous_id="1368725287000", previous_type="feed")
 ```
+
+:::note
+Since v0.13.0 we recommend using `track_mobile_screen_view()` instead of the deprecated `track_screen_view()` method.
+:::
 
 ### Track ecommerce transactions
 

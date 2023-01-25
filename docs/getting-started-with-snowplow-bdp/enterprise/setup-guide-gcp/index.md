@@ -19,7 +19,7 @@ Please create a new project segregated from anything else you have running in GC
 
 ### Set up required permissions
 
-Please add **techops-cloud-admin@snowplowanalytics.com** to your project with the following roles:
+Please add **techops-cloud-admin@snowplowanalytics.com** to your project. This account will be used to install and maintain your pipeline in GCP. The following roles are required:
 
 - [`editor`](https://cloud.google.com/iam/docs/roles-overview#basic-definitions)
 - [`Roles/resourcemanager.projectIamAdmin`](https://cloud.google.com/iam/docs/understanding-roles#resourcemanager.projectIamAdmin)

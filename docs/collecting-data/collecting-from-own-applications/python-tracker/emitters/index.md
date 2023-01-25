@@ -22,12 +22,12 @@ This is the signature of the constructor for the base Emitter class:
 def __init__(
         self,
         endpoint: str,
-        protocol: HttpProtocol = "https",
+        protocol: Literal["http", "https"] = "https",
         port: Optional[int] = None,
-        method: Method = "post",
+        method: Literal["get", "post"] = "post",
         batch_size: Optional[int] = None,
-        on_success: Optional[SuccessCallback] = None,
-        on_failure: Optional[FailureCallback] = None,
+        on_success: Optional[Callable[[PayloadDictList], None]] = None,
+        on_failure: Optional[Callable[[int, PayloadDictList], None]] = None,
         byte_limit: Optional[int] = None,
         request_timeout: Optional[Union[float, Tuple[float, float]]] = None,
         max_retry_delay_seconds: int = 60,
@@ -63,7 +63,125 @@ Before version 0.13.0 `batch_size` was named `buffer_size`
 | `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | `None` | v0.13.0 |
 | `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None` | v0.13.0 |
 
-See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for more information on the individual parameters. 
+See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for more information. 
+
+- `protocol`
+
+`protocol` defaults to "https" but also supports "http".
+
+:::note Prior to v0.12.0
+
+In older versions, `protocol` defaulted to `http`.
+
+:::
+
+- `batch_size`
+
+:::note Prior to v0.13.0
+
+In older versions, `batch_size` was named `buffer_size`.
+
+:::
+
+When the emitter receives an event, it adds it to a buffer. When the queue is full, all events in the queue get sent to the collector. The `batch_size` argument allows you to customize the queue size. By default, it is 1 for GET requests and 10 for POST requests. (So in the case of GET requests, each event is fired as soon as the emitter receives it.) If the emitter is configured to send POST requests, then instead of sending one for every event in the buffer, it will send a single request containing all those events in JSON format.
+
+- `byte_limit`
+
+`byte_limit` is similar to `batch_size`, but instead of counting events - it takes into account only the amount of bytes to be sent over the network. _Warning_: this limit is approximate with error < 1%.
+
+- `on_success`
+
+`on_success` is an optional callback that will execute whenever the queue is flushed successfully, that is, whenever every request sent has status code 200. It will be passed one argument: the number of events that were successfully sent.
+
+:::note New in v0.9.0
+
+Since version 0.9.0, the on_success callback function will be passed the array of successfully sent events, instead of just the number of them, in order to augment this functionality.
+
+:::
+
+- `on_failure` 
+
+`on_failure` is similar, but executes when the flush is not wholly successful. It will be passed two arguments: the number of events that were successfully sent, and an array of unsent events.
+
+An example:
+
+```python
+# Prior to v0.9.0, the on_success callback receives only the number of successfully sent events
+def success(num):
+    print(str(num) + " events sent successfully!")
+
+# Since v0.9.0, the on_success callback receives the array of successfully sent events
+def new_success(arr):
+    for event_dict in arr:
+        print(event_dict)
+
+def failure(num, arr):
+    print(str(num) + " events sent successfully!")
+    print("These events were not sent successfully:")
+    for event_dict in arr:
+        print(event_dict)
+     
+# prior to v0.9.0
+# e = Emitter("collector.example.com", buffer_size=3, on_success=success, on_failure=failure)
+
+# since v0.9.0
+e = Emitter("collector.example.com", buffer_size=3, on_success=new_success, on_failure=failure)
+
+t = Tracker(e)
+
+# This doesn't cause the emitter to send a request because the buffer_size was set to 3, not 1
+t.track_page_view("http://www.example.com")
+t.track_page_view("http://www.example.com/page1")
+
+# This does cause the emitter to try to send all 3 events
+t.track_page_view("http://www.example.com/page2")
+```
+
+:::note New in v0.10.0
+
+Since version 0.10.0, the constructor takes another `request_timeout` argument.
+
+:::
+- `request_timeout`
+
+Timeout for HTTP requests. Can be set either as single float value which applies to both "connect" AND "read" timeout, or as tuple with two float values which specify the "connect" and "read" timeouts separately.
+
+:::note New in v0.13.0
+
+Since version 0.13.0, the constructor takes another `max_retry_delay_seconds` argument.
+
+:::
+- `max_retry_delay_seconds`
+
+The maximum time between attempts to send failed events to the collector. 
+
+:::note New in v0.13.0
+
+Since version 0.13.0, the constructor takes another `buffer_capacity` argument.
+
+:::
+- `buffer_capacity`
+
+The maximum capacity of the event buffer. When the buffer is full new events are lost.
+
+:::note New in v0.13.0
+
+Since version 0.13.0, the constructor takes another `custom_retry_codes` argument.
+
+:::
+- `custom_retry_codes`
+
+Custom retry rules for HTTP status codes received in emit responses from the Collector. By default, retry will not occur for status codes 400, 401, 403, 410 or 422. This can be overridden here by parsing a dictionary of status codes and booleans.
+
+:::note New in v0.13.0
+
+Since version 0.13.0, the constructor takes another `event_store` argument.
+
+:::
+- `event_store`
+
+The event store is used to store an event queue with events scheduled to be sent. Events are added to the event store when they are tracked and removed when they are successfuly emitted or when emitting fails without any scheduled retries. The default is an InMemoryEventStore object with a buffer_capacity of 10,000 events.
+
 ## What happens if an event fails to send?
 :::note New in v0.13.0
 Retry capabilities are new in v0.13.0

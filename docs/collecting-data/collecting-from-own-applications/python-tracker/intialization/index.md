@@ -6,6 +6,46 @@ sidebar_position: 20
 
 Assuming you have completed the Python Tracker Setup for your Python project, you are now ready to initialize the Python Tracker.
 
+:::note 
+Version 0.13.0 introduces the Snowplow interface, making tracker creation and management simpler, for versions `<0.13.0` go to [`Importing the module`](#importing-the-module)
+:::
+
+### The Snowplow Class
+The Snowplow class contains `static` methods to help manage `Tracker` objects. 
+
+Import the Snowplow class along with the required configuration objects:
+
+```python
+from snowplow_tracker import Snowplow, EmitterConfiguration, Subject, TrackerConfiguration
+```
+
+The simplest tracker configuration can be instantiated with the `create_tracker()` method as follows:
+
+```python
+Snowplow.create_tracker(namespace='ns', endpoint='collector.example.com')
+```
+
+This creates a `Tracker` and `Emitter` with default settings, with events logged to `collector.example.com`.
+
+You can access a tracker in the following way:
+
+```python
+Snowplow.get_tracker('ns')
+```
+
+The Snowplow class can be used to initialize trackers using the following properties:
+
+| **Argument Name** | **Description** | **Required?** | **Default** |
+| --- | --- | --- | --- |
+| `namespace` | The name of the tracker  | Yes |  |
+| `endpoint` | The collector URL events are sent to  | Yes |  |
+| `method` | The method to use: “get” or “post” | No | `post` |
+| `emitter_config` | The emitter configuration object | No | `EmitterConfiguration()` |
+| `app_id` | The application ID | No | `None` |
+| `subject` | The user being tracked | No | `subject.Subject()` |
+| `tracker_config` | The tracker configuration object | No | `TrackerConfiguration()` |
+
+
 ### Importing the module
 
 Require the Python Tracker's module into your Python code like so:
@@ -21,7 +61,7 @@ That's it - you are now ready to initialize a tracker instance.
 The simplest tracker initialization only requires you to provide the Emitter's endpoint to which the tracker will log events:
 
 ```python
-e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
+e = Emitter("collector.example.com")
 t = Tracker(e)
 ```
 
@@ -39,7 +79,7 @@ The tracker parameters are:
 Here is a more complete example in which every tracker parameter is set:
 
 ```python
-e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
+e = Emitter("collector.example.com")
 s = Subject().set_platform("srv")
 
 tracker = Tracker( e, 

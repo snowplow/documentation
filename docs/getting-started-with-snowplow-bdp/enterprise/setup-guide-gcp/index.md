@@ -22,7 +22,7 @@ Please create a new project segregated from anything else you have running in GC
 Please add **techops-cloud-admin@snowplowanalytics.com** to your project with the following roles:
 
 - `editor`
-- `Roles/resourcemanager.projectIamAdmin`
+- [`Roles/resourcemanager.projectIamAdmin`](https://cloud.google.com/iam/docs/understanding-roles#resourcemanager.projectIamAdmin)
 - `Roles/errorreporting.admin`
 - `Roles/logging.admin`
 - `Roles/monitoring.admin`

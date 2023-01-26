@@ -24,6 +24,7 @@ The UMD files (which work in the browser) can be downloaded from [GitHub release
 | Consent | ✅ | ❌ |
 | Debugger | ❌ | ❌ |
 | Ecommerce | ✅ | ❌ |
+| Enhanced Consent | ❌ | ❌ |
 | Enhanced Ecommerce | ✅ | ❌ |
 | Error Tracking | ✅ | ❌ |
 | Form Tracking | ✅ | ❌ |

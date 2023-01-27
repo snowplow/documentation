@@ -34,8 +34,6 @@ This is a complete list of the options that can be configured in the Snowplow Bi
 | `monitoring.statsd.tags`       | Optional. You can use env vars, eg {"worker": ${HOST}}. |
 | `monitoring.statsd.period`     | Optional, eg 10 sec.  |
 | `monitoring.statsd.prefix`     | Optional, eg snowplow.monitoring. |
-| `monitoring.dropwizard.* `     | Optional. If set up, metrics will be emitted from Loader using the [Dropwizard](https://www.dropwizard.io/en/latest/) protocol. |
-| `monitoring.dropwizard.period` | Optional, eg 10000 ms.   |
 | `monitoring.stdout.*`          | Optional. If set up, metrics will be logged to stdout at INFO level.  |
 | `monitoring.sentry`            | Optional. If set up, errors will be sent to a [Sentry](https://sentry.io/) endpoint. |
 

@@ -45,10 +45,6 @@ The defaults should be good for the overwhelming majority of deployments and hop
 
 | parameter | description |
 |-----------|-------------|
-| `loader.loadMode.*`                   | BigQuery supports two loading APIs: <br/> - [Streaming Inserts API](https://cloud.google.com/bigquery/streaming-data-into-bigquery) <br/> - [Load Jobs API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs) (experimental)   |
-| `loader.loadMode.type`                | Defaults to `StreamingInserts`. The only other possible option is FileLoads. |
-| `loader.loadMode.retry`               | Defaults to `false`. Specifies if failed inserts should be retried infinitely or sent straight to the&nbsp;failedInserts&nbsp;topic. When set to true, if a row cannot be inserted, it will be re-tried indefinitely, which can throttle the whole load. In that case a restart might be required. This setting is only supported by the Streaming inserts API. |
-| `loader.loadMode.frequency`           | Defaults to `null`. Specifies how often the load job should be performed, in seconds. Unlike the near-real-time&nbsp;Streaming inserts&nbsp;API, load jobs are more batch-oriented. This setting is only supported by the Load jobs API. An example value is 60000.                                                                                             |
 | `loader.consumerSettings.maxQueueSize`  | Defaults to `3000`. The maximum number of unacked messages that stream loader can hold in memory at once |
 | `loader.consumerSettings.parallelPullCount`   | Defaults to `3`. The number of pullers used to pull messages from the input subscription |
 | `loader.consumerSettings.maxRequestBytes` | Defaults to `50000000`. The maximum size of unacked messages that stream loader can hold in memory at once |

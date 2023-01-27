@@ -6,7 +6,7 @@ export const versions = {
   rustTracker: '0.2.0',
 
   // Loaders
-  bqLoader: '1.6.3',
+  bqLoader: '1.6.4',
   esLoader: '2.0.9',
   gcsLoader: '0.5.4',
   postgresLoader: '0.3.3',

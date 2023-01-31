@@ -4,6 +4,13 @@ date: "2021-07-27"
 sidebar_position: 101
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+```
+
+
 # Snowplow Web Package
 
 **The package source code can be found in the [snowplow/dbt-snowplow-web repo](https://github.com/snowplow/dbt-snowplow-web), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web).**
@@ -87,3 +94,57 @@ models:
 If you have previously run the web model without this optional module enabled, you can simply enable the module and run `dbt run --selector snowplow_web` as many times as needed for this module to catch up with your other data. If you only wish to process this from a specific date, be sure to change your `snowplow__start_date`, or refer to the [Custom module](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) section for a detailed guide on how to achieve this the most efficient way.
 
 If you haven't run the web package before, then you can run it using `dbt run --selector snowplow_web` either through your CLI, within dbt Cloud, or for Enterprise customers you can use the BDP console. In this situation, all models will start in-sync as no events have been processed.
+
+## Stray Page Pings
+Stray Page Pings are pings within a session that do not have a corresponding `page_view` event within **the same session**. The most common cause of these is someone returning to a tab after their session has timed out but not refreshing the page. The `page_view` event exists in some other session, but there is no guarantee that both these sessions will be processed in the same run, which could lead to different results. Depending on your site content and user behavior the prevalence of sessions with stray page pings could vary greatly. For long-form content around 10% of all sessions contain only stray page pings (i.e. no page view events).
+
+We take different approaches to adjust for these stray pings at the page view and sessions levels, which can lead to differences between the two tables, but each is as accurate as we can currently make it.
+
+### Sessions
+As all our processing ensures full sessions are reprocessed, our sessions level table includes all stray page ping events, as well as all other view and ping events. We adjust the start time down based on your minimum visit length if the session starts with a page ping, and we include sessions that contain only (stray) pings. We also count page views based on the number of unique `page_view_ids` you have (from the `web_page` context) rather than using absolute `page_view` events to include these stray pings, and account for stray pings in the engaged time. Overall this is a more accurate view of a session and treats the stray pings as if they had a corresponding `page_view` event in the same session, even when they did not. 
+
+The result of this is you may see misalignment between sessions and if you tried to recalculate them based directly off the page views table; this is because we discard stray pings during page view processing as discussed below, so the values in the sessions table may be higher, but are more accurate at a session level.
+
+<center>
+<ThemedImage 
+alt='Stray page ping sessionisation'
+sources={{
+light: require('./images/stray_sessions_light.drawio.png').default, 
+dark: require('./images/stray_sessions_dark.drawio.png').default
+}}
+/>
+</center>
+
+
+### Page Views
+For page views, because we cannot guarantee the sessions with the `page_view` event and all subsequent `page_ping` events are processed within the same run, we choose to discard all stray page pings. Without doing this it could be possible that you would get different results from different run configurations.
+
+<div style ={{overflow:'hidden'}}>
+<div style={{float: 'left', width: '45%'}}>
+<center><p><b>Without enforcing within-session view</b></p></center>
+<ThemedImage 
+alt='Stray page ping page views'
+sources={{
+light: require('./images/stray_views_old-light.drawio.png').default, 
+dark: require('./images/stray_views_old-dark.drawio.png').default
+}}
+/>
+
+</div>
+<div style={{float: 'right', width: '45%'}}>
+<center><p><b>With enforcing within-session view</b></p></center>
+<ThemedImage 
+alt='Stray page ping page views'
+sources={{
+light: require('./images/stray_views_new-light.drawio.png').default, 
+dark: require('./images/stray_views_new-dark.drawio.png').default
+}}
+/>
+</div>
+</div>
+
+:::info
+
+Currently we do not process these discarded stray page pings in any way, meaning that engaged time and scroll depth in these cases may be under representative of the true value. Due to session level reprocessing this remains a complicated issue to resolve, but please [let us know](https://github.com/snowplow/dbt-snowplow-web/issues) if you would like to help solve this!
+
+:::

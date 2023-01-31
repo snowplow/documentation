@@ -94,6 +94,18 @@ You can also run the formatter command before committing changes manually:
 yarn format
 ```
 
+### Images
+We need to ensure that all images are visible in both light and dark themes, if your image does not have a background this can be achieved in a few ways:
+- Where possible for diagrams prefer the use of [mermaid diagrams](https://mermaid.js.org/intro/) as these adjust automatically
+- If you are using `drawio` diagrams, ensure that either the diagram has a non-transparent background, or provide a dark and light mode version using [Themed images](https://docusaurus.io/docs/next/markdown-features/assets#themed-images). If possible also include a copy of your diagram in the image as part of the export to allow easy editing in the future.
+- If you are editing a page with an existing diagram you cannot recreate, you can replace the existing image link with the below, which will add the light background even in dark mode. If you do this please also comment on the [issue here](TBC) to let us know so we can try and re-make the diagram in the future.
+    ```html
+    <div style={{"background-color": '#F2F4F7'}}>
+    <img src={require("./images/IMAGE_NAME.png").default}/>
+    </div>
+    ```
+
+
 ## VSCode Snippets
 
 We have created a selection of [VSCode Snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets) that cover some of the common, but fiddly, blocks of code you may require when writing docs. You can trigger these by starting to type their name and then pressing tab or use `Insert Snippet` in the Command Palette. All snippets we have created can be found [here](https://github.com/snowplow/documentation/blob/main/.vscode/snowplow-docs.code-snippets) and we currently have ones for:

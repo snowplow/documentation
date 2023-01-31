@@ -1,5 +1,5 @@
 ---
-title: "Setup Snowplow BDP on GCP"
+title: "Setup Snowplow BDP on GCP" 
 date: "2020-01-30"
 sidebar_position: 20
 coverImage: "gcp_logo.png"
@@ -19,21 +19,21 @@ Please create a new project segregated from anything else you have running in GC
 
 ### Set up required permissions
 
-Please add **techops-cloud-admin@snowplowanalytics.com** to your project with the following roles:
+Please add **techops-cloud-admin@snowplowanalytics.com** to your project. This account will be used to install and maintain your pipeline in GCP. The following roles are required:
 
-- `editor`
-- `Roles/resourcemanager.projectIamAdmin`
-- `Roles/errorreporting.admin`
-- `Roles/logging.admin`
-- `Roles/monitoring.admin`
-- `Roles/iam.roleAdmin`
-- `Roles/iam.serviceAccountAdmin`
+- [`editor`](https://cloud.google.com/iam/docs/roles-overview#basic-definitions)
+- [`Roles/resourcemanager.projectIamAdmin`](https://cloud.google.com/iam/docs/understanding-roles#resourcemanager.projectIamAdmin)
+- [`Roles/errorreporting.admin`](https://cloud.google.com/iam/docs/understanding-roles#errorreporting.admin)
+- [`Roles/logging.admin`](https://cloud.google.com/iam/docs/understanding-roles#logging.admin)
+- [`Roles/monitoring.admin`](https://cloud.google.com/iam/docs/understanding-roles#monitoring.admin)
+- [`Roles/iam.roleAdmin`](https://cloud.google.com/iam/docs/understanding-roles#iam.roleAdmin)
+- [`Roles/iam.serviceAccountAdmin`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountAdmin)
 
 The following roles are also required if using [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) within GCP:
 
-- `Roles/secretmanager.secretAccessor`
-- `Roles/secretmanager.secretVersionAdder`
+- [`Roles/secretmanager.secretAccessor`](https://cloud.google.com/iam/docs/understanding-roles#secretmanager.secretAccessor)
+- [`Roles/secretmanager.secretVersionAdder`](https://cloud.google.com/iam/docs/understanding-roles#secretmanager.secretVersionAdder)
 
 ### Enable billing for the project
 
-Please enable billing on the project as failing to do so will prevent the pipeline from being installed.
+Please enable billing on the project as failing to do so will prevent the pipeline from being installed. For details on enabling billing for your project, please refer to the GCP documentation for [APIs and billing](https://support.google.com/googleapi/answer/6158867).

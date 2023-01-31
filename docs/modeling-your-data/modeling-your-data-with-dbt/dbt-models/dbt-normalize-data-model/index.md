@@ -86,11 +86,18 @@ This package consists of two macros, a python script, and some example configura
   - `models/base/`: Models relating to the incremental nature of the package, processing only new events (and those covered by the lookback window). 
 ## Operation
 
+:::tip Using dbt Cloud?
+
+If you are using dbt Cloud then you will need to run the model-generating script locally, as there is no way to do this in cloud, and then copy your models up to your Cloud environment. You'll still need to add the package to your `packages.yml` file in your project.
+
+You will need to have [python installed](https://www.python.org/downloads/), and basic experience using the terminal and a text editor, but there is no need to install dbt. If you clone or download the [package repo](https://github.com/snowplow/dbt-snowplow-normalize) you can follow the instruction below, but remove the `dbt_packages/snowplow_normalize` from the front of paths when you see it.
+
+:::
+
 In general, it should only be required to run the script in this package once to begin with, then only as/when you need to add new models based on new events or alter the contexts attached to existing ones. While it is possible to manually set the values and use the macros, it is not recommended due to the time it would take and the likelihood of making mistakes.
 
 
 The script should always be run from the **root** of your dbt project (the same level your `dbt_project.yml` file is at).
-
 
 ### Install python packages
 :::caution

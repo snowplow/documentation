@@ -215,7 +215,7 @@ After adding the script, you need to restart the cluster. Verify that changes to
 evaluating `spark.conf.get("spark.databricks.acl.sqlOnly")`, which should return `true`.
 
 
-Start the loader so it could create tables. Now cluster is ready to be configured:
+Start the loader so that it can create the tables. Now the cluster is ready to be configured:
 
 ```sql
 -- Clean initial permissions from tables

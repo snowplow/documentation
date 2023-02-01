@@ -189,7 +189,7 @@ PARTITIONED BY (collector_tstamp_date, event_name);
 </details>
 
 
-### Minimal Security Configuration (_optional_)
+### Minimal Security Configuration _(optional)_
 
 The security principal used by loader needs `Databricks SQL access` permission which can be enabled in the _Admin Console_.
 

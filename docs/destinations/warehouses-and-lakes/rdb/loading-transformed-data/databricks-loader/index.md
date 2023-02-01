@@ -229,7 +229,7 @@ REVOKE ALL PRIVILEGES ON SCHEMA <catalog>.<schema> FROM `<principal>`;
 -- Loader will run CREATE TABLE IF NOT EXISTS statements, so USAGE and CREATE and both required.
 GRANT USAGE, CREATE ON SCHEMA <catalog>.<schema> TO `<principal>`;
 
--- COPY TO statement requires ANY FILE and MODIFY for receiving table
+-- COPY TO statement requires ANY FILE and MODIFY for the receiving table
 GRANT SELECT ON ANY FILE TO `<principal>`;
 GRANT MODIFY  ON TABLE  <catalog>.<schema>.events TO `<principal>`;
 

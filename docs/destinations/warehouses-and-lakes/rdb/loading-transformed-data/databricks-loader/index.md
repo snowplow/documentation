@@ -211,8 +211,8 @@ dbutils.fs.put("dbfs:/databricks/init/set_spark_params.sh","""
 `}</CodeBlock>
 </details>
 
-After script is added cluster needs to be restarted. Verify that changes took effect with 
-`spark.conf.get("spark.databricks.acl.sqlOnly")`, should return `true`.
+After adding the script, you need to restart the cluster. Verify that changes took effect by 
+evaluating `spark.conf.get("spark.databricks.acl.sqlOnly")`, which should return `true`.
 
 
 Start the loader so it could create tables. Now cluster is ready to be configured:

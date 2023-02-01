@@ -31,7 +31,7 @@ Above assumes that you have following directory structure:
 - Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)
 - [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md)
 
-It is possible to use environment variables in all of the above.
+It is possible to use environment variables in all of the above (for Iglu and enrichments starting from `3.7.0` only).
 
 Depending on where the app runs, `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` might not be required.
 

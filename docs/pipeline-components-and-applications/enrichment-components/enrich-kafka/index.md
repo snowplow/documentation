@@ -31,6 +31,8 @@ Above assumes that you have following directory structure:
 2. Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)
 3. [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md)
 
+It is possible to use environment variables in all of the above.
+
 Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
 
 <CodeBlock language="bash">{

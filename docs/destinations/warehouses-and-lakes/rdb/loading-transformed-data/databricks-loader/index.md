@@ -191,7 +191,7 @@ PARTITIONED BY (collector_tstamp_date, event_name);
 
 ### Minimal Security Configuration (_optional_)
 
-Security principal used by loader needs `Databricks SQL access` permission which could enable in `Admin Console`.
+The security principal used by loader needs `Databricks SQL access` permission which can be enabled in the _Admin Console_.
 
 Databricks does not have table access enabled by default. Enable it with the 
 init script:

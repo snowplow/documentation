@@ -189,6 +189,55 @@ PARTITIONED BY (collector_tstamp_date, event_name);
 </details>
 
 
+### Minimal Security Configuration _(optional)_
+
+The security principal used by loader needs `Databricks SQL access` permission which can be enabled in the _Admin Console_.
+
+Databricks does not have table access enabled by default. Enable it with the 
+init script:
+<details>
+  <summary>Init script creation in scala notebook</summary>
+  <CodeBlock language="scala">{
+`
+dbutils.fs.put("dbfs:/databricks/init/set_spark_params.sh","""
+|#!/bin/bash
+|
+|cat << 'EOF' > /databricks/driver/conf/00-custom-table-access.conf
+|[driver] {
+|  "spark.databricks.acl.sqlOnly" = "true"
+|}
+|EOF
+""".stripMargin, true)
+`}</CodeBlock>
+</details>
+
+After adding the script, you need to restart the cluster. Verify that changes took effect by 
+evaluating `spark.conf.get("spark.databricks.acl.sqlOnly")`, which should return `true`.
+
+
+Start the loader so that it can create the tables. Now the cluster is ready to be configured:
+
+```sql
+-- Clean initial permissions from tables
+REVOKE ALL PRIVILEGES ON TABLE <catalog>.<schema>.events FROM `<principal>`;
+REVOKE ALL PRIVILEGES ON TABLE <catalog>.<schema>.manifest FROM `<principal>`;
+REVOKE ALL PRIVILEGES ON TABLE <catalog>.<schema>.rdb_folder_monitoring FROM `<principal>`;
+
+-- Clean initial permissions from schema
+REVOKE ALL PRIVILEGES ON SCHEMA <catalog>.<schema> FROM `<principal>`;
+
+-- Loader will run CREATE TABLE IF NOT EXISTS statements, so USAGE and CREATE and both required.
+GRANT USAGE, CREATE ON SCHEMA <catalog>.<schema> TO `<principal>`;
+
+-- COPY TO statement requires ANY FILE and MODIFY for the receiving table
+GRANT SELECT ON ANY FILE TO `<principal>`;
+GRANT MODIFY  ON TABLE  <catalog>.<schema>.events TO `<principal>`;
+
+-- These tables are used to store internal loader state
+GRANT MODIFY, SELECT ON TABLE  <catalog>.<schema>.manifest TO `<principal>`;
+GRANT MODIFY, SELECT ON TABLE  <catalog>.<schema>.rdb_folder_monitoring TO `<principal>`;
+```
+
 ### Downloading the artifact
 
 The asset is published as a jar file attached to the [Github release notes](https://github.com/snowplow/snowplow-rdb-loader/releases) for each version.

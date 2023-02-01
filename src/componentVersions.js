@@ -17,7 +17,7 @@ export const versions = {
   // Other stuff
   snowplowMicro: '1.3.3',
   collector: '2.8.2',
-  enrich: '3.6.1',
+  enrich: '3.7.0',
   sqs2kinesis: '1.0.4',
   igluServer: '0.9.0',
   igluctl: '0.10.2',

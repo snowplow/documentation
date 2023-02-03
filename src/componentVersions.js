@@ -15,7 +15,7 @@ export const versions = {
   s3Loader22x: '2.2.6',
 
   // Other stuff
-  snowplowMicro: '1.3.3',
+  snowplowMicro: '1.5.0',
   collector: '2.8.2',
   enrich: '3.7.0',
   sqs2kinesis: '1.0.4',

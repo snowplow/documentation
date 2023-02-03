@@ -88,7 +88,11 @@ A self-describing JSON has two keys, `schema` and `data`. The `schema` valu
 
 After events have been collected by the event collector, they are validated to ensure that the properties match the self-describing JSONs. Mistakes (e.g. extra fields, or incorrect types) will result in events being processed as Bad Events. This means that only high-quality, valid events arrive in your data storage or real-time stream.
 
-Your schemas must be accessible to your pipeline to allow this validation. We provide [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) for schema management. If you are a paid Snowplow customer, you can manage your schemas through your console. Check out our [Ruby tracker Rails](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) example to see how we included schemas in the Snowplow Micro testing pipeline in that app.
+```mdx-code-block
+import SchemaAccess from "@site/docs/reusable/schema-access/_index.md"
+
+<SchemaAccess/>
+```
 
 Creating an instance of `SelfDescribing` takes a schema name and a dictionary of event data.
 

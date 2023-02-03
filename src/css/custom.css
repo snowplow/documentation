@@ -303,3 +303,7 @@ textarea {
 textarea {
   max-width: 100%;
 }
+
+img.shield {
+  vertical-align: text-bottom;
+}

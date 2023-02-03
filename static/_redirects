@@ -92,3 +92,6 @@
 /docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/upgrade-guides/* /docs/destinations/warehouses-and-lakes/rdb/upgrade-guides/:splat 301
 
 /docs/destinations/forwarding-events/google-tag-manager-server-side/building-an-enriched-event-relay-for-gtm-ss/ /docs/destinations/forwarding-events/snowbridge/ 301
+
+/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/example-of-automated-tests/ /docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/ 301
+/docs/understanding-your-pipeline/what-is-snowplow-micro/ /docs/getting-started-with-micro/what-is-micro/ 301

@@ -1,7 +1,6 @@
 ---
-title: "Set up automated testing with Snowplow Micro"
-date: "2021-03-26"
-sidebar_position: 1000
+title: "Automated testing with Snowplow Micro"
+sidebar_position: 0
 ---
 
 ```mdx-code-block
@@ -9,637 +8,734 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-# Snowplow Micro
+[Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) is a lightweight version of the Snowplow pipeline which is great for testing.
 
-[![Latest Docker image version](https://img.shields.io/docker/v/snowplow/snowplow-micro?sort=semver)](https://hub.docker.com/r/snowplow/snowplow-micro)
+The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository aims to show in detail all the steps to setting up automated tests for your Snowplow event tracking (using Nightwatch and Cypress as examples of test tools), to build end-to-end GitHub Actions testing workflows.
 
-[![Latest Docker image version](https://img.shields.io/docker/pulls/snowplow/snowplow-micro)](https://hub.docker.com/r/snowplow/snowplow-micro)
+## Local setup
 
-  
-  
-  
-  
+### Prerequisites
 
-## What is Snowplow Micro for?
+We recommend setting up the following tools before starting:
 
-Snowplow Micro is built to enable users to run automated test suites to ensure that new releases of their websites, mobile apps and server-side applications do not break the tracking setup and Snowplow data collection.
+- Git
+- Docker and Docker-compose
+- Npm
 
-Snowplow Micro is a very small version of a full Snowplow data collection pipeline: small enough that it can be launched by a test suite. Events can be recorded into Snowplow Micro just as they can a full Snowplow pipeline. Micro then exposes an API that can be queried to understand:
+### Clone the repo, start Snowplow Micro and serve the app
 
-- How many events have been received?
-- How many of them were successfully processed vs ended up as "bad" (e.g. because the events failed validation against the corresponding schemas in the [Iglu](https://github.com/snowplow/iglu) Schema Registry)
-- For any events that have successfully processed, what type of events they are, what fields have been recorded etc.
-- For any events that have not been successfully processed, what errors were generated on processing the events. (So these can be surfaced back via the test suite.)
+```bash
+git clone https://github.com/snowplow-incubator/snowplow-micro-examples.git
 
-This means you can build automated test suites to assert that specific user behaviour in an application generates specific events that are successfully processed by Snowplow.
+cd snowplow-micro-examples
 
-## How do I run Snowplow Micro?
-
-Snowplow Micro is configured at runtime through the [Stream Collector](https://github.com/snowplow/stream-collector) configuration and the [Iglu](https://github.com/snowplow/iglu) resolver configuration. So, to start Snowplow Micro:
-
-1. Update the stream-collector [configuration for Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro/blob/master/example/micro.conf)
-2. Update the [configuration for Iglu resolvers](https://github.com/snowplow-incubator/snowplow-micro/blob/master/example/iglu.json)
-3. Run Micro either using Docker or using Java.
-
-#### Using Docker
-
-Snowplow Micro is hosted on Docker Hub: [snowplow/snowplow-micro](https://hub.docker.com/r/snowplow/snowplow-micro). (since version `1.2`, Micro's Docker images support `amd64` devices as well).
-
-The configuration files must be placed in a folder that is mounted in the Docker container, and the port configured for Micro needs to be exposed. For example, with configuration files in `./example` directory and to bind port `9090`:
-
-<CodeBlock language="bash">{
-`docker run \\
-  --mount type=bind,source=$(pwd)/example,destination=/config \\
-  -p 9090:9090 \\
-  snowplow/snowplow-micro:${versions.snowplowMicro} \\
-  --collector-config /config/micro.conf \\
-  --iglu /config/iglu.json`
-}</CodeBlock>
-
-#### Using Java
-
-Alternatively, a Snowplow Micro jar file is hosted on the [Github release](https://github.com/snowplow-incubator/snowplow-micro/releases) page.
-
-<CodeBlock Language="bash">{
-`java -jar snowplow-micro-${versions.snowplowMicro}.jar --collector-config example/micro.conf --iglu example/iglu.json`
-}</CodeBlock>
-
-## REST API
-
-Snowplow Micro offers the following endpoints to query the data recorded.
-
-### /micro/all
-
-This endpoint responds with a summary JSON object of the number of total, good and bad events currently in the cache.
-
-#### HTTP method
-
-`GET`, `POST`, `OPTIONS`
-
-#### Response format
-
-Example:
-
-```json
-{
-  "total": 7,
-  "good": 5,
-  "bad": 2
-}
+docker-compose up
 ```
 
-### /micro/good
+This will:
 
-This endpoint queries the good events, which are the events that have been successfully validated.
+1. Start serving the app on `localhost:8000`
+2. Launch Snowplow Micro, mounting the `micro` directory and setting the port 9090 for accessing Micro's [REST API](/docs/getting-started-with-micro/what-is-micro/index.md?preview_id=6151&preview_nonce=51ab1bb706&preview=true#REST_API) endpoints. Inside the `micro` directory are:
+    1. The [configuration for Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/micro.conf).
+    2. The [configuration for Iglu resolvers](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu.json).
+    3. The `iglu-client-embedded` directory containing the custom schemas used for tracking.
 
-#### HTTP method
+### Install npm dependencies
 
-- `GET`: get _all_ the good events from the cache.
-- `POST`: get the good events with the possibility to filter.
+```bash
+npm install
+```
 
-#### Response format
+This step will install Nightwatch and Cypress.
 
-JSON array of [GoodEvent](https://github.com/snowplow-incubator/snowplow-micro/blob/master/src/main/scala/com.snowplowanalytics.snowplow.micro/model.scala#L19)s. A `GoodEvent` contains 4 fields:
+### Run the tests
 
-- `rawEvent`: contains the [RawEvent](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/adapters/RawEvent.scala#L28). It corresponds to the format of a validated event just before being enriched.
-- `event`: contains the [canonical snowplow Event](https://github.com/snowplow/snowplow-scala-analytics-sdk/blob/master/src/main/scala/com.snowplowanalytics.snowplow.analytics.scalasdk/Event.scala#L42). It is in the format of an event after enrichment, even if all the enrichments are deactivated.
-- `eventType`: type of the event.
-- `schema`: schema of the event in case of an unstructured event.
-- `contexts`: contexts of the event.
+Our demo web app uses snowplow to track user activity. We will be testing that tracking is properly configured on our site.
 
-An example of a response with one event can be found below:
+To run all tests:
 
-```json
-[
-  {
-    "rawEvent":{
-      "api":{
-        "vendor":"com.snowplowanalytics.snowplow",
-        "version":"tp2"
-      },
-      "parameters":{
-        "e":"pv",
-        "duid":"36746fd2-8441-4ea2-8ad0-237d6f4c77cf",
-        "vid":"1",
-        "co":"{\"schema\":\"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0\",\"data\":[{\"schema\":\"iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0\",\"data\":{\"id\":\"5cea9899-10df-4ccf-bf66-8c36f4a4bba2\"}}]}",
-        "eid":"bee0a6d7-fc17-4392-b2bc-2208e8e944f3",
-        "url":"http://localhost:8000/",
-        "refr":"http://localhost:8000/__/",
-        "aid":"shop",
-        "tna":"sp1",
-        "cs":"UTF-8",
-        "cd":"24",
-        "stm":"1630238465752",
-        "tz":"Europe/London",
-        "tv":"js-3.1.3",
-        "vp":"1000x660",
-        "ds":"988x670",
-        "res":"1920x1080",
-        "cookie":"1",
-        "p":"web",
-        "dtm":"1630238465748",
-        "uid":"tester",
-        "lang":"en-US",
-        "sid":"6d15a4fb-9623-4ba1-b876-5240e72e6970"
-      },
-      "contentType":"application/json",
-      "source":{
-        "name":"ssc-2.3.1-stdout$",
-        "encoding":"UTF-8",
-        "hostname":"0.0.0.0"
-      },
-      "context":{
-        "timestamp":"2021-08-29T12:01:05.787Z",
-        "ipAddress":"172.17.0.1",
-        "useragent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-        "refererUri":"http://localhost:8000/",
-        "headers":[
-          "Timeout-Access: <function1>",
-          "Connection: keep-alive",
-          "Host: 0.0.0.0:9090",
-          "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-          "Accept: */*",
-          "Accept-Language: en-US, en;q=0.5",
-          "Accept-Encoding: gzip",
-          "Referer: http://localhost:8000/",
-          "Origin: http://localhost:8000",
-          "Cookie: micro=3734601f-5c3d-47c5-b367-0883e1ed74e6",
-          "application/json"
-        ],
-        "userId":"3734601f-5c3d-47c5-b367-0883e1ed74e6"
-      }
+```bash
+npm test
+```
+
+For running only [Nightwatch](https://nightwatchjs.org/) tests:
+
+```bash
+npm run test:nightwatch
+```
+
+For running only [Cypress](https://www.cypress.io/) tests:
+
+```bash
+# From the command line
+npm run cypress:run
+
+# To launch the Test Runner
+npm run cypress:open
+```
+
+## Github Actions
+
+Inside the `.github/workflows/` directory you can find the `.yml` files we use to test this exaple app with Micro and Nightwatch/Cypress. A general workflow file would definitely use the [Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro) step, which for our example is:
+
+```yaml
+- name: Start Micro
+    run: docker-compose up -d
+    working-directory: snowplow-micro-examples
+```
+
+In order to use it, just make sure that:
+
+1. Your `working-directory` contains the `micro/` directory that Micro will mount, containing a `micro.conf` and a `iglu.json` configuration for Micro and Iglu respectively.
+2. Your `docker-compose.yml` file is adjusted accordingly
+
+If you wanted to use `docker run` instead of `docker-compose`, the same step would be:
+
+<CodeBlock language="yaml">{
+`- name: Start Micro
+    run: docker run --mount type=bind,source=$(pwd)/micro,destination=/config -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --collector-config /config/micro.conf --iglu /config/iglu.json & \\
+    working-directory: snowplow-micro-examples`
+}</CodeBlock>
+
+## Tracking design
+
+Our demo web app uses Snowplow to track user activity. Then, using Snowplow Micro we will be testing that tracking is properly configured on our site using, as examples, two populat web test tools, Nightwatch and Cypress.
+
+### Overview of the demo app
+
+The example application is a simple ecommerce app consisting of just 3 pages:
+
+1. A start-up page with a sample login form (no authentication involved - see also the **Note** below)
+2. The shop page including a same-page cart
+3. The purchase-confirmation page
+
+> **Note:** The form of the login-page is only for demonstrating the tracking of form events (which can also show that password fields are not being tracked). There is no authentication involved. While you can type anything and continue to the shop-page, we recommend that you do not use any personal data.
+
+Each page serves the purpose of demonstrating possible event-tracking, which will then be tested using Snowplow Micro and a test tool.
+
+### Event dictionary
+
+Using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md):
+
+```html
+<!-- Snowplow starts plowing -->
+<script type="text/javascript">
+;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+};p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+n.src=w;g.parentNode.insertBefore(n,g)}}(window, document, "script", "{% static 'ecommerce/js/sp.js' %}", "snowplow"));
+```
+
+The tracking implemented consists of:
+
+- Pageview tracking
+    - This event happens when a user visits a page.
+    - It is a predefined Snowplow event, that automatically captures the URL, referrer and page title.
+
+```javascript
+window.snowplow('trackPageView');
+```
+
+- Activity Tracking
+    - This event happens when a user engages with a page (e.g. user scrolls).
+    - It is a predefined Snowplow event, that automatically records the maximum scroll left-right, up-down in the last ping period.
+    - Method call - before the trackPageView method call:
+
+```javascript
+// login-page
+window.snowplow('enableActivityTracking', {
+    minimumVisitLength: 20,
+    heartbeatDelay: 20
+});
+
+// shop-page:
+window.snowplow('enableActivityTracking', {
+    minimumVisitLength: 10,
+    heartbeatDelay: 10
+});
+```
+
+- Form Tracking
+    - This set of events happens when a user interacts with a web form (e.g. focus on an form element, change a value of input-textarea-select element form, submit a form)
+    - These are predefined Snowplow events that are of unstructured eventType and can be customized. Data captured:
+        - **focus_form**: id, classes of the form and name, type, value of the form element that received focus.
+        - **change_form**: name, type, new value of the element, id of the parent form
+        - **submit_form**: id, classes of the form and name, type, value of all form elements
+    - **Note**: _By default, Form Tracking does not track password fields. We used the `options` to demonstrate how you can ensure the Non-tracking of sensitive fields. With Snowplow Micro we can also later test that any denylisting of forms is implemented correctly and that no sensitive fields are tracked._
+
+```javascript
+var options = {
+    forms: {
+        denylist: []
     },
-    "eventType":"page_view",
-    "schema":"iglu:com.snowplowanalytics.snowplow/page_view/jsonschema/1-0-0",
-    "contexts":[
-      "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"
-    ],
-    "event":{
-      "app_id":"shop",
-      "platform":"web",
-      "etl_tstamp":"2021-08-29T12:01:05.792Z",
-      "collector_tstamp":"2021-08-29T12:01:05.787Z",
-      "dvce_created_tstamp":"2021-08-29T12:01:05.748Z",
-      "event":"page_view",
-      "event_id":"bee0a6d7-fc17-4392-b2bc-2208e8e944f3",
-      "txn_id":null,
-      "name_tracker":"sp1",
-      "v_tracker":"js-3.1.3",
-      "v_collector":"ssc-2.3.1-stdout$",
-      "v_etl":"snowplow-micro-1.3.1-common-2.0.2",
-      "user_id":"tester",
-      "user_ipaddress":"172.17.0.1",
-      "user_fingerprint":null,
-      "domain_userid":"36746fd2-8441-4ea2-8ad0-237d6f4c77cf",
-      "domain_sessionidx":1,
-      "network_userid":"3734601f-5c3d-47c5-b367-0883e1ed74e6",
-      "geo_country":null,
-      "geo_region":null,
-      "geo_city":null,
-      "geo_zipcode":null,
-      "geo_latitude":null,
-      "geo_longitude":null,
-      "geo_region_name":null,
-      "ip_isp":null,
-      "ip_organization":null,
-      "ip_domain":null,
-      "ip_netspeed":null,
-      "page_url":"http://localhost:8000/",
-      "page_title":null,
-      "page_referrer":"http://localhost:8000/__/",
-      "page_urlscheme":"http",
-      "page_urlhost":"localhost",
-      "page_urlport":8000,
-      "page_urlpath":"/",
-      "page_urlquery":null,
-      "page_urlfragment":null,
-      "refr_urlscheme":"http",
-      "refr_urlhost":"localhost",
-      "refr_urlport":8000,
-      "refr_urlpath":"/__/",
-      "refr_urlquery":null,
-      "refr_urlfragment":null,
-      "refr_medium":null,
-      "refr_source":null,
-      "refr_term":null,
-      "mkt_medium":null,
-      "mkt_source":null,
-      "mkt_term":null,
-      "mkt_content":null,
-      "mkt_campaign":null,
-      "contexts":{
-        "schema":"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-        "data":[
-          {
-            "schema":"iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-            "data":{
-              "id":"5cea9899-10df-4ccf-bf66-8c36f4a4bba2"
+    fields: {
+        denylist: ['user_password']
+    }
+};
+
+window.snowplow('enableFormTracking', { options: options });
+```
+
+- Tracking custom self-describing(unstructured) events
+    1. cart-events ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/cart_action_event/jsonschema/1-0-0))
+        - These events happen when a user interacts with the cart, adding or removing items, using the Add-to-cart or Remove buttons.
+        - This is a self-describing event that captures the type of cart interaction: "add" versus "remove".
+        - We also want to add as [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#Custom_context) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
+        - Implemented in the shop-page (see file [shoppage.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/app/static/ecommerce/js/shoppage.js)):
+
+```javascript
+// TRACK cart_action_event (add)
+window.snowplow('trackSelfDescribingEvent', {
+    event: {
+        schema: 'iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0',
+        data: {
+            type: 'add',
+        },
+    },
+    context: [
+        {
+            schema: 'iglu:test.example.iglu/product_entity/jsonschema/1-0-0',
+            data: {
+                sku: sku,
+                name: title,
+                price: parseFloat(price),
+                quantity: parseInt(quantity)
             }
-          }
-        ]
-      },
-      "se_category":null,
-      "se_action":null,
-      "se_label":null,
-      "se_property":null,
-      "se_value":null,
-      "unstruct_event":null,
-      "tr_orderid":null,
-      "tr_affiliation":null,
-      "tr_total":null,
-      "tr_tax":null,
-      "tr_shipping":null,
-      "tr_city":null,
-      "tr_state":null,
-      "tr_country":null,
-      "ti_orderid":null,
-      "ti_sku":null,
-      "ti_name":null,
-      "ti_category":null,
-      "ti_price":null,
-      "ti_quantity":null,
-      "pp_xoffset_min":null,
-      "pp_xoffset_max":null,
-      "pp_yoffset_min":null,
-      "pp_yoffset_max":null,
-      "useragent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-      "br_name":null,
-      "br_family":null,
-      "br_version":null,
-      "br_type":null,
-      "br_renderengine":null,
-      "br_lang":"en-US",
-      "br_features_pdf":null,
-      "br_features_flash":null,
-      "br_features_java":null,
-      "br_features_director":null,
-      "br_features_quicktime":null,
-      "br_features_realplayer":null,
-      "br_features_windowsmedia":null,
-      "br_features_gears":null,
-      "br_features_silverlight":null,
-      "br_cookies":true,
-      "br_colordepth":"24",
-      "br_viewwidth":1000,
-      "br_viewheight":660,
-      "os_name":null,
-      "os_family":null,
-      "os_manufacturer":null,
-      "os_timezone":"Europe/London",
-      "dvce_type":null,
-      "dvce_ismobile":null,
-      "dvce_screenwidth":1920,
-      "dvce_screenheight":1080,
-      "doc_charset":"UTF-8",
-      "doc_width":988,
-      "doc_height":670,
-      "tr_currency":null,
-      "tr_total_base":null,
-      "tr_tax_base":null,
-      "tr_shipping_base":null,
-      "ti_currency":null,
-      "ti_price_base":null,
-      "base_currency":null,
-      "geo_timezone":null,
-      "mkt_clickid":null,
-      "mkt_network":null,
-      "etl_tags":null,
-      "dvce_sent_tstamp":"2021-08-29T12:01:05.752Z",
-      "refr_domain_userid":null,
-      "refr_dvce_tstamp":null,
-      "derived_contexts":{},
-      "domain_sessionid":"6d15a4fb-9623-4ba1-b876-5240e72e6970",
-      "derived_tstamp":"2021-08-29T12:01:05.783Z",
-      "event_vendor":"com.snowplowanalytics.snowplow",
-      "event_name":"page_view",
-      "event_format":"jsonschema",
-      "event_version":"1-0-0",
-      "event_fingerprint":null,
-      "true_tstamp":null
-    }
-  }
-]
-```
-
-#### Filters
-
-When querying `/micro/good` with `POST` (`Content-Type: application/json` needs to be set in the headers of the request), it's possible to specify filters, thanks to a JSON in the data of the HTTP request.
-
-Example of command to query the good events: 
-
-```bash
-curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/good -d '<JSON>'
-```
-
-An example of JSON with filters could be:
-
-```json
-{ 
-  "schema": "iglu:com.acme/example/jsonschema/1-0-0",
-  "contexts": [
-    "com.snowplowanalytics.mobile/application/jsonschema/1-0-0",
-    "com.snowplowanalytics.mobile/screen/jsonschema/1-0-0"
-  ],
-  "limit": 10
-}
-```
-
-List of possible fields for the filters:
-
-- `event_type`: type of the event (in `e` param);
-- `schema`: corresponds to the shema of an [unstructured event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#Custom_unstructured_event_tracking) (schema of the self-describing JSON contained in `ue_pr` or `ue_px`). It automatically implies `event_type` = `ue`.
-- `contexts`: list of the schemas contained in the contexts of an event (parameters `co` or `cx`). An event must contain **all** the contexts of the list to be returned. It can also contain more contexts than the ones specified in the request.
-- `limit`: limit the number of events in the response (most recent events are returned).
-
-It's not necessary to specify all the fields in a request, only the ones that need to be used for filtering.
-
-### /micro/bad
-
-This endpoint queries the bad events, which are the events that failed validation.
-
-#### HTTP method
-
-- `GET`: get _all_ the bad events from the cache.
-- `POST`: get the bad events with the possibility to filter.
-
-#### Response format
-
-JSON array of [BadEvent](https://github.com/snowplow-incubator/snowplow-micro/blob/master/src/main/scala/com.snowplowanalytics.snowplow.micro/model.scala#L28)s. A `BadEvent` contains 3 fields:
-
-- `collectorPayload`: contains the [CollectorPayload](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/loaders/CollectorPayload.scala#L107) with all the raw information of the tracking event. This field can be empty if an error occured before trying to validate a payload.
-- `rawEvent`: contains the [RawEvent](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/adapters/RawEvent.scala#L28). It corresponds to the format of a validated event just before being enriched.
-- `errors`: list of errors that occured during the validation of the tracking event.
-
-An example of a response with one bad event can be found below:
-
-```json
-[
-  {
-    "collectorPayload":{
-      "api":{
-        "vendor":"com.snowplowanalytics.snowplow",
-        "version":"tp2"
-      },
-      "querystring":[],
-      "contentType":"application/json",
-      "body":"{\"schema\":\"iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4\",\"data\":[{\"e\":\"ue\",\"eid\":\"36c39024-7b1b-4c2c-ae85-e95a8cb8340a\",\"tv\":\"js-3.1.3\",\"tna\":\"spmicro\",\"aid\":\"sh0pspr33\",\"p\":\"web\",\"cookie\":\"1\",\"cs\":\"UTF-8\",\"lang\":\"en-US\",\"res\":\"1920x1080\",\"cd\":\"24\",\"tz\":\"Europe/London\",\"dtm\":\"1630234190717\",\"vp\":\"1000x660\",\"ds\":\"1003x2242\",\"vid\":\"1\",\"sid\":\"13c8f5ac-d999-4923-940d-b39f7b74aa94\",\"duid\":\"8a17bb29-e35c-4363-aec3-85b9b363f9bf\",\"uid\":\"tester\",\"refr\":\"http://localhost:8000/\",\"url\":\"http://localhost:8000/shop/\",\"ue_pr\":\"{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"schema\\\":\\\"iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"type\\\":\\\"add\\\"}}}\",\"co\":\"{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0\\\",\\\"data\\\":[{\\\"schema\\\":\\\"iglu:test.example.iglu/product_entity/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"sku\\\":\\\"hh456\\\",\\\"name\\\":\\\"One-size bucket hat\\\",\\\"price\\\":24.49,\\\"quantity\\\":\\\"2\\\"}},{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"id\\\":\\\"fe0dd7c7-fb0b-43a2-b299-75d20baa94ec\\\"}}]}\",\"stm\":\"1630234190719\"}]}",
-      "source":{
-        "name":"ssc-2.3.1-stdout$",
-        "encoding":"UTF-8",
-        "hostname":"0.0.0.0"
-      },
-      "context":{
-        "timestamp":"2021-08-29T10:49:50.727Z",
-        "ipAddress":"172.17.0.1",
-        "useragent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-        "refererUri":"http://localhost:8000/",
-        "headers":[
-          "Timeout-Access: <function1>",
-          "Connection: keep-alive",
-          "Host: 0.0.0.0:9090",
-          "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-          "Accept: */*",
-          "Accept-Language: en-US, en;q=0.5",
-          "Accept-Encoding: gzip",
-          "Referer: http://localhost:8000/",
-          "Origin: http://localhost:8000",
-          "Cookie: micro=3734601f-5c3d-47c5-b367-0883e1ed74e6",
-          "application/json"
-        ],
-        "userId":"3734601f-5c3d-47c5-b367-0883e1ed74e6"
-      }
-    },
-    "rawEvent":{
-      "api":{
-        "vendor":"com.snowplowanalytics.snowplow",
-        "version":"tp2"
-      },
-      "parameters":{
-        "e":"ue",
-        "duid":"8a17bb29-e35c-4363-aec3-85b9b363f9bf",
-        "vid":"1",
-        "co":"{\"schema\":\"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0\",\"data\":[{\"schema\":\"iglu:test.example.iglu/product_entity/jsonschema/1-0-0\",\"data\":{\"sku\":\"hh456\",\"name\":\"One-size bucket hat\",\"price\":24.49,\"quantity\":\"2\"}},{\"schema\":\"iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0\",\"data\":{\"id\":\"fe0dd7c7-fb0b-43a2-b299-75d20baa94ec\"}}]}",
-        "eid":"36c39024-7b1b-4c2c-ae85-e95a8cb8340a",
-        "url":"http://localhost:8000/shop/",
-        "refr":"http://localhost:8000/",
-        "aid":"sh0pspr33",
-        "tna":"spmicro",
-        "cs":"UTF-8",
-        "cd":"24",
-        "stm":"1630234190719",
-        "tz":"Europe/London",
-        "tv":"js-3.1.3",
-        "vp":"1000x660",
-        "ds":"1003x2242",
-        "ue_pr":"{\"schema\":\"iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0\",\"data\":{\"schema\":\"iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0\",\"data\":{\"type\":\"add\"}}}",
-        "res":"1920x1080",
-        "cookie":"1",
-        "p":"web",
-        "dtm":"1630234190717",
-        "uid":"tester",
-        "lang":"en-US",
-        "sid":"13c8f5ac-d999-4923-940d-b39f7b74aa94"
-      },
-      "contentType":"application/json",
-      "source":{
-        "name":"ssc-2.3.1-stdout$",
-        "encoding":"UTF-8",
-        "hostname":"0.0.0.0"
-      },
-      "context":{
-        "timestamp":"2021-08-29T10:49:50.727Z",
-        "ipAddress":"172.17.0.1",
-        "useragent":"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-        "refererUri":"http://localhost:8000/",
-        "headers":[
-          "Timeout-Access: <function1>",
-          "Connection: keep-alive",
-          "Host: 0.0.0.0:9090",
-          "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0",
-          "Accept: */*",
-          "Accept-Language: en-US, en;q=0.5",
-          "Accept-Encoding: gzip",
-          "Referer: http://localhost:8000/",
-          "Origin: http://localhost:8000",
-          "Cookie: micro=3734601f-5c3d-47c5-b367-0883e1ed74e6",
-          "application/json"
-        ],
-        "userId":"3734601f-5c3d-47c5-b367-0883e1ed74e6"
-      }
-    },
-    "errors":[
-      "Error while validating the event",
-      "{\"schema\":\"iglu:com.snowplowanalytics.snowplow.badrows/schema_violations/jsonschema/2-0-0\",\"data\":{\"processor\":{\"artifact\":\"snowplow-micro\",\"version\":\"1.2.1\"},\"failure\":{\"timestamp\":\"2021-08-29T10:49:50.739178Z\",\"messages\":[{\"schemaKey\":\"iglu:test.example.iglu/product_entity/jsonschema/1-0-0\",\"error\":{\"error\":\"ValidationError\",\"dataReports\":[{\"message\":\"$.quantity: string found, integer expected\",\"path\":\"$.quantity\",\"keyword\":\"type\",\"targets\":[\"string\",\"integer\"]}]}}]},\"payload\":{\"enriched\":{\"app_id\":\"sh0pspr33\",\"platform\":\"web\",\"etl_tstamp\":\"2021-08-29 10:49:50.731\",\"collector_tstamp\":\"2021-08-29 10:49:50.727\",\"dvce_created_tstamp\":\"2021-08-29 10:49:50.717\",\"event\":\"unstruct\",\"event_id\":\"36c39024-7b1b-4c2c-ae85-e95a8cb8340a\",\"txn_id\":null,\"name_tracker\":\"spmicro\",\"v_tracker\":\"js-3.1.3\",\"v_collector\":\"ssc-2.3.1-stdout$\",\"v_etl\":\"snowplow-micro-1.2.1-common-2.0.2\",\"user_id\":\"tester\",\"user_ipaddress\":\"172.17.0.1\",\"user_fingerprint\":null,\"domain_userid\":\"8a17bb29-e35c-4363-aec3-85b9b363f9bf\",\"domain_sessionidx\":1,\"network_userid\":\"3734601f-5c3d-47c5-b367-0883e1ed74e6\",\"geo_country\":null,\"geo_region\":null,\"geo_city\":null,\"geo_zipcode\":null,\"geo_latitude\":null,\"geo_longitude\":null,\"geo_region_name\":null,\"ip_isp\":null,\"ip_organization\":null,\"ip_domain\":null,\"ip_netspeed\":null,\"page_url\":\"http://localhost:8000/shop/\",\"page_title\":null,\"page_referrer\":\"http://localhost:8000/\",\"page_urlscheme\":null,\"page_urlhost\":null,\"page_urlport\":null,\"page_urlpath\":null,\"page_urlquery\":null,\"page_urlfragment\":null,\"refr_urlscheme\":null,\"refr_urlhost\":null,\"refr_urlport\":null,\"refr_urlpath\":null,\"refr_urlquery\":null,\"refr_urlfragment\":null,\"refr_medium\":null,\"refr_source\":null,\"refr_term\":null,\"mkt_medium\":null,\"mkt_source\":null,\"mkt_term\":null,\"mkt_content\":null,\"mkt_campaign\":null,\"contexts\":\"{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0\\\",\\\"data\\\":[{\\\"schema\\\":\\\"iglu:test.example.iglu/product_entity/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"sku\\\":\\\"hh456\\\",\\\"name\\\":\\\"One-size bucket hat\\\",\\\"price\\\":24.49,\\\"quantity\\\":\\\"2\\\"}},{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"id\\\":\\\"fe0dd7c7-fb0b-43a2-b299-75d20baa94ec\\\"}}]}\",\"se_category\":null,\"se_action\":null,\"se_label\":null,\"se_property\":null,\"se_value\":null,\"unstruct_event\":\"{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"schema\\\":\\\"iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"type\\\":\\\"add\\\"}}}\",\"tr_orderid\":null,\"tr_affiliation\":null,\"tr_total\":null,\"tr_tax\":null,\"tr_shipping\":null,\"tr_city\":null,\"tr_state\":null,\"tr_country\":null,\"ti_orderid\":null,\"ti_sku\":null,\"ti_name\":null,\"ti_category\":null,\"ti_price\":null,\"ti_quantity\":null,\"pp_xoffset_min\":null,\"pp_xoffset_max\":null,\"pp_yoffset_min\":null,\"pp_yoffset_max\":null,\"useragent\":\"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0\",\"br_name\":null,\"br_family\":null,\"br_version\":null,\"br_type\":null,\"br_renderengine\":null,\"br_lang\":\"en-US\",\"br_features_pdf\":null,\"br_features_flash\":null,\"br_features_java\":null,\"br_features_director\":null,\"br_features_quicktime\":null,\"br_features_realplayer\":null,\"br_features_windowsmedia\":null,\"br_features_gears\":null,\"br_features_silverlight\":null,\"br_cookies\":1,\"br_colordepth\":\"24\",\"br_viewwidth\":1000,\"br_viewheight\":660,\"os_name\":null,\"os_family\":null,\"os_manufacturer\":null,\"os_timezone\":\"Europe/London\",\"dvce_type\":null,\"dvce_ismobile\":null,\"dvce_screenwidth\":1920,\"dvce_screenheight\":1080,\"doc_charset\":\"UTF-8\",\"doc_width\":1003,\"doc_height\":2242,\"tr_currency\":null,\"tr_total_base\":null,\"tr_tax_base\":null,\"tr_shipping_base\":null,\"ti_currency\":null,\"ti_price_base\":null,\"base_currency\":null,\"geo_timezone\":null,\"mkt_clickid\":null,\"mkt_network\":null,\"etl_tags\":null,\"dvce_sent_tstamp\":\"2021-08-29 10:49:50.719\",\"refr_domain_userid\":null,\"refr_dvce_tstamp\":null,\"derived_contexts\":null,\"domain_sessionid\":\"13c8f5ac-d999-4923-940d-b39f7b74aa94\",\"derived_tstamp\":null,\"event_vendor\":null,\"event_name\":null,\"event_format\":null,\"event_version\":null,\"event_fingerprint\":null,\"true_tstamp\":null},\"raw\":{\"vendor\":\"com.snowplowanalytics.snowplow\",\"version\":\"tp2\",\"parameters\":[{\"name\":\"e\",\"value\":\"ue\"},{\"name\":\"duid\",\"value\":\"8a17bb29-e35c-4363-aec3-85b9b363f9bf\"},{\"name\":\"vid\",\"value\":\"1\"},{\"name\":\"co\",\"value\":\"{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0\\\",\\\"data\\\":[{\\\"schema\\\":\\\"iglu:test.example.iglu/product_entity/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"sku\\\":\\\"hh456\\\",\\\"name\\\":\\\"One-size bucket hat\\\",\\\"price\\\":24.49,\\\"quantity\\\":\\\"2\\\"}},{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"id\\\":\\\"fe0dd7c7-fb0b-43a2-b299-75d20baa94ec\\\"}}]}\"},{\"name\":\"eid\",\"value\":\"36c39024-7b1b-4c2c-ae85-e95a8cb8340a\"},{\"name\":\"url\",\"value\":\"http://localhost:8000/shop/\"},{\"name\":\"refr\",\"value\":\"http://localhost:8000/\"},{\"name\":\"aid\",\"value\":\"sh0pspr33\"},{\"name\":\"tna\",\"value\":\"spmicro\"},{\"name\":\"cs\",\"value\":\"UTF-8\"},{\"name\":\"cd\",\"value\":\"24\"},{\"name\":\"stm\",\"value\":\"1630234190719\"},{\"name\":\"tz\",\"value\":\"Europe/London\"},{\"name\":\"tv\",\"value\":\"js-3.1.3\"},{\"name\":\"vp\",\"value\":\"1000x660\"},{\"name\":\"ds\",\"value\":\"1003x2242\"},{\"name\":\"ue_pr\",\"value\":\"{\\\"schema\\\":\\\"iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"schema\\\":\\\"iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0\\\",\\\"data\\\":{\\\"type\\\":\\\"add\\\"}}}\"},{\"name\":\"res\",\"value\":\"1920x1080\"},{\"name\":\"cookie\",\"value\":\"1\"},{\"name\":\"p\",\"value\":\"web\"},{\"name\":\"dtm\",\"value\":\"1630234190717\"},{\"name\":\"uid\",\"value\":\"tester\"},{\"name\":\"lang\",\"value\":\"en-US\"},{\"name\":\"sid\",\"value\":\"13c8f5ac-d999-4923-940d-b39f7b74aa94\"}],\"contentType\":\"application/json\",\"loaderName\":\"ssc-2.3.1-stdout$\",\"encoding\":\"UTF-8\",\"hostname\":\"0.0.0.0\",\"timestamp\":\"2021-08-29T10:49:50.727Z\",\"ipAddress\":\"172.17.0.1\",\"useragent\":\"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0\",\"refererUri\":\"http://localhost:8000/\",\"headers\":[\"Timeout-Access: <function1>\",\"Connection: keep-alive\",\"Host: 0.0.0.0:9090\",\"User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0\",\"Accept: */*\",\"Accept-Language: en-US, en;q=0.5\",\"Accept-Encoding: gzip\",\"Referer: http://localhost:8000/\",\"Origin: http://localhost:8000\",\"Cookie: micro=3734601f-5c3d-47c5-b367-0883e1ed74e6\",\"application/json\"],\"userId\":\"3734601f-5c3d-47c5-b367-0883e1ed74e6\"}}}}"
+        }
     ]
-  }
-]
+});
+
+// TRACK cart_action_event (remove)
+window.snowplow('trackSelfDescribingEvent', {
+    event: {
+        schema: 'iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0',
+        data: {
+            type: 'remove',
+        },
+    },
+    context: [
+        {
+            schema: 'iglu:test.example.iglu/product_entity/jsonschema/1-0-0',
+            data: {
+                sku: sku,
+                name: title,
+                price: parseFloat(price),
+                quantity: parseInt(quantity)
+            }
+        }
+    ]
+});
 ```
 
-#### Filters
+- purchase-event ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/purchase_event/jsonschema/1-0-0))
+    1. - These events happen when a user completes the purchase of the products in their cart by clicking the Purchase button.
+        - This is a self-describing event that captures the total amount of the transaction.
+        - We also want to add as custom contexts the products involved, each of which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0))
+        - Implemented in the shop-page as well
 
-When querying `/micro/bad` with `POST` (`Content-Type: application/json` needs to be set in the headers of the request), it's possible to specify filters, thanks to a JSON in the data of the HTTP request.
+```javascript
+// create the contexts array
+let productsContext = [];
+userCart.forEach(function(elt) {
+    productsContext.push({
+        schema: 'iglu:test.example.iglu/product_entity/jsonschema/1-0-0',
+        data: {
+            sku: elt.itemSku,
+            name: elt.itemTitle,
+            price: parseFloat(elt.itemPrice),
+            quantity: parseInt(elt.itemQuant)
+        }
+    });
+});
 
-Example of command to query the bad events: 
+// TRACK purchase_event
+window.snowplow('trackSelfDescribingEvent', {
+    event: {
+        schema: 'iglu:test.example.iglu/purchase_event/jsonschema/1-0-0',
+        data: {
+            total: parseFloat(total),
+        },
+    },
+    context: productsContext
+});
+```
+
+- `webPage` [predefined Context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Adding_predefined_contexts). Note: The webPage predefined context is enabled by default in JavaScript Tracker v3, as it is also a prerequisite for the official [Snowplow web data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
+
+## Testing with Snowplow Micro
+
+The purpose of this repo is to show how Snowplow Micro can be used to validate that the tracking implemented in a demo app is operating in the way we expect.
+
+Simulate particular situations, and check that:
+
+- There are no bad events.
+- The data sent is as expected.
+- The right event data is sent with each event.
+- The right entities / contexts are attached to each event.
+- The right values are sent with each event.
+
+In this repo you can also find information on how to set up trackers, how to make customised (unstructured) events, and, mainly, how to configure and add tests in your test tool of choice, using as examples the popular web test tools Nightwatch and Cypress, in order to demonstate the capabilities of Snowplow Micro.
+
+### The tests implemented
+
+1. No bad events
+2. Number of good events = number of expected good events
+3. Ensuring that total number of events is right - expected number of good events + bad events (noBadEvents = True)
+4. Checking proper values of structured and unstructured events are sent to Micro
+5. Event With Property test - context, event type and schema
+    - user puts in an event and we match by all 3 conditions (contexts, properties and schema - this determines whether or not the fake test event is equal to the one on micro - for both structured and unstructured)
+6. Race condition test - to ensure that event x is always sent to Micro before event y (in our case we wanted to ensure cart action occurred before purchase)
+7. Form tracking test to ensure blacklisted form fields are not tracked, and to ensure the right properties are sent for each field
+
+## Snowplow Micro and Nightwatch
+
+Powered by Node.js, [Nightwatch.js](https://nightwatchjs.org/) is an open-source automated testing framework that aims at providing complete E2E (end to end) solutions to automate testing with Selenium Javascript for web-based applications, browser applications, and websites.
+
+This framework relies on Selenium and provides several commands and assertions within the framework to perform operations on the DOM elements.
+
+### How does Nightwatch JS work?
+
+Nightwatch communicates over a restful API protocol that is defined by the W3C WebDriver API. It needs a restful HTTP API with a Selenium JavaScript WebDriver server. In order to perform any operation i.e. either a command or assertion, Nightwatch usually requires sending a minimum of two requests.
+
+It works as follows:
+
+- The first request locates the required element with the given XPath expression or CSS selector.
+- The second request takes the element and performs the actual operation of command or assertion.
+
+### Getting Started
+
+If you want to isolate Nightwatch JS testing, follow these steps below.
+
+Install nightwatch and a chrome driver which enables nightwatch to interact with the Chrome browser:
 
 ```bash
-curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/bad -d '<JSON>'
+npm install nightwatch --save-dev
+npm install chromedriver --save-dev
 ```
 
-An example of JSON with filters could be:
+1. Create default json package
+2. Create node modules folder and add nightwatch to dev dependencies
+3. Add nightwatch.conf.js file (must contain basic configuration file)
+4. Add a chrome driver binary for nightwatch configs - adds it into node modules - allows us to send commands to the chrome driver
+5. Add `test:nightwatch` to the scripts section of the package.json
+6. Write your own tests
 
-```json
-{
-    "vendor":"com.snowplowanalytics.snowplow",
-    "version":"tp2",
-    "limit": 10
-}
-```
-
-List of possible fields for the filters:
-
-- `vendor`: vendor for the tracking event.
-- `version`: version of the vendor for the tracking event.
-- `limit`: limit the number of events in the response (most recent events are returned).
-
-It's not necessary to specify all the fields in each request, only the ones that need to be used for filtering.
-
-### /micro/reset
-
-Sending a request to this endpoint resets Micro's cache.
-
-#### HTTP method
-
-`GET`, `POST`
-
-#### Response format
-
-Expected:
-
-```json
-{
-  "total": 0,
-  "good": 0,
-  "bad": 0
-}
-```
-
-### /micro/iglu
-
-**\*\*New in v1.2\*\***
-
-The `/micro/iglu` endpoint can be used in order to check whether a schema can be resolved.
-
-Schema lookup should be in format:
-
-```text
-/micro/iglu/{vendor}/{schemaName}/jsonschema/{schemaVersion}
-```
-
-Or more specifically:
-
-```text
-/micro/iglu/{vendor}/{schemaName}/jsonschema/{model}-{revision}-{addition}
-```
-
-For example, assuming Micro running on localhost port `9090`:
+Running nightwatch:
 
 ```bash
-curl -X GET http://localhost:9090/micro/iglu/com.myvendor/myschema/jsonschema/1-0-0
+npm run test:nightwatch
 ```
 
-#### HTTP Method
+### Simulating a User with Nightwatch
 
-GET
+When using Nightwatch, one testing strategy is to simluate a user interaction with your app. This is useful so that we can fire the exact events that a user would fire when using the app in the field.
 
-#### Response format
+In Nightwatch a test involves 3 phases:
 
-The JSON schema itself, if resolved:
+1. Preparing a state:
+    1. Reset Micro command - deleting the cache in Micro so that each test has independent events from other tests
+    2. Configure Nightwatch to interact with your app
+2. Taking an action: Nightwatch interacts with the app creating events
+3. Making an assertion on the resulting state: Nighwatch requests the state of Micro and based on a test performs the corresponding assertions
 
-```json
-{
-  "$schema":"http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-  "description":"A template for a self-describing JSON Schema for use with Iglu",
-  "self": {
-    "vendor":"com.myvendor",
-    "name":"myschema",
-    "format":"jsonschema",
-    "version":"1-0-0"
-  },
-  "type":"object",
-  "properties": {
-    "myStringProperty": {
-      "type":"string"
+### Organisation of tests
+
+#### Commands
+
+##### resetMicro
+
+The resetMicro command can be added before each test as the beforeEach hook: [Nightwatch Test Hooks](https://github.com/nightwatchjs/nightwatch-docs/blob/643e9a63a94deba6bd84bf2dd78cb27693620e20/guide/using-nightwatch/using-test-hooks.md)
+
+_Example call_:
+
+```javascript
+module.exports = {
+    beforeEach: function(browser) {
+        browser
+            .resetMicro();
     },
-    "myNumberProperty":{
-      "type":"number"
+    "test1" :function (browser0 {
+        // code here
     }
-  },
-  "required": ["myStringProperty","myNumberProperty"],
-  "additionalProperties":false
 }
 ```
 
-If a schema cannot be resolved, a JSON indicating the Iglu repositories searched:
+_Arguments_: None
 
-```json
-{
-  "value": {
-    "Iglu Central": {
-      "errors": [{"error":"NotFound"}],
-      "attempts":1,
-      "lastAttempt":"2021-08-26T13:41:06.905Z"
-    },
-    "Iglu Client Embedded": {
-      "errors": [{"error":"NotFound"}],
-      "attempts":1,
-      "lastAttempt":"2021-08-26T13:41:06.677Z"
+This command utilises the ability to reset Micro through the `/micro/reset` endpoint.
+
+This is the general structure of how to create a command which aims to request information from Snowplow Micro using Nightwatch:
+
+```javascript
+this.command = (callback) => {
+    const request = require('request');
+
+    request(
+        {
+            url: 'http://localhost:9090/micro/all',
+            json: true
+        }, 
+        (err, res, body) => {
+            if (err) {
+                console.warn(error);
+                return false;
+            }
+            callback(body);
+        }
+    );
+};
+```
+
+#### Assertions
+
+##### .noBadEvents
+
+_Example call_:
+
+```javascript
+browser.assert.noBadEvents();
+```
+
+_Arguments_: None
+
+This is arguably the most important assertion, if you only implement one this is a great place to start. It ensures that all of your data is sent to Micro and ends up in good events, so all of your data is in your warehouse and you can interpret it as expected.
+
+##### .noOfGoodEvents
+
+_Example call_:
+
+```javascript
+browser.assert.noOfGoodEvents(2);
+```
+
+_Arguments_: Number of expected good events to be sent to Micro
+
+An extension of noBadEvents, asserts that you sent the correct number of good events to Micro for a given event. For example, you might expect the onClick() action to send 2 good events, then you can make sure 2 are sent to good events and call noBadEvents on the same assertion as total number of events = number of good events + number of bad events.
+
+##### .noOfTotalEvents
+
+_Example call_:
+
+```javascript
+browser.assert.noOfTotalEvents(2);
+```
+
+_Arguments_: Number of expected total events sent to Micro
+
+A further extension on noOfGoodEvents, this assertion ensures that both the correct number events are sent to Micro, and that no bad events are sent. Using all 3 of these assertions consecutively provides the best assurance that every event you send is sent to your warehouse properly.
+
+##### .orderOfEvents
+
+_Example call_:
+
+```javascript
+browser.assert.orderOfEvents(events_list);
+
+```javascript
+
+_Arguments_: events_list
+
+Checks for when one event must be before the other so that your application works as expected. This works by retrieving the derived timestamps for each event, and asserting that events fired in the specified order. In our case we use this to test that a cart action occurs before purchasing an item. If our application didn't get this order of events correct, then the application does not act as expected. This can also be considered a race condition test.
+
+##### .successfulEvent
+
+_Example call_:
+
+```javascript
+browser.assert.successfulEvent(
+    {
+        "eventType": "unstruct",
+        "schema": "iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0",
+        "values": {
+            "type": "remove"
+        },
+        "contexts": [
+            {
+                "schema": "iglu:test.example.iglu/product_entity/jsonschema/1-0-0",
+                "data": {
+                    "name": "One-size summer hat",
+                    "price": 15.5,
+                    "quantity": 1
+                }
+            }
+        ]
     }
-  }
-}
+);
 ```
 
-## Advanced usage: Embedded Iglu
+_Arguments_: test_event (with schema, eventType, values and context), number_of_occurences
 
-**\*\*New in v1.2\*\***
+Ensures that when an event is sent to Micro the correct parameters are sent as expected. In our case we check that the schema, properties and contexts are correct:
 
-In order to support a broader range of test workflows, it is possible to use an embedded Iglu with Snowplow Micro. Users can now choose to embed their custom schemas inside Micro to be resolved during their test worflows.
+- We match what the user expects to be sent to what is received on Micro.
+- In the end, the number of matched events is retrieved and asserted to the expected number of occurrences.
+- By doing that, we can also specify which events we don't expect on Micro by setting the argument number_of_occurences=0.
 
-In order to do so, they simply need an `iglu-client-embedded` directory (templated as an Iglu repository) under the same directory that is mounted when starting Micro.
+## Snowplow Micro and Cypress
 
-```text
-example
-├── iglu-client-embedded
-│   └── schemas
-│       └── com.myvendor
-│           └── myschema
-│               └── jsonschema
-│                   └── 1-0-0
-├── iglu.json
-└── micro.conf
+[Cypress](https://www.cypress.io/) is an open [source](https://github.com/cypress-io/cypress) JavaScript End-to-End testing framework with extensive [documentation](https://docs.cypress.io/). In this section we note few things that are specifically related to using this test tool with Snowplow Micro, describe the rationale behind the tests' organization used in this example and document the commands used.
+
+### Introduction
+
+Generally, a test involves 3 phases:
+
+1. Prepare a state
+2. Take an action
+3. Assert on the resulting state
+
+While Cypress considers as state the application's state, it is still a fact that an app is rarely an isolated system without side effects.
+
+This is especially true when a tracking strategy is implemented, which means that any action can fire [events](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) through the [trackers](/docs/collecting-data/collecting-from-own-applications/index.md). There is an increasing number of reports highlighting the importance of upstream data quality and Data Ops, which means that testing your Data Collection and trackers' implementation besides your product's features is of highest priority. Tracking is as important as your shipping, and that is why it is highly recommended that you include its testing in your E2E tests.
+
+Cypress, even though it considers as [best practice](https://docs.cypress.io/guides/references/best-practices.html#Visiting-external-sites) to avoid requiring or testing 3rd party services, it still offers the ability to "talk" to 3rd party API's via [cy.request()](https://docs.cypress.io/api/commands/request.html), that:
+
+- Entirely bypasses CORS
+- Expects the server to exist and provide a response
+- Does not retry its assertions (as that could affect external state) , which makes it great to use for querying Snowplow Micro's endpoints. For example:
+
+```javascript
+cy.request({
+    url: 'http://localhost:9090/micro/all',
+    json:true
+});
 ```
 
-#### Using Docker
+So, following on the 3 test's phases:
 
-Using Docker, in order to use the embedded Iglu capabilities, the command remains the same:
+1. Preparing state:
+    1. Reset Micro
+    2. Configure Cypress to visit your app
+2. Actions: Cypress interacts with the app creating events
+3. Assertions: Cypress sends requests to Micro, and attempts assertions on the responses
 
-<CodeBlock language="bash">{
-`docker run \\
-  --mount type=bind,source=$(pwd)/example,destination=/config \\
-  -p 9090:9090 \\
-  snowplow/snowplow-micro:${versions.snowplowMicro} \\
-  --collector-config /config/micro.conf \\
-  --iglu /config/iglu.json`
-}</CodeBlock>
+### Tests' organization
 
-#### Using Java
+Another Cypress' recommendation for best [practices](https://docs.cypress.io/guides/references/best-practices.html#Having-tests-rely-on-the-state-of-previous-tests) is the decoupling of tests, which, for the case of testing with Snowplow Micro, would mean to run both the state-changing and the micro-requests in the same spec file. However, there were some issues in doing so. More specifically, those issues had only to do with cases where links (or submit buttons) were clicked, in other words in cases where a window [unload event](https://developer.mozilla.org/en-US/docs/Web/API/Window/unload_event) was fired.
 
-If you cannot use Docker and you also want an embedded Iglu, apply the same directory structure as shown above and run for this example:
+To describe the issue, we first describe what normally happens upon an unload event: When a user clicks, for example, a link, on one hand the browser wants to navigate to the link, and on the other hand, the tracker (in our case the [Javascript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/index.md)) tries to send the [link click](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#Link_click_tracking) or the [submit form](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#Form_tracking) events, while also storing them in local storage, just in case the events don't get sent before the page unloads. While it is normal for browsers to cancel all requests, a cancelled request does not necessarily mean that the request did not reach the server, but that the client sending it, does not wait for an answer anymore. So, there is no way to know from client side whether the request (be it POST or GET) succeeded.
 
-<CodeBlock language="bash">{
-`# Unix
-java -cp snowplow-micro-${versions.snowplowMicro}.jar:example com.snowplowanalytics.snowplow.micro.Main --collector-config example/micro.conf --iglu example/iglu.json
-# Windows
-java -cp snowplow-micro-${versions.snowplowMicro}.jar;example com.snowplowanalytics.snowplow.micro.Main --collector-config example/micro.conf --iglu example/iglu.json`
-}</CodeBlock>
+That problem was especially apparent when Micro was being queried in the same spec file with the app's actions. For example, POST requests appeared as cancelled in Cypress' test runner, but the events may have reached Micro. Taking advantage of the fact that Cypress also clears browser cache when it changes spec file, we decided to move the testing part of Micro into separate spec files.
 
-Now you can also check that your embedded schemas can be resolved by using the `/micro/iglu` endpoint.
+The consequences of this decision are:
+
+1. You need to ensure a naming strategy, and the reason for this is the fact that Cypress decides the order of execution for test files based on alphabetical order. In this example, we use this naming strategy:
+
+- `xx_app_spec.js` for the spec files that visit the app and create events
+- `xx_micro_spec.js` for the spec files that query Micro and make the assertions on those events , where `xx` stands for numbering (but it could be anything as long as it matches uniquely).
+
+```bash
+$ tree testing/cypress/integration
+
+testing/cypress/integration/
+├── 01_app_spec.js
+├── 01_micro_spec.js
+├── 02_app_spec.js
+├── 02_micro_spec.js
+├── 03_app_spec.js
+├── 03_micro_spec.js
+```
+
+2. You need to consider how and when you reset Micro. We chose to use a Before [hook](https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests.html#Hooks) in the start of every `xx_app_spec.js` file, since the naming strategy ensures that the tests will run in `app`\-`micro` pairs.
+3. If you just want to run only a particular app test file (and not all of them), you will also need its corresponding Micro test file. Since this is a usual case, for example, when a particular spec file fails, we added another npm script `cy-micro:pair-run`, which will match a naming pattern and run the corresponding micro-spec file after the matching app spec. The script can be seen in [package.json](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/package.json).
+
+Example usage:
+
+1. To run all spec files in your `cypress/integration` directory (in alphabetical order)
+
+```bash
+npm run cypress:run
+```
+
+2. To run an app-micro pair of spec files given a name pattern
+
+```bash
+PAIR_PATTERN=03 npm run cy-micro:pair-run  # will run first the 03_app_spec.js and then the 03_micro_spec.js
+```
+
+Just make sure that this name pattern is unique for this pair.
+
+This kind of organization also has the benefit, that you can keep having the tests you normally had for your app (just adding the before-hook to reset Micro), and just add a corresponding micro-spec file, to test the events emitted from the original run of that app test. That way, you can test your app's features in the `app_spec` files and your tracking implementation in the corresponding `micro_spec` files.
+
+### Commands
+
+Since Cypress allows to define your own [custom commands](https://docs.cypress.io/api/cypress-api/custom-commands.html), in this repo you can find commands specifically for use with Snowplow Micro and assertions of events. You can see them all in [commands.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/support/commands.js).
+
+#### cy.noBadEvents
+
+_Example call_:
+
+```javascript
+cy.noBadEvents();
+```
+
+Even if this is the only thing that you check in your tests, you are already brilliant. It is going to ensure that your app is not sending any bad events, in other words you ensure that all your events end up in your warehouse. There are no more gaps in your data or in your analytics and no recovery jobs to get those bad events back, jobs that are not going to be trivial, especially if you are dealing with high volume of events.
+
+#### cy.numGoodEvents
+
+_Example call_:
+
+```javascript
+cy.numGoodEvents( 19 );
+```
+
+This command ensures that all the events you want to track, actually get tracked. Because there may be not bad events, but maybe your tracker is not implemented correctly into the app's logic.
+
+#### cy.eventsWithEventType
+
+_Example call_:
+
+```javascript
+cy.eventsWithEventType( "page_view", 8 );
+cy.eventsWithEventType( "struct", 45 );
+```
+
+This command is useful when you want to ensure that a particular type of events got tracked as many times as it should.
+
+#### cy.eventsWithParams
+
+_Example call_:
+
+```javascript
+cy.eventsWithParams(
+    {
+        "event": "struct",
+        "se_category": "Media",
+        "se_action": "Play video",
+        "se_label": "Surfing"
+    }, 
+    3 
+);
+```
+
+This command accepts as first argument an object with the expected event's field-value pairs. You can read about all the fields in Snowplow docs [here](/docs/understanding-your-pipeline/canonical-event/index.md). This command is particularly useful when checking on [structured events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#Tracking_custom_structured_events).
+
+#### cy.eventsWithSchema
+
+_Example call_:
+
+```javascript
+cy.eventsWithSchema( "iglu:com.snowplowanalytics.snowplow/submit_form/jsonschema/1-0-0", 5 );
+```
+
+With this command you can look specifically for [unstructured events](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), which include both custom unstructured events and all other default Snowplow events that are of "unstruct" eventType (link-click, submit-form, ad-impression etc.)
+
+#### cy.eventsWithContexts
+
+_Example call_:
+
+```javascript
+cy.eventsWithContexts( [ { "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0" } ], 10 );
+
+cy.eventsWithContexts(
+    [
+        {
+            "schema": "iglu:com.example.eg/article_context/jsonschema/1-0-0",
+            "data": {
+                "writer": "John Doe",
+                "category": "Sports",
+                "title": "The match of the year"
+            }
+        },
+        {
+            "schema": "iglu:com.example.eg/writer_entity/jsonschema/1-0-0",
+            "data": {
+                "name": "John Doe",
+                "age": 34,
+                "numOfArticles": 50,
+                "categories": ["sports", "history", "food"]
+            }
+        }
+    ], 
+    2 
+);
+```
+
+With this command you can check whether the predefined(e.g. webpage, geolocation) or custom contexts/entities got properly attached to events. You can not only check by the schema of the entities but also by their data. Note that the first argument to this command should be an array of objects, like the contexts' array that can be attached to any Snowplow event. The keys of these objects can be either "schema" or "data". For "schema" the value should be a string (the schema). For "data" the value should be an object of key-value pairs, depending on the context.
+
+#### cy.eventsWithProperties
+
+_Example call_:
+
+```javascript
+cy.eventsWithProperties(
+    {
+        "parameters": {
+        "event": "unstruct",
+        "v_tracker": "js-3.1.3"
+        },
+        "schema": "iglu:com.example.eg/custom_cart_event/jsonschema/1-0-0",
+        "values": {
+            "type": "add",
+            "productSku": "12345",
+            "quantity": 1
+        },
+        "contexts": [
+            {
+                "schema": "iglu:com.example.eg/custom_product_context/jsonschema/1-0-0",
+                "data": {
+                    "sku": "12345",
+                    "name": "Laptop",
+                    "onOffer": false,
+                },
+            }
+        ]
+    }, 
+    1 
+);
+```
+
+This is a command that combines some of the above (eventsWithSchema, eventsWithParams, eventsWithContexts), and also adds the ability to look into the data of unstructured events. The object that gets passed as the first argument, can have as keys:
+
+- "schema" : matches by schema
+- "values" : matches by the data of an unstructured event
+- "contexts" : matches by contexts
+- "parameters" matches by the event's fields It will return the events that have all those properties. As shown in the examples above, you do not have to use all the properties, and the command works accordingly.
+
+#### cy.eventsWithOrder
+
+_Example call_:
+
+```javascript
+cy.eventsWithOrder([
+    {
+        "schema": "iglu:com.snowplowanalytics.snowplow/focus_form/jsonschema/1-0-0",
+        "values": {"elementId": "user_email"}
+    },
+    {
+        "schema": "iglu:com.snowplowanalytics.snowplow/change_form/jsonschema/1-0-0",
+        "values": {"elementId": "user_email"}
+    },
+    {
+        "schema": "iglu:com.snowplowanalytics.snowplow/submit_form/jsonschema/1-0-0"
+    }
+]);
+```
+
+With this command you can assert that events happened in a specified (ascending) order. For example, in the call above, we can assert that the focus_form event happened before the corresponding change_form event, which in turn happened before the submit_form event. The argument to this command is an array of at least 2 event "descriptions", which are exactly like the properties' object argument of `eventsWithProperties`. Those event descriptions need to uniquely identify exactly one Snowplow event. Internally, this command compares events' `derived_tstamp`.
+
+### Some further notes
+
+```bash
+$ tree testing/cypress/
+
+testing/cypress/
+├── integration
+│   ├── 01_app_spec.js
+│   ├── 01_micro_spec.js
+│   ├── 02_app_spec.js
+│   ├── 02_micro_spec.js
+│   ├── 03_app_spec.js
+│   ├── 03_micro_spec.js
+│   └── helpers_spec.js
+├── plugins
+│   └── index.js
+└── support
+    ├── commands.js
+    └── index.js
+```
+
+1. Helpers
+    - In the `commands.js` file, the commands are defined based on the `Micro` [helper module](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/jsm/helpers.js)
+    - The `integration/helpers_spec.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/integration/helpers_spec.js) tests the helper functions that define the matching logic. For a different custom matching logic, you can tweak the helper functions, and then test them.
+2. Environment variables.
+    - Cypress allows for [many ways](https://docs.cypress.io/guides/guides/environment-variables.html) to set environment variables. In this example we set them in the `plugins/index.js` [file](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/testing/cypress/plugins/index.js).

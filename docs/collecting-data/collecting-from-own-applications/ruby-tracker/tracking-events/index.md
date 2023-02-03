@@ -39,7 +39,11 @@ A self-describing JSON has two keys, `schema` and `data`. The `schema` value sho
 
 After events have been collected by the event collector, they are validated to ensure that the properties match the self-describing JSONs. Mistakes (e.g. extra fields, or incorrect types) will result in events being processed as Bad Events. This means that only high-quality, valid events arrive in your data storage or real-time stream.
 
-Your schemas must be accessible to your pipeline to allow this validation. We provide [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) for schema management. If you are a paid Snowplow customer, you can manage your schemas through your console. Check out our [Ruby tracker Rails example](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) to see how we included schemas in the Snowplow Micro testing pipeline in that app.
+```mdx-code-block
+import SchemaAccess from "@site/docs/reusable/schema-access/_index.md"
+
+<SchemaAccess/>
+```
 
 This method was previously called `track_unstruct_event`, as a counterpoint to `track_struct_event`. This name is misleading and we are in the process of depreciating it. An `unstruct` event requires a schema ruleset and therefore can be considered more structured than a `struct` event. However, this method still produces events labelled `unstruct`, as changing the event name in the Tracker Protocol would be a breaking change.
 

@@ -23,6 +23,12 @@ Note: you can very easily edit the script or run each of the terraform modules i
 ![](images/snowflake.png)
 
   </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+![](images/databricks.png)
+
+TODO: need databricks specific image
+  </TabItem>
 </Tabs>
 
 ## Collector load balancer
@@ -149,6 +155,29 @@ Find out more about the Transformer Kinesis module and explore the full set of v
 The Snowplow application responsible for [loading transformed enriched data from S3 to Snowflake](/docs/destinations/warehouses-and-lakes/rdb/loading-transformed-data/snowflake-loader/index.md).
 
 Find out more about the Snowflake Loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest).
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+## SQS Queue
+
+SQS queue is used for communication between Transformer Kinesis and Databricks Loader.
+
+Transformer Kinesis sends SQS message to Databricks Loader after finishing transforming some window of data. Databricks Loader listens to SQS queue. When a new message is received, it extracts necessary information from the message and loads data to Databricks. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/destinations/warehouses-and-lakes/rdb/index.md#how-transformer-and-loader-interface-with-other-snowplow-compone).
+
+## Transformer Kinesis
+
+This is a Snowplow application that reads the enriched data from Kinesis stream, transforms it to format expected by Loader and write it to S3 bucket.
+
+After transforming is finished, it sends SQS message to Loader to notify that it can load the transformed data. More details can be found in the [Stream Transformer documentation](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/stream-transformer/index.md).
+
+Find out more about the Transformer Kinesis module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest).
+
+## Databricks Loader
+
+The Databricks application responsible for [loading transformed enriched data from S3 to Databricks](/docs/destinations/warehouses-and-lakes/rdb/loading-transformed-data/databricks-loader/index.md).
+
+Find out more about the Databricks Loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest).
 
   </TabItem>
 </Tabs>

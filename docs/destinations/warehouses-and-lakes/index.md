@@ -14,21 +14,22 @@ To store your enriched Snowplow data, you will need to determine which loader to
 <Tabs groupId="destination">
   <TabItem value="aws" label="AWS" default>
 
-| Destination | Loader | Status |
-| --- | --- | --- |
-| Redshift | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) | Production-ready |
-| Snowflake | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) | Production-ready |
-| Databricks | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) | Production-ready |
-| Postgres | [Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | Early release |
+| Destination | Loader                                                                       | Status           |
+|-------------|------------------------------------------------------------------------------|------------------|
+| Redshift    | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md)  | Production-ready |
+| Snowflake   | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md)  | Production-ready |
+| Databricks  | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md)  | Production-ready |
+| Postgres    | [Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | Early release    |
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-| Destination | Loader | Status |
-| --- | --- | --- |
-| Snowflake | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) | Production-ready |
-| BigQuery | [BigQuery Loader](/docs/destinations/warehouses-and-lakes/bigquery/index.md) | Production-ready |
-| Postgres | [Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | Early release |
+| Destination | Loader                                                                       | Status           |
+|-------------|------------------------------------------------------------------------------|------------------|
+| Snowflake   | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md)  | Production-ready |
+| Databricks  | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md)  | Coming soon      |
+| BigQuery    | [BigQuery Loader](/docs/destinations/warehouses-and-lakes/bigquery/index.md) | Production-ready |
+| Postgres    | [Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | Early release    |
 
   </TabItem>
 </Tabs>

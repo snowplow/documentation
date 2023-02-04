@@ -44,7 +44,7 @@ The main difference is around the [VPC](https://docs.aws.amazon.com/vpc/latest/u
 
 #### Storage Options
 
-There are also two different storage options for you to select. The steps below will guide you through how to set each up, however you will need to know if you wish to use `postgres` or if you have an external `snowflake` instance you wish to use.
+There are also three different storage options for you to select. The steps below will guide you through how to set each up, however you will need to know if you wish to use `postgres` or if you have an external `snowflake` or `databricks` instance you wish to use.
 
 ### Setting up your Iglu Server
 
@@ -106,7 +106,7 @@ In this section you will update the input variables for the terraform module, an
 
 **Step 1: Update your input variables**
 
-Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `pipeline` directory to update the input variables in either `postgres.terraform.tfvars` or `snowflake.terraform.tfvars` according to the chosen destination. How to choose the destination and configure it will be explained in detail in the next section.
+Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `pipeline` directory to update the input variables in either `postgres.terraform.tfvars`, `snowflake.terraform.tfvars` or `databricks.terraform.tfvars` according to the chosen destination. How to choose the destination and configure it will be explained in detail in the next section.
 
 ```bash
 git clone https://github.com/snowplow/quickstart-examples.git
@@ -126,7 +126,7 @@ To update your input variables, you'll need to know a couple of things:
     - This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`
     - You can get the value with `cat ~/.ssh/id_rsa.pub`
 
-As mentioned above, there are two options for pipeline's destination database. These are Postgres and Snowflake. Your chosen database needs to be specified with `pipeline_db` variable. Allowed values for that variable are `postgres` and `snowflake`. Respective `<destination>.terraform.tfvars` file should be filled in according to the chosen database. Only database specific variables are different in those two tfvars files.
+As mentioned above, there are three options for pipeline's destination database. These are Postgres, Snowflake and Databricks. Your chosen database needs to be specified with `pipeline_db` variable. Allowed values for that variable are `postgres`, `snowflake` and `databricks`. Respective `<destination>.terraform.tfvars` file should be filled in according to the chosen database. Only database specific variables are different in those three tfvars files.
 
 ##### Postgres
 
@@ -134,7 +134,11 @@ If you choose Postgres as destination, there is no additional step. Respective v
 
 ##### Snowflake
 
-If you choose Snowflake as destination, there is one more additional step. Pipeline Terraform module doesn't create necessary Snowflake resources, unlike Postgres resources. It only deploys the Snowflake Loader. Therefore Snowflake resources need to be created before deploying the pipeline. We've created [another Terraform module](https://github.com/snowplow/quickstart-examples/tree/snowflake-loader/terraform/aws/snowflake) for this purpose. You can follow the Optional Step 2 below to learn how to use Snowflake Terraform module. Snowflake Terraform module will give outputs after it is applied. These outputs need to be passed to `snowflake.terraform.tfvars`.
+If you choose Snowflake as destination, there is one more additional step. Pipeline Terraform module doesn't create necessary Snowflake resources, unlike Postgres resources. It only deploys the Snowflake Loader. Therefore Snowflake resources need to be created before deploying the pipeline. We've created [another Terraform module](https://github.com/snowplow/quickstart-examples/tree/main/terraform/aws/snowflake) for this purpose. You can follow the Optional Step 2 below to learn how to use Snowflake Terraform module. Snowflake Terraform module will give outputs after it is applied. These outputs need to be passed to `snowflake.terraform.tfvars`.
+
+##### Databricks
+
+If you choose Databricks as destination, there is one more additional step. Pipeline Terraform module doesn't create necessary Databricks resources, unlike Postgres resources. It only deploys the Databricks Loader. Therefore Databricks resources need to be created before deploying the pipeline. We've created [another Terraform module](https://github.com/snowplow/quickstart-examples/tree/main/terraform/aws/databricks) for this purpose. You can follow the Optional Step 3 below to learn how to use Databricks Terraform module. Databricks Terraform module will give outputs after it is applied. These outputs need to be passed to `databricks.terraform.tfvars`.
 
 **Step 2 (Snowflake only): Run Snowflake terraform module**
 
@@ -142,31 +146,61 @@ It is possible to use Snowflake as the destination in AWS pipelines. However nec
 
 For this purpose, the [Snowflake Terraform module](https://github.com/snowplow/quickstart-examples/tree/main/terraform/aws/snowflake) has been created. This module creates resources including, but not limited to, Snowflake database, table, user, and role. These resources are needed by the Snowflake Loader to operate correctly.
 
-#### Prerequisites
+#### Prerequisites (Snowflake only)
 
 Authentication for the service user is required for the Snowflake Terraform provider - [follow this tutorial](https://quickstarts.snowflake.com/guide/terraforming_snowflake/index.html) to obtain Snowflake connection details:
 
-| Parameter          | Description                                    |
-|--------------------|------------------------------------------------|
-| account            | The account name.                              |
-| username           | A snowflake user to perform resource creation. |
-| region             | Region for the snowflake deployment.           |
-| role               | Needs to be ACCOUNTADMIN or similar.           |
+| Parameter        | Description                                    |
+|------------------|------------------------------------------------|
+| account          | The account name.                              |
+| username         | A snowflake user to perform resource creation. |
+| region           | Region for the snowflake deployment.           |
+| role             | Needs to be ACCOUNTADMIN or similar.           |
 | private_key_path | Path the private key.                          |
 
-#### Usage
+#### Usage (Snowflake only)
 
-1. Fill variables in [terraform.tfvars](https://github.com/snowplow/quickstart-examples/blob/main/terraform/aws/snowflake/terraform.tfvars) within the `aws/snowflake` folder. Snowflake connection details found in the [Prerequisites](#Prerequisites) section need to be assigned to respective variables in `terraform.tfvars`.
+1. Fill variables in [terraform.tfvars](https://github.com/snowplow/quickstart-examples/blob/main/terraform/aws/snowflake/terraform.tfvars) within the `aws/snowflake` folder. Snowflake connection details found in the [Prerequisites](#prerequisites-snowflake-only) section need to be assigned to respective variables in `terraform.tfvars`.
 2. Run `terraform init`
 3. Run `terraform apply`
 
-#### Output
+#### Output (Snowflake only)
 
 Snowflake Terraform module will output the name of the created resources. Full list can be found [here](https://github.com/snowplow/quickstart-examples/blob/snowflake-loader/terraform/aws/snowflake/outputs.tf).
 
 These output values need to be passed to `aws/pipeline` modules as a variable when Snowflake is selected as pipeline's destination.
 
-**Step 3: Run the terraform script to set up your Pipeline stack**
+**Step 3 (Databricks only): Run Databricks terraform module**
+
+It is possible to use Databricks as the destination in AWS pipelines. However necessary resources need to be created in Databricks before starting the pipeline.
+
+For this purpose, the [Databricks Terraform module](https://github.com/snowplow/quickstart-examples/tree/main/terraform/aws/databricks) has been created. This module creates resources including, but not limited to, Databricks database, table, user, and role. These resources are needed by the Databricks Loader to operate correctly.
+
+#### Prerequisites (Databricks only)
+
+Authentication for the service user is required for the Databricks Terraform provider - [follow this tutorial](https://docs.databricks.com/dev-tools/terraform/index.html) to obtain Databricks connection details:
+
+| Parameter        | Description                                     |
+|------------------|-------------------------------------------------|
+| account          | The account name.                               |
+| username         | A Databricks user to perform resource creation. |
+| region           | Region for the Databricks deployment.           |
+| role             | Needs to be ACCOUNTADMIN or similar.            |
+| private_key_path | Path the private key.                           |
+
+#### Usage (Databricks only)
+
+1. Fill variables in [terraform.tfvars](https://github.com/snowplow/quickstart-examples/blob/main/terraform/aws/databricks/terraform.tfvars) within the `aws/databricks` folder. Databricks connection details found in the [Prerequisites](#prerequisites-databricks-only) section need to be assigned to respective variables in `terraform.tfvars`.
+2. Run `terraform init`
+3. Run `terraform apply`
+
+#### Output (Databricks only)
+
+Snowflake Terraform module will output the name of the created resources. Full list can be found [here](https://github.com/snowplow/quickstart-examples/blob/databricks-loader/terraform/aws/databricks/outputs.tf).
+
+These output values need to be passed to `aws/pipeline` modules as a variable when Databricks is selected as pipeline's destination.
+
+**Step 4: Run the terraform script to set up your Pipeline stack**
 
 You can now use terraform to create your Pipeline stack. You will be asked to select a region, you can find more information about [available regions here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
 

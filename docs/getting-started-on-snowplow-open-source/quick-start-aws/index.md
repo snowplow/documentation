@@ -178,15 +178,15 @@ For this purpose, the [Databricks Terraform module](https://github.com/snowplow/
 
 #### Prerequisites (Databricks only)
 
-Authentication for the service user is required for the Databricks Terraform provider - [follow this tutorial](https://quickstarts.databricks.com/guide/terraforming_databricks/index.html) to obtain Databricks connection details:
+Authentication for the service user is required for the Databricks Terraform provider - [follow this tutorial](https://docs.databricks.com/dev-tools/terraform/index.html) to obtain Databricks connection details:
 
-| Parameter        | Description                                    |
-|------------------|------------------------------------------------|
-| account          | The account name.                              |
-| username         | A snowflake user to perform resource creation. |
-| region           | Region for the snowflake deployment.           |
-| role             | Needs to be ACCOUNTADMIN or similar.           |
-| private_key_path | Path the private key.                          |
+| Parameter        | Description                                     |
+|------------------|-------------------------------------------------|
+| account          | The account name.                               |
+| username         | A Databricks user to perform resource creation. |
+| region           | Region for the Databricks deployment.           |
+| role             | Needs to be ACCOUNTADMIN or similar.            |
+| private_key_path | Path the private key.                           |
 
 #### Usage (Databricks only)
 

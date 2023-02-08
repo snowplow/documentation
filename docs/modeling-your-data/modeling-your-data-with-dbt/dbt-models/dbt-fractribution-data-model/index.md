@@ -26,7 +26,13 @@ This package consists of a series of dbt models that produce the following table
 - `snowplow_fractribution_paths_to_non_conversion`: Path combinations leading to non-conversion
 - `snowplow_fractribution_sessions_by_customer_id`: Channel information by session timestamp, where an event timestamp is considered as the session start
 
-Once the models are generated, the next step is to run a python script which is included in the package to run the fractribution calculations. In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) section you will find a detailed step-by-step guide on how to operate the package as a whole.
+Once the models are generated, the next step is to run a python script which is included in the package to run the fractribution calculations. This will generate and populate the following three tables:
+
+- `snowplow_fractribution_channel_attribution`: The main output table that shows conversions, revenue, spend and ROAS per channel
+- `snowplow_fractribution_path_summary_with_channels`: The conversion and revenue attribution per channel (used to create the report table)
+- `snowplow_fractribution_report_table`: An intermediate table that shows, for each unique path, a summary of conversions, non conversions and revenue, as well as which channels were assigned a contribution
+
+In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) section you will find a detailed step-by-step guide on how to operate the package as a whole.
 
 ### Intrasession Channels
 
@@ -40,7 +46,8 @@ In Google Analytics (Universal Analytics) a new session is started if a campaign
  2. **Unique**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
  3. **First**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
  4. **Frequency**: keep a count of the events’ frequency: `A → A → B` becomes `A(2) → B`, best when there is a lot of retargeting
-
+ 5. **Remove if last and not all**: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as its trying to reach a non-matching channel param: `A` path: `A → B → A → A` becomes `A → B`
+ 6. **Remove if not all**: requires a channel to be added as a parameter, which gets removed from the path altogether unless it would result in the whole path's removal: `A` path: `A → B → A → A` becomes `B`
 
 ### Attribution Models
 - **shapley** *(default)*: Takes the weighted average of the marginal contributions of each channel to a conversion

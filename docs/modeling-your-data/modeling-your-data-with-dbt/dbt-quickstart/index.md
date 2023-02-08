@@ -550,10 +550,11 @@ dbt run --selector snowplow_ecommerce
 - `conversion_hosts`: `url_hosts` to consider
 - `path_lookback_steps`: The limit for the number of marketing channels to look at before the conversion (default is 0 = unlimited)
 - `path_lookback_days`: Restrict the model to marketing channels within this many days of the conversion (values of 30, 14 or 7 are recommended)
-- `path_transforms`: An array of path transforms and their arguments (see [Path Transform Options](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#path-transform-options) section)
+- `path_transforms`: A dictionary of path transforms and their arguments (see [Path Transform Options](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#path-transform-options) section)
 - `consider_intrasession_channels`: Boolean. If `false`, only considers the channel at the start of the session (i.e. first page view). If `true`, considers multiple channels in the conversion session as well as historically.
 - `page_views_source`: The source (schema and table) of the derived `snowplow_web_page_views` table. Defaulted to `derived.snowplow_web_page_views`.
 - `conversions_source`: The source (schema and table) of the conversion event data. Defaulted to `atomic.events`.
+- `channels_to_exclude`: List of channels to exclude from analysis (empty to keep all channels). For example, users may want to exclude the 'Direct' channel from the analysis.
 
 #### 2. Configure macros
 

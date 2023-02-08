@@ -46,7 +46,7 @@ In Google Analytics (Universal Analytics) a new session is started if a campaign
  2. **Unique**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
  3. **First**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
  4. **Frequency**: keep a count of the events’ frequency: `A → A → B` becomes `A(2) → B`, best when there is a lot of retargeting
- 5. **Remove if last and not all**: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as its trying to reach a non-matching channel param: `A` path: `A → B → A → A` becomes `A → B`
+ 5. **Remove if last and not all**: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as it is trying to reach a non-matching channel param: `A` path: `A → B → A → A` becomes `A → B`
  6. **Remove if not all**: requires a channel to be added as a parameter, which gets removed from the path altogether unless it would result in the whole path's removal: `A` path: `A → B → A → A` becomes `B`
 
 ### Attribution Models

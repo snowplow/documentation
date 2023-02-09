@@ -17,13 +17,9 @@ When implementing new tracking, or when making changes to your schemas or enrich
 
 ## Test tracking using automated testing
 
-For more automated testing of your tracking we have a tool called Snowplow Micro which is part of our Open Source estate and allows you to integrate with your automated testing suite to check that your tracking remains intact as application-level changes are made.
+For more automated testing of your tracking we have a tool called [Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) which allows you to integrate with your automated testing suite to check that your tracking remains intact as application-level changes are made.
 
-1. [Generate and copy](https://console.snowplowanalytics.com/iglu-keys) an IgluAPI Read key from console
-2. Request your schema registry URLs from Snowplow Support
-3. [Follow this guide](/docs/understanding-your-pipeline/what-is-snowplow-micro/index.md) using the registry URLs to configure Micro, and the API key to run the commands
-
-You'll also find [examples of integrating with Nightwatch and Cypress](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/example-of-automated-tests/index.md) in the guide.
+Follow [this guide](/docs/getting-started-with-micro/basic-usage/index.md) to get familiar with Micro and set it up. Next, take a look at te [examples of integrating Micro with Nightwatch and Cypress](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/index.md).
 
 ## Verify schema dependencies using the Data Structures CI tool
 

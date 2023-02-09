@@ -80,8 +80,10 @@ Visit documentation about [tracking events](/docs/collecting-data/collecting-fr
 
 ## Testing
 
-Testing that your event tracking is properly configured can be as important as testing the other aspects of your app. It confirms that you are generating the events you expect.
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-tracking-with-micro/_index.md"
 
-We provide two types of pipeline for testing and debugging. [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/index.md) is especially useful in manual schema and pipeline testing. [Snowplow Micro](/docs/understanding-your-pipeline/what-is-snowplow-micro/index.md) is a minimal pipeline designed to be used as part of your app's automated test suite.
+<TestingWithMicro/>
+```
 
-Check out the [example Roku channel](/docs/collecting-data/collecting-from-own-applications/roku-tracker/example-app/index.md) to see the tracker used with a Snowplow Micro.
+Check out the [example Roku channel](/docs/collecting-data/collecting-from-own-applications/roku-tracker/example-app/index.md) to see the tracker used with Snowplow Micro.

@@ -69,6 +69,8 @@ The [log](https://crates.io/crates/log) crate is used for logging. To enable log
 
 ## Testing
 
-Testing that your event tracking is properly configured can be as important as testing the other aspects of your app. It confirms that you are generating the events you expect.
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-tracking-with-micro/_index.md"
 
-[Snowplow Micro](/docs/understanding-your-pipeline/what-is-snowplow-micro/index.md) is a minimal pipeline designed to be used as part of your app's automated test suite.
+<TestingWithMicro/>
+```

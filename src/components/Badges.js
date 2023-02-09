@@ -1,6 +1,20 @@
 import React from 'react'
 
 export default function Badges(props) {
+  if (props.badgeType === 'Docker Pulls') {
+    const { repo } = props
+    return (
+      <a href={`https://hub.docker.com/r/${repo}`}>
+        <img
+          loading="lazy"
+          src={`https://img.shields.io/docker/pulls/${repo}`}
+          alt="Docker Pulls"
+          title="Docker Pulls"
+          className="shield"
+        ></img>
+      </a>
+    )
+  }
   if (props.badgeType === 'Actively Maintained') {
     return (
       <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">

@@ -8,7 +8,7 @@ As well as managing data structures through the Snowplow BDP Console, Snowplow B
 
 This functionality is key to automating any existing process you may have, including workflows in version control systems like GitHub.
 
-Partnered with other tools like our [CI tool](/docs/managing-data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/index.md) and / or [Snowplow Micro](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
+Partnered with other tools like our [CI tool](/docs/managing-data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/index.md) and / or [Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
 
 :::note
 

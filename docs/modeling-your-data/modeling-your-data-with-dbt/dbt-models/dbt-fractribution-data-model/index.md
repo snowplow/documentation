@@ -33,8 +33,6 @@ This will generate and populate the following three tables:
 - `snowplow_fractribution_channel_attribution`: The main output table that shows conversions, revenue, spend and ROAS per channel
 - `snowplow_fractribution_path_summary_with_channels`: The conversion and revenue attribution per channel (used to create the report table)
 - `snowplow_fractribution_report_table`: An intermediate table that shows, for each unique path, a summary of conversions, non conversions and revenue, as well as which channels were assigned a contribution
-
-In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) section you will find a detailed step-by-step guide on how to operate the package as a whole.
 ​
 ### Intrasession Channels
 ​
@@ -48,6 +46,8 @@ In Google Analytics (Universal Analytics) a new session is started if a campaign
  2. **Unique**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
  3. **First**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
  4. **Frequency**: keep a count of the events’ frequency: `A → A → B` becomes `A(2) → B`, best when there is a lot of retargeting
+ 5. **Remove if last and not all**: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as it is trying to reach a non-matching channel param: `A` path: `A → B → A → A` becomes `A → B`
+ 6. **Remove if not all**: requires a channel to be added as a parameter, which gets removed from the path altogether unless it would result in the whole path's removal: `A` path: `A → B → A → A` becomes `B`
 ​
 ​
 ### Attribution Models
@@ -78,11 +78,13 @@ In Google Analytics (Universal Analytics) a new session is started if a campaign
 6. Configure environment variables to be used by the python file specific to your warehouse (either `main_snowplow_bigquery.py`, `main_snowplow_databricks.py` or `main_snowplow_snowflake.py`) to enable you to connect.
 7. Overwrite default variables provided by the package in your dbt_project.yml file, if necessary. E.g.: make sure your `snowplow__page_views_source` and `snowplow__conversions_source` are aligned to what is available in your warehouse, and update `snowplow__conversion_window_start_date` and `snowplow__conversion_window_end_date` if you don't want the default of the last 30 days.
 ​
-### Running
+### Running Overview (for detailed instructions check out the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md)) section)
 ​
 1. Ensure the setup steps have been completed above.
 2. Run `dbt run`, or `dbt run --select package:fractribution`
-3. Run the correct python script for the data warehouse you are using, e.g. `python utils/main_snowplow_snowflake.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01'` for Snowflake, or `python utils/main_snowplow_bigquery.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01'` for Bigquery. Set these conversion_window dates to represent the last 30 days if you left these variables blank in the dbt_project.yml file. You can optionally add the attribution_model flag if you do not want the default of `shapley`.
+3. Set up your python virtual environment based on utils/requirements.txt.
+4. Configure you environment variables needed for the scripts to run
+5. Run the correct python script for the data warehouse you are using, e.g. `python utils/main_snowplow_snowflake.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01'` for Snowflake, or `python utils/main_snowplow_bigquery.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01'` for Bigquery. Set these conversion_window dates to represent the last 30 days if you left these variables blank in the dbt_project.yml file. You can optionally add the attribution_model flag if you do not want the default of `shapley`.
 ​
 ​
 ### Differences to Google's Fractribution

@@ -647,17 +647,20 @@ export snowflake_schema=derived_schema_name
 ```
 
 **BigQuery specific env variables:**
+```
 export project_id=project_id\
 export bigquery_dataset=bigquery_dataset\
-export google_application_credentials=google_application_credentials\
+export google_application_credentials=google_application_credentials
+```
 
 **Databricks specific env variables:**
 
+```
 export databricks_schema=derived_schema_name\
 export databricks_server_hostname=hostname\
 export databricks_http_path=http_path\
 export databricks_token=token
-
+```
 
 ***
 

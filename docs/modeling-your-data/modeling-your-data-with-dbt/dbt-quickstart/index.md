@@ -595,9 +595,17 @@ If you wish to change the channel classification macro, copy the `channel_spend.
  ```
  #### 4. Run the python script to generate the final models
 
-Python scripts and `requirements.txt` can be found at `[dbt_project_name]/dbt_packages/snowplow_fractribution/utils/`. To run the fractribution script locally in Python, we recommend using a virtual environment.
+Python scripts and `requirements.txt` can be found at `[dbt_project_name]/dbt_packages/snowplow_fractribution/utils/`.
 
-Snowpark requires Python 3.8. To use conda:
+Please note that some of the libraries are adapter specific. You can find the necessary list for each adapter below:
+
+ | BigQuery  | Databricks  | Snowflake  |
+ | --------- | ----------- | ---------- |
+ absl-py==1.2.0, google-cloud-bigquery==3.5.0 | absl-py==1.2.0,  databricks-sql-connector==2.1.0 pandas  |  absl-py==1.2.0, snowflake-snowpark-python==0.11.0  |
+
+To run the fractribution script locally in Python, we recommend using a virtual environment.
+
+Example using conda:
 
 ```
 conda create --name fractribution_env -c https://repo.anaconda.com/pkgs/snowflake python=3.8 absl-py
@@ -605,7 +613,7 @@ conda activate fractribution_env
 ```
 ***
 
-**M1 Instructions**
+**M1 Instructions (for Snowflake only)**
 
 :::caution
 There is an issue with running Snowpark on M1 chips. A workaround recommended by Snowflake is to set up a virtual environment that uses x86 Python:
@@ -624,7 +632,9 @@ Install snowpark in this environment (all computers):
 conda install snowflake-snowpark-python
 ```
 
-Set the connection parameters to your Snowflake warehouse on the command line:
+**Set the connection parameters in your terminal**
+
+**Snowflake specific env variables:**
 
 ```
 export snowflake_account=my_account\
@@ -633,11 +643,25 @@ export snowflake_password=password\
 export snowflake_user_role=special_role\
 export snowflake_warehouse=warehouse_name\
 export snowflake_database=database_name\
-export snowflake_schema=schema_name
+export snowflake_schema=derived_schema_name
 ```
+
+**BigQuery specific env variables:**
+export project_id=project_id\
+export bigquery_dataset=bigquery_dataset\
+export google_application_credentials=google_application_credentials\
+
+**Databricks specific env variables:**
+
+export databricks_schema=derived_schema_name\
+export databricks_server_hostname=hostname\
+export databricks_http_path=http_path\
+export databricks_token=token
+
+
 ***
 
-Run the fractribution script by specifying the conversion window start and end dates and the attribution model (if you are not using the default (`shapely`)). Example:
+Run the adapter specific main fractribution script by specifying the conversion window start and end dates and the attribution model (if you are not using the default (`shapely`)). Example:
 
 ```
 python main_snowplow_snowflake.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01' --attribution_model last_touch

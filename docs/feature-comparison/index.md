@@ -19,7 +19,7 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 | [Destinations hub](https://snowplow.io/destination-hub/) | do-it-yourself | ❌ | ✅ |
 | **Warehouse / lake destinations** | | | |
 | • Snowflake | ✅ | ✅ | ✅ |
-| • Redshift | ✅ | _coming soon_ | ✅ |
+| • Redshift | ✅ | ✅| ✅ |
 | • BigQuery | ✅ | ❌ | ✅ |
 | • Databricks | ✅ | ✅ | ✅ |
 | • Elasticsearch | ✅ | ❌ | ✅ |

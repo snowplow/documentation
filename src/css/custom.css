@@ -64,6 +64,7 @@
   --ifm-toc-padding-horizontal: 20px;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --doc-sidebar-width: 330px !important;
+  --ifm-tabs-padding-vertical: 7px;
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
 }
 
@@ -306,4 +307,15 @@ textarea {
 
 img.shield {
   vertical-align: text-bottom;
+}
+
+.tabs-container:hover {
+  border: 2px solid var(--ifm-color-primary);
+}
+
+.tabs-container {
+  padding: 7px 14px 14px;
+  border: 2px solid transparent;
+  border-radius: var(--ifm-alert-border-radius);
+  transition: 0.4s cubic-bezier(.38,.14,.58,1) all;
 }

@@ -20,7 +20,7 @@ Mini 0.8.0 updated some of the internal components resulting in some breaking ch
 
 - _Iglu Server is updated from 0.3.0 to 0.6.1_ :
     - Swagger UI is deprecated which means `repo-server.baseURL` configuration field in Iglu Server configuration is deprecated too.
-    - We've overhauled Iglu Server in 0.6.0 release and introduced breaking API changes. Please check [API Changes section](https://snowplowanalytics.com/blog/2019/10/11/iglu-server-0.6.0-released/#api-changes) of the blog post to learn about them.
+    - We've overhauled Iglu Server in 0.6.0 release and introduced breaking API changes. Please check [API Changes section](https://snowplow.io/blog/iglu-server-0-6-0-released/#api-changes) of the blog post to learn about them.
     - In addition to 0.6.0, Iglu Server 0.6.1 deprecated query parameter support for `POST iglu-server/api/auth/keygen` endpoint. vendor_prefix must be provided
     - **Note** that browsing to the same endpoint ( /iglu-server ) in an internet browser will yield an error message stating that endpoint doesn't exist, we'll address this in upcoming releases but one can safely ignore that for now and server health can be checked at `GET iglu-server/api/meta/health` endpoint.
 - _Stream Enrich is updated from 0.21.0 to 1.0.0_ :

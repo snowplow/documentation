@@ -156,4 +156,4 @@ visits <- dbGetQuery(con, "
 [r](http://www.r-project.org/)
 [download-r](http://www.r-project.org/)
 [aws-console](https://console.aws.amazon.com/console/home)
-[get-started-with-r](http://snowplowanalytics.com/analytics/tools-and-techniques/get-started-analysing-snowplow-data-with-r.html)
+[get-started-with-r](https://discourse.snowplow.io/t/get-started-analyzing-snowplow-data-with-r-part-1/1182)

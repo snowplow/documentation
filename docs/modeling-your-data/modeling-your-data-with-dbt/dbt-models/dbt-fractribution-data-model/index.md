@@ -85,6 +85,12 @@ In Google Analytics (Universal Analytics) a new session is started if a campaign
 3. Set up your python virtual environment based on utils/requirements.txt.
 4. Configure you environment variables needed for the scripts to run
 5. Run the correct python script for the data warehouse you are using, e.g. `python utils/main_snowplow_snowflake.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01'` for Snowflake, or `python utils/main_snowplow_bigquery.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01'` for Bigquery. Set these conversion_window dates to represent the last 30 days if you left these variables blank in the dbt_project.yml file. You can optionally add the attribution_model flag if you do not want the default of `shapley`.
+
+
+The output of the fractribution analysis will be built into the schema specified in your connection parameters. There are three tables that will be created are:
+- `snowplow_fractribution_report_table`: The main output table that shows conversions, revenue, spend and ROAS per channel.
+- `snowplow_fractribution_channel_attribution`: The conversion and revenue attribution per channel (used to create the report table).
+- `snowplow_fractribution_path_summary_with_channels`: An intermediate table that shows, for each unique path, a summary of conversions, non conversions and revenue, as well as which channels were assigned a contribution.
 ​
 ​
 ### Differences to Google's Fractribution

@@ -558,23 +558,19 @@ dbt run --selector snowplow_ecommerce
 
 #### 2. Configure macros
 
+ All the below macros are created with the intention to let users modify them to fit their personal use case. If you wish to change this, copy the macro from the macros folder in the `snowplow_fractribution` package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_clause.sql`) and add it to the macros folder of your own dbt project where you are free to make any alterations. You will find a detailed guide / illustration with sample code within the individual macros themselves.
+
 ##### Configure the conversion_clause macro
 
  The `conversion_clause` specifies how to filter Snowplow events to only conversion events. How this is filtered will depend on your definition of a conversion. The default is filtering to events where `tr_total > 0`, but this could instead filter on `event_name = 'checkout'`, for example. If you are using the e-commerce model, you will still need to set this for the fractribution code to run (even though all events are conversions in the e-commerce model), in this case change it to `transaction_revenue > 0`.
-
- If you wish to change this filter, copy the `conversion_clause.sql` file from the macros folder in the `snowplow_fractribution` package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_clause.sql`) and add it to the macros folder of your own dbt project. Update the filter and save the file.
 
 ##### Configure the conversion_value macro
 
  The `conversion_value` macro specifies either a single column or a calculated value that represents the value associated with that conversion. The default is `tr_total`, but revenue or a calculation using revenue and discount_amount from the default e-commerce schema, for example, could similarly be used.
 
- If you wish to change this value, copy the `conversion_value.sql` file from the macros folder in the snowplow_fractribution package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_value.sql`) and add it to the macros folder of your own dbt project. Update the value and save the file.
-
 ##### Configure the default channel_classification macro
 
  The `channel_classification` macro is used to perform channel classifications. This can be altered to generate your expected channels if they differ from the channels generated in the default macro. It is highly recommended that you examine and configure this macro when using your own data, as the default values will not consider any custom marketing parameters.
-
- If you wish to change the channel classification macro, copy the `channel_classification.sql` file from the macros folder in the snowplow_fractribution package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/channel_classification.sql`) and add it to the macros folder of your own dbt project. Update the SQL and save the file.
 
  ##### Configure the channel_spend macro
 
@@ -583,8 +579,6 @@ dbt run --selector snowplow_ecommerce
  Required output schema:
  - channel: STRING NOT NULL
  - spend: FLOAT64 (Use the same monetary units as conversion revenue, and NULL if unknown.)
-
-If you wish to change the channel classification macro, copy the `channel_spend.sql` file from the macros folder in the snowplow_fractribution package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/channel_spend.sql`) and add it to the macros folder of your own dbt project. Update the SQL and save the file.
 
  #### 3. Run the model
 
@@ -670,10 +664,6 @@ Run the adapter specific main fractribution script by specifying the conversion 
 python main_snowplow_snowflake.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01' --attribution_model last_touch
 ```
 
-The output of the fractribution analysis will be built into the schema specified in your connection parameters. There are three tables that will be created are:
-- `snowplow_fractribution_report_table`: The main output table that shows conversions, revenue, spend and ROAS per channel.
-- `snowplow_fractribution_channel_attribution`: The conversion and revenue attribution per channel (used to create the report table).
-- `snowplow_fractribution_path_summary_with_channels`: An intermediate table that shows, for each unique path, a summary of conversions, non conversions and revenue, as well as which channels were assigned a contribution.
 
 </TabItem>
 </Tabs>

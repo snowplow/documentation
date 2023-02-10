@@ -61,7 +61,7 @@ You must set the application ID for the website you are tracking via AMP:
 
 **Notes:**
 
-- You do not have to use the `appId` to distinguish AMP traffic from other web traffic (unless you want to) - see the [Analytics](https://github.com/snowplow/snowplow/wiki/Google-AMP-Tracker#analytics) section for an alternative approach
+- You do not have to use the `appId` to distinguish AMP traffic from other web traffic (unless you want to) - see the [Analytics](#analytics) section for an alternative approach
 
 ## Tracking events
 

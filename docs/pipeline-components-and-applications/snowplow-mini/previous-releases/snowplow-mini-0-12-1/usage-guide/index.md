@@ -171,7 +171,7 @@ Unfold any payload to inspect a bad event in detail.
 
 ## Uploading custom enrichments
 
-You can add new custom enrichments via the Control Plane tab. The only thing you have to do is submit the enrichment file which you created according to this [wiki page](https://github.com/snowplow/snowplow/wiki/Configurable-enrichments). If the enrichment relies on additional schemas these should be uploaded to the Iglu repository.
+You can add new custom enrichments via the Control Plane tab. The only thing you have to do is submit the enrichment file which you created according to this [wiki page](/docs/enriching-your-data/available-enrichments/index.md). If the enrichment relies on additional schemas these should be uploaded to the Iglu repository.
 
 ## Adding a custom schema
 

@@ -8,7 +8,7 @@ _This page refers to version 2.14.0+ of the Snowplow JavaScript Tracker._
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v1) for the corresponding documentation for version 1._
 
-_Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.0) for the corresponding documentation for version 2.1.1._
+_Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.0) for the corresponding documentation for version 2.0 and 2.1.1._
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.2) for the corresponding documentation for version 2.2.2._
 
@@ -26,7 +26,7 @@ _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-fo
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.9) for the corresponding documentation for version 2.9.0._
 
-_Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.10) for the corresponding documentation for version 2.10.0._
+_Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.10.0) for the corresponding documentation for version 2.10.0._
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.11) for the corresponding documentation for version 2.11.0._
 

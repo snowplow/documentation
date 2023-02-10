@@ -55,7 +55,7 @@ If you want, you can also manually override the event's `platform` parameter b
 http://<collector host>/com.mailchimp/v1?p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters); if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Before we save our MailChimp webhook we can configure what types of events MailChimp will send to our webhook and what channels will trigger these events. Simply select the boxes that are applicable to you and MailChimp will send these events to our webhook.
 

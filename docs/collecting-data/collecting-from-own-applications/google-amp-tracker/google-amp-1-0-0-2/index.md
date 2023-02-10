@@ -90,7 +90,7 @@ Notes:
 
 ### `userId`
 
-Specify the optional `"userId"` var to set the uid/user_id  [Snowplow](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol) field.
+Specify the optional `"userId"` var to set the uid/user_id  [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#user-related-parameters) field.
 
 ```javascript
 "vars": {
@@ -100,7 +100,7 @@ Specify the optional `"userId"` var to set the uid/user_id  [Snowplow](https://g
 
 ### `nameTracker`
 
-Specify the optional "nameTracker" var to set the tna/name_tracker [Snowplow tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) field.
+Specify the optional "nameTracker" var to set the tna/name_tracker [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters) field.
 
 ```javascript
 "vars": {
@@ -325,7 +325,7 @@ The tracker is designed to handle user journeys as follows:
 
 #### JS-tracker page to AMP page
 
-Where a user moves from a standard web page, tracked by the Javascript tracker, to an AMP page, the domain userid from the Javascript tracker can be passed to the AMP tracker by enabling the  [Javascript tracker's crossDomainLinker](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#2217-configuring-cross-domain-tracking). The AMP tracker will parse the value from the querystring, and attach it to all events, along with the AMP client ID, via the AMP ID context.
+Where a user moves from a standard web page, tracked by the Javascript tracker, to an AMP page, the domain userid from the Javascript tracker can be passed to the AMP tracker by enabling the  [Javascript tracker's crossDomainLinker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#configuring-cross-domain-tracking). The AMP tracker will parse the value from the querystring, and attach it to all events, along with the AMP client ID, via the AMP ID context.
 
 The AMP tracker uses a combination of cookies and the AMP linker to attempt to retain the value, however due to the nature of AMP pages, there is no guarantee that the value will be retained across sessions. To ensure best possible retention of the value within the session, make sure the tracker config has linker pages enabled for your AMP domains:
 

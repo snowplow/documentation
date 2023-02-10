@@ -6,7 +6,7 @@ sidebar_position: 10
 
 ![](images/snowplow-aws-pipeline-trackers.png)
 
-Snowplow Trackers are SDKs that are integrated into applications to generate event-data and send that data to [Snowplow Collectors](https://github.com/snowplow/snowplow/wiki/Setting-up-a-Collector).
+Snowplow Trackers are SDKs that are integrated into applications to generate event-data and send that data to [Snowplow Collectors](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-the-snowplow-collector/index.md).
 
 ## 1. Choose and setup a Tracker
 

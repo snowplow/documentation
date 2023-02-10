@@ -14,7 +14,7 @@ Snowplow enrichments can be categorized into three brackets:
 - Configurable enrichments loading `atomic.events` (legacy)
 - Configurable enrichments adding new contexts to the `derived_contexts` JSON array
 
-_Legacy enrichments_ are those which populate `atomic.events` table as opposed to dedicated enrichment tables. The hardcoded legacy enrichments normally take place as part of common enrichment process and they precede configurable enrichments. During the common enrichment process the data received from collector(s) is mapped according to our [Canonical Event Model](https://github.com/snowplow/snowplow/wiki/canonical-event-model).
+_Legacy enrichments_ are those which populate `atomic.events` table as opposed to dedicated enrichment tables. The hardcoded legacy enrichments normally take place as part of common enrichment process and they precede configurable enrichments. During the common enrichment process the data received from collector(s) is mapped according to our [Canonical Event Model](/docs/understanding-your-pipeline/canonical-event/index.md).
 
 _Configurable enrichments_ often depend on the data produced by the common enrichment process.
 

@@ -153,7 +153,7 @@ The arguments are as follows:
 
 | **Argument** | **Description** | **Required?** | **Type** |
 | --- | --- | --- | --- |
-| `eventData` | The properties of the event | Yes | [`SelfDescribingJson`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#self-describing-json) |
+| `eventData` | The properties of the event | Yes | [`SelfDescribingJson`](#selfdescribingjson) |
 | `customContexts` | Optional custom context | No | `List<IContext>` |
 | `timestamp` | Optional timestamp | No | `long` |
 | `eventId` | Optional custom event id | No | `string` |

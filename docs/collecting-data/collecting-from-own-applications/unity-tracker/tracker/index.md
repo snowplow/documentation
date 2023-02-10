@@ -10,11 +10,11 @@ The Tracker object is responsible for co-ordinating the saving and sending of ev
 
 | **Argument Name** | **Description** | **Required?** | **Default** |
 | --- | --- | --- | --- |
-| [`emitter`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#emitter) | The Emitter object you create | Yes | Null |
+| [`emitter`](/docs/collecting-data/collecting-from-own-applications/unity-tracker/emitter/index.md) | The Emitter object you create | Yes | Null |
 | `trackerNamespace` | The name of the tracker instance | Yes | Null |
 | `appId` | The application ID | Yes | Null |
-| [`subject`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#subject) | The Subject that defines a user | No | Null |
-| [`session`](https://github.com/snowplow/snowplow/wiki/Unity-Tracker#session) | The Session object you create | No | Null |
+| [`subject`](/docs/collecting-data/collecting-from-own-applications/unity-tracker/subject/index.md) | The Subject that defines a user | No | Null |
+| [`session`](/docs/collecting-data/collecting-from-own-applications/unity-tracker/session/index.md) | The Session object you create | No | Null |
 | `platform` | The device the Tracker is running on | No | Mobile |
 | `base64Encoded` | If we [base 64 encode](https://en.wikipedia.org/wiki/Base64) json values | No | True |
 

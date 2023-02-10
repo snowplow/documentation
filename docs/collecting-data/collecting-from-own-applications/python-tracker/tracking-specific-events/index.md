@@ -131,7 +131,7 @@ from snowplow_tracker.tracker import TrueTimestamp
 t.track_struct_event("some cat", "save action", tstamp=TrueTimestamp(1368725287000))
 ```
 
-Above will attach [`ttm`](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#12-date--time-parameter)([`true_tstamp`](https://github.com/snowplow/snowplow/wiki/canonical-event-model#212-date--time-fields)) parameter instead of default `dtm`. You can also use, plain integer, `DeviceTimestamp` or `None` to send `device_sent_timestamp`.
+Above will attach [`ttm`](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#timestamp-parameters)([`true_tstamp`](/docs/understanding-your-pipeline/canonical-event/index.md#date--time-fields)) parameter instead of default `dtm`. You can also use, plain integer, `DeviceTimestamp` or `None` to send `device_sent_timestamp`.
 
 **_\*\*New to v0.9.0_**
 

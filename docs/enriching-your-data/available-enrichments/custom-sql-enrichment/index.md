@@ -19,8 +19,6 @@ Currently supported database types:
 
 We don’t recommend to use this enrichment with analytical databases which support minimal (50-100) concurrent queries (e.g. Redshift).
 
-To read more detail on this enrichnment and its configuration, look [here](https://github.com/snowplow/snowplow/wiki/SQL-Query-enrichment).
-
 For help with configuring this enrichment and getting it live on your pipeline please contact us at support@snowplowanalytics.com.
 
 ## Configuration

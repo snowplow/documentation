@@ -10,7 +10,7 @@ sidebar_position: 970
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.
 
-The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](https://github.com/snowplow/snowplow/wiki/Python-Tracker) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Android Tracker Setup](https://github.com/snowplow/snowplow/wiki/Android-Tracker-Setup) guide before continuing.
+The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) guide before continuing.
 
 ### 1.1. Demo App
 
@@ -18,11 +18,11 @@ If you would like to see the Tracker in action you can download our demonstratio
 
 Within the app you will simply need to supply an endpoint and hit start! The application will then send all types of events available to the tracker to this endpoint.
 
-For a walkthrough go [here](https://github.com/snowplow/snowplow/wiki/Android-app-walkthrough).
+For a walkthrough go [here](https://github.com/snowplow/snowplow/wiki/Android-app-walkthrough/6d8f6c2bfe27c60e9589976d9a6dd57f56f9f2ba).
 
 ## 2 Initialization
 
-Assuming you have completed the [Android Tracker Setup](https://github.com/snowplow/snowplow/wiki/Android-Tracker-Setup) for your project, you are now ready to initialize the Android Tracker.
+Assuming you have completed the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) for your project, you are now ready to initialize the Android Tracker.
 
 #### 2.1 Importing the module
 
@@ -88,11 +88,11 @@ We also have several extra builder options:
 
 ##### 2.3.1 `emitter`
 
-The emitter to which the tracker will send events. See [Emitters](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#emitter) for more on emitter configuration.
+The emitter to which the tracker will send events. See [Emitters](#5-sending-eventemitter) for more on emitter configuration.
 
 ##### 2.3.2 `subject`
 
-The user which the Tracker will track. This should be an instance of the [Subject](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#subject) class. You don't need to set this during Tracker construction; you can use the `Tracker.setSubject` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
+The user which the Tracker will track. This should be an instance of the [Subject](#31-subject-setter-functions) class. You don't need to set this during Tracker construction; you can use the `Tracker.setSubject` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
 
 ##### 2.3.3 `namespace`
 
@@ -124,7 +124,7 @@ tracker.setPlatform(DevicePlatforms.{{ Valid Enum Option }})
 
 There are several different DevicePlatforms options to choose from.
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/Snowplow-Tracker-Protocol).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
 #### 2.3.8 Change the tracker's subject with `setSubject`
 
@@ -134,7 +134,7 @@ You can change the subject by creating a new `Subject` object and then calling
 tracker.setSubject(newSubject);
 ```
 
-See [Adding extra data: the Subject class](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#add-data-subject) for more information on the `Subject`.
+See [Adding extra data: the Subject class](#3-adding-extra-data-the-subject-class) for more information on the `Subject`.
 
 #### 2.3.9 Change the tracker's emitter with `setEmitter`
 
@@ -152,16 +152,16 @@ You may have additional information about your application's environment, curren
 
 The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events:
 
-- [`setUserId`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-user-id)
-- [`setScreenResolution`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-screen-resolution)
-- [`setViewport`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-viewport-dimensions)
-- [`setColorDepth`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-color-depth)
-- [`setTimezone`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-timezone)
-- [`setLanguage`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-lang)
-- [`setIpAddress`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-ip-address)
-- [`setUseragent`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-user-agent)
-- [`setNetworkUserId`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-network-user-id)
-- [`setDomainUserId`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#set-domain-user-id)
+- [`setUserId`](#311-set-user-id-withsetuserid)
+- [`setScreenResolution`](#312-set-screen-resolution-withsetscreenresolution)
+- [`setViewport`](#313-set-viewport-dimensions-withsetviewport)
+- [`setColorDepth`](#314-set-color-depth-withsetcolordepth)
+- [`setTimezone`](#315-set-timezone-withsettimezone)
+- [`setLanguage`](#316-set-the-language-withsetlanguage)
+- [`setIpAddress`](#317setipaddress)
+- [`setUseragent`](#318setuseragent)
+- [`setNetworkUserId`](#319setnetworkuserid)
+- [`setDomainUserId`](#3110setdomainuserid)
 
 Here are some examples:
 
@@ -335,7 +335,7 @@ subj.setDomainUserId("domain-id");
 
 ### 3.2 Additional contexts sent by this tracker
 
-This Tracker not only appends the [generic](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#subject-setters) subject information to each event; it will also attempt to gather more specific information about the mobile it is hosted on.
+This Tracker not only appends the [generic](#31-subject-setter-functions) subject information to each event; it will also attempt to gather more specific information about the mobile it is hosted on.
 
 ### 3.2.1 `mobile_context`
 
@@ -415,11 +415,11 @@ Tracking methods supported by the Android Tracker at a glance:
 
 | **Function** | \*_Description_ |
 | --- | --- |
-| [`trackScreenView()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageView()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#page-view) | Track and record views of web pages. |
-| [`trackEcommerceTransaction()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#ecommerce-transaction) | Track an ecommerce transaction and its items |
-| [`trackStructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#unstruct-event) | Track a Snowplow custom unstructured event |
+| [`trackScreenView()`](#42-track-screen-views-withtrackscreenview) | Track the user viewing a screen within the application |
+| [`trackPageView()`](#43-track-pageviews-withtrackpageview) | Track and record views of web pages. |
+| [`trackEcommerceTransaction()`](#44-track-ecommerce-transactions-withtrackecommercetransaction) | Track an ecommerce transaction and its items |
+| [`trackStructuredEvent()`](#45-track-structured-events-withtrackstructuredevent) | Track a Snowplow custom structured event |
+| [`trackUnstructuredEvent()`](#46-track-unstructured-events-withtrackunstructuredevent) | Track a Snowplow custom unstructured event |
 
 #### 4.1 Common
 
@@ -445,7 +445,7 @@ You can create a SelfDescribingJson with the following arguments:
 | `schema` | JsonSchema that describes the data | Yes | `String` |
 | `data` | Data that will be validated by the schema | No | `Map<String, String>, Map<String, Object>, TrackerPayload, SelfDescribingJson` |
 
-`SelfDescribingJson` is used for recording [custom contexts](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#custom-contexts) and [unstructured events](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#unstruct-event).
+`SelfDescribingJson` is used for recording [custom contexts](#412-custom-contexts) and [unstructured events](#46-track-unstructured-events-withtrackunstructuredevent).
 
 #### 4.1.2 Custom contexts
 
@@ -458,7 +458,7 @@ t1.trackPageView(String pageUrl, String pageTitle, String referrer, double times
 t1.trackPageView(String pageUrl, String pageTitle, String referrer, List<SelfDescribingJson> context, double timestamp);
 ```
 
-The `context` argument should consist of a `List` of `SelfDescribingJson` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0#unstruct-event).
+The `context` argument should consist of a `List` of `SelfDescribingJson` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](#46-track-unstructured-events-withtrackunstructuredevent).
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
@@ -802,13 +802,13 @@ Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'.
 
 ## Integration
 
-This page refers to integration samples for [Android Tracker v0.4.0](https://github.com/snowplow/snowplow/wiki/Android-Tracker-0.4.0). This assumes you have already successfully gone through the [Setup Guide](https://github.com/snowplow/snowplow/wiki/Android-Tracker-Setup-0.4.0) for setting up all the dependencies for the tracker.
+This page refers to integration samples for [Android Tracker v0.4.0](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/android-0-4-0/index.md). This assumes you have already successfully gone through the [Setup Guide](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) for setting up all the dependencies for the tracker.
 
 The following example classes are using the bare minimum of settings for building a Tracker. It is encouraged to flesh out the options for the Tracker and Emitter builders.
 
 ## Contents
 
-1. [Classic Tracker](https://github.com/snowplow/snowplow/wiki/Android-Integration-0.4.0#classic)
+1. [Classic Tracker](#1-classic-tracker)
 
 ## 1. Classic Tracker
 

@@ -56,4 +56,4 @@ Alternatively, you can download and run [a jar file from the github release](ht
   --force-cached-files-download
 `}</CodeBlock>
 
-The [configuration guide](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/configure-stream-enrich/index.md) describes how to construct the config, enrichments, and resolver input files.[](https://github.com/snowplow/snowplow/wiki/_Footer/_edit)
+The [configuration guide](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/configure-stream-enrich/index.md) describes how to construct the config, enrichments, and resolver input files.

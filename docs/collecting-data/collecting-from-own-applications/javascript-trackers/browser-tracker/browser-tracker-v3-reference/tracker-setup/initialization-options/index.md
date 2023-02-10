@@ -77,7 +77,7 @@ Set the application ID using the `appId` field of the configuration object. Th
 
 #### Setting the platform
 
-Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/SnowPlow-Tracker-Protocol).
+Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters).
 
 #### Configuring the cookie domain
 
@@ -89,7 +89,7 @@ If your website spans multiple subdomains e.g.
 
 You will want to track user behaviour across all those subdomains, rather than within each individually. As a result, it is important that the domain for your first party cookies is set to ‘.mysite.com’ rather than ‘www.mysite.com’. By doing so, any values that are stored on the cookie on one of subdomain will be accessible on all the others.
 
-It is recommended that you [enable automatic discovery and setting of the root domain](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker#discoverRootDomain).
+It is recommended that you [enable automatic discovery and setting of the root domain](#automatically-discover-and-set-the-root-domain).
 
 Otherwise, set the cookie domain for the tracker instance using the `cookieDomain` field of the configuration object. If this field is not set, the cookies will not be given a domain.
 

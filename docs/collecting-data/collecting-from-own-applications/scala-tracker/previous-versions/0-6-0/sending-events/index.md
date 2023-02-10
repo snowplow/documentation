@@ -152,7 +152,7 @@ try {
 }
 ```
 
-Note: this tracker should not be used to track exceptions happening in tracker itself, use [callbacks](https://github.com/snowplow/snowplow/wiki/Scala-Tracker#callbacks) mechanism for that.
+Note: this tracker should not be used to track exceptions happening in tracker itself, use [callbacks](/docs/collecting-data/collecting-from-own-applications/scala-tracker/previous-versions/0-6-0/initialization/index.md#callbacks) mechanism for that.
 
 ### `trackAddToCart`
 

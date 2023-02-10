@@ -134,9 +134,9 @@ To disable `ttl` so keys could be stored in cache until job is done `0` valu
 The data source for this enrichment is the entire `enriched/good` event. More precisely, input data can be accessed in any of four forms:
 
 - Snowplow Plain Old Java Object produced during common enrichment process
-- [Snowplow Unstructured event](https://github.com/snowplow/snowplow/wiki/Custom-events#unstructured-event)
-- [Custom contexts](https://github.com/snowplow/snowplow/wiki/Custom-contexts) attached to event by tracking SDK
-- Derived contexts attached to event by [other enrichments](https://github.com/snowplow/snowplow/wiki/Configurable-enrichments)
+- [Snowplow Unstructured event](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#self-describing-events)
+- [Custom contexts](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md) attached to event by tracking SDK
+- Derived contexts attached to event by [other enrichments](/docs/enriching-your-data/available-enrichments/index.md)
 
 More precise usage of these data sources is described in inputs section.
 

@@ -275,7 +275,7 @@ On the tracker setup you can override the device platform entry calling:
 
 It resets the parameter `p` (platform) to the new value.
 
-[Here](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#1-common-parameters-platform-and-event-independent) a full list of the supported platform values.
+[Here](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters) a full list of the supported platform values.
 
 ### Sending events
 

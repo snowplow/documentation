@@ -10,7 +10,7 @@ The [Snowplow Java Tracker](https://github.com/snowplow/snowplow-java-tracker)�
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.
 
-The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](https://github.com/snowplow/snowplow/wiki/Python-Tracker) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Java Tracker Setup](https://github.com/snowplow/snowplow/wiki/Java-Tracker-Setup) or [Android Tracker Setup](https://github.com/snowplow/snowplow/wiki/Android-Tracker-Setup) guide before continuing.
+The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Java Tracker Setup](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) or [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) guide before continuing.
 
 ### 1.1 Android specific
 
@@ -18,7 +18,7 @@ The Android Tracker is based off of the Java Tracker core library which was also
 
 ## 2 Initialization
 
-Assuming you have completed the [Android Tracker Setup](https://github.com/snowplow/snowplow/wiki/Android-Tracker-Setup) or [Java Tracker Setup](https://github.com/snowplow/snowplow/wiki/Java-Tracker-Setup) for your project, you are now ready to initialize the Android/Java Tracker.
+Assuming you have completed the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) or [Java Tracker Setup](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) for your project, you are now ready to initialize the Android/Java Tracker.
 
 ### 2.1 Importing the module
 
@@ -62,11 +62,11 @@ Tracker t2 = new Tracker(emitter, "AF003", "cf");
 
 #### 2.3.1 `emitter`
 
-The emitter to which the tracker will send events. See [Emitters](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#emitter) for more on emitter configuration.
+The emitter to which the tracker will send events. See [Emitters](#5-sending-eventemitter) for more on emitter configuration.
 
 #### 2.3.2 `subject`
 
-The user which the Tracker will track. This should be an instance of the [Subject](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#subject) class. You don't need to set this during Tracker construction; you can use the `Tracker.setSubject` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
+The user which the Tracker will track. This should be an instance of the [Subject](#3-adding-extra-data-the-subject-class) class. You don't need to set this during Tracker construction; you can use the `Tracker.setSubject` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
 
 #### 2.3.3 `namespace`
 
@@ -88,7 +88,7 @@ You can change the platform by calling:
 tracker.setPlatform("cnsl");
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/Snowplow-Tracker-Protocol).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
 ## 3. Adding extra data: the Subject class
 
@@ -96,12 +96,12 @@ You may have additional information about your application's environment, curren
 
 The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events:
 
-- [`setUserId`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#set-user-id)
-- [`setScreenResolution`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#set-screen-resolution)
-- [`setViewport`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#set-viewport-dimensions)
-- [`setColorDepth`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#set-color-depth)
-- [`setTimezone`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#set-timezone)
-- [`setLanguage`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#set-lang)
+- [`setUserId`](#32-set-user-id-withsetuserid)
+- [`setScreenResolution`](#33-set-screen-resolution-withsetscreenresolution)
+- [`setViewport`](#34-set-viewport-dimensions-withsetviewport)
+- [`setColorDepth`](#35-set-color-depth-withsetcolordepth)
+- [`setTimezone`](#36-set-timezone-withsettimezone)
+- [`setLanguage`](#37-set-the-language-withsetlanguage)
 
 Here are some examples:
 
@@ -211,11 +211,11 @@ Tracking methods supported by the Java Tracker at a glance:
 
 | **Function** | \*_Description_ |
 | --- | --- |
-| [`trackScreenView()`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageView()`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#page-view) | Track and record views of web pages. |
-| [`trackEcommerceTransaction()`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#ecommerce-transaction) | Track an ecommerce transaction and its items |
-| [`trackStructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructuredEvent()`](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#unstruct-event) | Track a Snowplow custom unstructured event |
+| [`trackScreenView()`](#42-track-screen-views-withtrackscreenview) | Track the user viewing a screen within the application |
+| [`trackPageView()`](#43-track-pageviews-withtrackpageview) | Track and record views of web pages. |
+| [`trackEcommerceTransaction()`](#44-track-ecommerce-transactions-withtrackecommercetransaction) | Track an ecommerce transaction and its items |
+| [`trackStructuredEvent()`](#45-track-structured-events-withtrackstructuredevent) | Track a Snowplow custom structured event |
+| [`trackUnstructuredEvent()`](#46-track-unstructured-events-withtrackunstructuredevent) | Track a Snowplow custom unstructured event |
 
 ### 4.1 Common
 
@@ -232,7 +232,7 @@ t1.trackPageView(String pageUrl, String pageTitle, String referrer, double times
 t1.trackPageView(String pageUrl, String pageTitle, String referrer, List<SchemaPayload> context, double timestamp);
 ```
 
-The `context` argument should consist of a `List` of `SchemaPayload` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#unstruct-event).
+The `context` argument should consist of a `List` of `SchemaPayload` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](#46-track-unstructured-events-withtrackunstructuredevent).
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 
@@ -538,7 +538,7 @@ In the example, we we can see an in-line example of handling the case. If events
 
 ## 6. Payload
 
-A Payload interface is used for implementing a [TrackerPayload](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#tracker-payload) and [SchemaPayload](https://github.com/snowplow/snowplow/wiki/Android-and-Java-Tracker#schema-payload), but accordingly, can be used to implement your own Payload class if you choose.
+A Payload interface is used for implementing a [TrackerPayload](#61-tracker-payload) and [SchemaPayload](#62-schema-payload), but accordingly, can be used to implement your own Payload class if you choose.
 
 ### 6.1 Tracker Payload
 

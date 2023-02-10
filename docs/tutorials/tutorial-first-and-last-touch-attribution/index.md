@@ -38,7 +38,7 @@ The above table includes a line of data per marketing touch, ordered by user (as
 
 ## Identifying the different revenue events
 
-Now lets create a table with all our different revenue events. What these look like will depend on your own particular event schema - for this example we’ll assume that revenue events are standard [Snowplow transaction events](https://github.com/snowplow/snowplow/wiki/canonical-event-model?_sp=44dbe9a530cc476d.1459636607965#233-ecommerce-transactions). It should be straightforward to modify / update the below SQL with your own set of revenue events.
+Now lets create a table with all our different revenue events. What these look like will depend on your own particular event schema - for this example we’ll assume that revenue events are standard [Snowplow transaction events](/docs/understanding-your-pipeline/canonical-event/index.md#e-commerce-transactions). It should be straightforward to modify / update the below SQL with your own set of revenue events.
 
 ```sql
 create table derived.revenue_events as (

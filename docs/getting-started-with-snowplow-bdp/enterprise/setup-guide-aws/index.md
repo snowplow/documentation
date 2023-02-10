@@ -53,7 +53,6 @@ You will need to share this role with us as part of filling out the setup form i
 
 ```text
  "acm:*",
- "apigateway:*",
  "application-autoscaling:*",
  "autoscaling:*",
  "aws-marketplace:Subscribe",
@@ -66,7 +65,6 @@ You will need to share this role with us as part of filling out the setup form i
  "ec2:*",
  "ecs:*",
  "eks:*",
- "elasticbeanstalk:*",
  "elasticloadbalancing:*",
  "elasticmapreduce:*",
  "es:*",

@@ -168,7 +168,6 @@ models:
 </TabItem>
 </Tabs>
 
-------
 
 ## Disabling a standard module
 
@@ -341,7 +340,6 @@ In addition the e-commerce package has some contexts that can be enabled dependi
 </TabItem>
 </Tabs>
 
-------
 ## Warehouse specific configurations
 ### Postgres
 

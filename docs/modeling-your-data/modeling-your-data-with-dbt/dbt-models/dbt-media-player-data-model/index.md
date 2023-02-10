@@ -4,6 +4,13 @@ date: "2022-10-05"
 sidebar_position: 103
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+```
+
+
 # Snowplow Media Player Package
 
 **The package source code can be found in the [snowplow/dbt-snowplow-media-player repo](https://github.com/snowplow/dbt-snowplow-media-player), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player).**
@@ -37,6 +44,88 @@ The main `_media_stats` derived table will also be updated incrementally based o
 
 The additional `_pivot_base` table is there to calculate the percent_progress boundaries and weights that are used to calculate the total play_time and other related media fields.
 
+
+## Operating with the Web package
+Due to its unique relationship with the web package, in order to operate the media player package together with the web model there are several considerations to keep in mind. Depending on the use case one of the following scenarios may happen:
+
+1. The web package was already being used and the media player package added later
+2. The web package has not been used
+3. Only the media player package needs to be run at any time
+
+<Tabs groupId="operation">
+<TabItem value="sc1" label="Scenario 1" default>
+
+#### Adding the media player data model to an existing dbt project with web model data already running
+
+If you have already been using the web package then your new media player models will need to sync up with the data that has been processed (see [the incremental logic section](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) for why), so the backfilling needs to happen before we can process more web data. Please note that during backfill no new web data is allowed to be processed and depending on the `snowplow__backfill_limit_days` configured and the period that needs backfilling it can take multiple run for all models to sync up and new web events to start to be processed again. You can temporarily overwrite the `snowplow__backfill_limit_days` variable in your `snowplow_web` configuration if you want to backfill in less runs.
+
+To begin the synching process please run the following script:
+
+```bash
+dbt run --select snowplow_web.base snowplow_media_player --vars 'snowplow__start_date: <date_when_media_player_tracking_starts>'
+```
+
+:::tip
+
+Using the `snowplow__start_date` allows you to start your media player data at a later date than the rest of your web data if you need to.
+
+:::
+
+The web model's update logic will recognize the new media player models and begin backfilling them between the date you defined within `snowplow_start_date` and the upper limit defined by the variable `snowplow_backfill_limit_days` that is set for the web model. You should see the following in the logs:
+
+```bash
+Snowplow: New Snowplow incremental model. Backfilling
+```
+
+After this you should be able to see all media_player models added to the `derived.snowplow_web_incremental_manifest` table. Any subsequent run from this point onwards could be carried out using the recommended web model running method, using the `snowplow_web` selector.
+
+```bash
+dbt run --selector snowplow_web
+```
+
+
+</TabItem>
+<TabItem value="sc2" label="Scenario 2">
+
+#### Starting both the media and web model from scratch
+
+As neither package has been run before, the `snowplow_web_incremental_manifest` table is new; all models from both packages (plus any custom modules tagged with `snowplow_web_incremental`) will be processed using the recommended web model running method - using the `snowplow_web` selector - without any extra steps required. 
+
+```bash
+dbt run --selector snowplow_web
+```
+
+</TabItem>
+<TabItem value="sc3" label="Scenario 3">
+
+#### 3. Only running the media player package from the same dbt project
+
+Although the media player package is not designed for standalone usage, there can be scenarios where you wish to only have the media player models enabled and not the web model. In such case the web model still has to be configured, but you can disable all models the media player package does not rely on. You can disable all non-required models like so:
+
+```yml
+# dbt_project.yml
+...
+models:
+  snowplow_web:
+    page_views:
+      enabled: false
+    sessions:
+      enabled: false
+    user_mapping:
+      enabled: false
+    users:
+      enabled: false
+```
+Running it, however can still be achieved by running the selector as defined in the web model.
+
+```bash
+dbt run --selector snowplow_web
+```
+After the run finishes, you should only see the media player related models to be present within the snowplow_web_incremental_manifest table (if you did not have them enabled before).
+
+</TabItem>
+
+</Tabs>
 
 ## Custom models
 

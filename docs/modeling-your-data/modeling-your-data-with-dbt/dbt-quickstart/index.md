@@ -75,7 +75,6 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web 
 </TabItem>
 </Tabs>
 
-------
 
 ## Installation
 
@@ -334,6 +333,8 @@ dbt run --selector snowplow_mobile
 
 </TabItem>
 <TabItem value="media" label="Snowplow Media Player">
+
+If you are not starting the media player package at the same time as the web package, see the [media player package operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md#operating-with-the-web-package) for how to best sync them.
 
 #### 1. Adding the `selector.yml` file
 

@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::info
-Due to its unique relationship with the web package, the media player package operates in a different way. More information can be found on the [media player package section](#media-player-package).
+Due to its unique relationship with the web package, the media player package operates in a different way. More information can be found on the [media player package section](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md).
 
 :::
 
@@ -19,6 +19,10 @@ On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce,` `normaliz
 
 :::
 
+
+
+## YAML Selectors
+
 The Snowplow models are designed to be run as a whole, which ensures all incremental tables are kept in sync. As such, run the model using:
 
 ```bash
@@ -26,13 +30,11 @@ dbt run --select snowplow_<package> tag:snowplow_<package>_incremental
 ```
 The `snowplow_<package>` selection will execute all nodes within the relevant Snowplow package, while the `tag:snowplow_<package>_incremental` will execute all custom modules that you may have created.
 
-Given the verbose nature of this command we suggest using the [YAML selectors](#yaml-selectors) we have provided. The equivalent command using the selector flag would be:
+Given the verbose nature of this command we suggest using the YAML selectors we have provided. The equivalent command using the selector flag would be:
 
 ```bash
 dbt run --selector snowplow_<package>
 ```
-
-## YAML Selectors
 
 Within the packages we have provided a suite of suggested selectors to run and test the models within the packages. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax).
 
@@ -71,7 +73,6 @@ Within the packages we have provided a suite of suggested selectors to run and t
 </TabItem>
 </Tabs>
 
-------
 
 These are defined in each `selectors.yml` file within the packages, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -112,8 +113,6 @@ There are 3 manifest tables included in this package:
 </TabItem>
 </Tabs>
 
-------
-
 Please refer to the [Incremental Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) section more details on the purpose of each of these tables.
 
 These manifest models are critical to the package **and as such are protected from full refreshes, i.e. being dropped, by default when running in production, while in development refreshes are allowed.**
@@ -136,3 +135,9 @@ dbt run --select snowplow_<package> tag:snowplow_<package>_incremental --full-re
 # or using selector flag
 dbt run --selector snowplow_<package> --full-refresh --vars 'snowplow__allow_refresh: true'
 ```
+
+:::tip
+
+If you want to backfill a previously disabled model, or refresh only a subset of models, check out the docs on [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md).
+
+:::

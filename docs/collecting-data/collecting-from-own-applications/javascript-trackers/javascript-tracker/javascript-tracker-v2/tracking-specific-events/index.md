@@ -8,7 +8,7 @@ _This page refers to version 2.14.0+ of the Snowplow JavaScript Tracker._
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v1) for the corresponding documentation for version 1._
 
-_Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.0) for the corresponding documentation for version 2.0._
+_Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.0) for the corresponding documentation for version 2.0 and 2.1.1._
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.2) for the corresponding documentation for version 2.2.2._
 
@@ -26,7 +26,7 @@ _Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracki
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.9) for the corresponding documentation for version 2.9.0._
 
-_Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.10) for the corresponding documentation for version 2.10.0._
+_Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.10.0) for the corresponding documentation for version 2.10.0._
 
 _Click [here](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker-v2.11) for the corresponding documentation for version 2.11.0._
 
@@ -321,7 +321,7 @@ Custom context can be used to augment any standard Snowplow event type, includin
 
 Custom context can be added as an extra argument to any of Snowplow's `track..()` methods and to `addItem` and `addTrans`.
 
-Each custom context is an array of self-describing JSON following the same pattern as an self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported [Iglu clients](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-client). Since more than one (of either different or the same type) can be attached to an event, the `context` argument (if it is provided at all) should be a non-empty array of self-describing JSONs.
+Each custom context is an array of self-describing JSON following the same pattern as an self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported [Iglu clients](/docs/pipeline-components-and-applications/iglu/iglu-clients/index.md). Since more than one (of either different or the same type) can be attached to an event, the `context` argument (if it is provided at all) should be a non-empty array of self-describing JSONs.
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
@@ -661,7 +661,7 @@ This argument is a string taken from the event payload field, `e`.
 | Custom structured event | se |
 | Custom self describing event | ue |
 
-Further information about the event payload can be found in the [tracker](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) [protocol documentation](https://github.com/snowplow/snowplow/wiki/snowplow-tracker-protocol#3-snowplow-events).
+Further information about the event payload can be found in the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
 ##### `eventSchema`
 
@@ -1233,7 +1233,7 @@ snowplow('trackSiteSearch',
 
 Site search events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/site_search/jsonschema/1-0-0) is the schema for a `site_search` event.
 
-`trackSiteSearch` can also be passed an array of custom context as an additional final parameter. See [custom context](https://github.com/snowplow/snowplow/wiki/2-Specific-event-tracking-with-the-Javascript-tracker#custom-contexts) for more information.
+`trackSiteSearch` can also be passed an array of custom context as an additional final parameter. See [custom context](#custom-contexts) for more information.
 
 ### `trackTiming`
 

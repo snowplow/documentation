@@ -6,7 +6,7 @@ sidebar_position: 160
 
 ## Intro
 
-[Adjust 36](https://www.adjust.com/) provides a mobile attribution platform. It enables users to track what marketing channels drive mobile app installations.
+[Adjust](https://www.adjust.com/) provides a mobile attribution platform. It enables users to track what marketing channels drive mobile app installations.
 
 Many Snowplow users who have mobile apps use Adjust to capture the sources (marketing channels) that drive app downloads. By integrating Adjust with Snowplow, it is straightforward to:
 
@@ -17,9 +17,9 @@ Integrating Adjust with Snowplow is straightforward. In this guide we will walk 
 
 ## How the integration works: an overview
 
-The integration uses the [Adjust Callback 34](https://docs.adjust.com/en/callbacks/). We will configure this to send an app install event to the Snowplow collector when an app is installed, with the attribution data attached. In addition, we will set this up to send a reattribution event every time this occurs in Adjust to Snowplow. Again, this will contain all the data we need to figure out what drove an earlier app installation.
+The integration uses the [Adjust Callback](https://docs.adjust.com/en/callbacks/). We will configure this to send an app install event to the Snowplow collector when an app is installed, with the attribution data attached. In addition, we will set this up to send a reattribution event every time this occurs in Adjust to Snowplow. Again, this will contain all the data we need to figure out what drove an earlier app installation.
 
-On the Snowplow side, we will use the [Iglu webhook adapter 27](https://github.com/snowplow/snowplow/wiki/Iglu-webhook-adapter) to ensure that the event is correctly received and processed. We will create a schema for the event that matches the structure of the data sent from Adjust.
+On the Snowplow side, we will use the [Iglu webhook adapter](/docs/collecting-data/collecting-data-from-third-parties/iglu-webhook/index.md) to ensure that the event is correctly received and processed. We will create a schema for the event that matches the structure of the data sent from Adjust.
 
 The guide is illustrative. One of the nice things about Adjust is that it gives you a huge amount of flexibility about what data you want to send into Snowplow and how. One of the great things about Snowplow is that it is flexible enough to work with very many structures of data, just so long as it knows the schema that the data adheres to. So there are lots of ways you can adapt the following setup. It should be a good start for most users however.
 
@@ -39,7 +39,7 @@ In our example webhook setup above we’re using the schema that is defined furt
 
 We have elected to grab _all_ the data that Adjust makes available with an install event (at the time of writing).
 
-For a complete list of data Adjust can send, see the [Adjust placeholder documentation 14](https://partners.adjust.com/placeholders/).
+For a complete list of data Adjust can send, see the [Adjust placeholder documentation](https://partners.adjust.com/placeholders/).
 
 At the end of this post we’ll describe how you can tailor your setup to grab just a subset.
 
@@ -47,7 +47,7 @@ At the end of this post we’ll describe how you can tailor your setup to grab j
 
 In order for Snowplow to process the data sent to the Iglu webhook, we need to schema it.
 
-_Since first publishing this guide, we’ve added an Adjust `install` event schema to our [Iglu Central](https://github.com/snowplow/iglu-central) schema repository. You can find it [here 1](https://github.com/snowplow/iglu-central/blob/master/schemas/com.adjust/install/jsonschema/1-0-0). We recommend using that schema for out-of-the-box tracking of all the data points associated with an `install` event (at the time the schema was written), rather than the example schema used further down. If you’re using Redshift you might also find the [table definition 2](https://github.com/snowplow/iglu-central/blob/master/sql/com.adjust/install_1.sql) and [JSONpaths file 2](https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.adjust/install_1.json) from Iglu Central useful. For Snowflake and BigQuery users, the loader app in the pipeline will figure those out itself._
+_Since first publishing this guide, we’ve added an Adjust `install` event schema to our [Iglu Central](https://github.com/snowplow/iglu-central) schema repository. You can find it [here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.adjust/install/jsonschema/1-0-0). We recommend using that schema for out-of-the-box tracking of all the data points associated with an `install` event (at the time the schema was written), rather than the example schema used further down. If you’re using Redshift you might also find the [table definition](https://github.com/snowplow/iglu-central/blob/master/sql/com.adjust/install_1.sql) and [JSONpaths file](https://github.com/snowplow/iglu-central/blob/master/jsonpaths/com.adjust/install_1.json) from Iglu Central useful. For Snowflake and BigQuery users, the loader app in the pipeline will figure those out itself._
 
 _Refer to the rest of this guide to see how you can write your own custom schemas._
 
@@ -354,7 +354,7 @@ We have included a field for each placeholder that we included in our Adjust cal
 
 ### 3. Create the table in Redshift
 
-Create a corresponding Redshift table for the schema. We recommend autogenerating this [Schema Guru 6](https://github.com/snowplow/schema-guru), e.g. by executing the following in the root of your schema registry:
+Create a corresponding Redshift table for the schema. We recommend autogenerating this [Schema Guru](https://github.com/snowplow/schema-guru), e.g. by executing the following in the root of your schema registry:
 
 ```bash
 /path/to/schema-guru-0.6.2 ddl --with-json-paths schemas/com.adjust.snowplow/install

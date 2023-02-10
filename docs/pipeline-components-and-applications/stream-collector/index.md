@@ -14,7 +14,7 @@ The Stream Collector receives raw Snowplow events sent over HTTP by [trackers](/
 6. [Amazon SQS](https://aws.amazon.com/sqs/)
 7. `stdout` for a custom stream collection process
 
-The Stream Collector supports cross-domain Snowplow deployments, setting a `user_id` (used to identify unique visitors) server side to reliably identify the same user across domains.[](https://github.com/snowplow/snowplow/wiki/Scala-stream-collector#how-it-works)
+The Stream Collector supports cross-domain Snowplow deployments, setting a `user_id` (used to identify unique visitors) server side to reliably identify the same user across domains.
 
 ## How it works
 

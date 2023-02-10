@@ -19,7 +19,7 @@ There are four strategies planned regarding incorporating deduplication mechanis
 | Cross-batch natural de-duplication | Cross-batch | Yes | Yes | [R88 Angkor Wat](http://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/) |
 | Cross-batch synthetic de-duplication | Cross-batch | Yes | No | Planned |
 
-We will cover these in turn:[](https://github.com/snowplow/snowplow/wiki/Relational-Database-Shredder#41-in-batch-natural-de-duplication)
+We will cover these in turn:
 
 #### In-batch natural de-duplication
 
@@ -27,7 +27,7 @@ As of [the R76 Changeable Eagle-Hawk release](http://snowplowanalytics.com/blog/
 
 - i.e. events which share the same event ID (`event_id`) and the same event payload (based by `event_fingerprint`), meaning that they are semantically identical to each other. For a given ETL run (batch) of events being processed, RDB Shredder keeps only the first out of each group of natural duplicates; all others will be discarded.
 
-To enable this functionality you need to have [the Event Fingerprint Enrichment](https://github.com/snowplow/snowplow/wiki/Event-fingerprint-enrichment) enabled in order to correctly populate the `event_fingerprint` property.
+To enable this functionality you need to have [the Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) enabled in order to correctly populate the `event_fingerprint` property.
 
 #### In-batch synthetic de-duplication
 
@@ -37,7 +37,7 @@ As of [the R86 Petra](http://snowplowanalytics.com/blog/2016/12/20/snowplow-r86-
 2. Generate new random `event_id` for each of them
 3. Create a [`duplicate`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/duplicate/jsonschema/1-0-0) context with the original `event_id` for each event where the duplicated `event_id` was found
 
-There is no configuration required for this functionality - de-duplication is performed automatically in RDB Shredder, but it is highly recommended to use the [Event Fingerprint Enrichment](https://github.com/snowplow/snowplow/wiki/Event-fingerprint-enrichment) in order to correctly populate the `event_fingerprint` property.
+There is no configuration required for this functionality - de-duplication is performed automatically in RDB Shredder, but it is highly recommended to use the [Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) in order to correctly populate the `event_fingerprint` property.
 
 #### Cross-batch natural de-duplication
 
@@ -76,9 +76,9 @@ In the code, we perform this check after we have grouped the batch by `event_id`
 
 ##### Enabling
 
-To enable cross-batch natural de-duplication you must provide a DynamoDB table [configuration](https://github.com/snowplow/snowplow/wiki/Configuring-storage-targets#dynamodb) to EmrEtlRunner and provide [necessary rights](https://github.com/snowplow/snowplow/wiki/Setting-up-Amazon-DynamoDB) in IAM. If this is not provided, then cross-batch natural de-duplication will be disabled. In-batch de-duplication will still work however.
+To enable cross-batch natural de-duplication you must provide a DynamoDB table [configuration](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/dynamodb-table/index.md) to EmrEtlRunner and provide [necessary rights](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/dynamodb-table/index.md#2-setting-up-iam-policy) in IAM. If this is not provided, then cross-batch natural de-duplication will be disabled. In-batch de-duplication will still work however.
 
-To avoid "cold start" problems you may want to use the [Event-manifest-populator](https://github.com/snowplow/snowplow/wiki/Event-manifest-populator) Spark job, which backpopulates duplicate storage with events from the specified point in time.
+To avoid "cold start" problems you may want to use the [Event-manifest-populator](/docs/pipeline-components-and-applications/legacy/events-manifest-populator/index.md) Spark job, which backpopulates duplicate storage with events from the specified point in time.
 
 ##### Table cleanup
 
@@ -86,4 +86,4 @@ To make sure the DynamoDB table is not going to be overpopulated we're using [th
 
 ##### Costs and performance penalty
 
-Cross-batch deduplication uses DynamoDB as transient storage and therefore has associated AWS costs. Default write capacity is 100 units, which means no matter how powerful your EMR cluster is - whole RDB Shredder can be throttled by AWS DynamoDB. The rough cost of the default setup is 50USD per month, however throughput can be [tweaked](https://github.com/snowplow/snowplow/wiki/Setting-up-Amazon-DynamoDB) according to your needs.
+Cross-batch deduplication uses DynamoDB as transient storage and therefore has associated AWS costs. Default write capacity is 100 units, which means no matter how powerful your EMR cluster is - whole RDB Shredder can be throttled by AWS DynamoDB. The rough cost of the default setup is 50USD per month, however throughput can be [tweaked](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/dynamodb-table/index.md) according to your needs.

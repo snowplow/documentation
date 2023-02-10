@@ -79,7 +79,7 @@ You can use the Pixel tracker for click tracking aka URI redirects:
 - Set your collector path to `{{collector-domain}}/r/tp2?{{name-value-pairs}}` - the `/r/tp2` tells Snowplow that you are attempting a URI redirect
 - Add a `&u={{uri}}` argument to your collector URI, where `{{uri}}` is the URL-encoded URI that you want to redirect to
 - On clicking this link, the collector will register the link and then do a 302 redirect to the supplied `{{uri}}`
-- As well as the `&u={{uri}}` parameter, you can populate the collector URI with any other fields from the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/Snowplow-Tracker-Protocol)
+- As well as the `&u={{uri}}` parameter, you can populate the collector URI with any other fields from the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md)
 
 Redirect tracking is usually disabled by default, and is disabled by default for all Snowplow BDP users. To use this feature, you need to enable this in your collector configuration. Snowplow BDP customers can enable this from within the Pipeline Configuration screen of the Snowplow BDP Console.
 

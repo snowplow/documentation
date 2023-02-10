@@ -13,7 +13,7 @@ The Subject class has a set of `set...()` methods to attach extra data relatin
 - `setViewport`
 - `setColorDepth`
 - `setTimezone`
-- `setLanguag`[`e`](https://github.com/snowplow/snowplow/wiki/ActionScript3-Tracker#set-lang)
+- `setLanguage`
 
 Here are some examples:
 

@@ -43,11 +43,11 @@ var t1:Tracker = new Tracker(emitter, "AF003", "cf", user1Subject, this.stage, t
 
 #### `emitter`
 
-The emitter to which the tracker will send events. See [Emitters](https://github.com/snowplow/snowplow/wiki/ActionScript3-Tracker#5-sending-event-emitter) for more on emitter configuration.
+The emitter to which the tracker will send events. See [Emitters](/docs/collecting-data/collecting-from-own-applications/actionscript3-tracker/sending-event-emitter/index.md) for more on emitter configuration.
 
 #### `subject`
 
-The user which the Tracker will track. This should be an instance of the [Subject](https://github.com/snowplow/snowplow/wiki/ActionScript3-Tracker#3-adding-extra-data-the-subject-class) class. You don't need to set this during Tracker construction; you can use the `Tracker.setSubject` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
+The user which the Tracker will track. This should be an instance of the [Subject](/docs/collecting-data/collecting-from-own-applications/actionscript3-tracker/adding-extra-data-the-subject-class/index.md) class. You don't need to set this during Tracker construction; you can use the `Tracker.setSubject` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
 
 #### `namespace`
 
@@ -69,4 +69,4 @@ You can change the platform by calling:
 tracker.setPlatform("cnsl");
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](https://github.com/snowplow/snowplow/wiki/Snowplow-Tracker-Protocol).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).

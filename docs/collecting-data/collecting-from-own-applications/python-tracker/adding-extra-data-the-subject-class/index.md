@@ -15,13 +15,13 @@ s = Subject()
 
 The Subject class has a set of `set_...()` methods to attach extra data relating to the user:
 
-- [`set_platform`](#set-platform)
-- [`set_user_id`](#set-user-id)
-- [`set_screen_resolution`](#set-screen-resolution)
-- [`set_viewport`](#set-viewport)
-- [`set_color_depth`](#set-color-depth)
-- [`set_timezone`](#set-timezone)
-- [`set_lang`](https://github.com/snowplow/snowplow/wiki/Python-Tracker#set-lang)
+- [`set_platform`](#change-the-trackers-platform-withset_platform)
+- [`set_user_id`](#set-user-id-withset_user_id)
+- [`set_screen_resolution`](#set-screen-resolution-with-set_screen_resolution)
+- [`set_viewport`](#set-viewport-dimensions-withset_viewport)
+- [`set_color_depth`](#set-color-depth-withset_color_depth)
+- [`set_timezone`](#set-timezone-withset_timezone)
+- [`set_lang`](#set-the-language-withset_lang)
 
 If you initialize a `Tracker` instance without a subject, a default `Subject` instance will be attached to the tracker. You can access that subject like this:
 

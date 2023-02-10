@@ -8,13 +8,13 @@ sidebar_position: 1000
 
 The [Snowplow iOS Tracker](https://github.com/snowplow/snowplow-ios-tracker) allows you to track Snowplow events from your iOS apps and games. It supports iOS 7.0+.
 
-The tracker should be straightforward to use if you are comfortable with iOS development; its API is modelled after Snowplow's [Python Tracker](https://github.com/snowplow/snowplow/wiki/Python-Tracker) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [iOS Tracker Setup](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup) guide before continuing.
+The tracker should be straightforward to use if you are comfortable with iOS development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [iOS Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) guide before continuing.
 
 You can also find detailed documentation for the method calls in the tracker classes available as part of the [CocoaPods documentation](http://cocoadocs.org/docsets/SnowplowTracker/).
 
 ## 2. Initialization
 
-Assuming you have completed the [iOS Tracker Setup](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-Setup) for your project, you are now ready to initialze the Snowplow Tracker.
+Assuming you have completed the [iOS Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) for your project, you are now ready to initialze the Snowplow Tracker.
 
 ## 2.1 Importing the library
 
@@ -53,7 +53,7 @@ SnowplowTracker *t1 = [[SnowplowTracker alloc] initWithCollector:collector appId
 
 #### 2.2.1 `collector`
 
-This is a single `SnowplowRequest` object that will be used to send all the tracking events created by the `SnowplowTracker` to a collector. See [Sending events](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#emitters) for more on its configuration.
+This is a single `SnowplowRequest` object that will be used to send all the tracking events created by the `SnowplowTracker` to a collector. See [Sending events](#5-sending-eventssnowplowrequest) for more on its configuration.
 
 #### 2.2.2 `namespace`
 
@@ -73,7 +73,7 @@ The iOS Tracker automatically collects your platform, screen resolution, viewpor
 
 You can set additional information using the following methods:
 
-- [`setUserId`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#set-user-id)
+- [`setUserId`](#31-set-user-id-withsetuserid)
 
 ### 3.1 Set user ID with `setUserId`
 
@@ -99,11 +99,11 @@ Tracking methods supported by the iOS Tracker at a glance:
 
 | **Function** | \*_Description_ |
 | --- | --- |
-| [`trackScreenView:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageView:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#page-view) | Track and record views of web pages. |
-| [`trackEcommerceTransaction:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#ecommerce-transaction) | Track an ecommerce transaction and its items |
-| [`trackStructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructuredEvent:`](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#unstruct-event) | Track a Snowplow custom unstructured event |
+| [`trackScreenView:`](#42-track-screen-views-withtrackscreenview) | Track the user viewing a screen within the application |
+| [`trackPageView:`](#43-track-pageviews-withtrackpageview) | Track and record views of web pages. |
+| [`trackEcommerceTransaction:`](#44-track-ecommerce-transactions-withtrackecommercetransaction) | Track an ecommerce transaction and its items |
+| [`trackStructuredEvent:`](#45-track-structured-events-withtrackstructuredevent) | Track a Snowplow custom structured event |
+| [`trackUnstructuredEvent:`](#46-track-unstructured-events-withtrackunstructuredevent) | Track a Snowplow custom unstructured event |
 
 ### 4.1 Common
 
@@ -132,7 +132,7 @@ In short, custom contexts let you add additional information about the circumsta
              timestamp:(double)timestamp;
 ```
 
-The `context` argument should consist of a `NSArray` of `NSDictionary` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](https://github.com/snowplow/snowplow/wiki/iOS-Tracker-v0.1#unstruct-event).
+The `context` argument should consist of a `NSArray` of `NSDictionary` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](#46-track-unstructured-events-withtrackunstructuredevent).
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 

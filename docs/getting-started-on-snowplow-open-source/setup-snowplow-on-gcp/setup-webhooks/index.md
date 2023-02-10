@@ -8,11 +8,9 @@ sidebar_position: 20
 
 Snowplow allows you to collect events via the [webhooks](http://en.wikipedia.org/wiki/Webhook) of supported third-party software.
 
-Webhooks allow this third-party software to send their own internal event streams to [Snowplow Collectors](https://github.com/snowplow/snowplow/wiki/Setting-up-a-Collector) for further processing. Webhooks are sometimes referred to as "streaming APIs" or "HTTP response APIs".
+Webhooks allow this third-party software to send their own internal event streams to [Snowplow Collectors](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-the-snowplow-collector/index.md) for further processing. Webhooks are sometimes referred to as "streaming APIs" or "HTTP response APIs".
 
 ## 1. Choose and configure a Webhook
-
-**If you are interested in sponsoring a new webhook integration for Snowplow, please [talk to us](https://github.com/snowplow/snowplow/wiki/Talk-to-us).**
 
 The following Webhooks are currently available for setup:
 
@@ -21,5 +19,3 @@ import Block2941 from "@site/docs/reusable/untitled-reusable-block-39/_index.md"
 
 <Block2941/>
 ```
-
-**If you are interested in sponsoring a new webhook integration for Snowplow, please [talk to us](https://github.com/snowplow/snowplow/wiki/Talk-to-us).**

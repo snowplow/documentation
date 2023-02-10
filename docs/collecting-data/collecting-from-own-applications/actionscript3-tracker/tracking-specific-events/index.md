@@ -23,7 +23,7 @@ In short, custom contexts let you add additional information about the circumsta
 t1.trackScreenView(name:String, id:String, context:Array, timestamp:Number);
 ```
 
-The `context` argument should consist of a `Array` of `SchemaPayload` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](https://github.com/snowplow/snowplow/wiki/ActionScript3-Tracker#unstruct-event).
+The `context` argument should consist of a `Array` of `SchemaPayload` representing an array of one or more contexts. The format of each individual context element is the same as for an [unstructured event](#track-structured-events-withtrackstructuredevent).
 
 If a visitor arrives on a page advertising a movie, the context dictionary might look like this:
 

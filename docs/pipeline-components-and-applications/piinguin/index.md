@@ -8,9 +8,9 @@ The piinguin and snowplow-piinguin-relay are intended to complete the PII handli
 
 ## Background
 
-Following the release of [R106](https://snowplowanalytics.com/blog/2018/05/10/snowplow-r106-acropolis) which adds the capability to emit a stream of PII events, Snowplow wanted to continue leading the pack in terms of responsible PII management.
+Following the release of [R106](https://snowplow.io/blog/snowplow-r106-acropolis-released-with-pii-enrichment-upgrade) which adds the capability to emit a stream of PII events, Snowplow wanted to continue leading the pack in terms of responsible PII management.
 
-If you want to learn more about PII and how they are managed during Snowplow PII enrichment, you can read more in the release post for [R100](https://snowplowanalytics.com/blog/2018/02/27/snowplow-r100-epidaurus-released-with-pii-pseudonymization-support/) and [R106](https://snowplowanalytics.com/blog/2018/05/10/snowplow-r106-acropolis).
+If you want to learn more about PII and how they are managed during Snowplow PII enrichment, you can read more in the release post for [R100](https://snowplowanalytics.com/blog/2018/02/27/snowplow-r100-epidaurus-released-with-pii-pseudonymization-support/) and [R106](https://snowplow.io/blog/snowplow-r106-acropolis-released-with-pii-enrichment-upgrade/).
 
 ## Aims
 
@@ -24,9 +24,9 @@ The piinguin and snowplow-piinguin-relay are intended to complete the PII handli
 
 ## Background
 
-Following the release of [R106](https://snowplowanalytics.com/blog/2018/05/10/snowplow-r106-acropolis) which adds the capability to emit a stream of PII events, Snowplow wanted to continue leading the pack in terms of responsible PII management.
+Following the release of [R106](https://snowplow.io/blog/snowplow-r106-acropolis-released-with-pii-enrichment-upgrade/) which adds the capability to emit a stream of PII events, Snowplow wanted to continue leading the pack in terms of responsible PII management.
 
-If you want to learn more about PII and how they are managed during Snowplow PII enrichment, you can read more in the release post for [R100](https://snowplowanalytics.com/blog/2018/02/27/snowplow-r100-epidaurus-released-with-pii-pseudonymization-support/) and [R106](https://snowplowanalytics.com/blog/2018/05/10/snowplow-r106-acropolis).
+If you want to learn more about PII and how they are managed during Snowplow PII enrichment, you can read more in the release post for [R100](https://snowplowanalytics.com/blog/2018/02/27/snowplow-r100-epidaurus-released-with-pii-pseudonymization-support/) and [R106](https://snowplow.io/blog/snowplow-r106-acropolis-released-with-pii-enrichment-upgrade/).
 
 ![](images/piinguin-diagram.png)
 

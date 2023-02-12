@@ -33,7 +33,7 @@ First you’ll have to store your config file in some place that your instances 
 sudo apt-get update
 sudo apt-get -y install default-jre
 sudo apt-get -y install unzip
-wget "https://github.com/snowplow/stream-collector/releases/download/2.3.0/snowplow-stream-collector-google-pubsub-<VERSION>.jar"
+wget "https://github.com/snowplow/stream-collector/releases/download/2.8.2/snowplow-stream-collector-google-pubsub-<VERSION>.jar"
 gsutil cp gs://<YOUR-BUCKET-NAME/<YOUR-CONFIG-FILE-NAME> .
 java -jar snowplow-stream-collector-google-pubsub-<VERSION>.jar --config <YOUR-CONFIG-FILE-NAME> &
 ```

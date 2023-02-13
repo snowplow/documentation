@@ -23,7 +23,7 @@ On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce,` `normaliz
 
 ## YAML Selectors
 
-The Snowplow models are designed to be run as a whole, which ensures all incremental tables are kept in sync. As such, run the model using:
+The Snowplow models in each package are designed to be run as a whole, which ensures all incremental tables are kept in sync. As such, run the model using:
 
 ```bash
 dbt run --select snowplow_<package> tag:snowplow_<package>_incremental
@@ -41,22 +41,22 @@ Within the packages we have provided a suite of suggested selectors to run and t
 <Tabs groupId="dbt-packages">
 <TabItem value="web" label="Snowplow Web" default>
 
-- `snowplow_web`: Recommended way to run the package. This selection includes all models within the Snowplow Web as well as any custom models you have created.
-- `snowplow_web_lean_tests`: Recommended way to test the models within the package. See the testing section for more details.
+- `snowplow_web`: Recommended way to run the package. This selection includes all models within the Snowplow Web as well as any custom models you have created
+- `snowplow_web_lean_tests`: Recommended way to test the models within the package. See the testing section for more details
 
 </TabItem>
 <TabItem value="mobile" label="Snowplow Mobile">
 
-- `snowplow_mobile`: Recommended way to run the package. This selection includes all models within the Snowplow Mobile as well as any custom models you have created.
-- `snowplow_mobile_lean_tests`: Recommended way to test the models within the package. See the testing section for more details.
+- `snowplow_mobile`: Recommended way to run the package. This selection includes all models within the Snowplow Mobile as well as any custom models you have created
+- `snowplow_mobile_lean_tests`: Recommended way to test the models within the package. See the testing section for more details
 
 </TabItem>
 <TabItem value="media" label="Snowplow Media Player">
 
-- `snowplow_web`:  Recommended way to run the package. This selection includes all models within the Snowplow Web and Snowplow Media Player as well as any custom models you have created.
+- `snowplow_web`:  Recommended way to run the package. This selection includes all models within the Snowplow Web and Snowplow Media Player as well as any custom models you have created
 - `snowplow_web_lean_and_media_player_tests`: Recommended way to test the models within the package. See the testing section for more details.
-- `snowplow_media_player_tests`: Runs all tests within the Snowplow Media Player Package and any custom models tagged with `snowplow_media_player`.
-- `snowplow_web_and_media_player_tests`: Runs all tests within the Snowplow Web and Snowplow Media Player Package and any custom models tagged with `snowplow_media_player` or `snowplow_web_incremental`.
+- `snowplow_media_player_tests`: Runs all tests within the Snowplow Media Player Package and any custom models tagged with `snowplow_media_player`
+- `snowplow_web_and_media_player_tests`: Runs all tests within the Snowplow Web and Snowplow Media Player Package and any custom models tagged with `snowplow_media_player` or `snowplow_web_incremental`
 
 </TabItem>
 <TabItem value="normalize" label="Snowplow Normalize">
@@ -67,8 +67,8 @@ Within the packages we have provided a suite of suggested selectors to run and t
 
 <TabItem value="ecommerce" label="Snowplow E-commerce">
 
-- `snowplow_ecommerce`: Recommended way to run the package. This selection includes all models within the Snowplow E-commerce as well as any custom models you have created.
-- `snowplow_ecommerce_lean_tests`: Recommended way to test the models within the package. See the testing section for more details.
+- `snowplow_ecommerce`: Recommended way to run the package. This selection includes all models within the Snowplow E-commerce as well as any custom models you have created
+- `snowplow_ecommerce_lean_tests`: Recommended way to test the models within the package. See the testing section for more details
 
 </TabItem>
 </Tabs>
@@ -82,46 +82,46 @@ These are defined in each `selectors.yml` file within the packages, however in o
 
 There are 3 manifest tables included in this package:
 
-- `snowplow_web_incremental_manifest`: Records the current state of the package.
-- `snowplow_web_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions.
-- `snowplow_web_base_quarantined_sessions`: Records sessions that have exceeded the maximum allowed session length, defined by `snowplow__max_session_days` (default 3 days).
+- `snowplow_web_incremental_manifest`: Records the current state of the package
+- `snowplow_web_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions
+- `snowplow_web_base_quarantined_sessions`: Records sessions that have exceeded the maximum allowed session length, defined by `snowplow__max_session_days` (default 3 days)
 
 </TabItem>
 <TabItem value="mobile" label="Snowplow Mobile">
 
 There are 2 manifest tables included in this package:
 
-- `snowplow_mobile_incremental_manifest`: Records the current state of the package.
-- `snowplow_mobile_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions.
+- `snowplow_mobile_incremental_manifest`: Records the current state of the package
+- `snowplow_mobile_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions
 
 </TabItem>
 <TabItem value="normalize" label="Snowplow Normalize">
 
 There is 1 manifest table included in this package:
 
-- `snowplow_normalize_incremental_manifest`: Records the current state of the package.
+- `snowplow_normalize_incremental_manifest`: Records the current state of the package
 
 </TabItem>
 <TabItem value="ecommerce" label="Snowplow E-commerce">
 
 There are 3 manifest tables included in this package:
 
-- `snowplow_ecommerce_incremental_manifest`: Records the current state of the package.
-- `snowplow_ecommerce_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions.
-- `snowplow_ecommerce_base_quarantined_sessions`: Records sessions that have exceeded the maximum allowed session length, defined by `snowplow__max_session_days` (default 3 days).
+- `snowplow_ecommerce_incremental_manifest`: Records the current state of the package
+- `snowplow_ecommerce_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions
+- `snowplow_ecommerce_base_quarantined_sessions`: Records sessions that have exceeded the maximum allowed session length, defined by `snowplow__max_session_days` (default 3 days)
 
 </TabItem>
 </Tabs>
 
-Please refer to the [Incremental Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) section more details on the purpose of each of these tables.
+_Please refer to the [Incremental Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) section more details on the purpose of each of these tables._
 
-These manifest models are critical to the package **and as such are protected from full refreshes, i.e. being dropped, by default when running in production, while in development refreshes are allowed.**
+These manifest models are critical to the package **and as such are protected from full refreshes, i.e. being dropped, by default when running in production**. While in development refreshes are allowed.
 
 The `allow_refresh()` macro defines this behavior. As [dbt recommends](https://docs.getdbt.com/faqs/target-names), target names are used here to differentiate between your prod and dev environment. By default, this macro assumes your dev target is named `dev`. This can be changed by setting the `snowplow__dev_target_name` var in your `dbt_project.yml` file.
 
 To full refresh any of the manifest models in production, set the `snowplow__allow_refresh` to `true` at run time (see below).
 
-Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/index.md#overriding-macros) section for more details.
+Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-advanced-operation/index.md#overriding-macros) section for more details.
 
 ## Complete refresh of Snowplow package
 

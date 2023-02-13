@@ -4,7 +4,13 @@ description: "Information for the configuration of our dbt packages"
 sidebar_position: 350
 ---
 
-Each model has specific configuration variables that define how the models run, please see each following page for the specifics of each package, however some variables are applied across multiple packages and in some cases may have the same name. Ensure you provide the variable and/or configuration value for each package you are using by defining them in the scope of the package.
+:::info
+
+This page details general configurations that can apply across many of our packages, each package has specific configuration variables that define how the models run, please see each child page for the specifics of each package.
+
+::: 
+
+## Mixing Variables
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

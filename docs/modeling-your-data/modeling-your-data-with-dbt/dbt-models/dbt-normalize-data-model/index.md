@@ -1,14 +1,18 @@
 ---
 title: "Normalize"
 sidebar_position: 104
+hide_title: true
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
+import Badges from '@site/src/components/Badges';
 ```
+<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>
 
+# Snowplow Normalize Package
 :::note
 
 Normalize in this context means [database normalization](https://en.wikipedia.org/wiki/Database_normalization), as these models produce flatter data, not statistical normalization.
@@ -24,9 +28,6 @@ The package only includes the base incremental scratch model and does not have a
 The incremental model is simplified compared to the standard web model, this package does not use sessions to identify which historic events to reprocess and just uses the `collector_tstamp` and package variables to identify which events to (re)process.
 
 :::
-
-
-
 
 ## Model Design
 

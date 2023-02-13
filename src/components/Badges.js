@@ -134,4 +134,15 @@ export default function Badges(props) {
       </a>
     )
   }
+  if (props.badgeType === 'dbt-package Release') {
+    const { pkg } = props
+    return (
+      <a href={`https://github.com/snowplow/dbt-snowplow-${pkg}`}>
+        <img
+          src={`https://img.shields.io/github/v/release/snowplow/dbt-snowplow-${pkg}`}
+          alt="Release version"
+        ></img>
+      </a>
+    )
+  }
 }

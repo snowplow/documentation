@@ -1,7 +1,15 @@
 ---
 title: "Mobile"
 sidebar_position: 102
+hide_title: true
 ---
+
+```mdx-code-block
+import Badges from '@site/src/components/Badges';
+import ThemedImage from '@theme/ThemedImage';
+```
+<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>
+
 # Snowplow Mobile Package
 
 **The package source code can be found in the [snowplow/dbt-snowplow-mobile repo](https://github.com/snowplow/dbt-snowplow-mobile), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile).** 
@@ -10,9 +18,15 @@ The package contains a fully incremental model that transforms raw mobile event 
 
 The Snowplow mobile data model aggregates Snowplow's out-of-the-box mobile events to create a set of derived tables - screen views, sessions, and users. These contain many useful dimensions, as well as calculated measures such as screen views per session.
 
-![](images/Screenshot-2022-03-25-at-10.50.33.png)
-
-
+<center>
+<ThemedImage 
+alt='Web Package data flow'
+sources={{
+light: require('./images/mobile-process-light.drawio.png').default, 
+dark: require('./images/mobile-process-dark.drawio.png').default
+}}
+/>
+</center>
 
 ## Overview
 

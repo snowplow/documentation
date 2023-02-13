@@ -1,14 +1,15 @@
 ---
 title: "Web"
 sidebar_position: 101
+hide_title: true
 ---
 
 ```mdx-code-block
-import Tabs from '@theme/Tabs';
+import Badges from '@site/src/components/Badges';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 ```
-
+<Badges badgeType="dbt-package Release" pkg="web"></Badges>
 
 # Snowplow Web Package
 
@@ -18,7 +19,16 @@ The package contains a fully incremental model that transforms raw web event dat
 
 The Snowplow web data model aggregates Snowplow's out of the box page view and page ping events to create a set of derived tables - page views, sessions and users - that contain many useful dimensions as well as calculated measures such as time engaged and scroll depth.
 
-![](images/image-3.png)
+<center>
+<ThemedImage 
+alt='Web Package data flow'
+sources={{
+light: require('./images/web-process-light.drawio.png').default, 
+dark: require('./images/web-process-dark.drawio.png').default
+}}
+/>
+</center>
+
 
 ## Overview
 

@@ -1,13 +1,16 @@
 ---
 title: "Media Player"
 sidebar_position: 103
+hide_title: true
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
+import Badges from '@site/src/components/Badges';
 ```
+<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
 
 
 # Snowplow Media Player Package

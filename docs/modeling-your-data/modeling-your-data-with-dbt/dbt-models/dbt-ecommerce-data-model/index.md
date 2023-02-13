@@ -1,7 +1,13 @@
 ---
 title: "E-commerce"
 sidebar_position: 105
+hide_title: true
 ---
+
+```mdx-code-block
+import Badges from '@site/src/components/Badges';
+```
+<Badges badgeType="dbt-package Release" pkg="ecommerce"></Badges>
 
 # Snowplow E-commerce Package
 

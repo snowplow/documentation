@@ -3,7 +3,7 @@ title: "What is data modeling?"
 sidebar_position: 0
 ---
 
-At Snowplow, we define data modeling as the process of using business logic to, transform, aggregate or otherwise process event level data. It occurs in the data warehouse, and is often they last step in the Snowplow pipeline (unless you are using reverse ETL tools).
+At Snowplow, we define data modeling as the process of using business logic to, transform, aggregate, or otherwise process event level data. It occurs in the data warehouse, and is often the last step in the Snowplow pipeline (unless you are using reverse ETL tools).
 
 The Snowplow atomic data acts as an immutable log of all the actions that occurred across your digital products. The data model takes that data and transforms it into a set of derived tables optimized for analysis.
 

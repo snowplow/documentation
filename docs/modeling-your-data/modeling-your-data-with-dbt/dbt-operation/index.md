@@ -53,14 +53,14 @@ Within the packages we have provided a suite of suggested selectors to run and t
 <TabItem value="media" label="Snowplow Media Player">
 
 - `snowplow_web`:  Recommended way to run the package. This selection includes all models within the Snowplow Web and Snowplow Media Player as well as any custom models you have created
-- `snowplow_web_lean_and_media_player_tests`: Recommended way to test the models within the package. See the testing section for more details.
+- `snowplow_web_lean_and_media_player_tests`: Recommended way to test the models within the package. See the testing section for more details
 - `snowplow_media_player_tests`: Runs all tests within the Snowplow Media Player Package and any custom models tagged with `snowplow_media_player`
 - `snowplow_web_and_media_player_tests`: Runs all tests within the Snowplow Web and Snowplow Media Player Package and any custom models tagged with `snowplow_media_player` or `snowplow_web_incremental`
 
 </TabItem>
 <TabItem value="normalize" label="Snowplow Normalize">
 
-- `snowplow_normalize`:  Recommended way to run the package. This selection includes all models within the Snowplow Normalize package as well as any custom models you have created.
+- `snowplow_normalize`:  Recommended way to run the package. This selection includes all models within the Snowplow Normalize package as well as any custom models you have created
 
 </TabItem>
 
@@ -114,7 +114,13 @@ There are 3 manifest tables included in this package:
 
 _Please refer to the [Incremental Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) section more details on the purpose of each of these tables._
 
+:::danger
+
 These manifest models are critical to the package **and as such are protected from full refreshes, i.e. being dropped, by default when running in production**. While in development refreshes are allowed.
+
+:::
+
+
 
 The `allow_refresh()` macro defines this behavior. As [dbt recommends](https://docs.getdbt.com/faqs/target-names), target names are used here to differentiate between your prod and dev environment. By default, this macro assumes your dev target is named `dev`. This can be changed by setting the `snowplow__dev_target_name` var in your `dbt_project.yml` file.
 

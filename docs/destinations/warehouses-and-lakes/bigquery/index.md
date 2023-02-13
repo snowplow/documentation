@@ -6,7 +6,9 @@ sidebar_position: 2
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
+import ThemedImage from '@theme/ThemedImage';
 ```
+
 
 Under the umbrella of Snowplow BigQuery Loader, we have a family of applications that can be used to load enriched Snowplow data into BigQuery.
 
@@ -31,7 +33,16 @@ The available tools are:
 3. **Snowplow BigQuery Mutator**, a Scala app that performs table updates to add new columns as required.
 4. **Snowplow BigQuery Repeater**, a Scala app that reads failed inserts (caused by _table update lag_) and re-tries inserting them into BigQuery after some delay, sinking failures into a dead-letter bucket.
 
-![](images/BQL_100_technical_diagram.png)
+<center>
+<ThemedImage 
+alt='Big Query Loader Technical Diagram'
+sources={{
+light: require('./images/BQL_100_technical_diagram_light.drawio.png').default, 
+dark: require('./images/BQL_100_technical_diagram_dark.drawio.png').default
+}}
+/>
+</center>
+
 
 ### Snowplow BigQuery StreamLoader
 

@@ -3,6 +3,13 @@ title: "RDB Loader (Redshift, Snowflake, Databricks)"
 sidebar_position: 1
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+```
+
+
 We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift**, **Snowflake** or **Databricks**. For other destinations, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md).
 
 Loading [enriched](/docs/pipeline-components-and-applications/enrichment-components/index.md) Snowplow data is a two-step process which consists of:
@@ -75,4 +82,10 @@ The transformer consumes enriched tsv-formatted Snowplow events from S3 (AWS) or
 
 The loader consumes a stream of these messages and uses them to determine what data needs to be loaded. It issues the necessary SQL commands to the storage target.
 
-![](images/shredder_loader_interface.png)
+<ThemedImage 
+alt='Shredder loader interface diagram'
+sources={{
+light: require('./images/shredder_loader_interface_light.drawio.png').default, 
+dark: require('./images/shredder_loader_interface_dark.drawio.png').default
+}}
+/>

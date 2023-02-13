@@ -128,7 +128,7 @@ The Snowplow JavaScript tracker offers two techniques where tracking can be done
 Recommended configurations when using `anonymousTracking`:
 
 ```javascript
-anonymousTracking: true, 
+anonymousTracking: true,
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
 
@@ -352,11 +352,11 @@ The POST path that is used to send POST requests to a collector can be change wi
 
 `postPath` defaults to the standard path: `/com.snowplowanalytics.snowplow/tp2`
 
-Note: changing `postPath` is non-standard behavior that does not conform to the default collector protocol.
-The collector configuration must be updated (via [Snowplow Console](/docs/using-the-snowplow-console/accessing-collector-configuration/index.md) or [Collector Configuration](/docs/pipeline-components-and-applications/stream-collector/configure/index.md#configuring-custom-paths)) to support the new path _before_ you send events to it with this setting.
-Sending to an unmapped path will cause events to not be received by the collector, or in some cases, collected but fail validation during enrichment.
+```mdx-code-block
+import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 
-Care must be taken to ensure that requests are supported by your collector configuration or redirected to the collector at the correct endpoint (normally this is `/com.snowplowanalytics.snowplow/tp2`).
+<PostPath/>
+```
 
 #### Configuring cross-domain tracking
 

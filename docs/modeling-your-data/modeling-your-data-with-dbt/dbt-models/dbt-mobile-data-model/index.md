@@ -1,6 +1,5 @@
 ---
-title: "The Mobile data model"
-date: "2022-05-14"
+title: "Mobile"
 sidebar_position: 102
 ---
 # Snowplow Mobile Package

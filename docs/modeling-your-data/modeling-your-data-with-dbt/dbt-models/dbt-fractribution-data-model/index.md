@@ -1,6 +1,5 @@
 ---
-title: "The Fractribution data model"
-date: "2022-12-01"
+title: "Fractribution"
 sidebar_position: 105
 ---
 

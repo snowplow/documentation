@@ -1,5 +1,5 @@
 ---
-title: "The Normalize data model"
+title: "Normalize"
 sidebar_position: 104
 ---
 

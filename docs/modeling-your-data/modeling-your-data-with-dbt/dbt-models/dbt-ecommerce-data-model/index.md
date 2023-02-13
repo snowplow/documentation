@@ -1,6 +1,5 @@
 ---
-title: "The E-commerce data model"
-date: "2022-12-13"
+title: "E-commerce"
 sidebar_position: 105
 ---
 

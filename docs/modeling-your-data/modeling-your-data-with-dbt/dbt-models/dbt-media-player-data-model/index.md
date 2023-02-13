@@ -1,6 +1,5 @@
 ---
-title: "The Media Player data model"
-date: "2022-10-05"
+title: "Media Player"
 sidebar_position: 103
 ---
 

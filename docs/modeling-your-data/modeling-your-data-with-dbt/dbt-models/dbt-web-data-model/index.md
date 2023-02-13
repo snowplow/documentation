@@ -1,6 +1,5 @@
 ---
-title: "The Web data model"
-date: "2021-07-27"
+title: "Web"
 sidebar_position: 101
 ---
 

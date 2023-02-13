@@ -1,5 +1,5 @@
 ---
-title: "Modeling your data"
+title: "Data Modeling"
 date: "2020-10-30"
 sidebar_position: 90
 ---

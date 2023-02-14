@@ -302,9 +302,11 @@ The POST path that is used to send POST requests to a collector can be change wi
 
 `postPath` defaults to the standard path: `/com.snowplowanalytics.snowplow/tp2`
 
-Note: changing `postPath` is non-standard behavior that does not conform to the default collector protocol. The collector configuration must be updated to support this path.
+```mdx-code-block
+import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 
-Care must be taken to ensure that requests are supported by your collector configuration or redirected to the collector at the correct endpoint (normally this is `/com.snowplowanalytics.snowplow/tp2`).
+<PostPath/>
+```
 
 #### Configuring cross-domain tracking
 

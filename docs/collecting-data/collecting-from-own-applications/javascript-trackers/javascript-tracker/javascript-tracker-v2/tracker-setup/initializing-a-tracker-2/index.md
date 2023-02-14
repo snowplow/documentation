@@ -49,7 +49,7 @@ The documentation listed here is for Version 2 of the JavaScript Tracker. Versio
 \- [v2 to v3 Migration Guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide/index.md)
 
 ```mdx-code-block
-import Block1512 from "@site/docs/reusable/untitled-reusable-block-26/_index.md"
+import v2Init from "@site/docs/reusable/javascript-tracker-v2-initialization-options/_index.md"
 
-<Block1512/>
+<v2Init/>
 ```

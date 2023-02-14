@@ -7,8 +7,11 @@ hide_title: true
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 ```
-<Badges badgeType="dbt-package Release" pkg="fractribution"></Badges>
+
+<Badges badgeType="dbt-package Release" pkg="fractribution"></Badges> ​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>  
 
 
 # Snowplow Fractribution Package

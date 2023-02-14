@@ -141,6 +141,10 @@ export default function Badges(props) {
         <img
           src={`https://img.shields.io/github/v/release/snowplow/dbt-snowplow-${pkg}`}
           alt="Release version"
+          loading="lazy"
+          alt="Release Version"
+          title="Release Version"
+          className="shield"
         ></img>
       </a>
     )

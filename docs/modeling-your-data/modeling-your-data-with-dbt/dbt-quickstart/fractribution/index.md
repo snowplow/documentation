@@ -33,10 +33,10 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 
 The package has some variables that need to be set before it can be run, you should edit these in your `dbt_project.yml` file. Further customization can be done via the variables listed in the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/fractribution/index.md).
 
-- `conversion_window_start_date`: The start date in UTC for the window of conversions to include
-- `conversion_window_end_date`: The end date in UTC for the window of conversions to include
-- `conversion_hosts`: `url_hosts` to process
-- `path_transforms`: A dictionary of path transforms and their arguments (see [Path Transform Options](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#path-transform-options) section)
+- `snowplow__conversion_window_start_date`: The start date in UTC for the window of conversions to include
+- `snowplow__conversion_window_end_date`: The end date in UTC for the window of conversions to include
+- `snowplow__conversion_hosts`: `url_hosts` to process
+- `snowplow__path_transforms`: A dictionary of path transforms and their arguments (see [Path Transform Options](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#path-transform-options) section)
 
 ```yml
 # dbt_project.yml
@@ -164,7 +164,7 @@ export snowflake_schema=derived_schema_name
 
 
 #### III. Run the fractribution script
-Run the adapter specific main fractribution script by specifying the conversion window start and end dates, and the attribution model (if you are not using the default `shapely`, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#attribution-models) for more options). Example:
+Run the adapter specific main fractribution script by specifying the conversion window start and end dates, and the attribution model (if you are not using the default `shapley`, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#attribution-models) for more options). Example:
 
 
 <Tabs groupId="warehouse">
@@ -202,12 +202,27 @@ You can pull the docker image from Docker Hub: `docker pull snowplow/fractributi
 
 #### II. Set the environment variables
 
-Add the necessary environment variables to an environment file, e.g. `configs.env`. The necessary variables will differ depending on the data warehouse you are using. The easiest way to determine the variables you need to set is to check the Dockerfile in the fractribution dbt package: `dbt-snowplow-fractribution/utils/Dockerfile`
+Add the necessary environment variables to an environment file, e.g. `configs.env`. The necessary variables will differ depending on the data warehouse you are using. The easiest way to determine the variables you need to set is to check the Dockerfile in the fractribution dbt package: `dbt-snowplow-fractribution/utils/Dockerfile`.  
 
+Below is an example of the `config.env` file (set up for Snowflake). You do not need to specify the attribution model if using the default, `shapley`:
+```
+snowflake_account=youraccount.ap-southeast-2
+snowflake_user=user
+snowflake_password=abc123
+snowflake_user_role=DBT
+snowflake_warehouse=WH
+snowflake_database=snowplow
+snowflake_schema=FRACTRIBUTION_DERIVED
+
+conversion_window_start_date=2022-06-03
+conversion_window_end_date=2022-08-01
+attribution_model=last_touch
+warehouse=snowflake
+```
 
 #### III. Run the docker container
 
-Run the docker container with a variable for the data warehouse : 
+Run the docker container : 
 
 If you are using Bigquery, 
 
@@ -217,21 +232,21 @@ If you are using Bigquery,
 
 With BigQuery you need to mount your service account keyfile when running the docker image
 ```
-docker run --rm -e warehouse=bigquery -e attribution_model=last_touch --env-file /path/to/env/file/configs.env -v /path/to/yourkeyfile.json:/keyfile.json -it snowplow/fractribution
+docker run --rm --env-file /path/to/env/file/configs.env -v /path/to/yourkeyfile.json:/keyfile.json -it snowplow/fractribution
 ```
 
 </TabItem>
 <TabItem value="databricks" label="Databricks">
 
 ```
-docker run --rm -e warehouse=snowflake -e attribution_model=last_touch --env-file /path/to/env/file/configs.env -it snowplow/fractribution
+docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribution
 ```
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
 
 ```
-docker run --rm -e warehouse=snowflake -e attribution_model=last_touch --env-file /path/to/env/file/configs.env -it snowplow/fractribution
+docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribution
 ```
 
 </TabItem>

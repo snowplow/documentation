@@ -90,13 +90,14 @@ import FractributionDbtMacros from "@site/docs/reusable/fractribution-dbt-macros
 ```
 
 ### Environment Variables 
-For the package to run you need to set some environment variables that can be accessed by the python script to connect to your warehouse. These variables vary by warehouse.
+For the script or docker container to run you need to set some environment variables that can be accessed to connect to your warehouse. These variables vary by warehouse. If you are using Docker, it can be easier to set these in a file that you reference when you run the container. See the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) for detailed running information.
 
 <Tabs groupId="warehouse">
 <TabItem value="bigquery" label="BigQuery" default>
 
 - `project_id`: Project id of your BigQuery warehouse
-- `bigquery_dataset`: Dataset for your derived tables
+- `bigquery_dataset`: Dataset for your derived tables  
+For the python script only (for Docker you mount this as a volume at run time): 
 - `google_application_credentials`: Google Service Account JSON file
 
 </TabItem>

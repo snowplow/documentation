@@ -43,6 +43,18 @@ We will use `9090` in the examples below, but remember to substitute the port of
 
 </details>
 
+:::tip
+
+We also provide a _distroless_ image of Micro. Because it only includes the bare minimum, it’s smaller and more secure. However, the downside of using the distroless image is that basic utilities (such as a shell) are not available.
+
+To use this image, add `-distroless` to the tag:
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro}-distroless`
+}</CodeBlock>
+
+:::
+
 ## Sending events to Micro
 
 Follow the documentation for one of [our trackers](/docs/collecting-data/collecting-from-own-applications/index.md) to implement some tracking code on your website or application.

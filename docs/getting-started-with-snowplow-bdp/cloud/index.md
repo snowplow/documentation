@@ -13,10 +13,9 @@ BDP Cloud is a hosted and lightweight version of [Snowplow](https://snowplow.io)
     
 BDP Cloud differs from Snowplow BDP Enterprise in the following ways:
 
-- It is hosted by Snowplow, rather than deployed into your cloud account
-- It is more limited in terms of the functionality it provides
-- It has an event cap of 10m events per month
-- We only support Snowflake as a destination currently (although more destinations will be added soon)
+- It is hosted by Snowplow rather than in your own cloud account, for teams seeking a turn-key managed solution
+- It has an event cap of up to 80m events per month
+- You can load your data to your self-hosted Snowflake, Redshift, or Databricks
 
 For more details, see our [feature comparison page](/docs/feature-comparison/index.md).
 

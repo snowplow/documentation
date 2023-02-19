@@ -180,14 +180,14 @@ TODO: Insert link to description of how to create the Databricks resources - its
 
 Authentication for the service user is required for the Databricks Terraform provider - [follow this tutorial](https://docs.databricks.com/dev-tools/terraform/index.html) to obtain Databricks connection details:
 
-| Parameter            | Description                           |
-|----------------------|---------------------------------------|
-| deltalake_catalog    | Databricks catalog name.              |
-| deltalake_schema     | Databricks schema name.               |
-| deltalake_host       | Databricks JDBC host.                 |
-| deltalake_port       | Databricks JDBC port (typically 443). |
-| deltalake_http_path  | Databricks JDBC http_path parameter.  |
-| deltalake_auth_token | Databricks API token.                 |
+| Parameter            | Description                                           |
+|----------------------|-------------------------------------------------------|
+| deltalake_catalog    | Databricks catalog name (typically `hive_metastore`). |
+| deltalake_schema     | Databricks schema name.                               |
+| deltalake_host       | Databricks JDBC host.                                 |
+| deltalake_port       | Databricks JDBC port (typically 443).                 |
+| deltalake_http_path  | Databricks JDBC http_path parameter.                  |
+| deltalake_auth_token | Databricks API token.                                 |
 
 These values need to be passed to `aws/pipeline` modules as variables when Databricks is selected as pipeline's destination.
 

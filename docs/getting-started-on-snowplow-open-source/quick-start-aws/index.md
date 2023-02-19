@@ -138,7 +138,7 @@ If you choose Snowflake as destination, there is one more additional step. Pipel
 
 ##### Databricks
 
-If you choose Databricks as destination, there is one more additional step. Pipeline Terraform module doesn't create necessary Databricks resources, unlike Postgres resources. It only deploys the Databricks Loader. Therefore Databricks resources need to be created before deploying the pipeline. We've created [another Terraform module](https://github.com/snowplow/quickstart-examples/tree/main/terraform/aws/databricks) for this purpose. You can follow the Optional Step 3 below to learn how to use Databricks Terraform module. Databricks Terraform module will give outputs after it is applied. These outputs need to be passed to `databricks.terraform.tfvars`.
+If you choose Databricks as destination, there is one more additional step. Pipeline Terraform module doesn't create necessary Databricks resources, unlike Postgres resources. It only deploys the Databricks Loader. Therefore Databricks resources need to be created before deploying the pipeline. TODO: Insert link to description of how to create the Databricks resources - its https://support.snowplow.io/hc/en-us/articles/5240915931805-56-01-How-to-Enable-Loading-Snowplow-Data-Into-Databricks-Deltalake but needs moving over to this site. These configuration values need to be passed to `databricks.terraform.tfvars`.
 
 **Step 2 (Snowflake only): Run Snowflake terraform module**
 
@@ -168,37 +168,28 @@ Authentication for the service user is required for the Snowflake Terraform prov
 
 Snowflake Terraform module will output the name of the created resources. Full list can be found [here](https://github.com/snowplow/quickstart-examples/blob/snowflake-loader/terraform/aws/snowflake/outputs.tf).
 
-These output values need to be passed to `aws/pipeline` modules as a variable when Snowflake is selected as pipeline's destination.
+These output values need to be passed to `aws/pipeline` modules as variables when Snowflake is selected as pipeline's destination.
 
-**Step 3 (Databricks only): Run Databricks terraform module**
+**Step 3 (Databricks only): Configure Databricks**
 
 It is possible to use Databricks as the destination in AWS pipelines. However necessary resources need to be created in Databricks before starting the pipeline.
 
-For this purpose, the [Databricks Terraform module](https://github.com/snowplow/quickstart-examples/tree/main/terraform/aws/databricks) has been created. This module creates resources including, but not limited to, Databricks database, table, user, and role. These resources are needed by the Databricks Loader to operate correctly.
+TODO: Insert link to description of how to create the Databricks resources - its https://support.snowplow.io/hc/en-us/articles/5240915931805-56-01-How-to-Enable-Loading-Snowplow-Data-Into-Databricks-Deltalake but needs moving over to this site. These resources are needed by the Databricks Loader to operate correctly.
 
 #### Prerequisites (Databricks only)
 
 Authentication for the service user is required for the Databricks Terraform provider - [follow this tutorial](https://docs.databricks.com/dev-tools/terraform/index.html) to obtain Databricks connection details:
 
-| Parameter        | Description                                     |
-|------------------|-------------------------------------------------|
-| account          | The account name.                               |
-| username         | A Databricks user to perform resource creation. |
-| region           | Region for the Databricks deployment.           |
-| role             | Needs to be ACCOUNTADMIN or similar.            |
-| private_key_path | Path the private key.                           |
+| Parameter            | Description                           |
+|----------------------|---------------------------------------|
+| deltalake_catalog    | Databricks catalog name.              |
+| deltalake_schema     | Databricks schema name.               |
+| deltalake_host       | Databricks JDBC host.                 |
+| deltalake_port       | Databricks JDBC port (typically 443). |
+| deltalake_http_path  | Databricks JDBC http_path parameter.  |
+| deltalake_auth_token | Databricks API token.                 |
 
-#### Usage (Databricks only)
-
-1. Fill variables in [terraform.tfvars](https://github.com/snowplow/quickstart-examples/blob/main/terraform/aws/databricks/terraform.tfvars) within the `aws/databricks` folder. Databricks connection details found in the [Prerequisites](#prerequisites-databricks-only) section need to be assigned to respective variables in `terraform.tfvars`.
-2. Run `terraform init`
-3. Run `terraform apply`
-
-#### Output (Databricks only)
-
-Snowflake Terraform module will output the name of the created resources. Full list can be found [here](https://github.com/snowplow/quickstart-examples/blob/databricks-loader/terraform/aws/databricks/outputs.tf).
-
-These output values need to be passed to `aws/pipeline` modules as a variable when Databricks is selected as pipeline's destination.
+These values need to be passed to `aws/pipeline` modules as variables when Databricks is selected as pipeline's destination.
 
 **Step 4: Run the terraform script to set up your Pipeline stack**
 

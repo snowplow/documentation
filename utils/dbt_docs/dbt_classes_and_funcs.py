@@ -3,10 +3,10 @@ from typing import Optional, Union
 from copy import deepcopy
 import re
 import urllib.request
+import shutil
 import os
 
 def classFromArgs(className, argDict):
-    # https://stackoverflow.com/questions/68417319/initialize-python-dataclass-from-dictionary
     fieldSet = {f.name for f in fields(className) if f.init}
     filteredArgDict = {k : v for k, v in argDict.items() if k in fieldSet}
     return className(**filteredArgDict)
@@ -445,19 +445,17 @@ def combine_packages(type: str, packages: list[dict[Union[dbt_macro, dbt_model]]
 
     return combined_objects
 
-def download_docs():
+
+def download_docs(packages):
     # Create the manifest folder to write to
     if not (os.path.exists('./manifests')):
         os.makedirs('./manifests')
 
     # Get the latest manifest from each package
-    urllib.request.urlretrieve("https://raw.githubusercontent.com/snowplow/dbt-snowplow-web/gh_pages/docs/manifest.json", filename="./manifests/web_manifest.json")
-    urllib.request.urlretrieve("https://raw.githubusercontent.com/snowplow/dbt-snowplow-mobile/gh_pages/docs/manifest.json", filename="./manifests/mobile_manifest.json")
-    urllib.request.urlretrieve("https://raw.githubusercontent.com/snowplow/dbt-snowplow-media-player/gh_pages/docs/manifest.json", filename="./manifests/media_player_manifest.json")
-    urllib.request.urlretrieve("https://raw.githubusercontent.com/snowplow/dbt-snowplow-utils/gh_pages/docs/manifest.json", filename="./manifests/utils_manifest.json")
-    urllib.request.urlretrieve("https://raw.githubusercontent.com/snowplow/dbt-snowplow-normalize/gh_pages/docs/manifest.json", filename="./manifests/normalize_manifest.json")
-    urllib.request.urlretrieve("https://raw.githubusercontent.com/snowplow/dbt-snowplow-fractribution/gh_pages/docs/manifest.json", filename="./manifests/fractribution_manifest.json")
-    urllib.request.urlretrieve("https://raw.githubusercontent.com/snowplow/dbt-snowplow-ecommerce/gh_pages/docs/manifest.json", filename="./manifests/ecommerce_manifest.json")
+    for package in packages:
+        with urllib.request.urlopen(f'https://raw.githubusercontent.com/snowplow/dbt-snowplow-{package.replace("_", "-")}/gh_pages/docs/manifest.json') as response, open(f'./manifests/{package}_manifest.json', 'wb') as out_file:
+            shutil.copyfileobj(response, out_file)
+
 
 def get_referenced_by(imodels:dict[dbt_model], imacros: dict[dbt_macro]) -> tuple[dict[dbt_model], dict[dbt_macro]]:
     """For each model and macro passed, this creates a `reference_by` field which is used to find 1 level upstream calls for the model/macro.

@@ -15,10 +15,10 @@ Create the folder structure for the package markdowns, update the index at the h
 """
 
 def main():
-    download_docs()
+    packages = ['utils', 'web', 'mobile', 'media_player', 'normalize', 'fractribution', 'ecommerce']
+    download_docs(packages)
 
     # Load in files
-    packages = ['web', 'mobile', 'media_player', 'utils', 'normalize', 'fractribution', 'ecommerce']
     package_manifests = {}
     for package in packages:
         with open(f'./manifests/{package}_manifest.json') as f:

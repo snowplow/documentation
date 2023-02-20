@@ -12,11 +12,11 @@ import ThemedImage from '@theme/ThemedImage';
 [dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. Snowplow has written and maintain a number of dbt packages to model your snowplow data for various purposes and produce derived tables for use in analytics, AI, ML, BI, or reverse ETL tools.
 
 <center>
-<ThemedImage 
+<ThemedImage
 alt='Snowplow Data Modeling Packages'
 width="70%"
 sources={{
-light: require('./images/dbt_packages-light.drawio.png').default, 
+light: require('./images/dbt_packages-light.drawio.png').default,
 dark: require('./images/dbt_packages-dark.drawio.png').default
 }}
 />
@@ -42,6 +42,7 @@ _The Snowplow Media Player package is designed to be used with the Snowplow Web 
 Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/collecting-data/collecting-from-own-applications/index.md) and produce tables aggregated to different levels, or to perform analysis for you. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
 
 In addition to the other packages, there is a [Normalize](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-normalize-data-model/index.md) package that makes it easy for you to build models that transform your events data into a different structure that may be better suited for downstream consumers.
+
 
 The supported data warehouses per version can be seen below:
 
@@ -101,3 +102,8 @@ The supported data warehouses per version can be seen below:
 
 </TabItem>
 </Tabs>
+
+Other dependencies:
+
+**snowplow_web**
+- [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v4.0.0 and above (from snowplow_web v0.13.0 onwards) in case of Redshift / Postgres or using the Consent model for any data warehouse.

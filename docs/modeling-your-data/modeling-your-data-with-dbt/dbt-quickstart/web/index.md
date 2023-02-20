@@ -10,6 +10,7 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web 
 - [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) version 2 or later implemented.
 - Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/index.md#webPage_context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#webPage_context)).
 - [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#page-views) implemented.
+- [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v4.0.0 and above (from snowplow_web v0.13.0 onwards) in case of Redshift / Postgres or using the Consent model for any data warehouse.
 
 
 ```mdx-code-block

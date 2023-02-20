@@ -7,7 +7,6 @@ sidebar_position: 20
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
 
 export function DbtDetails(props) {
 return <div className="dbt"><details>{props.children}</details></div>

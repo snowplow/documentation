@@ -10,8 +10,6 @@ The following pages are reference documents used mostly for developers and advan
 
 Due to supporting multiple adaptors, as well as offering flexibility with source tables via variables, the generated data by dbt that is used as the source for this is sometimes incomplete. This is most of note for disabled models, they do not generate model dependencies, which means for models used only in a particular warehouse implementation these links may be missing/incomplete - this issue mostly exists for redshift where additional tables are used.
 
-In addition, there may be times where our packages are out of sync with each other which can lead to older versions of macros or models being displayed as we try to unify information across all our packages.
-
 For complete accuracy, always refer the code in the package itself and/or [build the docs locally](https://docs.getdbt.com/reference/commands/cmd-docs) for the warehouse you are working with.
 
 :::

@@ -55,7 +55,7 @@ app_id in ('web', 'mobile', 'news')
 ```jinja2
 {% macro app_id_filter(app_ids) %}
 
-  {%- if app_ids|length -%} 
+  {%- if app_ids|length -%}
 
     app_id in ('{{ app_ids|join("','") }}') --filter on app_id if provided
 
@@ -115,7 +115,6 @@ This macro does not currently have a description.
 
 #### Depends On
 - macro.dbt.type_timestamp
-- macro.dbt_utils.type_timestamp
 
 
 #### Referenced By
@@ -492,6 +491,77 @@ This macro does not currently have a description.
 </Tabs>
 </DbtDetails>
 
+### Get Array To String {#macro.snowplow_utils.get_array_to_string}
+
+<DbtDetails><summary>
+<code>macros/utils/cross_db/get_array_to_string.sql</code>
+</summary>
+
+#### Description
+This macro takes care of harmonising cross-db array to string type functions. The macro supports a custom delimiter if you don't want to use a comma with no space (default).
+
+
+
+#### Arguments
+- `array_column` *(string)*: Name of the column to join into a string
+- `column_prefix` *(string)*: Table alias for the array_column
+- `delimiter` *(string)*: (Optional) String that determines how to delimit your array values. Default ','
+
+#### Returns
+
+The data warehouse appropriate sql to convert an array to a string. 
+
+#### Usage
+
+```sql
+select
+...
+{{ snowplow_utils.get_array_to_string('my_array_column', 'a', ', ') }}
+...
+from ... a
+
+```
+
+
+#### Details
+<DbtDetails>
+<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_array_to_string.sql">(source)</a></summary>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="Raw" default>
+
+```jinja2
+
+
+{%- macro get_array_to_string(array_column, column_prefix, delimiter=',') -%}
+    {{ return(adapter.dispatch('get_array_to_string', 'snowplow_utils')(array_column, column_prefix, delimiter)) }}
+{%- endmacro -%}
+
+
+```
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__get_array_to_string(array_column, column_prefix, delimiter=',') %}
+    array_to_string({{column_prefix}}.{{array_column}},'{{delimiter}}')
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="spark" label="spark">
+
+```jinja2
+{% macro spark__get_array_to_string(array_column, column_prefix, delimiter=',') %}
+    array_join({{column_prefix}}.{{array_column}},'{{delimiter}}')
+{% endmacro %}
+```
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+</DbtDetails>
+
 ### Get Cluster By {#macro.snowplow_utils.get_cluster_by}
 
 <DbtDetails><summary>
@@ -508,12 +578,15 @@ This macro does not currently have a description.
 ```jinja2
 {% macro get_cluster_by(bigquery_cols=none, snowflake_cols=none) %}
 
+  {# {%- do exceptions.warn("Warning: the `get_cluster_by` macro is deprecated and will be removed in a future version of the package, please use `get_value_by_target_type` instead.") -%} #}
+
+
   {% if target.type == 'bigquery' %}
     {{ return(bigquery_cols) }}
   {% elif target.type == 'snowflake' %}
     {{ return(snowflake_cols) }}
   {% endif %}
-  
+
 {% endmacro %}
 ```
 
@@ -610,7 +683,7 @@ get_columns_in_relation_by_column_prefix(ref('snowplow_web_base_events_this_run'
   {% endif %}
 
   {%- set columns = adapter.get_columns_in_relation(relation) -%}
-  
+
   {# get_columns_in_relation returns uppercase cols for snowflake so uppercase column_prefix #}
   {%- set column_prefix = column_prefix.upper() if target.type == 'snowflake' else column_prefix -%}
 
@@ -1152,6 +1225,8 @@ This macro does not currently have a description.
 ```jinja2
 {%- macro get_partition_by(bigquery_partition_by=none, databricks_partition_by=none) -%}
 
+  {# {%- do exceptions.warn("Warning: the `get_partition_by` macro is deprecated and will be removed in a future version of the package, please use `get_value_by_target_type` instead.") -%} #}
+
   {% if target.type == 'bigquery' %}
     {{ return(bigquery_partition_by) }}
   {% elif target.type in ['databricks', 'spark'] %}
@@ -1329,7 +1404,6 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- macro.dbt_utils.current_timestamp_in_utc
 - [macro.snowplow_utils.cast_to_tstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.cast_to_tstamp)
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
 - [macro.snowplow_utils.log_message](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.log_message)
@@ -1376,36 +1450,16 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
 <TabItem value="raw" label="Raw" default>
 
 ```jinja2
-{% macro get_schemas_by_pattern(schema_pattern, table_pattern) %}
+{% macro get_schemas_by_pattern(schema_pattern) %}
     {{ return(adapter.dispatch('get_schemas_by_pattern', 'snowplow_utils')
-        (schema_pattern, table_pattern)) }}
-{% endmacro %}
-```
-</TabItem>
-<TabItem value="databricks" label="databricks">
-
-```jinja2
-{% macro databricks__get_schemas_by_pattern(schema_pattern, table_pattern) %}
-    {%- set schema_pattern= schema_pattern~'*' -%}
-
-    {# Get all schemas with the target.schema prefix #}
-    {%- set get_schemas_sql -%}
-        SHOW SCHEMAS LIKE '{{schema_pattern}}';
-    {%- endset -%}
-
-    {% set results = run_query(get_schemas_sql) %}
-    {% set schemas = results|map(attribute='databaseName')|unique|list %}
-
-    {{ return(schemas) }}
-
+        (schema_pattern)) }}
 {% endmacro %}
 ```
 </TabItem>
 <TabItem value="default" label="default">
 
 ```jinja2
-{% macro default__get_schemas_by_pattern(schema_pattern, table_pattern) %}
-    {%- set schema_pattern= schema_pattern~'%' -%}
+{% macro default__get_schemas_by_pattern(schema_pattern) %}
 
     {% set get_tables_sql = dbt_utils.get_tables_by_pattern_sql(schema_pattern, table_pattern='%') %}
     {% set results = [] if get_tables_sql.isspace() else run_query(get_tables_sql) %}
@@ -1418,11 +1472,21 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
 <TabItem value="spark" label="spark">
 
 ```jinja2
+{% macro spark__get_schemas_by_pattern(schema_pattern) %}
+    {# databricks/spark uses a regex on SHOW SCHEMAS and doesn't have an information schema in hive_metastore #}
+    {%- set schema_pattern= dbt.replace(schema_pattern, "%", "*") -%}
 
+    {# Get all schemas with the target.schema prefix #}
+    {%- set get_schemas_sql -%}
+        SHOW SCHEMAS LIKE '{{schema_pattern}}';
+    {%- endset -%}
 
-{%- macro spark__get_schemas_by_pattern(schema_pattern, table_pattern) -%}
-    {{ return(snowplow_utils.databricks__get_schemas_by_pattern(schema_pattern, table_pattern)) }}
-{%- endmacro %}
+    {% set results = run_query(get_schemas_sql) %}
+    {% set schemas = results|map(attribute='databaseName')|unique|list %}
+
+    {{ return(schemas) }}
+
+{% endmacro %}
 ```
 </TabItem>
 </Tabs>
@@ -1533,7 +1597,6 @@ This macro does not currently have a description.
 
 #### Depends On
 - [macro.snowplow_utils.default__get_snowplow_delete_insert_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__get_snowplow_delete_insert_sql)
-- [macro.snowplow_utils.snowflake__get_snowplow_delete_insert_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__get_snowplow_delete_insert_sql)
 
 </DbtDetails>
 
@@ -1587,8 +1650,7 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- [macro.snowplow_utils.bigquery__get_snowplow_upsert_limits_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.bigquery__get_snowplow_upsert_limits_sql)
-- [macro.snowplow_utils.snowflake__get_snowplow_upsert_limits_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__get_snowplow_upsert_limits_sql)
+- [macro.snowplow_utils.default__get_snowplow_upsert_limits_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__get_snowplow_upsert_limits_sql)
 
 </DbtDetails>
 
@@ -1599,7 +1661,30 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro takes care of harmonising cross-db split to array type functions. The macro supports a custom delimiter if your string is not delimited by a comma with no space (default).
+
+
+
+#### Arguments
+- `string_column` *(string)*: Name of the column to split into an array
+- `column_prefix` *(string)*: Table alias for the string_column
+- `delimiter` *(string)*: (Optional) String that determines how to split your string. Default ','
+
+#### Returns
+
+The data warehouse appropriate sql to perform a split to array. 
+
+#### Usage
+
+```sql
+select
+...
+{{ snowplow_utils.get_split_to_array('my_string_column', 'a', ', ') }}
+...
+from ... a
+
+```
+
 
 #### Details
 <DbtDetails>
@@ -1611,8 +1696,8 @@ This macro does not currently have a description.
 ```jinja2
 
 
-{%- macro get_split_to_array(string_column, column_prefix) -%}
-    {{ return(adapter.dispatch('get_split_to_array', 'snowplow_utils')(string_column, column_prefix)) }}
+{%- macro get_split_to_array(string_column, column_prefix, delimiter=',') -%}
+    {{ return(adapter.dispatch('get_split_to_array', 'snowplow_utils')(string_column, column_prefix, delimiter)) }}
 {%- endmacro -%}
 
 
@@ -1621,24 +1706,24 @@ This macro does not currently have a description.
 <TabItem value="default" label="default">
 
 ```jinja2
-{% macro default__get_split_to_array(string_column, column_prefix) %}
-   split({{column_prefix}}.{{string_column}}, ',')
+{% macro default__get_split_to_array(string_column, column_prefix, delimiter=',') %}
+   split({{column_prefix}}.{{string_column}}, '{{delimiter}}')
 {% endmacro %}
 ```
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
 ```jinja2
-{% macro postgres__get_split_to_array(string_column, column_prefix) %}
-    string_to_array({{column_prefix}}.{{string_column}}, ',')
+{% macro postgres__get_split_to_array(string_column, column_prefix, delimiter=',') %}
+    string_to_array({{column_prefix}}.{{string_column}}, '{{delimiter}}')
 {% endmacro %}
 ```
 </TabItem>
 <TabItem value="redshift" label="redshift">
 
 ```jinja2
-{% macro redshift__get_split_to_array(string_column, column_prefix) %}
-    split_to_array({{column_prefix}}.{{string_column}})
+{% macro redshift__get_split_to_array(string_column, column_prefix, delimiter=',') %}
+    split_to_array({{column_prefix}}.{{string_column}}, '{{delimiter}}')
 {% endmacro %}
 ```
 </TabItem>
@@ -1664,7 +1749,38 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro takes care of harmonising cross-db `list_agg`, `string_agg` type functions. These are aggregate functions (i.e. to be used with a `group by`) that take values from grouped rows and concatenates them into a single string. This macro supports ordering values by an arbitrary column and ensuring unique values (i.e. applying distinct).
+
+Note that databricks does not have list/string_agg function so a more complex expression is used.
+
+
+
+#### Arguments
+- `base_column` *(string)*: Name of the column to aggregate values for
+- `column_prefix` *(string)*: Table alias for the base_column
+- `separator` *(string)*: (Optional) String to use to separate your values. Default ','
+- `order_by_column` *(string)*: (Optional) Column to order your values by before aggregating. Default base_column
+- `sort_numeric` *(boolean)*: (Optional) Is the column you are ordering by a numeric value (regardless of stored type). Default false
+- `order_by_column_prefix` *(string)*: (Optional) Table alias for the order_by_column. Default column_prefix
+- `is_distinct` *(boolean)*: (Optional) Do you want to apply distinct to your values. Will be applied after ordering. Default false
+- `order_desc` *(boolean)*: (Optional) Do you wish to apply the ordering descending. Default false
+
+#### Returns
+
+The data warehouse appropriate sql to perform a list/string_agg. 
+
+#### Usage
+
+```sql
+select
+...
+{{ snowplow_utils.get_string_agg('base_column', 'column_prefix', ';', 'order_by_col', sort_numeric=true, order_by_column_prefix='order_by_column_prefix', is_distict=True, order_desc=True)  }},
+...
+from ...
+group by ...
+
+```
+
 
 #### Details
 <DbtDetails>
@@ -1676,9 +1792,9 @@ This macro does not currently have a description.
 ```jinja2
 
 
-{%- macro get_string_agg(string_column, column_prefix, separator=',', order_by_column=string_column, sort_numeric=false) -%}
+{%- macro get_string_agg(base_column, column_prefix, separator=',', order_by_column=base_column, sort_numeric=false, order_by_column_prefix=column_prefix, is_distinct=false, order_desc=false) -%}
 
-  {{ return(adapter.dispatch('get_string_agg', 'snowplow_utils')(string_column, column_prefix, separator, order_by_column, sort_numeric)) }}
+  {{ return(adapter.dispatch('get_string_agg', 'snowplow_utils')(base_column, column_prefix, separator, order_by_column, sort_numeric, order_by_column_prefix, is_distinct, order_desc)) }}
 
 {%- endmacro -%}
 
@@ -1688,31 +1804,22 @@ This macro does not currently have a description.
 <TabItem value="bigquery" label="bigquery">
 
 ```jinja2
-{% macro bigquery__get_string_agg(string_column, column_prefix, separator=',', order_by_column=string_column, sort_numeric=false) %}
+{% macro bigquery__get_string_agg(base_column, column_prefix, separator=',', order_by_column=base_column, sort_numeric=false, order_by_column_prefix=column_prefix, is_distinct=false, order_desc = false) %}
 
-  {%- if sort_numeric -%}
-    string_agg(cast({{column_prefix}}.{{string_column}} as string), '{{separator}}' order by cast({{column_prefix}}.{{order_by_column}} as numeric))
+  {% if (base_column != order_by_column or column_prefix != order_by_column_prefix or sort_numeric) and is_distinct %}
+    {%- do exceptions.raise_compiler_error("Snowplow Error: "~target.type~" does not support distinct with a different ordering column, or when the order column is numeric.") -%}
+  {% endif %}
 
-  {%- else %}
-    string_agg(cast({{column_prefix}}.{{string_column}} as string), '{{separator}}' order by {{column_prefix}}.{{order_by_column}})
+  string_agg({% if is_distinct %} distinct {% endif %} cast({{column_prefix}}.{{base_column}} as string), '{{separator}}' order by
 
-  {%- endif -%}
+  {% if sort_numeric -%}
+    cast({{order_by_column_prefix}}.{{order_by_column}} as numeric) {% if order_desc %} desc {% endif %}
 
-{% endmacro %}
-```
-</TabItem>
-<TabItem value="databricks" label="databricks">
-
-```jinja2
-{% macro databricks__get_string_agg(string_column, column_prefix, separator=',', order_by_column=string_column, sort_numeric=false) %}
-
-  {%- if sort_numeric -%}
-    array_join(array_sort(collect_list(cast({{column_prefix}}.{{string_column}} as numeric))), '{{separator}}')
-
-  {%- else %}
-    array_join(array_sort(collect_list({{column_prefix}}.{{string_column}})), '{{separator}}')
+  {% else %}
+    cast({{order_by_column_prefix}}.{{order_by_column}} as string) {% if order_desc %} desc {% endif %}
 
   {%- endif -%}
+  )
 
 {% endmacro %}
 ```
@@ -1720,15 +1827,23 @@ This macro does not currently have a description.
 <TabItem value="default" label="default">
 
 ```jinja2
-{% macro default__get_string_agg(string_column, column_prefix, separator=',', order_by_column=string_column, sort_numeric=false) %}
+{% macro default__get_string_agg(base_column, column_prefix, separator=',', order_by_column=base_column, sort_numeric=false, order_by_column_prefix=column_prefix, is_distinct=false, order_desc=false) %}
 
-  {%- if sort_numeric -%}
-    listagg({{column_prefix}}.{{string_column}}::varchar, '{{separator}}') within group (order by to_numeric({{column_prefix}}.{{order_by_column}}))
+  {% if (base_column != order_by_column or column_prefix != order_by_column_prefix or sort_numeric) and is_distinct %}
+    {%- do exceptions.raise_compiler_error("Snowplow Error: "~target.type~" does not support distinct with a different ordering column, or when the order column is numeric.") -%}
+  {% endif %}
 
-  {%- else %}
-    listagg({{column_prefix}}.{{string_column}}, '{{separator}}') within group (order by {{column_prefix}}.{{order_by_column}})
+
+  listagg({% if is_distinct %} distinct {% endif %} {{column_prefix}}.{{base_column}}::varchar, '{{separator}}') within group (order by
+
+  {% if sort_numeric -%}
+    to_numeric({{order_by_column_prefix}}.{{order_by_column}}, 38, 9) {% if order_desc %} desc {% endif %}
+
+  {% else %}
+    {{order_by_column_prefix}}.{{order_by_column}}::varchar {% if order_desc %} desc {% endif %}
 
   {%- endif -%}
+  )
 
 {% endmacro %}
 ```
@@ -1736,15 +1851,22 @@ This macro does not currently have a description.
 <TabItem value="postgres" label="postgres">
 
 ```jinja2
-{% macro postgres__get_string_agg(string_column, column_prefix, separator=',', order_by_column=string_column, sort_numeric=false) %}
+{% macro postgres__get_string_agg(base_column, column_prefix, separator=',', order_by_column=base_column, sort_numeric=false, order_by_column_prefix=column_prefix, is_distinct=false, order_desc = false) %}
 
-  {%- if sort_numeric -%}
-    string_agg({{column_prefix}}.{{string_column}}::varchar, '{{separator}}' order by {{column_prefix}}.{{order_by_column}}::decimal)
+  {% if (base_column != order_by_column or column_prefix != order_by_column_prefix or sort_numeric) and is_distinct %}
+    {%- do exceptions.raise_compiler_error("Snowplow Error: "~target.type~" does not support distinct with a different ordering column, or when the order column is numeric.") -%}
+  {% endif %}
 
-  {%- else %}
-    string_agg({{column_prefix}}.{{string_column}}::varchar, '{{separator}}' order by {{column_prefix}}.{{order_by_column}})
+  string_agg({% if is_distinct %} distinct {% endif %} {{column_prefix}}.{{base_column}}::varchar, '{{separator}}' order by
+
+  {% if sort_numeric -%}
+    {{order_by_column_prefix}}.{{order_by_column}}::decimal {% if order_desc %} desc {% endif %}
+
+  {% else %}
+    {{order_by_column_prefix}}.{{order_by_column}}::varchar {% if order_desc %} desc {% endif %}
 
   {%- endif -%}
+  )
 
 {% endmacro %}
 ```
@@ -1752,15 +1874,22 @@ This macro does not currently have a description.
 <TabItem value="redshift" label="redshift">
 
 ```jinja2
-{% macro redshift__get_string_agg(string_column, column_prefix, separator=',', order_by_column=string_column, sort_numeric=false) %}
+{% macro redshift__get_string_agg(base_column, column_prefix, separator=',', order_by_column=base_column, sort_numeric=false, order_by_column_prefix=column_prefix, is_distinct=false, order_desc = false) %}
 
-  {%- if sort_numeric -%}
-    listagg({{column_prefix}}.{{string_column}}::varchar, '{{separator}}') within group (order by text_to_numeric_alt({{column_prefix}}.{{order_by_column}}))
+  {% if (base_column != order_by_column or column_prefix != order_by_column_prefix or sort_numeric) and is_distinct %}
+    {%- do exceptions.raise_compiler_error("Snowplow Error: "~target.type~" does not support distinct with a different ordering column, or when the order column is numeric.") -%}
+  {% endif %}
 
-  {%- else %}
-    listagg({{column_prefix}}.{{string_column}}::varchar, '{{separator}}') within group (order by {{column_prefix}}.{{order_by_column}})
+  listagg({% if is_distinct %} distinct {% endif %} {{column_prefix}}.{{base_column}}::varchar, '{{separator}}') within group (order by
+
+  {% if sort_numeric -%}
+    text_to_numeric_alt({{order_by_column_prefix}}.{{order_by_column}}, 38, 9) {% if order_desc %} desc {% endif %}
+
+  {% else %}
+    {{order_by_column_prefix}}.{{order_by_column}}::varchar {% if order_desc %} desc {% endif %}
 
   {%- endif -%}
+  )
 
 {% endmacro %}
 ```
@@ -1768,15 +1897,34 @@ This macro does not currently have a description.
 <TabItem value="spark" label="spark">
 
 ```jinja2
-{% macro spark__get_string_agg(string_column, column_prefix, separator=',', order_by_column=string_column, sort_numeric=false) %}
+{% macro spark__get_string_agg(base_column, column_prefix, separator=',', order_by_column=base_column, sort_numeric=false, order_by_column_prefix=column_prefix, is_distinct=false, order_desc = false) %}
+  /* Explaining inside out:
+  1. Create a group array which is made of sub-arrays of the base_column and the sort column
+  2. Sort these sub-arrays based on a lamdba function that compares on the second element (the sort column, casted if needed)
+  3. Use transform to select just the first element of the array
+  4. Optionally use array_distinct
+  5. Join the array into a string
+  */
+  array_join(
+    {% if is_distinct %} array_distinct( {% endif %}
+    transform(
+      array_sort(
+        collect_list(
+          ARRAY({{column_prefix}}.{{base_column}}::string, {{order_by_column_prefix}}.{{order_by_column}}::string)), (left, right) ->
 
-  {%- if sort_numeric -%}
-    array_join(array_sort(collect_list(cast({{column_prefix}}.{{string_column}} as numeric))), '{{separator}}')
+          {%- if sort_numeric -%}
+            CASE WHEN cast(left[1] as numeric(38, 9)) {% if order_desc %} > {% else %} < {% endif %} cast(right[1] as numeric(38, 9)) THEN -1
+                        WHEN cast(left[1] as numeric(38, 9)) {% if order_desc %} < {% else %} > {% endif %} cast(right[1] as numeric(38, 9)) THEN 1 ELSE 0 END
 
-  {%- else %}
-    array_join(array_sort(collect_list({{column_prefix}}.{{string_column}})), '{{separator}}')
+          {% else %}
+            CASE WHEN left[1] {% if order_desc %} > {% else %} < {% endif %} right[1] THEN -1
+                        WHEN left[1] {% if order_desc %} < {% else %} > {% endif %} right[1] THEN 1 ELSE 0 END
 
-  {%- endif -%}
+          {% endif %}
+                ), x -> x[0])
+    {% if is_distinct %} ) {% endif %},
+      '{{separator}}')
+
 
 {% endmacro %}
 ```
@@ -1966,7 +2114,7 @@ The appropriate value for the target warehouse type, or an error if not an expec
     {{ return(snowflake_val) }}
   {% elif target.type == 'redshift' %}
     {{ return(redshift_val) }}
-  {% elif target.type in 'postgres' %}
+  {% elif target.type == 'postgres' %}
     {{ return(postgres_val) }}
   {% elif target.type in ['databricks', 'spark'] %}
     {{ return(databricks_val) }}
@@ -2044,21 +2192,21 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
       {#Technically should be max(end_tstsamp) but table is partitioned on start_tstamp so cheaper to use.
         Worst case we update the manifest during a backfill when we dont need to, which should be v rare. #}
       {% set has_been_processed_query %}
-        select 
-          case when 
-            (select upper_limit from {{ new_event_limits_relation }}) <= (select max(start_tstamp) from {{this}}) 
-          then false 
+        select
+          case when
+            (select upper_limit from {{ new_event_limits_relation }}) <= (select max(start_tstamp) from {{this}})
+          then false
         else true end
       {% endset %}
 
     {%- else -%}
 
       {% set has_been_processed_query %}
-        select 
-          case when 
-            (select upper_limit from {{ new_event_limits_relation }}) 
-            <= (select last_success from {{ incremental_manifest_relation }} where model = '{{node_identifier}}') 
-          then false 
+        select
+          case when
+            (select upper_limit from {{ new_event_limits_relation }})
+            <= (select last_success from {{ incremental_manifest_relation }} where model = '{{node_identifier}}')
+          then false
         else true end
       {% endset %}
 
@@ -2144,24 +2292,11 @@ A wrapper macro for the `dbt_utils.pretty_log_format` using the `snowplow__has_l
 <DbtDetails>
 <summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/log_message.sql">(source)</a></summary>
 
-<Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
-
 ```jinja2
 {% macro log_message(message, is_printed=var('snowplow__has_log_enabled', true)) %}
-    {{ return(adapter.dispatch('log_message', 'snowplow_utils')(message, is_printed)) }}
-{% endmacro %}
-```
-</TabItem>
-<TabItem value="default" label="default">
-
-```jinja2
-{% macro default__log_message(message, is_printed) %}
     {{ log(dbt_utils.pretty_log_format(message), info=is_printed) }}
 {% endmacro %}
 ```
-</TabItem>
-</Tabs>
 
 </DbtDetails>
 
@@ -2176,6 +2311,7 @@ A wrapper macro for the `dbt_utils.pretty_log_format` using the `snowplow__has_l
 
 - [macro.snowplow_utils.get_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_run_limits)
 - [macro.snowplow_utils.print_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.print_run_limits)
+- [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 - [macro.snowplow_utils.snowplow_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_from_manifest)
 
 </TabItem>
@@ -2580,7 +2716,6 @@ This macro does not currently have a description.
 - macro.dbt.run_query
 - macro.dbt.should_full_refresh
 - macro.dbt.statement
-- macro.dbt_snowflake.unset_query_tag
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_utils.snowplow_snowflake_get_incremental_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_snowflake_get_incremental_sql)
 - [macro.snowplow_utils.snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_validate_get_incremental_strategy)
@@ -2813,7 +2948,7 @@ This macro deletes all schemas that start with the specified `schema_pattern`, m
 {% macro post_ci_cleanup(schema_pattern=target.schema) %}
 
   {# Get all schemas with the target.schema prefix #}
-  {% set schemas = snowplow_utils.get_schemas_by_pattern(schema_pattern,table_pattern='%') %}
+  {% set schemas = snowplow_utils.get_schemas_by_pattern(schema_pattern~'%') %}
 
   {% if schemas|length %}
 
@@ -2882,9 +3017,9 @@ Separated output of items in the list, quoted.
 <summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/print_list.sql">(source)</a></summary>
 
 ```jinja2
-{% macro print_list(list) %}
+{% macro print_list(list, separator = ',') %}
 
-  {%- for item in list %} '{{item}}' {%- if not loop.last %},{% endif %} {% endfor -%}
+  {%- for item in list %} '{{item}}' {%- if not loop.last %}{{separator}}{% endif %} {% endfor -%}
 
 {% endmacro %}
 ```
@@ -3147,23 +3282,36 @@ A list of two objects, the lower and upper values from the columns in the model
 ```jinja2
 {% macro return_limits_from_model(model, lower_limit_col, upper_limit_col) -%}
 
+  {# In case of not execute just return empty strings to avoid hitting database #}
   {% if not execute %}
     {{ return(['','']) }}
   {% endif %}
-  
-  {% set limit_query %} 
-    select 
+
+  {% set limit_query %}
+    select
       min({{lower_limit_col}}) as lower_limit,
       max({{upper_limit_col}}) as upper_limit
-    from {{ model }} 
+    from {{ model }}
     {% endset %}
 
   {% set results = run_query(limit_query) %}
-   
+
   {% if execute %}
 
-    {% set lower_limit = snowplow_utils.cast_to_tstamp(results.columns[0].values()[0]) %}
-    {% set upper_limit = snowplow_utils.cast_to_tstamp(results.columns[1].values()[0]) %}
+    {# If there is no data within the limits, we should warn them otherwise they may be stuck here forever#}
+    {%- if results.columns[0].values()[0] is none or results.columns[1].values()[0] is none -%}
+    {# Currently warnings do not actually do anything other than text in logs, this makes it more visible https://github.com/dbt-labs/dbt-core/issues/6721 #}
+      {{ snowplow_utils.log_message("Snowplow Warning: *************") }}
+      {% do exceptions.warn("Snowplow Warning: No data in "~this~" for date range from variables, please modify your run variables to include data if this is not expected.") %}
+      {{ snowplow_utils.log_message("Snowplow Warning: *************") }}
+      {# This allows for bigquery to still run the same way the other warehouses do, but also ensures no data is processed #}
+      {% set lower_limit = snowplow_utils.cast_to_tstamp('9999-01-01 00:00:00') %}
+      {% set upper_limit = snowplow_utils.cast_to_tstamp('9999-01-02 00:00:00') %}
+    {%- else -%}
+      {% set lower_limit = snowplow_utils.cast_to_tstamp(results.columns[0].values()[0]) %}
+      {% set upper_limit = snowplow_utils.cast_to_tstamp(results.columns[1].values()[0]) %}
+    {%- endif -%}
+
 
   {{ return([lower_limit, upper_limit]) }}
 
@@ -3177,6 +3325,7 @@ A list of two objects, the lower and upper values from the columns in the model
 #### Depends On
 - macro.dbt.run_query
 - [macro.snowplow_utils.cast_to_tstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.cast_to_tstamp)
+- [macro.snowplow_utils.log_message](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.log_message)
 
 
 #### Referenced By
@@ -3243,7 +3392,7 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 
 ```jinja2
 {% macro default__set_query_tag(statement) %}
-    
+
 {% endmacro %}
 ```
 </TabItem>
@@ -3367,14 +3516,17 @@ This macro does not currently have a description.
 ```jinja2
 {% macro snowplow_delete_from_manifest(models, incremental_manifest_table) %}
 
+  {# Ensure models is a list #}
   {%- if models is string -%}
     {%- set models = [models] -%}
   {%- endif -%}
 
+  {# No models to delete or not in execute mode #}
   {% if not models|length or not execute %}
     {{ return('') }}
   {% endif %}
 
+  {# Get the manifest table to ensure it exits #}
   {%- set incremental_manifest_table_exists = adapter.get_relation(incremental_manifest_table.database,
                                                                   incremental_manifest_table.schema,
                                                                   incremental_manifest_table.name) -%}
@@ -3383,6 +3535,7 @@ This macro does not currently have a description.
     {{return(dbt_utils.log_info("Snowplow: "+incremental_manifest_table|string+" does not exist"))}}
   {%- endif -%}
 
+  {# Get all models in the manifest and compare to list of models to delete #}
   {%- set models_in_manifest = dbt_utils.get_column_values(table=incremental_manifest_table, column='model') -%}
   {%- set unmatched_models, matched_models = [], [] -%}
 
@@ -3471,7 +3624,6 @@ This macro does not currently have a description.
 
 #### Depends On
 - [macro.snowplow_utils.default__snowplow_delete_insert](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__snowplow_delete_insert)
-- [macro.snowplow_utils.snowflake__snowplow_delete_insert](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_delete_insert)
 
 
 #### Referenced By
@@ -3601,7 +3753,6 @@ This macro does not currently have a description.
 
 #### Depends On
 - [macro.snowplow_utils.default__snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__snowplow_merge)
-- [macro.snowplow_utils.snowflake__snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_merge)
 
 
 #### Referenced By
@@ -3713,7 +3864,6 @@ This macro does not currently have a description.
 
 #### Depends On
 - [macro.snowplow_utils.default__snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__snowplow_validate_get_incremental_strategy)
-- [macro.snowplow_utils.snowflake__snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_validate_get_incremental_strategy)
 
 
 #### Referenced By
@@ -3853,7 +4003,6 @@ This macro does not currently have a description.
 
 #### Depends On
 - macro.dbt.dateadd
-- macro.dbt_utils.dateadd
 
 
 #### Referenced By
@@ -3925,7 +4074,6 @@ This macro does not currently have a description.
 
 #### Depends On
 - macro.dbt.datediff
-- macro.dbt_utils.datediff
 
 
 #### Referenced By
@@ -3965,8 +4113,7 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- [macro.snowplow_utils.bigquery__to_unixtstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.bigquery__to_unixtstamp)
-- [macro.snowplow_utils.snowflake__to_unixtstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__to_unixtstamp)
+- [macro.snowplow_utils.default__to_unixtstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__to_unixtstamp)
 
 
 #### Referenced By
@@ -4187,7 +4334,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro postgres__unnest(id_column, unnest_column, field_alias, source_table) %}
-    select {{ id_column }}, cast(trim(unnest({{ unnest_column }})) as {{ type_int() }}) as {{ field_alias }}
+    select {{ id_column }}, trim(unnest({{ unnest_column }})) as {{ field_alias }}
     from {{ source_table }}
 {% endmacro %}
 ```
@@ -4205,7 +4352,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro snowflake__unnest(id_column, unnest_column, field_alias, source_table) %}
-    select t.{{ id_column }}, r.value as {{ field_alias }}
+    select t.{{ id_column }}, replace(r.value, '"', '') as {{ field_alias }}
     from {{ source_table }} t, table(flatten(t.{{ unnest_column }})) r
 {% endmacro %}
 ```
@@ -4213,11 +4360,6 @@ This macro does not currently have a description.
 </Tabs>
 
 </DbtDetails>
-
-
-#### Depends On
-- macro.dbt.type_int
-- macro.dbt_utils.type_int
 
 
 #### Referenced By

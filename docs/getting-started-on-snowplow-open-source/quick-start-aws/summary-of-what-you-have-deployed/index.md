@@ -27,7 +27,6 @@ Note: you can very easily edit the script or run each of the terraform modules i
 
 ![](images/databricks.png)
 
-TODO: need databricks specific image
   </TabItem>
 </Tabs>
 

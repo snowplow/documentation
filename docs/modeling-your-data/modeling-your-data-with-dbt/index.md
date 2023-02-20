@@ -51,7 +51,7 @@ The supported data warehouses per version can be seen below:
 
 | snowplow-web version | dbt versions        | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
 | -------------------- | ------------------- | --------- | ----------- | --------- | ---------- | --------- |
-| 0.12.4              | >=1.3.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
+| 0.13.0              | >=1.3.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
 | 0.11.0              | >=1.0.0 to <1.3.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
 | 0.5.1                | >=0.20.0 to <1.0.0  | ✅        | ❌            | ✅        | ✅         | ✅          |
 | 0.4.1                | >=0.18.0 to <0.20.0 | ✅        | ❌            | ✅        | ✅         | ❌          |
@@ -96,6 +96,7 @@ The supported data warehouses per version can be seen below:
 
 | snowplow-fractribution version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | ----------------------------- | ----------------- | -------- | ---------- | -------- | --------- | -------- |
+| 0.2.0                         |  >=1.0.0 to <2.0.0 | ✅       |  ✅       | ❌       | ✅       | ❌        |
 | 0.1.0                         |  >=1.0.0 to <2.0.0 | ❌       |  ❌       | ❌       | ✅       | ❌        |
 
 </TabItem>

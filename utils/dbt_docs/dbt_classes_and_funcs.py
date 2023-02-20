@@ -687,12 +687,23 @@ def column_dict_to_table(columns: dict, docs: dict, key: str) -> list:
     Returns:
         list: Markdown string(s) for the table of column info
     """
-    table_str = ['| Column Name | Description |',
-                '|--------------|-------------|']
-    for col in columns.values():
-        col_name = col.get('name')
-        col_desc = get_doc(col.get('description'), docs, key)
-        table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} |')
+
+    type_exists = any([x.get('data_type') for x in columns.values()])
+    if type_exists:
+        table_str = ['| Column Name | Description |Type|',
+                    '|--------------|-------------|----|']
+        for col in columns.values():
+            col_name = col.get('name')
+            col_desc = get_doc(col.get('description'), docs, key)
+            col_type = col.get('data_type')
+            table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} |{col_type if col_type is not None else " "} |')
+    else:
+        table_str = ['| Column Name | Description |',
+                    '|--------------|-------------|']
+        for col in columns.values():
+            col_name = col.get('name')
+            col_desc = get_doc(col.get('description'), docs, key)
+            table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} |')
 
     return table_str
 

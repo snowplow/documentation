@@ -7,7 +7,7 @@ sidebar_position: 1
 
 :::note Limits
 
-Please note that BDP Cloud pipelines by default have an event volume cap of 60 events per second and a total of 10m events per month.
+Please note that BDP Cloud pipelines by default have an event volume cap of 60 events per second and a total of 80m events per month.
 
 :::
 

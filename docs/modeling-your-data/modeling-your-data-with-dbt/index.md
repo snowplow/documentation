@@ -62,7 +62,7 @@ The supported data warehouses per version can be seen below:
 
 | snowplow-mobile version | dbt versions       | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
 | ----------------------- | ------------------ | --------- | ----------- | --------- | ---------- | --------- |
-| 0.6.2                   | >=1.3.0 to <2.0.0  | ✅          | ✅          | ✅        | ✅           | ✅        |
+| 0.6.3                   | >=1.3.0 to <2.0.0  | ✅          | ✅          | ✅        | ✅           | ✅        |
 | 0.5.5                   | >=1.0.0 to <1.3.0  | ✅          | ✅          | ✅        | ✅           | ✅        |
 | 0.2.0                   | >=0.20.0 to <1.0.0 | ✅          | ❌          | ✅        | ✅           | ✅        |
 

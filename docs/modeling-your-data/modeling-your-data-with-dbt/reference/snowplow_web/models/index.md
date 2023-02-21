@@ -55,6 +55,12 @@ For any given run, this table contains all required events to be consumed by sub
 <DbtDetails>
 <summary>Columns</summary>
 
+:::note
+
+Base event this run table column lists may be incomplete and is missing contexts/unstructs, please check your warehouse for a more accurate column list.
+
+:::
+
 | Column Name | Description |
 |--------------|-------------|
 | app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
@@ -566,14 +572,16 @@ qualify row_number() over (partition by a.event_id order by a.collector_tstamp) 
 #### Description
 This table contains the lower and upper timestamp limits for the given run of the web model. These limits are used to select new events from the events table.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| lower_limit | The lower `collector_tstamp` limit for the run |
-| upper_limit | The upper `collector_tstamp` limit for the run |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| lower_limit | The lower `collector_tstamp` limit for the run | timestamp_ntz |
+| upper_limit | The upper `collector_tstamp` limit for the run | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -661,13 +669,15 @@ This table contains any sessions that have been quarantined. Sessions are quaran
 Once quarantined, no further events from these sessions will be processed. Events up until the point of quarantine remain in your derived tables.
 The reason for removing long sessions is to reduce table scans on both the events table and all derived tables. This improves performance greatly.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| session_id | The `session_id` of the quarantined session |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| session_id | The `session_id` of the quarantined session | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -748,16 +758,18 @@ This incremental table is a manifest of all sessions that have been processed by
 
 By knowing the lifecycle of a session the model is able to able to determine which sessions and thus events to process for a given timeframe, as well as the complete date range required to reprocess all events of each session.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| start_tstamp | The `collector_tstamp` when the session began |
-| end_tstamp | The `collector_tstamp` when the session ended |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| start_tstamp | The `collector_tstamp` when the session began | timestamp_ntz |
+| end_tstamp | The `collector_tstamp` when the session ended | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -921,16 +933,18 @@ from session_lifecycle sl
 #### Description
 For any given run, this table contains all the required sessions.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| start_tstamp | The `collector_tstamp` when the session began |
-| end_tstamp | The `collector_tstamp` when the session ended |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| start_tstamp | The `collector_tstamp` when the session began | timestamp_ntz |
+| end_tstamp | The `collector_tstamp` when the session ended | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -1908,14 +1922,16 @@ on v.consent_version = l.consent_version
 #### Description
 This incremental table is a manifest of the timestamp of the latest event consumed per model within the `snowplow-web` package as well as any models leveraging the incremental framework provided by the package. The latest event's timestamp is based off `collector_tstamp`. This table is used to determine what events should be processed in the next run of the model.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| model | The name of the model. |
-| last_success | The latest event consumed by the model, based on `collector_tstamp` |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| model | The name of the model. | text |
+| last_success | The latest event consumed by the model, based on `collector_tstamp` | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -1995,6 +2011,15 @@ where false
 
 #### Description
 This is a staging table containing all the page view events for a given run of the Web model. It is the first step in the page views module and therefore does not contain metrics such as engaged time and scroll depth which are calculated in subsequent models. It is also where the de-duping of `page_view_id`'s occurs
+
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="default" label="default" default>
+
+`models/page_views/scratch/default/snowplow_web_page_view_events.sql`
+</TabItem>
+</Tabs>
+
 
 #### Details
 <DbtDetails>
@@ -2216,111 +2241,113 @@ where row_count = 1 -- Remove dupe page views with more than 1 row
 #### Description
 This derived incremental table contains all historic page views and should be the end point for any analysis or BI tools.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionidx | A visit / session index e.g. 3 |
-| page_view_in_session_index | A page view index within a single session |
-| page_views_in_session | Distinct count of `page_view_id` within a session |
-| dvce_created_tstamp | Timestamp event was recorded on the client device e.g. ‘2013-11-26 00:03:57.885’ |
-| collector_tstamp | Time stamp for the event recorded by the collector e.g. ‘2013-11-26 00:02:05’ |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| start_tstamp | Timestamp for the start of the page view, based on `derived_tstamp` |
-| end_tstamp | Timestamp for the end of the page view, based on `derived_tstamp` |
-| model_tstamp | The current timestamp when the model processed this row. |
-| engaged_time_in_s | Time spent by the user on the page calculated using page pings. |
-| absolute_time_in_s | The time in seconds between the `start_tstamp` and `end_tstamp` |
-| horizontal_pixels_scrolled | Distance the user scrolled horizontally in pixels |
-| vertical_pixels_scrolled | Distance the user scrolled vertically in pixels |
-| horizontal_percentage_scrolled | Percentage of page scrolled horizontally |
-| vertical_percentage_scrolled | Percentage of page scrolled vertically |
-| doc_width | The page’s width in pixels e.g. 1024 |
-| doc_height | The page’s height in pixels e.g. 3000 |
-| page_title | Web page title e.g. ‘Snowplow Docs – Understanding the structure of Snowplow data’ |
-| page_url | The page URL e.g. ‘http://www.example.com’ |
-| page_urlscheme | Scheme aka protocol e.g. ‘https’ |
-| page_urlhost | Host aka domain e.g. ‘“www.snowplow.io’ |
-| page_urlpath | Path to page e.g. ‘/product/index.html’ |
-| page_urlquery | Querystring e.g. ‘id=GTM-DLRG’ |
-| page_urlfragment | Fragment aka anchor e.g. ‘4-conclusion’ |
-| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ |
-| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ |
-| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ |
-| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 |
-| mkt_campaign | The campaign ID e.g. ‘diageo-123’ |
-| mkt_clickid | The click ID e.g. ‘ac3d8e459’ |
-| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ |
-| page_referrer | URL of the referrer e.g. ‘http://www.referrer.com’ |
-| refr_urlscheme | Referer scheme e.g. ‘http’ |
-| refr_urlhost | Referer host e.g. ‘www.bing.com’ |
-| refr_urlpath | Referer page path e.g. ‘/images/search’ |
-| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ |
-| refr_urlfragment | Referer URL fragment |
-| refr_medium | Type of referer e.g. ‘search’, ‘internal’ |
-| refr_source | Name of referer if recognised e.g. ‘Bing images’ |
-| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ |
-| geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ |
-| geo_region | ISO-3166-2 code for country region the visitor is in e.g. ‘I9’, ‘TX’ |
-| geo_region_name | Visitor region name e.g. ‘Florida’ |
-| geo_city | City the visitor is in e.g. ‘New York’, ‘London’ |
-| geo_zipcode | Postcode the visitor is in e.g. ‘94109’ |
-| geo_latitude | Visitor location latitude e.g. 37.443604 |
-| geo_longitude | Visitor location longitude e.g. -122.4124 |
-| geo_timezone | Visitor timezone name e.g. ‘Europe/London’ |
-| user_ipaddress | User IP address e.g. ‘92.231.54.234’ |
-| useragent | Raw useragent |
-| br_lang | Language the browser is set to e.g. ‘en-GB’ |
-| br_viewwidth | Viewport width e.g. 1000 |
-| br_viewheight | Viewport height e.g. 1000 |
-| br_colordepth | Bit depth of the browser color palette e.g. 24 |
-| br_renderengine | Browser rendering engine e.g. ‘GECKO’ |
-| os_timezone | Client operating system timezone e.g. ‘Europe/London’ |
-| category | Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise |
-| primary_impact | Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none |
-| reason | Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise |
-| spider_or_robot | True if the IP address or user agent checked against the list is a spider or robot, false otherwise |
-| useragent_family | Useragent family (browser) name |
-| useragent_major | Useragent major version |
-| useragent_minor | Useragent minor version |
-| useragent_patch | Useragent patch version |
-| useragent_version | Full version of the useragent |
-| os_family | Operating system family e.g. ‘Linux’ |
-| os_major | Operation system major version |
-| os_minor | Operation system minor version |
-| os_patch | Operation system patch version |
-| os_patch_minor | Operation system patch minor version |
-| os_version | Operation system full version |
-| device_family | Device type |
-| device_class | Class of device e.g. phone |
-| agent_class | Class of agent e.g. browser |
-| agent_name | Name of agent e.g. Chrome |
-| agent_name_version | Name and version of agent e.g. Chrome 53.0.2785.124 |
-| agent_name_version_major | Name and major version of agent e.g. Chrome 53 |
-| agent_version | Version of agent e.g. 53.0.2785.124 |
-| agent_version_major | Major version of agent e.g. 53 |
-| device_brand | Brand of device e.g. Google |
-| device_name | Name of device e.g. Google Nexus 6 |
-| device_version | Version of device e.g. 6.0 |
-| layout_engine_class | Class of layout engine e.g. Browser |
-| layout_engine_name | Name of layout engine e.g. Blink |
-| layout_engine_name_version | Name and version of layout engine e.g. Blink 53.0 |
-| layout_engine_name_version_major | Name and major version of layout engine e.g. Blink 53 |
-| layout_engine_version | Version of layout engine e.g. 53.0 |
-| layout_engine_version_major | Major version of layout engine e.g. 53 |
-| operating_system_class | Class of the OS e.g. Mobile |
-| operating_system_name | Name of the OS e.g. Android |
-| operating_system_name_version | Name and version of the OS e.g. Android 7.0 |
-| operating_system_version | Version of the OS e.g. 7.0 |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionidx | A visit / session index e.g. 3 | number |
+| page_view_in_session_index | A page view index within a single session | number |
+| page_views_in_session | Distinct count of `page_view_id` within a session | number |
+| dvce_created_tstamp | Timestamp event was recorded on the client device e.g. ‘2013-11-26 00:03:57.885’ | timestamp_ntz |
+| collector_tstamp | Time stamp for the event recorded by the collector e.g. ‘2013-11-26 00:02:05’ | timestamp_ntz |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| start_tstamp | Timestamp for the start of the page view, based on `derived_tstamp` | timestamp_ntz |
+| end_tstamp | Timestamp for the end of the page view, based on `derived_tstamp` | timestamp_ntz |
+| model_tstamp | The current timestamp when the model processed this row. | timestamp_ntz |
+| engaged_time_in_s | Time spent by the user on the page calculated using page pings. | number |
+| absolute_time_in_s | The time in seconds between the `start_tstamp` and `end_tstamp` | number |
+| horizontal_pixels_scrolled | Distance the user scrolled horizontally in pixels | number |
+| vertical_pixels_scrolled | Distance the user scrolled vertically in pixels | number |
+| horizontal_percentage_scrolled | Percentage of page scrolled horizontally | float |
+| vertical_percentage_scrolled | Percentage of page scrolled vertically | float |
+| doc_width | The page’s width in pixels e.g. 1024 | number |
+| doc_height | The page’s height in pixels e.g. 3000 | number |
+| page_title | Web page title e.g. ‘Snowplow Docs – Understanding the structure of Snowplow data’ | text |
+| page_url | The page URL e.g. ‘http://www.example.com’ | text |
+| page_urlscheme | Scheme aka protocol e.g. ‘https’ | text |
+| page_urlhost | Host aka domain e.g. ‘“www.snowplow.io’ | text |
+| page_urlpath | Path to page e.g. ‘/product/index.html’ | text |
+| page_urlquery | Querystring e.g. ‘id=GTM-DLRG’ | text |
+| page_urlfragment | Fragment aka anchor e.g. ‘4-conclusion’ | text |
+| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ | text |
+| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ | text |
+| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ | text |
+| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 | text |
+| mkt_campaign | The campaign ID e.g. ‘diageo-123’ | text |
+| mkt_clickid | The click ID e.g. ‘ac3d8e459’ | text |
+| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ | text |
+| page_referrer | URL of the referrer e.g. ‘http://www.referrer.com’ | text |
+| refr_urlscheme | Referer scheme e.g. ‘http’ | text |
+| refr_urlhost | Referer host e.g. ‘www.bing.com’ | text |
+| refr_urlpath | Referer page path e.g. ‘/images/search’ | text |
+| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ | text |
+| refr_urlfragment | Referer URL fragment | text |
+| refr_medium | Type of referer e.g. ‘search’, ‘internal’ | text |
+| refr_source | Name of referer if recognised e.g. ‘Bing images’ | text |
+| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ | text |
+| geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ | text |
+| geo_region | ISO-3166-2 code for country region the visitor is in e.g. ‘I9’, ‘TX’ | text |
+| geo_region_name | Visitor region name e.g. ‘Florida’ | text |
+| geo_city | City the visitor is in e.g. ‘New York’, ‘London’ | text |
+| geo_zipcode | Postcode the visitor is in e.g. ‘94109’ | text |
+| geo_latitude | Visitor location latitude e.g. 37.443604 | float |
+| geo_longitude | Visitor location longitude e.g. -122.4124 | float |
+| geo_timezone | Visitor timezone name e.g. ‘Europe/London’ | text |
+| user_ipaddress | User IP address e.g. ‘92.231.54.234’ | text |
+| useragent | Raw useragent | text |
+| br_lang | Language the browser is set to e.g. ‘en-GB’ | text |
+| br_viewwidth | Viewport width e.g. 1000 | number |
+| br_viewheight | Viewport height e.g. 1000 | number |
+| br_colordepth | Bit depth of the browser color palette e.g. 24 | text |
+| br_renderengine | Browser rendering engine e.g. ‘GECKO’ | text |
+| os_timezone | Client operating system timezone e.g. ‘Europe/London’ | text |
+| category | Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise | text |
+| primary_impact | Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none | text |
+| reason | Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise | text |
+| spider_or_robot | True if the IP address or user agent checked against the list is a spider or robot, false otherwise | boolean |
+| useragent_family | Useragent family (browser) name | text |
+| useragent_major | Useragent major version | text |
+| useragent_minor | Useragent minor version | text |
+| useragent_patch | Useragent patch version | text |
+| useragent_version | Full version of the useragent | text |
+| os_family | Operating system family e.g. ‘Linux’ | text |
+| os_major | Operation system major version | text |
+| os_minor | Operation system minor version | text |
+| os_patch | Operation system patch version | text |
+| os_patch_minor | Operation system patch minor version | text |
+| os_version | Operation system full version | text |
+| device_family | Device type | text |
+| device_class | Class of device e.g. phone | text |
+| agent_class | Class of agent e.g. browser | text |
+| agent_name | Name of agent e.g. Chrome | text |
+| agent_name_version | Name and version of agent e.g. Chrome 53.0.2785.124 | text |
+| agent_name_version_major | Name and major version of agent e.g. Chrome 53 | text |
+| agent_version | Version of agent e.g. 53.0.2785.124 | text |
+| agent_version_major | Major version of agent e.g. 53 | text |
+| device_brand | Brand of device e.g. Google | text |
+| device_name | Name of device e.g. Google Nexus 6 | text |
+| device_version | Version of device e.g. 6.0 | text |
+| layout_engine_class | Class of layout engine e.g. Browser | text |
+| layout_engine_name | Name of layout engine e.g. Blink | text |
+| layout_engine_name_version | Name and version of layout engine e.g. Blink 53.0 | text |
+| layout_engine_name_version_major | Name and major version of layout engine e.g. Blink 53 | text |
+| layout_engine_version | Version of layout engine e.g. 53.0 | text |
+| layout_engine_version_major | Major version of layout engine e.g. 53 | text |
+| operating_system_class | Class of the OS e.g. Mobile | text |
+| operating_system_name | Name of the OS e.g. Android | text |
+| operating_system_name_version | Name and version of the OS e.g. Android 7.0 | text |
+| operating_system_version | Version of the OS e.g. 7.0 | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -2396,6 +2423,8 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 #### Description
 This staging table contains all the page views for the given run of the Web model. It possess all the same columns as `snowplow_web_page_views`. If building a custom module that requires page view events, this is the table you should reference.
 
+**Type**: Table
+
 #### File Paths
 <Tabs groupId="dispatched_sql">
 <TabItem value="bigquery" label="bigquery" >
@@ -2421,107 +2450,107 @@ This staging table contains all the page views for the given run of the Web mode
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionidx | A visit / session index e.g. 3 |
-| page_view_in_session_index | A page view index within a single session |
-| page_views_in_session | Distinct count of `page_view_id` within a session |
-| dvce_created_tstamp | Timestamp event was recorded on the client device e.g. ‘2013-11-26 00:03:57.885’ |
-| collector_tstamp | Time stamp for the event recorded by the collector e.g. ‘2013-11-26 00:02:05’ |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| start_tstamp | Timestamp for the start of the page view, based on `derived_tstamp` |
-| end_tstamp | Timestamp for the end of the page view, based on `derived_tstamp` |
-| model_tstamp | The current timestamp when the model processed this row. |
-| engaged_time_in_s | Time spent by the user on the page calculated using page pings. |
-| absolute_time_in_s | The time in seconds between the `start_tstamp` and `end_tstamp` |
-| horizontal_pixels_scrolled | Distance the user scrolled horizontally in pixels |
-| vertical_pixels_scrolled | Distance the user scrolled vertically in pixels |
-| horizontal_percentage_scrolled | Percentage of page scrolled horizontally |
-| vertical_percentage_scrolled | Percentage of page scrolled vertically |
-| doc_width | The page’s width in pixels e.g. 1024 |
-| doc_height | The page’s height in pixels e.g. 3000 |
-| page_title | Web page title e.g. ‘Snowplow Docs – Understanding the structure of Snowplow data’ |
-| page_url | The page URL e.g. ‘http://www.example.com’ |
-| page_urlscheme | Scheme aka protocol e.g. ‘https’ |
-| page_urlhost | Host aka domain e.g. ‘“www.snowplow.io’ |
-| page_urlpath | Path to page e.g. ‘/product/index.html’ |
-| page_urlquery | Querystring e.g. ‘id=GTM-DLRG’ |
-| page_urlfragment | Fragment aka anchor e.g. ‘4-conclusion’ |
-| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ |
-| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ |
-| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ |
-| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 |
-| mkt_campaign | The campaign ID e.g. ‘diageo-123’ |
-| mkt_clickid | The click ID e.g. ‘ac3d8e459’ |
-| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ |
-| page_referrer | URL of the referrer e.g. ‘http://www.referrer.com’ |
-| refr_urlscheme | Referer scheme e.g. ‘http’ |
-| refr_urlhost | Referer host e.g. ‘www.bing.com’ |
-| refr_urlpath | Referer page path e.g. ‘/images/search’ |
-| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ |
-| refr_urlfragment | Referer URL fragment |
-| refr_medium | Type of referer e.g. ‘search’, ‘internal’ |
-| refr_source | Name of referer if recognised e.g. ‘Bing images’ |
-| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ |
-| geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ |
-| geo_region | ISO-3166-2 code for country region the visitor is in e.g. ‘I9’, ‘TX’ |
-| geo_region_name | Visitor region name e.g. ‘Florida’ |
-| geo_city | City the visitor is in e.g. ‘New York’, ‘London’ |
-| geo_zipcode | Postcode the visitor is in e.g. ‘94109’ |
-| geo_latitude | Visitor location latitude e.g. 37.443604 |
-| geo_longitude | Visitor location longitude e.g. -122.4124 |
-| geo_timezone | Visitor timezone name e.g. ‘Europe/London’ |
-| user_ipaddress | User IP address e.g. ‘92.231.54.234’ |
-| useragent | Raw useragent |
-| br_lang | Language the browser is set to e.g. ‘en-GB’ |
-| br_viewwidth | Viewport width e.g. 1000 |
-| br_viewheight | Viewport height e.g. 1000 |
-| br_colordepth | Bit depth of the browser color palette e.g. 24 |
-| br_renderengine | Browser rendering engine e.g. ‘GECKO’ |
-| os_timezone | Client operating system timezone e.g. ‘Europe/London’ |
-| category | Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise |
-| primary_impact | Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none |
-| reason | Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise |
-| spider_or_robot | True if the IP address or user agent checked against the list is a spider or robot, false otherwise |
-| useragent_family | Useragent family (browser) name |
-| useragent_major | Useragent major version |
-| useragent_minor | Useragent minor version |
-| useragent_patch | Useragent patch version |
-| useragent_version | Full version of the useragent |
-| os_family | Operating system family e.g. ‘Linux’ |
-| os_major | Operation system major version |
-| os_minor | Operation system minor version |
-| os_patch | Operation system patch version |
-| os_patch_minor | Operation system patch minor version |
-| os_version | Operation system full version |
-| device_family | Device type |
-| device_class | Class of device e.g. phone |
-| agent_class | Class of agent e.g. browser |
-| agent_name | Name of agent e.g. Chrome |
-| agent_name_version | Name and version of agent e.g. Chrome 53.0.2785.124 |
-| agent_name_version_major | Name and major version of agent e.g. Chrome 53 |
-| agent_version | Version of agent e.g. 53.0.2785.124 |
-| agent_version_major | Major version of agent e.g. 53 |
-| device_brand | Brand of device e.g. Google |
-| device_name | Name of device e.g. Google Nexus 6 |
-| device_version | Version of device e.g. 6.0 |
-| layout_engine_class | Class of layout engine e.g. Browser |
-| layout_engine_name | Name of layout engine e.g. Blink |
-| layout_engine_name_version | Name and version of layout engine e.g. Blink 53.0 |
-| layout_engine_name_version_major | Name and major version of layout engine e.g. Blink 53 |
-| layout_engine_version | Version of layout engine e.g. 53.0 |
-| layout_engine_version_major | Major version of layout engine e.g. 53 |
-| operating_system_class | Class of the OS e.g. Mobile |
-| operating_system_name | Name of the OS e.g. Android |
-| operating_system_name_version | Name and version of the OS e.g. Android 7.0 |
-| operating_system_version | Version of the OS e.g. 7.0 |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionidx | A visit / session index e.g. 3 | number |
+| page_view_in_session_index | A page view index within a single session | number |
+| page_views_in_session | Distinct count of `page_view_id` within a session | number |
+| dvce_created_tstamp | Timestamp event was recorded on the client device e.g. ‘2013-11-26 00:03:57.885’ | timestamp_ntz |
+| collector_tstamp | Time stamp for the event recorded by the collector e.g. ‘2013-11-26 00:02:05’ | timestamp_ntz |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| start_tstamp | Timestamp for the start of the page view, based on `derived_tstamp` | timestamp_ntz |
+| end_tstamp | Timestamp for the end of the page view, based on `derived_tstamp` | timestamp_ntz |
+| model_tstamp | The current timestamp when the model processed this row. | timestamp_ntz |
+| engaged_time_in_s | Time spent by the user on the page calculated using page pings. | number |
+| absolute_time_in_s | The time in seconds between the `start_tstamp` and `end_tstamp` | number |
+| horizontal_pixels_scrolled | Distance the user scrolled horizontally in pixels | number |
+| vertical_pixels_scrolled | Distance the user scrolled vertically in pixels | number |
+| horizontal_percentage_scrolled | Percentage of page scrolled horizontally | float |
+| vertical_percentage_scrolled | Percentage of page scrolled vertically | float |
+| doc_width | The page’s width in pixels e.g. 1024 | number |
+| doc_height | The page’s height in pixels e.g. 3000 | number |
+| page_title | Web page title e.g. ‘Snowplow Docs – Understanding the structure of Snowplow data’ | text |
+| page_url | The page URL e.g. ‘http://www.example.com’ | text |
+| page_urlscheme | Scheme aka protocol e.g. ‘https’ | text |
+| page_urlhost | Host aka domain e.g. ‘“www.snowplow.io’ | text |
+| page_urlpath | Path to page e.g. ‘/product/index.html’ | text |
+| page_urlquery | Querystring e.g. ‘id=GTM-DLRG’ | text |
+| page_urlfragment | Fragment aka anchor e.g. ‘4-conclusion’ | text |
+| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ | text |
+| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ | text |
+| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ | text |
+| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 | text |
+| mkt_campaign | The campaign ID e.g. ‘diageo-123’ | text |
+| mkt_clickid | The click ID e.g. ‘ac3d8e459’ | text |
+| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ | text |
+| page_referrer | URL of the referrer e.g. ‘http://www.referrer.com’ | text |
+| refr_urlscheme | Referer scheme e.g. ‘http’ | text |
+| refr_urlhost | Referer host e.g. ‘www.bing.com’ | text |
+| refr_urlpath | Referer page path e.g. ‘/images/search’ | text |
+| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ | text |
+| refr_urlfragment | Referer URL fragment | text |
+| refr_medium | Type of referer e.g. ‘search’, ‘internal’ | text |
+| refr_source | Name of referer if recognised e.g. ‘Bing images’ | text |
+| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ | text |
+| geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ | text |
+| geo_region | ISO-3166-2 code for country region the visitor is in e.g. ‘I9’, ‘TX’ | text |
+| geo_region_name | Visitor region name e.g. ‘Florida’ | text |
+| geo_city | City the visitor is in e.g. ‘New York’, ‘London’ | text |
+| geo_zipcode | Postcode the visitor is in e.g. ‘94109’ | text |
+| geo_latitude | Visitor location latitude e.g. 37.443604 | float |
+| geo_longitude | Visitor location longitude e.g. -122.4124 | float |
+| geo_timezone | Visitor timezone name e.g. ‘Europe/London’ | text |
+| user_ipaddress | User IP address e.g. ‘92.231.54.234’ | text |
+| useragent | Raw useragent | text |
+| br_lang | Language the browser is set to e.g. ‘en-GB’ | text |
+| br_viewwidth | Viewport width e.g. 1000 | number |
+| br_viewheight | Viewport height e.g. 1000 | number |
+| br_colordepth | Bit depth of the browser color palette e.g. 24 | text |
+| br_renderengine | Browser rendering engine e.g. ‘GECKO’ | text |
+| os_timezone | Client operating system timezone e.g. ‘Europe/London’ | text |
+| category | Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise | text |
+| primary_impact | Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none | text |
+| reason | Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise | text |
+| spider_or_robot | True if the IP address or user agent checked against the list is a spider or robot, false otherwise | boolean |
+| useragent_family | Useragent family (browser) name | text |
+| useragent_major | Useragent major version | text |
+| useragent_minor | Useragent minor version | text |
+| useragent_patch | Useragent patch version | text |
+| useragent_version | Full version of the useragent | text |
+| os_family | Operating system family e.g. ‘Linux’ | text |
+| os_major | Operation system major version | text |
+| os_minor | Operation system minor version | text |
+| os_patch | Operation system patch version | text |
+| os_patch_minor | Operation system patch minor version | text |
+| os_version | Operation system full version | text |
+| device_family | Device type | text |
+| device_class | Class of device e.g. phone | text |
+| agent_class | Class of agent e.g. browser | text |
+| agent_name | Name of agent e.g. Chrome | text |
+| agent_name_version | Name and version of agent e.g. Chrome 53.0.2785.124 | text |
+| agent_name_version_major | Name and major version of agent e.g. Chrome 53 | text |
+| agent_version | Version of agent e.g. 53.0.2785.124 | text |
+| agent_version_major | Major version of agent e.g. 53 | text |
+| device_brand | Brand of device e.g. Google | text |
+| device_name | Name of device e.g. Google Nexus 6 | text |
+| device_version | Version of device e.g. 6.0 | text |
+| layout_engine_class | Class of layout engine e.g. Browser | text |
+| layout_engine_name | Name of layout engine e.g. Blink | text |
+| layout_engine_name_version | Name and version of layout engine e.g. Blink 53.0 | text |
+| layout_engine_name_version_major | Name and major version of layout engine e.g. Blink 53 | text |
+| layout_engine_version | Version of layout engine e.g. 53.0 | text |
+| layout_engine_version_major | Major version of layout engine e.g. 53 | text |
+| operating_system_class | Class of the OS e.g. Mobile | text |
+| operating_system_name | Name of the OS e.g. Android | text |
+| operating_system_name_version | Name and version of the OS e.g. Android 7.0 | text |
+| operating_system_version | Version of the OS e.g. 7.0 | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -3969,13 +3998,18 @@ from page_view_events pve
 #### Description
 This model calculates the time a visitor spent engaged on a given page view. This is calculated using the number of page ping events received for that page view.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid |   | text |
+| end_tstamp |   | timestamp_ntz |
+| engaged_time_in_s |   | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -4057,6 +4091,15 @@ group by 1 {% if var('snowplow__limit_page_views_to_session', true) %}, 2 {% end
 
 The IAB Spiders & Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="default" label="default" default>
+
+`models/page_views/scratch/default/snowplow_web_pv_iab.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
@@ -4114,6 +4157,15 @@ where iab.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits
 #### Description
 This model calculates the lower and upper limit for the page views events in the given run. This is based taking the min and max `collector_tstamp` across all page views. It is used to improve performance when selected rows from the various context tables such as the UA parser table.
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="default" label="default" default>
+
+`models/page_views/scratch/default/snowplow_web_pv_limits.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Code</summary>
@@ -4148,13 +4200,28 @@ where page_view_id is not null
 #### Description
 This model calculates the horizontal and vertical scroll depth of the vistor on a given page view. Such metrics are useful when assessing engagement on a page view.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid |   | text |
+| doc_width |   | number |
+| doc_height |   | number |
+| br_viewwidth |   | number |
+| br_viewheight |   | number |
+| hmin |   | number |
+| hmax |   | number |
+| vmin |   | number |
+| vmax |   | number |
+| relative_hmin |   | float |
+| relative_hmax |   | float |
+| relative_vmin |   | float |
+| relative_vmax |   | float |
 </DbtDetails>
 
 <DbtDetails>
@@ -4269,6 +4336,15 @@ from prep
 #### Description
 **Redshift and Postgres only**. This is a staging table containing context data generated by the [UA parser enrichment](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/) for the events in the given run. The model is disable by default. Refer to the docs to enable.
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="default" label="default" default>
+
+`models/page_views/scratch/default/snowplow_web_pv_ua_parser.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
@@ -4333,6 +4409,15 @@ where ua.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits'
 
 #### Description
 **Redshift and Postgres only**. This is a staging table containing context data generated by the [YAUAA enrichment](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/yauaa-enrichment/). The model is disable by default. Refer to the docs to enable.
+
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="default" label="default" default>
+
+`models/page_views/scratch/default/snowplow_web_pv_yauaa.sql`
+</TabItem>
+</Tabs>
+
 
 #### Details
 <DbtDetails>
@@ -4408,103 +4493,106 @@ where ya.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits'
 #### Description
 This derived incremental table contains all historic sessions and should be the end point for any analysis or BI tools.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionidx | A visit / session index e.g. 3 |
-| start_tstamp | Timestamp for the start of the session, based on `derived_tstamp` |
-| end_tstamp | Timestamp for the end of the session, based on `derived_tstamp` |
-| model_tstamp | The current timestamp when the model processed this row. |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| page_views | The number of distinct page views within a session |
-| engaged_time_in_s | The total time engaged by a user within a session |
-| absolute_time_in_s | The time in seconds between the `start_tstamp` and `end_tstamp` |
-| first_page_title | The title of the first page visited within the session |
-| first_page_url | The url of the first page visited within the session |
-| first_page_urlscheme | The urlscheme of the first page visited within the session |
-| first_page_urlhost | The urlhost of the first page visited within the session |
-| first_page_urlpath | The urlpath of the first page visited within the session |
-| first_page_urlquery | The urlquery of the first page visited within the session |
-| first_page_urlfragment | The urlfragment of the first page visited within the session |
-| last_page_title | The title of the last page visited within the session |
-| last_page_url | The url of the last page visited within the session |
-| last_page_urlscheme | The urlscheme of the last page visited within the session |
-| last_page_urlhost | The urlhost of the last page visited within the session |
-| last_page_urlpath | The urlpath of the last page visited within the session |
-| last_page_urlquery | The urlquery of the last page visited within the session |
-| last_page_urlfragment | The urlfragment of the last page visited within the session |
-| referrer | The referrer associated with the first page view of the session |
-| refr_urlscheme | Referer scheme e.g. ‘http’ |
-| refr_urlhost | Referer host e.g. ‘www.bing.com’ |
-| refr_urlpath | Referer page path e.g. ‘/images/search’ |
-| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ |
-| refr_urlfragment | Referer URL fragment |
-| refr_medium | Type of referer e.g. ‘search’, ‘internal’ |
-| refr_source | Name of referer if recognised e.g. ‘Bing images’ |
-| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ |
-| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ |
-| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ |
-| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ |
-| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 |
-| mkt_campaign | The campaign ID e.g. ‘diageo-123’ |
-| mkt_clickid | The click ID e.g. ‘ac3d8e459’ |
-| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ |
-| geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ |
-| geo_region | ISO-3166-2 code for country region the visitor is in e.g. ‘I9’, ‘TX’ |
-| geo_region_name | Visitor region name e.g. ‘Florida’ |
-| geo_city | City the visitor is in e.g. ‘New York’, ‘London’ |
-| geo_zipcode | Postcode the visitor is in e.g. ‘94109’ |
-| geo_latitude | Visitor location latitude e.g. 37.443604 |
-| geo_longitude | Visitor location longitude e.g. -122.4124 |
-| geo_timezone | Visitor timezone name e.g. ‘Europe/London’ |
-| user_ipaddress | User IP address e.g. ‘92.231.54.234’ |
-| useragent | Raw useragent |
-| br_renderengine | Browser rendering engine e.g. ‘GECKO’ |
-| br_lang | Language the browser is set to e.g. ‘en-GB’ |
-| os_timezone | Client operating system timezone e.g. ‘Europe/London’ |
-| category | Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise |
-| primary_impact | Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none |
-| reason | Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise |
-| spider_or_robot | True if the IP address or user agent checked against the list is a spider or robot, false otherwise |
-| useragent_family | Useragent family (browser) name |
-| useragent_major | Useragent major version |
-| useragent_minor | Useragent minor version |
-| useragent_patch | Useragent patch version |
-| useragent_version | Full version of the useragent |
-| os_family | Operating system family e.g. ‘Linux’ |
-| os_major | Operation system major version |
-| os_minor | Operation system minor version |
-| os_patch | Operation system patch version |
-| os_patch_minor | Operation system patch minor version |
-| os_version | Operation system full version |
-| device_family | Device type |
-| device_class | Class of device e.g. phone |
-| agent_class | Class of agent e.g. browser |
-| agent_name | Name of agent e.g. Chrome |
-| agent_name_version | Name and version of agent e.g. Chrome 53.0.2785.124 |
-| agent_name_version_major | Name and major version of agent e.g. Chrome 53 |
-| agent_version | Version of agent e.g. 53.0.2785.124 |
-| agent_version_major | Major version of agent e.g. 53 |
-| device_brand | Brand of device e.g. Google |
-| device_name | Name of device e.g. Google Nexus 6 |
-| device_version | Version of device e.g. 6.0 |
-| layout_engine_class | Class of layout engine e.g. Browser |
-| layout_engine_name | Name of layout engine e.g. Blink |
-| layout_engine_name_version | Name and version of layout engine e.g. Blink 53.0 |
-| layout_engine_name_version_major | Name and major version of layout engine e.g. Blink 53 |
-| layout_engine_version | Version of layout engine e.g. 53.0 |
-| layout_engine_version_major | Major version of layout engine e.g. 53 |
-| operating_system_class | Class of the OS e.g. Mobile |
-| operating_system_name | Name of the OS e.g. Android |
-| operating_system_name_version | Name and version of the OS e.g. Android 7.0 |
-| operating_system_version | Version of the OS e.g. 7.0 |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionidx | A visit / session index e.g. 3 | number |
+| start_tstamp | Timestamp for the start of the session, based on `derived_tstamp` | timestamp_ntz |
+| end_tstamp | Timestamp for the end of the session, based on `derived_tstamp` | timestamp_ntz |
+| model_tstamp | The current timestamp when the model processed this row. | timestamp_ntz |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| stitched_user_id |   | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| page_views | The number of distinct page views within a session | number |
+| engaged_time_in_s | The total time engaged by a user within a session | number |
+| absolute_time_in_s | The time in seconds between the `start_tstamp` and `end_tstamp` | number |
+| first_page_title | The title of the first page visited within the session | text |
+| first_page_url | The url of the first page visited within the session | text |
+| first_page_urlscheme | The urlscheme of the first page visited within the session | text |
+| first_page_urlhost | The urlhost of the first page visited within the session | text |
+| first_page_urlpath | The urlpath of the first page visited within the session | text |
+| first_page_urlquery | The urlquery of the first page visited within the session | text |
+| first_page_urlfragment | The urlfragment of the first page visited within the session | text |
+| last_page_title | The title of the last page visited within the session | text |
+| last_page_url | The url of the last page visited within the session | text |
+| last_page_urlscheme | The urlscheme of the last page visited within the session | text |
+| last_page_urlhost | The urlhost of the last page visited within the session | text |
+| last_page_urlpath | The urlpath of the last page visited within the session | text |
+| last_page_urlquery | The urlquery of the last page visited within the session | text |
+| last_page_urlfragment | The urlfragment of the last page visited within the session | text |
+| referrer | The referrer associated with the first page view of the session | text |
+| refr_urlscheme | Referer scheme e.g. ‘http’ | text |
+| refr_urlhost | Referer host e.g. ‘www.bing.com’ | text |
+| refr_urlpath | Referer page path e.g. ‘/images/search’ | text |
+| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ | text |
+| refr_urlfragment | Referer URL fragment | text |
+| refr_medium | Type of referer e.g. ‘search’, ‘internal’ | text |
+| refr_source | Name of referer if recognised e.g. ‘Bing images’ | text |
+| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ | text |
+| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ | text |
+| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ | text |
+| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ | text |
+| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 | text |
+| mkt_campaign | The campaign ID e.g. ‘diageo-123’ | text |
+| mkt_clickid | The click ID e.g. ‘ac3d8e459’ | text |
+| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ | text |
+| geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ | text |
+| geo_region | ISO-3166-2 code for country region the visitor is in e.g. ‘I9’, ‘TX’ | text |
+| geo_region_name | Visitor region name e.g. ‘Florida’ | text |
+| geo_city | City the visitor is in e.g. ‘New York’, ‘London’ | text |
+| geo_zipcode | Postcode the visitor is in e.g. ‘94109’ | text |
+| geo_latitude | Visitor location latitude e.g. 37.443604 | float |
+| geo_longitude | Visitor location longitude e.g. -122.4124 | float |
+| geo_timezone | Visitor timezone name e.g. ‘Europe/London’ | text |
+| user_ipaddress | User IP address e.g. ‘92.231.54.234’ | text |
+| useragent | Raw useragent | text |
+| br_renderengine | Browser rendering engine e.g. ‘GECKO’ | text |
+| br_lang | Language the browser is set to e.g. ‘en-GB’ | text |
+| os_timezone | Client operating system timezone e.g. ‘Europe/London’ | text |
+| category | Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise | text |
+| primary_impact | Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none | text |
+| reason | Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise | text |
+| spider_or_robot | True if the IP address or user agent checked against the list is a spider or robot, false otherwise | boolean |
+| useragent_family | Useragent family (browser) name | text |
+| useragent_major | Useragent major version | text |
+| useragent_minor | Useragent minor version | text |
+| useragent_patch | Useragent patch version | text |
+| useragent_version | Full version of the useragent | text |
+| os_family | Operating system family e.g. ‘Linux’ | text |
+| os_major | Operation system major version | text |
+| os_minor | Operation system minor version | text |
+| os_patch | Operation system patch version | text |
+| os_patch_minor | Operation system patch minor version | text |
+| os_version | Operation system full version | text |
+| device_family | Device type | text |
+| device_class | Class of device e.g. phone | text |
+| agent_class | Class of agent e.g. browser | text |
+| agent_name | Name of agent e.g. Chrome | text |
+| agent_name_version | Name and version of agent e.g. Chrome 53.0.2785.124 | text |
+| agent_name_version_major | Name and major version of agent e.g. Chrome 53 | text |
+| agent_version | Version of agent e.g. 53.0.2785.124 | text |
+| agent_version_major | Major version of agent e.g. 53 | text |
+| device_brand | Brand of device e.g. Google | text |
+| device_name | Name of device e.g. Google Nexus 6 | text |
+| device_version | Version of device e.g. 6.0 | text |
+| layout_engine_class | Class of layout engine e.g. Browser | text |
+| layout_engine_name | Name of layout engine e.g. Blink | text |
+| layout_engine_name_version | Name and version of layout engine e.g. Blink 53.0 | text |
+| layout_engine_name_version_major | Name and major version of layout engine e.g. Blink 53 | text |
+| layout_engine_version | Version of layout engine e.g. 53.0 | text |
+| layout_engine_version_major | Major version of layout engine e.g. 53 | text |
+| operating_system_class | Class of the OS e.g. Mobile | text |
+| operating_system_name | Name of the OS e.g. Android | text |
+| operating_system_name_version | Name and version of the OS e.g. Android 7.0 | text |
+| operating_system_version | Version of the OS e.g. 7.0 | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -4594,13 +4682,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 #### Description
 This model aggregates various metrics derived from page views to a session level.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| start_tstamp |   | timestamp_ntz |
+| end_tstamp |   | timestamp_ntz |
+| page_views |   | number |
+| engaged_time_in_s |   | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -4673,13 +4767,22 @@ group by 1
 #### Description
 This model identifies the last page view within a given session and returns various dimensions associated with that page view.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| last_page_title |   | text |
+| last_page_url |   | text |
+| last_page_urlscheme |   | text |
+| last_page_urlhost |   | text |
+| last_page_urlpath |   | text |
+| last_page_urlquery |   | text |
+| last_page_urlfragment |   | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -4756,103 +4859,106 @@ and a.page_view_in_session_index = b.page_views
 #### Description
 This staging table contains all the sessions for the given run of the Web model. It possess all the same columns as `snowplow_web_sessions`. If building a custom module that requires session level data, this is the table you should reference.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionidx | A visit / session index e.g. 3 |
-| start_tstamp | Timestamp for the start of the session, based on `derived_tstamp` |
-| end_tstamp | Timestamp for the end of the session, based on `derived_tstamp` |
-| model_tstamp | The current timestamp when the model processed this row. |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| page_views | The number of distinct page views within a session |
-| engaged_time_in_s | The total time engaged by a user within a session |
-| absolute_time_in_s | The time in seconds between the `start_tstamp` and `end_tstamp` |
-| first_page_title | The title of the first page visited within the session |
-| first_page_url | The url of the first page visited within the session |
-| first_page_urlscheme | The urlscheme of the first page visited within the session |
-| first_page_urlhost | The urlhost of the first page visited within the session |
-| first_page_urlpath | The urlpath of the first page visited within the session |
-| first_page_urlquery | The urlquery of the first page visited within the session |
-| first_page_urlfragment | The urlfragment of the first page visited within the session |
-| last_page_title | The title of the last page visited within the session |
-| last_page_url | The url of the last page visited within the session |
-| last_page_urlscheme | The urlscheme of the last page visited within the session |
-| last_page_urlhost | The urlhost of the last page visited within the session |
-| last_page_urlpath | The urlpath of the last page visited within the session |
-| last_page_urlquery | The urlquery of the last page visited within the session |
-| last_page_urlfragment | The urlfragment of the last page visited within the session |
-| referrer | The referrer associated with the first page view of the session |
-| refr_urlscheme | Referer scheme e.g. ‘http’ |
-| refr_urlhost | Referer host e.g. ‘www.bing.com’ |
-| refr_urlpath | Referer page path e.g. ‘/images/search’ |
-| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ |
-| refr_urlfragment | Referer URL fragment |
-| refr_medium | Type of referer e.g. ‘search’, ‘internal’ |
-| refr_source | Name of referer if recognised e.g. ‘Bing images’ |
-| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ |
-| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ |
-| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ |
-| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ |
-| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 |
-| mkt_campaign | The campaign ID e.g. ‘diageo-123’ |
-| mkt_clickid | The click ID e.g. ‘ac3d8e459’ |
-| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ |
-| geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ |
-| geo_region | ISO-3166-2 code for country region the visitor is in e.g. ‘I9’, ‘TX’ |
-| geo_region_name | Visitor region name e.g. ‘Florida’ |
-| geo_city | City the visitor is in e.g. ‘New York’, ‘London’ |
-| geo_zipcode | Postcode the visitor is in e.g. ‘94109’ |
-| geo_latitude | Visitor location latitude e.g. 37.443604 |
-| geo_longitude | Visitor location longitude e.g. -122.4124 |
-| geo_timezone | Visitor timezone name e.g. ‘Europe/London’ |
-| user_ipaddress | User IP address e.g. ‘92.231.54.234’ |
-| useragent | Raw useragent |
-| br_renderengine | Browser rendering engine e.g. ‘GECKO’ |
-| br_lang | Language the browser is set to e.g. ‘en-GB’ |
-| os_timezone | Client operating system timezone e.g. ‘Europe/London’ |
-| category | Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise |
-| primary_impact | Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none |
-| reason | Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise |
-| spider_or_robot | True if the IP address or user agent checked against the list is a spider or robot, false otherwise |
-| useragent_family | Useragent family (browser) name |
-| useragent_major | Useragent major version |
-| useragent_minor | Useragent minor version |
-| useragent_patch | Useragent patch version |
-| useragent_version | Full version of the useragent |
-| os_family | Operating system family e.g. ‘Linux’ |
-| os_major | Operation system major version |
-| os_minor | Operation system minor version |
-| os_patch | Operation system patch version |
-| os_patch_minor | Operation system patch minor version |
-| os_version | Operation system full version |
-| device_family | Device type |
-| device_class | Class of device e.g. phone |
-| agent_class | Class of agent e.g. browser |
-| agent_name | Name of agent e.g. Chrome |
-| agent_name_version | Name and version of agent e.g. Chrome 53.0.2785.124 |
-| agent_name_version_major | Name and major version of agent e.g. Chrome 53 |
-| agent_version | Version of agent e.g. 53.0.2785.124 |
-| agent_version_major | Major version of agent e.g. 53 |
-| device_brand | Brand of device e.g. Google |
-| device_name | Name of device e.g. Google Nexus 6 |
-| device_version | Version of device e.g. 6.0 |
-| layout_engine_class | Class of layout engine e.g. Browser |
-| layout_engine_name | Name of layout engine e.g. Blink |
-| layout_engine_name_version | Name and version of layout engine e.g. Blink 53.0 |
-| layout_engine_name_version_major | Name and major version of layout engine e.g. Blink 53 |
-| layout_engine_version | Version of layout engine e.g. 53.0 |
-| layout_engine_version_major | Major version of layout engine e.g. 53 |
-| operating_system_class | Class of the OS e.g. Mobile |
-| operating_system_name | Name of the OS e.g. Android |
-| operating_system_name_version | Name and version of the OS e.g. Android 7.0 |
-| operating_system_version | Version of the OS e.g. 7.0 |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionidx | A visit / session index e.g. 3 | number |
+| start_tstamp | Timestamp for the start of the session, based on `derived_tstamp` | timestamp_ntz |
+| end_tstamp | Timestamp for the end of the session, based on `derived_tstamp` | timestamp_ntz |
+| model_tstamp | The current timestamp when the model processed this row. | timestamp_ntz |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| stitched_user_id |   | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| page_views | The number of distinct page views within a session | number |
+| engaged_time_in_s | The total time engaged by a user within a session | number |
+| absolute_time_in_s | The time in seconds between the `start_tstamp` and `end_tstamp` | number |
+| first_page_title | The title of the first page visited within the session | text |
+| first_page_url | The url of the first page visited within the session | text |
+| first_page_urlscheme | The urlscheme of the first page visited within the session | text |
+| first_page_urlhost | The urlhost of the first page visited within the session | text |
+| first_page_urlpath | The urlpath of the first page visited within the session | text |
+| first_page_urlquery | The urlquery of the first page visited within the session | text |
+| first_page_urlfragment | The urlfragment of the first page visited within the session | text |
+| last_page_title | The title of the last page visited within the session | text |
+| last_page_url | The url of the last page visited within the session | text |
+| last_page_urlscheme | The urlscheme of the last page visited within the session | text |
+| last_page_urlhost | The urlhost of the last page visited within the session | text |
+| last_page_urlpath | The urlpath of the last page visited within the session | text |
+| last_page_urlquery | The urlquery of the last page visited within the session | text |
+| last_page_urlfragment | The urlfragment of the last page visited within the session | text |
+| referrer | The referrer associated with the first page view of the session | text |
+| refr_urlscheme | Referer scheme e.g. ‘http’ | text |
+| refr_urlhost | Referer host e.g. ‘www.bing.com’ | text |
+| refr_urlpath | Referer page path e.g. ‘/images/search’ | text |
+| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ | text |
+| refr_urlfragment | Referer URL fragment | text |
+| refr_medium | Type of referer e.g. ‘search’, ‘internal’ | text |
+| refr_source | Name of referer if recognised e.g. ‘Bing images’ | text |
+| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ | text |
+| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ | text |
+| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ | text |
+| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ | text |
+| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 | text |
+| mkt_campaign | The campaign ID e.g. ‘diageo-123’ | text |
+| mkt_clickid | The click ID e.g. ‘ac3d8e459’ | text |
+| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ | text |
+| geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ | text |
+| geo_region | ISO-3166-2 code for country region the visitor is in e.g. ‘I9’, ‘TX’ | text |
+| geo_region_name | Visitor region name e.g. ‘Florida’ | text |
+| geo_city | City the visitor is in e.g. ‘New York’, ‘London’ | text |
+| geo_zipcode | Postcode the visitor is in e.g. ‘94109’ | text |
+| geo_latitude | Visitor location latitude e.g. 37.443604 | float |
+| geo_longitude | Visitor location longitude e.g. -122.4124 | float |
+| geo_timezone | Visitor timezone name e.g. ‘Europe/London’ | text |
+| user_ipaddress | User IP address e.g. ‘92.231.54.234’ | text |
+| useragent | Raw useragent | text |
+| br_renderengine | Browser rendering engine e.g. ‘GECKO’ | text |
+| br_lang | Language the browser is set to e.g. ‘en-GB’ | text |
+| os_timezone | Client operating system timezone e.g. ‘Europe/London’ | text |
+| category | Category based on activity if the IP/UA is a spider or robot, BROWSER otherwise | text |
+| primary_impact | Whether the spider or robot would affect page impression measurement, ad impression measurement, both or none | text |
+| reason | Type of failed check if the IP/UA is a spider or robot, PASSED_ALL otherwise | text |
+| spider_or_robot | True if the IP address or user agent checked against the list is a spider or robot, false otherwise | boolean |
+| useragent_family | Useragent family (browser) name | text |
+| useragent_major | Useragent major version | text |
+| useragent_minor | Useragent minor version | text |
+| useragent_patch | Useragent patch version | text |
+| useragent_version | Full version of the useragent | text |
+| os_family | Operating system family e.g. ‘Linux’ | text |
+| os_major | Operation system major version | text |
+| os_minor | Operation system minor version | text |
+| os_patch | Operation system patch version | text |
+| os_patch_minor | Operation system patch minor version | text |
+| os_version | Operation system full version | text |
+| device_family | Device type | text |
+| device_class | Class of device e.g. phone | text |
+| agent_class | Class of agent e.g. browser | text |
+| agent_name | Name of agent e.g. Chrome | text |
+| agent_name_version | Name and version of agent e.g. Chrome 53.0.2785.124 | text |
+| agent_name_version_major | Name and major version of agent e.g. Chrome 53 | text |
+| agent_version | Version of agent e.g. 53.0.2785.124 | text |
+| agent_version_major | Major version of agent e.g. 53 | text |
+| device_brand | Brand of device e.g. Google | text |
+| device_name | Name of device e.g. Google Nexus 6 | text |
+| device_version | Version of device e.g. 6.0 | text |
+| layout_engine_class | Class of layout engine e.g. Browser | text |
+| layout_engine_name | Name of layout engine e.g. Blink | text |
+| layout_engine_name_version | Name and version of layout engine e.g. Blink 53.0 | text |
+| layout_engine_name_version_major | Name and major version of layout engine e.g. Blink 53 | text |
+| layout_engine_version | Version of layout engine e.g. 53.0 | text |
+| layout_engine_version_major | Major version of layout engine e.g. 53 | text |
+| operating_system_class | Class of the OS e.g. Mobile | text |
+| operating_system_name | Name of the OS e.g. Android | text |
+| operating_system_name_version | Name and version of the OS e.g. Android 7.0 | text |
+| operating_system_version | Version of the OS e.g. 7.0 | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -5064,15 +5170,17 @@ on b.domain_sessionid = c.domain_sessionid
 #### Description
 A mapping table between `domain_userid` and `user_id`.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| end_tstamp | The `collector_tstamp` when the user was last active |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| end_tstamp | The `collector_tstamp` when the user was last active | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -5158,51 +5266,53 @@ and domain_userid is not null
 #### Description
 This derived incremental table contains all historic users data and should be the end point for any analysis or BI tools.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| start_tstamp | Timestamp for the start of the users lifecycle, based on `derived_tstamp` |
-| end_tstamp | Timestamp for the last time the user was seen, based on `derived_tstamp` |
-| model_tstamp | The current timestamp when the model processed this row. |
-| page_views | The total page views by the user |
-| sessions | The total sessions by the user |
-| engaged_time_in_s | The total engaged time in seconds by the user |
-| first_page_title | The title of the first page visited by the user |
-| first_page_url | The url of the first page visited by the user |
-| first_page_urlscheme | The urlscheme of the first page visited by the user |
-| first_page_urlhost | The urlhost of the first page visited by the user |
-| first_page_urlpath | The urlpath of the first page visited by the user |
-| first_page_urlquery | The urlquery of the first page visited by the user |
-| first_page_urlfragment | The urlfragment of the first page visited by the user |
-| last_page_title | The title of the last page visited by the user |
-| last_page_url | The url of the last page visited by the user |
-| last_page_urlscheme | The urlscheme of the last page visited by the user |
-| last_page_urlhost | The urlhost of the last page visited by the user |
-| last_page_urlpath | The urlpath of the last page visited by the user |
-| last_page_urlquery | The urlquery of the last page visited by the user |
-| last_page_urlfragment | The urlfragment of the last page visited by the user |
-| referrer | The referrer associated with the first page view of the user |
-| refr_urlscheme | Referer scheme e.g. ‘http’ |
-| refr_urlhost | Referer host e.g. ‘www.bing.com’ |
-| refr_urlpath | Referer page path e.g. ‘/images/search’ |
-| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ |
-| refr_urlfragment | Referer URL fragment |
-| refr_medium | Type of referer e.g. ‘search’, ‘internal’ |
-| refr_source | Name of referer if recognised e.g. ‘Bing images’ |
-| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ |
-| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ |
-| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ |
-| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ |
-| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 |
-| mkt_campaign | The campaign ID e.g. ‘diageo-123’ |
-| mkt_clickid | The click ID e.g. ‘ac3d8e459’ |
-| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| start_tstamp | Timestamp for the start of the users lifecycle, based on `derived_tstamp` | timestamp_ntz |
+| end_tstamp | Timestamp for the last time the user was seen, based on `derived_tstamp` | timestamp_ntz |
+| model_tstamp | The current timestamp when the model processed this row. | timestamp_ntz |
+| page_views | The total page views by the user | number |
+| sessions | The total sessions by the user | number |
+| engaged_time_in_s | The total engaged time in seconds by the user | number |
+| first_page_title | The title of the first page visited by the user | text |
+| first_page_url | The url of the first page visited by the user | text |
+| first_page_urlscheme | The urlscheme of the first page visited by the user | text |
+| first_page_urlhost | The urlhost of the first page visited by the user | text |
+| first_page_urlpath | The urlpath of the first page visited by the user | text |
+| first_page_urlquery | The urlquery of the first page visited by the user | text |
+| first_page_urlfragment | The urlfragment of the first page visited by the user | text |
+| last_page_title | The title of the last page visited by the user | text |
+| last_page_url | The url of the last page visited by the user | text |
+| last_page_urlscheme | The urlscheme of the last page visited by the user | text |
+| last_page_urlhost | The urlhost of the last page visited by the user | text |
+| last_page_urlpath | The urlpath of the last page visited by the user | text |
+| last_page_urlquery | The urlquery of the last page visited by the user | text |
+| last_page_urlfragment | The urlfragment of the last page visited by the user | text |
+| referrer | The referrer associated with the first page view of the user | text |
+| refr_urlscheme | Referer scheme e.g. ‘http’ | text |
+| refr_urlhost | Referer host e.g. ‘www.bing.com’ | text |
+| refr_urlpath | Referer page path e.g. ‘/images/search’ | text |
+| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ | text |
+| refr_urlfragment | Referer URL fragment | text |
+| refr_medium | Type of referer e.g. ‘search’, ‘internal’ | text |
+| refr_source | Name of referer if recognised e.g. ‘Bing images’ | text |
+| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ | text |
+| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ | text |
+| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ | text |
+| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ | text |
+| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 | text |
+| mkt_campaign | The campaign ID e.g. ‘diageo-123’ | text |
+| mkt_clickid | The click ID e.g. ‘ac3d8e459’ | text |
+| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -5278,13 +5388,22 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 #### Description
 This model aggregates various metrics derived from sessions to a users level.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| start_tstamp |   | timestamp_ntz |
+| end_tstamp |   | timestamp_ntz |
+| first_domain_sessionid |   | text |
+| last_domain_sessionid |   | text |
+| page_views |   | number |
+| sessions |   | number |
+| engaged_time_in_s |   | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -5368,13 +5487,22 @@ group by 1,2,3
 #### Description
 This model identifies the last page view for a user and returns various dimensions associated with that page view.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| last_page_title |   | text |
+| last_page_url |   | text |
+| last_page_urlscheme |   | text |
+| last_page_urlhost |   | text |
+| last_page_urlpath |   | text |
+| last_page_urlquery |   | text |
+| last_page_urlfragment |   | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -5450,13 +5578,108 @@ on a.domain_sessionid = b.last_domain_sessionid
 #### Description
 This model contains all sessions data related to users contained in the given run of the Web model
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| app_id |   | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionidx |   | number |
+| start_tstamp |   | timestamp_ntz |
+| end_tstamp |   | timestamp_ntz |
+| model_tstamp |   | timestamp_ntz |
+| user_id |   | text |
+| domain_userid |   | text |
+| stitched_user_id |   | text |
+| network_userid |   | text |
+| page_views |   | number |
+| engaged_time_in_s |   | number |
+| absolute_time_in_s |   | number |
+| first_page_title |   | text |
+| first_page_url |   | text |
+| first_page_urlscheme |   | text |
+| first_page_urlhost |   | text |
+| first_page_urlpath |   | text |
+| first_page_urlquery |   | text |
+| first_page_urlfragment |   | text |
+| last_page_title |   | text |
+| last_page_url |   | text |
+| last_page_urlscheme |   | text |
+| last_page_urlhost |   | text |
+| last_page_urlpath |   | text |
+| last_page_urlquery |   | text |
+| last_page_urlfragment |   | text |
+| referrer |   | text |
+| refr_urlscheme |   | text |
+| refr_urlhost |   | text |
+| refr_urlpath |   | text |
+| refr_urlquery |   | text |
+| refr_urlfragment |   | text |
+| refr_medium |   | text |
+| refr_source |   | text |
+| refr_term |   | text |
+| mkt_medium |   | text |
+| mkt_source |   | text |
+| mkt_term |   | text |
+| mkt_content |   | text |
+| mkt_campaign |   | text |
+| mkt_clickid |   | text |
+| mkt_network |   | text |
+| geo_country |   | text |
+| geo_region |   | text |
+| geo_region_name |   | text |
+| geo_city |   | text |
+| geo_zipcode |   | text |
+| geo_latitude |   | float |
+| geo_longitude |   | float |
+| geo_timezone |   | text |
+| user_ipaddress |   | text |
+| useragent |   | text |
+| br_renderengine |   | text |
+| br_lang |   | text |
+| os_timezone |   | text |
+| category |   | text |
+| primary_impact |   | text |
+| reason |   | text |
+| spider_or_robot |   | boolean |
+| useragent_family |   | text |
+| useragent_major |   | text |
+| useragent_minor |   | text |
+| useragent_patch |   | text |
+| useragent_version |   | text |
+| os_family |   | text |
+| os_major |   | text |
+| os_minor |   | text |
+| os_patch |   | text |
+| os_patch_minor |   | text |
+| os_version |   | text |
+| device_family |   | text |
+| device_class |   | text |
+| agent_class |   | text |
+| agent_name |   | text |
+| agent_name_version |   | text |
+| agent_name_version_major |   | text |
+| agent_version |   | text |
+| agent_version_major |   | text |
+| device_brand |   | text |
+| device_name |   | text |
+| device_version |   | text |
+| layout_engine_class |   | text |
+| layout_engine_name |   | text |
+| layout_engine_name_version |   | text |
+| layout_engine_name_version_major |   | text |
+| layout_engine_version |   | text |
+| layout_engine_version_major |   | text |
+| operating_system_class |   | text |
+| operating_system_name |   | text |
+| operating_system_name_version |   | text |
+| operating_system_version |   | text |
+| user_start_tstamp |   | timestamp_ntz |
+| user_end_tstamp |   | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -5534,51 +5757,53 @@ on a.domain_userid = b.domain_userid
 #### Description
 This staging table contains all the users for the given run of the Web model. It possess all the same columns as `snowplow_web_users`. If building a custom module that requires session level data, this is the table you should reference.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| start_tstamp | Timestamp for the start of the users lifecycle, based on `derived_tstamp` |
-| end_tstamp | Timestamp for the last time the user was seen, based on `derived_tstamp` |
-| model_tstamp | The current timestamp when the model processed this row. |
-| page_views | The total page views by the user |
-| sessions | The total sessions by the user |
-| engaged_time_in_s | The total engaged time in seconds by the user |
-| first_page_title | The title of the first page visited by the user |
-| first_page_url | The url of the first page visited by the user |
-| first_page_urlscheme | The urlscheme of the first page visited by the user |
-| first_page_urlhost | The urlhost of the first page visited by the user |
-| first_page_urlpath | The urlpath of the first page visited by the user |
-| first_page_urlquery | The urlquery of the first page visited by the user |
-| first_page_urlfragment | The urlfragment of the first page visited by the user |
-| last_page_title | The title of the last page visited by the user |
-| last_page_url | The url of the last page visited by the user |
-| last_page_urlscheme | The urlscheme of the last page visited by the user |
-| last_page_urlhost | The urlhost of the last page visited by the user |
-| last_page_urlpath | The urlpath of the last page visited by the user |
-| last_page_urlquery | The urlquery of the last page visited by the user |
-| last_page_urlfragment | The urlfragment of the last page visited by the user |
-| referrer | The referrer associated with the first page view of the user |
-| refr_urlscheme | Referer scheme e.g. ‘http’ |
-| refr_urlhost | Referer host e.g. ‘www.bing.com’ |
-| refr_urlpath | Referer page path e.g. ‘/images/search’ |
-| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ |
-| refr_urlfragment | Referer URL fragment |
-| refr_medium | Type of referer e.g. ‘search’, ‘internal’ |
-| refr_source | Name of referer if recognised e.g. ‘Bing images’ |
-| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ |
-| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ |
-| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ |
-| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ |
-| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 |
-| mkt_campaign | The campaign ID e.g. ‘diageo-123’ |
-| mkt_clickid | The click ID e.g. ‘ac3d8e459’ |
-| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| start_tstamp | Timestamp for the start of the users lifecycle, based on `derived_tstamp` | timestamp_ntz |
+| end_tstamp | Timestamp for the last time the user was seen, based on `derived_tstamp` | timestamp_ntz |
+| model_tstamp | The current timestamp when the model processed this row. | timestamp_ntz |
+| page_views | The total page views by the user | number |
+| sessions | The total sessions by the user | number |
+| engaged_time_in_s | The total engaged time in seconds by the user | number |
+| first_page_title | The title of the first page visited by the user | text |
+| first_page_url | The url of the first page visited by the user | text |
+| first_page_urlscheme | The urlscheme of the first page visited by the user | text |
+| first_page_urlhost | The urlhost of the first page visited by the user | text |
+| first_page_urlpath | The urlpath of the first page visited by the user | text |
+| first_page_urlquery | The urlquery of the first page visited by the user | text |
+| first_page_urlfragment | The urlfragment of the first page visited by the user | text |
+| last_page_title | The title of the last page visited by the user | text |
+| last_page_url | The url of the last page visited by the user | text |
+| last_page_urlscheme | The urlscheme of the last page visited by the user | text |
+| last_page_urlhost | The urlhost of the last page visited by the user | text |
+| last_page_urlpath | The urlpath of the last page visited by the user | text |
+| last_page_urlquery | The urlquery of the last page visited by the user | text |
+| last_page_urlfragment | The urlfragment of the last page visited by the user | text |
+| referrer | The referrer associated with the first page view of the user | text |
+| refr_urlscheme | Referer scheme e.g. ‘http’ | text |
+| refr_urlhost | Referer host e.g. ‘www.bing.com’ | text |
+| refr_urlpath | Referer page path e.g. ‘/images/search’ | text |
+| refr_urlquery | Referer URL querystring e.g. ‘q=psychic+oracle+cards’ | text |
+| refr_urlfragment | Referer URL fragment | text |
+| refr_medium | Type of referer e.g. ‘search’, ‘internal’ | text |
+| refr_source | Name of referer if recognised e.g. ‘Bing images’ | text |
+| refr_term | Keywords if source is a search engine e.g. ‘psychic oracle cards’ | text |
+| mkt_medium | Type of traffic source e.g. ‘cpc’, ‘affiliate’, ‘organic’, ‘social’ | text |
+| mkt_source | The company / website where the traffic came from e.g. ‘Google’, ‘Facebook’ | text |
+| mkt_term | Any keywords associated with the referrer e.g. ‘new age tarot decks’ | text |
+| mkt_content | The content of the ad. (Or an ID so that it can be looked up.) e.g. 13894723 | text |
+| mkt_campaign | The campaign ID e.g. ‘diageo-123’ | text |
+| mkt_clickid | The click ID e.g. ‘ac3d8e459’ | text |
+| mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ | text |
 </DbtDetails>
 
 <DbtDetails>

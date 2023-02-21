@@ -20,9 +20,13 @@ def main():
 
     # Load in files
     package_manifests = {}
+    package_catalogs = {}
     for package in packages:
         with open(f'./manifests/{package}_manifest.json') as f:
             package_manifests[package] = json.load(f)
+    for package in packages:
+        with open(f'./manifests/{package}_catalog.json') as f:
+            package_catalogs[package] = json.load(f)
 
     # Get all models and macros for our packages, attempting to only get models and macros from their own package to avoid dealing with out-of-sync versions
     all_macros = []
@@ -42,18 +46,25 @@ def main():
                     disabled_package_models[node_k] = merged_model
             disabled_models.append(disabled_package_models)
 
+    combined_catalogs = dict()
+    for package_name, package in package_catalogs.items():
+        if package_name != 'utils':
+            combined_catalogs |= {node_k: classFromArgs(dbt_catalog, node_v) for node_k, node_v in package.get('nodes').items() if f'snowplow_{package_name}' in node_k}
+
 
     # Combine them into a single dictionary for processing
     combined_macros = combine_packages('macro', all_macros)
     combined_docs = combine_packages('doc', all_docs)
-    # Add the disabled models into the rest of them
-    combined_models = combine_packages('model', all_models + disabled_models)
+    # Add the disabled models into the rest of them and add catalog columns
+    merged_models = combine_packages('model', all_models + disabled_models)
+    combined_models = merge_manifest_and_catalog(merged_models, combined_catalogs)
 
     # Combine and clean the multidb stuff for macros
     unified_macros = process_multidb_macros(combined_macros)
 
     # Add the referrenced by field, across all packages!
     combined_models_w_ref, combined_macros_w_ref = get_referenced_by(combined_models, unified_macros)
+
 
     # Write the files for testing purposes, comment this out later
     # with open("debug/macros.json", "w") as outfile:

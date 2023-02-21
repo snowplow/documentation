@@ -51,6 +51,12 @@ For any given run, this table contains all required events to be consumed by sub
 <DbtDetails>
 <summary>Columns</summary>
 
+:::note
+
+Base event this run table column lists may be incomplete and is missing contexts/unstructs, please check your warehouse for a more accurate column list.
+
+:::
+
 | Column Name | Description |
 |--------------|-------------|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
@@ -605,14 +611,16 @@ from prep
 #### Description
 This table contains the lower and upper timestamp limits for the given run of the web model. These limits are used to select new events from the events table.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| lower_limit | The lower `collector_tstamp` limit for the run |
-| upper_limit | The upper `collector_tstamp` limit for the run |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| lower_limit | The lower `collector_tstamp` limit for the run | timestamp_ntz |
+| upper_limit | The upper `collector_tstamp` limit for the run | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -700,13 +708,15 @@ This table contains any sessions that have been quarantined. Sessions are quaran
 Once quarantined, no further events from these sessions will be processed. Events up until the point of quarantine remain in your derived tables.
 The reason for removing long sessions is to reduce table scans on both the events table and all derived tables. This improves performance greatly.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| session_id | The `session_id` of the quarantined session |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| session_id | The `session_id` of the quarantined session | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -787,16 +797,18 @@ This incremental table is a manifest of all sessions that have been processed by
 
 By knowing the lifecycle of a session the model is able to able to determine which sessions and thus events to process for a given timeframe, as well as the complete date range required to reprocess all events of each session.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| start_tstamp | The `collector_tstamp` when the session began |
-| end_tstamp | The `collector_tstamp` when the session ended |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| start_tstamp | The `collector_tstamp` when the session began | timestamp_ntz |
+| end_tstamp | The `collector_tstamp` when the session ended | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -954,16 +966,18 @@ from session_lifecycle sl
 #### Description
 For any given run, this table contains all the required sessions.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| start_tstamp | The `collector_tstamp` when the session began |
-| end_tstamp | The `collector_tstamp` when the session ended |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| start_tstamp | The `collector_tstamp` when the session began | timestamp_ntz |
+| end_tstamp | The `collector_tstamp` when the session ended | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -1051,29 +1065,31 @@ and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 #### Description
 This derived incremental table contains all historic cart interactions and should be the end point for any analysis or BI tools.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_in_session_index | The index of the event in the corresponding session. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| cart_id | The unique ID representing this cart e.g. abc123 |
-| cart_currency | The currency used for this cart (ISO 4217) |
-| cart_total_value | The total value of the cart after this interaction |
-| cart_created | A boolean to describe whether the cart was created in this action |
-| cart_emptied | A boolean to describe whether the cart was emptied in this action |
-| cart_transacted | A boolean to describe whether the cart was transacted (purchased) in this action |
-| ecommerce_action_type | The type of ecommerce action that was performed, e.g. transaction, add_to_cart, etc. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_in_session_index | The index of the event in the corresponding session. | number |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. | text |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | date |
+| cart_id | The unique ID representing this cart e.g. abc123 | text |
+| cart_currency | The currency used for this cart (ISO 4217) | text |
+| cart_total_value | The total value of the cart after this interaction | number |
+| cart_created | A boolean to describe whether the cart was created in this action | boolean |
+| cart_emptied | A boolean to describe whether the cart was emptied in this action | boolean |
+| cart_transacted | A boolean to describe whether the cart was transacted (purchased) in this action | boolean |
+| ecommerce_action_type | The type of ecommerce action that was performed, e.g. transaction, add_to_cart, etc. | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -1142,29 +1158,31 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 #### Description
 This staging table tracks and stores information about cart interactions that occurred within the current run, with interactions being when a user adds or removes an item from their cart. It possesses all of the same columns as `snowplow_ecommerce_cart_interactions`. If building a custom module that requires cart interactions, this is the table you should reference for that information.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_in_session_index | The index of the event in the corresponding session. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| cart_id | The unique ID representing this cart e.g. abc123 |
-| cart_currency | The currency used for this cart (ISO 4217) |
-| cart_total_value | The total value of the cart after this interaction |
-| cart_created | A boolean to describe whether the cart was created in this action |
-| cart_emptied | A boolean to describe whether the cart was emptied in this action |
-| cart_transacted | A boolean to describe whether the cart was transacted (purchased) in this action |
-| ecommerce_action_type | The type of ecommerce action that was performed, e.g. transaction, add_to_cart, etc. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_in_session_index | The index of the event in the corresponding session. | number |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. | text |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | date |
+| cart_id | The unique ID representing this cart e.g. abc123 | text |
+| cart_currency | The currency used for this cart (ISO 4217) | text |
+| cart_total_value | The total value of the cart after this interaction | number |
+| cart_created | A boolean to describe whether the cart was created in this action | boolean |
+| cart_emptied | A boolean to describe whether the cart was emptied in this action | boolean |
+| cart_transacted | A boolean to describe whether the cart was transacted (purchased) in this action | boolean |
+| ecommerce_action_type | The type of ecommerce action that was performed, e.g. transaction, add_to_cart, etc. | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -1292,41 +1310,43 @@ from cart_product_interactions
 #### Description
 This derived incremental table contains all historic checkout interactions and should be the end point for any analysis or BI tools.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_in_session_index | The index of the event in the corresponding session. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| ecommerce_action_type | The type of ecommerce action that was performed, e.g. transaction, add_to_cart, etc. |
-| ecommerce_action_name | The name that is associated with the ecommerce action. E.g. when a list_click occurs, the name of the product list such as 'recommended' or 'shop the look' |
-| ecommerce_page_type | The type of the page that was visited E.g. homepage, product page, checkout page |
-| checkout_step_number | The checkout step index e.g. 1 |
-| checkout_account_type | The type of account that is conducting the checkout e.g. guest |
-| checkout_billing_full_address | The full billing address provided at the checkout step e.g. 1 Lincoln Street |
-| checkout_billing_postcode | The full billing postcode/zipcode provided at the checkout step e.g. 90210 |
-| checkout_coupon_code | The coupon code used at the checkout step e.g. SNOWPLOW50 |
-| checkout_delivery_method | The delivery method selected at the checkout step e.g. Store pickup |
-| checkout_delivery_provider | The delivery provider selected at the checkout step e.g. SantaPost |
-| checkout_marketing_opt_in | A boolean to describe whether or not the user has opted in for marketing emails at the checkout step |
-| checkout_payment_method | The chosen payment method selected at the checkout step e.g. Credit Card |
-| checkout_proof_of_payment | The proof of payment given at the checkout step, e.g. invoice or receipt |
-| checkout_shipping_full_address | Full shipping address |
-| checkout_shipping_postcode | Shipping address postcode |
-| session_entered_at_step | A boolean to describe whether the session was entered at this checkout step |
-| checkout_succeeded | A boolean to describe whether the checkout succeeded |
-| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. |
-| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_in_session_index | The index of the event in the corresponding session. | number |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. | text |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | date |
+| ecommerce_action_type | The type of ecommerce action that was performed, e.g. transaction, add_to_cart, etc. | text |
+| ecommerce_action_name | The name that is associated with the ecommerce action. E.g. when a list_click occurs, the name of the product list such as 'recommended' or 'shop the look' | text |
+| ecommerce_page_type | The type of the page that was visited E.g. homepage, product page, checkout page | text |
+| checkout_step_number | The checkout step index e.g. 1 | number |
+| checkout_account_type | The type of account that is conducting the checkout e.g. guest | text |
+| checkout_billing_full_address | The full billing address provided at the checkout step e.g. 1 Lincoln Street | text |
+| checkout_billing_postcode | The full billing postcode/zipcode provided at the checkout step e.g. 90210 | text |
+| checkout_coupon_code | The coupon code used at the checkout step e.g. SNOWPLOW50 | text |
+| checkout_delivery_method | The delivery method selected at the checkout step e.g. Store pickup | text |
+| checkout_delivery_provider | The delivery provider selected at the checkout step e.g. SantaPost | text |
+| checkout_marketing_opt_in | A boolean to describe whether or not the user has opted in for marketing emails at the checkout step | boolean |
+| checkout_payment_method | The chosen payment method selected at the checkout step e.g. Credit Card | text |
+| checkout_proof_of_payment | The proof of payment given at the checkout step, e.g. invoice or receipt | text |
+| checkout_shipping_full_address | Full shipping address | text |
+| checkout_shipping_postcode | Shipping address postcode | text |
+| session_entered_at_step | A boolean to describe whether the session was entered at this checkout step | boolean |
+| checkout_succeeded | A boolean to describe whether the checkout succeeded | boolean |
+| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. | text |
+| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. | boolean |
 </DbtDetails>
 
 <DbtDetails>
@@ -1395,41 +1415,43 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 #### Description
 This staging table tracks and stores information about checkout interactions that occurred within the current run, with interactions being when a user progresses through the checkout flow or completes a transaction. It possesses all of the same columns as `snowplow_ecommerce_checkout_interactions`. If building a custom module that requires checkout interactions, this is the table you should reference for that information.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_in_session_index | The index of the event in the corresponding session. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| ecommerce_action_type | The type of ecommerce action that was performed, e.g. transaction, add_to_cart, etc. |
-| ecommerce_action_name | The name that is associated with the ecommerce action. E.g. when a list_click occurs, the name of the product list such as 'recommended' or 'shop the look' |
-| ecommerce_page_type | The type of the page that was visited E.g. homepage, product page, checkout page |
-| checkout_step_number | The checkout step index e.g. 1 |
-| checkout_account_type | The type of account that is conducting the checkout e.g. guest |
-| checkout_billing_full_address | The full billing address provided at the checkout step e.g. 1 Lincoln Street |
-| checkout_billing_postcode | The full billing postcode/zipcode provided at the checkout step e.g. 90210 |
-| checkout_coupon_code | The coupon code used at the checkout step e.g. SNOWPLOW50 |
-| checkout_delivery_method | The delivery method selected at the checkout step e.g. Store pickup |
-| checkout_delivery_provider | The delivery provider selected at the checkout step e.g. SantaPost |
-| checkout_marketing_opt_in | A boolean to describe whether or not the user has opted in for marketing emails at the checkout step |
-| checkout_payment_method | The chosen payment method selected at the checkout step e.g. Credit Card |
-| checkout_proof_of_payment | The proof of payment given at the checkout step, e.g. invoice or receipt |
-| checkout_shipping_full_address | Full shipping address |
-| checkout_shipping_postcode | Shipping address postcode |
-| session_entered_at_step | A boolean to describe whether the session was entered at this checkout step |
-| checkout_succeeded | A boolean to describe whether the checkout succeeded |
-| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. |
-| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_in_session_index | The index of the event in the corresponding session. | number |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. | text |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | date |
+| ecommerce_action_type | The type of ecommerce action that was performed, e.g. transaction, add_to_cart, etc. | text |
+| ecommerce_action_name | The name that is associated with the ecommerce action. E.g. when a list_click occurs, the name of the product list such as 'recommended' or 'shop the look' | text |
+| ecommerce_page_type | The type of the page that was visited E.g. homepage, product page, checkout page | text |
+| checkout_step_number | The checkout step index e.g. 1 | number |
+| checkout_account_type | The type of account that is conducting the checkout e.g. guest | text |
+| checkout_billing_full_address | The full billing address provided at the checkout step e.g. 1 Lincoln Street | text |
+| checkout_billing_postcode | The full billing postcode/zipcode provided at the checkout step e.g. 90210 | text |
+| checkout_coupon_code | The coupon code used at the checkout step e.g. SNOWPLOW50 | text |
+| checkout_delivery_method | The delivery method selected at the checkout step e.g. Store pickup | text |
+| checkout_delivery_provider | The delivery provider selected at the checkout step e.g. SantaPost | text |
+| checkout_marketing_opt_in | A boolean to describe whether or not the user has opted in for marketing emails at the checkout step | boolean |
+| checkout_payment_method | The chosen payment method selected at the checkout step e.g. Credit Card | text |
+| checkout_proof_of_payment | The proof of payment given at the checkout step, e.g. invoice or receipt | text |
+| checkout_shipping_full_address | Full shipping address | text |
+| checkout_shipping_postcode | Shipping address postcode | text |
+| session_entered_at_step | A boolean to describe whether the session was entered at this checkout step | boolean |
+| checkout_succeeded | A boolean to describe whether the checkout succeeded | boolean |
+| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. | text |
+| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. | boolean |
 </DbtDetails>
 
 <DbtDetails>
@@ -1536,14 +1558,16 @@ where ecommerce_action_type IN ('transaction', 'checkout_step') -- the two check
 #### Description
 This incremental table is a manifest of the timestamp of the latest event consumed per model within the Snowplow dbt ecommerce package as well as any models leveraging the incremental framework provided by the package. The latest event's timestamp is based off `collector_tstamp`. This table is used to determine what events should be processed in the next run of the model.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| model | The name of the model. |
-| last_success | The timestamp of the latest event consumed by the model, based on `collector_tstamp` |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| model | The name of the model. | text |
+| last_success | The timestamp of the latest event consumed by the model, based on `collector_tstamp` | timestamp_ntz |
 </DbtDetails>
 
 <DbtDetails>
@@ -1620,46 +1644,51 @@ where false
 #### Description
 This derived incremental table contains all historic product interactions and should be the end point for any analysis or BI tools.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| product_event_id | A surrogate key which is a combination of `product_id` and `event_id` |
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_in_session_index | The index of the event in the corresponding session. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| product_id | The SKU or product ID. |
-| product_category | The category the product belongs to. Use a consistent separator to express multiple levels. E.g. Woman/Shoes/Sneakers |
-| product_subcategory | The subcategories derived from the defined product category using a user-defined separator |
-| product_currency | The currency in which the product is being priced (ISO 4217). |
-| product_price | The price of the product at the current time. |
-| product_brand | The brand of the product. |
-| product_creative_id | Identifier/Name/Url for the creative presented on a list or product view. |
-| product_inventory_status | The inventory status of the product E.g. in stock, out of stock, preorder, backorder. |
-| product_list_price | The list or recommended retail price of a product. |
-| product_name | The name or title of the product |
-| product_list_position | The position the product was presented in a list of products E.g. search results, product list page. |
-| product_quantity | The quantity of the product taking part in the ecommerce action. |
-| product_size | The size of the product. |
-| product_variant | The variant of the product. |
-| is_product_view | A boolean to describe whether this product interaction was a product view |
-| product_view_type | The type of product view that occurred, e.g. list_view or product_view |
-| is_add_to_cart | A boolean to describe whether this product interaction was an add to cart action |
-| is_remove_from_cart | A boolean to describe whether this product interaction was a remove from cart action |
-| product_list_name | The name of the list presented to the user E.g. product list, search results, shop the look, frequently bought with. |
-| is_product_transaction | A boolean to describe whether this product interaction was a transaction (purchase) interaction |
-| transaction_id | The ID of the transaction |
-| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. |
-| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| product_event_id | A surrogate key which is a combination of `product_id` and `event_id` | text |
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_in_session_index | The index of the event in the corresponding session. | number |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. | text |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | date |
+| product_id | The SKU or product ID. | text |
+| product_category | The category the product belongs to. Use a consistent separator to express multiple levels. E.g. Woman/Shoes/Sneakers | text |
+| product_subcategory_1 |   | text |
+| product_subcategory_2 |   | text |
+| product_subcategory_3 |   | text |
+| product_subcategory_4 |   | text |
+| product_currency | The currency in which the product is being priced (ISO 4217). | text |
+| product_price | The price of the product at the current time. | number |
+| product_brand | The brand of the product. | text |
+| product_creative_id | Identifier/Name/Url for the creative presented on a list or product view. | text |
+| product_inventory_status | The inventory status of the product E.g. in stock, out of stock, preorder, backorder. | text |
+| product_list_price | The list or recommended retail price of a product. | number |
+| product_name | The name or title of the product | text |
+| product_list_position | The position the product was presented in a list of products E.g. search results, product list page. | number |
+| product_quantity | The quantity of the product taking part in the ecommerce action. | number |
+| product_size | The size of the product. | text |
+| product_variant | The variant of the product. | text |
+| is_product_view | A boolean to describe whether this product interaction was a product view | boolean |
+| product_view_type | The type of product view that occurred, e.g. list_view or product_view | text |
+| is_add_to_cart | A boolean to describe whether this product interaction was an add to cart action | boolean |
+| is_remove_from_cart | A boolean to describe whether this product interaction was a remove from cart action | boolean |
+| product_list_name | The name of the list presented to the user E.g. product list, search results, shop the look, frequently bought with. | text |
+| is_product_transaction | A boolean to describe whether this product interaction was a transaction (purchase) interaction | boolean |
+| transaction_id | The ID of the transaction | text |
+| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. | text |
+| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. | boolean |
 </DbtDetails>
 
 <DbtDetails>
@@ -1728,6 +1757,8 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 #### Description
 This staging table tracks and stores information about product interactions that occurred within the current run, such as a user viewing a product on a product page, or in a product list. It possesses all of the same columns as `snowplow_ecommerce_product_interactions`. If building a custom module that requires checkout interactions, this is the table you should reference for that information.
 
+**Type**: Table
+
 #### File Paths
 <Tabs groupId="dispatched_sql">
 <TabItem value="bigquery" label="bigquery" >
@@ -1749,42 +1780,45 @@ This staging table tracks and stores information about product interactions that
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| product_event_id | A surrogate key which is a combination of `product_id` and `event_id` |
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_in_session_index | The index of the event in the corresponding session. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| product_id | The SKU or product ID. |
-| product_category | The category the product belongs to. Use a consistent separator to express multiple levels. E.g. Woman/Shoes/Sneakers |
-| product_subcategory | The subcategories derived from the defined product category using a user-defined separator |
-| product_currency | The currency in which the product is being priced (ISO 4217). |
-| product_price | The price of the product at the current time. |
-| product_brand | The brand of the product. |
-| product_creative_id | Identifier/Name/Url for the creative presented on a list or product view. |
-| product_inventory_status | The inventory status of the product E.g. in stock, out of stock, preorder, backorder. |
-| product_list_price | The list or recommended retail price of a product. |
-| product_name | The name or title of the product |
-| product_list_position | The position the product was presented in a list of products E.g. search results, product list page. |
-| product_quantity | The quantity of the product taking part in the ecommerce action. |
-| product_size | The size of the product. |
-| product_variant | The variant of the product. |
-| is_product_view | A boolean to describe whether this product interaction was a product view |
-| product_view_type | The type of product view that occurred, e.g. list_view or product_view |
-| is_add_to_cart | A boolean to describe whether this product interaction was an add to cart action |
-| is_remove_from_cart | A boolean to describe whether this product interaction was a remove from cart action |
-| product_list_name | The name of the list presented to the user E.g. product list, search results, shop the look, frequently bought with. |
-| is_product_transaction | A boolean to describe whether this product interaction was a transaction (purchase) interaction |
-| transaction_id | The ID of the transaction |
-| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. |
-| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| product_event_id | A surrogate key which is a combination of `product_id` and `event_id` | text |
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_in_session_index | The index of the event in the corresponding session. | number |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. | text |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | date |
+| product_id | The SKU or product ID. | text |
+| product_category | The category the product belongs to. Use a consistent separator to express multiple levels. E.g. Woman/Shoes/Sneakers | text |
+| product_subcategory_1 |   | text |
+| product_subcategory_2 |   | text |
+| product_subcategory_3 |   | text |
+| product_subcategory_4 |   | text |
+| product_currency | The currency in which the product is being priced (ISO 4217). | text |
+| product_price | The price of the product at the current time. | number |
+| product_brand | The brand of the product. | text |
+| product_creative_id | Identifier/Name/Url for the creative presented on a list or product view. | text |
+| product_inventory_status | The inventory status of the product E.g. in stock, out of stock, preorder, backorder. | text |
+| product_list_price | The list or recommended retail price of a product. | number |
+| product_name | The name or title of the product | text |
+| product_list_position | The position the product was presented in a list of products E.g. search results, product list page. | number |
+| product_quantity | The quantity of the product taking part in the ecommerce action. | number |
+| product_size | The size of the product. | text |
+| product_variant | The variant of the product. | text |
+| is_product_view | A boolean to describe whether this product interaction was a product view | boolean |
+| product_view_type | The type of product view that occurred, e.g. list_view or product_view | text |
+| is_add_to_cart | A boolean to describe whether this product interaction was an add to cart action | boolean |
+| is_remove_from_cart | A boolean to describe whether this product interaction was a remove from cart action | boolean |
+| product_list_name | The name of the list presented to the user E.g. product list, search results, shop the look, frequently bought with. | text |
+| is_product_transaction | A boolean to describe whether this product interaction was a transaction (purchase) interaction | boolean |
+| transaction_id | The ID of the transaction | text |
+| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. | text |
+| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. | boolean |
 </DbtDetails>
 
 <DbtDetails>
@@ -2238,51 +2272,53 @@ from product_info
 #### Description
 This derived incremental table contains all historic sessions data specifically for ecommerce actions and should be the end point for any analysis or BI tools.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| start_tstamp | The first time the session interacted with the website |
-| end_tstamp | The last time the session interacted with the website |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| number_unique_cart_ids | The total number of unique `cart_id`s over the session's lifetime |
-| number_carts_created | The total number of carts created over the session's lifetime |
-| number_carts_emptied | The total number of carts emptied over the session's lifetime |
-| number_carts_transacted | The total number of carts transacted over the session's lifetime |
-| first_cart_created | The timestamp of when the session first created a cart |
-| last_cart_created | The timestamp of when the session last created a cart |
-| first_cart_transacted | The timestamp of when the session first transacted (purchased) the contents of a cart |
-| last_cart_transacted | The timestamp of when the session last transacted (purchased) the contents of a cart |
-| session_cart_abandoned | A boolean to describe whether the session's cart was abandoned |
-| session_entered_at_step | A boolean to describe whether the session was entered at this checkout step |
-| number_unique_checkout_steps_attempted | The total distinct number of checkout steps that a session went through |
-| number_checkout_steps_visited | The total number of (non-unique) checkout steps that a session went through |
-| checkout_succeeded | A boolean to describe whether the checkout succeeded |
-| first_checkout_attempted | The timestamp of when the session first attempted any checkout steps |
-| last_checkout_attempted | The timestamp of when the session last attempted any checkout steps |
-| first_checkout_succeeded | The timestamp of when the session first succeeded in checking out products |
-| last_checkout_succeeded | The timestamp of when the session last succeeded in checking out products |
-| first_product_view | The timestamp of when the session first viewed a product |
-| last_product_view | The timestamp of when the session last viewed a product |
-| first_product_add_to_cart | The timestamp of when the session first added a product to their cart |
-| last_product_add_to_cart | The timestamp of when the session last added a product to their cart |
-| first_product_remove_from_cart | The timestamp of when the session first removed a product from their cart |
-| last_product_remove_from_cart | The timestamp of when the session last removed a product from their cart |
-| first_product_transaction | The timestamp of when the session first purchased a product |
-| last_product_transaction | The timestamp of when the session last purchased a product |
-| number_product_views | The number of product views that occurred within a session |
-| number_add_to_carts | The number of add to cart actions that occurred within a session |
-| number_remove_from_carts | The number of remove from cart actions that occurred within a session |
-| number_product_transactions | The number of product transaction actions that occurred within a session |
-| first_transaction_completed | The timestamp of when the session first completed a transaction |
-| last_transaction_completed | The timestamp of when the session last completed a transaction |
-| total_transaction_revenue | The total amount of revenue coming from transactions over the session's lifetime |
-| total_transaction_quantity | The total quantity of products coming from transactions over the session's lifetime |
-| total_number_transactions | The total number of transactions over the session's lifetime |
-| total_transacted_products | The total number of transacted products over the session's lifetime |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| start_tstamp | The first time the session interacted with the website | timestamp_ntz |
+| end_tstamp | The last time the session interacted with the website | timestamp_ntz |
+| number_unique_cart_ids | The total number of unique `cart_id`s over the session's lifetime | number |
+| number_carts_created | The total number of carts created over the session's lifetime | number |
+| number_carts_emptied | The total number of carts emptied over the session's lifetime | number |
+| number_carts_transacted | The total number of carts transacted over the session's lifetime | number |
+| first_cart_created | The timestamp of when the session first created a cart | timestamp_ntz |
+| last_cart_created | The timestamp of when the session last created a cart | timestamp_ntz |
+| first_cart_transacted | The timestamp of when the session first transacted (purchased) the contents of a cart | timestamp_ntz |
+| last_cart_transacted | The timestamp of when the session last transacted (purchased) the contents of a cart | timestamp_ntz |
+| session_cart_abandoned | A boolean to describe whether the session's cart was abandoned | boolean |
+| session_entered_at_checkout |   | boolean |
+| number_unique_checkout_steps_attempted | The total distinct number of checkout steps that a session went through | number |
+| number_checkout_steps_visited | The total number of (non-unique) checkout steps that a session went through | number |
+| checkout_succeeded | A boolean to describe whether the checkout succeeded | boolean |
+| first_checkout_attempted | The timestamp of when the session first attempted any checkout steps | timestamp_ntz |
+| last_checkout_attempted | The timestamp of when the session last attempted any checkout steps | timestamp_ntz |
+| first_checkout_succeeded | The timestamp of when the session first succeeded in checking out products | timestamp_ntz |
+| last_checkout_succeeded | The timestamp of when the session last succeeded in checking out products | timestamp_ntz |
+| first_product_view | The timestamp of when the session first viewed a product | timestamp_ntz |
+| last_product_view | The timestamp of when the session last viewed a product | timestamp_ntz |
+| first_product_add_to_cart | The timestamp of when the session first added a product to their cart | timestamp_ntz |
+| last_product_add_to_cart | The timestamp of when the session last added a product to their cart | timestamp_ntz |
+| first_product_remove_from_cart | The timestamp of when the session first removed a product from their cart | timestamp_ntz |
+| last_product_remove_from_cart | The timestamp of when the session last removed a product from their cart | timestamp_ntz |
+| first_product_transaction | The timestamp of when the session first purchased a product | timestamp_ntz |
+| last_product_transaction | The timestamp of when the session last purchased a product | timestamp_ntz |
+| number_product_views | The number of product views that occurred within a session | number |
+| number_add_to_carts | The number of add to cart actions that occurred within a session | number |
+| number_remove_from_carts | The number of remove from cart actions that occurred within a session | number |
+| number_product_transactions | The number of product transaction actions that occurred within a session | number |
+| first_transaction_completed | The timestamp of when the session first completed a transaction | timestamp_ntz |
+| last_transaction_completed | The timestamp of when the session last completed a transaction | timestamp_ntz |
+| total_transaction_revenue | The total amount of revenue coming from transactions over the session's lifetime | number |
+| total_transaction_quantity | The total quantity of products coming from transactions over the session's lifetime | number |
+| total_number_transactions | The total number of transactions over the session's lifetime | number |
+| total_transacted_products | The total number of transacted products over the session's lifetime | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -2353,52 +2389,53 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 #### Description
 This staging table tracks and stores aggregate information about sessions that occurred within the current run. It possesses all of the same columns as `snowplow_ecommerce_sessions`. If building a custom module that requires session level data, this is the table you should reference for that information.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| start_tstamp | The first time the session interacted with the website |
-| end_tstamp | The last time the session interacted with the website |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| number_unique_cart_ids | The total number of unique `cart_id`s over the session's lifetime |
-| number_carts_created | The total number of carts created over the session's lifetime |
-| number_carts_emptied | The total number of carts emptied over the session's lifetime |
-| number_carts_transacted | The total number of carts transacted over the session's lifetime |
-| first_cart_created | The timestamp of when the session first created a cart |
-| last_cart_created | The timestamp of when the session last created a cart |
-| first_cart_transacted | The timestamp of when the session first transacted (purchased) the contents of a cart |
-| last_cart_transacted | The timestamp of when the session last transacted (purchased) the contents of a cart |
-| session_cart_abandoned | A boolean to describe whether the session's cart was abandoned |
-| session_entered_at_checkout | A boolean to describe whether the session started within the checkout |
-| number_unique_checkout_steps_attempted | The total distinct number of checkout steps that a session went through |
-| number_checkout_steps_visited | The total number of (non-unique) checkout steps that a session went through |
-| checkout_succeeded | A boolean to describe whether the checkout succeeded |
-| first_checkout_attempted | The timestamp of when the session first attempted any checkout steps |
-| last_checkout_attempted | The timestamp of when the session last attempted any checkout steps |
-| first_checkout_succeeded | The timestamp of when the session first succeeded in checking out products |
-| last_checkout_succeeded | The timestamp of when the session last succeeded in checking out products |
-| first_product_view | The timestamp of when the session first viewed a product |
-| last_product_view | The timestamp of when the session last viewed a product |
-| first_product_add_to_cart | The timestamp of when the session first added a product to their cart |
-| last_product_add_to_cart | The timestamp of when the session last added a product to their cart |
-| first_product_remove_from_cart | The timestamp of when the session first removed a product from their cart |
-| last_product_remove_from_cart | The timestamp of when the session last removed a product from their cart |
-| first_product_transaction | The timestamp of when the session first purchased a product |
-| last_product_transaction | The timestamp of when the session last purchased a product |
-| number_product_views | The number of product views that occurred within a session |
-| number_add_to_carts | The number of add to cart actions that occurred within a session |
-| number_remove_from_carts | The number of remove from cart actions that occurred within a session |
-| number_product_transactions | The number of product transaction actions that occurred within a session |
-| number_distinct_products_viewed | The number of distinct product IDs that were viewed within a session |
-| first_transaction_completed | The timestamp of when the session first completed a transaction |
-| last_transaction_completed | The timestamp of when the session last completed a transaction |
-| total_transaction_revenue | The total amount of revenue coming from transactions over the session's lifetime |
-| total_transaction_quantity | The total quantity of products coming from transactions over the session's lifetime |
-| total_number_transactions | The total number of transactions over the session's lifetime |
-| total_transacted_products | The total number of transacted products over the session's lifetime |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| start_tstamp | The first time the session interacted with the website | timestamp_ntz |
+| end_tstamp | The last time the session interacted with the website | timestamp_ntz |
+| number_unique_cart_ids | The total number of unique `cart_id`s over the session's lifetime | number |
+| number_carts_created | The total number of carts created over the session's lifetime | number |
+| number_carts_emptied | The total number of carts emptied over the session's lifetime | number |
+| number_carts_transacted | The total number of carts transacted over the session's lifetime | number |
+| first_cart_created | The timestamp of when the session first created a cart | timestamp_ntz |
+| last_cart_created | The timestamp of when the session last created a cart | timestamp_ntz |
+| first_cart_transacted | The timestamp of when the session first transacted (purchased) the contents of a cart | timestamp_ntz |
+| last_cart_transacted | The timestamp of when the session last transacted (purchased) the contents of a cart | timestamp_ntz |
+| session_cart_abandoned | A boolean to describe whether the session's cart was abandoned | boolean |
+| session_entered_at_checkout | A boolean to describe whether the session started within the checkout | boolean |
+| number_unique_checkout_steps_attempted | The total distinct number of checkout steps that a session went through | number |
+| number_checkout_steps_visited | The total number of (non-unique) checkout steps that a session went through | number |
+| checkout_succeeded | A boolean to describe whether the checkout succeeded | boolean |
+| first_checkout_attempted | The timestamp of when the session first attempted any checkout steps | timestamp_ntz |
+| last_checkout_attempted | The timestamp of when the session last attempted any checkout steps | timestamp_ntz |
+| first_checkout_succeeded | The timestamp of when the session first succeeded in checking out products | timestamp_ntz |
+| last_checkout_succeeded | The timestamp of when the session last succeeded in checking out products | timestamp_ntz |
+| first_product_view | The timestamp of when the session first viewed a product | timestamp_ntz |
+| last_product_view | The timestamp of when the session last viewed a product | timestamp_ntz |
+| first_product_add_to_cart | The timestamp of when the session first added a product to their cart | timestamp_ntz |
+| last_product_add_to_cart | The timestamp of when the session last added a product to their cart | timestamp_ntz |
+| first_product_remove_from_cart | The timestamp of when the session first removed a product from their cart | timestamp_ntz |
+| last_product_remove_from_cart | The timestamp of when the session last removed a product from their cart | timestamp_ntz |
+| first_product_transaction | The timestamp of when the session first purchased a product | timestamp_ntz |
+| last_product_transaction | The timestamp of when the session last purchased a product | timestamp_ntz |
+| number_product_views | The number of product views that occurred within a session | number |
+| number_add_to_carts | The number of add to cart actions that occurred within a session | number |
+| number_remove_from_carts | The number of remove from cart actions that occurred within a session | number |
+| number_product_transactions | The number of product transaction actions that occurred within a session | number |
+| first_transaction_completed | The timestamp of when the session first completed a transaction | timestamp_ntz |
+| last_transaction_completed | The timestamp of when the session last completed a transaction | timestamp_ntz |
+| total_transaction_revenue | The total amount of revenue coming from transactions over the session's lifetime | number |
+| total_transaction_quantity | The total quantity of products coming from transactions over the session's lifetime | number |
+| total_number_transactions | The total number of transactions over the session's lifetime | number |
+| total_transacted_products | The total number of transacted products over the session's lifetime | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -2591,35 +2628,37 @@ left join transaction_session_stats as tss on s.session_id = tss.domain_sessioni
 #### Description
 This derived incremental table contains all historic transaction interactions and should be the end point for any analysis or BI tools.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| transaction_id | The ID of the transaction |
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_in_session_index | The index of the event in the corresponding session. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| transaction_currency | The currency used for the transaction (ISO 4217). |
-| transaction_payment_method | The payment method used for the transaction. |
-| transaction_revenue | The revenue of the transaction. |
-| transaction_total_quantity | Total quantity of items in the transaction. |
-| transaction_credit_order | Whether the transaction is a credit order or not. |
-| transaction_discount_amount | Discount amount taken off |
-| transaction_discount_code | Discount code used. |
-| transaction_shipping | Total cost of shipping on the transaction. |
-| transaction_tax | Total amount of tax on the transaction. |
-| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. |
-| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. |
-| number_products | The number of products that are contained in a transaction, counted from the product interactions |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_in_session_index | The index of the event in the corresponding session. | number |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. | text |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | date |
+| transaction_id | The ID of the transaction | text |
+| transaction_currency | The currency used for the transaction (ISO 4217). | text |
+| transaction_payment_method | The payment method used for the transaction. | text |
+| transaction_revenue | The revenue of the transaction. | number |
+| transaction_total_quantity | Total quantity of items in the transaction. | number |
+| transaction_credit_order | Whether the transaction is a credit order or not. | boolean |
+| transaction_discount_amount | Discount amount taken off | number |
+| transaction_discount_code | Discount code used. | text |
+| transaction_shipping | Total cost of shipping on the transaction. | number |
+| transaction_tax | Total amount of tax on the transaction. | number |
+| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. | text |
+| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. | boolean |
+| number_products | The number of products that are contained in a transaction, counted from the product interactions | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -2688,35 +2727,37 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 #### Description
 This staging table tracks and stores information about transaction interactions that occurred within the current run, with interactions being when a user completes a transaction. It possesses all of the same columns as `snowplow_ecommerce_transaction_interactions`. If building a custom module that requires checkout interactions, this is the table you should reference for that information.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| transaction_id | The ID of the transaction |
-| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
-| event_in_session_index | The index of the event in the corresponding session. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
-| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ |
-| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ |
-| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
-| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ |
-| transaction_currency | The currency used for the transaction (ISO 4217). |
-| transaction_payment_method | The payment method used for the transaction. |
-| transaction_revenue | The revenue of the transaction. |
-| transaction_total_quantity | Total quantity of items in the transaction. |
-| transaction_credit_order | Whether the transaction is a credit order or not. |
-| transaction_discount_amount | Discount amount taken off |
-| transaction_discount_code | Discount code used. |
-| transaction_shipping | Total cost of shipping on the transaction. |
-| transaction_tax | Total amount of tax on the transaction. |
-| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. |
-| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. |
-| number_products | The number of products that are contained in a transaction, counted from the product interactions |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
+| event_in_session_index | The index of the event in the corresponding session. | number |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
+| network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
+| user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
+| ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. | text |
+| derived_tstamp | Timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | timestamp_ntz |
+| derived_tstamp_date | Date value of the timestamp making allowance for innaccurate device clock e.g. ‘2013-11-26 00:02:04’ | date |
+| transaction_id | The ID of the transaction | text |
+| transaction_currency | The currency used for the transaction (ISO 4217). | text |
+| transaction_payment_method | The payment method used for the transaction. | text |
+| transaction_revenue | The revenue of the transaction. | number |
+| transaction_total_quantity | Total quantity of items in the transaction. | number |
+| transaction_credit_order | Whether the transaction is a credit order or not. | boolean |
+| transaction_discount_amount | Discount amount taken off | number |
+| transaction_discount_code | Discount code used. | text |
+| transaction_shipping | Total cost of shipping on the transaction. | number |
+| transaction_tax | Total amount of tax on the transaction. | number |
+| ecommerce_user_email | The ecommerce user email, extracted from the ecommerce user context. | text |
+| ecommerce_user_is_guest | A boolean extracted from the ecommerce user context to ascertain whether a user is a guest or not. | boolean |
+| number_products | The number of products that are contained in a transaction, counted from the product interactions | number |
 </DbtDetails>
 
 <DbtDetails>

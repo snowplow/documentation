@@ -51,6 +51,12 @@ For any given run, this table contains all required events to be consumed by sub
 <DbtDetails>
 <summary>Columns</summary>
 
+:::note
+
+Base event this run table column lists may be incomplete and is missing contexts/unstructs, please check your warehouse for a more accurate column list.
+
+:::
+
 | Column Name | Description |
 |--------------|-------------|
 | app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
@@ -311,14 +317,16 @@ qualify row_number() over (partition by a.event_id order by a.collector_tstamp) 
 #### Description
 This table contains the lower and upper timestamp limits for the given run of the normalize model. These limits are used to select new events from the events table.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| lower_limit | The lower `collector_tstamp` limit for the run |
-| upper_limit | The upper `collector_tstamp` limit for the run |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| lower_limit | The lower `collector_tstamp` limit for the run | timestamp |
+| upper_limit | The upper `collector_tstamp` limit for the run | timestamp |
 </DbtDetails>
 
 <DbtDetails>
@@ -397,14 +405,16 @@ This table contains the lower and upper timestamp limits for the given run of th
 #### Description
 This incremental table is a manifest of the timestamp of the latest event consumed per model within the `snowplow-normalize` package as well as any models leveraging the incremental framework provided by the package. The latest event's timestamp is based off `collector_tstamp`. This table is used to determine what events should be processed in the next run of the model.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| model | The name of the model. |
-| last_success | The latest event consumed by the model, based on `collector_tstamp` |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| model | The name of the model. | string |
+| last_success | The latest event consumed by the model, based on `collector_tstamp` | timestamp |
 </DbtDetails>
 
 <DbtDetails>

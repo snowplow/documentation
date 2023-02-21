@@ -47,12 +47,17 @@ class dbt_model(dbt_base):
     paths: Optional[dict] = field(default_factory=dict)
     dispatched_sql: Optional[dict] = field(default_factory=dict)
     referenced_by: Optional[dict[list]] = field(default_factory=lambda: {'macros': [], 'nodes': []})
+    type: Optional[str] = None
 
     def __post_init__(self):
+        # Replace warehosue specific ones in prep for adding disabled models
         lang = self.get_lang()
         self.paths[lang] = self.original_file_path
         self.dispatched_sql[lang] = self.raw_code
-        self.original_file_path = re.sub('bigquery|snowflake|default|redshift_postgres|redshift|postgres|databricks', '&lt;adaptor&gt;', self.original_file_path)
+        self.original_file_path = re.sub('bigquery|snowflake|default|redshift\_postgres|redshift|postgres|databricks', '&lt;adaptor&gt;', self.original_file_path)
+        # ensure all column names are lowercase
+        temp_cols = deepcopy(self.columns)
+        self.columns = {k.lower(): v for k, v in temp_cols.items()}
 
     def to_markdown(self, key, docs):
         """Generates the markdown for a dbt model
@@ -92,8 +97,10 @@ class dbt_model(dbt_base):
             is_documented = False
             markdown.append('This model does not currently have a description.')
 
-        # Add the file paths
-        if len(dispatched_filepath) > 1:
+        if self.type is not None:
+            markdown.extend(['', f'**Type**: {self.type}'])
+        # Add the file paths if it is adaptor split
+        if '&lt;adaptor&gt;' in self.original_file_path:
             markdown.extend(['', '#### File Paths'])
             markdown.append('<Tabs groupId="dispatched_sql">')
             for lang in sorted(dispatched_filepath):
@@ -110,6 +117,8 @@ class dbt_model(dbt_base):
         # Add columns
         if columns != {}:
             markdown.extend(['<DbtDetails>', '<summary>Columns</summary>', ''])
+            if self.name.endswith('base_events_this_run'):
+                markdown.extend([':::note', '', 'Base event this run table column lists may be incomplete and is missing contexts/unstructs, please check your warehouse for a more accurate column list.', '', ':::', ''])
             columns_as_table = column_dict_to_table(columns, docs, key)
             markdown.extend(columns_as_table)
             markdown.extend(['</DbtDetails>', ''])
@@ -352,6 +361,10 @@ class dbt_macro(dbt_base):
         return '\n'.join(markdown), is_documented
 
 @dataclass
+class dbt_catalog:
+    metadata: dict
+    columns: dict
+@dataclass
 class dbt_doc:
     block_contents: str
 
@@ -375,33 +388,33 @@ def merge_dbt_obj(type: str, obj1: Union[dbt_macro, dbt_model], obj2: Union[dbt_
             setattr(merged_obj, field.name, getattr(obj2, field.name))
 
     if type == 'doc':
-        return merge_dbt_obj
+        return merged_obj
+    else:
+        # Combine depends on and referenced by
+        merged_obj.depends_on['macros'] = list(set(obj1.depends_on['macros'] + obj2.depends_on['macros']))
+        merged_obj.referenced_by['macros'] = list(set(obj1.referenced_by['macros'] + obj2.referenced_by['macros']))
+        merged_obj.referenced_by['nodes'] = list(set(obj1.referenced_by['nodes'] + obj2.referenced_by['nodes']))
+        # Combine dispatched sql
+        for sql in obj2.dispatched_sql:
+            if sql not in merged_obj.dispatched_sql:
+                merged_obj.dispatched_sql[sql] = obj2.dispatched_sql[sql]
+        if type == 'model':
+            merged_obj.depends_on['nodes'] = list(set(obj1.depends_on['nodes'] + obj2.depends_on['nodes']))
+            # Combine paths
+            for path in obj2.paths:
+                if path not in merged_obj.paths:
+                    merged_obj.paths[path] = obj2.paths[path]
+            # Combine columns
+            for col in obj2.columns:
+                if col not in merged_obj.columns:
+                    merged_obj.columns[col] = obj2.columns[col]
+        if type == 'macro':
+            # Combine arguments
+            for arg in obj2.arguments:
+                if arg not in merged_obj.arguments:
+                    merged_obj.arguments.append(arg)
 
-    # Combine depends on and referenced by
-    merged_obj.depends_on['macros'] = list(set(obj1.depends_on['macros'] + obj2.depends_on['macros']))
-    merged_obj.referenced_by['macros'] = list(set(obj1.referenced_by['macros'] + obj2.referenced_by['macros']))
-    merged_obj.referenced_by['nodes'] = list(set(obj1.referenced_by['nodes'] + obj2.referenced_by['nodes']))
-    # Combine dispatched sql
-    for sql in obj2.dispatched_sql:
-        if sql not in merged_obj.dispatched_sql:
-            merged_obj.dispatched_sql[sql] = obj2.dispatched_sql[sql]
-    if type == 'model':
-        merged_obj.depends_on['nodes'] = list(set(obj1.depends_on['nodes'] + obj2.depends_on['nodes']))
-        # Combine paths
-        for path in obj2.paths:
-            if path not in merged_obj.paths:
-                merged_obj.paths[path] = obj2.paths[path]
-        # Combine columns
-        for col in obj2.columns:
-            if col not in merged_obj.columns:
-                merged_obj.columns[col] = obj2.columns[col]
-    if type == 'macro':
-        # Combine arguments
-        for arg in obj2.arguments:
-            if arg not in merged_obj.arguments:
-                merged_obj.arguments.append(arg)
-
-    return merged_obj
+        return merged_obj
 
 def merge_dbt_objs(type: str, objs: list[Union[dbt_macro, dbt_model]]) -> Union[dbt_macro, dbt_model]:
     """Merges multiple dbt objects into a single instance, prioritising the first object
@@ -446,6 +459,29 @@ def combine_packages(type: str, packages: list[dict[Union[dbt_macro, dbt_model]]
     return combined_objects
 
 
+def merge_manifest_and_catalog(models, catalogs):
+
+    models_copy = deepcopy(models)
+
+    for model in models_copy:
+        mod_cat = catalogs.get(model)
+        # base events this run models are based off seeds, so we want to remove these and just keep hardcoded documentation from the package
+        if mod_cat is not None and not model.endswith('base_events_this_run'):
+            orig_cols = deepcopy(models_copy[model].columns)
+            table_type = mod_cat.metadata.get('type')
+            cat_cols = mod_cat.columns
+            merged_cols = dict()
+            for col_name, col_val in cat_cols.items():
+                merged_cols[col_name.lower()] = col_val
+                merged_cols[col_name.lower()]['description'] = orig_cols.get(col_name.lower(), {}).get('description')
+            models_copy[model].columns = merged_cols
+            if table_type == 'BASE TABLE':
+                models_copy[model].type = 'Table'
+            else:
+                models_copy[model].type = table_type.capitalize()
+
+    return models_copy
+
 def download_docs(packages):
     # Create the manifest folder to write to
     if not (os.path.exists('./manifests')):
@@ -454,6 +490,8 @@ def download_docs(packages):
     # Get the latest manifest from each package
     for package in packages:
         with urllib.request.urlopen(f'https://raw.githubusercontent.com/snowplow/dbt-snowplow-{package.replace("_", "-")}/gh_pages/docs/manifest.json') as response, open(f'./manifests/{package}_manifest.json', 'wb') as out_file:
+            shutil.copyfileobj(response, out_file)
+        with urllib.request.urlopen(f'https://raw.githubusercontent.com/snowplow/dbt-snowplow-{package.replace("_", "-")}/gh_pages/docs/catalog.json') as response, open(f'./manifests/{package}_catalog.json', 'wb') as out_file:
             shutil.copyfileobj(response, out_file)
 
 
@@ -687,20 +725,20 @@ def column_dict_to_table(columns: dict, docs: dict, key: str) -> list:
         list: Markdown string(s) for the table of column info
     """
 
-    type_exists = any([x.get('data_type') for x in columns.values()])
+    type_exists = any([x.get('type') for x in columns.values()])
     if type_exists:
         table_str = ['| Column Name | Description |Type|',
                     '|--------------|-------------|----|']
         for col in columns.values():
-            col_name = col.get('name')
-            col_desc = get_doc(col.get('description'), docs, key)
-            col_type = col.get('data_type')
-            table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} |{col_type if col_type is not None else " "} |')
+            col_name = col.get('name').lower()
+            col_desc = get_doc(col.get('description'), docs, key) or col.get('comment')
+            col_type = col.get('type').lower()
+            table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} | {col_type if col_type is not None else " "} |')
     else:
         table_str = ['| Column Name | Description |',
                     '|--------------|-------------|']
         for col in columns.values():
-            col_name = col.get('name')
+            col_name = col.get('name').lower()
             col_desc = get_doc(col.get('description'), docs, key)
             table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} |')
 
@@ -717,7 +755,7 @@ def get_doc(text: str, docs: dict, key: str) -> str:
     Returns:
         str: Lookuped docs, or original text if no lookup required
     """
-    if '{{ doc("' in text:
+    if text is not None and '{{ doc("' in text:
         package = key.split('.')[1]
         doc_name = text.split('"')[1]
         doc_key = package + '.' + doc_name

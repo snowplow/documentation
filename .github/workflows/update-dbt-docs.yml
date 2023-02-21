@@ -3,7 +3,7 @@ name: generate-dbt-docs-pages
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * 1-5"
+    - cron: "0 8 * * 1"
 
 concurrency: dbt_docs_generation
 

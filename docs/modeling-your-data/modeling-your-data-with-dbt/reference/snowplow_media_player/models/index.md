@@ -28,40 +28,42 @@ This page is auto-generated from our dbt packages, some information may be incom
 #### Description
 This derived table aggregates media player interactions to a pageview level incrementally.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. |
-| page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. |
-| media_label | The optional, human readable name given to tracked media content. |
-| domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. |
-| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. |
-| media_type | The type of media content: video or audio. |
-| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. |
-| page_referrer | URL of the referrer e.g. `http://www.referrer.com`. |
-| page_url | The page URL e.g. `http://www.example.com`. |
-| source_url | The url which shows the source of the media content. For YouTube it is the `url` context field, for HTML5 it is the `source_url` field. |
-| geo_region_name | Visitor region name e.g. `Florida`. |
-| br_name | Browser name e.g. `Firefox 12`. |
-| dvce_type | Type of device e.g. `Computer`. |
-| os_name | Name of operating system e.g. `Android`. |
-| os_timezone | Client operating system timezone e.g. `Europe/London`. |
-| start_tstamp | The `derived_tstamp` denoting the time when the event started. |
-| end_tstamp | The `derived_tstamp` denoting the time when the last media player event belonging to the specific level of aggregation (e.g.: page_view by media) started. |
-| play_time_sec | Estimated duration of play in seconds. It is calculated using the percent_progress events that are fired during play. In case such an event is fired, it is assumed that the total section of the media in between the previous and current percent_progress is played through, even if the user seeks to another point in time within the audio / video. The more often these events are tracked (e.g. every 5% of the media's length) the more accurate the calculation becomes. |
-| play_time_sec_muted | Calculated duration of muted play in seconds. It is based on the percent_progress event and whether the user played it on mute during this event or not. |
-| is_played | Pageviews with at least one play event. |
-| is_valid_play | A boolean value to show whether the duration of the play (`play_time_sec`) is bigger than or equal to the variable given in `snowplow__valid_play_sec` (defaulted to 30). |
-| is_complete_play | A boolean value to show whether the total percentage played is bigger than or equal to the `snowplow__complete_play_rate` (defaulted to 0.99). |
-| avg_playback_rate | Average playback rate (1 is normal speed). |
-| retention_rate | The maximum percent progress reached before any seek event. |
-| seeks | The count of seek events within a certain aggregation level. The seek event occurs when a user moves/skips to a new position in the media content. |
-| percent_progress_reached | An array of percent progresses reached by the user while playing the media. In case the same percentprogress event was fired during the same page_view (e.g. due to seeks to rewatch part of the video) the % is added to the array again. e.g. in case of percent_progress_reached = [10, 25, 25, 50, 75] the user replayed part of the media so that the percentprogress event fired twice at the 25% mark. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. | text |
+| page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. | text |
+| media_label | The optional, human readable name given to tracked media content. | text |
+| domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. | text |
+| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. | number |
+| media_type | The type of media content: video or audio. | text |
+| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. | text |
+| page_referrer | URL of the referrer e.g. `http://www.referrer.com`. | text |
+| page_url | The page URL e.g. `http://www.example.com`. | text |
+| source_url | The url which shows the source of the media content. For YouTube it is the `url` context field, for HTML5 it is the `source_url` field. | text |
+| geo_region_name | Visitor region name e.g. `Florida`. | text |
+| br_name | Browser name e.g. `Firefox 12`. | text |
+| dvce_type | Type of device e.g. `Computer`. | text |
+| os_name | Name of operating system e.g. `Android`. | text |
+| os_timezone | Client operating system timezone e.g. `Europe/London`. | text |
+| start_tstamp | The `derived_tstamp` denoting the time when the event started. | timestamp_ntz |
+| end_tstamp | The `derived_tstamp` denoting the time when the last media player event belonging to the specific level of aggregation (e.g.: page_view by media) started. | timestamp_ntz |
+| play_time_sec | Estimated duration of play in seconds. It is calculated using the percent_progress events that are fired during play. In case such an event is fired, it is assumed that the total section of the media in between the previous and current percent_progress is played through, even if the user seeks to another point in time within the audio / video. The more often these events are tracked (e.g. every 5% of the media's length) the more accurate the calculation becomes. | number |
+| play_time_sec_muted | Calculated duration of muted play in seconds. It is based on the percent_progress event and whether the user played it on mute during this event or not. | number |
+| is_played | Pageviews with at least one play event. | boolean |
+| is_valid_play | A boolean value to show whether the duration of the play (`play_time_sec`) is bigger than or equal to the variable given in `snowplow__valid_play_sec` (defaulted to 30). | boolean |
+| is_complete_play | A boolean value to show whether the total percentage played is bigger than or equal to the `snowplow__complete_play_rate` (defaulted to 0.99). | boolean |
+| avg_playback_rate | Average playback rate (1 is normal speed). | float |
+| retention_rate | The maximum percent progress reached before any seek event. | float |
+| seeks | The count of seek events within a certain aggregation level. The seek event occurs when a user moves/skips to a new position in the media content. | number |
+| percent_progress_reached | An array of percent progresses reached by the user while playing the media. In case the same percentprogress event was fired during the same page_view (e.g. due to seeks to rewatch part of the video) the % is added to the array again. e.g. in case of percent_progress_reached = [10, 25, 25, 50, 75] the user replayed part of the media so that the percentprogress event fired twice at the 25% mark. | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -145,40 +147,42 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 #### Description
 This staging table aggregates media player interactions within the current run to a pageview level that is considered a base level for media plays.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. |
-| page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. |
-| media_label | The optional, human readable name given to tracked media content. |
-| domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. |
-| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. |
-| media_type | The type of media content: video or audio. |
-| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. |
-| page_referrer | URL of the referrer e.g. `http://www.referrer.com`. |
-| page_url | The page URL e.g. `http://www.example.com`. |
-| source_url | The url which shows the source of the media content. For YouTube it is the `url` context field, for HTML5 it is the `source_url` field. |
-| geo_region_name | Visitor region name e.g. `Florida`. |
-| br_name | Browser name e.g. `Firefox 12`. |
-| dvce_type | Type of device e.g. `Computer`. |
-| os_name | Name of operating system e.g. `Android`. |
-| os_timezone | Client operating system timezone e.g. `Europe/London`. |
-| start_tstamp | The `derived_tstamp` denoting the time when the event started. |
-| end_tstamp | The `derived_tstamp` denoting the time when the last media player event belonging to the specific level of aggregation (e.g.: page_view by media) started. |
-| play_time_sec | Estimated duration of play in seconds. It is calculated using the percent_progress events that are fired during play. In case such an event is fired, it is assumed that the total section of the media in between the previous and current percent_progress is played through, even if the user seeks to another point in time within the audio / video. The more often these events are tracked (e.g. every 5% of the media's length) the more accurate the calculation becomes. |
-| play_time_sec_muted | Calculated duration of muted play in seconds. It is based on the percent_progress event and whether the user played it on mute during this event or not. |
-| is_played | Pageviews with at least one play event. |
-| is_valid_play | A boolean value to show whether the duration of the play (`play_time_sec`) is bigger than or equal to the variable given in `snowplow__valid_play_sec` (defaulted to 30). |
-| is_complete_play | A boolean value to show whether the total percentage played is bigger than or equal to the `snowplow__complete_play_rate` (defaulted to 0.99). |
-| avg_playback_rate | Average playback rate (1 is normal speed). |
-| retention_rate | The maximum percent progress reached before any seek event. |
-| seeks | The count of seek events within a certain aggregation level. The seek event occurs when a user moves/skips to a new position in the media content. |
-| percent_progress_reached | An array of percent progresses reached by the user while playing the media. In case the same percentprogress event was fired during the same page_view (e.g. due to seeks to rewatch part of the video) the % is added to the array again. e.g. in case of percent_progress_reached = [10, 25, 25, 50, 75] the user replayed part of the media so that the percentprogress event fired twice at the 25% mark. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. | text |
+| page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. | text |
+| media_label | The optional, human readable name given to tracked media content. | text |
+| domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. | text |
+| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. | number |
+| media_type | The type of media content: video or audio. | text |
+| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. | text |
+| page_referrer | URL of the referrer e.g. `http://www.referrer.com`. | text |
+| page_url | The page URL e.g. `http://www.example.com`. | text |
+| source_url | The url which shows the source of the media content. For YouTube it is the `url` context field, for HTML5 it is the `source_url` field. | text |
+| geo_region_name | Visitor region name e.g. `Florida`. | text |
+| br_name | Browser name e.g. `Firefox 12`. | text |
+| dvce_type | Type of device e.g. `Computer`. | text |
+| os_name | Name of operating system e.g. `Android`. | text |
+| os_timezone | Client operating system timezone e.g. `Europe/London`. | text |
+| start_tstamp | The `derived_tstamp` denoting the time when the event started. | timestamp_ntz |
+| end_tstamp | The `derived_tstamp` denoting the time when the last media player event belonging to the specific level of aggregation (e.g.: page_view by media) started. | timestamp_ntz |
+| play_time_sec | Estimated duration of play in seconds. It is calculated using the percent_progress events that are fired during play. In case such an event is fired, it is assumed that the total section of the media in between the previous and current percent_progress is played through, even if the user seeks to another point in time within the audio / video. The more often these events are tracked (e.g. every 5% of the media's length) the more accurate the calculation becomes. | number |
+| play_time_sec_muted | Calculated duration of muted play in seconds. It is based on the percent_progress event and whether the user played it on mute during this event or not. | number |
+| is_played | Pageviews with at least one play event. | boolean |
+| is_valid_play | A boolean value to show whether the duration of the play (`play_time_sec`) is bigger than or equal to the variable given in `snowplow__valid_play_sec` (defaulted to 30). | boolean |
+| is_complete_play | A boolean value to show whether the total percentage played is bigger than or equal to the `snowplow__complete_play_rate` (defaulted to 0.99). | boolean |
+| avg_playback_rate | Average playback rate (1 is normal speed). | float |
+| retention_rate | The maximum percent progress reached before any seek event. | float |
+| seeks | The count of seek events within a certain aggregation level. The seek event occurs when a user moves/skips to a new position in the media content. | number |
+| percent_progress_reached | An array of percent progresses reached by the user while playing the media. In case the same percentprogress event was fired during the same page_view (e.g. due to seeks to rewatch part of the video) the % is added to the array again. e.g. in case of percent_progress_reached = [10, 25, 25, 50, 75] the user replayed part of the media so that the percentprogress event fired twice at the 25% mark. | text |
 </DbtDetails>
 
 <DbtDetails>
@@ -372,6 +376,8 @@ where d.duplicate_count = 1
 #### Description
 This staging table shows all media player events within the current incremental run and calculates play_time. It could be used in custom models for more in-depth time based calculations.
 
+**Type**: Table
+
 #### File Paths
 <Tabs groupId="dispatched_sql">
 <TabItem value="bigquery" label="bigquery" >
@@ -397,38 +403,38 @@ This staging table shows all media player events within the current incremental 
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| event_id | A UUID for each event e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. |
-| media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. |
-| media_label | The optional, human readable name given to tracked media content. |
-| play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. |
-| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. |
-| media_type | The type of media content: video or audio. |
-| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. |
-| page_referrer | URL of the referrer e.g. `http://www.referrer.com`. |
-| page_url | The page URL e.g. `http://www.example.com`. |
-| source_url | The url which shows the source of the media content. For YouTube it is the `url` context field, for HTML5 it is the `source_url` field. |
-| geo_region_name | Visitor region name e.g. `Florida`. |
-| br_name | Browser name e.g. `Firefox 12`. |
-| dvce_type | Type of device e.g. `Computer`. |
-| os_name | Name of operating system e.g. `Android`. |
-| os_timezone | Client operating system timezone e.g. `Europe/London`. |
-| event_type | The type of event generated by the media player. e.g. 'ended', 'paused', 'playing'. |
-| start_tstamp | The `derived_tstamp` denoting the time when the event started. |
-| player_current_time | The playback position of a specific media in seconds whenever a media player event is fired. Could be used in custom models for more detailed analytics or play time calculations. |
-| playback_rate | Playback rate (1 is normal speed). |
-| playback_quality | Depending on the player it is either the playback quality field or the resolution. |
-| percent_progress | The percent of the way through the media. It is based on either the percentprogress event that is fired at specific intervalls as defined during the tracker setup or the 'ended' event, which is equivalent to reaching 100% of the media's total duration (length). e.g. 25, meaning the user passed the 25% mark during play. It does not mean the user watched all the content in between two percentprogress marks, unless there is no seek events happening within the same page_view (`snowplow_media_player_base`). |
-| is_muted | If the media is muted during the event that is fired. |
-| play_time_sec | Estimated duration of play in seconds. It is calculated using the percent_progress events that are fired during play. In case such an event is fired, it is assumed that the total section of the media in between the previous and current percent_progress is played through, even if the user seeks to another point in time within the audio / video. The more often these events are tracked (e.g. every 5% of the media's length) the more accurate the calculation becomes. |
-| play_time_sec_muted | Calculated duration of muted play in seconds. It is based on the percent_progress event and whether the user played it on mute during this event or not. |
-| is_live | If the media is live. |
-| loop | If the video should restart after ending. |
-| volume | Volume percent. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. | text |
+| event_id | A UUID for each event e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. | text |
+| page_referrer | URL of the referrer e.g. `http://www.referrer.com`. | text |
+| page_url | The page URL e.g. `http://www.example.com`. | text |
+| media_label | The optional, human readable name given to tracked media content. | text |
+| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. | number |
+| geo_region_name | Visitor region name e.g. `Florida`. | text |
+| br_name | Browser name e.g. `Firefox 12`. | text |
+| dvce_type | Type of device e.g. `Computer`. | text |
+| os_name | Name of operating system e.g. `Android`. | text |
+| os_timezone | Client operating system timezone e.g. `Europe/London`. | text |
+| event_type | The type of event generated by the media player. e.g. 'ended', 'paused', 'playing'. | text |
+| start_tstamp | The `derived_tstamp` denoting the time when the event started. | timestamp_ntz |
+| player_current_time | The playback position of a specific media in seconds whenever a media player event is fired. Could be used in custom models for more detailed analytics or play time calculations. | float |
+| playback_rate | Playback rate (1 is normal speed). | number |
+| percent_progress | The percent of the way through the media. It is based on either the percentprogress event that is fired at specific intervalls as defined during the tracker setup or the 'ended' event, which is equivalent to reaching 100% of the media's total duration (length). e.g. 25, meaning the user passed the 25% mark during play. It does not mean the user watched all the content in between two percentprogress marks, unless there is no seek events happening within the same page_view (`snowplow_media_player_base`). | number |
+| is_muted | If the media is muted during the event that is fired. | boolean |
+| is_live | If the media is live. | text |
+| loop | If the video should restart after ending. | text |
+| volume | Volume percent. | text |
+| media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. | text |
+| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. | text |
+| source_url | The url which shows the source of the media content. For YouTube it is the `url` context field, for HTML5 it is the `source_url` field. | text |
+| media_type | The type of media content: video or audio. | text |
+| playback_quality | Depending on the player it is either the playback quality field or the resolution. | text |
+| play_time_sec | Estimated duration of play in seconds. It is calculated using the percent_progress events that are fired during play. In case such an event is fired, it is assumed that the total section of the media in between the previous and current percent_progress is played through, even if the user seeks to another point in time within the audio / video. The more often these events are tracked (e.g. every 5% of the media's length) the more accurate the calculation becomes. | number |
+| play_time_sec_muted | Calculated duration of muted play in seconds. It is based on the percent_progress event and whether the user played it on mute during this event or not. | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -1044,31 +1050,38 @@ with prep as (
 #### Description
 This derived table aggregates the pageview level interactions to show overall media stats.
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| media_id | The primary key of this table |
-| media_label | The optional, human readable name given to tracked media content. |
-| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. |
-| media_type | The type of media content: video or audio. |
-| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. |
-| play_time_min | Calculated duration of play in minutes. |
-| avg_play_time_min | Estimated average duration of plays in minutes. |
-| first_play | The `derived_tstamp` of the beginning of the first play of a media element. |
-| last_play | The `derived_tstamp` of the beginning of the last play of a media element. |
-| plays | The number of pageviews with plays of any duration. |
-| valid_plays | The sum of all media plays that exceeds the minimum media length set within the variable `snowplow__valid_play_sec`, it is defaulted to 30 (seconds). |
-| complete_plays | The number of plays where the total percentage played is bigger than or equal to the `snowplow__complete_play_rate`. Default is 0.99, meaning that 99% of the video being watched constitutes a complete play. |
-| impressions | The number of pageviews where a media content was rendered regardless of whether the media was actually played or not. |
-| avg_playback_rate | Average playback rate (1 is normal speed). |
-| play_rate | Total plays divided by impressions. Please note that as the base for media plays is pageview / media_id, in case the same video is played multiple times within the same pageview, it will still count as one play. |
-| completion_rate_by_plays | The number of complete plays divided by the number of pageviews with plays of any duration. |
-| avg_percent_played | Average of total play_time divided by the media duration. |
-| avg_retention_rate | The maximum percent progress reached before any seek event. |
-| last_base_tstamp | The start_tstamp of the last processed page_view across all media_ids to be used as a lower limit for subsequent incremental runs. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| media_id | The primary key of this table | text |
+| media_label | The optional, human readable name given to tracked media content. | text |
+| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. | number |
+| media_type | The type of media content: video or audio. | text |
+| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. | text |
+| play_time_min | Calculated duration of play in minutes. | float |
+| avg_play_time_min | Estimated average duration of plays in minutes. | float |
+| first_play | The `derived_tstamp` of the beginning of the first play of a media element. | timestamp_ntz |
+| last_play | The `derived_tstamp` of the beginning of the last play of a media element. | timestamp_ntz |
+| plays | The number of pageviews with plays of any duration. | number |
+| valid_plays | The sum of all media plays that exceeds the minimum media length set within the variable `snowplow__valid_play_sec`, it is defaulted to 30 (seconds). | number |
+| complete_plays | The number of plays where the total percentage played is bigger than or equal to the `snowplow__complete_play_rate`. Default is 0.99, meaning that 99% of the video being watched constitutes a complete play. | number |
+| impressions | The number of pageviews where a media content was rendered regardless of whether the media was actually played or not. | number |
+| avg_playback_rate | Average playback rate (1 is normal speed). | float |
+| play_rate | Total plays divided by impressions. Please note that as the base for media plays is pageview / media_id, in case the same video is played multiple times within the same pageview, it will still count as one play. | float |
+| completion_rate_by_plays | The number of complete plays divided by the number of pageviews with plays of any duration. | float |
+| avg_percent_played | Average of total play_time divided by the media duration. | number |
+| avg_retention_rate | The maximum percent progress reached before any seek event. | float |
+| last_base_tstamp | The start_tstamp of the last processed page_view across all media_ids to be used as a lower limit for subsequent incremental runs. | timestamp_ntz |
+| _10_percent_reached |   | number |
+| _25_percent_reached |   | number |
+| _50_percent_reached |   | number |
+| _75_percent_reached |   | number |
+| _100_percent_reached |   | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -1397,14 +1410,16 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 #### Description
 This helper table serves as a base to calculate percent_progress based fields as well as the play_time metrics (by calculating the weight attributed to a percent progress being reached).
 
+**Type**: Table
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| percent_progress | The percent of the way through the media. It is based on either the percentprogress event that is fired at specific intervalls as defined during the tracker setup or the 'ended' event, which is equivalent to reaching 100% of the media's total duration (length). e.g. 25, meaning the user passed the 25% mark during play. It does not mean the user watched all the content in between two percentprogress marks, unless there is no seek events happening within the same page_view (`snowplow_media_player_base`). |
-| weight_rate | The weight given for each percent progress reached used for the calculation of the play_time_sec_estimated field. It is based on the difference of the current and preciding percent_progress rate. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| percent_progress | The percent of the way through the media. It is based on either the percentprogress event that is fired at specific intervalls as defined during the tracker setup or the 'ended' event, which is equivalent to reaching 100% of the media's total duration (length). e.g. 25, meaning the user passed the 25% mark during play. It does not mean the user watched all the content in between two percentprogress marks, unless there is no seek events happening within the same page_view (`snowplow_media_player_base`). | number |
+| weight_rate | The weight given for each percent progress reached used for the calculation of the play_time_sec_estimated field. It is based on the difference of the current and preciding percent_progress rate. | number |
 </DbtDetails>
 
 <DbtDetails>
@@ -1496,40 +1511,42 @@ from weight_calc
 #### Description
 This view removes impressions from the derived snowplow_media_base table for showing pageview level media play events.
 
+**Type**: View
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. |
-| page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. |
-| media_label | The optional, human readable name given to tracked media content. |
-| domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
-| domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. |
-| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. |
-| media_type | The type of media content: video or audio. |
-| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. |
-| page_referrer | URL of the referrer e.g. `http://www.referrer.com`. |
-| page_url | The page URL e.g. `http://www.example.com`. |
-| source_url | The url which shows the source of the media content. For YouTube it is the `url` context field, for HTML5 it is the `source_url` field. |
-| geo_region_name | Visitor region name e.g. `Florida`. |
-| br_name | Browser name e.g. `Firefox 12`. |
-| dvce_type | Type of device e.g. `Computer`. |
-| os_name | Name of operating system e.g. `Android`. |
-| os_timezone | Client operating system timezone e.g. `Europe/London`. |
-| start_tstamp | The `derived_tstamp` denoting the time when the event started. |
-| end_tstamp | The `derived_tstamp` denoting the time when the last media player event belonging to the specific level of aggregation (e.g.: page_view by media) started. |
-| play_time_sec | Estimated duration of play in seconds. It is calculated using the percent_progress events that are fired during play. In case such an event is fired, it is assumed that the total section of the media in between the previous and current percent_progress is played through, even if the user seeks to another point in time within the audio / video. The more often these events are tracked (e.g. every 5% of the media's length) the more accurate the calculation becomes. |
-| play_time_sec_muted | Calculated duration of muted play in seconds. It is based on the percent_progress event and whether the user played it on mute during this event or not. |
-| is_played | Pageviews with at least one play event. |
-| is_valid_play | A boolean value to show whether the duration of the play (`play_time_sec`) is bigger than or equal to the variable given in `snowplow__valid_play_sec` (defaulted to 30). |
-| is_complete_play | A boolean value to show whether the total percentage played is bigger than or equal to the `snowplow__complete_play_rate` (defaulted to 0.99). |
-| avg_playback_rate | Average playback rate (1 is normal speed). |
-| retention_rate | The maximum percent progress reached before any seek event. |
-| seeks | The count of seek events within a certain aggregation level. The seek event occurs when a user moves/skips to a new position in the media content. |
-| percent_progress_reached | An array of percent progresses reached by the user while playing the media. In case the same percentprogress event was fired during the same page_view (e.g. due to seeks to rewatch part of the video) the % is added to the array again. e.g. in case of percent_progress_reached = [10, 25, 25, 50, 75] the user replayed part of the media so that the percentprogress event fired twice at the 25% mark. |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. | text |
+| page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. | text |
+| media_label | The optional, human readable name given to tracked media content. | text |
+| domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
+| domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. | text |
+| duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. | number |
+| media_type | The type of media content: video or audio. | text |
+| media_player_type | The combination of schema_name and schema_vendor coming from the specific media player context e.g. com.youtube-youtube, org.whatwg-media_element. | text |
+| page_referrer | URL of the referrer e.g. `http://www.referrer.com`. | text |
+| page_url | The page URL e.g. `http://www.example.com`. | text |
+| source_url | The url which shows the source of the media content. For YouTube it is the `url` context field, for HTML5 it is the `source_url` field. | text |
+| geo_region_name | Visitor region name e.g. `Florida`. | text |
+| br_name | Browser name e.g. `Firefox 12`. | text |
+| dvce_type | Type of device e.g. `Computer`. | text |
+| os_name | Name of operating system e.g. `Android`. | text |
+| os_timezone | Client operating system timezone e.g. `Europe/London`. | text |
+| start_tstamp | The `derived_tstamp` denoting the time when the event started. | timestamp_ntz |
+| end_tstamp | The `derived_tstamp` denoting the time when the last media player event belonging to the specific level of aggregation (e.g.: page_view by media) started. | timestamp_ntz |
+| play_time_sec | Estimated duration of play in seconds. It is calculated using the percent_progress events that are fired during play. In case such an event is fired, it is assumed that the total section of the media in between the previous and current percent_progress is played through, even if the user seeks to another point in time within the audio / video. The more often these events are tracked (e.g. every 5% of the media's length) the more accurate the calculation becomes. | number |
+| play_time_sec_muted | Calculated duration of muted play in seconds. It is based on the percent_progress event and whether the user played it on mute during this event or not. | number |
+| is_played | Pageviews with at least one play event. | boolean |
+| is_valid_play | A boolean value to show whether the duration of the play (`play_time_sec`) is bigger than or equal to the variable given in `snowplow__valid_play_sec` (defaulted to 30). | boolean |
+| is_complete_play | A boolean value to show whether the total percentage played is bigger than or equal to the `snowplow__complete_play_rate` (defaulted to 0.99). | boolean |
+| avg_playback_rate | Average playback rate (1 is normal speed). | float |
+| retention_rate | The maximum percent progress reached before any seek event. | float |
+| seeks | The count of seek events within a certain aggregation level. The seek event occurs when a user moves/skips to a new position in the media content. | number |
+| percent_progress_reached | An array of percent progresses reached by the user while playing the media. In case the same percentprogress event was fired during the same page_view (e.g. due to seeks to rewatch part of the video) the % is added to the array again. e.g. in case of percent_progress_reached = [10, 25, 25, 50, 75] the user replayed part of the media so that the percentprogress event fired twice at the 25% mark. | text |
 </DbtDetails>
 
 <DbtDetails>

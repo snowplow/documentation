@@ -28,6 +28,15 @@ This page is auto-generated from our dbt packages, some information may be incom
 #### Description
 Number of sessions per channel, campaign, source and medium
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="snowflake" label="snowflake" >
+
+`models/snowflake/snowplow_fractribution_channel_counts.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
@@ -106,6 +115,15 @@ ORDER BY channel, number_of_sessions DESC
 #### Description
 This model does not currently have a description.
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="snowflake" label="snowflake" >
+
+`models/snowflake/snowplow_fractribution_channel_spend.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Code</summary>
@@ -159,14 +177,23 @@ This model does not currently have a description.
 #### Description
 Each conversion and associated revenue per customer_id
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="snowflake" label="snowflake" >
+
+`models/snowflake/snowplow_fractribution_conversions_by_customer_id.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
 |--------------|-------------|
-| customerId | Identifier for the customer, 'f' prefixed when domain_userid is used, 'u' prefixed for when user_id is used (logged in?) |
-| conversionTimestamp | UTC timestamp for the conversion |
+| customerid | Identifier for the customer, 'f' prefixed when domain_userid is used, 'u' prefixed for when user_id is used (logged in?) |
+| conversiontimestamp | UTC timestamp for the conversion |
 | revenue | Revenue (dollars / cents) for the conversion |
 </DbtDetails>
 
@@ -258,15 +285,24 @@ WHERE
 #### Description
 For each unique path, a summary of associated conversions, non conversions and revenue
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="snowflake" label="snowflake" >
+
+`models/snowflake/snowplow_fractribution_path_summary.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
 |--------------|-------------|
-| transformedPath | > delimited path summary |
+| transformedpath | > delimited path summary |
 | conversions | Count of conversions for this path |
-| nonConversions | Count of non-conversions for path |
+| nonconversions | Count of non-conversions for path |
 | revenue | Revenue for the given path |
 | direct_display_other_organic_search_paid_search_referral | These columns may be created dynamically... |
 </DbtDetails>
@@ -338,17 +374,26 @@ FULL JOIN PathsToNonConversion
 #### Description
 Customer id and the the paths the customer has followed that have lead to conversion
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="snowflake" label="snowflake" >
+
+`models/snowflake/snowplow_fractribution_paths_to_conversion.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
 |--------------|-------------|
-| customerId | Id for the customer (identified or cookie) |
-| conversionTimestamp | UTC timestamp for the conversion event |
+| customerid | Id for the customer (identified or cookie) |
+| conversiontimestamp | UTC timestamp for the conversion event |
 | revenue | Revenue associated with the conversion |
 | path | Path to conversion (> delimited) |
-| transformedPath | Transformations applied to "path" above |
+| transformedpath | Transformations applied to "path" above |
 </DbtDetails>
 
 <DbtDetails>
@@ -433,15 +478,24 @@ GROUP BY
 #### Description
 Customer id and the the paths the customer has followed that have not lead to conversion
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="snowflake" label="snowflake" >
+
+`models/snowflake/snowplow_fractribution_paths_to_non_conversion.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
 |--------------|-------------|
-| customerId | Id for the customer (identified or cookie) |
+| customerid | Id for the customer (identified or cookie) |
 | path | Path to conversion (> delimited) |
-| transformedPath | Transformations applied to "path" above |
+| transformedpath | Transformations applied to "path" above |
 </DbtDetails>
 
 <DbtDetails>
@@ -537,16 +591,25 @@ GROUP BY NonConversions.customerId
 Channels per session by customer id, yields one row per session unless consider_intrasession_channels is true
 
 
+#### File Paths
+<Tabs groupId="dispatched_sql">
+<TabItem value="snowflake" label="snowflake" >
+
+`models/snowflake/snowplow_fractribution_sessions_by_customer_id.sql`
+</TabItem>
+</Tabs>
+
+
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
 |--------------|-------------|
-| customerId | Customer id |
-| visitStartTimestamp | UTC timestamp for the start of the session |
+| customerid | Customer id |
+| visitstarttimestamp | UTC timestamp for the start of the session |
 | channel | Channel |
-| referralPath | Referall path for the session |
+| referralpath | Referall path for the session |
 | campaign | Marketing campaign |
 | source | Marketing source |
 | medium | Marketing medium |

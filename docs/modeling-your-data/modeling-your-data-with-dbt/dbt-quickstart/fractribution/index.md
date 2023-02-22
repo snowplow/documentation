@@ -89,21 +89,21 @@ Please note that some of the libraries are adapter specific. These are listed in
 <Tabs groupId="warehouse">
 <TabItem value="bigquery" label="BigQuery" default>
 
-- `absl-py`==`1.2.0` 
+- `absl-py`==`1.2.0`
 - `google-cloud-bigquery`==`3.5.0`
 
 </TabItem>
 <TabItem value="databricks" label="Databricks">
 
-- `absl-py`==`1.2.0`, 
-- `databricks-sql-connector`==`2.1.0` 
-- `pandas` 
+- `absl-py`==`1.2.0`,
+- `databricks-sql-connector`==`2.1.0`
+- `pandas`
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
 
-- `absl-py`==`1.2.0`, 
-- `snowflake-snowpark-python`==`0.11.0` 
+- `absl-py`==`1.2.0`,
+- `snowflake-snowpark-python`==`0.11.0`
 
 </TabItem>
 </Tabs>
@@ -196,13 +196,13 @@ python main_snowplow_snowflake.py --conversion_window_start_date '2022-06-03' --
 <details>
 <summary>Run python with docker</summary>
 
-#### I. Pull the docker image ​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>  
+#### I. Pull the docker image ​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>
 
-You can pull the docker image from Docker Hub: `docker pull snowplow/fractribution`
+You can pull the latest docker image from Docker Hub: `docker pull snowplow/fractribution:latest`. Alternatively, you can pull it based on the package version: `docker pull snowplow/fractribution:0.2.0`
 
 #### II. Set the environment variables
 
-Add the necessary environment variables to an environment file, e.g. `configs.env`. The necessary variables will differ depending on the data warehouse you are using. The easiest way to determine the variables you need to set is to check the Dockerfile in the fractribution dbt package: `dbt-snowplow-fractribution/utils/Dockerfile`.  
+Add the necessary environment variables to an environment file, e.g. `configs.env`. The necessary variables will differ depending on the data warehouse you are using. The easiest way to determine the variables you need to set is to check the Dockerfile in the fractribution dbt package: `dbt-snowplow-fractribution/utils/Dockerfile`. Please note that in case of BigQuery, the `google_application_credentials` env var is not needed for Docker as you mount this as a volume at run time.
 
 Below is an example of the `config.env` file (set up for Snowflake). You do not need to specify the attribution model if using the default, `shapley`:
 ```
@@ -222,9 +222,9 @@ warehouse=snowflake
 
 #### III. Run the docker container
 
-Run the docker container : 
+Run the docker container :
 
-If you are using Bigquery, 
+If you are using Bigquery,
 
 
 <Tabs groupId="warehouse">
@@ -232,21 +232,21 @@ If you are using Bigquery,
 
 With BigQuery you need to mount your service account keyfile when running the docker image
 ```
-docker run --rm --env-file /path/to/env/file/configs.env -v /path/to/yourkeyfile.json:/keyfile.json -it snowplow/fractribution
+docker run --rm --env-file /path/to/env/file/configs.env -v /path/to/yourkeyfile.json:/keyfile.json -it snowplow/fractribution:latest
 ```
 
 </TabItem>
 <TabItem value="databricks" label="Databricks">
 
 ```
-docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribution
+docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribution:latest
 ```
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
 
 ```
-docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribution
+docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribution:latest
 ```
 
 </TabItem>

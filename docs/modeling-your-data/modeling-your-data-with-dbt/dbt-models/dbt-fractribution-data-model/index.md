@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="fractribution"></Badges> ​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>  
+<Badges badgeType="dbt-package Release" pkg="fractribution"></Badges> ​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>
 
 
 # Snowplow Fractribution Package
@@ -51,6 +51,9 @@ This script will generate and populate the following three additional tables:
 ### Intra-session Channels
 ​
 In Google Analytics (Universal Analytics) a new session is started if a campaign source changes (referrer of campaign tagged URL) which is used in Fractribution. Snowplow utilizes activity based sessionization, rather than campaign based sessionization. Setting `consider_intrasession_channels` to `false` will take only the campaign information from the first page view in a given Snowplow session, and not give credit to other channels in the converting session if they occur after the initial page view.
+
+### Filter unwanted channels
+You can specify a list of channels for the variable `snowplow__channels_to_exclude` to exclude them from analysis (if kept empty all channels are kept). For example, users may want to exclude the 'Direct' channel from the analysis.
 ​
  ### Path Transform Options
 ​
@@ -89,15 +92,15 @@ import FractributionDbtMacros from "@site/docs/reusable/fractribution-dbt-macros
 <FractributionDbtMacros/>
 ```
 
-### Environment Variables 
+### Environment Variables
 For the script or docker container to run you need to set some environment variables that can be accessed to connect to your warehouse. These variables vary by warehouse. If you are using Docker, it can be easier to set these in a file that you reference when you run the container. See the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) for detailed running information.
 
 <Tabs groupId="warehouse">
 <TabItem value="bigquery" label="BigQuery" default>
 
 - `project_id`: Project id of your BigQuery warehouse
-- `bigquery_dataset`: Dataset for your derived tables  
-For the python script only (for Docker you mount this as a volume at run time): 
+- `bigquery_dataset`: Dataset for your derived tables
+For the python script only (for Docker you mount this as a volume at run time):
 - `google_application_credentials`: Google Service Account JSON file
 
 </TabItem>

@@ -30,7 +30,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-media-player/blob/main/macros/get_percentage_boundaries.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-media-player/blob/main/macros/get_percentage_boundaries.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_percentage_boundaries(tracked_boundaries) %}

@@ -282,10 +282,12 @@ class dbt_macro(dbt_base):
         # Add in the sql if there is any
         if sql != '':
             source_url = get_source_url(key, self.original_file_path)
+            markdown.extend(['<DbtDetails>', f'<summary>Code</summary>', ''])
             if source_url is not None:
-                markdown.extend(['<DbtDetails>', f'<summary>Code <a href="{source_url}">(source)</a></summary>', ''])
+                link = f'<center><b><i><a href="{source_url}">Source</a></i></b></center>'
             else:
-                markdown.extend(['<DbtDetails>', f'<summary>Code</summary>', ''])
+                link = ''
+            markdown.extend([link, ''])
             if not dispatched_sql:
                 markdown.extend(['```jinja2',
                                 sql,

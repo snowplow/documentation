@@ -30,7 +30,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_web_delete_from_manifest(models) %}
@@ -55,11 +57,19 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to determine if a full-refresh is allowed (depending on the environment), using the `snowplow__allow_refresh` variable.
+- 
+
+
+#### Returns
+`snowplow__allow_refresh` if environment is not `dev`, `none` otherwise.
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/allow_refresh.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/allow_refresh.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -107,10 +117,10 @@ This macro does not currently have a description.
 </Tabs>
 </DbtDetails>
 
-### Filter Bots {#macro.snowplow_web.filter_bots}
+### Consent Fields {#macro.snowplow_web.consent_fields}
 
 <DbtDetails><summary>
-<code>macros/filter_bots.sql</code>
+<code>macros/bigquery/consent_fields.sql</code>
 </summary>
 
 #### Description
@@ -118,14 +128,122 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/filter_bots.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/bigquery/consent_fields.sql">Source</a></i></b></center>
+
+```jinja2
+{% macro consent_fields() %}
+
+  {% set consent_fields = [
+      {'field': 'event_type', 'dtype': 'string'},
+      {'field': 'basis_for_processing', 'dtype': 'string'},
+      {'field': 'consent_url', 'dtype': 'string'},
+      {'field': 'consent_version', 'dtype': 'string'},
+      {'field': 'consent_scopes', 'dtype': 'string'},
+      {'field': 'domains_applied', 'dtype': 'string'},
+      {'field': 'gdpr_applies', 'dtype': 'string'}
+    ] %}
+
+  {{ return(consent_fields) }}
+
+{% endmacro %}
+```
+
+</DbtDetails>
+
+
+#### Referenced By
+<Tabs groupId="reference">
+<TabItem value="model" label="Models" default>
+
+- [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Filter Bots {#macro.snowplow_web.filter_bots}
+
+<DbtDetails><summary>
+<code>macros/filter_bots.sql</code>
+</summary>
+
+#### Description
+This macro is used to generate a warehouse specific filter for the `useragent` field to remove bots from processing, or to overwrite for custom filtering. The filter excludes any of the following in the string:
+- bot
+- crawl
+- slurp
+- spider
+- archiv
+- spinn
+- sniff
+- seo
+- audit
+- survey
+- pingdom
+- worm
+- capture
+- (browser|screen)shots
+- analyz
+- index
+- thumb
+- check
+- facebook
+- PingdomBot
+- PhantomJS
+- YandexBot
+- Twitterbot
+- a_archiver
+- facebookexternalhit
+- Bingbot
+- BingPreview
+- Googlebot
+- Baiduspider
+- 360(Spider|User-agent)
+- semalt
+
+
+
+#### Arguments
+- `table_alias` *(string)*: (Optional) the table alias to identify the useragent column from. Default none
+
+#### Returns
+
+A filter on `useragent` to exclude those with strings matching the above list.
+
+#### Usage
+
+```sql
+select
+...
+from
+...
+where 1=1
+filter_bots()
+
+-- returns (snowflake)
+select
+...
+from
+...
+where 1=1
+and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt).*')
+```
+
+
+#### Details
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/filter_bots.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
 
 ```jinja2
-{% macro filter_bots() %}
-  {{ return(adapter.dispatch('filter_bots', 'snowplow_web')()) }}
+{% macro filter_bots(table_alias = none) %}
+  {{ return(adapter.dispatch('filter_bots', 'snowplow_web')(table_alias)) }}
 {%- endmacro -%}
 
 
@@ -134,40 +252,32 @@ This macro does not currently have a description.
 <TabItem value="bigquery" label="bigquery">
 
 ```jinja2
-{% macro bigquery__filter_bots() %}
-  and not regexp_contains(ev.useragent, '(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)')
-{% endmacro %}
-```
-</TabItem>
-<TabItem value="databricks" label="databricks">
-
-```jinja2
-{% macro databricks__filter_bots() %}
-  and not rlike(ev.useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt).*')
+{% macro bigquery__filter_bots(table_alias = none) %}
+  and not regexp_contains({% if table_alias %}{{table_alias~'.'}}{% endif %}useragent, '(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)')
 {% endmacro %}
 ```
 </TabItem>
 <TabItem value="default" label="default">
 
 ```jinja2
-{% macro default__filter_bots() %}
-  and ev.useragent not similar to '%(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)%'
-{% endmacro %}
-```
-</TabItem>
-<TabItem value="redshift" label="redshift">
-
-```jinja2
-{% macro redshift__filter_bots() %}
-  and ev.useragent not similar to '%(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)%'
+{% macro default__filter_bots(table_alias = none) %}
+  and {% if table_alias %}{{table_alias~'.'}}{% endif %}useragent not similar to '%(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)%'
 {% endmacro %}
 ```
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
 ```jinja2
-{% macro snowflake__filter_bots() %}
-  and not rlike(ev.useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt).*')
+{% macro snowflake__filter_bots(table_alias = none) %}
+  and not rlike({% if table_alias %}{{table_alias~'.'}}{% endif %}useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt).*')
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="spark" label="spark">
+
+```jinja2
+{% macro spark__filter_bots(table_alias = none) %}
+  and not rlike({% if table_alias %}{{table_alias~'.'}}{% endif %}useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt).*')
 {% endmacro %}
 ```
 </TabItem>
@@ -182,6 +292,513 @@ This macro does not currently have a description.
 
 - [model.snowplow_web.snowplow_web_page_view_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_view_events)
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Get Iab Context Fields {#macro.snowplow_web.get_iab_context_fields}
+
+<DbtDetails><summary>
+<code>macros/get_context_fields.sql</code>
+</summary>
+
+#### Description
+This macro is used to extract the fields from the iab enrichment context for each warehouse.
+- 
+
+
+#### Arguments
+- `table_prefix` *(string)*: (Optional) Table alias to prefix the column selection with. Default none
+
+#### Returns
+
+The sql to extract the columns from the iab context, or these columns as nulls.
+
+
+#### Details
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/get_context_fields.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="Raw" default>
+
+```jinja2
+{% macro get_iab_context_fields(table_prefix = none) %}
+    {{ return(adapter.dispatch('get_iab_context_fields', 'snowplow_web')(table_prefix)) }}
+{%- endmacro -%}
+
+
+```
+</TabItem>
+<TabItem value="bigquery" label="bigquery">
+
+```jinja2
+{% macro bigquery__get_iab_context_fields(table_prefix = none) %}
+    {% if execute %}
+        {% do exceptions.raise_compiler_error('get_iab_context_fields is not defined for bigquery, please use snowplow_utils.get_optional_fields instead') %}
+    {% endif %}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="postgres" label="postgres">
+
+```jinja2
+{% macro postgres__get_iab_context_fields(table_prefix = none) %}
+    {%- if var('snowplow__enable_iab', false) -%}
+        {% if table_prefix %}table_prefix.{% endif %}category,
+        {% if table_prefix %}table_prefix.{% endif %}primary_impact,
+        {% if table_prefix %}table_prefix.{% endif %}reason,
+        {% if table_prefix %}table_prefix.{% endif %}spider_or_robot
+    {%- else -%}
+        cast(null as {{ type_string() }}) as category,
+        cast(null as {{ type_string() }}) as primary_impact,
+        cast(null as {{ type_string() }}) as reason,
+        cast(null as boolean) as spider_or_robot
+    {%- endif -%}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="snowflake" label="snowflake">
+
+```jinja2
+{% macro snowflake__get_iab_context_fields(table_prefix = none) %}
+
+    {%- if var('snowplow__enable_iab', false) %}
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_iab_snowplow_spiders_and_robots_1[0]:category::VARCHAR as category,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_iab_snowplow_spiders_and_robots_1[0]:primaryImpact::VARCHAR as primary_impact,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_iab_snowplow_spiders_and_robots_1[0]:reason::VARCHAR as reason,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_iab_snowplow_spiders_and_robots_1[0]:spiderOrRobot::BOOLEAN as spider_or_robot
+    {%- else -%}
+        cast(null as {{ type_string() }}) as category,
+        cast(null as {{ type_string() }}) as primary_impact,
+        cast(null as {{ type_string() }}) as reason,
+        cast(null as boolean) as spider_or_robot
+    {%- endif -%}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="spark" label="spark">
+
+```jinja2
+{% macro spark__get_iab_context_fields(table_prefix = none) %}
+    {%- if var('snowplow__enable_iab', false) -%}
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_iab_snowplow_spiders_and_robots_1[0].category::STRING as category,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_iab_snowplow_spiders_and_robots_1[0]:primaryImpact::STRING as primary_impact,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_iab_snowplow_spiders_and_robots_1[0]:reason::STRING as reason,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_iab_snowplow_spiders_and_robots_1[0]:spiderOrRobot::BOOLEAN as spider_or_robot
+    {%- else -%}
+        cast(null as {{ type_string() }}) as category,
+        cast(null as {{ type_string() }}) as primary_impact,
+        cast(null as {{ type_string() }}) as reason,
+        cast(null as boolean) as spider_or_robot
+    {%- endif -%}
+{% endmacro %}
+```
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+#### Depends On
+- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+
+
+#### Referenced By
+<Tabs groupId="reference">
+<TabItem value="model" label="Models" default>
+
+- [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Get Ua Context Fields {#macro.snowplow_web.get_ua_context_fields}
+
+<DbtDetails><summary>
+<code>macros/get_context_fields.sql</code>
+</summary>
+
+#### Description
+This macro is used to extract the fields from the ua enrichment context for each warehouse.
+- 
+
+
+#### Arguments
+- `table_prefix` *(string)*: (Optional) Table alias to prefix the column selection with. Default none
+
+#### Returns
+
+The sql to extract the columns from the ua context, or these columns as nulls.
+
+
+#### Details
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/get_context_fields.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="Raw" default>
+
+```jinja2
+{% macro get_ua_context_fields(table_prefix = none) %}
+    {{ return(adapter.dispatch('get_ua_context_fields', 'snowplow_web')(table_prefix)) }}
+{%- endmacro -%}
+
+
+```
+</TabItem>
+<TabItem value="bigquery" label="bigquery">
+
+```jinja2
+{% macro bigquery__get_ua_context_fields(table_prefix = none) %}
+    {% if execute %}
+        {% do exceptions.raise_compiler_error('get_ua_context_fields is not defined for bigquery, please use snowplow_utils.get_optional_fields instead') %}
+    {% endif %}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="postgres" label="postgres">
+
+```jinja2
+{% macro postgres__get_ua_context_fields(table_prefix = none) %}
+    {%- if var('snowplow__enable_ua', false) -%}
+        {% if table_prefix %}table_prefix.{% endif %}useragent_family,
+        {% if table_prefix %}table_prefix.{% endif %}useragent_major,
+        {% if table_prefix %}table_prefix.{% endif %}useragent_minor,
+        {% if table_prefix %}table_prefix.{% endif %}useragent_patch,
+        {% if table_prefix %}table_prefix.{% endif %}useragent_version,
+        {% if table_prefix %}table_prefix.{% endif %}os_family,
+        {% if table_prefix %}table_prefix.{% endif %}os_major,
+        {% if table_prefix %}table_prefix.{% endif %}os_minor,
+        {% if table_prefix %}table_prefix.{% endif %}os_patch,
+        {% if table_prefix %}table_prefix.{% endif %}os_patch_minor,
+        {% if table_prefix %}table_prefix.{% endif %}os_version,
+        {% if table_prefix %}table_prefix.{% endif %}device_family
+    {%- else -%}
+        cast(null as {{ type_string() }}) as useragent_family,
+        cast(null as {{ type_string() }}) as useragent_major,
+        cast(null as {{ type_string() }}) as useragent_minor,
+        cast(null as {{ type_string() }}) as useragent_patch,
+        cast(null as {{ type_string() }}) as useragent_version,
+        cast(null as {{ type_string() }}) as os_family,
+        cast(null as {{ type_string() }}) as os_major,
+        cast(null as {{ type_string() }}) as os_minor,
+        cast(null as {{ type_string() }}) as os_patch,
+        cast(null as {{ type_string() }}) as os_patch_minor,
+        cast(null as {{ type_string() }}) as os_version,
+        cast(null as {{ type_string() }}) as device_family
+    {%- endif -%}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="snowflake" label="snowflake">
+
+```jinja2
+{% macro snowflake__get_ua_context_fields(table_prefix = none) %}
+    {%- if var('snowplow__enable_ua', false) -%}
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentFamily::VARCHAR as useragent_family,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentMajor::VARCHAR as useragent_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentMinor::VARCHAR as useragent_minor,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentPatch::VARCHAR as useragent_patch,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentVersion::VARCHAR as useragent_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osFamily::VARCHAR as os_family,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osMajor::VARCHAR as os_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osMinor::VARCHAR as os_minor,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osPatch::VARCHAR as os_patch,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osPatchMinor::VARCHAR as os_patch_minor,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osVersion::VARCHAR as os_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:deviceFamily::VARCHAR as device_family
+    {%- else -%}
+        cast(null as {{ type_string() }}) as useragent_family,
+        cast(null as {{ type_string() }}) as useragent_major,
+        cast(null as {{ type_string() }}) as useragent_minor,
+        cast(null as {{ type_string() }}) as useragent_patch,
+        cast(null as {{ type_string() }}) as useragent_version,
+        cast(null as {{ type_string() }}) as os_family,
+        cast(null as {{ type_string() }}) as os_major,
+        cast(null as {{ type_string() }}) as os_minor,
+        cast(null as {{ type_string() }}) as os_patch,
+        cast(null as {{ type_string() }}) as os_patch_minor,
+        cast(null as {{ type_string() }}) as os_version,
+        cast(null as {{ type_string() }}) as device_family
+    {% endif %}
+
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="spark" label="spark">
+
+```jinja2
+{% macro spark__get_ua_context_fields(table_prefix = none) %}
+    {%- if var('snowplow__enable_ua', false) -%}
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentFamily::STRING as useragent_family,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentMajor::STRING as useragent_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentMinor::STRING as useragent_minor,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentPatch::STRING as useragent_patch,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:useragentVersion::STRING as useragent_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osFamily::STRING as os_family,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osMajor::STRING as os_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osMinor::STRING as os_minor,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osPatch::STRING as os_patch,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osPatchMinor::STRING as os_patch_minor,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:osVersion::STRING as os_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_com_snowplowanalytics_snowplow_ua_parser_context_1[0]:deviceFamily::STRING as device_family
+    {%- else -%}
+        cast(null as {{ type_string() }}) as useragent_family,
+        cast(null as {{ type_string() }}) as useragent_major,
+        cast(null as {{ type_string() }}) as useragent_minor,
+        cast(null as {{ type_string() }}) as useragent_patch,
+        cast(null as {{ type_string() }}) as useragent_version,
+        cast(null as {{ type_string() }}) as os_family,
+        cast(null as {{ type_string() }}) as os_major,
+        cast(null as {{ type_string() }}) as os_minor,
+        cast(null as {{ type_string() }}) as os_patch,
+        cast(null as {{ type_string() }}) as os_patch_minor,
+        cast(null as {{ type_string() }}) as os_version,
+        cast(null as {{ type_string() }}) as device_family
+    {%- endif -%}
+{% endmacro %}
+```
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+#### Depends On
+- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+
+
+#### Referenced By
+<Tabs groupId="reference">
+<TabItem value="model" label="Models" default>
+
+- [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Get Yauaa Context Fields {#macro.snowplow_web.get_yauaa_context_fields}
+
+<DbtDetails><summary>
+<code>macros/get_context_fields.sql</code>
+</summary>
+
+#### Description
+This macro is used to extract the fields from the yauaa enrichment context for each warehouse.
+- 
+
+
+#### Arguments
+- `table_prefix` *(string)*: (Optional) Table alias to prefix the column selection with. Default none
+
+#### Returns
+
+The sql to extract the columns from the yauaa context, or these columns as nulls.
+
+
+#### Details
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/get_context_fields.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="Raw" default>
+
+```jinja2
+{% macro get_yauaa_context_fields(table_prefix = none) %}
+    {{ return(adapter.dispatch('get_yauaa_context_fields', 'snowplow_web')(table_prefix)) }}
+{%- endmacro -%}
+
+
+```
+</TabItem>
+<TabItem value="bigquery" label="bigquery">
+
+```jinja2
+{% macro bigquery__get_yauaa_context_fields(table_prefix = none) %}
+    {% if execute %}
+        {% do exceptions.raise_compiler_error('get_yauaa_context_fields is not defined for bigquery, please use snowplow_utils.get_optional_fields instead') %}
+    {% endif %}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="postgres" label="postgres">
+
+```jinja2
+{% macro postgres__get_yauaa_context_fields(table_prefix = none) %}
+    {%- if var('snowplow__enable_yauaa', false) -%}
+        {% if table_prefix %}table_prefix.{% endif %}device_class,
+        {% if table_prefix %}table_prefix.{% endif %}agent_class,
+        {% if table_prefix %}table_prefix.{% endif %}agent_name,
+        {% if table_prefix %}table_prefix.{% endif %}agent_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}agent_name_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}agent_version,
+        {% if table_prefix %}table_prefix.{% endif %}agent_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}device_brand,
+        {% if table_prefix %}table_prefix.{% endif %}device_name,
+        {% if table_prefix %}table_prefix.{% endif %}device_version,
+        {% if table_prefix %}table_prefix.{% endif %}layout_engine_class,
+        {% if table_prefix %}table_prefix.{% endif %}layout_engine_name,
+        {% if table_prefix %}table_prefix.{% endif %}layout_engine_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}layout_engine_name_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}layout_engine_version,
+        {% if table_prefix %}table_prefix.{% endif %}layout_engine_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}operating_system_class,
+        {% if table_prefix %}table_prefix.{% endif %}operating_system_name,
+        {% if table_prefix %}table_prefix.{% endif %}operating_system_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}operating_system_version
+    {%- else -%}
+        cast(null as {{ type_string() }}) as device_class,
+        cast(null as {{ type_string() }}) as agent_class,
+        cast(null as {{ type_string() }}) as agent_name,
+        cast(null as {{ type_string() }}) as agent_name_version,
+        cast(null as {{ type_string() }}) as agent_name_version_major,
+        cast(null as {{ type_string() }}) as agent_version,
+        cast(null as {{ type_string() }}) as agent_version_major,
+        cast(null as {{ type_string() }}) as device_brand,
+        cast(null as {{ type_string() }}) as device_name,
+        cast(null as {{ type_string() }}) as device_version,
+        cast(null as {{ type_string() }}) as layout_engine_class,
+        cast(null as {{ type_string() }}) as layout_engine_name,
+        cast(null as {{ type_string() }}) as layout_engine_name_version,
+        cast(null as {{ type_string() }}) as layout_engine_name_version_major,
+        cast(null as {{ type_string() }}) as layout_engine_version,
+        cast(null as {{ type_string() }}) as layout_engine_version_major,
+        cast(null as {{ type_string() }}) as operating_system_class,
+        cast(null as {{ type_string() }}) as operating_system_name,
+        cast(null as {{ type_string() }}) as operating_system_name_version,
+        cast(null as {{ type_string() }}) as operating_system_version
+    {%- endif -%}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="snowflake" label="snowflake">
+
+```jinja2
+{% macro snowflake__get_yauaa_context_fields(table_prefix = none) %}
+    {%- if var('snowplow__enable_yauaa', false) -%}
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:deviceClass::VARCHAR as device_class,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentClass::VARCHAR as agent_class,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentName::VARCHAR as agent_name,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentNameVersion::VARCHAR as agent_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentNameVersionMajor::VARCHAR as agent_name_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentVersion::VARCHAR as agent_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentVersionMajor::VARCHAR as agent_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:deviceBrand::VARCHAR as device_brand,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:deviceName::VARCHAR as device_name,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:deviceVersion::VARCHAR as device_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineClass::VARCHAR as layout_engine_class,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineName::VARCHAR as layout_engine_name,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineNameVersion::VARCHAR as layout_engine_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineNameVersionMajor::VARCHAR as layout_engine_name_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineVersion::VARCHAR as layout_engine_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineVersionMajor::VARCHAR as layout_engine_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:operatingSystemClass::VARCHAR as operating_system_class,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:operatingSystemName::VARCHAR as operating_system_name,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:operatingSystemNameVersion::VARCHAR as operating_system_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:operatingSystemVersion::VARCHAR as operating_system_version
+    {%- else -%}
+        cast(null as {{ type_string() }}) as device_class,
+        cast(null as {{ type_string() }}) as agent_class,
+        cast(null as {{ type_string() }}) as agent_name,
+        cast(null as {{ type_string() }}) as agent_name_version,
+        cast(null as {{ type_string() }}) as agent_name_version_major,
+        cast(null as {{ type_string() }}) as agent_version,
+        cast(null as {{ type_string() }}) as agent_version_major,
+        cast(null as {{ type_string() }}) as device_brand,
+        cast(null as {{ type_string() }}) as device_name,
+        cast(null as {{ type_string() }}) as device_version,
+        cast(null as {{ type_string() }}) as layout_engine_class,
+        cast(null as {{ type_string() }}) as layout_engine_name,
+        cast(null as {{ type_string() }}) as layout_engine_name_version,
+        cast(null as {{ type_string() }}) as layout_engine_name_version_major,
+        cast(null as {{ type_string() }}) as layout_engine_version,
+        cast(null as {{ type_string() }}) as layout_engine_version_major,
+        cast(null as {{ type_string() }}) as operating_system_class,
+        cast(null as {{ type_string() }}) as operating_system_name,
+        cast(null as {{ type_string() }}) as operating_system_name_version,
+        cast(null as {{ type_string() }}) as operating_system_version
+    {%- endif -%}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="spark" label="spark">
+
+```jinja2
+{% macro spark__get_yauaa_context_fields(table_prefix = none) %}
+    {%- if var('snowplow__enable_yauaa', false) -%}
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:deviceClass as device_class,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentClass::STRING as agent_class,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentName::STRING as agent_name,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentNameVersion::STRING as agent_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentNameVersionMajor::STRING as agent_name_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentVersion::STRING as agent_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:agentVersionMajor::STRING as agent_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:deviceBrand::STRING as device_brand,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:deviceName::STRING as device_name,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:deviceVersion::STRING as device_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineClass::STRING as layout_engine_class,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineName::STRING as layout_engine_name,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineNameVersion::STRING as layout_engine_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineNameVersionMajor::STRING as layout_engine_name_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineVersion::STRING as layout_engine_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:layoutEngineVersionMajor::STRING as layout_engine_version_major,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:operatingSystemClass::STRING as operating_system_class,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:operatingSystemName::STRING as operating_system_name,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:operatingSystemNameVersion::STRING as operating_system_name_version,
+        {% if table_prefix %}table_prefix.{% endif %}contexts_nl_basjes_yauaa_context_1[0]:operatingSystemVersion::STRING as operating_system_version
+    {%- else -%}
+        cast(null as {{ type_string() }}) as device_class,
+        cast(null as {{ type_string() }}) as agent_class,
+        cast(null as {{ type_string() }}) as agent_name,
+        cast(null as {{ type_string() }}) as agent_name_version,
+        cast(null as {{ type_string() }}) as agent_name_version_major,
+        cast(null as {{ type_string() }}) as agent_version,
+        cast(null as {{ type_string() }}) as agent_version_major,
+        cast(null as {{ type_string() }}) as device_brand,
+        cast(null as {{ type_string() }}) as device_name,
+        cast(null as {{ type_string() }}) as device_version,
+        cast(null as {{ type_string() }}) as layout_engine_class,
+        cast(null as {{ type_string() }}) as layout_engine_name,
+        cast(null as {{ type_string() }}) as layout_engine_name_version,
+        cast(null as {{ type_string() }}) as layout_engine_name_version_major,
+        cast(null as {{ type_string() }}) as layout_engine_version,
+        cast(null as {{ type_string() }}) as layout_engine_version_major,
+        cast(null as {{ type_string() }}) as operating_system_class,
+        cast(null as {{ type_string() }}) as operating_system_name,
+        cast(null as {{ type_string() }}) as operating_system_name_version,
+        cast(null as {{ type_string() }}) as operating_system_version
+    {%- endif -%}
+{% endmacro %}
+```
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+#### Depends On
+- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+
+
+#### Referenced By
+<Tabs groupId="reference">
+<TabItem value="model" label="Models" default>
+
+- [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 </Tabs>
@@ -194,11 +811,20 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
+- 
+
+
+#### Returns
+
+The specific fields and their type for the context (see macro code for values).
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/bigquery/page_view_contexts.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/bigquery/page_view_contexts.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro iab_fields() %}
@@ -223,6 +849,7 @@ This macro does not currently have a description.
 <TabItem value="model" label="Models" default>
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 </Tabs>
@@ -235,36 +862,69 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used as a post-hook on the sessions table to stitch user identities using the user_mapping table provided.
+- 
+
+
+#### Arguments
+- `enabled` *(boolean)*: If the user stitching should be done or not
+- `relation` *(string)*: (Optional) The model to update the `stitched_user_id` column in. Default `this`
+- `user_mapping_relation` *(string)*: (Optional) The model to use the `user_id` column from. Default `snowplow_web_user_mapping`
+
+#### Returns
+
+The update/merge statement to update the `stitched_user_id` column, if enabled.
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/stitch_user_identifiers.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/stitch_user_identifiers.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="Raw" default>
 
 ```jinja2
-{% macro stitch_user_identifiers(enabled, relation=this, user_mapping_relation=ref('snowplow_web_user_mapping')) %}
+{% macro stitch_user_identifiers(enabled, relation=this, user_mapping_relation='snowplow_web_user_mapping') %}
+    {{ return(adapter.dispatch('stitch_user_identifiers', 'snowplow_web')(enabled, relation, user_mapping_relation)) }}
+{%- endmacro -%}
 
-  {% if enabled and target.type not in ['databricks', 'spark'] | as_bool() %}
 
-    -- Update sessions table with mapping
-    update {{ relation }} as s
-    set stitched_user_id = um.user_id
-    from {{ user_mapping_relation }} as um
-    where s.domain_userid = um.domain_userid;
-
-  {% elif enabled and target.type in ['databricks', 'spark']  | as_bool() %}
-
-    -- Update sessions table with mapping
-    merge into {{ relation }} as s
-    using {{ user_mapping_relation }} as um
-    on s.domain_userid = um.domain_userid
-    when matched then 
-      update set s.stitched_user_id = um.user_id;
-
-  {% endif %}
-
-{% endmacro %}
 ```
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__stitch_user_identifiers(enabled, relation=this, user_mapping_relation='snowplow_web_user_mapping') %}
+    {% if enabled | as_bool() %}
+      -- Update sessions table with mapping
+      update {{ relation }} as s
+      set stitched_user_id = um.user_id
+      from {{ ref(user_mapping_relation) }} as um
+      where s.domain_userid = um.domain_userid;
+    {% endif %}
+{%- endmacro -%}
+
+
+```
+</TabItem>
+<TabItem value="spark" label="spark">
+
+```jinja2
+{% macro spark__stitch_user_identifiers(enabled, relation=this, user_mapping_relation='snowplow_web_user_mapping') %}
+    {% if enabled | as_bool() %}
+      -- Update sessions table with mapping
+      merge into {{ relation }} as s
+      using {{ ref(user_mapping_relation) }} as um
+      on s.domain_userid = um.domain_userid
+      when matched then
+      update set s.stitched_user_id = um.user_id;
+    {% endif %}
+{%- endmacro -%}
+```
+</TabItem>
+</Tabs>
 
 </DbtDetails>
 
@@ -286,11 +946,20 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
+- 
+
+
+#### Returns
+
+The specific fields and their type for the context (see macro code for values).
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/bigquery/page_view_contexts.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/bigquery/page_view_contexts.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro ua_fields() %}
@@ -323,6 +992,7 @@ This macro does not currently have a description.
 <TabItem value="model" label="Models" default>
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 </Tabs>
@@ -335,11 +1005,20 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
+- 
+
+
+#### Returns
+
+The specific fields for each warehouse (see macro code for values).
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -388,11 +1067,20 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
+- 
+
+
+#### Returns
+
+The specific fields for each warehouse (see macro code for values).
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -441,11 +1129,20 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
+- 
+
+
+#### Returns
+
+The specific fields for each warehouse (see macro code for values).
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -494,11 +1191,20 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
+- 
+
+
+#### Returns
+
+The specific fields for each warehouse (see macro code for values).
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -547,11 +1253,20 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
+- 
+
+
+#### Returns
+
+The specific fields for each warehouse (see macro code for values).
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -600,11 +1315,20 @@ This macro does not currently have a description.
 </summary>
 
 #### Description
-This macro does not currently have a description.
+This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
+- 
+
+
+#### Returns
+
+The specific fields and their type for the context (see macro code for values).
+
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/bigquery/page_view_contexts.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/bigquery/page_view_contexts.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro yauaa_fields() %}
@@ -645,6 +1369,7 @@ This macro does not currently have a description.
 <TabItem value="model" label="Models" default>
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 </Tabs>

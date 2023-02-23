@@ -30,7 +30,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/allow_refresh.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/allow_refresh.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -88,7 +90,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro app_context_fields() %}
@@ -127,7 +131,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro app_error_context_fields() %}
@@ -175,7 +181,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bool_or.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bool_or.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -250,7 +258,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -303,7 +313,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro geo_context_fields() %}
@@ -347,7 +359,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/get_path_sql.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/get_path_sql.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -457,7 +471,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/get_path_sql.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/get_path_sql.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -567,7 +583,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -620,7 +638,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -673,7 +693,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -726,7 +748,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -779,7 +803,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro mobile_context_fields() %}
@@ -827,7 +853,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro screen_context_fields() %}
@@ -871,7 +899,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/unstruct_event_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/unstruct_event_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro screen_view_event_fields() %}
@@ -915,7 +945,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro session_context_fields() %}
@@ -957,26 +989,28 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/stitch_user_identifiers.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/stitch_user_identifiers.sql">Source</a></i></b></center>
 
 ```jinja2
-{% macro stitch_user_identifiers(enabled, relation=this, user_mapping_relation=ref('snowplow_mobile_user_mapping')) %}
+{% macro stitch_user_identifiers(enabled, relation=this, user_mapping_relation='snowplow_mobile_user_mapping') %}
 
   {% if enabled and target.type not in ['databricks', 'spark'] | as_bool() %}
 
     -- Update sessions table with mapping
     update {{ relation }} as s
     set stitched_user_id = um.user_id
-    from {{ user_mapping_relation }} as um
+    from {{ ref(user_mapping_relation) }} as um
     where s.device_user_id = um.device_user_id;
 
 {% elif enabled and target.type in ['databricks', 'spark']  | as_bool() %}
 
     -- Update sessions table with mapping
     merge into {{ relation }} as s
-    using {{ user_mapping_relation }} as um
+    using {{ ref(user_mapping_relation) }} as um
     on s.device_user_id = um.device_user_id
-    when matched then 
+    when matched then
       update set s.stitched_user_id = um.user_id;
 
   {% endif %}
@@ -1008,7 +1042,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_mobile_delete_from_manifest(models) %}

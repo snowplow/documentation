@@ -30,7 +30,9 @@ A macro used to perform channel classifications
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/channel_classification.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/channel_classification.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -137,7 +139,9 @@ A macro for the user to overwrite it with a sql script to extract total ad spend
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/channel_spend.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/channel_spend.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -190,7 +194,9 @@ A macro to specify how to filter on conversion events
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/conversion_clause.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/conversion_clause.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -235,7 +241,9 @@ A macro that specifies either a single column or a calculated value that represe
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/conversion_value.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/conversion_value.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -280,7 +288,9 @@ A macro which creates user defined functions that will be used in the models
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/create_udfs.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/create_udfs.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>

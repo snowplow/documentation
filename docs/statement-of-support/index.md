@@ -1,7 +1,7 @@
 ---
 title: "Statement of Support"
-sidebar_position: -0.6
-hide_table_of_contents: true
+sidebar_position: -0.7
+hide_table_of_contents: false
 ---
 
 This Statement of Support defines the scope of support provided for Snowplow BDP Cloud, BDP Enterprise and all other Snowplow products and services. Our friendly team is available 24x7 to provide product expertise, technical advice, and assistance throughout your journey with Snowplow.

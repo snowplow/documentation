@@ -8,7 +8,13 @@ Snowplow Support is here to ensure you gain full value from Snowplow’s product
 
 ## All Products
 
-The following services are provided for all BDP Cloud and BDP Enterprise customers. The support described here is not currently available to Open Source users.
+The following services are provided for all BDP Cloud and BDP Enterprise customers.
+
+:::note
+
+The support described here is not currently available to Open Source users.
+
+:::
 
 ### Support Channels
 
@@ -79,7 +85,7 @@ Unless otherwise stated in your contract, we provide official support for the cu
 
 ### Try Snowplow & Open Source
 
-If you’re seeking assistance with your Try Snowplow or Open Source pipelines, our team currently do not provide direct support for these products. We encourage you to make use of these resources :
+If you’re seeking assistance with your Try Snowplow or Open Source pipelines, we currently do not provide direct customer support for these products. We encourage you to make use of these resources:
 
 - [Snowplow Docs](https://docs.snowplow.io/docs): Extensive product and engineering documentation of Snowplow features, functionality, and configuration.
 - [Snowplow Discourse](https://discourse.snowplow.io/): Community forum where free & open source users, customers, and our team come together to discuss everything Snowplow.

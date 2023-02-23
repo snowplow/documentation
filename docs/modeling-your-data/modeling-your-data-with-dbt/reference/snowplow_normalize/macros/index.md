@@ -30,7 +30,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/allow_refresh.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/allow_refresh.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -100,7 +102,9 @@ A macro to produce a table from `base_events_this_run` with the input columns, f
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/normalize_events.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/normalize_events.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -370,7 +374,9 @@ Take a string in camel/pascal case and make it snakecase
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/snakeify_case.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/snakeify_case.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -430,7 +436,9 @@ A macro to produce a users table from the `base_events_this_run` table, using th
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/users_table.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/users_table.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>

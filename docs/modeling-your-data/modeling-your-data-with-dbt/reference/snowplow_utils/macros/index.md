@@ -49,7 +49,9 @@ app_id in ('web', 'mobile', 'news')
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/app_id_filter.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/app_id_filter.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro app_id_filter(app_ids) %}
@@ -97,7 +99,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro cast_to_tstamp(tstamp_literal) -%}
@@ -140,7 +144,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/coalesce_field_paths.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/coalesce_field_paths.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro coalesce_field_paths(paths, field_alias, include_field_alias, relation_alias) %}
@@ -182,7 +188,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/combine_column_versions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/combine_column_versions.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro combine_column_versions(relation, column_prefix, required_fields=[], nested_level=none, level_filter='equalto', relation_alias=none, include_field_alias=true, array_index=0, max_nested_level=15, exclude_versions=[]) %}
@@ -299,7 +307,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -384,7 +394,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/exclude_column_versions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/exclude_column_versions.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro exclude_column_versions(columns, exclude_versions) %}
@@ -425,7 +437,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/flatten_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/flatten_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro flatten_fields(fields, parent, path, array_index, level_limit=none, level_counter=1, flattened_fields=[], field_name='') %}
@@ -524,7 +538,9 @@ from ... a
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_array_to_string.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_array_to_string.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -559,6 +575,15 @@ from ... a
 
 </DbtDetails>
 
+
+#### Referenced By
+<Tabs groupId="reference">
+<TabItem value="model" label="Models" default>
+
+- [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
+
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Get Cluster By {#macro.snowplow_utils.get_cluster_by}
@@ -572,7 +597,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_cluster_by.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_cluster_by.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_cluster_by(bigquery_cols=none, snowflake_cols=none) %}
@@ -671,7 +698,9 @@ get_columns_in_relation_by_column_prefix(ref('snowplow_web_base_events_this_run'
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_columns_in_relation_by_column_prefix.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_columns_in_relation_by_column_prefix.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_columns_in_relation_by_column_prefix(relation, column_prefix) %}
@@ -729,7 +758,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_enabled_snowplow_models.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_enabled_snowplow_models.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_enabled_snowplow_models(package_name, graph_object=none, models_to_run=var("models_to_run","")) -%}
@@ -825,7 +856,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/get_field_alias.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/get_field_alias.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_field_alias(field) %}
@@ -865,37 +898,55 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_status.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_status.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_incremental_manifest_status(incremental_manifest_table, models_in_run) -%}
 
+  {# In case of not execute just return empty strings to avoid hitting database #}
   {% if not execute %}
-
     {{ return(['', '', '', '']) }}
+  {% endif %}
+
+  {% set target_relation = adapter.get_relation(
+        database=incremental_manifest_table.database,
+        schema=incremental_manifest_table.schema,
+        identifier=incremental_manifest_table.name) %}
+
+  {% if target_relation is not none %}
+
+    {% set last_success_query %}
+      select min(last_success) as min_last_success,
+            max(last_success) as max_last_success,
+            coalesce(count(*), 0) as models
+      from {{ incremental_manifest_table }}
+      where model in ({{ snowplow_utils.print_list(models_in_run) }})
+    {% endset %}
+
+    {% set results = run_query(last_success_query) %}
+
+    {% if execute %}
+
+      {% set min_last_success = results.columns[0].values()[0] %}
+      {% set max_last_success = results.columns[1].values()[0] %}
+      {% set models_matched_from_manifest = results.columns[2].values()[0] %}
+      {% set has_matched_all_models = true if models_matched_from_manifest == models_in_run|length else false %}
+
+      {{ return([min_last_success, max_last_success, models_matched_from_manifest, has_matched_all_models]) }}
+
+    {% endif %}
+
+
+  {% else %}
+
+    {% do exceptions.warn("Snowplow Warning: " ~ incremental_manifest_table ~ " does not exist. This is expected if you are compiling a fresh installation of the dbt-snowplow-* packages.") %}
+
+    {{ return(['9999-01-01 00:00:00', '9999-01-01 00:00:00', 0, false]) }}
 
   {% endif %}
 
-  {% set last_success_query %}
-    select min(last_success) as min_last_success,
-           max(last_success) as max_last_success,
-           coalesce(count(*), 0) as models
-    from {{ incremental_manifest_table }}
-    where model in ({{ snowplow_utils.print_list(models_in_run) }})
-  {% endset %}
-
-  {% set results = run_query(last_success_query) %}
-
-  {% if execute %}
-
-    {% set min_last_success = results.columns[0].values()[0] %}
-    {% set max_last_success = results.columns[1].values()[0] %}
-    {% set models_matched_from_manifest = results.columns[2].values()[0] %}
-    {% set has_matched_all_models = true if models_matched_from_manifest == models_in_run|length else false %}
-
-  {% endif %}
-
-  {{ return([min_last_success, max_last_success, models_matched_from_manifest, has_matched_all_models]) }}
 
 {%- endmacro %}
 ```
@@ -932,7 +983,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_table_relation.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_table_relation.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_incremental_manifest_table_relation(package_name) %}
@@ -969,7 +1022,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/get_level_limit.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/get_level_limit.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_level_limit(level, level_filter, required_field_names) %}
@@ -1066,7 +1121,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/get_matched_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/get_matched_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_matched_fields(fields, required_field_names, nested_level, level_filter) %}
@@ -1118,7 +1175,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_new_event_limits_table_relation.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_new_event_limits_table_relation.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_new_event_limits_table_relation(package_name) %}
@@ -1154,7 +1213,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/get_optional_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/get_optional_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_optional_fields(enabled, fields, col_prefix, relation, relation_alias, include_field_alias=true) -%}
@@ -1201,8 +1262,10 @@ This macro does not currently have a description.
 - [model.snowplow_media_player.snowplow_media_player_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_interactions_this_run)
 - [model.snowplow_mobile.snowplow_mobile_app_errors_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors_this_run)
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
+- [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 </Tabs>
@@ -1219,7 +1282,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_partition_by.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_partition_by.sql">Source</a></i></b></center>
 
 ```jinja2
 {%- macro get_partition_by(bigquery_partition_by=none, databricks_partition_by=none) -%}
@@ -1284,7 +1349,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/quarantine_sessions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/quarantine_sessions.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_quarantine_sql(relation, max_session_length) %}
@@ -1338,7 +1405,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_run_limits.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_run_limits.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_run_limits(min_last_success, max_last_success, models_matched_from_manifest, has_matched_all_models, start_date) -%}
@@ -1443,7 +1512,9 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_schemas_by_pattern.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_schemas_by_pattern.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -1520,7 +1591,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_session_lookback_limit.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_session_lookback_limit.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_session_lookback_limit(lower_limit) %}
@@ -1583,7 +1656,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/get_snowplow_delete_insert_sql.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/get_snowplow_delete_insert_sql.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_snowplow_delete_insert_sql(target, source, unique_key, dest_cols_csv, predicates) -%}
@@ -1595,7 +1670,7 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- [macro.snowplow_utils.default__get_snowplow_delete_insert_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__get_snowplow_delete_insert_sql)
+- [macro.snowplow_utils.snowflake__get_snowplow_delete_insert_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__get_snowplow_delete_insert_sql)
 
 </DbtDetails>
 
@@ -1610,7 +1685,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/get_snowplow_merge_sql.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/get_snowplow_merge_sql.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_snowplow_merge_sql(target, source, unique_key, dest_columns, predicates, include_sql_header) -%}
@@ -1637,7 +1714,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/get_snowplow_upsert_limits_sql.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/get_snowplow_upsert_limits_sql.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_snowplow_upsert_limits_sql(tmp_relation, upsert_date_key, disable_upsert_lookback) -%}
@@ -1649,7 +1728,7 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- [macro.snowplow_utils.default__get_snowplow_upsert_limits_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__get_snowplow_upsert_limits_sql)
+- [macro.snowplow_utils.snowflake__get_snowplow_upsert_limits_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__get_snowplow_upsert_limits_sql)
 
 </DbtDetails>
 
@@ -1687,7 +1766,9 @@ from ... a
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_split_to_array.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_split_to_array.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -1736,6 +1817,7 @@ from ... a
 <TabItem value="model" label="Models" default>
 
 - [model.snowplow_media_player.snowplow_media_player_media_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_media_stats)
+- [model.snowplow_web.snowplow_web_consent_scope_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_scope_status)
 
 </TabItem>
 </Tabs>
@@ -1783,7 +1865,9 @@ group by ...
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_string_agg.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_string_agg.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -1954,7 +2038,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_successful_models.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_successful_models.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_successful_models(models=[], run_results=results) -%}
@@ -2045,7 +2131,9 @@ snowplow_web:
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_value_by_target.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_value_by_target.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro get_value_by_target(dev_value, default_value, dev_target_name='dev') %}
@@ -2102,7 +2190,9 @@ The appropriate value for the target warehouse type, or an error if not an expec
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_value_by_target_type.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_value_by_target_type.sql">Source</a></i></b></center>
 
 ```jinja2
 {%- macro get_value_by_target_type(bigquery_val=none, snowflake_val=none, redshift_val=none, postgres_val=none, databricks_val=none) -%}
@@ -2173,7 +2263,9 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/is_run_with_new_events.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/is_run_with_new_events.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro is_run_with_new_events(package_name) %}
@@ -2258,6 +2350,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 - [model.snowplow_mobile.snowplow_mobile_user_mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_user_mapping)
 - [model.snowplow_mobile.snowplow_mobile_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users)
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
+- [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 - [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
@@ -2289,7 +2382,9 @@ A wrapper macro for the `dbt_utils.pretty_log_format` using the `snowplow__has_l
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/log_message.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/log_message.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro log_message(message, is_printed=var('snowplow__has_log_enabled', true)) %}
@@ -2328,7 +2423,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/bigquery/snowplow_incremental.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/bigquery/snowplow_incremental.sql">Source</a></i></b></center>
 
 ```jinja2
 {% materialization snowplow_incremental, adapter='bigquery' -%}
@@ -2430,7 +2527,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/databricks/snowplow_incremental.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/databricks/snowplow_incremental.sql">Source</a></i></b></center>
 
 ```jinja2
 {% materialization snowplow_incremental, adapter='databricks' -%}
@@ -2527,7 +2626,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/default/snowplow_incremental.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/default/snowplow_incremental.sql">Source</a></i></b></center>
 
 ```jinja2
 {% materialization snowplow_incremental, default -%}
@@ -2628,7 +2729,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/snowflake/snowplow_incremental.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/snowflake/snowplow_incremental.sql">Source</a></i></b></center>
 
 ```jinja2
 {% materialization snowplow_incremental, adapter='snowflake' -%}
@@ -2715,6 +2818,7 @@ This macro does not currently have a description.
 - macro.dbt.run_query
 - macro.dbt.should_full_refresh
 - macro.dbt.statement
+- macro.dbt_snowflake.unset_query_tag
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_utils.snowplow_snowflake_get_incremental_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_snowflake_get_incremental_sql)
 - [macro.snowplow_utils.snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_validate_get_incremental_strategy)
@@ -2732,7 +2836,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/spark/snowplow_incremental.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/spark/snowplow_incremental.sql">Source</a></i></b></center>
 
 ```jinja2
 {% materialization snowplow_incremental, adapter='spark' -%}
@@ -2829,7 +2935,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/merge_fields_across_col_versions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/bigquery/combine_column_versions/merge_fields_across_col_versions.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro merge_fields_across_col_versions(fields_by_col_version) %}
@@ -2909,7 +3017,9 @@ Current timestamp minus `n` units.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/n_timedeltas_ago.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/n_timedeltas_ago.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro n_timedeltas_ago(n, timedelta_attribute) %}
@@ -2941,7 +3051,9 @@ This macro deletes all schemas that start with the specified `schema_pattern`, m
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/post_ci_cleanup.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/post_ci_cleanup.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro post_ci_cleanup(schema_pattern=target.schema) %}
@@ -3013,7 +3125,9 @@ Separated output of items in the list, quoted.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/print_list.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/print_list.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro print_list(list, separator = ',') %}
@@ -3048,7 +3162,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_status.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_status.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro print_run_limits(run_limits_relation) -%}
@@ -3106,7 +3222,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/quarantine_sessions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/quarantine_sessions.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -3194,37 +3312,58 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/return_base_new_event_limits.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/return_base_new_event_limits.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro return_base_new_event_limits(base_events_this_run) -%}
 
+  {# In case of not execute just return empty strings to avoid hitting database #}
   {% if not execute %}
     {{ return(['','',''])}}
   {% endif %}
-  
-  {% set limit_query %} 
-    select 
-      lower_limit, 
-      upper_limit,
-      {{ snowplow_utils.timestamp_add('day', 
-                                     -var("snowplow__max_session_days", 3),
-                                     'lower_limit') }} as session_start_limit
 
-    from {{ base_events_this_run }} 
+  {% set target_relation = adapter.get_relation(
+        database=base_events_this_run.database,
+        schema=base_events_this_run.schema,
+        identifier=base_events_this_run.name) %}
+
+  {% if target_relation is not none %}
+
+    {% set limit_query %}
+      select
+        lower_limit,
+        upper_limit,
+        {{ snowplow_utils.timestamp_add('day',
+                                      -var("snowplow__max_session_days", 3),
+                                      'lower_limit') }} as session_start_limit
+
+      from {{ base_events_this_run }}
     {% endset %}
 
-  {% set results = run_query(limit_query) %}
-   
-  {% if execute %}
+    {% set results = run_query(limit_query) %}
 
-    {% set lower_limit = snowplow_utils.cast_to_tstamp(results.columns[0].values()[0]) %}
-    {% set upper_limit = snowplow_utils.cast_to_tstamp(results.columns[1].values()[0]) %}
-    {% set session_start_limit = snowplow_utils.cast_to_tstamp(results.columns[2].values()[0]) %}
+    {% if execute %}
 
-  {{ return([lower_limit, upper_limit, session_start_limit]) }}
+      {% set lower_limit = snowplow_utils.cast_to_tstamp(results.columns[0].values()[0]) %}
+      {% set upper_limit = snowplow_utils.cast_to_tstamp(results.columns[1].values()[0]) %}
+      {% set session_start_limit = snowplow_utils.cast_to_tstamp(results.columns[2].values()[0]) %}
+
+      {{ return([lower_limit, upper_limit, session_start_limit]) }}
+
+    {% endif %}
+
+  {% else %}
+
+    {% do exceptions.warn("Snowplow Warning: " ~ base_events_this_run ~ " does not exist. This is expected if you are compiling a fresh installation of the dbt-snowplow-* packages.") %}
+
+    {% set dummy_limit = snowplow_utils.cast_to_tstamp('9999-01-01 00:00:00') %}
+
+    {{ return([dummy_limit, dummy_limit, dummy_limit]) }}
 
   {% endif %}
+
 {%- endmacro %}
 ```
 
@@ -3276,7 +3415,9 @@ A list of two objects, the lower and upper values from the columns in the model
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/return_limits_from_model.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/return_limits_from_model.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro return_limits_from_model(model, lower_limit_col, upper_limit_col) -%}
@@ -3286,36 +3427,53 @@ A list of two objects, the lower and upper values from the columns in the model
     {{ return(['','']) }}
   {% endif %}
 
-  {% set limit_query %}
-    select
-      min({{lower_limit_col}}) as lower_limit,
-      max({{upper_limit_col}}) as upper_limit
-    from {{ model }}
+  {% set target_relation = adapter.get_relation(
+        database=model.database,
+        schema=model.schema,
+        identifier=model.name) %}
+
+  {% if target_relation is not none %}
+
+    {% set limit_query %}
+      select
+        min({{lower_limit_col}}) as lower_limit,
+        max({{upper_limit_col}}) as upper_limit
+      from {{ model }}
     {% endset %}
 
-  {% set results = run_query(limit_query) %}
+    {% set results = run_query(limit_query) %}
 
-  {% if execute %}
+    {% if execute %}
 
-    {# If there is no data within the limits, we should warn them otherwise they may be stuck here forever#}
-    {%- if results.columns[0].values()[0] is none or results.columns[1].values()[0] is none -%}
-    {# Currently warnings do not actually do anything other than text in logs, this makes it more visible https://github.com/dbt-labs/dbt-core/issues/6721 #}
-      {{ snowplow_utils.log_message("Snowplow Warning: *************") }}
-      {% do exceptions.warn("Snowplow Warning: No data in "~this~" for date range from variables, please modify your run variables to include data if this is not expected.") %}
-      {{ snowplow_utils.log_message("Snowplow Warning: *************") }}
-      {# This allows for bigquery to still run the same way the other warehouses do, but also ensures no data is processed #}
-      {% set lower_limit = snowplow_utils.cast_to_tstamp('9999-01-01 00:00:00') %}
-      {% set upper_limit = snowplow_utils.cast_to_tstamp('9999-01-02 00:00:00') %}
-    {%- else -%}
-      {% set lower_limit = snowplow_utils.cast_to_tstamp(results.columns[0].values()[0]) %}
-      {% set upper_limit = snowplow_utils.cast_to_tstamp(results.columns[1].values()[0]) %}
-    {%- endif -%}
+      {# If there is no data within the limits, we should warn them otherwise they may be stuck here forever#}
+      {%- if results.columns[0].values()[0] is none or results.columns[1].values()[0] is none -%}
+      {# Currently warnings do not actually do anything other than text in logs, this makes it more visible https://github.com/dbt-labs/dbt-core/issues/6721 #}
+        {{ snowplow_utils.log_message("Snowplow Warning: *************") }}
+        {% do exceptions.warn("Snowplow Warning: No data in "~this~" for date range from variables, please modify your run variables to include data if this is not expected.") %}
+        {{ snowplow_utils.log_message("Snowplow Warning: *************") }}
+        {# This allows for bigquery to still run the same way the other warehouses do, but also ensures no data is processed #}
+        {% set lower_limit = snowplow_utils.cast_to_tstamp('9999-01-01 00:00:00') %}
+        {% set upper_limit = snowplow_utils.cast_to_tstamp('9999-01-02 00:00:00') %}
+      {%- else -%}
+        {% set lower_limit = snowplow_utils.cast_to_tstamp(results.columns[0].values()[0]) %}
+        {% set upper_limit = snowplow_utils.cast_to_tstamp(results.columns[1].values()[0]) %}
+      {%- endif -%}
 
+      {{ return([lower_limit, upper_limit]) }}
 
-  {{ return([lower_limit, upper_limit]) }}
+    {% endif %}
+
+  {% else %}
+
+    {% do exceptions.warn("Snowplow Warning: " ~ model ~ " does not exist. This is expected if you are compiling a fresh installation of the dbt-snowplow-* packages.") %}
+    {% set dummy_limit = snowplow_utils.cast_to_tstamp('9999-01-01 00:00:00') %}
+
+    {{ return([dummy_limit, dummy_limit]) }}
 
   {% endif %}
-{%- endmacro %}
+
+
+{% endmacro %}
 ```
 
 </DbtDetails>
@@ -3340,6 +3498,8 @@ A list of two objects, the lower and upper values from the columns in the model
 - [model.snowplow_mobile.snowplow_mobile_base_screen_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_screen_context)
 - [model.snowplow_mobile.snowplow_mobile_base_session_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_session_context)
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
+- [model.snowplow_web.snowplow_web_consent_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_users)
+- [model.snowplow_web.snowplow_web_consent_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_versions)
 
 </TabItem>
 </Tabs>
@@ -3374,7 +3534,9 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/set_query_tag.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/set_query_tag.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -3470,6 +3632,7 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 - [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
 - [model.snowplow_web.snowplow_web_consent_cmp_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_cmp_stats)
+- [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 - [model.snowplow_web.snowplow_web_consent_totals](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_totals)
 - [model.snowplow_web.snowplow_web_consent_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_users)
@@ -3510,7 +3673,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_delete_from_manifest(models, incremental_manifest_table) %}
@@ -3610,7 +3775,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/snowplow_delete_insert.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/snowplow_delete_insert.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_delete_insert(tmp_relation, target_relation, unique_key, upsert_date_key, dest_columns, disable_upsert_lookback) -%}
@@ -3622,7 +3789,7 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- [macro.snowplow_utils.default__snowplow_delete_insert](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__snowplow_delete_insert)
+- [macro.snowplow_utils.snowflake__snowplow_delete_insert](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_delete_insert)
 
 
 #### Referenced By
@@ -3647,7 +3814,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/snowplow_incremental_post_hook.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/snowplow_incremental_post_hook.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_incremental_post_hook(package_name) %}
@@ -3687,7 +3856,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/snowplow_is_incremental.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/snowplow_is_incremental.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_is_incremental() %}
@@ -3739,7 +3910,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/snowplow_merge.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/snowplow_merge.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_merge(tmp_relation, target_relation, unique_key, upsert_date_key, dest_columns, disable_upsert_lookback) -%}
@@ -3751,7 +3924,7 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- [macro.snowplow_utils.default__snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__snowplow_merge)
+- [macro.snowplow_utils.snowflake__snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_merge)
 
 
 #### Referenced By
@@ -3778,7 +3951,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_mobile_delete_from_manifest(models) %}
@@ -3807,7 +3982,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/snowflake/snowplow_incremental.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/snowflake/snowplow_incremental.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_snowflake_get_incremental_sql(strategy, tmp_relation, target_relation, unique_key, upsert_date_key, dest_columns, disable_upsert_lookback) %}
@@ -3850,7 +4027,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/snowplow_validate_get_incremental_strategy.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/snowplow_incremental/common/snowplow_validate_get_incremental_strategy.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_validate_get_incremental_strategy(config) -%}
@@ -3862,7 +4041,7 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- [macro.snowplow_utils.default__snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__snowplow_validate_get_incremental_strategy)
+- [macro.snowplow_utils.snowflake__snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_validate_get_incremental_strategy)
 
 
 #### Referenced By
@@ -3889,7 +4068,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_web_delete_from_manifest(models) %}
@@ -3918,7 +4099,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/throw_compiler_error.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/throw_compiler_error.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro throw_compiler_error(error_message, disable_error=var("snowplow__disable_errors", false)) %}
@@ -3960,7 +4143,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -4015,6 +4200,7 @@ This macro does not currently have a description.
 - [model.snowplow_normalize.snowplow_normalize_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_base_events_this_run)
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 <TabItem value="macros" label="Macros">
@@ -4039,7 +4225,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -4097,7 +4285,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">Source</a></i></b></center>
 
 ```jinja2
 
@@ -4112,7 +4302,7 @@ This macro does not currently have a description.
 
 
 #### Depends On
-- [macro.snowplow_utils.default__to_unixtstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__to_unixtstamp)
+- [macro.snowplow_utils.snowflake__to_unixtstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__to_unixtstamp)
 
 
 #### Referenced By
@@ -4120,6 +4310,7 @@ This macro does not currently have a description.
 <TabItem value="model" label="Models" default>
 
 - [model.snowplow_web.snowplow_web_pv_engaged_time](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_pv_engaged_time)
+- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 </Tabs>
@@ -4136,7 +4327,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/tstamp_to_str.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/tstamp_to_str.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro tstamp_to_str(tstamp) -%}
@@ -4168,7 +4361,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/datatypes.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/datatypes.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -4232,7 +4427,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/datatypes.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/datatypes.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -4282,6 +4479,13 @@ This macro does not currently have a description.
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
+<TabItem value="macros" label="Macros">
+
+- [macro.snowplow_web.get_iab_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_iab_context_fields)
+- [macro.snowplow_web.get_ua_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_ua_context_fields)
+- [macro.snowplow_web.get_yauaa_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_yauaa_context_fields)
+
+</TabItem>
 </Tabs>
 </DbtDetails>
 
@@ -4296,7 +4500,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/unnest.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/unnest.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -4383,7 +4589,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/update_incremental_manifest_table.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/update_incremental_manifest_table.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>

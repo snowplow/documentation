@@ -30,7 +30,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/allow_refresh.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/allow_refresh.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
 <TabItem value="raw" label="Raw" default>
@@ -89,7 +91,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro cart_fields() %}
@@ -129,7 +133,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro checkout_step_fields() %}
@@ -178,7 +184,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/coalesce_columns_by_prefix.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/coalesce_columns_by_prefix.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro coalesce_columns_by_prefix(model_ref, col_prefix) %}
@@ -219,7 +227,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/event_name_filter.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/event_name_filter.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro event_name_filter(event_names) %}
@@ -262,7 +272,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/snowplow_delete_from_manifest.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro snowplow_ecommerce_delete_from_manifest(models) %}
@@ -289,7 +301,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/unstruct_event_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/unstruct_event_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro tracking_action_fields() %}
@@ -328,7 +342,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro tracking_page_fields() %}
@@ -368,7 +384,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro transaction_fields() %}
@@ -415,7 +433,9 @@ This macro does not currently have a description.
 
 #### Details
 <DbtDetails>
-<summary>Code <a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">(source)</a></summary>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/bigquery/context_fields.sql">Source</a></i></b></center>
 
 ```jinja2
 {% macro user_fields() %}

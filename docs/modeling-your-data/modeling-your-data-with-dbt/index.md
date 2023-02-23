@@ -50,9 +50,12 @@ The supported data warehouses per version can be seen below:
 <Tabs groupId="dbt-packages">
 <TabItem value="web" label="Snowplow Web" default>
 
+From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
+
+
 | snowplow-web version | dbt versions        | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
 | -------------------- | ------------------- | --------- | ----------- | --------- | ---------- | --------- |
-| 0.13.0              | >=1.3.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
+| 0.13.1              | >=1.3.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
 | 0.11.0              | >=1.0.0 to <1.3.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
 | 0.5.1                | >=0.20.0 to <1.0.0  | ✅        | ❌            | ✅        | ✅         | ✅          |
 | 0.4.1                | >=0.18.0 to <0.20.0 | ✅        | ❌            | ✅        | ✅         | ❌          |
@@ -105,5 +108,6 @@ The supported data warehouses per version can be seen below:
 
 Other dependencies:
 
-**snowplow_web**
-- [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v4.0.0 and above (from snowplow_web v0.13.0 onwards) in case of Redshift / Postgres or using the Consent model for any data warehouse.
+``**snowplow_web**
+- 
+``

@@ -56,7 +56,7 @@ models:
 These models should also have the `materialization` set such that `materialized=var("snowplow__incremental_materialization")` in your model config. Finally, as well as referencing a `_this_run` table these models should make use of the `is_run_with_new_events` macro to only process the table when new events are available in the current run. This macro `snowplow_utils.is_run_with_new_events(package_name)` will evaluate whether the particular model, i.e. `{{ this }}`, has already processed the events in the given run of the model. This is returned as a boolean and effectively blocks the upsert to incremental models if the run only contains old data. This protects against your derived incremental tables being temporarily updated with incomplete data during batched back-fills of other models.
 
 ```jinja2
--- /models/snowplow_<package>_custom_models/my_custom_model.sql
+{# /models/snowplow_<package>_custom_models/my_custom_model.sql #}
 {{
   config(
     materialized=var("snowplow__incremental_materialization"),

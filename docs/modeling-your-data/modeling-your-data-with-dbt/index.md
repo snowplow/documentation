@@ -35,7 +35,7 @@ There are 5 core snowplow dbt packages:
 - [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile)): for modeling your mobile app data for screen views, sessions, users, and crashes
 - [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player)): for modeling your (web-based) media elements for play statistics
 - [Snowplow E-commerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce)): for modeling your (web-based) E-commerce interactions across carts, products, checkouts, and transactions
-- [Snowplow Fractribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-fractribution/#!/overview/fractribution)): for computing fractional attribution of marketing campaigns
+- [Snowplow Fractribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-fractribution/#!/overview/fractribution)): used for Attribution Modelling with Snowplow
 
 _The Snowplow Media Player package is designed to be used with the Snowplow Web package and not as a standalone package._
 
@@ -109,5 +109,5 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 Other dependencies:
 
 ``**snowplow_web**
-- 
+-
 ``

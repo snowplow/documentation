@@ -16,7 +16,7 @@ npx expo install @snowplow/react-native-tracker
 
 ## Expo bare workflow
 
-The tracker works without limitations on the bare workflow. Since the tracker is able to use iOS and Android native code using the mobile trackers, it provides the full functionality of the React Native tracker.
+The tracker works without limitations on the bare workflow. Since the tracker is able to run iOS and Android native code using the mobile trackers, it provides the full functionality of the React Native tracker.
 
 Make sure to rebuild your app after installing the tracker.
 

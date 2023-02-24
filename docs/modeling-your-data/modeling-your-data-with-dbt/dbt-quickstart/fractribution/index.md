@@ -42,7 +42,7 @@ The package has some variables that need to be set before it can be run, you sho
 # dbt_project.yml
 ...
 vars:
-  snowplow_web:
+  snowplow_fractribution:
     snowplow__conversion_window_start_date: '2022-01-01'
     snowplow__conversion_window_end_date: '2023-02-01'
     snowplow__conversion_hosts: ['mysite.com']

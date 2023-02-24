@@ -105,9 +105,3 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 
 </TabItem>
 </Tabs>
-
-Other dependencies:
-
-``**snowplow_web**
--
-``

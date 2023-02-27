@@ -1,5 +1,5 @@
 ---
-title: "Scaling
+title: "Scaling"
 date: "2023-02-27"
 sidebar_position: 150
 ---

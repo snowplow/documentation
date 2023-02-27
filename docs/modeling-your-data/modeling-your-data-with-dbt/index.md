@@ -55,7 +55,7 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 
 | snowplow-web version | dbt versions        | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
 | -------------------- | ------------------- | --------- | ----------- | --------- | ---------- | --------- |
-| 0.13.1              | >=1.3.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
+| 0.13.2              | >=1.3.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
 | 0.11.0              | >=1.0.0 to <1.3.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
 | 0.5.1                | >=0.20.0 to <1.0.0  | ✅        | ❌            | ✅        | ✅         | ✅          |
 | 0.4.1                | >=0.18.0 to <0.20.0 | ✅        | ❌            | ✅        | ✅         | ❌          |

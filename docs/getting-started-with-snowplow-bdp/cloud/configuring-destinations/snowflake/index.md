@@ -1,9 +1,11 @@
 ---
-title: "Naming resources in Snowflake"
-sidebar_position: 2
+title: "Snowflake"
+sidebar_position: 3
 ---
 
-# Naming resources in Snowflake
+# Snowflake
+
+## Naming resources in Snowflake
 
 :::caution
 

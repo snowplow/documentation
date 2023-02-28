@@ -23,7 +23,13 @@ For more information on how events are stored in ElasticSearch, check the [mappi
 
 #### Getting started
 
-First off, install and set up Elasticsearch version 7.x or 6.x. For more information check out the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html).
+First off, install and set up Elasticsearch. We have tested the loader with versions 6.x, 7.x and 8.x of Elasticsearch. For more information, check out the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html).
+
+:::note OpenSearch
+
+We have also tested this loader with OpenSearch 2.2.x, 2.4.x and 2.5.
+
+:::
 
 #### Raising the file limit
 
@@ -40,7 +46,7 @@ Append the following lines to the file:
 {{USERNAME}} hard nofile 32000
 `}</CodeBlock>
 
-Where {{USERNAME}} is the name of the user running Elasticsearch. You will need to logout and restart Elasticsearch before the new file limit takes effect.
+Where `{{USERNAME}}` is the name of the user running Elasticsearch. You will need to logout and restart Elasticsearch before the new file limit takes effect.
 
 To check that this new limit has taken effect you can run the following command from the terminal:
 
@@ -52,7 +58,7 @@ If the `max_file_descriptors` equals 32000 it is running with the new limit.
 
 #### Defining the mapping
 
-Use the following request to create the mapping with Elasticsearch 7.x:
+Use the following request to create the mapping with Elasticsearch 7+:
 
 <CodeBlock language="bash">{
 `curl -XPUT 'http://localhost:9200/snowplow' -d '{
@@ -75,7 +81,7 @@ Use the following request to create the mapping with Elasticsearch 7.x:
 }'
 `}</CodeBlock>
 
-Note that [mapping types are removed](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html) starting from Elasticsearch 7.0.0. If you use any older version, you might need to include mapping type also.
+Note that Elasticsearch 7+ [no longer uses mapping types](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html). If you have an older version, you might need to include mapping types in the above snippet.
 
 This initialization sets the default analyzer to "keyword". This means that string fields will not be split into separate tokens for the purposes of searching. This saves space and ensures that URL fields are handled correctly.
 

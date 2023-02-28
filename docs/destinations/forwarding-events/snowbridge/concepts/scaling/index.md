@@ -10,9 +10,17 @@ sidebar_position: 150
 
 Snowbridge is built to suit a horizontal scaling model, and you can safely deploy multiple instances of Snowbridge to consume the same input out-of-the-box (the kinesis source requires Dynamo DB tables to be created for this purpose). No addditional configuration or setup is required for the app to smoothly run across multiple instance/environment, compared to a single instance/environment.
 
-Within each instance/environment, concurrency may be managed via the `concurrent_writes` setting - which provides a degree of control over vertical scaling.
+How to configure scaling behaviour will depend on the infrastructure you're using, and the use case you have implemented. For example, when scaling based on CPU usage, this metric will be affected by the size and shape of the data, which transformations and filters are used, and if using script transformations, the content of those scripts. 
 
-Configuration of horizontal scaling will depend on the implementation, and infrastructure the app runs on. Use cases and infrastructure types have an impact on performance behaviour.
+We recommend that you instrument your use case, and follow the best practices for the deployment infrastrucutre you're using to find a the scaling configuration which suits your requirements. Note that occasionally releases will improve efficiency, which in the past has had a large impact on metrics which can be used for scaling. So, it is advisable to monitor those metrics after any version update or transformation configuration change, to ensure that scaling behaves as expected.
+
+Additionally within each instance/environment, concurrency may be managed via the `concurrent_writes` setting - which provides a degree of control over throughput and resource usage. Snowbridge should consume as much data as possible, as fast as possible - a backlog of data or spike in traffic should cause the app's CPU usage to increase significantly. If spikes/backlogs do not induce this behaviour, and there are no target retries or failures (see below), then the `concurrent_writes` can be increased to induce this behaviour.
+
+## Concurrency
+
+Snowbridge is a Go application, which makes use of [goroutines](https://golangdocs.com/goroutines-in-golang). For present purposes we can think of goroutines as lightweight threads (there's dispute over how accurate this explanation is, but to explain present concepts those details aren't relevant). The source's `concurrent_writes` setting controls how many goroutines may be processing data at once, in a given instance of the app (others may exist separately, under the hood for non-data processing purposes).
+
+The total maximum concurrency for the entire application can be determined by multiplying `concurrent_writes` by the number of horizontal instances of the app. For example, if deployed via kubernetes pods, if I have 4 active pods with `concurrent_writes` set to 150, then at any given time there will be up to 600 concurrent goroutines that can process and send data.
 
 ## Target scaling
 

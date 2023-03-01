@@ -27,6 +27,6 @@ You can determine the total maximum concurrency for the entire application by mu
 
 ## Target scaling
 
-Snowbridge will attempt to send data to the target as fast as resources will allow, and so we recommend that you set up the target to scale sufficiently with the expected volume and throughput. Note that in case of failure, Snowbridge will enter an exponential retry loop, staring with a 1s delay between retries, and increasing that delay for 5 retries.
+Snowbridge will attempt to send data to the target as fast as resources will allow, so we recommend that you set up the target to scale sufficiently with the expected volume and throughput. Note that in case of failure, Snowbridge will retry sending the messages with an exponential backoff, staring with a 1s delay between retries, and double that delay for 5 retries.
 
 If a backlog of data builds up due to some failure — for example target downtime — then we advise to overprovision the target until the backlog is processed. That’s only required until latency falls back to normal rates.

@@ -17,7 +17,7 @@ How to configure scaling behaviour will depend on the infrastructure you're usin
 
 Note that occasionally releases will improve efficiency, which in the past has had a large impact on metrics which can be used for scaling. So, it is advisable to monitor those metrics after any version update or transformation configuration change, to ensure that scaling behaves as expected.
 
-Additionally within each instance/environment, concurrency may be managed via the `concurrent_writes` setting - which provides a degree of control over throughput and resource usage. Snowbridge should consume as much data as possible, as fast as possible - a backlog of data or spike in traffic should cause the app's CPU usage to increase significantly. If spikes/backlogs do not induce this behaviour, and there are no target retries or failures (see below), then the `concurrent_writes` can be increased to induce this behaviour.
+Additionally within each instance/environment, you can manage concurrency via the `concurrent_writes` setting, which provides a degree of control over throughput and resource usage. Snowbridge should consume as much data as possible, as fast as possible — a backlog of data or spike in traffic should cause the app’s CPU usage to increase significantly. If spikes/backlogs do not induce this behaviour, and there are no target retries or failures (see below), then you can increase the `concurrent_writes`.
 
 ## Concurrency
 

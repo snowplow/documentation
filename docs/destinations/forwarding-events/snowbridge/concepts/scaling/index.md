@@ -15,7 +15,7 @@ If you are using the Kinesis source, Snowbridge requires DynamoDB tables to mana
 
 How to configure scaling behaviour will depend on the infrastructure you're using, and the use case you have implemented. For example, if you choose to scale based on CPU usage, note that this metric will be affected by the size and shape of the data, by the transformations and filters used, and for script transformations, by the content of the scripts.
 
-We recommend that you instrument your use case, and follow the best practices for the deployment infrastrucutre you're using to find a the scaling configuration which suits your requirements. Note that occasionally releases will improve efficiency, which in the past has had a large impact on metrics which can be used for scaling. So, it is advisable to monitor those metrics after any version update or transformation configuration change, to ensure that scaling behaves as expected.
+Note that occasionally releases will improve efficiency, which in the past has had a large impact on metrics which can be used for scaling. So, it is advisable to monitor those metrics after any version update or transformation configuration change, to ensure that scaling behaves as expected.
 
 Additionally within each instance/environment, concurrency may be managed via the `concurrent_writes` setting - which provides a degree of control over throughput and resource usage. Snowbridge should consume as much data as possible, as fast as possible - a backlog of data or spike in traffic should cause the app's CPU usage to increase significantly. If spikes/backlogs do not induce this behaviour, and there are no target retries or failures (see below), then the `concurrent_writes` can be increased to induce this behaviour.
 

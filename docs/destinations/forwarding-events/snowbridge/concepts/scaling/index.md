@@ -13,7 +13,7 @@ Snowbridge is built to suit a horizontal scaling model, and you can safely deplo
 If you are using the Kinesis source, you will need to manually create a few DynamoDB tables as described in [the Kinesis source configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/sources/kinesis.md). Snowbridge uses these tables to coordinate multiple instances consuming from the same stream.
 :::
 
-How to configure scaling behaviour will depend on the infrastructure you're using, and the use case you have implemented. For example, if you choose to scale based on CPU usage, note that this metric will be affected by the size and shape of the data, by the transformations and filters used, and for script transformations, by the content of the scripts.
+How to configure scaling behaviour will depend on the infrastructure you’re using, and the use case you have implemented. For example, if you choose to scale based on CPU usage, note that this metric will be affected by the size and shape of the data, by the transformations and filters used, and for script transformations, by the content of the scripts.
 
 :::tip
 Occasionally, new releases of Snowbridge will improve its efficiency. In the past, this has had a large impact on metrics typically used for scaling. To ensure that scaling behaves as expected, we recommend monitoring your metrics after you upgrade Snowbridge or change the transformation configuration.

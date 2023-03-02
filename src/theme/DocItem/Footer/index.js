@@ -57,6 +57,19 @@ function Feedback() {
 
   const feedbackTextRef = useRef()
 
+  const handleLike = () => {
+    setIsThanksVisible(true)
+    setTimeout(() => {
+      setIsThanksVisible(false)
+    }, 1000)
+
+    trackStructEvent({
+      category: 'feedback',
+      action: 'like',
+      label: permalink,
+    })
+  }
+
   const handleDislike = () => {
     setIsTextboxVisible((current) => !current)
     setIsThanksVisible(false)
@@ -93,15 +106,7 @@ function Feedback() {
     <div className="col margin-bottom--sm">
       Was this page useful?
       <div>
-        <button
-          onClick={trackStructEvent({
-            category: 'feedback',
-            action: 'like',
-            label: permalink,
-          })}
-        >
-          Yes
-        </button>
+        <button onClick={handleLike}>Yes</button>
         <button onClick={handleDislike}>No</button>
       </div>
       {isTextboxVisible && (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import clsx from 'clsx'
 import { ThemeClassNames } from '@docusaurus/theme-common'
 import { useDoc } from '@docusaurus/theme-common/internal'
@@ -23,28 +23,94 @@ function TagsRow(props) {
   )
 }
 
+function CommentBox({ handleSubmit, feedbackTextRef }) {
+  const [textContent, setTextContent] = useState("Why wasn't it useful?")
+  const [textareaClicked, setTextareaClicked] = useState(false)
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          ref={feedbackTextRef}
+          value={textContent}
+          onChange={(e) => setTextContent(e.target.value)}
+          onClick={() => {
+            if (textareaClicked === false) {
+              setTextContent('')
+              setTextareaClicked(true)
+            }
+          }}
+          rows={4}
+          cols={40}
+        />
+        <button type="submit">Send feedback</button>
+      </form>
+    </div>
+  )
+}
+
 function Feedback() {
+  const { permalink } = useDoc().metadata
+
+  const [isTextboxVisible, setIsTextboxVisible] = useState(false)
+  const [isThanksVisible, setIsThanksVisible] = useState(false)
+
+  const feedbackTextRef = useRef()
+
+  const handleDislike = () => {
+    setIsTextboxVisible((current) => !current)
+    setIsThanksVisible(false)
+
+    trackStructEvent({
+      category: 'feedback',
+      action: 'dislike',
+      label: permalink,
+    })
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log('submitted')
+
+    const text = feedbackTextRef.current.defaultValue
+    console.log(text)
+
+    trackStructEvent({
+      category: 'feedback',
+      action: 'comment',
+      label: permalink,
+      property: text,
+    })
+
+    setIsTextboxVisible((current) => !current)
+    setIsThanksVisible(true)
+    setTimeout(() => {
+      setIsThanksVisible(false)
+    }, 1000)
+  }
+
   return (
     <div className="col margin-bottom--sm">
-      Was this page helpful?
+      Was this page useful?
       <div>
         <button
           onClick={trackStructEvent({
             category: 'feedback',
             action: 'like',
+            label: permalink,
           })}
         >
           Yes
         </button>
-        <button
-          onClick={trackStructEvent({
-            category: 'feedback',
-            action: 'dislike',
-          })}
-        >
-          No
-        </button>
+        <button onClick={handleDislike}>No</button>
       </div>
+      {isTextboxVisible && (
+        <CommentBox
+          handleSubmit={handleSubmit}
+          feedbackTextRef={feedbackTextRef}
+        />
+      )}
+      {isThanksVisible && <div>Thanks for your feedback!</div>}
     </div>
   )
 }

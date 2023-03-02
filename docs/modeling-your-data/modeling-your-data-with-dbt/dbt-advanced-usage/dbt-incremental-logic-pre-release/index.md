@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-We are in the process of moving our packages away from the custom `snowplow_incremental` [materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) materialization to instead use the default `incremental` materialization, with an overridden macro for generating the sql to deliver the same performance benefit our custom materialization has done for years.
+We are in the process of moving our packages away from the custom `snowplow_incremental` [materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) to instead use the default `incremental` materialization, with an overridden macro for generating the sql to deliver the same performance benefit our custom materialization has done for years.
 
 Currently we are in pre-release in the `snowplow_utils` package (which contains the materialization), and in `snowplow_web` which uses it, to test the new version for any adverse issues or performance slow downs. The expectation is users will see no difference in performance but will gain access to newer dbt materialization features such as [`on_schema_change`](https://docs.getdbt.com/docs/build/incremental-models#what-if-the-columns-of-my-incremental-model-change), and it will simplify the workflow of using our packages.
 

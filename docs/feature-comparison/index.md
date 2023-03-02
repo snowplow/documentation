@@ -51,7 +51,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ❌ | ❌ | ✅ |
 | <h3>Deployment & security</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) | 
 | Deployment method | self-hosted<br/>(AWS, GCP) | Snowplow-hosted cloud | private cloud<br/>(AWS, GCP) |
-| SSO | ❌ | ❌ | ✅ |
+| Single Sign-On | ❌ | ❌ | ✅ |
 | Fine grained user permissions (ACLs) | ❌ | ❌ | ✅<br/>_(top tier only)_ |
 | Custom VPC integration | ❌ | ❌ | bolt-on |
 | AWS Infra security bundle | ❌ | ❌ | ✅<br/>_(top tier only)_ |

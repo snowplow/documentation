@@ -1,12 +1,17 @@
 ---
 title: "Snowplow Materialization (Pre-Release)"
-unlisted: true
-sidebar_position: 400
+sidebar_position: 99999
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+:::danger
+
+This information releases to pre-release versions of our dbt packages, in particular release candidates for versions 0.14.0 of web and utils. Please see our [Discourse](https://discourse.snowplow.io/) posts for more information.
+
+:::
 
 We are in the process of moving our packages away from the custom `snowplow_incremental` [materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) to instead use the default `incremental` materialization, with an overridden macro for generating the sql to deliver the same performance benefit our custom materialization has done for years.
 
@@ -14,7 +19,7 @@ Currently we are in pre-release in the `snowplow_utils` package (which contains 
 
 ## Instructions
 
-To enable the new macro to override the default dbt sql generation you **must** add the following to the top level of your `dbt_project.yml` file:
+Assuming you have the pre-release versions installed, to enable the new macro to override the default dbt sql generation you **must** add the following to the top level of your `dbt_project.yml` file:
 
 ```yaml
 # dbt_project.yml

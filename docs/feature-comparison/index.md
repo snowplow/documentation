@@ -13,7 +13,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | [35+ trackers & webhooks](/docs/collecting-data/index.md) | ✅ | ✅ | ✅ |
 | 1st party tracking | ✅ | _coming soon_ | ✅ |
 | [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ | ✅ |
-| [Custom events & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) | ✅ | _coming soon_ | ✅ |
+| [Custom events & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) | ✅ | ✅ | ✅ |
 | [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ | ✅ |
 | Advanced stream transformations (JS, API, SQL enrichments) | ✅ | ❌ | ✅ |
 | [Out-of-the-box data models](/docs/modeling-your-data/what-is-data-modeling/index.md)  | ✅ | ✅ | ✅ |

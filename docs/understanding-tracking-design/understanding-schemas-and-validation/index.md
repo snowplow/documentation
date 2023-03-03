@@ -27,6 +27,10 @@ Rather than just leaving your data open to interpretation by the many different 
 
 ## The anatomy of a schema
 
+:::info
+Please note that for BDP Cloud customers this complexity is abstracted by [the Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md).
+:::
+
 Let’s take a look at an example JSON schema to talk about its constituent parts:
 
 ```json

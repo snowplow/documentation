@@ -32,9 +32,7 @@ async function createConfig() {
       require.resolve('./google.js'),
     ],
 
-    themes : [
-      '@saucelabs/theme-github-codeblock'
-    ],
+    themes: ['@saucelabs/theme-github-codeblock'],
 
     presets: [
       [

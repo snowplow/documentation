@@ -22,59 +22,54 @@ This page is auto-generated from our dbt packages, some information may be incom
 ### Snowplow Fractribution Channel Counts {#model.snowplow_fractribution.snowplow_fractribution_channel_counts}
 
 <DbtDetails><summary>
-<code>models/&lt;adaptor&gt;/snowplow_fractribution_channel_counts.sql</code>
+<code>models/snowplow_fractribution_channel_counts.sql</code>
 </summary>
 
 #### Description
 Number of sessions per channel, campaign, source and medium
 
-#### File Paths
-<Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
-
-`models/snowflake/snowplow_fractribution_channel_counts.sql`
-</TabItem>
-</Tabs>
-
+**Type**: Table
 
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| channel | Channel name |
-| campaign | Campaign name |
-| source | Source / referring host |
-| medium | Marketing medium |
-| number_of_sessions | Count of sessions per channel / campaign / source / medium |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| channel | Channel name | text |
+| campaign | Campaign name | text |
+| source | Source / referring host | text |
+| medium | Marketing medium | text |
+| number_of_sessions | Count of sessions per channel / campaign / source / medium | number |
 </DbtDetails>
 
 <DbtDetails>
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="default" label="default" default>
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowflake/snowplow_fractribution_channel_counts.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowplow_fractribution_channel_counts.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
-  ) 
+  )
 }}
 
-SELECT
-    channel,
-    campaign,
-    source,
-    medium,
-    COUNT(*) AS number_of_sessions
-FROM
-    {{ ref('snowplow_fractribution_sessions_by_customer_id') }}
-GROUP BY channel, campaign, source, medium
-ORDER BY channel, number_of_sessions DESC
+select
+  channel,
+  campaign,
+  source,
+  medium,
+  count(*) as number_of_sessions
+
+from {{ ref('snowplow_fractribution_sessions_by_customer_id') }}
+
+group by 1,2,3,4
+
+order by channel, number_of_sessions desc
 ```
 </TabItem>
 </Tabs>
@@ -109,29 +104,31 @@ ORDER BY channel, number_of_sessions DESC
 ### Snowplow Fractribution Channel Spend {#model.snowplow_fractribution.snowplow_fractribution_channel_spend}
 
 <DbtDetails><summary>
-<code>models/&lt;adaptor&gt;/snowplow_fractribution_channel_spend.sql</code>
+<code>models/snowplow_fractribution_channel_spend.sql</code>
 </summary>
 
 #### Description
 This model does not currently have a description.
 
-#### File Paths
-<Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
-
-`models/snowflake/snowplow_fractribution_channel_spend.sql`
-</TabItem>
-</Tabs>
-
+**Type**: Table
 
 #### Details
+<DbtDetails>
+<summary>Columns</summary>
+
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| channel |   | text |
+| spend |   | number |
+</DbtDetails>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="default" label="default" default>
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowflake/snowplow_fractribution_channel_spend.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowplow_fractribution_channel_spend.sql">Source</a></i></b></center>
 
 ```jinja2
 {{ 
@@ -171,77 +168,60 @@ This model does not currently have a description.
 ### Snowplow Fractribution Conversions By Customer Id {#model.snowplow_fractribution.snowplow_fractribution_conversions_by_customer_id}
 
 <DbtDetails><summary>
-<code>models/&lt;adaptor&gt;/snowplow_fractribution_conversions_by_customer_id.sql</code>
+<code>models/snowplow_fractribution_conversions_by_customer_id.sql</code>
 </summary>
 
 #### Description
 Each conversion and associated revenue per customer_id
 
-#### File Paths
-<Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
-
-`models/snowflake/snowplow_fractribution_conversions_by_customer_id.sql`
-</TabItem>
-</Tabs>
-
+**Type**: Table
 
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| customerid | Identifier for the customer, 'f' prefixed when domain_userid is used, 'u' prefixed for when user_id is used (logged in?) |
-| conversiontimestamp | UTC timestamp for the conversion |
-| revenue | Revenue (dollars / cents) for the conversion |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| customer_id | Identifier for the customer, 'f' prefixed when domain_userid is used, 'u' prefixed for when user_id is used (logged in?) | text |
+| conversion_tstamp |   | timestamp_ntz |
+| revenue | Revenue (dollars / cents) for the conversion | number |
 </DbtDetails>
 
 <DbtDetails>
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="default" label="default" default>
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowflake/snowplow_fractribution_conversions_by_customer_id.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowplow_fractribution_conversions_by_customer_id.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
-  ) 
+  )
 }}
 
-SELECT
-    CASE
-        WHEN events.user_id IS NOT NULL AND events.user_id != '' THEN 'u' || events.user_id -- use event user_id
-        {% if var('use_snowplow_web_user_mapping_table') %}
-            WHEN user_mapping.domain_userid IS NOT NULL THEN 'u' || user_mapping.user_id
-        {% endif %}
-        ELSE 'f' || events.domain_userid
-    END AS customerId,
-    derived_tstamp AS conversionTimestamp,
-    {{ conversion_value() }} AS revenue
-FROM
-    {{ var('conversions_source' )}} AS events
-    {% if var('use_snowplow_web_user_mapping_table') %}
-        LEFT JOIN
-        {{ var('snowplow_web_user_mapping_table') }} AS user_mapping
-        ON
-        events.domain_userid = user_mapping.domain_userid
+select
+  case when events.user_id is not null and events.user_id != '' then 'u' || events.user_id -- use event user_id
+    {% if var('snowplow__use_snowplow_web_user_mapping_table') %}
+       when user_mapping.domain_userid is not null then 'u' || user_mapping.user_id
     {% endif %}
-WHERE
-    {{ conversion_clause() }}
-    AND
-    DATE(derived_tstamp) >= CASE WHEN '{{ var('conversion_window_start_date') }}' = '' 
-                                THEN current_date()-31
-                                ELSE '{{ var('conversion_window_start_date') }}'
-                                END
-    AND
-    DATE(derived_tstamp) <= CASE WHEN '{{ var('conversion_window_end_date') }}' = '' 
-                                THEN current_date()-1
-                                ELSE '{{ var('conversion_window_end_date') }}'
-                                END
+       else 'f' || events.domain_userid
+  end as customer_id,
+  derived_tstamp as conversion_tstamp,
+  {{ conversion_value() }} as revenue
+
+from {{ var('snowplow__conversions_source' )}} as events
+
+{% if var('snowplow__use_snowplow_web_user_mapping_table') %}
+  left join {{ var('snowplow__web_user_mapping_table') }} as user_mapping
+    on events.domain_userid = user_mapping.domain_userid
+{% endif %}
+
+where {{ conversion_clause() }}
+  and date(derived_tstamp) >= '{{ get_lookback_date_limits("min") }}'
+  and date(derived_tstamp) <= '{{ get_lookback_date_limits("max") }}'
 ```
 </TabItem>
 </Tabs>
@@ -251,15 +231,11 @@ WHERE
 
 #### Depends On
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
-
-- [source.snowplow_fractribution.atomic.events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#source.snowplow_fractribution.atomic.events)
-
-</TabItem>
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_fractribution.conversion_clause](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.conversion_clause)
 - [macro.snowplow_fractribution.conversion_value](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.conversion_value)
+- [macro.snowplow_fractribution.get_lookback_date_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.get_lookback_date_limits)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
@@ -279,69 +255,75 @@ WHERE
 ### Snowplow Fractribution Path Summary {#model.snowplow_fractribution.snowplow_fractribution_path_summary}
 
 <DbtDetails><summary>
-<code>models/&lt;adaptor&gt;/snowplow_fractribution_path_summary.sql</code>
+<code>models/snowplow_fractribution_path_summary.sql</code>
 </summary>
 
 #### Description
 For each unique path, a summary of associated conversions, non conversions and revenue
 
-#### File Paths
-<Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
-
-`models/snowflake/snowplow_fractribution_path_summary.sql`
-</TabItem>
-</Tabs>
-
+**Type**: Table
 
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| transformedpath | > delimited path summary |
-| conversions | Count of conversions for this path |
-| nonconversions | Count of non-conversions for path |
-| revenue | Revenue for the given path |
-| direct_display_other_organic_search_paid_search_referral | These columns may be created dynamically... |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| transformed_path | > delimited path summary | text |
+| conversions | Count of conversions for this path | number |
+| non_conversions | Count of non-conversions for path | number |
+| revenue | Revenue for the given path | number |
 </DbtDetails>
 
 <DbtDetails>
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="default" label="default" default>
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowflake/snowplow_fractribution_path_summary.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowplow_fractribution_path_summary.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
-  ) 
+  )
 }}
 
-WITH PathsToConversion AS (
-  SELECT transformedPath, COUNT(*) AS conversions, SUM(revenue) AS revenue
-  FROM
-    {{ ref('snowplow_fractribution_paths_to_conversion') }}
-  GROUP BY transformedPath
-), PathsToNonConversion AS (
-  SELECT transformedPath, COUNT(*) AS nonConversions
-  FROM 
-    {{ ref('snowplow_fractribution_paths_to_non_conversion') }}
-    GROUP BY transformedPath
+with paths_to_conversion as (
+
+  select
+    transformed_path,
+    count(*) as conversions,
+    sum(revenue) as revenue
+
+  from {{ ref('snowplow_fractribution_paths_to_conversion') }}
+
+  group by 1
+
 )
-SELECT
-  IFNULL(PathsToConversion.transformedPath,
-         PathsToNonConversion.transformedPath) AS transformedPath,
-  IFNULL(PathsToConversion.conversions, 0) AS conversions,
-  IFNULL(PathsToNonConversion.nonConversions, 0) AS nonConversions,
-  PathsToConversion.revenue
-FROM PathsToConversion
-FULL JOIN PathsToNonConversion
-  USING(transformedPath)
+
+, paths_to_non_conversion as (
+
+  select
+    transformed_path,
+    count(*) as non_conversions
+
+  from {{ ref('snowplow_fractribution_paths_to_non_conversion') }}
+
+  group by 1
+)
+
+select
+  coalesce(c.transformed_path, n.transformed_path) as transformed_path,
+  coalesce(c.conversions, 0) as conversions,
+  coalesce(n.non_conversions, 0) as non_conversions,
+  c.revenue
+
+from paths_to_conversion c
+
+full join paths_to_non_conversion n
+  on c.transformed_path = n.transformed_path
 ```
 </TabItem>
 </Tabs>
@@ -368,75 +350,86 @@ FULL JOIN PathsToNonConversion
 ### Snowplow Fractribution Paths To Conversion {#model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion}
 
 <DbtDetails><summary>
-<code>models/&lt;adaptor&gt;/snowplow_fractribution_paths_to_conversion.sql</code>
+<code>models/snowplow_fractribution_paths_to_conversion.sql</code>
 </summary>
 
 #### Description
 Customer id and the the paths the customer has followed that have lead to conversion
 
-#### File Paths
-<Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
-
-`models/snowflake/snowplow_fractribution_paths_to_conversion.sql`
-</TabItem>
-</Tabs>
-
+**Type**: Table
 
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| customerid | Id for the customer (identified or cookie) |
-| conversiontimestamp | UTC timestamp for the conversion event |
-| revenue | Revenue associated with the conversion |
-| path | Path to conversion (> delimited) |
-| transformedpath | Transformations applied to "path" above |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| customer_id | Id for the customer (identified or cookie) | text |
+| conversion_tstamp |   | timestamp_ntz |
+| revenue | Revenue associated with the conversion | number |
+| path | Path to conversion (> delimited) | text |
+| transformed_path | Transformations applied to "path" above | text |
 </DbtDetails>
 
 <DbtDetails>
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="default" label="default" default>
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowflake/snowplow_fractribution_paths_to_conversion.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowplow_fractribution_paths_to_conversion.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
-  ) 
+  )
 }}
 
-SELECT
-  con.customerId,
-  conversionTimestamp,
+-- Requires macro trim_long_path
+
+with string_aggs as (
+
+  select
+    c.customer_id,
+    c.conversion_tstamp,
+    c.revenue,
+    {{ snowplow_utils.get_string_agg('channel', 's', separator=' > ', sort_numeric=false, order_by_column='visit_start_tstamp', order_by_column_prefix='s') }} as path
+
+  from {{ ref('snowplow_fractribution_conversions_by_customer_id') }} c
+
+  inner join {{ ref('snowplow_fractribution_sessions_by_customer_id') }} s
+  on c.customer_id = s.customer_id
+    and {{ datediff('s.visit_start_tstamp', 'c.conversion_tstamp', 'day') }}  >= 0
+    and {{ datediff('s.visit_start_tstamp', 'c.conversion_tstamp', 'day') }} <= {{ var('snowplow__path_lookback_days') }}
+
+  group by 1,2,3
+
+)
+
+, arrays as (
+
+  select
+    customer_id,
+    conversion_tstamp,
+    revenue,
+    {{ snowplow_utils.get_split_to_array('path', 's', ' > ') }} as path,
+    {{ snowplow_utils.get_split_to_array('path', 's', ' > ') }} as transformed_path
+
+  from string_aggs s
+
+)
+
+{{ transform_paths('conversions', 'arrays') }}
+
+select
+  customer_id,
+  conversion_tstamp,
   revenue,
-  ARRAY_TO_STRING({{schema}}.TrimLongPath(
-    ARRAY_AGG(channel) WITHIN GROUP (ORDER BY visitStartTimestamp), {{ var('path_lookback_steps') }}),
-    ' > ') AS path,
-  ARRAY_TO_STRING(
-    {% for path_transform_name, _ in var('path_transforms')|reverse %}
-      {{schema}}.{{path_transform_name}}(
-    {% endfor %}
-        ARRAY_AGG(channel) WITHIN GROUP (ORDER BY visitStartTimestamp)
-    {% for _, arg_str in var('path_transforms') %}
-      {% if arg_str %}, {{arg_str}}{% endif %})
-    {% endfor %}
-    , ' > ') AS transformedPath
-FROM {{ ref('snowplow_fractribution_conversions_by_customer_id') }} con
-LEFT JOIN {{ ref('snowplow_fractribution_sessions_by_customer_id') }} se
-  ON
-    con.customerId = se.customerId
-    AND DATEDIFF(day, visitStartTimestamp, conversionTimestamp)
-      BETWEEN 0 AND {{ var('path_lookback_days') }}
-GROUP BY
-  con.customerId,
-  conversionTimestamp,
-  revenue
+  {{ snowplow_utils.get_array_to_string('path', 'p', ' > ') }} as path,
+  {{ snowplow_utils.get_array_to_string('transformed_path', 'p', ' > ') }} as transformed_path
+
+from path_transforms p
 ```
 </TabItem>
 </Tabs>
@@ -454,6 +447,11 @@ GROUP BY
 </TabItem>
 <TabItem value="macros" label="Macros">
 
+- macro.dbt.datediff
+- [macro.snowplow_fractribution.transform_paths](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.transform_paths)
+- [macro.snowplow_utils.get_array_to_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_array_to_string)
+- [macro.snowplow_utils.get_split_to_array](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_split_to_array)
+- [macro.snowplow_utils.get_string_agg](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_string_agg)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
@@ -472,83 +470,94 @@ GROUP BY
 ### Snowplow Fractribution Paths To Non Conversion {#model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion}
 
 <DbtDetails><summary>
-<code>models/&lt;adaptor&gt;/snowplow_fractribution_paths_to_non_conversion.sql</code>
+<code>models/snowplow_fractribution_paths_to_non_conversion.sql</code>
 </summary>
 
 #### Description
 Customer id and the the paths the customer has followed that have not lead to conversion
 
-#### File Paths
-<Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
-
-`models/snowflake/snowplow_fractribution_paths_to_non_conversion.sql`
-</TabItem>
-</Tabs>
-
+**Type**: Table
 
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| customerid | Id for the customer (identified or cookie) |
-| path | Path to conversion (> delimited) |
-| transformedpath | Transformations applied to "path" above |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| customer_id | Id for the customer (identified or cookie) | text |
+| path | Path to conversion (> delimited) | text |
+| transformed_path | Transformations applied to "path" above | text |
 </DbtDetails>
 
 <DbtDetails>
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="default" label="default" default>
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowflake/snowplow_fractribution_paths_to_non_conversion.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowplow_fractribution_paths_to_non_conversion.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
-  ) 
+  )
 }}
 
--- Requires TrimLongPath UDF
+-- Requires macro trim_long_path
 
-WITH Conversions AS (
-  SELECT DISTINCT customerId
-  FROM {{ ref('snowplow_fractribution_conversions_by_customer_id') }}
-),
-NonConversions AS (
-  SELECT
-    customerId,
-    MAX(visitStartTimestamp) AS nonConversionTimestamp
-  FROM {{ ref('snowplow_fractribution_sessions_by_customer_id') }} se
-  LEFT JOIN Conversions
-    USING (customerId)
-  WHERE Conversions.customerId IS NULL
-  GROUP BY customerId
+
+with non_conversions as (
+
+  select
+    customer_id,
+    max(visit_start_tstamp) as non_conversion_tstamp
+
+  from {{ ref('snowplow_fractribution_sessions_by_customer_id') }} s
+
+  where not exists (select customer_id from {{ ref('snowplow_fractribution_conversions_by_customer_id') }} c where s.customer_id = c.customer_id)
+
+  group by 1
+
 )
-SELECT
-  NonConversions.customerId,
-  ARRAY_TO_STRING({{schema}}.TrimLongPath(
-    ARRAY_AGG(channel) WITHIN GROUP (ORDER BY visitStartTimestamp), {{ var('path_lookback_steps') }}), ' > ') AS path,
-  ARRAY_TO_STRING(
-    {% for path_transform_name, _ in var('path_transforms')|reverse %}
-      {{schema}}.{{path_transform_name}}(
-    {% endfor %}
-        ARRAY_AGG(channel) WITHIN GROUP (ORDER BY visitStartTimestamp)
-    {% for _, arg_str in var('path_transforms') %}
-      {% if arg_str %}, {{arg_str}}{% endif %})
-    {% endfor %}
-    , ' > ') AS transformedPath
-FROM NonConversions
-LEFT JOIN {{ ref('snowplow_fractribution_sessions_by_customer_id') }} se
-  ON
-    NonConversions.customerId = se.customerId
-    AND DATEDIFF(day, visitStartTimestamp, nonConversionTimestamp)
-      BETWEEN 0 AND {{ var('path_lookback_days') }}
-GROUP BY NonConversions.customerId
+
+, string_aggs as (
+
+  select
+    n.customer_id,
+    {{ snowplow_utils.get_string_agg('channel', 's', separator=' > ', order_by_column='visit_start_tstamp', sort_numeric=false, order_by_column_prefix='s') }} as path
+
+  from non_conversions n
+
+  inner join {{ ref('snowplow_fractribution_sessions_by_customer_id') }} s
+  on n.customer_id = s.customer_id
+    and {{ datediff('s.visit_start_tstamp', 'n.non_conversion_tstamp', 'day') }}  >= 0
+    and {{ datediff('s.visit_start_tstamp', 'n.non_conversion_tstamp', 'day') }} <= {{ var('snowplow__path_lookback_days') }}
+
+  group by 1
+
+
+)
+
+, arrays as (
+
+    select
+      customer_id,
+      {{ snowplow_utils.get_split_to_array('path', 's', ' > ') }} as path,
+      {{ snowplow_utils.get_split_to_array('path', 's', ' > ') }} as transformed_path
+
+    from string_aggs s
+
+)
+
+{{ transform_paths('non_conversions', 'arrays') }}
+
+select
+  customer_id,
+  {{ snowplow_utils.get_array_to_string('path', 'p', ' > ') }} as path,
+  {{ snowplow_utils.get_array_to_string('transformed_path', 'p', ' > ') }} as transformed_path
+
+from path_transforms p
 ```
 </TabItem>
 </Tabs>
@@ -566,6 +575,11 @@ GROUP BY NonConversions.customerId
 </TabItem>
 <TabItem value="macros" label="Macros">
 
+- macro.dbt.datediff
+- [macro.snowplow_fractribution.transform_paths](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.transform_paths)
+- [macro.snowplow_utils.get_array_to_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_array_to_string)
+- [macro.snowplow_utils.get_split_to_array](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_split_to_array)
+- [macro.snowplow_utils.get_string_agg](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_string_agg)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
@@ -584,44 +598,37 @@ GROUP BY NonConversions.customerId
 ### Snowplow Fractribution Sessions By Customer Id {#model.snowplow_fractribution.snowplow_fractribution_sessions_by_customer_id}
 
 <DbtDetails><summary>
-<code>models/&lt;adaptor&gt;/snowplow_fractribution_sessions_by_customer_id.sql</code>
+<code>models/snowplow_fractribution_sessions_by_customer_id.sql</code>
 </summary>
 
 #### Description
-Channels per session by customer id, yields one row per session unless consider_intrasession_channels is true
+Channels per session by customer id, yields one row per session unless snowplow__consider_intrasession_channels is true
 
 
-#### File Paths
-<Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
-
-`models/snowflake/snowplow_fractribution_sessions_by_customer_id.sql`
-</TabItem>
-</Tabs>
-
+**Type**: Table
 
 #### Details
 <DbtDetails>
 <summary>Columns</summary>
 
-| Column Name | Description |
-|--------------|-------------|
-| customerid | Customer id |
-| visitstarttimestamp | UTC timestamp for the start of the session |
-| channel | Channel |
-| referralpath | Referall path for the session |
-| campaign | Marketing campaign |
-| source | Marketing source |
-| medium | Marketing medium |
+| Column Name | Description |Type|
+|--------------|-------------|----|
+| customer_id | Customer id | text |
+| visit_start_tstamp | UTC timestamp for the start of the session | timestamp_ntz |
+| channel | Channel | text |
+| referral_path | Referall path for the session | text |
+| campaign | Marketing campaign | text |
+| source | Marketing source | text |
+| medium | Marketing medium | text |
 </DbtDetails>
 
 <DbtDetails>
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="default" label="default" default>
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowflake/snowplow_fractribution_sessions_by_customer_id.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowplow_fractribution_sessions_by_customer_id.sql">Source</a></i></b></center>
 
 ```jinja2
 {{
@@ -630,59 +637,57 @@ Channels per session by customer id, yields one row per session unless consider_
   )
 }}
 
-SELECT
-    CASE
-        WHEN page_views.user_id IS NOT NULL AND page_views.user_id != '' THEN 'u' || page_views.user_id -- use event user_id
-        {% if var('use_snowplow_web_user_mapping_table') %}
-            WHEN user_mapping.domain_userid IS NOT NULL THEN 'u' || user_mapping.user_id
-        {% endif %}
-        ELSE 'f' || page_views.domain_userid
-    END AS customerId, -- f (anonymous) or u (identifier) prefixed user identifier
-    derived_tstamp AS visitStartTimestamp, -- we consider the event timestamp to be the session start, rather than the session start timestamp
-    {{ channel_classification() }} AS channel,
-    refr_urlpath AS referralPath,
-    mkt_campaign AS campaign,
-    mkt_source AS source,
-    mkt_medium AS medium
-FROM
-    {{ var('page_views_source') }}  page_views
-    {% if var('use_snowplow_web_user_mapping_table') %}
-        LEFT JOIN
-        {{ var('snowplow_web_user_mapping_table') }} AS user_mapping
-        ON
-        page_views.domain_userid = user_mapping.domain_userid
-    {% endif %}
-WHERE
-    DATE(derived_tstamp) >= DATEADD(d, -{{ var('path_lookback_days') + 1 }},
-                                CASE WHEN '{{ var('conversion_window_start_date') }}' = ''
-                                THEN current_date()-31
-                                ELSE '{{ var('conversion_window_start_date') }}'
-                                END)
-    AND
-    DATE(derived_tstamp) <= CASE WHEN '{{ var('conversion_window_end_date') }}' = ''
-                                THEN current_date()-1
-                                ELSE '{{ var('conversion_window_end_date') }}'
-                                END
-    AND
+ -- restrict to certain hostnames
+{% if var('snowplow__conversion_hosts') in ('', [], '[]') or var('snowplow__conversion_hosts') == None %}
+    {{ exceptions.raise_compiler_error("Error: var('conversion_host') needs to be set!") }}
+{% endif %}
+
+select
+  case when page_views.user_id is not null and page_views.user_id != '' then 'u' || page_views.user_id -- use event user_id
+  {% if var('snowplow__use_snowplow_web_user_mapping_table') %}
+       when user_mapping.domain_userid is not null then 'u' || user_mapping.user_id
+  {% endif %}
+        else 'f' || page_views.domain_userid
+  end as customer_id, -- f (anonymous) or u (identifier) prefixed user identifier
+  derived_tstamp as visit_start_tstamp, -- we consider the event timestamp to be the session start, rather than the session start timestamp
+  {{ channel_classification() }} as channel,
+  refr_urlpath as referral_path,
+  mkt_campaign as campaign,
+  mkt_source as source,
+  mkt_medium as medium
+
+from {{ var('snowplow__page_views_source') }}  page_views
+
+{% if var('snowplow__use_snowplow_web_user_mapping_table') %}
+  left join {{ var('snowplow__web_user_mapping_table') }} as user_mapping
+  on page_views.domain_userid = user_mapping.domain_userid
+{% endif %}
+
+where date(derived_tstamp) >= '{{ get_lookback_date_limits("min") }}'
+
+  and date(derived_tstamp) <= '{{ get_lookback_date_limits("max") }}'
+
+  and
     -- restrict to certain hostnames
-    {% if var('conversion_hosts') in ('', [], '[]') or var('conversion_hosts') == None %}
-      {{ exceptions.raise_compiler_error("Error: var('conversion_host') needs to be set!") }}
+{% if var('snowplow__conversion_hosts') in ('', [], '[]') or var('snowplow__conversion_hosts') == None %}
+  {{ exceptions.raise_compiler_error("Error: var('conversion_host') needs to be set!") }}
 
-    {% endif %}
-    page_urlhost IN (
-        {%- for urlhost in var('conversion_hosts') %}
-            '{{ urlhost }}'
-            {%- if not loop.last %},{% endif %}
-        {%- endfor %}
-    )
+{% endif %}
+page_urlhost in ({{ snowplow_utils.print_list(var('snowplow__conversion_hosts')) }})
 
-    {% if var('consider_intrasession_channels') %}
-        -- yields one row per channel change
-        AND mkt_medium IS NOT NULL AND mkt_medium != ''
-    {% else %}
-        -- yields one row per session (last touch)
-        AND page_view_in_session_index = 1 -- takes the first page view in the session
-    {% endif %}
+{% if var('snowplow__consider_intrasession_channels') %}
+  -- yields one row per channel change
+  and mkt_medium is not null and mkt_medium != ''
+
+{% else %}
+  -- yields one row per session (last touch)
+  and page_view_in_session_index = 1 -- takes the first page view in the session
+{% endif %}
+
+{% if var('snowplow__channels_to_exclude') %}
+    -- Filters out any unwanted channels
+    and channel not in ({{ snowplow_utils.print_list(var('snowplow__channels_to_exclude')) }})
+{% endif %}
 ```
 </TabItem>
 </Tabs>
@@ -692,14 +697,11 @@ WHERE
 
 #### Depends On
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
-
-- [source.snowplow_fractribution.derived.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#source.snowplow_fractribution.derived.snowplow_web_page_views)
-
-</TabItem>
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_fractribution.channel_classification](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.channel_classification)
+- [macro.snowplow_fractribution.get_lookback_date_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.get_lookback_date_limits)
+- [macro.snowplow_utils.print_list](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.print_list)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>

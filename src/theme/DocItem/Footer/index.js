@@ -111,7 +111,7 @@ function Feedback() {
   }
 
   return (
-    <div className="col margin-bottom--sm">
+    <div className="col margin-bottom--sm" style={{ paddingLeft: 0 + 'px' }}>
       <div className="row margin-bottom--sm" style={{ marginLeft: 0 + 'px' }}>
         <div className={styles.feedback_question}>Was this page helpful?</div>
         <div>

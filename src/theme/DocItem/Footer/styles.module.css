@@ -33,7 +33,7 @@
   max-width: 80%;
   border: 2px solid var(--ifm-color-primary);
   border-radius: var(--ifm-alert-border-radius);
-  background-color: var(--ifm-background-color);
+  background-color: var(--ifm-navbar-background-color);
   resize: none;
 }
 

@@ -42,7 +42,7 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
             }
           }}
           rows={3}
-          cols={20}
+          cols={30}
         />
         <button
           className={clsx(styles.feedback_button, 'col', styles.submit_button)}
@@ -111,31 +111,35 @@ function Feedback() {
   }
 
   return (
-    <div className="row margin-bottom--sm" style={{ marginLeft: 0 + 'px' }}>
-      <div className={styles.feedback_question}>Was this page helpful?</div>
-      <div>
-        <button
-          className={styles.feedback_button}
-          ref={buttonLikeRef}
-          onClick={handleLike}
-        >
-          Yes
-        </button>
-        <button
-          className={styles.feedback_button}
-          ref={buttonDislikeRef}
-          onClick={handleDislike}
-        >
-          No
-        </button>
-        <div>{isThanksVisible && <span>Thanks for your feedback!</span>}</div>
+    <div className="col margin-bottom--sm">
+      <div className="row margin-bottom--sm" style={{ marginLeft: 0 + 'px' }}>
+        <div className={styles.feedback_question}>Was this page helpful?</div>
+        <div>
+          <button
+            className={styles.feedback_button}
+            ref={buttonLikeRef}
+            onClick={handleLike}
+          >
+            Yes
+          </button>
+          <button
+            className={styles.feedback_button}
+            ref={buttonDislikeRef}
+            onClick={handleDislike}
+          >
+            No
+          </button>
+        </div>
+        {isTextboxVisible && (
+          <CommentBox
+            handleSubmit={handleSubmit}
+            feedbackTextRef={feedbackTextRef}
+          />
+        )}
       </div>
-      {isTextboxVisible && (
-        <CommentBox
-          handleSubmit={handleSubmit}
-          feedbackTextRef={feedbackTextRef}
-        />
-      )}
+      <div className={clsx('row', styles.thanks)}>
+        {isThanksVisible && <span>Thanks for your feedback!</span>}
+      </div>
     </div>
   )
 }
@@ -151,7 +155,7 @@ function EditMetaRow({
       <div className="col">
         <Feedback />
       </div>
-      <div>
+      <div style={{ marginLeft: 14 + 'px' }}>
         <div className="col">
           {editUrl && <EditThisPage editUrl={editUrl} />}
         </div>

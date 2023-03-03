@@ -24,26 +24,29 @@ function TagsRow(props) {
 }
 
 function CommentBox({ handleSubmit, feedbackTextRef }) {
-  const [textContent, setTextContent] = useState("Why wasn't it useful?")
-  const [textareaClicked, setTextareaClicked] = useState(false)
+  const [textContent, setTextContent] = useState("Why wasn't it helpful?")
+  const [textareaFocussed, setTextareaFocussed] = useState(false)
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <textarea
+          className={styles.comment_box}
           ref={feedbackTextRef}
           value={textContent}
           onChange={(e) => setTextContent(e.target.value)}
-          onClick={() => {
-            if (textareaClicked === false) {
+          onFocus={() => {
+            if (textareaFocussed === false) {
               setTextContent('')
-              setTextareaClicked(true)
+              setTextareaFocussed(true)
             }
           }}
           rows={4}
           cols={40}
         />
-        <button type="submit">Send feedback</button>
+        <button className={styles.feedback_button} type="submit">
+          Send feedback
+        </button>
       </form>
     </div>
   )
@@ -51,13 +54,17 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
 
 function Feedback() {
   const { permalink } = useDoc().metadata
+  const feedbackTextRef = useRef()
+  const buttonLikeRef = useRef()
+  const buttonDislikeRef = useRef()
 
   const [isTextboxVisible, setIsTextboxVisible] = useState(false)
   const [isThanksVisible, setIsThanksVisible] = useState(false)
 
-  const feedbackTextRef = useRef()
-
   const handleLike = () => {
+    buttonLikeRef.current.blur()
+    setIsTextboxVisible(false)
+
     setIsThanksVisible(true)
     setTimeout(() => {
       setIsThanksVisible(false)
@@ -71,6 +78,7 @@ function Feedback() {
   }
 
   const handleDislike = () => {
+    buttonDislikeRef.current.blur()
     setIsTextboxVisible((current) => !current)
     setIsThanksVisible(false)
 
@@ -104,10 +112,23 @@ function Feedback() {
 
   return (
     <div className="col margin-bottom--sm">
-      Was this page useful?
-      <div>
-        <button onClick={handleLike}>Yes</button>
-        <button onClick={handleDislike}>No</button>
+      <span className={styles.feedback_question}>Was this page helpful?</span>
+      <div className="row">
+        <button
+          className={styles.feedback_button}
+          ref={buttonLikeRef}
+          onClick={handleLike}
+        >
+          Yes
+        </button>
+        <button
+          className={styles.feedback_button}
+          ref={buttonDislikeRef}
+          onClick={handleDislike}
+        >
+          No
+        </button>
+        {isThanksVisible && <span>Thanks for your feedback!</span>}
       </div>
       {isTextboxVisible && (
         <CommentBox
@@ -115,7 +136,6 @@ function Feedback() {
           feedbackTextRef={feedbackTextRef}
         />
       )}
-      {isThanksVisible && <div>Thanks for your feedback!</div>}
     </div>
   )
 }

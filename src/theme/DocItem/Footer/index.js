@@ -28,10 +28,10 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
   const [textareaFocussed, setTextareaFocussed] = useState(false)
 
   return (
-    <div>
+    <div className="row">
       <form onSubmit={handleSubmit}>
         <textarea
-          className={styles.comment_box}
+          className={clsx(styles.comment_box, 'col')}
           ref={feedbackTextRef}
           value={textContent}
           onChange={(e) => setTextContent(e.target.value)}
@@ -41,10 +41,13 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
               setTextareaFocussed(true)
             }
           }}
-          rows={4}
-          cols={40}
+          rows={3}
+          cols={20}
         />
-        <button className={styles.feedback_button} type="submit">
+        <button
+          className={clsx(styles.feedback_button, 'col', styles.submit_button)}
+          type="submit"
+        >
           Send feedback
         </button>
       </form>
@@ -108,9 +111,9 @@ function Feedback() {
   }
 
   return (
-    <div className="col margin-bottom--sm">
-      <span className={styles.feedback_question}>Was this page helpful?</span>
-      <div className="row">
+    <div className="row margin-bottom--sm" style={{ marginLeft: 0 + 'px' }}>
+      <div className={styles.feedback_question}>Was this page helpful?</div>
+      <div>
         <button
           className={styles.feedback_button}
           ref={buttonLikeRef}
@@ -125,7 +128,7 @@ function Feedback() {
         >
           No
         </button>
-        {isThanksVisible && <span>Thanks for your feedback!</span>}
+        <div>{isThanksVisible && <span>Thanks for your feedback!</span>}</div>
       </div>
       {isTextboxVisible && (
         <CommentBox
@@ -145,16 +148,23 @@ function EditMetaRow({
 }) {
   return (
     <div className={clsx(ThemeClassNames.docs.docFooterEditMetaRow, 'row')}>
-      <div className="col">{editUrl && <EditThisPage editUrl={editUrl} />}</div>
+      <div className="col">
+        <Feedback />
+      </div>
+      <div>
+        <div className="col">
+          {editUrl && <EditThisPage editUrl={editUrl} />}
+        </div>
 
-      <div className={clsx('col', styles.lastUpdated)}>
-        {(lastUpdatedAt || lastUpdatedBy) && (
-          <LastUpdated
-            lastUpdatedAt={lastUpdatedAt}
-            formattedLastUpdatedAt={formattedLastUpdatedAt}
-            lastUpdatedBy={lastUpdatedBy}
-          />
-        )}
+        <div className={clsx('col', styles.lastUpdated)}>
+          {(lastUpdatedAt || lastUpdatedBy) && (
+            <LastUpdated
+              lastUpdatedAt={lastUpdatedAt}
+              formattedLastUpdatedAt={formattedLastUpdatedAt}
+              lastUpdatedBy={lastUpdatedBy}
+            />
+          )}
+        </div>
       </div>
     </div>
   )
@@ -178,7 +188,6 @@ export default function DocItemFooter() {
     <footer
       className={clsx(ThemeClassNames.docs.docFooter, 'docusaurus-mt-lg')}
     >
-      <Feedback />
       {canDisplayTagsRow && <TagsRow tags={tags} />}
       {canDisplayEditMetaRow && (
         <EditMetaRow

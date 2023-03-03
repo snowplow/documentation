@@ -13,13 +13,16 @@
 .feedback_question {
   font-size: 14px;
   font-style: italic;
+  padding-right: 14px;
+  line-height: 40px;
 }
 
 .comment_box {
   height: 150px;
   padding: 12px;
-  margin-top: 16px;
+  margin-top: 4px;
   margin-right: 16px;
+  margin-left: 16px;
   box-sizing: border-box;
   border: 2px solid var(--ifm-color-primary);
   border-radius: var(--ifm-alert-border-radius);
@@ -50,6 +53,11 @@
   font-size: 14px;
   line-height: 20px;
   color: #412476;
+}
+
+.submit_button {
+  /* margin-bottom: 50px; */
+  margin-left: 16px;
 }
 
 [data-theme='dark'] .feedback_button {

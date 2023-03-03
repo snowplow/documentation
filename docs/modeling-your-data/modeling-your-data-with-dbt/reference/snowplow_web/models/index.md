@@ -424,7 +424,9 @@ with events_this_run AS (
     a.event_version,
     a.event_fingerprint,
     a.true_tstamp,
-    a.load_tstamp,
+    {% if var('snowplow__enable_load_tstamp', true) %}
+      a.load_tstamp,
+    {% endif %}
     dense_rank() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index --dense_rank so rows with equal tstamps assigned same number
 
   from {{ var('snowplow__events') }} as a
@@ -3803,13 +3805,13 @@ select
   -- optional fields, only populated if enabled.
 
   -- iab enrichment fields: set iab variable to true to enable
-  {{snowplow_web.get_iab_context_fields()}},
+  {{snowplow_web.get_iab_context_fields('iab')}},
 
   -- ua parser enrichment fields
-  {{snowplow_web.get_ua_context_fields()}},
+  {{snowplow_web.get_ua_context_fields('ua')}},
 
   -- yauaa enrichment fields
-  {{snowplow_web.get_yauaa_context_fields()}}
+  {{snowplow_web.get_yauaa_context_fields('ya')}}
 
 from {{ ref('snowplow_web_page_view_events') }} ev
 
@@ -5914,7 +5916,7 @@ with session_firsts as (
     {% if var('snowplow__enable_yauaa', false) -%}
         left join {{ ref('snowplow_web_pv_yauaa') }} ya
         on ev.page_view_id = ya.page_view_id
-    {%- endif -%}
+    {% endif -%}
 
     where
         ev.event_name in ('page_ping', 'page_view')

@@ -91,10 +91,7 @@ function Feedback() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('submitted')
-
     const text = feedbackTextRef.current.defaultValue
-    console.log(text)
 
     trackStructEvent({
       category: 'feedback',

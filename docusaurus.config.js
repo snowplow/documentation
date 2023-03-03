@@ -2,6 +2,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 const sidebar = require('./sidebars')
+const abbreviations = require('./src/remark/abbreviations')
 
 /** @returns {import('@docusaurus/types').Config} */
 async function createConfig() {
@@ -42,7 +43,7 @@ async function createConfig() {
           docs: {
             showLastUpdateTime: true,
             editUrl: 'https://github.com/snowplow/documentation/tree/main/',
-            remarkPlugins: [mdxMermaid.default],
+            remarkPlugins: [mdxMermaid.default, abbreviations],
             async sidebarItemsGenerator({
               defaultSidebarItemsGenerator,
               ...args

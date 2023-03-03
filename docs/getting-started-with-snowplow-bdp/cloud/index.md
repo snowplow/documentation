@@ -2,7 +2,7 @@
 title: "BDP Cloud"
 date: "2020-01-30"
 sidebar_position: 1
-sidebar_label: "🆕 BDP Cloud"
+sidebar_label: "🆕 Behavioral Data Platform — Cloud"
 ---
 
 # Introduction

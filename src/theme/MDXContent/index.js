@@ -9,20 +9,21 @@ const previousVersionPattern = new RegExp(
   '[^/]*(?:previous-|older-)(?:versions?|releases?)/'
 )
 
-const legacyPattern = new RegExp('/legacy')
+const legacyPattern = new RegExp(
+  '/legacy'
+)
 
 export default function MDXContentWrapper(props) {
   const location = useLocation()
   const legacy = legacyPattern.test(location.pathname)
-  if (legacy)
-    return (
-      <>
-        <Head>
-          <meta name="robots" content="noindex, follow" />
-        </Head>
-        <MDXContent {...props} />
-      </>
-    )
+  if (legacy) return (
+    <>
+      <Head>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
+      <MDXContent {...props} />
+    </>
+  )
   const outdated = previousVersionPattern.test(location.pathname)
   if (!outdated) return <MDXContent {...props} />
   const [latest, subpage] = location.pathname.split(previousVersionPattern)

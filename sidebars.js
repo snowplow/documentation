@@ -18,7 +18,7 @@ const swap = (allItems, linkItems) => {
         type: 'html',
         value: item.customProps.header,
         defaultStyle: true,
-        className: 'header',
+        className: "header",
       }
       return [header, { ...item, items: swap(item.items, linkItems) }]
     }
@@ -28,15 +28,13 @@ const swap = (allItems, linkItems) => {
     }
 
     if (linkItems[item.id]) {
-      return [
-        {
-          type: 'link',
-          label: linkItems[item.id].sidebar_label ?? linkItems[item.id].title,
-          href: linkItems[item.id].href,
-          className: linkItems[item.id].sidebar_class_name,
-          customProps: linkItems[item.id].sidebar_custom_props,
-        },
-      ]
+      return [{
+        type: 'link',
+        label: linkItems[item.id].sidebar_label ?? linkItems[item.id].title,
+        href: linkItems[item.id].href,
+        className: linkItems[item.id].sidebar_class_name,
+        customProps: linkItems[item.id].sidebar_custom_props,
+      }]
     }
 
     return [item]

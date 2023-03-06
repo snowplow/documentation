@@ -11,6 +11,51 @@
     <td>AWS region of the S3 bucket. Optional if it can be resolved with <a href="https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html">AWS region provider chain</a>.</td>
 </tr>
 <tr>
+    <td><code>output.maxRecordsPerFile</code> (since 5.4.0) </td>
+    <td>Optional. Default = 10000. Max number of events per parquet partition.</td>
+</tr>
+<tr>
+    <td><code>output.bad.type</code> (since 5.4.0) </td>
+    <td>Optional. Either <code>kinesis</code> or <code>file</code>, default value <code>file</code>. Type of bad output sink. When <code>file</code>, badrows are written as files under URI configured in <code>output.path</code>.</td>
+</tr>
+<tr>
+    <td><code>output.bad.streamName</code> (since 5.4.0) </td>
+    <td>Required if output type is <code>kinesis</code>. Name of the Kinesis stream to write to.</td>
+</tr>
+<tr>
+    <td><code>output.bad.region</code> (since 5.4.0) </td>
+    <td>AWS region of the Kinesis stream. Optional if it can be resolved with <a href="https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html">AWS region provider chain</a>.</td>
+</tr>
+<tr>
+    <td><code>output.bad.recordLimit</code> (since 5.4.0) </td>
+    <td>Optional, default = 500. Limits the number of events in a single PutRecords Kinesis request.</td>
+</tr>
+<tr>
+    <td><code>output.bad.byteLimit</code> (since 5.4.0) </td>
+    <td>Optional, default = 5242880. Limits the number of bytes in a single PutRecords Kinesis request.</td>
+</tr>
+<tr>
+    <td><code>output.bad.backoffPolicy.minBackoff</code> (since 5.4.0) </td>
+    <td>Optional, default = 100 milliseconds. Minimum backoff before retrying when writing to Kinesis fails with internal errors.</td>
+</tr>
+<tr>
+    <td><code>output.bad.backoffPolicy.maxBackoff</code> (since 5.4.0) </td>
+    <td>Optional, default = 10 seconds. Maximum backoff before retrying when writing to Kinesis fails with internal errors.</td>
+</tr>
+<tr>
+    <td><code>output.bad.backoffPolicy.maxRetries</code> (since 5.4.0) </td>
+    <td>Optional, default = 10. Maximum number of retries for internal Kinesis errors.</td>
+</tr>
+<tr>
+    <td><code>output.bad.throttledBackoffPolicy.minBackoff</code> (since 5.4.0) </td>
+    <td>Optional, default = 100 milliseconds. Minimum backoff before retrying when writing to Kinesis fails in case of throughput exceeded. </td>
+</tr>
+<tr>
+    <td><code>output.bad.throttledBackoffPolicy.maxBackoff</code> (since 5.4.0) </td>
+    <td>Optional, default = 10 seconds. Maximum backoff before retrying when writing to Kinesis fails in case of throughput exceeded. Writing is retried forever.</td>
+</tr>
+
+<tr>
     <td><code>queue.type</code></td>
     <td>Required. Type of the message queue. Can be either <code>sqs</code> or <code>sns</code>.</td>
 </tr>

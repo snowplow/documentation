@@ -27,6 +27,30 @@
     <td>Optional. Default value 4096. During the window period, processed items are stored in a buffer. This value determines the size of this buffer. When its limit is reached, buffer content is flushed to blob storage.</td>
 </tr>
 <tr>
+    <td><code>output.maxRecordsPerFile</code> (since 5.4.0) </td>
+    <td>Optional. Default = 10000. Max number of events per parquet partition.</td>
+</tr>
+<tr>
+    <td><code>output.bad.type</code> (since 5.4.0) </td>
+    <td>Optional. Either <code>pubsub</code> or <code>file</code>, default value <code>file</code>. Type of bad output sink. When <code>file</code>, badrows are written as files under URI configured in <code>output.path</code>.</td>
+</tr>
+<tr>
+    <td><code>output.bad.topic</code> (since 5.4.0) </td>
+    <td>Required if output type is <code>pubsub</code>. Name of the PubSub topic that will receive the bad data.</td>
+</tr>
+<tr>
+    <td><code>output.bad.batchSize</code> (since 5.4.0) </td>
+    <td>Optional. Default = 1000, max = 1000. Maximum number of messages sent to PubSub within a batch. When the buffer reaches this number of messages they are sent.</td>
+</tr>
+<tr>
+    <td><code>output.bad.requestByteThreshold</code> (since 5.4.0) </td>
+    <td>Optional. Default = 8000000, max = 10MB. Maximum number of bytes sent to PubSub within a batch. When the buffer reaches this size messages are sent.</td>
+</tr>
+<tr>
+    <td><code>output.bad.delayThreshold</code> (since 5.4.0) </td>
+    <td>Optional. Default = 200 milliseconds. Delay threshold to use for PubSub batching. After this amount of time has elapsed, before <code>batchSize</code> and <code>requestByteThreshold</code> have been reached, messages from the buffer will be sent.</td>
+</tr>
+<tr>
     <td><code>queue.topic</code></td>
     <td>Name of the Pubsub topic used to communicate with Loader</td>
 </tr>

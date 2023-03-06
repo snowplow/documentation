@@ -14,3 +14,7 @@
     <td><code>featureFlags.legacyMessageFormat</code></td>
     <td>This currently the only feature flag. Setting this to <code>true</code> allows you to use a new version of the transformer with an older version of the loader.</td>
 </tr>
+<tr>
+    <td><code>featureFlags.truncateAtomicFields</code> (since 5.4.0) </td>
+    <td>Optional, default <code>false</code>. When enabled, event's atomic fields are truncated (based on the length limits from the atomic JSON schema) before transformation. </td> 
+</tr>

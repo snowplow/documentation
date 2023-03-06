@@ -39,6 +39,7 @@ The loader can emit metrics to a StatsD daemon describing every batch it process
 
 ```text
 snowplow.rdbloader.count_good:42|c|#tag1:value1
+snowplow.rdbloader.count_bad:2|c|#tag1:value1
 snowplow.rdbloader.latency_collector_to_load_min:123.4|g|#tag1:value1
 snowplow.rdbloader.latency_collector_to_load_max:234.5|g|#tag1:value1
 snowplow.rdbloader.latency_transformer_start_to_load:66.6|g|#tag1:value1
@@ -48,6 +49,7 @@ snowplow.rdbloader.latency_transformer_end_to_load:44.4|g|#tag1:value1
 These are the meanings of the individual metrics:
 
 - `count_good`: the total number of good events in the batch that was loaded
+- `count_bad`: the total number of bad events in the batch that was loaded (available since version 5.4.0)
 - `latency_collector_to_load_min`: for the most recent event in the batch, this is the time difference between reaching the collector and getting loaded to the warehouse
 - `latency_collector_to_load_min`: for the oldest event in the batch, this is the time difference between reaching the collector and getting loaded to the warehouse
 - `latency_transformer_start_to_load`: time difference between the transformer starting on this batch and the loader completing loading to the warehouse

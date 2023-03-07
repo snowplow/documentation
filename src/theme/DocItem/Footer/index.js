@@ -1,27 +1,9 @@
 import React, { useState, useRef } from 'react'
 import clsx from 'clsx'
-import { ThemeClassNames } from '@docusaurus/theme-common'
+import Footer from '@theme-original/DocItem/Footer'
 import { useDoc } from '@docusaurus/theme-common/internal'
-import LastUpdated from '@theme/LastUpdated'
-import EditThisPage from '@theme/EditThisPage'
-import TagsListInline from '@theme/TagsListInline'
 import styles from './styles.module.css'
 import { trackStructEvent } from '@snowplow/browser-tracker'
-
-function TagsRow(props) {
-  return (
-    <div
-      className={clsx(
-        ThemeClassNames.docs.docFooterTagsRow,
-        'row margin-bottom--sm'
-      )}
-    >
-      <div className="col">
-        <TagsListInline {...props} />
-      </div>
-    </div>
-  )
-}
 
 function CommentBox({ handleSubmit, feedbackTextRef }) {
   const [textContent, setTextContent] = useState("Why wasn't it helpful?")
@@ -31,7 +13,7 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
     <div className="row">
       <form onSubmit={handleSubmit}>
         <textarea
-          className={clsx(styles.comment_box, 'col')}
+          className={clsx(styles.commentBox, 'col')}
           ref={feedbackTextRef}
           value={textContent}
           onChange={(e) => setTextContent(e.target.value)}
@@ -45,7 +27,12 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
           cols={30}
         />
         <button
-          className={clsx(styles.feedback_button, 'col', styles.submit_button)}
+          className={clsx(
+            'navbar__item',
+            'snwpl-nav-button',
+            'col',
+            styles.submitButton
+          )}
           type="submit"
         >
           Send feedback
@@ -113,17 +100,17 @@ function Feedback() {
   return (
     <div className="col margin-bottom--sm" style={{ paddingLeft: 0 + 'px' }}>
       <div className="row margin-bottom--sm" style={{ marginLeft: 0 + 'px' }}>
-        <div className={styles.feedback_question}>Was this page helpful?</div>
+        <div className={styles.feedbackQuestion}>Was this page helpful?</div>
         <div>
           <button
-            className={styles.feedback_button}
+            className={clsx('navbar__item', 'snwpl-nav-button')}
             ref={buttonLikeRef}
             onClick={handleLike}
           >
             Yes
           </button>
           <button
-            className={styles.feedback_button}
+            className={clsx('navbar__item', 'snwpl-nav-button')}
             ref={buttonDislikeRef}
             onClick={handleDislike}
           >
@@ -137,70 +124,18 @@ function Feedback() {
           />
         )}
       </div>
-      <div className={clsx('row', styles.thanks)}>
+      <div className={clsx('row', styles.feedbackThanksMessage)}>
         {isThanksVisible && <span>Thanks for your feedback!</span>}
       </div>
     </div>
   )
 }
 
-function EditMetaRow({
-  editUrl,
-  lastUpdatedAt,
-  lastUpdatedBy,
-  formattedLastUpdatedAt,
-}) {
+export default function FooterWrapper(props) {
   return (
-    <div className={clsx(ThemeClassNames.docs.docFooterEditMetaRow, 'row')}>
-      <div className="col">
-        <Feedback />
-      </div>
-      <div style={{ marginLeft: 14 + 'px' }}>
-        <div className="col">
-          {editUrl && <EditThisPage editUrl={editUrl} />}
-        </div>
-
-        <div className={clsx('col', styles.lastUpdated)}>
-          {(lastUpdatedAt || lastUpdatedBy) && (
-            <LastUpdated
-              lastUpdatedAt={lastUpdatedAt}
-              formattedLastUpdatedAt={formattedLastUpdatedAt}
-              lastUpdatedBy={lastUpdatedBy}
-            />
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-export default function DocItemFooter() {
-  const { metadata } = useDoc()
-  const {
-    editUrl,
-    lastUpdatedAt,
-    formattedLastUpdatedAt,
-    lastUpdatedBy,
-    tags,
-  } = metadata
-  const canDisplayTagsRow = tags.length > 0
-  const canDisplayEditMetaRow = !!(editUrl || lastUpdatedAt || lastUpdatedBy)
-  const canDisplayFooter = canDisplayTagsRow || canDisplayEditMetaRow
-  if (!canDisplayFooter) {
-    return null
-  }
-  return (
-    <footer
-      className={clsx(ThemeClassNames.docs.docFooter, 'docusaurus-mt-lg')}
-    >
-      {canDisplayTagsRow && <TagsRow tags={tags} />}
-      {canDisplayEditMetaRow && (
-        <EditMetaRow
-          editUrl={editUrl}
-          lastUpdatedAt={lastUpdatedAt}
-          lastUpdatedBy={lastUpdatedBy}
-          formattedLastUpdatedAt={formattedLastUpdatedAt}
-        />
-      )}
-    </footer>
+    <>
+      <Footer {...props} />
+      <Feedback />
+    </>
   )
 }

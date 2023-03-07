@@ -10,20 +10,20 @@
   }
 }
 
-.feedback_question {
+.feedbackQuestion {
   font-size: 14px;
   font-style: italic;
   padding-right: 14px;
   line-height: 40px;
 }
 
-.thanks {
+.feedbackThanksMessage {
   margin-left: 0px;
   font-size: 14px;
   font-weight: 500;
 }
 
-.comment_box {
+.commentBox {
   height: 150px;
   padding: 12px;
   margin-top: 4px;
@@ -37,57 +37,6 @@
   resize: none;
 }
 
-.feedback_button {
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  padding-left: 16px;
-  padding-right: 16px;
-  gap: 8px;
-  background: #f0ebf8;
-  width: auto;
-  height: 30px;
-  box-shadow: 0px 1px 2px 0px #1018280d;
-  border: 1px solid #f0ebf8;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.05),
-    0px 1px 2px rgba(16, 24, 40, 0.05);
-  border-radius: var(--ifm-alert-border-radius);
-  margin-right: 16px;
-  margin-top: 4px;
-
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  color: #412476;
-}
-
-.submit_button {
+.submitButton {
   margin-left: 16px;
-}
-
-[data-theme='dark'] .feedback_button {
-  background: var(--ifm-color-primary-light);
-  border-color: var(--ifm-color-primary-light);
-  color: var(--ifm-font-color-base);
-}
-
-[data-theme='dark'] .feedback_button:hover {
-  background: var(--ifm-color-primary-lighter);
-  border-color: var(--ifm-color-primary-lighter);
-}
-
-[data-theme='dark'] .feedback_button:focus {
-  background: var(--ifm-color-primary-lighter);
-  border-color: var(--ifm-color-primary-lighter);
-  color: var(--ifm-font-color-base);
-}
-
-.feedback_button:active,
-.feedback_button:hover,
-.feedback_button:focus {
-  text-decoration: none;
-  background: #e4dcef;
-  border-color: #e4dcef;
 }

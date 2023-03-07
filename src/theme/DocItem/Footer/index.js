@@ -24,13 +24,14 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
             }
           }}
           rows={3}
-          cols={30}
+          cols={34}
         />
         <button
           className={clsx(
             'navbar__item',
             'snwpl-nav-button',
             'col',
+            styles.feedbackButton,
             styles.submitButton
           )}
           type="submit"
@@ -98,25 +99,37 @@ function Feedback() {
   }
 
   return (
-    <div className="col margin-bottom--sm" style={{ paddingLeft: 0 + 'px' }}>
-      <div className="row margin-bottom--sm" style={{ marginLeft: 0 + 'px' }}>
-        <div className={styles.feedbackQuestion}>Was this page helpful?</div>
-        <div>
+    <div className={clsx('col', styles.feedback)}>
+      <div className={clsx('row', styles.feedback)}>
+        <div className={clsx('row', styles.feedbackQuestion)}>
+          Was this page helpful?
+        </div>
+        <div className="row">
           <button
-            className={clsx('navbar__item', 'snwpl-nav-button')}
+            className={clsx(
+              'navbar__item',
+              'snwpl-nav-button',
+              styles.feedbackButton
+            )}
             ref={buttonLikeRef}
             onClick={handleLike}
           >
             Yes
           </button>
           <button
-            className={clsx('navbar__item', 'snwpl-nav-button')}
+            className={clsx(
+              'navbar__item',
+              'snwpl-nav-button',
+              styles.feedbackButton
+            )}
             ref={buttonDislikeRef}
             onClick={handleDislike}
           >
             No
           </button>
         </div>
+      </div>
+      <div className="row">
         {isTextboxVisible && (
           <CommentBox
             handleSubmit={handleSubmit}

@@ -6,8 +6,7 @@ import styles from './styles.module.css'
 import { trackStructEvent } from '@snowplow/browser-tracker'
 
 function CommentBox({ handleSubmit, feedbackTextRef }) {
-  const [textContent, setTextContent] = useState("Why wasn't it helpful?")
-  const [textareaFocussed, setTextareaFocussed] = useState(false)
+  const placeholder = "Why wasn't it helpful?"
 
   return (
     <div className="row">
@@ -15,14 +14,7 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
         <textarea
           className={clsx(styles.commentBox, 'col')}
           ref={feedbackTextRef}
-          value={textContent}
-          onChange={(e) => setTextContent(e.target.value)}
-          onFocus={() => {
-            if (textareaFocussed === false) {
-              setTextContent('')
-              setTextareaFocussed(true)
-            }
-          }}
+          placeholder={placeholder}
           rows={3}
           cols={34}
         />

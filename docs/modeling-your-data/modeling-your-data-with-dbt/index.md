@@ -149,7 +149,7 @@ export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
     if (! valid(dbtVer)) {
         return(<em>Please enter a valid dbt version.</em>)
     }
-    if (! valid(utilsVer) && utilsVer != '') {
+    if (! valid(utilsVer) && utilsVer !== '') {
         return(<>
         <i>Please enter a valid dbt-utils version.</i>
         </>)
@@ -159,16 +159,16 @@ export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
             let maxVer = '0.0.0'
             let actualMaxVer = '0.0.0'
             for(const [ver, details] of Object.entries(version)) {
-                {/* Check if the version is in the range the package supports, and check if this version is newer than our previous highest */}
-                if (satisfies(dbtVer, details['dbtversion'], {'includePrerelease':true}) && gt(ver, maxVer) ) {
+                // Check if the version is in the range the package supports, and check if this version is newer than our previous highest
+                if (satisfies(dbtVer, details.dbtversion, {'includePrerelease':true}) && gt(ver, maxVer) ) {
                     maxVer = ver
                 }
                 if (gt(ver, actualMaxVer)) {
                     actualMaxVer = ver
                 }
             }
-            if (maxVer == '0.0.0') {
-                packageVersions.push({'package': pkg, 'maxVer': 'none', 'actualMaxVer' : actualMaxVer})
+            if (maxVer === '0.0.0') {
+                packageVersions.push({'package': pkg, 'maxVer': null, actualMaxVer})
             } else {
                 packageVersions.push({'package': pkg, 'maxVer': maxVer, 'actualMaxVer' : actualMaxVer})
             }

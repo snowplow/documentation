@@ -120,93 +120,78 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 
 export function VersionChecker() {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [dbtVer, setDbtVer] = useState('')
-    const [utilsVer, setutilsVer] = useState('')
-    return (
-        <>
-        <TextField
-            id="input-dbt-version"
-            label="dbt Version"
-            onChange={() => setDbtVer(event.target.value)}
-            />
-            &nbsp; &nbsp;
-            <TextField
-            id="input-utils-version"
-            label="dbt-utils Version"
-            onChange={() => setutilsVer(event.target.value)}
-            />
-        <br/>
-        <br/>
-        <Getsupportedpackages dbtVer={dbtVer} utilsVer={utilsVer}/>
-        </>
-    );
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [dbtVer, setDbtVer] = useState('')
+  const [utilsVer, setutilsVer] = useState('')
+  return (
+    <>
+    <TextField
+      id="input-dbt-version"
+      label="dbt Version"
+      onChange={() => setDbtVer(event.target.value)}
+    />
+    &nbsp; &nbsp;
+    <TextField
+      id="input-utils-version"
+      label="dbt-utils Version"
+      onChange={() => setutilsVer(event.target.value)}
+    />
+    <br/>
+    <br/>
+    <GetSupportedPackages dbtVer={dbtVer} utilsVer={utilsVer}/>
+    </>
+  );
 }
 
 
 export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
-    let packageVersions = []
-    if (! valid(dbtVer)) {
-        return(<em>Please enter a valid dbt version.</em>)
+  let packageVersions = []
+  if (! valid(dbtVer)) {
+    return(<em>Please enter a valid dbt version.</em>)
+  }
+  if (! valid(utilsVer) && utilsVer !== '') {
+    return(<em>Please enter a valid dbt version.</em>)
+  }
+  for(const [pkg, version] of Object.entries(dbtVersions)) {
+    let maxVer = '0.0.0'
+    let actualMaxVer = '0.0.0'
+    for(const [ver, details] of Object.entries(version)) {
+      // Check if the version is in the range the package supports, ( AND if the dbt-utils version is within the range (if exists) ) and check if this version is newer than our previous highest
+      let dbt_utils_required_version = details['packages']['dbt-labs/dbt_utils'] ?? utilsVer
+      if (utilsVer === '' && (satisfies(dbtVer, details.dbtversion, {'includePrerelease':true}) && gt(ver, maxVer)) ) {
+        maxVer = ver
+      } else if (utilsVer !== '' && (satisfies(dbtVer, details['dbtversion'], {'includePrerelease':true}) && satisfies(utilsVer, dbt_utils_required_version, {'includePrerelease':true}) && gt(ver, maxVer) )){
+        maxVer = ver
+      }
+      if (gt(ver, actualMaxVer)) {
+        actualMaxVer = ver
+      }
     }
-    if (! valid(utilsVer) && utilsVer !== '') {
-        return(<>
-        <i>Please enter a valid dbt-utils version.</i>
-        </>)
-    }
-    if (utilsVer === '') {
-        for(const [pkg, version] of Object.entries(dbtVersions)) {
-            let maxVer = '0.0.0'
-            let actualMaxVer = '0.0.0'
-            for(const [ver, details] of Object.entries(version)) {
-                // Check if the version is in the range the package supports, and check if this version is newer than our previous highest
-                if (satisfies(dbtVer, details.dbtversion, {'includePrerelease':true}) && gt(ver, maxVer) ) {
-                    maxVer = ver
-                }
-                if (gt(ver, actualMaxVer)) {
-                    actualMaxVer = ver
-                }
-            }
-            if (maxVer === '0.0.0') {
-                packageVersions.push({'package': pkg, 'maxVer': null, actualMaxVer})
-            } else {
-                packageVersions.push({'package': pkg, maxVer, actualMaxVer})
-            }
-        }
-        return (
-        <>
-        <p>For <strong>dbt</strong> version <code>{dbtVer}</code> the latest version of each of our packages you can install are:</p>
-        {packageVersions.map(x => <li>{x.package}: <code>{x.maxVer || 'No matching version supported'}</code> &nbsp;<em>(latest version: <code>{x.actualMaxVer}</code>)</em></li>)}
-        </>
-        )
+    if (maxVer === '0.0.0') {
+      packageVersions.push({pkg, 'maxVer': null, actualMaxVer})
     } else {
-        for(const [pkg, version] of Object.entries(dbtVersions)) {
-            let maxVer = '0.0.0'
-            let actualMaxVer = '0.0.0'
-            for(const [ver, details] of Object.entries(version)) {
-                {/* Check if the dbt version is in the range the package supports, AND if the dbt-utils version is within the range (if exists) and check if this version is newer than our previous highest */}
-                let dbt_utils_required_version = details['packages']['dbt-labs/dbt_utils'] ?? utilsVer
-                console.log(`Package ${pkg} required dbt utils ${dbt_utils_required_version}`)
-                if (satisfies(dbtVer, details['dbtversion'], {'includePrerelease':true}) && satisfies(utilsVer, dbt_utils_required_version, {'includePrerelease':true}) && gt(ver, maxVer) ) {
-                    maxVer = ver
-                }
-                if (gt(ver, actualMaxVer)) {
-                    actualMaxVer = ver
-                }
-            }
-            if (maxVer == '0.0.0') {
-                packageVersions.push({'package': pkg, 'maxVer': 'none', 'actualMaxVer' : actualMaxVer})
-            } else {
-                packageVersions.push({'package': pkg, 'maxVer': maxVer, 'actualMaxVer' : actualMaxVer})
-            }
-        }
-        return (
-        <>
-        <p>For <b>dbt</b> version <code>{dbtVer}</code> and <b>dbt_utils</b> version <code>{utilsVer}</code> the latest version of each of our packages you can install are:</p>
-        {packageVersions.map(x => <li>{x['package']}: <code>{x['maxVer'] == 'none' ? 'No matching version supported' : x['maxVer'] }</code> &nbsp; &nbsp; <i>(latest version: <code>{x['actualMaxVer']}</code>)</i></li>)}
-        </>
-    )
+      packageVersions.push({pkg, maxVer, actualMaxVer})
     }
+  }
+  if (utilsVer !== '') {
+    return (
+      <>
+      <p>For <strong>dbt</strong> version <code>{dbtVer}</code> and <b>dbt_utils</b> version <code>{utilsVer}</code> the latest version of each of our packages you can install are:</p>
+      <ul>
+      {packageVersions.map(x => <li>{x.pkg}: <code>{x.maxVer || 'No matching version supported'}</code> &nbsp;<em>(latest version: <code>{x.actualMaxVer}</code>)</em></li>)}
+      </ul>
+      </>
+    )
+  } else {
+    return (
+      <>
+      <p>For <strong>dbt</strong> version <code>{dbtVer}</code> the latest version of each of our packages you can install are:</p>
+      <ul>
+      {packageVersions.map(x => <li>{x.pkg}: <code>{x.maxVer || 'No matching version supported'}</code> &nbsp;<em>(latest version: <code>{x.actualMaxVer}</code>)</em></li>)}
+      </ul>
+      </>
+    )
+  }
 }
 
 <VersionChecker/>

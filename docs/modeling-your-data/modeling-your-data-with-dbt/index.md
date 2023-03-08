@@ -170,13 +170,13 @@ export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
             if (maxVer === '0.0.0') {
                 packageVersions.push({'package': pkg, 'maxVer': null, actualMaxVer})
             } else {
-                packageVersions.push({'package': pkg, 'maxVer': maxVer, 'actualMaxVer' : actualMaxVer})
+                packageVersions.push({'package': pkg, maxVer, actualMaxVer})
             }
         }
         return (
         <>
-        <p>For <b>dbt</b> version <code>{dbtVer}</code> the latest version of each of our packages you can install are:</p>
-        {packageVersions.map(x => <li>{x['package']}: <code>{x['maxVer'] == 'none' ? 'No matching version supported' : x['maxVer'] }</code> &nbsp; &nbsp; <i>(latest version: <code>{x['actualMaxVer']}</code>)</i></li>)}
+        <p>For <strong>dbt</strong> version <code>{dbtVer}</code> the latest version of each of our packages you can install are:</p>
+        {packageVersions.map(x => <li>{x.package}: <code>{x.maxVer || 'No matching version supported'}</code> &nbsp;<em>(latest version: <code>{x.actualMaxVer}</code>)</em></li>)}
         </>
         )
     } else {

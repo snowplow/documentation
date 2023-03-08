@@ -8,6 +8,11 @@
   line-height: 40px;
 }
 
+.feedbackIcon {
+  margin-top: 8px;
+  margin-right: 4px;
+}
+
 .feedbackThanksMessage {
   margin-top: 12px;
   font-weight: 500;

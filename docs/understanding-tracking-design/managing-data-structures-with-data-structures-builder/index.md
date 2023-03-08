@@ -1,6 +1,5 @@
 ---
 title: "🆕 Managing data structures with the Data Structures Builder"
-date: "2023-03-01"
 sidebar_position: 85
 ---
 

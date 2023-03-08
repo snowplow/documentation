@@ -1,6 +1,5 @@
 ---
 title: "Versioning Data Structures in BDP Enterprise"
-date: "2023-03-01"
 sidebar_position: 20
 ---
 

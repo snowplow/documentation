@@ -18,8 +18,8 @@ You can then add one or multiple properties. For each property, you can set a na
 
 ![](images/data-structures-2.png)
 
-Click save on the Property modal and this will save your property changes.
+Click “Save” on the Property dialog box and this will save your property changes.
 
-Clicking Save on the Data Structure page will publish your Data Structure to your Iglu Server.
+Clicking “Save” on the Data Structure page will publish your Data Structure to your Iglu Server.
 
-For information about editing and versioning your Data Structure please see the [Versioning in BDP Cloud section](/docs/understanding-tracking-design//versioning-your-data-structures/cloud/index.md).
+For information about editing and versioning your Data Structure, please see [Versioning](/docs/understanding-tracking-design/versioning-your-data-structures/cloud/index.md) in BDP Cloud section.

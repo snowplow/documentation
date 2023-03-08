@@ -24,7 +24,7 @@ window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
 ## Custom contexts
 
 :::info
-Please note that for BDP Cloud customers this complexity is abstracted by [the Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md).
+If you are using BDP Cloud, you can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md) without worrying about how it works under the hood.
 :::
 
 Custom contexts let you add additional information about the circumstances surrounding an event by attaching context through entities represented with a [self-describing JSON](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).

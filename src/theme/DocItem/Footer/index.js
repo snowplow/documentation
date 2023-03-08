@@ -17,6 +17,7 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
           placeholder={placeholder}
           rows={3}
           cols={34}
+          maxLength="999"
         />
         <button
           className={clsx(

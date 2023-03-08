@@ -2,9 +2,10 @@ import requests
 import base64
 import re
 import json
+import sys
 
 #Set your PAT key so you get the 5000 calls per hour for the github api
-headers = {'Authorization': f"token <YOUR_PAT_TOKEN>"}
+headers = {'Authorization': f"token {sys.argv[1]}"}
 
 # Functions to decode the contents and process into the format we want
 def process_package(packages):

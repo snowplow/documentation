@@ -176,7 +176,7 @@ export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
   if (utilsVer !== '') {
     return (
       <>
-      <p>For <strong>dbt</strong> version <code>{dbtVer}</code> and <b>dbt_utils</b> version <code>{utilsVer}</code> the latest version of each of our packages you can install are:</p>
+      <p>For <strong>dbt</strong> version <code>{dbtVer}</code> and <strong>dbt_utils</strong> version <code>{utilsVer}</code> the latest version of each of our packages you can install are:</p>
       <ul>
       {packageVersions.map(x => <li>{x.pkg}: <code>{x.maxVer || 'No matching version supported'}</code> &nbsp;<em>(latest version: <code>{x.actualMaxVer}</code>)</em></li>)}
       </ul>

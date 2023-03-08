@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 import { trackStructEvent } from '@snowplow/browser-tracker'
 
 function CommentBox({ handleSubmit, feedbackTextRef }) {
-  const placeholder = "Why wasn't it helpful?"
+  const placeholder = "How can we improve it?"
 
   return (
     <div className="row">

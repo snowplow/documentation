@@ -109,16 +109,15 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 
 ## dbt Version Compatibility Checker
 
-We understand that you may be using other dbt packages that require you to use a specific version of dbt, or a specific version of the `dbt_utils` package, or you simply may not wish to upgrade your existing setup. For that reason we provide a way to check what is the latest version of our packages that you can install for a given setup. Simply enter your dbt and (optional) `dbt_utils` version below.
+You may be using other dbt packages that require you to use a specific version of dbt, or a specific version of the `dbt_utils` package. Or you simply may not wish to upgrade your existing setup.
+
+Here’s a way to check the latest version of our packages you can install for a given setup. Simply enter your dbt version and (optionally) `dbt_utils` version below.
 
 ```mdx-code-block
 import { dbtVersions } from '@site/src/dbtVersions';
 import { satisfies, gt, valid } from "semver";
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-
-
-
 
 export function VersionChecker() {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -145,12 +144,10 @@ export function VersionChecker() {
 }
 
 
-export const Getsupportedpackages = ({children, dbtVer, utilsVer}) => {
+export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
     let packageVersions = []
     if (! valid(dbtVer)) {
-        return(<>
-        <i>Please enter a valid dbt version.</i>
-        </>)
+        return(<em>Please enter a valid dbt version.</em>)
     }
     if (! valid(utilsVer) && utilsVer != '') {
         return(<>

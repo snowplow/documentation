@@ -117,28 +117,7 @@ Here’s a way to check the latest version of our packages you can install for a
 import { dbtVersions } from '@site/src/dbtVersions';
 import { satisfies, gt, valid } from "semver";
 import { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import {useColorMode} from '@docusaurus/theme-common';
-
-export const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: getComputedStyle(document.body).getPropertyValue('--ifm-color-primary-lighter').trim()
-    },
-  },
-});
-
-export const lightTheme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: {
-      main: getComputedStyle(document.body).getPropertyValue('--ifm-color-primary-lighter').trim()
-    },
-  },
-});
 
 export function VersionChecker() {
   const { isDarkTheme } = useColorMode()
@@ -147,25 +126,25 @@ export function VersionChecker() {
   const [utilsVer, setutilsVer] = useState('')
   return (
     <>
-      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-        <TextField
-          id="input-dbt-version"
-          label="dbt Version"
-          onChange={() => setDbtVer(event.target.value)}
-        />
-        <TextField
-          id="input-utils-version"
-          label="dbt-utils Version"
-          onChange={() => setutilsVer(event.target.value)}
-        />
-      </ThemeProvider>
-    <br/>
+      <div style ={{overflow: "hidden"}}>
+        <div style={{width:"48%", float:"left"}}>
+          <form class="DocSearch-Form">
+            <label class="DocSearch-MagnifierLabel" for="dbt">dbt Version:</label><br/>
+            <input class="DocSearch-Input" placeholder="e.g. 1.3.0" maxlength="15" type="text" id="dbt" name="dbt" onChange={() => setDbtVer(event.target.value)}/>
+          </form>
+        </div>
+        <div style={{width:"48%", float:"right"}}>
+          <form class="DocSearch-Form">
+            <label class="DocSearch-MagnifierLabel" for="utils">dbt-utils Version:</label><br/>
+            <input class="DocSearch-Input" placeholder="e.g. 1.0.0" maxlength="15" type="text" id="utils" name="utils" onChange={() => setutilsVer(event.target.value)}/>
+          </form>
+        </div>
+      </div>
     <br/>
     <GetSupportedPackages dbtVer={dbtVer} utilsVer={utilsVer}/>
     </>
   );
 }
-
 
 export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
   let packageVersions = []

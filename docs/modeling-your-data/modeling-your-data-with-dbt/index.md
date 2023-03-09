@@ -129,7 +129,6 @@ export function VersionChecker() {
         id="input-dbt-version"
         label="dbt Version"
         onChange={() => setDbtVer(event.target.value)}
-        style={{"padding-right": "10px"}}
       />
       <TextField
         id="input-utils-version"

@@ -127,6 +127,22 @@ docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --outp
 
 </details>
 
+You can also save the TSV output to a file:
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --output-tsv > output.tsv`
+}</CodeBlock>
+
+:::tip
+
+If you prefer CSV to TSV, you can use the `csvformat` utility that comes with [csvkit](https://csvkit.readthedocs.io/en/latest/):
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --output-tsv | csvformat -t > output.csv`
+}</CodeBlock>
+
+:::
+
 ## Adding custom schemas
 
 One of the benefits of using Snowplow is that you can design your own schemas for your events.

@@ -4,7 +4,9 @@ sidebar_position: 85
 ---
 
 :::info
-The Data Structures Builder is only available for BDP Cloud customers, for BDP Enterprise users, see [Managing data structures in the console](/docs/understanding-tracking-design/managing-data-structures/index.md), for Open Source users, see [Managing data structures using Iglu](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md).
+The Data Structures Builder is only available for BDP Cloud customers.
+
+For BDP Enterprise, see [Managing data structures in the console](/docs/understanding-tracking-design/managing-data-structures/index.md). For Snowplow Open Source, see [Managing data structures using Iglu](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md).
 :::
 
 To create a new Data Structure, first navigate to **Data Structures** in the menu and click the **'Create a Data Structure'** button.

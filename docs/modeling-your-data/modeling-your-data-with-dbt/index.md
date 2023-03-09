@@ -118,23 +118,47 @@ import { dbtVersions } from '@site/src/dbtVersions';
 import { satisfies, gt, valid } from "semver";
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import {useColorMode} from '@docusaurus/theme-common';
+
+export const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: getComputedStyle(document.body).getPropertyValue('--ifm-color-primary-lighter').trim()
+    },
+  },
+});
+
+export const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: getComputedStyle(document.body).getPropertyValue('--ifm-color-primary-lighter').trim()
+    },
+  },
+});
 
 export function VersionChecker() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { isDarkTheme } = useColorMode()
+  const [activeIndex, setActiveIndex] = useState(0)
   const [dbtVer, setDbtVer] = useState('')
   const [utilsVer, setutilsVer] = useState('')
   return (
     <>
-      <TextField
-        id="input-dbt-version"
-        label="dbt Version"
-        onChange={() => setDbtVer(event.target.value)}
-      />
-      <TextField
-        id="input-utils-version"
-        label="dbt-utils Version"
-        onChange={() => setutilsVer(event.target.value)}
-      />
+      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+        <TextField
+          id="input-dbt-version"
+          label="dbt Version"
+          onChange={() => setDbtVer(event.target.value)}
+        />
+        <TextField
+          id="input-utils-version"
+          label="dbt-utils Version"
+          onChange={() => setutilsVer(event.target.value)}
+        />
+      </ThemeProvider>
     <br/>
     <br/>
     <GetSupportedPackages dbtVer={dbtVer} utilsVer={utilsVer}/>

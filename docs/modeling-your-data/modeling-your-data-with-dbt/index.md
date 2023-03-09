@@ -158,7 +158,7 @@ export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
       // Check if the version is in the range the package supports, AND if the dbt-utils version is within the range (if exists) and check if this version is newer than our previous highest
       const dbtUtilsRequiredVersion = details.packages['dbt-labs/dbt_utils'] ?? utilsVer
       const satisfiesDbt = satisfies(dbtVer, details.dbtversion, {includePrerelease:true})
-      const satisfiesDbtUtils = (utilsVer === '') || satisfies(utilsVer, dbt_utils_required_version, {includePrerelease:true})
+      const satisfiesDbtUtils = (utilsVer === '') || satisfies(utilsVer, dbtUtilsRequiredVersion, {includePrerelease:true})
       if (satisfiesDbt && satisfiesDbtUtils && gt(ver, maxVer))  {
         maxVer = ver
       }

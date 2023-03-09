@@ -1,10 +1,10 @@
 ---
-title: "Set up the remote configuration"
+title: "Update tracker configuration remotely"
 date: "2022-08-30"
 sidebar_position: 50
 ---
 
-# Set up the remote configuration
+# Update tracker configuration remotely
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

@@ -7,7 +7,7 @@ sidebar_position: 1
 
 :::note Limits
 
-Please note that BDP Cloud pipelines by default have an event volume cap of 60 events per second and a total of 10m events per month.
+Please note that BDP Cloud pipelines by default have an event volume cap of 60 events per second and a total of 80m events per month.
 
 :::
 
@@ -35,3 +35,7 @@ You can also use the Snowplow iOS and Android mobile trackers or instrument trac
 ## Understanding Snowplow data
 
 Take a look at the [full list](/docs/understanding-your-pipeline/canonical-event/index.md) of properties you can expect in your data.
+
+## Custom events & entities
+
+You can also create your own custom events & entities using [the Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md). To understand more about events & entities please see [here](/docs/understanding-tracking-design/understanding-events-entities/index.md).

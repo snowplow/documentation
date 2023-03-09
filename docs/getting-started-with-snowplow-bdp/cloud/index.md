@@ -21,6 +21,6 @@ For more details, see our [feature comparison page](/docs/feature-comparison/ind
 
 ## Where is the Snowplow pipeline hosted?
     
-All data processed and collected with Snowplow BDP Cloud is undertaken within Snowplow’s own cloud account (AWS `eu-central-1` region). Data is stored in Snowplow’s cloud account for 7 days to provide resilience against potential failures.
+All data processed and collected with Snowplow BDP Cloud is undertaken within Snowplow’s own cloud account (AWS `eu-central-1` or `us-east-2` region). Data is stored in Snowplow’s cloud account for 7 days to provide resilience against potential failures.
 
 For more information, please see our [full product description](https://snowplow.io/).

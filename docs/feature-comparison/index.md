@@ -8,12 +8,12 @@ Should you choose [Snowplow Open Source](/docs/getting-started-on-snowplow-open-
 
 To find out more about the support services offered to Snowplow BDP customers see our [Statement of Support](/statement-of-support/).
 
-| <h3>Create & consume behavioral data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
+| <h3>Create & consume behavioral data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
 |:--|:-:|:-:|:-:|
 | [35+ trackers & webhooks](/docs/collecting-data/index.md) | ✅ | ✅ | ✅ |
 | 1st party tracking | ✅ | _coming soon_ | ✅ |
 | [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ | ✅ |
-| [Custom events & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) | ✅ | _coming soon_ | ✅ |
+| [Custom events & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) | ✅ | ✅ | ✅ |
 | [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ | ✅ |
 | Advanced stream transformations (JS, API, SQL enrichments) | ✅ | ❌ | ✅ |
 | [Out-of-the-box data models](/docs/modeling-your-data/what-is-data-modeling/index.md)  | ✅ | ✅ | ✅ |
@@ -33,7 +33,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | • Pubsub | ✅ | ❌ | ✅ |
 | • Kafka | do-it-yourself | ❌ | bolt-on |
 | • Azure Eventhubs | do-it-yourself | ❌ | bolt-on |
-| <h3>Build more trust in your data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
+| <h3>Build more trust in your data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
 | [Failed Events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md) | ✅ | ❌ | ✅ |
 | [Data quality monitoring & API](/docs/managing-data-quality/failed-events/failed-events-in-the-ui/index.md) | ❌ | ❌ | ✅ |
 | Jobs monitoring dashboard | ❌ | ❌ | ✅ |
@@ -44,18 +44,18 @@ To find out more about the support services offered to Snowplow BDP customers se
 | Warehouse loading latency SLA | ❌ | ❌ | ✅ |
 | Surge protection | do-it-yourself | ❌ | ✅ |
 | Outage protection | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| <h3>Collaborate across multiple teams</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
+| <h3>Collaborate across multiple teams</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
 | Seats | N/A | unlimited | unlimited |
-| [Data structures tooling & API](/docs/understanding-tracking-design/managing-data-structures/index.md) | ❌ | ❌ | ✅ |
+| [Data structures tooling & API](/docs/understanding-tracking-design/managing-data-structures/index.md) | ❌ | ✅<br/>_(UI only)_ | ✅ |
 | [Data modelling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md) | ❌ | _coming soon_ | ✅ |
 | [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ❌ | ❌ | ✅ |
-| <h3>Deployment & security</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) | 
+| <h3>Deployment & security</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) | 
 | Deployment method | self-hosted<br/>(AWS, GCP) | Snowplow-hosted cloud | private cloud<br/>(AWS, GCP) |
 | Single Sign-On | ❌ | ❌ | ✅ |
 | Fine grained user permissions (ACLs) | ❌ | ❌ | ✅<br/>_(top tier only)_ |
 | Custom VPC integration | ❌ | ❌ | bolt-on |
 | AWS Infra security bundle | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| <h3>Services</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud *Preview* :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
+| <h3>Services</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud :new:](/docs/getting-started-with-snowplow-bdp/cloud/index.md) | [BDP Enterprise](/docs/getting-started-with-snowplow-bdp/enterprise/index.md) |
 | Self-help support website, FAQs and educational materials | ✅ | ✅ | ✅ |
 | Community support via Discourse | ✅ | ✅ | ✅ |
 | 24/7/365 Support through email / Help Centre | ❌ | ✅ | ✅ |

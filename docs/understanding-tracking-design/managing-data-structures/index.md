@@ -4,6 +4,12 @@ date: "2020-02-15"
 sidebar_position: 80
 ---
 
+:::info
+Managing data structures in the console is only available for BDP Enterprise customers.
+
+For BDP Cloud, see [Managing data structures with the Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md). For Snowplow Open Source, see [Managing data structures using Iglu](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md).
+:::
+
 ## Creating a new data structure
 
 To create a new Data Structure, first navigate to **Data Structures** in the menu and click the **'Create a Data Structure'** button.

@@ -98,6 +98,10 @@ function Feedback() {
           {/* Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com
           License - https://fontawesome.com/license (Commercial License)
           Copyright 2023 Fonticons, Inc. */}
+          {/* Snowplow comment: This icon ("comment-dots") is part of the 
+          Font Awesome Free catalogue, covered by the CC BY 4.0 license.
+          https://fontawesome.com/license/free
+          https://creativecommons.org/licenses/by/4.0/ */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"

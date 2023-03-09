@@ -38,9 +38,18 @@ let plugin = PluginConfiguration(identifier: "myPlugin")
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
-TODO
+```kotlin
+val plugin = PluginConfiguration("myPlugin")
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+PluginConfiguration plugin = new PluginConfiguration("myPlugin");
+```
 
   </TabItem>
 </Tabs>
@@ -66,9 +75,33 @@ plugin.entities(schemas: [
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
-TODO
+```kotlin
+plugin.entities(
+    schemas = listOf(
+        // The list of schemas to call the closure for is optional. If not passed, the callback is called for all events.
+        "iglu:com.google.analytics.measurement-protocol/screen_view/jsonschema/1-0-0", // screen view events
+        "se" // structured events
+    )
+) {
+    listOf(SelfDescribingJson("iglu:xx", hashMapOf("yy" to true)))
+}
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+plugin.entities(
+        Arrays.asList(
+                // The list of schemas to call the closure for is optional. If not passed, the callback is called for all events.
+                "iglu:com.google.analytics.measurement-protocol/screen_view/jsonschema/1-0-0", // screen view events
+                "se" // structured events
+        ),
+        event -> Collections.singletonList(new SelfDescribingJson("iglu:xx", Collections.singletonMap("yy", true)))
+);
+```
 
   </TabItem>
 </Tabs>
@@ -86,9 +119,23 @@ plugin.afterTrack { event in
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
-TODO
+```kotlin
+plugin.afterTrack {
+    println("Tracked event with ${it.entities.count()} entities")
+}
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+plugin.afterTrack(
+        null,
+        event -> System.out.printf("Tracked event with %d entities%n", event.getEntities().size())
+);
+```
 
   </TabItem>
 </Tabs>
@@ -108,9 +155,29 @@ let tracker = Snowplow.createTracker(namespace: "ns",
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
-TODO
+```kotlin
+// the plugin is supplied to the tracker as a configuration
+val tracker = Snowplow.createTracker(
+    applicationContext,
+    "ns",
+    networkConfiguration,
+    plugin
+)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+TrackerController tracker = Snowplow.createTracker(
+        getApplicationContext(),
+        "ns",
+        networkConfiguration,
+        plugin
+);
+```
 
   </TabItem>
 </Tabs>
@@ -126,9 +193,20 @@ let pluginIdentifiers = tracker?.plugins.identifiers
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
-TODO
+```kotlin
+// one can inspect the enabled plugins and get the list of their identifiers
+val pluginIdentifiers = tracker.plugins.identifiers
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+// one can inspect the enabled plugins and get the list of their identifiers
+List<String> identifiers = tracker.getPlugins().getIdentifiers();
+```
 
   </TabItem>
 </Tabs>
@@ -143,9 +221,18 @@ tracker?.plugins.add(plugin: otherPlugin)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
-TODO
+```kotlin
+tracker.plugins.addPlugin(otherPlugin)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+tracker.getPlugins().addPlugin(otherPlugin);
+```
 
   </TabItem>
 </Tabs>
@@ -160,9 +247,18 @@ tracker?.plugins.remove(identifier: "myPlugin")
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
-TODO
+```kotlin
+tracker.plugins.removePlugin("myPlugin")
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+tracker.getPlugins().removePlugin("myPlugin");
+```
 
   </TabItem>
 </Tabs>

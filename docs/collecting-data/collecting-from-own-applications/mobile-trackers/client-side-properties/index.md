@@ -77,6 +77,10 @@ let subjectConfig = SubjectConfiguration()
     .userId("username")
 ```
 
+See the API docs for the full [list of options](https://snowplow.github.io/snowplow-objc-tracker/documentation/snowplowtracker/subjectconfiguration).
+
+Subject properties can be updated or added to after initialization, using setter methods. See the [API docs](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1internal_1_1tracker_1_1_subject.html) for full details.
+
   </TabItem>
   <TabItem value="android" label="Android">
 
@@ -85,9 +89,28 @@ SubjectConfiguration subjectConfig = new SubjectConfiguration()
     .userId("username");
 ```
 
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_subject_configuration.html).
+
   </TabItem>
 </Tabs>
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_subject_configuration.html).
+Subject properties can be updated or added to after initialization using the `SubjectController` retrieved from the tracker:
 
-Subject properties can be updated or added to after initialization, using setter methods. See the [API docs](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1internal_1_1tracker_1_1_subject.html) for full details.
+<Tabs groupId="platform">
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let tracker = Snowplow.defaultTracker()
+tracker?.subject?.userId = ""
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android">
+
+```kotlin
+val tracker = Snowplow.defaultTracker
+tracker?.subject?.userId = ''
+```
+
+  </TabItem>
+</Tabs>

@@ -13,6 +13,7 @@ import ThemedImage from '@theme/ThemedImage';
 
 <center>
 <ThemedImage
+class='center'
 alt='Snowplow Data Modeling Packages'
 width="70%"
 sources={{
@@ -122,8 +123,8 @@ import {useColorMode} from '@docusaurus/theme-common';
 export function VersionChecker() {
   const { isDarkTheme } = useColorMode()
   const [activeIndex, setActiveIndex] = useState(0)
-  const [dbtVer, setDbtVer] = useState('1.3.0')
-  const [utilsVer, setutilsVer] = useState('1.0.0')
+  const [dbtVer, setDbtVer] = useState('')
+  const [utilsVer, setutilsVer] = useState('')
   return (
     <>
       <div style ={{overflow: "hidden"}}>
@@ -152,7 +153,7 @@ export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
     return(<em>Please enter a valid dbt version.</em>)
   }
   if (! valid(utilsVer) && utilsVer !== '') {
-    return(<em>Please enter a valid dbt version.</em>)
+    return(<em>Please enter a valid dbt_utils version.</em>)
   }
   for(const [pkg, version] of Object.entries(dbtVersions)) {
     let maxVer = '0.0.0'
@@ -178,16 +179,26 @@ export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
   return (
     <>
       <p>For <strong>dbt</strong> version <code>{dbtVer}</code> and {utilsVer !== '' && (<><strong>dbt_utils</strong> version <code>{utilsVer}</code></>)} the latest version of each of our packages you can install are:</p>
-      <center>
-        <table>
+        <table class="center">
           <tr>
             <th>Package</th>
             <th>Max supported version</th>
             <th>Max released version</th>
           </tr>
-            {packageVersions.map(x => <tr><td> <a href={`https://hub.getdbt.com/${x.pkg}`}>{x.pkg}</a> </td><td> <code>{x.maxVer ? <a href={`https://hub.getdbt.com/${x.pkg}/${x.maxVer}`}>{x.maxVer}</a> : 'No matching version supported'}</code> </td><td> <em><code><a href={`https://hub.getdbt.com/${x.pkg}/${x.actualMaxVer}`}>{x.actualMaxVer}</a></code></em> </td></tr>)}
+          {packageVersions.map(x =>
+            <tr>
+              <td>
+                <a href={`https://hub.getdbt.com/${x.pkg}`}>{x.pkg}</a>
+              </td>
+              <td>
+                <code>{x.maxVer ? <a href={`https://hub.getdbt.com/${x.pkg}/${x.maxVer}`}>{x.maxVer}</a> : 'No matching version supported'}</code>
+              </td>
+              <td>
+                <em><code><a href={`https://hub.getdbt.com/${x.pkg}/${x.actualMaxVer}`}>{x.actualMaxVer}</a></code></em>
+              </td>
+            </tr>)
+          }
         </table>
-      </center>
     </>
   )
 }

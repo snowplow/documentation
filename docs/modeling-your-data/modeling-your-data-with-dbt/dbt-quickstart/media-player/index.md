@@ -55,8 +55,6 @@ These are defined in the `selectors.yml` file ([source](https://github.com/snowp
 
 Please refer to the `Quick Start` guide for the Snowplow Web package to make sure you configure the web model appropriately. (e.g. checking the source data or enabling desired contexts).
 
-One thing to highlight here: as the package is built onto the snowplow_incremental_materialization logic provided by the web package, please leave the `snowplow__incremental_materialization` variable as is with the default `snowplow_incremental` value.
-
 ### 4. Enable desired contexts
 
 If you have enabled a specific context you will need to enable it in your `dbt_project.yml` file:

@@ -122,20 +122,20 @@ import {useColorMode} from '@docusaurus/theme-common';
 export function VersionChecker() {
   const { isDarkTheme } = useColorMode()
   const [activeIndex, setActiveIndex] = useState(0)
-  const [dbtVer, setDbtVer] = useState('')
-  const [utilsVer, setutilsVer] = useState('')
+  const [dbtVer, setDbtVer] = useState('1.3.0')
+  const [utilsVer, setutilsVer] = useState('1.0.0')
   return (
     <>
       <div style ={{overflow: "hidden"}}>
         <div style={{width:"48%", float:"left"}}>
           <form class="DocSearch-Form">
-            <label class="DocSearch-MagnifierLabel" for="dbt">dbt Version:</label><br/>
+            <label class="DocSearch-MagnifierLabel" for="dbt">dbt:</label><br/>
             <input class="DocSearch-Input" placeholder="e.g. 1.3.0" maxlength="15" type="text" id="dbt" name="dbt" onChange={() => setDbtVer(event.target.value)}/>
           </form>
         </div>
         <div style={{width:"48%", float:"right"}}>
           <form class="DocSearch-Form">
-            <label class="DocSearch-MagnifierLabel" for="utils">dbt-utils Version:</label><br/>
+            <label class="DocSearch-MagnifierLabel" for="utils">dbt_utils:</label><br/>
             <input class="DocSearch-Input" placeholder="e.g. 1.0.0" maxlength="15" type="text" id="utils" name="utils" onChange={() => setutilsVer(event.target.value)}/>
           </form>
         </div>
@@ -178,9 +178,16 @@ export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
   return (
     <>
       <p>For <strong>dbt</strong> version <code>{dbtVer}</code> and {utilsVer !== '' && (<><strong>dbt_utils</strong> version <code>{utilsVer}</code></>)} the latest version of each of our packages you can install are:</p>
-      <ul>
-      {packageVersions.map(x => <li>{x.pkg}: <code>{x.maxVer ?? 'No matching version supported'}</code> &nbsp;<em>(latest version: <code>{x.actualMaxVer}</code>)</em></li>)}
-      </ul>
+      <center>
+        <table>
+          <tr>
+            <th>Package</th>
+            <th>Max supported version</th>
+            <th>Max released version</th>
+          </tr>
+            {packageVersions.map(x => <tr><td> <a href={`https://hub.getdbt.com/${x.pkg}`}>{x.pkg}</a> </td><td> <code>{x.maxVer ? <a href={`https://hub.getdbt.com/${x.pkg}/${x.maxVer}`}>{x.maxVer}</a> : 'No matching version supported'}</code> </td><td> <em><code><a href={`https://hub.getdbt.com/${x.pkg}/${x.actualMaxVer}`}>{x.actualMaxVer}</a></code></em> </td></tr>)}
+        </table>
+      </center>
     </>
   )
 }

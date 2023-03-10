@@ -4,7 +4,7 @@
 // import CodeBlock from '@theme/CodeBlock';
 // ```
 // Then use <>{versions.yourThing}</> to add the version in place.
-// Note that this does not render correctly in markdown ables so cannot be used without converting to a html table.
+// Note that this does not render correctly in markdown ables so you need to use additional steps, see docs/modeling-your-data/modeling-your-data-with-dbt/index.md as an example
 
 export const versions = {
   // Trackers

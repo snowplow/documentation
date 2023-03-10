@@ -11,7 +11,7 @@ import ThemedImage from '@theme/ThemedImage';
 
 [dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. Snowplow has written and maintain a number of dbt packages to model your snowplow data for various purposes and produce derived tables for use in analytics, AI, ML, BI, or reverse ETL tools.
 
-<center>
+<p align="center">
 <ThemedImage
 alt='Snowplow Data Modeling Packages'
 width="70%"
@@ -20,7 +20,7 @@ light: require('./images/dbt_packages-light.drawio.png').default,
 dark: require('./images/dbt_packages-dark.drawio.png').default
 }}
 />
-</center>
+</p>
 
 
 To setup dbt, Snowplow open source users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.
@@ -105,3 +105,16 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 
 </TabItem>
 </Tabs>
+
+
+## dbt Version Compatibility Checker
+
+You may be using other dbt packages that require you to use a specific version of dbt, or a specific version of the `dbt_utils` package. Or you simply may not wish to upgrade your existing setup.
+
+Here’s a way to check the latest version of our packages you can install for a given setup. Simply enter your dbt version and (optionally) `dbt_utils` version below.
+
+```mdx-code-block
+import DbtVersionChecker from "@site/src/components/DbtVersionChecker"
+
+<DbtVersionChecker/>
+```

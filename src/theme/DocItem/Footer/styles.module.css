@@ -8,6 +8,10 @@
   margin-right: 5px;
 }
 
+.feedbackPrompt svg {
+  fill: var(--ifm-font-color-base);
+}
+
 .feedbackComment textarea {
   height: 150px;
   padding: 12px;

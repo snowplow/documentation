@@ -319,3 +319,9 @@ img.shield {
   border-radius: var(--ifm-alert-border-radius);
   transition: 0.4s cubic-bezier(.38,.14,.58,1) all;
 }
+
+.centeredImage {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}

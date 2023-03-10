@@ -84,6 +84,7 @@ The loader consumes a stream of these messages and uses them to determine what d
 
 <ThemedImage 
 alt='Shredder loader interface diagram'
+class="centeredImage"
 sources={{
 light: require('./images/shredder_loader_interface_light.drawio.png').default, 
 dark: require('./images/shredder_loader_interface_dark.drawio.png').default

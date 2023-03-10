@@ -18,15 +18,14 @@ The package contains a fully incremental model that transforms raw mobile event 
 
 The Snowplow mobile data model aggregates Snowplow's out-of-the-box mobile events to create a set of derived tables - screen views, sessions, and users. These contain many useful dimensions, as well as calculated measures such as screen views per session.
 
-<center>
 <ThemedImage 
 alt='Web Package data flow'
+class="centeredImage"
 sources={{
 light: require('./images/mobile-process-light.drawio.png').default, 
 dark: require('./images/mobile-process-dark.drawio.png').default
 }}
 />
-</center>
 
 ## Overview
 

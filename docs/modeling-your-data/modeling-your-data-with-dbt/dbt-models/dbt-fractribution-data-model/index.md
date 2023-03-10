@@ -78,11 +78,13 @@ The package currently offers 5 different attribution models, that can be chosen 
 ​
 
 <ThemedImage
-  alt='Data processing model for the normalize package'
-  sources={{
-    light: require('./images/attribution_models_light.png').default,
-    dark: require('./images/attribution_models_dark.png').default
-    }}/>
+class="centeredImage"
+alt='Data processing model for the normalize package'
+sources={{
+  light: require('./images/attribution_models_light.png').default,
+  dark: require('./images/attribution_models_dark.png').default
+}}
+/>
 
 ### Package Macros
 

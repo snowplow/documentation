@@ -1,0 +1,24 @@
+.versionChecker {
+  display: flex;
+}
+
+.versionChecker form {
+  width: 50%;
+}
+
+.versionChecker form input {
+  font-size: 1em;
+}
+
+.versionChecker form:not(:last-child) {
+  margin-right: 12px;
+}
+
+.supportedVersions {
+  display: table;
+  width: 100%;
+}
+
+.supportedVersions th {
+  text-align: left;
+}

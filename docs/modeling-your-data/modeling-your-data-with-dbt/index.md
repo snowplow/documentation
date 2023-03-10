@@ -11,9 +11,8 @@ import ThemedImage from '@theme/ThemedImage';
 
 [dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. Snowplow has written and maintain a number of dbt packages to model your snowplow data for various purposes and produce derived tables for use in analytics, AI, ML, BI, or reverse ETL tools.
 
-<center>
+<p align="center">
 <ThemedImage
-class='center'
 alt='Snowplow Data Modeling Packages'
 width="70%"
 sources={{
@@ -21,7 +20,7 @@ light: require('./images/dbt_packages-light.drawio.png').default,
 dark: require('./images/dbt_packages-dark.drawio.png').default
 }}
 />
-</center>
+</p>
 
 
 To setup dbt, Snowplow open source users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.
@@ -115,93 +114,7 @@ You may be using other dbt packages that require you to use a specific version o
 Here’s a way to check the latest version of our packages you can install for a given setup. Simply enter your dbt version and (optionally) `dbt_utils` version below.
 
 ```mdx-code-block
-import { dbtVersions } from '@site/src/dbtVersions';
-import { satisfies, gt, valid } from "semver";
-import { useState } from 'react';
-import {useColorMode} from '@docusaurus/theme-common';
+import DbtVersionChecker from "@site/src/components/DbtVersionChecker"
 
-export function VersionChecker() {
-  const { isDarkTheme } = useColorMode()
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [dbtVer, setDbtVer] = useState('')
-  const [utilsVer, setutilsVer] = useState('')
-  return (
-    <>
-      <div style ={{overflow: "hidden"}}>
-        <div style={{width:"48%", float:"left"}}>
-          <form class="DocSearch-Form">
-            <label class="DocSearch-MagnifierLabel" for="dbt">dbt:</label><br/>
-            <input class="DocSearch-Input" placeholder="e.g. 1.3.0" maxlength="15" type="text" id="dbt" name="dbt" onChange={() => setDbtVer(event.target.value)}/>
-          </form>
-        </div>
-        <div style={{width:"48%", float:"right"}}>
-          <form class="DocSearch-Form">
-            <label class="DocSearch-MagnifierLabel" for="utils">dbt_utils:</label><br/>
-            <input class="DocSearch-Input" placeholder="e.g. 1.0.0" maxlength="15" type="text" id="utils" name="utils" onChange={() => setutilsVer(event.target.value)}/>
-          </form>
-        </div>
-      </div>
-    <br/>
-    <GetSupportedPackages dbtVer={dbtVer} utilsVer={utilsVer}/>
-    </>
-  );
-}
-
-export const GetSupportedPackages = ({children, dbtVer, utilsVer}) => {
-  let packageVersions = []
-  if (! valid(dbtVer)) {
-    return(<em>Please enter a valid dbt version.</em>)
-  }
-  if (! valid(utilsVer) && utilsVer !== '') {
-    return(<em>Please enter a valid dbt_utils version.</em>)
-  }
-  for(const [pkg, version] of Object.entries(dbtVersions)) {
-    let maxVer = '0.0.0'
-    let actualMaxVer = '0.0.0'
-    for(const [ver, details] of Object.entries(version)) {
-      // Check if the version is in the range the package supports, AND if the dbt-utils version is within the range (if exists) and check if this version is newer than our previous highest
-      const dbtUtilsRequiredVersion = details.packages['dbt-labs/dbt_utils'] ?? utilsVer
-      const satisfiesDbt = satisfies(dbtVer, details.dbtversion, {includePrerelease:true})
-      const satisfiesDbtUtils = (utilsVer === '') || satisfies(utilsVer, dbtUtilsRequiredVersion, {includePrerelease:true})
-      if (satisfiesDbt && satisfiesDbtUtils && gt(ver, maxVer))  {
-        maxVer = ver
-      }
-      if (gt(ver, actualMaxVer)) {
-        actualMaxVer = ver
-      }
-    }
-    if (maxVer === '0.0.0') {
-      packageVersions.push({pkg, 'maxVer': null, actualMaxVer})
-    } else {
-      packageVersions.push({pkg, maxVer, actualMaxVer})
-    }
-  }
-  return (
-    <>
-      <p>For <strong>dbt</strong> version <code>{dbtVer}</code> and {utilsVer !== '' && (<><strong>dbt_utils</strong> version <code>{utilsVer}</code></>)} the latest version of each of our packages you can install are:</p>
-        <table class="center">
-          <tr>
-            <th>Package</th>
-            <th>Max supported version</th>
-            <th>Max released version</th>
-          </tr>
-          {packageVersions.map(x =>
-            <tr>
-              <td>
-                <a href={`https://hub.getdbt.com/${x.pkg}`}>{x.pkg}</a>
-              </td>
-              <td>
-                <code>{x.maxVer ? <a href={`https://hub.getdbt.com/${x.pkg}/${x.maxVer}`}>{x.maxVer}</a> : 'No matching version supported'}</code>
-              </td>
-              <td>
-                <em><code><a href={`https://hub.getdbt.com/${x.pkg}/${x.actualMaxVer}`}>{x.actualMaxVer}</a></code></em>
-              </td>
-            </tr>)
-          }
-        </table>
-    </>
-  )
-}
-
-<VersionChecker/>
+<DbtVersionChecker/>
 ```

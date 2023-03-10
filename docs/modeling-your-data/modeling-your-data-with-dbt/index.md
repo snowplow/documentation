@@ -53,55 +53,55 @@ The supported data warehouses per version can be seen below:
 From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
 
 
-| snowplow-web version | dbt versions        | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
-| -------------------- | ------------------- | --------- | ----------- | --------- | ---------- | --------- |
-| 0.13.2              | >=1.3.0 to <2.0.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
-| 0.11.0              | >=1.0.0 to <1.3.0   | ✅        | ✅            | ✅        | ✅         | ✅          |
-| 0.5.1                | >=0.20.0 to <1.0.0  | ✅        | ❌            | ✅        | ✅         | ✅          |
-| 0.4.1                | >=0.18.0 to <0.20.0 | ✅        | ❌            | ✅        | ✅         | ❌          |
+| snowplow-web version | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| -------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
+| 0.13.2               | >=1.3.0 to <2.0.0   | ✅        | ✅          | ✅        | ✅         | ✅        |
+| 0.11.0               | >=1.0.0 to <1.3.0   | ✅        | ✅          | ✅        | ✅         | ✅        |
+| 0.5.1                | >=0.20.0 to <1.0.0  | ✅        | ❌          | ✅        | ✅         | ✅        |
+| 0.4.1                | >=0.18.0 to <0.20.0 | ✅        | ❌          | ✅        | ✅         | ❌        |
 
 </TabItem>
 <TabItem value="mobile" label="Snowplow Mobile">
 
-| snowplow-mobile version | dbt versions       | BigQuery  | Databricks  | Redshift  | Snowflake  | Postgres  |
-| ----------------------- | ------------------ | --------- | ----------- | --------- | ---------- | --------- |
-| 0.6.3                   | >=1.3.0 to <2.0.0  | ✅          | ✅          | ✅        | ✅           | ✅        |
-| 0.5.5                   | >=1.0.0 to <1.3.0  | ✅          | ✅          | ✅        | ✅           | ✅        |
-| 0.2.0                   | >=0.20.0 to <1.0.0 | ✅          | ❌          | ✅        | ✅           | ✅        |
+| snowplow-mobile version | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| ----------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: |
+| 0.6.3                   | >=1.3.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
+| 0.5.5                   | >=1.0.0 to <1.3.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
+| 0.2.0                   | >=0.20.0 to <1.0.0 | ✅        | ❌          | ✅        | ✅         | ✅        |
 
 </TabItem>
 <TabItem value="media" label="Snowplow Media Player">
 
 | snowplow-media-player version | snowplow-web version | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| ----------------------------- | -------------------- | ------------------ | -------- | ---------- | -------- | --------- | -------- |
-| 0.4.1                         | >=0.12.0 to <0.13.0   | >=1.3.0 to <2.0.0  | ✅       | ✅          | ✅       | ✅        | ✅        |
-| 0.3.4                         | >=0.9.0 to <0.12.0   | >=1.0.0 to <1.3.0  | ✅       | ✅          | ✅       | ✅        | ✅        |
-| 0.1.0                         | >=0.6.0 to <0.7.0    | >=0.20.0 to <1.1.0 | ❌       | ❌          | ✅       | ❌        | ✅        |
+| ----------------------------- | -------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: |
+| 0.4.1                         | >=0.12.0 to <0.13.0  | >=1.3.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
+| 0.3.4                         | >=0.9.0 to <0.12.0   | >=1.0.0 to <1.3.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
+| 0.1.0                         | >=0.6.0 to <0.7.0    | >=0.20.0 to <1.1.0 | ❌        | ❌          | ✅        | ❌         | ✅        |
 
 </TabItem>
 <TabItem value="normalize" label="Snowplow Normalize">
 
 | snowplow-normalize version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| ----------------------------- | ----------------- | -------- | ---------- | -------- | --------- | -------- |
-| 0.2.1                         | >=1.3.0 to <2.0.0 | ✅        | ✅        | ❌        | ✅        | ❌        |
-| 0.1.0                         | >=1.0.0 to <2.0.0 | ✅        | ✅        | ❌        | ✅        | ❌        |
+| -------------------------- | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
+| 0.2.2                      | >=1.3.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
+| 0.1.0                      | >=1.0.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
 
 </TabItem>
 <TabItem value="ecommerce" label="Snowplow E-commerce">
 
 | snowplow-ecommerce version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| -------------------------- | ----------------- | -------- | ---------- | -------- | --------- | -------- |
-| 0.3.0                      | >=1.3.0 to <2.0.0 | ✅        | ✅        | ❌       | ✅        | ❌       |
-| 0.2.1                      | >=1.0.0 to <2.0.0 | ✅        | ✅        | ❌       | ✅        | ❌       |
+| -------------------------- | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
+| 0.3.0                      | >=1.3.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
+| 0.2.1                      | >=1.0.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
 
 </TabItem>
 
 <TabItem value="fractribution" label="Snowplow Fractribution">
 
 | snowplow-fractribution version | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| ----------------------------- | ----------------- | -------- | ---------- | -------- | --------- | -------- |
-| 0.2.0                         |  >=1.3.0 to <2.0.0 | ✅       |  ✅       | ❌       | ✅       | ❌        |
-| 0.1.0                         |  >=1.0.0 to <2.0.0 | ❌       |  ❌       | ❌       | ✅       | ❌        |
+| ------------------------------ | ----------------- | -------- | ---------- | -------- | --------- | -------- |
+| 0.2.0                          | >=1.3.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
+| 0.1.0                          | >=1.0.0 to <2.0.0 | ❌        | ❌          | ❌        | ✅         | ❌        |
 
 </TabItem>
 </Tabs>

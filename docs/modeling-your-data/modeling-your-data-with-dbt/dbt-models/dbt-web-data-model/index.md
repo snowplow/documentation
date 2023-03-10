@@ -19,14 +19,15 @@ The package contains a fully incremental model that transforms raw web event dat
 
 The Snowplow web data model aggregates Snowplow's out of the box page view and page ping events to create a set of derived tables - page views, sessions and users - that contain many useful dimensions as well as calculated measures such as time engaged and scroll depth.
 
+<p align="center">
 <ThemedImage 
 alt='Web Package data flow'
-class="centeredImage"
 sources={{
 light: require('./images/web-process-light.drawio.png').default, 
 dark: require('./images/web-process-dark.drawio.png').default
 }}
 />
+</p>
 
 ## Overview
 
@@ -115,15 +116,15 @@ As all our processing ensures full sessions are reprocessed, our sessions level 
 
 The result of this is you may see misalignment between sessions and if you tried to recalculate them based directly off the page views table; this is because we discard stray pings during page view processing as discussed below, so the values (`page_views`, `engaged_time_in_s`, and `absolute_time_in_s`) in the sessions table may be higher, but are more accurate at a session level.
 
-
+<p align="center">
 <ThemedImage 
 alt='Stray page ping sessionisation'
-class="centeredImage"
 sources={{
 light: require('./images/stray_sessions_light.drawio.png').default, 
 dark: require('./images/stray_sessions_dark.drawio.png').default
 }}
 />
+</p>
 
 
 ### Page Views
@@ -131,10 +132,9 @@ For page views, because we cannot guarantee the sessions with the `page_view` ev
 
 <div style ={{overflow:'hidden'}}>
 <div style={{float: 'left', width: '45%'}}>
-<p style={{"text-align": "center"}}><strong>Without enforcing within-session view</strong></p>
+<p align="center"><strong>Without enforcing within-session view</strong></p>
 <ThemedImage 
 alt='Stray page ping page views'
-class="centeredImage"
 sources={{
 light: require('./images/stray_views_old-light.drawio.png').default, 
 dark: require('./images/stray_views_old-dark.drawio.png').default
@@ -143,10 +143,9 @@ dark: require('./images/stray_views_old-dark.drawio.png').default
 
 </div>
 <div style={{float: 'right', width: '45%'}}>
-<p style={{"text-align": "center"}}><strong>With enforcing within-session view</strong></p>
+<p align="center"><strong>With enforcing within-session view</strong></p>
 <ThemedImage 
 alt='Stray page ping page views'
-class="centeredImage"
 sources={{
 light: require('./images/stray_views_new-light.drawio.png').default, 
 dark: require('./images/stray_views_new-dark.drawio.png').default

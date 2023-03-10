@@ -11,15 +11,16 @@ import ThemedImage from '@theme/ThemedImage';
 
 [dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. Snowplow has written and maintain a number of dbt packages to model your snowplow data for various purposes and produce derived tables for use in analytics, AI, ML, BI, or reverse ETL tools.
 
+<p align="center">
 <ThemedImage
 alt='Snowplow Data Modeling Packages'
-class="centeredImage"
 width="70%"
 sources={{
 light: require('./images/dbt_packages-light.drawio.png').default,
 dark: require('./images/dbt_packages-dark.drawio.png').default
 }}
 />
+</p>
 
 
 To setup dbt, Snowplow open source users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.

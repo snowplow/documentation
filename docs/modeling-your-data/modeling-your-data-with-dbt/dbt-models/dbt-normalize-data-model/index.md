@@ -157,7 +157,7 @@ The config file is a JSON file which can be viewed by running the python script 
     - `id_context_schema`_(optional - string)_:`iglu:com.` type url for the context schema that your user_id column is in
     - `alias`: _(optional - string)_: Alias to apply to the id column
   - `user_contexts` _(optional (>=1 of) - array)_: Array of strings of `iglu:com.` type url(s) for the context/entities to add to your users table as columns, if not provided will not generate users model
-  - `user_columns` _(optional (>=1 of) - array)_: Array of strings of flat column names from the events table to include in the mode
+  - `user_columns` _(optional (>=1 of) - array)_: Array of strings of flat column names from the events table to include in the model
 
 
 </TabItem>

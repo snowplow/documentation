@@ -155,7 +155,9 @@ The config file is a JSON file which can be viewed by running the python script 
     - `id_column` _(required - string)_: Name of column or attribute in the schema that defines your user_id, will be converted to a string in Snowflake
     - `id_self_describing_event_schema`_(optional - string)_: `iglu:com.` type url for the self-describing event schema that your user_id column is in, used over `id_context_schema` if both provided
     - `id_context_schema`_(optional - string)_:`iglu:com.` type url for the context schema that your user_id column is in
-  - `user_contexts` _(required - array)_: Array of strings of `iglu:com.` type url(s) for the context/entities to add to your users table as columns, if not provided will not generate users model
+    - `alias`: _(optional - string)_: Alias to apply to the id column
+  - `user_contexts` _(optional (>=1 of) - array)_: Array of strings of `iglu:com.` type url(s) for the context/entities to add to your users table as columns, if not provided will not generate users model
+  - `user_columns` _(optional (>=1 of) - array)_: Array of strings of flat column names from the events table to include in the mode
 
 
 </TabItem>
@@ -167,7 +169,7 @@ The config file is a JSON file which can be viewed by running the python script 
     "self": {
         "name": "normalize-config",
         "format": "jsonschema",
-        "version": "2-0-0"
+        "version": "2-1-0"
     },
     "properties": {
         "config": {
@@ -225,7 +227,7 @@ The config file is a JSON file which can be viewed by running the python script 
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of strings of flat column names from the events table to include to include in the model"
+                        "description": "array of strings of flat column names from the events table to include in the model"
                     },
                     "self_describing_event_schemas": {
                         "type": "array",
@@ -344,10 +346,16 @@ The config file is a JSON file which can be viewed by running the python script 
                         "id_context_schema": {
                             "type": "string",
                             "description": "`iglu:com.` type url for the context schema that your user_id column is in"
+                        },
+                        "alias": {
+                            "type": "string",
+                            "description": "alias to apply to the id column"
                         }
                     },
                     "additionalProperties": false,
-                    "required": ["id_column"]
+                    "required": [
+                        "id_column"
+                    ]
                 },
                 "user_contexts": {
                     "type": "array",
@@ -355,10 +363,26 @@ The config file is a JSON file which can be viewed by running the python script 
                         "type": "string",
                         "description": "array of strings of iglu:com. type url(s) for the context/entities to add to your users table as columns"
                     }
+                },
+                "user_columns": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "description": "array of strings of flat column names from the events table to include in the model"
+                    }
                 }
             },
-            "required": [
-                "user_contexts"
+            "anyOf": [
+                {
+                    "required": [
+                        "user_contexts"
+                    ]
+                },
+                {
+                    "required": [
+                        "user_columns"
+                    ]
+                }
             ],
             "additionalProperties": false
         }
@@ -421,10 +445,16 @@ The config file is a JSON file which can be viewed by running the python script 
         "user_id": {
             "id_column": "userId",
             "id_self_describing_event_schema": "iglu:com.google.analytics.measurement-protocol/user/jsonschema/1-0-0",
-            "id_context_schema": "iglu:com.zendesk.snowplow/user/jsonschema/1-0-0"
+            "id_context_schema": "iglu:com.zendesk.snowplow/user/jsonschema/1-0-0",
+            "alias": "true_user_id"
         },
         "user_contexts": ["iglu:com.snowplowanalytics.snowplow/ua_parser_context/jsonschema/1-0-0",
-            "iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0"]
+            "iglu:com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0"],
+        "user_columns": [
+            "domain_userid",
+            "network_userid",
+            "app_id"
+        ]
     }
 }
 

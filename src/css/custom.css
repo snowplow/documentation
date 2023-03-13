@@ -80,7 +80,7 @@
   --ifm-color-primary-lightest: #b198df;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-font-color-base: rgb(218, 221, 225);
-  --ifm-font-color-base-inverse: #000000
+  --ifm-font-color-base-inverse: #000000;
 }
 
 [data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {

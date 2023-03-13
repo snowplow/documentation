@@ -23,9 +23,10 @@ jobs:
       with:
         python-version: "3.9.x"
 
-    - name: Create dbt docs
+    - name: Update dbt docs
       run: |
         python utils/dbt_docs/generate_dbt_docs.py
+        python utils/dbt_docs/get_dbt_package_versions.py 'Bearer ${{ secrets.GITHUB_TOKEN }}'
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v4
@@ -43,3 +44,4 @@ jobs:
             [1]: https://github.com/peter-evans/create-pull-request
         add-paths: |
           ./docs/modeling-your-data/modeling-your-data-with-dbt/reference/*.md
+          .src/dbtVersions.js

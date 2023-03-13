@@ -718,7 +718,7 @@ This significantly reduces table scans
 
 with prep as (
   select
-    cast(null as {{ snowplow_utils.type_string(64) }}) session_id
+    cast(null as {{ type_string() }}) session_id
 )
 
 select *
@@ -736,8 +736,8 @@ where false
 <Tabs groupId="reference">
 <TabItem value="macros" label="Macros">
 
+- macro.dbt.type_string
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
 - [macro.snowplow_web.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.allow_refresh)
 
 </TabItem>
@@ -790,15 +790,15 @@ By knowing the lifecycle of a session the model is able to able to determine whi
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized='incremental',
     unique_key='session_id',
     upsert_date_key='start_tstamp',
     sort='start_tstamp',
     dist='session_id',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
+    }, databricks_val='start_tstamp_date'),
     cluster_by=snowplow_web.web_cluster_by_fields_sessions_lifecycle(),
     full_refresh=snowplow_web.allow_refresh(),
     tags=["manifest"],
@@ -806,7 +806,8 @@ By knowing the lifecycle of a session the model is able to able to determine whi
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize = true
   )
 }}
 
@@ -842,7 +843,7 @@ with new_events_session_ids as (
   group by 1
   )
 
-{% if snowplow_utils.snowplow_is_incremental() %}
+{% if is_incremental() %}
 
 , previous_sessions as (
   select *
@@ -907,13 +908,13 @@ from session_lifecycle sl
 </TabItem>
 <TabItem value="macros" label="Macros">
 
+- macro.dbt.is_incremental
 - [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_session_lookback_limit](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_session_lookback_limit)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.snowplow_is_incremental](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_is_incremental)
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
 - [macro.snowplow_web.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.allow_refresh)
 - [macro.snowplow_web.web_cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_sessions_lifecycle)
@@ -1738,22 +1739,23 @@ select
 ```jinja2
 {{
   config(
-    materialized= var("snowplow__incremental_materialization", 'snowplow_incremental'),
+    materialized= 'incremental',
     unique_key='event_id',
     upsert_date_key='derived_tstamp',
     sort='derived_tstamp',
     dist='event_id',
     tags=["derived"],
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by = {
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val = {
       "field": "derived_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by = 'derived_tstamp_date'),
+    }, databricks_val = 'derived_tstamp_date'),
     cluster_by=snowplow_web.web_cluster_by_fields_consent(),
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize= true
   )
 }}
 
@@ -1852,6 +1854,7 @@ from prep p
 
 - [macro.snowplow_utils.get_optional_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_optional_fields)
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_web.web_cluster_by_fields_consent](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_consent)
@@ -2479,7 +2482,7 @@ This incremental table is a manifest of the timestamp of the latest event consum
 
 with prep as (
   select
-    cast(null as {{ snowplow_utils.type_string(4096) }}) model,
+    cast(null as {{ snowplow_utils.type_max_string() }}) model,
     cast('1970-01-01' as {{ type_timestamp() }}) as last_success
 )
 
@@ -2500,7 +2503,7 @@ where false
 
 - macro.dbt.type_timestamp
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
 - [macro.snowplow_web.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.allow_refresh)
 
 </TabItem>
@@ -2882,22 +2885,23 @@ This derived incremental table contains all historic page views and should be th
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized='incremental',
     unique_key='page_view_id',
     upsert_date_key='start_tstamp',
     sort='start_tstamp',
     dist='page_view_id',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by = {
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val = {
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
+    }, databricks_val='start_tstamp_date'),
     cluster_by=snowplow_web.web_cluster_by_fields_page_views(),
     tags=["derived"],
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize = true
   )
 }}
 
@@ -2927,6 +2931,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_web.web_cluster_by_fields_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_page_views)
@@ -4868,15 +4873,15 @@ This derived incremental table contains all historic sessions and should be the 
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized='incremental',
     unique_key='domain_sessionid',
     upsert_date_key='start_tstamp',
     sort='start_tstamp',
     dist='domain_sessionid',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
+    }, databricks_val='start_tstamp_date'),
     cluster_by=snowplow_web.web_cluster_by_fields_sessions(),
     tags=["derived"],
     post_hook="{{ snowplow_web.stitch_user_identifiers(
@@ -4886,7 +4891,8 @@ This derived incremental table contains all historic sessions and should be the 
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize = true
   )
 }}
 
@@ -4917,6 +4923,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_web.stitch_user_identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.stitch_user_identifiers)
@@ -5230,9 +5237,9 @@ with session_firsts as (
         domain_userid,
         {% if var('snowplow__session_stitching') %}
             -- updated with mapping as part of post hook on derived sessions table
-            cast(domain_userid as {{ snowplow_utils.type_string(255) }}) as stitched_user_id,
+            cast(domain_userid as {{ type_string() }}) as stitched_user_id,
         {% else %}
-            cast(null as {{ snowplow_utils.type_string(255) }}) as stitched_user_id,
+            cast(null as {{ type_string() }}) as stitched_user_id,
         {% endif %}
         network_userid as network_userid,
 
@@ -5540,9 +5547,9 @@ with session_firsts as (
         domain_userid,
         {% if var('snowplow__session_stitching') %}
             -- updated with mapping as part of post hook on derived sessions table
-            cast(domain_userid as {{ snowplow_utils.type_string(255) }}) as stitched_user_id,
+            cast(domain_userid as {{ type_string() }}) as stitched_user_id,
         {% else %}
-            cast(null as {{ snowplow_utils.type_string(255) }}) as stitched_user_id,
+            cast(null as {{ type_string() }}) as stitched_user_id,
         {% endif %}
         network_userid as network_userid,
 
@@ -5832,9 +5839,9 @@ with session_firsts as (
         domain_userid,
         {% if var('snowplow__session_stitching') %}
             -- updated with mapping as part of post hook on derived sessions table
-            cast(domain_userid as {{ snowplow_utils.type_string(255) }}) as stitched_user_id,
+            cast(domain_userid as {{ type_string() }}) as stitched_user_id,
         {% else %}
-            cast(null as {{ snowplow_utils.type_string(255) }}) as stitched_user_id,
+            cast(null as {{ type_string() }}) as stitched_user_id,
         {% endif %}
         network_userid as network_userid,
 
@@ -6144,9 +6151,9 @@ with session_firsts as (
         domain_userid,
         {% if var('snowplow__session_stitching') %}
             -- updated with mapping as part of post hook on derived sessions table
-            cast(domain_userid as {{ snowplow_utils.type_string(255) }}) as stitched_user_id,
+            cast(domain_userid as {{ type_string() }}) as stitched_user_id,
         {% else %}
-            cast(null as {{ snowplow_utils.type_string(255) }}) as stitched_user_id,
+            cast(null as {{ type_string() }}) as stitched_user_id,
         {% endif %}
         network_userid as network_userid,
 
@@ -6493,7 +6500,7 @@ A mapping table between `domain_userid` and `user_id`.
     unique_key='domain_userid',
     sort='end_tstamp',
     dist='domain_userid',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "end_tstamp",
       "data_type": "timestamp"
     }),
@@ -6536,6 +6543,7 @@ and domain_userid is not null
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -6621,23 +6629,24 @@ This derived incremental table contains all historic users data and should be th
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized='incremental',
     unique_key='domain_userid',
     upsert_date_key='start_tstamp',
     disable_upsert_lookback=true,
     sort='start_tstamp',
     dist='domain_userid',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
+    }, databricks_val='start_tstamp_date'),
     cluster_by=snowplow_web.web_cluster_by_fields_users(),
     tags=["derived"],
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize = true
   )
 }}
 
@@ -6666,6 +6675,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_web.web_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_users)
@@ -6712,11 +6722,11 @@ This model aggregates various metrics derived from sessions to a users level.
 ```jinja2
 {{
   config(
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
     }),
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["domain_userid"]),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["domain_userid"]),
     sort='domain_userid',
     dist='domain_userid',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
@@ -6757,6 +6767,7 @@ group by 1,2,3
 
 - [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>

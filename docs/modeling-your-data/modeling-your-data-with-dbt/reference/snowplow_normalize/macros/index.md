@@ -1,6 +1,6 @@
 ---
 title: "Snowplow Normalize Macros"
-description: Reference fors nowplow_normalize dbt macros developed by Snowplow
+description: Reference for snowplow_normalize dbt macros developed by Snowplow
 sidebar_position: 20
 ---
 
@@ -163,38 +163,44 @@ select
     -- self describing events columns from event table
     {% if sde_cols|length > 0 %}
         {%- for col, col_ind in zip(sde_cols_clean, range(sde_cols|length)) -%} {# Loop over each sde column, get coalesced version of keys #}
+            {# Prep the alias columns #}
+            {%- if sde_aliases|length > 0 -%}
+                {%- set required_aliases = [] -%}
+                {%- for i in range(sde_keys_clean[col_ind]|length) -%}
+                    {%- do required_aliases.append(sde_aliases[col_ind] ~ '_' ~ sde_keys_clean[col_ind][i]) -%}
+                {%- endfor -%}
+            {%- else -%}
+                {%- set required_aliases = sde_keys_clean[col_ind] -%}
+            {%- endif -%}
             {%- set sde_col_list = snowplow_utils.combine_column_versions(
                                         relation=ref('snowplow_normalize_base_events_this_run'),
                                         column_prefix=col.lower(),
-                                        include_field_alias = False,
-                                        required_fields = sde_keys_clean[col_ind]
+                                        required_fields = zip(sde_keys_clean[col_ind], required_aliases)
                                         ) -%}
-            {% for field, key_ind in zip(sde_col_list, range(sde_col_list|length)) %} {# Loop over each key within the column, appling the bespoke alias as needed #}
+            {%- for field, key_ind in zip(sde_col_list, range(sde_col_list|length)) -%} {# Loop over each key within the column, appling the bespoke alias as needed #}
                 , {{field}}
-                {%- if sde_aliases|length > 0 -%} {# The following contains a very cursed hack to ensure there is a space before the as, as I can't promise it ends up on a newline  #}
-                    {# #} as {{ sde_aliases[col_ind] }}_{{ sde_keys_clean[col_ind][key_ind] }}
-                {%- else -%}
-                    {# #} as {{ sde_keys_clean[col_ind][key_ind] }}
-                {%- endif -%}
             {% endfor -%}
         {%- endfor -%}
     {%- endif %}
     -- context column(s) from the event table
     {% if context_cols|length > 0 %}
         {%- for col, col_ind in zip(context_cols_clean, range(context_cols|length)) -%} {# Loop over each context column, get coalesced version of keys #}
+            {# Prep the alias columns #}
+            {%- if context_aliases|length > 0 -%}
+                {%- set required_aliases = [] -%}
+                {%- for i in range(context_keys_clean[col_ind]|length) -%}
+                    {%- do required_aliases.append(context_aliases[col_ind] ~ '_' ~ context_keys_clean[col_ind][i]) -%}
+                {%- endfor -%}
+            {%- else -%}
+                {%- set required_aliases = context_keys_clean[col_ind] -%}
+            {%- endif -%}
             {%- set cont_col_list = snowplow_utils.combine_column_versions(
                                         relation=ref('snowplow_normalize_base_events_this_run'),
                                         column_prefix=col.lower(),
-                                        include_field_alias = False,
-                                        required_fields = context_keys_clean[col_ind]
+                                        required_fields = zip(context_keys_clean[col_ind], required_aliases)
                                         ) -%}
-            {% for field, key_ind in zip(cont_col_list, range(cont_col_list|length)) %} {# Loop over each key within the column, appling the bespoke alias as needed #}
+            {%- for field, key_ind in zip(cont_col_list, range(cont_col_list|length)) -%} {# Loop over each key within the column #}
                 , {{field}}
-                {%- if context_aliases|length > 0 -%} {# The following contains a very cursed hack to ensure there is a space before the as, as I can't promise it ends up on a newline #}
-                    {# #} as {{ context_aliases[col_ind] }}_{{ context_keys_clean[col_ind][key_ind] }}
-                {%- else -%}
-                    {# #} as {{ context_keys_clean[col_ind][key_ind] }}
-                {%- endif -%}
             {% endfor -%}
         {%- endfor -%}
     {%- endif %}
@@ -251,9 +257,9 @@ select
     {%- endif %}
     -- Flat columns from event table
     {% if flat_cols|length > 0 %}
-    {%- for col in flat_cols -%}
-    , {{ col }}
-    {% endfor -%}
+        {%- for col in flat_cols -%}
+            , {{ col }}
+        {% endfor -%}
     {%- endif -%}
     -- self describing events columns from event table
     {% if sde_cols_clean|length > 0 %}
@@ -432,6 +438,8 @@ A macro to produce a users table from the `base_events_this_run` table, using th
 - `user_cols` *(array)*: List of (user related) context columns from the atomic.events table to include
 - `user_keys` *(array of arrays)*: List of lists of keys/column names within the respective user context column to include
 - `user_types` *(array of arrays)*: List of list of types of the values of the keys within the respective user context column (only used in Snowflake)
+- `user_id_alias` *(string)*: The alias to apply to the user_id_field to help avoid clashes. Must match the unique key in the config
+- `flat_cols` *(array)*: List of (user related) flat columns from the atomic.events table to include
 - `remove_new_event_check` *(boolean)*: A flag to disable the `with_new_events` part of the macro, to allow for integration tests to run
 
 #### Details
@@ -444,15 +452,15 @@ A macro to produce a users table from the `base_events_this_run` table, using th
 <TabItem value="raw" label="Raw" default>
 
 ```jinja2
-{% macro users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], remove_new_event_check = false) %}
-    {{ return(adapter.dispatch('users_table', 'snowplow_normalize')(user_id_field, user_id_sde, user_id_context, user_cols, user_keys, user_types, remove_new_event_check)) }}
+{% macro users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], user_id_alias = 'user_id', flat_cols = [], remove_new_event_check = false) %}
+    {{ return(adapter.dispatch('users_table', 'snowplow_normalize')(user_id_field, user_id_sde, user_id_context, user_cols, user_keys, user_types, user_id_alias, flat_cols, remove_new_event_check)) }}
 {% endmacro %}
 ```
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
 ```jinja2
-{% macro bigquery__users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], remove_new_event_check = false) %}
+{% macro bigquery__users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], user_id_alias = 'user_id', flat_cols = [], remove_new_event_check = false) %}
 {# Remove down to major version for bigquery combine columns macro, drop 2 last _X values #}
 {%- set user_cols_clean = [] -%}
 {%- for ind in range(user_cols|length) -%}
@@ -475,12 +483,13 @@ A macro to produce a users table from the `base_events_this_run` table, using th
 {% do exceptions.warn("Snowplow: Both a user_id sde column and context column provided, only the sde column will be used.") %}
 {%- endif -%}
 
+{%- set snake_user_id =  snowplow_normalize.snakeify_case(user_id_alias) -%}
 
 
 with defined_user_id as (
     select
         {% if user_id_sde == '' and user_id_context == ''%}
-            {{snowplow_normalize.snakeify_case(user_id_field)}} as user_id
+            {{snowplow_normalize.snakeify_case(user_id_field)}} as {{ snake_user_id }}
         {% elif user_id_sde != '' %}
         {# Coalesce the sde column for the custom user_id field  #}
             {%- set user_id_sde_coal = snowplow_utils.combine_column_versions(
@@ -489,7 +498,7 @@ with defined_user_id as (
                                         include_field_alias = False,
                                         required_fields = [ user_id_field ]
                                         ) -%}
-            {{ user_id_sde_coal[0] }} as user_id
+            {{ user_id_sde_coal[0] }} as {{ snake_user_id }}
 
         {% elif user_id_context != '' %}
         {# Coalesce the context column for the custom user_id field  #}
@@ -499,9 +508,15 @@ with defined_user_id as (
                                         include_field_alias = False,
                                         required_fields = [ user_id_field ]
                                         ) -%}
-            {{ user_id_cont_coal[0] }} as user_id
+            {{ user_id_cont_coal[0] }} as {{ snake_user_id }}
         {%- endif %}
         , collector_tstamp as latest_collector_tstamp
+        -- Flat columns from event table
+        {% if flat_cols|length > 0 %}
+            {%- for col in flat_cols -%}
+                , {{ col }}
+            {% endfor -%}
+        {%- endif -%}
         -- user column(s) from the event table
         {% if user_cols|length > 0 %}
             {%- for col, col_ind in zip(user_cols_clean, range(user_cols|length)) -%}  {# Loop over each context column, getting the coalesced version#}
@@ -529,11 +544,11 @@ with defined_user_id as (
 users_ordering as (
     select
         a.*
-        , row_number() over (partition by user_id order by latest_collector_tstamp desc) as rn
+        , row_number() over (partition by {{ snake_user_id }} order by latest_collector_tstamp desc) as rn
     from
         defined_user_id a
     where
-        user_id is not null
+        {{ snake_user_id }} is not null
 )
 
 {# Ensure only latest record is upserted into the table #}
@@ -549,7 +564,7 @@ where
 <TabItem value="databricks" label="databricks">
 
 ```jinja2
-{% macro databricks__users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], remove_new_event_check = false) %}
+{% macro databricks__users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], user_id_alias = 'user_id', flat_cols = [], remove_new_event_check = false) %}
 {# Remove down to major version for Databricks columns, drop 2 last _X values #}
 {%- set user_cols_clean = [] -%}
 {%- for ind in range(user_cols|length) -%}
@@ -572,20 +587,27 @@ where
 {% do exceptions.warn("Snowplow: Both a user_id sde column and context column provided, only the sde column will be used.") %}
 {%- endif -%}
 
+{%- set snake_user_id =  snowplow_normalize.snakeify_case(user_id_alias) -%}
 
 with defined_user_id as (
     select
         {% if user_id_sde == '' and user_id_context == ''%}
-            {{ user_id_field }} as user_id
+            {{ user_id_field }} as {{ snake_user_id }}
         {% elif user_id_sde != '' %}
-            {{ '_'.join(user_id_sde.split('_')[:-2]) }}.{{ user_id_field }} as user_id
+            {{ '_'.join(user_id_sde.split('_')[:-2]) }}.{{ user_id_field }} as {{ snake_user_id }}
         {% elif user_id_context != '' %}
-            {{ '_'.join(user_id_context.split('_')[:-2]) }}[0].{{ user_id_field }} as user_id
+            {{ '_'.join(user_id_context.split('_')[:-2]) }}[0].{{ user_id_field }} as {{ snake_user_id }}
         {%- endif %}
         , collector_tstamp as latest_collector_tstamp
         {% if target.type in ['databricks', 'spark'] -%}
             , DATE(collector_tstamp) as latest_collector_tstamp_date
         {%- endif %}
+        -- Flat columns from event table
+        {% if flat_cols|length > 0 %}
+            {%- for col in flat_cols -%}
+                , {{ col }}
+            {% endfor -%}
+        {%- endif -%}
         -- user column(s) from the event table
         {% if user_cols_clean|length > 0 %}
             {%- for col, col_ind in zip(user_cols_clean, range(user_cols_clean|length)) -%} {# Loop over each context column provided #}
@@ -608,11 +630,11 @@ with defined_user_id as (
 users_ordering as (
 select
     a.*
-    , row_number() over (partition by user_id order by latest_collector_tstamp desc) as rn
+    , row_number() over (partition by {{ snake_user_id }} order by latest_collector_tstamp desc) as rn
 from
     defined_user_id a
 where
-    user_id is not null
+    {{ snake_user_id }} is not null
 )
 
 {# Ensure only latest record is upserted into the table #}
@@ -628,7 +650,7 @@ where
 <TabItem value="snowflake" label="snowflake">
 
 ```jinja2
-{% macro snowflake__users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], remove_new_event_check = false) %}
+{% macro snowflake__users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], user_id_alias = 'user_id', flat_cols = [], remove_new_event_check = false) %}
 {# Remove down to major version for Snowflake columns, drop 2 last _X values #}
 {%- set user_cols_clean = [] -%}
 {%- for ind in range(user_cols|length) -%}
@@ -639,17 +661,24 @@ where
 {%- if user_id_sde != '' and user_id_context != '' -%}
 {% do exceptions.warn("Snowplow: Both a user_id sde column and context column provided, only the sde column will be used.") %}
 {%- endif -%}
+{%- set snake_user_id =  snowplow_normalize.snakeify_case(user_id_alias) -%}
 
 with defined_user_id as (
 select
     {% if user_id_sde == '' and user_id_context == '' %}
-        {{snowplow_normalize.snakeify_case(user_id_field)}} as user_id {# Snakeify case of standard column even in snowflake #}
+        {{snowplow_normalize.snakeify_case(user_id_field)}} as {{ snake_user_id }} {# Snakeify case of standard column even in snowflake #}
     {% elif user_id_sde != '' %}
-        {{ '_'.join(user_id_sde.split('_')[:-2]) }}:{{user_id_field}}::string as user_id
+        {{ '_'.join(user_id_sde.split('_')[:-2]) }}:{{user_id_field}}::string as {{ snake_user_id }}
     {% elif user_id_context != '' %}
-        {{ '_'.join(user_id_context.split('_')[:-2]) }}[0]:{{user_id_field}}::string as user_id
+        {{ '_'.join(user_id_context.split('_')[:-2]) }}[0]:{{user_id_field}}::string as {{ snake_user_id }}
     {%- endif %}
     , collector_tstamp as latest_collector_tstamp
+    -- Flat columns from event table
+    {% if flat_cols|length > 0 %}
+        {%- for col in flat_cols -%}
+            , {{ col }}
+        {% endfor -%}
+    {%- endif -%}
     -- user column(s) from the event table
     {% if user_cols_clean|length > 0 %}
         {%- for col, col_ind in zip(user_cols_clean, range(user_cols_clean|length)) -%} {# Loop over each context column provided #}
@@ -673,9 +702,9 @@ select
 from
     defined_user_id
 where
-    user_id is not null
+    {{ snake_user_id }} is not null
 qualify
-    row_number() over (partition by user_id order by latest_collector_tstamp desc) = 1
+    row_number() over (partition by {{ snake_user_id }} order by latest_collector_tstamp desc) = 1
 {% endmacro %}
 ```
 </TabItem>

@@ -1,5 +1,5 @@
 ---
-title: "Snowplow E-Commerce Macros"
+title: "Snowplow Ecommerce Macros"
 description: Reference for snowplow_ecommerce dbt macros developed by Snowplow
 sidebar_position: 20
 ---

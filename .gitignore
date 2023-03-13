@@ -25,3 +25,4 @@ yarn-error.log*
 # Python
 __pycache__
 manifests
+.vscode/launch.json

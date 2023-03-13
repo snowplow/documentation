@@ -58,7 +58,7 @@ This macro does not currently have a description.
 
 #### Description
 This macro is used to determine if a full-refresh is allowed (depending on the environment), using the `snowplow__allow_refresh` variable.
-- 
+
 
 
 #### Returns
@@ -306,7 +306,7 @@ and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit
 
 #### Description
 This macro is used to extract the fields from the iab enrichment context for each warehouse.
-- 
+
 
 
 #### Arguments
@@ -405,7 +405,7 @@ The sql to extract the columns from the iab context, or these columns as nulls.
 
 
 #### Depends On
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- macro.dbt.type_string
 
 
 #### Referenced By
@@ -427,7 +427,7 @@ The sql to extract the columns from the iab context, or these columns as nulls.
 
 #### Description
 This macro is used to extract the fields from the ua enrichment context for each warehouse.
-- 
+
 
 
 #### Arguments
@@ -574,7 +574,7 @@ The sql to extract the columns from the ua context, or these columns as nulls.
 
 
 #### Depends On
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- macro.dbt.type_string
 
 
 #### Referenced By
@@ -596,7 +596,7 @@ The sql to extract the columns from the ua context, or these columns as nulls.
 
 #### Description
 This macro is used to extract the fields from the yauaa enrichment context for each warehouse.
-- 
+
 
 
 #### Arguments
@@ -790,7 +790,7 @@ The sql to extract the columns from the yauaa context, or these columns as nulls
 
 
 #### Depends On
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- macro.dbt.type_string
 
 
 #### Referenced By
@@ -812,7 +812,7 @@ The sql to extract the columns from the yauaa context, or these columns as nulls
 
 #### Description
 This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
-- 
+
 
 
 #### Returns
@@ -863,7 +863,7 @@ The specific fields and their type for the context (see macro code for values).
 
 #### Description
 This macro is used as a post-hook on the sessions table to stitch user identities using the user_mapping table provided.
-- 
+
 
 
 #### Arguments
@@ -947,7 +947,7 @@ The update/merge statement to update the `stitched_user_id` column, if enabled.
 
 #### Description
 This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
-- 
+
 
 
 #### Returns
@@ -1006,7 +1006,7 @@ The specific fields and their type for the context (see macro code for values).
 
 #### Description
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
-- 
+
 
 
 #### Returns
@@ -1036,7 +1036,7 @@ The specific fields for each warehouse (see macro code for values).
 ```jinja2
 {% macro default__web_cluster_by_fields_consent() %}
 
-  {{ return(snowplow_utils.get_cluster_by(bigquery_cols=["event_id","domain_userid"], snowflake_cols=["to_date(load_tstamp)"])) }}
+  {{ return(snowplow_utils.get_value_by_target_type(bigquery_val=["event_id","domain_userid"], snowflake_val=["to_date(load_tstamp)"])) }}
 
 {% endmacro %}
 ```
@@ -1047,7 +1047,7 @@ The specific fields for each warehouse (see macro code for values).
 
 
 #### Depends On
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
 
 #### Referenced By
@@ -1068,7 +1068,7 @@ The specific fields for each warehouse (see macro code for values).
 
 #### Description
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
-- 
+
 
 
 #### Returns
@@ -1098,7 +1098,7 @@ The specific fields for each warehouse (see macro code for values).
 ```jinja2
 {% macro default__web_cluster_by_fields_page_views() %}
 
-  {{ return(snowplow_utils.get_cluster_by(bigquery_cols=["domain_userid","domain_sessionid"], snowflake_cols=["to_date(start_tstamp)"])) }}
+  {{ return(snowplow_utils.get_value_by_target_type(bigquery_val=["domain_userid","domain_sessionid"], snowflake_val=["to_date(start_tstamp)"])) }}
 
 {% endmacro %}
 ```
@@ -1109,7 +1109,7 @@ The specific fields for each warehouse (see macro code for values).
 
 
 #### Depends On
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
 
 #### Referenced By
@@ -1130,7 +1130,7 @@ The specific fields for each warehouse (see macro code for values).
 
 #### Description
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
-- 
+
 
 
 #### Returns
@@ -1160,7 +1160,7 @@ The specific fields for each warehouse (see macro code for values).
 ```jinja2
 {% macro default__web_cluster_by_fields_sessions() %}
 
-  {{ return(snowplow_utils.get_cluster_by(bigquery_cols=["domain_userid"], snowflake_cols=["to_date(start_tstamp)"])) }}
+  {{ return(snowplow_utils.get_value_by_target_type(bigquery_val=["domain_userid"], snowflake_val=["to_date(start_tstamp)"])) }}
 
 {% endmacro %}
 ```
@@ -1171,7 +1171,7 @@ The specific fields for each warehouse (see macro code for values).
 
 
 #### Depends On
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
 
 #### Referenced By
@@ -1192,7 +1192,7 @@ The specific fields for each warehouse (see macro code for values).
 
 #### Description
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
-- 
+
 
 
 #### Returns
@@ -1222,7 +1222,7 @@ The specific fields for each warehouse (see macro code for values).
 ```jinja2
 {% macro default__web_cluster_by_fields_sessions_lifecycle() %}
 
-  {{ return(snowplow_utils.get_cluster_by(bigquery_cols=["session_id"], snowflake_cols=["to_date(start_tstamp)"])) }}
+  {{ return(snowplow_utils.get_value_by_target_type(bigquery_val=["session_id"], snowflake_val=["to_date(start_tstamp)"])) }}
 
 {% endmacro %}
 ```
@@ -1233,7 +1233,7 @@ The specific fields for each warehouse (see macro code for values).
 
 
 #### Depends On
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
 
 #### Referenced By
@@ -1254,7 +1254,7 @@ The specific fields for each warehouse (see macro code for values).
 
 #### Description
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
-- 
+
 
 
 #### Returns
@@ -1284,7 +1284,7 @@ The specific fields for each warehouse (see macro code for values).
 ```jinja2
 {% macro default__web_cluster_by_fields_users() %}
 
-  {{ return(snowplow_utils.get_cluster_by(bigquery_cols=["user_id","domain_userid"], snowflake_cols=["to_date(start_tstamp)"])) }}
+  {{ return(snowplow_utils.get_value_by_target_type(bigquery_val=["user_id","domain_userid"], snowflake_val=["to_date(start_tstamp)"])) }}
 
 {% endmacro %}
 ```
@@ -1295,7 +1295,7 @@ The specific fields for each warehouse (see macro code for values).
 
 
 #### Depends On
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
 
 #### Referenced By
@@ -1316,7 +1316,7 @@ The specific fields for each warehouse (see macro code for values).
 
 #### Description
 This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
-- 
+
 
 
 #### Returns

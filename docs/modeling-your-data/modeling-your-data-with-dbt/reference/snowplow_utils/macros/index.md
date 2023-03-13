@@ -606,7 +606,7 @@ This macro does not currently have a description.
 ```jinja2
 {% macro get_cluster_by(bigquery_cols=none, snowflake_cols=none) %}
 
-  {# {%- do exceptions.warn("Warning: the `get_cluster_by` macro is deprecated and will be removed in a future version of the package, please use `get_value_by_target_type` instead.") -%} #}
+  {%- do exceptions.warn("Warning: the `get_cluster_by` macro is deprecated and will be removed in a future version of the package, please use `get_value_by_target_type` instead.") -%}
 
 
   {% if target.type == 'bigquery' %}
@@ -644,11 +644,6 @@ This macro does not currently have a description.
 - [macro.snowplow_mobile.mobile_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions)
 - [macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle)
 - [macro.snowplow_mobile.mobile_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_users)
-- [macro.snowplow_web.web_cluster_by_fields_consent](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_consent)
-- [macro.snowplow_web.web_cluster_by_fields_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_page_views)
-- [macro.snowplow_web.web_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_sessions)
-- [macro.snowplow_web.web_cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_sessions_lifecycle)
-- [macro.snowplow_web.web_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_users)
 
 </TabItem>
 </Tabs>
@@ -1291,7 +1286,7 @@ This macro does not currently have a description.
 ```jinja2
 {%- macro get_partition_by(bigquery_partition_by=none, databricks_partition_by=none) -%}
 
-  {# {%- do exceptions.warn("Warning: the `get_partition_by` macro is deprecated and will be removed in a future version of the package, please use `get_value_by_target_type` instead.") -%} #}
+  {%- do exceptions.warn("Warning: the `get_partition_by` macro is deprecated and will be removed in a future version of the package, please use `get_value_by_target_type` instead.") -%}
 
   {% if target.type == 'bigquery' %}
     {{ return(bigquery_partition_by) }}
@@ -1328,7 +1323,6 @@ This macro does not currently have a description.
 - [model.snowplow_mobile.snowplow_mobile_user_mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_user_mapping)
 - [model.snowplow_mobile.snowplow_mobile_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users)
 - [model.snowplow_mobile.snowplow_mobile_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_aggs)
-- [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 - [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
@@ -2222,6 +2216,30 @@ The appropriate value for the target warehouse type, or an error if not an expec
 
 </DbtDetails>
 
+
+#### Referenced By
+<Tabs groupId="reference">
+<TabItem value="model" label="Models" default>
+
+- [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
+- [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
+- [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
+- [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
+- [model.snowplow_web.snowplow_web_user_mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_user_mapping)
+- [model.snowplow_web.snowplow_web_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users)
+- [model.snowplow_web.snowplow_web_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_aggs)
+
+</TabItem>
+<TabItem value="macros" label="Macros">
+
+- [macro.snowplow_web.web_cluster_by_fields_consent](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_consent)
+- [macro.snowplow_web.web_cluster_by_fields_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_page_views)
+- [macro.snowplow_web.web_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_sessions)
+- [macro.snowplow_web.web_cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_sessions_lifecycle)
+- [macro.snowplow_web.web_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_users)
+
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Is Run With New Events {#macro.snowplow_utils.is_run_with_new_events}
@@ -2252,7 +2270,7 @@ For the sessions lifecycle identifier it does not use the manifest as this table
 
 {{
 config(
-    materialized='snowplow_incremental',
+    materialized='incremental',
     unique_key='screen_view_id',
     upsert_date_key='start_tstamp'
 )
@@ -2279,7 +2297,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
   {%- set new_event_limits_relation = snowplow_utils.get_new_event_limits_table_relation(package_name) -%}
   {%- set incremental_manifest_relation = snowplow_utils.get_incremental_manifest_table_relation(package_name) -%}
 
-  {% if snowplow_utils.snowplow_is_incremental() %}
+  {% if is_incremental() %}
 
     {%- set node_identifier = this.identifier -%}
     {%- set base_sessions_lifecycle_identifier = package_name+'_base_sessions_lifecycle_manifest' -%}
@@ -2332,10 +2350,10 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 
 
 #### Depends On
+- macro.dbt.is_incremental
 - macro.dbt.run_query
 - [macro.snowplow_utils.get_incremental_manifest_table_relation](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_incremental_manifest_table_relation)
 - [macro.snowplow_utils.get_new_event_limits_table_relation](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_new_event_limits_table_relation)
-- [macro.snowplow_utils.snowplow_is_incremental](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_is_incremental)
 
 
 #### Referenced By
@@ -3877,6 +3895,10 @@ This macro does not currently have a description.
   {% if not execute %}
     {{ return(False) }}
   {% else %}
+
+    {%- set error_message = "Warning: the `snowplow_is_incremental` macro is deprecated as is the materialization, and should be replaced with dbt's `is_incremental` materialization. It will be removed completely in a future version of the package." -%}
+    {%- do exceptions.warn(error_message) -%}
+
     {% set relation = adapter.get_relation(this.database, this.schema, this.table) %}
     {{ return(relation is not none
               and relation.type == 'table'
@@ -3899,12 +3921,6 @@ This macro does not currently have a description.
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
-- [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
-
-</TabItem>
-<TabItem value="macros" label="Macros">
-
-- [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 
 </TabItem>
 </Tabs>
@@ -4383,7 +4399,7 @@ This macro does not currently have a description.
 
 
 {%- macro type_max_string() -%}
-  {{ return(adapter.dispatch('type_max_string', 'snowplow_utils')()) }}
+        {{ return(adapter.dispatch('type_max_string', 'snowplow_utils')()) }}
 {%- endmacro -%}
 
 
@@ -4393,15 +4409,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro default__type_max_string() %}
-    string
-{% endmacro %}
-```
-</TabItem>
-<TabItem value="postgres" label="postgres">
-
-```jinja2
-{% macro postgres__type_max_string() %}
-    text
+    {{ dbt.type_string() }}
 {% endmacro %}
 ```
 </TabItem>
@@ -4413,89 +4421,20 @@ This macro does not currently have a description.
 {% endmacro %}
 ```
 </TabItem>
-<TabItem value="snowflake" label="snowflake">
-
-```jinja2
-{% macro snowflake__type_max_string() %}
-    varchar
-{% endmacro %}
-```
-</TabItem>
 </Tabs>
 
 </DbtDetails>
 
-</DbtDetails>
 
-### Type String {#macro.snowplow_utils.type_string}
-
-<DbtDetails><summary>
-<code>macros/utils/cross_db/datatypes.sql</code>
-</summary>
-
-#### Description
-This macro does not currently have a description.
-
-#### Details
-<DbtDetails>
-<summary>Code</summary>
-
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/datatypes.sql">Source</a></i></b></center>
-
-<Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
-
-```jinja2
-
-
-{%- macro type_string(max_characters) -%}
-  {{ return(adapter.dispatch('type_string', 'snowplow_utils')(max_characters)) }}
-{%- endmacro -%}
-
-
-```
-</TabItem>
-<TabItem value="bigquery" label="bigquery">
-
-```jinja2
-{% macro bigquery__type_string(max_characters) %}
-    string
-{% endmacro %}
-```
-</TabItem>
-<TabItem value="default" label="default">
-
-```jinja2
-{% macro default__type_string(max_characters) %}
-    varchar( {{max_characters }} )
-{% endmacro %}
-```
-</TabItem>
-</Tabs>
-
-</DbtDetails>
+#### Depends On
+- macro.dbt.type_string
 
 
 #### Referenced By
 <Tabs groupId="reference">
 <TabItem value="model" label="Models" default>
 
-- [model.snowplow_ecommerce.snowplow_ecommerce_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_quarantined_sessions)
-- [model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest)
-- [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
-- [model.snowplow_mobile.snowplow_mobile_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_this_run)
-- [model.snowplow_normalize.snowplow_normalize_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_incremental_manifest)
-- [model.snowplow_web.snowplow_web_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_quarantined_sessions)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
-- [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
-
-</TabItem>
-<TabItem value="macros" label="Macros">
-
-- [macro.snowplow_fractribution.get_lookback_date_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.get_lookback_date_limits)
-- [macro.snowplow_web.get_iab_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_iab_context_fields)
-- [macro.snowplow_web.get_ua_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_ua_context_fields)
-- [macro.snowplow_web.get_yauaa_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_yauaa_context_fields)
 
 </TabItem>
 </Tabs>

@@ -27,7 +27,7 @@ jobs:
     - name: Update dbt docs
       run: |
         pip install -r utils/dbt_docs/requirements.txt
-        python utils/dbt_docs/generate_dbt_docs.py
+        python utils/dbt_docs/generate_dbt_docs.py 'Bearer ${{ secrets.GITHUB_TOKEN }}'
         python utils/dbt_docs/get_dbt_package_versions.py 'Bearer ${{ secrets.GITHUB_TOKEN }}'
 
     - name: Create Pull Request

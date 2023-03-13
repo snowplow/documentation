@@ -2,9 +2,10 @@ from dataclasses import dataclass, fields, field
 from typing import Optional, Union
 from copy import deepcopy
 import re
-import urllib.request
-import shutil
 import os
+import requests
+import base64
+import json
 
 def classFromArgs(className, argDict):
     fieldSet = {f.name for f in fields(className) if f.init}
@@ -484,17 +485,29 @@ def merge_manifest_and_catalog(models, catalogs):
 
     return models_copy
 
-def download_docs(packages):
+def github_read_file(username, repository_name, file_path, ref,headers):
+    headers['Accept'] = 'application/vnd.github.v3.raw'
+    url = f'https://api.github.com/repos/{username}/{repository_name}/contents/{file_path}?ref={ref}'
+    print(f'Fetching {url}')
+    r = requests.get(url, headers=headers)
+    r.raise_for_status()
+
+    return r.text
+
+def download_docs(packages, headers):
     # Create the manifest folder to write to
     if not (os.path.exists('./manifests')):
         os.makedirs('./manifests')
 
     # Get the latest manifest from each package
     for package in packages:
-        with urllib.request.urlopen(f'https://raw.githubusercontent.com/snowplow/dbt-snowplow-{package.replace("_", "-")}/gh_pages/docs/manifest.json') as response, open(f'./manifests/{package}_manifest.json', 'wb') as out_file:
-            shutil.copyfileobj(response, out_file)
-        with urllib.request.urlopen(f'https://raw.githubusercontent.com/snowplow/dbt-snowplow-{package.replace("_", "-")}/gh_pages/docs/catalog.json') as response, open(f'./manifests/{package}_catalog.json', 'wb') as out_file:
-            shutil.copyfileobj(response, out_file)
+        manifest = github_read_file('snowplow', package[1], 'docs/manifest.json', 'gh_pages', headers)
+        catalog = github_read_file('snowplow', package[1], 'docs/catalog.json', 'gh_pages', headers)
+
+        with open(f'./manifests/{package[0].split("/")[1]}_manifest.json', 'w') as out_file:
+            json.dump(json.loads(manifest), out_file)
+        with open(f'./manifests/{package[0].split("/")[1]}_catalog.json', 'w') as out_file:
+            json.dump(json.loads(catalog), out_file)
 
 
 def get_referenced_by(imodels:dict[dbt_model], imacros: dict[dbt_macro]) -> tuple[dict[dbt_model], dict[dbt_macro]]:
@@ -761,7 +774,7 @@ def get_doc(text: str, docs: dict, key: str) -> str:
         package = key.split('.')[1]
         doc_name = text.split('"')[1]
         doc_key = package + '.' + doc_name
-        # Sometimes it has a doc prefix, sometimes it doens't?
+        # Sometimes it has a doc prefix, won't have if produced pre-version 1.4, should be okay to remove in the future
         try:
             return docs[doc_key].block_contents
         except:

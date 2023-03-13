@@ -1,5 +1,5 @@
 ---
-title: "Snowplow E-Commerce Models"
+title: "Snowplow Ecommerce Models"
 description: Reference for snowplow_ecommerce dbt models developed by Snowplow
 sidebar_position: 10
 ---

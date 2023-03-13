@@ -5,7 +5,8 @@ import json
 import sys
 
 #Set your PAT key so you get the 5000 calls per hour for the github api
-headers = {'Authorization': f"token {sys.argv[1]}"}
+# call with `token <YOUR_TOKEN> as cmd argument if using a local PAT key`
+headers = {'Authorization': f"{sys.argv[1]}"}
 
 # Functions to decode the contents and process into the format we want
 def process_package(packages):

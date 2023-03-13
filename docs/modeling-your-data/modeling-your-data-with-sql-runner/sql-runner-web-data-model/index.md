@@ -8,7 +8,7 @@ The Snowplow web data model aggregates Snowplow's out of the box page view and p
 
 ![](images/image-3.png)
 
-**The Snowplow web data model v1.0.0 can be found in the [snowplow/data-models GitHub repository](https://github.com/snowplow/data-models/tree/master).**
+**The latest Snowplow web data model can be found in the [snowplow/data-models GitHub repository](https://github.com/snowplow/data-models/tree/master).**
 
 ## Quickstart
 

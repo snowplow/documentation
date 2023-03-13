@@ -20,7 +20,7 @@ Unlike the [web model](/docs/modeling-your-data/modeling-your-data-with-sql-runn
 
 The model runs incrementally, only processing new events (and events that have previously been modeled but are part of screen views, sessions or users for which/whom there is new information) with every run. The incremental logic is separate from the logic that calculates the tables so as to make customization of the model easier. More information on the model structure and customization options can be found below.
 
-**The Snowplow mobile data model v1.0.0 can be found in the [snowplow/data-models GitHub repository](https://github.com/snowplow/data-models/tree/master).**
+**The latest Snowplow mobile data model can be found in the [snowplow/data-models GitHub repository](https://github.com/snowplow/data-models/tree/master).**
 
 #### Supported Warehouses
 

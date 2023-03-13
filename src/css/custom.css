@@ -80,6 +80,7 @@
   --ifm-color-primary-lightest: #b198df;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-font-color-base: rgb(218, 221, 225);
+  --ifm-font-color-base-inverse: #000000
 }
 
 [data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
@@ -339,8 +340,8 @@ abbr[data-title]:focus::after {
   white-space: nowrap;
 
   /* style tooltip */
-  background-color: #1e1e1e;
-  color: #fff;
+  background-color: var(--ifm-font-color-base);
+  color: var(--ifm-font-color-base-inverse);
   border-radius: 3px;
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
   font-size: 14px;

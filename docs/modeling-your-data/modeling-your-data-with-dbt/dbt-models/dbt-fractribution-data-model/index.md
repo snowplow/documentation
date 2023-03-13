@@ -76,13 +76,15 @@ The package currently offers 5 different attribution models, that can be chosen 
 - `position_based`: The first and last channels get 40% of the credit each, with the remaining channels getting the leftover 20% distributed evenly.
 - `linear`: Assigns attribution evenly between all channels on the path.
 ​
-
+<p align="center">
 <ThemedImage
-  alt='Data processing model for the normalize package'
-  sources={{
-    light: require('./images/attribution_models_light.png').default,
-    dark: require('./images/attribution_models_dark.png').default
-    }}/>
+alt='Data processing model for the normalize package'
+sources={{
+  light: require('./images/attribution_models_light.png').default,
+  dark: require('./images/attribution_models_dark.png').default
+}}
+/>
+</p>
 
 ### Package Macros
 

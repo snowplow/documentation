@@ -82,6 +82,7 @@ The transformer consumes enriched tsv-formatted Snowplow events from S3 (AWS) or
 
 The loader consumes a stream of these messages and uses them to determine what data needs to be loaded. It issues the necessary SQL commands to the storage target.
 
+<p align="center">
 <ThemedImage 
 alt='Shredder loader interface diagram'
 sources={{
@@ -89,3 +90,4 @@ light: require('./images/shredder_loader_interface_light.drawio.png').default,
 dark: require('./images/shredder_loader_interface_dark.drawio.png').default
 }}
 />
+</p>

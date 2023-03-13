@@ -76,7 +76,7 @@ Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in�
 
 ## Cloudwatch (for enrich-kinesis)
 
-It's possible to send KCL and KPL metrics to Cloudwatch by adding this section to the config file:
+It's possible to send KCL metrics to Cloudwatch by adding this section to the config file:
 
 ```json
 "monitoring": {

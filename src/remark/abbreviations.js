@@ -27,7 +27,7 @@ const plugin = () => {
         const split = node.value.split(find)
         if (split.length > 1) {
           const replaced = split.map(token => config[token] ?
-            { type: 'html', value: `<abbr title="${config[token]}">${token}</abbr>` } :
+            { type: 'html', value: `<abbr data-title="${config[token]}">${token}</abbr>` } :
             { ...node, value: token }
           )
           return replaced

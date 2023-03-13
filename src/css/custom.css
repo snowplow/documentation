@@ -80,6 +80,7 @@
   --ifm-color-primary-lightest: #b198df;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-font-color-base: rgb(218, 221, 225);
+  --ifm-font-color-base-inverse: #000000;
 }
 
 [data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
@@ -318,4 +319,32 @@ img.shield {
   border: 2px solid transparent;
   border-radius: var(--ifm-alert-border-radius);
   transition: 0.4s cubic-bezier(.38,.14,.58,1) all;
+}
+
+abbr[data-title] {
+  position: relative;
+  cursor: help;
+  /* ensure consistent styling across browsers */
+  text-decoration: underline dotted;
+}
+
+abbr[data-title]:hover::after,
+abbr[data-title]:focus::after {
+  content: attr(data-title);
+  font-weight: normal;
+  /* position tooltip like the native one */
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+  width: auto;
+  white-space: nowrap;
+
+  /* style tooltip */
+  background-color: var(--ifm-font-color-base);
+  color: var(--ifm-font-color-base-inverse);
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  z-index: 9998;
+  padding: 3px 5px;
 }

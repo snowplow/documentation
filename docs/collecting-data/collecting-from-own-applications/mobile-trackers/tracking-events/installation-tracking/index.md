@@ -26,10 +26,18 @@ let trackerConfig = TrackerConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val trackerConfig = TrackerConfiguration("appId")
+    .installAutotracking(true)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .installAutotracking(true);
 ```
 

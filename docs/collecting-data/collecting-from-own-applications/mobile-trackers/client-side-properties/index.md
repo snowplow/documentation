@@ -82,7 +82,17 @@ See the API docs for the full [list of options](https://snowplow.github.io/snowp
 Subject properties can be updated or added to after initialization, using setter methods. See the [API docs](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1internal_1_1tracker_1_1_subject.html) for full details.
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val subjectConfig = SubjectConfiguration()
+    .userId("username")
+```
+
+See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_subject_configuration.html).
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 SubjectConfiguration subjectConfig = new SubjectConfiguration()
@@ -96,7 +106,7 @@ See the API docs for the full [list of options](https://docs.snowplow.io/snowplo
 
 Subject properties can be updated or added to after initialization using the `SubjectController` retrieved from the tracker:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -105,11 +115,19 @@ tracker?.subject?.userId = ""
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
 val tracker = Snowplow.defaultTracker
 tracker?.subject?.userId = ''
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+TrackerController tracker = Snowplow.getDefaultTracker();
+tracker.getSubject().setUserId("");
 ```
 
   </TabItem>

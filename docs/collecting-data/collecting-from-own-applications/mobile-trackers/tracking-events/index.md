@@ -24,10 +24,18 @@ let eventId = tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ScreenView("screen")
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());         
+ScreenView event = new ScreenView("screen");         
 tracker.track(event);
 ```
 
@@ -71,10 +79,32 @@ Snowplow.createTracker(namespace: "appTracker", network: networkConfig) {
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
 
 ```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
+val trackerConfig = TrackerConfiguration("appId")
+    .platformContext(true)
+    .applicationContext(true)
+    .lifecycleAutotracking(true)
+    .sessionContext(true)
+    .screenViewAutotracking(true)
+    .screenContext(true)
+    .exceptionAutotracking(true)
+    .installAutotracking(true)
+
+Snowplow.createTracker(
+    applicationContext,
+    namespace,
+    networkConfiguration,
+    trackerConfig
+)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .platformContext(true)
     .applicationContext(true)
     .lifecycleAutotracking(true)
@@ -120,13 +150,24 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = Structured("shop", "add-to-basket") // category and action
+    .label("Add To Basket")
+    .property("pcs")
+    .value(2.0)
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Structured event = new Structured("category", "action")
-    .label("label")
-    .property("property")
-    .value(5);
+Structured event = new Structured("shop", "add-to-basket") // category and action
+    .label("Add To Basket")
+    .property("pcs")
+    .value(2);
 tracker.track(event);
 ```
 
@@ -150,7 +191,17 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = Timing("timing-category", "timing-variable", 5)
+    .label("optional-label")
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android">
 
 ```java
 Timing event = new Timing("timing-category", "timing-variable", 5)
@@ -178,10 +229,19 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ScreenView("DemoScreenName")
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-ScreenView event = new ScreenView("DemoScreenName", UUID.randomUUID());
+ScreenView event = new ScreenView("DemoScreenName");
 
 tracker.track(event);
 ```
@@ -209,7 +269,18 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ConsentGranted("2022-01-01T00:00:00Z", "1234abcd", "1.2")
+    .documentDescription("document-description")
+    .documentName("document-name")
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 ConsentGranted event = new ConsentGranted("2022-01-01T00:00:00Z", "1234abcd", "1.2")
@@ -243,7 +314,18 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ConsentWithdrawn(false, "1234abcd", "1.2")
+    .documentDescription("document-description")
+    .documentName("document-name")
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 ConsentWithdrawn event = new ConsentWithdrawn(false, "1234abcd", "1.2")
@@ -295,7 +377,33 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val tracker = Snowplow.createTracker(applicationContext, "ns", "end", HttpMethod.POST)
+
+val item = EcommerceTransactionItem("sku-1", 0.75, 1)
+    .name("DemoItemName")
+    .category("DemoItemCategory")
+    .currency("USD")
+    .orderId("item-1")
+
+val items = listOf(item)
+
+val event = EcommerceTransaction("order-1", 350.0, items)
+    .affiliation("DemoTransactionAffiliation")
+    .taxValue(10.0)
+    .shipping(15.0)
+    .city("Boston")
+    .state("Massachusetts")
+    .country("USA")
+    .currency("USD")
+
+tracker.track(event)
+```
+
+</TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 EcommerceTransactionItem item = new EcommerceTransactionItem("sku-1", 0.75, 1)
@@ -347,7 +455,23 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = MessageNotification("title", "body", MessageNotificationTrigger.push)
+    .notificationTimestamp("2021-10-18T10:16:08.008Z")
+    .category("category")
+    .action("action")
+    .bodyLocKey("loc key")
+    .bodyLocArgs(listOf("loc arg1", "loc arg2"))
+    .sound("chime.mp3")
+    .notificationCount(9)
+    .category("category1")
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 MessageNotification event = new MessageNotification("title", "body", MessageNotificationTrigger.push)
@@ -394,7 +518,32 @@ public func application(_ application: UIApplication,
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    ...
+
+    // Extract info from Intent
+    val deepLinkUrl = intent.data.toString()
+    var referrer: String? = null
+    val extras = intent.extras
+    if (extras != null) {
+        val referrerUri = extras[Intent.EXTRA_REFERRER] as? Uri
+        if (referrerUri != null) {
+            referrer = referrerUri.toString()
+        }
+    }
+    // Create and track the event
+    val event = DeepLinkReceived(deepLinkUrl).referrer(referrer)
+    tracker.track(event)
+
+    ...
+}
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 @Override
@@ -443,10 +592,19 @@ let trackerConfig = TrackerConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val trackerConfig = TrackerConfiguration("appId")
+    ...
+    .deepLinkContext(false)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     ...
     .deepLinkContext(false);
 ```
@@ -491,7 +649,16 @@ let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_cli
 `trueTimestamp` should be a `Date` object.
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+// This example shows a self-describing event, but all events can have a trueTimestamp
+val event = SelfDescribing(SelfDescribingJson("iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", data))
+    .trueTimestamp(166184300L)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 // This example shows a self-describing event, but all events can have a trueTimestamp

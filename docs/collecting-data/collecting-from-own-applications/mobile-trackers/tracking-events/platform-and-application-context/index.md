@@ -25,10 +25,19 @@ let trackerConfig = TrackerConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val trackerConfig = TrackerConfiguration("appId")
+    .platformContext(true)
+    .applicationContext(true)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .platformContext(true)
     .applicationContext(true);
 ```

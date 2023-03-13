@@ -38,10 +38,19 @@ let config = TrackerConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val config = TrackerConfiguration("appId")
+    .sessionContext(false) // Session context entity won't be added to events
+    .userAnonymisation(true) // User identifiers in Platform context (IDFA and IDFV) will be anonymised
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TrackerConfiguration config = new TrackerConfiguration()
+TrackerConfiguration config = new TrackerConfiguration("appId")
     .sessionContext(false) // Session context entity won't be added to events
     .userAnonymisation(true); // User identifiers in Platform context (IDFA and IDFV) will be anonymised
 ```
@@ -63,10 +72,19 @@ let config = TrackerConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val config: TrackerConfiguration = TrackerConfiguration("appId")
+    .sessionContext(true) // Session context is tracked with the session ID
+    .userAnonymisation(true) // User identifiers in Session and Platform context are anonymised
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TrackerConfiguration config = new TrackerConfiguration()
+TrackerConfiguration config = new TrackerConfiguration("appId")
     .sessionContext(true) // Session context is tracked with the session ID
     .userAnonymisation(true); // User identifiers in Session and Platform context are anonymised
 ```
@@ -93,7 +111,15 @@ let config = EmitterConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val config = EmitterConfiguration()
+    .serverAnonymisation(true)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 EmitterConfiguration config = new EmitterConfiguration()

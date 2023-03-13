@@ -27,7 +27,14 @@ let networkConfig = NetworkConfiguration(endpoint: "http://collector-endpoint")
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val networkConfig = NetworkConfiguration("http://collector-endpoint")
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 NetworkConfiguration networkConfig = new NetworkConfiguration("http://collector-endpoint");
@@ -55,7 +62,21 @@ let networkConfig = NetworkConfiguration(networkConnection: network)
 In the example above we used the `DefaultNetworkConnection` but it can be used any custom component that implements the `NetworkConnection` interface.
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val connection = OkHttpNetworkConnectionBuilder(url, applicationContext)
+    .method(method)
+    .emitTimeout(10)
+    .build()
+
+val networkConfig = NetworkConfiguration(connection)
+```
+
+In the example above we used the `OkHttpNetworkConnection` but it can be used any custom component that implements the `NetworkConnection` interface.
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 OkHttpNetworkConnection connection =
@@ -86,7 +107,17 @@ let emitterConfig = EmitterConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val eventStore: EventStore = CustomEventStore(applicationContext, kNamespace)
+
+val emitterConfiguration = EmitterConfiguration()
+    .eventStore(eventStore)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 EventStore eventStore = new CustomEventStore(getApplicationContext(), kNamespace);
@@ -117,7 +148,17 @@ let emitterConfig = EmitterConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val emitterConfiguration = EmitterConfiguration()
+    .customRetryForStatusCodes(mapOf(
+        403 to true
+    ))
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
@@ -142,7 +183,15 @@ let emitterConfig = EmitterConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val emitterConfiguration = EmitterConfiguration()
+    .bufferOption(BufferOption.DefaultGroup)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 EmitterConfiguration emitterConfiguration = new EmitterConfiguration()

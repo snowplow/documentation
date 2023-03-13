@@ -24,10 +24,18 @@ let trackerConfig = TrackerConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val trackerConfig = TrackerConfiguration("appId")
+    .sessionContext(true)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .sessionContext(true);
 ```
 
@@ -56,7 +64,18 @@ Snowplow.createTracker(
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val sessionConfig = SessionConfiguration(
+    TimeMeasure(6, TimeUnit.SECONDS),
+    TimeMeasure(30, TimeUnit.SECONDS)
+)
+Snowplow.createTracker(applicationContext, namespace, networkConfig, sessionConfig)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 SessionConfiguration sessionConfig = new SessionConfiguration(
@@ -87,7 +106,17 @@ SessionConfiguration(
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val sessionConfig = SessionConfiguration(
+    TimeMeasure(360, TimeUnit.SECONDS),
+    TimeMeasure(15, TimeUnit.SECONDS)
+)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 SessionConfiguration sessionConfig = new SessionConfiguration(
@@ -136,7 +165,28 @@ let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConf
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val sessionConfig = SessionConfiguration(
+    TimeMeasure(6, TimeUnit.SECONDS),
+    TimeMeasure(30, TimeUnit.SECONDS)
+)
+    .onSessionUpdate { state ->
+        log(
+            "Session: " + state.getSessionId()
+                .toString() + "\r\nprevious: " + state.getPreviousSessionId()
+                .toString() + "\r\neventId: " + state.getFirstEventId()
+                .toString() + "\r\nindex: " + state.getSessionIndex()
+                .toString() + "\r\nuserId: " + state.getUserId()
+        )
+    }
+
+Snowplow.createTracker(applicationContext, namespace, networkConfig, sessionConfig)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 ...

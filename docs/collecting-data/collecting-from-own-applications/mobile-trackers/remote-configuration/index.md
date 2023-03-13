@@ -42,7 +42,31 @@ Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: defaultC
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+// Indicate the URL where to download the config file
+val remoteConfig = RemoteConfiguration(REMOTE_CONFIG_URL, HttpMethod.GET)
+
+// Default configuration used in case the remote config is not accessible
+val defaultNetworkConfig = NetworkConfiguration(DEFAULT_COLLECTOR_URL, HttpMethod.POST)
+val defaultConfig: List<ConfigurationBundle> =
+    listOf(ConfigurationBundle("defaultNamespace", networkConfig))
+
+// Setup tracker with remote configuration
+Snowplow.setup(
+    context, remoteConfig, defaultConfig
+) { configurationPair: Pair<List<String>, ConfigurationState?>? ->
+    val namespaces = configurationPair?.first
+    val configurationState =
+        configurationPair?.second // either cached, default or fetched from the remote endpoint
+
+  // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
+}
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 // Indicate the URL where to download the config file
@@ -156,7 +180,19 @@ Snowplow.refresh(onSuccess: successCallback)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+Snowplow.refresh(
+    context
+) { configurationPair: Pair<List<String>, ConfigurationState>? ->
+    val namespaces = configurationPair?.first
+    val configurationState = configurationPair?.second
+}
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 Snowplow.refresh(context, configurationPair -> {
@@ -203,7 +239,30 @@ Snowplow.refresh(onSuccess: successCallback)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+// Load configuration with userId = nil
+Snowplow.setup(context, remoteConfig, defaultConfig, successCallback)
+
+/* userId is set to nil */
+
+...later...
+
+tracker.subject.userId = "my-runtime-updated-userId"
+
+/* userId is is set to "my-runtime-updated-userId" */
+
+...later...
+
+// Later refreshing the configuration with userId = nil
+Snowplow.refresh(context, successCallback)
+
+/* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 // Load configuration with userId = nil
@@ -220,7 +279,7 @@ tracker.getSubject().userId = "my-runtime-updated-userId"
 ...later...
 
 // Later refreshing the configuration with userId = nil
-Snowplow.refresh(context, successCallback)
+Snowplow.refresh(context, successCallback);
 
 /* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
 ```

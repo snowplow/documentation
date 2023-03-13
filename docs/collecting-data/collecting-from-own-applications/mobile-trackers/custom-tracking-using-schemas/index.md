@@ -35,7 +35,21 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val data = mapOf(
+    "targetUrl" to "http://a-target-url.com"
+)
+val json = SelfDescribingJson(
+    "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1",
+    data
+)
+val event = SelfDescribing(json)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 Map<String, String> data = new HashMap<>();
@@ -119,7 +133,7 @@ They can be used in the tracker to provide more context to specific events (e.g.
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let event = ScreenView(name: "DemoScreenName", screenId: UUID())
+let event = ScreenView(name: "DemoScreenName")
 event.contexts.add(
     SelfDescribingJson(schema: "iglu:com.example/screen/jsonschema/1-0-1",
         andDictionary: [
@@ -136,10 +150,36 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ScreenView("screen")
+event.customContexts.add(
+    SelfDescribingJson(
+        "iglu:com.example/screen/jsonschema/1-2-1",
+        mapOf(
+            "screenType" to "test",
+            "lastUpdated" to "2021-06-11"
+        )
+    )
+)
+event.customContexts.add(
+    SelfDescribingJson(
+        "iglu:com.example/user/jsonschema/2-0-0",
+        mapOf(
+            "userType" to "tester"
+        )
+    )
+)
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());
+ScreenView event = new ScreenView("screen");
 event.customContexts.add(
     new SelfDescribingJson("iglu:com.example/screen/jsonschema/1-2-1",
         new HashMap<String, String>() {{
@@ -181,7 +221,28 @@ let tracker = Snowplow.createTracker(namespace: ..., network: ..., configuration
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val staticContext = SelfDescribingJson(
+    "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
+    mapOf(
+        "key" to "staticExample"
+    )
+)
+val staticGlobalContext = GlobalContext(listOf(staticContext))
+
+val globalContextsConfig = GlobalContextsConfiguration(
+    mutableMapOf(
+        "staticExampleTag" to staticGlobalContext
+    )
+)
+
+Snowplow.createTracker(applicationContext, namespace, networkConfiguration, globalContextsConfig)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 SelfDescribingJson staticContext = new SelfDescribingJson(
@@ -210,7 +271,14 @@ tracker.globalContexts.remove(tag: "staticExampleTag")
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+tracker.globalContexts.remove("staticExampleTag")
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 tracker.getGlobalContexts().remove("staticExampleTag");
@@ -231,7 +299,14 @@ tracker.globalContexts.add(tag: "staticExampleTag", contextGenerator: staticGlob
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+tracker.globalContexts.add("staticExampleTag", staticGlobalContext);
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 tracker.getGlobalContexts().add("staticExampleTag", staticGlobalContext);
@@ -254,7 +329,19 @@ let staticContext = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val staticContext = SelfDescribingJson(
+    "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
+    mapOf(
+        "key" to "staticExample"
+    )
+)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 SelfDescribingJson staticContext = new SelfDescribingJson(
@@ -284,7 +371,23 @@ let contextGenerator = GlobalContext(generator: {  event in
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val contextGenerator = GlobalContext(object : FunctionalGenerator() {
+    override fun apply(event: InspectableEvent): List<SelfDescribingJson> {
+        return listOf(SelfDescribingJson(
+            "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
+            mapOf(
+                    "eventName" to event.schema
+            )
+        ))
+    }
+})
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 GlobalContext contextGenerator = new GlobalContext(new FunctionalGenerator() {
@@ -328,7 +431,25 @@ tracker.add(filteredGC, tag: "tag1")
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val staticContext = SelfDescribingJson(
+    "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
+    mapOf(
+        "key" to "staticExample"
+    )
+)
+val staticGlobalContext =
+    GlobalContext(listOf(staticContext), object : FunctionalFilter() {
+        override fun apply(event: InspectableEvent): Boolean {
+            return event.name === "se"
+        }
+    })
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 SelfDescribingJson staticContext = new SelfDescribingJson(
@@ -370,7 +491,26 @@ tracker.add(rulesetGC tag: "tag1")
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val allowed = "iglu:com.snowplowanalytics.*/*/jsonschema/*-*-*"
+val denied = "iglu:com.snowplowanalytics.mobile/*/jsonschema/*-*-*"
+
+val staticContext = SelfDescribingJson(
+    "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
+    mapOf(
+        "key" to "staticExample"
+    )
+)
+val staticGlobalContext = GlobalContext(
+    listOf(staticContext),
+    buildRuleSet(listOf(allowed), listOf(denied))
+)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 String allowed = "iglu:com.snowplowanalytics.*/*/jsonschema/*-*-*";
@@ -434,7 +574,27 @@ tracker.add(contextGeneratorGC, tag: "tag1")
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val staticGlobalContext = GlobalContext(object : ContextGenerator {
+    override fun generateContexts(event: InspectableEvent): List<SelfDescribingJson> {
+        return listOf(SelfDescribingJson(
+            "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
+            mapOf(
+                    "eventName" to event.schema
+            )
+        ))
+    }
+
+    override fun filterEvent(event: InspectableEvent): Boolean {
+        return true
+    }
+})
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 GlobalContext staticGlobalContext = new GlobalContext(new ContextGenerator() {

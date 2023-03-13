@@ -323,7 +323,7 @@ img.shield {
 
 abbr[data-title] {
   position: relative;
-
+  cursor: help;
   /* ensure consistent styling across browsers */
   text-decoration: underline dotted;
 }
@@ -331,7 +331,7 @@ abbr[data-title] {
 abbr[data-title]:hover::after,
 abbr[data-title]:focus::after {
   content: attr(data-title);
-
+  font-weight: normal;
   /* position tooltip like the native one */
   position: absolute;
   left: 0;
@@ -345,5 +345,6 @@ abbr[data-title]:focus::after {
   border-radius: 3px;
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
   font-size: 14px;
+  z-index: 9998;
   padding: 3px 5px;
 }

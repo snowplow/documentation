@@ -11,7 +11,7 @@ sidebar_position: 101
     # dbt_project.yml
     ...
     dispatch:
-    - macro_namespace: dbt
+      - macro_namespace: dbt
         search_order: ['snowplow_utils', 'dbt']
     ```
 - Other changes required by [utils version 0.14.0](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/utils/index.md#upgrading-to-0140)

@@ -47,7 +47,7 @@
 /* You can override the default Infima variables here. */
 :root {
   --ifm-background-color: #f2f4f7;
-  --ifm-color-primary: #6638b8;
+  --ifm-color-primary: rgb(102, 56, 184);
   --ifm-color-primary-dark: #522d93;
   --ifm-color-primary-darker: #472781;
   --ifm-color-primary-darkest: #29164a;
@@ -347,4 +347,12 @@ abbr[data-title]:focus::after {
   font-size: 14px;
   z-index: 9998;
   padding: 3px 5px;
+}
+
+.alert--snowplow {
+	--ifm-alert-background-color:rgba(102, 56, 184,0.3);
+	--ifm-alert-background-color-highlight: rgba(102, 56, 184, 0.15);
+	--ifm-alert-foreground-color: var(--ifm-color-announcement);
+	--ifm-alert-border-color: var(--ifm-color-primary-darker);
+  color: var(--ifm-font-color-base);
 }

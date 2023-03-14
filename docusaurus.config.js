@@ -44,6 +44,10 @@ async function createConfig() {
         {
           docs: {
             showLastUpdateTime: true,
+            admonitions: {
+              tag: ':::',
+              keywords: ['note', 'tip', 'info', 'caution', 'danger', 'snowplow'],
+            },
             editUrl: 'https://github.com/snowplow/documentation/tree/main/',
             remarkPlugins: [mdxMermaid.default, abbreviations],
             async sidebarItemsGenerator({

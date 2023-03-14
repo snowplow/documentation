@@ -19,3 +19,10 @@ Have you found yourself relying on “data exhaust” — data from arbitrary to
 * ✅ A unique approach based on **[schemas and validation](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md)** ensures your data is as clean as possible.
 * 🪄 **Over [15 enrichments](/docs/enriching-your-data/available-enrichments/index.md)** to get the most out of your data.
 * 🏭 Send data to **popular warehouses and streams** — Snowplow fits nicely within the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/?utm_source=docs&utm_content=landing-page).
+
+
+:::snowplow
+
+Hello, world!
+
+:::

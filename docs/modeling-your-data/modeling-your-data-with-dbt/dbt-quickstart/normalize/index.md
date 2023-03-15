@@ -51,7 +51,11 @@ vars:
     snowplow__start_date: 'yyyy-mm-dd'
     snowplow__app_id: ['my_app_1','my_app_2']
 ```
+:::note
 
+If you have events you are going to normalize with no value for the `dvce_sent_tstamp` field, you need to disable the days late filter by setting the `snowplow__days_late_allowed` variable to `-1`, otherwise these events will not be processed.
+
+:::
 
 ### 4. Install additional python packages
 

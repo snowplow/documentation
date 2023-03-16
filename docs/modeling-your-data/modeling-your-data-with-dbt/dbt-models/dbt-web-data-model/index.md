@@ -54,7 +54,7 @@ $$
 
 and the below shows an example visually.
 
-This calculation at a session level is slightly more involved as have to calculate these per page view and account for [stray page pings](#stray-page-pings) but the underlying idea is the same.
+At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for [stray page pings](#stray-page-pings), but the underlying idea is the same.
 
 <p align="center">
 <ThemedImage 

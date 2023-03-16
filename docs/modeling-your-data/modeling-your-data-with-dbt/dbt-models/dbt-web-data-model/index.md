@@ -40,9 +40,11 @@ This model consists of a series of modules, each producing a table which serves 
 - User Mapping: Provides a mapping between user identifiers, `domain_userid` and `user_id`, outputting the table `snowplow_web_user_mapping`. This can be used for session stitching.
 
 ## Engaged vs. Absolute Time
-At a page view and session level we provide two measures of time, absolute and engaged. Absolute is simple, it's the difference between the `dervied_tstamp` of the first and last (page view or page ping) events within that page view/session, however this isn't a true measure of how long a user spent engaging with your content, and engaged time is often a large predictor of a customer conversion (whatever that may be in your domain).
+At a page view and session level we provide two measures of time; absolute, how long a user had the page open, and engaged, how much of that time the user was on the page. Engaged time is often a large predictor of a customer conversion, such as a purchase or a sign-up, whatever that may be in your domain.
 
-Engaged time is derived based on the page pings which means if the user isn't active on your content, the time does not count. Consider a single page view example of reading an article. If part way through reading I see something I don't understand, I may open a new tab and look this up, perhaps read a Wikipedia page on it, before coming back to your site. In this case there will be a gap in my page pings in the events data. 
+To calculate absolute is simple, it's the difference between the `dervied_tstamp` of the first and last (page view or page ping) events within that page view/session.
+
+Engaged time is more complicated, it is derived based on the page pings which means if the user isn't active on your content, the time does not count. Let's consider a single page view example of reading an article; part way through the reader may see something they don't understand, so they open a new tab and look this up, perhaps read a Wikipedia page on it, before coming back to your site. In this case there will be a gap in the page pings in the events data. 
 
 To adjust for these gaps we calculate engaged time as the time to trigger each ping (your heartbeat) times the number of pings (ignoring the first one), and add to that the time delay to the first ping (your minimum visit length). The equation is:
 

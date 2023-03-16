@@ -3,6 +3,16 @@ title: "Mobile"
 sidebar_position: 102
 ---
 
+```mdx-code-block
+import Admonition from "@theme/Admonition";
+```
+
+<a href="https://docs.snowplow.io/accelerators/mobile/">
+  <Admonition icon="🚀" title="Unleash the power of your behavioral data" type="tip">
+    If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our Advanced Analytics for Mobile Accelerator!
+  </Admonition>
+</a>
+
 ## Requirements
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a mobile events dataset being available in your database:

@@ -3,6 +3,17 @@ title: "E-commerce"
 sidebar_position: 105
 ---
 
+
+```mdx-code-block
+import Admonition from "@theme/Admonition";
+```
+
+<a href="https://docs.snowplow.io/accelerators/ecommerce/">
+  <Admonition icon="🚀" title="Unleash the power of your behavioral data" type="tip">
+    If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our E-Commerce Accelerator!
+  </Admonition>
+</a>
+
 ## Requirements
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:

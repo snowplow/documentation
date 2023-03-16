@@ -39,6 +39,32 @@ This model consists of a series of modules, each producing a table which serves 
 - Users: Aggregates session level data to a users level, `domain_userid`, outputting the table `snowplow_web_users`.
 - User Mapping: Provides a mapping between user identifiers, `domain_userid` and `user_id`, outputting the table `snowplow_web_user_mapping`. This can be used for session stitching.
 
+## Engaged vs. Absolute Time
+At a page view and session level we provide two measures of time, absolute and engaged. Absolute is simple, it's the difference between the `dervied_tstamp` of the first and last (page view or page ping) events within that page view/session, however this isn't a true measure of how long a user spent engaging with your content, and engaged time is often a large predictor of a customer conversion (whatever that may be in your domain).
+
+Engaged time is derived based on the page pings which means if the user isn't active on your content, the time does not count. Consider a single page view example of reading an article. If part way through reading I see something I don't understand, I may open a new tab and look this up, perhaps read a Wikipedia page on it, before coming back to your site. In this case there will be a gap in my page pings in the events data. 
+
+To adjust for these gaps we calculate engaged time as the time to trigger each ping (your heartbeat) times the number of pings (ignoring the first one), and add to that the time delay to the first ping (your minimum visit length). The equation is:
+
+$$
+engaged\_time=t_{heartbeat}\times (n_{distinct\_pings} -1) + t_{min\_visit\_length}
+$$ 
+
+and the below shows an example visually.
+
+This calculation at a session level is slightly more involved as have to calculate these per page view and account for [stray page pings](#stray-page-pings) but the underlying idea is the same.
+
+<p align="center">
+<ThemedImage 
+alt='Page views and pings showing gaps to highlight the difference between absolute and engaged time'
+sources={{
+light: require('./images/engaged_time_light.drawio.png').default, 
+dark: require('./images/engaged_time_dark.drawio.png').default
+}}
+/>
+</p>
+
+
 ## Optional Modules
 
 ### Consent Tracking Custom Module

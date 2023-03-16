@@ -1,7 +1,9 @@
 ---
 title: "Media Player"
 sidebar_position: 103
+hide_title: true
 ---
+# Media Player Quickstart
 
 ## Requirements
 

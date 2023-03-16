@@ -1,7 +1,9 @@
 ---
 title: "Mobile"
 sidebar_position: 102
+hide_title: true
 ---
+# Mobile Quickstart
 
 ```mdx-code-block
 import Admonition from "@theme/Admonition";

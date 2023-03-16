@@ -1,7 +1,9 @@
 ---
 title: "E-commerce"
 sidebar_position: 105
+hide_title: true
 ---
+# E-commerce Quickstart
 
 ```mdx-code-block
 import Admonition from "@theme/Admonition";

@@ -1,7 +1,9 @@
 ---
 title: "Fractribution"
 sidebar_position: 106
+hide_title: true
 ---
+# Fractribution Quickstart
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

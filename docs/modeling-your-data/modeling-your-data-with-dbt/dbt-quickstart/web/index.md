@@ -1,7 +1,9 @@
 ---
 title: "Web"
 sidebar_position: 101
+hide_title: true
 ---
+# Web Quickstart
 
 ```mdx-code-block
 import Admonition from "@theme/Admonition";
@@ -13,6 +15,8 @@ import {SnowplowIcon} from "@site/src/components/SnowplowIcon/SnowplowIcon";
   <br/>
   <a className="callToAction" href="https://docs.snowplow.io/accelerators/web/">👉 Take me there! 👈</a>
 </Admonition>
+
+
 
 ## Requirements
 

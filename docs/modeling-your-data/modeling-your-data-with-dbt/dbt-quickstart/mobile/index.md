@@ -5,13 +5,14 @@ sidebar_position: 102
 
 ```mdx-code-block
 import Admonition from "@theme/Admonition";
+import {SnowplowIcon} from "@site/src/components/SnowplowIcon/SnowplowIcon";
 ```
 
-<a href="https://docs.snowplow.io/accelerators/mobile/">
-  <Admonition icon="🚀" title="Unleash the power of your behavioral data" type="tip">
-    If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our Advanced Analytics for Mobile Accelerator!
-  </Admonition>
-</a>
+<Admonition icon={SnowplowIcon()} title="Unleash the power of your behavioral data" type="tip">
+  If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our <strong>Advanced Analytics for Mobile</strong> Accelerator!
+  <br/>
+  <a className="callToAction" href="https://docs.snowplow.io/accelerators/mobile/">👉 Take me there! 👈</a>
+</Admonition>
 
 ## Requirements
 

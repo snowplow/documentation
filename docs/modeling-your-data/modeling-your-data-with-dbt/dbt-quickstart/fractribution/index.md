@@ -9,13 +9,14 @@ import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 import Admonition from "@theme/Admonition";
+import {SnowplowIcon} from "@site/src/components/SnowplowIcon/SnowplowIcon";
 ```
 
-<a href="https://docs.snowplow.io/accelerators/snowplow_fractribution/">
-  <Admonition icon="🚀" title="Unleash the power of your behavioral data" type="tip">
-    If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our Fractional Attribution Modeling Accelerator Accelerator!
-  </Admonition>
-</a>
+<Admonition icon={SnowplowIcon()} title="Unleash the power of your behavioral data" type="tip">
+  If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our <strong>Fractional Attribution Modeling</strong> Accelerator!
+  <br/>
+  <a className="callToAction" href="https://docs.snowplow.io/accelerators/snowplow_fractribution/">👉 Take me there! 👈</a>
+</Admonition>
 
 ## Requirements
 

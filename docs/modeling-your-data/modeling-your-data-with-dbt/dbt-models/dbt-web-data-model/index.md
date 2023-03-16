@@ -44,9 +44,9 @@ At a page view and session level we provide two measures of time; absolute, how 
 
 Calculating absolute time is simple, it's the difference between the `dervied_tstamp` of the first and last (page view or page ping) events within that page view/session.
 
-Engaged time is more complicated, it is derived based on the page pings which means if the user isn't active on your content, the time does not count. Let's consider a single page view example of reading an article; part way through the reader may see something they don't understand, so they open a new tab and look this up, perhaps read a Wikipedia page on it, before coming back to your site. In this case there will be a gap in the page pings in the events data. 
+Engaged time is more complicated, it is derived based on the page pings which means if the user isn't active on your content the time does not count. Let's consider a single page view example of reading an article; part way through the reader may see something they don't understand, so they open a new tab and look this up, perhaps read a Wikipedia page on it, they go down a rabbit hole and 10 minutes later they make it back to your site to finish the article. In this case there will be a gap in the page pings in the events data. 
 
-To adjust for these gaps we calculate engaged time as the time to trigger each ping (your heartbeat) times the number of pings (ignoring the first one), and add to that the time delay to the first ping (your minimum visit length). The equation is:
+To adjust for these gaps we calculate engaged time as the time to trigger each ping (your heartbeat) times the number of pings (ignoring the first one), and add to that the time delay to the first ping (your minimum visit length). The formula is:
 
 $$
 engaged\_time=t_{heartbeat}\times (n_{distinct\_pings} -1) + t_{min\_visit\_length}

@@ -1,7 +1,14 @@
 ---
-title: "E-commerce"
+sidebar_label: "E-commerce"
 sidebar_position: 105
+title: "E-commerce Quickstart"
 ---
+
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/ecommerce/" name="E-Commerce"/>
+```
 
 ## Requirements
 

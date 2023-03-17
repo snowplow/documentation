@@ -1,7 +1,15 @@
 ---
-title: "Mobile"
+sidebar_label: "Mobile"
 sidebar_position: 102
+title: "Mobile Quickstart"
 ---
+
+
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/mobile/" name="Advanced Analytics for Mobile"/>
+```
 
 ## Requirements
 

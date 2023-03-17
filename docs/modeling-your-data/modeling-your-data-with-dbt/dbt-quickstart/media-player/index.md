@@ -1,6 +1,7 @@
 ---
-title: "Media Player"
+sidebar_label: "Media Player"
 sidebar_position: 103
+title: "Media Player Quickstart"
 ---
 
 ## Requirements

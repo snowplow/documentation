@@ -18,7 +18,7 @@ export function AllAccelerators(props) {
     <Admonition icon={SnowplowIcon()} title="Unleash the power of your behavioral data" type="tip">
       If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our <strong>Data Product Accelerators!</strong>!
       <br/>
-      <a className="callToAction" href={props.href}>👉 Take me there! 👈</a>
+      <a className="callToAction" href="https://snowplow.io/data-product-accelerators/">👉 Take me there! 👈</a>
     </Admonition>
   )
 }

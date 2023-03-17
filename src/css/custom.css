@@ -349,7 +349,7 @@ abbr[data-title]:focus::after {
   padding: 3px 5px;
 }
 
-.callToAction{
+.callToAction {
   display: inline-flex;
   border-radius: 1vh;
   justify-content: center;
@@ -361,12 +361,12 @@ abbr[data-title]:focus::after {
   text-decoration-line: none;
 }
 
-.callToAction:hover{
+.callToAction:hover {
   color: #FFFFFF;
   text-decoration-color: #FFFFFF;
 }
 
-.coloredSvg{
+.coloredSvg {
   stroke: var(--ifm-color-primary);
   fill: var(--ifm-color-primary);
 }

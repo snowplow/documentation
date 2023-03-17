@@ -6,7 +6,7 @@ sidebar_position: -10
 ```mdx-code-block
 import { AllAccelerators } from "@site/src/components/AceleratorAdmonitions";
 
-<AllAccelerators href="https://snowplow.io/data-product-accelerators/"/>
+<AllAccelerators/>
 ```
 
 The following pages contain the steps to get you up and running with our packages. For more detailed information on running the packages see the [individual package pages](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md), and the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) pages.

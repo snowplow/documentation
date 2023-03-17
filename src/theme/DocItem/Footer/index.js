@@ -18,7 +18,7 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
         maxLength="999"
       />
       <button
-        className="navbar__item snwpl-nav-button"
+        className="snwpl-nav-button"
         type="submit"
       >
         Send feedback

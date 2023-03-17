@@ -22,12 +22,6 @@ Snowplow started life as a web analytics data warehousing platform, and has a ba
 
 As Snowplow has evolved into a general purpose event analytics platform, we've enabled Snowplow users to define additional event types (we call these _custom unstructured events_) and define their own entities (we call these _custom contexts_) so that they can extend the schema to suit their own businesses.
 
-:::note
-
-Currently, custom events and custom contexts are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
-
-:::
-
 For Snowplow users running Amazon Redshift, each custom unstructured event and custom context will be stored in its own dedicated table, again with one line per event. These additional tables can be joined back to the core `atomic.events` table, by joining on th e `root_id` field in the custom unstructured event / custom context table with the `event_id` in the `atomic.events` table.
 
 ### Single table

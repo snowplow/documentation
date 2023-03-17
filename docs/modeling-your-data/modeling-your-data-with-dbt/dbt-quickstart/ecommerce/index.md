@@ -7,7 +7,7 @@ title: "E-commerce Quickstart"
 ```mdx-code-block
 import { Accelerator } from "@site/src/components/AceleratorAdmonitions";
 
-<Accelerator href ="https://docs.snowplow.io/accelerators/ecommerce/" name = "E-Commerce"/>
+<Accelerator href="https://docs.snowplow.io/accelerators/ecommerce/" name="E-Commerce"/>
 ```
 
 ## Requirements

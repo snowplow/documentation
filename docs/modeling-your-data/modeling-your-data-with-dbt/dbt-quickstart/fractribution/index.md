@@ -11,7 +11,7 @@ import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 import { Accelerator } from "@site/src/components/AceleratorAdmonitions";
 
-<Accelerator href ="https://docs.snowplow.io/accelerators/snowplow_fractribution/" name = "Fractional Attribution Modeling"/>
+<Accelerator href="https://docs.snowplow.io/accelerators/snowplow_fractribution/" name="Fractional Attribution Modeling"/>
 ```
 
 ## Requirements

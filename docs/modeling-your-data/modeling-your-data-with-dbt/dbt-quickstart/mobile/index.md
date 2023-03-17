@@ -1,20 +1,15 @@
 ---
-title: "Mobile"
+sidebar_label: "Mobile"
 sidebar_position: 102
-hide_title: true
+title: "Mobile Quickstart"
 ---
-# Mobile Quickstart
+
 
 ```mdx-code-block
-import Admonition from "@theme/Admonition";
-import {SnowplowIcon} from "@site/src/components/SnowplowIcon/SnowplowIcon";
-```
+import { Accelerator } from "@site/src/components/AceleratorAdmonitions";
 
-<Admonition icon={SnowplowIcon()} title="Unleash the power of your behavioral data" type="tip">
-  If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our <strong>Advanced Analytics for Mobile</strong> Accelerator!
-  <br/>
-  <a className="callToAction" href="https://docs.snowplow.io/accelerators/mobile/">👉 Take me there! 👈</a>
-</Admonition>
+<Accelerator href ="https://docs.snowplow.io/accelerators/mobile/" name = "Advanced Analytics for Mobile"/>
+```
 
 ## Requirements
 

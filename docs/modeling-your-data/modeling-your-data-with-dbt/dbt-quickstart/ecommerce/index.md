@@ -1,20 +1,14 @@
 ---
-title: "E-commerce"
+sidebar_label: "E-commerce"
 sidebar_position: 105
-hide_title: true
+title: "E-commerce Quickstart"
 ---
-# E-commerce Quickstart
 
 ```mdx-code-block
-import Admonition from "@theme/Admonition";
-import {SnowplowIcon} from "@site/src/components/SnowplowIcon/SnowplowIcon";
-```
+import { Accelerator } from "@site/src/components/AceleratorAdmonitions";
 
-<Admonition icon={SnowplowIcon()} title="Unleash the power of your behavioral data" type="tip">
-  If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our <strong>E-Commerce</strong> Accelerator!
-  <br/>
-  <a className="callToAction" href="https://docs.snowplow.io/accelerators/ecommerce/">👉 Take me there! 👈</a>
-</Admonition>
+<Accelerator href ="https://docs.snowplow.io/accelerators/ecommerce/" name = "E-Commerce"/>
+```
 
 ## Requirements
 

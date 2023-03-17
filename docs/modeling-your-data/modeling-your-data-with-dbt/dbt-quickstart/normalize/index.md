@@ -1,9 +1,8 @@
 ---
-title: "Normalize"
+sidebar_label: "Normalize"
 sidebar_position: 104
-hide_title: true
+title: "Normalize Quickstart"
 ---
-# Normalize Quickstart
 
 ## Requirements
 

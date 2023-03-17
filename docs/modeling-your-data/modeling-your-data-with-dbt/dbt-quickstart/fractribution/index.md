@@ -1,24 +1,18 @@
 ---
-title: "Fractribution"
+sidebar_label: "Fractribution"
 sidebar_position: 106
-hide_title: true
+title: "Fractribution Quickstart"
 ---
-# Fractribution Quickstart
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
-import Admonition from "@theme/Admonition";
-import {SnowplowIcon} from "@site/src/components/SnowplowIcon/SnowplowIcon";
-```
+import { Accelerator } from "@site/src/components/AceleratorAdmonitions";
 
-<Admonition icon={SnowplowIcon()} title="Unleash the power of your behavioral data" type="tip">
-  If you're looking for a more guided approach that contains information about tracking and modeling your data, check out our <strong>Fractional Attribution Modeling</strong> Accelerator!
-  <br/>
-  <a className="callToAction" href="https://docs.snowplow.io/accelerators/snowplow_fractribution/">👉 Take me there! 👈</a>
-</Admonition>
+<Accelerator href ="https://docs.snowplow.io/accelerators/snowplow_fractribution/" name = "Fractional Attribution Modeling"/>
+```
 
 ## Requirements
 

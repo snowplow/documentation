@@ -99,14 +99,14 @@ function Feedback() {
         </svg>
         <span>Was this page helpful?</span>
         <button
-            className="navbar__item snwpl-nav-button"
+            className="snwpl-nav-button"
             ref={buttonLikeRef}
             onClick={handleLike}
           >
             Yes
           </button>
           <button
-            className="navbar__item snwpl-nav-button"
+            className="snwpl-nav-button"
             ref={buttonDislikeRef}
             onClick={handleDislike}
           >

@@ -3,6 +3,8 @@
 
 const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
+const math = require('remark-math');
+const katex = require('rehype-katex');
 
 /** @returns {import('@docusaurus/types').Config} */
 async function createConfig() {
@@ -45,7 +47,8 @@ async function createConfig() {
           docs: {
             showLastUpdateTime: true,
             editUrl: 'https://github.com/snowplow/documentation/tree/main/',
-            remarkPlugins: [mdxMermaid.default, abbreviations],
+            remarkPlugins: [mdxMermaid.default, abbreviations, math],
+            rehypePlugins: [katex],
             async sidebarItemsGenerator({
               defaultSidebarItemsGenerator,
               ...args
@@ -61,6 +64,16 @@ async function createConfig() {
           },
         },
       ],
+    ],
+
+    stylesheets: [
+      {
+        href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+        type: 'text/css',
+        integrity:
+          'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+        crossorigin: 'anonymous',
+      },
     ],
 
     themeConfig:

@@ -39,6 +39,33 @@ This model consists of a series of modules, each producing a table which serves 
 - Users: Aggregates session level data to a users level, `domain_userid`, outputting the table `snowplow_web_users`.
 - User Mapping: Provides a mapping between user identifiers, `domain_userid` and `user_id`, outputting the table `snowplow_web_user_mapping`. This can be used for session stitching.
 
+## Engaged vs. Absolute Time
+At a page view- and session-level we provide two measures of time; **absolute**, how long a user had the page open, and **engaged**, how much of that time the user was on the page. Engaged time is often a large predictor of a customer conversion, such as a purchase or a sign-up, whatever that may be in your domain.
+
+Calculating absolute time is simple, it's the difference between the `derived_tstamp` of the first and last (page view or page ping) events within that page view/session.
+
+The calculation for engaged time is more complicated, it is derived based on page pings which means if the user isn't active on your content, the engaged time does not increase. Let's consider a single page view example of reading an article; partway through the reader may see something they don't understand, so they open a new tab and look this up. They might stumble upon a Wikipedia page on it, they go down a rabbit hole and 10 minutes later they make it back to your site to finish the article. In this case there will be a gap for those 10 minutes in the page pings in the events data. 
+
+To adjust for these gaps we calculate engaged time as the time to trigger each ping (your heartbeat) times the number of pings (ignoring the first one), and add to that the time delay to the first ping (your minimum visit length). The formula is:
+
+$$
+engaged\_time=t_{heartbeat}\times (n_{distinct\_pings} -1) + t_{min\_visit\_length}
+$$ 
+
+and the below shows an example visually for a single page view.
+
+<p align="center">
+<ThemedImage 
+alt='Page views and pings showing gaps to highlight the difference between absolute and engaged time'
+sources={{
+light: require('./images/engaged_time_light.drawio.png').default, 
+dark: require('./images/engaged_time_dark.drawio.png').default
+}}
+/>
+</p>
+
+At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for [stray page pings](#stray-page-pings), but the underlying idea is the same.
+
 ## Optional Modules
 
 ### Consent Tracking Custom Module

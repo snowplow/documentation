@@ -7,6 +7,8 @@ sidebar_position: 200
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
 ```
 
 ## Distribution options
@@ -20,10 +22,10 @@ The default distribution contains everything except for the [Kinesis source](/do
 
 It’s available on Docker:
 
-```bash
-docker pull snowplow/snowbridge:{version}
-docker run snowplow/snowbridge:{version}
-```
+<CodeBlock language="bash">{
+`docker pull snowplow/snowbridge:${versions.snowbridge}
+docker run snowplow/snowbridge:${versions.snowbridge}`
+}</CodeBlock>
 
 
   </TabItem>
@@ -35,10 +37,10 @@ To comply with the [Amazon Software License](https://github.com/twitchscience/ki
 
 It’s available on Docker:
 
-```bash
-docker pull snowplow/snowbridge:{version}-aws-only
-docker run snowplow/snowbridge:{version}-aws-only
-```
+<CodeBlock language="bash">{
+`docker pull snowplow/snowbridge:${versions.snowbridge}-aws-only
+docker run snowplow/snowbridge:${versions.snowbridge}-aws-only`
+}</CodeBlock>
 
   </TabItem>
 </Tabs>

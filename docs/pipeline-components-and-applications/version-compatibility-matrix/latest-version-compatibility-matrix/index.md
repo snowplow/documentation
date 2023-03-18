@@ -4,50 +4,156 @@ date: "2021-04-29"
 sidebar_position: -1000
 ---
 
-### Recommended Stack
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import {versions} from '@site/src/componentVersions';
+```
 
-Please note, the `x` indicates that we recommend always being on the latest patched version.
+## Core pipeline
 
-#### AWS
+:::info Snowplow BDP
 
-<table class="has-fixed-layout"><tbody><tr><td class="has-text-align-center" data-align="center">Stream Collector</td><td class="has-text-align-center" data-align="center">Stream Enrich</td><td class="has-text-align-center" data-align="center">Dataflow Runner</td><td class="has-text-align-center" data-align="center">Sqs2Kinesis</td></tr><tr><td class="has-text-align-center" data-align="center"><a href="http://github.com/snowplow/stream-collector/releases" target="_blank" rel="noreferrer noopener">v2.4.5</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/enrich/releases" target="_blank" rel="noreferrer noopener">v2.0.5</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/dataflow-runner/releases" target="_blank" rel="noreferrer noopener">v0.5.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/sqs2kinesis/releases/tag/1.0.0" target="_blank" rel="noreferrer noopener">v1.0.x</a></td></tr></tbody></table>
+If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install any of the core pipeline components yourself. We deploy your pipeline and keep it up to date.
 
-<table class="has-fixed-layout"><tbody><tr><td class="has-text-align-center" data-align="center">S3 Loader</td><td class="has-text-align-center" data-align="center">RDB Loader</td><td class="has-text-align-center" data-align="center">Snowflake Loader</td><td class="has-text-align-center" data-align="center">Elasticsearch<br/>Loader</td></tr><tr><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-s3-loader/releases" target="_blank" rel="noreferrer noopener">v2.1.3</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-rdb-loader/releases" target="_blank" rel="noreferrer noopener">v1.2.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/snowplow-snowflake-loader/releases" target="_blank" rel="noreferrer noopener">v0.9.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-elasticsearch-loader/releases">v1.0.5</a></td></tr></tbody></table>
+:::
 
-#### GCP
+<Tabs groupId="cloud">
+<TabItem value="aws" label="AWS" default>
 
-<table class="has-fixed-layout"><tbody><tr><td class="has-text-align-center" data-align="center">Stream Collector</td><td class="has-text-align-center" data-align="center">Beam Enrich</td><td class="has-text-align-center" data-align="center">Enrich PubSub</td><td class="has-text-align-center" data-align="center">GCS Loader</td><td class="has-text-align-center" data-align="center">BigQuery Stream Loader</td></tr><tr><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/stream-collector/releases" target="_blank" rel="noreferrer noopener">v2.4.5</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/enrich/releases" target="_blank" rel="noreferrer noopener">v2.0.5</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/enrich/releases" target="_blank" rel="noreferrer noopener">v2.0.5</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/snowplow-google-cloud-storage-loader/releases" target="_blank" rel="noreferrer noopener">v0.3.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/snowplow-bigquery-loader/releases" target="_blank" rel="noreferrer noopener">v1.1.0</a></td></tr></tbody></table>
+<ReactMarkdown children={`
+Component | Latest version
+:--|:-:
+[Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) | ${versions.collector}
+[Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
+[RDB Loader (Redshift, Snowflake, Databricks)](/docs/destinations/warehouses-and-lakes/rdb/index.md) | ${versions.rdbLoader}
+[S3 Loader](/docs/destinations/warehouses-and-lakes/s3/index.md) | ${versions.s3Loader}
+[Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
+[Elasticsearch Loader](/docs/destinations/forwarding-events/elasticsearch/index.md) | ${versions.esLoader}
+[Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | ${versions.postgresLoader}
+[Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/index.md) | ${versions.dataflowRunner}
+`} remarkPlugins={[remarkGfm]} />
 
-#### Iglu
+</TabItem>
+<TabItem value="gcp" label="GCP">
 
-<table class="has-fixed-layout"><tbody><tr><td class="has-text-align-center" data-align="center">Iglu Server</td><td class="has-text-align-center" data-align="center">igluctl</td><td class="has-text-align-center" data-align="center">Iglu Central</td></tr><tr><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/iglu-server/releases" target="_blank" rel="noreferrer noopener">v0.7.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/igluctl/releases/" target="_blank" rel="noreferrer noopener">v0.8.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/iglu-central/releases" target="_blank" rel="noreferrer noopener">R132</a></td></tr></tbody></table>
+<ReactMarkdown children={`
+Component | Latest version
+:--|:-:
+[Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) | ${versions.collector}
+[Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
+[RDB Loader (Snowflake, Databricks)](/docs/destinations/warehouses-and-lakes/rdb/index.md) | ${versions.rdbLoader}
+[BigQuery Loader](/docs/destinations/warehouses-and-lakes/bigquery/index.md) | ${versions.bqLoader}
+[GCS Loader](/docs/destinations/warehouses-and-lakes/google-cloud-storage/index.md) | ${versions.gcsLoader}
+[Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
+[Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | ${versions.postgresLoader}
+`} remarkPlugins={[remarkGfm]} />
 
-#### Trackers
+</TabItem>
+</Tabs>
 
-<table class="has-fixed-layout"><tbody><tr><td class="has-text-align-center" data-align="center">JS (Web &amp; Node)</td><td class="has-text-align-center" data-align="center">Android</td><td class="has-text-align-center" data-align="center">iOS</td><td class="has-text-align-center" data-align="center">React Native</td><td class="has-text-align-center" data-align="center">Flutter</td><td class="has-text-align-center" data-align="center">Java</td><td class="has-text-align-center" data-align="center">.NET</td><td class="has-text-align-center" data-align="center">Python</td></tr><tr><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">v3.3.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-android-tracker/releases">v3.0.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-objc-tracker/releases">v3.0.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/snowplow-react-native-tracker/releases">v1.0.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/snowplow-flutter-tracker/releases">v0.1.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-java-tracker/releases">v0.11.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-dotnet-tracker/releases">v1.1.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-python-tracker/releases">v0.10.x</a></td></tr></tbody></table>
+## Iglu (schema registry)
 
-<table class="has-fixed-layout"><tbody><tr><td class="has-text-align-center" data-align="center">AMP</td><td class="has-text-align-center" data-align="center">Roku</td><td class="has-text-align-center" data-align="center">Unity</td><td class="has-text-align-center" data-align="center">PHP</td><td class="has-text-align-center" data-align="center">Golang</td><td class="has-text-align-center" data-align="center">Scala</td><td class="has-text-align-center" data-align="center">Ruby</td><td class="has-text-align-center" data-align="center">C++</td></tr><tr><td class="has-text-align-center" data-align="center"><a href="/docs/collecting-data/collecting-from-own-applications/google-amp-tracker/">v1.0.3</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow-incubator/snowplow-roku-tracker/releases">v0.2.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-unity-tracker/releases">v0.5.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-php-tracker/releases">v0.4.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-golang-tracker/releases">v2.4.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-scala-tracker/releases">v1.0.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-ruby-tracker/releases">v.0.8.x</a></td><td class="has-text-align-center" data-align="center"><a href="https://github.com/snowplow/snowplow-cpp-tracker/releases">v0.1.x</a></td></tr></tbody></table>
+:::info Snowplow BDP
 
-#### Data Modeling
+If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [via the API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md).
 
-##### SQL Runner
+:::
 
-<table class="has-fixed-layout"><tbody><tr><td>Redshift web model</td><td>BigQuery web model</td><td>Snowflake web model</td></tr><tr><td><a href="https://github.com/snowplow/data-models/releases">v1.2.x</a></td><td><a href="https://github.com/snowplow/data-models/releases">v.1.0.x</a></td><td><a href="https://github.com/snowplow/data-models/releases">v1.0.x</a></td></tr></tbody></table>
+<ReactMarkdown children={`
+Component | Latest version
+:--|:-:
+[Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) | ${versions.igluServer}
+[\`igluctl\` utility](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) | ${versions.igluctl}
+[Iglu Scala client](/docs/pipeline-components-and-applications/iglu/iglu-clients/scala-client-setup/index.md) | ${versions.igluScalaClient}
+[Iglu Ruby client](/docs/pipeline-components-and-applications/iglu/iglu-clients/ruby-client/index.md) | ${versions.igluRubyClient}
+[Iglu Objective-C client](/docs/pipeline-components-and-applications/iglu/iglu-clients/objc-client/index.md) | ${versions.igluObjCClient}
+`} remarkPlugins={[remarkGfm]} />
 
-<table class="has-fixed-layout"><tbody><tr><td>Redshift mobile model</td><td>BigQuery mobile model</td><td>Snowflake mobile model</td></tr><tr><td><a href="https://github.com/snowplow/data-models/releases">v1.1.x</a></td><td><a href="https://github.com/snowplow/data-models/releases">v.1.1.x</a></td><td><a href="https://github.com/snowplow/data-models/releases">v1.1.x</a></td></tr></tbody></table>
+## Trackers
 
-<table class="has-fixed-layout"><tbody><tr><td>SQL Runner</td></tr><tr><td><a href="https://github.com/snowplow/sql-runner/releases">v0.9.x</a></td></tr></tbody></table>
+<ReactMarkdown children={`
+Tracker | Latest version
+:--|:-:
+[JavaScript (Web and Node.js)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) | ${versions.javaScriptTracker}
+[iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) | ${versions.iosTracker}
+[Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) | ${versions.androidTracker}
+[React Native](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md) | ${versions.reactNativeTracker}
+[Flutter](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/index.md) | ${versions.flutterTracker}
+[WebView](/docs/collecting-data/collecting-from-own-applications/webview-tracker/index.md) | ${versions.webViewTracker}
+[Roku](/docs/collecting-data/collecting-from-own-applications/roku-tracker/index.md) | ${versions.rokuTracker}
+[Google AMP](/docs/collecting-data/collecting-from-own-applications/google-amp-tracker/index.md) | ${versions.googleAmpTracker}
+[Pixel](/docs/collecting-data/collecting-from-own-applications/pixel-tracker/index.md) | ${versions.pixelTracker}
+[Golang](/docs/collecting-data/collecting-from-own-applications/golang-tracker/index.md) | ${versions.golangTracker}
+[.NET](/docs/collecting-data/collecting-from-own-applications/net-tracker/index.md) | ${versions.dotNetTracker}
+[Java](/docs/collecting-data/collecting-from-own-applications/java-tracker/index.md) | ${versions.javaTracker}
+[Python](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) | ${versions.pythonTracker}
+[Scala](/docs/collecting-data/collecting-from-own-applications/scala-tracker/index.md) | ${versions.scalaTracker}
+[Ruby](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/index.md) | ${versions.rubyTracker}
+[Rust](/docs/collecting-data/collecting-from-own-applications/rust-tracker/index.md) | ${versions.rustTracker}
+[PHP](/docs/collecting-data/collecting-from-own-applications/php-tracker/index.md) | ${versions.phpTracker}
+[C++](/docs/collecting-data/collecting-from-own-applications/c-tracker/index.md) | ${versions.cppTracker}
+[Unity](/docs/collecting-data/collecting-from-own-applications/unity-tracker/index.md) | ${versions.unityTracker}
+[Lua](/docs/collecting-data/collecting-from-own-applications/lua-tracker/index.md) | ${versions.luaTracker}
+`} remarkPlugins={[remarkGfm]} />
 
-##### dbt
+## Data Models
 
-<table class="has-fixed-layout"><tbody><tr><td>dbt-snowplow-web</td><td>dbt-snowplow-utils</td><td>dbt</td></tr><tr><td><a href="https://github.com/snowplow/dbt-snowplow-web/releases" target="_blank" rel="noreferrer noopener">v0.5.x</a></td><td><a href="https://github.com/snowplow/dbt-snowplow-utils/releases" target="_blank" rel="noreferrer noopener">v0.5.x</a></td><td><a href="https://github.com/dbt-labs/dbt/releases">v1.0.x</a></td></tr></tbody></table>
+### dbt
 
-#### Testing
+[Modeling data with dbt](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) is our recommended approach.
 
-<table class="has-fixed-layout"><tbody><tr><td>Mini</td><td>Micro</td></tr><tr><td><a href="https://github.com/snowplow/snowplow-mini/releases">v0.13.x</a></td><td><a href="https://github.com/snowplow-incubator/snowplow-micro/releases">v1.2.x</a></td></tr></tbody></table>
+```mdx-code-block
+import ModelVersionsDbt from '@site/docs/modeling-your-data/modeling-your-data-with-dbt/_model-versions.md'
 
-#### Analytics SDKs
+<ModelVersionsDbt/>
+```
 
-<table class="has-fixed-layout"><tbody><tr><td>Scala</td><td>JavaScript</td><td>Python</td><td>.NET</td><td>Go</td></tr><tr><td><a href="https://github.com/snowplow/snowplow-python-analytics-sdk/releases">v2.1.x</a></td><td><a href="https://github.com/snowplow-incubator/snowplow-js-analytics-sdk/releases">v0.3.0</a></td><td><a href="https://github.com/snowplow/snowplow-python-analytics-sdk/releases">v0.2.x</a></td><td><a href="https://github.com/snowplow/snowplow-dotnet-analytics-sdk/releases">v0.2.x</a></td><td><a href="https://github.com/snowplow/snowplow-golang-analytics-sdk/releases" target="_blank" rel="noreferrer noopener">v0.1.x</a></td></tr></tbody></table>
+See also the [dbt version compatibility checker](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md#dbt-version-compatibility-checker).
 
-We hope that the above provides clarity on our recommended stack, however if you have any questions or feedback please reach out to us on [discourse](https://discourse.snowplow.io/).
+### SQL Runner
+
+:::note
+
+We recommend using the dbt models above, as they are more actively developed.
+
+:::
+
+<ReactMarkdown children={`
+The latest version of [SQL Runner](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md) itself is **${versions.sqlRunner}**.
+`}/>
+
+```mdx-code-block
+import ModelVersionsSqlRunner from '@site/docs/modeling-your-data/modeling-your-data-with-sql-runner/_model-versions.md'
+
+<ModelVersionsSqlRunner/>
+```
+
+## Testing and debugging
+
+:::info Snowplow BDP
+
+If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install Snowplow Mini yourself. We (optionally) deploy it and keep it up to date for you.
+
+:::
+
+<ReactMarkdown children={`
+Application | Latest version
+:--|:-:
+[Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) | ${versions.snowplowMicro}
+[Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/index.md) | ${versions.snowplowMini}
+`} remarkPlugins={[remarkGfm]} />
+
+## Analytics SDKs
+
+<ReactMarkdown children={`
+SDK | Latest version
+:--|:-:
+[Scala](/docs/modeling-your-data/analytics-sdk/analytics-sdk-scala/index.md) | ${versions.analyticsSdkScala}
+[Javascript](/docs/modeling-your-data/analytics-sdk/analytics-sdk-javascript/index.md) | ${versions.analyticsSdkJavascript}
+[Python](/docs/modeling-your-data/analytics-sdk/analytics-sdk-python/index.md) | ${versions.analyticsSdkPython}
+[.NET](/docs/modeling-your-data/analytics-sdk/analytics-sdk-net/index.md) | ${versions.analyticsSdkDotNet}
+[Go](/docs/modeling-your-data/analytics-sdk/analytics-sdk-go/index.md) | ${versions.analyticsSdkGo}
+`} remarkPlugins={[remarkGfm]} />

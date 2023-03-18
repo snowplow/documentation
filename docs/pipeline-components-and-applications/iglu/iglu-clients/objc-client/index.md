@@ -4,8 +4,6 @@ date: "2021-03-26"
 sidebar_position: 30
 ---
 
-This page refers to version 0.1.0 of the Iglu ObjC client.
-
 ## Overview
 
 The [Iglu Objc client](https://github.com/snowplow/iglu-objc-client) allows you to resolve JSON Schemas from embedded and remote repositories. It does not yet let you write to repositories in any way (e.g. you can't publish new schemas to an Iglu repository).

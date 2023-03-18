@@ -3,6 +3,11 @@ title: "Modeling your data with SQL Runner"
 sidebar_position: 99999
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 [SQL Runner](https://github.com/snowplow/sql-runner) enables you to execute SQL scripts against the Snowplow data in your data warehouse. Specifically, it allows you to organize your SQL scripts in templatable playbooks, and execute them in series or in parallel on Snowflake, Amazon Redshift, GCP BigQuery and PostgreSQL.
 
 To set up SQL Runner, Snowplow open source users can start from the [User guide](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md#user-guide) .
@@ -13,6 +18,14 @@ A SQL Runner data model consists of:
 
 - SQL files (containing one or more SQL statements)
 - Playbooks (YAML files organizing the SQL into steps)
+
+### Available models
+
+```mdx-code-block
+import ModelVersions from './_model-versions.md'
+
+<ModelVersions/>
+```
 
 ### Playbooks
 
@@ -214,15 +227,15 @@ That's it - you're now ready to start running SQL against your data warehouse!
 
 SQL Runner is a zero-dependency binary and can be found as a [release asset](https://github.com/snowplow/sql-runner/releases/latest) for:
 
-- [macOS](https://github.com/snowplow/sql-runner/releases/download/0.10.0/sql_runner_0.10.0_darwin_amd64.zip)
-- [Linux](https://github.com/snowplow/sql-runner/releases/download/0.10.0/sql_runner_0.10.0_linux_amd64.zip)
-- [Windows](https://github.com/snowplow/sql-runner/releases/download/0.10.0/sql_runner_0.10.0_windows_amd64.zip)
+- <a href={`https://github.com/snowplow/sql-runner/releases/download/${versions.sqlRunner}/sql_runner_${versions.sqlRunner}_darwin_amd64.zip`}>macOS</a>
+- <a href={`https://github.com/snowplow/sql-runner/releases/download/${versions.sqlRunner}/sql_runner_${versions.sqlRunner}_linux_amd64.zip`}>Linux</a>
+- <a href={`https://github.com/snowplow/sql-runner/releases/download/${versions.sqlRunner}/sql_runner_${versions.sqlRunner}_windows_amd64.zip`}>Windows</a>
 
 ### CLI Arguments
 
-```bash
-./sql-runner --help
-sql-runner version: 0.10.0
+<CodeBlock language="text">{
+`./sql-runner --help
+sql-runner version: ${versions.sqlRunner}
 Run playbooks of SQL scripts in series and parallel on Redshift, Postgres, BigQuery and Snowflake
 Usage:
   -checkLock string
@@ -256,8 +269,8 @@ Usage:
   -var value
     	Variables to be passed to the playbook, in the key=value format
   -version
-    	Shows the program version
-```
+    	Shows the program version`
+}</CodeBlock>
 
 #### More on Consul
 

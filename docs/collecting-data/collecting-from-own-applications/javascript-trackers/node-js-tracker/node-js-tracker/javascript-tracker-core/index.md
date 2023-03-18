@@ -4,6 +4,10 @@ date: "2020-02-26"
 sidebar_position: 400
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+```
+
 ## Overview
 
 The [Snowplow JavaScript Tracker Core](https://github.com/snowplow/snowplow-javascript-tracker/tree/master/core) is an node module, available on [npm,](https://www.npmjs.org/package/snowplow-tracker-core) providing functionality common to both the server-side [Snowplow Node.js](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/index.md) Tracker and the client-side [Snowplow JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md). It supports all the Snowplow event types. Custom contexts and timestamps can be added to all events.
@@ -16,7 +20,7 @@ It has two main types of method: setter methods and tracking methods. Setter met
 
 ### Compatibility
 
-Current release: **0.10.0**
+<p>Current release: <strong>{versions.javaScriptTracker}</strong></p>
 
 The current release of Snowplow Tracker Core is compatible with [Node.js](http://nodejs.org/) versions 10, 12 and 14. Installing it requires [npm](https://www.npmjs.org/) or [yarn](https://yarnpkg.com/).
 

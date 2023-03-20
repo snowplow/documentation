@@ -29,7 +29,7 @@ The plugin is available since version 3.8 of the tracker.
 window.snowplow(
     'addPlugin',
     'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-snowplow-ecommerce@latest/dist/index.umd.min.js',
-    ['snowplowEcommerceTracking', 'SnowplowEcommercePlugin']
+    ['snowplowEcommerceAccelerator', 'SnowplowEcommercePlugin']
 );
 ```
 

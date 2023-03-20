@@ -1,8 +1,6 @@
 # Statement of Support
 
-This Statement of Support defines the scope of support provided for Snowplow BDP Cloud, BDP Enterprise and all other Snowplow products and services. Our friendly team is available 24x7 to provide product expertise, technical advice, and assistance throughout your journey with Snowplow.
-
-The level of support and products that we support for you are described in your contract. This document augments your contract and our Product Description by offering general guidance on the scope of services provided by Snowplow to our customers. In simplest terms, the scope of support is what we support and what we don’t support at this time. Any support we provide you beyond this scope is discretionary and on a best-effort basis.
+This Statement of Support defines the scope of support provided for Snowplow BDP Cloud, BDP Enterprise and all other Snowplow products and services. Our friendly team is available 24x7 to provide product expertise, technical advice, and assistance throughout your journey with Snowplow. The level of support and products that we support for you are described in your contract. This document augments your contract and our Product Description by offering general guidance on the scope of services provided by Snowplow to our customers. In simplest terms, the scope of support is what we support and what we don’t support at this time. Any support we provide you beyond this scope is discretionary and on a best-effort basis.
 
 Snowplow Support is here to ensure you gain full value from Snowplow’s products and services. We work with you both in the run-up to go-live and in production, providing a broad range of support. This includes use-case and setup questions, handling product issues and enhancement requests, and resolving implementation-specific problems.
 

@@ -7,15 +7,17 @@ sidebar_position: 0
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
 ```
 
 ## Installation
 
 The Snowplow Ruby Tracker is compatible with Ruby 2.1+, including 3.0+. To add the Snowplow Tracker to your Ruby app or gem, add this line to your Gemfile:
 
-```ruby
-gem 'snowplow-tracker', '~> 0.8.0'
-```
+<CodeBlock language="ruby">{
+`gem 'snowplow-tracker', '~> ${versions.rubyTracker}'`
+}</CodeBlock>
 
 To make the Snowplow Ruby Tracker work with as many different Ruby programs as possible, we have tried to keep external dependencies to a minimum. There are only two external dependencies currently, both of which are for development of the gem itself: [rspec](https://rspec.info/) and [webmock](https://rubygems.org/gems/webmock).
 

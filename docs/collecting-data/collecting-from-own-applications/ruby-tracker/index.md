@@ -6,13 +6,14 @@ sidebar_position: 220
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import {versions} from '@site/src/componentVersions';
 
 <Badges badgeType="Actively Maintained"></Badges>
 ```
 
 The Snowplow Ruby Tracker allows you to track Snowplow events in your Ruby applications and gems and Ruby on Rails web applications.
 
-The Ruby tracker is compatible with Ruby 2.1+, including Ruby 3.0+.
+<p>The Ruby tracker is compatible with Ruby 2.1+, including Ruby 3.0+. The current tracker version is {versions.rubyTracker}.</p>
 
 These pages will help you in setting up and using the Ruby tracker. There are more technical details in the [API docs.](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker.html)
 

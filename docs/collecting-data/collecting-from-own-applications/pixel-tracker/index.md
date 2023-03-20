@@ -64,7 +64,7 @@ The generator is currently built for quickly outputting a pixel tag related to c
 
 Category, action, label, property and value are all available to input relevant information about your campaign.
 
-#### Select the \`Generate Pixel tracking tag button.
+#### Select the Generate Pixel tracking tag button.
 
 The tracking code will be displayed. Copy this to the clipboard.
 

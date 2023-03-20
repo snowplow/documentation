@@ -8,11 +8,12 @@ sidebar_position: 135
 import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import {versions} from '@site/src/componentVersions';
 
 <Badges badgeType="Early Release"></Badges>
 ```
 
-The [Snowplow WebView Tracker](https://github.com/snowplow-incubator/snowplow-webview-tracker) allows you to track Snowplow events from Web views in **mobile hybrid apps**.
+<p>The <a href="https://github.com/snowplow-incubator/snowplow-webview-tracker">Snowplow WebView Tracker</a> allows you to track Snowplow events from Web views in <strong>mobile hybrid apps</strong>. The current tracker version is {versions.webViewTracker}.</p>
 
 Hybrid apps are mobile apps that in addition to a native interface, provide part of the UI through an embedded Web view.
 Snowplow events are tracked from both the native code (e.g. written in Swift or Kotlin) as well as the Web view (in JavaScript).

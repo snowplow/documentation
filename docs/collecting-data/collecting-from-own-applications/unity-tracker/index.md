@@ -6,11 +6,12 @@ sidebar_position: 250
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import {versions} from '@site/src/componentVersions';
 
 <Badges badgeType="Actively Maintained"></Badges>
 ```
 
-The Snowplow Unity Tracker allows you to track Snowplow events from your Unity games and apps.
+<p>The Snowplow Unity Tracker allows you to track Snowplow events from your Unity games and apps. The current tracker version is {versions.unityTracker}.</p>
 
 ### Snowplow Icebreaker Demo
 

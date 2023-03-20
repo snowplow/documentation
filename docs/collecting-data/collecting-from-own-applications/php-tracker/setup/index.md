@@ -4,6 +4,11 @@ date: "2020-02-26"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Installation
 
 Currently the only supported method of installation is through Composer. For a tutorial on setting up a PHP project with Composer please follow this [link](https://getcomposer.org/doc/00-intro.md).
@@ -12,19 +17,19 @@ Currently the only supported method of installation is through Composer. For a t
 
 Using Composer to manage your dependencies, simply add the Snowplow PHP Tracker to your project by including it in your composer.json file as a dependency.
 
-```json
-{
+<CodeBlock language="json">{
+`{
     "require": {
-        "snowplow/snowplow-tracker": "0.4.0"
+        "snowplow/snowplow-tracker": "${versions.phpTracker}"
     }
-}
-```
+}`
+}</CodeBlock>
 
 Assuming you have Composer setup correctly in the root of your project. Type the following command line argument:
 
 ```javascript
-composer install #If composer has not been run yet
-composer update #If composer dependencies are already installed
+composer install # If composer has not been run yet
+composer update # If composer dependencies are already installed
 ```
 
 This will install the Snowplow Tracker and allow you to initialize a Tracker object:

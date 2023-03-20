@@ -22,7 +22,8 @@ Example:
 
 ```ruby
 emitter1 = SnowplowTracker::Emitter.new(endpoint: 'collector.example.com')
-emitter2 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector2.example.com')
+emitter2 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector2.example.com',
+                                             options: { method: 'post' })
 emitter3 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector.elsewhere.com',
                                              options: { protocol: 'https' })
 
@@ -35,7 +36,8 @@ tracker.add_emitter(emitter3)
 
 ```ruby
 emitter1 = SnowplowTracker::Emitter.new('collector.example.com')
-emitter2 = SnowplowTracker::AsyncEmitter.new('collector2.example.com')
+emitter2 = SnowplowTracker::AsyncEmitter.new('collector2.example.com',
+                                             { method: 'post' })
 emitter3 = SnowplowTracker::AsyncEmitter.new('collector.elsewhere.com',
                                              { protocol: 'https' })
 
@@ -47,17 +49,17 @@ tracker.add_emitter(emitter3)
 
 Optional Emitter settings:
 
-| **Optional parameter** | **Description** |
-| --- | --- |
-| `path` | Override the default path for appending to the endpoint |
-| `protocol` | HTTP or HTTPS |
-| `port` | The port for the connection |
-| `method` | GET or POST |
-| `buffer_size` | The size of the buffer, i.e. the number of events to send at once |
-| `on_success` | A method to call if events were all sent successfully |
-| `on_failure` | A method to call if any events did not send |
-| `thread_count` | Number of threads to use (relevant to AsyncEmitters only) |
-| `logger` | Log somewhere other than STDERR |
+| **Optional parameter** | **Description** | **Default** |
+| --- | --- | --- |
+| `path` | Override the default path for appending to the endpoint | n/a|
+| `protocol` | `http` or `https` | `http` |
+| `port` | The port for the connection | n/a |
+| `method` | `get` or `post` | `get` |
+| `buffer_size` | The size of the buffer, i.e. the number of events to send at once | 1 |
+| `on_success` | A method to call if events were all sent successfully | n/a |
+| `on_failure` | A method to call if any events did not send | n/a |
+| `thread_count` | Number of threads to use (relevant to AsyncEmitters only) | 1 |
+| `logger` | Where to log | STDERR |
 
 Response status codes of 2xx or 3xx status codes are considered successful.
 

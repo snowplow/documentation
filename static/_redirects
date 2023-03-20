@@ -96,3 +96,6 @@
 /docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/example-of-automated-tests/ /docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/ 301
 /docs/understanding-your-pipeline/what-is-snowplow-micro/ /docs/getting-started-with-micro/what-is-micro/ 301
 /docs/getting-started-with-snowplow-bdp/cloud/naming-resources-in-snowflake/* /docs/getting-started-with-snowplow-bdp/cloud/configuring-destinations/snowflake/:splat 301
+
+/docs/pipeline-components-and-applications/iglu/igluctl-2/previous-versions/* /docs/pipeline-components-and-applications/iglu/igluctl-2/ 301
+/docs/pipeline-components-and-applications/snowplow-mini/previous-releases/* /docs/pipeline-components-and-applications/snowplow-mini/ 301

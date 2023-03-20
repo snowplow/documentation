@@ -4,13 +4,18 @@ date: "2020-02-26"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Tracker compatibility
 
-The latest version of the Snowplow Golang Tracker is `v3` which has been built and tested using Golang versions `1.19.x`, `1.18.x` and `1.17.x`.
+<p>The latest version of the Snowplow Golang Tracker is v{versions.golangTracker} which has been built and tested using Golang versions <code>1.19.x</code>, <code>1.18.x</code> and <code>1.17.x</code>.</p>
 
 ## Setup
 
-All of the tracker code is hosted on GitHub and versions can be fetched using Golang modules with both `v2` and `v3` available via this method.
+All of the tracker code is hosted on [GitHub](https://github.com/snowplow/snowplow-golang-tracker) and versions can be fetched using Golang modules with both `v2` and `v3` available via this method.
 
 To get the package, execute:
 

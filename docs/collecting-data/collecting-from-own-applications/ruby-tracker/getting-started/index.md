@@ -4,19 +4,18 @@ date: "2021-10-15"
 sidebar_position: 0
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Installation
 
-The Snowplow Ruby Tracker is compatible with Ruby 2.1+, including 3.0+. To install it locally:
+The Snowplow Ruby Tracker is compatible with Ruby 2.1+, including 3.0+. To add the Snowplow Tracker to your Ruby app or gem, add this line to your Gemfile:
 
-```bash
-$ gem install snowplow-tracker
-```
-
-To add the Snowplow Tracker to your Ruby app or gem, add this line to your Gemfile:
-
-```ruby
-gem 'snowplow-tracker', '~> 0.8.0'
-```
+<CodeBlock language="ruby">{
+`gem 'snowplow-tracker', '~> ${versions.rubyTracker}'`
+}</CodeBlock>
 
 To make the Snowplow Ruby Tracker work with as many different Ruby programs as possible, we have tried to keep external dependencies to a minimum. There are only two external dependencies currently, both of which are for development of the gem itself: [rspec](https://rspec.info/) and [webmock](https://rubygems.org/gems/webmock).
 
@@ -28,7 +27,9 @@ The main class of the Ruby tracker is the Tracker class. Trackers provide method
 
 Data about users, and which platform (e.g. server-side app or mobile) the event occurred on, are managed by Subject objects. A Subject can be added to each event, and Trackers always have an associated Subject. Other information can be added to events using Page, DeviceTimestamp or TrueTimestamp objects, as well as via event context. Event context is added via SelfDescribingJson objects.
 
-Note that the Ruby tracker version 0.7.0 had some breaking changes, specifically the addition of keyword arguments. If you are using version <0.7.0, look out for the dropdowns under code examples on these pages for the old API. Check out the tracker changelog [here](https://github.com/snowplow/snowplow-ruby-tracker/blob/master/CHANGELOG).
+:::note
+The Ruby tracker version 0.7.0 had some breaking changes, specifically the addition of keyword arguments. If you are using a version before 0.7.0, look out for the dropdowns under code examples on these pages for the old API. Check out the tracker changelog [here](https://github.com/snowplow/snowplow-ruby-tracker/blob/master/CHANGELOG).
+:::
 
 ## Tracking design and initialization
 

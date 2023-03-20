@@ -4,15 +4,14 @@ date: "2021-10-15"
 sidebar_position: 0
 ---
 
-## Installation
-
-The Snowplow Ruby Tracker is compatible with Ruby 2.1+, including 3.0+. To install it locally:
-
-```bash
-$ gem install snowplow-tracker
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 ```
 
-To add the Snowplow Tracker to your Ruby app or gem, add this line to your Gemfile:
+## Installation
+
+The Snowplow Ruby Tracker is compatible with Ruby 2.1+, including 3.0+. To add the Snowplow Tracker to your Ruby app or gem, add this line to your Gemfile:
 
 ```ruby
 gem 'snowplow-tracker', '~> 0.8.0'
@@ -42,6 +41,9 @@ The Tracker must be initialized with an Emitter or the subclass AsyncEmitter (or
 
 Initializing a tracker instance:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 require 'snowplow-tracker'
 
@@ -51,7 +53,9 @@ tracker = SnowplowTracker::Tracker.new(emitters: emitter)
 tracker = SnowplowTracker::Tracker.new(emitters: [emitter])
 ```
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  </TabItem>
+
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 require 'snowplow-tracker'
@@ -61,6 +65,10 @@ tracker = SnowplowTracker::Tracker.new(emitter)
 # or
 tracker = SnowplowTracker::Tracker.new([emitter])
 ```
+
+  </TabItem>
+</Tabs>
+
 
 This Tracker will send events via GET to `http://collector.example.com/i`.
 
@@ -72,6 +80,9 @@ The final initialization parameter is a setting for the base64-encoding of any J
 
 Initializing a tracker instance with all possible settings used:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 require 'snowplow-tracker'
 
@@ -79,10 +90,14 @@ SnowplowTracker::Tracker.new(emitters: SnowplowTracker::Emitter.new(endpoint: 'c
                              subject: SnowplowTracker::Subject.new,
                              namespace: 'tracker_no_encode',
                              app_id: 'rails_main',
-                             encode_base64: false)
+                             encode_base64: false
+                             )
 ```
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this-1)
+
+  </TabItem>
+
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 require 'snowplow-tracker'
@@ -91,8 +106,12 @@ SnowplowTracker::Tracker.new(SnowplowTracker::Emitter.new('collector.example.com
                              SnowplowTracker::Subject.new,
                              'tracker_no_encode',
                              'rails_main',
-                             false)
+                             false
+                             )
 ```
+
+  </TabItem>
+</Tabs>
 
 You can create as many Tracker instances as you like within your app; each one is completely sandboxed. For example, you may wish to send certain events to a different collector endpoint (using a different Emitter), or with a different JSON base64-encoding choice. Make sure you set different Tracker namespaces when using multiple instances.
 

@@ -4,6 +4,11 @@ date: "2021-10-26"
 sidebar_position: 30
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 When you [initialize your Tracker object](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/getting-started/index.md#tracking-design-and-initialization), you will need to provide one or more Emitter objects. Remember that we advise using the Singleton pattern, to avoid constantly recreating your objects.
 
 There are two types of Emitter. The Emitter parent class can only send events synchronously. The AsyncEmitter subclass sends events asynchronously by default. We recommend you use the AsyncEmitter, to avoid slowing down your app.
@@ -11,6 +16,9 @@ There are two types of Emitter. The Emitter parent class can only send events sy
 Emitters and AsyncEmitters are initialized in the same way. An event collector endpoint is required, but there are various optional parameters that can also be set (see [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Emitter.html) and below table). A Tracker can have more than one associated Emitter or AsyncEmitter. These can be provided at Tracker initialization, or added later on.
 
 Example:
+
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
 emitter1 = SnowplowTracker::Emitter.new(endpoint: 'collector.example.com')
@@ -21,8 +29,9 @@ emitter3 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector.elsewhere.com'
 tracker = SnowplowTracker::Tracker.new(emitters: [emitter1, emitter2])
 tracker.add_emitter(emitter3)
 ```
+  </TabItem>
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 emitter1 = SnowplowTracker::Emitter.new('collector.example.com')
@@ -33,6 +42,8 @@ emitter3 = SnowplowTracker::AsyncEmitter.new('collector.elsewhere.com',
 tracker = SnowplowTracker::Tracker.new([emitter1, emitter2])
 tracker.add_emitter(emitter3)
 ```
+  </TabItem>
+</Tabs>
 
 Optional Emitter settings:
 
@@ -56,6 +67,9 @@ You may want to force an emitter to send all events in its buffer, even if the b
 
 Example:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 # Synchronous flush
 tracker.flush
@@ -63,8 +77,9 @@ tracker.flush
 # Asynchronous flush
 tracker.flush(async: true)
 ```
+  </TabItem>
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 # Synchronous flush
@@ -73,6 +88,8 @@ tracker.flush
 # Asynchronous flush
 tracker.flush(true)
 ```
+  </TabItem>
+</Tabs>
 
 ### Logging
 

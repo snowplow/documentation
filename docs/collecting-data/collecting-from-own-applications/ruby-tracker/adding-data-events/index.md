@@ -4,6 +4,11 @@ date: "2021-10-19"
 sidebar_position: 20
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 There are multiple ways to add extra data to your tracked events, adding richness and value to your dataset. Each of them involves a different class from the Ruby tracker.
 
 1. [Event context](#event-context) using SelfDescribingJson. Attach event context, describing anything you like, in the form of self-describing JSONs.
@@ -29,6 +34,9 @@ Once defined, an entity can be attached to any kind of event. This is also an im
 
 Example:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 # Tracking a screen view with context made up of two entities
 entity1 = SnowplowTracker::SelfDescribingJson.new(
@@ -45,8 +53,9 @@ entity2 = SnowplowTracker::SelfDescribingJson.new(
 
 tracker.track_screen_view(id: 'sci-123-abc', context: [entity1, entity2])
 ```
+  </TabItem>
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 # Tracking a screen view with context made up of two entities
@@ -65,7 +74,12 @@ entity2 = SnowplowTracker::SelfDescribingJson.new(
 tracker.track_screen_view(nil, 'sci-123-abc', [entity1, entity2])
 ```
 
-Note: the event context is always an array, even if you are only adding one entity.
+  </TabItem>
+</Tabs>
+
+:::note
+The event context is always an array, even if you are only adding one entity.
+:::
 
 ## Adding user and platform data with Subject
 
@@ -96,9 +110,18 @@ The following table lists all the properties that can be set via Subject. These 
 | `br_viewwidth` and `br_viewheight` | The browser viewport size |
 | `br_colordepth` | The browser color depth |
 
-Note: the methods for defining `domain_sessionid` and `domain_sessionidx` were added in tracker version 0.7.0.
+:::note
+The methods for defining `domain_sessionid` and `domain_sessionidx` were added in tracker version 0.7.0.
+:::
 
 Example:
+
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
+:::note
+The ability to add `Subject` objects to `track_x_event` method calls (option 1 below) was added in version 0.7.0.
+:::
 
 ```ruby
 # Creating a Subject and adding user data
@@ -118,10 +141,9 @@ tracker.set_subject(subject).track_page_view(page_url: 'www.example.com')
 tracker.set_user_id('12345').set_timezone('Europe/London')
 tracker.track_page_view(page_url: 'www.example.com')
 ```
+  </TabItem>
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
-
-Note: the ability to add Subjects to `track_x_event` method calls was added in version 0.7.0.
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 # Creating a Subject and adding user data
@@ -137,6 +159,8 @@ tracker.set_subject(subject).track_page_view('www.example.com')
 tracker.set_user_id('12345').set_timezone('Europe/London')
 tracker.track_page_view('www.example.com')
 ```
+  </TabItem>
+</Tabs>
 
 ### Cookie-based user properties
 

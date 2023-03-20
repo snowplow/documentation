@@ -4,22 +4,20 @@ date: "2021-08-06"
 sidebar_position: 0
 ---
 
-[![Tracker Maintenance Classification](https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Actively%20Maintained&color=6638b8&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC)](/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification/index.md)
+```mdx-code-block
+import Badges from '@site/src/components/Badges';
+import {versions} from '@site/src/componentVersions';
+
+<Badges badgeType="Actively Maintained"></Badges>
+```
 
 [![Latest tracker version](https://img.shields.io/npm/v/@snowplow/react-native-tracker)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
 [![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
 
-  
-  
-  
-  
-  
-  
+The Snowplow React Native Tracker is a module which imports the [Mobile Native Snowplow Trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) as native modules, available for use in React Native projects. More specifically it is built upon the [Mobile Native Trackers v2](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/mobile-trackers-v2-x/index.md), so as to leverage their tracking capabilities, API and configuration parameters.
 
-The Snowplow React Native Tracker is a module which imports the [Mobile Native Snowplow Trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) as native modules, available for use in React Native projects.
-
-More specifically it is build upon the [Mobile Native Trackers v2](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/mobile-trackers-v2-x/index.md), so as to leverage their tracking capabilities, API and configuration parameters.
+<p>The current version is {versions.reactNativeTracker}.</p>
 
 ## Initializing a tracker
 

@@ -4,6 +4,11 @@ date: "2020-02-25"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Tracker compatibility
 
 The Snowplow C++ Tracker has been built and tested using C++ 11 as a minimum.
@@ -25,16 +30,17 @@ There are two ways to install the tracker in your app:
 
 Cmake version 3.14 or greater is required. You may add the library to your project target (`your-target`) using `FetchContent` like so:
 
-```cpp
-include(FetchContent)
+<CodeBlock language="cpp">{
+`include(FetchContent)
 FetchContent_Declare(
     snowplow
     GIT_REPOSITORY https://github.com/snowplow/snowplow-cpp-tracker
-    GIT_TAG        1.0.0
+    GIT_TAG        ${versions.cppTracker}
 )
 FetchContent_MakeAvailable(snowplow)
 target_link_libraries(your-target snowplow)
-```
+`
+}</CodeBlock>
 
 ### Copying files to your project
 

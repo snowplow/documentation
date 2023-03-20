@@ -4,63 +4,70 @@ date: "2022-03-24"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Installing
 
 The Snowplow Java tracker has been built and tested using Java versions 8, 11 and 17, so should work within any Java application built using JDK8 upwards. The Java tracker is also usable from Scala. 
 
-The current tracker version is 1.0.0. New issues and pull requests are very welcome! Find the Github repository [here](https://github.com/snowplow/snowplow-java-tracker).  
+<p>The current tracker version is {versions.javaTracker}. New issues and pull requests are very welcome! Find the Github repository <a href="https://github.com/snowplow/snowplow-java-tracker">here.</a></p> 
 
 ### Install using Maven
 Add into your project’s `pom.xml`:
-```xml
-<dependency>
+<CodeBlock language="xml">{
+`<dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-java-tracker</artifactId>
-    <version>1.0.0</version>
+    <version>${versions.javaTracker}</version>
 </dependency>
-```
+`}</CodeBlock>
+
 ### Install using Gradle
 From version 0.10.1 onwards, we provide out-of-the-box support for sending events via OkHttp or Apache HTTP. The appropriate dependencies must be specified. The default tracker configuration uses OkHttp.  
 
 Add this into your project’s `build.gradle` for the default installation with OkHttp support:
-```gradle
-dependencies {
-    implementation 'com.snowplowanalytics:snowplow-java-tracker:1.0.0'
-    implementation ('com.snowplowanalytics:snowplow-java-tracker:1.0.0') {
+<CodeBlock language="gradle">{
+`dependencies {
+    implementation 'com.snowplowanalytics:snowplow-java-tracker:${versions.javaTracker}'
+    implementation ('com.snowplowanalytics:snowplow-java-tracker:${versions.javaTracker}') {
         capabilities {
             requireCapability 'com.snowplowanalytics:snowplow-java-tracker-okhttp-support'
         }
     }
-}
-```
+}`
+}</CodeBlock>
+
 Adding Apache HTTP support instead:
-```gradle
-dependencies {
-    implementation 'com.snowplowanalytics:snowplow-java-tracker:1.0.0'
-    implementation ('com.snowplowanalytics:snowplow-java-tracker:1.0.0') {
+<CodeBlock language="gradle">{
+`dependencies {
+    implementation 'com.snowplowanalytics:snowplow-java-tracker:${versions.javaTracker}'
+    implementation ('com.snowplowanalytics:snowplow-java-tracker:${versions.javaTracker}') {
         capabilities {
             requireCapability 'com.snowplowanalytics:snowplow-java-tracker-apachehttp-support'
         }
     }
-}
-```
+}`
+}</CodeBlock>
 
 If you are using your own `HttpClientAdapter` class:
-```gradle
-dependencies {
-    implementation 'com.snowplowanalytics:snowplow-java-tracker:1.0.0'
-}
-```
+<CodeBlock language="gradle">{
+`dependencies {
+    implementation 'com.snowplowanalytics:snowplow-java-tracker:${versions.javaTracker}'
+}`
+}</CodeBlock>
 
 ### Install by direct download
 You can also manually insert the tracker by downloading the jar directly from [Maven Central](https://search.maven.org/search?q=a:snowplow-java-tracker).
 
 ### Install in Scala project (SBT)
 The Snowplow Java tracker is also usable from Scala. Add this to your SBT config:
-```scala
-// Dependency
-val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "1.0.0"
-```
+<CodeBlock language="scala">{
+`// Dependency
+val snowplowTracker = "com.snowplowanalytics"  % "snowplow-java-tracker"  % "${versions.javaTracker}"`
+}</CodeBlock>
 
 ## Setting up
 

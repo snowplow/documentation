@@ -6,13 +6,14 @@ sidebar_position: 270
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import {versions} from '@site/src/componentVersions';
 
 <Badges badgeType="Actively Maintained"></Badges>
 ```
 
 The Snowplow Lua Tracker allows you to track Snowplow events in your Lua applications.
 
-It is compatible with Lua >= 5.1, along with LuaJIT.
+<p>The current version is {versions.luaTracker}. It is compatible with Lua >= 5.1, along with LuaJIT.</p>
 
 This will help you set up the Lua tracker and get started tracking. For more technical details, you can visit the [API docs](https://snowplow.github.io/snowplow-lua-tracker/).
 

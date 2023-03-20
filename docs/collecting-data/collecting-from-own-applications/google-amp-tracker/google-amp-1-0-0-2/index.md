@@ -6,7 +6,7 @@ sidebar_position: 990
 
 ## Overview
 
-Snowplow is collaborating with Google on their  [Accelerated Mobile Pages Project](https://www.ampproject.org/) (AMPP or AMP for short). AMP is an open source (Apache License 2.0) initiative to improve the mobile web experience by optimizing web pages for mobile devices.
+Snowplow is collaborating with Google on their [Accelerated Mobile Pages Project](https://www.ampproject.org/) (AMPP or AMP for short). AMP is an open source (Apache License 2.0) initiative to improve the mobile web experience by optimizing web pages for mobile devices.
 
 To learn more about analytics for AMP pages see the [amp-analytics](https://www.ampproject.org/docs/reference/extended/amp-analytics.html) reference. For general information about AMP see [What Is AMP?](https://www.ampproject.org/docs/get_started/about-amp.html) on the [Accelerated Mobile Pages (AMP) Project](https://www.ampproject.org/) site.
 
@@ -39,12 +39,13 @@ Snowplow is natively integrated into the project, so pages optimized with AMP HT
   </amp-analytics>
 </body>
 ```
-
-\*Note:\* The tracker utilises AMP linker functionality to ensure that user identification can be done where a user may visit via the google domain or the site's own domain. In order to function, this requires that linkers are enabled in the amp-analytics configuration. Not doing so can result in changing AMP client Ids (which are the primary user identifier).
+:::note
+The tracker utilises AMP linker functionality to ensure that user identification can be done where a user may visit via the google domain or the site's own domain. In order to function, this requires that linkers are enabled in the amp-analytics configuration. Not doing so can result in changing AMP client Ids (which are the primary user identifier).
+:::
 
 ### Redshift Users
 
-The v2 AMP tracker attaches two custom contexts to all events by defaul. Redshift users using RDB 0.16 or earlier must create the `amp_id_1` and `amp_web_page_1` tables before use. SQL definitions can be found in Iglu central
+The v2 AMP tracker attaches two custom contexts to all events by default. Redshift users using RDB 0.16 or earlier must create the `amp_id_1` and `amp_web_page_1` tables before use. SQL definitions can be found in Iglu central.
 
 ## Standard variables
 

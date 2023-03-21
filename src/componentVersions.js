@@ -12,7 +12,7 @@ export const versions = {
   luaTracker: '0.2.0',
   phpTracker: '0.6.1',
   pixelTracker: '0.3.0',
-  pythonTracker: '0.13.0',
+  pythonTracker: '0.14.0',
   reactNativeTracker: '1.4.0',
   rokuTracker: '0.2.0',
   rubyTracker: '0.8.0',
@@ -38,7 +38,7 @@ export const versions = {
   s3Loader22x: '2.2.6',
 
   // Data Modelling
-    // dbt
+  // dbt
   dbtSnowplowWeb: '0.13.2',
   dbtSnowplowMobile: '0.6.3',
   dbtSnowplowUtils: '0.13.2',
@@ -47,7 +47,7 @@ export const versions = {
   dbtSnowplowFractribution: '0.2.0',
   dbtSnowplowEcommerce: '0.3.0',
 
-    // sql runner
+  // sql runner
   sqlRunner: '0.10.1',
   sqlRunnerWebSnowflake: '1.0.2',
   sqlRunnerWebRedshift: '1.3.1',

@@ -4,6 +4,11 @@ date: "2021-10-15"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps.
 
 We provide several built-in methods to help you track different kinds of events. The `track_x_event` methods range from single purpose methods, such as `track_page_view`, to the more complex but flexible `track_self_describing_event`, which can be used to track any kind of user behaviour. We strongly recommend using `track_self_describing_event` for your tracking, as it allows you to design custom event types to match your business requirements. This [post on our blog](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/), "Re-thinking the structure of event data" might be informative here.
@@ -51,6 +56,9 @@ The `track_self_describing_event` method has one required argument, which must b
 
 Example:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 self_desc_json = SnowplowTracker::SelfDescribingJson.new(
   "iglu:com.example_company/save_game/jsonschema/1-0-2",
@@ -65,7 +73,9 @@ self_desc_json = SnowplowTracker::SelfDescribingJson.new(
 tracker.track_self_describing_event(event_json: self_desc_json)
 ```
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  </TabItem>
+
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 self_desc_json = SnowplowTracker::SelfDescribingJson.new(
@@ -80,6 +90,9 @@ self_desc_json = SnowplowTracker::SelfDescribingJson.new(
 
 tracker.track_self_describing_event(self_desc_json)
 ```
+
+  </TabItem>
+</Tabs>
 
 You can track anything you want using this method, as long as you can describe it in a self-describing JSON schema.
 
@@ -99,6 +112,9 @@ As these fields are fairly arbitrary, we recommend following the advice in this 
 
 Example:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 tracker.track_struct_event(category: 'shop',
                            action: 'add-to-basket',
@@ -106,11 +122,16 @@ tracker.track_struct_event(category: 'shop',
                            value: 2)
 ```
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  </TabItem>
+
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 tracker.track_struct_event('shop', 'add-to-basket', nil, 'pcs', 2)
 ```
+
+  </TabItem>
+</Tabs>
 
 ### Track page views with `track_page_view`
 
@@ -120,17 +141,25 @@ As a server-side language, your Ruby code won't automatically have access to the
 
 Example:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 tracker.track_page_view(page_url: 'www.example.com',
                         page_title: 'example',
                         referrer: 'www.referrer.com')
 ```
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  </TabItem>
+
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 tracker.track_page_view('www.example.com', 'example', 'www.referrer.com')
 ```
+
+  </TabItem>
+</Tabs>
 
 ### Track screen views with `track_screen_view`
 
@@ -140,16 +169,24 @@ This method creates an `unstruct` event, by creating a SelfDescribingJson and ca
 
 Example:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 tracker.track_screen_view(name: 'HUD > Save Game',
                           id: 'screen23')
 ```
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  </TabItem>
+
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 tracker.track_screen_view('HUD > Save Game', 'screen23')
 ```
+
+  </TabItem>
+</Tabs>
 
 ### Track eCommerce transactions with `track-ecommerce-transaction`
 
@@ -162,6 +199,9 @@ Broadly, the "transaction" hash contains the information about the order as a wh
 The "item" hash records each item's unique SKU identifier, value, and how many were purchased, as well as any further information which might be useful, such as its human-readable item name.
 
 Example:
+
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
 transaction = {
@@ -187,9 +227,13 @@ tracker.track_ecommerce_transaction(transaction: transaction,
                                     items: [item1, item2])
 ```
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  </TabItem>
 
-Note: older versions of the Ruby tracker have a bug in `track_ecommerce_transaction`: hashes with symbols for keys are not accepted. The event will fail silently. You must use only string keys. This was fixed in version 0.7.0.
+  <TabItem value="old" label="Before v0.7.0">
+
+:::note
+Older versions of the Ruby tracker have a bug in `track_ecommerce_transaction`: hashes with symbols for keys are not accepted. The event will fail silently. You must use only string keys. This was fixed in version 0.7.0.
+:::
 
 ```ruby
 transaction = {
@@ -213,5 +257,8 @@ item2 = {
 }
 tracker.track_ecommerce_transaction(transaction, [item1, item2])
 ```
+
+  </TabItem>
+</Tabs>
 
 This will fire three events: one for the transaction as a whole, and one for each item. The `order_id` and `currency` fields in the `transaction` argument will also be attached to each of the item events.

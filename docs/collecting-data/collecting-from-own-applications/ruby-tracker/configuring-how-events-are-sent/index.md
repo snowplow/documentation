@@ -4,6 +4,11 @@ date: "2021-10-26"
 sidebar_position: 30
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 When you [initialize your Tracker object](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/getting-started/index.md#tracking-design-and-initialization), you will need to provide one or more Emitter objects. Remember that we advise using the Singleton pattern, to avoid constantly recreating your objects.
 
 There are two types of Emitter. The Emitter parent class can only send events synchronously. The AsyncEmitter subclass sends events asynchronously by default. We recommend you use the AsyncEmitter, to avoid slowing down your app.
@@ -12,41 +17,49 @@ Emitters and AsyncEmitters are initialized in the same way. An event collector e
 
 Example:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 emitter1 = SnowplowTracker::Emitter.new(endpoint: 'collector.example.com')
-emitter2 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector2.example.com')
+emitter2 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector2.example.com',
+                                             options: { method: 'post' })
 emitter3 = SnowplowTracker::AsyncEmitter.new(endpoint: 'collector.elsewhere.com',
                                              options: { protocol: 'https' })
 
 tracker = SnowplowTracker::Tracker.new(emitters: [emitter1, emitter2])
 tracker.add_emitter(emitter3)
 ```
+  </TabItem>
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 emitter1 = SnowplowTracker::Emitter.new('collector.example.com')
-emitter2 = SnowplowTracker::AsyncEmitter.new('collector2.example.com')
+emitter2 = SnowplowTracker::AsyncEmitter.new('collector2.example.com',
+                                             { method: 'post' })
 emitter3 = SnowplowTracker::AsyncEmitter.new('collector.elsewhere.com',
                                              { protocol: 'https' })
 
 tracker = SnowplowTracker::Tracker.new([emitter1, emitter2])
 tracker.add_emitter(emitter3)
 ```
+  </TabItem>
+</Tabs>
 
 Optional Emitter settings:
 
-| **Optional parameter** | **Description** |
-| --- | --- |
-| `path` | Override the default path for appending to the endpoint |
-| `protocol` | HTTP or HTTPS |
-| `port` | The port for the connection |
-| `method` | GET or POST |
-| `buffer_size` | The size of the buffer, i.e. the number of events to send at once |
-| `on_success` | A method to call if events were all sent successfully |
-| `on_failure` | A method to call if any events did not send |
-| `thread_count` | Number of threads to use (relevant to AsyncEmitters only) |
-| `logger` | Log somewhere other than STDERR |
+| **Optional parameter** | **Description** | **Default** |
+| --- | --- | --- |
+| `path` | Override the default path for appending to the endpoint | n/a|
+| `protocol` | `http` or `https` | `http` |
+| `port` | The port for the connection | n/a |
+| `method` | `get` or `post` | `get` |
+| `buffer_size` | The size of the buffer, i.e. the number of events to send at once | 1 |
+| `on_success` | A method to call if events were all sent successfully | n/a |
+| `on_failure` | A method to call if any events did not send | n/a |
+| `thread_count` | Number of threads to use (relevant to AsyncEmitters only) | 1 |
+| `logger` | Where to log | STDERR |
 
 Response status codes of 2xx or 3xx status codes are considered successful.
 
@@ -56,6 +69,9 @@ You may want to force an emitter to send all events in its buffer, even if the b
 
 Example:
 
+<Tabs groupId="version">
+  <TabItem value="current" label="v0.7.0+" default>
+
 ```ruby
 # Synchronous flush
 tracker.flush
@@ -63,8 +79,9 @@ tracker.flush
 # Asynchronous flush
 tracker.flush(async: true)
 ```
+  </TabItem>
 
-[Using Ruby tracker <0.7.0? Expand this](#accordion-using-ruby-tracker-andlt070-expand-this)
+  <TabItem value="old" label="Before v0.7.0">
 
 ```ruby
 # Synchronous flush
@@ -73,6 +90,8 @@ tracker.flush
 # Asynchronous flush
 tracker.flush(true)
 ```
+  </TabItem>
+</Tabs>
 
 ### Logging
 

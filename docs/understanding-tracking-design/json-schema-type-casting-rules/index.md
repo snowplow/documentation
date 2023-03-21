@@ -138,6 +138,8 @@ OR
 }
 ```
 
+For the purposes of this `number` and `integer` are the same.
+
 </td>
 <td>
 
@@ -359,22 +361,6 @@ _Content is stringified and quoted._
 <td>
 
 `DECIMAL(36,2)`
-
-</td>
-</tr>
-<tr>
-<td>
-
-  ```json
-{
-    "type": ["number", "integer"]
-}
-```
-
-</td>
-<td>
-
-`DOUBLE`
 
 </td>
 </tr>

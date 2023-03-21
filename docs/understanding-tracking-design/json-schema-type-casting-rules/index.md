@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 
 :::note
 
-The row order in this table is important.  Type lookup stops after the first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
+The row order in this table is important.  Type lookup stops after the first match is found scanning from top to bottom (with the two exceptions of "null" and "required" — the first two rows in the table).
 
 :::
 
@@ -27,7 +27,7 @@ The row order in this table is important.  Type lookup stops after the first mat
 </thead>
 <tbody>
 <tr>
-<td >
+<td>
 
   ```json
 {
@@ -43,12 +43,39 @@ OR
 }
 ```
 
-`"null"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
+`"null"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down
+the table. `"null"`'s position in a list does not matter. Nullability constraints only apply to the first major of the 
+schema. For example, `2-0-0` would use them, but `2-0-1` or `2-2-0` would not. And `3-0-0` would apply constraints again.
+It is still valid to have `"null"` for validation purposes in enrich.
 
 </td>
 <td>
 
 `NULLABLE`
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "properties": {
+      "f1": {"type": "T"}
+    },
+    "required": [ "f1" ]
+}
+```
+
+`"required"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
+Fields that are not listed as `"required"` are nullable. Nullability constraints only apply to the first major of the
+schema. For example, `2-0-0` would use them, but `2-0-1` or `2-2-0` would not. And `3-0-0` would apply them again.
+It is still valid to have `"required"` for validation purposes in enrich.
+
+</td>
+<td>
+
+`NOT NULL`
 
 </td>
 </tr>
@@ -65,7 +92,7 @@ The `enum` can contain more than **one** JavaScript type: `string`, `number|inte
 For the purposes of this  `number` and `integer` are the same.
 
 
-`array`, `object`, `NaN` and other types in the `enum` will be cast as fallback `VARCHAR(65535)`.
+`array`, `object`, `NaN` and other types in the `enum` will be cast as fallback `VARCHAR(4096)`.
 
 </td>
 <td>
@@ -81,11 +108,17 @@ For the purposes of this  `number` and `integer` are the same.
 
   ```json
 {
-    "type": [T1, T2, ...]
+    "type": ["boolean", "integer"]
 }
 ```
 
-- `T1, T2, ..`. only contains `"boolean"` **and** `"integer"`
+OR 
+
+  ```json
+{
+    "type": [ "integer", "boolean"]
+}
+```
 
 </td>
 <td>
@@ -505,30 +538,12 @@ _Content is stringified and quoted._
 <tr>
 <td>
 
-  ```json
-{
-    "enum": ["E1", "E2"]
-}
-```
-
-</td>
-<td>
-
-`VARCHAR(M)`
-
-`M` is the maximum size of `json.stringify("E*")`
-
-</td>
-</tr>
-<tr>
-<td>
-
 If nothing matches above, this is a catch-all.
 
 </td>
 <td>
 
-`VARCHAR(65535)`
+`VARCHAR(4096)`
 
 
 _Values will be quoted as in JSON._

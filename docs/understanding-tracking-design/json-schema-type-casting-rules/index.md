@@ -72,6 +72,8 @@ Fields that are not listed as `"required"` are nullable. Nullability constraints
 schema. For example, `2-0-0` would use them, but `2-0-1` or `2-2-0` would not. And `3-0-0` would apply them again.
 It is still valid to have `"required"` for validation purposes in enrich.
 
+When field has both `"null"` in type array and listed as `"required"` at the same time resulting column would be nullable.
+
 </td>
 <td>
 

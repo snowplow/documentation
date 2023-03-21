@@ -79,7 +79,7 @@ As part of our Infrastructure Review service, our team review your current infra
 
 ## Version Support
 
-Unless otherwise stated in your contract, we provide official support for the currently recommended stack and two preceding stacks as defined in our [product description](https://snowplow.io/snowplow-bdp-product-description/). The currently recommended versions of components can be found on our [public technical documentation](https://docs.snowplow.io/docs/pipeline-components-and-applications/version-compatibility-matrix/latest-version-compatibility-matrix/).
+Unless otherwise stated in your contract, we provide official support for software that’s either in its latest version or a version released within the last 18 months (rolling). You can find the current versions of components [here](https://docs.snowplow.io/docs/pipeline-components-and-applications/versions/).
 
 ### Try Snowplow & Open Source
 

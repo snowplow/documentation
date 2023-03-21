@@ -4,6 +4,11 @@ date: "2020-11-03"
 sidebar_position: 400
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## 1. Overview
 
 The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-python-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your Python event processing, data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), and other Python-compatible data processing frameworks.
@@ -38,9 +43,9 @@ $ pip install snowplow_analytics_sdk --upgrade
 
 To add the Snowplow Analytics SDK as a dependency to your own Python app, edit your `requirements.txt` and add:
 
-```text
-snowplow_analytics_sdk==0.2.3
-```
+<CodeBlock language="text">{
+`snowplow_analytics_sdk==${versions.analyticsSdkPython}`
+}</CodeBlock>
 
 ### 3.3 easy_install
 

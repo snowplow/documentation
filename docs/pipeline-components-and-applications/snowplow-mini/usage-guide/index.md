@@ -44,30 +44,40 @@ Given that this API key must be a UUID v4, you will need to generate one by runn
 
 ### Generating a pair of read/write API keys for the local Iglu schema registry
 
+:::note
+
 Mini 0.8.0 comes bundled with Iglu Server 0.6.1 which introduced a couple of changes regarding this section.
 
 - Swagger UI of Iglu Server is deprecated, however Iglu Server still serves at `/iglu-server` endpoint.
 - `POST /api/auth/keygen` no longer supports query parameter to provide vendor prefix. Use POST raw data request instead.
 
-To add schemas to the Iglu repository bundled with Snowplow Mini, you have to create a dedicated pair of API keys. We have 2 options:
+:::
 
-- Use igluctl's `[server keygen](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#server-keygen)` subcommand
+To add schemas to the Iglu repository bundled with Snowplow Mini, you have to create a dedicated pair of API keys. There are 2 options:
+
+- Use igluctl’s [server keygen](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#server-keygen) subcommand
 - Use any HTTP client e.g. cURL
 
-Let's have examples for both options.
+#### Option 1
 
-- Download the igluctl 0.10.1 from Github:
+First, [download igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
 
-`$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip  
-$ chmod +x igluctl`
+Following is a sample execution where `com.acme` is the vendor prefix for which we'll upload our schemas, `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is an example super API key you would have created in the previous steps.
 
-Following is a sample execution where `com.acme` is the vendor prefix for which we'll upload our schemas, `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is the super API key created in step 2.2
+```bash
+/path/to/igluctl server keygen --vendor-prefix com.acme mini-address/iglu-server 53b4c441-84f7-467e-af4c-074ced53eb20
+```
 
-`$ ./igluctl server keygen --vendor-prefix com.acme mini-address/iglu-server 53b4c441-84f7-467e-af4c-074ced53eb20`
+#### Option 2
 
-- Let's also see how one can use `cURL` to interact with the Iglu Server
+You can also use `cURL` to interact with Iglu Server:
 
-`$ curl --location --request POST 'mini-address/iglu-server/api/auth/keygen' --header 'apikey: 1b5d0459-3492-451c-aab1-7f74cbe12112' --header 'Content-Type: application/json' --data-raw '{"vendorPrefix":"com.acme"}'`
+```
+curl --location --request POST 'mini-address/iglu-server/api/auth/keygen' \
+  --header 'apikey: 1b5d0459-3492-451c-aab1-7f74cbe12112' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"vendorPrefix":"com.acme"}'
+```
 
 should return a read key and a write key.
 
@@ -83,17 +93,12 @@ should return a read key and a write key.
 To test and send non-standard Snowplow events such as your own custom-contexts and unstructured events you can load them into the Iglu repository local to the Snowplow Mini instance.
 
 1. Get a local copy of your Iglu repository which contains your schemas. This should be modelled after [this folder](https://github.com/snowplow/iglu-central/tree/master/schemas)
-2. Download the latest Igluctl from Github:
-
-```bash
-$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.10.1/igluctl_0.10.1.zip
-$ chmod +x igluctl
-```
+2. [Download igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
 
 1. Run the executable with the following input:
 
 - The address of the Iglu repository: `http://[public_dns]/iglu-server`
-- The Super API Key you created in step 2.2
+- The Super API Key you created previously
 - The path to your schemas For example to load the `iglu-central` repository into Iglu Server:
 
 ```bash
@@ -215,31 +220,29 @@ You can add new custom enrichments via the Control Plane tab. The only thing you
 
 Since Mini 0.8.0 deprecated Swagger UI of Iglu Server, we have 2 options:
 
-- Use igluctl [static push](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static_push) to put our custom schema into the Iglu Server
+- Use igluctl’s [static push](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static_push) subcommand to put our custom schema into the Iglu Server
 - Use any HTTP client e.g. cURL
 
-Let's have examples for both options.
+#### Option 1
 
-- Download the igluctl 0.7.0 from Github:
+First, [download igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#downloading-and-running-igluctl).
 
-```bash
-$ wget https://github.com/snowplow-incubator/igluctl/releases/download/0.7.2/igluctl
-$ chmod +x igluctl
-```
-
-Following is a sample execution where `path-to-schema(s)` is the path to custom schema(s) , `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is the super API key created in step 2.2
+Following is a sample execution where `path-to-schema(s)` is the path to custom schema(s) , `mini-address` is the URL of our mini and `53b4c441-84f7-467e-af4c-074ced53eb20` is an example super API key you would have created in the previous steps.
 
 ```bash
-$ ./igluctl static push path-to-schema(s) mini-address/iglu-server 53b4c441-84f7-467e-af4c-074ced53eb20
+/path/to/igluctl static push path-to-schema(s) mini-address/iglu-server 53b4c441-84f7-467e-af4c-074ced53eb20
 ```
 
-- Let's also see how one can use `cURL` to interact with the Iglu Server
+#### Option 2
+
+You can also use `cURL` to interact with Iglu Server:
 
 ```bash
-$ curl mini-address/iglu-server/api/schemas -X POST -H "apikey: YOUR_APIKEY" -d '{"json": YOUR_JSON}'
+curl mini-address/iglu-server/api/schemas -X POST \
+  -H "apikey: YOUR_APIKEY" -d '{"json": YOUR_JSON}'
 ```
 
-will produce a response like this one, if no errors are encountered:
+The command will produce a response like this one, if no errors are encountered:
 
 ```json
 {

@@ -4,8 +4,6 @@ date: "2021-03-26"
 sidebar_position: 60
 ---
 
-This page refers to version 0.2.0 of the Iglu Ruby client.
-
 ## Overview
 
 The [Iglu Ruby client](https://github.com/snowplow/iglu-ruby-client) allows you to resolve JSON Schemas from embedded and remote repositories.
@@ -36,28 +34,6 @@ or add it to `Gemfile`:
 
 ```ruby
 gem 'iglu-ruby-client'
-```
-
-### Manual Setup
-
-You can also build and install gem locally in case you need to introduce some changes.
-
-#### Clone the client
-
-First, git clone the latest version of the client to your local machine:
-
-```bash
-$ git clone https://github.com/snowplow/iglu-ruby-client.git
-```
-
-If you don't have git installed locally, [install it](http://git-scm.com/downloads) first.
-
-#### Build a gem
-
-```bash
-$ cd iglu-ruby-client
-$ gem build iglu-ruby-client.gemspec
-$ gem install iglu-ruby-client-0.1.0.gem
 ```
 
 ## Initialization

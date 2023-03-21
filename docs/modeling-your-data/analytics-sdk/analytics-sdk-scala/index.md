@@ -4,6 +4,11 @@ date: "2020-11-02"
 sidebar_position: 100
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## 1. Overview
 
 The [Snowplow Analytics SDK for Scala](https://github.com/snowplow/snowplow-scala-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your Scala event processing,  
@@ -18,16 +23,16 @@ Minimum required Java Runtime is JRE8.
 
 ## 3. Setup
 
-The latest version of Snowplow Scala Analytics SDK is 2.1.0 and it is available on Maven Central.
+<p>The latest version of Snowplow Scala Analytics SDK is {versions.analyticsSdkScala} and it is available on Maven Central.</p>
 
 ### 3.1 SBT
 
 If you’re using SBT, add the following lines to your build file:
 
-```scala
-// Dependency
-libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-analytics-sdk" % "2.1.0"
-```
+<CodeBlock language="scala">{
+`// Dependency
+libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-analytics-sdk" % "${versions.analyticsSdkScala}"`
+}</CodeBlock>
 
 Note the double percent (`%%`) between the group and artifactId. This will ensure that you get the right package for your Scala version.
 
@@ -35,13 +40,13 @@ Note the double percent (`%%`) between the group and artifactId. This will ensur
 
 If you are using Gradle in your own job, then add following lines in your `build.gradle` file:
 
-```gradle
-dependencies {
+<CodeBlock language="gradle">{
+`dependencies {
     ...
     // Snowplow Scala Analytics SDK
-    compile 'com.snowplowanalytics:snowplow-scala-analytics-sdk_2.12:2.1.0'
-    }
-```
+    compile 'com.snowplowanalytics:snowplow-scala-analytics-sdk_2.12:${versions.analyticsSdkScala}'
+}`
+}</CodeBlock>
 
 Note that you need to change `_2.12` to `_2.13` in artifactId if you're using Scala 2.13.
 
@@ -49,13 +54,13 @@ Note that you need to change `_2.12` to `_2.13` in artifactId if you're using Sc
 
 If you are using Maven in your own job, then add following lines in your `pom.xml` file:
 
-```xml
-<dependency>
+<CodeBlock language="xml">{
+`<dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-scala-analytics-sdk_2.12</artifactId>
-    <version>2.1.0</version>
-</dependency>
-```
+    <version>${versions.analyticsSdkScala}</version>
+</dependency>`
+}</CodeBlock>
 
 Note that you need to change `_2.12` to `_2.13` in artifactId if you're using Scala 2.13.
 

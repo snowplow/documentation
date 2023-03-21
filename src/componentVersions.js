@@ -21,6 +21,13 @@ export const versions = {
   unityTracker: '0.6.1',
   webViewTracker: '0.2.0',
 
+  // Core pipeline
+  collector: '2.8.2',
+  enrich: '3.7.0',
+  sqs2kinesis: '1.0.4',
+  dataflowRunner: '0.7.3',
+  snowbridge: '2.0.2',
+
   // Loaders
   bqLoader: '1.6.4',
   esLoader: '2.0.9',
@@ -31,7 +38,7 @@ export const versions = {
   s3Loader22x: '2.2.6',
 
   // Data Modelling
-  // dbt
+    // dbt
   dbtSnowplowWeb: '0.13.2',
   dbtSnowplowMobile: '0.6.3',
   dbtSnowplowUtils: '0.13.2',
@@ -40,7 +47,8 @@ export const versions = {
   dbtSnowplowFractribution: '0.2.0',
   dbtSnowplowEcommerce: '0.3.0',
 
-  // sql runner
+    // sql runner
+  sqlRunner: '0.10.1',
   sqlRunnerWebSnowflake: '1.0.2',
   sqlRunnerWebRedshift: '1.3.1',
   sqlRunnerWebBigQuery: '1.0.4',
@@ -48,12 +56,21 @@ export const versions = {
   sqlRunnerMobileRedshift: '1.1.0',
   sqlRunnerMobileBigQuery: '1.1.0',
 
-  // Other stuff
-  snowplowMicro: '1.5.0',
-  collector: '2.8.2',
-  enrich: '3.7.0',
-  sqs2kinesis: '1.0.4',
+  // Analytics SDKs
+  analyticsSdkDotNet: '0.2.1',
+  analyticsSdkGo: '0.3.0',
+  analyticsSdkJavascript: '0.3.1',
+  analyticsSdkPython: '0.2.3',
+  analyticsSdkScala: '3.0.0',
+
+  // Iglu
   igluServer: '0.9.0',
   igluctl: '0.10.2',
+  igluObjCClient: '0.1.1',
+  igluRubyClient: '0.2.0',
+  igluScalaClient: '2.2.1',
+
+  // Testing & debugging
+  snowplowMicro: '1.5.0',
   snowplowMini: '0.15.1',
 }

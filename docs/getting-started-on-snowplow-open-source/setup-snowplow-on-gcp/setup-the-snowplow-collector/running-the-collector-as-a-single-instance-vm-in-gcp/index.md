@@ -4,6 +4,11 @@ date: "2020-02-27"
 sidebar_position: 20
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 To run the collector on a single GCP instance, you'll first need to spin one up:
 
 - Go to the [GCP dashboard](https://console.cloud.google.com/home/dashboard), and once again, make sure your project is selected.
@@ -45,11 +50,11 @@ gcloud compute ssh your-instance-name --zone your-instance-zone
 
 And then run:
 
-```bash
-sudo apt-get update
+<CodeBlock language="bash">{
+`sudo apt-get update
 sudo apt-get -y install default-jre
 sudo apt-get -y install unzip
-wget "https://github.com/snowplow/stream-collector/releases/download/2.3.0/snowplow-stream-collector-google-pubsub-<VERSION>.jar"
+wget "https://github.com/snowplow/stream-collector/releases/download/${versions.collector}/snowplow-stream-collector-google-pubsub-${versions.collector}.jar"
 gsutil cp gs://<YOUR-BUCKET-NAME/<YOUR-CONFIG-FILE-NAME> .
-java -jar snowplow-stream-collector-google-pubsub-<VERSION>.jar --config <YOUR-CONFIG-FILE-NAME>
-```
+java -jar snowplow-stream-collector-google-pubsub-${versions.collector}.jar --config <YOUR-CONFIG-FILE-NAME>`
+}</CodeBlock>

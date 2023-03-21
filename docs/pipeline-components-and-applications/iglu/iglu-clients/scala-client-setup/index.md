@@ -4,6 +4,11 @@ date: "2021-03-26"
 sidebar_position: 70
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Overview
 
 The [Scala client](https://github.com/snowplow/iglu-scala-client) is an Iglu client and schema resolver implemented in Scala.
@@ -21,27 +26,27 @@ To minimize jar bloat, we have tried to keep external dependencies to a minimum.
 
 The Scala client is published to Snowplow's [hosted Maven repository](http://maven.snplow.com), which should make it easy to add it as a dependency into your own Java app.
 
-The current version of the Scala client is 1.0.2.
+<p>The current version of the Scala client is {versions.igluScalaClient}.</p>
 
 ### SBT
 
 Add this to your SBT config:
 
-```scala
-// Dependency
-val igluClient = "com.snowplowanalytics" %% "iglu-scala-client"  % "1.0.2"
-```
+<CodeBlock language="scala">{
+`// Dependency
+val igluClient = "com.snowplowanalytics" %% "iglu-scala-client"  % "${versions.igluScalaClient}"`
+}</CodeBlock>
 
 ### Gradle
 
 Add into `build.gradle`:
 
-```gradle
-dependencies {
+<CodeBlock language="gradle">{
+`dependencies {
     ...
     // Iglu client
-    compile 'com.snowplowanalytics:iglu-scala-client:0.4.0'
-}
-```
+    compile 'com.snowplowanalytics:iglu-scala-client:"${versions.igluScalaClient}"'
+}`
+}</CodeBlock>
 
 Now read the  [Scala client API](https://github.com/snowplow/iglu-scala-client) to start using the Scala client.

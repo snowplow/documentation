@@ -44,7 +44,7 @@ OR
 ```
 
 `"null"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down
-the table. `"null"`'s position in a list does not matter. Nullability constraints only apply to the first major of the 
+the table. `"null"`'s position in a list (`type` or `enum`) does not matter. Nullability constraints only apply to the first major of the 
 schema. For example, `2-0-0` would use them, but `2-0-1` or `2-2-0` would not. And `3-0-0` would apply constraints again.
 It is still valid to have `"null"` for validation purposes in enrich.
 

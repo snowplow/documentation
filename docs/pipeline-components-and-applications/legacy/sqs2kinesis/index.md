@@ -9,9 +9,17 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
+:::caution
+
+Sqs2kinesis is a _deprecated_ application for moving data from SQS to Kinesis.
+
+It is superseded by [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md), which provides the same functionality via its [SQS source](/docs/destinations/forwarding-events/snowbridge/configuration/sources/sqs.md) and [Kinesis target](/docs/destinations/forwarding-events/snowbridge/configuration/targets/kinesis.md).
+
+:::
+
 Sqs2kinesis is an application for moving data from SQS to Kinesis on AWS. In a Snowplow pipeline, you can run it if you are using SQS as either a fallback buffer or as your primary collector sink.
 
-The AWS setup guide describes [how to set up a SQS buffer for your collector, and why it is needed.](/docs/pipeline-components-and-applications/stream-collector/configure/index.md#setting-up-an-sqs-buffer-2-0-0) If you chose not to configure an SQS buffer, then you do not need to run sqs2kinesis.
+The AWS setup guide describes [how to set up a SQS buffer for your collector, and why it is needed](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-the-snowplow-collector/set-up-an-sqs-buffer/index.md).
 
 ### Getting a Docker image
 
@@ -59,4 +67,4 @@ Here is an example of a minimal configuration file:
 }
 ```
 
-See [the configuration reference](/docs/pipeline-components-and-applications/sqs2kinesis/sqs2kinesis-configuration-reference/index.md) for a complete description of all parameters.
+See [the configuration reference](/docs/pipeline-components-and-applications/legacy/sqs2kinesis/sqs2kinesis-configuration-reference/index.md) for a complete description of all parameters.

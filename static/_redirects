@@ -99,3 +99,5 @@
 
 /docs/pipeline-components-and-applications/iglu/igluctl-2/previous-versions/* /docs/pipeline-components-and-applications/iglu/igluctl-2/ 301
 /docs/pipeline-components-and-applications/snowplow-mini/previous-releases/* /docs/pipeline-components-and-applications/snowplow-mini/ 301
+
+/docs/pipeline-components-and-applications/sqs2kinesis/* /docs/pipeline-components-and-applications/legacy/sqs2kinesis/:splat 301

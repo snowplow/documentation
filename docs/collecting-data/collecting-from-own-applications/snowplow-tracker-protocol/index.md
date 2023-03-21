@@ -321,7 +321,7 @@ The `ttm` field is used for a timestamp set on the client which should be take
 | `cs`          | `doc_charset`                               | text     | Web page's character encoding                                 | `UTF-8`                                                                                                                 |
 | `ds`          | `doc_width` and `doc_height`                | text     | Web page width and height                                     | `1090x1152`                                                                                                             |
 | `vp`          | `br_viewwidth` and `br_viewheight`          | text     | Browser viewport width and height                             | `1105x390`                                                                                                              |
-| `res`         | `dvce_screenheight` and `dvce_screenwidth`  | text     | Screen / monitor resolution                                   | `1280x1024`                                                                                                             |
+| `res`         | `dvce_screenwidth` and `dvce_screenheight`  | text     | Screen / monitor resolution                                   | `1280x1024`                                                                                                             |
 | `mac`         | `mac_address`                               | text     | MAC address for the device running the tracker                | `12:34:56:78:9A:BC`                                                                                                     |
 
 ### Reserved parameters

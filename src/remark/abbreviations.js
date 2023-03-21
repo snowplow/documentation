@@ -17,6 +17,7 @@ const plugin = () => {
     'RDS': 'Amazon Relational Database Service',
     'S3': 'Amazon Cloud Object Storage',
     'SS': 'Server Side',
+    'SQS': 'Amazon Simple Queue Service',
     'UA': 'User Agent',
     'VPC': 'Virtual Private Cloud',
   }

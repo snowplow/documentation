@@ -138,8 +138,6 @@ OR
 }
 ```
 
-For the purposes of this `number` and `integer` are the same.
-
 </td>
 <td>
 

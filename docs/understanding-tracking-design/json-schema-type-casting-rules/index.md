@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 
 :::note
 
-The row order in this table is important.  Type lookup stops after the first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
+The row order in this table is important.  Type lookup stops after the first match is found scanning from top to bottom (with the two exceptions of "null" and "required" — the first two rows in the table).
 
 :::
 
@@ -27,7 +27,7 @@ The row order in this table is important.  Type lookup stops after the first mat
 </thead>
 <tbody>
 <tr>
-<td >
+<td>
 
   ```json
 {
@@ -45,10 +45,39 @@ OR
 
 `"null"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
 
+`"null"`’s position in a list (`type` or `enum`) does not matter.
+
+Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is nullable in schema version `1-0-0` and not nullable in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
+
 </td>
 <td>
 
 `NULLABLE`
+
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+    "properties": {
+      "f1": {"type": "T"}
+    },
+    "required": [ "f1" ]
+}
+```
+
+`"required"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
+
+Fields that are not listed as `"required"` are nullable. Fields are _also_ nullable when they are listed as `"required"` but have `"null"` in their `type` or `enum` definition. (In the latter case, the Enrich application will still validate that the field is present, even if it’s `null`.)
+
+Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is not required in schema version `1-0-0` and required in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
+
+</td>
+<td>
+
+`NOT NULL`
 
 </td>
 </tr>
@@ -65,7 +94,7 @@ The `enum` can contain more than **one** JavaScript type: `string`, `number|inte
 For the purposes of this  `number` and `integer` are the same.
 
 
-`array`, `object`, `NaN` and other types in the `enum` will be cast as fallback `VARCHAR(65535)`.
+`array`, `object`, `NaN` and other types in the `enum` will be cast as fallback `VARCHAR(4096)`.
 
 </td>
 <td>
@@ -81,11 +110,17 @@ For the purposes of this  `number` and `integer` are the same.
 
   ```json
 {
-    "type": [T1, T2, ...]
+    "type": ["boolean", "integer"]
 }
 ```
 
-- `T1, T2, ..`. only contains `"boolean"` **and** `"integer"`
+OR 
+
+  ```json
+{
+    "type": ["integer", "boolean"]
+}
+```
 
 </td>
 <td>
@@ -332,22 +367,6 @@ _Content is stringified and quoted._
 
   ```json
 {
-    "type": ["number", "integer"]
-}
-```
-
-</td>
-<td>
-
-`DOUBLE`
-
-</td>
-</tr>
-<tr>
-<td>
-
-  ```json
-{
     "type": "number"
 }
 ```
@@ -505,30 +524,12 @@ _Content is stringified and quoted._
 <tr>
 <td>
 
-  ```json
-{
-    "enum": ["E1", "E2"]
-}
-```
-
-</td>
-<td>
-
-`VARCHAR(M)`
-
-`M` is the maximum size of `json.stringify("E*")`
-
-</td>
-</tr>
-<tr>
-<td>
-
 If nothing matches above, this is a catch-all.
 
 </td>
 <td>
 
-`VARCHAR(65535)`
+`VARCHAR(4096)`
 
 
 _Values will be quoted as in JSON._

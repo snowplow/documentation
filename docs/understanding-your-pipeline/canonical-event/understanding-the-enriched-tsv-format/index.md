@@ -4,6 +4,12 @@ date: "2021-07-07"
 sidebar_position: 1000
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Overview - TSV Format
 
 The Snowplow pipeline outputs the enriched stream in a Tab Separated Values (TSV) format. As TSV files do not contain header information, this page exists to help users of the enriched stream understand what each value represents.
@@ -17,6 +23,9 @@ Additionally, Snowplow has a number of Analytics SDKs available which help parse
 - [Analytics SDK Golang](https://github.com/snowplow/snowplow-golang-analytics-sdk)
 
 For explanations of what each field represents, please see the [Canonical Event Model](/docs/understanding-your-pipeline/canonical-event/index.md).
+
+<Tabs groupId="fields">
+  <TabItem value="table" label="Table" default>
 
 | Property Index | Property Name |
 | --- | --- |
@@ -151,3 +160,17 @@ For explanations of what each field represents, please see the [Canonical Event 
 | 128 | event_version |
 | 129 | event_fingerprint |
 | 130 | true_tstamp |
+
+  </TabItem>
+  <TabItem value="tsv" label="TSV header" default>
+    
+You can use this if you need a header to work with the Snowplow TSV files.
+
+```mdx-code-block
+export const header = `app_id\tplatform\tetl_tstamp\tcollector_tstamp\tdvce_created_tstamp\tevent\tevent_id\ttxn_id\tname_tracker\tv_tracker\tv_collector\tv_etl\tuser_id\tuser_ipaddress\tuser_fingerprint\tdomain_userid\tdomain_sessionidx\tnetwork_userid\tgeo_country\tgeo_region\tgeo_city\tgeo_zipcode\tgeo_latitude\tgeo_longitude\tgeo_region_name\tip_isp\tip_organization\tip_domain\tip_netspeed\tpage_url\tpage_title\tpage_referrer\tpage_urlscheme\tpage_urlhost\tpage_urlport\tpage_urlpath\tpage_urlquery\tpage_urlfragment\trefr_urlscheme\trefr_urlhost\trefr_urlport\trefr_urlpath\trefr_urlquery\trefr_urlfragment\trefr_medium\trefr_source\trefr_term\tmkt_medium\tmkt_source\tmkt_term\tmkt_content\tmkt_campaign\tcontexts\tse_category\tse_action\tse_label\tse_property\tse_value\tunstruct_event\ttr_orderid\ttr_affiliation\ttr_total\ttr_tax\ttr_shipping\ttr_city\ttr_state\ttr_country\tti_orderid\tti_sku\tti_name\tti_category\tti_price\tti_quantity\tpp_xoffset_min\tpp_xoffset_max\tpp_yoffset_min\tpp_yoffset_max\tuseragent\tbr_name\tbr_family\tbr_version\tbr_type\tbr_renderengine\tbr_lang\tbr_features_pdf\tbr_features_flash\tbr_features_java\tbr_features_director\tbr_features_quicktime\tbr_features_realplayer\tbr_features_windowsmedia\tbr_features_gears\tbr_features_silverlight\tbr_cookies\tbr_colordepth\tbr_viewwidth\tbr_viewheight\tos_name\tos_family\tos_manufacturer\tos_timezone\tdvce_type\tdvce_ismobile\tdvce_screenwidth\tdvce_screenheight\tdoc_charset\tdoc_width\tdoc_height\ttr_currency\ttr_total_base\ttr_tax_base\ttr_shipping_base\tti_currency\tti_price_base\tbase_currency\tgeo_timezone\tmkt_clickid\tmkt_network\tetl_tags\tdvce_sent_tstamp\trefr_domain_userid\trefr_device_tstamp\tderived_contexts\tdomain_sessionid\tderived_tstamp\tevent_vendor\tevent_name\tevent_format\tevent_version\tevent_fingerprint\ttrue_tstamp`
+```
+
+<CodeBlock>{header}</CodeBlock>
+    
+  </TabItem>
+</Tabs>

@@ -68,11 +68,10 @@ It is still valid to have `"null"` for validation purposes in enrich.
 ```
 
 `"required"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
-Fields that are not listed as `"required"` are nullable. Nullability constraints only apply to the first major of the
-schema. For example, `2-0-0` would use them, but `2-0-1` or `2-2-0` would not. And `3-0-0` would apply them again.
-It is still valid to have `"required"` for validation purposes in enrich.
 
-When field has both `"null"` in type array and listed as `"required"` at the same time resulting column would be nullable.
+Fields that are not listed as `"required"` are nullable. Fields are _also_ nullable when they are listed as `"required"` but have `"null"` in their `type` or `enum` definition. (In the latter case, the Enrich application will still validate that the field is present, even if it’s `null`.)
+
+Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULL` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is not required in schema version `1-0-0` and required in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
 
 </td>
 <td>

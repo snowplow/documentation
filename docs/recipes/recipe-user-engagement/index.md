@@ -28,24 +28,11 @@ Please note that in Try Snowplow and BDP Cloud, these fields (as well as the `do
 
 Additionally, Snowplow allows you to specify a custom user ID, which we'll be adding in this recipe. We'll then build a user engagement table to explore how you can develop a better understanding of how your users engage with you over time.
 
-## Implement a custom user ID (optional)
+## Implement automatic tracking
 
-Adding a custom user ID with the Snowplow Javascript Tracker is easy. You'll simply add this line to your out of the box tracking:
-
-```javascript
-window.snowplow('setUserId', "example_user_id");
-```
-
-If you are using Google Tag Manager, you can add the variable like so:
+Ensure you have implemented the following JS tracker methods (directly or via GTM):
 
 ```javascript
-window.snowplow('setUserId', "{{example_user_id_variable}}");
-```
-
-Make sure you add this method before you start tracking events, i.e.
-
-```javascript
-window.snowplow('setUserId', "example_user_id");
 window.snowplow('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 });
 window.snowplow('enableLinkClickTracking');
 window.snowplow('trackPageView');
@@ -70,9 +57,7 @@ CREATE TABLE derived.user_engagement AS(
     SELECT
         -- user information
         ev.domain_userid,
-        LAST_VALUE(ev.network_userid) OVER (PARTITION BY ev.domain_userid ORDER BY ev.derived_tstamp) AS network_userid,
-        LAST_VALUE(ev.user_id) OVER (PARTITION BY ev.domain_userid ORDER BY ev.derived_tstamp) AS user_id,
-        ev.user_ipaddress AS ip_address, 
+        ev.user_ipaddress AS ip_address,
         ev.geo_country AS country, -- this field will be null in Try Snowplow and BDP Cloud, as we cannot enable MaxMind geo data due to CCPA regulation
         ev.geo_city AS city, -- this field will be null in Try Snowplow and BDP Cloud, as we cannot enable MaxMind geo data due to CCPA regulation
         ua.useragent_family AS browser,
@@ -92,7 +77,7 @@ CREATE TABLE derived.user_engagement AS(
         ON ev.event_id = ua.root_id AND ev.collector_tstamp = ua.root_tstamp
 
     WHERE ev.domain_userid IS NOT NULL
-    GROUP BY 1,4,5,6,7,8, ev.network_userid, ev.user_id, ev.derived_tstamp
+    GROUP BY 1,2,3,4,5,6
 
 );
 ```

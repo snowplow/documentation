@@ -33,11 +33,11 @@ Once complete (it might take a minute or two), you'll find your brand new `sp.js
 The above only works for the official plugins included in the `snowplow-javascript-tracker` repository.
 If you have [developed your own plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/creating-your-own-plugins/index.md), or want to include plugins from third parties, the process is similar, but with some additional small code changes:
 
-- Include the plugin as a dependency in `trackers/javascript-tracker/package.json`
-- Import the plugin in `trackers/javascript-tracker/src/features.ts`
-- Follow the pattern defined in `trackers/javascript-tracker/src/features.ts` to check a feature flag for the plugin to conditionally reference the plugin
-- Add a feature flag for the plugin to `trackers/javascript-tracker/tracker.config.ts` and `trackers/javascript-tracker/tracker.lite.config.ts`
-- Rerun `npx @microsoft/rush update` and `npx @microsoft/rush build` as usual (`update` may take longer if it needs to build the custom plugins from scratch if they are not already published in a package repository)
+1. Include the plugin as a dependency in `trackers/javascript-tracker/package.json`
+1. Import the plugin in `trackers/javascript-tracker/src/features.ts`
+1. Follow the pattern defined in `trackers/javascript-tracker/src/features.ts` to check a feature flag for the plugin to conditionally reference the plugin
+1. Add a feature flag for the plugin to `trackers/javascript-tracker/tracker.config.ts` and `trackers/javascript-tracker/tracker.lite.config.ts`
+1. Rerun `npx @microsoft/rush update` and `npx @microsoft/rush build` as usual (`update` may take longer if it needs to build the custom plugins from scratch if they are not already published in a package repository)
 
 If the plugin flag is constant and set to true, the import should succeed and the plugin will be included in the bundle.
 Otherwise, the "tree-shaking" should kick in and the plugin code will be excluded from the bundle output.

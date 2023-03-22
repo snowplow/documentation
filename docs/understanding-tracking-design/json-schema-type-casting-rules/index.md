@@ -118,7 +118,7 @@ OR
 
   ```json
 {
-    "type": [ "integer", "boolean"]
+    "type": ["integer", "boolean"]
 }
 ```
 

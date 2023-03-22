@@ -47,7 +47,7 @@ OR
 
 `"null"`’s position in a list (`type` or `enum`) does not matter.
 
-Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULL` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is nullable in schema version `1-0-0` and not nullable in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
+Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is nullable in schema version `1-0-0` and not nullable in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
 
 </td>
 <td>
@@ -72,7 +72,7 @@ Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new col
 
 Fields that are not listed as `"required"` are nullable. Fields are _also_ nullable when they are listed as `"required"` but have `"null"` in their `type` or `enum` definition. (In the latter case, the Enrich application will still validate that the field is present, even if it’s `null`.)
 
-Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULL` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is not required in schema version `1-0-0` and required in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
+Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is not required in schema version `1-0-0` and required in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
 
 </td>
 <td>

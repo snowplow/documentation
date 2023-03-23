@@ -26,26 +26,13 @@ With all web events the Snowplow JavaScript tracker captures the following user 
 
 Please note that in Try Snowplow and BDP Cloud, these fields (as well as the `domain_sessionid`) are being hashed with Snowplow's [PII enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md) to protect user privacy. With Snowplow BDP, you are able to configure this enrichment to hash (or not hash) any number of out of the box or custom fields.
 
-Additionally, Snowplow allows you to specify a custom user ID, which we'll be adding in this recipe. We'll then build a user engagement table to explore how you can develop a better understanding of how your users engage with you over time.
+We end by building a user engagement table to explore how you can develop a better understanding of how your users engage with you over time.
 
-## Implement a custom user ID (optional)
+## Implement automatic tracking
 
-Adding a custom user ID with the Snowplow Javascript Tracker is easy. You'll simply add this line to your out of the box tracking:
-
-```javascript
-window.snowplow('setUserId', "example_user_id");
-```
-
-If you are using Google Tag Manager, you can add the variable like so:
+Ensure you have implemented the following JS tracker methods (directly or via GTM):
 
 ```javascript
-window.snowplow('setUserId', "{{example_user_id_variable}}");
-```
-
-Make sure you add this method before you start tracking events, i.e.
-
-```javascript
-window.snowplow('setUserId', "example_user_id");
 window.snowplow('enableActivityTracking', { minimumVisitLength: 10, heartbeatDelay: 10 });
 window.snowplow('enableLinkClickTracking');
 window.snowplow('trackPageView');
@@ -70,9 +57,7 @@ CREATE TABLE derived.user_engagement AS(
     SELECT
         -- user information
         ev.domain_userid,
-        LAST_VALUE(ev.network_userid) OVER (PARTITION BY ev.domain_userid ORDER BY ev.derived_tstamp) AS network_userid,
-        LAST_VALUE(ev.user_id) OVER (PARTITION BY ev.domain_userid ORDER BY ev.derived_tstamp) AS user_id,
-        ev.user_ipaddress AS ip_address, 
+        ev.user_ipaddress AS ip_address,
         ev.geo_country AS country, -- this field will be null in Try Snowplow and BDP Cloud, as we cannot enable MaxMind geo data due to CCPA regulation
         ev.geo_city AS city, -- this field will be null in Try Snowplow and BDP Cloud, as we cannot enable MaxMind geo data due to CCPA regulation
         ua.useragent_family AS browser,
@@ -92,7 +77,7 @@ CREATE TABLE derived.user_engagement AS(
         ON ev.event_id = ua.root_id AND ev.collector_tstamp = ua.root_tstamp
 
     WHERE ev.domain_userid IS NOT NULL
-    GROUP BY 1,4,5,6,7,8, ev.network_userid, ev.user_id, ev.derived_tstamp
+    GROUP BY 1,2,3,4,5,6
 
 );
 ```
@@ -105,13 +90,13 @@ SELECT * FROM derived.user_engagement;
 
 ## Let's break down what we've done
 
-- You have learnt what user identifiers Snowplow tracks out of the box, and how you can add a custom user ID to Snowplow web events.
+- You have learnt what user identifiers Snowplow tracks out of the box
 - You have created a simple user engagement table that aggregates user activity into an easily queryable format. This allows you to better understand how your users are interacting with your site.
 
 ## What you might want to do next
 
-This recipe covers a really simple example of aggregating user engagement based on Snowplow's out of the box events and the custom user ID only. Next, you might want to
+This recipe covers a really simple example of aggregating user engagement based on Snowplow's out of the box events only. Next, you might want to
 
-- Build a user stitching table to make sure you are including all user activity correctly based on the different identifiers you observe across platforms. You can explore Snowplow's approach to user stitching in [our single customer view recipe](/docs/recipes/recipe-single-customer-view/index.md).
+- Build a user stitching table to make sure you are including all user activity correctly based on the different identifiers you observe across platforms, including a custom set user ID. You can explore Snowplow's approach to user stitching in [our single customer view recipe](/docs/recipes/recipe-single-customer-view/index.md).
 - Instrument additional events to better understand how your users are engaging with you.
 - Start to think about how you might use user attributes and user behaviour to segment your user base. Segmentation is the first step towards personalizing user experience.

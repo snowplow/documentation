@@ -1139,8 +1139,9 @@ _`"null"` is not considered for type casting logic. Only for nullability constra
 }
 ```
 
-Objects could be nullable. Missing `"properies"` key would fallback entire object to `"STRING"`. Nullability rules 
-are followed normally for the nested fields.  
+If the `"properties"` key is missing, the type for the entire object will be `STRING` instead of `RECORD`.
+
+Objects can be nullable. Nested fields can also be nullable (same rules as for everything else).
 
 </td>
 <td>

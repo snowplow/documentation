@@ -90,13 +90,13 @@ SELECT * FROM derived.user_engagement;
 
 ## Let's break down what we've done
 
-- You have learnt what user identifiers Snowplow tracks out of the box, and how you can add a custom user ID to Snowplow web events.
+- You have learnt what user identifiers Snowplow tracks out of the box
 - You have created a simple user engagement table that aggregates user activity into an easily queryable format. This allows you to better understand how your users are interacting with your site.
 
 ## What you might want to do next
 
-This recipe covers a really simple example of aggregating user engagement based on Snowplow's out of the box events and the custom user ID only. Next, you might want to
+This recipe covers a really simple example of aggregating user engagement based on Snowplow's out of the box events only. Next, you might want to
 
-- Build a user stitching table to make sure you are including all user activity correctly based on the different identifiers you observe across platforms. You can explore Snowplow's approach to user stitching in [our single customer view recipe](/docs/recipes/recipe-single-customer-view/index.md).
+- Build a user stitching table to make sure you are including all user activity correctly based on the different identifiers you observe across platforms, including a custom set user ID. You can explore Snowplow's approach to user stitching in [our single customer view recipe](/docs/recipes/recipe-single-customer-view/index.md).
 - Instrument additional events to better understand how your users are engaging with you.
 - Start to think about how you might use user attributes and user behaviour to segment your user base. Segmentation is the first step towards personalizing user experience.

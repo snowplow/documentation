@@ -26,7 +26,7 @@ With all web events the Snowplow JavaScript tracker captures the following user 
 
 Please note that in Try Snowplow and BDP Cloud, these fields (as well as the `domain_sessionid`) are being hashed with Snowplow's [PII enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md) to protect user privacy. With Snowplow BDP, you are able to configure this enrichment to hash (or not hash) any number of out of the box or custom fields.
 
-Additionally, Snowplow allows you to specify a custom user ID, which we'll be adding in this recipe. We'll then build a user engagement table to explore how you can develop a better understanding of how your users engage with you over time.
+We end by building a user engagement table to explore how you can develop a better understanding of how your users engage with you over time.
 
 ## Implement automatic tracking
 

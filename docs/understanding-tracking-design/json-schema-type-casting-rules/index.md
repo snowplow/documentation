@@ -1128,6 +1128,49 @@ _`"null"` is not considered for type casting logic. Only for nullability constra
 
 </td>
 </tr>
+
+<tr>
+<td>
+
+```json
+{
+    "type": "object",
+    "properties": {...}
+}
+```
+
+Objects could be nullable. Missing `"properies"` key would fallback entire object to `"STRING"`. Nullability rules 
+are followed normally for the nested fields.  
+
+</td>
+<td>
+
+`RECORD`
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+```json
+{
+    "type": "array",
+    "items": {...}
+}
+```
+
+Arrays could be nullable. Missing `"items"` key would fallback entire array to `"STRING"`. Nullability rules
+are followed normally for the nested items.
+
+</td>
+<td>
+
+`REPEATED`
+
+</td>
+</tr>
+
 <tr>
 <td>
 

@@ -1161,8 +1161,9 @@ Objects can be nullable. Nested fields can also be nullable (same rules as for e
 }
 ```
 
-Arrays could be nullable. Missing `"items"` key would fallback entire array to `"STRING"`. Nullability rules
-are followed normally for the nested items.
+If the `"items"` key is missing, the type for the entire array will be `STRING` instead of `REPEATED`.
+
+Arrays can be nullable. Nested fields can also be nullable (same rules as for everything else).
 
 </td>
 <td>

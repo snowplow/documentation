@@ -8,6 +8,9 @@ sidebar_position: 17000
 import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
 
 <Block5966/>
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 ```
 
 # Snowplow Media Tracking
@@ -15,9 +18,9 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 This plugin will allow the tracking of an embedded YouTube IFrame.
 
 | Tracker Distribution | Included |
-| --- | --- |
-| `sp.js` | ❌ |
-| `sp.lite.js` | ❌ |
+| -------------------- | -------- |
+| `sp.js`              | ❌        |
+| `sp.lite.js`         | ❌        |
 
 ## Download
 
@@ -27,42 +30,72 @@ This plugin will allow the tracking of an embedded YouTube IFrame.
 
 ## Quick Start
 
-To start tracking a YouTube video with default settings, use the snippet below after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md):
+The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md). 
 
-**`index.html`**
+:::info The plugin's `id` attribute will accept:
+
+- The `id` of an `iframe` element
+- An existing instance of `YT.Player`, created with the [YouTube Iframe API](https://developers.google.com/youtube/iframe_api_reference)
+
+:::
+
+<Tabs>
+  <TabItem value="iframe" label="Iframe" default>
 
 ```html
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Snowplow YouTube Tracking Example</title>
-    <script src="main.js"></script>
-  </head>
   <body>
     <iframe
-      id="example-id"
+      id="yt-player"
       src="https://www.youtube.com/embed/zSM4ZyVe8xs"
     ></iframe>  
+
+    <script>
+      window.snowplow(
+        'addPlugin',
+        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
+        ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
+      );
+
+      window.snowplow('enableYouTubeTracking', {
+        id: 'yt-player'
+      });
+    </script>
   </body>
 </html>
 ```
 
-**`main.js`**
+</TabItem>
+<TabItem value="player" label="YT.Player Instance">
 
-```javascript
-window.snowplow(
-    'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
-    ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
-);
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="yt-player"></div>
 
-window.snowplow('enableYouTubeTracking', {
-    id: 'example-id',
-    options: {
-        label: 'My Video Title',
-        boundaries: [10, 25, 50, 75]
-    }
-});
+    <script>
+      window.snowplow(
+        'addPlugin',
+        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
+        ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
+      );
+
+      const player = new YT.Player('yt-player', {
+        videoId: 'zSM4ZyVe8xs'
+      });
+
+      window.snowplow('enableYouTubeTracking', {
+          id: player
+      });
+    </script>
+  </body>
+</html>
 ```
+
+  </TabItem>
+</Tabs>
 
 ## The enableYouTubeTracking function
 
@@ -72,13 +105,13 @@ The `enableYouTubeTracking` function takes the form:
 window.snowplow("enableYouTubeTracking", { id, options?: { label?, captureEvents?, boundaries?, updateRate? } })
 ```
 
-| Parameter | Type | Default | Description | Required |
-| --- | --- | --- | --- | --- |
-| `id` | `string` | \- | The HTML id attribute of the media element | Yes |
-| `options.label` | `string` | \- | An identifiable custom label sent with the event | No |
-| `options.captureEvents` | `string[]` | `["DefaultEvents"]` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No |
-| `options.boundaries` | `number[]` | `[10, 25, 50, 75]` | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1) | No |
-| `options.updateRate` | `number` | `250` | The rate at which `seek` and `volumechange` events can occur [[2]](#2) | No |
+| Parameter               | Type                    | Default             | Description                                                                                                    | Required |
+| ----------------------- | ----------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------- | -------- |
+| `id`                    | `string` or `YT.Player` | \-                  | The HTML id attribute of the media element, or an instance of `YT.Player`                                      | Yes      |
+| `options.label`         | `string`                | \-                  | An identifiable custom label sent with the event                                                               | No       |
+| `options.captureEvents` | `string[]`              | `["DefaultEvents"]` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
+| `options.boundaries`    | `number[]`              | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                         | No       |
+| `options.updateRate`    | `number`                | `250`               | The rate at which `seek` and `volumechange` events can occur [[2]](#2)                                         | No       |
 
 Below is an example of the full `enableYouTubeTracking` function:
 
@@ -94,53 +127,32 @@ window.snowplow('enableYouTubeTracking', {
 })
 ```
 
-## Usage
-
-For this plugin to find your media element, your IFrame must be given the id that is passed into `enableYouTubeTracking`:
-
-**`index.html`**
-
-```html
- <iframe
-      id="example-id"
-      src="https://www.youtube.com/embed/zSM4ZyVe8xs"
-></iframe>
-```
-
-**`main.js`**
-
-```javascript
-window.snowplow('enableYouTubeTracking', {
-  id: "example-id"
-})
-```
-
 ## Events
 
 ### Capturable Events
 
 Below is a table of all the events that can be used in `options.captureEvents`
 
-| Name | Fire Condition |
-| --- | --- |
-| play | The video is played |
-| pause | The video is paused |
-| seek | On seek |
-| volumechange | Volume has changed |
-| ended | When playback stops at the end of the video |
-| error | An error occurs in the player |
-| percentprogress | When a percentage boundary set in `options.boundaries` is reached |
-| playbackratechange | Playback rate has changed |
-| playbackqualitychange | Playback quality has changed |
+| Name                  | Fire Condition                                                    |
+| --------------------- | ----------------------------------------------------------------- |
+| play                  | The video is played                                               |
+| pause                 | The video is paused                                               |
+| seek                  | On seek                                                           |
+| volumechange          | Volume has changed                                                |
+| ended                 | When playback stops at the end of the video                       |
+| error                 | An error occurs in the player                                     |
+| percentprogress       | When a percentage boundary set in `options.boundaries` is reached |
+| playbackratechange    | Playback rate has changed                                         |
+| playbackqualitychange | Playback quality has changed                                      |
 
 ### Event Groups
 
 You can also use a pre-made event group in `options.captureEvents`:
 
-| Name | Events |
-| --- | --- |
+| Name            | Events                                                                                                                 |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `DefaultEvents` | `["play", "pause", "seek", "volumechange", "ended", "percentprogress", "playbackratechange", "playbackqualitychange"]` |
-| `AllEvents` | Every event listed in [Capturable Events](#capturable-events) |
+| `AllEvents`     | Every event listed in [Capturable Events](#capturable-events)                                                          |
 
 It is possible to extend an event group with any event in the Events table above. This could be useful if you want, for example, all the events contained in the "DefaultEvents" group, along with the "error" event. This is expressed in the following way:
 

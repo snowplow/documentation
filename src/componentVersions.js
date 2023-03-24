@@ -18,7 +18,7 @@ export const versions = {
   rubyTracker: '0.8.0',
   rustTracker: '0.2.0',
   scalaTracker: '2.0.0',
-  unityTracker: '0.6.1',
+  unityTracker: '0.6.3',
   webViewTracker: '0.2.0',
 
   // Core pipeline

@@ -92,6 +92,6 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tra
 
 ## Configuration
 
-Once your script is ready, you can configure it in the app by following the [Javascript](docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) or [Lua](docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/lua-configuration/index.md) configuration pages.
+Once your script is ready, you can configure it in the app by following the [Javascript](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) or [Lua](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/lua-configuration/index.md) configuration pages.
 
-You can also find some complete example use cases in [the examples section](docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/index.md).
+You can also find some complete example use cases in [the examples section](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/index.md).

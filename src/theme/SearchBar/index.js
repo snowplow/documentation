@@ -5,7 +5,10 @@ import { useHistory } from '@docusaurus/router'
 import { useBaseUrlUtils } from '@docusaurus/useBaseUrl'
 import Link from '@docusaurus/Link'
 import Head from '@docusaurus/Head'
-import { isRegexpStringMatch, useSearchLinkCreator } from '@docusaurus/theme-common'
+import {
+  isRegexpStringMatch,
+  useSearchLinkCreator,
+} from '@docusaurus/theme-common'
 import { DocSearchButton, useDocSearchKeyboardEvents } from '@docsearch/react'
 import { useAlgoliaContextualFacetFilters } from '@docusaurus/theme-search-algolia/client'
 import Translate from '@docusaurus/Translate'
@@ -26,17 +29,18 @@ let DocSearchModal = null
 function Hit({ hit, children }) {
   return <Link to={hit.url}>{children}</Link>
 }
-function ResultsFooter({state, onClose}) {
-  const createSearchLink = useSearchLinkCreator();
+function ResultsFooter({ state, onClose }) {
+  const createSearchLink = useSearchLinkCreator()
   return (
     <Link to={createSearchLink(state.query)} onClick={onClose}>
       <Translate
         id="theme.SearchBar.seeAll"
-        values={{count: state.context.nbHits}}>
+        values={{ count: state.context.nbHits }}
+      >
         {'See all {count} results'}
       </Translate>
     </Link>
-  );
+  )
 }
 function mergeFacetFilters(f1, f2) {
   const normalize = (f) => (typeof f === 'string' ? [f] : f)

@@ -20,7 +20,7 @@ Different data warehouses handle schema evolution slightly differently. Use the 
 
 :::caution
 
-In Redshift, changing _size_ may also mean _type_ change; e.g. changing the `maximum` integer from say `30000` to `100000`. See our documentation on [how schemas translate to database types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md), as well as Redshift’s documentation on [numeric types](https://docs.aws.amazon.com/redshift/latest/dg/r_Numeric_types201.html).
+In Redshift and Databricks, changing _size_ may also mean _type_ change; e.g. changing the `maximum` integer from `30000` to `100000`. See our documentation on [how schemas translate to database types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md).
 
 :::
 

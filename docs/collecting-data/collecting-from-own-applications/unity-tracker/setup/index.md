@@ -8,7 +8,7 @@ sidebar_position: 10
 
 ### Tracker compatibility
 
-The Snowplow Unity Tracker has been built and tested using Unity 2020.3 on Windows, Linux, OSX, iOS and Android. It is built using .NET Standard 2.0 and requires at least Unity 2018.1.
+The Snowplow Unity Tracker has been built and tested using Unity 2021.3 on Windows, Linux, OSX, iOS and Android. It is built using .NET Standard 2.0 and requires at least Unity 2018.1.
 
 It is not currently compatible with the WebPlayer.
 

@@ -85,6 +85,7 @@ def main():
     with open("src/dbtVersions.js", "w") as fdesc:
         fdesc.write('export const dbtVersions = ')
         json.dump(package_list, fdesc, indent = 4)
+        fdesc.write('\n')
 
 
 if __name__ == '__main__':

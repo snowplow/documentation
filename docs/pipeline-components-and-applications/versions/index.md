@@ -1,5 +1,5 @@
 ---
-title: "Latest compatibility matrix"
+title: "Versions and compatibility"
 date: "2021-04-29"
 sidebar_position: -1000
 ---
@@ -12,7 +12,37 @@ import remarkGfm from 'remark-gfm';
 import {versions} from '@site/src/componentVersions';
 ```
 
-## Core pipeline
+## Compatibility
+
+In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
+
+You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md#consent-tracking-custom-module) might call for a reasonably recent version of the [warehouse loader](/docs/destinations/warehouses-and-lakes/rdb/index.md).
+
+:::tip
+
+When in doubt, feel free to start a thread on [Discourse](https://discourse.snowplow.io/).
+
+:::
+
+## Upgrades and deprecation
+
+:::info Snowplow BDP
+
+If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to deal with upgrading your pipeline, as we perform upgrades for you.
+
+:::
+
+Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/upgrade-guides/index.md).
+
+From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Discourse](https://discourse.snowplow.io/).
+
+We still keep the [documentation for legacy applications](/docs/pipeline-components-and-applications/legacy/index.md) for reference, along with guidance on what they have been replaced with.
+
+---
+
+## Latest versions
+
+### Core pipeline
 
 :::info Snowplow BDP
 
@@ -54,7 +84,7 @@ Component | Latest version
 </TabItem>
 </Tabs>
 
-## Iglu (schema registry)
+### Iglu (schema registry)
 
 :::info Snowplow BDP
 
@@ -72,7 +102,7 @@ Component | Latest version
 [Iglu Objective-C client](/docs/pipeline-components-and-applications/iglu/iglu-clients/objc-client/index.md) | ${versions.igluObjCClient}
 `} remarkPlugins={[remarkGfm]} />
 
-## Trackers
+### Trackers
 
 <ReactMarkdown children={`
 Tracker | Latest version
@@ -99,9 +129,9 @@ Tracker | Latest version
 [Lua](/docs/collecting-data/collecting-from-own-applications/lua-tracker/index.md) | ${versions.luaTracker}
 `} remarkPlugins={[remarkGfm]} />
 
-## Data Models
+### Data Models
 
-### dbt
+#### dbt
 
 [Modeling data with dbt](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) is our recommended approach.
 
@@ -113,7 +143,7 @@ import ModelVersionsDbt from '@site/docs/modeling-your-data/modeling-your-data-w
 
 See also the [dbt version compatibility checker](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md#dbt-version-compatibility-checker).
 
-### SQL Runner
+#### SQL Runner
 
 :::note
 
@@ -131,7 +161,7 @@ import ModelVersionsSqlRunner from '@site/docs/modeling-your-data/modeling-your-
 <ModelVersionsSqlRunner/>
 ```
 
-## Testing and debugging
+### Testing and debugging
 
 :::info Snowplow BDP
 
@@ -146,7 +176,7 @@ Application | Latest version
 [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/index.md) | ${versions.snowplowMini}
 `} remarkPlugins={[remarkGfm]} />
 
-## Analytics SDKs
+### Analytics SDKs
 
 <ReactMarkdown children={`
 SDK | Latest version

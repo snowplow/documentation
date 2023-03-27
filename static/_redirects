@@ -101,3 +101,5 @@
 /docs/pipeline-components-and-applications/snowplow-mini/previous-releases/* /docs/pipeline-components-and-applications/snowplow-mini/ 301
 
 /docs/pipeline-components-and-applications/sqs2kinesis/* /docs/pipeline-components-and-applications/legacy/sqs2kinesis/:splat 301
+
+/docs/pipeline-components-and-applications/version-compatibility-matrix/* /docs/pipeline-components-and-applications/versions/ 301

@@ -17,10 +17,7 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
         cols={34}
         maxLength="999"
       />
-      <button
-        className="snwpl-nav-button"
-        type="submit"
-      >
+      <button className="snwpl-nav-button" type="submit">
         Send feedback
       </button>
     </form>
@@ -99,19 +96,19 @@ function Feedback() {
         </svg>
         <span>Was this page helpful?</span>
         <button
-            className="snwpl-nav-button"
-            ref={buttonLikeRef}
-            onClick={handleLike}
-          >
-            Yes
-          </button>
-          <button
-            className="snwpl-nav-button"
-            ref={buttonDislikeRef}
-            onClick={handleDislike}
-          >
-            No
-          </button>
+          className="snwpl-nav-button"
+          ref={buttonLikeRef}
+          onClick={handleLike}
+        >
+          Yes
+        </button>
+        <button
+          className="snwpl-nav-button"
+          ref={buttonDislikeRef}
+          onClick={handleDislike}
+        >
+          No
+        </button>
       </div>
       {isTextboxVisible && (
         <CommentBox

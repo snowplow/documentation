@@ -3,8 +3,8 @@
 
 const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
-const math = require('remark-math');
-const katex = require('rehype-katex');
+const math = require('remark-math')
+const katex = require('rehype-katex')
 
 /** @returns {import('@docusaurus/types').Config} */
 async function createConfig() {
@@ -35,9 +35,7 @@ async function createConfig() {
       require.resolve('./google.js'),
     ],
 
-    themes : [
-      '@saucelabs/theme-github-codeblock'
-    ],
+    themes: ['@saucelabs/theme-github-codeblock'],
 
     presets: [
       [

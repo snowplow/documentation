@@ -101,7 +101,7 @@ The tracker sends events asynchrounously in batches using POST requests. In case
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let eventStore = CustomEventStore(namespace: kNamespace);
+let eventStore = CustomEventStore(namespace: trackerNamespace);
 let emitterConfig = EmitterConfiguration()
       .eventStore(eventStore)
 ```
@@ -110,7 +110,7 @@ let emitterConfig = EmitterConfiguration()
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val eventStore: EventStore = CustomEventStore(applicationContext, kNamespace)
+val eventStore: EventStore = CustomEventStore(applicationContext, trackerNamespace)
 
 val emitterConfiguration = EmitterConfiguration()
     .eventStore(eventStore)
@@ -120,7 +120,7 @@ val emitterConfiguration = EmitterConfiguration()
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-EventStore eventStore = new CustomEventStore(getApplicationContext(), kNamespace);
+EventStore eventStore = new CustomEventStore(getApplicationContext(), trackerNamespace);
 
 EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
       .eventStore(eventStore);

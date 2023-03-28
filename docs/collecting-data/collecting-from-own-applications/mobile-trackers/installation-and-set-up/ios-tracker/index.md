@@ -75,7 +75,7 @@ The tracker has a default configuration where some settings are enabled by defau
 You can override the default configuration with a fine grained configuration when you create the tracker:
 
 ```swift
-Snowplow.createTracker(namespace: "appTracker", endpoint: COLLECTOR_URL) {
+Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com") {
   TrackerConfiguration()
       .base64Encoding(false)
       .sessionContext(true)

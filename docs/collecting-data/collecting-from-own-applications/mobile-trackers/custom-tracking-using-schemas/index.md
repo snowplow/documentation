@@ -28,8 +28,8 @@ You may wish to track events in your app which are not directly supported by Sno
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let data = ["targetUrl": "http://a-target-url.com" as NSObject];       
-let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)       
+let data = ["targetUrl": "http://a-target-url.com"];       
+let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
 
 tracker.track(event)
 ```
@@ -210,13 +210,17 @@ This can be done at tracker setup declaring the contexts generator and the suita
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let staticContext = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExample"] as NSMutableDictionary)
+// context entity to add to all events
+let staticContext = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExample"])
 
+// create a GlobalContext instance with the entity as a static context
 let staticGlobalContext = GlobalContext(staticContexts: [staticContext])
 
+// create a GlobalContextsConfiguration and assign the GlobalContext with a unique tag identifier
 let globalContextsConfig = GlobalContextsConfiguration()
-    .contextGenerators(["staticExampleTag": staticGlobalContext] as NSMutableDictionary)
+    .contextGenerators(["staticExampleTag": staticGlobalContext])
 
+// pass the configuration when creating a new tracker
 let tracker = Snowplow.createTracker(namespace: ..., network: ..., configurations: [..., globalContextsConfig])
 ```
 
@@ -224,20 +228,24 @@ let tracker = Snowplow.createTracker(namespace: ..., network: ..., configuration
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
+// context entity to add to all events
 val staticContext = SelfDescribingJson(
     "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
     mapOf(
         "key" to "staticExample"
     )
 )
+// create a GlobalContext instance with the entity as a static context
 val staticGlobalContext = GlobalContext(listOf(staticContext))
 
+// create a GlobalContextsConfiguration and assign the GlobalContext with a unique tag identifier
 val globalContextsConfig = GlobalContextsConfiguration(
     mutableMapOf(
         "staticExampleTag" to staticGlobalContext
     )
 )
 
+// pass the configuration when creating a new tracker
 Snowplow.createTracker(applicationContext, namespace, networkConfiguration, globalContextsConfig)
 ```
 
@@ -245,16 +253,20 @@ Snowplow.createTracker(applicationContext, namespace, networkConfiguration, glob
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
+// context entity to add to all events
 SelfDescribingJson staticContext = new SelfDescribingJson(
     "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0",
     new HashMap<String, String>() {{ put("key", "staticExample"); }}
 );
+// create a GlobalContext instance with the entity as a static context
 GlobalContext staticGlobalContext = new GlobalContext(Arrays.asList(staticContext));
 
+// create a GlobalContextsConfiguration and assign the GlobalContext with a unique tag identifier
 GlobalContextsConfiguration globalContextsConfig = new GlobalContextsConfiguration(
     new HashMap<String, GlobalContext>() {{ put("staticExampleTag", staticGlobalContext); }}
 );
 
+// pass the configuration when creating a new tracker
 Snowplow.createTracker(getApplicationContext(), namespace, networkConfiguration, globalContextsConfig);
 ```
 
@@ -325,7 +337,7 @@ This is useful in cases where the entity is static and it's always the same. A c
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let staticContext = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExample"] as NSMutableDictionary)
+let staticContext = SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["key": "staticExample"])
 ```
 
   </TabItem>
@@ -365,7 +377,7 @@ The `InspectableEvent` is an interface that exposes internal data of the process
 ```swift
 let contextGenerator = GlobalContext(generator: {  event in
             return [
-                SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["eventName": event.schema!] as NSMutableDictionary)
+                SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["eventName": event.schema!])
             ]
         })
 ```

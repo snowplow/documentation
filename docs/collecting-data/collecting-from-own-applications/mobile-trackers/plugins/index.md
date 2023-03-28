@@ -65,7 +65,7 @@ When no list of schemas is passed, the callback is called for all tracked events
 ```swift
 plugin.entities(schemas: [
     // The list of schemas to call the closure for is optional. If not passed, the callback is called for all events.
-    "iglu:com.google.analytics.measurement-protocol/screen_view/jsonschema/1-0-0", // screen view events
+    "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", // screen view events
     "se" // structured events
 ]) { event in
     return [

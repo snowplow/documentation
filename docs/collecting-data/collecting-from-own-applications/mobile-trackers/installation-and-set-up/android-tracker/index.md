@@ -19,7 +19,7 @@ The Android Tracker SDK can be installed using Gradle.
 
 Add into your `build.gradle` file:
 
-```ruby
+```gradle
 dependencies {
   ...
   // Snowplow Android Tracker
@@ -41,7 +41,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 
     ```kotlin
     val tracker = Snowplow.createTracker(
-        context, // Android context
+        applicationContext, // Android context (LocalContext.current in Compose apps)
         "appTracker", // namespace
         "https://snowplow-collector-url.com", // Snowplow collector URL
         HttpMethod.POST // HTTP method
@@ -53,7 +53,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 
     ```java
     TrackerController tracker = Snowplow.createTracker(
-          context, // Android context
+          getApplicationContext(), // Android context
           "appTracker", // namespace
           "https://snowplow-collector-url.com", // Snowplow collector URL
           HttpMethod.POST // HTTP method
@@ -137,7 +137,7 @@ val sessionConfig = SessionConfiguration(
     TimeMeasure(30, TimeUnit.SECONDS)
 )
 createTracker(
-    context,
+    applicationContext,
     "appTracker",
     networkConfig,
     trackerConfig,
@@ -168,7 +168,7 @@ SessionConfiguration sessionConfig = new SessionConfiguration(
     new TimeMeasure(30, TimeUnit.SECONDS),
     new TimeMeasure(30, TimeUnit.SECONDS)
 );
-Snowplow.createTracker(context,
+Snowplow.createTracker(getApplicationContext(),
     "appTracker",
     networkConfig,
     trackerConfig,

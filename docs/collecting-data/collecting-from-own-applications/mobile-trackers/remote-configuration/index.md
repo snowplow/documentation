@@ -17,12 +17,12 @@ With remote configuration, the developer just indicates to the tracker how to do
 
 Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker for the remote configuration:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
 1. In your application delegate `AppDelegate.swift` add `import SnowplowTracker`.
 
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
 
 ```swift
 // Indicate the URL where to download the config file

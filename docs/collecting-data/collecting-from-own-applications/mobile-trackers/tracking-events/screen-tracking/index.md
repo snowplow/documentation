@@ -75,14 +75,40 @@ struct ProductDetail: View {
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
+## Screen View tracking in traditional Activity-based apps
+
+The screen view tracking for Activities (screens) is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
+
 ```kotlin
 val trackerConfig = TrackerConfiguration("appId")
     .screenViewAutotracking(true)
     .screenContext(true)
 ```
 
+Using the Android `Application.ActivityLifecycleCallbacks` interface, the tracker automatically detects when Activities are loaded and tracks events that include information about the current and previous Activity.
+
+## Screen View tracking in Jetpack Compose apps
+
+Apps built with Jetpack Compose are constructed from Composable functions rather than Activities, and so the built-in ScreenViewAutotracking will not work.
+
+One possibility for an equivalent functionality is to add a navigation listener, which can track a screen view for each new destination. 
+
+
+```kotlin
+fun autoTrackScreenView(navController: NavController) {
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+        Snowplow.defaultTracker?.track(ScreenView(destination.route ?: "null"))
+    }
+}
+```
+Try out this example in the Compose demo inside the [Android codebase](https://github.com/snowplow/snowplow-android-tracker).
+
   </TabItem>
   <TabItem value="android-java" label="Android (Java)">
+
+## Screen View tracking in traditional Activity-based apps
+
+The screen view tracking for Activities (screens) is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
 
 ```java
 TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
@@ -90,13 +116,18 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .screenContext(true);
 ```
 
+
+Using the Android `Application.ActivityLifecycleCallbacks` interface, the tracker automatically detects when Activities are loaded and tracks events that include information about the current and previous Activity.
+
   </TabItem>
 </Tabs>
 
-The configuration is composed of two settings:
+## Screen view event and screen context entity
 
-- `screenViewAutotracking`: the tracker automatically tracks each screen change using a [`ScreenView` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
-- `screenContext`: the tracker attaches a [`Screen` entity](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
+Automatic screen view tracking tracks two pieces of information:
+
+- The tracker automatically tracks each screen change using a [`ScreenView` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
+- If the `TrackerConfiguration.screenContext` property is enabled, the tracker attaches a [`Screen` entity](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
 
 The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event, even if it was manually tracked and the app is in a different screen.
 

@@ -94,7 +94,11 @@ vars:
 
 :::
 
-### 6. Run your model
+### 6. Removing unused modules
+
+If you are not using certain entities described in the [Snowplow E-commerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/) documentation, you may want to remove these models from being created during a standard dbt run. You'll find some ways to do this in the [disabling modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-disable-modules/index.md) documentation.
+
+### 7. Run your model
 
 You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package):
 

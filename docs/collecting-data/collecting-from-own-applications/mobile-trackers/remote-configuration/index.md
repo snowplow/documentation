@@ -195,7 +195,7 @@ Snowplow.refresh(
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Snowplow.refresh(context, configurationPair -> {
+Snowplow.refresh(getApplicationContext(), configurationPair -> {
   List<String> namespaces = configurationPair.first;
   ConfigurationState configurationState = configurationPair.second;
 
@@ -243,7 +243,7 @@ Snowplow.refresh(onSuccess: successCallback)
 
 ```kotlin
 // Load configuration with userId = nil
-Snowplow.setup(context, remoteConfig, defaultConfig, successCallback)
+Snowplow.setup(applicationContext, remoteConfig, defaultConfig, successCallback)
 
 /* userId is set to nil */
 
@@ -256,7 +256,7 @@ tracker.subject.userId = "my-runtime-updated-userId"
 ...later...
 
 // Later refreshing the configuration with userId = nil
-Snowplow.refresh(context, successCallback)
+Snowplow.refresh(applicationContext, successCallback)
 
 /* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
 ```

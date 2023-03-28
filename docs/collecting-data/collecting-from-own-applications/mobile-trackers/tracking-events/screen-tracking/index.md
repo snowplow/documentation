@@ -28,7 +28,7 @@ let trackerConfig = TrackerConfiguration()
 
 Using method swizzling in the `ViewController` class, the tracker automatically detects when screens are loaded (triggered by viewDidAppear in a ViewController) and tracks events that include information about the current and previous view controllers.
 
-## Screen View Tracking in SwiftUI
+## Screen View tracking in SwiftUI
 
 The tracker is able to track screen view events when selected view components appear in the SwiftUI lifecycle.
 To provide this functionality, it implements an extension over the `View` component which lets you annotate the components the events should be tracked for using the `snowplowScreen()` function:
@@ -93,9 +93,9 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
   </TabItem>
 </Tabs>
 
-The configuration is composed by two settings:
+The configuration is composed of two settings:
 
-- `screenViewAutotracking`: the tracker automatically tracks each screen change (triggered by `viewDidAppear` in a `ViewController`) using a [`ScreenView` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
+- `screenViewAutotracking`: the tracker automatically tracks each screen change using a [`ScreenView` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
 - `screenContext`: the tracker attaches a [`Screen` entity](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
 
 The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event, even if it was manually tracked and the app is in a different screen.

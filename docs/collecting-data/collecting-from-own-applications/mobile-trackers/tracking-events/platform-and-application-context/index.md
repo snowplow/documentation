@@ -82,7 +82,7 @@ The [platform context entity](https://github.com/snowplow/iglu-central/blob/mast
 | `availableStorage` | Integer | Bytes of storage remaining | No |
 | `totalStorage` | Integer | Total size of storage in bytes | No |
 
-### Identifier for Advertisers (IDFA)
+### Identifier for Advertisers (IDFA/AAID)
 
 The IDFA advertising identifiers are only added to the platform context if you fulfill the following requirements.
 Otherwise, their values will be NULL.

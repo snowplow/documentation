@@ -25,12 +25,14 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>macros/channel_classification.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A macro used to perform channel classifications. Each channel should be classified a name that is a valid field name as it will be used for that purpose, once unnested downstream.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 A sql of case statements that determine which channel is classified (it is most likely unique to each organisation, the sample provided is based on Google's Fractribution).
 
@@ -55,7 +57,8 @@ Example:
     end
 ```
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 
@@ -64,20 +67,22 @@ select {{ channel_classification() }} as channel,
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/channel_classification.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro channel_classification() %}
     {{ return(adapter.dispatch('channel_classification', 'snowplow_fractribution')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -104,6 +109,7 @@ select {{ channel_classification() }} as channel,
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -130,15 +136,17 @@ select {{ channel_classification() }} as channel,
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_sessions_by_customer_id](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_sessions_by_customer_id)
 
@@ -152,7 +160,8 @@ select {{ channel_classification() }} as channel,
 <code>macros/channel_spend.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A macro for the user to overwrite it with a sql script to extract total ad spend by channel.
 
  -- Example (simplified) query:
@@ -173,12 +182,14 @@ A macro for the user to overwrite it with a sql script to extract total ad spend
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 A sql script to extract channel and corresponding spend values from a data source.
 
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 
@@ -187,20 +198,22 @@ A sql script to extract channel and corresponding spend values from a data sourc
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/channel_spend.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro channel_spend() %}
     {{ return(adapter.dispatch('channel_spend', 'snowplow_fractribution')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -229,20 +242,28 @@ A sql script to extract channel and corresponding spend values from a data sourc
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.type_string
 - [macro.snowplow_utils.unnest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.unnest)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_channel_spend](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_channel_spend)
 
@@ -256,16 +277,19 @@ A sql script to extract channel and corresponding spend values from a data sourc
 <code>macros/conversion_clause.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A macro to let users specify how to filter on conversion events.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 A sql to be used in a WHERE clause to filter on conversion events.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 where {{ conversion_clause() }}
@@ -273,20 +297,22 @@ where {{ conversion_clause() }}
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/conversion_clause.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro conversion_clause() %}
     {{ return(adapter.dispatch('conversion_clause', 'snowplow_fractribution')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -295,15 +321,17 @@ where {{ conversion_clause() }}
     tr_total > 0
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_conversions_by_customer_id](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_conversions_by_customer_id)
 
@@ -317,16 +345,19 @@ where {{ conversion_clause() }}
 <code>macros/conversion_value.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A user defined macro that specifies either a single column or a calculated value that represents the value associated with the conversion.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 A sql to be used to refer to the conversion value.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 
@@ -335,20 +366,22 @@ select {{ conversion_value() }} as revenue
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/conversion_value.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro conversion_value() %}
     {{ return(adapter.dispatch('conversion_value', 'snowplow_fractribution')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -357,15 +390,17 @@ select {{ conversion_value() }} as revenue
     tr_total
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_conversions_by_customer_id](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_conversions_by_customer_id)
 
@@ -379,16 +414,19 @@ select {{ conversion_value() }} as revenue
 <code>macros/path_transformations/create_udfs.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Creates user defined functions for adapters apart from Databricks. It is executed as part of an on-start hook.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 Nothing, sql is executed which creates the UDFs in the target database and schema.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```yml
 -- dbt_project.yml
@@ -399,20 +437,22 @@ on-run-start: "{{ create_udfs() }}"
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/path_transformations/create_udfs.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro create_udfs() %}
   {{ return(adapter.dispatch('create_udfs', 'snowplow_fractribution')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -586,6 +626,7 @@ on-run-start: "{{ create_udfs() }}"
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -593,6 +634,7 @@ on-run-start: "{{ create_udfs() }}"
 {% macro default__create_udfs() %}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -757,6 +799,7 @@ on-run-start: "{{ create_udfs() }}"
   select 1;
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -764,15 +807,22 @@ on-run-start: "{{ create_udfs() }}"
 {% macro spark__create_udfs() %}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.run_query
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Get Lookback Date Limits {#macro.snowplow_fractribution.get_lookback_date_limits}
@@ -781,19 +831,23 @@ on-run-start: "{{ create_udfs() }}"
 <code>macros/get_lookback_date_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A macro returning the upper or lower boundary to limit what is processed by the sessions_by_customer_id model.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `limit_type` *(string)*: Can be either 'min' or 'max' depending on if the upper or lower boundary date needs to be returned
 
-#### Returns
+<h4>Returns</h4>
+
 
 A string value of the upper or lower date limit.
 
-#### Usage
+<h4>Usage</h4>
+
 
 A macro call with 'min' or 'max' given as a parameter.
 
@@ -817,20 +871,22 @@ where
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/get_lookback_date_limits.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro get_lookback_date_limits(limit_type) %}
   {{ return(adapter.dispatch('get_lookback_date_limits', 'snowplow_fractribution')(limit_type)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -895,22 +951,30 @@ where
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.current_timestamp
 - macro.dbt.dateadd
 - macro.dbt.run_query
 - [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_conversions_by_customer_id](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_conversions_by_customer_id)
 - [model.snowplow_fractribution.snowplow_fractribution_sessions_by_customer_id](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_sessions_by_customer_id)
@@ -925,22 +989,26 @@ where
 <code>macros/path_transformations/path_transformation.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Macro to execute the indvidual path_transformation specified as a parameter.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `transformation_type` *(string)*: A type of transformation that needs to be executed E.g. 'unique_path'. Needs to be one of the following: exposure_path, first_path, frequency_path, remove_if_last_and_not_all, remove_if_not_all, unique_path More details here https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/#path-transform-options
 
 - `transform_param` *(string)*: (Optional) The parameter value that the path transormation needs to execute,. Default none
 
-#### Returns
+<h4>Returns</h4>
+
 
 The transformed array column.
 
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 
@@ -949,20 +1017,22 @@ The transformed array column.
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/path_transformations/path_transformation.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro path_transformation(transformation_type, transform_param) %}
   {{ return(adapter.dispatch('path_transformation', 'snowplow_fractribution')(transformation_type, transform_param)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -978,6 +1048,7 @@ The transformed array column.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -1034,15 +1105,17 @@ The transformed array column.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_fractribution.transform_paths](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.transform_paths)
 
@@ -1056,20 +1129,24 @@ The transformed array column.
 <code>macros/path_transformations/transform_paths.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Macro to remove complexity from models paths_to_conversion / paths_to_non_conversion.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `model_type` *(string)*: The macro only expects 'conversions' in case it runs in the path_to_conversions in which case it adds more fields
 - `source_cte` *(string)*: The name of the cte to take as an input for the macro the build sql to
 
-#### Returns
+<h4>Returns</h4>
+
 
 The sql with the missing cte's that take care of path transformations.
 
-#### Usage
+<h4>Usage</h4>
+
 
 It is used by the transform_paths() macro for the transformation cte sql code build. It takes a transformation type as a parameter and its optional argument, if exists. The E.g.
 
@@ -1082,20 +1159,22 @@ select * from path_transforms
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/path_transformations/transform_paths.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro transform_paths(model_type, source_cte) %}
   {{ return(adapter.dispatch('transform_paths', 'snowplow_fractribution')(model_type, source_cte)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1143,6 +1222,7 @@ select * from path_transforms
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -1229,20 +1309,28 @@ select * from path_transforms
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_fractribution.path_transformation](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.path_transformation)
 - [macro.snowplow_fractribution.trim_long_path](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.trim_long_path)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion)
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion)
@@ -1257,21 +1345,25 @@ select * from path_transforms
 <code>macros/path_transformations/trim_long_path.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Returns the last 'snowplow__path_lookback_steps' number of channels in the path if snowplow__path_lookback_steps > 0, or the full path otherwise.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `array_column` *(string)*: The array column to be transformed
 - `lookback_steps` *(integer)*: Defaulted to be taken from the snowplow__path_lookback_steps, the number of path to leave starting from the end
 
-#### Returns
+<h4>Returns</h4>
+
 
 The transformed array column.
 
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 
@@ -1285,20 +1377,22 @@ from
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/path_transformations/trim_long_path.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro trim_long_path(array_column, lookback_steps=var('snowplow__path_lookback_steps')) %}
   {{ return(adapter.dispatch('trim_long_path', 'snowplow_fractribution')(array_column,lookback_steps)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1309,6 +1403,7 @@ from
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -1322,15 +1417,17 @@ from
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_fractribution.transform_paths](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.transform_paths)
 

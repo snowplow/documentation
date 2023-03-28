@@ -25,23 +25,26 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>macros/allow_refresh.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/macros/allow_refresh.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro allow_refresh() %}
   {{ return(adapter.dispatch('allow_refresh', 'snowplow_ecommerce')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -58,19 +61,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_quarantined_sessions)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
@@ -86,10 +97,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -112,9 +125,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 
@@ -128,10 +142,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -163,9 +179,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 
@@ -179,10 +196,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/coalesce_columns_by_prefix.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -202,13 +221,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_columns_in_relation_by_column_prefix](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_columns_in_relation_by_column_prefix)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run)
 
@@ -222,10 +248,12 @@ This macro does not currently have a description.
 <code>macros/event_name_filter.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -250,9 +278,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
@@ -267,10 +296,12 @@ This macro does not currently have a description.
 <code>macros/snowplow_delete_from_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -285,9 +316,15 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowplow_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_from_manifest)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Tracking Action Fields {#macro.snowplow_ecommerce.tracking_action_fields}
@@ -296,10 +333,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/unstruct_event_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -321,9 +360,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 
@@ -337,10 +377,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -363,9 +405,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 
@@ -379,10 +422,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -412,9 +457,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 
@@ -428,10 +474,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -454,9 +502,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 

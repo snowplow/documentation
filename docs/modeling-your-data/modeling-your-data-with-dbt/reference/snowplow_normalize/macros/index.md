@@ -25,23 +25,26 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>macros/allow_refresh.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/allow_refresh.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro allow_refresh() %}
   {{ return(adapter.dispatch('allow_refresh', 'snowplow_normalize')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -58,19 +61,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_normalize.snowplow_normalize_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_incremental_manifest)
 
@@ -84,10 +95,12 @@ This macro does not currently have a description.
 <code>macros/normalize_events.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A macro to produce a table from `base_events_this_run` with the input columns, for a single event type
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `event_names` *(array)*: List of names of the events this table will be filtered to
 - `flat_cols` *(array)*: List of standard columns from the atomic.events table to include
 - `sde_cols` *(string)*: Column names for the self-describing event to pull attributes from
@@ -100,20 +113,22 @@ A macro to produce a table from `base_events_this_run` with the input columns, f
 - `context_aliases` *(array)*: List of prefixes to apply to the respective context column keys to be used as final column names
 - `remove_new_event_check` *(boolean)*: A flag to disable the `with_new_events` part of the macro, to allow for integration tests to run
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/normalize_events.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro normalize_events(event_names, flat_cols = [], sde_cols = [], sde_keys = [], sde_types = [], sde_aliases = [], context_cols = [], context_keys = [], context_types = [], context_aliases = [], remove_new_event_check = false) %}
     {{ return(adapter.dispatch('normalize_events', 'snowplow_normalize')(event_names, flat_cols, sde_cols, sde_keys, sde_types, sde_aliases, context_cols, context_keys, context_types, context_aliases, remove_new_event_check)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -213,6 +228,7 @@ where
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="databricks" label="databricks">
 
@@ -295,6 +311,7 @@ where
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -353,17 +370,24 @@ where
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_normalize.snakeify_case](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.snakeify_case)
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Snakeify Case {#macro.snowplow_normalize.snakeify_case}
@@ -372,26 +396,30 @@ where
 <code>macros/snakeify_case.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Take a string in camel/pascal case and make it snakecase
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `text` *(string)*: the text to convert to snakecase
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/snakeify_case.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro snakeify_case(text) %}
     {{ return(adapter.dispatch('snakeify_case', 'snowplow_normalize')(text)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -405,15 +433,17 @@ Take a string in camel/pascal case and make it snakecase
     {{- output_text -}}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_normalize.normalize_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.normalize_events)
 - [macro.snowplow_normalize.users_table](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.users_table)
@@ -428,10 +458,12 @@ Take a string in camel/pascal case and make it snakecase
 <code>macros/users_table.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A macro to produce a users table from the `base_events_this_run` table, using the latest context values as defined by the collector_tstamp.
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `user_id_field` *(string)*: The name of the field to use as the unique user_id
 - `user_id_sde` *(string)*: The name of the SDE column that contains the user_id_field
 - `user_id_context` *(string)*: The name of the context column that contains the user_id_field, not used if user_id_sde is also provided
@@ -442,20 +474,22 @@ A macro to produce a users table from the `base_events_this_run` table, using th
 - `flat_cols` *(array)*: List of (user related) flat columns from the atomic.events table to include
 - `remove_new_event_check` *(boolean)*: A flag to disable the `with_new_events` part of the macro, to allow for integration tests to run
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/macros/users_table.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro users_table(user_id_field = 'user_id', user_id_sde = '', user_id_context = '', user_cols = [], user_keys = [], user_types = [], user_id_alias = 'user_id', flat_cols = [], remove_new_event_check = false) %}
     {{ return(adapter.dispatch('users_table', 'snowplow_normalize')(user_id_field, user_id_sde, user_id_context, user_cols, user_keys, user_types, user_id_alias, flat_cols, remove_new_event_check)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -560,6 +594,7 @@ where
     rn = 1
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="databricks" label="databricks">
 
@@ -646,6 +681,7 @@ where
     rn = 1
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -707,16 +743,23 @@ qualify
     row_number() over (partition by {{ snake_user_id }} order by latest_collector_tstamp desc) = 1
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_normalize.snakeify_case](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.snakeify_case)
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 

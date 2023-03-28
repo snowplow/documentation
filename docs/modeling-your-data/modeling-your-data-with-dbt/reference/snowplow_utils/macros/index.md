@@ -25,19 +25,23 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>macros/utils/app_id_filter.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Generates a `sql` filter for the values in `app_ids` applied on the `app_id` column.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `app_ids` *(list)*: List of app_ids to filter to include
 
-#### Returns
+<h4>Returns</h4>
+
 
 `app_id in (...)` if any `app_ids` are provided, otherwise `true`.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 app_id_filter(['web', 'mobile', 'news'])
@@ -47,7 +51,8 @@ app_id in ('web', 'mobile', 'news')
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -72,9 +77,10 @@ app_id in ('web', 'mobile', 'news')
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
@@ -94,10 +100,12 @@ app_id in ('web', 'mobile', 'news')
 <code>macros/utils/cross_db/timestamp_functions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -116,13 +124,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.type_timestamp
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_run_limits)
 - [macro.snowplow_utils.get_session_lookback_limit](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_session_lookback_limit)
@@ -139,10 +154,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/combine_column_versions/coalesce_field_paths.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -167,9 +184,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 
@@ -183,10 +201,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/combine_column_versions/combine_column_versions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -271,7 +291,11 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.coalesce_field_paths](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.coalesce_field_paths)
 - [macro.snowplow_utils.exclude_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.exclude_column_versions)
 - [macro.snowplow_utils.flatten_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.flatten_fields)
@@ -281,10 +305,13 @@ This macro does not currently have a description.
 - [macro.snowplow_utils.get_matched_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_matched_fields)
 - [macro.snowplow_utils.merge_fields_across_col_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.merge_fields_across_col_versions)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_mobile.get_device_user_id_path_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.get_device_user_id_path_sql)
 - [macro.snowplow_mobile.get_session_id_path_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.get_session_id_path_sql)
@@ -302,23 +329,26 @@ This macro does not currently have a description.
 <code>macros/utils/cross_db/timestamp_functions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro current_timestamp_in_utc() -%}
   {{ return(adapter.dispatch('current_timestamp_in_utc', 'snowplow_utils')()) }}
 {%- endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -327,6 +357,7 @@ This macro does not currently have a description.
     {{current_timestamp()}}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -335,6 +366,7 @@ This macro does not currently have a description.
     (current_timestamp at time zone 'utc')::{{type_timestamp()}}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="redshift" label="redshift">
 
@@ -343,6 +375,7 @@ This macro does not currently have a description.
     {{ return(snowplow_utils.default__current_timestamp_in_utc()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -351,20 +384,28 @@ This macro does not currently have a description.
     convert_timezone('UTC', {{current_timestamp()}})::{{type_timestamp()}}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.current_timestamp
 - macro.dbt.type_timestamp
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_media_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_media_stats)
 - [model.snowplow_mobile.snowplow_mobile_app_errors_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors_this_run)
@@ -375,7 +416,7 @@ This macro does not currently have a description.
 - [model.snowplow_web.snowplow_web_users_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_run_limits)
 
@@ -389,10 +430,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/combine_column_versions/exclude_column_versions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -416,9 +459,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 
@@ -432,10 +476,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/combine_column_versions/flatten_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -489,13 +535,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.flatten_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.flatten_fields)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 - [macro.snowplow_utils.flatten_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.flatten_fields)
@@ -510,21 +563,25 @@ This macro does not currently have a description.
 <code>macros/utils/cross_db/get_array_to_string.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro takes care of harmonising cross-db array to string type functions. The macro supports a custom delimiter if you don't want to use a comma with no space (default).
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `array_column` *(string)*: Name of the column to join into a string
 - `column_prefix` *(string)*: Table alias for the array_column
 - `delimiter` *(string)*: (Optional) String that determines how to delimit your array values. Default ','
 
-#### Returns
+<h4>Returns</h4>
+
 
 The data warehouse appropriate sql to convert an array to a string. 
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 select
@@ -536,14 +593,15 @@ from ... a
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_array_to_string.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 
@@ -554,6 +612,7 @@ from ... a
 
 
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -562,6 +621,7 @@ from ... a
     array_to_string({{column_prefix}}.{{array_column}},'{{delimiter}}')
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -570,15 +630,17 @@ from ... a
     array_join({{column_prefix}}.{{array_column}},'{{delimiter}}')
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion)
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion)
@@ -594,10 +656,12 @@ from ... a
 <code>macros/utils/get_cluster_by.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -621,9 +685,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base)
 - [model.snowplow_media_player.snowplow_media_player_base_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base_this_run)
@@ -642,20 +707,24 @@ This macro does not currently have a description.
 <code>macros/utils/get_columns_in_relation_by_column_prefix.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro returns an array of column objects within a relation that start with the given column prefix. This is useful when you have multiple versions of a column within a table and want to dynamically identify all versions.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `relation` *(relation)*: A table or `ref` type object to get the columns from
 - `column_prefix` *(string)*: The prefix string to search for matching columns
 
-#### Returns
+<h4>Returns</h4>
+
 
 An array of (column objects)[https://docs.getdbt.com/reference/dbt-classes#column]. The name of each column can be accessed with the name property.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 get_columns_in_relation_by_column_prefix(ref('snowplow_web_base_events_this_run'), 'domain')
@@ -672,7 +741,8 @@ get_columns_in_relation_by_column_prefix(ref('snowplow_web_base_events_this_run'
 {{ column.name }}
 {% endfor %}
 
-# Renders to something like:
+<h1>Renders</h1>
+ to something like:
 'custom_context_1_0_1'
 'custom_context_1_0_2'
 'custom_context_1_0_3'
@@ -680,7 +750,8 @@ get_columns_in_relation_by_column_prefix(ref('snowplow_web_base_events_this_run'
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -720,9 +791,10 @@ get_columns_in_relation_by_column_prefix(ref('snowplow_web_base_events_this_run'
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_ecommerce.coalesce_columns_by_prefix](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.coalesce_columns_by_prefix)
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
@@ -737,10 +809,12 @@ get_columns_in_relation_by_column_prefix(ref('snowplow_web_base_events_this_run'
 <code>macros/incremental_hooks/get_enabled_snowplow_models.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -811,9 +885,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
@@ -821,7 +896,7 @@ This macro does not currently have a description.
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.snowplow_incremental_post_hook](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_incremental_post_hook)
 
@@ -835,10 +910,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/combine_column_versions/get_field_alias.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -860,9 +937,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 - [macro.snowplow_utils.get_optional_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_optional_fields)
@@ -877,10 +955,12 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/get_incremental_manifest_status.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -938,14 +1018,21 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.run_query
 - [macro.snowplow_utils.print_list](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.print_list)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
@@ -962,10 +1049,12 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/get_incremental_manifest_table_relation.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -984,9 +1073,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.snowplow_incremental_post_hook](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_incremental_post_hook)
@@ -1001,10 +1091,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/combine_column_versions/get_level_limit.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1080,13 +1172,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.throw_compiler_error](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.throw_compiler_error)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 
@@ -1100,10 +1199,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/combine_column_versions/get_matched_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1138,9 +1239,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 
@@ -1154,10 +1256,12 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/get_new_event_limits_table_relation.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1176,9 +1280,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 
@@ -1192,10 +1297,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/get_optional_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1233,14 +1340,21 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 - [macro.snowplow_utils.get_field_alias](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_field_alias)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_media_player.snowplow_media_player_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_interactions_this_run)
@@ -1260,10 +1374,12 @@ This macro does not currently have a description.
 <code>macros/utils/get_partition_by.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1286,9 +1402,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions)
@@ -1318,10 +1435,12 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/quarantine_sessions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1354,13 +1473,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.quarantine_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.quarantine_sessions)
 
@@ -1374,10 +1500,12 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/get_run_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1445,16 +1573,23 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.cast_to_tstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.cast_to_tstamp)
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
 - [macro.snowplow_utils.log_message](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.log_message)
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
@@ -1471,27 +1606,31 @@ This macro does not currently have a description.
 <code>macros/utils/get_schemas_by_pattern.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Given a pattern, finds and returns all schemas that match that pattern. Note that for databricks any single character matches (`_`) will not be properly translated due to databricks using a regex expression instead of a SQL `like` clause.
 
       
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `schema_pattern` *(string)*: The pattern for the schema(s) you wish to find. For all non-databricks should be of the usual SQL `like` form. `%` will be automatically translated for databricks, but other special characters may not be
 
-#### Returns
+<h4>Returns</h4>
+
 
       A list of schemas that match the pattern provided.
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_schemas_by_pattern.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro get_schemas_by_pattern(schema_pattern) %}
@@ -1499,6 +1638,7 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
         (schema_pattern)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1512,6 +1652,7 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -1532,21 +1673,29 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.replace
 - macro.dbt.run_query
 - macro.dbt_utils.get_tables_by_pattern_sql
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.post_ci_cleanup](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.post_ci_cleanup)
 
@@ -1560,25 +1709,29 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
 <code>macros/utils/get_sde_or_context.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro exists for Redshift and Postgres users to more easily select their self-describing event and context tables and apply de-duplication before joining onto their (already de-duplicated) events table. The `root_id` and `root_tstamp` columns are by default returned as `schema_name_id` and `schema_name_tstamp` respectively, where `schema_name` is the value in the `schema_name` column of the table. 
 
 Note that is the responsibility of the user to ensure they have no duplicate names when using this macro multiple times or when a schema column name matches on already in the events table. In this case the `prefix` argument should be used and aliasing applied to the output.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `schema` *(string)*: The schema your context or sde table is in
 - `identifier` *(string)*: The table name of your context or sde
 - `lower_limit` *(string)*: Lower limit to filter the `root_tstamp` field on, only used if both lower and upper are provided
 - `upper_limit` *(string)*: Upper limit to filter the `root_tstamp` field on, only used if both lower and upper are provided
 - `prefix` *(string)*: A string to prefix (additional `_` added automatically) the column names with. If not provided `root_id` and `root_tstamp` will be prefixed with the schema name.
 
-#### Returns
+<h4>Returns</h4>
+
 
 CTE sql for deduplicated records from the schema table, without the schema details columns. The final CTE is the name of the original table.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1', "'2023-01-01'", "'2023-02-01'")}}
@@ -1592,20 +1745,22 @@ left join nl_basjes_yauaa_context_1 b on
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_sde_or_context.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro get_sde_or_context(schema, identifier, lower_limit, upper_limit, prefix = none) %}
     {{ return(adapter.dispatch('get_sde_or_context', 'snowplow_utils')(schema, identifier, lower_limit, upper_limit, prefix)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1614,6 +1769,7 @@ left join nl_basjes_yauaa_context_1 b on
     {% do exceptions.raise_compiler_error('Macro get_sde_or_context is only for Postgres or Redshift, it is not supported for' ~ target.type) %}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -1669,15 +1825,22 @@ left join nl_basjes_yauaa_context_1 b on
     {{ return(sql) }}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt_utils.get_single_value
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Get Session Lookback Limit {#macro.snowplow_utils.get_session_lookback_limit}
@@ -1686,10 +1849,12 @@ left join nl_basjes_yauaa_context_1 b on
 <code>macros/incremental_hooks/get_session_lookback_limit.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1727,15 +1892,22 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.run_query
 - [macro.snowplow_utils.cast_to_tstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.cast_to_tstamp)
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
@@ -1751,10 +1923,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/common/get_snowplow_delete_insert_sql.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1769,9 +1943,15 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowflake__get_snowplow_delete_insert_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__get_snowplow_delete_insert_sql)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Get Snowplow Merge Sql {#macro.snowplow_utils.get_snowplow_merge_sql}
@@ -1780,10 +1960,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/common/get_snowplow_merge_sql.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1798,9 +1980,15 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.default__get_snowplow_merge_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.default__get_snowplow_merge_sql)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Get Snowplow Upsert Limits Sql {#macro.snowplow_utils.get_snowplow_upsert_limits_sql}
@@ -1809,10 +1997,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/common/get_snowplow_upsert_limits_sql.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1827,9 +2017,15 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowflake__get_snowplow_upsert_limits_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__get_snowplow_upsert_limits_sql)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Get Split To Array {#macro.snowplow_utils.get_split_to_array}
@@ -1838,21 +2034,25 @@ This macro does not currently have a description.
 <code>macros/utils/cross_db/get_split_to_array.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro takes care of harmonising cross-db split to array type functions. The macro supports a custom delimiter if your string is not delimited by a comma with no space (default).
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `string_column` *(string)*: Name of the column to split into an array
 - `column_prefix` *(string)*: Table alias for the string_column
 - `delimiter` *(string)*: (Optional) String that determines how to split your string. Default ','
 
-#### Returns
+<h4>Returns</h4>
+
 
 The data warehouse appropriate sql to perform a split to array. 
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 select
@@ -1864,14 +2064,15 @@ from ... a
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_split_to_array.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 
@@ -1882,6 +2083,7 @@ from ... a
 
 
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1890,6 +2092,7 @@ from ... a
    split({{column_prefix}}.{{string_column}}, '{{delimiter}}')
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -1898,6 +2101,7 @@ from ... a
     string_to_array({{column_prefix}}.{{string_column}}, '{{delimiter}}')
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="redshift" label="redshift">
 
@@ -1906,15 +2110,17 @@ from ... a
     split_to_array({{column_prefix}}.{{string_column}}, '{{delimiter}}')
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion)
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion)
@@ -1931,14 +2137,16 @@ from ... a
 <code>macros/utils/cross_db/get_string_agg.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro takes care of harmonising cross-db `list_agg`, `string_agg` type functions. These are aggregate functions (i.e. to be used with a `group by`) that take values from grouped rows and concatenates them into a single string. This macro supports ordering values by an arbitrary column and ensuring unique values (i.e. applying distinct).
 
 Note that databricks does not have list/string_agg function so a more complex expression is used.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `base_column` *(string)*: Name of the column to aggregate values for
 - `column_prefix` *(string)*: Table alias for the base_column
 - `separator` *(string)*: (Optional) String to use to separate your values. Default ','
@@ -1948,11 +2156,13 @@ Note that databricks does not have list/string_agg function so a more complex ex
 - `is_distinct` *(boolean)*: (Optional) Do you want to apply distinct to your values. Will be applied after ordering. Default false
 - `order_desc` *(boolean)*: (Optional) Do you wish to apply the ordering descending. Default false
 
-#### Returns
+<h4>Returns</h4>
+
 
 The data warehouse appropriate sql to perform a list/string_agg. 
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 select
@@ -1965,14 +2175,15 @@ group by ...
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_string_agg.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 
@@ -1985,6 +2196,7 @@ group by ...
 
 
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -2008,6 +2220,7 @@ group by ...
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -2032,6 +2245,7 @@ group by ...
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -2055,6 +2269,7 @@ group by ...
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="redshift" label="redshift">
 
@@ -2078,6 +2293,7 @@ group by ...
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -2113,15 +2329,17 @@ group by ...
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion)
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion)
@@ -2137,10 +2355,12 @@ group by ...
 <code>macros/incremental_hooks/get_successful_models.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2190,9 +2410,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.snowplow_incremental_post_hook](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_incremental_post_hook)
 
@@ -2206,21 +2427,25 @@ This macro does not currently have a description.
 <code>macros/utils/get_value_by_target.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is designed to dynamically return values based on the target (`target.name`) you are running against. Your target names are defined in your [profiles.yml](https://docs.getdbt.com/reference/profiles.yml) file. This can be useful for dynamically changing variables within your project, depending on whether you are running in dev or prod.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `dev_value`: Value to use if target is development
 - `default_value`: Value to use if target is not development
 - `dev_target_name` *(string)*: (Optional) Name of the development target. Default `dev`
 
-#### Returns
+<h4>Returns</h4>
+
 
 The value relevant to the target environment
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```yml
 
@@ -2233,7 +2458,8 @@ snowplow_web:
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2256,9 +2482,10 @@ snowplow_web:
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
 - [macro.snowplow_mobile.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.allow_refresh)
@@ -2275,24 +2502,28 @@ snowplow_web:
 <code>macros/utils/get_value_by_target_type.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Returns the value provided based on the `target.type`. This is useful when you need a different value based on which warehouse is being used e.g. cluster fields or partition keys.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `bigquery_val` *(string)*: (Optional) Value to return if the `target.type` is bigquery. Default None
 - `snowflake_val` *(string)*: (Optional) Value to return if the `target.type` is snowflake. Default None
 - `redshift_val` *(string)*: (Optional) Value to return if the `target.type` is redshift. Default None
 - `postgres_val` *(string)*: (Optional) Value to return if the `target.type` is postgres. Default None
 - `databricks_val` *(string)*: (Optional) Value to return if the `target.type` is databricks. Default None
 
-#### Returns
+<h4>Returns</h4>
+
 
 The appropriate value for the target warehouse type, or an error if not an expected target type.
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2321,9 +2552,10 @@ The appropriate value for the target warehouse type, or an error if not an expec
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
@@ -2344,7 +2576,7 @@ The appropriate value for the target warehouse type, or an error if not an expec
 - [model.snowplow_web.snowplow_web_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_aggs)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_mobile.cluster_by_fields_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.cluster_by_fields_app_errors)
 - [macro.snowplow_mobile.mobile_cluster_by_fields_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_screen_views)
@@ -2367,7 +2599,8 @@ The appropriate value for the target warehouse type, or an error if not an expec
 <code>macros/utils/is_run_with_new_events.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is designed for use with Snowplow data modelling packages like `snowplow-web`. It can be used in any incremental models, to effectively block the incremental model from being updated with old data which it has already consumed. This saves cost as well as preventing historical data from being overwritten with partially complete data (due to a batch back-fill for instance).
 
 The macro utilizes the `snowplow_[platform]_incremental_manifest` table to determine whether the model from which the macro is called, i.e. `{{ this }}`, has already consumed the data in the given run. If it has, it returns `false`. If the data in the run contains new data, `true` is returned.
@@ -2376,14 +2609,17 @@ For the sessions lifecycle identifier it does not use the manifest as this table
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `package_name` *(string)*: The modeling package name e.g. `snowplow-mobile`
 
-#### Returns
+<h4>Returns</h4>
+
 
 `true` if the run contains new events previously not consumed by `this`, `false` otherwise.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 
@@ -2404,7 +2640,8 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2468,16 +2705,23 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.is_incremental
 - macro.dbt.run_query
 - [macro.snowplow_utils.get_incremental_manifest_table_relation](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_incremental_manifest_table_relation)
 - [macro.snowplow_utils.get_new_event_limits_table_relation](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_new_event_limits_table_relation)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions)
@@ -2501,7 +2745,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 - [model.snowplow_web.snowplow_web_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_normalize.normalize_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.normalize_events)
 - [macro.snowplow_normalize.users_table](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.users_table)
@@ -2516,14 +2760,17 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <code>macros/utils/log_message.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A wrapper macro for the `dbt_utils.pretty_log_format` using the `snowplow__has_log_enabled` to determine if the log is also printed to the stdout.
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `message` *(string)*: The string message to print.
 - `is_printed` *(boolean)*: Boolean value to determine if the log is also printed to the stdout
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2538,13 +2785,20 @@ A wrapper macro for the `dbt_utils.pretty_log_format` using the `snowplow__has_l
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt_utils.pretty_log_format
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_run_limits)
 - [macro.snowplow_utils.print_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.print_run_limits)
@@ -2561,10 +2815,12 @@ A wrapper macro for the `dbt_utils.pretty_log_format` using the `snowplow__has_l
 <code>macros/materializations/snowplow_incremental/bigquery/snowplow_incremental.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2646,7 +2902,11 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.create_table_as
 - macro.dbt.load_relation
 - macro.dbt.make_temp_relation
@@ -2657,6 +2917,8 @@ This macro does not currently have a description.
 - [macro.snowplow_utils.snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_merge)
 - [macro.snowplow_utils.snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_validate_get_incremental_strategy)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Materialization Snowplow Incremental Databricks {#macro.snowplow_utils.materialization_snowplow_incremental_databricks}
@@ -2665,10 +2927,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/databricks/snowplow_incremental.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2744,7 +3008,11 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.create_table_as
 - macro.dbt.load_relation
 - macro.dbt.make_temp_relation
@@ -2756,6 +3024,8 @@ This macro does not currently have a description.
 - [macro.snowplow_utils.snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_merge)
 - [macro.snowplow_utils.snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_validate_get_incremental_strategy)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Materialization Snowplow Incremental Default {#macro.snowplow_utils.materialization_snowplow_incremental_default}
@@ -2764,10 +3034,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/default/snowplow_incremental.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2848,7 +3120,11 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.create_indexes
 - macro.dbt.create_table_as
 - macro.dbt.load_relation
@@ -2859,6 +3135,8 @@ This macro does not currently have a description.
 - macro.dbt.statement
 - [macro.snowplow_utils.snowplow_delete_insert](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_insert)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Materialization Snowplow Incremental Snowflake {#macro.snowplow_utils.materialization_snowplow_incremental_snowflake}
@@ -2867,10 +3145,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/snowflake/snowplow_incremental.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -2952,7 +3232,11 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.create_table_as
 - macro.dbt.load_relation
 - macro.dbt.make_temp_relation
@@ -2966,6 +3250,8 @@ This macro does not currently have a description.
 - [macro.snowplow_utils.snowplow_snowflake_get_incremental_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_snowflake_get_incremental_sql)
 - [macro.snowplow_utils.snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_validate_get_incremental_strategy)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Materialization Snowplow Incremental Spark {#macro.snowplow_utils.materialization_snowplow_incremental_spark}
@@ -2974,10 +3260,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/spark/snowplow_incremental.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3053,7 +3341,11 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.create_table_as
 - macro.dbt.load_relation
 - macro.dbt.make_temp_relation
@@ -3065,6 +3357,8 @@ This macro does not currently have a description.
 - [macro.snowplow_utils.snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_merge)
 - [macro.snowplow_utils.snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_validate_get_incremental_strategy)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Merge Fields Across Col Versions {#macro.snowplow_utils.merge_fields_across_col_versions}
@@ -3073,10 +3367,12 @@ This macro does not currently have a description.
 <code>macros/utils/bigquery/combine_column_versions/merge_fields_across_col_versions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3120,9 +3416,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 
@@ -3136,20 +3433,24 @@ This macro does not currently have a description.
 <code>macros/utils/n_timedeltas_ago.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro takes the current timestamp and subtracts `n` units, as defined by the `timedelta_attribute`, from it. This is achieved using the Python datetime module, rather than querying your database. By combining this with the `get_value_by_target` macro, you can dynamically set dates depending on your environment.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `n` *(integer)*: The number of timedeltas to subtract from the current timestamp
 - `timedelta_attribute` *(string)*: The type of units to subtract. This can be any valid attribute of the [timedelta](https://docs.python.org/3/library/datetime.html#timedelta-objects) object
 
-#### Returns
+<h4>Returns</h4>
+
 
 Current timestamp minus `n` units.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 
@@ -3158,7 +3459,8 @@ Current timestamp minus `n` units.
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3186,13 +3488,16 @@ Current timestamp minus `n` units.
 <code>macros/utils/post_ci_cleanup.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro deletes all schemas that start with the specified `schema_pattern`, mostly for use before/after CI testing to ensure a clean start and removal of data after CI tests.
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `schema_pattern` *(string)*: The prefix of the schema(s) to delete
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3240,10 +3545,16 @@ This macro deletes all schemas that start with the specified `schema_pattern`, m
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.run_query
 - [macro.snowplow_utils.get_schemas_by_pattern](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_schemas_by_pattern)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Print List {#macro.snowplow_utils.print_list}
@@ -3252,21 +3563,25 @@ This macro deletes all schemas that start with the specified `schema_pattern`, m
 <code>macros/utils/print_list.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Prints an array as a `seperator` separated quoted list.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `list` *(array)*: Array object to print the (quoted) items of
 - `separator` *(string)*: The character(s) to separate the items by, default `,`
 
-#### Returns
+<h4>Returns</h4>
+
 
 Separated output of items in the list, quoted.
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3283,14 +3598,15 @@ Separated output of items in the list, quoted.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_fractribution.snowplow_fractribution_sessions_by_customer_id](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_sessions_by_customer_id)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_incremental_manifest_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_incremental_manifest_status)
 - [macro.snowplow_utils.snowplow_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_from_manifest)
@@ -3305,10 +3621,12 @@ Separated output of items in the list, quoted.
 <code>macros/incremental_hooks/get_incremental_manifest_status.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3340,15 +3658,22 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.run_query
 - [macro.snowplow_utils.log_message](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.log_message)
 - [macro.snowplow_utils.tstamp_to_str](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.tstamp_to_str)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
@@ -3365,17 +3690,19 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/quarantine_sessions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/quarantine_sessions.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro quarantine_sessions(package_name, max_session_length, src_relation=this) %}
@@ -3384,6 +3711,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -3401,6 +3729,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -3428,19 +3757,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_quarantine_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_quarantine_sql)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
 - [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
@@ -3455,10 +3792,12 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/return_base_new_event_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3518,15 +3857,22 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.run_query
 - [macro.snowplow_utils.cast_to_tstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.cast_to_tstamp)
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
@@ -3546,22 +3892,26 @@ This macro does not currently have a description.
 <code>macros/utils/return_limits_from_model.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Calculates and returns the minimum (lower) and maximum (upper) values of specified columns within the specified table. Useful to find ranges of a column within a table.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `model` *(relation)*: A string or `ref` type object to refer to a model or table to return limits from
 - `lower_limit_col` *(string)*: The column to take the `min` of to get the lower limit
 - `upper_limit_col` *(string)*: The column to take the `max` of to get the upper limit
 
-#### Returns
+<h4>Returns</h4>
+
 
 A list of two objects, the lower and upper values from the columns in the model
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3627,15 +3977,22 @@ A list of two objects, the lower and upper values from the columns in the model
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.run_query
 - [macro.snowplow_utils.cast_to_tstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.cast_to_tstamp)
 - [macro.snowplow_utils.log_message](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.log_message)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_mobile.snowplow_mobile_app_errors_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors_this_run)
@@ -3660,19 +4017,23 @@ A list of two objects, the lower and upper values from the columns in the model
 <code>macros/utils/set_query_tag.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro takes a provided statement as argument and generates the SQL command to set this statement as the query_tag for Snowflake databases, and does nothing otherwise. It can be used to safely set the query_tag regardless of database type.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `statement` *(string)*: The statement to use as the `query_tag` within Snowflake
 
-#### Returns
+<h4>Returns</h4>
+
 
 An alter session command set to the `query_tag` to the `statement` for Snowflake, otherwise nothing
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 
@@ -3681,14 +4042,15 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/set_query_tag.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {%- macro set_query_tag(statement) -%}
@@ -3697,6 +4059,7 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 
 
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -3705,6 +4068,7 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -3713,15 +4077,17 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
     alter session set query_tag = '{{ statement }}';
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
@@ -3801,7 +4167,7 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 - [model.snowplow_web.snowplow_web_users_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.materialization_snowplow_incremental_snowflake](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.materialization_snowplow_incremental_snowflake)
 
@@ -3815,10 +4181,12 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 <code>macros/utils/snowplow_delete_from_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3891,17 +4259,24 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.run_query
 - macro.dbt_utils.get_column_values
 - macro.dbt_utils.log_info
 - [macro.snowplow_utils.log_message](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.log_message)
 - [macro.snowplow_utils.print_list](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.print_list)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_ecommerce.snowplow_ecommerce_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.snowplow_ecommerce_delete_from_manifest)
 - [macro.snowplow_utils.snowplow_mobile_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_mobile_delete_from_manifest)
@@ -3917,10 +4292,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/common/snowplow_delete_insert.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3935,13 +4312,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowflake__snowplow_delete_insert](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_delete_insert)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.materialization_snowplow_incremental_default](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.materialization_snowplow_incremental_default)
 - [macro.snowplow_utils.snowplow_snowflake_get_incremental_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_snowflake_get_incremental_sql)
@@ -3956,10 +4340,12 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/snowplow_incremental_post_hook.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -3984,12 +4370,18 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_enabled_snowplow_models](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_enabled_snowplow_models)
 - [macro.snowplow_utils.get_incremental_manifest_table_relation](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_incremental_manifest_table_relation)
 - [macro.snowplow_utils.get_successful_models](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_successful_models)
 - [macro.snowplow_utils.update_incremental_manifest_table](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.update_incremental_manifest_table)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Snowplow Is Incremental {#macro.snowplow_utils.snowplow_is_incremental}
@@ -3998,10 +4390,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/common/snowplow_is_incremental.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4029,13 +4423,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.should_full_refresh
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
@@ -4050,10 +4451,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/common/snowplow_merge.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4068,13 +4471,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowflake__snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_merge)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.materialization_snowplow_incremental_bigquery](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.materialization_snowplow_incremental_bigquery)
 - [macro.snowplow_utils.materialization_snowplow_incremental_databricks](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.materialization_snowplow_incremental_databricks)
@@ -4091,10 +4501,12 @@ This macro does not currently have a description.
 <code>macros/utils/snowplow_delete_from_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4111,9 +4523,15 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowplow_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_from_manifest)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Snowplow Snowflake Get Incremental Sql {#macro.snowplow_utils.snowplow_snowflake_get_incremental_sql}
@@ -4122,10 +4540,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/snowflake/snowplow_incremental.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4146,14 +4566,21 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowplow_delete_insert](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_insert)
 - [macro.snowplow_utils.snowplow_merge](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_merge)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.materialization_snowplow_incremental_snowflake](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.materialization_snowplow_incremental_snowflake)
 
@@ -4167,10 +4594,12 @@ This macro does not currently have a description.
 <code>macros/materializations/snowplow_incremental/common/snowplow_validate_get_incremental_strategy.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4185,13 +4614,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowflake__snowplow_validate_get_incremental_strategy](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__snowplow_validate_get_incremental_strategy)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.materialization_snowplow_incremental_bigquery](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.materialization_snowplow_incremental_bigquery)
 - [macro.snowplow_utils.materialization_snowplow_incremental_databricks](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.materialization_snowplow_incremental_databricks)
@@ -4208,10 +4644,12 @@ This macro does not currently have a description.
 <code>macros/utils/snowplow_delete_from_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4228,9 +4666,15 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowplow_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_from_manifest)
 
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Throw Compiler Error {#macro.snowplow_utils.throw_compiler_error}
@@ -4239,10 +4683,12 @@ This macro does not currently have a description.
 <code>macros/utils/throw_compiler_error.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4267,9 +4713,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_level_limit](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_level_limit)
 
@@ -4283,23 +4730,26 @@ This macro does not currently have a description.
 <code>macros/utils/cross_db/timestamp_functions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro timestamp_add(datepart, interval, tstamp) %}
     {{ return(adapter.dispatch('timestamp_add', 'snowplow_utils')(datepart, interval, tstamp)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -4308,6 +4758,7 @@ This macro does not currently have a description.
     timestamp_add({{tstamp}}, interval {{interval}} {{datepart}})
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="databricks" label="databricks">
 
@@ -4316,6 +4767,7 @@ This macro does not currently have a description.
     timestampadd({{datepart}}, {{interval}}, {{tstamp}})
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -4324,19 +4776,27 @@ This macro does not currently have a description.
     {{ return(dateadd(datepart, interval, tstamp)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.dateadd
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
@@ -4348,7 +4808,7 @@ This macro does not currently have a description.
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_quarantine_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_quarantine_sql)
 - [macro.snowplow_utils.get_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_run_limits)
@@ -4365,23 +4825,26 @@ This macro does not currently have a description.
 <code>macros/utils/cross_db/timestamp_functions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/timestamp_functions.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro timestamp_diff(first_tstamp, second_tstamp, datepart) %}
     {{ return(adapter.dispatch('timestamp_diff', 'snowplow_utils')(first_tstamp, second_tstamp, datepart)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -4390,6 +4853,7 @@ This macro does not currently have a description.
     timestamp_diff({{second_tstamp}}, {{first_tstamp}}, {{datepart}})
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -4398,19 +4862,27 @@ This macro does not currently have a description.
     {{ return(datediff(first_tstamp, second_tstamp, datepart)) }}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.datediff
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_sessions_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_aggs)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
@@ -4425,10 +4897,12 @@ This macro does not currently have a description.
 <code>macros/utils/cross_db/timestamp_functions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4446,13 +4920,20 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.snowflake__to_unixtstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowflake__to_unixtstamp)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_pv_engaged_time](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_pv_engaged_time)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
@@ -4467,10 +4948,12 @@ This macro does not currently have a description.
 <code>macros/utils/tstamp_to_str.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4485,9 +4968,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.print_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.print_run_limits)
 
@@ -4501,17 +4985,19 @@ This macro does not currently have a description.
 <code>macros/utils/cross_db/datatypes.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/datatypes.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 
@@ -4522,6 +5008,7 @@ This macro does not currently have a description.
 
 
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -4530,6 +5017,7 @@ This macro does not currently have a description.
     {{ dbt.type_string() }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="redshift" label="redshift">
 
@@ -4538,19 +5026,27 @@ This macro does not currently have a description.
     varchar(max)
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.type_string
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
 - [model.snowplow_mobile.snowplow_mobile_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_this_run)
@@ -4567,17 +5063,19 @@ This macro does not currently have a description.
 <code>macros/utils/cross_db/unnest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/unnest.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 
@@ -4588,6 +5086,7 @@ This macro does not currently have a description.
 
 
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -4597,6 +5096,7 @@ This macro does not currently have a description.
     from {{ source_table }} t, unnest(t.{{ unnest_column }}) r
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -4606,6 +5106,7 @@ This macro does not currently have a description.
     from {{ source_table }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -4615,6 +5116,7 @@ This macro does not currently have a description.
     from {{ source_table }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="redshift" label="redshift">
 
@@ -4624,6 +5126,7 @@ This macro does not currently have a description.
     from {{ source_table }} p, p.{{ unnest_column }} as {{ field_alias }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -4633,21 +5136,23 @@ This macro does not currently have a description.
     from {{ source_table }} t, table(flatten(t.{{ unnest_column }})) r
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_media_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_media_stats)
 - [model.snowplow_web.snowplow_web_consent_scope_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_scope_status)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_fractribution.channel_spend](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.channel_spend)
 
@@ -4661,17 +5166,19 @@ This macro does not currently have a description.
 <code>macros/incremental_hooks/update_incremental_manifest_table.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/update_incremental_manifest_table.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro update_incremental_manifest_table(manifest_table, base_events_table, models) -%}
@@ -4680,6 +5187,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -4716,6 +5224,7 @@ This macro does not currently have a description.
 
 {%- endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -4760,15 +5269,17 @@ This macro does not currently have a description.
 
 {%- endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.snowplow_incremental_post_hook](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_incremental_post_hook)
 

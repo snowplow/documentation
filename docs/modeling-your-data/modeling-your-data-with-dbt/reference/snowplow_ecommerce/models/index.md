@@ -25,29 +25,35 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>models/base/scratch/&lt;adaptor&gt;/snowplow_ecommerce_base_events_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 For any given run, this table contains all required events to be consumed by subsequent nodes in the Snowplow dbt ecommerce package. This is a cleaned, deduped dataset, containing all columns from the raw events table as well as having the `page_view_id` joined in from the page view context, and all of the fields parsed from the various e-commerce contexts except the `product` context.
 
 **Note: This table should be used as the input to any custom modules that require event level data, rather than selecting straight from `atomic.events`**
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/base/scratch/bigquery/snowplow_ecommerce_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/base/scratch/databricks/snowplow_ecommerce_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/base/scratch/snowflake/snowplow_ecommerce_base_events_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
@@ -58,7 +64,7 @@ Base event this run table column lists may be incomplete and is missing contexts
 :::
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ |
 | ecommerce_user_id | The ecommerce user id extracted from the ecommerce user context. |
@@ -227,7 +233,7 @@ Base event this run table column lists may be incomplete and is missing contexts
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/base/scratch/bigquery/snowplow_ecommerce_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -380,8 +386,9 @@ from (
   group by e.event_id
 ) ev
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/base/scratch/databricks/snowplow_ecommerce_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -468,8 +475,9 @@ select *,
 
 from prep
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/base/scratch/snowflake/snowplow_ecommerce_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -558,20 +566,22 @@ select *,
 
 from prep
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_ecommerce.cart_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.cart_fields)
 - [macro.snowplow_ecommerce.checkout_step_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.checkout_step_fields)
@@ -589,9 +599,10 @@ from prep
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_checkout_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_checkout_interactions_this_run)
@@ -608,17 +619,19 @@ from prep
 <code>models/base/scratch/snowplow_ecommerce_base_new_event_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table contains the lower and upper timestamp limits for the given run of the web model. These limits are used to select new events from the events table.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | lower_limit | The lower `collector_tstamp` limit for the run | timestamp_ntz |
 | upper_limit | The upper `collector_tstamp` limit for the run | timestamp_ntz |
 </DbtDetails>
@@ -657,20 +670,22 @@ This table contains the lower and upper timestamp limits for the given run of th
 
 {{ run_limits_query }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_enabled_snowplow_models](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_enabled_snowplow_models)
 - [macro.snowplow_utils.get_incremental_manifest_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_incremental_manifest_status)
@@ -681,9 +696,10 @@ This table contains the lower and upper timestamp limits for the given run of th
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
@@ -703,19 +719,21 @@ This table contains the lower and upper timestamp limits for the given run of th
 <code>models/base/manifest/snowplow_ecommerce_base_quarantined_sessions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table contains any sessions that have been quarantined. Sessions are quarantined once they exceed the maximum allowed session length, defined by `snowplow__max_session_days`.
 Once quarantined, no further events from these sessions will be processed. Events up until the point of quarantine remain in your derived tables.
 The reason for removing long sessions is to reduce table scans on both the events table and all derived tables. This improves performance greatly.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | The `session_id` of the quarantined session | text |
 </DbtDetails>
 
@@ -758,15 +776,17 @@ select *
 from prep
 where false
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -775,9 +795,10 @@ where false
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
@@ -792,19 +813,21 @@ where false
 <code>models/base/manifest/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This incremental table is a manifest of all sessions that have been processed by the Snowplow dbt ecommerce package. For each session, the start and end timestamp is recorded.
 
 By knowing the lifecycle of a session the model is able to able to determine which sessions and thus events to process for a given timeframe, as well as the complete date range required to reprocess all events of each session.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | start_tstamp | The `collector_tstamp` when the session began | timestamp_ntz |
@@ -916,22 +939,24 @@ select
 
 from session_lifecycle sl
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_quarantined_sessions)
 - [model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
 - [macro.snowplow_ecommerce.event_name_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.event_name_filter)
@@ -947,9 +972,10 @@ from session_lifecycle sl
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
 
@@ -963,17 +989,19 @@ from session_lifecycle sl
 <code>models/base/scratch/snowplow_ecommerce_base_sessions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 For any given run, this table contains all the required sessions.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | start_tstamp | The `collector_tstamp` when the session began | timestamp_ntz |
@@ -1021,22 +1049,24 @@ and s.start_tstamp <= {{ upper_limit }}
 -- Select sessions within window that either; start or finish between lower & upper limit, start and finish outside of lower and upper limits
 and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_quarantined_sessions)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.quarantine_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.quarantine_sessions)
 - [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
@@ -1045,9 +1075,10 @@ and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run)
@@ -1062,17 +1093,19 @@ and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 <code>models/carts/snowplow_ecommerce_cart_interactions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic cart interactions and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -1124,22 +1157,24 @@ select *
 from {{ ref('snowplow_ecommerce_cart_interactions_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
@@ -1155,17 +1190,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 <code>models/carts/scratch/snowplow_ecommerce_cart_interactions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table tracks and stores information about cart interactions that occurred within the current run, with interactions being when a user adds or removes an item from their cart. It possesses all of the same columns as `snowplow_ecommerce_cart_interactions`. If building a custom module that requires cart interactions, this is the table you should reference for that information.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -1269,30 +1306,33 @@ select
 
 from cart_product_interactions
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions)
 - [model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run)
@@ -1307,17 +1347,19 @@ from cart_product_interactions
 <code>models/checkouts/snowplow_ecommerce_checkout_interactions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic checkout interactions and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -1381,22 +1423,24 @@ select *
 from {{ ref('snowplow_ecommerce_checkout_interactions_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_ecommerce.snowplow_ecommerce_checkout_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_checkout_interactions_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
@@ -1412,17 +1456,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 <code>models/checkouts/scratch/snowplow_ecommerce_checkout_interactions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table tracks and stores information about checkout interactions that occurred within the current run, with interactions being when a user progresses through the checkout flow or completes a transaction. It possesses all of the same columns as `snowplow_ecommerce_checkout_interactions`. If building a custom module that requires checkout interactions, this is the table you should reference for that information.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -1518,29 +1564,32 @@ select
 from {{ ref("snowplow_ecommerce_base_events_this_run") }}
 where ecommerce_action_type IN ('transaction', 'checkout_step') -- the two checkout step action types. Either you've initiated the checkout or you've finished with a transaction step
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_checkout_interactions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_checkout_interactions)
 - [model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run)
@@ -1555,17 +1604,19 @@ where ecommerce_action_type IN ('transaction', 'checkout_step') -- the two check
 <code>models/base/manifest/snowplow_ecommerce_incremental_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This incremental table is a manifest of the timestamp of the latest event consumed per model within the Snowplow dbt ecommerce package as well as any models leveraging the incremental framework provided by the package. The latest event's timestamp is based off `collector_tstamp`. This table is used to determine what events should be processed in the next run of the model.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | model | The name of the model. | text |
 | last_success | The timestamp of the latest event consumed by the model, based on `collector_tstamp` | timestamp_ntz |
 </DbtDetails>
@@ -1601,15 +1652,17 @@ select *
 from prep
 where false
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_timestamp
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
@@ -1619,9 +1672,10 @@ where false
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
@@ -1641,17 +1695,19 @@ where false
 <code>models/products/snowplow_ecommerce_product_interactions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic product interactions and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | product_event_id | A surrogate key which is a combination of `product_id` and `event_id` | text |
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -1723,22 +1779,24 @@ select *
 from {{ ref('snowplow_ecommerce_product_interactions_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest)
 - [model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
@@ -1754,34 +1812,40 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 <code>models/products/scratch/&lt;adaptor&gt;/snowplow_ecommerce_product_interactions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table tracks and stores information about product interactions that occurred within the current run, such as a user viewing a product on a product page, or in a product list. It possesses all of the same columns as `snowplow_ecommerce_product_interactions`. If building a custom module that requires checkout interactions, this is the table you should reference for that information.
 
 **Type**: Table
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/products/scratch/bigquery/snowplow_ecommerce_product_interactions_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/products/scratch/databricks/snowplow_ecommerce_product_interactions_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/products/scratch/snowflake/snowplow_ecommerce_product_interactions_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | product_event_id | A surrogate key which is a combination of `product_id` and `event_id` | text |
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -1825,7 +1889,7 @@ This staging table tracks and stores information about product interactions that
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/products/scratch/bigquery/snowplow_ecommerce_product_interactions_this_run.sql">Source</a></i></b></center>
 
@@ -1945,8 +2009,9 @@ select
 
 from product_info
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/products/scratch/databricks/snowplow_ecommerce_product_interactions_this_run.sql">Source</a></i></b></center>
 
@@ -2106,8 +2171,9 @@ select
 
 from product_info
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/products/scratch/snowflake/snowplow_ecommerce_product_interactions_this_run.sql">Source</a></i></b></center>
 
@@ -2228,20 +2294,22 @@ select
 
 from product_info
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt_utils.generate_surrogate_key
 - [macro.snowplow_ecommerce.coalesce_columns_by_prefix](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.coalesce_columns_by_prefix)
@@ -2250,9 +2318,10 @@ from product_info
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_product_interactions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_product_interactions)
@@ -2269,17 +2338,19 @@ from product_info
 <code>models/sessions/snowplow_ecommerce_sessions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic sessions data specifically for ecommerce actions and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | start_tstamp | The first time the session interacted with the website | timestamp_ntz |
@@ -2355,22 +2426,24 @@ select *
 from {{ ref('snowplow_ecommerce_sessions_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest)
 - [model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
@@ -2386,17 +2459,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 <code>models/sessions/scratch/snowplow_ecommerce_sessions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table tracks and stores aggregate information about sessions that occurred within the current run. It possesses all of the same columns as `snowplow_ecommerce_sessions`. If building a custom module that requires session level data, this is the table you should reference for that information.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | start_tstamp | The first time the session interacted with the website | timestamp_ntz |
@@ -2585,15 +2660,17 @@ left join checkout_session_stats as chss on s.session_id = chss.domain_sessionid
 left join product_session_stats as pss on s.session_id = pss.domain_sessionid
 left join transaction_session_stats as tss on s.session_id = tss.domain_sessionid
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions_this_run)
@@ -2602,16 +2679,17 @@ left join transaction_session_stats as tss on s.session_id = tss.domain_sessioni
 - [model.snowplow_ecommerce.snowplow_ecommerce_transaction_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_transaction_interactions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_sessions)
 
@@ -2625,17 +2703,19 @@ left join transaction_session_stats as tss on s.session_id = tss.domain_sessioni
 <code>models/transactions/snowplow_ecommerce_transaction_interactions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic transaction interactions and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -2693,22 +2773,24 @@ select *
 from {{ ref('snowplow_ecommerce_transaction_interactions_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_new_event_limits)
 - [model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_incremental_manifest)
 - [model.snowplow_ecommerce.snowplow_ecommerce_transaction_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_transaction_interactions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
@@ -2724,17 +2806,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 <code>models/transactions/scratch/snowplow_ecommerce_transaction_interactions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table tracks and stores information about transaction interactions that occurred within the current run, with interactions being when a user completes a transaction. It possesses all of the same columns as `snowplow_ecommerce_transaction_interactions`. If building a custom module that requires checkout interactions, this is the table you should reference for that information.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -2828,30 +2912,33 @@ select *
 
 from transaction_info
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_sessions_this_run)
 - [model.snowplow_ecommerce.snowplow_ecommerce_transaction_interactions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_transaction_interactions)

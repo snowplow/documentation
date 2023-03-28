@@ -25,29 +25,35 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>models/base/scratch/&lt;adaptor&gt;/snowplow_normalize_base_events_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 For any given run, this table contains all required events to be consumed by subsequent nodes in the Snowplow dbt normalize package. This is a cleaned, deduped dataset, containing all columns from the raw events table.
 
 **Note: This table should be used as the input to any custom modules that require event level data, rather than selecting straight from `atomic.events`**
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/base/scratch/bigquery/snowplow_normalize_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/base/scratch/databricks/snowplow_normalize_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/base/scratch/snowflake/snowplow_normalize_base_events_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
@@ -58,7 +64,7 @@ Base event this run table column lists may be incomplete and is missing contexts
 :::
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
 | platform | Platform e.g. ‘web’ |
 | etl_tstamp | Timestamp event began ETL e.g. ‘2017-01-26 00:01:25.292’ |
@@ -194,7 +200,7 @@ Base event this run table column lists may be incomplete and is missing contexts
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/models/base/scratch/bigquery/snowplow_normalize_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -236,8 +242,9 @@ from (
 ) e
 group by e.event_id
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/models/base/scratch/databricks/snowplow_normalize_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -268,8 +275,9 @@ where
 
 qualify row_number() over (partition by a.event_id order by a.collector_tstamp, a.etl_tstamp) = 1
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/models/base/scratch/snowflake/snowplow_normalize_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -302,20 +310,22 @@ where
 
 qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_normalize.snowplow_normalize_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_base_new_event_limits)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
 - [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
@@ -332,17 +342,19 @@ qualify row_number() over (partition by a.event_id order by a.collector_tstamp) 
 <code>models/base/scratch/snowplow_normalize_base_new_event_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table contains the lower and upper timestamp limits for the given run of the normalize model. These limits are used to select new events from the events table.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | lower_limit | The lower `collector_tstamp` limit for the run | timestamp |
 | upper_limit | The upper `collector_tstamp` limit for the run | timestamp |
 </DbtDetails>
@@ -380,20 +392,22 @@ This table contains the lower and upper timestamp limits for the given run of th
 
 {{ run_limits_query }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_normalize.snowplow_normalize_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_enabled_snowplow_models](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_enabled_snowplow_models)
 - [macro.snowplow_utils.get_incremental_manifest_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_incremental_manifest_status)
@@ -404,9 +418,10 @@ This table contains the lower and upper timestamp limits for the given run of th
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_normalize.snowplow_normalize_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_base_events_this_run)
 
@@ -420,17 +435,19 @@ This table contains the lower and upper timestamp limits for the given run of th
 <code>models/base/manifest/snowplow_normalize_incremental_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This incremental table is a manifest of the timestamp of the latest event consumed per model within the `snowplow-normalize` package as well as any models leveraging the incremental framework provided by the package. The latest event's timestamp is based off `collector_tstamp`. This table is used to determine what events should be processed in the next run of the model.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | model | The name of the model. | string |
 | last_success | The latest event consumed by the model, based on `collector_tstamp` | timestamp |
 </DbtDetails>
@@ -465,15 +482,17 @@ select *
 from prep
 where false
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_timestamp
 - [macro.snowplow_normalize.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.allow_refresh)
@@ -482,9 +501,10 @@ where false
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_normalize.snowplow_normalize_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_base_new_event_limits)
 

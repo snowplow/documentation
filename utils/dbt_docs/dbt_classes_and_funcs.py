@@ -4,8 +4,8 @@ from copy import deepcopy
 import re
 import os
 import requests
-import base64
 import json
+from dbt_package_list import all_packages
 
 def classFromArgs(className, argDict):
     fieldSet = {f.name for f in fields(className) if f.init}
@@ -88,7 +88,8 @@ class dbt_model(dbt_base):
                     f'<code>{self.original_file_path}</code>',
                     '</summary>',
                     '',
-                    '#### Description']
+                    '<h4>Description</h4>',
+                    '']
 
         # Add the description
         if description != "":
@@ -102,18 +103,13 @@ class dbt_model(dbt_base):
             markdown.extend(['', f'**Type**: {self.type}'])
         # Add the file paths if it is adaptor split
         if '&lt;adaptor&gt;' in self.original_file_path:
-            markdown.extend(['', '#### File Paths'])
+            markdown.extend(['', '<h4>File Paths</h4>', ''])
             markdown.append('<Tabs groupId="dispatched_sql">')
             for lang in sorted(dispatched_filepath):
-                markdown.extend([f'<TabItem value="{lang}" label="{lang}" {"default" if lang == "default" else ""}>',
-                            '',
-                            f'`{dispatched_filepath[lang]}`',
-                            ''
-                            '</TabItem>'
-                            ])
+                markdown.extend(md_tab_val(lang, None, f'`{dispatched_filepath[lang]}`', lang == "default", None))
             markdown.extend(['</Tabs>', ''])
 
-        markdown.extend(['', '#### Details'])
+        markdown.extend(['', '<h4>Details</h4>', ''])
 
         # Add columns
         if columns != {}:
@@ -134,77 +130,16 @@ class dbt_model(dbt_base):
                 link = f'<center><b><i><a href="{source_url}">Source</a></i></b></center>'
             else:
                 link = ''
-            markdown.extend([f'<TabItem value="{lang}" label="{lang}" {"default" if lang == "default" else ""}>',
-                        '',
-                        link,
-                        '',
-                        '```jinja2',
-                        dispatched_sql[lang],
-                        '```'
-                        '',
-                        '</TabItem>'
-                        ])
+            markdown.extend(md_tab_val(lang, link, dispatched_sql[lang], lang == "default", 'jinja2'))
 
         markdown.extend(['</Tabs>', ''])
 
         markdown.extend(['</DbtDetails>', ''])
 
-        # Add the depends on anf references
-        if depends_macros != [] or depends_models != []:
-            markdown.extend(['', '#### Depends On'])
+        # Add the depends on references
+        markdown.extend(md_depends_on(depends_macros, depends_models))
 
-            # Generate a tab group even if there is only one of the types, just for consistency
-            markdown.append('<Tabs groupId="reference">')
-
-            if depends_models != []:
-                markdown.extend(['<TabItem value="model" label="Models" default>', ''])
-                for dep_model in sorted(depends_models):
-                    if 'snowplow_' in dep_model:
-                        package = dep_model.split('.')[1]
-                        markdown.append(f'- [{dep_model}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/models/index.md#{dep_model})')
-                    else:
-                        markdown.append(f'- {dep_model}')
-                markdown.extend(['', '</TabItem>'])
-
-            if depends_macros != []:
-                markdown.extend(['<TabItem value="macros" label="Macros">', ''])
-                for dep_macro in sorted(depends_macros):
-                    if 'snowplow_' in dep_macro:
-                        package = dep_macro.split('.')[1]
-                        markdown.append(f'- [{dep_macro}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/macros/index.md#{dep_macro})')
-                    else:
-                        markdown.append(f'- {dep_macro}')
-                markdown.extend(['', '</TabItem>'])
-
-            markdown.append('</Tabs>')
-
-
-        if referenced_by_macros != [] or referenced_by_models != []:
-            markdown.extend(['', '#### Referenced By'])
-            # Generate a tab group even if there is only one of the types, just for consistency
-            markdown.append('<Tabs groupId="reference">')
-
-            if referenced_by_models != []:
-                markdown.extend(['<TabItem value="model" label="Models" default>', ''])
-                for ref_model in sorted(referenced_by_models):
-                    if 'snowplow_' in ref_model:
-                        package = ref_model.split('.')[1]
-                        markdown.append(f'- [{ref_model}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/models/index.md#{ref_model})')
-                    else:
-                        markdown.append(f'- {ref_model}')
-                markdown.extend(['', '</TabItem>'])
-
-            if referenced_by_macros != []:
-                markdown.extend(['<TabItem value="macros" label="Macros">', ''])
-                for ref_macro in sorted(referenced_by_macros):
-                    if 'snowplow_' in ref_macro:
-                        package = ref_macro.split('.')[1]
-                        markdown.append(f'- [{ref_macro}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/macros/index.md#{ref_macro})')
-                    else:
-                        markdown.append(f'- {ref_macro}')
-                markdown.extend(['', '</TabItem>'])
-
-            markdown.append('</Tabs>')
+        markdown.extend(md_referenced_by(referenced_by_macros, referenced_by_models))
 
         markdown.extend(['</DbtDetails>', ''])
         return '\n'.join(markdown), is_documented
@@ -248,7 +183,8 @@ class dbt_macro(dbt_base):
                     f'<code>{self.original_file_path}</code>',
                     '</summary>',
                     '',
-                    '#### Description']
+                    '<h4>Description</h4>',
+                    '']
 
         # Add the description
         if description != "":
@@ -263,7 +199,7 @@ class dbt_macro(dbt_base):
 
         # Add in argument details if there are any
         if self.arguments:
-            markdown.extend(['', '#### Arguments'])
+            markdown.extend(['', '<h4>Arguments</h4>', ''])
             for arg in self.arguments:
                 arg_type = arg.get('type')
                 arg_desc = arg.get('description')
@@ -276,10 +212,12 @@ class dbt_macro(dbt_base):
                 markdown.append(arg_string)
 
         # Add in any other headers that were included in the description
+        # Introducing an incredible regex that Nick made and I don't even dream to understand
         if len(description_parts) > 1:
-            markdown.extend(['', '####'+ description_parts[1], ''])
+            markdown.extend(['', re.sub("(#+) ([A-Z][a-z]+)", lambda x: f"<h{len(x.group(1))}>{x.group(2)}</h{len(x.group(1))}>\n", f'####{description_parts[1]}'), ''])
 
-        markdown.extend(['', '#### Details'])
+
+        markdown.extend(['', '<h4>Details</h4>', ''])
         # Add in the sql if there is any
         if sql != '':
             source_url = get_source_url(key, self.original_file_path)
@@ -298,67 +236,20 @@ class dbt_macro(dbt_base):
             # Use a tabs group for dispatced sql items
             else:
                 markdown.append('<Tabs groupId="dispatched_sql">')
-                markdown.extend(['<TabItem value="raw" label="Raw" default>',
-                                '',
-                                '```jinja2',
-                                sql,
-                                '```',
-                                '</TabItem>'
-                                ])
+                markdown.extend(md_tab_val('raw', None, sql, True, 'jinja2'))
                 for lang in sorted(dispatched_sql):
-                    markdown.extend([f'<TabItem value="{lang}" label="{lang}">',
-                                '',
-                                '```jinja2',
-                                dispatched_sql[lang],
-                                '```'
-                                '',
-                                '</TabItem>'
-                                ])
+                    markdown.extend(md_tab_val(lang, None, dispatched_sql[lang], False, 'jinja2'))
 
                 markdown.extend(['</Tabs>', ''])
 
             markdown.extend(['</DbtDetails>', ''])
 
+        # Add the depends on references
         # Macros can only depend on other macros
-        if depends_macros:
-            markdown.extend(['', '#### Depends On'])
+        markdown.extend(md_depends_on(depends_macros, []))
 
-            for dep_macro in sorted(depends_macros):
-                # only add a link if we made it, so we documented it (might miss a few due to docs show false, but good enough)
-                if 'snowplow_' in dep_macro:
-                    package = dep_macro.split('.')[1]
-                    markdown.append(f'- [{dep_macro}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/macros/index.md#{dep_macro})')
-                else:
-                    markdown.append(f'- {dep_macro}')
 
-            markdown.append('')
-
-        if referenced_by_macros or referenced_by_models:
-            markdown.extend(['', '#### Referenced By'])
-            # Generate a tab group even if there is only one of the types, just for consistency
-            markdown.append('<Tabs groupId="reference">')
-
-            if referenced_by_models:
-                markdown.extend(['<TabItem value="model" label="Models" default>', ''])
-                for ref_model in sorted(referenced_by_models):
-                    if 'snowplow_' in ref_model:
-                        package = ref_model.split('.')[1]
-                        markdown.append(f'- [{ref_model}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/models/index.md#{ref_model})')
-                    else:
-                        markdown.append(f'- {ref_model}')
-                markdown.extend(['', '</TabItem>'])
-
-            if referenced_by_macros:
-                markdown.extend(['<TabItem value="macros" label="Macros">', ''])
-                for ref_macro in sorted(referenced_by_macros):
-                    if 'snowplow_' in ref_macro:
-                        package = ref_macro.split('.')[1]
-                        markdown.append(f'- [{ref_macro}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/macros/index.md#{ref_macro})')
-                    else:
-                        markdown.append(f'- {ref_macro}')
-                markdown.extend(['', '</TabItem>'])
-
-            markdown.append('</Tabs>')
+        markdown.extend(md_referenced_by(referenced_by_macros, referenced_by_models))
 
         markdown.extend(['</DbtDetails>', ''])
         return '\n'.join(markdown), is_documented
@@ -658,7 +549,7 @@ def objects_to_markdown(objects: dict[Union[dbt_macro, dbt_model]], docs: dict =
     """
     # Filter to relevant macros
     if filter_key is not None:
-        cut_objects = {k:v for k,v in objects.items() if filter_key in k}
+        cut_objects = {k:v for k,v in objects.items() if filter_key + '.' in k}
     else:
         cut_objects = {k:v for k,v in objects.items()}
 
@@ -706,22 +597,14 @@ def get_source_url(macrokey: str, path: str) -> str:
     Returns:
         str: Full url for the file
     """
-    url = 'https://github.com/snowplow/dbt-'
-    if 'snowplow_utils' in macrokey:
-        url += 'snowplow-utils'
-    elif 'snowplow_web' in macrokey:
-        url += 'snowplow-web'
-    elif 'snowplow_mobile' in macrokey:
-        url += 'snowplow-mobile'
-    elif 'snowplow_media_player' in macrokey:
-        url += 'snowplow-media-player'
-    elif 'snowplow_normalize' in macrokey:
-        url += 'snowplow-normalize'
-    elif 'snowplow_fractribution' in macrokey:
-        url += 'snowplow-fractribution'
-    elif 'snowplow_ecommerce' in macrokey:
-        url += 'snowplow-ecommerce'
-    else:
+    url = 'https://github.com/snowplow/'
+    match = False
+    for pkg in all_packages:
+        if pkg[0].split('/')[1] + '.' in macrokey: # just check package name is in the key, but ending with . to ensure it's not in macro name
+            url += pkg[1]
+            match = True
+
+    if not match:
         return None
 
     url += '/blob/main/' + path
@@ -743,7 +626,7 @@ def column_dict_to_table(columns: dict, docs: dict, key: str) -> list:
     type_exists = any([x.get('type') for x in columns.values()])
     if type_exists:
         table_str = ['| Column Name | Description |Type|',
-                    '|--------------|-------------|----|']
+                    '|:------------|:------------|:--:|']
         for col in columns.values():
             col_name = col.get('name').lower()
             col_desc = get_doc(col.get('description'), docs, key) or col.get('comment')
@@ -751,7 +634,7 @@ def column_dict_to_table(columns: dict, docs: dict, key: str) -> list:
             table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} | {col_type if col_type is not None else " "} |')
     else:
         table_str = ['| Column Name | Description |',
-                    '|--------------|-------------|']
+                    '|:------------|:------------|']
         for col in columns.values():
             col_name = col.get('name').lower()
             col_desc = get_doc(col.get('description'), docs, key)
@@ -781,3 +664,65 @@ def get_doc(text: str, docs: dict, key: str) -> str:
             return docs['doc.' + doc_key].block_contents
     else:
         return text
+
+
+def md_X_by(X, type):
+    md = []
+    if type not in ['model', 'macro']:
+        raise ValueError('Non-supported type in call')
+    md.extend([f'<TabItem value="{type}" label="{type.title()}s">', ''])
+    for y in sorted(X):
+        if 'snowplow_' in y:
+            package = y.split('.')[1]
+            md.append(f'- [{y}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/{type}s/index.md#{y})')
+        else:
+            md.append(f'- {y}')
+    md.extend(['', '</TabItem>'])
+
+    return md
+
+def md_referenced_by(ref_by_macros, ref_by_models):
+    md = []
+    if ref_by_macros or ref_by_models:
+        md.extend(['', '<h4>Referenced By</h4>', ''])
+        # Generate a tab group even if there is only one of the types, just for consistency
+        md.append('<Tabs groupId="reference">')
+
+        if ref_by_models:
+            md.extend(md_X_by(ref_by_models, 'model'))
+
+        if ref_by_macros:
+            md.extend(md_X_by(ref_by_macros, 'macro'))
+
+        md.append('</Tabs>')
+
+    return md
+
+
+def md_depends_on(dep_macros, dep_models):
+    md = []
+    if dep_macros or dep_models:
+        md.extend(['', '<h4>Depends On</h4>', ''])
+        # Generate a tab group even if there is only one of the types, just for consistency
+        md.append('<Tabs groupId="reference">')
+
+        if dep_models:
+            md.extend(md_X_by(dep_models, 'model'))
+
+        if dep_macros:
+            md.extend(md_X_by(dep_macros, 'macro'))
+
+        md.append('</Tabs>')
+
+    return md
+
+def md_tab_val(lang, link, val, default, syn):
+    md = []
+    md.extend([f'<TabItem value="{lang}" label="{lang}"{" default" if default else ""}>', ''])
+    if link:
+        md.extend([link, ''])
+    if syn:
+        md.extend([f'```{syn}', val, '```', '', '</TabItem>'])
+    else:
+        md.extend([val, '', '</TabItem>'])
+    return md

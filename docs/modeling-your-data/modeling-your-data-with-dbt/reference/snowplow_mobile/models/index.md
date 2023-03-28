@@ -25,15 +25,17 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>models/optional_modules/app_errors/snowplow_mobile_app_errors.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived table contains all app errors and should be the end point for any analysis or BI tools looking to investigate app errors. This is an optional table that will be empty if the `app_errors` module is not enabled.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | event_id | A UUID for each event e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
 | app_id | Application ID e.g. `angry-birds` is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
 | user_id | Unique ID set by business e.g. `jon.doe@email.com`. |
@@ -139,15 +141,17 @@ select *
 from {{ ref('snowplow_mobile_app_errors_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_mobile.cluster_by_fields_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.cluster_by_fields_app_errors)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -164,36 +168,43 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <code>models/optional_modules/app_errors/scratch/&lt;adaptor&gt;/snowplow_mobile_app_errors_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table contains all the app errors for the given run of the Mobile model. This is an optional table that will not be generated if the `app_errors` module is not enabled.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/optional_modules/app_errors/scratch/bigquery/snowplow_mobile_app_errors_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/optional_modules/app_errors/scratch/databricks/snowplow_mobile_app_errors_this_run.sql`
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/optional_modules/app_errors/scratch/redshift_postgres/snowplow_mobile_app_errors_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/optional_modules/app_errors/scratch/snowflake/snowplow_mobile_app_errors_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | event_id | A UUID for each event e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
 | app_id | Application ID e.g. `angry-birds` is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
 | user_id | Unique ID set by business e.g. `jon.doe@email.com`. |
@@ -263,7 +274,7 @@ This staging table contains all the app errors for the given run of the Mobile m
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/optional_modules/app_errors/scratch/bigquery/snowplow_mobile_app_errors_this_run.sql">Source</a></i></b></center>
 
@@ -353,8 +364,9 @@ from {{ ref('snowplow_mobile_base_events_this_run') }} as e
 
 where e.event_name = 'application_error'
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/optional_modules/app_errors/scratch/databricks/snowplow_mobile_app_errors_this_run.sql">Source</a></i></b></center>
 
@@ -448,8 +460,9 @@ select
 from {{ ref('snowplow_mobile_base_events_this_run') }} as e
 where e.event_name = 'application_error'
 ```
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/optional_modules/app_errors/scratch/redshift_postgres/snowplow_mobile_app_errors_this_run.sql">Source</a></i></b></center>
 
@@ -575,8 +588,9 @@ inner join app_errors_events ae
 on abe.event_id = ae.root_id
 and abe.collector_tstamp = ae.root_tstamp
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/optional_modules/app_errors/scratch/snowflake/snowplow_mobile_app_errors_this_run.sql">Source</a></i></b></center>
 
@@ -671,15 +685,17 @@ select
 from {{ ref('snowplow_mobile_base_events_this_run') }} as e
 where e.event_name = 'application_error'
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_mobile.app_error_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.app_error_context_fields)
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
@@ -697,26 +713,30 @@ where e.event_name = 'application_error'
 <code>models/base/scratch/&lt;adaptor&gt;/contexts/snowplow_mobile_base_app_context.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 ** This table only exists when working in a Redshift or Postgres warehouse. **
 
 This optional table provides extra context on an event level and brings in data surrounding the application's build and version.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_app_context.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | root_id | The corresponding UUID used in the root table. |
 | root_tstamp | The timestamp for when this event was produced. |
 | build | The build of the application. |
@@ -727,7 +747,7 @@ This optional table provides extra context on an event level and brings in data 
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_app_context.sql">Source</a></i></b></center>
 
@@ -766,15 +786,17 @@ from base
 
 where dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 
@@ -788,33 +810,40 @@ where dedupe_index = 1
 <code>models/base/scratch/&lt;adaptor&gt;/snowplow_mobile_base_events_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 For any given run, this table contains all required events to be consumed by subsequent nodes in the Snowplow dbt mob package. This is a cleaned, de-duped dataset, containing all columns from the raw events table as well as having various optional contexts joined-on/unpacked.
 
 **Note: This table should be used as the input to any custom modules that require event level data, rather than selecting straight from `atomic.events`**
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/base/scratch/bigquery/snowplow_mobile_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/base/scratch/databricks/snowplow_mobile_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/base/scratch/redshift_postgres/snowplow_mobile_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/base/scratch/snowflake/snowplow_mobile_base_events_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
@@ -825,7 +854,7 @@ Base event this run table column lists may be incomplete and is missing contexts
 :::
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | screen_id | A UUID for each screen e.g. `738f1fbc-5298-46fa-9474-bc0a65f014ab`. |
 | screen_name | The name set for a specific screen, e.g. `DemoScreenName`. |
 | screen_activity | The name of the Activity element in the screen. |
@@ -931,7 +960,7 @@ Base event this run table column lists may be incomplete and is missing contexts
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/bigquery/snowplow_mobile_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -1076,8 +1105,9 @@ select
 
 from deduped_events as d
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/databricks/snowplow_mobile_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -1205,8 +1235,9 @@ from deduped_events as d
 
   from prep
 ```
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/snowplow_mobile_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -1354,8 +1385,9 @@ from events_this_run e
 
 where e.event_id_dedupe_index = 1
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/snowflake/snowplow_mobile_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -1489,20 +1521,22 @@ select
 
 from deduped_events as d
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_string
 - [macro.snowplow_mobile.app_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.app_context_fields)
@@ -1521,9 +1555,10 @@ from deduped_events as d
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_screen_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views_this_run)
 - [model.snowplow_mobile.snowplow_mobile_sessions_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_aggs)
@@ -1540,24 +1575,28 @@ from deduped_events as d
 <code>models/base/scratch/&lt;adaptor&gt;/snowplow_mobile_base_events_this_run_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table contains the lower and upper timestamp limits for the given run of the mobile model. These limits are used to select new events from the events table. These limits are determined by taking the `MIN` of the `start_tstamp` and `MAX` of the `end_tstamp` from the `snowplow_mobile_base_sessions_this_run` table for the `lower_limit` and `upper_limit` respectively.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/base/scratch/redshift_postgres/snowplow_mobile_base_events_this_run_limits.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | lower_limit | The min `start_tstamp` of all events processed this run |
 | upper_limit | The max `end_tstamp` of all events processed this run |
 </DbtDetails>
@@ -1566,7 +1605,7 @@ This table contains the lower and upper timestamp limits for the given run of th
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/snowplow_mobile_base_events_this_run_limits.sql">Source</a></i></b></center>
 
@@ -1577,6 +1616,7 @@ select
 
 from {{ ref('snowplow_mobile_base_sessions_this_run') }} s
 ```
+
 </TabItem>
 </Tabs>
 
@@ -1590,26 +1630,30 @@ from {{ ref('snowplow_mobile_base_sessions_this_run') }} s
 <code>models/base/scratch/&lt;adaptor&gt;/contexts/snowplow_mobile_base_geo_context.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 ** This table only exists when working in a Redshift or Postgres warehouse. **
 
 This optional table provides extra context on an event level and brings in data surrounding a device's geographical properties, such as latitude/longitude, altitude, and speed.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_geo_context.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | root_id | The corresponding UUID used in the root table. |
 | root_tstamp | The timestamp for when this event was produced. |
 | device_latitude | Latitude coordinates for device location. |
@@ -1625,7 +1669,7 @@ This optional table provides extra context on an event level and brings in data 
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_geo_context.sql">Source</a></i></b></center>
 
@@ -1669,15 +1713,17 @@ from base
 
 where dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 
@@ -1691,26 +1737,30 @@ where dedupe_index = 1
 <code>models/base/scratch/&lt;adaptor&gt;/contexts/snowplow_mobile_base_mobile_context.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 ** This table only exists when working in a Redshift or Postgres warehouse. **
 
 This optional table provides extra context on an event level and brings in data surrounding a device's manufacturer, model, and carrier.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_mobile_context.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | root_id | The corresponding UUID used in the root table. |
 | root_tstamp | The timestamp for when this event was produced. |
 | device_manufacturer | Manufacturer name of the device eg. `Apple`. |
@@ -1730,7 +1780,7 @@ This optional table provides extra context on an event level and brings in data 
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_mobile_context.sql">Source</a></i></b></center>
 
@@ -1778,15 +1828,17 @@ from base
 
 where dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 
@@ -1800,19 +1852,21 @@ where dedupe_index = 1
 <code>models/base/scratch/snowplow_mobile_base_new_event_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table contains the lower and upper timestamp limits for the given run of the mobile model. These limits are used to select new events from the events table.
 
 The sql to determine the correct limits for the run is generated by the `get_run_limits()` macro. Please refer to the documentation for details on how this macro determines the run limits.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | lower_limit | The lower `collector_tstamp` limit for the run | timestamp_ntz |
 | upper_limit | The upper `collector_tstamp` limit for the run | timestamp_ntz |
 </DbtDetails>
@@ -1851,20 +1905,22 @@ The sql to determine the correct limits for the run is generated by the `get_run
 
 {{ run_limits_query }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_enabled_snowplow_models](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_enabled_snowplow_models)
 - [macro.snowplow_utils.get_incremental_manifest_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_incremental_manifest_status)
@@ -1875,9 +1931,10 @@ The sql to determine the correct limits for the run is generated by the `get_run
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_this_run)
@@ -1896,26 +1953,30 @@ The sql to determine the correct limits for the run is generated by the `get_run
 <code>models/base/scratch/&lt;adaptor&gt;/contexts/snowplow_mobile_base_screen_context.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 ** This table only exists when working in a Redshift or Postgres warehouse. **
 
 This optional table provides extra context on an event level and brings in data surrounding the screen that the application is on, such as the screen's id, activity, and type.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_screen_context.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | root_id | The corresponding UUID used in the root table. |
 | root_tstamp | The timestamp for when this event was produced. |
 | screen_id | A UUID for each screen e.g. `738f1fbc-5298-46fa-9474-bc0a65f014ab`. |
@@ -1931,7 +1992,7 @@ This optional table provides extra context on an event level and brings in data 
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_screen_context.sql">Source</a></i></b></center>
 
@@ -1976,15 +2037,17 @@ from base
 
 where dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 
@@ -1998,26 +2061,30 @@ where dedupe_index = 1
 <code>models/base/scratch/&lt;adaptor&gt;/contexts/snowplow_mobile_base_session_context.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 ** This table only exists when working in a Redshift or Postgres warehouse. **
 
 This optional table provides extra context on an event level and brings in data surrounding the session that the application is in, such as the session's first event ID, and the ID of the previous session.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_session_context.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | root_id | The corresponding UUID used in the root table. |
 | root_tstamp | The timestamp for when this event was produced. |
 | session_id | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
@@ -2031,7 +2098,7 @@ This optional table provides extra context on an event level and brings in data 
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_session_context.sql">Source</a></i></b></center>
 
@@ -2072,15 +2139,17 @@ from base
 
 where dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 
@@ -2094,32 +2163,37 @@ where dedupe_index = 1
 <code>models/base/manifest/&lt;adaptor&gt;/snowplow_mobile_base_sessions_lifecycle_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This incremental table is a manifest of all sessions that have been processed by the Snowplow dbt mobile model. For each session, the start and end timestamp is recorded.
 
 By knowing the life-cycle of a session the model is able to able to determine which sessions and thus events to process for a given time-frame, as well as the complete date range required to reprocess all events of each session.
 
 **Type**: Table
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
 <TabItem value="default" label="default" default>
 
 `models/base/manifest/default/snowplow_mobile_base_sessions_lifecycle_manifest.sql`
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/base/manifest/redshift_postgres/snowplow_mobile_base_sessions_lifecycle_manifest.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | device_user_id |  Unique device user id. | text |
 | start_tstamp | The `collector_tstamp` when the session began. | timestamp_ntz |
@@ -2234,8 +2308,9 @@ select
 
 from session_lifecycle sl
 ```
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/manifest/redshift_postgres/snowplow_mobile_base_sessions_lifecycle_manifest.sql">Source</a></i></b></center>
 
@@ -2337,21 +2412,23 @@ select
 
 from session_lifecycle sl
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_mobile.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.allow_refresh)
 - [macro.snowplow_mobile.get_device_user_id_path_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.get_device_user_id_path_sql)
@@ -2369,9 +2446,10 @@ from session_lifecycle sl
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_this_run)
 
@@ -2385,17 +2463,19 @@ from session_lifecycle sl
 <code>models/base/scratch/snowplow_mobile_base_sessions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 For any given run, this table contains all the required sessions.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | device_user_id | Unique device user id. | text |
 | start_tstamp | The `collector_tstamp` when the session began. | timestamp_ntz |
@@ -2442,21 +2522,23 @@ and s.start_tstamp <= {{ upper_limit }}
 -- Select sessions within window that either; start or finish between lower & upper limit, start and finish outside of lower and upper limits
 and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -2464,9 +2546,10 @@ and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 - [model.snowplow_mobile.snowplow_mobile_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_sessions_this_run)
@@ -2481,17 +2564,19 @@ and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 <code>models/base/manifest/snowplow_mobile_incremental_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This incremental table is a manifest of the timestamp of the latest event consumed per model within the `snowplow-mobile` package as well as any models leveraging the incremental framework provided by the package. The latest event's timestamp is based off `collector_tstamp`. This table is used to determine what events should be processed in the next run of the model.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | model | The name of the model. | text |
 | last_success | The latest event consumed by the model, based on `collector_tstamp` | timestamp_ntz |
 </DbtDetails>
@@ -2531,15 +2616,17 @@ select *
 from prep
 where false
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_timestamp
 - [macro.snowplow_mobile.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.allow_refresh)
@@ -2549,9 +2636,10 @@ where false
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
@@ -2570,17 +2658,19 @@ where false
 <code>models/screen_views/snowplow_mobile_screen_views.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table contains all the screen views for the given run of the mobile model. It possess all the same columns as `snowplow_mobile_screen_views`. If building a custom module that requires screen view events, this is the table you should reference.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | screen_view_id | The UUID of a screen view. | text |
 | event_id | A UUID for each event e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | app_id | Application ID e.g. `angry-birds` is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
@@ -2680,22 +2770,24 @@ select *
 from {{ ref('snowplow_mobile_screen_views_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
 - [model.snowplow_mobile.snowplow_mobile_screen_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_mobile.mobile_cluster_by_fields_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_screen_views)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -2712,30 +2804,35 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <code>models/screen_views/scratch/&lt;adaptor&gt;/snowplow_mobile_screen_views_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table contains all the screen views for the given run of the mobile model. It possess all the same columns as `snowplow_mobile_screen_views`. If building a custom module that requires screen view events, this is the table you should reference.
 
 **Type**: Table
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
 <TabItem value="default" label="default" default>
 
 `models/screen_views/scratch/default/snowplow_mobile_screen_views_this_run.sql`
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/screen_views/scratch/redshift_postgres/snowplow_mobile_screen_views_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | screen_view_id | The UUID of a screen view. | text |
 | event_id | A UUID for each event e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | app_id | Application ID e.g. `angry-birds` is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
@@ -2974,8 +3071,9 @@ select
 
 from cleaned_screen_view_events ev
 ```
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/screen_views/scratch/redshift_postgres/snowplow_mobile_screen_views_this_run.sql">Source</a></i></b></center>
 
@@ -3175,20 +3273,22 @@ select
 
 from cleaned_screen_view_events ev
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -3197,9 +3297,10 @@ from cleaned_screen_view_events ev
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views)
 - [model.snowplow_mobile.snowplow_mobile_sessions_sv_details](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_sv_details)
@@ -3214,17 +3315,19 @@ from cleaned_screen_view_events ev
 <code>models/sessions/snowplow_mobile_sessions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic sessions and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | app_id | Application ID e.g. `angry-birds` is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
 | session_id | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | session_index | A visit / session index e.g. `3`. | number |
@@ -3333,15 +3436,17 @@ select *
 from {{ ref('snowplow_mobile_sessions_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
@@ -3349,7 +3454,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 - [model.snowplow_mobile.snowplow_mobile_user_mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_user_mapping)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_mobile.mobile_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions)
 - [macro.snowplow_mobile.stitch_user_identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.stitch_user_identifiers)
@@ -3360,9 +3465,10 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_sessions_this_run)
 
@@ -3376,17 +3482,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <code>models/sessions/scratch/snowplow_mobile_sessions_aggs.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model aggregates various metrics derived from page views to a session level.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | last_build | Last build of the application. | text |
 | last_version | Last application version. | text |
@@ -3499,20 +3607,22 @@ from session_aggs sa
 left join app_errors ae
 on sa.session_id = ae.session_id
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_int
 - macro.dbt.type_string
@@ -3524,9 +3634,10 @@ on sa.session_id = ae.session_id
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_this_run)
 
@@ -3540,17 +3651,19 @@ on sa.session_id = ae.session_id
 <code>models/sessions/scratch/snowplow_mobile_sessions_sv_details.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model identifies the last page view within a given session and returns various dimensions associated with that page view.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | screen_views | Total number of screen views within a session. | number |
 | screen_names_viewed | The number of different screens viewed where the unique screens are counted by the screen names. | number |
@@ -3596,20 +3709,22 @@ from {{ ref('snowplow_mobile_screen_views_this_run') }} sv
 
 group by 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_screen_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -3617,9 +3732,10 @@ group by 1
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_this_run)
 
@@ -3633,17 +3749,19 @@ group by 1
 <code>models/sessions/scratch/snowplow_mobile_sessions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table contains all the sessions for the given run of the Mob model. It possess all the same columns as `snowplow_mobile_sessions`. If building a custom module that requires session level data, this is the table you should reference.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | app_id | Application ID e.g. `angry-birds` is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
 | session_id | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | session_index | A visit / session index e.g. `3`. | number |
@@ -3825,22 +3943,24 @@ and es.event_index_in_session = 1
 left join {{ ref('snowplow_mobile_sessions_sv_details') }} sv
 on es.session_id = sv.session_id
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 - [model.snowplow_mobile.snowplow_mobile_sessions_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_aggs)
 - [model.snowplow_mobile.snowplow_mobile_sessions_sv_details](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_sv_details)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_int
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
@@ -3850,9 +3970,10 @@ on es.session_id = sv.session_id
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions)
 
@@ -3866,17 +3987,19 @@ on es.session_id = sv.session_id
 <code>models/user_mapping/snowplow_mobile_user_mapping.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A mapping table between `device_user_id` and `user_id`.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | device_user_id | Unique device user id. | text |
 | user_id | Unique ID set by business e.g. `jon.doe@email.com`. | text |
 | end_tstamp | The `collector_tstamp` when the user was last active | timestamp_ntz |
@@ -3922,22 +4045,24 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 and user_id is not null
 and device_user_id is not null
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
@@ -3946,9 +4071,10 @@ and device_user_id is not null
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions)
 
@@ -3962,17 +4088,19 @@ and device_user_id is not null
 <code>models/users/snowplow_mobile_users.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic users data and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | user_id | Unique ID set by business e.g. `jon.doe@email.com`. | text |
 | device_user_id | Unique device user id. | text |
 | network_userid | User ID set by Snowplow using 3rd party cookie e.g. `ecdff4d0-9175-40ac-a8bb-325c49733607`. | text |
@@ -4055,22 +4183,24 @@ select *
 from {{ ref('snowplow_mobile_users_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_new_event_limits)
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
 - [model.snowplow_mobile.snowplow_mobile_users_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_mobile.mobile_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_users)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -4087,17 +4217,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <code>models/users/scratch/snowplow_mobile_users_aggs.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model aggregates various metrics derived from sessions to a users level.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | device_user_id | Unique device user id. | text |
 | start_tstamp | Earliest timestamp for the user's activity, based on `derived_tstamp`. | timestamp_ntz |
 | end_tstamp | Latest timestamp for the user's activity, based on `derived_tstamp`. | timestamp_ntz |
@@ -4161,20 +4293,22 @@ from {{ ref('snowplow_mobile_users_sessions_this_run') }}
 
 group by 1,2,3
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.date_trunc
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -4183,9 +4317,10 @@ group by 1,2,3
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users_lasts](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_lasts)
 - [model.snowplow_mobile.snowplow_mobile_users_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_this_run)
@@ -4200,17 +4335,19 @@ group by 1,2,3
 <code>models/users/scratch/snowplow_mobile_users_lasts.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model identifies the last page view for a user and returns various dimensions associated with that page view.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | device_user_id | Unique device user id. | text |
 | last_screen_view_name | Name of the last screen viewed. | text |
 | last_screen_view_transition_type | Type of transition for the last screen view. | text |
@@ -4250,30 +4387,33 @@ from {{ ref('snowplow_mobile_users_sessions_this_run') }} a
 inner join {{ ref('snowplow_mobile_users_aggs') }} b
 on a.session_id = b.last_session_id
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_aggs)
 - [model.snowplow_mobile.snowplow_mobile_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_this_run)
 
@@ -4287,17 +4427,19 @@ on a.session_id = b.last_session_id
 <code>models/users/scratch/snowplow_mobile_users_sessions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model contains all sessions data related to users contained in the given run of the Mobile model
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | app_id | Application ID e.g. `angry-birds` is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
 | session_id | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | session_index | A visit / session index e.g. `3`. | number |
@@ -4399,30 +4541,33 @@ from {{ var('snowplow__sessions_table') }} a
 inner join user_ids_this_run b
 on a.device_user_id = b.device_user_id
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_this_run)
 - [model.snowplow_mobile.snowplow_mobile_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_aggs)
 - [model.snowplow_mobile.snowplow_mobile_users_lasts](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_lasts)
@@ -4438,17 +4583,19 @@ on a.device_user_id = b.device_user_id
 <code>models/users/scratch/snowplow_mobile_users_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table contains all the users for the given run of the Mobile model. It possess all the same columns as `snowplow_mobile_users`. If building a custom module that requires session level data, this is the table you should reference.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | user_id | Unique ID set by business e.g. `jon.doe@email.com`. | text |
 | device_user_id | Unique device user id. | text |
 | network_userid | User ID set by Snowplow using 3rd party cookie e.g. `ecdff4d0-9175-40ac-a8bb-325c49733607`. | text |
@@ -4575,22 +4722,24 @@ on a.session_id = b.first_session_id
 inner join {{ ref('snowplow_mobile_users_lasts') }} c
 on b.device_user_id = c.device_user_id
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_aggs)
 - [model.snowplow_mobile.snowplow_mobile_users_lasts](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_lasts)
 - [model.snowplow_mobile.snowplow_mobile_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.current_timestamp
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -4598,9 +4747,10 @@ on b.device_user_id = c.device_user_id
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users)
 

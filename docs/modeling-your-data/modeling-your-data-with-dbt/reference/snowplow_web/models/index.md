@@ -25,33 +25,40 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>models/base/scratch/&lt;adaptor&gt;/snowplow_web_base_events_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 For any given run, this table contains all required events to be consumed by subsequent nodes in the Snowplow dbt web package. This is a cleaned, deduped dataset, containing all columns from the raw events table as well as having the `page_view_id` joined in from the page view context. 
 
 **Note: This table should be used as the input to any custom modules that require event level data, rather than selecting straight from `atomic.events`**
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/base/scratch/bigquery/snowplow_web_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/base/scratch/databricks/snowplow_web_base_events_this_run.sql`
+
 </TabItem>
 <TabItem value="default" label="default" default>
 
 `models/base/scratch/default/snowplow_web_base_events_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/base/scratch/snowflake/snowplow_web_base_events_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
@@ -62,7 +69,7 @@ Base event this run table column lists may be incomplete and is missing contexts
 :::
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. |
 | platform | Platform e.g. ‘web’ |
 | etl_tstamp | Timestamp event began ETL e.g. ‘2017-01-26 00:01:25.292’ |
@@ -198,7 +205,7 @@ Base event this run table column lists may be incomplete and is missing contexts
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/base/scratch/bigquery/snowplow_web_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -241,8 +248,9 @@ from (
 ) e
 group by e.event_id
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/base/scratch/databricks/snowplow_web_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -273,6 +281,7 @@ and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
 
 qualify row_number() over (partition by a.event_id order by a.collector_tstamp, a.etl_tstamp) = 1
 ```
+
 </TabItem>
 <TabItem value="default" label="default" default>
 
@@ -472,8 +481,9 @@ and e.collector_tstamp = pc.root_tstamp
 
 where e.event_id_dedupe_index = 1
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/base/scratch/snowflake/snowplow_web_base_events_this_run.sql">Source</a></i></b></center>
 
@@ -506,20 +516,22 @@ and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
 
 qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
@@ -529,9 +541,10 @@ qualify row_number() over (partition by a.event_id order by a.collector_tstamp) 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_interactions_this_run)
 - [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
@@ -551,17 +564,19 @@ qualify row_number() over (partition by a.event_id order by a.collector_tstamp) 
 <code>models/base/scratch/snowplow_web_base_new_event_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table contains the lower and upper timestamp limits for the given run of the web model. These limits are used to select new events from the events table.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | lower_limit | The lower `collector_tstamp` limit for the run | timestamp_ntz |
 | upper_limit | The upper `collector_tstamp` limit for the run | timestamp_ntz |
 </DbtDetails>
@@ -600,20 +615,22 @@ This table contains the lower and upper timestamp limits for the given run of th
 
 {{ run_limits_query }}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_enabled_snowplow_models](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_enabled_snowplow_models)
 - [macro.snowplow_utils.get_incremental_manifest_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_incremental_manifest_status)
@@ -624,9 +641,10 @@ This table contains the lower and upper timestamp limits for the given run of th
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base)
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
@@ -648,19 +666,21 @@ This table contains the lower and upper timestamp limits for the given run of th
 <code>models/base/manifest/snowplow_web_base_quarantined_sessions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table contains any sessions that have been quarantined. Sessions are quarantined once they exceed the maximum allowed session length, defined by `snowplow__max_session_days`.
 Once quarantined, no further events from these sessions will be processed. Events up until the point of quarantine remain in your derived tables.
 The reason for removing long sessions is to reduce table scans on both the events table and all derived tables. This improves performance greatly.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | The `session_id` of the quarantined session | text |
 </DbtDetails>
 
@@ -703,15 +723,17 @@ select *
 from prep
 where false
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_string
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -720,9 +742,10 @@ where false
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 - [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
@@ -737,19 +760,21 @@ where false
 <code>models/base/manifest/snowplow_web_base_sessions_lifecycle_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This incremental table is a manifest of all sessions that have been processed by the Snowplow dbt web model. For each session, the start and end timestamp is recorded. 
 
 By knowing the lifecycle of a session the model is able to able to determine which sessions and thus events to process for a given timeframe, as well as the complete date range required to reprocess all events of each session.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | start_tstamp | The `collector_tstamp` when the session began | timestamp_ntz |
@@ -868,22 +893,24 @@ select
 
 from session_lifecycle sl
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_quarantined_sessions)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.is_incremental
 - [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
@@ -899,9 +926,10 @@ from session_lifecycle sl
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
 
@@ -915,17 +943,19 @@ from session_lifecycle sl
 <code>models/base/scratch/snowplow_web_base_sessions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 For any given run, this table contains all the required sessions.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | session_id | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | start_tstamp | The `collector_tstamp` when the session began | timestamp_ntz |
@@ -973,22 +1003,24 @@ and s.start_tstamp <= {{ upper_limit }}
 -- Select sessions within window that either; start or finish between lower & upper limit, start and finish outside of lower and upper limits
 and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_quarantined_sessions)
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.quarantine_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.quarantine_sessions)
 - [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
@@ -997,9 +1029,10 @@ and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 - [model.snowplow_web.snowplow_web_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_sessions_this_run)
@@ -1014,17 +1047,19 @@ and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
 <code>models/optional_modules/consent/snowplow_web_consent_cmp_stats.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Used for modeling cmp_visible events and related metrics
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_userid | The optional userid of a user | text |
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
@@ -1181,20 +1216,22 @@ from cmp_events e
 left join first_consent_events f
 on e.event_id = f.cmp_id
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.datediff
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -1209,38 +1246,45 @@ on e.event_id = f.cmp_id
 <code>models/optional_modules/consent/scratch/&lt;adaptor&gt;/snowplow_web_consent_events_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model does not currently have a description.
 
 **Type**: Table
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/optional_modules/consent/scratch/bigquery/snowplow_web_consent_events_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/optional_modules/consent/scratch/databricks/snowplow_web_consent_events_this_run.sql`
+
 </TabItem>
 <TabItem value="default" label="default" default>
 
 `models/optional_modules/consent/scratch/default/snowplow_web_consent_events_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/optional_modules/consent/scratch/snowflake/snowplow_web_consent_events_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id |   | text |
 | domain_userid |   | text |
 | user_id |   | text |
@@ -1264,7 +1308,7 @@ This model does not currently have a description.
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/optional_modules/consent/scratch/bigquery/snowplow_web_consent_events_this_run.sql">Source</a></i></b></center>
 
@@ -1329,8 +1373,9 @@ select
 
   from prep p
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/optional_modules/consent/scratch/databricks/snowplow_web_consent_events_this_run.sql">Source</a></i></b></center>
 
@@ -1391,6 +1436,7 @@ select
 
 from prep p
 ```
+
 </TabItem>
 <TabItem value="default" label="default" default>
 
@@ -1478,8 +1524,9 @@ with consent_pref as (
 
   and {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/optional_modules/consent/scratch/snowflake/snowplow_web_consent_events_this_run.sql">Source</a></i></b></center>
 
@@ -1541,22 +1588,24 @@ select
 
 from prep p
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_float
 - [macro.snowplow_utils.get_array_to_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_array_to_string)
@@ -1569,9 +1618,10 @@ from prep p
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 
@@ -1585,17 +1635,19 @@ from prep p
 <code>models/optional_modules/consent/snowplow_web_consent_log.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Incremental table showing the audit trail of consent and Consent Management Platform (cmp) events
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
@@ -1656,22 +1708,24 @@ from {{ ref('snowplow_web_consent_events_this_run') }}
 
 where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -1682,9 +1736,10 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_cmp_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_cmp_stats)
 - [model.snowplow_web.snowplow_web_consent_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_users)
@@ -1700,17 +1755,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 <code>models/optional_modules/consent/snowplow_web_consent_scope_status.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Aggregate of current number of users consented to each consent scope
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | scope | Consent scope | text |
 | total_consent | The number of consent events corresponding to a scope | number |
 </DbtDetails>
@@ -1756,20 +1813,22 @@ from unnesting
 
 group by 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_users)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_string
 - [macro.snowplow_utils.get_split_to_array](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_split_to_array)
@@ -1785,17 +1844,19 @@ group by 1
 <code>models/optional_modules/consent/snowplow_web_consent_totals.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Summary of the latest consent status as per consent version
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | consent_version | Version of the privacy policy related document | text |
 | version_start_tstamp | The first allow_all consent event belonging to a consent version | timestamp_ntz |
 | consent_scopes | The scopes allowed after the user finalized his selection of consent preferences Eg ['analytics', 'functional', 'advertisement'] | text |
@@ -1876,21 +1937,23 @@ on t.last_consent_version = v.consent_version
 
 order by v.version_start_tstamp desc
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_users)
 - [model.snowplow_web.snowplow_web_consent_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_versions)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.dateadd
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -1905,17 +1968,19 @@ order by v.version_start_tstamp desc
 <code>models/optional_modules/consent/snowplow_web_consent_users.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 By user consent stats
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
 | geo_country | ISO 3166-1 code for the country the visitor is located in e.g. ‘GB’, ‘US’ | text |
@@ -2065,21 +2130,23 @@ and b.latest_event_by_user_rank = 1
 
 {% endif %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 - [model.snowplow_web.snowplow_web_consent_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_versions)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.is_incremental
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
@@ -2088,9 +2155,10 @@ and b.latest_event_by_user_rank = 1
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_scope_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_scope_status)
 - [model.snowplow_web.snowplow_web_consent_totals](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_totals)
@@ -2105,17 +2173,19 @@ and b.latest_event_by_user_rank = 1
 <code>models/optional_modules/consent/snowplow_web_consent_versions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 Used to keep track of each consent version and its validity
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | consent_version | Version of the privacy policy related document | text |
 | version_start_tstamp | The time_stamp of the first allow_all event related to a consent version | timestamp_ntz |
 | consent_scopes | The scopes allowed after the user finalized his selection of consent preferences Eg ['analytics', 'functional', 'advertisement'] | text |
@@ -2222,20 +2292,22 @@ on v.consent_version = l.consent_version
 
 {% endif %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.is_incremental
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
@@ -2244,9 +2316,10 @@ on v.consent_version = l.consent_version
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_totals](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_totals)
 - [model.snowplow_web.snowplow_web_consent_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_users)
@@ -2261,17 +2334,19 @@ on v.consent_version = l.consent_version
 <code>models/base/manifest/snowplow_web_incremental_manifest.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This incremental table is a manifest of the timestamp of the latest event consumed per model within the `snowplow-web` package as well as any models leveraging the incremental framework provided by the package. The latest event's timestamp is based off `collector_tstamp`. This table is used to determine what events should be processed in the next run of the model.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | model | The name of the model. | text |
 | last_success | The latest event consumed by the model, based on `collector_tstamp` | timestamp_ntz |
 </DbtDetails>
@@ -2311,15 +2386,17 @@ select *
 from prep
 where false
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_timestamp
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -2329,9 +2406,10 @@ where false
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base)
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
@@ -2353,24 +2431,28 @@ where false
 <code>models/page_views/scratch/&lt;adaptor&gt;/snowplow_web_page_view_events.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This is a staging table containing all the page view events for a given run of the Web model. It is the first step in the page views module and therefore does not contain metrics such as engaged time and scroll depth which are calculated in subsequent models. It is also where the de-duping of `page_view_id`'s occurs
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
 <TabItem value="default" label="default" default>
 
 `models/page_views/scratch/default/snowplow_web_page_view_events.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
 </DbtDetails>
 
@@ -2549,15 +2631,17 @@ from page_view_events as pv
 
 where page_view_id_dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_web.filter_bots](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.filter_bots)
 
@@ -2571,17 +2655,19 @@ where page_view_id_dedupe_index = 1
 <code>models/page_views/snowplow_web_page_views.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic page views and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
@@ -2722,22 +2808,24 @@ select *
 from {{ ref('snowplow_web_page_views_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -2755,38 +2843,45 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 <code>models/page_views/scratch/&lt;adaptor&gt;/snowplow_web_page_views_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table contains all the page views for the given run of the Web model. It possess all the same columns as `snowplow_web_page_views`. If building a custom module that requires page view events, this is the table you should reference.
 
 **Type**: Table
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/page_views/scratch/bigquery/snowplow_web_page_views_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/page_views/scratch/databricks/snowplow_web_page_views_this_run.sql`
+
 </TabItem>
 <TabItem value="default" label="default" default>
 
 `models/page_views/scratch/default/snowplow_web_page_views_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/page_views/scratch/snowflake/snowplow_web_page_views_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | event_id | A UUID for each event e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
@@ -2892,7 +2987,7 @@ This staging table contains all the page views for the given run of the Web mode
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/page_views/scratch/bigquery/snowplow_web_page_views_this_run.sql">Source</a></i></b></center>
 
@@ -3153,8 +3248,9 @@ on ev.page_view_id = t.page_view_id {% if var('snowplow__limit_page_views_to_ses
 left join {{ ref('snowplow_web_pv_scroll_depth') }} sd
 on ev.page_view_id = sd.page_view_id {% if var('snowplow__limit_page_views_to_session', true) %} and ev.domain_sessionid = sd.domain_sessionid {% endif %}
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/page_views/scratch/databricks/snowplow_web_page_views_this_run.sql">Source</a></i></b></center>
 
@@ -3518,6 +3614,7 @@ select
 
 from page_view_events pve
 ```
+
 </TabItem>
 <TabItem value="default" label="default" default>
 
@@ -3656,8 +3753,9 @@ on ev.page_view_id = sd.page_view_id {% if var('snowplow__limit_page_views_to_se
 
 {%- endif -%}
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/page_views/scratch/snowflake/snowplow_web_page_views_this_run.sql">Source</a></i></b></center>
 
@@ -4022,22 +4120,24 @@ select
 
 from page_view_events pve
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 - [model.snowplow_web.snowplow_web_pv_engaged_time](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_pv_engaged_time)
 - [model.snowplow_web.snowplow_web_pv_scroll_depth](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_pv_scroll_depth)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.datediff
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
@@ -4054,9 +4154,10 @@ from page_view_events pve
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
 
@@ -4070,17 +4171,19 @@ from page_view_events pve
 <code>models/page_views/scratch/snowplow_web_pv_engaged_time.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model calculates the time a visitor spent engaged on a given page view. This is calculated using the number of page ping events received for that page view.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionid |   | text |
 | end_tstamp |   | timestamp_ntz |
@@ -4124,20 +4227,22 @@ and ev.page_view_id is not null
 
 group by 1 {% if var('snowplow__limit_page_views_to_session', true) %}, 2 {% endif %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_utils.to_unixtstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.to_unixtstamp)
@@ -4145,9 +4250,10 @@ group by 1 {% if var('snowplow__limit_page_views_to_session', true) %}, 2 {% end
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 
@@ -4161,26 +4267,30 @@ group by 1 {% if var('snowplow__limit_page_views_to_session', true) %}, 2 {% end
 <code>models/page_views/scratch/&lt;adaptor&gt;/snowplow_web_pv_iab.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 **Redshift and Postgres only**. This is a staging table containing context data generated by the [IAB enrichment](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/iab-enrichment/) for the events in the given run. The model is disable by default. Refer to the docs to enable.
 
 The IAB Spiders & Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
 <TabItem value="default" label="default" default>
 
 `models/page_views/scratch/default/snowplow_web_pv_iab.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
 </DbtDetails>
 
@@ -4226,6 +4336,7 @@ from base
 
 where dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
@@ -4239,19 +4350,23 @@ where dedupe_index = 1
 <code>models/page_views/scratch/&lt;adaptor&gt;/snowplow_web_pv_limits.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model calculates the lower and upper limit for the page views events in the given run. This is based taking the min and max `collector_tstamp` across all page views. It is used to improve performance when selected rows from the various context tables such as the UA parser table.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
 <TabItem value="default" label="default" default>
 
 `models/page_views/scratch/default/snowplow_web_pv_limits.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -4269,6 +4384,7 @@ from {{ ref('snowplow_web_base_events_this_run') }}
 
 where page_view_id is not null
 ```
+
 </TabItem>
 </Tabs>
 
@@ -4282,17 +4398,19 @@ where page_view_id is not null
 <code>models/page_views/scratch/snowplow_web_pv_scroll_depth.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model calculates the horizontal and vertical scroll depth of the visitor on a given page view. Such metrics are useful when assessing engagement on a page view.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionid |   | text |
 | doc_width |   | number |
@@ -4381,20 +4499,22 @@ select
 
 from prep
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_float
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -4402,9 +4522,10 @@ from prep
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 
@@ -4418,24 +4539,28 @@ from prep
 <code>models/page_views/scratch/&lt;adaptor&gt;/snowplow_web_pv_ua_parser.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 **Redshift and Postgres only**. This is a staging table containing context data generated by the [UA parser enrichment](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/) for the events in the given run. The model is disable by default. Refer to the docs to enable.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
 <TabItem value="default" label="default" default>
 
 `models/page_views/scratch/default/snowplow_web_pv_ua_parser.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
 </DbtDetails>
 
@@ -4489,6 +4614,7 @@ from base
 
 where dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
@@ -4502,24 +4628,28 @@ where dedupe_index = 1
 <code>models/page_views/scratch/&lt;adaptor&gt;/snowplow_web_pv_yauaa.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 **Redshift and Postgres only**. This is a staging table containing context data generated by the [YAUAA enrichment](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/yauaa-enrichment/). The model is disable by default. Refer to the docs to enable.
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
 <TabItem value="default" label="default" default>
 
 `models/page_views/scratch/default/snowplow_web_pv_yauaa.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | page_view_id | A UUID for each page view e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ |
 </DbtDetails>
 
@@ -4582,6 +4712,7 @@ from base
 
 where dedupe_index = 1
 ```
+
 </TabItem>
 </Tabs>
 
@@ -4595,17 +4726,19 @@ where dedupe_index = 1
 <code>models/sessions/snowplow_web_sessions.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic sessions and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionidx | A visit / session index e.g. 3 | number |
@@ -4742,15 +4875,17 @@ select *
 from {{ ref('snowplow_web_sessions_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
@@ -4758,7 +4893,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 - [model.snowplow_web.snowplow_web_user_mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_user_mapping)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -4770,9 +4905,10 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_sessions_this_run)
 
@@ -4786,38 +4922,45 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 <code>models/sessions/scratch/&lt;adaptor&gt;/snowplow_web_sessions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table contains all the sessions for the given run of the Web model. It possess all the same columns as `snowplow_web_sessions`. If building a custom module that requires session level data, this is the table you should reference.
 
 **Type**: Table
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/sessions/scratch/bigquery/snowplow_web_sessions_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/sessions/scratch/databricks/snowplow_web_sessions_this_run.sql`
+
 </TabItem>
 <TabItem value="default" label="default" default>
 
 `models/sessions/scratch/default/snowplow_web_sessions_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/sessions/scratch/snowflake/snowplow_web_sessions_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | app_id | Application ID e.g. ‘angry-birds’ is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. production versus dev. | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionidx | A visit / session index e.g. 3 | number |
@@ -4916,7 +5059,7 @@ This staging table contains all the sessions for the given run of the Web model.
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/sessions/scratch/bigquery/snowplow_web_sessions_this_run.sql">Source</a></i></b></center>
 
@@ -5225,8 +5368,9 @@ left join
 where
     a.page_event_in_session_index = 1
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/sessions/scratch/databricks/snowplow_web_sessions_this_run.sql">Source</a></i></b></center>
 
@@ -5517,6 +5661,7 @@ left join
 left join
     session_aggs c on a.domain_sessionid = c.domain_sessionid
 ```
+
 </TabItem>
 <TabItem value="default" label="default" default>
 
@@ -5828,8 +5973,9 @@ left join
 where
     a.page_event_in_session_index = 1
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/sessions/scratch/snowflake/snowplow_web_sessions_this_run.sql">Source</a></i></b></center>
 
@@ -6124,20 +6270,22 @@ left join
 left join
     session_aggs c on a.domain_sessionid = c.domain_sessionid
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.concat
 - macro.dbt.type_string
@@ -6159,9 +6307,10 @@ left join
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
 
@@ -6175,17 +6324,19 @@ left join
 <code>models/user_mapping/snowplow_web_user_mapping.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 A mapping table between `domain_userid` and `user_id`.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
 | end_tstamp | The `collector_tstamp` when the user was last active | timestamp_ntz |
@@ -6231,22 +6382,24 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 and user_id is not null
 and domain_userid is not null
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -6256,9 +6409,10 @@ and domain_userid is not null
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
 
@@ -6272,17 +6426,19 @@ and domain_userid is not null
 <code>models/users/snowplow_web_users.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived incremental table contains all historic users data and should be the end point for any analysis or BI tools.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
@@ -6363,22 +6519,24 @@ select *
 from {{ ref('snowplow_web_users_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 - [model.snowplow_web.snowplow_web_users_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
@@ -6396,17 +6554,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 <code>models/users/scratch/snowplow_web_users_aggs.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model aggregates various metrics derived from sessions to a users level.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | start_tstamp |   | timestamp_ntz |
 | end_tstamp |   | timestamp_ntz |
@@ -6456,20 +6616,22 @@ from {{ ref('snowplow_web_users_sessions_this_run') }}
 
 group by 1,2,3
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
@@ -6479,9 +6641,10 @@ group by 1,2,3
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users_lasts](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_lasts)
 - [model.snowplow_web.snowplow_web_users_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_this_run)
@@ -6496,17 +6659,19 @@ group by 1,2,3
 <code>models/users/scratch/snowplow_web_users_lasts.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model identifies the last page view for a user and returns various dimensions associated with that page view.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | last_page_title |   | text |
 | last_page_url |   | text |
@@ -6550,30 +6715,33 @@ from {{ ref('snowplow_web_users_sessions_this_run') }} a
 inner join {{ ref('snowplow_web_users_aggs') }} b
 on a.domain_sessionid = b.last_domain_sessionid
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_aggs)
 - [model.snowplow_web.snowplow_web_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_this_run)
 
@@ -6587,17 +6755,19 @@ on a.domain_sessionid = b.last_domain_sessionid
 <code>models/users/scratch/snowplow_web_users_sessions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This model contains all sessions data related to users contained in the given run of the Web model
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | app_id |   | text |
 | domain_sessionid | A visit / session UUID e.g. ‘c6ef3124-b53a-4b13-a233-0088f79dcbcb’ | text |
 | domain_sessionidx |   | number |
@@ -6727,30 +6897,33 @@ from {{ var('snowplow__sessions_table') }} a
 inner join user_ids_this_run b
 on a.domain_userid = b.domain_userid
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_aggs)
 - [model.snowplow_web.snowplow_web_users_lasts](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_lasts)
@@ -6766,17 +6939,19 @@ on a.domain_userid = b.domain_userid
 <code>models/users/scratch/snowplow_web_users_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table contains all the users for the given run of the Web model. It possess all the same columns as `snowplow_web_users`. If building a custom module that requires session level data, this is the table you should reference.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | user_id | Unique ID set by business e.g. ‘jon.doe@email.com’ | text |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. ‘bc2e92ec6c204a14’ | text |
 | network_userid | User ID set by Snowplow using 3rd party cookie e.g. ‘ecdff4d0-9175-40ac-a8bb-325c49733607’ | text |
@@ -6901,22 +7076,24 @@ on a.domain_sessionid = b.first_domain_sessionid
 inner join {{ ref('snowplow_web_users_lasts') }} c
 on b.domain_userid = c.domain_userid
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_aggs)
 - [model.snowplow_web.snowplow_web_users_lasts](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_lasts)
 - [model.snowplow_web.snowplow_web_users_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_sessions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -6924,9 +7101,10 @@ on b.domain_userid = c.domain_userid
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users)
 

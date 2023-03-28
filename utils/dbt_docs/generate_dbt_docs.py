@@ -3,18 +3,6 @@ from dbt_classes_and_funcs import *
 import sys
 from dbt_package_list import all_packages
 
-"""
-To add a new package, you need to update a few places:
-In classes_and_funcs:
-    - Add it to the download_docs function
-    - Add it to get_source_url
-In this file:
-    - Add the load of the file
-    - Add two calls to generate the markdown for it's macros and it's models
-    - Add two calls to write the file
-Create the folder structure for the package markdowns, update the index at the higher level
-"""
-
 def main():
     package_names = [x[0].split('/')[1] for x in all_packages]
     # packages = ['utils', 'web', 'mobile', 'media_player', 'normalize', 'fractribution', 'ecommerce']

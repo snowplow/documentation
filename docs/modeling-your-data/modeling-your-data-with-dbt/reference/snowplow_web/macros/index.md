@@ -19,66 +19,39 @@ This page is auto-generated from our dbt packages, some information may be incom
 
 :::
 ## Snowplow Web
-### Snowplow Web Delete From Manifest {#macro.snowplow_utils.snowplow_web_delete_from_manifest}
-
-<DbtDetails><summary>
-<code>macros/utils/snowplow_delete_from_manifest.sql</code>
-</summary>
-
-#### Description
-This macro does not currently have a description.
-
-#### Details
-<DbtDetails>
-<summary>Code</summary>
-
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
-
-```jinja2
-{% macro snowplow_web_delete_from_manifest(models) %}
-
-  {{ snowplow_utils.snowplow_delete_from_manifest(models, ref('snowplow_web_incremental_manifest')) }}
-
-{% endmacro %}
-```
-
-</DbtDetails>
-
-
-#### Depends On
-- [macro.snowplow_utils.snowplow_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_from_manifest)
-
-</DbtDetails>
-
 ### Allow Refresh {#macro.snowplow_web.allow_refresh}
 
 <DbtDetails><summary>
 <code>macros/allow_refresh.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to determine if a full-refresh is allowed (depending on the environment), using the `snowplow__allow_refresh` variable.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 `snowplow__allow_refresh` if environment is not `dev`, `none` otherwise.
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/allow_refresh.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro allow_refresh() %}
   {{ return(adapter.dispatch('allow_refresh', 'snowplow_web')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -95,19 +68,27 @@ This macro is used to determine if a full-refresh is allowed (depending on the e
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_quarantined_sessions)
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
@@ -123,10 +104,12 @@ This macro is used to determine if a full-refresh is allowed (depending on the e
 <code>macros/bigquery/consent_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -153,9 +136,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
 
@@ -169,7 +153,8 @@ This macro does not currently have a description.
 <code>macros/filter_bots.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to generate a warehouse specific filter for the `useragent` field to remove bots from processing, or to overwrite for custom filtering. The filter excludes any of the following in the string:
 - bot
 - crawl
@@ -205,14 +190,17 @@ This macro is used to generate a warehouse specific filter for the `useragent` f
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `table_alias` *(string)*: (Optional) the table alias to identify the useragent column from. Default none
 
-#### Returns
+<h4>Returns</h4>
+
 
 A filter on `useragent` to exclude those with strings matching the above list.
 
-#### Usage
+<h4>Usage</h4>
+
 
 ```sql
 select
@@ -232,14 +220,15 @@ and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit
 ```
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/filter_bots.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro filter_bots(table_alias = none) %}
@@ -248,6 +237,7 @@ and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit
 
 
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -256,6 +246,7 @@ and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit
   and not regexp_contains({% if table_alias %}{{table_alias~'.'}}{% endif %}useragent, '(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)')
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -264,6 +255,7 @@ and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit
   and {% if table_alias %}{{table_alias~'.'}}{% endif %}useragent not similar to '%(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)%'
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -272,6 +264,7 @@ and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit
   and not rlike({% if table_alias %}{{table_alias~'.'}}{% endif %}useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt).*')
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -280,15 +273,17 @@ and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit
   and not rlike({% if table_alias %}{{table_alias~'.'}}{% endif %}useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt).*')
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_view_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_view_events)
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
@@ -304,27 +299,31 @@ and not rlike(useragent, '.*(bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit
 <code>macros/get_context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to extract the fields from the iab enrichment context for each warehouse.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `table_prefix` *(string)*: (Optional) Table alias to prefix the column selection with. Default none
 
-#### Returns
+<h4>Returns</h4>
+
 
 The sql to extract the columns from the iab context, or these columns as nulls.
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/get_context_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro get_iab_context_fields(table_prefix = none) %}
@@ -333,6 +332,7 @@ The sql to extract the columns from the iab context, or these columns as nulls.
 
 
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -343,6 +343,7 @@ The sql to extract the columns from the iab context, or these columns as nulls.
     {% endif %}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -361,6 +362,7 @@ The sql to extract the columns from the iab context, or these columns as nulls.
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -380,6 +382,7 @@ The sql to extract the columns from the iab context, or these columns as nulls.
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -398,19 +401,27 @@ The sql to extract the columns from the iab context, or these columns as nulls.
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.type_string
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
@@ -425,27 +436,31 @@ The sql to extract the columns from the iab context, or these columns as nulls.
 <code>macros/get_context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to extract the fields from the ua enrichment context for each warehouse.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `table_prefix` *(string)*: (Optional) Table alias to prefix the column selection with. Default none
 
-#### Returns
+<h4>Returns</h4>
+
 
 The sql to extract the columns from the ua context, or these columns as nulls.
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/get_context_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro get_ua_context_fields(table_prefix = none) %}
@@ -454,6 +469,7 @@ The sql to extract the columns from the ua context, or these columns as nulls.
 
 
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -464,6 +480,7 @@ The sql to extract the columns from the ua context, or these columns as nulls.
     {% endif %}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -498,6 +515,7 @@ The sql to extract the columns from the ua context, or these columns as nulls.
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -533,6 +551,7 @@ The sql to extract the columns from the ua context, or these columns as nulls.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -567,19 +586,27 @@ The sql to extract the columns from the ua context, or these columns as nulls.
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.type_string
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
@@ -594,27 +621,31 @@ The sql to extract the columns from the ua context, or these columns as nulls.
 <code>macros/get_context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to extract the fields from the yauaa enrichment context for each warehouse.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `table_prefix` *(string)*: (Optional) Table alias to prefix the column selection with. Default none
 
-#### Returns
+<h4>Returns</h4>
+
 
 The sql to extract the columns from the yauaa context, or these columns as nulls.
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/get_context_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro get_yauaa_context_fields(table_prefix = none) %}
@@ -623,6 +654,7 @@ The sql to extract the columns from the yauaa context, or these columns as nulls
 
 
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -633,6 +665,7 @@ The sql to extract the columns from the yauaa context, or these columns as nulls
     {% endif %}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="postgres" label="postgres">
 
@@ -683,6 +716,7 @@ The sql to extract the columns from the yauaa context, or these columns as nulls
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -733,6 +767,7 @@ The sql to extract the columns from the yauaa context, or these columns as nulls
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -783,19 +818,27 @@ The sql to extract the columns from the yauaa context, or these columns as nulls
     {%- endif -%}
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - macro.dbt.type_string
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
@@ -810,17 +853,20 @@ The sql to extract the columns from the yauaa context, or these columns as nulls
 <code>macros/bigquery/page_view_contexts.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 The specific fields and their type for the context (see macro code for values).
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -844,9 +890,10 @@ The specific fields and their type for the context (see macro code for values).
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
@@ -861,29 +908,33 @@ The specific fields and their type for the context (see macro code for values).
 <code>macros/stitch_user_identifiers.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used as a post-hook on the sessions table to stitch user identities using the user_mapping table provided.
 
 
 
-#### Arguments
+<h4>Arguments</h4>
+
 - `enabled` *(boolean)*: If the user stitching should be done or not
 - `relation` *(string)*: (Optional) The model to update the `stitched_user_id` column in. Default `this`
 - `user_mapping_relation` *(string)*: (Optional) The model to use the `user_id` column from. Default `snowplow_web_user_mapping`
 
-#### Returns
+<h4>Returns</h4>
+
 
 The update/merge statement to update the `stitched_user_id` column, if enabled.
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/stitch_user_identifiers.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro stitch_user_identifiers(enabled, relation=this, user_mapping_relation='snowplow_web_user_mapping') %}
@@ -892,6 +943,7 @@ The update/merge statement to update the `stitched_user_id` column, if enabled.
 
 
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -908,6 +960,7 @@ The update/merge statement to update the `stitched_user_id` column, if enabled.
 
 
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -923,15 +976,17 @@ The update/merge statement to update the `stitched_user_id` column, if enabled.
     {% endif %}
 {%- endmacro -%}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
 
@@ -945,17 +1000,20 @@ The update/merge statement to update the `stitched_user_id` column, if enabled.
 <code>macros/bigquery/page_view_contexts.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 The specific fields and their type for the context (see macro code for values).
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -987,9 +1045,10 @@ The specific fields and their type for the context (see macro code for values).
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
@@ -1004,24 +1063,27 @@ The specific fields and their type for the context (see macro code for values).
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 The specific fields for each warehouse (see macro code for values).
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro web_cluster_by_fields_consent() %}
@@ -1030,6 +1092,7 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1040,19 +1103,27 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 
@@ -1066,24 +1137,27 @@ The specific fields for each warehouse (see macro code for values).
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 The specific fields for each warehouse (see macro code for values).
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro web_cluster_by_fields_page_views() %}
@@ -1092,6 +1166,7 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1102,19 +1177,27 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
 
@@ -1128,24 +1211,27 @@ The specific fields for each warehouse (see macro code for values).
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 The specific fields for each warehouse (see macro code for values).
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro web_cluster_by_fields_sessions() %}
@@ -1154,6 +1240,7 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1164,19 +1251,27 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
 
@@ -1190,24 +1285,27 @@ The specific fields for each warehouse (see macro code for values).
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 The specific fields for each warehouse (see macro code for values).
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro web_cluster_by_fields_sessions_lifecycle() %}
@@ -1216,6 +1314,7 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1226,19 +1325,27 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 
@@ -1252,24 +1359,27 @@ The specific fields for each warehouse (see macro code for values).
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to return the appropriate `cluster_by` fields for the table, depending on the warehouse target.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 The specific fields for each warehouse (see macro code for values).
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro web_cluster_by_fields_users() %}
@@ -1278,6 +1388,7 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -1288,19 +1399,27 @@ The specific fields for each warehouse (see macro code for values).
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users)
 
@@ -1314,17 +1433,20 @@ The specific fields for each warehouse (see macro code for values).
 <code>macros/bigquery/page_view_contexts.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro is used to return the appropriate field and type mapping for use in `snowplow_utils.get_optional_fields`.
 
 
 
-#### Returns
+<h4>Returns</h4>
+
 
 The specific fields and their type for the context (see macro code for values).
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1364,9 +1486,10 @@ The specific fields and their type for the context (see macro code for values).
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)

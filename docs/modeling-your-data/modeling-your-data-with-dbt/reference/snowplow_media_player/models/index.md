@@ -25,17 +25,19 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>models/web/snowplow_media_player_base.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived table aggregates media player interactions to a pageview level incrementally.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. | text |
 | page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. | text |
@@ -102,22 +104,24 @@ from {{ ref('snowplow_media_player_base_this_run') }}
 
 where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_base_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base_this_run)
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
 - [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
@@ -127,9 +131,10 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_media_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_media_stats)
 - [model.snowplow_media_player.snowplow_media_player_plays_by_pageview](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_plays_by_pageview)
@@ -144,17 +149,19 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 <code>models/web/scratch/snowplow_media_player_base_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table aggregates media player interactions within the current run to a pageview level that is considered a base level for media plays.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. | text |
 | page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. | text |
@@ -333,20 +340,22 @@ on f.media_id = d.media_id
 
 where d.duplicate_count = 1
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_interactions_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_float
 - [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
@@ -357,9 +366,10 @@ where d.duplicate_count = 1
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base)
 
@@ -373,38 +383,45 @@ where d.duplicate_count = 1
 <code>models/web/scratch/interactions_this_run/&lt;adaptor&gt;/snowplow_media_player_interactions_this_run.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This staging table shows all media player events within the current incremental run and calculates play_time. It could be used in custom models for more in-depth time based calculations.
 
 **Type**: Table
 
-#### File Paths
+<h4>File Paths</h4>
+
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 `models/web/scratch/interactions_this_run/bigquery/snowplow_media_player_interactions_this_run.sql`
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 `models/web/scratch/interactions_this_run/databricks/snowplow_media_player_interactions_this_run.sql`
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 `models/web/scratch/interactions_this_run/redshift_postgres/snowplow_media_player_interactions_this_run.sql`
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 `models/web/scratch/interactions_this_run/snowflake/snowplow_media_player_interactions_this_run.sql`
+
 </TabItem>
 </Tabs>
 
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. | text |
 | event_id | A UUID for each event e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
@@ -441,7 +458,7 @@ This staging table shows all media player events within the current incremental 
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery" >
+<TabItem value="bigquery" label="bigquery">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-media-player/blob/main/models/web/scratch/interactions_this_run/bigquery/snowplow_media_player_interactions_this_run.sql">Source</a></i></b></center>
 
@@ -715,8 +732,9 @@ with prep as (
   left join {{ ref("snowplow_media_player_pivot_base") }} piv
   on p.percent_progress = piv.percent_progress
 ```
+
 </TabItem>
-<TabItem value="databricks" label="databricks" >
+<TabItem value="databricks" label="databricks">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-media-player/blob/main/models/web/scratch/interactions_this_run/databricks/snowplow_media_player_interactions_this_run.sql">Source</a></i></b></center>
 
@@ -805,8 +823,9 @@ with prep as (
   left join {{ ref("snowplow_media_player_pivot_base") }} piv
   on p.percent_progress = piv.percent_progress
 ```
+
 </TabItem>
-<TabItem value="redshift/postgres" label="redshift/postgres" >
+<TabItem value="redshift/postgres" label="redshift/postgres">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-media-player/blob/main/models/web/scratch/interactions_this_run/redshift_postgres/snowplow_media_player_interactions_this_run.sql">Source</a></i></b></center>
 
@@ -915,8 +934,9 @@ with prep as (
   left join {{ ref("snowplow_media_player_pivot_base") }} piv
   on p.percent_progress = piv.percent_progress
 ```
+
 </TabItem>
-<TabItem value="snowflake" label="snowflake" >
+<TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-media-player/blob/main/models/web/scratch/interactions_this_run/snowflake/snowplow_media_player_interactions_this_run.sql">Source</a></i></b></center>
 
@@ -1007,21 +1027,23 @@ with prep as (
   left join {{ ref("snowplow_media_player_pivot_base") }} piv
   on p.percent_progress = piv.percent_progress
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_pivot_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_pivot_base)
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_int
 - macro.dbt_utils.generate_surrogate_key
@@ -1031,9 +1053,10 @@ with prep as (
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_base_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base_this_run)
 
@@ -1047,17 +1070,19 @@ with prep as (
 <code>models/web/snowplow_media_player_media_stats.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This derived table aggregates the pageview level interactions to show overall media stats.
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | media_id | The primary key of this table | text |
 | media_label | The optional, human readable name given to tracked media content. | text |
 | duration | Total length of media in seconds e.g. it's a 5:32 youtube video so the duration is 332 seconds. | number |
@@ -1366,21 +1391,23 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 
 {% endif %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base)
 - [model.snowplow_media_player.snowplow_media_player_pivot_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_pivot_base)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.dateadd
 - macro.dbt.is_incremental
@@ -1407,17 +1434,19 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 <code>models/web/scratch/snowplow_media_player_pivot_base.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This helper table serves as a base to calculate percent_progress based fields as well as the play_time metrics (by calculating the weight attributed to a percent progress being reached).
 
 **Type**: Table
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | percent_progress | The percent of the way through the media. It is based on either the percentprogress event that is fired at specific intervalls as defined during the tracker setup or the 'ended' event, which is equivalent to reaching 100% of the media's total duration (length). e.g. 25, meaning the user passed the 25% mark during play. It does not mean the user watched all the content in between two percentprogress marks, unless there is no seek events happening within the same page_view (`snowplow_media_player_base`). | number |
 | weight_rate | The weight given for each percent progress reached used for the calculation of the play_time_sec_estimated field. It is based on the difference of the current and preciding percent_progress rate. | number |
 </DbtDetails>
@@ -1475,15 +1504,17 @@ select
 
 from weight_calc
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_media_player.get_percentage_boundaries](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/macros/index.md#macro.snowplow_media_player.get_percentage_boundaries)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -1491,9 +1522,10 @@ from weight_calc
 </TabItem>
 </Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_interactions_this_run)
 - [model.snowplow_media_player.snowplow_media_player_media_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_media_stats)
@@ -1508,17 +1540,19 @@ from weight_calc
 <code>models/web/snowplow_media_player_plays_by_pageview.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This view removes impressions from the derived snowplow_media_base table for showing pageview level media play events.
 
 **Type**: View
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |Type|
-|--------------|-------------|----|
+|:------------|:------------|:--:|
 | play_id | The surrogate key generated from `page_view_id` and `media_id `to create a unique play event identifier. | text |
 | page_view_id | A UUID for each page view e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. | text |
 | media_id | The unique identifier of a specific media element. It is the `player_id` in case of YouTube and `html_id` in case of HTML5. | text |
@@ -1572,20 +1606,22 @@ from {{ ref("snowplow_media_player_base") }}
 
 where is_played
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_media_player.snowplow_media_player_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base)
 
 </TabItem>
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -1599,15 +1635,17 @@ where is_played
 <code>models/custom/snowplow_media_player_session_stats.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table aggregates the pageview level interactions to show session level media stats.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | domain_sessionid | A visit / session UUID e.g. `c6ef3124-b53a-4b13-a233-0088f79dcbcb`. |
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. |
 | impressions | The number of pageviews where a media content was rendered regardless of whether the media was actually played or not. |
@@ -1685,15 +1723,17 @@ select *
 
 from prep
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_float
 - [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
@@ -1710,15 +1750,17 @@ from prep
 <code>models/custom/snowplow_media_player_user_stats.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This table aggregates the pageview level interactions to show user level media stats.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Columns</summary>
 
 | Column Name | Description |
-|--------------|-------------|
+|:------------|:------------|
 | domain_userid | User ID set by Snowplow using 1st party cookie e.g. `bc2e92ec6c204a14`. |
 | first_play | The `derived_tstamp` of the beginning of the first play of a media element. |
 | last_play | The `derived_tstamp` of the beginning of the last play of a media element. |
@@ -1787,15 +1829,17 @@ select *
 
 from prep
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
 <Tabs groupId="reference">
-<TabItem value="macros" label="Macros">
+<TabItem value="macro" label="Macros">
 
 - macro.dbt.type_int
 - [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)

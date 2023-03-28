@@ -25,23 +25,26 @@ This page is auto-generated from our dbt packages, some information may be incom
 <code>macros/allow_refresh.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/allow_refresh.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro allow_refresh() %}
   {{ return(adapter.dispatch('allow_refresh', 'snowplow_mobile')()) }}
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -58,19 +61,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
@@ -85,10 +96,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -110,9 +123,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 
@@ -126,10 +140,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -160,9 +176,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_app_errors_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors_this_run)
 
@@ -176,17 +193,19 @@ This macro does not currently have a description.
 <code>macros/bool_or.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/bool_or.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro bool_or(field) %}
@@ -195,6 +214,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -207,6 +227,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -219,6 +240,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="snowflake" label="snowflake">
 
@@ -231,15 +253,17 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_sessions_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_aggs)
 
@@ -253,17 +277,19 @@ This macro does not currently have a description.
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro cluster_by_fields_app_errors() %}
@@ -272,6 +298,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -282,19 +309,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors)
 
@@ -308,10 +343,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -338,9 +375,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 
@@ -354,17 +392,19 @@ This macro does not currently have a description.
 <code>macros/get_path_sql.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/get_path_sql.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro get_device_user_id_path_sql(relation_alias) %}
@@ -373,6 +413,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -402,6 +443,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="databricks" label="databricks">
 
@@ -416,6 +458,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -430,6 +473,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -440,19 +484,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
 
@@ -466,17 +518,19 @@ This macro does not currently have a description.
 <code>macros/get_path_sql.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/get_path_sql.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro get_session_id_path_sql(relation_alias) %}
@@ -485,6 +539,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="bigquery" label="bigquery">
 
@@ -515,6 +570,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="databricks" label="databricks">
 
@@ -528,6 +584,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -541,6 +598,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="spark" label="spark">
 
@@ -551,19 +609,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.combine_column_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.combine_column_versions)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
@@ -578,17 +644,19 @@ This macro does not currently have a description.
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro mobile_cluster_by_fields_screen_views() %}
@@ -597,6 +665,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -607,19 +676,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views)
 
@@ -633,17 +710,19 @@ This macro does not currently have a description.
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro mobile_cluster_by_fields_sessions() %}
@@ -652,6 +731,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -662,19 +742,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions)
 
@@ -688,17 +776,19 @@ This macro does not currently have a description.
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro mobile_cluster_by_fields_sessions_lifecycle() %}
@@ -707,6 +797,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -717,19 +808,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
 
@@ -743,17 +842,19 @@ This macro does not currently have a description.
 <code>macros/cluster_by_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/macros/cluster_by_fields.sql">Source</a></i></b></center>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="raw" label="Raw" default>
+<TabItem value="raw" label="raw" default>
 
 ```jinja2
 {% macro mobile_cluster_by_fields_users() %}
@@ -762,6 +863,7 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 <TabItem value="default" label="default">
 
@@ -772,19 +874,27 @@ This macro does not currently have a description.
 
 {% endmacro %}
 ```
+
 </TabItem>
 </Tabs>
 
 </DbtDetails>
 
 
-#### Depends On
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 
+</TabItem>
+</Tabs>
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users)
 
@@ -798,10 +908,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -832,9 +944,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 
@@ -848,10 +961,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -878,9 +993,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 
@@ -894,10 +1010,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/unstruct_event_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -924,9 +1042,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 
@@ -940,10 +1059,12 @@ This macro does not currently have a description.
 <code>macros/bigquery/context_fields.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -968,9 +1089,10 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_events_this_run)
 
@@ -984,10 +1106,12 @@ This macro does not currently have a description.
 <code>macros/stitch_user_identifiers.sql</code>
 </summary>
 
-#### Description
+<h4>Description</h4>
+
 This macro does not currently have a description.
 
-#### Details
+<h4>Details</h4>
+
 <DbtDetails>
 <summary>Code</summary>
 
@@ -1021,44 +1145,14 @@ This macro does not currently have a description.
 </DbtDetails>
 
 
-#### Referenced By
+<h4>Referenced By</h4>
+
 <Tabs groupId="reference">
-<TabItem value="model" label="Models" default>
+<TabItem value="model" label="Models">
 
 - [model.snowplow_mobile.snowplow_mobile_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions)
 
 </TabItem>
 </Tabs>
-</DbtDetails>
-
-### Snowplow Mobile Delete From Manifest {#macro.snowplow_utils.snowplow_mobile_delete_from_manifest}
-
-<DbtDetails><summary>
-<code>macros/utils/snowplow_delete_from_manifest.sql</code>
-</summary>
-
-#### Description
-This macro does not currently have a description.
-
-#### Details
-<DbtDetails>
-<summary>Code</summary>
-
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
-
-```jinja2
-{% macro snowplow_mobile_delete_from_manifest(models) %}
-
-  {{ snowplow_utils.snowplow_delete_from_manifest(models, ref('snowplow_mobile_incremental_manifest')) }}
-
-{% endmacro %}
-```
-
-</DbtDetails>
-
-
-#### Depends On
-- [macro.snowplow_utils.snowplow_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_from_manifest)
-
 </DbtDetails>
 

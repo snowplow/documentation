@@ -84,7 +84,7 @@ def main():
     # write the file out
     with open("src/dbtVersions.js", "w") as fdesc:
         fdesc.write('export const dbtVersions = ')
-        json.dump(package_list, fdesc, indent = 4)
+        json.dump(dict(sorted(package_list.items())), fdesc, indent = 4)
         fdesc.write('\n')
 
 

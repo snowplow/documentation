@@ -7,10 +7,12 @@ import requests
 import json
 from dbt_package_list import all_packages
 
+
 def classFromArgs(className, argDict):
     fieldSet = {f.name for f in fields(className) if f.init}
-    filteredArgDict = {k : v for k, v in argDict.items() if k in fieldSet}
+    filteredArgDict = {k: v for k, v in argDict.items() if k in fieldSet}
     return className(**filteredArgDict)
+
 
 @dataclass
 class dbt_base:
@@ -41,13 +43,15 @@ class dbt_base:
         else:
             return 'default'
 
+
 @dataclass
 class dbt_model(dbt_base):
     raw_code: str
     columns: dict[dict]
     paths: Optional[dict] = field(default_factory=dict)
     dispatched_sql: Optional[dict] = field(default_factory=dict)
-    referenced_by: Optional[dict[list]] = field(default_factory=lambda: {'macros': [], 'nodes': []})
+    referenced_by: Optional[dict[list]] = field(
+        default_factory=lambda: {'macros': [], 'nodes': []})
     type: Optional[str] = None
 
     def __post_init__(self):
@@ -55,7 +59,8 @@ class dbt_model(dbt_base):
         lang = self.get_lang()
         self.paths[lang] = self.original_file_path
         self.dispatched_sql[lang] = self.raw_code
-        self.original_file_path = re.sub('bigquery|snowflake|default|redshift\_postgres|redshift|postgres|databricks', '&lt;adaptor&gt;', self.original_file_path)
+        self.original_file_path = re.sub(
+            'bigquery|snowflake|default|redshift\_postgres|redshift|postgres|databricks', '&lt;adaptor&gt;', self.original_file_path)
         # ensure all column names are lowercase
         temp_cols = deepcopy(self.columns)
         self.columns = {k.lower(): v for k, v in temp_cols.items()}
@@ -71,15 +76,20 @@ class dbt_model(dbt_base):
             str: A markdown string for the model
         """
         # Get all the information we need about the macro
-        description = get_doc(self.description, docs, key) # If this was a disabled model we need to process from the actual docs
+        # If this was a disabled model we need to process from the actual docs
+        description = get_doc(self.description, docs, key)
         dispatched_sql = self.dispatched_sql
         dispatched_filepath = self.paths
         columns = self.columns
         # Remove all integration test stuff from depends/refs, also de-dupe in case any made it through somehow
-        depends_macros = list({x for x in self.depends_on.get('macros') if 'integration_tests' not in x})
-        depends_models = list({x for x in self.depends_on.get('nodes') if 'integration_tests' not in x})
-        referenced_by_macros = list({x for x in self.referenced_by.get('macros') if 'integration_tests' not in x})
-        referenced_by_models = list({x for x in self.referenced_by.get('nodes') if 'integration_tests' not in x})
+        depends_macros = list({x for x in self.depends_on.get(
+            'macros') if 'integration_tests' not in x})
+        depends_models = list({x for x in self.depends_on.get(
+            'nodes') if 'integration_tests' not in x})
+        referenced_by_macros = list(
+            {x for x in self.referenced_by.get('macros') if 'integration_tests' not in x})
+        referenced_by_models = list(
+            {x for x in self.referenced_by.get('nodes') if 'integration_tests' not in x})
 
         # Set initial markdown, set specific header key
         markdown = [f'### {self.name.replace("_"," ").title()} {{#{key}}}',
@@ -97,7 +107,8 @@ class dbt_model(dbt_base):
             markdown.append(description)
         else:
             is_documented = False
-            markdown.append('This model does not currently have a description.')
+            markdown.append(
+                'This model does not currently have a description.')
 
         if self.type is not None:
             markdown.extend(['', f'**Type**: {self.type}'])
@@ -106,7 +117,8 @@ class dbt_model(dbt_base):
             markdown.extend(['', '<h4>File Paths</h4>', ''])
             markdown.append('<Tabs groupId="dispatched_sql">')
             for lang in sorted(dispatched_filepath):
-                markdown.extend(md_tab_val(lang, None, f'`{dispatched_filepath[lang]}`', lang == "default", None))
+                markdown.extend(md_tab_val(
+                    lang, None, f'`{dispatched_filepath[lang]}`', lang == "default", None))
             markdown.extend(['</Tabs>', ''])
 
         markdown.extend(['', '<h4>Details</h4>', ''])
@@ -115,7 +127,8 @@ class dbt_model(dbt_base):
         if columns != {}:
             markdown.extend(['<DbtDetails>', '<summary>Columns</summary>', ''])
             if self.name.endswith('base_events_this_run'):
-                markdown.extend([':::note', '', 'Base event this run table column lists may be incomplete and is missing contexts/unstructs, please check your warehouse for a more accurate column list.', '', ':::', ''])
+                markdown.extend(
+                    [':::note', '', 'Base event this run table column lists may be incomplete and is missing contexts/unstructs, please check your warehouse for a more accurate column list.', '', ':::', ''])
             columns_as_table = column_dict_to_table(columns, docs, key)
             markdown.extend(columns_as_table)
             markdown.extend(['</DbtDetails>', ''])
@@ -130,7 +143,8 @@ class dbt_model(dbt_base):
                 link = f'<center><b><i><a href="{source_url}">Source</a></i></b></center>'
             else:
                 link = ''
-            markdown.extend(md_tab_val(lang, link, dispatched_sql[lang], lang == "default", 'jinja2'))
+            markdown.extend(md_tab_val(
+                lang, link, dispatched_sql[lang], lang == "default", 'jinja2'))
 
         markdown.extend(['</Tabs>', ''])
 
@@ -139,10 +153,12 @@ class dbt_model(dbt_base):
         # Add the depends on references
         markdown.extend(md_depends_on(depends_macros, depends_models))
 
-        markdown.extend(md_referenced_by(referenced_by_macros, referenced_by_models))
+        markdown.extend(md_referenced_by(
+            referenced_by_macros, referenced_by_models))
 
         markdown.extend(['</DbtDetails>', ''])
         return '\n'.join(markdown), is_documented
+
 
 @dataclass
 class dbt_macro(dbt_base):
@@ -150,13 +166,14 @@ class dbt_macro(dbt_base):
     arguments: list[dict]
     is_dispatched: Optional[bool] = False
     dispatched_sql: Optional[dict] = field(default_factory=dict)
-    referenced_by: Optional[dict[list]] = field(default_factory=lambda: {'macros': [], 'nodes': []})
+    referenced_by: Optional[dict[list]] = field(
+        default_factory=lambda: {'macros': [], 'nodes': []})
 
     def __post_init__(self):
         if 'return(adapter.dispatch' in self.macro_sql.replace(' ', ''):
             self.is_dispatched = True
 
-    def to_markdown(self, key:str, docs = {}):
+    def to_markdown(self, key: str, docs={}):
         """Generates the markdown for a dbt macro
 
         Args:
@@ -172,9 +189,12 @@ class dbt_macro(dbt_base):
         sql = self.macro_sql
         dispatched_sql = self.dispatched_sql
         # Remove all integration test stuff from depends/refs, also de-dupe in case any made it through somehow
-        depends_macros = list({x for x in self.depends_on.get('macros') if 'integration_tests' not in x})
-        referenced_by_macros = list({x for x in self.referenced_by.get('macros') if 'integration_tests' not in x})
-        referenced_by_models = list({x for x in self.referenced_by.get('nodes') if 'integration_tests' not in x})
+        depends_macros = list({x for x in self.depends_on.get(
+            'macros') if 'integration_tests' not in x})
+        referenced_by_macros = list(
+            {x for x in self.referenced_by.get('macros') if 'integration_tests' not in x})
+        referenced_by_models = list(
+            {x for x in self.referenced_by.get('nodes') if 'integration_tests' not in x})
 
         # Set initial markdown, set specific header key
         markdown = [f'### {self.name.replace("_"," ").title()} {{#{key}}}',
@@ -190,12 +210,14 @@ class dbt_macro(dbt_base):
         if description != "":
             is_documented = True
             description.replace('\\n', '\\n\\n')
-            description_parts = description.split('####', 1) # split once on the first level 4 header - see internal style guide
+            # split once on the first level 4 header - see internal style guide
+            description_parts = description.split('####', 1)
             markdown.append(description_parts[0])
         else:
             is_documented = False
             description_parts = []
-            markdown.append('This macro does not currently have a description.')
+            markdown.append(
+                'This macro does not currently have a description.')
 
         # Add in argument details if there are any
         if self.arguments:
@@ -214,8 +236,8 @@ class dbt_macro(dbt_base):
         # Add in any other headers that were included in the description
         # Introducing an incredible regex that Nick made and I don't even dream to understand
         if len(description_parts) > 1:
-            markdown.extend(['', re.sub("(#+) ([A-Z][a-z]+)", lambda x: f"<h{len(x.group(1))}>{x.group(2)}</h{len(x.group(1))}>\n", f'####{description_parts[1]}'), ''])
-
+            markdown.extend(['', re.sub(
+                "(#+) ([A-Z][a-z]+)", lambda x: f"<h{len(x.group(1))}>{x.group(2)}</h{len(x.group(1))}>\n", f'####{description_parts[1]}'), ''])
 
         markdown.extend(['', '<h4>Details</h4>', ''])
         # Add in the sql if there is any
@@ -231,14 +253,15 @@ class dbt_macro(dbt_base):
                 markdown.extend(['```jinja2',
                                 sql,
                                 '```',
-                                ''
-                                ])
+                                 ''
+                                 ])
             # Use a tabs group for dispatced sql items
             else:
                 markdown.append('<Tabs groupId="dispatched_sql">')
                 markdown.extend(md_tab_val('raw', None, sql, True, 'jinja2'))
                 for lang in sorted(dispatched_sql):
-                    markdown.extend(md_tab_val(lang, None, dispatched_sql[lang], False, 'jinja2'))
+                    markdown.extend(md_tab_val(
+                        lang, None, dispatched_sql[lang], False, 'jinja2'))
 
                 markdown.extend(['</Tabs>', ''])
 
@@ -248,19 +271,23 @@ class dbt_macro(dbt_base):
         # Macros can only depend on other macros
         markdown.extend(md_depends_on(depends_macros, []))
 
-
-        markdown.extend(md_referenced_by(referenced_by_macros, referenced_by_models))
+        markdown.extend(md_referenced_by(
+            referenced_by_macros, referenced_by_models))
 
         markdown.extend(['</DbtDetails>', ''])
         return '\n'.join(markdown), is_documented
+
 
 @dataclass
 class dbt_catalog:
     metadata: dict
     columns: dict
+
+
 @dataclass
 class dbt_doc:
     block_contents: str
+
 
 def merge_dbt_obj(type: str, obj1: Union[dbt_macro, dbt_model], obj2: Union[dbt_macro, dbt_model]) -> Union[dbt_macro, dbt_model]:
     """Merge 2 dbt objects into one, prioriting the first object
@@ -285,15 +312,19 @@ def merge_dbt_obj(type: str, obj1: Union[dbt_macro, dbt_model], obj2: Union[dbt_
         return merged_obj
     else:
         # Combine depends on and referenced by
-        merged_obj.depends_on['macros'] = list(set(obj1.depends_on['macros'] + obj2.depends_on['macros']))
-        merged_obj.referenced_by['macros'] = list(set(obj1.referenced_by['macros'] + obj2.referenced_by['macros']))
-        merged_obj.referenced_by['nodes'] = list(set(obj1.referenced_by['nodes'] + obj2.referenced_by['nodes']))
+        merged_obj.depends_on['macros'] = list(
+            set(obj1.depends_on['macros'] + obj2.depends_on['macros']))
+        merged_obj.referenced_by['macros'] = list(
+            set(obj1.referenced_by['macros'] + obj2.referenced_by['macros']))
+        merged_obj.referenced_by['nodes'] = list(
+            set(obj1.referenced_by['nodes'] + obj2.referenced_by['nodes']))
         # Combine dispatched sql
         for sql in obj2.dispatched_sql:
             if sql not in merged_obj.dispatched_sql:
                 merged_obj.dispatched_sql[sql] = obj2.dispatched_sql[sql]
         if type == 'model':
-            merged_obj.depends_on['nodes'] = list(set(obj1.depends_on['nodes'] + obj2.depends_on['nodes']))
+            merged_obj.depends_on['nodes'] = list(
+                set(obj1.depends_on['nodes'] + obj2.depends_on['nodes']))
             # Combine paths
             for path in obj2.paths:
                 if path not in merged_obj.paths:
@@ -309,6 +340,7 @@ def merge_dbt_obj(type: str, obj1: Union[dbt_macro, dbt_model], obj2: Union[dbt_
                     merged_obj.arguments.append(arg)
 
         return merged_obj
+
 
 def merge_dbt_objs(type: str, objs: list[Union[dbt_macro, dbt_model]]) -> Union[dbt_macro, dbt_model]:
     """Merges multiple dbt objects into a single instance, prioritising the first object
@@ -333,6 +365,7 @@ def merge_dbt_objs(type: str, objs: list[Union[dbt_macro, dbt_model]]) -> Union[
             merged = merge_dbt_obj(type, merged, objs[i])
     return merged
 
+
 def combine_packages(type: str, packages: list[dict[Union[dbt_macro, dbt_model]]]) -> dict[Union[dbt_macro, dbt_model]]:
     """Combines multiple packages worth of macros or models
 
@@ -346,7 +379,8 @@ def combine_packages(type: str, packages: list[dict[Union[dbt_macro, dbt_model]]
     all_keys = set().union(*(d.keys() for d in packages))
     combined_objects = {}
     for key in all_keys:
-        matching_objs = [package.get(key) for package in packages if package.get(key) is not None]
+        matching_objs = [package.get(
+            key) for package in packages if package.get(key) is not None]
         if matching_objs:
             combined_objects[key] = merge_dbt_objs(type, matching_objs)
 
@@ -367,7 +401,8 @@ def merge_manifest_and_catalog(models, catalogs):
             merged_cols = dict()
             for col_name, col_val in cat_cols.items():
                 merged_cols[col_name.lower()] = col_val
-                merged_cols[col_name.lower()]['description'] = orig_cols.get(col_name.lower(), {}).get('description')
+                merged_cols[col_name.lower()]['description'] = orig_cols.get(
+                    col_name.lower(), {}).get('description')
             models_copy[model].columns = merged_cols
             if table_type == 'BASE TABLE':
                 models_copy[model].type = 'Table'
@@ -376,7 +411,8 @@ def merge_manifest_and_catalog(models, catalogs):
 
     return models_copy
 
-def github_read_file(username, repository_name, file_path, ref,headers):
+
+def github_read_file(username, repository_name, file_path, ref, headers):
     headers['Accept'] = 'application/vnd.github.v3.raw'
     url = f'https://api.github.com/repos/{username}/{repository_name}/contents/{file_path}?ref={ref}'
     print(f'Fetching {url}')
@@ -385,6 +421,7 @@ def github_read_file(username, repository_name, file_path, ref,headers):
 
     return r.text
 
+
 def download_docs(packages, headers):
     # Create the manifest folder to write to
     if not (os.path.exists('./manifests')):
@@ -392,8 +429,10 @@ def download_docs(packages, headers):
 
     # Get the latest manifest from each package
     for package in packages:
-        manifest = github_read_file('snowplow', package[1], 'docs/manifest.json', 'gh_pages', headers)
-        catalog = github_read_file('snowplow', package[1], 'docs/catalog.json', 'gh_pages', headers)
+        manifest = github_read_file(
+            'snowplow', package[1], 'docs/manifest.json', 'gh_pages', headers)
+        catalog = github_read_file(
+            'snowplow', package[1], 'docs/catalog.json', 'gh_pages', headers)
 
         with open(f'./manifests/{package[0].split("/")[1]}_manifest.json', 'w') as out_file:
             json.dump(json.loads(manifest), out_file)
@@ -401,7 +440,7 @@ def download_docs(packages, headers):
             json.dump(json.loads(catalog), out_file)
 
 
-def get_referenced_by(imodels:dict[dbt_model], imacros: dict[dbt_macro]) -> tuple[dict[dbt_model], dict[dbt_macro]]:
+def get_referenced_by(imodels: dict[dbt_model], imacros: dict[dbt_macro]) -> tuple[dict[dbt_model], dict[dbt_macro]]:
     """For each model and macro passed, this creates a `reference_by` field which is used to find 1 level upstream calls for the model/macro.
 
     Args:
@@ -427,21 +466,25 @@ def get_referenced_by(imodels:dict[dbt_model], imacros: dict[dbt_macro]) -> tupl
             # check we actually have this model
             if models.get(referenced_model_name) is not None:
                 # add in this model
-                models[referenced_model_name].referenced_by['nodes'].append(cur_model_name)
+                models[referenced_model_name].referenced_by['nodes'].append(
+                    cur_model_name)
 
         # repeat again for macros
         for referenced_macro_name in references_macros:
             if macros.get(referenced_macro_name) is not None:
-                macros[referenced_macro_name].referenced_by['nodes'].append(cur_model_name)
+                macros[referenced_macro_name].referenced_by['nodes'].append(
+                    cur_model_name)
 
     # Loop over macros, same as before except they cannot depend on a model
     for cur_macro_name, cur_macro in macros.items():
         references_macros = cur_macro.depends_on['macros']
         for referenced_macro_name in references_macros:
             if macros.get(referenced_macro_name) is not None:
-                macros[referenced_macro_name].referenced_by['macros'].append(cur_macro_name)
+                macros[referenced_macro_name].referenced_by['macros'].append(
+                    cur_macro_name)
 
     return models, macros
+
 
 def process_multidb_macros(macros: dict[dbt_macro]) -> dict[dbt_macro]:
     """Returns the input dictonary without any of the `adaptor__macro` type entries,
@@ -458,7 +501,8 @@ def process_multidb_macros(macros: dict[dbt_macro]) -> dict[dbt_macro]:
     # Just in case
     processed_macros = deepcopy(macros)
     # List all possible adaptor prefixes
-    possible_prefixes = ['default', 'snowflake', 'bigquery', 'databricks', 'spark', 'redshift', 'postgres']
+    possible_prefixes = ['default', 'snowflake', 'bigquery',
+                         'databricks', 'spark', 'redshift', 'postgres']
 
     # Add the dispatched sql to the main thing
     for macro_key, macro_value in processed_macros.items():
@@ -467,13 +511,16 @@ def process_multidb_macros(macros: dict[dbt_macro]) -> dict[dbt_macro]:
             # chcek for each possible dispatched version
             for adaptor in possible_prefixes:
                 # Get dispatched name and check if it exists
-                adapted_macro_name =  macro_key.replace(macro_value.name, adaptor + '__' + macro_value.name)
+                adapted_macro_name = macro_key.replace(
+                    macro_value.name, adaptor + '__' + macro_value.name)
                 if processed_macros.get(adapted_macro_name) is None:
                     continue
 
-                adaptor_sql = processed_macros.get(adapted_macro_name).macro_sql
+                adaptor_sql = processed_macros.get(
+                    adapted_macro_name).macro_sql
                 # Depends on may be different for each adapator, so we need to bring them up to the dispatcher
-                adaptor_depends_on = processed_macros.get(adapted_macro_name).depends_on.get('macros')
+                adaptor_depends_on = processed_macros.get(
+                    adapted_macro_name).depends_on.get('macros')
 
                 # Update the sql if there is any
                 if adaptor_sql is not None:
@@ -481,10 +528,12 @@ def process_multidb_macros(macros: dict[dbt_macro]) -> dict[dbt_macro]:
 
                 # add children depends on a
                 if adaptor_depends_on is not None and adaptor_depends_on != []:
-                    new_depend_on_macros = list(set(processed_macros[macro_key].depends_on.get('macros') + adaptor_depends_on))
+                    new_depend_on_macros = list(
+                        set(processed_macros[macro_key].depends_on.get('macros') + adaptor_depends_on))
                     processed_macros[macro_key].depends_on['macros'] = new_depend_on_macros
             # remove any adaptor specific depends on
-            processed_macros[macro_key].depends_on['macros'] = [x for x in processed_macros[macro_key].depends_on['macros'] if '__' not in x]
+            processed_macros[macro_key].depends_on['macros'] = [
+                x for x in processed_macros[macro_key].depends_on['macros'] if '__' not in x]
 
     # remove any adaptor ones from the overall list
     to_delete = []
@@ -494,8 +543,8 @@ def process_multidb_macros(macros: dict[dbt_macro]) -> dict[dbt_macro]:
     for name in to_delete:
         del processed_macros[name]
 
-
     return processed_macros
+
 
 def write_docusarus_page(filename: str, pagename: str, text: str, pagedesc: str, postition: int):
     """Write a piece of text to a docusaurs page, adding relevant mdx blocks as needed
@@ -509,30 +558,31 @@ def write_docusarus_page(filename: str, pagename: str, text: str, pagedesc: str,
 
     """
     page_header = ["---",
-                f'title: "{pagename}"',
-                f"description: {postition}",
-                f"sidebar_position: {pagedesc}",
-                "---",
-                "",
-                "```mdx-code-block",
-                "import Tabs from '@theme/Tabs';",
-                "import TabItem from '@theme/TabItem';",
-                '',
-                'export function DbtDetails(props) {',
-                    'return <div className="dbt"><details>{props.children}</details></div>',
-                '}',
-                "```",
-                '',
-                ':::caution',
-                '',
-                'This page is auto-generated from our dbt packages, some information may be incomplete',
-                '',
-                ':::',
-                '']
+                   f'title: "{pagename}"',
+                   f"description: {postition}",
+                   f"sidebar_position: {pagedesc}",
+                   "---",
+                   "",
+                   "```mdx-code-block",
+                   "import Tabs from '@theme/Tabs';",
+                   "import TabItem from '@theme/TabItem';",
+                   '',
+                   'export function DbtDetails(props) {',
+                   'return <div className="dbt"><details>{props.children}</details></div>',
+                   '}',
+                   "```",
+                   '',
+                   ':::caution',
+                   '',
+                   'This page is auto-generated from our dbt packages, some information may be incomplete',
+                   '',
+                   ':::',
+                   '']
 
     with open(filename, 'w+') as outfile:
         outfile.write('\n'.join(page_header))
         outfile.write(text)
+
 
 def objects_to_markdown(objects: dict[Union[dbt_macro, dbt_model]], docs: dict = {}, package: str = None, filter_key: str = None, detailed_documented: bool = False) -> str:
     """Given a list of objects, this will generate the markdown for them for docusarus snowplow
@@ -549,9 +599,10 @@ def objects_to_markdown(objects: dict[Union[dbt_macro, dbt_model]], docs: dict =
     """
     # Filter to relevant macros
     if filter_key is not None:
-        cut_objects = {k:v for k,v in objects.items() if filter_key + '.' in k}
+        cut_objects = {k: v for k,
+                       v in objects.items() if filter_key + '.' in k}
     else:
-        cut_objects = {k:v for k,v in objects.items()}
+        cut_objects = {k: v for k, v in objects.items()}
 
     # Counters
     undocumented = []
@@ -569,7 +620,7 @@ def objects_to_markdown(objects: dict[Union[dbt_macro, dbt_model]], docs: dict =
     for object in sorted(cut_objects):
         # Check for exclusions
         show_docs = cut_objects[object].docs.get('show')
-        if (not show_docs) or  ('integration_tests' in object):
+        if (not show_docs) or ('integration_tests' in object):
             continue
         # Make markdown and check if it was documented or not
         model_md, is_documented = cut_objects[object].to_markdown(object, docs)
@@ -587,6 +638,7 @@ def objects_to_markdown(objects: dict[Union[dbt_macro, dbt_model]], docs: dict =
 
     return md
 
+
 def get_source_url(macrokey: str, path: str) -> str:
     """Gets the package url for a macro (also works for models!) key. So far, very simple...
 
@@ -600,7 +652,8 @@ def get_source_url(macrokey: str, path: str) -> str:
     url = 'https://github.com/snowplow/'
     match = False
     for pkg in all_packages:
-        if pkg[0].split('/')[1] + '.' in macrokey: # just check package name is in the key, but ending with . to ensure it's not in macro name
+        # just check package name is in the key, but ending with . to ensure it's not in macro name
+        if pkg[0].split('/')[1] + '.' in macrokey:
             url += pkg[1]
             match = True
 
@@ -610,6 +663,7 @@ def get_source_url(macrokey: str, path: str) -> str:
     url += '/blob/main/' + path
 
     return url
+
 
 def column_dict_to_table(columns: dict, docs: dict, key: str) -> list:
     """Generates the markdown string from a dictionary of columns
@@ -626,21 +680,25 @@ def column_dict_to_table(columns: dict, docs: dict, key: str) -> list:
     type_exists = any([x.get('type') for x in columns.values()])
     if type_exists:
         table_str = ['| Column Name | Description |Type|',
-                    '|:------------|:------------|:--:|']
+                     '|:------------|:------------|:--:|']
         for col in columns.values():
             col_name = col.get('name').lower()
-            col_desc = get_doc(col.get('description'), docs, key) or col.get('comment')
+            col_desc = get_doc(col.get('description'), docs,
+                               key) or col.get('comment')
             col_type = col.get('type').lower()
-            table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} | {col_type if col_type is not None else " "} |')
+            table_str.append(
+                f'| {col_name} | {col_desc if col_desc is not None else " "} | {col_type if col_type is not None else " "} |')
     else:
         table_str = ['| Column Name | Description |',
-                    '|:------------|:------------|']
+                     '|:------------|:------------|']
         for col in columns.values():
             col_name = col.get('name').lower()
             col_desc = get_doc(col.get('description'), docs, key)
-            table_str.append(f'| {col_name} | {col_desc if col_desc is not None else " "} |')
+            table_str.append(
+                f'| {col_name} | {col_desc if col_desc is not None else " "} |')
 
     return table_str
+
 
 def get_doc(text: str, docs: dict, key: str) -> str:
     """Get the true value from the docs object, if required
@@ -674,12 +732,14 @@ def md_X_by(X, type):
     for y in sorted(X):
         if 'snowplow_' in y:
             package = y.split('.')[1]
-            md.append(f'- [{y}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/{type}s/index.md#{y})')
+            md.append(
+                f'- [{y}](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/{package}/{type}s/index.md#{y})')
         else:
             md.append(f'- {y}')
     md.extend(['', '</TabItem>'])
 
     return md
+
 
 def md_referenced_by(ref_by_macros, ref_by_models):
     md = []
@@ -716,9 +776,11 @@ def md_depends_on(dep_macros, dep_models):
 
     return md
 
+
 def md_tab_val(lang, link, val, default, syn):
     md = []
-    md.extend([f'<TabItem value="{lang}" label="{lang}"{" default" if default else ""}>', ''])
+    md.extend(
+        [f'<TabItem value="{lang}" label="{lang}"{" default" if default else ""}>', ''])
     if link:
         md.extend([link, ''])
     if syn:

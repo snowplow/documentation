@@ -202,7 +202,7 @@ tracker.track(event);
 
 ### Adding custom entities to any event (Global Contexts)
 
-It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/introduction/)), so that they are applied to all (or a subset of) events within an application.
+It is also possible to add contexts in a declarative way, so that they are applied to all (or a subset of) events within an application.
 
 This can be done at tracker setup declaring the contexts generator and the suitable subset of events.
 

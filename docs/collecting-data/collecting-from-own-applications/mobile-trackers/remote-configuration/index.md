@@ -222,20 +222,20 @@ A clear example is a runtime change on `userId` on `SubjectController`:
 // Load configuration with userId = nil
 Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: defaultConfig, onSuccess: successCallback)
 
-/* userId is set to nil */
+// userId is set to nil
 
-...later...
+// ...later...
 
 tracker.subject.userId = "my-runtime-updated-userId"
 
-/* userId is is set to "my-runtime-updated-userId" */
+// userId is is set to "my-runtime-updated-userId"
 
-...later...
+// ...later...
 
 // Later refreshing the configuration with userId = nil
 Snowplow.refresh(onSuccess: successCallback)
 
-/* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
+// userId is still set to "my-runtime-updated-userId" because it was set at runtime
 ```
 
   </TabItem>
@@ -245,20 +245,20 @@ Snowplow.refresh(onSuccess: successCallback)
 // Load configuration with userId = nil
 Snowplow.setup(applicationContext, remoteConfig, defaultConfig, successCallback)
 
-/* userId is set to nil */
+// userId is set to nil
 
-...later...
+// ...later...
 
 tracker.subject.userId = "my-runtime-updated-userId"
 
-/* userId is is set to "my-runtime-updated-userId" */
+// userId is is set to "my-runtime-updated-userId"
 
-...later...
+// ...later...
 
 // Later refreshing the configuration with userId = nil
 Snowplow.refresh(applicationContext, successCallback)
 
-/* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
+// userId is still set to "my-runtime-updated-userId" because it was set at runtime
 ```
 
   </TabItem>
@@ -268,20 +268,20 @@ Snowplow.refresh(applicationContext, successCallback)
 // Load configuration with userId = nil
 Snowplow.setup(getApplicationContext(), remoteConfig, defaultConfig, successCallback);
 
-/* userId is set to nil */
+// userId is set to nil
 
-...later...
+// ...later...
 
 tracker.getSubject().userId = "my-runtime-updated-userId"
 
-/* userId is is set to "my-runtime-updated-userId" */
+// userId is is set to "my-runtime-updated-userId"
 
-...later...
+// ...later...
 
 // Later refreshing the configuration with userId = nil
 Snowplow.refresh(getApplicationContext(), successCallback);
 
-/* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
+// userId is still set to "my-runtime-updated-userId" because it was set at runtime
 ```
 
   </TabItem>

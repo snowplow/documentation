@@ -50,7 +50,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
    
    ```swift
-   let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: COLLECTOR_URL)
+   let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com")
    ```
 
 3. It creates a tracker instance which can be used to track events like this:

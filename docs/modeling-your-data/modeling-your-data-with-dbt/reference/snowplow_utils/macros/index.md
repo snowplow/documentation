@@ -630,20 +630,7 @@ This macro does not currently have a description.
 - [model.snowplow_media_player.snowplow_media_player_media_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_media_stats)
 - [model.snowplow_media_player.snowplow_media_player_session_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_session_stats)
 - [model.snowplow_media_player.snowplow_media_player_user_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_user_stats)
-- [model.snowplow_mobile.snowplow_mobile_screen_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views_this_run)
-- [model.snowplow_mobile.snowplow_mobile_sessions_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_aggs)
-- [model.snowplow_mobile.snowplow_mobile_sessions_sv_details](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_sv_details)
-- [model.snowplow_mobile.snowplow_mobile_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_aggs)
 - [model.snowplow_web.snowplow_web_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_users_aggs)
-
-</TabItem>
-<TabItem value="macros" label="Macros">
-
-- [macro.snowplow_mobile.cluster_by_fields_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.cluster_by_fields_app_errors)
-- [macro.snowplow_mobile.mobile_cluster_by_fields_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_screen_views)
-- [macro.snowplow_mobile.mobile_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions)
-- [macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle)
-- [macro.snowplow_mobile.mobile_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_users)
 
 </TabItem>
 </Tabs>
@@ -1314,14 +1301,6 @@ This macro does not currently have a description.
 - [model.snowplow_media_player.snowplow_media_player_media_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_media_stats)
 - [model.snowplow_media_player.snowplow_media_player_session_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_session_stats)
 - [model.snowplow_media_player.snowplow_media_player_user_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_user_stats)
-- [model.snowplow_mobile.snowplow_mobile_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors)
-- [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
-- [model.snowplow_mobile.snowplow_mobile_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views)
-- [model.snowplow_mobile.snowplow_mobile_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions)
-- [model.snowplow_mobile.snowplow_mobile_sessions_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_aggs)
-- [model.snowplow_mobile.snowplow_mobile_user_mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_user_mapping)
-- [model.snowplow_mobile.snowplow_mobile_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users)
-- [model.snowplow_mobile.snowplow_mobile_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_aggs)
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 - [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
@@ -1573,6 +1552,132 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
 
 </TabItem>
 </Tabs>
+</DbtDetails>
+
+### Get Sde Or Context {#macro.snowplow_utils.get_sde_or_context}
+
+<DbtDetails><summary>
+<code>macros/utils/get_sde_or_context.sql</code>
+</summary>
+
+#### Description
+This macro exists for Redshift and Postgres users to more easily select their self-describing event and context tables and apply de-duplication before joining onto their (already de-duplicated) events table. The `root_id` and `root_tstamp` columns are by default returned as `schema_name_id` and `schema_name_tstamp` respectively, where `schema_name` is the value in the `schema_name` column of the table. 
+
+Note that is the responsibility of the user to ensure they have no duplicate names when using this macro multiple times or when a schema column name matches on already in the events table. In this case the `prefix` argument should be used and aliasing applied to the output.
+
+
+
+#### Arguments
+- `schema` *(string)*: The schema your context or sde table is in
+- `identifier` *(string)*: The table name of your context or sde
+- `lower_limit` *(string)*: Lower limit to filter the `root_tstamp` field on, only used if both lower and upper are provided
+- `upper_limit` *(string)*: Upper limit to filter the `root_tstamp` field on, only used if both lower and upper are provided
+- `prefix` *(string)*: A string to prefix (additional `_` added automatically) the column names with. If not provided `root_id` and `root_tstamp` will be prefixed with the schema name.
+
+#### Returns
+
+CTE sql for deduplicated records from the schema table, without the schema details columns. The final CTE is the name of the original table.
+
+#### Usage
+
+```sql
+with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1', "'2023-01-01'", "'2023-02-01'")}}
+
+select
+...
+from my_events_table a
+left join nl_basjes_yauaa_context_1 b on 
+    a.event_id = b.yauaa_context_id 
+    and a.collector_tstamp = b.yauaa_context_tstamp
+```
+
+
+#### Details
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_sde_or_context.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="Raw" default>
+
+```jinja2
+{% macro get_sde_or_context(schema, identifier, lower_limit, upper_limit, prefix = none) %}
+    {{ return(adapter.dispatch('get_sde_or_context', 'snowplow_utils')(schema, identifier, lower_limit, upper_limit, prefix)) }}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__get_sde_or_context() %}
+    {% do exceptions.raise_compiler_error('Macro get_sde_or_context is only for Postgres or Redshift, it is not supported for' ~ target.type) %}
+{% endmacro %}
+```
+</TabItem>
+<TabItem value="postgres" label="postgres">
+
+```jinja2
+{% macro postgres__get_sde_or_context(schema, identifier, lower_limit, upper_limit, prefix = none) %}
+    {# Create a relation from the inputs then get all columns in that context/sde table #}
+    {% set relation = api.Relation.create(schema = schema, identifier = identifier) %}
+    {# Get the schema name to be able to alias the timestamp and id #}
+    {% set schema_get_query %}
+        select schema_name from {{ relation }}
+        limit 1
+    {% endset %}
+    {%- set schema_name = dbt_utils.get_single_value(schema_get_query) -%}
+    {# Get the columns to loop over #}
+    {%- set columns = adapter.get_columns_in_relation(relation) -%}
+    {% set sql %}
+        {{'dd_' ~ identifier }} as (
+            select
+            {# Get all columns that aren't related to the schema itself #}
+            {%- for col in columns -%}
+                {%- if col.name not in ['schema_vendor', 'schema_name', 'schema_format', 'schema_version', 'ref_root', 'ref_tree', 'ref_parent'] %}
+                    {{ col.quoted }},
+                {%- endif -%}
+            {% endfor %}
+                row_number() over (partition by root_id order by root_tstamp) as dedupe_index -- keep the first event for that root_id
+            from
+                {{ relation }}
+            {% if upper_limit and lower_limit -%}
+                where
+                    root_tstamp >= {{ lower_limit }}
+                    and root_tstamp <= {{ upper_limit }}
+            {% endif %}
+
+        ),
+
+        {{identifier}} as (
+            select
+            {%- for col in columns -%}
+                {%- if col.name | lower not in ['schema_vendor', 'schema_name', 'schema_format', 'schema_version', 'ref_root', 'ref_tree', 'ref_parent', 'root_tstamp', 'root_id'] %}
+                    {{ col.quoted }}{% if prefix %} as {{ adapter.quote(prefix ~ '_' ~ col.name) }}{% endif -%},
+                {%- endif -%}
+            {% endfor -%}
+            {# Rename columns that we know exist in every schema based table #}
+                root_tstamp as {% if prefix %}{{ adapter.quote(prefix ~ '_tstamp') }}{% else %}{{ adapter.quote(schema_name ~ '_tstamp') }}{% endif %},
+                root_id as {% if prefix %}{{ adapter.quote(prefix ~ '_id') }}{% else %}{{ adapter.quote(schema_name ~ '_id') }}{% endif %}
+            from
+                {{'dd_' ~ identifier }}
+            where
+                dedupe_index = 1
+        )
+
+    {% endset %}
+    {{ return(sql) }}
+{% endmacro %}
+```
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+#### Depends On
+- macro.dbt_utils.get_single_value
+
 </DbtDetails>
 
 ### Get Session Lookback Limit {#macro.snowplow_utils.get_session_lookback_limit}
@@ -2220,6 +2325,16 @@ The appropriate value for the target warehouse type, or an error if not an expec
 <Tabs groupId="reference">
 <TabItem value="model" label="Models" default>
 
+- [model.snowplow_mobile.snowplow_mobile_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors)
+- [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
+- [model.snowplow_mobile.snowplow_mobile_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views)
+- [model.snowplow_mobile.snowplow_mobile_screen_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_screen_views_this_run)
+- [model.snowplow_mobile.snowplow_mobile_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions)
+- [model.snowplow_mobile.snowplow_mobile_sessions_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_aggs)
+- [model.snowplow_mobile.snowplow_mobile_sessions_sv_details](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_sv_details)
+- [model.snowplow_mobile.snowplow_mobile_user_mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_user_mapping)
+- [model.snowplow_mobile.snowplow_mobile_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users)
+- [model.snowplow_mobile.snowplow_mobile_users_aggs](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users_aggs)
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 - [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
@@ -2231,6 +2346,11 @@ The appropriate value for the target warehouse type, or an error if not an expec
 </TabItem>
 <TabItem value="macros" label="Macros">
 
+- [macro.snowplow_mobile.cluster_by_fields_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.cluster_by_fields_app_errors)
+- [macro.snowplow_mobile.mobile_cluster_by_fields_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_screen_views)
+- [macro.snowplow_mobile.mobile_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions)
+- [macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle)
+- [macro.snowplow_mobile.mobile_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_users)
 - [macro.snowplow_web.web_cluster_by_fields_consent](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_consent)
 - [macro.snowplow_web.web_cluster_by_fields_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_page_views)
 - [macro.snowplow_web.web_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_sessions)
@@ -3526,6 +3646,7 @@ A list of two objects, the lower and upper values from the columns in the model
 - [model.snowplow_mobile.snowplow_mobile_base_screen_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_screen_context)
 - [model.snowplow_mobile.snowplow_mobile_base_session_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_session_context)
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
+- [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
 - [model.snowplow_web.snowplow_web_consent_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_users)
 - [model.snowplow_web.snowplow_web_consent_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_versions)
 
@@ -4431,6 +4552,9 @@ This macro does not currently have a description.
 <Tabs groupId="reference">
 <TabItem value="model" label="Models" default>
 
+- [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
+- [model.snowplow_mobile.snowplow_mobile_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_this_run)
+- [model.snowplow_normalize.snowplow_normalize_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_incremental_manifest)
 - [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 
 </TabItem>

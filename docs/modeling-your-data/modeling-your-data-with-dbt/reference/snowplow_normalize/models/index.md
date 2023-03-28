@@ -456,7 +456,7 @@ This incremental table is a manifest of the timestamp of the latest event consum
 
 with prep as (
   select
-    cast(null as {{ snowplow_utils.type_string(4096) }}) model,
+    cast(null as {{ snowplow_utils.type_max_string() }}) model,
     cast('1970-01-01' as {{ type_timestamp() }}) as last_success
 )
 
@@ -477,7 +477,7 @@ where false
 
 - macro.dbt.type_timestamp
 - [macro.snowplow_normalize.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.allow_refresh)
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
 
 </TabItem>
 </Tabs>

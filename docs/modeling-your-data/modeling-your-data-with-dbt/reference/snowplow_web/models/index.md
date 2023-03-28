@@ -292,7 +292,7 @@ qualify row_number() over (partition by a.event_id order by a.collector_tstamp, 
                                                                           'end_tstamp') %}
 
 /* Dedupe logic: Per dupe event_id keep earliest row ordered by collector_tstamp.
-   If multiple earliest rows, i.e. matching collector_tstamp, remove entirely. */
+   If multiple earliest rows, take arbitrary one using row_number(). */
 
 with events_this_run AS (
   select
@@ -427,7 +427,7 @@ with events_this_run AS (
     {% if var('snowplow__enable_load_tstamp', true) %}
       a.load_tstamp,
     {% endif %}
-    dense_rank() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index --dense_rank so rows with equal tstamps assigned same number
+    row_number() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index
 
   from {{ var('snowplow__events') }} as a
   inner join {{ ref('snowplow_web_base_sessions_this_run') }} as b
@@ -440,29 +440,12 @@ with events_this_run AS (
   and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
 )
 
-, events_dedupe as (
-  select
-    *,
-    count(*) over(partition by e.event_id) as row_count
-
-  from events_this_run e
-
-  where
-    e.event_id_dedupe_index = 1 -- Keep row(s) with earliest collector_tstamp per dupe event
-)
-
-, cleaned_events as (
-  select *
-  from events_dedupe
-  where row_count = 1 -- Only keep dupes with single row per earliest collector_tstamp
-)
-
 , page_context as (
   select
     root_id,
     root_tstamp,
     id as page_view_id,
-    dense_rank() over (partition by root_id order by root_tstamp) as page_context_dedupe_index
+    row_number() over (partition by root_id order by root_tstamp) as page_context_dedupe_index
 
   from {{ var('snowplow__page_view_context') }}
   where
@@ -472,28 +455,22 @@ with events_this_run AS (
 
 , page_context_dedupe as (
   select
-   *,
-   count(*) over(partition by root_id) as row_count
+   *
 
   from page_context
-  where page_context_dedupe_index = 1 -- Keep row(s) with earliest collector_tstamp per dupe event
-)
-
-, cleaned_page_context as (
-  select *
-  from page_context_dedupe
-  where row_count = 1 -- Only keep dupes with single row per earliest collector_tstamp
-
+  where page_context_dedupe_index = 1
 )
 
 select
-  ce.*,
+  e.*,
   pc.page_view_id
 
-from cleaned_events as ce
-left join cleaned_page_context as pc
-on ce.event_id = pc.root_id
-and ce.collector_tstamp = pc.root_tstamp
+from events_this_run as e
+left join page_context_dedupe as pc
+on e.event_id = pc.root_id
+and e.collector_tstamp = pc.root_tstamp
+
+where e.event_id_dedupe_index = 1
 ```
 </TabItem>
 <TabItem value="snowflake" label="snowflake" >
@@ -1426,7 +1403,45 @@ from prep p
   )
 }}
 
-with prep as (
+{%- set lower_limit, upper_limit = snowplow_utils.return_limits_from_model(ref('snowplow_web_base_sessions_this_run'),
+                                                                          'start_tstamp',
+                                                                          'end_tstamp') %}
+
+with consent_pref as (
+
+  select
+    root_id,
+    root_tstamp,
+    event_type,
+    basis_for_processing,
+    consent_url,
+    consent_version,
+    consent_scopes,
+    domains_applied,
+    gdpr_applies,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
+
+  from {{ var('snowplow__consent_preferences') }}
+
+  where root_tstamp >= {{ lower_limit }}
+  and root_tstamp <= {{ upper_limit }}
+
+)
+
+, cmp_visible  as (
+
+  select
+    root_id,
+    root_tstamp,
+    elapsed_time,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
+
+  from {{ var('snowplow__consent_cmp_visible') }}
+
+  where root_tstamp >= {{ lower_limit }}
+  and root_tstamp <= {{ upper_limit }}
+
+)
 
   select
     e.event_id,
@@ -1442,47 +1457,26 @@ with prep as (
     p.basis_for_processing,
     p.consent_url,
     p.consent_version,
-    p.consent_scopes,
-    p.domains_applied,
-    p.gdpr_applies,
+    replace(translate(p.consent_scopes, '"[]', ''), ',', ', ') as consent_scopes,
+    replace(translate(p.domains_applied, '"[]', ''), ',', ', ') as domains_applied,
+    coalesce(p.gdpr_applies, false) as gdpr_applies,
     v.elapsed_time as cmp_load_time
 
   from {{ ref("snowplow_web_base_events_this_run") }} as e
 
-  left join {{ var('snowplow__consent_preferences') }} p
+  left join consent_pref p
     on e.event_id = p.root_id
     and e.collector_tstamp = p.root_tstamp
+    and p.dedupe_index = 1
 
-  left join {{ var('snowplow__consent_cmp_visible') }} v
+  left join cmp_visible v
     on e.event_id = v.root_id
     and e.collector_tstamp = v.root_tstamp
+    and v.dedupe_index = 1
 
   where event_name in ('cmp_visible', 'consent_preferences')
 
   and {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
-
-)
-
-select
-  p.event_id,
-  p.domain_userid,
-  p.user_id,
-  p.geo_country,
-  p.page_view_id,
-  p.domain_sessionid,
-  p.derived_tstamp,
-  p.load_tstamp,
-  p.event_name,
-  p.event_type,
-  p.basis_for_processing,
-  p.consent_url,
-  p.consent_version,
-  replace(translate(p.consent_scopes, '"[]', ''), ',', ', ') as consent_scopes,
-  replace(translate(p.domains_applied, '"[]', ''), ',', ', ') as domains_applied,
-  coalesce(p.gdpr_applies, false) as gdpr_applies,
-  p.cmp_load_time
-
-from prep p
 ```
 </TabItem>
 <TabItem value="snowflake" label="snowflake" >
@@ -1568,6 +1562,7 @@ from prep p
 - [macro.snowplow_utils.get_array_to_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_array_to_string)
 - [macro.snowplow_utils.get_optional_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_optional_fields)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
+- [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_web.consent_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.consent_fields)
 
@@ -2466,7 +2461,7 @@ with page_view_events as (
     ev.br_renderengine,
     ev.os_timezone,
 
-    dense_rank() over (partition by ev.page_view_id order by ev.derived_tstamp, ev.dvce_created_tstamp) as page_view_id_dedupe_index
+    row_number() over (partition by ev.page_view_id order by ev.derived_tstamp, ev.dvce_created_tstamp) as page_view_id_dedupe_index
 
   from {{ ref('snowplow_web_base_events_this_run') }} as ev
 
@@ -2476,17 +2471,6 @@ with page_view_events as (
   {% if var("snowplow__ua_bot_filter", true) %}
     {{ filter_bots('ev') }}
   {% endif %}
-)
-
--- Dedupe: Take first row of duplicate page view, unless derived_tstamp also duplicated.
--- Remove pv entirely if both fields are dupes. Avoids 1:many join with context tables.
-, dedupe as (
-  select
-    *,
-    count(*) over(partition by page_view_id) as row_count
-
-  from page_view_events
-  where page_view_id_dedupe_index = 1 -- Keep row(s) with earliest derived_tstamp per dupe pv
 )
 
 select
@@ -2561,9 +2545,9 @@ select
 
   row_number() over (partition by pv.domain_sessionid order by pv.derived_tstamp, pv.dvce_created_tstamp) as page_view_in_session_index --Moved to post dedupe, unlike V1 web model.
 
-from dedupe as pv
+from page_view_events as pv
 
-where row_count = 1 -- Remove dupe page views with more than 1 row
+where page_view_id_dedupe_index = 1
 ```
 </TabItem>
 </Tabs>
@@ -4215,22 +4199,32 @@ The IAB Spiders & Robots enrichment uses the [IAB/ABC International Spiders and 
   )
 }}
 
-select
-  pv.page_view_id,
+with base as (
+  select
+    pv.page_view_id,
 
-  iab.category,
-  iab.primary_impact,
-  iab.reason,
-  iab.spider_or_robot
+    iab.category,
+    iab.primary_impact,
+    iab.reason,
+    iab.spider_or_robot,
+    row_number() over (partition by pv.page_view_id order by pv.collector_tstamp) as dedupe_index
 
-from {{ var('snowplow__iab_context') }} iab
+  from {{ var('snowplow__iab_context') }} iab
 
-inner join {{ ref('snowplow_web_page_view_events') }} pv
-on iab.root_id = pv.event_id
-and iab.root_tstamp = pv.collector_tstamp
+  inner join {{ ref('snowplow_web_page_view_events') }} pv
+  on iab.root_id = pv.event_id
+  and iab.root_tstamp = pv.collector_tstamp
 
-where iab.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits') }})
-  and iab.root_tstamp <= (select upper_limit from {{ ref('snowplow_web_pv_limits') }})
+  where iab.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits') }})
+    and iab.root_tstamp <= (select upper_limit from {{ ref('snowplow_web_pv_limits') }})
+
+)
+
+select *
+
+from base
+
+where dedupe_index = 1
 ```
 </TabItem>
 </Tabs>
@@ -4289,7 +4283,7 @@ where page_view_id is not null
 </summary>
 
 #### Description
-This model calculates the horizontal and vertical scroll depth of the vistor on a given page view. Such metrics are useful when assessing engagement on a page view.
+This model calculates the horizontal and vertical scroll depth of the visitor on a given page view. Such metrics are useful when assessing engagement on a page view.
 
 **Type**: Table
 
@@ -4460,30 +4454,40 @@ from prep
   )
 }}
 
-select
-  pv.page_view_id,
+with base as (
+  select
+    pv.page_view_id,
 
-  ua.useragent_family,
-  ua.useragent_major,
-  ua.useragent_minor,
-  ua.useragent_patch,
-  ua.useragent_version,
-  ua.os_family,
-  ua.os_major,
-  ua.os_minor,
-  ua.os_patch,
-  ua.os_patch_minor,
-  ua.os_version,
-  ua.device_family
+    ua.useragent_family,
+    ua.useragent_major,
+    ua.useragent_minor,
+    ua.useragent_patch,
+    ua.useragent_version,
+    ua.os_family,
+    ua.os_major,
+    ua.os_minor,
+    ua.os_patch,
+    ua.os_patch_minor,
+    ua.os_version,
+    ua.device_family,
+    row_number() over (partition by pv.page_view_id order by pv.collector_tstamp) as dedupe_index
 
-from {{ var('snowplow__ua_parser_context') }} as ua
+  from {{ var('snowplow__ua_parser_context') }} as ua
 
-inner join {{ ref('snowplow_web_page_view_events') }} pv
-on ua.root_id = pv.event_id
-and ua.root_tstamp = pv.collector_tstamp
+  inner join {{ ref('snowplow_web_page_view_events') }} pv
+  on ua.root_id = pv.event_id
+  and ua.root_tstamp = pv.collector_tstamp
 
-where ua.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits') }})
-  and ua.root_tstamp <= (select upper_limit from {{ ref('snowplow_web_pv_limits') }})
+  where ua.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits') }})
+    and ua.root_tstamp <= (select upper_limit from {{ ref('snowplow_web_pv_limits') }})
+
+)
+
+select *
+
+from base
+
+where dedupe_index = 1
 ```
 </TabItem>
 </Tabs>
@@ -4535,38 +4539,48 @@ where ua.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits'
 }}
 
 
-select
-  pv.page_view_id,
+with base as (
+  select
+    pv.page_view_id,
 
-  ya.device_class,
-  ya.agent_class,
-  ya.agent_name,
-  ya.agent_name_version,
-  ya.agent_name_version_major,
-  ya.agent_version,
-  ya.agent_version_major,
-  ya.device_brand,
-  ya.device_name,
-  ya.device_version,
-  ya.layout_engine_class,
-  ya.layout_engine_name,
-  ya.layout_engine_name_version,
-  ya.layout_engine_name_version_major,
-  ya.layout_engine_version,
-  ya.layout_engine_version_major,
-  ya.operating_system_class,
-  ya.operating_system_name,
-  ya.operating_system_name_version,
-  ya.operating_system_version
+    ya.device_class,
+    ya.agent_class,
+    ya.agent_name,
+    ya.agent_name_version,
+    ya.agent_name_version_major,
+    ya.agent_version,
+    ya.agent_version_major,
+    ya.device_brand,
+    ya.device_name,
+    ya.device_version,
+    ya.layout_engine_class,
+    ya.layout_engine_name,
+    ya.layout_engine_name_version,
+    ya.layout_engine_name_version_major,
+    ya.layout_engine_version,
+    ya.layout_engine_version_major,
+    ya.operating_system_class,
+    ya.operating_system_name,
+    ya.operating_system_name_version,
+    ya.operating_system_version,
+    row_number() over (partition by pv.page_view_id order by pv.collector_tstamp) as dedupe_index
 
-from {{ var('snowplow__yauaa_context') }} ya
+  from {{ var('snowplow__yauaa_context') }} ya
 
-inner join {{ ref('snowplow_web_page_view_events') }} pv
-on ya.root_id = pv.event_id
-and ya.root_tstamp = pv.collector_tstamp
+  inner join {{ ref('snowplow_web_page_view_events') }} pv
+  on ya.root_id = pv.event_id
+  and ya.root_tstamp = pv.collector_tstamp
 
-where ya.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits') }})
-  and ya.root_tstamp <= (select upper_limit from {{ ref('snowplow_web_pv_limits') }})
+  where ya.root_tstamp >= (select lower_limit from {{ ref('snowplow_web_pv_limits') }})
+    and ya.root_tstamp <= (select upper_limit from {{ ref('snowplow_web_pv_limits') }})
+
+)
+
+select *
+
+from base
+
+where dedupe_index = 1
 ```
 </TabItem>
 </Tabs>

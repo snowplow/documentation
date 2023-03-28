@@ -110,15 +110,15 @@ This derived table contains all app errors and should be the end point for any a
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='event_id',
     upsert_date_key='derived_tstamp',
     sort='derived_tstamp',
     dist='event_id',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "derived_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='derived_tstamp_date'),
+    }, databricks_val='derived_tstamp_date'),
     cluster_by=snowplow_mobile.cluster_by_fields_app_errors(),
     tags=["derived"],
     enabled=var("snowplow__enable_app_errors_module", false),
@@ -126,7 +126,8 @@ This derived table contains all app errors and should be the end point for any a
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -149,7 +150,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_mobile.cluster_by_fields_app_errors](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.cluster_by_fields_app_errors)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -731,9 +732,9 @@ This optional table provides extra context on an event level and brings in data 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_app_context.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
-    enabled=(var("snowplow__enable_application_context", false) 
+    enabled=(var("snowplow__enable_application_context", false)
       and target.type in ['redshift','postgres'] | as_bool()),
     dist='root_id',
     sort='root_tstamp'
@@ -744,15 +745,26 @@ This optional table provides extra context on an event level and brings in data 
                                       ref('snowplow_mobile_base_events_this_run_limits'),
                                       'lower_limit',
                                       'upper_limit') %}
-select
-  ac.root_id,
-  ac.root_tstamp,
-  ac.build,
-  ac.version
+with base as (
 
-from {{ var("snowplow__application_context") }} ac
+  select
+    ac.root_id,
+    ac.root_tstamp,
+    ac.build,
+    ac.version,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
 
-where ac.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+  from {{ var("snowplow__application_context") }} ac
+
+  where ac.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+select *
+
+from base
+
+where dedupe_index = 1
 ```
 </TabItem>
 </Tabs>
@@ -1212,7 +1224,7 @@ from deduped_events as d
                                                                           'end_tstamp') %}
 
 /* Dedupe logic: Per dupe event_id keep earliest row ordered by collector_tstamp.
-   If multiple earliest rows, i.e. matching collector_tstamp, remove entirely. */
+   If multiple earliest rows, take arbitrary one using row_number(). */
 
 with events_this_run AS (
   select
@@ -1223,7 +1235,7 @@ with events_this_run AS (
     sc.session_first_event_id,
 
     e.*,
-    dense_rank() over (partition by e.event_id order by e.collector_tstamp) as event_id_dedupe_index --dense_rank so rows with equal tstamps assigned same #
+    row_number() over (partition by e.event_id order by e.collector_tstamp) as event_id_dedupe_index
 
   from {{ var('snowplow__events') }} e
   inner join {{ ref('snowplow_mobile_base_session_context') }} sc
@@ -1238,22 +1250,6 @@ with events_this_run AS (
   and e.collector_tstamp <= {{ upper_limit }}
   and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
   and e.platform in ('{{ var("snowplow__platform")|join("','") }}') -- filters for 'mob' by default
-)
-
-, events_dedupe as (
-  select
-    *,
-    count(*) over(partition by e.event_id) as row_count
-
-  from events_this_run e
-
-  where e.event_id_dedupe_index = 1 -- Keep row(s) with earliest collector_tstamp per dupe event
-)
-
-, cleaned_events as (
-  select *
-  from events_dedupe
-  where row_count = 1 -- Only keep dupes with single row per earliest collector_tstamp
 )
 
 select
@@ -1330,7 +1326,7 @@ select
   e.*,
   row_number() over(partition by e.session_id order by e.derived_tstamp) as event_index_in_session
 
-from cleaned_events e
+from events_this_run e
 
 {% if var("snowplow__enable_screen_context", false) %}
   left join {{ ref('snowplow_mobile_base_screen_context') }} sc
@@ -1355,6 +1351,8 @@ from cleaned_events e
   on e.event_id = ac.root_id
   and e.collector_tstamp = ac.root_tstamp
 {% endif %}
+
+where e.event_id_dedupe_index = 1
 ```
 </TabItem>
 <TabItem value="snowflake" label="snowflake" >
@@ -1632,9 +1630,9 @@ This optional table provides extra context on an event level and brings in data 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_geo_context.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
-    enabled=(var("snowplow__enable_geolocation_context", false) 
+    enabled=(var("snowplow__enable_geolocation_context", false)
       and target.type in ['redshift','postgres'] | as_bool()),
     dist='root_id',
     sort='root_tstamp'
@@ -1645,20 +1643,31 @@ This optional table provides extra context on an event level and brings in data 
                                       ref('snowplow_mobile_base_events_this_run_limits'),
                                       'lower_limit',
                                       'upper_limit') %}
-select
-  gc.root_id,
-  gc.root_tstamp,
-  gc.latitude AS device_latitude,
-  gc.longitude AS device_longitude,
-  gc.latitude_longitude_accuracy AS device_latitude_longitude_accuracy,
-  gc.altitude AS device_altitude,
-  gc.altitude_accuracy AS device_altitude_accuracy,
-  gc.bearing AS device_bearing,
-  gc.speed AS device_speed
+with base as (
 
-from {{ var("snowplow__geolocation_context") }} gc
+  select
+    gc.root_id,
+    gc.root_tstamp,
+    gc.latitude AS device_latitude,
+    gc.longitude AS device_longitude,
+    gc.latitude_longitude_accuracy AS device_latitude_longitude_accuracy,
+    gc.altitude AS device_altitude,
+    gc.altitude_accuracy AS device_altitude_accuracy,
+    gc.bearing AS device_bearing,
+    gc.speed AS device_speed,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
 
-where gc.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+  from {{ var("snowplow__geolocation_context") }} gc
+
+  where gc.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+select *
+
+from base
+
+where dedupe_index = 1
 ```
 </TabItem>
 </Tabs>
@@ -1726,9 +1735,9 @@ This optional table provides extra context on an event level and brings in data 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_mobile_context.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
-    enabled=(var("snowplow__enable_mobile_context", false) 
+    enabled=(var("snowplow__enable_mobile_context", false)
       and target.type in ['redshift','postgres'] | as_bool()),
     dist='root_id',
     sort='root_tstamp'
@@ -1739,24 +1748,35 @@ This optional table provides extra context on an event level and brings in data 
                                       ref('snowplow_mobile_base_events_this_run_limits'),
                                       'lower_limit',
                                       'upper_limit') %}
-select
-  m.root_id,
-  m.root_tstamp,
-  m.device_manufacturer,
-  m.device_model,
-  m.os_type,
-  m.os_version,
-  m.android_idfa,
-  m.apple_idfa,
-  m.apple_idfv,
-  m.carrier,
-  m.open_idfa,
-  m.network_technology,
-  m.network_type
+with base as (
 
-from {{ var("snowplow__mobile_context") }} m
+  select
+    m.root_id,
+    m.root_tstamp,
+    m.device_manufacturer,
+    m.device_model,
+    m.os_type,
+    m.os_version,
+    m.android_idfa,
+    m.apple_idfa,
+    m.apple_idfv,
+    m.carrier,
+    m.open_idfa,
+    m.network_technology,
+    m.network_type,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
 
-where m.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+  from {{ var("snowplow__mobile_context") }} m
+
+  where m.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+select *
+
+from base
+
+where dedupe_index = 1
 ```
 </TabItem>
 </Tabs>
@@ -1916,9 +1936,9 @@ This optional table provides extra context on an event level and brings in data 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/base/scratch/redshift_postgres/contexts/snowplow_mobile_base_screen_context.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
-    enabled=(var("snowplow__enable_screen_context", false) 
+    enabled=(var("snowplow__enable_screen_context", false)
       and target.type in ['redshift','postgres'] | as_bool()),
     dist='root_id',
     sort='root_tstamp'
@@ -1929,20 +1949,32 @@ This optional table provides extra context on an event level and brings in data 
                                       ref('snowplow_mobile_base_events_this_run_limits'),
                                       'lower_limit',
                                       'upper_limit') %}
-select
-  sc.root_id,
-  sc.root_tstamp,
-  sc.id AS screen_id,
-  sc.name AS screen_name,
-  sc.activity AS screen_activity,
-  sc.fragment AS screen_fragment,
-  sc.top_view_controller AS screen_top_view_controller,
-  sc.type AS screen_type,
-  sc.view_controller AS screen_view_controller
 
-from {{ var("snowplow__screen_context") }} sc
+with base as (
 
-where sc.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+  select
+    sc.root_id,
+    sc.root_tstamp,
+    sc.id AS screen_id,
+    sc.name AS screen_name,
+    sc.activity AS screen_activity,
+    sc.fragment AS screen_fragment,
+    sc.top_view_controller AS screen_top_view_controller,
+    sc.type AS screen_type,
+    sc.view_controller AS screen_view_controller,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
+
+  from {{ var("snowplow__screen_context") }} sc
+
+  where sc.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+select *
+
+from base
+
+where dedupe_index = 1
 ```
 </TabItem>
 </Tabs>
@@ -2016,18 +2048,29 @@ This optional table provides extra context on an event level and brings in data 
                                       ref('snowplow_mobile_base_events_this_run_limits'),
                                       'lower_limit',
                                       'upper_limit') %}
-select
+with base as (
+
+  select
   s.root_id,
   s.root_tstamp,
   s.session_id,
   s.session_index,
   s.previous_session_id,
   s.user_id as device_user_id,
-  s.first_event_id as session_first_event_id
+  s.first_event_id as session_first_event_id,
+  row_number() over (partition by root_id order by root_tstamp) dedupe_index
 
 from {{ var("snowplow__session_context") }} s
 
 where s.root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+select *
+
+from base
+
+where dedupe_index = 1
 ```
 </TabItem>
 </Tabs>
@@ -2094,13 +2137,13 @@ By knowing the life-cycle of a session the model is able to able to determine wh
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='session_id',
     upsert_date_key='start_tstamp',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
+    }, databricks_val='start_tstamp_date'),
     cluster_by=mobile_cluster_by_fields_sessions_lifecycle(),
     full_refresh=snowplow_mobile.allow_refresh(),
     tags=["manifest"],
@@ -2108,7 +2151,8 @@ By knowing the life-cycle of a session the model is able to able to determine wh
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -2198,13 +2242,14 @@ from session_lifecycle sl
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='session_id',
     upsert_date_key='start_tstamp',
     sort='start_tstamp',
     dist='session_id',
     full_refresh=snowplow_mobile.allow_refresh(),
-    tags=["manifest"]
+    tags=["manifest"],
+    snowplow_optimize=true
   )
 }}
 
@@ -2313,8 +2358,8 @@ from session_lifecycle sl
 - [macro.snowplow_mobile.get_session_id_path_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.get_session_id_path_sql)
 - [macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle)
 - [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_session_lookback_limit](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_session_lookback_limit)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
@@ -2477,7 +2522,7 @@ This incremental table is a manifest of the timestamp of the latest event consum
 
 with prep as (
   select
-    cast(null as {{ snowplow_utils.type_string(4096) }}) model,
+    cast(null as {{ snowplow_utils.type_max_string() }}) model,
     cast('1970-01-01' as {{ type_timestamp() }}) as last_success
 )
 
@@ -2499,7 +2544,7 @@ where false
 - macro.dbt.type_timestamp
 - [macro.snowplow_mobile.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.allow_refresh)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
 
 </TabItem>
 </Tabs>
@@ -2607,22 +2652,23 @@ This staging table contains all the screen views for the given run of the mobile
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='screen_view_id',
     upsert_date_key='derived_tstamp',
     sort='derived_tstamp',
     dist='screen_view_id',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
        "field": "derived_tstamp",
        "data_type": "timestamp"
-     }, databricks_partition_by='derived_tstamp_date'),
+     }, databricks_val='derived_tstamp_date'),
     cluster_by=snowplow_mobile.mobile_cluster_by_fields_screen_views(),
     tags=["derived"],
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -2652,7 +2698,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_mobile.mobile_cluster_by_fields_screen_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_screen_views)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -2761,7 +2807,7 @@ This staging table contains all the screen views for the given run of the mobile
 ```jinja2
 {{
   config(
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["session_id"]),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["session_id"]),
     tags=["this_run"],
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
   )
@@ -3145,7 +3191,7 @@ from cleaned_screen_view_events ev
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
@@ -3256,15 +3302,15 @@ This derived incremental table contains all historic sessions and should be the 
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='session_id',
     upsert_date_key='start_tstamp',
     sort='start_tstamp',
     dist='session_id',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
        "field": "start_tstamp",
        "data_type": "timestamp"
-     }, databricks_partition_by='start_tstamp_date'),
+     }, databricks_val='start_tstamp_date'),
     cluster_by=snowplow_mobile.mobile_cluster_by_fields_sessions(),
     tags=["derived"],
     post_hook="{{ snowplow_mobile.stitch_user_identifiers(
@@ -3274,7 +3320,8 @@ This derived incremental table contains all historic sessions and should be the 
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -3306,7 +3353,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 
 - [macro.snowplow_mobile.mobile_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions)
 - [macro.snowplow_mobile.stitch_user_identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.stitch_user_identifiers)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -3364,11 +3411,11 @@ This model aggregates various metrics derived from page views to a session level
 ```jinja2
 {{
   config(
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
     }),
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["session_id"]),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["session_id"]),
     sort='session_id',
     dist='session_id',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
@@ -3470,8 +3517,7 @@ on sa.session_id = ae.session_id
 - macro.dbt.type_int
 - macro.dbt.type_string
 - [macro.snowplow_mobile.bool_or](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.bool_or)
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_utils.timestamp_diff](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_diff)
 
@@ -3525,13 +3571,13 @@ This model identifies the last page view within a given session and returns vari
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-mobile/blob/main/models/sessions/scratch/snowplow_mobile_sessions_sv_details.sql">Source</a></i></b></center>
 
 ```jinja2
-{{ 
+{{
   config(
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["session_id"]),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["session_id"]),
     sort='session_id',
     dist='session_id',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
-  ) 
+  )
 }}
 
 select
@@ -3565,7 +3611,7 @@ group by 1
 </TabItem>
 <TabItem value="macros" label="Macros">
 
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
@@ -3704,9 +3750,9 @@ select
 
   {% if var('snowplow__session_stitching') %}
     -- updated with mapping as part of post hook on derived sessions table
-    cast(es.device_user_id as {{snowplow_utils.type_string(4096) }}) as stitched_user_id,
+    cast(es.device_user_id as {{snowplow_utils.type_max_string() }}) as stitched_user_id,
   {% else %}
-    cast(null as {{ snowplow_utils.type_string(4096) }}) as stitched_user_id,
+    cast(null as {{ snowplow_utils.type_max_string() }}) as stitched_user_id,
   {% endif %}
 
   sa.session_duration_s,
@@ -3799,7 +3845,7 @@ on es.session_id = sv.session_id
 - macro.dbt.type_int
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
 
 </TabItem>
 </Tabs>
@@ -3851,7 +3897,7 @@ A mapping table between `device_user_id` and `user_id`.
     unique_key='device_user_id',
     sort='end_tstamp',
     dist='device_user_id',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "end_tstamp",
       "data_type": "timestamp"
     }),
@@ -3893,7 +3939,7 @@ and device_user_id is not null
 </TabItem>
 <TabItem value="macros" label="Macros">
 
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -3981,23 +4027,24 @@ This derived incremental table contains all historic users data and should be th
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='device_user_id',
     upsert_date_key='start_tstamp',
     disable_upsert_lookback=true,
     sort='start_tstamp',
     dist='device_user_id',
-   partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+   partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
        "field": "start_tstamp",
        "data_type": "timestamp"
-     }, databricks_partition_by='start_tstamp_date'),
+     }, databricks_val='start_tstamp_date'),
     cluster_by=snowplow_mobile.mobile_cluster_by_fields_users(),
     tags=["derived"],
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -4026,7 +4073,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <TabItem value="macros" label="Macros">
 
 - [macro.snowplow_mobile.mobile_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_users)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -4076,11 +4123,11 @@ This model aggregates various metrics derived from sessions to a users level.
 ```jinja2
 {{
   config(
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
        "field": "start_tstamp",
        "data_type": "timestamp"
      }),
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["device_user_id"]),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["device_user_id"]),
     sort='device_user_id',
     dist='device_user_id',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
@@ -4130,8 +4177,7 @@ group by 1,2,3
 <TabItem value="macros" label="Macros">
 
 - macro.dbt.date_trunc
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>

@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-It captures application lifecycle state changes. In particular, when the app changes the state from foreground to background and viceversa.
+The tracker can capture application lifecycle state changes. In particular, when the app changes state from foreground to background and vice versa.
 
 The lifecycle tracking is disabled by default. It can be enabled in `TrackerConfiguration` like in the example below:
 

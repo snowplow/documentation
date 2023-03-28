@@ -55,7 +55,7 @@ val defaultConfig: List<ConfigurationBundle> =
 
 // Setup tracker with remote configuration
 Snowplow.setup(
-    context, remoteConfig, defaultConfig
+    applicationContext, remoteConfig, defaultConfig
 ) { configurationPair: Pair<List<String>, ConfigurationState?>? ->
     val namespaces = configurationPair?.first
     val configurationState =
@@ -77,7 +77,7 @@ NetworkConfiguration defaultNetworkConfig = new NetworkConfiguration(DEFAULT_COL
 List<ConfigurationBundle> defaultConfig = Lists.listOf(new ConfigurationBundle("defaultNamespace", networkConfig));
 
 // Setup tracker with remote configuration
-Snowplow.setup(context, remoteConfig, defaultConfig, configurationPair -> {
+Snowplow.setup(getApplicationContext(), remoteConfig, defaultConfig, configurationPair -> {
   List<String> namespaces = configurationPair.first;
   ConfigurationState configurationState = configurationPair.second; // either cached, default or fetched from the remote endpoint
 
@@ -266,7 +266,7 @@ Snowplow.refresh(applicationContext, successCallback)
 
 ```java
 // Load configuration with userId = nil
-Snowplow.setup(context, remoteConfig, defaultConfig, successCallback);
+Snowplow.setup(getApplicationContext(), remoteConfig, defaultConfig, successCallback);
 
 /* userId is set to nil */
 
@@ -279,7 +279,7 @@ tracker.getSubject().userId = "my-runtime-updated-userId"
 ...later...
 
 // Later refreshing the configuration with userId = nil
-Snowplow.refresh(context, successCallback);
+Snowplow.refresh(getApplicationContext(), successCallback);
 
 /* userId is still set to "my-runtime-updated-userId" because it was set at runtime */
 ```

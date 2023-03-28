@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-They capture information about the device and the app.
+Platform and application data tracking features capture information about the device and the app.
 
 They are enabled by default. But the setting can be changed through `TrackerConfiguration` like in the example below:
 
@@ -45,13 +45,11 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
   </TabItem>
 </Tabs>
 
-More details on [Subject](../../client-side-properties/index.md)
-
 ## Application context
 
 The [application context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) contains two properties:
 
-| Property | Type | Description | Required |
+| Property | Type | Description | Required in schema |
 | --- | --- | --- | --- |
 | `version` | String | Version number of the application e.g 1.1.0 | Yes |
 | `build` | String | Build name of the application e.g s9f2k2d or 1.1.0 beta | Yes |
@@ -60,7 +58,7 @@ The [application context entity](https://github.com/snowplow/iglu-central/blob/m
 
 The [platform context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-2) contains the following properties:
 
-| Property | Type | Description | Required |
+| Property | Type | Description | Required in schema |
 | --- | --- | --- | --- |
 | `osType` | String | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android") | Yes |
 | `osVersion` | String | Version of the mobile operating system. | Yes |

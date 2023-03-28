@@ -26,7 +26,7 @@ let trackerConfig = TrackerConfiguration()
     .screenContext(true)
 ```
 
-Using method swizzling in the `ViewController` class, the tracker automatically detects when screens are loaded and tracks events that include information about the current and previous view controllers.
+Using method swizzling in the `ViewController` class, the tracker automatically detects when screens are loaded (triggered by viewDidAppear in a ViewController) and tracks events that include information about the current and previous view controllers.
 
 ## Screen View Tracking in SwiftUI
 

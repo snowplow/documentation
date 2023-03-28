@@ -1,6 +1,5 @@
 ---
-title: "Snowplow Materialization"
-date: "2022-10-05"
+title: "Snowplow Optimized Materialization"
 sidebar_position: 400
 ---
 ```mdx-code-block
@@ -8,13 +7,21 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This package makes use of the `snowplow_incremental` [materialization](https://docs.getdbt.com/guides/legacy/creating-new-materializations) from the `snowplow_utils` package for the incremental models. This builds upon the out-of-the-box [incremental materialization](https://docs.getdbt.com/docs/building-a-dbt-project/building-models/materializations#incremental) provided by dbt. Its key advantage is that it limits table scans on the target table when updating/inserting based on the new data. This improves performance and reduces cost.
+This package makes use of the standard dbt `incremental` [materialization](https://docs.getdbt.com/docs/build/materializations#incremental) with an optimization applied for incremental models. Its key advantage is that it limits table scans on the target table when updating/inserting based on the new data. This improves performance and reduces cost. We do this by overriding the macro that generates the sql for the `merge` and `insert_delete` incremental methods.
 
-All models built by Snowplow use this materialization by default, any [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) are also able to make use of it. As is the case with the native incremental materialization, the strategy varies between adapters.
+All other features of the `incremental` materialization are supported including `incremental_predicates` and `on_schema_change`. The code for the overridden macro can be found [here](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/base_incremental/common/get_merge_sql.sql).
 
-Please refer to the [snowplow-utils](https://github.com/snowplow/dbt-snowplow-utils) docs for the full documentation on `snowplow_incremental` materialization.
+## Usage
+To enable the materialization on a model you need to ensure a `unique_key` and `upsert_date_key` are provided in the model config, and that `snowplow_optimize=true` in the config as well. 
 
-## Usage Notes
+In addition, the following must be added to your `dbt_project.yml` file once.
 
-- If using this the `snowplow_incremental` materialization, the native dbt `is_incremental()` macro will not recognize the model as incremental. Please use the `snowplow_utils.snowplow_is_incremental()` macro instead, which operates in the same way.
-- If you would rather use an alternative incremental materialization for all incremental models within the package, set the variable `snowplow__incremental_materialization` to your preferred materialization. See the [Configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for more details.
+```yaml
+# dbt_project.yml
+...
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['snowplow_utils', 'dbt']
+```
+
+If you wish to disable the buffer we apply to the upsert in the case of late arriving data (defined by `snowplow__upsert_lookback_days`) you can set `disable_upsert_lookback` to `true` in your model config.

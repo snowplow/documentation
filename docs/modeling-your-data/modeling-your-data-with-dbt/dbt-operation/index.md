@@ -120,8 +120,6 @@ These manifest models are critical to the package **and as such are protected fr
 
 :::
 
-
-
 The `allow_refresh()` macro defines this behavior. As [dbt recommends](https://docs.getdbt.com/faqs/target-names), target names are used here to differentiate between your prod and dev environment. By default, this macro assumes your dev target is named `dev`. This can be changed by setting the `snowplow__dev_target_name` var in your `dbt_project.yml` file.
 
 To full refresh any of the manifest models in production, set the `snowplow__allow_refresh` to `true` at run time (see below).

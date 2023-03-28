@@ -32,20 +32,30 @@ If you are not starting the media player package at the same time as the web pac
 
 :::
 
+### 1. Override the dispatch order in your project
+To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
 
-### 1. Adding the `selector.yml` file
+```yml
+# dbt_project.yml
+...
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['snowplow_utils', 'dbt']
+```
+
+If you do not do this the package will still work, but the incremental upserts will become more costly over time.
+
+### 2. Adding the `selector.yml` file
 
 Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-media-player/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
-### 2. Configuring the web model (in case it has not been run before)
+### 3. Configuring the web model (in case it has not been run before)
 
 Please refer to the `Quick Start` guide for the Snowplow Web package to make sure you configure the web model appropriately. (e.g. checking the source data or enabling desired contexts).
 
-One thing to highlight here: as the package is built onto the snowplow_incremental_materialization logic provided by the web package, please leave the `snowplow__incremental_materialization` variable as is with the default `snowplow_incremental` value.
-
-### 3. Enable desired contexts
+### 4. Enable desired contexts
 
 If you have enabled a specific context you will need to enable it in your `dbt_project.yml` file:
 
@@ -64,7 +74,7 @@ vars:
 
 For other variables you can configure please see the [model configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md#model-configuration) section.
 
-### 4. Run your model
+### 5. Run your model
 
 You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package):
 

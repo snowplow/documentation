@@ -472,9 +472,6 @@ You should keep your configuration file, and your resolver file if you have one,
 
 :::
 
-#### Using a different materialization
-By default the models use the `snowplow_incremental` method, which can be overwritten by setting the `snowplow__incremental_materialization` variable in your `dbt_project.yml`. See more details in the [Snowplow Materialization docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md).
-
 ### Producing your models
 To produce your models you need to run 
 

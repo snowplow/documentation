@@ -28,13 +28,26 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 
 ## Setup
 
-### 1. Adding the `selector.yml` file
+### 1. Override the dispatch order in your project
+To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
+
+```yml
+# dbt_project.yml
+...
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['snowplow_utils', 'dbt']
+```
+
+If you do not do this the package will still work, but the incremental upserts will become more costly over time.
+
+### 2. Adding the `selector.yml` file
 
 Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the mobile model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-mobile/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
-### 2. Check source data
+### 3. Check source data
 
 This package will by default assume your Snowplow events data is contained in the `atomic` schema of your [target.database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile), in the table labeled `events`. In order to change this, please add the following to your `dbt_project.yml` file:
 
@@ -53,7 +66,7 @@ vars:
 Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
 
 :::
-### 3. Enabled desired contexts
+### 4. Enabled desired contexts
 
 The mobile package has the option to join in data from the following 4 Snowplow contexts:
 
@@ -75,7 +88,7 @@ vars:
     snowplow__enable_screen_context: true
 ```
 
-### 4. Enable desired modules
+### 5. Enable desired modules
 
 The mobile package has the option to join in data from the following 1 Snowplow module:
 
@@ -91,7 +104,7 @@ vars:
     snowplow__enable_app_errors_module: true
 ```
 
-### 5. Filter your data set
+### 6. Filter your data set
 
 You can specify both `start_date` at which to start processing events and the `app_id`'s to filter for. By default the `start_date` is set to `2020-01-01` and all `app_id`'s are selected. To change this please add/modify the following in your `dbt_project.yml` file:
 
@@ -103,7 +116,7 @@ vars:
     snowplow__start_date: 'yyyy-mm-dd'
     snowplow__app_id: ['my_app_1','my_app_2']
 ```
-### 6. Additional vendor specific configuration
+### 7. Additional vendor specific configuration
 
 :::info BigQuery Only
 Verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
@@ -135,7 +148,7 @@ Depending on the use case it should either be the catalog (for Unity Catalog use
 
 :::
 
-### 7. Run your model
+### 8. Run your model
 
 You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package):
 

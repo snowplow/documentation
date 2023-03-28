@@ -33,7 +33,20 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 
 ## Setup
 
-### 1. Set variables
+### 1. Override the dispatch order in your project
+To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
+
+```yml
+# dbt_project.yml
+...
+dispatch:
+  - macro_namespace: dbt
+    search_order: ['snowplow_utils', 'dbt']
+```
+
+If you do not do this the package will still work, but the incremental upserts will become more costly over time.
+
+### 2. Set variables
 
 The package has some variables that need to be set before it can be run, you should edit these in your `dbt_project.yml` file. Further customization can be done via the variables listed in the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/fractribution/index.md).
 
@@ -53,7 +66,7 @@ vars:
     snowplow__path_transforms: {'exposure_path' : null}
 ```
 
-### 2. Configure macros
+### 3. Configure macros
 
 All the below macros are created with the intention to let users modify them to fit their personal use case. If you wish to change this, copy the macro from the macros folder in the `snowplow_fractribution` package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_clause.sql`) and add it to the macros folder of your own dbt project where you are free to make any alterations. You will find a detailed guide / illustration with sample code within the individual macros themselves.
 
@@ -62,14 +75,14 @@ import FractributionDbtMacros from "@site/docs/reusable/fractribution-dbt-macros
 
 <FractributionDbtMacros/>
 ```
-### 3. Run the model
+### 4. Run the model
 
 Execute the following either through your CLI, within dbt Cloud, or within [Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md)
 
 ```yml
 dbt run --select snowplow_fractribution
 ```
-### 4. Run the python script to generate the final models
+### 5. Run the python script to generate the final models
 <details>
 <summary>Locally run python</summary>
 
@@ -255,7 +268,5 @@ docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribut
 
 </TabItem>
 </Tabs>
-
-
 
 </details>

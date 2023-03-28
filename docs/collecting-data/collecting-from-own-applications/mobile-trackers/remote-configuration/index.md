@@ -184,7 +184,7 @@ Snowplow.refresh(onSuccess: successCallback)
 
 ```kotlin
 Snowplow.refresh(
-    context
+    applicationContext
 ) { configurationPair: Pair<List<String>, ConfigurationState>? ->
     val namespaces = configurationPair?.first
     val configurationState = configurationPair?.second

@@ -1,10 +1,10 @@
 ---
-title: "Custom tracking using schemas"
+title: "Custom event tracking"
 date: "2022-08-30"
 sidebar_position: 20
 ---
 
-# Custom tracking using schemas
+# Custom event tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -134,13 +134,13 @@ They can be used in the tracker to provide more context to specific events (e.g.
 
 ```swift
 let event = ScreenView(name: "DemoScreenName")
-event.contexts.add(
+event.entities.add(
     SelfDescribingJson(schema: "iglu:com.example/screen/jsonschema/1-0-1",
         andDictionary: [
              "screenType": "test",
              "lastUpdated": "2021-06-11"
         ])!)     
-event.contexts.add(
+event.entities.add(
     SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0", 
         andDictionary: [
              "userType": "tester"
@@ -154,7 +154,7 @@ tracker.track(event)
 
 ```kotlin
 val event = ScreenView("screen")
-event.customContexts.add(
+event.entities.add(
     SelfDescribingJson(
         "iglu:com.example/screen/jsonschema/1-2-1",
         mapOf(
@@ -163,7 +163,7 @@ event.customContexts.add(
         )
     )
 )
-event.customContexts.add(
+event.entities.add(
     SelfDescribingJson(
         "iglu:com.example/user/jsonschema/2-0-0",
         mapOf(
@@ -180,14 +180,14 @@ tracker.track(event)
 
 ```java
 ScreenView event = new ScreenView("screen");
-event.customContexts.add(
+event.getEntities().add(
     new SelfDescribingJson("iglu:com.example/screen/jsonschema/1-2-1",
         new HashMap<String, String>() {{
             put("screenType", "test");
             put("lastUpdated", "2021-06-11");
         }})
 );
-event.customContexts.add(
+event.getEntities().add(
     new SelfDescribingJson("iglu:com.example/user/jsonschema/2-0-0",
         new HashMap<String, String>() {{
             put("userType", "tester");

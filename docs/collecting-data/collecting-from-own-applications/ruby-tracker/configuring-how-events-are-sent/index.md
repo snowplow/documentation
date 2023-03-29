@@ -17,7 +17,7 @@ Emitters and AsyncEmitters are initialized in the same way. An event collector e
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
@@ -69,7 +69,7 @@ You may want to force an emitter to send all events in its buffer, even if the b
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby

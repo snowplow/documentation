@@ -37,7 +37,7 @@ dbt run --selector snowplow_<package>
 
 Within the packages we have provided a suite of suggested selectors to run and test the models within the packages. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax).
 
-<Tabs groupId="dbt-packages">
+<Tabs groupId="dbt-packages" queryString>
 <TabItem value="web" label="Snowplow Web" default>
 
 - `snowplow_web`: Recommended way to run the package. This selection includes all models within the Snowplow Web as well as any custom models you have created
@@ -76,7 +76,7 @@ Within the packages we have provided a suite of suggested selectors to run and t
 These are defined in each `selectors.yml` file within the packages, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
 ## Manifest Tables
-<Tabs groupId="dbt-packages">
+<Tabs groupId="dbt-packages" queryString>
 <TabItem value="web" label="Snowplow Web" default>
 
 There are 3 manifest tables included in this package:

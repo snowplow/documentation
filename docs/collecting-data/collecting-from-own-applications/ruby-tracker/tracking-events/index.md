@@ -56,7 +56,7 @@ The `track_self_describing_event` method has one required argument, which must b
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
@@ -112,7 +112,7 @@ As these fields are fairly arbitrary, we recommend following the advice in this 
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
@@ -141,7 +141,7 @@ As a server-side language, your Ruby code won't automatically have access to the
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
@@ -169,7 +169,7 @@ This method creates an `unstruct` event, by creating a SelfDescribingJson and ca
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
@@ -200,7 +200,7 @@ The "item" hash records each item's unique SKU identifier, value, and how many w
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby

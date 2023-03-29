@@ -25,7 +25,7 @@ For example if your derived tables are very large you may want to run the full t
 
 This is our recommended approach to testing and can be implemented using the selector flag (see [YAML selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section for more details) as follows:
 
-<Tabs groupId="dbt-packages">
+<Tabs groupId="dbt-packages" queryString>
 <TabItem value="web+mobile" label="Snowplow Web/Mobile" default>
 
 ```bash

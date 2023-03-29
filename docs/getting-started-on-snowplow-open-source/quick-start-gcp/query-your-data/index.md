@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 If you were using the `default` or `secure` example scripts unedited in the last section, you will have created a Postgres database where all of your data is stored. Your database will contain the following standard Snowplow schemas:
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 - `atomic`: this is your rich, high quality data
@@ -30,7 +30,7 @@ If you were using the `default` or `secure` example scripts unedited in the last
 
 To query the good data, you will first you need to connect to your database.
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 - Connect to the database using the username and password you provided when creating the pipeline, along with the `db_address` and `db_port` you noted down after the pipeline was created.
@@ -69,7 +69,7 @@ By default, there are 5 enrichments enabled, as listed below. These enrichments 
 
 Some enrichments are _legacy_ and therefore populate your events table. From the above list, these are the _campaign attribution, referer parser_ and _event fingerprint_ enrichments. The UA parser and YAUAA enrichment also add a separate _entity_ to each event (these are also referred to as contexts since they add additional context to the events in your events table).
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 The contexts are loaded into separate tables: 
@@ -97,7 +97,7 @@ In the last section, we sent a test event that would fail to be processed by you
 
 As the custom `product_view` event passed through your pipeline, the Enrich application fetches the schema for the event. It does this so it can validate that the structure of the event conforms to what was defined up front, therefore ensuring it is of the quality expected.  Since the schema for the `product_view` event doesn't yet exist in your Iglu schema registry, the event failed to validate.
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 Your `atomic_bad` schema holds events that have failed to be processed by your pipeline. These are called [failed events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).

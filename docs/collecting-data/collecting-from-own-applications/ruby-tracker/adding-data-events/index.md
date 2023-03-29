@@ -34,7 +34,7 @@ Once defined, an entity can be attached to any kind of event. This is also an im
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
@@ -116,7 +116,7 @@ The methods for defining `domain_sessionid` and `domain_sessionidx` were added i
 
 Example:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 :::note

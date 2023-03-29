@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Note: you can very easily edit the script or run each of the terraform modules independently, giving you the flexibility to design the topology of your pipeline according to your needs.
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 ![](images/postgres.png)

@@ -17,7 +17,7 @@ For this example, the input data is a json string which looks like this:
 
 The script filters out any data with a `batmobileCount` less than 1, otherwise it updates the Data's `name` field to "Bruce Wayne", and sets the PartitionKey to the value of `id`:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="js" label="Javascript" default>
 
 ```js reference
@@ -36,7 +36,7 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tra
 
 The configuration for this script is:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="js" label="Javascript" default>
 
 ```hcl reference

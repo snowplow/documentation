@@ -20,8 +20,8 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 1. In your application delegate `AppDelegate.swift` add `import SnowplowTracker`.
 
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
-   
-<Tabs groupId="platform">
+
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -144,7 +144,7 @@ Note: The `networkConfiguration` is fundamental in order to set the collector en
 As shown above the developer can enforce the download of the configuration file at the start up of the app.
 If the developer wants to check for configuration updates more often, for example at runtime or when the app comes back from background state, it's possible to use the `refresh` method, placing it where the developer wants to perform the download and the configuration check.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -179,7 +179,7 @@ When the tracker initializer updates the tracker configuration, it would reset a
 
 A clear example is a runtime change on `userId` on `SubjectController`:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift

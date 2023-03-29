@@ -77,7 +77,7 @@ Manipulating the values in the manifest tables can cause unexpected outcomes if 
 
 All the incremental models in the Snowplow packages have recommended cluster keys applied to them. Depending on your specific use case, you may want to change or disable these all together. This can be achieved by overriding the following macros with your own version within your project:
 
-<Tabs groupId="dbt-packages">
+<Tabs groupId="dbt-packages" queryString>
 <TabItem value="web" label="Snowplow Web" default>
 
 - `web_cluster_by_fields_sessions_lifecycle()`

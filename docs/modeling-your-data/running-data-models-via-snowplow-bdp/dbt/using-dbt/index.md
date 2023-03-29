@@ -52,7 +52,7 @@ Read below for more details on the steps to configure and run your dbt data mode
 
 You need to provide your prod connection profile for the warehouse you are connecting to in the `profiles.yml` file for **each datamodel**. Ensure that your profile and target are set to `prod`. See [the dbt adapters docs](https://docs.getdbt.com/docs/supported-data-platforms#verified-adapters) for more specific configuration information for each database.
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
 <TabItem value="redshift" label="Redshift" default>
 
 See [dbt connection setup](https://docs.getdbt.com/reference/warehouse-setups/redshift-setup) for more information.
@@ -170,7 +170,7 @@ You should write your dbt models in such a way that if they fail part way throug
 
 In the third and last step you can configure the arguments and variables your `dbt run` call is excecuted with. The arguments (`--selector` or `--select` / `--exclude`) follow the syntax described on [dbt docs](https://docs.getdbt.com/reference/node-selection/syntax), and so do variables ([`--vars` flag](https://docs.getdbt.com/docs/build/project-variables#defining-variables-on-the-command-line)):
 
-<Tabs groupId="dbt-step3">
+<Tabs groupId="dbt-step3" queryString>
 <TabItem value="selector" label="Selector" default>
 
 ![](images/data-model-create-step-3.png)

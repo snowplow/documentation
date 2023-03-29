@@ -45,7 +45,7 @@ The Tracker must be initialized with an Emitter or the subclass AsyncEmitter (or
 
 Initializing a tracker instance:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby
@@ -88,7 +88,7 @@ The final initialization parameter is a setting for the base64-encoding of any J
 
 Initializing a tracker instance with all possible settings used:
 
-<Tabs groupId="version">
+<Tabs groupId="version" queryString>
   <TabItem value="current" label="v0.7.0+" default>
 
 ```ruby

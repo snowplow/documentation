@@ -52,7 +52,7 @@ Read below for more details on the steps to configure and run your dbt data mode
 
 You need to provide your prod connection profile for the warehouse you are connecting to in the `profiles.yml` file for **each datamodel**. Ensure that your profile and target are set to `prod`. See [the dbt adapters docs](https://docs.getdbt.com/docs/supported-data-platforms#verified-adapters) for more specific configuration information for each database.
 
-<Tabs groupId="dbt-packages">
+<Tabs groupId="warehouse">
 <TabItem value="redshift" label="Redshift" default>
 
 See [dbt connection setup](https://docs.getdbt.com/reference/warehouse-setups/redshift-setup) for more information.

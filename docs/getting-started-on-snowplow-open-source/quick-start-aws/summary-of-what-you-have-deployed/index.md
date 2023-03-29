@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Note: you can very easily edit the script or run each of the terraform modules independently, giving you the flexibility to design the topology of your pipeline according to your needs.
 
-<Tabs groupId="destination">
+<Tabs groupId="warehouse">
   <TabItem value="postgres" label="Postgres" default>
 
 ![](images/postgres.png)
@@ -118,7 +118,7 @@ Your S3 bucket where the raw, enriched and bad data gets written to by the S3 lo
 
 Find out more about the S3 bucket module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest](https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest).
 
-<Tabs groupId="destination" queryString>
+<Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 ## Postgres loader

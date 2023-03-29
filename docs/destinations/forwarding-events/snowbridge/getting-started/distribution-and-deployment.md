@@ -15,7 +15,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 There are two distributions of Snowbridge.
 
-<Tabs groupId="distribution">
+<Tabs groupId="cloud">
   <TabItem value="default" label="Default" default>
 
 The default distribution contains everything except for the [Kinesis source](/docs/destinations/forwarding-events/snowbridge/configuration/sources/kinesis.md), i.e. the ability to read from AWS Kinesis. This distribution is all licensed under the [Snowplow Community License](/community-license-1.0/). _(If you are uncertain how it applies to your use case, check our answers to [frequently asked questions](/docs/contributing/community-license-faq/index.md).)_

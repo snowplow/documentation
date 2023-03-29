@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 To store your enriched Snowplow data, you will need to determine which loader to set-up to ensure your enriched data reaches your data warehouse or lake. 
 
 ### Selecting a loader for your data warehouse
-<Tabs groupId="destination">
+<Tabs groupId="cloud">
   <TabItem value="aws" label="AWS" default>
 
 | Destination | Loader | Status |

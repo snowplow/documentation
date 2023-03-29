@@ -11,6 +11,7 @@ const plugin = () => {
     GCP: 'Google Cloud Platform',
     GCS: 'Google Cloud Storage',
     GTM: 'Google Tag Manager',
+    HAR: 'HTTP Archive',
     KCL: 'Kinesis Client Library',
     OSS: 'Open Source Software',
     QA: 'Quality Assurance',

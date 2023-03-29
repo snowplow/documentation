@@ -151,10 +151,11 @@ class dbt_model(dbt_base):
         markdown.extend(['</DbtDetails>', ''])
 
         # Add the depends on references
-        markdown.extend(md_depends_on(depends_macros, depends_models))
+        markdown.extend(md_X_by(depends_macros, depends_models, 'Depends On'))
 
-        markdown.extend(md_referenced_by(
-            referenced_by_macros, referenced_by_models))
+        # Add referenced by
+        markdown.extend(md_X_by(
+            referenced_by_macros, referenced_by_models, 'Referened By'))
 
         markdown.extend(['</DbtDetails>', ''])
         return '\n'.join(markdown), is_documented
@@ -269,10 +270,10 @@ class dbt_macro(dbt_base):
 
         # Add the depends on references
         # Macros can only depend on other macros
-        markdown.extend(md_depends_on(depends_macros, []))
+        markdown.extend(md_X_by(depends_macros, [], 'Depends On'))
 
-        markdown.extend(md_referenced_by(
-            referenced_by_macros, referenced_by_models))
+        markdown.extend(md_X_by(
+            referenced_by_macros, referenced_by_models, 'Referened By'))
 
         markdown.extend(['</DbtDetails>', ''])
         return '\n'.join(markdown), is_documented
@@ -387,7 +388,16 @@ def combine_packages(type: str, packages: list[dict[Union[dbt_macro, dbt_model]]
     return combined_objects
 
 
-def merge_manifest_and_catalog(models, catalogs):
+def merge_manifest_and_catalog(models: dict, catalogs: dict) -> dict:
+    """Merges a dictionary of models based on manifest files and catalog type objects
+
+    Args:
+        models (dict): A dictionary of models generated from manifest files
+        catalogs (dict): A dictonary of catalog file objects
+
+    Returns:
+        dict: A copy of the models dictionary with information from the catalog.
+    """
 
     models_copy = deepcopy(models)
 
@@ -401,6 +411,7 @@ def merge_manifest_and_catalog(models, catalogs):
             merged_cols = dict()
             for col_name, col_val in cat_cols.items():
                 merged_cols[col_name.lower()] = col_val
+                # Add back in the column description
                 merged_cols[col_name.lower()]['description'] = orig_cols.get(
                     col_name.lower(), {}).get('description')
             models_copy[model].columns = merged_cols
@@ -412,7 +423,19 @@ def merge_manifest_and_catalog(models, catalogs):
     return models_copy
 
 
-def github_read_file(username, repository_name, file_path, ref, headers):
+def github_read_file(username: str, repository_name: str, file_path: str, ref: str, headers: dict) -> str:
+    """Retruns the contets of a file from a github repo for a specific ref
+
+    Args:
+        username (str): Username of Organisation of the repo
+        repository_name (str): Repo name
+        file_path (str): Path to the file in the repo
+        ref (str): Ref (branch or tag) to get the contents of
+        headers (dict): Headers to send with request
+
+    Returns:
+        str: Contents of the file
+    """
     headers['Accept'] = 'application/vnd.github.v3.raw'
     url = f'https://api.github.com/repos/{username}/{repository_name}/contents/{file_path}?ref={ref}'
     print(f'Fetching {url}')
@@ -422,7 +445,13 @@ def github_read_file(username, repository_name, file_path, ref, headers):
     return r.text
 
 
-def download_docs(packages, headers):
+def download_docs(packages: tuple[str, str], headers: dict) -> None:
+    """Downloads manifest and catalog objects for all packages
+
+    Args:
+        packages (tuple): Tuple of packages to download contents from, the second value should be the repo name
+        headers (dict): Headers to send with the request
+    """
     # Create the manifest folder to write to
     if not (os.path.exists('./manifests')):
         os.makedirs('./manifests')
@@ -640,7 +669,7 @@ def objects_to_markdown(objects: dict[Union[dbt_macro, dbt_model]], docs: dict =
 
 
 def get_source_url(macrokey: str, path: str) -> str:
-    """Gets the package url for a macro (also works for models!) key. So far, very simple...
+    """Gets the package url for a macro (also works for models!) key.
 
     Args:
         macrokey (str): a key value for the macro you want the url of
@@ -724,7 +753,19 @@ def get_doc(text: str, docs: dict, key: str) -> str:
         return text
 
 
-def md_X_by(X, type):
+def md_X_by_list(X: list, type: str) -> list:
+    """Returns the code for a list of links to other macros/models
+
+    Args:
+        X (list): List of objects (models or macros) to list
+        type (str): Type of objects, one of model or macro
+
+    Raises:
+        ValueError: If type is not one of the valid options
+
+    Returns:
+        list: Markdown of objects listed with correct links
+    """
     md = []
     if type not in ['model', 'macro']:
         raise ValueError('Non-supported type in call')
@@ -741,43 +782,47 @@ def md_X_by(X, type):
     return md
 
 
-def md_referenced_by(ref_by_macros, ref_by_models):
+def md_X_by(macros: list, models: list, header: str) -> list:
+    """Generates a list block of markdown for the provided models and macros
+
+    Args:
+        macros (list): List of macro names
+        models (list): List of model names
+        header (str): Header for the section
+
+    Returns:
+        list: Markdown of referenced objects
+    """
     md = []
-    if ref_by_macros or ref_by_models:
-        md.extend(['', '<h4>Referenced By</h4>', ''])
+    if macros or models:
+        md.extend(['', f'<h4>{header}</h4>', ''])
         # Generate a tab group even if there is only one of the types, just for consistency
         md.append('<Tabs groupId="reference">')
 
-        if ref_by_models:
-            md.extend(md_X_by(ref_by_models, 'model'))
+        if models:
+            md.extend(md_X_by_list(models, 'model'))
 
-        if ref_by_macros:
-            md.extend(md_X_by(ref_by_macros, 'macro'))
+        if macros:
+            md.extend(md_X_by_list(macros, 'macro'))
 
         md.append('</Tabs>')
 
     return md
 
 
-def md_depends_on(dep_macros, dep_models):
-    md = []
-    if dep_macros or dep_models:
-        md.extend(['', '<h4>Depends On</h4>', ''])
-        # Generate a tab group even if there is only one of the types, just for consistency
-        md.append('<Tabs groupId="reference">')
+def md_tab_val(lang: str, link: str, val: str, default: bool, syn: str) -> list:
+    """Generates markdown for a tabitem with specified values
 
-        if dep_models:
-            md.extend(md_X_by(dep_models, 'model'))
+    Args:
+        lang (str): Language of the value to apple as the value and the label
+        link (str): Link html, if required
+        val (str): Value to add to the tab item
+        default (bool): Should this item be the default for the group?
+        syn (str): Syntax language to apply to the value
 
-        if dep_macros:
-            md.extend(md_X_by(dep_macros, 'macro'))
-
-        md.append('</Tabs>')
-
-    return md
-
-
-def md_tab_val(lang, link, val, default, syn):
+    Returns:
+        list: Markdown of the tabitem
+    """
     md = []
     md.extend(
         [f'<TabItem value="{lang}" label="{lang}"{" default" if default else ""}>', ''])

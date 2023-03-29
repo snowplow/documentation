@@ -13,7 +13,7 @@ If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enr
 
 :::tip Schemas in ElasticSearch
 
-For more information on how events are stored in ElasticSearch, check the [mapping between Snowplow schemas and the corresponding ElasticSearch types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md).
+For more information on how events are stored in ElasticSearch, check the [mapping between Snowplow schemas and the corresponding ElasticSearch types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md?warehouse=elastic).
 
 :::
 

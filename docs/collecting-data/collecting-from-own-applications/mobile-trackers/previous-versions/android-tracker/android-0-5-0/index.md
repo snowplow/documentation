@@ -10,7 +10,7 @@ sidebar_position: 960
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.
 
-The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) guide before continuing.
+The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md?platform=android#installing-1) guide before continuing.
 
 **NOTE**: The Tracker should only ever be setup as a singleton object. Due to the way it stores and reads information and the creation of persistent background services, creating more than one Tracker can cause a plethora of race conditions.
 
@@ -67,7 +67,7 @@ protected void onResume() {
 
 ## 2 Initialization
 
-Assuming you have completed the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) for your project, you are now ready to initialize the Android Tracker.
+Assuming you have completed the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md?platform=android#installing-1) for your project, you are now ready to initialize the Android Tracker.
 
 #### 2.1 Importing the module
 

@@ -10,7 +10,7 @@ sidebar_position: 970
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.
 
-The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) guide before continuing.
+The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md?platform=android#installing-1) guide before continuing.
 
 ### 1.1. Demo App
 
@@ -22,7 +22,7 @@ For a walkthrough go [here](https://github.com/snowplow/snowplow/wiki/Android-a
 
 ## 2 Initialization
 
-Assuming you have completed the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) for your project, you are now ready to initialize the Android Tracker.
+Assuming you have completed the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md?platform=android#installing-1) for your project, you are now ready to initialize the Android Tracker.
 
 #### 2.1 Importing the module
 
@@ -802,7 +802,7 @@ Logging in the Tracker is done using our own Logger class: '/utils/Logger.java'.
 
 ## Integration
 
-This page refers to integration samples for [Android Tracker v0.4.0](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/android-0-4-0/index.md). This assumes you have already successfully gone through the [Setup Guide](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md) for setting up all the dependencies for the tracker.
+This page refers to integration samples for [Android Tracker v0.4.0](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/android-0-4-0/index.md). This assumes you have already successfully gone through the [Setup Guide](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md?platform=android#installing-1) for setting up all the dependencies for the tracker.
 
 The following example classes are using the bare minimum of settings for building a Tracker. It is encouraged to flesh out the options for the Tracker and Emitter builders.
 

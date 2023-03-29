@@ -155,7 +155,7 @@ class dbt_model(dbt_base):
 
         # Add referenced by
         markdown.extend(md_X_by(
-            referenced_by_macros, referenced_by_models, 'Referened By'))
+            referenced_by_macros, referenced_by_models, 'Referenced By'))
 
         markdown.extend(['</DbtDetails>', ''])
         return '\n'.join(markdown), is_documented
@@ -273,7 +273,7 @@ class dbt_macro(dbt_base):
         markdown.extend(md_X_by(depends_macros, [], 'Depends On'))
 
         markdown.extend(md_X_by(
-            referenced_by_macros, referenced_by_models, 'Referened By'))
+            referenced_by_macros, referenced_by_models, 'Referenced By'))
 
         markdown.extend(['</DbtDetails>', ''])
         return '\n'.join(markdown), is_documented

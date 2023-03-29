@@ -54,7 +54,7 @@ Due to its unique relationship with the web package, in order to operate the med
 2. The web package has not been used
 3. Only the media player package needs to be run at any time
 
-<Tabs groupId="operation">
+<Tabs groupId="operation" queryString>
 <TabItem value="sc1" label="Scenario 1" default>
 
 #### Adding the media player data model to an existing dbt project with web model data already running

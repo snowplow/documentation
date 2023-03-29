@@ -118,7 +118,7 @@ Your S3 bucket where the raw, enriched and bad data gets written to by the S3 lo
 
 Find out more about the S3 bucket module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest](https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest).
 
-<Tabs groupId="destination">
+<Tabs groupId="destination" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 ## Postgres loader

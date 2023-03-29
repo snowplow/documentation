@@ -166,7 +166,7 @@ The [platform context entity](https://github.com/snowplow/iglu-central/blob/mast
 The IDFA advertising identifiers are only added to the platform context if you fulfill the following requirements.
 Otherwise, their values will be NULL.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS (tracker v4)" default>
 
 The Apple advertising identifier is stored in the `appleIdfa` property.

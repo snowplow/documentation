@@ -50,7 +50,7 @@ If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install
 
 :::
 
-<Tabs groupId="cloud">
+<Tabs groupId="cloud" queryString>
 <TabItem value="aws" label="AWS" default>
 
 <ReactMarkdown children={`

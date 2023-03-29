@@ -69,7 +69,7 @@ Events that have been validated and enriched by the Enrich application are writt
 
 This bad topic is for events that the collector or enrich fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure. More details can be found [here](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).
 
-<Tabs groupId="destination">
+<Tabs groupId="destination" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 No other pubsub topics.
@@ -114,7 +114,7 @@ This is the Iglu Server database where the Iglu schemas themselves are stored.
 
 For further details on the resources, default and required input variables, and outputs see the [cloud-sql](https://registry.terraform.io/modules/snowplow-devops/cloud-sql/google/latest) terraform module.
 
-<Tabs groupId="destination">
+<Tabs groupId="destination" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
 ## Postgres loader

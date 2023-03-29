@@ -24,7 +24,7 @@ Additionally, Snowplow has a number of Analytics SDKs available which help parse
 
 For explanations of what each field represents, please see the [Canonical Event Model](/docs/understanding-your-pipeline/canonical-event/index.md).
 
-<Tabs groupId="fields">
+<Tabs groupId="fields" queryString>
   <TabItem value="table" label="Table" default>
 
 | Property Index | Property Name |

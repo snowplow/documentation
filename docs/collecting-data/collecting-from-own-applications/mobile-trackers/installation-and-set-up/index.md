@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Tabs>
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 The Snowplow iOS Tracker SDK supports iOS 9.0+, macOS 10.9+, tvOS 9.0+ and watchOS 2.0+

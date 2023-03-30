@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Tabs>
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS Tracker" default>
 
 The mobile trackers capture two types of events, automatically captured and manual events.

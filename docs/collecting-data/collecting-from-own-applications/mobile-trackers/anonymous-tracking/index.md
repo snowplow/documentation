@@ -28,7 +28,7 @@ There are several levels to the anonymisation depending on which of the three ca
 
 In this case, we want to anonymise both the client-side user identifiers as well as the client-side session identifiers. This means disabling the Session context altogether and enabling user anonymisation:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -53,7 +53,7 @@ TrackerConfiguration config = new TrackerConfiguration()
 
 This setting disables client-side user identifiers are but tracks session information. In practice, this means that events track the Session context entity but the `userId` property is a null UUID (`00000000-0000-0000-0000-000000000000`). In case Platform context is enabled, the IDFA identifiers will not be present.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -84,7 +84,7 @@ When anonymous tracking is enabled or disabled using `tracker.setUserAnonymisati
 
 Server-side anonymisation affects user identifiers set server-side. In particular, these are the `network_userid` property set in server-side cookie and the user IP address. You can anonymise the properties using the `serverAnonymisation` flag in `EmitterConfiguration`:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift

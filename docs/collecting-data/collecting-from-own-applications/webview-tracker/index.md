@@ -57,7 +57,7 @@ nativeTracker -- "Sends tracked events" --> collector
 
 You may choose to install the tracker as an npm package or by loading it through an HTML script tag.
 
-<Tabs groupId="installation">
+<Tabs groupId="installation" queryString>
   <TabItem value="npm" label="Using npm" default>
 
 To install the WebView tracker in your JavaScript or TypeScript app, add the npm package:
@@ -98,7 +98,7 @@ Make sure to replace the `{{URL to sp.js}}` with the URL to the `sp.js` file in 
 
 To track events, simply call their corresponding functions given the event data:
 
-<Tabs groupId="installation">
+<Tabs groupId="installation" queryString>
   <TabItem value="npm" label="Installed using npm" default>
 
 ```javascript

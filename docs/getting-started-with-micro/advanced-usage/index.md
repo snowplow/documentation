@@ -67,7 +67,7 @@ The easiest way to achieve it is with a tool like [ngrok](https://ngrok.com/) or
 
 After running Micro as above, you just need to expose the port:
 
-<Tabs group="exposing-micro">
+<Tabs groupId="exposing-micro" queryString>
   <TabItem value="ngrok" label="ngrok" default>
 
 [Download](https://ngrok.com/download) ngrok, then run this command:

@@ -78,7 +78,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_<package>') }} --return
 
 By doing all of this you ensure your table will be managed correctly in the manifest tables and make use of the incremental logic of the package. Listed below are the recommended tables to reference as your input for a custom model, depending on the level of aggregation required:
 
-<Tabs groupId="dbt-packages2">
+<Tabs groupId="dbt-packages" queryString>
 <TabItem value="web" label="Snowplow Web" default>
 
 - Event level: `snowplow_web_base_events_this_run`

@@ -103,7 +103,7 @@ You can install the packages using `pip install -r dbt_packages/snowplow_fractri
 
 Please note that some of the libraries are adapter specific. These are listed in the `requirements` file, and you can also find the necessary list for each adapter below:
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
 <TabItem value="bigquery" label="BigQuery" default>
 
 - `absl-py`==`1.2.0`
@@ -144,7 +144,7 @@ conda config --env --set subdir osx-64
 
 #### II. Set the connection parameters in your terminal
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
 <TabItem value="bigquery" label="BigQuery" default>
 
 ```
@@ -184,7 +184,7 @@ export snowflake_schema=derived_schema_name
 Run the adapter specific main fractribution script by specifying the conversion window start and end dates, and the attribution model (if you are not using the default `shapley`, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#attribution-models) for more options). Example:
 
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
 <TabItem value="bigquery" label="BigQuery" default>
 
 ```
@@ -244,7 +244,7 @@ Run the docker container :
 If you are using Bigquery,
 
 
-<Tabs groupId="warehouse">
+<Tabs groupId="warehouse" queryString>
 <TabItem value="bigquery" label="BigQuery" default>
 
 With BigQuery you need to mount your service account keyfile when running the docker image

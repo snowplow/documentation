@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 The Tracker is published to Maven Central and JCenter, which should make it easy to add it as a dependency into your own Scala app.
-<Tabs groupId="packager">
+<Tabs groupId="packager" queryString>
 <TabItem value="sbt" label="sbt" default>
 
 Add the Scala Tracker to your build.sbt:

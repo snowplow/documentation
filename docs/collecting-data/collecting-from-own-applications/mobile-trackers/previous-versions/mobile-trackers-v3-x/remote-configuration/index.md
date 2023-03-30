@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Tabs>
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS Tracker" default>
 
 Remote Configuration is a feature of the mobile native trackers that allows for the configuration of the tracker without distributing an app update.

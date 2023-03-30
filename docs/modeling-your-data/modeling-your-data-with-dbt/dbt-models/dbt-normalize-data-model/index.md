@@ -126,7 +126,7 @@ The configuration file is used to provide the information needed to generate the
 The config file is a JSON file which can be viewed by running the python script with the `--configHelp` flag. The config file can be located anywhere in your project, but it must have the following structure. Note that you must provide **at least** one of `event_columns`, `self_describing_event_schemas` or `context_schemas` for each event listed.
 :::
 
-<Tabs groupId="config-file">
+<Tabs groupId="config-file" queryString>
 <TabItem value="desc" label="Field Description" default>
 
 - `config` _(required - object)_:

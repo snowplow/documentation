@@ -8,7 +8,7 @@ import {versions} from '@site/src/componentVersions';
 
 <!-- Note the following tables are wrapped in the additional tags to correctly render the package version, but work the same as normal markdown tables -->
 
-<Tabs groupId="dbt-packages">
+<Tabs groupId="dbt-packages" queryString>
 <TabItem value="web" label="Snowplow Web" default>
 
 From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.

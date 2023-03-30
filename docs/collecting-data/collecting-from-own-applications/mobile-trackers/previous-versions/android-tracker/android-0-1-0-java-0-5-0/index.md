@@ -10,7 +10,7 @@ The [Snowplow Java Tracker](https://github.com/snowplow/snowplow-java-tracker)�
 
 The [Snowplow Android Tracker](https://github.com/snowplow/snowplow-android-tracker) allows you to track Snowplow events from your Android applications and games. It supports applications using the Android SDK 11 and above.
 
-The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Java Tracker Setup](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) or [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md#installing-1) guide before continuing.
+The tracker should be straightforward to use if you are comfortable with Java development; its API is modelled after Snowplow's [Python Tracker](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) so any prior experience with that tracker is helpful but not necessary. If you haven't already, have a look at the [Java Tracker Setup](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) or [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md?platform=android#installing-1) guide before continuing.
 
 ### 1.1 Android specific
 
@@ -18,7 +18,7 @@ The Android Tracker is based off of the Java Tracker core library which is the s
 
 ## 2 Initialization
 
-Assuming you have completed the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md#installing-1) or [Java Tracker Setup](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) for your project, you are now ready to initialize the Android/Java Tracker.
+Assuming you have completed the [Android Tracker Setup](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/installation-and-set-up/index.md?platform=android#installing-1) or [Java Tracker Setup](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) for your project, you are now ready to initialize the Android/Java Tracker.
 
 ### 2.1 Importing the module
 

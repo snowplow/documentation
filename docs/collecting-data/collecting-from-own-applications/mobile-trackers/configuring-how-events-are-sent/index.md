@@ -19,7 +19,7 @@ The tracker allows the configuration of the network connection, event sending, a
 
 The `NetworkConfiguration` is used to specify the collector endpoint:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -41,7 +41,7 @@ The URL path for your collector endpoint should include the protocol, "http" or 
 
 In particular cases it can be useful to have a full control of the component in charge to send the events. This can be achieved with a custom `NetworkConnection` that will take care to send the events to the collector:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -78,7 +78,7 @@ In the example above we used the `OkHttpNetworkConnection` but it can be used an
 
 The tracker sends events asynchrounously in batches using POST requests. In case the collector is not reachable, the events are stored in an internal component called `EventStore` based on a SQLite database. The `EventStore` can be overriden with a custom one in case the developer require a different solution to persist the events before sending.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -110,7 +110,7 @@ The tracker has an option for setting response codes not to retry after. The int
 
 By default, the tracker retries sending events on all 3xx, 4xx, and 5xx status codes except the status codes indicated above. You may override the default behaviour using the `customRetryForStatusCodes`. Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent. The `customRetryForStatusCodes` needs a dictionary that maps integers (status codes) to booleans (true for retry and false for not retry).
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -135,7 +135,7 @@ The tracker sends events in batches. The tracker allows only a choice of 1 (`Buf
 
 Configure the batch size like this:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift

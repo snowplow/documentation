@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 
-<Tabs groupId="type-casting">
+<Tabs groupId="warehouse" queryString>
   <TabItem value="redshift" label="Redshift and Postgres" default>
 
 :::note

@@ -24,7 +24,7 @@ You may wish to track events in your app which are not directly supported by Sno
 
 <!-- [Here](TODO) are some more details on how to create a custom entity. -->
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -115,7 +115,7 @@ and the other describes a user on that screen:
 
 They can be used in the tracker to provide more context to specific events (e.g.: ScreenView event).
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -166,7 +166,7 @@ It is also possible to add contexts in a declarative way (see GlobalContextsConf
 
 This can be done at tracker setup declaring the contexts generator and the suitable subset of events.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -202,7 +202,7 @@ Snowplow.createTracker(getApplicationContext(), namespace, networkConfiguration,
 
 The `GlobalContextsConfiguration` can be used to set up the generators which are able to generate the entities to add in the context of the events. Each context generator is associated to a tag string. The tag string can be used to remove a generator at runtime using the method `remove` like in the following example.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -223,7 +223,7 @@ It returns `nil` in case there aren’t generators registered with the specified
 
 A generator can be added at run-time using the method `add` like in the following example.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -246,7 +246,7 @@ An entity can be an immutable static entity (self-describing JSON) or a dynamic 
 
 This is useful in cases where the entity is static and it's always the same. A classic case is a contextual information like a user identifier that doesn't change during the tracking.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -272,7 +272,7 @@ A context generator callback returns an array of self describing JSONs, represen
 They are evaluated each time an event is sent, hence they meet the case where we would like to send an entity based on event information.
 The `InspectableEvent` is an interface that exposes internal data of the processed event: name, schema and payload.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -311,7 +311,7 @@ However, there are cases where the contexts should only be applied to certain ev
 
 A filter callback is used to discriminate between events so we can attach global contexts only to certain events.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -354,7 +354,7 @@ A ruleset provider has a ruleset which has a list of allowed schemas and a list 
 
 In this example, the ruleset provider will attach the generated entities (as described in the previous section) to events with the schema `iglu:com.acme.*/*/jsonschema/*-*-*`, but not to `iglu:com.acme.marketing/*/jsonschema/*-*-*`.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
@@ -408,7 +408,7 @@ In case the logic for filter and generator callbacks are too complex, it’s pos
 
 In this case the logic for filtering and generation is encapsulated behind a context generator class.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift

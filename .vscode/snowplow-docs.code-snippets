@@ -73,7 +73,7 @@
     "scope": "markdown",
     "prefix": "tab",
     "body": [
-      "<Tabs groupId=\"$1\">",
+      "<Tabs groupId=\"$1\" queryString>",
       "<TabItem value=\"$2\" label=\"$3\" default>",
       "",
       "$4",

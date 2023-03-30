@@ -69,7 +69,7 @@ A further property, `timezone`, is generated automatically during Subject initia
 ## Set the `SubjectConfiguration`
 A simple `SubjectConfiguration` initialisation looks like this:
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift

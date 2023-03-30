@@ -103,3 +103,5 @@
 /docs/pipeline-components-and-applications/sqs2kinesis/* /docs/pipeline-components-and-applications/legacy/sqs2kinesis/:splat 301
 
 /docs/pipeline-components-and-applications/version-compatibility-matrix/* /docs/pipeline-components-and-applications/versions/ 301
+
+/docs/tutorials/tutorial-a-guide-to-using-the-poplin-chrome-extension/* /docs/tutorials/tutorial-a-guide-to-using-the-snowplow-inspector-extension/:splat 301

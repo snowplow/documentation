@@ -1,10 +1,10 @@
 ---
-title: "Anonymous Tracking"
+title: "Anonymous tracking"
 date: "2022-08-30"
 sidebar_position: 60
 ---
 
-# Anonymous Tracking
+# Anonymous tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

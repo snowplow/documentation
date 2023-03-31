@@ -1,10 +1,10 @@
 ---
-title: "Screen View Tracking"
+title: "Screen view tracking"
 date: "2023-01-03"
 sidebar_position: 40
 ---
 
-# Screen View Tracking
+# Screen view tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

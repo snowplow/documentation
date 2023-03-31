@@ -1,10 +1,10 @@
 ---
-title: "Tracker Plugins"
+title: "Tracker plugins"
 date: "2023-01-03"
 sidebar_position: 45
 ---
 
-# Tracker Plugins
+# Tracker plugins
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

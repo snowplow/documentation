@@ -1,10 +1,10 @@
 ---
-title: "Hybrid Apps"
+title: "Hybrid mobile and web apps"
 date: "2022-08-30"
 sidebar_position: 70
 ---
 
-# Hybrid Apps
+# Hybrid mobile and web apps
 
 :::info
 

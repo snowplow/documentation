@@ -1,10 +1,10 @@
 ---
-title: "App Lifecycle Tracking"
+title: "App lifecycle tracking"
 date: "2023-01-03"
 sidebar_position: 30
 ---
 
-# App Lifecycle Tracking
+# App lifecycle tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

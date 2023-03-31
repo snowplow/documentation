@@ -1,5 +1,5 @@
 ---
-title: "iOS Tracker"
+title: "iOS tracker"
 date: "2022-08-30"
 sidebar_position: 0
 ---

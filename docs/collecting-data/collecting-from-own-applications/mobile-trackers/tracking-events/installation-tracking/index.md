@@ -1,10 +1,10 @@
 ---
-title: "Installation Tracking"
+title: "Installation tracking"
 date: "2023-01-03"
 sidebar_position: 60
 ---
 
-# Installation Tracking
+# Installation tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

@@ -1,10 +1,10 @@
 ---
-title: "Platform and Application Data Tracking"
+title: "Platform and application data tracking"
 date: "2023-01-03"
 sidebar_position: 10
 ---
 
-# Platform and Application Data Tracking
+# Platform and application data tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

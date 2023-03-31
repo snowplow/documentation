@@ -1,5 +1,5 @@
 ---
-title: "Android Tracker"
+title: "Android tracker"
 date: "2022-08-30"
 sidebar_position: 0
 ---

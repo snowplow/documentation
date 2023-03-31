@@ -8,7 +8,7 @@ export const versions = {
   googleAmpTracker: '1.0.3',
   iosTracker: '4.1.0',
   javaTracker: '1.0.0',
-  javaScriptTracker: '3.8.0',
+  javaScriptTracker: '3.9.0',
   luaTracker: '0.2.0',
   phpTracker: '0.6.1',
   pixelTracker: '0.3.0',

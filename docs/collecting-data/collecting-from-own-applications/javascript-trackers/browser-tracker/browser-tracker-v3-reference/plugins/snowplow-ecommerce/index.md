@@ -41,6 +41,8 @@ API | Used for:
 `trackRemoveFromCart` | Track a removal from cart.
 `trackProductListView` | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.
 `trackProductListClick` | Track the click/selection of a product from a product list.
+`trackPromotionView` | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.
+`trackPromotionClick` | Track the click/selection of an internal promotion.
 `trackCheckoutStep` | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.
 `trackTransaction` | Track a transaction/purchase completion.
 `setPageType` | Set a Page type context which would allow the analyst to discern between types of pages with ecommerce value. E.g. Category Page, Product Page, Cart Page, etc.
@@ -189,6 +191,43 @@ trackProductListClick({
 - Where `product` is the product being clicked/selected from the list.
 - Where `name` is the name of the list the product is currently in. For the list names, you can use any kind of friendly name or a codified language to express the labeling of the list. E.g. 'Shoes - Men - Sneakers','Search results: "unisex shoes"', 'Product page upsells'
 
+### trackPromotionView
+```js
+import { trackPromotionView } from '@snowplow/browser-plugin-snowplow-ecommerce';
+
+/* Carousel slide 1 viewed */
+trackPromotionView({ 
+    id: 'IP1234',
+    name: 'promo_winter',
+    type: 'carousel',
+    position: 1,
+    product_ids: ['P1234'],
+});
+
+/* On carousel slide 2 view */
+trackPromotionView({ 
+    id: 'IP1234',
+    name: 'promo_winter',
+    type: 'carousel',
+    position: 2,
+    product_ids: ['P1235'],
+});
+```
+
+### trackPromotionClick
+
+```js
+import { trackPromotionClick } from "@snowplow/browser-plugin-snowplow-ecommerce";
+
+trackPromotionClick({ 
+    id: 'IP1234',
+    name: 'promo_winter',
+    type: 'carousel',
+    position: 1,
+    product_ids: ['P1234'],
+});
+```
+
 ### trackCheckoutStep
 
 To track a checkout step you can use the `trackCheckoutStep` method with the following attributes:
@@ -315,6 +354,23 @@ Whenever there is a product entity involved in the ecommerce interaction event, 
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
+### Internal promotion entity
+
+On internal promotion events, an internal promotion can have the following attributes:
+
+| attribute | type | description | required |
+| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
+| id | `string` | The unique ID representing this promotion element. | ✅ |
+| name | `string` | The friendly name for this promotion element. | ✘ |
+| product_ids | `string[]` | An array of SKUs or product IDs showcased in this promotion element. | ✘ |
+| position | `integer` | The position this promotion element was presented in a list of promotions E.g. banner, slider. | ✘ |
+| creative_id | `string` | Identifier/Name/Url for the creative presented on this promotion element. | ✘ |
+| type | `string` | The type of the promotion delivery mechanism. E.g. popup, banner, intra-content. | ✘ |
+| slot | `string` | The website slot in which the promotional content was added to. E.g. Identifier for slot sidebar-1, intra-content-2. | ✘ |
+
+
+<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/promotion/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
+
 ### Cart entity
 
 On cart interaction ecommerce events, a cart can have the following attributes:
@@ -325,7 +381,7 @@ On cart interaction ecommerce events, a cart can have the following attributes:
 | currency | `string` | The currency used for this cart (ISO 4217). | ✅ |
 | cart_id | `string` | The unique ID representing this cart. | ✘ |
 
-<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/cart/jsonschema" target="_blank" rel="noreferrer noopener">Cart</a>
+<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/cart/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
 ### Checkout step entity
 

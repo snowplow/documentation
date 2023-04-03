@@ -1,5 +1,5 @@
 ---
-title: "Android - Google Play Data safety"
+title: "Google Play Data safety (Android)"
 date: "2021-11-24"
 sidebar_position: 200
 ---

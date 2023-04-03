@@ -1,7 +1,7 @@
 ---
 title: "Android - Google Play Data Safety"
 date: "2021-11-24"
-sidebar_position: 500
+sidebar_position: 200
 ---
 
 Google Play is launching a new Data safety section to help app developers showcase their app’s overall safety. The section, to be displayed on each app’s store listing page, will summarize the app’s privacy and security practices, as well as explain the data the app may collect and share from users (and why).

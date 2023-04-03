@@ -19,6 +19,8 @@ For example, tracking a ScreenView:
   <TabItem value="ios" label="iOS" default>
 
 ```swift
+let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com")
+
 let event = ScreenView(name: "screen name")
 let eventId = tracker.track(event)
 ```
@@ -27,6 +29,12 @@ let eventId = tracker.track(event)
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
+val tracker = Snowplow.createTracker(
+        applicationContext, // Android context
+        "appTracker", // namespace
+        "https://snowplow-collector-url.com" // Event collector URL
+    )
+
 val event = ScreenView("screen")
 tracker.track(event)
 ```
@@ -35,6 +43,12 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
+TrackerController tracker = Snowplow.createTracker(
+      getApplicationContext(), // Android context
+      "appTracker", // namespace
+      "https://snowplow-collector-url.com" // Event collector URL
+);
+
 ScreenView event = new ScreenView("screen");         
 tracker.track(event);
 ```
@@ -42,11 +56,13 @@ tracker.track(event);
   </TabItem>
 </Tabs>
 
-The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types as well as fully custom events. 
+The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types, as well as fully custom events. 
 
-Each event can bring context which is composed by entities. The tracker attaches entities to the events based on the configuration, but you can attach your own custom entities as well.
+Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the configuration, but you can attach your own [custom entities](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) as well.
 
-Every tracked event payload has a unique `event_id` UUID string set by the tracker and a set of timestamps along with other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol).
+Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol).
+
+See the full configuration and parameter options for all these classes and methods in the API docs - [Android](https://snowplow.github.io/snowplow-android-tracker/index.html) and [iOS](https://snowplow.github.io/snowplow-objc-tracker/documentation/snowplowtracker/).
 
 ## Auto-tracked events and entities
 
@@ -123,17 +139,15 @@ Snowplow.createTracker(getApplicationContext(),
   </TabItem>
 </Tabs>
 
-You can know more about the `TrackerConfiguration` properties [here](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_tracker_configuration.html).
-
 ## Manually-tracked events
 
 The tracker provides classes for tracking different types of events.
-The events are divided in two groups: canonical events and self-describing events.
+The events are divided into two groups: canonical events and self-describing events.
 <!-- You can read more about the difference between the two [here](TODO) -->
 
 ### Creating a Structured event
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](https://docs.snowplow.io/docs/understanding-tracking-design/). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
+Our philosophy in creating Snowplow is that users should design suitable data structures customised for their own consumer interactions data capture. You can read more about that philosophy [here](https://docs.snowplow.io/docs/understanding-tracking-design/).
 
 However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 
@@ -174,8 +188,6 @@ tracker.track(event);
   </TabItem>
 </Tabs>
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_structured.html).
-
 ### Creating a Timing event
 
 Use the `Timing` events to track user timing events such as how long resources take to load.
@@ -213,8 +225,6 @@ tracker.track(event);
   </TabItem>
 </Tabs>
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_timing.html).
-
 ### Creating a ScreenView event
 
 Track the user viewing a screen within the application. This type of tracking is typically used when automatic screen view tracking is not suitable within your application.
@@ -248,8 +258,6 @@ tracker.track(event);
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
 
 ### Creating a Consent event
 
@@ -293,8 +301,6 @@ tracker.track(event);
   </TabItem>
 </Tabs>
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_consent_granted.html).
-
 #### Consent Withdrawn
 
 Use the `ConsentWithdrawn` event to track a user withdrawing consent for data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied. To specify that a user opts out of all data collection, `all` should be set to `true`.
@@ -337,8 +343,6 @@ tracker.track(event);
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_consent_withdrawn.html).
 
 ### Tracking Ecommerce Transactions
 <!-- (TODO: Section to remove) -->
@@ -430,8 +434,6 @@ tracker.track(event);
   </TabItem>
 </Tabs>
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_ecommerce_transaction.html).
-
 ### Tracking Push and Local Notifications
 
 To track an event when a push (or local) notification is used, it is possible to use the `MessageNotification` event:
@@ -488,8 +490,6 @@ tracker.track(event);
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_message_notification.html).
 
 ### Tracking Deep Links
 
@@ -571,8 +571,6 @@ public void onCreate(Bundle savedInstanceState) {
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_deep_link_received.html).
 
 The tracker keeps memory of the tracked Deep Link event and will attach a Deep Link entity to the first ScreenView tracked in the tracker.
 This is helpful during the analysis of the data because it will be clear the relation between the content visualized by the user (ScreenView event) and source (DeepLink entity) that originated that visualisation.

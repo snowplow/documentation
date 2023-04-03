@@ -43,8 +43,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
     val tracker = Snowplow.createTracker(
         applicationContext, // Android context (LocalContext.current in Compose apps)
         "appTracker", // namespace
-        "https://snowplow-collector-url.com", // Snowplow collector URL
-        HttpMethod.POST // HTTP method
+        "https://snowplow-collector-url.com" // Event collector URL
     )
     ```
 
@@ -55,8 +54,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
     TrackerController tracker = Snowplow.createTracker(
           getApplicationContext(), // Android context
           "appTracker", // namespace
-          "https://snowplow-collector-url.com", // Snowplow collector URL
-          HttpMethod.POST // HTTP method
+          "https://snowplow-collector-url.com" // Event collector URL
     );
     ```
 
@@ -178,3 +176,5 @@ Snowplow.createTracker(getApplicationContext(),
 
   </TabItem>
 </Tabs>
+
+The [Android tracker Github repository](https://github.com/snowplow/snowplow-android-tracker) includes demo apps in Java, Kotlin, and Kotlin with Jetpack Compose. They are provided as simple reference apps to help you set up the tracker.

@@ -77,7 +77,7 @@ let subjectConfig = SubjectConfiguration()
     .userId("username")
 ```
 
-See the full configuration and parameter options for all these classes and methods in the API docs - [Android](https://snowplow.github.io/snowplow-android-tracker/index.html) and [iOS](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/).
+See the API docs for the full [list of options](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/).
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">

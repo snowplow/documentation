@@ -68,7 +68,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 - A `data` field, containing the properties of the event
 - A `schema` field, containing the location of the JSON schema against which the `data` field should be validated.
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_self_describing.html).
+See the full configuration and parameter options for all these classes and methods in the API docs - [Android](https://snowplow.github.io/snowplow-android-tracker/index.html) and [iOS](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/).
 
 ## Tracking a custom entity
 
@@ -127,7 +127,7 @@ and the other describes a user on that screen:
 }
 ```
 
-They can be used in the tracker to provide more context to specific events (e.g.: ScreenView event).
+They can be used in the tracker to provide more context to specific events (e.g. ScreenView event).
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

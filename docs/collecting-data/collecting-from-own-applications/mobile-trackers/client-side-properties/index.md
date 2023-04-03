@@ -77,9 +77,7 @@ let subjectConfig = SubjectConfiguration()
     .userId("username")
 ```
 
-See the API docs for the full [list of options](https://snowplow.github.io/snowplow-objc-tracker/documentation/snowplowtracker/subjectconfiguration).
-
-Subject properties can be updated or added to after initialization, using setter methods. See the [API docs](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1internal_1_1tracker_1_1_subject.html) for full details.
+See the full configuration and parameter options for all these classes and methods in the API docs - [Android](https://snowplow.github.io/snowplow-android-tracker/index.html) and [iOS](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/).
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">

@@ -72,6 +72,8 @@ The tracker has a default configuration where some settings are enabled by defau
 - screen tracking
 - platform contexts (mobile specific context fields)
 
+The URL path for your collector endpoint should include the protocol, "http" or "https". If not included in the URL, "https" connection will be used by default.
+
 You can override the default configuration with a fine grained configuration when you create the tracker:
 
 ```swift

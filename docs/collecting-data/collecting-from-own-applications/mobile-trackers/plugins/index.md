@@ -56,7 +56,7 @@ PluginConfiguration plugin = new PluginConfiguration("myPlugin");
 
 To enrich events with additional context entities, you can make use of the `entities` callback.
 This function accepts an optional list of schemas of self-describing events to subscribe to.
-To filter primitive (not self-describing events) such as structured or page view events, you can pass their event names in the schemas list (`se` for structured events, `pv` for page view events).
+To filter primitive (not self-describing events) such as structured events, you can pass their event names in the schemas list (`se` for structured events).
 When no list of schemas is passed, the callback is called for all tracked events.
 
 <Tabs groupId="platform" queryString>
@@ -149,7 +149,7 @@ Once you have a plugin configuration, you can register it when creating a new tr
 
 ```swift
 // the plugin is supplied to the tracker as a configuration
-let tracker = Snowplow.createTracker(namespace: "ns",
+let tracker = Snowplow.createTracker(namespace: "namespace",
                                      network: networkConfig,
                                      configurations: [plugin])
 ```
@@ -161,7 +161,7 @@ let tracker = Snowplow.createTracker(namespace: "ns",
 // the plugin is supplied to the tracker as a configuration
 val tracker = Snowplow.createTracker(
     applicationContext,
-    "ns",
+    "namespace",
     networkConfiguration,
     plugin
 )
@@ -173,7 +173,7 @@ val tracker = Snowplow.createTracker(
 ```java
 TrackerController tracker = Snowplow.createTracker(
         getApplicationContext(),
-        "ns",
+        "namespace",
         networkConfiguration,
         plugin
 );

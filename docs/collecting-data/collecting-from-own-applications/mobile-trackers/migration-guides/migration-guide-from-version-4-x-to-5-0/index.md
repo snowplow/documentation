@@ -32,14 +32,14 @@ event.trueTimestamp = 123456789L; // doesn't work anymore
 event.setTrueTimestamp(123456789L);
 ```
 
-However, the API hasn't changed if you use the builder methods to set the properties. For example, this approach work both in the v4 and v5 tracker:
+However, the API hasn't changed if you use the builder methods to set the properties. For example, this approach works in both the v4 and v5 tracker:
 
 ```java
 // works both in v4 and v5 API:
 event.trueTimestamp(123456789L);
 ```
 
-If using `EmitterConfiguration` when creating a new tracker, the default buffer option configuration changed from `single` (max 1 event per batch) do `default` (max 10 events per batch). If not using an `EmitterConfiguration`, the buffer option was set to `default` also in tracker v4.
+If using `EmitterConfiguration` when creating a new tracker, the default buffer option configuration changed from `single` (max 1 event per batch) to `default` (max 10 events per batch). If not using an `EmitterConfiguration`, the buffer option was set to `default` also in tracker v4.
 
 ## Renaming contexts to entities
 

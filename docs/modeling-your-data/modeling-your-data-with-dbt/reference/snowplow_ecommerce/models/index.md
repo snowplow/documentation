@@ -269,7 +269,7 @@ from (
 
       -- unpacking the ecommerce user object
     {{ snowplow_utils.get_optional_fields(
-        enabled=true,
+        enabled=not var('snowplow__disable_ecommerce_user_context', false),
         fields=user_fields(),
         col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_user_1_',
         relation=ref('snowplow_ecommerce_events_stg'),
@@ -277,7 +277,7 @@ from (
 
     -- unpacking the ecommerce checkout step object
     {{ snowplow_utils.get_optional_fields(
-        enabled=true,
+        enabled=not var('snowplow__disable_ecommerce_checkouts', false),
         fields=checkout_step_fields(),
         col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1_',
         relation=ref('snowplow_ecommerce_events_stg'),
@@ -285,7 +285,7 @@ from (
 
     -- unpacking the ecommerce page object
     {{ snowplow_utils.get_optional_fields(
-        enabled=true,
+        enabled=not var('snowplow__disable_ecommerce_page_context', false),
         fields=tracking_page_fields(),
         col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_page_1_',
         relation=ref('snowplow_ecommerce_events_stg'),
@@ -293,7 +293,7 @@ from (
 
     -- unpacking the ecommerce transaction object
     {{ snowplow_utils.get_optional_fields(
-        enabled=true,
+        enabled=not var('snowplow__disable_ecommerce_transactions', false),
         fields=transaction_fields(),
         col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1_',
         relation=ref('snowplow_ecommerce_events_stg'),
@@ -301,7 +301,7 @@ from (
 
     -- unpacking the ecommerce cart object
     {{ snowplow_utils.get_optional_fields(
-        enabled=true,
+        enabled=not var('snowplow__disable_ecommerce_carts', false),
         fields=cart_fields(),
         col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1_',
         relation=ref('snowplow_ecommerce_events_stg'),
@@ -318,7 +318,7 @@ from (
     {% else %}
       -- unpacking the ecommerce user object
       {{ snowplow_utils.get_optional_fields(
-          enabled=true,
+          enabled=not var('snowplow__disable_ecommerce_user_context', false),
           fields=user_fields(),
           col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_user_1_',
           relation=source('atomic', 'events'),
@@ -326,7 +326,7 @@ from (
 
       -- unpacking the ecommerce checkout step object
       {{ snowplow_utils.get_optional_fields(
-          enabled=true,
+          enabled=not var('snowplow__disable_ecommerce_checkouts', false),
           fields=checkout_step_fields(),
           col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1_',
           relation=source('atomic', 'events'),
@@ -334,7 +334,7 @@ from (
 
       -- unpacking the ecommerce page object
       {{ snowplow_utils.get_optional_fields(
-          enabled=true,
+          enabled=not var('snowplow__disable_ecommerce_page_context', false),
           fields=tracking_page_fields(),
           col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_page_1_',
           relation=source('atomic', 'events'),
@@ -342,7 +342,7 @@ from (
 
       -- unpacking the ecommerce transaction object
       {{ snowplow_utils.get_optional_fields(
-          enabled=true,
+          enabled=not var('snowplow__disable_ecommerce_transactions', false),
           fields=transaction_fields(),
           col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1_',
           relation=source('atomic', 'events'),
@@ -350,7 +350,7 @@ from (
 
       -- unpacking the ecommerce cart object
       {{ snowplow_utils.get_optional_fields(
-          enabled=true,
+          enabled=not var('snowplow__disable_ecommerce_carts', false),
           fields=cart_fields(),
           col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1_',
           relation=source('atomic', 'events'),
@@ -410,11 +410,31 @@ with prep AS (
     b.domain_userid,
 
     -- unpacking the ecommerce user object
+    {% if var('snowplow__disable_ecommerce_user_context', false) -%}
+    cast(NULL as {{ type_string() }}) as ecommerce_user_id,
+    cast(NULL as {{ type_string() }}) as ecommerce_user_email,
+    cast(NULL as {{ type_boolean() }}) as ecommerce_user_is_guest,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_user_1[0].id::string as ecommerce_user_id,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_user_1[0].email::string as ecommerce_user_email,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_user_1[0].is_guest::boolean as ecommerce_user_is_guest,
+    {%- endif %}
 
     -- unpacking the ecommerce checkout step object
+    {% if var('snowplow__disable_ecommerce_checkouts', false) -%}
+    cast(NULL as {{ type_int() }}) as checkout_step_number,
+    cast(NULL as {{ type_string() }}) as checkout_account_type,
+    cast(NULL as {{ type_string() }}) as checkout_billing_full_address,
+    cast(NULL as {{ type_string() }}) as checkout_billing_postcode,
+    cast(NULL as {{ type_string() }}) as checkout_coupon_code,
+    cast(NULL as {{ type_string() }}) as checkout_delivery_method,
+    cast(NULL as {{ type_string() }}) as checkout_delivery_provider,
+    cast(NULL as {{ type_boolean() }}) as checkout_marketing_opt_in,
+    cast(NULL as {{ type_string() }}) as checkout_payment_method,
+    cast(NULL as {{ type_string() }}) as checkout_proof_of_payment,
+    cast(NULL as {{ type_string() }}) as checkout_shipping_full_address,
+    cast(NULL as {{ type_string() }}) as checkout_shipping_postcode,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0].step::int as checkout_step_number,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0].account_type::string as checkout_account_type,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0].billing_full_address::string as checkout_billing_full_address,
@@ -427,13 +447,32 @@ with prep AS (
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0].proof_of_payment::string as checkout_proof_of_payment,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0].shipping_full_address::string as checkout_shipping_full_address,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0].shipping_postcode::string as checkout_shipping_postcode,
+    {%- endif %}
 
     -- unpacking the ecommerce page object
+    {% if var('snowplow__disable_ecommerce_page_context', false) -%}
+    CAST(NULL as {{ type_string() }}) as ecommerce_page_type,
+    CAST(NULL as {{ type_string() }}) as ecommerce_page_language,
+    CAST(NULL as {{ type_string() }}) as ecommerce_page_locale,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_page_1[0].type::string as ecommerce_page_type,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_page_1[0].language::string as ecommerce_page_language,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_page_1[0].locale::string as ecommerce_page_locale,
+    {%- endif %}
 
     -- unpacking the ecommerce transaction object
+    {% if var('snowplow__disable_ecommerce_transactions', false) -%}
+    CAST(NULL AS {{ type_string() }}) as transaction_id,
+    CAST(NULL AS {{ type_string() }}) as transaction_currency,
+    CAST(NULL AS {{ type_string() }}) as transaction_payment_method,
+    CAST(NULL AS decimal(7,2)) as transaction_revenue,
+    CAST(NULL AS {{ type_int() }}) as transaction_total_quantity,
+    CAST(NULL AS {{ type_boolean() }}) as transaction_credit_order,
+    CAST(NULL AS decimal(7,2)) as transaction_discount_amount,
+    CAST(NULL AS {{ type_string() }}) as transaction_discount_code,
+    CAST(NULL AS decimal(7,2)) as transaction_shipping,
+    CAST(NULL AS decimal(7,2)) as transaction_tax,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0].transaction_id::string as transaction_id,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0].currency::string as transaction_currency,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0].payment_method::string as transaction_payment_method,
@@ -444,12 +483,18 @@ with prep AS (
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0].discount_code::string as transaction_discount_code,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0].shipping::decimal(7,2) as transaction_shipping,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0].tax::decimal(7,2) as transaction_tax,
+    {%- endif %}
 
     -- unpacking the ecommerce cart object
+    {% if var('snowplow__disable_ecommerce_carts', false) -%}
+    CAST(NULL AS {{ type_string() }}) as cart_id,
+    CAST(NULL AS {{ type_string() }}) as cart_currency,
+    CAST(NULL AS decimal(7,2)) as cart_total_value,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1[0].cart_id::string as cart_id,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1[0].currency::string as cart_currency,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1[0].total_value::decimal(7,2) as cart_total_value,
-
+    {%- endif%}
     -- unpacking the ecommerce action object
     a.unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1.type::string as ecommerce_action_type,
     a.unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1.name::string as ecommerce_action_name,
@@ -500,11 +545,31 @@ with prep as (
     b.domain_userid,
 
     -- unpacking the ecommerce user object
+    {% if var('snowplow__disable_ecommerce_user_context', false) -%}
+    cast(NULL as {{ type_string() }}) as ecommerce_user_id,
+    cast(NULL as {{ type_string() }}) as ecommerce_user_email,
+    cast(NULL as {{ type_boolean() }}) as ecommerce_user_is_guest,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_user_1[0]:id::varchar as ecommerce_user_id,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_user_1[0]:email::varchar as ecommerce_user_email,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_user_1[0]:is_guest::boolean as ecommerce_user_is_guest,
+    {%- endif %}
 
     -- unpacking the ecommerce checkout step object
+    {% if var('snowplow__disable_ecommerce_checkouts', false) -%}
+    cast(NULL as {{ type_int() }}) as checkout_step_number,
+    cast(NULL as {{ type_string() }}) as checkout_account_type,
+    cast(NULL as {{ type_string() }}) as checkout_billing_full_address,
+    cast(NULL as {{ type_string() }}) as checkout_billing_postcode,
+    cast(NULL as {{ type_string() }}) as checkout_coupon_code,
+    cast(NULL as {{ type_string() }}) as checkout_delivery_method,
+    cast(NULL as {{ type_string() }}) as checkout_delivery_provider,
+    cast(NULL as {{ type_boolean() }}) as checkout_marketing_opt_in,
+    cast(NULL as {{ type_string() }}) as checkout_payment_method,
+    cast(NULL as {{ type_string() }}) as checkout_proof_of_payment,
+    cast(NULL as {{ type_string() }}) as checkout_shipping_full_address,
+    cast(NULL as {{ type_string() }}) as checkout_shipping_postcode,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0]:step::int as checkout_step_number,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0]:account_type::varchar as checkout_account_type,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0]:billing_full_address::varchar as checkout_billing_full_address,
@@ -517,13 +582,33 @@ with prep as (
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0]:proof_of_payment::varchar as checkout_proof_of_payment,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0]:shipping_full_address::varchar as checkout_shipping_full_address,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1[0]:shipping_postcode::varchar as checkout_shipping_postcode,
+    {%- endif %}
 
     -- unpacking the ecommerce page object
+    {% if var('snowplow__disable_ecommerce_page_context', false) -%}
+    CAST(NULL as {{ type_string() }}) as ecommerce_page_type,
+    CAST(NULL as {{ type_string() }}) as ecommerce_page_language,
+    CAST(NULL as {{ type_string() }}) as ecommerce_page_locale,
+
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_page_1[0]:type::varchar as ecommerce_page_type,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_page_1[0]:language::varchar as ecommerce_page_language,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_page_1[0]:locale::varchar as ecommerce_page_locale,
+    {%- endif %}
 
     -- unpacking the ecommerce transaction object
+    {% if var('snowplow__disable_ecommerce_transactions', false) -%}
+    CAST(NULL AS {{ type_string() }}) as transaction_id,
+    CAST(NULL AS {{ type_string() }}) as transaction_currency,
+    CAST(NULL AS {{ type_string() }}) as transaction_payment_method,
+    CAST(NULL AS decimal(7,2)) as transaction_revenue,
+    CAST(NULL AS {{ type_int() }}) as transaction_total_quantity,
+    CAST(NULL AS {{ type_boolean() }}) as transaction_credit_order,
+    CAST(NULL AS decimal(7,2)) as transaction_discount_amount,
+    CAST(NULL AS {{ type_string() }}) as transaction_discount_code,
+    CAST(NULL AS decimal(7,2)) as transaction_shipping,
+    CAST(NULL AS decimal(7,2)) as transaction_tax,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0]:transaction_id::varchar as transaction_id,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0]:currency::varchar as transaction_currency,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0]:payment_method::varchar as transaction_payment_method,
@@ -534,11 +619,18 @@ with prep as (
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0]:discount_code::varchar as transaction_discount_code,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0]:shipping::decimal(7,2) as transaction_shipping,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1[0]:tax::decimal(7,2) as transaction_tax,
+    {%- endif %}
 
     -- unpacking the ecommerce cart object
+    {% if var('snowplow__disable_ecommerce_carts', false) -%}
+    CAST(NULL AS {{ type_string() }}) as cart_id,
+    CAST(NULL AS {{ type_string() }}) as cart_currency,
+    CAST(NULL AS decimal(7,2)) as cart_total_value,
+    {%- else -%}
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1[0]:cart_id::varchar as cart_id,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1[0]:currency::varchar as cart_currency,
     a.contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1[0]:total_value::decimal(7,2) as cart_total_value,
+    {%- endif%}
 
     -- unpacking the ecommerce action object
     a.unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type::varchar as ecommerce_action_type,
@@ -768,7 +860,7 @@ This significantly reduces table scans
 
 with prep as (
   select
-    cast(null as {{ snowplow_utils.type_string(64) }}) session_id
+    cast(null as {{ dbt.type_string() }}) session_id
 )
 
 select *
@@ -788,9 +880,9 @@ where false
 <Tabs groupId="reference">
 <TabItem value="macro" label="Macros">
 
+- macro.dbt.type_string
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
 
 </TabItem>
 </Tabs>
@@ -845,16 +937,17 @@ By knowing the lifecycle of a session the model is able to able to determine whi
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='session_id',
     upsert_date_key='start_tstamp',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }),
+    }, databricks_val='start_tstamp_date'),
     full_refresh=snowplow_ecommerce.allow_refresh(),
-    tags=["manifest"]
+    tags=["manifest"],
+    snowplow_optimize=true
   )
 }}
 
@@ -891,7 +984,7 @@ with new_events_session_ids as (
   group by 1
   )
 
-{% if snowplow_utils.snowplow_is_incremental() %}
+{% if is_incremental() %}
 
 , previous_sessions as (
   select *
@@ -958,15 +1051,15 @@ from session_lifecycle sl
 </TabItem>
 <TabItem value="macro" label="Macros">
 
+- macro.dbt.is_incremental
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
 - [macro.snowplow_ecommerce.event_name_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.event_name_filter)
 - [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_session_lookback_limit](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_session_lookback_limit)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.snowplow_is_incremental](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_is_incremental)
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
 
 </TabItem>
@@ -1136,19 +1229,20 @@ This derived incremental table contains all historic cart interactions and shoul
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='event_id',
     upsert_date_key='derived_tstamp',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by = {
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val = {
       "field": "derived_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='derived_tstamp_date'),
+    }, databricks_val='derived_tstamp_date'),
     tags=["derived"],
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -1176,7 +1270,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 </TabItem>
 <TabItem value="macro" label="Macros">
 
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -1264,13 +1358,20 @@ with cart_product_interactions AS (
 
         -- ecommerce action field
         e.ecommerce_action_type,
-        SUM(pi.product_price) as product_value_added
+        {% if var('snowplow__disable_ecommerce_products', false) -%}
+            cast(NULL as {{ type_float() }}) as product_value_added
+        {%- else -%}
+            SUM(pi.product_price) as product_value_added
+        {%- endif %}
 
 
     from {{ ref('snowplow_ecommerce_base_events_this_run') }} as e
-    left join {{ ref('snowplow_ecommerce_product_interactions_this_run') }} as pi on e.event_id = pi.event_id AND pi.is_add_to_cart
+    {% if not var('snowplow__disable_ecommerce_products', false) -%}
+        left join {{ ref('snowplow_ecommerce_product_interactions_this_run') }} as pi on e.event_id = pi.event_id AND pi.is_add_to_cart
+    {%- endif %}
     where e.ecommerce_action_type IN ('add_to_cart', 'remove_from_cart', 'transaction')
     group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14
+
 )
 
 select
@@ -1402,19 +1503,20 @@ This derived incremental table contains all historic checkout interactions and s
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='event_id',
     upsert_date_key='derived_tstamp',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by = {
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val = {
       "field": "derived_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='derived_tstamp_date'),
+    }, databricks_val='derived_tstamp_date'),
     tags=["derived"],
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -1442,7 +1544,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 </TabItem>
 <TabItem value="macro" label="Macros">
 
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -1643,7 +1745,7 @@ This incremental table is a manifest of the timestamp of the latest event consum
 
 with prep as (
   select
-    cast(null as {{ snowplow_utils.type_string(4096) }}) model,
+    cast(null as {{ snowplow_utils.type_max_string() }}) model,
     cast('1970-01-01' as {{ type_timestamp() }}) as last_success
 )
 
@@ -1667,7 +1769,7 @@ where false
 - macro.dbt.type_timestamp
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
 
 </TabItem>
 </Tabs>
@@ -1758,19 +1860,20 @@ This derived incremental table contains all historic product interactions and sh
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='product_event_id',
     upsert_date_key='derived_tstamp',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by = {
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val = {
       "field": "derived_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='derived_tstamp_date'),
+    }, databricks_val='derived_tstamp_date'),
     tags=["derived"],
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -1798,7 +1901,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 </TabItem>
 <TabItem value="macro" label="Macros">
 
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -2403,19 +2506,20 @@ This derived incremental table contains all historic sessions data specifically 
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='domain_sessionid',
     upsert_date_key='start_tstamp',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by = {
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val = {
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
+    }, databricks_val='start_tstamp_date'),
     tags=["derived"],
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -2445,7 +2549,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 </TabItem>
 <TabItem value="macro" label="Macros">
 
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -2530,81 +2634,140 @@ This staging table tracks and stores aggregate information about sessions that o
 }}
 
 with cart_session_stats AS (
-    select
-        t.*,
-        number_carts_transacted < number_carts_created as session_cart_abandoned
+    {% if var('snowplow__disable_ecommerce_carts', false) -%}
+        select
+        CAST(NULL as {{ type_string() }}) as domain_sessionid,
+        CAST(NULL as {{ type_int() }}) as number_unique_cart_ids,
+        CAST(NULL as {{ type_int() }}) as number_carts_created,
+        CAST(NULL as {{ type_int() }}) as number_carts_emptied,
+        CAST(NULL as {{ type_int() }}) as number_carts_transacted,
+        CAST(NULL as {{ type_timestamp() }}) as first_cart_created,
+        CAST(NULL as {{ type_timestamp() }}) as last_cart_created,
+        CAST(NULL as {{ type_timestamp() }}) as first_cart_transacted,
+        CAST(NULL as {{ type_timestamp() }}) as last_cart_transacted,
+        CAST(NULL as {{ type_boolean() }}) as session_cart_abandoned
 
-    from (
-        select domain_sessionid,
+    {%- else -%}
+        select
+            t.*,
+            number_carts_transacted < number_carts_created as session_cart_abandoned
 
-        COUNT(DISTINCT cart_id) as number_unique_cart_ids,
-        COUNT(DISTINCT CASE WHEN cart_created THEN event_id END) as number_carts_created,
-        COUNT(DISTINCT CASE WHEN cart_emptied THEN event_id END) as number_carts_emptied,
-        COUNT(DISTINCT CASE WHEN cart_transacted THEN event_id END) as number_carts_transacted,
+        from (
+            select domain_sessionid,
 
-        MIN(CASE WHEN cart_created THEN derived_tstamp END) as first_cart_created,
-        MAX(CASE WHEN cart_created THEN derived_tstamp END) as last_cart_created,
+            COUNT(DISTINCT cart_id) as number_unique_cart_ids,
+            COUNT(DISTINCT CASE WHEN cart_created THEN event_id END) as number_carts_created,
+            COUNT(DISTINCT CASE WHEN cart_emptied THEN event_id END) as number_carts_emptied,
+            COUNT(DISTINCT CASE WHEN cart_transacted THEN event_id END) as number_carts_transacted,
 
-        MIN(CASE WHEN cart_transacted THEN derived_tstamp END) as first_cart_transacted,
-        MAX(CASE WHEN cart_transacted THEN derived_tstamp END) as last_cart_transacted
+            MIN(CASE WHEN cart_created THEN derived_tstamp END) as first_cart_created,
+            MAX(CASE WHEN cart_created THEN derived_tstamp END) as last_cart_created,
+
+            MIN(CASE WHEN cart_transacted THEN derived_tstamp END) as first_cart_transacted,
+            MAX(CASE WHEN cart_transacted THEN derived_tstamp END) as last_cart_transacted
 
 
-        from {{ ref('snowplow_ecommerce_cart_interactions_this_run') }}
+            from {{ ref('snowplow_ecommerce_cart_interactions_this_run') }}
+            group by 1
+
+        ) as t
+    {%- endif %}
+), checkout_session_stats AS (
+    {% if var('snowplow__disable_ecommerce_checkouts', false) -%}
+       select
+            CAST(NULL as {{ type_string() }}) as domain_sessionid,
+            CAST(NULL as {{ type_boolean() }}) as session_entered_at_checkout,
+            CAST(NULL as {{ type_int() }}) as number_unique_checkout_steps_attempted,
+            CAST(NULL as {{ type_int() }}) as number_checkout_steps_visited,
+            CAST(NULL as {{ type_boolean() }}) as checkout_succeeded,
+            CAST(NULL as {{ type_timestamp() }}) as first_checkout_attempted,
+            CAST(NULL as {{ type_timestamp() }}) as last_checkout_attempted,
+            CAST(NULL as {{ type_timestamp() }}) as first_checkout_succeeded,
+            CAST(NULL as {{ type_timestamp() }}) as last_checkout_succeeded
+    {%- else -%}
+     select
+            domain_sessionid,
+
+            MAX(session_entered_at_step) as session_entered_at_checkout,
+            COUNT(DISTINCT checkout_step_number) as number_unique_checkout_steps_attempted,
+            COUNT(DISTINCT event_id) as number_checkout_steps_visited,
+            MAX(checkout_succeeded) as checkout_succeeded,
+
+            MIN(CASE WHEN checkout_step_number = 1 THEN derived_tstamp END) as first_checkout_attempted,
+            MAX(CASE WHEN checkout_step_number = 1 THEN derived_tstamp END) as last_checkout_attempted,
+            MIN(CASE WHEN checkout_succeeded THEN derived_tstamp END) as first_checkout_succeeded,
+            MAX(CASE WHEN checkout_succeeded THEN derived_tstamp END) as last_checkout_succeeded
+
+        from {{ ref('snowplow_ecommerce_checkout_interactions_this_run') }}
         group by 1
 
-    ) as t
-), checkout_session_stats AS (
-    select
-        domain_sessionid,
-
-        MAX(session_entered_at_step) as session_entered_at_checkout,
-        COUNT(DISTINCT checkout_step_number) as number_unique_checkout_steps_attempted,
-        COUNT(DISTINCT event_id) as number_checkout_steps_visited,
-        MAX(checkout_succeeded) as checkout_succeeded,
-
-        MIN(CASE WHEN checkout_step_number = 1 THEN derived_tstamp END) as first_checkout_attempted,
-        MAX(CASE WHEN checkout_step_number = 1 THEN derived_tstamp END) as last_checkout_attempted,
-        MIN(CASE WHEN checkout_succeeded THEN derived_tstamp END) as first_checkout_succeeded,
-        MAX(CASE WHEN checkout_succeeded THEN derived_tstamp END) as last_checkout_succeeded
-
-    from {{ ref('snowplow_ecommerce_checkout_interactions_this_run') }}
-    group by 1
+    {%- endif %}
 ), product_session_stats AS (
-    select
-        domain_sessionid,
+    {% if var('snowplow__disable_ecommerce_products', false) -%}
+        select
+            CAST(NULL as {{ type_string() }}) AS domain_sessionid,
+            CAST(NULL as {{ type_timestamp() }}) AS first_product_view,
+            CAST(NULL as {{ type_timestamp() }}) AS last_product_view,
+            CAST(NULL as {{ type_timestamp() }}) AS first_product_add_to_cart,
+            CAST(NULL as {{ type_timestamp() }}) AS last_product_add_to_cart,
+            CAST(NULL as {{ type_timestamp() }}) AS first_product_remove_from_cart,
+            CAST(NULL as {{ type_timestamp() }}) AS last_product_remove_from_cart,
+            CAST(NULL as {{ type_timestamp() }}) AS first_product_transaction,
+            CAST(NULL as {{ type_timestamp() }}) AS last_product_transaction,
+            CAST(NULL as {{ type_int() }}) AS number_product_views,
+            CAST(NULL as {{ type_int() }}) AS number_add_to_carts,
+            CAST(NULL as {{ type_int() }}) AS number_remove_from_carts,
+            CAST(NULL as {{ type_int() }}) AS number_product_transactions,
+            CAST(NULL as {{ type_int() }}) AS number_distinct_products_viewed
+    {%- else -%}
+        select
+            domain_sessionid,
 
-        MIN(CASE WHEN is_product_view THEN derived_tstamp END) AS first_product_view,
-        MAX(CASE WHEN is_product_view THEN derived_tstamp END) AS last_product_view,
-        MIN(CASE WHEN is_add_to_cart THEN derived_tstamp END) AS first_product_add_to_cart,
-        MAX(CASE WHEN is_add_to_cart THEN derived_tstamp END) AS last_product_add_to_cart,
-        MIN(CASE WHEN is_remove_from_cart THEN derived_tstamp END) AS first_product_remove_from_cart,
-        MAX(CASE WHEN is_remove_from_cart THEN derived_tstamp END) AS last_product_remove_from_cart,
-        MIN(CASE WHEN is_product_transaction THEN derived_tstamp END) AS first_product_transaction,
-        MAX(CASE WHEN is_product_transaction THEN derived_tstamp END) AS last_product_transaction,
+            MIN(CASE WHEN is_product_view THEN derived_tstamp END) AS first_product_view,
+            MAX(CASE WHEN is_product_view THEN derived_tstamp END) AS last_product_view,
+            MIN(CASE WHEN is_add_to_cart THEN derived_tstamp END) AS first_product_add_to_cart,
+            MAX(CASE WHEN is_add_to_cart THEN derived_tstamp END) AS last_product_add_to_cart,
+            MIN(CASE WHEN is_remove_from_cart THEN derived_tstamp END) AS first_product_remove_from_cart,
+            MAX(CASE WHEN is_remove_from_cart THEN derived_tstamp END) AS last_product_remove_from_cart,
+            MIN(CASE WHEN is_product_transaction THEN derived_tstamp END) AS first_product_transaction,
+            MAX(CASE WHEN is_product_transaction THEN derived_tstamp END) AS last_product_transaction,
 
-        COUNT(DISTINCT CASE WHEN is_product_view THEN event_id END) AS number_product_views,
-        COUNT(DISTINCT CASE WHEN is_add_to_cart THEN event_id END) AS number_add_to_carts,
-        COUNT(DISTINCT CASE WHEN is_remove_from_cart THEN event_id END) AS number_remove_from_carts,
-        COUNT(DISTINCT CASE WHEN is_product_transaction THEN event_id END) AS number_product_transactions,
-        COUNT(DISTINCT CASE WHEN is_product_view THEN product_id END) as number_distinct_products_viewed
+            COUNT(DISTINCT CASE WHEN is_product_view THEN event_id END) AS number_product_views,
+            COUNT(DISTINCT CASE WHEN is_add_to_cart THEN event_id END) AS number_add_to_carts,
+            COUNT(DISTINCT CASE WHEN is_remove_from_cart THEN event_id END) AS number_remove_from_carts,
+            COUNT(DISTINCT CASE WHEN is_product_transaction THEN event_id END) AS number_product_transactions,
+            COUNT(DISTINCT CASE WHEN is_product_view THEN product_id END) as number_distinct_products_viewed
 
 
-    from {{ ref('snowplow_ecommerce_product_interactions_this_run') }}
-    group by 1
+        from {{ ref('snowplow_ecommerce_product_interactions_this_run') }}
+        group by 1
+        
+    {%- endif %}
 ), transaction_session_stats AS (
-    select
-        domain_sessionid,
+    {% if var('snowplow__disable_ecommerce_transactions', false) -%}
+        select
+            CAST(NULL as {{ type_string() }}) AS domain_sessionid,
+            CAST(NULL as {{ type_timestamp() }}) AS first_transaction_completed,
+            CAST(NULL as {{ type_timestamp() }}) AS last_transaction_completed,
+            CAST(NULL as {{ type_float() }}) AS total_transaction_revenue,
+            CAST(NULL as {{ type_int() }}) AS total_transaction_quantity,
+            CAST(NULL as {{ type_int() }}) AS total_number_transactions,
+            CAST(NULL as {{ type_int() }}) AS total_transacted_products
+       
+    {%- else -%}
+         select
+            domain_sessionid,
 
-        MIN(derived_tstamp) AS first_transaction_completed,
-        MAX(derived_tstamp) AS last_transaction_completed,
-        SUM(transaction_revenue) as total_transaction_revenue,
-        SUM(transaction_total_quantity) as total_transaction_quantity,
-        COUNT(DISTINCT transaction_id) as total_number_transactions,
-        SUM(number_products) as total_transacted_products
+            MIN(derived_tstamp) AS first_transaction_completed,
+            MAX(derived_tstamp) AS last_transaction_completed,
+            SUM(transaction_revenue) as total_transaction_revenue,
+            SUM(transaction_total_quantity) as total_transaction_quantity,
+            COUNT(DISTINCT transaction_id) as total_number_transactions,
+            SUM(number_products) as total_transacted_products
 
-
-    from {{ ref('snowplow_ecommerce_transaction_interactions_this_run') }}
-    group by 1
+        from {{ ref('snowplow_ecommerce_transaction_interactions_this_run') }}
+        group by 1
+    {%- endif %}
 )
 select
     s.session_id as domain_sessionid,
@@ -2752,19 +2915,20 @@ This derived incremental table contains all historic transaction interactions an
 ```jinja2
 {{
   config(
-    materialized=var("snowplow__incremental_materialization"),
+    materialized="incremental",
     unique_key='transaction_id',
     upsert_date_key='derived_tstamp',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by = {
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val = {
       "field": "derived_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='derived_tstamp_date'),
+    }, databricks_val='derived_tstamp_date'),
     tags=["derived"],
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -2792,7 +2956,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_ecommerce') }}
 </TabItem>
 <TabItem value="macro" label="Macros">
 
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -2856,7 +3020,7 @@ This staging table tracks and stores information about transaction interactions 
 {{
     config(
         tags=["this_run"],
-        sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
+        sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
     )
 }}
 
@@ -2896,14 +3060,16 @@ with transaction_info AS (
         e.ecommerce_user_email,
         e.ecommerce_user_is_guest,
 
-        {% if var("snowplow__use_product_quantity", false) -%}
+        {% if (var("snowplow__use_product_quantity", false) and not var("snowplow__disable_ecommerce_products", false) | as_bool() )  -%}
         SUM(pi.product_quantity) as number_products
         {%- else -%}
         COUNT(*) as number_products -- count all products added
         {%- endif %}
 
     from {{ ref('snowplow_ecommerce_base_events_this_run') }} as e
+    {% if not var("snowplow__disable_ecommerce_products", false)  -%}
     left join {{ ref('snowplow_ecommerce_product_interactions_this_run') }} as pi on e.transaction_id = pi.transaction_id AND pi.is_product_transaction
+    {%- endif %}
     where ecommerce_action_type = 'transaction'
     group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22
 )

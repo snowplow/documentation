@@ -15,7 +15,7 @@ Add an [entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com
 
 The only required argument is the `Basis` enum, which contains the six GDPR options. A document describing the legal basis for processing can also be provided (as a string), along with the document version and ID.
 
-<Tabs groupId="platform">
+<Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift

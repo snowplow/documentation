@@ -59,6 +59,8 @@ This function accepts an optional list of schemas of self-describing events to s
 To filter primitive (not self-describing events) such as structured events, you can pass their event names in the schemas list (`se` for structured events).
 When no list of schemas is passed, the callback is called for all tracked events.
 
+The following code will add a specific entity, with URI "iglu:xx" (not a valid URI, for example only), to all Structured and ScreenView events.
+
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 

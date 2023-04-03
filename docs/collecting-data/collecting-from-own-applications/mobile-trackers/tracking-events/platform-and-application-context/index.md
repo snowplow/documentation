@@ -195,7 +195,7 @@ Publishers using Google Ad Manager have to declare the app an "Ad Manager app" i
 
 Failure to add this tag will result in the app crashing at app launch with a message starting with "The Google Mobile Ads SDK was initialized incorrectly".
 
-Read more about [Google Play Data Safety here.](../../android-google-play-data-safety/index.md)
+Read more about [Google Play Data safety here.](../../android-google-play-data-safety/index.md)
 
   </TabItem>
 </Tabs>

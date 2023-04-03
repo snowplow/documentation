@@ -179,4 +179,8 @@ Snowplow.createTracker(getApplicationContext(),
   </TabItem>
 </Tabs>
 
+:::note
+The trackers created with the above method are configured "locally" only. To create a tracker where the configuration can be updated through downloaded files, read [this page](docs/collecting-data/collecting-from-own-applications/mobile-trackers/remote-configuration/index.md) about remote configuration.
+:::
+
 The [Android tracker Github repository](https://github.com/snowplow/snowplow-android-tracker) includes demo apps in Java, Kotlin, and Kotlin with Jetpack Compose. They are provided as simple reference apps to help you set up the tracker.

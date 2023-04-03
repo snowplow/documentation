@@ -11,11 +11,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Remote Configuration is a feature of the mobile native trackers that allows for the configuration of the tracker without distributing an app update. In fact, the configuration of the tracker lies on the app bundle submitted to the stores for the distribution. Each tracker configuration change would require the resubmission of the whole app bundle.
+Remote configuration allows for the configuration of the tracker without distributing an app update. When remote configuration is not used, changing the tracking configuration can require the resubmission of the whole app bundle.
 
-With remote configuration, the developer just indicates to the tracker how to download the configuration file. The tracker will automatically reconfigure itself based on the downloaded file.
+With remote configuration, the tracker can download a configuration file and automatically reconfigure itself based on the downloaded file.
 
-Once the tracker SDK is correctly set as a dependency in your app project you have to instrument the tracker for the remote configuration:
+A tracker that will be remotely configured is created slightly differently from a locally-configured tracker, which is created using `Snowplow.createTracker()`. Instead, `Snowplow.setup()` is used. This example code will create a tracker with namespace "defaultNamespace" that can be configured remotely. Access the tracker using `Snowplow.defaultTracker` or `Snowplow.getTracker("defaultNamespace")`.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -26,18 +26,24 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 
 ```swift
 // Indicate the URL where to download the config file
-let remoteConfig = RemoteConfiguration(endpoint: REMOTE_CONFIG_URL, method: .get)
+let remoteConfig = RemoteConfiguration(
+  endpoint: "https://remote-config.com", 
+  method: .get
+)
 
-// Default configuration used in case the remote config is not accessible
-let defaultNetworkConfig = NetworkConfiguration(endpoint: DEFAULT_COLLECTOR_URL, method: .post);
-let defaultConfig = [ConfigurationBundle(namespace: "defaultNamespace", networkConfiguration: networkConfig)]
+// Default configuration used when the remote config is not accessible
+// Network, tracker, subject and sessionConfigurations can be provided
+let defaultNetworkConfig = NetworkConfiguration(
+  endpoint: "https://snowplow-collector-url.com", 
+  method: .post)
+let defaultConfig = [ConfigurationBundle(namespace: "defaultNamespace", networkConfiguration: defaultNetworkConfig)]
 
-// Callback for when the tracker reconfigures itself passing a list of active namespaces and the state of the configuration describing where it was fetched from
+// Optional callback for when the tracker reconfigures itself passing a list of active namespaces and the state of the configuration describing where it was fetched from
 let successCallback: ([String]?) -> Void = { namespaces, state in
   // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
 }
 
-// Setup tracker with remote configuration
+// Set up tracker with remote configuration
 Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: defaultConfig, onSuccess: successCallback)
 ```
 
@@ -46,22 +52,23 @@ Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: defaultC
 
 ```kotlin
 // Indicate the URL where to download the config file
-val remoteConfig = RemoteConfiguration(REMOTE_CONFIG_URL, HttpMethod.GET)
+val remoteConfig = RemoteConfiguration("https://remote-config.com", HttpMethod.GET)
 
 // Default configuration used in case the remote config is not accessible
-val defaultNetworkConfig = NetworkConfiguration(DEFAULT_COLLECTOR_URL, HttpMethod.POST)
+// Network, tracker, subject and sessionConfigurations can be provided
+val defaultNetworkConfig = NetworkConfiguration("https://snowplow-collector-url.com", HttpMethod.POST)
 val defaultConfig: List<ConfigurationBundle> =
-    listOf(ConfigurationBundle("defaultNamespace", networkConfig))
+    listOf(ConfigurationBundle("defaultNamespace", defaultNetworkConfig))
 
-// Setup tracker with remote configuration
+// Set up tracker with remote configuration
 Snowplow.setup(
     applicationContext, remoteConfig, defaultConfig
-) { configurationPair: Pair<List<String>, ConfigurationState?>? ->
+) { 
+  // This optional callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
+  configurationPair: Pair<List<String>, ConfigurationState?>? ->
     val namespaces = configurationPair?.first
     val configurationState =
         configurationPair?.second // either cached, default or fetched from the remote endpoint
-
-  // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
 }
 ```
 
@@ -70,34 +77,33 @@ Snowplow.setup(
 
 ```java
 // Indicate the URL where to download the config file
-RemoteConfiguration remoteConfig = new RemoteConfiguration(REMOTE_CONFIG_URL, HttpMethod.get);
+RemoteConfiguration remoteConfig = new RemoteConfiguration("https://remote-config.com", HttpMethod.get);
 
 // Default configuration used in case the remote config is not accessible
-NetworkConfiguration defaultNetworkConfig = new NetworkConfiguration(DEFAULT_COLLECTOR_URL, HttpMethod.post);
-List<ConfigurationBundle> defaultConfig = Lists.listOf(new ConfigurationBundle("defaultNamespace", networkConfig));
+// Network, tracker, subject and sessionConfigurations can be provided
+NetworkConfiguration defaultNetworkConfig = new NetworkConfiguration("https://snowplow-collector-url.com", HttpMethod.post);
+List<ConfigurationBundle> defaultConfig = Lists.listOf(new ConfigurationBundle("defaultNamespace", defaultNetworkConfig));
 
-// Setup tracker with remote configuration
+// Set up tracker with remote configuration
 Snowplow.setup(getApplicationContext(), remoteConfig, defaultConfig, configurationPair -> {
+  // This optional callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
   List<String> namespaces = configurationPair.first;
   ConfigurationState configurationState = configurationPair.second; // either cached, default or fetched from the remote endpoint
-
-  // This callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
 });
 ```
 
   </TabItem>
 </Tabs>
 
-Once the app starts, the Snowplow tracker initializer will attempt to download the remote configuration file. Meanwhile, it will initialize the tracker instance (or multiple tracker instances) based on the last cached configuration. The cached configuration is the last configuration downloaded remotely. If it's not available, the tracker initializer will spin up the default configuration passed as a parameter. Every time the initializer successfully initializes the tracker instances it calls a callback passing the list of activated namespaces and the state of the configuration which represents the source where the configuration was retrieved from (using default values, cache, or fetched from the remote endpoint). The callback can be used for last minute settings at runtime once the tracker has been instanced.
+On app startup, the Snowplow tracker initializer will attempt to download the remote configuration file. Meanwhile, it will initialize the tracker instance (or multiple tracker instances) based on the last cached configuration. The cached configuration is the last configuration downloaded remotely. If it's not available, the tracker initializer will spin up the default configuration passed as a parameter. Every time the initializer successfully initializes the tracker instances it calls a callback passing the list of activated namespaces and the state of the configuration which represents the source where the configuration was retrieved from (using default values, cache, or fetched from the remote endpoint). The callback can be used for last minute settings at runtime once the tracker has been instanced.
 
 The `defaultConfiguration` parameter takes a list of `ConfigurationBundle` objects. Each one represents a tracker instance and it's own configuration. Each tracker instance is identified by a `namespace` which is a parameter required in each `ConfigurationBundle`.
 
-The `onSuccess` callback is called for each successful configuration. For example, if the tracker has a cached configuration and it's downloading a new configuration, first the `onSuccess` callback will be called for the cached configuration and then it will be called when the downloaded configuration is applied. When it happens the cached configuration is substituted with the downloaded one.
+The optional `onSuccess` callback is called for each successful configuration. For example, if the tracker has a cached configuration and it's downloading a new configuration, first the `onSuccess` callback will be called for the cached configuration and then it will be called when the downloaded configuration is applied. When it happens the cached configuration is substituted with the downloaded one.
 
 ## The remote configuration file
 
-In the `RemoteConfiguration` object passed to the `setup` method is specified the REMOTE_CONFIG_URL, which is the url where the developer hosts the configuration file.
-There aren't restrictions about where to host the file but possible solutions may be S3 with Cloudfront or a Google Cloud Storage bucket.
+The URL where the configuration file is hosted must be provided in the `RemoteConfiguration` object passed to the `setup()` method. There aren't restrictions about where to host the file but possible solutions may be S3 with Cloudfront or a Google Cloud Storage bucket.
 
 The configuration file is simply a JSON file compliant with the [Remote Config JSONSchema](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0).
 
@@ -150,7 +156,10 @@ An example of remote config specification:
 The required fields are:
 
 - `$schema`: It specifies the format of the configuration file and it's used by the tracker to check if the format is compatible with that version of the tracker.
-- `configurationVersion`: It's an incremental version number that identifies the current configuration. **It MUST be increased on each update.** The tracker compares this value with the configurationVersion of the cached configuration to decide whether to update or not the tracker configuration.
+- `configurationVersion`: It's an incremental version number that identifies the current configuration. The tracker compares this value with the configurationVersion of the cached configuration to decide whether to update or not the tracker configuration.
+  :::caution
+  The version MUST be increased on each update.
+  :::
 - `configurationBundle`: This is a list of configurations for the various tracker instances the developer wants to activate in the app. Usually there is a unique tracker instance for the app so the configurationBundle will likely be an array of a single object like in the example above.
 
 The elements of the `configurationBundle` list are just a subset of the common configuration settings described in the "Introduction" section.
@@ -165,8 +174,8 @@ Note: The `networkConfiguration` is fundamental in order to set the collector en
 
 ## Refresh the configuration
 
-As shown above the developer can enforce the download of the configuration file at the start up of the app.
-If the developer wants to check for configuration updates more often, for example at runtime or when the app comes back from background state, it's possible to use the `refresh` method, placing it where the developer wants to perform the download and the configuration check.
+By default the tracker will attempt to download the configuration file at the start up of the app.
+To check for configuration updates more often, for example at runtime or when the app comes back from background state, it's possible to use the `refresh()` method.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

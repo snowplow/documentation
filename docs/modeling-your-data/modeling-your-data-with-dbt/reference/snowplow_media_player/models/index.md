@@ -79,22 +79,23 @@ This derived table aggregates media player interactions to a pageview level incr
 ```jinja2
 {{
   config(
-    materialized= var("snowplow__incremental_materialization", 'snowplow_incremental'),
+    materialized= "incremental",
     upsert_date_key='start_tstamp',
     unique_key = 'play_id',
     sort = 'start_tstamp',
     dist = 'play_id',
     tags=["derived"],
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["media_id"]),
+    }, databricks_val='start_tstamp_date'),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["media_id"]),
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
       'delta.autoOptimize.autoCompact' : 'true'
-    }
+    },
+    snowplow_optimize=true
   )
 }}
 
@@ -123,8 +124,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns fals
 </TabItem>
 <TabItem value="macro" label="Macros">
 
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
@@ -205,11 +205,11 @@ This staging table aggregates media player interactions within the current run t
   config(
     materialized='table',
     tags=["this_run"],
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["media_id"]),
+    }, databricks_val='start_tstamp_date'),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["media_id"]),
     sort = 'start_tstamp',
     dist = 'play_id',
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
@@ -358,9 +358,8 @@ where d.duplicate_count = 1
 <TabItem value="macro" label="Macros">
 
 - macro.dbt.type_float
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_string_agg](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_string_agg)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
@@ -839,7 +838,106 @@ with prep as (
   )
 }}
 
-with prep as (
+{%- set lower_limit, upper_limit = snowplow_utils.return_limits_from_model(ref('snowplow_web_base_sessions_this_run'),
+                                                                          'start_tstamp',
+                                                                          'end_tstamp') %}
+
+with mpe_context as (
+
+  select
+    root_id,
+    root_tstamp,
+    label,
+    type,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
+
+  from {{ var('snowplow__media_player_event_context') }}
+
+  where root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+, mp_context as (
+
+  select
+    root_id,
+    root_tstamp,
+    duration,
+    playback_rate,
+    current_time,
+    percent_progress,
+    muted,
+    is_live,
+    loop,
+    volume,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
+
+  from {{ var('snowplow__media_player_context') }}
+
+  where root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+{% if var("snowplow__enable_youtube") %}
+
+, yt_context as (
+
+  select
+    root_id,
+    root_tstamp,
+    player_id,
+    url,
+    playback_quality,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
+
+  from {{ var('snowplow__youtube_context') }}
+
+  where root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+{% endif %}
+
+{% if var("snowplow__enable_whatwg_media") %}
+
+, me_context as (
+
+select
+    root_id,
+    root_tstamp,
+    media_type,
+    current_src,
+    html_id,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
+
+from {{ var('snowplow__html5_media_element_context') }}
+
+where root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+{% endif %}
+
+{% if var("snowplow__enable_whatwg_video") %}
+
+, ve_context as (
+
+select
+    root_id,
+    root_tstamp,
+    video_width,
+    video_height,
+    row_number() over (partition by root_id order by root_tstamp) dedupe_index
+
+from {{ var('snowplow__html5_video_element_context') }}
+
+where root_tstamp between {{ lower_limit }} and {{ upper_limit }}
+
+)
+
+{% endif %}
+
+, prep as (
 
   select
     e.event_id,
@@ -900,25 +998,30 @@ with prep as (
 
     from {{ ref("snowplow_web_base_events_this_run") }} as e
 
-    inner join {{ var('snowplow__media_player_event_context') }} as mpe
+    inner join mpe_context as mpe
     on mpe.root_id = e.event_id and mpe.root_tstamp = e.collector_tstamp
+    and mpe.dedupe_index = 1
 
-    inner join {{ var('snowplow__media_player_context') }} as mp
+    inner join mp_context as mp
     on mp.root_id = e.event_id and mp.root_tstamp = e.collector_tstamp
+    and mp.dedupe_index = 1
 
   {% if var("snowplow__enable_youtube") %}
-    left join {{ var('snowplow__youtube_context') }} as y
+    left join yt_context as y
     on y.root_id = e.event_id and y.root_tstamp = e.collector_tstamp
+    and y.dedupe_index = 1
   {% endif %}
 
   {% if var("snowplow__enable_whatwg_media") %}
-    left join {{ var('snowplow__html5_media_element_context') }} as me
+    left join me_context as me
     on me.root_id = e.event_id and me.root_tstamp = e.collector_tstamp
+    and me.dedupe_index = 1
   {% endif %}
 
   {% if var("snowplow__enable_whatwg_video") %}
-    left join {{ var('snowplow__html5_video_element_context') }} as ve
+    left join ve_context as ve
     on ve.root_id = e.event_id and ve.root_tstamp = e.collector_tstamp
+    and ve.dedupe_index = 1
   {% endif %}
 
 )
@@ -1048,6 +1151,7 @@ with prep as (
 - macro.dbt.type_int
 - macro.dbt_utils.generate_surrogate_key
 - [macro.snowplow_utils.get_optional_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_optional_fields)
+- [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
@@ -1125,11 +1229,11 @@ This derived table aggregates the pageview level interactions to show overall me
     sort = 'last_play',
     dist = 'media_id',
     tags=["derived"],
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "first_play",
       "data_type": "timestamp"
-    }, databricks_partition_by='first_play_date'),
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["media_id"]),
+    }, databricks_val='first_play_date'),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["media_id"]),
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
     tblproperties={
       'delta.autoOptimize.optimizeWrite' : 'true',
@@ -1418,9 +1522,8 @@ group by 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19
 - macro.dbt_utils.pivot
 - [macro.snowplow_media_player.get_percentage_boundaries](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/macros/index.md#macro.snowplow_media_player.get_percentage_boundaries)
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
 - [macro.snowplow_utils.get_split_to_array](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_split_to_array)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_utils.unnest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.unnest)
 
@@ -1679,11 +1782,11 @@ This table aggregates the pageview level interactions to show session level medi
     materialized = 'table',
     sort = 'start_tstamp',
     dist = 'domain_sessionid',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "start_tstamp",
       "data_type": "timestamp"
-    }, databricks_partition_by='start_tstamp_date'),
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["domain_userid"]),
+    }, databricks_val='start_tstamp_date'),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["domain_userid"]),
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
   )
 }}
@@ -1736,8 +1839,7 @@ from prep
 <TabItem value="macro" label="Macros">
 
 - macro.dbt.type_float
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>
@@ -1789,11 +1891,11 @@ This table aggregates the pageview level interactions to show user level media s
     materialized = 'table',
     sort = 'first_play',
     dist = 'domain_userid',
-    partition_by = snowplow_utils.get_partition_by(bigquery_partition_by={
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
       "field": "first_play",
       "data_type": "timestamp"
-    }, databricks_partition_by='first_play_date'),
-    cluster_by=snowplow_utils.get_cluster_by(bigquery_cols=["domain_userid"]),
+    }, databricks_val='first_play_date'),
+    cluster_by=snowplow_utils.get_value_by_target_type(bigquery_val=["domain_userid"]),
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
   )
 }}
@@ -1842,8 +1944,7 @@ from prep
 <TabItem value="macro" label="Macros">
 
 - macro.dbt.type_int
-- [macro.snowplow_utils.get_cluster_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_cluster_by)
-- [macro.snowplow_utils.get_partition_by](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_partition_by)
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 
 </TabItem>

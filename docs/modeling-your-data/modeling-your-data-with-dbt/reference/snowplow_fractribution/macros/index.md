@@ -966,7 +966,7 @@ where
 - macro.dbt.current_timestamp
 - macro.dbt.dateadd
 - macro.dbt.run_query
-- [macro.snowplow_utils.type_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_string)
+- macro.dbt.type_string
 
 </TabItem>
 </Tabs>

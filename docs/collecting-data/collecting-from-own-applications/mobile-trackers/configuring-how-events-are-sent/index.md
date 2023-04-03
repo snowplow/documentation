@@ -170,7 +170,13 @@ EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
 
 ## Configuring how many events to send in one request
 
-The tracker sends events in batches. The tracker allows only a choice of 1 (`BufferOption.single`), 10 (`BufferOption.defaultGroup`) or 25 (`BufferOption.largeGroup`) events per payload. The tracker sends the events as soon as possible using the `BufferOption.Single` option. Even with a different batching option the events are sent as soon as the event sending is automatically triggered after 5 seconds.
+The tracker sends events in batches. The tracker allows only a choice of 1 (`BufferOption.single`), 10 (`BufferOption.defaultGroup`), or 25 (`BufferOption.largeGroup`) events at maximum per request payload. 
+
+The tracker checks for events to send every time an event is tracked. Normally, the new event will be sent immediately in its own request (no batching), regardless of the `BufferOption` setting.
+
+With very high event volumes, or when many events are buffered in the event store (e.g. if the network had been down), the `BufferOption` settings come into play. The maximum number of events to remove from the eventStore at once (by one thread) is set by the `EmitterConfiguration.emitRange` property: 150 events by default. These events are processed into requests with a maximum `BufferOption` of events per request.
+
+If the event store is empty when the tracker tries to send events - because another thread has just sent them - the thread sleeps for 5 seconds before trying again. If this happens 5 times in a row in the same thread, event sending will be paused for the whole tracker. It is restarted when a new event arrives.
 
 Configure the batch size like this:
 

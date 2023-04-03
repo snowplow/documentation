@@ -139,6 +139,8 @@ Snowplow.createTracker(getApplicationContext(),
   </TabItem>
 </Tabs>
 
+You can also configure your tracker to automatically add [GDPR information](./gdpr-tracking/index.md) to every event.
+
 ## Manually-tracked events
 
 The tracker provides classes for tracking different types of events.

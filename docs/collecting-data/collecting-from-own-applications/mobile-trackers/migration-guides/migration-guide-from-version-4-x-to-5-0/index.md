@@ -17,7 +17,7 @@ The supported platforms have changed on the iOS tracker:
 * On tvOS, from 9.0 to 12.0.
 * On watchOS, from 2.0 to 6.0.
 
-If using `EmitterConfiguration` when creating a new tracker, the default buffer option configuration changed from `single` (max 1 event per batch) do `default` (max 10 events per batch). If not using an `EmitterConfiguration`, the buffer option was set to `default` also in tracker v4.
+If using `EmitterConfiguration` when creating a new tracker, the default buffer option configuration changed from `single` (max 1 event per batch) to `default` (max 10 events per batch). If not using an `EmitterConfiguration`, the buffer option was set to `default` also in tracker v4.
 
 ## Android tracker
 

@@ -53,6 +53,8 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
    let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com")
    ```
 
+   The URL path for your collector endpoint should include the protocol, "http" or "https". If not included in the URL, "https" connection will be used by default.
+
 3. It creates a tracker instance which can be used to track events like this:
    
    ```swift
@@ -66,15 +68,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
    Snowplow.defaultTracker()?.track(event)
    ```
 
-The tracker has a default configuration where some settings are enabled by default:
-
-- session tracking
-- screen tracking
-- platform contexts (mobile specific context fields)
-
-The URL path for your collector endpoint should include the protocol, "http" or "https". If not included in the URL, "https" connection will be used by default.
-
-You can override the default configuration with a fine grained configuration when you create the tracker:
+You can override the default configuration with a fine grained configuration when you create the tracker. See the API docs for the `Configuration` classes to see all the options and defaults.
 
 ```swift
 Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com") {

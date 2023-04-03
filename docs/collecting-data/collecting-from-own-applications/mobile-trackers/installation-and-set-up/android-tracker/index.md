@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The Android Tracker SDK supports Android 5 (**API level 21+**)
+The Android Tracker SDK supports Android 5 (**API level 21+**).
 
 ## Installing
 
@@ -23,7 +23,7 @@ Add into your `build.gradle` file:
 dependencies {
   ...
   // Snowplow Android Tracker
-  implementation 'com.snowplowanalytics:snowplow-android-tracker:4.+'
+  implementation 'com.snowplowanalytics:snowplow-android-tracker:5.+'
   // In case 'lifecycleAutotracking' is enabled
   implementation 'androidx.lifecycle-extensions:2.2.+'
   ...
@@ -46,6 +46,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
         "https://snowplow-collector-url.com" // Event collector URL
     )
     ```
+    The URL path for your collector endpoint should include the protocol, "http" or "https". If not included in the URL, "https" connection will be used by default.
 
       </TabItem>
       <TabItem value="android-java" label="Android (Java)">
@@ -57,6 +58,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
           "https://snowplow-collector-url.com" // Event collector URL
     );
     ```
+    The URL path for your collector endpoint should include the protocol, "http" or "https". If not included in the URL, "https" connection will be used by default.
 
       </TabItem>
     </Tabs>
@@ -103,15 +105,7 @@ Snowplow.getDefaultTracker().track(event);
   </TabItem>
 </Tabs>
 
-The tracker has a default configuration where some settings are enabled by default:
-
-- session tracking
-- screen tracking
-- platform contexts (mobile specific context fields)
-
-The URL path for your collector endpoint should include the protocol, "http" or "https". If not included in the URL, "https" connection will be used by default.
-
-You can override the default configuration with a fine grained configuration when you create the tracker:
+You can override the default configuration with a fine grained configuration when you create the tracker. See the [API docs](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/index.html) for the `Configuration` classes to see all the options and defaults.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="android" label="Android (Kotlin)">

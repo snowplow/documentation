@@ -159,6 +159,7 @@ async function createConfig() {
             'toml',
             'django',
             'yaml',
+            'kotlin',
           ],
         },
         algolia: {

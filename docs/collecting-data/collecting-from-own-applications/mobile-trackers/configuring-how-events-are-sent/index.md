@@ -27,7 +27,14 @@ let networkConfig = NetworkConfiguration(endpoint: "http://collector-endpoint")
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val networkConfig = NetworkConfiguration("http://collector-endpoint")
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 NetworkConfiguration networkConfig = new NetworkConfiguration("http://collector-endpoint");
@@ -45,19 +52,31 @@ In particular cases it can be useful to have a full control of the component in 
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let network = DefaultNetworkConnection.build { (builder) in
-      builder.setUrlEndpoint(url)
-      builder.setHttpMethod(method)
-      builder.setEmitThreadPoolSize(20)
-      builder.setByteLimitPost(52000)
-}
+let network = DefaultNetworkConnection(urlString: url, httpMethod: method)
+network.emitThreadPoolSize = 20
+network.byteLimitPost = 52000
+
 let networkConfig = NetworkConfiguration(networkConnection: network)
 ```
 
 In the example above we used the `DefaultNetworkConnection` but it can be used any custom component that implements the `NetworkConnection` interface.
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val connection = OkHttpNetworkConnectionBuilder(url, applicationContext)
+    .method(method)
+    .emitTimeout(10)
+    .build()
+
+val networkConfig = NetworkConfiguration(connection)
+```
+
+In the example above we used the `OkHttpNetworkConnection` but it can be used any custom component that implements the `NetworkConnection` interface.
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 OkHttpNetworkConnection connection =
@@ -82,16 +101,26 @@ The tracker sends events asynchrounously in batches using POST requests. In case
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let eventStore = SQLiteEventStore(namespace: kNamespace);
+let eventStore = CustomEventStore(namespace: trackerNamespace);
 let emitterConfig = EmitterConfiguration()
       .eventStore(eventStore)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val eventStore: EventStore = CustomEventStore(applicationContext, trackerNamespace)
+
+val emitterConfiguration = EmitterConfiguration()
+    .eventStore(eventStore)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-EventStore eventStore = new SQLiteEventStore(getApplicationContext(), kNamespace);
+EventStore eventStore = new CustomEventStore(getApplicationContext(), trackerNamespace);
 
 EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
       .eventStore(eventStore);
@@ -100,7 +129,7 @@ EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
   </TabItem>
 </Tabs>
 
-In the example above we used the `SQLiteEventStore` but it can be used any custom component that implements the `EventStore` interface.
+In the example above the `CustomEventStore` is your implementation of the `EventStore` interface.
 
 ## What happens if an event fails to send?
 
@@ -119,7 +148,17 @@ let emitterConfig = EmitterConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val emitterConfiguration = EmitterConfiguration()
+    .customRetryForStatusCodes(mapOf(
+        403 to true
+    ))
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
@@ -131,7 +170,13 @@ EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
 
 ## Configuring how many events to send in one request
 
-The tracker sends events in batches. The tracker allows only a choice of 1 (`BufferOption.single`), 10 (`BufferOption.defaultGroup`) or 25 (`BufferOption.largeGroup`) events per payload. The tracker sends the events as soon as possible using the `BufferOption.Single` option. Even with a different batching option the events are sent as soon as the event sending is automatically triggered after 5 seconds.
+The tracker sends events in batches. The tracker allows only a choice of 1 (`BufferOption.single`), 10 (`BufferOption.defaultGroup`), or 25 (`BufferOption.largeGroup`) events at maximum per request payload. 
+
+The tracker checks for events to send every time an event is tracked. Normally, the new event will be sent immediately in its own request (no batching), regardless of the `BufferOption` setting.
+
+With very high event volumes, or when many events are buffered in the event store (e.g. if the network had been down), the `BufferOption` settings come into play. The maximum number of events to remove from the eventStore at once (by one thread) is set by the `EmitterConfiguration.emitRange` property: 150 events by default. These events are processed into requests with a maximum `BufferOption` of events per request.
+
+If the event store is empty when the tracker tries to send events - because another thread has just sent them - the thread sleeps for 5 seconds before trying again. If this happens 5 times in a row in the same thread, event sending will be paused for the whole tracker. It is restarted when a new event arrives.
 
 Configure the batch size like this:
 
@@ -144,7 +189,15 @@ let emitterConfig = EmitterConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val emitterConfiguration = EmitterConfiguration()
+    .bufferOption(BufferOption.DefaultGroup)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 EmitterConfiguration emitterConfiguration = new EmitterConfiguration()

@@ -1,10 +1,10 @@
 ---
-title: "Tracking events"
+title: "Tracking out-of-the-box events"
 date: "2022-08-30"
 sidebar_position: 10
 ---
 
-# Tracking events
+# Tracking out-of-the-box events
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -19,37 +19,61 @@ For example, tracking a ScreenView:
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let event = ScreenView(name: "screen name", screenId: nil)
+let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com")
+
+let event = ScreenView(name: "screen name")
 let eventId = tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val tracker = Snowplow.createTracker(
+        applicationContext, // Android context
+        "appTracker", // namespace
+        "https://snowplow-collector-url.com" // Event collector URL
+    )
+
+val event = ScreenView("screen")
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-ScreenView event = new ScreenView("screen", UUID.randomUUID().toString());         
+TrackerController tracker = Snowplow.createTracker(
+      getApplicationContext(), // Android context
+      "appTracker", // namespace
+      "https://snowplow-collector-url.com" // Event collector URL
+);
+
+ScreenView event = new ScreenView("screen");         
 tracker.track(event);
 ```
 
   </TabItem>
 </Tabs>
 
-The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types as well as fully custom events. 
+The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types, as well as fully custom events. 
 
-Each event can bring context which is composed by entities. The tracker attaches entities to the events based on the configuration, but you can attach your own custom entities as well.
+Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the configuration, but you can attach your own [custom entities](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) as well.
 
-Every tracked event payload has a unique `event_id` UUID string set by the tracker and a set of timestamps along with other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol).
+Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol).
+
+See the full configuration and parameter options for all these classes and methods in the API docs - [Android](https://snowplow.github.io/snowplow-android-tracker/index.html) and [iOS](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/).
 
 ## Auto-tracked events and entities
 
 Automatically captured data are:
 
-* [**Platform and Application Context Tracking**](#platform): Captures contextual information about the device and the app.
-* [**Session Tracking**](#session): Captures the session which helps to keep track of the user activity in the app.
-* [**App Lifecycle Tracking**](#lifecycle-tracking): Captures application lifecycle state changes (foreground/background transitions).
-* [**Screen View Tracking**](#screen-view): Captures each time a new “screen” is loaded.
-* [**Exception Tracking**](#exception): Captures any unhandled exceptions within the application.
-* [**Installation Tracking**](#installation): Captures an install event which occurs the first time an application is opened.
+* [**Platform and Application Context Tracking**](./platform-and-application-context/index.md): Captures contextual information about the device and the app.
+* [**Session Tracking**](./session-tracking/index.md): Captures the session which helps to keep track of the user activity in the app.
+* [**App Lifecycle Tracking**](./lifecycle-tracking/index.md): Captures application lifecycle state changes (foreground/background transitions).
+* [**Screen View Tracking**](./screen-tracking/index.md): Captures each time a new “screen” is loaded.
+* [**Exception Tracking**](./exception-tracking/index.md): Captures any unhandled exceptions within the application.
+* [**Installation Tracking**](./installation-tracking/index.md): Captures an install event which occurs the first time an application is opened.
 
 Autotracking can be enabled in the tracker configuration. In this example, some helpful automatic entities and all autotracking is enabled:
 
@@ -57,7 +81,24 @@ Autotracking can be enabled in the tracker configuration. In this example, some 
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let trackerConfig = TrackerConfiguration()
+Snowplow.createTracker(namespace: "appTracker", network: networkConfig) {
+    TrackerConfiguration()
+        .platformContext(true)
+        .applicationContext(true)
+        .lifecycleAutotracking(true)
+        .sessionContext(true)
+        .screenViewAutotracking(true)
+        .screenContext(true)
+        .exceptionAutotracking(true)
+        .installAutotracking(true)
+}
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```java
+val trackerConfig = TrackerConfiguration("appId")
     .platformContext(true)
     .applicationContext(true)
     .lifecycleAutotracking(true)
@@ -68,17 +109,18 @@ let trackerConfig = TrackerConfiguration()
     .installAutotracking(true)
 
 Snowplow.createTracker(
-    namespace: "appTracker",
-    network: networkConfig,
-    configurations: [trackerConfig]
+    applicationContext,
+    namespace,
+    networkConfiguration,
+    trackerConfig
 )
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .platformContext(true)
     .applicationContext(true)
     .lifecycleAutotracking(true)
@@ -97,469 +139,17 @@ Snowplow.createTracker(getApplicationContext(),
   </TabItem>
 </Tabs>
 
-You can know more about the `TrackerConfiguration` properties [here](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_tracker_configuration.html).
-
-### Platform and Application Data Tracking {#platform}
-
-They capture information about the device and the app.
-
-They are enabled by default. But the setting can be changed through `TrackerConfiguration` like in the example below:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-let trackerConfig = TrackerConfiguration()
-    .platformContext(true)
-    .applicationContext(true)
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
-    .platformContext(true)
-    .applicationContext(true);
-```
-
-  </TabItem>
-</Tabs>
-
-#### Application context
-
-The [application context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) contains two properties:
-
-| Property | Type | Description | Required |
-| --- | --- | --- | --- |
-| `version` | String | Version number of the application e.g 1.1.0 | Yes |
-| `build` | String | Build name of the application e.g s9f2k2d or 1.1.0 beta | Yes |
-
-#### Platform context
-
-The [platform context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-2) contains the following properties:
-
-| Property | Type | Description | Required |
-| --- | --- | --- | --- |
-| `osType` | String | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android") | Yes |
-| `osVersion` | String | Version of the mobile operating system. | Yes |
-| `deviceManufacturer` | String | Device vendor. | Yes |
-| `deviceModel` | String | Model of the device. | Yes |
-| `carrier` | String | Carrier of the SIM inserted in the device. | No |
-| `networkType` | String | One of: "mobile", "wifi", "offline" | No |
-| `networkTechnology` | String | Radio access technology that the device is using. | No |
-| `openIdfa` | String | Deprecated property. | No |
-| `appleIdfa` | String | Advertising identifier on iOS. | No |
-| `appleIdfv` | String | UUID [identifier for vendors](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor) on iOS. | No |
-| `androidIdfa` | String | Advertising identifier on Android. | No |
-| `physicalMemory` | Integer | Total physical system memory in bytes | No |
-| `systemAvailableMemory` | Integer | Available memory on the system in bytes (Android only) | No |
-| `appAvailableMemory` | Integer | Amount of memory in bytes available to the current app (iOS only) | No |
-| `batteryLevel` | Integer | Remaining battery level as an integer percentage of total battery capacity | No |
-| `batteryState` | String | Battery state for the device. One of: "unplugged", "charging", "full". | No |
-| `lowPowerMode` | Boolean | A Boolean indicating whether Low Power Mode is enabled (iOS only) | No |
-| `availableStorage` | Integer | Bytes of storage remaining | No |
-| `totalStorage` | Integer | Total size of storage in bytes | No |
-
-##### Identifier for Advertisers (IDFA)
-
-The IDFA advertising identifiers are only added to the platform context if you fulfill the following requirements.
-Otherwise, their values will be NULL.
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS (tracker v4)" default>
-
-The Apple advertising identifier is stored in the `appleIdfa` property.
-
-Starting with iOS 14, one has to request user consent through the [App Tracking Transparency](https://developer.apple.com/documentation/apptrackingtransparency) framework in order to access the advertising identifier.
-
-1. Add and follow the guidelines of [App Tracking Transparency Framework](https://developer.apple.com/documentation/apptrackingtransparency) in your app.
-2. Add AdSupport framework to your app. If it’s not added the tracker will not send the IDFA with the events.
-3. Add the compiler flag `SNOWPLOW_IDFA_ENABLED` to your build settings.
-
-:::note
-
-The simulators can’t generate a proper IDFA, instead they generate a sequence of zeros.
-If you want to test IDFA with a real code, please, use the physical device.
-
-The user has the ability to limit ad-tracking from the device’s Settings.
-If the user enable the limitations the tracker will not be able to track the IDFA.
-
-:::
-
-  </TabItem>
-  <TabItem value="ios-v5" label="iOS (tracker v5+)">
-
-The Apple advertising identifier is stored in the `appleIdfa` property.
-
-Starting with iOS 14, one has to request user consent through the [App Tracking Transparency](https://developer.apple.com/documentation/apptrackingtransparency) framework in order to access the advertising identifier.
-
-1. Add and follow the guidelines of [App Tracking Transparency Framework](https://developer.apple.com/documentation/apptrackingtransparency) in your app.
-2. Pass a callback to your `TrackerConfiguration` that retrieves the identifier:
-
-```swift
-import AdSupport
-
-let trackerConfig = TrackerConfiguration()
-trackerConfig.advertisingIdentifierRetriever = {
-    ASIdentifierManager.shared().advertisingIdentifier
-}
-let tracker = Snowplow.createTracker(namespace: "ns", network: networkConfig, configurations: [trackerConfig])
-```
-
-:::note
-
-The simulators can’t generate a proper IDFA, instead they generate a sequence of zeros.
-If you want to test IDFA with a real code, please, use the physical device.
-
-The user has the ability to limit ad-tracking from the device’s Settings.
-If the user enable the limitations the tracker will not be able to track the IDFA.
-
-:::
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-The AAID (Android Advertising ID) is a unique user-resettable identifier, which uniquely identifies a particular user for advertising use cases, such as ad personalization. The tracker allows retrieval of the AAID, sending it as property `androidIdfa`.
-
-For privacy purposes the user can reset the identifier at any moment.
-In that case the tracker will report a new AAID, despite the device and user being the same as before.
-Also, the user can "Opt out of Ads Personalisation" from the Android settings menu.
-In that case the tracker will report an empty string in place of the AAID.
-
-If you want to track the AAID, you need to add the Google Mobile Ads library to your app.
-If it isn’t included, the tracker will not send the AAID with the events.
-
-The Google Mobile Ads can be imported in the `dependencies` section of the `build.gradle` adding:
-
-```gradle
-dependencies {
-    ...
-    implementation 'com.google.android.gms:play-services-ads:19.0.0'
-    ...
-}
-```
-
-The Google Mobile Ads SDK v.17.0.0 introduced some [changes](https://ads-developers.googleblog.com/2018/10/announcing-v1700-of-android-google.html) requiring a tag in the `androidManifest.xml` explained below.
-
-###### Manifest tag for AdMob publishers
-
-AdMob publishers have to add the AdMob app ID in the `AndroidManifest.xml` file:
-
-```xml
-<manifest>
-    <application>
-        <!-- TODO: Replace with your real AdMob app ID -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-################~##########"/>
-    </application>
-</manifest>
-```
-
-Failure to add this tag will result in the app crashing at app launch with a message starting with "The Google Mobile Ads SDK was initialized incorrectly".
-
-###### Manifest tag for Google Ad Manager publishers
-
-Publishers using Google Ad Manager have to declare the app an "Ad Manager app" in the `AndroidManifest.xml` file:
-
-```xml
-<manifest>
-    <application>
-        <meta-data
-            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
-            android:value="true"/>
-    </application>
-</manifest>
-```
-
-Failure to add this tag will result in the app crashing at app launch with a message starting with "The Google Mobile Ads SDK was initialized incorrectly".
-
-Read more about [Google Play Data Safety here.](../android-google-play-data-safety/index.md)
-
-  </TabItem>
-</Tabs>
-
-### App Lifecycle Tracking {#lifecycle-tracking}
-
-It captures application lifecycle state changes. In particular, when the app changes the state from foreground to background and viceversa.
-
-The lifecycle tracking is disabled by default. It can be enabled in `TrackerConfiguration` like in the example below:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-let trackerConfig = TrackerConfiguration()
-    .lifecycleAutotracking(true)
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
-    .lifecycleAutotracking(true);
-```
-
-  </TabItem>
-</Tabs>
-
-Once enabled, the tracker will automatically track a [`Background` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_background.html) when the app is moved to background and a [`Foreground` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_foreground.html) when the app moves back to foreground (becomes visible in the screen).
-
-The tracker attaches a [`LifecycleEntity`](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1entity_1_1_lifecycle_entity.html) to all the events tracked by the tracker reporting if the app was visible (foreground state) when the event was tracked.
-
-The `LifecycleEntity` value is conditioned by the internal state of the tracker only. To make an example, if the app is in foreground state but the developer tracks a `Background` event intentionally, it would force the generation of a `LifecycleEntity` that mark the app as non visible, even if it's actually visible in the device.
-
-### Session Tracking {#session}
-
-Captures the session which helps to keep track of the user activity in the app.
-
-Client session tracking is enabled by default. It can be set through the `TrackerConfiguration` as explained below.
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-let trackerConfig = TrackerConfiguration()
-    .sessionContext(true)
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
-    .sessionContext(true);
-```
-
-  </TabItem>
-</Tabs>
-
-When enabled, the tracker appends a [`client_session` entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) to each event it sends and it maintains this session information as long as the application is installed on the device.
-
-Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
-
-The timeouts for the session can be configured in the `SessionConfiguration` like in the example below:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-let sessionConfig = SessionConfiguration(
-    foregroundTimeout: Measurement(value: 360, unit: .seconds),
-    backgroundTimeout: Measurement(value: 360, unit: .seconds)
-)
-Snowplow.createTracker(
-    namespace: "appTracker",
-    network: networkConfig,
-    configurations: [trackerConfig, sessionConfig]
-)
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-SessionConfiguration sessionConfig = new SessionConfiguration(
-    new TimeMeasure(6, TimeUnit.SECONDS),
-    new TimeMeasure(30, TimeUnit.SECONDS)
-);
-Snowplow.createTracker(getApplicationContext(), namespace, networkConfig, sessionConfig);
-```
-
-  </TabItem>
-</Tabs>
-
-The lifecycle events (`Foreground` and `Background` events) have a role in the session expiration. The lifecycle events can be enabled as explained in [App Lifecycle Tracking](#lifecycle-tracking). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
-
-When the app moves from foreground to background, the `Background` event is fired. If session tracking is enabled, the session entity will be attached to the event checking the session expiration using the foreground timeout.
-When the app moves from background to foreground, the `Foreground` event is fired. If session tracking is enabled, the session entity will be attached to the event checking the session expiration using the background timeout.
-
-For instance, with this configuration:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-SessionConfiguration(
-    foregroundTimeout: Measurement(value: 360, unit: .seconds),
-    backgroundTimeout: Measurement(value: 15, unit: .seconds)
-)       
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-SessionConfiguration sessionConfig = new SessionConfiguration(
-    new TimeMeasure(360, TimeUnit.SECONDS),
-    new TimeMeasure(15, TimeUnit.SECONDS)
-);
-```
-
-  </TabItem>
-</Tabs>
-
-the session would expire if the app is in background for more than 15 seconds, like in this example:
-
-```text
-time: 0s - ScreenView event - foreground timeout session check - session 1
-time: 3s - Background event - foreground timeout session check (3 < 360) - session 1
-time: 30s - Foreground event - background timeout session check (30 > 15) - session 2
-```
-
-In the above example, the `Foreground` event triggers a new session because the time spent in background (without tracked events) is bigger than the background timeout for the session.
-
-#### Session callback
-
-:::info
-
-This feature is available since v3.1.
-
-:::
-
-The tracker allows the configuration of a callback to inform the app every time a new session is created (in correspondence of a session timeout check).
-This can be configured in the `SessionConfiguration` and it provides the `SessionState` where all the info already tracked in the session can be accessed.
-
-Below is an example of where the session callback is used to print out the values of session every time a new session is generated by the tracker:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-...
-let sessionConfig = SessionConfiguration()
-    .onSessionStateUpdate { session in
-        print("SessionState: id: \(session.sessionId) - index: \(session.sessionIndex) - userID: \(session.userId) - firstEventID: \(session.firstEventId)")
-    }
-...
-let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [sessionConfig])
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-...
-SessionConfiguration sessionConfig = new SessionConfiguration(
-    new TimeMeasure(6, TimeUnit.SECONDS),
-    new TimeMeasure(30, TimeUnit.SECONDS)
-)
-    .onSessionUpdate(state -> log(
-        "Session: " + state.getSessionId()
-                + "\r\nprevious: " + state.getPreviousSessionId()
-                + "\r\neventId: " + state.getFirstEventId()
-                + "\r\nindex: " + state.getSessionIndex()
-                + "\r\nuserId: " + state.getUserId()
-    ));
-
-...
-Snowplow.createTracker(getApplicationContext(), namespace, networkConfig, sessionConfig);
-```
-
-  </TabItem>
-</Tabs>
-
-### Screen View Tracking {#screen-view}
-
-It captures screen changes within the app.
-
-The screen view tracking is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-let trackerConfig = TrackerConfiguration()
-    .screenViewAutotracking(true)
-    .screenContext(true)
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
-    .screenViewAutotracking(true)
-    .screenContext(true);
-```
-
-  </TabItem>
-</Tabs>
-
-The configuration is composed by two settings:
-
-- `screenViewAutotracking`: the tracker automatically tracks each screen change (triggered by `viewDidAppear` in a `ViewController`) using a [`ScreenView` event](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
-- `screenContext`: the tracker attaches a [`Screen` entity](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
-
-The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event, even if it was manually tracked and the app is in a different screen.
-
-Indeed, disabling the `screenViewAutotracking` only, the tracker can still attach `Screen` entities automatically based only to the manual tracking of `ScreenView` events, and vice versa.
-
-### Exception Tracking {#exception}
-
-It captures any unhandled exceptions within the application.
-
-The exception tracking is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-let trackerConfig = TrackerConfiguration()
-    .exceptionAutotracking(true)
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
-    .exceptionAutotracking(true);
-```
-
-  </TabItem>
-</Tabs>
-
-It allows the tracker to intercept critical exceptions in the app. Exceptions can crash the app so it's likely that the event will be sent after the restart of the app. Being a critical situation we can't be 100% sure that all the exception stacktraces are reliably stored for sending before the crash of the app.
-
-### Installation Tracking {#installation}
-
-It tracks an install event which occurs the first time an application is opened. The tracker will record when it's first been installed, so deleting and reinstalling an app will trigger another install event.
-
-If installation autotracking is not enabled, the tracker will still keep track of when the app was first installed, so that when enabled, the tracker will send the recorded install event with a timestamp reflecting when it was first installed.
-
-The installation autotracking is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-let trackerConfig = TrackerConfiguration()
-    .installAutotracking(true)
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android">
-
-```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
-    .installAutotracking(true);
-```
-
-  </TabItem>
-</Tabs>
+You can also configure your tracker to automatically add [GDPR information](./gdpr-tracking/index.md) to every event.
 
 ## Manually-tracked events
 
 The tracker provides classes for tracking different types of events.
-The events are divided in two groups: canonical events and self-describing events.
+The events are divided into two groups: canonical events and self-describing events.
 <!-- You can read more about the difference between the two [here](TODO) -->
 
 ### Creating a Structured event
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](https://docs.snowplow.io/docs/understanding-tracking-design/). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
+Our philosophy in creating Snowplow is that users should design suitable data structures customised for their own consumer interactions data capture. You can read more about that philosophy [here](https://docs.snowplow.io/docs/understanding-tracking-design/).
 
 However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 
@@ -576,20 +166,29 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = Structured("shop", "add-to-basket") // category and action
+    .label("Add To Basket")
+    .property("pcs")
+    .value(2.0)
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Structured event = new Structured("category", "action")
-    .label("label")
-    .property("property")
-    .value(5);
+Structured event = new Structured("shop", "add-to-basket") // category and action
+    .label("Add To Basket")
+    .property("pcs")
+    .value(2);
 tracker.track(event);
 ```
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_structured.html).
 
 ### Creating a Timing event
 
@@ -606,7 +205,17 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = Timing("timing-category", "timing-variable", 5)
+    .label("optional-label")
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android">
 
 ```java
 Timing event = new Timing("timing-category", "timing-variable", 5)
@@ -617,8 +226,6 @@ tracker.track(event);
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_timing.html).
 
 ### Creating a ScreenView event
 
@@ -634,18 +241,25 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ScreenView("DemoScreenName")
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-ScreenView event = new ScreenView("DemoScreenName", UUID.randomUUID());
+ScreenView event = new ScreenView("DemoScreenName");
 
 tracker.track(event);
 ```
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_screen_view.html).
 
 ### Creating a Consent event
 
@@ -665,7 +279,18 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ConsentGranted("2022-01-01T00:00:00Z", "1234abcd", "1.2")
+    .documentDescription("document-description")
+    .documentName("document-name")
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 ConsentGranted event = new ConsentGranted("2022-01-01T00:00:00Z", "1234abcd", "1.2")
@@ -677,8 +302,6 @@ tracker.track(event);
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_consent_granted.html).
 
 #### Consent Withdrawn
 
@@ -699,7 +322,18 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = ConsentWithdrawn(false, "1234abcd", "1.2")
+    .documentDescription("document-description")
+    .documentName("document-name")
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 ConsentWithdrawn event = new ConsentWithdrawn(false, "1234abcd", "1.2")
@@ -711,8 +345,6 @@ tracker.track(event);
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_consent_withdrawn.html).
 
 ### Tracking Ecommerce Transactions
 <!-- (TODO: Section to remove) -->
@@ -736,7 +368,7 @@ let itemArray = [
     .name("DemoItemName")       
     .category("DemoItemCategory")       
     .currency("USD")       
-]       
+]
 
 let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
     .affiliation("DemoTransactionAffiliation")
@@ -751,7 +383,33 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val tracker = Snowplow.createTracker(applicationContext, "ns", "end", HttpMethod.POST)
+
+val item = EcommerceTransactionItem("sku-1", 0.75, 1)
+    .name("DemoItemName")
+    .category("DemoItemCategory")
+    .currency("USD")
+    .orderId("item-1")
+
+val items = listOf(item)
+
+val event = EcommerceTransaction("order-1", 350.0, items)
+    .affiliation("DemoTransactionAffiliation")
+    .taxValue(10.0)
+    .shipping(15.0)
+    .city("Boston")
+    .state("Massachusetts")
+    .country("USA")
+    .currency("USD")
+
+tracker.track(event)
+```
+
+</TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 EcommerceTransactionItem item = new EcommerceTransactionItem("sku-1", 0.75, 1)
@@ -778,8 +436,6 @@ tracker.track(event);
   </TabItem>
 </Tabs>
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_ecommerce_transaction.html).
-
 ### Tracking Push and Local Notifications
 
 To track an event when a push (or local) notification is used, it is possible to use the `MessageNotification` event:
@@ -803,7 +459,23 @@ tracker.track(event)
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = MessageNotification("title", "body", MessageNotificationTrigger.push)
+    .notificationTimestamp("2021-10-18T10:16:08.008Z")
+    .category("category")
+    .action("action")
+    .bodyLocKey("loc key")
+    .bodyLocArgs(listOf("loc arg1", "loc arg2"))
+    .sound("chime.mp3")
+    .notificationCount(9)
+    .category("category1")
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 MessageNotification event = new MessageNotification("title", "body", MessageNotificationTrigger.push)
@@ -820,8 +492,6 @@ tracker.track(event);
 
   </TabItem>
 </Tabs>
-
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_message_notification.html).
 
 ### Tracking Deep Links
 
@@ -850,7 +520,32 @@ public func application(_ application: UIApplication,
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    ...
+
+    // Extract info from Intent
+    val deepLinkUrl = intent.data.toString()
+    var referrer: String? = null
+    val extras = intent.extras
+    if (extras != null) {
+        val referrerUri = extras[Intent.EXTRA_REFERRER] as? Uri
+        if (referrerUri != null) {
+            referrer = referrerUri.toString()
+        }
+    }
+    // Create and track the event
+    val event = DeepLinkReceived(deepLinkUrl).referrer(referrer)
+    tracker.track(event)
+
+    ...
+}
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 @Override
@@ -879,8 +574,6 @@ public void onCreate(Bundle savedInstanceState) {
   </TabItem>
 </Tabs>
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1event_1_1_deep_link_received.html).
-
 The tracker keeps memory of the tracked Deep Link event and will attach a Deep Link entity to the first ScreenView tracked in the tracker.
 This is helpful during the analysis of the data because it will be clear the relation between the content visualized by the user (ScreenView event) and source (DeepLink entity) that originated that visualisation.
 
@@ -899,10 +592,19 @@ let trackerConfig = TrackerConfiguration()
 ```
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val trackerConfig = TrackerConfiguration("appId")
+    ...
+    .deepLinkContext(false)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TrackerConfiguration trackerConfig = new TrackerConfiguration()
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     ...
     .deepLinkContext(false);
 ```
@@ -947,7 +649,16 @@ let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_cli
 `trueTimestamp` should be a `Date` object.
 
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+// This example shows a self-describing event, but all events can have a trueTimestamp
+val event = SelfDescribing(SelfDescribingJson("iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", data))
+    .trueTimestamp(166184300L)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 // This example shows a self-describing event, but all events can have a trueTimestamp

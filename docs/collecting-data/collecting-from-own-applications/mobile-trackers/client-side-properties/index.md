@@ -77,17 +77,56 @@ let subjectConfig = SubjectConfiguration()
     .userId("username")
 ```
 
+See the API docs for the full [list of options](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/subjectconfiguration).
+
   </TabItem>
-  <TabItem value="android" label="Android">
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val subjectConfig = SubjectConfiguration()
+    .userId("username")
+```
+
+See the API docs for the full [list of options](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/-subject-configuration/index.html).
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
 
 ```java
 SubjectConfiguration subjectConfig = new SubjectConfiguration()
     .userId("username");
 ```
 
+See the API docs for the full [list of options](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/-subject-configuration/index.html).
+
   </TabItem>
 </Tabs>
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_subject_configuration.html).
+Subject properties can be updated or added to after initialization using the `SubjectController` retrieved from the tracker:
 
-Subject properties can be updated or added to after initialization, using setter methods. See the [API docs](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1internal_1_1tracker_1_1_subject.html) for full details.
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let tracker = Snowplow.defaultTracker()
+tracker?.subject?.userId = ""
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val tracker = Snowplow.defaultTracker
+tracker?.subject?.userId = ''
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+TrackerController tracker = Snowplow.getDefaultTracker();
+tracker.getSubject().setUserId("");
+```
+
+  </TabItem>
+</Tabs>

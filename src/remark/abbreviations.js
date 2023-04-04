@@ -2,6 +2,7 @@ const flatMap = require('unist-util-flatmap')
 
 const plugin = () => {
   const config = {
+    AAID: 'Android Advertising ID',
     AWS: 'Amazon Web Services',
     BDP: 'Behavioral Data Platform',
     CDP: 'Customer Data Platform',
@@ -12,6 +13,8 @@ const plugin = () => {
     GCS: 'Google Cloud Storage',
     GTM: 'Google Tag Manager',
     HAR: 'HTTP Archive',
+    IDFA: 'Identifier for Advertisers',
+    IDFV: 'Identifier for Vendors',
     KCL: 'Kinesis Client Library',
     OSS: 'Open Source Software',
     QA: 'Quality Assurance',
@@ -21,9 +24,6 @@ const plugin = () => {
     SQS: 'Amazon Simple Queue Service',
     UA: 'User Agent',
     VPC: 'Virtual Private Cloud',
-    AAID: 'Android Advertising ID',
-    IDFA: 'Identifier for Advertisers',
-    IDFV: 'Identifier for Vendors',
   }
   const transformer = async (ast) => {
     const find = new RegExp(

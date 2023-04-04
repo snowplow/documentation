@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Captures the session which helps to keep track of the user activity in the app.
+Session tracking captures the session which helps to keep track of the user activity in the app.
 
 Client session tracking is enabled by default. It can be set through the `TrackerConfiguration` as explained below.
 

@@ -77,7 +77,7 @@ let subjectConfig = SubjectConfiguration()
     .userId("username")
 ```
 
-See the API docs for the full [list of options](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/).
+See the API docs for the full [list of options](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/subjectconfiguration).
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -87,7 +87,7 @@ val subjectConfig = SubjectConfiguration()
     .userId("username")
 ```
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_subject_configuration.html).
+See the API docs for the full [list of options](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/-subject-configuration/index.html).
 
   </TabItem>
   <TabItem value="android-java" label="Android (Java)">
@@ -97,7 +97,7 @@ SubjectConfiguration subjectConfig = new SubjectConfiguration()
     .userId("username");
 ```
 
-See the API docs for the full [list of options](https://docs.snowplow.io/snowplow-android-tracker/classcom_1_1snowplowanalytics_1_1snowplow_1_1configuration_1_1_subject_configuration.html).
+See the API docs for the full [list of options](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/-subject-configuration/index.html).
 
   </TabItem>
 </Tabs>

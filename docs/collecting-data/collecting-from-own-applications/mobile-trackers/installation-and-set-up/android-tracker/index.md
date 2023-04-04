@@ -105,7 +105,7 @@ Snowplow.getDefaultTracker().track(event);
   </TabItem>
 </Tabs>
 
-You can override the default configuration with a fine grained configuration when you create the tracker. See the [API docs](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/index.html) for the `Configuration` classes to see all the options and defaults.
+You can override the default configuration with a fine grained configuration when you create the tracker. See the [Android API docs](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/index.html) and [iOS API docs](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/configurationprotocol) for the `Configuration` classes to see all the options and defaults.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="android" label="Android (Kotlin)">

@@ -21,6 +21,9 @@ const plugin = () => {
     SQS: 'Amazon Simple Queue Service',
     UA: 'User Agent',
     VPC: 'Virtual Private Cloud',
+    AAID: 'Android Advertising ID',
+    IDFA: 'Identifier for Advertisers',
+    IDFV: 'Identifier for Vendors',
   }
   const transformer = async (ast) => {
     const find = new RegExp(

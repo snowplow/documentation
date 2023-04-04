@@ -45,4 +45,4 @@ If using `EmitterConfiguration` when creating a new tracker, the default buffer 
 
 The `contexts` property in events used to assign custom context entities to events has been renamed to `entities`. The previous naming is still available but it is deprecated.
 
-In the Android tracker, the `customContexts` property in events has been deprecated in favour of the `entities` property.
+In the Android tracker, the `customContexts` property in events has been deprecated in favor of the `entities` property.

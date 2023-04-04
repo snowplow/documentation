@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Add an [entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/gdpr/jsonschema/1-0-0) detailing the GDPR basis for processing to every event tracked. To configure this, provide a `GdprConfiguration` object when setting up a new tracker.
+You can add an [entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/gdpr/jsonschema/1-0-0) detailing the GDPR basis for processing to every event tracked. To configure this, provide a `GdprConfiguration` object when setting up a new tracker.
 
 The only required argument is the `Basis` enum, which contains the six GDPR options. A document describing the legal basis for processing can also be provided (as a string), along with the document version and ID.
 

@@ -4,12 +4,12 @@ date: "2022-08-30"
 sidebar_position: 20
 ---
 
+# Declarative entities with Global Context
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-# Declarative entities with Global Context
 
 As well as [adding context entities](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) to each individual event, it is possible to add context entities in a declarative way, so that they are applied to all (or a subset of) events within an application.
 
@@ -90,7 +90,7 @@ A generator can also be added at run-time using the method `add` like in the fol
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-tracker.globalContexts.add(tag: "staticExampleTag", contextGenerator: staticGlobalContext)
+tracker.globalContexts?.add(tag: "staticExampleTag", contextGenerator: staticGlobalContext)
 ```
 
   </TabItem>
@@ -218,10 +218,10 @@ The `InspectableEvent` is an interface that exposes internal data of the process
 
 ```swift
 let contextGenerator = GlobalContext(generator: {  event in
-            return [
-                SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["eventName": event.schema!])
-            ]
-        })
+    return [
+        SelfDescribingJson(schema: "iglu:com.snowplowanalytics.iglu/anything-a/jsonschema/1-0-0", andData: ["eventName": event.schema!])
+    ]
+})
 ```
 
   </TabItem>
@@ -272,9 +272,9 @@ A filter callback is used to discriminate between events so we can attach global
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let filteredGC = SPGlobalContext(
+let filteredGC = GlobalContext(
     staticContexts: [
-        SPSelfDescribingJson(schema: "iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1", andData: [
+        SelfDescribingJson(schema: "iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1", andData: [
             "key": "value"
         ])
     ],
@@ -336,15 +336,15 @@ In this example, the ruleset provider will attach the generated entities (as des
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let allowed:String! = "iglu:com.snowplowanalytics.*/*/jsonschema/*-*-*"
-let denied:String! = "iglu:com.snowplowanalytics.mobile/*/jsonschema/*-*-*"
+let allowed = "iglu:com.snowplowanalytics.*/*/jsonschema/*-*-*"
+let denied = "iglu:com.snowplowanalytics.mobile/*/jsonschema/*-*-*"
 
-let ruleset:SPSchemaRuleset! = SPSchemaRuleset.rulesetWithAllowedList([allowed], andDeniedList:[denied])
-let rulesetGC:SPGlobalContext! = SPGlobalContext(staticContexts:[
-    SPSelfDescribingJson(schema:"iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1", andData:["key": "value"])
-    ], ruleset:ruleset)
+let ruleset = SchemaRuleset(allowedList: [allowed], andDeniedList: [denied])
+let rulesetGC = GlobalContext(staticContexts:[
+  SelfDescribingJson(schema:"iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1", andData:["key": "value"])
+], ruleset:ruleset)
 
-tracker.add(rulesetGC tag: "tag1")
+tracker.globalContexts?.add(tag: "tag1", contextGenerator: rulesetGC)
 ```
 
   </TabItem>
@@ -409,15 +409,15 @@ In this case the logic for filtering and generation is encapsulated behind a con
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-class GlobalContextGenerator : SPContextGenerator {
-
-    func filter(event:SPInspectableEvent!) -> Bool {
+class GlobalContextGenerator : ContextGenerator {
+    
+    func filter(from event: InspectableEvent) -> Bool {
         return true
     }
-
-    func generator(event:SPInspectableEvent!) -> [Any]! {
+    
+    func generator(from event: InspectableEvent) -> [SelfDescribingJson]? {
         return [
-            SPSelfDescribingJson(schema:"iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1", andData:["key": "value"]),
+            SelfDescribingJson(schema:"iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1", andData:["key": "value"]),
         ]
     }
 }
@@ -426,8 +426,8 @@ class GlobalContextGenerator : SPContextGenerator {
 It can be passed to the tracker as usual:
 
 ```swift
-let contextGeneratorGC:SPGlobalContext! = SPGlobalContext(contextGenerator: GlobalContextGenerator())
-tracker.add(contextGeneratorGC, tag: "tag1")
+let contextGeneratorGC = GlobalContext(contextGenerator: GlobalContextGenerator())
+tracker.globalContexts?.add(tag: "tag1", contextGenerator: contextGeneratorGC)
 ```
 
   </TabItem>

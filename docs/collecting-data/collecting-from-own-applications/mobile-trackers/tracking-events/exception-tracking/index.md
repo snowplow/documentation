@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-It captures any unhandled exceptions within the application.
+Exception tracking captures any unhandled exceptions within the application.
 
 The exception tracking is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
 

@@ -1,6 +1,5 @@
 ---
 title: "GDPR tracking"
-date: "2023-01-03"
 sidebar_position: 61
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Platform and application data tracking"
-date: "2023-01-03"
 sidebar_position: 10
 ---
 

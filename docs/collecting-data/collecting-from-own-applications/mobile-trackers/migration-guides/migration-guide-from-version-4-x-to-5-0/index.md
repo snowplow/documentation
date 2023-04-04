@@ -1,6 +1,5 @@
 ---
 title: "From version 4.x to 5.0"
-date: "2022-08-30"
 sidebar_position: -4
 ---
 

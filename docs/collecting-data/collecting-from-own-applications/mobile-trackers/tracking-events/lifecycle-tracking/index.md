@@ -1,6 +1,5 @@
 ---
 title: "App lifecycle tracking"
-date: "2023-01-03"
 sidebar_position: 30
 ---
 

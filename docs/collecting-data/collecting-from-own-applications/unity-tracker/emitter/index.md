@@ -6,10 +6,11 @@ sidebar_position: 50
 
 The Emitter object is responsible for sending and storing all events.
 
-We have two emitters available currently:
+We have three emitters available currently:
 
 - `SyncEmitter` : Slow blocking synchronous operation, useful for testing but should not be used in production.
 - `AsyncEmitter` : Fully asynchronous operation which uses the ThreadPool to perform all of its operations.
+- `WebGlEmitter` : Emitter implementing the async API that is compatible with WebGL.
 
 ### Constructor
 

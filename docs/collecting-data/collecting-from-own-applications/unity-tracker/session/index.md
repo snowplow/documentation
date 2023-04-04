@@ -6,6 +6,9 @@ sidebar_position: 70
 
 The Session object is responsible for maintaining persistent data around user sessions over the life-time of an application.
 
+Session information is persisted using file storage on most platforms except for tvOS and WebGL.
+On those two platforms, session information is stored in [`PlayerPrefs`](https://docs.unity3d.com/ScriptReference/PlayerPrefs.html).
+
 ### Constructor
 
 | **Argument Name** | **Description** | **Required?** | **Default** |

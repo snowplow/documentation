@@ -23,10 +23,14 @@ You should now be able to setup the Tracker!
 To instantiate a Tracker in your code (can be global or local to the process being tracked) simply instantiate the Tracker interface with the following:
 
 ```csharp
-// Create Emitter and Tracker
-IEmitter e1 = new AsyncEmitter ("com.collector.acme")
-Tracker t1 = new Tracker(e1, "Namespace", "AppId");
+// Create Emitter – to support WebGL, make sure to use the WebGlEmitter
+IEmitter emitter = Application.platform == RuntimePlatform.WebGLPlayer 
+        ? new WebGlEmitter("com.collector.acme", HttpProtocol.HTTPS, HttpMethod.POST)
+        : new AsyncEmitter("com.collector.acme", HttpProtocol.HTTPS, HttpMethod.POST);
+
+// Create a Tracker instance with the Emitter
+Tracker tracker = new Tracker(emitter, "Namespace", "AppId");
 
 // Start the Tracker
-t1.StartEventTracking();
+tracker.StartEventTracking();
 ```

@@ -85,28 +85,7 @@ The IDFA advertising identifiers are only added to the platform context if you f
 Otherwise, their values will be NULL.
 
 <Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS (tracker v4)" default>
-
-The Apple advertising identifier is stored in the `appleIdfa` property.
-
-Starting with iOS 14, one has to request user consent through the [App Tracking Transparency](https://developer.apple.com/documentation/apptrackingtransparency) framework in order to access the advertising identifier.
-
-1. Add and follow the guidelines of [App Tracking Transparency Framework](https://developer.apple.com/documentation/apptrackingtransparency) in your app.
-2. Add AdSupport framework to your app. If it’s not added the tracker will not send the IDFA with the events.
-3. Add the compiler flag `SNOWPLOW_IDFA_ENABLED` to your build settings.
-
-:::note
-
-The simulators can’t generate a proper IDFA, instead they generate a sequence of zeros.
-If you want to test IDFA with a real code, please, use the physical device.
-
-The user has the ability to limit ad-tracking from the device’s Settings.
-If the user enable the limitations the tracker will not be able to track the IDFA.
-
-:::
-
-  </TabItem>
-  <TabItem value="ios-v5" label="iOS (tracker v5+)">
+  <TabItem value="ios" label="iOS">
 
 The Apple advertising identifier is stored in the `appleIdfa` property.
 

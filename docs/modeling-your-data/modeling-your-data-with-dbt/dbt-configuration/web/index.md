@@ -25,6 +25,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `atomic_schema`    | The schema (dataset for BigQuery) that contains your atomic events table.                                                                                                                                                                                                                                                                                                                                                            | `atomic`                                 |
 | `database`         | The database that contains your atomic events table.                                                                                                                                                                                                                                                                                                                                                                                 | `target.database`                        |
 | `dev_target_name`  | The [target name](https://docs.getdbt.com/reference/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#manifest-tables) section for more details.                                                                                                                                                   | `dev`                                    |
+| `events`           | ???                                                                                                                                                                                                                                                                                                                                                                                                                                  | `events`                                 |
 | `heartbeat`        | Page ping heartbeat time as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#activity-tracking-page-pings).                                                                                                                                                                                      | `10`                                     |
 | `min_visit_length` | Minimum visit length as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#activity-tracking-page-pings).                                                                                                                                                                                          | `5`                                      |
 | `sessions_table`   | The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref('snowplow_web_sessions_custom') }}`. Please see the [README](https://github.com/snowplow/dbt-snowplow-web/tree/main/custom_example) in the `custom_example` directory for more information on this sort of implementation. | `"{{ ref( 'snowplow_web_sessions' ) }}"` |
@@ -66,14 +67,14 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 
 Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/#shredded-data) approach for the context tables, so thee variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
 
-| Variable Name                   | Default                                                                            |
-| ------------------------------- | ---------------------------------------------------------------------------------- |
-| `page_view_context`             | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_web_page_1') }}"`            |
-| `iab_context`                   | `"{{ source('atomic', 'com_iab_snowplow_spiders_and_robots_1') }}"`                |
-| `ua_parser_context`             | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_ua_parser_context_1') }}"`   |
-| `yauaa_context`                 | `"{{ source('atomic', 'nl_basjes_yauaa_context_1') }}"`                            |
-| `snowplow__consent_cmp_visible` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_cmp_visible_1') }}"`         |
-| `snowplow__consent_preferences` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_consent_preferences_1') }}"` |
+| Variable Name         | Default                                                                            |
+| --------------------- | ---------------------------------------------------------------------------------- |
+| `page_view_context`   | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_web_page_1') }}"`            |
+| `iab_context`         | `"{{ source('atomic', 'com_iab_snowplow_spiders_and_robots_1') }}"`                |
+| `ua_parser_context`   | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_ua_parser_context_1') }}"`   |
+| `yauaa_context`       | `"{{ source('atomic', 'nl_basjes_yauaa_context_1') }}"`                            |
+| `consent_cmp_visible` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_cmp_visible_1') }}"`         |
+| `consent_preferences` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_consent_preferences_1') }}"` |
 
 
 | Variable Name        | Description                                                                                                                                                                                                                                                                                    | Default |

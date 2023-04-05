@@ -12,18 +12,18 @@ The Snowplow Tag can also construct Snowplow events from other GTM SS Clients su
 
 ### Tag Manager Gallery
 
-- From the Templates tab in GTM SS, click "Search Gallery" in the Tag Templates section
-- Search for "Snowplow" and select the official "By Snowplow" tag
-- Click Add to Workspace
-- Accept the permissions dialog by clicking "Add"
+1. From the Templates tab in GTM SS, click "Search Gallery" in the Tag Templates section
+2. Search for "Snowplow" and select the official "By Snowplow" tag
+3. Click Add to Workspace
+4. Accept the permissions dialog by clicking "Add"
 
 ## Snowplow Tag Setup
 
 With the template installed, you can now add the Snowplow Tag to your GTM SS Container.
 
-- From the Tag tab, select "New", then select the Snowplow Tag as your Tag Configuration
-- Select your desired Trigger - If using the Snowplow JavaScript Tracker and Snowplow Client, you want to select "All Events"
-- Enter your Snowplow Collector Endpoint, and confirm the Cookie Name matches that of your Collector
-- Click Save
+1. From the Tag tab, select "New", then select the Snowplow Tag as your Tag Configuration
+2. Select your desired Trigger - If using the Snowplow JavaScript Tracker and Snowplow Client, you want to select "All Events"
+3. Enter your Snowplow Collector Endpoint, and confirm the Cookie Name matches that of your Collector
+4. Click Save
 
 ![](images/tagsetup.gif)

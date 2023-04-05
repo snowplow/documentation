@@ -12,16 +12,16 @@ The tag is designed to work best with Self Describing Events, and atomic events,
 
 ### Tag Manager Gallery
 
-- From the Templates tab in GTM Server Side, click “Search Gallery” in the Tag Templates section
-- Search for “Amplitude HTTP API V2” and select the official “By Snowplow” tag
-- Click Add to Workspace
-- Accept the permissions dialog by clicking “Add”
+1. From the Templates tab in GTM Server Side, click “Search Gallery” in the Tag Templates section
+2. Search for “Amplitude HTTP API V2” and select the official “By Snowplow” tag
+3. Click Add to Workspace
+4. Accept the permissions dialog by clicking “Add”
 
 ## Amplitude Tag Setup
 
 With the template installed, you can now add the Amplitude Tag to your GTM SS Container.
 
-- From the Tag tab, select "New", then select the Amplitude Tag as your Tag Configuration
-- Select your desired Trigger for the events you wish to forward to Amplitude
-- Enter your Amplitude API Key for a HTTP API integration. This can be retrieved from Amplitude Data Sources within your Amplitude project.
-- Click Save
+1. From the Tag tab, select "New", then select the Amplitude Tag as your Tag Configuration
+2. Select your desired Trigger for the events you wish to forward to Amplitude
+3. Enter your Amplitude API Key for a HTTP API integration. This can be retrieved from Amplitude Data Sources within your Amplitude project.
+4. Click Save

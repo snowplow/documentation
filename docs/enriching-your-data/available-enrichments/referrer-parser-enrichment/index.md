@@ -15,6 +15,12 @@ This is particularly useful when looking for specific traffic from search engine
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/referer_parser/jsonschema/2-0-0)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/referer_parser.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 Snowplow has several subdomains like _console.snowplowanalytics.com_ and _discourse.snowplowanalytics.com_. As users move from these subdomains to our main _snowplowanalytics.com_ domain, we would like to capture that traffic as being referred internally. Therefore we would set the configuration as such:
 
 ```json

@@ -17,6 +17,12 @@ Their internationally recognized list of spiders and bots is regularly maintaine
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/iab_spiders_and_robots_enrichment/jsonschema/1-0-0)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/iab_spiders_and_robots_enrichment.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 There are three fields that can be added to the `parameters` section of the enrichment configuration JSON:
 
 - `ipFile`

@@ -9,11 +9,10 @@ hide_table_of_contents: true
 * Getting familiar with Snowplow
 * Debugging and testing, including [automated testing](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/index.md)
 
-Just like a real Snowplow pipeline, Micro receives and validates events sent by your [tracking code](/docs/collecting-data/collecting-from-own-applications/index.md).
+Just like a real Snowplow pipeline, Micro receives, validates and enriches events sent by your [tracking code](/docs/collecting-data/collecting-from-own-applications/index.md).
 
 Unlike a real pipeline, Micro is missing a few features:
-* It does not run [enrichments](/docs/enriching-your-data/index.md) (yet).
-* It does not store the events in a data warehouse or database (yet), although [an API is available](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md) to look at the data.
+* It does not store the events in a data warehouse or database, although [an API is available](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md) to look at the data.
 * It’s not meant for production traffic.
 
 Follow [these instructions](/docs/getting-started-with-micro/basic-usage/index.md) to get started in minutes.

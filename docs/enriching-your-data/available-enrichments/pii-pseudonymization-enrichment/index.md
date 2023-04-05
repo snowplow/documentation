@@ -15,6 +15,12 @@ In Europe the obligations regarding Personal Data handling have been outlined on
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-0)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/pii_enrichment_config.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 Two types of fields can be configured to be hashed:
 
 - `pojo`: field that is effectively a scalar field in the enriched event (full list of fields that can be pseudonymized [here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-0#L43-L60))

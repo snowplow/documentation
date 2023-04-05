@@ -4,9 +4,15 @@ date: "2020-02-14"
 sidebar_position: 10
 ---
 
+
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Description
 
-This enrichment lets you write a JavaScript function which is executed in the enrichment process for each enriched event. Use this enrichment to apply your own business logic to your enriched events at the row-level.
+This enrichment lets you write a JavaScript function which is executed in the enrichment process for each enriched event. Use this enrichment to apply your own business logic to your enriched events at the row level.
 
 ## Overview
 
@@ -16,9 +22,11 @@ Through this functionality the ability to “data widen” your events at the ro
 
 Since your company has a unique set of customers and likely a unique set of data points that speak towards the behavioural interactions customers have with your site or applications, the more information you can capture at the time of the event means the more insight you can find in the analysis of those events.
 
-JavaScript Language Features
+:::tip JavaScript Language Features
 
-JavaScript enrichment uses [Nashorn Engine](https://docs.oracle.com/javase/10/nashorn/introduction.htm) and since version 3.0.0 of enrich, many features of ECMAScript 6 are supported. Please refer to [this page](http://openjdk.java.net/jeps/292) to know what is supported. About the uncertainty mentioned, our testing shows that classes and generators don't work, but tail calls do.
+JavaScript enrichment uses [Nashorn Engine](https://docs.oracle.com/javase/10/nashorn/introduction.htm) and since version 3.0.0 of Enrich, many features of ECMAScript 6 are supported. Please refer to [this page](http://openjdk.java.net/jeps/292) to know what is supported. About the uncertainty mentioned, our testing shows that classes and generators don't work, but tail calls do.
+
+:::
 
 ## Configuration
 
@@ -130,6 +138,117 @@ Manipulating your event stream with Javascript is powerful, but can be dangerous
 - try to share state across multiple enriched events – write your own Scalding or Spark job instead
 - include CPU-intensive tasks without being aware of the impact on your event processing time
 - allow untrusted parties to write your script – the script has access to the Java standard library and therefore to your filesystem.
+
+## Testing your enrichment
+
+You can test your enrichment with [Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) before adding it to your production pipeline. Follow the Micro [usage guide](/docs/getting-started-with-micro/configuring-enrichments/index.md) to set up Micro and configure it to use your enrichment.
+
+:::tip Testing `.js` files directly
+
+One trick up Micro’s sleeve is that while you can add the full enrichment configuration in a JSON file (with your JavaScript encoded in base64), you can also just drop a `.js` file in your enrichments folder. Micro will interpret it as JavaScript enrichment code. This way, you don’t need to keep converting your enrichment to base64 as you iterate on it. _(Make sure to either use a `.json` or a `.js` file, but not both.)_
+
+:::
+
+Let’s walk through an example.
+
+### Step 1. Write your enrichment
+
+Suppose you want to add avocados to all your events:
+
+```js title="avocado.js"
+function process(event) {
+    return [{
+        schema: "iglu:com.snowplowanalytics.snowplow/add_to_cart/jsonschema/1-0-0",
+        data:  { sku: "avocado", quantity: "a lot" }
+    }]
+}
+```
+
+### Step 2. Run Micro
+
+Run this command:
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 \\
+  --mount type=bind,source=$(pwd)/avocado.js,destination=/config/enrichments/avocado.js \\
+  snowplow/snowplow-micro:${versions.snowplowMicro}`
+}</CodeBlock>
+
+You should see this line in the output:
+
+```
+[INFO] com.snowplowanalytics.snowplow.micro.Main$ - Enabled enrichments: JavascriptScriptEnrichment
+```
+
+### Step 3. Send some events
+
+Point some tracking code at `localhost:9090` and fire some events. There are more details on this in the Micro [usage guide](/docs/getting-started-with-micro/basic-usage/index.md#sending-events-to-micro).
+
+### Step 4. Look at the results
+
+If you followed these steps, you will discover that the enrichment is wrong! The `quantity` field in the `add_to_cart` schema has to be a number. A look at the output from Micro confirms this:
+
+```
+[WARN] EventLog - BAD {
+  "schemaKey" : "iglu:com.snowplowanalytics.snowplow/add_to_cart/jsonschema/1-0-0",
+  "error" : {
+    "error" : "ValidationError",
+    "dataReports" : [
+      {
+        "message" : "$.quantity: string found, number expected",
+        "path" : "$.quantity",
+        "keyword" : "type",
+        "targets" : [
+          "string",
+          "number"
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Step 5. Fix the code
+
+Let’s scale this down to just 1 avocado:
+
+```js title="avocado.js"
+function process(event) {
+    return [{
+        schema: "iglu:com.snowplowanalytics.snowplow/add_to_cart/jsonschema/1-0-0",
+        data:  { sku: "avocado", quantity: 1 }
+    }]
+}
+```
+
+### Step 6. Confirm everything works
+
+Restart Micro and send more events. You can use the [Micro API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md) to inspect the events in detail:
+
+```bash
+curl localhost:9090/micro/good
+```
+
+You should see the new context being added:
+
+```json
+...
+"derived_contexts": {
+  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+  "data": [
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/add_to_cart/jsonschema/1-0-0",
+      "data": {
+        "sku": "avocado",
+        "quantity": 1
+      }
+    }
+  ]
+}
+...
+```
+
+Et voilà!
 
 ## Uploading a custom JavaScript enrichment to Snowplow BDP
 

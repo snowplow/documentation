@@ -21,6 +21,12 @@ If you’d like support in setting up or configuring this enrichment please cont
 - [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/api_request_enrichment_config/jsonschema/1-0-1)
 - [example](https://github.com/snowplow/enrich/blob/master/config/enrichments/api_request_enrichment_config.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 The example configuration is using imaginary api.acme.com RESTful service to widen Snowplow event with context containing information about users. To find real-world example you can check our extensive tutorial on [Integrating Clearbit data into Snowplow using the API Request Enrichment](https://discourse.snowplow.io/t/integrating-clearbit-data-into-snowplow-using-the-api-request-enrichment/210).
 
 The configuration JSON for this enrichment contains four sub-objects:

@@ -15,6 +15,12 @@ The conversion is done by the enrich job at processing time with Open Exchange R
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/currency_conversion_config/jsonschema/1-0-0)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/currency_conversion_config.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 | **Field** | **Description** |
 | --- | --- |
 | `accountType` | Level of Open Exchange Rates account. Must be “developer”, “enterprise”, or “unlimited”. |

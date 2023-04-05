@@ -32,7 +32,7 @@ with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1',
 select
     a.*,
     b.yauaa_context_agent_name_version
-from {{ ref('snowplow_web_base_events_this_run) }} a
+from {{ ref('snowplow_web_base_events_this_run') }} a
 left join nl_basjes_yauaa_context_1 b on 
     a.event_id = b.yauaa_context__id 
     and a.collector_tstamp = b.yauaa_context__tstamp
@@ -54,7 +54,7 @@ with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1',
 select`
     a.*,
     b.yauaa_context_agent_name_version
-from {{ ref('snowplow_web_base_events_this_run) }} a
+from {{ ref('snowplow_web_base_events_this_run') }} a
 left join nl_basjes_yauaa_context_1 b on 
     a.event_id = b.yauaa_context__id 
     and a.collector_tstamp = b.yauaa_context__tstamp

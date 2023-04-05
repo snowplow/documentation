@@ -17,18 +17,18 @@ The Braze Tag for GTM SS allows events to be forwarded to [Braze](https://www.br
 
 ### Manual Installation
 
-- Download [the template file](https://github.com/snowplow/snowplow-gtm-server-side-braze-tag/blob/main/template.tpl) `template.tpl` – Ctrl+S (Win) or Cmd+S (Mac) to save the file, or right click the link on this page and select "Save Link As…"
-- Create a new Tag in the Templates section of a Google Tag Manager Server container
-- Click the More Actions menu, in the top right hand corner, and select Import
-- Import `template.tpl` downloaded in Step 1
-- Click Save
+1. Download [the template file](https://github.com/snowplow/snowplow-gtm-server-side-braze-tag/blob/main/template.tpl) `template.tpl` – Ctrl+S (Win) or Cmd+S (Mac) to save the file, or right click the link on this page and select "Save Link As…"
+2. Create a new Tag in the Templates section of a Google Tag Manager Server container
+3. Click the More Actions menu, in the top right hand corner, and select Import
+4. Import `template.tpl` downloaded in Step 1
+5. Click Save
 
 ## Braze Tag Setup
 
 With the template installed, you can now add the Braze Tag to your GTM SS Container.
 
-- From the Tag tab, select “New”, then select the Braze Tag as your Tag Configuration
-- Select your desired Trigger for the events you wish to forward to Braze.
-- Enter the required parameters and then optionally
-- [Configure the tag](/docs/destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/braze-tag-configuration/index.md) to customize your Braze Tag.
-- Click Save
+1. From the Tag tab, select “New”, then select the Braze Tag as your Tag Configuration
+2. Select your desired Trigger for the events you wish to forward to Braze.
+3. Enter the required parameters and then optionally
+4. [Configure the tag](/docs/destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/braze-tag-configuration/index.md) to customize your Braze Tag.
+5. Click Save

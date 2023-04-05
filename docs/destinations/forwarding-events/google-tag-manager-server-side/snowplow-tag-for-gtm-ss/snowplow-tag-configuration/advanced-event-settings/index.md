@@ -150,7 +150,7 @@ dataLayer.push({
 });
 ```
 
-We are using the Snowplow GTM-SS Tag to forward it to our Snowplow pipeline, and we want to attach context entities. For our example, let's say:
+We are using the Snowplow GTM SS Tag to forward it to our Snowplow pipeline, and we want to attach context entities. For our example, let's say:
 
 - our `tutorial` Snowplow entity corresponds to this schema
 
@@ -184,7 +184,7 @@ We are using the Snowplow GTM-SS Tag to forward it to our Snowplow pipeline, and
 
 - we also want user information, so we will use the `user_data` context entity ([available in Iglu Central](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.tag-manager.server-side/user_data/jsonschema/1-0-0)) attached to all events as well.
 
-Then we can configure the Snowplow GTM-SS Tag's Context entities settings as:
+Then we can configure the Snowplow GTM SS Tag's Context entities settings as:
 
 ![context entities settings example A](images/context_entities_settings_example.png)
 
@@ -208,7 +208,7 @@ As you can see in the images above, the schema for an entity can be written in 2
 
 :::
 
-#### 2. GTM-SS Variables
+#### 2. GTM SS Variables
 
 As mentioned, it is also possible to reference GTM Server-side Variables in order to set both the Custom and the Global context entities. As a simple example:
 

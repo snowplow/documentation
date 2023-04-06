@@ -2,6 +2,12 @@
 title: "E-commerce"
 sidebar_position: 105
 ---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 ## Model Configuration
 
 This packages make use of a series of other variables, which are all set to the recommend values for the operation of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
@@ -58,22 +64,6 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | Variable Name        | Description                                                                                                                                                                                                                                                                                          | Default |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `databricks_catalog` | The catalogue your atomic events table is in. Depending on the use case it should either be the catalog (for Unity Catalog users from databricks connector 1.1.1 onwards, defaulted to `hive_metastore`) or the same value as your `snowplow__atomic_schema` (unless changed it should be 'atomic'). |         |
-
-</TabItem>
-<TabItem value="redshift+postgres" label="Redshift & Postgres">
-
-Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/#shredded-data) approach for the context tables, so thee variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
-
-| Variable Name                     | Default                                                                  |
-| --------------------------------- | ------------------------------------------------------------------------ |
-| `context_ecommerce_user`          | `'com_snowplowanalytics_snowplow_ecommerce_user_1'`                      |
-| `context_ecommerce_checkout_step` | `'com_snowplowanalytics_snowplow_ecommerce_checkout_step_1'`             |
-| `context_ecommerce_page`          | `'com_snowplowanalytics_snowplow_ecommerce_page_1'`                      |
-| `context_ecommerce_transaction`   | `'com_snowplowanalytics_snowplow_ecommerce_transaction_1'`               |
-| `context_ecommerce_cart`          | `'com_snowplowanalytics_snowplow_ecommerce_cart_1'`                      |
-| `sde_ecommerce_action`            | `'com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1'` |
-| `context_web_page`                | `'com_snowplowanalytics_snowplow_web_page_1'`                            |
-| `context_ecommerce_product`       | `'com_snowplowanalytics_snowplow_ecommerce_product_1'`                   |
 
 </TabItem>
 <TabItem value="bigquery" label="Bigquery" default>

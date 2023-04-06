@@ -2,6 +2,12 @@
 title: "Media Player"
 sidebar_position: 103
 ---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 ## Model Configuration
 
 This packages make use of a series of other variables, which are all set to the recommend values for the operation of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
@@ -38,7 +44,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift+postgres" label="Redshift & Postgres">
 
-Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/#shredded-data) approach for the context tables, so thee variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
+Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
 
 | Variable Name                           | Default                                                                           |
 | --------------------------------------- | --------------------------------------------------------------------------------- |

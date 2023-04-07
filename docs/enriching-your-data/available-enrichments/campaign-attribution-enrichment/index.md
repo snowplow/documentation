@@ -37,6 +37,12 @@ In addition, this enrichment automatically knows about Google (corresponding to 
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/campaign_attribution/jsonschema/1-0-1)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/campaign_attribution.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 ### Basic usage
 
 Here’s an example for standard Google parameters. It specifies that the `utm_medium` parameter in the query string will map to the `mkt_medium` field in the event, and so on.

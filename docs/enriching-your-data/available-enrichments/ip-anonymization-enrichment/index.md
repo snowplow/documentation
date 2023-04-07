@@ -15,6 +15,12 @@ This enrichment runs after [IP lookup enrichment](/docs/enriching-your-data/avai
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/anon_ip/jsonschema/1-0-1)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/anon_ip.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 The number of octets (IPv4) to anonymize is specified with `anonOctets` and the number of segments (IPv6) to anonymize is specified with `anonSegments`.
 
 For example anonymizing one octet would change an IPv4 address of 255.255.255.255 to 255.255.255.x, and anonymizing three octets would change it to 255.x.x.x.

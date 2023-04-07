@@ -40,6 +40,12 @@ Alternatively, in the second method, you can put a `meta` tag in the header seci
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/yauaa_enrichment_config/jsonschema/1-0-0)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/yauaa_enrichment_config.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 Only one parameter can be set in the configuration : `cacheSize`. This field determines the number of already parsed user agents that are kept in memory for faster processing. If set to 0, caching is disabled. If not set, a default size is used for the cache (10000).
 
 ## Input

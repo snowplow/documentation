@@ -25,3 +25,5 @@ The IAB and IP Lookups enrichments require a 3rd party database to function.
 :::
 
 To disable any enrichment, you can follow the instructions for [AWS](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2#disabling-default-enrichments) or [GCP](https://github.com/snowplow-devops/terraform-google-enrich-pubsub-ce#disabling-default-enrichments).
+
+If you are using [Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) for testing, you can configure enrichments following the [usage guide](/docs/getting-started-with-micro/configuring-enrichments/index.md).

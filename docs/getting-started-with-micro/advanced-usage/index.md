@@ -1,7 +1,7 @@
 ---
 title: "Advanced usage"
-sidebar_position: 2
-description: "How to configure Snowplow Micro and expose it to the world."
+sidebar_position: 4
+description: "How to fully configure Snowplow Micro and expose it to the world."
 ---
 
 ```mdx-code-block
@@ -17,7 +17,7 @@ If you’d like to tweak the Iglu registries Micro uses, the priority between th
 
 :::tip
 
-If you are just looking for a way to add custom schemas or connect to your private Iglu registry, check out [Basic usage](/docs/getting-started-with-micro/basic-usage/index.md#adding-custom-schemas) for simpler ways to achieve that.
+If you are just looking to add custom schemas or connect to your private Iglu registry, check out [Adding custom schemas](/docs/getting-started-with-micro/adding-schemas/index.md) for simpler ways to achieve that.
 
 :::
 

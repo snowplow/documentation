@@ -11,6 +11,12 @@ This enrichment can extract name/value pairs from the HTTP headers and attach th
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/http_header_extractor_config/jsonschema/1-0-0)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/http_header_extractor_config.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 All the headers that will match the regex defined in `headersPattern` parameter will be attached to the event.
 
 In the example configuration, all the headers of the request would be attached to the event.

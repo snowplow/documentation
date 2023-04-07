@@ -15,6 +15,12 @@ This is helpful when de-duplicating events.
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/event_fingerprint_config/jsonschema/1-0-1)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/event_fingerprint_enrichment.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 `hashAlgorithm` determines the algorithm that should be used to calculate the hash. Supported hashing algorithms are:
 
 - [MD5](https://en.wikipedia.org/wiki/MD5)

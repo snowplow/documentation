@@ -26,6 +26,12 @@ For help with configuring this enrichment and getting it live on your pipeline p
 - [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/sql_query_enrichment_config/jsonschema/1-0-0)
 - [example](https://github.com/snowplow/enrich/blob/master/config/enrichments/sql_query_enrichment_config.json)
 
+```mdx-code-block
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+
+<TestingWithMicro/>
+```
+
 ## Hypothetical example
 
 Below you can see an example configuration using imaginary PostgreSQL database with CRM data, used to widen Snowplow event with context containing information about users.

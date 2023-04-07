@@ -103,29 +103,41 @@ If you wish to map other properties from a Client event into an Amplitude event 
 
 ![](images/03-gtm-ss-amplitude.png)
 
-#### Event Property Rules
+### Event Property Rules
 
-##### Include common event properties
+#### Include common event properties
 
 Enabling this ensures properties from the [Common Event](https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data) are automatically mapped to the Amplitude Event Properties.
 
-##### Additional Event Property Mapping Rules
+#### Additional Event Property Mapping Rules
 
 Specify the Property Key from the Client Event, and then the key you could like to map it to or leave the mapped key blank to keep the same name. You can use Key Path notation here (e.g. `x-sp-tp2.p` for a Snowplow events platform or `x-sp-contexts.com_snowplowanalytics_snowplow_web_page_1.0.id` for a Snowplow events page view id (in array index 0) or pick non-Snowplow properties if using an alternative Client. These keys will populate the Amplitude `eventProperties` object.
 
-#### User Property Rules
+### User Property Rules
 
-##### Include common user properties
+#### Include common user properties
 
 Enabling this ensures user_data properties from the [Common Event](https://developers.google.com/tag-platform/tag-manager/server-side/common-event-data) are automatically mapped to the Amplitude Event Properties.
 
-##### Map Snowplow mkt fields (standard UTM parameters) to user properties
+#### Map Snowplow mkt fields (standard UTM parameters) to user properties
 
 Enabling this option automatically maps all the marketing (`mkt_` prefixed) fields of the Snowplow event to the standard UTM parameters in Amplitude's user properties.
 
-##### Additional User Property Mapping Rules
+#### Additional User Property Mapping Rules
 
 Specify the Property Key from the Client Event, and then the key you could like to map it to or leave the mapped key blank to keep the same name. You can use Key Path notation here (e.g. `x-sp-tp2.p` for a Snowplow events platform or `x-sp-contexts.com_snowplowanalytics_snowplow_web_page_1.0.id` for a Snowplow events page view id (in array index 0) or pick non-Snowplow properties if using an alternative Client. These keys will populate the Amplitude `eventProperties` object.
+
+### Groups Property Rules
+
+:::note
+
+This configuration option is relevant **only if** you have set up [account-level reporting in Amplitude](https://help.amplitude.com/hc/en-us/articles/115001765532).
+
+:::
+
+#### Groups Property Mapping Rules
+
+Specify the Property Key from the GTM Event, and the key you would like to map it to or leave the mapped key blank to keep the same name. You can use Key Path notation here (e.g. `x-sp-tp2.p` for a Snowplow events platform or `x-sp-contexts.com_snowplowanalytics_snowplow_web_page_1.0.id` for a Snowplow events page view id (in array index 0). These keys will populate the Amplitude `groups` object.
 
 ## Additional Properties
 

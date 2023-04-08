@@ -70,7 +70,7 @@ After running Micro as above, you just need to expose the port:
 <Tabs groupId="exposing-micro" queryString>
   <TabItem value="ngrok" label="ngrok" default>
 
-[Download](https://ngrok.com/download) ngrok, then run this command:
+[Sign up](https://dashboard.ngrok.com/signup), [download](https://ngrok.com/download) ngrok and follow the instructions to authenticate your client. Then run this command:
 
 ```bash
 ngrok http 9090
@@ -93,7 +93,7 @@ Then run this command:
 lt --port 9090
 ```
 
-You will see the publicly available URL in the output.
+You will see the publicly available URL in the output. Before use, visit this URL in your web browser and click “Continue”.
 
   </TabItem>
 </Tabs>

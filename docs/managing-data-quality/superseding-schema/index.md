@@ -178,3 +178,19 @@ Things to keep in mind while submitting superseding information:
 * A schema can't supersede schema with greater version than itself.
 * Superseding schema info can be overwritten with submitting same schema with different superseding information. Note that this will only overwrite superseding info. The content of the schema won't be overwritten.
 * This feature allows to create chain of superseding schemas. In this case, when the last schema in the chain is superseded by another schema, all the schemas in the chain will be superseded by the new schema as well. For example, let's say `1-0-0` is superseded by `1-0-1` initially. Later, we create a new schema `1-0-2` that supersedes `1-0-1`. In this case, both `1-0-1` and `1-0-0` will be superseded by `1-0-2`. Later, we create `1-0-3` that supersedes `1-0-2`. In that case, `1-0-0`, `1-0-1` and `1-0-2` will be superseded by `1-0-3`.
+
+## What will happen when Enrich receives an event with superseded schema
+
+When Enrich receives an event with superseded schema, initially respective entity will be validated with superseding schema. If the validation is successful, the schema version of the entity will be replaced with the superseding schema's version. Lastly, a new context will be added to event to specify the actual schema version entity validated with. Let's go over an example to make it more clear:
+
+Let's say `iglu:com.acme/geolocation/jsonschema/1-0-0` is superseded by `iglu:com.acme/geolocation/jsonschema/1-0-1`. Enrich receives an event that contains a context with `iglu:com.acme/geolocation/jsonschema/1-0-0`. In that case, respective context will be validated with `iglu:com.acme/geolocation/jsonschema/1-0-1` instead of `1-0-0` because `1-0-0` is superseded by `1-0-1`. Then, the schema version `1-0-0` will be replaced with `1-0-1` in the enriched event's respective context. Also, following context will be added to enriched event:
+```
+{
+        "schema": "iglu:com.snowplowanalytics.iglu/validation_info/jsonschema/1-0-0",
+        "data": {
+                "originalSchema": "iglu:com.acme/geolocation/jsonschema/1-0-0",
+                "validatedWith": "1-0-1"
+        }
+}
+```
+This context states that there was an entity with `iglu:com.acme/geolocation/jsonschema/1-0-0` originally however it's schema version replaced with `1-0-1` since `1-0-0` was superseded by `1-0-1`.

@@ -1670,7 +1670,7 @@ Given a pattern, finds and returns all schemas that match that pattern. Note tha
 
 <h4>Description</h4>
 
-This macro exists for Redshift and Postgres users to more easily select their self-describing event and context tables and apply de-duplication before joining onto their (already de-duplicated) events table. The `root_id` and `root_tstamp` columns are by default returned as `schema_name_id` and `schema_name_tstamp` respectively, where `schema_name` is the value in the `schema_name` column of the table. 
+This macro exists for Redshift and Postgres users to more easily select their self-describing event and context tables and apply de-duplication before joining onto their (already de-duplicated) events table. The `root_id` and `root_tstamp` columns are by default returned as `schema_name_id` and `schema_name_tstamp` respectively, where `schema_name` is the value in the `schema_name` column of the table. In the case where multiple entities may be sent in the context (e.g. products in a search results), you should set the `single_entity` argument to `false` and use an additional criteria in your join (see [the snowplow docs](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/) for further details).
 
 Note that is the responsibility of the user to ensure they have no duplicate names when using this macro multiple times or when a schema column name matches on already in the events table. In this case the `prefix` argument should be used and aliasing applied to the output.
 
@@ -1687,11 +1687,12 @@ Note that is the responsibility of the user to ensure they have no duplicate nam
 <h4>Returns</h4>
 
 
-CTE sql for deduplicated records from the schema table, without the schema details columns. The final CTE is the name of the original table.
+CTE sql for deduplicating records from the schema table, without the schema details columns. The final CTE is the name of the original table.
 
 <h4>Usage</h4>
 
 
+With at most one entity per context:
 ```sql
 with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1', "'2023-01-01'", "'2023-02-01'")}}
 
@@ -1699,8 +1700,20 @@ select
 ...
 from my_events_table a
 left join nl_basjes_yauaa_context_1 b on 
-    a.event_id = b.yauaa_context_id 
-    and a.collector_tstamp = b.yauaa_context_tstamp
+    a.event_id = b.yauaa_context__id 
+    and a.collector_tstamp = b.yauaa_context__tstamp
+```
+With the possibility of multiple entities per context, your events table must already be de-duped but still have a field with the number of duplicates:
+```sql
+with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1', "'2023-01-01'", "'2023-02-01'", single_entity = false)}}
+
+select
+...
+from my_events_table a
+left join nl_basjes_yauaa_context_1 b on 
+    a.event_id = b.yauaa_context__id 
+    and a.collector_tstamp = b.yauaa_context__tstamp
+    and mod(b.yauaa_context__index, a.duplicate_count) = 0
 ```
 
 
@@ -1715,8 +1728,8 @@ left join nl_basjes_yauaa_context_1 b on
 <TabItem value="raw" label="raw" default>
 
 ```jinja2
-{% macro get_sde_or_context(schema, identifier, lower_limit, upper_limit, prefix = none) %}
-    {{ return(adapter.dispatch('get_sde_or_context', 'snowplow_utils')(schema, identifier, lower_limit, upper_limit, prefix)) }}
+{% macro get_sde_or_context(schema, identifier, lower_limit, upper_limit, prefix = none, single_entity = true) %}
+    {{ return(adapter.dispatch('get_sde_or_context', 'snowplow_utils')(schema, identifier, lower_limit, upper_limit, prefix, single_entity)) }}
 {% endmacro %}
 ```
 
@@ -1724,8 +1737,10 @@ left join nl_basjes_yauaa_context_1 b on
 <TabItem value="default" label="default">
 
 ```jinja2
-{% macro default__get_sde_or_context() %}
-    {% do exceptions.raise_compiler_error('Macro get_sde_or_context is only for Postgres or Redshift, it is not supported for' ~ target.type) %}
+{% macro default__get_sde_or_context(schema, identifier, lower_limit, upper_limit, prefix = none, single_entity = true) %}
+    {% if execute %}
+        {% do exceptions.raise_compiler_error('Macro get_sde_or_context is only for Postgres or Redshift, it is not supported for' ~ target.type) %}
+    {% endif %}
 {% endmacro %}
 ```
 
@@ -1733,7 +1748,7 @@ left join nl_basjes_yauaa_context_1 b on
 <TabItem value="postgres" label="postgres">
 
 ```jinja2
-{% macro postgres__get_sde_or_context(schema, identifier, lower_limit, upper_limit, prefix = none) %}
+{% macro postgres__get_sde_or_context(schema, identifier, lower_limit, upper_limit, prefix = none, single_entity = true) %}
     {# Create a relation from the inputs then get all columns in that context/sde table #}
     {% set relation = api.Relation.create(schema = schema, identifier = identifier) %}
     {# Get the schema name to be able to alias the timestamp and id #}
@@ -1744,6 +1759,7 @@ left join nl_basjes_yauaa_context_1 b on
     {%- set schema_name = dbt_utils.get_single_value(schema_get_query) -%}
     {# Get the columns to loop over #}
     {%- set columns = adapter.get_columns_in_relation(relation) -%}
+
     {% set sql %}
         {{'dd_' ~ identifier }} as (
             select
@@ -1753,7 +1769,11 @@ left join nl_basjes_yauaa_context_1 b on
                     {{ col.quoted }},
                 {%- endif -%}
             {% endfor %}
+            {% if single_entity %}
                 row_number() over (partition by root_id order by root_tstamp) as dedupe_index -- keep the first event for that root_id
+            {% else %}
+                row_number() over (partition by {% for item in columns | map(attribute='quoted') %}{{item}}{%- if not loop.last %},{% endif %}{% endfor -%} ) as dedupe_index -- get the index across all columns for the entity
+            {% endif %}
             from
                 {{ relation }}
             {% if upper_limit and lower_limit -%}
@@ -1761,7 +1781,6 @@ left join nl_basjes_yauaa_context_1 b on
                     root_tstamp >= {{ lower_limit }}
                     and root_tstamp <= {{ upper_limit }}
             {% endif %}
-
         ),
 
         {{identifier}} as (
@@ -1772,12 +1791,17 @@ left join nl_basjes_yauaa_context_1 b on
                 {%- endif -%}
             {% endfor -%}
             {# Rename columns that we know exist in every schema based table #}
-                root_tstamp as {% if prefix %}{{ adapter.quote(prefix ~ '_tstamp') }}{% else %}{{ adapter.quote(schema_name ~ '_tstamp') }}{% endif %},
-                root_id as {% if prefix %}{{ adapter.quote(prefix ~ '_id') }}{% else %}{{ adapter.quote(schema_name ~ '_id') }}{% endif %}
+            {% if not single_entity %}
+                dedupe_index as {% if prefix %}{{ adapter.quote(prefix ~ '__index') }}{% else %}{{ adapter.quote(schema_name ~ '__index') }}{% endif %}, -- keep track of this for the join
+            {% endif %}
+                root_tstamp as {% if prefix %}{{ adapter.quote(prefix ~ '__tstamp') }}{% else %}{{ adapter.quote(schema_name ~ '__tstamp') }}{% endif %},
+                root_id as {% if prefix %}{{ adapter.quote(prefix ~ '__id') }}{% else %}{{ adapter.quote(schema_name ~ '__id') }}{% endif %}
             from
                 {{'dd_' ~ identifier }}
+            {% if single_entity %}
             where
                 dedupe_index = 1
+            {% endif %}
         )
 
     {% endset %}

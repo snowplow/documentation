@@ -25,6 +25,8 @@ Wherever possible we would advise always versioning the schema when making a cha
 
 Overwriting in your Production environment is forbidden due to the technology that auto-adjusts your tables, so when you promote an overwritten version to the Production environment you are required to increase the version as Breaking or Non-Breaking.
 
+The alternative to overwriting schemas is superseding schemas. Instead of overwriting schemas, you can create a new version of the schema, and specify that new version supersedes older version. After this, the schema version of the entities with the superseded schema will be replaced with the superseding version. More information about the superseding schemas can be found [here](/docs/understanding-tracking-design/versioning-your-data-structures/superseding-schema/index.md).
+
 ### Incrementing the middle digit
 
 For particular workflows you may want to make use of the middle digital as part of your versioning strategy. For simplicity, the UI allows only breaking or non-breaking changes.

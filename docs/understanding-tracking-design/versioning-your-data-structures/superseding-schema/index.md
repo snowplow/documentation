@@ -9,6 +9,14 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
+:::note
+
+You need >= Enrich 3.8.0 and >= Iglu Server 0.10.0 to be able to use this feature.
+
+No additional configuration change is required on Enrich or on Iglu Server to make superseding schema feature work.
+
+:::
+
 One of the most powerful features of Snowplow is schemas.
 
 Schemas define the structure of the data that you collect. Each schema defines what fields are recorded with each event that is captured, and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/understanding-tracking-design/understanding-events-entities/index.md). You can get more information about schemas in [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md).
@@ -103,27 +111,6 @@ When this schema submitted to Iglu Server, information of `1-0-1` superseding `1
   `}</CodeBlock> 
 </details>
 Note the `$supersededBy` field in there. This field specifies that if an event is received with `1-0-0` version of that schema, version should be replaced with `1-0-1` and the respective entity will be validated with `1-0-1` instead. This operation is performed on Enrich.
-
-## Upgrading components for superseding schema feature
-
-You need >= Enrich 3.8.0 and >= Iglu Server 0.10.0 to be able to use this feature.
-
-While upgrading Iglu Server to 0.10.0, you need to add new `superseded_by` column to `iglu_schemas` table. You can do this either with the following command:
-```bash
-# Replace ${config-folder} with a path to folder where your Iglu Server config resides
-# Rename your config file name to iglu-config.hocon
-docker run \
-  -v /${config-folder}/config:/snowplow/config \
-  snowplow/iglu-server:0.10.0 \
-  setup --config "/snowplow/config/iglu-config.hocon" --migrate 0.9.0
-```
-
-or with running the following SQL statement in your database:
-```sql
-ALTER TABLE iglu_schemas ADD COLUMN superseded_by VARCHAR(32);
-```
-
-No additional configuration change is required on Enrich or on Iglu Server to make superseding schema feature work.
 
 ## How to add superseding information to schema
 

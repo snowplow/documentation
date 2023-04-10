@@ -61,6 +61,8 @@ Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standa
 ```json
 {
   "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$supersedes": ["1-0-0", "1-0-1"],
+  "$supersededBy": "1-0-3",
   "description": "Schema for an example event",
   "self": {
     "vendor": "com.snowplowanalytics",
@@ -100,6 +102,10 @@ Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standa
 ```
 
 **“$schema”** - this argument instructs the Snowplow pipeline on how to handle this schema and in most circumstances should be left as shown in the example.
+
+**“$supersedes”** - Optional. This argument is the list of the schema versions that are superseded by the current schema. When it is set, `$supersededBy` shouldn't be set. More information can be found [here](/docs/understanding-tracking-design/versioning-your-data-structures/superseding-schema/index.md).
+
+**“$supersededBy”** - Optional. This argument is the schema version that is superseding the current schema. When it is set, `$supersedes` shouldn't be set. More information can be found [here](/docs/understanding-tracking-design/versioning-your-data-structures/superseding-schema/index.md).
 
 **“description”** - This argument is where you should put detailed information on the purpose of this schema. This will be particularly helpful for others who are trying to understand the meaning of particular data or when they want to know if a schema already exists for something they want to track.
 

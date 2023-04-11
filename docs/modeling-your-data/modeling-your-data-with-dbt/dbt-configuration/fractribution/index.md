@@ -2,9 +2,10 @@
 title: "Fractribution"
 sidebar_position: 106
 ---
-## Model Configuration
 
-This packages make use of a series of other variables, which are all set to the recommend values for the operation of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
+## Package Configuration Variables
+
+This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
 :::note
 

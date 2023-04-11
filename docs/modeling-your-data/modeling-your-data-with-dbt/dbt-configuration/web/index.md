@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## Package Configuration Variables
 
-This packages make use of a series of other variables, which are all set to the recommend values for the operation of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
+This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
 :::note
 
@@ -94,7 +94,7 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 
 | Variable Name | Description                                                                                                                                                                    | Default        |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
-| `query_tag`   | This sets the value of the query_tag for all sql executed against the database. This is used internally for metric gathering in Snowflake and its value should not be changed. | `snowplow_dbt` |
+| `query_tag`   | This sets the value of the `query_tag` for all sql executed against the database. This is used internally for metric gathering in Snowflake and its value should not be changed. | `snowplow_dbt` |
 
 </TabItem>
 </Tabs>

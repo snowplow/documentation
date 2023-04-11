@@ -6,6 +6,7 @@ const plugin = () => {
     AWS: 'Amazon Web Services',
     BDP: 'Behavioral Data Platform',
     CDP: 'Customer Data Platform',
+    CLI: 'Command Line Interface',
     EC2: 'Amazon Elastic Compute Cloud',
     ECS: 'Amazon Elastic Container Service',
     ETL: 'Extract, Transform, Load',
@@ -13,6 +14,7 @@ const plugin = () => {
     GCS: 'Google Cloud Storage',
     GTM: 'Google Tag Manager',
     HAR: 'HTTP Archive',
+    IAB: 'Interactive Advertising Bureau',
     IDFA: 'Identifier for Advertisers',
     IDFV: 'Identifier for Vendors',
     KCL: 'Kinesis Client Library',
@@ -24,6 +26,7 @@ const plugin = () => {
     SQS: 'Amazon Simple Queue Service',
     UA: 'User Agent',
     VPC: 'Virtual Private Cloud',
+    YAUAA: 'Yet Another UserAgent Analyzer',
   }
   const transformer = async (ast) => {
     const find = new RegExp(

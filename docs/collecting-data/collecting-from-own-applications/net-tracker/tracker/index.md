@@ -36,7 +36,7 @@ var session = new ClientSession("client_session.dict", l: logger);
 Tracker.Instance.Start(emitter: emitter, subject: subject, clientSession: session, trackerNamespace: "some namespace", appId: "some appid", encodeBase64: true, l: logger);
 ```
 
-The `Tracker.Start(...)` and `Tracker.Stop()` methods take full responsibility for starting and stopping the threads required for processing everything asynchronously. **Do not** use any other `Start` and `Stop` functions other than the ones directly for the Tracker to prevent unknown behaviours.
+The `Tracker.Start(...)` and `Tracker.Stop()` methods take full responsibility for starting and stopping the threads required for processing everything asynchronously. **Do not** use any other `Start` and `Stop` functions other than the ones directly for the Tracker to prevent unknown behaviors.
 
 **WARNING**: The `LiteDBStorage` object must be disposed of manually after stopping the Tracker so you will need to maintain a reference to this object.
 

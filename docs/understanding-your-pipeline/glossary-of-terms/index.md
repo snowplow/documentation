@@ -53,7 +53,7 @@ The data collection and enrichment process generates a data set that is an "even
 Whilst it is possible to do analysis directly on this event stream, it is very common to:
 
 1. Join the event-stream data set with other data sets (e.g. customer data, product data, media data, marketing data, financial data).
-2. Aggregate the event-level data into smaller data sets that are easier and faster to run analyses against.
+2. Aggregate the event-level data into smaller data sets that are easier and faster to run analyzes against.
 3. Apply "business logic" i.e. definitions to the data as part of that aggregation step.
 
 What tables are produced, and the different fields available in each, varies widely between companies in different sectors, and surprisingly even varies within the same vertical. That is because part of putting together these aggregate tables involves implementing business-specific logic.
@@ -91,7 +91,7 @@ __[Read more](/docs/understanding-tracking-design/understanding-events-entities/
 
 When we set up Snowplow, we need to make sure that we track all the events that are meaningful to our business, so that the data associated with those events is available in Snowplow for analysis.
 
-When we come to analyse Snowplow data, we need to be able to look at the event data and understand, in an unambiguous way, what that data actually means i.e. what it represents.
+When we come to analyze Snowplow data, we need to be able to look at the event data and understand, in an unambiguous way, what that data actually means i.e. what it represents.
 
 An event dictionary is a crucial tool in both cases. It is a document that defines the universe of events that a company is interested in tracking.
 
@@ -123,7 +123,7 @@ The Snowplow pipeline is built to enable a very clean separation of the followin
 
 1. [Data collection](/docs/collecting-data/index.md)
 2. [Data enrichment](/docs/enriching-your-data/index.md)
-3. [Data modelling](/docs/modeling-your-data/index.md)
+3. [Data modeling](/docs/modeling-your-data/index.md)
 4. [Data analysis](/docs/tutorials/index.md)
 
 __[Read more](/docs/understanding-your-pipeline/index.md)__
@@ -196,16 +196,16 @@ __[Read more](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-
 Snowplow is an enterprise-strength marketing and product analytics platform. It does three things:
 
 - Identifies your users, and tracks the way they engage with your website or application
-- Stores your users' behavioural data in a scalable "event data warehouse" you control: in Amazon S3 and (optionally) Amazon Redshift or Postgres
-- Lets you leverage the biggest range of tools to analyze that data, including big data tools (e.g. Hive, Pig, Mahout) via EMR or more traditional tools e.g. Tableau, R, Looker, Chartio to analyze that behavioural data
+- Stores your users' behavioral data in a scalable "event data warehouse" you control: in Amazon S3 and (optionally) Amazon Redshift or Postgres
+- Lets you leverage the biggest range of tools to analyze that data, including big data tools (e.g. Hive, Pig, Mahout) via EMR or more traditional tools e.g. Tableau, R, Looker, Chartio to analyze that behavioral data
 
 __[Read more](https://snowplow.io/)__
 
 ### Storage
 
-The  enrichment process takes raw Snowplow collector logs, tidies them up, enriches them (e.g. by adding Geo-IP data, and performing referrer parsing) and then writes the output of that process back to S3 as a cleaned up set of Snowplow event files. The data in these files can be analysed directly by any big data tool that runs on EMR.
+The  enrichment process takes raw Snowplow collector logs, tidies them up, enriches them (e.g. by adding Geo-IP data, and performing referrer parsing) and then writes the output of that process back to S3 as a cleaned up set of Snowplow event files. The data in these files can be analyzed directly by any big data tool that runs on EMR.
 
-In addition, Snowplow data from those event files could be copied into Amazon Redshift, where it can be analysed using any tool that talks to PostgreSQL.
+In addition, Snowplow data from those event files could be copied into Amazon Redshift, where it can be analyzed using any tool that talks to PostgreSQL.
 
 There are therefore a number of different potential storage modules that Snowplow users can store their data in.
 
@@ -231,7 +231,7 @@ __[Read more](/docs/understanding-your-pipeline/canonical-event/index.md)__
 
 ### Tracker
 
-A tracker is client- or server-side libraries which track customer behaviour by sending Snowplow events to a Collector.
+A tracker is client- or server-side libraries which track customer behavior by sending Snowplow events to a Collector.
 
 __[Read more](/docs/collecting-data/collecting-from-own-applications/index.md)__
 

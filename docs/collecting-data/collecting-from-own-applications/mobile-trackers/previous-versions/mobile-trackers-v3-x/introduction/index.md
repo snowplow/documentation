@@ -19,8 +19,8 @@ Fine tuning of the tracker is now possible with Configuration classes.
 These are the classes for the configuration of the tracker:
 
 - `NetworkConfiguration`: to configure network connection with the Snowplow collector.
-- `TrackerConfiguration`: to configure contexts and automatic events of the tracker, and general behaviour.
-- `SessionConfiguration`: to configure session behaviour.
+- `TrackerConfiguration`: to configure contexts and automatic events of the tracker, and general behavior.
+- `SessionConfiguration`: to configure session behavior.
 - `EmitterConfiguration`: to fine tune about how the tracker sends events to the collector.
 - `SubjectConfiguration`: to specify details to send with events about the user and the platform.
 - `GdprConfiguration`: to configure the GDPR context.
@@ -49,9 +49,9 @@ Please note that cookies set by the Collector are maintained both in the iOS and
 
 #### TrackerConfiguration
 
-Represents the configuration of the tracker and the core tracker properties. The TrackerConfiguration can be used to setup the tracker behaviour indicating what should be tracked in term of automatic tracking and contexts/entities to track with the events.
+Represents the configuration of the tracker and the core tracker properties. The TrackerConfiguration can be used to setup the tracker behavior indicating what should be tracked in term of automatic tracking and contexts/entities to track with the events.
 
-- **appId**: Identifer of the app.
+- **appId**: Identifier of the app.
     
 - **devicePlatform** = mobile: It sets the device platform the tracker is running on.
     
@@ -105,7 +105,7 @@ Represents the tracker configuration from the emission perspective. It can be us
     
 - **eventStore** (optional): Custom component with full ownership for persisting events before to be sent to the collector. If it's not set the tracker will use a SQLite database as default EventStore.
     
-- **customRetryForStatusCodes** (optional, available since v3.2): Custom retry rules for HTTP status codes received in emit responses from the Collector – dictionary that maps integers (status codes) to booleans (true for retry and false for not retry). By default, the tracker retries sending events on all 3xx, 4xx, and 5xx status codes except for 400, 401, 403, 410, and 422. You may override the default behaviour using the `customRetryForStatusCodes`. Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent.
+- **customRetryForStatusCodes** (optional, available since v3.2): Custom retry rules for HTTP status codes received in emit responses from the Collector – dictionary that maps integers (status codes) to booleans (true for retry and false for not retry). By default, the tracker retries sending events on all 3xx, 4xx, and 5xx status codes except for 400, 401, 403, 410, and 422. You may override the default behavior using the `customRetryForStatusCodes`. Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent.
 
 #### SubjectConfiguration
 

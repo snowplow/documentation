@@ -104,7 +104,7 @@ Alternatively, you can set the subject for each event individually.
 
 ## Buffer Configuration
 
-Emitters use a buffer, so they can send larger payloads comprising several events, instead of sending each event immediately. You can choose the behaviour of your emitter's buffering by passing in a `BufferConfig` during initialisation. For example:
+Emitters use a buffer, so they can send larger payloads comprising several events, instead of sending each event immediately. You can choose the behavior of your emitter's buffering by passing in a `BufferConfig` during initialisation. For example:
 
 ```scala
 val emitter = Http4sEmitter.build(endpoint, bufferConfig = PayloadSize(40000))
@@ -126,7 +126,7 @@ val emitter = Http4sEmitter.build(endpoint, retryPolicy = MaxAttempts(10))
 
 The available policies are:
 
-- `RetryForever` A RetryPolicy with no cap on maximum of attempts to send an event to the collector. This policy might appear attractive where it is critical to avoid data loss because it never deliberately drops events. However, it could cause a backlog of events in the buffered queue if the collector is unavailable for too long. This RetryPolicy could be paired with an `EventQueuePolicy` that manages the behaviour of a large backlog.
+- `RetryForever` A RetryPolicy with no cap on maximum of attempts to send an event to the collector. This policy might appear attractive where it is critical to avoid data loss because it never deliberately drops events. However, it could cause a backlog of events in the buffered queue if the collector is unavailable for too long. This RetryPolicy could be paired with an `EventQueuePolicy` that manages the behavior of a large backlog.
 - `MaxAttempts(max: Int)` A RetryPolicy which drops events after failing to contact the collector within a fixed number of attempts. This policy can smooth over short outages of connection to the collector. Events will be dropped only if the collector is unreachable for a relatively long span of time. Dropping events can be a safety mechanism against a growing backlog of unsent events.
 - `NoRetry` A RetryPolicy that drops events immediately after a failed attempt to send to the collector.
 

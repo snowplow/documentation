@@ -10,7 +10,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 <Block5966/>
 ```
 
-You have more than one tracker instance running on the same page at once. This may be useful if you want to log events to different collectors. By default, any Snowplow method you call will be executed by every tracker you have created so far. You can override this behaviour and specify which trackers will execute a Snowplow method. To do this, change the method name by adding a colon followed by a list of tracker names separated by semicolons.
+You have more than one tracker instance running on the same page at once. This may be useful if you want to log events to different collectors. By default, any Snowplow method you call will be executed by every tracker you have created so far. You can override this behavior and specify which trackers will execute a Snowplow method. To do this, change the method name by adding a colon followed by a list of tracker names separated by semicolons.
 
 ```javascript
 snowplow("newTracker", "sp1", "{{FIRST_COLLECTOR_URL}}", {

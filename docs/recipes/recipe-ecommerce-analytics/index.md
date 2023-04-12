@@ -243,7 +243,7 @@ Understanding how your users are engaging with your products is the first step i
 - Extend this table to include returns by joining this data with data from your transactional databases, so you get a more accurate picture of how products are actually performing.
 - Extend this table to include where these products are being promoted on your site to understand how visual merchandising affects performance.
 - Join this data with your inventory data to get a 360 view of e-commerce strategy.
-- Start mapping the relationships between products based on user behaviour, working towards compelling product recommendations.
+- Start mapping the relationships between products based on user behavior, working towards compelling product recommendations.
 - Pivot this data to look at users instead: understand which marketing channels customers come from, and their customer lifetime value.
 - Etc.
 

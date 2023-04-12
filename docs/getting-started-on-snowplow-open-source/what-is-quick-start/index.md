@@ -8,7 +8,7 @@ sidebar_position: 1
 
 We have built a set of [terraform](https://www.terraform.io/docs/language/modules/develop/index.html) modules, which automates the setting up & deployment of the required infrastructure & applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side. 
 
-The accompanying Quick Start guides for AWS or GCP will get you up and running with a Snowplow open source pipeline — and deliver rich behavioural data to stream, lake and warehouse — in less than an hour.
+The accompanying Quick Start guides for AWS or GCP will get you up and running with a Snowplow open source pipeline — and deliver rich behavioral data to stream, lake and warehouse — in less than an hour.
 
 The data pipeline that you will have set up by the end of either guide will look similar to the following (this will vary by cloud and can be designed to suit your needs due to our modular approach):
 
@@ -26,7 +26,7 @@ Out-of-the-box, the pipeline set up using Quick Start will: 
 - Handle up to ~100 events per second (~9 million events per day)
 - Cost ~$200 (depending on data transfer costs) per month for ~100 events per second in AWS infrastructure costs, and ~$240 on GCP
 
-It will get you up and running as quickly as possible with Snowplow's open source product so that you can start exploring how to run & manage a Snowplow pipeline that will help you to deliver value with rich, high quality behavioural data to power multiple use cases.
+It will get you up and running as quickly as possible with Snowplow's open source product so that you can start exploring how to run & manage a Snowplow pipeline that will help you to deliver value with rich, high quality behavioral data to power multiple use cases.
 
 ```mdx-code-block
 import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"

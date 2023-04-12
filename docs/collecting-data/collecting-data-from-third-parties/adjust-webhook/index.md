@@ -11,7 +11,7 @@ sidebar_position: 160
 Many Snowplow users who have mobile apps use Adjust to capture the sources (marketing channels) that drive app downloads. By integrating Adjust with Snowplow, it is straightforward to:
 
 1. Have your mobile attribution data (at the app installation event-level), with the rest of your event-level data, in Snowplow
-2. Join app installation data collected from Adjust, with other user event data collected through Snowplow from mobile, web or other platforms, in order to analyse the performance of those marketing channels and return on ad spend. This is typically used to drive future ad spend.
+2. Join app installation data collected from Adjust, with other user event data collected through Snowplow from mobile, web or other platforms, in order to analyze the performance of those marketing channels and return on ad spend. This is typically used to drive future ad spend.
 
 Integrating Adjust with Snowplow is straightforward. In this guide we will walk through the process.
 

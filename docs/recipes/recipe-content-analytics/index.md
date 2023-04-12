@@ -17,7 +17,7 @@ You have already set up Snowplow’s out of the box web tracking by instrumentin
 
 To understand how people are engaging with your content, you’ll want to be tie these events to specific pieces of content, not just pages.
 
-For this purpose, you can add a content entity which will be sent every time these events are tracked. Learn more about Snowplow events and entities [here](/docs/understanding-tracking-design/understanding-events-entities/index.md). You can then aggregate all of your user behavioural data into one row per content piece to get a better view of how your content is performing.
+For this purpose, you can add a content entity which will be sent every time these events are tracked. Learn more about Snowplow events and entities [here](/docs/understanding-tracking-design/understanding-events-entities/index.md). You can then aggregate all of your user behavioral data into one row per content piece to get a better view of how your content is performing.
 
 ## Design and implement the `content` entity
 
@@ -145,7 +145,7 @@ SELECT * FROM derived.content;
 Understanding how your users are engaging with your content is just the first step. Next, you might want to
 
 - Extend this table to include where the content is being promoted on your site to understand how placement affects performance.
-- Start mapping the relationships between content pieces based on user behaviour, working towards compelling content recommendations.
+- Start mapping the relationships between content pieces based on user behavior, working towards compelling content recommendations.
 - Pivot this data to look at users instead: understand which marketing channels users come from, and how that affects their engagement with your content.
 - Etc.
 

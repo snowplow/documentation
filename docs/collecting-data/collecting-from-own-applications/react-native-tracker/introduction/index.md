@@ -30,8 +30,8 @@ The `createTracker` function can be used to create multiple instances of the tra
 The configuration objects that are used to initialize a tracker are:
 
 - `NetworkConfiguration`: **Required**. Configures the network connection with the Snowplow collector.
-- `TrackerConfiguration`: **Optional**. Configures the general behaviour of the tracker.
-- `SessionConfiguration`: **Optional**. Configures the session behaviour.
+- `TrackerConfiguration`: **Optional**. Configures the general behavior of the tracker.
+- `SessionConfiguration`: **Optional**. Configures the session behavior.
 - `EmitterConfiguration`: **Optional**. Configures the way the tracker sends events to the collector.
 - `SubjectConfiguration`: **Optional**. Specifies details to send with events about the user and the platform.
 - `GdprConfiguration`: **Optional**. Configures the GDPR context.
@@ -64,7 +64,7 @@ interface NetworkConfiguration {
 
 ### TrackerConfiguration
 
-Represents the configuration of the tracker and the core tracker properties. The TrackerConfiguration can be used to setup the tracker behaviour indicating what should be tracked in terms of automatic tracking and contexts/entities to attach to the events.
+Represents the configuration of the tracker and the core tracker properties. The TrackerConfiguration can be used to setup the tracker behavior indicating what should be tracked in terms of automatic tracking and contexts/entities to attach to the events.
 
 Its type definition is:
 
@@ -142,7 +142,7 @@ interface TrackerConfiguration {
 }
 ```
 
-- **appId**: Identifer of the app.
+- **appId**: Identifier of the app.
 - **devicePlatform**: The device platform the app runs on. Default value: `'mob'`. Allowed platform values are:
     
     - `'mob'`: Mobile/Tablet

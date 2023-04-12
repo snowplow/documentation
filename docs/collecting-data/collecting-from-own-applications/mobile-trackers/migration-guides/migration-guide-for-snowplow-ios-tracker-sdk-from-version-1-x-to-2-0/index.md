@@ -23,8 +23,8 @@ Fine tuning of the tracker is now possible with Configuration classes.
 These are the classes now available:
 
 - `NetworkConfiguration`: to configure network connection with the Snowplow collector.
-- `TrackerConfiguration`: to configure contexts and automatic events of the tracker, and general behaviour.
-- `SessionConfiguration`: to configure session behaviour.
+- `TrackerConfiguration`: to configure contexts and automatic events of the tracker, and general behavior.
+- `SessionConfiguration`: to configure session behavior.
 - `EmitterConfiguration`: to fine tune about how the tracker sends events to the collector.
 - `SubjectConfiguration`: to specify details to send with events about the user and the platform.
 - `GdprConfiguration`: to configure the GDPR context.

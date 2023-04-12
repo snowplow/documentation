@@ -58,7 +58,7 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tra
 
 ## Filtering
 
-If the `FilterOut` field of the output is returned as `true`, the message will be acked immediately and won't be sent to the target. This will be the behaviour regardelss of what is returned to the other fields in the protocol.
+If the `FilterOut` field of the output is returned as `true`, the message will be acked immediately and won't be sent to the target. This will be the behaviorregardelss of what is returned to the other fields in the protocol.
 
 ```js reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-filter-example.js

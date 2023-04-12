@@ -37,7 +37,7 @@ export const versions = {
   s3Loader: '2.2.6',
   s3Loader22x: '2.2.6',
 
-  // Data Modelling
+  // Data Modeling
   // dbt
   dbtSnowplowWeb: '0.14.0',
   dbtSnowplowMobile: '0.7.0',

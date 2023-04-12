@@ -1,6 +1,6 @@
 ---
 title: "User engagement"
-description: "Aggregating user behaviour beyond sessions"
+description: "Aggregating user behavior beyond sessions"
 date: "2020-10-12"
 sidebar_position: 70
 ---
@@ -11,10 +11,10 @@ Deep insights into how your customers interact with you across platforms over ti
 
 There are two key steps in understanding user engagement:
 
-- Capture their behaviour in granular detail, and aggregate that behaviour into an easily consumable format.
+- Capture their behavior in granular detail, and aggregate that behavior into an easily consumable format.
 - Consistently identify users across platforms to ensure you are seeing the full picture.
 
-This recipe will focus on capturing and aggregating user behaviour. You might also want to take a look at [our single customer view recipe](/docs/recipes/recipe-single-customer-view/index.md) that tackles user stitching more specifically.
+This recipe will focus on capturing and aggregating user behavior. You might also want to take a look at [our single customer view recipe](/docs/recipes/recipe-single-customer-view/index.md) that tackles user stitching more specifically.
 
 ## What you'll be doing
 
@@ -43,7 +43,7 @@ window.snowplow('enableFormTracking');
 
 #### What does the model do?
 
-Aggregating the user behaviour data you have collected into a table with one row per user makes it much easier to understand how your customers are engaging with your website.
+Aggregating the user behavior data you have collected into a table with one row per user makes it much easier to understand how your customers are engaging with your website.
 
 The following SQL creates a table of one row per user (as identified by one of the Snowplow cookie IDs), with additional user information as well as engagement measures including number of page views and sessions, total time engaged, etc.
 
@@ -99,4 +99,4 @@ This recipe covers a really simple example of aggregating user engagement based 
 
 - Build a user stitching table to make sure you are including all user activity correctly based on the different identifiers you observe across platforms, including a custom set user ID. You can explore Snowplow's approach to user stitching in [our single customer view recipe](/docs/recipes/recipe-single-customer-view/index.md).
 - Instrument additional events to better understand how your users are engaging with you.
-- Start to think about how you might use user attributes and user behaviour to segment your user base. Segmentation is the first step towards personalizing user experience.
+- Start to think about how you might use user attributes and user behavior to segment your user base. Segmentation is the first step towards personalizing user experience.

@@ -17,8 +17,8 @@ Fine tuning of the tracker is now possible with Configuration classes.
 These are the classes for the configuration of the tracker:
 
 - `NetworkConfiguration`: to configure network connection with the Snowplow collector.
-- `TrackerConfiguration`: to configure contexts and automatic events of the tracker, and general behaviour.
-- `SessionConfiguration`: to configure session behaviour.
+- `TrackerConfiguration`: to configure contexts and automatic events of the tracker, and general behavior.
+- `SessionConfiguration`: to configure session behavior.
 - `EmitterConfiguration`: to fine tune about how the tracker sends events to the collector.
 - `SubjectConfiguration`: to specify details to send with events about the user and the platform.
 - `GdprConfiguration`: to configure the GDPR context.
@@ -37,9 +37,9 @@ Represents the network communication configuration allowing the tracker to be ab
 
 #### TrackerConfiguration
 
-Represents the configuration of the tracker and the core tracker properties. The TrackerConfiguration can be used to setup the tracker behaviour indicating what should be tracked in term of automatic tracking and contexts/entities to track with the events.
+Represents the configuration of the tracker and the core tracker properties. The TrackerConfiguration can be used to setup the tracker behavior indicating what should be tracked in term of automatic tracking and contexts/entities to track with the events.
 
-- **appId**: Identifer of the app.
+- **appId**: Identifier of the app.
 - **devicePlatform** = mobile: It sets the device platform the tracker is running on.
 - **base64encoding** = true: It indicates whether the JSON data in the payload should be base64 encoded.
 - **logLevel** = OFF: It sets the log level of tracker logs.

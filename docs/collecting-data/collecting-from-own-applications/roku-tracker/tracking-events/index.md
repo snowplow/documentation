@@ -6,7 +6,7 @@ sidebar_position: 2000
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
 
-We provide several built-in methods to help you track different kinds of events. The methods range from single purpose methods, such as `screenView`, to the more complex but flexible `selfDescribing`, which can be used to track any kind of user behaviour. We strongly recommend using `selfDescribing` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
+We provide several built-in methods to help you track different kinds of events. The methods range from single purpose methods, such as `screenView`, to the more complex but flexible `selfDescribing`, which can be used to track any kind of user behavior. We strongly recommend using `selfDescribing` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
 
 Tracking methods supported by the Roku Tracker:
 

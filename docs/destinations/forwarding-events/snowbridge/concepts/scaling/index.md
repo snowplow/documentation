@@ -13,13 +13,13 @@ Snowbridge is built to suit a horizontal scaling model, and you can safely deplo
 If you are using the Kinesis source, you will need to manually create a few DynamoDB tables as described in [the Kinesis source configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/sources/kinesis.md). Snowbridge uses these tables to coordinate multiple instances consuming from the same stream.
 :::
 
-How to configure scaling behaviour will depend on the infrastructure you’re using, and the use case you have implemented. For example, if you choose to scale based on CPU usage, note that this metric will be affected by the size and shape of the data, by the transformations and filters used, and for script transformations, by the content of the scripts.
+How to configure scaling behavior will depend on the infrastructure you’re using, and the use case you have implemented. For example, if you choose to scale based on CPU usage, note that this metric will be affected by the size and shape of the data, by the transformations and filters used, and for script transformations, by the content of the scripts.
 
 :::tip
 Occasionally, new releases of Snowbridge will improve its efficiency. In the past, this has had a large impact on metrics typically used for scaling. To ensure that scaling behaves as expected, we recommend monitoring your metrics after you upgrade Snowbridge or change the transformation configuration.
 :::
 
-In addition to configuring the number of Snowbridge instances, you can manage concurrency via the `concurrent_writes` setting (explained in the [next section](#concurrency)). This setting provides a degree of control over throughput and resource usage. Snowbridge should consume as much data as possible, as fast as possible — a backlog of data or spike in traffic should cause the app’s CPU usage to increase significantly. If spikes/backlogs do not induce this behaviour, and there are no target retries or failures (see below), then you can increase the `concurrent_writes`.
+In addition to configuring the number of Snowbridge instances, you can manage concurrency via the `concurrent_writes` setting (explained in the [next section](#concurrency)). This setting provides a degree of control over throughput and resource usage. Snowbridge should consume as much data as possible, as fast as possible — a backlog of data or spike in traffic should cause the app’s CPU usage to increase significantly. If spikes/backlogs do not induce this behavior, and there are no target retries or failures (see below), then you can increase the `concurrent_writes`.
 
 ## Concurrency
 

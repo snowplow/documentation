@@ -95,7 +95,7 @@ let mut tracker = Tracker::new("ns", "app_id", custom_emitter, None);
 
 The BatchEmitter sends events in batches. This is more efficient than sending event requests singly, as only one set of POST headers is required for a number of events. The event collector receives the request and separates out the individual event payloads. Although the Snowplow Tracker interface is sync, the BatchEmitter uses [Tokio](https://github.com/tokio-rs/tokio) to asynchronously send events to the collector.
 
-#### Retry Behaviour
+#### Retry Behavior
 
 Failed requests are retried with exponentially increasing delays between subsequent retry requests. This ensures that the Collector is not overwhelmed with too many requests and also saves resources on the client by reducing the number of requests during failures. The number of times a request is retried is determined by the Retry Policy.
 
@@ -121,5 +121,3 @@ let emitter = BatchEmitter::builder()
 #### Safely Stopping the Emitter
 
 The `BatchEmitter` can be safely stopped using the `tracker.close_emitter()` method. This will stop the emitter from accepting new events, and will wait for any in-flight requests to complete before returning. This is useful as the emitter runs in a separate thread, and the main thread needs to wait for the emitter to finish sending events before exiting.
-
-

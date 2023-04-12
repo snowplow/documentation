@@ -7,7 +7,7 @@ sidebar_label: "🆕 Behavioral Data Platform — Cloud"
 
 # Introduction
 
-BDP Cloud is a hosted and lightweight version of [Snowplow](https://snowplow.io), designed to get your organization up and running and delivering value from behavioural data as quickly as possible. It enables you to create rich and well-structured data to power your advanced analytics and AI use cases.
+BDP Cloud is a hosted and lightweight version of [Snowplow](https://snowplow.io), designed to get your organization up and running and delivering value from behavioral data as quickly as possible. It enables you to create rich and well-structured data to power your advanced analytics and AI use cases.
 
 ## How does BDP Cloud differ from BDP Enterprise?
     

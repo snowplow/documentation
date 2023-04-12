@@ -105,7 +105,7 @@ These are the required objects for tracking using the Java tracker:
 
 The `Tracker` class has the responsibility for tracking [events](/docs/collecting-data/collecting-from-own-applications/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md). Certain properties can also be set when creating a `Tracker` that will be attached to all events. These are `trackerNamespace`, `appId`, and `platform`.
 
-Both `trackerNamespace` and `appId` are required arguments for `TrackerBuilder`. Snowplow events are designed to be stored in a single data warehouse/lake, regardless of their source, to make data modelling easier and provide a single valuable source of truth for your business. The tracker namespace allows you to distinguish events sent by this specific `Tracker`, if you are using multiple `Tracker` objects within your app. The `appId` allows you to identify events from this specific application, if you are tracking from multiple places.
+Both `trackerNamespace` and `appId` are required arguments for `TrackerBuilder`. Snowplow events are designed to be stored in a single data warehouse/lake, regardless of their source, to make data modeling easier and provide a single valuable source of truth for your business. The tracker namespace allows you to distinguish events sent by this specific `Tracker`, if you are using multiple `Tracker` objects within your app. The `appId` allows you to identify events from this specific application, if you are tracking from multiple places.
 
 The other Tracker property that will be added to all tracked events is `platform`. This is set by default to `srv` - "server-side app". To set another valid platform type, use the optional `TrackerBuilder` method `platform()`.
 

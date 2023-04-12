@@ -1,4 +1,4 @@
-By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and Local Storage. The behaviour of each of these cookies and local storage keys are described here. The base name of each cookie can be configured by following these [instructions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Configuring_the_cookie_name).
+By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and Local Storage. The behavior of each of these cookies and local storage keys are described here. The base name of each cookie can be configured by following these [instructions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Configuring_the_cookie_name).
 
 # Cookies
 
@@ -20,7 +20,7 @@ Local Storage will only be used if `stateStorageStrategy` is set to `localSto
 | Storage Key | Description |
 | --- | --- |
 | snowplowOutQueue_{namespace}_post2 | Used to store a cache of unsent events. This is used to reduce the chance of events to be lost due to page navigation and events not being set to the collector before the navigation event occurs. Where GET requests are used, this key will end in `_get` rather than `_post2`. |
-| snowplowOutQueue_{namespace}_post2.expires | Used to match the concept of cookie expiry within Local Storage. This ensures a consistent behaviour between cookie and local storage. Where GET requests are used, this key will end in `_get` rather than `_post2`. |
+| snowplowOutQueue_{namespace}_post2.expires | Used to match the concept of cookie expiry within Local Storage. This ensures a consistent behavior between cookie and local storage. Where GET requests are used, this key will end in `_get` rather than `_post2`. |
 
 # Mapping Values to Tracker Protocol
 

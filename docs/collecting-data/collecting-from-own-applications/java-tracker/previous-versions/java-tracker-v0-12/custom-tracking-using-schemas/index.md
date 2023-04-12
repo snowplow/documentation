@@ -8,7 +8,7 @@ Self-describing (self-referential) JSON schemas are at the core of Snowplow trac
 
 In all our trackers, self-describing JSON are used in two places. One is in the `Unstructured`/`SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features.
 
-When tracking user behaviour, the event describes the specific activity they performed, e.g. a user added an item to an eCommerce cart. To understand the meaning of the event, and how it relates to your business, it's ideal to also track the persistent environment in which the activity was performed. For example, is the user a repeat customer? Which item did they add, and how many are in stock?
+When tracking user behavior, the event describes the specific activity they performed, e.g. a user added an item to an eCommerce cart. To understand the meaning of the event, and how it relates to your business, it's ideal to also track the persistent environment in which the activity was performed. For example, is the user a repeat customer? Which item did they add, and how many are in stock?
 
 These environmental factors can be tracked as the event "context", using self-describing JSON. When self-describing JSON are tracked as part of an event, they are called "entities". All the entities of an event together form the context. Read more in this [thorough blog post](https://snowplow.io/blog/2020/03/25/what-are-snowplow-events-and-entities-and-what-makes-them-so-powerful/).
 

@@ -20,7 +20,7 @@ The custom JavaScript enrichment is a great example of the power of Snowplow.
 
 Through this functionality the ability to “data widen” your events at the row level, means that if you have access to a unique data set that can be used to give a higher level of detail and context around certain events you are collecting, you can insert them at this enrichment step before writing to your data store.
 
-Since your company has a unique set of customers and likely a unique set of data points that speak towards the behavioural interactions customers have with your site or applications, the more information you can capture at the time of the event means the more insight you can find in the analysis of those events.
+Since your company has a unique set of customers and likely a unique set of data points that speak towards the behavioral interactions customers have with your site or applications, the more information you can capture at the time of the event means the more insight you can find in the analysis of those events.
 
 :::tip JavaScript Language Features
 

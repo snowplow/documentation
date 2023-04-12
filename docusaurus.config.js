@@ -122,6 +122,10 @@ module.exports = {
             className: 'snowplow-button',
             position: 'right',
           },
+          {
+            type: 'custom-docsTrackerNavbarButton',
+            position: 'right',
+          },
         ],
       },
       footer: {

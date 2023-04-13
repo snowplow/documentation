@@ -96,6 +96,8 @@ For the purposes of this  `number` and `integer` are the same.
 
 `array`, `object`, `NaN` and other types in the `enum` will be cast as fallback `VARCHAR(4096)`.
 
+_If content size is longer than 4096 it would be truncated when inserted into the Redshift._
+
 </td>
 <td>
 
@@ -142,6 +144,8 @@ OR
 <td>
 
 `VARCHAR(4096)`
+
+_If content size is longer than 4096 it would be truncated when inserted into the Redshift._
 
 </td>
 </tr>
@@ -194,6 +198,8 @@ OR
 `VARCHAR(65535)`
 
 _Content is stringified and quoted._
+
+_If content size is longer than 65535 it would be truncated when inserted into the Redshift._
 
 </td>
 </tr>
@@ -533,6 +539,8 @@ If nothing matches above, this is a catch-all.
 
 
 _Values will be quoted as in JSON._
+
+_If content size is longer than 4096 it would be truncated when inserted into the Redshift._
 
 </td>
 </tr>

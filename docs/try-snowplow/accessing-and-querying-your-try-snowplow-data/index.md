@@ -19,14 +19,14 @@ Connection details for accessing this data are available in the Try Snowplow con
 
 ## Querying your data
 
-Like Snowplow BDP, Try Snowplow encourages you to connect your your BI or query tool of choice to access the database and query your data.
+Like Snowplow BDP, Try Snowplow encourages you to connect your data visualization or query tool of choice to access the database and query your data.
 
 You can either copy a sample query from the console tutorial, [check out the Recipes](/docs/recipes/index.md) or start exploring your data with your own queries.
 
 ### Example: Querying your data in Supersest / Preset
 
-You can access the PostgreSQL trial database using your preferred BI or SQL query tool.
-If you don’t have permissions to create a new connection in your BI tool, you can use [Preset](https://preset.io/) which is built on the popular open source project, Superset and has a 14 day free trial.
+You can access the PostgreSQL trial database using your preferred data visualization or SQL query tool.
+If you don’t have permissions to create a new connection in your data visualization tool, you can use [Preset](https://preset.io/) which is built on the popular open source project, Superset and has a 14 day free trial.
 
 The steps to connect, access and visualize data are below.
 
@@ -41,7 +41,7 @@ The steps to connect, access and visualize data are below.
 
 4. Enter the connection details provided in the [Try Snowplow UI](https://try.snowplowanalytics.com/access-data): Hostname, Port, Database, Username and Password (request credentials on Try UI if you haven’t done so)
 
-<img src=images/4-connectpostgres.png width="400"/>\
+![](images/4-connectpostgres.png)
 
 5. Continue with default settings and finalize set up
 
@@ -49,8 +49,7 @@ The steps to connect, access and visualize data are below.
 
 6. On the top bar, select the “SQL” section and “SQL lab” subsection.
 
-<img src=images/6-sqleditor.png width="400"/>\
-
+![](images/6-sqleditor.png)
 
 7. Copy SQL query from the [Try Snowplow UI](https://try.snowplowanalytics.com/access-data)
 

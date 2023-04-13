@@ -68,7 +68,7 @@ You should now see Snowplow atomic data which you can [explore](https://docs.sno
 ### Example: Create a simple time-series chart
 From the query results, select “Create chart” and select “Bar chart”, set these values and click “Update chart”:
 
-* X-axis: derived_tstamp
+* X-axis: `derived_tstamp`
 * Metrics:
   * Column: “event_id”
   * Aggregate: COUNT

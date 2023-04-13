@@ -53,7 +53,7 @@ The steps to connect, access and visualize data are below.
 
 7. Copy SQL query from the [Try Snowplow UI](https://try.snowplowanalytics.com/access-data)
 
-```
+```sql
 SELECT *
 FROM atomic.events
 LIMIT 10

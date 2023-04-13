@@ -71,6 +71,6 @@ From the query results, select “Create chart” and select “Bar chart”, se
 * X-axis: `derived_tstamp`
 * Metrics:
   * Column: `event_id`
-  * Aggregate: COUNT
+  * Aggregate: `COUNT`
 
 ![](images/8-createchart.png)

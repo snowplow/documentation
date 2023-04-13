@@ -47,7 +47,7 @@ The steps to connect, access and visualize data are below.
 
 ![](images/5-finalizesetup.png)
 
-6. On the top bar, select the “SQL” section and “SQL lab” subsection.
+6. On the top bar, select the “SQL” section and “SQL lab” subsection
 
 ![](images/6-sqleditor.png)
 

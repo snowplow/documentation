@@ -5,7 +5,7 @@ sidebar_position: 10
 
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
-import { AllAccelerators } from "@site/src/components/AceleratorAdmonitions";
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
 
 <AllAccelerators/>
 ```

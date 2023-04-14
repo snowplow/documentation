@@ -5,7 +5,7 @@ title: "Web Quickstart"
 ---
 
 ```mdx-code-block
-import { Accelerator } from "@site/src/components/AceleratorAdmonitions";
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 <Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
 ```

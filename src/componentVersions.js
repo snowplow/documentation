@@ -34,8 +34,8 @@ export const versions = {
   gcsLoader: '0.5.4',
   postgresLoader: '0.3.3',
   rdbLoader: '5.4.1',
-  s3Loader: '2.2.6',
-  s3Loader22x: '2.2.6',
+  s3Loader: '2.2.7',
+  s3Loader22x: '2.2.7',
 
   // Data Modelling
   // dbt

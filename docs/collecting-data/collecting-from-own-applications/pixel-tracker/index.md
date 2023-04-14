@@ -91,7 +91,7 @@ Example:
 Check out <a href="http://collector.acme.com/r/tp2?u=https%3A%2F%2Fgithub.com%2Fsnowplow%2Fsnowplow">Snowplow</a>
 ```
 
-Snowplow converts the `&u={{uri}}` argument into a `com.snowplowanalytics.snowplow/uri_direct` self-describing JSON.
+Snowplow converts the `&u={{uri}}` argument into a `com.snowplowanalytics.snowplow/uri_redirect` self-describing JSON.
 
 How Snowplow attaches the `uri_redirect` to the event depends on what other Tracker Protocol fields you attached to the event:
 

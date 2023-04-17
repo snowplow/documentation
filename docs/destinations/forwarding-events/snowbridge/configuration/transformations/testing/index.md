@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-The easiest way to test a transformation configuration for Snowbridge is to run it locally, using the default stdin source, stdout target and your actual transformation config - using a sample of data that is as close to the real world as possible.
+The easiest way to test a transformation configuration for Snowbridge is to run it locally, using the default `stdin` source, `stdout` target and your actual transformation config - using a sample of data that is as close to the real world as possible.
 
 The sample file should contain the events/messages you'd like to test with, one per line.
 
@@ -35,13 +35,13 @@ You can run Snowbridge locally via Docker:
 `docker run snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
-The default configuration for Snowbridge already uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):T
+The default configuration for Snowbridge already uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
-This will print the data to console, along with logs.
+This will print the data to the terminal, along with logs.
 
 :::note
 

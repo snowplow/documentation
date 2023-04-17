@@ -35,7 +35,7 @@ Snowbridge can be run locally via docker, with:
 `docker run snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
-Since the default configuration for snowbridge is already `stdin` source and `stdout` target. So, to test sending data through with no transformations, (where `data.tsv` contains our test data) we can simply run:
+Since the default configuration for snowbridge is already `stdin` source and `stdout` target. So, to test sending data through with no transformations, (where `data.tsv` contains our test data) we can run:
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i snowplow/snowbridge:${versions.snowbridge}`
@@ -82,4 +82,4 @@ Note that you must ensure that the transformation config points to the mounted p
 
 ## Further testing
 
-You can use the above method to test sources and targets from a local environment too, which can be useful in combination with transformations - simply set up the appropriate authentication for your source and/or target, add them to your configuration file, and run as directed above.
+You can use the above method to test sources and targets from a local environment too, which can be useful in combination with transformations, once you set up the appropriate authentication for your source and/or target, add them to your configuration file, and run as directed above.

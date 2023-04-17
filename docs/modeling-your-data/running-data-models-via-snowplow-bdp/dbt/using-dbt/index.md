@@ -7,6 +7,7 @@ sidebar_position: 100
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import BrowserWindow from '@site/src/components/BrowserWindow';
 ```
 
 ### Overview
@@ -145,28 +146,25 @@ The warehouse password should be sent by [secure form from the Snowplow BDP Cons
 
 Data models can be configured via the Snowplow BDP Console:
 
-<div class="browser-window">
-    <img src={require("./images/Screenshot-2021-11-15-at-20.15.28.png").default} alt="BDP Console data models screen"/>
-</div>
+<BrowserWindow url ="https://console.snowplowanalytics.com/">
+    <img src={require("./images/DataModelsBDP.png").default} alt="BDP Console data models screen"/>
+</BrowserWindow>
 
+In the first step, you can provide the data model name, a description, and the owner(s) of the data model that will be alerted in case of failure. Finally select the engine and version that should run your data model (`dbt` in this case):
 
-In the first step, you can provide the data model name, a description, and the owner(s) of the data model that will be alerted in case of failure. Finally select the engine and version that should run your datamodel (dbt in this case):
+<BrowserWindow url ="https://console.snowplowanalytics.com/">
+    <img src={require("./images/CreateDataModelStep1.png").default} alt="Create a new data model step 1 screenshot"/>
+</BrowserWindow>
 
-<div class="browser-window">
-    <img src={require("./images/data-model-create-step-1.png").default} alt="Create a new data model step 1 screenshot"/>
-</div>
-
-
-
-Please note that the model name needs to match to the corresponding datamodeling subfolder name in GitHub. The dbt project for the model in the above example would therefore live under:
+Please note that the model name needs to match to the corresponding `datamodeling` subfolder name in GitHub. The dbt project for the model in the above example would therefore live under:
 
 `your snowplow-pipeline repo > datamodeling > data model name > dbt ...`
 
 In the second step, you can then add the schedule:
 
-<div class="browser-window">
-    <img src={require("./images/data-model-create-step-2.png").default} alt="Create data model step 2 screenshot"/>
-</div>
+<BrowserWindow url ="https://console.snowplowanalytics.com/">
+    <img src={require("./images/CreateDataModelStep2.png").default} alt="Create data model step 2 screenshot"/>
+</BrowserWindow>
 
 Please note that the cron schedule is in UTC.
 
@@ -176,34 +174,34 @@ You should write your dbt models in such a way that if they fail part way throug
 
 :::
 
-In the third and last step you can configure the arguments and variables your `dbt run` call is excecuted with. The arguments (`--selector` or `--select` / `--exclude`) follow the syntax described on [dbt docs](https://docs.getdbt.com/reference/node-selection/syntax), and so do variables ([`--vars` flag](https://docs.getdbt.com/docs/build/project-variables#defining-variables-on-the-command-line)):
+In the third and last step you can configure the arguments and variables your `dbt run` call is executed with. Where possible we recommend setting the variables in your `dbt_project.yml` file for expected values. The arguments (`--selector` or `--select` / `--exclude`) follow the syntax described on [dbt docs](https://docs.getdbt.com/reference/node-selection/syntax), and so do variables ([`--vars` flag](https://docs.getdbt.com/docs/build/project-variables#defining-variables-on-the-command-line)):
 
 <Tabs groupId="dbt-step3" queryString>
 <TabItem value="selector" label="Selector" default>
 
-<div class="browser-window">
-    <img src={require("./images/data-model-create-step-3.png").default} alt="Create data model step 3 screenshot"/>
-</div>
+<BrowserWindow url ="https://console.snowplowanalytics.com/">
+    <img src={require("./images/CreateDataModelStep3Selector.png").default} alt="Create data model step 3 screenshot"/>
+</BrowserWindow>
 
 </TabItem>
 <TabItem value="select_exclude" label="Select/Exclude">
 
-<div class="browser-window">
-    <img src={require("./images/data-model-create-step-3-selectexclude.png").default} alt="Create data model step 3 screenshot using exclude"/>
-</div>
+<BrowserWindow url ="https://console.snowplowanalytics.com/">
+    <img src={require("./images/CreateDataModelStep3Exclude.png").default} alt="Create data model step 3 screenshot using exclude"/>
+</BrowserWindow>
 
 </TabItem>
 </Tabs>
 
 Once you are happy with the configuration, you can create the model. The model will be disabled until you enable it:
 
-<div class="browser-window">
-    <img src={require("./images/Screenshot-2021-11-15-at-20.25.53.png").default} alt="Data model created screenshot"/>
-</div>
+<BrowserWindow url ="https://console.snowplowanalytics.com/">
+    <img src={require("./images/CreateDataModelSuccess.png").default} alt="Data model created screenshot"/>
+</BrowserWindow>
 
 
 Please make sure all your dbt project files are merged to the default branch in GitHub before enabling the model. Any changes merged to the default branch are available immediately.
 
 ### 3. Monitor your model in the Snowplow BDP Console
 
-Everything is set and you can now monitor your data models running against your data warehouse from the Snowplow BDP Console, in the Jobs UI! There you can see the data modeling DAG generated, and monitor the status, duration and run times both at the data model and at the playbook level.
+Everything is set and you can now monitor your data models running against your data warehouse from the Snowplow BDP Console, in the Jobs UI! There you can see the data modeling DAG generated, and monitor the status, duration and run times both at the data model and at the playbook level. You can also edit any of the fields you setup above if needed as the running of your model evolves.

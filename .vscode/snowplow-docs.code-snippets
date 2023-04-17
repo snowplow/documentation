@@ -28,19 +28,6 @@
     ],
     "description": "Docusaurus Front Matter"
   },
-  "mdx code block": {
-    "scope": "markdown",
-    "prefix": "mdx",
-    "body": [
-      "```mdx-code-block",
-      "import Tabs from '@theme/Tabs';",
-      "import TabItem from '@theme/TabItem';",
-      "import ThemedImage from '@theme/ThemedImage';",
-      "```",
-      ""
-    ],
-    "description": "Docusaurus mdx block for tabs and themed images"
-  },
   "Doc card block": {
     "scope": "markdown",
     "prefix": "doc_card",
@@ -134,6 +121,64 @@
   "Browser Window": {
     "scope": "markdown",
     "prefix": "browser_window",
-    "body": ["<div class=\"browser-window\">", "\t\t<img src={require(\"./$1\").default} alt=\"$2\"/>", "</div>", ""]
+    "body": [" <BrowserWindow url =\"$1\">", "\t<img src={require(\"./$2\").default} alt=\"$3\"/>", "</BrowserWindow>", ""]
+  },
+  "Tabs mdx import": {
+    "scope": "markdown",
+    "prefix": "import_tabs",
+    "body": [
+      "```mdx-code-block",
+      "import Tabs from '@theme/Tabs';",
+      "import TabItem from '@theme/TabItem';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for tabs"
+  },
+  "ThemedImage mdx import": {
+    "scope": "markdown",
+    "prefix": "import_themedimage",
+    "body": [
+      "```mdx-code-block",
+      "import Tabs from '@theme/Tabs';",
+      "import TabItem from '@theme/TabItem';",
+      "import ThemedImage from '@theme/ThemedImage';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for themed images"
+  },
+  "BrowserWindow mdx import": {
+    "scope": "markdown",
+    "prefix": "import_browserwindow",
+    "body": [
+      "```mdx-code-block",
+      "import BrowserWindow from '@site/src/components/BrowserWindow';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for BrowserWindow"
+  },
+  "componentVersions mdx import": {
+    "scope": "markdown",
+    "prefix": "import_componentversions",
+    "body": [
+      "```mdx-code-block",
+      "import {versions} from '@site/src/componentVersions';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for componentVersions"
+  },
+  "CodeBlock mdx import": {
+    "scope": "markdown",
+    "prefix": "import_codeblock",
+    "body": [
+      "```mdx-code-block",
+      "import CodeBlock from '@theme/CodeBlock';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for CodeBlock"
   }
 }

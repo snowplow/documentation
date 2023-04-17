@@ -57,7 +57,7 @@ The output (in `output.txt`) will contain more than the data itself. There will 
 
 ### Adding configuration
 
-To add a specific configuration to test, create a configuration file (`config.hcl`) and pass it to the Docker container. You will need to mount the file and set the `SNOWBRIDGE_CONFIG_FILE` environment variable to the path _inside_ the container:
+To add a specific configuration to test, create a configuration file (`config.hcl`) and pass it to the Docker container. You will need to [mount the file](https://docs.docker.com/storage/bind-mounts/) and set the `SNOWBRIDGE_CONFIG_FILE` environment variable to the path _inside_ the container:
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i \\
@@ -82,8 +82,16 @@ Finally, you can add custom scripts by mounting a file, in the exact same manner
     snowplow/snowbridge:${versions.snowbridge} > output.txt`
 }</CodeBlock>
 
-Note that you must ensure that the transformation config points to the mounted path (the `target` in the mount path - `/tmp/script.js` above).
+Note that you must ensure that the transformation config points to the mounted path (the `target` in the mount path - `/tmp/script.js` above). For example, the transformation block in our cofiguration for the above example might look like this:
+
+```hcl
+transform {
+  use "js" {
+    script_path = env.JS_SCRIPT_PATH
+  }
+}
+```
 
 ## Further testing
 
-You can use the above method to test sources and targets from a local environment too, which can be useful in combination with transformations, once you set up the appropriate authentication for your source and/or target, add them to your configuration file, and run as directed above.
+You can use the above method to test all other aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. To do so, first you'll need to ensure that the local envionment has access to any required resources and can authenticate (eg. connecting from a laptop to a cloud account, or setting up a local metrics server for testing). Once that's done, provide Snowbridge with a hcl file configuring it to connect to those resources, and run it the same way we do in the transformation examples above.

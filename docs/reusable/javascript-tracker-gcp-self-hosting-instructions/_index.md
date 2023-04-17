@@ -61,7 +61,7 @@ Open the _Edit Metadata_ popup using the file menu.
 
 ### Set permissions
 
-Open the _Edit Access_ popup using the file menu.
+Open the [_Edit Access_ popup](https://cloud.google.com/storage/docs/access-control/making-data-public#objects) using the file menu.
 
 Add a new item in the table, enter the following details and click Save.
 

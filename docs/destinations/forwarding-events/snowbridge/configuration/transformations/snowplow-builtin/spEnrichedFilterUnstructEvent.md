@@ -10,7 +10,7 @@ Optionally, a regex can be provided to match against the stringified version of 
 
 The path to the field to match against must be provided as a jsonpath (dot notation and square braces only) — for example `test1.test2[0].test3`.
 
-Filters can be used in one of two ways, which is determined by the `filter_action` option. `filter_action` determines the behaviour of the app when the regex provided evaluates to `true`. If it's set to `"keep"`, the app will complete the remaining transformations and send the message to the destination (unless a subsequent filter determines otherwise). If it's set to `"drop"`, the message will be acked and discarded, without continuing to the next transformation or target.
+Filters can be used in one of two ways, which is determined by the `filter_action` option. `filter_action` determines the behavior of the app when the regex provided evaluates to `true`. If it's set to `"keep"`, the app will complete the remaining transformations and send the message to the destination (unless a subsequent filter determines otherwise). If it's set to `"drop"`, the message will be acked and discarded, without continuing to the next transformation or target.
 
 This example keeps all events whose `add_to_cart` event data at the `sku` field matches `test-data`.
 
@@ -25,5 +25,3 @@ Every configuration option:
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-full-example.hcl
 ```
-
-

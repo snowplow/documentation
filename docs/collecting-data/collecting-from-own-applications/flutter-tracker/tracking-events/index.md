@@ -6,7 +6,7 @@ sidebar_position: 3000
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
 
-We provide several built-in event classes to help you track different kinds of events. When instantiated, their objects can be passed to the `Snowplow.track()` method to send events to the Snowplow collector. The event classes range from single purpose ones, such as `ScreenView`, to the more complex but flexible `SelfDescribing`, which can be used to track any kind of user behaviour. We strongly recommend using `SelfDescribing` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
+We provide several built-in event classes to help you track different kinds of events. When instantiated, their objects can be passed to the `Snowplow.track()` method to send events to the Snowplow collector. The event classes range from single purpose ones, such as `ScreenView`, to the more complex but flexible `SelfDescribing`, which can be used to track any kind of user behavior. We strongly recommend using `SelfDescribing` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
 
 ## Auto-tracked view events
 

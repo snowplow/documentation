@@ -391,7 +391,7 @@ Please refer to the [Linking API](https://reactnative.dev/docs/linking) in Rea
 
 The tracker keeps memory of the tracked Deep Link event and will attach a Deep Link entity to the first ScreenView tracked in the tracker. This is helpful during the analysis of the data because it will be clear the relation between the content visualized by the user (ScreenView event) and source (DeepLink entity) that originated that visualisation.
 
-This behaviour is enabled by default but it can be disabled using the `deepLinkContext` boolean property when passing `trackerConfig` to `createTracker`:
+This behavior is enabled by default but it can be disabled using the `deepLinkContext` boolean property when passing `trackerConfig` to `createTracker`:
 
 ```typescript
 const tracker = createTracker(

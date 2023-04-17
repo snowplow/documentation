@@ -18,7 +18,7 @@ Event context is an incredibly powerful aspect of Snowplow tracking, which allow
 
 Each schema will describe a single "entity". All of an event’s entities together form the event context. The event context will be sent as one field of the event, finally ending up in one column (`context`) in your data storage. There is no limit to how many entities can be attached to one event.
 
-Note that context can be added to any event type, not just self-describing events. This means that even a simple event type like a page view can hold complex and extensive information – reducing the chances of data loss and the amount of modelling (JOINs etc.) needed in modelling, while increasing the value of each event, and the sophistication of the possible use cases.
+Note that context can be added to any event type, not just self-describing events. This means that even a simple event type like a page view can hold complex and extensive information – reducing the chances of data loss and the amount of modeling (JOINs etc.) needed in modeling, while increasing the value of each event, and the sophistication of the possible use cases.
 
 The entities you provide are validated against their schemas as the event is processed (during the enrich phase). If there is a mistake or mismatch, the event is processed as a Bad Event.
 

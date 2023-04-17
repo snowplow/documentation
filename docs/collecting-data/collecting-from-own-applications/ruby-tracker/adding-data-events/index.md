@@ -26,7 +26,7 @@ Each schema will describe a single "entity". All of an event's entities together
 
 The context entities were originally called "context" themselves, with the event context referred to as "contexts". This was confusing (and not great English grammar), so we changed the name. However, the name "contexts" persists in some places.
 
-Check out our [demo Rails app](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) to see an example of a custom eCommerce event created using a self-describing event plus product entity. Note that context can be added to any event type, not just self-describing events. This means that even a simple event type like a page view can hold complex and extensive information - reducing the chances of data loss and the amount of modelling (JOINs etc.) needed in modelling, while increasing the value of each event, and the sophistication of the possible use cases.
+Check out our [demo Rails app](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) to see an example of a custom eCommerce event created using a self-describing event plus product entity. Note that context can be added to any event type, not just self-describing events. This means that even a simple event type like a page view can hold complex and extensive information - reducing the chances of data loss and the amount of modeling (JOINs etc.) needed in modeling, while increasing the value of each event, and the sophistication of the possible use cases.
 
 The entities you provide are validated against their schemas as the event is processed (during the enrich phase). If there is a mistake or mismatch, the event is processed as a Bad Event.
 
@@ -181,7 +181,7 @@ end
 
 Similarly, the `domain_session_id` and `domain_session_idx` values are saved in the first-party `_sp_ses` and `_sp_id` cookies. If you configured the JavaScript tracker with a different “cookieName” option, then these cookies will be named differently.
 
-The `network_user_id` derives from the event collector's third-party cookie, hence the name "network" as it is set at a network level. It is the server-side user identifier. The cookie is named `sp` (Snowplow Micro pipelines call it `micro` instead). The default behaviour is for the collector to provide a new cookie/network user ID for each event it receives. You can override the collector cookie's value with your own generated ID using the `set_network_user_id` method.
+The `network_user_id` derives from the event collector's third-party cookie, hence the name "network" as it is set at a network level. It is the server-side user identifier. The cookie is named `sp` (Snowplow Micro pipelines call it `micro` instead). The default behavior is for the collector to provide a new cookie/network user ID for each event it receives. You can override the collector cookie's value with your own generated ID using the `set_network_user_id` method.
 
 The user fingerprint is also a client-side concept. The JavaScript Tracker generates a fingerprint based on browser features and attaches it to all client-side events. You could develop your own fingerprints to attach to your Ruby server-side events with `set_fingerprint`.
 

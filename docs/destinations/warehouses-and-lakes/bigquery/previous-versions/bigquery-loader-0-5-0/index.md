@@ -55,7 +55,7 @@ A JVM application that reads a `failedInserts` subscription and tries to re-in
 
 #### Overview
 
-Repeater has several important behaviour aspects:
+Repeater has several important behavioral aspects:
 
 - If a pulled record is not a valid Snowplow event, it will result into a `loader_recovery_error` bad row.
 - If a pulled record is a valid event, Repeater will wait some time (5 minutes by default) after the `etl_tstamp` before attempting to re-insert it, in order to let Mutator do its job.
@@ -79,7 +79,7 @@ Used for exactly the same purpose as Repeater, but uses Dataflow under the hood,
 - User needs to re-launch it manually when failed inserts appear.
 - Otherwise, it could be extremely expensive to run a Dataflow job that idles 99.9% of the time (it cannot terminate as it is a streaming/infinite job1).
 - There's no way to tell Forwarder that it should take a pause before inserting rows back. Without the pause there's a chance that Mutator doesn't get a chance to alter the table.
-- Forwarder keeps retrying all inserts (default behaviour for streaming Dataflow jobs), while Repeater has a dead-end GCS bucket.
+- Forwarder keeps retrying all inserts (default behavior for streaming Dataflow jobs), while Repeater has a dead-end GCS bucket.
 - In order to debug a problem with Forwarder, operator needs to inspect Stackdriver logs.
 
 1Forwarder is a very generic and primitive Dataflow job. It could be launched using the standard Dataflow templates. But a standard template job cannot accept a subscription as a source, only a topic. That means the job must be running all the time and most of the time it will be idle.

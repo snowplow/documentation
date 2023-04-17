@@ -21,7 +21,7 @@ The diagram above illustrates a typical Snowplow pipeline with data flowing left
 
 Snowplow's distinctive architecture has been informed by a set of key design principles:
 
-1. **Extreme scalability** - Snowplow should be able to scale to tracking billions of customer events without affecting the performance of your client (e.g. website) or making it difficult to subsequently analyse all of those events
+1. **Extreme scalability** - Snowplow should be able to scale to tracking billions of customer events without affecting the performance of your client (e.g. website) or making it difficult to subsequently analyze all of those events
 2. **Permanent event history** - Snowplow events should be stored in a simple, non-relational, immutable data store
 3. **Direct access to individual events** - you should have direct access to your raw Snowplow event data at the atomic level
 4. **Separation of concerns** - event tracking and event analysis should be two separate systems, only loosely-coupled
@@ -34,4 +34,4 @@ The Snowplow approach has several technical advantages over more conventional we
 - **Direct access to events** - not intermediated by a third-party vendor, or a slow API, or an interface offering aggregates only
 - **Analysis tool agnostic** - Snowplow can be used to feed whatever analytics process you want (e.g. Hive, R, Pig, Sky EQL)
 - **Integrable with other data sources** - join Snowplow data into your other data sources (e.g. ecommerce, CRM) at the event level
-- **Clean separation of tracking and analysis** - new analyses will not require re-tagging of your site or app
+- **Clean separation of tracking and analysis** - new analyzes will not require re-tagging of your site or app

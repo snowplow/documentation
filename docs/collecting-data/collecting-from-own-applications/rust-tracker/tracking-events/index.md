@@ -8,7 +8,7 @@ Designing how and what to track in your app is an important decision. Check out 
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
 
-We provide several built-in events to help you track different kinds of events. When instantiated, their objects can be passed to the `tracker.track()` method to send events to the Snowplow collector. The events range from single purpose ones, such as `ScreenViewEvent`, to the more complex but flexible `SelfDescribingEvent`, which can be used to track any kind of user behaviour. We strongly recommend using `SelfDescribingEvent` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
+We provide several built-in events to help you track different kinds of events. When instantiated, their objects can be passed to the `tracker.track()` method to send events to the Snowplow collector. The events range from single purpose ones, such as `ScreenViewEvent`, to the more complex but flexible `SelfDescribingEvent`, which can be used to track any kind of user behavior. We strongly recommend using `SelfDescribingEvent` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
 
 Event classes supported by the Rust Tracker:
 

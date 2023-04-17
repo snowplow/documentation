@@ -25,7 +25,7 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Modelling your data',
+    title: 'Modeling your data',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     link: 'docs/modeling-your-data/what-is-data-modeling',
     description: <>Guidance on how to model your data.</>,

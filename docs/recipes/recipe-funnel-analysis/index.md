@@ -13,7 +13,7 @@ Funnel analysis is a great way to get started with understanding how your users 
 
 You have already set up Snowplow’s out of the box web tracking by instrumenting the Javascript Tracker in your application. This includes tracking `page_view` events. In the modeling section of this recipe, you will be able to classify any page view as a funnel step. However, you might also want to track additional actions as part of your funnel analysis. For this purpose, you will implement a custom `funnel_interaction` event (optional).
 
-You will then collect all funnel step interactions (whether they are page views or specific interactions) into a single table to easily visualise and analyse how your users are moving through your funnels, and where they are getting stuck or dropping off.
+You will then collect all funnel step interactions (whether they are page views or specific interactions) into a single table to easily visualise and analyze how your users are moving through your funnels, and where they are getting stuck or dropping off.
 
 ## Design and implement the `funnel_interaction` event (optional)
 
@@ -155,7 +155,7 @@ ORDER BY 1,3 ASC;
 ## Let's break down what you've done
 
 - You have captured all funnel steps, whether they are page views or specific interactions.
-- You have modeled this data into a single table to easily visualise and analyse how your users are moving through your funnels.
+- You have modeled this data into a single table to easily visualise and analyze how your users are moving through your funnels.
 - This gives you initial insights into where users are getting stuck or dropping off, and how you might improve their journeys.
 
 ## Further reading

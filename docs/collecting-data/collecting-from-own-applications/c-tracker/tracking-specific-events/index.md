@@ -6,7 +6,7 @@ sidebar_position: 50
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
 
-We provide several built-in event classes to help you track different kinds of events. When instantiated, their objects can be passed to the `tracker.track()` methods to send events to the Snowplow collector. The event classes range from single purpose ones, such as `ScreenViewEvent`, to the more complex but flexible `SelfDescribingEvent`, which can be used to track any kind of user behaviour. We strongly recommend using `SelfDescribingEvent` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
+We provide several built-in event classes to help you track different kinds of events. When instantiated, their objects can be passed to the `tracker.track()` methods to send events to the Snowplow collector. The event classes range from single purpose ones, such as `ScreenViewEvent`, to the more complex but flexible `SelfDescribingEvent`, which can be used to track any kind of user behavior. We strongly recommend using `SelfDescribingEvent` for your tracking, as it allows you to design custom event types to match your business requirements. [This post](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/) on our blog, "Re-thinking the structure of event data" might be informative here.
 
 The tracker provides the following event classes for tracking events out of the box:
 
@@ -25,7 +25,7 @@ Event context is an incredibly powerful aspect of Snowplow tracking, which allow
 
 Each schema will describe a single "entity". All of an event's entities together form the event context. There is no limit to how many entities can be attached to one event.
 
-Note that context can be added to any event type, not just self-describing events. This means that even a simple event type like a screen view can hold complex and extensive information – reducing the chances of data loss and the amount of modelling (JOINs etc.) needed in modelling, while increasing the value of each event, and the sophistication of the possible use cases.
+Note that context can be added to any event type, not just self-describing events. This means that even a simple event type like a screen view can hold complex and extensive information – reducing the chances of data loss and the amount of modeling (JOINs etc.) needed in modeling, while increasing the value of each event, and the sophistication of the possible use cases.
 
 The entities you provide are validated against their schemas as the event is processed (during the enrich phase). If there is a mistake or mismatch, the event is processed as a Bad Event.
 

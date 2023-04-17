@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps.
 
-We provide several built-in methods to help you track different kinds of events. The `track_x_event` methods range from single purpose methods, such as `track_page_view`, to the more complex but flexible `track_self_describing_event`, which can be used to track any kind of user behaviour. We strongly recommend using `track_self_describing_event` for your tracking, as it allows you to design custom event types to match your business requirements. This [post on our blog](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/), "Re-thinking the structure of event data" might be informative here.
+We provide several built-in methods to help you track different kinds of events. The `track_x_event` methods range from single purpose methods, such as `track_page_view`, to the more complex but flexible `track_self_describing_event`, which can be used to track any kind of user behavior. We strongly recommend using `track_self_describing_event` for your tracking, as it allows you to design custom event types to match your business requirements. This [post on our blog](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/), "Re-thinking the structure of event data" might be informative here.
 
 Tracking methods supported by the Ruby Tracker:
 

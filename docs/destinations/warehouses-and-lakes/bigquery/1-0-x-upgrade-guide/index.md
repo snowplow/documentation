@@ -122,7 +122,7 @@ $ docker run \
 
 ## New events table field
 
-The first time you deploy Mutator 1.0.0 it will add a new column to your events table: `load_tstamp`. This represents the exact moment when the row was inserted into BigQuery. It shows you when events have arrived in the warehouse, which makes it possible to use incremental processing of newly arrived data in your downstream data modelling.
+The first time you deploy Mutator 1.0.0 it will add a new column to your events table: `load_tstamp`. This represents the exact moment when the row was inserted into BigQuery. It shows you when events have arrived in the warehouse, which makes it possible to use incremental processing of newly arrived data in your downstream data modeling.
 
 Depending on your traffic volume and pattern, there might be a short time period in which the loader app cannot write to BigQuery because the new column hasn't propagated and is not yet visible to all workers. For that reason, **we recommend that you upgrade Mutator first**.
 

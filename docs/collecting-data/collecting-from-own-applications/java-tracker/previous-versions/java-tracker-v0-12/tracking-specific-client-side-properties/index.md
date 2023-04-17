@@ -42,7 +42,7 @@ The `user_ipaddress` is automatically added to all enriched events. To manually 
 
 The `useragent` is also automatically added during enrichment. Snowplow pipelines provide multiple useragent-parsing [enrichments](/docs/enriching-your-data/available-enrichments/index.md). To manually override the detected useragent, use a `Subject` and set a `useragent` string. For the default Tracker configuration with OkHttp, the default `useragent` will be "okhttp/4.2.2".
 
-The `network_userid` is the cookie value for the event collector’s third-party cookie. It is the server-side user identifier. The cookie is named `sp` (or `micro` for Snowplow Micro pipelines). The default behaviour is for the collector to provide a new cookie/`network_userid` for each event it receives. To override the collector cookie’s value with your own generated ID, use a `Subject` object and set `networkUserId`.
+The `network_userid` is the cookie value for the event collector’s third-party cookie. It is the server-side user identifier. The cookie is named `sp` (or `micro` for Snowplow Micro pipelines). The default behavior is for the collector to provide a new cookie/`network_userid` for each event it receives. To override the collector cookie’s value with your own generated ID, use a `Subject` object and set `networkUserId`.
 
 A further property, `timezone`, is generated automatically during Subject initialization, based on `Calendar.getInstance().getTimeZone()`. Therefore, this will be added to all events with a `Subject` attached. The default will be overriden if `timezone` is provided explicitly.
 

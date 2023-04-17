@@ -23,7 +23,7 @@ Through describing how the data should be structured as part of your schema defi
 
 ## Building data meaning with data structures
 
-Rather than just leaving your data open to interpretation by the many different people that will consume and analyse it, you can use schemas to describe the meaning of your data. Each schema you define should clearly describe what is being collected and why both for the schema itself, but also for each field within the schema.
+Rather than just leaving your data open to interpretation by the many different people that will consume and analyze it, you can use schemas to describe the meaning of your data. Each schema you define should clearly describe what is being collected and why both for the schema itself, but also for each field within the schema.
 
 ## The anatomy of a schema
 

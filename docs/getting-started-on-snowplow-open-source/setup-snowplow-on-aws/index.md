@@ -54,7 +54,7 @@ Webhooks allow this third-party software to send their own internal event stream
 
 The Snowplow enrichment process processes raw events from a collector and
 
-1. **Cleans up the data** into a format that is easier to parse / analyse
+1. **Cleans up the data** into a format that is easier to parse / analyze
 2. **Enriches the data** (e.g. infers the location of the visitor from his / her IP address and infers the search engine keywords from the query string)
 3. **Stores the cleaned, enriched data**
 
@@ -86,7 +86,7 @@ We call this process _data modeling_.
 
 - [Get started with data modeling in Snowplow!](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-data-models/index.md)
 
-## Analyse your data!
+## Analyze your data!
 
 ![](images/snowplow-aws-pipeline-analytics.png)
 

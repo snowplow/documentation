@@ -26,7 +26,7 @@ The Fractribution package is dependent on the `snowplow_web_page_views` model cr
 
 ## Overview
 ​
-The Snowplow Fractribution dbt package is a tool to perform Attribution Modelling. The name itself comes from `Fractional attribution`, which allows you to attribute the value of a conversion to one or more channels depending on the conversion pathway. As a result, it becomes possible to determine the revenue per channel, as well as ROAS (Return On Ad Spend - the amount of revenue that is earned for every dollar spent on advertising) once you have cost data for each marketing channel.
+The Snowplow Fractribution dbt package is a tool to perform Attribution Modeling. The name itself comes from `Fractional attribution`, which allows you to attribute the value of a conversion to one or more channels depending on the conversion pathway. As a result, it becomes possible to determine the revenue per channel, as well as ROAS (Return On Ad Spend - the amount of revenue that is earned for every dollar spent on advertising) once you have cost data for each marketing channel.
 ​
 
 This package consists of a series of dbt models that produce the following tables:

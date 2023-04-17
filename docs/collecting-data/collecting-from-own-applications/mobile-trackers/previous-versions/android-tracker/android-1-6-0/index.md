@@ -963,7 +963,7 @@ _[Available from 1.6.0]_
 
 The tracker is tested with different platforms and versions but there are rare situations where an error can be generated. The tracker will manage these errors to avoid crashes of the app and assure that the events are not lost.
 
-However, it can be useful to observe logs and errors from the tracker in order to narrow down a possible issue. Perhaps due to a mistake in the instrumentation of the tracker in the app or other unexpected behaviour.
+However, it can be useful to observe logs and errors from the tracker in order to narrow down a possible issue. Perhaps due to a mistake in the instrumentation of the tracker in the app or other unexpected behavior.
 
 We let the developer to have a full visibility of the tracker logs. _Please, take care to avoid sharing of sensitive information through the logs when in production environment_.
 

@@ -354,9 +354,9 @@ tracker.trackPageViewEvent({
 - `pageTitle`: (string) – Page Title for the page view event.
 - `pageReferrer`: (string) – Url for the referring page to the page view event. Must be a vaild url.
 
-## Data Modelling
+## Data Modeling
 
-### Important features for Data Modelling
+### Important features for Data Modeling
 
 For most use cases, the recommended setup is to enable at least the session context, screen context, and platform context. These will enable most of the common information in modeling mobile events in a standard way.
 

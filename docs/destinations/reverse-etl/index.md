@@ -5,7 +5,7 @@ sidebar_position: 4
 
 Snowplow and Reverse ETL represents best in class tooling for companies executing more sophisticated use cases with their behavioral data.
 
-As one example of where this approach is beneficial, many organizations begin with marketing use cases by creating simple segments but quickly want to target their ads more effectively wanting to incorporate customer propensity to buy and predictive lifetime value. That increase in sophistication can only come from building a deep understanding of users in a place like a data warehouse with modelling tooling (AI/ML) and Reverse ETL.
+As one example of where this approach is beneficial, many organizations begin with marketing use cases by creating simple segments but quickly want to target their ads more effectively wanting to incorporate customer propensity to buy and predictive lifetime value. That increase in sophistication can only come from building a deep understanding of users in a place like a data warehouse with modeling tooling (AI/ML) and Reverse ETL.
 
 This can only be done repeatedly, and with confidence with excellent governance practises which comes from Snowplow’s compliance controls (i.e. controlling which data is sent to 3rd parties), schematised workflows and UI/API for management. Targeting in a sophisticated way ensure resource is allocated best as well (e.g. don’t target users who have already purchased).
 

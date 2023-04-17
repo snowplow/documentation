@@ -81,7 +81,7 @@ If a new type arrives from the input subscription in this period of time, BigQ
 
 In order to load this data again from `failedInserts` to BigQuery you can use Repeater, which reads a subscription on `failedInserts` and performs `INSERT` statements.
 
-Repeater has several important behaviour aspects:
+Repeater has several important behavior aspects:
 
 - If a pulled record is not a valid Snowplow event, it will result into a `loader_recovery_error` bad row.
 - If a pulled record is a valid event, Repeater will wait some time (15 minutes by default) after the `etl_tstamp` before attempting to re-insert it, in order to let Mutator do its job.

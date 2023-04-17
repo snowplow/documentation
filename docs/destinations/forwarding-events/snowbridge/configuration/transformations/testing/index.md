@@ -93,7 +93,7 @@ The transformation config should point to the path of the script _inside_ the co
 ```hcl
 transform {
   use "js" {
-    script_path = env.JS_SCRIPT_PATH
+    script_path = "/tmp/script.js"
   }
 }
 ```

@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 The easiest way to test a transformation configuration for Snowbridge is to run it locally, using the default stdin source, stdout target and your actual transformation config - using a sample of data that is as close to the real world as possible.
 
-The sample file should contain the events/messages you'd like to test with, line separated.
+The sample file should contain the events/messages you'd like to test with, one per line.
 
 ## Snowplow data - generating a sample
 
@@ -29,7 +29,7 @@ Point some test environment tracking to `localhost:9090`, and your events should
 
 ### Local Snowbridge setup
 
-Snowbridge can be run locally via docker, with:
+You can run Snowbridge locally via Docker:
 
 <CodeBlock language="bash">{
 `docker run snowplow/snowbridge:${versions.snowbridge}`
@@ -41,7 +41,13 @@ Since the default configuration for snowbridge is already `stdin` source and `st
 `cat data.tsv | docker run -i snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
-This will print the data to console, along with logs - note that the metrics reported in logs may report that no data has been processed. This is because the app reached the end of output and exited before the default reporting period of 1 second.
+This will print the data to console, along with logs.
+
+:::note
+
+The metrics reported in the logs may state that no data has been processed. This is because the app reached the end of output and exited before the default reporting period of 1 second. You can safely ignore this.
+
+:::
 
 It is likely easiest to output the results to file, to make it easier to examine the results:
 
@@ -82,7 +88,7 @@ Finally, you can add custom scripts by mounting a file, in the exact same manner
     snowplow/snowbridge:${versions.snowbridge} > output.txt`
 }</CodeBlock>
 
-Note that you must ensure that the transformation config points to the mounted path (the `target` in the mount path - `/tmp/script.js` above). For example, the transformation block in our cofiguration for the above example might look like this:
+The transformation config should point to the path of the script _inside_ the container (`/tmp/script.js` above). For example, the transformation block in the configuration might look like this:
 
 ```hcl
 transform {
@@ -94,4 +100,4 @@ transform {
 
 ## Further testing
 
-You can use the above method to test all other aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. To do so, first you'll need to ensure that the local envionment has access to any required resources and can authenticate (eg. connecting from a laptop to a cloud account, or setting up a local metrics server for testing). Once that's done, provide Snowbridge with a hcl file configuring it to connect to those resources, and run it the same way we do in the transformation examples above.
+You can use the above method to test all other aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. To do so, first you'll need to ensure that the local envionment has access to any required resources and can authenticate (eg. connecting from a laptop to a cloud account, or setting up a local metrics server for testing). Once that's done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the transformation examples above.

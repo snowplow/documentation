@@ -15,7 +15,7 @@ The sample file should contain the events/messages you'd like to test with, line
 
 ## Snowplow data - generating a sample
 
-If you're working with Snowplow data, you can simpy follow the [guide to use Snowplow Micro](/docs/getting-started-with-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/getting-started-with-micro/basic-usage/index.md#exporting-events-to-tsv).
+If you're working with Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/getting-started-with-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/getting-started-with-micro/basic-usage/index.md#exporting-events-to-tsv).
 
 For example, here we're using a file named `data.tsv`:
 
@@ -49,11 +49,15 @@ It is likely easiest to output the results to file, to make it easier to examine
 `cat data.tsv | docker run -i snowplow/snowbridge:${versions.snowbridge} > output.txt`
 }</CodeBlock>
 
-Note that the resulting data will contain more than the data: `PartitionKey`, `TimeCreated` `TimePulled` and `TimeTransformed` will also be present. The data that reaches the target in a production setup is under `Data`.
+:::tip
+
+The output (in `output.txt`) will contain more than the data itself. There will be additional fields called `PartitionKey`, `TimeCreated` `TimePulled` and `TimeTransformed`. The data that reaches the target in a production setup is under `Data`.
+
+:::
 
 ### Adding configuration
 
-Adding the specific configuration to test is a matter of mounting a configuration file, and setting the `SNOWBRIDGE_CONFIG_FILE` env var to point to that path. If your configuration is in `config.hcl`, you can add configuration to the above example as follows:
+To add a specific configuration to test, create a configuration file (`config.hcl`) and pass it to the Docker container. You will need to mount the file and set the `SNOWBRIDGE_CONFIG_FILE` environment variable to the path _inside_ the container:
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i \\
@@ -62,9 +66,9 @@ Adding the specific configuration to test is a matter of mounting a configuratio
     snowplow/snowbridge:${versions.snowbridge} > output.txt`
 }</CodeBlock>
 
-Note that docker expects absolute paths for mounted files - here we use pwd but you can specify the aboslute path manually too.
+Note that docker expects absolute paths for mounted files - here we use `$(pwd)` but you can specify the aboslute path manually too.
 
-To test transformations, your configuration file only needs to contain the `transform` block(s) that you're testing, leaving the source and targets on default (by not specifying them in the configuration file).
+To test transformations, you only need to add the `transform` block(s) to your configuration file. Don’t specify the `source` and `target` blocks to leave them on default (`stdin` and `stdout`).
 
 ### Adding custom scripts
 

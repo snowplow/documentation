@@ -79,9 +79,9 @@
       "$4",
       "",
       "</TabItem>",
-      "<TabItem value=\"$4\" label=\"$5\">",
+      "<TabItem value=\"$5\" label=\"$6\">",
       "",
-      "$6",
+      "$7",
       "",
       "</TabItem>",
       "",
@@ -130,5 +130,10 @@
     "scope": "markdown",
     "prefix": "details_block",
     "body": ["<details>", "<summary>$1</summary>", "$2", "</details>", ""]
+  },
+  "Browser Window": {
+    "scope": "markdown",
+    "prefix": "browser_window",
+    "body": ["<div class=\"browser-window\">", "\t\t<img src={require(\"./$1\").default} alt=\"$2\"/>", "</div>", ""]
   }
 }

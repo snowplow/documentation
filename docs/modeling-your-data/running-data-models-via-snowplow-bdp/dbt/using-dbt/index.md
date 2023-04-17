@@ -145,11 +145,17 @@ The warehouse password should be sent by [secure form from the Snowplow BDP Cons
 
 Data models can be configured via the Snowplow BDP Console:
 
-![](images/Screenshot-2021-11-15-at-20.15.28.png)
+<div class="browser-window">
+    <img src={require("./images/Screenshot-2021-11-15-at-20.15.28.png").default} alt="BDP Console data models screen"/>
+</div>
+
 
 In the first step, you can provide the data model name, a description, and the owner(s) of the data model that will be alerted in case of failure. Finally select the engine and version that should run your datamodel (dbt in this case):
 
-![](images/data-model-create-step-1.png)
+<div class="browser-window">
+    <img src={require("./images/data-model-create-step-1.png").default} alt="Create a new data model step 1 screenshot"/>
+</div>
+
 
 
 Please note that the model name needs to match to the corresponding datamodeling subfolder name in GitHub. The dbt project for the model in the above example would therefore live under:
@@ -158,7 +164,9 @@ Please note that the model name needs to match to the corresponding datamodeling
 
 In the second step, you can then add the schedule:
 
-![](images/data-model-create-step-2.png)
+<div class="browser-window">
+    <img src={require("./images/data-model-create-step-2.png").default} alt="Create data model step 2 screenshot"/>
+</div>
 
 Please note that the cron schedule is in UTC.
 
@@ -173,19 +181,26 @@ In the third and last step you can configure the arguments and variables your `d
 <Tabs groupId="dbt-step3" queryString>
 <TabItem value="selector" label="Selector" default>
 
-![](images/data-model-create-step-3.png)
+<div class="browser-window">
+    <img src={require("./images/data-model-create-step-3.png").default} alt="Create data model step 3 screenshot"/>
+</div>
 
 </TabItem>
 <TabItem value="select_exclude" label="Select/Exclude">
 
-![](images/data-model-create-step-3-selectexclude.png)
+<div class="browser-window">
+    <img src={require("./images/data-model-create-step-3-selectexclude.png").default} alt="Create data model step 3 screenshot using exclude"/>
+</div>
 
 </TabItem>
 </Tabs>
 
 Once you are happy with the configuration, you can create the model. The model will be disabled until you enable it:
 
-![](images/Screenshot-2021-11-15-at-20.25.53.png)
+<div class="browser-window">
+    <img src={require("./images/Screenshot-2021-11-15-at-20.25.53.png").default} alt="Data model created screenshot"/>
+</div>
+
 
 Please make sure all your dbt project files are merged to the default branch in GitHub before enabling the model. Any changes merged to the default branch are available immediately.
 

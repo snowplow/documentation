@@ -372,26 +372,26 @@ abbr[data-title]:focus::after {
 }
 
 .browser-window {
-	 background: var(--ifm-font-color-base-inverse);
-	 position: relative;
-	 display: inline-block;
-	 padding: 20px 0 0;
-	 -webkit-box-shadow: 0 16px 80px 0 rgba(0, 0, 0, 0.05);
-	 box-shadow: 0 16px 80px 0 rgba(0, 0, 0, 0.05);
-	 border: 1px solid var(--ifm-font-color-base-inverse);
-	 border-radius: 5px;
-   margin-bottom: 20px;
+  background: var(--ifm-font-color-base-inverse);
+  position: relative;
+  display: inline-block;
+  padding: 20px 0 0;
+  -webkit-box-shadow: 0 16px 80px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 16px 80px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--ifm-font-color-base-inverse);
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
- .browser-window:before {
-	 content: "";
-	 position: absolute;
-	 display: block;
-	 width: 35px;
-	 height: 7px;
-	 top: 6px;
-	 left: 10px;
-	 background-image: url('/img/window-buttons.svg')
+.browser-window:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 35px;
+  height: 7px;
+  top: 6px;
+  left: 10px;
+  background-image: url('/img/window-buttons.svg')
 }
- .browser-window img {
-	 width: auto;
+.browser-window img {
+  width: auto;
 }

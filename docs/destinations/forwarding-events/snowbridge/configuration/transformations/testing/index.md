@@ -35,7 +35,7 @@ You can run Snowbridge locally via Docker:
 `docker run snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
-Since the default configuration for snowbridge is already `stdin` source and `stdout` target. So, to test sending data through with no transformations, (where `data.tsv` contains our test data) we can run:
+The default configuration for Snowbridge already uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):T
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i snowplow/snowbridge:${versions.snowbridge}`
@@ -49,7 +49,7 @@ The metrics reported in the logs may state that no data has been processed. This
 
 :::
 
-It is likely easiest to output the results to file, to make it easier to examine the results:
+You can output the results to a file to make it easier to examine them:
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i snowplow/snowbridge:${versions.snowbridge} > output.txt`
@@ -100,4 +100,4 @@ transform {
 
 ## Further testing
 
-You can use the above method to test all other aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. To do so, first you'll need to ensure that the local envionment has access to any required resources and can authenticate (eg. connecting from a laptop to a cloud account, or setting up a local metrics server for testing). Once that's done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the transformation examples above.
+You can use the above method to test all other aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. To do so, first you'll need to ensure that the local envionment has access to any required resources and can authenticate (eg. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that's done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the transformation examples above.

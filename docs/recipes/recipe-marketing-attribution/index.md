@@ -5,6 +5,12 @@ date: "2020-10-12"
 sidebar_position: 10
 ---
 
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/snowplow_fractribution/" name="Fractional Attribution Modeling"/>
+```
+
 ## Introduction
 
 Attribution modeling is the process of assigning credit for conversions to marketing touch points. The key to attribution modeling is capturing all marketing touchpoints and all conversions, and being able to assign them to a specific user. This allows you to look at the effectiveness of your marketing spend across platforms and channels, over time.

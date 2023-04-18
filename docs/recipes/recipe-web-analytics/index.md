@@ -5,6 +5,12 @@ date: "2020-10-12"
 sidebar_position: 0
 ---
 
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
+```
+
 ## Introduction
 
 Snowplow empowers you to collect granular data from your website(s). To gain a better understanding of how users are engaging, let's start off by aggregating this data into sessions. While sessions don't tell you everything, and don't necessarily reflect the entire customer journey, they are great for some initial exploratory analysis such as:

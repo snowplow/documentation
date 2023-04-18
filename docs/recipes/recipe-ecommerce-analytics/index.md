@@ -5,6 +5,12 @@ date: "2020-10-12"
 sidebar_position: 40
 ---
 
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/ecommerce/" name="E-Commerce"/>
+```
+
 :::note
 
 This recipe is currently specific to Try Snowplow.

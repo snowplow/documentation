@@ -140,3 +140,9 @@ FROM derived.sessions;
 For more information on how Snowplow models web data, take a look at [our standard web data model](https://github.com/snowplow/data-models/tree/master).
 
 A general view of Snowplow for web can also be found on [our website](https://snowplowanalytics.com/web/).
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

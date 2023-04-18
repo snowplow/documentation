@@ -241,3 +241,9 @@ GROUP BY 1;
 - Consider different types of conversions, or model intent-to-convert
 
 To learn more about marketing attribution with Snowplow, check out [our introductory post](https://snowplowanalytics.com/blog/2020/04/06/introduction-to-marketing-attribution-with-snowplow/) as well as [this full guide to advanced attribution](https://snowplowanalytics.com/blog/2020/10/26/how-to-do-marketing-attribution-with-snowplow/).
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

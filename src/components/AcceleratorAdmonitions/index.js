@@ -27,8 +27,8 @@ export function AllAccelerators(props) {
       title="Unleash the power of your behavioral data"
       type="tip"
     >
-      If you're looking for a more guided approach that contains information
-      about tracking and modeling your data, check out our{' '}
+      If you're looking for more guided approaches that contains information
+      about tracking and modeling your data, check out all our{' '}
       <strong>Data Product Accelerators</strong>!
       <br />
       <a

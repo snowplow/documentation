@@ -152,3 +152,9 @@ Understanding how your users are engaging with your content is just the first st
 To learn more about Snowplow for media and entertainment, check out [our blog series on the topic](https://snowplowanalytics.com/blog/2019/05/29/snowplow-for-media-part-1/).
 
 Ready to get started with content recommendations? Check out our [step-by-step guide](https://snowplowanalytics.com/blog/2020/10/26/how-to-build-a-content-recommendation-engine-with-snowplow/).
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

@@ -165,3 +165,9 @@ Funnels can be difficult to construct and visualise in relational databases usin
 For example, if your users can also interact with you via email or a ticketing system such as ZenDesk, you might want to include those interactions too. Building out funnel analytics yourself in the data warehouse gives you that flexibility. You might want to try this out by joining the data collected through Try Snowplow with our customer data you have.
 
 To learn more about Snowplow's approach to Product Analytics, check out [the relevant page in our use case library](https://snowplowanalytics.com/use-cases/product-analytics/) or download our [e-book](https://snowplowanalytics.com/resources/product-analytics-ebook/).
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

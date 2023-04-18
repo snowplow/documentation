@@ -26,6 +26,12 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web 
 - `python` or `docker` installed
 
 ```mdx-code-block
+import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
+
+<DbtPrivs/>
+```
+
+```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
 <DbtPackageInstallation/>

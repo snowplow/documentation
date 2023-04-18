@@ -18,7 +18,13 @@ On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce,` `normaliz
 
 :::
 
+## Required Privileges 
 
+```mdx-code-block
+import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
+
+<DbtPrivs/>
+```
 
 ## YAML Selectors
 

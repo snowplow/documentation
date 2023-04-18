@@ -33,3 +33,4 @@ You can always run Micro with the `--help` argument to find out what is supporte
 |----------|-------------|
 | `MICRO_IGLU_REGISTRY_URL`<br/>_(since 1.5.0)_ | The URL for an additional custom Iglu registry ([usage](/docs/getting-started-with-micro/adding-schemas/index.md#pointing-micro-to-an-iglu-registry)) |
 | `MICRO_IGLU_API_KEY`<br/>_(since 1.5.0)_ | An optional API key for an Iglu registry defined with `MICRO_IGLU_REGISTRY_URL` |
+| `MICRO_SSL_CERT_PASSWORD`<br/>_(since 1.7.0)_ | The password for the optional SSL/TLS certificate in `/config/ssl-certificate.p12`. Enables HTTPS ([usage](/docs/getting-started-with-micro/advanced-usage/index.md#enabling-https)) |

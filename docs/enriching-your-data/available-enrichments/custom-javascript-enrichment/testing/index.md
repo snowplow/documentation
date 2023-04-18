@@ -137,8 +137,32 @@ This command will add both the script and the schema to Micro:
 
 ## Testing with more complete events
 
-Here are two more tips on getting the most of Micro when testing your JavaScript enrichment.
+Here are a few more tips on getting the most out of Micro when testing your JavaScript enrichment.
 
-* If your enrichment uses fields filled by other enrichments, you will want to [enable those](/docs/getting-started-with-micro/configuring-enrichments/index.md) as well.
+### Enriched fields
 
-* If your enrichment relies on the `user_ipaddress` field or the `geo_*` fields, you will discover that `user_ipaddress` is your local one (e.g. something like `192.168.0.42`), and subsequently the `geo_*` fields are all `null`. That’s because you have both Micro and your tracking code running locally on the same machine. There is a way around that. Check out the section on [exposing Micro to the world](/docs/getting-started-with-micro/advanced-usage/index.md#exposing-micro-to-the-outside-world) — with this approach you can get a public URL for your Micro, to which you can point your tracking code. Now the interaction between your tracking and your Micro will go through the internet, and you will get a realistic IP address in your events.
+If your enrichment uses fields filled by other enrichments, you will want to [enable those](/docs/getting-started-with-micro/configuring-enrichments/index.md) as well.
+
+### IP addresses
+
+If your enrichment relies on the `user_ipaddress` field or the `geo_*` fields, with the default setup you will discover that `user_ipaddress` is your local one (e.g. something like `192.168.0.42`). Subsequently, the `geo_*` fields are all `null`. That’s because you have both Micro and your tracking code running locally on the same machine.
+
+There is a way around this. Check out the section on [exposing Micro via a public domain name](/docs/getting-started-with-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name) — with this approach you can get a public URL for your Micro, to which you can point your tracking code. Now the interaction between your tracking and your Micro will go through the internet, and you will get a realistic IP address in your events.
+
+### Cookies
+
+If your enrichment relies on cookies, you may find it difficult to reproduce all the cookies set by your website or app in a local setup.
+
+For a solution, check out the section on [locally resolving an existing domain name to Micro](/docs/getting-started-with-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro). With this approach you can hook into an existing website or app, receiving all cookies in your Micro.
+
+:::tip Cookie name
+
+If the values of cookie-based fields (e.g. `network_userid`) are not what you expect, make sure you [configure Micro](/docs/getting-started-with-micro/advanced-usage/index.md#adding-custom-collector-configuration) to use the same cookie name as your website or app (the default is `micro`). For example, to set it to `sp`:
+
+<CodeBlock language="bash">{
+`docker run ... \\
+  snowplow/snowplow-micro:${versions.snowplowMicro} \\
+  -Dcollector.cookie.name=sp`
+}</CodeBlock>
+
+:::

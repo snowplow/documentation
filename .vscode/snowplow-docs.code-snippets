@@ -121,7 +121,7 @@
   "Browser Window": {
     "scope": "markdown",
     "prefix": "browser_window",
-    "body": [" <BrowserWindow url =\"$1\">", "\t<img src={require(\"./$2\").default} alt=\"$3\"/>", "</BrowserWindow>", ""]
+    "body": ["<BrowserWindow url =\"$1\">", "\t<img src={require(\"./$2\").default} alt=\"$3\"/>", "</BrowserWindow>", ""]
   },
   "Tabs mdx import": {
     "scope": "markdown",

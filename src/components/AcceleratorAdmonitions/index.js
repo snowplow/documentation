@@ -29,7 +29,7 @@ export function AllAccelerators(props) {
     >
       If you're looking for a more guided approach that contains information
       about tracking and modeling your data, check out our{' '}
-      <strong>Data Product Accelerators!</strong>!
+      <strong>Data Product Accelerators</strong>!
       <br />
       <a
         className="snwpl-nav-button"

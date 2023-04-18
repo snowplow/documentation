@@ -70,7 +70,7 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 | 0.2.1                            | >=1.0.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
 `} remarkPlugins={[remarkGfm]} /> 
 
-> _Postgres is technically supported in the models within the package, however one of the context's names is too long to be loaded via the Postgres Loader._
+> _Postgres is technically supported in the models within the package, however one of the contexts’ names is too long to be loaded via the Postgres Loader._
 
 
 </TabItem>

@@ -61,17 +61,17 @@ Open the _Edit Metadata_ popup using the file menu.
 
 ### Set permissions
 
-Open the _Edit Permissions_ popup using the file menu.
+Open the [_Edit Access_ popup](https://cloud.google.com/storage/docs/access-control/making-data-public#objects) using the file menu.
 
 Add a new item in the table, enter the following details and click Save.
 
 | Option | Value |
 | --- | --- |
-| Entity | Group |
+| Entity | Public |
 | Name | allUsers |
 | Access | Reader |
 
-Click the link icon next to _Public to internet_ to get the file URL e.g. [https://storage.googleapis.com/company-name-sp-js/gh7rnghq.js](https://storage.googleapis.com/company-name-sp-js/gh7rnghq.js) 
+Click _Copy URL_ next to _Public to internet_ in the file browser to get the file's URL e.g. [https://storage.googleapis.com/company-name-sp-js/gh7rnghq.js](https://storage.googleapis.com/company-name-sp-js/gh7rnghq.js) 
 
 ### Add DNS Record for bucket (optional)
 

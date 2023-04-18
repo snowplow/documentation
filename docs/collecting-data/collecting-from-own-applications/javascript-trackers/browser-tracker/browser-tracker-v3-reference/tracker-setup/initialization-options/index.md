@@ -127,7 +127,7 @@ Most browsers have a Do Not Track option which allows users to express a prefere
 
 #### Opt-out cookie
 
-It is possible to set an opt-out cookie in order not to track anything similarly to Do Not Track through `window.snowplow('setOptOutCookie', 'opt-out');` where ‘opt-out’ is the name of your opt-out cookie. If this cookie is set, cookies won’t be stored and events won’t be fired.
+It is possible to set an opt-out cookie in order not to track anything similarly to Do Not Track through `setOptOutCookie('opt-out');` where ‘opt-out’ is the name of your opt-out cookie. If this cookie is set, cookies won’t be stored and events won’t be fired.
 
 #### Anonymous Tracking
 
@@ -279,7 +279,7 @@ We recommend leaving the `bufferSize` as the default value of 1. This ensure tha
 If you have set `bufferSize` to greater than 1, you can flush the buffer using the `flushBuffer` method:
 
 ```javascript
-snowplow('flushBuffer');
+flushBuffer();
 ```
 
 For instance, if you wish to send several events at once, you might make the API calls to create the events and store them and then and call `flushBuffer` afterwards to ensure they are all sent before the user leaves the page.
@@ -345,8 +345,8 @@ If you want to decorate every link, regardless of its destination:
 Note that the above will decorate “links” which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`). To exclude these links:
 
 ```javascript
-snowplow('crossDomainLinker', function(linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0;
+crossDomainLinker(function(linkElement) {
+  return linkElement.hostname !== "";
 });
 ```
 
@@ -355,7 +355,7 @@ Note that when the tracker loads, it does not immediately decorate links. Instea
 If further links get added to the page after the tracker has loaded, you can use the tracker’s `crossDomainLinker` method to add listeners again. (Listeners won’t be added to links which already have them.)
 
 ```javascript
-snowplow('crossDomainLinker', function (linkElement) {
+crossDomainLinker(function (linkElement) {
   return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
 });
 ```
@@ -394,7 +394,7 @@ If the optional `discoverRootDomain` field of the configuration object is set 
 Whenever tracker initialized on your domain – it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` configuration object parameter or `setVisitorCookieTimeout` method.
 
 ```javascript
-snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
+newTracker('cf', '{{COLLECTOR_URL}}', {
   cookieLifetime: 86400 * 31,
 });
 ```
@@ -402,7 +402,7 @@ snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
 or
 
 ```javascript
-snowplow('setVisitorCookieTimeout', 86400 * 30);  // 30 days
+setVisitorCookieTimeout(86400 * 30);  // 30 days
 ```
 
 If `cookieLifetime` is set to `0`, the cookie will expire at the end of the session (when the browser closes). If set to `-1`, the first-party cookies will be disabled.

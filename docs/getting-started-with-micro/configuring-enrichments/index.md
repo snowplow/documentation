@@ -56,6 +56,6 @@ Once Micro starts, you should see messages like these:
 
 :::tip
 
-Micro is especially great for [testing the JavaScript enrichment](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/index.md#testing-your-enrichment).
+Micro is especially great for [testing the JavaScript enrichment](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/testing/index.md).
 
 :::

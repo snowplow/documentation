@@ -48,9 +48,18 @@ MaxMind also offer a method to [download and update their databases programmati
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
-
-<TestingWithMicro/>
+import XForwardedForPlugin from "@site/docs/reusable/x-forwarded-for-plugin/_index.md"
 ```
+
+<TestingWithMicro>
+
+Note that to test this enrichment, you will need events with realistic IP addresses (not local ones like `192.168.0.42`).
+
+<XForwardedForPlugin/>
+
+Alternatively, you can [set up Micro to receive external IP addresses](/docs/getting-started-with-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name).
+
+</TestingWithMicro>
 
 Snowplow BDP customers can enable the IP Lookup enrichment for your pipeline [in the Snowplow console.](/docs/enriching-your-data/configuring-enrichments/index.md) Open Source will need to upload the enrichment json for use in their Snowplow pipeline.
 

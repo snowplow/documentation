@@ -263,61 +263,6 @@ e = AsyncEmitter("collector.example.com",
             event_store = None,
             session=None)
 ```
-
-## The CeleryEmitter class
-
-**Important note**: Since version 0.9.0, the CeleryEmitter is only available as an extra module. To use it, you need to install the snowplow-tracker as:
-
-```bash
-$ pip install snowplow-tracker[celery]
-```
-
-The `CeleryEmitter` class works just like the base `Emitter` class, but it registers sending requests as a task for a [Celery](http://www.celeryproject.org/) worker. If there is a module named snowplow_celery_config.py on your PYTHONPATH, it will be used as the Celery configuration file; otherwise, a default configuration will be used. You can run the worker using this command:
-
-```bash
-celery -A snowplow_tracker.emitters worker --loglevel=debug
-```
-
-Note that `on_success` and `on_failure` callbacks cannot be supplied to this emitter.
-
-## The RedisEmitter class
-
-**Important note**: Since version 0.9.0, the RedisEmitter is only available as an extra module. To use it, you need to install the snowplow-tracker as:
-
-```bash
-$ pip install snowplow-tracker[redis]
-```
-
-  
-
-Use a RedisEmitter instance to store events in a [Redis](http://redis.io/) database for later use. This is the RedisEmitter constructor function:
-
-```python
-def __init__(self, rdb=None, key="snowplow"):
-```
-
-`rdb` should be an instance of either the `Redis` or `StrictRedis` class, found in the `redis` module. If it is not supplied, a default will be used. `key` is the key used to store events in the database. It defaults to "snowplow". The format for event storage is a Redis list of JSON strings.
-
-An example:
-
-```python
-from snowplow_tracker import RedisEmitter, Tracker
-import redis
-
-rdb = redis.StrictRedis(db=2)
-
-e = RedisEmitter(rdb, "my_snowplow_key")
-
-t = Tracker(e)
-
-t.track_page_view("http://www.example.com")
-
-# Check that the event was stored in Redis:
-print(rdb.lrange("my_snowplowkey", 0, -1))
-# prints something like:
-# ['{"tv":"py-0.4.0", "ev": "pv", "url": "http://www.example.com", "dtm": 1400252420261, "tid": 7515828, "p": "pc"}']
-```
-
 ### Manual flushing
 
 You can flush the emitter manually using the `flush` method of the `Tracker` instance which is sending events to the emitter. This is a blocking call which synchronously sends all events in the emitter's buffer.

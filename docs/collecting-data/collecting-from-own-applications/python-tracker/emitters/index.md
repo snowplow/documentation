@@ -33,7 +33,8 @@ def __init__(
         max_retry_delay_seconds: int = 60,
         buffer_capacity: Optional[int] = None,
         custom_retry_codes: Dict[int, bool] = {},
-        event_store: Optional[EventStore] = None
+        event_store: Optional[EventStore] = None,
+        session: Optional[requests.Session] = None,
     )-> None:
 ```
 
@@ -62,6 +63,7 @@ Before version 0.13.0 `batch_size` was named `buffer_size`
 | `buffer_capacity` | The maximum capacity of the event buffer | No | int | `None` | v0.13.0 |
 | `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | `None` | v0.13.0 |
 | `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None` | v0.13.0 |
+| `session` | Persist parameters across requests by using a session object | No | requests.Session | `None` | v0.15.0 |
 
 See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for more information. 
 
@@ -182,6 +184,14 @@ Since version 0.13.0, the constructor takes another `event_store` argument.
 
 The event store is used to store an event queue with events scheduled to be sent. Events are added to the event store when they are tracked and removed when they are successfuly emitted or when emitting fails without any scheduled retries. The default is an InMemoryEventStore object with a buffer_capacity of 10,000 events.
 
+:::note New in v0.15.0
+
+Since version 0.15.0, the constructor takes another `session` argument.
+
+:::
+- `session`
+The session object can be parsed into the emitter to use the requests.Session API. This allows users to persist parameters across requests, as well as pool connections to increase efficiency under heavy useage. If no `session` is parsed, the requests API is used.
+
 ## What happens if an event fails to send?
 :::note New in v0.13.0
 Retry capabilities are new in v0.13.0
@@ -250,7 +260,8 @@ e = AsyncEmitter("collector.example.com",
             byte_limit=None,
             max_retry_delay_seconds = 60,
             buffer_capacity = 5000,
-            event_store = None)
+            event_store = None,
+            session=None)
 ```
 
 ## The CeleryEmitter class

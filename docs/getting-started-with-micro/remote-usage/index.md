@@ -136,7 +136,8 @@ The two most important settings are the cookie name (you can set it with `-Dcoll
 
 You will need to run Micro as usual, with a few changes:
 * [Enable HTTPS](/docs/getting-started-with-micro/advanced-usage/index.md#enabling-https), if needed
-* Use port 80 (and 443, if needed) instead of 9090 (and 9543)
+* Use port `80` instead of `9090`
+* If HTTPS is enabled, also use port `443` instead of `9543`
 
 If you don’t need HTTPS:
 

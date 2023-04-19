@@ -147,7 +147,13 @@ If your enrichment uses fields filled by other enrichments, you will want to [en
 
 If your enrichment relies on the `user_ipaddress` field or the `geo_*` fields, with the default setup you will discover that `user_ipaddress` is your local one (e.g. something like `192.168.0.42`). Subsequently, the `geo_*` fields are all `null`. That’s because you have both Micro and your tracking code running locally on the same machine.
 
-There is a way around this. Check out the section on [exposing Micro via a public domain name](/docs/getting-started-with-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name) — with this approach you can get a public URL for your Micro, to which you can point your tracking code. Now the interaction between your tracking and your Micro will go through the internet, and you will get a realistic IP address in your events.
+```mdx-code-block
+import XForwardedForPlugin from "@site/docs/reusable/x-forwarded-for-plugin/_index.md"
+
+<XForwardedForPlugin/>
+```
+
+Alternatively, check out the section on [exposing Micro via a public domain name](/docs/getting-started-with-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name) — with this approach you can get a public URL for your Micro, to which you can point your tracking code. Now the interaction between your tracking and your Micro will go through the internet, and you will get a realistic IP address in your events.
 
 ### Cookies
 

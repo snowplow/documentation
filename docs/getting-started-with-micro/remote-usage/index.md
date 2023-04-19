@@ -9,6 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import XForwardedForPlugin from "@site/docs/reusable/x-forwarded-for-plugin/_index.md"
 ```
 
 If you are not running your website or app locally but would still like to use Micro for testing and debugging, there are two options:
@@ -102,6 +103,8 @@ Let’s say you have a website `example.com` with Snowplow tracking that points 
 With this approach, because Micro is “pretending” to be behind the actual Collector domain (`c.example.com`), it will receive first-party cookies set for that domain.
 
 However, you will only get local IP addresses (like `192.168.0.42`) in your data, because the traffic never leaves your machine. This might be relevant for testing some enrichments.
+
+<XForwardedForPlugin/>
 
 :::
 

@@ -29,13 +29,13 @@ The example configuration is capturing Scala Stream Collector’s own “sp” c
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
+```
 
 <TestingWithMicro>
 
 You will likely also need to [configure Micro to work with first-party cookies](/docs/getting-started-with-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro).
 
 </TestingWithMicro>
-```
 
 ## Input
 

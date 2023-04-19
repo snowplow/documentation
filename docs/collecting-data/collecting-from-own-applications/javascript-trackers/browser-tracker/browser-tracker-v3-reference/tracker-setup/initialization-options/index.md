@@ -313,31 +313,7 @@ import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 import CrossDomain from "@site/docs/reusable/javascript-tracker-cross-domain/_index.md"
 ```
 
-<CrossDomain>
-
-```javascript
-crossDomainLinker(function(linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0;
-});
-```
-```javascript
-crossDomainLinker(function(linkElement) {
-  return linkElement.hostname !== "";
-});
-```
-```javascript
-crossDomainLinker(function (linkElement) {
-  return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-});
-```
-
-```javascript
-trackPageView(); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
-if (/[?&]_sp=/.test(window.location.href)) {
-  history.replaceState(history.state, "", window.location.replace(/&?_sp=[^&]+/, "")); // page URL is now https://example.com/?example=123
-}
-```
-</CrossDomain>
+<CrossDomain lang="browser" />
 
 #### Configuring the maximum payload size in bytes
 

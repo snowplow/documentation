@@ -360,34 +360,7 @@ import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 import CrossDomain from "@site/docs/reusable/javascript-tracker-cross-domain/_index.md"
 ```
 
-<CrossDomain>
-
-```javascript
-snowplow('crossDomainLinker', function(linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0;
-});
-```
-```javascript
-snowplow('crossDomainLinker', function(linkElement) {
-  return linkElement.hostname !== "";
-});
-```
-```javascript
-snowplow('crossDomainLinker', function (linkElement) {
-  return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-});
-```
-The URL updating code runs in a [Tracker Callback](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/advanced-usage/tracker-callbacks/index.md) to ensure it does not run before the page view event has a chance to capture the original URL.
-```javascript
-snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
-snowplow(function(){
-  if (/[?&]_sp=/.test(window.location.href)) {
-    history.replaceState(history.state, "", window.location.replace(/&?_sp=[^&]+/, "")); // page URL is now https://example.com/?example=123
-  }
-});
-```
-</CrossDomain>
-
+<CrossDomain lang="javascript" />
 
 #### Configuring the maximum payload size in bytes
 

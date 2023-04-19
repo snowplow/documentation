@@ -30,7 +30,7 @@ flowchart LR
   website(Website or app)
   tracking(Tracking code)
   url(URL like <code>https://22d8-....ngrok.app</code>)
-  tunnel{{<i>Tunneling magic</i> &#x1FA84}}
+  tunnel{{"<i>Tunneling magic</i> 🪄"}}
   micro(Micro on your machine)
 
   website --> tracking --> url --> tunnel --> micro

@@ -5,6 +5,12 @@ date: "2020-10-12"
 sidebar_position: 40
 ---
 
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/ecommerce/" name="E-Commerce"/>
+```
+
 :::note
 
 This recipe is currently specific to Try Snowplow.
@@ -248,3 +254,9 @@ Understanding how your users are engaging with your products is the first step i
 - Etc.
 
 To learn more about Snowplow for retail and e-commerce, check out [our blog series on the topic](https://snowplowanalytics.com/blog/2019/03/06/snowplow-for-retail-part-1-how-can-I-use-snowplow/)!
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

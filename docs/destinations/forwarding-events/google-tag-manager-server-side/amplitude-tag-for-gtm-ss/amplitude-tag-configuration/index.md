@@ -153,6 +153,16 @@ Using the **Additional Event Properties** table allows you to set additional **e
 
 Using the **Additional User Properties** table allows you to set additional **user** properties in Amplitude payload. Similarly to the previous table in the section, add a row and specify the property name for Amplitude `user_properties` and then the value you would like to set it to.
 
+### Groups Properties
+
+:::note
+
+This configuration option is relevant **only if** you have set up [account-level reporting in Amplitude](https://help.amplitude.com/hc/en-us/articles/115001765532).
+
+:::
+
+Using the **Additional Groups Properties** table allows you to set additional **groups** properties in Amplitude payload. Similarly to the previous tables in the section, add a row and specify the property name for Amplitude `groups` object and then the value you would like to set it to.
+
 ## Advanced Event Settings
 
 In this section you can find advanced configuration parameters.

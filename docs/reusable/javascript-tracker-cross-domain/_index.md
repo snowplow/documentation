@@ -156,7 +156,7 @@ You can do this using the [History API](https://developer.mozilla.org/en-US/docs
 <>{ props.lang === "browser" && <>
 
 ```javascript
--trackPageView(); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
+trackPageView(); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 if (/[?&]_sp=/.test(window.location.href)) {
   history.replaceState(history.state, "", window.location.replace(/&?_sp=[^&]+/, "")); // page URL is now https://example.com/?example=123
 }

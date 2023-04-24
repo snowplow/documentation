@@ -889,6 +889,132 @@ This macro does not currently have a description.
 </Tabs>
 </DbtDetails>
 
+### Get Field {#macro.snowplow_utils.get_field}
+
+<DbtDetails><summary>
+<code>macros/utils/cross_db/get_field.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro exists to make it easier to extract a field from our `unstruct_` and `contexts_` type columns for users in Snowflake, Databricks, and BigQuery (although you may prefer to use `combine_column_versions` for BigQuery, as this manages multiple context versions and allows for extraction of multiple fields at the same time). The macro can handle type casting and selecting from arrays.
+
+
+
+<h4>Arguments</h4>
+
+- `column_name` *(string)*: Name of the column to extract the field from
+- `field_name` *(string)*: Name of the field to extract
+- `table_alias` *(string)*: (Optional) Alias of the table in your query that the column exists in. Default `none` (no table alias)
+- `type` *(string)*: (Optional) Type to cast the field to if required. Default `none` (no casting)
+- `array_index` *(integer)*: (Optional) Index of the array to select in case of multiple entries. Uses `SAFE_OFFSET` for BigQuery. Default `none` (not an array)
+
+<h4>Returns</h4>
+
+
+SQL snippet to select the field specified from the column
+
+<h4>Usage</h4>
+
+
+Extracting a single field
+```sql
+
+select
+{{ snowplow_utils.get_field(column_name = 'contexts_nl_basjes_yauaa_context_1', 
+                            field_name = 'agent_class', 
+                            table_alias = 'a',
+                            type = 'string',
+                            array_index = 0)}} as yauaa_agent_class
+from 
+    my_events_table a
+
+```
+
+Extracting multiple fields
+```sql
+
+select
+{% for field in [('field1', 'string'), ('field2', 'numeric'), ...] %}
+  {{ snowplow_utils.get_field(column_name = 'contexts_nl_basjes_yauaa_context_1', 
+                            field_name = field[0], 
+                            table_alias = 'a',
+                            type = field[1],
+                            array_index = 0)}} as {{ field[0] }}
+{% endfor %}
+
+from 
+    my_events_table a
+
+```
+
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/get_field.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="raw" default>
+
+```jinja2
+{% macro get_field(column_name, field_name, table_alias = none, type = none, array_index = none) %}
+    {{ return(adapter.dispatch('get_field', 'snowplow_utils')(column_name, field_name, table_alias, type, array_index)) }}
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="bigquery" label="bigquery">
+
+```jinja2
+{% macro bigquery__get_field(column_name, field_name, table_alias = none, type = none, array_index = none) %}
+{%- if type -%}cast({%- endif -%}{%- if table_alias -%}{{table_alias}}.{%- endif -%}{{column_name}}{%- if array_index is not none -%}[SAFE_OFFSET({{array_index}})]{%- endif -%}.{{field_name}}{%- if type %} as {{type}}){%- endif -%}
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__get_field(column_name, field_name, table_alias = none, type = none, array_index = none) %}
+
+{% if execute %}
+    {% do exceptions.raise_compiler_error('Macro get_field only supports Bigquery, Snowflake, Spark, and Databricks, it is not supported for ' ~ target.type) %}
+{% endif %}
+
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="snowflake" label="snowflake">
+
+```jinja2
+{% macro snowflake__get_field(column_name, field_name, table_alias = none, type = none, array_index = none) %}
+{%- if type is none and execute -%}
+{% do exceptions.warn("Warning: macro snowplow_utils.get_field is being use without a type provided, Snowflake will return a variant column in this case which is unlikely to be what you want.") %}
+{%- endif -%}
+{%- if table_alias -%}{{table_alias}}.{%- endif -%}{{column_name}}{%- if array_index is not none -%}[{{array_index}}]{%- endif -%}:{{field_name}}{%- if type -%}::{{type}}{%- endif -%}
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="spark" label="spark">
+
+```jinja2
+{% macro spark__get_field(column_name, field_name, table_alias = none, type = none, array_index = none) %}
+{%- if table_alias -%}{{table_alias}}.{%- endif -%}{{column_name}}{%- if array_index is not none -%}[{{array_index}}]{%- endif -%}.{{field_name}}{%- if type -%}::{{type}}{%- endif -%}
+{% endmacro %}
+```
+
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+</DbtDetails>
+
 ### Get Field Alias {#macro.snowplow_utils.get_field_alias}
 
 <DbtDetails><summary>
@@ -1708,7 +1834,8 @@ With the possibility of multiple entities per context, your events table must al
 with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1', "'2023-01-01'", "'2023-02-01'", single_entity = false)}}
 
 select
-...
+...,
+count(*) over (partition by a.event_id) as duplicate_count
 from my_events_table a
 left join nl_basjes_yauaa_context_1 b on 
     a.event_id = b.yauaa_context__id 
@@ -1821,6 +1948,17 @@ left join nl_basjes_yauaa_context_1 b on
 <TabItem value="macro" label="Macros">
 
 - macro.dbt_utils.get_single_value
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
+- [model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run)
 
 </TabItem>
 </Tabs>
@@ -2105,6 +2243,7 @@ from ... a
 <Tabs groupId="reference">
 <TabItem value="model" label="Models">
 
+- [model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run)
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion)
 - [model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_paths_to_non_conversion)
 - [model.snowplow_media_player.snowplow_media_player_media_stats](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_media_stats)
@@ -3989,6 +4128,7 @@ A list of two objects, the lower and upper values from the columns in the model
 <TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_events_this_run)
+- [model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_product_interactions_this_run)
 - [model.snowplow_media_player.snowplow_media_player_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_interactions_this_run)
 - [model.snowplow_mobile.snowplow_mobile_app_errors_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_app_errors_this_run)
 - [model.snowplow_mobile.snowplow_mobile_base_app_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_app_context)

@@ -1,18 +1,18 @@
 export const versions = {
   // Trackers
-  androidTracker: '5.0.1',
+  androidTracker: '5.0.0',
   dotNetTracker: '1.2.1',
   cppTracker: '1.0.0',
   flutterTracker: '0.3.0',
   golangTracker: '3.0.0',
   googleAmpTracker: '1.0.3',
-  iosTracker: '5.0.1',
+  iosTracker: '5.0.0',
   javaTracker: '1.0.0',
   javaScriptTracker: '3.8.0',
   luaTracker: '0.2.0',
   phpTracker: '0.6.1',
   pixelTracker: '0.3.0',
-  pythonTracker: '0.15.0',
+  pythonTracker: '0.14.0',
   reactNativeTracker: '1.4.0',
   rokuTracker: '0.2.0',
   rubyTracker: '0.8.0',
@@ -23,7 +23,7 @@ export const versions = {
 
   // Core pipeline
   collector: '2.9.0',
-  enrich: '3.7.3',
+  enrich: '3.8.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.3',
   snowbridge: '2.0.3',
@@ -37,15 +37,15 @@ export const versions = {
   s3Loader: '2.2.7',
   s3Loader22x: '2.2.7',
 
-  // Data Modeling
+  // Data Modelling
   // dbt
   dbtSnowplowWeb: '0.14.0',
   dbtSnowplowMobile: '0.7.0',
-  dbtSnowplowUtils: '0.14.2',
+  dbtSnowplowUtils: '0.14.1',
   dbtSnowplowMediaPlayer: '0.5.0',
   dbtSnowplowNormalize: '0.3.0',
   dbtSnowplowFractribution: '0.3.0',
-  dbtSnowplowEcommerce: '0.4.1',
+  dbtSnowplowEcommerce: '0.4.0',
 
   // sql runner
   sqlRunner: '0.10.1',
@@ -65,12 +65,12 @@ export const versions = {
 
   // Iglu
   igluServer: '0.9.1',
-  igluctl: '0.11.0',
+  igluctl: '0.10.2',
   igluObjCClient: '0.1.1',
   igluRubyClient: '0.2.0',
   igluScalaClient: '2.2.1',
 
   // Testing & debugging
-  snowplowMicro: '1.7.0',
+  snowplowMicro: '1.6.0',
   snowplowMini: '0.15.1',
 }

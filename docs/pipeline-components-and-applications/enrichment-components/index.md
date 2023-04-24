@@ -20,6 +20,8 @@ Standalone JVM application that reads collector payloads from a PubSub subscript
 
 Standalone JVM application that reads collector payloads from a Kafka topic and outputs back to Kafka.
 
+## [enrich-nsq](/docs/pipeline-components-and-applications/enrichment-components/enrich-nsq/index.md) (cloud agnostic)
+
 ## [enrich-rabbitmq-experimental](/docs/pipeline-components-and-applications/enrichment-components/enrich-rabbitmq/index.md) (cloud agnostic)
 
 Standalone JVM application that reads collector payloads from a RabbitMQ subscription and outputs back to RabbitMQ.

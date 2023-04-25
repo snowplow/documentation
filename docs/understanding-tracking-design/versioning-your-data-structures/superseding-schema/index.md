@@ -25,7 +25,7 @@ We treat schemas as immutable objects because updating the schemas might make pr
 
 <details>
   <summary>Geolocation 1-0-0</summary>
-  <CodeBlock>{`
+  <CodeBlock language="json">{`
   {
           "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
           "description": "Schema for client geolocation contexts",
@@ -56,7 +56,7 @@ Superseding schemas feature comes to rescue at this point. With superseding sche
 After having problem with with `1-0-0` version of geolocation schema, we will create new version `1-0-1` of this schema. This time, we will add `altitude` field to the new schema. However, we want events coming from older version of the application to be valid as well. Therefore, we will make `1-0-1` to supersede `1-0-0` like following:
 <details>
   <summary>Geolocation 1-0-1 with $supersedes</summary>
-  <CodeBlock>{`
+  <CodeBlock language="json">{`
   {
           "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
           "$supersedes": ["1-0-0"],
@@ -86,7 +86,7 @@ After having problem with with `1-0-0` version of geolocation schema, we will cr
 When this schema submitted to Iglu Server, information of `1-0-1` superseding `1-0-0` will be saved to database. When `1-0-0` version is fetched, it will look like following:
 <details>
   <summary>Geolocation 1-0-0 with $supersededBy</summary>
-  <CodeBlock>{`
+  <CodeBlock language="json">{`
   {
           "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
           "$supersededBy": "1-0-1",
@@ -119,7 +119,7 @@ There are two ways to add superseding information: `$supersedes` and `$supersede
 `$supersedes` field states that schema version defined in the `self` part supersedes the schema versions listed under `$supersedes` field. It is used like following:
 <details>
   <summary>Example 1-0-2 with $supersedes</summary>
-  <CodeBlock>{`
+  <CodeBlock language="json">{`
   {
           "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
           "$supersedes": ["1-0-0", "1-0-1"],
@@ -139,7 +139,7 @@ Above schema specifies that version `1-0-2` supersedes `1-0-0` and `1-0-1`. Afte
 It is also possible to submit superseding information to Iglu Server with `$supersededBy` field. In this case, we submit superseding information to Iglu Server in reverse way. It is used like following:
 <details>
   <summary>Example 1-0-0 with $supersededBy</summary>
-  <CodeBlock>{`
+  <CodeBlock language="json">{`
   {
           "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
           "$supersededBy": "1-0-1",
@@ -171,7 +171,7 @@ Things to keep in mind while submitting superseding information:
 When Enrich receives an event with superseded schema, initially respective entity will be validated with superseding schema. If the validation is successful, the schema version of the entity will be replaced with the superseding schema's version. Lastly, a new context will be added to event to specify the actual schema version entity validated with. Let's go over an example to make it more clear:
 
 Let's say `iglu:com.acme/geolocation/jsonschema/1-0-0` is superseded by `iglu:com.acme/geolocation/jsonschema/1-0-1`. Enrich receives an event that contains a context with `iglu:com.acme/geolocation/jsonschema/1-0-0`. In that case, respective context will be validated with `iglu:com.acme/geolocation/jsonschema/1-0-1` instead of `1-0-0` because `1-0-0` is superseded by `1-0-1`. Then, the schema version `1-0-0` will be replaced with `1-0-1` in the enriched event's respective context. Also, following context will be added to enriched event:
-```
+```json
 {
         "schema": "iglu:com.snowplowanalytics.iglu/validation_info/jsonschema/1-0-0",
         "data": {

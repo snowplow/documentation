@@ -22,6 +22,7 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
     - `pull` - pull set of JSON Schemas from registry to local folder
     - `parquet-verify` - Verify integrity of schema family for parquet(databricks) transformation.
     - `deploy` - Run entire schema workflow using config file.
+    - `s3cp` - copy JSONPaths or schemas to S3 bucket
 - `server` - work with an Iglu server
     - `keygen` - generate read and write API keys on Iglu Server
 - `rdbms` - work with relation databases
@@ -190,6 +191,23 @@ It accepts three required arguments:
 $ ./igluctl static pull /path/to/static/registry iglu.acme.com:80/iglu-server f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 
+## static s3cp
+
+`igluctl static s3cp` enables you to upload JSON Schemas to chosen S3 bucket. This is helpful for generating a remote iglu registry which can be served from S3 over http(s).
+
+`igluctl static s3cp` accepts two required arguments and several options:
+
+- `input` - path to your files. Required.
+- `bucket` - S3 bucket name. Required.
+- `s3path` - optional S3 path to prepend your input root. Usually you don’t need it.
+- `accessKeyId` - your AWS Access Key Id. This may or or may not be required, depending on your preferred authentication option.
+- `secretAccessKey` - your AWS Secret Access Key. This may or or may not be required, depending on your preferred authentication option.
+- `profile` - your AWS profile name. This may or or may not be required, depending on your preferred authentication option.
+- `region` - AWS S3 region. Default: `us-west-2`
+- `skip-schema-lists` - Do not generate and upload schema list objects.
+
+`igluctl static s3cp` tries to closely follow AWS CLI authentication process. First it checks if profile name or `accessKeyId`/`secretAccessKey` pair provided and uses it. If neither of above provided - it looks into `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` environment variables. If above aren’t available as well - it `~/.aws/config` file. If all above failed - it exits with error.
+
 ## static deploy
 
 `igluctl static deploy` performs whole schema workflow at once.
@@ -233,6 +251,12 @@ Example:
         "isPublic": true
         "apikey": "bd96b5ff-7eb7-4085-83e0-97ac4954b891"
         "apikey": ${APIKEY_1}
+      }
+      {
+        "action": "s3cp"
+        "uploadFormat": "jsonschema"
+        "profile": "profile-1"
+        "region": "eu-east-2"
       }
     ]
 

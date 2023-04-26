@@ -128,7 +128,7 @@ Results:
 
 ### Click and network attribution
 
-You can define which URL parameters are used to populate the `mkt_clickid` field (the defaults include `gclid`, `msclkid` and `dclid`). For each parameter, _the same configuration setting_ also defines what network (`mkt_network` field) it correspond to (by default, `gclid` corresponds to `Google`, `msclkid` to `Microsoft` and `dclid` to DoubleClick.
+You can define which URL parameters are used to populate the `mkt_clickid` field (the defaults include `gclid`, `msclkid` and `dclid`). For each parameter, _the same configuration setting_ also defines what network — the `mkt_network` field — it corresponds to (by default, `gclid` corresponds to `Google`, `msclkid` to `Microsoft` and `dclid` to DoubleClick).
 
 :::tip
 

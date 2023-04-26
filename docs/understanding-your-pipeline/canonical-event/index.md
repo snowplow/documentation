@@ -71,12 +71,12 @@ The platform ID is used to distinguish the same app running on different platfor
 
 #### Event / transaction fields
 
-| **Field**           | **Type** | **Description**                                         | **Reqd?** | **Example**                            | **Source**                        |
-| ------------------- | -------- | ------------------------------------------------------- | --------- | -------------------------------------- | --------------------------------- |
-| `event`             | text     | The type of event recorded                              | ??? No       | 'page_view'                            | Tracking (Deprecated, use `event_name` instead)             |
-| `event_id`          | text     | A UUID for each event                                   | Yes       | 'c6ef3124-b53a-4b13-a233-0088f79dcbcb' | Tracking (or enrichment if empty) |
-| `txn_id`            | int      | Transaction ID set client-side, used to de-dupe records | No        | 421828                                 | Tracking (Deprecated)             |
-| `event_fingerprint` | text     | Hash client-set event fields                            | No        | AADCE520E20C2899F4CED228A79A3083       | Default Enrichment                |
+| **Field**           | **Type** | **Description**                                         | **Reqd?** | **Example**                            | **Source**                                      |
+| ------------------- | -------- | ------------------------------------------------------- | --------- | -------------------------------------- | ----------------------------------------------- |
+| `event`             | text     | The type of event recorded                              | ??? No    | 'page_view'                            | Tracking (Deprecated, use `event_name` instead) |
+| `event_id`          | text     | A UUID for each event                                   | Yes       | 'c6ef3124-b53a-4b13-a233-0088f79dcbcb' | Tracking (or enrichment if empty)               |
+| `txn_id`            | int      | Transaction ID set client-side, used to de-dupe records | No        | 421828                                 | Tracking (Deprecated)                           |
+| `event_fingerprint` | text     | Hash client-set event fields                            | No        | AADCE520E20C2899F4CED228A79A3083       | Default Enrichment                              |
 
 A complete list of event types is given [here](#Event-specific-fields).
 
@@ -441,10 +441,11 @@ from
     atomic.events
 ```
 
+or they can use a [`LATERAL VIEW`](https://docs.databricks.com/sql/language-manual/sql-ref-syntax-qry-select-lateral-view.html) statement to explode out the array.
+
 </TabItem>
 </Tabs>
 
-or they can use a [`LATERAL VIEW`](https://docs.databricks.com/sql/language-manual/sql-ref-syntax-qry-select-lateral-view.html) statement to explode out the array.
 
 ### Specific unstructured events and custom contexts
 

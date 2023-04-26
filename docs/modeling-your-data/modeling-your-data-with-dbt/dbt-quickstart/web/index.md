@@ -46,7 +46,7 @@ dispatch:
 
 If you do not do this the package will still work, but the incremental upserts will become more costly over time.
 
-### 2. Adding the `selector.yml` file
+### 2. Adding the `selectors.yml` file
 
 Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
 

@@ -312,7 +312,7 @@ It also accepts a number of arguments:
 ```
 
 ```bash
-$ ./igluctl rdbms table-check --resolver <path> --schema <schemaKey> ...connctions params
+$ ./igluctl rdbms table-check --resolver <path> --schema <schemaKey> ...connection parameters
 ```
 
 or

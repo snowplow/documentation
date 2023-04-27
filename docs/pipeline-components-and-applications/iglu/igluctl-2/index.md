@@ -20,7 +20,7 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
     - `generate` - verify integrity of schema family for Redshift or Postgres transformation. Generate DDLs and migrations from set of JSON Schemas.
     - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
     - `pull` - pull set of JSON Schemas from registry to local folder
-    - `parquet-verify` - Verify integrity of schema family for parquet(databricks) transformation.
+    - `parquet-verify` - Verify integrity of schema family for parquet transformation (for loading into Databricks)
     - `deploy` - Run entire schema workflow using config file.
     - `s3cp` - copy JSONPaths or schemas to S3 bucket
 - `server` - work with an Iglu server

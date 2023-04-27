@@ -156,6 +156,9 @@ You can now run your models for the first time by running the below command (see
 dbt run --selector snowplow_web
 ```
 
+### 9. Enable extras
+The package comes with additional modules and functionality that you can enable, for more information see the [consent tracking](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/consent-module/index.md) and [conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/conversions/index.md) documentation.
+
 :::tip
 
 For some common analytical queries to run on the derived web data, take a look at our page [here](/docs/recipes/recipe-dbt-web-queries/index.md)!

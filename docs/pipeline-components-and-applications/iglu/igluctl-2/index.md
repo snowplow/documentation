@@ -116,9 +116,7 @@ Igluctl also includes many checks proving that schemas doesn’t have conflictin
 
 `igluctl static generate` generates corresponding [Redshift](http://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html) DDL files (`CREATE TABLE` statements) and migration scripts (`ALTER TABLE` statements).
 
-This command previously was a part of [Schema Guru](http://github.com/snowplow/schema-guru) and was known 
-as `schema-guru ddl`, but has been moved into iglu in r5 release. As of version 0.11.0 this will also validate the
-compatibility of schema family and display warnings if there is an incompatible evolution.
+As of version 0.11.0 this command will also validate the compatibility of schema family and display warnings if there is an incompatible evolution.
 
 ```bash
 $ ./igluctl static generate $INPUT

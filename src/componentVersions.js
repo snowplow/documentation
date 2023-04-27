@@ -65,7 +65,7 @@ export const versions = {
 
   // Iglu
   igluServer: '0.9.1',
-  igluctl: '0.10.2',
+  igluctl: '0.11.0',
   igluObjCClient: '0.1.1',
   igluRubyClient: '0.2.0',
   igluScalaClient: '2.2.1',

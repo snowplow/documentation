@@ -389,7 +389,7 @@ left join
     on ctx.root_id = ev.event_id and ctx.root_tstamp = ev.collector_tstamp
 ```
 
-:::note
+:::caution
 
 You may need to take care of duplicate events as Snowplow uses an _at least once_ method of delivery.
 
@@ -403,13 +403,21 @@ Contexts are not part of the standard `atomic.events` columns, it is instead a `
 ```sql
 select
 ...
-my_custom_context_1_0_0[SAFE_OFFSET(0)].my_custom_field,
+contexts_my_custom_context_1_0_0[SAFE_OFFSET(0)].my_custom_field,
 ...
 from 
     atomic.events
 ```
 
 or they can use an [`unnest`](https://cloud.google.com/bigquery/docs/reference/standard-sql/arrays#flattening_arrays) function to explode out the array.
+
+```sql
+select 
+  ...,
+  my_ent.a_property as my_prop
+from  atomic.events
+left join unnest(contexts_my_custom_context_1_0_0) as my_ent -- left join to avoid discarding events without values in this context
+```
 
 </TabItem>
 <TabItem value="sf" label="Snowflake">
@@ -419,7 +427,7 @@ Contexts are not part of the standard `atomic.events` columns, it is instead an 
 ```sql
 select
 ...
-my_custom_context_1[0]:myCustomField::varchar,
+contexts_my_custom_context_1[0]:myCustomField::varchar,  -- field will be variant type so important to cast
 ...
 from 
     atomic.events
@@ -435,7 +443,7 @@ Contexts are not part of the standard `atomic.events` columns, it is instead an 
 ```sql
 select
 ...
-my_custom_context_1[0].my_custom_field::varchar,
+contexts_my_custom_context_1[0].my_custom_field,
 ...
 from 
     atomic.events

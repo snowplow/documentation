@@ -16,10 +16,10 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 
 - `lint` - validate set of JSON Schemas for syntax and consistency of their properties
 - `static` - work with static Iglu registry
-    - `generate` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`). Generate DDLs and migrations from set of JSON Schemas. (If the schema is not evolved correctly, the offending version will be stored in a separate column with `_recovered_` in its name.)
+    - `generate` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for Redshift and Postgres warehouses. Generate DDLs and migrations from set of JSON Schemas. If the schema is not evolved correctly and backward incompatible data is sent within transformer's aggregation window loading would fail for all events.. 
     - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
     - `pull` - pull set of JSON Schemas from registry to local folder
-    - `parquet-verify` - verify possibility of schema evolution in a family for parquet transformation (for loading into Databricks). Failed evolution verification could result in recovery column.
+    - `parquet-verify` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks).  If the schema is not evolved correctly, the offending version will be stored in a separate column with `_recovered_` in its name.
     - `deploy` - run entire schema workflow using a config file. This could be used to chain multiple commands, i.e. `lint` followed by `push` and `s3cp`.
     - `s3cp` - copy JSONPaths or schemas to S3 bucket
 - `server` - work with an Iglu server
@@ -317,5 +317,5 @@ $ ./igluctl rdbms table-check --resolver <path> --schema <schemaKey> ...connecti
 or
 
 ```bash
-$ ./igluctl rdbms table-check --server <uri> ...connctions params
+$ ./igluctl rdbms table-check --server <uri> ...connection params
 ```

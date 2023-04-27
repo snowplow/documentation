@@ -16,7 +16,7 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 
 - `lint` - validate set of JSON Schemas for syntax and consistency of their properties
 - `static` - work with static Iglu registry
-    - `generate` - verify possibility of schema evolution in a family for Redshift or Postgres transformation. Generate DDLs and migrations from set of JSON Schemas. Failed evolution verification could result in recovery in a loading error.
+    - `generate` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`). Generate DDLs and migrations from set of JSON Schemas. (If the schema is not evolved correctly, the offending version will be stored in a separate column with `_recovered_` in its name.)
     - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
     - `pull` - pull set of JSON Schemas from registry to local folder
     - `parquet-verify` - verify possibility of schema evolution in a family for parquet transformation (for loading into Databricks). Failed evolution verification could result in recovery column.

@@ -25,7 +25,7 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 - `server` - work with an Iglu server
     - `keygen` - generate read and write API keys on Iglu Server
 - `rdbms` - work with relation databases
-    - `table-check` - will check a given RedShift or Postgres tables against iglu server.
+    - `table-check` - will check a given Redshift or Postgres tables against iglu server.
 
 ## Downloading and running Igluctl 
 

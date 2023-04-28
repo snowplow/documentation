@@ -1,5 +1,5 @@
 ---
-title: "Testing Transformations"
+title: "Testing Snowbridge locally"
 date: "2023-04-14"
 sidebar_position: 300
 ---
@@ -9,15 +9,13 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-The easiest way to test a transformation configuration for Snowbridge is to run it locally, using the default `stdin` source, `stdout` target and your actual transformation config - using a sample of data that is as close to the real world as possible.
+The easiest way to test Snowbridge configuration (e.g. transformations) is to run it locally. Ideally, you should also use a sample of data that is as close to the real world as possible. The sample file should contain the events/messages you’d like to test with, one per line.
 
-The sample file should contain the events/messages you'd like to test with, one per line.
-
-## Snowplow data - generating a sample
+## Snowplow data — generating a sample
 
 If you're working with Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/getting-started-with-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/getting-started-with-micro/basic-usage/index.md#exporting-events-to-tsv).
 
-For example, here we're using a file named `data.tsv`:
+For example, here we’re using a file named `data.tsv`:
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --output-tsv > data.tsv`
@@ -27,7 +25,7 @@ Point some test environment tracking to `localhost:9090`, and your events should
 
 ## Testing Snowbridge locally
 
-### Local Snowbridge setup
+### Setup
 
 You can run Snowbridge locally via Docker:
 
@@ -35,7 +33,7 @@ You can run Snowbridge locally via Docker:
 `docker run snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
-The default configuration for Snowbridge already uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):
+The default configuration for Snowbridge uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i snowplow/snowbridge:${versions.snowbridge}`
@@ -76,9 +74,11 @@ Note that docker expects absolute paths for mounted files - here we use `$(pwd)`
 
 To test transformations, you only need to add the `transform` block(s) to your configuration file. Don’t specify the `source` and `target` blocks to leave them on default (`stdin` and `stdout`).
 
-### Adding custom scripts
+To test specific sources or targets, add the respective `source` or `target` blocks. For example, see the [configuration](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/google-tag-manager.md) for an HTTP target sending data to Google Tag Manager Server Side.
 
-Finally, you can add custom scripts by mounting a file, in the exact same manner. Assuming the script is in `script.js`, that looks like this:
+### Adding custom transformation scripts
+
+You can add custom scripts by mounting a file, similarly to the above. Assuming the script is in `script.js`, that looks like this:
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i \\
@@ -100,4 +100,4 @@ transform {
 
 ## Further testing
 
-You can use the above method to test all other aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. To do so, first you'll need to ensure that the local envionment has access to any required resources and can authenticate (eg. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that's done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the transformation examples above.
+You can use the above method to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local envionment has access to any required resources and can authenticate (e.g. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.

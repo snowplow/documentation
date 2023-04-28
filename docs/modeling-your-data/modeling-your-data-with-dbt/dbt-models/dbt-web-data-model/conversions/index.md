@@ -16,11 +16,11 @@ import ThemedImage from '@theme/ThemedImage';
 
 Conversion events are a type of event that's important to your business, be that a transaction, a sign up to a newsletter, or the view of a specific page. Whatever type of event matters to you, so long as it can be determined from a single event record, you'll be able to model and aggregate these conversions at a session level with our package.
 
-Because we know that each user may have a different concept of what a conversion means to them, for example it could be a specific type of event such as a `page_view` on a specific url, a self-describing event such as `sign_up`, or even a bespoke `conversion` event type with some attached context, the way we model conversions is also flexible and allows you to change your definition over time. This allows you to track multiple types of conversions, with varying logic.
+Because we know that each user may have a different concept of what a conversion means to them, for example it could be a specific type of event such as a `page_view` on a specific url, a self-describing event such as `sign_up`, or even a bespoke `conversion` event type with some attached context, the way we model conversions is also flexible and allows you to change your definition over time. This allows you to track multiple types of conversions, with varying logic, even retrospectively.
 
 :::caution
 
-Because this is part of the sessions table within the web package, we still expect your sessions to contain at least one `page_view` or `page_ping` event, and the events must all have a `domain_sessionid` to be included in the `base_events_this_run_table`. Without 
+Because this is part of the sessions table within the web package, we still expect your sessions to contain at least one `page_view` or `page_ping` event, and the events must all have a `domain_sessionid` to be included in the `base_events_this_run_table`. Without a `domain_sessionid` the event will not be visible to the model, and without a `page_view` or `page_ping` in the session there will be no session record for the model to attach the conversions to.
 
 :::
 

@@ -9,3 +9,9 @@ import Badges from '@site/src/components/Badges';
 
 <Badges badgeType="Actively Maintained"></Badges>
 ```
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+```

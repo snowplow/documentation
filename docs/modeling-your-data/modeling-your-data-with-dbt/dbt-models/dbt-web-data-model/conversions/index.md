@@ -9,8 +9,52 @@ import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
+import { RJSFSchema } from '@rjsf/utils';
+import validator from '@rjsf/validator-ajv8';
+import Form from '@rjsf/mui';
+import CodeBlock from '@theme/CodeBlock';
+
+export const schema = {
+  title: 'Conversion Definition',
+  type: 'object',
+  required: ['name', 'condition'],
+  properties: {
+    name: { type: 'string', title: 'Name', default: 'Name of your conversion type' },
+    condition: { type: 'string', title: 'Condition', default: 'event_name = ...' },
+    value: { type: 'string', title: 'Value',  },
+    default_value: { type: 'number', title: 'Default value'},
+    list_events: { type: 'boolean', title: 'List events?' },
+  },
+};
+
+export const App = () => {
+  const [formData, setFormData] = React.useState(null);
+  return (<>
+  <div class="row">
+  <div style={{ width: "50%" }}>
+    <Form
+      schema={schema}
+      formData={formData}
+      onChange={(e) => setFormData(e.formData)}
+      validator={validator}
+      liveValidate
+      
+    ><div/></Form>
+    </div>
+    <div style={{ width: "50%" }}>
+    <h4>Conversion Code</h4>
+    <CodeBlock language="json">{JSON.stringify(formData, null, 4)}</CodeBlock>
+    </div>
+    </div>
+    </>
+  );
+};
+
+
 ```
+
 <Badges badgeType="dbt-package Release" pkg="web"></Badges>
+
 
 # Conversions
 
@@ -156,3 +200,8 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 
 </details>
+
+
+## Configuration Generator
+
+<App />

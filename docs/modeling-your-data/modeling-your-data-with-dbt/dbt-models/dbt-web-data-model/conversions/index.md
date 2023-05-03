@@ -35,8 +35,6 @@ export const schema = {
 export const App = () => {
   const [formData, setFormData] = React.useState(null);
   return (<>
-  <div class="row">
-  <div style={{ width: "50%" }}>
     <Form
       schema={schema}
       formData={formData}
@@ -44,12 +42,8 @@ export const App = () => {
       validator={validator}
       liveValidate
     ><div/></Form>
-    </div>
-    <div style={{ width: "50%" }}>
-    <h4>Conversion Code</h4>
+    <h4>Output</h4>
     <CodeBlock language="json">{JSON.stringify(formData, null, 4)}</CodeBlock>
-    </div>
-    </div>
     </>
   );
 };

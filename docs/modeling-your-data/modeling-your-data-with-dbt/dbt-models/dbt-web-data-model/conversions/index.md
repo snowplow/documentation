@@ -16,15 +16,20 @@ import CodeBlock from '@theme/CodeBlock';
 
 export const schema = {
   title: 'Conversion Definition',
-  type: 'object',
-  required: ['name', 'condition'],
-  properties: {
-    name: { type: 'string', title: 'Name', default: 'Name of your conversion type' },
-    condition: { type: 'string', title: 'Condition', default: 'event_name = ...' },
-    value: { type: 'string', title: 'Value',  },
-    default_value: { type: 'number', title: 'Default value'},
-    list_events: { type: 'boolean', title: 'List events?' },
-  },
+  type: 'array',
+  "default": [{"name": "Name of your conversion type", "condition": "event_name = ..."} ],
+  items: {
+    type: 'object',
+    required: ['name', 'condition'],
+    "minItems": 1,
+    properties: {
+      name: { type: 'string', title: 'Name', default: 'Name of your conversion type' },
+      condition: { type: 'string', title: 'Condition', default: 'event_name = ...' },
+      value: { type: 'string', title: 'Value',  },
+      default_value: { type: 'number', title: 'Default value'},
+      list_events: { type: 'boolean', title: 'List events?' },
+    },
+  }
 };
 
 export const App = () => {
@@ -38,7 +43,6 @@ export const App = () => {
       onChange={(e) => setFormData(e.formData)}
       validator={validator}
       liveValidate
-      
     ><div/></Form>
     </div>
     <div style={{ width: "50%" }}>

@@ -19,6 +19,28 @@
     <td>Optional. For tracking runtime exceptions.</td>
 </tr>
 <tr>
+    <td><code>monitoring.metrics.cloudwatch</code> (since 5.5.0)</td>
+    <td>Optional. For sending metrics to Cloudwatch. If not set, metrics are not sent.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.cloudwatch.namespace</code> (since 5.5.0)</td>
+    <td>Namespace that will contain the metrics in Cloudwatch. Example: <code>snowplow/transformer_batch</code></td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.cloudwatch.transformDuration</code> (since 5.5.0)</td>
+    <td>Name of the metric that contains the number of milliseconds needed to transform a folder. Example: <code>transform_duration</code></td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.cloudwatch.dimensions</code> (since 5.5.0)</td>
+    <td>Any key-value pairs to be added as dimensions in Cloudwatch metrics. Example:
+
+```json
+{"app_version": "x.y.z", "env": "prod"}
+```
+
+</td>
+</tr>
+<tr>
     <td><code>deduplication.*</code></td>
     <td>Configure the way in-batch deduplication is performed</td>
 </tr>

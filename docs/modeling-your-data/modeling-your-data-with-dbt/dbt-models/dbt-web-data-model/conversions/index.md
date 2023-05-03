@@ -42,6 +42,20 @@ If you only want to take into account the first conversion in a session then use
 
 :::
 
+Finally, if `snowplow__total_all_conversions` is set to `true` two additional columns will be added that total the volume and value across all conversions.
+
+| Column           | Description                                  |
+| ---------------- | -------------------------------------------- |
+| `cv__all_volume` | The sum of volume across all conversions     |
+| `cv__all_total`  | The sum of total value across all conversion |
+
+
+:::tip
+
+If you are using these columns make sure that all your conversion values are in the same units e.g. $ or stock volume.
+
+:::
+
 ## The conversion configuration dictionary
 The `snowplow__conversion_events` variable in our project takes a list of dictionaries to determine what events count as a conversion. These dictionaries are expected to have certain keys and form what we call a conversion configuration. The keys are:
 

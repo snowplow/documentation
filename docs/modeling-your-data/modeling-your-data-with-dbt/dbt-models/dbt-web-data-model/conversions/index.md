@@ -9,6 +9,7 @@ import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
+// https://rjsf-team.github.io/react-jsonschema-form/docs/
 import { RJSFSchema } from '@rjsf/utils';
 import validator from '@rjsf/validator-ajv8';
 import Form from '@rjsf/mui';
@@ -17,17 +18,17 @@ import CodeBlock from '@theme/CodeBlock';
 export const schema = {
   title: 'Conversion Definition',
   type: 'array',
-  "default": [{"name": "Name of your conversion type", "condition": "event_name = ..."} ],
+  "default": [{} ],
   items: {
     type: 'object',
     required: ['name', 'condition'],
     "minItems": 1,
     properties: {
-      name: { type: 'string', title: 'Name', default: 'Name of your conversion type' },
-      condition: { type: 'string', title: 'Condition', default: 'event_name = ...' },
-      value: { type: 'string', title: 'Value',  },
-      default_value: { type: 'number', title: 'Default value'},
-      list_events: { type: 'boolean', title: 'List events?' },
+      name: { type: 'string', title: 'Name', description: 'Name of your conversion type' },
+      condition: { type: 'string', title: 'Condition', description: "SQL condition e.g. event_name = 'page_view'" },
+      value: { type: 'string', title: 'Value', description: "SQL value e.g. tr_total_base"  },
+      default_value: { type: 'number', title: 'Default value', description: "Default value e.g. 0" },
+      list_events: { type: 'boolean', title: 'List all event ids?' },
     },
   }
 };
@@ -40,6 +41,7 @@ export const App = () => {
       formData={formData}
       onChange={(e) => setFormData(e.formData)}
       validator={validator}
+      showErrorList='bottom'
       liveValidate
     ><div/></Form>
     <h4>Output</h4>
@@ -47,12 +49,9 @@ export const App = () => {
     </>
   );
 };
-
-
 ```
 
 <Badges badgeType="dbt-package Release" pkg="web"></Badges>
-
 
 # Conversions
 

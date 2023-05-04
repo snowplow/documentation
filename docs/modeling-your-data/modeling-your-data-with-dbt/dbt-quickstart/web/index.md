@@ -155,3 +155,9 @@ You can now run your models for the first time by running the below command (see
 ```bash
 dbt run --selector snowplow_web
 ```
+
+:::tip
+
+For some common analytical queries to run on the derived web data, take a look at our page [here](/docs/recipes/recipe-dbt-web-queries/index.md)!
+
+:::

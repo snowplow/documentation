@@ -103,7 +103,7 @@ create table (your_schema)_derived.snowplow_ecommerce_cart_interactions_new
 insert into (your_schema)_derived.snowplow_ecommerce_cart_interactions_new  select * from (your_schema)_derived.snowplow_ecommerce_cart_interactions;
 drop table (your_schema)_derived.snowplow_ecommerce_cart_interactions;
 alter table (your_schema)_derived.snowplow_ecommerce_cart_interactions_new
-rename to (your_schema)_derived.snowplow_ecommerce_cart_interactions;
+rename to snowplow_ecommerce_cart_interactions;
 
 create table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new
 (
@@ -134,7 +134,7 @@ create table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_n
 
 insert into (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new    select * from (your_schema)_derived.snowplow_ecommerce_transaction_interactions;
 drop table (your_schema)_derived.snowplow_ecommerce_transaction_interactions;
-alter table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new rename to (your_schema)_derived.snowplow_ecommerce_transaction_interactions ;
+alter table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new rename to snowplow_ecommerce_transaction_interactions ;
 ```
 
 </div>

@@ -2,23 +2,29 @@
 title: "E-commerce"
 sidebar_position: 105
 ---
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 ### Upgrading to 0.4.2
 
 Two of the derived tables need to be altered for existing Snowflake, Databricks or Redshift users. Please modify the below script to fit your schemas and apply them before running the upgraded package.
 
 <details>
   <summary>SQL scripts</summary>
-  <div>
-    <div>
+<Tabs groupId="warehouse" queryString>
+<TabItem value="snowflake" label="snowflake" default>
 
 ```sql
-
--- Snowflake:
 alter table (your_schema)_derived.snowplow_ecommerce_cart_interactions alter column cart_total_value type decimal(9,2);
 alter table (your_schema)_derived.snowplow_ecommerce_transaction_interactions alter column transaction_revenue type decimal(9,2), transaction_discount_amount type decimal(9,2), transaction_shipping type decimal(9,2), transaction_tax type decimal(9,2);
+```
 
+</TabItem>
+<TabItem value="databricks" label="databricks">
 
--- Databricks:
+```sql
 create table (your_schema)_derived.snowplow_ecommerce_cart_interactions_new
 (
     event_id               STRING(255),
@@ -77,8 +83,12 @@ drop table (your_schema)_derived.snowplow_ecommerce_transaction_interactions;
 create table (your_schema)_derived.snowplow_ecommerce_transaction_interactions select * from (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new ;
 drop table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new;
 
+```
 
--- Redshift
+</TabItem>
+<TabItem value="redshift" label="redshift" default>
+
+```sql
 create table (your_schema)_derived.snowplow_ecommerce_cart_interactions_new
 (
     event_id CHAR(36)   ENCODE lzo
@@ -103,7 +113,7 @@ create table (your_schema)_derived.snowplow_ecommerce_cart_interactions_new
 insert into (your_schema)_derived.snowplow_ecommerce_cart_interactions_new  select * from (your_schema)_derived.snowplow_ecommerce_cart_interactions;
 drop table (your_schema)_derived.snowplow_ecommerce_cart_interactions;
 alter table (your_schema)_derived.snowplow_ecommerce_cart_interactions_new
-rename to snowplow_ecommerce_cart_interactions;
+rename to (your_schema)_derived.snowplow_ecommerce_cart_interactions;
 
 create table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new
 (
@@ -134,11 +144,11 @@ create table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_n
 
 insert into (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new    select * from (your_schema)_derived.snowplow_ecommerce_transaction_interactions;
 drop table (your_schema)_derived.snowplow_ecommerce_transaction_interactions;
-alter table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new rename to snowplow_ecommerce_transaction_interactions ;
+alter table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new rename to (your_schema)_derived.snowplow_ecommerce_transaction_interactions;
 ```
 
-</div>
-  </div>
+</TabItem>
+</Tabs>
 </details>
 
 

@@ -44,8 +44,8 @@ export const App = () => {
       showErrorList='bottom'
       liveValidate
     ><div/></Form>
-    <h4>Output</h4>
-    <CodeBlock language="json">{JSON.stringify(formData, null, 4)}</CodeBlock>
+    <h4>Project Variable:</h4>
+    <CodeBlock language="yaml">snowplow__conversion_events: {JSON.stringify(formData, null, 4)}</CodeBlock>
     </>
   );
 };

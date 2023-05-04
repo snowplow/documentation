@@ -18,11 +18,11 @@ import CodeBlock from '@theme/CodeBlock';
 export const schema = {
   title: 'Conversion Definition',
   type: 'array',
-  "default": [{} ],
+  "default": [{}],
+  "minItems": 1,
   items: {
     type: 'object',
     required: ['name', 'condition'],
-    "minItems": 1,
     properties: {
       name: { type: 'string', title: 'Name', description: 'Name of your conversion type' },
       condition: { type: 'string', title: 'Condition', description: "SQL condition e.g. event_name = 'page_view'" },

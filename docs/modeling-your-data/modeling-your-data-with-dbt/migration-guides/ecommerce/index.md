@@ -27,23 +27,23 @@ alter table (your_schema)_derived.snowplow_ecommerce_transaction_interactions al
 ```sql
 create table (your_schema)_derived.snowplow_ecommerce_cart_interactions_new
 (
-    event_id               STRING(255),
-    page_view_id           STRING(255),
-    domain_sessionid       STRING(255),
-    event_in_session_index INT(10),
-    domain_userid          STRING(255),
-    network_userid         STRING(255),
-    user_id                STRING(255),
-    ecommerce_user_id      STRING(255),
-    derived_tstamp         TIMESTAMP(29, 9),
-    derived_tstamp_date    DATE(10),
-    cart_id                STRING(255),
-    cart_currency          STRING(255),
+    event_id               STRING,
+    page_view_id           STRING,
+    domain_sessionid       STRING,
+    event_in_session_index INT,
+    domain_userid          STRING,
+    network_userid         STRING,
+    user_id                STRING,
+    ecommerce_user_id      STRING,
+    derived_tstamp         TIMESTAMP,
+    derived_tstamp_date    DATE,
+    cart_id                STRING,
+    cart_currency          STRING,
     cart_total_value       DECIMAL(9, 2),
     cart_created           BOOLEAN,
     cart_emptied           BOOLEAN,
     cart_transacted        BOOLEAN,
-    ecommerce_action_type  STRING(255)
+    ecommerce_action_type  STRING
 );
 
 insert into (your_schema)_derived.snowplow_ecommerce_cart_interactions_new  select * from (your_schema)_derived.snowplow_ecommerce_cart_interactions;
@@ -53,29 +53,29 @@ drop table (your_schema)_derived.snowplow_ecommerce_cart_interactions_new;
 
 create table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new
 (
-    event_id                    STRING(255),
-    page_view_id                STRING(255),
-    domain_sessionid            STRING(255),
-    event_in_session_index      INT(10),
-    domain_userid               STRING(255),
-    network_userid              STRING(255),
-    user_id                     STRING(255),
-    ecommerce_user_id           STRING(255),
-    derived_tstamp              TIMESTAMP(29, 9),
-    derived_tstamp_date         DATE(10),
-    transaction_id              STRING(255),
-    transaction_currency        STRING(255),
-    transaction_payment_method  STRING(255),
+    event_id                    STRING,
+    page_view_id                STRING,
+    domain_sessionid            STRING,
+    event_in_session_index      INT,
+    domain_userid               STRING,
+    network_userid              STRING,
+    user_id                     STRING,
+    ecommerce_user_id           STRING,
+    derived_tstamp              TIMESTAMP,
+    derived_tstamp_date         DATE,
+    transaction_id              STRING,
+    transaction_currency        STRING,
+    transaction_payment_method  STRING,
     transaction_revenue         DECIMAL(9, 2),
-    transaction_total_quantity  INT(10),
+    transaction_total_quantity  INT,
     transaction_credit_order    BOOLEAN,
-    transaction_discount_amount DECIMAL(79 2),
-    transaction_discount_code   STRING(255),
+    transaction_discount_amount DECIMAL(9, 2),
+    transaction_discount_code   STRING,
     transaction_shipping        DECIMAL(9, 2),
     transaction_tax             DECIMAL(9, 2),
-    ecommerce_user_email        STRING(255),
+    ecommerce_user_email        STRING,
     ecommerce_user_is_guest     BOOLEAN,
-    number_products             BIGINT(19)
+    number_products             BIGINT
 );
 
 insert into (your_schema)_derived.snowplow_ecommerce_transaction_interactions_new    select * from (your_schema)_derived.snowplow_ecommerce_transaction_interactions;

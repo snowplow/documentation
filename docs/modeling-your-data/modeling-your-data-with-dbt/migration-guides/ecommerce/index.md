@@ -11,6 +11,8 @@ import TabItem from '@theme/TabItem';
 
 Two of the derived tables need to be altered for existing Snowflake, Databricks or Redshift users. Please modify the below script to fit your schemas and apply them before running the upgraded package.
 
+The other option is to do a [complete refresh](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#complete-refresh-of-snowplow-package) of the package.
+
 <details>
   <summary>SQL scripts</summary>
 <Tabs groupId="warehouse" queryString>

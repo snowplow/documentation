@@ -66,7 +66,7 @@ CREATE TABLE derived.marketing_attribution AS(
             --SUM(c.value) AS conversions_value -- conversion value to be added when tracked specifically
 
         FROM atomic.events AS ev
-        --LEFT JOIN atomic.io_snowplow_foundation_conversion_1 AS c
+        --LEFT JOIN atomic.io_snowplow_foundation_conversion_1 AS c -- this join is only relevant if custom conversion events are tracked in the second section of the guide
         --    ON ev.event_id = c.root_id AND ev.collector_tstamp = c.root_tstamp
 
         WHERE ev.event_name IN ('page_view', 'conversion')

@@ -4,11 +4,22 @@ date: "2020-02-14"
 sidebar_position: 2
 ---
 
-This enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to convert the currencies used in transactions. It requires an Open Exchange Rates.
+This enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to convert the currencies used in transactions. It requires an Open Exchange Rates account and API key.
 
 When transactional data is collected in multiple currencies, it can be useful to convert it in the one that is used for reporting for instance. This could help to lower discrepancies when reporting revenue amounts across multiple currencies.
 
-The conversion is done by the enrich job at processing time with Open Exchange Rates API so that it can be stored directly with the right currency in the database.
+:::caution Limitations
+
+This is an older and less actively maintained enrichment, and as such it has several limitations.
+
+* **It can only use the exchange rates from the end of the preceding day.** (As opposed to, say, the rates on the morning of the day when the event is processed.)
+* **It only works with the [`tr_` and `ti_` fields](/docs/understanding-your-pipeline/canonical-event/index.md#e-commerce-transactions).** These fields are not very convenient to use and exist for legacy reasons. One of their significant downsides is that you have to send a separate event for the transaction itself and then an event for each of the order items in that transaction (as opposed to including all items in a single event).
+
+Over the years, it has become more idiomatic to use dedicated [entities](/docs/understanding-tracking-design/understanding-events-entities/index.md) for order items in e-commerce transactions. For instance, our [E-commerce Accelerator](https://docs.snowplow.io/accelerators/ecommerce/) uses this approach, which is _incompatible with this enrichment_.
+
+We recommend to manage currency conversion downstream instead of using this enrichment. For example, you could bring currency exchange rate information into your data warehouse and join that data with your Snowplow data.
+
+:::
 
 ## Configuration
 
@@ -26,7 +37,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 | `accountType` | Level of Open Exchange Rates account. Must be “developer”, “enterprise”, or “unlimited”. |
 | `apiKey` | Open Exchange Rates API key |
 | `baseCurrency` | Currency to convert all transaction values to |
-| `rateAt` | Determines which exchange rate will be used. Currently only “EOD_PRIOR” is supported, meaning that the enrichment uses the exchange rate from the end of the previous day. |
+| `rateAt` | Determines which exchange rate will be used. **Currently only “EOD_PRIOR” is supported**, meaning that the enrichment uses the exchange rate from the end of the previous day. |
 
 ## Input
 

@@ -22,9 +22,9 @@ The [enrich-kinesis reference](/docs/pipeline-components-and-applications/enrich
 ## Add any desired Enrichments
 
 ```mdx-code-block
-import Block1303 from "@site/docs/reusable/untitled-reusable-block-20/_index.md"
+import EnrichmentList from "@site/docs/reusable/enrichment-list/_index.md"
 
-<Block1303/>
+<EnrichmentList/>
 ```
 
 Each enrichment is enabled by configuring a JSON config file (one per enrichment), loading these into DynamoDB and then passing the location of the configs in DynamoDB to stream enrich on running it using the `--enrichments` [argument as documented](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/configure-stream-enrich/index.md).

@@ -100,7 +100,7 @@ Here's an example of an EMR cluster config file that can be used with Dataflow R
       {
         "name": "Use Java 11",
         "scriptBootstrapAction": {
-          "path": "s3://bucket/path/emr-bootstrap-java-11.sh",
+          "path": "s3://<bucket>/<path>/emr-bootstrap-java-11.sh",
           "args": []
         }
       }

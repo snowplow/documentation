@@ -153,7 +153,7 @@ Here's an example of an EMR cluster config file that can be used with Dataflow R
 }
 ```
 
-Where the content of `s3://bucket/path/emr-bootstrap-java-11.sh` is:
+You will need to replace `<bucket>` and `<path>` (in the `bootstrapActionConfigs` section) according to where you placed `emr-bootstrap-java-11.sh`. The content of this file should be as follows:
 
 ```bash
 #!/bin/bash

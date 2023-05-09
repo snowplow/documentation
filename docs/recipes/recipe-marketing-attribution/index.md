@@ -53,6 +53,8 @@ Check [this guide](https://docs.snowplow.io/docs/try-snowplow/accessing-and-quer
 
 ![](images/sessions.png)
 
+You can see what the fields mean by reviewing [the Snowplow Canonical Event Model docs page](https://docs.snowplow.io/docs/understanding-your-pipeline/canonical-event/).
+
 ```sql
 CREATE TABLE derived.marketing_attribution AS(
     WITH session_aggregations AS (
@@ -309,8 +311,8 @@ Now that you have all the out of the box technology set up, you can discover the
 
 - Add additional marketing sources, such as ad impressions or emails
 - [Redefine sessions](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/#configuring-the-session-cookie-duration) to be more meaningful for your business rather than the default '30 minutes of inactivity'
-- Join acquisition costs, such as the average cpc for paid search based on the click and keyword performance reports from Google
-- Add the revenue associated with conversions from your transactional database
-- Explore different attribution models and hone a custom one that maps to your customer journey and buying behaviors
+- [Join acquisition costs](https://snowplow.io/blog/marketing-attribution-with-snowplow/), such as the average cpc for paid search based on the click and keyword performance reports from Google
+- Add the revenue associated with conversions from your transactional database, or track these in a custom conversion event
+- Explore different attribution models and hone a custom one that maps to your customer journey and customers' buying behaviors
 - Split out attribution by additional dimensions, such as device type or campaign information
 - Consider different types of conversions, or model [intent-to-convert](https://snowplow.io/blog/attribution-models-and-mapping-customer-journeys/)

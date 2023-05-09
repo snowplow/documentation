@@ -155,7 +155,7 @@ Here's an example of an EMR cluster config file that can be used with Dataflow R
 
 You will need to replace `<bucket>` and `<path>` (in the `bootstrapActionConfigs` section) according to where you placed `emr-bootstrap-java-11.sh`. The content of this file should be as follows:
 
-```bash
+```bash title="emr-bootstrap-java-11.sh"
 #!/bin/bash
 
 set -e

@@ -11,7 +11,7 @@ Configure specific implementation rules, entities and triggers for your tracking
 To create a new Tracking Scenario, first navigate to **Data Structures** in the menu. From there, select a data structure from the list.
 
 :::info
-Tracking Scenarios can only be created from Data Strucutres that have been set as **Event**.
+Tracking Scenarios can only be created from Data Structures that have been set as **Event**.
 :::
 
 After selecting a data structure, click on the **Tracking Scenarios** tab as shown in the image.
@@ -22,12 +22,12 @@ Next, click the **'Add new scenario'** button. A new modal will appear with fiel
 
 ![](images/ts-2.png)
 
-Be aware of the **Show version** of the data structure against which the Tracking Scenario will be created. This means that the tracking will be compatible with this specific Data Structure version but may not be compatible against other versions or future versions if they evolve.
+Be aware of the **version** of the data structure against which the Tracking Scenario will be created. This means that the tracking will be compatible with this specific Data Structure version but may not be compatible against other versions or future versions if they evolve.
 
 The fields available to fill at this stage are:
 
 - A text field with the **Scenario name**. 
-- A tag field to indicate which applications this scenario is design to tracked. This will allow to create or reuse existing tags from other defined tracking scenarios.
+- A tag field to indicate which applications this scenario is designed to track. This will allow to create or reuse existing tags from other defined tracking scenarios.
 - A free text field for a **description** of the tracking scenario.
 
 ![](images/ts-3.png)
@@ -56,9 +56,9 @@ You can edit the following fields in this page.
 
 ### Scenario Information
 
-Click the **'Edit information'** button in the **Scenario Information** section or the **pencil icon** at the right side of the tracking scenario name to open a modal view similar to the creation one, but with the current information already filled.
+Click the **'Edit information'** button in the **Scenario Information** section or the **pencil icon** at the right side of the tracking scenario name to open a modal view similar to the creation one, but with the current information already filled in.
 
-Yo will be able to modify all of the field previously during the creation stage.
+You will be able to modify all of the fields set previously, during the creation stage.
 
 To confirm the changes, click **'Save and update scenario'**. To cancel, click the **'Cancel'** button, both at the bottom of the modal.
 
@@ -104,17 +104,17 @@ Add multiple entites by clicking the **'Add entities'** button. A new modal view
 
 ![](images/ts-10.png)
 
-Similar to the **Add implementation rules** modal, you will be able to add multiple entities from the list of entites displayed, sourced from your [Iglu](/docs/understanding-your-pipeline/glossary-of-terms/index.md#iglu). For each of the entities, you can view detailed information about the properties of the entity by clicking **'View properties'**. A search bar will also be available to help search and filter by entity name.
+Similar to the **Add implementation rules** modal, you will be able to add multiple entities from the list of entites displayed, that can be sourced from your [Iglu](/docs/understanding-your-pipeline/glossary-of-terms/index.md#iglu) or custom user defined entites. For each of the entities, you can view detailed information about the properties of the entity by clicking **'View properties'**. A search bar will also be available to help search and filter by entity name.
 
 Once you've selected the entities you want to add to the tracking scenario, click the **'Select entities'** button to confirm or the **'Cancel'** button to discard your selections.
 
-Once selected you will be shown with a new view inside the modal where you can select the cardinality of the entities.
+Once selected you will be presented with a new view inside the modal where you can select the cardinality of the entities.
 
 ![](images/ts-11.png)
 
 It will save the entites on **'Save entities'** click or back to the previous selection view clicking **'Back'**.
 
-Once saved the entities you will see a list of entities in the tracking detail view where you can edit, add or remove them.
+Once the entities are saved, you will see a list of entities in the tracking detail view where you can edit, add or remove them.
 
 ![](images/ts-12.png)
 
@@ -126,7 +126,7 @@ When you've configured a tracking scenario and you are ready to publish it, go t
 
 ![](images/ts-13.png)
 
-Once the scenario is published, it will no longer appear with the status **Draft** but instead with the status **Published** in the list view. When a scenario is published, you won't be able to edit it anymore unless you create a new **Draft** version. To do this  click on the scenario name from the list of tracking scenarios, and in the detailed view, instead of the previous **'Publish scenario'** button, you will see a **'Create a draft & edit'** button instead of the publish one.
+Once the scenario is published, it will no longer appear with the status **Draft** but instead with the status **Published** in the list view. When a scenario is published, you won't be able to edit it anymore unless you create a new **Draft** version. To do this  click on the scenario name from the list of tracking scenarios, and in the detailed view, instead of the previous **'Publish scenario'** button, you will see a **'Create a draft & edit'** button.
 
 ![](images/ts-14.png)
 
@@ -134,7 +134,7 @@ Once the scenario is published, it will no longer appear with the status **Draft
 
 ## Scharing a Tracking Scenario
 
-You may want to share a tracking scenario, whether it is published or still on draft. To do this from the **Tracking scenario** tab, click on the tracking scenario name you want to share, and then from the detailed view, click the **'Share scenario'** button near to the publish button.
+You may want to share a tracking scenario, whether it is published or still a draft. To do this from the **Tracking scenario** tab, click on the tracking scenario name you want to share, and then from the detailed view, click the **'Share scenario'** button near to the publish button.
 
 ![](images/ts-15.png)
 
@@ -153,18 +153,18 @@ A confirmation modal will appear.
 ![](images/ts-17.png)
 
 :::warning
-This opeartion can't be undo.
+This opeartion can't be reverted.
 :::
 
 ## Deprecating Published Tracking Scenarios
 
-You can deprecate a tracking scenario, but this is only possible for *Published* versions. To deprecate a Published tracking scenario, got to the **Tracking scenarios** tab and click the **'Deprecate'** button.
+You can deprecate a tracking scenario, but this is only possible for *Published* versions. To deprecate a Published tracking scenario, go to the **Tracking scenarios** tab and click the **'Deprecate'** button.
 
 A confirmation modal will appear where you can add some comments. 
 
 ![](images/ts-18.png)
 
-Once you deprecate on a Published scenario you will see the new **Deprecated** status.
+Once you deprecate a Published scenario you will see the new **Deprecated** status.
 
 ![](images/ts-19.png)
 
@@ -175,7 +175,7 @@ You can undo this action by clicking on the scenario and on the detail view you 
 :::
 
 :::info
-You can perform some of this actions, **'Publish'**, **'Share'**, **'Delete'**, **'Create a draft & edit'** and **'Deprecate'** on a tracking scenario clicking the triple-dot menu button **'...'** from the **Tracking scenario** tab view.
+You can perform some of these actions, **'Publish'**, **'Share'**, **'Delete'**, **'Create a draft & edit'** and **'Deprecate'** on a tracking scenario clicking the triple-dot menu button **'...'** from the **Tracking scenario** tab view.
 
 ![](images/ts-21.png)
 ![](images/ts-22.png)

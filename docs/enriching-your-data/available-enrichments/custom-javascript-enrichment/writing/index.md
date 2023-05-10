@@ -111,7 +111,7 @@ For events with no entities attached, `getContexts()` will return `null`. The pa
 
 :::note Derived entities
 
-Currently, derived entities (added by other enrichments) cannot be fetched. `event.getDerived_contexts()` will _always_ return `null`.
+For derived entities (added by other enrichments), you can use `event.getDerived_contexts()` in the same way as above. Note that this is only supported since Enrich 3.8.0 (and Snowplow Micro 1.7.1). In prior versions, this function always returns `null`.
 
 :::
 
@@ -234,6 +234,12 @@ function process(event) {
 
   ...
 ```
+
+:::note
+
+You might be tempted to update derived entities in a similar way by using `event.setDerived_contexts()`. However, this is not supported (the function exists, but has no effect). Instead, refer to the [Adding extra entities](#adding-extra-entities-to-the-event) section.
+
+:::
 
 ## Discarding the event
 

@@ -33,10 +33,11 @@ let remoteConfig = RemoteConfiguration(
 
 // Default configuration used when the remote config is not accessible
 // Network, tracker, subject and sessionConfigurations can be provided
-let defaultNetworkConfig = NetworkConfiguration(
-  endpoint: "https://snowplow-collector-url.com", 
-  method: .post)
-let defaultConfig = [ConfigurationBundle(namespace: "defaultNamespace", networkConfiguration: defaultNetworkConfig)]
+let defaultNetworkConfig = NetworkConfiguration(endpoint: "https://snowplow-collector-url.com", method: .post)
+let bundle = ConfigurationBundle(namespace: "defaultNamespace", networkConfiguration: defaultNetworkConfig)
+bundle.trackerConfiguration = TrackerConfiguration(appId: "app-id")
+  .screenViewAutotracking(true)
+let defaultConfig = [bundle]
 
 // Optional callback for when the tracker reconfigures itself passing a list of active namespaces and the state of the configuration describing where it was fetched from
 let successCallback: ([String]?) -> Void = { namespaces, state in

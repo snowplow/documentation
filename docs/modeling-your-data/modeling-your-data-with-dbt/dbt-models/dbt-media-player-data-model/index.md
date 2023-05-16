@@ -1,6 +1,6 @@
 ---
 title: "Media Player"
-sidebar_position: 103
+sidebar_position: 104
 hide_title: true
 ---
 
@@ -91,7 +91,7 @@ dbt run --selector snowplow_web
 
 #### Starting both the media and web model from scratch
 
-As neither package has been run before, the `snowplow_web_incremental_manifest` table is new; all models from both packages (plus any custom modules tagged with `snowplow_web_incremental`) will be processed using the recommended web model running method - using the `snowplow_web` selector - without any extra steps required. 
+As neither package has been run before, the `snowplow_web_incremental_manifest` table is new; all models from both packages (plus any custom modules tagged with `snowplow_web_incremental`) will be processed using the recommended web model running method - using the `snowplow_web` selector - without any extra steps required.
 
 ```bash
 dbt run --selector snowplow_web

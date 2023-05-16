@@ -1,6 +1,6 @@
 ---
 title: "Media Player"
-sidebar_position: 103
+sidebar_position: 104
 ---
 
 ```mdx-code-block
@@ -18,7 +18,8 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 
 :::
 
-### Warehouse and tracker 
+
+### Warehouse and tracker
 | Variable Name                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Default            |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
 | `percent_progress_boundaries` | The list of percent progress values. It needs to be aligned with the values being tracked by the tracker. It is worth noting that the more these percent progress boundaries are being tracked the more accurate the play time calculations become. Please note that tracking 100% is unnecessary as there is a separate `ended` event which the model equates to achieving 100% and it also gets included automatically to this list, in case it is not added (you can refer to the helper macro `get_percentage_boundaries` ([source](https://snowplow.github.io/dbt-snowplow-media-player/#!/macro/macro.snowplow_media_player.get_percentage_boundaries)) for details). | `[10, 25, 50, 75]` |
@@ -38,7 +39,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `enable_whatwg_video` | Set to `true` if the HTML5 video element context schema is enabled. This variable is used to handle syntax depending on whether the context fields are available in the database or not. | `false` |
 | `enable_youtube`      | Set to `true` if the YouTube context schema is enabled. This variable is used to handle syntax depending on whether the context fields are available in the database or not.             | `false` |
 
-### Warehouse Specific 
+### Warehouse Specific
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift/postgres" label="Redshift & Postgres">

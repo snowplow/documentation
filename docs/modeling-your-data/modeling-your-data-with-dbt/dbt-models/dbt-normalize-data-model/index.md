@@ -1,6 +1,6 @@
 ---
 title: "Normalize"
-sidebar_position: 104
+sidebar_position: 105
 hide_title: true
 ---
 
@@ -18,7 +18,7 @@ import Badges from '@site/src/components/Badges';
 Normalize in this context means [database normalization](https://en.wikipedia.org/wiki/Database_normalization), as these models produce flatter data, not statistical normalization.
 :::
 
-**The package source code can be found in the [snowplow/dbt-snowplow-normalize repo](https://github.com/snowplow/dbt-snowplow-normalize ), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-normalize/#/overview/snowplow_normalize ).** 
+**The package source code can be found in the [snowplow/dbt-snowplow-normalize repo](https://github.com/snowplow/dbt-snowplow-normalize ), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-normalize/#/overview/snowplow_normalize ).**
 
 The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools such as Hightouch. See the [Model Design](#model-design) section for further details on these tables.
 
@@ -85,7 +85,7 @@ This package consists of two macros, a python script, and some example configura
 
   - `example_resolver_config.json`: This file is an example [Iglu Resolver](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) configuration. It supports custom iglu servers with API keys, but does not currently support accessing embedded registries. For more information please see the Resolver docs.
 
-  - `models/base/`: Models relating to the incremental nature of the package, processing only new events (and those covered by the lookback window). 
+  - `models/base/`: Models relating to the incremental nature of the package, processing only new events (and those covered by the lookback window).
 ## Operation
 
 :::tip Using dbt Cloud?
@@ -473,14 +473,14 @@ You should keep your configuration file, and your resolver file if you have one,
 :::
 
 ### Producing your models
-To produce your models you need to run 
+To produce your models you need to run
 
-`python dbt_packages/snowplow_normalize/utils/snowplow_normalize_model_gen.py path/to/your/config.json` 
+`python dbt_packages/snowplow_normalize/utils/snowplow_normalize_model_gen.py path/to/your/config.json`
 
-(or equivalent path in Windows) from the root of your dbt project. This will produce one `.sql` file for each of the event name specified in the `events` part of your configuration, one `.sql` file for the combined filtered events table if a name was provided, and one `.sql` file for your users table if schema(s) were provided. These files will be in your `models` folder in the sub-folder specified in your config. 
+(or equivalent path in Windows) from the root of your dbt project. This will produce one `.sql` file for each of the event name specified in the `events` part of your configuration, one `.sql` file for the combined filtered events table if a name was provided, and one `.sql` file for your users table if schema(s) were provided. These files will be in your `models` folder in the sub-folder specified in your config.
 
 :::info
-Custom error messages have been added to the script to try and catch any issues and provide suggested resolutions to any issues such as invalid configurations or failing validation of schemas. If you persist in getting errors when validating schemas you believe you be correct, you can disable this validation by setting `validate_schemas` to `false` in your config. 
+Custom error messages have been added to the script to try and catch any issues and provide suggested resolutions to any issues such as invalid configurations or failing validation of schemas. If you persist in getting errors when validating schemas you believe you be correct, you can disable this validation by setting `validate_schemas` to `false` in your config.
 :::
 
 ### Adding new models

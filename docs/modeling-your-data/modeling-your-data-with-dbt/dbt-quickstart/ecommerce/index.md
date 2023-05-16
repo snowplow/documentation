@@ -1,6 +1,6 @@
 ---
 sidebar_label: "E-commerce"
-sidebar_position: 105
+sidebar_position: 106
 title: "E-commerce Quickstart"
 ---
 
@@ -120,7 +120,7 @@ models:
             +enabled: false
 ```
 
-Adding these two configurations to your `dbt_project.yml` will ensure that the carts module is disabled. 
+Adding these two configurations to your `dbt_project.yml` will ensure that the carts module is disabled.
 
 #### Disabling the cart module using `dbt run`
 If you want to temporarily disable a module, or you just find it easier to use the command line, you can also do this in the command line when executing the `dbt run` command. You will need to run the following command to disable the carts module

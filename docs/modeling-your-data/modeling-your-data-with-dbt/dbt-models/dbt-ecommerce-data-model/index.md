@@ -1,6 +1,6 @@
 ---
 title: "E-commerce"
-sidebar_position: 105
+sidebar_position: 106
 hide_title: true
 ---
 

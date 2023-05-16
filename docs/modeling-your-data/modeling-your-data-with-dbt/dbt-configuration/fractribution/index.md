@@ -1,6 +1,6 @@
 ---
 title: "Fractribution"
-sidebar_position: 106
+sidebar_position: 107
 ---
 
 ## Package Configuration Variables

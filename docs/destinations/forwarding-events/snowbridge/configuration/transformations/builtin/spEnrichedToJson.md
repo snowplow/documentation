@@ -1,6 +1,6 @@
 # SpEnrichedToJson
 
-`spEnrichedToJson`: Transforms a message's data from Snowplow Enriched tsv string format to a JSON object. The input data must be a valid Snowplow enriched TSV.
+`spEnrichedToJson`: Specific to Snowplow data. Transforms a message's data from Snowplow Enriched tsv string format to a JSON object. The input data must be a valid Snowplow enriched TSV.
 
 `spEnrichedToJson` has no options.
 

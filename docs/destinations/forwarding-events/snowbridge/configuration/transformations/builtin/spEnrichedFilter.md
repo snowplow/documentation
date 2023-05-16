@@ -1,6 +1,6 @@
 # spEnrichedFilter
 
-`spEnrichedFilter`: Filters messages based on a regex match against an atomic field.
+`spEnrichedFilter`: Specific to Snowplow data. Filters messages based on a regex match against an atomic field.
 
 This transformation is for use on base-level atomic fields, rather than fields from contexts, or custom events — which can be achieved with `spEnrichedFilterContext` and `spEnrichedFilterUnstructEvent`.
 

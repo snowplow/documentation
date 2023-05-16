@@ -1,6 +1,6 @@
 # spEnrichedFilterUnstructEvent
 
-`spEnrichedFilterUnstructEvent`: Filters messages based on a regex match against a field in a custom event.
+`spEnrichedFilterUnstructEvent`: Specific to Snowplow data.  Filters messages based on a regex match against a field in a custom event.
 
 This transformation is for use on fields from custom events.
 

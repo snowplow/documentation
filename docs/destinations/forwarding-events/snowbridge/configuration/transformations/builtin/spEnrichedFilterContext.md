@@ -1,6 +1,6 @@
 # spEnrichedFilterContext
 
-`spEnrichedFilterContext`: Filters messages based on a regex match against a field in a context.
+`spEnrichedFilterContext`: Specific to Snowplow data.  Filters messages based on a regex match against a field in a context.
 
 This transformation is for use on fileds from contexts.
 

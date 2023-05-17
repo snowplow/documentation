@@ -378,57 +378,11 @@ import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 
 #### Configuring cross-domain tracking
 
-The JavaScript Tracker can add an additional parameter named “_sp” to the querystring of outbound links. Its value includes the domain user ID for the current page and the time at which the link was clicked. This makes these values visible in the “url” field of events sent by an instance of the JavaScript Tracker on the destination page. The enrichment process will use these values to populate the `refr_domain_userid` and `refr_dvce_tstamp` fields in Redshift for all events fired on the destination page.
-
-You can configure which links get decorated this way using the `crossDomainLinker` field of the configuration object. This field should be a function taking one argument (the link element) and return `true` if the link element should be decorated and false otherwise. For example, this function would only decorate those links whose destination is “[http://acme.de](http://acme.de/)” or whose HTML id is “crossDomainLink”:
-
-```javascript
-{
-  crossDomainLinker: function (linkElement) {
-    return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-  }
-}
+```mdx-code-block
+import CrossDomain from "@site/docs/reusable/javascript-tracker-cross-domain/_index.md"
 ```
 
-If you want to decorate every link to the domain github.com:
-
-```javascript
-{
-  crossDomainLinker: function (linkElement) {
-    return /^https:\/\/github\.com/.test(linkElement.href);
-  }
-}
-```
-
-If you want to decorate every link, regardless of its destination:
-
-```javascript
-{
-  crossDomainLinker: function (linkElement) {
-    return true;
-  }
-}
-```
-
-Note that the above will decorate “links” which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`). To exclude these links:
-
-```javascript
-snowplow('crossDomainLinker', function(linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0;
-});
-```
-
-Note that when the tracker loads, it does not immediately decorate links. Instead it adds event listeners to links which decorate them as soon as a user clicks on them or navigates to them using the keyboard. This ensures that the timestamp added to the querystring is fresh.
-
-If further links get added to the page after the tracker has loaded, you can use the tracker’s `crossDomainLinker` method to add listeners again. (Listeners won’t be added to links which already have them.)
-
-```javascript
-snowplow('crossDomainLinker', function (linkElement) {
-  return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-});
-```
-
-_Warning_: If you enable link decoration, you should also make sure that at least one event is fired on the page. Firing an event causes the tracker to write the domain_userid to a cookie. If the cookie doesn’t exist when the user leaves the page, the tracker will generate a new ID for them when they return rather than keeping the old ID.
+<CrossDomain lang="javascript" />
 
 #### Configuring the maximum payload size in bytes
 

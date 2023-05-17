@@ -1,10 +1,16 @@
 ---
-title: "🆕 Managing tracking scenarios in the console"
-date: "2020-04-17"
+title: "Managing tracking scenarios in the console"
+sidebar_label: "🆕 Managing tracking scenarios in the console"
 sidebar_position: 95
 ---
 
-Configure specific implementation rules, entities and triggers for your tracking, boosting decision making and collaboration among team members through BDP Console.
+With Tracking Scenarios, you and your team can create a shared understanding of what events should be tracked, in which cases, and with what entities.
+
+:::info
+Tracking scenario management from console is only available for BDP Cloud customers.
+
+ For BDP Enterprise, see [Managing tracking scenarios with API] <!-- TODO: add link when https://github.com/snowplow/documentation/pull/441 is merged -->
+:::
 
 ## Creating a New Tracking Scenario draft
 
@@ -18,7 +24,7 @@ After selecting a data structure, click on the **Tracking Scenarios** tab as sho
 
 ![](images/ts-1.png)
 
-Next, click the **'Add new scenario'** button. A new modal will appear with fields for basic information that can be defined during creation, as shown.
+Next, click the **'Add new scenario'** button. A new dialog box will appear with fields for basic information that can be defined during creation, as shown.
 
 ![](images/ts-2.png)
 
@@ -56,35 +62,35 @@ You can edit the following fields in this page.
 
 ### Scenario Information
 
-Click the **'Edit information'** button in the **Scenario Information** section or the **pencil icon** at the right side of the tracking scenario name to open a modal view similar to the creation one, but with the current information already filled in.
+Click the **'Edit information'** button in the **Scenario Information** section or the **pencil icon** at the right side of the tracking scenario name to open a dialog box view similar to the creation one, but with the current information already filled in.
 
 You will be able to modify all of the fields set previously, during the creation stage.
 
-To confirm the changes, click **'Save and update scenario'**. To cancel, click the **'Cancel'** button, both at the bottom of the modal.
+To confirm the changes, click **'Save and update scenario'**. To cancel, click the **'Cancel'** button, both at the bottom of the dialog box.
 
 ### Triggers
 
-Triggers describes situations in which tracking will be performed, such as button clicks, page views, app launches, in-app purchases, user interactions, login attemps, system events and more. These triggers are essential for developers when implementing tracking.  
+Triggers describe situations in which tracking will be performed, such as button clicks, page views, app launches, in-app purchases, user interactions, login attempts, system events and more. These triggers are essential for developers when implementing tracking.
 
-Add multiple triggers by clicking the **'+ Add trigger'** button on the **Scenario Triggers** section. A new modal view will appear with a text field where you can specificy information about when, where and how the scenario will be triggered.
+Add multiple triggers by clicking the **'+ Add trigger'** button on the **Scenario Triggers** section. A new dialog box view will appear with a text field where you can specificy information about when, where and how the scenario will be triggered.
 
 ![](images/ts-6.png)
 
 Once completed, you can confirm the changes by clicking the **'Save and update scenario'** button or cancel the changes by clicking the **'Cancel'** button.
 
-You will be able to edit it after adding a trigger.
+You will be able to edit the scenario after adding a trigger.
 
 ### Implementation rules
 
-Implementation rules allow defining constraints and conditions on basic fields, based on the underlying schema properties of a particular tracking event. These rules ensure that the event data complies with the data structure's underlying schema, so when the scenario is triggered and flows downstream through the pipeline, it is validated against the schema.
+With implementation rules, you can define constraints and conditions on basic fields, based on the underlying schema properties of a particular tracking event. This way, you can ensure that once the events flows downstream through the pipeline, they will comply with the underlying schema.
 
-Add multiple implementation rules by clicking the **'+ Add implementation rules'** button in the **Implmentation rules** section. A new modal view will appear.
+Add multiple implementation rules by clicking the **'+ Add implementation rules'** button in the **Implmentation rules** section. A new dialog box view will appear.
 
-This modal displays a list of rules for specific properties that can be set. This list of posible rules is populated based on the Data Structure properties from the specific version that the Tracking Scenario was created from. A search bar will also be available to help search and filtering by rule name.
+This dialog box displays a list of rules for specific properties that you can set. This list of possible rules is populated based on the Data Structure properties from the specific version that the Tracking Scenario was created from. You can use the search bar to find rules by name.
 
 ![](images/ts-7.png)
 
-You can click on any of the properties that are shown in the list. A new view inside the modal will show where you'll be able to configure the rule's **Type of condition**, **Value** and **Comments** properties. 
+You can click on any of the properties that are shown in the list. A new view inside the dialog box will show where you'll be able to configure the rule's **Type of condition**, **Value** and **Comments** properties. 
 
 ![](images/ts-8.png)
 
@@ -98,27 +104,25 @@ You will see a list of rules in the tracking detail view where you can edit or r
 
 ### Entities
 
-Entities can be defined as part of the context for a tracking scenario, providing additional information about specific events such as clicks, conversions, impressions, payment info, and more. By including these entities, you can enrich the tracked data and gain deeper insights into user behavior.
+[Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md) can be defined as part of the context for a tracking scenario, providing additional information about specific events such as clicks, conversions, impressions, payment info, and more. By including these entities, you can enrich the tracked data and gain deeper insights into user behavior.
 
-Add multiple entites by clicking the **'Add entities'** button. A new modal view for configuring entites will appear.
+Add multiple entites by clicking the **'Add entities'** button. A new dialog box view for configuring entites will appear.
 
 ![](images/ts-10.png)
 
-Similar to the **Add implementation rules** modal, you will be able to add multiple entities from the list of entites displayed, that can be sourced from your [Iglu](/docs/understanding-your-pipeline/glossary-of-terms/index.md#iglu) or custom user defined entites. For each of the entities, you can view detailed information about the properties of the entity by clicking **'View properties'**. A search bar will also be available to help search and filter by entity name.
+Similar to the **Add implementation rules** dialog box, you will be able to add multiple entities from the list of entites displayed. You can pick your own custom entities (defined in the **Data Structures** section of the Console), or ones available on [Iglu Central](https://iglucentral.com/) repository.
 
-Once you've selected the entities you want to add to the tracking scenario, click the **'Select entities'** button to confirm or the **'Cancel'** button to discard your selections.
+For each of the entities, you can view detailed information about the properties of the entity by clicking **'View properties'**. You can use the search bar to find an entity by name.
 
-Once selected you will be presented with a new view inside the modal where you can select the cardinality of the entities.
+Once you've selected the entities you want to add to the tracking scenario, click the **'Select entities'** button to confirm or the **'Cancel'** button to discard your selections. On the next screen, you can configure the cardinality, i.e. how many instances of each entity should be attached to the event.
 
 ![](images/ts-11.png)
 
-It will save the entites on **'Save entities'** click or back to the previous selection view clicking **'Back'**.
+Click **'Save entities'** or **'Back'** to save or discard your changes respectively.
 
 Once the entities are saved, you will see a list of entities in the tracking detail view where you can edit, add or remove them.
 
 ![](images/ts-12.png)
-
-* * *
 
 ## Publishing a Tracking Scenario
 
@@ -126,11 +130,9 @@ When you've configured a tracking scenario and you are ready to publish it, go t
 
 ![](images/ts-13.png)
 
-Once the scenario is published, it will no longer appear with the status **Draft** but instead with the status **Published** in the list view. When a scenario is published, you won't be able to edit it anymore unless you create a new **Draft** version. To do this  click on the scenario name from the list of tracking scenarios, and in the detailed view, instead of the previous **'Publish scenario'** button, you will see a **'Create a draft & edit'** button.
+Once the scenario is published, it will no longer appear with the status **Draft** but instead with the status **Published** in the list view. When a scenario is published, you won't be able to edit it anymore, unless you create a new **Draft** version. To do this, click on the scenario name from the list of tracking scenarios, and in the detailed view, instead of the previous **'Publish scenario'** button, you will see a **'Create a draft & edit'** button.
 
 ![](images/ts-14.png)
-
-* * *
 
 ## Scharing a Tracking Scenario
 
@@ -138,17 +140,15 @@ You may want to share a tracking scenario, whether it is published or still a dr
 
 ![](images/ts-15.png)
 
-Then a modal view with a link with a **'Copy'** button will appear.
+Then a dialog box view with a link with a **'Copy'** button will appear.
 
 ![](images/ts-16.png)
-
-* * *
 
 ## Deleting Drafted Tracking Scenarios
 
 You can delete a tracking scenario, but this is only possible for *Draft* versions. To delete a Draft tracking scenario, got to the **Tracking scenarios** tab and click the **'Delete'** button.
 
-A confirmation modal will appear.
+A confirmation dialog box will appear.
 
 ![](images/ts-17.png)
 
@@ -158,9 +158,11 @@ This opeartion can't be reverted.
 
 ## Deprecating Published Tracking Scenarios
 
+Deprecating a tracking scenario is a signal to developers that this scenario is no longer in use and should not be tracked anymore. However, it's important to note that deprecating a tracking scenario does not automatically prevent new events from being tracked under this scenario. Developers will need to manually stop tracking events for the deprecated scenario.
+
 You can deprecate a tracking scenario, but this is only possible for *Published* versions. To deprecate a Published tracking scenario, go to the **Tracking scenarios** tab and click the **'Deprecate'** button.
 
-A confirmation modal will appear where you can add some comments. 
+A confirmation dialog box will appear where you can add some comments. 
 
 ![](images/ts-18.png)
 

@@ -1,5 +1,5 @@
 ---
-title: "🆕 Managing data structures with the Data Structures Builder"
+title: "Managing data structures with the Data Structures Builder"
 sidebar_position: 85
 ---
 

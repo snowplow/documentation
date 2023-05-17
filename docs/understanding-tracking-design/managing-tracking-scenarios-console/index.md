@@ -82,7 +82,7 @@ You will be able to edit the scenario after adding a trigger.
 
 ### Implementation rules
 
-With implementation rules, you can define constraints and conditions on basic fields, based on the underlying schema properties of a particular tracking event. This way, you can ensure that once the events flows downstream through the pipeline, they will comply with the underlying schema.
+With implementation rules, you can define constraints and conditions on basic fields, based on the underlying schema properties of a particular tracking event.
 
 Add multiple implementation rules by clicking the **'+ Add implementation rules'** button in the **Implmentation rules** section. A new dialog box view will appear.
 

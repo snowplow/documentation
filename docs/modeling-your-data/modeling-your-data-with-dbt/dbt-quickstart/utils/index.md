@@ -151,7 +151,7 @@ vars:
 ```
 
 ### 6. Setting up the sessions lifecycle manifest macro
-For the `snowplow_base_sessions_lifecycle_manifest` model, you have the following macro call which takes in a lot of parameters:
+For the `snowplow_base_sessions_lifecycle_manifest` model, you have the following macro call which takes in a lot of parameters to allow for a high level of flexibility in how you can process your Snowplow data:
 
 ```sql
 

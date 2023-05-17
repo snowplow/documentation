@@ -1,5 +1,7 @@
 # base64Decode
 
+Introduced in version 2.1.0
+
 `base64Decode`: Base64 decodes the message's data.
 
 This transformation base64 decodes the message's data from a base64 byte array, to a byte array representation of the decoded data.

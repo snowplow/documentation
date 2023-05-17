@@ -1,5 +1,7 @@
 # base64Encode
 
+Introduced in version 2.1.0
+
 `base64Encode`: Base64 encodes the message's data.
 
 This transformation base64 encodes the message's data to a base 64 byte array.

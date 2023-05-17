@@ -40,14 +40,33 @@ dispatch:
 If you do not do this the package will still work, but the incremental upserts will become more costly over time.
 
 ### 2. Creating the `base` module in your dbt project
-In your dbt project, create a `base` folder somewhere within your `models` directory. Within this `base` folder, you need to create the following files:
-1. `snowplow_base_quarantined_sessions.sql`
-2. `snowplow_incremental_manifest.sql`
-3. `snowplow_base_new_event_limits.sql`
-4. `snowplow_base_sessions_lifecycle_manifest.sql`
-5. `snowplow_base_sessions_this_run.sql`
-6. `snowplow_base_events_this_run.sql`
-
+In your dbt project, create a `base` folder somewhere within your `models` directory. Within this `base` folder, you need to create the 6 `.sql` files shown below:
+```ascii
+my_dbt_project
+├── analyses
+│   └── .gitkeep
+├── dbt_packages
+│   ├── dbt_utils
+│   └── snowplow_utils
+├── logs
+├── macros
+├── models
+│   └── base
+│       ├── snowplow_base_quarantined_sessions.sql
+│       ├── snowplow_incremental_manifest.sql
+│       ├── snowplow_base_new_event_limits.sql
+│       ├── snowplow_base_sessions_lifecycle_manifest.sql
+│       ├── snowplow_base_sessions_this_run.sql
+│       └── snowplow_base_events_this_run.sql
+├── seeds
+├── snapshots
+├── target
+├── tests
+├── .gitignore
+├── dbt_project.yml
+├── packages.yml
+├── README.md
+└── selectors.yml
 Once you've created all of these models, you need to call the correct macros in each model to ensure that the correct SQL gets generated for each model. If you'd like to rename any of the models, all you need to do is rename the `.sql` files listed above. However, please do so with caution and be sure to read the subsequent steps carefully as you may need to modify some of the boilerplate code outlined below to have the macros adapt properly to your naming conventions.
 
 ### 3. Setting up the quarantined sessions macro

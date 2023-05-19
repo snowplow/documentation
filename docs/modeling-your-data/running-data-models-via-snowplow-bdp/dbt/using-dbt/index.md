@@ -141,6 +141,15 @@ profile_name:
 The warehouse password should be sent by [secure form from the Snowplow BDP Console](https://console.snowplowanalytics.com/secure-messaging/freeform) in order to set the environment variables.
 
 :::
+
+#### Required Privileges 
+
+```mdx-code-block
+import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
+
+<DbtPrivs/>
+```
+
 ### 2. The data modeling configuration
 
 Data models can be configured via the Snowplow BDP Console:

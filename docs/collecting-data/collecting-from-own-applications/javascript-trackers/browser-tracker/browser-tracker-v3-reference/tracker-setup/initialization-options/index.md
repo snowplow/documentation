@@ -66,7 +66,8 @@ newTracker('sp', '{{collector_url_here}}', {
     browser: false // Adds browser context entity to events, off by default. Available in v3.9+.
   },
   retryStatusCodes: [],
-  dontRetryStatusCodes: []
+  dontRetryStatusCodes: [],
+  onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
 });
 ```
 
@@ -431,3 +432,17 @@ dontRetryStatusCodes: [418] // force retry on 418
 ```
 
 Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent. Take caution when choosing the `dontRetryStatusCodes`.
+
+#### On session update callback
+
+The `onSessionUpdateCallback` option, allows you to supply a callback function to be executed whenever a new session is generated on the tracker.
+
+The callback's signature is:
+`(clientSession: ClientSession) => void`
+where clientSession includes the same values as you would expect on the [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context.
+
+_Note:_ The callback is **not** called whenever a session is expired, but only when a new one is generated.
+
+:::note
+Please note that the session context entity is only available since version 3.11 of the tracker.
+:::

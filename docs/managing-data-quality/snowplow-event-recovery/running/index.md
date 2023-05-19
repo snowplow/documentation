@@ -22,7 +22,7 @@ The configuration consists of
   "data": {
     "iglu:com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema/1-0-*": [
       {
-        "name": "pass through",
+        "name": "passthrough",
         "conditions": [],
         "steps": []
       }

@@ -74,7 +74,7 @@ For every type of conversion you provide a configuration for, the package will a
 | `cv_{name}_values`           | An array of values for each conversion, if provided in the configuration                     |
 | `cv_{name}_total`            | The total of the values for each conversion, if provided in the configuration                |
 | `cv_{name}_events`           | An array of `event_id`s for each conversion, if `list_events` is `true` in the configuration |
-| `cv_{name}_first_conversion` | The `collector_tstamp` of the first conversion event                                         |
+| `cv_{name}_first_conversion` | The `derived_tstamp` of the first conversion event                                         |
 | `cv_{name}_converted`        | A boolean for if there was a conversion in the session                                       |
 
 :::tip
@@ -104,7 +104,7 @@ The `snowplow__conversion_events` variable in our project takes a list of dictio
 | ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `name`          | Yes      | The name of the conversion, to be used in the column names for this conversion                                                                                      | `sign_up`                                                  |
 | `condition`     | Yes      | The (valid sql) condition that identifies if the event is a conversion. Must return true or false, and will be used in a `case when ...` statement.                 | `event_name = 'page_view' and page_url like '%signed_up%'` |
-| `value`         | No       | The field name or sql to select the value associated with the conversion. If not provided the `cv_{name}_value` and `cv_{name}_total` fields will not be generated. | `tr_total_base`                                            |
+| `value`         | No       | The field name or sql to select the value associated with the conversion. If not provided the `cv_{name}_value` and `cv_{name}_total` fields will not be generated. | `tr_total_base/100`                                            |
 | `default_value` | No       | The default value to use when a conversion is identified but the value returned is `null`. The type should match value. Default `0`                                 | `1`                                                        |
 | `list_events`   | No       | A boolean to determine whether to add the `cv_{name}_events` column to the output.                                                                                  | `true`                                                     |
 
@@ -117,9 +117,6 @@ For Redshift and Postgres users currently you are limited to just the fields add
 :::
 
 ### Example configurations
-
-#### 
-
 
 <details>
 <summary>All ids of page views on a particular url</summary>

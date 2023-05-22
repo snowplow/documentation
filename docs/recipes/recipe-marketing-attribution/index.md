@@ -5,7 +5,7 @@ date: "2020-10-12"
 sidebar_position: 10
 ---
 
-![](images/charts.png)
+
 
 ## Introduction
 
@@ -23,9 +23,10 @@ By the end of this guide you will have built a table just like this one for your
 The most important goal of this guide is to help you learn something new about your customers!
 
 :::note
-Prerequisites: None!
+Prerequisites:
+* to build a proof of concept: None!
+* to build a production-ready model: dbt, a data warehouse / lake, ability to add a JS tag to a website, and a BDP Cloud account
 
-You don't need any tooling to build a v1 model, you will need a warehouse and dbt to do the more advanced final section of this guide.
 :::
 
 To achieve this, you will:
@@ -39,7 +40,7 @@ Without even getting to any more advanced customizations, Snowplow gives you the
 ![](images/models.png)
 
 
-## 1. A quick demo of attribution with Snowplow
+## 1. Proof of concept with sample data
 
 #### Set up a free Snowplow account
 
@@ -193,14 +194,16 @@ FROM derived.marketing_attribution
 GROUP BY 1;
 ```
 
-## 2. Track events to create a real dataset
+## 2. First insights using your customer data
 
 When you've completed this section, you should learn something about how you acquire real customers!
 
 #### Auto-track page views via GTM
-[Tracking real page view events](https://docs.snowplow.io/docs/try-snowplow/tracking-events-with-try-snowplow/) is very simple, especially if you have Google Tag Manager connected to your website (or your personal blog if you just want to see how it works!) - just copy the snippet from the Snowplow UI into a custom HTML tag.
+[Tracking real page view events](https://docs.snowplow.io/docs/try-snowplow/tracking-events-with-try-snowplow/) is very simple, especially if you have Google Tag Manager connected to your website (or your personal blog if you just want to see how it works!) - just copy the snippet from the Snowplow UI into a custom HTML tag or directly into the `<head>` section of your website.
 
 ![](images/gtm.gif)
+
+The process will be similar for any popular tag management solution.
 
 #### Run the same SQL on this dataset
 Now run the same SQL snippets from step 1 on this new data in Postgres and don't forget to update the conversion logic to something that makes sense for your website such as:
@@ -274,24 +277,20 @@ window.snowplow('trackSelfDescribingEvent', {
 ```
 </details>
 
-## 3. Connect to your data warehouse
+## 3. Production grade model in your warehouse
 
-Now that you've seen the principles in action, you've actually done the hardest part.
+Now that you've seen the principles in action, you've actually done the hardest part. Once you have completed this section, you will have a production grade setup to reliably run a custom attribution model.
+
+#### Connect to your Data warehouse with BDP Cloud
 
 Now you just need to connect to your warehouse and starting building up an asset of customer data that you can get better and better attribution insights out of over time!
 
-To connect to your warehouse / lake, you need to go into the Snowplow UI, click 'Upgrade Now' and follow the setup wizard for BDP Cloud (you will need a credit card for this), this is a production-ready platform that can reliably load live events to your warehouse / lake.
+To connect to your warehouse / lake, you need to go into the Snowplow UI, click 'Upgrade Now' and follow the setup wizard for BDP Cloud (you will need a credit card for this). BDP Cloud is a production-ready platform that can reliably load live events to your warehouse / lake, to continue without a credit card you can always set up [Snowplow Opensource](https://docs.snowplow.io/docs/getting-started-on-snowplow-open-source/).
 
 ![](images/destination.png)
 
-When your connection is confirmed, deploy our prebuilt dbt packages following our quickstart guides:
+#### Ensure Snowplow events are loading to your warehouse
 
-1. Snowplow [web package](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/)
-2. Snowplow [attribution package](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/fractribution/)
-
-![](images/datamodel.png)
-
-:::note
 You had already set up tracking in step 2 so you can change the endpoint the events are sent to, to ensure they load to your warehouse, instead of Postgres.
 
 Do this by copying the endpoint from the [Snowplow BDP UI](https://console.snowplowanalytics.com/environments) into your tracking code in GTM:
@@ -303,7 +302,22 @@ Do this by copying the endpoint from the [Snowplow BDP UI](https://console.snowp
 snowplow("newTracker", "sp", "com-acme-saas1.collector.snplow.net", {
 ...
 ```
-:::
+
+#### Deploy Snowplow's out of the box attribution model
+
+![](images/datamodel.png)
+
+When your connection is confirmed and tracking snippet updated, deploy our prebuilt dbt packages (note that you will need dbt Core or Cloud for this step) following the quickstart guides:
+
+1. Snowplow [web package](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/)
+2. Snowplow [attribution package](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/fractribution/)
+
+With these dbt packages you will get a series of production ready tables that automatically aggregate and model the raw Snowplow events into BI ready tables. You can read more about our dbt packages in [the docs](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/).
+
+Any BI tool can then be connected to create charts of the output.
+
+![](images/charts.png)
+
 
 ## 4. Customizing for a competitive advantage
 

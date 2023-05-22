@@ -223,7 +223,7 @@ CREATE TABLE derived.marketing_attribution AS(
 
 <details>
   <summary>
-Design and implement a `conversion` event
+Design and implement a "Conversion" event
   </summary>
 
 #### Designing the `conversion` event

@@ -2,7 +2,7 @@
 
 You can use the HTTP target to send events to Google Tag Manager Server Side, where the [Snowplow Client tag](/docs/destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md) is installed.
 
-To do this, you will need to include a [transformation](/docs/destinations/forwarding-events/snowbridge/concepts/transformations/index.md) that converts your events to JSON — [`spEnrichedToJson`](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/snowplow-builtin/spEnrichedToJson.md).
+To do this, you will need to include a [transformation](/docs/destinations/forwarding-events/snowbridge/concepts/transformations/index.md) that converts your events to JSON — [`spEnrichedToJson`](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/builtin/spEnrichedToJson.md).
 
 Here’s an example configuration. Replace `<your-gtm-host>` with the hostname of your Google Tag Manager instance, and — optionally — `<preview-token>` with your preview mode token.
 

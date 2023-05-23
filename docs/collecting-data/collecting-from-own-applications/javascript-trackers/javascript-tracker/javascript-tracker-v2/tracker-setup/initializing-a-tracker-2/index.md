@@ -36,19 +36,12 @@ _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-fo
 
 ```mdx-code-block
 import Block3067 from "@site/docs/reusable/untitled-reusable-block-41/_index.md"
+import DeprecatedV2 from "@site/docs/reusable/javascript-tracker-v2-deprecation/_index.md"
+import V2Init from "@site/docs/reusable/javascript-tracker-v2-initialization-options/_index.md"
+```
 
 <Block3067/>
-```
 
-Documentation for latest release
-
-The documentation listed here is for Version 2 of the JavaScript Tracker. Version 3 is now available and upgrading is recommended.
-
-- [Documentation for Version 3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md)
-- [v2 to v3 Migration Guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide/index.md)
-
-```mdx-code-block
-import V2Init from "@site/docs/reusable/javascript-tracker-v2-initialization-options/_index.md"
+<DeprecatedV2/>
 
 <V2Init/>
-```

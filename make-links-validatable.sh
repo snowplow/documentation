@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for link in $(git grep -Eoh '[("]/docs[^)"#?]+' | grep -v index.md | cut -c2- | sort | uniq); do
+for link in $(git grep -Eoh '[("]/docs[^)"#?]+' | grep -v '.md$' | cut -c2- | sort | uniq); do
     relative=$(echo $link | cut -c2-)
     replacement=$(echo $link | sed 's![^/]$!&/!')
     for file in $(git grep -rl $link docs); do

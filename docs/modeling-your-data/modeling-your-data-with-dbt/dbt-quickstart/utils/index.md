@@ -67,12 +67,17 @@ my_dbt_project
 ├── packages.yml
 ├── README.md
 └── selectors.yml
-Once you've created all of these models, you need to call the correct macros in each model to ensure that the correct SQL gets generated for each model. If you'd like to rename any of the models, all you need to do is rename the `.sql` files listed above. However, please do so with caution and be sure to read the subsequent steps carefully as you may need to modify some of the boilerplate code outlined below to have the macros adapt properly to your naming conventions.
+```
+Once you've created all of these models, you need to call the correct macros in each model to ensure that the correct SQL gets generated for each model. If you'd like to rename any of the models, all you need to do is rename the `.sql` files listed above.
+
+:::caution
+Please only rename the models with caution and be sure to read the subsequent steps carefully as you may need to modify some of the boilerplate code outlined below to have the macros adapt properly to your naming conventions.
+:::
 
 ### 3. Setting up the quarantined sessions macro
 Within the `snowplow_base_quarantined_sessions.sql` file, you can call the `base_create_snowplow_quarantined_sessions` macro as follows:
 
-```sql
+```jinja2
 {{
   config(
     materialized='incremental'
@@ -84,12 +89,12 @@ Within the `snowplow_base_quarantined_sessions.sql` file, you can call the `base
 {{ quarantined_query }}
 ```
 
-This macro doesn't accept any arguments, and simply generates a table which contains a column named `session_identifier`, containing all session identifiers of sessions that have been quarantined due to exceeding the maximum session length, to avoid long table scans.
+This macro doesn't accept any arguments, and simply generates a table which contains a column named `session_identifier`, containing all session identifiers of sessions that have been quarantined due to exceeding the maximum session length, to avoid long table scans. More information on the sessionization logic and optimization can be found [here](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/)
 
 ### 4. Setting up the incremental manifest macro
 Next, within the `snowplow_incremental_manifest.sql` file, you can call the `base_create_snowplow_incremental_manifest` macro as follows:
 
-```sql
+```jinja2
 {{
   config(
     materialized='incremental'
@@ -106,7 +111,12 @@ Much like with the quarantined sessions macro, this does not accept any argument
 ### 5. Setting up the new event limits macro
 For the `snowplow_base_new_event_limits` model, you need to add a few extra macros into the mix, which you can do as follows:
 
-```sql
+```jinja2
+{{ config(
+   post_hook=["{{snowplow_utils.print_run_limits(this)}}"],
+   sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
+   )
+}}
 
 {%- set models_in_run = snowplow_utils.base_get_enabled_snowplow_models() -%}
 
@@ -129,7 +139,11 @@ For the `snowplow_base_new_event_limits` model, you need to add a few extra macr
 
 Here there are a couple of variables that can be used to modify the `new_event_limits` table setup. Firstly, if you chose to name your `snowplow_incremental_manifest` model differently, be sure to reference that properly in the `get_incremental_manifest_status` macro call. If for example, you chose to call the manifest model `incremental_manifest` by naming your file `incremental_manifest.sql` instead of the prescribed `snowplow_incremental_manifest.sql`, then you would reflect that using the following macro call:
 
-```sql
+:::info
+The below is just an example of a macro call when using custom naming, this isn't something additional to copy and add if you want to set up your `snowplow_new_event_limits` model!
+:::
+
+```jinja2
 {% set min_last_success,
          max_last_success,
          models_matched_from_manifest,
@@ -153,7 +167,7 @@ vars:
 ### 6. Setting up the sessions lifecycle manifest macro
 For the `snowplow_base_sessions_lifecycle_manifest` model, you have the following macro call which takes in a lot of parameters to allow for a high level of flexibility in how you can process your Snowplow data:
 
-```sql
+```jinja2
 
 {% set sessions_lifecycle_manifest_query = snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest(
     var('snowplow__session_identifiers', '{"atomic": "domain_sessionid"}'),
@@ -182,7 +196,7 @@ Further, you can specify some additional configurations here such as in which ta
 ### 7. Setting up the sessions this run macro
 For the `snowplow_base_sessions_this_run` model, you will need to add a post-hook to the configuration of the model as follows:
 
-```sql
+```jinja2
 {{
     config(
         post_hook=["{{ snowplow_utils.base_quarantine_sessions(var('snowplow__max_session_days', 3), var('snowplow__quarantined_sessions', 'snowplow_base_quarantined_sessions')) }}"]
@@ -205,7 +219,7 @@ For the `base_create_snowplow_sessions_this_run` macro call, you specify the nam
 ### 8. Setting up the events this run macro
 For the `snowplow_base_events_this_run` model, you will need to run the following two macros in your model:
 
-```sql
+```jinja2
 {%- set lower_limit, upper_limit = snowplow_utils.return_limits_from_model(ref(var('snowplow__base_sessions', 'snowplow_base_sessions_this_run')),
                                                                           'start_tstamp',
                                                                           'end_tstamp') %}

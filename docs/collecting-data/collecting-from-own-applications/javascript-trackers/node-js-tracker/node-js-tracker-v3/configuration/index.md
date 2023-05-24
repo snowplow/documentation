@@ -10,19 +10,21 @@ You may have additional information about your application's environment, curren
 
 The `tracker` instance has a set of `set...()` methods to attach extra data to all tracked events:
 
-- [`setPlatform()`](#set-platform)
-- [`setUserId()`](#set-user-id)
-- [`setDomainUserId()`](#set-domain-user-id)
-- [`setNetworkUserId()`](http://set-network-user-id)
-- [`setScreenResolution()`](#set-screen-resolution)
-- [`setViewport()`](#set-viewport)
-- [`setColorDepth()`](#set-color-depth)
-- [`setTimezone()`](#set-timezone)
-- [`setLang()`](#set-lang)
-- `[setIpAddress()](#set-ip-address)`
-- `[setUseragent()](#set-useragent)`
+- [`setPlatform()`](#set-the-platform-id-withsetplatform)
+- [`setUserId()`](#set-user-id-withsetuserid)
+- [`setDomainUserId()`](#set-domain-user-id-with-setdomainuserid)
+- [`setSessionId()`](#set-session-id-with-setsessionid)
+- [`setSessionIndex()`](#set-session-index-with-setsessionindex)
+- [`setNetworkUserId()`](#set-network-user-id-with-setnetworkuserid)
+- [`setScreenResolution()`](#set-screen-resolution-with-setscreenresolution)
+- [`setViewport()`](#set-viewport-dimensions-withsetviewport)
+- [`setColorDepth()`](#set-color-depth-withsetcolordepth)
+- [`setTimezone()`](#set-the-timezone-withsettimezone)
+- [`setLang()`](#set-the-language-withsetlang)
+- [`setIpAddress()`](#set-the-ip-address-withsetipaddress)`
+- [`setUseragent()`](#set-the-useragent-withsetuseragent)`
 
-### 3.1 Set the platform ID with `setPlatform()`
+### Set the platform ID with `setPlatform()`
 
 You can set the platform:
 
@@ -64,15 +66,43 @@ t.setDomainUserId('{{DOMAIN USER ID}}');
 
 Example:
 
-You can set the domain user ID to any string:
-
 ```javascript
 t.setDomainUserId('e8091074-f197-4279-a92e-71a34171d477');
 ```
 
-### Set domain user ID with `setNetworkUserId()`
+### Set session ID with `setSessionId()`
 
-You can set the domain user ID to any string:
+You can set the session ID to any string:
+
+```javascript
+t.setSessionId('{{SESSION ID}}');
+```
+
+Example:
+
+```javascript
+t.setSessionId('s8091074-f197-4279-a92e-71a34171d477');
+```
+
+### Set session index with `setSessionIndex()`
+
+You can set the session index to any number:
+
+```javascript
+t.setSessionIndex('{{SESSION INDEX}}');
+```
+
+Example:
+
+```javascript
+t.setSessionIndex(10);
+/* t.setSessionIndex('10'); will also work as long as input string can be converted to a valid number. */
+```
+
+
+### Set network user ID with `setNetworkUserId()`
+
+You can set the network user ID to any string:
 
 ```javascript
 t.setNetworkUserId('{{NETWORK USER ID}}');

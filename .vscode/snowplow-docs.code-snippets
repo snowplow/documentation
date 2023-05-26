@@ -28,19 +28,6 @@
     ],
     "description": "Docusaurus Front Matter"
   },
-  "mdx code block": {
-    "scope": "markdown",
-    "prefix": "mdx",
-    "body": [
-      "```mdx-code-block",
-      "import Tabs from '@theme/Tabs';",
-      "import TabItem from '@theme/TabItem';",
-      "import ThemedImage from '@theme/ThemedImage';",
-      "```",
-      ""
-    ],
-    "description": "Docusaurus mdx block for tabs and themed images"
-  },
   "Doc card block": {
     "scope": "markdown",
     "prefix": "doc_card",
@@ -79,9 +66,9 @@
       "$4",
       "",
       "</TabItem>",
-      "<TabItem value=\"$4\" label=\"$5\">",
+      "<TabItem value=\"$5\" label=\"$6\">",
       "",
-      "$6",
+      "$7",
       "",
       "</TabItem>",
       "",
@@ -130,5 +117,52 @@
     "scope": "markdown",
     "prefix": "details_block",
     "body": ["<details>", "<summary>$1</summary>", "$2", "</details>", ""]
+  },
+  "Tabs mdx import": {
+    "scope": "markdown",
+    "prefix": "import_tabs",
+    "body": [
+      "```mdx-code-block",
+      "import Tabs from '@theme/Tabs';",
+      "import TabItem from '@theme/TabItem';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for tabs"
+  },
+  "ThemedImage mdx import": {
+    "scope": "markdown",
+    "prefix": "import_themedimage",
+    "body": [
+      "```mdx-code-block",
+      "import Tabs from '@theme/Tabs';",
+      "import TabItem from '@theme/TabItem';",
+      "import ThemedImage from '@theme/ThemedImage';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for themed images"
+  },
+  "componentVersions mdx import": {
+    "scope": "markdown",
+    "prefix": "import_componentversions",
+    "body": [
+      "```mdx-code-block",
+      "import {versions} from '@site/src/componentVersions';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for componentVersions"
+  },
+  "CodeBlock mdx import": {
+    "scope": "markdown",
+    "prefix": "import_codeblock",
+    "body": [
+      "```mdx-code-block",
+      "import CodeBlock from '@theme/CodeBlock';",
+      "```",
+      ""
+    ],
+    "description": "Docusaurus mdx import block for CodeBlock"
   }
 }

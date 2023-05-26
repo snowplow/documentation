@@ -10,6 +10,7 @@ The `snowplow-utils` package allows you to create your own custom `snowplow_base
 It is only recommended that you use this if you are planning on heavily customizing your Snowplow data modeling setup, whilst still taking advantage of the incremental framework that the existing dbt packages offer. If you are going to be heavily leveraging the existing Snowplow packages (e.g. [snowplow-web](https://hub.getdbt.com/snowplow/snowplow_web/latest/) or [snowplow-mobile](https://hub.getdbt.com/snowplow/snowplow_mobile/latest/)) then you will not need to leverage this package for the creation of your base tables. Please instead follow the appropriate quickstart guides for the packages you are going to be utilizing instead, such as for [web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/index.md) or [mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/index.md)
 
 :::
+
 ## Requirements
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and connected to your database you need:
@@ -29,6 +30,11 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 ```
 
 ## Setup
+
+:::info
+You can largely skip redundant copy + pasting by cloning the following dbt project repository that we have created in GitHub. You can find it [here](https://github.com/snowplow-incubator/dbt-example-project), and this has all of the boilerplate setup for you already. If you want to customise model names or parameter values, you can still follow the quickstart guide below to help you understand how to do that, and what changing each variable will mean for your models. Feel free to skip steps 1 and 2, however.
+
+:::
 
 ### 1. Override the dispatch order in your project
 To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
@@ -193,7 +199,26 @@ For the `snowplow_base_sessions_lifecycle_manifest` model, you have the followin
 
 To get an in-depth explanation of each variable passed here, please refer to the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/utils/index.md) page.
 
-Some key parameters, however, are the `snowplow__session_timestamp` which is used to identify which timestamp column is used for sessionization, with sensible values being either `collector_tstamp` or `load_tstamp`. You also have the `snowplow__session_identifiers` and `snowplow__user_identifiers` which expect a map object which stipulates where all session or user identifiers are contained. The key stipulates the name of the context/entity where this identifier can be found (or this can be set to `atomic` if it is a field found in the atomic columns), and the value stipulates the name of this field in either the context/entity or the atomic columns. As you can see, these default to `atomic: domain_sessionid` and `atomic: domain_userid` by default respectively. If you have more than one session/user identifier, you can specify multiple within the map, with the order in which you specify them being the order of precedence that the macro will try to `COALESCE` these field values into a common `session/user_identifier` field.
+There are several important parameters to consider. The first one is `snowplow__session_timestamp`, which helps identify the timestamp column used for sessionization. It's recommended to use either `collector_tstamp` or `load_tstamp` as sensible values.
+
+Next, we have `snowplow__session_identifiers` and `snowplow__user_identifiers`, which expect a map object defining the location of session or user identifiers. In this map, the key represents the name of the context or entity where the identifier can be found. If the identifier is a field in the atomic columns, the key can be set to `atomic`. The value specifies the name of the field in either the context/entity or the atomic columns.
+
+:::caution
+Currently, we only support session and user identifiers found in atomic fields for Redshift/Postgres. We don't support nested level fields for any warehouses, and for BigQuery you will currently need to do the version management yourself. We will be getting around to supporting this extra functionality soon.
+:::
+
+By default, `snowplow__session_identifiers` is set to `atomic: domain_sessionid`, and `snowplow__user_identifiers` is set to `atomic: domain_userid`. This means that the identifiers for sessions and users are expected to be found in the `domain_sessionid` and `domain_userid` fields, respectively.
+
+If you have more than one session or user identifier, you can specify multiple entries in the map. The order in which you list them determines the precedence that the macro will use to look for these field values, and `COALESCE` them into the common session/user_identifier field. E.g. if you have the following definition for your `user_identifier`:
+
+```json
+{
+  "my_custom_context": "internal_user_id",
+  "atomic": "domain_userid"
+}
+```
+
+The package will first extract `internal_user_id` from the `my_custom_context` context, and then use something similar to the following SQL statement: `COALESCE(my_custom_context.internal_user_id, events.domain_userid) as user_identifier`. This way, if a user is able to identify themselves through logging in which would populate a context called `my_custom_context`, their `internal_user_id` is used as a `user_identifier`. If, however, this is not the case, then the `user_identifier` field falls back on the value that the `domain_userid` has.
 
 Further, you can specify some additional configurations here such as in which table/schema the events data sits, what the names are of your `event_limits` and `incremental_manifest` tables, and some parameters around what the maximum session length is. You should once again be familiar with the majority of these variables if you've used another of our dbt packages before.
 
@@ -218,7 +243,7 @@ For the `snowplow_base_sessions_this_run` model, you will need to add a post-hoo
 
 Here the parameters that are called in both macros are only used to direct the macro to the right model names, so again if you've chosen to modify any of the table names then you should adjust the names in the right macros here. For the `base_quarantine_sessions` macro you simply pass the maximum session duration in days, which is taken from the `snowplow__max_session_days` variable, and you specify the name of the `snowplow_base_quarantined_sessions` table, specified by the `snowplow__quarantined_sessions` variable.
 
-For the `base_create_snowplow_sessions_this_run` macro call, you specify the name of the `lifecycle_manifest_table` and the `new_evet_limits_table`. The boilerplate contains their default names, and so if you have not customised anything you can simply copy this code into your `snowplow_base_sessions_this_run.sql` model.
+For the `base_create_snowplow_sessions_this_run` macro call, you specify the name of the `lifecycle_manifest_table` and the `new_evet_limits_table`. The boilerplate contains their default names, and so if you have not customised anything you can simply copy this code into your `snowplow_base_sessions_this_run` model.
 
 ### 8. Setting up the events this run macro
 For the `snowplow_base_events_this_run` model, you will need to run the following two macros in your model:

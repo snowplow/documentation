@@ -72,7 +72,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | `txn_id` | int | Transaction ID set client-side, used to de-dupe records | No | 421828 |
 | `event_fingerprint` | text | Hash client-set event fields | No | AADCE520E20C2899F4CED228A79A3083 |
 
-A complete list of event types is given [here](#Event-specific_fields).
+A complete list of event types is given [here](#Event-specific-fields).
 
 #### Snowplow version fields
 
@@ -220,7 +220,7 @@ Snowplow currently supports (or will support in the near future) the following e
 | --- | --- |
 | [Page views](#page-views) | 'page_view' |
 | [Page pings](#page-pings) | 'page_ping' |
-| [E-commerce transactions](#ecommerce-transactions) | 'transaction' and 'transaction_item' |
+| [E-commerce transactions](#e-commerce-transactions) | 'transaction' and 'transaction_item' |
 | [Custom structured events](#custom-structured-events) | 'struct' |
 |[Custom unstructured events](#custom-unstructured-events) | 'unstruct' |
 
@@ -228,7 +228,7 @@ Details of which fields are available for which events are given below.
 
 #### Page views
 
-There are currently no fields that are specific to `page_view` events: all the fields that are required are part of the standard fields available for any [web-based event](#Web-specific_fields) e.g. `page_urlscheme`, `page_title`.
+There are currently no fields that are specific to `page_view` events: all the fields that are required are part of the standard fields available for any [web-based event](#web-specific-fields) e.g. `page_urlscheme`, `page_title`.
 
 #### Page pings
 

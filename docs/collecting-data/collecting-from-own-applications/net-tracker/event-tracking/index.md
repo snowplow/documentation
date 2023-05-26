@@ -197,7 +197,7 @@ SelfDescribingJson eventData = new SelfDescribingJson("iglu:com.acme/save_game/j
 // Track your event with your custom event data
 t1.Track(new SelfDescribing()
     .SetEventData(eventData)
-    .Build();
+    .Build());
 
 // OR
 
@@ -206,7 +206,7 @@ t1.Track(new SelfDescribing()
     .SetCustomContext(contextList)
     .SetTrueTimestamp(1423583655000)
     .SetEventId("uid-1")
-    .Build();
+    .Build());
 ```
 
 For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).

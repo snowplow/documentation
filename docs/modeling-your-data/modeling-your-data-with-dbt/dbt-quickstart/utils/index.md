@@ -243,7 +243,7 @@ For the `snowplow_base_sessions_this_run` model, you will need to add a post-hoo
 
 Here the parameters that are called in both macros are only used to direct the macro to the right model names, so again if you've chosen to modify any of the table names then you should adjust the names in the right macros here. For the `base_quarantine_sessions` macro you simply pass the maximum session duration in days, which is taken from the `snowplow__max_session_days` variable, and you specify the name of the `snowplow_base_quarantined_sessions` table, specified by the `snowplow__quarantined_sessions` variable.
 
-For the `base_create_snowplow_sessions_this_run` macro call, you specify the name of the `lifecycle_manifest_table` and the `new_evet_limits_table`. The boilerplate contains their default names, and so if you have not customised anything you can simply copy this code into your `snowplow_base_sessions_this_run` model.
+For the `base_create_snowplow_sessions_this_run` macro call, you specify the name of the `lifecycle_manifest_table` and the `new_event_limits_table`. The boilerplate contains their default names, and so if you have not customised anything you can simply copy this code into your `snowplow_base_sessions_this_run` model.
 
 ### 8. Setting up the events this run macro
 For the `snowplow_base_events_this_run` model, you will need to run the following two macros in your model:

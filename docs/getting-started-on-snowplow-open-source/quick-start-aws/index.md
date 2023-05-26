@@ -48,9 +48,9 @@ There are also two different storage options for you to select. The steps below 
 
 ### Setting up your Iglu Server
 
-The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline. 
+The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline.
 
-We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your loader) can communicate with Iglu. 
+We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your loader) can communicate with Iglu.
 
 **Step 1: Update your input variables**
 

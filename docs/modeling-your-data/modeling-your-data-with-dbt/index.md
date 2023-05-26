@@ -10,9 +10,9 @@ import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
 <AllAccelerators/>
 ```
 
-[dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. Snowplow has written and maintain a number of dbt packages to model your snowplow data for various purposes and produce derived tables for use in analytics, AI, ML, BI, or reverse ETL tools. 
+[dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. Snowplow has written and maintain a number of dbt packages to model your snowplow data for various purposes and produce derived tables for use in analytics, AI, ML, BI, or reverse ETL tools.
 
-Using Snowplow's dbt packages means you can draw insight and value from your data *quicker*, *easier*, and *cheaper* than building your own modeling from scratch. 
+Using Snowplow's dbt packages means you can draw insight and value from your data *quicker*, *easier*, and *cheaper* than building your own modeling from scratch.
 
 <p align="center">
 <ThemedImage
@@ -33,7 +33,7 @@ For Snowplow BDP customers, dbt projects can be configured and scheduled in the 
 
 # Snowplow dbt Packages
 
-Our dbt packages come with powerful built-in features such as an [optimization to the incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md) to save you cost on warehouse compute resources compared to the standard method, a custom [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/) to ensure we process just the required data for each run and keep your models in sync, plus the ability to build your own custom models using both of these! 
+Our dbt packages come with powerful built-in features such as an [optimization to the incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md) to save you cost on warehouse compute resources compared to the standard method, a custom [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) to ensure we process just the required data for each run and keep your models in sync, plus the ability to build your own custom models using both of these!
 
 There are 5 core snowplow dbt packages:
 - [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web)): for modeling your web data for page views, sessions, users, and consent

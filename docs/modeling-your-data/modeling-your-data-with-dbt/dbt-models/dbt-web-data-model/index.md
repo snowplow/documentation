@@ -17,7 +17,7 @@ import ThemedImage from '@theme/ThemedImage';
 
 :::tip
 
-For some common analytical queries to run on the derived web data, take a look at our page [here](/docs/recipes/recipe-dbt-web-queries/index.md)!
+Take a look at some [common analytical queries](/docs/recipes/recipe-dbt-web-queries/index.md) to run on the derived web data.
 
 :::
 

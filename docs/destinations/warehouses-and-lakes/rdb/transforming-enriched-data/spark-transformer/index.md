@@ -234,7 +234,7 @@ A typical playbook can look like:
         "jar": "command-runner.jar",
         "arguments": [
           "spark-submit",
-          "--class", "com.snowplowanalytics.snowplow.rdbloader.shredder.batch.Main",
+          "--class", "com.snowplowanalytics.snowplow.rdbloader.transformer.batch.Main",
           "--master", "yarn",
           "--deploy-mode", "cluster",
           "s3://snowplow-hosted-assets-eu-central-1/4-storage/transformer-batch/snowplow-transformer-batch-${versions.rdbLoader}.jar",

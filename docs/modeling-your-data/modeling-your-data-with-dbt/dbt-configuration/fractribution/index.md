@@ -45,8 +45,8 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 
 | Variable Name | Description                                                                                                                                                                    | Default        |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
-| `snowplow__run_python_script_in_snowpark`   | A flag for if you wish to run the python scripts using Snowpark. | `false` |
-| `snowplow__attribution_model_for_snowpark`   | The attribution model to use for Snowpark running, one of `shapley`, `first_touch`, `last_touch`, `position_based`, `linear`. See the [package docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#attribution-models) for more information. | `shapley` |
+| `run_python_script_in_snowpark`   | A flag for if you wish to run the python scripts using Snowpark. | `false` |
+| `attribution_model_for_snowpark`   | The attribution model to use for Snowpark running, one of `shapley`, `first_touch`, `last_touch`, `position_based`, `linear`. See the [package docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#attribution-models) for more information. | `shapley` |
 
 </TabItem>
 </Tabs>

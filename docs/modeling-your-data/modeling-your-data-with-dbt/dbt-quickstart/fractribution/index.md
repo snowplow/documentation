@@ -104,6 +104,7 @@ Depending on your setup, please follow the appropriate steps below. All these me
 
 <details>
 <summary>Run on Snowflake using Snowpark</summary>
+
 If you are using Snowflake, you can have the dbt model run the python scripts for you using their Snowpark features. To enable these you simply need to set the `snowplow__run_python_script_in_snowpark` and `snowplow__attribution_model_for_snowpark` variables and run the model.
 
 For example, to enable this and use the `last_touch` attribution model:

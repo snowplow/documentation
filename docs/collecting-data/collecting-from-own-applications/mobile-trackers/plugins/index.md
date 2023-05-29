@@ -17,11 +17,12 @@ Tracker plugins are only available since version 5 of the mobile trackers.
 The mobile trackers provide a plugin architecture that allows new functionality to be added to the trackers.
 There are several Snowplow maintained plugins, however you are also free to build your own or leverage community plugins too.
 
-Plugins provide the ability to intercept tracked events in order to enrich them with additional entities or just to inspect them.
-To implement this, they contain two extension points:
+Plugins provide the ability to intercept tracked events in order to enrich them with additional entities, filter them or just to inspect them.
+To implement this, they contain three extension points:
 
 1. `entities` callback which can return context entities to enrich events before they are tracked. The callback is passed the tracked event object to be enriched.
-2. `afterTrack` callback which can be used to inspect final tracked events. The passed event object contains all its properties as well as context entities.
+2. `filter` callback that returns true or false in order to decide whether to track a given event or not. The callback is passed the tracked event object.
+3. `afterTrack` callback which can be used to inspect final tracked events. The passed event object contains all its properties as well as context entities.
 
 ## Creating a custom plugin
 
@@ -52,6 +53,8 @@ PluginConfiguration plugin = new PluginConfiguration("myPlugin");
 
   </TabItem>
 </Tabs>
+
+### Adding context entities
 
 To enrich events with additional context entities, you can make use of the `entities` callback.
 This function accepts an optional list of schemas of self-describing events to subscribe to.
@@ -107,8 +110,58 @@ plugin.entities(
   </TabItem>
 </Tabs>
 
+### Filtering events
+
+The `filter` callback enables you to add custom logic that decides whether a given event should be tracked or not.
+This can for example enable you to intercept events automatically tracked by the tracker and skip some of them.
+The callback returns true in case the event should be tracked and false otherwise.
+It also accepts the optional `schemas` array as the `entities` callback to only be applied to events with those schemas.
+
+The following code will apply to all screen view events and only accept ones with the name "Home Screen", other screen view events will be discarded:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+plugin.filter(schemas: [
+    "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", // screen view events
+]) { event in
+    return event.payload["name"] as? String == "Home Screen"
+}
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+plugin.filter(
+    schemas = listOf(
+        "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", // screen view events
+    )
+) { event ->
+    event.payload["name"] == "Home Screen"
+}
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+plugin.filter(
+        Collections.singletonList(
+                "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", // screen view events
+        ),
+        event -> event.getPayload().get("name") == "Home Screen"
+);
+```
+
+  </TabItem>
+</Tabs>
+
+### Inspecting events after they are tracked
+
 To inspect events after they are tracked, you can make use of the `afterTrack` callback.
-It also accepts the optional `schemas` array as the `entities` callback to filter events.
+It also accepts the optional `schemas` array as the `entities` and `filter` callbacks to filter events.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

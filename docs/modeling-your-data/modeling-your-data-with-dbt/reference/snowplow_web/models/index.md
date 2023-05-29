@@ -715,7 +715,7 @@ This significantly reduces table scans
 
 with prep as (
   select
-    cast(null as {{ type_string() }}) session_id
+    cast(null as {{ snowplow_utils.type_max_string() }}) session_id
 )
 
 select *
@@ -735,8 +735,8 @@ where false
 <Tabs groupId="reference">
 <TabItem value="macro" label="Macros">
 
-- macro.dbt.type_string
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
 - [macro.snowplow_web.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.allow_refresh)
 
 </TabItem>
@@ -1805,7 +1805,7 @@ with arrays as (
   )
 
 select
-  replace(replace(replace(cast(consent_scope as {{type_string() }}), '"', ''), '[', ''), ']', '') as scope,
+  replace(replace(replace(cast(consent_scope as {{ snowplow_utils.type_max_string() }}), '"', ''), '[', ''), ']', '') as scope,
   count(*) as total_consent
 
 from unnesting
@@ -1831,6 +1831,7 @@ group by 1
 
 - macro.dbt.type_string
 - [macro.snowplow_utils.get_split_to_array](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_split_to_array)
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
 - [macro.snowplow_utils.unnest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.unnest)
 
 </TabItem>
@@ -5689,7 +5690,7 @@ with session_firsts as (
             -- updated with mapping as part of post hook on derived sessions table
             cast(domain_userid as {{ type_string() }}) as stitched_user_id,
         {% else %}
-            cast(null as {{ type_string() }}) as stitched_user_id,
+            cast(null as {{ snowplow_utils.type_max_string() }}) as stitched_user_id,
         {% endif %}
         network_userid as network_userid,
 
@@ -5814,7 +5815,7 @@ session_aggs as (
                 count(distinct case
                         when event_name = 'page_ping' then
                         -- need to get a unique list of floored time PER page view, so create a dummy surrogate key...
-                            {{ dbt.concat(['page_view_id', "cast(floor("~snowplow_utils.to_unixtstamp('dvce_created_tstamp')~"/"~var('snowplow__heartbeat', 10)~") as "~dbt.type_string()~")" ]) }}
+                            {{ dbt.concat(['page_view_id', "cast(floor("~snowplow_utils.to_unixtstamp('dvce_created_tstamp')~"/"~var('snowplow__heartbeat', 10)~") as "~snowplow_utils.type_max_string()~")" ]) }}
                         else
                             null end) -
                     count(distinct case when event_name = 'page_ping' then page_view_id else null end)
@@ -6292,6 +6293,7 @@ left join
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
 - [macro.snowplow_utils.timestamp_diff](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_diff)
 - [macro.snowplow_utils.to_unixtstamp](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.to_unixtstamp)
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
 - [macro.snowplow_web.filter_bots](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.filter_bots)
 - [macro.snowplow_web.get_iab_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_iab_context_fields)
 - [macro.snowplow_web.get_ua_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_ua_context_fields)

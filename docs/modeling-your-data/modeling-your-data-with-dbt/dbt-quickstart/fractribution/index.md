@@ -72,9 +72,19 @@ vars:
     snowplow__path_transforms: {'exposure_path' : null}
 ```
 
-:::tip
+:::tip Snowflake Only
 
-If you are running on Snowflake you can also enable the python steps using variables, see later in this guide for more details.
+If you are using Snowflake, you can automatically run the python scripts using Snowpark when running the dbt package. This is done using macros that create and run a stored procedure on Snowpark after the dbt models have completed.
+
+To enable this you need to set some additional variables. For example, to enable this and use the `last_touch` attribution model:
+```yml
+# dbt_project.yml
+...
+vars:
+  snowplow_fractribution:
+    snowplow__run_python_script_in_snowpark: true
+    snowplow__attribution_model_for_snowpark: 'last_touch'
+```
 
 :::
 
@@ -105,19 +115,7 @@ Depending on your setup, please follow the appropriate steps below. All these me
 <details>
 <summary>Run on Snowflake using Snowpark</summary>
 
-If you are using Snowflake, you can have the dbt model run the python scripts for you using their Snowpark features. To enable these you simply need to set the `snowplow__run_python_script_in_snowpark` and `snowplow__attribution_model_for_snowpark` variables and run the model.
-
-For example, to enable this and use the `last_touch` attribution model:
-```yml
-# dbt_project.yml
-...
-vars:
-  snowplow_fractribution:
-    snowplow__run_python_script_in_snowpark: true
-    snowplow__attribution_model_for_snowpark: 'last_touch'
-```
-
-You can then either run just the required model if you have already run the package, or in the future this will now run when you do step 4.
+If you enabled this already, the tables will have already been built as part of step 4. If you wish to just re-run the attribution modeling for some reason you can run the following:
 
 ```
 dbt run --select snowplow_fractribution_call_snowpark_macros

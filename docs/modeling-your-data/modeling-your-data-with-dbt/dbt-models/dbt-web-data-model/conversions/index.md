@@ -16,20 +16,20 @@ import Form from '@rjsf/mui';
 import CodeBlock from '@theme/CodeBlock';
 
 export const schema = {
-  title: 'Conversion Definition',
-  type: 'array',
+  "title": "Conversion Definition",
+  "type": "array",
   "default": [{}],
   "minItems": 1,
-  items: {
-    type: 'object',
-    required: ['name', 'condition'],
-    properties: {
-      name: { type: 'string', title: 'Name', description: 'Name of your conversion type' },
-      condition: { type: 'string', title: 'Condition', description: "SQL condition e.g. event_name = 'page_view'" },
-      value: { type: 'string', title: 'Value', description: "SQL value e.g. tr_total_base"  },
-      default_value: { type: 'number', title: 'Default value', description: "Default value e.g. 0" },
-      list_events: { type: 'boolean', title: 'List all event ids?' },
-    },
+  "items": {
+    "type": "object",
+    "required": ["name", "condition"],
+    "properties": {
+      "name": { "type": "string", "title": "Name", "description": "Name of your conversion type" },
+      "condition": { "type": "string", "title": "Condition", "description": "SQL condition e.g. event_name = 'page_view'" },
+      "value": { "type": "string", "title": "Value", "description": "SQL value e.g. tr_total_base"  },
+      "default_value": { "type": "number", "title": "Default value", "description": "Default value e.g. 0" },
+      "list_events": { "type": "boolean", "title": "List all event ids?" }
+    }
   }
 };
 

@@ -134,3 +134,67 @@ models:
       scratch:
         +schema: my_scratch_schema
 ```
+
+
+```mdx-code-block
+import CodeBlock from '@theme/CodeBlock';
+import { dump } from 'js-yaml';
+import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator';
+import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
+
+export const GROUPS = [
+  { title: "Warehouse and tracker", fields: ["snowplow__atomic_schema",
+                                            "snowplow__database",
+                                            "snowplow__dev_target_name",
+                                            "snowplow__heartbeat",
+                                            "snowplow__min_visit_length",
+                                            "snowplow__sessions_table"] },
+  { title: "Operation and Logic", fields: ["snowplow__allow_refresh",
+                                          "snowplow__backfill_limit_days",
+                                          "snowplow__conversion_events",
+                                          "snowplow__days_late_allowed",
+                                          "snowplow__limit_page_views_to_session",
+                                          "snowplow__list_event_counts",
+                                          "snowplow__lookback_window_hours",
+                                          "snowplow__max_session_days",
+                                          "snowplow__session_lookback_days",
+                                          "snowplow__session_stitching",
+                                          "snowplow__start_date",
+                                          "snowplow__total_all_conversions",
+                                          "snowplow__upsert_lookback_days"] },
+  { title: "Contexts, Filters, and Logs", fields: ["snowplow__app_id",
+                                                  "snowplow__enable_iab",
+                                                  "snowplow__enable_ua",
+                                                  "snowplow__enable_yauaa",
+                                                  "snowplow__has_log_enabled",
+                                                  "snowplow__ua_bot_filter"] },
+  { title: "Warehouse Specific", fields: ["snowplow__databricks_catalog",
+                                          "snowplow__page_view_context",
+                                          "snowplow__iab_context",
+                                          "snowplow__ua_parser_context",
+                                          "snowplow__yauaa_context",
+                                          "snowplow__consent_cmp_visible",
+                                          "snowplow__consent_preferences",
+                                          "snowplow__enable_load_tstamp",
+                                          "snowplow__derived_tstamp_partitioned"] }
+];
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variable:</h4>
+    <CodeBlock language="yaml">{dump(data, { flowLevel: 1 })}</CodeBlock>
+    </>
+  )
+}
+
+export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
+
+
+```
+
+
+## Config Generator
+<JsonApp schema={dbtSnowplowWebConfigSchema} output={printYamlVariables} template={Template}/>
+
+Snowplow Web Configuration Generator

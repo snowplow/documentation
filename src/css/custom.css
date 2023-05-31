@@ -448,3 +448,7 @@ abbr[data-title]:focus::after {
   stroke: var(--ifm-color-primary);
   fill: var(--ifm-color-primary);
 }
+
+fieldset {
+  border: none;
+}

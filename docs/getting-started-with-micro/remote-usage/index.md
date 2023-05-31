@@ -149,7 +149,7 @@ If you need HTTPS (substitute your Collector domain for `c.example.com`):
 
 <CodeBlock language="bash">{
 `docker run -p 80:9090 -p 443:9543 \\
-  --mount type=bind,source=$(pwd)/c.example.com.p12,destination=/config/ssl-certificate.p12 \\
+  -v $(pwd)/c.example.com.p12:/config/ssl-certificate.p12 \\
   -e MICRO_SSL_CERT_PASSWORD=changeit \\
   snowplow/snowplow-micro:${versions.snowplowMicro}`
 }</CodeBlock>

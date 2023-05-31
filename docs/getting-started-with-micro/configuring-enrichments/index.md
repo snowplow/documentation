@@ -32,17 +32,17 @@ https://github.com/snowplow/enrich/blob/master/config/enrichments/ip_lookups.jso
 
 Put this file somewhere on the machine where you are running Micro, let’s say `my-enrichments/ip_lookups.json`. (Feel free to add any other configurations to `my-enrichments`).
 
-Now you will need to pass this directory to the Docker container (using a [bind mount](https://docs.docker.com/storage/bind-mounts/)):
+Now you will need to pass this directory to the Docker container:
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 \\
-  --mount type=bind,source=$(pwd)/my-enrichments,destination=/config/enrichments \\
+  -v $(pwd)/my-enrichments:/config/enrichments \\
   snowplow/snowplow-micro:${versions.snowplowMicro}`
 }</CodeBlock>
 
 :::note
 
-The directory _inside_ the container (what goes after `destination=`) must be exactly `/config/enrichments`.
+The directory _inside_ the container (what goes after `:`) must be exactly `/config/enrichments`.
 
 :::
 

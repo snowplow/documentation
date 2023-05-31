@@ -91,12 +91,6 @@ Next, you will need to place the schemas in `/config/iglu-client-embedded/` insi
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 \\
-  --mount type=bind,source=$(pwd)/schemas,destination=/config/iglu-client-embedded/schemas \\
+  -v $(pwd)/schemas:/config/iglu-client-embedded/schemas \\
   snowplow/snowplow-micro:${versions.snowplowMicro}`
 }</CodeBlock>
-
-:::tip
-
-You can read more about bind mounts in the [Docker documentation](https://docs.docker.com/storage/bind-mounts/).
-
-:::

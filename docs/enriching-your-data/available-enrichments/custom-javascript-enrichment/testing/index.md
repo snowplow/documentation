@@ -25,7 +25,7 @@ For example, if your enrichment code is in `script.js` in the current directory,
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 \\
-  --mount type=bind,source=$(pwd)/script.js,destination=/config/enrichments/script.js \\
+  -v $(pwd)/script.js:/config/enrichments/script.js \\
   snowplow/snowplow-micro:${versions.snowplowMicro}`
 }</CodeBlock>
 
@@ -130,8 +130,8 @@ This command will add both the script and the schema to Micro:
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 \\
-  --mount type=bind,source=$(pwd)/schemas,destination=/config/iglu-client-embedded/schemas \\
-  --mount type=bind,source=$(pwd)/script.js,destination=/config/enrichments/script.js \\
+  -v $(pwd)/schemas:/config/iglu-client-embedded/schemas \\
+  -v $(pwd)/script.js:/config/enrichments/script.js \\
   snowplow/snowplow-micro:${versions.snowplowMicro}`
 }</CodeBlock>
 

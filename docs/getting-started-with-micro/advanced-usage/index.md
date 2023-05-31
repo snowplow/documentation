@@ -15,18 +15,18 @@ import TabItem from '@theme/TabItem';
 
 While in most cases HTTP is sufficient, you may want to enable HTTPS in Micro (for an example of when that’s useful, see [Locally resolving an existing domain name to Micro](/docs/getting-started-with-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro)).
 
-You will need an SSL/TLS certificate in [PKCS 12](https://en.wikipedia.org/wiki/PKCS_12) format (`.p12`). Pass your certificate file and its password to the container (using a [bind mount](https://docs.docker.com/storage/bind-mounts/) and an [environment variable](https://docs.docker.com/compose/environment-variables/)). Don’t forget to expose the HTTPS port (by default, 9543):
+You will need an SSL/TLS certificate in [PKCS 12](https://en.wikipedia.org/wiki/PKCS_12) format (`.p12`). Pass your certificate file and its password to the container. Don’t forget to expose the HTTPS port (by default, 9543):
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 -p 9543:9543 \\
-  --mount type=bind,source=$(pwd)/my-certificate.p12,destination=/config/ssl-certificate.p12 \\
+  -v $(pwd)/my-certificate.p12:/config/ssl-certificate.p12 \\
   -e MICRO_SSL_CERT_PASSWORD=... \\
   snowplow/snowplow-micro:${versions.snowplowMicro}`
 }</CodeBlock>
 
 :::note
 
-For the certificate, the path inside the container must be exactly `/config/ssl-certificate.p12`.
+For the certificate, the path inside the container (the part after `:`) must be exactly `/config/ssl-certificate.p12`.
 
 :::
 
@@ -48,11 +48,11 @@ If you are just looking to add custom schemas or connect to your private Iglu re
 
 :::
 
-Pass your configuration file to the container (using a [bind mount](https://docs.docker.com/storage/bind-mounts/)) and instruct Micro to use it:
+Pass your configuration file to the container and instruct Micro to use it:
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 \\
-  --mount type=bind,source=$(pwd)/iglu.json,destination=/config/iglu.json \\
+  -v $(pwd)/iglu.json:/config/iglu.json \\
   snowplow/snowplow-micro:${versions.snowplowMicro} \\
   --iglu /config/iglu.json`
 }</CodeBlock>
@@ -84,11 +84,11 @@ https://github.com/snowplow-incubator/snowplow-micro/blob/master/example/micro.c
 
 </details>
 
-Pass your configuration file to the container (using a [bind mount](https://docs.docker.com/storage/bind-mounts/)) and instruct Micro to use it:
+Pass your configuration file to the container and instruct Micro to use it:
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 \\
-  --mount type=bind,source=$(pwd)/micro.conf,destination=/config/micro.conf \\
+  -v $(pwd)/micro.conf:/config/micro.conf \\
   snowplow/snowplow-micro:${versions.snowplowMicro} \\
   --collector-config /config/micro.conf`
 }</CodeBlock>

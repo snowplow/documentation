@@ -1,0 +1,338 @@
+---
+title: "Marketing Dashboard Templates (v1)"
+date: '2023-06-01'
+sidebar_position: 0
+---
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+```
+
+## Introduction
+
+This guide is written to introduce you to the dashboard templates designed for visualising your derived tables produced by the **snowplow-web** dbt package. It will show you how to get started and what each dashboard represents.
+
+## Setup
+
+Pick your preferred BI tool and access the templates here:
+
+- PowerBI
+- Tableau
+- Streamlit
+- Preset
+
+<Tabs groupId="dashboards" queryString>
+
+<TabItem value="PowerBI" label="PowerBI">
+
+### Connect your dataset
+
+For performance reasons the PowerBI template is designed to retrieve only the data that is needed for the visualizations with the aggregations done on the database side (15 in total). Each query is set up with a list of connection parameters so that you only have to change them once. To do this go to *Transform Data / Edit parameters* and change the following to yours:
+
+`Server / Database / Role / Schema`
+
+Once you made the changes you will need to refresh the data by clicking the *Refresh* icon on the *Home* ribbon when in the *Report view*.
+
+### Prefilter your data
+
+#### App id filter
+
+In case you would need to filter on a specific app_id, we have provided two parameters you can utilise for this purpose:
+
+`App_id_1 / App_id_2`
+
+You can add more, of course, if needed, but then this would have to be changed for all queries, similar to what has been done before.
+
+#### Time filters
+
+The dashboard by design works with the most likely use case that it needs to display the last x number of days. You can change the `LastXDay` parameter to any of the default values (1, 7, 28, 30, 90) or add more, if you need to. This will ensure that the data is filtered for each of the visualizations.
+
+Lastly there are two more parameters, the `Start Year / End Year` which control the dimDate table, it should be set to cover a period you need for the duration of your reporting so you would only need to set it up once.
+
+Each of these parameters get updated once you refresh your database and are exposed in the Home page. There is a field called `Last Refreshed` which always show you the last time the queries were updated, which might come in handy for users to see.
+
+
+</TabItem>
+
+<TabItem value="Tableau" label="Tableau">
+
+
+
+</TabItem>
+
+<TabItem value="Streamlit" label="Streamlit">
+
+There are a few ways you can run the application:
+  1. [locally](#1-run-it-locally)
+  1. [Steamlit on Snowflake](#2-run-it-on-streamlit-on-snowflake)
+  1. [Streamlit cloud](#3-run-it-on-streamlits-cloud)
+
+### 1. Run it locally
+
+To run the application on your local machine you will need a working python environment running python 3.8.16 - this is the current version Snowflake are using on their Streamlit environment.
+
+Install Streamlit:
+```
+pip install streamlit==1.20.0
+```
+
+Install dependencies:
+
+```
+pip install plotly==5.9.0 geopandas==0.12.2 pydeck==0.7.1
+```
+
+Provide credentials: create file called `credentials.json` in the current directory with the following structure:
+```
+{
+  "account": "<snowflake_account>",
+  "user": "<snowflake_username>",
+  "password": "<snowflake_password>",
+  "database": "<database>",
+  "schema": "<schema>"
+}
+```
+
+Run it:
+```
+streamlit run snowplow.py
+```
+&nbsp; &nbsp; or depending on your setup:
+```
+python -m streamlit run snowplow.py
+```
+
+### 2. Run it on Streamlit on Snowflake
+
+#### Step 1: Create a Streamlit Application:
+  1. Log into Snowsight as a user with the CREATE STREAMLIT privilege.
+  2. In the left navigation bar, select Streamlit Apps.
+  3. Select + Streamlit. The Create Streamlit App window opens.
+  4. Enter a name for your app.
+  5. In the Warehouse dropdown, select the warehouse where you want to run your app and execute queries.
+  6. In the App location dropdown, select the database and schema for your app.
+  7. Select Create. The Streamlit in Snowflake editor opens an example Streamlit application in Viewer mode. Viewer mode allows you to see how the Streamlit application appears to users.
+  8. Click Edit to create your application.
+
+#### Step 2: Install required packages:
+  [PUT](https://docs.snowflake.com/en/sql-reference/sql/put) the [environment.yml](/environment.yml) file to the stage location specified by the `STREAMLIT_ROOT_LOCATION` parameter of the Streamlit object:
+  ```
+  $ SELECT STREAMLIT_ROOT_LOCATION FROM <database>.INFORMATION_SCHEMA.STREAMLITS;
+
+  > <database>.<schema>."<appname> (Stage)"
+  ```
+  ```
+  PUT file:///<full_path>/environment.yml '@<database>.<schema>."<appname> (Stage)"' AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+  ```
+
+#### Step 4: Provide the geojson [file](/countries.geo.json) that contains the country information required to render the choropleth map:
+  ```
+  PUT file:///<full_path>/countries.geo.json '@<database>.<schema>."<appname> (Stage)"' AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+  ```
+
+#### Step 5: Copy the code from [snowplow.py](/snowplow.py) inside the editor
+
+and Click `Run`
+
+
+### 3. Run it on Streamlit's cloud
+
+Follow the instruction on [https://streamlit.io/cloud](https://streamlit.io/cloud)
+
+</TabItem>
+
+<TabItem value="Preset" label="Preset">
+
+</TabItem>
+
+</Tabs>
+
+## Dashboards
+
+### Acquisition Overview
+
+The **Acquisition Overview** aims at updating you about the website traffic with a breakdown by marketing channels.
+
+There is also a distinction between `New Users` who have not previously had a session on the website (domain_sessionidx=1) and `Existing users` who have a session with domain_sessionidx > 1.
+
+<Tabs groupId="dashboards" queryString>
+
+<TabItem value="PowerBI" label="PowerBI">
+
+![](images/PBI_AO.png)
+
+</TabItem>
+
+<TabItem value="Tableau" label="Tableau">
+
+![](images/T_AO.png)
+
+</TabItem>
+
+<TabItem value="Streamlit" label="Streamlit">
+
+</TabItem>
+
+<TabItem value="Preset" label="Preset">
+
+![](images/P_AO.png)
+
+</TabItem>
+
+</Tabs>
+
+### User Acquisition
+This dashboard is about **User Acquisition** which is effectively about what channels / methods were used to acquire new users.
+
+Every visual is already filtered on new users only (domain_sessionidx = 1).
+
+Metrics definitions:
+
+**engaged_sessions** = count(case when engaged=True end)
+**engagement_rate** = engaged_sessions / count(distinct domain_sessionid)
+**conversion_count** =sum(cv__all_volume)
+**conversion_revenue** = sum(cv__all_total)
+
+<Tabs groupId="dashboards" queryString>
+
+<TabItem value="PowerBI" label="PowerBI">
+
+![](images/PBI_UA.png)
+
+</TabItem>
+
+<TabItem value="Tableau" label="Tableau">
+
+![](images/T_UA.png)
+
+</TabItem>
+
+<TabItem value="Streamlit" label="Streamlit">
+
+</TabItem>
+
+<TabItem value="Preset" label="Preset">
+
+![](images/P_UA.png)
+
+</TabItem>
+
+</Tabs>
+
+### Traffic Acquisition
+
+This dashboard is about **Traffic Acquisition** which aims at highlighting which channels are used to re-engage existing (returning) users.
+
+Every visual is already filtered on returning users only (domain_sessionidx =>1).
+
+Metrics definitions:
+
+**engaged_sessions** = count(case when engaged=True end)
+**engagement_rate** = engaged_sessions / count(distinct domain_sessionid)
+**conversion_count** =sum(cv__all_volume)
+**conversion_revenue** = sum(cv__all_total)
+
+<Tabs groupId="dashboards" queryString>
+
+<TabItem value="PowerBI" label="PowerBI">
+
+![](images/PBI_TA.png)
+
+</TabItem>
+
+<TabItem value="Tableau" label="Tableau">
+
+![](images/T_TA.png)
+
+</TabItem>
+
+<TabItem value="Streamlit" label="Streamlit">
+
+</TabItem>
+
+<TabItem value="Preset" label="Preset">
+
+![](images/P_TA.png)
+
+</TabItem>
+
+</Tabs>
+
+### Entrance and Exit Points
+
+A separate overview is dedicated for the top 10 Entrance and Exit points with a breakdown on new and returning users.
+
+An `entrance point` is the first page URL within a session. Although the sessions table produces a field called first_page_url (first_page_url_scheme  || '://' || first_page_url_hist || first_page_url_path), for BI purposes a calculated field is being used on this dashboard to exclude GTM tags.
+
+Similarly an `exit point` is the last page URL within a session. It is calculated using last_page_url_scheme  || '://' || last_page_url_host || last_page_url_path.
+
+<Tabs groupId="dashboards" queryString>
+
+<TabItem value="PowerBI" label="PowerBI">
+
+![](images/PBI_EE.png)
+
+</TabItem>
+
+<TabItem value="Tableau" label="Tableau">
+
+![](images/T_EE.png)
+
+</TabItem>
+
+<TabItem value="Streamlit" label="Streamlit">
+
+</TabItem>
+
+<TabItem value="Preset" label="Preset">
+
+![](images/P_EE.png)
+
+</TabItem>
+
+</Tabs>
+
+### Page Analytics
+
+The **Page Analytics** dashboard is aimed at giving insight into how the visitors interact with your web page.
+
+The `bounce rate` visualisation is essentially about the inverse of engagement rate, it shows the ratio of non-engaged sessions over the total sessions.
+
+There is also a pivot heat map called the `Entrance vs exit points` which show the top 10 most visited first pages based on total session_id count and displays the total sessions where the session ended (from the same top 10 pages only).
+
+
+<Tabs groupId="dashboards" queryString>
+
+<TabItem value="PowerBI" label="PowerBI">
+
+![](images/PBI_PA.png)
+
+</TabItem>
+
+<TabItem value="Tableau" label="Tableau">
+
+![](images/T_PA.png)
+
+</TabItem>
+
+<TabItem value="Streamlit" label="Streamlit">
+
+</TabItem>
+
+<TabItem value="Preset" label="Preset">
+
+![](images/P_PA.png)
+
+</TabItem>
+
+</Tabs>
+
+## Customization
+
+The templates are designed with the intention that they can be used out of the box, therefore we refrained from adding too much styling that might not fit a wide audience's taste but there are plenty of things you can do, depending on the tool to make it your own.
+
+If you would like us to give you a more detailed guide on how you can do that you can request this and we could add a new Accelerator to cover this topic for you.
+
+
+

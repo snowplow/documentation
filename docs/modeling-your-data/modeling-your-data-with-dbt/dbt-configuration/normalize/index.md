@@ -70,19 +70,30 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 ## Output Schemas
 ```mdx-code-block
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md"
+import CodeBlock from '@theme/CodeBlock';
 
 <DbtSchemas/>
-```
 
-```yml
-# dbt_project.yml
-...
-models:
+import { SchemaSetter } from '@site/src/components/DbtSchemaSelector';
+
+<DbtSchemas/>
+
+export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema) => {
+  return(
+    <>
+    <CodeBlock language="yaml">
+    {`models:
   snowplow_normalize:
     base:
       manifest:
-        +schema: my_manifest_schema
+        +schema: ${manifestSchema}
       scratch:
-        +schema: my_scratch_schema
-        +tags: my_scratch_schema
+        +schema: ${scratchSchema}`
+    }
+        </CodeBlock>
+    </>
+  )
+}
 ```
+
+<SchemaSetter output={printSchemaVariables}/>

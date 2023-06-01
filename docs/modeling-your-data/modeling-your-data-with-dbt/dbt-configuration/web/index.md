@@ -104,36 +104,43 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 
 ## Output Schemas
 ```mdx-code-block
-import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md"
+import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
+import { SchemaSetter } from '@site/src/components/DbtSchemaSelector';
 
 <DbtSchemas/>
-```
 
-```yml
-# dbt_project.yml
-...
-models:
+export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema) => {
+  return(
+    <>
+    <CodeBlock language="yaml">
+    {`models:
   snowplow_web:
     base:
       manifest:
-        +schema: my_manifest_schema
+        +schema: ${manifestSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     sessions:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     user_mapping:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
     users:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     page_views:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}`}
+        </CodeBlock>
+    </>
+  )
+}
+
 ```
+<SchemaSetter output={printSchemaVariables}/>
 
 
 ```mdx-code-block
@@ -182,8 +189,8 @@ export const GROUPS = [
 export const printYamlVariables = (data) => {
   return(
     <>
-    <h4>Project Variable:</h4>
-    <CodeBlock language="yaml">{dump(data, { flowLevel: 1 })}</CodeBlock>
+    <h4>Project Variables:</h4>
+    <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
     </>
   )
 }
@@ -195,6 +202,6 @@ export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
 
 
 ## Config Generator
-<JsonApp schema={dbtSnowplowWebConfigSchema} output={printYamlVariables} template={Template}/>
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require.
 
-Snowplow Web Configuration Generator
+<JsonApp schema={dbtSnowplowWebConfigSchema} output={printYamlVariables} template={Template}/>

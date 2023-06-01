@@ -97,7 +97,7 @@ export const dbtSnowplowWebConfigSchema = {
         "snowplow__database": {
             "type": "string",
             "title": "Database",
-            "description": "Schema (dataset) that contains your atomic events"
+            "description": "Database that contains your atomic events"
         },
         "snowplow__dev_target_name": {
             "type": "string",
@@ -107,7 +107,7 @@ export const dbtSnowplowWebConfigSchema = {
         "snowplow__heartbeat": {
             "type": "number",
             "minimum": 0,
-            "title": "Hearbeat",
+            "title": "Heartbeat",
             "description": "Page ping heartbeat time as defined in your tracker configuration"
         },
         "snowplow__min_visit_length": {
@@ -119,7 +119,7 @@ export const dbtSnowplowWebConfigSchema = {
         "snowplow__sessions_table": {
             "type": "string",
             "title": "Sessions Table",
-            "description": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref('snowplow_web_sessions_custom') }}`"
+            "description": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref('snowplow_web_sessions_custom') }}"
         },
         "snowplow__allow_refresh": {
             "type": "boolean",

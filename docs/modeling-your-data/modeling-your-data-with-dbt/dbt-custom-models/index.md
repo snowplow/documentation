@@ -115,7 +115,7 @@ By doing all of this you ensure your table will be managed correctly in the mani
 ### This run models
 If you need to produce a custom `_this_run` type model you should build this model off the relevant package's `snowplow_<package>_base_events_this_run` table. This table has all the columns from your events table in, including any self describing events and custom contexts (except in Redshift). Note that this table has some custom logic in each package to identify which events to include in each run, including your `app_ids` filter. For more information about the way this works see the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) page, but the key takeaway is all events with a session ID that exists in events since the last processing are included in the next run - the session ID field varies by package and the normalize package does not have this filter.
 
-To build a custom `_this_run` table you need to ensure that this model is materialized as a `table` and you use `{{ ref(snowplow_<package>_base_events_this_run) }}`. This type of model does **NOT** need to be tagged. You can then use this model in other Incremental type custom models.
+To build a custom `_this_run` table you need to ensure that this model is materialized as a `table` and you use `{{ ref(snowplow_<package>_base_events_this_run) }}`. This type of model also need to be tagged with `snowplow_<package>_incremental`. You can then use this model in other Incremental type custom models.
 
 ## Retiring Custom models
 This process is the same for all types of custom model.

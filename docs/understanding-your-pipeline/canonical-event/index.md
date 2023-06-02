@@ -275,12 +275,6 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 
 #### Custom structured events
 
-:::note
-
-Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
-
-:::
-
 If you wish to track an event that Snowplow does not recognise as a first class citizen (i.e. one of the events listed above), then you can track them using the generic 'custom structured events'. There are five fields that are available to store data related to custom events:
 
 | **Field** | **Type** | **Description** | **Reqd?** | **Example** |
@@ -292,12 +286,6 @@ If you wish to track an event that Snowplow does not recognise as a first class 
 | `se_value` | decimal | A value associated with the event / action e.g. the value of goods added-to-basket | No | 9.99 |
 
 #### Custom unstructured events
-
-:::note
-
-Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
-
-:::
 
 Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 

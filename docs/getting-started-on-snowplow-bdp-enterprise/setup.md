@@ -8,8 +8,8 @@ Whether you are just getting started with your first Snowplow pipeline or would 
 
 Follow the links below for guidance on what is necessary to configure. The process shouldn't take too long, but it will need to be done by someone with the appropriate permission levels to configure the cloud environment.
 
-* [AWS Setup Guide](/docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-aws/index.md)
-* [GCP Setup Guide](/docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-gcp/index.md)
+* [AWS Setup Guide](/docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-aws/index.md)
+* [GCP Setup Guide](/docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-gcp/index.md)
 
 Once you've set up your cloud environment, you can request the new pipeline to be added via the Snowplow BDP user interface:
 

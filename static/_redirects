@@ -39,10 +39,10 @@
 
 /docs/try-snowplow/recipes/* /docs/recipes/:splat 301
 
-/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-with-snowplow-bdp/enterprise/ 301
+/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-on-snowplow-bdp-enterprise/ 301
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/ /docs/feature-comparison/ 302
-/docs/getting-started-with-snowplow-bdp/aws-setup-guide/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-aws/:splat 301
-/docs/getting-started-with-snowplow-bdp/setup-guide-gcp/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-gcp/:splat 301
+/docs/getting-started-with-snowplow-bdp/aws-setup-guide/* /docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-aws/:splat 301
+/docs/getting-started-with-snowplow-bdp/setup-guide-gcp/* /docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-gcp/:splat 301
 
 /docs/open-source-quick-start/what-is-the-quick-start-for-open-source/ /docs/getting-started-on-snowplow-open-source/what-is-quick-start/ 301
 /docs/open-source-quick-start/what-is-the-quick-start-for-open-source/feature-comparison/ /docs/feature-comparison/ 302
@@ -106,3 +106,6 @@
 
 /docs/tutorials/tutorial-a-guide-to-using-the-poplin-chrome-extension/* /docs/tutorials/tutorial-a-guide-to-using-the-snowplow-inspector-extension/:splat 301
 /docs/destinations/forwarding-events/snowbridge/configuration/transformations/testing/ /docs/destinations/forwarding-events/snowbridge/testing/ 301
+
+/docs/getting-started-with-snowplow-bdp/enterprise/* /docs/getting-started-on-snowplow-bdp-enterprise/:splat 301
+/docs/getting-started-with-snowplow-bdp/cloud/* /docs/getting-started-on-snowplow-bdp-cloud/:splat 301

@@ -2,6 +2,11 @@
 title: "Behavioral Data Platform — Enterprise"
 date: "2021-03-09"
 sidebar_position: 0
+sidebar_label: "Setting up BDP Enterprise"
+sidebar_custom_props:
+  header: "Getting started"
+  offerings:
+    - enterprise
 ---
 
 Snowplow BDP is the solution for organizations who want to use Snowplow’s leading behavioral data platform, without having to run it themselves.

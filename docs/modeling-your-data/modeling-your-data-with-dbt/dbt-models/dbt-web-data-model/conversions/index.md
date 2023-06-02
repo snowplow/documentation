@@ -6,14 +6,9 @@ hide_title: true
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
-// https://rjsf-team.github.io/react-jsonschema-form/docs/
-import { RJSFSchema } from '@rjsf/utils';
-import validator from '@rjsf/validator-ajv8';
-import Form from '@rjsf/mui';
 import CodeBlock from '@theme/CodeBlock';
+import { dump } from 'js-yaml';
+import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
 
 export const schema = {
   "title": "Conversion Definition",
@@ -33,22 +28,15 @@ export const schema = {
   }
 };
 
-export const App = () => {
-  const [formData, setFormData] = React.useState(null);
-  return (<>
-    <Form
-      schema={schema}
-      formData={formData}
-      onChange={(e) => setFormData(e.formData)}
-      validator={validator}
-      showErrorList='bottom'
-      liveValidate
-    ><div/></Form>
+export const printYamlVariables = (data) => {
+  return(
+    <>
     <h4>Project Variable:</h4>
-    <CodeBlock language="yaml">snowplow__conversion_events: {JSON.stringify(formData, null, 4)}</CodeBlock>
+    <CodeBlock language="yaml">snowplow__conversion_events: {JSON.stringify(data, null, 4)}</CodeBlock>
     </>
-  );
-};
+  )
+}
+
 ```
 
 <Badges badgeType="dbt-package Release" pkg="web"></Badges>
@@ -198,4 +186,6 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ## Configuration Generator
 
-<App />
+You can use the below to generate the project variable `snowplow__conversion_events`, or you can use our full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/index.md).
+
+<JsonApp schema={schema} output={printYamlVariables} />

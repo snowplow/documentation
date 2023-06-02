@@ -6,7 +6,6 @@ import { useColorMode } from '@docusaurus/theme-common';
 import validator from '@rjsf/validator-ajv8';
 import Form from '@rjsf/mui';
 import Details from '@theme/Details';
-
 // Allow for grouping of items into collapsible fields
 // Get default object field template to pass to
 export const ObjectFieldTemplates = Templates.ObjectFieldTemplate;
@@ -69,6 +68,7 @@ export const JsonApp = (props) => {
     return (
         <>
             <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
+                <div className="JsonValidator">
                 <Form
                     schema={props.schema}
                     formData={formData}
@@ -78,7 +78,7 @@ export const JsonApp = (props) => {
                     templates={{ ObjectFieldTemplate: props.template ? props.template : ObjectFieldTemplates }}
                     liveValidate
                     {...props}
-                ><div /></Form>
+                ><div /></Form></div>
                 {props.output(formData)}
             </ThemeProvider>
         </>

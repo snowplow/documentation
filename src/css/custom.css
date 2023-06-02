@@ -452,3 +452,11 @@ abbr[data-title]:focus::after {
 fieldset {
   border: none;
 }
+
+.JsonValidator .MuiGrid-root.MuiGrid-item {
+  padding-top: 8px;
+}
+
+.JsonValidator .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module{
+  padding-top: 0px;
+}

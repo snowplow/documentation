@@ -97,3 +97,41 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 ```
 
 <SchemaSetter output={printSchemaVariables}/>
+
+```mdx-code-block
+import { dump } from 'js-yaml';
+// normlaize is currently a subset of web so can use those variables and filter with the groups list
+import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator';
+import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
+
+export const GROUPS = [
+  { title: "Warehouse and tracker", fields: ["snowplow__atomic_schema",
+                                            "snowplow__database",
+                                            "snowplow__dev_target_name"] },
+  { title: "Operation and Logic", fields: ["snowplow__allow_refresh",
+                                          "snowplow__backfill_limit_days",
+                                          "snowplow__days_late_allowed",
+                                          "snowplow__lookback_window_hours",
+                                          "snowplow__start_date",
+                                          "snowplow__upsert_lookback_days"] },
+  { title: "Contexts, Filters, and Logs", fields: ["snowplow__app_id"] },
+  { title: "Warehouse Specific", fields: ["snowplow__databricks_catalog",
+                                          "snowplow__derived_tstamp_partitioned"] }
+];
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variables:</h4>
+    <CodeBlock language="yaml">{dump({vars: {"snowplow_normalize": data}}, { flowLevel: 3 })}</CodeBlock>
+    </>
+  )
+}
+
+export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
+```
+
+## Config Generator
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require.
+
+<JsonApp schema={dbtSnowplowWebConfigSchema} output={printYamlVariables} template={Template}/>

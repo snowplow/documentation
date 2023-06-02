@@ -84,7 +84,6 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `enable_load_tstamp` | Flag to include the `load_tstamp` column in the base events this run model. This should be set to true (the default) unless you are using the Postgres loader or an RDB loader version less than 4.0.0. It must be true to use consent models on Postgres and Redshift. | `true`  |
 
-
 </TabItem>
 <TabItem value="bigquery" label="Bigquery" default>
 
@@ -105,6 +104,7 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 ## Output Schemas
 ```mdx-code-block
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
+import CodeBlock from '@theme/CodeBlock';
 import { SchemaSetter } from '@site/src/components/DbtSchemaSelector';
 
 <DbtSchemas/>
@@ -142,9 +142,7 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 ```
 <SchemaSetter output={printSchemaVariables}/>
 
-
 ```mdx-code-block
-import CodeBlock from '@theme/CodeBlock';
 import { dump } from 'js-yaml';
 import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator';
 import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
@@ -196,10 +194,7 @@ export const printYamlVariables = (data) => {
 }
 
 export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
-
-
 ```
-
 
 ## Config Generator
 You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require.

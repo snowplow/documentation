@@ -35,8 +35,8 @@ Where:
 - `AWS_KEYPAIR` - AWS EC2 key pair to use for the instances (eg. geoffs-keypair)
 - `JOB_OWNER` - tag to use to mark the owner of the job (eg. goeff)
 - `RECOVERY_VERSION` - application version (eg. 0.6.0)
-- `RECOVERY_CONFIG` - recovery job config as described in [Concepts](../../0-2-concepts/index.md)
-- `IGLU_RESOLVER` - iglu resolver configuration as described in  [Concepts](../../0-2-concepts/index.md)
+- `RECOVERY_CONFIG` - recovery job config as described in [Configuration](../../configuration/index.md)
+- `IGLU_RESOLVER` - iglu resolver configuration as described in  [Configuration](../../configuration/index.md)
 - `KINESIS_OUTPUT` - Kinesis stream to output recovered events to
 - `INTERVAL` - job checkpointing interval (we recommend starting with 10 minutes and tuning to your job's characteristics)
 

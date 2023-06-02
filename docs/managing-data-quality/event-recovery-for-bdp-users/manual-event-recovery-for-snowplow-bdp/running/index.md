@@ -43,7 +43,7 @@ Also, the`job-config.json` which describes the recovery job to be done, for exam
   "data": {
     "iglu:com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema/1-0-0": [
       {
-        "name": "pass through",
+        "name": "passthrough",
         "conditions": [],
         "steps": []
       }

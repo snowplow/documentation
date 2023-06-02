@@ -1,11 +1,11 @@
 ---
 title: "Event Recovery for Open Source"
-date: "2020-03-02"
+date: "2020-07-22"
 sidebar_position: 40
 ---
 
-Snowplow pipelines are non-lossy, so if something goes fails during the processing of an event the event payload and associated failure message is stored in bad rows storage, be it a data stream or object storage.
+Snowplow pipelines are "non-lossy", this means if something is wrong with an event during any part of the pipeline, the event is stored in a separate storage environment rather than just discarded. See the [failed events section](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md) for more information on the types of failures that may occur.
 
-The goal of recovery is to fix the payloads contained in these bad rows so that they are ready to be processed successfully by a Snowplow enrichment platform.
+Besides allowing for the inspection of failed events to fix the root cause of the problem, you have the option to recover data by running a recovery process to correct an issue and "re-play" the events through your pipeline again.
 
-Snowplow Event Recovery lets you run data recoveries on data emitted by real-time Snowplow pipelines on AWS and GCP.
+Snowplow Event Recovery is available for pipelines running on AWS and GCP.

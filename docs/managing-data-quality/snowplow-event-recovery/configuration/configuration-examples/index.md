@@ -1,22 +1,20 @@
 ---
 title: "Configuration Examples"
-date: "2020-04-14"
+date: "2020-07-22"
 sidebar_position: 0
 ---
 
-Below configuration examples incorporate most of the available features.
-
 ### Minimal example
 
-The most basic configuration that will run for particular bad row type in particular version and mark all the other as `failed` because of missing configuration mappings.
+The most basic configuration that will run for the particular failure type: `adapter-failure`, in a particular version, and mark all others as `failed` because of missing configuration mappings would look like this:
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/2-0-0",
+  "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/4-0-0",
   "data": {
-    "iglu:com.snowplowanalytics.snowplow.badrows/adapter_failures/jsonschema/*-*-*": [
+    "iglu:com.snowplowanalytics.snowplow.badrows/adapter_failures/jsonschema/1-0-0": [
       {
-        "name": "pass-through flow",
+        "name": "pass-through-flow",
         "conditions": [],
         "steps": []
       }
@@ -25,19 +23,19 @@ The most basic configuration that will run for particular bad row type in partic
 }
 ```
 
-In above scenario we want to resubmit all the received `adapter_failures` without any modifications.
+In above scenario we would be resubmitting all the received `adapter_failures` without any modifications.
 
 ### Multiple flows example
 
-Following example shows a way of setting up multiple configuration flows for specific bad row types. Configurations will be matched top to bottom and the first from the to will be chosen.
+The next example shows a way of setting up multiple configuration flows for specific failure types. Configurations will be matched top to bottom and the first from the top will be chosen.
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/2-0-0",
+  "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/4-0-0",
   "data": {
-    "iglu:com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema/1-0-*": [
+    "iglu:com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema/1-0-0": [
       {
-        "name": "main flow",
+        "name": "main-flow",
         "conditions": [
           {
             "op": "Test",
@@ -66,19 +64,19 @@ Following example shows a way of setting up multiple configuration flows for spe
 }
 ```
 
-In above scenario we want to process `1-0`\-series of `enrichment_failures` bad row type only. Moreover we only want to modify those for which vendor in raw payload is starting with `com.snowplow`. For those bad rows we will replace full `refererUri` contents with `https://console.snplow.com/`. All the other `enrichment_failures` will be resubmitted as they've been originally submitted (pass-through scenario).
+In above scenario we would only process the `1-0-0` version of `enrichment_failures`. We would be modifying those for which vendor in raw payload starts with `com.snowplow`. For those rows that match that field value, we replace the full `refererUri` contents with `https://console.snplow.com/`. All other `enrichment_failures` will be resubmitted as they were originally (pass-through scenario).
 
-### Full example
+### Putting it all together
 
-An advanced example making use of most of the features that will perform multiple operations on very specific subset of bad rows.
+Below is an advanced example making use of most of the features and performing multiple operations on a very specific subset of failed events.
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/2-0-0",
+  "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/4-0-0",
   "data": {
-    "iglu:com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema/1-0-*": [
+    "iglu:com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema/1-0-0": [
       {
-        "name": "main flow making use of most of available features",
+        "name": "main-flow",
         "conditions": [
           {
             "op": "Test",
@@ -167,7 +165,7 @@ An advanced example making use of most of the features that will perform multipl
         ]
       },
       {
-        "name": "impossible flow",
+        "name": "impossible-flow",
         "conditions": [
           {
             "op": "Test",

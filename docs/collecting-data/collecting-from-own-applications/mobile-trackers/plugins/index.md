@@ -161,7 +161,7 @@ plugin.filter(
 ### Inspecting events after they are tracked
 
 To inspect events after they are tracked, you can make use of the `afterTrack` callback.
-It also accepts the optional `schemas` array as the `entities` and `filter` callbacks to filter events.
+It also accepts the same optional `schemas` array as the `entities` and `filter` callbacks to filter events.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

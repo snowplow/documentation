@@ -1,14 +1,12 @@
 ---
 title: "Managing data structures via the API"
 date: "2021-12-22"
-sidebar_position: 70
+sidebar_label: "Using the API"
+sidebar_position: 2
+sidebar_custom_props:
+  offerings:
+    - enterprise
 ---
-
-:::info
-Managing data structures via the API is only available for BDP Enterprise customers.
-
-For BDP Cloud, see [Managing data structures with the Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md). For Snowplow Open Source, see [Managing data structures using Iglu](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md).
-:::
 
 As well as managing data structures through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through the data structures API.
 

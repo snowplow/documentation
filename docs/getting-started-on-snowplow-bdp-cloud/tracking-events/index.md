@@ -38,4 +38,4 @@ Take a look at the [full list](/docs/understanding-your-pipeline/canonical-event
 
 ## Custom events & entities
 
-You can also create your own custom events & entities using [the Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md). To understand more about events & entities please see [here](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+You can also create your own custom events & entities using [the Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/builder/index.md). To understand more about events & entities please see [here](/docs/understanding-tracking-design/understanding-events-entities/index.md).

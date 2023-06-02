@@ -1,14 +1,18 @@
 ---
 title: "Versioning Data Structures in BDP Cloud"
 date: "2023-03-01"
-sidebar_position: 10
+sidebar_label: "Using the Data Structures Builder"
+sidebar_position: 20
+sidebar_custom_props:
+  offerings:
+    - cloud
 ---
 
 # Versioning in BDP Cloud
 
 If you are a BDP Cloud customer, you will have used our Data Structure Builder to create your custom Data Structures for your Events and Entities.
 
-![](../../managing-data-structures-with-data-structures-builder/images/data-structures-2.png)
+![](../../managing-your-data-structures/builder/images/data-structures-2.png)
 
 **Breaking and non-breaking changes**
 

@@ -7,6 +7,8 @@ sidebar_position: 3000
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import DefineCustomEvent from "@site/docs/reusable/define-custom-event/_index.md";
+import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.md";
 ```
 
 <Tabs groupId="platform" queryString>
@@ -43,11 +45,9 @@ let trackerConfig = TrackerConfiguration()
 
 ## Custom Event Context
 
-Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to this custom context as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+<DefineCustomEntity/>
 
 Custom context can be added as an extra argument to any of Snowplow's `track..()` methods and to `addItem` and `addTrans`.
-
-Each custom context is an array of self-describing JSON following the same pattern as an self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP UI](https://snowplow.io/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported [Iglu clients](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-client). Since more than one (of either different or the same type) can be attached to an event, the `context` argument (if it is provided at all) should be a non-empty array of self-describing JSONs.
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
@@ -101,9 +101,7 @@ It is also possible to [add contexts globally](https://snowplow.github.io/snowpl
 
 ### Self Describing
 
-You may wish to track events in your app which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by `Structured` events, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) and can have arbitrarily many fields.
-
-To define your own custom event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
+<DefineCustomEvent/>
 
 ```swift
 let data = ["targetUrl": "http://a-target-url.com" as NSObject];       
@@ -276,11 +274,9 @@ TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)
 
 ## Custom Event Context
 
-Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to this custom context as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+<DefineCustomEntity/>
 
 Custom context can be added as an extra argument to any of Snowplow's `track..()` methods and to `addItem` and `addTrans`.
-
-Each custom context is an array of self-describing JSON following the same pattern as an self describing event. As with self describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplow.io/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported [Iglu clients](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-client). Since more than one (of either different or the same type) can be attached to an event, the `context` argument (if it is provided at all) should be a non-empty array of self-describing JSONs.
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
 
@@ -338,9 +334,7 @@ It is also possible to [add contexts globally](https://snowplow.github.io/snowpl
 
 ### Self Describing
 
-You may wish to track events in your app which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by `Structured` events, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) and can have arbitrarily many fields.
-
-To define your own custom event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP Console UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
+<DefineCustomEvent/>
 
 ```java
 Map<String, String> properties = new HashMap<>();

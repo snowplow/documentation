@@ -28,7 +28,7 @@ Rather than just leaving your data open to interpretation by the many different 
 ## The anatomy of a schema
 
 :::info
-If you are using BDP Cloud, you can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md) without worrying about how it works under the hood.
+If you are using BDP Cloud, you can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/builder/index.md) without worrying about how it works under the hood.
 :::
 
 Let’s take a look at an example JSON schema to talk about its constituent parts:

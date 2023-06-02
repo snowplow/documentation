@@ -88,7 +88,7 @@ Component | Latest version
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [via the API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md).
+If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/understanding-tracking-design/managing-your-data-structures/index.md).
 
 :::
 

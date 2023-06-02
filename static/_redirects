@@ -113,3 +113,6 @@
 /docs/understanding-tracking-design/managing-data-structures-via-the-api-2/* /docs/understanding-tracking-design/managing-your-data-structures/api/:splat 301
 /docs/understanding-tracking-design/managing-data-structures/* /docs/understanding-tracking-design/managing-your-data-structures/ui/:splat 301
 docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/* /docs/understanding-tracking-design/managing-your-data-structures/builder/:splat 301
+
+/docs/enriching-your-data/configuring-enrichments/* /docs/enriching-your-data/managing-enrichments/ui/:splat 301
+/docs/enriching-your-data/configuring-enrichments-open-source/* /docs/enriching-your-data/managing-enrichments/terraform/:splat 301

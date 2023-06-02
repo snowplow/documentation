@@ -65,6 +65,6 @@ Once you've sent this event at least once, you can take a look at this event in 
 
 You can join back to atomic.events using `root_id = event_id`.
 
-Next, learn how to further [enrich your data](/docs/enriching-your-data/index.md) and [configure extra enrichments](/docs/enriching-your-data/configuring-enrichments-open-source/index.md) if necessary.
+Next, learn how to further [enrich your data](/docs/enriching-your-data/index.md) and [configure extra enrichments](/docs/enriching-your-data/managing-enrichments/terraform/index.md) if necessary.
 
 Once you are all set, check out our [recipes](/docs/recipes/index.md) to get tackling real-world use cases!

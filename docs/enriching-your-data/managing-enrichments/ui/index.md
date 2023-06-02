@@ -1,7 +1,11 @@
 ---
 title: "Managing enrichments in BDP Console"
 date: "2020-02-15"
+sidebar_label: "Using the UI"
 sidebar_position: 10
+sidebar_custom_props:
+  offerings:
+    - enterprise
 ---
 
 Snowplow Console enables you to manage the Enrichments that run on each of your environments.

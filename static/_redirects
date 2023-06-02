@@ -130,3 +130,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/managing-data-quality/event-recovery-for-bdp-users/using-the-recovery-builder-to-design-your-recovery/* /docs/managing-data-quality/recovering-failed-events/builder/:splat 301
 /docs/managing-data-quality/event-recovery-for-bdp-users/manual-event-recovery-for-snowplow-bdp/* /docs/managing-data-quality/recovering-failed-events/manual/:splat 301
 /docs/managing-data-quality/snowplow-event-recovery/* /docs/managing-data-quality/recovering-failed-events/manual/:splat 301
+
+/docs/using-the-snowplow-console/managing-users-2/* /docs/using-the-snowplow-console/managing-users/adding-removing/:splat 301
+/docs/using-the-snowplow-console/managing-user-permissions-in-console/* /docs/using-the-snowplow-console/managing-users/managing-permissions/:splat 301
+
+/docs/using-the-snowplow-console/accessing-collector-configuration/* /docs/collecting-data/configuring-collector/ui/:splat 301

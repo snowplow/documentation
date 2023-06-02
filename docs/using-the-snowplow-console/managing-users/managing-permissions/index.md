@@ -1,6 +1,7 @@
 ---
 title: "Managing user permissions in Console"
 date: "2022-03-17"
+sidebar_label: "Managing user permissions"
 sidebar_position: 30
 ---
 

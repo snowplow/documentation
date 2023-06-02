@@ -1,7 +1,10 @@
 ---
-title: "Managing Console API authentication"
+title: "Managing API authentication"
 date: "2021-12-27"
 sidebar_position: 20
+sidebar_custom_props:
+  offerings:
+    - enterprise
 ---
 
 The API that drives BDP Console's functionality is [publicly documented](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml) and available for our customers to invoke via code. All calls to it need to be properly authenticated using JSON Web Tokens (JWT) that can be acquired via the Credentials API.

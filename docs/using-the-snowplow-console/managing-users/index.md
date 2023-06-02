@@ -2,6 +2,9 @@
 title: "Managing users"
 date: "2020-02-15"
 sidebar_position: 30
+sidebar_custom_props:
+  offerings:
+    - enterprise
 ---
 
 To manage users in console, click 'Manage users' in the navigation bar.

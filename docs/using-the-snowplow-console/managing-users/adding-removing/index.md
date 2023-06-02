@@ -1,6 +1,7 @@
 ---
 title: "Adding and removing users in Console"
 date: "2020-02-15"
+sidebar_label: "Adding and removing users"
 sidebar_position: 30
 ---
 

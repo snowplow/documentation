@@ -2,6 +2,9 @@
 title: "Using the Data Structures CI tool"
 date: "2020-06-01"
 sidebar_position: 2000
+sidebar_custom_props:
+  offerings:
+    - enterprise
 ---
 
 The Data Structures CI is a command-line tool which integrates Data Structures API into your CI/CD pipelines and currently has one task which verifies that all schema dependencies for a project are already deployed into a specified environment (e.g. "DEV", "PROD").
@@ -22,7 +25,7 @@ An API Key can be created [here](https://console.snowplowanalytics.com/credentia
 
 This command allows you to verify that all schema dependencies for a project (declared in a specific "manifest") are already deployed into an environment (e.g. "DEV", "PROD").
 
-In your application project, create a JSON file for your manifest that will store references to the schema dependencies you have for your project. During a CI build this file will be parsed, validated and used by Data Structures CI to check that each schema is correctly deployed to the appropriate environment before the code for the application gets deployed, effectively guarding against the 'Schema not found' type of [failed events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).
+In your application project, create a JSON file for your manifest that will store references to the schema dependencies you have for your project. During a CI build this file will be parsed, validated and used by Data Structures CI to check that each schema is correctly deployed to the appropriate environment before the code for the application gets deployed, effectively guarding against the 'Schema not found' type of [failed events](/docs/managing-data-quality/understanding-failed-events/index.md).
 
 Here is an example manifest file where our application has dependencies on three schemas:
 

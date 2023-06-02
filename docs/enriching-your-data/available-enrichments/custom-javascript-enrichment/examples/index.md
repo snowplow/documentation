@@ -47,7 +47,7 @@ You can use the [IAB enrichment](/docs/enriching-your-data/available-enrichments
 }
 ```
 
-If you wish to discard the bot events (sending them to [failed events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md)), you can use the JavaScript enrichment:
+If you wish to discard the bot events (sending them to [failed events](/docs/managing-data-quality/understanding-failed-events/index.md)), you can use the JavaScript enrichment:
 
 ```js
 function process(event) {

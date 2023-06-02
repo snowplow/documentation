@@ -31,8 +31,8 @@ This makes the tool a good first port of call when trying to answer questions su
 
 Additionally, you can configure the extension to show whether or not an event has passed validation according to any event validation rules codified in the corresponding JSON Schema stored in an [Iglu](/docs/understanding-your-pipeline/glossary-of-terms/index.md#iglu) registry. 
 
-For events that failed validation in production historically that you are unable to replicate in your own browser, see our guides on [how to query failed events](/docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/index.md) from their respective destinations.
-These failed events have a [specific format](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md) that includes an array of helpful, detailed error messages that explain the exact reasons why the event failed validation.
+For events that failed validation in production historically that you are unable to replicate in your own browser, see our guides on [how to query failed events](/docs/managing-data-quality/exploring-failed-events/querying/index.md) from their respective destinations.
+These failed events have a [specific format](/docs/managing-data-quality/understanding-failed-events/index.md) that includes an array of helpful, detailed error messages that explain the exact reasons why the event failed validation.
 These events can also [be imported](#importing-failed-events) into the extension to view as if your browser had generated them itself.
 
 ## Event validation with custom registries

@@ -34,8 +34,8 @@ To find out more about the support services offered to Snowplow BDP customers se
 | • Kafka | do-it-yourself | ❌ | bolt-on |
 | • Azure Eventhubs | do-it-yourself | ❌ | bolt-on |
 | <h3>Build more trust in your data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud :new:](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
-| [Failed Events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md) | ✅ | ❌ | ✅ |
-| [Data quality monitoring & API](/docs/managing-data-quality/failed-events/failed-events-in-the-ui/index.md) | ❌ | ❌ | ✅ |
+| [Failed Events](/docs/managing-data-quality/understanding-failed-events/index.md) | ✅ | ❌ | ✅ |
+| [Data quality monitoring & API](/docs/managing-data-quality/monitoring-failed-events/index.md) | ❌ | ❌ | ✅ |
 | Jobs monitoring dashboard | ❌ | ❌ | ✅ |
 | Pipeline configuration tooling | ❌ | ❌ | ✅ |
 | QA pipeline | do-it-yourself | ❌ | ✅ |

@@ -116,3 +116,17 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 /docs/enriching-your-data/configuring-enrichments/* /docs/enriching-your-data/managing-enrichments/ui/:splat 301
 /docs/enriching-your-data/configuring-enrichments-open-source/* /docs/enriching-your-data/managing-enrichments/terraform/:splat 301
+
+/docs/managing-data-quality/failed-events/understanding-failed-events/* /docs/managing-data-quality/understanding-failed-events/:splat 301
+
+/docs/managing-data-quality/failed-events/accessing-failed-events-in-file-storage/* /docs/managing-data-quality/exploring-failed-events/file-storage/:splat 301
+/docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/* /docs/managing-data-quality/exploring-failed-events/querying/:splat 301
+
+/docs/managing-data-quality/failed-events/failed-events-in-the-ui/* /docs/managing-data-quality/monitoring-failed-events/ui/:splat 301
+/docs/managing-data-quality/failed-events/setting-up-data-quality-alerts/* /docs/managing-data-quality/monitoring-failed-events/alerts/:splat 301
+/docs/managing-data-quality/failed-events/accessing-failed-event-aggregates-via-the-api/* /docs/managing-data-quality/monitoring-failed-events/api/:splat 301
+
+/docs/managing-data-quality/event-recovery-for-bdp-users/ /docs/managing-data-quality/recovering-failed-events/ 301
+/docs/managing-data-quality/event-recovery-for-bdp-users/using-the-recovery-builder-to-design-your-recovery/* /docs/managing-data-quality/recovering-failed-events/builder/:splat 301
+/docs/managing-data-quality/event-recovery-for-bdp-users/manual-event-recovery-for-snowplow-bdp/* /docs/managing-data-quality/recovering-failed-events/manual/:splat 301
+/docs/managing-data-quality/snowplow-event-recovery/* /docs/managing-data-quality/recovering-failed-events/manual/:splat 301

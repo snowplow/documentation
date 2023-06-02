@@ -49,7 +49,8 @@ Snowplow.setup(
   remoteConfiguration: remoteConfig,
   defaultConfiguration: defaultConfig,
   defaultConfigurationVersion: 1,
-  onSuccess: successCallback)
+  onSuccess: successCallback
+)
 ```
 
   </TabItem>
@@ -111,6 +112,7 @@ On app startup, the Snowplow tracker initializer will attempt to download the re
 Meanwhile, it will initialize the tracker instance (or multiple tracker instances) based on the last cached configuration.
 The cached configuration is the last configuration downloaded remotely.
 If it's not available, the tracker initializer will spin up the default configuration passed as a parameter.
+
 Every time the initializer successfully initializes the tracker instances it calls a callback passing the list of activated namespaces and the state of the configuration which represents the source where the configuration was retrieved from (using default values, cache, or fetched from the remote endpoint).
 The callback can be used for last minute settings at runtime once the tracker has been instanced.
 

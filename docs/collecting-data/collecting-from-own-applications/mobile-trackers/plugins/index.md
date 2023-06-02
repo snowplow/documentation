@@ -115,7 +115,7 @@ plugin.entities(
 The `filter` callback enables you to add custom logic that decides whether a given event should be tracked or not.
 This can for example enable you to intercept events automatically tracked by the tracker and skip some of them.
 The callback returns true in case the event should be tracked and false otherwise.
-It also accepts the optional `schemas` array as the `entities` callback to only be applied to events with those schemas.
+It also accepts the same optional `schemas` array as the `entities` callback to only be applied to events with those schemas.
 
 The following code will apply to all screen view events and only accept ones with the name "Home Screen", other screen view events will be discarded:
 

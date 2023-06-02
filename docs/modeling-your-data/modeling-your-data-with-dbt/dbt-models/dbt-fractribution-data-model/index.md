@@ -125,6 +125,15 @@ For the python script only (for Docker you mount this as a volume at run time):
 - `snowflake_schema`: Schema for your derived tables
 
 </TabItem>
+<TabItem value="redshift" label="Redshift">
+
+- `redshift_host`: Redshift host url
+- `redshift_database`: Redshift database
+- `redshift_port`: Redshift port (likely `5439`) 
+- `redshift_user`: Redshift user
+- `redshift_password`: Redshift password
+
+</TabItem>
 </Tabs>
 
 ​

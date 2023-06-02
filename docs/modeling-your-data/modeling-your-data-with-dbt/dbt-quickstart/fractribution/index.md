@@ -164,13 +164,18 @@ Please note that some of the libraries are adapter specific. These are listed in
 - `snowflake-snowpark-python`==`0.11.0`
 
 </TabItem>
+<TabItem value="redshift" label="Redshift">
+
+- `absl-py`==`1.2.0`,
+- `redshift_connector`==`2.0.910`
+
+</TabItem>
 </Tabs>
-
-
 
 
 <details>
 <summary>M1 Instructions (for Snowflake only)</summary>
+
 :::caution
 There is an issue with running Snowpark on M1 chips. A workaround recommended by Snowflake is to set up a virtual environment that uses x86 Python:
 
@@ -218,6 +223,17 @@ export snowflake_schema=derived_schema_name
 ```
 
 </TabItem>
+<TabItem value="redshift" label="Redshift">
+
+```
+export redshift_host=redshift_host\
+export redshift_database=redshift_database\
+export redshift_port=redshift_port\
+export redshift_user=redshift_user\
+export redshift_password=redshift_password
+```
+
+</TabItem>
 </Tabs>
 
 
@@ -244,6 +260,13 @@ python main_snowplow_databricks.py --conversion_window_start_date '2022-06-03' -
 
 ```
 python main_snowplow_snowflake.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01' --attribution_model last_touch
+```
+
+</TabItem>
+<TabItem value="redshift" label="Redshift">
+
+```
+python main_snowplow_redshift.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01' --attribution_model last_touch
 ```
 
 </TabItem>
@@ -302,6 +325,13 @@ docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribut
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
+
+```
+docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribution:latest
+```
+
+</TabItem>
+<TabItem value="redshift" label="Redshift">
 
 ```
 docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribution:latest

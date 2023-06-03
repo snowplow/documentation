@@ -14,7 +14,7 @@ This plugin is the recommended way to manually track media events from video pla
 While we also provide plugins for integrating with specific video players (e.g., YouTube, HTML5), this plugin allows you to implement media tracking for any player.
 
 :::note
-The plugin is available since version 3.10 of the tracker.
+The plugin is available since version 3.12 of the tracker.
 :::
 
 ## Installation

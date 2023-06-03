@@ -19,7 +19,7 @@ While we also provide plugins for integrating with specific video players (e.g.,
 | `sp.lite.js` | ❌ |
 
 :::note
-The plugin is available since version 3.10 of the tracker.
+The plugin is available since version 3.12 of the tracker.
 :::
 
 ## Download

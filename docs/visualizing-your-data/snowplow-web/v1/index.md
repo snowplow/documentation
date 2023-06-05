@@ -57,11 +57,32 @@ Each of these parameters get updated once you refresh your database and are expo
 
 <TabItem value="Tableau" label="Tableau">
 
+### Prepare your Tableau workbook
+
+In order for you to be able to connect the workbook template to your dataset you will have to change the connection parameters in the template.
+
+First, unpackage the twbx file: change the twbx extension to zip and then you can treat it like one.
+
+Open the twb file. Use find and replace function in your editor of choice to replace all occurrences of the following connection parameters:
+
+`YOUR_SERVER, YOUR_WAREHOUSE, YOUR_DATABASE, YOUR_SCHEMA, YOUR_USER, YOUR_ROLE`
+
+Save the file.
+
+In order for Tableau to accept the twbx format you have to select all files first and then compress it back to a zip to avoid an additional level of folder structure. Once done rename the extension back to `twbx` from `zip` and your file should be ready to be used.
+
+### Prefilter your data
+
+Once the file is uploaded to Tableau online or opened elsewhere you will be prompted to log in with your username and password. Once authenticated you can change the data source settings e.g. switch the live connection to an extract.
+
+On the Home dashboard you will see a parameter called 'Last_x_day' which can be used to filter the number of days of data you would like the refresh to retrieve.
 
 
 </TabItem>
 
 <TabItem value="Streamlit" label="Streamlit">
+
+### Preparing the enviroment to run the application
 
 There are a few ways you can run the application:
   1. [locally](#1-run-it-locally)
@@ -80,7 +101,8 @@ pip install streamlit==1.20.0
 Install dependencies:
 
 ```
-pip install plotly==5.9.0 geopandas==0.12.2 pydeck==0.7.1
+pip install plotly==5.9.0 geopandas==0.12.2 pydeck==0.7.1 snowflake-connector-python==3.0.4
+snowflake-snowpark-python==1.4.0 snowflake-connector-python[pandas]
 ```
 
 Provide credentials: create file called `credentials.json` in the current directory with the following structure:
@@ -89,8 +111,10 @@ Provide credentials: create file called `credentials.json` in the current direct
   "account": "<snowflake_account>",
   "user": "<snowflake_username>",
   "password": "<snowflake_password>",
+  "warehouse": "<snowflake_warehouse>"
   "database": "<database>",
-  "schema": "<schema>"
+  "schema": "<schema>",
+  "role": "<role>"
 }
 ```
 
@@ -102,6 +126,20 @@ streamlit run snowplow.py
 ```
 python -m streamlit run snowplow.py
 ```
+
+### Applying filters
+
+#### Time filters
+
+By default the app is configured to always retrieve the last 7 days data. Users are also able to modify the start and end date of this filter to modify this range at any point in time, which will rerun all queries and applies the filters to all visualisations.
+
+## App_id filters
+
+Users could also filter on app_ids. To change the default two items, replace appid1 and appid2:
+
+    ```app_id1 = st.text_input("App ID:", key = 'appid1')
+     app_id2 = st.text_input("App ID:", key = 'appid2')```
+
 
 ### 2. Run it on Streamlit on Snowflake
 
@@ -172,6 +210,8 @@ There is also a distinction between `New Users` who have not previously had a se
 
 <TabItem value="Streamlit" label="Streamlit">
 
+![](images/S_AO.png)
+
 </TabItem>
 
 <TabItem value="Preset" label="Preset">
@@ -209,6 +249,8 @@ Metrics definitions:
 </TabItem>
 
 <TabItem value="Streamlit" label="Streamlit">
+
+![](images/S_UA.png)
 
 </TabItem>
 
@@ -249,6 +291,8 @@ Metrics definitions:
 
 <TabItem value="Streamlit" label="Streamlit">
 
+![](images/S_TA.png)
+
 </TabItem>
 
 <TabItem value="Preset" label="Preset">
@@ -282,6 +326,8 @@ Similarly an `exit point` is the last page URL within a session. It is calculate
 </TabItem>
 
 <TabItem value="Streamlit" label="Streamlit">
+
+![](images/S_EE.png)
 
 </TabItem>
 
@@ -318,6 +364,8 @@ There is also a pivot heat map called the `Entrance vs exit points` which show t
 
 <TabItem value="Streamlit" label="Streamlit">
 
+![](images/S_PA.png)
+
 </TabItem>
 
 <TabItem value="Preset" label="Preset">
@@ -330,7 +378,7 @@ There is also a pivot heat map called the `Entrance vs exit points` which show t
 
 ## Customization
 
-The templates are designed with the intention that they can be used out of the box, therefore we refrained from adding too much styling that might not fit a wide audience's taste but there are plenty of things you can do, depending on the tool to make it your own.
+The templates are designed with the intention that they can be used out of the box, therefore we refrained from adding too much styling that might not fit a wide audience's taste. There are  many other additional changes you could make to fine-tune the interactivity, enhance the performance or develop it further depending on the tool to make it your own.
 
 If you would like us to give you a more detailed guide on how you can do that you can request this and we could add a new Accelerator to cover this topic for you.
 

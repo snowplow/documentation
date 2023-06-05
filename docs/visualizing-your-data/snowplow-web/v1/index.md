@@ -42,7 +42,7 @@ In case you would need to filter on a specific app_id, we have provided two para
 
 `App_id_1 / App_id_2`
 
-You can add more, of course, if needed, but then this would have to be changed for all queries, similar to what has been done before.
+You can of course add more, if needed, but these also need to be added to all queries, similar to the existing filters.
 
 #### Time filters
 

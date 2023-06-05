@@ -80,8 +80,8 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 <ReactMarkdown children={`
 | snowplow-fractribution version       | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | ------------------------------------ | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowFractribution} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
-| 0.3.0                                | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |
+| ${versions.dbtSnowplowFractribution} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |
+| 0.3.0                                | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 | 0.2.0                                | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 | 0.1.0                                | >=1.0.0 to <2.0.0 |    ❌     |     ❌      |    ❌     |     ✅     |    ❌     |
 `} remarkPlugins={[remarkGfm]} /> 

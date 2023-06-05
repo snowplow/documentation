@@ -400,12 +400,7 @@ updateMediaTracking({
 Having started a media tracking instance, you can use it to track media events as you receive them from the media player.
 
 Typically, you would subscribe to notifications from the media player (e.g., user clicks play, volume changes, content is buffering) with callbacks that would track the Snowplow events.
-For an example, see the code that subscribes for events from an HTML5 media player [here](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples/blob/issue/media_plugin_example/react/src/components/video.jsx).
-
-:::warning
-TODO:
-Update the link to the example code once we merge it into master.
-:::
+For an example, see the code that subscribes for events from an HTML5 media player [here](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples/tree/master/react/src/components/video.jsx).
 
 ### Providing additional information
 

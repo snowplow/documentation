@@ -190,7 +190,7 @@ Follow the instruction on [https://streamlit.io/cloud](https://streamlit.io/clou
 
 ### Acquisition Overview
 
-The **Acquisition Overview** aims at updating you about the website traffic with a breakdown by marketing channels.
+The **Acquisition Overview** provides an overview on the website traffic, with a breakdown by marketing channels.
 
 There is also a distinction between `New Users` who have not previously had a session on the website (domain_sessionidx=1) and `Existing users` who have a session with domain_sessionidx > 1.
 

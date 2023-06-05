@@ -11,7 +11,7 @@ import ThemedImage from '@theme/ThemedImage';
 
 ## Introduction
 
-This guide is written to introduce you to the dashboard templates designed for visualising your derived tables produced by the **snowplow-web** dbt package. It will show you how to get started and what each dashboard represents.
+This guide is written to introduce you to the dashboard templates designed for visualising your derived tables produced by the [snowplow-web](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/) dbt package. It will show you how to get started and what each visualization view (= page / tab / dashboard depending on the tool) represents.
 
 ## Setup
 
@@ -89,7 +89,8 @@ There are a few ways you can run the application:
   1. [Steamlit on Snowflake](#2-run-it-on-streamlit-on-snowflake)
   1. [Streamlit cloud](#3-run-it-on-streamlits-cloud)
 
-### 1. Run it locally
+<details>
+<summary>#### 1. Run it locally)</summary>
 
 To run the application on your local machine you will need a working python environment running python 3.8.16 - this is the current version Snowflake are using on their Streamlit environment.
 
@@ -127,6 +128,51 @@ streamlit run snowplow.py
 python -m streamlit run snowplow.py
 ```
 
+</details>
+
+<details>
+<summary>#### 2. Run it on Streamlit on Snowflake</summary>
+
+##### Step 1: Create a Streamlit Application:
+  1. Log into Snowsight as a user with the CREATE STREAMLIT privilege.
+  2. In the left navigation bar, select Streamlit Apps.
+  3. Select + Streamlit. The Create Streamlit App window opens.
+  4. Enter a name for your app.
+  5. In the Warehouse dropdown, select the warehouse where you want to run your app and execute queries.
+  6. In the App location dropdown, select the database and schema for your app.
+  7. Select Create. The Streamlit in Snowflake editor opens an example Streamlit application in Viewer mode. Viewer mode allows you to see how the Streamlit application appears to users.
+  8. Click Edit to create your application.
+
+##### Step 2: Install required packages:
+  [PUT](https://docs.snowflake.com/en/sql-reference/sql/put) the [environment.yml](/environment.yml) file to the stage location specified by the `STREAMLIT_ROOT_LOCATION` parameter of the Streamlit object:
+  ```
+  $ SELECT STREAMLIT_ROOT_LOCATION FROM <database>.INFORMATION_SCHEMA.STREAMLITS;
+
+  > <database>.<schema>."<appname> (Stage)"
+  ```
+  ```
+  PUT file:///<full_path>/environment.yml '@<database>.<schema>."<appname> (Stage)"' AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+  ```
+
+##### Step 4: Provide the geojson [file](/countries.geo.json) that contains the country information required to render the choropleth map:
+  ```
+  PUT file:///<full_path>/countries.geo.json '@<database>.<schema>."<appname> (Stage)"' AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+  ```
+
+##### Step 5: Copy the code from [snowplow.py](/snowplow.py) inside the editor
+
+and Click `Run`
+
+</details>
+
+<details>
+
+<summary>#### 3. Run it on Streamlit's cloud</summary>
+
+Follow the instruction on [https://streamlit.io/cloud](https://streamlit.io/cloud)
+
+</details>
+
 ### Applying filters
 
 #### Time filters
@@ -139,44 +185,6 @@ Users could also filter on app_ids. To change the default two items, replace app
 
     ```app_id1 = st.text_input("App ID:", key = 'appid1')
      app_id2 = st.text_input("App ID:", key = 'appid2')```
-
-
-### 2. Run it on Streamlit on Snowflake
-
-#### Step 1: Create a Streamlit Application:
-  1. Log into Snowsight as a user with the CREATE STREAMLIT privilege.
-  2. In the left navigation bar, select Streamlit Apps.
-  3. Select + Streamlit. The Create Streamlit App window opens.
-  4. Enter a name for your app.
-  5. In the Warehouse dropdown, select the warehouse where you want to run your app and execute queries.
-  6. In the App location dropdown, select the database and schema for your app.
-  7. Select Create. The Streamlit in Snowflake editor opens an example Streamlit application in Viewer mode. Viewer mode allows you to see how the Streamlit application appears to users.
-  8. Click Edit to create your application.
-
-#### Step 2: Install required packages:
-  [PUT](https://docs.snowflake.com/en/sql-reference/sql/put) the [environment.yml](/environment.yml) file to the stage location specified by the `STREAMLIT_ROOT_LOCATION` parameter of the Streamlit object:
-  ```
-  $ SELECT STREAMLIT_ROOT_LOCATION FROM <database>.INFORMATION_SCHEMA.STREAMLITS;
-
-  > <database>.<schema>."<appname> (Stage)"
-  ```
-  ```
-  PUT file:///<full_path>/environment.yml '@<database>.<schema>."<appname> (Stage)"' AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
-  ```
-
-#### Step 4: Provide the geojson [file](/countries.geo.json) that contains the country information required to render the choropleth map:
-  ```
-  PUT file:///<full_path>/countries.geo.json '@<database>.<schema>."<appname> (Stage)"' AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
-  ```
-
-#### Step 5: Copy the code from [snowplow.py](/snowplow.py) inside the editor
-
-and Click `Run`
-
-
-### 3. Run it on Streamlit's cloud
-
-Follow the instruction on [https://streamlit.io/cloud](https://streamlit.io/cloud)
 
 </TabItem>
 
@@ -223,7 +231,7 @@ There is also a distinction between `New Users` who have not previously had a se
 </Tabs>
 
 ### User Acquisition
-This dashboard is about **User Acquisition** which is effectively about what channels / methods were used to acquire new users.
+This view is about **User Acquisition** which is effectively about what channels / methods were used to acquire new users.
 
 Every visual is already filtered on new users only (domain_sessionidx = 1).
 
@@ -264,7 +272,7 @@ The metric are defined as:
 
 ### Traffic Acquisition
 
-This dashboard is about **Traffic Acquisition** which aims at highlighting which channels are used to re-engage existing (returning) users.
+This page is about **Traffic Acquisition** which highlights which channels are used to re-engage existing (returning) users.
 
 Every visual is already filtered on returning users only (domain_sessionidx =>1).
 
@@ -307,9 +315,9 @@ The metric are defined as:
 
 A separate overview is dedicated for the top 10 Entrance and Exit points with a breakdown on new and returning users.
 
-An `entrance point` is the first page URL within a session. Although the sessions table produces a field called first_page_url (first_page_url_scheme  || '://' || first_page_url_hist || first_page_url_path), for BI purposes a calculated field is being used on this dashboard to exclude GTM tags.
+An `entrance point` is the first page URL within a session. Although the sessions table produces a field called first_page_url, for BI purposes we exclude queries or fragments.
 
-Similarly an `exit point` is the last page URL within a session. It is calculated using last_page_url_scheme  || '://' || last_page_url_host || last_page_url_path.
+Similarly an `exit point` is the last page URL within a session.
 
 <Tabs groupId="dashboards" queryString>
 
@@ -341,7 +349,7 @@ Similarly an `exit point` is the last page URL within a session. It is calculate
 
 ### Page Analytics
 
-The **Page Analytics** dashboard is aimed at giving insight into how the visitors interact with your web page.
+The **Page Analytics** view is aimed at giving insight into how the visitors interact with your web page.
 
 The `bounce rate` visualisation is essentially about the inverse of engagement rate, it shows the ratio of non-engaged sessions over the total sessions.
 
@@ -378,7 +386,7 @@ There is also a pivot heat map called the `Entrance vs exit points` which show t
 
 ## Customization
 
-The templates are designed with the intention that they can be used out of the box, therefore we refrained from adding too much styling that might not fit a wide audience's taste. There are  many other additional changes you could make to fine-tune the interactivity, enhance the performance or develop it further depending on the tool to make it your own.
+The templates are designed with the intention that they can be used out of the box, therefore we refrained from adding too much styling that might not fit a wide audience's taste. There are many other additional changes you could make to fine-tune the interactivity, enhance the performance or develop it further depending on the tool to make it your own.
 
 If you would like us to give you a more detailed guide on how you can do that you can request this and we could add a new Accelerator to cover this topic for you.
 

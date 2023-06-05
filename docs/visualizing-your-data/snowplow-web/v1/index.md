@@ -227,12 +227,12 @@ This dashboard is about **User Acquisition** which is effectively about what cha
 
 Every visual is already filtered on new users only (domain_sessionidx = 1).
 
-Metrics definitions:
+The metric are defined as:
 
-**engaged_sessions** = count(case when engaged=True end)
-**engagement_rate** = engaged_sessions / count(distinct domain_sessionid)
-**conversion_count** =sum(cv__all_volume)
-**conversion_revenue** = sum(cv__all_total)
+- **engaged_sessions** = count(case when engaged=True end)
+- **engagement_rate** = engaged_sessions / count(distinct domain_sessionid)
+- **conversion_count** =sum(cv__all_volume)
+- **conversion_revenue** = sum(cv__all_total)
 
 <Tabs groupId="dashboards" queryString>
 

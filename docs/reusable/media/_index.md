@@ -1012,12 +1012,14 @@ The event schema has the following properties:
 | Request Key | Required | Type/Format | Description |
 | --- | --- | --- | --- |
 | errorCode | N | string | Error-identifying code for the playback issue. E.g. E522 |
+| errorName | N | string | Name for the type of error that occurred in the playback. E.g. forbidden |
 | errorDescription | N | string | Longer description for the error occurred in the playback |
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaError', {
     id,
     errorCode: '500',
+    errorName: 'forbidden',
     errorDescription: 'Failed to load media',
 });`}
 </CodeBlock>)}</>
@@ -1026,6 +1028,7 @@ The event schema has the following properties:
 {`trackMediaError({
     id,
     errorCode: '500',
+    errorName: 'forbidden',
     errorDescription: 'Failed to load media',
 });`}
 </CodeBlock>)}</>

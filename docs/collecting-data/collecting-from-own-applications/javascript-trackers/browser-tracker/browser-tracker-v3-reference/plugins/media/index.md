@@ -31,7 +31,7 @@ import { SnowplowMediaPlugin } from '@snowplow/browser-plugin-media';
 
 newTracker('sp1', '{{collector_url}}', { 
    appId: 'my-app-id', 
-   plugins: [ MediaTrackingPlugin() ],
+   plugins: [ SnowplowMediaPlugin() ],
 });
 ```
 

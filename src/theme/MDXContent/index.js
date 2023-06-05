@@ -2,41 +2,41 @@ import React from 'react'
 import MDXContent from '@theme-original/MDXContent'
 import Admonition from '@theme-original/Admonition'
 import Head from '@docusaurus/Head'
-import { useLocation } from '@docusaurus/router'
-
-// yeah, we need to standardize things!
-const previousVersionPattern = new RegExp(
-  '[^/]*(?:previous-|older-)(?:versions?|releases?)/'
-)
-
-const legacyPattern = new RegExp('/legacy')
+import { useSidebarBreadcrumbs } from '@docusaurus/theme-common/internal'
+import _ from 'lodash'
 
 export default function MDXContentWrapper(props) {
-  const location = useLocation()
-  const legacy = legacyPattern.test(location.pathname)
-  if (legacy)
-    return (
-      <>
+  let breadcrumbs;
+  try {
+    breadcrumbs = useSidebarBreadcrumbs()
+  } catch {
+    // non-docs page, nothing to do here
+    return <MDXContent {...props} />
+  }
+
+  const admonitions = []
+
+  const legacy = _.some(_.initial(breadcrumbs), item => item.customProps?.legacy)
+  const outdated = !legacy && _.some(_.initial(breadcrumbs), item => item.customProps?.outdated)
+
+  if (outdated) {
+    const latest = _.last(_.takeWhile(breadcrumbs, item => !item.customProps?.outdated)).href
+    admonitions.push(
+      <Admonition type="caution" key="outdated">
+        You are reading documentation for an outdated version. Here’s the{' '}
+        <a href={latest}>latest one</a>!
+      </Admonition>
+    )
+  }
+
+  return (
+    <>
+      {(legacy || outdated) && (
         <Head>
           <meta name="robots" content="noindex, follow" />
         </Head>
-        <MDXContent {...props} />
-      </>
-    )
-  const outdated = previousVersionPattern.test(location.pathname)
-  if (!outdated) return <MDXContent {...props} />
-  const [latest, subpage] = location.pathname.split(previousVersionPattern)
-  return (
-    <>
-      <Head>
-        <meta name="robots" content="noindex, follow" />
-      </Head>
-      {subpage.length > 0 && (
-        <Admonition type="caution">
-          You are reading documentation for an outdated version. Here’s the{' '}
-          <a href={latest}>latest one</a>!
-        </Admonition>
       )}
+      {admonitions}
       <MDXContent {...props} />
     </>
   )

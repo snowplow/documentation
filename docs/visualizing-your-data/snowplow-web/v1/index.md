@@ -386,9 +386,4 @@ There is also a pivot heat map called the `Entrance vs exit points` which show t
 
 ## Customization
 
-The templates are designed with the intention that they can be used out of the box, therefore we refrained from adding too much styling that might not fit a wide audience's taste. There are many other additional changes you could make to fine-tune the interactivity, enhance the performance or develop it further depending on the tool to make it your own.
-
-If you would like us to give you a more detailed guide on how you can do that you can request this and we could add a new Accelerator to cover this topic for you.
-
-
-
+The templates are designed with the intention that they can be used out of the box, therefore we refrained from adding too much styling that might not fit a wide audience's taste. There are many other additional changes you could make to fine-tune the interactivity, enhance the performance or develop it further depending on the tool to make it your own. Please refer to the official documentation of your chosen BI tool for further information on this.

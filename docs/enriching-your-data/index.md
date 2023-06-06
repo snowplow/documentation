@@ -1,5 +1,5 @@
 ---
-title: "Enriching your data"
+title: "Enriching data"
 date: "2020-02-15"
 sidebar_position: 80
 ---

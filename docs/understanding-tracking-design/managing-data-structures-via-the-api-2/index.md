@@ -74,18 +74,21 @@ Use this request to retrieve all versions of a specific data structure by its ha
 
 See the [detailed API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs) for all options.
 
-Generating a data structure hash
+#### Generating a data structure hash
 
 To use the commands to retrieve information about a specific Data Structure, you need to encode its identifying parameters (`organization ID`, `vendor`, `name` and `format`) and hash it with SHA-256.
 
 **Example:**  
-`organization ID: _38e97db9-f3cb-404d-8250-cd227506e544_`  
-`vendor_: com.acme.event_`  
-`schema name: _search_`  
-`format: _jsonschema_` 
+
+| Parameter | Value |
+|-----------|-------|
+| Organization ID | `38e97db9-f3cb-404d-8250-cd227506e544` |
+| Vendor | `com.acme.event` |
+| Schema name | `search` |
+| Format | `jsonschema` |
 
 First concatenate the information with a dash (-) as the separator:  
-`_38e97db9-f3cb-404d-8250-cd227506e544_-_com.acme.event_-_search_-jsonschema`
+`38e97db9-f3cb-404d-8250-cd227506e544-com.acme.event-search-jsonschema`
 
 And then hash them with SHA-256 to receive: `a41ef92847476c1caaf5342c893b51089a596d8ecd28a54d3f22d922422a6700`
 

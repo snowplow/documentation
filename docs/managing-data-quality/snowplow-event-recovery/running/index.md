@@ -1,26 +1,47 @@
 ---
 title: "Running"
-date: "2020-04-13"
-sidebar_position: 10
+date: "2020-07-22"
+sidebar_position: 30
 ---
+
+Now that we've discussed configuring the recovery, let's dive in to running it on your pipeline.
+
+First we'll need to define configuration:
 
 ## Define configuration
 
-The configuration consists of
-
-`resolver-config.json`, for example:
-
-```json
-{"schema":"iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-1","data":{"cacheSize":0,"repositories":[{"name":"Iglu-Central","priority":1,"vendorPrefixes":["com.snowplowanalytics"],"connection":{"http":{"uri":"http://iglu-central.com"}}}]}}
-```
-
-`job-config.json`, for example:
+The configuration consists of the `resolver-config.json` that your pipeline uses to resolve events against corresponding schema, for example:
 
 ```json
 {
-  "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/2-0-0",
+  "schema": "iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-1",
   "data": {
-    "iglu:com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema/1-0-*": [
+    "cacheSize": 0,
+    "repositories": [
+      {
+        "name": "Iglu Central",
+        "priority": 0,
+        "vendorPrefixes": [
+          "com.snowplowanalytics"
+        ],
+        "connection": {
+          "http": {
+            "uri": "http://iglucentral.com"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+Also, the`job-config.json` which describes the recovery job to be done, for example:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonschema/4-0-0",
+  "data": {
+    "iglu:com.snowplowanalytics.snowplow.badrows/enrichment_failures/jsonschema/1-0-0": [
       {
         "name": "passthrough",
         "conditions": [],
@@ -33,7 +54,7 @@ The configuration consists of
 
 ## Encode configuration
 
-Configuration is supplied to recovery jobs as a Base64-encoded string. Encode your configuration. You can use following [ammonite](http://ammonite.io) script to do this for you:
+Configuration is supplied to recovery jobs as a Base64-encoded string. You can use your encoding plugin of choice, but here is an example [ammonite](http://ammonite.io/) script you can use to encode your configuration:
 
 ```scala
 import java.util.Base64
@@ -51,12 +72,14 @@ val encode = (str: String)  => Base64.getEncoder.encodeToString(str.getBytes(Sta
   }
 ```
 
-And then just run (assuming ammonite is on your path and above script is called `encode.sc`:
+And then just run (assuming ammonite is on your path and above script is called `encode.sc`:
 
 ```bash
 amm ./encode.sc resolver-config.json
 amm ./encode.sc job-config.json
 ```
+
+Once the configuration files are encrypted it's time to deploy the recovery job on your pipeline.
 
 ## Deploy the job
 

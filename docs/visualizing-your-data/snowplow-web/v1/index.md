@@ -200,7 +200,7 @@ Users could also filter on app_ids. To change the default two items, replace app
 
 The **Acquisition Overview** provides an overview on the website traffic, with a breakdown by marketing channels.
 
-There is also a distinction between `New Users` who have not previously had a session on the website (domain_sessionidx=1) and `Existing users` who have a session with domain_sessionidx > 1.
+There is also a distinction between `New Users` who have not previously had a session on the website (`domain_sessionid = 1`) and `Existing users` who have a session with `domain_sessionidx > 1`.
 
 <Tabs groupId="dashboards" queryString>
 

@@ -13,18 +13,32 @@
 
 const swap = (allItems, linkItems) => {
   const result = allItems.flatMap((item) => {
-    if (item.customProps?.header) {
-      const header = {
-        type: 'html',
-        value: item.customProps.header,
-        defaultStyle: true,
-        className: 'header',
-      }
-      return [header, { ...item, items: swap(item.items, linkItems) }]
-    }
+    const header = item.customProps?.header ? [{
+      type: 'html',
+      value: item.customProps.header,
+      defaultStyle: true,
+      className: 'header',
+    }] : []
+
+    const className = item.customProps?.offerings ?
+      [item.className || '', ...item.customProps.offerings].join(' ') :
+      item.className
 
     if (item.type === 'category') {
-      return [{ ...item, items: swap(item.items, linkItems) }]
+      if (item.items.length > 0) return [...header, {
+        ...item,
+        className,
+        items: swap(item.items, linkItems)
+      }]
+      // a workaround for empty category pages not respecting className
+      // see https://discord.com/channels/398180168688074762/867060369087922187/1068508121091293264
+      return [...header, {
+        type: 'doc',
+        id: item.link.id,
+        label: item.label,
+        className,
+        customProps: item.customProps,
+      }]
     }
 
     if (linkItems[item.id]) {
@@ -33,13 +47,13 @@ const swap = (allItems, linkItems) => {
           type: 'link',
           label: linkItems[item.id].sidebar_label ?? linkItems[item.id].title,
           href: linkItems[item.id].href,
-          className: linkItems[item.id].sidebar_class_name,
+          className,
           customProps: linkItems[item.id].sidebar_custom_props,
         },
       ]
     }
 
-    return [item]
+    return [{...item, className}]
   })
 
   return result

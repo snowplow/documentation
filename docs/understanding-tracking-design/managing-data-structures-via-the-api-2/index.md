@@ -79,6 +79,7 @@ See the [detailed API documentation](https://console.snowplowanalytics.com/api/m
 To use the commands to retrieve information about a specific Data Structure, you need to encode its identifying parameters (`organization ID`, `vendor`, `name` and `format`) and hash it with SHA-256.
 
 **Example:**  
+
 | Parameter | Value |
 |-----------|-------|
 | Organization ID | `38e97db9-f3cb-404d-8250-cd227506e544` |

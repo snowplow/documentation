@@ -183,9 +183,10 @@ By default the app is configured to always retrieve the last 7 days data. Users 
 
 Users could also filter on app_ids. To change the default two items, replace appid1 and appid2:
 
-    ```app_id1 = st.text_input("App ID:", key = 'appid1')
-     app_id2 = st.text_input("App ID:", key = 'appid2')
-    ```
+    app_id1 = st.text_input("App ID:", key = 'appid1')
+    app_id2 = st.text_input("App ID:", key = 'appid2')
+
+
 
 </TabItem>
 

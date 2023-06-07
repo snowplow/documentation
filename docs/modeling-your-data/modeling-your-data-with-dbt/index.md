@@ -1,5 +1,6 @@
 ---
 title: "Modeling your data with dbt"
+description: "Information for our dbt packages including quickstarts, configurations, and building custom models."
 sidebar_position: 10
 ---
 

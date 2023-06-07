@@ -1,6 +1,6 @@
 ---
 title: "Incremental Logic"
-date: "2022-10-05"
+description: "A detailed overview of our incremental run logic using manifest tables."
 sidebar_position: 300
 ---
 ```mdx-code-block

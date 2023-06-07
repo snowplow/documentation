@@ -90,7 +90,7 @@ There are a few ways you can run the application:
   1. [Streamlit cloud](#3-run-it-on-streamlits-cloud)
 
 <details>
-<summary>#### 1. Run it locally)</summary>
+<summary>Option 1. Run it locally</summary>
 
 To run the application on your local machine you will need a working python environment running python 3.8.16 - this is the current version Snowflake are using on their Streamlit environment.
 
@@ -131,7 +131,7 @@ python -m streamlit run snowplow.py
 </details>
 
 <details>
-<summary>#### 2. Run it on Streamlit on Snowflake</summary>
+<summary>Option 2. Run it on Streamlit on Snowflake</summary>
 
 ##### Step 1: Create a Streamlit Application:
   1. Log into Snowsight as a user with the CREATE STREAMLIT privilege.
@@ -167,7 +167,7 @@ and Click `Run`
 
 <details>
 
-<summary>#### 3. Run it on Streamlit's cloud</summary>
+<summary>Option 3. Run it on Streamlit's cloud</summary>
 
 Follow the instruction on [https://streamlit.io/cloud](https://streamlit.io/cloud)
 
@@ -184,7 +184,8 @@ By default the app is configured to always retrieve the last 7 days data. Users 
 Users could also filter on app_ids. To change the default two items, replace appid1 and appid2:
 
     ```app_id1 = st.text_input("App ID:", key = 'appid1')
-     app_id2 = st.text_input("App ID:", key = 'appid2')```
+     app_id2 = st.text_input("App ID:", key = 'appid2')
+    ```
 
 </TabItem>
 

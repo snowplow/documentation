@@ -2,9 +2,6 @@
 title: "Tracking catalog"
 date: "2022-10-26"
 sidebar_position: 0
-sidebar_custom_props:
-  offerings:
-    - enterprise
 description: "The Tracking Catalog will provide your team with easy and self serve access to the events you’re tracking, creating greater transparency and autonomy. This can help improve the data culture in your organisation and foster a more collaborative approach to create Data Products."
 ---
 

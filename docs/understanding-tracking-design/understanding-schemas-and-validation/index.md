@@ -17,7 +17,7 @@ Schemas make it possible for you to:
 
 ## Managing data quality with data structures
 
-Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/index.md), each event is validated against its self-describing schema and only those that pass are allowed to pass through, [failures are sent to a separate queue](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).
+Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/index.md), each event is validated against its self-describing schema and only those that pass are allowed to pass through, [failures are sent to a separate queue](/docs/managing-data-quality/understanding-failed-events/index.md).
 
 Through describing how the data should be structured as part of your schema definition you ensure clean and consistent data landing in your data warehouse or other destinations.
 
@@ -28,7 +28,7 @@ Rather than just leaving your data open to interpretation by the many different 
 ## The anatomy of a schema
 
 :::info
-If you are using BDP Cloud, you can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md) without worrying about how it works under the hood.
+If you are using BDP Cloud, you can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/builder/index.md) without worrying about how it works under the hood.
 :::
 
 Let’s take a look at an example JSON schema to talk about its constituent parts:

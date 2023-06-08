@@ -44,46 +44,9 @@ Learn more [why schemas are a powerful feature of Snowplow](/docs/understanding-
 
 :::
 
-- First create the schema for the event
-    - The below is an example - you can create your own schema or edit this schema to better suit your needs
+Follow the documentation for [creating and uploading a schema to Iglu Server](/docs/understanding-tracking-design/managing-your-data-structures/iglu/index.md).
 
-```json
-{
-     "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-     "description": "Schema for a button click event",
-     "self": {
-         "vendor": "com.snowplowanalytics",
-         "name": "button_click",
-         "format": "jsonschema",
-         "version": "1-0-0"
-     },
-     "type": "object",
-     "properties": {
-         "id": {
-             "type": "string"
-             "minLength": 1
-         },
-         "target": {
-             "type": "string"
-         },
-         "content": {
-             "type": "string"
-         }
-     },
-     "required": ["id"],
-     "additionalProperties": false
- }
-```
-
-- You should then save this schema in the following folder structure, with a filename of `1-0-0`:
-    - /`schemas/com.snowplowanalytics/button_click/jsonschema/1-0-0`
-    - Note: If you update the `vendor` string in the example, you should update the above path too.
-- Upload your schema to your Iglu registry that you created when setting up your pipeline
-    - Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) if you haven't already
-    - To upload your schemas on localhost to the Iglu Server, use the following command:
-        - `igluctl static push --public <local path to schemas/> <Iglu server endpoint> <iglu_super_api_key>`
-        - You can find more information on the [Igluctl docs page](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static-push)
-- To send an event using this schema you'll want to track a Self Describing Event. Here is an example of how to do so with the JavaScript Tracker:
+To send an event using your schema you'll want to track a Self Describing Event. Here is an example of how to do so with the JavaScript Tracker:
 
 ```javascript
 snowplow('trackSelfDescribingEvent', {
@@ -102,6 +65,6 @@ Once you've sent this event at least once, you can take a look at this event in 
 
 You can join back to atomic.events using `root_id = event_id`.
 
-Next, learn how to further [enrich your data](/docs/enriching-your-data/index.md) and [configure extra enrichments](/docs/enriching-your-data/configuring-enrichments-open-source/index.md) if necessary.
+Next, learn how to further [enrich your data](/docs/enriching-your-data/index.md) and [configure extra enrichments](/docs/enriching-your-data/managing-enrichments/terraform/index.md) if necessary.
 
 Once you are all set, check out our [recipes](/docs/recipes/index.md) to get tackling real-world use cases!

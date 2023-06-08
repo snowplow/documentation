@@ -61,8 +61,6 @@ Alternatively, you can [set up Micro to receive external IP addresses](/docs/get
 
 </TestingWithMicro>
 
-Snowplow BDP customers can enable the IP Lookup enrichment for your pipeline [in the Snowplow console.](/docs/enriching-your-data/configuring-enrichments/index.md) Open Source will need to upload the enrichment json for use in their Snowplow pipeline.
-
 There are four possible fields you can add to the “parameters” section of the enrichment configuration JSON: “geo”, “isp”, “domain”, and “connectionType”:
 
 - The `database` field contains the name of the MaxMind database file.

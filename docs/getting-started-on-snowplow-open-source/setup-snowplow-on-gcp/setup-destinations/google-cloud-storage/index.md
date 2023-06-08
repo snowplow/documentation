@@ -6,7 +6,7 @@ sidebar_position: 10
 
 Snowplow supports streaming data (either raw or enriched data) from [Pub/Sub](https://cloud.google.com/pubsub/) into [Google Cloud Storage (GCS)](https://cloud.google.com/storage/) with the [Google Cloud Storage Loader](/docs/destinations/warehouses-and-lakes/google-cloud-storage/index.md). 
 
-We recommend streaming the "failed events" Pub/Sub topic (containing data that failed to be processed successfully) to GCS. From there, you may wish to load them into your destination of choice to [query the failed events](/docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/index.md) to understand why they were not successfully processed and recover them using [Snowplow Event Recovery](https://github.com/snowplow-incubator/snowplow-event-recovery).
+We recommend streaming the "failed events" Pub/Sub topic (containing data that failed to be processed successfully) to GCS. From there, you may wish to load them into your destination of choice to [query the failed events](/docs/managing-data-quality/exploring-failed-events/querying/index.md) to understand why they were not successfully processed and recover them using [Snowplow Event Recovery](https://github.com/snowplow-incubator/snowplow-event-recovery).
 
 You may also wish to stream the "good events" Pub/Sub topic to serve as a backup in case there is an issue downstream (e.g. while loading the data into BigQuery).  
 

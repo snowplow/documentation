@@ -39,10 +39,10 @@
 
 /docs/try-snowplow/recipes/* /docs/recipes/:splat 301
 
-/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-with-snowplow-bdp/enterprise/ 301
+/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-on-snowplow-bdp-enterprise/ 301
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/ /docs/feature-comparison/ 302
-/docs/getting-started-with-snowplow-bdp/aws-setup-guide/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-aws/:splat 301
-/docs/getting-started-with-snowplow-bdp/setup-guide-gcp/* /docs/getting-started-with-snowplow-bdp/enterprise/setup-guide-gcp/:splat 301
+/docs/getting-started-with-snowplow-bdp/aws-setup-guide/* /docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-aws/:splat 301
+/docs/getting-started-with-snowplow-bdp/setup-guide-gcp/* /docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-gcp/:splat 301
 
 /docs/open-source-quick-start/what-is-the-quick-start-for-open-source/ /docs/getting-started-on-snowplow-open-source/what-is-quick-start/ 301
 /docs/open-source-quick-start/what-is-the-quick-start-for-open-source/feature-comparison/ /docs/feature-comparison/ 302
@@ -106,3 +106,32 @@
 
 /docs/tutorials/tutorial-a-guide-to-using-the-poplin-chrome-extension/* /docs/tutorials/tutorial-a-guide-to-using-the-snowplow-inspector-extension/:splat 301
 /docs/destinations/forwarding-events/snowbridge/configuration/transformations/testing/ /docs/destinations/forwarding-events/snowbridge/testing/ 301
+
+/docs/getting-started-with-snowplow-bdp/enterprise/* /docs/getting-started-on-snowplow-bdp-enterprise/:splat 301
+/docs/getting-started-with-snowplow-bdp/cloud/* /docs/getting-started-on-snowplow-bdp-cloud/:splat 301
+
+/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/* /docs/understanding-tracking-design/managing-your-data-structures/api/:splat 301
+/docs/understanding-tracking-design/managing-data-structures/* /docs/understanding-tracking-design/managing-your-data-structures/ui/:splat 301
+docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/* /docs/understanding-tracking-design/managing-your-data-structures/builder/:splat 301
+
+/docs/enriching-your-data/configuring-enrichments/* /docs/enriching-your-data/managing-enrichments/ui/:splat 301
+/docs/enriching-your-data/configuring-enrichments-open-source/* /docs/enriching-your-data/managing-enrichments/terraform/:splat 301
+
+/docs/managing-data-quality/failed-events/understanding-failed-events/* /docs/managing-data-quality/understanding-failed-events/:splat 301
+
+/docs/managing-data-quality/failed-events/accessing-failed-events-in-file-storage/* /docs/managing-data-quality/exploring-failed-events/file-storage/:splat 301
+/docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/* /docs/managing-data-quality/exploring-failed-events/querying/:splat 301
+
+/docs/managing-data-quality/failed-events/failed-events-in-the-ui/* /docs/managing-data-quality/monitoring-failed-events/ui/:splat 301
+/docs/managing-data-quality/failed-events/setting-up-data-quality-alerts/* /docs/managing-data-quality/monitoring-failed-events/alerts/:splat 301
+/docs/managing-data-quality/failed-events/accessing-failed-event-aggregates-via-the-api/* /docs/managing-data-quality/monitoring-failed-events/api/:splat 301
+
+/docs/managing-data-quality/event-recovery-for-bdp-users/ /docs/managing-data-quality/recovering-failed-events/ 301
+/docs/managing-data-quality/event-recovery-for-bdp-users/using-the-recovery-builder-to-design-your-recovery/* /docs/managing-data-quality/recovering-failed-events/builder/:splat 301
+/docs/managing-data-quality/event-recovery-for-bdp-users/manual-event-recovery-for-snowplow-bdp/* /docs/managing-data-quality/recovering-failed-events/manual/:splat 301
+/docs/managing-data-quality/snowplow-event-recovery/* /docs/managing-data-quality/recovering-failed-events/manual/:splat 301
+
+/docs/using-the-snowplow-console/managing-users-2/* /docs/using-the-snowplow-console/managing-users/adding-removing/:splat 301
+/docs/using-the-snowplow-console/managing-user-permissions-in-console/* /docs/using-the-snowplow-console/managing-users/managing-permissions/:splat 301
+
+/docs/using-the-snowplow-console/accessing-collector-configuration/* /docs/collecting-data/configuring-collector/ui/:splat 301

@@ -176,7 +176,7 @@ Great! We now have a schema written for our form. Next we need to upload it to o
 
 ### Uploading your schema
 
-For this step, follow the documentation on [using Snowplow Console to manage your data structures](/docs/understanding-tracking-design/managing-data-structures/index.md).
+For this step, follow the documentation on [managing your data structures](/docs/understanding-tracking-design/managing-your-data-structures/index.md).
 
 Once you have successfully created and published your schema to the development registry you can begin sending test events to your Snowplow Mini.
 

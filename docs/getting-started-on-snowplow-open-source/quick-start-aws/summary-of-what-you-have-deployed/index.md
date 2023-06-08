@@ -66,7 +66,7 @@ Events that have been validated and enriched by the Enrich application are writt
 
 ### Bad 1 stream
 
-This bad stream is for events that the collector, enrich or S3 loader (raw and enriched) applications fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure.  More details can be found [here](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md). 
+This bad stream is for events that the collector, enrich or S3 loader (raw and enriched) applications fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure.  More details can be found [here](/docs/managing-data-quality/understanding-failed-events/index.md). 
 
 ### Bad 2 stream
 

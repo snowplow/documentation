@@ -278,6 +278,11 @@ li.enterprise.cloud > a::before,
 article.enterprise.cloud > a > p::before {
   content: '🏭 ☁️';
 }
+li.enterprise.opensource > div > a::before,
+li.enterprise.opensource > a::before,
+article.enterprise.opensource > a > p::before {
+  content: '🏭 🛠️';
+}
 li.opensource > div > a::before,
 li.opensource > a::before,
 article.opensource > a > p::before {
@@ -317,6 +322,9 @@ a.card:hover::after {
 }
 .enterprise.cloud a:hover::after {
   content: '🏭 ☁️: For Snowplow BDP customers';
+}
+.enterprise.opensource a:hover::after {
+  content: '🏭 🛠️: Not available to BDP Cloud customers';
 }
 .opensource a:hover::after {
   content: '🛠️: For Snowplow Open Source users';

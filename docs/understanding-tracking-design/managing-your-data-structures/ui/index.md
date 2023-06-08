@@ -54,15 +54,15 @@ Once you are happy with your changes, click **'Validate'** to ensure you have va
 
 The versioning modal dialog will appear, at this point you have three options:
 
-- Increment a minor version to indicate a non-breaking change to the schema. In our example, we would increment the schema to from `1-0-1` to `1-0-2`.
-- Increment a major version to indicate a breaking change to the schema. In our example, we would increment the schema from `1-0-1` to `2-0-0`.
-- Patch the current version, this will overwrite the existing schema without increasing the version. In our example, we would leave the schema at 1-0-1.
+- Increment a minor version to indicate a non-breaking change to the schema. In our example, this would increment the schema to from `1-0-1` to `1-0-2`.
+- Increment a major version to indicate a breaking change to the schema. In our example, this would increment the schema from `1-0-1` to `2-0-0`.
+- [Patch the current version](/docs/understanding-tracking-design/versioning-your-data-structures/amending/index.md#patching-the-schema), this will overwrite the existing schema without increasing the version. In our example, this would leave the schema at 1-0-1.
 
-Warning: Versioning existing Data Structures with patches
+:::caution Selecting the “patch” option
 
-When you create a new Data Structure we generally recommend you patch at version 1-0-0 until you are ready to make your first deploy to Production.
+Patching can be useful in development environments, but should be done carefully and should never be done in production. See [amending schemas](/docs/understanding-tracking-design/versioning-your-data-structures/amending/index.md) for an explanation and some suggestions.
 
-Once you have version 1-0-0 in Production we then advise against patching as a versioning strategy. When deploying a subsequent iteration to Production you will be forced to increment the version.
+:::
 
 For more information see [Versioning your data structures](/docs/understanding-tracking-design/versioning-your-data-structures/index.md).
 
@@ -80,9 +80,11 @@ So far we have learned how to create a new schema, and how to edit an existing s
 
 Once you are happy with your changes you will want to promote these changes to your production environment.
 
-Note
+:::note
 
 The action of promoting data structures is only available to Admin users.
+
+:::
 
 Navigate to **Data Structures** and locate the Data Structure you wish to promote. You can more easily find your Data Structure by:
 
@@ -118,12 +120,14 @@ Once located either click on the name to view the Data Structure and then click 
 
 Follow the modal instructions to confirm the action.
 
-Note
+:::note
 
 Hiding a Data Structure will not remove it from the registry, it simply hides it from the console listing, this means:
 
 (1) events can still be sent against this structure  
 (2) you cannot create a new structure of the same name
+
+:::
 
 ### Restoring a hidden Data Structure
 

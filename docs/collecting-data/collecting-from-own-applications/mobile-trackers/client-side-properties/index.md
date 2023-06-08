@@ -56,9 +56,9 @@ The tracker provides anonymous tracking functionality to mask certain user ident
 
 All enriched Snowplow events contain values for `user_ipaddress`, `useragent`, and `network_userid`. 
 
-The `user_ipaddress` is automatically added to all enriched events (unless [anonymous tracking with server anonymisation](../anonymous-tracking/index.md) is enabled). To manually override this, use a `Subject` and set an `ipAddress` string; use an empty string to prevent IP address tracking. Alternatively, use the [IP anonymization enrichment](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/).
+The `user_ipaddress` is automatically added to all enriched events (unless [anonymous tracking with server anonymisation](../anonymous-tracking/index.md) is enabled). To manually override this, use a `Subject` and set an `ipAddress` string; use an empty string to prevent IP address tracking. Alternatively, use the [IP anonymization enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md).
 
-The `useragent` is also automatically added but it can be overriden on configuration. Snowplow pipelines provide multiple useragent-parsing [enrichments](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/). To manually override the detected useragent, use a `Subject` and set a `useragent` string.
+The `useragent` is also automatically added but it can be overriden on configuration. Snowplow pipelines provide multiple useragent-parsing [enrichments](/docs/enriching-your-data/available-enrichments/index.md). To manually override the detected useragent, use a `Subject` and set a `useragent` string.
 
 The `network_userid` is the cookie value for the event collector's third-party cookie. The cookie is named `sp` (or `micro` for Snowplow Micro pipelines). To override the collector cookie’s value with your own generated ID, use a `Subject` object and set `networkUserId`.
 

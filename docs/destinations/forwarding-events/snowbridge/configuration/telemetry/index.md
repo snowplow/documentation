@@ -6,7 +6,7 @@ sidebar_position: 500
 
 # Telemetry Configuration
 
-You can read about our telemetry principles [here](https://docs.snowplow.io/docs/getting-started-on-snowplow-open-source/telemetry/).
+You can read about our telemetry principles [here](/docs/getting-started-on-snowplow-open-source/telemetry/index.md).
 
 ## Configuration via file:
 

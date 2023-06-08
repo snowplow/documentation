@@ -1,6 +1,6 @@
 ---
 title: "Advanced Operation"
-date: '2022-10-05'
+description: "Information for power user operation of the packages."
 sidebar_position: 999
 ---
 ```mdx-code-block

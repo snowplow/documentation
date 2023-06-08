@@ -1,6 +1,6 @@
 ---
 title: "Duplicates"
-date: "2022-10-05"
+description: "How we deal with duplicate events in our packages."
 sidebar_position: 200
 ---
 ```mdx-code-block

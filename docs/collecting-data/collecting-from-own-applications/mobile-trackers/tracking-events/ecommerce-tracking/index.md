@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 :::note
 Snowplow ecommerce tracking is currently available for Android (and web) only. Stay tuned for the iOS release.
 
-With the addition of these Snowplow ecommerce events and entities, we have deprecated the original `EcommerceTransaction` and `EcommerceTransactionItem` events.
+With the addition of these Snowplow ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events.
 :::
 
 The Snowplow ecommerce tracking APIs enable you to track events from your ecommerce store on the web ([Javascript](docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/index.md) and [browser](docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/plugins/snowplow-ecommerce/index.md) trackers) as well as mobile apps. For the web, a complete setup journey, including data modeling, is showcased on the [Ecommerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).
@@ -59,7 +59,7 @@ tracker.track(event);
 </Tabs>
 
 
-Older out-of-the-box Snowplow event types provide builder methods, reflecting the Android tracker's Java heritage. Now that the tracker is fully Kotlin, we have instead set all ecommerce event/entity properties as `var` for flexible construction. For example, adding data to a Promotion object: 
+Older out-of-the-box Snowplow event types provide builder methods, reflecting the Android tracker's Java heritage. Now that the tracker is written in Kotlin, we have provided similar functionality by setting all ecommerce event/entity properties as `var`. For example, adding data to a Promotion object: 
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

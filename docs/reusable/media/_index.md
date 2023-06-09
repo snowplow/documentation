@@ -249,7 +249,7 @@ startMediaTracking({
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
-{`let player = MediaPlayer()
+{`let player = MediaPlayerEntity()
     .currentTime(0) // The current playback time
     .duration(150.0) // A double-precision floating-point value indicating the duration of the media in seconds
     .ended(false) // If playback of the media has ended
@@ -643,7 +643,7 @@ updateMediaTracking({
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
-{`mediaTracking.update(player: MediaPlayer().currentTime(10.0))`}
+{`mediaTracking.update(player: MediaPlayerEntity().currentTime(10.0))`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
@@ -688,7 +688,7 @@ trackMediaSeekEnd({
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
-{`mediaTracking.track(MediaSeekEndEvent(), media: MediaPlayer().currentTime(30.0))`}
+{`mediaTracking.track(MediaSeekEndEvent(), media: MediaPlayerEntity().currentTime(30.0))`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
@@ -736,7 +736,7 @@ trackMediaAdStart({
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
-{`let ad = MediaAd(adId: "1234") // Unique identifier for the ad
+{`let ad = MediaAdEntity(adId: "1234") // Unique identifier for the ad
     .name("Podcast Ad") // Friendly name of the ad
     .creativeId("4321") // The ID of the ad creative
     .duration(15) // Length of the video ad in seconds
@@ -790,7 +790,7 @@ trackMediaAdBreakStart({
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
-{`let adBreak = MediaAdBreak(breakId: "2345") // An identifier for the ad break
+{`let adBreak = MediaAdBreakEntity(breakId: "2345") // An identifier for the ad break
     .name("pre-roll") // Ad break name
     .podSize(2) // The number of ads to be played within the ad break
     .breakType(.linear) // Type of ads within the break

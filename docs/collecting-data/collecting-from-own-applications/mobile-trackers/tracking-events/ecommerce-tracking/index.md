@@ -10,17 +10,24 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
----
+The Snowplow ecommerce tracking APIs enable you to track events from your ecommerce store on the Web as well as mobile apps.
 
-Using the out-of-the-box Snowplow Ecommerce events and entities is the recommended way to track ecommerce events in your store. These events are also available for the Javascript/browser trackers, meaning that it's easy to use your website data together with mobile ecommerce data. Functions, usage and a complete setup journey, including data modeling, is showcased on the [E-commerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).
+:::note
+Snowplow ecommerce tracking is currently available for Android (and web) only. Stay tuned for an iOS release.
+:::
+
+The trackers provide a set of tracking APIs that enable you to (manually) track ecommerce activity. For the web, a complete setup journey, including data modeling, is showcased on the [Ecommerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).
 
 All Ecommerce events must be manually tracked: there is no Ecommerce auto-tracking.
 
-## Event types 
+
+<TOCInline toc={toc} maxHeadingLevel={4} />
+
+## Ecommerce events
 
 `Event`            | Used for
 -------------------|-----------------------------------------------------------------------------------------------------------------------------------------------
-`ProductView`      | Tracking a visit to a product page. Known also as product detail view.
+`ProductView`      | Tracking a visit to a product page. Also known as product detail view.
 `AddToCart`        | Track an addition to cart.
 `RemoveFromCart`   | Track a removal from cart.
 `ProductListView`  | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.
@@ -31,27 +38,9 @@ All Ecommerce events must be manually tracked: there is no Ecommerce auto-tracki
 `Transaction`      | Track a transaction/purchase completion.
 `Refund`           | Track a transaction partial or complete refund.
 
+TODO currency ISO 4217
 
-`setPageType`           | Set a Page type context which would allow the analyst to discern between types of pages with ecommerce value. E.g. Category Page, Product Page, Cart Page, etc.
-`setEcommerceUser`      | Set a User type context with a few standard user attributes.
-
----
-
-The Snowplow ecommerce tracking APIs enable you to track events from your ecommerce store on the Web as well as mobile apps.
-
-The trackers provide a set of tracking APIs that enable you to (manually) track ecommerce activity. For the web, a complete setup journey, including data modeling, is showcased on the [E-commerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).
-
-
-<TOCInline toc={toc} maxHeadingLevel={4} />
-
-## Tracked events and entities
-
-The ecommerce tracking works with a set of out-of-the-box event and entity schemas.
-<!-- Additionally, you can track custom entities along with the events. -->
-
-### Ecommerce events
-
-Each ecommerce event is a self-describing event with a single schema, 
+Each ecommerce event is a TODO self-describing event with a single schema, 
 `iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-1`.
 
 <details>
@@ -63,16 +52,14 @@ Each ecommerce event is a self-describing event with a single schema,
 | name        | N        | string      | For `ProductListView` and `ProductListClick` events: human-readable list name |
 </details>
 
-The events are distinguished by their `type` property, which is different for each `Event` class tracked. Aside from list `name` in the `ProductListView` and `ProductListClick` events, all tracked ecommerce properties are tracked as entities.
+The events are distinguished by their `type` property, which is different for each `Event` class tracked. Aside from the optional list `name` in the `ProductListView` and `ProductListClick` events, all tracked ecommerce properties are tracked as entities.
 
-TODO currency ISO 4217
-
-<!-- You can see the schemas listed under the event tracking methods below. -->
+## Ecommerce entities
 
 ### Product entity
 
 The product entity is used in several ecommerce events.
-It contains information about the product(s) the user is interacting with.
+It contains information about the product the user is interacting with.
 
 <details>
     <summary>Product entity properties</summary>
@@ -166,4 +153,153 @@ The transaction entity is used for `Transaction` events.
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0`.
 
+### Refund entity
 
+The refund entity is used for `Refund` events.
+
+<details>
+    <summary>Refund entity properties</summary>
+
+| Request Key   | Required | Type/Format | Description                                   |
+|---------------|----------|-------------|-----------------------------------------------|
+| transactionId | Y        | string      | The identifier from the original transaction. |
+| refundAmount  | Y        | number      | Amount to be refunded.                        |
+| currency      | Y        | string      | Currency used in transaction.                 |
+| refundReason  | N        | string      | Reason for the refund.                        |
+
+</details>
+
+*Schema:*
+`iglu:com.snowplowanalytics.snowplow.ecommerce/refund/jsonschema/1-0-0`.
+
+### Promotion entity
+
+The promotion entity is used for `PromotionView` and `PromotionClick` events.
+
+<details>
+    <summary>Promotion entity properties</summary>
+
+| Request Key | Required | Type/Format     | Description                                        |
+|-------------|----------|-----------------|----------------------------------------------------|
+| id          | Y        | string          | The unique promotion identifier.                   |
+| name        | N        | string          | Promotion name.                                    |
+| productIds  | N        | list of strings | IDs of products in the promotion.                  |
+| position    | N        | integer         | Index of the promotion in a list such as a banner. |
+| creativeId  | N        | string          | Identifier for the promotion creative.             |
+| type        | N        | string          | Type of promotion.                                 |
+| slot        | N        | string          | Where the promotion was displayed.                 |
+
+</details>
+
+*Schema:*
+`iglu:com.snowplowanalytics.snowplow.ecommerce/promotion/jsonschema/1-0-0`.
+
+## Global ecommerce entities Screen and User
+
+Use these APIs to add ecommerce context information to every subsequent event tracked - including non-ecommerce events.
+
+### EcommerceUser entity
+
+To set an Ecommerce User entity you can use the `setEcommerceUser` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+Coming soon!
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+Snowplow.tracker.ecommerce.setEcommerceUser("userId12345")
+
+// setting EcommerceUser again will replace the original entity
+Snowplow.tracker.ecommerce.setEcommerceUser("userId67890")
+
+// remove the saved properties and stop the User entity being added
+Snowplow.tracker.ecommerce.removeEcommerceUser()
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+Snowplow.getDefaultTracker().getEcommerce().setEcommerceUser("userId12345")
+
+// setting ScreenType again will replace the original entity
+Snowplow.getDefaultTracker().getEcommerce().setEcommerceUser("userId67890")
+
+// remove the saved properties and stop the Page entity being added
+Snowplow.getDefaultTracker().getEcommerce().removeEcommerceUser()
+```
+
+  </TabItem>
+</Tabs>
+
+<details>
+    <summary>User entity properties</summary>
+
+| Request Key | Required | Type/Format | Description                  |
+|-------------|----------|-------------|------------------------------|
+| id          | Y        | string      | The unique user identifier.  |
+| isGuest     | N        | boolean     | Whether the user is a guest. |
+| email       | N        | string      | User email address.          |
+
+</details>
+
+*Schema:*
+`iglu:com.snowplowanalytics.snowplow.ecommerce/user/jsonschema/1-0-0`.
+
+### ScreenType
+
+Note that the `setScreenType` method adds a `Page` (rather than `Screen`) entity to all events, to be consistent with web tracking.
+
+To set a Page entity you can use the `setScreenType` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+Coming soon!
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+Snowplow.tracker.ecommerce.setScreenType("demo_app_screen")
+
+// setting ScreenType again will replace the original entity
+Snowplow.tracker.ecommerce.setScreenType("product_list", "EN-GB", "UK")
+
+// remove the saved properties and stop the Page entity being added
+Snowplow.tracker.ecommerce.removeScreenType()
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+Snowplow.getDefaultTracker().getEcommerce().setScreenType("demo_app_screen")
+
+// setting ScreenType again will replace the original entity
+Snowplow.getDefaultTracker().getEcommerce().setScreenType("product_list", "EN-GB", "UK")
+
+// remove the saved properties and stop the Page entity being added
+Snowplow.getDefaultTracker().getEcommerce().removeScreenType()
+```
+
+  </TabItem>
+</Tabs>
+
+<details>
+    <summary>Page entity properties</summary>
+
+| Request Key | Required | Type/Format | Description                   |
+|-------------|----------|-------------|-------------------------------|
+| type        | Y        | string      | Type of screen.               |
+| language    | N        | string      | Language used for the screen. |
+| locale      | N        | string      | Locale version. |
+
+</details>
+
+*Schema:*
+`iglu:com.snowplowanalytics.snowplow.ecommerce/page/jsonschema/1-0-0`.

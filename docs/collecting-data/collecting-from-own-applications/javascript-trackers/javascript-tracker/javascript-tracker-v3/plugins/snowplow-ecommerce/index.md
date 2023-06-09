@@ -302,7 +302,7 @@ To set a Page type context you can use the `setPageType` method with the followi
 window.snowplow("setPageType:{trackerName}", { type, language, locale });
 ```
 
-After setting the Page context, it will getting attached to every consecutive Snowplow event.
+After setting the Page context, it will be attached to every subsequent Snowplow event.
 
 ### setEcommerceUser
 
@@ -312,7 +312,7 @@ To set an Ecommerce User context you can use the `setEcommerceUser` method with 
 window.snowplow("setEcommerceUser:{trackerName}", { id, is_guest, email });
 ```
 
-After setting the Page context, it will getting attached to every consecutive Snowplow event.
+After setting the Page context, it will be attached to every subsequent Snowplow event.
 
 ## Entities
 

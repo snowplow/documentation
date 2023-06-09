@@ -52,9 +52,9 @@ This model consists of a series of modules, each producing a table which serves 
 
 ## Overridable Macros
 
-- `filter_bots(table_alias)`: used to define the filter to remove bot events from events processed by the package. Of the form `and <condition>`
-- `channel_group_query()`: defines the channel a user arrived at using various fields, populates the `default_channel_group` field. Must be a valid sql `select` object e.g. a complete `case when` statement. 
-- `engaged_session()`: defines if a session was engaged or not, populates the `is_engaged` field. Must return `true` or `false` and be a valid sql `select` object e.g. a complete `case when` statement.
+- `filter_bots(table_alias)`[source](https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/filter_bots.sql): used to define the filter to remove bot events from events processed by the package. Of the form `and <condition>`
+- `channel_group_query()`[source](https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/channel_group_query.sql): defines the channel a user arrived at using various fields, populates the `default_channel_group` field. Must be a valid sql `select` object e.g. a complete `case when` statement. 
+- `engaged_session()`[source](https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/engaged_session.sql): defines if a session was engaged or not, populates the `is_engaged` field. Must return `true` or `false` and be a valid sql `select` object e.g. a complete `case when` statement.
 
 ## Engaged vs. Absolute Time
 At a page view- and session-level we provide two measures of time; **absolute**, how long a user had the page open, and **engaged**, how much of that time the user was on the page. Engaged time is often a large predictor of a customer conversion, such as a purchase or a sign-up, whatever that may be in your domain.

@@ -585,9 +585,13 @@ The promotion entity is used for `PromotionView` and `PromotionClick` events.
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.ecommerce/promotion/jsonschema/1-0-0`.
 
-## Global ecommerce entities Page (Screen) and User
+## Global ecommerce entities Screen/Page and User
 
-Use these APIs to add ecommerce context information to every subsequent event tracked - including non-ecommerce events.
+Use these APIs to add ecommerce context information to every subsequent event tracked.
+
+:::note
+These entities will be added to **all** events, not just ecommerce ones.
+:::
 
 ### EcommerceUser entity
 
@@ -641,13 +645,13 @@ Snowplow.getDefaultTracker().getEcommerce().removeEcommerceUser();
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.ecommerce/user/jsonschema/1-0-0`.
 
-### PageType entity
+### EcommerceScreen (Page) entity
 
-Track information about the current screen for use as part of ecommerce modeling. 
+:::note
+The `setEcommerceScreen` method adds a `Page` (rather than `Screen`) entity to all events, for consistency with web tracking.
+:::
 
-This entity was originally designed for web, hence the name Page rather than Screen. We have kept the web API for consistency, and for simplicity in data modeling. 
-
-To set a Page entity you can use the `setPageType` method:
+To set a Page entity you can use the `setScreenType` method:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -658,39 +662,39 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-Snowplow.defaultTracker?.ecommerce.setPageType("demo_app_screen")
+Snowplow.defaultTracker?.ecommerce.setEcommerceScreen("demo_app_screen")
 
-// setting PageType again will replace the original entity
-Snowplow.defaultTracker?.ecommerce.setPageType("product_list", "EN-GB", "UK")
+// setting EcommerceScreen again will replace the original entity
+Snowplow.defaultTracker?.ecommerce.setEcommerceScreen("product_list", "EN-GB", "UK")
 
 // remove the saved properties and stop the Page entity being added
-Snowplow.defaultTracker?.ecommerce.removePageType()
+Snowplow.defaultTracker?.ecommerce.removeEcommerceScreen()
 ```
 
   </TabItem>
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Snowplow.getDefaultTracker().getEcommerce().setPageType("demo_app_screen");
+Snowplow.getDefaultTracker().getEcommerce().setEcommerceScreen("demo_app_screen");
 
-// setting PageType again will replace the original entity
-Snowplow.getDefaultTracker().getEcommerce().setPageType("product_list", "EN-GB", "UK");
+// setting EcommerceScreen again will replace the original entity
+Snowplow.getDefaultTracker().getEcommerce().setEcommerceScreen("product_list", "EN-GB", "UK");
 
 // remove the saved properties and stop the Page entity being added
-Snowplow.getDefaultTracker().getEcommerce().removePageType();
+Snowplow.getDefaultTracker().getEcommerce().removeEcommerceScreen();
 ```
 
   </TabItem>
 </Tabs>
 
 <details>
-    <summary>Page entity properties</summary>
+    <summary>Screen/Page entity properties</summary>
 
 | Request Key | Required | Type/Format | Description                   |
 |-------------|----------|-------------|-------------------------------|
 | type        | Y        | string      | Type of screen.               |
 | language    | N        | string      | Language used for the screen. |
-| locale      | N        | string      | Locale version.               |
+| locale      | N        | string      | Locale version. |
 
 </details>
 

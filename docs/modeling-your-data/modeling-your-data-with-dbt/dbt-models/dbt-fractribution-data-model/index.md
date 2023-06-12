@@ -40,7 +40,7 @@ This package consists of a series of dbt models that produce the following table
 - `snowplow_fractribution_sessions_by_customer_id`: Channel information by session timestamp, where an event timestamp is considered as the session start
 ​
 
-Once the models are generated, the next step is to run a python script which is included in the package to run the attribution calculations. In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) section you will find a step-by-step guide on how to operate the package as a whole.
+Once the models are generated, the next step is to run a python script which is included in the package to run the attribution calculations. You can run this locally, via a docker image, or using Snowpark if you are on Snowflake. In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) section you will find a step-by-step guide on how to operate the package as a whole.
 
 This script will generate and populate the following three additional tables:
 
@@ -123,6 +123,15 @@ For the python script only (for Docker you mount this as a volume at run time):
 - `snowflake_warehouse`: Snowflake warehouse
 - `snowflake_database`: Snowflake database
 - `snowflake_schema`: Schema for your derived tables
+
+</TabItem>
+<TabItem value="redshift" label="Redshift">
+
+- `redshift_host`: Redshift host url
+- `redshift_database`: Redshift database
+- `redshift_port`: Redshift port (likely `5439`) 
+- `redshift_user`: Redshift user
+- `redshift_password`: Redshift password
 
 </TabItem>
 </Tabs>

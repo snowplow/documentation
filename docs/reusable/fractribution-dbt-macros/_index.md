@@ -1,4 +1,14 @@
 
+:::tip
+
+To overwrite these macros correctly with those in your project, ensure you prefix the macro name by `default__` in the definition e.g.
+```jinja2
+{% macro default__conversion_value() %}
+    tr_total/100
+{% endmacro %}
+```
+:::
+
 #### `conversion_clause` macro
 
 > The [`conversion_clause`](https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/conversion_clause.sql) macro specifies how to filter Snowplow events to only succesfful conversion events. How this is filtered will depend on your definition of a conversion. The default is filtering to events where `tr_total > 0`, but this could instead filter on `event_name = 'checkout'`, for example. If you are using the e-commerce model, you will still need to set this for the fractribution code to run (even though *all* events are conversions in the e-commerce model), in this case change it to `transaction_revenue > 0`.

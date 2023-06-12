@@ -38,6 +38,19 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `conversion_hosts`               | `url_hosts` to filter to in the data processing                                                                                                                                      | `[a.com]` |
 | `consider_intrasession_channels` | If `false`, only considers the channel at the start of the session (i.e. first page view). If `true`, considers multiple channels in the conversion session as well as historically. | `false`   |
 
+### Warehouse Specific 
+
+<Tabs groupId="warehouse" queryString>
+<TabItem value="snowflake" label="Snowflake" default>
+
+| Variable Name | Description                                                                                                                                                                    | Default        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
+| `run_python_script_in_snowpark`   | A flag for if you wish to run the python scripts using Snowpark. | `false` |
+| `attribution_model_for_snowpark`   | The attribution model to use for Snowpark running, one of `shapley`, `first_touch`, `last_touch`, `position_based`, `linear`. See the [package docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#attribution-models) for more information. | `shapley` |
+
+</TabItem>
+</Tabs>
+
 ## Output Schemas
 ```mdx-code-block
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md"

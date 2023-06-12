@@ -1,5 +1,5 @@
 ---
-title: "Consent Module"
+title: "Core Web Vitals Module"
 sidebar_position: 101
 hide_title: true
 ---
@@ -20,9 +20,9 @@ To enable this optional module, the web package must be correctly configured. Pl
 
 In order to use this module you would need to:
 
-1. track core web vitals using the web `Snowplow Web Vitals plugin` - unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1
-2. have `yauaa enrichment enabled` (for device type and device class) - contexts_com_snowplowanalytics_snowplow_yauaa_context_1
-3. have `spiders and bots enrichments enabled` - contexts_com_iab_snowplow_spiders_and_robots_1_0_0
+1. Track core web vitals using the web `Snowplow Web Vitals plugin`, which populates the column/table `unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1`
+2. Have the [yauaa enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) enabled (for device type and device class), which populates `contexts_com_snowplowanalytics_snowplow_yauaa_context_1`
+3. Have the [spiders and bots](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) enrichment enabled, which populates `contexts_com_iab_snowplow_spiders_and_robots_1`
 
 ## Overview
 
@@ -40,7 +40,7 @@ It is assumed that the dbt_snowplow_web package is already installed and configu
 
 ### Enable the module
 
-You can enable the custom module through the `snowplow__enable_cwv` variable most conveniently in your dbt_project.yml file:
+You can enable the custom module through the `snowplow__enable_cwv` variable in your dbt_project.yml file:
 
 ```yml
 # dbt_project.yml
@@ -50,15 +50,22 @@ vars:
     snowplow__enable_consent: true
 ```
 
-### Overwerite the module specific macros
+### Override the module specific macros
 
-- The `core_web_vital_page_groups()` macro is used to let the user classify their urls to specific page groups. It returns the sql to provide the classification (expected in the form of case when statements).
+:::tip
 
-- The `core_web_vital_results()` macro is used to let the user classify the tresholds to be applied for the measurements. It returns the sql to provide the logic for the evaluation based on user defined tresholds (expected in the form of case when statements).
+For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-advanced-operation/index.md#overriding-macros)
 
-Please make sure you equal the results you would like the measurements to pass to `good` due to the following logic that gets evaluated within *snowplow_web_vital_measurements*:
+:::
 
-```lcp_result = 'good' and fid_result = 'good' and cls_result = 'good' then 1 else 0 end passed
+- The `core_web_vital_page_groups()`[source](https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/core_web_vital_page_groups.sql) macro is used to let the user classify their urls to specific page groups. It returns the sql to provide the classification (expected in the form of case when statements).
+
+- The `core_web_vital_results()`[source](https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/core_web_vital_results.sql) macro is used to let the user classify the tresholds to be applied for the measurements. It returns the sql to provide the logic for the evaluation based on user defined tresholds (expected in the form of case when statements).
+
+Please make sure you set the results you would like the measurements to pass to **`good`** due to the following logic that gets evaluated within *snowplow_web_vital_measurements*:
+
+```sql
+case when lcp_result = 'good' and fid_result = 'good' and cls_result = 'good' then 1 else 0 end passed
 ```
 
 ###  Run the module

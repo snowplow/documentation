@@ -45,29 +45,14 @@ It is assumed that the dbt_snowplow_web package is already installed and configu
 
 ### Enable the module
 
-To enable the custom module simply copy the following code snippet to your own dbt_project.yml file:
+You can enable the custom module through the `snowplow__enable_consent` variable most conveniently set in your dbt_project.yml file:
 
 ```yml
 # dbt_project.yml
 
-models:
+vars:
   snowplow_web:
-    optional_modules:
-      consent:
-        enabled: true
-        +schema: "derived"
-        +tags: ["snowplow_web_incremental", "derived"]
-        scratch:
-          +schema: "scratch"
-          +tags: "scratch"
-          bigquery:
-            enabled: "{{ target.type == 'bigquery' | as_bool() }}"
-          databricks:
-            enabled: "{{ target.type in ['databricks', 'spark'] | as_bool() }}"
-          default:
-            enabled: "{{ target.type in ['redshift', 'postgres'] | as_bool() }}"
-          snowflake:
-            enabled: "{{ target.type == 'snowflake' | as_bool() }}"
+    snowplow__enable_consent: true
 ```
 
 ###  Run the module

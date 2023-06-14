@@ -42,7 +42,7 @@ The Snowplow data table is designed to be immutable: the data in each line shoul
 
 ## Canonical event model
 
-The sections below go over the standard fields found in all Snowplow events.
+The sections below go over the standard fields found in all Snowplow events. We provide a `Source` for each field, however sometimes a field may have multiple sources e.g. a value originally set by a tracker but is overwritten by a later enrichment; in this case we have tended to classify this as the earliest source.
 
 ### Common fields (platform and event independent)
 
@@ -68,7 +68,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | `os_timezone` _(not available in BDP Cloud)_ | text      | Client operating system timezone                                                                                                                                               | No    | 'Europe/London'           | Tracking [Timezone Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/timezone/index.md) |
 | `derived_tstamp`                             | timestamp | Timestamp making allowance for inaccurate device clock                                                                                                                         | No    | '2013-11-26 00:02:04'     | Default Enrichment                                                                                                                                                        |
 | `true_tstamp`                                | timestamp | User-set "true timestamp" for the event                                                                                                                                        | No    | '2013-11-26 00:02:04'     | Tracking                                                                                                                                                                  |
-| `load_tstamp`                                | timestamp | Timestamp for when the data was loaded into the warehouse, best choice for incremental processing                                                                                                                                        | No    | '2013-11-26 00:02:04'     | Pipeline                                                                                                                                                                  |
+| `load_tstamp`                                | timestamp | Timestamp for when the data was loaded into the warehouse, best choice for incremental processing                                                                              | No    | '2013-11-26 00:02:04'     | Pipeline                                                                                                                                                                  |
 
 #### Event / transaction fields
 
@@ -108,49 +108,49 @@ Some Snowplow Trackers allow the user to name each specific Tracker instance. `n
 
 #### Device and operating system fields
 
-| Field                                        | Type | Description            | Reqd? | Example | Source           |
-| ------------------------------------------------ | -------- | -------------------------- | --------- | ----------- | -------------------- |
-| `useragent`                                      | text     | Raw useragent              | Yes       |             | Tracking or Pipeline |
-| `dvce_type` _(not available in BDP Cloud)_       | text     | Type of device             | No        | 'Computer'  | Deprecated           |
-| `dvce_ismobile` _(not available in BDP Cloud)_   | boolean  | Is the device mobile?      | No        | 1           | Deprecated           |
-| `dvce_screenheight`                              | int      | Screen height in pixels    | No        | 1024        | Tracking             |
-| `dvce_screenwidth`                               | int      | Screen width in pixels     | No        | 1900        | Tracking             |
-| `os_name` _(not available in BDP Cloud)_         | text     | Name of operating system   | No        | 'Android'   | Deprecated           |
-| `os_family` _(not available in BDP Cloud)_       | text     | Operating system family    | No        | 'Linux'     | Deprecated           |
-| `os_manufacturer` _(not available in BDP Cloud)_ | text     | Company responsible for OS | No        | 'Apple'     | Deprecated           |
+| Field                                            | Type    | Description                | Reqd? | Example    | Source               |
+| ------------------------------------------------ | ------- | -------------------------- | ----- | ---------- | -------------------- |
+| `useragent`                                      | text    | Raw useragent              | Yes   |            | Tracking or Pipeline |
+| `dvce_type` _(not available in BDP Cloud)_       | text    | Type of device             | No    | 'Computer' | Deprecated           |
+| `dvce_ismobile` _(not available in BDP Cloud)_   | boolean | Is the device mobile?      | No    | 1          | Deprecated           |
+| `dvce_screenheight`                              | int     | Screen height in pixels    | No    | 1024       | Tracking             |
+| `dvce_screenwidth`                               | int     | Screen width in pixels     | No    | 1900       | Tracking             |
+| `os_name` _(not available in BDP Cloud)_         | text    | Name of operating system   | No    | 'Android'  | Deprecated           |
+| `os_family` _(not available in BDP Cloud)_       | text    | Operating system family    | No    | 'Linux'    | Deprecated           |
+| `os_manufacturer` _(not available in BDP Cloud)_ | text    | Company responsible for OS | No    | 'Apple'    | Deprecated           |
 
 #### Location fields
 
-| Field         | Type | Description                                           | Reqd? | Example          | Source                                                                                     |
-| ----------------- | -------- | --------------------------------------------------------- | --------- | -------------------- | ---------------------------------------------------------------------------------------------- |
-| `geo_country`     | text     | ISO 3166-1 code for the country the visitor is located in | No        | 'GB', 'US'           | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `geo_region`      | text     | ISO-3166-2 code for country region the visitor is in      | No        | 'I9', 'TX'           | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `geo_city`        | text     | City the visitor is in                                    | No        | 'New York', 'London' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `geo_zipcode`     | text     | Postcode the visitor is in                                | No        | '94109'              | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `geo_latitude`    | text     | Visitor location latitude                                 | No        | 37.443604            | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `geo_longitude`   | text     | Visitor location longitude                                | No        | -122.4124            | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `geo_region_name` | text     | Visitor region name                                       | No        | 'Florida'            | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `geo_timezone`    | text     | Visitor timezone name                                     | No        | 'Europe/London'      | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| Field             | Type | Description                                               | Reqd? | Example              | Source                                                                                         |
+| ----------------- | ---- | --------------------------------------------------------- | ----- | -------------------- | ---------------------------------------------------------------------------------------------- |
+| `geo_country`     | text | ISO 3166-1 code for the country the visitor is located in | No    | 'GB', 'US'           | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `geo_region`      | text | ISO-3166-2 code for country region the visitor is in      | No    | 'I9', 'TX'           | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `geo_city`        | text | City the visitor is in                                    | No    | 'New York', 'London' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `geo_zipcode`     | text | Postcode the visitor is in                                | No    | '94109'              | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `geo_latitude`    | text | Visitor location latitude                                 | No    | 37.443604            | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `geo_longitude`   | text | Visitor location longitude                                | No    | -122.4124            | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `geo_region_name` | text | Visitor region name                                       | No    | 'Florida'            | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `geo_timezone`    | text | Visitor timezone name                                     | No    | 'Europe/London'      | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
 
 #### IP address-based fields
 
-| Field         | Type | Description                                                                               | Reqd? | Example          | Source                                                                                     |
-| ----------------- | -------- | --------------------------------------------------------------------------------------------- | --------- | -------------------- | ---------------------------------------------------------------------------------------------- |
-| `ip_isp`          | text     | Visitor's ISP                                                                                 | No        | 'FDN Communications' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `ip_organization` | text     | Organization associated with the visitor's IP address - defaults to ISP name if none is found | No        | 'Bouygues Telecom'   | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `ip_domain`       | text     | Second level domain name associated with the visitor's IP address                             | No        | 'nuvox.net'          | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
-| `ip_netspeed`     | text     | Visitor's connection type                                                                     | No        | 'Cable/DSL'          | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| Field             | Type | Description                                                                                   | Reqd? | Example              | Source                                                                                         |
+| ----------------- | ---- | --------------------------------------------------------------------------------------------- | ----- | -------------------- | ---------------------------------------------------------------------------------------------- |
+| `ip_isp`          | text | Visitor's ISP                                                                                 | No    | 'FDN Communications' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `ip_organization` | text | Organization associated with the visitor's IP address - defaults to ISP name if none is found | No    | 'Bouygues Telecom'   | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `ip_domain`       | text | Second level domain name associated with the visitor's IP address                             | No    | 'nuvox.net'          | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
+| `ip_netspeed`     | text | Visitor's connection type                                                                     | No    | 'Cable/DSL'          | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) |
 
 #### Metadata fields
 
 Fields containing information about the event type.
 
-| Field       | Type | Description         | Reqd? | Example  | Source |
-| --------------- | -------- | ----------------------- | --------- | ------------ | ---------- |
-| `event_vendor`  | text     | Who defined the event   | No        | 'com.acme'   | Tracking   |
-| `event_name`    | text     | Event name              | No        | 'link_click' | Tracking   |
-| `event_format`  | text     | Format for event        | No        | 'jsonschema' | Tracking   |
-| `event_version` | text     | Version of event schema | No        | '1-0-2'      | Tracking   |
+| Field           | Type | Description             | Reqd? | Example      | Source                          |
+| --------------- | ---- | ----------------------- | ----- | ------------ | ------------------------------- |
+| `event_vendor`  | text | Who defined the event   | Yes   | 'com.acme'   | Default Enrich (`event schema`) |
+| `event_name`    | text | Event name              | Yes   | 'link_click' | Default Enrich (`event schema`) |
+| `event_format`  | text | Format for event        | Yes   | 'jsonschema' | Default Enrich (`event schema`) |
+| `event_version` | text | Version of event schema | Yes   | '1-0-2'      | Default Enrich (`event schema`) |
 
 ### Platform-specific fields
 
@@ -159,15 +159,15 @@ Fields containing information about the event type.
 | Field                                                     | Type      | Description                                                                | Reqd? | Example                                                        | Source                                                                                                                      |
 | --------------------------------------------------------- | --------- | -------------------------------------------------------------------------- | ----- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | **Page fields**                                           |           |                                                                            |       |                                                                |                                                                                                                             |
-| `page_url`                                                | text      | The page URL                                                               | Yes   | 'http://www.example.com'                                       | Tracking(`web_page` context)                                                                                                |
+| `page_url`                                                | text      | The page URL                                                               | Yes   | 'http://www.example.com'                                       | Tracking                                                                                                                    |
 | `page_urlscheme`                                          | text      | Scheme aka protocol                                                        | Yes   | 'https'                                                        | Default Enrichment (`url`)                                                                                                  |
 | `page_urlhost`                                            | text      | Host aka domain                                                            | Yes   | '“www.snowplowanalytics.com'                                   | Default Enrichment (`url`)                                                                                                  |
 | `page_urlport`                                            | int       | Port if specified, 80 if not                                               | 80    |                                                                | Default Enrichment (`url`)                                                                                                  |
 | `page_urlpath`                                            | text      | Path to page                                                               | No    | '/product/index.html'                                          | Default Enrichment (`url`)                                                                                                  |
 | `page_urlquery`                                           | text      | Querystring                                                                | No    | 'id=GTM-DLRG'                                                  | Default Enrichment (`url`)                                                                                                  |
 | `page_urlfragment`                                        | text      | Fragment aka anchor                                                        | No    | '4-conclusion'                                                 | Default Enrichment (`url`)                                                                                                  |
-| `page_referrer`                                           | text      | URL of the referrer                                                        | No    | 'http://www.referrer.com'                                      | Tracking(`web_page` context)                                                                                                |
-| `page_title`                                              | text      | Web page title                                                             | No    | 'Snowplow Docs - Understanding the structure of Snowplow data' | Tracking(`web_page` context)                                                                                                |
+| `page_referrer`                                           | text      | URL of the referrer                                                        | No    | 'http://www.referrer.com'                                      | Tracking                                                                                                                    |
+| `page_title`                                              | text      | Web page title                                                             | No    | 'Snowplow Docs - Understanding the structure of Snowplow data' | Tracking                                                                                                                    |
 | `refr_urlscheme`                                          | text      | Referrer scheme                                                            | No    | 'http'                                                         | ??? Default Enrichment (`url`)                                                                                              |
 | `refr_urlhost`                                            | text      | Referrer host                                                              | No    | 'www.bing.com'                                                 | ??? Default Enrichment (`url`)                                                                                              |
 | `refr_urlport`                                            | int       | Referrer port                                                              | No    | 80                                                             | ??? Default Enrichment (`url`)                                                                                              |
@@ -177,8 +177,8 @@ Fields containing information about the event type.
 | `refr_medium`                                             | text      | Type of referrer                                                           | No    | 'search', 'internal'                                           | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)           |
 | `refr_source`                                             | text      | Name of referrer if recognized                                             | No    | 'Bing images'                                                  | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)           |
 | `refr_term`                                               | text      | Keywords if source is a search engine                                      | No    | 'psychic oracle cards'                                         | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)           |
-| `refr_domain_userid`                                      | text      | The Snowplow domain_userid of the referring website                        | No    | 'bc2e92ec6c204a14'                                             | ??? Default Enrichment (`cross_domain`)                                                                                     |
-| `refr_dvce_tstamp`                                        | timestamp | The time of attaching the domain_userid to the inbound link                | No    | '2013-11-26 00:02:05'                                          | ??? Default Enrichment (`cross_domain`)                                                                                     |
+| `refr_domain_userid`                                      | text      | The Snowplow domain_userid of the referring website                        | No    | 'bc2e92ec6c204a14'                                             | Default Enrichment (`cross_domain`)                                                                                         |
+| `refr_dvce_tstamp`                                        | timestamp | The time of attaching the domain_userid to the inbound link                | No    | '2013-11-26 00:02:05'                                          | Default Enrichment (`cross_domain`)                                                                                         |
 | **Document fields**                                       |           |                                                                            |       |                                                                |                                                                                                                             |
 | `doc_charset`                                             | text      | The page’s character encoding                                              | No    | , 'UTF-8'                                                      | Tracking                                                                                                                    |
 | `doc_width`                                               | int       | The page's width in pixels                                                 | No    | 1024                                                           | Tracking                                                                                                                    |
@@ -193,13 +193,12 @@ Fields containing information about the event type.
 | `mkt_network`                                             | text      | The ad network to which the click ID belongs                               | No    | 'DoubleClick'                                                  | [Campaign Attribution Enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) |
 | **Browser fields**                                        |           |                                                                            |       |                                                                |                                                                                                                             |
 | `user_fingerprint` _(not available in BDP Cloud)_         | int       | A user fingerprint generated by looking at the individual browser features | No    | 2161814971                                                     | Tracking (Deprecated)                                                                                                       |
-| `connection_type` _(not available in BDP Cloud)_          | text      | Type of internet connection                                                | No    | No                                                             | ???                                                                                                                         |
 | `br_name` _(not available in BDP Cloud)_                  | text      | Browser name                                                               | No    | 'Firefox 12'                                                   | Deprecated                                                                                                                  |
 | `br_version` _(not available in BDP Cloud)_               | text      | Browser version                                                            | No    | '12.0'                                                         | Deprecated                                                                                                                  |
 | `br_family` _(not available in BDP Cloud)_                | text      | Browser family                                                             | No    | 'Firefox'                                                      | Deprecated                                                                                                                  |
 | `br_type` _(not available in BDP Cloud)_                  | text      | Browser type                                                               | No    | 'Browser'                                                      | Deprecated                                                                                                                  |
 | `br_renderengine` _(not available in BDP Cloud)_          | text      | Browser rendering engine                                                   | No    | 'GECKO'                                                        | Deprecated                                                                                                                  |
-| `br_lang`                                                 | text      | Language the browser is set to                                             | No    | 'en-GB'                                                        | Tracking (`browser_features` context)                                                                                       |
+| `br_lang`                                                 | text      | Language the browser is set to                                             | No    | 'en-GB'                                                        | Tracking                                                                                                                    |
 | `br_features_pdf` _(not available in BDP Cloud)_          | boolean   | Whether the browser recognizes PDFs                                        | No    | 1                                                              | Tracking (`browser_features` context)                                                                                       |
 | `br_features_flash` _(not available in BDP Cloud)_        | boolean   | Whether Flash is installed                                                 | No    | 1                                                              | Tracking (`browser_features` context)                                                                                       |
 | `br_features_java` _(not available in BDP Cloud)_         | boolean   | Whether Java is installed                                                  | No    | 1                                                              | Tracking (`browser_features` context)                                                                                       |
@@ -210,9 +209,9 @@ Fields containing information about the event type.
 | `br_features_gears` _(not available in BDP Cloud)_        | boolean   | Whether Google Gears is installed                                          | No    | 1                                                              | Tracking (`browser_features` context)                                                                                       |
 | `br_features_silverlight` _(not available in BDP Cloud)_  | boolean   | Whether Microsoft Silverlight is installed                                 | No    | 1                                                              | Tracking (`browser_features` context)                                                                                       |
 | `br_cookies`                                              | boolean   | Whether cookies are enabled                                                | No    | 1                                                              | Tracking                                                                                                                    |
-| `br_colordepth`                                           | int       | Bit depth of the browser color palette                                     | No    | 24                                                             | Tracking (`browser_features` context)                                                                                       |
-| `br_viewheight`                                           | int       | Viewport height                                                            | No    | 1000                                                           | Tracking (`browser_features` context)                                                                                       |
-| `br_viewwidth`                                            | int       | Viewport width                                                             | No    | 1000                                                           | Tracking (`browser_features` context)                                                                                       |
+| `br_colordepth`                                           | int       | Bit depth of the browser color palette                                     | No    | 24                                                             | Tracking                                                                                                                    |
+| `br_viewheight`                                           | int       | Viewport height                                                            | No    | 1000                                                           | Tracking                                                                                                                    |
+| `br_viewwidth`                                            | int       | Viewport width                                                             | No    | 1000                                                           | Tracking                                                                                                                    |
 
 ### Event-specific fields
 
@@ -222,11 +221,11 @@ Note that to date, all event types have been defined by Snowplow. Also note that
 
 Snowplow currently supports the following event types:
 
-| Event type                                            | Value of `event` field in model  |
+| Event type                                                | Value of `event` field in model      |
 | --------------------------------------------------------- | ------------------------------------ |
 | [Page views](#page-views)                                 | 'page_view'                          |
 | [Page pings](#page-pings)                                 | 'page_ping'                          |
-| [E-commerce transactions](#ecommerce-transactions)        | 'transaction' and 'transaction_item' |
+| [E-commerce transactions](#e-commerce-transactions)        | 'transaction' and 'transaction_item' |
 | [Custom structured events](#custom-structured-events)     | 'struct'                             |
 | [Custom unstructured events](#custom-unstructured-events) | 'unstruct'                           |
 
@@ -241,12 +240,12 @@ There are currently no fields that are specific to `page_view` events: all the f
 
 There are four additional fields included with page pings that indicate how a user has scrolled over a web page since the last page ping:
 
-| Field        | Type | Description                                    | Reqd? | Example | 
-| ---------------- | -------- | -------------------------------------------------- | --------- | ----------- | 
-| `pp_xoffset_min` | integer  | Minimum page x offset seen in the last ping period | No        | 0           | 
-| `pp_xoffset_max` | integer  | Maximum page x offset seen in the last ping period | No        | 100         | 
-| `pp_yoffset_min` | integer  | Minimum page y offset seen in the last ping period | No        | 0           | 
-| `pp_yoffset_max` | integer  | Maximum page y offset seen in the last ping period | No        | 200         | 
+| Field            | Type    | Description                                        | Reqd? | Example |
+| ---------------- | ------- | -------------------------------------------------- | ----- | ------- |
+| `pp_xoffset_min` | integer | Minimum page x offset seen in the last ping period | No    | 0       |
+| `pp_xoffset_max` | integer | Maximum page x offset seen in the last ping period | No    | 100     |
+| `pp_yoffset_min` | integer | Minimum page y offset seen in the last ping period | No    | 0       |
+| `pp_yoffset_max` | integer | Maximum page y offset seen in the last ping period | No    | 200     |
 
 #### E-commerce transactions
 
@@ -254,29 +253,29 @@ There are a large number of fields specifically for transaction events.
 
 Fields that start `tr_` relate to the transaction as a whole. Fields that start `ti_` refer to the specific item included in the transaction. (E.g. a product in the basket.) Single transactions typically span multiple lines of data: there will be a single line where `event` = `transaction`, where the `tr_` fields are set, and multiple lines (one for each product included) where `event` = `transaction_item` and the `ti_` fields are set.
 
-| Field           | Type | Description                                            | Reqd? | Example     |
-| ------------------- | -------- | ---------------------------------------------------------- | --------- | --------------- |
-| `tr_orderid`        | text     | Order ID                                                   | Yes       | '#134'          |
-| `tr_affiliation`    | text     | Transaction affiliation (e.g. store where sale took place) | No        | 'web'           |
-| `tr_total`          | decimal  | Total transaction value                                    | Yes       | 12.99           |
-| `tr_tax`            | decimal  | Total tax included in transaction value                    | No        | 3.00            |
-| `tr_shipping`       | decimal  | Delivery cost charged                                      | No        | 0.00            |
-| `tr_total_base`*    | decimal  | Total in base currency                                     | No        | 12.99           |
-| `tr_tax_base`*      | decimal  | Total tax in base currency                                 | No        | 3.00            |
-| `tr_shipping_base`* | decimal  | Delivery cost in base currency                             | No        | 0.00            |
-| `tr_city`           | text     | Delivery address, city                                     | No        | 'London'        |
-| `tr_state`          | text     | Delivery address, state                                    | No        | 'Washington'    |
-| `tr_country`        | text     | Delivery address, country                                  | No        | 'France'        |
-| `tr_currency`       | text     | Currency                                                   | No        | 'USD'           |
-| `ti_orderid`        | text     | Order ID                                                   | Yes       | '#134'          |
-| `ti_sku`            | text     | Product SKU                                                | Yes       | 'pbz00123'      |
-| `ti_name`           | text     | Product name                                               | No        | 'Cone pendulum' |
-| `ti_category`       | text     | Product category                                           | No        | 'New Age'       |
-| `ti_price`          | decimal  | Product unit price                                         | Yes       | 9.99            |
-| `ti_price_base`*    | decimal  | Price in base currency                                     | No        | 9.99            |
-| `ti_quantity`       | integer  | Number of product in transaction                           | Yes       | 2               |
-| `ti_currency`       | text     | Currency                                                   | No        | 'EUR'           |
-| `base_currency`*    | text     | Reporting currency                                         | No        | 'GBP'           |
+| Field               | Type    | Description                                                | Reqd? | Example         |
+| ------------------- | ------- | ---------------------------------------------------------- | ----- | --------------- |
+| `tr_orderid`        | text    | Order ID                                                   | Yes   | '#134'          |
+| `tr_affiliation`    | text    | Transaction affiliation (e.g. store where sale took place) | No    | 'web'           |
+| `tr_total`          | decimal | Total transaction value                                    | Yes   | 12.99           |
+| `tr_tax`            | decimal | Total tax included in transaction value                    | No    | 3.00            |
+| `tr_shipping`       | decimal | Delivery cost charged                                      | No    | 0.00            |
+| `tr_total_base`*    | decimal | Total in base currency                                     | No    | 12.99           |
+| `tr_tax_base`*      | decimal | Total tax in base currency                                 | No    | 3.00            |
+| `tr_shipping_base`* | decimal | Delivery cost in base currency                             | No    | 0.00            |
+| `tr_city`           | text    | Delivery address, city                                     | No    | 'London'        |
+| `tr_state`          | text    | Delivery address, state                                    | No    | 'Washington'    |
+| `tr_country`        | text    | Delivery address, country                                  | No    | 'France'        |
+| `tr_currency`       | text    | Currency                                                   | No    | 'USD'           |
+| `ti_orderid`        | text    | Order ID                                                   | Yes   | '#134'          |
+| `ti_sku`            | text    | Product SKU                                                | Yes   | 'pbz00123'      |
+| `ti_name`           | text    | Product name                                               | No    | 'Cone pendulum' |
+| `ti_category`       | text    | Product category                                           | No    | 'New Age'       |
+| `ti_price`          | decimal | Product unit price                                         | Yes   | 9.99            |
+| `ti_price_base`*    | decimal | Price in base currency                                     | No    | 9.99            |
+| `ti_quantity`       | integer | Number of product in transaction                           | Yes   | 2               |
+| `ti_currency`       | text    | Currency                                                   | No    | 'EUR'           |
+| `base_currency`*    | text    | Reporting currency                                         | No    | 'GBP'           |
 
 \* Set exclusively by the [Currency conversion enrichment](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/index.md).
 
@@ -284,13 +283,13 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 
 If you wish to track an event that Snowplow does not recognize as a first class citizen (i.e. one of the events listed above), then you can track them using the generic 'custom structured events'. There are five fields that are available to store data related to custom events:
 
-| Field     | Type | Description                                                                                | Reqd? | Example                   |
-| ------------- | -------- | ---------------------------------------------------------------------------------------------- | --------- | ----------------------------- |
-| `se_category` | text     | Category of event                                                                              | Yes*       | 'ecomm', 'video'              |
-| `se_action`   | text     | Action performed / event name                                                                  | Yes*       | 'add-to-basket', 'play-video' |
-| `se_label`    | text     | The object of the action e.g. the ID of the video played or SKU of the product added-to-basket | No        | 'pbz00123'                    |
-| `se_property` | text     | A property associated with the object of the action                                            | No        | 'HD', 'large'                 |
-| `se_value`    | decimal  | A value associated with the event / action e.g. the value of goods added-to-basket             | No        | 9.99                          |
+| Field         | Type    | Description                                                                                    | Reqd? | Example                       |
+| ------------- | ------- | ---------------------------------------------------------------------------------------------- | ----- | ----------------------------- |
+| `se_category` | text    | Category of event                                                                              | Yes*  | 'ecomm', 'video'              |
+| `se_action`   | text    | Action performed / event name                                                                  | Yes*  | 'add-to-basket', 'play-video' |
+| `se_label`    | text    | The object of the action e.g. the ID of the video played or SKU of the product added-to-basket | No    | 'pbz00123'                    |
+| `se_property` | text    | A property associated with the object of the action                                            | No    | 'HD', 'large'                 |
+| `se_value`    | decimal | A value associated with the event / action e.g. the value of goods added-to-basket             | No    | 9.99                          |
 
 
 \* These fields are only required for `struct` events.
@@ -377,7 +376,7 @@ An event can have any number of custom entities attached. Each context is passed
 <Tabs groupId="warehouse" queryString>
 <TabItem value="rs/pg" label="Redshift/Postgres" default>
 
-Contexts are not part of the `atomic.events` table; instead, for users running on Redshift, Snowplow will shred each context JSON into a dedicated table in the `atomic` schema, making it much more efficient for analysts to query data passed in in any one of the contexts. Those contexts can be joined back to the core `atomic.events` table by the following, which is a one-to-one join or a one-to-many join.
+Contexts are not part of the `atomic.events` table; instead, for users running on Redshift, Snowplow will shred each context JSON into a dedicated table in the `atomic` schema, making it much more efficient for analysts to query data passed in in any one of the contexts. Those contexts can be joined back to the core `atomic.events` table by the following, which is a one-to-one join (for a single record entity) or a one-to-many join (for a multi-record entity), assuming no duplicates.
 
 ```sql
 select 
@@ -392,6 +391,79 @@ left join
 :::caution
 
 You may need to take care of duplicate events as Snowplow uses an _at least once_ method of delivery.
+
+<details>
+<summary>How to join your data with duplicates?</summary>
+
+The method to apply de-duplication depends on if the entity is used as a single record or may have contained multiple records, as in the latter case it is entirely possible that two of the records are identical, making de-duplication a more complex task.
+
+For single record entity the de-duplication simple requires the use of a row number over `event_id` to get each unique event:
+
+```sql
+with unique_events as (
+    select
+        ev.*,
+        row_number() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index
+    from 
+        atomic.events ev
+),
+
+unique_my_custom_context as (
+    select
+        ctx.*,
+        row_number() over (partition by a.root_id order by a.root_tstamp) as my_custom_context_index
+    from 
+        atomic.my_custom_context_table ctx
+)
+
+select 
+    ...
+from 
+    unique_events u_ev
+left join 
+    unique_my_custom_context u_ctx
+    on u_ctx.root_id = u_ev.event_id and u_ctx.root_tstamp = u_ev.collector_tstamp and u_ctx.my_custom_context_index = 1
+where
+    u_ev.event_id_dedupe_index = 1
+```
+
+For the case of a potential multiple-record entity we need to employ a slightly more complex logic.
+
+First de-duplicate the events table in the same way as with a single entity context, but we also keep the number of duplicates there were. In the entity table we generate a row number per unique combination of **all** fields in the record. A join is then made on `root_id` and `root_tstamp` as before, but with an **additional** clause that the row number is a multiple of the number of duplicates, to support the 1-to-many join. This ensures all duplicates are removed while retaining all original records of the entity. This may look like a weird join condition, but it works.
+
+Unfortunately listing all fields manually can be quite tedious, but we have added support for this in the [de-duplication logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/index.md#multiple-entity-contexts) of our dbt packages.
+
+```sql
+with unique_events as (
+    select
+        ev.*,
+        row_number() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index,
+    count(*) over (partition by a.event_id) as event_id_dedupe_count
+    from 
+        atomic.events ev
+),
+
+unique_my_custom_context as (
+    select
+        ctx.*,
+        row_number() over (partition by a.root_id, a.root_tstamp, ... /*all columns listed here for your context */ order by a.root_tstamp) as my_custom_context_index
+    from 
+        atomic.my_custom_context_table ctx
+)
+
+select 
+    ...
+from 
+    unique_events u_ev
+left join 
+    unique_my_custom_context u_ctx
+    on u_ctx.root_id = u_ev.event_id and u_ctx.root_tstamp = u_ev.collector_tstamp and mod(u_ctx.my_custom_context_index, u_ev.event_id_dedupe_count) 
+where
+    u_ev.event_id_dedupe_index = 1
+```
+
+</details>
+
 
 :::
 

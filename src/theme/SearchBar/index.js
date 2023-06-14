@@ -114,7 +114,11 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
   }).current
   const transformItems = useRef((items) => {
     refreshLinks()
-    return items.map((item) => {
+    return items.flatMap((item) => {
+      // Skip reference dbt docs pages
+      if (isRegexpStringMatch('.*modeling-your-data\/modeling-your-data-with-dbt\/reference.*', item.url)){
+        return []
+      }
       // If Algolia contains a external domain, we should navigate without
       // relative URL
       if (isRegexpStringMatch(externalUrlRegex, item.url)) {

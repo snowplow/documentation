@@ -36,11 +36,17 @@ Enabling this enrichment with the above configuration would fill the `refr_mediu
 
 This enrichment populates the following fields of the atomic event :
 
-| Field         | Purpose                                                              |
-|---------------|----------------------------------------------------------------------|
-| `refr_medium` | Type of referer. Examples : Search, Internal, Unknown, Social, Email |
-| `refr_source` | Name of referer if recognised. Examples: Google, Facebook            |
-| `refr_term`   | Keywords if source is a search engine                                |
+| Field              | Purpose                                                              |
+| ------------------ | -------------------------------------------------------------------- |
+| `refr_urlscheme`   | Referrer scheme e.g. `http`                                          |
+| `refr_urlhost`     | Referrer host e.g. `www.bing.com`                                    |
+| `refr_urlport`     | Referrer port e.g. `80`                                              |
+| `refr_urlpath`     | Referrer page path e.g. `/images/search`                             |
+| `refr_urlquery`    | Referrer URL querystring e.g. `q=psychic+oracle+cards`               |
+| `refr_urlfragment` | Referrer URL fragment                                                |
+| `refr_medium`      | Type of referer. Examples : Search, Internal, Unknown, Social, Email |
+| `refr_source`      | Name of referer if recognised. Examples: Google, Facebook            |
+| `refr_term`        | Keywords if source is a search engine                                |
 
 With this information in the data warehouse it's possible to get such insights:
 

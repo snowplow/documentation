@@ -688,7 +688,7 @@ trackMediaSeekEnd({
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
-{`mediaTracking.track(MediaSeekEndEvent(), media: MediaPlayer().currentTime(30.0)`}
+{`mediaTracking.track(MediaSeekEndEvent(), media: MediaPlayer().currentTime(30.0))`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">

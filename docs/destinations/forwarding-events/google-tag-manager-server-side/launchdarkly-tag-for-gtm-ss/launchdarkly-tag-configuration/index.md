@@ -22,9 +22,21 @@ This section allows you to select the Metric Type for this Tag. The options are:
 
 ![](images/02-authentication.png)
 
-### Client Side ID (Required)
+### Project Key (Required)
 
-In this text box you need to provide the [LaunchDarkly client-side ID](https://docs.launchdarkly.com/sdk/concepts/client-side-server-side#client-side-id) for the environment your metric events pertain to.
+In this text box you need to provide the key for the **project** your metric events pertain to. You can find it under Environments on the Projects tab on your LaunchDarkly Account settings page.
+
+### Environment Key (Required)
+
+In this text box you need to provide the key for the **environment** your metric events pertain to. You can find it under Environments on the Projects tab on your LaunchDarkly Account settings page.
+
+## Authorization
+
+![](images/02-authorization.png)
+
+### Access Token (Required)
+
+In this text box you need to provide the access token to be used for authorizing the requests to the LaunchDarkly API. This can be either a personal or service token. The access token must have a role that allows the `importEventData` environment action. It is strongly recommended to use a dedicated access token with this permission.
 
 ## Metric Options
 
@@ -44,24 +56,35 @@ Since the metric value needs to be a number (e.g. `10.0`), the Tag **will fail**
 
 In order to specify the common event property of interest, Key Path notation can be used (e.g. `x-sp-contexts_com_acme_transaction_1.0.total` to select the `total` value from an entity (at array index 0)) as your metric value.
 
-## User Options
+## Context Keys
+
+### User Options
 
 ![](images/04-user-options-default.png)
 
 This section allows you to configure how to populate the value of the user property that uniquely identifies the context that the LaunchDarkly metric is about.
 
-### User Value
+#### User Value
 
 With this drop-down option you can select how to derive the value for the `user` in your `contextKeys`. The available options are:
 
 1. **Common User ID** (default): Using this option the Tag will populate the `user` from the `user_id` property of the common event.
 2. **Custom**: This option allows you to specify an alternative property of the event to be used. Selecting this option reveals the following text-box to specify which event property to use.
+3. **Do not populate**: Selecting this option will not populate `user` as a context key.
 
-### Event property for user context key
+#### Event property for user context key
 
 ![](images/05-user-value-custom.png)
 
-In this text box you can specify the Property Key from the GTM Event to use. You can use Key Path notation here if you want to denote a nested key (e.g. `x-sp-contexts_com_snowplowanalytics_snowplow_client_session_1.0.userId` to use the `userId` from the Snowplow client session entity (in array index 0)).
+This option is revealed if you have previously selected **Custom** as the option for the [User Value](#user-value). In this text box you can specify the Property Key from the GTM Event to use. You can use Key Path notation here if you want to denote a nested key (e.g. `x-sp-contexts_com_snowplowanalytics_snowplow_client_session_1.0.userId` to use the `userId` from the Snowplow client session entity (in array index 0)).
+
+### Other Context Keys
+
+![](images/05-other-context-keys.png)
+
+#### Context Keys to Add
+
+Using this table you can specify context keys depending on your experiment's [randomization units](https://docs.launchdarkly.com/home/creating-experiments/allocation#randomization-units).
 
 ## Advanced Event Settings
 

@@ -1,6 +1,7 @@
 ```mdx-code-block
 import CodeBlock from '@theme/CodeBlock';
 import TOCInline from '@theme/TOCInline';
+import Admonition from '@theme/Admonition';
 ```
 
 <!-- Note: Docusaurus mermaid theme does not yet support renderAsync required by the timeline diagram, so using a pre-built SVG -->
@@ -304,8 +305,17 @@ player.setVolume(100); // Volume level`}
 
 #### Media ping events
 
-Media ping events (not to be confused with page ping events, see below) are events sent in a regular interval while media tracking is active.
+Media ping events are events sent in a regular interval while media tracking is active.
 They inform about the current state of the media playback.
+
+<>{(props.tracker == 'js-browser' || props.tracker == 'js-tag') && (<>
+<Admonition type="info" title="Media pings vs page pings">
+  <p>
+    Media ping events are different events from the page ping events tracked by activity tracking in the tracker.
+    See the following section to read how page ping events are tracked during media playback.
+  </p>
+</Admonition>
+</>)}</>
 
 By default, ping events are sent every 30 seconds.
 This can be configured as follows:
@@ -683,12 +693,12 @@ The updated properties will apply for the current and all following events.
 {`import { trackMediaSeekEnd } from "@snowplow/browser-plugin-media";
 trackMediaSeekEnd({
     id,
-    media: { currentTime: 30.0 }
+    player: { currentTime: 30.0 }
 });`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
-{`mediaTracking.track(MediaSeekEndEvent(), media: MediaPlayerEntity().currentTime(30.0))`}
+{`mediaTracking.track(MediaSeekEndEvent(), player: MediaPlayerEntity().currentTime(30.0))`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">

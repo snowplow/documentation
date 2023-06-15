@@ -1,7 +1,7 @@
 ---
 title: "Advanced usage"
-sidebar_position: 4
-description: "How to fully configure Snowplow Micro and expose it to the world."
+sidebar_position: 5
+description: "How to configure more aspects of Snowplow Micro."
 ---
 
 ```mdx-code-block
@@ -10,6 +10,33 @@ import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+## Enabling HTTPS
+
+While in most cases HTTP is sufficient, you may want to enable HTTPS in Micro (for an example of when that’s useful, see [Locally resolving an existing domain name to Micro](/docs/getting-started-with-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro)).
+
+You will need an SSL/TLS certificate in [PKCS 12](https://en.wikipedia.org/wiki/PKCS_12) format (`.p12`). Pass your certificate file and its password to the container (using a [bind mount](https://docs.docker.com/storage/bind-mounts/) and an [environment variable](https://docs.docker.com/compose/environment-variables/)). Don’t forget to expose the HTTPS port (by default, 9543):
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 -p 9543:9543 \\
+  --mount type=bind,source=$(pwd)/my-certificate.p12,destination=/config/ssl-certificate.p12 \\
+  -e MICRO_SSL_CERT_PASSWORD=... \\
+  snowplow/snowplow-micro:${versions.snowplowMicro}`
+}</CodeBlock>
+
+:::note
+
+For the certificate, the path inside the container must be exactly `/config/ssl-certificate.p12`.
+
+:::
+
+You should see a message like this in the logs:
+
+```
+[INFO] com.snowplowanalytics.snowplow.micro.Main$ - HTTPS REST interface bound to /0.0.0.0:9543
+```
+
+As usual, you can change the ports to your liking (see [Running Micro](/docs/getting-started-with-micro/basic-usage/index.md#running)).
 
 ## Adding custom Iglu resolver configuration
 
@@ -38,7 +65,15 @@ curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
 
 ## Adding custom collector configuration
 
-If you’d like to tweak the [collector configuration](/docs/pipeline-components-and-applications/stream-collector/configure/index.md) inside Micro, you can bring your own configuration file (`micro.conf`).
+If you’d like to tweak the [collector configuration](/docs/pipeline-components-and-applications/stream-collector/configure/index.md) inside Micro, the simplest approach is to override individual settings. For example, to change the cookie name:
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 \\
+  snowplow/snowplow-micro:${versions.snowplowMicro} \\
+  -Dcollector.cookie.name=sp`
+}</CodeBlock>
+
+For more extensive changes, you can also bring your own configuration file (`micro.conf`).
 
 <details>
 <summary>Example</summary>
@@ -57,43 +92,3 @@ Pass your configuration file to the container (using a [bind mount](https://docs
   snowplow/snowplow-micro:${versions.snowplowMicro} \\
   --collector-config /config/micro.conf`
 }</CodeBlock>
-
-## Exposing Micro to the outside world
-
-Sometimes you might want to send events to Micro running on your machine from tracking code that isn’t running on your machine.
-
-In this case, you will need a publicly accessible URL for your Micro to point the tracker to.
-The easiest way to achieve it is with a tool like [ngrok](https://ngrok.com/) or [localtunnel](https://theboroer.github.io/localtunnel-www/).
-
-After running Micro as above, you just need to expose the port:
-
-<Tabs groupId="exposing-micro" queryString>
-  <TabItem value="ngrok" label="ngrok" default>
-
-[Sign up](https://dashboard.ngrok.com/signup), [download](https://ngrok.com/download) ngrok and follow the instructions to authenticate your client. Then run this command:
-
-```bash
-ngrok http 9090
-```
-
-You will see the publicly available URL in the output.
-
-  </TabItem>
-  <TabItem value="localtunnel" label="localtunnel">
-
-Install:
-
-```bash
-npm install -g localtunnel
-```
-
-Then run this command:
-
-```bash
-lt --port 9090
-```
-
-You will see the publicly available URL in the output. Before use, visit this URL in your web browser and click “Continue”.
-
-  </TabItem>
-</Tabs>

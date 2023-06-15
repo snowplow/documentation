@@ -33,10 +33,11 @@ let remoteConfig = RemoteConfiguration(
 
 // Default configuration used when the remote config is not accessible
 // Network, tracker, subject and sessionConfigurations can be provided
-let defaultNetworkConfig = NetworkConfiguration(
-  endpoint: "https://snowplow-collector-url.com", 
-  method: .post)
-let defaultConfig = [ConfigurationBundle(namespace: "defaultNamespace", networkConfiguration: defaultNetworkConfig)]
+let defaultNetworkConfig = NetworkConfiguration(endpoint: "https://snowplow-collector-url.com", method: .post)
+let bundle = ConfigurationBundle(namespace: "defaultNamespace", networkConfiguration: defaultNetworkConfig)
+bundle.trackerConfiguration = TrackerConfiguration(appId: "app-id")
+  .screenViewAutotracking(true)
+let defaultConfig = [bundle]
 
 // Optional callback for when the tracker reconfigures itself passing a list of active namespaces and the state of the configuration describing where it was fetched from
 let successCallback: ([String]?) -> Void = { namespaces, state in
@@ -44,7 +45,12 @@ let successCallback: ([String]?) -> Void = { namespaces, state in
 }
 
 // Set up tracker with remote configuration
-Snowplow.setup(remoteConfiguration: remoteConfig, defaultConfiguration: defaultConfig, onSuccess: successCallback)
+Snowplow.setup(
+  remoteConfiguration: remoteConfig,
+  defaultConfiguration: defaultConfig,
+  defaultConfigurationVersion: 1,
+  onSuccess: successCallback
+)
 ```
 
   </TabItem>
@@ -62,7 +68,10 @@ val defaultConfig: List<ConfigurationBundle> =
 
 // Set up tracker with remote configuration
 Snowplow.setup(
-    applicationContext, remoteConfig, defaultConfig
+  context = applicationContext,
+  remoteConfiguration = remoteConfig,
+  defaultBundles = defaultConfig,
+  defaultBundleVersion = 1
 ) { 
   // This optional callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
   configurationPair: Pair<List<String>, ConfigurationState?>? ->
@@ -85,7 +94,11 @@ NetworkConfiguration defaultNetworkConfig = new NetworkConfiguration("https://sn
 List<ConfigurationBundle> defaultConfig = Lists.listOf(new ConfigurationBundle("defaultNamespace", defaultNetworkConfig));
 
 // Set up tracker with remote configuration
-Snowplow.setup(getApplicationContext(), remoteConfig, defaultConfig, configurationPair -> {
+Snowplow.setup(getApplicationContext(),
+  remoteConfig,
+  defaultConfig,
+  1, // version of the default configuration
+  configurationPair -> {
   // This optional callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
   List<String> namespaces = configurationPair.first;
   ConfigurationState configurationState = configurationPair.second; // either cached, default or fetched from the remote endpoint
@@ -95,11 +108,31 @@ Snowplow.setup(getApplicationContext(), remoteConfig, defaultConfig, configurati
   </TabItem>
 </Tabs>
 
-On app startup, the Snowplow tracker initializer will attempt to download the remote configuration file. Meanwhile, it will initialize the tracker instance (or multiple tracker instances) based on the last cached configuration. The cached configuration is the last configuration downloaded remotely. If it's not available, the tracker initializer will spin up the default configuration passed as a parameter. Every time the initializer successfully initializes the tracker instances it calls a callback passing the list of activated namespaces and the state of the configuration which represents the source where the configuration was retrieved from (using default values, cache, or fetched from the remote endpoint). The callback can be used for last minute settings at runtime once the tracker has been instanced.
+On app startup, the Snowplow tracker initializer will attempt to download the remote configuration file.
+Meanwhile, it will initialize the tracker instance (or multiple tracker instances) based on the last cached configuration.
+The cached configuration is the last configuration downloaded remotely.
+If it's not available, the tracker initializer will spin up the default configuration passed as a parameter.
 
-The `defaultConfiguration` parameter takes a list of `ConfigurationBundle` objects. Each one represents a tracker instance and it's own configuration. Each tracker instance is identified by a `namespace` which is a parameter required in each `ConfigurationBundle`.
+Every time the initializer successfully initializes the tracker instances it calls a callback passing the list of activated namespaces and the state of the configuration which represents the source where the configuration was retrieved from (using default values, cache, or fetched from the remote endpoint).
+The callback can be used for last minute settings at runtime once the tracker has been instanced.
 
-The optional `onSuccess` callback is called for each successful configuration. For example, if the tracker has a cached configuration and it's downloading a new configuration, first the `onSuccess` callback will be called for the cached configuration and then it will be called when the downloaded configuration is applied. When it happens the cached configuration is substituted with the downloaded one.
+## Default configuration
+
+The default configuration will be used right after calling the `setup()` method in case there is no cached configuration (one that was fetched from the remote endpoint and stored in a cache file).
+
+The `defaultConfiguration` parameter takes a list of `ConfigurationBundle` objects.
+Each one represents a tracker instance and it's own configuration.
+Each tracker instance is identified by a `namespace` which is a parameter required in each `ConfigurationBundle`.
+
+The optional `defaultConfigurationVersion` parameter specifies the version of the default configuration.
+If the fetched remote configuration has version lower or equal to the default configuration, it will not be used.
+
+## On success callback
+
+The optional `onSuccess` callback is called for each successful configuration.
+
+For example, if the tracker has a cached configuration and it's downloading a new configuration, first the `onSuccess` callback will be called for the cached configuration and then it will be called when the downloaded configuration is applied.
+When it happens the cached configuration is substituted with the downloaded one.
 
 ## The remote configuration file
 

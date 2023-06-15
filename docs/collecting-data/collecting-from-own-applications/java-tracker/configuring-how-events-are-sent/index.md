@@ -140,20 +140,20 @@ If `bufferCapacity` is provided at the same time as `eventStore`, the `bufferCap
 We currently offer two different HTTP clients that can be used to send events to your collector: OkHttp or Apache HTTP. Both libraries have broadly the same features, with some differences in their default configurations. If neither of these HTTP clients is suitable, we also provide an `HttpClientAdapter` interface. The `HttpClientAdapter` is a wrapper for HTTP client objects.
 
 :::note
-Gradle users: [different dependencies](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) are required if you are using OkHttp or Apache HTTP.
+Gradle users: [different dependencies](/docs/collecting-data/collecting-from-own-applications/java-tracker/installation-and-set-up/index.md) can be configured if you are using OkHttp or Apache HTTP.
 :::
 
-By default, the Java tracker uses OkHttp; an `OkHttpClientAdapter` object is generated when a `BatchEmitter` is created. To specify a different client adapter, initialize the `Tracker` like this:
+By default, the Java tracker uses OkHttp; an `OkHttpClientAdapter` object is generated when a `BatchEmitter` is created. See below for how to use Apache HTTP instead, or how to customise the OkHTTP setup.
+
+To specify a completely different client adapter, use the `HttpClientAdapter` interface and initialize the `Tracker` like this:
 ```java
-HttpClientAdapter httpClientAdapter = {{ your implementation here }}
+HttpClientAdapter adapter = {{ your implementation here }}
+
 Tracker tracker = Snowplow.createTracker(
                 new TrackerConfiguration("namespace", "appId"),
-                new NetworkConfiguration(httpClientAdapter));
-
-// A BatchEmitter can also be created directly
-BatchEmitter emitter = new BatchEmitter(new NetworkConfiguration(httpClientAdapter));
+                new NetworkConfiguration(adapter));
 ```
-Note that `collectorUrl` is not a required method when an `HttpClientAdapter` is specified. The collector endpoint is normally used to create the default `OkHttpClientAdapter`, therefore if `collectorUrl` was provided here, it would be ignored.
+Note that `collectorUrl` is not a required parameter for `NetworkConfiguration` when an `HttpClientAdapter` is specified. The `collectorUrl` is normally used to create the default `OkHttpClientAdapter`, therefore if a URL was provided here, it would be ignored.
 
 HTTP request retry can be configured within the HTTP clients, on top of the Java tracker's handling of unsuccessful requests. The default HTTP client, OkHttp, [retries after certain types of connection failure](https://square.github.io/okhttp/4.x/okhttp/okhttp3/-ok-http-client/-builder/retry-on-connection-failure/) by default. The Apache HTTP Client [retries a request up to 3 times](https://www.javadoc.io/doc/org.apache.httpcomponents/httpclient/4.3.5/org/apache/http/impl/client/DefaultHttpRequestRetryHandler.html) by default. 
 
@@ -162,7 +162,10 @@ The simplest OkHttpClient initialization looks like this:
 ```java
 OkHttpClient client = new OkHttpClient();
 ```
-This is the default as used in the `BatchEmitter`. To add configuration, instead use the `OkHttpClient.Builder`. For example, setting timeouts for an `OkHttpClientAdapter`:
+This is the default as used in the `BatchEmitter`.
+
+To add configuration, pass a `OkHttpClientAdapter` during Tracker initialization.  
+For example, setting timeouts:
 ```java
 OkHttpClient client = new OkHttpClient.Builder()
       .connectTimeout(5, TimeUnit.SECONDS)
@@ -170,18 +173,24 @@ OkHttpClient client = new OkHttpClient.Builder()
       .writeTimeout(5, TimeUnit.SECONDS)
       .build();
 
-HttpClientAdapter adapter = OkHttpClientAdapter.builder()
-      .url("http://collector-endpoint.com")
-      .httpClient(client)
-      .build();
+OkHttpClientAdapter adapter = new OkHttpClientAdapter(
+      "http://collector-endpoint.com", 
+      client
+);
+
+Tracker tracker = Snowplow.createTracker(
+                new TrackerConfiguration("namespace", "appId"),
+                new NetworkConfiguration(adapter));
 ```
-The `url` is the URL for your collector. See [Square's API docs](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.Builder.html) for the full list of options.
+The URL is the address for your collector. See [Square's API docs](https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.Builder.html) for the full list of options.
 
 #### Apache HTTP Client
 The simplest Apache HTTP Client initialization looks like this:
 ```java
 CloseableHttpClient client = HttpClients.createDefault();
 ```
+Wrap the Client in an `ApacheHttpClientAdapter` to pass it to the tracker during initialization.
+
 You are encouraged to research how best to set up your Apache Client for maximum performance. For example, by default the Apache Client will never time out, and will also allow only two outbound connections at a time. In this code block, a `PoolingHttpClientConnectionManager` is used to allow up to 50 concurrent outbound connections:
 ```java
 PoolingHttpClientConnectionManager manager = new PoolingHttpClientConnectionManager();
@@ -191,12 +200,16 @@ CloseableHttpClient client = HttpClients.custom()
       .setConnectionManager(manager)
       .build();
 
-HttpClientAdapter adapter = ApacheHttpClientAdapter.builder()
-      .url("http://collector-endpoint.com")
-      .httpClient(client)
-      .build();
+ApacheHttpClientAdapter adapter = new ApacheHttpClientAdapter(
+      "http://collector-endpoint.com", 
+      client
+);
+
+Tracker tracker = Snowplow.createTracker(
+                new TrackerConfiguration("namespace", "appId"),
+                new NetworkConfiguration(adapter));
 ```
-The `url` is the URL for your collector. See [Apache's HttpClient docs](https://hc.apache.org/httpcomponents-client-4.5.x/index.html) for more information about configuring the client.
+The URL is the address for your collector. See [Apache's HttpClient docs](https://hc.apache.org/httpcomponents-client-4.5.x/index.html) for more information about configuring the client.
 
 ### Configuring the Java tracker threads
 

@@ -1,5 +1,5 @@
 ---
-title: "Managing Console API authentication"
+title: "Managing API authentication"
 date: "2021-12-27"
 sidebar_position: 20
 ---

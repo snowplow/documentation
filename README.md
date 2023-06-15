@@ -48,6 +48,27 @@ The sidebar on the left follows [file structure](https://github.com/snowplow/doc
 
 To control the position of a section in the sidebar, go to the `index.md` file for that section and adjust the `sidebar_position` attribute at the top (see [this example](https://github.com/snowplow/documentation/blob/main/docs/tutorials/index.md)). Sidebar positions are just numbers, and you can use any number as long as the order is correct.
 
+### Offerings
+
+Some documentation is only relevant to a particular offering. You can indicate it like this:
+```
+---
+title: ...
+...
+sidebar_custom_props:
+  offerings:
+    - enterprise
+    - cloud
+...
+---
+```
+
+This will result in an icon appearing in the sidebar, as well as an automatic banner on the page, specifying that the docs only apply to a given offering.
+
+The available values are: `enterprise`, `cloud`, `opensource`. You can speficy just one value or combine several (currently, `enterprise` + `cloud` is the only supported combination, see `src/css/custom.css`). Do not specify all three values at once — if a piece of documentation is relevant to all offerings, there should be no `offerings` property as that’s the default.
+
+Whenever the same functionality can be achieved in multiple offerings but in a different way (e.g. managing schemas), create a parent folder (“Managing schemas”) that’s offering-neutral, and then add offering-specific pages inside it. This way, other pages can link to the generic page without having to specify different methods for different offerings.
+
 ### Links
 
 For links within this documentation, please end the link with `/index.md`. This way all links will be checked, and you’ll get an error if a link is broken at any point.
@@ -62,7 +83,12 @@ Some of our modules are versioned (e.g. trackers, loaders). Here are a few simpl
 
 * Within pages for versioned modules, use **relative links** (e.g. `../setup/index.md`) when pointing to pages for the same version. This helps moving directories around without breaking the links.
 * For the latest docs, **don’t include the version number in the URL**. Otherwise we’d need to update internal links to it with every version change (also, it would get indexed and we’ll need to add a redirect later to avoid breaking external links). For example, see the [Scala tracker docs](https://github.com/snowplow/documentation/tree/main/docs/collecting-data/collecting-from-own-applications/scala-tracker) — the path ends with `scala-tracker` rather than `scala-tracker-2-0`.
-* **Put older versions under `previous-versions/`**. This automatically enables the “you are looking at an old version” warning. See the [Scala tracker docs](https://github.com/snowplow/documentation/tree/main/docs/collecting-data/collecting-from-own-applications/scala-tracker) for an example of how to add the `previous-versions` directory and what to put there.
+* **Put older versions in a single folder, e.g. `previous-versions/`**. In the `index.md` for that folder, add the following:
+  ```
+  sidebar_custom_props:
+    outdated: true
+  ```
+  This automatically enables the “you are looking at an old version” warning. See the [Scala tracker docs](https://github.com/snowplow/documentation/tree/main/docs/collecting-data/collecting-from-own-applications/scala-tracker) for an example of how to add the `previous-versions` directory and what to put there.
 * When a new version is released, you can either update the latest version pages, or move them to `previous-versions` and replace with the new content. If there are not too many breaking changes, you might want to do the former to avoid having too many previous version directories.
 * Put the latest bugfix version for each component into [componentVersions.js](https://github.com/snowplow/documentation/blob/main/src/componentVersions.js). This way you only need to update it in one place when a new bugfix release comes out. See the [Scala tracker docs](https://raw.githubusercontent.com/snowplow/documentation/main/docs/collecting-data/collecting-from-own-applications/scala-tracker/setup/index.md) for how to then use this on the page. If you need to use them in a markdown table you will have to render it in a particular way for it to work, see the [dbt package docs](https://raw.githubusercontent.com/snowplow/documentation/main/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) for an example.
 

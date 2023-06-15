@@ -55,7 +55,7 @@ The [application context entity](https://github.com/snowplow/iglu-central/blob/m
 
 ## Platform context
 
-The [platform context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-2) contains the following properties:
+The [platform context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-3) contains the following properties:
 
 | Property | Type | Description | Required in schema |
 | --- | --- | --- | --- |
@@ -78,6 +78,45 @@ The [platform context entity](https://github.com/snowplow/iglu-central/blob/mast
 | `lowPowerMode` | Boolean | A Boolean indicating whether Low Power Mode is enabled (iOS only) | No |
 | `availableStorage` | Integer | Bytes of storage remaining | No |
 | `totalStorage` | Integer | Total size of storage in bytes | No |
+| `isPortrait` | Boolean | A Boolean indicating whether the device orientation is portrait (either upright or upside down) | No |
+| `resolution` | String | Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes | No |
+| `scale` | Number | Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android) | No |
+| `language` | String | System language currently used on the device (ISO 639) | No |
+| `appSetId` | String | Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id) | No |
+| `appSetIdScope` | String (either "app" or "developer") | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No |
+
+### Choosing which properties to track
+
+You can choose which properties should be added to the platform context entity.
+By default, all available properties are tracked in the entity.
+In case you don't want certain properties to be tracked, you can choose the ones to track using `TrackerConfiguration.platformContextEntities`:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let trackerConfig = TrackerConfiguration()
+    .platformContextProperties([.batteryLevel, .isPortrait, .language])
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val trackerConfig = TrackerConfiguration("appId")
+     .platformContextProperties(listOf(PlatformContextProperty.BATTERY_LEVEL, PlatformContextProperty.IS_PORTRAIT))
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
+    .platformContextProperties(Collections.singletonList(PlatformContextProperty.BATTERY_LEVEL, PlatformContextProperty.IS_PORTRAIT));
+```
+
+  </TabItem>
+</Tabs>
 
 ### Identifier for Advertisers (IDFA/AAID)
 

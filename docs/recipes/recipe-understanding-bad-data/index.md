@@ -13,11 +13,11 @@ This recipe is currently specific to Try Snowplow.
 
 ## Introduction
 
-Snowplow has the concept of upfront data validation: you get to decide what your data should look like, and data that does not match your definitions is classified as "bad data". Detailed information on the different failure types can be found in [the technical documentation](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).
+Snowplow has the concept of upfront data validation: you get to decide what your data should look like, and data that does not match your definitions is classified as "bad data". Detailed information on the different failure types can be found in [the technical documentation](/docs/managing-data-quality/understanding-failed-events/index.md).
 
 This bad data is not simply dropped, but rather loaded into dedicated locations so you can understand what went wrong and how your tracking implementation or your data structure definitions need to be updated to resolve the issue. This approach ensures you don't need to waste time cleaning data but can instead rely on Snowplow delivering only the highest quality data to you.
 
-Snowplow BDP comes with a dedicated failed events monitoring tool, you can take a look at it in [the documentation](/docs/managing-data-quality/failed-events/failed-events-in-the-ui/index.md). With Try Snowplow, failed events are loaded into a `badrows` schema for monitoring and analysing. This recipe will teach you how to access and understand any bad Snowplow data you might have collected.
+Snowplow BDP comes with a dedicated failed events monitoring tool, you can take a look at it in [the documentation](/docs/managing-data-quality/monitoring-failed-events/ui/index.md). With Try Snowplow, failed events are loaded into a `badrows` schema for monitoring and analysing. This recipe will teach you how to access and understand any bad Snowplow data you might have collected.
 
 ## What you'll be doing
 
@@ -30,7 +30,7 @@ SELECT * FROM information_schema.tables
 WHERE table_schema = 'badrows';
 ```
 
-Please note that not all bad data is actually a source of concern. For example, if you navigate directly to your collector endpoint, you will generate a bad request. Therefore, certain types of bad events can be ignored. For more detail on the different failure types, check out [the technical documentation](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).
+Please note that not all bad data is actually a source of concern. For example, if you navigate directly to your collector endpoint, you will generate a bad request. Therefore, certain types of bad events can be ignored. For more detail on the different failure types, check out [the technical documentation](/docs/managing-data-quality/understanding-failed-events/index.md).
 
 In this recipe, you will focus on schema violations, i.e. errors that occur because data is not tracked as expected. To check if you already have any existing schema violations, you can run the following query:
 

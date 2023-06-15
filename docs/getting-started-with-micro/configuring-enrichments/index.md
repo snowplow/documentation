@@ -24,7 +24,7 @@ Also, the Enrich application supports files located in S3 and GCS with the `s3:/
 
 </details>
 
-For example, let’s say that you want to configure the [IP Lookup enrichment](docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/). The default configuration file looks like this:
+For example, let’s say that you want to configure the [IP Lookup enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md). The default configuration file looks like this:
 
 ```json reference
 https://github.com/snowplow/enrich/blob/master/config/enrichments/ip_lookups.json
@@ -56,6 +56,6 @@ Once Micro starts, you should see messages like these:
 
 :::tip
 
-Micro is especially great for [testing the JavaScript enrichment](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/index.md#testing-your-enrichment).
+Micro is especially great for [testing the JavaScript enrichment](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/testing/index.md).
 
 :::

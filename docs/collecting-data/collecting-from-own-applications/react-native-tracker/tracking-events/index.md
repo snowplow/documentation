@@ -51,9 +51,13 @@ All tracker's `track` methods take two arguments: An object of key-value pairs f
 
 ### Custom event contexts
 
-Custom contexts can be used to augment any standard Snowplow event type, including self describing events, with additional data. We refer to the custom contexts as [Event Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+```mdx-code-block
+import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.md"
 
-Custom contexts can be optionally added as an extra argument to any of the Tracker’s `track..()` methods as an array of self-describing JSON following the same pattern as a self-describing event. As with self-describing events, if you want to create your own custom context, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for it and upload it to an [Iglu repository](https://github.com/snowplow/iglu) using the [Snowplow BDP Console UI](https://snowplowanalytics.com/snowplow-insights/), [Data Structures API](/docs/understanding-tracking-design/managing-data-structures/index.md), [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) or one of the other supported [Iglu clients](https://github.com/snowplow/iglu/wiki/Setting-up-an-Iglu-client). Since more than one can be attached to an event, the context's argument (if it is provided at all) should be a non-empty array of self-describing JSONs.
+<DefineCustomEntity/>
+```
+
+Custom contexts can be optionally added as an extra argument to any of the Tracker’s `track..()` methods.
 
 **Note:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array. Also an empty array is acceptable, which will attach no entities to the event.
 
@@ -95,9 +99,11 @@ It is also possible to add custom contexts globally, so that they are applied to
 
 #### Self-describing events
 
-You may wish to track events, which do not fit into the out-of-the box ones described below. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) and can have arbitrarily many fields.
+```mdx-code-block
+import DefineCustomEvent from "@site/docs/reusable/define-custom-event/_index.md"
 
-Just like with custom event entities, to define your own custom self-describing event, you must create a [JSON schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) for that event and upload it to an [Iglu Schema Repository](https://github.com/snowplow/iglu) using [igluctl](/docs/pipeline-components-and-applications/iglu/index.md) (or if a Snowplow BDP customer, you can use the [Snowplow BDP Console UI](/docs/understanding-tracking-design/managing-data-structures/index.md) or [Data Structures API](/docs/understanding-tracking-design/managing-data-structures-via-the-api-2/index.md)). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
+<DefineCustomEvent/>
+```
 
 A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
 

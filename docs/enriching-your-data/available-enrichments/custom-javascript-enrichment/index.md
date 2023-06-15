@@ -7,7 +7,7 @@ sidebar_position: 10
 With this enrichment, you can write a JavaScript function to be executed for each event. Use this enrichment to apply your own business logic to your events, including:
 * [Adding extra data](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event) to the event in the form of [entities](/docs/understanding-tracking-design/understanding-events-entities/index.md)
 * [Modifying event fields](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#modifying-event-fields-directly) directly
-* [Discarding the event](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#discarding-the-event) so that it goes to [failed events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md) rather than your data destination
+* [Discarding the event](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#discarding-the-event) so that it goes to [failed events](/docs/managing-data-quality/understanding-failed-events/index.md) rather than your data destination
 
 ## Configuration
 

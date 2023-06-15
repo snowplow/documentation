@@ -72,7 +72,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | `txn_id` | int | Transaction ID set client-side, used to de-dupe records | No | 421828 |
 | `event_fingerprint` | text | Hash client-set event fields | No | AADCE520E20C2899F4CED228A79A3083 |
 
-A complete list of event types is given [here](#Event-specific_fields).
+A complete list of event types is given [here](#Event-specific-fields).
 
 #### Snowplow version fields
 
@@ -220,7 +220,7 @@ Snowplow currently supports (or will support in the near future) the following e
 | --- | --- |
 | [Page views](#page-views) | 'page_view' |
 | [Page pings](#page-pings) | 'page_ping' |
-| [E-commerce transactions](#ecommerce-transactions) | 'transaction' and 'transaction_item' |
+| [E-commerce transactions](#e-commerce-transactions) | 'transaction' and 'transaction_item' |
 | [Custom structured events](#custom-structured-events) | 'struct' |
 |[Custom unstructured events](#custom-unstructured-events) | 'unstruct' |
 
@@ -228,7 +228,7 @@ Details of which fields are available for which events are given below.
 
 #### Page views
 
-There are currently no fields that are specific to `page_view` events: all the fields that are required are part of the standard fields available for any [web-based event](#Web-specific_fields) e.g. `page_urlscheme`, `page_title`.
+There are currently no fields that are specific to `page_view` events: all the fields that are required are part of the standard fields available for any [web-based event](#web-specific-fields) e.g. `page_urlscheme`, `page_title`.
 
 #### Page pings
 
@@ -275,12 +275,6 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 
 #### Custom structured events
 
-:::note
-
-Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
-
-:::
-
 If you wish to track an event that Snowplow does not recognise as a first class citizen (i.e. one of the events listed above), then you can track them using the generic 'custom structured events'. There are five fields that are available to store data related to custom events:
 
 | **Field** | **Type** | **Description** | **Reqd?** | **Example** |
@@ -292,12 +286,6 @@ If you wish to track an event that Snowplow does not recognise as a first class 
 | `se_value` | decimal | A value associated with the event / action e.g. the value of goods added-to-basket | No | 9.99 |
 
 #### Custom unstructured events
-
-:::note
-
-Currently, custom events are not available in [BDP Cloud](/docs/getting-started-with-snowplow-bdp/cloud/index.md).
-
-:::
 
 Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 

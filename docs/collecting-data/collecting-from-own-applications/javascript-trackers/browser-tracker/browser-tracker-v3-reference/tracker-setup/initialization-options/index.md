@@ -62,10 +62,12 @@ newTracker('sp', '{{collector_url_here}}', {
   // anonymousTracking: { withSessionTracking: true, withServerAnonymisation: true },
   contexts: {
     webPage: true, // Default
-    session: false // Adds client session context entity to events, off by default. Available in v3.5+.
+    session: false, // Adds client session context entity to events, off by default. Available in v3.5+.
+    browser: false // Adds browser context entity to events, off by default. Available in v3.9+.
   },
   retryStatusCodes: [],
-  dontRetryStatusCodes: []
+  dontRetryStatusCodes: [],
+  onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
 });
 ```
 
@@ -127,7 +129,7 @@ Most browsers have a Do Not Track option which allows users to express a prefere
 
 #### Opt-out cookie
 
-It is possible to set an opt-out cookie in order not to track anything similarly to Do Not Track through `window.snowplow('setOptOutCookie', 'opt-out');` where ‘opt-out’ is the name of your opt-out cookie. If this cookie is set, cookies won’t be stored and events won’t be fired.
+It is possible to set an opt-out cookie in order not to track anything similarly to Do Not Track through `setOptOutCookie('opt-out');` where ‘opt-out’ is the name of your opt-out cookie. If this cookie is set, cookies won’t be stored and events won’t be fired.
 
 #### Anonymous Tracking
 
@@ -187,14 +189,6 @@ This mode will continue to track session information in the client side but will
 
 The Snowplow JavaScript Tracker performs sessionization client side. This allows anonymous session tracking to be done using client side storage without sending any user identifier fields to the collector.
 
-#### Setting the page unload pause
-
-Whenever the Snowplow Javascript Tracker fires an event, it automatically starts a 500 millisecond timer running. If the user clicks on a link or refreshes the page during this period (or, more likely, if the event was triggered by the user clicking a link), the page will wait until either the event is sent or the timer is finished before unloading. 500 milliseconds is usually enough to ensure the event has time to be sent.
-
-You can change the pause length (in milliseconds) using the `pageUnloadTimer` of the configuration object. The above example completely eliminates the pause. This does make it unlikely that events triggered by link clicks will be sent.
-
-See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/index.md#Local_Storage) for an explanation of how the tracker can later recover and send unsent events.
-
 #### Setting the event request protocol
 
 Normally the protocol (http or https) used by the Tracker to send events to a collector is the same as the protocol of the current page. You can force the tracker to use https by prefixing the collector endpoint with the protocol. For example:
@@ -227,6 +221,8 @@ Three strategies are made available to store the Tracker’s state: cookies, loc
 
 When choosing local storage, the Tracker will additionally store events in local storage before sending them so that they can be recovered if the user leaves the page before they are sent.
 
+See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/index.md#Local_Storage) for an explanation of how the tracker can later recover and send unsent events.
+
 #### Adding predefined contexts
 
 The JavaScript Tracker comes with many predefined contexts which you can automatically add to every event you send. To enable them, simply add them to the `contexts` field of the configuration object as above.
@@ -258,7 +254,33 @@ The [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.sno
 | `firstEventId`        | The optional identifier (UUID) of the first event id for this session.                                        | No        |
 | `firstEventTimestamp` | Optional date-time timestamp of when the first event in the session was tracked.                              | No        |
 
+:::note
 Please note that the session context entity is only available since version 3.5 of the tracker.
+:::
+
+##### browser context
+
+The [browser](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/browser_context/jsonschema) context entity consists of the following properties:
+
+| Attribute | Description | Required? |
+| : ------: | :--------: | :-----: |
+| `viewport` | Viewport dimensions of the browser. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes  |
+| `documentSize` | Document dimensions. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes  |
+| `resolution` | Device native resolution. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes |
+| `colorDepth` | The number of bits allocated to colors for a pixel in the output device, excluding the alpha channel. | Yes |
+| `devicePixelRatio` | Ratio of the resolution in physical pixels to the resolution in CSS pixels for the current display device. | No  |
+| `cookiesEnabled` | Indicates whether cookies are enabled or not. More info and caveats at the official [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/cookieEnabled). | Yes |
+| `online` | Returns the online status of the browser. Important caveats are described in [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine). | Yes |
+| `browserLanguage` | The preferred language of the user, usually the language of the browser UI. Defined in [RFC 5646](https://datatracker.ietf.org/doc/html/rfc5646). | No  |
+| `documentLanguage` | The language of the HTML document. Defined in [RFC 5646](https://datatracker.ietf.org/doc/html/rfc5646). | No  |
+| `webdriver` | Indicates whether the user agent is controlled by automation. | No  |
+| `deviceMemory` | Approximate amount of device memory in gigabytes. | No  |
+| `hardwareConcurrency` | Number of logical processors available to run threads on the user's computer. | No  |
+| `tabId` | A UUID identifier for the client browser tab the event is sent from. | No  |
+
+:::note
+Please note that the browser context entity is only available since version 3.9 of the tracker.
+:::
 
 ##### Other contexts
 
@@ -279,7 +301,7 @@ We recommend leaving the `bufferSize` as the default value of 1. This ensure tha
 If you have set `bufferSize` to greater than 1, you can flush the buffer using the `flushBuffer` method:
 
 ```javascript
-snowplow('flushBuffer');
+flushBuffer();
 ```
 
 For instance, if you wish to send several events at once, you might make the API calls to create the events and store them and then and call `flushBuffer` afterwards to ensure they are all sent before the user leaves the page.
@@ -309,58 +331,11 @@ import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 ```
 
 #### Configuring cross-domain tracking
-
-The JavaScript Tracker can add an additional parameter named “_sp” to the querystring of outbound links. Its value includes the domain user ID for the current page and the time at which the link was clicked. This makes these values visible in the “url” field of events sent by an instance of the JavaScript Tracker on the destination page. The enrichment process will use these values to populate the `refr_domain_userid` and `refr_dvce_tstamp` fields in Redshift for all events fired on the destination page.
-
-You can configure which links get decorated this way using the `crossDomainLinker` field of the configuration object. This field should be a function taking one argument (the link element) and return `true` if the link element should be decorated and false otherwise. For example, this function would only decorate those links whose destination is “[http://acme.de](http://acme.de/)” or whose HTML id is “crossDomainLink”:
-
-```javascript
-{
-  crossDomainLinker: function (linkElement) {
-    return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-  }
-}
+```mdx-code-block
+import CrossDomain from "@site/docs/reusable/javascript-tracker-cross-domain/_index.md"
 ```
 
-If you want to decorate every link to the domain github.com:
-
-```javascript
-{
-  crossDomainLinker: function (linkElement) {
-    return /^https:\/\/github\.com/.test(linkElement.href);
-  }
-}
-```
-
-If you want to decorate every link, regardless of its destination:
-
-```javascript
-{
-  crossDomainLinker: function (linkElement) {
-    return true;
-  }
-}
-```
-
-Note that the above will decorate “links” which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`). To exclude these links:
-
-```javascript
-snowplow('crossDomainLinker', function(linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0;
-});
-```
-
-Note that when the tracker loads, it does not immediately decorate links. Instead it adds event listeners to links which decorate them as soon as a user clicks on them or navigates to them using the keyboard. This ensures that the timestamp added to the querystring is fresh.
-
-If further links get added to the page after the tracker has loaded, you can use the tracker’s `crossDomainLinker` method to add listeners again. (Listeners won’t be added to links which already have them.)
-
-```javascript
-snowplow('crossDomainLinker', function (linkElement) {
-  return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-});
-```
-
-_Warning_: If you enable link decoration, you should also make sure that at least one event is fired on the page. Firing an event causes the tracker to write the domain_userid to a cookie. If the cookie doesn’t exist when the user leaves the page, the tracker will generate a new ID for them when they return rather than keeping the old ID.
+<CrossDomain lang="browser" />
 
 #### Configuring the maximum payload size in bytes
 
@@ -394,7 +369,7 @@ If the optional `discoverRootDomain` field of the configuration object is set 
 Whenever tracker initialized on your domain – it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` configuration object parameter or `setVisitorCookieTimeout` method.
 
 ```javascript
-snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
+newTracker('cf', '{{COLLECTOR_URL}}', {
   cookieLifetime: 86400 * 31,
 });
 ```
@@ -402,7 +377,7 @@ snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
 or
 
 ```javascript
-snowplow('setVisitorCookieTimeout', 86400 * 30);  // 30 days
+setVisitorCookieTimeout(86400 * 30);  // 30 days
 ```
 
 If `cookieLifetime` is set to `0`, the cookie will expire at the end of the session (when the browser closes). If set to `-1`, the first-party cookies will be disabled.
@@ -457,3 +432,17 @@ dontRetryStatusCodes: [418] // force retry on 418
 ```
 
 Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent. Take caution when choosing the `dontRetryStatusCodes`.
+
+#### On session update callback
+
+The `onSessionUpdateCallback` option, allows you to supply a callback function to be executed whenever a new session is generated on the tracker.
+
+The callback's signature is:
+`(clientSession: ClientSession) => void`
+where clientSession includes the same values as you would expect on the [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context.
+
+_Note:_ The callback is **not** called whenever a session is expired, but only when a new one is generated.
+
+:::note
+Please note that the session context entity is only available since version 3.11 of the tracker.
+:::

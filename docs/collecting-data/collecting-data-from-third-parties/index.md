@@ -2,6 +2,7 @@
 title: "Webhooks - collecting data from third parties"
 date: "2020-02-15"
 sidebar_position: 10
+sidebar_label: "Webhooks"
 ---
 
 Snowplow enables you to collect events via the webhooks of supported third-party software.

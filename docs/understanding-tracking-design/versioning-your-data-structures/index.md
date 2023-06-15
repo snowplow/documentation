@@ -1,5 +1,5 @@
 ---
-title: "Versioning your data structures"
+title: "Versioning data structures"
 date: "2020-02-25"
 sidebar_position: 90
 ---

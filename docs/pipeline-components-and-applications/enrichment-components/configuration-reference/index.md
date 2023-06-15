@@ -153,6 +153,26 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.bad.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
 | `output.bad.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
 
+## enrich-nsq
+
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.nsq.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.nsq.extended.hocon).
+
+| parameter | description |
+|-|-|
+| `input.topic` | Required. Name of the NSQ topic with the collector payloads. |
+| `input.lookupHost` | Required. The host name of NSQ lookup application. |
+| `input.lookupPort` | Required. The port number of NSQ lookup application. |
+| `input.channel` | Optional. Default: `collector-payloads-channel`. Name of the NSQ channel used to retrieve collector payloads. |
+| `output.good.topic` | Required. Name of the NSQ topic that will receive the enriched events. |
+| `output.good.nsqdHost` | Required. The host name of nsqd application. |
+| `output.good.nsqdPort` | Required. The port number of nsqd application. |
+| `output.bad.topic` | Required. Name of the NSQ topic that will receive the bad rows. |
+| `output.bad.nsqdHost` | Required. The host name of nsqd application. |
+| `output.bad.nsqdPort` | Required. The port number of nsqd application. |
+| `output.pii.topic` | Optional. Name of the NSQ topic that will receive the pii events. |
+| `output.pii.nsqdHost` | Optional. The host name of nsqd application. |
+| `output.pii.nsqdPort` | Optional. The port number of nsqd application. |
+
 ## enrich-rabbitmq-experimental
 
 A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.rabbitmq.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.rabbitmq.extended.hocon).

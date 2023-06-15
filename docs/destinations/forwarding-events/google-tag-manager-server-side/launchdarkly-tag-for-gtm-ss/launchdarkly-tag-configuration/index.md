@@ -26,10 +26,6 @@ This section allows you to select the Metric Type for this Tag. The options are:
 
 In this text box you need to provide the [LaunchDarkly client-side ID](https://docs.launchdarkly.com/sdk/concepts/client-side-server-side#client-side-id) for the environment your metric events pertain to.
 
-### Company Name (Required)
-
-In this text box you need to provide the company name, which is used to help LaunchDarkly identify the source of traffic and debug issues.
-
 ## Metric Options
 
 ![](images/03-metric-options.png)
@@ -99,7 +95,7 @@ This configuration section allows you to define the version to be used. For exam
 As an example using the default version, the User-Agent header could be like:
 
 ```
-'User-Agent: MetricImport-CompanyName-int/1'
+'User-Agent: MetricImport-Snowplow-int/1'
 ```
 
 ## Logs Settings

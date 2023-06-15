@@ -244,6 +244,84 @@ table h3 {
   line-height: 20px;
 }
 
+li.enterprise > div > a::before,
+li.enterprise > a::before,
+li.cloud > div > a::before,
+li.cloud > a::before,
+li.opensource > div > a::before,
+li.opensource > a::before {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+
+article.enterprise > a > p::before,
+article.cloud > a > p::before,
+article.opensource > a > p::before {
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 0.3em;
+}
+
+li.enterprise > div > a::before,
+li.enterprise > a::before,
+article.enterprise > a > p::before {
+  content: '🏭';
+}
+li.cloud > div > a::before,
+li.cloud > a::before,
+article.cloud > a > p::before {
+  content: '☁️';
+}
+li.enterprise.cloud > div > a::before,
+li.enterprise.cloud > a::before,
+article.enterprise.cloud > a > p::before {
+  content: '🏭 ☁️';
+}
+li.opensource > div > a::before,
+li.opensource > a::before,
+article.opensource > a > p::before {
+  content: '🛠️';
+}
+
+a.menu__link, a.card {
+  position: relative;
+}
+.enterprise a:hover::after,
+.cloud a:hover::after,
+.opensource a:hover::after {
+  position: absolute;
+  left: 0;
+  bottom: -30px;
+  width: auto;
+  white-space: nowrap;
+  transform: none;
+  background-color: var(--ifm-font-color-base);
+  color: var(--ifm-font-color-base-inverse);
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  z-index: 9998;
+  padding: 3px 5px;
+}
+a.card:hover::after {
+  top: 2rem;
+  left: 2rem;
+  bottom: auto;
+}
+.enterprise a:hover::after {
+  content: '🏭: For Snowplow BDP Enterprise customers';
+}
+.cloud a:hover::after {
+  content: '☁️: For Snowplow BDP Cloud customers';
+}
+.enterprise.cloud a:hover::after {
+  content: '🏭 ☁️: For Snowplow BDP customers';
+}
+.opensource a:hover::after {
+  content: '🛠️: For Snowplow Open Source users';
+}
+
 .breadcrumbs__item:not(:last-child):after {
   content: '/';
   background: none;

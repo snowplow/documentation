@@ -48,7 +48,7 @@ dark: require('./images/BQL_100_technical_diagram_dark.drawio.png').default
 - Reads Snowplow enriched events from a dedicated Pub/Sub subscription.
 - Uses the JSON transformer from the [Snowplow Scala Analytics SDK](https://github.com/snowplow/snowplow-scala-analytics-sdk) to convert those enriched events into JSON.
 - Uses [Iglu Client](https://github.com/snowplow/iglu-scala-client/) to fetch JSON schemas for self-describing events and entities.
-- Uses [Iglu Schema DDL](https://github.com/snowplow/iglu/tree/master/0-common/schema-ddl) to transform self-describing events and entities into BigQuery format.
+- Uses [Iglu Schema DDL](https://github.com/snowplow/schema-ddl) to transform self-describing events and entities into BigQuery format.
 - Writes transformed data into BigQuery.
 - Writes all encountered Iglu types into a dedicated Pub/Sub topic (the `types` topic).
 - Writes all data that failed to be validated against its schema into a dedicated `badRows` Pub/Sub topic.

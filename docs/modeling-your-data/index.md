@@ -1,5 +1,5 @@
 ---
-title: "Data Modeling"
+title: "Modeling data"
 sidebar_position: 90
 ---
 

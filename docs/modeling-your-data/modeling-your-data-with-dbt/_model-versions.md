@@ -16,11 +16,11 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 <ReactMarkdown children={`
 | snowplow-web version       | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | -------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowWeb} | >=1.4.0 to <2.0.0   | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.13.3                     | >=1.3.0 to <2.0.0   | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.11.0                     | >=1.0.0 to <1.3.0   | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.5.1                      | >=0.20.0 to <1.0.0  | ✅        | ❌          | ✅        | ✅         | ✅        |
-| 0.4.1                      | >=0.18.0 to <0.20.0 | ✅        | ❌          | ✅        | ✅         | ❌        |
+| ${versions.dbtSnowplowWeb} | >=1.4.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.13.3                     | >=1.3.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.11.0                     | >=1.0.0 to <1.3.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.5.1                      | >=0.20.0 to <1.0.0  |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
+| 0.4.1                      | >=0.18.0 to <0.20.0 |    ✅     |     ❌      |    ✅     |     ✅     |    ❌     |
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
@@ -29,10 +29,10 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 <ReactMarkdown children={`
 | snowplow-mobile version       | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | ----------------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowMobile} | >=1.3.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.6.3                         | >=1.3.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.5.5                         | >=1.0.0 to <1.3.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.2.0                         | >=0.20.0 to <1.0.0 | ✅        | ❌          | ✅        | ✅         | ✅        |
+| ${versions.dbtSnowplowMobile} | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.6.3                         | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.5.5                         | >=1.0.0 to <1.3.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.2.0                         | >=0.20.0 to <1.0.0 |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
 `} remarkPlugins={[remarkGfm]} /> 
 
 </TabItem>
@@ -41,11 +41,11 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 <ReactMarkdown children={`
 | snowplow-media-player version      | snowplow-web version | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | ---------------------------------- | -------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowMediaPlayer} | >=0.14.0 to <0.15.0  | >=1.4.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.4.2                              | >=0.13.0 to <0.14.0  | >=1.3.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.4.1                              | >=0.12.0 to <0.13.0  | >=1.3.0 to <2.0.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.3.4                              | >=0.9.0 to <0.12.0   | >=1.0.0 to <1.3.0  | ✅        | ✅          | ✅        | ✅         | ✅        |
-| 0.1.0                              | >=0.6.0 to <0.7.0    | >=0.20.0 to <1.1.0 | ❌        | ❌          | ✅        | ❌         | ✅        |
+| ${versions.dbtSnowplowMediaPlayer} | >=0.14.0 to <0.15.0  | >=1.4.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.4.2                              | >=0.13.0 to <0.14.0  | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.4.1                              | >=0.12.0 to <0.13.0  | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.3.4                              | >=0.9.0 to <0.12.0   | >=1.0.0 to <1.3.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.1.0                              | >=0.6.0 to <0.7.0    | >=0.20.0 to <1.1.0 |    ❌     |     ❌      |    ✅     |     ❌     |    ✅     |
 `} remarkPlugins={[remarkGfm]} /> 
 
 </TabItem>
@@ -54,9 +54,9 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 <ReactMarkdown children={`
 | snowplow-normalize version       | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | -------------------------------- | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowNormalize} | >=1.4.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
-| 0.2.3                            | >=1.3.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
-| 0.1.0                            | >=1.0.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
+| ${versions.dbtSnowplowNormalize} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
+| 0.2.3                            | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
+| 0.1.0                            | >=1.0.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 `} remarkPlugins={[remarkGfm]} /> 
 
 </TabItem>
@@ -65,10 +65,13 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 <ReactMarkdown children={`
 | snowplow-ecommerce version       | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | -------------------------------- | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowEcommerce} | >=1.4.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
-| 0.3.0                            | >=1.3.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
-| 0.2.1                            | >=1.0.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
+| ${versions.dbtSnowplowEcommerce} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ⚠️     |
+| 0.3.0                            | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
+| 0.2.1                            | >=1.0.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 `} remarkPlugins={[remarkGfm]} /> 
+
+> _Postgres is technically supported in the models within the package, however one of the contexts’ names is too long to be loaded via the Postgres Loader._
+
 
 </TabItem>
 
@@ -77,9 +80,10 @@ From version v0.13.0 onwards you must be using [RDB Loader](/docs/destinations/w
 <ReactMarkdown children={`
 | snowplow-fractribution version       | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | ------------------------------------ | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowFractribution} | >=1.4.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
-| 0.2.0                                | >=1.3.0 to <2.0.0 | ✅        | ✅          | ❌        | ✅         | ❌        |
-| 0.1.0                                | >=1.0.0 to <2.0.0 | ❌        | ❌          | ❌        | ✅         | ❌        |
+| ${versions.dbtSnowplowFractribution} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |
+| 0.3.0                                | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
+| 0.2.0                                | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
+| 0.1.0                                | >=1.0.0 to <2.0.0 |    ❌     |     ❌      |    ❌     |     ✅     |    ❌     |
 `} remarkPlugins={[remarkGfm]} /> 
 
 </TabItem>

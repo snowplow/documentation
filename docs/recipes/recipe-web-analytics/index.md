@@ -5,7 +5,19 @@ date: "2020-10-12"
 sidebar_position: 0
 ---
 
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
+```
+
 ## Introduction
+
+:::caution
+
+While this recipe is still relevant if you want to process the raw data yourself, we recommend you use our [snowplow-web dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) instead now to do all this for you!
+
+:::
 
 Snowplow empowers you to collect granular data from your website(s). To gain a better understanding of how users are engaging, let's start off by aggregating this data into sessions. While sessions don't tell you everything, and don't necessarily reflect the entire customer journey, they are great for some initial exploratory analysis such as:
 
@@ -131,6 +143,12 @@ FROM derived.sessions;
 
 ## Further reading
 
-For more information on how Snowplow models web data, take a look at [our standard web data model](https://github.com/snowplow/data-models/tree/master).
+For more information on how Snowplow models web data, take a look at [our dbt web data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
 
 A general view of Snowplow for web can also be found on [our website](https://snowplowanalytics.com/web/).
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

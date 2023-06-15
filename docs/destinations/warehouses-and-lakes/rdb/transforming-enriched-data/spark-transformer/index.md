@@ -45,6 +45,12 @@ where `region` is one of `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`, `eu
 
 ## Configuring the EMR cluster
 
+:::caution
+
+Starting from version `5.5.0`, batch transformer requires to use Java 11 on EMR ([default is Java 8](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/configuring-java8.html)). See the `bootstrapActionConfigs` section in the configuration below.
+
+:::
+
 Here's an example of an EMR cluster config file that can be used with Dataflow Runner:
 
 ```json
@@ -90,7 +96,15 @@ Here's an example of an EMR cluster config file that can be used with Dataflow R
       }
     },
     "tags": [],
-    "bootstrapActionConfigs": [],
+    "bootstrapActionConfigs": [
+      {
+        "name": "Use Java 11",
+        "scriptBootstrapAction": {
+          "path": "s3://<bucket>/<path>/emr-bootstrap-java-11.sh",
+          "args": []
+        }
+      }
+    ],
     "configurations": [
       {
         "classification": "core-site",
@@ -137,6 +151,19 @@ Here's an example of an EMR cluster config file that can be used with Dataflow R
     ]
   }
 }
+```
+
+You will need to replace `<bucket>` and `<path>` (in the `bootstrapActionConfigs` section) according to where you placed `emr-bootstrap-java-11.sh`. The content of this file should be as follows:
+
+```bash title="emr-bootstrap-java-11.sh"
+#!/bin/bash
+
+set -e
+
+sudo update-alternatives --set java /usr/lib/jvm/java-11-amazon-corretto.x86_64/bin/java
+
+exit 0
+
 ```
 
 This is a typical cluster configuration for processing ~1.5GB of uncompressed enriched data.
@@ -207,7 +234,7 @@ A typical playbook can look like:
         "jar": "command-runner.jar",
         "arguments": [
           "spark-submit",
-          "--class", "com.snowplowanalytics.snowplow.rdbloader.shredder.batch.Main",
+          "--class", "com.snowplowanalytics.snowplow.rdbloader.transformer.batch.Main",
           "--master", "yarn",
           "--deploy-mode", "cluster",
           "s3://snowplow-hosted-assets-eu-central-1/4-storage/transformer-batch/snowplow-transformer-batch-${versions.rdbLoader}.jar",

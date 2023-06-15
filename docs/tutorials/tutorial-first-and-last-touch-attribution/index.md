@@ -4,9 +4,15 @@ date: "2020-02-26"
 sidebar_position: 20
 ---
 
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/snowplow_fractribution/" name="Fractional Attribution Modeling"/>
+```
+
 In order to calculate the return on marketing spend on individual campaigns, digital marketers need to connect revenue events, downstream in a user journey, with marketing touch events, upstream in a user journey. This connection is necessary so that the cost of those associated with the marketing campaign that drove those marketing touches can be connected to profit associated with the conversion events later on.
 
-Different attribution models involve applying different logic to connecting those marketing touch events with subsequent revenue events. In this blog post, we will document the analytic approach and the corresponding SQL statements to perform the most basic types of attribution: first and last touch. Our example SQL will focus on the web use case. The same undelying analytic approach can, however, be applied to any channel.
+Different attribution models involve applying different logic to connecting those marketing touch events with subsequent revenue events. In this blog post, we will document the analytic approach and the corresponding SQL statements to perform the most basic types of attribution: first and last touch. Our example SQL will focus on the web use case. The same underlying analytic approach can, however, be applied to any channel.
 
 Note that all the SQL given below is Redshift compatible. It can be easier to do attribution analysis with other dialects of SQL that support complicated data types (arrays and objects) in particular.
 

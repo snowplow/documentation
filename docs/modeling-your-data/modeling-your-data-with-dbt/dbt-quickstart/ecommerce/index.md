@@ -46,7 +46,7 @@ dispatch:
 
 If you do not do this the package will still work, but the incremental upserts will become more costly over time.
 
-### 2. Adding the `selector.yml` file
+### 2. Adding the `selectors.yml` file
 
 Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the e-commerce model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
 
@@ -102,7 +102,7 @@ vars:
 
 ### 6. Removing unused modules
 
-The e-commerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow e-commerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/#cart-entity)
+The e-commerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow e-commerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/index.md#cart-entity)
 
 #### Disabling the cart module in `dbt_project.yml` (recommended)
 

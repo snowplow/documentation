@@ -1,6 +1,6 @@
 ---
 title: "User Mapping"
-date: "2022-10-05"
+description: "Details on mapping between `domain_userid` and `user_id` in our packages."
 sidebar_position: 100
 ---
 ```mdx-code-block

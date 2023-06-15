@@ -40,7 +40,7 @@ Add this into your project’s `build.gradle` for the default installation with 
 }`
 }</CodeBlock>
 
-Adding Apache HTTP support instead:
+Adding dependencies for Apache HTTP support instead (read [this page](/docs/collecting-data/collecting-from-own-applications/java-tracker/configuring-how-events-are-sent/index.md) for how to configure this):
 <CodeBlock language="gradle">{
 `dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:${versions.javaTracker}'
@@ -52,7 +52,7 @@ Adding Apache HTTP support instead:
 }`
 }</CodeBlock>
 
-If you are using your own `HttpClientAdapter` class:
+If you are using your own `HttpClientAdapter` implementation and/or will be installing dependencies separately:
 <CodeBlock language="gradle">{
 `dependencies {
     implementation 'com.snowplowanalytics:snowplow-java-tracker:${versions.javaTracker}'

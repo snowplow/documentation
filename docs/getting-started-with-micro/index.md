@@ -1,5 +1,5 @@
 ---
-title: "Setting up Snowplow Micro locally"
+title: "Using Snowplow Micro locally"
 sidebar_position: 25
 ---
 

@@ -5,7 +5,7 @@ sidebar_position: 20
 ---
 
 ```mdx-code-block
-import Block1303 from "@site/docs/reusable/untitled-reusable-block-20/_index.md"
+import EnrichmentList from "@site/docs/reusable/enrichment-list/_index.md"
 
-<Block1303/>
+<EnrichmentList/>
 ```

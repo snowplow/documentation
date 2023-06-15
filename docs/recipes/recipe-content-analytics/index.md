@@ -27,7 +27,7 @@ We have already created a custom `content` entity for you in [Iglu Central](http
 
 Snowplow uses self-describing JSON schemas to structure events and entities so that they can be validated in the pipeline and loaded into tidy tables in the warehouse. You can learn more about these data structures [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), and about why we take this approach [here](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/).
 
-While Try Snowplow only ships with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-data-structures/index.md) (and API) for Enterprise and via [the Data Structures Builder](/docs/understanding-tracking-design/managing-data-structures-with-data-structures-builder/index.md) for Cloud. 
+While Try Snowplow only ships with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) (and API) for Enterprise and via [the Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/builder/index.md) for Cloud. 
 
 The `content` entity has the following fields:
 
@@ -152,3 +152,9 @@ Understanding how your users are engaging with your content is just the first st
 To learn more about Snowplow for media and entertainment, check out [our blog series on the topic](https://snowplowanalytics.com/blog/2019/05/29/snowplow-for-media-part-1/).
 
 Ready to get started with content recommendations? Check out our [step-by-step guide](https://snowplowanalytics.com/blog/2020/10/26/how-to-build-a-content-recommendation-engine-with-snowplow/).
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

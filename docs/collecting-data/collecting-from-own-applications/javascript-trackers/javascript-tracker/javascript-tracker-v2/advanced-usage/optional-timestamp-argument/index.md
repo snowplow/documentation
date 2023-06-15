@@ -4,13 +4,11 @@ date: "2021-03-24"
 sidebar_position: -10
 ---
 
-Documentation for latest release
+```mdx-code-block
+import DeprecatedV2 from "@site/docs/reusable/javascript-tracker-v2-deprecation/_index.md"
+```
 
-The documentation listed here is for Version 2 of the JavaScript Tracker. Version 3 is now available and upgrading is recommended.
-
-\- [Documentation for Version 3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md)
-
-\- [v2 to v3 Migration Guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/v2-to-v3-migration-guide/index.md)
+<DeprecatedV2/>
 
 Since 2.7.0 each `track...()` method supports an optional timestamp as its final argument; this allows you to manually override the timestamp attached to this event. The timestamp should be in milliseconds since the Unix epoch.
 

@@ -17,6 +17,33 @@ s1.SetLang("en-gb");
 s1.SetScreenResolution(1920, 1080);
 ```
 
+There are two ways to provide the subject information:
+
+1. Globally for all tracked events. This is useful in client-side applications where all tracked events relate to the same user and share the same properties.
+2. For each event individually. This is useful in server-side applications where each event might relate to a different user.
+
+To configure a global subject, pass it to the tracker during initialization:
+
+```csharp
+var globalSubject = new Subject().SetPlatform(Platform.Mob).SetLang("EN");
+
+Tracker.Tracker.Instance.Start(emitter: emitter, subject: globalSubject, trackerNamespace: "some namespace", appId: "some appid", l: logger);
+```
+
+To pass the subject along with tracked events:
+
+```csharp
+Subject eventSubject = new Subject().SetUserId("Kevin Gleason");
+
+Tracker.Instance.Track(
+    new Structured()
+        .SetCategory("shop")
+        .SetAction("add-to-basket")
+        .Build(),
+    eventSubject
+);
+```
+
 ### `SetUserId`
 
 You can set the user ID to any string:

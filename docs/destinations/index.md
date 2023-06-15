@@ -1,5 +1,5 @@
 ---
-title: "Storing and forwarding the data"
+title: "Storing and forwarding data"
 sidebar_position: 85
 ---
 

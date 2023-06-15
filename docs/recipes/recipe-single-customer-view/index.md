@@ -105,3 +105,9 @@ This recipe covers a really simple example of user stitching based on Snowplow's
 - Address your obligations as a data controller by learning more about [Snowplow's approach to user privacy](https://snowplow.io/blog/user-identification-and-privacy/).
 
 For more information about how to build a single customer view with Snowplow, check out [our blog post on the topic](https://snowplowanalytics.com/blog/2020/06/11/single-customer-view/).
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

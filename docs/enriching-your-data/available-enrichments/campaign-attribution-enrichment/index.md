@@ -128,9 +128,18 @@ Results:
 
 ### Click and network attribution
 
+You can define which URL parameters are used to populate the `mkt_clickid` field (the defaults include `gclid`, `msclkid` and `dclid`). For each parameter, _the same configuration setting_ also defines what network — the `mkt_network` field — it corresponds to (by default, `gclid` corresponds to `Google`, `msclkid` to `Microsoft` and `dclid` to DoubleClick).
+
+:::tip
+
+You can configure any parameter names or network names, including your custom ones.
+
+:::
+
 In the next example, we will customize the `mktClickId` configuration:
 * First, we add support for `wbraid` and `gbraid` [parameters](https://support.google.com/analytics/answer/11367152?hl=en), which will be mapped to `Google` as the corresponding `mkt_network`.
 * Second, we override the `msclkid` parameter, so that it maps to `NotMicrosoft` as the marketing network (instead of the default `Microsoft`).
+* Third, we add a custom `xyzid` parameter that maps to the `XYZ` network.
 * Other default mappings for `gclid` and `dclid` remain unaffected.
 
 ```json
@@ -141,7 +150,8 @@ In the next example, we will customize the `mktClickId` configuration:
         "mktClickId": {
           "wbraid": "Google",
           "gbraid": "Google",
-          "msclkid": "NotMicrosoft"
+          "msclkid": "NotMicrosoft",
+          "xyzid": "XYZ"
         }
         ...
       }
@@ -160,7 +170,8 @@ Results:
 |-------------------------|------------------------|------------------------|
 | `wbraid=abc`            | `abc`                  | `Google`               |
 | `msclkid=abc`           | `abc`                  | `NotMicrosoft`         |
-| `wbraid=abc&gbraid=def` | `abc` or `def` ⚠️        | `Google`               |
+| `xyzid=abc`             | `abc`                  | `XYZ`                  |
+| `wbraid=abc&gbraid=def` | `abc` or `def` ⚠️       | `Google`               |
 
 ## Output
 

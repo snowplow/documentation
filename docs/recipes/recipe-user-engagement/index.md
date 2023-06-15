@@ -100,3 +100,9 @@ This recipe covers a really simple example of aggregating user engagement based 
 - Build a user stitching table to make sure you are including all user activity correctly based on the different identifiers you observe across platforms, including a custom set user ID. You can explore Snowplow's approach to user stitching in [our single customer view recipe](/docs/recipes/recipe-single-customer-view/index.md).
 - Instrument additional events to better understand how your users are engaging with you.
 - Start to think about how you might use user attributes and user behavior to segment your user base. Segmentation is the first step towards personalizing user experience.
+
+```mdx-code-block
+import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
+
+<AllAccelerators/>
+```

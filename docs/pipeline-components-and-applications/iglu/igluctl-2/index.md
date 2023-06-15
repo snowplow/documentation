@@ -1,6 +1,5 @@
 ---
 title: "Igluctl"
-date: "2021-01-21"
 sidebar_position: 10
 ---
 
@@ -17,15 +16,16 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 
 - `lint` - validate set of JSON Schemas for syntax and consistency of their properties
 - `static` - work with static Iglu registry
-    - `generate` - generate DDLs and migrations (only for Redshift now) from set of JSON Schemas
+    - `generate` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for Redshift and Postgres warehouses. Generate DDLs and migrations from set of JSON Schemas. If the schema is not evolved correctly and backward incompatible data is sent within transformer's aggregation window, loading would fail for all events.
     - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
-    - `pull` - pull set of JSON Schemas from registry to local folder
+    - `pull` - pull set of JSON Schemas from registry to local folder
+    - `parquet-verify` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks).  If the schema is not evolved correctly, the offending version will be stored in a separate column with `_recovered_` in its name.
+    - `deploy` - run entire schema workflow using a config file. This could be used to chain multiple commands, i.e. `lint` followed by `push` and `s3cp`.
     - `s3cp` - copy JSONPaths or schemas to S3 bucket
-- `server` - work with an Iglu server
-    - `keygen` - generate read and write API keys on Iglu Server
-- `rdbms` - work with relation databases
-    - `table-check` - will check a given schema's table structure against schema
-    - `table-migrate` is optional and allows removal of incompatible tables by migrating them as opposed to just "blacklisting".
+- `server` - work with an Iglu server
+    - `keygen` - generate read and write API keys on Iglu Server
+- `rdbms` - work with relation databases
+    - `table-check` - will check a given Redshift or Postgres tables against iglu server.
 
 ## Downloading and running Igluctl 
 
@@ -115,7 +115,7 @@ Igluctl also includes many checks proving that schemas doesn’t have conflictin
 
 `igluctl static generate` generates corresponding [Redshift](http://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html) DDL files (`CREATE TABLE` statements) and migration scripts (`ALTER TABLE` statements).
 
-This command previously was a part of [Schema Guru](http://github.com/snowplow/schema-guru) and was known as `schema-guru ddl`, but has been moved into iglu in r5 release.
+As of version 0.11.0 this command will also validate the compatibility of schema family and display warnings if there is an incompatible evolution.
 
 ```bash
 $ ./igluctl static generate $INPUT
@@ -145,8 +145,6 @@ Igluctl will generate the following migration scripts:
 
 This migrations (and all subsequent table definitions) are aware of column order and will ensure that new columns are added at the end of the table definition. This means that the tables can be updated in-place with single `ALTER TABLE` statements.
 
-**NOTE**: migrations support is in early beta. Only single alter-table case is supported, particularly “add optional field”.
-
 ### Handling union types
 
 One of the more problematic scenarios to handle when generating Redshift table definitions is handling `UNION` field types e.g. `["integer", "string"]`. Union types will be transformed as most general. In the above example (union of an integer and string type) the corresponding Redshift column will be a `VARCHAR(4096)`.
@@ -159,51 +157,6 @@ One of the more problematic scenarios to handle when generating Redshift table d
 - If user specified full path to file with schema and this file is not 1-0-0 - just print a warning
 - If user specified full path to file with schema and it is 1-0-0 - all good
 
-### Other options
-
-If you’re not a Snowplow Platform user, don’t use [Self-describing Schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/index.md) or just don’t want anything Iglu-specific, you can produce raw DDL:
-
-```bash
-$ ./igluctl static generate --raw $INPUT
-```
-
-But bear in mind that Self-describing Schemas bring many benefits. For example, raw Schemas will not preserve an order for your columns (it’s just impossible as it doesn’t know about previous revisions) and also you will not have a migrations.
-
-You may also want to get JSONPaths file for Redshift’s [COPY](http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html) command. It will place `jsonpaths` dir alongside with `sql`:
-
-```bash
-$ ./igluctl static generate --with-json-paths $INPUT
-```
-
-If there’s no clues about string length (e.g. `maxLength` specifications in the schema), Igluctl will set the length of `VARCHAR` columns to 4096 by default . You can also specify this your own VARCHAR size used by default:
-
-```bash
-$ ./igluctl static generate --varchar-size 32 $INPUT
-```
-
-You can also specify Redshift Schema for your table (don’t confuse database [schema](http://docs.aws.amazon.com/redshift/latest/dg/r_Schemas_and_tables.html) and schemas like JSON). For non-raw mode `atomic` used as default.
-
-```bash
-$ ./igluctl static generate --raw --dbschema business $INPUT
-```
-
-Some users do not full rely on Igluctl for DDL generation and edit their DDLs manually. By default, Igluctl will not override your files (either DDLs and migrations) if user made any significant changes (comments and whitespaces are not significant). Instead Igluctl will print warning that file has been changed manually. To change this behavior you may specify `--force` flag.
-
-```bash
-$ ./igluctl static generate --force $INPUT
-```
-
-It is possible to forget about ownership once table is created. It could be achieved within igluctl as following.
-
-```bash
-$ ./igluctl static generate $INPUT --set-owner <owner>
-```
-
-igluctl also has an option `--no-header` which will not place header comments into output DDL.
-
-```bash
-$ ./igluctl static generate $INPUT --no-header
-```
 
 ## static push
 
@@ -285,10 +238,6 @@ Example:
 
     "generate": {
       "dbschema": "atomic"
-      "owner": "a_new_owner"
-      "varcharSize": 4096
-      "withJsonPaths": true
-      "noHeader": false
       "force": false
     }
 
@@ -328,7 +277,8 @@ $ ./igluctl server keygen --vendor-prefix com.acme iglu.acme.com:80/iglu-server 
 
 ## rdbms table-check
 
-`igluctl rdbms table-check` will check given schema's table structure against schema.
+`igluctl rdbms table-check` will check given RedShift or Postgres schema against iglu repository. As of version 0.11.0 
+it would cross verify the column types as well as names. 
 
 It supports two interfaces:
 
@@ -361,50 +311,11 @@ It also accepts a number of arguments:
 ```
 
 ```bash
-$ ./igluctl rdbms table-check --resolver <path> --schema <schemaKey>
+$ ./igluctl rdbms table-check --resolver <path> --schema <schemaKey> ...connection parameters
 ```
 
 or
 
 ```bash
-$ ./igluctl rdbms table-check --server <uri>
-```
-
-## rdbms table-migrate
-
-`igluctl rdbms table-migrate` is optional and allows removal of incompatible tables by migrating them as opposed to just "blacklisting".
-
-`rdbms table-migrate` will provide you with DML/DDL statements steps to migrate legacy tables into a new format.
-
-It also accepts a number of arguments:
-
-```bash
---help
-    Display this help text.
---resolver <path>
-    Iglu resolver config path
---schema <schemaKey>
-    Schema to check against. It should have iglu:<URI> format
---dbschema <string>
-    Database schema
---output <string>
-    S3 Path for output
---role <string>
-    AWS Role
---region <name>
-    AWS Region
---host <string>
-    Database host address
---port <integer>
-    Database port
---dbname <string>
-    Database name
---username <string>
-    Database username
---password <string>
-    Database password
-```
-
-```bash
-$ ./igluctl rdbms table-migrate --resolver <path> --schema <schemaKey>
+$ ./igluctl rdbms table-check --server <uri> ...connection params
 ```

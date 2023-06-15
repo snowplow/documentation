@@ -7,11 +7,14 @@ sidebar_position: 10
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
+import AutoSchemaCreation from '@site/docs/destinations/warehouses-and-lakes/rdb/loading-transformed-data/_automatic-schema-creation.md';
 ```
 
 ## Setting up Redshift
 
 Refer to our [guide](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/setup-redshift/index.md) on how to setup and launch a Redshift cluster.
+
+<AutoSchemaCreation name="Redshift" grantDocs="https://docs.aws.amazon.com/redshift/latest/dg/r_GRANT.html" />
 
 ## Downloading the artifact
 

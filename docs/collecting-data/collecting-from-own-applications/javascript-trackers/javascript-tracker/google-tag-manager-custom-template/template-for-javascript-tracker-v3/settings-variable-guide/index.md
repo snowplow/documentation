@@ -34,7 +34,7 @@ This means that a tracker configuration is applied **only once** to the tracker.
 
 ### Collector Endpoint Hostname
 
-This needs to be set to the hostname/domain (e.g. `sp.domain.com`) on which you’ve configured your Snowplow collector. Snowplow BDP customers can find this in their [Pipeline Configuration settings](/docs/using-the-snowplow-console/accessing-collector-configuration/index.md).
+This needs to be set to the hostname/domain (e.g. `sp.domain.com`) on which you’ve [configured](/docs/collecting-data/configuring-collector/index.md) your Snowplow Collector.
 
 ### Acknowledgements
 

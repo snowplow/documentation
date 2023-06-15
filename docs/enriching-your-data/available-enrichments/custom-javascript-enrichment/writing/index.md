@@ -7,7 +7,7 @@ description: "How to write the enrichment code in JavaScript."
 Your JavaScript enrichment code should contain a function called `process`:
 * This function will receive each event as its only argument
 * It can optionally return an array of [entities](/docs/understanding-tracking-design/understanding-events-entities/index.md) to be added to the event (under `derived_contexts`)
-* Any uncaught exceptions will result in [failed events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md)
+* Any uncaught exceptions will result in [failed events](/docs/managing-data-quality/understanding-failed-events/index.md)
 
 ```js
 function process(event) {
@@ -30,7 +30,7 @@ JavaScript enrichment uses the [Nashorn Engine](https://docs.oracle.com/en/java/
 ## Best practices
 
 Before we dive into it, here are a few general tips:
-* Make sure your code works for _all_ of your events, not just the particular types of events you are interested in. Remember, unhandled exceptions will result in [failed events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md).
+* Make sure your code works for _all_ of your events, not just the particular types of events you are interested in. Remember, unhandled exceptions will result in [failed events](/docs/managing-data-quality/understanding-failed-events/index.md).
 * Don’t try to share state across multiple enriched events. Enrichments are run inside a highly parallel application with multiple independent instances, so this will not work.
 * In your enrichment code, avoid CPU-intensive tasks (e.g. encryption) and IO-intensive tasks (e.g. requests to an external service) without thoroughly benchmarking the impact they might have on your event processing time.
 * The enrichment code has access to the Java standard library and therefore to the filesystem of the machine it’s running on. Proceed with caution when copying code from untrusted sources.
@@ -111,7 +111,7 @@ For events with no entities attached, `getContexts()` will return `null`. The pa
 
 :::note Derived entities
 
-Currently, derived entities (added by other enrichments) cannot be fetched. `event.getDerived_contexts()` will _always_ return `null`.
+For derived entities (added by other enrichments), you can use `event.getDerived_contexts()` in the same way as above. Note that this is only supported since Enrich 3.8.0 (and Snowplow Micro 1.7.1). In prior versions, this function always returns `null`.
 
 :::
 
@@ -235,9 +235,15 @@ function process(event) {
   ...
 ```
 
+:::note
+
+You might be tempted to update derived entities in a similar way by using `event.setDerived_contexts()`. However, this is not supported (the function exists, but has no effect). Instead, refer to the [Adding extra entities](#adding-extra-entities-to-the-event) section.
+
+:::
+
 ## Discarding the event
 
-Sometimes you don’t want the event to appear in your data warehouse or lake, e.g. because you suspect it comes from a bot and not a real user. In this case, you can `throw` an exception in your JavaScript code, which will send the event to [failed events](/docs/managing-data-quality/failed-events/understanding-failed-events/index.md):
+Sometimes you don’t want the event to appear in your data warehouse or lake, e.g. because you suspect it comes from a bot and not a real user. In this case, you can `throw` an exception in your JavaScript code, which will send the event to [failed events](/docs/managing-data-quality/understanding-failed-events/index.md):
 
 ```js
 const botPattern = /.*Googlebot.*/;

@@ -1,6 +1,6 @@
 ---
 title: "Understanding the structure of Snowplow data"
-date: "2020-10-29"
+description: A summary of the Snowplow events table and its fields, including self describing events and entities
 sidebar_position: 10
 ---
 
@@ -28,7 +28,7 @@ Snowplow started life as a web analytics data warehousing platform, and has a ba
 
 As Snowplow has evolved into a general purpose event analytics platform, we've enabled Snowplow users to define additional event types (we call these[ _self describing events_](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#self-describing-events)) and define their own entities (we call these [_custom entities_](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md#custom-contexts)) so that they can extend the schema to suit their own businesses.
 
-For Snowplow users running Amazon Redshift, each custom unstructured event and custom context will be stored in its own dedicated table, again with one line per event. These additional tables can be joined back to the core `atomic.events` table, by joining on the `root_id` field in the self-describing event / custom entity table with the `event_id` in the `atomic.events` table, and the `root_tstamp` and `collector_tstamp` field int eh respective tables. For users on other warehouses these will be additional columns in the `atomic.events` table.
+For Snowplow users running Amazon Redshift, each custom unstructured event and custom context will be stored in its own dedicated table. These additional tables can be joined back to the core `atomic.events` table, by joining on the `root_id` field in the self-describing event / custom entity table with the `event_id` in the `atomic.events` table, and the `root_tstamp` and `collector_tstamp` field in the respective tables. For users on other warehouses these will be additional columns in the `atomic.events` table.
 
 ### Single table
 
@@ -77,7 +77,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | `event`             | text | The type of event recorded                              | Yes   | 'page_view'                            | Tracking                                                                                                              |
 | `event_id`          | text | A UUID for each event                                   | Yes   | 'c6ef3124-b53a-4b13-a233-0088f79dcbcb' | Tracking (or enrichment if empty)                                                                                     |
 | `txn_id`            | int  | Transaction ID set client-side, used to de-dupe records | No    | 421828                                 | Tracking (Deprecated)                                                                                                 |
-| `event_fingerprint` | text | Hash client-set event fields                            | No    | AADCE520E20C2899F4CED228A79A3083       | [Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) |
+| `event_fingerprint` | text | Hash client-set event fields, used to de-dupe records                            | No    | AADCE520E20C2899F4CED228A79A3083       | [Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) |
 
 A complete list of event types is given [here](#Event-specific-fields).
 
@@ -104,7 +104,7 @@ Some Snowplow Trackers allow the user to name each specific Tracker instance. `n
 | `domain_sessionidx` | int  | A visit / session index                                                                                                                                          | No    | 3                                      | Tracking             |
 | `domain_sessionid`  | text | A visit / session identifier                                                                                                                                     | No    | 'c6ef3124-b53a-4b13-a233-0088f79dcbcb' | Tracking             |
 
-`domain_sessionidx` is the number of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript Tracker calculates this field by storing a visit count in a first-party cookie. Whenever the Tracker fires an event, if more than 30 minutes have elapsed since the last event, the visitor count is increased by 1. (Whenever an event is fired, a "session cookie" is created and set to expire in 30 minutes. This is how the Tracker can tell whether the visit count should be incremented.) Thirty minutes is the default value and can be changed using the `SessionCookieTimeout` configuration option in the tracker.
+`domain_sessionidx` is the number of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript Tracker calculates this field by storing a visit count in a first-party cookie. Whenever the Tracker fires an event, if more than 30 minutes have elapsed since the last event, the visitor count is increased by 1. (Whenever an event is fired, a "session cookie" is created and set to expire in 30 minutes. This is how the Tracker can tell whether the visit count should be incremented.) Thirty minutes is the default value and can be changed using the `sessionCookieTimeout` configuration option in the tracker.
 
 #### Device and operating system fields
 
@@ -162,18 +162,18 @@ Fields containing information about the event type.
 | `page_url`                                                | text      | The page URL                                                               | Yes   | 'http://www.example.com'                                       | Tracking                                                                                                                                                                                          |
 | `page_urlscheme`                                          | text      | Scheme aka protocol                                                        | Yes   | 'https'                                                        | Default Enrichment (`url`)                                                                                                                                                                        |
 | `page_urlhost`                                            | text      | Host aka domain                                                            | Yes   | '“www.snowplowanalytics.com'                                   | Default Enrichment (`url`)                                                                                                                                                                        |
-| `page_urlport`                                            | int       | Port if specified, 80 if not                                               | 80    |                                                                | Default Enrichment (`url`)                                                                                                                                                                        |
+| `page_urlport`                                            | int       | Port if specified, scheme dependent if not (443 for https, 80 for http)    | Yes   | 80                                                             | Default Enrichment (`url`)                                                                                                                                                                        |
 | `page_urlpath`                                            | text      | Path to page                                                               | No    | '/product/index.html'                                          | Default Enrichment (`url`)                                                                                                                                                                        |
 | `page_urlquery`                                           | text      | Querystring                                                                | No    | 'id=GTM-DLRG'                                                  | Default Enrichment (`url`)                                                                                                                                                                        |
 | `page_urlfragment`                                        | text      | Fragment aka anchor                                                        | No    | '4-conclusion'                                                 | Default Enrichment (`url`)                                                                                                                                                                        |
 | `page_referrer`                                           | text      | URL of the referrer                                                        | No    | 'http://www.referrer.com'                                      | Tracking                                                                                                                                                                                          |
 | `page_title`                                              | text      | Web page title                                                             | No    | 'Snowplow Docs - Understanding the structure of Snowplow data' | Tracking                                                                                                                                                                                          |
-| `refr_urlscheme`                                          | text      | Referrer scheme                                                            | No    | 'http'                                                         | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                                                                                                    |
-| `refr_urlhost`                                            | text      | Referrer host                                                              | No    | 'www.bing.com'                                                 | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                                                                                                    |
-| `refr_urlport`                                            | int       | Referrer port                                                              | No    | 80                                                             | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                                                                                                    |
-| `refr_urlpath`                                            | text      | Referrer page path                                                         | No    | '/images/search'                                               | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                                                                                                    |
-| `refr_urlquery`                                           | text      | Referrer URL querystring                                                   | No    | 'q=psychic+oracle+cards'                                       | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                                                                                                    |
-| `refr_urlfragment`                                        | text      | Referrer URL fragment                                                      | No    |                                                                | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                                                                                                    |
+| `refr_urlscheme`                                          | text      | Referrer scheme                                                            | No    | 'http'                                                         | Default Enrichment (`referer`)                                                                                                                                                                    |
+| `refr_urlhost`                                            | text      | Referrer host                                                              | No    | 'www.bing.com'                                                 | Default Enrichment (`referer`)                                                                                                                                                                    |
+| `refr_urlport`                                            | int       | Referrer port                                                              | No    | 80                                                             | Default Enrichment (`referer`)                                                                                                                                                                    |
+| `refr_urlpath`                                            | text      | Referrer page path                                                         | No    | '/images/search'                                               | Default Enrichment (`referer`)                                                                                                                                                                    |
+| `refr_urlquery`                                           | text      | Referrer URL querystring                                                   | No    | 'q=psychic+oracle+cards'                                       | Default Enrichment (`referer`)                                                                                                                                                                    |
+| `refr_urlfragment`                                        | text      | Referrer URL fragment                                                      | No    |                                                                | Default Enrichment (`referer`)                                                                                                                                                                    |
 | `refr_medium`                                             | text      | Type of referrer                                                           | No    | 'search', 'internal'                                           | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                 |
 | `refr_source`                                             | text      | Name of referrer if recognized                                             | No    | 'Bing images'                                                  | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                 |
 | `refr_term`                                               | text      | Keywords if source is a search engine                                      | No    | 'psychic oracle cards'                                         | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)                                                                                 |
@@ -227,13 +227,12 @@ Snowplow currently supports the following event types:
 | [Page pings](#page-pings)                                 | 'page_ping'                          |
 | [E-commerce transactions](#e-commerce-transactions)       | 'transaction' and 'transaction_item' |
 | [Custom structured events](#custom-structured-events)     | 'struct'                             |
-| [Custom unstructured events](#custom-unstructured-events) | 'unstruct'                           |
+| [Custom unstructured events](#custom-self-describing-unstructured-events) | 'unstruct'                           |
 
 Details of which fields are available for which events are given below. In some cases these events will store values in the `atomic.events` columns, which are listed below.
 
 #### Page views
 
-There are currently no fields that are specific to `page_view` events: all the fields that are required are part of the standard fields available for any [web-based event](#web-specific-fields) e.g. `page_urlscheme`, `page_title`.
 There are currently no fields that are specific to `page_view` events: all the fields that are required are part of the standard fields available for any [web-based event](#web-specific-fields) e.g. `page_urlscheme`, `page_title`.
 
 #### Page pings
@@ -298,7 +297,7 @@ If you wish to track an event that Snowplow does not recognize as a first class 
 
 Custom [self-describing (unstructured) events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#self-describing-events) are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 
-When a user sends in a custom self-describing event, they do so as a JSON of name-value properties that conforms to a JSON schema defined for the event earlier.
+When a user sends in a custom self-describing event, they do so as a JSON document of name-value properties that conforms to an Iglu schema defined for the event earlier.
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="rs/pg" label="Redshift/Postgres" default>
@@ -369,9 +368,9 @@ from
 
 #### Entities (Contexts)
 
-Entities (Contexts) enable Snowplow users to define their own entities that are related to events, and fields that are related to each of those entities. For example, an online retailer may choose to define a `user` context, to store information about a particular user, which might include data points like the users Facebook ID, age, membership details etc. In addition, they may also define a `product` context, with product data e.g. SKU, name, created date, description, tags etc.
+Entities (Contexts) enable Snowplow users to define their own entities that are related to events, and fields that are related to each of those entities. For example, an online retailer may choose to define a `user` context, to store information about a particular user, which might include data points like the users Facebook ID, age, membership details etc. In addition, they may also define a `product` context, with product data e.g. SKU, name, created date, description, tags etc. These entities could be attached to a standard Snowplow event, or a Self-Describing event such as a `product_view` which tracks a specific user viewing a specific product (or set of products).
 
-An event can have any number of custom entities attached. Each context is passed into Snowplow as a JSON. Additionally, the [Snowplow Enrichment](/docs/enriching-your-data/index.md) process can derive additional contexts.
+An event can have any number of custom entities attached. Each context is passed into Snowplow as a JSON document. Additionally, the [Snowplow Enrichment](/docs/enriching-your-data/index.md) process can derive additional contexts.
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="rs/pg" label="Redshift/Postgres" default>
@@ -383,7 +382,7 @@ select
     ...
 from 
     atomic.events ev
-left join 
+left join -- assumes no duplicates, and will return all events regardless of if they have this entity
     atomic.my_custom_context_table ctx
     on ctx.root_id = ev.event_id and ctx.root_tstamp = ev.collector_tstamp
 ```
@@ -457,7 +456,7 @@ from
     unique_events u_ev
 left join 
     unique_my_custom_context u_ctx
-    on u_ctx.root_id = u_ev.event_id and u_ctx.root_tstamp = u_ev.collector_tstamp and mod(u_ctx.my_custom_context_index, u_ev.event_id_dedupe_count) 
+    on u_ctx.root_id = u_ev.event_id and u_ctx.root_tstamp = u_ev.collector_tstamp and mod(u_ctx.my_custom_context_index, u_ev.event_id_dedupe_count) = 0
 where
     u_ev.event_id_dedupe_index = 1
 ```

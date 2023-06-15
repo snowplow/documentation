@@ -58,7 +58,7 @@ from {{ ref('snowplow_web_base_events_this_run') }} a
 left join nl_basjes_yauaa_context_1 b on 
     a.event_id = b.yauaa_context__id 
     and a.collector_tstamp = b.yauaa_context__tstamp
-    and mod(b.yauaa_context__index, a.event_id_dedupe_count) -- ensure one version of each potentially duplicated entity in context
+    and mod(b.yauaa_context__index, a.event_id_dedupe_count) = 0 -- ensure one version of each potentially duplicated entity in context
 ```
 
 :::info

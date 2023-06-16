@@ -89,11 +89,11 @@ The latest information for our packages can be found in the [quickstart](/docs/m
 
 The dbt package uses slightly different logic for processing, including the quarantining of sessions and different format manifest tables. It is highly recommended that you just run the dbt project from your start date. The following is a best-effort suggestion and we make no guarantee that all data will be correctly processed or that issues may not happen later in the lifetime of the project.
 
-This method will also not correctly populate the user stitching table or process for historic data.
+This method will also not correctly populate the user stitching table or process user stitching for historic data.
 
 :::
 
-There may be cases where running the dbt models from scratch is not a viable option for you, in this case it is possible to migrate your existing derived SQL Runner data into the derived tables produced by dbt. 
+There may be cases where running the dbt models from scratch is not a viable option for you, in this case it is possible to migrate your existing derived SQL Runner data into the derived tables produced by dbt, however this will result in your data being generated from two slightly differing logics. 
 
 It is advisable to produce your dbt tables into new schemas where possible, even though the derived tables should have different names; this will help keep your data separate and ensure that as we go through the following steps that dbt does not overwrite your SQL Runner tables.
 

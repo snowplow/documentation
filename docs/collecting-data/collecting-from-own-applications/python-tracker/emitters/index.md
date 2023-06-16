@@ -1,6 +1,5 @@
 ---
 title: "Emitters"
-date: "2023-06-14"
 sidebar_position: 30
 ---
 
@@ -13,7 +12,7 @@ At its most basic, the Emitter class only needs a collector URI:
 ```python
 from snowplow_tracker import Emitter
 
-e = Emitter("collector.example.com")
+e = Emitter(endpoint="collector.example.com")
 ```
 
 This is the signature of the constructor for the base Emitter class:
@@ -49,11 +48,15 @@ def __init__(
 | `on_failure` | Callback executed when a flush is unsuccessful | No | Function taking 2 arguments | `None` |
 | `byte_limit` | Number of bytes to store before flushing | No | Positive integer | `None` |
 | `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers | `None` | 
-| `max_retry_delay_seconds` | The maximum time between attempts to send failed events to the collector | No | int | 60s | 
+| `max_retry_delay_seconds` | The maximum time between attempts to send failed events to the collector | No | int | 60 | 
 | `buffer_capacity` | The maximum capacity of the event buffer | No | int | `None` |
 | `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | `None` | 
-| `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None` | 
+| `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None`| 
 | `session` | Persist parameters across requests by using a session object | No | requests.Session | `None` | 
+
+:::note
+If no `event_store` is provided, an `InMemoryEventStore` will be initialized with a `buffer_capacity` of 10,000
+:::
 
 See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for more information. 
 
@@ -93,7 +96,7 @@ def failure(num, arr):
     for event_dict in arr:
         print(event_dict)
      
-e = Emitter("collector.example.com", buffer_size=3, on_success=new_success, on_failure=failure)
+e = Emitter(endpoint="collector.example.com", buffer_size=3, on_success=new_success, on_failure=failure)
 
 t = Tracker(namespace="snowplow_tracker", emitter=e)
 ```
@@ -116,10 +119,10 @@ Custom retry rules for HTTP status codes received in emit responses from the Col
 
 ### `event_store`
 
-The event store is used to store an event queue with events scheduled to be sent. Events are added to the event store when they are tracked and removed when they are successfuly emitted or when emitting fails without any scheduled retries. The default is an InMemoryEventStore object with a buffer_capacity of 10,000 events.
+The event store is used to store an event queue with events scheduled to be sent. Events are added to the event store when they are tracked and removed when they are successfully emitted or when emitting fails without any scheduled retries. The default is an InMemoryEventStore object with a buffer_capacity of 10,000 events.
 
 ### `session`
-The session object can be parsed into the emitter to use the requests.Session API. This allows users to persist parameters across requests, as well as pool connections to increase efficiency under heavy useage. If no `session` is parsed, the requests API is used.
+The session object can be parsed into the emitter to use the requests.Session API. This allows users to persist parameters across requests, as well as pool connections to increase efficiency under heavy usage. If no `session` is parsed, the requests API is used.
 
 ## What happens if an event fails to send?
 After trying to send a batch of events the collector will return an http status code. A 2xx code is always considered successful. If a failure code is returned (anything other than 2xx, with certain exceptions, see below), the events (as PayloadDictList objects) are returned to the buffer. They will be retried in future sending attempts. 
@@ -163,7 +166,7 @@ The emitter will store 25,000 events before starting to lose data.
 ```python
 from snowplow_tracker import AsyncEmitter
 
-e = AsyncEmitter("collector.example.com", thread_count=10)
+e = AsyncEmitter(endpoint="collector.example.com", thread_count=10)
 ```
 
 The `AsyncEmitter` class works just like the Emitter class, which is its parent class. It has one advantage, though: HTTP(S) requests are sent asynchronously, so the Tracker won't be blocked while the Emitter waits for a response. For this reason, the AsyncEmitter is recommended over the base `Emitter` class.
@@ -175,7 +178,8 @@ Here is a complete example with all constructor parameters set:
 ```python
 from snowplow_tracker import AsyncEmitter
 
-e = AsyncEmitter("collector.example.com", 
+e = AsyncEmitter(
+    endpoint="collector.example.com", 
     protocol = "https",
     port=9090,
     method='post',
@@ -195,13 +199,13 @@ e = AsyncEmitter("collector.example.com",
 You can flush the emitter manually using the `flush` method of the `Tracker` instance which is sending events to the emitter. This is a blocking call which synchronously sends all events in the emitter's buffer.
 
 ```python
-t.flush()
+tracker.flush()
 ```
 
 You can alternatively perform an asynchronous flush, which tells the tracker to send all buffered events but doesn't wait for the sending to complete:
 
 ```python
-t.flush(False)
+tracker.flush(False)
 ```
 
 If you are using the AsyncEmitter, you shouldn't perform a synchronous flush inside an on_success or on_failure callback function as this can cause a deadlock.
@@ -213,14 +217,14 @@ You can configure a tracker instance to send events to multiple emitters by pass
 ```python
 from snowplow_tracker import Subject, Tracker, AsyncEmitter
 
-e1 = AsyncEmitter("collector1.cloudfront.net", method="get")
-e2 = AsyncEmitter("collector2.cloudfront.net", method="post")
+e1 = AsyncEmitter(endpoint="collector1.cloudfront.net", method="get")
+e2 = AsyncEmitter(endpoint="collector2.cloudfront.net", method="post")
 
-t = Tracker([e1, e2])
+tracker = Tracker(namespace="snowplow_tracker", emitters=[e1, e2])
 
-e3 = AsyncEmitter("collector3.cloudfront.net", method="post")
+e3 = AsyncEmitter(endpoint="collector3.cloudfront.net", method="post")
 
-t.addEmitter(e3)
+tracker.addEmitter(e3)
 ```
 
 ### Custom emitters
@@ -232,7 +236,7 @@ You can create your own custom emitter class, either from scratch or by subclass
 You can flush your emitter based on some time interval:
 
 ```python
-e1 = AsyncEmitter("collector1.cloudfront.net", method="post")
+e1 = AsyncEmitter(endpoint="collector1.cloudfront.net", method="post")
 e1.set_flush_timer(5)  # flush each 5 seconds
 ```
 

@@ -1,6 +1,5 @@
 ---
 title: "Contracts"
-date: "2020-02-26"
 sidebar_position: 70
 ---
 
@@ -11,8 +10,8 @@ Python is a dynamically typed language, but each of our methods expects its argu
 
 ```python
 s = Subject()
-t.set_platform("coffee") # throws ValueError because "coffee" is not one of supported platforms
-t.set_screen_resolution(width=-1, height=-1) # throws ValueError because width and height arguments have to be greater than 0
+tracker.set_platform("coffee") # throws ValueError because "coffee" is not one of supported platforms
+tracker.set_screen_resolution(width=-1, height=-1) # throws ValueError because width and height arguments have to be greater than 0
 ```
 
 You can turn off runtime contract validation like this:
@@ -28,7 +27,7 @@ Earlier versions of the tracker up to v0.9.1 used the [PyContracts](http://andr
 
 ```python
 s = Subject()
-t.set_color_depth("walrus")
+tracker.set_color_depth("walrus")
 ```
 
 ```python
@@ -45,7 +44,7 @@ If your value is of the wrong type, convert it before passing it into the `trac
 
 ```python
 level_idx = 42
-t.track_screen_view("Game Level", str(level_idx))
+tracker.track_screen_view("Game Level", str(level_idx))
 ```
 
 You can turn off type checking to improve performance like this:

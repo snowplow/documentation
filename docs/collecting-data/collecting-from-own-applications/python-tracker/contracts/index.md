@@ -1,6 +1,5 @@
 ---
 title: "Contracts"
-date: "2023-06-14"
 sidebar_position: 70
 ---
 
@@ -11,8 +10,8 @@ Python is a dynamically typed language, but each of our methods expects its argu
 
 ```python
 s = Subject()
-t.set_platform("coffee") # throws ValueError because "coffee" is not one of supported platforms
-t.set_screen_resolution(width=-1, height=-1) # throws ValueError because width and height arguments have to be greater than 0
+tracker.set_platform("coffee") # throws ValueError because "coffee" is not one of supported platforms
+tracker.set_screen_resolution(width=-1, height=-1) # throws ValueError because width and height arguments have to be greater than 0
 ```
 
 You can turn off runtime contract validation like this:

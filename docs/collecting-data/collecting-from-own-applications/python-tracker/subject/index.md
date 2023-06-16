@@ -1,40 +1,87 @@
 ---
 title: "Subject"
-date: "2023-06-14"
 sidebar_position: 40
 ---
 
-You may have additional information about the user (i.e. subject) performing the action or the environment in which the user has performed the action. Some of that additional data can be sent into Snowplow with each event as part of the subject class.
+You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
 
-You can create a subject like this:
+The Subject class has a number of `set_xxx()` methods to attach extra data relating to the user of the tracked events.
+
+Here are some examples:
 
 ```python
 from snowplow_tracker import Subject
-s = Subject()
+subject = Subject()
+
+subject.set_user_id("user_id")
+subject.set_lang("en-gb")
+subject.set_screen_resolution(1920, 1080)
 ```
 
-The Subject class has a set of `set_...()` methods to attach extra data relating to the user:
+There are two ways to provide the subject information:
 
-- [`set_platform`](#change-the-trackers-platform-withset_platform)
-- [`set_user_id`](#set-user-id-withset_user_id)
-- [`set_screen_resolution`](#set-screen-resolution-with-set_screen_resolution)
-- [`set_viewport`](#set-viewport-dimensions-withset_viewport)
-- [`set_color_depth`](#set-color-depth-withset_color_depth)
-- [`set_timezone`](#set-timezone-withset_timezone)
-- [`set_lang`](#set-the-language-withset_lang)
+1. For all tracked events. This is useful in client-side applications where all tracked events relate to the same user and share the same properties.
+2. For each event individually. This is useful in server-side applications where each event might relate to a different user.
+
+:::note
+When the same parameter is set for a tracker subject and an event subject, the event subject will take priority.
+:::
+
+
+The full set of subject methods are listed below:
+
+| **Subject Method** | **Description** |
+| --- | --- |
+| [`set_platform`](#change-the-trackers-platform-withset_platform) | Track custom events with custom schemas |
+| [`set_user_id`](#set-user-id-withset_user_id) | Track views of web pages |
+| [`set_screen_resolution`](#set-screen-resolution-with-set_screen_resolution) | Track engagement on web pages over time |
+| [`set_viewport`](#set-viewport-dimensions-withset_viewport) | Track views of a screen (non-web e.g. in-app) |
+| [`set_color_depth`](#set-color-depth-withset_color_depth) | Track custom events without schemas |
+| [`set_timezone`](#set-timezone-withset_timezone) | Track custom events without schemas |
+| [`set_lang`](#set-the-language-withset_lang) | Track custom events without schemas |
+
+
+### Setting a Tracker Subject
+To configure a tracker subject, pass it to the tracker during initialization:
+
+```python
+subject = Subject().set_platform("mob").set_user_id("user-12345").set_lang("en")
+
+t = Tracker(
+        namespace="snowplow_tracker", 
+        emitters=emitter, 
+        subject=subject
+)
+```
 
 If you initialize a `Tracker` instance without a subject, a default `Subject` instance will be attached to the tracker. You can access that subject like this:
 
 ```python
-t = Tracker(my_emitter)
+t = Tracker(
+        namespace="snowplow_tracker",
+        emitters=my_emitter
+)
 t.subject.set_platform("mob").set_user_id("user-12345").set_lang("en")
 ```
 
-We will discuss each of these in turn below:
+### Setting an Event Subject
+To configure an event level subject, pass it to the event during initialization.
 
-### Change the tracker's platform with `set_platform`
+```python
+event_subject = Subject().set_screen_resolution(1920, 1080)
 
-The default platform is "pc". You can change the platform the subject is using by calling for example:
+id = tracker.get_uuid()
+screen_view = ScreenView(
+  id_=id, 
+  name="name",
+  event_subject=event_subject
+)
+
+tracker.track(screen_view)
+```
+### `set_platform`
+
+The default platform is `pc`. You can change the platform the subject is using by calling for example:
 
 ```python
 s.set_platform('mob')
@@ -42,7 +89,7 @@ s.set_platform('mob')
 
 For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters).
 
-### Set user ID with `set_user_id`
+### `set_user_id`
 
 You can set the user ID to any string:
 
@@ -50,32 +97,31 @@ You can set the user ID to any string:
 s.set_user_id("user_id")
 ```
 
-### Set screen resolution with `set_screen_resolution`
+### `set_screen_resolution`
 
-If your Python code has access to the device's screen resolution, then you can pass this in to Snowplow too. 
-Both numbers should be positive integers; note the order is width followed by height. For example:
+Set the screen resolution as below. Both numbers should be positive integers in the order width followed by height.
 
 ```python
 s.set_screen_resolution(1366, 768)
 ```
 
-### Set viewport dimensions with `set_viewport`
+### `set_viewport`
 
-If your Python code has access to the viewport dimensions, then you can pass this in to the subject too. Both numbers should be positive integers; note the order is width followed by height. For example:
+Set the viewport dimensions as below. Both numbers should be positive integers in the order width followed by height.
 
 ```python
 s.set_viewport(300, 200)
 ```
 
-### Set color depth with `set_color_depth`
+### `set_color_depth`
 
-If your Python code has access to the bit depth of the device's color palette for displaying images, then you can pass this in to the subject too. The number should be a positive integer, in bits per pixel. For example:
+Set the bit depth of the device's color palette for displaying images as below. The number should be a positive integer, in bits per pixel. For example:
 
 ```python
 s.set_color_depth(32)
 ```
 
-### Set timezone with `set_timezone`
+### `set_timezone`
 
 This method lets you pass a user's timezone into Snowplow. The timezone should be a string.
 
@@ -83,7 +129,7 @@ This method lets you pass a user's timezone into Snowplow. The timezone should b
 s.set_timezone("Europe/London")
 ```
 
-### Set the language with `set_lang`
+### `set_lang`
 
 This method lets you pass a user's language into Snowplow. The language should be a string.
 
@@ -91,7 +137,7 @@ This method lets you pass a user's language into Snowplow. The language should b
 s.set_lang('en')
 ```
 
-### Setting the IP address with `set_ip_address`
+### `set_ip_address`
 
 If you have access to the user's IP address, you can set it like this:
 
@@ -99,7 +145,7 @@ If you have access to the user's IP address, you can set it like this:
 s.set_ip_address('34.633.11.139')
 ```
 
-### Setting the useragent with `set_useragent`
+### `set_useragent`
 
 If you have access to the user's useragent (sometimes called "browser string"), you can set it like this:
 
@@ -107,48 +153,27 @@ If you have access to the user's useragent (sometimes called "browser string"), 
 s.set_useragent('Mozilla/5.0 (Windows NT 5.1; rv:23.0) Gecko/20100101 Firefox/23.0')
 ```
 
-### Setting the domain user ID with `set_domain_user_id`
+### `set_domain_user_id`
 
 The `domain_userid` field of the Snowplow event model corresponds to the ID stored in the first party cookie set by the Snowplow JavaScript Tracker. If you want to match up server-side events with client-side events, you can set the domain user ID for server-side events like this:
 
 ```python
 s.set_domain_user_id('c7aadf5c60a5dff9')
 ```
-
-You can extract the domain user ID from the cookies of a request using the `get_domain_user_id` function below. The `request` argument is, as an example, the [Django request object](https://docs.djangoproject.com/en/1.7/ref/request-response/).
-
-**Note that this function has not been tested.**
-
-```python
-import re
-def snowplow_cookie(request):
-    for name in request.COOKIES:
-        if re.match(r"_sp_id", name) != None:
-           return request.COOKIES[name]
-    return None
-
-def get_domain_user_id(request):
-    cookie = snowplow_cookie(request)
-    if cookie != None:
-        return cookie.split(".")[0]
-```
-
-If you used the "cookieName" configuration option of the Snowplow JavaScript Tracker, replace "_sp_" with the same string you passed as the cookieName.
-
-### Setting the network user ID with `set_network_user_id`
+### `set_network_user_id`
 
 The `network_user_id` field of the Snowplow event model corresponds to the ID stored in the third party cookie set by the Snowplow Collector. You can set the network user ID for server-side events like this:
 
 ```python
 s.set_network_user_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
 ```
-### Setting Domain Session ID with `set_domain_session_id`
+### `set_domain_session_id`
 This method lets you pass a Domain Session ID in to Snowplow:
 
 ```python
 s.set_domain_session_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
 ```
-### Setting Domain Session index with `set_domain_session_index`
+### `set_domain_session_index`
 This method lets you pass a Domain Session index in to Snowplow:
 ```python
 s.set_domain_session_index(4)
@@ -162,7 +187,7 @@ You may want to track more than one subject concurrently. To avoid data about on
 from snowplow_tracker import Subject, Emitter, Tracker
 
 # Create a simple Emitter which will log events to https://d3rkrsqld9gmqf.cloudfront.net/com.snowplowanalytics.snowplow/tp2
-e = Emitter("d3rkrsqld9gmqf.cloudfront.net")
+e = Emitter(endpoint="d3rkrsqld9gmqf.cloudfront.net")
 
 # Create a Tracker instance
 t = Tracker(emitters=e, namespace="cf", app_id="CF63A")
@@ -212,25 +237,4 @@ struct_event = StructuredEvent(
         value=2,
     )
 t.track(struct_event)
-```
-
-You can specify an `event_subject` in all event classes. For example:
-
-```python
-from snowplow_tracker import Emitter, Tracker, Subject
-
-e = Emitter("0.0.0.0", port=9090)
-default_subject = Subject().set_platform("srv")
-t = Tracker([e], s) 
-# at this point the Tracker's subject is the default_subject. 
-# The default_subject will be combined with any event_subject that is provided
-
-# specifying event_subject - supported by all event classes
-event_subject = Subject().set_platform("srv").set_user_id("tester")
-page_view = PageView(
-        page_url="https://www.snowplow.io",
-        page_title="Homepage",
-        event_subject=event_subject
-)
-t.track(page_view) 
 ```

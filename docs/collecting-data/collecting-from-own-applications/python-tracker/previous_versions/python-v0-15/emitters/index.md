@@ -182,7 +182,7 @@ Since version 0.13.0, the constructor takes another `event_store` argument.
 :::
 - `event_store`
 
-The event store is used to store an event queue with events scheduled to be sent. Events are added to the event store when they are tracked and removed when they are successfuly emitted or when emitting fails without any scheduled retries. The default is an InMemoryEventStore object with a buffer_capacity of 10,000 events.
+The event store is used to store an event queue with events scheduled to be sent. Events are added to the event store when they are tracked and removed when they are successfully emitted or when emitting fails without any scheduled retries. The default is an InMemoryEventStore object with a buffer_capacity of 10,000 events.
 
 :::note New in v0.15.0
 
@@ -190,7 +190,7 @@ Since version 0.15.0, the constructor takes another `session` argument.
 
 :::
 - `session`
-The session object can be parsed into the emitter to use the requests.Session API. This allows users to persist parameters across requests, as well as pool connections to increase efficiency under heavy useage. If no `session` is parsed, the requests API is used.
+The session object can be parsed into the emitter to use the requests.Session API. This allows users to persist parameters across requests, as well as pool connections to increase efficiency under heavy usage. If no `session` is parsed, the requests API is used.
 
 ## What happens if an event fails to send?
 :::note New in v0.13.0

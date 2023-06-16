@@ -1,6 +1,5 @@
 ---
 title: "Tracking specific events"
-date: "2020-02-26"
 sidebar_position: 40
 ---
 
@@ -89,7 +88,7 @@ poster_context = SelfDescribingJson(
 This is how to fire a page view event with both above contexts:
 
 ```python
-t.track_page_view("http://www.films.com", "Homepage", context=[poster_context, geo_context])
+tracker.track_page_view("http://www.films.com", "Homepage", context=[poster_context, geo_context])
 ```
 
 **Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
@@ -106,20 +105,20 @@ Generally, according to the Snowplow Tracker Protocol, every event tracked will 
 
 - the `dvce_sent_tstamp`, which is the timestamp when the event was sent
 
-These are going to be used downstream, to calculate the `derived_tstamp` for the event, which takes also into account the collector timestamp, in order to best approximate the exact time the event occured.
+These are going to be used downstream, to calculate the `derived_tstamp` for the event, which takes also into account the collector timestamp, in order to best approximate the exact time the event occurred.
 
 The optional timestamp argument is for the cases where you might want to set the event timestamp yourself. If this argument is not provided or set to None, then the Python Tracker will use the current time to be the `dvce_created_tstamp` for the event.
 
 Here is an example tracking a structured event and supplying the optional timestamp argument. We can explicitly supply `None` for the intervening arguments which are empty:
 
 ```python
-t.track_struct_event("some cat", "save action", None, None, None, 1368725287000)
+tracker.track_struct_event("some cat", "save action", None, None, None, 1368725287000)
 ```
 
 Alternatively, we can use the argument name:
 
 ```python
-t.track_struct_event("some cat", "save action", tstamp=1368725287000)
+tracker.track_struct_event("some cat", "save action", tstamp=1368725287000)
 ```
 
 **_\*\*Prior to v0.9.0_**
@@ -128,7 +127,7 @@ Before version 0.9.0 of the Python Tracker, providing a `snowplow_tracker.times
 
 ```python
 from snowplow_tracker.tracker import TrueTimestamp
-t.track_struct_event("some cat", "save action", tstamp=TrueTimestamp(1368725287000))
+tracker.track_struct_event("some cat", "save action", tstamp=TrueTimestamp(1368725287000))
 ```
 
 Above will attach [`ttm`](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#timestamp-parameters)([`true_tstamp`](/docs/understanding-your-pipeline/canonical-event/index.md#date--time-fields)) parameter instead of default `dtm`. You can also use, plain integer, `DeviceTimestamp` or `None` to send `device_sent_timestamp`.
@@ -139,7 +138,7 @@ Since version 0.9.0, providing the optional timestamp argument will only set the
 
 ```python
 
-t.track_struct_event("some cat", "save action", tstamp=1368725287000)
+tracker.track_struct_event("some cat", "save action", tstamp=1368725287000)
 ```
 
 #### 3. Event subject (since v0.9.0)
@@ -151,7 +150,7 @@ This is supported as an optional keyword argument by all track methods. For exam
 ```python
 
 evSubject = Subject().set_user_id("1234")
-t.track_page_view("www.example.com", event_subject=evSubject)
+tracker.track_page_view("www.example.com", event_subject=evSubject)
 ```
 
 ### Tracker method return values
@@ -183,7 +182,7 @@ Example:
 ```python
 from snowplow_tracker import SelfDescribingJson
 
-t.track_self_describing_event(SelfDescribingJson(
+tracker.track_self_describing_event(SelfDescribingJson(
   "iglu:com.example_company/save-game/jsonschema/1-0-2",
   {
     "save_id": "4321",
@@ -216,7 +215,7 @@ Use `track_page_view()` to track a user viewing a page within your app or webs
 Example:
 
 ```python
-t.track_page_view("www.example.com", "example", "www.referrer.com")
+tracker.track_page_view("www.example.com", "example", "www.referrer.com")
 ```
 
 ### Track page pings
@@ -241,7 +240,7 @@ Arguments are:
 Example:
 
 ```python
-t.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.com", 0, 100, 0, 500, None)
+tracker.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.com", 0, 100, 0, 500, None)
 ```
 
 ### Track screen view
@@ -264,7 +263,7 @@ Use `track_mobile_screen_view()` to track a user viewing a screen (or equivalent
 Example:
 
 ```python
-t.track_mobile_screen_view(id_="1368725287001", name="Profile Page", type="feed", previous_name="Home Page", previous_id="1368725287000", previous_type="feed")
+tracker.track_mobile_screen_view(id_="1368725287001", name="Profile Page", type="feed", previous_name="Home Page", previous_id="1368725287000", previous_type="feed")
 ```
 
 :::note
@@ -307,7 +306,7 @@ These are the fields that can appear in a transaction item dictionary:
 Example of tracking a transaction containing two items:
 
 ```python
-t.track_ecommerce_transaction("6a8078be", 35, city="London", currency="GBP", items=
+tracker.track_ecommerce_transaction("6a8078be", 35, city="London", currency="GBP", items=
     [{
         "sku": "pbz0026",
         "price": 20,
@@ -341,7 +340,7 @@ Arguments:
 Example:
 
 ```python
-t.track_ecommerce_transaction_item("order-789", "2001", 49.99, 1, "Green shoes", "clothing")
+tracker.track_ecommerce_transaction_item("order-789", "2001", 49.99, 1, "Green shoes", "clothing")
 ```
 
 ### Track structured events
@@ -362,7 +361,7 @@ Use `track_struct_event()` to track a custom event happening in your app which
 Example:
 
 ```python
-t.track_struct_event("shop", "add-to-basket", None, "pcs", 2)
+tracker.track_struct_event("shop", "add-to-basket", None, "pcs", 2)
 ```
 
 ### Track link clicks
@@ -383,13 +382,13 @@ Use `track_link_click()` to track individual link click events. Arguments are:
 Basic example:
 
 ```python
-t.track_link_click("http://my-target-url2/path")
+tracker.track_link_click("http://my-target-url2/path")
 ```
 
 Advanced example:
 
 ```python
-t.track_link_click("http://my-target-url2/path", "element id 2", None, "element target", "element content")
+tracker.track_link_click("http://my-target-url2/path", "element id 2", None, "element target", "element content")
 ```
 
 ### Track add-to-cart events
@@ -411,7 +410,7 @@ Use `track_add_to_cart()` to track adding items to a cart on an ecommerce site
 Example:
 
 ```python
-t.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
+tracker.track_add_to_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD", None )
 ```
 
 ### Track remove-from-cart events
@@ -433,13 +432,13 @@ Use `track_remove_from_cart()` to track removing items from a cart on an ecomm
 Basic example:
 
 ```python
-t.track_remove_from_cart("123", 1)
+tracker.track_remove_from_cart("123", 1)
 ```
 
 Advanced example:
 
 ```python
-t.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD")
+tracker.track_remove_from_cart("123", 2, "The Devil's Dance", "Books", 23.99, "USD")
 ```
 
 ### Track form change
@@ -461,13 +460,13 @@ Use `track_from_change()` to track changes in website form inputs over session
 Basic example:
 
 ```python
-t.track_form_change("signupForm", "ageInput", "age", "24")
+tracker.track_form_change("signupForm", "ageInput", "age", "24")
 ```
 
 Advanced example:
 
 ```python
-t.track_form_change("signupForm", "ageInput", "age", "24", "number", ["signup__number", "form__red"])
+tracker.track_form_change("signupForm", "ageInput", "age", "24", "number", ["signup__number", "form__red"])
 ```
 
 ### Track submitted forms
@@ -486,13 +485,13 @@ Use `track_form_submit()` to track sumbitted forms. Arguments are:
 Basic example:
 
 ```python
-t.track_form_submit("registrationForm")
+tracker.track_form_submit("registrationForm")
 ```
 
 Advanced example:
 
 ```python
-t.track_form_submit("signupForm", ["signup__warning"], {"name": "email", "value": "tracker@example.com", "nodeName": "INPUT", "type": "email"})
+tracker.track_form_submit("signupForm", ["signup__warning"], {"name": "email", "value": "tracker@example.com", "nodeName": "INPUT", "type": "email"})
 ```
 
 ### Track site searches
@@ -512,13 +511,13 @@ Use `track_site_search()` to track a what user searches on your website. Argum
 Basic example:
 
 ```python
-t.track_site_search(["analytics", "snowplow", "tracker"])
+tracker.track_site_search(["analytics", "snowplow", "tracker"])
 ```
 
 Advanced example:
 
 ```python
-t.track_site_search(["pulp fiction", "reviews"], {"nswf": true}, 215, 22)
+tracker.track_site_search(["pulp fiction", "reviews"], {"nswf": true}, 215, 22)
 ```
 
 ### `truck_unstruct_event`

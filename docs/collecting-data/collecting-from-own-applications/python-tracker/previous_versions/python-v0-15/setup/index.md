@@ -60,7 +60,7 @@ To add the Snowplow Tracker as a dependency to your own Python app, edit your `
 
 
 <CodeBlock language="bash">{
-`snowplow-tracker==${versions.pythonTracker}`
+`snowplow-tracker==0.15.0`
 }</CodeBlock>
 
 

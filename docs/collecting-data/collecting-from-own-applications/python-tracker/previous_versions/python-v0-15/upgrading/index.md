@@ -6,7 +6,7 @@ sidebar_position: 100
 
 This page gives instructions to upgrading to newer versions of the Python Tracker
 
-## Upgrading to v0.13.0
+## Upgrading to v0.13.0+
 There are a number of breaking changes in this release, in order to make use of the new features please make sure to:
 
 - Use the `batch_size` argument instead of `buffer_size` in the Emitter initialization.

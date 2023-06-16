@@ -1,6 +1,6 @@
 ---
 title: "Setup"
-date: "2023-06-14"
+date: "2020-02-26"
 sidebar_position: 10
 ---
 
@@ -8,6 +8,9 @@ sidebar_position: 10
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
+## Integration options
+
 ### Tracker compatibility
 
 As a programming language that lets you work more quickly and integrate your systems more effectively, Python is available in a huge number of different computing environments and platforms, from Civilization IV through [Django framework](https://www.djangoproject.com/) to Ubuntu One.
@@ -26,6 +29,10 @@ To make the Snowplow Python Tracker work with as many different Python programs 
 
 These dependencies can be installed from the package manager of the host system or through PyPi.
 
+In addition, since version **0.9.0**, extra functionality, like the redis and celery emitters, was separated and needs to be explicitly installed, so as to keep the core version as light as possible.
+
+## Setup
+
 ### PyPI
 
 The Snowplow Python Tracker is published to [PyPI](https://pypi.python.org/), the the official third-party software repository for the Python programming language.
@@ -34,16 +41,36 @@ This makes it easy to either install the tracker locally, or to add it as a depe
 
 ### pip
 
-To install the Snowplow Python Tracker locally, assuming you already have `pip` installed:
+To install the Snowplow Python Tracker locally, assuming you already have Pip installed:
 
 ```bash
 $ pip install snowplow-tracker --upgrade
 ```
+
+**_\*\*New in v0.9.0_** : To install the Snowplow Tracker with extras:
+
+```bash
+# Redis extra
+$ pip install snowplow-tracker[redis]
+# Celery extra
+$ pip install snowplow-tracker[celery]
+```
+
 To add the Snowplow Tracker as a dependency to your own Python app, edit your `requirements.txt` and add:
 
-<CodeBlock language="txt">{
-`snowplow-tracker==${versions.pythonTracker}`
+
+<CodeBlock language="bash">{
+`snowplow-tracker==0.15.0`
 }</CodeBlock>
+
+
+### easy_install
+
+If you are still using easy_install:
+
+```bash
+$ easy_install -U snowplow-tracker
+```
 
 ## Python version support
 

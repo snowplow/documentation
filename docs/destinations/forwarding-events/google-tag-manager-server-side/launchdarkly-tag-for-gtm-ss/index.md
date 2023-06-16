@@ -7,6 +7,12 @@ The [LaunchDarkly Tag for GTM SS](https://github.com/snowplow/snowplow-gtm-serve
 
 ## Template Installation
 
+:::note
+
+The server Docker image must be 2.0.0 or later.
+
+:::
+
 ### Tag Manager Gallery
 
 Coming soon!

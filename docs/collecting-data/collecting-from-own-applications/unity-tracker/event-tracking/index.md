@@ -154,7 +154,7 @@ Custom self-describing events are a flexible tool that enable Snowplow users to 
 
 When a user sends in a custom self-describing event, they do so as a JSON of name-value properties, that conforms to a JSON schema defined for the event earlier.
 
-Use `Track(SelfDescribing)` to track a custom event which consists of a name and an self-describing set of properties. This is useful when:
+Use `Track(SelfDescribing)` to track a custom event which consists of a name and a self-describing set of properties. This is useful when:
 
 - You want to track event types which are proprietary/specific to your business (i.e. not already part of Snowplow), or
 - You want to track events which have unpredictable or frequently changing properties
@@ -429,7 +429,7 @@ data.Add("Event", "Data")
 SelfDescribingJson json = new SelfDescribingJson("iglu:com.acme/example/jsonschema/1-0-0", data);
 ```
 
-This object is now ready to be Tracked within an SelfDescribing Event.
+This object is now ready to be Tracked within a SelfDescribing Event.
 
 You can create a SelfDescribingJson with the following arguments:
 

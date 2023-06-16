@@ -17,15 +17,22 @@ This guide assumes you are running the standard web and/or mobile SQL Runner mod
 
 ## Why Migrate?
 
-SQL Runner is currently in maintenance mode, while we will continue to fix bugs when they are identified, we are not actively developing the tool or the models anymore and at some point in the future may deprecate it entirely. Our dbt models on the other hand are under active development, with new features and optimizations being made regularly. It is also a more widely used tool and we have a far wider range of packages available in dbt. 
+SQL Runner is currently in maintenance mode, while we will continue to fix bugs when they are identified, we are not actively developing the tool or the models anymore and at some point in the future may deprecate it entirely. Our dbt models on the other hand are under active development, with new features and optimizations being made regularly. It is also a more widely used tool, meaning installation and management is far easier (or you can use tools like dbt Cloud, or our BDP customers can run dbt models the same way you can SQL Runner). We also have a far wider range of packages available in dbt including e-commerce, marketing attribution, and a package to normalize your Snowplow data. 
+
+In dbt we also support Databricks & Postgres warehouses in addition to Snowflake, BigQuery, and Redshift. Our [Accelerators](https://snowplow.io/data-product-accelerators/) contain our dbt models, and 
 
 In general, if you are happy with SQL Runner and don't foresee a need to add more models in the future then there is no need to migrate; however if you are starting from scratch, or would like to make use of our wider range of models, then you should consider migrating to dbt.
 
 ## Differences between the tools
 
-The core of the web and mobile models (e.g. page/screen views, sessions, and users) are the same across SQL Runner and dbt, however the dbt versions contain some additional fields which may be useful for analysis, as well as additional optional modules for web such as consent and core web vitals. Below this the logic used to process the data is roughly the same, although we have made some optimizations and added more flexibility in how this processing is done in dbt.
+The core of the web and mobile models (e.g. page/screen views, sessions, and users) are the same across SQL Runner and dbt, however the dbt versions contain some additional fields which may be useful for analysis (such as conversions, event counts, and human-readable language information in the web package), as well as additional optional modules for web such as consent and core web vitals. Below this the logic used to process the data is roughly the same, although we have made some optimizations and added more flexibility in how this processing is done in dbt.
 
-We also have additional packages in dbt, including e-commerce, marketing attribution, and a package to normalize your Snowplow data. The final difference is that in dbt we support Databricks warehouses in addition to Snowflake, BigQuery, and Redshift.
+:::note
+
+One big change in the processing logic is that dbt will include all events within the lookback window, even if that session has already been fully processed, SQL runner would only look at new sessions. This is more reliable for late arriving data.
+
+:::
+
 
 We recommend you take a look at the [docs](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) for our dbt packages to get a better understanding of how they work and how you can use them going forward.
 
@@ -96,6 +103,12 @@ This method will also not correctly populate the user stitching table or process
 There may be cases where running the dbt models from scratch is not a viable option for you, in this case it is possible to migrate your existing derived SQL Runner data into the derived tables produced by dbt, however this will result in your data being generated from two slightly differing logics. 
 
 It is advisable to produce your dbt tables into new schemas where possible, even though the derived tables should have different names; this will help keep your data separate and ensure that as we go through the following steps that dbt does not overwrite your SQL Runner tables.
+
+:::note
+
+Postgres only supports the `MERGE` statement in version 15 and up, if you are using an older version you will need to alter the commands to be a `DELETE`+`INSERT` instead.
+
+:::
 
 ### Create dbt tables by doing a recent-dated run
 Because of the difference in manifest tables and incremental logic between SQL Runner and dbt models it makes sense to first create the dbt tables and then insert your existing data into them, rather than try and create the dbt tables directly from your SQL Runner data. 

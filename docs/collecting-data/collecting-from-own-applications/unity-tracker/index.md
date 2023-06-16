@@ -15,4 +15,4 @@ import {versions} from '@site/src/componentVersions';
 
 ### Snowplow Icebreaker Demo
 
-To see the Tracker in action you can download our demonstration game Snowplow Icebreaker from [Github](https://github.com/snowplow/snowplow-unity-tracker) and loading the SnowplowTracker.Demo folder into Unity 2021.3. You will need to set a valid collector endpoint on the Main Menu Page to see the events being generated.
+To see the Tracker in action you can download our demonstration game Snowplow Icebreaker from [Github](https://github.com/snowplow/snowplow-unity-tracker) and loading the SnowplowTracker.Demo folder into Unity 2022.3. You will need to set a valid collector endpoint on the Main Menu Page to see the events being generated.

@@ -40,14 +40,19 @@ t1.Track(new PageView()
     .Build());
 ```
 
-#### Track screen views with `Track(ScreenView)`
+#### Track screen views with `Track(MobileScreenView)`
 
-Use `Track(ScreenView)` to track a user viewing a screen (or equivalent) within your app. You **must** use either `name` or `id`. Arguments are:
+Use `Track(MobileScreenView)` to track a user viewing a screen (or equivalent) within your app. You **must** provide a `name` property. The `id` of the screen view will be automatically assigned (as an UUID) but you may also provide it manually. Arguments are:
 
 | **Argument** | **Description** | **Required?** | **Type** |
 | --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | `string` |
-| `id` | Unique identifier for this screen | No | `string` |
+| `name` | Human-readable name for this screen | Yes | `string` |
+| `id` | Unique identifier for this screen view (can be auto-generated) | Yes | `string` |
+| `type` | The type of screen that was viewed e.g feed / carousel | No | `string` |
+| `previousName` | The name of the previous screen | No | `string` |
+| `previousId` | The screen view ID of the previous screen view | No | `string` |
+| `previousType` | The screen type of the previous screen view | No | `string` |
+| `previousType` | The screen type of the previous screen view | No | `string` |
 | `customContexts` | Optional custom context | No | `List<IContext>` |
 | `timestamp` | Optional timestamp | No | `long` |
 | `eventId` | Optional custom event id | No | `string` |
@@ -55,19 +60,24 @@ Use `Track(ScreenView)` to track a user viewing a screen (or equivalent) withi
 Examples:
 
 ```csharp
-t1.Track(new ScreenView()
-    .SetName("HUD > Save Game")
-    .SetId("screen23")
+t1.Track(new MobileScreenView("HUD > Save Game")
+    .SetType("dialog")
+    .SetPreviousName("HUD > Menu")
+    .SetPreviousId(previousScreenId)
+    .SetTransitionType("pop-up")
     .Build());
 
-t1.Track(new ScreenView()
-    .SetName("HUD > Save Game")
-    .SetId("screen23")
+t1.Track(new MobileScreenView("HUD > Save Game")
     .SetCustomContext(contextList)
     .SetTimestamp(1423583655000)
     .SetEventId("uid-1")
     .Build());
 ```
+
+:::note
+In tracker versions 0.7.0 and earlier, screen views were tracked using the `ScreenView` class.
+However, this class used the older schema for screen views and has been deprecated in favour of the `MobileScreenView` in the 0.8.0 release of the tracker.
+:::
 
 #### Track structured events with `Track(Structured)`
 
@@ -138,13 +148,13 @@ t1.Track(new Timing()
     .Build());
 ```
 
-#### Track unstructured events with `Track(Unstructured)`
+#### Track self-describing events with `Track(SelfDescribing)`
 
-Custom unstructured events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
+Custom self-describing events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 
-When a user sends in a custom unstructured event, they do so as a JSON of name-value properties, that conforms to a JSON schema defined for the event earlier.
+When a user sends in a custom self-describing event, they do so as a JSON of name-value properties, that conforms to a JSON schema defined for the event earlier.
 
-Use `Track(Unstructured)` to track a custom event which consists of a name and an unstructured set of properties. This is useful when:
+Use `Track(SelfDescribing)` to track a custom event which consists of a name and an self-describing set of properties. This is useful when:
 
 - You want to track event types which are proprietary/specific to your business (i.e. not already part of Snowplow), or
 - You want to track events which have unpredictable or frequently changing properties
@@ -178,18 +188,13 @@ Dictionary<string, object> eventDict = new Dictionary<string, object>();
 eventDict.Add("levelName", "Barrels o' Fun");
 eventDict.Add("levelIndex", 23);
 
-// Create your event data
-SelfDescribingJson eventData = new SelfDescribingJson("iglu:com.acme/save_game/jsonschema/1-0-0", eventDict);
-
 // Track your event with your custom event data
-t1.Track(new Unstructured()
-    .SetEventData(eventData)
+t1.Track(new SelfDescribing("iglu:com.acme/save_game/jsonschema/1-0-0", eventDict)
     .Build();
 
 // OR
 
-t1.Track(new Unstructured()
-    .SetEventData(eventData)
+t1.Track(new SelfDescribing("iglu:com.acme/save_game/jsonschema/1-0-0", eventDict)
     .SetCustomContext(contextList)
     .SetTimestamp(1423583655000)
     .SetEventId("uid-1")
@@ -197,6 +202,10 @@ t1.Track(new Unstructured()
 ```
 
 For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
+
+:::note
+In versions 0.7.0 and earlier, the `Unstructured` class was used to track self-describing events. This was deprecated in version 0.8.0 in favour of the `SelfDescribing` class.
+:::
 
 #### Track ecommerce transactions with `Track(EcommerceTransaction)`
 
@@ -420,7 +429,7 @@ data.Add("Event", "Data")
 SelfDescribingJson json = new SelfDescribingJson("iglu:com.acme/example/jsonschema/1-0-0", data);
 ```
 
-This object is now ready to be Tracked within an Unstructured Event.
+This object is now ready to be Tracked within an SelfDescribing Event.
 
 You can create a SelfDescribingJson with the following arguments:
 

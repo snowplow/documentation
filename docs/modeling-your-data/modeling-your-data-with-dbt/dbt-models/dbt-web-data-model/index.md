@@ -42,7 +42,7 @@ This model consists of a series of modules, each producing a table which serves 
 
 - Base: Performs the incremental logic, outputting the table `snowplow_web_base_events_this_run` which contains a de-duped data set of all events required for the current run of the model.
 - Page Views: Aggregates event level data to a page view level, `page_view_id`, outputting the table `snowplow_web_page_views`.
-- Sessions: Aggregates page view level data to a session level, `domain_sessionid`, outputting the table `snowplow_web_sessions`.
+- Sessions: Aggregates event level data to a session level, `domain_sessionid`, outputting the table `snowplow_web_sessions`. Includes other events but requires at least one `page_view` or `page_ping` event in the session.
 - Users: Aggregates session level data to a users level, `domain_userid`, outputting the table `snowplow_web_users`.
 - User Mapping: Provides a mapping between user identifiers, `domain_userid` and `user_id`, outputting the table `snowplow_web_user_mapping`. This can be used for session stitching.
 

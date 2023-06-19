@@ -27,13 +27,6 @@ In general, if you are happy with SQL Runner and don't foresee a need to add mor
 
 The core of the web and mobile models (e.g. page/screen views, sessions, and users) are the same across SQL Runner and dbt, however the dbt versions contain some additional fields which may be useful for analysis (such as conversions, event counts, and human-readable language information in the web package), as well as additional optional modules for web such as consent and core web vitals. Below this the logic used to process the data is roughly the same, although we have made some optimizations and added more flexibility in how this processing is done in dbt.
 
-:::note
-
-One big change in the processing logic is that dbt will include all events within the lookback window, even if that session has already been fully processed, SQL runner would only look at new sessions. This is more reliable for late arriving data.
-
-:::
-
-
 We recommend you take a look at the [docs](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) for our dbt packages to get a better understanding of how they work and how you can use them going forward.
 
 ## Pre-requisites

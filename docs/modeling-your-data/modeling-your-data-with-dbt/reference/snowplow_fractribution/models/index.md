@@ -19,6 +19,108 @@ This page is auto-generated from our dbt packages, some information may be incom
 
 :::
 ## Snowplow Fractribution
+### Snowplow Fractribution Call Snowpark Macros {#model.snowplow_fractribution.snowplow_fractribution_call_snowpark_macros}
+
+<DbtDetails><summary>
+<code>models/snowplow_fractribution_call_snowpark_macros.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+Model to trigger the Snowpark macros for producing the 3 attribution model output tables
+
+**Type**: Table
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Columns</summary>
+
+| Column Name | Description |Type|
+|:------------|:------------|:--:|
+| schema_name |   | text |
+| table_name |   | text |
+| last_run_time |   | text |
+</DbtDetails>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="default" label="default" default>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/models/snowplow_fractribution_call_snowpark_macros.sql">Source</a></i></b></center>
+
+```jinja2
+--This model is only used when the attribution package is run on Snowflake and the Python script will be run using Snowpark, rather than manually.
+{{ config(
+    enabled = target.type == "snowflake" and var('snowplow__run_python_script_in_snowpark', false),
+    materialized = 'table',
+)}}
+
+-- depends_on: {{ref('snowplow_fractribution_path_summary')}}
+-- depends_on: {{ref('snowplow_fractribution_channel_spend')}}
+
+{{create_report_table_proc()}}
+{{run_stored_procedure(var('snowplow__attribution_model_for_snowpark'), var('snowplow__conversion_window_start_date') , var('snowplow__conversion_window_end_date') )}}
+With table_1 as (
+    SELECT
+        '{{schema}}' as schema_name,
+         'snowplow_fractribution_path_summary_with_channels' as table_name,
+        '{{dbt_utils.pretty_time(format="%Y-%m-%d %H:%M:%S")}}' as last_run_time
+),
+table_2 as (
+    SELECT
+        '{{schema}}' as schema_name,
+         'snowplow_fractribution_channel_attribution' as table_name,
+        '{{dbt_utils.pretty_time(format="%Y-%m-%d %H:%M:%S")}}' as last_run_time
+),
+table_3 as (
+    SELECT
+        '{{schema}}' as schema_name,
+         'snowplow_fractribution_report_table' as table_name,
+        '{{dbt_utils.pretty_time(format="%Y-%m-%d %H:%M:%S")}}' as last_run_time
+)
+SELECT * FROM table_1
+UNION ALL
+SELECT * FROM table_2
+UNION ALL
+SELECT * FROM table_3
+
+
+{%- if execute %}
+{{ log('Finished running stored procedure. Created tables:
+snowplow_fractribution_path_summary_with_channels
+snowplow_fractribution_channel_attribution
+snowplow_fractribution_report_table', info=True)}}
+{% endif %}
+```
+
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_fractribution.snowplow_fractribution_channel_spend](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_channel_spend)
+- [model.snowplow_fractribution.snowplow_fractribution_path_summary](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_path_summary)
+
+</TabItem>
+<TabItem value="macro" label="Macros">
+
+- macro.dbt_utils.pretty_time
+- [macro.snowplow_fractribution.create_report_table_proc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.create_report_table_proc)
+- [macro.snowplow_fractribution.run_stored_procedure](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.run_stored_procedure)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
 ### Snowplow Fractribution Channel Counts {#model.snowplow_fractribution.snowplow_fractribution_channel_counts}
 
 <DbtDetails><summary>
@@ -169,6 +271,16 @@ This model does not currently have a description.
 
 - [macro.snowplow_fractribution.channel_spend](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.channel_spend)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_fractribution.snowplow_fractribution_call_snowpark_macros](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_call_snowpark_macros)
 
 </TabItem>
 </Tabs>
@@ -363,6 +475,16 @@ full join paths_to_non_conversion n
 
 </TabItem>
 </Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_fractribution.snowplow_fractribution_call_snowpark_macros](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/models/index.md#model.snowplow_fractribution.snowplow_fractribution_call_snowpark_macros)
+
+</TabItem>
+</Tabs>
 </DbtDetails>
 
 ### Snowplow Fractribution Paths To Conversion {#model.snowplow_fractribution.snowplow_fractribution_paths_to_conversion}
@@ -427,6 +549,8 @@ with string_aggs as (
 
 )
 
+ {% if target.type not in ('redshift') %}
+
 , arrays as (
 
   select
@@ -435,6 +559,7 @@ with string_aggs as (
     revenue,
     {{ snowplow_utils.get_split_to_array('path', 's', ' > ') }} as path,
     {{ snowplow_utils.get_split_to_array('path', 's', ' > ') }} as transformed_path
+
 
   from string_aggs s
 
@@ -450,6 +575,30 @@ select
   {{ snowplow_utils.get_array_to_string('transformed_path', 'p', ' > ') }} as transformed_path
 
 from path_transforms p
+
+{% else %}
+
+, strings as (
+
+  select
+    customer_id,
+    conversion_tstamp,
+    revenue,
+    path as path,
+    path as transformed_path
+
+  from string_aggs s
+
+)
+
+  {{ transform_paths('conversions', 'strings') }}
+
+
+select *
+from path_transforms p
+
+
+{% endif %}
 ```
 
 </TabItem>
@@ -564,6 +713,8 @@ with non_conversions as (
 
 )
 
+{% if target.type not in ('redshift') %}
+
 , arrays as (
 
     select
@@ -583,6 +734,27 @@ select
   {{ snowplow_utils.get_array_to_string('transformed_path', 'p', ' > ') }} as transformed_path
 
 from path_transforms p
+
+{% else %}
+
+, strings as (
+
+  select
+    customer_id,
+    path as path,
+    path as transformed_path
+
+  from string_aggs s
+
+)
+
+  {{ transform_paths('non_conversions', 'strings') }}
+
+
+select *
+from path_transforms p
+
+{% endif %}
 ```
 
 </TabItem>

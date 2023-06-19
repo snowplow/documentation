@@ -53,7 +53,7 @@ import DbtVariables from "@site/docs/reusable/dbt-variables/_index.md"
 | `cluster_by`                       | No equivalent variable *(Clustering defined in model)*                                                  |
 | `days_late_allowed`                | `snowplow__days_late_allowed`                                                                           |
 | `derived_tstamp_partitioned`       | `snowplow__derived_tstamp_partitioned`                                                                  |
-| `enabled` (Mobile app errors only) | **`snowplow__enable_app_errors_module`**                                                                |
+| **`enabled`** (Mobile app errors only) | **`snowplow__enable_app_errors_module`**                                                                |
 | `ends_run`                         | No equivalent variable                                                                                  |
 | `entropy`                          | No equivalent variable                                                                                  |
 | **`geolocation_context`**          | **`snowplow__enable_geolocation_context`**                                                              |
@@ -122,7 +122,7 @@ It is possible, particularly for columns which may have been null, that the type
 
 #### Page Views
 
-
+<div style={{"max-height":"500px", "overflow-y":"scroll"}} >
 
 ```sql
 MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_web_page_views t
@@ -333,7 +333,11 @@ VALUES
 );
 ```
 
+</div>
+
 #### Sessions
+
+<div style={{'max-height':'500px', 'overflow-y':'scroll'}}>
 
 ```sql
 MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_web_sessions t
@@ -528,7 +532,11 @@ VALUES
 );
 ```
 
+</div>
+
 #### Users
+
+<div style={{'max-height':'500px', 'overflow-y':'scroll'}}>
 
 ```sql
 MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_web_users t
@@ -619,6 +627,7 @@ VALUES
 );
 ```
 
+</div>
 
 ### Merge your existing data into the new tables (mobile)
 
@@ -633,6 +642,8 @@ It is possible, particularly for columns which may have been null, that the type
 :::
 
 #### Screen Views
+
+<div style={{'max-height':'500px', 'overflow-y':'scroll'}}>
 
 ```sql
 MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_mobile_screen_views t
@@ -763,7 +774,11 @@ VALUES
 );
 ```
 
+</div>
+
 #### Sessions
+
+<div style={{'max-height':'500px', 'overflow-y':'scroll'}}>
 
 ```sql
 MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_mobile_sessions t
@@ -904,7 +919,11 @@ VALUES
 );
 ```
 
+</div>
+
 #### Users
+
+<div style={{'max-height':'500px', 'overflow-y':'scroll'}}>
 
 ```sql
 MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_mobile_users t
@@ -1001,7 +1020,11 @@ VALUES
 );
 ```
 
+</div>
+
 #### App Errors
+
+<div style={{'max-height':'500px', 'overflow-y':'scroll'}}>
 
 ```sql
 MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_mobile_app_errors t
@@ -1141,3 +1164,5 @@ VALUES
     s.thread_name
 );
 ```
+
+</div>

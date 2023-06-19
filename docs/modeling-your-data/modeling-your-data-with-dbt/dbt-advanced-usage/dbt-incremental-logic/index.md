@@ -70,28 +70,28 @@ In all states the `upper_limit` is limited by the `snowplow__backfill_limit_days
 
 The query returns `models = 0` indicating that no models exist in the manifest.
 
-**`lower_limit`**: `snowplow__start_date`
+**`lower_limit`**: `snowplow__start_date`  
 **`upper_limit`**: `least(current_tstamp, snowplow__start_date + snowplow__backfill_limit_days)`
 
 ### State 2: New model introduced
 
 `models < size(array_of_snowplow_tagged_enabled_models)` and therefore a new model, tagged with `snowplow_<package>_incremental`, has been added since the last run. The package will replay all previously processed events in order to back-fill the new model.
 
-**`lower_limit`**: `snowplow__start_date`
+**`lower_limit`**: `snowplow__start_date`  
 **`upper_limit`**: `least(max_last_success, snowplow__start_date + snowplow__backfill_limit_days)`
 
 ### State 3: Models out of sync
 
 `min_last_success < max_last_success` and therefore the tagged models are out of sync, for example due to a particular model failing to execute successfully during the previous run. The package will attempt to sync all models.
 
-**`lower_limit`**: `min_last_success - snowplow__lookback_window_hours`
+**`lower_limit`**: `min_last_success - snowplow__lookback_window_hours`  
 **`upper_limit`**: `least(max_last_success, min_last_success + snowplow__backfill_limit_days)`
 
 ### State 4: Standard run
 
 If none of the above criteria are met, then we consider it a 'standard run' and we carry on from the last processed event.
 
-**`lower_limit`**: `max_last_success - snowplow__lookback_window_hours`
+**`lower_limit`**: `max_last_success - snowplow__lookback_window_hours`  
 **`upper_limit`**: `least(current_tstamp, max_last_success + snowplow__backfill_limit_days)`
 
 

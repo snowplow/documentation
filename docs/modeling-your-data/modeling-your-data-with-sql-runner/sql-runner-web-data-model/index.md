@@ -1,8 +1,14 @@
 ---
-title: "sql-runner: Web data model"
+title: "Web data model"
 date: "2021-07-27"
 sidebar_position: 100
 ---
+
+:::tip
+
+For any new developments we highly recommend using our [web package for dbt](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) instead. SQL Runner is no longer under active development and will only receive bug fixes in the future.
+
+:::
 
 The Snowplow web data model aggregates Snowplow's out of the box page view and page ping events to create a set of derived tables - page views, sessions and users - that contain many useful dimensions as well as calculated measures such as time engaged and scroll depth.
 

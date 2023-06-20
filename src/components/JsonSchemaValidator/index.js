@@ -170,6 +170,18 @@ export const dbtSnowplowWebConfigSchema = {
         }
       }
     },
+    "snowplow__cwv_days_to_measure": {
+      "type": "number",
+      "minimum": 1,
+      "title": "CWV Days To Measure",
+      "description": "The number of days to use for web vital measurements (if enabled)"
+    },
+    "snowplow__cwv_percentile": {
+      "type": "number",
+      "minimum": 0,
+      "title": "CWV Percentile",
+      "description": "The percentile that the web vitals measurements that are produced for all page views (if enabled)"
+    },
     "snowplow__days_late_allowed": {
       "type": "number",
       "minimum": 0,
@@ -228,6 +240,14 @@ export const dbtSnowplowWebConfigSchema = {
       "minItems": 0,
       "title": "App IDs",
       "items": { "type": "string" }
+    },
+    "snowplow__enable_consent": {
+      "type": "boolean",
+      "title": "Enable Consent Module"
+    },
+    "snowplow__enable_cwv": {
+      "type": "boolean",
+      "title": "Enable Core Web Vitals Module"
     },
     "snowplow__enable_iab": {
       "type": "boolean",

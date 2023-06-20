@@ -1,6 +1,5 @@
 ---
 title: "Referer parser enrichment"
-date: "2020-02-14"
 sidebar_position: 3
 ---
 
@@ -37,7 +36,7 @@ Enabling this enrichment with the above configuration would fill the `refr_mediu
 This enrichment populates the following fields of the atomic event :
 
 | Field         | Purpose                                                              |
-|---------------|----------------------------------------------------------------------|
+| ------------- | -------------------------------------------------------------------- |
 | `refr_medium` | Type of referer. Examples : Search, Internal, Unknown, Social, Email |
 | `refr_source` | Name of referer if recognised. Examples: Google, Facebook            |
 | `refr_term`   | Keywords if source is a search engine                                |
@@ -45,9 +44,9 @@ This enrichment populates the following fields of the atomic event :
 With this information in the data warehouse it's possible to get such insights:
 
 | refr_medium | number of sessions |
-|--------------|--------------------|
-| Search       | 272,699            |
-| Internal     | 142,555            |
-| Unknown      | 127,335            |
-| Social       | 14,525             |
-| Email        | 5,345              |
+| ----------- | ------------------ |
+| Search      | 272,699            |
+| Internal    | 142,555            |
+| Unknown     | 127,335            |
+| Social      | 14,525             |
+| Email       | 5,345              |

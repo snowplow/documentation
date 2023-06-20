@@ -9,6 +9,11 @@ import Badges from '@site/src/components/Badges';
 ```
 <Badges badgeType="dbt-package Release" pkg="web"></Badges>
 
+```mdx-code-block
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/web-performance/" name="Web Performance"/>
+```
 
 # Core Web Vitals Custom Module
 
@@ -28,9 +33,9 @@ In order to use this module you would need to:
 
 This custom module consists of a series of dbt models which produce the following aggregated models from the raw web vitals events:
 
-- `snowplow_web_vitals`: Incremental table used as a base for storing core web vital events (first event per pageview).
+- `snowplow_web_vitals`: Incremental table used as a base for storing core web vital events (first event per page view).
 
-- `snowplow_web_vital_measurements`: Drop and recompute table to use for visualisations that takes core web vital measurements at the user specified percentile point (defaulted to 75).
+- `snowplow_web_vital_measurements`: Drop and recompute table to use for visualizations that takes core web vital measurements at the user specified percentile point (defaulted to 75).
 
 
 ## Operation
@@ -40,7 +45,7 @@ It is assumed that the dbt_snowplow_web package is already installed and configu
 
 ### Enable the module
 
-You can enable the custom module through the `snowplow__enable_cwv` variable in your dbt_project.yml file:
+You can enable the custom module through the `snowplow__enable_cwv` variable in your `dbt_project.yml` file:
 
 ```yml
 # dbt_project.yml

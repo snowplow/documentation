@@ -104,6 +104,11 @@ export const dbtSnowplowWebConfigSchema = {
       "title": "Dev Target",
       "description": "Target name of your development environment as defined in your `profiles.yml` file"
     },
+    "snowplow__events_table": {
+      "type": "string",
+      "title": "Events Table",
+      "description": "The name of the table that contains your atomic events"
+    },
     "snowplow__heartbeat": {
       "type": "number",
       "minimum": 0,

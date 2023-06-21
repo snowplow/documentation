@@ -5,6 +5,12 @@ sidebar_position: 101
 
 ### Upgrading to 0.14.0
 
+- Consent enablement is now done via the `snowplow__enable_consent` variable instead of via the enable block. If you are using consent please set this variable to `true`
+- Some seed files are now required to run the package, please run `dbt seed --select snowplow_web --full-refresh` to load these. The schema they are loaded to can be changed in your `dbt_project.yml`
+- New columns will be auto-added to users, sessions, and page views tables, please be aware for any downstream queries/BI tools.
+
+### Upgrading to 0.14.0
+
 - Version 1.4.0 of `dbt-core` now required
 - You must add the following to the top level of your project yaml
     ```yml

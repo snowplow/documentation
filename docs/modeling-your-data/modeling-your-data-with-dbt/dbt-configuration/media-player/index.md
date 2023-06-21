@@ -60,19 +60,27 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 ## Output Schemas
 ```mdx-code-block
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md"
+import { SchemaSetter } from '@site/src/components/DbtSchemaSelector';
+import CodeBlock from '@theme/CodeBlock';
 
 <DbtSchemas/>
-```
 
-```yml
-# dbt_project.yml
-...
-models:
+export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema) => {
+  return(
+    <>
+    <CodeBlock language="yaml">
+    {`models:
   snowplow_media_player:
     web:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${manifestSchema}
     custom:
-      +schema: my_scratch_schema
+      +schema: ${manifestSchema}`}
+        </CodeBlock>
+    </>
+  )
+}
+
 ```
+<SchemaSetter output={printSchemaVariables}/>

@@ -54,7 +54,16 @@ Note that Igluctl expects [JRE 8](http://www.oracle.com/technetwork/java/javase/
 
 `igluctl lint` validates JSON Schemas.
 
-It is designed to be run against schema registries with a folder structure that follows the [iglu-example-schema-registry](https://github.com/snowplow/iglu-example-schema-registry).
+It is designed to be run against file-based schema registries with the standard Iglu folder structure:
+
+```
+schemas
+└── com.example
+    └── my-schema
+        └── jsonschema
+            ├── 1-0-0
+            └── 1-0-1
+```
 
 You can validate _all_ the schemas in the registry:
 

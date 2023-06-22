@@ -145,13 +145,15 @@ Find out more about the Postgres loader module and explore the full set of varia
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
-## SQS Queue
+## Snowflake loader
+
+### SQS Queue
 
 SQS queue is used for communication between Transformer Kinesis and Snowflake Loader.
 
 Transformer Kinesis sends an SQS message to the Snowflake Loader after transforming a window of data. Snowflake Loader listens to the SQS queue. When a new message is received, it extracts necessary information from the message and loads that data to Snowflake. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-transformer-and-loader-interface-with-other-snowplow-components-and-each-other).
 
-## Transformer Kinesis
+### Transformer Kinesis
 
 This is a Snowplow application that reads the enriched data from the Kinesis stream, transforms it to format expected by Loader and writes it to an S3 bucket.
 
@@ -159,7 +161,7 @@ After transforming is finished, it sends a message to the Loader via the SQS que
 
 Find out more about the Transformer Kinesis module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest).
 
-## Snowflake Loader
+### Loader
 
 The Snowplow application responsible for [loading transformed enriched data from S3 to Snowflake](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/snowflake-loader/index.md).
 
@@ -168,13 +170,15 @@ Find out more about the Snowflake Loader module and explore the full set of vari
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
-## SQS Queue
+## Databricks loader
+
+### SQS Queue
 
 SQS queue is used for communication between Transformer Kinesis and the Databricks Loader.
 
 Transformer Kinesis sends SQS message to the Databricks Loader after transforming a window of data. The Databricks Loader listens to an SQS queue. When a new message is received, it extracts necessary information from the message and loads that data to Databricks. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-transformer-and-loader-interface-with-other-snowplow-components-and-each-other).
 
-## Transformer Kinesis
+### Transformer Kinesis
 
 This is a Snowplow application that reads the enriched data from the Kinesis stream, transforms it to format expected by Loader and writes it to an S3 bucket.
 
@@ -182,7 +186,7 @@ After transforming is finished, it sends a message to the Loader via the SQS que
 
 Find out more about the Transformer Kinesis module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest).
 
-## Databricks Loader
+### Loader
 
 The Snowplow application responsible for [loading transformed enriched data from S3 to Databricks](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/databricks-loader/index.md).
 
@@ -191,13 +195,15 @@ Find out more about the Databricks Loader module and explore the full set of var
   </TabItem>
   <TabItem value="redshift" label="Redshift">
 
-## SQS Queue
+## Redshift Loader
+
+### SQS Queue
 
 SQS queue is used for communication between Transformer Kinesis and the Redshift Loader.
 
 Transformer Kinesis sends SQS message to the Redshift Loader after shredding a window of data. The Redshift Loader listens to an SQS queue. When a new message is received, it extracts necessary information from the message and loads that data into Redshift. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-transformer-and-loader-interface-with-other-snowplow-components-and-each-other).
 
-## Transformer Kinesis
+### Transformer Kinesis
 
 This is a Snowplow application that reads the enriched data from the Kinesis stream, transforms it to format expected by Loader and writes it to an S3 bucket.
 
@@ -205,7 +211,7 @@ After transforming is finished, it sends a message to the Loader via the SQS que
 
 Find out more about the Transformer Kinesis module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest).
 
-## Redshift Loader
+### Loader
 
 The application responsible for [loading transformed enriched data from S3 to Redshift](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/redshift-loader/index.md).
 

@@ -156,10 +156,16 @@ And then use this variable as your Command Argument:
 
 ### Additional Tracking Parameters
 
-You can choose a Google Tag Manager variable from the drop-down titled **Add Custom Contexts**. This lets you add [custom contexts](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#custom-context) to the current hit. The variable **must** return an array of valid context objects.
+![](images/additional_tracking_parameters.png)
 
-You can also choose to override the device timestamp with the **Set Custom Timestamp** field. The format must be UNIX time in milliseconds.
+#### Add Custom Context Entities
+
+Using the **Context Entities** table allows you to attach [custom context entities](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
+
+#### Set Custom Timestamp
+
+You can also choose to [set the True Timestamp](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#setting-the-true-timestamp) with this field. The format must be UNIX time in milliseconds.
 
 ### Acknowledgements
 
-Thanks to [Simo Ahava](https://www.simoahava.com/) for building the intial release of this template.
+Thanks to [Simo Ahava](https://www.simoahava.com/) for building the initial release of this template.

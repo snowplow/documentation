@@ -10,6 +10,12 @@ The Snowplow Tag can also construct Snowplow events from other GTM SS Clients su
 
 ## Template Installation
 
+:::note
+
+The server Docker image must be 2.0.0 or later.
+
+:::
+
 ### Tag Manager Gallery
 
 1. From the Templates tab in GTM SS, click "Search Gallery" in the Tag Templates section

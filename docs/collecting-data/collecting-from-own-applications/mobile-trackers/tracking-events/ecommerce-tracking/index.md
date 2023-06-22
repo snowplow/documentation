@@ -21,7 +21,7 @@ All ecommerce events must be manually tracked; there is no ecommerce auto-tracki
 
 ## Ecommerce events
 
-Ecommerce events are tracked like normal Snowplow events. For example, tracking an ecommerce `ProductView` event:
+Ecommerce events are tracked like normal Snowplow events. For example, tracking an ecommerce `ProductViewEvent` event:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -38,7 +38,12 @@ val tracker = Snowplow.createTracker(
         "https://snowplow-collector-url.com" // Event collector URL
     )
 
-val event = ProductView(Product("productId", "category", "GBP", 100))
+val event = ProductViewEvent(ProductEntity(id = "productId", 
+  category = "category", 
+  currency = "GBP", 
+  price = 100
+  )
+)
 tracker.track(event)
 ```
 
@@ -52,14 +57,20 @@ TrackerController tracker = Snowplow.createTracker(
       "https://snowplow-collector-url.com" // Event collector URL
 );
 
-ProductView event = new ProductView(new Product("productId", "category", "GBP", 100));         
+ProductViewEvent event = new ProductViewEvent(new ProductEntity(
+  "productId", // id
+  "category",  // category
+  "GBP", // currency
+  100 // price
+  )
+);         
 tracker.track(event);
 ```
   </TabItem>
 </Tabs>
 
 
-Older out-of-the-box Snowplow event types provide builder methods, reflecting the Android tracker's Java heritage. Now that the tracker is written in Kotlin, we have provided similar functionality by setting all ecommerce event/entity properties as `var`. For example, adding data to a Promotion object: 
+Add or update properties using setters. For example, adding data to a PromotionEvent: 
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -70,16 +81,16 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val promotion = Promotion("promoId")
-promotion.type = "popup"
+val promotion = PromotionEvent("promoId")
 promotion.name = "bogof"
+promotion.type = "popup"
 ```
 
   </TabItem>
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Promotion promotion = new Promotion("promoId");
+PromotionEvent promotion = new PromotionEvent("promoId");
 promotion.setName("bogof");
 promotion.setType("popup");
 ```
@@ -90,16 +101,16 @@ This table lists all the ecommerce events.
 
 `Event`            | Used for
 -------------------|-----------------------------------------------------------------------------------------------------------------------------------------------
-`ProductView`      | Tracking a visit to a product detail screen. Also known as product detail view.
-`AddToCart`        | Track an addition to cart.
-`RemoveFromCart`   | Track a removal from cart.
-`ProductListView`  | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.
-`ProductListClick` | Track the click/selection of a product from a product list.
-`PromotionView`    | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.
-`PromotionClick`   | Track the click/selection of an internal promotion.
-`CheckoutStep`     | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.
-`Transaction`      | Track a transaction/purchase completion.
-`Refund`           | Track a transaction partial or complete refund.
+`ProductViewEvent`      | Tracking a visit to a product detail screen. Also known as product detail view.
+`AddToCartEvent`        | Track an addition to cart.
+`RemoveFromCartEvent`   | Track a removal from cart.
+`ProductListViewEvent`  | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.
+`ProductListClickEvent` | Track the click/selection of a product from a product list.
+`PromotionViewEvent`    | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.
+`PromotionClickEvent`   | Track the click/selection of an internal promotion.
+`CheckoutStepEvent`     | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.
+`TransactionEvent`      | Track a transaction/purchase completion.
+`RefundEvent`           | Track a transaction partial or complete refund.
 
 
 Each ecommerce event is a [self-describing](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) event using a single schema, 
@@ -114,9 +125,11 @@ Each ecommerce event is a [self-describing](docs/collecting-data/collecting-from
 | name        | N        | string      | For `ProductListView` and `ProductListClick` events: human-readable list name |
 </details>
 
-The events are distinguished by their `type` property, which is different for each `Event` class tracked. Aside from the optional list `name` in the `ProductListView` and `ProductListClick` events, all tracked ecommerce properties are tracked as entities - see [below](#entities) for details.
+The events are distinguished by their `type` property, which is different for each `Event` class tracked. Aside from the optional list `name` in the `ProductListViewEvent` and `ProductListClickEvent` events, all tracked ecommerce properties are tracked as entities - see [below](#entities) for details.
 
-Check out the API docs ([Android](https://snowplow.github.io/snowplow-android-tracker/)) for the full details and method signatures.
+:::note
+Check out the API docs ([Android](https://snowplow.github.io/snowplow-android-tracker/)) for the full details of each Event and Entity.
+:::
 
 ### ProductView
 
@@ -131,8 +144,8 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val product = Product("productId", "category", "GBP", 100)
-val event = ProductView(product)
+val product = ProductEntity(id = "productId", category = "category", currency = "GBP", price = 100)
+val event = ProductViewEvent(product)
 
 tracker.track(event)
 ```
@@ -141,8 +154,13 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Product product = new Product("productId", "category", "GBP", 100);
-ProductView event = new ProductView(product);
+ProductViewEvent event = new ProductViewEvent(new ProductEntity(
+  "productId", // id
+  "category",  // category
+  "GBP", // currency
+  100 // price
+  )
+); 
 
 tracker.track(event);
 ```
@@ -163,8 +181,14 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val product = Product("productId", "clothes/shirts", "EUR", 100.50)
-val event = AddToCart(listOf(product), 200, "EUR")
+val product = ProductEntity(
+  id = "productId", 
+  category = "clothes/shirts", 
+  currency = "EUR", 
+  price = 100.50
+)
+val cart = CartEntity(totalValue = 200, currency = "EUR")
+val event = AddToCartEvent(listOf(product), cart)
 
 tracker.track(event)
 ```
@@ -173,10 +197,20 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Product product = new Product("productId", "clothes/shirts", "EUR", 100.50);
+ProductEntity product = new ProductEntity(
+  "productId", // id
+  "clothes/shirts", // category
+  "EUR", // currency
+  100.50 // price
+);
 List<Product> products = new ArrayList<>();
 products.add(product);
-AddToCart event = new AddToCart(products, 200, "EUR");
+
+CartEntity cart = new CartEntity(
+  200, // totalValue
+  "EUR" // currency
+);
+AddToCartEvent event = new AddToCartEvent(products, cart);
 
 tracker.track(event);
 ```
@@ -197,8 +231,14 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val product = Product("productId", "clothes/shirts", "EUR", 100.50)
-val event = RemoveFromCart(listOf(product), 200, "EUR")
+val product = ProductEntity(
+  id = "productId", 
+  category = "clothes/shirts", 
+  currency = "EUR", 
+  price = 100.50
+)
+val cart = CartEntity(totalValue = 200, currency = "EUR")
+val event = RemoveFromCartEvent(listOf(product), cart)
 
 tracker.track(event)
 ```
@@ -206,10 +246,20 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Product product = new Product("productId", "clothes/shirts", "EUR", 100.50);
+ProductEntity product = new ProductEntity(
+  "productId", // id
+  "clothes/shirts", // category
+  "EUR", // currency
+  100.50 // price
+);
 List<Product> products = new ArrayList<>();
 products.add(product);
-RemoveFromCart event = new RemoveFromCart(products, 200, "EUR");
+
+CartEntity cart = new CartEntity(
+  200, // totalValue
+  "EUR" // currency
+);
+RemoveFromCartEvent event = new RemoveFromCartEvent(products, cart);
 
 tracker.track(event);
 ```
@@ -229,8 +279,13 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val product = Product("productId", "software", "USD", 99.99)
-val event = ProductListView(listOf(product), "snowplowProducts")
+val product = ProductEntity(
+  id = "productId", 
+  category = "software", 
+  currency = "USD", 
+  price = 99.99
+)
+val event = ProductListViewEvent(listOf(product), name = "snowplowProducts")
 
 tracker.track(event)
 ```
@@ -238,10 +293,18 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Product product = new Product("productId", "software", "USD", 99.99);
+ProductEntity product = new ProductEntity(
+  "productId", // id
+  "software", // category
+  "USD", // currency
+  99.99 // price
+);
 List<Product> products = new ArrayList<>();
 products.add(product);
-ProductListView event = new ProductListView(products, "snowplowProducts");
+ProductListViewEvent event = new ProductListViewEvent(
+  products, // products
+  "snowplowProducts" // name
+);
 
 tracker.track(event);
 ```
@@ -261,8 +324,13 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val product = Product("productId", "software", "USD", 99.99)
-val event = ProductListClick(product, "snowplowProducts")
+val product = ProductEntity(
+  id = "productId", 
+  category = "software", 
+  currency = "USD", 
+  price = 99.99
+)
+val event = ProductListClickEvent(product, name = "snowplowProducts")
 
 tracker.track(event)
 ```
@@ -270,8 +338,16 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Product product = new Product("productId", "software", "USD", 99.99);
-ProductListClick event = new ProductListClick(product, "snowplowProducts");
+ProductEntity product = new ProductEntity(
+  "productId", // id
+  "software", // category
+  "USD", // currency
+  99.99 // price
+);
+ProductListClickEvent event = new ProductListClickEvent(
+  product, // product
+  "snowplowProducts" // name
+);
 
 tracker.track(event);
 ```
@@ -280,7 +356,7 @@ tracker.track(event);
 
 ### CheckoutStep
 
-Track the completion of a step in the checkout funnel, along with common checkout properties.
+Track the completion of a step in the checkout funnel, along with common checkout properties such as payment method or coupon code.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -291,7 +367,7 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val event = CheckoutStep(3)
+val event = CheckoutStepEvent(step = 3, deliveryMethod = "next_day")
 
 tracker.track(event)
 ```
@@ -299,7 +375,14 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-CheckoutStep event = new CheckoutStep(3);
+CheckoutStepEvent event = new CheckoutStepEvent(
+  3, // step
+  null, // shippingPostcode
+  null, // billingPostcode
+  null, // shippingFullAddress
+  null, // billingFullAddress
+  "next_day" // deliveryMethod
+);
 
 tracker.track(event);
 ```
@@ -308,7 +391,7 @@ tracker.track(event);
 
 ### Transaction
 
-Track the completion of a purchase or transaction.
+Track the completion of a purchase or transaction, along with common transaction properties such as shipping cost or discount amount.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -320,11 +403,11 @@ Coming soon!
 
 ```kotlin
 val event = Transaction(
-    "id-123", 
-    50000,
-    "JPY",
-    "debit",
-    2,
+    id = "id-123", 
+    revenue = 50000,
+    currency = "JPY",
+    paymentMethod = "debit",
+    totalQuantity = 2,
 )
 
 tracker.track(event)
@@ -333,12 +416,12 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Transaction event = new Transaction(
-    "id-123", 
-    50000,
-    "JPY",
-    "debit",
-    2,
+TransactionEvent event = new TransactionEvent(
+    "id-123", // id
+    50000, // revenue
+    "JPY", // currency
+    "debit", // paymentMethod
+    2, // totalQuantity
 );
 
 tracker.track(event);
@@ -360,9 +443,9 @@ Coming soon!
 
 ```kotlin
 val event = Refund(
-    "id-123", // use the transaction ID from the original Transaction event
-    20000,
-    "JPY"
+    id = "id-123", // use the transaction ID from the original Transaction event
+    refundAmount = 20000,
+    currency = "JPY"
 )
 
 tracker.track(event)
@@ -371,10 +454,10 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Refund event = new Refund(
-    "id-123", // use the transaction ID from the original Transaction event
-    20000,
-    "JPY"
+RefundEvent event = new RefundEvent(
+    "id-123", // id; use the transaction ID from the original Transaction event
+    20000, // refundAmount
+    "JPY" // currency
 );
 
 tracker.track(event);
@@ -395,8 +478,8 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val promotion = Promotion("promoId")
-val event = PromotionView(promotion)
+val promotion = PromotionEntity(id = "promoId")
+val event = PromotionViewEvent(promotion)
 
 tracker.track(event)
 ```
@@ -405,8 +488,8 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Promotion promotion = new Promotion("promoId");
-ProductView event = new PromotionView(promotion);
+PromotionEntity promotion = new PromotionEntity("promoId");
+ProductViewEvent event = new PromotionViewEvent(promotion);
 
 tracker.track(event);
 ```
@@ -427,7 +510,7 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val promotion = Promotion("promoId")
+val promotion = PromotionEntity(id = "promoId")
 val event = PromotionClick(promotion)
 
 tracker.track(event)
@@ -437,8 +520,8 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Promotion promotion = new Promotion("promoId");
-PromotionClick event = new PromotionClick(promotion);
+PromotionEntity promotion = new PromotionEntity("promoId");
+PromotionClickEvent event = new PromotionClickEvent(promotion);
 
 tracker.track(event);
 ```

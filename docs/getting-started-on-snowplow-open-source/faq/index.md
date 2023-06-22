@@ -21,11 +21,17 @@ On AWS:
 - Ensure you are using the `secure` variant of the Quick Start
 - Setting up CloudWatch alarms and Auto-scaling for each pipeline component
     - You can find extensive documentation on AWS CloudWatch which will guide you on what needs to be done to deliver a highly available, autoscaling pipeline
-- Set your Collector min_size to 2 at a minimum to ensure availability in case of availability zone outages: [https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70](https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70)
-- Set up your max_size for all the EC2 groups to a number bigger than 2 to ensure they can scale horizontally
+- Set your Collector `min_size` to 2 at a minimum to ensure availability in case of availability zone outages: [https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70](https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70)
+- Set up your `max_size` for all the EC2 groups to a number bigger than 2 to ensure they can scale horizontally
 - Ensure your RDS instances are setup with multi availability zones configured: [https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L92-L96](https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L92-L96)
-- Set the max_kcl_capacity for read & write to something substantially higher than the default (it will auto-scale up to that limit) - its the same variables for all Kinesis consumers ([https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85))
+- Set the `max_kcl_capacity` for read & write to something substantially higher than the default (it will auto-scale up to that limit) - its the same variables for all Kinesis consumers ([https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2/blob/main/variables.tf#L63-L85))
 - Ensure your RDS for the Postgres Loaders can auto-scale its capacity - this will mean you won't run out of disk when you start tracking events in: [https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L62-L66](https://github.com/snowplow-devops/terraform-aws-rds/blob/main/variables.tf#L62-L66)
+
+:::note
+
+For advice on how to scale an AWS Pipeline for Production scale workloads you can check out our webinar on ["Battle hardening Snowplow Open Source"](https://snowplow.io/events/battle-hardening-snowplow-os-emea/).
+
+:::
 
 ## How do I upgrade the version of the application that I am using?
 
@@ -62,7 +68,7 @@ AWS:
 
 `Provider "registry.terraform.io/hashicorp/aws" requires explicit configuration. Add a provider block to the root module and configure the provider's required arguments as described in the provider documentation.`
 
-**Solution:** Double check that your AWS Access Key ID and AWS Secret Access Key are set up correctly (with no typos) using the `aws configured` command.
+**Solution:** Double check that your AWS Access Key ID and AWS Secret Access Key are set up correctly (with no typos) using the `aws configure` command.
 
 **Error:** **"x.x.x.x" is not a valid CIDR block**
 
@@ -70,7 +76,7 @@ AWS:
 
 **Solution**: Add a mask to the IP in your terraform.tvars file, e.g. `x.x.x.x/32`.
 
-**Error creating application Load Balancer**
+**Error creating Application Load Balancer**
 
 `ValidationError: At least two subnets in two different Availability Zones must be specified status code: 400`
 

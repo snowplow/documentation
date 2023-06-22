@@ -71,6 +71,6 @@ WHERE collector_tstamp > '2021-01-01 00:00:00' -- insert the timestamp from when
 
 ## What you might want to do next
 
-You have now fully disabled capturing any PII with Snowplow events. However, Snowplow also allows you do anonymous session tracking: a session hash is stored in the browser for the duration of the session but no persistent user identifiers are set or captured. More information on Snowplow's different anonymous tracking capabilities can be found in the relevant JavaScript tracker release posts ([2.15.0](https://snowplowanalytics.com/blog/2020/08/20/snowplow-javascript-tracker-2-15-0-released/) and [2.17.0](https://snowplowanalytics.com/blog/2020/12/15/snowplow-javascript-tracker-2-17-0-released/)).
+You have now fully disabled capturing any PII with Snowplow events. However, Snowplow also allows you do anonymous session tracking: a session hash is stored in the browser for the duration of the session but no persistent user identifiers are set or captured. More information on Snowplow's different anonymous tracking capabilities can be found in the relevant JavaScript tracker release posts ([2.15.0](https://snowplow.io/blog/snowplow-javascript-tracker-2-15-0-released/) and [2.17.0](https://snowplow.io/blog/snowplow-javascript-tracker-2-17-0-released/)).
 
-An overall overview of Snowplow's approach to user identification and user privacy can be found in [this blog post](https://snowplowanalytics.com/blog/2020/09/06/user-identification-and-privacy/).
+An overall overview of Snowplow's approach to user identification and user privacy can be found in [this blog post](https://snowplow.io/blog/user-identification-and-privacy/).

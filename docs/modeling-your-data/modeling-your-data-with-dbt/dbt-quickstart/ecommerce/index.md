@@ -14,10 +14,10 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
 
-- A dataset of e-commerce web events from the [Snowplow JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md) must be available in the database.
-- Have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled.
+- A dataset of e-commerce events from the [Snowplow JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md), or the [iOS/Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.
+- Have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled. (Note if you have only tracked mobile e-commerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
 - Have the following e-commerce contexts enabled: `cart`, `checkout_step`, `page` `transaction`, `user`
-- Track the e-commerce tracking action events on your website
+- Track the e-commerce tracking action events on your website/mobile application
 
 ```mdx-code-block
 import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
@@ -129,7 +129,18 @@ If you want to temporarily disable a module, or you just find it easier to use t
 dbt run --exclude carts --select snowplow_ecommerce --vars '{snowplow__disable_ecommerce_carts: true}'
 ```
 
-### 7. Run your model
+### 7. Enable mobile e-commerce events
+Mobile e-commerce events may be processed in the package, if they have a `domain_sessionid` and are in your listed `app_id`s, however to correctly source the mobile session and screen view ids you need to set the following in your `dbt_project.yml`:
+
+```yml
+# dbt_project.yml
+...
+vars:
+  snowplow_ecommerce:
+    snowplow__enable_mobile_events: true
+```
+
+### 8. Run your model
 
 You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package):
 

@@ -185,7 +185,7 @@ More detail on the `Subject` class can be found [here](/docs/collecting-data/col
 
 ### Custom context
 
-Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. You can read more about custom contexts and the possible use cases [here](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+Custom context can be used to augment any standard Snowplow event type, including self describing events, with additional data. You can read more about custom contexts and the possible use cases [here](/docs/understanding-your-pipeline/entities/index.md#custom-entities).
 
 Custom context can be added as an extra argument to any of Snowplow’s Event classes. The `context` argument should consist of a list of one or more instances of the `SelfDescribingJson` class.
 

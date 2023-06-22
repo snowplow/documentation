@@ -1,6 +1,6 @@
 ---
 title: "Understanding the enriched TSV format"
-date: "2021-07-07"
+sidebar_label: "Enriched TSV format"
 sidebar_position: 1000
 ---
 

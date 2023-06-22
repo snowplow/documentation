@@ -73,6 +73,25 @@ Whenever the same functionality can be achieved in multiple offerings but in a d
 
 For links within this documentation, please end the link with `/index.md`. This way all links will be checked, and you’ll get an error if a link is broken at any point.
 
+### Concepts
+
+There are several key concepts at Snowplow: events (self-describing, structured), entities, schemas. We must ensure that we use and explain them consistently.
+
+**Please, use up-to-date terms:**
+* “Self-describing event”, not “unstructured event”
+* “Entities”, not “contexts”
+* If you are writing about schemas, pick “schema” or “data structure” and stick with it
+
+**Please, do not over-explain these in any of your writing.** Instead, just link to one of the existing concept pages:
+* Events in general: `/docs/understanding-your-pipeline/events/index.md`
+* Custom events: `/docs/understanding-your-pipeline/events/index.md#self-describing-events`
+* Self-describing events: `/docs/understanding-your-pipeline/events/index.md#self-describing-events`
+* Structured events: `/docs/understanding-your-pipeline/events/index.md#structured-events`
+* Entities in general: `/docs/understanding-your-pipeline/entities/index.md`
+* Custom entities: `/docs/understanding-your-pipeline/events/index.md#custom-entities`
+* Schemas: `/docs/understanding-your-pipeline/schemas/index.md`
+* Iglu resolvers/registries: `/docs/understanding-your-pipeline/schemas/index.md#iglu`
+
 ### Reusable fragments
 
 You can create reusable fragments and include them in multiple files (see [this example](https://github.com/snowplow/documentation/blob/main/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/index.md)).

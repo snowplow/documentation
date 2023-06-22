@@ -1,7 +1,6 @@
 ---
 title: "What is Snowplow Mini?"
-date: "2020-02-24"
-sidebar_position: 20
+sidebar_position: 0
 ---
 
 [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development sandbox, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
@@ -38,7 +37,7 @@ Once you are happy with the changes you have made you would then change the trac
 ## Features of Snowplow Mini
 
 - Data is tracked and processed in real time
-- Your Snowplow Mini speaks to your [Schema registries](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) to allow events to be sent against your [custom schemas](/docs/understanding-tracking-design/index.md)
+- Your Snowplow Mini speaks to your [Schema registries](/docs/understanding-your-pipeline/schemas/index.md#iglu) to allow events to be sent against your custom schemas
 - Data is validated during processing
 - Data is loaded into OpenSearch and can be queried directly or through the OpenSearch Dashboard
 - Successfully processed events and failed events are in distinct good and bad indexes

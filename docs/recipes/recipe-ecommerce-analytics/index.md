@@ -27,7 +27,7 @@ You have already set up Snowplow’s out of the box web tracking by instrumentin
 
 To understand how people are engaging with your products, you’ll want to make a couple of tracking additions:
 
-- You’ll want to be able to tie all of the events you are capturing to specific products, not just pages; to achieve this you'll attach a product entity to all of your product-related events. Learn more about Snowplow events and entities [here](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+- You’ll want to be able to tie all of the events you are capturing to specific products, not just pages; to achieve this you'll attach a product [entity](/docs/understanding-your-pipeline/entities/index.md) to all of your product-related events.
 - You'll want to extend this tracking to include cart actions and purchases; for this purpose, we've created a couple of custom events for you to instrument.
 
 You can then run a simple SQL query to model this data into a product table. This is straightforward as the information about the product is always captured in the same place across events, in the product entity.
@@ -38,7 +38,7 @@ You can then run a simple SQL query to model this data into a product table. Thi
 
 We have already created a custom `product` entity for you, and uploaded its data structure to [your Iglu server](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md).
 
-Snowplow uses self-describing JSON schemas to structure events and entities so that they can be validated in the pipeline and loaded into tidy tables in the warehouse. You can learn more about these data structures [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), and about why we take this approach [here](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/).
+Snowplow uses self-describing JSON schemas to structure events and entities so that they can be validated in the pipeline and loaded into tidy tables in the warehouse. You can learn more about these data structures [here](/docs/understanding-your-pipeline/schemas/index.md), and about why we take this approach [here](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/).
 
 While Try Snowplow only ships with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) (and API).
 

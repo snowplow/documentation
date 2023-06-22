@@ -84,7 +84,7 @@ Use the `SelfDescribingEvent` type to track a custom event which consists of
 - You want to track event types which are proprietary/specific to your business (i.e. not already part of Snowplow), or
 - You want to track events which have unpredictable or frequently changing properties
 
-A self-describing JSON has two keys, `schema` and `data`. The `schema` value should point to a valid self-describing JSON schema. They are called self-describing because the schema will specify the fields allowed in the data value. Read more about how schemas are used with Snowplow [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md).
+A self-describing JSON has two keys, `schema` and `data`. The `schema` value should point to a valid self-describing JSON schema. They are called self-describing because the schema will specify the fields allowed in the data value. Read more about how schemas are used with Snowplow [here](/docs/understanding-your-pipeline/schemas/index.md).
 
 After events have been collected by the event collector, they are validated to ensure that the properties match the self-describing JSONs. Mistakes (e.g. extra fields, or incorrect types) will result in events being processed as Bad Events. This means that only high-quality, valid events arrive in your data storage or real-time stream.
 
@@ -113,7 +113,7 @@ SelfDescribingEvent sde(sdj);
 Snowplow::get_default_tracker()->track(sde);
 ```
 
-For more on JSON schema, refer to [this page](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md).
+For more on JSON schema, refer to [this page](/docs/understanding-your-pipeline/schemas/index.md).
 
 ## Track screen views with "ScreenViewEvent"
 

@@ -1,29 +1,54 @@
 ---
 title: "Structuring your data with schemas"
-date: "2020-02-13"
-sidebar_position: 10
+sidebar_label: "Schemas (data structures)"
+sidebar_position: 3
+description: "Schemas are a powerful feature that ensures your data is clean and descriptive"
 ---
 
-One of the most powerful features of Snowplow is schemas.
+**Schemas** are one of the most powerful features of Snowplow. They define the structure of the data that you collect. Each schema defines what fields are recorded with each [event](/docs/understanding-your-pipeline/events/index.md), and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/understanding-your-pipeline/entities/index.md).
 
-Schemas define the structure of the data that you collect. Each schema defines what fields are recorded with each event that is captured, and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/understanding-tracking-design/understanding-events-entities/index.md).
+:::info Terminology
 
-Schemas make it possible for you to:
+We often use the terms “schema” and “data structure” interchangeably, although in [Snowplow BDP](/docs/feature-comparison/), “data structure” usually refers to a combination of a schema with some additional metadata.
 
-1. define your own data structures to capture data in a way that works for your business; for example a two-sided marketplace will be tracking very different events than a gaming application
-2. ensure your data presents a clear and easy-to-understand record of what has happened
-3. evolve your event and entity definitions over time by updating those schemas, enabling you to [evolve their data collection with their business](https://snowplowanalytics.com/blog/2019/07/23/how-to-ensure-your-data-collection-evolves-alongside-your-business/). Schemas can be updated to reflect changes to the design of websites, mobile apps and server-side applications
-4. expand your tracking to include more data as your organisation becomes more data sophisticated and needs to collect more granular data
+:::
 
-## Managing data quality with data structures
+With schemas, you can:
 
-Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/index.md), each event is validated against its self-describing schema and only those that pass are allowed to pass through, [failures are sent to a separate queue](/docs/managing-data-quality/understanding-failed-events/index.md).
+* Define your own data structures to capture data in a way that works for your business. For example, a two-sided marketplace will be tracking very different events than a gaming application
+* Ensure your data presents a clear and easy to understand record of what has happened
 
-Through describing how the data should be structured as part of your schema definition you ensure clean and consistent data landing in your data warehouse or other destinations.
+As you evolve your website, mobile app or server-side application, you can evolve your schemas to reflect the changes. _In the data warehouse, Snowplow automatically evolves your table definition to accommodate both old and new data in a safe, non-destructive way._
 
-## Building data meaning with data structures
+:::tip
 
-Rather than just leaving your data open to interpretation by the many different people that will consume and analyze it, you can use schemas to describe the meaning of your data. Each schema you define should clearly describe what is being collected and why both for the schema itself, but also for each field within the schema.
+Check out the documentation for [managing](/docs/understanding-tracking-design/managing-your-data-structures/index.md) and [versioning](/docs/understanding-tracking-design/versioning-your-data-structures/index.md) data structures.
+
+:::
+
+## Managing data quality with schemas
+
+Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/understanding-your-pipeline/failed-events/index.md) are sent to a separarte location.
+
+Through describing how the data should be structured as part of your schema definition, you ensure clean and consistent data landing in your data warehouse or other destinations.
+
+## Building data meaning with schemas
+
+Rather than just leaving your data open to interpretation by the many different people that will consume and analyze it, you can use schemas to describe the meaning of your data. Each schema you define should clearly describe what is being collected and why — both for the schema itself, but also for each field within the schema.
+
+## Iglu
+
+**Iglu** is a set of tools for hosting and managing schemas (more specifically, JSON schemas). We use it to store all the schemas associated with events and entities.
+
+:::info Terminology
+
+We use the terms “schema repository” and “schema registry” interchangeably.
+
+:::
+
+There is a [central Iglu repository](http://iglucentral.com/) that holds public schemas for use with Snowplow, including ones for some of the [out-of-the-box self-described events](/docs/understanding-your-pipeline/events/index.md#out-of-the-box-and-custom-events) and [out-of-the-box entities](/docs/understanding-your-pipeline/entities/index.md#out-of-the-box-entities).
+
+To host schemas for your [custom self-described events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [custom entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities), you can run your own Iglu, either using [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) (recommended), or a [static repository](/docs/pipeline-components-and-applications/iglu/iglu-repositories/static-repo/index.md). _(This is not required for Snowplow BDP customers, as Snowplow BDP already includes a private Iglu repository.)_
 
 ## The anatomy of a schema
 

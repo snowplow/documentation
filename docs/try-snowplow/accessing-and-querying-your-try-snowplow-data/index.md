@@ -62,7 +62,7 @@ LIMIT 10
 
 ![](images/7-runquery.png)
 
-You should now see Snowplow atomic data which you can [explore](https://docs.snowplow.io/docs/understanding-your-pipeline/canonical-event/).
+You should now see Snowplow atomic data which you can [explore](/docs/understanding-your-pipeline/canonical-event/index.md).
 
 
 ### Example: Create a simple time-series chart

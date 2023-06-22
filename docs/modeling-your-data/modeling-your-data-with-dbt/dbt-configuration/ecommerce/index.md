@@ -38,6 +38,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `backfill_limit_days`   | The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#identification-of-events-to-process) section for more details.                                                                                                                  | `30`                            |
 | `days_late_allowed`     | The maximum allowed number of days between the event creation and it being sent to the collector. Exists to reduce lengthy table scans that can occur as a result of late arriving data.                                                                                                                                                                                                                         | `3`                             |
 | `ecommerce_event_names` | The list of event names that the Snowplow e-commerce package will filter on when extracting events from your atomic events table. If you have included any custom e-commerce events, feel free to add their event name in this list to include them in your data models.                                                                                                                                         | `['snowplow_ecommerce_action']` |
+| `enable_mobile_events` | Whether to use the mobile contexts for mobile e-commerce events in the processing (based on the client session and screen view context).                                                                                                                                         | `false` |
 | `lookback_window_hours` | The number of hours to look before the latest event processed - to account for late arriving data, which comes out of order.                                                                                                                                                                                                                                                                                     | `6`                             |
 | `max_session_days`      | The maximum allowed session length in days. For a session exceeding this length, all events after this limit will stop being processed. Exists to reduce lengthy table scans that can occur due to long sessions which are usually a result of bots.                                                                                                                                                             | `3`                             |
 | `session_lookback_days` | Number of days to limit scan on `snowplow_ecommerce_base_sessions_lifecycle_manifest` manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.                                                                                                                                                                                          | `730`                           |
@@ -80,6 +81,8 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 | `sde_ecommerce_action`            | `'com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1'` |
 | `context_web_page`                | `'com_snowplowanalytics_snowplow_web_page_1'`                            |
 | `context_ecommerce_product`       | `'com_snowplowanalytics_snowplow_ecommerce_product_1'`                   |
+| `context_mobile_session`          | `'com_snowplowanalytics_snowplow_client_session_1'`                      |
+| `context_screen`                  | `'com_snowplowanalytics_mobile_screen_1'`                                |
 
 </TabItem>
 <TabItem value="bigquery" label="Bigquery" default>
@@ -101,40 +104,46 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 ## Output Schemas
 ```mdx-code-block
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md"
+import { SchemaSetter } from '@site/src/components/DbtSchemaSelector';
+import CodeBlock from '@theme/CodeBlock';
 
 <DbtSchemas/>
-```
 
-
-```yml
-# dbt_project.yml
-...
-models:
+export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema) => {
+  return(
+    <>
+    <CodeBlock language="yaml">
+    {`models:
   snowplow_ecommerce:
     base:
       manifest:
-        +schema: my_manifest_schema
+        +schema: ${manifestSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     carts:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     checkouts:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     products:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     transactions:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     users:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}`}
+        </CodeBlock>
+    </>
+  )
+}
 
 ```
+<SchemaSetter output={printSchemaVariables}/>

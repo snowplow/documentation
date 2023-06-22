@@ -46,6 +46,7 @@ API | Used for:
 `trackCheckoutStep` | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.
 `trackTransaction` | Track a transaction/purchase completion.
 `trackRefund` | Track a transaction partial or complete refund.
+`trackTransactionError` | Track an error happening during a transaction process.
 `setPageType` | Set a Page type context which would allow the analyst to discern between types of pages with ecommerce value. E.g. Category Page, Product Page, Cart Page, etc.
 `setEcommerceUser` | Set a User type context with a few standard user attributes.
 
@@ -282,6 +283,11 @@ trackTransaction({
 - Where `products` is an array with the product/s taking part in the transaction.
 
 ### trackRefund
+
+:::note
+Available from version 3.10.
+:::
+
 To track a complete or partial refund you can use the `trackRefund` method with the following attributes:
 
 ```js
@@ -307,6 +313,34 @@ trackRefund({
 ```
 
 - Where `products` is an array with the product/s taking part in the refund.
+
+### trackTransactionError
+
+:::note
+Available from version 3.13.
+:::
+
+To track an error happening during a transaction process you can use the `trackTransactionError` method with the following attributes:
+
+```js
+import { trackTransactionError } from '@snowplow/browser-plugin-snowplow-ecommerce';
+
+trackTransactionError({
+  resolution: "rejection",
+  error_code: "E123",
+  error_shortcode: "CARD_DECLINE",
+  error_description: "Card has been declined by the issuing bank.",
+  error_type: "hard",
+  transaction: {
+    revenue: 45,
+    currency: "EUR",
+    transaction_id: "T12345",
+    payment_method: "card" 
+  }
+});
+```
+
+- Where `transaction` is the transaction entity being processed.
 
 ### setPageType
 
@@ -449,6 +483,8 @@ Whenever there is a transaction entity involved in the ecommerce interaction eve
 | discount_amount | `number` | Discount amount taken off. | ✘ |
 | credit_order | `boolean` | Whether the transaction is a credit order or not. | ✘ |
 
+<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
+
 ### Refund entity
 
 Whenever there is a refund entity involved in the ecommerce interaction event, it can have the following attributes:
@@ -460,7 +496,21 @@ Whenever there is a refund entity involved in the ecommerce interaction event, i
 | refund_amount | `number` | The amount refunded from the transaction. | ✅ |
 | refund_reason | `string` | The reason that resulted in a refund. | ✘ |
 
-<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
+<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/refund/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
+
+### Transaction Error entity
+
+Whenever there is a transaction error entity involved in the ecommerce interaction event, it can have the following attributes:
+
+| attribute | type | description | required |
+| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
+| error_code | `string` | Error-identifying code for the transaction issue. E.g. E522 | ✘ |
+| error_shortcode | `string` | Shortcode for the error occurred in the transaction. E.g. declined_by_stock_api, declined_by_payment_method, card_declined, pm_card_radarBlock | ✘ |
+| error_description | `number` | Longer description for the error occurred in the transaction. | ✘ |
+| error_type | `Enum string` | Either `'hard'` or `'soft'`. Hard error types mean the customer must provide another form of payment e.g. an expired card. Soft errors can be the result of temporary issues where retrying might be successful e.g. processor declined the transaction. | ✘ |
+| resolution | `string` | The resolution selected for the error scenario. E.g. retry_allowed, user_blacklisted, block_gateway, contact_user, default | ✘ |
+
+<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction_error/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
 ## GA4/UA Ecommerce transitional API
 

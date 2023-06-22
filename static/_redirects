@@ -8,6 +8,7 @@
 /accelerators/ecommerce/* https://snowplow-axl-ecom.netlify.app/accelerators/ecommerce/:splat 200
 /accelerators/snowplow-fractribution/* https://main--snowplow-axl-mkt-attribution.netlify.app/accelerators/snowplow-fractribution/:splat 200
 /accelerators/consent/* https://snowplow-axl-consent.netlify.app/accelerators/consent/:splat 200
+/accelerators/web-performance/* https://snowplow-axl-web-performance.netlify.app/accelerators/web-performance/:splat 200
 /snowplow-android-tracker/* https://snowplow.github.io/snowplow-android-tracker/:splat 302
 /snowplow-cpp-tracker/* https://snowplow.github.io/snowplow-cpp-tracker/:splat 302
 /snowplow-lua-tracker/* https://snowplow.github.io/snowplow-lua-tracker/:splat 302
@@ -21,6 +22,8 @@
 
 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
 /docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
+/docs/collecting-data/collecting-from-own-applications/python-tracker/adding-extra-data-the-subject-class/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/adding-extra-data-the-subject-class/:splat 301
+/docs/collecting-data/collecting-from-own-applications/python-tracker/the-redisworker-class/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/the-redisworker-class/:splat 301
 
 /docs/modeling-your-data/resolving-data-model-failures-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/sql-runner/resolving-data-model-failures/ 301
 /docs/modeling-your-data/retrieving-job-execution-data-via-the-api/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-execution-data-via-the-api/ 301

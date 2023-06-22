@@ -9,6 +9,12 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
+:::tip
+
+For any new developments we highly recommend using our [dbt packages](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) instead. SQL Runner is no longer under active development and will only receive bug fixes in the future.
+
+:::
+
 [SQL Runner](https://github.com/snowplow/sql-runner) enables you to execute SQL scripts against the Snowplow data in your data warehouse. Specifically, it allows you to organize your SQL scripts in templatable playbooks, and execute them in series or in parallel on Snowflake, Amazon Redshift, GCP BigQuery and PostgreSQL.
 
 To set up SQL Runner, Snowplow open source users can start from the [User guide](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md#user-guide) .

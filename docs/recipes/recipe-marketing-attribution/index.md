@@ -47,14 +47,14 @@ Without even getting to any more advanced customizations, Snowplow gives you the
 Make sure you've set up a free [Snowplow trial account](https://try.snowplowanalytics.com/) and follow the getting started instructions to generate sample events by clicking [the "Web Analytics" button](https://try.snowplowanalytics.com/event-tester).
 
 :::note
-Check [this guide](https://docs.snowplow.io/docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/) out if you want to help querying the data
+Check [this guide](/docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/index.md) out if you want to help querying the data
 :::
 
 #### Create a sessions table
 
 ![](images/sessions.png)
 
-You can see what the fields mean by reviewing [the Snowplow Canonical Event Model docs page](https://docs.snowplow.io/docs/understanding-your-pipeline/canonical-event/).
+You can see what the fields mean by reviewing [the Snowplow Canonical Event Model docs page](/docs/understanding-your-pipeline/canonical-event/index.md).
 
 ```sql
 CREATE TABLE derived.marketing_attribution AS(
@@ -199,7 +199,7 @@ GROUP BY 1;
 When you've completed this section, you should learn something about how you acquire real customers!
 
 #### Auto-track page views via GTM
-[Tracking real page view events](https://docs.snowplow.io/docs/try-snowplow/tracking-events-with-try-snowplow/) is very simple, especially if you have Google Tag Manager connected to your website (or your personal blog if you just want to see how it works!) - just copy the snippet from the Snowplow UI into a custom HTML tag or directly into the `<head>` section of your website.
+[Tracking real page view events](/docs/try-snowplow/tracking-events-with-try-snowplow/index.md) is very simple, especially if you have Google Tag Manager connected to your website (or your personal blog if you just want to see how it works!) - just copy the snippet from the Snowplow UI into a custom HTML tag or directly into the `<head>` section of your website.
 
 ![](images/gtm.gif)
 
@@ -285,7 +285,7 @@ Now that you've seen the principles in action, you've actually done the hardest 
 
 Now you just need to connect to your warehouse and starting building up an asset of customer data that you can get better and better attribution insights out of over time!
 
-To connect to your warehouse / lake, you need to go into the Snowplow UI, click 'Upgrade Now' and follow the setup wizard for BDP Cloud (you will need a credit card for this). BDP Cloud is a production-ready platform that can reliably load live events to your warehouse / lake, to continue without a credit card you can always set up [Snowplow Opensource](https://docs.snowplow.io/docs/getting-started-on-snowplow-open-source/).
+To connect to your warehouse / lake, you need to go into the Snowplow UI, click 'Upgrade Now' and follow the setup wizard for BDP Cloud (you will need a credit card for this). BDP Cloud is a production-ready platform that can reliably load live events to your warehouse / lake, to continue without a credit card you can always set up [Snowplow Opensource](/docs/getting-started-on-snowplow-open-source/index.md).
 
 ![](images/destination.png)
 
@@ -309,10 +309,10 @@ snowplow("newTracker", "sp", "com-acme-saas1.collector.snplow.net", {
 
 When your connection is confirmed and tracking snippet updated, deploy our prebuilt dbt packages (note that you will need dbt Core or Cloud for this step) following the quickstart guides:
 
-1. Snowplow [web package](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/)
-2. Snowplow [attribution package](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/fractribution/)
+1. Snowplow [web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/index.md)
+2. Snowplow [attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/fractribution/index.md)
 
-With these dbt packages you will get a series of production ready tables that automatically aggregate and model the raw Snowplow events into BI ready tables. You can read more about our dbt packages in [the docs](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/).
+With these dbt packages you will get a series of production ready tables that automatically aggregate and model the raw Snowplow events into BI ready tables. You can read more about our dbt packages in [the docs](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md).
 
 Any BI tool can then be connected to create charts of the output.
 
@@ -324,7 +324,7 @@ Any BI tool can then be connected to create charts of the output.
 Now that you have all the out of the box technology set up, you can discover the real power of Snowplow in fully owning all the data and logic behind your analytics and AI. Some suggestions for what you might try next:
 
 - Add additional marketing sources, such as ad impressions or emails
-- [Redefine sessions](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/#configuring-the-session-cookie-duration) to be more meaningful for your business rather than the default '30 minutes of inactivity'
+- [Redefine sessions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#configuring-the-session-cookie-duration) to be more meaningful for your business rather than the default '30 minutes of inactivity'
 - [Join acquisition costs](https://snowplow.io/blog/marketing-attribution-with-snowplow/), such as the average cpc for paid search based on the click and keyword performance reports from Google
 - Add the revenue associated with conversions from your transactional database, or [track these in a custom conversion event](http://snowplow.io/docs/recipes/recipe-marketing-attribution/#optional-for-more-confidence-track-a-dedicated-conversion-event)
 - Explore different attribution models and hone a custom one that maps to your customer journey and customers' buying behaviors

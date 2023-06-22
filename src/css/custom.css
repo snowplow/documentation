@@ -448,3 +448,15 @@ abbr[data-title]:focus::after {
   stroke: var(--ifm-color-primary);
   fill: var(--ifm-color-primary);
 }
+
+fieldset {
+  border: none;
+}
+
+.JsonValidator .MuiGrid-root.MuiGrid-item {
+  padding-top: 8px;
+}
+
+.JsonValidator .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module{
+  padding-top: 0px;
+}

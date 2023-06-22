@@ -99,37 +99,45 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 ## Output Schemas
 ```mdx-code-block
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md"
+import { SchemaSetter } from '@site/src/components/DbtSchemaSelector';
+import CodeBlock from '@theme/CodeBlock';
 
 <DbtSchemas/>
-```
 
-```yml
-# dbt_project.yml
-...
-models:
+export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema) => {
+  return(
+    <>
+    <CodeBlock language="yaml">
+    {`models:
   snowplow_mobile:
     base:
       manifest:
-        +schema: my_manifest_schema
+        +schema: ${manifestSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     sessions:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     user_mapping:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
     users:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     screen_views:
-      +schema: my_derived_schema
+      +schema: ${derivedSchema}
       scratch:
-        +schema: my_scratch_schema
+        +schema: ${scratchSchema}
     optional_modules:
       app_errors:
-        +schema: my_derived_schema
+        +schema: ${derivedSchema}
         scratch:
-          +schema: my_scratch_schema
+          +schema: ${scratchSchema}`}
+        </CodeBlock>
+    </>
+  )
+}
 ```
+
+<SchemaSetter output={printSchemaVariables}/>

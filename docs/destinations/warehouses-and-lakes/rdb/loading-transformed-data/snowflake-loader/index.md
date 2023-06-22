@@ -7,6 +7,7 @@ sidebar_position: 20
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
+import AutoSchemaCreation from '@site/docs/destinations/warehouses-and-lakes/rdb/loading-transformed-data/_automatic-schema-creation.md';
 ```
 
 It is possible to run Snowflake Loader on both AWS and GCP.
@@ -52,11 +53,11 @@ The following resources need to be created:
 - Snowflake loader [role](https://docs.snowflake.com/en/sql-reference/sql/create-role.html)
 - Snowflake [warehouse](https://docs.snowflake.com/en/sql-reference/sql/create-warehouse.html)
 - Snowflake [database](https://docs.snowflake.com/en/sql-reference/sql/create-database.html)
-- Snowflake [schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html)
-- `events` table in the same schema (see [here](https://github.com/snowplow/snowplow-rdb-loader/blob/master/modules/snowflake-loader/src/main/resources/atomic-def.sql) for the schema)
 - Snowflake [storage integration](https://docs.snowflake.com/en/sql-reference/sql/create-storage-integration.html)
 - Snowflake [file format](https://docs.snowflake.com/en/sql-reference/sql/create-file-format.html)
 - Snowflake [stage](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html) to load transformed events.
+
+<AutoSchemaCreation name="Snowflake" grantDocs="https://docs.snowflake.com/en/sql-reference/sql/grant-privilege" />
 
 #### Creating Snowflake stage for transformed events
 

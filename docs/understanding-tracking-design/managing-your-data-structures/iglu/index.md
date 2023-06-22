@@ -46,7 +46,15 @@ First, design the schema for your custom event (or entity). For example:
  }
 ```
 
-Next, save this schema in the following folder structure, with a filename of `1-0-0` (without any extension): `/schemas/com.snowplowanalytics/button_click/jsonschema/1-0-0`.
+Next, save this schema in the following folder structure, with a filename of `1-0-0` (without any extension):
+
+```
+schemas
+└── com.snowplowanalytics
+    └── button_click
+        └── jsonschema
+            └── 1-0-0
+```
 
 :::tip
 

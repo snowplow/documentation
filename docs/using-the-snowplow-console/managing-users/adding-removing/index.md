@@ -29,11 +29,15 @@ Only system administrators can set up SSO for their company.
 
 ### How to enable SSO for your account
 
-Setting up SSO for your account requires some information to be exchanged between you as the Identity Provider and Snowplow as the Service Provider.
+Setting up SSO for your account requires some information to be exchanged between you as the Identity Provider and Snowplow as the Service Provider. Depending on your Identity Provider the information that is required is slightly different.
 
-Depending on your Identity Provider the information that is required is slightly different.
+To enable single sign-on (SSO) for Snowplow, follow these steps inside Console:
 
-To enable SSO for Snowplow **please contact your Customer Success representative or send a support ticket requesting SSO to be enabled**. We will then work with you to exchange the relevant information and set up the SSO connection. 
+1. Go to the [manage organization](https://console.snowplowanalytics.com/settings) page.
+2. Select [Single sign-on (SSO)](https://console.snowplowanalytics.com/users/sso) from the Users panel.
+3. Follow the steps for your selected identity provider and supply the relevant information.
+* For Google Workspace, Azure AD, and Open ID Connect, the process is fully self-serve. This means that you can get connected immediately.
+* For other identity providers, you will need to submit your details securely to our support team. We will then work with you to set up the SSO connection.
 
 ### Which Identity Providers (IdPs) are supported?
 

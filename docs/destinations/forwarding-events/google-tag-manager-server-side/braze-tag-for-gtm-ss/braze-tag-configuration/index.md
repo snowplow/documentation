@@ -68,25 +68,24 @@ When enabled(default), this option will only update existing users. Uncheck this
 
   Depending on the previous selection, here you can specify the value or the client event property that corresponds to the User Alias Label.
 
-<details>
-
-<summary><i>pre-v0.2.0</i></summary>
-
-#### Identity settings
-
-##### Braze external_id (required)
-
-Set this key to the client event property (e.g. `client_id`) that corresponds to your users' `external_id` and will be used as the [Braze User Identifier](https://www.braze.com/docs/api/basics/#external-user-id-explanation).
-
-</details>
-
 ## Snowplow Event Mapping Options
 
 This section includes the mapping rules that concern a Snowplow event as claimed by the [Snowplow Client](/docs/destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md):
 
-### Include Self Describing event
+###  Snowplow Self Describing Event
+
+![snowplow event mapping options](images/snowplow_event_mapping_options.png)
+
+#### Include Self Describing event
 
 This option indicates if the Snowplow Self-Describing event data will be included in the event's properties object that will be sent to Braze. By default, this option is enabled.
+
+#### Self Describing Event Location
+
+This section is available only if the [Include Self Describing event](/docs/destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/braze-tag-configuration/#snowplow-self-describing-event) option is enabled. Using this drop-down menu you can indicate the location where Snowplow Self Describing event properties should be added under Braze event properties. The available options are:
+
+- **Nest under schema name** (default): The schema name will be used as a key in Braze event properties with the self-describing data as its value.
+- **Merge to root level**: The self-describing properties will be added directly as Braze event properties without nesting.
 
 ### Snowplow Event Context Rules
 
@@ -132,35 +131,6 @@ Depending on the value set for the **Apply to all versions** column, the major v
 
 :::
 
-<details>
-
-<summary><i>pre-v0.2.0</i></summary>
-
-#### Snowplow Event Context Rules
-
-##### Extract entity from Array if single element
-
-Snowplow Entities are always in Arrays, as multiple of the same entity can be attached to an event. This option will pick the single element from the array if the array only contains a single element.
-
-##### Include all Entities in event object
-
-Leaving this option enabled (default) ensures that all Entities on an event will be included within the Braze event's properties object.
-
-Disabling this option, reveals the options so that individual entities can be selected for inclusion.
-
-##### Snowplow Entity Mapping
-
-Using the "Snowplow Entity Mapping" table, the entities can also be remapped to have different names in the Braze and can be included in either event's properties or user attributes object.. The entity can be specified in two different formats:
-
-- Major version match: `x-sp-contexts_com_snowplowanalytics_snowplow_web_page_1` where `com_snowplowanalytics_snowplow` is the event vendor, `web_page` is the schema name and `1` is the Major version number. `x-sp-` can also be omitted from this if desired
-- Full schema match: `iglu:com.snowplowanalytics.snowplow/webPage/jsonschema/1-0-0`
-
-##### Include unmapped entities in event
-
-When remapping or moving some entities to User Attributes with the above customization, this option enables you to ensure that all unmapped entities (i.e. any entites not found in the "Snowplow Entity Mapping" rules above) will be included in the properties object of the Braze event.
-
-</details>
-
 ## Additional Event Mapping Options
 
 If you wish to pick other properties from the Client event and map them onto the Braze event, these can be specified in this section.
@@ -198,8 +168,6 @@ You can use this option to override the name of the Braze event object or leave 
 This option enables you to specify the client event property to populate the event time (in ISO-8601 format) or leave it empty to use the current time (default behavior).
 
 ## Logs Settings
-
-_(Available since v0.2.0)_
 
 Through the Logs Settings you can control the logging behavior of the Braze Tag. The available options are:
 

@@ -5,7 +5,7 @@ export const versions = {
   cppTracker: '2.0.0',
   flutterTracker: '0.3.0',
   golangTracker: '3.0.0',
-  googleAmpTracker: '1.0.3',
+  googleAmpTracker: '1.1.0',
   iosTracker: '5.2.0',
   javaTracker: '1.0.0',
   javaScriptTracker: '3.13.0',

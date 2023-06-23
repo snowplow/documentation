@@ -1,6 +1,5 @@
 ---
-title: "Google AMP (1.0.3)"
-date: "2020-03-19"
+title: "Google AMP (1.1.0)"
 sidebar_position: 990
 ---
 
@@ -43,10 +42,6 @@ Snowplow is natively integrated into the project, so pages optimized with AMP HT
 The tracker utilises AMP linker functionality to ensure that user identification can be done where a user may visit via the google domain or the site's own domain. In order to function, this requires that linkers are enabled in the amp-analytics configuration. Not doing so can result in changing AMP client Ids (which are the primary user identifier).
 :::
 
-### Redshift Users
-
-The v2 AMP tracker attaches two custom contexts to all events by default. Redshift users using RDB 0.16 or earlier must create the `amp_id_1` and `amp_web_page_1` tables before use. SQL definitions can be found in Iglu central.
-
 ## Standard variables
 
 `collectorHost` and `appId` must be provided in the `"vars"` section of the tag:
@@ -87,7 +82,7 @@ You must set the application ID for the website you are tracking via AMP:
 
 Notes:
 
-- You do not have to use the `appId` to distinguish AMP traffic from other web traffic (unless you want to) - see the  [Analytics](#analytics) section for an alternative approach
+- You do not have to use the `appId` to distinguish AMP traffic from other web traffic (unless you want to) - see the  [Analytics](#analytics) section for an alternative approach.
 
 ### `userId`
 
@@ -301,7 +296,7 @@ v2 of the tracker brings with it significant improvements in our ability to mode
 
 All events sent via this tracker will have:
 
-- `v_tracker` set to `amp-1.0.0`
+- `v_tracker` set to `amp-1.1.0`
 - `platform` set to `web`
 
 If you want to analyze events sent via this tracker, you may prefer to query for `v_tracker LIKE 'amp-%'` to future-proof your query against future releases of this tracker (which may change the version number).
@@ -313,6 +308,20 @@ By default, the  [AMP web page context](https://github.com/snowplow/iglu-central
 Users can aggregate page views, page pings and other events on-page by this ID to aggregate engaged time, and model events to a page view level, by combining it with the url, amp client ID, and date.
 
 Note that page pings and the page view ID itself are not defined by Snowplow's logic, but by what's made available by AMP - therefore applying the same logic to this data as that produced by the Javascript tracker is liable to produce different results.
+
+### Session information
+
+:::note
+Available from version 1.1.0.
+:::
+
+By default the [AMP Session](https://github.com/snowplow/iglu-central/blob/master/schemas/dev.amp.snowplow/amp_session/jsonschema/) context is attached to every event. This context allows for tracking information related to session analytics capabilities, as implemented in the [AMP framework](https://github.com/ampproject/issues/3399). The attributes included are the following:
+- `ampSessionId`: An identifier for the AMP session.
+- `ampSessionIndex`: The index of the current session for this user.
+- `sessionEngaged`: If there has been any kind of user engagement in the AMP session. Engagement in this context means if the page is visible, has focus and is in the foreground.
+- `sessionCreationTimestamp`: Timestamp at which the session was created in milliseconds elapsed since the UNIX epoch.
+- `lastSessionEventTimestamp`: Timestamp at which the last event took place in the session in milliseconds elapsed since the UNIX epoch.
+
 
 ### User Identification
 

@@ -29,9 +29,9 @@ Only system administrators can set up SSO for their company.
 
 ### How to enable SSO for your account
 
-Setting up SSO for your account requires some information to be exchanged between you as the Identity Provider and Snowplow as the Service Provider. Depending on your Identity Provider the information that is required is slightly different.
+Setting up SSO for your account requires some information to be exchanged between you as the Identity Provider and Snowplow as the Service Provider. Depending on your Identity Provider, the information that is required is slightly different.
 
-To enable single sign-on (SSO) for Snowplow, follow these steps inside Console:
+To enable single sign-on (SSO) for Snowplow, follow these steps inside the Console:
 
 1. Go to the [manage organization](https://console.snowplowanalytics.com/settings) page.
 2. Select [Single sign-on (SSO)](https://console.snowplowanalytics.com/users/sso) from the Users panel.

@@ -42,10 +42,10 @@ export const versions = {
   dbtSnowplowWeb: '0.15.0',
   dbtSnowplowMobile: '0.7.0',
   dbtSnowplowUtils: '0.14.2',
-  dbtSnowplowMediaPlayer: '0.5.0',
+  dbtSnowplowMediaPlayer: '0.5.1',
   dbtSnowplowNormalize: '0.3.1',
   dbtSnowplowFractribution: '0.3.1',
-  dbtSnowplowEcommerce: '0.4.2',
+  dbtSnowplowEcommerce: '0.5.0',
 
   // sql runner
   sqlRunner: '0.10.1',

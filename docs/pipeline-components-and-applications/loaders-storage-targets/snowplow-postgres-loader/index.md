@@ -13,7 +13,7 @@ With Snowplow Postgres Loader you can load enriched data or plain self-describin
 
 :::tip Schemas in Postgres
 
-For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md?warehouse=postgres).
+For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/storing-querying/schemas-in-warehouse/index.md?warehouse=postgres).
 
 :::
 

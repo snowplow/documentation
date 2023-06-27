@@ -21,7 +21,7 @@ Each step is handled by a dedicated application: `transformer` or `loader`. To l
 
 :::tip Schemas in Redshift, Snowflake and Databricks
 
-For more information on how events are stored in the warehouse, check the [mapping between Snowplow schemas and the corresponding warehouse column types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md).
+For more information on how events are stored in the warehouse, check the [mapping between Snowplow schemas and the corresponding warehouse column types](/docs/storing-querying/schemas-in-warehouse/index.md).
 
 :::
 

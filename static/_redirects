@@ -148,3 +148,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/managing-data-quality/understanding-failed-events/* /docs/understanding-your-pipeline/failed-events/:splat 301
 /docs/understanding-your-pipeline/glossary-of-terms/ /docs/understanding-your-pipeline/ 301
 /docs/understanding-your-pipeline/architecture-overview-aws/* /docs/understanding-your-pipeline/architecture-overview/:splat 301
+
+/docs/destinations/warehouses-and-lakes/* /docs/storing-querying/storage-options/:splat 301
+/docs/understanding-tracking-design/json-schema-type-casting-rules/* /docs/storing-querying/schemas-in-warehouse/:splat 301
+/docs/destinations/overview/* /docs/understanding-your-pipeline/destinations/:splat 301

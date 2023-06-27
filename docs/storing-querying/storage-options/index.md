@@ -1,6 +1,6 @@
 ---
-title: "Data warehouses and lakes"
-sidebar_position: 2
+title: "Storage options"
+sidebar_position: 1
 ---
 
 ```mdx-code-block

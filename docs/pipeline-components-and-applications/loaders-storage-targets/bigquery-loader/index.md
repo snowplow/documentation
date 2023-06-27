@@ -14,7 +14,7 @@ Under the umbrella of Snowplow BigQuery Loader, we have a family of applications
 
 :::tip Schemas in BigQuery
 
-For more information on how events are stored in BigQuery, check the [mapping between Snowplow schemas and the corresponding BigQuery column types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md?warehouse=bigquery).
+For more information on how events are stored in BigQuery, check the [mapping between Snowplow schemas and the corresponding BigQuery column types](/docs/storing-querying/schemas-in-warehouse/index.md?warehouse=bigquery).
 
 :::
 

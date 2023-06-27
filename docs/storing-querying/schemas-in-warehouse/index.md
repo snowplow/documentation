@@ -1,8 +1,7 @@
 ---
-title: "How schemas translate to database types"
-date: "2021-12-30"
-sidebar_position: 100
-hide_table_of_contents: true
+title: "How schema definitions translate to the warehouse"
+sidebar_label: "Schemas in the warehouse"
+sidebar_position: 4
 ---
 
 ```mdx-code-block
@@ -10,6 +9,299 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+[Self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md) use [schemas](/docs/understanding-your-pipeline/schemas/index.md) to define which fields should be present, and of what type (e.g. string, number). This page explains what happens to this information in the warehouse.
+
+## Location
+
+Where can you find the data carried by a self-describing event or an entity?
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="redshift" label="Redshift and Postgres" default>
+
+Each type of self-describing event and each type of entity get their own dedicated tables. The name of such a table is composed of the schema vendor, schema name and its major version (more on versioning [later](#versioning)).
+
+:::note
+
+All characters are converted to lowercase and all symbols (like `.`) are replaced with an underscore.
+
+:::
+
+Examples:
+
+| Kind | Schema | Resulting table |
+|---|---|---|
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `atomic.com_example_button_press_1` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `atomic.com_example_user_1` |
+
+Inside the table, there will be columns corresponding to the fields in the schema. Their types are determined according to the logic described [below](#types).
+
+:::note
+
+The name of each column is the name of the schema field converted to snake case.
+
+:::
+
+:::caution
+
+If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
+
+:::
+
+For example, suppose you have the following field in the schema:
+
+```json
+"lastName": {
+  "type": "string",
+  "maxLength": 100
+}
+```
+
+It will be translated into a column called `last_name` (notice the underscore), of type `CHAR(100)`.
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+Each type of self-describing event and each type of entity get their own dedicated columns in the `atomic.events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
+
+The column name is prefixed by `unstruct_event_` for self-describing events, and by `contexts_` for entities. _(In case you were wondering, those are the legacy terms for self-describing events and entities, respectively.)_
+
+:::note
+
+All characters are converted to lowercase and all symbols (like `.`) are replaced with an underscore.
+
+:::
+
+Examples:
+
+| Kind | Schema | Resulting column |
+|---|---|---|
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `atomic.events.unstruct_event_com_example_button_press_1` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `atomic.events.contexts_com_example_user_1` |
+
+For self-describing events, the column will be of a `STRUCT` type, while for entities the type will be `ARRAY` of `STRUCT` (because an event can have more than one entity attached).
+
+Inside the `STRUCT`, there will be fields corresponding to the fields in the schema. Their types are determined according to the logic described [below](#types).
+
+:::note
+
+The name of each record field is the name of the schema field converted to snake case.
+
+:::
+
+:::caution
+
+If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
+
+:::
+
+For example, suppose you have the following field in the schema:
+
+```json
+"lastName": {
+  "type": "string",
+  "maxLength": 100
+}
+```
+
+It will be translated into a field called `last_name` (notice the underscore), of type `STRING`.
+
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
+
+Each type of self-describing event and each type of entity get their own dedicated columns in the `atomic.events` table. The name of such a column is composed of the schema vendor, schema name and full schema version (more on versioning [later](#versioning)).
+
+The column name is prefixed by `unstruct_event_` for self-describing events, and by `contexts_` for entities. _(In case you were wondering, those are the legacy terms for self-describing events and entities, respectively.)_
+
+:::note
+
+All characters are converted to lowercase and all symbols (like `.`) are replaced with an underscore.
+
+:::
+
+Examples:
+
+| Kind | Schema | Resulting column |
+|---|---|---|
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `atomic.events.unstruct_event_com_example_button_press_1_0_0` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `atomic.events.contexts_com_example_user_1_0_0` |
+
+For self-describing events, the column will be of a `RECORD` type, while for entities the type will be `REPEATED RECORD` (because an event can have more than one entity attached).
+
+Inside the record, there will be fields corresponding to the fields in the schema. Their types are determined according to the logic described [below](#types).
+
+:::note
+
+The name of each record field is the name of the schema field converted to snake case.
+
+:::
+
+:::caution
+
+If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
+
+:::
+
+For example, suppose you have the following field in the schema:
+
+```json
+"lastName": {
+  "type": "string",
+  "maxLength": 100
+}
+```
+
+It will be translated into a field called `last_name` (notice the underscore), of type `STRING`.
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+Each type of self-describing event and each type of entity get their own dedicated columns in the `atomic.events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
+
+The column name is prefixed by `unstruct_event_` for self-describing events, and by `contexts_` for entities. _(In case you were wondering, those are the legacy terms for self-describing events and entities, respectively.)_
+
+:::note
+
+All characters are converted to lowercase and all symbols (like `.`) are replaced with an underscore.
+
+:::
+
+Examples:
+
+| Kind | Schema | Resulting column |
+|---|---|---|
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `atomic.events.unstruct_event_com_example_button_press_1` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `atomic.events.contexts_com_example_user_1` |
+
+For self-describing events, the column will be of an `OBJECT` type, while for entities the type will be an `ARRAY` of objects (because an event can have more than one entity attached).
+
+Inside the object, there will be keys corresponding to the fields in the schema. The values for the keys will be of type `VARIANT`.
+
+:::note
+
+If an event or entity includes fields not defined in the schema, those fields will be included in the object. However, remember that you need to set `additionalProperties` to `true` in the respective schema for such events and entities to pass schema validation.
+
+:::
+
+For example, suppose you have the following field in the schema:
+
+```json
+"lastName": {
+  "type": "string",
+  "maxLength": 100
+}
+```
+
+It will be translated into an object with a `lastName` key that points to a value of type `VARIANT`.
+
+  </TabItem>
+</Tabs>
+
+## Versioning
+
+What happens when you evolve your schema to a [new version](/docs/understanding-tracking-design/versioning-your-data-structures/index.md)?
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="redshift" label="Redshift and Postgres" default>
+
+Because the table name for the self-describing event or entity includes the major schema version, each major version of a schema gets a new table:
+
+| Schema | Resulting table |
+|---|---|
+| `com.example/button_press/jsonschema/1-0-0` | `atomic.com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-2-0` | `atomic.com_example_button_press_1` |
+| `com.example/button_press/jsonschema/2-0-0` | `atomic.com_example_button_press_2` |
+
+When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing table automatically. For example, if you change the `maxLength` of a `string` field, the limit of the `VARCHAR` column would be updated accordingly.
+
+:::danger Breaking changes
+
+If you make a breaking schema change (e.g. change a type of a field from a `string` to a `number`) without creating a new major schema version, the loader will not be able to adapt the table to receive new data. Your loading process will halt.
+
+:::
+
+:::info Nullability
+
+Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is nullable in schema version `1-0-0` and not nullable in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
+
+:::
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+Because the column name for the self-describing event or entity includes the major schema version, each major version of a schema gets a new column:
+
+| Schema | Resulting column |
+|---|---|
+| `com.example/button_press/jsonschema/1-0-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2` |
+
+When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing column automatically. For example, if you add a new optional field in the schema, a new optional field will be added to the `STRUCT`.
+
+:::info Breaking changes
+
+If you make a breaking schema change (e.g. change a type of a field from a `string` to a `number`) without creating a new major schema version, the loader will not be able to modify the column to accommodate the new data.
+
+In this case, _upon receiving the first event with the offending schema_, the loader will instead create a new column, with a name like `unstruct_event_com_example_button_press_1_0_1_recovered_9999999`, where:
+* `1-0-1` is the version of the offending schema
+* `9999999` is a hash code unique to the schema (i.e. it will change if the schema is overwritten with a different one)
+
+To resolve this situation:
+* Create a new schema version (e.g. `1-0-2`) that reverts the offending changes and is again compatible with the original column. The data for events with that schema will start going to the original column as expected.
+* You might also want to manually adapt the data in the `..._recovered_...` column and copy it to the original one.
+
+Note that this behavior was introduced in RDB Loader 5.3.0.
+
+:::
+
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
+
+Because the column name for the self-describing event or entity includes the full schema version, each version of a schema gets a new column:
+
+| Schema | Resulting column |
+|---|---|
+| `com.example/button_press/jsonschema/1-0-0` | `unstruct_event_com_example_button_press_1_0_0` |
+| `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1_2_0` |
+| `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2_0_0` |
+
+You can use [data models](/docs/modeling-your-data/what-is-data-modeling/index.md) to aggregate the data across multiple columns.
+
+:::info Breaking changes
+
+While our recommendation is to use major schema versions to indicate breaking changes (e.g. changing a type of a field from a `string` to a `number`), this is not particularly relevant for BigQuery. Indeed, each schema version gets its own column, so there is no difference between major and minor versions. That said, we believe sticking to our recommendation is a good idea:
+* Breaking changes might affect downstream consumers of the data, even if they don’t affect BigQuery
+* In the future, you might want to migrate to a different data warehouse where our rules are stricter (e.g. Databricks)
+
+:::
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+Because the column name for the self-describing event or entity includes the major schema version, each major version of a schema gets a new column:
+
+| Schema | Resulting column |
+|---|---|
+| `com.example/button_press/jsonschema/1-0-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2` |
+
+:::info Breaking changes
+
+While our recommendation is to use major schema versions to indicate breaking changes (e.g. changing a type of a field from a `string` to a `number`), this is not particularly relevant for Snowflake. Indeed, the event or entity data is stored in the column as is in the `VARIANT` form, so Snowflake is not “aware” of the schema. That said, we believe sticking to our recommendation is a good idea:
+* Breaking changes might affect downstream consumers of the data, even if they don’t affect Snowflake
+* In the future, you might want to migrate to a different data warehouse where our rules are stricter (e.g. Databricks)
+
+Also, creating a new major version of the schema (and hence a new column) is the only way to indicate a change in semantics, where the data is in the same format but has different meaning (e.g. amounts in dollars vs euros).
+
+:::
+
+  </TabItem>
+</Tabs>
+
+## Types
+
+How do schema types translate to the database types?
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="redshift" label="Redshift and Postgres" default>
@@ -47,8 +339,6 @@ OR
 
 `"null"`’s position in a list (`type` or `enum`) does not matter.
 
-Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is nullable in schema version `1-0-0` and not nullable in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
-
 </td>
 <td>
 
@@ -71,8 +361,6 @@ Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new col
 `"required"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
 
 Fields that are not listed as `"required"` are nullable. Fields are _also_ nullable when they are listed as `"required"` but have `"null"` in their `type` or `enum` definition. (In the latter case, the Enrich application will still validate that the field is present, even if it’s `null`.)
-
-Note that each major schema version (`1-0-0`, `2-0-0`, etc) results in a new column (name ending with `_1`, `_2`, etc). Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is not required in schema version `1-0-0` and required in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
 
 </td>
 <td>
@@ -548,7 +836,7 @@ _If content size is longer than 4096 it would be truncated when inserted into th
 </table>
 </TabItem>
 
-<TabItem value="databricks" label="Databricks" default>
+<TabItem value="databricks" label="Databricks">
 
 :::note
 
@@ -1095,7 +1383,7 @@ _Values will be quoted as in JSON._
 </table>
 </TabItem>
 
-<TabItem value="bigquery" label="BigQuery" default>
+<TabItem value="bigquery" label="BigQuery">
 
 :::note
 
@@ -1358,85 +1646,9 @@ _Values will be quoted as in JSON._
 </tbody>
 </table>
 </TabItem>
-<TabItem value="snowflake" label="Snowflake" default>
+<TabItem value="snowflake" label="Snowflake">
 
-All types are `JSON`.
-
-</TabItem>
-<TabItem value="elastic" label="Elastic" default>
-
-When loading enriched events, the resulting JSONs are like the [Snowplow Canonical Event model](/docs/understanding-your-pipeline/canonical-event/index.md) with the following changes.
-
-#### Boolean fields reformatted
-
-All boolean fields like `br_features_java` are either `"0"` or `"1"` in the canonical event model. The JSON converts these values to `false` and `true`.
-
-#### New `geo_location` field
-
-The `geo_latitude` and `geo_longitude` fields are combined into a single `geo_location` field of Elasticsearch's ["geo_point" type](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html).
-
-#### Unstructured events
-
-Unstructured events are expanded into full JSONs. For example, the event
-
-```json
-{
-    "schema": "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1",
-    "data": {
-        "targetUrl": "http://snowplowanalytics.com/analytics/index.html",
-        "elementId": "action",
-        "elementClasses": [],
-        "elementTarget": ""
-	}
-}
-```
-
-would be converted to the field
-
-```json
-{
-    "unstruct_com_snowplowanalytics_snowplow_link_click_1": {
-        "targetUrl": "http://snowplowanalytics.com/analytics/index.html",
-        "elementId": "action",
-        "elementClasses": [],
-        "elementTarget": ""
-    }
-}
-```
-
-#### Custom contexts
-
-Each custom context in an array is similarly expanded to a JSON with its own field. For example, the array
-
-```json
-[
-    {
-        "schema": "iglu:com.acme/contextOne/jsonschema/1-0-0",
-        "data": {
-            "key": "value"
-        }
-    }
-    {
-        "schema": "iglu:com.acme/contextTwo/jsonschema/3-0-0",
-        "data": {
-            "name": "second"
-        }
-    }
-]
-```
-
-would be converted to
-
-```json
-{
-    "contexts_com_acme_context_one_1": {
-        "key": "value"
-    },
-    "contexts_com_acme_context_two_3": {
-        "name": "second"
-    }
-}
-```
+All types are `VARIANT`.
 
 </TabItem>
 </Tabs>

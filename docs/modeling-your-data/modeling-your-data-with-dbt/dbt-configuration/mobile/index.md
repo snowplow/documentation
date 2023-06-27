@@ -65,7 +65,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 </TabItem>
 <TabItem value="redshift+postgres" label="Redshift & Postgres">
 
-Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
+Redshift and Postgres use a [shredded](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
 
 | Variable Name         | Default                                                                            |
 | --------------------- | ---------------------------------------------------------------------------------- |

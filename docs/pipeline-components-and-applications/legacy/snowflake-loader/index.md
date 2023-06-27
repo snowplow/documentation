@@ -8,7 +8,7 @@ sidebar_position: 200
 
 Snowplow Snowflake Loader is a _deprecated_ application for loading Snowplow events into Snowflake. 
 
-It has been replaced by [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md). Please see this [blog post](https://snowplow.io/blog/snowplows-rdb-loader-or-snowflakes-snowpipe/) for further information, and use [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) to load your events into Snowflake instead.
+It has been replaced by [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md). Please see this [blog post](https://snowplow.io/blog/snowplows-rdb-loader-or-snowflakes-snowpipe/) for further information, and use [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) to load your events into Snowflake instead.
 
 :::
 

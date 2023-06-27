@@ -72,11 +72,6 @@
 
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/snowflakedb/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/snowflake/ 301
 
-/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/* /docs/destinations/warehouses-and-lakes/bigquery/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/* /docs/destinations/warehouses-and-lakes/google-cloud-storage/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/* /docs/destinations/warehouses-and-lakes/s3/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/* /docs/destinations/warehouses-and-lakes/postgres/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/* /docs/destinations/warehouses-and-lakes/rdb/:splat 301
 /docs/forwarding-events-to-destinations/reverse-etl/* /docs/destinations/reverse-etl/:splat 301
 /docs/forwarding-events-to-destinations/supporting-additional-destinations/* /docs/destinations/overview/:splat 301
 /docs/forwarding-events-to-destinations/forwarding-events/* /docs/destinations/forwarding-events/:splat 301
@@ -138,3 +133,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/using-the-snowplow-console/managing-user-permissions-in-console/* /docs/using-the-snowplow-console/managing-users/managing-permissions/:splat 301
 
 /docs/using-the-snowplow-console/accessing-collector-configuration/* /docs/collecting-data/configuring-collector/ui/:splat 301
+
+/docs/destinations/warehouses-and-lakes/bigquery/* /docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/:splat 301
+/docs/destinations/warehouses-and-lakes/google-cloud-storage/* /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/:splat 301
+/docs/destinations/warehouses-and-lakes/s3/* /docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/:splat 301
+/docs/destinations/warehouses-and-lakes/postgres/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/:splat 301
+/docs/destinations/warehouses-and-lakes/rdb/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301

@@ -302,7 +302,7 @@ When a user sends in a custom self-describing event, they do so as a JSON docume
 <Tabs groupId="warehouse" queryString>
 <TabItem value="rs/pg" label="Redshift/Postgres" default>
 
-The unstructured event is not part of the standard `atomic.events` table, instead, for users running on Redshift, it is transformed by the [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) into its own table. The fields in this table will be determined by the JSON schema defined for the event in advance. Users can query just the table for that particular unstructured event, if that's all that's required for their analysis, or join that table back to the `atomic.events` table by
+The unstructured event is not part of the standard `atomic.events` table, instead, for users running on Redshift, it is transformed by the [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) into its own table. The fields in this table will be determined by the JSON schema defined for the event in advance. Users can query just the table for that particular unstructured event, if that's all that's required for their analysis, or join that table back to the `atomic.events` table by
 
 ```sql
 select 

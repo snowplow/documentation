@@ -17,7 +17,9 @@ All failed events are routed to storage (AWS S3 or GCP cloud storage).
 
 :::note
 
-When an error occurs while enriching an event (that is part of a collector payload with several events), the Failed Event will contain **only** this event. The other events of the collector payload can be successfully enriched.
+Collector might receive events in batches. So if something is wrong with the Collector payload as a whole, the generated failed event might represent several Snowplow events.
+
+Once the Collector payload successfully reaches the validation and enrichment steps, it is split into its constituent events. Each of them would fail (or not fail) independently. This means that each failed event generated at this stage represents a single Snowplow event.
 
 :::
 

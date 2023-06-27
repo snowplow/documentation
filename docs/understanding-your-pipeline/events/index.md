@@ -35,9 +35,9 @@ Snowplow supports a large number of events out of the box, for example:
 * Form submissions
 * Transactions
 
-This includes all the [baked-in events](#baked-in-events) and also some [self-describing events](#self-describing-events) that were predefined by the Snowplow team, e.g. link clicks. Tracking SDKs usually provide dedicated API to create out-of-the-box events.
+Some of these are [baked-in events](#baked-in-events), while others are [self-describing events](#self-describing-events) that were predefined by the Snowplow team, e.g. link clicks. Tracking SDKs usually provide dedicated API to create out-of-the-box events (regardless of their kind).
 
-You can also create your own custom events to match your business logic. You can choose between [self-describing events](#self-describing-events) (recommended) and [structured events](#structured-events).
+You can also create custom events to match your business logic. For that purpose, you can either define your own [self-describing events](#self-describing-events) (recommended), or use [structured events](#structured-events).
 
 | Out-of-the-box events | Custom events |
 |:-:|:-:|
@@ -50,6 +50,14 @@ The following events are “baked in”. They get special treatment because they
 * Page views (`page_view`)
 * Page pings (`page_ping`)
 * E-commerce transactions	(`transaction` and `transaction_item`)
+
+:::info Transaction events
+
+The `transaction` and `transaction_item` events are not very convenient to use and exist mostly for legacy reasons. One of their significant downsides is that you have to send a separate event for the transaction itself and then an event for each of the order items in that transaction (as opposed to including all items in a single event).
+
+Over the years, it has become more idiomatic to use [entities](/docs/understanding-your-pipeline/entities/index.md) for order items in e-commerce transactions. For instance, our [E-commerce Accelerator](https://docs.snowplow.io/accelerators/ecommerce/) uses this approach.
+
+:::
 
 <details>
 <summary>Tracking and storage format</summary>
@@ -80,11 +88,11 @@ We recommend using [self-describing events](#self-describing-events) instead of 
 
 Structured events have 5 fields:
 
-- _Category_: The name for the group of objects you want to track.
-- _Action_: A string that is used to define the user in action for the category of object.
-- _Label_: An optional string which identifies the specific object being actioned.
-- _Property_: An optional string describing the object or the action performed on it.
-- _Value_: An optional numeric data to quantify or further describe the user action.
+- _Category_: The name for the group of objects you want to track
+- _Action_: A string that is used to define the user action for the category of object
+- _Label_: An optional string which identifies the specific object being actioned
+- _Property_: An optional string describing the object or the action performed on it
+- _Value_: An optional numeric data to quantify or further describe the user action
 
 <details>
 <summary>Tracking and storage format</summary>
@@ -109,7 +117,7 @@ In the data warehouse, these events still use the [standard columns](/docs/under
 
 :::info Terminology
 
-In the past, self-describing events used to be called “unstructured events”, to distinguish them from [structured events](#structured-events). However, this was misleading, because in a way, these events are actually _more_ structured than structured events 🤯. The old term is now deprecated, but you might still see it in some docs and APIs.
+In the past, self-describing events used to be called “unstructured events”, to distinguish them from [structured events](#structured-events). However, this was misleading, because in a way, these events are actually _more_ structured than structured events 🤯. The old term is now deprecated, but you might still see it in some docs, APIs and database column names.
 
 :::
 

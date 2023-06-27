@@ -147,3 +147,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/understanding-tracking-design/predefined-vs-custom-entities/ /docs/understanding-your-pipeline/entities/ 301
 /docs/managing-data-quality/understanding-failed-events/* /docs/understanding-your-pipeline/failed-events/:splat 301
 /docs/understanding-your-pipeline/glossary-of-terms/ /docs/understanding-your-pipeline/ 301
+/docs/understanding-your-pipeline/architecture-overview-aws/* /docs/understanding-your-pipeline/architecture-overview/:splat 301

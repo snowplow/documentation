@@ -9,7 +9,7 @@ When an event occurs, it generally involves a number of entities, which provi
 
 :::info Terminology
 
-In the past, what we now call “entities” was called “context”. We find the new term clearer, but you will still find `context` used in many of the existing APIs and documentation, especially to refer to a set of _multiple_ entities. Sometimes, we will also use the two terms interchangeably.
+In the past, what we now call “entities” was called “context”. We find the new term clearer, but you will still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of _multiple_ entities. Sometimes, we will also use the two terms interchangeably.
 
 :::
 

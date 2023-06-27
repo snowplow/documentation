@@ -28,7 +28,7 @@ Check out the documentation for [managing](/docs/understanding-tracking-design/m
 
 ## Managing data quality with schemas
 
-Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview-aws/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/understanding-your-pipeline/failed-events/index.md) are sent to a separarte location.
+Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/understanding-your-pipeline/failed-events/index.md) are sent to a separarte location.
 
 Through describing how the data should be structured as part of your schema definition, you ensure clean and consistent data landing in your data warehouse or other destinations.
 
@@ -56,7 +56,7 @@ To host schemas for your [custom self-described events](/docs/understanding-your
 If you are using BDP Cloud, you can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/builder/index.md) without worrying about how it works under the hood.
 :::
 
-Let’s take a look at an example JSON schema to talk about its constituent parts:
+Snowplow schemas are based on the JSON Schema standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). Let’s take a look at an example schema to talk about its constituent parts:
 
 ```json
 {

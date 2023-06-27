@@ -16,19 +16,19 @@ To store your enriched Snowplow data, you will need to determine which loader to
 
 | Destination | Loader | Status |
 | --- | --- | --- |
-| Redshift | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) | Production-ready |
-| Snowflake | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) | Production-ready |
-| Databricks | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) | Production-ready |
-| Postgres | [Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | Early release |
+| Redshift | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
+| Snowflake | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
+| Databricks | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
+| Postgres | [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | Early release |
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
 | Destination | Loader | Status |
 | --- | --- | --- |
-| Snowflake | [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) | Production-ready |
-| BigQuery | [BigQuery Loader](/docs/destinations/warehouses-and-lakes/bigquery/index.md) | Production-ready |
-| Postgres | [Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | Early release |
+| Snowflake | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
+| BigQuery | [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) | Production-ready |
+| Postgres | [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | Early release |
 
   </TabItem>
 </Tabs>
@@ -39,4 +39,4 @@ Our warehouse loaders pick up the data from [Enrich Kinesis](/docs/pipeline-comp
 
 ### Selecting a loader for your data lake 
 
-There is support for loading into cloud storage or data lakes via the [S3 Loader](/docs/destinations/warehouses-and-lakes/s3/index.md) for AWS or the [Google Cloud Storage Loader](/docs/destinations/warehouses-and-lakes/google-cloud-storage/index.md) for GCP.
+There is support for loading into cloud storage or data lakes via the [S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md) for AWS or the [Google Cloud Storage Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) for GCP.

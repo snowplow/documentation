@@ -8,7 +8,7 @@ sidebar_position: 2000
 
 [Event Manifest Populator](https://github.com/snowplow/snowplow/tree/master/5-data-modeling/event-manifest-populator/) is an [Apache Spark](http://spark.apache.org/) job allowing you to backpopulate a Snowplow event manifest in DynamoDB with the metadata of some or all enriched events from your archive in S3.
 
-This one-off job solves the "cold start" problem for identifying cross-batch natural deduplicates in Snowplow's [Relational Database Shredder step](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/event-deduplication/index.md).  
+This one-off job solves the "cold start" problem for identifying cross-batch natural deduplicates in Snowplow's [Relational Database Shredder step](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/event-deduplication/index.md).  
 In other words, without running this job you still will be able to deduplicate events across batches, but if Relational Database Shredder encounters duplicate of event that was shredded _before_ you enabled cross-batch deduplication it will land into `shredded/good`.
 
 ## Usage

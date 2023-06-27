@@ -2,6 +2,9 @@
 title: "Managing tracking scenarios in the console"
 sidebar_label: "🆕 Managing tracking scenarios in the console"
 sidebar_position: 80
+sidebar_custom_props:
+  offerings:
+    - enterprise
 ---
 
 
@@ -9,25 +12,25 @@ sidebar_position: 80
 
 Tracking Scenarios are directly linked to Data Structures and represent the events that are documented and tracked using a certain Data Structure.
 
-To create a new Tracking Scenario, navigate to the "Data Structures" option in the menu. From there, select a data structure from the list.
+To create a new Tracking Scenario, navigate to the **Data Structures** option in the menu. From there, select a data structure from the list.
 
 :::info
-Note that Tracking Scenarios can only be created from Data Structures that have been set as "Event."
+Note that Tracking Scenarios can only be created from Data Structures that have been set as **Event**.
 :::
 
-After selecting a data structure, click on the "Tracking Scenarios" tab, as shown in the image.
+After selecting a data structure, click on the **Tracking Scenarios** tab, as shown in the image.
 
 ![](images/ts-1.png)
 
-Next, click the 'Add new scenario' button. A new dialog box will appear with fields for basic information that can be defined during creation, as shown.
+Next, click the **'Add new scenario'** button. A new dialog box will appear with fields for basic information that can be defined during creation, as shown.
 
 ![](images/ts-2.png)
 
-Tracking scenarios should be created in association with the most recent version of the data structure deployed in production. This will determine the rules for tracking implementation that can be set in the validation part of the tracking scenarios.
+Tracking scenarios should be created in association with the most recent version of the data structure deployed in production. This will determine the instructions for tracking implementation that can be set in the validation part of the tracking scenarios.
 
-It is always guaranteed that your tracking scenario will have rules compatible with the associated data structure version. This ensures that any event tracked by following the rules defined in the tracking scenarios will pass validation for the associated data structure.
+It is always guaranteed that your tracking scenario will have instructions compatible with the associated data structure version. This ensures that any event tracked by following the instructions defined in the tracking scenarios will pass validation for the associated data structure.
 
-However, if a newer version of the data structure is subsequently deployed in production, you may wish to "upgrade" the tracking scenario and tracking to the newer data structure and verify that your implementation rules still meet validation.
+However, if a newer version of the data structure is subsequently deployed in production, you may wish to "upgrade" the tracking scenario and tracking to the newer data structure and verify that your implementation instructions still meet validation.
 
 The fields available for filling at this stage are:
 
@@ -43,7 +46,7 @@ After creating your first tracking scenario, a list of tracking scenarios will a
 
 ![](images/ts-4.png)
 
-Until published, the scenario status is set to "Draft" to represent that it is a work in progress. During this time, you may wish to share it with others in the business to get feedback or approval. To do this, select the link to the tracking scenario and click the "Share" button located at the top right of the page. Please note that others will need access to the Snowplow Console Data Structures section to view the scenario.
+Until published, the scenario status is set to "Draft" to represent that it is a work in progress. During this time, you may wish to share it with others in the business to get feedback or approval. To do this, select the link to the tracking scenario and click the **'Share scenario'** button located at the top right of the page. Please note that others will need access to the Snowplow Console Data Structures section to view the scenario.
 
 * * *
 
@@ -53,28 +56,27 @@ To add more information or modify a tracking scenario, select it from the approp
 
 ![](images/ts-5.png)
 
-To make changes, edit the information in each section, and then click the ‘Save and Update’ button to save your changes.
+To make changes, edit the information in each section, and then click the **'Save changes'** button to save your changes.
 
+### Implementation instructions
 
-### Implementation rules
+The Implementation Instructions section is where you can specify how each property for this event should be populated.
 
-The Implementation Rules section is where you can specify how each property for this event should be populated.
-
-To add multiple implementation rules, click the **'+ Add implementation rules'** button in the Implementation Rules section. This will open a dialog view.
+To add multiple implementation instructions, click the **'Add implementation instructions'** button in the Implementation Instructions section. This will open a dialog view.
 
 The dialog displays the list of properties defined in the data structure associated with this scenario.
 
 ![](images/ts-7.png)
 
-You can click on any of the properties shown in the list to access a new view inside the dialog box. Here, you will be able to configure the rule's Type of condition, Value, and Comments properties.
+You can click on any of the properties shown in the list to access a new view inside the dialog box. Here, you will be able to configure the instructions's Type of condition, Value, and Comments properties.
 
 ![](images/ts-8.png)
 
-Click **'Add rule'** to save the rule, or click the **'Cancel'** button to discard changes.
+Click **'Add instruction'** to save the instruction, or click the **'Cancel'** button to discard changes.
 
-After configuring the rules, click **'Save and update rules'** to confirm the changes or click **'Close'** to discard them.
+After configuring the instructions, click **'Save and update instruction'** to confirm the changes or click **'Close'** to discard them.
 
-You can edit or remove rules in the tracking detail view's rule list.
+You can edit or remove instructions in the tracking detail view's instructions list.
 
 ![](images/ts-9.png)
 
@@ -104,11 +106,11 @@ Once you have finalized your definition of the tracking scenario and completed a
 
 ![](images/ts-13.png)
 
-Publishing a new scenario indicates an intention to implement the tracking defined in it. For data consumers, a published scenario signals that the tracking associated with the event complies with the rules contained in it.
+Publishing a new scenario indicates an intention to implement the tracking defined in it. For data consumers, a published scenario signals that the tracking associated with the event complies with the instructions contained in it.
 
 Once published, the scenario's status will appear as "Published" in the list view.
 
-If you need to edit a published scenario, you can do so by selecting the "Edit" button. This action will reset the scenario's status to "Draft."
+If you need to edit a published scenario, you can do so by selecting the **'Edit'** button. This action will reset the scenario's status to "Draft."
 
 ![](images/ts-14.png)
 
@@ -138,17 +140,17 @@ This operation cannot be undone.
 
 If you believe a published scenario no longer reflects your tracking implementation, or you wish to remove this tracking from your product, you can choose to deprecate it.
 
-Deprecating a tracking scenario signals the intention to remove this tracking from your product. It's important to note that deprecating a tracking scenario does not automatically prevent new events from being tracked in line with the rules of this scenario. Developers will need to manually stop tracking events for the deprecated scenario.
+Deprecating a tracking scenario signals the intention to remove this tracking from your product. It's important to note that deprecating a tracking scenario does not automatically prevent new events from being tracked in line with the instructions of this scenario. Developers will need to manually stop tracking events for the deprecated scenario.
 
 Deprecating a scenario can also notify data consumers that the information contained in the scenario is not reflective of the tracking implementation and should not be used to understand the data.
 
 We strongly advise keeping your scenario in sync with your tracking, so that the information contained in it can be used by data consumers for data discovery and understanding purposes.
 
-To deprecate a published tracking scenario, go to the **Tracking scenarios** tab and click the **'Deprecate'** button. A confirmation dialog box will appear where you can add some comments.
+To deprecate a published tracking scenario, go to the **Tracking scenarios** tab, click on the triple-dot (**'...'**) menu button to the right of the scenario name. A small menu will appear, and then click the **'Deprecate'** button. A confirmation dialog box will appear where you can add some comments.
 
 ![](images/ts-18.png)
 
-Once completed, the status of the scenarios will appear as **Deprecated**.
+Once completed, the status of the scenarios will appear as "Deprecated".
 
 ![](images/ts-19.png)
 
@@ -159,7 +161,7 @@ To undo this action, click on the scenario. In the detail view, you will see a *
 :::
 
 :::info
-To perform certain actions on a tracking scenario, such as **'Publish'**, **'Share'**, **'Delete'**, **'Edit'**, and **'Deprecate'**, click the triple-dot menu button ('...') from the Tracking scenario tab view.
+To perform certain actions on a tracking scenario, such as **'Duplicate'**, **'Share scenario'**, **'Publish scenario'**, **'View history'**, **'Delete'**, **'Edit'** and **'Deprecate'**, click the triple-dot menu button (**'...'**) from the Tracking scenario tab view.
 
 ![](images/ts-21.png)
 ![](images/ts-22.png)

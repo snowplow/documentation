@@ -63,7 +63,7 @@ Each entity consists of two parts:
 
 This structure is an example of what we call _self-describing JSON_ — a JSON object with a `schema` and a `data` field.
 
-In the data warehouse, each type of entity gets its own column (or its own table, in case of Redshift). There is no difference between how out-of-the-box and custom entities are stored. See the [structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md#entities-contexts) for more information.
+In the data warehouse, each type of entity gets its own column (or its own table, in the case of Redshift). There is no difference between how out-of-the-box and custom entities are stored. See the [structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md#entities) for more information.
 
 ## Out-of-the-box entities
 

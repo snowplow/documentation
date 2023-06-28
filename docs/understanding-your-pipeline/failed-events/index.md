@@ -1,6 +1,6 @@
 ---
 title: "Understanding failed events"
-sidebar_label: "Failed events"
+sidebar_label: "Failed events (bad rows)"
 sidebar_position: 4
 description: "Failed events represent data that did not pass validation or otherwise failed to be processed"
 ---
@@ -9,17 +9,27 @@ description: "Failed events represent data that did not pass validation or other
 
 A Failed Event is simply what we label any event that was not able to be processed through your pipeline. There are multiple points at which an event can fail in the pipeline: collection, validation and enrichment.
 
+:::info Terminology
+
+An older term for “failed events” is “bad rows”. You will still see it used throughout this documentation and some APIs and tools.
+
+:::
+
+All failed events are routed to storage (AWS S3 or GCP Cloud Storage).
+
+Many types of failed events can be “recovered”. That is, you can fix the underlying issue (such as a problem in the pipeline setup or incorrect event data) and successfully load the events. See [recovering failed events](/docs/managing-data-quality/recovering-failed-events/index.md).
+
+## Where do Failed Events originate?
+
 While an event is being processed by the pipeline it is checked to ensure it meets the specific formatting or configuration expectations; these include checks like: does it match the schema it is associated with, were Enrichments successfully applied and was the payload sent by the tracker acceptable.
 
-Generally, the [collector](/docs/pipeline-components-and-applications/stream-collector/index.md) tries to write any payload to the raw stream, no matter its content, and no matter whether it is valid. This explains why many of the failure types are filtered out by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, and not any earlier.
-
-All failed events are routed to storage (AWS S3 or GCP cloud storage).
+Generally, the [Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) tries to write any payload to the raw stream, no matter its content, and no matter whether it is valid. This explains why many of the failure types are filtered out by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, and not any earlier.
 
 :::note
 
-Collector might receive events in batches. So if something is wrong with the Collector payload as a whole, the generated failed event might represent several Snowplow events.
+The Collector might receive events in batches. If something is wrong with the Collector payload as a whole (e.g. due to a [Collector Payload Format Violation](#collector-payload-format-violation)), the generated failed event would represent an entire batch of Snowplow events.
 
-Once the Collector payload successfully reaches the validation and enrichment steps, it is split into its constituent events. Each of them would fail (or not fail) independently. This means that each failed event generated at this stage represents a single Snowplow event.
+Once the Collector payload successfully reaches the validation and enrichment steps, it is split into its constituent events. Each of them would fail (or not fail) independently (e.g. due to an [Enrichment Failure](#enrichment-failure)). This means that each failed event generated at this stage represents a single Snowplow event.
 
 :::
 
@@ -76,7 +86,7 @@ Enrichment failure schema can be found [here](https://github.com/snowplow/iglu-c
 
 ### Collector Payload Format Violation
 
-This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when collector payloads from the raw stream are deserialized from thrift format.
+This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when Collector payloads from the raw stream are deserialized from thrift format.
 
 <details>
 
@@ -87,7 +97,7 @@ Violations could be:
 - Invalid query string encoding in URL
 - Path not respecting /vendor/version
 
-The most likely source of this failure type is bot traffic that has hit the collector with an invalid http request. Bots are prevalent on the web, so do not be surprised if your collector receives some of this traffic. Generally you would ignore not try to recover a collector payload format violation, because it likely did not originate from a tracker or a webhook.
+The most likely source of this failure type is bot traffic that has hit the Collector with an invalid http request. Bots are prevalent on the web, so do not be surprised if your Collector receives some of this traffic. Generally you would ignore not try to recover a Collector payload format violation, because it likely did not originate from a tracker or a webhook.
 
 Because this failure is handled during enrichment, events in the real time good stream are free of this violation type.
 
@@ -97,13 +107,13 @@ Collector payload format violation schema can be found [here](https://github.com
 
 ### Adaptor Failure
 
-This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when it tries to interpret a collector payload from the raw stream as a http request from a [3rd party webhook](/docs/collecting-data/collecting-data-from-third-parties/index.md).
+This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a http request from a [3rd party webhook](/docs/collecting-data/collecting-data-from-third-parties/index.md).
 
 <details>
 
 The failure could be:
 
-1. The vendor/version combination in the collector url is not supported. For example, imagine a http request sent to `/com.sandgrod/v3` which is a mis-spelling of the [sendgrid adaptor](http://sendgrid) endpoint.
+1. The vendor/version combination in the Collector url is not supported. For example, imagine a http request sent to `/com.sandgrod/v3` which is a mis-spelling of the [sendgrid adaptor](http://sendgrid) endpoint.
 2. The webhook sent by the 3rd party does not conform to the expected structure and list of fields for this webhook. For example, imagine the 3rd party webhook payload is updated and stops sending a field that it was sending before.
 
 Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. However, if you believe you are missing data because of a misconfigured webhook, then you might try to fix the webhook and then [recover the failed events](/docs/managing-data-quality/recovering-failed-events/index.md).
@@ -134,7 +144,7 @@ Tracker protocol violation schema can be found [here](https://github.com/snowplo
 
 ### Size Violation
 
-This failure type can be produced either by the [collector](/docs/pipeline-components-and-applications/stream-collector/index.md) or by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
+This failure type can be produced either by the [Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) or by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
 
 <details>
 

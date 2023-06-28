@@ -4,7 +4,7 @@ sidebar_position: 0
 description: "An overview of what a Snowplow pipeline does and what steps it includes"
 ---
 
-![](images/Screenshot-2020-02-24-at-10.38.12.png)
+![Pipeline architecture diagram](images/architecture.png)
 
 ## The typical architecture of a Snowplow pipeline
 

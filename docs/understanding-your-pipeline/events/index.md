@@ -2,10 +2,10 @@
 title: "Understanding events"
 sidebar_label: "Events"
 sidebar_position: 1
-description: "An event is a central concept in Snowplow that represents something that occurred in a particular point in time"
+description: "An event is a central concept in Snowplow that represents something that occurred at a particular point in time"
 ---
 
-An event is something that occurred in a particular point in time. Examples of events include:
+An event is something that occurred at a particular point in time. Examples of events include:
 
 - Load a web page
 - Add an item to basket
@@ -37,7 +37,7 @@ Snowplow supports a large number of events out of the box, for example:
 
 Some of these are [baked-in events](#baked-in-events), while others are [self-describing events](#self-describing-events) that were predefined by the Snowplow team, e.g. link clicks. Tracking SDKs usually provide dedicated API to create out-of-the-box events (regardless of their kind).
 
-You can also create custom events to match your business logic. For that purpose, you can either define your own [self-describing events](#self-describing-events) (recommended), or use [structured events](#structured-events).
+You can also create custom events to match your business requirements. For that purpose, you can either define your own [self-describing events](#self-describing-events) (recommended), or use [structured events](#structured-events).
 
 | Out-of-the-box events | Custom events |
 |:-:|:-:|
@@ -162,6 +162,6 @@ window.snowplow('trackSelfDescribingEvent', {
 });
 ```
 
-In the data warehouse, these events still use the [standard columns](/docs/understanding-your-pipeline/canonical-event/index.md) for general information, like timestamps. In addition, each type of self-describing event gets its own column (or its own table, in case of Redshift) for event-specific fields defined in its schema. See the [structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md#self-describing-events) for more information.
+In the data warehouse, these events still use the [standard columns](/docs/understanding-your-pipeline/canonical-event/index.md) for general information, like timestamps. In addition, each type of self-describing event gets its own column (or its own table, in the case of Redshift) for event-specific fields defined in its schema. See the [structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md#self-describing-events) for more information.
 
 </details>

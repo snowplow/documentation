@@ -29,7 +29,7 @@ Snowplow started life as a web analytics data warehousing platform, and has a ba
 
 As Snowplow has evolved into a general purpose event analytics platform, we've enabled Snowplow users to define additional event types (we call these [_self describing events_](/docs/understanding-your-pipeline/events/index.md#self-describing-events)) and define their own entities (we call these [_custom entities_](/docs/understanding-your-pipeline/entities/index.md#custom-entities)) so that they can extend the schema to suit their own businesses.
 
-For Snowplow users running Amazon Redshift, each self-describing event and entities will be stored in its own dedicated table. These additional tables can be joined back to the core `atomic.events` table, by joining on the `root_id` field in the self-describing event / entity table with the `event_id` in the `atomic.events` table, and the `root_tstamp` and `collector_tstamp` field in the respective tables. For users on other warehouses these will be additional columns in the `atomic.events` table.
+For Snowplow users running Amazon Redshift, each type of self-describing event and each type of entity will be stored in their own dedicated tables. These additional tables can be joined back to the core `atomic.events` table, by joining on the `root_id` field in the self-describing event / entity table with the `event_id` in the `atomic.events` table, and the `root_tstamp` and `collector_tstamp` field in the respective tables. For users on other warehouses these will be additional columns in the `atomic.events` table.
 
 ### Single table
 
@@ -527,7 +527,7 @@ or they can use a [`LATERAL VIEW`](https://docs.databricks.com/sql/language-manu
 
 ### Out-of-the-box self-describing events and entities
 
-These are also a variety of self-describing events and custom entities defined by Snowplow. You can find their schemas [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow).
+These are also a variety of self-describing events and entities defined by Snowplow. You can find their schemas [here](http://iglucentral.com/?q=com.snowplowanalytics).
 
 ## A note about storage data formats
 

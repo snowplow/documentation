@@ -75,11 +75,12 @@ For links within this documentation, please end the link with `/index.md`. This 
 
 ### Concepts
 
-There are several key concepts at Snowplow: events (self-describing, structured), entities, schemas. We must ensure that we use and explain them consistently.
+There are several key concepts in Snowplow: events (self-describing, structured), entities, schemas. We must ensure that we use and explain them consistently.
 
 **Please, use up-to-date terms:**
-* “Self-describing event”, not “unstructured event”
-* “Entities”, not “contexts”
+* _Self-describing event_, not _unstructured event_
+* _Entities_, not _contexts_ (it’s ok-ish to refer to a set of entities as “context”, but only in a casual sense, as in “these provide some context to the event”)
+* _Failed events_ and not _bad rows_
 * If you are writing about schemas, pick “schema” or “data structure” and stick with it
 
 **Please, do not over-explain these in any of your writing.** Instead, just link to one of the existing concept pages:
@@ -91,6 +92,7 @@ There are several key concepts at Snowplow: events (self-describing, structured)
 * Custom entities: `/docs/understanding-your-pipeline/events/index.md#custom-entities`
 * Schemas: `/docs/understanding-your-pipeline/schemas/index.md`
 * Iglu resolvers/registries: `/docs/understanding-your-pipeline/schemas/index.md#iglu`
+* Failed events: `/docs/understanding-your-pipeline/failed-events/index.md`
 
 ### Reusable fragments
 

@@ -1,8 +1,6 @@
 ---
 title: "Snowbridge"
-date: "2022-10-20"
 sidebar_position: 40
-sidebar_label: "🆕 Snowbridge"
 ---
 
 # Introduction

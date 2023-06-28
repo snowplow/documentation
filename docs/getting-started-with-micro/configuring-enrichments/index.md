@@ -2,6 +2,8 @@
 title: "Configuring enrichments"
 sidebar_position: 2
 description: "How to add enrichments to Snowplow Micro."
+sidebar_custom_props:
+  new: true
 ---
 
 ```mdx-code-block

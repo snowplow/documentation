@@ -48,6 +48,19 @@ The sidebar on the left follows [file structure](https://github.com/snowplow/doc
 
 To control the position of a section in the sidebar, go to the `index.md` file for that section and adjust the `sidebar_position` attribute at the top (see [this example](https://github.com/snowplow/documentation/blob/main/docs/tutorials/index.md)). Sidebar positions are just numbers, and you can use any number as long as the order is correct.
 
+### New features
+
+To highlight a new feature in the sidebar, add the following to your page:
+```
+---
+title: ...
+...
+sidebar_custom_props:
+  new: true
+...
+---
+```
+
 ### Offerings
 
 Some documentation is only relevant to a particular offering. You can indicate it like this:

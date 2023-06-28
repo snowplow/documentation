@@ -1,7 +1,10 @@
 ---
 title: "Managing tracking scenarios via the API"
-date: "2023-05-09"
+sidebar_label: "🆕 Managing tracking scenarios via the API"
 sidebar_position: 93
+sidebar_custom_props:
+  offerings:
+    - enterprise
 ---
 
 With the [**Tracking Scenarios API**](https://console.snowplowanalytics.com/api/msc/v1/docs), you can efficiently manage tracking scenarios programmatically. Whether you want to retrieve, create, edit, publish, deprecate, or delete tracking scenarios, the API provides the necessary endpoints and functionalities.
@@ -11,9 +14,9 @@ For detailed information about each request, including query parameters and resp
 
 ### Authorizing in the API Documentation
 
-To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual requests is overwritten by this authorization.
+To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual request is overwritten by this authorization.
 
-Each request will need to include your company's `organizationID` which is a UUID that can be retrieved from the URL immediately following `.com` when visiting console:
+Each request will need to include your company's `organizationId` which is a UUID that can be retrieved from the URL immediately following `.com` when visiting console:
 
 ![](images/orgID.png)
 
@@ -43,12 +46,11 @@ The Tracking Scenarios API uses a specific response format for success cases (`2
 
 - `data`: Contains the scenario or scenarios, depending on the request.
 - `includes`: Contains additional information, such as the history of tracking scenario changes.
-- `errors`: Contains a list of errors or warnings, depending on the request.
+- `errors`: Contains a list of errors that could be of type `Error` or `Warning`. **If the array field contains at least one error of type `Error`, the request will also return a `4xx` status code, meaning that it cannot perform the store operation. Any other severity different to `Error` will return a 2xx status code.**
 
-While on `2xx` code responses the errors array can only contain errors of type **Warning**, and it will create or update the tracking scenario. On the other hand, on `422` responses, the errors array will contain at least one **Error** type and won't perform any creation or update.
+## Compatibility Checks
 
-<details>
-Some endpoints perform a validation of the tracking scenario `event`. 
+Some endpoints will perform a validation that checks the compatibility of a particular tracking scenario event schema, `event.schema`, against the source data structure version referenced by `event.source`. When both `event.schema` and `event.source` are defined in the tracking scenario, the compatibility checks will be performed.
 
 ```
 ...
@@ -82,9 +84,9 @@ Some endpoints perform a validation of the tracking scenario `event`.
 ...
 ```
 
-This validation checks the compatibility of a particular tracking scenario version with the source schema version referenced by `event.source`.
+However, the compatibility check will not only be performed against the version specified by the source data structure, `event.source` field, e.g., `1-0-0`, which we will refer to as the **current** version. It will also be conducted against the latest version available in Iglu, referred to as the **latest** version. This approach is because it's common for a new tracking scenario to utilize the latest version of the source data structure. However, as this data structure may evolve over time and become incompatible with the `event.schema` defined in the tracking scenario, we provide a method to detect these compatibility issues. Consequently, customers can update the tracking scenario to ensure compatibility.
 
-Normally, a tracking scenario is compatible with the source schema version when created. However, there could be cases where the schema evolves to a new version and is not backward compatible. In such cases, a **Warning** or **Error** (depending on the endpoint) can be returned in the errors field, providing information about the severity, tracking scenario ID, schema, version, and reason for the incompatibility.
+In cases where a scenario is incompatible or we cannot determine it, some errors will be provided in the `errors` field of the [response](#response-format). These errors alerting of compatibility issues between the tracking scenario and the source data structure, will take a similar shape to the one below:
 
 ```
 ...
@@ -98,9 +100,16 @@ Normally, a tracking scenario is compatible with the source schema version when 
 ]
 ...
 ```
-</details>
 
-We will discuss each case, explaining the request type, use case scenarios, and the different content that these fields may have.
+Compatibility checks can result in three possible values: **Compatible**, **SchemaIncompatible**, or **SchemaUndecidable**. 
+
+- If **Compatible**, the tracking scenario is compatible and no errors will be append to the `errors` response field.
+- If **SchemaIncompatible**, the tracking scenario is incompatible against some version. If the check for **current** version is incompatible, the `type` will be `Error`. For incompatibility with the **latest** version, the `type` will be `Warning`. If the requested operation involves persisting the scenario (create/update) an error of type `Error` will be append to the response, the status code will be **422 Unprocessable Entity**, and the store operation will not persist. When fetching a scenario, the checks will run for both too, **current** and **latest** versions, and if incompatible, the error type will allways be `Warning`, returning status code **200 Ok**.
+- If **SchemaUndecidable**, it is indeterminable whether the scenario is compatible with a specific version due to the use of some advanced JSON-Schema features and that the high computational cost of checking the compatibility. The `type` will always be `Warning` and the user is responsible for ensuring that the tracking scenario is compatible with the source data structure. A warning will be attached to the `errors` response field.
+
+:::info
+The algorithm used to perform the compatbility check is based on the [Finding Data Compatibility Bugs with JSON Subschema Checking](https://dl.acm.org/doi/pdf/10.1145/3460319.3464796) paper published by Andrew Habib, Avraham Shinnar and Michael Pradel.
+:::
 
 ## Retrieve a List of Tracking Scenarios
 
@@ -111,30 +120,31 @@ Use this request to retrieve a list of scenarios within an organization, which w
 ### Query Parameters and Filters
 
 You can filter the results based on the following query parameters:
-
-- `dataStructureId`: Filters the tracking scenarios associated with a particular data structure based on the source schema.
+- `dataProductId`: Filters the tracking scenarios that are associated with a particular data product. (Coming soon)
+- `dataStructureId`: Filters the tracking scenarios associated with a particular data structure. This is infered from the `event.source` field.
 - `dataStructureVersion`: Filters the tracking scenarios associated with a specific data structure version when used with `dataStructureId`.
-- `withLatestHistory`: When `true` it will return a list of tracking scenarios in the `data` array of the response and the latest change for each of the tracking scenario in the `includes` array. The relation between tracking scenarios in `data` and history in `includes` can be determined by `id = scenarioId`.
+- `withLatestHistory`: When `true` it will return a list of tracking scenarios, and the latest change per scenario attached to the `includes` array field. The relation between tracking scenarios in `data` and history in `includes` can be determined by `id = scenarioId`.
 - `status`: Filters the tracking scenarios that match the specified status.
 
-### Compatibility Checks
-
-This request may return warnings within the `errors` field of the response:
-
-- **SchemaIncompatible**: The tracking scenario is not compatible with a specific source schema version. The `type` is always `Warning`.
-- **SchemaUndecidable**: It cannot determine the compatibility of the tracking scenario with a specific source schema version due to the use of some advanced JSON-Schema features and that the complexity of checking if the tracking scenario is compatible agains the source schema is very high and would require heavy computations. The `type` in this case will always be `Warning` and it is the user the one that is responsable of making sure the tracking scenario is compatible with the source schema.
+:::info
+If no query parameters are provided it will return all the tracking scenarios for an organization
+:::
 
 ## Retrieve a Specific Tracking Scenario
 
-Use this request to retrieve a specific tracking scenario within an organization, which will be wrapped into the `data` field of the response.
+Use this request to retrieve a specific tracking scenario within an organization. The retrieved scenario will be wrapped into the `data` field of the response.
 
 `GET /api/msc/v1/organizations/{organizationId}/tracking-scenarios/v1/{trackingScenarioId}`
+
+:::info
+This endpoint will trigger [**compatibility checking**](#compatibility-checks) if `event.source` and `event.schema` are defined.
+:::
 
 ### Query Parameters and Filters
 
 You can filter the results based on the following query parameters:
 
-- `withHistory`: Returns a list with the history for the tracking scenario in the `includes` field of the response, related to the tracking scenario by its ID.
+- `withHistory`: Returns a list with the history for the tracking scenario in the `includes` array field of the response, related to the tracking scenario by its id.
 - `status`: Filters the tracking scenarios that match the specified status.
 
 ## Creating a Tracking Scenario
@@ -161,7 +171,7 @@ The creation form has two fields at the top level, as shown in this example:
 ```
 
 - `message`: An optional field to provide a message.
-- `scenario`: The definition of the tracking scenario, which should comply to the given JSON Schema shown on [Validations](#validations).
+- `scenario`: The definition of the tracking scenario, which should comply with the [validations](#validations).
 
 By default, the tracking scenario will be created with `scenario.status` set to `draft` and `scenario.version` set to `0` if not provided. These values can be changed and managed after creation. Here is an example response:
 
@@ -195,109 +205,27 @@ By default, the tracking scenario will be created with `scenario.status` set to 
 ```
 
 ### Validations
-
-- **Scenario**: The content of the `scenario` field from the request form is validated against a JSON schema:
-```
-{
-    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-    "self": {
-        "vendor": "com.snowplowanalytics.snowplow.bdp",
-        "version": "1-0-0",
-        "format": "jsonschema",
-        "name": "tracking-scenario"
-    },
-    "id": "http://iglucentral.com/schemas/com.snowplowanalytics.snowplow.bdp/tracking-scenario/jsonschema/1-0-0#",
-    "type": "object",
-    "properties": {
-        "id": {
-            "type": "string",
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-        },
-        "version": { "type": "integer", "minimum": 0 },
-        "status": { "enum": ["draft", "published", "deprecated"] },
-        "name": { "type": "string", "minLength": 1 },
-        "description": { "type": "string" },
-        "owner": { "type": "string" },
-        "triggers": { "type": "array", "items": { "type": "string" } },
-        "appIds": { "type": "array", "items": { "type": "string" } },
-        "event": {
-            "type": "object",
-            "properties": {
-                "source": { "type": "string", "format": "uri" },
-                "schema": {
-                    "$ref": "http://json-schema.org/draft-04/schema#"
-                }
-            },
-            "required": ["source"]
-        },
-        "entities": {
-            "type": "object",
-            "properties": {
-                "tracked": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "source": { "type": "string", "format": "uri" },
-                            "minCardinality": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "default": 0
-                            },
-                            "maxCardinality": { "type": "integer" }
-                        },
-                        "required": ["source"]
-                    }
-                },
-                "enriched": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "source": { "type": "string", "format": "uri" },
-                            "minCardinality": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "default": 0
-                            },
-                            "maxCardinality": { "type": "integer" }
-                        },
-                        "required": ["source"]
-                    }
-                }
-            }
-        }
-    },
-    "required": ["name", "event"]
-}
-```
-
-- **Name**: It validates that the `scenario.name` of a tracking scenario is unique within the data structure context inferred from the source schema `scenario.event.source`.
-- **Entities**: If present during creation, it will validate that the entities, `scenario.entities.tracked` and `scenario.entities.enriched`, are not duplicated.
-
-### Compatibility Check
-
-If a `scenario.event` is provided during creation, a compatibility check will be performed between the provided event and the one referenced in the source schema by `scenario.event.source`.
-
-This check is performed for the version indicated by the Iglu URI, referred to as the **current** version. Additionally, the compatibility check is also run for the **latest** version. The compatibility check results in three possible values: **Compatible**, **SchemaIncompatible**, or **SchemaUndecidable**. The different errors will be provided in the `errors` field of the [response](#response-format).
-
-- If **Compatible**, no errors or warnings will be attached to the `errors` response field.
-- If **SchemaIncompatible**, an error will be attached to the `errors` response field when the **current** version is incompatible, resulting in a **422 Unprocessable Entity** response without being able to create the tracking scenario. If the **latest** version is incompatible, a warning will be attached to the `errors` field, but a **201 Created** response will still be returned.
-- If **SchemaUndecidable**, a warning will be attached to the `errors` response field.
+- `scenario.event.source`: If provided it should match a valid and existing Iglu URI.
+- `scenario.name`: It validates that the `scenario.name` of a tracking scenario is unique within the data structure context, inferred from the source data structure `scenario.event.source` if provided.
+- `scenario.version`: If provided should be equal or greater than zero.
+- `scenario.status`: If provided should match one of `draft`, `published` or `deprecated`.
+- `scenario.entities`: If provided it will validate that the entities, `scenario.entities.tracked` and `scenario.entities.enriched`, are not duplicated and that they exist.
+- `scneario.dataProductId`: If provided it will validate that the data products exists. (Coming soon)
 
 :::info
-The algorithm used to perform the compatbility check is based on the [Finding Data Compatibility Bugs with JSON Subschema Checking](https://dl.acm.org/doi/pdf/10.1145/3460319.3464796) paper published by Andrew Habib, Avraham Shinnar and Michael Pradel.
+This endpoint will trigger [**compatibility checking**](#compatibility-checks) if `event.source` and `event.schema` are defined.
 :::
 
 ## Editing a Tracking Scenario
 
-Use this request to edit a tracking scenario within an organization. The [request and response](#request-and-response) follow the same format as during creation.
+Use this request to edit a tracking scenario within an organization. The format of the [request and response](#request-and-response) is the same format as during creation.
 
 `PUT /api/msc/v1/organizations/{organizationId}/tracking-scenarios/v1/{trackingScenarioId}`
 
 ### Publishing a Tracking Scenario
 
-By default, when a tracking scenario is created and no value is provided for `scenario.status`, it is set to **draft**. This suggests a tracking scenario lifecycle that we recommend following, especially when using the API in conjunction with the Console.
+When editing a scenario, it can be published by setting the `status` to `published`. Currently, this will indicate to the tracking scenario consumers (for instance, front-end developers) that the tracking design is ready to be implemented or to be consumed.  
+By default, when a tracking scenario is created and no value is provided for `scenario.status`, it will be set to `draft`. With this, we suggests a tracking scenario lifecycle that we recommend following, but we allow certain degree of flexibility to accommodate unique customer use cases. Here is the suggested lifecycle: 
 
 ```mermaid
 graph LR
@@ -316,7 +244,7 @@ graph LR
     Deleted((Deleted))
 ```
 
-In addition to this lifecycle and in conjunction with versioning, we enforce that when a tracking scenario is **published**, the versions between two published versions are **squashed**. For example:
+In addition to this lifecycle, and in conjunction with versioning, we enforce that when a tracking scenario is **published**, the versions between two published versions are **discarded**. For example:
 
 Publish new version, before squash:
 
@@ -335,7 +263,7 @@ graph LR
     D[Draft 4] --> E[Published 5]
 ```
 
-After squash:
+After discarding intermediate versions:
 
 ```mermaid
 graph LR
@@ -348,16 +276,19 @@ graph LR
 
 ### Deprecating a Tracking Scenario
 
-Tracking scenarios can also be **deprecated** by changing the `scenario.status` field to `deprecated`. This will essentially be a tag that will tell the users, developers or customers of a tracking scenario to not relly on it anymore.
+When editing a scenario, it can be deprecated by setting the `status` to `deprecated`. This will is a way of telling the tracking scenario consumers (for instance, developers) not to relly on the tracking anymore.
 
 ### Validations
+- `scenario.event.source`: If provided it should match a valid and existing Iglu URI.
+- `scenario.name`: It validates that the `scenario.name` of a tracking scenario is unique within the data structure context, inferred from the source data structure `scenario.event.source` if provided.
+- `scenario.version`: If provided should be equal or greater than zero, should not exists and be greater than the last published version.
+- `scenario.status`: If provided should match one of `draft`, `published` or `deprecated`.
+- `scenario.entities`: If provided it will validate that the entities, `scenario.entities.tracked` and `scenario.entities.enriched`, are not duplicated and that they exists.
+- `scneario.dataProductId`: If provided it will validate that the data product exists. (Coming soon)
 
-- **Id**: The `scenario.id` cannot be changed.
-- **Entities**: Similar to creation, the `scenario.entities.tracked` and `scenario.entities.enriched` fields are checked to ensure they do not contain duplicates.
-
-### Compatibility Check
-
-The same compatibility check performed during [creation](#compatibility-check) will be carried out.
+:::info
+This endpoint will trigger [**compatibility checking**](#compatibility-checks) if `event.source` and `event.schema` are defined.
+:::
 
 ## Deleting a Tracking Scenario
 

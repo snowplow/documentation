@@ -30,8 +30,8 @@ Examples:
 
 | Kind | Schema | Resulting table |
 |---|---|---|
-| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `atomic.com_example_button_press_1` |
-| Entity | `com.example/user/jsonschema/1-0-0` | `atomic.com_example_user_1` |
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `com_example_button_press_1` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `com_example_user_1` |
 
 Inside the table, there will be columns corresponding to the fields in the schema. Their types are determined according to the logic described [below](#types).
 
@@ -56,12 +56,12 @@ For example, suppose you have the following field in the schema:
 }
 ```
 
-It will be translated into a column called `last_name` (notice the underscore), of type `CHAR(100)`.
+It will be translated into a column called `last_name` (notice the underscore), of type `VARCHAR(100)`.
 
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
-Each type of self-describing event and each type of entity get their own dedicated columns in the `atomic.events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
+Each type of self-describing event and each type of entity get their own dedicated columns in the `events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
 
 The column name is prefixed by `unstruct_event_` for self-describing events, and by `contexts_` for entities. _(In case you were wondering, those are the legacy terms for self-describing events and entities, respectively.)_
 
@@ -75,8 +75,8 @@ Examples:
 
 | Kind | Schema | Resulting column |
 |---|---|---|
-| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `atomic.events.unstruct_event_com_example_button_press_1` |
-| Entity | `com.example/user/jsonschema/1-0-0` | `atomic.events.contexts_com_example_user_1` |
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `events.unstruct_event_com_example_button_press_1` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `events.contexts_com_example_user_1` |
 
 For self-describing events, the column will be of a `STRUCT` type, while for entities the type will be `ARRAY` of `STRUCT` (because an event can have more than one entity attached).
 
@@ -108,7 +108,7 @@ It will be translated into a field called `last_name` (notice the underscore), o
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
 
-Each type of self-describing event and each type of entity get their own dedicated columns in the `atomic.events` table. The name of such a column is composed of the schema vendor, schema name and full schema version (more on versioning [later](#versioning)).
+Each type of self-describing event and each type of entity get their own dedicated columns in the `events` table. The name of such a column is composed of the schema vendor, schema name and full schema version (more on versioning [later](#versioning)).
 
 The column name is prefixed by `unstruct_event_` for self-describing events, and by `contexts_` for entities. _(In case you were wondering, those are the legacy terms for self-describing events and entities, respectively.)_
 
@@ -122,8 +122,8 @@ Examples:
 
 | Kind | Schema | Resulting column |
 |---|---|---|
-| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `atomic.events.unstruct_event_com_example_button_press_1_0_0` |
-| Entity | `com.example/user/jsonschema/1-0-0` | `atomic.events.contexts_com_example_user_1_0_0` |
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `events.unstruct_event_com_example_button_press_1_0_0` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `events.contexts_com_example_user_1_0_0` |
 
 For self-describing events, the column will be of a `RECORD` type, while for entities the type will be `REPEATED RECORD` (because an event can have more than one entity attached).
 
@@ -155,7 +155,7 @@ It will be translated into a field called `last_name` (notice the underscore), o
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
-Each type of self-describing event and each type of entity get their own dedicated columns in the `atomic.events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
+Each type of self-describing event and each type of entity get their own dedicated columns in the `events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
 
 The column name is prefixed by `unstruct_event_` for self-describing events, and by `contexts_` for entities. _(In case you were wondering, those are the legacy terms for self-describing events and entities, respectively.)_
 
@@ -169,8 +169,8 @@ Examples:
 
 | Kind | Schema | Resulting column |
 |---|---|---|
-| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `atomic.events.unstruct_event_com_example_button_press_1` |
-| Entity | `com.example/user/jsonschema/1-0-0` | `atomic.events.contexts_com_example_user_1` |
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `events.unstruct_event_com_example_button_press_1` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `events.contexts_com_example_user_1` |
 
 For self-describing events, the column will be of an `OBJECT` type, while for entities the type will be an `ARRAY` of objects (because an event can have more than one entity attached).
 
@@ -207,9 +207,9 @@ Because the table name for the self-describing event or entity includes the majo
 
 | Schema | Resulting table |
 |---|---|
-| `com.example/button_press/jsonschema/1-0-0` | `atomic.com_example_button_press_1` |
-| `com.example/button_press/jsonschema/1-2-0` | `atomic.com_example_button_press_1` |
-| `com.example/button_press/jsonschema/2-0-0` | `atomic.com_example_button_press_2` |
+| `com.example/button_press/jsonschema/1-0-0` | `com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-2-0` | `com_example_button_press_1` |
+| `com.example/button_press/jsonschema/2-0-0` | `com_example_button_press_2` |
 
 When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing table automatically. For example, if you change the `maxLength` of a `string` field, the limit of the `VARCHAR` column would be updated accordingly.
 
@@ -271,7 +271,7 @@ You can use [data models](/docs/modeling-your-data/what-is-data-modeling/index.m
 
 While our recommendation is to use major schema versions to indicate breaking changes (e.g. changing a type of a field from a `string` to a `number`), this is not particularly relevant for BigQuery. Indeed, each schema version gets its own column, so there is no difference between major and minor versions. That said, we believe sticking to our recommendation is a good idea:
 * Breaking changes might affect downstream consumers of the data, even if they don’t affect BigQuery
-* In the future, you might want to migrate to a different data warehouse where our rules are stricter (e.g. Databricks)
+* In the future, you might decide to migrate to a different data warehouse where our rules are stricter (e.g. Databricks)
 
 :::
 
@@ -290,7 +290,7 @@ Because the column name for the self-describing event or entity includes the maj
 
 While our recommendation is to use major schema versions to indicate breaking changes (e.g. changing a type of a field from a `string` to a `number`), this is not particularly relevant for Snowflake. Indeed, the event or entity data is stored in the column as is in the `VARIANT` form, so Snowflake is not “aware” of the schema. That said, we believe sticking to our recommendation is a good idea:
 * Breaking changes might affect downstream consumers of the data, even if they don’t affect Snowflake
-* In the future, you might want to migrate to a different data warehouse where our rules are stricter (e.g. Databricks)
+* In the future, you might decide to migrate to a different data warehouse where our rules are stricter (e.g. Databricks)
 
 Also, creating a new major version of the schema (and hence a new column) is the only way to indicate a change in semantics, where the data is in the same format but has different meaning (e.g. amounts in dollars vs euros).
 
@@ -303,12 +303,103 @@ Also, creating a new major version of the schema (and hence a new column) is the
 
 How do schema types translate to the database types?
 
+### Nullability
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="redshift" label="Redshift and Postgres" default>
+
+All non-required schema fields translate to nullable columns.
+
+Required fields translate to `NOT NULL` columns:
+
+```json
+{
+  "properties": {
+    "myRequiredField": {"type": ...}
+  },
+  "required": [ "myRequiredField" ]
+}
+```
+
+However, it is possible to define a required field where `null` values are allowed (the Enrich application will still validate that the field is present, even if it’s `null`):
+
+```json
+"myRequiredField": {
+  "type": ["null", ...]
+}
+```
+
+OR
+
+```json
+"myRequiredField": {
+  "enum": ["null", ...]
+}
+```
+
+In this case, the column will be nullable. It does not matter if `"null"` is in the beginning, middle or end of the list of types or enum values.
+
+:::info
+
+See also how [versioning](#versioning) affects this.
+
+:::
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+All schema fields, including the required ones, translate to nullable fields inside the `STRUCT`.
+
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
+
+All non-required schema fields translate to nullable `RECORD` fields.
+
+Required schema fields translate to required `RECORD` fields:
+
+```json
+{
+  "properties": {
+    "myRequiredField": {"type": ...}
+  },
+  "required": [ "myRequiredField" ]
+}
+```
+
+However, it is possible to define a required field where `null` values are allowed (the Enrich application will still validate that the field is present, even if it’s `null`):
+
+```json
+"myRequiredField": {
+  "type": ["null", ...]
+}
+```
+
+OR
+
+```json
+"myRequiredField": {
+  "enum": ["null", ...]
+}
+```
+
+In this case, the `RECORD` field will be nullable. It does not matter if `"null"` is in the beginning, middle or end of the list of types or enum values.
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+All fields are nullable (because they are stored inside the `VARIANT` type).
+
+  </TabItem>
+</Tabs>
+
+### Types themselves
+
 <Tabs groupId="warehouse" queryString>
   <TabItem value="redshift" label="Redshift and Postgres" default>
 
 :::note
 
-The row order in this table is important.  Type lookup stops after the first match is found scanning from top to bottom (with the two exceptions of "null" and "required" — the first two rows in the table).
+The row order in this table is important. Type lookup stops after the first match is found scanning from top to bottom.
 
 :::
 
@@ -321,60 +412,9 @@ The row order in this table is important.  Type lookup stops after the first mat
 <tr>
 <td>
 
-  ```json
-{
-    "type": ["null", T1, ...]
-}
-```
-
-OR
-
-  ```json
-{
-    "enum": ["null", E1, ...]
-}
-```
-
-`"null"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
-
-`"null"`’s position in a list (`type` or `enum`) does not matter.
-
-</td>
-<td>
-
-`NULLABLE`
-
-</td>
-</tr>
-<tr>
-<td >
-
 ```json
 {
-    "properties": {
-      "f1": {"type": "T"}
-    },
-    "required": [ "f1" ]
-}
-```
-
-`"required"` is not considered for type casting logic, only for the nullability constraint. Type lookup will continue down the table.
-
-Fields that are not listed as `"required"` are nullable. Fields are _also_ nullable when they are listed as `"required"` but have `"null"` in their `type` or `enum` definition. (In the latter case, the Enrich application will still validate that the field is present, even if it’s `null`.)
-
-</td>
-<td>
-
-`NOT NULL`
-
-</td>
-</tr>
-<tr>
-<td>
-
-  ```json
-{
-    "enum": [E1, E2, ...]
+  "enum": [E1, E2, ...]
 }
 ```
 
@@ -398,17 +438,17 @@ _If content size is longer than 4096 it would be truncated when inserted into th
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": ["boolean", "integer"]
+  "type": ["boolean", "integer"]
 }
 ```
 
 OR 
 
-  ```json
+```json
 {
-    "type": ["integer", "boolean"]
+  "type": ["integer", "boolean"]
 }
 ```
 
@@ -422,9 +462,9 @@ OR
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": [T1, T2, ...]
+  "type": [T1, T2, ...]
 }
 ```
 
@@ -440,10 +480,10 @@ _If content size is longer than 4096 it would be truncated when inserted into th
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "date-time"
+  "type": "string",
+  "format": "date-time"
 }
 ```
 
@@ -457,10 +497,10 @@ _If content size is longer than 4096 it would be truncated when inserted into th
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "date"
+  "type": "string",
+  "format": "date"
 }
 ```
 
@@ -474,9 +514,9 @@ _If content size is longer than 4096 it would be truncated when inserted into th
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "array"
+  "type": "array"
 }
 ```
 
@@ -494,10 +534,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "integer",
-    "maximum": M
+  "type": "integer",
+  "maximum": M
 }
 ```
 
@@ -513,10 +553,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "integer",
-    "maximum": M
+  "type": "integer",
+  "maximum": M
 }
 ```
 
@@ -532,10 +572,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "integer",
-    "maximum": M
+  "type": "integer",
+  "maximum": M
 }
 ```
 
@@ -551,10 +591,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "integer",
-    "enum": [E1, E2, ...]
+  "type": "integer",
+  "enum": [E1, E2, ...]
 }
 ```
 
@@ -570,10 +610,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "integer",
-    "enum": [E1, E2, ...]
+  "type": "integer",
+  "enum": [E1, E2, ...]
 }
 ```
 
@@ -591,8 +631,8 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 
 ```json
 {
-    "type": "integer",
-    "enum": [E1, E2, ...]
+  "type": "integer",
+  "enum": [E1, E2, ...]
 }
 ```
 
@@ -610,7 +650,7 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 
 ```json
 {
-    "type": "integer"
+  "type": "integer"
 }
 ```
 
@@ -624,9 +664,9 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "multipleOf": B
+  "multipleOf": B
 }
 ```
 
@@ -642,8 +682,8 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 
 ```json
 {
-    "type": "number",
-    "multipleOf": B
+  "type": "number",
+  "multipleOf": B
 }
 ```
 
@@ -659,9 +699,9 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "number"
+  "type": "number"
 }
 ```
 
@@ -675,9 +715,9 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "boolean"
+  "type": "boolean"
 }
 ```
 
@@ -691,11 +731,11 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "minLength": M,
-    "maxLength": M
+  "type": "string",
+  "minLength": M,
+  "maxLength": M
 }
 ```
 
@@ -711,10 +751,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "uuid"
+  "type": "string",
+  "format": "uuid"
 }
 ```
 
@@ -728,10 +768,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "ipv6"
+  "type": "string",
+  "format": "ipv6"
 }
 ```
 
@@ -745,10 +785,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "ipv4"
+  "type": "string",
+  "format": "ipv4"
 }
 ```
 
@@ -762,10 +802,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "email"
+  "type": "string",
+  "format": "email"
 }
 ```
 
@@ -779,10 +819,10 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "maxLength": M
+  "type": "string",
+  "maxLength": M
 }
 ```
 
@@ -798,9 +838,9 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "enum": ["E1"]
+  "enum": ["E1"]
 }
 ```
 
@@ -840,10 +880,7 @@ _If content size is longer than 4096 it would be truncated when inserted into th
 
 :::note
 
-All fields in databricks are `nullable`. Having `"null"` in the `"type"` or `"enum"` does not affect the warehouse type,
-and is ignored for the purposes of type casting as per the table below.
-
-The row order in this table is important.  Type lookup stops after the first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
+The row order in this table is important. Type lookup stops after the first match is found scanning from top to bottom.
 
 :::
 
@@ -856,10 +893,10 @@ The row order in this table is important.  Type lookup stops after the first mat
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "date-time"
+  "type": "string",
+  "format": "date-time"
 }
 ```
 
@@ -873,10 +910,10 @@ The row order in this table is important.  Type lookup stops after the first mat
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "date"
+  "type": "string",
+  "format": "date"
 }
 ```
 
@@ -890,9 +927,9 @@ The row order in this table is important.  Type lookup stops after the first mat
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "boolean"
+  "type": "boolean"
 }
 ```
 
@@ -906,9 +943,9 @@ The row order in this table is important.  Type lookup stops after the first mat
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string"
+  "type": "string"
 }
 ```
 
@@ -922,11 +959,11 @@ The row order in this table is important.  Type lookup stops after the first mat
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "integer",
-    "minimum": N,
-    "maximum": M
+  "type": "integer",
+  "minimum": N,
+  "maximum": M
 }
 ```
 
@@ -943,11 +980,11 @@ The row order in this table is important.  Type lookup stops after the first mat
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "integer",
-    "minimum": N,
-    "maximum": M
+  "type": "integer",
+  "minimum": N,
+  "maximum": M
 }
 ```
 
@@ -966,9 +1003,9 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "integer",
-    "minimum": N,
-    "maximum": M
+  "type": "integer",
+  "minimum": N,
+  "maximum": M
 }
 ```
 
@@ -987,9 +1024,9 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "integer",
-    "minimum": N,
-    "maximum": M
+  "type": "integer",
+  "minimum": N,
+  "maximum": M
 }
 ```
 
@@ -1008,7 +1045,7 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "integer"
+  "type": "integer"
 }
 ```
 
@@ -1024,10 +1061,10 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "number", // OR ["number", "integer"]
-    "minimum": N,
-    "maximum": M,
-    "multipleOf": F
+  "type": "number", // OR ["number", "integer"]
+  "minimum": N,
+  "maximum": M,
+  "multipleOf": F
 }
 ```
 
@@ -1047,10 +1084,10 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "number", // OR ["number", "integer"]
-    "minimum": N,
-    "maximum": M,
-    "multipleOf": F
+  "type": "number", // OR ["number", "integer"]
+  "minimum": N,
+  "maximum": M,
+  "multipleOf": F
 }
 ```
 
@@ -1070,10 +1107,10 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "number", // OR ["number", "integer"]
-    "minimum": N,
-    "maximum": M,
-    "multipleOf": F
+  "type": "number", // OR ["number", "integer"]
+  "minimum": N,
+  "maximum": M,
+  "multipleOf": F
 }
 ```
 
@@ -1093,10 +1130,10 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "number", // OR ["number", "integer"]
-    "minimum": N,
-    "maximum": M,
-    "multipleOf": F
+  "type": "number", // OR ["number", "integer"]
+  "minimum": N,
+  "maximum": M,
+  "multipleOf": F
 }
 ```
 
@@ -1116,8 +1153,8 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "number", // OR ["number", "integer"]
-    "multipleOf": F
+  "type": "number", // OR ["number", "integer"]
+  "multipleOf": F
 }
 ```
 
@@ -1135,10 +1172,10 @@ The row order in this table is important.  Type lookup stops after the first mat
 
 ```json
 {
-    "type": "number", // OR ["number", "integer"]
-    "minimum": N,
-    "maximum": M,
-    "multipleOf": F
+  "type": "number", // OR ["number", "integer"]
+  "minimum": N,
+  "maximum": M,
+  "multipleOf": F
 }
 ```
 
@@ -1178,10 +1215,10 @@ _`P` is rounded up to either `9`, `18` or `38`._
 
 ```json
 {
-    "type": "number", // OR ["number", "integer"]
-    "minimum": N,
-    "maximum": M,
-    "multipleOf": F
+  "type": "number", // OR ["number", "integer"]
+  "minimum": N,
+  "maximum": M,
+  "multipleOf": F
 }
 ```
 
@@ -1212,10 +1249,10 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 ```json
 {
-    "type": "number", // OR ["number", "integer"]
-    "minimum": N,
-    "maximum": M,
-    "multipleOf": F
+  "type": "number", // OR ["number", "integer"]
+  "minimum": N,
+  "maximum": M,
+  "multipleOf": F
 }
 ```
 
@@ -1235,7 +1272,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 ```json
 {
-    "type": "number" // OR ["number", "integer"]
+  "type": "number" // OR ["number", "integer"]
 }
 ```
 
@@ -1251,7 +1288,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 ```json
 {
-    "enum": [N1, I1, ...]
+  "enum": [N1, I1, ...]
 }
 ```
 
@@ -1271,7 +1308,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 ```json
 {
-    "enum": [N1, I1, ...]
+  "enum": [N1, I1, ...]
 }
 ```
 
@@ -1291,7 +1328,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 ```json
 {
-    "enum": [N1, I1, ...]
+  "enum": [N1, I1, ...]
 }
 ```
 
@@ -1311,7 +1348,7 @@ For example, `M=10.9999, N=-1e50, F=0.1` will be `DOUBLE`. Calculation as follow
 
 ```json
 {
-    "enum": [N1, I1, ...]
+  "enum": [N1, I1, ...]
 }
 ```
 
@@ -1334,7 +1371,7 @@ _`P` is rounded up to either `9`, `18` or `38`._
 
 ```json
 {
-    "enum": [S1, S2, ...]
+  "enum": [S1, S2, ...]
 }
 ```
 
@@ -1352,7 +1389,7 @@ _`P` is rounded up to either `9`, `18` or `38`._
 
 ```json
 {
-    "enum": [A1, A2, ...]
+  "enum": [A1, A2, ...]
 }
 ```
 
@@ -1387,7 +1424,7 @@ _Values will be quoted as in JSON._
 
 :::note
 
-The row order in this table is important.  Type lookup stops after first match is found scanning from top to bottom (with the single exception of "null" — the first row in the table).
+The row order in this table is important. Type lookup stops after the first match is found scanning from top to bottom.
 
 :::
 
@@ -1398,40 +1435,12 @@ The row order in this table is important.  Type lookup stops after first match i
 </thead>
 <tbody>
 <tr>
-<td >
-
-  ```json
-{
-    "type": ["null", T1, ...]
-}
-```
-
-OR
-
-  ```json
-{
-    "enum": ["null", E1, ...]
-}
-```
-
-</td>
-<td>
-
-`NULLABLE`
-
-
-_`"null"` is not considered for type casting logic. Only for nullability constraint. Type lookup will continue down the table._
-
-</td>
-</tr>
-
-<tr>
 <td>
 
 ```json
 {
-    "type": "object",
-    "properties": {...}
+  "type": "object",
+  "properties": {...}
 }
 ```
 
@@ -1452,8 +1461,8 @@ Objects can be nullable. Nested fields can also be nullable (same rules as for e
 
 ```json
 {
-    "type": "array",
-    "items": {...}
+  "type": "array",
+  "items": {...}
 }
 ```
 
@@ -1474,8 +1483,8 @@ Arrays can be nullable. Nested fields can also be nullable (same rules as for ev
 
 ```json
 {
-    "type": "string",
-    "format": "date-time"
+  "type": "string",
+  "format": "date-time"
 }
 ```
 
@@ -1489,10 +1498,10 @@ Arrays can be nullable. Nested fields can also be nullable (same rules as for ev
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string",
-    "format": "date"
+  "type": "string",
+  "format": "date"
 }
 ```
 
@@ -1506,9 +1515,9 @@ Arrays can be nullable. Nested fields can also be nullable (same rules as for ev
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "boolean"
+  "type": "boolean"
 }
 ```
 
@@ -1522,9 +1531,9 @@ Arrays can be nullable. Nested fields can also be nullable (same rules as for ev
 <tr>
 <td>
 
-  ```json
+```json
 {
-    "type": "string"
+  "type": "string"
 }
 ```
 
@@ -1540,7 +1549,7 @@ Arrays can be nullable. Nested fields can also be nullable (same rules as for ev
 
 ```json
 {
-    "type": "integer"
+  "type": "integer"
 }
 ```
 
@@ -1556,7 +1565,7 @@ Arrays can be nullable. Nested fields can also be nullable (same rules as for ev
 
 ```json
 {
-    "type": "number"
+  "type": "number"
 }
 ```
 
@@ -1564,7 +1573,7 @@ OR
 
 ```json
 {
-    "type": [ "integer", "number"]
+  "type": [ "integer", "number"]
 }
 ```
 
@@ -1580,7 +1589,7 @@ OR
 
 ```json
 {
-    "enum": [I1, I2, ...]
+  "enum": [I1, I2, ...]
 }
 ```
 
@@ -1598,7 +1607,7 @@ OR
 
 ```json
 {
-    "enum": [I1, N1, ...]
+  "enum": [I1, N1, ...]
 }
 ```
 
@@ -1616,7 +1625,7 @@ OR
 
 ```json
 {
-    "enum": [A1, A2, ...]
+  "enum": [A1, A2, ...]
 }
 ```
 

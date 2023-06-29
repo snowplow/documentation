@@ -11,13 +11,19 @@ import TabItem from '@theme/TabItem';
 
 ## Basic queries
 
-You will typically find most of your Snowplow data in the `atomic.events` table in the `snowplow` schema, unless you configured your loader to use a different location. (In case of Redshift and Postgres, there will be extra tables for [self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md) — see [below](#self-describing-events)).
+You will typically find most of your Snowplow data in the `events` table. If you are using Redshift or Postgres, there will be extra tables for [self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md) — see [below](#self-describing-events).
+
+:::note
+
+Database and/or schema name will depend on your configuration, but we will use `atomic` as the schema name in the examples below.
+
+:::
 
 Please refer to [the structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md) for the principles behind our approach, as well as the descriptions of the various standard columns.
 
 :::tip Data models
 
-Querying the “atomic” data directly can be useful for exploring your events or building custom analytics. However, for many common use cases it’s much easier to use our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md), which provide a pre-aggregated view of your data.
+Querying the `events` table directly can be useful for exploring your events or building custom analytics. However, for many common use cases it’s much easier to use our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md), which provide a pre-aggregated view of your data.
 
 :::
 

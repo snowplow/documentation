@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 Where can you find the data carried by a self-describing event or an entity?
 
 <Tabs groupId="warehouse" queryString>
-  <TabItem value="redshift" label="Redshift and Postgres" default>
+  <TabItem value="redshift/postgres" label="Redshift and Postgres" default>
 
 Each type of self-describing event and each type of entity get their own dedicated tables. The name of such a table is composed of the schema vendor, schema name and its major version (more on versioning [later](#versioning)).
 

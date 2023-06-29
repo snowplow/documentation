@@ -6,24 +6,31 @@ sidebar_position: 1
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ThemedImage from '@theme/ThemedImage';
+import Diagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/_diagram.md';
+import CrossCloudDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/_cross-cloud-diagram.md';
 ```
 
+We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift** (including Redshift serverless), **Snowflake** or **Databricks**. For other destinations, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md).
 
-We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift**, **Snowflake** or **Databricks**. For other destinations, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md).
-
-Loading [enriched](/docs/pipeline-components-and-applications/enrichment-components/index.md) Snowplow data is a two-step process which consists of:
-
-- transforming the enriched tsv-formatted data into a format that can be readily loaded into a target (previously known as 'shredding');
-- loading the transformed data.
-
-Each step is handled by a dedicated application: `transformer` or `loader`. To load Snowplow data with RDB Loader, you'll need to run one of each.
+<Tabs groupId="warehouse" queryString lazy>
+  <TabItem value="redshift" label="Redshift" default>
+    <Diagram batch="true" shredding="true" stream="Kinesis" bucket="S3" queue="SQS" format="JSON"  warehouse="Redshift"/>
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+    <CrossCloudDiagram format="Parquet" warehouse="Databricks"/>
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+    <CrossCloudDiagram format="JSON" warehouse="Snowflake"/>
+  </TabItem>
+</Tabs>
 
 :::tip Schemas in Redshift, Snowflake and Databricks
 
 For more information on how events are stored in the warehouse, check the [mapping between Snowplow schemas and the corresponding warehouse column types](/docs/storing-querying/schemas-in-warehouse/index.md).
 
 :::
+
+To run RDB Loader, you will need to run one instance of the Transformer and one instance of the Loader.
 
 ## How to pick a transformer
 
@@ -60,19 +67,13 @@ If duplicates are not a concern, or if you are happy to deal with them after the
 
 ## How to pick a loader based on the destination
 
-There are different loader applications depending on the storage target. Currently, RDB Loader supports Redshift, Snowflake and Databricks.
+There are different loader applications depending on the storage target. Currently, RDB Loader supports Redshift (AWS only), Snowflake and Databricks.
 
-For loading into **Redshift**, use the `snowplow-rdb-loader-redshift` artifact.
+For loading into **Redshift** (including Redshift serverless), use the `snowplow-rdb-loader-redshift` artifact.
 
 For loading into **Snowflake**, use the `snowplow-rdb-loader-snowflake` artifact.
 
 For loading into **Databricks**, use the `snowplow-rdb-loader-databricks` artifact.
-
-:::note
-
-AWS is fully supported for both Snowflake and Databricks. GCP is supported for Snowflake (since 5.0.0.).
-
-:::
 
 ## How `transformer` and `loader` interface with other Snowplow components and each other
 
@@ -81,13 +82,3 @@ The applications communicate through messages.
 The transformer consumes enriched tsv-formatted Snowplow events from S3 (AWS) or stream (AWS and GCP). It writes its output to blob storage (S3 or GCS). Once it's finished processing a batch of data, it issues a message with details about the run.
 
 The loader consumes a stream of these messages and uses them to determine what data needs to be loaded. It issues the necessary SQL commands to the storage target.
-
-<p align="center">
-<ThemedImage 
-alt='Shredder loader interface diagram'
-sources={{
-light: require('./images/shredder_loader_interface_light.drawio.png').default, 
-dark: require('./images/shredder_loader_interface_dark.drawio.png').default
-}}
-/>
-</p>

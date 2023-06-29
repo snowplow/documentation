@@ -1,16 +1,15 @@
 ---
-title: "Managing tracking scenarios in the console"
-sidebar_label: "🆕 Managing tracking scenarios in the console"
+title: "Managing Tracking Scenarios in the Console"
+sidebar_label: "Using the UI"
 sidebar_position: 80
 sidebar_custom_props:
-  offerings:
-    - enterprise
+  new: true
 ---
 
 
-## Creating a New Tracking Scenario using Console
+## Creating a New Tracking Scenario using the Console
 
-Tracking Scenarios are directly linked to Data Structures and represent the events that are documented and tracked using a certain Data Structure.
+Tracking Scenarios are directly linked to [Data Structures](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) and represent the events that are documented and tracked using a certain Data Structure.
 
 To create a new Tracking Scenario, navigate to the **Data Structures** option in the menu. From there, select a data structure from the list.
 
@@ -82,7 +81,7 @@ You can edit or remove instructions in the tracking detail view's instructions l
 
 ### Entities
 
-In this section, you can define which [Entities](/docs/understanding-tracking-design/understanding-events-entities/index.md) should be tracked as context for this event.
+In this section, you can define which [Entities](/docs/understanding-your-pipeline/entities/index.md) should be tracked as context for this event.
 
 To add multiple entities, click the **'Add entities'** button. A new dialog box will appear to select entities. This includes both entities from Iglu Central and your own custom entities.
 

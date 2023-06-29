@@ -1,7 +1,8 @@
 ---
 title: "Understanding the structure of Snowplow data"
-description: A summary of the Snowplow events table and its fields, including self describing events and entities
-sidebar_position: 10
+description: A summary of the Snowplow events table and its fields, including custom events and entities
+sidebar_label: "What the data looks like"
+sidebar_position: 5
 ---
 
 ```mdx-code-block
@@ -26,9 +27,9 @@ Snowplow data is structured: individual fields are stored in their own columns, 
 
 Snowplow started life as a web analytics data warehousing platform, and has a basic schema suitable for performing web analytics, with a wide range of web-specific dimensions (related to page URLs, browsers, operating systems, devices, IP addresses, cookie IDs) and web-specific events (page views, page pings, transactions). All of these fields can be found in the `atomic.events` table, which is a "fat" (many columns) table.
 
-As Snowplow has evolved into a general purpose event analytics platform, we've enabled Snowplow users to define additional event types (we call these[ _self describing events_](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#self-describing-events)) and define their own entities (we call these [_custom entities_](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md#custom-contexts)) so that they can extend the schema to suit their own businesses.
+As Snowplow has evolved into a general purpose event analytics platform, we've enabled Snowplow users to define additional event types (we call these [_self describing events_](/docs/understanding-your-pipeline/events/index.md#self-describing-events)) and define their own entities (we call these [_custom entities_](/docs/understanding-your-pipeline/entities/index.md#custom-entities)) so that they can extend the schema to suit their own businesses.
 
-For Snowplow users running Amazon Redshift, each custom unstructured event and custom context will be stored in its own dedicated table. These additional tables can be joined back to the core `atomic.events` table, by joining on the `root_id` field in the self-describing event / custom entity table with the `event_id` in the `atomic.events` table, and the `root_tstamp` and `collector_tstamp` field in the respective tables. For users on other warehouses these will be additional columns in the `atomic.events` table.
+For Snowplow users running Amazon Redshift, each type of self-describing event and each type of entity will be stored in their own dedicated tables. These additional tables can be joined back to the core `atomic.events` table, by joining on the `root_id` field in the self-describing event / entity table with the `event_id` in the `atomic.events` table, and the `root_tstamp` and `collector_tstamp` field in the respective tables. For users on other warehouses these will be additional columns in the `atomic.events` table.
 
 ### Single table
 
@@ -79,7 +80,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | `txn_id`            | int  | Transaction ID set client-side, used to de-dupe records | No    | 421828                                 | Tracking (Deprecated)                                                                                                 |
 | `event_fingerprint` | text | Hash client-set event fields, used to de-dupe records                            | No    | AADCE520E20C2899F4CED228A79A3083       | [Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) |
 
-A complete list of event types is given [here](#Event-specific-fields).
+A complete list of event types is given [here](#event-specific-fields).
 
 #### Snowplow version fields
 
@@ -226,8 +227,8 @@ Snowplow currently supports the following event types:
 | [Page views](#page-views)                                 | 'page_view'                          |
 | [Page pings](#page-pings)                                 | 'page_ping'                          |
 | [E-commerce transactions](#e-commerce-transactions)       | 'transaction' and 'transaction_item' |
-| [Custom structured events](#custom-structured-events)     | 'struct'                             |
-| [Custom unstructured events](#custom-self-describing-unstructured-events) | 'unstruct'                           |
+| [Structured events](#structured-events)     | 'struct'                             |
+| [Self-describing events](#self-describing-events) | 'unstruct' (for legacy reasons)                           |
 
 Details of which fields are available for which events are given below. In some cases these events will store values in the `atomic.events` columns, which are listed below.
 
@@ -278,9 +279,9 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 
 \* Set exclusively by the [Currency conversion enrichment](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/index.md).
 
-#### Custom structured events
+#### Structured events
 
-If you wish to track an event that Snowplow does not recognize as a first class citizen (i.e. one of the events listed above), then you can track them using the generic 'custom structured events'. There are five fields that are available to store data related to custom events:
+[Structured events](/docs/understanding-your-pipeline/events/index.md#structured-events) allow you to send your own custom data, as long as it fits in the following 5 fields:
 
 | Field         | Type    | Description                                                                                    | Reqd? | Example                       |
 | ------------- | ------- | ---------------------------------------------------------------------------------------------- | ----- | ----------------------------- |
@@ -293,11 +294,9 @@ If you wish to track an event that Snowplow does not recognize as a first class 
 
 \* These fields are only required for `struct` events.
 
-#### Custom Self-Describing (unstructured) events
+#### Self-describing events
 
-Custom [self-describing (unstructured) events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#self-describing-events) are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
-
-When a user sends in a custom self-describing event, they do so as a JSON document of name-value properties that conforms to an Iglu schema defined for the event earlier.
+[Self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) can contain their own set of fields, defined by their [schema](/docs/understanding-your-pipeline/schemas/index.md).
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="rs/pg" label="Redshift/Postgres" default>
@@ -310,7 +309,7 @@ select
 from 
     atomic.events ev
 left join 
-    atomic.my_example_unstructured_event_table sde
+    atomic.my_example_unstruct_event_table sde
     on sde.root_id = ev.event_id and sde.root_tstamp = ev.collector_tstamp
 ```
 
@@ -323,7 +322,7 @@ You may need to take care of duplicate events as Snowplow uses an _at least once
 </TabItem>
 <TabItem value="bq" label="BigQuery">
 
-The unstructured event is not part of the standard `atomic.events` columns, it is instead a `RECORD` type column with the name of the schema and the full version number. The fields in this record will be determined by the JSON schema defined for the event in advance, converted to snake case. Users can query fields in the self-describing event by extracting them using 
+The self-describing event is not part of the standard `atomic.events` columns, it is instead a `RECORD` type column with the name of the schema and the full version number. The fields in this record will be determined by the JSON schema defined for the event in advance, converted to snake case. Users can query fields in the self-describing event by extracting them using 
 
 ```sql
 select
@@ -337,7 +336,7 @@ from
 </TabItem>
 <TabItem value="sf" label="Snowflake">
 
-The unstructured event is not part of the standard `atomic.events` columns, it is instead a `OBJECT` type column with the name of the schema and the major version number. The fields in this object will be set by the JSON schema defined for the event in advance, but are not a fixed structure like in other warehouses. Users can query fields in the self-describing event by extracting them using 
+The self-describing event is not part of the standard `atomic.events` columns, it is instead a `OBJECT` type column with the name of the schema and the major version number. The fields in this object will be set by the JSON schema defined for the event in advance, but are not a fixed structure like in other warehouses. Users can query fields in the self-describing event by extracting them using 
 
 ```sql
 select
@@ -351,12 +350,12 @@ from
 </TabItem>
 <TabItem value="db" label="Databricks">
 
-The unstructured event is not part of the standard `atomic.events` columns, it is instead a `struct` type column with the name of the schema and the major version number. The fields in this table will be determined by the JSON schema defined for the event in advance, converted to snake case. Users can query fields in the self-describing event by extracting them using 
+The self-describing event is not part of the standard `atomic.events` columns, it is instead a `struct` type column with the name of the schema and the major version number. The fields in this table will be determined by the JSON schema defined for the event in advance, converted to snake case. Users can query fields in the self-describing event by extracting them using 
 
 ```sql
 select
 ...
-unstruct_event_my_example_event_1_0_0.myCustomField,
+unstruct_event_my_example_event_1_0_0.my_custom_field,
 ...
 from 
     atomic.events
@@ -366,16 +365,16 @@ from
 </Tabs>
 
 
-#### Entities (Contexts)
+#### Entities
 
-Entities (Contexts) enable Snowplow users to define their own entities that are related to events, and fields that are related to each of those entities. For example, an online retailer may choose to define a `user` context, to store information about a particular user, which might include data points like the users Facebook ID, age, membership details etc. In addition, they may also define a `product` context, with product data e.g. SKU, name, created date, description, tags etc. These entities could be attached to a standard Snowplow event, or a Self-Describing event such as a `product_view` which tracks a specific user viewing a specific product (or set of products).
+[Entities](/docs/understanding-your-pipeline/entities/index.md) (also known as contexts) provide extra information about the event, such as data describing a product or a user.
 
-An event can have any number of custom entities attached. Each context is passed into Snowplow as a JSON document. Additionally, the [Snowplow Enrichment](/docs/enriching-your-data/index.md) process can derive additional contexts.
+An event can have any number of entities attached. The [Snowplow Enrichment](/docs/enriching-your-data/index.md) process can add extra entities.
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="rs/pg" label="Redshift/Postgres" default>
 
-Contexts are not part of the `atomic.events` table; instead, for users running on Redshift, Snowplow will shred each context JSON into a dedicated table in the `atomic` schema, making it much more efficient for analysts to query data passed in in any one of the contexts. Those contexts can be joined back to the core `atomic.events` table by the following, which is a one-to-one join (for a single record entity) or a one-to-many join (for a multi-record entity), assuming no duplicates.
+Entities are not part of the `atomic.events` table; instead, for users running on Redshift, Snowplow will split each entity JSON into a dedicated table in the `atomic` schema, making it much more efficient for analysts to query data passed in in any one of the entities. Those entities can be joined back to the core `atomic.events` table by the following, which is a one-to-one join (for a single record entity) or a one-to-many join (for a multi-record entity), assuming no duplicates.
 
 ```sql
 select 
@@ -396,7 +395,7 @@ You may need to take care of duplicate events as Snowplow uses an _at least once
 
 The method to apply de-duplication depends on if the entity is used as a single record or may have contained multiple records, as in the latter case it is entirely possible that two of the records are identical, making de-duplication a more complex task.
 
-For single record entity the de-duplication simple requires the use of a row number over `event_id` to get each unique event:
+For single record entity the de-duplication simply requires the use of a row number over `event_id` to get each unique event:
 
 ```sql
 with unique_events as (
@@ -469,7 +468,7 @@ where
 </TabItem>
 <TabItem value="bq" label="BigQuery">
 
-Contexts are not part of the standard `atomic.events` columns, it is instead a `REPATED` `RECORD` type column with the name of the schema and the full version number. The fields in this table will be determined by the JSON schema defined for the event in advance, converted to snake case. Users can query a single context's fields in the context by extracting them using 
+Entities are not part of the standard `atomic.events` columns, it is instead a `REPATED` `RECORD` type column with the name of the schema and the full version number. The fields in this table will be determined by the JSON schema defined for the entity in advance, converted to snake case. Users can query a single entity's fields by extracting them using 
 
 ```sql
 select
@@ -493,7 +492,7 @@ left join unnest(contexts_my_custom_context_1_0_0) as my_ent -- left join to avo
 </TabItem>
 <TabItem value="sf" label="Snowflake">
 
-Contexts are not part of the standard `atomic.events` columns, it is instead an `ARRAY` of `OBJECT`s type column with the name of the schema and the major version number. The fields in this table will be determined by the JSON schema defined for the event in advance. Users can query a single context's fields in the context by extracting them using 
+Entities are not part of the standard `atomic.events` columns, there is instead an `ARRAY` of `OBJECT`s type column with the name of the schema and the major version number. The fields in this table will be determined by the JSON schema defined for the entity in advance. Users can query a single entity's fields by extracting them using 
 
 ```sql
 select
@@ -509,7 +508,7 @@ or they can use a [`lateral flatten`](https://docs.snowflake.com/en/sql-referenc
 </TabItem>
 <TabItem value="db" label="Databricks">
 
-Contexts are not part of the standard `atomic.events` columns, it is instead an `array` of `struct`s type column with the name of the schema and the major version number. The fields in this table will be determined by the JSON schema defined for the event in advance, converted to snake case. Users can query a single context's fields in the context by extracting them using 
+Entities are not part of the standard `atomic.events` columns, there is instead an `array` of `struct`s type column with the name of the schema and the major version number. The fields in this table will be determined by the JSON schema defined for the entity in advance, converted to snake case. Users can query a single entity's fields by extracting them using 
 
 ```sql
 select
@@ -526,9 +525,9 @@ or they can use a [`LATERAL VIEW`](https://docs.databricks.com/sql/language-manu
 </Tabs>
 
 
-### Specific unstructured events and custom contexts
+### Out-of-the-box self-describing events and entities
 
-These are also a variety of unstructured events and custom contexts defined by Snowplow. You can find their schemas [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow).
+These are also a variety of self-describing events and entities defined by Snowplow. You can find their schemas [here](http://iglucentral.com/?q=com.snowplowanalytics).
 
 ## A note about storage data formats
 

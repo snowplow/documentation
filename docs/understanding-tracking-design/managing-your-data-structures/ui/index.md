@@ -10,11 +10,11 @@ sidebar_custom_props:
 
 ## Creating a new data structure
 
-To create a new Data Structure, first navigate to **Data Structures** in the menu and click the **'Create a Data Structure'** button.
+To create a new [Data Structure](/docs/understanding-your-pipeline/schemas/index.md), first navigate to **Data Structures** in the menu and click the **'Create a Data Structure'** button.
 
 ![](images/image-1.png)
 
-Now select whether you'd like to create [an Event or an Entity](/docs/understanding-tracking-design/understanding-events-entities/index.md). You can always change this selection at a later date.
+Now select whether you'd like to create an [Event](/docs/understanding-your-pipeline/events/index.md) or an [Entity](/docs/understanding-your-pipeline/entities/index.md). You can always change this selection at a later date.
 
 ![](images/image-2.png)
 

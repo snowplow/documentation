@@ -115,7 +115,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/enriching-your-data/configuring-enrichments/* /docs/enriching-your-data/managing-enrichments/ui/:splat 301
 /docs/enriching-your-data/configuring-enrichments-open-source/* /docs/enriching-your-data/managing-enrichments/terraform/:splat 301
 
-/docs/managing-data-quality/failed-events/understanding-failed-events/* /docs/managing-data-quality/understanding-failed-events/:splat 301
+/docs/managing-data-quality/failed-events/understanding-failed-events/* /docs/understanding-your-pipeline/failed-events/:splat 301
 
 /docs/managing-data-quality/failed-events/accessing-failed-events-in-file-storage/* /docs/managing-data-quality/exploring-failed-events/file-storage/:splat 301
 /docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/* /docs/managing-data-quality/exploring-failed-events/querying/:splat 301
@@ -139,3 +139,12 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/destinations/warehouses-and-lakes/s3/* /docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/:splat 301
 /docs/destinations/warehouses-and-lakes/postgres/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/:splat 301
 /docs/destinations/warehouses-and-lakes/rdb/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301
+
+/docs/understanding-your-pipeline/what-is-snowplow-mini/* /docs/pipeline-components-and-applications/snowplow-mini/overview/:splat 301
+/docs/understanding-tracking-design/understanding-events-entities/ /docs/understanding-your-pipeline/events/ 301
+/docs/understanding-tracking-design/understanding-schemas-and-validation/* /docs/understanding-your-pipeline/schemas/:splat 301
+/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/ /docs/understanding-your-pipeline/events/ 301
+/docs/understanding-tracking-design/predefined-vs-custom-entities/ /docs/understanding-your-pipeline/entities/ 301
+/docs/managing-data-quality/understanding-failed-events/* /docs/understanding-your-pipeline/failed-events/:splat 301
+/docs/understanding-your-pipeline/glossary-of-terms/ /docs/understanding-your-pipeline/ 301
+/docs/understanding-your-pipeline/architecture-overview-aws/* /docs/understanding-your-pipeline/architecture-overview/:splat 301

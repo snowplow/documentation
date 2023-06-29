@@ -4,7 +4,7 @@ date: "2022-03-24"
 sidebar_position: 30
 ---
 
-Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
+Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/understanding-your-pipeline/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
 In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features. 
 

@@ -8,7 +8,7 @@ sidebar_custom_props:
     - enterprise
 ---
 
-As well as managing data structures through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through the data structures API.
+As well as managing [data structures](/docs/understanding-your-pipeline/schemas/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through the data structures API.
 
 This functionality is key to automating any existing process you may have, including workflows in version control systems like GitHub.
 

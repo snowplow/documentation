@@ -100,13 +100,13 @@ As the custom `product_view` event passed through your pipeline, the Enrich appl
 <Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
-Your `atomic_bad` schema holds events that have failed to be processed by your pipeline. These are called [failed events](/docs/managing-data-quality/understanding-failed-events/index.md).
+Your `atomic_bad` schema holds events that have failed to be processed by your pipeline. These are called [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
 
 You will see in Postgres that you have a table called `atomic_bad.com_snowplowanalytics_snowplow_badrows_schema_violation_1.`
 
 :::info
 
-You might also see _adapter failure_ failed events in Postgres. Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. Find out more [here](/docs/managing-data-quality/understanding-failed-events/index.md#adaptor-failure).
+You might also see _adapter failure_ failed events in Postgres. Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. Find out more [here](/docs/understanding-your-pipeline/failed-events/index.md#adaptor-failure).
 
 :::
 
@@ -132,7 +132,7 @@ In the next section, we guide you through creating a custom schema so that your 
 
 :::note Schemas
 
-Learn more about [self-describing events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) and [schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), and the different types of failures [here](/docs/managing-data-quality/understanding-failed-events/index.md).
+Learn more about [self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [schemas](/docs/understanding-your-pipeline/schemas/index.md), and the different types of failures [here](/docs/understanding-your-pipeline/failed-events/index.md).
 
 :::
 

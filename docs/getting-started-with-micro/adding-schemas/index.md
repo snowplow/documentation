@@ -13,7 +13,7 @@ One of the benefits of using Snowplow is that you can design your own schemas fo
 
 :::tip
 
-See [our explanation](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) on what schemas are for and what they look like.
+See [our explanation](/docs/understanding-your-pipeline/schemas/index.md) on what schemas are for and what they look like.
 
 :::
 

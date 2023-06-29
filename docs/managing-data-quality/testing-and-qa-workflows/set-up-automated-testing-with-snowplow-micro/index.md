@@ -617,7 +617,7 @@ _Example call_:
 cy.eventsWithSchema( "iglu:com.snowplowanalytics.snowplow/submit_form/jsonschema/1-0-0", 5 );
 ```
 
-With this command you can look specifically for [unstructured events](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), which include both custom unstructured events and all other default Snowplow events that are of "unstruct" eventType (link-click, submit-form, ad-impression etc.)
+With this command you can look specifically for [self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events), which include both custom self-describing events and all other out-of-the-box Snowplow events that are of "unstruct" eventType (link-click, submit-form, ad-impression etc.)
 
 #### cy.eventsWithContexts
 

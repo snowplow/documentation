@@ -10,7 +10,7 @@ sidebar_custom_props:
 
 # Versioning in BDP Cloud
 
-If you are a BDP Cloud customer, you will have used our Data Structure Builder to create your custom Data Structures for your Events and Entities.
+If you are a BDP Cloud customer, you will have used our Data Structure Builder to create your custom [Data Structures](/docs/understanding-your-pipeline/schemas/index.md) for your [Events](/docs/understanding-your-pipeline/events/index.md) and [Entities](/docs/understanding-your-pipeline/entities/index.md).
 
 ![](../../managing-your-data-structures/builder/images/data-structures-2.png)
 

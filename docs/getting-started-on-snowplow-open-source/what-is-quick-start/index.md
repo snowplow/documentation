@@ -17,7 +17,7 @@ The data pipeline that you will have set up by the end of either guide will look
 After following a Quick Start guide, you will be able to: 
 
 - Collect granular, well-structured data with our suite of web, mobile and server side [SDKs](/docs/collecting-data/collecting-from-own-applications/index.md)
-- Create your own [custom events and entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md) 
+- Create your own [custom events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities)
 - Easily enable and disable our suite of [out-of-the-box enrichments](/docs/enriching-your-data/available-enrichments/index.md) 
 - Consume your rich data in real time from a choice of over 5 supported destinations (kinesis, pubsub, S3, Postgres or ElasticSearch)
 

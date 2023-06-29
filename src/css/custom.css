@@ -244,24 +244,6 @@ table h3 {
   line-height: 20px;
 }
 
-li.menu__list-item.new > div > a::after,
-li.menu__list-item.new > a::after {
-  content: 'new';
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 0.5em;
-  font-size: 0.6em;
-  font-weight: bold;
-  font-variant: small-caps;
-  border: 1px solid var(--ifm-color-primary);
-  background-color: var(--ifm-color-primary);
-  border-radius: 3px;
-  line-height: 1em;
-  padding: 2px;
-  color: var(--ifm-background-color);
-  transform: none;
-}
-
 li.enterprise > div > a::before,
 li.enterprise > a::before,
 li.cloud > div > a::before,
@@ -302,19 +284,12 @@ article.opensource > a > p::before {
   content: '🛠️';
 }
 
-a.menu__link,
-a.card,
-li.menu__list-item,
-li.menu__list-item > div {
+a.menu__link, a.card {
   position: relative;
 }
-li.enterprise > div:hover::after,
-li.enterprise li:hover::after,
-li.cloud > div:hover::after,
-li.cloud li:hover::after,
-li.opensource > div:hover::after,
-li.opensource li:hover::after,
-a.card:hover::after {
+.enterprise a:hover::after,
+.cloud a:hover::after,
+.opensource a:hover::after {
   position: absolute;
   left: 0;
   bottom: -30px;
@@ -327,32 +302,23 @@ a.card:hover::after {
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
   font-size: 14px;
   z-index: 9998;
-  padding: 5px 5px;
-  line-height: 1em;
-  font-weight: normal;
+  padding: 3px 5px;
 }
 a.card:hover::after {
+  top: 2rem;
   left: 2rem;
-  bottom: 2rem;
+  bottom: auto;
 }
-li.enterprise > div:hover::after,
-li.enterprise li:hover::after,
-article.enterprise a.card:hover::after {
+.enterprise a:hover::after {
   content: '🏭: For Snowplow BDP Enterprise customers';
 }
-li.cloud > div:hover::after,
-li.cloud li:hover::after,
-article.cloud a.card:hover::after {
+.cloud a:hover::after {
   content: '☁️: For Snowplow BDP Cloud customers';
 }
-li.enterprise.cloud > div:hover::after,
-li.enterprise.cloud li:hover::after,
-article.enterprise.cloud a.card:hover::after {
+.enterprise.cloud a:hover::after {
   content: '🏭 ☁️: For Snowplow BDP customers';
 }
-li.opensource > div:hover::after,
-li.opensource li:hover::after,
-article.opensource a.card:hover::after {
+.opensource a:hover::after {
   content: '🛠️: For Snowplow Open Source users';
 }
 

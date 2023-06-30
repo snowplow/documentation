@@ -6,7 +6,6 @@ sidebar_position: 1
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Diagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/_diagram.md';
 import CrossCloudDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/_cross-cloud-diagram.md';
 ```
 
@@ -14,7 +13,7 @@ We use the name RDB Loader (from "relational database") for a set of application
 
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="redshift" label="Redshift" default>
-    <Diagram batch="true" shredding="true" stream="Kinesis" bucket="S3" queue="SQS" format="JSON"  warehouse="Redshift"/>
+    <CrossCloudDiagram format="TSV" warehouse="Redshift"/>
   </TabItem>
   <TabItem value="databricks" label="Databricks">
     <CrossCloudDiagram format="Parquet" warehouse="Databricks"/>

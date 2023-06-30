@@ -26,7 +26,8 @@ flowchart LR
 sequenceDiagram
   loop
     Note over Transformer: Read a batch of events
-    Note over Transformer: Transform events to ${props.format}${props.shredding ? ' and split out self-describing events and entities' : ''}
+    Note over Transformer: Transform events to ${props.format}
+    ${props.shredding ? 'Note over Transformer: Split out self-describing events and entities' : ''}
     Note over Transformer: Write data to the ${props.bucket} bucket
     Transformer->>Loader: Notify the loader (via ${props.queue})
     Loader->>${props.warehouse}: Send SQL commands for loading

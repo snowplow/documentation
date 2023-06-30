@@ -17,7 +17,7 @@ To store your enriched Snowplow data, you will need to determine which loader to
 
 | Destination | Type | Loader application | Status |
 | --- | --- | --- |
-| Redshift<br/>_(including Redshift serverless)_ | Batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
+| Redshift<br/>_(including Redshift serverless)_ | Batching (recommended)<br/>or micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
 | Snowflake | Batching (recommended)<br/>or micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
 | Databricks | Batching (recommended)<br/>or micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
 | Postgres | Streaming | [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | Early release |

@@ -1,6 +1,7 @@
 ---
 title: "Storage options"
 sidebar_position: 1
+description: "An overview of the available options for storing Snowplow data in data warehouses and lakes"
 ---
 
 ```mdx-code-block
@@ -8,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-To store your enriched Snowplow data, you will need to determine which loader to set-up to ensure your enriched data reaches your data warehouse or lake. 
+Data warehouses and data lakes are primary destinations for Snowplow data. For other options, see the [destinations overview](/docs/understanding-your-pipeline/destinations/index.md) page.
 
 ### Data warehouse loaders
 

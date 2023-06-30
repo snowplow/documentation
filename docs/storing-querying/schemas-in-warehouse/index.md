@@ -2,6 +2,7 @@
 title: "How schema definitions translate to the warehouse"
 sidebar_label: "Schemas in the warehouse"
 sidebar_position: 4
+description: "A detailed explanation of how Snowplow data is stored in Redshift/Postgres, BigQuery, Snowflake and Databricks"
 ---
 
 ```mdx-code-block

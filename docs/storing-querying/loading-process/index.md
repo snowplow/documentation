@@ -2,6 +2,7 @@
 title: "Understanding the data loading process"
 sidebar_label: "How loading works"
 sidebar_position: 2
+description: "A high level view of how Snowplow data is loaded into Redshift, BigQuery, Snowflake and Databricks" 
 ---
 
 ```mdx-code-block

@@ -2,6 +2,7 @@
 title: "Querying Snowplow data"
 sidebar_label: "Querying data"
 sidebar_position: 3
+description: "An introduction to querying Snowplow data, including self-describing events and entities, as well tips for dealing with duplicate events"
 ---
 
 ```mdx-code-block
@@ -238,7 +239,7 @@ from
 
 ## Failed events
 
-See [Querying failed events](/docs/managing-data-quality/exploring-failed-events/querying/index.md).
+See [Exploring failed events](/docs/managing-data-quality/exploring-failed-events/index.md).
 
 ## Dealing with duplicates
 

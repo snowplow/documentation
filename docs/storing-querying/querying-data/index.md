@@ -83,7 +83,6 @@ In BigQuery it is as simple as using a `qualify` statement over your initial que
 ```sql
 select
     ...
-
 from atomic.events a
 qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
 ```
@@ -96,7 +95,6 @@ In Snowflake it is as simple as using a `qualify` statement over your initial qu
 ```sql
 select
     ...
-
 from atomic.events a
 qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
 ```
@@ -109,7 +107,6 @@ In Databricks it is as simple as using a `qualify` statement over your initial q
 ```sql
 select
     ...
-
 from atomic.events a
 qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
 ```

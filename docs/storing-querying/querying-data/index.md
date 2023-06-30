@@ -39,10 +39,10 @@ WHERE event_name = 'page_view'
 With large data volumes (read: any production system), you should always include a filter on the partition key (normally, `collector_tstamp`), for example:
 
 ```sql
-WHERE ... AND collector_tstamp > '2023-10-23'
+WHERE ... AND collector_tstamp between timestamp '2023-10-23' and timestamp '2023-11-23'
 ```
 
-This ensures that you read from the minimum number of partitions necessary, making the query run much faster.
+This ensures that you read from the minimum number of (micro-)partitions necessary, making the query run much faster and reducing compute cost (where applicable).
 
 :::
 
@@ -50,7 +50,72 @@ This ensures that you read from the minimum number of partitions necessary, maki
 
 In some cases, your data might contain duplicate events (full deduplication _before_ the data lands in the warehouse is optionally available for [Redshift, Snowflake and Databricks on AWS](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/deduplication/index.md)).
 
-TODO: tips for deduplication?
+While our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) deal with duplicates for you, there may be cases where you need to de-duplicate the events table yourself.
+
+<Tabs groupId="warehouse" queryString>
+<TabItem value="redshift/postgres" label="Redshift/Postgres" default>
+
+In Redshift/Postgres you must first generate a `row_number()` on your events and use this to de-duplicate, however we also recommend keeping track of the total number of duplicates you had to make it possible to accurately join any [entities](#entities).
+
+```sql
+with unique_events as (
+    select
+        ...
+        row_number() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index,
+        count(*) over (partition by a.event_id) as event_id_dedupe_count
+    from
+        atomic.events a
+)
+
+select
+    ...
+from
+    unique_events
+where 
+    event_id_dedupe_index = 1
+```
+
+</TabItem>
+<TabItem value="bigquery" label="BigQuery">
+
+In BigQuery it is as simple as using a `qualify` statement over your initial query:
+
+```sql
+select
+    ...
+
+from atomic.events a
+qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
+```
+
+</TabItem>
+<TabItem value="snowflake" label="Snowflake">
+
+In Snowflake it is as simple as using a `qualify` statement over your initial query:
+
+```sql
+select
+    ...
+
+from atomic.events a
+qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
+```
+
+</TabItem>
+<TabItem value="databricks" label="Databricks">
+
+In Databricks it is as simple as using a `qualify` statement over your initial query:
+
+```sql
+select
+    ...
+
+from atomic.events a
+qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
+```
+
+</TabItem>
+</Tabs>
 
 ## Self-describing events
 
@@ -201,7 +266,7 @@ with unique_events as (
     select
         ev.*,
         row_number() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index,
-    count(*) over (partition by a.event_id) as event_id_dedupe_count
+        count(*) over (partition by a.event_id) as event_id_dedupe_count
     from 
         atomic.events ev
 ),
@@ -227,7 +292,6 @@ where
 
 </details>
 
-
 :::
 
 </TabItem>
@@ -239,20 +303,20 @@ You can query a single entity’s fields by extracting them like so:
 
 ```sql
 select
-...
-contexts_my_custom_context_1_0_0[SAFE_OFFSET(0)].my_custom_field,
-...
+    ...
+    contexts_my_custom_context_1_0_0[SAFE_OFFSET(0)].my_custom_field as my_field,
+    ...
 from 
     atomic.events
 ```
 
-Alternatively, you can use the [`unnest`](https://cloud.google.com/bigquery/docs/reference/standard-sql/arrays#flattening_arrays) function to explode out the array:
+Alternatively, you can use the [`unnest`](https://cloud.google.com/bigquery/docs/reference/standard-sql/arrays#flattening_arrays) function to explode out the array into one row per entity value.
 
 ```sql
 select 
-  ...,
-  my_ent.a_property as my_prop
-from  atomic.events
+    ...,
+    my_ent.my_custom_field as my_field
+from atomic.events
 left join unnest(contexts_my_custom_context_1_0_0) as my_ent -- left join to avoid discarding events without values in this entity
 ```
 
@@ -265,14 +329,24 @@ You can query a single entity’s fields by extracting them like so:
 
 ```sql
 select
-...
-contexts_my_custom_context_1[0]:myCustomField::varchar,  -- field will be variant type so important to cast
-...
+    ...
+    contexts_my_custom_context_1[0]:myCustomField::varchar,  -- field will be variant type so important to cast
+    ...
 from 
     atomic.events
 ```
 
-Alternatively, you can use the [`lateral flatten`](https://docs.snowflake.com/en/sql-reference/functions/flatten) function to explode out the array.
+Alternatively, you can use the [`lateral flatten`](https://docs.snowflake.com/en/sql-reference/functions/flatten) function to explode out the array into one row per entity value.
+
+```sql
+select
+    ...
+    r.value:myCustomField::varchar,  -- field will be variant type so important to cast
+    ...
+from 
+    atomic.events  as t,
+    LATERAL FLATTEN(input => t.contexts_my_custom_context_1) r
+```
 
 </TabItem>
 <TabItem value="databricks" label="Databricks">
@@ -283,14 +357,24 @@ You can query a single entity’s fields by extracting them like so:
 
 ```sql
 select
-...
-contexts_my_custom_context_1[0].my_custom_field,
-...
+    ...
+    contexts_my_custom_context_1[0].my_custom_field,
+    ...
 from 
     atomic.events
 ```
 
-Alternatively, you can use the [`LATERAL VIEW`](https://docs.databricks.com/sql/language-manual/sql-ref-syntax-qry-select-lateral-view.html) function to explode out the array.
+Alternatively, you can use the [`LATERAL VIEW`](https://docs.databricks.com/sql/language-manual/sql-ref-syntax-qry-select-lateral-view.html) clause combined with [`EXPLODE`](https://docs.databricks.com/sql/language-manual/functions/explode.html) to explode out the array into one row per entity value.
+
+```sql
+select
+    ...
+    my_ent.my_custom_field,
+    ...
+from 
+    atomic.events
+    lateral view explode(contexts_my_custom_context_1) as my_ent
+```
 
 </TabItem>
 </Tabs>

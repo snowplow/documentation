@@ -63,7 +63,7 @@ select
 from 
     atomic.events ev
 left join 
-    atomic.my_example_unstruct_event_table sde
+    atomic.my_example_event_table sde
     on sde.root_id = ev.event_id and sde.root_tstamp = ev.collector_tstamp
 ```
 
@@ -141,8 +141,8 @@ select
 from 
     atomic.events ev
 left join -- assumes no duplicates, and will return all events regardless of if they have this entity
-    atomic.my_entity ctx
-    on ctx.root_id = ev.event_id and ctx.root_tstamp = ev.collector_tstamp
+    atomic.my_entity ent
+    on ent.root_id = ev.event_id and ent.root_tstamp = ev.collector_tstamp
 ```
 
 :::caution
@@ -187,7 +187,7 @@ You can query a single entity’s fields by extracting them like so:
 ```sql
 select
     ...
-    contexts_my_entity_1[0]:myCustomField::varchar,  -- field will be variant type so important to cast
+    contexts_my_entity_1[0]:myField::varchar,  -- field will be variant type so important to cast
     ...
 from 
     atomic.events
@@ -198,7 +198,7 @@ Alternatively, you can use the [`lateral flatten`](https://docs.snowflake.com/en
 ```sql
 select
     ...
-    r.value:myCustomField::varchar,  -- field will be variant type so important to cast
+    r.value:myField::varchar,  -- field will be variant type so important to cast
     ...
 from 
     atomic.events  as t,
@@ -283,10 +283,10 @@ with unique_events as (
 
 unique_my_entity as (
     select
-        ctx.*,
+        ent.*,
         row_number() over (partition by a.root_id order by a.root_tstamp) as my_entity_index
     from 
-        atomic.my_entity_1 ctx
+        atomic.my_entity_1 ent
 )
 
 select 
@@ -294,8 +294,8 @@ select
 from 
     unique_events u_ev
 left join 
-    unique_my_entity u_ctx
-    on u_ctx.root_id = u_ev.event_id and u_ctx.root_tstamp = u_ev.collector_tstamp and u_ctx.my_entity_index = 1
+    unique_my_entity u_ent
+    on u_ent.root_id = u_ev.event_id and u_ent.root_tstamp = u_ev.collector_tstamp and u_ent.my_entity_index = 1
 where
     u_ev.event_id_dedupe_index = 1
 ```
@@ -320,10 +320,10 @@ with unique_events as (
 
 unique_my_entity as (
     select
-        ctx.*,
+        ent.*,
         row_number() over (partition by a.root_id, a.root_tstamp, ... /*all columns listed here for your entity */ order by a.root_tstamp) as my_entity_index
     from 
-        atomic.my_entity_1 ctx
+        atomic.my_entity_1 ent
 )
 
 select 
@@ -331,8 +331,8 @@ select
 from 
     unique_events u_ev
 left join 
-    unique_my_entity u_ctx
-    on u_ctx.root_id = u_ev.event_id and u_ctx.root_tstamp = u_ev.collector_tstamp and mod(u_ctx.my_entity_index, u_ev.event_id_dedupe_count) = 0
+    unique_my_entity u_ent
+    on u_ent.root_id = u_ev.event_id and u_ent.root_tstamp = u_ev.collector_tstamp and mod(u_ent.my_entity_index, u_ev.event_id_dedupe_count) = 0
 where
     u_ev.event_id_dedupe_index = 1
 ```

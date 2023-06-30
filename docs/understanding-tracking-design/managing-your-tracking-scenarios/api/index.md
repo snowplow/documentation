@@ -231,7 +231,6 @@ graph LR
     style Published color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
     style Deprecated color:#89251F, fill:#FDF3F2, stroke:#89251F, stroke-width:1px;
     style Deleted fill:#D63A31, stroke:#000000, stroke-width:1px;
-    linkStyle default stroke-width:2px,fill:#F2F4F7,stroke:#633EB5,color:#633EB5
 
     Start(( )) -->|Create| Draft
     Draft -->|Publish| Published

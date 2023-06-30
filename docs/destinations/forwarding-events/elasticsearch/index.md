@@ -11,11 +11,54 @@ import CodeBlock from '@theme/CodeBlock';
 
 If you are using [Stream Enrich](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) to write enriched Snowplow events to one stream and bad events to another, you can use the Elasticsearch Loader to read events from either of those streams and write them to [Elasticsearch](http://www.elasticsearch.org/overview/). It works with either Kinesis or NSQ streams.
 
-:::tip Schemas in ElasticSearch
+## What the data looks like
 
-For more information on how events are stored in ElasticSearch, check the [mapping between Snowplow schemas and the corresponding ElasticSearch types](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md?warehouse=elastic).
+There are a few changes compared to the [standard structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md).
 
-:::
+### Boolean fields reformatted
+
+All boolean fields like `br_features_java` are normally either `"0"` or `"1"`. In Elasticsearch, these values are converted to `false` and `true`.
+
+### New `geo_location` field
+
+The `geo_latitude` and `geo_longitude` fields are combined into a single `geo_location` field of Elasticsearch's ["geo_point" type](https://www.elastic.co/guide/en/elasticsearch/reference/current/geo-point.html).
+
+### Self-describing events
+
+Each [self-describing event](/docs/understanding-your-pipeline/events/index.md#self-describing-events) gets its own field (same [naming rules](/docs/storing-querying/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). For example:
+
+```json
+{
+  "unstruct_com_snowplowanalytics_snowplow_link_click_1": {
+    "targetUrl": "http://snowplow.io",
+    "elementId": "action",
+    "elementClasses": [],
+    "elementTarget": ""
+  }
+}
+```
+
+### Entities
+
+Each [entity](/docs/understanding-your-pipeline/entities/index.md) type attached to the event gets its own field (same [naming rules](/docs/storing-querying/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). The field contains an array with the data for all entities of the given type. For example:
+
+```json
+{
+  "contexts_com_acme_user_1": [
+    {
+      "name": "Alice"
+    }
+  ],
+  "contexts_com_acme_product_1": [
+    {
+      "name": "Apple"
+    },
+    {
+      "name": "Orange"
+    }
+  ]
+}
+```
 
 ## Setup guide
 

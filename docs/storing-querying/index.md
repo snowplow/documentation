@@ -1,7 +1,6 @@
 ---
-title: "Warehouse and lake loaders"
-date: "2020-11-24"
-sidebar_position: 60
+title: "Storing and querying data"
+sidebar_position: 84
 ---
 
 ```mdx-code-block

@@ -1,6 +1,7 @@
 ---
-title: "Overview"
-sidebar_position: 1
+title: "Destinations"
+sidebar_position: 6
+description: "Different options for storing and forwarding Snowplow data"
 ---
 
 ![](images/usecasearch.png)
@@ -14,7 +15,7 @@ Here you will find an overview of what’s available.
 
 ## Data warehouses and lakes
 
-Snowplow is primarily built for data warehouse and lake destinations and supports Redshift, BigQuery, Snowflake and Databricks, as well as S3 and GCS, via the [various loaders](/docs/destinations/warehouses-and-lakes/index.md).
+Snowplow is primarily built for data warehouse and lake destinations and supports Redshift, BigQuery, Snowflake and Databricks, as well as S3 and GCS, via the [various loaders](/docs/storing-querying/storage-options/index.md).
 
 ## Additional destinations
 
@@ -22,9 +23,9 @@ Snowplow supports sending your data to additional destinations through a variety
 
 ### [No Processing Required (Event Forwarding)](/docs/destinations/forwarding-events/index.md)
 
-This is the route to take if you want to forwarding individual events to downstream destinations, ideal for use cases where platforms can make use of event data, such as "evented" marketing platforms.
+This is the route to take if you want to forward individual events to downstream destinations, ideal for use cases where platforms can make use of event data, such as "evented" marketing platforms.
 
-Snowplow recommends using **Google Tag Manager Server Side** to forward events to other platforms. This can be used in two configurations, either before or after the Snowplow pipeline, using the official Snowplow Client and Tags.
+Snowplow recommends using **Google Tag Manager Server Side** to forward events to other platforms. This can be used in [two configurations](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md), either before or after the Snowplow pipeline, using the official Snowplow Client and Tags.
 
 ### [Processing Required (Reverse ETL)](/docs/destinations/reverse-etl/index.md)
 

@@ -109,6 +109,12 @@ Collector payload format violation schema can be found [here](https://github.com
 
 This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a http request from a [3rd party webhook](/docs/collecting-data/collecting-data-from-third-parties/index.md).
 
+:::info
+
+Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline.
+
+:::
+
 <details>
 
 The failure could be:

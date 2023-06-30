@@ -11,13 +11,18 @@ To use Snowplow successfully, you need to have a good idea of:
 - What decisions you make based on those events
 - What you need to know about those events to make those decisions
 
-That's where **event dictionary** comes into play. It is a document that defines the universe of events that a company is interested in tracking. For each event, it defines:
+This is where creating a **Tracking Plan** comes into play. It is a comprehensive document that adds a semantic layer to the events your business is interested in tracking. For each event, it defines:
 
-- What the event is (often this might be illustrated e.g. with screenshots)
-- What data is captured when the event occurs, that represents the event. This is a data structure for the event.
-- Details on how the relevant Snowplow tracker has been setup to pass the event data into Snowplow.
+- A description of the event, often illustrated with screenshots.
+- The data that is captured with the event, and its structure.
+- The origin of the data, i.e. what platforms or apps this data is created by.
+- Other relevant information.
 
-We use a **schema registry** to store these definitions.
+:::info
+Please see [**Tracking Plan**](/docs/understanding-tracking-design/tracking-plans/index.md) for more information on how you can create one with Snowplow.
+:::
+
+Snowplow also uses a **schema registry** to store the definition of these data structures.
 
 > **Schema registry** provides a serving layer for your metadata. It provides a RESTful interface for storing and retrieving schemas. It stores a versioned history of all schemas and allows evolution of schemas.
 

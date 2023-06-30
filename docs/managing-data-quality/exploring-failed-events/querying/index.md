@@ -1,8 +1,7 @@
 ---
-title: "Querying failed events in Athena and BigQuery"
-date: "2020-04-30"
-sidebar_label: "Querying failed events"
-sidebar_position: 5000
+title: "Querying failed events in Athena or BigQuery"
+sidebar_label: "Using Athena or BigQuery"
+sidebar_position: 2
 ---
 
 ```mdx-code-block

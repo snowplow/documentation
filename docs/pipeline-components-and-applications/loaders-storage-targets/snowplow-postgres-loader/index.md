@@ -8,8 +8,13 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
+With Snowplow Postgres Loader you can load enriched data or [failed events](/docs/understanding-your-pipeline/failed-events/index.md) into PostgreSQL database.
 
-With Snowplow Postgres Loader you can load enriched data or plain self-describing JSONs into PostgreSQL database.
+:::danger Production use
+
+The Postgres loader is not recommended for production use, especially with large data volumes. We recommend using a fully-fledged data warehouse like Databricks, Snowflake, BigQuery or Redshift, together with a [respective loader](/docs/storing-querying/storage-options/index.md).
+
+:::
 
 :::tip Schemas in Postgres
 

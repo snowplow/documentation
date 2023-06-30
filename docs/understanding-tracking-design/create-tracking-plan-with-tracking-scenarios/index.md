@@ -1,11 +1,10 @@
 ---
 title: "Creating a Tracking Plan with Tracking Scenarios"
-sidebar_label: "Creating a Tracking Plan"
+sidebar_label: "Creating a Tracking Plan 🆕"
 sidebar_position: 25
 sidebar_custom_props:
   offerings:
     - enterprise
-  new: true
 ---
 
 As explained in [Introduction to Tracking Design](/docs/understanding-tracking-design/introduction-to-tracking-design/index.md), to use Snowplow successfully, you need to have a good idea of:
@@ -53,4 +52,6 @@ The event validation part allows you to set the instructions for tracking implem
 
 The [Entities](/docs/understanding-your-pipeline/entities/index.md) part allows you to declare which entities should be tracked with the event. You can also define whether the entity should be mandatory or optional, or whether more than one instance should be tracked with this event.
 
-Snowplow BDP provides both a UI and an API to manage your Tracking Scenarios. For information about managing Tracking Scenarios through the API, please see [Managing tracking scenarios with API](/docs/understanding-tracking-design/managing-your-tracking-scenarios/api/index.md).
+:::info
+Snowplow BDP provides both a UI and an API to manage your Tracking Scenarios. For information about managing Tracking Scenarios see [How to manage Tracking Scenario](/docs/understanding-tracking-design/managing-your-tracking-scenarios/index.md).
+:::

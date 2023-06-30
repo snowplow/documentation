@@ -1,9 +1,7 @@
 ---
 title: "Managing Tracking Scenarios in the Console"
-sidebar_label: "Using the UI"
+sidebar_label: "Using the UI 🆕"
 sidebar_position: 1
-sidebar_custom_props:
-  new: true
 ---
 
 

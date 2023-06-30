@@ -4,7 +4,6 @@ sidebar_position: 95
 sidebar_custom_props:
   offerings:
     - enterprise
-  new: true
 ---
 
 ```mdx-code-block

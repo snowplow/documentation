@@ -266,7 +266,7 @@ Because the column name for the self-describing event or entity includes the ful
 | `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1_2_0` |
 | `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2_0_0` |
 
-You can use [this macro](https://github.com/snowplow/dbt-snowplow-utils#combine_column_versions-source) to aggregate the data across multiple columns.
+If you are [modeling your data with dbt](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md), you can use [this macro](https://github.com/snowplow/dbt-snowplow-utils#combine_column_versions-source) to aggregate the data across multiple columns.
 
 :::info Breaking changes
 

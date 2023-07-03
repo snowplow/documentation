@@ -1,13 +1,13 @@
 ---
-title: "Creating a Tracking Plan with Tracking Scenarios"
-sidebar_label: "Creating a Tracking Plan 🆕"
+title: "Creating a tracking plan with tracking scenarios"
+sidebar_label: "Creating a tracking plan 🆕"
 sidebar_position: 25
 sidebar_custom_props:
   offerings:
     - enterprise
 ---
 
-As explained in [Introduction to Tracking Design](/docs/understanding-tracking-design/introduction-to-tracking-design/index.md), to use Snowplow successfully, you need to have a good idea of:
+As explained in [Introduction to tracking design](/docs/understanding-tracking-design/introduction-to-tracking-design/index.md), to use Snowplow successfully, you need to have a good idea of:
 - The events that matter to your business
 - The events that occur in your website, mobile application, server-side systems, factories, call centers, dispatch centers, etc.
 - The decisions you make based on those events

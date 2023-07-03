@@ -1,5 +1,5 @@
 ---
-title: "Managing Tracking Scenarios in the Console"
+title: "Managing tracking scenarios in the Console"
 sidebar_label: "Using the UI 🆕"
 sidebar_position: 1
 ---

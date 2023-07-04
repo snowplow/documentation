@@ -284,7 +284,8 @@ article.opensource > a > p::before {
   content: '🛠️';
 }
 
-a.menu__link, a.card {
+a.menu__link,
+a.card {
   position: relative;
 }
 .enterprise a:hover::after,
@@ -457,6 +458,7 @@ fieldset {
   padding-top: 8px;
 }
 
-.JsonValidator .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module{
+.JsonValidator
+  .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
   padding-top: 0px;
 }

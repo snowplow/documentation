@@ -3,44 +3,43 @@ name: generate-dbt-docs-pages
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 8 * * 1"
+    - cron: '0 8 * * 1'
 
 concurrency: dbt_docs_generation
-
 
 jobs:
   dbt_docs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0 # otherwise, you will fail to push refs to the destination repo
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # otherwise, you will fail to push refs to the destination repo
 
-    - name: Python setup
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.9.x"
-        cache: 'pip' # caching pip dependencies
+      - name: Python setup
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9.x'
+          cache: 'pip' # caching pip dependencies
 
-    - name: Update dbt docs
-      run: |
-        pip install -r utils/dbt_docs/requirements.txt
-        python utils/dbt_docs/generate_dbt_docs.py 'Bearer ${{ secrets.GITHUB_TOKEN }}'
-        python utils/dbt_docs/get_dbt_package_versions.py 'Bearer ${{ secrets.GITHUB_TOKEN }}'
+      - name: Update dbt docs
+        run: |
+          pip install -r utils/dbt_docs/requirements.txt
+          python utils/dbt_docs/generate_dbt_docs.py 'Bearer ${{ secrets.GITHUB_TOKEN }}'
+          python utils/dbt_docs/get_dbt_package_versions.py 'Bearer ${{ secrets.GITHUB_TOKEN }}'
 
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v4
-      with:
-        title: '[Auto-Generated] Update dbt reference docs'
-        branch: dbt-reference-docs
-        branch-suffix: random
-        delete-branch: true
-        reviewers: rlh1994
-        assignees: rlh1994
-        body: |
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          title: '[Auto-Generated] Update dbt reference docs'
+          branch: dbt-reference-docs
+          branch-suffix: random
+          delete-branch: true
+          reviewers: rlh1994
+          assignees: rlh1994
+          body: |
             Update auto-generated dbt docs. Note this is an auto-generated PR from a github action, see the action or utils/dbt_docs for further information.
-        add-paths: |
-          ./docs/modeling-your-data/modeling-your-data-with-dbt/reference/*.md
-          ./src/dbtVersions.js
+          add-paths: |
+            ./docs/modeling-your-data/modeling-your-data-with-dbt/reference/*.md
+            ./src/dbtVersions.js

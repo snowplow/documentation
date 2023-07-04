@@ -11,7 +11,7 @@ import ThemedImage from '@theme/ThemedImage';
 
 ## Introduction
 
-This guide is written to introduce you to the dashboard templates designed for visualising your derived tables produced by the [snowplow-web](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/) dbt package. It will show you how to get started and what each visualization view (= page / tab / dashboard depending on the tool) represents.
+This guide is written to introduce you to the dashboard templates designed for visualizing your derived tables produced by the [snowplow-web](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/) dbt package. It will show you how to get started and what each visualization view (= page / tab / dashboard depending on the tool) represents.
 
 ## Setup
 
@@ -82,7 +82,7 @@ On the Home dashboard you will see a parameter called 'Last_x_day' which can be 
 
 <TabItem value="Streamlit" label="Streamlit">
 
-### Preparing the enviroment to run the application
+### Preparing the environment to run the application
 
 There are a few ways you can run the application:
   1. [locally](#1-run-it-locally)
@@ -134,7 +134,7 @@ python -m streamlit run snowplow.py
 <summary>Option 2. Run it on Streamlit on Snowflake</summary>
 
 ##### Step 1: Create a Streamlit Application:
-  1. Log into Snowsight as a user with the CREATE STREAMLIT privilege.
+  1. Log into Snowsight as a user with the `CREATE STREAMLIT` privilege.
   2. In the left navigation bar, select Streamlit Apps.
   3. Select + Streamlit. The Create Streamlit App window opens.
   4. Enter a name for your app.
@@ -177,11 +177,11 @@ Follow the instruction on [https://streamlit.io/cloud](https://streamlit.io/clou
 
 #### Time filters
 
-By default the app is configured to always retrieve the last 7 days data. Users are also able to modify the start and end date of this filter to modify this range at any point in time, which will rerun all queries and applies the filters to all visualisations.
+By default the app is configured to always retrieve the last 7 days data. Users are also able to modify the start and end date of this filter to modify this range at any point in time, which will rerun all queries and applies the filters to all visualizations.
 
 ## App_id filters
 
-Users could also filter on app_ids. To change the default two items, replace appid1 and appid2:
+Users could also filter on app_ids. To change the default two items, replace `appid1` and `appid2`:
 
     app_id1 = st.text_input("App ID:", key = 'appid1')
     app_id2 = st.text_input("App ID:", key = 'appid2')
@@ -353,7 +353,7 @@ Similarly an `exit point` is the last page URL within a session.
 
 The **Page Analytics** view is aimed at giving insight into how the visitors interact with your web page.
 
-The `bounce rate` visualisation is essentially about the inverse of engagement rate, it shows the ratio of non-engaged sessions over the total sessions.
+The `bounce rate` visualization is essentially about the inverse of engagement rate, it shows the ratio of non-engaged sessions over the total sessions.
 
 There is also a pivot heat map called the `Entrance vs exit points` which show the top 10 most visited first pages based on total session_id count and displays the total sessions where the session ended (from the same top 10 pages only).
 

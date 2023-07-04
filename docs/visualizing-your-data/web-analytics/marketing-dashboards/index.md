@@ -1,19 +1,38 @@
 ---
-title: "Marketing Dashboard Templates (v1)"
-date: '2023-06-01'
+title: "Marketing Dashboards"
 sidebar_position: 0
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
+import { SnowplowIcon } from '@site/src/components/SnowplowIcon'
+import Admonition from '@theme/Admonition'
 ```
+
+<Admonition
+  icon={SnowplowIcon()}
+  title="Snowplow Digital Analytics, Powered By Snowflake"
+  type="tip"
+>
+  For access to the templates, and a walkthrough of all the features, please book a demo of our <a href="https://snowplow.io/digital-analytics/">Snowplow Digital Analytics</a> solution.
+  <br />
+  <a className="snwpl-nav-button" href="https://snowplow.io/digital-analytics/" target='_blank'>
+    👉 Take me there! 👈
+  </a>
+</Admonition>
 
 ## Introduction
 
-This guide is written to introduce you to the dashboard templates designed for visualizing your derived tables produced by the [snowplow-web](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/) dbt package. It will show you how to get started and what each visualization view (= page / tab / dashboard depending on the tool) represents.
+This guide is written to introduce you to the dashboard templates designed for visualizing your derived tables produced by the [snowplow-web](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/) dbt package. It will show you how to get started and what each visualization view represents.
 
-## Setup
+:::info
+
+Each tool has it's own definition of what defines a view, page, tab, dashboard etc. We will use these terms interchangably throughout.
+
+:::
+
+<!-- ## Setup
 
 Pick your preferred BI tool and access the templates here:
 
@@ -194,7 +213,7 @@ Users could also filter on app_ids. To change the default two items, replace `ap
 
 </TabItem>
 
-</Tabs>
+</Tabs> -->
 
 ## Dashboards
 

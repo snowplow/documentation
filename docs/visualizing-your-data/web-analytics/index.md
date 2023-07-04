@@ -1,5 +1,5 @@
 ---
-title: "Snowplow Web"
+title: "Web Analytics"
 ---
 
 ```mdx-code-block

@@ -1,6 +1,7 @@
 ---
 title: "Marketing Dashboards"
 sidebar_position: 0
+description: "Marketing Dashboard Screens from Snowplow Digital Analytics"
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

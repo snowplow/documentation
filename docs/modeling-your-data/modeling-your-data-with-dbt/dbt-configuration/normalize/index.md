@@ -101,7 +101,7 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 ```mdx-code-block
 import { dump } from 'js-yaml';
 // normlaize is currently a subset of web so can use those variables and filter with the groups list
-import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator';
+import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator/dbtWeb.js';
 import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
 
 export const GROUPS = [

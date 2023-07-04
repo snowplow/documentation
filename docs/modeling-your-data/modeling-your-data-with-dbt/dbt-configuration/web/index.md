@@ -149,13 +149,14 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 
 ```mdx-code-block
 import { dump } from 'js-yaml';
-import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator';
+import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator/dbtWeb.js';
 import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
 
 export const GROUPS = [
   { title: "Warehouse and tracker", fields: ["snowplow__atomic_schema",
                                             "snowplow__database",
                                             "snowplow__dev_target_name",
+                                            "snowplow__events_table",
                                             "snowplow__heartbeat",
                                             "snowplow__min_visit_length",
                                             "snowplow__sessions_table"] },

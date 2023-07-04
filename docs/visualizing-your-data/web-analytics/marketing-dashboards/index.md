@@ -28,7 +28,7 @@ This guide is written to introduce you to the dashboard templates designed for v
 
 :::info
 
-Each tool has it's own definition of what defines a view, page, tab, dashboard etc. We will use these terms interchangably throughout.
+Each tool has it's own definition of what defines a view, page, tab, dashboard etc. We will use these terms interchangeably throughout.
 
 :::
 

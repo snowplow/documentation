@@ -58,7 +58,7 @@ export const dbtSnowplowEcommerceConfigSchema = {
     },
     snowplow__ecommerce_event_names: {
       type: 'array',
-      minItems: 1,
+      minItems: 0,
       title: 'E-Commerce Event Names',
       items: { type: 'string' },
       description: '> Click the plus sign to add a new entry',

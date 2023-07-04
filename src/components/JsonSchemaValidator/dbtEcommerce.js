@@ -8,7 +8,7 @@ export const dbtSnowplowEcommerceConfigSchema = {
     },
     snowplow__categories_separator: {
       type: 'string',
-      title: 'Database',
+      title: 'Categories Separator',
       length: 1,
       description:
         'Separator used to split out your subcategories from your main subcategory',
@@ -37,7 +37,6 @@ export const dbtSnowplowEcommerceConfigSchema = {
       description:
         'Index of the checkout step which represents a completed transaction',
     },
-
     snowplow__allow_refresh: {
       type: 'boolean',
       title: 'Allow Refresh',
@@ -90,19 +89,18 @@ export const dbtSnowplowEcommerceConfigSchema = {
       title: 'Start Date',
       description:
         'The date to start processing events from in the package on first run or a full refresh, based on `collector_tstamp`',
-      snowplow__upsert_lookback_days: {
-        type: 'number',
-        minimum: 0,
-        title: 'Upsert Lookback Days',
-        description:
-          'Number of days to look back over the incremental derived tables during the upsert',
-      },
+    },
+    snowplow__upsert_lookback_days: {
+      type: 'number',
+      minimum: 0,
+      title: 'Upsert Lookback Days',
+      description:
+        'Number of days to look back over the incremental derived tables during the upsert',
     },
     snowplow__use_product_quantity: {
       type: 'boolean',
       title: 'Use Product Quantity?',
     },
-
     snowplow__app_id: {
       type: 'array',
       description: '> Click the plus sign to add a new entry',
@@ -134,7 +132,6 @@ export const dbtSnowplowEcommerceConfigSchema = {
       type: 'boolean',
       title: 'Disable User Context',
     },
-
     snowplow__databricks_catalog: {
       type: 'string',
       title: '(Databricks) Catalog',
@@ -146,7 +143,7 @@ export const dbtSnowplowEcommerceConfigSchema = {
     },
     snowplow__context_ecommerce_checkout_step: {
       type: 'string',
-      title: '(Redshift) E-Commerce Checkout Context Table',
+      title: '(Redshift) E-Commerce Checkout StepContext Table',
     },
     snowplow__context_ecommerce_page: {
       type: 'string',
@@ -161,11 +158,11 @@ export const dbtSnowplowEcommerceConfigSchema = {
       title: '(Redshift) E-Commerce Cart Context Table',
     },
     snowplow__context_web_page: {
-      type: 'boolean',
+      type: 'string',
       title: '(Redshift) Web Page Context Table',
     },
     snowplow__context_ecommerce_product: {
-      type: 'boolean',
+      type: 'string',
       title: '(Redshift) E-Commerce Product Context Table',
       snowplow__sde_ecommerce_action: {
         type: 'string',

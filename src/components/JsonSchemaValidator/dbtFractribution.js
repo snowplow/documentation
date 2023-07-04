@@ -114,6 +114,7 @@ export const dbtSnowplowFractributionConfigSchema = {
     snowplow__attribution_model_for_snowpark: {
       type: 'string',
       title: '(Snowflake) Attribution Model type',
+      enum: ['shapley', 'first_touch', 'last_touch', 'position_based', 'linear']
     },
   },
 }

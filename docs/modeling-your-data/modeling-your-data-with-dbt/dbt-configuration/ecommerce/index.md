@@ -168,7 +168,7 @@ export const GROUPS = [
                                           "snowplow__upsert_lookback_days",
                                           "snowplow__use_product_quantity"] },
   { title: "Contexts, Filters, and Logs", fields: ["snowplow__app_id",
-                                                  "snowplow__disable_ecommerce_cartst",
+                                                  "snowplow__disable_ecommerce_carts",
                                                   "snowplow__disable_ecommerce_checkouts",
                                                   "snowplow__disable_ecommerce_page_context",
                                                   "snowplow__disable_ecommerce_products",

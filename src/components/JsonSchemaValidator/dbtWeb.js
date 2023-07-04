@@ -40,7 +40,7 @@ export const dbtSnowplowWebConfigSchema = {
       type: 'string',
       title: 'Sessions Table',
       description:
-        "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref('snowplow_web_sessions_custom') }}",
+        'The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref("snowplow_web_sessions_custom") }}',
     },
     snowplow__allow_refresh: {
       type: 'boolean',
@@ -99,6 +99,7 @@ export const dbtSnowplowWebConfigSchema = {
     snowplow__cwv_percentile: {
       type: 'number',
       minimum: 0,
+      maximum: 100,
       title: 'CWV Percentile',
       description:
         'The percentile that the web vitals measurements that are produced for all page views (if enabled)',
@@ -219,7 +220,7 @@ export const dbtSnowplowWebConfigSchema = {
     },
     snowplow__consent_cmp_visible: {
       type: 'string',
-      title: '(Redshift) CMP visible Context Table',
+      title: '(Redshift) CMP Visible Context Table',
     },
     snowplow__consent_preferences: {
       type: 'string',

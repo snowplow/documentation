@@ -1,5 +1,5 @@
 ---
-title: Visualizing your data
+title: 🆕 Visualizing your data
 sidebar_position: 112
 ---
 

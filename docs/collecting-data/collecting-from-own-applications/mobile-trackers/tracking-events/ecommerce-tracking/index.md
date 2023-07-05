@@ -10,8 +10,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 :::note
-Snowplow ecommerce tracking is currently available for Android (and web) only. Stay tuned for the iOS release.
-
 With the addition of these Snowplow ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events.
 :::
 
@@ -33,12 +31,13 @@ Coming soon!
 
 ```kotlin
 val tracker = Snowplow.createTracker(
-        applicationContext, // Android context
-        "appTracker", // namespace
-        "https://snowplow-collector-url.com" // Event collector URL
-    )
+    context = applicationContext, // Android context
+    namespace = "appTracker",
+    endpoint = "https://snowplow-collector-url.com" // Event collector URL
+)
 
-val event = ProductViewEvent(ProductEntity(id = "productId", 
+val event = ProductViewEvent(ProductEntity(
+  id = "productId", 
   category = "category", 
   currency = "GBP", 
   price = 100
@@ -356,7 +355,7 @@ tracker.track(event);
 
 ### CheckoutStep
 
-Track the completion of a step in the checkout funnel, along with common checkout properties such as payment method or coupon code.
+Track the completion of a step in the checkout funnel, along with common checkout properties such as payment method or coupon code. See the API docs for the full details ([Android](https://snowplow.github.io/snowplow-android-tracker/), [iOS](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/snowplow/)).
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -673,60 +672,8 @@ The promotion entity is used for `PromotionView` and `PromotionClick` events.
 Use these APIs to add ecommerce context information to every subsequent event tracked.
 
 :::note
-These entities will be added to **all** events, not just ecommerce ones.
+These entities will be added to **all** events, not just ecommerce ones. This is for consistency with entities in the JavaScript tracker.
 :::
-
-### EcommerceUser entity
-
-To set an Ecommerce User entity you can use the `setEcommerceUser` method with the following attributes:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-Coming soon!
-
-  </TabItem>
-  <TabItem value="android" label="Android (Kotlin)">
-
-```kotlin
-Snowplow.defaultTracker?.ecommerce.setEcommerceUser("userId12345")
-
-// setting EcommerceUser again will replace the original entity
-Snowplow.defaultTracker?.ecommerce.setEcommerceUser("userId67890")
-
-// remove the saved properties and stop the User entity being added
-Snowplow.defaultTracker?.ecommerce.removeEcommerceUser()
-```
-
-  </TabItem>
-  <TabItem value="android-java" label="Android (Java)">
-
-```java
-Snowplow.getDefaultTracker().getEcommerce().setEcommerceUser("userId12345");
-
-// setting ScreenType again will replace the original entity
-Snowplow.getDefaultTracker().getEcommerce().setEcommerceUser("userId67890");
-
-// remove the saved properties and stop the Page entity being added
-Snowplow.getDefaultTracker().getEcommerce().removeEcommerceUser();
-```
-
-  </TabItem>
-</Tabs>
-
-<details>
-    <summary>User entity properties</summary>
-
-| Request Key | Required | Type/Format | Description                  |
-|-------------|----------|-------------|------------------------------|
-| id          | Y        | string      | The unique user identifier.  |
-| isGuest     | N        | boolean     | Whether the user is a guest. |
-| email       | N        | string      | User email address.          |
-
-</details>
-
-*Schema:*
-`iglu:com.snowplowanalytics.snowplow.ecommerce/user/jsonschema/1-0-0`.
 
 ### EcommerceScreen (Page) entity
 
@@ -734,7 +681,9 @@ Snowplow.getDefaultTracker().getEcommerce().removeEcommerceUser();
 The `setEcommerceScreen` method adds a `Page` (rather than `Screen`) entity to all events, for consistency with web tracking.
 :::
 
-To set a Page entity you can use the `setScreenType` method:
+The Ecommerce Screen/Page entity helps in grouping insights by screen/page type, e.g. Product description, Product list, Homepage.
+
+To set a Screen/Page entity you can use the `setEcommerceScreen` method:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -745,10 +694,12 @@ Coming soon!
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-Snowplow.defaultTracker?.ecommerce.setEcommerceScreen("demo_app_screen")
+val entity = EcommScreenEntity(type = "demo_app_screen")
+Snowplow.defaultTracker?.ecommerce.setEcommerceScreen(entity)
 
 // setting EcommerceScreen again will replace the original entity
-Snowplow.defaultTracker?.ecommerce.setEcommerceScreen("product_list", "EN-GB", "UK")
+val newEntity = EcommScreenEntity(type = "product_list", language = "EN-GB", locale = "UK")
+Snowplow.defaultTracker?.ecommerce.setEcommerceScreen(newEntity)
 
 // remove the saved properties and stop the Page entity being added
 Snowplow.defaultTracker?.ecommerce.removeEcommerceScreen()
@@ -758,10 +709,18 @@ Snowplow.defaultTracker?.ecommerce.removeEcommerceScreen()
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-Snowplow.getDefaultTracker().getEcommerce().setEcommerceScreen("demo_app_screen");
+EcommScreenEntity entity = new EcommScreenEntity(
+  "demo_app_screen" // type
+)
+Snowplow.getDefaultTracker().getEcommerce().setEcommerceScreen(entity);
 
 // setting EcommerceScreen again will replace the original entity
-Snowplow.getDefaultTracker().getEcommerce().setEcommerceScreen("product_list", "EN-GB", "UK");
+EcommScreenEntity newEntity = new EcommScreenEntity(
+  "product_list", // type
+  "EN-GB", // language
+  "UK" // locale
+)
+Snowplow.getDefaultTracker().getEcommerce().setEcommerceScreen(newEntity);
 
 // remove the saved properties and stop the Page entity being added
 Snowplow.getDefaultTracker().getEcommerce().removeEcommerceScreen();
@@ -783,3 +742,68 @@ Snowplow.getDefaultTracker().getEcommerce().removeEcommerceScreen();
 
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.ecommerce/page/jsonschema/1-0-0`.
+
+### Ecommerce User entity
+
+The Ecommerce User entity helps in modeling guest/non-guest account transactions.
+
+To set an Ecommerce User entity you can use the `setEcommerceUser` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+Coming soon!
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val entity = EcommUserEntity(id = "userId12345", isGuest = true)
+Snowplow.defaultTracker?.ecommerce.setEcommerceUser(entity)
+
+// setting EcommerceUser again will replace the original entity
+val newEntity = EcommUserEntity(id = "userId12345", isGuest = false, email = "email@email.com")
+Snowplow.defaultTracker?.ecommerce.setEcommerceUser(newEntity)
+
+// remove the saved properties and stop the User entity being added
+Snowplow.defaultTracker?.ecommerce.removeEcommerceUser()
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+EcommUserEntity entity = new EcommUserEntity(
+  "userId12345", // id
+  true // isGuest
+)
+Snowplow.getDefaultTracker().getEcommerce().setEcommerceUser(entity);
+
+// setting ScreenType again will replace the original entity
+EcommUserEntity newEntity = new EcommUserEntity(
+  "userId12345", // id
+  false, // isGuest
+  "email@email.com" // email
+)
+Snowplow.getDefaultTracker().getEcommerce().setEcommerceUser(newEntity);
+
+// remove the saved properties and stop the Page entity being added
+Snowplow.getDefaultTracker().getEcommerce().removeEcommerceUser();
+```
+
+  </TabItem>
+</Tabs>
+
+<details>
+    <summary>User entity properties</summary>
+
+| Request Key | Required | Type/Format | Description                  |
+|-------------|----------|-------------|------------------------------|
+| id          | Y        | string      | The unique user identifier.  |
+| isGuest     | N        | boolean     | Whether the user is a guest. |
+| email       | N        | string      | User email address.          |
+
+</details>
+
+*Schema:*
+`iglu:com.snowplowanalytics.snowplow.ecommerce/user/jsonschema/1-0-0`.

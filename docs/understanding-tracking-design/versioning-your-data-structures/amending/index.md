@@ -19,7 +19,7 @@ Sometimes, small mistakes creep into your schemas. For example, you might mark a
 
 It might be tempting to somehow “overwrite” the schema without updating the version. But this can bring several problems:
 * Events that were previously valid could become invalid against the new changes.
-* Your warehouse loader, which updates the table [according to the schema](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md), could get stuck if it’s not possible to cast the data in the existing table column to the new definition.
+* Your warehouse loader, which updates the table [according to the schema](/docs/storing-querying/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number).
 * Similarly, data models or other applications consuming the data downstream might not be able to deal with the changes.
 
 The best approach is to just create a new schema version and update your tracking code to use it. However, there are two alternatives for when it’s not ideal.
@@ -33,7 +33,9 @@ Before:
 ```mermaid
 flowchart LR
   style v102 fill:orange
-  v100("1-0-0") --> v101("1-0-1") --> v102("1-0-2\n(incorrect)")
+  %% ~~~ is not working for some reason
+  linkStyle default stroke:none,fill:none
+  v100("1-0-0") --- v101("1-0-1") --- v102("1-0-2\n(incorrect)")
 ```
 
 After:
@@ -41,7 +43,8 @@ After:
 ```mermaid
 flowchart LR
   style v102 fill:teal
-  v100("1-0-0") --> v101("1-0-1") --> v102("1-0-2\n(corrected)")
+  linkStyle default stroke:none,fill:none
+  v100("1-0-0") --- v101("1-0-1") --- v102("1-0-2\n(corrected)")
 ```
 
 We call this approach “patching”. To patch the schema, i.e. apply changes to it without updating the version:
@@ -64,26 +67,28 @@ If your events are failing in production because of an incorrect schema, you mig
 
 :::note
 
-You need to be on Enrich 3.8.0+ and Iglu Server 0.10.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/index.md) or [Snowplow Micro](/docs/getting-started-with-micro/index.md), you will need version 0.16.1+ or 1.7.1+ respectively.
+You need to be on Enrich 3.8.0+ and Iglu Server 0.10.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/overview/index.md) or [Snowplow Micro](/docs/getting-started-with-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
 
 :::
 
 Before:
 
 ```mermaid
-flowchart LR
+flowchart RL
   style v102 fill:orange
-  v100("1-0-0") --> v101("1-0-1") --> v102("1-0-2\n(incorrect)")
+  linkStyle default stroke:none,fill:none
+  v102("1-0-2\n(incorrect)") --- v101("1-0-1") --- v100("1-0-0")
 ```
 
 After:
 
 ```mermaid
-flowchart LR
+flowchart RL
   style v102 fill:orange
   style v103 fill:teal
-  v100("1-0-0") --> v101("1-0-1") --> v102("1-0-2\n(incorrect)")
-  v102 -- "superseded by" --> v103("1-0-3\n(corrected)")
+  v102("1-0-2\n(incorrect)") --- v101("1-0-1") --- v100("1-0-0")
+  v103("1-0-3\n(corrected)") -->|supersedes| v102
+  linkStyle 0,1 stroke:none,fill:none
 ```
 
 Here’s how this works, at a glance:
@@ -126,9 +131,29 @@ Let’s say we have a mobile application. We are sending certain events from thi
 
 </details>
 
-Later, we realize that when implementing tracking, we have mistakenly included an `altitude` field in the entity objects. Since `additionalProperties` is set to `false`, all events with the `altitude` field end up as [failed events](/docs/managing-data-quality/understanding-failed-events/index.md).
+Later, we realize that when implementing tracking, we have mistakenly included an `altitude` field in the entity objects:
 
-We can create new schema with version `1-0-3` that contains the `altitude` field and use this schema in the next version of the application. This would make the events valid. However, users will not update their application to the new version all at once. Events from the older version will continue to come, therefore there will still be failed events until all users start to use a newer version.
+<details>
+  <summary>Wrong tracking code (iOS)</summary>
+
+```swift
+let event = ScreenView(name: "Screen")
+event.entities.add(
+    SelfDescribingJson(schema: "iglu:com.acme/geolocation/jsonschema/1-0-2",
+        andDictionary: [
+            "latitude": 38.7223,
+            "longitude": 9.1393,
+            // highlight-next-line
+            "altitude": 20 // extra field not defined in the schema
+        ])!)
+tracker.track(event)
+```
+
+</details>
+
+Since `additionalProperties` is set to `false`, all events with the `altitude` field end up as [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
+
+We can create a new schema with version `1-0-3` that contains the `altitude` field and then use this schema in the next version of the application. This would make the events valid. However, users will not update their application to the new version all at once. Events from the older version will continue to come, therefore there will still be failed events until all users start to use a newer version.
 
 To solve this problem, we simply add the `$supersedes` definition to the new schema.
 
@@ -235,7 +260,7 @@ The `$supersededBy` field states that the schema version defined in the `self` p
 
 #### A schema version can only supersede previous versions
 
-For example, `1-0-2` can supersede `1-0-1`, but _can’t_ supersede `1-0-3`, `1-1-0`, or `2-0-0`. Definitions that break this rule will be ignored.
+For example, `1-0-2` can supersede `1-0-1`, but _can’t_ supersede `1-0-3`, `1-1-0`, or `2-0-0`. Iglu Server will reject a schema with a definition that breaks this rule.
 
 <table>
 <thead><tr><td align="center">✅ OK</td><td align="center">❌ Invalid</td></tr></thead>
@@ -244,16 +269,16 @@ For example, `1-0-2` can supersede `1-0-1`, but _can’t_ supersede `1-0-3`, `1-
 <td>
 
 ```mermaid
-flowchart LR
-  v101["1-0-1"] -- "superseded by" --> v102["1-0-2"]
+flowchart RL
+  v102("1-0-2") -->|supersedes| v101("1-0-1")
 ```
 
 </td>
 <td>
 
 ```mermaid
-flowchart RL
-  v101["2-0-0"] -- "superseded by" --> v102["1-0-2"]
+flowchart LR
+  v102("1-0-2") -->|supersedes| v200("2-0-0")
 ```
 
 </td>
@@ -266,10 +291,11 @@ flowchart RL
 Events referencing either of those previous versions will be treated as explained above.
 
 ```mermaid
-flowchart LR
-  v101["1-0-1"] ---> v102["1-0-2"]
-  v101["1-0-1"] -- "superseded by" --> v103["1-0-3"]
-  v102["1-0-2"] -- "superseded by" --> v103["1-0-3"]
+flowchart RL
+  v102("1-0-2") --- v101("1-0-1")
+  v103("1-0-3") -->|supersedes| v101
+  v103 -->|supersedes| v102
+  linkStyle 0 stroke:none,fill:none
 ```
 
 #### At any given moment, a schema version can only be superseded by a single schema version
@@ -285,18 +311,19 @@ For example, if you specify that `1-0-3` supersedes `1-0-2` and (later) that `1-
 <td>
 
 ```mermaid
-flowchart LR
-  v102["1-0-2"] -- "superseded by" --> v103["1-0-3"]
-  v102["1-0-2"] -- "superseded by" --> v104["1-0-4"]
+flowchart RL
+  v103("1-0-3") -->|supersedes| v102("1-0-2")
+  v104("1-0-4") --->|supersedes| v102
 ```
 
 </td>
 <td>
 
 ```mermaid
-flowchart LR
-  v102["1-0-2"] --> v103["1-0-3"] --> v104["1-0-4"]
-  v102["1-0-2"] -- "superseded by" --> v104["1-0-4"]
+flowchart RL
+  v104("1-0-4") --- v103("1-0-3") --- v102("1-0-2")
+  v104 -->|supersedes| v102
+  linkStyle 0,1 stroke:none,fill:none
 ```
 
 </td>
@@ -313,19 +340,20 @@ The same happens if you specify “chains”, e.g. `1-0-3` supersedes `1-0-2` an
 <td>
 
 ```mermaid
-flowchart LR
-  v102["1-0-2"] -- "superseded by" --> v103["1-0-3"]
-  v103["1-0-3"] -- "superseded by" --> v104["1-0-4"]
+flowchart RL
+  v103("1-0-3") -->|supersedes| v102("1-0-2")
+  v104("1-0-4") -->|supersedes| v103
 ```
 
 </td>
 <td>
 
 ```mermaid
-flowchart LR
-  v102["1-0-2"] --> v103["1-0-3"]
-  v102["1-0-2"] -- "superseded by" --> v104["1-0-4"]
-  v103["1-0-3"] -- "superseded by" --> v104["1-0-4"]
+flowchart RL
+  v103("1-0-3") --- v102("1-0-2")
+  v104("1-0-4") -->|supersedes| v102
+  v104 -->|supersedes| v103
+  linkStyle 0 stroke:none,fill:none
 ```
 
 </td>

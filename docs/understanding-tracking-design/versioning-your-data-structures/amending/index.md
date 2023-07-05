@@ -104,7 +104,7 @@ Here’s how this works, at a glance:
 Let’s say we have a mobile application. We are sending certain events from this application, and these events contain entities with following schema:
 
 <details>
-  <summary>Geolocation 1-0-2</summary>
+  <summary>Geolocation <code>1-0-2</code></summary>
 
 ```json
 {
@@ -158,7 +158,7 @@ We can create a new schema with version `1-0-3` that contains the `altitude` fie
 To solve this problem, we simply add the `$supersedes` definition to the new schema.
 
 <details>
-  <summary>Geolocation 1-0-3 with `$supersedes`</summary>
+  <summary>Geolocation <code>1-0-3</code> with <code>$supersedes</code></summary>
 
 ```json
 {
@@ -206,7 +206,7 @@ To record this fact, an extra entity will be added to all such events:
 Finally, if we [browse](/docs/understanding-tracking-design/managing-your-data-structures/index.md) schema version `1-0-2`, we will see that Iglu Server automatically keeps track of which schema supersedes which. Specifically, it will now contain a `$supersededBy` definition:
 
 <details>
-  <summary>Geolocation 1-0-2 with $supersededBy</summary>
+  <summary>Geolocation <code>1-0-2</code> with <code>$supersededBy</code></summary>
 
 ```json
 {
@@ -290,6 +290,12 @@ flowchart LR
 
 Events referencing either of those previous versions will be treated as explained above.
 
+<table>
+<thead><tr><td align="center">✅ OK</td></tr></thead>
+<tbody>
+<tr>
+<td>
+
 ```mermaid
 flowchart RL
   v102("1-0-2") --- v101("1-0-1")
@@ -297,6 +303,11 @@ flowchart RL
   v103 -->|supersedes| v102
   linkStyle 0 stroke:none,fill:none
 ```
+
+</td>
+</tr>
+</tbody>
+</table>
 
 #### At any given moment, a schema version can only be superseded by a single schema version
 

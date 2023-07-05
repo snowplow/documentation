@@ -44,24 +44,25 @@ export const dbtSnowplowFractributionConfigSchema = {
     },
     snowplow__path_transforms: {
       type: 'object',
+      description: 'Please select the path transformations, in the order to apply them. Some transformations have arguments that need specifying, others have no arguments but need a value of `null` if you wish to use this transformation.',
       properties: {
         exposure_path: {
-          type: 'string',
+          type: ['string', 'null'],
           title: 'Exposure path',
-          description: 'Consequitive same channels are reduced to one',
-          enum: ['null'],
+          description: 'Consecutive same channels are reduced to one',
+          enum: [null],
         },
         first_path: {
-          type: 'string',
+          type: ['string', 'null'],
           title: 'First Path',
-          description: 'First occurance of path is kept',
-          enum: ['null'],
+          description: 'First occurrence of path is kept',
+          enum: [null],
         },
         frequency_path: {
-          type: 'string',
+          type: ['string', 'null'],
           title: 'Frequency Path',
           description: 'Keeps count of channel frequency',
-          enum: ['null'],
+          enum: [null],
         },
         remove_if_last_and_not_all: {
           type: 'string',
@@ -73,22 +74,20 @@ export const dbtSnowplowFractributionConfigSchema = {
           type: 'string',
           title: 'Remove If Not All',
           description:
-            "Remove all occurances of the channel, if it isn't the only channel",
+            "Remove all occurrences of the channel, if it isn't the only channel",
         },
         unique_path: {
-          type: 'string',
+          type: ['string', 'null'],
           title: 'Unique Path',
           description: 'No change',
-          enum: ['null'],
+          enum: [null],
         },
       },
     },
-
     snowplow__use_snowplow_web_user_mapping_table: {
       type: 'boolean',
       title: 'Use Snowplow Web User Mapping Table?',
     },
-
     snowplow__channels_to_exclude: {
       type: 'array',
       description: '> Click the plus sign to add a new entry',

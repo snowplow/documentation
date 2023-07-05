@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
-:::note
+:::caution
 
 All variables in Snowplow packages start with `snowplow__` but we have removed these in the below table for brevity.
 
@@ -118,6 +118,6 @@ export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
 ```
 
 ## Config Generator
-You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require.
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
 
 <JsonApp schema={dbtSnowplowMediaPlayerConfigSchema} output={printYamlVariables} template={Template}/>

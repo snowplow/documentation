@@ -4,6 +4,11 @@ date: "2021-05-11"
 sidebar_position: 1
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 ## Overview
 
 Snowplow Mini is, in essence, the Snowplow real time stack inside of a single image. It is an easily-deployable, single instance version of Snowplow that serves three use cases:
@@ -24,33 +29,14 @@ Mini is available in 3 different sizes:
 - `xlarge` : Double the large image. Opensearch has `8g` heap size and Snowplow apps has `1.5g` heap size. Recommended machine RAM is `16g`.
 - `xxlarge` : Double the xlarge image. Opensearch has `16g` heap size and Snowplow apps has `3g` heap size. Recommended machine RAM is `32g`.
 
-This service is available as an EC2 image within the AWS Community AMIs in the following regions:
+This service is available as an EC2 image within the AWS Community AMIs in the following regions: `ap-northeast-1`, `ap-northeast-2`, `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`, `eu-central-1`, `eu-west-1`, `eu-west-2`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1` and `us-west-2`.
 
-Version 0.15.1 (Recommended)
+<p>Version {versions.snowplowMini} (recommended) comes with:</p>
 
-| region         | large / t2.large      | xlarge / t2.xlarge    | xxlarge / t2.xxlarge  |
-| ---            | ---                   | ---                   | ---                   |
-| ap-northeast-1 | ami-0158e0fab2c8e6e65 | ami-02c8bc6c0972ab714 | ami-0e9c2659cf4ffd908 |
-| ap-northeast-2 | ami-09a04e181a5de15bd | ami-0c407c2324287b631 | ami-0e16065214735e004 |
-| ap-south-1     | ami-05b4b3d599b1b0b2a | ami-08922b559d6d5632c | ami-01632963dacfbbfef |
-| ap-southeast-1 | ami-08e5e96ce93bef1d6 | ami-00ea092138a7cb44a | ami-0bc8f4fdd09686edb |
-| ap-southeast-2 | ami-0f352ba78d75f5772 | ami-069a0da7a93d82fd7 | ami-09d98c0b4d44572f3 |
-| ca-central-1   | ami-03887e17dd665d5e6 | ami-006bbee3099ee35ce | ami-0e978a3b52e4de249 |
-| eu-central-1   | ami-02c88c24820cdde69 | ami-022f28d1e79f2e920 | ami-0333d939f89191723 |
-| eu-west-1      | ami-09cf7e5acdbc9e8ad | ami-0923e4c14bf9f589e | ami-0e2fed0c9cbc61e30 |
-| eu-west-2      | ami-0178b420c5b099ea2 | ami-018549cc21741ad02 | ami-01bd2ff1da1016d4c |
-| sa-east-1      | ami-0f8ce9d7dfd9bfd80 | ami-0e02a0a64b0c1311f | ami-00bdbe42884c14148 |
-| us-east-1      | ami-0dcc21519a5e648a8 | ami-0452d8233d5246d86 | ami-01165ee3a5fa44a93 |
-| us-east-2      | ami-0244938cf238eedda | ami-03491c53c6505e179 | ami-08b98725a7ccf7628 |
-| us-west-1      | ami-0ae6e88dfc5986a3a | ami-0b54fd197b9a3361a | ami-041fc48a39008a9cc |
-| us-west-2      | ami-0c460da85e5c76945 | ami-03c0097dd40222c64 | ami-0462172d15246aa5f |
-
-The software stack installed:
-
-- Snowplow Stream Collector NSQ 2.8.2
-- Snowplow Stream Enrich NSQ 3.6.1
+- Snowplow Stream Collector NSQ 2.9.0
+- Snowplow Stream Enrich NSQ 3.8.0
 - Snowplow Elasticsearch Loader 2.0.8
-- Snowplow Iglu Server 0.8.7
+- Snowplow Iglu Server 0.10.0
 - Opensearch 2.4.0
 - Opensearch Dashboards 2.4.0
 - Postgresql 15.1
@@ -118,15 +104,16 @@ For OutBound you can leave the default to allow everything out.
 
 ## Choose AMI
 
-In the EC2 Console UI select the `Launch Instance` button then select the `Community AMIs` button. In the search bar enter `snowplow-mini-0.15.0` to find the needed AMI and then select it.
+<p>In the EC2 Console UI select the <em>Launch Instance</em> button then select the <em>Community AMIs</em> button. In the search bar enter <code>snowplow-mini-{versions.snowplowMini}</code> to find the needed AMI and then select it.</p>
 
 ## Choose Instance Type
 
-`0.15.1` AMI names explicitly specifies which instance type to use.
-
-- `0.15.1-large` needs `t2.large`
-- `0.15.1-xlarge` needs `t2.xlarge`
-- `0.15.1-xxlarge` needs `t2.2xlarge`
+AMI names explicitly specify which instance type to use.
+<ul>
+<li><code>{versions.snowplowMini}-large</code> needs <code>t2.large</code></li>
+<li><code>{versions.snowplowMini}-xlarge</code> needs <code>t2.xlarge</code></li>
+<li><code>{versions.snowplowMini}-xxlarge</code> needs <code>t2.2xlarge</code></li>
+</ul>
 
 ## Configure Instance
 

@@ -163,6 +163,7 @@ To solve this problem, we simply add the `$supersedes` definition to the new sch
 ```json
 {
     "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    // highlight-next-line
     "$supersedes": ["1-0-2"],
     "description": "Schema for client geolocation contexts",
     "self": {
@@ -211,6 +212,7 @@ Finally, if we [browse](/docs/understanding-tracking-design/managing-your-data-s
 ```json
 {
     "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    // highlight-next-line
     "$supersededBy": "1-0-3",
     "description": "Schema for client geolocation contexts",
     "self": {

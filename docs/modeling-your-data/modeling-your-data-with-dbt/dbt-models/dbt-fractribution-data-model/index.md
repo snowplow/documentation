@@ -132,9 +132,17 @@ For the python script only (for Docker you mount this as a volume at run time):
 - `redshift_port`: Redshift port (likely `5439`) 
 - `redshift_user`: Redshift user
 - `redshift_password`: Redshift password
+- `redshift_schema`: Redshift schema
 
 </TabItem>
 </Tabs>
+
+All warehouses require the following if you are using the docker container:
+
+- `conversion_window_start_date`: The start date of your conversion window, in the format of YYYY-MM-DD
+- `conversion_window_end_date`: The end date of your conversion window, in the format of YYYY-MM-DD
+- `attribution_model`: The [attribution model method](#attribution-models)
+- `warehouse`: The warehouse to run on, one of `snowflake`, `bigquery`, `redshift`, or `databricks`
 
 ​
 ### Differences to Google's Fractribution

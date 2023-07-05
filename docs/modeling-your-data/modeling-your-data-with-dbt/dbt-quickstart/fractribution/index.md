@@ -230,7 +230,8 @@ export redshift_host=redshift_host\
 export redshift_database=redshift_database\
 export redshift_port=redshift_port\
 export redshift_user=redshift_user\
-export redshift_password=redshift_password
+export redshift_password=redshift_password\
+export redshift_schema=redshift_schema
 ```
 
 </TabItem>
@@ -285,7 +286,7 @@ You can pull the latest docker image from Docker Hub: `docker pull snowplow/frac
 
 Add the necessary environment variables to an environment file, e.g. `configs.env`. The necessary variables will differ depending on the data warehouse you are using. The easiest way to determine the variables you need to set is to check the Dockerfile in the fractribution dbt package: `dbt-snowplow-fractribution/utils/Dockerfile`. Please note that in case of BigQuery, the `google_application_credentials` env var is not needed for Docker as you mount this as a volume at run time.
 
-Below is an example of the `config.env` file (set up for Snowflake). You do not need to specify the attribution model if using the default, `shapley`:
+Below is an example of the `config.env` file (set up for Snowflake). Note the last 4 variables are named the same across all warehouses. You do not need to specify the attribution model if using the default, `shapley`:
 ```
 snowflake_account=youraccount.ap-southeast-2
 snowflake_user=user

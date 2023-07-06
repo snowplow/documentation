@@ -70,6 +70,12 @@ For more flexibility, see [Advanced usage](/docs/getting-started-with-micro/adva
 
 ## Adding schemas directly to Micro
 
+:::note Limitations
+
+Currently, this method does not work for [marking schemas as superseded](/docs/understanding-tracking-design/versioning-your-data-structures/amending/index.md#marking-the-schema-as-superseded).
+
+:::
+
 Structure your schema file or files like so:
 
 ```

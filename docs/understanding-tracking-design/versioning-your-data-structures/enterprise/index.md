@@ -19,12 +19,6 @@ import Breaking from "../_breaking.md"
 <Breaking/>
 ```
 
-### Overwriting schemas
-
-Wherever possible we would advise always versioning the schema when making a change. However in cases where this isn't possible, Snowplow does allow you to overwrite a schema on your development environment, that is making a change and keeping the version the same.
-
-Overwriting in your Production environment is forbidden due to the technology that auto-adjusts your tables, so when you promote an overwritten version to the Production environment you are required to increase the version as Breaking or Non-Breaking.
-
 ### Incrementing the middle digit
 
 For particular workflows you may want to make use of the middle digital as part of your versioning strategy. For simplicity, the UI allows only breaking or non-breaking changes.

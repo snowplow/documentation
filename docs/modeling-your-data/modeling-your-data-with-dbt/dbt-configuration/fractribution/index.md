@@ -7,7 +7,7 @@ sidebar_position: 106
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
-:::note
+:::caution
 
 All variables in Snowplow packages start with `snowplow__` but we have removed these in the below table for brevity.
 
@@ -24,7 +24,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 ### Operation and logic
 | Variable Name                         | Description                                                                                                                                                                                                                                   | Default                   |
 | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- |
-| `conversion_window_start_date`        | The start date in UTC for the window of conversions to include                                                                                                                                                                                |                           |
+| `conversion_window_start_date`        | The start date in UTC for the window of conversions to include                                                                                                                                                                                |  `current_date()-31`                         |
 | `conversion_window_end_date`          | The end date in UTC for the window of conversions to include                                                                                                                                                                                  | `current_date()-1`        |
 | `path_lookback_days`                  | Restricts the model to marketing channels within this many days of the conversion (values of 30, 14 or 7 are recommended)                                                                                                                     | `30`                      |
 | `path_lookback_steps`                 | The limit for the number of marketing channels to look at before the conversion                                                                                                                                                               | `0` (unlimited)           |
@@ -43,10 +43,10 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>
 
-| Variable Name | Description                                                                                                                                                                    | Default        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- |
-| `run_python_script_in_snowpark`   | A flag for if you wish to run the python scripts using Snowpark. | `false` |
-| `attribution_model_for_snowpark`   | The attribution model to use for Snowpark running, one of `shapley`, `first_touch`, `last_touch`, `position_based`, `linear`. See the [package docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#attribution-models) for more information. | `shapley` |
+| Variable Name                    | Description                                                                                                                                                                                                                                                                                          | Default   |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `run_python_script_in_snowpark`  | A flag for if you wish to run the python scripts using Snowpark.                                                                                                                                                                                                                                     | `false`   |
+| `attribution_model_for_snowpark` | The attribution model to use when running in Snowpark; one of `shapley`, `first_touch`, `last_touch`, `position_based`, `linear`. See the [package docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#attribution-models) for more information. | `shapley` |
 
 </TabItem>
 </Tabs>
@@ -73,3 +73,42 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 
 ```
 <SchemaSetter output={printSchemaVariables}/>
+
+```mdx-code-block
+import { dump } from 'js-yaml';
+import { dbtSnowplowFractributionConfigSchema } from '@site/src/components/JsonSchemaValidator/dbtFractribution.js';
+import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
+
+export const GROUPS = [
+  { title: "Warehouse and tracker", fields: ["snowplow__page_views_source",
+                                            "snowplow__web_user_mapping_table",
+                                            "snowplow__conversions_source",] },
+  { title: "Operation and Logic", fields: ["snowplow__conversion_window_start_date",
+                                          "snowplow__conversion_window_end_date",
+                                          "snowplow__path_lookback_days",
+                                          "snowplow__path_lookback_steps",
+                                          "snowplow__path_transforms",
+                                          "snowplow__use_snowplow_web_user_mapping_table"] },
+  { title: "Contexts, Filters, and Logs", fields: ["snowplow__channels_to_exclude",
+                                                  "snowplow__conversion_hosts",
+                                                  "snowplow__consider_intrasession_channels"] },
+  { title: "Warehouse Specific", fields: ["snowplow__run_python_script_in_snowpark",
+                                          "snowplow__attribution_model_for_snowpark"] }
+];
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variables:</h4>
+    <CodeBlock language="yaml">{dump({vars: {"snowplow_fractribution": data}}, { flowLevel: 3 })}</CodeBlock>
+    </>
+  )
+}
+
+export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
+```
+
+## Config Generator
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
+
+<JsonApp schema={dbtSnowplowFractributionConfigSchema} output={printYamlVariables} template={Template}/>

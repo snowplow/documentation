@@ -12,12 +12,11 @@ import TabItem from '@theme/TabItem';
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
-:::note
+:::caution
 
 All variables in Snowplow packages start with `snowplow__` but we have removed these in the below table for brevity.
 
 :::
-
 
 ### Warehouse and tracker 
 | Variable Name                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Default            |
@@ -48,11 +47,11 @@ Redshift and Postgres use a [shredded](/docs/pipeline-components-and-application
 
 | Variable Name                           | Default                                                                           |
 | --------------------------------------- | --------------------------------------------------------------------------------- |
-| `snowplow__media_player_event_context`  | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_player_event_1') }}"` |
-| `snowplow__media_player_context`        | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_player_1') }}"`       |
-| `snowplow__youtube_context`             | `"{{ source('atomic', 'com_youtube_youtube_1') }}"`                               |
-| `snowplow__html5_media_element_context` | `"{{ source('atomic', 'org_whatwg_media_element_1') }}"`                          |
-| `snowplow__html5_video_element_context` | `"{{ source('atomic', 'org_whatwg_video_element_1') }}"`                          |
+| `media_player_event_context`  | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_player_event_1') }}"` |
+| `media_player_context`        | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_player_1') }}"`       |
+| `youtube_context`             | `"{{ source('atomic', 'com_youtube_youtube_1') }}"`                               |
+| `html5_media_element_context` | `"{{ source('atomic', 'org_whatwg_media_element_1') }}"`                          |
+| `html5_video_element_context` | `"{{ source('atomic', 'org_whatwg_video_element_1') }}"`                          |
 
 </TabItem>
 </Tabs>
@@ -84,3 +83,41 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 
 ```
 <SchemaSetter output={printSchemaVariables}/>
+
+```mdx-code-block
+import { dump } from 'js-yaml';
+import { dbtSnowplowMediaPlayerConfigSchema } from '@site/src/components/JsonSchemaValidator/dbtMediaPlayer.js';
+import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
+
+export const GROUPS = [
+  { title: "Warehouse and tracker", fields: ["snowplow__percent_progress_boundaries"] },
+  { title: "Operation and Logic", fields: ["snowplow__complete_play_rate",
+                                          "snowplow__max_media_pv_window",
+                                          "snowplow__valid_play_sec",
+                                          "snowplow__surrogate_key_treat_nulls_as_empty_strings"] },
+  { title: "Contexts, Filters, and Logs", fields: ["snowplow__enable_whatwg_media",
+                                                  "snowplow__enable_whatwg_video",
+                                                  "snowplow__enable_youtube"] },
+  { title: "Warehouse Specific", fields: ["snowplow__media_player_event_context",
+                                          "snowplow__media_player_context",
+                                          "snowplow__youtube_context",
+                                          "snowplow__html5_media_element_context",
+                                          "snowplow__html5_video_element_context"] }
+];
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variables:</h4>
+    <CodeBlock language="yaml">{dump({vars: {"snowplow_media_player": data}}, { flowLevel: 3 })}</CodeBlock>
+    </>
+  )
+}
+
+export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
+```
+
+## Config Generator
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
+
+<JsonApp schema={dbtSnowplowMediaPlayerConfigSchema} output={printYamlVariables} template={Template}/>

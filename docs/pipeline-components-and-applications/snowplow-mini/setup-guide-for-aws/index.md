@@ -104,7 +104,7 @@ For OutBound you can leave the default to allow everything out.
 
 ## Choose AMI
 
-<p>In the EC2 Console UI select the <em>Launch Instance</em> button then select the <em>Community AMIs</em> button. In the search bar enter <code>snowplow-mini-{versions.snowplowMini}</code> to find the needed AMI and then select it.</p>
+<p>In the EC2 Console UI select the <code>Launch Instance</code> button then select the <code>Community AMIs</code> button. In the search bar enter <code>snowplow-mini-{versions.snowplowMini}</code> to find the needed AMI and then select it.</p>
 
 ## Choose Instance Type
 

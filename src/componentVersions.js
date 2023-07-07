@@ -1,12 +1,12 @@
 export const versions = {
   // Trackers
-  androidTracker: '5.2.0',
+  androidTracker: '5.4.0',
   dotNetTracker: '1.2.1',
   cppTracker: '2.0.0',
   flutterTracker: '0.3.0',
   golangTracker: '3.0.0',
   googleAmpTracker: '1.0.3',
-  iosTracker: '5.2.0',
+  iosTracker: '5.4.0',
   javaTracker: '1.0.0',
   javaScriptTracker: '3.13.0',
   luaTracker: '0.2.0',

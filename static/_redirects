@@ -20,6 +20,7 @@
 /accelerators/snowplow_fractribution/* /accelerators/snowplow-fractribution/:splat 301
 
 
+/docs/collecting-data/collecting-from-own-applications/javascript-tracker/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/ 301  # http://bit.ly/sp-js linked in most of the web tracker artifacts
 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
 /docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
 /docs/collecting-data/collecting-from-own-applications/python-tracker/adding-extra-data-the-subject-class/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/adding-extra-data-the-subject-class/:splat 301

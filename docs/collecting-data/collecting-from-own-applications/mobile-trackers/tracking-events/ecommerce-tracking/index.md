@@ -23,9 +23,18 @@ Ecommerce events are tracked like normal Snowplow events. For example, tracking 
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
+```swift
+let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com")
 
-Coming soon!
-
+let product = ProductEntity(
+  id: "productId", 
+  category: "category", 
+  currency: "GBP", 
+  price: 100
+)
+let event = ProductViewEvent(product: product)
+let eventId = tracker.track(event)
+```
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
@@ -69,18 +78,20 @@ tracker.track(event);
 </Tabs>
 
 
-Add or update properties using setters. For example, adding data to a PromotionEvent: 
+Add or update properties using setters. For example, adding data to a PromotionEntity: 
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+let promotion = PromotionEntity(id: "promoId")
+promotion.name = "bogof"
+promotion.type = "popup"
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val promotion = PromotionEvent("promoId")
+val promotion = PromotionEntity(id = "promoId")
 promotion.name = "bogof"
 promotion.type = "popup"
 ```
@@ -89,7 +100,7 @@ promotion.type = "popup"
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-PromotionEvent promotion = new PromotionEvent("promoId");
+PromotionEvent promotion = new PromotionEntity("promoId");
 promotion.setName("bogof");
 promotion.setType("popup");
 ```
@@ -137,13 +148,23 @@ Tracking a visit to a details screen for a specific product.
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let product = ProductEntity(
+  id: "plow2", 
+  category: "snow.clearance.ploughs.large", 
+  currency: "NOK", 
+  price: 5000
+)
+let event = ProductViewEvent(product: product)
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val product = ProductEntity(id = "productId", category = "category", currency = "GBP", price = 100)
+val product = ProductEntity(id = "plow2", category = "snow.clearance.ploughs.large", currency = "NOK", price = 5000)
 val event = ProductViewEvent(product)
 
 tracker.track(event)
@@ -154,10 +175,10 @@ tracker.track(event)
 
 ```java
 ProductViewEvent event = new ProductViewEvent(new ProductEntity(
-  "productId", // id
-  "category",  // category
-  "GBP", // currency
-  100 // price
+  "plow2", // id
+  "snow.clearance.ploughs.large",  // category
+  "NOK", // currency
+  5000 // price
   )
 ); 
 
@@ -174,7 +195,13 @@ Tracking one or more products being added to a cart.
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let product = ProductEntity(id: "productId", category: "clothes/shirts", currency: "EUR", price: 100.50)
+let cart = CartEntity(totalValue: 200, currency: "EUR")
+let event = AddToCartEvent(products: [product], cart: cart)
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -224,7 +251,13 @@ Tracking one or more products being removed from a cart.
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let product = ProductEntity(id: "productId", category: "clothes/shirts", currency: "EUR", price: 100.50)
+let cart = CartEntity(totalValue: 200, currency: "EUR")
+let event = RemoveFromCartEvent(products: [product], cart: cart)
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -272,7 +305,12 @@ Track an impression of a list of products. You can optionally provide a name for
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let product = ProductEntity(id: "productId", category: "software", currency: "USD", price: 99.99)
+let event = ProductListViewEvent(products: [product], name: "snowplowProducts")
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -317,7 +355,12 @@ Track a specific product being selected from a list. You can optionally provide 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let product = ProductEntity(id: "productId", category: "software", currency: "USD", price: 99.99)
+let event = ProductListClickEvent(product: product, name: "snowplowProducts")
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -360,7 +403,11 @@ Track the completion of a step in the checkout funnel, along with common checkou
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let event = CheckoutStepEvent(step: 3, deliveryMethod: "next_day")
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -395,7 +442,17 @@ Track the completion of a purchase or transaction, along with common transaction
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let event = TransactionEvent(
+  transactionId: "id-123", 
+  revenue: 50000, 
+  currency: "JPY", 
+  paymentMethod: "debit", 
+  totalQuantity: 2
+)
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -435,7 +492,15 @@ Track a refund being requested for part of, or the entirety of, a transaction.
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let event = RefundEvent(
+  transactionId: "id-123", // use the transaction ID from the original Transaction event
+  refundAmount: 20000, 
+  currency: "JPY"
+)
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -471,7 +536,12 @@ Track an impression for any kind of internal promotion.
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let promotion = PromotionEntity(id: "promoId")
+let event = PromotionViewEvent(promotion: promotion)
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -503,7 +573,12 @@ Track an internal promotion being selected.
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let promotion = PromotionEntity(id: "promoId")
+let event = PromotionViewEvent(promotion: promotion)
+
+tracker.track(event)
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
@@ -688,17 +763,27 @@ To set a Screen/Page entity you can use the `setEcommerceScreen` method:
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let entity = EcommerceScreenEntity(type: "demo_app_screen")
+Snowplow.defaultTracker()?.ecommerce.setEcommerceScreen(entity)
+
+// setting EcommerceScreen again will replace the original entity
+let newEntity = EcommerceScreenEntity(type: "product_list", language: "EN-GB", locale: "UK")
+Snowplow.defaultTracker()?.ecommerce.setEcommerceScreen(newEntity)
+
+// remove the saved properties and stop the Page entity being added
+Snowplow.defaultTracker()?.ecommerce.removeEcommerceScreen()
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val entity = EcommScreenEntity(type = "demo_app_screen")
+val entity = EcommerceScreenEntity(type = "demo_app_screen")
 Snowplow.defaultTracker?.ecommerce.setEcommerceScreen(entity)
 
 // setting EcommerceScreen again will replace the original entity
-val newEntity = EcommScreenEntity(type = "product_list", language = "EN-GB", locale = "UK")
+val newEntity = EcommerceScreenEntity(type = "product_list", language = "EN-GB", locale = "UK")
 Snowplow.defaultTracker?.ecommerce.setEcommerceScreen(newEntity)
 
 // remove the saved properties and stop the Page entity being added
@@ -709,13 +794,13 @@ Snowplow.defaultTracker?.ecommerce.removeEcommerceScreen()
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-EcommScreenEntity entity = new EcommScreenEntity(
+EcommerceScreenEntity entity = new EcommerceScreenEntity(
   "demo_app_screen" // type
 )
 Snowplow.getDefaultTracker().getEcommerce().setEcommerceScreen(entity);
 
 // setting EcommerceScreen again will replace the original entity
-EcommScreenEntity newEntity = new EcommScreenEntity(
+EcommerceScreenEntity newEntity = new EcommerceScreenEntity(
   "product_list", // type
   "EN-GB", // language
   "UK" // locale
@@ -752,17 +837,27 @@ To set an Ecommerce User entity you can use the `setEcommerceUser` method with t
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-Coming soon!
+```swift
+let entity = EcommerceUserEntity(id: "userId12345", isGuest: true)
+Snowplow.defaultTracker()?.ecommerce.setEcommerceUser(entity)
+
+// setting EcommerceUser again will replace the original entity
+let newEntity = EcommerceUserEntity(id: "userId67890", isGuest: false, email: "email@email.com")
+Snowplow.defaultTracker()?.ecommerce.setEcommerceUser(newEntity)
+
+// remove the saved properties and stop the User entity being added
+Snowplow.defaultTracker()?.ecommerce.removeEcommerceUser()
+```
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val entity = EcommUserEntity(id = "userId12345", isGuest = true)
+val entity = EcommerceUserEntity(id = "userId12345", isGuest = true)
 Snowplow.defaultTracker?.ecommerce.setEcommerceUser(entity)
 
 // setting EcommerceUser again will replace the original entity
-val newEntity = EcommUserEntity(id = "userId12345", isGuest = false, email = "email@email.com")
+val newEntity = EcommerceUserEntity(id = "userId67890", isGuest = false, email = "email@email.com")
 Snowplow.defaultTracker?.ecommerce.setEcommerceUser(newEntity)
 
 // remove the saved properties and stop the User entity being added
@@ -773,15 +868,15 @@ Snowplow.defaultTracker?.ecommerce.removeEcommerceUser()
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-EcommUserEntity entity = new EcommUserEntity(
+EcommerceUserEntity entity = new EcommerceUserEntity(
   "userId12345", // id
   true // isGuest
 )
 Snowplow.getDefaultTracker().getEcommerce().setEcommerceUser(entity);
 
 // setting ScreenType again will replace the original entity
-EcommUserEntity newEntity = new EcommUserEntity(
-  "userId12345", // id
+EcommerceUserEntity newEntity = new EcommerceUserEntity(
+  "userId67890", // id
   false, // isGuest
   "email@email.com" // email
 )

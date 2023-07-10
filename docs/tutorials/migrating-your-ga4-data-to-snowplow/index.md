@@ -201,4 +201,4 @@ Provide the following parameters:
 - `Schema name`: The name of the schema that you would like to the new table to be created in
 - `Table name`: The name of the table that will be created
 
-Then click `Run import` and the data will be imported to Snowflake. The data will be imported to the table that you specified in the `Table name` field. If the table already exists, it will be dropped and recreated.\
+Then click `Run import` and the data will be imported to Snowflake. The data will be imported to the table that you specified in the `Table name` field. If the table already exists, it will be dropped and recreated.

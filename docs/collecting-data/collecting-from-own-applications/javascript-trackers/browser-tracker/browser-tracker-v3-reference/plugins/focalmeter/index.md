@@ -15,14 +15,14 @@ The plugin sends requests with the domain user ID to a Kantar endpoint used with
 A request is made when the first event with a new user ID is tracked.
 
 :::note
-The plugin is available since version 3.9 of the tracker.
+The plugin is available since version 3.13 of the tracker.
 :::
 
 ## Installation
 
-- `npm install @snowplow/browser-plugin-focalmeter`
-- `yarn add @snowplow/browser-plugin-focalmeter`
-- `pnpm add @snowplow/browser-plugin-focalmeter`
+- `npm install @snowplow/browser-plugin-focalmeter@focalmeter_plugin`
+- `yarn add @snowplow/browser-plugin-focalmeter@focalmeter_plugin`
+- `pnpm add @snowplow/browser-plugin-focalmeter@focalmeter_plugin`
 
 ## Initialization
 

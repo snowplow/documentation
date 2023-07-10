@@ -20,7 +20,7 @@ A request is made when the first event with a new user ID is tracked.
 | `sp.lite.js` | ❌ |
 
 :::note
-The plugin is available since version 3.9 of the tracker.
+The plugin is available since version 3.13 of the tracker.
 :::
 
 ## Download

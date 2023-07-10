@@ -153,3 +153,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/destinations/warehouses-and-lakes/* /docs/storing-querying/storage-options/:splat 301
 /docs/understanding-tracking-design/json-schema-type-casting-rules/* /docs/storing-querying/schemas-in-warehouse/:splat 301
 /docs/destinations/overview/* /docs/understanding-your-pipeline/destinations/:splat 301
+
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/* /docs/getting-started-on-snowplow-open-source/quick-start-aws/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/* /docs/getting-started-on-snowplow-open-source/quick-start-gcp/ 301
+/docs/getting-started-on-snowplow-open-source/what-is-quick-start/faq/ /docs/getting-started-on-snowplow-open-source/faq/ 301

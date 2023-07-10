@@ -1,24 +1,10 @@
 ---
-title: "Quick Start on GCP"
+title: "Quick start on GCP"
 date: "2021-09-21"
 sidebar_position: 3
 ---
 
 This guide will take you through how to spin up an open source pipeline using the [Snowplow terraform modules](https://registry.terraform.io/namespaces/snowplow-devops). _Learn more about [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started) here._
-
-### Before you begin
-
-Sign up on [discourse](https://discourse.snowplow.io/)! If you run into any problems or have any questions, we are here to help.
-
-If you are interested in receiving the latest updates from Product & Engineering, such as critical bug fixes, security updates, new features and the rest, then [join our mailing list](https://go.snowplowanalytics.com/get-snowplow-technology-updates).
-
-You can find more details on the infrastructure and applications that [will be deployed in your cloud here](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/summary-of-what-you-have-deployed/index.md).
-
-```mdx-code-block
-import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
-
-<PocketEdition/>
-```
 
 ### Prerequisites
 

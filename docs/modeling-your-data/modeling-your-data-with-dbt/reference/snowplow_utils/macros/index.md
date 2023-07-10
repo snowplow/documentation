@@ -2446,8 +2446,8 @@ group by ...
     {% if is_distinct %} array_distinct( {% endif %}
     transform(
       array_sort(
-        collect_list(
-          ARRAY({{column_prefix}}.{{base_column}}::string, {{order_by_column_prefix}}.{{order_by_column}}::string)), (left, right) ->
+        FILTER(collect_list(
+          ARRAY({{column_prefix}}.{{base_column}}::string, {{order_by_column_prefix}}.{{order_by_column}}::string)), x -> x[0] is not null), (left, right) ->
 
           {%- if sort_numeric -%}
             CASE WHEN cast(left[1] as numeric(38, 9)) {% if order_desc %} > {% else %} < {% endif %} cast(right[1] as numeric(38, 9)) THEN -1
@@ -3785,7 +3785,7 @@ This macro does not currently have a description.
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_status.sql">Source</a></i></b></center>
 
 ```jinja2
-{% macro print_run_limits(run_limits_relation) -%}
+{% macro print_run_limits(run_limits_relation, package= none) -%}
 
   {% set run_limits_query %}
     select lower_limit, upper_limit from {{ run_limits_relation }}
@@ -3799,6 +3799,9 @@ This macro does not currently have a description.
     {% set lower_limit = snowplow_utils.tstamp_to_str(results.columns[0].values()[0]) %}
     {% set upper_limit = snowplow_utils.tstamp_to_str(results.columns[1].values()[0]) %}
     {% set run_limits_message = "Snowplow: Processing data between " + lower_limit + " and " + upper_limit %}
+    {% if package %}
+        {% set run_limits_message = run_limits_message +  " (" + package + ")" %}
+    {% endif %}
 
     {% do snowplow_utils.log_message(run_limits_message) %}
 

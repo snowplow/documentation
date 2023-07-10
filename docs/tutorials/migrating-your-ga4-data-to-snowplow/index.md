@@ -89,7 +89,7 @@ role_id = "ga4_migrator_role"
 ```
 The keyfile will be created in the same directory you ran Terraform.
 </TabItem>
-
+</Tabs>
 ## Step 2 - How to run docker
 Set the environment variable SERVICE_ACCOUNT_KEY_FILE to the full path for the GCP service account key file.
 ```shell

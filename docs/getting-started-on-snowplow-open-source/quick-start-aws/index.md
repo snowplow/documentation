@@ -1,5 +1,5 @@
 ---
-title: "Quick Start on AWS"
+title: "Quick start on AWS"
 date: "2021-07-08"
 sidebar_position: 2
 ---
@@ -7,20 +7,6 @@ sidebar_position: 2
 This guide will take you through how to spin up an open source pipeline using the [Snowplow terraform modules](https://registry.terraform.io/namespaces/snowplow-devops).
 
 _Learn more about [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started) here._
-
-### Before you begin
-
-Sign up on [discourse](https://discourse.snowplow.io/)! If you run into any problems or have any questions, we are here to help.
-
-If you are interested in receiving the latest updates from Product & Engineering, such as critical bug fixes, security updates, new features and the rest, then [join our mailing list](https://go.snowplowanalytics.com/get-snowplow-technology-updates).
-
-You can find more details on the infrastructure and applications that will be deployed in your cloud [here](/docs/getting-started-on-snowplow-open-source/quick-start-aws/summary-of-what-you-have-deployed/index.md).
-
-```mdx-code-block
-import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
-
-<PocketEdition/>
-```
 
 ### Prerequisites
 
@@ -180,7 +166,7 @@ This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`.
 
 :::note Terraform errors
 
-For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/getting-started-on-snowplow-open-source/what-is-quick-start/faq.md#troubleshooting-terraform-errors).
+For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/getting-started-on-snowplow-open-source/faq/index.md#troubleshooting-terraform-errors).
 
 :::
 

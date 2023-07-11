@@ -53,3 +53,42 @@ Session context needs to be enabled (default) in order for the integration to wo
 :::note
 The feature is available since version 5.3 of the iOS and Android trackers.
 :::
+
+## Processing the user ID sent in requests to Kantar
+
+By default, the plugin sends the user ID as a GET parameter in requests to Kantar without modifying it.
+In case you want to apply some transformation on the value, such as hashing, you can provide the `processUserId` callback when instantiating the plugin:
+
+<Tabs groupId="platform">
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let focalMeterConfig = FocalMeterConfiguration(kantarEndpoint: "https://thekantarendpoint.com") { userId in
+  return hash(userId) // apply custom hashing function
+}
+let tracker = Snowplow.createTracker(namespace: namespace, network: networkConfig, configurations: [focalMeterConfig])
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val focalMeterConfig = FocalMeterConfiguration("https://thekantarendpoint.com") { userId ->
+  hash(userId) // apply custom hashing function
+}
+val tracker = Snowplow.createTracker(applicationContext, namespace, networkConfiguration, focalMeterConfig)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+FocalMeterConfiguration focalMeterConfig = new FocalMeterConfiguration(
+  "https://thekantarendpoint.com",
+  userId -> hash(userId) // apply custom hashing function
+);
+Snowplow.createTracker(applicationContext, namespace, networkConfiguration, focalMeterConfig);
+```
+
+  </TabItem>
+</Tabs>

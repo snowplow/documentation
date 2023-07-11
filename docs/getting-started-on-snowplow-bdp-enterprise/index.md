@@ -1,10 +1,10 @@
 ---
 title: "Behavioral Data Platform — Enterprise"
 date: "2021-03-09"
-sidebar_position: 0
+sidebar_position: 6
 sidebar_label: "Setting up BDP Enterprise"
 sidebar_custom_props:
-  header: "Getting started"
+  header: "Installing Snowplow"
   offerings:
     - enterprise
 ---

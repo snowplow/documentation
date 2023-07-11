@@ -47,7 +47,7 @@ Without even getting to any more advanced customizations, Snowplow gives you the
 Make sure you've set up a free [Snowplow trial account](https://try.snowplowanalytics.com/) and follow the getting started instructions to generate sample events by clicking [the "Web Analytics" button](https://try.snowplowanalytics.com/event-tester).
 
 :::note
-Check [this guide](/docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/index.md) out if you want to help querying the data
+Check [this guide](/docs/recipes/querying-try-data/index.md) out if you want help querying the data
 :::
 
 #### Create a sessions table
@@ -199,7 +199,7 @@ GROUP BY 1;
 When you've completed this section, you should learn something about how you acquire real customers!
 
 #### Auto-track page views via GTM
-[Tracking real page view events](/docs/try-snowplow/tracking-events-with-try-snowplow/index.md) is very simple, especially if you have Google Tag Manager connected to your website (or your personal blog if you just want to see how it works!) - just copy the snippet from the Snowplow UI into a custom HTML tag or directly into the `<head>` section of your website.
+[Tracking real page view events](/docs/first-steps/tracking/index.md) is very simple, especially if you have Google Tag Manager connected to your website (or your personal blog if you just want to see how it works!) - just copy the snippet from the Snowplow UI into a custom HTML tag or directly into the `<head>` section of your website.
 
 ![](images/gtm.gif)
 

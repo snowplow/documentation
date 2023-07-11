@@ -1,7 +1,7 @@
 ---
-title: "Try Snowplow"
-date: "2020-10-08"
-sidebar_position: 10
+title: "First steps with Snowplow"
+sidebar_position: 3
+sidebar_label: "First steps"
 ---
 
 ```mdx-code-block

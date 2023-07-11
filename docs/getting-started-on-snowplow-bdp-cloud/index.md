@@ -1,7 +1,7 @@
 ---
 title: "Behavioral Data Platform — Cloud"
 date: "2020-01-30"
-sidebar_position: 1
+sidebar_position: 7
 sidebar_label: "Setting up BDP Cloud"
 sidebar_custom_props:
   offerings:

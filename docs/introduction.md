@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 slug: "/"
-sidebar_position: -1
+sidebar_position: 0
 ---
 
 Hi! Welcome to Snowplow, the world’s largest developer-first engine for collecting behavioral data.  

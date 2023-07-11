@@ -109,8 +109,8 @@ promotion.setType("popup");
 
 This table lists all the ecommerce events.
 
-`Event`            | Used for
--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------
+`Event`                 | Used for
+------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------
 `ProductViewEvent`      | Tracking a visit to a product detail screen. Also known as product detail view.
 `AddToCartEvent`        | Track an addition to cart.
 `RemoveFromCartEvent`   | Track a removal from cart.
@@ -120,11 +120,12 @@ This table lists all the ecommerce events.
 `PromotionClickEvent`   | Track the click/selection of an internal promotion.
 `CheckoutStepEvent`     | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.
 `TransactionEvent`      | Track a transaction/purchase completion.
+`TransactionErrorEvent` | Track a failed transaction.
 `RefundEvent`           | Track a transaction partial or complete refund.
 
 
 Each ecommerce event is a [self-describing](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) event using a single schema, 
-`iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-1`.
+`iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2`.
 
 <details>
     <summary>Ecommerce action event properties</summary>
@@ -138,7 +139,7 @@ Each ecommerce event is a [self-describing](docs/collecting-data/collecting-from
 The events are distinguished by their `type` property, which is different for each `Event` class tracked. Aside from the optional list `name` in the `ProductListViewEvent` and `ProductListClickEvent` events, all tracked ecommerce properties are tracked as entities - see [below](#entities) for details.
 
 :::note
-Check out the API docs ([Android](https://snowplow.github.io/snowplow-android-tracker/)) for the full details of each Event and Entity.
+Check out the API docs ([Android](https://snowplow.github.io/snowplow-android-tracker/), [iOS](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/snowplow/)) for the full details of each Event and Entity.
 :::
 
 ### ProductView
@@ -443,12 +444,70 @@ Track the completion of a purchase or transaction, along with common transaction
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let event = TransactionEvent(
+let transaction = TransactionEntity(
   transactionId: "id-123", 
   revenue: 50000, 
   currency: "JPY", 
   paymentMethod: "debit", 
   totalQuantity: 2
+)
+let event = TransactionEvent(transaction)
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val transaction = TransactionEntity(
+  id = "id-123", 
+  revenue = 50000,
+  currency = "JPY",
+  paymentMethod = "debit",
+  totalQuantity = 2
+)
+val event = TransactionEvent(transaction)
+
+tracker.track(event)
+```
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+TransactionEntity transaction = new TransactionEntity(
+  "id-123", // id
+  50000, // revenue
+  "JPY", // currency
+  "debit", // paymentMethod
+  2 // totalQuantity
+);
+TransactionEvent event = new TransactionEvent(transaction);
+
+tracker.track(event);
+```
+  </TabItem>
+</Tabs>
+
+### TransactionError
+
+Track an error occurring during a transaction.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let transaction = TransactionEntity(
+  transactionId: "id-123", 
+  revenue: 50000, 
+  currency: "JPY", 
+  paymentMethod: "debit", 
+  totalQuantity: 2
+)
+let event = TransactionErrorEvent(
+  transaction: transaction, 
+  errorCode: "E05", 
+  errorDescription: "connection_failure"
 )
 
 tracker.track(event)
@@ -458,12 +517,17 @@ tracker.track(event)
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val event = Transaction(
-    id = "id-123", 
-    revenue = 50000,
-    currency = "JPY",
-    paymentMethod = "debit",
-    totalQuantity = 2,
+val transaction = TransactionEntity(
+  id = "id-123", 
+  revenue = 50000,
+  currency = "JPY",
+  paymentMethod = "debit",
+  totalQuantity = 2
+)
+val event = TransactionErrorEvent(
+    transaction = transaction, 
+    errorCode = "E05",
+    errorDescription = "connection_failure"
 )
 
 tracker.track(event)
@@ -472,12 +536,18 @@ tracker.track(event)
   <TabItem value="android-java" label="Android (Java)">
 
 ```java
-TransactionEvent event = new TransactionEvent(
-    "id-123", // id
-    50000, // revenue
-    "JPY", // currency
-    "debit", // paymentMethod
-    2, // totalQuantity
+TransactionEntity transaction = new TransactionEntity(
+  "id-123", // id
+  50000, // revenue
+  "JPY", // currency
+  "debit", // paymentMethod
+  2 // totalQuantity
+);
+TransactionErrorEvent event = new TransactionErrorEvent(
+    transaction, // transaction
+    "E05", // errorCode
+    null, // errorShortcode
+    "connection_failure" // errorDescription
 );
 
 tracker.track(event);
@@ -756,7 +826,7 @@ These entities will be added to **all** events, not just ecommerce ones. This is
 The `setEcommerceScreen` method adds a `Page` (rather than `Screen`) entity to all events, for consistency with web tracking.
 :::
 
-The Ecommerce Screen/Page entity helps in grouping insights by screen/page type, e.g. Product description, Product list, Homepage.
+The Ecommerce Screen/Page entity helps in grouping insights by screen/page type, e.g. Product description, Product list, Home screen.
 
 To set a Screen/Page entity you can use the `setEcommerceScreen` method:
 
@@ -830,7 +900,7 @@ Snowplow.getDefaultTracker().getEcommerce().removeEcommerceScreen();
 
 ### Ecommerce User entity
 
-The Ecommerce User entity helps in modeling guest/non-guest account transactions.
+The Ecommerce User entity helps in modeling guest/non-guest account interactions.
 
 To set an Ecommerce User entity you can use the `setEcommerceUser` method with the following attributes:
 

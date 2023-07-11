@@ -1,6 +1,8 @@
 # Statement of Support
 
-This Statement of Support defines the scope of support provided for Snowplow BDP Cloud, BDP Enterprise and all other Snowplow products and services. Our friendly team is available 24x7 to provide product expertise, technical advice, and assistance throughout your journey with Snowplow. The level of support and products that we support for you are described in your contract. This document augments your contract and our Product Description by offering general guidance on the scope of services provided by Snowplow to our customers. In simplest terms, the scope of support is what we support and what we don’t support at this time. Any support we provide you beyond this scope is discretionary and on a best-effort basis.
+This Statement of Support defines the current scope of support provided for Snowplow BDP Cloud, BDP Enterprise and all other Snowplow products and services. As our product and service offerings change, this document will evolve to accommodate those changes. Further information on the Snowplow products and associated definitions, such as SLAs and severity level definitions, can be found in our [Product Description](https://snowplow.io/snowplow-bdp-product-description/).
+
+Our friendly team is available 24x7 to provide product expertise, technical advice, and assistance throughout your journey with Snowplow. The level of support and products that we support for you are described in your contract. This document augments your contract and our Product Description by offering general guidance on the scope of services provided by Snowplow to our customers. In simplest terms, the scope of support is what we support and what we don’t support at this time. Any support we provide you beyond this scope is on a discretionary basis, and might only be offered as part of a separate Statement of Work, with associated additional costs.
 
 Snowplow Support is here to ensure you gain full value from Snowplow’s products and services. We work with you both in the run-up to go-live and in production, providing a broad range of support. This includes use-case and setup questions, handling product issues and enhancement requests, and resolving implementation-specific problems.
 
@@ -40,6 +42,8 @@ Our 24/7 team of engineers monitor your pipeline for errors, failures, and data 
 
 For BDP Enterprise and Cloud customers we use proprietary means to manage the configuration of pipeline infrastructure and environments. Where appropriate, we’ll work with you to make and deploy certain configuration and secrets changes to the Snowplow pipeline setup on your behalf. 
 
+We encourage you to reach out to us if you are considering setting up new use cases, or are expecting seasonal or periodic (eg daily) peaks in volume or usage; we will work with you to ensure your pipeline is optimally tuned for performance and cost management according to your changing needs.
+
 ### Major Incident Response
 
 An incident is an unplanned interruption to a service, or reduction in the quality of a business-critical service. Our team are here to provide communication, assistance, and insights when a major incident occurs. For [Priority 1](https://snowplow.io/snowplow-bdp-product-description/) incidents (and for certain mutually agreed other business critical situations), we’ll work with your team as required to establish root cause, perform remediation, and put in place future mitigation strategies. We can provide post incident reports to ensure your team are informed and feeling confident that plans are in place to reduce the chances of a reoccurrence.
@@ -68,7 +72,7 @@ Customers on our *Summit* plan, for major updates, can request a deferred upgrad
 
 ### Infrastructure Reviews
 
-As part of our Infrastructure Review service, our team review your current infrastructure and make recommendations in the following areas:
+As part of our [Infrastructure Review service](https://snowplow.io/snowplow-bdp-product-description/#:~:text=Infrastructure%20Management-,Regular%20Infrastructure%20Reviews,-Deferred%20Upgrades), our team review your current infrastructure and make recommendations in the following areas:
 
 - History of recent infrastructure management activities (such as upgrades)
 - Security
@@ -79,24 +83,24 @@ As part of our Infrastructure Review service, our team review your current infra
 
 ## Version Support
 
-Unless otherwise stated in your contract, we provide official support for software that’s either in its latest version or a version released within the last 18 months (rolling). You can find the current versions of components [here](https://docs.snowplow.io/docs/pipeline-components-and-applications/versions/).
+Unless otherwise stated in your contract, we provide official support for software that’s either in its latest version or a version released within the last 18 months (rolling). You can find the [current versions of components](https://docs.snowplow.io/docs/pipeline-components-and-applications/versions/) in our documentation.
 
 ### Try Snowplow & Open Source
 
-If you’re seeking assistance with your Try Snowplow or Open Source pipelines, we currently do not provide direct customer support for these products. We encourage you to make use of these resources:
+Customer Support is provided to our commercial customers. For support with your Try Snowplow or Open Source pipelines, we encourage you to make use of these resources:
 
 - [Snowplow Docs](https://docs.snowplow.io/docs): Extensive product and engineering documentation of Snowplow features, functionality, and configuration.
 - [Snowplow Discourse](https://discourse.snowplow.io/): Community forum where free & open source users, customers, and our team come together to discuss everything Snowplow.
 
 ## Access Needed to Support Your Pipeline
 
-Customers should ensure that all pipeline and infrastructure users and roles configured by Snowplow retain their required permissions. These roles and users are necessary to run and monitor your pipeline and are protected by technical access policies and operational policies. If the configured permissions are changed, or any users or roles removed, your pipeline may not function correctly and our team will be unable to respond to problems that occur.
+Customers should ensure that all pipeline and infrastructure users and roles configured by Snowplow retain their [required permissions](https://support.snowplow.io/hc/en-us/articles/9330740930717-FAQ-Pipeline-Data-Access). These roles and users are necessary to run and monitor your pipeline and are protected by technical access policies and operational policies. If the configured permissions are changed, or any users or roles removed, your pipeline may not function correctly and our team will be unable to respond to problems that occur.
 
 Should we need additional access to your infrastructure we will acquire your written consent. Any extension of the initial access set up (for example, data access) is only enabled on a per-case basis and with your prior approval.
 
 ## Out of Scope
 
-The following items are out of scope of the support services offered to Snowplow BDP customers. From time to time we may offer help and support on these items, however, it is done so at Snowplow’s discretion and as a courtesy.
+The following items are out of scope of the support services offered to Snowplow BDP customers. Any support we provide you beyond this scope is on a discretionary basis, and might only be offered as part of a separate Statement of Work, with associated additional costs.
 
 | Out of Scope | Example | What is in scope? |
 | ------------ | ------- | ----------------- |
@@ -110,6 +114,8 @@ The following items are out of scope of the support services offered to Snowplow
 | Proxy management | Managing CloudFlare, Akamai, Fastly reverse proxy in front of the collector endpoint with custom domains and SSL in the proxy itself | Reverse proxies are supported: we can still add any custom records to our configurations, ensuring we can monitor that endpoints are responding |
 | Lifecycle rules | Configuring lifecycle rules and data retention policies for pipeline infrastructure (e.g. AWS S3) | Our team can provide general recommendations for select components such as AWS S3 buckets (see [S3 Buckets and Recommended Lifecycle Rules](https://support.snowplow.io/hc/en-us/articles/360019773617-54-01-S3-Buckets-and-Recommended-Lifecycle-Rules)) |
 | Cost management | Managing or monitoring the infrastructure costs associated with running your pipeline | We are able to provide general recommendations and best practice on right-sizing your infrastructure and storage. As part of our Infrastructure Review service, we are able to make more specific recommendations |
+| Data warehouse migrations | Migration of data from one data warehouse to another, or the loading of historical data into a new data warehouse | Helping you to understand best practices surrounding data reprocessing if it’s required for your pipeline |
+| Pipeline migrations | Migration of pipeline components between sub-accounts within your cloud provider or between cloud providers | Deployment and management of your pipeline in line with our [Product Description](https://snowplow.io/snowplow-bdp-product-description/)
 
 ## Alpha & Beta Features and Services
 

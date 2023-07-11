@@ -1,6 +1,7 @@
 ---
-title: "What is Snowplow Micro?"
+title: "Snowplow Micro Overview"
 sidebar_position: 0
+sidebar_label: "Overview"
 description: "Snowplow Micro is a lightweight version of the Snowplow pipeline that’s great for getting familiar with Snowplow, debugging and testing."
 hide_table_of_contents: true
 ---
@@ -15,4 +16,4 @@ Unlike a real pipeline, Micro is missing a few features:
 * It does not store the events in a data warehouse or database, although [an API is available](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md) to look at the data.
 * It’s not meant for production traffic.
 
-Follow [these instructions](/docs/getting-started-with-micro/basic-usage/index.md) to get started in minutes.
+Follow [these instructions](/docs/testing-debugging/snowplow-micro/basic-usage/index.md) to get started in minutes.

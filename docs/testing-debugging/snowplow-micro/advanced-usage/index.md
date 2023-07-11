@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 ## Enabling HTTPS
 
-While in most cases HTTP is sufficient, you may want to enable HTTPS in Micro (for an example of when that’s useful, see [Locally resolving an existing domain name to Micro](/docs/getting-started-with-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro)).
+While in most cases HTTP is sufficient, you may want to enable HTTPS in Micro (for an example of when that’s useful, see [Locally resolving an existing domain name to Micro](/docs/testing-debugging/snowplow-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro)).
 
 You will need an SSL/TLS certificate in [PKCS 12](https://en.wikipedia.org/wiki/PKCS_12) format (`.p12`). Pass your certificate file and its password to the container (using a [bind mount](https://docs.docker.com/storage/bind-mounts/) and an [environment variable](https://docs.docker.com/compose/environment-variables/)). Don’t forget to expose the HTTPS port (by default, 9543):
 
@@ -36,7 +36,7 @@ You should see a message like this in the logs:
 [INFO] com.snowplowanalytics.snowplow.micro.Main$ - HTTPS REST interface bound to /0.0.0.0:9543
 ```
 
-As usual, you can change the ports to your liking (see [Running Micro](/docs/getting-started-with-micro/basic-usage/index.md#running)).
+As usual, you can change the ports to your liking (see [Running Micro](/docs/testing-debugging/snowplow-micro/basic-usage/index.md#running)).
 
 ## Adding custom Iglu resolver configuration
 
@@ -44,7 +44,7 @@ If you’d like to tweak the Iglu registries Micro uses, the priority between th
 
 :::tip
 
-If you are just looking to add custom schemas or connect to your private Iglu registry, check out [Adding custom schemas](/docs/getting-started-with-micro/adding-schemas/index.md) for simpler ways to achieve that.
+If you are just looking to add custom schemas or connect to your private Iglu registry, check out [Adding custom schemas](/docs/testing-debugging/snowplow-micro/adding-schemas/index.md) for simpler ways to achieve that.
 
 :::
 

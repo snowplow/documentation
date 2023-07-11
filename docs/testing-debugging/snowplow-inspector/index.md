@@ -1,7 +1,6 @@
 ---
-title: "Defining the data to collect"
-date: "2020-02-15"
-sidebar_position: 60
+title: "Snowplow Inspector"
+sidebar_position: 1
 ---
 
 ```mdx-code-block

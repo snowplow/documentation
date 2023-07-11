@@ -8,7 +8,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-[Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) is a lightweight version of the Snowplow pipeline which is great for testing.
+[Snowplow Micro](/docs/testing-debugging/snowplow-micro/what-is-micro/index.md) is a lightweight version of the Snowplow pipeline which is great for testing.
 
 The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository aims to show in detail all the steps to setting up automated tests for your Snowplow event tracking (using Nightwatch and Cypress as examples of test tools), to build end-to-end GitHub Actions testing workflows.
 
@@ -35,7 +35,7 @@ docker-compose up
 This will:
 
 1. Start serving the app on `localhost:8000`
-2. Launch Snowplow Micro, mounting the `micro` directory and setting the port 9090 for accessing Micro's [REST API](/docs/getting-started-with-micro/what-is-micro/index.md?preview_id=6151&preview_nonce=51ab1bb706&preview=true#REST_API) endpoints. Inside the `micro` directory are:
+2. Launch Snowplow Micro, mounting the `micro` directory and setting the port 9090 for accessing Micro's [REST API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md) endpoints. Inside the `micro` directory are:
     1. The [configuration for Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/micro.conf).
     2. The [configuration for Iglu resolvers](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu.json).
     3. The `iglu-client-embedded` directory containing the custom schemas used for tracking.

@@ -16,19 +16,19 @@ The tool requires certain permissions in order to access and export your GA4 dat
 
 <Tabs groupId="service-account" queryString>
 <TabItem value="CLI" label="CLI" default>
-To create your service account using the cli, follow the steps below:
+To create your service account using the cli, follow the steps below:  
 
-##### Install gcloud
+#### Install gcloud
 
 See https://cloud.google.com/sdk/docs/install-sdk for installation instructions
 
-##### Authorize gcloud
+#### Authorize gcloud
 
 ```shell
 gcloud auth login
 ```
 
-##### Set the following variables in your terminal
+#### Set the following variables in your terminal
 
 - `PROJECT_ID`: the name of the GCP project in which the GA4 data is stored
 - `SERVICE_ACCOUNT_NAME`: The name to give the new service account
@@ -42,14 +42,14 @@ export ROLE_NAME=ga4_exporter_role
 export KEY_FILE_NAME=migrator_service_account_key.json
 ```
 
-##### Create a service account 
+#### Create a service account 
 
 ```shell
 gcloud iam service-accounts create $SERVICE_ACCOUNT_NAME --display-name $SERVICE_ACCOUNT_NAME
 ```
 *Note: this will error if the service account name uses underscores, or if the service account already exists*
 
-##### Create a custom role
+#### Create a custom role
 
 ```shell
 gcloud iam roles create $ROLE_NAME --project=$PROJECT_ID --permissions=bigquery.tables.export,bigquery.tables.getData,bigquery.tables.get,bigquery.tables.create,bigquery.tables.update,bigquery.tables.updateData,bigquery.tables.list,bigquery.tables.delete,bigquery.jobs.create,storage.objects.create,storage.objects.get,storage.objects.list,storage.objects.delete,storage.buckets.getIamPolicy,storage.buckets.setIamPolicy,storage.buckets.create,storage.buckets.get,bigquery.datasets.create,bigquery.routines.create,bigquery.routines.get
@@ -57,13 +57,13 @@ gcloud iam roles create $ROLE_NAME --project=$PROJECT_ID --permissions=bigquery.
 *Note this will error if you already have a custom role with this name*
 
 
-##### Grant the custom role to the service account
+#### Grant the custom role to the service account
 
 ```shell
 gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com --role projects/$PROJECT_ID/roles/$ROLE_NAME
 ```
 
-##### Create a key for the service account
+#### Create a key for the service account
 
 ```shell
 gcloud iam service-accounts keys create $KEY_FILE_NAME --iam-account $SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
@@ -72,20 +72,22 @@ gcloud iam service-accounts keys create $KEY_FILE_NAME --iam-account $SERVICE_AC
 </TabItem>
 
 <TabItem value="Terraform" label="Terraform">
-##### Install gcloud
+
+#### Install gcloud
+
 See https://cloud.google.com/sdk/docs/install-sdk for installation instructions
 
-##### Authorize gcloud
+#### Authorize gcloud
 
 ```shell
 gcloud auth application-default login
 ```
 
-##### Install Terraform
+#### Install Terraform
 
 See https://learn.hashicorp.com/tutorials/terraform/install-cli for installation instructions
 
-##### Run Terraform
+#### Run Terraform
 
 There is a file in the root directory of the migrator tool called `manage_service_account.tf`. This file contains the Terraform code to create the service account.
 To create the service account in the root directory of the migrator tool, run the following commands:
@@ -108,7 +110,7 @@ The keyfile will be created in the same directory you ran Terraform.
 
 ## Step 2 - How to run docker
 
-Set the environment variable SERVICE_ACCOUNT_KEY_FILE to the full path for the GCP service account key file.
+Set the environment variable `SERVICE_ACCOUNT_KEY_FILE` to the full path for the GCP service account key file.
 ```shell
 export SERVICE_ACCOUNT_KEY_FILE=[path/to/service_account/keyfile.json]
 ```
@@ -120,8 +122,8 @@ Also ensure that the GCS bucket you are using for the export already exists and 
 export SNOWFLAKE_USER=[snowflake_user]
 export SNOWFLAKE_PASSWORD=[snowflake_password]
 ```
-If you do not already have Docker, installation instructions can be found (here)[https://docs.docker.com/get-docker/]  
-To run the docker container using docker compose. Run the following command -
+If you do not already have Docker, installation instructions can be found [here](https://docs.docker.com/get-docker/).
+To run the docker container using docker compose. Run the following command:
 ```shell
 docker compose up --build
 ```
@@ -139,11 +141,11 @@ The following credentials are required:
 - `Dataset`: The name of your GA4 dataset in Bigquery. 
 - `Table`: The name of your GA4 table in Bigquery. The default value is set to `events_*`. If you do not wish to query all the data, do not select a specific date/table here, it is done further down. Even if you only want to query a single day, leave this as `events_*` and provide the specific date below. This field should only be changed if you have a custom table name.
 - `Start date`: The first date that you want to query data from. This is inclusive.
-- `End date`: The date that you want to query data until. This is inclusive. If you only want to query only one date, set both start and end dates to that date.
+- `End date`: The date that you want to query data until. This is inclusive. If you only want to query one date, set both start and end dates to that date.
 
 ### Step 2 - Map Snowplow events
 
-Although GA4 has events, it does not have a concept of entities like Snowplow. As such, we gather the parameters from each of your GA4 events, and add similar parameters to a Snowplow entity that we create. For example, if you have two events, `add_to_cart` and `view_cart`, with each containing a property called `page_title`, we will create a Snowplow entity called context_page_vendor_1_0_0, and add the `page_title` parameter to it. In addition, for each of your events, a Snowplow unstruct event will also be created, containing the parameters from each GA4 event.\
+Although GA4 has events, it does not have a concept of entities like Snowplow. As such, we gather the parameters from each of your GA4 events, and add similar parameters to a Snowplow entity that we create. For example, if you have two events, `add_to_cart` and `view_cart`, with each containing a property called `page_title`, we will create a Snowplow entity called context_page_vendor_1_0_0, and add the `page_title` parameter to it. In addition, for each of your events, a Snowplow self-describing event will also be created, containing the parameters from each GA4 event.\
 
 The interface in the UI allows you to modify any of the pre-created entities, or create your own entities. You can remove parameters the events (for example if you wish to add the parameter to an entity), but you cannot add any new parameters to events. Events will be migrated contatining the same parameters as they had in GA4, minus any that you remove.\
 When you create a new entity, you can choose parameters from the events that are shown in the UI. Note that you only have to add a parameter to an entity once, and it will be filled in the entity column from any event that has that parameter.\

@@ -1,8 +1,6 @@
 ---
 title: "Testing and debugging"
-sidebar_position: 57
-sidebar_custom_props:
-  header: "Using Snowplow"
+sidebar_position: 75
 ---
 
 ```mdx-code-block

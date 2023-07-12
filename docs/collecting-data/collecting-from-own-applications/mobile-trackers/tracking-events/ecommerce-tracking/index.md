@@ -771,6 +771,26 @@ The transaction entity is used for `Transaction` events.
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0`.
 
+### Transaction error entity
+
+The transaction error entity is used for `TransactionError` events.
+
+<details>
+    <summary>Transaction error entity properties</summary>
+
+| Request Key      | Required | Type/Format | Description                    |
+|------------------|----------|-------------|--------------------------------|
+| errorCode        | N        | string      | Error-identifying code.        |
+| errorShortcode   | N        | string      | Shortcode for the error.       |
+| errorDescription | N        | string      | Longer description.            |
+| errorType        | N        | string enum | Is the error "hard" or "soft". |
+| resolution       | N        | string      | The chosen error resolution.   |
+
+</details>
+
+*Schema:*
+`iglu:com.snowplowanalytics.snowplow.ecommerce/transaction_error/jsonschema/1-0-0`.
+
 ### Refund entity
 
 The refund entity is used for `Refund` events.
@@ -820,7 +840,7 @@ Use these APIs to add ecommerce context information to every subsequent event tr
 These entities will be added to **all** events, not just ecommerce ones. This is for consistency with entities in the JavaScript tracker.
 :::
 
-### EcommerceScreen (Page) entity
+### Ecommerce Screen (Page) entity
 
 :::note
 The `setEcommerceScreen` method adds a `Page` (rather than `Screen`) entity to all events, for consistency with web tracking.

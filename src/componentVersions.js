@@ -1,12 +1,12 @@
 export const versions = {
   // Trackers
-  androidTracker: '5.3.0',
+  androidTracker: '5.4.0',
   dotNetTracker: '1.2.1',
   cppTracker: '2.0.0',
   flutterTracker: '0.3.0',
   golangTracker: '3.0.0',
   googleAmpTracker: '1.1.0',
-  iosTracker: '5.3.0',
+  iosTracker: '5.4.0',
   javaTracker: '1.0.0',
   javaScriptTracker: '3.13.0',
   luaTracker: '0.2.0',
@@ -45,7 +45,7 @@ export const versions = {
   dbtSnowplowMediaPlayer: '0.5.1',
   dbtSnowplowNormalize: '0.3.1',
   dbtSnowplowFractribution: '0.3.1',
-  dbtSnowplowEcommerce: '0.5.0',
+  dbtSnowplowEcommerce: '0.5.1',
 
   // sql runner
   sqlRunner: '0.10.1',

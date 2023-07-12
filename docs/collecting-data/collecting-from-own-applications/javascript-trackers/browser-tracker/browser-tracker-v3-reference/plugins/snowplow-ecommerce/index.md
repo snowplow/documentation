@@ -352,7 +352,7 @@ import { setPageType } from '@snowplow/browser-plugin-snowplow-ecommerce';
 setPageType({ type, language, locale });
 ```
 
-After setting the Page context, it will getting attached to every consecutive Snowplow event.
+After setting the Page context, it will be attached to every subsequent Snowplow event.
 
 ### setEcommerceUser
 
@@ -364,7 +364,7 @@ import { setEcommerceUser } from '@snowplow/browser-plugin-snowplow-ecommerce';
 setEcommerceUser({ id, is_guest, email });
 ```
 
-After setting the Page context, it will getting attached to every consecutive Snowplow event.
+After setting the Page context, it will be attached to every subsequent Snowplow event.
 
 ## Entities
 

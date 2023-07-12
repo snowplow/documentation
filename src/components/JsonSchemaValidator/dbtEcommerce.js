@@ -62,6 +62,10 @@ export const dbtSnowplowEcommerceConfigSchema = {
       items: { type: 'string' },
       description: '> Click the plus sign to add a new entry',
     },
+    snowplow__enable_mobile_events : {
+      type: 'boolean',
+      title: 'Enable Mobile Events'
+    },
     snowplow__lookback_window_hours: {
       type: 'number',
       minimum: 0,
@@ -161,14 +165,22 @@ export const dbtSnowplowEcommerceConfigSchema = {
       type: 'string',
       title: '(Redshift) Web Page Context Table',
     },
+    snowplow__context_mobile_session: {
+      type: 'string',
+      title: '(Redshift) Mobile Session Context Table',
+    },
+    snowplow__context_screen: {
+      type: 'string',
+      title: '(Redshift) Mobile Screen Context Table',
+    },
     snowplow__context_ecommerce_product: {
       type: 'string',
       title: '(Redshift) E-Commerce Product Context Table',
-      snowplow__sde_ecommerce_action: {
+    },
+    snowplow__sde_ecommerce_action: {
         type: 'string',
         title: '(Redshift) E-Commerce Action Self Describing Event Table',
       },
-    },
     snowplow__derived_tstamp_partitioned: {
       type: 'boolean',
       title: '(Bigquery) Dervied Timestamp Partition',

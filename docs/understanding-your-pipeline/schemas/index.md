@@ -16,9 +16,9 @@ We often use the terms “schema” and “data structure” interchangeably, al
 With schemas, you can:
 
 * Define your own data structures to capture data in a way that works for your business. For example, a two-sided marketplace will be tracking very different events than a gaming application
-* Ensure your data presents a clear and easy to understand record of what has happened
+* Ensure your data presents a clear and easy-to-understand record of what has happened
 
-As you evolve your website, mobile app or server-side application, you can evolve your schemas to reflect the changes. _In the data warehouse, Snowplow automatically evolves your table definition to accommodate both old and new data in a safe, non-destructive way._
+As you evolve your website, mobile app or server-side application, you can evolve your schemas to reflect the changes. _In the data warehouse, Snowplow automatically evolves your table definition to accommodate both old and new data safely and non-destructively._
 
 :::tip
 
@@ -28,13 +28,13 @@ Check out the documentation for [managing](/docs/understanding-tracking-design/m
 
 ## Managing data quality with schemas
 
-Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/understanding-your-pipeline/failed-events/index.md) are sent to a separarte location.
+Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/understanding-your-pipeline/architecture-overview/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/understanding-your-pipeline/failed-events/index.md) are sent to a separate location.
 
-Through describing how the data should be structured as part of your schema definition, you ensure clean and consistent data landing in your data warehouse or other destinations.
+By describing how the data should be structured as part of your schema definition, you ensure clean and consistent data landing in your data warehouse or other destinations.
 
 ## Building data meaning with schemas
 
-Rather than just leaving your data open to interpretation by the many different people that will consume and analyze it, you can use schemas to describe the meaning of your data. Each schema you define should clearly describe what is being collected and why — both for the schema itself, but also for each field within the schema.
+Rather than just leaving your data open to interpretation by the many different people that will consume and analyze it, you can use schemas to describe the meaning of your data. Each schema you define should clearly describe what is being collected and why — both for the schema itself and for each field within the schema.
 
 ## Iglu
 
@@ -108,9 +108,9 @@ Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standa
 - **“vendor”** - This usually refers to the company who has authored the schema. Most times this will be your company’s name. This could also be for organizing schemas from different groups in your organization if you have multiple teams working on different events and contexts (e.g. com.acme.android, com.acme.marketing). Snowplow uses the reversed company internet domain for vendor names (e.g. com.snowplowanalytics).
 - **“name”** - This is the name you want to give your schema. Much like the description above, this is a good chance to help others like data analysts who might be consuming this data know exactly what your schema is meant to capture.
 - **“format”** - This field simply states the format of the schema which will always be `jsonschema`.
-- **“version”** - Snowplow allows you to [increment versions of a schema](/docs/understanding-tracking-design/versioning-your-data-structures/index.md) as your tracking needs evolve and this argument stores the current version.
+- **“version”** - Snowplow allows you to [increment versions of a schema](/docs/understanding-tracking-design/versioning-your-data-structures/index.md) as your tracking needs to evolve and this argument stores the current version.
 
-After the self section the remainder of the schema is where you will begin describing the event or context fields that you will be collecting.
+After the self section, the remainder of the schema is where you will begin describing the event or context fields that you will be collecting.
 
 **“type”** - Type should always be set as `object`.
 

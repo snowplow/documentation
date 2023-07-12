@@ -88,7 +88,42 @@ vars:
 
 :::
 
+<details>
+<summary>Modifying the conversions source</summary>
+
+By default the `snowplow__conversions_source` is your atomic events table. In most cases this is likely to be what you want to use, however if you are using Redshift/Postgres you may wish to include additional fields from a Self-Describing Event, or an Entity.
+
+To do this, you should create a new model in your project, e.g. `models/snowplow/snowplow_joined_events_table.sql` which should have something like the following content. For more information about dealing with duplicates, make sure to see our [deduplication docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/index.md).
+
+```jinja2
+
+with {{ snowplow_utils.get_sde_or_context('atomic', 'my_custom_context', "'{{ get_lookback_date_limits("min") }}'", "'{{ get_lookback_date_limits("max") }}'", 'my_prefix')}}
+
+select
+  events.*,
+  b.*
+from {{ source('atomic', 'events') }} as events
+  left join nl_basjes_my_prefix_1 b on 
+    events.event_id = b.my_prefix__id 
+    and events.collector_tstamp = b.my_prefix__tstamp
+
+where 
+  -- use the appropriate partition key to filter on, add a bit of a buffer if it is not derived_tstamp
+  date(derived_tstamp) >= '{{ get_lookback_date_limits("min") }}'
+  and date(derived_tstamp) <= '{{ get_lookback_date_limits("max") }}'
+```
+
+Finally ensure you set the `snowplow__conversions_source` to `"{{ ref(snowplow_joined_events_table') }}"`
+
+</details>
+
 ### 3. Configure macros
+
+:::tip
+
+While the macro and matching columns/tables use the term _channel_, it is entirely possible to define this in terms of something else e.g. a campaign.
+
+:::
 
 All the below macros are created with the intention to let users modify them to fit their personal use case. If you wish to change this, copy the macro from the macros folder in the `snowplow_fractribution` package (at `[dbt_project_name]/dbt_packages/snowplow_fractribution/macros/conversion_clause.sql`) and add it to the macros folder of your own dbt project where you are free to make any alterations. You will find a detailed guide / illustration with sample code within the individual macros themselves.
 

@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 :::note
-With the addition of these Snowplow ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events.
+Snowplow ecommerce tracking was added in version 5.3.0. With the addition of these new ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events.
 :::
 
 The Snowplow ecommerce tracking APIs enable you to track events from your ecommerce store on the web ([Javascript](docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/index.md) and [browser](docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/plugins/snowplow-ecommerce/index.md) trackers) as well as mobile apps. For the web, a complete setup journey, including data modeling, is showcased on the [Ecommerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).

@@ -30,7 +30,7 @@ The Snowplow Fractribution dbt package is a tool to perform Attribution Modeling
 ​
 :::tip
 
-While the throughout this package we use the term _channel_, it is entirely possible to define this in terms of something else e.g. a campaign.
+While the throughout this package we use the term _channel_, it is entirely possible to define this in terms of something else e.g. a campaign, and define the spend and classification in the `channel_spend` and `channel_classification` macros respectively.
 
 :::
 

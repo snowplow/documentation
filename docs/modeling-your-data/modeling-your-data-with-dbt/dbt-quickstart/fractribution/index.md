@@ -91,7 +91,7 @@ vars:
 <details>
 <summary>Modifying the conversions source</summary>
 
-By default the `snowplow__conversions_source` is your atomic events table. In most cases this is likely to be what you want to use, however if you are using Redshift/Postgres you may wish to include additional fields from a Self-Describing Event, or an Entity.
+By default the `snowplow__conversions_source` is your atomic events table. In most cases this is likely to be what you want to use, however you may wish to use the in-built conversions modeling as part of our [web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md), by setting `snowplow__conversions_source` to `"{{ ref(snowplow_joined_events_table') }}"`. Alternatively, if you are using Redshift/Postgres you may wish to include additional fields from a Self-Describing Event, or an Entity. 
 
 To do this, you should create a new model in your project, e.g. `models/snowplow/snowplow_joined_events_table.sql` which should have something like the following content. For more information about dealing with duplicates, make sure to see our [deduplication docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/index.md).
 

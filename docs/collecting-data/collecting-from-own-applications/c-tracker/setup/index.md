@@ -54,8 +54,8 @@ Make sure your project finds the same dependencies what was visible for Snowplow
 
 Cmake version 3.15 or greater is required. You may add the library to your project target (`your-target`) using `FetchContent` like so:
 
-```cmake
-include(FetchContent)
+<CodeBlock language="cmake">{
+`include(FetchContent)
 FetchContent_Declare(
     snowplow
     GIT_REPOSITORY https://github.com/snowplow/snowplow-cpp-tracker
@@ -63,7 +63,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(snowplow)
 target_link_libraries(your-target snowplow)
-```
+`}</CodeBlock>
 
 ### Copying files to your project
 

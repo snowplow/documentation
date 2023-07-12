@@ -16,7 +16,7 @@ import {versions} from '@site/src/componentVersions';
 
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 
-You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md#consent-tracking-custom-module) might call for a reasonably recent version of the [warehouse loader](/docs/destinations/warehouses-and-lakes/rdb/index.md).
+You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md#consent-tracking-custom-module) might call for a reasonably recent version of the [warehouse loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md).
 
 :::tip
 
@@ -32,7 +32,7 @@ If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to deal wi
 
 :::
 
-Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/upgrade-guides/index.md).
+Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/index.md).
 
 From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Discourse](https://discourse.snowplow.io/).
 
@@ -58,11 +58,11 @@ Component | Latest version
 :--|:-:
 [Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) | ${versions.collector}
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
-[RDB Loader (Redshift, Snowflake, Databricks)](/docs/destinations/warehouses-and-lakes/rdb/index.md) | ${versions.rdbLoader}
-[S3 Loader](/docs/destinations/warehouses-and-lakes/s3/index.md) | ${versions.s3Loader}
+[RDB Loader (Redshift, Snowflake, Databricks)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
+[S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md) | ${versions.s3Loader}
 [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
 [Elasticsearch Loader](/docs/destinations/forwarding-events/elasticsearch/index.md) | ${versions.esLoader}
-[Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | ${versions.postgresLoader}
+[Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | ${versions.postgresLoader}
 [Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/index.md) | ${versions.dataflowRunner}
 `} remarkPlugins={[remarkGfm]} />
 
@@ -74,11 +74,11 @@ Component | Latest version
 :--|:-:
 [Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) | ${versions.collector}
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
-[RDB Loader (Snowflake, Databricks)](/docs/destinations/warehouses-and-lakes/rdb/index.md) | ${versions.rdbLoader}
-[BigQuery Loader](/docs/destinations/warehouses-and-lakes/bigquery/index.md) | ${versions.bqLoader}
-[GCS Loader](/docs/destinations/warehouses-and-lakes/google-cloud-storage/index.md) | ${versions.gcsLoader}
+[RDB Loader (Snowflake, Databricks)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
+[BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) | ${versions.bqLoader}
+[GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | ${versions.gcsLoader}
 [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
-[Postgres Loader](/docs/destinations/warehouses-and-lakes/postgres/index.md) | ${versions.postgresLoader}
+[Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | ${versions.postgresLoader}
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
@@ -172,7 +172,7 @@ If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install
 <ReactMarkdown children={`
 Application | Latest version
 :--|:-:
-[Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) | ${versions.snowplowMicro}
+[Snowplow Micro](/docs/testing-debugging/snowplow-micro/what-is-micro/index.md) | ${versions.snowplowMicro}
 [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/index.md) | ${versions.snowplowMini}
 `} remarkPlugins={[remarkGfm]} />
 

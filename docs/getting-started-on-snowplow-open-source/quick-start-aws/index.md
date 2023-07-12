@@ -1,5 +1,5 @@
 ---
-title: "Quick Start on AWS"
+title: "Quick start on AWS"
 date: "2021-07-08"
 sidebar_position: 2
 ---
@@ -8,20 +8,6 @@ This guide will take you through how to spin up an open source pipeline using th
 
 _Learn more about [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started) here._
 
-### Before you begin
-
-Sign up on [discourse](https://discourse.snowplow.io/)! If you run into any problems or have any questions, we are here to help.
-
-If you are interested in receiving the latest updates from Product & Engineering, such as critical bug fixes, security updates, new features and the rest, then [join our mailing list](https://go.snowplowanalytics.com/get-snowplow-technology-updates).
-
-You can find more details on the infrastructure and applications that will be deployed in your cloud [here](/docs/getting-started-on-snowplow-open-source/quick-start-aws/summary-of-what-you-have-deployed/index.md).
-
-```mdx-code-block
-import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
-
-<PocketEdition/>
-```
-
 ### Prerequisites
 
 - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) version 2 installed
@@ -29,7 +15,7 @@ import PocketEdition from "@site/docs/reusable/pocket-edition-pitch/_index.md"
         - AdminstratorAccess allows all actions on all AWS services and shouldn't be used in production
 - [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher installed
     - Follow the instructions to make sure the terraform binary is available on your PATH. You can also use [tfenv](https://github.com/tfutils/tfenv) to help manage Terraform installation
-- Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) which allows you to publish schemas for your [custom events](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events) and [entities](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md#custom-contexts) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/index.md)
+- Download [the latest igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md) which allows you to publish schemas for your [custom events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities) to [Iglu (your schema registry)](/docs/pipeline-components-and-applications/iglu/index.md)
 - Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your localhost
     - `git clone https://github.com/snowplow/quickstart-examples.git`
 
@@ -48,7 +34,7 @@ There are also two different storage options for you to select. The steps below 
 
 ### Setting up your Iglu Server
 
-The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom event & entities](/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/index.md#custom-events). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline.
+The first step is to set up your [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) Server stack.  This will mean that you can create and evolve your own [custom events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities). Iglu enables you to store the schemas for your events & entities and fetch them as your events are getting processed by your pipeline.
 
 We will go into more details on why this is very valuable and how to create your custom events & entities later, but for now you will need to set this up first so that your pipeline (specifically the Enrich application and your loader) can communicate with Iglu.
 
@@ -180,7 +166,7 @@ This will output your `collector_dns_name`, `db_address`, `db_port` and `db_id`.
 
 :::note Terraform errors
 
-For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/getting-started-on-snowplow-open-source/what-is-quick-start/faq.md#troubleshooting-terraform-errors).
+For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/getting-started-on-snowplow-open-source/faq/index.md#troubleshooting-terraform-errors).
 
 :::
 

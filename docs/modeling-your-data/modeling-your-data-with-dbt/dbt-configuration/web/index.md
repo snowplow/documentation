@@ -73,7 +73,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 </TabItem>
 <TabItem value="redshift+postgres" label="Redshift & Postgres">
 
-Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
+Redshift and Postgres use a [shredded](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
 
 | Variable Name         | Default                                                                            |
 | --------------------- | ---------------------------------------------------------------------------------- |
@@ -149,13 +149,14 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 
 ```mdx-code-block
 import { dump } from 'js-yaml';
-import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator';
+import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator/dbtWeb.js';
 import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
 
 export const GROUPS = [
   { title: "Warehouse and tracker", fields: ["snowplow__atomic_schema",
                                             "snowplow__database",
                                             "snowplow__dev_target_name",
+                                            "snowplow__events_table",
                                             "snowplow__heartbeat",
                                             "snowplow__min_visit_length",
                                             "snowplow__sessions_table"] },
@@ -206,6 +207,6 @@ export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
 ```
 
 ## Config Generator
-You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require.
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
 
 <JsonApp schema={dbtSnowplowWebConfigSchema} output={printYamlVariables} template={Template}/>

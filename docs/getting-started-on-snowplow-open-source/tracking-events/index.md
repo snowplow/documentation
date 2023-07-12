@@ -40,7 +40,7 @@ Custom events & entities allow you to track & collect events that better reflect
 
 :::note Schemas
 
-Learn more [why schemas are a powerful feature of Snowplow](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md), and about [the anatomy of a schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md#the-anatomy-of-a-schema).
+Learn more [why schemas are a powerful feature of Snowplow](/docs/understanding-your-pipeline/schemas/index.md), and about [the anatomy of a schema](/docs/understanding-your-pipeline/schemas/index.md#the-anatomy-of-a-schema).
 
 :::
 

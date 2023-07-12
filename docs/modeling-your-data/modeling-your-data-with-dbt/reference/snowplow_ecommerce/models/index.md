@@ -266,61 +266,33 @@ from (
   from (
 
   select
-    a.contexts_com_snowplowanalytics_snowplow_web_page_1_0_0[safe_offset(0)].id as page_view_id,
-    b.domain_userid,
+      {% if var('snowplow__enable_mobile_events', false) %}
+        coalesce(
+          {{ snowplow_utils.get_optional_fields(
+          enabled=var('snowplow__enable_mobile_events', false),
+          fields=[{'field': 'id', 'dtype': 'string'}],
+          col_prefix='contexts_com_snowplowanalytics_mobile_screen_1_',
+          relation=source('atomic', 'events'),
+          relation_alias='a',
+          include_field_alias=false) }},
+          a.contexts_com_snowplowanalytics_snowplow_web_page_1_0_0[safe_offset(0)].id
+        ) as page_view_id,
+        coalesce(
+          {{ snowplow_utils.get_optional_fields(
+          enabled=var('snowplow__enable_mobile_events', false),
+          fields=[{'field': 'session_id', 'dtype': 'string'}],
+          col_prefix='contexts_com_snowplowanalytics_snowplow_client_session_1_',
+          relation=source('atomic', 'events'),
+          relation_alias='a',
+          include_field_alias=false) }},
+          a.domain_sessionid
+        ) as domain_sessionid,
+      {% else %}
+        a.contexts_com_snowplowanalytics_snowplow_web_page_1_0_0[safe_offset(0)].id as page_view_id,
+        a.domain_sessionid,
+      {% endif %}
+      b.domain_userid,
 
-  -- handling relations for integration tests
-  {% if target.schema.startswith('gh_sp_ecom_dbt_') %}
-
-      -- unpacking the ecommerce user object
-    {{ snowplow_utils.get_optional_fields(
-        enabled=not var('snowplow__disable_ecommerce_user_context', false),
-        fields=user_fields(),
-        col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_user_1_',
-        relation=ref('snowplow_ecommerce_events_stg'),
-        relation_alias='a') }},
-
-    -- unpacking the ecommerce checkout step object
-    {{ snowplow_utils.get_optional_fields(
-        enabled=not var('snowplow__disable_ecommerce_checkouts', false),
-        fields=checkout_step_fields(),
-        col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_checkout_step_1_',
-        relation=ref('snowplow_ecommerce_events_stg'),
-        relation_alias='a') }},
-
-    -- unpacking the ecommerce page object
-    {{ snowplow_utils.get_optional_fields(
-        enabled=not var('snowplow__disable_ecommerce_page_context', false),
-        fields=tracking_page_fields(),
-        col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_page_1_',
-        relation=ref('snowplow_ecommerce_events_stg'),
-        relation_alias='a') }},
-
-    -- unpacking the ecommerce transaction object
-    {{ snowplow_utils.get_optional_fields(
-        enabled=not var('snowplow__disable_ecommerce_transactions', false),
-        fields=transaction_fields(),
-        col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_transaction_1_',
-        relation=ref('snowplow_ecommerce_events_stg'),
-        relation_alias='a') }},
-
-    -- unpacking the ecommerce cart object
-    {{ snowplow_utils.get_optional_fields(
-        enabled=not var('snowplow__disable_ecommerce_carts', false),
-        fields=cart_fields(),
-        col_prefix='contexts_com_snowplowanalytics_snowplow_ecommerce_cart_1_',
-        relation=ref('snowplow_ecommerce_events_stg'),
-        relation_alias='a') }},
-
-    -- unpacking the ecommerce action object
-    {{ snowplow_utils.get_optional_fields(
-        enabled=true,
-        fields=tracking_action_fields(),
-        col_prefix='unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1_',
-        relation=ref('snowplow_ecommerce_events_stg'),
-        relation_alias='a') }},
-
-    {% else %}
       -- unpacking the ecommerce user object
       {{ snowplow_utils.get_optional_fields(
           enabled=not var('snowplow__disable_ecommerce_user_context', false),
@@ -368,14 +340,26 @@ from (
           col_prefix='unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1_',
           relation=source('atomic', 'events'),
           relation_alias='a') }},
-    {% endif %}
 
     a.* except (domain_userid,
-                contexts_com_snowplowanalytics_snowplow_web_page_1_0_0)
+                contexts_com_snowplowanalytics_snowplow_web_page_1_0_0, domain_sessionid)
 
     from {{ var('snowplow__events') }} as a
     inner join {{ ref('snowplow_ecommerce_base_sessions_this_run') }} as b
-    on a.domain_sessionid = b.session_id
+    {% if var('snowplow__enable_mobile_events', false) %}
+      on coalesce(
+        {{ snowplow_utils.get_optional_fields(
+        enabled=var('snowplow__enable_mobile_events', false),
+        fields=[{'field': 'session_id', 'dtype': 'string'}],
+        col_prefix='contexts_com_snowplowanalytics_snowplow_client_session_1_',
+        relation=source('atomic', 'events'),
+        relation_alias='a',
+        include_field_alias=false) }},
+        a.domain_sessionid
+      ) = b.session_id
+    {% else %}
+      on a.domain_sessionid = b.session_id
+    {% endif %}
 
     where a.collector_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'b.start_tstamp') }}
     and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'a.dvce_created_tstamp') }}
@@ -411,7 +395,20 @@ from (
 with prep AS (
 
   select
-    a.contexts_com_snowplowanalytics_snowplow_web_page_1[0].id::string as page_view_id,
+      {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(
+        a.contexts_com_snowplowanalytics_mobile_screen_1[0].id::string,
+        a.contexts_com_snowplowanalytics_snowplow_web_page_1[0].id::string
+      ) as page_view_id,
+      coalesce(
+        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0].session_id::string,
+        a.domain_sessionid
+      ) as domain_sessionid,
+    {% else %}
+      a.contexts_com_snowplowanalytics_snowplow_web_page_1[0].id::string as page_view_id,
+      a.domain_sessionid,
+    {% endif %}
+
     b.domain_userid,
 
     -- unpacking the ecommerce user object
@@ -504,11 +501,18 @@ with prep AS (
     a.unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1.type::string as ecommerce_action_type,
     a.unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1.name::string as ecommerce_action_name,
 
-    a.* except(contexts_com_snowplowanalytics_snowplow_web_page_1, domain_userid)
+    a.* except(contexts_com_snowplowanalytics_snowplow_web_page_1, domain_userid, domain_sessionid)
 
   from {{ var('snowplow__events') }} as a
   inner join {{ ref('snowplow_ecommerce_base_sessions_this_run') }} as b
-  on a.domain_sessionid = b.session_id
+  {% if var('snowplow__enable_mobile_events', false) %}
+    on coalesce(
+        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0].session_id::string,
+        a.domain_sessionid
+      ) = b.session_id
+  {% else %}
+    on a.domain_sessionid = b.session_id
+  {% endif %}
 
   where a.collector_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'b.start_tstamp') }}
   and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'a.dvce_created_tstamp') }}
@@ -547,7 +551,14 @@ from prep
 /* Dedupe logic: Per dupe event_id keep earliest row ordered by collector_tstamp.
    If multiple earliest rows, take arbitrary one using row_number(). */
 
-with events_this_run AS (
+with
+
+{% if var('snowplow__enable_mobile_events', false) -%}
+    {{ snowplow_utils.get_sde_or_context(var('snowplow__atomic_schema', 'atomic'), var('snowplow__context_mobile_session'), lower_limit, upper_limit, 'mob_session') }},
+    {{ snowplow_utils.get_sde_or_context(var('snowplow__atomic_schema', 'atomic'), var('snowplow__context_screen'), lower_limit, upper_limit, 'mob_sc_view') }},
+{%- endif %}
+
+events_this_run AS (
     select
         a.app_id,
         a.platform,
@@ -669,7 +680,14 @@ with events_this_run AS (
         a.dvce_sent_tstamp,
         a.refr_domain_userid,
         a.refr_dvce_tstamp,
-        a.domain_sessionid,
+        {% if var('snowplow__enable_mobile_events', false) %}
+            coalesce(
+                ms.mob_session_session_id,
+                a.domain_sessionid
+            ) as domain_sessionid,
+        {% else %}
+            a.domain_sessionid,
+        {% endif %}
         a.derived_tstamp,
         a.event_vendor,
         a.event_name,
@@ -684,8 +702,19 @@ with events_this_run AS (
         count(*) over (partition by a.event_id) as event_id_dedupe_count
 
     from {{ var('snowplow__events') }} as a
+    {% if var('snowplow__enable_mobile_events', false) -%}
+        left join {{ var('snowplow__context_mobile_session') }} ms on a.event_id = ms.mob_session__id and a.collector_tstamp = ms.mob_session__tstamp
+    {%- endif %}
         inner join {{ ref('snowplow_ecommerce_base_sessions_this_run') }} as b
-            on a.domain_sessionid = b.session_id
+            on
+            {% if var('snowplow__enable_mobile_events', false) %}
+                coalesce(
+                    ms.mob_session_session_id,
+                    a.domain_sessionid
+                )
+            {% else %}
+                a.domain_sessionid
+            {% endif %} = b.session_id
 
     where a.collector_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'b.start_tstamp') }}
         and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'a.dvce_created_tstamp') }}
@@ -718,11 +747,15 @@ with events_this_run AS (
 {{ snowplow_utils.get_sde_or_context(var('snowplow__atomic_schema', 'atomic'), var('snowplow__context_web_page'), lower_limit, upper_limit, 'page_view') }}
 
 
-
-
 select ev.*,
-
-    pv.page_view_id,
+    {% if var('snowplow__enable_mobile_events', false) %}
+        coalesce(
+            sv.mob_sc_view_id,
+            pv.page_view_id
+        ) as page_view_id,
+    {% else %}
+        pv.page_view_id,
+    {% endif %}
 
     {% if var('snowplow__disable_ecommerce_user_context', false) -%}
         cast(NULL as {{ type_string() }}) as ecommerce_user_id,
@@ -835,7 +868,9 @@ from events_this_run ev
 {%- endif %}
     left join {{ var('snowplow__sde_ecommerce_action') }} action on ev.event_id = action.ecommerce_action__id and ev.collector_tstamp = action.ecommerce_action__tstamp
     left join {{ var('snowplow__context_web_page') }} pv on ev.event_id = pv.page_view__id and ev.collector_tstamp = pv.page_view__tstamp
-
+{% if var('snowplow__enable_mobile_events', false) -%}
+    left join {{ var('snowplow__context_screen') }} sv on ev.event_id = sv.mob_sc_view__id and ev.collector_tstamp = sv.mob_sc_view__tstamp
+{%- endif %}
 where
     ev.event_id_dedupe_index = ev.event_id_dedupe_count
 ```
@@ -860,7 +895,19 @@ where
 with prep as (
 
   select
-    a.contexts_com_snowplowanalytics_snowplow_web_page_1[0]:id::varchar as page_view_id,
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(
+        a.contexts_com_snowplowanalytics_mobile_screen_1[0]:id::varchar,
+        a.contexts_com_snowplowanalytics_snowplow_web_page_1[0]:id::varchar
+      ) as page_view_id,
+      coalesce(
+        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::varchar,
+        a.domain_sessionid
+      ) as domain_sessionid,
+    {% else %}
+      a.contexts_com_snowplowanalytics_snowplow_web_page_1[0]:id::varchar as page_view_id,
+      a.domain_sessionid,
+    {% endif %}
     b.domain_userid,
 
     -- unpacking the ecommerce user object
@@ -955,12 +1002,19 @@ with prep as (
     a.unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type::varchar as ecommerce_action_type,
     a.unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:name::varchar as ecommerce_action_name,
 
-    a.* exclude(contexts_com_snowplowanalytics_snowplow_web_page_1, domain_userid)
+    a.* exclude(contexts_com_snowplowanalytics_snowplow_web_page_1, domain_userid, domain_sessionid)
 
 
   from {{ var('snowplow__events') }} as a
   inner join {{ ref('snowplow_ecommerce_base_sessions_this_run') }} as b
-  on a.domain_sessionid = b.session_id
+  {% if var('snowplow__enable_mobile_events', false) %}
+    on coalesce(
+        a.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::varchar,
+        a.domain_sessionid
+      ) = b.session_id
+  {% else %}
+    on a.domain_sessionid = b.session_id
+  {% endif %}
 
   where a.collector_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'b.start_tstamp') }}
   and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'a.dvce_created_tstamp') }}
@@ -1222,7 +1276,7 @@ where false
 ### Snowplow Ecommerce Base Sessions Lifecycle Manifest {#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest}
 
 <DbtDetails><summary>
-<code>models/base/manifest/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql</code>
+<code>models/base/manifest/&lt;adaptor&gt;/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql</code>
 </summary>
 
 <h4>Description</h4>
@@ -1232,6 +1286,32 @@ This incremental table is a manifest of all sessions that have been processed by
 By knowing the lifecycle of a session the model is able to able to determine which sessions and thus events to process for a given timeframe, as well as the complete date range required to reprocess all events of each session.
 
 **Type**: Table
+
+<h4>File Paths</h4>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="bigquery" label="bigquery">
+
+`models/base/manifest/bigquery/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql`
+
+</TabItem>
+<TabItem value="databricks" label="databricks">
+
+`models/base/manifest/databricks/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql`
+
+</TabItem>
+<TabItem value="default" label="default" default>
+
+`models/base/manifest/default/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql`
+
+</TabItem>
+<TabItem value="snowflake" label="snowflake">
+
+`models/base/manifest/snowflake/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql`
+
+</TabItem>
+</Tabs>
+
 
 <h4>Details</h4>
 
@@ -1250,9 +1330,9 @@ By knowing the lifecycle of a session the model is able to able to determine whi
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="default" label="default" default>
+<TabItem value="bigquery" label="bigquery">
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/base/manifest/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/base/manifest/bigquery/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql">Source</a></i></b></center>
 
 ```jinja2
 {{
@@ -1280,16 +1360,436 @@ By knowing the lifecycle of a session the model is able to able to determine whi
 
 with new_events_session_ids as (
   select
-    e.domain_sessionid as session_id,
-    max(e.domain_userid) as domain_userid, -- Edge case 1: Arbitary selection to avoid window function like first_value.
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(
+        {{ snowplow_utils.get_optional_fields(
+          enabled=var('snowplow__enable_mobile_events', false),
+          fields=[{'field': 'session_id', 'dtype': 'string'}],
+          col_prefix='contexts_com_snowplowanalytics_snowplow_client_session_1_',
+          relation=source('atomic', 'events'),
+          relation_alias='e',
+          include_field_alias=false) }},
+        e.domain_sessionid
+      ) as session_id,
+      max(coalesce(
+      {{ snowplow_utils.get_optional_fields(
+          enabled=var('snowplow__enable_mobile_events', false),
+          fields=[{'field': 'user_id', 'dtype': 'string'}],
+          col_prefix='contexts_com_snowplowanalytics_snowplow_client_session_1_',
+          relation=source('atomic', 'events'),
+          relation_alias='e',
+          include_field_alias=false) }},
+        e.domain_userid
+      )) as domain_userid,
+    {% else %}
+      e.domain_sessionid as session_id,
+      max(e.domain_userid) as domain_userid, -- Edge case 1: Arbitary selection to avoid window function like first_value.
+    {% endif %}
     min(e.collector_tstamp) as start_tstamp,
     max(e.collector_tstamp) as end_tstamp
 
   from {{ var('snowplow__events') }} e
 
   where
-    e.domain_sessionid is not null
-    and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = e.domain_sessionid) -- don't continue processing v.long sessions
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(
+      {{ snowplow_utils.get_optional_fields(
+        enabled=var('snowplow__enable_mobile_events', false),
+        fields=[{'field': 'session_id', 'dtype': 'string'}],
+        col_prefix='contexts_com_snowplowanalytics_snowplow_client_session_1_',
+        relation=source('atomic', 'events'),
+        relation_alias='e',
+        include_field_alias=false) }},
+      e.domain_sessionid
+    ) is not null
+          and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = coalesce(
+      {{ snowplow_utils.get_optional_fields(
+        enabled=var('snowplow__enable_mobile_events', false),
+        fields=[{'field': 'session_id', 'dtype': 'string'}],
+        col_prefix='contexts_com_snowplowanalytics_snowplow_client_session_1_',
+        relation=source('atomic', 'events'),
+        relation_alias='e',
+        include_field_alias=false) }},
+      e.domain_sessionid
+    )) -- don't continue processing v.long sessions
+    {% else %}
+      e.domain_sessionid is not null
+      and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = e.domain_sessionid) -- don't continue processing v.long sessions
+    {% endif %}
+    and e.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'dvce_created_tstamp') }} -- don't process data that's too late
+    and e.collector_tstamp >= {{ lower_limit }}
+    and e.collector_tstamp <= {{ upper_limit }}
+    and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
+    and {{ event_name_filter(var("snowplow__ecommerce_event_names", ["snowplow_ecommerce_event"]))}}
+    and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+    {% if var('snowplow__derived_tstamp_partitioned', true) and target.type == 'bigquery' | as_bool() %} -- BQ only
+      and e.derived_tstamp >= {{ lower_limit }}
+      and e.derived_tstamp <= {{ upper_limit }}
+    {% endif %}
+
+  group by 1
+  )
+
+{% if is_incremental() %}
+
+, previous_sessions as (
+  select *
+
+  from {{ this }}
+
+  where start_tstamp >= {{ session_lookback_limit }}
+  and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+)
+
+, session_lifecycle as (
+  select
+    ns.session_id,
+    coalesce(self.domain_userid, ns.domain_userid) as domain_userid, -- Edge case 1: Take previous value to keep domain_userid consistent. Not deterministic but performant
+    least(ns.start_tstamp, coalesce(self.start_tstamp, ns.start_tstamp)) as start_tstamp,
+    greatest(ns.end_tstamp, coalesce(self.end_tstamp, ns.end_tstamp)) as end_tstamp -- BQ 1 NULL will return null hence coalesce
+
+  from new_events_session_ids ns
+  left join previous_sessions as self
+    on ns.session_id = self.session_id
+
+  where
+    self.session_id is null -- process all new sessions
+    or self.end_tstamp < {{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'self.start_tstamp') }} --stop updating sessions exceeding 3 days
+  )
+
+{% else %}
+
+, session_lifecycle as (
+
+  select * from new_events_session_ids
+
+)
+
+{% endif %}
+
+select
+  sl.session_id,
+  sl.domain_userid,
+  sl.start_tstamp,
+  least({{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'sl.start_tstamp') }}, sl.end_tstamp) as end_tstamp -- limit session length to max_session_days
+  {% if target.type in ['databricks', 'spark'] -%}
+  , DATE(sl.start_tstamp) as start_tstamp_date
+  {%- endif %}
+
+from session_lifecycle sl
+```
+
+</TabItem>
+<TabItem value="databricks" label="databricks">
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/base/manifest/databricks/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql">Source</a></i></b></center>
+
+```jinja2
+{{
+  config(
+    materialized="incremental",
+    unique_key='session_id',
+    upsert_date_key='start_tstamp',
+    sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
+      "field": "start_tstamp",
+      "data_type": "timestamp"
+    }, databricks_val='start_tstamp_date'),
+    full_refresh=snowplow_ecommerce.allow_refresh(),
+    tags=["manifest"],
+    snowplow_optimize=true
+  )
+}}
+
+-- Known edge cases:
+-- 1: Rare case with multiple domain_userid per session.
+
+{% set lower_limit, upper_limit, _ = snowplow_utils.return_base_new_event_limits(ref('snowplow_ecommerce_base_new_event_limits')) %}
+{% set session_lookback_limit = snowplow_utils.get_session_lookback_limit(lower_limit) %}
+{% set is_run_with_new_events = snowplow_utils.is_run_with_new_events('snowplow_ecommerce') %}
+
+with new_events_session_ids as (
+  select
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(
+        e.contexts_com_snowplowanalytics_snowplow_client_session_1[0].session_id::string,
+        e.domain_sessionid
+      ) as session_id,
+      max(coalesce(
+        e.contexts_com_snowplowanalytics_snowplow_client_session_1[0].user_id::string,
+        e.domain_userid
+      )) as domain_userid,
+    {% else %}
+      e.domain_sessionid as session_id,
+      max(e.domain_userid) as domain_userid, -- Edge case 1: Arbitary selection to avoid window function like first_value.
+    {% endif %}
+    min(e.collector_tstamp) as start_tstamp,
+    max(e.collector_tstamp) as end_tstamp
+
+  from {{ var('snowplow__events') }} e
+
+  where
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(
+        e.contexts_com_snowplowanalytics_snowplow_client_session_1[0].session_id::string,
+        e.domain_sessionid
+      ) is not null
+      and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = coalesce(
+        e.contexts_com_snowplowanalytics_snowplow_client_session_1[0].session_id::string,
+        e.domain_sessionid
+      )) -- don't continue processing v.long sessions
+    {% else %}
+      e.domain_sessionid is not null
+      and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = e.domain_sessionid) -- don't continue processing v.long sessions
+    {% endif %}
+    and e.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'dvce_created_tstamp') }} -- don't process data that's too late
+    and e.collector_tstamp >= {{ lower_limit }}
+    and e.collector_tstamp <= {{ upper_limit }}
+    and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
+    and {{ event_name_filter(var("snowplow__ecommerce_event_names", ["snowplow_ecommerce_event"]))}}
+    and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+    {% if var('snowplow__derived_tstamp_partitioned', true) and target.type == 'bigquery' | as_bool() %} -- BQ only
+      and e.derived_tstamp >= {{ lower_limit }}
+      and e.derived_tstamp <= {{ upper_limit }}
+    {% endif %}
+
+  group by 1
+  )
+
+{% if is_incremental() %}
+
+, previous_sessions as (
+  select *
+
+  from {{ this }}
+
+  where start_tstamp >= {{ session_lookback_limit }}
+  and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+)
+
+, session_lifecycle as (
+  select
+    ns.session_id,
+    coalesce(self.domain_userid, ns.domain_userid) as domain_userid, -- Edge case 1: Take previous value to keep domain_userid consistent. Not deterministic but performant
+    least(ns.start_tstamp, coalesce(self.start_tstamp, ns.start_tstamp)) as start_tstamp,
+    greatest(ns.end_tstamp, coalesce(self.end_tstamp, ns.end_tstamp)) as end_tstamp -- BQ 1 NULL will return null hence coalesce
+
+  from new_events_session_ids ns
+  left join previous_sessions as self
+    on ns.session_id = self.session_id
+
+  where
+    self.session_id is null -- process all new sessions
+    or self.end_tstamp < {{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'self.start_tstamp') }} --stop updating sessions exceeding 3 days
+  )
+
+{% else %}
+
+, session_lifecycle as (
+
+  select * from new_events_session_ids
+
+)
+
+{% endif %}
+
+select
+  sl.session_id,
+  sl.domain_userid,
+  sl.start_tstamp,
+  least({{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'sl.start_tstamp') }}, sl.end_tstamp) as end_tstamp -- limit session length to max_session_days
+  {% if target.type in ['databricks', 'spark'] -%}
+  , DATE(sl.start_tstamp) as start_tstamp_date
+  {%- endif %}
+
+from session_lifecycle sl
+```
+
+</TabItem>
+<TabItem value="default" label="default" default>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/base/manifest/default/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql">Source</a></i></b></center>
+
+```jinja2
+{{
+  config(
+    materialized="incremental",
+    unique_key='session_id',
+    upsert_date_key='start_tstamp',
+    sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
+      "field": "start_tstamp",
+      "data_type": "timestamp"
+    }, databricks_val='start_tstamp_date'),
+    full_refresh=snowplow_ecommerce.allow_refresh(),
+    tags=["manifest"],
+    snowplow_optimize=true
+  )
+}}
+
+-- Known edge cases:
+-- 1: Rare case with multiple domain_userid per session.
+
+{% set lower_limit, upper_limit, _ = snowplow_utils.return_base_new_event_limits(ref('snowplow_ecommerce_base_new_event_limits')) %}
+{% set session_lookback_limit = snowplow_utils.get_session_lookback_limit(lower_limit) %}
+{% set is_run_with_new_events = snowplow_utils.is_run_with_new_events('snowplow_ecommerce') %}
+
+with
+
+{% if var('snowplow__enable_mobile_events', false) -%}
+    {{ snowplow_utils.get_sde_or_context(var('snowplow__atomic_schema', 'atomic'), var('snowplow__context_mobile_session'), lower_limit, upper_limit, 'mob_session') }},
+{%- endif %}
+
+new_events_session_ids as (
+  select
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(ms.mob_session_session_id, e.domain_sessionid) as session_id,
+      max(coalesce(ms.mob_session_user_id, e.domain_userid)) as domain_userid,
+    {% else %}
+      e.domain_sessionid as session_id,
+      max(e.domain_userid) as domain_userid, -- Edge case 1: Arbitary selection to avoid window function like first_value.
+    {% endif %}
+    min(e.collector_tstamp) as start_tstamp,
+    max(e.collector_tstamp) as end_tstamp
+
+  from {{ var('snowplow__events') }} e
+  {% if var('snowplow__enable_mobile_events', false) -%}
+      left join {{ var('snowplow__context_mobile_session') }} ms on e.event_id = ms.mob_session__id and e.collector_tstamp = ms.mob_session__tstamp
+  {%- endif %}
+  where
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(ms.mob_session_session_id, e.domain_sessionid) is not null
+      and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = coalesce(ms.mob_session_session_id, e.domain_sessionid)) -- don't continue processing v.long sessions
+    {% else %}
+      e.domain_sessionid is not null
+      and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = e.domain_sessionid) -- don't continue processing v.long sessions
+    {% endif %}
+    and e.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'dvce_created_tstamp') }} -- don't process data that's too late
+    and e.collector_tstamp >= {{ lower_limit }}
+    and e.collector_tstamp <= {{ upper_limit }}
+    and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
+    and {{ event_name_filter(var("snowplow__ecommerce_event_names", ["snowplow_ecommerce_event"]))}}
+    and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+    {% if var('snowplow__derived_tstamp_partitioned', true) and target.type == 'bigquery' | as_bool() %} -- BQ only
+      and e.derived_tstamp >= {{ lower_limit }}
+      and e.derived_tstamp <= {{ upper_limit }}
+    {% endif %}
+
+  group by 1
+  )
+
+{% if is_incremental() %}
+
+, previous_sessions as (
+  select *
+
+  from {{ this }}
+
+  where start_tstamp >= {{ session_lookback_limit }}
+  and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+)
+
+, session_lifecycle as (
+  select
+    ns.session_id,
+    coalesce(self.domain_userid, ns.domain_userid) as domain_userid, -- Edge case 1: Take previous value to keep domain_userid consistent. Not deterministic but performant
+    least(ns.start_tstamp, coalesce(self.start_tstamp, ns.start_tstamp)) as start_tstamp,
+    greatest(ns.end_tstamp, coalesce(self.end_tstamp, ns.end_tstamp)) as end_tstamp -- BQ 1 NULL will return null hence coalesce
+
+  from new_events_session_ids ns
+  left join previous_sessions as self
+    on ns.session_id = self.session_id
+
+  where
+    self.session_id is null -- process all new sessions
+    or self.end_tstamp < {{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'self.start_tstamp') }} --stop updating sessions exceeding 3 days
+  )
+
+{% else %}
+
+, session_lifecycle as (
+
+  select * from new_events_session_ids
+
+)
+
+{% endif %}
+
+select
+  sl.session_id,
+  sl.domain_userid,
+  sl.start_tstamp,
+  least({{ snowplow_utils.timestamp_add('day', var("snowplow__max_session_days", 3), 'sl.start_tstamp') }}, sl.end_tstamp) as end_tstamp -- limit session length to max_session_days
+  {% if target.type in ['databricks', 'spark'] -%}
+  , DATE(sl.start_tstamp) as start_tstamp_date
+  {%- endif %}
+
+from session_lifecycle sl
+```
+
+</TabItem>
+<TabItem value="snowflake" label="snowflake">
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/models/base/manifest/snowflake/snowplow_ecommerce_base_sessions_lifecycle_manifest.sql">Source</a></i></b></center>
+
+```jinja2
+{{
+  config(
+    materialized="incremental",
+    unique_key='session_id',
+    upsert_date_key='start_tstamp',
+    sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt')),
+    partition_by = snowplow_utils.get_value_by_target_type(bigquery_val={
+      "field": "start_tstamp",
+      "data_type": "timestamp"
+    }, databricks_val='start_tstamp_date'),
+    full_refresh=snowplow_ecommerce.allow_refresh(),
+    tags=["manifest"],
+    snowplow_optimize=true
+  )
+}}
+
+-- Known edge cases:
+-- 1: Rare case with multiple domain_userid per session.
+
+{% set lower_limit, upper_limit, _ = snowplow_utils.return_base_new_event_limits(ref('snowplow_ecommerce_base_new_event_limits')) %}
+{% set session_lookback_limit = snowplow_utils.get_session_lookback_limit(lower_limit) %}
+{% set is_run_with_new_events = snowplow_utils.is_run_with_new_events('snowplow_ecommerce') %}
+
+with new_events_session_ids as (
+  select
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(
+        e.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::varchar,
+        e.domain_sessionid
+      ) as session_id,
+      max(coalesce(
+        e.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:userId::varchar,
+        e.domain_userid
+      )) as domain_userid,
+    {% else %}
+      e.domain_sessionid as session_id,
+      max(e.domain_userid) as domain_userid, -- Edge case 1: Arbitary selection to avoid window function like first_value.
+    {% endif %}
+    min(e.collector_tstamp) as start_tstamp,
+    max(e.collector_tstamp) as end_tstamp
+
+  from {{ var('snowplow__events') }} e
+
+  where
+    {% if var('snowplow__enable_mobile_events', false) %}
+      coalesce(
+        e.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::varchar,
+        e.domain_sessionid
+      ) is not null
+      and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = coalesce(
+        e.contexts_com_snowplowanalytics_snowplow_client_session_1[0]:sessionId::varchar,
+        e.domain_sessionid
+      )) -- don't continue processing v.long sessions
+    {% else %}
+      e.domain_sessionid is not null
+      and not exists (select 1 from {{ ref('snowplow_ecommerce_base_quarantined_sessions') }} as a where a.session_id = e.domain_sessionid) -- don't continue processing v.long sessions
+    {% endif %}
     and e.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'dvce_created_tstamp') }} -- don't process data that's too late
     and e.collector_tstamp >= {{ lower_limit }}
     and e.collector_tstamp <= {{ upper_limit }}
@@ -1375,6 +1875,8 @@ from session_lifecycle sl
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
 - [macro.snowplow_ecommerce.event_name_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.event_name_filter)
 - [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
+- [macro.snowplow_utils.get_optional_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_optional_fields)
+- [macro.snowplow_utils.get_sde_or_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_sde_or_context)
 - [macro.snowplow_utils.get_session_lookback_limit](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_session_lookback_limit)
 - [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
@@ -2331,7 +2833,7 @@ This staging table tracks and stores information about product interactions that
 
 with product_info as (
   select
-    {{ dbt_utils.generate_surrogate_key(['t.event_id', 'r.id']) }} as product_event_id,
+    {{ dbt_utils.generate_surrogate_key(['t.event_id', 'r.id', 'index']) }} as product_event_id,
     t.event_id,
     t.page_view_id,
 
@@ -2380,7 +2882,7 @@ with product_info as (
     t.transaction_id
 
 
-  from {{ ref('snowplow_ecommerce_base_events_this_run') }} as t, unnest( {{coalesce_columns_by_prefix(ref('snowplow_ecommerce_base_events_this_run'), 'contexts_com_snowplowanalytics_snowplow_ecommerce_product_1') }}) r
+  from {{ ref('snowplow_ecommerce_base_events_this_run') }} as t, unnest( {{coalesce_columns_by_prefix(ref('snowplow_ecommerce_base_events_this_run'), 'contexts_com_snowplowanalytics_snowplow_ecommerce_product_1') }}) r WITH OFFSET AS INDEX
 
 )
 
@@ -2485,13 +2987,13 @@ with prep as (
     t.ecommerce_user_email,
     t.transaction_id,
 
-    EXPLODE(contexts_com_snowplowanalytics_snowplow_ecommerce_product_1) as contexts_com_snowplowanalytics_snowplow_ecommerce_product_1
+    POSEXPLODE(contexts_com_snowplowanalytics_snowplow_ecommerce_product_1) as (index, contexts_com_snowplowanalytics_snowplow_ecommerce_product_1)
 
   from {{ ref('snowplow_ecommerce_base_events_this_run') }} as t
 
 ), product_info as (
   select
-    {{ dbt_utils.generate_surrogate_key(['event_id', 'contexts_com_snowplowanalytics_snowplow_ecommerce_product_1.id']) }} as product_event_id,
+    {{ dbt_utils.generate_surrogate_key(['event_id', 'contexts_com_snowplowanalytics_snowplow_ecommerce_product_1.id', 'index']) }} as product_event_id,
     event_id,
     page_view_id,
 
@@ -2623,7 +3125,7 @@ with {{ snowplow_utils.get_sde_or_context(var('snowplow__atomic_schema', 'atomic
 
 product_info as (
   select
-    {{ dbt_utils.generate_surrogate_key(['t.event_id', 'r.ecommerce_product_id']) }} as product_event_id,
+    {{ dbt_utils.generate_surrogate_key(['t.event_id', 'r.ecommerce_product_id', 'r.ecommerce_product__index']) }} as product_event_id,
     t.event_id,
     t.page_view_id,
 
@@ -2750,7 +3252,7 @@ from product_info
 
 with product_info as (
   select
-    {{ dbt_utils.generate_surrogate_key(['t.event_id', 'r.value:id']) }} as product_event_id,
+    {{ dbt_utils.generate_surrogate_key(['t.event_id', 'r.value:id', 'r.index']) }} as product_event_id,
     t.event_id,
     t.page_view_id,
 

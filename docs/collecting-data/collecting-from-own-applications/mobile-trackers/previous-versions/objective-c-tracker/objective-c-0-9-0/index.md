@@ -262,7 +262,7 @@ They can be found in the `Examples` folder:
 
 The two Swift apps share the same codebase. The unique difference is in the configuration for the dependency managers.
 
-For general testing, [Snowplow Mini](/docs/understanding-your-pipeline/what-is-snowplow-mini/index.md) can be used as an easily deployable collector with a live web interface for viewing received events.
+For general testing, [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/overview/index.md) can be used as an easily deployable collector with a live web interface for viewing received events.
 
 The apps can be run in an emulator or on an actual Apple device through Xcode.
 

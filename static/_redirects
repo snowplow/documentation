@@ -20,6 +20,7 @@
 /accelerators/snowplow_fractribution/* /accelerators/snowplow-fractribution/:splat 301
 
 
+/docs/collecting-data/collecting-from-own-applications/javascript-tracker/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/ 301  # http://bit.ly/sp-js linked in most of the web tracker artifacts
 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
 /docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
 /docs/collecting-data/collecting-from-own-applications/python-tracker/adding-extra-data-the-subject-class/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/adding-extra-data-the-subject-class/:splat 301
@@ -72,11 +73,6 @@
 
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/snowflakedb/ /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-destinations/snowflake/ 301
 
-/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/* /docs/destinations/warehouses-and-lakes/bigquery/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/* /docs/destinations/warehouses-and-lakes/google-cloud-storage/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/* /docs/destinations/warehouses-and-lakes/s3/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/* /docs/destinations/warehouses-and-lakes/postgres/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/* /docs/destinations/warehouses-and-lakes/rdb/:splat 301
 /docs/forwarding-events-to-destinations/reverse-etl/* /docs/destinations/reverse-etl/:splat 301
 /docs/forwarding-events-to-destinations/supporting-additional-destinations/* /docs/destinations/overview/:splat 301
 /docs/forwarding-events-to-destinations/forwarding-events/* /docs/destinations/forwarding-events/:splat 301
@@ -120,7 +116,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/enriching-your-data/configuring-enrichments/* /docs/enriching-your-data/managing-enrichments/ui/:splat 301
 /docs/enriching-your-data/configuring-enrichments-open-source/* /docs/enriching-your-data/managing-enrichments/terraform/:splat 301
 
-/docs/managing-data-quality/failed-events/understanding-failed-events/* /docs/managing-data-quality/understanding-failed-events/:splat 301
+/docs/managing-data-quality/failed-events/understanding-failed-events/* /docs/understanding-your-pipeline/failed-events/:splat 301
 
 /docs/managing-data-quality/failed-events/accessing-failed-events-in-file-storage/* /docs/managing-data-quality/exploring-failed-events/file-storage/:splat 301
 /docs/managing-data-quality/failed-events/failed-events-in-athena-and-bigquery/* /docs/managing-data-quality/exploring-failed-events/querying/:splat 301
@@ -138,3 +134,29 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/using-the-snowplow-console/managing-user-permissions-in-console/* /docs/using-the-snowplow-console/managing-users/managing-permissions/:splat 301
 
 /docs/using-the-snowplow-console/accessing-collector-configuration/* /docs/collecting-data/configuring-collector/ui/:splat 301
+
+/docs/destinations/warehouses-and-lakes/bigquery/* /docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/:splat 301
+/docs/destinations/warehouses-and-lakes/google-cloud-storage/* /docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/:splat 301
+/docs/destinations/warehouses-and-lakes/s3/* /docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/:splat 301
+/docs/destinations/warehouses-and-lakes/postgres/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/:splat 301
+/docs/destinations/warehouses-and-lakes/rdb/* /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/:splat 301
+
+/docs/understanding-your-pipeline/what-is-snowplow-mini/* /docs/pipeline-components-and-applications/snowplow-mini/overview/:splat 301
+/docs/understanding-tracking-design/understanding-events-entities/ /docs/understanding-your-pipeline/events/ 301
+/docs/understanding-tracking-design/understanding-schemas-and-validation/* /docs/understanding-your-pipeline/schemas/:splat 301
+/docs/understanding-tracking-design/out-of-the-box-vs-custom-events-and-entities/ /docs/understanding-your-pipeline/events/ 301
+/docs/understanding-tracking-design/predefined-vs-custom-entities/ /docs/understanding-your-pipeline/entities/ 301
+/docs/managing-data-quality/understanding-failed-events/* /docs/understanding-your-pipeline/failed-events/:splat 301
+/docs/understanding-your-pipeline/glossary-of-terms/ /docs/understanding-your-pipeline/ 301
+/docs/understanding-your-pipeline/architecture-overview-aws/* /docs/understanding-your-pipeline/architecture-overview/:splat 301
+
+/docs/destinations/warehouses-and-lakes/* /docs/storing-querying/storage-options/:splat 301
+/docs/understanding-tracking-design/json-schema-type-casting-rules/* /docs/storing-querying/schemas-in-warehouse/:splat 301
+/docs/destinations/overview/* /docs/understanding-your-pipeline/destinations/:splat 301
+
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/* /docs/getting-started-on-snowplow-open-source/quick-start-aws/ 301
+/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/* /docs/getting-started-on-snowplow-open-source/quick-start-gcp/ 301
+/docs/getting-started-on-snowplow-open-source/what-is-quick-start/faq/ /docs/getting-started-on-snowplow-open-source/faq/ 301
+
+/docs/tutorials/tutorial-a-guide-to-using-the-snowplow-inspector-extension/* /docs/testing-debugging/snowplow-inspector/:splat 301
+/docs/getting-started-with-micro/* /docs/testing-debugging/snowplow-micro/:splat 301

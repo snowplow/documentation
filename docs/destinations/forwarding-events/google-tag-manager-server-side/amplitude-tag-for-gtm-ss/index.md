@@ -10,6 +10,12 @@ The tag is designed to work best with Self Describing Events, and atomic events,
 
 ## Template Installation
 
+:::note
+
+The server Docker image must be 2.0.0 or later.
+
+:::
+
 ### Tag Manager Gallery
 
 1. From the Templates tab in GTM Server Side, click “Search Gallery” in the Tag Templates section

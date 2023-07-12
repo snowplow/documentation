@@ -8,7 +8,7 @@ sidebar_position: 600
 
 ## Failure targets
 
-When Snowbridge hits an unrecoverable error — for example [oversized](#oversized-data) or [invalid](#invalid-data) data — it will emit a [failed event](/docs/managing-data-quality/understanding-failed-events/index.md#what-is-a-failed-event) to the configured failure target. A failure target is the same as a target, the only difference is that the configured destination will receive failed events.
+When Snowbridge hits an unrecoverable error — for example [oversized](#oversized-data) or [invalid](#invalid-data) data — it will emit a [failed event](/docs/understanding-your-pipeline/failed-events/index.md#what-is-a-failed-event) to the configured failure target. A failure target is the same as a target, the only difference is that the configured destination will receive failed events.
 
 You can find more detail on setting up a failure target, in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/targets/index.md).
 
@@ -24,13 +24,13 @@ Note that this means failures on the receiving end (eg. if an endpoint is unavai
 
 ### Oversized data
 
-Targets have limits to the size of a single message. Where the destination technology has a hard limit, targets are hardcoded to that limit. Otherwise, this is a configurable option in the target configuration. When a message's data is above this limit, Snowbridge will produce a [size violation failed event](/docs/managing-data-quality/understanding-failed-events/index.md#size-violation), and emit it to the failure target.
+Targets have limits to the size of a single message. Where the destination technology has a hard limit, targets are hardcoded to that limit. Otherwise, this is a configurable option in the target configuration. When a message's data is above this limit, Snowbridge will produce a [size violation failed event](/docs/understanding-your-pipeline/failed-events/index.md#size-violation), and emit it to the failure target.
 
 Writes of oversized messages to the failure target will be recorded with 'OversizedMsg' statistics in monitoring. Any failure to write to the failure target will cause a [fatal failure](#fatal-failure).
 
 ### Invalid data
 
-In the unlikely event that Snowbridge encounters data which is invalid for the target destination (for example empty data is invalid for pubsub), it will create a [generic error failed event](/docs/managing-data-quality/understanding-failed-events/index.md#generic-error),  emit it to the failure target, and ack the original message.
+In the unlikely event that Snowbridge encounters data which is invalid for the target destination (for example empty data is invalid for pubsub), it will create a [generic error failed event](/docs/understanding-your-pipeline/failed-events/index.md#generic-error),  emit it to the failure target, and ack the original message.
 
 Transformation failures are also treated as invalid, as described below.
 
@@ -38,7 +38,7 @@ Writes of invalid messages to the failure target will be recorded with 'InvalidM
 
 ### Transformation failure
 
-Where a transformation hits an exception, Snowbridge will consider it invalid, assuming that the configured transformation cannot process the data. It will create a [generic error failed event](/docs/managing-data-quality/understanding-failed-events/index.md#generic-error), emit it to the failure target, and ack the original message.
+Where a transformation hits an exception, Snowbridge will consider it invalid, assuming that the configured transformation cannot process the data. It will create a [generic error failed event](/docs/understanding-your-pipeline/failed-events/index.md#generic-error), emit it to the failure target, and ack the original message.
 
 As long as the built-in transformations are configured correctly, this should be unlikely. For scripting transformations, Snowbridge assumes that an exception means the data cannot be processed - make sure to construct and test your scripts accordingly.
 

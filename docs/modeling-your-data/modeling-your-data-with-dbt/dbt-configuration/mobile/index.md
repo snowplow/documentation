@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
-:::note
+:::caution
 
 All variables in Snowplow packages start with `snowplow__` but we have removed these in the below table for brevity.
 
@@ -65,7 +65,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 </TabItem>
 <TabItem value="redshift+postgres" label="Redshift & Postgres">
 
-Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
+Redshift and Postgres use a [shredded](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
 
 | Variable Name         | Default                                                                            |
 | --------------------- | ---------------------------------------------------------------------------------- |
@@ -141,3 +141,59 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 ```
 
 <SchemaSetter output={printSchemaVariables}/>
+
+```mdx-code-block
+import { dump } from 'js-yaml';
+import { dbtSnowplowMobileConfigSchema } from '@site/src/components/JsonSchemaValidator/dbtMobile.js';
+import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
+
+export const GROUPS = [
+  { title: "Warehouse and tracker", fields: ["snowplow__atomic_schema",
+                                            "snowplow__database",
+                                            "snowplow__dev_target_name",
+                                            "snowplow__events_table",
+                                            "snowplow__sessions_table"] },
+  { title: "Operation and Logic", fields: ["snowplow__allow_refresh",
+                                          "snowplow__backfill_limit_days",
+                                          "snowplow__days_late_allowed",
+                                          "snowplow__lookback_window_hours",
+                                          "snowplow__max_session_days",
+                                          "snowplow__session_lookback_days",
+                                          "snowplow__session_stitching",
+                                          "snowplow__start_date",
+                                          "snowplow__upsert_lookback_days"] },
+  { title: "Contexts, Filters, and Logs", fields: ["snowplow__app_id",
+                                                  "snowplow__enable_app_errors_module",
+                                                  "snowplow__enable_application_context",
+                                                  "snowplow__enable_geolocation_context",
+                                                  "snowplow__enable_mobile_context",
+                                                  "snowplow__enable_screen_context",
+                                                  "snowplow__has_log_enabled",
+                                                  "snowplow__platform"] },
+  { title: "Warehouse Specific", fields: ["snowplow__databricks_catalog",
+                                          "snowplow__session_context",
+                                          "snowplow__mobile_context",
+                                          "snowplow__geolocation_context",
+                                          "snowplow__application_context",
+                                          "snowplow__screen_context",
+                                          "snowplow__app_errors_table",
+                                          "snowplow__screen_view_events",
+                                          "snowplow__derived_tstamp_partitioned"] }
+];
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variables:</h4>
+    <CodeBlock language="yaml">{dump({vars: {"snowplow_mobile": data}}, { flowLevel: 3 })}</CodeBlock>
+    </>
+  )
+}
+
+export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
+```
+
+## Config Generator
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
+
+<JsonApp schema={dbtSnowplowMobileConfigSchema} output={printYamlVariables} template={Template}/>

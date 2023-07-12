@@ -11,19 +11,13 @@ sidebar_custom_props:
 
 ### Breaking and non-breaking changes
 
-In Data Structures UI at the point of publishing a schema you'll be asked to select which version you'd like to create.
+In Data Structures UI at the point of publishing a [schema](/docs/understanding-your-pipeline/schemas/index.md) you'll be asked to select which version you'd like to create.
 
 ```mdx-code-block
 import Breaking from "../_breaking.md"
 
 <Breaking/>
 ```
-
-### Overwriting schemas
-
-Wherever possible we would advise always versioning the schema when making a change. However in cases where this isn't possible, Snowplow does allow you to overwrite a schema on your development environment, that is making a change and keeping the version the same.
-
-Overwriting in your Production environment is forbidden due to the technology that auto-adjusts your tables, so when you promote an overwritten version to the Production environment you are required to increase the version as Breaking or Non-Breaking.
 
 ### Incrementing the middle digit
 

@@ -8,6 +8,12 @@ The Braze Tag for GTM SS allows events to be forwarded to [Braze](https://www.br
 
 ## Template installation
 
+:::note
+
+The server Docker image must be 2.0.0 or later.
+
+:::
+
 ### Tag Manager Gallery
 
 1. From the Templates tab in GTM Server Side, click "Search Gallery" in the Tag Templates section

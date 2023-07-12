@@ -8,7 +8,7 @@ sidebar_position: 200
 
 Snowplow Snowflake Loader is a _deprecated_ application for loading Snowplow events into Snowflake. 
 
-It has been replaced by [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md). Please see this [blog post](https://snowplow.io/blog/snowplows-rdb-loader-or-snowflakes-snowpipe/) for further information, and use [Snowplow RDB Loader](/docs/destinations/warehouses-and-lakes/rdb/index.md) to load your events into Snowflake instead.
+It has been replaced by [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md). Please see this [blog post](https://snowplow.io/blog/snowplows-rdb-loader-or-snowflakes-snowpipe/) for further information, and use [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) to load your events into Snowflake instead.
 
 :::
 
@@ -20,6 +20,6 @@ The Snowflake Loader consists of two independent applications:
 
 Both applications communicate through DynamoDB table, called "processing manifest" and used to maintain pipeline state. Both applications use same self-describing JSON configuration file of [schema](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow.storage/snowflake_config/jsonschema/1-0-3) `com.snowplowanalytics.snowplow.storage/snowflake_config/jsonschema/1-0-3`, which contain both transformer- and loader-specific properties.
 
-Type reference for our loaders could be found [here](/docs/understanding-tracking-design/json-schema-type-casting-rules/index.md).
+Type reference for our loaders could be found [here](/docs/storing-querying/schemas-in-warehouse/index.md).
 
 The Snowflake loader is publicly available since version 0.3.1.

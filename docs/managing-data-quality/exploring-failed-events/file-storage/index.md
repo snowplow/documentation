@@ -1,8 +1,7 @@
 ---
 title: "Accessing failed events in file storage"
-date: "2021-10-13"
-sidebar_label: "Accessing failed events"
-sidebar_position: 50
+sidebar_label: "Using S3 or GCS"
+sidebar_position: 1
 ---
 
 When failed events are generated on your pipeline the raw event payload along with details about the failure are saved into file storage (S3 on AWS, GCS on Google Cloud).

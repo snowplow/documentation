@@ -447,7 +447,7 @@ trackSelfDescribingEvent({
 });
 ```
 
-For more information on custom contexts, see [here](/docs/understanding-tracking-design/predefined-vs-custom-entities/index.md).
+For more information on custom contexts, see [here](/docs/understanding-your-pipeline/entities/index.md#custom-entities).
 
 ### Global context
 

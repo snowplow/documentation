@@ -6,7 +6,7 @@ sidebar_position: 9990
 
 :::caution
 
-Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/shredding-overview/index.md). See the [RDB loader R35 upgrade guide](/docs/destinations/warehouses-and-lakes/rdb/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
+Snowplow EmrEtlRunner is a _deprecated_ application that ran Snowplow's batch processing jobs in [AWS EMR](https://aws.amazon.com/emr/), such as the [RDB shredder](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/shredding-overview/index.md). See the [RDB loader R35 upgrade guide](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) for how to migrate away from this application.
 
 Historically it was also used for enriching data, but that functionality was deprecated even longer ago in favour of the [streaming versions of Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md).
 
@@ -194,7 +194,7 @@ Describing how to do this is out of scope for this guide, but the blog post [Lo
 
 ## Configuring shredding
 
-Snowplow has a [Shredding process](/docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/shredding-overview/index.md) for Redshift which contributes to the following three phases:
+Snowplow has a [Shredding process](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/shredding-overview/index.md) for Redshift which contributes to the following three phases:
 
 1. Extracting unstructured event JSONs and context JSONs from enriched event files into their own files
 2. Removing endogenous duplicate records, which are sometimes introduced within the Snowplow pipeline (feature added to r76)

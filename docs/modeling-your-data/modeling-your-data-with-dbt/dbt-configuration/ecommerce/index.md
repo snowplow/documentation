@@ -12,8 +12,7 @@ import TabItem from '@theme/TabItem';
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
-
-:::note
+:::caution
 
 All variables in Snowplow packages start with `snowplow__` but we have removed these in the below table for brevity.
 
@@ -69,7 +68,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 </TabItem>
 <TabItem value="redshift+postgres" label="Redshift & Postgres">
 
-Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. These should be the table name in your `atomic_schema`, as the defaults below show.
+Redshift and Postgres use a [shredded](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. These should be the table name in your `atomic_schema`, as the defaults below show.
 
 | Variable Name                     | Default                                                                  |
 | --------------------------------- | ------------------------------------------------------------------------ |
@@ -78,11 +77,11 @@ Redshift and Postgres use a [shredded](/docs/destinations/warehouses-and-lakes/r
 | `context_ecommerce_page`          | `'com_snowplowanalytics_snowplow_ecommerce_page_1'`                      |
 | `context_ecommerce_transaction`   | `'com_snowplowanalytics_snowplow_ecommerce_transaction_1'`               |
 | `context_ecommerce_cart`          | `'com_snowplowanalytics_snowplow_ecommerce_cart_1'`                      |
-| `sde_ecommerce_action`            | `'com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1'` |
 | `context_web_page`                | `'com_snowplowanalytics_snowplow_web_page_1'`                            |
 | `context_ecommerce_product`       | `'com_snowplowanalytics_snowplow_ecommerce_product_1'`                   |
 | `context_mobile_session`          | `'com_snowplowanalytics_snowplow_client_session_1'`                      |
 | `context_screen`                  | `'com_snowplowanalytics_mobile_screen_1'`                                |
+| `sde_ecommerce_action`            | `'com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1'` |
 
 </TabItem>
 <TabItem value="bigquery" label="Bigquery" default>
@@ -147,3 +146,62 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
 
 ```
 <SchemaSetter output={printSchemaVariables}/>
+
+
+```mdx-code-block
+import { dump } from 'js-yaml';
+import { dbtSnowplowEcommerceConfigSchema } from '@site/src/components/JsonSchemaValidator/dbtEcommerce.js';
+import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
+
+export const GROUPS = [
+  { title: "Warehouse and tracker", fields: ["snowplow__atomic_schema",
+                                            "snowplow__categories_separator",
+                                            "snowplow__database",
+                                            "snowplow__dev_target_name",
+                                            "snowplow__number_category_levels",
+                                            "snowplow__number_checkout_steps"] },
+  { title: "Operation and Logic", fields: ["snowplow__allow_refresh",
+                                          "snowplow__backfill_limit_days",
+                                          "snowplow__days_late_allowed",
+                                          "snowplow__ecommerce_event_names",
+                                          "snowplow__lookback_window_hours",
+                                          "snowplow__max_session_days",
+                                          "snowplow__session_lookback_days",
+                                          "snowplow__start_date",
+                                          "snowplow__upsert_lookback_days",
+                                          "snowplow__use_product_quantity"] },
+  { title: "Contexts, Filters, and Logs", fields: ["snowplow__app_id",
+                                                  "snowplow__disable_ecommerce_carts",
+                                                  "snowplow__disable_ecommerce_checkouts",
+                                                  "snowplow__disable_ecommerce_page_context",
+                                                  "snowplow__disable_ecommerce_products",
+                                                  "snowplow__disable_ecommerce_transactions",
+                                                  "snowplow__disable_ecommerce_user_context"] },
+  { title: "Warehouse Specific", fields: ["snowplow__databricks_catalog",
+                                          "snowplow__context_ecommerce_user",
+                                          "snowplow__context_ecommerce_checkout_step",
+                                          "snowplow__context_ecommerce_page",
+                                          "snowplow__context_ecommerce_transaction",
+                                          "snowplow__context_ecommerce_cart",
+                                          "snowplow__context_web_page",
+                                          "snowplow__context_ecommerce_product",
+                                          "snowplow__sde_ecommerce_action",
+                                          "snowplow__derived_tstamp_partitioned"] }
+];
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variables:</h4>
+    <CodeBlock language="yaml">{dump({vars: {"snowplow_ecommerce": data}}, { flowLevel: 3 })}</CodeBlock>
+    </>
+  )
+}
+
+export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
+```
+
+## Config Generator
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
+
+<JsonApp schema={dbtSnowplowEcommerceConfigSchema} output={printYamlVariables} template={Template}/>

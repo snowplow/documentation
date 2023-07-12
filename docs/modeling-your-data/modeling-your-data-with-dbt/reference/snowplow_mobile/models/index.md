@@ -951,7 +951,8 @@ Base event this run table column lists may be incomplete and is missing contexts
 | event_version | Version of event schema e.g. `1-0-2`. |
 | event_fingerprint | Hash client-set event fields e.g. `AADCE520E20C2899F4CED228A79A3083`. |
 | true_tstamp | User-set “true timestamp” for the event e.g. `2013-11-26 00:02:04`. |
-| event_id_dedupe_index |  |
+| event_id_dedupe_index | An indexing column used for de-duplication of raw events |
+| event_id_dedupe_count | A count of the total duplicates of the event, used in Redshift/Postgres for joining entities in some cases |
 | row_count |  |
 | event_index_in_session | A session index of the event. |
 </DbtDetails>
@@ -980,52 +981,6 @@ Base event this run table column lists may be incomplete and is missing contexts
 with events as (
   select
 
--- handling relations for integration tests
-  {% if target.schema.startswith('gh_sp_mobile_dbt_') %}
-    -- screen view events
-    {{ snowplow_utils.get_optional_fields(
-          enabled=true,
-          col_prefix='unstruct_event_com_snowplowanalytics_mobile_screen_view_1_',
-          fields=screen_view_event_fields(),
-          relation=ref('snowplow_mobile_events_stg'),
-          relation_alias='a') }},
-    -- session context
-    {{ snowplow_utils.get_optional_fields(
-          enabled=true,
-          col_prefix='contexts_com_snowplowanalytics_snowplow_client_session_1_',
-          fields=session_context_fields(),
-          relation=ref('snowplow_mobile_events_stg'),
-          relation_alias='a') }},
-    -- screen context
-    {{ snowplow_utils.get_optional_fields(
-          enabled=var('snowplow__enable_screen_context', false),
-          col_prefix='contexts_com_snowplowanalytics_mobile_screen_1_',
-          fields=screen_context_fields(),
-          relation=ref('snowplow_mobile_events_stg'),
-          relation_alias='a') }},
-    -- mobile context
-    {{ snowplow_utils.get_optional_fields(
-          enabled=var('snowplow__enable_mobile_context', false),
-          col_prefix='contexts_com_snowplowanalytics_snowplow_mobile_context_1_',
-          fields=mobile_context_fields(),
-          relation=ref('snowplow_mobile_events_stg'),
-          relation_alias='a') }},
-    -- geo context
-    {{ snowplow_utils.get_optional_fields(
-          enabled=var('snowplow__enable_geolocation_context', false),
-          col_prefix='contexts_com_snowplowanalytics_snowplow_geolocation_context_1_',
-          fields=geo_context_fields(),
-          relation=ref('snowplow_mobile_events_stg'),
-          relation_alias='a') }},
-    -- app context
-    {{ snowplow_utils.get_optional_fields(
-          enabled=var('snowplow__enable_application_context', false),
-          col_prefix='contexts_com_snowplowanalytics_mobile_application_1_',
-          fields=app_context_fields(),
-          relation=ref('snowplow_mobile_events_stg'),
-          relation_alias='a') }},
-
-  {% else %}
     -- screen view events
     {{ snowplow_utils.get_optional_fields(
           enabled=true,
@@ -1068,8 +1023,6 @@ with events as (
           fields=session_context_fields(),
           relation=source('atomic','events'),
           relation_alias='a') }},
-
-    {% endif %}
 
     a.*
 
@@ -1266,7 +1219,8 @@ with events_this_run AS (
     sc.session_first_event_id,
 
     e.*,
-    row_number() over (partition by e.event_id order by e.collector_tstamp) as event_id_dedupe_index
+    row_number() over (partition by e.event_id order by e.collector_tstamp) as event_id_dedupe_index,
+    count(*) over (partition by e.event_id) as event_id_dedupe_count
 
   from {{ var('snowplow__events') }} e
   inner join {{ ref('snowplow_mobile_base_session_context') }} sc

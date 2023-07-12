@@ -5,7 +5,7 @@ export const versions = {
   cppTracker: '2.0.0',
   flutterTracker: '0.3.0',
   golangTracker: '3.0.0',
-  googleAmpTracker: '1.0.3',
+  googleAmpTracker: '1.1.0',
   iosTracker: '5.4.0',
   javaTracker: '1.0.0',
   javaScriptTracker: '3.13.0',
@@ -33,19 +33,19 @@ export const versions = {
   esLoader: '2.0.9',
   gcsLoader: '0.5.4',
   postgresLoader: '0.3.3',
-  rdbLoader: '5.6.0',
+  rdbLoader: '5.6.3',
   s3Loader: '2.2.7',
   s3Loader22x: '2.2.7',
 
   // Data Modelling
   // dbt
   dbtSnowplowWeb: '0.15.0',
-  dbtSnowplowMobile: '0.7.0',
-  dbtSnowplowUtils: '0.14.2',
-  dbtSnowplowMediaPlayer: '0.5.0',
+  dbtSnowplowMobile: '0.7.1',
+  dbtSnowplowUtils: '0.14.3',
+  dbtSnowplowMediaPlayer: '0.5.1',
   dbtSnowplowNormalize: '0.3.1',
   dbtSnowplowFractribution: '0.3.1',
-  dbtSnowplowEcommerce: '0.4.2',
+  dbtSnowplowEcommerce: '0.5.0',
 
   // sql runner
   sqlRunner: '0.10.1',
@@ -71,6 +71,6 @@ export const versions = {
   igluScalaClient: '2.2.1',
 
   // Testing & debugging
-  snowplowMicro: '1.7.1',
-  snowplowMini: '0.15.1',
+  snowplowMicro: '1.7.2',
+  snowplowMini: '0.17.0',
 }

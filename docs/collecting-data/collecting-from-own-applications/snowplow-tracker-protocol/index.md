@@ -26,7 +26,7 @@ At its heart, Snowplow is a platform for granular tracking of events. In the tra
 There are 3 categories of events:
 
 - Standard events, such as page views, page pings and transactions
-- Custom self-describing events based on a [schema](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md)
+- Custom self-describing events based on a [schema](/docs/understanding-your-pipeline/schemas/index.md)
 - Legacy custom structured events, which we don’t recommend using
 
 :::info
@@ -47,7 +47,7 @@ Additionally, [entities can be attached to events](#event-entity-tracking) which
 
 ### Self-describing events
 
-[Structuring your data with schemas](/docs/understanding-tracking-design/understanding-schemas-and-validation/index.md) to perform self-describing event tracking is the defacto way to track events with Snowplow and allows any arbitrary name: value pairs to be captured with the event.
+[Structuring your data with schemas](/docs/understanding-your-pipeline/schemas/index.md) to perform self-describing event tracking is the defacto way to track events with Snowplow and allows any arbitrary name: value pairs to be captured with the event.
 
 An example of a self-describing event for a product view event:
 

@@ -27,7 +27,7 @@ It is published on Docker Hub and can be run with the following command:
 
 Above assumes that you have following directory structure:
 
-- `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/setup-validation-and-enrich/add-additional-enrichments/index.md)
+- `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/enriching-your-data/available-enrichments/index.md)
 - Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)
 - [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md)
 

@@ -546,16 +546,9 @@ This macro does not currently have a description.
 ```jinja2
 {% macro bigquery__get_session_id_path_sql(relation_alias) %}
 
--- setting relation through variable is not currently supported (recognised as string), different logic for integration tests
-{% if target.schema.startswith('gh_sp_mobile_dbt_') %}
-
-  {%- set relation=ref('snowplow_mobile_events_stg') %}
-
-{% else %}
+-- setting relation through variable is not currently supported (recognised as string)
 
   {%- set relation=source('atomic','events') %}
-
-{% endif %}
 
   {%- set session_id = snowplow_utils.combine_column_versions(
                                   relation=relation,

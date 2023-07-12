@@ -37,7 +37,7 @@ Once you navigate to it, you will be presented with a view showing all the Event
 
 ![Screenshot of the BDP Console Tracking catalog page showing the search bar and search results list](images/TC-Landing-page.png)
 
-If you select a particular [Event](/docs/understanding-tracking-design/understanding-events-entities/index.md), you can see the details of the Event, what properties are tracked for this event, described in plain English therefore easily consumable by a non-technical audience. You can also see any validation criteria associated with this Event.
+If you select a particular [Event](/docs/understanding-your-pipeline/events/index.md), you can see the details of the Event, what properties are tracked for this event, described in plain English therefore easily consumable by a non-technical audience. You can also see any validation criteria associated with this Event.
 
 ![Screenshot of the BDP Console in the event properties view](images/event-details.png)
 

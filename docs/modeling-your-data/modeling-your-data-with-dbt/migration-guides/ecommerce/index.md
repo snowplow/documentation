@@ -7,6 +7,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+### Upgrading to 0.5.0
+
+**This version requires a full refresh run if you have been using any previous versions.** You will not be able to upgrade and have the package work without doing a full refresh.
+
+To enable modeling mobile events, set `snowplow__enable_mobile_events` to `true`.
+
 ### Upgrading to 0.4.2
 
 Two of the derived tables need to be altered for existing Snowflake, Databricks or Redshift users. Please modify the below script to fit your schemas and apply them before running the upgraded package.

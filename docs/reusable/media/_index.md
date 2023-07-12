@@ -1,6 +1,7 @@
 ```mdx-code-block
 import CodeBlock from '@theme/CodeBlock';
 import TOCInline from '@theme/TOCInline';
+import Admonition from '@theme/Admonition';
 ```
 
 <!-- Note: Docusaurus mermaid theme does not yet support renderAsync required by the timeline diagram, so using a pre-built SVG -->
@@ -151,8 +152,25 @@ window.snowplow('startMediaTracking', { id });`}
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`import { startMediaTracking } from "@snowplow/browser-plugin-media";
 const id = 'XXXXX'; // randomly generated ID
-startMediaTracking({ id });
-`}
+startMediaTracking({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let id = "XXXXX"
+let tracker = Snowplow.defaultTracker()
+let mediaTracking = tracker.media.startMediaTracking(id: id)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val id = "XXXXX"
+val tracker = Snowplow.defaultTracker
+val mediaTracking = tracker?.media?.startMediaTracking(id)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`String id = "XXXXX";
+TrackerController tracker = Snowplow.getDefaultTracker();
+MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(id, null);`}
 </CodeBlock>)}</>
 
 Use the `endMediaTracking` call to end media tracking. This will clear the local state for the media tracking and stop any background updates.
@@ -164,6 +182,18 @@ Use the `endMediaTracking` call to end media tracking. This will clear the local
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`import { endMediaTracking } from "@snowplow/browser-plugin-media";
 endMediaTracking({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`tracker.media.endMediaTracking(id: id)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`tracker?.media?.endMediaTracking(id)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`tracker.getMedia().endMediaTracking(id);`}
 </CodeBlock>)}</>
 
 ### Configuration
@@ -219,10 +249,73 @@ startMediaTracking({
 });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let player = MediaPlayerEntity()
+    .currentTime(0) // The current playback time
+    .duration(150.0) // A double-precision floating-point value indicating the duration of the media in seconds
+    .ended(false) // If playback of the media has ended
+    .livestream(false) // If the media is live
+    .label("Sample video") // A human-readable title for the media
+    .loop(false) // If the video should restart after ending
+    .mediaType(.video) // Type of media content
+    .muted(false) // If the media element is muted
+    .paused(true) // If the media element is paused
+    .pictureInPicture(false) // If the media is in picture-in-picture mode
+    .playbackRate(1.0) // Playback rate (1 is normal)
+    .quality("1080p") // The quality level of the playback
+    .volume(100) // Volume level
+let mediaTracking = tracker.media.startMediaTracking(id: id, player: player)
+`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val player = MediaPlayerEntity(
+    currentTime = 0.0, // The current playback time
+    duration = 150.0, // A double-precision floating-point value indicating the duration of the media in seconds
+    ended = false, // If playback of the media has ended
+    livestream = false, // If the media is live
+    label = "Sample video", // A human-readable title for the media
+    loop = false, // If the video should restart after ending
+    mediaType = MediaType.Video, // Type of media content
+    muted = false, // If the media element is muted
+    paused = true, // If the media element is paused
+    pictureInPicture = false, // If the media is in picture-in-picture mode
+    playbackRate = 1.0, // Playback rate (1 is normal)
+    quality = "1080p", // The quality level of the playback
+    volume = 100 // Volume level
+)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaPlayerEntity player = new MediaPlayerEntity();
+player.setCurrentTime(0.0); // The current playback time
+player.setDuration(150.0); // A double-precision floating-point value indicating the duration of the media in seconds
+player.setEnded(false); // If playback of the media has ended
+player.setLivestream(false); // If the media is live
+player.setLabel("Sample video"); // A human-readable title for the media
+player.setLoop(false); // If the video should restart after ending
+player.setMediaType(MediaType.Video); // Type of media content
+player.setMuted(false); // If the media element is muted
+player.setPaused(true); // If the media element is paused
+player.setPictureInPicture(false); // If the media is in picture-in-picture mode
+player.setPlaybackRate(1.0); // Playback rate (1 is normal)
+player.setQuality("1080p"); // The quality level of the playback
+player.setVolume(100); // Volume level`}
+</CodeBlock>)}</>
+
 #### Media ping events
 
-Media ping events (not to be confused with page ping events, see below) are events sent in a regular interval while media tracking is active.
+Media ping events are events sent in a regular interval while media tracking is active.
 They inform about the current state of the media playback.
+
+<>{(props.tracker == 'js-browser' || props.tracker == 'js-tag') && (<>
+<Admonition type="info" title="Media pings vs page pings">
+  <p>
+    Media ping events are different events from the page ping events tracked by activity tracking in the tracker.
+    See the following section to read how page ping events are tracked during media playback.
+  </p>
+</Admonition>
+</>)}</>
 
 By default, ping events are sent every 30 seconds.
 This can be configured as follows:
@@ -240,6 +333,27 @@ This can be configured as follows:
     pings: { pingInterval: 30 }, // Interval in seconds for sending ping events. Defaults to 30s. 
 });
 `}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let configuration = MediaTrackingConfiguration(id: id)
+    .pingInterval(30)
+let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
+`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val configuration = MediaTrackingConfiguration(
+    id = id,
+    pingInterval = 30
+)
+val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
+configuration.setPingInterval(30);
+MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
 The ping events are sent in an interval that is unrelated to the media playback.
@@ -261,6 +375,27 @@ By default, this is set to 1, but it is configurable:
 `}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let configuration = MediaTrackingConfiguration(id: id)
+    .maxPausedPings(3)
+let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
+`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val configuration = MediaTrackingConfiguration(
+    id = id,
+    maxPausedPings = 3
+)
+val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
+configuration.setMaxPausedPings(3);
+MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
+</CodeBlock>)}</>
+
 You can disable ping events as follows:
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
@@ -270,6 +405,27 @@ You can disable ping events as follows:
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`startMediaTracking({ id, pings: false });
 `}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let configuration = MediaTrackingConfiguration(id: id)
+    .pings(false)
+let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
+`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val configuration = MediaTrackingConfiguration(
+    id = id,
+    pings = false
+)
+val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
+configuration.setPings(false);
+MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
 Media ping events have the following schema:
@@ -312,6 +468,27 @@ Tracking the media player session entity with all media events is enabled by def
 `}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let configuration = MediaTrackingConfiguration(id: id)
+    .session(false)
+let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
+`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val configuration = MediaTrackingConfiguration(
+    id = id,
+    session = false
+)
+val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
+configuration.setSession(false);
+MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
+</CodeBlock>)}</>
+
 #### Percentage progress events
 
 Percentage progress events are tracked when the playback reaches some percentage boundaries.
@@ -324,6 +501,27 @@ To send percentage progress events, set the percentage boundaries when they shou
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`startMediaTracking({ id, boundaries: [10, 25, 50, 75] });
 `}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let configuration = MediaTrackingConfiguration(id: id)
+    .boundaries([10, 25, 50, 75])
+let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
+`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val configuration = MediaTrackingConfiguration(
+    id = id,
+    boundaries = listOf(10, 25, 50, 75),
+)
+val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
+configuration.setBoundaries(Arrays.asList(10, 25, 50, 75));
+MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
 Percentage progress events have the following schema:
@@ -341,6 +539,27 @@ In case you want to discard some of the events that are tracked during the media
 {`import { MediaEventType } from "@snowplow/browser-plugin-media";
 startMediaTracking({ id, captureEvents: [MediaEventType.Play] });
 `}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let configuration = MediaTrackingConfiguration(id: id)
+    .captureEvents([MediaPlayEvent.self])
+let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
+`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val configuration = MediaTrackingConfiguration(
+    id = id,
+    captureEvents = listOf(MediaPlayEvent::class)
+)
+val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
+configuration.setCaptureEvents(Collections.singletonList(MediaPlayEvent.class));
+MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
 #### Add context entities to all events
@@ -373,6 +592,44 @@ They will be added to all events tracked in the media tracking.
 `}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let configuration = MediaTrackingConfiguration(id: id)
+    .entities([
+        SelfDescribingJson(
+            schema: "iglu:org.schema/video/jsonschema/1-0-0",
+            andData: ["creativeId": "1234"]
+        )
+    ])
+let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
+`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val configuration = MediaTrackingConfiguration(
+    id = id,
+    entities = listOf(
+        SelfDescribingJson(
+            schema = "iglu:org.schema/video/jsonschema/1-0-0",
+            data = mapOf("creativeId" to "1234")
+        )
+    )
+)
+val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
+configuration.setEntities(Collections.singletonList(
+        new SelfDescribingJson(
+                "iglu:org.schema/video/jsonschema/1-0-0",
+                new HashMap<String, Object>() {{
+                    put("creativeId", "1234");
+                }}
+        )
+));
+MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
+</CodeBlock>)}</>
+
 ## Updating playback properties
 
 Updates stored attributes of the media player such as the current playback.
@@ -393,6 +650,20 @@ updateMediaTracking({
     player: { currentTime: 10 }
 });
 `}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.update(player: MediaPlayerEntity().currentTime(10.0))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.update(player = MediaPlayerEntity(currentTime = 10.0))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaPlayerEntity player = new MediaPlayerEntity();
+player.setCurrentTime(10.0);
+mediaTracking.update(player, null, null);`}
 </CodeBlock>)}</>
 
 ## Tracking media events
@@ -422,8 +693,22 @@ The updated properties will apply for the current and all following events.
 {`import { trackMediaSeekEnd } from "@snowplow/browser-plugin-media";
 trackMediaSeekEnd({
     id,
-    media: { currentTime: 30.0 }
+    player: { currentTime: 30.0 }
 });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaSeekEndEvent(), player: MediaPlayerEntity().currentTime(30.0))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaSeekEndEvent(), player = MediaPlayerEntity(currentTime = 30.0))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaPlayerEntity player = new MediaPlayerEntity();
+player.setCurrentTime(30.0);
+mediaTracking.track(new MediaSeekEndEvent(), player, null, null);`}
 </CodeBlock>)}</>
 
 #### Update ad and ad break properties
@@ -460,6 +745,35 @@ trackMediaAdStart({
 `}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let ad = MediaAdEntity(adId: "1234") // Unique identifier for the ad
+    .name("Podcast Ad") // Friendly name of the ad
+    .creativeId("4321") // The ID of the ad creative
+    .duration(15) // Length of the video ad in seconds
+    .skippable(true) // Indicating whether skip controls are made available to the end user
+mediaTracking.track(MediaAdStartEvent(), ad: ad)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val ad = MediaAdEntity(
+    adId = "1234",
+    name = "Podcast Ad",
+    creativeId = "4321",
+    duration = 15.0,
+    skippable = true
+)
+mediaTracking?.track(MediaAdStartEvent(), ad = ad)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaAdEntity ad = new MediaAdEntity("1234");
+ad.setName("Podcast Ad");
+ad.setCreativeId("4321");
+ad.setDuration(15.0);
+ad.setSkippable(true);
+mediaTracking.track(new MediaAdStartEvent(), null, ad, null);`}
+</CodeBlock>)}</>
+
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaAdBreakStart', {
     id,
@@ -482,8 +796,33 @@ trackMediaAdBreakStart({
         podSize: 2, // The number of ads to be played within the ad break
         breakType: MediaPlayerAdBreakType.Linear, // Type of ads within the break
     }
-});
-`}
+});`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`let adBreak = MediaAdBreakEntity(breakId: "2345") // An identifier for the ad break
+    .name("pre-roll") // Ad break name
+    .podSize(2) // The number of ads to be played within the ad break
+    .breakType(.linear) // Type of ads within the break
+mediaTracking.track(MediaAdBreakStartEvent(), adBreak: adBreak)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`val adBreak = MediaAdBreakEntity(
+    name = "pre-roll",
+    breakId = "2345",
+    podSize = 2,
+    breakType = MediaAdBreakType.Linear
+)
+mediaTracking?.track(MediaAdBreakStartEvent(), adBreak = adBreak)`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaAdBreakEntity adBreak = new MediaAdBreakEntity("2345");
+adBreak.setName("pre-roll");
+adBreak.setPodSize(2);
+adBreak.setBreakType(MediaAdBreakType.Linear);
+mediaTracking.track(new MediaAdBreakStartEvent(), null, null, adBreak);`}
 </CodeBlock>)}</>
 
 #### Add context entities to tracked event
@@ -517,6 +856,39 @@ trackMediaPlay({
 `}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaPlayEvent().entities([
+    SelfDescribingJson(
+        schema: "iglu:org.schema/video/jsonschema/1-0-0",
+        andData: [
+            "creativeId": "1234"
+        ]
+    )
+]))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaPlayEvent().entities(listOf(
+    SelfDescribingJson(
+        schema = "iglu:org.schema/video/jsonschema/1-0-0",
+        data = mapOf("creativeId" to "1234")
+    ),
+)))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(
+        new MediaPlayEvent().entities(Collections.singletonList(
+                new SelfDescribingJson(
+                        "iglu:org.schema/video/jsonschema/1-0-0",
+                        new HashMap<String, Object>() {{
+                            put("creativeId", "1234");
+                        }}
+                )
+        )), null, null, null
+);`}
+</CodeBlock>)}</>
+
 ### Available event types
 
 #### Events for controlling the playback
@@ -531,6 +903,18 @@ Tracks a media player ready event that is fired when the media tracking is succe
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaReady({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaReadyEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaReadyEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaReadyEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -550,6 +934,18 @@ Tracking this event will automatically set the `paused` property in the media pl
 {`trackMediaPlay({ id });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaPlayEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaPlayEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaPlayEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/play_event/jsonschema/1-0-0`.
 
@@ -565,6 +961,18 @@ Tracking this event will automatically set the `paused` property in the media pl
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaPause({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaPauseEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaPauseEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaPauseEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -584,6 +992,18 @@ Tracking this event will automatically set the `ended` and `paused` properties i
 {`trackMediaEnd({ id });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaEndEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaEndEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaEndEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/end_event/jsonschema/1-0-0`.
 
@@ -601,6 +1021,18 @@ If multiple seek start events are tracked after each other (without a seek end e
 {`trackMediaSeekStart({ id });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaSeekStartEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaSeekStartEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaSeekStartEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/seek_start_event/jsonschema/1-0-0`.
 
@@ -614,6 +1046,18 @@ Tracks a media player seek end event sent when a seek operation completes.
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaSeekEnd({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaSeekEndEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaSeekEndEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaSeekEndEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -643,6 +1087,18 @@ The `newRate` is passed when tracking the event and is automatically updated in 
 {`trackMediaPlaybackRateChange({ id, newRate: 1.5 });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaPlaybackRateChangeEvent(newRate: 1.5))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaPlaybackRateChangeEvent(newRate = 1.5))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaPlaybackRateChangeEvent(null, 1.5), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/playback_rate_change_event/jsonschema/1-0-0`.
 
@@ -668,6 +1124,18 @@ The `newVolume` is passed when tracking the event and is automatically updated i
 {`trackMediaVolumeChange({ id, newVolume: 80 });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaVolumeChangeEvent(newVolume: 80))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaVolumeChangeEvent(newVolume = 80))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaVolumeChangeEvent(null, 80), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/volume_change_event/jsonschema/1-0-0`.
 
@@ -689,6 +1157,18 @@ The `fullscreen` value is passed when tracking the event and is automatically up
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaFullscreenChange({ id, fullscreen: true });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaFullscreenChangeEvent(fullscreen: true))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaFullscreenChangeEvent(fullscreen = true))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaFullscreenChangeEvent(true), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -714,6 +1194,18 @@ The `pictureInPicture` value is passed when tracking the event and is automatica
 {`trackMediaPictureInPictureChange({ id, pictureInPicture: true });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaPictureInPictureChangeEvent(pictureInPicture: true))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaPictureInPictureChangeEvent(pictureInPicture = true))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaPictureInPictureChangeEvent(true), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/picture_in_picture_change_event/jsonschema/1-0-0`.
 
@@ -733,6 +1225,18 @@ Tracking this event will increase the counter of `adBreaks` in the session entit
 {`trackMediaAdBreakStart({ id });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdBreakStartEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdBreakStartEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdBreakStartEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_break_start_event/jsonschema/1-0-0`.
 
@@ -746,6 +1250,18 @@ Tracks a media player ad break end event that signals the end of an ad break.
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaAdBreakEnd({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdBreakEndEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdBreakEndEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdBreakEndEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -763,6 +1279,18 @@ Tracking this event will increase the counter of `ads` in the session entity.
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaAdStart({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdStartEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdStartEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdStartEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -788,6 +1316,18 @@ Tracking this event will increase the counter of `adsSkipped` in the session ent
 {`trackMediaAdSkip({ id, percentProgress: 60 });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdSkipEvent(percentProgress: 60))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdSkipEvent(percentProgress = 33))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdSkipEvent(33), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_skip_event/jsonschema/1-0-0`.
 
@@ -809,6 +1349,18 @@ The event schema has one required property – it is set automatically to 25%:
 {`trackMediaAdFirstQuartile({ id });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdFirstQuartileEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdFirstQuartileEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdFirstQuartileEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0`.
 
@@ -828,6 +1380,18 @@ The event schema has one required property – it is set automatically to 50%:
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaAdMidpoint({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdMidpointEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdMidpointEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdMidpointEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -852,6 +1416,18 @@ The event schema has one required property – it is set automatically to 75%:
 `}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdThirdQuartileEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdThirdQuartileEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdThirdQuartileEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_quartile/jsonschema/1-0-0`.
 
@@ -865,6 +1441,18 @@ Tracks a media player ad complete event that signals the ad creative was played 
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaAdComplete({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdCompleteEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdCompleteEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdCompleteEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -890,6 +1478,18 @@ Tracking this event will increase the counter of `adsClicked` in the session ent
 {`trackMediaAdClick({ id, percentProgress: 30 });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdClickEvent(percentProgress: 30))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdClickEvent(percentProgress = 33))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdClickEvent(33), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0`.
 
@@ -911,6 +1511,18 @@ The event schema has one optional property:
 {`trackMediaAdPause({ id, percentProgress: 30 });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdPauseEvent(percentProgress: 30))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdPauseEvent(percentProgress = 33))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdPauseEvent(33), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_pause_event/jsonschema/1-0-0`.
 
@@ -924,6 +1536,18 @@ Tracks a media player ad resume event fired when the user resumed playing the ad
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaAdResume({ id, percentProgress: 30 });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaAdResumeEvent(percentProgress: 30))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaAdResumeEvent(percentProgress = 33))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaAdResumeEvent(33), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -945,6 +1569,18 @@ The tracker will calculate the time since this event until either the buffer end
 {`trackMediaBufferStart({ id });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaBufferStartEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaBufferStartEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaBufferStartEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/buffer_start_event/jsonschema/1-0-0`.
 
@@ -958,6 +1594,18 @@ Tracks a media player buffering end event fired when the the player finishes buf
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`trackMediaBufferEnd({ id });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaBufferEndEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaBufferEndEvent())`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new MediaBufferEndEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1000,6 +1648,33 @@ The `newQuality` is passed when tracking the event and is automatically updated 
 });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaQualityChangeEvent(
+    newQuality: "1080p",
+    bitrate: 1000,
+    framesPerSecond: 30,
+    automatic: false,
+))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaQualityChangeEvent(
+    newQuality = "1080p",
+    bitrate = 1000,
+    framesPerSecond = 60,
+    automatic = false
+))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaQualityChangeEvent event = new MediaQualityChangeEvent();
+event.setNewQuality("1080p");
+event.setBitrate(1000);
+event.setFramesPerSecond(60);
+event.setAutomatic(false);
+mediaTracking.track(event, null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/quality_change_event/jsonschema/1-0-0`.
 
@@ -1033,6 +1708,30 @@ The event schema has the following properties:
 });`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(MediaErrorEvent(
+    errorCode: "500",
+    errorName: "forbidden",
+    errorDescription: "Failed to load media",
+))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(MediaErrorEvent(
+    errorCode = "500",
+    errorName = "forbidden",
+    errorDescription = "Failed to load media"
+))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`MediaErrorEvent event = new MediaErrorEvent();
+event.setErrorCode("500");
+event.setErrorName("forbidden");
+event.setErrorDescription("Failed to load media");
+mediaTracking.track(event, null, null, null);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/error_event/jsonschema/1-0-0`.
 
@@ -1059,4 +1758,27 @@ When tracked within the context of a media tracking, the tracker will attach the
         data: { foo: 'bar' },
     },
 });`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'ios') && (<CodeBlock language="swift">
+{`mediaTracking.track(SelfDescribing(
+    schema: "iglu:com.acme/event/jsonschema/1-0-0",
+    payload: ["foo": "bar"]
+))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
+{`mediaTracking?.track(SelfDescribing(
+    "iglu:com.acme/event/jsonschema/1-0-0",
+    mapOf("foo" to "bar")
+))`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'android-java') && (<CodeBlock language="java">
+{`mediaTracking.track(new SelfDescribing(
+        "iglu:com.acme/event/jsonschema/1-0-0",
+        new HashMap<String, Object>() {{
+            put("foo", "bar");
+        }}
+), null, null, null);`}
 </CodeBlock>)}</>

@@ -13,7 +13,7 @@ The easiest way to test Snowbridge configuration (e.g. transformations) is to ru
 
 ## Snowplow data — generating a sample
 
-If you're working with Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/getting-started-with-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/getting-started-with-micro/basic-usage/index.md#exporting-events-to-tsv).
+If you're working with Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/testing-debugging/snowplow-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/testing-debugging/snowplow-micro/basic-usage/index.md#exporting-events-to-tsv).
 
 For example, here we’re using a file named `data.tsv`:
 

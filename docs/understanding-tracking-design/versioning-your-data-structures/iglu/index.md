@@ -11,7 +11,7 @@ sidebar_custom_props:
 
 ### Breaking and non-breaking changes
 
-When evolving your schema and [uploading](/docs/understanding-tracking-design/managing-your-data-structures/iglu/index.md) it to your [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md), you will need to choose how to increment its version.
+When evolving your [schema](/docs/understanding-your-pipeline/schemas/index.md) and [uploading](/docs/understanding-tracking-design/managing-your-data-structures/iglu/index.md) it to your [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md), you will need to choose how to increment its version.
 
 ```mdx-code-block
 import Breaking from "../_breaking.md"

@@ -67,7 +67,7 @@ Events that have been validated and enriched by the Enrich application are writt
 
 ### Bad 1 topic
 
-This bad topic is for events that the collector or enrich fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure. More details can be found [here](/docs/managing-data-quality/understanding-failed-events/index.md).
+This bad topic is for events that the collector or enrich fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure. More details can be found [here](/docs/understanding-your-pipeline/failed-events/index.md).
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
@@ -119,7 +119,7 @@ For further details on the resources, default and required input variables, and 
 
 ## Postgres loader
 
-The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres](/docs/destinations/warehouses-and-lakes/postgres/index.md).
+The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md).
 
 For further details on the resources, default and required input variables, and outputs see the [postgres-loader-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-pubsub-ce/google/latest) terraform module.
 
@@ -128,7 +128,7 @@ For further details on the resources, default and required input variables, and 
 
 ## BigQuery loader
 
-The Snowplow application responsible for reading the enriched data and [loading to BigQuery](/docs/destinations/warehouses-and-lakes/bigquery/index.md).
+The Snowplow application responsible for reading the enriched data and [loading to BigQuery](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md).
 
 For further details on the resources, default and required input variables, and outputs see the [bigquery-loader-pubsub-ce](https://registry.terraform.io/modules/snowplow-devops/bigquery-loader-pubsub-ce/google/latest) terraform module.
 

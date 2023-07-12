@@ -23,6 +23,7 @@ Ecommerce events are tracked like normal Snowplow events. For example, tracking 
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
+
 ```swift
 let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com")
 
@@ -83,10 +84,11 @@ Add or update properties using setters. For example, adding data to a PromotionE
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
+```swift
 let promotion = PromotionEntity(id: "promoId")
 promotion.name = "bogof"
 promotion.type = "popup"
-
+```
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
@@ -136,7 +138,7 @@ Each ecommerce event is a [self-describing](docs/collecting-data/collecting-from
 | name        | N        | string      | For `ProductListView` and `ProductListClick` events: human-readable list name |
 </details>
 
-The events are distinguished by their `type` property, which is different for each `Event` class tracked. Aside from the optional list `name` in the `ProductListViewEvent` and `ProductListClickEvent` events, all tracked ecommerce properties are tracked as entities - see [below](#entities) for details.
+The events are distinguished by their `type` property, which is different for each `Event` class tracked. Aside from the optional list `name` in the `ProductListViewEvent` and `ProductListClickEvent` events, all tracked ecommerce properties are tracked as entities.
 
 :::note
 Check out the API docs ([Android](https://snowplow.github.io/snowplow-android-tracker/), [iOS](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/snowplow/)) for the full details of each Event and Entity.
@@ -748,7 +750,7 @@ The checkout step entity is used for `CheckoutStep` events.
 
 ### Transaction entity
 
-The transaction entity is used for `Transaction` events.
+The transaction entity is used for `Transaction` and `TransactionError` events.
 
 <details>
     <summary>Transaction entity properties</summary>

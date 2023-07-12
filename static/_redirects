@@ -157,3 +157,6 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/* /docs/getting-started-on-snowplow-open-source/quick-start-aws/ 301
 /docs/getting-started-on-snowplow-open-source/setup-snowplow-on-gcp/* /docs/getting-started-on-snowplow-open-source/quick-start-gcp/ 301
 /docs/getting-started-on-snowplow-open-source/what-is-quick-start/faq/ /docs/getting-started-on-snowplow-open-source/faq/ 301
+
+/docs/tutorials/tutorial-a-guide-to-using-the-snowplow-inspector-extension/* /docs/testing-debugging/snowplow-inspector/:splat 301
+/docs/getting-started-with-micro/* /docs/testing-debugging/snowplow-micro/:splat 301

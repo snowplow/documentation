@@ -19,7 +19,7 @@ When implementing new tracking, or when making changes to your schemas or enrich
 
 ## Test tracking using automated testing
 
-For more automated testing of your tracking we have a tool called [Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) which allows you to integrate with your automated testing suite to check that your tracking remains intact as application-level changes are made.
+For more automated testing of your tracking we have a tool called [Snowplow Micro](/docs/testing-debugging/snowplow-micro/what-is-micro/index.md) which allows you to integrate with your automated testing suite to check that your tracking remains intact as application-level changes are made.
 
-Follow [this guide](/docs/getting-started-with-micro/basic-usage/index.md) to get familiar with Micro and set it up. Next, take a look at the [examples of integrating Micro with Nightwatch and Cypress](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/index.md).
+Follow [this guide](/docs/testing-debugging/snowplow-micro/basic-usage/index.md) to get familiar with Micro and set it up. Next, take a look at the [examples of integrating Micro with Nightwatch and Cypress](/docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/index.md).
 

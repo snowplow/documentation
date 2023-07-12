@@ -110,7 +110,7 @@ However, you will only get local IP addresses (like `192.168.0.42`) in your data
 
 ### Generate a local SSL/TLS certificate
 
-Chances are that the website in question uses HTTPS. If so, you will need to configure Micro to [enable HTTPS](/docs/getting-started-with-micro/advanced-usage/index.md#enabling-https). Otherwise, feel free to skip this step.
+Chances are that the website in question uses HTTPS. If so, you will need to configure Micro to [enable HTTPS](/docs/testing-debugging/snowplow-micro/advanced-usage/index.md#enabling-https). Otherwise, feel free to skip this step.
 
 First, install [`mkcert`](https://github.com/FiloSottile/mkcert). This tool allows you to easily generate SSL/TLS certificates that your machine trusts. 
 
@@ -128,14 +128,14 @@ You should now have a local file called `c.example.com.p12` with the default pas
 
 ### Match the Collector configuration
 
-To make sure your Micro behaves the same way as the Collector it’s “pretending” to be, copy the relevant parts of your Collector configuration and [pass them to Micro](/docs/getting-started-with-micro/advanced-usage/index.md#adding-custom-collector-configuration).
+To make sure your Micro behaves the same way as the Collector it’s “pretending” to be, copy the relevant parts of your Collector configuration and [pass them to Micro](/docs/testing-debugging/snowplow-micro/advanced-usage/index.md#adding-custom-collector-configuration).
 
 The two most important settings are the cookie name (you can set it with `-Dcollector.cookie.name` as shown on the page linked above) and any custom paths (via a configuration file).
 
 ### Run Micro
 
 You will need to run Micro as usual, with a few changes:
-* [Enable HTTPS](/docs/getting-started-with-micro/advanced-usage/index.md#enabling-https), if needed
+* [Enable HTTPS](/docs/testing-debugging/snowplow-micro/advanced-usage/index.md#enabling-https), if needed
 * Use port `80` instead of `9090`
 * If HTTPS is enabled, also use port `443` instead of `9543`
 

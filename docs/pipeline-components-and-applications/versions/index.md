@@ -172,7 +172,7 @@ If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install
 <ReactMarkdown children={`
 Application | Latest version
 :--|:-:
-[Snowplow Micro](/docs/getting-started-with-micro/what-is-micro/index.md) | ${versions.snowplowMicro}
+[Snowplow Micro](/docs/testing-debugging/snowplow-micro/what-is-micro/index.md) | ${versions.snowplowMicro}
 [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/usage-guide/index.md) | ${versions.snowplowMini}
 `} remarkPlugins={[remarkGfm]} />
 

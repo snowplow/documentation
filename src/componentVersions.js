@@ -3,7 +3,7 @@ export const versions = {
   androidTracker: '5.4.0',
   dotNetTracker: '1.2.1',
   cppTracker: '2.0.0',
-  flutterTracker: '0.3.0',
+  flutterTracker: '0.4.0',
   golangTracker: '3.0.0',
   googleAmpTracker: '1.1.0',
   iosTracker: '5.4.0',

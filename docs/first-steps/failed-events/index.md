@@ -1,6 +1,6 @@
 ---
 title: "Inspecting your first failed events"
-sidebar_position: 5
+sidebar_position: 7
 sidebar_label: "Inspecting failed events"
 description: "How validation and failed events work"
 ---

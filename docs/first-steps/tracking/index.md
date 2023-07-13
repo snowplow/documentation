@@ -15,7 +15,6 @@ Once your pipeline is set up, you will want to send some events to it. Here’s 
 :::note Limits
 
 Keep in mind that some of our offerings have limits on the number of events you can send:
-* For BDP Cloud, there is a default cap of 60 events per second and a total of 80m events per month
 * For Try Snowplow, there is cap of 50 events per second. Any events above this cap will be dropped
 * For Open Source, the default setup is sized for around 100 events per second
 
@@ -40,7 +39,7 @@ You can find the pre-generated snippet in the [Getting started](https://console.
   </TabItem>
   <TabItem value="try" label="Try Snowplow">
 
-You can find the pre-generated snippet in the Console.
+You can find the pre-generated snippet in the [Console](https://try.snowplowanalytics.com/).
 
   </TabItem>
   <TabItem value="opensource" label="Open Source">

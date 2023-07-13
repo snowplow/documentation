@@ -1,6 +1,6 @@
 ---
 title: "Creating your first custom events"
-sidebar_position: 5
+sidebar_position: 6
 sidebar_label: "Defining custom events"
 description: "How to define your own events and entities"
 ---

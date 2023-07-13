@@ -1,6 +1,5 @@
 ---
-title: "Recipes"
-date: "2020-10-08"
+title: "Recipes and tutorials"
 sidebar_position: 4
 ---
 

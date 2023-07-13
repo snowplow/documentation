@@ -1,8 +1,8 @@
 ---
 title: "Snowplow fundamentals"
-sidebar_position: 50
+sidebar_position: 2
 sidebar_custom_props:
-  header: "Concepts & How-tos"
+  header: "Getting started"
 ---
 
 ```mdx-code-block

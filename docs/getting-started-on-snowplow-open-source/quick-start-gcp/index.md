@@ -139,4 +139,4 @@ terraform apply -var-file=<destination>.terraform.tfvars
 
 This will output your `collector_dns_name`, `db_address`, `db_port`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`. Depending on your destination some of these outputs will be empty. Make a note of these, you’ll need it when sending events and connecting to your database. If you have attached a custom ssl certificate and set up your own DNS records then you don’t need your `collector_dns_name` as you will use your own DNS record to send events from the Snowplow trackers.
 
-Now let's [send some events](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/sending-test-events/index.md) to your pipeline!
+Now it’s time to [send your first events to your pipeline](/docs/first-steps/tracking/index.md)!

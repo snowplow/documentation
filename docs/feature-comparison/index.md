@@ -1,6 +1,6 @@
 ---
 title: "Feature comparison"
-sidebar_position: -0.5
+sidebar_position: 1
 hide_table_of_contents: true
 ---
 

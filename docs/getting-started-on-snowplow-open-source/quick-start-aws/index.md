@@ -170,4 +170,4 @@ For solutions to some common Terraform errors that you might encounter when runn
 
 :::
 
-Now it’s time to [send your first events to your pipeline](/docs/getting-started-on-snowplow-open-source/quick-start-aws/send-test-events-to-your-pipeline/index.md)!
+Now it’s time to [send your first events to your pipeline](/docs/first-steps/tracking/index.md)!

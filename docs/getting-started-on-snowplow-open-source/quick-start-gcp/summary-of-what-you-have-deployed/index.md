@@ -134,5 +134,3 @@ For further details on the resources, default and required input variables, and 
 
   </TabItem>
 </Tabs>
-
-Next, start [tracking events from your own application](/docs/getting-started-on-snowplow-open-source/tracking-events/index.md).

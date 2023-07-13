@@ -160,3 +160,16 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 /docs/tutorials/tutorial-a-guide-to-using-the-snowplow-inspector-extension/* /docs/testing-debugging/snowplow-inspector/:splat 301
 /docs/getting-started-with-micro/* /docs/testing-debugging/snowplow-micro/:splat 301
+
+/docs/tutorials/tutorial-basic-tracking-design-and-setup/ /docs/recipes/recipe-basic-tracking-design/ 301
+/docs/tutorials/ /docs/recipes/ 301
+
+/docs/getting-started-on-snowplow-open-source/quick-start-aws/send-test-events-to-your-pipeline/ /docs/first-steps/tracking/ 301
+/docs/getting-started-on-snowplow-open-source/quick-start-gcp/sending-test-events/ /docs/first-steps/tracking/ 301
+/docs/getting-started-on-snowplow-open-source/tracking-events/ /docs/first-steps/tracking/ 301
+/docs/getting-started-on-snowplow-bdp-cloud/tracking-events/ /docs/first-steps/tracking/ 301
+/docs/try-snowplow/tracking-events-with-try-snowplow/ /docs/first-steps/tracking/ 301
+
+/docs/getting-started-on-snowplow-open-source/quick-start-aws/query-your-data/* /docs/first-steps/querying/ 301
+/docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-data/* /docs/first-steps/querying/ 301
+/docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/ /docs/recipes/querying-try-data/ 301

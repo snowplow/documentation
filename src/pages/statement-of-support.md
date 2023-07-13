@@ -72,7 +72,7 @@ Customers on our *Summit* plan, for major updates, can request a deferred upgrad
 
 ### Infrastructure Reviews
 
-As part of our [Infrastructure Review service](https://snowplow.io/snowplow-bdp-product-description/#:~:text=Infrastructure%20Management-,Regular%20Infrastructure%20Reviews,-Deferred%20Upgrades), our team review your current infrastructure and make recommendations in the following areas:
+As part of our [Infrastructure Review service](https://snowplow.io/snowplow-bdp-product-description/#pipeline-types), our team review your current infrastructure and make recommendations in the following areas:
 
 - History of recent infrastructure management activities (such as upgrades)
 - Security

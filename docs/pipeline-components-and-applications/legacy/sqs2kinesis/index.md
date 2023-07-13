@@ -19,8 +19,6 @@ It is superseded by [Snowbridge](/docs/destinations/forwarding-events/snowbridge
 
 Sqs2kinesis is an application for moving data from SQS to Kinesis on AWS. In a Snowplow pipeline, you can run it if you are using SQS as either a fallback buffer or as your primary collector sink.
 
-The AWS setup guide describes [how to set up a SQS buffer for your collector, and why it is needed](/docs/getting-started-on-snowplow-open-source/setup-snowplow-on-aws/setup-the-snowplow-collector/set-up-an-sqs-buffer/index.md).
-
 ### Getting a Docker image
 
 sqs2kinesis is published on [Docker Hub](https://hub.docker.com/r/snowplow/sqs2kinesis/tags):

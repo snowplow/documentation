@@ -1,18 +1,18 @@
 export const versions = {
   // Trackers
-  androidTracker: '5.3.0',
+  androidTracker: '5.4.0',
   dotNetTracker: '1.2.1',
   cppTracker: '2.0.0',
   flutterTracker: '0.3.0',
   golangTracker: '3.0.0',
   googleAmpTracker: '1.1.0',
-  iosTracker: '5.3.0',
+  iosTracker: '5.4.0',
   javaTracker: '1.0.0',
   javaScriptTracker: '3.13.0',
   luaTracker: '0.2.0',
   phpTracker: '0.6.1',
   pixelTracker: '0.3.0',
-  pythonTracker: '1.0.0',
+  pythonTracker: '1.0.1',
   reactNativeTracker: '1.4.0',
   rokuTracker: '0.2.0',
   rubyTracker: '0.8.0',
@@ -33,7 +33,7 @@ export const versions = {
   esLoader: '2.0.9',
   gcsLoader: '0.5.4',
   postgresLoader: '0.3.3',
-  rdbLoader: '5.6.0',
+  rdbLoader: '5.6.3',
   s3Loader: '2.2.7',
   s3Loader22x: '2.2.7',
 
@@ -45,7 +45,7 @@ export const versions = {
   dbtSnowplowMediaPlayer: '0.5.1',
   dbtSnowplowNormalize: '0.3.1',
   dbtSnowplowFractribution: '0.3.1',
-  dbtSnowplowEcommerce: '0.5.0',
+  dbtSnowplowEcommerce: '0.5.1',
 
   // sql runner
   sqlRunner: '0.10.1',

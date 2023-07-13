@@ -66,7 +66,7 @@ The following Docker command will pick up the environment variables and pass the
 
 This will ensure Micro uses your Iglu registry, in addition to [Iglu Central](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-central/index.md).
 
-For more flexibility, see [Advanced usage](/docs/getting-started-with-micro/advanced-usage/index.md#adding-custom-iglu-resolver-configuration).
+For more flexibility, see [Advanced usage](/docs/testing-debugging/snowplow-micro/advanced-usage/index.md#adding-custom-iglu-resolver-configuration).
 
 ## Adding schemas directly to Micro
 

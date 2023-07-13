@@ -26,6 +26,7 @@ The only required attributes of the `Snowplow.createTracker` method are `namespa
 | `endpoint`       | `String`                | URI for the Snowplow collector endpoint.                                             |
 | `method`         | `Method?`               | HTTP method to use: `Method.get` or `Method.post` (`Method.post` is default).        |
 | `customPostPath` | `String?`               | Custom POST path.                                                                    |
+| `requestHeaders` | `Map<String, String>?` | Map of custom HTTP headers to add to requests to the collector. |
 | `trackerConfig`  | `TrackerConfiguration?` | Configuration of the tracker and the core tracker properties.                        |
 | `gdprConfig`     | `GdprConfiguration?`    | Determines the GDPR context that will be attached to all events sent by the tracker. |
 | `subjectConfig`  | `SubjectConfiguration?` | Subject information about tracked user and device that is added to events.           |

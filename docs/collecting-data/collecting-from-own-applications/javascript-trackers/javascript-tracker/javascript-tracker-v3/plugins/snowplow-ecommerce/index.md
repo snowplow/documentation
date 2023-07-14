@@ -314,7 +314,8 @@ window.snowplow("trackTransactionError:{trackerName}", {
     revenue: 45,
     currency: "EUR",
     transaction_id: "T12345",
-    payment_method: "card" 
+    payment_method: "card",
+    total_quantity: 1
   }
 });
 ```

@@ -52,7 +52,7 @@ gcloud iam service-accounts create $SERVICE_ACCOUNT_NAME --display-name $SERVICE
 #### 5 - Create a custom role
 
 ```shell
-gcloud iam roles create $ROLE_NAME --project=$PROJECT_ID --permissions=bigQuery.tables.export,bigQuery.tables.getData,bigQuery.tables.get,bigQuery.tables.create,bigQuery.tables.update,bigQuery.tables.updateData,bigQuery.tables.list,bigQuery.tables.delete,bigQuery.jobs.create,storage.objects.create,storage.objects.get,storage.objects.list,storage.objects.delete,storage.buckets.getIamPolicy,storage.buckets.setIamPolicy,storage.buckets.create,storage.buckets.get,bigQuery.datasets.create,bigQuery.routines.create,bigQuery.routines.get,bigQuery.routines.update
+gcloud iam roles create $ROLE_NAME --project=$PROJECT_ID --permissions=bigquery.tables.export,bigquery.tables.getData,bigquery.tables.get,bigquery.tables.create,bigquery.tables.update,bigquery.tables.updateData,bigquery.tables.list,bigquery.tables.delete,bigquery.jobs.create,storage.objects.create,storage.objects.get,storage.objects.list,storage.objects.delete,storage.buckets.getIamPolicy,storage.buckets.setIamPolicy,storage.buckets.create,storage.buckets.get,bigquery.datasets.create,bigquery.datasets.get,bigquery.routines.create,bigquery.routines.get,bigquery.routines.update
 ```
 *Note this will error if you already have a custom role with this name, or your role name contains dashes*
 

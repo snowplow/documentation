@@ -25,4 +25,4 @@ dispatch:
     search_order: ['snowplow_utils', 'dbt']
 ```
 
-If you wish to disable the buffer we apply to the upsert in the case of late arriving data (defined by `snowplow__upsert_lookback_days`) you can set `disable_upsert_lookback` to `true` in your model config.
+If you wish to disable the buffer we apply to the upsert in the case of late arriving data (equivalent to setting `snowplow__upsert_lookback_days` to `0`) you can set `disable_upsert_lookback` to `true` in your model config. To disable the optimized upsert entirely and use the default incremental materialization, set the `snowplow_optimize` to `false` in your model config.

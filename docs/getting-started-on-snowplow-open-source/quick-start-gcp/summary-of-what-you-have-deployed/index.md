@@ -27,7 +27,7 @@ Note: you can very easily edit the script by removing certain modules, giving yo
 
 #### BigQuery Loader
 
-For more information about the BigQuery Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=bigquery&cloud=aws-micro-batching).
+For more information about the BigQuery Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=bigquery&cloud=gcp).
 
   </TabItem>
 </Tabs>

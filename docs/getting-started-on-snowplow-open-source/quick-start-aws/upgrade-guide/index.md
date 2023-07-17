@@ -10,7 +10,7 @@ The Open Source Quick Start is updated in line with the Snowplow OS Distribution
 
 :::note
 
-You may have deviated from the original Quick Start example Terraform files, if this is the case then the concepts described here still apply. However you will want to compare the differences between Quick Start releases to see what you need to update.
+You may have deviated from the original Quick Start example Terraform files. If this is the case then the concepts described here still apply. However, you will want to compare the differences between Quick Start releases to see what you need to update.
 
 :::
 

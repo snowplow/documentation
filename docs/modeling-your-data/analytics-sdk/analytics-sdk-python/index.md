@@ -65,7 +65,7 @@ The [Snowplow Analytics SDK for Python](https://github.com/snowplow/snowplow-pyt
 
 Run manifests functionality resides in new `snowplow_analytics_sdk.run_manifests` module.
 
-Main class is `RunManifests`, that proides access to DynamoDB table via `contains` and `add`, as well as `create` method to initialize table with appropriate settings. Other commonly-used function is `list_runids` that is gives S3 client and path to folder such as `enriched.archive` or `shredded.archive` from `config.yml` lists all folders that match Snowplow run id format (`run-YYYY-mm-DD-hh-MM-SS`). Using `list_runids` and `RunManifests` you can list job runs and safely process them one by one without risk of reprocessing.
+Main class is `RunManifests`, that provides access to DynamoDB table via `contains` and `add`, as well as `create` method to initialize table with appropriate settings. Other commonly-used function is `list_runids` that is gives S3 client and path to folder such as `enriched.archive` or `shredded.archive` from `config.yml` lists all folders that match Snowplow run id format (`run-YYYY-mm-DD-hh-MM-SS`). Using `list_runids` and `RunManifests` you can list job runs and safely process them one by one without risk of reprocessing.
 
 ### 4.3 Example
 

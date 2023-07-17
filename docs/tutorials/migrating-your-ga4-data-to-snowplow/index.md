@@ -127,7 +127,7 @@ Set the environment variable `SERVICE_ACCOUNT_KEY_FILE` to the full path for the
 export SERVICE_ACCOUNT_KEY_FILE=[path/to/service_account/keyfile.json]
 ```
 <details>
-If you are also going to run the export from BigQuery to Snowflake, set the following environment variables. This user must have ACCOUNTADMIN permissions in Snowflake.
+If you are also going to run the export from BigQuery to Snowflake, set the following environment variables. This user must either have ACCOUNTADMIN permissions in Snowflake or the global CREATE INTEGRATION privilege.
 Also ensure that the GCS bucket you are using for the export already exists and is in the same location as your BigQuery table.
 
 ```shell

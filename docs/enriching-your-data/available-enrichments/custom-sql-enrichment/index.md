@@ -23,7 +23,7 @@ For help with configuring this enrichment and getting it live on your pipeline p
 
 ## Configuration
 
-- [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/sql_query_enrichment_config/jsonschema/1-0-0)
+- [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/sql_query_enrichment_config/jsonschema/1-0-1)
 - [example](https://github.com/snowplow/enrich/blob/master/config/enrichments/sql_query_enrichment_config.json)
 
 ```mdx-code-block
@@ -168,6 +168,10 @@ A Snowplow enrichment can run many millions of time per hour, effectively launch
 
 - `size` is the maximum number of entries to hold in the cache at any one time
 - `ttl` is the number of seconds that an entry can stay in the cache before it is forcibly evicted. This is useful to prevent stale values from being retrieved in the case that your DB can return different values for the same key over time
+
+#### `ignoreOnError`
+
+When set to `true`, no bad row will be emitted if the SQL query fails and the enriched event will be emitted without the context added by this enrichment.
 
 ## Examples
 

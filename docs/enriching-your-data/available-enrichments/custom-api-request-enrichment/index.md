@@ -18,7 +18,7 @@ If you’d like support in setting up or configuring this enrichment please cont
 
 ## Configuration
 
-- [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/api_request_enrichment_config/jsonschema/1-0-1)
+- [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/api_request_enrichment_config/jsonschema/1-0-2)
 - [example](https://github.com/snowplow/enrich/blob/master/config/enrichments/api_request_enrichment_config.json)
 
 ```mdx-code-block
@@ -134,6 +134,10 @@ The cache is an LRU (least-recently used) cache, where less frequently accessed 
 - `ttl` is the number of seconds that an entry can stay in the cache before it is forcibly evicted. This is useful to prevent stale values from being retrieved in the case that your API can return different values for the same key over time.
 
 To disable `ttl` so keys could be stored in cache until job is done `0` value should be used.
+
+#### `ignoreOnError`
+
+When set to `true`, no bad row will be emitted if the API call fails and the enriched event will be emitted without the context added by this enrichment.
 
 ### Data sources
 

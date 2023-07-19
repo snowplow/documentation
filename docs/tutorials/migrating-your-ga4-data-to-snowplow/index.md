@@ -103,7 +103,7 @@ terraform init
 terraform apply
 ```
 You will be prompted to enter values for role ID, service account ID and project ID. The role ID is the name of the custom IAM role that will be created. The service account ID is the name of the service account that will be created.
-You will also be prompted for a bucket name and location in case you wish to create a bucket. If you already have a bucket to use as part of the export to Snowflake, leave these blank and set the `create_bucket` variable, when prompted, to false.
+You will also be prompted for a bucket name and location in case you wish to create a bucket to use when importing your data to Snowflake. If you already have a bucket to use as part of the import to Snowflake, or will not be exporting your data from BigQuery, leave these blank.
 
 You can create a `terraform.tfvars` file if you do not want to re-enter the variables each time you run Terraform.
 E.g.
@@ -113,7 +113,6 @@ service_account_id = "ga4-migrator-service-account"
 role_id = "ga4_migrator_role"
 bucket_name = ""
 bucket_location = ""
-create_bucket = false
 ```
 
 The keyfile will be created in the same directory you ran Terraform.

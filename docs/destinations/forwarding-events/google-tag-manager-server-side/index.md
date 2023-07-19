@@ -62,4 +62,9 @@ If using GTM SS as a Server Side Tag Manager for Snowplow JavaScript Tracker eve
 
 ## Snowplow Authored Tags
 
-Snowplow have created a number of GTM SS Tags which work best with the Snowplow Client and make use of the rich data available from Snowplow tracker or Enriched events.
+Snowplow have created a number of GTM SS Tags which work best with the Snowplow Client and make use of the rich data available from Snowplow tracker or Enriched events. See the tags for:
+
+* [Amplitude](https://docs.snowplow.io/docs/destinations/forwarding-events/google-tag-manager-server-side/amplitude-tag-for-gtm-ss/)
+* [Braze](https://docs.snowplow.io/docs/destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/)
+* [Iterable](https://docs.snowplow.io/docs/destinations/forwarding-events/google-tag-manager-server-side/iterable-tag-for-gtm-ss/)
+* [LaunchDarkly](https://docs.snowplow.io/docs/destinations/forwarding-events/google-tag-manager-server-side/launchdarkly-tag-for-gtm-ss/)

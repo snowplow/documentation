@@ -1,6 +1,6 @@
 ---
 title: "What is deployed?"
-sidebar_position: 300
+sidebar_position: 3
 ---
 
 ```mdx-code-block

@@ -8,7 +8,7 @@ When failed events are generated on your pipeline the raw event payload along wi
 
 :::info Open Source quick start guide on GCP
 
-If you followed the [Open Source quick start guide](/docs/getting-started-on-snowplow-open-source/quick-start-aws/index.md) on GCP, you will need to manually deploy the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
+If you followed the [Open Source quick start guide](/docs/getting-started-on-snowplow-open-source/quick-start/index.md) on GCP, you will need to manually deploy the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
 
 :::
 

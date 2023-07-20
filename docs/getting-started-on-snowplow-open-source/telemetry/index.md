@@ -1,7 +1,7 @@
 ---
 title: "Telemetry principles"
 date: "2021-07-09"
-sidebar_position: 200
+sidebar_position: 6
 ---
 
 Telemetry helps us better understand how our applications are used:
@@ -45,7 +45,7 @@ We also appreciate if you provide your email (or just a UUID) in the `user_provi
 ## Which components have telemetry?
 
 At the moment, opt-out telemetry is present in the following:
-* Terraform modules for Quick Start on [AWS](/docs/getting-started-on-snowplow-open-source/quick-start-aws/index.md) and on [GCP](/docs/getting-started-on-snowplow-open-source/quick-start-gcp/index.md).
+* Terraform modules for the [quick start guide](/docs/getting-started-on-snowplow-open-source/quick-start/index.md).
 * [Collector](/docs/pipeline-components-and-applications/stream-collector/setup/index.md).
 * Enrich ([Enrich Kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md), [Enrich PubSub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md), [Enrich Kafka](/docs/pipeline-components-and-applications/enrichment-components/enrich-kafka/index.md), [Enrich RabbitMQ](/docs/pipeline-components-and-applications/enrichment-components/enrich-rabbitmq/index.md)).
 * RDB Loader ([Transofmer Kinesis](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-kinesis/index.md), [Transformer PubSub](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-pubsub/index.md), [Redshift Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/redshift-loader/index.md), [Snowflake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/snowflake-loader/index.md), [Databricks Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/databricks-loader/index.md)).

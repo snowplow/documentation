@@ -537,4 +537,4 @@ For solutions to some common Terraform errors that you might encounter when runn
 
 :::
 
-If you are curious, here’s [what has been deployed](/docs/getting-started-on-snowplow-open-source/quick-start-aws/summary-of-what-you-have-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/first-steps/tracking/index.md)!
+If you are curious, here’s [what has been deployed](/docs/getting-started-on-snowplow-open-source/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/first-steps/tracking/index.md)!

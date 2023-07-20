@@ -1,7 +1,7 @@
 ---
 title: "Open Source quick start: frequently asked questions"
 sidebar_label: "Frequently asked questions"
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 ## How do I shut down the pipeline?

@@ -2,7 +2,7 @@
 import Mermaid from '@theme/Mermaid';
 ```
 
-#### The main components of the pipeline
+<h4>The main components of the pipeline</h4>
 
 <Mermaid value={`
 flowchart LR
@@ -25,7 +25,9 @@ flowchart LR
   linkStyle 0 stroke:none,fill:none
 `}/>
 
-#### Archival and failed events
+<h4>Archival and failed events</h4>
+
+<>{props.bucket == 'GCS' && props.warehouse != 'Postgres' ? <p>Currently not included.</p> : ''}</>
 
 <div style={{width: '50%'}}>
 <Mermaid value={`
@@ -38,13 +40,14 @@ flowchart LR
     blobloadergood{{"<b>${props.bucket} Loader Good</b>\n(${props.compute})"}}
     blobgood[("<b>Enriched Events</b>\n(${props.bucket})")]
     raw-->blobloaderraw-->blobraw
-    good-->blobloadergood-->blobgood` : ''}
-  bad[["<b>Bad Stream</b>\n(${props.stream})"]]
-  blobloaderbad{{"<b>${props.bucket} Loader Bad</b>\n(${props.compute})"}}
-  blobbad[("<b>Failed Events</b>\n(${props.bucket})")]
-  bad-->blobloaderbad-->blobbad
+    good-->blobloadergood-->blobgood
+    bad[["<b>Bad Stream</b>\n(${props.stream})"]]
+    blobloaderbad{{"<b>${props.bucket} Loader Bad</b>\n(${props.compute})"}}
+    blobbad[("<b>Failed Events</b>\n(${props.bucket})")]
+    bad-->blobloaderbad-->blobbad` : ''}
   ${props.warehouse == 'Postgres' ?
-    `psloaderbad{{"<b>Postgres Loader Bad</b>\n(${props.compute})"}}
+    `bad[["<b>Bad Stream</b>\n(${props.stream})"]]
+    psloaderbad{{"<b>Postgres Loader Bad</b>\n(${props.compute})"}}
     psbad[("<b>Failed events</b>\n(Postgres)")]
     bad-->psloaderbad-->psbad` : ''}
 `}/>

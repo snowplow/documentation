@@ -6,14 +6,31 @@ sidebar_position: 300
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import Link from '@docusaurus/Link';
 import Diagram from '@site/docs/getting-started-on-snowplow-open-source/_diagram.md';
+
+export const TerraformLinks = (props) => <p>
+  For further details on the resources, default and required input variables, and outputs, see the Terraform module (
+  <Link to={props.aws}>AWS</Link>,{' '}
+  <Link to={props.gcp}>GCP</Link>
+  ).
+</p>
 ```
 
-**Let’s take a look at what is deployed on AWS upon running the quick start example script.**
+Let’s take a look at what is deployed when you follow the quick start guide.
 
-You can very easily edit the script or run each of the terraform modules independently, giving you the flexibility to design the topology of your pipeline according to your needs.
+:::tip
+
+You can very easily edit the script or run each of the Terraform modules independently, giving you the flexibility to design the topology of your pipeline according to your needs.
+
+:::
+
+## Overview
 
 <!-- see https://github.com/facebook/docusaurus/issues/8357 -->
+<Tabs groupId="cloud" queryString lazy>
+  <TabItem value="aws" label="AWS" default>
+
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="postgres" label="Postgres" default>
 
@@ -24,7 +41,7 @@ You can very easily edit the script or run each of the terraform modules indepen
 
 <Diagram warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3"/>
 
-#### Redshift Loader
+<h4>Redshift Loader</h4>
 
 For more information about the Redshift Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=redshift&cloud=aws-micro-batching).
 
@@ -33,7 +50,7 @@ For more information about the Redshift Loader, see the [documentation on the lo
 
 <Diagram warehouse="Snowflake" compute="EC2" stream="Kinesis" bucket="S3"/>
 
-#### Snowflake Loader
+<h4>Snowflake Loader</h4>
 
 For more information about the Snowflake Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=snowflake&cloud=aws-micro-batching).
 
@@ -42,202 +59,237 @@ For more information about the Snowflake Loader, see the [documentation on the l
 
 <Diagram warehouse="Databricks" compute="EC2" stream="Kinesis" bucket="S3"/>
 
-#### Databricks Loader
+<h4>Databricks Loader</h4>
 
 For more information about the Databricks Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=databricks&cloud=aws-micro-batching).
 
   </TabItem>
 </Tabs>
 
-## Collector Load Balancer
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
 
-This is an Application Load Balancer (ALB) for your inbound HTTP/S traffic. Traffic is routed from the load balancer to the collector instances.
+<!-- see https://github.com/facebook/docusaurus/issues/8357 -->
+<Tabs groupId="warehouse" queryString lazy>
+  <TabItem value="postgres" label="Postgres" default>
 
-For further details on the resources, default and required input variables, and outputs see the [terraform-aws-alb module](https://github.com/snowplow-devops/terraform-aws-alb) github repository.
+<Diagram warehouse="Postgres" compute="CE" stream="Pub/Sub" bucket="GCS"/>
 
-## Stream Collector
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
 
-This is a Snowplow event collector that receives raw Snowplow events over HTTP, serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to Kinesis. More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/index.md).
+<Diagram warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS"/>
 
-Find out more about the Collector terraform module, and explore the full set of variables here: [https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest).
+<h4>BigQuery Loader</h4>
+
+For more information about the BigQuery Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=bigquery&cloud=gcp).
+
+  </TabItem>
+</Tabs>
+
+</TabItem>
+</Tabs>
+
+## Collector load balancer
+
+This is an application load balancer for your inbound HTTP(S) traffic. Traffic is routed from the load balancer to the Collector instances.
+
+<TerraformLinks
+  aws="https://registry.terraform.io/modules/snowplow-devops/alb/aws/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/lb/google/latest"
+/>
+
+## Collector
+
+This is an application that receives raw Snowplow events over HTTP(S), serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to Kinesis (on AWS) or Pub/Sub (on GCP). More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/index.md).
+
+<TerraformLinks
+  aws="https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/collector-pubsub
+-ce/google/latest"
+/>
 
 ## Enrich
 
-This is a Snowplow app written in scala which:
+This is an application that reads the raw Snowplow events, validates them (including validation against [schemas](/docs/understanding-your-pipeline/schemas/index.md)), [enriches](/docs/enriching-your-data/what-is-enrichment/index.md) them and writes the enriched events to another stream. More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/index.md).
 
-- Reads raw Snowplow events off a Kinesis stream populated by the Scala Stream Collector
-- Validates each raw event
-- Enriches each event (e.g. infers the location of the user from his/her IP address)
-- Writes the enriched Snowplow event to another stream
-
-It is designed to be used downstream of the [Scala Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md). More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md).
-
-Find out more about the Enrich modules and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest).
-
-## Kinesis streams
-
-Your kinesis streams are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
-
-Find out more about the Kinesis stream module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/kinesis-stream/aws/latest).
-
-### Raw stream
-
-Collector payloads are written to this raw kinesis stream, before being picked up by the Enrich application. The S3 loader (raw) also reads from this raw stream and writes to the raw S3 folder.
-
-### Enriched stream
-
-Events that have been validated and enriched by the Enrich application are written to this enriched stream. The S3 loader (enriched) reads from this enriched stream and writes to the enriched folder on S3.  Other applications that read from this stream include the Postgres Loader and the Streaming Transformer applications used for preparing data for loading into Snowflake, Redshift and Databricks.
-
-### Bad 1 stream
-
-This bad stream is for events that the collector, enrich or S3 loader (raw and enriched) applications fail to process. An event can fail at the collector point due to, for instance, it being too large for the stream creating a size violation bad row, or it can fail during enrichment due to a schema violation or enrichment failure. More details can be found [here](/docs/understanding-your-pipeline/failed-events/index.md).
-
-### Bad 2 stream
-
-This bad stream is for failed events generated by the S3 loader as it tries to write from the bad 1 stream to the bad folder on S3.
+<TerraformLinks
+  aws="https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/enrich-pubsub-ce/go
+ogle/latest"
+/>
 
 ## Iglu
 
-[Iglu](/docs/pipeline-components-and-applications/iglu/index.md) allows you to publish, test and serve schemas via an easy-to-use RESTful interface. It is split into a few services.
+The Iglu stack allows you to manage [schemas](/docs/understanding-your-pipeline/schemas/index.md).
 
 ### Iglu load balancer
 
 This load balances the inbound traffic and routes traffic to the Iglu Server.
 
-Find out more about the application load balancer module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/alb/aws/latest](https://registry.terraform.io/modules/snowplow-devops/alb/aws/latest).
+<TerraformLinks
+  aws="https://registry.terraform.io/modules/snowplow-devops/alb/aws/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/lb/google/latest"
+/>
 
 ### Iglu Server
 
-The [Iglu Server](https://github.com/snowplow/iglu/tree/master/2-repositories/iglu-server) serves requests for Iglu schemas stored in your schema registry.
+The [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) serves requests for Iglu schemas stored in your schema registry.
 
-Find out more about the Iglu Server module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest).
+<TerraformLinks
+  aws="https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/iglu-server-ce/google
+/latest"
+/>
 
-### Iglu RDS
+### Iglu database
 
-This is the Iglu Server database where the Iglu schemas themselves are stored.
+This is the Iglu Server database (RDS on AWS, CloudSQL on GCP) where the Iglu [schemas](/docs/understanding-your-pipeline/schemas/index.md) themselves are stored.
 
-Find out more about the RDS module and explore the full set of variables available here:_ [https://registry.terraform.io/modules/snowplow-devops/rds/aws/latest](https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest).
+<TerraformLinks
+  aws="https://registry.terraform.io/modules/snowplow-devops/rds/aws/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/cloud-sql/google/latest"
+/>
 
-## S3 loader
+## Streams
 
-The Snowplow S3 Loaders consume records from your relevant [Amazon Kinesis](http://aws.amazon.com/kinesis/) streams (as outlined above) and writes them to [S3](http://aws.amazon.com/s3/).
+The various streams (Kinesis on AWS, Pub/Sub on GCP) are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
 
-Find out more about the S3 loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest).
+<TerraformLinks
+  aws="https://registry.terraform.io/modules/snowplow-devops/kinesis-stream/aws/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/pubsub-topic/google/lat
+est"
+/>
 
-### S3 loader raw
-
-Responsible for reading from the raw stream (i.e. events from the collector that have not yet been validated or enriched) and writing to the raw folder on S3. Any events that have failed to be processed by the raw S3 loader get written to your bad-1 stream.
-
-### S3 loader bad
-
-Responsible for reading from the bad-1 stream and writing to the bad folder on S3. Any events that fail to be processed by the bad S3 loader get written to the bad-2 stream.
-
-### S3 loader enriched
-
-Responsible for reading from the enriched stream and writing to your enriched folder on S3. Any events that fail to be processed by the enriched S3 loader get written to the bad-1 stream.
-
-## S3 loader bucket
-
-Your S3 bucket where the raw, enriched and bad data gets written to by the S3 loader.
-
-* `raw/`: holds the events that come straight out of your collector and have not yet been validated (i.e. quality checked) or enriched by the Enrich application. They are thrift records and are therefore a little tricky to decode - there are not many reasons to use this data, but backing this data up gives you the flexibility to replay this data should something go wrong further downstream in the pipeline.
-* `enriched/`: holds all of your enriched data as GZipped blobs of newline delimited TSVs.  Historically this has been used as the staging ground for loading into data warehouses via our "Batch Transformer/Shredder" application - the quick-start now leverages the "Streaming Transformer" which deprecates this need
-* `bad/`: holds the data that has failed to be validated by your pipeline
-  - You can optionally [configure Athena to be able to query this data directly](/docs/managing-data-quality/exploring-failed-events/querying/index.md)
-
-Find out more about the S3 bucket module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest](https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest).
-
-<Tabs groupId="warehouse" queryString>
-  <TabItem value="postgres" label="Postgres" default>
-
-## Postgres loader
-
-The Snowplow application responsible for reading the enriched and bad data and [loading to Postgres](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md).
-
-Find out more about the Postgres loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest).
-
-  </TabItem>
-  <TabItem value="snowflake" label="Snowflake">
-
-## Snowflake loader
-
-### SQS Queue
-
-SQS queue is used for communication between Transformer Kinesis and Snowflake Loader.
-
-Transformer Kinesis sends an SQS message to the Snowflake Loader after transforming a window of data. Snowflake Loader listens to the SQS queue. When a new message is received, it extracts necessary information from the message and loads that data to Snowflake. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-transformer-and-loader-interface-with-other-snowplow-components-and-each-other).
-
-### Transformer Kinesis
-
-This is a Snowplow application that reads the enriched data from the Kinesis stream, transforms it to format expected by Loader and writes it to an S3 bucket.
-
-After transforming is finished, it sends a message to the Loader via the SQS queue to notify that it can load the transformed data. More details can be found in the [Stream Transformer documentation](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/index.md).
-
-Find out more about the Transformer Kinesis module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest).
-
-### Loader
-
-The Snowplow application responsible for [loading transformed enriched data from S3 to Snowflake](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/snowflake-loader/index.md).
-
-Find out more about the Snowflake Loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest).
-
-  </TabItem>
-  <TabItem value="databricks" label="Databricks">
-
-## Databricks loader
-
-### SQS Queue
-
-SQS queue is used for communication between Transformer Kinesis and the Databricks Loader.
-
-Transformer Kinesis sends SQS message to the Databricks Loader after transforming a window of data. The Databricks Loader listens to an SQS queue. When a new message is received, it extracts necessary information from the message and loads that data to Databricks. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-transformer-and-loader-interface-with-other-snowplow-components-and-each-other).
-
-### Transformer Kinesis
-
-This is a Snowplow application that reads the enriched data from the Kinesis stream, transforms it to format expected by Loader and writes it to an S3 bucket.
-
-After transforming is finished, it sends a message to the Loader via the SQS queue to notify that it can load the transformed data. More details can be found in the [Stream Transformer documentation](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/index.md).
-
-Find out more about the Transformer Kinesis module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest).
-
-### Loader
-
-The Snowplow application responsible for [loading transformed enriched data from S3 to Databricks](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/databricks-loader/index.md).
-
-Find out more about the Databricks Loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest).
-
-  </TabItem>
-  <TabItem value="redshift" label="Redshift">
-
-## Redshift Loader
-
-### SQS Queue
-
-SQS queue is used for communication between Transformer Kinesis and the Redshift Loader.
-
-Transformer Kinesis sends SQS message to the Redshift Loader after shredding a window of data. The Redshift Loader listens to an SQS queue. When a new message is received, it extracts necessary information from the message and loads that data into Redshift. More details can be found in [How `transformer` and `loader` interface with other Snowplow components and each other](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md#how-transformer-and-loader-interface-with-other-snowplow-components-and-each-other).
-
-### Transformer Kinesis
-
-This is a Snowplow application that reads the enriched data from the Kinesis stream, transforms it to format expected by Loader and writes it to an S3 bucket.
-
-After transforming is finished, it sends a message to the Loader via the SQS queue to notify that it can load the transformed data. More details can be found in the [Stream Transformer documentation](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/index.md).
-
-Find out more about the Transformer Kinesis module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest).
-
-### Loader
-
-The application responsible for [loading transformed enriched data from S3 to Redshift](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/redshift-loader/index.md).
-
-Find out more about the Redshift Loader module and explore the full set of variables available here: [https://registry.terraform.io/modules/snowplow-devops/redshift-loader-ec2/aws/latest](https://registry.terraform.io/modules/snowplow-devops/redshift-loader-ec2/aws/latest).
-
-  </TabItem>
-</Tabs>
-
-## DynamoDB
+<details>
+<summary>AWS only — DynamoDB</summary>
 
 On the first run of each of the applications consuming from Kinesis (e.g. Enrich), the Kinesis Connectors Library creates a DynamoDB table to keep track of what they have consumed from the stream so far. Each Kinesis consumer maintains its own checkpoint information.
 
 The DynamoDB autoscaling module enables autoscaling for a target DynamoDB table. Note that there is a `kcl_write_max_capacity` variable which can be set to your expected RPS, but setting it high will of course incur more cost.
 
-You can find further details here: [https://registry.terraform.io/modules/snowplow-devops/dynamodb-autoscaling/aws/latest](https://registry.terraform.io/modules/snowplow-devops/dynamodb-autoscaling/aws/latest).
+You can find further details in the [DynamoDB Terraform module](https://registry.terraform.io/modules/snowplow-devops/dynamodb-autoscaling/aws/latest).
+
+</details>
+
+### Raw stream
+
+Collector payloads are written to the raw stream, before being picked up by the Enrich application.
+
+:::note AWS only
+
+The S3 loader (raw) also reads from this raw stream and writes to the raw S3 folder.
+
+:::
+
+### Enriched stream
+
+Events that have been validated and enriched by the Enrich application are written to the enriched stream. Depending on your cloud and destination, different loaders pick up the data from this stream, as shown on the diagram [above](#overview).
+
+:::note AWS only
+
+The S3 loader (enriched) also reads from this enriched stream and writes to the enriched folder on S3.
+
+:::
+
+### Bad 1 stream
+
+This bad stream is for [failed events](/docs/understanding-your-pipeline/failed-events/index.md), which get created when the Collector, Enrich or various loader applications fail to process the data.
+
+### Other streams
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+The _Bad 2 stream_ is for failed events generated by the S3 loader as it tries to write from the Bad 1 stream to the bad folder on S3.
+
+If you selected Redshift, Snowflake or Databricks as your destination, the loader will use an extra SQS stream internally as explained in the [loading process](/docs/storing-querying/loading-process/index.md?cloud=aws-micro-batching).
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+If you selected BigQuery as your destination, the _Bad Rows_ stream will contain events that could not be inserted into BigQuery by the loader. This includes data that is not valid against its schema or that is somehow corrupted in a way that the loader cannot handle. In addition, the loader users a few streams internally, as explained in the [loading process](/docs/storing-querying/loading-process/index.md?warehouse=bigquery).
+
+  </TabItem>
+</Tabs>
+
+## Archival and failed events
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+Aside from your main destination, the data is written to S3 by the S3 Loader applications for archival and to deal with [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
+
+See the [S3 Loader](https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest) and [S3](https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest) Terraform modules for further details on the resources, default and required input variables, and outputs.
+
+The following loaders and folders are available:
+* Raw loader, `raw/`: events that come straight out of the Collector and have not yet been validated or enriched by the Enrich application. They are Thrift records and are therefore a little tricky to decode. There are not many reasons to use this data, but backing this data up gives you the flexibility to replay this data should something go wrong further downstream in the pipeline.
+* Enriched loader, `enriched/`: enriched events, in GZipped blobs of [enriched TSV](/docs/understanding-your-pipeline/canonical-event/understanding-the-enriched-tsv-format/index.md). Historically, this has been used as the staging ground for loading into data warehouses via the [Batch transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) application. However, it’s no longer used in the quick start examples.
+* Bad loader, `bad/`: [failed events](/docs/understanding-your-pipeline/failed-events/index.md). You can [query them using Athena](/docs/managing-data-quality/exploring-failed-events/querying/index.md).
+
+Also, if you choose Postgres as your destination, the Postgres loader will load all failed events into Postgres.
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+If you choose Postgres as your destination, the Postgres loader will load all [failed events](/docs/understanding-your-pipeline/failed-events/index.md) into Postgres, although not to GCS.
+
+If you choose BigQuery as your destination, there will be a “dead letter” GCS bucket. It will have the suffix `-bq-loader-dead-letter` and will contain events that the loader fails to be insert into BigQuery, _but not_ any other kind of failed events. To store all failed events, you will need to manually deploy the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
+
+  </TabItem>
+</Tabs>
+
+## Loaders
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="postgres" label="Postgres" default>
+
+The [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) loads enriched events and failed events to Postgres.
+
+<TerraformLinks
+  aws="https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/postgres-l
+oader-pubsub-ce/google/latest"
+/>
+
+  </TabItem>
+  <TabItem value="redshift" label="Redshift">
+
+[RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Redshift.
+
+See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
+* [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
+* [Redshift Loader](https://registry.terraform.io/modules/snowplow-devops/redshift-loader-ec2/aws/latest)
+
+
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
+
+The [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) is a set of applications that loads enriched events into BigQuery.
+
+See the [Terraform module](https://registry.terraform.io/modules/snowplow-devops/bigquery-loader-pubsub-ce/google/latest) for further details on the resources, default and required input variables, and outputs.
+
+There will be a new dataset available in BigQuery with the suffix `_snowplow_db`. Within this dataset, there will be a table called `events` — all of your collected events will be available here generally within a few seconds after they are sent into the pipeline.
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+[RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Snowflake.
+
+See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
+* [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
+* [Snowflake Loader](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest)
+
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+[RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Databricks.
+
+See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
+* [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
+* [Databricks Loader](https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest)
+
+
+  </TabItem>
+</Tabs>

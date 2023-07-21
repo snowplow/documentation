@@ -302,7 +302,7 @@ The cluster spec described below should be sufficient for a monthly event volume
 
 Create a new cluster, following the [Databricks documentation](https://docs.databricks.com/clusters/create.html), with the following settings:
 
-* the runtime version must be 13.0 or greater
+* the runtime version must be 13.0 or greater (but not 13.1 or 13.2)
 * single node cluster
 * "smallest" size node type
 * auto-terminate after 30 minutes.

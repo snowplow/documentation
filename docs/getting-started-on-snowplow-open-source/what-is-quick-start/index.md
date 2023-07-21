@@ -4,7 +4,7 @@ sidebar_label: "Before you begin"
 sidebar_position: 1
 ---
 
-We have built a set of [terraform](https://www.terraform.io/docs/language/modules/develop/index.html) modules, which automate the setting up and deploying the required infrastructure and applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side.
+We have built a set of [terraform](https://www.terraform.io/docs/language/modules/develop/index.html) modules, which automates the setup and deployment of the required infrastructure and applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side.
 
 After following this guide, you will be able to: 
 

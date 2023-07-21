@@ -6,10 +6,10 @@ import Mermaid from '@theme/Mermaid';
 
 <Mermaid value={`
 flowchart LR
-  stream[["<b>Enriched events</b>\n(${props.stream} stream)"]]
+  stream[["<b>Enriched Events</b>\n(${props.stream} stream)"]]
   ${props.batch ? `
     s3loader{{"<b>S3 Loader</b>"}}
-    prebucket[("<b>Enriched events</b>\n(S3 bucket)")]
+    prebucket[("<b>Enriched Events</b>\n(S3 bucket)")]
   ` : ''}
   loader{{"<b>RDB Loader</b>\n(Transformer and Loader apps)"}}
   bucket[("<b>Transformed Events</b>\n(${props.bucket} bucket)")]

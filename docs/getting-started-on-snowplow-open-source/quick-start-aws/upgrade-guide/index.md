@@ -8,7 +8,11 @@ Now that you have successfully spun up a Snowplow pipeline, you might want to up
 
 The Open Source Quick Start is updated in line with the Snowplow OS Distributions and here we describe the steps you need to take to upgrade between versions.
 
-**Note:** You may have deviated from the original Quick Start example Terraform files, if this is the case then the concepts described here still apply however you will want to compare the differences between Quick Start releases to see what you need to update.
+:::note
+
+You may have deviated from the original Quick Start example Terraform files. If this is the case then the concepts described here still apply. However, you will want to compare the differences between Quick Start releases to see what you need to update.
+
+:::
 
 ## Updating your repository
 

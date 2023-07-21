@@ -46,6 +46,12 @@ You can find the pre-generated snippet in the [Console](https://try.snowplowanal
 
 Take note of the Collector URL you’ve chosen when deploying your Open Source pipeline.
 
+:::note
+
+If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
+
+:::
+
 Then, follow the JavaScript tracker [quick start guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md) to create your snippet.
   
   </TabItem>

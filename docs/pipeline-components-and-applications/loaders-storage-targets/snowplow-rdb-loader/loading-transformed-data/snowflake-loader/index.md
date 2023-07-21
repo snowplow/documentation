@@ -25,23 +25,18 @@ We recommend the first way.
 
 At the moment, terraform modules for deploying Snowflake Loader on GCP aren't implemented. Therefore necessary Snowflake resources needs to be created and application needs to be deployed manually.
 
-
 ## Using the Terraform modules (for AWS)
 
 ### Requirements
 
 - Terraform >= 1.0.0
-- [`terraform-snowflake-target` module](https://registry.terraform.io/modules/snowplow-devops/target/snowflake/latest)
-- [`terraform-aws-snowflake-loader-setup` module](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-setup/aws/latest)
 - [`terraform-aws-snowflake-loader-ec2` module](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest)
 
 ### Usage
 
-The `terraform-snowflake-target` and `terraform-aws-snowflake-loader-setup` modules create the necessary Snowflake resources to run the loader. The outputs of these modules become inputs to the `terraform-aws-snowflake-loader-ec2` module.
+If you have an existing pipeline you should be able to attach the loader to an existing Enriched Kinesis stream following the documentation found [here](https://github.com/snowplow-devops/terraform-aws-snowflake-loader-ec2#usage).
 
-Stitching these modules together is described [here](https://github.com/snowplow-devops/terraform-aws-snowflake-loader-ec2/blob/master/README.md).
-
-We also have full pipeline deployment examples [here](https://github.com/snowplow/quickstart-examples), including a [deployment example](https://github.com/snowplow/quickstart-examples/tree/main/terraform/aws/pipeline/secure/snowflake) for a pipeline with Snowflake as destination. This lets you see how all the Terraform modules are used in a full pipeline deployment.
+We also have full pipeline deployment examples [here](https://github.com/snowplow/quickstart-examples).
 
 ## Manual setup and deployment
 

@@ -37,13 +37,37 @@ For a step-by-step guide on how to query data in Try Snowplow, see [this tutoria
 <Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
 
-You can connect to the database using the username and password you provided when creating the pipeline, along with the `db_address` and `db_port` you noted down after the pipeline was created. (If you need to reset your username or password, you can follow [these steps](https://aws.amazon.com/premiumsupport/knowledge-center/reset-master-user-password-rds/).)
-
-Your database will contain two schemas:
+Your database will be named according to the `postgres_db_name` Terraform variable. It will contain two schemas:
 * `atomic` — the validated events
 * `atomic_bad` — the [failed events](/docs/understanding-your-pipeline/failed-events/index.md)
 
+You can connect to the database using the credentials you provided for the loader in the Terraform variables (`postgres_db_username` and `postgres_db_password`), along with the `postgres_db_address` and `postgres_db_port` Terraform outputs.
+
+:::tip
+
+If you need to reset your username or password, you can follow [these steps](https://aws.amazon.com/premiumsupport/knowledge-center/reset-master-user-password-rds/).
+
+:::
+
 See [the AWS RDS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html) for more details on how to connect.
+
+:::note
+
+If you opted for the `secure` option, you will first need to create a tunnel into your VPC to be able to connect to your RDS instance and be able to query the data. A common solution to this issue is to configure a bastion host as described [here](https://repost.aws/knowledge-center/rds-connect-using-bastion-host-linux).
+
+:::
+
+
+  </TabItem>
+  <TabItem value="redshift" label="Redshift">
+
+The database name and the schema name will be defined by the `redshift_database` and `redshift_schema` variables in Terraform.
+
+There are two different ways to login to the database:
+* The first option is to use the credentials you configured for the loader in the Terraform variables (`redshift_loader_user` and `redshift_loader_password`)
+* The second option is to grant `SELECT` permissions on the schema to an existing user
+
+To connect, you can use the Redshift UI or something like [`psql`](https://www.postgresql.org/docs/current/app-psql.html).
 
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
@@ -55,13 +79,24 @@ You can access the database via the [BigQuery UI](https://console.cloud.google.c
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
-There are two different ways to login to the database:
-* The first option is to login using the same credentials as the loader. The user name is in the `snowflake_loader_user` output of the Snowflake Terraform module. The password is the one you’ve passed as `snowflake_loader_password` in your Terraform variables.
-* The second option is to grant the loader’s role to an existing user. The role name is in the `snowflake_loader_role` output of the Snowflake Terraform module.
+The database name and the schema name will be defined by the `snowflake_database` and `snowflake_schema` variables in Terraform.
 
-By default, the database will be called `<prefix>_database`, where `<prefix>` is the prefix you picked in your Terraform variables file (any special characters are replaced with underscores). It will contain an `atomic` schema with your validated events.
+There are two different ways to login to the database:
+* The first option is to use the credentials you configured for the loader in the Terraform variables (`snowflake_loader_user` and `snowflake_loader_password`)
+* The second option is to grant `SELECT` permissions on the schema to an existing user
 
 To connect, you can use either Snowflake dashboard or [SnowSQL](https://docs.snowflake.com/en/user-guide/snowsql.html).
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+The database name and the schema name will be defined by the `databricks_database` and `databricks_schema` variables in Terraform.
+
+There are two different ways to login to the database:
+* The first option is to use the credentials you configured for the loader in the Terraform variables (`databricks_loader_user` and `databricks_loader_password`, or alternatively the `databricks_auth_token`)
+* The second option is to grant `SELECT` permissions on the schema to an existing user
+
+See the [Databricks tutorial](https://docs.databricks.com/getting-started/quick-start.html) for more details on how to connect. The documentation on [Unity Catalog](https://docs.databricks.com/data-governance/unity-catalog/queries.html) is also useful.
 
   </TabItem>
 </Tabs>

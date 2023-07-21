@@ -21,4 +21,7 @@ import RDBLoaderDiagram from '@site/docs/pipeline-components-and-applications/lo
   {props.warehouse != 'Redshift' && (<TabItem value="gcp" label="GCP">
     <RDBLoaderDiagram {...props} stream="Pub/Sub" bucket="GCS" queue="Pub/Sub"/>
   </TabItem>)}
+  {props.warehouse != 'Redshift' && props.warehouse != 'Databricks' && (<TabItem value="azure" label="Azure">
+    <RDBLoaderDiagram {...props} stream="Kafka" bucket="Azure Blob Storage" queue="Kafka"/>
+  </TabItem>)}
 </Tabs>

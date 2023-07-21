@@ -8,7 +8,7 @@ _For a high-level overview of the RDB Loader architecture, of which the loader i
 
 The loader applications are specialised to a specific storage target. Each one performs 3 key tasks:
 
-- Consume messages from SQS / SNS / Pubsub to discover information about transformed data: where it is stored and what it looks like.
+- Consume messages from SQS / SNS / Pubsub / Kafka to discover information about transformed data: where it is stored and what it looks like.
 - Use the information from the message to determine if any changes to the target table(s) are required, eg to add a column for a new event field. If required, submit the appropriate SQL statement for execution by the storage target.
 - Prepare and submit for execution the appropriate SQL `COPY` statement.
 
@@ -20,6 +20,6 @@ For loading into **Databricks**, use the [Databricks loader](/docs/pipeline-comp
 
 :::note
 
-AWS is fully supported for both Snowflake and Databricks. GCP is supported for Snowflake (since 5.0.0).
+AWS is fully supported for both Snowflake and Databricks. GCP is supported for Snowflake (since 5.0.0). Azure is supported for Snowflake (since 5.7.0).
 
 :::

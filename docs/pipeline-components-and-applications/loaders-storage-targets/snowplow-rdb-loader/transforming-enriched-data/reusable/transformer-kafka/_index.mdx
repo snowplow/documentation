@@ -1,0 +1,48 @@
+<tr>
+    <td><code>input.topicName</code></td>
+    <td>Name of the Kafka topic to read from</td>
+</tr>
+<tr>
+    <td><code>input.bootstrapServers</code></td>
+    <td>A list of host:port pairs to use for establishing the initial connection to the Kafka cluster</td>
+</tr>
+<tr>
+    <td><code>input.consumerConf</code></td>
+    <td>Optional. Kafka consumer configuration. See https://kafka.apache.org/documentation/#consumerconfigs for all properties</td>
+</tr>
+<tr>
+    <td><code>output.path</code></td>
+    <td>Azure Blob Storage path to transformer output</td>
+</tr>
+<tr>
+    <td><code>output.compression</code></td>
+    <td>Optional. One of <code>NONE</code> or <code>GZIP</code>. The default is <code>GZIP</code>.</td>
+</tr>
+<tr>
+    <td><code>output.bad.type</code></td>
+    <td>Optional. Either <code>kafka</code> or <code>file</code>, default value <code>file</code>. Type of bad output sink. When <code>file</code>, badrows are written as files under URI configured in <code>output.path</code>.</td>
+</tr>
+<tr>
+    <td><code>output.bad.topicName</code></td>
+    <td>Required if output type is <code>kafka</code>. Name of the Kafka topic that will receive the bad data.</td>
+</tr>
+<tr>
+    <td><code>output.bad.bootstrapServers</code></td>
+    <td>Required if output type is <code>kafka</code>. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster</td>
+</tr>
+<tr>
+    <td><code>output.producerConf</code></td>
+    <td>Optional. Kafka producer configuration. See https://kafka.apache.org/documentation/#producerconfigs for all properties</td>
+</tr>
+<tr>
+    <td><code>queue.topicName</code></td>
+    <td>Name of the Kafka topic used to communicate with Loader</td>
+</tr>
+<tr>
+    <td><code>queue.bootstrapServers</code></td>
+    <td>A list of host:port pairs to use for establishing the initial connection to the Kafka cluster</td>
+</tr>
+<tr>
+    <td><code>queue.producerConf</code></td>
+    <td>Optional. Kafka producer configuration. See https://kafka.apache.org/documentation/#producerconfigs for all properties</td>
+</tr>

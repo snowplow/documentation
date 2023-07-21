@@ -47,6 +47,12 @@ Note that the sql statements contain a few placeholders which you will need to e
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
 
+:::info Open Source quick start guide on GCP
+
+If you followed the [Open Source quick start guide](/docs/getting-started-on-snowplow-open-source/quick-start/index.md), you will need to manually deploy the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
+
+:::
+
 :::note
 
 These instructions make use of the [bq command-line tool](https://cloud.google.com/bigquery/docs/bq-command-line-tool) which is packaged with the [google cloud sdk](https://cloud.google.com/sdk/docs). Follow the sdk instructions for how to [initialize and authenticate the sdk](https://cloud.google.com/sdk/docs/initializing). Also take a look at the [BigQuery dashboard](https://console.cloud.google.com/bigquery) as you run these commands, so you can see your tables as you create them.

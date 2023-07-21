@@ -173,3 +173,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/query-your-data/* /docs/first-steps/querying/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-data/* /docs/first-steps/querying/ 301
 /docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/ /docs/recipes/querying-try-data/ 301
+
+/docs/getting-started-on-snowplow-open-source/quick-start-aws/ /docs/getting-started-on-snowplow-open-source/quick-start/ 301
+/docs/getting-started-on-snowplow-open-source/quick-start-gcp/ /docs/getting-started-on-snowplow-open-source/quick-start/ 301
+/docs/getting-started-on-snowplow-open-source/quick-start-aws/summary-of-what-you-have-deployed/ /docs/getting-started-on-snowplow-open-source/what-is-deployed/ 301
+/docs/getting-started-on-snowplow-open-source/quick-start-gcp/summary-of-what-you-have-deployed/ /docs/getting-started-on-snowplow-open-source/what-is-deployed/ 301
+/docs/getting-started-on-snowplow-open-source/quick-start-aws/upgrade-guide/ /docs/getting-started-on-snowplow-open-source/upgrade-guide/ 301

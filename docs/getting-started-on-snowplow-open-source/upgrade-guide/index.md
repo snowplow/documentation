@@ -1,7 +1,7 @@
 ---
 title: "Upgrade guide"
 date: "2021-09-01"
-sidebar_position: 400
+sidebar_position: 4
 ---
 
 Now that you have successfully spun up a Snowplow pipeline, you might want to upgrade your components when there are updates available.
@@ -36,6 +36,12 @@ git checkout -b 21.08 21.08 // To checkout 21.08
 ```
 
 ## Migrations
+
+:::info AWS
+
+This information is currently specific to AWS.
+
+:::
 
 Before updating your stack, you should run any required manual migrations. These are listed below.
 

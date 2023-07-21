@@ -24,8 +24,7 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
     - `s3cp` - copy JSONPaths or schemas to S3 bucket
 - `server` - work with an Iglu server
     - `keygen` - generate read and write API keys on Iglu Server
-- `rdbms` - work with relation databases
-    - `table-check` - will check a given Redshift or Postgres tables against iglu server.
+- `table-check` - will check a given Redshift or Postgres tables against iglu server.
 
 ## Downloading and running Igluctl 
 
@@ -284,15 +283,15 @@ Also it accepts `--vendor-prefix` argument which will be associated with generat
 $ ./igluctl server keygen --vendor-prefix com.acme iglu.acme.com:80/iglu-server f81d4fae-7dec-11d0-a765-00a0c91e6bf6
 ```
 
-## rdbms table-check
+## table-check
 
-`igluctl rdbms table-check` will check given RedShift or Postgres schema against iglu repository. As of version 0.11.0 
+`igluctl table-check` will check given RedShift or Postgres schema against iglu repository. As of version 0.11.0 
 it would cross verify the column types as well as names. 
 
 It supports two interfaces:
 
-- `igluctl rdbms table-check --server <uri>` to check all tables
-- `igluctl rdbms table-check --resolver <path> --schema <schemaKey>` to check particular table
+- `igluctl table-check --server <uri>` to check all tables
+- `igluctl table-check --resolver <path> --schema <schemaKey>` to check particular table
 
 It also accepts a number of arguments:
 
@@ -320,11 +319,11 @@ It also accepts a number of arguments:
 ```
 
 ```bash
-$ ./igluctl rdbms table-check --resolver <path> --schema <schemaKey> ...connection parameters
+$ ./igluctl table-check --resolver <path> --schema <schemaKey> ...connection parameters
 ```
 
 or
 
 ```bash
-$ ./igluctl rdbms table-check --server <uri> ...connection params
+$ ./igluctl table-check --server <uri> ...connection params
 ```

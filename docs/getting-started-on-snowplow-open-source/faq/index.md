@@ -8,17 +8,16 @@ sidebar_position: 5
 
 If you would like to shut down your pipeline then you can easily do so by running `terraform destroy`.
 
-Note that if you want to delete your S3 bucket or Postgres database, you would need to do that from within the AWS or GCP console. If you want to maintain these then you can - just be aware that next time you spin up your pipeline you might see some errors.
+Note that if you want to delete your S3 bucket or Postgres database, you would need to do that from within the AWS, GCP or Azure console. If you want to maintain these then you can - just be aware that next time you spin up your pipeline you might see some errors.
 
 ## How do I make the pipeline production ready?
 
-Each Snowplow application is deployed as a docker image on a single EC2 / CE instance. This, along with the streams themselves (AWS only), are the limiting factors when it comes to throughput.
+Each Snowplow application is deployed as a docker image on a single EC2 / CE / VMSS instance. This, along with the streams themselves (AWS and Azure only), are the limiting factors when it comes to throughput.
 
 If you are at the point where you would like to deliver higher volume production use cases, then here are some general guidelines on delivering a highly available, auto scaling pipeline:
 
 On AWS:
 
-- Ensure you are using the `secure` variant of the Quick Start
 - Setting up CloudWatch alarms and Auto-scaling for each pipeline component
     - You can find extensive documentation on AWS CloudWatch which will guide you on what needs to be done to deliver a highly available, autoscaling pipeline
 - Set your Collector `min_size` to 2 at a minimum to ensure availability in case of availability zone outages: [https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70](https://github.com/snowplow-devops/terraform-aws-collector-kinesis-ec2/blob/main/variables.tf#L60-L70)

@@ -58,6 +58,20 @@ Configure a Google Cloud service account. See [details on using the service acco
 - Create a new JSON Key and store it locally
 - Create the environment variable by running `export GOOGLE_APPLICATION_CREDENTIALS="KEY PATH"` in your terminal
 
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+Install the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+
+If your organisation has an existing Azure account make sure your user has been granted the following roles on a valid Azure Subscription:
+
+* [Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor)
+* [User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator)
+* [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor)
+
+If no Azure account currently exists yet you can get started with a new [pay-as-you-go account](https://azure.microsoft.com/free/).
+
+Details on how to configure the Azure Terraform Provider can be found [on the registry](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli).
 
   </TabItem>
 </Tabs>
@@ -66,13 +80,13 @@ Configure a Google Cloud service account. See [details on using the service acco
 
 The sections below will guide you through setting up your destination to receive Snowplow data, but for now here is an overview.
 
-| Warehouse | AWS | GCP |
-|:----------|:---:|:---:|
-| Postgres | :white_check_mark: | :white_check_mark: |
-| Redshift | :white_check_mark: | :x: |
-| BigQuery | :x: | :white_check_mark: |
-| Snowflake | :white_check_mark: | :x: |
-| Databricks | :white_check_mark: | :x: |
+| Warehouse | AWS | GCP | Azure |
+|:----------|:---:|:---:|:-----:|
+| Postgres | :white_check_mark: | :white_check_mark: | :x: |
+| Redshift | :white_check_mark: | :x: | :x: |
+| BigQuery | :x: | :white_check_mark: | :x: |
+| Snowflake | :white_check_mark: | :x: |:white_check_mark: |
+| Databricks | :white_check_mark: | :x: | :x: |
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
@@ -87,37 +101,48 @@ We recommend to only load data into a single destination, but nothing prevents y
 There are two alternative storage options for you to select: Postgres and BigQuery (currently, you can’t choose both). Additionally, [failed events](/docs/understanding-your-pipeline/failed-events/index.md) are stored in GCS.
 
   </TabItem>
+  <TabItem value="azure" label="Azure">
+
+There is currently only one option for you to select: Snowflake.
+
+  </TabItem>
 </Tabs>
 
-## Choose `default` or `secure`
-
-The Quickstart Examples repository contains two different deployment strategies:
-
-- `default`
-- `secure` (Recommended for production use cases)
+## Set up a VPC to deploy into
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-The main difference is around the [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) that the components are deployed within. In `default` you will deploy everything into a public subnet, this is the easiest route if you want to try out Snowplow as you can use [your default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc). However, to increase the security of your components, it is recommended and best practice to deploy components into private subnets. This ensures they are not available publicly.
-
-To use the `secure` configuration, you will need [your own VPC with public and private subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html). You can follow [this guide](https://docs.aws.amazon.com/vpc/latest/userguide/working-with-vpcs.html) for steps on how to create VPCs and subnets on AWS.
+AWS deploys a [default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc) into every region in your sub-account as default - you should make a copy of the identifiers of the VPC and the associated subnets for later parts of the deployment.
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-The main difference is around the [VPC](https://cloud.google.com/vpc/docs/overview) that the components are deployed within. In `default` you will deploy everything into a public subnet, this is the easiest route if you want to try out Snowplow as you can use [your default network (auto mode VPC)](https://cloud.google.com/vpc/docs/vpc#default-network). However, to increase the security of your components, it is recommended and best practise to deploy components into private subnets. This ensures they are not available publicly.
+GCP deploy a [default VPC](https://cloud.google.com/vpc/docs/vpc#default-network) into your project as default - it is sufficient to  set `network = default` and leave subnetworks empty and Terraform will discover the correct network to deploy into.
 
-To use the `secure` configuration, you will need your [own custom VPC network](https://cloud.google.com/vpc/docs/vpc#auto-mode-considerations) with public and private subnets. You can follow [this guide](https://cloud.google.com/vpc/docs/using-vpc#creating_networks) for steps on how to create networks and subnetworks on GCP.
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+Azure does not deploy a default VPC or resource group for us to deploy into so we have created a helper module to deploy a working network for the pipeline deployment.
+
+To use our out of the box network you will need to navigate to the `terraform/azure/base` directory to update the input variables in `terraform.tfvars`.
+
+Once thats done you can now use Terraform to create your base network deployment.
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+:::tip
+
+Make a note of the outputs as you will need them for later parts of the deployment.
+
+:::
 
   </TabItem>
 </Tabs>
-
-:::caution
-
-If opting for the `secure` deployment, you must ensure your private subnet layer has full access to the internet. Without internet access the deployment will fail.
-
-:::
 
 ## Set up Iglu Server
 
@@ -133,7 +158,7 @@ Once you have cloned the `quickstart-examples` repository, you will need to navi
   <TabItem value="aws" label="AWS" default>
 
 ```bash
-cd quickstart-examples/terraform/aws/iglu_server/default # or secure
+cd quickstart-examples/terraform/aws/iglu_server/default
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
@@ -141,9 +166,22 @@ nano terraform.tfvars # or other text editor of your choosing
   <TabItem value="gcp" label="GCP">
 
 ```bash
-cd quickstart-examples/terraform/gcp/iglu_server/default # or secure
+cd quickstart-examples/terraform/gcp/iglu_server/default
 nano terraform.tfvars # or other text editor of your choosing
 ```
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+```bash
+cd quickstart-examples/terraform/azure/iglu_server
+nano terraform.tfvars # or other text editor of your choosing
+```
+
+If you used our "base" module you will need to find to use these named output IDs:
+
+* `subnet_id_lb`: `lookup(module.base.vnet_subnets_name_id, "iglu-agw1")`
+* `subnet_id_servers`: `lookup(module.base.vnet_subnets_name_id, "iglu1")`
 
   </TabItem>
 </Tabs>
@@ -159,19 +197,6 @@ To update your input variables, you’ll need to know a few things:
 On most systems, you can generate an SSH Key with: `ssh-keygen -t rsa -b 4096`. This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`. You can get the value with `cat ~/.ssh/id_rsa.pub`.
 
 :::
-
-<Tabs groupId="cloud" queryString>
-  <TabItem value="aws" label="AWS" default>
-
-You will also need to specify the default VPC you will deploy your Iglu Server into. [Help](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc).
-
-  </TabItem>
-  <TabItem value="gcp" label="GCP">
-
-If you have opted for `secure`, you will need to specify the network and subnetworks you will deploy your Iglu Server into. If you are deploying to your default network, then set `network = default` and leave subnetworks empty.
-
-  </TabItem>
-</Tabs>
 
 ```mdx-code-block
 import Telemetry from "@site/docs/reusable/telemetry/_index.md"
@@ -198,6 +223,15 @@ The deployment will take roughly 15 minutes.
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
 
 ```bash
 terraform init
@@ -416,7 +450,7 @@ Navigate to the `pipeline` directory in the `quickstart-examples` repository and
   <TabItem value="aws" label="AWS" default>
 
 ```bash
-cd quickstart-examples/terraform/aws/pipeline/default # or secure
+cd quickstart-examples/terraform/aws/pipeline/default
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
@@ -424,9 +458,22 @@ nano terraform.tfvars # or other text editor of your choosing
   <TabItem value="gcp" label="GCP">
 
 ```bash
-cd quickstart-examples/terraform/gcp/pipeline/default # or secure
+cd quickstart-examples/terraform/gcp/pipeline/default
 nano terraform.tfvars # or other text editor of your choosing
 ```
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+```bash
+cd quickstart-examples/terraform/azure/pipeline
+nano terraform.tfvars # or other text editor of your choosing
+```
+
+If you used our "base" module you will need to find to use these named output IDs:
+
+* `subnet_id_lb`: `lookup(module.base.vnet_subnets_name_id, "collector-agw1")`
+* `subnet_id_servers`: `lookup(module.base.vnet_subnets_name_id, "pipeline1")`
 
   </TabItem>
 </Tabs>
@@ -443,21 +490,6 @@ To update your input variables, you’ll need to know a few things:
 On most systems, you can generate an SSH Key with: `ssh-keygen -t rsa -b 4096`. This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`. You can get the value with `cat ~/.ssh/id_rsa.pub`.
 
 :::
-
-<Tabs groupId="cloud" queryString>
-  <TabItem value="aws" label="AWS" default>
-
-You will also need to specify the default VPC you will deploy your pipeline into. [Help](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc).
-
-Optionally, you will need an SSL certificate so that your collector can receive HTTPS traffic on a domain you own. You can create one using [Amazon Certificate Manager](https://aws.amazon.com/certificate-manager/). Once you have done that, add the certificate in the `ssl_certificate_arn` variable.
-
-  </TabItem>
-  <TabItem value="gcp" label="GCP">
-
-If you have opted for `secure`, you will need to specify the network and subnetworks you will deploy your pipeline into. If you are deploying to your default network, then set `network = default` and leave subnetworks empty.
-
-  </TabItem>
-</Tabs>
 
 #### Destination-specific variables
 
@@ -486,6 +518,19 @@ As mentioned [above](#storage-options), there are two options for pipeline’s d
 Change the `postgres_db_password` setting to a value that _only you_ know.
 
 Set the `postgres_db_authorized_networks` to a list of CIDR addresses that will need to access the database — this can be systems like BI Tools, or your local IP address, so that you can query the database from your laptop.
+
+:::
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+As mentioned [above](#storage-options), there is one option for the pipeline’s destination database. For the destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `snowflake_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
+
+When in doubt, refer back to the [destination setup](#prepare-the-destination) section where you have picked values for many of the variables.
+
+:::caution
+
+For all active destinations, change any `_password` setting to a value that _only you_ know.
 
 :::
 
@@ -519,6 +564,17 @@ terraform apply -var-file=<destination>.terraform.tfvars
 This will output your `collector_dns_name`, `db_address`, `db_port`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`.
 
   </TabItem>
+  <TabItem value="azure" label="Azure">
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+This will output your `collector_lb_ip_address` and `collector_lb_fqdn`.
+
+  </TabItem>
 </Tabs>
 
 Make a note of the outputs: you'll need them when sending events and connecting to your database.
@@ -529,7 +585,7 @@ Depending on your chosen destination, some of these outputs will be empty — yo
 
 :::
 
-If you have attached a custom ssl certificate and set up your own DNS records, then you don't need `collector_dns_name`, as you will use your own DNS record to send events from the Snowplow trackers.
+If you have attached a custom SSL certificate and set up your own DNS records, then you don't need `collector_dns_name`, as you will use your own DNS record to send events from the Snowplow trackers.
 
 :::tip Terraform errors
 

@@ -12,7 +12,8 @@ import Diagram from '@site/docs/getting-started-on-snowplow-open-source/_diagram
 export const TerraformLinks = (props) => <p>
   For further details on the resources, default and required input variables, and outputs, see the Terraform module (
   <Link to={props.aws}>AWS</Link>,{' '}
-  <Link to={props.gcp}>GCP</Link>
+  <Link to={props.gcp}>GCP</Link>,{' '}
+  <Link to={props.azure}>Azure</Link>
   ).
 </p>
 ```
@@ -88,6 +89,21 @@ For more information about the BigQuery Loader, see the [documentation on the lo
 </Tabs>
 
 </TabItem>
+<TabItem value="azure" label="Azure" default>
+
+<Tabs groupId="warehouse" queryString lazy>
+  <TabItem value="snowflake" label="Snowflake" default>
+
+<Diagram warehouse="Snowflake" compute="VMSS" stream="EventHubs" bucket="Azure Blob"/>
+
+<h4>Snowflake Loader</h4>
+
+For more information about the Snowflake Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=snowflake&cloud=aws-micro-batching).
+
+  </TabItem>
+</Tabs>
+
+  </TabItem>
 </Tabs>
 
 ## Collector load balancer
@@ -97,6 +113,7 @@ This is an application load balancer for your inbound HTTP(S) traffic. Traffic i
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/alb/aws/latest"
   gcp="https://registry.terraform.io/modules/snowplow-devops/lb/google/latest"
+  azure="https://registry.terraform.io/modules/snowplow-devops/lb/azurerm/latest"
 />
 
 ## Collector
@@ -105,8 +122,8 @@ This is an application that receives raw Snowplow events over HTTP(S), serialize
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest"
-  gcp="https://registry.terraform.io/modules/snowplow-devops/collector-pubsub
--ce/google/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/collector-pubsub-ce/google/latest"
+  azure="https://registry.terraform.io/modules/snowplow-devops/collector-event-hub-vmss/azurerm/latest"
 />
 
 ## Enrich
@@ -115,8 +132,8 @@ This is an application that reads the raw Snowplow events, validates them (inclu
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest"
-  gcp="https://registry.terraform.io/modules/snowplow-devops/enrich-pubsub-ce/go
-ogle/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/enrich-pubsub-ce/google/latest"
+  azure="https://registry.terraform.io/modules/snowplow-devops/enrich-event-hub-vmss/azurerm/latest"
 />
 
 ## Iglu
@@ -130,6 +147,7 @@ This load balances the inbound traffic and routes traffic to the Iglu Server.
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/alb/aws/latest"
   gcp="https://registry.terraform.io/modules/snowplow-devops/lb/google/latest"
+  azure="https://registry.terraform.io/modules/snowplow-devops/lb/azurerm/latest"
 />
 
 ### Iglu Server
@@ -138,27 +156,28 @@ The [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositor
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/iglu-server-ec2/aws/latest"
-  gcp="https://registry.terraform.io/modules/snowplow-devops/iglu-server-ce/google
-/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/iglu-server-ce/google/latest"
+  azure="https://registry.terraform.io/modules/snowplow-devops/iglu-server-vmss/azurerm/latest"
 />
 
 ### Iglu database
 
-This is the Iglu Server database (RDS on AWS, CloudSQL on GCP) where the Iglu [schemas](/docs/understanding-your-pipeline/schemas/index.md) themselves are stored.
+This is the Iglu Server database (RDS on AWS, CloudSQL on GCP and PostgreSQL on Azure) where the Iglu [schemas](/docs/understanding-your-pipeline/schemas/index.md) themselves are stored.
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/rds/aws/latest"
   gcp="https://registry.terraform.io/modules/snowplow-devops/cloud-sql/google/latest"
+  azure="https://registry.terraform.io/modules/snowplow-devops/postgresql-server/azurerm/latest"
 />
 
 ## Streams
 
-The various streams (Kinesis on AWS, Pub/Sub on GCP) are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
+The various streams (Kinesis on AWS, Pub/Sub on GCP and EventHubs on Azure) are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/kinesis-stream/aws/latest"
-  gcp="https://registry.terraform.io/modules/snowplow-devops/pubsub-topic/google/lat
-est"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/pubsub-topic/google/latest"
+  azure=https://registry.terraform.io/modules/snowplow-devops/event-hub-namespace/azurerm/latest
 />
 
 <details>
@@ -237,6 +256,11 @@ If you choose Postgres as your destination, the Postgres loader will load all [f
 If you choose BigQuery as your destination, there will be a “dead letter” GCS bucket. It will have the suffix `-bq-loader-dead-letter` and will contain events that the loader fails to be insert into BigQuery, _but not_ any other kind of failed events. To store all failed events, you will need to manually deploy the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
 
   </TabItem>
+  <TabItem value="azure" label="Azure">
+
+Currently bad events are only available in the `bad` event hubs topic and are not pushed to any blob storage format.
+
+  </TabItem>
 </Tabs>
 
 ## Loaders
@@ -248,8 +272,7 @@ The [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest"
-  gcp="https://registry.terraform.io/modules/snowplow-devops/postgres-l
-oader-pubsub-ce/google/latest"
+  gcp="https://registry.terraform.io/modules/snowplow-devops/postgres-loader-pubsub-ce/google/latest"
 />
 
   </TabItem>
@@ -260,7 +283,6 @@ oader-pubsub-ce/google/latest"
 See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
 * [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
 * [Redshift Loader](https://registry.terraform.io/modules/snowplow-devops/redshift-loader-ec2/aws/latest)
-
 
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
@@ -277,9 +299,10 @@ There will be a new dataset available in BigQuery with the suffix `_snowplow_db`
 [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Snowflake.
 
 See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
-* [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
-* [Snowflake Loader](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest)
-
+* [AWS Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
+* [AWS Snowflake Loader](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest)
+* [Azure Transformer EventHubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest)
+* [Azure Snowflake Loader](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest)
 
   </TabItem>
   <TabItem value="databricks" label="Databricks">
@@ -289,7 +312,6 @@ See the following Terraform modules for further details on the resources, defaul
 See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
 * [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
 * [Databricks Loader](https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest)
-
 
   </TabItem>
 </Tabs>

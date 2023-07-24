@@ -70,7 +70,13 @@ In case the option to *Include Original Self Describing Event* is enabled, then 
 }
 ```
 
-Please note that this option only makes sense in using GTM as [**Server Side Tag Manager (pre-pipeline)**](https://docs.snowplow.io/docs/destinations/forwarding-events/google-tag-manager-server-side/#configuration-options) architecture because it only makes a difference when the input is a raw Snowplow event. In a [**Destinations Hub (post-pipeline)**](https://docs.snowplow.io/docs/destinations/forwarding-events/google-tag-manager-server-side/#configuration-options) architecture, this **option does not apply**. There — no matter how this option is configured — it is possible to access/filter data based only on self-describing data. In the above example, Destinations Hub would only contain 'x-sp-self_describing_event_com_acme_foobar_1', while the Server Side Tag Manager would include `x-sp-self_describing_event` in case the *Include Original Self Describing Event* is activated. 
+:::note
+
+This option only makes sense when using GTM in a [**Server Side Tag Manager (pre-pipeline)**](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md#configuration-options) architecture, because it only makes a difference when the input is a _raw_ Snowplow event.
+
+In a [**Destinations Hub (post-pipeline)**](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md#configuration-options) architecture, this option **does not apply**. Effectively, it’s always disabled, regardless of the setting. In the example above, this would mean that the data will contain `x-sp-self_describing_event_com_acme_foobar_1`, but not`x-sp-self_describing_event`.
+
+:::
 
 ### Include Original Contexts Array
 

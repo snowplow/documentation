@@ -37,7 +37,7 @@ Data warehouses and data lakes are primary destinations for Snowplow data. For o
 </Tabs>
 
 :::note
-Our warehouse loaders pick up the data from [Enrich Kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md) on AWS and [Enrich Pubsub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md) on GCP. Both [Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) and [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) allow you to use a streaming technology other than Kinesis and Pub/Sub, but if you go that route, you will need to define your own process to load your enriched data into the warehouse.
+Our warehouse loaders pick up the data from [Enrich Kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md) on AWS, [Enrich Pubsub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md) on GCP and [Enrich Kafka](/docs/pipeline-components-and-applications/enrichment-components/enrich-kafka/index.md) on Azure. Both [Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) and [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) allow you to use a streaming technology other than Kinesis, Pub/Sub and Kafka, but if you go that route, you will need to define your own process to load your enriched data into the warehouse.
 :::
 
 ### Data lake loaders

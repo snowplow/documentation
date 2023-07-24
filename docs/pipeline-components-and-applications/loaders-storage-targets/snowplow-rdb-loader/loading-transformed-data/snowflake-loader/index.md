@@ -14,34 +14,7 @@ It is possible to run Snowflake Loader on AWS, GCP and Azure.
 
 ### Setting up Snowflake
 
-To create the Snowflake resources necessary for Snowflake Loader, you can execute the following SQL. You will need access to both `SYSADMIN` and `SECURITYADMIN` level roles to action this:
-
-```sql
--- 1. Create database
-CREATE DATABASE IF NOT EXISTS ${snowflake_database};
-
--- 2. Create schema within database
-CREATE SCHEMA IF NOT EXISTS ${snowflake_database}.${snowflake_schema};
-
--- 3. Create a warehouse which will be used to load data
-CREATE WAREHOUSE IF NOT EXISTS ${snowflake_warehouse} WITH WAREHOUSE_SIZE = 'XSMALL' WAREHOUSE_TYPE = 'STANDARD' AUTO_SUSPEND = 60 AUTO_RESUME = TRUE;
-
--- 4. Create a role that will be used for loading data
-CREATE ROLE IF NOT EXISTS ${snowflake_loader_role};
-GRANT USAGE, OPERATE ON WAREHOUSE ${snowflake_warehouse} TO ROLE ${snowflake_loader_role};
-GRANT USAGE ON DATABASE ${snowflake_database} TO ROLE ${snowflake_loader_role};
-GRANT ALL ON SCHEMA ${snowflake_database}.${snowflake_schema} TO ROLE ${snowflake_loader_role};
-
--- 5. Create a user that can be used for loading data
-CREATE USER IF NOT EXISTS ${snowflake_loader_user} PASSWORD='${snowflake_password}'
-  MUST_CHANGE_PASSWORD = FALSE
-  DEFAULT_ROLE = ${snowflake_loader_role}
-  EMAIL = 'loader@acme.com';
-GRANT ROLE ${snowflake_loader_role} TO USER ${snowflake_loader_user};
-
--- 6. (Optional) Grant this role to SYSADMIN to make debugging easier from admin-users
-GRANT ROLE ${snowflake_loader_role} TO ROLE SYSADMIN;
-```
+SQL script in [here](/docs/getting-started-on-snowplow-open-source/quick-start/?warehouse=snowflake#prepare-the-destination) can be used to create most of the necessary Snowflake resources.
 
 Also, there are two different load auth methods with Snowflake Loader. With `TempCreds` method, no additional Snowflake resources are needed. With `NoCreds` method, however, Loader needs Snowflake stage therefore it needs to be created prior as well.
 
@@ -53,7 +26,7 @@ Assuming you created the other required resources for it, you can create the Sno
 
 ### Running the loader
 
-There are dedicated terraform modules for deploying Snowflake Loader on [AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest) and [Azure](https://github.com/snowplow-devops/terraform-azurerm-snowflake-loader-vmss). You can see how they are used in our full pipeline deployment examples [here](https://github.com/snowplow/quickstart-examples).
+There are dedicated terraform modules for deploying Snowflake Loader on [AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest) and [Azure](https://github.com/snowplow-devops/terraform-azurerm-snowflake-loader-vmss). You can see how they are used in our full pipeline deployment examples [here](https://docs.snowplow.io/docs/getting-started-on-snowplow-open-source/quick-start).
 
 We don't have terraform module for deploying Snowflake Loader on GCP yet. Therefore, it needs to be deployed manually at the moment.
 

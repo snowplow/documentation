@@ -177,7 +177,7 @@ The various streams (Kinesis on AWS, Pub/Sub on GCP and EventHubs on Azure) are 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/kinesis-stream/aws/latest"
   gcp="https://registry.terraform.io/modules/snowplow-devops/pubsub-topic/google/latest"
-  azure=https://registry.terraform.io/modules/snowplow-devops/event-hub-namespace/azurerm/latest
+  azure="https://registry.terraform.io/modules/snowplow-devops/event-hub-namespace/azurerm/latest"
 />
 
 <details>

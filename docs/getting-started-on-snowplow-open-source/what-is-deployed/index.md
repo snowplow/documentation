@@ -284,6 +284,7 @@ See the following Terraform modules for further details on the resources, defaul
 * [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
 * [Redshift Loader](https://registry.terraform.io/modules/snowplow-devops/redshift-loader-ec2/aws/latest)
 
+
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
 
@@ -304,6 +305,7 @@ See the following Terraform modules for further details on the resources, defaul
 * [Azure Transformer EventHubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest)
 * [Azure Snowflake Loader](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest)
 
+
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
@@ -312,6 +314,7 @@ See the following Terraform modules for further details on the resources, defaul
 See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
 * [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
 * [Databricks Loader](https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest)
+
 
   </TabItem>
 </Tabs>

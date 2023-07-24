@@ -58,6 +58,7 @@ Configure a Google Cloud service account. See [details on using the service acco
 - Create a new JSON Key and store it locally
 - Create the environment variable by running `export GOOGLE_APPLICATION_CREDENTIALS="KEY PATH"` in your terminal
 
+
   </TabItem>
   <TabItem value="azure" label="Azure">
 
@@ -182,6 +183,7 @@ If you used our "base" module you will need to find to use these named output ID
 
 * `subnet_id_lb`: `lookup(module.base.vnet_subnets_name_id, "iglu-agw1")`
 * `subnet_id_servers`: `lookup(module.base.vnet_subnets_name_id, "iglu1")`
+
 
   </TabItem>
 </Tabs>
@@ -474,6 +476,7 @@ If you used our "base" module you will need to find to use these named output ID
 
 * `subnet_id_lb`: `lookup(module.base.vnet_subnets_name_id, "collector-agw1")`
 * `subnet_id_servers`: `lookup(module.base.vnet_subnets_name_id, "pipeline1")`
+
 
   </TabItem>
 </Tabs>

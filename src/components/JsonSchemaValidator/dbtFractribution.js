@@ -90,11 +90,13 @@ export const dbtSnowplowFractributionConfigSchema = {
     },
     snowplow__conversions_source_filter: {
       type: 'string',
-      description: 'A timestamp field the conversion source field is partitioned on for optimized filtering',
+      title: 'Conversions source filter',
+      description: 'A timestamp field the conversions source field is partitioned on for optimized filtering',
     },
     snowplow__conversions_source_filter_buffer_days: {
       type: 'integer',
-      title: 'The number of days to extend the filter',
+      title: 'Conversions source filter buffer days',
+      description: 'The number of days to extend the filter',
     },
     snowplow__channels_to_exclude: {
       type: 'array',

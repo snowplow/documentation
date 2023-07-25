@@ -14,6 +14,7 @@ The other option is to do a [complete refresh](/docs/modeling-your-data/modeling
 <TabItem value="snowflake" label="snowflake" default>
 
 ```sql
+-- for Snowflake
 create table (your_schema)_derived.snowplow_web_vitals_new
 (
 
@@ -51,7 +52,6 @@ create table (your_schema)_derived.snowplow_web_vitals_new
     cls_result             STRING,
     ttfb_result            STRING,
     inp_result             STRING
-
 );
 
 insert into (your_schema)_derived.snowplow_web_vitals_new  select * from (your_schema)_derived.snowplow_web_vitals;
@@ -60,12 +60,13 @@ alter table (your_schema)_derived.snowplow_web_vitals_new rename to (your_schema
 ```
 
 </TabItem>
+
 <TabItem value="databricks" label="databricks">
 
 ```sql
+-- for Databricks
 create table (your_schema)_derived.snowplow_web_vitals_new
 (
-
     event_id               STRING,
     event_name             STRING,
     app_id                 STRING,
@@ -100,7 +101,6 @@ create table (your_schema)_derived.snowplow_web_vitals_new
     cls_result             STRING,
     ttfb_result            STRING,
     inp_result             STRING
-
 );
 
 insert into (your_schema)_derived.snowplow_web_vitals_new  select * from (your_schema)_derived.snowplow_web_vitals;
@@ -109,6 +109,7 @@ create table (your_schema)_derived.snowplow_web_vitals select * from (your_schem
 drop table (your_schema)_derived.snowplow_web_vitals_new;
 
 ```
+
 </TabItem>
 </Tabs>
 </details>

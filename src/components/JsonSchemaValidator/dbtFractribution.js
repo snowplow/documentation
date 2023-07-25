@@ -86,7 +86,7 @@ export const dbtSnowplowFractributionConfigSchema = {
     },
     snowplow__use_snowplow_web_user_mapping_table: {
       type: 'boolean',
-      description: 'Use Snowplow Web User Mapping Table?',
+      title: 'Use Snowplow Web User Mapping Table?',
     },
     snowplow__conversions_source_filter: {
       type: 'string',

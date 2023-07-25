@@ -105,7 +105,8 @@ create table (your_schema)_derived.snowplow_web_vitals_new
 
 insert into (your_schema)_derived.snowplow_web_vitals_new  select * from (your_schema)_derived.snowplow_web_vitals;
 drop table (your_schema)_derived.snowplow_web_vitals;
-alter table (your_schema)_derived.snowplow_web_vitals_new rename to (your_schema)_derived.snowplow_web_vitals;
+create table (your_schema)_derived.snowplow_web_vitals select * from (your_schema)_derived.snowplow_web_vitals_new;
+drop table (your_schema)_derived.snowplow_web_vitals_new;
 
 ```
 </TabItem>

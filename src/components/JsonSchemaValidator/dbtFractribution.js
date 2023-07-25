@@ -88,6 +88,14 @@ export const dbtSnowplowFractributionConfigSchema = {
       type: 'boolean',
       title: 'Use Snowplow Web User Mapping Table?',
     },
+    snowplow__conversions_source_filter: {
+      type: 'string',
+      title: 'A timestamp field the conversion source field is partitioned on for optimized filtering',
+    },
+    snowplow__conversions_source_filter_buffer_days: {
+      type: 'integer',
+      title: 'The number of days to extend the filter',
+    },
     snowplow__channels_to_exclude: {
       type: 'array',
       description: '> Click the plus sign to add a new entry',

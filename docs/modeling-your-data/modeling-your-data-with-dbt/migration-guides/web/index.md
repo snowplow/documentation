@@ -110,7 +110,7 @@ create table (your_schema)_derived.snowplow_web_vitals select * from (your_schem
 drop table (your_schema)_derived.snowplow_web_vitals_new;
 
 ```
-
+</TabItem>
 </Tabs>
 </details>
 

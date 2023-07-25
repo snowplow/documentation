@@ -2,6 +2,10 @@
 title: "Web"
 sidebar_position: 101
 ---
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
 
 ### Upgrading to 0.15.1
 
@@ -14,7 +18,6 @@ The other option is to do a [complete refresh](/docs/modeling-your-data/modeling
 <TabItem value="snowflake" label="snowflake" default>
 
 ```sql
--- for Snowflake
 create table (your_schema)_derived.snowplow_web_vitals_new
 (
 
@@ -64,7 +67,6 @@ alter table (your_schema)_derived.snowplow_web_vitals_new rename to (your_schema
 <TabItem value="databricks" label="databricks">
 
 ```sql
--- for Databricks
 create table (your_schema)_derived.snowplow_web_vitals_new
 (
     event_id               STRING,

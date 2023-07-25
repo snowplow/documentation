@@ -2,6 +2,10 @@
 title: "Web"
 sidebar_position: 101
 ---
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
 
 ### Upgrading to 0.15.1
 
@@ -51,7 +55,6 @@ create table (your_schema)_derived.snowplow_web_vitals_new
     cls_result             STRING,
     ttfb_result            STRING,
     inp_result             STRING
-
 );
 
 insert into (your_schema)_derived.snowplow_web_vitals_new  select * from (your_schema)_derived.snowplow_web_vitals;
@@ -60,12 +63,12 @@ alter table (your_schema)_derived.snowplow_web_vitals_new rename to (your_schema
 ```
 
 </TabItem>
+
 <TabItem value="databricks" label="databricks">
 
 ```sql
 create table (your_schema)_derived.snowplow_web_vitals_new
 (
-
     event_id               STRING,
     event_name             STRING,
     app_id                 STRING,
@@ -100,7 +103,6 @@ create table (your_schema)_derived.snowplow_web_vitals_new
     cls_result             STRING,
     ttfb_result            STRING,
     inp_result             STRING
-
 );
 
 insert into (your_schema)_derived.snowplow_web_vitals_new  select * from (your_schema)_derived.snowplow_web_vitals;
@@ -109,6 +111,7 @@ create table (your_schema)_derived.snowplow_web_vitals select * from (your_schem
 drop table (your_schema)_derived.snowplow_web_vitals_new;
 
 ```
+
 </TabItem>
 </Tabs>
 </details>

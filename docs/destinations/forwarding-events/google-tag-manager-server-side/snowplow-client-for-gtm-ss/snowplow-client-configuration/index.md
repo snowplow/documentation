@@ -50,9 +50,9 @@ By default, the self describing event will be "shredded" into a key using the sc
 
 Let's assume we have a self-describing event following the schema `iglu:com.acme/foobar/jsonschema/1-0-0`. By default, the option to *Include Original Self Describing Event* is disabled. So the Snowplow client by default will include it in the common event as:
 
-```
-'x-sp-self_describing_event_com_acme_foobar_1': {
-    foo: 'bar'
+```json
+"x-sp-self_describing_event_com_acme_foobar_1": {
+    "foo": "bar"
 }
 ```
 

@@ -14,7 +14,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 :::
 
 
-### Warehouse and tracker 
+### Warehouse and tracker
 | Variable Name            | Description                                                                               | Default                                              |
 | ------------------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | `page_views_source`      | The source (schema and table) of the derived snowplow_web_page_views table                | `{{ source('derived', 'snowplow_web_page_views') }}` |
@@ -30,6 +30,9 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `path_lookback_steps`                 | The limit for the number of marketing channels to look at before the conversion                                                                                                                                                               | `0` (unlimited)           |
 | `path_transforms`                     | Dictionary of path transforms (and their argument, `null` if none) to perform on the full conversion path (see [udfs.sql file](https://github.com/snowplow/dbt-snowplow-fractribution/blob/main/macros/path_transformations/create_udfs.sql)) | `{'exposure_path': null}` |
 | `use_snowplow_web_user_mapping_table` | `true` if you are using the Snowplow web model for web user mappings (`domain_userid` => `user_id`)                                                                                                                                           | `false`                   |
+| `snowplow__conversions_source_filter` | A timestamp field the conversion source field is partitioned on (ideally) for optimized filtering, when left blank derived_tstamp is used                                                                                                                                          | `blank`                   |
+| `snowplow__conversions_source_filter_buffer_days` | The number of days to extend the filter                                                                                                                                           | 1                   |
+
 
 ### Contexts, filters, and logs
 | Variable Name                    | Description                                                                                                                                                                          | Default   |
@@ -38,7 +41,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `conversion_hosts`               | `url_hosts` to filter to in the data processing                                                                                                                                      | `[a.com]` |
 | `consider_intrasession_channels` | If `false`, only considers the channel at the start of the session (i.e. first page view). If `true`, considers multiple channels in the conversion session as well as historically. | `false`   |
 
-### Warehouse Specific 
+### Warehouse Specific
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>
@@ -88,7 +91,9 @@ export const GROUPS = [
                                           "snowplow__path_lookback_days",
                                           "snowplow__path_lookback_steps",
                                           "snowplow__path_transforms",
-                                          "snowplow__use_snowplow_web_user_mapping_table"] },
+                                          "snowplow__use_snowplow_web_user_mapping_table",
+                                          "snowplow__conversions_source_filter",
+                                          "snowplow__conversions_source_filter_buffer_days"] },
   { title: "Contexts, Filters, and Logs", fields: ["snowplow__channels_to_exclude",
                                                   "snowplow__conversion_hosts",
                                                   "snowplow__consider_intrasession_channels"] },

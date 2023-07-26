@@ -58,14 +58,14 @@ Let's assume we have a self-describing event following the schema `iglu:com.acme
 
 In case the option to *Include Original Self Describing Event* is enabled, then the Snowplow client, if it finds the original event (see note below), will also include it in the common event, resulting in:
 
-```
-'x-sp-self_describing_event_com_acme_foobar_1': {
-    foo: 'bar'
+```json
+"x-sp-self_describing_event_com_acme_foobar_1": {
+    "foo": "bar"
 },
-'x-sp-self_describing_event': {
-    schema: 'iglu:com.acme/foobar/jsonschema/1-0-0',
-    data: {
-        foo: 'bar'
+"x-sp-self_describing_event": {
+    "schema": "iglu:com.acme/foobar/jsonschema/1-0-0",
+    "data": {
+        "foo": "bar"
     }
 }
 ```

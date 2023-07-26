@@ -21,7 +21,7 @@ If you are not doing what is excluded, this license change will not affect your 
 
 ## Is Snowplow moving away from open source?
 
-We remain committed to an Open Core model.  Open Core means the core of our product is open source and available under the Apache 2.0 license, while certain features of Snowplow software are available under the Snowplow Community License.
+We remain committed to an Open Core model. Open Core means the core of our product is open source and available under either the Apache 2.0 license, or the Snowplow Community License.
 
 ## Can my company or I provide support to others who are running software under the Snowplow Community License?
 

@@ -8,27 +8,47 @@ sidebar_position: 20
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 import AutoSchemaCreation from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/_automatic-schema-creation.md';
+import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md";
 ```
 
 It is possible to run Snowflake Loader on AWS, GCP and Azure.
 
+<AzureExperimental/>
+
 ### Setting up Snowflake
 
-SQL script in [here](/docs/getting-started-on-snowplow-open-source/quick-start/?warehouse=snowflake#prepare-the-destination) can be used to create most of the necessary Snowflake resources.
+You can use the steps outlined in our [quick start guide](/docs/getting-started-on-snowplow-open-source/quick-start/index.md?warehouse=snowflake#prepare-the-destination) to create most of the necessary Snowflake resources.
 
-Also, there are two different load auth methods with Snowflake Loader. With `TempCreds` method, no additional Snowflake resources are needed. With `NoCreds` method, however, Loader needs Snowflake stage therefore it needs to be created prior as well.
+There are two different authentication methods with Snowflake Loader:
+* With the `TempCreds` method, there are no additional Snowflake resources needed.
+* With the `NoCreds` method, the Loader needs a Snowflake stage.
 
-To create a Snowflake stage, you need a Snowflake database, Snowflake schema, Snowflake storage integration, Snowflake file format, and the blob storage (S3, GCS and Azure) path to the transformed events bucket.
+This choice is controlled by the `loadAuthMethod` [configuration setting](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md#snowflake-loader-storage-section).
+
+:::note
+
+For GCP pipelines, only the `NoCreds` method is available.
+
+:::
+
+<details>
+<summary>Using the <code>NoCreds</code> method</summary>
+
+First, create a Snowflake stage. For that, you will need a Snowflake database, Snowflake schema, Snowflake storage integration, Snowflake file format, and the path to the transformed events bucket (in S3, GCS or Azure Blob Storage).
 
 You can follow [this tutorial](https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration.html) to create the storage integration.
 
 Assuming you created the other required resources for it, you can create the Snowflake stage by following [this document](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html).
 
+Finally, use the `transformedStage` [configuration setting](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md#snowflake-loader-storage-section) to point the loader to your stage.
+
+</details>
+
 ### Running the loader
 
-There are dedicated terraform modules for deploying Snowflake Loader on [AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest) and [Azure](https://github.com/snowplow-devops/terraform-azurerm-snowflake-loader-vmss). You can see how they are used in our full pipeline deployment examples [here](https://docs.snowplow.io/docs/getting-started-on-snowplow-open-source/quick-start).
+There are dedicated terraform modules for deploying Snowflake Loader on [AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest) and [Azure](https://github.com/snowplow-devops/terraform-azurerm-snowflake-loader-vmss). You can see how they are used in our full pipeline deployment examples [here](/docs/getting-started-on-snowplow-open-source/quick-start/index.md).
 
-We don't have terraform module for deploying Snowflake Loader on GCP yet. Therefore, it needs to be deployed manually at the moment.
+We don't have a terraform module for deploying Snowflake Loader on GCP yet. Therefore, it needs to be deployed manually at the moment.
 
 ### Downloading the artifact
 

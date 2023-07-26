@@ -48,6 +48,36 @@ If using this Client to receive Snowplow Tracker events and then forward to a Sn
 
 By default, the self describing event will be "shredded" into a key using the schema name as the key, this is a "lossy" transformation, as the Minor and Patch parts of the jsonschema version will be dropped. This flag populates the original, lossless, Self Describing Event as `x-sp-self_describing_event`.
 
+Let's assume we have a self-describing event following the schema `iglu:com.acme/foobar/jsonschema/1-0-0`. By default, the option to *Include Original Self Describing Event* is disabled. So the Snowplow client by default will include it in the common event as:
+
+```json
+"x-sp-self_describing_event_com_acme_foobar_1": {
+    "foo": "bar"
+}
+```
+
+In case the option to *Include Original Self Describing Event* is enabled, then the Snowplow client, if it finds the original event (see note below), will also include it in the common event, resulting in:
+
+```json
+"x-sp-self_describing_event_com_acme_foobar_1": {
+    "foo": "bar"
+},
+"x-sp-self_describing_event": {
+    "schema": "iglu:com.acme/foobar/jsonschema/1-0-0",
+    "data": {
+        "foo": "bar"
+    }
+}
+```
+
+:::note
+
+This option only makes sense when using GTM in a [**Server Side Tag Manager (pre-pipeline)**](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md#configuration-options) architecture, because it only makes a difference when the input is a _raw_ Snowplow event.
+
+In a [**Destinations Hub (post-pipeline)**](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md#configuration-options) architecture, this option **does not apply**. Effectively, it’s always disabled, regardless of the setting. In the example above, this would mean that the data will contain `x-sp-self_describing_event_com_acme_foobar_1`, but not`x-sp-self_describing_event`.
+
+:::
+
 ### Include Original Contexts Array
 
 By default, the contexts will be "shredded" into separate keys using the context name as the key, this is a "lossy" transformation, as the Minor and Patch parts of the jsonschema version will be dropped. If you would like to keep the original "lossless" contexts array (as `x-sp-contexts`), enable this option.

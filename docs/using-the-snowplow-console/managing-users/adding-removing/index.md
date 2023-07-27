@@ -71,7 +71,7 @@ This will differ depending on your Identity Provider, but typically will include
 
 Snowplow supports just-in-time provisioning with SSO connections. When a user logs in for the first time, a corresponding user account with the same email is created in Snowplow.
 
-A new user created via SSO will have a custom permissions set that allows them to view-only, as outlined below. This can then be edited by anyone with the Admin role on your account. For more details on setting user access, see [LINK](Setting User Permissions).
+A new user created via SSO will have a custom permissions set that allows them to view-only, as outlined below. This can then be edited by anyone with the Admin role on your account. For more details on setting user access, see [Managing user permissions](/docs/using-the-snowplow-console/managing-users/managing-permissions/index.md).
 
 <table><tbody><tr><td><strong>Console feature</strong></td><td><strong>Permissions</strong></td></tr><tr><td>User management</td><td>No access</td></tr><tr><td>Environments</td><td>View access</td></tr><tr><td>Data structures</td><td>View access</td></tr><tr><td>Data models &amp; jobs</td><td>View access</td></tr><tr><td>API keys</td><td>View access</td></tr></tbody></table>
 

@@ -70,6 +70,14 @@ If your organisation has an existing Azure account make sure your user has been 
 * [User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator)
 * [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor)
 
+If you prefer to scope Active Directory privilages, a custom role can be used rather than User Access Administrator. `Microsoft.Authorization/roleAssignments/write` is needed to deploy the quickstart, and `Microsoft.Authorization/roleAssignments/delete` to destroy it.
+
+:::caution
+
+`User Access Administrator` allows the user to modify, create and delete permissions across Azure resources, and shouldn't be used in production.
+
+:::
+
 If no Azure account currently exists yet you can get started with a new [pay-as-you-go account](https://azure.microsoft.com/free/).
 
 Details on how to configure the Azure Terraform Provider can be found [on the registry](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli).

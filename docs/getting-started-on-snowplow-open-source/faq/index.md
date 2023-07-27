@@ -34,14 +34,18 @@ For advice on how to scale an AWS Pipeline for Production scale workloads, you c
 
 ## How do I upgrade the version of the application that I am using?
 
-We release new versions of our pipeline components very frequently; however the versions used within the terraform modules are updated [in line with our platform releases](https://snowplowanalytics.com/blog/2021/04/29/introducing-snowplow-21-04-pennine-alps/) since these are the most stable and recommended versions of our components. [Sign-up to get the latest updates](https://go.snowplowanalytics.com/get-snowplow-technology-updates) on platform releases and new features.  
+We release new versions of our pipeline components very frequently; however the versions used within the terraform modules are updated a few times a year to the most stable and recommended versions of our components. [Sign up to get the latest updates](https://go.snowplowanalytics.com/get-snowplow-technology-updates) on platform releases and new features.  
 
 When a new version of a module is released, follow these instructions to upgrade: 
 
 - Update the module version in your terraform
 - Run `terraform plan` to check for what changes will be made
 
-With the standard deployment, you will only have a single collector instance. This means you will experience brief downtime, typically less than a minute. To prevent this you will need to move to multiple collector set up, so there are multiple collector instances behind the load balancer.
+:::caution
+
+With the standard deployment, you will only have a single collector instance. This means you will experience brief downtime, typically less than a minute. To prevent this, you will need to move to a multi-collector setup, so there are multiple collector instances behind the load balancer.
+
+:::
 
 ## Which enrichments are enabled by default?
 
@@ -53,9 +57,9 @@ The following enrichments are enabled by default within the Enrich module:
 - [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) 
 - [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)
 
-Other available enrichments enrichments and the configurations can be found [here.](/docs/enriching-your-data/available-enrichments/index.md)
+Other available enrichments enrichments and the configurations can be found [here](/docs/enriching-your-data/available-enrichments/index.md).
 
-To enable a different enrichment would need to add the [appropriate terraform inputs](https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest?tab=inputs) to the [`snowplow-devops/enrich-kinesis-ec2/aws` module.](https://github.com/snowplow/quickstart-examples/blob/main/terraform/aws/pipeline/default/main.tf#L111-L139)
+Follow the [documentation](/docs/enriching-your-data/managing-enrichments/terraform/index.md) if you want to enable or disable certain enrichments.
 
 ## Troubleshooting Terraform Errors
 

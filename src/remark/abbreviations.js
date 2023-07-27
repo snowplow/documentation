@@ -26,6 +26,7 @@ const plugin = () => {
     SS: 'Server Side',
     SQS: 'Amazon Simple Queue Service',
     UA: 'User Agent',
+    VMSS: 'Azure Virtual Machine Scale Sets',
     VPC: 'Virtual Private Cloud',
     YAUAA: 'Yet Another UserAgent Analyzer',
   }

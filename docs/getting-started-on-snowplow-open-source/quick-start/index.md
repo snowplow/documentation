@@ -60,25 +60,25 @@ Configure a Google Cloud service account. See [details on using the service acco
 
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
 Install the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
 
-If your organisation has an existing Azure account make sure your user has been granted the following roles on a valid Azure Subscription:
+If your organisation has an existing Azure account, make sure your user has been granted the following roles on a valid Azure Subscription:
 
 * [Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor)
 * [User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator)
 * [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor)
 
-If you prefer to scope Active Directory privilages, a custom role can be used rather than User Access Administrator. `Microsoft.Authorization/roleAssignments/write` is needed to deploy the quickstart, and `Microsoft.Authorization/roleAssignments/delete` to destroy it.
-
 :::caution
 
-`User Access Administrator` allows the user to modify, create and delete permissions across Azure resources, and shouldn't be used in production.
+`User Access Administrator` allows the user to modify, create and delete permissions across Azure resources, and shouldn’t be used in production. Instead, you can use a custom role with the following permissions:
+* `Microsoft.Authorization/roleAssignments/write` to deploy the stacks below
+* `Microsoft.Authorization/roleAssignments/delete` to destroy them
 
 :::
 
-If no Azure account currently exists yet you can get started with a new [pay-as-you-go account](https://azure.microsoft.com/free/).
+If you don’t have an Azure account yet, you can get started with a new [pay-as-you-go account](https://azure.microsoft.com/free/).
 
 Details on how to configure the Azure Terraform Provider can be found [on the registry](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli).
 
@@ -92,10 +92,11 @@ The sections below will guide you through setting up your destination to receive
 | Warehouse | AWS | GCP | Azure |
 |:----------|:---:|:---:|:-----:|
 | Postgres | :white_check_mark: | :white_check_mark: | :x: |
-| Redshift | :white_check_mark: | :x: | :x: |
-| BigQuery | :x: | :white_check_mark: | :x: |
 | Snowflake | :white_check_mark: | :x: |:white_check_mark: |
-| Databricks | :white_check_mark: | :x: | :x: |
+| Databricks | :white_check_mark: | :x: | _coming soon_ |
+| Redshift | :white_check_mark: | — | — |
+| BigQuery | — | :white_check_mark: | — |
+| Synapse | — | — | _coming soon_ |
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
@@ -107,12 +108,12 @@ We recommend to only load data into a single destination, but nothing prevents y
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-There are two alternative storage options for you to select: Postgres and BigQuery (currently, you can’t choose both). Additionally, [failed events](/docs/understanding-your-pipeline/failed-events/index.md) are stored in GCS.
+There are two alternative storage options for you to select: Postgres and BigQuery (currently, you can’t choose both).
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
-There is currently only one option for you to select: Snowflake.
+There is currently only one option: Snowflake.
 
   </TabItem>
 </Tabs>
@@ -122,21 +123,21 @@ There is currently only one option for you to select: Snowflake.
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-AWS deploys a [default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc) into every region in your sub-account as default - you should make a copy of the identifiers of the VPC and the associated subnets for later parts of the deployment.
+AWS provides a [default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc) in every region for your sub-account. Take a note of the identifiers of this VPC and the associated subnets for later parts of the deployment.
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-GCP deploy a [default VPC](https://cloud.google.com/vpc/docs/vpc#default-network) into your project as default - it is sufficient to  set `network = default` and leave subnetworks empty and Terraform will discover the correct network to deploy into.
+GCP provides a [default VPC](https://cloud.google.com/vpc/docs/vpc#default-network) for your project. In the steps below, it is sufficient to set `network = default` and leave subnetworks empty, and Terraform will discover the correct network to deploy into.
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
-Azure does not deploy a default VPC or resource group for us to deploy into so we have created a helper module to deploy a working network for the pipeline deployment.
+Azure does not provide a default VPC or resource group, so we have added a helper module to create a working network we can deploy into.
 
-To use our out of the box network you will need to navigate to the `terraform/azure/base` directory to update the input variables in `terraform.tfvars`.
+To use our out-of-the-box network, you will need to navigate to the `terraform/azure/base` directory in the `quickstart-examples` repository and update the input variables in `terraform.tfvars`.
 
-Once thats done you can now use Terraform to create your base network deployment.
+Once that’s done, you can use Terraform to create your base network.
 
 ```bash
 terraform init
@@ -146,7 +147,7 @@ terraform apply
 
 :::tip
 
-Make a note of the outputs as you will need them for later parts of the deployment.
+Make a note of the outputs, as you will need them for later parts of the deployment.
 
 :::
 
@@ -180,7 +181,7 @@ nano terraform.tfvars # or other text editor of your choosing
 ```
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
 ```bash
 cd quickstart-examples/terraform/azure/iglu_server
@@ -241,7 +242,7 @@ terraform apply
 ```
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
 ```bash
 terraform init
@@ -473,7 +474,7 @@ nano terraform.tfvars # or other text editor of your choosing
 ```
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
 ```bash
 cd quickstart-examples/terraform/azure/pipeline
@@ -533,15 +534,15 @@ Set the `postgres_db_authorized_networks` to a list of CIDR addresses that will 
 :::
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
-As mentioned [above](#storage-options), there is one option for the pipeline’s destination database. For the destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `snowflake_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
+As mentioned [above](#storage-options), there is currently only one option for the pipeline’s destination database: Snowflake. Set `snowflake_enabled` to `true` and fill all the relevant configuration options (starting with `<snowflake>_`).
 
 When in doubt, refer back to the [destination setup](#prepare-the-destination) section where you have picked values for many of the variables.
 
 :::caution
 
-For all active destinations, change any `_password` setting to a value that _only you_ know.
+Change the `snowflake_loader_password` setting to a value that _only you_ know.
 
 :::
 
@@ -575,7 +576,7 @@ terraform apply -var-file=<destination>.terraform.tfvars
 This will output your `collector_dns_name`, `db_address`, `db_port`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`.
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
 ```bash
 terraform init
@@ -592,7 +593,7 @@ Make a note of the outputs: you'll need them when sending events and connecting 
 
 :::tip Empty outputs
 
-Depending on your chosen destination, some of these outputs will be empty — you can ignore those.
+Depending on your cloud and chosen destination, some of these outputs might be empty — you can ignore those.
 
 :::
 

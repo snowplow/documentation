@@ -82,6 +82,17 @@ Component | Latest version
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
+<TabItem value="azure" label="Azure 🧪">
+
+<ReactMarkdown children={`
+Component | Latest version
+:--|:-:
+[Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) | ${versions.collector}
+[Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
+[RDB Loader (Snowflake)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
+`} remarkPlugins={[remarkGfm]} />
+
+</TabItem>
 </Tabs>
 
 ### Iglu (schema registry)

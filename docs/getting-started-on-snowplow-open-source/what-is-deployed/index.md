@@ -35,34 +35,22 @@ You can very easily edit the script or run each of the Terraform modules indepen
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="postgres" label="Postgres" default>
 
-<Diagram warehouse="Postgres" compute="EC2" stream="Kinesis" bucket="S3"/>
+<Diagram cloud="aws" warehouse="Postgres" compute="EC2" stream="Kinesis" bucket="S3"/>
 
   </TabItem>
   <TabItem value="redshift" label="Redshift">
 
-<Diagram warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3"/>
-
-<h4>Redshift Loader</h4>
-
-For more information about the Redshift Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=redshift&cloud=aws-micro-batching).
+<Diagram cloud="aws" warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3"/>
 
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
-<Diagram warehouse="Snowflake" compute="EC2" stream="Kinesis" bucket="S3"/>
-
-<h4>Snowflake Loader</h4>
-
-For more information about the Snowflake Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=snowflake&cloud=aws-micro-batching).
+<Diagram cloud="aws" warehouse="Snowflake" compute="EC2" stream="Kinesis" bucket="S3"/>
 
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
-<Diagram warehouse="Databricks" compute="EC2" stream="Kinesis" bucket="S3"/>
-
-<h4>Databricks Loader</h4>
-
-For more information about the Databricks Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=databricks&cloud=aws-micro-batching).
+<Diagram cloud="aws" warehouse="Databricks" compute="EC2" stream="Kinesis" bucket="S3"/>
 
   </TabItem>
 </Tabs>
@@ -74,31 +62,23 @@ For more information about the Databricks Loader, see the [documentation on the 
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="postgres" label="Postgres" default>
 
-<Diagram warehouse="Postgres" compute="CE" stream="Pub/Sub" bucket="GCS"/>
+<Diagram cloud="gcp" warehouse="Postgres" compute="CE" stream="Pub/Sub" bucket="GCS"/>
 
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
 
-<Diagram warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS"/>
-
-<h4>BigQuery Loader</h4>
-
-For more information about the BigQuery Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=bigquery&cloud=gcp).
+<Diagram cloud="gcp" warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS"/>
 
   </TabItem>
 </Tabs>
 
 </TabItem>
-<TabItem value="azure" label="Azure" default>
+<TabItem value="azure" label="Azure 🧪">
 
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="snowflake" label="Snowflake" default>
 
-<Diagram warehouse="Snowflake" compute="VMSS" stream="EventHubs" bucket="Azure Blob"/>
-
-<h4>Snowflake Loader</h4>
-
-For more information about the Snowflake Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=snowflake&cloud=aws-micro-batching).
+<Diagram cloud="azure" warehouse="Snowflake" compute="VMSS" stream="Event Hubs" bucket="Azure Blob"/>
 
   </TabItem>
 </Tabs>
@@ -118,7 +98,7 @@ This is an application load balancer for your inbound HTTP(S) traffic. Traffic i
 
 ## Collector
 
-This is an application that receives raw Snowplow events over HTTP(S), serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to Kinesis (on AWS) or Pub/Sub (on GCP). More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/index.md).
+This is an application that receives raw Snowplow events over HTTP(S), serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to Kinesis (on AWS), Pub/Sub (on GCP) or Event Hubs (on Azure). More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/index.md).
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest"
@@ -172,7 +152,7 @@ This is the Iglu Server database (RDS on AWS, CloudSQL on GCP and PostgreSQL on 
 
 ## Streams
 
-The various streams (Kinesis on AWS, Pub/Sub on GCP and EventHubs on Azure) are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
+The various streams (Kinesis on AWS, Pub/Sub on GCP and Event Hubs on Azure) are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/kinesis-stream/aws/latest"
@@ -230,6 +210,11 @@ If you selected Redshift, Snowflake or Databricks as your destination, the loade
 If you selected BigQuery as your destination, the _Bad Rows_ stream will contain events that could not be inserted into BigQuery by the loader. This includes data that is not valid against its schema or that is somehow corrupted in a way that the loader cannot handle. In addition, the loader users a few streams internally, as explained in the [loading process](/docs/storing-querying/loading-process/index.md?warehouse=bigquery).
 
   </TabItem>
+  <TabItem value="azure" label="Azure 🧪">
+
+No other streams.
+
+  </TabItem>
 </Tabs>
 
 ## Archival and failed events
@@ -256,9 +241,9 @@ If you choose Postgres as your destination, the Postgres loader will load all [f
 If you choose BigQuery as your destination, there will be a “dead letter” GCS bucket. It will have the suffix `-bq-loader-dead-letter` and will contain events that the loader fails to be insert into BigQuery, _but not_ any other kind of failed events. To store all failed events, you will need to manually deploy the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
 
   </TabItem>
-  <TabItem value="azure" label="Azure">
+  <TabItem value="azure" label="Azure 🧪">
 
-Currently bad events are only available in the `bad` event hubs topic and are not pushed to any blob storage format.
+Currently, [failed events](/docs/understanding-your-pipeline/failed-events/index.md) are only available in the `bad` Event Hubs topic.
 
   </TabItem>
 </Tabs>
@@ -300,10 +285,8 @@ There will be a new dataset available in BigQuery with the suffix `_snowplow_db`
 [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Snowflake.
 
 See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
-* [AWS Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
-* [AWS Snowflake Loader](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest)
-* [Azure Transformer EventHubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest)
-* [Azure Snowflake Loader](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest)
+* Transformer ([AWS — Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest), [Azure — Event Hubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest))
+* Snowflake Loader ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest), [Azure](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest))
 
 
   </TabItem>

@@ -8,6 +8,7 @@ description: "Tracking your first Snowplow events"
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import EventComponent from '@site/src/components/FirstSteps';
 ```
 
 Once your pipeline is set up, you will want to send some events to it. Here’s an overview of the different options.
@@ -19,6 +20,8 @@ Keep in mind that some of our offerings have limits on the number of events you 
 * For Open Source, the default setup is sized for around 100 events per second
 
 :::
+
+<EventComponent />
 
 ## Using the JavaScript tracker
 

@@ -145,11 +145,19 @@ terraform plan
 terraform apply
 ```
 
-:::tip
+After the deployment completes, you should get an output like this:
 
-Make a note of the outputs, as you will need them for later parts of the deployment.
+```
+...
+vnet_subnets_name_id = {
+  "collector-agw1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/collector-agw1"
+  "iglu-agw1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/iglu-agw1"
+  "iglu1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/iglu1"
+  "pipeline1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/pipeline1"
+}
+```
 
-:::
+These are the subnet identifiers, e.g. `"/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/pipeline1"` is the identifier of the `pipeline1` subnet. Take note of these four identifiers, as you will need them in the following steps.
 
   </TabItem>
 </Tabs>
@@ -188,10 +196,11 @@ cd quickstart-examples/terraform/azure/iglu_server
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
-If you used our "base" module you will need to find to use these named output IDs:
+If you [used our `base` module](#set-up-a-vpc-to-deploy-into), you will need to set these variables as follows:
 
-* `subnet_id_lb`: `lookup(module.base.vnet_subnets_name_id, "iglu-agw1")`
-* `subnet_id_servers`: `lookup(module.base.vnet_subnets_name_id, "iglu1")`
+* `resource_group_name`: use the same value as you supplied in `base`
+* `subnet_id_lb`: use the identifier of the `iglu-agw1` subnet from `base`
+* `subnet_id_servers`: use the identifier of the `iglu1` subnet from `base`
 
 
   </TabItem>
@@ -481,10 +490,11 @@ cd quickstart-examples/terraform/azure/pipeline
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
-If you used our "base" module you will need to find to use these named output IDs:
+If you [used our `base` module](#set-up-a-vpc-to-deploy-into), you will need to set these variables as follows:
 
-* `subnet_id_lb`: `lookup(module.base.vnet_subnets_name_id, "collector-agw1")`
-* `subnet_id_servers`: `lookup(module.base.vnet_subnets_name_id, "pipeline1")`
+* `resource_group_name`: use the same value as you supplied in `base`
+* `subnet_id_lb`: use the identifier of the `collector-agw1` subnet from `base`
+* `subnet_id_servers`: use the identifier of the `pipeline1` subnet from `base`
 
 
   </TabItem>

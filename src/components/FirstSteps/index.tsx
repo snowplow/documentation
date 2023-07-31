@@ -39,7 +39,6 @@ export default function EventComponent() {
         <form
           onSubmit={async (e) => {
             e.preventDefault()
-            setIsSending(true)
 
             const statusCode = await checkCollectorEndpoint(
               collector.state.value
@@ -71,6 +70,8 @@ export default function EventComponent() {
                   disabled: true,
                 }))
               }
+
+              setIsSending(true)
 
               const namespace = getDocsTrackerNamespace()
               eventsToTrack.forEach((e: EventWithNamespace) => e(namespace))

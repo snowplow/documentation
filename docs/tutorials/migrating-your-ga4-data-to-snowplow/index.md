@@ -144,12 +144,10 @@ docker compose up --build
 ## Step 3 - Using the migrator tool UI
 
 Once the docker container is running, the URI to access it will be printed to your terminal.
-There are 4 steps to the UI:
-### Step 1 - Provide your GCP configuration
+There are 5 steps to the UI:
+### Step 1 - Provide your GA4 table details
 
 The following information is required:
-- `Dataset location`: The location of your GA4 dataset in BigQuery
-- `Project ID`: The name of the GCP project in which the GA4 data is stored
 - `Dataset`: The name of your GA4 dataset in BigQuery. 
 - `Table`: The name of your GA4 table in BigQuery. The default value is set to `events_*`. If you only want to import a certain time period (not all historical data) leave this as `events_*` and provide the specific date range below. This field should only be changed if you have a custom table name.
 - `Start date`: The first date that you want to query data from. This is inclusive.
@@ -159,7 +157,7 @@ The following information is required:
 
 Although GA4 and Snowplow both track events, GA4 does not have a concept of [entities](https://docs.snowplow.io/docs/understanding-your-pipeline/entities/). As such, the migrator gathers the parameters from each of your GA4 events, and adds similar parameters to a Snowplow entity definition. For example, if you have two events, `add_to_cart` and `view_cart`, with each containing a property called `page_title`, a Snowplow entity called context_vendor_page_1_0_0 will be created, and the `page_title` parameter will be added to it. In addition, for each of your events, a Snowplow self-describing event will also be created, containing the parameters from each GA4 event.
 
-The interface in the UI allows you to modify any of the pre-created entities, or create your own entities. You can remove parameters from the events (for example if you wish to add the parameter to an entity), but you cannot add any new parameters to events. Events will be migrated contatining the same parameters as they had in GA4, minus any that you remove.
+The interface in the UI allows you to modify any of the pre-created entities, or create your own entities. You can remove parameters from the events (for example if you wish to add the parameter to an entity), but you cannot add any new parameters to events or create new events. Events will be migrated contatining the same parameters as they had in GA4, minus any that you remove.
 
 When you create a new entity, you can choose parameters from the events that are shown in the UI. Note that you only have to add a parameter to an entity once, and it will be filled in the entity column from any event that has that parameter.
 For example, if you move the `page_title` parameter (which exists in both `add_to_cart` and `view_cart` events) from the `add_to_cart` event to a new `cart` entity, in the newly created table the `page_title` parameter will be filled in on both the `add_to_cart` and `view_cart` events. You don't have to copy the parameter from both events to the new entity.
@@ -179,7 +177,7 @@ The SQL written for the mapping will be placed directly into the code, so it mus
 ...
 ```
 For example, the following inputs:
-| Snowplow_field | mapping_sql |
+| Snowplow Field | Value definition |
 | --------------- | ----------- |
 | page_urlscheme  | regexp_extract(page_url, r'(.*?):') |
 | page_urlhost    | {{dbt_utils.get_url_host(field='page_url')}} |
@@ -225,10 +223,14 @@ CASE WHEN stream_id = '4271243942' THEN 'Snowplow' ELSE NULL END AS app_id,
 The SQL that you input must conform to other strict requirements:
 - When creating or updating any of the mapping fields and using a dbt package, it must be written in the following format, including the curly braces and the package reference: `{{dbt_package.function('column_name')}}`, e.g. `{{dbt_utils.get_url_host('page_referrer')}}`.
 
-- In the mapping table, there are two fields that should not be altered:
-`geo_country_temp` and `geo_region_temp`. These are required for the `geo_country` and `geo_region` fields to be populated correctly.
-
 ### Step 4 - Transform data
+This step uses the mapping created in the previous two steps and passes these to dbt. 
+There are also two tick boxes:
+- `Include all original GA4 columns as JSON in a dedicated context`: This will create a context in the final table that contains all of your original GA4 columns,
+in case you wish to access any data within them when using the newly-created Snowplow table.
+- `Build Ecommerce context from GA4 "items" property`: Tick this box if you have data in the `items` property of your GA4 data that you wish to migrate to the Snowplow `ecommerce` context. If you do not have any data in the `items` property, or do not wish to migrate the data, leave this box unticked. If you tick this box, a new input field called 'Ecommerce currency code' will appear. The GA4 data in BigQuery doesn't have currency code information for the `items.price` field, so you must provide this.
+
+You can also choose to name the output table that will be created, in the `New Table Name` field. If you do not provide a name, a default name will be used.
 
 Click the `Run transformation` button to run the migration. Behind the scenes, this runs dbt. dbt will create the UDF that extracts the event_params, seed two tables that are used for geographical mapping, and create the final table that contains the migrated data.
 
@@ -236,13 +238,15 @@ Click the `Run transformation` button to run the migration. Behind the scenes, t
 
 This step is optional, and is only if you wish to import the data into Snowflake. If you do not wish to import the data, you can skip this step.
 Provide the following parameters:
-- `Region`: The region in which your Snowflake account is located
 - `Account identifier`: The account identifier for your Snowflake account
+- `Warehouse name`: The name of the warehouse that you would like to use to import the data
+- `Role name`: The name of the role that you would like to use to import the data (Must be ACCOUNTADMIN or have the global CREATE INTEGRATION privilege)
+- `Database name`: The name of the database that you would like to the new table to be created in
+- `Snowflake schema name`: The name of the schema that you would like to the new table to be created in
+- `Snowflake table name`: The name of the table that will be created (import will fail if this table already exists)
 - `Storage integration name`: The name you would like to give the storage integration that will be created
 - `Stage name`: The name you would like to give the stage that will be created
-- `Warehouse name`: The name of the warehouse that you would like to use to import the data
-- `Database name`: The name of the database that you would like to the new table to be created in
-- `Schema name`: The name of the schema that you would like to the new table to be created in
-- `Table name`: The name of the table that will be created
+- `GCS bucket to export to`: The name of a GCS bucket to use as part of the import. This must exist and be in the same location as the BigQuery table. 
+- `Your preferred filename`: This will be the filename of the object created in the GCS bucket. Ensure you include the suffix `.json.gz` in the filename.
 
-Then click `Run import` and the data will be imported to Snowflake. The data will be imported to the table that you specified in the `Table name` field. If the table already exists, it will be dropped and recreated.
+Then click `Run import` and the data will be imported to Snowflake. The data will be imported to the table that you specified in the `Snowflake table name` field.

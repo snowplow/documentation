@@ -76,7 +76,7 @@ There are many reasons why an enrichment will fail, but here are some examples:
 
 If your pipeline is generating enrichment failures, it might mean there is a problem with your enrichment configuration. The error details in the enrichment failure JSON object should give you a hint about what the problem might be.
 
-Once you have fixed your enrichment configuration, Once you have fixed your tracking, you might want to also [recover the failed events](/docs/managing-data-quality/recovering-failed-events/index.md), to avoid any data loss.
+Once you have fixed your enrichment configuration, you might want to also [recover the failed events](/docs/managing-data-quality/recovering-failed-events/index.md), to avoid any data loss.
 
 Because this failure is handled during enrichment, events in the real time good stream are free of this violation type.
 

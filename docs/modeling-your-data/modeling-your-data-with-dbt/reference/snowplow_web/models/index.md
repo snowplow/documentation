@@ -721,7 +721,7 @@ This table contains the lower and upper timestamp limits for the given run of th
 
 ```jinja2
 {{ config(
-   post_hook=["{{snowplow_utils.print_run_limits(this)}}"],
+   post_hook=["{{snowplow_utils.print_run_limits(this, 'snowplow_web')}}"],
    sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
    )
 }}
@@ -848,7 +848,7 @@ This significantly reduces table scans
 
 with prep as (
   select
-    cast(null as {{ snowplow_utils.type_max_string() }}) session_id
+    cast(null as {% if target.type == 'redshift' %} varchar(400) {% else %} {{snowplow_utils.type_max_string()}} {% endif %}) session_id
 )
 
 select *
@@ -2870,6 +2870,7 @@ This derived incremental table contains all historic page views and should be th
 | mkt_campaign | The campaign ID e.g. ‘diageo-123’ | text |
 | mkt_clickid | The click ID e.g. ‘ac3d8e459’ | text |
 | mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ | text |
+| default_channel_group |   | text |
 | page_referrer | URL of the referrer e.g. ‘http://www.referrer.com’ | text |
 | refr_urlscheme | Referer scheme e.g. ‘http’ | text |
 | refr_urlhost | Referer host e.g. ‘www.bing.com’ | text |
@@ -3088,6 +3089,7 @@ This staging table contains all the page views for the given run of the Web mode
 | mkt_campaign | The campaign ID e.g. ‘diageo-123’ | text |
 | mkt_clickid | The click ID e.g. ‘ac3d8e459’ | text |
 | mkt_network | The ad network to which the click ID belongs e.g. ‘DoubleClick’ | text |
+| default_channel_group | The channels by which users arrived at your site. | text |
 | page_referrer | URL of the referrer e.g. ‘http://www.referrer.com’ | text |
 | refr_urlscheme | Referer scheme e.g. ‘http’ | text |
 | refr_urlhost | Referer host e.g. ‘www.bing.com’ | text |
@@ -3168,7 +3170,7 @@ This staging table contains all the page views for the given run of the Web mode
   )
 }}
 
-with page_view_events as (
+with prep as (
 select
   ev.page_view_id,
   ev.event_id,
@@ -3203,6 +3205,7 @@ select
   ev.page_urlquery,
   ev.page_urlfragment,
 
+  -- marketing fields
   ev.mkt_medium,
   ev.mkt_source,
   ev.mkt_term,
@@ -3210,7 +3213,9 @@ select
   ev.mkt_campaign,
   ev.mkt_clickid,
   ev.mkt_network,
+  {{ channel_group_query() }} as default_channel_group,
 
+  -- referrer fields
   ev.page_referrer,
   ev.refr_urlscheme,
   ev.refr_urlhost,
@@ -3221,6 +3226,7 @@ select
   ev.refr_source,
   ev.refr_term,
 
+  -- geo fields
   ev.geo_country,
   ev.geo_region,
   ev.geo_region_name,
@@ -3243,7 +3249,6 @@ select
   ev.br_renderengine,
   ev.os_timezone,
 
-  row_number() over (partition by ev.domain_sessionid order by ev.derived_tstamp, ev.dvce_created_tstamp, ev.event_id) AS page_view_in_session_index,
 
   -- optional fields, only populated if enabled.
 
@@ -3271,163 +3276,292 @@ select
         relation=ref('snowplow_web_base_events_this_run'),
         relation_alias='ev') }}
 
-from (
+  from {{ ref('snowplow_web_base_events_this_run') }} as ev
+  left join {{ ref('dim_ga4_source_categories') }} c on lower(trim(ev.mkt_source)) = lower(c.source)
+
+  where ev.event_name = 'page_view'
+  and ev.page_view_id is not null
+
+  {% if var("snowplow__ua_bot_filter", true) %}
+  {{ filter_bots('ev') }}
+  {% endif %}
+
+  qualify row_number() over (partition by ev.page_view_id order by ev.derived_tstamp, ev.dvce_created_tstamp) = 1
+)
+
+, page_view_events as (
+
   select
-    array_agg(e order by e.derived_tstamp, e.dvce_created_tstamp limit 1)[offset(0)] as ev
-    -- order by matters here since derived_tstamp determines parts of model logic
+    ev.page_view_id,
+    ev.event_id,
 
-  from {{ ref('snowplow_web_base_events_this_run') }} as e
-  where e.event_name = 'page_view'
-  and e.page_view_id is not null
+    ev.app_id,
+    ev.platform,
 
-  group by e.page_view_id
+    -- user fields
+    ev.user_id,
+    ev.domain_userid,
+    ev.network_userid,
+
+    -- session fields
+    ev.domain_sessionid,
+    ev.domain_sessionidx,
+
+    row_number() over (partition by ev.domain_sessionid order by ev.derived_tstamp, ev.dvce_created_tstamp, ev.event_id) AS page_view_in_session_index,
+
+    -- timestamp fields
+    ev.dvce_created_tstamp,
+    ev.collector_tstamp,
+    ev.derived_tstamp,
+    ev.start_tstamp,
+    coalesce(t.end_tstamp, ev.derived_tstamp) as end_tstamp, -- only page views with pings will have a row in table t
+    {{ snowplow_utils.current_timestamp_in_utc() }} as model_tstamp,
+
+    coalesce(t.engaged_time_in_s, 0) as engaged_time_in_s, -- where there are no pings, engaged time is 0.
+    {{ datediff('ev.derived_tstamp', 'coalesce(t.end_tstamp, ev.derived_tstamp)', 'second') }} as absolute_time_in_s,
+
+    sd.hmax as horizontal_pixels_scrolled,
+    sd.vmax as vertical_pixels_scrolled,
+
+    sd.relative_hmax as horizontal_percentage_scrolled,
+    sd.relative_vmax as vertical_percentage_scrolled,
+
+    ev.doc_width,
+    ev.doc_height,
+    ev.content_group,
+
+    ev.page_title,
+    ev.page_url,
+    ev.page_urlscheme,
+    ev.page_urlhost,
+    ev.page_urlpath,
+    ev.page_urlquery,
+    ev.page_urlfragment,
+
+    ev.mkt_medium,
+    ev.mkt_source,
+    ev.mkt_term,
+    ev.mkt_content,
+    ev.mkt_campaign,
+    ev.mkt_clickid,
+    ev.mkt_network,
+    ev.default_channel_group,
+
+    ev.page_referrer,
+    ev.refr_urlscheme,
+    ev.refr_urlhost,
+    ev.refr_urlpath,
+    ev.refr_urlquery,
+    ev.refr_urlfragment,
+    ev.refr_medium,
+    ev.refr_source,
+    ev.refr_term,
+
+    ev.geo_country,
+    ev.geo_region,
+    ev.geo_region_name,
+    ev.geo_city,
+    ev.geo_zipcode,
+    ev.geo_latitude,
+    ev.geo_longitude,
+    ev.geo_timezone,
+
+    ev.user_ipaddress,
+
+    ev.useragent,
+
+    ev.br_lang,
+    ev.br_viewwidth,
+    ev.br_viewheight,
+    ev.br_colordepth,
+    ev.br_renderengine,
+
+    ev.os_timezone,
+
+    ev.category,
+    ev.primary_impact,
+    ev.reason,
+    ev.spider_or_robot,
+
+    ev.useragent_family,
+    ev.useragent_major,
+    ev.useragent_minor,
+    ev.useragent_patch,
+    ev.useragent_version,
+    ev.os_family,
+    ev.os_major,
+    ev.os_minor,
+    ev.os_patch,
+    ev.os_patch_minor,
+    ev.os_version,
+    ev.device_family,
+
+    ev.device_class,
+    case when ev.device_class = 'Desktop' then 'Desktop'
+      when ev.device_class = 'Phone' then 'Mobile'
+      when ev.device_class = 'Tablet' then 'Tablet'
+      else 'Other' end as device_category,
+    ev.screen_resolution,
+    ev.agent_class,
+    ev.agent_name,
+    ev.agent_name_version,
+    ev.agent_name_version_major,
+    ev.agent_version,
+    ev.agent_version_major,
+    ev.device_brand,
+    ev.device_name,
+    ev.device_version,
+    ev.layout_engine_class,
+    ev.layout_engine_name,
+    ev.layout_engine_name_version,
+    ev.layout_engine_name_version_major,
+    ev.layout_engine_version,
+    ev.layout_engine_version_major,
+    ev.operating_system_class,
+    ev.operating_system_name,
+    ev.operating_system_name_version,
+    ev.operating_system_version
+
+  from prep ev
+
+  left join {{ ref('snowplow_web_pv_engaged_time') }} t
+  on ev.page_view_id = t.page_view_id {% if var('snowplow__limit_page_views_to_session', true) %} and ev.domain_sessionid = t.domain_sessionid {% endif %}
+
+  left join {{ ref('snowplow_web_pv_scroll_depth') }} sd
+  on ev.page_view_id = sd.page_view_id {% if var('snowplow__limit_page_views_to_session', true) %} and ev.domain_sessionid = sd.domain_sessionid {% endif %}
+
 )
-where 1 = 1
-
-{% if var("snowplow__ua_bot_filter", true) %}
- {{ filter_bots('ev') }}
-{% endif %}
-)
-
 
 select
-  ev.page_view_id,
-  ev.event_id,
+   ev.page_view_id,
+    ev.event_id,
 
-  ev.app_id,
-  ev.platform,
+    ev.app_id,
+    ev.platform,
 
-  -- user fields
-  ev.user_id,
-  ev.domain_userid,
-  ev.network_userid,
+    -- user fields
+    ev.user_id,
+    ev.domain_userid,
+    ev.network_userid,
 
-  -- session fields
-  ev.domain_sessionid,
-  ev.domain_sessionidx,
+    -- session fields
+    ev.domain_sessionid,
+    ev.domain_sessionidx,
 
-  ev.page_view_in_session_index,
-  max(ev.page_view_in_session_index) over (partition by ev.domain_sessionid) as page_views_in_session,
+    ev.page_view_in_session_index,
+    max(ev.page_view_in_session_index) over (partition by ev.domain_sessionid) as page_views_in_session,
 
-  -- timestamp fields
-  ev.dvce_created_tstamp,
-  ev.collector_tstamp,
-  ev.derived_tstamp,
-  ev.start_tstamp,
-  coalesce(t.end_tstamp, ev.derived_tstamp) as end_tstamp, -- only page views with pings will have a row in table t
-  {{ snowplow_utils.current_timestamp_in_utc() }} as model_tstamp,
+    -- timestamp fields
+    ev.dvce_created_tstamp,
+    ev.collector_tstamp,
+    ev.derived_tstamp,
+    ev.start_tstamp,
+    ev.end_tstamp,
+    ev.model_tstamp,
 
-  coalesce(t.engaged_time_in_s, 0) as engaged_time_in_s, -- where there are no pings, engaged time is 0.
-  {{ datediff('ev.derived_tstamp', 'coalesce(t.end_tstamp, ev.derived_tstamp)', 'second') }} as absolute_time_in_s,
+    ev.engaged_time_in_s,
+    ev.absolute_time_in_s,
 
-  sd.hmax as horizontal_pixels_scrolled,
-  sd.vmax as vertical_pixels_scrolled,
+    ev.horizontal_pixels_scrolled,
+    ev.vertical_pixels_scrolled,
 
-  sd.relative_hmax as horizontal_percentage_scrolled,
-  sd.relative_vmax as vertical_percentage_scrolled,
+    ev.horizontal_percentage_scrolled,
+    ev.vertical_percentage_scrolled,
 
-  ev.doc_width,
-  ev.doc_height,
-  ev.content_group,
+    ev.doc_width,
+    ev.doc_height,
+    ev.content_group,
 
-  ev.page_title,
-  ev.page_url,
-  ev.page_urlscheme,
-  ev.page_urlhost,
-  ev.page_urlpath,
-  ev.page_urlquery,
-  ev.page_urlfragment,
+    ev.page_title,
+    ev.page_url,
+    ev.page_urlscheme,
+    ev.page_urlhost,
+    ev.page_urlpath,
+    ev.page_urlquery,
+    ev.page_urlfragment,
 
-  ev.mkt_medium,
-  ev.mkt_source,
-  ev.mkt_term,
-  ev.mkt_content,
-  ev.mkt_campaign,
-  ev.mkt_clickid,
-  ev.mkt_network,
+    ev.mkt_medium,
+    ev.mkt_source,
+    ev.mkt_term,
+    ev.mkt_content,
+    ev.mkt_campaign,
+    ev.mkt_clickid,
+    ev.mkt_network,
+    ev.default_channel_group,
 
-  ev.page_referrer,
-  ev.refr_urlscheme,
-  ev.refr_urlhost,
-  ev.refr_urlpath,
-  ev.refr_urlquery,
-  ev.refr_urlfragment,
-  ev.refr_medium,
-  ev.refr_source,
-  ev.refr_term,
+    ev.page_referrer,
+    ev.refr_urlscheme,
+    ev.refr_urlhost,
+    ev.refr_urlpath,
+    ev.refr_urlquery,
+    ev.refr_urlfragment,
+    ev.refr_medium,
+    ev.refr_source,
+    ev.refr_term,
 
-  ev.geo_country,
-  ev.geo_region,
-  ev.geo_region_name,
-  ev.geo_city,
-  ev.geo_zipcode,
-  ev.geo_latitude,
-  ev.geo_longitude,
-  ev.geo_timezone,
+    ev.geo_country,
+    ev.geo_region,
+    ev.geo_region_name,
+    ev.geo_city,
+    ev.geo_zipcode,
+    ev.geo_latitude,
+    ev.geo_longitude,
+    ev.geo_timezone,
 
-  ev.user_ipaddress,
+    ev.user_ipaddress,
 
-  ev.useragent,
+    ev.useragent,
 
-  ev.br_lang,
-  ev.br_viewwidth,
-  ev.br_viewheight,
-  ev.br_colordepth,
-  ev.br_renderengine,
+    ev.br_lang,
+    ev.br_viewwidth,
+    ev.br_viewheight,
+    ev.br_colordepth,
+    ev.br_renderengine,
 
-  ev.os_timezone,
+    ev.os_timezone,
 
-  ev.category,
-  ev.primary_impact,
-  ev.reason,
-  ev.spider_or_robot,
+    ev.category,
+    ev.primary_impact,
+    ev.reason,
+    ev.spider_or_robot,
 
-  ev.useragent_family,
-  ev.useragent_major,
-  ev.useragent_minor,
-  ev.useragent_patch,
-  ev.useragent_version,
-  ev.os_family,
-  ev.os_major,
-  ev.os_minor,
-  ev.os_patch,
-  ev.os_patch_minor,
-  ev.os_version,
-  ev.device_family,
+    ev.useragent_family,
+    ev.useragent_major,
+    ev.useragent_minor,
+    ev.useragent_patch,
+    ev.useragent_version,
+    ev.os_family,
+    ev.os_major,
+    ev.os_minor,
+    ev.os_patch,
+    ev.os_patch_minor,
+    ev.os_version,
+    ev.device_family,
 
-  ev.device_class,
-  case when ev.device_class = 'Desktop' then 'Desktop'
-    when ev.device_class = 'Phone' then 'Mobile'
-    when ev.device_class = 'Tablet' then 'Tablet'
-    else 'Other' end as device_category,
-  ev.screen_resolution,
-  ev.agent_class,
-  ev.agent_name,
-  ev.agent_name_version,
-  ev.agent_name_version_major,
-  ev.agent_version,
-  ev.agent_version_major,
-  ev.device_brand,
-  ev.device_name,
-  ev.device_version,
-  ev.layout_engine_class,
-  ev.layout_engine_name,
-  ev.layout_engine_name_version,
-  ev.layout_engine_name_version_major,
-  ev.layout_engine_version,
-  ev.layout_engine_version_major,
-  ev.operating_system_class,
-  ev.operating_system_name,
-  ev.operating_system_name_version,
-  ev.operating_system_version
+    ev.device_class,
+    ev.device_category,
+    ev.screen_resolution,
+    ev.agent_class,
+    ev.agent_name,
+    ev.agent_name_version,
+    ev.agent_name_version_major,
+    ev.agent_version,
+    ev.agent_version_major,
+    ev.device_brand,
+    ev.device_name,
+    ev.device_version,
+    ev.layout_engine_class,
+    ev.layout_engine_name,
+    ev.layout_engine_name_version,
+    ev.layout_engine_name_version_major,
+    ev.layout_engine_version,
+    ev.layout_engine_version_major,
+    ev.operating_system_class,
+    ev.operating_system_name,
+    ev.operating_system_name_version,
+    ev.operating_system_version
 
 from page_view_events ev
-
-left join {{ ref('snowplow_web_pv_engaged_time') }} t
-on ev.page_view_id = t.page_view_id {% if var('snowplow__limit_page_views_to_session', true) %} and ev.domain_sessionid = t.domain_sessionid {% endif %}
-
-left join {{ ref('snowplow_web_pv_scroll_depth') }} sd
-on ev.page_view_id = sd.page_view_id {% if var('snowplow__limit_page_views_to_session', true) %} and ev.domain_sessionid = sd.domain_sessionid {% endif %}
 ```
 
 </TabItem>
@@ -3477,6 +3611,7 @@ select
   ev.page_urlquery,
   ev.page_urlfragment,
 
+  -- marketing fields
   ev.mkt_medium,
   ev.mkt_source,
   ev.mkt_term,
@@ -3484,7 +3619,9 @@ select
   ev.mkt_campaign,
   ev.mkt_clickid,
   ev.mkt_network,
+  {{ channel_group_query() }} as default_channel_group,
 
+  -- referrer fields
   ev.page_referrer,
   ev.refr_urlscheme,
   ev.refr_urlhost,
@@ -3495,6 +3632,7 @@ select
   ev.refr_source,
   ev.refr_term,
 
+  -- geo fields
   ev.geo_country,
   ev.geo_region,
   ev.geo_region_name,
@@ -3529,6 +3667,7 @@ select
   {{snowplow_web.get_yauaa_context_fields()}}
 
   from {{ ref('snowplow_web_base_events_this_run') }} as ev
+  left join {{ ref('dim_ga4_source_categories') }} c on lower(trim(ev.mkt_source)) = lower(c.source)
 
   where ev.event_name = 'page_view'
   and ev.page_view_id is not null
@@ -3596,6 +3735,7 @@ select
     p.mkt_campaign,
     p.mkt_clickid,
     p.mkt_network,
+    p.default_channel_group,
 
     p.page_referrer,
     p.refr_urlscheme,
@@ -3743,6 +3883,7 @@ select
   pve.refr_medium,
   pve.refr_source,
   pve.refr_term,
+  pve.default_channel_group,
 
   pve.geo_country,
   pve.geo_region,
@@ -3859,6 +4000,7 @@ with prep as (
     ev.page_urlquery,
     ev.page_urlfragment,
 
+    -- marketing fields
     ev.mkt_medium,
     ev.mkt_source,
     ev.mkt_term,
@@ -3866,7 +4008,9 @@ with prep as (
     ev.mkt_campaign,
     ev.mkt_clickid,
     ev.mkt_network,
+    {{ channel_group_query() }} as default_channel_group,
 
+    -- referrer fields
     ev.page_referrer,
     ev.refr_urlscheme ,
     ev.refr_urlhost,
@@ -3877,6 +4021,7 @@ with prep as (
     ev.refr_source,
     ev.refr_term,
 
+    -- geo fields
     ev.geo_country,
     ev.geo_region,
     ev.geo_region_name,
@@ -3913,6 +4058,7 @@ with prep as (
     row_number() over (partition by ev.page_view_id order by ev.derived_tstamp, ev.dvce_created_tstamp) as page_view_id_dedupe_index
 
   from {{ ref('snowplow_web_base_events_this_run') }} as ev
+  left join {{ ref('dim_ga4_source_categories') }} c on lower(trim(ev.mkt_source)) = lower(c.source)
 
   where ev.event_name = 'page_view'
     and ev.page_view_id is not null
@@ -3978,6 +4124,7 @@ with prep as (
     p.mkt_campaign,
     p.mkt_clickid,
     p.mkt_network,
+    p.default_channel_group,
 
     p.page_referrer,
     p.refr_urlscheme ,
@@ -4117,6 +4264,7 @@ select
   pve.mkt_campaign,
   pve.mkt_clickid,
   pve.mkt_network,
+  pve.default_channel_group,
 
   pve.page_referrer,
   pve.refr_urlscheme,
@@ -4244,6 +4392,7 @@ select
   ev.page_urlquery,
   ev.page_urlfragment,
 
+  -- marketing fields
   ev.mkt_medium,
   ev.mkt_source,
   ev.mkt_term,
@@ -4251,7 +4400,9 @@ select
   ev.mkt_campaign,
   ev.mkt_clickid,
   ev.mkt_network,
+  {{ channel_group_query() }} as default_channel_group,
 
+  -- referrer fields
   ev.page_referrer,
   ev.refr_urlscheme,
   ev.refr_urlhost,
@@ -4262,6 +4413,7 @@ select
   ev.refr_source,
   ev.refr_term,
 
+  -- geo fields
   ev.geo_country,
   ev.geo_region,
   ev.geo_region_name,
@@ -4296,6 +4448,8 @@ select
   {{snowplow_web.get_yauaa_context_fields()}}
 
   from {{ ref('snowplow_web_base_events_this_run') }} as ev
+
+  left join {{ ref('dim_ga4_source_categories') }} c on lower(trim(ev.mkt_source)) = lower(c.source)
 
   where ev.event_name = 'page_view'
   and ev.page_view_id is not null
@@ -4363,6 +4517,7 @@ select
     p.mkt_campaign,
     p.mkt_clickid,
     p.mkt_network,
+    p.default_channel_group,
 
     p.page_referrer,
     p.refr_urlscheme,
@@ -4500,6 +4655,7 @@ select
   pve.mkt_campaign,
   pve.mkt_clickid,
   pve.mkt_network,
+  pve.default_channel_group,
 
   pve.page_referrer,
   pve.refr_urlscheme,
@@ -4593,6 +4749,7 @@ from page_view_events pve
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
 - [model.snowplow_web.snowplow_web_pv_engaged_time](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_pv_engaged_time)
 - [model.snowplow_web.snowplow_web_pv_scroll_depth](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_pv_scroll_depth)
+- [seed.snowplow_web.dim_ga4_source_categories](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#seed.snowplow_web.dim_ga4_source_categories)
 
 </TabItem>
 <TabItem value="macro" label="Macros">
@@ -4601,6 +4758,7 @@ from page_view_events pve
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
 - [macro.snowplow_utils.get_optional_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_optional_fields)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
+- [macro.snowplow_web.channel_group_query](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.channel_group_query)
 - [macro.snowplow_web.content_group_query](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.content_group_query)
 - [macro.snowplow_web.filter_bots](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.filter_bots)
 - [macro.snowplow_web.get_iab_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_iab_context_fields)
@@ -8049,6 +8207,11 @@ An upstream scratch table extracting all the relevant fields that could be used 
 `models/optional_modules/core_web_vitals/scratch/databricks/snowplow_web_vital_events_this_run.sql`
 
 </TabItem>
+<TabItem value="default" label="default" default>
+
+`models/optional_modules/core_web_vitals/scratch/default/snowplow_web_vital_events_this_run.sql`
+
+</TabItem>
 <TabItem value="snowflake" label="snowflake">
 
 `models/optional_modules/core_web_vitals/scratch/snowflake/snowplow_web_vital_events_this_run.sql`
@@ -8266,12 +8429,12 @@ with prep as (
 
     {{snowplow_web.get_yauaa_context_fields()}},
 
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.lcp::decimal(9,4)) /1000 as lcp,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.fcp::decimal(9,4), 3) as fcp,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.fid::decimal(9,4), 3) as fid,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.cls::decimal(9,4), 3) as cls,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.inp::decimal(9,4), 3) as inp,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.ttfb::decimal(9,4), 3) as ttfb,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.lcp::decimal(14,4)) /1000 as lcp,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.fcp::decimal(14,4), 3) as fcp,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.fid::decimal(14,4), 3) as fid,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.cls::decimal(14,4), 3) as cls,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.inp::decimal(14,4), 3) as inp,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.ttfb::decimal(14,4), 3) as ttfb,
     e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1.navigation_type::varchar(128) as navigation_type
 
   from {{ ref("snowplow_web_base_events_this_run") }} as e
@@ -8345,6 +8508,119 @@ from prep p
 ```
 
 </TabItem>
+<TabItem value="default" label="default" default>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/optional_modules/core_web_vitals/scratch/default/snowplow_web_vital_events_this_run.sql">Source</a></i></b></center>
+
+```jinja2
+{{
+  config(
+    tags=["this_run"],
+    enabled=var("snowplow__enable_cwv", false) and target.type in ('redshift', 'postgres') | as_bool()
+  )
+}}
+
+with {{ snowplow_utils.get_sde_or_context(var('snowplow__atomic_schema', 'atomic'), var('snowplow__cwv_context'), lower_limit, upper_limit, 'cwv') }}
+
+, prep as (
+
+  select
+    e.event_id,
+    e.event_name,
+    e.app_id,
+    e.platform,
+    e.domain_userid,
+    e.user_id,
+    e.page_view_id,
+    e.domain_sessionid,
+    e.collector_tstamp,
+    e.derived_tstamp,
+    e.dvce_created_tstamp,
+    e.load_tstamp,
+    e.geo_country,
+    e.page_url,
+    e.page_title,
+    e.useragent,
+
+    {{snowplow_web.get_yauaa_context_fields()}},
+
+    ceil(cast(cwv.cwv_lcp/1000 as decimal(14,4))*1000) /1000 as lcp,
+    ceil(cast(cwv.cwv_fcp as decimal(14,4))*1000) /1000 as fcp,
+    ceil(cast(cwv.cwv_fid as decimal(14,4))*1000) /1000 as fid,
+    ceil(cast(cwv.cwv_cls as decimal(14,4))*1000) /1000 as cls,
+    ceil(cast(cwv.cwv_inp as decimal(14,4))*1000) /1000 as inp,
+    ceil(cast(cwv.cwv_ttfb as decimal(14,4))*1000) /1000 as ttfb,
+    cast(cwv.cwv_navigation_type as {{ dbt.type_string() }}) as navigation_type
+
+  from {{ ref("snowplow_web_base_events_this_run") }} as e
+
+  inner join snowplow_web_cwv_context_stg cwv on e.event_id = cwv.cwv__id and e.collector_tstamp = cwv.cwv__tstamp
+
+  where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
+
+  and event_name = 'web_vitals'
+
+  and page_view_id is not null
+
+  -- exclude bot traffic
+
+  {% if var('snowplow__enable_iab', false) %}
+    and not e.iab_spider_or_robot = True
+  {% endif %}
+
+  {{ filter_bots() }}
+
+)
+
+select
+  event_id,
+  event_name,
+  app_id,
+  platform,
+  domain_userid,
+  user_id,
+  page_view_id,
+  domain_sessionid,
+  collector_tstamp,
+  derived_tstamp,
+  dvce_created_tstamp,
+  load_tstamp,
+  geo_country,
+  page_url,
+  page_title,
+  useragent,
+  lower(yauaa_device_class) as device_class,
+  yauaa_agent_class as agent_class,
+  yauaa_agent_name as agent_name,
+  yauaa_agent_name_version as agent_name_version,
+  yauaa_agent_name_version_major as agent_name_version_major,
+  yauaa_agent_version as agent_version,
+  yauaa_agent_version_major as agent_version_major,
+  yauaa_device_brand as device_brand,
+  yauaa_device_name as device_name,
+  yauaa_device_version as device_version,
+  yauaa_layout_engine_class as layout_engine_class,
+  yauaa_layout_engine_name as layout_engine_name,
+  yauaa_layout_engine_name_version as layout_engine_name_version,
+  yauaa_layout_engine_name_version_major as layout_engine_name_version_major,
+  yauaa_layout_engine_version as layout_engine_version,
+  yauaa_layout_engine_version_major as layout_engine_version_major,
+  yauaa_operating_system_class as operating_system_class,
+  yauaa_operating_system_name as operating_system_name,
+  yauaa_operating_system_name_version as operating_system_name_version,
+  yauaa_operating_system_version as operating_system_version,
+  lcp,
+  fcp,
+  fid,
+  cls,
+  inp,
+  ttfb,
+  navigation_type
+
+from prep p
+```
+
+</TabItem>
 <TabItem value="snowflake" label="snowflake">
 
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/optional_modules/core_web_vitals/scratch/snowflake/snowplow_web_vital_events_this_run.sql">Source</a></i></b></center>
@@ -8380,12 +8656,12 @@ with prep as (
 
     {{snowplow_web.get_yauaa_context_fields()}},
 
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:lcp::decimal(9,4), 3) /1000 as lcp,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:fcp::decimal(9,4), 3) as fcp,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:fid::decimal(9,4), 3) as fid,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:cls::decimal(9,4), 3) as cls,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:inp::decimal(9,4), 3) as inp,
-    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:ttfb::decimal(9,4), 3) as ttfb,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:lcp::decimal(14,4), 3) /1000 as lcp,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:fcp::decimal(14,4), 3) as fcp,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:fid::decimal(14,4), 3) as fid,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:cls::decimal(14,4), 3) as cls,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:inp::decimal(14,4), 3) as inp,
+    ceil(e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:ttfb::decimal(14,4), 3) as ttfb,
     e.unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1:navigationType::varchar as navigation_type
 
   from {{ ref("snowplow_web_base_events_this_run") }} as e
@@ -8476,8 +8752,10 @@ from prep p
 </TabItem>
 <TabItem value="macro" label="Macros">
 
+- macro.dbt.type_string
 - [macro.snowplow_utils.get_field](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_field)
 - [macro.snowplow_utils.get_optional_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_optional_fields)
+- [macro.snowplow_utils.get_sde_or_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_sde_or_context)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_web.filter_bots](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.filter_bots)
@@ -8521,6 +8799,11 @@ A table aimed to use for visualisations that takes core web vital measurements a
 `models/optional_modules/core_web_vitals/databricks/snowplow_web_vital_measurements.sql`
 
 </TabItem>
+<TabItem value="default" label="default" default>
+
+`models/optional_modules/core_web_vitals/default/snowplow_web_vital_measurements.sql`
+
+</TabItem>
 <TabItem value="snowflake" label="snowflake">
 
 `models/optional_modules/core_web_vitals/snowflake/snowplow_web_vital_measurements.sql`
@@ -8536,6 +8819,7 @@ A table aimed to use for visualisations that takes core web vital measurements a
 
 | Column Name | Description |
 |:------------|:------------|
+| compound_key | A compound key for the table. |
 | measurement_type | The category to be measured. E.g. By country |
 | page_url | The page URL e.g. ‘http://www.example.com’ |
 | device_class | Class of device e.g. phone |
@@ -8566,8 +8850,7 @@ A table aimed to use for visualisations that takes core web vital measurements a
 {{
   config(
     materialized='table',
-    enabled=var("snowplow__enable_cwv", false) and target.type == 'bigquery' | as_bool(),
-    sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
+    enabled=var("snowplow__enable_cwv", false) and target.type == 'bigquery' | as_bool()
   )
 }}
 
@@ -8756,7 +9039,7 @@ with by_url_and_device as (
 
   union all
 
-  select *,
+   select *,
 
   {{ snowplow_web.core_web_vital_results_query('_' + var('snowplow__cwv_percentile') | string + 'p') }}
 
@@ -8780,6 +9063,8 @@ with by_url_and_device as (
 
 )
 
+, coalesce as (
+
 select
   m.measurement_type,
   m.page_url,
@@ -8799,11 +9084,21 @@ select
   m.ttfb_result,
   m.inp_result,
   {{ snowplow_web.core_web_vital_pass_query() }} as passed
+
 from measurements m
 
 left join {{ ref('dim_geo_country_mapping') }} g on lower(m.geo_country) = lower(g.alpha_2)
 
 order by 1
+
+)
+
+select
+
+  {{ dbt.concat(['page_url', "'-'" , 'device_class', "'-'" , 'geo_country', "'-'" , 'time_period' ]) }} compound_key,
+  *
+
+from coalesce
 ```
 
 </TabItem>
@@ -8815,8 +9110,7 @@ order by 1
 {{
   config(
     materialized='table',
-    enabled=var("snowplow__enable_cwv", false) and target.type in ('databricks', 'spark') | as_bool(),
-    sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
+    enabled=var("snowplow__enable_cwv", false) and target.type in ('databricks', 'spark') | as_bool()
   )
 }}
 
@@ -8859,33 +9153,289 @@ with measurements as (
   from measurements
 )
 
+, coalesce as (
+
+  select
+    m.measurement_type,
+    coalesce(m.page_url, 'all') as page_url,
+    coalesce(m.device_class, 'all') as device_class,
+    coalesce(m.geo_country, 'all') as geo_country,
+    coalesce(g.name, 'all') as country,
+    coalesce(m.time_period, 'last {{var("snowplow__cwv_days_to_measure")|string }} days') as time_period,
+    m.page_view_count,
+    ceil(m.lcp_{{ var('snowplow__cwv_percentile') }}p, 3) as lcp_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(m.fid_{{ var('snowplow__cwv_percentile') }}p, 3) as fid_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(m.cls_{{ var('snowplow__cwv_percentile') }}p, 3) as cls_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(m.ttfb_{{ var('snowplow__cwv_percentile') }}p, 3) as ttfb_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(m.inp_{{ var('snowplow__cwv_percentile') }}p, 3) as inp_{{ var('snowplow__cwv_percentile') }}p,
+    m.lcp_result,
+    m.fid_result,
+    m.cls_result,
+    m.ttfb_result,
+    m.inp_result,
+    {{ snowplow_web.core_web_vital_pass_query() }} as passed
+
+  from measurement_type m
+
+  left join {{ ref('dim_geo_country_mapping') }} g on lower(m.geo_country) = lower(g.alpha_2)
+
+  where measurement_type is not null
+
+  order by 1
+
+)
+
 select
-  m.measurement_type,
-  coalesce(m.page_url, 'all') as page_url,
-  coalesce(m.device_class, 'all') as device_class,
-  coalesce(m.geo_country, 'all') as geo_country,
-  coalesce(g.name, 'all') as country,
-  coalesce(m.time_period, 'last {{var("snowplow__cwv_days_to_measure")|string }} days') as time_period,
-  m.page_view_count,
-  ceil(m.lcp_{{ var('snowplow__cwv_percentile') }}p, 3) as lcp_{{ var('snowplow__cwv_percentile') }}p,
-  ceil(m.fid_{{ var('snowplow__cwv_percentile') }}p, 3) as fid_{{ var('snowplow__cwv_percentile') }}p,
-  ceil(m.cls_{{ var('snowplow__cwv_percentile') }}p, 3) as cls_{{ var('snowplow__cwv_percentile') }}p,
-  ceil(m.ttfb_{{ var('snowplow__cwv_percentile') }}p, 3) as ttfb_{{ var('snowplow__cwv_percentile') }}p,
-  ceil(m.inp_{{ var('snowplow__cwv_percentile') }}p, 3) as inp_{{ var('snowplow__cwv_percentile') }}p,
-  m.lcp_result,
-  m.fid_result,
-  m.cls_result,
-  m.ttfb_result,
-  m.inp_result,
-  {{ snowplow_web.core_web_vital_pass_query() }} as passed
+  {{ dbt.concat(['page_url', "'-'" , 'device_class', "'-'" , 'geo_country', "'-'" , 'time_period' ]) }} compound_key,
+  *
+from coalesce
+```
 
-from measurement_type m
+</TabItem>
+<TabItem value="default" label="default" default>
 
-left join {{ ref('dim_geo_country_mapping') }} g on lower(m.geo_country) = lower(g.alpha_2)
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-web/blob/main/models/optional_modules/core_web_vitals/default/snowplow_web_vital_measurements.sql">Source</a></i></b></center>
 
-where measurement_type is not null
+```jinja2
+{{
+  config(
+    materialized='table',
+    enabled=var("snowplow__enable_cwv", false) and target.type in ('redshift', 'postgres') | as_bool(),
+  )
+}}
 
-order by 1
+{% if target.type == 'redshift'%}
+  {% set grouping_function = 'grouping_id' %}
+{% else  %}
+    {% set grouping_function = 'grouping' %}
+{% endif %}
+
+with prep as (
+
+  select
+    page_url,
+    device_class,
+    geo_country,
+    concat(cast({{ date_trunc('day', 'derived_tstamp') }} as {{ type_string() }}),'.000') as time_period,
+    lcp,
+    fid,
+    cls,
+    ttfb,
+    inp
+
+  from {{ ref('snowplow_web_vitals') }}
+
+  where cast(derived_tstamp as date) >= {{ dateadd('day', '-'+var('snowplow__cwv_days_to_measure')|string, date_trunc('day', snowplow_utils.current_timestamp_in_utc())) }}
+
+)
+
+, lcp_measurements as (
+
+  select
+    {{ dbt_utils.generate_surrogate_key(['page_url', 'device_class', 'geo_country', 'time_period' ]) }} surrogate_key,
+    page_url,
+    device_class,
+    geo_country,
+    time_period,
+    count(*) as page_view_count,
+    {{ grouping_function }}(page_url, device_class) as id_url_and_device,
+    {{ grouping_function }}(device_class) as id_device,
+    {{ grouping_function }}(time_period) as id_period,
+    {{ grouping_function }}(time_period, device_class) as id_period_and_device,
+    {{ grouping_function }}(geo_country) as id_country,
+    {{ grouping_function }}(geo_country, device_class) as id_country_and_device,
+    percentile_cont(0.{{ var('snowplow__cwv_percentile') }}) within group (order by lcp) as lcp_{{ var('snowplow__cwv_percentile') }}p
+
+  from prep
+
+  group by grouping sets ((), (page_url, device_class), (device_class), (time_period), (time_period, device_class), (geo_country), (geo_country, device_class))
+
+)
+
+, fid_measurements as (
+
+  select
+    {{ dbt_utils.generate_surrogate_key(['page_url', 'device_class', 'geo_country', 'time_period' ]) }} surrogate_key,
+    page_url,
+    device_class,
+    geo_country,
+    time_period,
+    count(*) as page_view_count,
+    {{ grouping_function }}(page_url, device_class) as id_url_and_device,
+    {{ grouping_function }}(device_class) as id_device,
+    {{ grouping_function }}(time_period) as id_period,
+    {{ grouping_function }}(time_period, device_class) as id_period_and_device,
+    {{ grouping_function }}(geo_country) as id_country,
+    {{ grouping_function }}(geo_country, device_class) as id_country_and_device,
+    percentile_cont(0.{{ var('snowplow__cwv_percentile') }}) within group (order by fid) as fid_{{ var('snowplow__cwv_percentile') }}p
+
+  from prep
+
+  group by grouping sets ((), (page_url, device_class), (device_class), (time_period), (time_period, device_class), (geo_country), (geo_country, device_class))
+
+)
+
+, cls_measurements as (
+
+  select
+    {{ dbt_utils.generate_surrogate_key(['page_url', 'device_class', 'geo_country', 'time_period' ]) }} surrogate_key,
+    page_url,
+    device_class,
+    geo_country,
+    time_period,
+    count(*) as page_view_count,
+    {{ grouping_function }}(page_url, device_class) as id_url_and_device,
+    {{ grouping_function }}(device_class) as id_device,
+    {{ grouping_function }}(time_period) as id_period,
+    {{ grouping_function }}(time_period, device_class) as id_period_and_device,
+    {{ grouping_function }}(geo_country) as id_country,
+    {{ grouping_function }}(geo_country, device_class) as id_country_and_device,
+    percentile_cont(0.{{ var('snowplow__cwv_percentile') }}) within group (order by cls) as cls_{{ var('snowplow__cwv_percentile') }}p
+
+  from prep
+
+  group by grouping sets ((), (page_url, device_class), (device_class), (time_period), (time_period, device_class), (geo_country), (geo_country, device_class))
+
+)
+
+, ttfb_measurements as (
+
+  select
+    {{ dbt_utils.generate_surrogate_key(['page_url', 'device_class', 'geo_country', 'time_period' ]) }} surrogate_key,
+    page_url,
+    device_class,
+    geo_country,
+    time_period,
+    count(*) as page_view_count,
+    {{ grouping_function }}(page_url, device_class) as id_url_and_device,
+    {{ grouping_function }}(device_class) as id_device,
+    {{ grouping_function }}(time_period) as id_period,
+    {{ grouping_function }}(time_period, device_class) as id_period_and_device,
+    {{ grouping_function }}(geo_country) as id_country,
+    {{ grouping_function }}(geo_country, device_class) as id_country_and_device,
+    percentile_cont(0.{{ var('snowplow__cwv_percentile') }}) within group (order by ttfb) as ttfb_{{ var('snowplow__cwv_percentile') }}p
+
+  from prep
+
+  group by grouping sets ((), (page_url, device_class), (device_class), (time_period), (time_period, device_class), (geo_country), (geo_country, device_class))
+
+)
+
+, inp_measurements as (
+
+  select
+    {{ dbt_utils.generate_surrogate_key(['page_url', 'device_class', 'geo_country', 'time_period' ]) }} surrogate_key,
+    page_url,
+    device_class,
+    geo_country,
+    time_period,
+    count(*) as page_view_count,
+    {{ grouping_function }}(page_url, device_class) as id_url_and_device,
+    {{ grouping_function }}(device_class) as id_device,
+    {{ grouping_function }}(time_period) as id_period,
+    {{ grouping_function }}(time_period, device_class) as id_period_and_device,
+    {{ grouping_function }}(geo_country) as id_country,
+    {{ grouping_function }}(geo_country, device_class) as id_country_and_device,
+    percentile_cont(0.{{ var('snowplow__cwv_percentile') }}) within group (order by inp) as inp_{{ var('snowplow__cwv_percentile') }}p
+
+  from prep
+
+  group by grouping sets ((), (page_url, device_class), (device_class), (time_period), (time_period, device_class), (geo_country), (geo_country, device_class))
+
+)
+
+, measurements as (
+
+  select
+    l.*,
+    f.fid_{{ var('snowplow__cwv_percentile') }}p,
+    c.cls_{{ var('snowplow__cwv_percentile') }}p,
+    t.ttfb_{{ var('snowplow__cwv_percentile') }}p,
+    i.inp_{{ var('snowplow__cwv_percentile') }}p
+
+  from lcp_measurements l
+
+  left join fid_measurements f on l.surrogate_key = f.surrogate_key
+
+  left join cls_measurements c on l.surrogate_key = c.surrogate_key
+
+  left join ttfb_measurements t on l.surrogate_key = t.surrogate_key
+
+  left join inp_measurements i on l.surrogate_key = i.surrogate_key
+
+)
+
+, measurement_type as (
+
+  select
+    *,
+    case when id_url_and_device <> 0 and id_device <> 0 and id_period <> 0 and id_period_and_device <> 0 and id_country <> 0 and id_country_and_device <> 0 then 'overall'
+       when id_url_and_device = 0 then 'by_url_and_device'
+       when id_period_and_device = 0 then 'by_day_and_device'
+       when id_country_and_device = 0 then 'by_country_and_device'
+       when id_country = 0 then 'by_country'
+       when id_device = 0 then 'by_device'
+       when id_period = 0 then 'by_day'
+       end as measurement_type,
+   {{ snowplow_web.core_web_vital_results_query('_' + var('snowplow__cwv_percentile') | string + 'p') }}
+
+  from measurements
+)
+
+
+, coalesce as (
+
+  select
+    measurement_type,
+    coalesce(m.page_url, 'all') as page_url,
+    coalesce(m.device_class, 'all') as device_class,
+    coalesce(m.geo_country, 'all') as geo_country,
+    coalesce(g.name, 'all') as country,
+    coalesce(time_period, 'last {{var("snowplow__cwv_days_to_measure")|string }} days') as time_period,
+    page_view_count,
+    ceil(cast(lcp_{{ var('snowplow__cwv_percentile') }}p as decimal(14,4))*1000) /1000 as lcp_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(cast(fid_{{ var('snowplow__cwv_percentile') }}p as decimal(14,4))*1000) /1000 as fid_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(cast(cls_{{ var('snowplow__cwv_percentile') }}p as decimal(14,4))*1000) /1000 as cls_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(cast(ttfb_{{ var('snowplow__cwv_percentile') }}p as decimal(14,4))*1000) /1000 as ttfb_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(cast(inp_{{ var('snowplow__cwv_percentile') }}p as decimal(14,4))*1000) /1000 as inp_{{ var('snowplow__cwv_percentile') }}p,
+    m.lcp_result,
+    m.fid_result,
+    m.cls_result,
+    m.ttfb_result,
+    m.inp_result,
+    {{ snowplow_web.core_web_vital_pass_query() }} as passed
+
+  from measurement_type m
+
+  left join {{ ref('dim_geo_country_mapping') }} g on lower(m.geo_country) = lower(g.alpha_2)
+
+  order by 1
+
+)
+
+select
+
+  {{ dbt.concat(['page_url', "'-'" , 'device_class', "'-'" , 'geo_country', "'-'" , 'time_period' ]) }} compound_key,
+  measurement_type,
+  page_url,
+  device_class,
+  geo_country,
+  country,
+  time_period,
+  page_view_count,
+  lcp_{{ var('snowplow__cwv_percentile') }}p,
+  fid_{{ var('snowplow__cwv_percentile') }}p,
+  cls_{{ var('snowplow__cwv_percentile') }}p,
+  ttfb_{{ var('snowplow__cwv_percentile') }}p,
+  inp_{{ var('snowplow__cwv_percentile') }}p,
+  lcp_result,
+  fid_result,
+  cls_result,
+  ttfb_result,
+  inp_result,
+  passed
+
+from coalesce
 ```
 
 </TabItem>
@@ -8921,6 +9471,7 @@ with measurements as (
     percentile_cont(0.{{ var('snowplow__cwv_percentile') }}) within group (order by cls) as cls_{{ var('snowplow__cwv_percentile') }}p,
     percentile_cont(0.{{ var('snowplow__cwv_percentile') }}) within group (order by ttfb) as ttfb_{{ var('snowplow__cwv_percentile') }}p,
     percentile_cont(0.{{ var('snowplow__cwv_percentile') }}) within group (order by inp) as inp_{{ var('snowplow__cwv_percentile') }}p
+
   from {{ ref('snowplow_web_vitals') }}
 
   where cast(derived_tstamp as date) >= {{ dateadd('day', '-'+var('snowplow__cwv_days_to_measure')|string, date_trunc('day', snowplow_utils.current_timestamp_in_utc())) }}
@@ -8946,31 +9497,40 @@ with measurements as (
   from measurements
 )
 
+, coalesce as (
+
+  select
+    m.measurement_type,
+    coalesce(m.page_url, 'all') as page_url,
+    coalesce(m.device_class, 'all') as device_class,
+    coalesce(m.geo_country, 'all') as geo_country,
+    coalesce(g.name, 'all') as country,
+    coalesce(time_period, 'last {{var("snowplow__cwv_days_to_measure")|string }} days') as time_period,
+    page_view_count,
+    ceil(lcp_{{ var('snowplow__cwv_percentile') }}p, 3) as lcp_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(fid_{{ var('snowplow__cwv_percentile') }}p, 3) as fid_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(cls_{{ var('snowplow__cwv_percentile') }}p, 3) as cls_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(ttfb_{{ var('snowplow__cwv_percentile') }}p, 3) as ttfb_{{ var('snowplow__cwv_percentile') }}p,
+    ceil(inp_{{ var('snowplow__cwv_percentile') }}p, 3) as inp_{{ var('snowplow__cwv_percentile') }}p,
+    m.lcp_result,
+    m.fid_result,
+    m.cls_result,
+    m.ttfb_result,
+    m.inp_result,
+    {{ snowplow_web.core_web_vital_pass_query() }} as passed
+
+  from measurement_type m
+
+  left join {{ ref('dim_geo_country_mapping') }} g on lower(m.geo_country) = lower(g.alpha_2)
+
+  order by 1
+
+)
+
 select
-  m.measurement_type,
-  coalesce(m.page_url, 'all') as page_url,
-  coalesce(m.device_class, 'all') as device_class,
-  coalesce(m.geo_country, 'all') as geo_country,
-  coalesce(g.name, 'all') as country,
-  coalesce(time_period, 'last {{var("snowplow__cwv_days_to_measure")|string }} days') as time_period,
-  page_view_count,
-  ceil(lcp_{{ var('snowplow__cwv_percentile') }}p, 3) as lcp_{{ var('snowplow__cwv_percentile') }}p,
-  ceil(fid_{{ var('snowplow__cwv_percentile') }}p, 3) as fid_{{ var('snowplow__cwv_percentile') }}p,
-  ceil(cls_{{ var('snowplow__cwv_percentile') }}p, 3) as cls_{{ var('snowplow__cwv_percentile') }}p,
-  ceil(ttfb_{{ var('snowplow__cwv_percentile') }}p, 3) as ttfb_{{ var('snowplow__cwv_percentile') }}p,
-  ceil(inp_{{ var('snowplow__cwv_percentile') }}p, 3) as inp_{{ var('snowplow__cwv_percentile') }}p,
-  m.lcp_result,
-  m.fid_result,
-  m.cls_result,
-  m.ttfb_result,
-  m.inp_result,
-  {{ snowplow_web.core_web_vital_pass_query() }} as passed
-
-from measurement_type m
-
-left join {{ ref('dim_geo_country_mapping') }} g on lower(m.geo_country) = lower(g.alpha_2)
-
-order by 1
+  {{ dbt.concat(['page_url', "'-'" , 'device_class', "'-'" , 'geo_country', "'-'" , 'time_period' ]) }} compound_key,
+  *
+from coalesce
 ```
 
 </TabItem>
@@ -8990,9 +9550,11 @@ order by 1
 </TabItem>
 <TabItem value="macro" label="Macros">
 
+- macro.dbt.concat
 - macro.dbt.date_trunc
 - macro.dbt.dateadd
 - macro.dbt.type_string
+- macro.dbt_utils.generate_surrogate_key
 - [macro.snowplow_utils.current_timestamp_in_utc](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.current_timestamp_in_utc)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_web.core_web_vital_pass_query](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.core_web_vital_pass_query)
@@ -9064,7 +9626,7 @@ An incremental table used as a base for storing core web vital events (first eve
 {{
   config(
     materialized= 'incremental',
-    enabled=var("snowplow__enable_cwv", false) and target.type in ('databricks', 'spark', 'snowflake', 'bigquery') | as_bool(),
+    enabled=var("snowplow__enable_cwv", false) | as_bool(),
     unique_key='page_view_id',
     upsert_date_key='derived_tstamp',
     sort='derived_tstamp',
@@ -9155,7 +9717,7 @@ A scratch table used as a base for creating the main incremental core web vital 
 ```jinja2
 {{
   config(
-     enabled=var("snowplow__enable_cwv", false) and target.type in ('databricks', 'spark', 'snowflake', 'bigquery') | as_bool(),
+    enabled=var("snowplow__enable_cwv", false) | as_bool(),
     tags=["this_run"],
     sql_header=snowplow_utils.set_query_tag(var('snowplow__query_tag', 'snowplow_dbt'))
   )
@@ -9175,12 +9737,12 @@ with prep as (
     e.collector_tstamp,
     e.derived_tstamp,
     e.load_tstamp,
-    e.geo_country,
-    e.page_url,
+    coalesce(e.geo_country, 'unknown_geo_country') as geo_country,
+    coalesce(e.page_url, 'unknown_page_url') as page_url,
     {{ core_web_vital_page_groups() }} as url_group,
     e.page_title,
     e.useragent,
-    e.device_class,
+    coalesce(e.device_class, 'unknown_device_class') as device_class,
     e.device_name,
     e.agent_name,
     e.agent_version,
@@ -9191,13 +9753,13 @@ with prep as (
     e.cls,
     e.inp,
     e.ttfb,
-    e.navigation_type
+    e.navigation_type,
+    row_number() over (partition by e.page_view_id order by e.derived_tstamp, e.dvce_created_tstamp, e.event_id) dedupe_index
 
   from {{ ref("snowplow_web_vital_events_this_run") }} as e
 
   where {{ snowplow_utils.is_run_with_new_events('snowplow_web') }} --returns false if run doesn't contain new events.
 
-  qualify row_number() over (partition by e.page_view_id order by e.derived_tstamp, e.dvce_created_tstamp, e.event_id) = 1
 
 )
 
@@ -9206,6 +9768,8 @@ select
   {{ snowplow_web.core_web_vital_results_query() }}
 
 from prep p
+
+where dedupe_index = 1
 ```
 
 </TabItem>

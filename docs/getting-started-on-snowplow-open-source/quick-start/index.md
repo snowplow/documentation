@@ -6,6 +6,7 @@ sidebar_position: 2
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md";
 ```
 
 This guide will take you through how to spin up an open source pipeline using the [Snowplow Terraform modules](https://registry.terraform.io/namespaces/snowplow-devops).
@@ -61,6 +62,8 @@ Configure a Google Cloud service account. See [details on using the service acco
 
   </TabItem>
   <TabItem value="azure" label="Azure 🧪">
+
+<AzureExperimental/>
 
 Install the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
 

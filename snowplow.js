@@ -15,7 +15,7 @@ import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
 import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
 import { reloadOnce } from './src/helpers/reloadOnce'
-import { pickBy } from 'lodash'
+import { isEmpty, pickBy } from 'lodash'
 
 const createTrackerConfig = (cookieName) => {
   const appId = DOCS_SITE_URLS.includes(window.location.hostname)
@@ -56,13 +56,16 @@ const setupBrowserTracker = () => {
   )
   newTracker('biz1', 'https://c.snowplow.io', createTrackerConfig('_sp_biz1_'))
 
-  const selectedTabContext = () => ({
-    schema: 'iglu:com.snowplowanalytics.docs/selected_tabs/jsonschema/1-0-0',
-    data: pickBy({
+  const selectedTabContext = () => {
+    const data = pickBy({
       cloud: localStorage.getItem("docusaurus.tab.cloud"),
       data_warehouse: localStorage.getItem("docusaurus.tab.warehouse")
-    }),
-  })
+    })
+    if (!_.isEmpty(data)) return {
+      schema: 'iglu:com.snowplowanalytics.docs/selected_tabs/jsonschema/1-0-0',
+      data
+    }
+  }
   addGlobalContexts([selectedTabContext])
 
   enableLinkClickTracking()

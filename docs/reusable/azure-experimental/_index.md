@@ -1,4 +1,4 @@
-:::caution Early release
+:::info Early release
 
 Currently, Azure support is in its pilot phase and we encourage you to share your thoughts and feedback with us on [Discourse](https://discourse.snowplow.io/) to help shape future development.
 

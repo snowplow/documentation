@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Card, CardContent, Typography } from '@mui/material'
+import { Card, CardContent, MenuItem, Select, Typography } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { trackSelfDescribingEvent } from '@snowplow/browser-tracker'
 
@@ -19,6 +19,7 @@ import { EventWithNamespace, eventsToTrack } from './eventsToTrack'
 
 export default function EventComponent() {
   const [isSending, setIsSending] = useState(false)
+  const [protocol, setProtocol] = useState('http://')
 
   const collector = createModalInput(DocsTrackerField.COLLECTOR_ENDPOINT)
 
@@ -40,12 +41,23 @@ export default function EventComponent() {
           onSubmit={async (e) => {
             e.preventDefault()
 
+            // Clear any previous errors
+            collector.setState((prev) => ({
+              ...prev,
+              error: '',
+            }))
+
+            appId.setState((prev) => ({
+              ...prev,
+              error: '',
+            }))
+
             const statusCode = await checkCollectorEndpoint(
-              collector.state.value
+              protocol + collector.state.value
             )
 
             const collectorEndpointError = getCollectorEndpointError(
-              collector.state.value,
+              protocol + collector.state.value,
               statusCode
             )
 
@@ -118,7 +130,20 @@ export default function EventComponent() {
             Test Events
           </Typography>
 
-          <ModalTextField label="Collector Endpoint" modalInput={collector} />
+          <div style={{ display: 'flex', alignItems: 'baseline' }}>
+            <Select
+              defaultValue={'http://'}
+              sx={{ mr: 1 }}
+              value={protocol}
+              onChange={(e) => {
+                setProtocol(e.target.value)
+              }}
+            >
+              <MenuItem value="http://">http://</MenuItem>
+              <MenuItem value="https://">https://</MenuItem>
+            </Select>
+            <ModalTextField label="Collector Endpoint" modalInput={collector} />
+          </div>
 
           <ModalTextField label="App ID" modalInput={appId} />
 

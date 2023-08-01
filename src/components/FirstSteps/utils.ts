@@ -162,10 +162,6 @@ export function getAppIdError(appId: string): string {
 }
 
 export async function checkCollectorEndpoint(url: string): Promise<number> {
-  if (!url.startsWith('http://') && !url.startsWith('https://')) {
-    url = 'http://' + url
-  }
-
   url = url + '/com.snowplowanalytics.snowplow/i'
 
   try {

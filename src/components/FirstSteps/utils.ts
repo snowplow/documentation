@@ -162,16 +162,18 @@ export function getAppIdError(appId: string): string {
 }
 
 export async function checkCollectorEndpoint(url: string): Promise<number> {
-  url = url + '/com.snowplowanalytics.snowplow/i'
+  try {
+    const resp = await fetch(url + '/health')
+    if (resp.status === 200) {
+      return resp.status
+    }
+  } catch (_e) {}
 
   try {
-    const resp = await fetch(url, {
-      method: 'GET',
-    })
+    const resp = await fetch(url + '/com.snowplowanalytics.snowplow/i')
 
     return resp.status
-  } catch (e) {
-    console.log(e)
+  } catch (_e) {
     return 0
   }
 }

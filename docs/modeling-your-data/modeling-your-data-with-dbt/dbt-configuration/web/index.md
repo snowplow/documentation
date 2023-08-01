@@ -71,7 +71,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `databricks_catalog` | The catalogue your atomic events table is in. Depending on the use case it should either be the catalog (for Unity Catalog users from databricks connector 1.1.1 onwards, defaulted to `hive_metastore`) or the same value as your `snowplow__atomic_schema` (unless changed it should be 'atomic'). | `hive_metastore` |
 
 </TabItem>
-<TabItem value="redshift+postgres" label="Redshift & Postgres">
+<TabItem value="redshift/postgres" label="Redshift & Postgres">
 
 Redshift and Postgres use a [shredded](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
 

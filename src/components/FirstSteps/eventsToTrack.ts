@@ -7,65 +7,6 @@ import {
 export type EventWithNamespace = (ns: string) => void
 
 export const eventsToTrack: EventWithNamespace[] = [
-  (ns) => trackStructEvent({ category: 'shop', action: 'add-to-basket' }, [ns]),
-  (ns) =>
-    trackStructEvent(
-      {
-        category: 'shop',
-        action: 'add-to-basket',
-        label: 'top hat',
-      },
-      [ns]
-    ),
-  (ns) =>
-    trackStructEvent(
-      {
-        category: 'shop',
-        action: 'add-to-basket',
-        label: 'top hat',
-        property: 'black',
-      },
-      [ns]
-    ),
-  (ns) =>
-    trackStructEvent(
-      {
-        category: 'shop',
-        action: 'add-to-basket',
-        label: 'top hat',
-        property: 'black',
-        value: 250,
-      },
-      [ns]
-    ),
-  (ns) =>
-    trackStructEvent(
-      {
-        category: 'user_interaction',
-        action: 'submit_form',
-        label: 'contact_form',
-      },
-      [ns]
-    ),
-  (ns) =>
-    trackStructEvent(
-      {
-        category: 'user_action',
-        action: 'share_post',
-        label: 'instagram',
-      },
-      [ns]
-    ),
-  (ns) =>
-    trackStructEvent(
-      {
-        category: 'user_action',
-        action: 'like_post',
-        label: 'instagram',
-        value: 43,
-      },
-      [ns]
-    ),
   (ns) =>
     trackSelfDescribingEvent(
       {

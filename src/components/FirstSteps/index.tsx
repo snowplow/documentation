@@ -22,7 +22,7 @@ export default function EventComponent() {
 
   const collector = createModalInput(DocsTrackerField.COLLECTOR_ENDPOINT)
 
-  const appId = createModalInput(DocsTrackerField.APP_ID)
+  const appId = createModalInput(DocsTrackerField.APP_ID, 'test')
 
   return (
     <Card

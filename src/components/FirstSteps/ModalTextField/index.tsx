@@ -52,13 +52,19 @@ const clearModalInput = (input: ModalInput) => {
  * @param getError - a function that takes in the value of the input and returns an error string
  * @returns a ModalInput object
  */
-export const createModalInput = (fieldName: DocsTrackerField): ModalInput => {
+export const createModalInput = (
+  fieldName: DocsTrackerField,
+  defaultValue?: string
+): ModalInput => {
   let value = ''
   let disabled = false
 
   useEffect(() => {
-    value = window.localStorage.getItem(fieldName) || ''
-    disabled = Boolean(window.localStorage.getItem(fieldName))
+    value = window.localStorage.getItem(fieldName) || defaultValue || ''
+    disabled =
+      Boolean(window.localStorage.getItem(fieldName)) ||
+      Boolean(defaultValue) ||
+      false
     setState((prev: ModalState) => ({ ...prev, value, disabled }))
   }, [])
 

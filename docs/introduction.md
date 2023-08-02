@@ -4,6 +4,12 @@ slug: "/"
 sidebar_position: 0
 ---
 
+```mdx-code-block
+import Head from '@docusaurus/Head'
+```
+
+<Head><meta name='zd-site-verification' content='fly2zzu1qcv51s1ma9jds' /></Head>
+
 Hi! Welcome to Snowplow, the world’s largest developer-first engine for collecting behavioral data.  
 
 We are the leader in [Data Creation](https://snowplowanalytics.com/what-is-data-creation/?utm_source=docs&utm_content=introduction). Thousands of organizations of all sizes around the world generate, enhance, and model behavioral data with Snowplow to fuel [advanced analytics](https://snowplowanalytics.com/advanced-analytics/?utm_source=docs&utm_content=introduction), [AI/ML initiatives](https://snowplowanalytics.com/ai-ml/?utm_source=docs&utm_content=introduction), or [Composable CDPs](https://snowplowanalytics.com/composable-cdp/?utm_source=docs&utm_content=landing-page).

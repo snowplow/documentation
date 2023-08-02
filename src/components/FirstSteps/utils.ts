@@ -125,6 +125,11 @@ export function newDocsTrackerFromAppIdAndCollectorUrl(
   })
 }
 
+export function prependProtocol(s: string) {
+  const parts = s.split('://')
+  return parts.length < 2 ? 'https://' + s : s
+}
+
 export function isValidUrl(s: string) {
   // new URL will error if empty string
   if (s === '') {
@@ -147,7 +152,7 @@ export function getCollectorEndpointError(url: string, status: number): string {
   if (!isValidUrl(url)) {
     return 'Please enter a valid URL'
   } else if (status !== 200) {
-    return 'Invalid response from collector - please ensure the URL is correct and the collector is running'
+    return 'Invalid response from the Collector. Please ensure the URL is correct and the Collector is running'
   } else {
     return ''
   }

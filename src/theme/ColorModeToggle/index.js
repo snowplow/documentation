@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import ColorModeToggle from '@theme-original/ColorModeToggle'
+import styles from './styles.module.css'
 import { useColorScheme } from '@mui/material/styles'
 
 export default function ColorModeToggleWrapper(props) {
@@ -17,7 +18,7 @@ export default function ColorModeToggleWrapper(props) {
 
   return (
     <>
-      <ColorModeToggle {...props} />
+      <ColorModeToggle {...props} className={styles.extraSpace} />
     </>
   )
 }

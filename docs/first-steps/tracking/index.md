@@ -21,7 +21,56 @@ Keep in mind that some of our offerings have limits on the number of events you 
 
 :::
 
+:::tip Latency
+
+Regardless of how you send the events, it might take a few minutes for them to reach your destination (e.g. data warehouse). This depends on which [destination and loader](/docs/storing-querying/storage-options/index.md) you have configured.
+
+:::
+
+## A quick test
+
+If you are eager to look at some Snowplow events or just test your pipeline, you can use the box below to send some data (including [failed events](/docs/understanding-your-pipeline/failed-events/index.md)) to your Collector.
+
+<Tabs groupId="offering" queryString>
+  <TabItem value="enterprise" label="BDP Enterprise" default>
+
+You can find the Collector URL (Collector Endpoint) in the [Console](https://console.snowplowanalytics.com/environments).
+
+  </TabItem>
+  <TabItem value="cloud" label="BDP Cloud">
+
+You can find the Collector URL (Collector Endpoint) in the [Console](https://console.snowplowanalytics.com/environments).
+
+  </TabItem>
+  <TabItem value="try" label="Try Snowplow">
+
+You can find the Collector URL (Collector Endpoint) in the [Console](https://try.snowplowanalytics.com/).
+
+  </TabItem>
+  <TabItem value="opensource" label="Open Source">
+
+Input the Collector URL you’ve chosen when deploying your Open Source pipeline.
+
+If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
+
+  </TabItem>
+</Tabs>
+
 <EventComponent />
+
+:::tip Application ID
+
+An application ID is sent along with each Snowplow event. You can pick a value that will make it easy to filter out these test events from your data later, e.g. like this:
+
+```sql
+...
+WHERE app_id != 'test'
+...
+```
+
+:::
+
+Now, let’s take a look at how to set up actual event tracking.
 
 ## Using the JavaScript tracker
 
@@ -49,11 +98,7 @@ You can find the pre-generated snippet in the [Console](https://try.snowplowanal
 
 Take note of the Collector URL you’ve chosen when deploying your Open Source pipeline.
 
-:::note
-
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
-
-:::
 
 Then, follow the JavaScript tracker [quick start guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md) to create your snippet.
   

@@ -1,168 +1,126 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { Card, CardContent, MenuItem, Select, Typography } from '@mui/material'
+import { Card, CardContent, TextField } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { trackSelfDescribingEvent } from '@snowplow/browser-tracker'
 
-import { ModalTextField, createModalInput } from './ModalTextField'
 import {
-  DocsTrackerField,
+  prependProtocol,
   checkCollectorEndpoint,
-  docsTrackerFieldsSet,
   getAppIdError,
   getCollectorEndpointError,
   getDocsTrackerNamespace,
-  newDocsTrackerFromAppIdAndCollectorUrl,
-  newDocsTrackerFromLocalStorage,
+  getDocsTrackerCollectorUrl,
+  getDocsTrackerAppId,
+  newDocsTrackerFromAppIdAndCollectorUrl
 } from './utils'
 import { EventWithNamespace, eventsToTrack } from './eventsToTrack'
+import styles from './styles.module.css'
+
+type EventComponentState = {
+  collectorUrl: string,
+  appId: string,
+  collectorUrlError: string,
+  appIdError: string,
+  sending: boolean
+}
 
 export default function EventComponent() {
-  const [isSending, setIsSending] = useState(false)
-  const [protocol, setProtocol] = useState('http://')
+  const [state, setState] = React.useState<EventComponentState>({
+    collectorUrl: '',
+    appId: 'test',
+    collectorUrlError: '',
+    appIdError: '',
+    sending: false
+  })
 
-  const collector = createModalInput(DocsTrackerField.COLLECTOR_ENDPOINT)
+  React.useEffect(() => {
+    setState((prev) => ({
+      ...prev,
+      collectorUrl: getDocsTrackerCollectorUrl() || '',
+      appId: getDocsTrackerAppId() || 'test'
+    }))
+  }, [])
 
-  const appId = createModalInput(DocsTrackerField.APP_ID, 'test')
+  async function sendEvents(e) {
+    e.preventDefault()
+    const collectorWithProtocol = prependProtocol(state.collectorUrl)
+
+    setState((prev) => ({
+      ...prev,
+      collectorUrl: collectorWithProtocol,
+      collectorUrlError: '',
+      appIdError: '',
+      sending: false
+    }))
+
+    const statusCode = await checkCollectorEndpoint(collectorWithProtocol)
+    const collectorUrlError = getCollectorEndpointError(collectorWithProtocol, statusCode)
+    const appIdError = getAppIdError(state.appId)
+
+    if (collectorUrlError !== '' || appIdError !== '') {
+      setState((prev) => ({...prev, collectorUrlError, appIdError}))
+      return
+    }
+
+    setState((prev) => ({...prev, sending: true}))
+
+    newDocsTrackerFromAppIdAndCollectorUrl(state.appId, collectorWithProtocol)
+    const namespace = getDocsTrackerNamespace()
+    eventsToTrack.forEach((e: EventWithNamespace) => e(namespace))
+
+    // Prevent the user from spamming the button
+    setTimeout(
+      () => setState((prev) => ({...prev, sending: false})),
+      1000 * (Math.random() + 1 * 0.5)
+    )
+
+    const collectorUrl = new URL(collectorWithProtocol)
+    trackSelfDescribingEvent(
+      {
+        event: {
+          schema:
+            'iglu:com.snowplowanalytics.telemetry/collector_telemetry/jsonschema/1-0-0',
+          data: {
+            method: 'POST',
+            appId: state.appId,
+            pageHost: window.location.host,
+            statusCode,
+            collectorHost: collectorUrl.host,
+            collectorPath: collectorUrl.pathname,
+          },
+        },
+      },
+      ['snplow5', 'biz1']
+    )
+  }
 
   return (
-    <Card
-      raised={false}
-      sx={{
-        p: 3,
-        pb: 0,
-        // Styling to match the alert component
-        borderRadius: 'var(--ifm-alert-border-radius)',
-        boxShadow: 'var(--ifm-alert-shadow)',
-      }}
-    >
-      <CardContent sx={{ p: 0, pb: 0 }}>
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault()
-
-            // Clear any previous errors
-            collector.setState((prev) => ({
-              ...prev,
-              error: '',
-            }))
-
-            appId.setState((prev) => ({
-              ...prev,
-              error: '',
-            }))
-
-            const statusCode = await checkCollectorEndpoint(
-              protocol + collector.state.value
-            )
-
-            const collectorEndpointError = getCollectorEndpointError(
-              protocol + collector.state.value,
-              statusCode
-            )
-
-            const appIdError = getAppIdError(appId.state.value)
-
-            if (collectorEndpointError === '' && appIdError === '') {
-              // If collectorUrl, appId, and the tracker ID are set in localStorage, make a tracker from them
-              if (docsTrackerFieldsSet()) {
-                newDocsTrackerFromLocalStorage()
-              } else {
-                newDocsTrackerFromAppIdAndCollectorUrl(
-                  appId.state.value,
-                  collector.state.value
-                )
-                collector.setState((prev) => ({
-                  ...prev,
-                  disabled: true,
-                }))
-
-                appId.setState((prev) => ({
-                  ...prev,
-                  disabled: true,
-                }))
-              }
-
-              setIsSending(true)
-
-              const namespace = getDocsTrackerNamespace()
-              eventsToTrack.forEach((e: EventWithNamespace) => e(namespace))
-
-              // Prevent the user from spamming the button
-              setTimeout(
-                () => setIsSending(false),
-                1000 * (Math.random() + 1 * 0.5)
-              )
-
-              const collectorUrl = new URL(collector.state.value)
-
-              trackSelfDescribingEvent(
-                {
-                  event: {
-                    schema:
-                      'iglu:com.snowplowanalytics.telemetry/collector_telemetry/jsonschema/1-0-0',
-                    data: {
-                      method: 'POST',
-                      appId: appId.state.value,
-                      pageHost: window.location.host,
-                      statusCode,
-                      collectorHost: collectorUrl.host,
-                      collectorPath: collectorUrl.pathname,
-                    },
-                  },
-                },
-                ['biz1']
-              )
-            } else {
-              collector.setState((prev) => ({
-                ...prev,
-                error: collectorEndpointError,
-              }))
-
-              appId.setState((prev) => ({
-                ...prev,
-                error: appIdError,
-              }))
-            }
-          }}
-        >
-          <Typography variant="h5" color="primary" sx={{ mb: 2 }}>
-            Test Events
-          </Typography>
-
-          <div style={{ display: 'flex', alignItems: 'baseline' }}>
-            <Select
-              defaultValue={'http://'}
-              sx={{ mr: 1 }}
-              value={protocol}
-              onChange={(e) => {
-                setProtocol(e.target.value)
-              }}
-            >
-              <MenuItem value="http://">http://</MenuItem>
-              <MenuItem value="https://">https://</MenuItem>
-            </Select>
-            <ModalTextField label="Collector Endpoint" modalInput={collector} />
-          </div>
-
-          <ModalTextField label="App ID" modalInput={appId} />
-
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-            }}
+    <Card raised={false} className={styles.sendEventsCard}>
+      <CardContent>
+        <form onSubmit={async(e) => sendEvents(e)}>
+          <TextField
+            value={state.collectorUrl}
+            onChange={(e) => setState((prev) => ({...prev, collectorUrl: e.target.value}))}
+            label="Collector URL"
+            error={Boolean(state.collectorUrlError)}
+            helperText={state.collectorUrlError}
+          />
+          <TextField
+            value={state.appId}
+            onChange={(e) => setState((prev) => ({...prev, appId: e.target.value}))}
+            label="Application ID"
+            error={Boolean(state.appIdError)}
+            helperText={state.appIdError}
+          />
+          <LoadingButton
+            variant="contained"
+            type="submit"
+            loading={state.sending}
+            loadingIndicator="Sending..."
           >
-            <LoadingButton
-              sx={{ ml: 1, mt: 1 }}
-              variant="contained"
-              type="submit"
-              loading={isSending}
-              loadingIndicator="Sending..."
-            >
-              Send me some events!
-            </LoadingButton>
-          </div>
+            Send me some events!
+          </LoadingButton>
         </form>
       </CardContent>
     </Card>

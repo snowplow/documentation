@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 :::note
-Snowplow ecommerce tracking was added in version 5.3.0. With the addition of these new ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events.
+Snowplow ecommerce tracking was added in version 5.4.0. With the addition of these new ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events.
 :::
 
 The Snowplow ecommerce tracking APIs enable you to track events from your ecommerce store on the web ([Javascript](docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/index.md) and [browser](docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/plugins/snowplow-ecommerce/index.md) trackers) as well as mobile apps. For the web, a complete setup journey, including data modeling, is showcased on the [Ecommerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).
@@ -167,7 +167,12 @@ tracker.track(event)
   <TabItem value="android" label="Android (Kotlin)">
 
 ```kotlin
-val product = ProductEntity(id = "plow2", category = "snow.clearance.ploughs.large", currency = "NOK", price = 5000)
+val product = ProductEntity(
+  id = "plow2", 
+  category = "snow.clearance.ploughs.large", 
+  currency = "NOK", 
+  price = 5000
+)
 val event = ProductViewEvent(product)
 
 tracker.track(event)
@@ -178,10 +183,10 @@ tracker.track(event)
 
 ```java
 ProductViewEvent event = new ProductViewEvent(new ProductEntity(
-  "plow2", // id
-  "snow.clearance.ploughs.large",  // category
-  "NOK", // currency
-  5000 // price
+    "plow2", // id
+    "snow.clearance.ploughs.large",  // category
+    "NOK", // currency
+    5000 // price
   )
 ); 
 
@@ -199,7 +204,12 @@ Tracking one or more products being added to a cart.
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let product = ProductEntity(id: "productId", category: "clothes/shirts", currency: "EUR", price: 100.50)
+let product = ProductEntity(
+  id: "productId", 
+  category: "clothes/shirts", 
+  currency: "EUR", 
+  price: 100.50
+)
 let cart = CartEntity(totalValue: 200, currency: "EUR")
 let event = AddToCartEvent(products: [product], cart: cart)
 
@@ -630,7 +640,7 @@ tracker.track(event)
 
 ```java
 PromotionEntity promotion = new PromotionEntity("promoId");
-ProductViewEvent event = new PromotionViewEvent(promotion);
+PromotionViewEvent event = new PromotionViewEvent(promotion);
 
 tracker.track(event);
 ```

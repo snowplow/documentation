@@ -4,11 +4,9 @@ slug: "/"
 sidebar_position: 0
 ---
 
-```mdx-code-block
-import Head from '@docusaurus/Head'
-```
-
-<Head><meta name='zd-site-verification' content='fly2zzu1qcv51s1ma9jds' /></Head>
+<head>
+  <meta name='zd-site-verification' content='fly2zzu1qcv51s1ma9jds' />
+</head>
 
 Hi! Welcome to Snowplow, the world’s largest developer-first engine for collecting behavioral data.  
 

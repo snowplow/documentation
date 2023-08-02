@@ -47,7 +47,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | <h3>Collaborate across multiple teams</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud :new:](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
 | Seats | N/A | unlimited | unlimited |
 | [Data structures tooling & API](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) | ❌ | ✅<br/>_(UI only)_ | ✅ |
-| [Tracking scenarios](/docs/understanding-tracking-design/tracking-plans/index.md) | ❌ | ✅ | ✅ |
+| [Tracking scenarios](/docs/understanding-tracking-design/tracking-plans/index.md) | ❌ | ✅<br/>_(UI only)_ | ✅ |
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md) | ❌ | _coming soon_ | ✅ |
 | [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ❌ | ❌ | ✅ |
 | <h3>Deployment & security</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud :new:](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) | 

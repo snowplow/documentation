@@ -22,3 +22,11 @@
 .sendEventsCard form > div {
   margin-bottom: 1em;
 }
+
+.sendEventsCard code {
+  max-height: 20em;
+}
+
+.sendEventsCard iframe {
+  display: none;
+}

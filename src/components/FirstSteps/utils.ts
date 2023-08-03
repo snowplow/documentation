@@ -1,131 +1,10 @@
-import { v4 as uuidv4 } from 'uuid'
-import { newTracker } from '@snowplow/browser-tracker'
-
-/*
- * Set the global namespace for snowplow so typescript doesn't complain
- */
-declare global {
-  interface Window {
-    snowplow: any
-  }
-}
-
-export const LIVE_SNIPPET_TRACKER_PREFIX = 'snowplowDocs-'
-/*
- * The fields that are stored in localStorage for the live snippet tracker
- * APP_ID and COLLECTOR_URL are self-explanatory, but the ID is a random UUID
- * that is generated when the user changes/sets the Collector URL or App ID
- * in the live snippet tracker settings.
- *
- * This allows the user to edit the Collector endpoint and App ID
- * as many times as they want, as we have to create a new tracker
- * every time they do so
- */
-export enum DocsTrackerField {
-  ID = 'trackerId',
-  APP_ID = 'appId',
-  COLLECTOR_ENDPOINT = 'collectorEndpoint',
-}
-
-/*
- * Returns the tracker ID in localStorage for the live snippet tracker
- */
-export function getDocsTrackerTrackerId(): string | null {
-  return window.localStorage.getItem(DocsTrackerField.ID)
-}
-
-/*
- * Returns the app ID in localStorage for the live snippet tracker
- */
-export function getDocsTrackerAppId(): string | null {
-  return window.localStorage.getItem(DocsTrackerField.APP_ID)
-}
-
-/*
- * Returns the collector URL in localStorage for the live snippet tracker
- */
-export function getDocsTrackerCollectorUrl(): string | null {
-  return window.localStorage.getItem(DocsTrackerField.COLLECTOR_ENDPOINT)
-}
-
-/*
- * Sets the required fields in localStorage for the live snippet tracker
- */
-export function setDocsTrackerFields({
-  trackerId,
-  appId,
-  collectorEndpoint,
-}: {
-  trackerId: string
-  appId: string
-  collectorEndpoint: string
-}) {
-  window.localStorage.setItem(DocsTrackerField.ID, trackerId)
-  window.localStorage.setItem(DocsTrackerField.APP_ID, appId)
-  window.localStorage.setItem(
-    DocsTrackerField.COLLECTOR_ENDPOINT,
-    collectorEndpoint
-  )
-}
-
-/*
- * Returns true if all the required fields are set in localStorage
- */
-export function docsTrackerFieldsSet(): boolean {
-  return Boolean(
-    getDocsTrackerTrackerId() &&
-      getDocsTrackerAppId() &&
-      getDocsTrackerCollectorUrl()
-  )
-}
-
-/*
- * Returns the namespace for the live snippet tracker
- */
-export function getDocsTrackerNamespace(): string {
-  return LIVE_SNIPPET_TRACKER_PREFIX + getDocsTrackerTrackerId()
-}
-
-/*
- * Creates a new tracker ID and stores it in localStorage
- * @returns the new tracker ID
- */
-export function createDocsTrackerTrackerNamespace(uuid): string {
-  window.localStorage.setItem(DocsTrackerField.ID, uuid)
-  return LIVE_SNIPPET_TRACKER_PREFIX + uuid
-}
-
-/*
- * Creates a new tracker with the fields in localStorage
- */
-export function newDocsTrackerFromLocalStorage() {
-  if (!docsTrackerFieldsSet()) {
-    console.warn('Docs tracker fields not set in localStorage')
-  } else {
-    newTracker(getDocsTrackerNamespace(), getDocsTrackerCollectorUrl()!!, {
-      appId: getDocsTrackerAppId()!!,
-      bufferSize: 1,
-    })
-  }
-}
-
-/*
- * Creates a new tracker with the given app ID and collector URL
- * Sets APP_ID, COLLECTOR_URL and ID in localStorage
- */
-export function newDocsTrackerFromAppIdAndCollectorUrl(
-  appId: string,
-  collectorEndpoint: string
-) {
-  const trackerId: string = uuidv4()
-  setDocsTrackerFields({ appId, collectorEndpoint, trackerId })
-  newTracker(createDocsTrackerTrackerNamespace(trackerId), collectorEndpoint, {
-    appId,
-    bufferSize: 1,
-  })
-}
-
 export function prependProtocol(s: string) {
+  // if there is at least some sign of a protocol,
+  // it’s better to keep it and have an invalid url
+  // rather than interfere with the user typing
+  if (s.startsWith('http')) return s
+
+  // if there is no protocol at all, let’s add it
   const parts = s.split('://')
   return parts.length < 2 ? 'https://' + s : s
 }
@@ -168,7 +47,7 @@ export function getAppIdError(appId: string): string {
 
 export async function checkCollectorEndpoint(url: string): Promise<number> {
   try {
-    const resp = await fetch(url + '/health')
+    const resp = await fetch(url + '/health', { mode: 'no-cors' })
     if (resp.status === 200) {
       return resp.status
     }

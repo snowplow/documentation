@@ -12,21 +12,29 @@ function isValidUrl(s: string) {
   }
 }
 
-export async function getCollectorEndpointError(url: string): Promise<string> {
+type CollectorEndpointError = {
+  collectorUrlError: string,
+  statusCode: number
+}
+
+export async function getCollectorEndpointError(url: string, appId: string): Promise<CollectorEndpointError> {
   if (url === '') {
-    return 'Required'
+    return {collectorUrlError: 'Required', statusCode: 0}
   }
   if (!url.startsWith('http://') && !url.startsWith('https://')) {
-    return 'Please specify a valid protocol (usually, https://)'
+    return {collectorUrlError: 'Please specify a valid protocol (usually, https://)', statusCode: 0}
   }
   if (!isValidUrl(url)) {
-    return 'Please enter a valid URL'
+    return {collectorUrlError: 'Please enter a valid URL', statusCode: 0}
   }
-  const status = await(checkCollectorEndpoint(url))
+  const status = await(checkCollectorEndpoint(url, appId))
   if (status !== 200) {
-    return 'Invalid response from the Collector. Please ensure the URL is correct and the Collector is running'
+    return {
+      collectorUrlError: 'Invalid response from the Collector. Please ensure the URL is correct and the Collector is running',
+      statusCode: status
+    }
   } else {
-    return ''
+    return {collectorUrlError: '', statusCode: 200}
   }
 }
 
@@ -38,7 +46,7 @@ export function getAppIdError(appId: string): string {
   }
 }
 
-async function checkCollectorEndpoint(url: string): Promise<number> {
+async function checkCollectorEndpoint(url: string, appId: string): Promise<number> {
   try {
     const resp = await fetch(url + '/health', { mode: 'no-cors' })
     if (resp.status === 200) {
@@ -47,7 +55,7 @@ async function checkCollectorEndpoint(url: string): Promise<number> {
   } catch (_e) {}
 
   try {
-    const resp = await fetch(url + '/com.snowplowanalytics.snowplow/i')
+    const resp = await fetch(`${url}/i?e=pv&aid=${appId}`)
 
     return resp.status
   } catch (_e) {

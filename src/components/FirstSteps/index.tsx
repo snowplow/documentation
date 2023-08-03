@@ -2,7 +2,6 @@ import React from 'react'
 
 import { Card, CardContent, TextField } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
-import CodeBlock from '@theme/CodeBlock'
 import { trackSelfDescribingEvent } from '@snowplow/browser-tracker'
 
 import {
@@ -67,11 +66,36 @@ export default function EventComponent() {
       sending: false
     }))
 
-    const collectorUrlError = await getCollectorEndpointError(state.collectorUrl)
     const appIdError = getAppIdError(state.appId)
+    if (appIdError) {
+      setState((prev) => ({...prev, appIdError}))
+      return
+    }
 
-    if (collectorUrlError !== '' || appIdError !== '') {
-      setState((prev) => ({...prev, collectorUrlError, appIdError}))
+    const { collectorUrlError, statusCode } = await(
+      getCollectorEndpointError(state.collectorUrl, state.appId)
+    )
+
+    if (statusCode > 0) {
+      // as long as the URL is valid, we log it — even if the collector does not respond
+      const collectorUrl = new URL(state.collectorUrl)
+      trackSelfDescribingEvent({
+        event: {
+          schema:
+            'iglu:com.snowplowanalytics.telemetry/collector_telemetry/jsonschema/1-0-0',
+          data: {
+            method: 'POST',
+            appId: state.appId,
+            statusCode,
+            collectorHost: collectorUrl.host,
+            collectorPath: collectorUrl.pathname,
+          },
+        },
+      })
+    }
+
+    if (collectorUrlError !== '') {
+      setState((prev) => ({...prev, collectorUrlError}))
       return
     }
 
@@ -87,22 +111,6 @@ export default function EventComponent() {
       () => setState((prev) => ({...prev, sending: false})),
       1000 * (Math.random() + 1 * 0.5)
     )
-
-    const collectorUrl = new URL(state.collectorUrl)
-    trackSelfDescribingEvent({
-      event: {
-        schema:
-          'iglu:com.snowplowanalytics.telemetry/collector_telemetry/jsonschema/1-0-0',
-        data: {
-          method: 'POST',
-          appId: state.appId,
-          pageHost: window.location.host,
-          statusCode,
-          collectorHost: collectorUrl.host,
-          collectorPath: collectorUrl.pathname,
-        },
-      },
-    })
   }
 
   return (
@@ -123,10 +131,6 @@ export default function EventComponent() {
             error={Boolean(state.appIdError)}
             helperText={state.appIdError}
           />
-          <details>
-            <summary>The tracking code for the events</summary>
-            <CodeBlock language="javascript">{sampleTrackingCode}</CodeBlock>
-          </details>
           <LoadingButton
             variant="contained"
             type="submit"

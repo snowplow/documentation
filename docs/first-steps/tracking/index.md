@@ -8,7 +8,9 @@ description: "Tracking your first Snowplow events"
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
 import EventComponent from '@site/src/components/FirstSteps';
+import { sampleTrackingCode } from '@site/src/components/FirstSteps/sampleTrackingCode';
 ```
 
 Once your pipeline is set up, you will want to send some events to it. Here’s an overview of the different options.
@@ -55,6 +57,12 @@ If you have not yet configured an SSL certificate and a custom domain name for y
 
   </TabItem>
 </Tabs>
+
+<details>
+<summary>Which events are sent?</summary>
+We use the following tracking code:
+<CodeBlock language="javascript">{sampleTrackingCode}</CodeBlock>
+</details>
 
 <EventComponent />
 

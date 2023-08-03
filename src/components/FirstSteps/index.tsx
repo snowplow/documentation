@@ -6,8 +6,6 @@ import CodeBlock from '@theme/CodeBlock'
 import { trackSelfDescribingEvent } from '@snowplow/browser-tracker'
 
 import {
-  prependProtocol,
-  checkCollectorEndpoint,
   getAppIdError,
   getCollectorEndpointError
 } from './utils'
@@ -69,8 +67,7 @@ export default function EventComponent() {
       sending: false
     }))
 
-    const statusCode = await checkCollectorEndpoint(state.collectorUrl)
-    const collectorUrlError = getCollectorEndpointError(state.collectorUrl, statusCode)
+    const collectorUrlError = await getCollectorEndpointError(state.collectorUrl)
     const appIdError = getAppIdError(state.appId)
 
     if (collectorUrlError !== '' || appIdError !== '') {
@@ -114,7 +111,7 @@ export default function EventComponent() {
         <form onSubmit={async(e) => sendEvents(e)}>
           <TextField
             value={state.collectorUrl}
-            onChange={(e) => setState((prev) => ({...prev, collectorUrl: prependProtocol(e.target.value)}))}
+            onChange={(e) => setState((prev) => ({...prev, collectorUrl: e.target.value}))}
             label="Collector URL"
             error={Boolean(state.collectorUrlError)}
             helperText={state.collectorUrlError}

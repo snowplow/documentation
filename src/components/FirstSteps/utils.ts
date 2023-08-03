@@ -1,15 +1,4 @@
-export function prependProtocol(s: string) {
-  // if there is at least some sign of a protocol,
-  // it’s better to keep it and have an invalid url
-  // rather than interfere with the user typing
-  if (s.startsWith('http')) return s
-
-  // if there is no protocol at all, let’s add it
-  const parts = s.split('://')
-  return parts.length < 2 ? 'https://' + s : s
-}
-
-export function isValidUrl(s: string) {
+function isValidUrl(s: string) {
   // new URL will error if empty string
   if (s === '') {
     return true
@@ -23,14 +12,18 @@ export function isValidUrl(s: string) {
   }
 }
 
-export function getCollectorEndpointError(url: string, status: number): string {
+export async function getCollectorEndpointError(url: string): Promise<string> {
   if (url === '') {
     return 'Required'
   }
-
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    return 'Please specify a valid protocol (usually, https://)'
+  }
   if (!isValidUrl(url)) {
     return 'Please enter a valid URL'
-  } else if (status !== 200) {
+  }
+  const status = await(checkCollectorEndpoint(url))
+  if (status !== 200) {
     return 'Invalid response from the Collector. Please ensure the URL is correct and the Collector is running'
   } else {
     return ''
@@ -45,7 +38,7 @@ export function getAppIdError(appId: string): string {
   }
 }
 
-export async function checkCollectorEndpoint(url: string): Promise<number> {
+async function checkCollectorEndpoint(url: string): Promise<number> {
   try {
     const resp = await fetch(url + '/health', { mode: 'no-cors' })
     if (resp.status === 200) {

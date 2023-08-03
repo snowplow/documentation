@@ -7,6 +7,7 @@ description: "An overview of the available options for storing Snowplow data in 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md";
 ```
 
 Data warehouses and data lakes are primary destinations for Snowplow data. For other options, see the [destinations overview](/docs/understanding-your-pipeline/destinations/index.md) page.
@@ -34,11 +35,16 @@ Data warehouses and data lakes are primary destinations for Snowplow data. For o
 | Postgres | Streaming | [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | Not recommended for production use |
 
   </TabItem>
-</Tabs>
+    <TabItem value="azure" label="Azure 🧪">
 
-:::note
-Our warehouse loaders pick up the data from [Enrich Kinesis](/docs/pipeline-components-and-applications/enrichment-components/enrich-kinesis/index.md) on AWS and [Enrich Pubsub](/docs/pipeline-components-and-applications/enrichment-components/enrich-pubsub/index.md) on GCP. Both [Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) and [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) allow you to use a streaming technology other than Kinesis and Pub/Sub, but if you go that route, you will need to define your own process to load your enriched data into the warehouse.
-:::
+<AzureExperimental/>
+
+| Destination | Type | Loader application | Status |
+| --- | --- | --- |
+| Snowflake | Micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Early release |
+
+  </TabItem>
+</Tabs>
 
 ### Data lake loaders
 

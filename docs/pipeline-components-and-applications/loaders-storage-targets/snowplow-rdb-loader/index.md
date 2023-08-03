@@ -37,7 +37,7 @@ The transformer app currently comes in two flavours: a Spark job that processes 
 
 The process of transforming the data is not dependent on the storage target. Which one is best for your use case depends on three factors:
 
-- cloud provider you want to use (AWS or GCP)
+- cloud provider you want to use (AWS, GCP or Azure)
 - your expected data volume
 - how much importance you place on deduplicating the data before loading it into the data warehouse.
 
@@ -47,11 +47,13 @@ If you want to run the transformer on AWS, you can use Spark transformer (`snowp
 
 If you want to run the transformer on GCP, you can use Transformer Pubsub (`snowplow-transformer-pubsub`).
 
+If you want to run the transformer on Azure, you can use Transformer Kafka (`snowplow-transformer-kafka`).
+
 ### Based on expected data volume
 
 The Spark transformer (`snowplow-transformer-batch`) is the best choice for big volumes, as the work can be split across multiple workers. However, the need to run it on EMR creates some overhead that is not justified for low-volume pipelines.
 
-The stream transformer (`snowplow-transformer-kinesis` and `snowplow-transformer-pubsub`) is a much leaner alternative and suggested for use with low volumes that can be comfortably processed on a single node. However, multiple stream transformers can be run parallel therefore it is possible to process big data volume with stream transformer too.
+The stream transformer (`snowplow-transformer-kinesis`, `snowplow-transformer-pubsub` and `snowplow-transformer-kafka`) is a much leaner alternative and suggested for use with low volumes that can be comfortably processed on a single node. However, multiple stream transformers can be run parallel therefore it is possible to process big data volume with stream transformer too.
 
 To make the best choice, consider:
 
@@ -78,6 +80,6 @@ For loading into **Databricks**, use the `snowplow-rdb-loader-databricks` artifa
 
 The applications communicate through messages.
 
-The transformer consumes enriched tsv-formatted Snowplow events from S3 (AWS) or stream (AWS and GCP). It writes its output to blob storage (S3 or GCS). Once it's finished processing a batch of data, it issues a message with details about the run.
+The transformer consumes enriched tsv-formatted Snowplow events from S3 (AWS) or stream (AWS, GCP and Azure). It writes its output to blob storage (S3, GCS or Azure Blob Storage). Once it's finished processing a batch of data, it issues a message with details about the run.
 
 The loader consumes a stream of these messages and uses them to determine what data needs to be loaded. It issues the necessary SQL commands to the storage target.

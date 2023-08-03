@@ -8,61 +8,47 @@ sidebar_position: 20
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 import AutoSchemaCreation from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/_automatic-schema-creation.md';
+import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md";
 ```
 
-It is possible to run Snowflake Loader on both AWS and GCP.
+It is possible to run Snowflake Loader on AWS, GCP and Azure.
 
-### Running on AWS
-
-There are two ways to set up the necessary Snowflake resources and run the loader on AWS:
-
-- using our dedicated open source Terraform modules to create the resources and deploy the loader on EC2
-- creating the resources and running the application manually.
-
-We recommend the first way.
-
-### Running on GCP
-
-At the moment, terraform modules for deploying Snowflake Loader on GCP aren't implemented. Therefore necessary Snowflake resources needs to be created and application needs to be deployed manually.
-
-## Using the Terraform modules (for AWS)
-
-### Requirements
-
-- Terraform >= 1.0.0
-- [`terraform-aws-snowflake-loader-ec2` module](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest)
-
-### Usage
-
-If you have an existing pipeline you should be able to attach the loader to an existing Enriched Kinesis stream following the documentation found [here](https://github.com/snowplow-devops/terraform-aws-snowflake-loader-ec2#usage).
-
-We also have full pipeline deployment examples [here](https://github.com/snowplow/quickstart-examples).
-
-## Manual setup and deployment
+<AzureExperimental/>
 
 ### Setting up Snowflake
 
-The following resources need to be created:
+You can use the steps outlined in our [quick start guide](/docs/getting-started-on-snowplow-open-source/quick-start/index.md?warehouse=snowflake#prepare-the-destination) to create most of the necessary Snowflake resources.
 
-- Snowflake loader [user](https://docs.snowflake.com/en/sql-reference/sql/create-user.html)
-- Snowflake loader [role](https://docs.snowflake.com/en/sql-reference/sql/create-role.html)
-- Snowflake [warehouse](https://docs.snowflake.com/en/sql-reference/sql/create-warehouse.html)
-- Snowflake [database](https://docs.snowflake.com/en/sql-reference/sql/create-database.html)
-- Snowflake [storage integration](https://docs.snowflake.com/en/sql-reference/sql/create-storage-integration.html)
-- Snowflake [file format](https://docs.snowflake.com/en/sql-reference/sql/create-file-format.html)
-- Snowflake [stage](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html) to load transformed events.
+There are two different authentication methods with Snowflake Loader:
+* With the `TempCreds` method, there are no additional Snowflake resources needed.
+* With the `NoCreds` method, the Loader needs a Snowflake stage.
 
-<AutoSchemaCreation name="Snowflake" grantDocs="https://docs.snowflake.com/en/sql-reference/sql/grant-privilege" />
+This choice is controlled by the `loadAuthMethod` [configuration setting](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md#snowflake-loader-storage-section).
 
-#### Creating Snowflake stage for transformed events
+:::note
 
-The Snowflake stage is the most complicated one to create from the resources listed above.
+For GCP pipelines, only the `NoCreds` method is available.
 
-To create a Snowflake stage, you need a Snowflake database, Snowflake schema, Snowflake storage integration, Snowflake file format, and the blob storage (S3 or GCS) path to the transformed events bucket.
+:::
+
+<details>
+<summary>Using the <code>NoCreds</code> method</summary>
+
+First, create a Snowflake stage. For that, you will need a Snowflake database, Snowflake schema, Snowflake storage integration, Snowflake file format, and the path to the transformed events bucket (in S3, GCS or Azure Blob Storage).
 
 You can follow [this tutorial](https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration.html) to create the storage integration.
 
 Assuming you created the other required resources for it, you can create the Snowflake stage by following [this document](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html).
+
+Finally, use the `transformedStage` [configuration setting](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md#snowflake-loader-storage-section) to point the loader to your stage.
+
+</details>
+
+### Running the loader
+
+There are dedicated terraform modules for deploying Snowflake Loader on [AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest) and [Azure](https://github.com/snowplow-devops/terraform-azurerm-snowflake-loader-vmss). You can see how they are used in our full pipeline deployment examples [here](/docs/getting-started-on-snowplow-open-source/quick-start/index.md).
+
+We don't have a terraform module for deploying Snowflake Loader on GCP yet. Therefore, it needs to be deployed manually at the moment.
 
 ### Downloading the artifact
 
@@ -81,6 +67,7 @@ The loader takes two configuration files:
 |-|-|
 |[aws/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/snowflake.config.minimal.hocon)|[aws/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/snowflake.config.reference.hocon)|
 |[gcp/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.minimal.hocon)|[gcp/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.reference.hocon)|
+|[azure/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/azure/snowflake.config.minimal.hocon)|[azure/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/azure/snowflake.config.reference.hocon)|
 
 For details about each setting, see the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md).
 

@@ -12,8 +12,9 @@ The configuration reference pages for previous versions can be found [here](/doc
 |-|-|
 |[aws/redshift.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/redshift.config.minimal.hocon)|[aws/redshift.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/redshift.config.reference.hocon)|
 |[aws/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/snowflake.config.minimal.hocon)|[aws/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/snowflake.config.reference.hocon)|
-|[gcp/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.minimal.hocon)|[gcp/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.reference.hocon)|
 |[aws/databricks.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/databricks.config.minimal.hocon)|[aws/databricks.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/aws/databricks.config.reference.hocon)|
+|[gcp/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.minimal.hocon)|[gcp/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.reference.hocon)|
+|[azure/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/azure/snowflake.config.minimal.hocon)|[azure/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/azure/snowflake.config.reference.hocon)|
 
 All applications use a common module for core functionality, so only the `storage` sections are different in their config.
 
@@ -117,6 +118,19 @@ Only Snowflake Loader can be run on GCP at the moment.
 |-|-|
 |`messageQueue.type`|Type of the message queue. It should be `pubsub` when application is run on GCP.|
 |`messageQueue.subscription`|Required. The name of the Pubsub subscription used by the transformer and loader to communicate.|
+
+## Azure specific settings
+
+Only Snowflake Loader can be run on Azure at the moment.
+
+|Parameter|Description|
+|-|-|
+|`blobStorageEndpoint`|Endpoint of Azure Blob Storage container that contains transformer's output.|
+|`azureVaultName`|Name of the Azure Key Vault where application secrets are stored. Required if secret store is used in `storage.password` field.|
+|`messageQueue.type`|Type of the message queue. It should be `kafka` when application is run on Azure.|
+|`messageQueue.topicName`|Name of the Kafka topic used to communicate with Transformer.|
+|`messageQueue.bootstrapServers`|A list of host:port pairs to use for establishing the initial connection to the Kafka cluster.|
+|`messageQueue.consumerConf`|Optional. Kafka consumer configuration. See https://kafka.apache.org/documentation/#consumerconfigs for all properties.|
 
 ## Common loader settings
 

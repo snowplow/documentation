@@ -10,7 +10,7 @@ flowchart LR
   collect{{"<b>Collector</b>\n<i>stream-collector app</i>\n(${props.compute})"}}
   enrich{{"<b>Enrich</b>\n<i>enrich-${props.stream.toLowerCase()} app</i>\n(${props.compute})"}}
   iglu{{"<b>Iglu Server</b>\n(${props.compute})"}}
-  igludb[("<b>Iglu Database</b>\n(RDS)")]
+  igludb[("<b>Iglu Database</b>\n(${props.igludb})")]
   bad[["<b>Bad Stream</b>\n(${props.stream})"]]
   ${props.warehouse == 'Postgres' ?
     `loader{{"<b>Postgres Loader</b>\n(${props.compute})"}}` :

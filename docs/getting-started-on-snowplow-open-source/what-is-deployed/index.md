@@ -35,22 +35,22 @@ You can very easily edit the script or run each of the Terraform modules indepen
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="postgres" label="Postgres" default>
 
-<Diagram cloud="aws" warehouse="Postgres" compute="EC2" stream="Kinesis" bucket="S3"/>
+<Diagram cloud="aws" warehouse="Postgres" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
 
   </TabItem>
   <TabItem value="redshift" label="Redshift">
 
-<Diagram cloud="aws" warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3"/>
+<Diagram cloud="aws" warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
 
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
-<Diagram cloud="aws" warehouse="Snowflake" compute="EC2" stream="Kinesis" bucket="S3"/>
+<Diagram cloud="aws" warehouse="Snowflake" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
 
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
-<Diagram cloud="aws" warehouse="Databricks" compute="EC2" stream="Kinesis" bucket="S3"/>
+<Diagram cloud="aws" warehouse="Databricks" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
 
   </TabItem>
 </Tabs>
@@ -62,12 +62,12 @@ You can very easily edit the script or run each of the Terraform modules indepen
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="postgres" label="Postgres" default>
 
-<Diagram cloud="gcp" warehouse="Postgres" compute="CE" stream="Pub/Sub" bucket="GCS"/>
+<Diagram cloud="gcp" warehouse="Postgres" compute="CE" stream="Pub/Sub" bucket="GCS" igludb="CloudSQL"/>
 
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
 
-<Diagram cloud="gcp" warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS"/>
+<Diagram cloud="gcp" warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS" igludb="CloudSQL"/>
 
   </TabItem>
 </Tabs>
@@ -78,7 +78,7 @@ You can very easily edit the script or run each of the Terraform modules indepen
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="snowflake" label="Snowflake" default>
 
-<Diagram cloud="azure" warehouse="Snowflake" compute="VMSS" stream="Event Hubs" bucket="Azure Blob"/>
+<Diagram cloud="azure" warehouse="Snowflake" compute="VMSS" stream="Event Hubs" bucket="Azure Blob" igludb="Postgres"/>
 
   </TabItem>
 </Tabs>

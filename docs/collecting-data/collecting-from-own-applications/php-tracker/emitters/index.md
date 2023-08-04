@@ -22,6 +22,11 @@ The Sync emitter is a very basic synchronous emitter which supports both `GET`�
 
 By default, this emitter uses the Request type POST, HTTP and a buffer size of 50.
 
+As of version 0.7.0, the emitter has the capability to retry failed requests.
+In case connection to the collector can't be estabilished or the request fails with a 4xx (except for 400, 401, 403, 410, 422) or 5xx status code, the same request is retried.
+The number of times a request should be retried is configurable but defaults to 1.
+There is a back-off period between subsequent retries, which starts with 100ms (configurable) and increases exponentially.
+
 Example emitter creation:
 
 ```php
@@ -33,7 +38,7 @@ Whilst you can force the buffer size to be greater than 1 for a GET Request; it 
 Constructor:
 
 ```php
-public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size = NULL, $debug = false)
+public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size = NULL, $debug = false, $max_retry_attempts = NULL, $retry_backoff_ms = NULL)
 ```
 
 Arguments:
@@ -45,10 +50,17 @@ Arguments:
 | `$type` | Request Type (POST or GET) | No | String |
 | `$buffer_size` | Amount of events to store before flush | No | Int |
 | `$debug` | Whether or not to log errors | No | Boolean |
+| `$max_retry_attempts` | The maximum number of times to retry a request. Defaults to 1. | No | Int |
+| `$retry_backoff_ms` | The number of milliseconds to backoff before retrying a request. Defaults to 100ms, increases exponentially in subsequent retries. | No | Int |
 
 ### Socket
 
 The Socket emitter allows for the much faster transmission of Requests to the collector by allowing us to write data directly to the HTTP socket. However, this solution is still, in essence, a synchronous process and will block the execution of the main script.
+
+As of version 0.7.0, the emitter has the capability to retry failed requests.
+In case connection to the collector can't be estabilished or the request fails with a 4xx (except for 400, 401, 403, 410, 422) or 5xx status code, the same request is retried.
+The number of times a request should be retried is configurable but defaults to 1.
+There is a back-off period between subsequent retries, which starts with 100ms (configurable) and increases exponentially.
 
 Example Emitter creation:
 
@@ -61,7 +73,7 @@ Whilst you can force the buffer size to be greater than 1 for a GET Request; it 
 Constructor:
 
 ```php
-public function __construct($uri, $ssl = NULL, $type = NULL, $timeout = NULL, $buffer_size = NULL, $debug = NULL)
+public function __construct($uri, $ssl = NULL, $type = NULL, $timeout = NULL, $buffer_size = NULL, $debug = NULL, $max_retry_attempts = NULL, $retry_backoff_ms = NULL)
 ```
 
 Arguments:
@@ -74,12 +86,18 @@ Arguments:
 | `$timeout` | Socket Timeout Limit | No | Int or Float |
 | `$buffer_size` | Amount of events to store before flush | No | Int |
 | `$debug` | Whether or not to log errors | No | Boolean |
+| `$max_retry_attempts` | The maximum number of times to retry a request. Defaults to 1. | No | Int |
+| `$retry_backoff_ms` | The number of milliseconds to backoff before retrying a request. Defaults to 100ms, increases exponentially in subsequent retries. | No | Int |
 
 ### Curl
 
 The Curl Emitter allows us to have the closest thing to native asynchronous requests in PHP. The curl emitter uses the `curl_multi_init` resource which allows us to send any number of requests asynchronously. This garners quite a performance gain over the sync and socket emitters as we can now send more than one request at a time.
 
 On top of this, we are also using a modified version of this **[Rolling Curl library](https://github.com/joshfraser/rolling-curl)** for the actual sending of the curl requests. This allows for a more efficient implementation of asynchronous curl requests as we can now have multiple requests sending at the same time, and in addition as soon as one is done a new request is started.
+
+:::note
+The collector does not retry failed requests to the collector. Failed requests to the collector (e.g., due to it being not reachable) result in lost events.
+:::
 
 Example Emitter creation:
 
@@ -132,6 +150,10 @@ The File Emitter is the only true non-blocking solution. The File Emitter works 
 All of the worker processes are created as background processes so none of them will delay the execution of the main script. Currently, they are configured to look for files inside created worker folders until there are none left and they hit their `timeout` limit, at which point the process will kill itself.
 
 If the worker for any reason fails to successfully send a request it will rename the entire file to `failed` and leave it in the `/temp/failed-logs/` folder.
+
+:::note
+The collector does not retry failed requests to the collector. Failed requests to the collector (e.g., due to it being not reachable) result in lost events.
+:::
 
 Example Emitter creation:
 

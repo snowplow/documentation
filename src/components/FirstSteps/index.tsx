@@ -175,24 +175,17 @@ export default function EventComponent() {
           </form>
         </CardContent>
       </Card>
-      <Snackbar open={state.showNotification}>
-        <Alert
-          className={styles.notification}
-          variant="filled"
-          severity="success"
-        >
+      <Snackbar className={styles.notification} open={state.showNotification}>
+        <Alert variant="filled" severity="success">
           <AlertTitle>
             Events Sent to{' '}
             <span className={styles.notificationTextHighlight}>
               {state.collectorUrl}
+            </span>{' '}
+            with App ID{' '}
+            <span className={styles.notificationTextHighlight}>
+              {state.appId}
             </span>
-            <>
-              {' '}
-              with App ID{' '}
-              <span className={styles.notificationTextHighlight}>
-                {state.appId}
-              </span>
-            </>
           </AlertTitle>
         </Alert>
       </Snackbar>

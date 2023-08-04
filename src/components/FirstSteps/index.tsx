@@ -14,8 +14,6 @@ import { trackSelfDescribingEvent } from '@snowplow/browser-tracker'
 import { getAppIdError, getCollectorEndpointError } from './utils'
 import { sampleTrackingCode } from './sampleTrackingCode'
 import styles from './styles.module.css'
-import { Toast } from './toast'
-import { show } from 'cookie-though'
 
 type EventComponentState = {
   collectorUrl: string

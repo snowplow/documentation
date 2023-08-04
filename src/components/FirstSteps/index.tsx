@@ -161,11 +161,12 @@ export default function EventComponent() {
             {state.sent && (<Alert
               variant="filled"
               severity="success"
+              className={styles.notification}
               onClose={
                 () => setState((prev) => ({ ...prev, sent: null }))
               }>
-                Events sent to <strong>{state.sent.collectorUrl}</strong>{' '}
-                with Application ID <strong>{state.sent.appId}</strong>
+                Events sent to <code>{state.sent.collectorUrl}</code>{' '}
+                with Application ID <code>{state.sent.appId}</code>
             </Alert>)}
             <LoadingButton
               variant="contained"

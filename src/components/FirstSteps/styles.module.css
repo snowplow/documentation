@@ -30,3 +30,8 @@
 .sendEventsCard iframe {
   display: none;
 }
+
+.sendEventsCard .notification {
+  color: var(--ifm-alert-foreground-color);
+  background-color: var(--ifm-color-success-contrast-background);
+}

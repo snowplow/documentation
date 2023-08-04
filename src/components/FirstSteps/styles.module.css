@@ -1,0 +1,37 @@
+.sendEventsCard {
+  padding: 3px;
+  padding-bottom: 0;
+  margin-bottom: 1em;
+  border-radius: var(--ifm-alert-border-radius);
+  box-shadow: var(--ifm-alert-shadow);
+}
+
+.sendEventsCard > div:last-child {
+  padding: 16px;
+}
+
+.sendEventsCard form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sendEventsCard form button[type=submit] {
+  align-self: flex-end;
+}
+
+.sendEventsCard form > div {
+  margin-bottom: 1em;
+}
+
+.sendEventsCard code {
+  max-height: 20em;
+}
+
+.sendEventsCard iframe {
+  display: none;
+}
+
+.sendEventsCard .notification {
+  color: var(--ifm-alert-foreground-color);
+  background-color: var(--ifm-color-success-contrast-background);
+}

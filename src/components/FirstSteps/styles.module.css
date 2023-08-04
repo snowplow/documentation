@@ -15,7 +15,7 @@
   flex-direction: column;
 }
 
-.sendEventsCard form button {
+.sendEventsCard form button[type=submit] {
   align-self: flex-end;
 }
 
@@ -29,12 +29,4 @@
 
 .sendEventsCard iframe {
   display: none;
-}
-
-.notification > div {
-  background-color: var(--ifm-color-primary-light);
-}
-
-.notificationTextHighlight {
-  color: var(--ifm-color-primary-lightest);
 }

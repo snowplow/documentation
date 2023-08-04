@@ -2,10 +2,8 @@ import React from 'react'
 
 import {
   Alert,
-  AlertTitle,
   Card,
   CardContent,
-  Snackbar,
   TextField,
 } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
@@ -15,13 +13,18 @@ import { getAppIdError, getCollectorEndpointError } from './utils'
 import { sampleTrackingCode } from './sampleTrackingCode'
 import styles from './styles.module.css'
 
+type EventComponentNotification = {
+  collectorUrl: string,
+  appId: string
+}
+
 type EventComponentState = {
   collectorUrl: string
   appId: string
   collectorUrlError: string
   appIdError: string
   sending: boolean
-  showNotification: boolean
+  sent: EventComponentNotification | null
 }
 
 const SnowplowSandbox = (props) => (
@@ -55,7 +58,7 @@ export default function EventComponent() {
     collectorUrlError: '',
     appIdError: '',
     sending: false,
-    showNotification: false,
+    sent: null,
   })
 
   React.useEffect(() => {
@@ -68,38 +71,40 @@ export default function EventComponent() {
 
   async function sendEvents(e) {
     e.preventDefault()
+    const { collectorUrl, appId } = state
 
     setState((prev) => ({
       ...prev,
       collectorUrlError: '',
       appIdError: '',
       sending: false,
+      sent: null,
     }))
 
-    const appIdError = getAppIdError(state.appId)
+    const appIdError = getAppIdError(appId)
     if (appIdError) {
       setState((prev) => ({ ...prev, appIdError }))
       return
     }
 
     const { collectorUrlError, statusCode } = await getCollectorEndpointError(
-      state.collectorUrl,
-      state.appId
+      collectorUrl,
+      appId
     )
 
     if (statusCode > 0) {
       // as long as the URL is valid, we log it — even if the collector does not respond
-      const collectorUrl = new URL(state.collectorUrl)
+      const parsedCollectorUrl = new URL(collectorUrl)
       trackSelfDescribingEvent({
         event: {
           schema:
             'iglu:com.snowplowanalytics.telemetry/collector_telemetry/jsonschema/1-0-0',
           data: {
             method: 'POST',
-            appId: state.appId,
+            appId,
             statusCode,
-            collectorHost: collectorUrl.host,
-            collectorPath: collectorUrl.pathname,
+            collectorHost: parsedCollectorUrl.host,
+            collectorPath: parsedCollectorUrl.pathname,
           },
         },
       })
@@ -110,8 +115,8 @@ export default function EventComponent() {
       return
     }
 
-    window.localStorage.setItem('collectorUrl', state.collectorUrl)
-    window.localStorage.setItem('appId', state.appId)
+    window.localStorage.setItem('collectorUrl', collectorUrl)
+    window.localStorage.setItem('appId', appId)
 
     setState((prev) => ({ ...prev, sending: true }))
 
@@ -119,19 +124,14 @@ export default function EventComponent() {
 
     // Prevent the user from spamming the button
     const buttonTime = 1000 * (Math.random() + 1 * 0.5)
-    const notificationTime = buttonTime * 2
     setTimeout(
       () =>
         setState((prev) => ({
           ...prev,
           sending: false,
-          showNotification: true,
+          sent: { collectorUrl, appId },
         })),
       buttonTime
-    )
-    setTimeout(
-      () => setState((prev) => ({ ...prev, showNotification: false })),
-      notificationTime
     )
   }
 
@@ -158,6 +158,15 @@ export default function EventComponent() {
               error={Boolean(state.appIdError)}
               helperText={state.appIdError}
             />
+            {state.sent && (<Alert
+              variant="filled"
+              severity="success"
+              onClose={
+                () => setState((prev) => ({ ...prev, sent: null }))
+              }>
+                Events sent to <strong>{state.sent.collectorUrl}</strong>{' '}
+                with Application ID <strong>{state.sent.appId}</strong>
+            </Alert>)}
             <LoadingButton
               variant="contained"
               type="submit"
@@ -175,20 +184,6 @@ export default function EventComponent() {
           </form>
         </CardContent>
       </Card>
-      <Snackbar className={styles.notification} open={state.showNotification}>
-        <Alert variant="filled" severity="success">
-          <AlertTitle>
-            Events Sent to{' '}
-            <span className={styles.notificationTextHighlight}>
-              {state.collectorUrl}
-            </span>{' '}
-            with App ID{' '}
-            <span className={styles.notificationTextHighlight}>
-              {state.appId}
-            </span>
-          </AlertTitle>
-        </Alert>
-      </Snackbar>
     </>
   )
 }

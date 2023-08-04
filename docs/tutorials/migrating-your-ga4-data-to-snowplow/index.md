@@ -183,14 +183,16 @@ For example, the following inputs:
 | page_urlhost    | {{dbt_utils.get_url_host(field='page_url')}} |
 | geo_zipcode     | NULL        |
 | app_id          | CASE WHEN stream_id = '4271243942' THEN 'Snowplow' ELSE NULL END |
+| v_tracker       | 'ga4-1.0.0' |
 
 Will be inserted into the SQL code as follows:
 ```SQL
 ...
 regexp_extract(page_url, r'(.*?):') AS page_urlscheme,
 {{dbt_utils.get_url_host(field='page_url')}} AS page_urlhost,
-"NULL" AS geo_zipcode,
+NULL AS geo_zipcode,
 CASE WHEN stream_id = '4271243942' THEN 'Snowplow' ELSE NULL END AS app_id,
+'ga4-1.0.0' AS v_tracker,
 ...
 ```
 - Some Snowplow fields have been pre-extracted from the GA4 data to make the SQL more readable, and to make using these fields in further calculations easier. These are:
@@ -222,6 +224,8 @@ CASE WHEN stream_id = '4271243942' THEN 'Snowplow' ELSE NULL END AS app_id,
     
 The SQL that you input must conform to other strict requirements:
 - When creating or updating any of the mapping fields and using a dbt package, it must be written in the following format, including the curly braces and the package reference: `{{dbt_package.function('column_name')}}`, e.g. `{{dbt_utils.get_url_host('page_referrer')}}`.
+- If you wish to add a string, it must be wrapped in single quotes, e.g. `'string'`. See example in table above for `v_tracker`.
+
 
 ### Step 4 - Transform data
 This step uses the mapping created in the previous two steps and passes these to dbt. 

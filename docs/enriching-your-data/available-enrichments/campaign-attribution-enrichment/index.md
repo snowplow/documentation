@@ -6,12 +6,12 @@ sidebar_position: 4
 
 This enrichment can be used to link events to marketing campaigns, using the query string parameters.
 
-When using online marketing campaigns to drive traffic to our website, it is usually possible to find information in the query string parameters to identify the particular campaign, channel, medium and more.
+When using online marketing campaigns to drive traffic to our website, it is usually possible to find information in the query string parameters to identify the particular campaign, medium and more.
 
 A link for an online advertisement that brings users back to our site might look like:
 
 ```markup
-https://www.acme.com/spring_offer_product?utm_source=influencer&utm_medium=blog&utm_channel=web&utm_campaign=spring_offer
+https://www.acme.com/spring_offer_product?utm_source=influencer&utm_medium=blog&utm_campaign=spring_offer
 ```
 
 This could result in the following fields being added to the enrich event:
@@ -20,7 +20,6 @@ This could result in the following fields being added to the enrich event:
 |----------------|-----------------|
 | `mkt_source`   | `influencer`    |
 | `mkt_medium`   | `blog`          |
-| `mkt_channel`  | `web`           |
 | `mkt_campaign` | `spring_offer`  |
 
 The configuration of the enrichment defines which parameters in the URL (e.g. `utm_source`) map to which fields in the event (e.g. `mkt_source`) — see examples below.

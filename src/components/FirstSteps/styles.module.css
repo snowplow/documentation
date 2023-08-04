@@ -31,8 +31,8 @@
   display: none;
 }
 
-.notification {
-  background-color: var(--ifm-color-primary-light) !important;
+.notification > div {
+  background-color: var(--ifm-color-primary-light);
 }
 
 .notificationTextHighlight {

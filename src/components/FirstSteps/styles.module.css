@@ -30,3 +30,11 @@
 .sendEventsCard iframe {
   display: none;
 }
+
+.notification {
+  background-color: var(--ifm-color-primary-light) !important;
+}
+
+.notificationTextHighlight {
+  color: var(--ifm-color-primary-lightest);
+}

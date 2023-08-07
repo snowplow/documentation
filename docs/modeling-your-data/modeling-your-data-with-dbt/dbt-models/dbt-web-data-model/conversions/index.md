@@ -154,7 +154,7 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 ```
 
 </TabItem>
-<TabItem value="BQ" label="BigQuery">
+<TabItem value="bigquery" label="BigQuery">
 
 ```json
     {
@@ -166,7 +166,7 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 ```
 
 </TabItem>
-<TabItem value="db" label="Databricks">
+<TabItem value="databricks" label="Databricks">
 
 ```json
     {

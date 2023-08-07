@@ -354,9 +354,6 @@ warehouse=snowflake
 
 Run the docker container :
 
-If you are using Bigquery,
-
-
 <Tabs groupId="warehouse" queryString>
 <TabItem value="bigquery" label="BigQuery" default>
 

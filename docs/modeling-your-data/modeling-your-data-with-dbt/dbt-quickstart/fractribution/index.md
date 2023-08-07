@@ -72,7 +72,7 @@ vars:
     snowplow__path_transforms: {'exposure_path' : null}
 ```
 
-
+:::tip Snowflake Only
 
 If you are using Snowflake, you can automatically run the python scripts using Snowpark when running the dbt package. This is done using macros that create and run a stored procedure on Snowpark after the dbt models have completed.
 
@@ -391,7 +391,7 @@ docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribut
 
 :::tip
 
-To help debug easier we have included logs to be printed each time a table is created in the warehouse, there should be 3 in total (`snowplow_fractribution_path_summary_with_channels`, `snowplow_fractribution_channel_attribution` and `snowplow_fractribution_report_table`). There is also a `-- verbose` flag you can include in your shell prompt when executing the python scripts which may give you an even more detailed breakdown depending on your warehouse.
+To help debug easier we have included logs to be printed each time a table is created in the warehouse, there should be 3 in total (`snowplow_fractribution_path_summary_with_channels`, `snowplow_fractribution_channel_attribution` and `snowplow_fractribution_report_table`).
 
 :::
 

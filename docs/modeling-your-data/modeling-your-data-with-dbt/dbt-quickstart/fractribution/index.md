@@ -72,7 +72,7 @@ vars:
     snowplow__path_transforms: {'exposure_path' : null}
 ```
 
-:::tip Snowflake Only
+
 
 If you are using Snowflake, you can automatically run the python scripts using Snowpark when running the dbt package. This is done using macros that create and run a stored procedure on Snowpark after the dbt models have completed.
 
@@ -91,28 +91,28 @@ vars:
 <details>
 <summary>Modifying the conversions source</summary>
 
-By default the `snowplow__conversions_source` is your atomic events table. In most cases this is likely to be what you want to use, however you may wish to use the in-built conversions modeling as part of our [web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/conversions/index.md) if you have already defined this, by setting `snowplow__conversions_source` to `"{{ ref('snowplow_web_sessions') }}"`. 
+By default the `snowplow__conversions_source` is your atomic events table. In most cases this is likely to be what you want to use, however you may wish to use the in-built conversions modeling as part of our [web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/conversions/index.md) if you have already defined this, by setting `snowplow__conversions_source` to `"{{ ref('snowplow_web_sessions') }}"`.
 
 Alternatively, if you are using Redshift/Postgres you may wish to include additional fields from a Self-Describing Event, or an Entity. To do this, you should create a new model in your project, e.g. `models/snowplow/snowplow_joined_events_table.sql` which should have something like the following content:
 
 > _For more information about dealing with duplicates and the macro in this code, make sure to see our [deduplication docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/index.md)._
 
 ```jinja2
-with {{ snowplow_utils.get_sde_or_context('atomic', 
-                                          'my_custom_context', 
-                                          "'{{ get_lookback_date_limits("min") }}'", 
-                                          "'{{ get_lookback_date_limits("max") }}'", 
+with {{ snowplow_utils.get_sde_or_context('atomic',
+                                          'my_custom_context',
+                                          "'{{ get_lookback_date_limits("min") }}'",
+                                          "'{{ get_lookback_date_limits("max") }}'",
                                           'my_prefix')}}
 
 select
   events.*,
   b.*
 from {{ source('atomic', 'events') }} as events
-  left join nl_basjes_my_prefix_1 b on 
-    events.event_id = b.my_prefix__id 
+  left join nl_basjes_my_prefix_1 b on
+    events.event_id = b.my_prefix__id
     and events.collector_tstamp = b.my_prefix__tstamp
 
-where 
+where
   -- use the appropriate partition key to filter on in addition to this, add a bit of a buffer if it is not derived_tstamp
   date(derived_tstamp) >= '{{ get_lookback_date_limits("min") }}'
   and date(derived_tstamp) <= '{{ get_lookback_date_limits("max") }}'
@@ -289,6 +289,8 @@ Run the adapter specific main fractribution script by specifying the conversion 
 python main_snowplow_bigquery.py --conversion_window_start_date '2022-06-03' --conversion_window_end_date '2022-08-01' --attribution_model last_touch
 ```
 
+
+
 </TabItem>
 <TabItem value="databricks" label="Databricks">
 
@@ -312,6 +314,12 @@ python main_snowplow_redshift.py --conversion_window_start_date '2022-06-03' --c
 
 </TabItem>
 </Tabs>
+
+:::tip
+
+To help debug easier we have included logs to be printed each time a table is created in the warehouse, there should be 3 in total (`snowplow_fractribution_path_summary_with_channels`, `snowplow_fractribution_channel_attribution` and `snowplow_fractribution_report_table`). There is also a `-- verbose` flag you can include in your shell prompt when executing the python scripts which may give you an even more detailed breakdown depending on your warehouse.
+
+:::
 
 </details>
 
@@ -380,5 +388,11 @@ docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribut
 
 </TabItem>
 </Tabs>
+
+:::tip
+
+To help debug easier we have included logs to be printed each time a table is created in the warehouse, there should be 3 in total (`snowplow_fractribution_path_summary_with_channels`, `snowplow_fractribution_channel_attribution` and `snowplow_fractribution_report_table`). There is also a `-- verbose` flag you can include in your shell prompt when executing the python scripts which may give you an even more detailed breakdown depending on your warehouse.
+
+:::
 
 </details>

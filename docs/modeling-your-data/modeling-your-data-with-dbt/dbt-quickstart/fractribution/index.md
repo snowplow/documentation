@@ -317,7 +317,7 @@ python main_snowplow_redshift.py --conversion_window_start_date '2022-06-03' --c
 
 :::tip
 
-To help debug easier we have included logs to be printed each time a table is created in the warehouse, there should be 3 in total (`snowplow_fractribution_path_summary_with_channels`, `snowplow_fractribution_channel_attribution` and `snowplow_fractribution_report_table`). There is also a `-- verbose` flag you can include in your shell prompt when executing the python scripts which may give you an even more detailed breakdown depending on your warehouse.
+To help debug easier we have included logs to be printed each time a table is created in the warehouse, there should be 3 in total (`snowplow_fractribution_path_summary_with_channels`, `snowplow_fractribution_channel_attribution` and `snowplow_fractribution_report_table`). There is also a `--verbose` flag you can include in your shell prompt when executing the python scripts which may give you an even more detailed breakdown depending on your warehouse.
 
 :::
 
@@ -391,7 +391,7 @@ docker run --rm --env-file /path/to/env/file/configs.env -it snowplow/fractribut
 
 :::tip
 
-To help debug easier we have included logs to be printed each time a table is created in the warehouse, there should be 3 in total (`snowplow_fractribution_path_summary_with_channels`, `snowplow_fractribution_channel_attribution` and `snowplow_fractribution_report_table`).
+To help debug easier we have included logs to be printed each time a table is created in the warehouse, there should be 3 in total (`snowplow_fractribution_path_summary_with_channels`, `snowplow_fractribution_channel_attribution` and `snowplow_fractribution_report_table`). In order to run the script with a `--verbose` flag you can set the `verbose_run` variable to "true" in your env-file, which may give you an even more detailed breakdown depending on your warehouse.
 
 :::
 

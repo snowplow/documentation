@@ -18,7 +18,7 @@ import Admonition from '@theme/Admonition'
 >
   For access to the templates, and a walkthrough of all the features, please book a demo of our <a href="https://snowplow.io/digital-analytics/">Snowplow Digital Analytics</a> solution.
   <br />
-  <a className="snwpl-nav-button" href="https://snowplow.io/digital-analytics/" target='_blank'>
+  <a className="snowplow-button" href="https://snowplow.io/digital-analytics/" target='_blank'>
     👉 Take me there! 👈
   </a>
 </Admonition>

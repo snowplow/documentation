@@ -13,7 +13,7 @@ export function Accelerator(props) {
       about tracking and modeling your data, check out our{' '}
       <strong>{props.name}</strong> Accelerator!
       <br />
-      <a className="snwpl-nav-button" href={props.href} target='_blank'>
+      <a className="snowplow-button" href={props.href} target='_blank'>
         👉 Take me there! 👈
       </a>
     </Admonition>
@@ -32,7 +32,7 @@ export function AllAccelerators(props) {
       <strong>Data Product Accelerators</strong>!
       <br />
       <a
-        className="snwpl-nav-button"
+        className="snowplow-button"
         href="https://snowplow.io/data-product-accelerators/"
         target='_blank'
       >

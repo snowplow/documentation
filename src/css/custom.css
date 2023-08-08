@@ -54,6 +54,8 @@
   --ifm-color-primary-light: #7345c6;
   --ifm-color-primary-lighter: #926ed3;
   --ifm-color-primary-lightest: #b198df;
+  --ifm-color-accent: #fc5e35;
+  --ifm-color-accent-darker: #e5481f;
   --ifm-color-announcement: #e6f6fe;
   --ifm-code-font-size: 95%;
   --ifm-code-padding-vertical: 0.05rem;
@@ -78,6 +80,8 @@
   --ifm-color-primary-light: #7345c6;
   --ifm-color-primary-lighter: #926ed3;
   --ifm-color-primary-lightest: #b198df;
+  --ifm-color-accent: #e5481f;
+  --ifm-color-accent-darker: #fc5e35;
   --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2);
   --ifm-font-color-base: rgb(218, 221, 225);
   --ifm-font-color-base-inverse: #000000;
@@ -87,21 +91,6 @@
   color: var(--ifm-font-color-base);
   background: none;
   text-decoration: none;
-}
-
-[data-theme='dark'] a.snwpl-nav-button,
-[data-theme='dark'] button.snwpl-nav-button,
-[data-theme='light'] .alert a.snwpl-nav-button {
-  background: var(--ifm-color-primary-light);
-  border-color: var(--ifm-color-primary-light);
-  color: var(--ifm-font-color-base);
-}
-
-[data-theme='dark'] a.snwpl-nav-button:hover,
-[data-theme='dark'] button.snwpl-nav-button:hover,
-[data-theme='light'] .alert a.snwpl-nav-button:hover {
-  background: var(--ifm-color-primary-lighter);
-  border-color: var(--ifm-color-primary-lighter);
 }
 
 @media screen and (min-width: 997px) {
@@ -127,8 +116,10 @@
   margin-left: 6px;
 }
 
-a.snwpl-nav-button,
-button.snwpl-nav-button {
+/* All buttons */
+
+a.snowplow-button,
+button.snowplow-button { 
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -137,13 +128,9 @@ button.snwpl-nav-button {
   padding-bottom: 10px;
   padding-left: 16px;
   padding-right: 16px;
-  background: #f0ebf8;
   width: auto;
   height: 40px;
-  box-shadow: 0px 1px 2px 0px #1018280d;
-  border: 1px solid #f0ebf8;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.05),
-    0px 1px 2px rgba(16, 24, 40, 0.05);
+  border: none;
   border-radius: 4px;
 
   font-family: 'Inter';
@@ -152,28 +139,81 @@ button.snwpl-nav-button {
   font-size: 14px;
   line-height: 20px;
   text-decoration: none;
+  
+  background: #f0ebf8;
   color: #412476;
 }
 
-a.snwpl-nav-button:active,
-a.snwpl-nav-button:hover,
-a.snwpl-nav-button:focus,
-button.snwpl-nav-button:active,
-button.snwpl-nav-button:hover,
-button.snwpl-nav-button:focus {
+a.snowplow-button:active,
+a.snowplow-button:hover,
+a.snowplow-button:focus,
+button.snowplow-button:active,
+button.snowplow-button:hover,
+button.snowplow-button:focus {
   text-decoration: none;
   background: #e4dcef;
   border-color: #e4dcef;
 }
 
-.alert a.snwpl-nav-button {
+[data-theme='dark'] a.snowplow-button,
+[data-theme='dark'] button.snowplow-button {
+  background: var(--ifm-color-primary-light);
+  border-color: var(--ifm-color-primary-light);
+  color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] a.snowplow-button:active,
+[data-theme='dark'] button.snowplow-button:active,
+[data-theme='dark'] a.snowplow-button:hover,
+[data-theme='dark'] button.snowplow-button:hover,
+[data-theme='dark'] a.snowplow-button:focus,
+[data-theme='dark'] button.snowplow-button:focus {
+  background: var(--ifm-color-primary-lighter);
+  border-color: var(--ifm-color-primary-lighter);
+}
+
+/* Call to action buttons */
+
+[data-theme] a.snowplow-button.cta-button,
+[data-theme] button.snowplow-button.cta-button {
+  background-color: var(--ifm-color-accent);
+  border-color: var(--ifm-color-accent);
+  color: white;
+}
+
+[data-theme] a.snowplow-button.cta-button:active,
+[data-theme] button.snowplow-button.cta-button:active,
+[data-theme] a.snowplow-button.cta-button:hover,
+[data-theme] button.snowplow-button.cta-button:hover,
+[data-theme] a.snowplow-button.cta-button:focus,
+[data-theme] button.snowplow-button.cta-button:focus {
+  background-color: var(--ifm-color-accent-darker);
+  border-color: var(--ifm-color-accent-darker);
+  color: white;
+}
+
+/* Alert buttons */
+
+.alert a.snowplow-button {
   display: inline-block;
   margin-top: 5px;
 }
 
-[data-theme] .alert a.snwpl-nav-button {
+[data-theme] .alert a.snowplow-button {
   color: white;
 }
+
+[data-theme='light'] .alert a.snowplow-button {
+  background: var(--ifm-color-primary-light);
+  border-color: var(--ifm-color-primary-light);
+}
+
+[data-theme='light'] .alert a.snowplow-button:hover {
+  background: var(--ifm-color-primary-lighter);
+  border-color: var(--ifm-color-primary-lighter);
+}
+
+/* End of buttons */
 
 p {
   line-height: 24px;

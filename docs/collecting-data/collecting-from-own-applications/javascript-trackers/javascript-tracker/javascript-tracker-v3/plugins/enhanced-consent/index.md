@@ -177,7 +177,7 @@ An consent entity can have the following attributes:
 | basisForProcessing | `string` | GDPR lawful basis for data collection & processing. | ✅ |
 | consentUrl | `string` | URI of the privacy policy related document. | ✅ |
 | consentVersion | `string` | Version of the privacy policy related document. | ✅ |
-| consentScopes | `string[]` | The scopes allowed after the user finalized his selection of consent preferences. E.g ['analytics', 'functional', 'advertisement']. | ✅ |
+| consentScopes | `string[]` | The scopes allowed after the user finalized their selection of consent preferences. E.g ['analytics', 'functional', 'advertisement']. | ✅ |
 | domainsApplied | `string[]` | The domains for which this consent allows these preferences to persist to. | ✅ |
 | gdprApplies | `boolean` | Determine if GDPR applies based on the user's geo-location. | ✘ |
 

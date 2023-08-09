@@ -1,6 +1,5 @@
 ---
 title: "Initialization and configuration"
-date: "2022-01-31"
 sidebar_position: 2000
 ---
 
@@ -55,7 +54,7 @@ The `EmitterConfiguration` class was added in v0.3.0.
 | `screenContext` | `bool?` | Indicates whether [screen](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) context should be attached to tracked events. | ✔ | ✔ | | true |
 | `applicationContext` | `bool?` | Indicates whether [application](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) context should be attached to tracked events. | ✔ | ✔ | | true |
 | `webActivityTracking` | `WebActivityTracking?` | Enables activity tracking using page views and pings on the Web. |  |  | ✔ | true |
-| `userAnonymisation` | `bool?` | Anonymises certain user identifiers. | ✔ | ✔ | ✔ | false |
+| `userAnonymisation` | `bool?` | Anonymizes certain user identifiers. | ✔ | ✔ | ✔ | false |
 
 :::note
 The ability to enable `userAnonymisation`, or the screen and application context entities, was added in v0.3.0.
@@ -63,7 +62,7 @@ The ability to enable `userAnonymisation`, or the screen and application context
 
 The optional `WebActivityTracking` property configures page tracking on Web. Initializing the configuration will inform `SnowplowObserver` observers (see section on auto-tracking in "Tracking events") to auto track `PageViewEvent` events instead of `ScreenView` events on navigation changes. Further, setting the `minimumVisitLength` and `heartbeatDelay` properties of the `WebActivityTracking` instance will enable activity tracking using 'page ping' events on Web.
 
-Activity tracking monitors whether a user continues to engage with a page over time, and record how he / she digests content on the page over time. That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll etc.) If any of these things occur in a set period of time (`minimumVisitLength` seconds from page load and every `heartbeatDelay` seconds after that), a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different tab in his / her browser), no page ping fires.
+Activity tracking monitors whether a user continues to engage with a page over time, and record how they digest content on the page over time. That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll etc.) If any of these things occur in a set period of time (`minimumVisitLength` seconds from page load and every `heartbeatDelay` seconds after that), a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different browser tab), no page ping fires.
 
 See [this page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/anonymous-tracking/index.md) for information about anonymous tracking.
 

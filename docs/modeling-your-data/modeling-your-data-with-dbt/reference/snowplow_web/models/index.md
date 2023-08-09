@@ -1816,7 +1816,7 @@ Incremental table showing the audit trail of consent and Consent Management Plat
 | basis_for_processing | GDPR lawful basis for data collection & processing | text |
 | consent_url | URI of the privacy policy related document | text |
 | consent_version | Version of the privacy policy related document | text |
-| consent_scopes | The scopes allowed after the user finalized his selection of consent preferences Eg ['analytics', 'functional', 'advertisement'] | text |
+| consent_scopes | The scopes allowed after the user finalized their selection of consent preferences Eg ['analytics', 'functional', 'advertisement'] | text |
 | domains_applied | The domains for which this consent allows these preferences to persist to | text |
 | gdpr_applies | A boolean which determines if GDPR applies based on the user's geo-location | boolean |
 | cmp_load_time | The time taken for the consent box to be shown to the screen | float |
@@ -2015,7 +2015,7 @@ Summary of the latest consent status as per consent version
 |:------------|:------------|:--:|
 | consent_version | Version of the privacy policy related document | text |
 | version_start_tstamp | The first allow_all consent event belonging to a consent version | timestamp_ntz |
-| consent_scopes | The scopes allowed after the user finalized his selection of consent preferences Eg ['analytics', 'functional', 'advertisement'] | text |
+| consent_scopes | The scopes allowed after the user finalized their selection of consent preferences Eg ['analytics', 'functional', 'advertisement'] | text |
 | consent_url | URI of the privacy policy related document | text |
 | domains_applied | The domains for which this consent allows these preferences to persist to | text |
 | is_latest_version | A boolean to filter whether the last consent or cmp visible event is sent after the latest privacy policy version goes live | boolean |
@@ -2346,7 +2346,7 @@ Used to keep track of each consent version and its validity
 |:------------|:------------|:--:|
 | consent_version | Version of the privacy policy related document | text |
 | version_start_tstamp | The time_stamp of the first allow_all event related to a consent version | timestamp_ntz |
-| consent_scopes | The scopes allowed after the user finalized his selection of consent preferences Eg ['analytics', 'functional', 'advertisement'] | text |
+| consent_scopes | The scopes allowed after the user finalized their selection of consent preferences Eg ['analytics', 'functional', 'advertisement'] | text |
 | consent_url | URI of the privacy policy related document | text |
 | domains_applied | The domains for which this consent allows these preferences to persist to | text |
 | is_latest_version | A boolean to filter whether the last consent or cmp visible event is sent after the latest privacy policy version goes live | boolean |
@@ -9808,4 +9808,3 @@ where dedupe_index = 1
 </TabItem>
 </Tabs>
 </DbtDetails>
-

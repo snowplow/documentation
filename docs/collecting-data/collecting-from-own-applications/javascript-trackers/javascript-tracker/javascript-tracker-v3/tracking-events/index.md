@@ -1,6 +1,5 @@
 ---
 title: "Tracking Events"
-date: "2021-03-26"
 sidebar_position: 1000
 ---
 
@@ -115,9 +114,9 @@ The page view and every subsequent page ping will have both a static_context and
 
 ### Activity Tracking: page pings
 
-As well as tracking page views, we can monitor whether a user continues to engage with a page over time, and record how he / she digests content on the page over time.
+As well as tracking page views, we can monitor whether a user continues to engage with a page over time, and record how they digest content on the page over time.
 
-That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc.) If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different tab in his / her browser), no page ping fires.
+That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc.) If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different tab in their browser), no page ping fires.
 
 #### `enableActivityTracking`
 
@@ -232,7 +231,7 @@ window.snowplow('trackPageView');
 
 :::note
 
-For this technique of sending on visibility change to work reliably, we recommend initialising the Snowplow tracker with `eventMethod: 'beacon'` and/or `stateStorageStrategy: 'cookieAndLocalStorage'` (if navigating to a page that also contains the JS Tracker). Using the visibility change technique may not work as expected for Single Page Applications (SPA), you would need to send the aggregated event to the Snowplow collector on navigation within your application.
+For this technique of sending on visibility change to work reliably, we recommend initializing the Snowplow tracker with `eventMethod: 'beacon'` and/or `stateStorageStrategy: 'cookieAndLocalStorage'` (if navigating to a page that also contains the JS Tracker). Using the visibility change technique may not work as expected for Single Page Applications (SPA), you would need to send the aggregated event to the Snowplow collector on navigation within your application.
 
 :::
 
@@ -242,7 +241,7 @@ The `iglu:com.acme_company/page_unload/jsonschema/1-0-0` schema used in the exam
 
 :::
 
-We are using `visibilitychange` events as `beforeunload` isn't a reliable option for mobile devices when using `beacon`. You can read more about this on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon#description). An idea on the different levels of compatibility of the different Page Visiblity API across browsers and mobile can here found [here](https://www.igvita.com/2015/11/20/dont-lose-user-and-app-state-use-page-visibility/).
+We are using `visibilitychange` events as `beforeunload` isn't a reliable option for mobile devices when using `beacon`. You can read more about this on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon#description). An idea on the different levels of compatibility of the different Page Visibility API across browsers and mobile can here found [here](https://www.igvita.com/2015/11/20/dont-lose-user-and-app-state-use-page-visibility/).
 
 #### `updatePageActivity`
 
@@ -304,9 +303,9 @@ The `data` field should be flat, not nested.
 
 There are likely to be a large number of events that can occur on your site, for which a specific tracking method is part of Snowplow.
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
 
-However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructEvent`, if none of the other event-specific methods outlined above are appropriate.
+However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructEvent`, if none of the other event-specific methods outlined above are appropriate.
 
 #### `trackStructEvent`
 
@@ -840,7 +839,7 @@ Use the `enableFormTracking` method to add event listeners to turn on form tra
 snowplow('enableFormTracking');
 ```
 
-This will only work for form elements which exist when it is called. If you are creating a form programatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
+This will only work for form elements which exist when it is called. If you are creating a form programmatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programmatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
 
 :::note
 
@@ -1222,7 +1221,7 @@ Snowplow uses the same query parameters used by Google Analytics. Because of thi
 | `utm_term`     | Campaign term(s) | Used for search marketing in particular, this field is used to identify the search terms that triggered the ad being displayed in the search results. |
 | `utm_content`  | Campaign content | Used either to differentiate similar content or two links in the same ad. (So that it is possible to identify which is generating more traffic.)      |
 
-The parameters are descibed in the [Google Analytics help page](https://support.google.com/analytics/answer/1033863). Google also provides a [urlbuilder](https://support.google.com/analytics/answer/1033867?hl=en) which can be used to construct the URL incl. query parameters to use in your campaigns.
+The parameters are described in the [Google Analytics help page](https://support.google.com/analytics/answer/1033863). Google also provides a [urlbuilder](https://support.google.com/analytics/answer/1033867?hl=en) which can be used to construct the URL incl. query parameters to use in your campaigns.
 
 ### Ad tracking methods
 
@@ -1790,7 +1789,7 @@ The method call will generate this event:
 
 ### GDPR context
 
-The GDPR context attaches a context with the GDPR basis for processing and the details of a related docuemnt (eg. a consent document) to all events which are fired after it is set.
+The GDPR context attaches a context with the GDPR basis for processing and the details of a related document (eg. a consent document) to all events which are fired after it is set.
 
 It takes the following arguments:
 
@@ -1830,7 +1829,7 @@ It takes the following arguments:
 
 The required basisForProcessing accepts only the following literals: `consent`, `contract`, `legalObligation`, `vitalInterests`, `publicTask`, `legitimateInterests` - in accordance with the [five legal bases for processing](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/)
 
-The GDPR context is enabled by calling the `enableGdprContext` method once the tracker has been initialised, for example:
+The GDPR context is enabled by calling the `enableGdprContext` method once the tracker has been initialized, for example:
 
 ```javascript
 snowplow('enableGdprContext', {

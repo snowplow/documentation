@@ -1,6 +1,5 @@
 ---
 title: "Tracking Events"
-date: "2021-03-31"
 sidebar_position: 2000
 ---
 
@@ -121,9 +120,9 @@ The page view and every subsequent page ping will have both a static_context and
 
 ### Activity Tracking: page pings
 
-As well as tracking page views, we can monitor whether a user continues to engage with a page over time, and record how he / she digests content on the page over time.
+As well as tracking page views, we can monitor whether a user continues to engage with a page over time, and record how they digest content on the page over time.
 
-That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc.) If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different tab in his / her browser), no page ping fires.
+That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc.) If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different tab in their browser), no page ping fires.
 
 #### `enableActivityTracking`
 
@@ -316,9 +315,9 @@ The event property is a [self-describing JSON](http://snowplowanalytics.com/blo
 
 There are likely to be a large number of events that can occur on your site, for which a specific tracking method is part of Snowplow.
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as described above.
 
-However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructEvent`, if none of the other event-specific methods outlined above are appropriate.
+However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructEvent`, if none of the other event-specific methods outlined above are appropriate.
 
 #### `trackStructEvent`
 
@@ -707,7 +706,7 @@ interface FilterCriterion {
 
 You can control which links are tracked using the second argument. There are three ways to do this: a denylist, an allow, and a filter function.
 
-An optional parameter is `pseudoClicks`. If this is not turned on, Firefox will not recognise middle clicks. If it is turned on, there is a small possibility of false positives (click events firing when they shouldn't). **Turning this feature on is recommended**:
+An optional parameter is `pseudoClicks`. If this is not turned on, Firefox will not recognize middle clicks. If it is turned on, there is a small possibility of false positives (click events firing when they shouldn't). **Turning this feature on is recommended**:
 
 ```javascript
 import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
@@ -857,7 +856,7 @@ trackLinkClick({
 
 ### Form tracking
 
-This is part of the `@snowplow/browser-plugin-form-tracking` plugin. You need to install it with your favourite package manager: `npm install @snowplow/browser-plugin-form-tracking` and then initialize it:
+This is part of the `@snowplow/browser-plugin-form-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-form-tracking` and then initialize it:
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -909,7 +908,7 @@ Use the `enableFormTracking` method to turn on form tracking by adding event l
 enableFormTracking();
 ```
 
-This will only work for form elements which exist when it is called. If you are creating a form programatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
+This will only work for form elements which exist when it is called. If you are creating a form programmatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programmatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
 
 **Note:** that events on password fields will not be tracked.
 
@@ -1039,7 +1038,7 @@ enableFormTracking({
 
 ### Ecommerce tracking
 
-This is part of the `@snowplow/browser-plugin-ecommerce` plugin. You need to install it with your favourite package manager: `npm install @snowplow/browser-plugin-ecommerce` and then initialize it:
+This is part of the `@snowplow/browser-plugin-ecommerce` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-ecommerce` and then initialize it:
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -1051,7 +1050,7 @@ newTracker('sp', '{{collector_url_here}}', {
 });
 ```
 
-This feature is modelled on Google Analytics ecommerce tracking capability, Snowplow uses three methods that have to be used together to track online transactions:
+This feature is modeled on Google Analytics ecommerce tracking capability, Snowplow uses three methods that have to be used together to track online transactions:
 
 1. **Create a transaction object**. Use `addTrans()` method to initialize a transaction object. This will be the object that is loaded with all the data relevant to the specific transaction that is being tracked including all the items in the order, the prices of the items, the price of shipping and the `order_id`.
 2. **Add items to the transaction.** Use the `addItem()` method to add data about each individual item to the transaction object.
@@ -1180,7 +1179,7 @@ Both methods can also be passed an array of custom context as an additional para
 
 ### Social tracking
 
-This is part of the `@snowplow/browser-plugin-site-tracking` plugin. You need to install it with your favourite package manager: `npm install @snowplow/browser-plugin-site-tracking` and then initialize it:
+This is part of the `@snowplow/browser-plugin-site-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-site-tracking` and then initialize it:
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -1327,11 +1326,11 @@ Snowplow uses the same query parameters used by Google Analytics. Because of thi
 | `utm_term`     | Campaign term(s) | Used for search marketing in particular, this field is used to identify the search terms that triggered the ad being displayed in the search results. |
 | `utm_content`  | Campaign content | Used either to differentiate similar content or two links in the same ad. (So that it is possible to identify which is generating more traffic.)      |
 
-The parameters are descibed in the [Google Analytics help page](https://support.google.com/analytics/answer/1033863). Google also provides a [urlbuilder](https://support.google.com/analytics/answer/1033867?hl=en) which can be used to construct the URL incl. query parameters to use in your campaigns.
+The parameters are described in the [Google Analytics help page](https://support.google.com/analytics/answer/1033863). Google also provides a [urlbuilder](https://support.google.com/analytics/answer/1033867?hl=en) which can be used to construct the URL incl. query parameters to use in your campaigns.
 
 ### Ad tracking methods
 
-This is part of the `@snowplow/browser-plugin-ad-tracking` plugin. You need to install it with your favourite package manager: `npm install @snowplow/browser-plugin-ad-tracking` and then initialize it:
+This is part of the `@snowplow/browser-plugin-ad-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-ad-tracking` and then initialize it:
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -1496,7 +1495,7 @@ ga('ec:setAction', 'purchase', {
 });
 ```
 
-**NOTE**: The action type is passed with the action context in the Google Analytics example. We have seperated this by asking you to call the trackEnhancedEcommerceAction function to actually send the context and the action.
+**NOTE**: The action type is passed with the action context in the Google Analytics example. We have separated this by asking you to call the trackEnhancedEcommerceAction function to actually send the context and the action.
 
 Adding an action using Snowplow:
 
@@ -1802,7 +1801,7 @@ The method call will generate this event:
 
 ### GDPR context
 
-The GDPR context attaches a context with the GDPR basis for processing and the details of a related docuemnt (eg. a consent document) to all events which are fired after it is set.
+The GDPR context attaches a context with the GDPR basis for processing and the details of a related document (eg. a consent document) to all events which are fired after it is set.
 
 It takes the following arguments:
 
@@ -1842,7 +1841,7 @@ It takes the following arguments:
 
 The required basisForProcessing accepts only the following literals: `consent`, `contract`, `legalObligation`, `vitalInterests`, `publicTask`, `legitimateInterests` - in accordance with the [five legal bases for processing](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/)
 
-The GDPR context is enabled by calling the `enableGdprContext` method once the tracker has been initialised, for example:
+The GDPR context is enabled by calling the `enableGdprContext` method once the tracker has been initialized, for example:
 
 ```javascript
 enableGdprContext({

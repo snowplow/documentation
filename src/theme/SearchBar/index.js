@@ -55,7 +55,7 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
       mergeFacetFilters(contextualSearchFacetFilters, configFacetFilters)
     : // ... or use config facetFilters
       configFacetFilters
-  // We let user override default searchParameters if she wants to
+  // We let user override default searchParameters if they want to
   const searchParameters = {
     ...props.searchParameters,
     facetFilters,

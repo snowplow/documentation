@@ -65,7 +65,7 @@ The schemas contain a single `label` property:
 </details>
 
 *Schema:*
-`iglu:com.snowplowanalytics.snowplow.media/player/jsonschema/1-0-0`.
+`iglu:com.snowplowanalytics.snowplow/media_player/jsonschema/2-0-0`.
 
 ### Media session entity
 

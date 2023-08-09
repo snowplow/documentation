@@ -114,9 +114,9 @@ The page view and every subsequent page ping will have both a static_context and
 
 ### Activity Tracking: page pings
 
-As well as tracking page views, we can monitor whether a user continues to engage with a page over time, and record how they digest content on the page over time.
+As well as tracking page views, we can monitor whether users continue to engage with pages over time, and record how they digest content on each page over time.
 
-That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc.) If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different tab in their browser), no page ping fires.
+That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc.) If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different browser tab), no page ping fires.
 
 #### `enableActivityTracking`
 

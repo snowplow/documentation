@@ -255,6 +255,34 @@ On the next interval after this call, a ping will be generated even if the user 
 
 This is particularly useful when a user is passively engaging with your content, e.g. watching a video.
 
+#### `disableActivityTracking`
+
+:::note
+Available since version 3.14 of the tracker.
+:::
+
+To disable activity tracking, you can use the `disableActivityTracking` method.
+
+```javascript
+snowplow('disableActivityTracking');
+```
+
+Disabling activity tracking will stop page activity intervals and will not send additional activity tracking events.
+
+#### `disableActivityTrackingCallback`
+
+:::note
+Available since version 3.14 of the tracker.
+:::
+
+To disable the activity tracking callback, you can use the `disableActivityTrackingCallback` method.
+
+```javascript
+snowplow('disableActivityTracking');
+```
+
+This will stop any further activity tracking callback from being executed.
+
 ### Tracking custom self-describing events
 
 ```mdx-code-block

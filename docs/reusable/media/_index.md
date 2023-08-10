@@ -562,6 +562,67 @@ configuration.setCaptureEvents(Collections.singletonList(MediaPlayEvent.class));
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'js-browser' || props.tracker == 'js-tag') && (<>
+<h4>Filter repeated events</h4>
+<p>
+Some media players produce a large number of subsequent seek start and seek end (or volume change) events when the user is scrubbing the slider controls (e.g, the Vimeo or HTML5 players).
+The large number of repeated events is usually not desirable and it's preferable to only keep the first and the last of those events.
+The media plugin has the ability to do that for seek start, seek end and volume change events.
+</p>
+<p>
+The algorithm to filter out the repeated events keeps tracked seek (or volume change) events in a buffer until an event other than a seek event is tracked or until the media tracking ends (<code>endMediaTracking</code> is called).
+At that point, it takes the first seek start and the last seek end from the buffer and tracks them.
+</p>
+<p>
+So if the following events are tracked:
+</p>
+<ol>
+<li>play</li>
+<li>seek start 1</li>
+<li>seek end 2</li>
+<li>seek start 2</li>
+<li>seek end 2</li>
+<li>pause</li>
+</ol>
+<p>
+By filtering events, the result will be:
+</p>
+<ol>
+<li>play</li>
+<li>seek start 1</li>
+<li>seek end 2</li>
+<li>pause</li>
+</ol>
+<p>
+Filtering out repeated seek and volume change events is enabled by default, but it is possible to disable as follows:
+</p>
+<>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
+{`window.snowplow('startMediaTracking', { id, filterOutRepeatedEvents: false });`}
+</CodeBlock>)}</>
+<>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
+{`startMediaTracking({ id, filterOutRepeatedEvents: false });`}
+</CodeBlock>)}</>
+<p>
+Or separately for the seek and volume events like this:
+</p>
+<>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
+{`window.snowplow('startMediaTracking', { id, filterOutRepeatedEvents: { seekEvents: false, volumeChangeEvents: false } });`}
+</CodeBlock>)}</>
+<>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
+{`startMediaTracking({ id, filterOutRepeatedEvents: { seekEvents: false, volumeChangeEvents: false });`}
+</CodeBlock>)}</>
+<p>
+There is also an internal timeout after which the buffer with events waiting to be filtered is processed even if no other events are tracked.
+The default timeout is 5s but is configurable:
+</p>
+<>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
+{`window.snowplow('startMediaTracking', { id, filterOutRepeatedEvents: { flushTimeoutMs: 1000 } });`} // sets the timeout to 1s
+</CodeBlock>)}</>
+<>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
+{`startMediaTracking({ id, filterOutRepeatedEvents: { flushTimeoutMs: 1000 });`} // sets the timeout to 1s
+</CodeBlock>)}</>
+</>)}</>
+
 #### Add context entities to all events
 
 You can provide custom context entities to describe the media playback.
@@ -1010,8 +1071,6 @@ Tracking this event will automatically set the `ended` and `paused` properties i
 ##### Seek start
 
 Tracks a media player seek start event sent when a seek operation begins.
-
-If multiple seek start events are tracked after each other (without a seek end event), the tracker tracks only the first one.
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaSeekStart', { id });`}

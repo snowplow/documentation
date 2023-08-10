@@ -60,3 +60,7 @@
     <td><code>featureFlags.enableMaxRecordsPerFile</code> (since 5.4.0) </td>
     <td>Optional, default = false. When enabled, <code>output.maxRecordsPerFile</code> configuration parameter is going to be used.</td>
 </tr>
+<tr>
+    <td><code>skipSchemas</code> (since 5.7.1) </td>
+    <td>Optional, default = none. Supply a list of Iglu URIs and the transformer's output files will omit any columns using that schema.  This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded to the table.</td>
+</tr>

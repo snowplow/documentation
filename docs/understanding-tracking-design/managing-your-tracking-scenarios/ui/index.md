@@ -5,6 +5,7 @@ sidebar_position: 1
 sidebar_custom_props:
   offerings:
     - enterprise
+    - cloud
 ---
 
 

@@ -5,7 +5,6 @@ sidebar_position: 2
 sidebar_custom_props:
   offerings:
     - enterprise
-    - cloud
 ---
 
 With the [**Tracking Scenarios API**](https://console.snowplowanalytics.com/api/msc/v1/docs), you can efficiently manage tracking scenarios programmatically. Whether you want to retrieve, create, edit, publish, deprecate, or delete tracking scenarios, the API provides the necessary endpoints and functionalities.

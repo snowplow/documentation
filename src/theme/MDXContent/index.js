@@ -24,7 +24,7 @@ export default function MDXContentWrapper(props) {
 
   const legacy = _.some(_.initial(breadcrumbs), item => item.customProps?.legacy)
   const outdated = !legacy && _.some(_.initial(breadcrumbs), item => item.customProps?.outdated)
- const offerings = _.findLast(breadcrumbs, item => item.customProps?.offerings)
+  const offerings = _.findLast(breadcrumbs, item => item.customProps?.offerings)
 
   if (outdated) {
     const latest = _.last(_.takeWhile(breadcrumbs, item => !item.customProps?.outdated)).href

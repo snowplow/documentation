@@ -2,6 +2,10 @@
 title: "Managing tracking scenarios in the Console"
 sidebar_label: "Using the UI 🆕"
 sidebar_position: 1
+sidebar_custom_props:
+  offerings:
+    - enterprise
+    - cloud
 ---
 
 

@@ -277,6 +277,7 @@ li.enterprise.cloud > div > a::before,
 li.enterprise.cloud > a::before,
 article.enterprise.cloud > a > p::before {
   content: '🏭 ☁️';
+  text-wrap: nowrap;
 }
 li.enterprise.opensource > div > a::before,
 li.enterprise.opensource > a::before,

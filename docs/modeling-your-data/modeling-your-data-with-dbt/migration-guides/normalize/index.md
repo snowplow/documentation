@@ -1,6 +1,6 @@
 ---
 title: "Normalize"
-sidebar_position: 104
+sidebar_position: 500
 ---
 
 ### Upgrading to 0.3.0

@@ -1,6 +1,6 @@
 ---
 title: "Core Web Vitals Module"
-sidebar_position: 101
+sidebar_position: 300
 hide_title: true
 ---
 

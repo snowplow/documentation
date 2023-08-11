@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Normalize"
-sidebar_position: 105
+sidebar_position: 500
 title: "Normalize Quickstart"
 ---
 

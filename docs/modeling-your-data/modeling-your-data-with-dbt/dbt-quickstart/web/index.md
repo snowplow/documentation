@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Web"
-sidebar_position: 101
+sidebar_position: 100
 title: "Web Quickstart"
 ---
 

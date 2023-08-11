@@ -1,6 +1,6 @@
 ---
 title: "Media Player"
-sidebar_position: 103
+sidebar_position: 400
 ---
 
 ### Upgrading to 0.5.0

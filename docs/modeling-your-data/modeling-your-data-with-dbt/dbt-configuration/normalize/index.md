@@ -1,6 +1,6 @@
 ---
 title: "Normalize"
-sidebar_position: 105
+sidebar_position: 500
 ---
 
 ```mdx-code-block

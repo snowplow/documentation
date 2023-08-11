@@ -1,8 +1,12 @@
 ---
 sidebar_label: "Utils"
-sidebar_position: 103
+sidebar_position: 300
 title: "Utils Quickstart"
 ---
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
 
 The `snowplow-utils` package allows you to create your own custom `snowplow_base_events_this_run` table using macros that generate the required SQL code for you, allowing you to incorporate whatever custom event types, contexts of Snowplow data. Using this package will allow you to leverage the [incremental nature](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) of the Snowplow packages, meaning you can more easily build data models using our other packages such as `snowplow-web` and `snowplow-mobile`, as well as build your own completely custom packages without having to do the initial heavy lifting yourself. This can, however, be a bit complicated to set up and so for that purpose we've create this quickstart page to guide you through this process.
 
@@ -180,9 +184,9 @@ For the `snowplow_base_sessions_lifecycle_manifest` model, you have the followin
 ```jinja2
 
 {% set sessions_lifecycle_manifest_query = snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest(
-    var('snowplow__session_identifiers', '{"atomic": "domain_sessionid"}'),
+    var('snowplow__session_identifiers', '[{"table": "atomic", "field": "domain_sessionid"}]'),
     var('snowplow__session_timestamp', 'collector_tstamp'),
-    var('snowplow__user_identifiers', '{"atomic" : "domain_userid"}'),
+    var('snowplow__user_identifiers', '[{"table": "atomic", "field": "domain_userid"}]'),
     var('snowplow__quarantined_sessions', 'snowplow_base_quarantined_sessions'),
     var('snowplow__derived_tstamp_partitioned', true),
     var('snowplow__days_late_allowed', 3),
@@ -207,16 +211,33 @@ Next, we have `snowplow__session_identifiers` and `snowplow__user_identifiers`, 
 Currently, we only support session and user identifiers found in atomic fields for Redshift/Postgres. We don't support nested level fields for any warehouses, and for BigQuery you will currently need to do the version management yourself. We will be getting around to supporting this extra functionality soon.
 :::
 
-By default, `snowplow__session_identifiers` is set to `atomic: domain_sessionid`, and `snowplow__user_identifiers` is set to `atomic: domain_userid`. This means that the identifiers for sessions and users are expected to be found in the `domain_sessionid` and `domain_userid` fields, respectively.
+By default, `snowplow__session_identifiers` is set to `[{"table": "atomic", "field": "domain_sessionid"}]`, and `snowplow__user_identifiers` is set to `[{"table": "atomic", "field": "domain_userid"}]`. This means that the identifiers for sessions and users are expected to be found in the `domain_sessionid` and `domain_userid` fields, respectively.
 
 If you have more than one session or user identifier, you can specify multiple entries in the map. The order in which you list them determines the precedence that the macro will use to look for these field values, and `COALESCE` them into the common session/user_identifier field. E.g. if you have the following definition for your `user_identifier`:
 
-```json
-{
-  "my_custom_context": "internal_user_id",
-  "atomic": "domain_userid"
-}
-```
+<Tabs groupId="warehouse" queryString>
+<TabItem value="default" label="BigQuery, Databricks, & Snowflake" default>
+<pre><code className="language-json">
+{`
+[
+  {"schema": "my_custom_context", "field": "internal_user_id"},
+  {"table": "atomic", "field": "domain_userid"}
+]
+`}
+</code></pre>
+</TabItem>
+<TabItem value="r&s" label="Redshift & Postgres" default>
+<pre><code className="language-json">
+{`
+[
+  {"table": "my_custom_context", "field": "internal_user_id", "prefix": "mcc", "alias": "mcc_iud"},
+  {"table": "atomic", "field": "domain_userid"}
+]
+`}
+</code></pre>
+</TabItem>
+</Tabs>
+
 
 The package will first extract `internal_user_id` from the `my_custom_context` context, and then use something similar to the following SQL statement: `COALESCE(my_custom_context.internal_user_id, events.domain_userid) as user_identifier`. This way, if a user is able to identify themselves through logging in which would populate a context called `my_custom_context`, their `internal_user_id` is used as a `user_identifier`. If, however, this is not the case, then the `user_identifier` field falls back on the value that the `domain_userid` has.
 
@@ -255,7 +276,7 @@ For the `snowplow_base_events_this_run` model, you will need to run the followin
 
 {% set base_events_query = snowplow_utils.base_create_snowplow_events_this_run(
     var('snowplow__base_sessions', 'snowplow_base_sessions_this_run'),
-    var('snowplow__session_identifiers', '{"atomic": "domain_sessionid"}'),
+    var('snowplow__session_identifiers', '[{"table": "atomic", "field": "domain_sessionid"}]'),
     var('snowplow__session_timestamp', 'collector_tstamp'),
     var('snowplow__derived_tstamp_partitioned', true),
     var('snowplow__days_late_allowed', 3),

@@ -1,6 +1,6 @@
 ---
 title: "Utils"
-sidebar_position: 103
+sidebar_position: 300
 ---
 
 ```mdx-code-block
@@ -8,13 +8,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+:::info
+The models, functionality, and variables described below are only available from `snowplow-utils v0.15.0` and above, as earlier packages do not utilize these variables.
+:::
+
 ## Package Configuration Variables
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
-
-:::info
-The variables listed here are only available from `snowplow-utils 0.15.0` onwards, as earlier packages do not utilize these variables.
-:::
 
 
 :::note
@@ -42,11 +42,16 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `start_date`            | The date to start processing events from in the package on first run or a full refresh, based on the value of `session_timestamp` variable.                                                                                                                                                                                                                                                                                             | `'2020-01-01'` |
 | `upsert_lookback_days`  | Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/) section for more details. | `30`           |
 ### Custom identifiers & timestamps
+
+:::info
+If you are looking to customise identifiers and timestamps heavily, please see the [Utils advanced operation](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation) section for more details and advanced usage examples to help you better understand how these variables work.
+:::
+
 | Variable Name        | Description                                                                                                                                                                                                                                                                                          | Default |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `session_identifiers` | A key:value map which contains all of the contexts and fields where your session identifiers are located. If the key is `atomic`, then this refers to a field found directly in the `events` table. If this key has a different value, the package will look for a context in your events table with that name, and it will use the specified value as the field name to access, either in the atomic table directly or in the specified context. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the map. | `{"atomic": "domain_sessionid"}`
+| `session_identifiers` | A list of key:value maps which contain all of the contexts and fields where your session identifiers are located. For each entry in the list, if your map contains the `table` value `events`, then this refers to a field found directly in the `events` table. If you are trying to introduce a context/entity with an identifier in it, you need to use the `schema` key instead, and the package will look for the context in your events table with that name. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `table` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `table` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Utils advanced operation](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation) section for more details. |  `[{"table" : "events", "field" : "domain_sessionid"}]`
 | `session_timestamp` | Determines which timestamp is used to build the sessionization logic. It's a good idea to have this timestamp be the same timestamp as the field you partition your events table on. | `collector_tstamp`
-| `user_identifiers` | A key:value map which contains all of the contexts and fields where your user identifiers are located. If the key is `atomic`, then this refers to a field found directly in the `events` table. If this key has a different value, the package will look for a context in your events table with that name, and it will use the specified value as the field name to access, either in the atomic table directly or in the specified context. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the map. | `{"atomic": "domain_userid"}` |
+| `user_identifiers` | A list of key:value maps which contain all of the contexts and fields where your user identifiers are located. For each entry in the list, if your map contains the `table` value `events`, then this refers to a field found directly in the `events` table. If you are trying to introduce a context/entity with an identifier in it, you need to use the `schema` key instead, and the package will look for the context in your events table with that name. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `table` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `table` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Utils advanced operation](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation) section for more details. | `{"atomic": "domain_userid"}` |
 ### Model renaming
 
 | Variable Name        | Description                                                                                                                                                                                                                                                                                          | Default |

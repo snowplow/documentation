@@ -314,7 +314,8 @@ a.card:hover::after {
   left: 2rem;
   bottom: auto;
 }
-.enterprise a:hover::after {
+.enterprise a:hover::after, 
+.cloud .enterprise:not(.cloud) a:hover::after {
   content: '🏭: For Snowplow BDP Enterprise customers';
 }
 .cloud a:hover::after {

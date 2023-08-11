@@ -253,6 +253,7 @@ li.opensource > a::before {
   display: inline-block;
   vertical-align: middle;
   margin-right: 0.5em;
+  text-wrap: nowrap;
 }
 
 article.enterprise > a > p::before,
@@ -277,7 +278,6 @@ li.enterprise.cloud > div > a::before,
 li.enterprise.cloud > a::before,
 article.enterprise.cloud > a > p::before {
   content: '🏭 ☁️';
-  text-wrap: nowrap;
 }
 li.enterprise.opensource > div > a::before,
 li.enterprise.opensource > a::before,

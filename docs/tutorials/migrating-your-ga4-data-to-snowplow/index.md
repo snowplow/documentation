@@ -121,11 +121,17 @@ The keyfile will be created in the same directory you ran Terraform.
 
 ## Step 2 - How to run the GA4 Migrator docker container
 
+#### 1 - Clone the Git repo along with the submodules
+```shell
+git clone --recurse-submodules https://github.com/snowplow-incubator/ga4-importer-backend.git
+```
+
+#### 2 - Configure environment variables
 Set the environment variable `SERVICE_ACCOUNT_KEY_FILE` to the full path for the GCP service account key file.
 ```shell
 export SERVICE_ACCOUNT_KEY_FILE=[path/to/service_account/keyfile.json]
 ```
-<details>
+<details><summary>Export to Snowflake</summary>
 If you are also going to run the export from BigQuery to Snowflake, set the following environment variables. This user must either have ACCOUNTADMIN permissions in Snowflake or the global CREATE INTEGRATION privilege.
 Also ensure that the GCS bucket you are using for the export already exists and is in the same location as your BigQuery table.
 
@@ -135,10 +141,21 @@ export SNOWFLAKE_PASSWORD=[snowflake_password]
 ```
 </details>
 
+#### 3 - Build and run the docker container
+
 If you do not already have Docker, installation instructions can be found [here](https://docs.docker.com/get-docker/).
 To run the docker container using docker compose. Run the following command:
 ```shell
 docker compose up --build
+```
+
+#### 4 - Access the migrator UI
+Once the docker container is up and running the UI can be accessed at `http://localhost:5000/`
+
+#### 5 - Stopping the container
+Stop and remove the docker container when it's no longer needed.
+```shell
+docker compose down
 ```
 
 ## Step 3 - Using the migrator tool UI

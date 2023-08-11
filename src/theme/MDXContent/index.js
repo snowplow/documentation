@@ -24,12 +24,7 @@ export default function MDXContentWrapper(props) {
 
   const legacy = _.some(_.initial(breadcrumbs), item => item.customProps?.legacy)
   const outdated = !legacy && _.some(_.initial(breadcrumbs), item => item.customProps?.outdated)
-  let offerings; 
-  if (breadcrumbs) {
-    const currentPage = breadcrumbs.slice(-1)
-    const parents = breadcrumbs.slice(0, -1)
-    offerings = _.find(currentPage.map(x => Array.isArray(x.customProps?.offerings)).includes(true) ? currentPage : parents, item => item.customProps?.offerings)
-  }
+ const offerings = _.findLast(breadcrumbs, item => item.customProps?.offerings)
 
   if (outdated) {
     const latest = _.last(_.takeWhile(breadcrumbs, item => !item.customProps?.outdated)).href

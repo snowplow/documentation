@@ -125,6 +125,10 @@ Much like with the quarantined sessions macro, this does not accept any argument
 ### 5. Setting up the new event limits macro
 For the `snowplow_base_new_event_limits` model, you need to add a few extra macros into the mix, which you can do as follows:
 
+:::info
+Be sure to specify your `PACKAGE_NAME` when calling the `get_enabled_snowplow_models` macro.
+:::
+
 ```jinja2
 {{ config(
    post_hook=["{{snowplow_utils.print_run_limits(this)}}"],
@@ -132,7 +136,7 @@ For the `snowplow_base_new_event_limits` model, you need to add a few extra macr
    )
 }}
 
-{%- set models_in_run = snowplow_utils.base_get_enabled_snowplow_models() -%}
+{%- set models_in_run = snowplow_utils.get_enabled_snowplow_models(PACKAGE_NAME, graph_object=none, models_to_run="", base_events_table_name='snowplow_base_events_this_run') -%}
 
 {% set min_last_success,
          max_last_success,
@@ -226,7 +230,7 @@ If you have more than one session or user identifier, you can specify multiple e
 `}
 </code></pre>
 </TabItem>
-<TabItem value="r&s" label="Redshift & Postgres" default>
+<TabItem value="redshift+postgres" label="Redshift & Postgres" default>
 <pre><code className="language-json">
 {`
 [
@@ -235,11 +239,22 @@ If you have more than one session or user identifier, you can specify multiple e
 ]
 `}
 </code></pre>
+
+For Redshift & Postgres we also introduce the `prefix` and `alias` fields, where `prefix` is the `prefix` that is put infront of each field name in the context, and `alias` is the table alias used upon joining. This can be useful when you are using custom SQL. As an example, using the above configuration we could access the `internal_user_id` field using the following SQL:
+
+```sql
+mcc_iud.mcc_internal_user_id as internal_user_id,
+```
+
+This could be leveraged in the `snowplow__custom_sql` variable. For more examples, please see [the following page](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation).
+
 </TabItem>
 </Tabs>
 
 
 The package will first extract `internal_user_id` from the `my_custom_context` context, and then use something similar to the following SQL statement: `COALESCE(my_custom_context.internal_user_id, events.domain_userid) as user_identifier`. This way, if a user is able to identify themselves through logging in which would populate a context called `my_custom_context`, their `internal_user_id` is used as a `user_identifier`. If, however, this is not the case, then the `user_identifier` field falls back on the value that the `domain_userid` has.
+
+
 
 Further, you can specify some additional configurations here such as in which table/schema the events data sits, what the names are of your `event_limits` and `incremental_manifest` tables, and some parameters around what the maximum session length is. You should once again be familiar with the majority of these variables if you've used another of our dbt packages before.
 

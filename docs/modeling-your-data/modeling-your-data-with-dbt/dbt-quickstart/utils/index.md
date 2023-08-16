@@ -225,7 +225,7 @@ If you have more than one session or user identifier, you can specify multiple e
 {`
 [
   {"schema": "my_custom_context", "field": "internal_user_id"},
-  {"table": "atomic", "field": "domain_userid"}
+  {"schema": "atomic", "field": "domain_userid"}
 ]
 `}
 </code></pre>
@@ -234,8 +234,8 @@ If you have more than one session or user identifier, you can specify multiple e
 <pre><code className="language-json">
 {`
 [
-  {"table": "my_custom_context", "field": "internal_user_id", "prefix": "mcc", "alias": "mcc_iud"},
-  {"table": "atomic", "field": "domain_userid"}
+  {"schema": "my_custom_context", "field": "internal_user_id", "prefix": "mcc", "alias": "mcc_iud"},
+  {"schema": "atomic", "field": "domain_userid"}
 ]
 `}
 </code></pre>
@@ -246,8 +246,7 @@ For Redshift & Postgres we also introduce the `prefix` and `alias` fields, where
 mcc_iud.mcc_internal_user_id as internal_user_id,
 ```
 
-This could be leveraged in the `snowplow__custom_sql` variable. For more examples, please see [the following page](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation).
-
+This could be leveraged in the `snowplow__custom_sql` variable. For more examples, please see [the following page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation).
 </TabItem>
 </Tabs>
 

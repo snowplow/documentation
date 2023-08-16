@@ -115,12 +115,12 @@ Next, within the `snowplow_incremental_manifest.sql` file, you can call the `bas
   )
 }}
 
-{% set incremental_manifest_query = snowplow_utils.base_create_snowplow_incremental_manifest() %}
+{% set incremental_manifest_query = snowplow_utils.base_create_snowplow_incremental_manifest(package_name=none) %}
 
 {{ incremental_manifest_query }}
 ```
 
-Much like with the quarantined sessions macro, this does not accept any arguments and generates the boilerplate for the incremental manifest table that Snowplow leverages.
+Much like with the quarantined sessions macro, this does not require any arguments and generates the boilerplate for the incremental manifest table that Snowplow leverages. If you provide a `package_name`, however, the manifest table will contain an additional `package` field which specifies the `package_name` for each table.
 
 ### 5. Setting up the new event limits macro
 For the `snowplow_base_new_event_limits` model, you need to add a few extra macros into the mix, which you can do as follows:
@@ -199,7 +199,8 @@ For the `snowplow_base_sessions_lifecycle_manifest` model, you have the followin
     var('snowplow__events_schema', 'atomic'),
     var('snowplow__events_table', 'events'),
     var('snowplow__event_limits', 'snowplow_base_new_event_limits'),
-    var('snowplow__incremental_manifest', 'snowplow_incremental_manifest')
+    var('snowplow__incremental_manifest', 'snowplow_incremental_manifest'),
+    var('snowplow__package_name, 'snowplow')
  ) %}
 
 {{ sessions_lifecycle_manifest_query }}

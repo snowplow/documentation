@@ -19,14 +19,19 @@ export const dbtSnowplowFractributionConfigSchema = {
     snowplow__conversion_window_start_date: {
       type: 'string',
       format: 'date',
-      title: 'Conversions Window Start Date',
+      title: 'Conversion Window Start Date',
       description: 'Start date (UTC) of your conversion window',
     },
     snowplow__conversion_window_end_date: {
       type: 'string',
       format: 'date',
-      title: 'Conversions Window End Date',
+      title: 'Conversion Window End Date',
       description: 'End date (UTC) of your conversion window',
+    },
+    snowplow__conversion_window_days: {
+      type: 'integer',
+      title: 'Conversion Window Days',
+      description: 'Optional variable in place of conversion_window_start_date and end_date to automatically define the conversion period.',
     },
     snowplow__path_lookback_days: {
       type: 'integer',
@@ -103,6 +108,13 @@ export const dbtSnowplowFractributionConfigSchema = {
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
       title: 'Channels to Exclude',
+      items: { type: 'string' },
+    },
+    snowplow__channels_to_include: {
+      type: 'array',
+      description: '> Click the plus sign to add a new entry',
+      minItems: 0,
+      title: 'Channels to Include',
       items: { type: 'string' },
     },
     snowplow__conversion_hosts: {

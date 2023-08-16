@@ -32,6 +32,7 @@ export const dbtSnowplowFractributionConfigSchema = {
       type: 'integer',
       title: 'Conversion Window Days',
       description: 'Optional variable in place of conversion_window_start_date and end_date to automatically define the conversion period.',
+      minimum: 1,
     },
     snowplow__path_lookback_days: {
       type: 'integer',

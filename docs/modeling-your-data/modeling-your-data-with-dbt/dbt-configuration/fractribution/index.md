@@ -90,7 +90,7 @@ export const GROUPS = [
                                             "snowplow__conversions_source",] },
   { title: "Operation and Logic", fields: ["snowplow__conversion_window_start_date",
                                           "snowplow__conversion_window_end_date",
-                                          "snowplow__conversion_days",
+                                          "snowplow__conversion_window_days",
                                           "snowplow__path_lookback_days",
                                           "snowplow__path_lookback_steps",
                                           "snowplow__path_transforms",

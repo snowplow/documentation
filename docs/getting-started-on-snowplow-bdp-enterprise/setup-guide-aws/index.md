@@ -91,7 +91,7 @@ You will need to share this role with us as part of filling out the setup form i
  "secretsmanager:PutSecretValue",
  "secretsmanager:TagResource",
  "sns:*",
- "sqs:*"
+ "sqs:*",
  "ssm:*",
  "support:*"
 ```

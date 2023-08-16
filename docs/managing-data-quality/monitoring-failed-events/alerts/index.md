@@ -10,7 +10,7 @@ sidebar_position: 2500
 Snowplow can send two types of alerts to help you monitor Failed Events:
 
 - **New failed event:** receive an alert within 10 minutes of a new type of event failure being detected on your pipeline.
-- **Failed event digest**: receive a twice-daily digest of all Failed Event activity in the previous 12-hour period.
+- **Failed event digest**: receive a daily digest of all Failed Event activity in the previous 48-hour period.
 
 ## Pre-requisites
 

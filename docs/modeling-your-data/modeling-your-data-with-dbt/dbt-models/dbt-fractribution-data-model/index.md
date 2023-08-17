@@ -57,8 +57,10 @@ This script will generate and populate the following three additional tables:
 ​
 In Google Analytics (Universal Analytics) a new session is started if a campaign source changes (referrer of campaign tagged URL). Snowplow utilizes activity based sessionization, rather than campaign based sessionization. Setting `consider_intrasession_channels` to `false` will take only the campaign information from the first page view in a given Snowplow session, and not give credit to other channels in the converting session if they occur after the initial page view.
 
-### Filter unwanted channels
+### Filter unwanted / wanted channels
 You can specify a list of channels for the variable `snowplow__channels_to_exclude` to exclude them from analysis (if kept empty all channels are kept). For example, users may want to exclude the 'Direct' channel from the analysis.
+
+You can also do the opposite, filter on certain channels to include in your analysis. You can do so by specifying them in the list captured within the variable `snowplow__channels_to_include`.
 ​
  ### Path Transform Options
 ​
@@ -134,7 +136,7 @@ For the python script only (for Docker you mount this as a volume at run time):
 
 - `redshift_host`: Redshift host url
 - `redshift_database`: Redshift database
-- `redshift_port`: Redshift port (likely `5439`) 
+- `redshift_port`: Redshift port (likely `5439`)
 - `redshift_user`: Redshift user
 - `redshift_password`: Redshift password
 - `redshift_schema`: Redshift schema

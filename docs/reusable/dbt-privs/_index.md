@@ -39,7 +39,7 @@ Please refer to the [Official Guide](https://cloud.google.com/bigquery/docs/acce
 
 ```sql
    -- user with "use catalog" privilege on the catalog
-   grant create schema on database <database_name> to role <role_name>;
+  grant create schema on catalog <catalog_name> to <principal_name>
 
    --alternatively
    create schema <profile_schema>_derived;

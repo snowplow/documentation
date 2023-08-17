@@ -36,7 +36,7 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 1. From your main AWS account, set up an Organisation if you haven't done so already.
 2. Create a member account (the sub-account) in that organization
 3. Sign out and sign into the new sub-account. Everything Snowplow-related will take place within this account from here in.
-4. Follow [these instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-start) to create a policy using the policy list below.
+4. Follow [these instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-start) to create a policy using the JSON policy document below.
 
 ### Set up Role and IAM permissions
 
@@ -49,51 +49,64 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 
 You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
 
-### Policy List
+### JSON Policy Document
 
-```text
- "acm:*",
- "application-autoscaling:*",
- "autoscaling:*",
- "aws-marketplace:Subscribe",
- "aws-marketplace:Unsubscribe",
- "aws-marketplace:ViewSubscriptions",
- "cloudformation:*",
- "cloudfront:*",
- "cloudwatch:*",
- "dynamodb:*",
- "ec2:*",
- "ecs:*",
- "eks:*",
- "elasticloadbalancing:*",
- "elasticmapreduce:*",
- "es:*",
- "execute-api:*",
- "events:*",
- "globalaccelerator:*",
- "iam:*",
- "kinesis:*",
- "kinesisanalytics:*",
- "kms:DescribeKey",
- "kms:List*",
- "lambda:*",
- "logs:*",
- "rds:*",
- "redshift:*",
- "route53:*",
- "route53resolver:*",
- "s3:*",
- "secretsmanager:CreateSecret",
- "secretsmanager:DeleteSecret",
- "secretsmanager:DescribeSecret",
- "secretsmanager:GetResourcePolicy",
- "secretsmanager:GetSecretValue",
- "secretsmanager:PutSecretValue",
- "secretsmanager:TagResource",
- "sns:*",
- "sqs:*",
- "ssm:*",
- "support:*"
+
+```json
+{
+  "Version":"2012-10-17",
+  "Statement":[
+    {
+      "Effect":"Allow",
+      "Action":[
+        "acm:*",
+        "application-autoscaling:*",
+        "autoscaling:*",
+        "aws-marketplace:Subscribe",
+        "aws-marketplace:Unsubscribe",
+        "aws-marketplace:ViewSubscriptions",
+        "cloudformation:*",
+        "cloudfront:*",
+        "cloudwatch:*",
+        "dynamodb:*",
+        "ec2:*",
+        "ecs:*",
+        "eks:*",
+        "elasticloadbalancing:*",
+        "elasticmapreduce:*",
+        "es:*",
+        "execute-api:*",
+        "events:*",
+        "globalaccelerator:*",
+        "iam:*",
+        "kinesis:*",
+        "kinesisanalytics:*",
+        "kms:DescribeKey",
+        "kms:List*",
+        "lambda:*",
+        "logs:*",
+        "rds:*",
+        "redshift:*",
+        "route53:*",
+        "route53resolver:*",
+        "s3:*",
+        "secretsmanager:CreateSecret",
+        "secretsmanager:DeleteSecret",
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetResourcePolicy",
+        "secretsmanager:GetSecretValue",
+        "secretsmanager:PutSecretValue",
+        "secretsmanager:TagResource",
+        "sns:*",
+        "sqs:*",
+        "ssm:*",
+        "support:*"
+      ],
+      "Resource":"*"
+    }
+  ]
+}
+ 
 ```
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).

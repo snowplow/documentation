@@ -188,9 +188,9 @@ For the `snowplow_base_sessions_lifecycle_manifest` model, you have the followin
 ```jinja2
 
 {% set sessions_lifecycle_manifest_query = snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest(
-    var('snowplow__session_identifiers', '[{"table": "atomic", "field": "domain_sessionid"}]'),
+    var('snowplow__session_identifiers', '[{"schema": "atomic", "field": "domain_sessionid"}]'),
     var('snowplow__session_timestamp', 'collector_tstamp'),
-    var('snowplow__user_identifiers', '[{"table": "atomic", "field": "domain_userid"}]'),
+    var('snowplow__user_identifiers', '[{"schema": "atomic", "field": "domain_userid"}]'),
     var('snowplow__quarantined_sessions', 'snowplow_base_quarantined_sessions'),
     var('snowplow__derived_tstamp_partitioned', true),
     var('snowplow__days_late_allowed', 3),
@@ -216,7 +216,7 @@ Next, we have `snowplow__session_identifiers` and `snowplow__user_identifiers`, 
 Currently, we only support session and user identifiers found in atomic fields for Redshift/Postgres. We don't support nested level fields for any warehouses, and for BigQuery you will currently need to do the version management yourself. We will be getting around to supporting this extra functionality soon.
 :::
 
-By default, `snowplow__session_identifiers` is set to `[{"table": "atomic", "field": "domain_sessionid"}]`, and `snowplow__user_identifiers` is set to `[{"table": "atomic", "field": "domain_userid"}]`. This means that the identifiers for sessions and users are expected to be found in the `domain_sessionid` and `domain_userid` fields, respectively.
+By default, `snowplow__session_identifiers` is set to `[{"schema": "atomic", "field": "domain_sessionid"}]`, and `snowplow__user_identifiers` is set to `[{"schema": "atomic", "field": "domain_userid"}]`. This means that the identifiers for sessions and users are expected to be found in the `domain_sessionid` and `domain_userid` fields, respectively.
 
 If you have more than one session or user identifier, you can specify multiple entries in the map. The order in which you list them determines the precedence that the macro will use to look for these field values, and `COALESCE` them into the common session/user_identifier field. E.g. if you have the following definition for your `user_identifier`:
 
@@ -254,6 +254,9 @@ This could be leveraged in the `snowplow__custom_sql` variable. For more example
 
 The package will first extract `internal_user_id` from the `my_custom_context` context, and then use something similar to the following SQL statement: `COALESCE(my_custom_context.internal_user_id, events.domain_userid) as user_identifier`. This way, if a user is able to identify themselves through logging in which would populate a context called `my_custom_context`, their `internal_user_id` is used as a `user_identifier`. If, however, this is not the case, then the `user_identifier` field falls back on the value that the `domain_userid` has.
 
+:::info
+We currently only track one `user_identifier` value per session in the `session_lifecycle_manifest`, which means if a user logs in part-way through a session, we would only keep one of those values.
+:::
 
 
 Further, you can specify some additional configurations here such as in which table/schema the events data sits, what the names are of your `event_limits` and `incremental_manifest` tables, and some parameters around what the maximum session length is. You should once again be familiar with the majority of these variables if you've used another of our dbt packages before.
@@ -291,7 +294,7 @@ For the `snowplow_base_events_this_run` model, you will need to run the followin
 
 {% set base_events_query = snowplow_utils.base_create_snowplow_events_this_run(
     var('snowplow__base_sessions', 'snowplow_base_sessions_this_run'),
-    var('snowplow__session_identifiers', '[{"table": "atomic", "field": "domain_sessionid"}]'),
+    var('snowplow__session_identifiers', '[{"schema": "atomic", "field": "domain_sessionid"}]'),
     var('snowplow__session_timestamp', 'collector_tstamp'),
     var('snowplow__derived_tstamp_partitioned', true),
     var('snowplow__days_late_allowed', 3),

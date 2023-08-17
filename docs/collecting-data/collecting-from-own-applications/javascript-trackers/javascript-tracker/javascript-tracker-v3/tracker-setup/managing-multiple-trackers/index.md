@@ -10,7 +10,23 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 <Block5966/>
 ```
 
-You have more than one tracker instance running on the same page at once. This may be useful if you want to log events to different collectors. By default, any Snowplow method you call will be executed by every tracker you have created so far. You can override this behavior and specify which trackers will execute a Snowplow method. To do this, change the method name by adding a colon followed by a list of tracker names separated by semicolons.
+You can have more than one tracker instance running on the same page at once. This may be useful if you want to log events to different collectors. By default, any Snowplow method you call will be executed by every tracker you have created so far.
+
+You can override this behavior and specify which trackers will execute a Snowplow method. To do this, change the method name by adding a colon followed by a list of tracker names separated by semicolons as such:
+
+```javascript
+/* Sending a pageview on a single tracker */
+snowplow('trackPageView:{{TRACKER_NAME}}');
+/* Sending a pageview on multiple trackers */
+snowplow('trackPageView:{{TRACKER_NAME}};{{ANOTHER_TRACKER_NAME}}');
+
+/**
+ * Where {{TRACKER_NAME}} and {{ANOTHER_TRACKER_NAME}} are names of 
+ * trackers initialized on the page using the `newTracker` API.
+*/
+```
+
+Example usage:
 
 ```javascript
 snowplow("newTracker", "sp1", "{{FIRST_COLLECTOR_URL}}", {
@@ -23,11 +39,11 @@ snowplow("newTracker", "sp2", "{{SECOND_COLLECTOR_URL}}", {
   platform: "mob"
 });
 
-// Both trackers will use this custom title
+/* Both trackers will use this custom title */
 snowplow('setCustomUrl', 'http://mysite.com/checkout-page');
 
-// Both trackers will fire a structured event
-window.snowplow('trackStructEvent', {
+/* Both trackers will fire a structured event */
+snowplow('trackStructEvent', {
   category: 'Mixes',
   action: 'Play',
   label: 'MRC/fabric-0503-mix',
@@ -35,8 +51,15 @@ window.snowplow('trackStructEvent', {
   value: 0.0,
 });
 
-// Only the first tracker will fire this structured event
-window.snowplow('trackStructEvent:sp1', {
+/* Only the first tracker will be affected by the plugin addition */
+snowplow(
+  "addPlugin:sp1",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@3/dist/index.umd.min.js",
+  ["snowplowWebVitals", "WebVitalsPlugin"]
+);
+
+/* Only the first tracker will fire this structured event */
+snowplow('trackStructEvent:sp1', {
   category: 'Mixes',
   action: 'Play',
   label: 'MRC/fabric-0503-mix',
@@ -44,7 +67,7 @@ window.snowplow('trackStructEvent:sp1', {
   value: 0.0,
 });
 
-// Only the second tracker will fire this self-describing event
+/* Only the second tracker will fire this self-describing event */
 snowplow('trackSelfDescribingEvent:sp2', { 
   event: {
     schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
@@ -60,6 +83,6 @@ snowplow('trackSelfDescribingEvent:sp2', {
   }
 });
 
-// Both trackers will fire a page view event
+/* Both trackers will fire a page view event */
 snowplow('trackPageView:sp1;sp2');
 ```

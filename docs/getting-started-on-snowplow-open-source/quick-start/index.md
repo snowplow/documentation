@@ -168,7 +168,7 @@ The first step is to set up the [Iglu Server](/docs/pipeline-components-and-appl
 
 This will allow you to create and evolve your own [custom events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities). Iglu Server stores the [schemas](/docs/understanding-your-pipeline/schemas/index.md) for your events and entities and fetches them as your events are processed by the pipeline.
 
-### Step 1: Update the `iglu_sever` input variables
+### Step 1: Update the `iglu_server` input variables
 
 Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `iglu_server` directory to update the input variables in `terraform.tfvars`.
 
@@ -504,7 +504,7 @@ To update your input variables, you’ll need to know a few things:
 
 - Your IP Address. [Help](https://duckduckgo.com/?q=ip+address&t=ffab&ia=answer).
 - Your Iglu Server’s domain name from the [previous step](#step-2-run-the-iglu_server-terraform-script)
-- Your Iglu Server’s API Key from the [previous step](#step-1-update-the-iglu_sever-input-variables)
+- Your Iglu Server’s API Key from the [previous step](#step-1-update-the-iglu_server-input-variables)
 - How to generate an SSH Key.
 
 :::tip

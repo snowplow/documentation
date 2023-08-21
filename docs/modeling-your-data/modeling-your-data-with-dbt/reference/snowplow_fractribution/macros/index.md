@@ -1238,7 +1238,7 @@ on-run-start: "{{ create_udfs() }}"
   {% set trim_long_path %}
   -- Returns the last snowplow__path_lookback_steps channels in the path if snowplow__path_lookback_steps > 0,
   -- or the full path otherwise.
-  create or replace function {{target.schema}}.trim_long_path(path varchar, snowplow__path_lookback_steps integer)
+  create or replace function {{target.schema}}.trim_long_path(path varchar(max), snowplow__path_lookback_steps integer)
   returns varchar
   stable
   AS $$
@@ -1269,7 +1269,7 @@ on-run-start: "{{ create_udfs() }}"
   {% set remove_if_not_all %}
   -- Returns the path with all copies of targetElem removed, unless the path consists only of
   -- targetElems, in which case the original path is returned.
-  create or replace function {{target.schema}}.remove_if_not_all(path varchar, target_elem varchar)
+  create or replace function {{target.schema}}.remove_if_not_all(path varchar(max), target_elem varchar)
   returns varchar
   stable
   AS $$
@@ -1295,7 +1295,7 @@ on-run-start: "{{ create_udfs() }}"
   {% set remove_if_last_and_not_all %}
   -- Returns the path with all copies of targetElem removed from the tail, unless the path consists
   -- only of targetElems, in which case the original path is returned.
-  create or replace function {{target.schema}}.remove_if_last_and_not_all(path varchar, target_elem varchar)
+  create or replace function {{target.schema}}.remove_if_last_and_not_all(path varchar(max), target_elem varchar)
   returns varchar
   stable
   AS $$
@@ -1326,7 +1326,7 @@ on-run-start: "{{ create_udfs() }}"
   {% set unique %}
   -- Returns the unique/identity transform of the given path array.
   -- E.g. [D, A, B, B, C, D, C, C] --> [D, A, B, B, C, D, C, C].
-  create or replace function {{target.schema}}.unique_path(path varchar)
+  create or replace function {{target.schema}}.unique_path(path varchar(max))
   returns varchar
   stable
   AS $$
@@ -1341,7 +1341,7 @@ on-run-start: "{{ create_udfs() }}"
   -- Sequential duplicates are collapsed.
   -- E.g. [D, A, B, B, C, D, C, C] --> [D, A, B, C, D, C].
 
-  create or replace function {{target.schema}}.exposure_path(path varchar)
+  create or replace function {{target.schema}}.exposure_path(path varchar(max))
   returns varchar
   stable
   AS $$
@@ -1365,7 +1365,7 @@ on-run-start: "{{ create_udfs() }}"
   -- Returns the first transform of the given path array.
   -- Repeated channels are removed.
   -- E.g. [D, A, B, B, C, D, C, C] --> [D, A, B, C].
-  create or replace function {{target.schema}}.first_path(path varchar)
+  create or replace function {{target.schema}}.first_path(path varchar(max))
   returns varchar
   stable
   AS $$
@@ -1388,7 +1388,7 @@ on-run-start: "{{ create_udfs() }}"
   -- Returns the frequency transform of the given path array.
   -- Repeat events are removed, but tracked with a count.
   -- E.g. [D, A, B, B, C, D, C, C] --> [D(2), A(1), B(2), C(3)].
-  create or replace function {{target.schema}}.frequency_path(path varchar)
+  create or replace function {{target.schema}}.frequency_path(path varchar(max))
   returns varchar
   stable
   AS $$
@@ -1635,6 +1635,7 @@ A macro returning the upper or lower boundary to limit what is processed by the 
 <h4>Arguments</h4>
 
 - `limit_type` *(string)*: Can be either 'min' or 'max' depending on if the upper or lower boundary date needs to be returned
+- `model` *(string)*: Can either be 'sessions' for usage within snowplow_fractribution_sessions_by_customer_id or 'conversions' to use for snowplow_fractribution_conversions_by_customer_id
 
 <h4>Returns</h4>
 
@@ -1677,8 +1678,8 @@ where
 <TabItem value="raw" label="raw" default>
 
 ```jinja2
-{% macro get_lookback_date_limits(limit_type) %}
-  {{ return(adapter.dispatch('get_lookback_date_limits', 'snowplow_fractribution')(limit_type)) }}
+{% macro get_lookback_date_limits(limit_type, model) %}
+  {{ return(adapter.dispatch('get_lookback_date_limits', 'snowplow_fractribution')(limit_type, model)) }}
 {% endmacro %}
 ```
 
@@ -1686,16 +1687,40 @@ where
 <TabItem value="default" label="default">
 
 ```jinja2
-{% macro default__get_lookback_date_limits(limit_type) %}
+{% macro default__get_lookback_date_limits(limit_type, model) %}
 
-  -- check if web data is up-to-date
-
+  -- check if web data is up-to-date in page_views_source (should cover conversion source check in case the web model is used to model conversions)
+  {% set combined_time = var("snowplow__conversion_window_days") + var('snowplow__path_lookback_days') %}
   {% set query %}
-    select max(start_tstamp) < '{{ var('snowplow__conversion_window_end_date') }}' as is_over_limit,
-           cast(min(start_tstamp) as date) > '{{ var("snowplow__conversion_window_start_date") }}' as is_below_limit,
-           cast(max(start_tstamp) as {{ type_string() }}) as last_processed_page_view,
-           cast(min(start_tstamp) as {{ type_string() }}) as first_processed_page_view
-    from {{ var('snowplow__page_views_source') }}
+
+      -- when the user opts for the auto-populated conversion window
+      {% if var("snowplow__conversion_window_start_date") == '' and var("snowplow__conversion_window_end_date") == '' %}
+           with base as (
+              select max(start_tstamp) as last_pageview,
+                    min(start_tstamp) as first_pageview,
+              from {{ var('snowplow__page_views_source') }}
+           )
+           select
+             false as is_over_limit, -- the last pageview will be taken from the page_views_source
+             cast(first_pageview as date) > cast({{ dbt.dateadd('day', -combined_time, last_pageview) }} as date) as is_below_limit,
+             cast(last_pageview as {{ type_string() }}) as last_processed_page_view,
+             cast(first_pageview as {{ type_string() }}) as first_processed_page_view
+
+      -- when the user opts for manually defined conversion window
+      {% elif var("snowplow__conversion_window_start_date")|length and var("snowplow__conversion_window_end_date")|length %}
+           select
+             max(start_tstamp) < '{{ var('snowplow__conversion_window_end_date') }}' as is_over_limit,
+             cast(min(start_tstamp) as date) > '{{ var("snowplow__conversion_window_start_date") }}' as is_below_limit,
+             cast(max(start_tstamp) as {{ type_string() }}) as last_processed_page_view,
+             cast(min(start_tstamp) as {{ type_string() }}) as first_processed_page_view
+          from {{ var('snowplow__page_views_source') }}
+
+      {% else %}
+        {%- do exceptions.raise_compiler_error("Snowplow Error: please either give both of the following variables a value or set both as empty strings: snowplow__conversion_window_start_date & snowplow__conversion_window_end_date ") %}
+
+
+      {% endif %}
+
   {% endset %}
 
   {% set result = run_query(query) %}
@@ -1717,22 +1742,65 @@ where
     {% endif %}
   {% endif %}
 
+  -- setting and executing the limit query depending on input
 
   {% set query %}
-    {% if limit_type == 'min' %}
-      with base as (select case when '{{ var("snowplow__conversion_window_start_date") }}' = ''
-                  then {{ dbt.dateadd('day', -31, dbt.current_timestamp()) }}
-                  else '{{ var("snowplow__conversion_window_start_date") }}'
-                  end as min_date_time)
-      select cast({{ dbt.dateadd('day', (- var('snowplow__path_lookback_days') + 1), 'min_date_time') }} as date) from base
+    {% if limit_type == 'min' and model == 'sessions' %}
+      {% if var("snowplow__conversion_window_start_date") == '' and var("snowplow__conversion_window_end_date") == '' %}
+          with base as (
+            select max(start_tstamp) as last_pageview
+            from {{ var('snowplow__page_views_source') }}
+          )
+          select cast({{ dbt.dateadd('day', -combined_time, 'last_pageview') }} as date) as lower_limit
+          from base
 
+      {% else %}
+         with base as (
+          select cast('{{ var('snowplow__conversion_window_start_date')}}' as timestamp) as cw_tstamp
+         )
+        select cast({{ dbt.dateadd('day', -var('snowplow__path_lookback_days'), 'cw_tstamp' ) }} as date) as lower_limit
+        from base
+      {% endif %}
 
-    {% elif limit_type == 'max' %}
-      with base as (select case when '{{ var("snowplow__conversion_window_start_date") }}' = ''
-                  then {{ dbt.dateadd('day', -1, dbt.current_timestamp()) }}
-                  else '{{ var("snowplow__conversion_window_end_date") }}'
-                  end as max_date_time)
-      select cast(max_date_time as date) from base
+    {% elif limit_type == 'max' and model == 'sessions' %}
+      {% if var("snowplow__conversion_window_start_date") == '' and var("snowplow__conversion_window_end_date") == '' %}
+          with base as (
+                select max(start_tstamp) as last_pageview
+                from {{ var('snowplow__page_views_source') }}
+            )
+        select cast({{ dbt.dateadd('day', -1, 'last_pageview') }} as date) as upper_limit
+        from base
+
+      {% else %}
+        select cast('{{ var("snowplow__conversion_window_end_date") }}' as date) as upper_limit
+      {% endif %}
+
+    {% elif limit_type == 'min' and model == 'conversions' %}
+      {% if var("snowplow__conversion_window_start_date") == '' and var("snowplow__conversion_window_end_date") == '' %}
+         with base as (
+            select max(start_tstamp) as last_pageview
+            from {{ var('snowplow__page_views_source') }}
+         )
+        select cast( {{ dbt.dateadd('day', -var("snowplow__conversion_window_days"), 'last_pageview') }} as date) as lower_limit
+          from base
+
+      {% else %}
+        select cast('{{ var("snowplow__conversion_window_start_date") }}' as date) as lower_limit
+      {% endif %}
+
+    {% elif limit_type == 'max' and model == 'conversions' %}
+      {% if var("snowplow__conversion_window_start_date") == '' and var("snowplow__conversion_window_end_date") == '' %}
+        with base as (
+                select max(start_tstamp) as last_pageview
+                from {{ var('snowplow__page_views_source') }}
+            )
+        select cast({{ dbt.dateadd('day', -1, 'last_pageview') }} as date) as upper_limit
+        from base
+
+      {% else %}
+        select cast('{{ var("snowplow__conversion_window_end_date") }}' as date) as upper_limit
+      {% endif %}
+
     {% else %}
     {% endif %}
   {% endset %}
@@ -1758,7 +1826,6 @@ where
 <Tabs groupId="reference">
 <TabItem value="macro" label="Macros">
 
-- macro.dbt.current_timestamp
 - macro.dbt.dateadd
 - macro.dbt.run_query
 - macro.dbt.type_string

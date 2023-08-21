@@ -343,12 +343,12 @@ from {{ var('snowplow__conversions_source' )}} as events
 {% endif %}
 
 where {{ conversion_clause() }}
-  and date(derived_tstamp) >= '{{ get_lookback_date_limits("min") }}'
-  and date(derived_tstamp) <= '{{ get_lookback_date_limits("max") }}'
+  and date(derived_tstamp) >= '{{ get_lookback_date_limits("min", "conversions") }}'
+  and date(derived_tstamp) <= '{{ get_lookback_date_limits("max", "conversions") }}'
 
   {% if var('snowplow__conversions_source_filter') != '' %}
-    and date({{ var('snowplow__conversions_source_filter') }}) >= {{ dateadd('day',-var('snowplow__conversions_source_filter_buffer_days'), "'"~get_lookback_date_limits('min')~"'") }}
-    and date({{ var('snowplow__conversions_source_filter') }}) <= {{ dateadd('day', var('snowplow__conversions_source_filter_buffer_days'),"'"~get_lookback_date_limits('max')~"'") }}
+    and date({{ var('snowplow__conversions_source_filter') }}) >= {{ dateadd('day',-var('snowplow__conversions_source_filter_buffer_days'), "'"~get_lookback_date_limits('min', 'conversions')~"'") }}
+    and date({{ var('snowplow__conversions_source_filter') }}) <= {{ dateadd('day', var('snowplow__conversions_source_filter_buffer_days'),"'"~get_lookback_date_limits('max', 'conversions')~"'") }}
   {% endif %}
 ```
 
@@ -871,9 +871,9 @@ from {{ var('snowplow__page_views_source') }}  page_views
   on page_views.domain_userid = user_mapping.domain_userid
 {% endif %}
 
-where date(derived_tstamp) >= '{{ get_lookback_date_limits("min") }}'
+where date(derived_tstamp) >= '{{ get_lookback_date_limits("min", "sessions") }}'
 
-  and date(derived_tstamp) <= '{{ get_lookback_date_limits("max") }}'
+  and date(derived_tstamp) <= '{{ get_lookback_date_limits("max", "sessions") }}'
 
   and
     -- restrict to certain hostnames
@@ -897,9 +897,19 @@ select
   *
 from
   base_data
-{% if var('snowplow__channels_to_exclude') %}
+{% if var('snowplow__channels_to_exclude') and var('snowplow__channels_to_include') %}
     -- Filters out any unwanted channels
     where channel not in ({{ snowplow_utils.print_list(var('snowplow__channels_to_exclude')) }})
+    and channel in ({{ snowplow_utils.print_list(var('snowplow__channels_to_include')) }})
+
+{% elif var('snowplow__channels_to_exclude') %}
+    -- Filters out any unwanted channels
+    where channel not in ({{ snowplow_utils.print_list(var('snowplow__channels_to_exclude')) }})
+
+{% elif var('snowplow__channels_to_include') %}
+    -- Filters out any unwanted channels
+    where channel in ({{ snowplow_utils.print_list(var('snowplow__channels_to_include')) }})
+
 {% endif %}
 ```
 

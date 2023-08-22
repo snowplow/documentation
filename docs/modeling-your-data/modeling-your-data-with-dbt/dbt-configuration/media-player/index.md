@@ -32,7 +32,6 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `max_media_pv_window` | The number of hours that needs to pass before new page_view level media player metrics from the `snowplow_media_player_base` table are safe to be processed by the model downstream in the `snowplow_media_player_media_stats` table. Please note that even if new events are added later on ( e.g. new `percentprogress` events are fired indicating potential replay) and the `snowplow_media_player_base` table is changed, the model will not update them in the media_stats table, therefore it is safer to set as big of a number as still convenient for analysis and reporting. | 10 |
 | `valid_play_sec` | The minimum number of seconds that a media play needs to last to consider that interaction a valid play. The default is 30 seconds (based on the YouTube standard) but it can be modified here, if needed. | 30 |
 | `surrogate_key_treat_nulls_as_empty_strings` | Passed through to `dbt_utils` to match legacy surrogate key behavior. | `true` |
-    snowplow__app_id: []
 
 ### Contexts, filters, and logs
 

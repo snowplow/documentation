@@ -19,6 +19,7 @@ export const ObjectFieldTemplateGroupsGenerator = (groups) => (props) => {
         {groups.map((group) => {
           // filter to just the relevant props
           const childProps = getPropsForGroup(group, props)
+          console.log(childProps)
           return (
             <>
               <Details summary={group.title}>
@@ -37,11 +38,11 @@ export const ObjectFieldTemplateGroupsGenerator = (groups) => (props) => {
 export const getPropsForGroup = (group, props) => {
   return {
     ...props,
-    properties: props.properties.filter((p) => group.fields.includes(p.name)),
+    properties: props.properties.filter((p) => group.fields.includes(p.name)).sort((a, b) => a.name.localeCompare(b.name)),
   }
 }
 
-// Themeing
+// Theming
 export const darkTheme = createTheme({
   palette: {
     mode: 'dark',

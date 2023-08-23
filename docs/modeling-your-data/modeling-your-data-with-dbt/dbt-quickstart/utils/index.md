@@ -8,6 +8,10 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+:::info
+The models, functionality, and variables described below are only available from `snowplow-utils v0.15.0` and above, as earlier packages do not utilize these variables.
+:::
+
 The `snowplow-utils` package allows you to create your own custom `snowplow_base_events_this_run` table using macros that generate the required SQL code for you, allowing you to incorporate whatever custom event types, contexts of Snowplow data. Using this package will allow you to leverage the [incremental nature](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) of the Snowplow packages, meaning you can more easily build data models using our other packages such as `snowplow-web` and `snowplow-mobile`, as well as build your own completely custom packages without having to do the initial heavy lifting yourself. This can, however, be a bit complicated to set up and so for that purpose we've create this quickstart page to guide you through this process.
 
 :::info

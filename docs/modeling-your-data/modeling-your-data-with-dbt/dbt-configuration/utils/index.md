@@ -43,6 +43,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `session_lookback_days` | Number of days to limit scan on `snowplow_mobile_base_sessions_lifecycle_manifest` manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.                                                                                                                                                                                             | `730`          |
 | `start_date`            | The date to start processing events from in the package on first run or a full refresh, based on the value of `session_timestamp` variable.                                                                                                                                                                                                                                                                                             | `'2020-01-01'` |
 | `upsert_lookback_days`  | Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/) section for more details. | `30`           |
+
 ### Custom identifiers & timestamps
 
 :::info

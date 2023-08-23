@@ -7,6 +7,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+### Upgrading to 0.16.0
+
+Note the minimum `dbt-core` version now required is 1.5.0
+
+Most upgrades and new features should be available automatically after the first run of the new version of the package, however there are a few breaking changes to manage before this first run. To enable any other new optional features or make use of the new configuration options, please see the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/index.md) page.
+
+1. The seed files have been prefixed with `snowplow_web_` so you will need to re-run `dbt seed` if this is not part of your standard workflow (note this will not drop the existing tables)
+2. Both the quarantined sessions and the sessions lifecycle table have has a column renamed, please run the below statements to rename this column in your warehouse if not doing a full-refresh of the package.
+    ```sql
+    alter table <your_schema>_snowplow_manifest.snowplow_web_base_sessions_lifecycle_manifest rename column session_id to session_identifier;
+    alter table <your_schema>_snowplow_manifest.snowplow_web_base_quarantined_sessions rename column session_id to session_identifier;
+    ```
+3. For Redshift/Postgres users, the context variables are now just the table name, no need for the complicated `source` function if you had overwritten these previously.
+
 ### Upgrading to 0.15.1
 
 For existing Snowflake and Databricks Core Web Vitals optional module users the derived table `snowplow_web_vitals` needs to be altered due to column data type change. Please run the below queries to migrate.

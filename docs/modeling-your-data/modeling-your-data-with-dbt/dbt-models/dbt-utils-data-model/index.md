@@ -12,6 +12,10 @@ import ThemedImage from '@theme/ThemedImage';
 
 # Snowplow Utils Package
 
+:::info
+The models, functionality, and variables described below are only available from `snowplow-utils v0.15.0` and above, as earlier packages do not utilize these variables.
+:::
+
 **The package source code can be found in the [snowplow/dbt-snowplow-utils repo](https://github.com/snowplow/dbt-snowplow-utils).**
 
 The package contains a handful of useful macros that can help speed up development, as well as some handy macros to rebuild the `base` level tables that each Snowplow dbt package uses internally.

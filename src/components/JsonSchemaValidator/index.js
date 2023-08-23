@@ -19,7 +19,6 @@ export const ObjectFieldTemplateGroupsGenerator = (groups) => (props) => {
         {groups.map((group) => {
           // filter to just the relevant props
           const childProps = getPropsForGroup(group, props)
-          console.log(childProps)
           return (
             <>
               <Details summary={group.title}>

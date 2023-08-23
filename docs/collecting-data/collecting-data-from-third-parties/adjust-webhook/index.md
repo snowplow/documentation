@@ -1,7 +1,6 @@
 ---
 title: "Adjust"
-date: "2020-08-21"
-sidebar_position: 160
+sidebar_position: -1
 ---
 
 ## Intro

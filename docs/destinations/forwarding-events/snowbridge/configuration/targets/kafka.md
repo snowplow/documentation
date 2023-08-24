@@ -1,6 +1,6 @@
 # Kafka Target
 
-Write data to an Kafka topic.
+Write data to a Kafka topic.
 
 ## Authentication
 

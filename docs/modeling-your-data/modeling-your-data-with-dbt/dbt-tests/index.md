@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 On this page, `<package>` can be one of: `web`, `mobile`
 
 :::
-
+## Test Selection
 The packages contains tests for both the scratch and derived models. Depending on your use case you might not want to run all tests in production, for example to save costs. There are several tags included in the packages to help select subsets of tests. Tags:
 
 - `this_run`: Any model with the `_this_run` suffix
@@ -85,3 +85,32 @@ dbt test --selector snowplow_ecommerce
 
 </TabItem>
 </Tabs>
+
+## Test Configuration
+There are a number of configuration options on dbt tests, which are documented in the [dbt docs](https://docs.getdbt.com/reference/test-configs). You may want to apply some of these on the tests within the Snowplow dbt packages to ensure they're applicable to your data and use cases. The best way to achieve this is by editing the configuration within your project's root `dbt_project.yml` file.
+
+For example, you may want to apply a severity threshold on all tests within the `snowplow_web` package. You can do this by updating your `dbt_project.yml` configuration as below:
+
+```yml
+# dbt_project.yml
+# Example config applied to all tests in a package
+...
+tests:
+  snowplow_web:
+    +warn_if: ">10"
+    +error_if: ">100"
+```
+
+Alternatively, you could apply a configuration to a specific, single instance of a test by calling out its resource path directly:
+
+```yml
+# dbt_project.yml
+# Example config applied to a specific test
+...
+tests:
+  snowplow_web:
+    page_views:
+      not_null_snowplow_web_page_views_domain_sessionid:
+        +where: "app_id != '<app_id_to_exclude_from_test>'"
+```
+

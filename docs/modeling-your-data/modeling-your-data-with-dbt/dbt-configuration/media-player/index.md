@@ -46,8 +46,8 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `enable_media_ad` | Set to `true` if the [media ad context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad/jsonschema/1-0-0) is enabled. This is tracked by our latest JavaScript and mobile trackers along with ad events. | `false` |
 | `enable_media_ad_break` | Set to `true` if the [media ad-break context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_break/jsonschema/1-0-0) is enabled. This is tracked by our latest JavaScript and mobile trackers when ad breaks are tracked along with ad events. | `false` |
 | `enable_web_events` | Whether to use the web contexts for web media events in the processing (based on the web page context). | `true` |
-| `enable_mobile_events` | Whether to use the mobile contexts for mobile media events in the processing (based on the client session and screen view context). | `true` |
-| `enable_ad_quartile_event` | Set to `true` if [ad quartile events](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0) are tracked during media ad playback. | `true` |
+| `enable_mobile_events` | Whether to use the mobile contexts for mobile media events in the processing (based on the client session and screen view context). | `false` |
+| `enable_ad_quartile_event` | Set to `true` if [ad quartile events](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0) are tracked during media ad playback. | `false` |
 | `app_id` | A list of app_ids to filter the events table on for processing within the package. | `[]` (no filter applied) |
 
 ### Warehouse Specific

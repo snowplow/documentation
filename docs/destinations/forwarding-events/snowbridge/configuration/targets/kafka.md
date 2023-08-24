@@ -1,5 +1,7 @@
 # Kafka Target
 
+Write data to an Kafka topic.
+
 ## Authentication
 
 Where SASL is used, it may be enabled via the `enable_sasl`, `sasl_username`, and `sasl_password` and `sasl_algorithm` options.

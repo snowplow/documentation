@@ -1,5 +1,7 @@
 # Stdin Source
 
+Read data from stdin.
+
 Stdin source is the default, and has one optional configuration to set the concurrency. 
 
 Stdin source simply treats stdin as the input.

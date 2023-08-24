@@ -1,5 +1,7 @@
 # PubSub Source
 
+Read data from a PubSub topic.
+
 ## Authentication
 
 Authentication is done using a [GCP Service Account](https://cloud.google.com/docs/authentication/application-default-credentials#attached-sa). Create a service account credentials file, and provide the path to it via the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.

@@ -1,5 +1,7 @@
 # Stdout Target
 
+Write data to stdout.
+
 Stdout target doesn't have any configurable options - when configured it simply outputs the messages to stdout.
 ## Configuration 
 

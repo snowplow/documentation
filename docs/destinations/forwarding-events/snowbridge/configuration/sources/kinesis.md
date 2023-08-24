@@ -1,5 +1,7 @@
 # Kinesis Source
 
+Read data from a Kinesis stream.
+
 :::note
 
 To use this source, you need the AWS-specific version of Snowbridge that can only be run on AWS. See [the page on Snowbridge distributions](/docs/destinations/forwarding-events/snowbridge/getting-started/distribution-and-deployment.md) for more information.

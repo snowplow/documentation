@@ -1,5 +1,7 @@
 # HTTP Target
 
+Send data over HTTP.
+
 ## Authentication
 
 Where basicauth is used, it may be configured using the `basic_auth_username` and `basic_auth_password` options. Where an authorisation header is used, it may be set via the `headers` option.

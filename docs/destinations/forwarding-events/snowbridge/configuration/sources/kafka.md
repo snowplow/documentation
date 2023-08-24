@@ -1,5 +1,7 @@
 # Kafka Source
 
+Read data from a Kafka topic.
+
 ## Authentication
 
 Authentication is done by providing valid credentials in the configuration.

@@ -1,5 +1,7 @@
 # EventHub Target
 
+Write data to an EventHub.
+
 ## Authentication
 
 Authentication for the EventHub target is done by configuring any valid combination of the environment variables [listed in the Azure Event Hubs Client documentation](https://pkg.go.dev/github.com/Azure/azure-event-hubs-go#NewHubWithNamespaceNameAndEnvironment).

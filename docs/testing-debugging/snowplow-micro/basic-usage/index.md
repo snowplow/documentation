@@ -90,7 +90,11 @@ Once you have the tracking code and the events are flowing in, you should see so
 
 This means your tracking is set up correctly and your events are valid (`GOOD`).
 
-If you wish to inspect the events further, you can use [the API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md). For example, try:
+Would you rather see the events visually? Open [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in your browser. You might want to check [a few tips on how to use the UI](/docs/testing-debugging/snowplow-micro/ui/index.md).
+
+![Micro UI overview](../images/overview.png)
+
+Alternatively, you can inspect the events via [the API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md). For example, try:
 
 ```bash
 curl localhost:9090/micro/good

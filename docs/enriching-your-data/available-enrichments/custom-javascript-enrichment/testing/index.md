@@ -33,7 +33,17 @@ Next, point your tracking code to `localhost:9090` (see the [usage guide](/docs/
 
 ## Debugging
 
-When debugging a JavaScript enrichment with Micro, there are two sources of useful information: Micro’s logs and its [REST API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md).
+When debugging a JavaScript enrichment with Micro, there are a few sources of useful information: the [UI](/docs/testing-debugging/snowplow-micro/ui/index.md) (available since Micro 2.0.0), the logs and the [REST API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md).
+
+### User Interface
+
+The overview will show you which events are enriched successfully and which fail:
+
+![Micro UI overview](../../../../testing-debugging/snowplow-micro/images/overview.png)
+
+For each failed event, you can also expand the details and look at the failure message:
+
+![Micro UI failure message](../../../../testing-debugging/snowplow-micro/images/failure-details.png)
 
 ### Logs
 
@@ -77,9 +87,15 @@ Here’s an example:
 print(`--- URL is: ${event.getPage_url()}`);
 ```
 
-This will be printed directly to the output from Micro.
+This will be printed directly to the output from Micro (in the terminal — currently this information is not available in the Micro UI).
 
-Note that `console.log` and `console.dir` familiar to JavaScript developers _will not_ work in this context. If you want to pretty-print an object or array, the best approach is to use `JSON.stringify`:
+:::info There is no `console.log`
+
+Note that `console.log` and `console.dir` familiar to JavaScript developers _will not_ work in this context.
+
+:::
+
+If you want to pretty-print an object or array, the best approach is to use `JSON.stringify`:
 
 ```js
 const myEvent = JSON.parse(event.getUnstruct_event());

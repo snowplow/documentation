@@ -1,6 +1,6 @@
 ---
 title: "Connecting remote sites and apps"
-sidebar_position: 4
+sidebar_position: 5
 description: "How to use Micro with websites and apps that are not running locally."
 ---
 
@@ -23,7 +23,7 @@ If you are not running your website or app locally but would still like to use M
 
 ## Exposing Micro via a public domain name
 
-This method allows you to get a publicly accessible URL for your Micro, which you can point your tracking code to. You can also send this URL to colleagues for them to inspect the results via [the API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md).
+This method allows you to get a publicly accessible URL for your Micro, which you can point your tracking code to. You can also send this URL to colleagues for them to inspect the results via the [UI](/docs/testing-debugging/snowplow-micro/ui/index.md) (since version 2.0.0) or the [API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md).
 
 ```mermaid
 flowchart LR

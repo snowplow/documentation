@@ -9,7 +9,7 @@ sidebar_position: 0
 
 Snowplow Mini is similar to [Snowplow Micro](/docs/testing-debugging/snowplow-micro/what-is-micro/index.md), with the following differences:
 * Micro is more portable and can easily run on your machine or in automated tests.
-* Mini has more features, mainly an OpenSearch Dashboards UI.
+* Mini has more features, mainly an OpenSearch Dashboards UI, and is better integrated with Snowplow BDP.
 
 :::
 

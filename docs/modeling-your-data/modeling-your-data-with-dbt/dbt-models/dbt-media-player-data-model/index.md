@@ -17,7 +17,7 @@ import Badges from '@site/src/components/Badges';
 
 **The package source code can be found in the [snowplow/dbt-snowplow-media-player repo](https://github.com/snowplow/dbt-snowplow-media-player), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player).**
 
-The package contains a fully incremental model that transforms raw media player event data into derived tables for easier querying. It can supports media events tracked using the following tracking implementations on Web and mobile:
+The package contains a fully incremental model that transforms raw media player event data into derived tables for easier querying. It can support media events tracked using the following tracking implementations on Web and mobile:
 
 * on Web using plugins for our [JavaScript trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md):
   * [media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media/index.md) that can be used to track events from any media player.
@@ -66,7 +66,7 @@ The package contains multiple staging models however the mart models are as foll
 
 ## Mixing web and mobile events
 
-The package makes no distinction between events tracked from the web and those tracked from a mobile application, so long as you are tracking media events and from allowed `app_id`s. The `sessionId` from the `client_session` context, and the `id` from the `mobile_screen` context, overwrite the `domain_sessionid` and `page_view_id` fields respectively in our intermediate and derived tables, for events where they are populated. If you are just using web events, the package will work out the box. If you are using a mix of web and mobile events, you will need to enable set the `snowplow__enable_mobile_events` package variable to `true` and events will be processed from both sources. If you are only tracking mobile events, the package will work with the variable set, however you must have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) available in your warehouse (even though it will not be populated for these mobile events) for the package to run.
+The package makes no distinction between events tracked from the web and those tracked from a mobile application, so long as you are tracking media events and from allowed `app_id`s. The `sessionId` from the `client_session` context, and the `id` from the `mobile_screen` context, overwrite the `domain_sessionid` and `page_view_id` fields respectively in our intermediate and derived tables, for events where they are populated. If you are just using web events, the package will work out the box. If you are using a mix of web and mobile events, you will need to set the `snowplow__enable_mobile_events` package variable to `true` and events will be processed from both sources. If you are only tracking mobile events, the package will work with the variable set, however you must have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) available in your warehouse (even though it will not be populated for these mobile events) for the package to run.
 
 ## Custom models
 

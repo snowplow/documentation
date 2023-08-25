@@ -1,6 +1,8 @@
-# HTTP Target
-
-Send data over HTTP.
+---
+title: "HTTP Target"
+sidebar_position: 1
+description: "Send data over HTTP."
+---
 
 ## Authentication
 

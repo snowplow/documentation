@@ -1,6 +1,8 @@
-# Kafka Target
-
-Write data to a Kafka topic.
+---
+title: "Kafka Target"
+sidebar_position: 1
+description: "Write data to a Kafka topic."
+---
 
 ## Authentication
 

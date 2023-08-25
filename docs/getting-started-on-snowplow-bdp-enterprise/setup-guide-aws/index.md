@@ -123,3 +123,25 @@ We also provide a CloudFormation template that will create a role named Snowplow
 6. Now proceed through the remainder of the prompts and choose Create stack
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
+
+### Setup the Snowplow deployment role
+
+The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform. 
+
+1. Navigate to https://console.aws.amazon.com/iam/home#/roles$new?step=type&roleType=crossAccount
+2. Select Create role and for trusted entity type select AWS account.
+- Account ID: 793733611312
+- Do not require MFA, as Snowplow needs to be able to assume the role via headless jobs.
+3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
+- Role name: SnowplowDeployment
+- Role description: Allows the Snowplow Team to programmatically deploy to this account.
+4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
+
+### Final checklist
+
+If you are sending a request to our team to set up your account for you. Please ensure you provide the following information:
+1. SnowplowAdmin role ARN
+2. SnowplowDeployment role ARN
+3. AWS region to deploy into
+4. VPC CIDR requirements for VPC Peering (if applicable)
+5. The IAM permission boundary ARN (if applicable)

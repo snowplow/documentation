@@ -7,16 +7,29 @@ title: "Media Player Quickstart"
 ## Requirements
 
 
-In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
+In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web or mobile events dataset being available in your database:
 
-- A dataset of media-player web events from the [Snowplow JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md) must be available in the database. In order for this to happen at least one of the JavaScript based media tracking plugins need to be enabled: [Media Tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media-tracking/index.md) or [YouTube Tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/youtube-tracking/index.md)
-- Have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled.
-- Have the [media-player event schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0) enabled.
-- Have the [media-player context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0) enabled.
-- Depending on the plugin / intention have all the relevant contexts from below enabled:
-  - in case of embedded YouTube tracking: Have the [YouTube specific context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.youtube/youtube/jsonschema/1-0-0) enabled.
-  - in case of HTML5 audio or video tracking: Have the [HTML5 media element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0) enabled.
-  - in case of HTML5 video tracking: Have the [HTML5 video element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/video_element/jsonschema/1-0-0) enabled.
+- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media/index.md), [HTML5 media player plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media-tracking/index.md), [YouTube plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/youtube-tracking/index.md), [Vimeo plugin][vimeo-tracking] or the [iOS and Android media APIs](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/vimeo-tracking/index.md)
+- Have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled on Web or the [screen context](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (default).
+- Enabled session tracking on the tracker (default).
+
+The model is compatible with all versions of our media tracking APIs. These have evolved over time and may track the media events using two sets of event and contexts schemas:
+
+1. Version 1 media schemas:
+
+   - [media-player event schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0) used for all media events.
+   - [media-player context v1 schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0).
+   - Depending on the plugin / intention there are player-specific contexts:
+      - in case of embedded YouTube tracking: Have the [YouTube specific context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.youtube/youtube/jsonschema/1-0-0) enabled.
+      - in case of HTML5 audio or video tracking: Have the [HTML5 media element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0) enabled.
+      - in case of HTML5 video tracking: Have the [HTML5 video element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/video_element/jsonschema/1-0-0) enabled.
+
+2. Version 2 media schemas (preferred):
+
+   - [per-event media event schemas](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.media).
+   - [media-player context v2 schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/2-0-0).
+   - optional [media-session context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0).
+   - optional [media-ad](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad/jsonschema/1-0-0) and [ad break](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_break/jsonschema/1-0-0) context schema.
 
 ```mdx-code-block
 import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
@@ -32,12 +45,6 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 
 ## Setup
 
-:::caution
-
-If you are not starting the media player package at the same time as the web package, see the [media player package details](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md#operating-with-the-web-package) for how to best sync them.
-
-:::
-
 ### 1. Override the dispatch order in your project
 To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
 
@@ -51,13 +58,13 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the web model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the media player model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-media-player/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
-### 3. Configuring the web model (in case it has not been run before)
+### 3. Check source data
 
-Please refer to the `Quick Start` guide for the Snowplow Web package to make sure you configure the web model appropriately. (e.g. checking the source data or enabling desired contexts).
+This package will by default assume your Snowplow events data is contained in the `atomic` schema of your [target.database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile), in the table labeled `events`. In order to change this, please add the following to your `dbt_project.yml` file:
 
 ### 4. Enable desired contexts
 
@@ -66,17 +73,105 @@ If you have enabled a specific context you will need to enable it in your `dbt_p
 ```yml title="dbt_project.yml"
 vars:
   snowplow_media_player:
-    # set to true if the YouTube context schema is enabled
-    snowplow__enable_youtube: true
+    snowplow__atomic_schema: schema_with_snowplow_events
+    snowplow__database: database_with_snowplow_events
+    snowplow__events_table: table_of_snowplow_events
+```
+
+:::info Databricks only
+
+Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
+
+:::
+
+### 4. Filter your data set
+
+You can specify both `start_date` at which to start processing events, the `app_id`'s to filter for, and the `event_name` value to filter on. By default the `start_date` is set to `2020-01-01`, all `app_id`'s are selected, and all events with the `com.snowplowanalytics.snowplow.media` or the `media_player_event` event name are being surfaced. To change this please add/modify the following in your `dbt_project.yml` file:
+
+```yml title=dbt_project.yml
+...
+vars:
+  snowplow_media_player:
+    snowplow__start_date: 'yyyy-mm-dd'
+    snowplow__app_id: ['my_app_1','my_app_2']
+    snowplow__media_event_names: ['media_player_event', 'my_custom_media_event']
+```
+### 5. Additional vendor specific configuration
+
+:::info BigQuery Only
+Verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
+
+```yml title=dbt_project.yml
+...
+vars:
+  snowplow_media_player:
+    snowplow__derived_tstamp_partitioned: false
+```
+
+:::
+
+### 6. Enable desired contexts and configuration
+
+The media player package creates tables that depend on the existence of certain context entities that are tracked by the media plugins in the Snowplow trackers. Depending on which media plugin or tracking implementation you, you will need to enable the relevant contexts in your `dbt_project.yml`.
+
+#### 6a. Using the latest Snowplow Media plugin, Vimeo plugin for JavaScript tracker or iOS/Android trackers
+
+```yaml title=dbt_project.yml
+...
+vars:
+  snowplow_media_player:
+    # don't use the older version 1 of the media player context schema
+    enable_media_player_v1: false
+    # use the version 2 of the media player context schema
+    enable_media_player_v2: true
+    # use the media session context schema (unless disabled on the tracker)
+    enable_media_session: true
+    # depending on whether you track ads, ad breaks and progress within ads:
+    enable_media_ad: true
+    enable_media_ad_break: true
+    enable_ad_quartile_event: true
+    # depending on whether you track events from web or mobile apps:
+    enable_web_events: true
+    enable_mobile_events: true
+```
+
+#### 6b. Using the HTML5 media tracking plugin for JavaScript tracker
+
+```yaml title=dbt_project.yml
+...
+vars:
+  snowplow_media_player:
+    # use the version 1 of the media player context schema used by the YouTube plugin
+    enable_media_player_v1: true
+    # don't use the version 2 of the media player context schema as it is not tracked by the plugin
+    enable_media_player_v2: false
+    # don't use the media session context schema as it is not tracked by the plugin
+    enable_media_session: false
     # set to true if the HTML5 media element context schema is enabled
     snowplow__enable_whatwg_media: true
     # set to true if the HTML5 video element context schema is enabled
     snowplow__enable_whatwg_video: true
 ```
 
+#### 6c. Using the YouTube tracking plugin for JavaScript tracker
+
+```yaml title=dbt_project.yml
+...
+vars:
+  snowplow_media_player:
+    # use the version 1 of the media player context schema used by the YouTube plugin
+    enable_media_player_v1: true
+    # don't use the version 2 of the media player context schema as it is not tracked by the plugin
+    enable_media_player_v2: false
+    # don't use the media session context schema as it is not tracked by the plugin
+    enable_media_session: false
+    # set to true if the YouTube context schema is enabled
+    snowplow__enable_youtube: true
+```
+
 For other variables you can configure please see the [model configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md#model-configuration) section.
 
-### 5. Run your model
+### 7. Run your model
 
 You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package):
 

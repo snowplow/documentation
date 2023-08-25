@@ -1,6 +1,7 @@
-# Kafka Source
-
-Read data from a Kafka topic.
+---
+title: "Kafka Source"
+description: "Read data from a Kafka topic."
+---
 
 ## Authentication
 

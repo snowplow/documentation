@@ -1,6 +1,7 @@
-# Stdin Source
-
-Read data from stdin.
+---
+title: "Stdin Source"
+description: "Read data from stdin."
+---
 
 Stdin source is the default, and has one optional configuration to set the concurrency. 
 

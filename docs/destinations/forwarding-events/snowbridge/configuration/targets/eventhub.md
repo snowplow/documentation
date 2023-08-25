@@ -1,6 +1,7 @@
-# EventHub Target
-
-Write data to an EventHub.
+---
+title: "EventHub Target"
+description: "Write data to an EventHub."
+---
 
 ## Authentication
 

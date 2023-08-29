@@ -13,7 +13,7 @@ We use the name RDB Loader (from "relational database") for a set of application
 
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="redshift" label="Redshift" default>
-    <CrossCloudDiagram format="TSV" warehouse="Redshift"/>
+    <CrossCloudDiagram format="JSON" warehouse="Redshift"/>
   </TabItem>
   <TabItem value="databricks" label="Databricks">
     <CrossCloudDiagram format="Parquet" warehouse="Databricks"/>

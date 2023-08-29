@@ -235,7 +235,7 @@ If you have more than one session or user identifier, you can specify multiple e
 `}
 </code></pre>
 </TabItem>
-<TabItem value="redshift+postgres" label="Redshift & Postgres" default>
+<TabItem value="redshift/postgres" label="Redshift & Postgres" default>
 <pre><code className="language-json">
 {`
 [

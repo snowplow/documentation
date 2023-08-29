@@ -23,6 +23,11 @@ If you are interfacing directly with the macros provided in the Snowplow utils d
 | `snowplow__custom_sql` | `custom_sql ` |
 | `snowplow__entities_or_sdes` | `entities_or_sdes` |
 
+## Usage
+These macros exist to extend the functionality and customizability of your Snowplow data and by extension the Snowplow packages. This also allows you to leverage the benefit of the Snowplow incremental framework without necessarily using Snowplow's packages that are pre-built for specific use-cases. Equally, this could be used to overwrite certain pre-existing logic in Snowplow's other dbt packages.
+
+The way this is intended to be used is by either calling the macros that are highlighted here directly in your `.sql` files as part of the models in your dbt project, or by defining variables within your `dbt_project.yml` which are being leveraged by Snowplow's other dbt packages. For more information, you can see the following demo projects that highlight how this might be used [here](https://github.com/snowplow-incubator/dbt-example-project).
+
 ## Adding custom identifiers
 Adding custom identifiers allows you to decide how to identify sessions and users. By default, this is done using some variation of a `domain_sessionid` and `domain_userid` for sessions and users respectively, but there could be scenarios where you want to use your own custom identifiers that are embedded in global contexts to be modeled against. Rather than having to re-write your own data models, you can leverage some Snowplow provided variables in dbt to do the heavy lifting for you. Below you'll find two scenarios for customizing session and user identifiers, but these work in analogous ways.
 ### Customizing session identifiers
@@ -99,17 +104,27 @@ Make sure you include a `prefix` value if you are running on **Postgres or Redsh
 
 This will then render into the following SQL:
 <Tabs groupId="warehouse" queryString>
-<TabItem value="default" label="Bigquery, Databricks, & Snowflake" default>
+<TabItem value="databricks/snowflake" label="Databricks & Snowflake" default>
 
 ```sql
 SELECT
     ...
-    COALESCE(logged_in_id, session_identifier, session_id, NULL) as session_identifier,
+    COALESCE(com_mycompany_logged_session_id_1_0_0[0].logged_in_id, com_mycompany_logged_session_id_1_0_0[0].session_identifier, com_mycompany_session_identifier_1_0_0[0].session_id, NULL) as session_identifier,
 ...
 ```
 
 </TabItem>
-<TabItem value="redshift+postgres" label="Redshift & Postgres">
+<TabItem value="bigquery" label="Bigquery" default>
+
+```sql
+SELECT
+    ...
+    COALESCE(com_mycompany_logged_session_id_1_0_0[safe_offset(0)].logged_in_id, com_mycompany_logged_session_id_1_0_0[safe_offset(0)].session_identifier, com_mycompany_session_identifier_1_0_0[safe_offset(0)].session_id, NULL) as session_identifier,
+...
+```
+
+</TabItem>
+<TabItem value="redshift/postgres" label="Redshift & Postgres">
 
 ```sql
 SELECT
@@ -152,7 +167,7 @@ Remember that the `prefix` key only needs to be set when running these models on
 :::
 
 #### Combining atomic fields and custom contexts
-Combining atomic fields and custom contexts should then be straightforward if you're comfortable with what we described above. Let's say you want to combine the `logged_in_id` field from the `com_mycompany_logged_session_id_1_0_0` context together with the standard `domain_sessionid` field in the `events` table. To achieve that, you would include the following in your `dbt_profile.yml`:
+Combining atomic fields and custom contexts should then be straightforward if you're comfortable with what we described above. Let's say you want to combine the `logged_in_id` field from the `com_mycompany_logged_session_id_1_0_0` context together with the standard `domain_sessionid` field in the `events` table. To achieve that, you would include the following in your `dbt_project.yml`:
 
 ```yml
 # dbt_project.yml
@@ -173,6 +188,58 @@ SELECT
     COALESCE(lsi_logged_in_id, domain_sessionid, NULL) as session_identifier,
 ...
 ```
+
+#### Adding your own custom session logic
+If there are session identifiers that are more complicated to utilize, then you can also provide your own session logic that will be used instead of the logic explained in the preceding sections. As an example, if you would want to concat two fields to create a session identifier, or instead apply a SQL function to a field to then use as a session identifier, that is completely possible using the `snowplow__session_sql` variable.
+
+:::warning
+Defining the `snowplow__session_sql` variable will ensure that the package takes it's value as the `session_identifier` **over** anything you may have defined with the `snowplow__session_identifiers` variable.
+:::
+
+##### Concatenating multiple fields to create a session identifier
+To start, suppose you want to combine the atomic `domain_sessionid` and `domain_userid` fields to create a session identifier. It's simple to do that by defining the following variable in your `dbt_project.yml`:
+
+ ```yml
+# dbt_project.yml
+...
+vars:
+    ...
+    snowplow__session_sql: "e.domain_userid || '_' || e.domain_sessionid"
+    ...
+...
+```
+
+This would be parsed into the following SQL:
+
+```sql
+SELECT
+    ...
+    e.domain_userid || '_' || e.domain_sessionid as session_identifier,
+...
+```
+
+##### Applying a SQL function to a field to use as a session identifier
+Instead, suppose you want to take the `DATE` value of your `derived_tstamp` as your session identifier. It's also simple to do that by defining the following variable in your `dbt_project.yml`:
+
+ ```yml
+# dbt_project.yml
+...
+vars:
+    ...
+    snowplow__session_sql: "DATE(e.derived_tstamp)"
+    ...
+...
+```
+
+This would be parsed into the following SQL:
+
+```sql
+SELECT
+    ...
+    DATE(e.derived_tstamp) as session_identifier,
+...
+```
+
 ### Customizing user identifiers
 Customizing user identifiers works in the exact same way as customizing session identifiers, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow_session_identifiers` variable.
 
@@ -288,7 +355,7 @@ Remember that the `prefix` key only needs to be set when running these models on
 :::
 
 #### Combining atomic fields and custom contexts
-Combining atomic fields and custom contexts should hopefully then be straightforward if you're comfortable with what we described above. Let's say you want to combine the `logged_in_user_id` field from the `com_mycompany_logged_user_id_1_0_0` context together with the standard `domain_userid` field in the `events` table. To achieve that, you would include the following in your `dbt_profile.yml`:
+Combining atomic fields and custom contexts should hopefully then be straightforward if you're comfortable with what we described above. Let's say you want to combine the `logged_in_user_id` field from the `com_mycompany_logged_user_id_1_0_0` context together with the standard `domain_userid` field in the `events` table. To achieve that, you would include the following in your `dbt_project.yml`:
 
 ```yml
 # dbt_project.yml
@@ -347,7 +414,7 @@ vars:
 If you'd like to add multiple lines of SQL, you can do that as well by making this string a multi-line string. Any SQL included in the `snowplow__custom_sql` will be found in your `snowplow_base_events_this_run` table, and will be referenced at the end of the select statement, so there's no need to add a trailing comma. Any of the newly created fields can also be passed through to other tables created automatically by Snowplow's dbt packages.
 
 </TabItem>
-<TabItem value="redshift+postgres" label="Redshift & Postgres">
+<TabItem value="redshift/postgres" label="Redshift & Postgres">
 
 ```yml
 # dbt_project.yml
@@ -459,7 +526,7 @@ from base_events
 ```
 
 </TabItem>
-<TabItem value="redshift+postgres" label="Redshift & Postgres">
+<TabItem value="redshift/postgres" label="Redshift & Postgres">
 
 ```yml
 # dbt_project.yml

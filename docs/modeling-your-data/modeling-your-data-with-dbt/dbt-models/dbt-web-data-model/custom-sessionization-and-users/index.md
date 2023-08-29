@@ -1,0 +1,65 @@
+---
+title: "Custom Sessionization & Users"
+sidebar_position: 500
+---
+
+:::info
+
+Custom Sessionization & Users are a feature only available in the web package versions 0.16.0 and higher
+
+:::
+
+:::danger
+
+As this changes the core logic of the package, you should make sure you have a good understanding of how the incremental sessionization logic works (including things such as quarantining sessions), and a good certainty around the tracking of any custom fields you plan to use.
+
+:::
+
+
+Our packages come with a very robust [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/) that makes sure when a session has a new event in the latest run, that _all_ events within that session are processed as part of that run to ensure all aggregations are correct and valid. There are some exceptions, such as quarantined sessions to avoid large table scans, but in general this approach ensures that you can be confident that in each run you have the full scope of a given session to process in our models, as well as any [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) you build to take advantage of this feature.
+
+Traditionally a session in this sense has been a _true_ session i.e. it has been the `domain_sessionid` value that has identified which events belong to the same session, however over time this became a limitation of the package as users wanted to define their session using a different field or logic, which meant they were unable to use our package and take advantage of the complex ground work we provided. Since version 0.16.0 of the web package, it is possible to overwrite the `domain_sessionid` field as part of the package logic and use your own session identifier, to ensure all events within a "session" are processed in the same run, whatever a "session" in this case means to you.
+
+:::caution
+
+To reduce the number of breaking changes within the web package, we made the decision to have the custom session identifier to overwrite the value of the `domain_sessionid` field in the `snowplow_web_base_events_this_run` and all downstream tables, but have added an `original_domain_sessionid` field to these tables to keep the original value if needed.
+
+:::
+
+A deeper set of documentation is available in the [Advanced Usage of Snowplow Utils](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/index.md#customizing-session-identifiers) page, including how to provide a hierarchy of fields in case one is null, but here are two short example showcasing how you can use a field in a custom context, and how you can provide custom SQL to create your "session" identifier.
+
+:::tip
+
+Remember that any events with a null session id will be excluded from the `snowplow_base_events_this_run` table and any processing of your package, make sure your identifier has a value for all events you want to process!
+
+:::
+
+#### Custom Context
+
+This example uses a field called `session_id` in your `com_mycompany_session_identifier_1` context and will use this as the value in your `domain_sessionid` field for all tables (excluding the manifest tables).
+
+```yaml
+# dbt_project.yml
+...
+vars:
+    ...
+    snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1', 'field': 'session_id', 'prefix': 'si'}]
+    ...
+...
+```
+
+#### Custom SQL
+
+This example creates a session identifier based off the combination of `app_id` and `domain_sessionid` which you may want if you use cross-domain tracking, but want to split the sessions for your analysis.
+
+```yaml
+# dbt_project.yml
+...
+vars:
+    ...
+    snowplow__session_sql: 'app_id || domain_sessionid'
+    ...
+...
+```
+
+The same approaches can be taken to provide a custom `domain_userid` overwrite as well, using the `snowplow__user_identifiers`/`snowplow__user_sql` variables.

@@ -1,5 +1,5 @@
 ---
-title: "Incremental Logic"
+title: "Incremental Sessionization Logic"
 description: "A detailed overview of our incremental run logic using manifest tables."
 sidebar_position: 300
 ---

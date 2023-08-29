@@ -192,8 +192,12 @@ SELECT
 #### Adding your own custom session logic
 If there are session identifiers that are more complicated to utilize, then you can also provide your own session logic that will be used instead of the logic explained in the preceding sections. As an example, if you would want to concat two fields to create a session identifier, or instead apply a SQL function to a field to then use as a session identifier, that is completely possible using the `snowplow__session_sql` variable.
 
-:::warning
+:::info
 Defining the `snowplow__session_sql` variable will ensure that the package takes it's value as the `session_identifier` **over** anything you may have defined with the `snowplow__session_identifiers` variable.
+:::
+
+:::warning
+For Redshift/Postgres, if you want to leverage custom entities for your custom session logic, you will need to include them in the `snowplow__session_identifiers` variable in the same way as in [previous sections](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/#customizing-session-identifiers).
 :::
 
 ##### Concatenating multiple fields to create a session identifier
@@ -373,6 +377,61 @@ This would be parsed into the following SQL:
 SELECT
     ...
     COALESCE(lui_logged_in_user_id, domain_userid, NULL) as user_identifier,
+...
+```
+
+#### Adding your own custom user logic
+If there are user identifiers that are more complicated to utilize, then you can also provide your own user logic that will be used instead of the logic explained in the preceding sections. As an example, if you would want to concat two fields to create a user identifier, or instead apply a SQL function to a field to then use as a user identifier, that is completely possible using the `snowplow__user_sql` variable.
+
+:::info
+Defining the `snowplow__user_sql` variable will ensure that the package takes it's value as the `user_identifier` **over** anything you may have defined with the `snowplow__user_identifiers` variable.
+:::
+
+:::warning
+For Redshift/Postgres, if you want to leverage custom entities for your custom user logic, you will need to include them in the `snowplow__user_identifiers` variable in the same way as in [previous sections](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/#customizing-user-identifiers).
+:::
+
+##### Concatenating multiple fields to create a user identifier
+To start, suppose you want to combine the atomic `network_userid` and `domain_userid` fields to create a user identifier. It's simple to do that by defining the following variable in your `dbt_project.yml`:
+
+ ```yml
+# dbt_project.yml
+...
+vars:
+    ...
+    snowplow__user_sql: "e.network_userid || '_' || e.domain_userid"
+    ...
+...
+```
+
+This would be parsed into the following SQL:
+
+```sql
+SELECT
+    ...
+    e.network_userid || '_' || e.domain_userid as user_identifier,
+...
+```
+
+##### Applying a SQL function to a field to use as a user identifier
+Instead, suppose you want to take the `DATE` value of your `derived_tstamp` as your user identifier. It's also simple to do that by defining the following variable in your `dbt_project.yml`:
+
+ ```yml
+# dbt_project.yml
+...
+vars:
+    ...
+    snowplow__user_sql: "DATE(e.derived_tstamp)"
+    ...
+...
+```
+
+This would be parsed into the following SQL:
+
+```sql
+SELECT
+    ...
+    DATE(e.derived_tstamp) as user_identifier,
 ...
 ```
 ## Introducing custom SQL logic to every event

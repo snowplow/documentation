@@ -104,7 +104,7 @@ Make sure you include a `prefix` value if you are running on **Postgres or Redsh
 
 This will then render into the following SQL:
 <Tabs groupId="warehouse" queryString>
-<TabItem value="databricks/snowflake" label="Databricks & Snowflake" default>
+<TabItem value="snowflake" label="Databricks & Snowflake" default>
 
 ```sql
 SELECT

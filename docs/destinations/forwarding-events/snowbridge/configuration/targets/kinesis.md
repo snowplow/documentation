@@ -1,4 +1,7 @@
-# Kinesis Target
+---
+title: "Kinesis Target"
+description: "Write data to a Kinesis stream."
+---
 
 ## Authentication
 

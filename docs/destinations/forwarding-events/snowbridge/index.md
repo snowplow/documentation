@@ -11,7 +11,7 @@ Snowbridge is a flexible, low latency tool which can replicate streams of data o
 
 ## Features
 
-- [Kinesis](https://aws.amazon.com/kinesis), [SQS](https://aws.amazon.com/sqs/), [PubSub](https://cloud.google.com/pubsub), and stdin sources
+- [Kinesis](https://aws.amazon.com/kinesis), [SQS](https://aws.amazon.com/sqs/), [PubSub](https://cloud.google.com/pubsub), [Kafka](https://kafka.apache.org/), and stdin sources
 
 - [Kinesis](https://aws.amazon.com/kinesis), [SQS](https://aws.amazon.com/sqs/), [PubSub](https://cloud.google.com/pubsub), [Kafka](https://kafka.apache.org/), [Event Hubs](https://azure.microsoft.com/en-us/services/event-hubs/), Http (e.g. for an [integration with Google Tag Manager Server Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)), and stdout targets
 

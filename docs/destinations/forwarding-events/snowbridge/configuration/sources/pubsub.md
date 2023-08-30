@@ -1,4 +1,7 @@
-# PubSub Source
+---
+title: "PubSub Source"
+description: "Read data from a PubSub topic."
+---
 
 ## Authentication
 

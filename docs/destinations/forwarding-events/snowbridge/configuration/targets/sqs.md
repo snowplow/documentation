@@ -1,4 +1,7 @@
-# SQS Target
+---
+title: "SQS Target"
+description: "Write data to an SQS queue."
+---
 
 ## Authentication
 

@@ -1,4 +1,11 @@
+---
+title: "SQS Source"
+description: "Read data from an SQS queue."
+---
+
 # SQS Source
+
+Read data from an SQS queue.
 
 ## Authentication
 

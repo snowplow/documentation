@@ -1,4 +1,7 @@
-# HTTP Target
+---
+title: "HTTP Target"
+description: "Send data over HTTP."
+---
 
 ## Authentication
 

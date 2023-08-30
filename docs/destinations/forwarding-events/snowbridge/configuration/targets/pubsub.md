@@ -1,4 +1,7 @@
-# PubSub Target
+---
+title: "PubSub Target"
+description: "Write data to a Pubsub topic."
+---
 
 ## Authentication
 

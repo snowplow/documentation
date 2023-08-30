@@ -1,4 +1,7 @@
-# Kinesis Source
+---
+title: "Kinesis Source"
+description: "Read data from a Kinesis stream."
+---
 
 :::note
 

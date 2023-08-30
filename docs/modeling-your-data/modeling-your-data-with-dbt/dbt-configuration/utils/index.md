@@ -47,7 +47,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 ### Custom identifiers & timestamps
 
 :::info
-If you are looking to customise identifiers and timestamps heavily, please see the [Utils advanced operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation) section for more details and advanced usage examples to help you better understand how these variables work.
+If you are looking to customize identifiers and timestamps heavily, please see the [Utils advanced operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation) section for more details and advanced usage examples to help you better understand how these variables work.
 :::
 
 | Variable Name        | Description                                                                                                                                                                                                                                                                                          | Default |

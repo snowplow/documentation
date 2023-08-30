@@ -70,7 +70,7 @@ The package contains multiple staging models however the mart models are as foll
 
 ## Mixing web and mobile events
 
-The package makes no distinction between events tracked from the web and those tracked from a mobile application, so long as you are tracking media events and from allowed `app_id`s. The `sessionId` from the `client_session` context, and the `id` from the `mobile_screen` context, overwrite the `domain_sessionid` and `page_view_id` fields respectively in our intermediate and derived tables, for events where they are populated. If you are just using web events, the package will work out the box. If you are using a mix of web and mobile events, you will need to set the `snowplow__enable_mobile_events` package variable to `true` and events will be processed from both sources. If you are only tracking mobile events, you can set the `snowplow__enable_web_events` to `false`.
+The package makes no distinction between events tracked from the web and those tracked from a mobile application, so long as you are tracking media events and from allowed `app_id`s. The `sessionId` from the `client_session` context, and the `id` from the `mobile_screen` context, overwrite the `session_identifier` and `page_view_id` fields respectively in our intermediate and derived tables, for events where they are populated. If you are just using web events, the package will work out the box. If you are using a mix of web and mobile events, you will need to set the `snowplow__enable_mobile_events` package variable to `true` and events will be processed from both sources. If you are only tracking mobile events, you can set the `snowplow__enable_web_events` to `false`.
 
 ## Custom models
 

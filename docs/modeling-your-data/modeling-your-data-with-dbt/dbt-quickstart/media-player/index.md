@@ -9,8 +9,8 @@ title: "Media Player Quickstart"
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web or mobile events dataset being available in your database:
 
-- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media/index.md), [HTML5 media player plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media-tracking/index.md), [YouTube plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/youtube-tracking/index.md), [Vimeo plugin][vimeo-tracking] or the [iOS and Android media APIs](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/vimeo-tracking/index.md)
-- Have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled on Web or the [screen context](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (default).
+- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media/index.md), [HTML5 media player plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media-tracking/index.md), [YouTube plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/youtube-tracking/index.md), [Vimeo plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/vimeo-tracking/index.md) or the [iOS and Android media APIs](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/vimeo-tracking/index.md)
+- Have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled on Web or the [screen context](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
 - Enabled session tracking on the tracker (default).
 
 The model is compatible with all versions of our media tracking APIs. These have evolved over time and may track the media events using two sets of event and contexts schemas:
@@ -114,7 +114,9 @@ vars:
 
 The media player package creates tables that depend on the existence of certain context entities that are tracked by the media plugins in the Snowplow trackers. Depending on which media plugin or tracking implementation you, you will need to enable the relevant contexts in your `dbt_project.yml`.
 
-#### 6a. Using the latest Snowplow Media plugin, Vimeo plugin for JavaScript tracker or iOS/Android trackers
+#### 6a. Using trackers with support for the version 2 media schemas
+
+This option applied in case you are tracking media events with either the Snowplow Media plugin, Vimeo plugin for JavaScript tracker, or the iOS/Android trackers.
 
 ```yaml title=dbt_project.yml
 ...
@@ -176,5 +178,5 @@ For other variables you can configure please see the [model configuration](/docs
 You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package):
 
 ```bash
-dbt run --selector snowplow_web
+dbt run --selector snowplow_media_player
 ```

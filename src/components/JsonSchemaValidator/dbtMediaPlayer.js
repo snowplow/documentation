@@ -18,12 +18,14 @@ export const dbtSnowplowMediaPlayerConfigSchema = {
     },
     snowplow__max_media_pv_window: {
       type: 'integer',
+      minimum: 0,
       title: 'Media Page View Window (hour)',
       description:
         'Delay between events being processed into your base table and your stats table',
     },
     snowplow__valid_play_sec: {
       type: 'integer',
+      minimum: 0,
       title: 'Valid Play (sec)',
       description: 'Minimum play time to be considered a valid play',
     },

@@ -18,6 +18,8 @@ vars:
     snowplow__enable_media_session: false
 ```
 
+On Redshift, the context names no longer require the use of the `{{ source('...') }}` macro, the table names can be passed directly.
+
 ### Upgrading to 0.5.0
 - Version 1.4.0 of `dbt-core` now required
 - You must add the following to the top level of your project yaml

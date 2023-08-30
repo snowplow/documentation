@@ -55,23 +55,23 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift/postgres" label="Redshift & Postgres">
 
-Redshift and Postgres use a [shredded](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. They must be passed in a stringified `source` function as the defaults below show.
+Redshift and Postgres use a [shredded](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/index.md#shredded-data) approach for the context tables, so these variables are used to identify where they are, if different from the expected schema and table name. These should be the table name in your `atomic_schema`, as the defaults below show.
 
 | Variable Name | Default |
 | --- | --- |
-| `media_player_event_context` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_player_event_1') }}"` |
-| `media_player_context` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_player_1') }}"` |
-| `media_player_v2_context` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_player_2') }}"` |
-| `media_session_context` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_session_1') }}"` |
-| `media_ad_context` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_ad_1') }}"` |
-| `media_ad_break_context` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_ad_break_1') }}"` |
-| `media_ad_quartile_event` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_media_ad_quartile_event_1') }}"` |
-| `youtube_context` | `"{{ source('atomic', 'com_youtube_youtube_1') }}"` |
-| `html5_media_element_context` | `"{{ source('atomic', 'org_whatwg_media_element_1') }}"` |
-| `html5_video_element_context` | `"{{ source('atomic', 'org_whatwg_video_element_1') }}"` |
-| `context_web_page` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_web_page_1') }}"` |
-| `context_screen` | `"{{ source('atomic', 'com_snowplowanalytics_mobile_screen_1') }}"` |
-| `context_mobile_session` | `"{{ source('atomic', 'com_snowplowanalytics_snowplow_client_session_1') }}"` |
+| `media_player_event_context` | `'com_snowplowanalytics_snowplow_media_player_event_1'` |
+| `media_player_context` | `'com_snowplowanalytics_snowplow_media_player_1'` |
+| `media_player_v2_context` | `'com_snowplowanalytics_snowplow_media_player_2'` |
+| `media_session_context` | `'com_snowplowanalytics_snowplow_media_session_1'` |
+| `media_ad_context` | `'com_snowplowanalytics_snowplow_media_ad_1'` |
+| `media_ad_break_context` | `'com_snowplowanalytics_snowplow_media_ad_break_1'` |
+| `media_ad_quartile_event` | `'com_snowplowanalytics_snowplow_media_ad_quartile_event_1'` |
+| `youtube_context` | `'com_youtube_youtube_1'` |
+| `html5_media_element_context` | `'org_whatwg_media_element_1'` |
+| `html5_video_element_context` | `'org_whatwg_video_element_1'` |
+| `context_web_page` | `'com_snowplowanalytics_snowplow_web_page_1'` |
+| `context_screen` | `'com_snowplowanalytics_mobile_screen_1'` |
+| `context_mobile_session` | `'com_snowplowanalytics_snowplow_client_session_1'` |
 
 </TabItem>
 </Tabs>

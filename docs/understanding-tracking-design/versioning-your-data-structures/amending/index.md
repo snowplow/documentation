@@ -63,6 +63,12 @@ For Snowplow BDP customers, patching is disabled for production pipelines. Open 
 
 ## Marking the schema as superseded
 
+:::caution
+
+There is a known issue with this feature, please avoid using it until a fix is released in a future version of Iglu Server (at which point we will remove this warning).
+
+:::
+
 If your events are failing in production because of an incorrect schema, you might not be able to instantly update the tracking code to use a new schema version. This is a common situation for mobile tracking, for example. You can resolve this by marking the old schema version as superseded by the new schema version.
 
 :::note

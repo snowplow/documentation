@@ -14,7 +14,7 @@ headers = {'Authorization': f"{sys.argv[1]}"}
 
 
 def process_package(packages):
-    decoded = [x for x in packages.split('\n')[1:] if x != '']
+    decoded = [x for x in packages.split('\n')[1:] if x != '' and x.replace(' ', '')[0] != '#']
     req_pkgs = {}
     for i in range(len(decoded)):
         if i % 2 == 0:

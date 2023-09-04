@@ -1677,11 +1677,13 @@ The update/merge statement to update the `stitched_user_id` column, if enabled.
 ```jinja2
 {% macro default__stitch_user_identifiers(enabled, relation=this, user_mapping_relation='snowplow_web_user_mapping') %}
     {% if enabled | as_bool() %}
-      -- Update sessions table with mapping
+
+      -- Update sessions /page_views table with mapping
       update {{ relation }} as s
       set stitched_user_id = um.user_id
       from {{ ref(user_mapping_relation) }} as um
       where s.domain_userid = um.domain_userid;
+
     {% endif %}
 {%- endmacro -%}
 
@@ -1694,12 +1696,15 @@ The update/merge statement to update the `stitched_user_id` column, if enabled.
 ```jinja2
 {% macro spark__stitch_user_identifiers(enabled, relation=this, user_mapping_relation='snowplow_web_user_mapping') %}
     {% if enabled | as_bool() %}
-      -- Update sessions table with mapping
+
+      -- Update sessions /page_views table with mapping
       merge into {{ relation }} as s
       using {{ ref(user_mapping_relation) }} as um
       on s.domain_userid = um.domain_userid
+
       when matched then
       update set s.stitched_user_id = um.user_id;
+
     {% endif %}
 {%- endmacro -%}
 ```
@@ -1715,6 +1720,7 @@ The update/merge statement to update the `stitched_user_id` column, if enabled.
 <Tabs groupId="reference">
 <TabItem value="model" label="Models">
 
+- [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
 - [model.snowplow_web.snowplow_web_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions)
 
 </TabItem>
@@ -2114,7 +2120,7 @@ The specific fields for each warehouse (see macro code for values).
 ```jinja2
 {% macro default__web_cluster_by_fields_sessions_lifecycle() %}
 
-  {{ return(snowplow_utils.get_value_by_target_type(bigquery_val=["session_id"], snowflake_val=["to_date(start_tstamp)"])) }}
+  {{ return(snowplow_utils.get_value_by_target_type(bigquery_val=["session_identifier"], snowflake_val=["to_date(start_tstamp)"])) }}
 
 {% endmacro %}
 ```

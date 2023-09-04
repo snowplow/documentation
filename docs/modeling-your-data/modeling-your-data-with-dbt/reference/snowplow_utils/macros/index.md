@@ -19,6 +19,66 @@ This page is auto-generated from our dbt packages, some information may be incom
 
 :::
 ## Snowplow Utils
+### Allow Refresh {#macro.snowplow_utils.allow_refresh}
+
+<DbtDetails><summary>
+<code>macros/utils/allow_refresh.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/allow_refresh.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="raw" default>
+
+```jinja2
+{% macro allow_refresh() %}
+  {{ return(adapter.dispatch('allow_refresh', 'snowplow_utils')()) }}
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__allow_refresh() %}
+
+  {% set allow_refresh = snowplow_utils.get_value_by_target(
+                                    dev_value=none,
+                                    default_value=var('snowplow__allow_refresh'),
+                                    dev_target_name=var('snowplow__dev_target_name')
+                                    ) %}
+
+  {{ return(allow_refresh) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.get_value_by_target](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
 ### App Id Filter {#macro.snowplow_utils.app_id_filter}
 
 <DbtDetails><summary>
@@ -88,7 +148,1002 @@ app_id in ('web', 'mobile', 'news')
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
 - [model.snowplow_normalize.snowplow_normalize_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_base_events_this_run)
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
+
+</TabItem>
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.base_create_snowplow_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_events_this_run)
+- [macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Base Create Snowplow Events This Run {#macro.snowplow_utils.base_create_snowplow_events_this_run}
+
+<DbtDetails><summary>
+<code>macros/base/base_create_snowplow_events_this_run.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/base/base_create_snowplow_events_this_run.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="raw" default>
+
+```jinja2
+{% macro base_create_snowplow_events_this_run(sessions_this_run_table='snowplow_base_sessions_this_run', session_identifiers=[{"table" : "events", "field" : "domain_sessionid"}], session_sql=none, session_timestamp='load_tstamp', derived_tstamp_partitioned=true, days_late_allowed=3, max_session_days=3, app_ids=[], snowplow_events_database=none, snowplow_events_schema='atomic', snowplow_events_table='events', entities_or_sdes=none, custom_sql=none) %}
+    {{ return(adapter.dispatch('base_create_snowplow_events_this_run', 'snowplow_utils')(sessions_this_run_table, session_identifiers, session_sql, session_timestamp, derived_tstamp_partitioned, days_late_allowed, max_session_days, app_ids, snowplow_events_database, snowplow_events_schema, snowplow_events_table, entities_or_sdes, custom_sql)) }}
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__base_create_snowplow_events_this_run(sessions_this_run_table, session_identifiers, session_sql, session_timestamp, derived_tstamp_partitioned, days_late_allowed, max_session_days, app_ids, snowplow_events_database, snowplow_events_schema, snowplow_events_table, entities_or_sdes, custom_sql) %}
+    {%- set lower_limit, upper_limit = snowplow_utils.return_limits_from_model(ref(sessions_this_run_table),
+                                                                          'start_tstamp',
+                                                                          'end_tstamp') %}
+    {% set sessions_this_run = ref(sessions_this_run_table) %}
+    {% set snowplow_events = api.Relation.create(database=snowplow_events_database, schema=snowplow_events_schema, identifier=snowplow_events_table) %}
+
+    {% set events_this_run_query %}
+        with identified_events AS (
+            select
+                {% if session_sql %}
+                    {{ session_sql }} as session_identifier,
+                {% else -%}
+                    COALESCE(
+                        {% for identifier in session_identifiers %}
+                            {%- if identifier['schema']|lower != 'atomic' -%}
+                                {{ snowplow_utils.get_field(identifier['schema'], identifier['field'], 'e', dbt.type_string(), 0) }}
+                            {%- else -%}
+                                e.{{identifier['field']}}
+                            {%- endif -%}
+                            ,
+                        {%- endfor -%}
+                        NULL
+                    ) as session_identifier,
+                {%- endif %}
+                e.*
+                {% if custom_sql %}
+                    , {{ custom_sql }}
+                {% endif %}
+
+            from {{ snowplow_events }} e
+
+        )
+
+        select
+            a.*,
+            b.user_identifier -- take user_identifier from manifest. This ensures only 1 domain_userid per session.
+
+        from identified_events as a
+        inner join {{ sessions_this_run }} as b
+        on a.session_identifier = b.session_identifier
+
+        where a.{{ session_timestamp }} <= {{ snowplow_utils.timestamp_add('day', max_session_days, 'b.start_tstamp') }}
+        and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', days_late_allowed, 'a.dvce_created_tstamp') }}
+        and a.{{ session_timestamp }} >= {{ lower_limit }}
+        and a.{{ session_timestamp }} <= {{ upper_limit }}
+
+        {% if derived_tstamp_partitioned and target.type == 'bigquery' | as_bool() %}
+            and a.derived_tstamp >= {{ snowplow_utils.timestamp_add('hour', -1, lower_limit) }}
+            and a.derived_tstamp <= {{ upper_limit }}
+        {% endif %}
+
+        and {{ snowplow_utils.app_id_filter(app_ids) }}
+
+        qualify row_number() over (partition by a.event_id order by a.{{ session_timestamp }}, a.dvce_created_tstamp) = 1
+    {% endset %}
+
+    {{ return(events_this_run_query) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="postgres" label="postgres">
+
+```jinja2
+{% macro postgres__base_create_snowplow_events_this_run(sessions_this_run_table, session_identifiers, session_sql, session_timestamp, derived_tstamp_partitioned, days_late_allowed, max_session_days, app_ids, snowplow_events_database, snowplow_events_schema, snowplow_events_table, entities_or_sdes, custom_sql) %}
+    {%- set lower_limit, upper_limit = snowplow_utils.return_limits_from_model(ref(sessions_this_run_table),
+                                                                          'start_tstamp',
+                                                                          'end_tstamp') %}
+
+    {% if entities_or_sdes %}
+        -- check uniqueness of entity/sde names provided
+        {% set ent_sde_names = [] %}
+        {% for ent_or_sde in entities_or_sdes %}
+            {% do ent_sde_names.append(ent_or_sde['name']) %}
+        {% endfor %}
+        {% if ent_sde_names | unique | list | length != entities_or_sdes | length %}
+            {% do exceptions.raise_compiler_error("There are duplicate names in your provided `entities_or_sdes` list. Please correct this before proceeding.")%}
+        {% endif %}
+    {% endif %}
+
+    {% set sessions_this_run = ref(sessions_this_run_table) %}
+    {% set snowplow_events = api.Relation.create(database=snowplow_events_database, schema=snowplow_events_schema, identifier=snowplow_events_table) %}
+
+    {% set events_this_run_query %}
+        with
+
+        {% if session_identifiers -%}
+            {% for identifier in session_identifiers %}
+                {% if identifier['schema']|lower != 'atomic' %}
+                    {{ snowplow_utils.get_sde_or_context(snowplow_events_schema, identifier['schema'], lower_limit, upper_limit, identifier['prefix']) }},
+                {%- endif -%}
+            {% endfor %}
+        {% endif %}
+
+        {%- if entities_or_sdes -%}
+            {%- for ent_or_sde in entities_or_sdes -%}
+                {%- set name = none -%}
+                {%- set prefix = none -%}
+                {%- set single_entity = true -%}
+                {%- if ent_or_sde['name'] -%}
+                    {%- set name = ent_or_sde['name'] -%}
+                {%- else -%}
+                    {%- do exceptions.raise_compiler_error("Need to specify the name of your Entity or SDE using the {'name'} attribute in a key-value map.") -%}
+                {%- endif -%}
+                {%- if ent_or_sde['prefix'] -%}
+                    {%- set prefix = ent_or_sde['prefix'] -%}
+                {%- else -%}
+                    {%- set prefix = name -%}
+                {%- endif -%}
+                {%- if ent_or_sde['single_entity'] and ent_or_sde['single_entity'] is boolean -%}
+                    {%- set single_entity = ent_or_sde['single_entity'] -%}
+                {%- endif %}
+                {{ snowplow_utils.get_sde_or_context(snowplow_events_schema, name, lower_limit, upper_limit, prefix, single_entity) }},
+            {% endfor -%}
+        {%- endif %}
+
+        identified_events AS (
+            select
+                {% if session_sql -%}
+                    {{ session_sql }} as session_identifier,
+                {% else -%}
+                    COALESCE(
+                            {% for identifier in session_identifiers %}
+                                {%- if identifier['schema']|lower != 'atomic' %}
+                                    {% if identifier['alias'] %}{{identifier['alias']}}{% else %}{{identifier['schema']}}{% endif %}.{% if identifier['prefix'] %}{{ identifier['prefix'] }}{% else %}{{ identifier['schema']}}{% endif %}_{{identifier['field']}}
+                                {%- else %}
+                                    e.{{identifier['field']}}
+                                {%- endif -%}
+                                ,
+                            {%- endfor -%}
+                            NULL
+                        ) as session_identifier,
+                {%- endif %}
+                    e.*
+                    {% if custom_sql %}
+                    , {{ custom_sql }}
+                    {%- endif %}
+
+            from {{ snowplow_events }} e
+            {% if session_identifiers|length > 0 %}
+                {% for identifier in session_identifiers %}
+                    {%- if identifier['schema']|lower != 'atomic' -%}
+                    left join {{ identifier['schema'] }} {% if identifier['alias'] %}as {{ identifier['alias'] }}{% endif %} on e.event_id = {% if identifier['alias'] %}{{ identifier['alias']}}{% else %}{{ identifier['schema'] }}{% endif %}.{{identifier['prefix']}}__id and e.collector_tstamp = {% if identifier['alias'] %}{{ identifier['alias']}}{% else %}{{ identifier['schema'] }}{% endif %}.{{ identifier['prefix'] }}__tstamp
+                    {% endif -%}
+                {% endfor %}
+            {% endif %}
+
+        ), events_this_run as (
+
+            select
+                a.*,
+                b.user_identifier, -- take user_identifier from manifest. This ensures only 1 domain_userid per session.
+                row_number() over (partition by a.event_id order by a.{{ session_timestamp }}, a.dvce_created_tstamp ) as event_id_dedupe_index,
+                count(*) over (partition by a.event_id) as event_id_dedupe_count
+
+            from identified_events as a
+            inner join {{ sessions_this_run }} as b
+            on a.session_identifier = b.session_identifier
+
+            where a.{{ session_timestamp }} <= {{ snowplow_utils.timestamp_add('day', max_session_days, 'b.start_tstamp') }}
+            and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', days_late_allowed, 'a.dvce_created_tstamp') }}
+            and a.{{ session_timestamp }} >= {{ lower_limit }}
+            and a.{{ session_timestamp }} <= {{ upper_limit }}
+            and {{ snowplow_utils.app_id_filter(app_ids) }}
+
+        )
+
+        select *
+
+        from events_this_run as e
+        {%- if entities_or_sdes -%}
+            {% for ent_or_sde in entities_or_sdes -%}
+                {%- set name = none -%}
+                {%- set prefix = none -%}
+                {%- set single_entity = true -%}
+                {%- set alias = none -%}
+                {%- if ent_or_sde['name'] -%}
+                    {%- set name = ent_or_sde['name'] -%}
+                {%- else -%}
+                    {%- do exceptions.raise_compiler_error("Need to specify the name of your Entity or SDE using the {'name'} attribute in a key-value map.") -%}
+                {%- endif -%}
+                {%- if ent_or_sde['prefix'] -%}
+                    {%- set prefix = ent_or_sde['prefix'] -%}
+                {%- else -%}
+                    {%- set prefix = name -%}
+                {%- endif -%}
+                {%- if ent_or_sde['single_entity'] and ent_or_sde['single_entity'] is boolean -%}
+                    {%- set single_entity = ent_or_sde['single_entity'] -%}
+                {%- endif -%}
+                {%- if ent_or_sde['alias'] -%}
+                    {%- set alias = ent_or_sde['alias'] -%}
+                {%- endif %}
+                left join {{name}} {% if alias -%} as {{ alias }} {%- endif %} on e.event_id = {% if alias -%} {{ alias }} {%- else -%}{{name}}{%- endif %}.{{prefix}}__id
+                and e.collector_tstamp = {% if alias -%} {{ alias }} {%- else -%}{{name}}{%- endif %}.{{prefix}}__tstamp
+                {% if not single_entity -%} and mod({% if alias -%} {{ alias }} {%- else -%}{{name}}{%- endif %}.{{prefix}}__index, e.event_id_dedupe_count) = 0{%- endif -%}
+            {% endfor %}
+        {% endif %}
+        where event_id_dedupe_index = 1
+
+    {% endset %}
+
+    {{ return(events_this_run_query) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- macro.dbt.type_string
+- [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
+- [macro.snowplow_utils.get_field](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_field)
+- [macro.snowplow_utils.get_sde_or_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_sde_or_context)
+- [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
+- [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Base Create Snowplow Incremental Manifest {#macro.snowplow_utils.base_create_snowplow_incremental_manifest}
+
+<DbtDetails><summary>
+<code>macros/base/base_create_snowplow_incremental_manifest.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/base/base_create_snowplow_incremental_manifest.sql">Source</a></i></b></center>
+
+```jinja2
+{% macro base_create_snowplow_incremental_manifest() %}
+
+    {% set create_manifest_query %}
+        with prep as (
+        select
+            cast(null as {{ snowplow_utils.type_max_string() }}) model,
+            cast('1970-01-01' as {{ type_timestamp() }}) as last_success
+        )
+
+        select *
+
+        from prep
+        where false
+    {% endset %}
+
+    {{ return(create_manifest_query) }}
+
+{% endmacro %}
+```
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- macro.dbt.type_timestamp
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Base Create Snowplow Quarantined Sessions {#macro.snowplow_utils.base_create_snowplow_quarantined_sessions}
+
+<DbtDetails><summary>
+<code>macros/base/base_create_snowplow_quarantined_sessions.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/base/base_create_snowplow_quarantined_sessions.sql">Source</a></i></b></center>
+
+```jinja2
+{% macro base_create_snowplow_quarantined_sessions() %}
+
+    {% set create_quarantined_query %}
+        with prep as (
+        select
+            cast(null as {{ snowplow_utils.type_max_string() }}) session_identifier
+        )
+
+        select *
+
+        from prep
+        where false
+
+    {% endset %}
+
+    {{ return(create_quarantined_query) }}
+
+{% endmacro %}
+```
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_web.snowplow_web_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_quarantined_sessions)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Base Create Snowplow Sessions Lifecycle Manifest {#macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest}
+
+<DbtDetails><summary>
+<code>macros/base/base_create_snowplow_sessions_lifecycle_manifest.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/base/base_create_snowplow_sessions_lifecycle_manifest.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="raw" default>
+
+```jinja2
+{% macro base_create_snowplow_sessions_lifecycle_manifest(session_identifiers=[{"schema": "atomic", "field" : "domain_sessionid"}], session_sql=none, session_timestamp='load_tstamp', user_identifiers=[{"schema": "atomic", "field" : "domain_userid"}], user_sql=none, quarantined_sessions=none, derived_tstamp_partitioned=true, days_late_allowed=3, max_session_days=3, app_ids=[], snowplow_events_database=none, snowplow_events_schema='atomic', snowplow_events_table='events', event_limits_table='snowplow_base_new_event_limits', incremental_manifest_table='snowplow_incremental_manifest', package_name='snowplow') %}
+    {{ return(adapter.dispatch('base_create_snowplow_sessions_lifecycle_manifest', 'snowplow_utils')(session_identifiers, session_sql, session_timestamp, user_identifiers, user_sql, quarantined_sessions, derived_tstamp_partitioned, days_late_allowed, max_session_days, app_ids, snowplow_events_database, snowplow_events_schema, snowplow_events_table, event_limits_table, incremental_manifest_table, package_name)) }}
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__base_create_snowplow_sessions_lifecycle_manifest(session_identifiers, session_sql, session_timestamp, user_identifiers, user_sql, quarantined_sessions, derived_tstamp_partitioned, days_late_allowed, max_session_days, app_ids, snowplow_events_database, snowplow_events_schema, snowplow_events_table, event_limits_table, incremental_manifest_table, package_name) %}
+    {% set base_event_limits = ref(event_limits_table) %}
+    {% set lower_limit, upper_limit, _ = snowplow_utils.return_base_new_event_limits(base_event_limits) %}
+    {% set session_lookback_limit = snowplow_utils.get_session_lookback_limit(lower_limit) %}
+    {% set is_run_with_new_events = snowplow_utils.is_run_with_new_events(package_name, event_limits_table, incremental_manifest_table) %}
+    {% set snowplow_events = api.Relation.create(database=snowplow_events_database, schema=snowplow_events_schema, identifier=snowplow_events_table) %}
+
+    {% set sessions_lifecycle_manifest_query %}
+
+        with new_events_session_ids_init as (
+            select
+            {% if session_sql %}
+                {{ session_sql }} as session_identifier,
+            {% elif session_identifiers|length > 0 %}
+                COALESCE(
+                    {% for identifier in session_identifiers %}
+                        {%- if identifier['schema']|lower != 'atomic' -%}
+                            {{ snowplow_utils.get_field(identifier['schema'], identifier['field'], 'e', dbt.type_string(), 0) }}
+                        {%- else -%}
+                            e.{{identifier['field']}}
+                        {%- endif -%}
+                        ,
+                    {%- endfor -%}
+                    NULL
+                ) as session_identifier,
+            {%- else -%}
+                {% do exceptions.raise_compiler_error("Need to specify either session identifiers or custom session code") %}
+            {%- endif %}
+            {%- if user_sql -%}
+                {{ user_sql }} as user_identifier,
+            {%- elif user_identifiers|length > 0 %}
+                max(
+                    COALESCE(
+                        {% for identifier in user_identifiers %}
+                            {%- if identifier['schema']|lower != 'atomic' -%}
+                                {{ snowplow_utils.get_field(identifier['schema'], identifier['field'], 'e', dbt.type_string(), 0) }}
+                            {%- else -%}
+                                e.{{identifier['field']}}
+                            {%- endif -%}
+                            ,
+                        {%- endfor -%}
+                        NULL
+                    )
+                ) as user_identifier, -- Edge case 1: Arbitary selection to avoid window function like first_value.
+            {% else %}
+                {% do exceptions.raise_compiler_error("Need to specify either session identifiers or custom session code") %}
+            {%- endif %}
+                min({{ session_timestamp }}) as start_tstamp,
+                max({{ session_timestamp }}) as end_tstamp
+
+            from {{ snowplow_events }} e
+
+            where
+                dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', days_late_allowed, 'dvce_created_tstamp') }} -- don't process data that's too late
+                and {{ session_timestamp }} >= {{ lower_limit }}
+                and {{ session_timestamp }} <= {{ upper_limit }}
+                and {{ snowplow_utils.app_id_filter(app_ids) }}
+                and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+                {% if derived_tstamp_partitioned and target.type == 'bigquery' | as_bool() %} -- BQ only
+                and derived_tstamp >= {{ lower_limit }}
+                and derived_tstamp <= {{ upper_limit }}
+                {% endif %}
+
+            group by 1
+        ), new_events_session_ids as (
+            select *
+            from new_events_session_ids_init e
+            {% if quarantined_sessions %}
+             where session_identifier is not null
+             and not exists (select 1 from {{ ref(quarantined_sessions) }} as a where a.session_identifier = e.session_identifier) -- don't continue processing v.long sessions
+            {%- endif %}
+
+        )
+        {% if is_incremental() %}
+
+        , previous_sessions as (
+        select *
+
+        from {{ this }}
+
+        where start_tstamp >= {{ session_lookback_limit }}
+        and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+        )
+
+        , session_lifecycle as (
+        select
+            ns.session_identifier,
+            coalesce(self.user_identifier, ns.user_identifier) as user_identifier, -- Edge case 1: Take previous value to keep domain_userid consistent. Not deterministic but performant
+            least(ns.start_tstamp, coalesce(self.start_tstamp, ns.start_tstamp)) as start_tstamp,
+            greatest(ns.end_tstamp, coalesce(self.end_tstamp, ns.end_tstamp)) as end_tstamp -- BQ 1 NULL will return null hence coalesce
+
+        from new_events_session_ids ns
+        left join previous_sessions as self
+            on ns.session_identifier = self.session_identifier
+
+        where
+            self.session_identifier is null -- process all new sessions
+            or self.end_tstamp < {{ snowplow_utils.timestamp_add('day', max_session_days, 'self.start_tstamp') }} --stop updating sessions exceeding 3 days
+        )
+
+        {% else %}
+
+        , session_lifecycle as (
+
+        select * from new_events_session_ids
+
+        )
+
+        {% endif %}
+
+        select
+        sl.session_identifier,
+        sl.user_identifier,
+        sl.start_tstamp,
+        least({{ snowplow_utils.timestamp_add('day', max_session_days, 'sl.start_tstamp') }}, sl.end_tstamp) as end_tstamp -- limit session length to max_session_days
+        {% if target.type in ['databricks', 'spark'] -%}
+        , DATE(start_tstamp) as start_tstamp_date
+        {%- endif %}
+
+        from session_lifecycle sl
+    {% endset %}
+
+    {{ return(sessions_lifecycle_manifest_query) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="postgres" label="postgres">
+
+```jinja2
+{% macro postgres__base_create_snowplow_sessions_lifecycle_manifest(session_identifiers, session_sql, session_timestamp, user_identifiers, user_sql, quarantined_sessions, derived_tstamp_partitioned, days_late_allowed, max_session_days, app_ids, snowplow_events_database, snowplow_events_schema, snowplow_events_table, event_limits_table, incremental_manifest_table, package_name) %}
+    {% set base_event_limits = ref(event_limits_table) %}
+    {% set lower_limit, upper_limit, _ = snowplow_utils.return_base_new_event_limits(base_event_limits) %}
+    {% set session_lookback_limit = snowplow_utils.get_session_lookback_limit(lower_limit) %}
+    {% set is_run_with_new_events = snowplow_utils.is_run_with_new_events(package_name, event_limits_table, incremental_manifest_table) %}
+    {% set snowplow_events = api.Relation.create(database=snowplow_events_database, schema=snowplow_events_schema, identifier=snowplow_events_table) %}
+
+    {% set sessions_lifecycle_manifest_query %}
+
+        with
+        {% if session_identifiers %}
+            {% for identifier in session_identifiers %}
+                {% if identifier['schema']|lower != 'atomic' %}
+                    {{ snowplow_utils.get_sde_or_context(snowplow_events_schema, identifier['schema'], lower_limit, upper_limit, identifier['prefix']) }},
+                {%- endif -%}
+            {% endfor %}
+        {% endif %}
+
+        {% if user_identifiers%}
+            {% for identifier in user_identifiers %}
+                {% if identifier['schema']|lower != 'atomic' %}
+                    {{ snowplow_utils.get_sde_or_context(snowplow_events_schema, identifier['schema'], lower_limit, upper_limit, identifier['prefix']) }},
+                {%- endif -%}
+            {% endfor %}
+        {% endif %}
+        new_events_session_ids_init as (
+            select
+            {% if session_sql %}
+                {{ session_sql }} as session_identifier,
+            {% elif session_identifiers|length > 0 %}
+                COALESCE(
+                    {% for identifier in session_identifiers %}
+                        {%- if identifier['schema']|lower != 'atomic' -%}
+                            {% if identifier['alias'] %}{{identifier['alias']}}{% else %}{{identifier['schema']}}{% endif %}.{% if identifier['prefix'] %}{{ identifier['prefix'] }}{% else %}{{ identifier['schema']}}{% endif %}_{{identifier['field']}}
+                        {%- else -%}
+                            e.{{identifier['field']}}
+                        {%- endif -%}
+                        ,
+                    {%- endfor -%}
+                    NULL
+                ) as session_identifier,
+            {% else %}
+                {% do exceptions.raise_compiler_error("Need to specify either session identifiers or custom session SQL") %}
+            {% endif %}
+            {% if user_sql %}
+                {{ user_sql }} as user_identifier,
+            {% elif user_identifiers|length > 0 %}
+                max(
+                    COALESCE(
+                        {% for identifier in user_identifiers %}
+                            {%- if identifier['schema']|lower != 'atomic' %}
+                                {% if identifier['alias'] %}{{identifier['alias']}}{% else %}{{identifier['schema']}}{% endif %}.{% if identifier['prefix'] %}{{ identifier['prefix'] }}{% else %}{{ identifier['schema']}}{% endif %}_{{identifier['field']}}
+                            {%- else %}
+                                e.{{identifier['field']}}
+                            {%- endif -%}
+                            ,
+                        {%- endfor -%}
+                        NULL
+                    )
+                ) as user_identifier, -- Edge case 1: Arbitary selection to avoid window function like first_value.
+            {% else %}
+                {% do exceptions.raise_compiler_error("Need to specify either user identifiers or custom user SQL") %}
+            {% endif %}
+                min({{ session_timestamp }}) as start_tstamp,
+                max({{ session_timestamp }}) as end_tstamp
+
+            from {{ snowplow_events }} e
+            {% if session_identifiers|length > 0 %}
+                {% for identifier in session_identifiers %}
+                    {%- if identifier['schema']|lower != 'atomic' -%}
+                    left join {{ identifier['schema'] }} {% if identifier['alias'] %}as {{ identifier['alias'] }}{% endif %} on e.event_id = {% if identifier['alias'] %}{{ identifier['alias']}}{% else %}{{ identifier['schema'] }}{% endif %}.{{identifier['prefix']}}__id and e.collector_tstamp = {% if identifier['alias'] %}{{ identifier['alias']}}{% else %}{{ identifier['schema'] }}{% endif %}.{{ identifier['prefix'] }}__tstamp
+                    {% endif -%}
+                {% endfor %}
+            {% endif %}
+            {% if session_identifiers|length > 0 %}
+                {% for identifier in user_identifiers %}
+                    {%- if identifier['schema']|lower != 'atomic' -%}
+                    left join {{ identifier['schema'] }} {% if identifier['alias'] %}as {{ identifier['alias'] }}{% endif %} on e.event_id = {% if identifier['alias'] %}{{ identifier['alias']}}{% else %}{{ identifier['schema'] }}{% endif %}.{{identifier['prefix']}}__id and e.collector_tstamp = {% if identifier['alias'] %}{{ identifier['alias']}}{% else %}{{ identifier['schema'] }}{% endif %}.{{ identifier['prefix'] }}__tstamp
+                    {% endif -%}
+                {% endfor %}
+            {% endif %}
+            where
+                dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', days_late_allowed, 'dvce_created_tstamp') }} -- don't process data that's too late
+                and {{ session_timestamp }} >= {{ lower_limit }}
+                and {{ session_timestamp }} <= {{ upper_limit }}
+                and {{ snowplow_utils.app_id_filter(app_ids) }}
+                and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+                {% if derived_tstamp_partitioned and target.type == 'bigquery' | as_bool() %} -- BQ only
+                and derived_tstamp >= {{ lower_limit }}
+                and derived_tstamp <= {{ upper_limit }}
+                {% endif %}
+
+            group by 1
+        ), new_events_session_ids as (
+            select *
+            from new_events_session_ids_init e
+            {% if quarantined_sessions %}
+                where session_identifier is not null
+                and not exists (select 1 from {{ ref(quarantined_sessions) }} as a where a.session_identifier = e.session_identifier) -- don't continue processing v.long sessions
+            {%- endif %}
+        )
+
+        {% if is_incremental() %}
+
+        , previous_sessions as (
+        select *
+
+        from {{ this }}
+
+        where start_tstamp >= {{ session_lookback_limit }}
+        and {{ is_run_with_new_events }} --don't reprocess sessions that have already been processed.
+        )
+
+        , session_lifecycle as (
+        select
+            ns.session_identifier,
+            coalesce(self.user_identifier, ns.user_identifier) as user_identifier, -- Edge case 1: Take previous value to keep domain_userid consistent. Not deterministic but performant
+            least(ns.start_tstamp, coalesce(self.start_tstamp, ns.start_tstamp)) as start_tstamp,
+            greatest(ns.end_tstamp, coalesce(self.end_tstamp, ns.end_tstamp)) as end_tstamp -- BQ 1 NULL will return null hence coalesce
+
+        from new_events_session_ids ns
+        left join previous_sessions as self
+            on ns.session_identifier = self.session_identifier
+
+        where
+            self.session_identifier is null -- process all new sessions
+            or self.end_tstamp < {{ snowplow_utils.timestamp_add('day', max_session_days, 'self.start_tstamp') }} --stop updating sessions exceeding 3 days
+        )
+
+        {% else %}
+
+        , session_lifecycle as (
+
+        select * from new_events_session_ids
+
+        )
+
+        {% endif %}
+
+        select
+        sl.session_identifier,
+        sl.user_identifier,
+        sl.start_tstamp,
+        least({{ snowplow_utils.timestamp_add('day', max_session_days, 'sl.start_tstamp') }}, sl.end_tstamp) as end_tstamp -- limit session length to max_session_days
+
+        from session_lifecycle sl
+    {% endset %}
+
+    {{ return(sessions_lifecycle_manifest_query) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- macro.dbt.is_incremental
+- macro.dbt.type_string
+- [macro.snowplow_utils.app_id_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.app_id_filter)
+- [macro.snowplow_utils.get_field](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_field)
+- [macro.snowplow_utils.get_sde_or_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_sde_or_context)
+- [macro.snowplow_utils.get_session_lookback_limit](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_session_lookback_limit)
+- [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
+- [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
+- [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Base Create Snowplow Sessions This Run {#macro.snowplow_utils.base_create_snowplow_sessions_this_run}
+
+<DbtDetails><summary>
+<code>macros/base/base_create_snowplow_sessions_this_run.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/base/base_create_snowplow_sessions_this_run.sql">Source</a></i></b></center>
+
+```jinja2
+{% macro base_create_snowplow_sessions_this_run(lifecycle_manifest_table='snowplow_base_sessions_lifecycle_manifest', new_event_limits_table='snowplow_base_new_event_limits') %}
+    {% set lifecycle_manifest = ref(lifecycle_manifest_table) %}
+    {% set new_event_limits = ref(new_event_limits_table) %}
+    {%- set lower_limit,
+        upper_limit,
+        session_start_limit = snowplow_utils.return_base_new_event_limits(new_event_limits) %}
+
+    {% set sessions_sql %}
+
+
+        select
+        s.session_identifier,
+        s.user_identifier,
+        s.start_tstamp,
+        -- end_tstamp used in next step to limit events. When backfilling, set end_tstamp to upper_limit if end_tstamp > upper_limit.
+        -- This ensures we don't accidentally process events after upper_limit
+        case when s.end_tstamp > {{ upper_limit }} then {{ upper_limit }} else s.end_tstamp end as end_tstamp
+
+        from {{ lifecycle_manifest }} s
+
+        where
+        -- General window of start_tstamps to limit table scans. Logic complicated by backfills.
+        -- To be within the run, session start_tstamp must be >= lower_limit - max_session_days as we limit end_tstamp in manifest to start_tstamp + max_session_days
+        s.start_tstamp >= {{ session_start_limit }}
+        and s.start_tstamp <= {{ upper_limit }}
+        -- Select sessions within window that either; start or finish between lower & upper limit, start and finish outside of lower and upper limits
+        and not (s.start_tstamp > {{ upper_limit }} or s.end_tstamp < {{ lower_limit }})
+    {% endset %}
+
+    {{ return(sessions_sql) }}
+{% endmacro%}
+```
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Base Get Quarantine Sql {#macro.snowplow_utils.base_get_quarantine_sql}
+
+<DbtDetails><summary>
+<code>macros/base/base_quarantine_sessions.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/base/base_quarantine_sessions.sql">Source</a></i></b></center>
+
+```jinja2
+{% macro base_get_quarantine_sql(relation, max_session_length) %}
+
+  {# Find sessions exceeding max_session_days #}
+  {% set quarantine_sql -%}
+
+    select
+      session_identifier
+
+    from {{ relation }}
+    -- '=' since end_tstamp is restricted to start_tstamp + max_session_days
+    where end_tstamp = {{ snowplow_utils.timestamp_add(
+                              'day',
+                              max_session_length,
+                              'start_tstamp'
+                              ) }}
+
+  {%- endset %}
+
+  {{ return(quarantine_sql) }}
+
+{% endmacro %}
+```
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.base_quarantine_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_quarantine_sessions)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
+### Base Quarantine Sessions {#macro.snowplow_utils.base_quarantine_sessions}
+
+<DbtDetails><summary>
+<code>macros/base/base_quarantine_sessions.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/base/base_quarantine_sessions.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="raw" default>
+
+```jinja2
+{% macro base_quarantine_sessions(max_session_length, quarantined_sessions='snowplow_base_quarantined_sessions', src_relation=this) %}
+
+  {{ return(adapter.dispatch('base_quarantine_sessions', 'snowplow_utils')(max_session_length, quarantined_sessions, src_relation)) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__base_quarantine_sessions(max_session_length, quarantined_sessions_str, src_relation) %}
+  {% set quarantined_sessions = ref(quarantined_sessions_str) %}
+
+  {% set sessions_to_quarantine_sql = snowplow_utils.base_get_quarantine_sql(src_relation, max_session_length) %}
+
+  {% set quarantine_query %}
+
+  merge into {{ quarantined_sessions }} trg
+  using ({{ sessions_to_quarantine_sql }}) src
+  on trg.session_identifier = src.session_identifier
+  when not matched then insert (session_identifier) values(session_identifier);
+
+  {% endset %}
+
+  {{ return(quarantine_query) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="postgres" label="postgres">
+
+```jinja2
+{% macro postgres__base_quarantine_sessions(max_session_length, quarantined_sessions_str, src_relation) %}
+
+  {% set quarantined_sessions = ref(quarantined_sessions_str) %}
+  {% set sessions_to_quarantine_tmp = 'sessions_to_quarantine_tmp' %}
+
+  begin;
+
+    create temporary table {{ sessions_to_quarantine_tmp }} as (
+      {{ snowplow_utils.base_get_quarantine_sql(src_relation, max_session_length) }}
+    );
+
+    delete from {{ quarantined_sessions }}
+    where session_identifier in (select session_identifier from {{ sessions_to_quarantine_tmp }});
+
+    insert into {{ quarantined_sessions }} (
+      select session_identifier from {{ sessions_to_quarantine_tmp }});
+
+    drop table {{ sessions_to_quarantine_tmp }};
+
+  commit;
+
+{% endmacro %}
+```
+
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.base_get_quarantine_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_get_quarantine_sql)
+
+</TabItem>
+</Tabs>
+
+<h4>Referenced By</h4>
+
+<Tabs groupId="reference">
+<TabItem value="model" label="Models">
+
+- [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
 
 </TabItem>
 </Tabs>
@@ -148,6 +1203,62 @@ This macro does not currently have a description.
 </Tabs>
 </DbtDetails>
 
+### Cluster By Fields Sessions Lifecycle {#macro.snowplow_utils.cluster_by_fields_sessions_lifecycle}
+
+<DbtDetails><summary>
+<code>macros/utils/cross_db/cluster_by_fields.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/cross_db/cluster_by_fields.sql">Source</a></i></b></center>
+
+<Tabs groupId="dispatched_sql">
+<TabItem value="raw" label="raw" default>
+
+```jinja2
+{% macro cluster_by_fields_sessions_lifecycle() %}
+
+  {{ return(adapter.dispatch('cluster_by_fields_sessions_lifecycle', 'snowplow_utils')()) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+<TabItem value="default" label="default">
+
+```jinja2
+{% macro default__cluster_by_fields_sessions_lifecycle() %}
+
+  {{ return(snowplow_utils.get_value_by_target_type(bigquery_val=["session_identifier"], snowflake_val=["to_date(start_tstamp)"])) }}
+
+{% endmacro %}
+```
+
+</TabItem>
+</Tabs>
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.get_value_by_target_type](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_value_by_target_type)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
 ### Coalesce Field Paths {#macro.snowplow_utils.coalesce_field_paths}
 
 <DbtDetails><summary>
@@ -167,7 +1278,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro coalesce_field_paths(paths, field_alias, include_field_alias, relation_alias) %}
-  
+
   {% set relation_alias = '' if relation_alias is none else relation_alias~'.' %}
 
   {% set field_alias = '' if not include_field_alias else ' as '~field_alias %}
@@ -214,7 +1325,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro combine_column_versions(relation, column_prefix, required_fields=[], nested_level=none, level_filter='equalto', relation_alias=none, include_field_alias=true, array_index=0, max_nested_level=15, exclude_versions=[]) %}
-  
+
   {# Create field_alias if not supplied i.e. is not tuple #}
   {% set required_fields_tmp = required_fields %}
   {% set required_fields = [] %}
@@ -234,7 +1345,7 @@ This macro does not currently have a description.
   {%- set matched_columns = snowplow_utils.get_columns_in_relation_by_column_prefix(relation, column_prefix) -%}
 
   {# Removes excluded versions, assuming column name ends with a version of format 'X_X_X' #}
-  {%- set filter_columns_by_version = snowplow_utils.exclude_column_versions(matched_columns, exclude_versions) -%}  
+  {%- set filter_columns_by_version = snowplow_utils.exclude_column_versions(matched_columns, exclude_versions) -%}
 
   {%- set flattened_fields_by_col_version = [] -%}
 
@@ -444,7 +1555,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro exclude_column_versions(columns, exclude_versions) %}
-  {%- set filtered_columns_by_version = [] -%}  
+  {%- set filtered_columns_by_version = [] -%}
   {% for column in columns %}
     {%- set col_version = column.name[-5:] -%}
     {% if col_version not in exclude_versions %}
@@ -490,7 +1601,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro flatten_fields(fields, parent, path, array_index, level_limit=none, level_counter=1, flattened_fields=[], field_name='') %}
-  
+
   {% for field in fields %}
 
     {# Only recurse up-until level_limit #}
@@ -807,13 +1918,13 @@ This macro does not currently have a description.
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_enabled_snowplow_models.sql">Source</a></i></b></center>
 
 ```jinja2
-{% macro get_enabled_snowplow_models(package_name, graph_object=none, models_to_run=var("models_to_run","")) -%}
-  
+{% macro get_enabled_snowplow_models(package_name, graph_object=none, models_to_run=var("models_to_run", ""), base_events_table_name='snowplow_base_events_this_run') -%}
+
   {# Override dbt graph object if graph_object is passed. Testing purposes #}
   {% if graph_object is not none %}
     {% set graph = graph_object %}
   {% endif %}
-  
+
   {# models_to_run optionally passed using dbt ls command. This returns a string of models to be run. Split into list #}
   {% if models_to_run|length %}
     {% set selected_models = models_to_run.split(" ") %}
@@ -824,12 +1935,12 @@ This macro does not currently have a description.
   {% set enabled_models = [] %}
   {% set untagged_snowplow_models = [] %}
   {% set snowplow_model_tag = package_name+'_incremental' %}
-  {% set snowplow_events_this_run_path = 'model.'+package_name+'.'+package_name+'_base_events_this_run' %}
+  {% set snowplow_events_this_run_path = 'model.' + project_name + '.' + base_events_table_name %}
 
   {% if execute %}
-    
+
     {% set nodes = graph.nodes.values() | selectattr("resource_type", "equalto", "model") %}
-    
+
     {% for node in nodes %}
       {# If selected_models is specified, filter for these models #}
       {% if selected_models is none or node.name in selected_models %}
@@ -847,18 +1958,22 @@ This macro does not currently have a description.
         {% endif %}
 
       {% endif %}
-      
+
     {% endfor %}
 
     {% if untagged_snowplow_models|length %}
     {#
-      Prints warning for models that reference snowplow_base_events_this_run but are untagged as 'snowplow_web_incremental'
+      Prints warning for models that reference snowplow_base_events_this_run but are untagged as '{package_name}_incremental'
       Without this tagging these models will not be inserted into the manifest, breaking the incremental logic.
       Only catches first degree dependencies rather than all downstream models
     #}
-      {%- do exceptions.raise_compiler_error("Snowplow Warning: Untagged models referencing '"+package_name+"_base_events_this_run'. Please refer to the Snowplow docs on tagging. " 
+      {%- do exceptions.raise_compiler_error("Snowplow Warning: Untagged models referencing '"+snowplow_events_this_run_path+"'. Please refer to the Snowplow docs on tagging. "
       + "Models: "+ ', '.join(untagged_snowplow_models)) -%}
-    
+
+    {% endif %}
+
+    {% if enabled_models|length == 0 %}
+      {%- do exceptions.raise_compiler_error("No enabled models identified.") -%}
     {% endif %}
 
   {% endif %}
@@ -994,7 +2109,7 @@ from
 ```jinja2
 {% macro snowflake__get_field(column_name, field_name, table_alias = none, type = none, array_index = none) %}
 {%- if type is none and execute -%}
-{% do exceptions.warn("Warning: macro snowplow_utils.get_field is being use without a type provided, Snowflake will return a variant column in this case which is unlikely to be what you want.") %}
+{% do exceptions.warn("Warning: macro snowplow_utils.get_field is being used without a type provided, Snowflake will return a variant column in this case which is unlikely to be what you want.") %}
 {%- endif -%}
 {%- if table_alias -%}{{table_alias}}.{%- endif -%}{{column_name}}{%- if array_index is not none -%}[{{array_index}}]{%- endif -%}:{{field_name}}{%- if type -%}::{{type}}{%- endif -%}
 {% endmacro %}
@@ -1023,6 +2138,12 @@ from
 - [model.snowplow_web.snowplow_web_vital_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_vital_events_this_run)
 
 </TabItem>
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.base_create_snowplow_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_events_this_run)
+- [macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest)
+
+</TabItem>
 </Tabs>
 </DbtDetails>
 
@@ -1045,14 +2166,14 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro get_field_alias(field) %}
-  
+
   {# Check if field is supplied as tuple e.g. (field_name, field_alias) #}
   {% if field is iterable and field is not string %}
     {{ return(field) }}
   {% else %}
     {{ return((field, field|replace('.', '_'))) }}
   {% endif %}
-  
+
 {% endmacro %}
 ```
 
@@ -1226,7 +2347,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro get_level_limit(level, level_filter, required_field_names) %}
-  
+
   {% set accepted_level_filters = ['equalto','lessthan','greaterthan'] %}
 
   {% if level_filter is not in accepted_level_filters %}
@@ -1451,7 +2572,7 @@ This macro does not currently have a description.
 
       {%- set field_alias = snowplow_utils.get_field_alias(field.field)[1] -%}
 
-      cast(null as {{ field.dtype }}) as {{ field_alias }} {%- if not loop.last %}, {% endif %}
+      cast(null as {{ field.dtype }}){%- if include_field_alias %} as {{ field_alias }}{%- endif %} {%- if not loop.last %}, {% endif %}
     {% endfor %}
 
   {%- endif -%}
@@ -1510,6 +2631,8 @@ This macro does not currently have a description.
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_partition_by.sql">Source</a></i></b></center>
 
 ```jinja2
+
+
 {%- macro get_partition_by(bigquery_partition_by=none, databricks_partition_by=none) -%}
 
   {%- do exceptions.warn("Warning: the `get_partition_by` macro is deprecated and will be removed in a future version of the package, please use `get_value_by_target_type` instead.") -%}
@@ -1976,6 +3099,12 @@ left join nl_basjes_yauaa_context_1 b on
 - [model.snowplow_web.snowplow_web_vital_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_vital_events_this_run)
 
 </TabItem>
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.base_create_snowplow_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_events_this_run)
+- [macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest)
+
+</TabItem>
 </Tabs>
 </DbtDetails>
 
@@ -1998,7 +3127,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro get_session_lookback_limit(lower_limit) %}
-  
+
   {% if not execute %}
     {{ return('')}}
   {% endif %}
@@ -2006,14 +3135,14 @@ This macro does not currently have a description.
   {% set limit_query %}
     select
     {{ snowplow_utils.timestamp_add(
-                'day', 
+                'day',
                 -var("snowplow__session_lookback_days", 365),
                 lower_limit) }} as session_lookback_limit
 
   {% endset %}
 
   {% set results = run_query(limit_query) %}
-   
+
   {% if execute %}
 
     {% set session_lookback_limit = snowplow_utils.cast_to_tstamp(results.columns[0].values()[0]) %}
@@ -2047,7 +3176,11 @@ This macro does not currently have a description.
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_lifecycle_manifest)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
-- [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
+
+</TabItem>
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest)
 
 </TabItem>
 </Tabs>
@@ -2627,6 +3760,7 @@ snowplow_web:
 - [macro.snowplow_ecommerce.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.allow_refresh)
 - [macro.snowplow_mobile.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.allow_refresh)
 - [macro.snowplow_normalize.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.allow_refresh)
+- [macro.snowplow_utils.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.allow_refresh)
 - [macro.snowplow_web.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.allow_refresh)
 
 </TabItem>
@@ -2667,6 +3801,8 @@ The appropriate value for the target warehouse type, or an error if not an expec
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_value_by_target_type.sql">Source</a></i></b></center>
 
 ```jinja2
+
+
 {%- macro get_value_by_target_type(bigquery_val=none, snowflake_val=none, redshift_val=none, postgres_val=none, databricks_val=none) -%}
 
   {% if target.type == 'bigquery' %}
@@ -2732,6 +3868,7 @@ The appropriate value for the target warehouse type, or an error if not an expec
 - [macro.snowplow_mobile.mobile_cluster_by_fields_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions)
 - [macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_sessions_lifecycle)
 - [macro.snowplow_mobile.mobile_cluster_by_fields_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.mobile_cluster_by_fields_users)
+- [macro.snowplow_utils.cluster_by_fields_sessions_lifecycle](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.cluster_by_fields_sessions_lifecycle)
 - [macro.snowplow_web.web_cluster_by_fields_consent](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_consent)
 - [macro.snowplow_web.web_cluster_by_fields_cwv](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_cwv)
 - [macro.snowplow_web.web_cluster_by_fields_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.web_cluster_by_fields_page_views)
@@ -2798,15 +3935,28 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/is_run_with_new_events.sql">Source</a></i></b></center>
 
 ```jinja2
-{% macro is_run_with_new_events(package_name) %}
+{% macro is_run_with_new_events(package_name, new_event_limits_table=none, incremental_manifest_table=none, base_sessions_lifecycle_table=none) %}
 
-  {%- set new_event_limits_relation = snowplow_utils.get_new_event_limits_table_relation(package_name) -%}
-  {%- set incremental_manifest_relation = snowplow_utils.get_incremental_manifest_table_relation(package_name) -%}
+  {%- if new_event_limits_table -%}
+    {%- set new_event_limits_relation = ref(new_event_limits_table) -%}
+  {%- else -%}
+    {%- set new_event_limits_relation = snowplow_utils.get_new_event_limits_table_relation(package_name) -%}
+  {%- endif -%}
+
+  {%- if incremental_manifest_table -%}
+    {%- set incremental_manifest_relation = ref(incremental_manifest_table) -%}
+  {%- else-%}
+    {%- set incremental_manifest_relation = snowplow_utils.get_incremental_manifest_table_relation(package_name) -%}
+  {%- endif -%}
 
   {% if is_incremental() %}
 
     {%- set node_identifier = this.identifier -%}
-    {%- set base_sessions_lifecycle_identifier = package_name+'_base_sessions_lifecycle_manifest' -%}
+    {%- if base_sessions_lifecycle_relation -%}
+      {%- set base_sessions_lifecycle_identifier = ref(base_sessions_lifecycle_relation) -%}
+    {%- else -%}
+      {%- set base_sessions_lifecycle_identifier = package_name+'_base_sessions_lifecycle_manifest' -%}
+    {%- endif -%}
 
     {# base_sessions_lifecycle not included in manifest so query directly. Otherwise use the manifest for performance #}
     {%- if node_identifier == base_sessions_lifecycle_identifier -%}
@@ -2886,7 +4036,6 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 - [model.snowplow_mobile.snowplow_mobile_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions)
 - [model.snowplow_mobile.snowplow_mobile_user_mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_user_mapping)
 - [model.snowplow_mobile.snowplow_mobile_users](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_users)
-- [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 - [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
 - [model.snowplow_web.snowplow_web_consent_log](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_log)
 - [model.snowplow_web.snowplow_web_page_views](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views)
@@ -2902,6 +4051,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_mobile') }} --returns f
 
 - [macro.snowplow_normalize.normalize_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.normalize_events)
 - [macro.snowplow_normalize.users_table](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.users_table)
+- [macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest)
 
 </TabItem>
 </Tabs>
@@ -3206,7 +4356,7 @@ This macro does not currently have a description.
   {# Required keys. Throws error if not present #}
   {%- set unique_key = config.require('unique_key') -%}
   {%- set upsert_date_key = config.require('upsert_date_key') -%}
-  
+
   {% set disable_upsert_lookback = config.get('disable_upsert_lookback') %}
 
   {% set target_relation = this %}
@@ -3250,9 +4400,9 @@ This macro does not currently have a description.
       {{ build_sql }}
   {% endcall %}
 
-  {% if existing_relation is none or existing_relation.is_view or should_full_refresh() %} 
-    {% do create_indexes(target_relation) %} 
-  {% endif %} 
+  {% if existing_relation is none or existing_relation.is_view or should_full_refresh() %}
+    {% do create_indexes(target_relation) %}
+  {% endif %}
 
   {{ run_hooks(post_hooks, inside_transaction=True) }}
 
@@ -3319,7 +4469,7 @@ This macro does not currently have a description.
   {# Required keys. Throws error if not present #}
   {%- set unique_key = config.require('unique_key') -%}
   {%- set upsert_date_key = config.require('upsert_date_key') -%}
-  
+
   {% set disable_upsert_lookback = config.get('disable_upsert_lookback') %}
 
   {% set target_relation = this %}
@@ -3349,7 +4499,7 @@ This macro does not currently have a description.
     {% do adapter.expand_target_column_types(
            from_relation=tmp_relation,
            to_relation=target_relation) %}
-    
+
     {%- set dest_columns = adapter.get_columns_in_relation(target_relation) -%}
 
     {% set build_sql = snowplow_utils.snowplow_snowflake_get_incremental_sql(strategy,
@@ -3547,7 +4697,7 @@ This macro does not currently have a description.
 
     {# Get all field_paths per field. Returned as array. #}
     {% set field_paths = all_cols|selectattr('field_name','equalto', field_name)|map(attribute='path')|list %}
-    
+
     {# Get nested_level of field. Returned as single element array. #}
     {% set nested_level = all_cols|selectattr('field_name',"equalto", field_name)|map(attribute='nested_level')|list%}
 
@@ -3627,7 +4777,7 @@ Current timestamp minus `n` units.
   {% set n_timedeltas_ago = (now - modules.datetime.timedelta(**arg_dict)) %}
 
   {{ return(n_timedeltas_ago) }}
-  
+
 {% endmacro %}
 ```
 
@@ -3862,7 +5012,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro quarantine_sessions(package_name, max_session_length, src_relation=this) %}
-  
+
   {{ return(adapter.dispatch('quarantine_sessions', 'snowplow_utils')(package_name, max_session_length, src_relation=this)) }}
 
 {% endmacro %}
@@ -3873,9 +5023,9 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro default__quarantine_sessions(package_name, max_session_length, src_relation=this) %}
-  
+
   {% set quarantined_sessions = ref(package_name~'_base_quarantined_sessions') %}
-  
+
   {% set sessions_to_quarantine_sql = snowplow_utils.get_quarantine_sql(src_relation, max_session_length) %}
 
   merge into {{ quarantined_sessions }} trg
@@ -3891,7 +5041,7 @@ This macro does not currently have a description.
 
 ```jinja2
 {% macro postgres__quarantine_sessions(package_name, max_session_length, src_relation=this) %}
-  
+
   {% set quarantined_sessions = ref(package_name~'_base_quarantined_sessions') %}
   {% set sessions_to_quarantine_tmp = 'sessions_to_quarantine_tmp' %}
 
@@ -3936,7 +5086,6 @@ This macro does not currently have a description.
 <TabItem value="model" label="Models">
 
 - [model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/models/index.md#model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
-- [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
 
 </TabItem>
 </Tabs>
@@ -4035,8 +5184,12 @@ This macro does not currently have a description.
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_this_run)
 - [model.snowplow_normalize.snowplow_normalize_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_base_events_this_run)
-- [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
-- [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
+
+</TabItem>
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest)
+- [macro.snowplow_utils.base_create_snowplow_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_sessions_this_run)
 
 </TabItem>
 </Tabs>
@@ -4166,6 +5319,11 @@ A list of two objects, the lower and upper values from the columns in the model
 - [model.snowplow_web.snowplow_web_consent_versions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_versions)
 
 </TabItem>
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.base_create_snowplow_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_events_this_run)
+
+</TabItem>
 </Tabs>
 </DbtDetails>
 
@@ -4211,6 +5369,8 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 <TabItem value="raw" label="raw" default>
 
 ```jinja2
+
+
 {%- macro set_query_tag(statement) -%}
   {{ return(adapter.dispatch('set_query_tag', 'snowplow_utils')(statement)) }}
 {%- endmacro -%}
@@ -4337,6 +5497,45 @@ An alter session command set to the `query_tag` to the `statement` for Snowflake
 </Tabs>
 </DbtDetails>
 
+### Snowplow Base Delete From Manifest {#macro.snowplow_utils.snowplow_base_delete_from_manifest}
+
+<DbtDetails><summary>
+<code>macros/utils/snowplow_delete_from_manifest.sql</code>
+</summary>
+
+<h4>Description</h4>
+
+This macro does not currently have a description.
+
+<h4>Details</h4>
+
+<DbtDetails>
+<summary>Code</summary>
+
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/snowplow_delete_from_manifest.sql">Source</a></i></b></center>
+
+```jinja2
+{% macro snowplow_base_delete_from_manifest(models, incremental_manifest='snowplow_incremental_manifest') %}
+
+  {{ snowplow_utils.snowplow_delete_from_manifest(models, ref(incremental_manifest)) }}
+
+{% endmacro %}
+```
+
+</DbtDetails>
+
+
+<h4>Depends On</h4>
+
+<Tabs groupId="reference">
+<TabItem value="macro" label="Macros">
+
+- [macro.snowplow_utils.snowplow_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_delete_from_manifest)
+
+</TabItem>
+</Tabs>
+</DbtDetails>
+
 ### Snowplow Delete From Manifest {#macro.snowplow_utils.snowplow_delete_from_manifest}
 
 <DbtDetails><summary>
@@ -4441,6 +5640,7 @@ This macro does not currently have a description.
 <TabItem value="macro" label="Macros">
 
 - [macro.snowplow_ecommerce.snowplow_ecommerce_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_ecommerce/macros/index.md#macro.snowplow_ecommerce.snowplow_ecommerce_delete_from_manifest)
+- [macro.snowplow_utils.snowplow_base_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_base_delete_from_manifest)
 - [macro.snowplow_utils.snowplow_mobile_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_mobile_delete_from_manifest)
 - [macro.snowplow_utils.snowplow_web_delete_from_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_web_delete_from_manifest)
 
@@ -4514,17 +5714,25 @@ This macro does not currently have a description.
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/snowplow_incremental_post_hook.sql">Source</a></i></b></center>
 
 ```jinja2
-{% macro snowplow_incremental_post_hook(package_name) %}
-  
+{% macro snowplow_incremental_post_hook(package_name='snowplow', incremental_manifest_table_name=none, base_events_this_run_table_name=none) %}
+
   {% set enabled_snowplow_models = snowplow_utils.get_enabled_snowplow_models(package_name) -%}
 
   {% set successful_snowplow_models = snowplow_utils.get_successful_models(models=enabled_snowplow_models) -%}
 
-  {% set incremental_manifest_table = snowplow_utils.get_incremental_manifest_table_relation(package_name) -%}
+  {%- if incremental_manifest_table_name -%}
+    {%- set incremental_manifest_table = ref(incremental_manifest_table_name) -%}
+  {%- else -%}
+    {% set incremental_manifest_table = snowplow_utils.get_incremental_manifest_table_relation(package_name) -%}
+  {%- endif -%}
 
-  {% set base_events_this_run_table = ref(package_name~'_base_events_this_run') -%}
-        
-  {{ snowplow_utils.update_incremental_manifest_table(incremental_manifest_table, base_events_this_run_table, successful_snowplow_models) }}                  
+  {%- if base_events_this_run_table_name -%}
+    {%- set base_events_this_run_table = ref(base_events_this_run_table_name) -%}
+  {%- else -%}
+    {% set base_events_this_run_table = ref(package_name~'_base_events_this_run') -%}
+  {%- endif -%}
+
+  {{ snowplow_utils.update_incremental_manifest_table(incremental_manifest_table, base_events_this_run_table, successful_snowplow_models) }}
 
 {% endmacro %}
 ```
@@ -4965,12 +6173,14 @@ This macro does not currently have a description.
 - [model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_base_sessions_lifecycle_manifest)
 - [model.snowplow_normalize.snowplow_normalize_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_base_events_this_run)
 - [model.snowplow_web.snowplow_web_base_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_events_this_run)
-- [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 <TabItem value="macro" label="Macros">
 
+- [macro.snowplow_utils.base_create_snowplow_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_events_this_run)
+- [macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest)
+- [macro.snowplow_utils.base_get_quarantine_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_get_quarantine_sql)
 - [macro.snowplow_utils.get_quarantine_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_quarantine_sql)
 - [macro.snowplow_utils.get_run_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_run_limits)
 - [macro.snowplow_utils.get_session_lookback_limit](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_session_lookback_limit)
@@ -5213,15 +6423,15 @@ This macro does not currently have a description.
 - [model.snowplow_mobile.snowplow_mobile_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_incremental_manifest)
 - [model.snowplow_mobile.snowplow_mobile_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/models/index.md#model.snowplow_mobile.snowplow_mobile_sessions_this_run)
 - [model.snowplow_normalize.snowplow_normalize_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/models/index.md#model.snowplow_normalize.snowplow_normalize_incremental_manifest)
-- [model.snowplow_web.snowplow_web_base_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_quarantined_sessions)
 - [model.snowplow_web.snowplow_web_consent_scope_status](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_scope_status)
-- [model.snowplow_web.snowplow_web_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_incremental_manifest)
 - [model.snowplow_web.snowplow_web_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_sessions_this_run)
 
 </TabItem>
 <TabItem value="macro" label="Macros">
 
 - [macro.snowplow_fractribution.channel_spend](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_fractribution/macros/index.md#macro.snowplow_fractribution.channel_spend)
+- [macro.snowplow_utils.base_create_snowplow_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_incremental_manifest)
+- [macro.snowplow_utils.base_create_snowplow_quarantined_sessions](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_quarantined_sessions)
 - [macro.snowplow_web.get_iab_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_iab_context_fields)
 - [macro.snowplow_web.get_ua_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_ua_context_fields)
 - [macro.snowplow_web.get_yauaa_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_yauaa_context_fields)
@@ -5370,11 +6580,11 @@ This macro does not currently have a description.
   {% if models %}
 
     {% set last_success_query %}
-      select 
-        b.model, 
-        a.last_success 
+      select
+        b.model,
+        a.last_success
 
-      from 
+      from
         (select max(collector_tstamp) as last_success from {{ base_events_table }}) a,
         ({% for model in models %} select '{{model}}' as model {%- if not loop.last %} union all {% endif %} {% endfor %}) b
 
@@ -5392,7 +6602,7 @@ This macro does not currently have a description.
     {% if target.type == 'snowflake' %}
       commit;
     {% endif %}
-    
+
   {% endif %}
 
 {%- endmacro %}
@@ -5437,7 +6647,7 @@ This macro does not currently have a description.
     end transaction;
 
     drop table snowplow_models_last_success;
-    
+
   {% endif %}
 
 {%- endmacro %}

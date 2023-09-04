@@ -15,7 +15,8 @@ import {versions} from '@site/src/componentVersions';
 <ReactMarkdown children={`
 | snowplow-web version       | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | -------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowWeb} | >=1.4.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅^     |
+| ${versions.dbtSnowplowWeb} | >=1.5.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅^     |
+| 0.15.2                     | >=1.4.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅^     |
 | 0.13.3*                     | >=1.3.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.11.0                     | >=1.0.0 to <1.3.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.5.1                      | >=0.20.0 to <1.0.0  |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |

@@ -1,6 +1,6 @@
 export const versions = {
   // Trackers
-  androidTracker: '5.4.2',
+  androidTracker: '5.4.4',
   dotNetTracker: '1.2.1',
   cppTracker: '2.0.0',
   flutterTracker: '0.4.0',

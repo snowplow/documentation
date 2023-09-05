@@ -17,7 +17,7 @@ The web and mobile packages contains a User Mapping module that aims to link use
 
 The `domain_userid`/`device_user_id` is cookie/device based and therefore expires/changes over time, where as `user_id` is typically populated when a user logs in with your own internal identifier (dependent on your tracking implementation).
 
-This mapping is applied to the sessions table by a post-hook which updates the `stitched_user_id` column with the latest mapping. If no mapping is present, the default value for `stitched_user_id`  is the `domain_userid`/`device_user_id`. This process is known as session stitching, and effectively allows you to attribute logged-in and non-logged-in sessions back to a single user. In the web package, it is also possible to stitch onto the page views table.
+This mapping is applied to the sessions table by a post-hook which updates the `stitched_user_id` column with the latest mapping. If no mapping is present, the default value for `stitched_user_id`  is the `domain_userid`/`device_user_id`. This process is known as session stitching, and effectively allows you to attribute logged-in and non-logged-in sessions back to a single user.
 
 If required, this update operation can be disabled by setting in your `dbt_project.yml` file (selecting one of web/mobile, or both, as appropriate):
 
@@ -28,5 +28,6 @@ vars:
   snowplow_<package>:
     snowplow__session_stitching: false
 ```
+In the web package, it is also possible to stitch onto the page views table by setting the value of `snowplow__page_view_stitching` to true. Perhaps it is enough to apply this with less frequency than your usual run to keep costs down by only enabling this at runtime (on the command line).
 
 User mapping is typically not a 'one size fits all' exercise. Depending on your tracking implementation, business needs and desired level of sophistication you may want to write bespoke logic. Please refer to this [blog post](https://snowplow.io/blog/developing-a-single-customer-view-with-snowplow/) for ideas. In addition, the web package offers the possibility to change what field is used as your stitched user id, so instead of `user_id` you can use any field you wish (note that it will still be called `user_id` in your mapping table), and by taking advantage of the [custom sessionization and users](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/custom-sessionization-and-users/index.md) you can also change the field used as the `domain_user_id`. We plan to add support for these features to the mobile package in the future.

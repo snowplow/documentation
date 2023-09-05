@@ -8,7 +8,7 @@ Snowplow Support is here to ensure you gain full value from Snowplow’s product
 
 ## All Products
 
-The following services are provided for all BDP Cloud and BDP Enterprise customers.
+The following services are provided for all BDP Cloud and BDP Enterprise customers, and for our Try Snowplow trial users.
 
 :::note
 
@@ -85,9 +85,9 @@ As part of our [Infrastructure Review service](https://snowplow.io/snowplow-bdp-
 
 Unless otherwise stated in your contract, we provide official support for software that’s either in its latest version or a version released within the last 18 months (rolling). You can find the [current versions of components](https://docs.snowplow.io/docs/pipeline-components-and-applications/versions/) in our documentation.
 
-### Try Snowplow & Open Source
+### Open Source
 
-Customer Support is provided to our commercial customers. For support with your Try Snowplow or Open Source pipelines, we encourage you to make use of these resources:
+Customer Support is provided to our commercial customers. For support with your Open Source pipeline, we encourage you to make use of these resources:
 
 - [Snowplow Docs](https://docs.snowplow.io/docs): Extensive product and engineering documentation of Snowplow features, functionality, and configuration.
 - [Snowplow Discourse](https://discourse.snowplow.io/): Community forum where free & open source users, customers, and our team come together to discuss everything Snowplow.
@@ -116,6 +116,7 @@ The following items are out of scope of the support services offered to Snowplow
 | Cost management | Managing or monitoring the infrastructure costs associated with running your pipeline | We are able to provide general recommendations and best practice on right-sizing your infrastructure and storage. As part of our Infrastructure Review service, we are able to make more specific recommendations |
 | Data warehouse migrations | Migration of data from one data warehouse to another, or the loading of historical data into a new data warehouse | Helping you to understand best practices surrounding data reprocessing if it’s required for your pipeline |
 | Pipeline migrations | Migration of pipeline components between sub-accounts within your cloud provider or between cloud providers | Deployment and management of your pipeline in line with our [Product Description](https://snowplow.io/snowplow-bdp-product-description/)
+| Destination management | Managing Redshift or Elastic/Open Search clusters on your behalf. <br /><br /> Note: Some legacy agreements include destination management. Snowplow has sunset this service and therefore we do not offer <br /> * destination management for new customers <br /> * management of additional destinations for existing customers with legacy agreements. | Helping you understand the requirements of destination setup for Snowplow, and advising on best practice. |
 
 ## Alpha & Beta Features and Services
 

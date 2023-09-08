@@ -26,36 +26,36 @@ To reduce the number of breaking changes within the web package, we made the dec
 
 :::
 
+## Examples
+
 A deeper set of documentation is available in the [Advanced Usage of Snowplow Utils](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/index.md#customizing-session-identifiers) page, including how to provide a hierarchy of fields in case one is null, but here are two short example showcasing how you can use a field in a custom context, and how you can provide custom SQL to create your "session" identifier.
 
 :::tip
 
-Remember that any events with a null session id will be excluded from the `snowplow_base_events_this_run` table and any processing of your package, make sure your identifier has a value for all events you want to process!
+Remember that any events with a null "session" identifier will be excluded from the `snowplow_base_events_this_run` table and any processing of the package, make sure your identifier has a value for all events you want to process!
 
 :::
 
+
+
 #### Custom Context
 
-This example uses a field called `session_id` in your `com_mycompany_session_identifier_1` context and will use this as the value in your `domain_sessionid` field for all tables (excluding the manifest tables).
+This example uses a field called `session_id` in your `com_mycompany_session_identifier_1` context and will use this as the value in your `domain_sessionid` field for all tables (excluding the manifest tables, which uses a column named `session_identifier`).
 
 ```yml title="dbt_project.yml"
 vars:
-    ...
-    snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1', 'field': 'session_id', 'prefix': 'si'}]
-    ...
-...
+    snowplow_web:
+        snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1', 'field': 'session_id', 'prefix': 'si'}]
 ```
 
 #### Custom SQL
 
-This example creates a session identifier based off the combination of `app_id` and `domain_sessionid` which you may want if you use cross-domain tracking, but want to split the sessions for your analysis.
+This example creates a session identifier based off the combination of `app_id` and `domain_sessionid` which you may want if you use cross-domain tracking, but want to split the sessions for your analysis. Note that if you provide a value for `snowplow__session_sql` this will be used instead of `snowplow__session_identifiers`.
 
 ```yml title="dbt_project.yml"
 vars:
-    ...
-    snowplow__session_sql: 'app_id || domain_sessionid'
-    ...
-...
+    snowplow_web:
+        snowplow__session_sql: 'app_id || domain_sessionid'
 ```
 
 The same approaches can be taken to provide a custom `domain_userid` overwrite as well, using the `snowplow__user_identifiers`/`snowplow__user_sql` variables.

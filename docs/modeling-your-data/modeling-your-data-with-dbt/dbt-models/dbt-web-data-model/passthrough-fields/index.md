@@ -28,7 +28,15 @@ vars:
     snowplow__page_view_passthroughs: ['v_collector', {'sql': 'event_id || app_id', 'alias': 'event_app_id'}]
 ```
 
-would add the `v_collector` field and a field called `event_app_id` which is the concatenation of the `event_id` and the `app_id`. A more useful case for the SQL block is to extract a specific field from a context, however you can also just use the context column name as the field to bring the whole context through as is. Note that how to extract a field from your context column will depend on your warehouse, and you are unable to use dbt macros in this variable. For the users table, any basic field will have `first_` or `last_` prefixed to the field name automatically to avoid clashes, however if you are using the SQL approach, you will need to add these prefixes as part of your alias.
+would add the `v_collector` field and a field called `event_app_id` which is the concatenation of the `event_id` and the `app_id`. A more useful case for the SQL block is to extract a specific field from a context, however you can also just use the context column name as the field to bring the whole context through as is e.g.
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_web:
+    snowplow__page_view_passthroughs: ['contexts_my_entity_1']
+```
+
+Note that how to extract a field from your context column will depend on your warehouse (see our [querying guide](/docs/storing-querying/querying-data/index.md?warehouse=snowflake#entities) for more information), and you are unable to use dbt macros in this variable. For the users table, any basic field will have `first_` or `last_` prefixed to the field name automatically to avoid clashes, however if you are using the SQL approach, you will need to add these prefixes as part of your alias.
 
 :::caution
 

@@ -51,7 +51,7 @@ Session context needs to be enabled (default) in order for the integration to wo
 :::
 
 :::note
-The feature is available since version 5.3 of the iOS and Android trackers.
+The feature is currently available in version 5.5.0-beta.2 of the iOS and Android trackers.
 :::
 
 ## Processing the user ID sent in requests to Kantar

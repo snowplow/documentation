@@ -22,6 +22,15 @@ import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 ```
 
 ## Manifest Tables
+
+Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) logic of our package, as well as thinks such as quarantined sessions. 
+
+:::danger
+
+These manifest tables are critical to the package **and as such are protected from full refreshes, i.e. being dropped, when running in production by default**. In development refreshes are enabled.
+
+:::
+
 <Tabs groupId="dbt-packages" queryString>
 <TabItem value="web" label="Snowplow Web" default>
 
@@ -58,16 +67,8 @@ There are 3 manifest tables included in this package:
 </TabItem>
 </Tabs>
 
-_Please refer to the [Incremental Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) section more details on the purpose of each of these tables._
+The `allow_refresh()` macro defines the protection behavior. As [dbt recommends](https://docs.getdbt.com/faqs/target-names), target names are used here to differentiate between your prod and dev environment. By default, this macro assumes your dev target is named `dev`. This can be changed by setting the `snowplow__dev_target_name` var in your `dbt_project.yml` file.
 
-:::danger
-
-These manifest models are critical to the package **and as such are protected from full refreshes, i.e. being dropped, by default when running in production**. While in development refreshes are allowed.
-
-:::
-
-The `allow_refresh()` macro defines this behavior. As [dbt recommends](https://docs.getdbt.com/faqs/target-names), target names are used here to differentiate between your prod and dev environment. By default, this macro assumes your dev target is named `dev`. This can be changed by setting the `snowplow__dev_target_name` var in your `dbt_project.yml` file.
-
-To full refresh any of the manifest models in production, set the `snowplow__allow_refresh` to `true` at run time (see below).
+To full refresh any of the manifest models in production, set the `snowplow__allow_refresh` to `true` at run time.
 
 Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](//docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/index.md#overriding-macros) section for more details.

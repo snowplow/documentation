@@ -24,7 +24,7 @@ Most upgrades and new features should be available automatically after the first
 ### Upgrading to 0.15.1
 
 For existing Snowflake and Databricks Core Web Vitals optional module users the derived table `snowplow_web_vitals` needs to be altered due to column data type change. Please run the below queries to migrate.
-The other option is to do a [complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#complete-refresh-of-snowplow-package) of the package.
+The other option is to do a [complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#complete-refresh-of-snowplow-package) of the package.
 
 <details>
   <summary>SQL scripts</summary>

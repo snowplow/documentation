@@ -17,7 +17,7 @@ To enable modeling mobile events, set `snowplow__enable_mobile_events` to `true`
 
 Two of the derived tables need to be altered for existing Snowflake, Databricks or Redshift users. Please modify the below script to fit your schemas and apply them before running the upgraded package.
 
-The other option is to do a [complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#complete-refresh-of-snowplow-package) of the package.
+The other option is to do a [complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#complete-refresh-of-snowplow-package) of the package.
 
 <details>
   <summary>SQL scripts</summary>

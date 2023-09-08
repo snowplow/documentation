@@ -116,7 +116,7 @@ If you need to produce a custom `_this_run` type model you should build this mod
 <details>
 <summary>Custom SDEs or Contexts in Redshift</summary>
 
-Since version 0.16.0 of `snowplow_web` it has been possible to include custom SDE or contexts in the `snowplow_web_base_events_this_run` table by making use of the `snowplow__entities_or_sdes` variable. See the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/?warehouse=redshift%2Bpostgres#utilizing-custom-contexts-or-sdes) for details of the structure, but as an example to include the values from the `contexts_com_mycompany_click_1` context you would use:
+Since version 0.16.0 of `snowplow_web` it has been possible to include custom SDE or contexts in the `snowplow_web_base_events_this_run` table by making use of the `snowplow__entities_or_sdes` variable. See the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/index.md/?warehouse=redshift%2Bpostgres#utilizing-custom-contexts-or-sdes) for details of the structure, but as an example to include the values from the `contexts_com_mycompany_click_1` context you would use:
 
 ```yml title="dbt_project.yml"
 vars:
@@ -174,7 +174,7 @@ As these models are rebuilt fully each time the package is run, there is no spec
 As the code base for your custom incremental models evolves, you will likely need to replay events through a given model. In order to do this you must:
 
 1. Manually drop the table(s) from your custom model(s) in your database (you may wish to simply rename them until the back-fill is completed in case of any issues).
-2. Remove the models from the manifest table (See the [Complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#complete-refresh-of-snowplow-package) section for an explanation as to why), this can be achieved either by:
+2. Remove the models from the manifest table (See the [Complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#complete-refresh-of-snowplow-package) section for an explanation as to why), this can be achieved either by:
    1. *(Recommended)* using the `models_to_remove` variable at run time
     ```bash
     dbt run --select +snowplow_<package>_custom_incremental_model --vars '{snowplow__start_date: "yyyy-mm-dd", models_to_remove: snowplow_<package>_custom_incremental_model}'

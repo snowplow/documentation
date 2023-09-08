@@ -209,7 +209,7 @@ Defining the `snowplow__session_sql` variable will ensure that the package takes
 :::
 
 :::warning
-For Redshift/Postgres, if you want to leverage custom entities for your custom session logic, you will need to include them in the `snowplow__session_identifiers` variable in the same way as in [previous sections](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/#customizing-session-identifiers).
+For Redshift/Postgres, if you want to leverage custom entities for your custom session logic, you will need to include them in the `snowplow__session_identifiers` variable in the same way as in [previous sections](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/index.md/#customizing-session-identifiers).
 :::
 
 ##### Concatenating multiple fields to create a session identifier
@@ -380,7 +380,7 @@ Defining the `snowplow__user_sql` variable will ensure that the package takes it
 :::
 
 :::warning
-For Redshift/Postgres, if you want to leverage custom entities for your custom user logic, you will need to include them in the `snowplow__user_identifiers` variable in the same way as in [previous sections](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/#customizing-user-identifiers).
+For Redshift/Postgres, if you want to leverage custom entities for your custom user logic, you will need to include them in the `snowplow__user_identifiers` variable in the same way as in [previous sections](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/index.md/#customizing-user-identifiers).
 :::
 
 ##### Concatenating multiple fields to create a user identifier

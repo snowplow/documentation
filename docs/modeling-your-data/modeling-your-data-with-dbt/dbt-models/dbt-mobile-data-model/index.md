@@ -57,7 +57,7 @@ Currently the App Errors module, used for crash reporting, is the only optional 
 
 Assuming your tracker is capturing `application_error` events, the module can be enabled by configuring the `dbt_project.yml` file:
 
-```yaml
+```yml title="dbt_project.yml"
 vars:
   snowplow_mobile:
     snowplow__enable_app_errors_module: true

@@ -164,9 +164,7 @@ alter table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_ne
 ### Upgrading to 0.4.0
 - Version 1.4.0 of `dbt-core` now required
 - You must add the following to the top level of your project yaml
-    ```yml
-    # dbt_project.yml
-    ...
+    ```yml title="dbt_project.yml"
     dispatch:
       - macro_namespace: dbt
         search_order: ['snowplow_utils', 'dbt']

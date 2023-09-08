@@ -99,9 +99,7 @@ import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md"
 <DbtSchemas/>
 ```
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 models:
   my_dbt_project:
     base:

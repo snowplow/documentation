@@ -38,9 +38,7 @@ Remember that any events with a null session id will be excluded from the `snowp
 
 This example uses a field called `session_id` in your `com_mycompany_session_identifier_1` context and will use this as the value in your `domain_sessionid` field for all tables (excluding the manifest tables).
 
-```yaml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1', 'field': 'session_id', 'prefix': 'si'}]
@@ -52,9 +50,7 @@ vars:
 
 This example creates a session identifier based off the combination of `app_id` and `domain_sessionid` which you may want if you use cross-domain tracking, but want to split the sessions for your analysis.
 
-```yaml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_sql: 'app_id || domain_sessionid'

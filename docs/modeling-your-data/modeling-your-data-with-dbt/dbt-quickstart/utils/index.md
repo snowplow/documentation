@@ -47,9 +47,7 @@ You can largely skip redundant copy + pasting by cloning the following dbt proje
 ### 1. Override the dispatch order in your project
 To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 dispatch:
   - macro_namespace: dbt
     search_order: ['snowplow_utils', 'dbt']
@@ -174,8 +172,7 @@ The below is just an example of a macro call when using custom naming, this isn'
 ```
 
 Secondly, you can choose the starting date of when your Snowplow data was first loaded into your data warehouse/lake. This is reflected in the value of the `snowplow__start_date` variable, which you may be familiar with if you've used previous Snowplow dbt packages. This variable is typically defined in your `dbt_project.yml`, and can be defined in that file in the following manner.
-```yml
-# dbt_project.yml
+```yml title="dbt_project.yml"
 
 vars:
     # to define it globally, use the following notation

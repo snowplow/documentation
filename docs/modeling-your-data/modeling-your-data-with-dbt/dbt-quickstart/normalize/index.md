@@ -26,9 +26,7 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 ### 1. Override the dispatch order in your project
 To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 dispatch:
   - macro_namespace: dbt
     search_order: ['snowplow_utils', 'dbt']
@@ -46,9 +44,7 @@ These are defined in the `selectors.yml` file ([source](https://github.com/snowp
 
 This package will by default assume your Snowplow events data is contained in the `atomic` schema of your [target.database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile). In order to change this, please add the following to your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_normalize:
     snowplow__atomic_schema: schema_with_snowplow_events
@@ -63,9 +59,7 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 You can specify both `start_date` at which to start processing events and the `app_id`'s to filter for. By default the `start_date` is set to `2020-01-01` and all `app_id`'s are selected. To change this please add the following to your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_normalize:
     snowplow__start_date: 'yyyy-mm-dd'
@@ -102,9 +96,7 @@ At the root of your dbt project, running `python dbt_packages/snowplow_normalize
 :::info BigQuery Only
 Verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_normalize:
     snowplow__derived_tstamp_partitioned: false
@@ -115,9 +107,7 @@ vars:
 
 Add the following variable to your dbt project's `dbt_project.yml` file
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_normalize:
     snowplow__databricks_catalog: 'hive_metastore'

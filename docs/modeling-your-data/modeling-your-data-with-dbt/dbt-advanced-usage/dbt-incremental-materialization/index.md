@@ -17,9 +17,7 @@ To enable the materialization on a model you need to ensure a `unique_key` and `
 
 In addition, the following must be added to your `dbt_project.yml` file once.
 
-```yaml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 dispatch:
   - macro_namespace: dbt
     search_order: ['snowplow_utils', 'dbt']

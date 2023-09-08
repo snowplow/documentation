@@ -21,9 +21,7 @@ This mapping is applied to the sessions table by a post-hook which updates the `
 
 If required, this update operation can be disabled by setting in your `dbt_project.yml` file (selecting one of web/mobile, or both, as appropriate):
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_<package>:
     snowplow__session_stitching: false

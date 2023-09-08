@@ -104,9 +104,7 @@ dbt run --selector snowplow_web
 
 Although the media player package is not designed for standalone usage, there can be scenarios where you wish to only have the media player models enabled and not the web model. In such case the web model still has to be configured, but you can disable all models the media player package does not rely on. You can disable all non-required models like so:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 models:
   snowplow_web:
     page_views:
@@ -139,9 +137,7 @@ There are two custom models included in the package which could potentially be u
 
 By default these are disabled, but you can enable them in the project's `profiles.yml`, if needed.
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
   models:
     snowplow_media_player:
       custom:

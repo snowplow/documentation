@@ -47,8 +47,7 @@ Note that because these models are not tagged, they will not be run when using t
 ### Incremental models
 As these models form part of the incremental processing of the package, these models should be tagged with `snowplow_<package>_incremental` in order to leverage the incremental logic of this package. We recommend creating a sub directory of your `/models` directory to contain all your custom models. In this example we created the sub directory `snowplow_<package>_custom_models`. We can then apply the tag to all models in this directory:
 
-```yml
-# dbt_project.yml
+```yml title="dbt_project.yml"
 models:
   your_dbt_project:
     snowplow_<package>_custom_models:
@@ -56,8 +55,7 @@ models:
 ```
 These models should also make use of the optimized `materialization` set such that `materialized='incremental` and `snowplow_optimize=true` in your model config. Finally, as well as referencing a `_this_run` table these models should make use of the `is_run_with_new_events` macro to only process the table when new events are available in the current run. This macro `snowplow_utils.is_run_with_new_events(package_name)` will evaluate whether the particular model, i.e. `{{ this }}`, has already processed the events in the given run of the model. This is returned as a boolean and effectively blocks the upsert to incremental models if the run only contains old data. This protects against your derived incremental tables being temporarily updated with incomplete data during batched back-fills of other models.
 
-```jinja2
-{# /models/snowplow_<package>_custom_models/my_custom_model.sql #}
+```jinja2 title="/models/snowplow_<package>_custom_models/my_custom_model.sql"
 {{
   config(
     materialized='incremental',
@@ -120,9 +118,7 @@ If you need to produce a custom `_this_run` type model you should build this mod
 
 Since version 0.16.0 of `snowplow_web` it has been possible to include custom SDE or contexts in the `snowplow_web_base_events_this_run` table by making use of the `snowplow__entities_or_sdes` variable. See the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/?warehouse=redshift%2Bpostgres#utilizing-custom-contexts-or-sdes) for details of the structure, but as an example to include the values from the `contexts_com_mycompany_click_1` context you would use:
 
-```yaml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__entities_or_sdes: [{'name': 'contexts_com_mycompany_click_1', 'prefix': 'click', 'alias': 'mc', 'single_entity': true}]
@@ -213,9 +209,7 @@ By setting `snowplow__backfill_limit_days` to 1 in your `dbt_project.yml` file y
 
 We have provided the `get_value_by_target` macro to dynamically switch the backfill limit depending on your environment i.e. dev vs. prod, with your environment determined by your target name:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_<package>:
     snowplow__backfill_limit_days: "{{ snowplow_utils.get_value_by_target(
@@ -228,9 +222,7 @@ vars:
 
 This can be achieved by setting `snowplow__start_date` to a recent date. To dynamically change the start date depending on your environment, you can use the following:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_<package>:
     snowplow__start_date: "{{ snowplow_utils.get_value_by_target(

@@ -36,9 +36,7 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 ### 1. Override the dispatch order in your project
 To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 dispatch:
   - macro_namespace: dbt
     search_order: ['snowplow_utils', 'dbt']
@@ -56,9 +54,7 @@ These are defined in the `selectors.yml` file ([source](https://github.com/snowp
 
 This package will by default assume your Snowplow events data is contained in the `atomic` schema of your [target.database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile), in the table labeled `events`. In order to change this, please add the following to your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_ecommerce:
     snowplow__atomic_schema: schema_with_snowplow_events
@@ -76,9 +72,7 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 You can specify both `start_date` at which to start processing events, the `app_id`'s to filter for, and the `event_name` value to filter on. By default the `start_date` is set to `2020-01-01`, all `app_id`'s are selected, and only the `snowplow_ecommerce_action` name is being surfaced. To change this please add/modify the following in your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_ecommerce:
     snowplow__start_date: 'yyyy-mm-dd'
@@ -90,9 +84,7 @@ vars:
 :::info BigQuery Only
 Verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_ecommerce:
     snowplow__derived_tstamp_partitioned: false
@@ -106,8 +98,7 @@ The e-commerce package creates tables that depend on the existence of certain en
 
 #### Disabling the cart module in `dbt_project.yml` (recommended)
 
-```yml
-# dbt_project.yml
+```yml title="dbt_project.yml"
 
 ...
 vars:
@@ -132,9 +123,7 @@ dbt run --exclude carts --select snowplow_ecommerce --vars '{snowplow__disable_e
 ### 7. Enable mobile e-commerce events
 Mobile e-commerce events may be processed in the package, if they have a `domain_sessionid` and are in your listed `app_id`s, however to correctly source the mobile session and screen view ids you need to set the following in your `dbt_project.yml`:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_ecommerce:
     snowplow__enable_mobile_events: true

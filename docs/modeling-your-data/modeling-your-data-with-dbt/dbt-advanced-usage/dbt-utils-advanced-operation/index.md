@@ -35,9 +35,7 @@ To customize your session identifiers, you can make use of the `snowplow__sessio
 #### Using additional atomic fields
 By default, your identifier will be the `domain_sessionid` field which is found in the atomic events table. If you wanted to instead use a different field, say the `domain_userid` field that can be found in the atomic events table, you could define your `snowplow__session_identifiers` as follows:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_identifiers: [{'schema': 'atomic', 'field': 'domain_userid'}]
@@ -47,9 +45,7 @@ vars:
 
 If you wanted to include multiple identifiers, then you could define the `snowplow__session_identifiers` as follows:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_identifiers: [{'schema': 'atomic', 'field': 'domain_userid'},
@@ -74,9 +70,7 @@ The order in which you provide your identifiers is the order of precedence they 
 #### Using custom contexts
 If you wanted to instead use session identifiers that come from a custom context, you can do that as well. Let's assume you've created a session identifier context that you attach to your events, and it's called `com_mycompany_session_identifier_1_0_0`. Let's also say you're interested in the `session_id` field of this context as the identifier for each session. To make sure that your dbt models extract and use this field as the value for `session_identifier`, you need to define the `snowplow__session_identifiers` as follows:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1_0_0', 'field': 'session_id', 'prefix': 'si'}]
@@ -89,9 +83,7 @@ Make sure you include a `prefix` value if you are running on **Postgres or Redsh
 
 Similar to before, if you want to combine multiple identifiers in different (or the same) contexts, you can do so by defining your `snowplow__session_identifiers` as shown below. First, however, let's assume there's another context called `com_mycompany_logged_session_id_1_0_0` which has both a `logged_in_id` and `session_identifier` field in it. To include all of these:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_identifiers: [{'schema': 'com_mycompany_logged_session_id_1_0_0', 'field': 'logged_in_id', 'prefix': 'lsi'}, {'schema': 'com_mycompany_logged_session_id_1_0_0', 'field': 'session_identifier', 'prefix': 'lsi'}, {'schema': 'com_mycompany_session_identifier_1_0_0', 'field': 'session_id', 'prefix': 'si'}]
@@ -141,9 +133,7 @@ with again the order of precedence being decided by the order of your list of id
 
 #### Schema evolution of custom contexts
 This can be extended into contexts where schema evolution takes place. Suppose, for example, your session identifying context has previously always been `com_mycompany_session_identifier_1_0_0`, where you extract the `session_id` field as the identifier. Then suppose you introduce some breaking changes that cause you to now use the `com_mycompany_session_identifier_2_0_0` context, where you extract `new_session_id` as the identifying field. In order to ensure you can track both as your session identifier, you would define your `snowplow__session_identifiers` as follows:
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_2_0_0', 'field': 'new_session_id', 'prefix': 'si_t'},
@@ -152,9 +142,7 @@ vars:
 ...
 ```
 This setup implies that the `new_session_id` from `com_mycompany_session_identifier_2_0_0` should have precedence over the `session_id` field from `com_mycompany_session_identifier_1_0_0`, meaning that if both are filled for a particular event, the `new_session_id` value would be the one present in the `session_identifier` field in your dbt tables. If you'd prefer to have the precedence swapped, you can swap the ordering in the `dbt_project.yml`. Handling minor version bumps of your schemas where this isn't automatically handled by your loader works in the exact same way. A small example of bumping `com_mycompany_session_identifier_1_0_0` to `com_mycompany_session_identifier_1_1_0` but leaving the `session_id` field as the key identifier would look as follows:
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1_1_0', 'field': 'session_id', 'prefix': 'si_t'},
@@ -169,9 +157,7 @@ Remember that the `prefix` key only needs to be set when running these models on
 #### Combining atomic fields and custom contexts
 Combining atomic fields and custom contexts should then be straightforward if you're comfortable with what we described above. Let's say you want to combine the `logged_in_id` field from the `com_mycompany_logged_session_id_1_0_0` context together with the standard `domain_sessionid` field in the `events` table. To achieve that, you would include the following in your `dbt_project.yml`:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_identifiers: [{'schema': 'com_mycompany_logged_session_id_1_0_0', 'field': 'logged_in_id', 'prefix': 'lsi'},
@@ -203,9 +189,7 @@ For Redshift/Postgres, if you want to leverage custom entities for your custom s
 ##### Concatenating multiple fields to create a session identifier
 To start, suppose you want to combine the atomic `domain_sessionid` and `domain_userid` fields to create a session identifier. It's simple to do that by defining the following variable in your `dbt_project.yml`:
 
- ```yml
-# dbt_project.yml
-...
+ ```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_sql: "e.domain_userid || '_' || e.domain_sessionid"
@@ -225,9 +209,7 @@ SELECT
 ##### Applying a SQL function to a field to use as a session identifier
 Instead, suppose you want to take the `DATE` value of your `derived_tstamp` as your session identifier. It's also simple to do that by defining the following variable in your `dbt_project.yml`:
 
- ```yml
-# dbt_project.yml
-...
+ ```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__session_sql: "DATE(e.derived_tstamp)"
@@ -250,9 +232,7 @@ Customizing user identifiers works in the exact same way as customizing session 
 #### Using additional atomic fields
 By default, your identifier will be the `domain_userid` field which is found in the atomic events table. If you wanted to instead use a different field, say the `network_userid` field that can be found in the atomic events table, you could define your `snowplow__user_identifiers` as follows:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_identifiers: [{'schema': 'atomic', 'field': 'network_userid'}]
@@ -262,9 +242,7 @@ vars:
 
 If you wanted to include multiple identifiers, then you could define the `snowplow__user_identifiers` as follows:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_identifiers: [{'schema': 'atomic', 'field': 'network_userid'},
@@ -289,9 +267,7 @@ This is to say, the order in which you provide your identifiers is the order of 
 #### Using custom contexts
 If you wanted to instead use user identifiers that come from a custom context, you can do that as well. Let's assume you've created a user identifier context that you attach to your events, and it's called `com_mycompany_user_identifier_1_0_0`. Let's also say you're interested in the `user_id` field of this context as the identifier for each user. To make sure that your dbt models extract and use this field as the value for `user_identifier`, you need to define the `snowplow__user_identifiers` as follows:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_identifiers: [{'schema': 'com_mycompany_user_identifier_1_0_0', 'field': 'user_id', 'prefix': 'ui'}]
@@ -304,9 +280,7 @@ Make sure you include a `prefix` value if you are running on **Postgres or Redsh
 
 Similar to before, if you want to combine multiple identifiers in different (or the same) contexts, you can do so by defining your `snowplow__user_identifiers` as shown below. First, however, let's assume there's another context called `com_mycompany_logged_user_id_1_0_0` which has both a `logged_in_user_id` and `internal_user_id` field in it. To include all of these:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_identifiers: [{'schema': 'com_mycompany_logged_user_id_1_0_0', 'field': 'logged_in_user_id', 'prefix': 'lui'},
@@ -331,9 +305,7 @@ with again the order of precedence being decided by the order of your list of id
 
 #### Schema evolution of custom contexts
 This can be extended into contexts where schema evolution takes place. Suppose, for example, your user identifying context has previously always been `com_mycompany_user_identifier_1_0_0`, where you extract the `user_id` field as the identifier. Then suppose you introduce some breaking changes that cause you to now use the `com_mycompany_user_identifier_2_0_0` context, where you extract `new_user_id` as the identifying field. In order to ensure you can track both as your user identifier, you would define your `snowplow__user_identifiers` as follows:
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_identifiers: [{'schema': 'com_mycompany_user_identifier_2_0_0', 'field': 'new_user_id', 'prefix': 'ui_t'},
@@ -344,9 +316,7 @@ vars:
 This setup implies that the `new_user_id` from `com_mycompany_user_identifier_2_0_0` should have precedence over the `user_id` field from `com_mycompany_user_identifier_1_0_0`, meaning that if both are filled for a particular event, the `new_user_id` value would be the one present in the `user_identifier` field in your dbt tables. If you'd prefer to have the precedence swapped, you can swap the ordering in the `dbt_project.yml`.
 
 Handling minor version bumps of your schemas where this isn't automatically handled by your loader works in the exact same way. A small example of bumping `com_mycompany_user_identifier_1_0_0` to `com_mycompany_user_identifier_1_1_0` but leaving the `user_id` field as the key identifier would look as follows:
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_identifiers: [{'schema': 'com_mycompany_user_identifier_1_1_0', 'field': 'user_id', 'prefix': 'ui_t'},
@@ -361,9 +331,7 @@ Remember that the `prefix` key only needs to be set when running these models on
 #### Combining atomic fields and custom contexts
 Combining atomic fields and custom contexts should hopefully then be straightforward if you're comfortable with what we described above. Let's say you want to combine the `logged_in_user_id` field from the `com_mycompany_logged_user_id_1_0_0` context together with the standard `domain_userid` field in the `events` table. To achieve that, you would include the following in your `dbt_project.yml`:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_identifiers: [{'schema': 'com_mycompany_logged_user_id_1_0_0', 'field': 'logged_in_user_id', 'prefix': 'lui'},
@@ -394,9 +362,7 @@ For Redshift/Postgres, if you want to leverage custom entities for your custom u
 ##### Concatenating multiple fields to create a user identifier
 To start, suppose you want to combine the atomic `network_userid` and `domain_userid` fields to create a user identifier. It's simple to do that by defining the following variable in your `dbt_project.yml`:
 
- ```yml
-# dbt_project.yml
-...
+ ```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_sql: "e.network_userid || '_' || e.domain_userid"
@@ -416,9 +382,7 @@ SELECT
 ##### Applying a SQL function to a field to use as a user identifier
 Instead, suppose you want to take the `DATE` value of your `derived_tstamp` as your user identifier. It's also simple to do that by defining the following variable in your `dbt_project.yml`:
 
- ```yml
-# dbt_project.yml
-...
+ ```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__user_sql: "DATE(e.derived_tstamp)"
@@ -444,9 +408,7 @@ Suppose you have a custom context called `contexts_com_mycompany_click_1_0_0` wh
 <Tabs groupId="warehouse" queryString>
 <TabItem value="databricks+snowflake" label="Databricks & Snowflake" default>
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__custom_sql: "CONCAT(com_mycompany_click_1_0_0[0].click_id, '_', domain_sessionid) as click_session_id"
@@ -459,9 +421,7 @@ If you'd like to add multiple lines of SQL, you can do that as well by making th
 </TabItem>
 <TabItem value="bigquery" label="BigQuery" default>
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__custom_sql: "CONCAT(com_mycompany_click_1_0_0[safe_offset(0)].click_id, '_', domain_sessionid) as click_session_id"
@@ -474,9 +434,7 @@ If you'd like to add multiple lines of SQL, you can do that as well by making th
 </TabItem>
 <TabItem value="redshift/postgres" label="Redshift & Postgres">
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__custom_sql: "com_mycompany_click_1_0_0.click_id || '_' || domain_sessionid as click_session_id"
@@ -503,9 +461,7 @@ If your `single_entity` value is set to false, then you will get duplicate event
 
 So, taking the example values from the table above, you could define your `snowplow__entities_or_sdes` in the following way:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__entities_or_sdes: [{'name': 'contexts_com_mycompany_click_1', 'prefix': 'click', 'alias': 'mc', 'single_entity': true}]
@@ -517,9 +473,7 @@ Note that you can simply add more entities or self-describing events to join by 
 
 Once you've added in the entities or self-describing events that you want to leverage, you can use `snowplow__custom_sql` to transform them and surface that in your `snowplow_base_events_this_run` table. Similiarly to the example for other warehouses, suppose you have a custom context called `contexts_com_mycompany_click_1` which contains a `id` that you want to concat with Snowplow's `domain_sessionid`. You can add that transformation by adding the following to your `dbt_project.yml`:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__entities_or_sdes: [{'name': 'contexts_com_mycompany_click_1', 'prefix': 'my_click', 'alias': 'mc', 'single_entity': true}]
@@ -586,9 +540,7 @@ from base_events
 </TabItem>
 <TabItem value="redshift/postgres" label="Redshift & Postgres">
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
     ...
     snowplow__entities_or_sdes: [{'name': 'contexts_com_mycompany_click_1', 'prefix': 'my_click', 'alias': 'mc', 'single_entity': true}]

@@ -47,8 +47,7 @@ It is assumed that the dbt_snowplow_web package is already installed and configu
 
 You can enable the custom module through the `snowplow__enable_cwv` variable in your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
+```yml title="dbt_project.yml"
 
 vars:
   snowplow_web:

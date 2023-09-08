@@ -22,7 +22,7 @@ As mentioned, the fields are passed through _as is_, which means it is not curre
 
 To enable the passthrough fields, you need to set the relevant variable in your root `dbt_project.yml` file; `snowplow__page_view_passthroughs`, `snowplow__session_passthroughs`, `snowplow__user_first_passthroughs`, and `snowplow__user_last_passthroughs` for page views, sessions, and users (first and lasts) respectively. The variables are lists of fields; either the name of the field or a dictionary specifying the SQL and alias for the field e.g.
 
-```yaml
+```yml title="dbt_project.yml"
 vars:
   snowplow_web:
     snowplow__page_view_passthroughs: ['v_collector', {'sql': 'event_id || app_id', 'alias': 'event_app_id'}]

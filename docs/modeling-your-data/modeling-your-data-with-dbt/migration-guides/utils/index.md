@@ -12,9 +12,7 @@ sidebar_position: 100
 - `snowplow_utils.get_cluster_by` and `snowplow_utils.get_partition_by` they have been deprecated and should be replaced with `snowplow_utils.get_value_by_target_type` with arg names `bigquery_val`, `databricks_val` etc.
 - `snowplow_utils.snowplow_is_incremental` has been deprecated and should be replaced with standard `is_incremental()` to align with removal of the custom materialization
 - You must add the following to the top level of your project yaml to take advantage of our optimized incremental materialization
-    ```yml
-    # dbt_project.yml
-    ...
+    ```yml title="dbt_project.yml"
     dispatch:
       - macro_namespace: dbt
         search_order: ['snowplow_utils', 'dbt']

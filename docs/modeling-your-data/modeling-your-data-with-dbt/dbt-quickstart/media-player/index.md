@@ -41,9 +41,7 @@ If you are not starting the media player package at the same time as the web pac
 ### 1. Override the dispatch order in your project
 To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 dispatch:
   - macro_namespace: dbt
     search_order: ['snowplow_utils', 'dbt']
@@ -65,9 +63,7 @@ Please refer to the `Quick Start` guide for the Snowplow Web package to make sur
 
 If you have enabled a specific context you will need to enable it in your `dbt_project.yml` file:
 
-```yaml
- dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_media_player:
     # set to true if the YouTube context schema is enabled

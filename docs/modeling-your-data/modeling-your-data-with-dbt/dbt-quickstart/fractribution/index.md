@@ -42,9 +42,7 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 ### 1. Override the dispatch order in your project
 To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 dispatch:
   - macro_namespace: dbt
     search_order: ['snowplow_utils', 'dbt']
@@ -61,9 +59,7 @@ The package has some variables that need to be set before it can be run, you sho
 - `snowplow__conversion_hosts`: `url_hosts` to process
 - `snowplow__path_transforms`: A dictionary of path transforms and their arguments (see [Path Transform Options](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md#path-transform-options) section)
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_fractribution:
     snowplow__conversion_window_start_date: '2022-01-01'
@@ -77,9 +73,7 @@ vars:
 If you are using Snowflake, you can automatically run the python scripts using Snowpark when running the dbt package. This is done using macros that create and run a stored procedure on Snowpark after the dbt models have completed.
 
 To enable this you need to set some additional variables. For example, to enable this and use the `last_touch` attribution model:
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_fractribution:
     snowplow__run_python_script_in_snowpark: true

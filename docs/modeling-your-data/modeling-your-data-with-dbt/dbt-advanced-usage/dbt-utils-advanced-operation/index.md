@@ -437,7 +437,6 @@ SELECT
 ## Introducing custom SQL logic to every event
 If there are certain SQL transformations you want to apply to events that are being processed by Snowplow's dbt packages you can leverage the `snowplow__custom_sql` variable to write out custom SQL that will be included in your `base_events_this_run` table, which can then be leveraged for any of your subsequent tables.
 
-The process for this looks slightly different for Redshift & Postgres relative to the other databases. If you use Redshift & Postgres, please skip ahead to the warehouse specific section to understand how that works.
 
 ### Utilizing custom contexts or SDEs
 Suppose you have a custom context called `contexts_com_mycompany_click_1_0_0` which contains a `click_id` that you want to concat with Snowplow's `domain_sessionid`. You could either do this concatenation when creating your own data models, but if you want to surface this to all of your data models downstream from Snowplow's initial data processing in it's dbt packages, you can add that transformation by adding the following to your `dbt_project.yml`:

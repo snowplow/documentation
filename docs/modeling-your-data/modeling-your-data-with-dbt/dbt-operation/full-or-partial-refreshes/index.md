@@ -1,32 +1,44 @@
 ---
-title: "Advanced Operation"
-description: "Information for power user operation of the packages."
-sidebar_position: 999
+title: "Full or Partial Refreshes"
+sidebar_position: 1
 ---
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 ```
 
-## Asynchronous Runs
+## Complete refresh of Snowplow package
 
-You may wish to run the modules asynchronously, for instance run the screen views module hourly but the sessions and users modules daily. You would assume this could be achieved using e.g.:
+While you can drop and recompute the incremental tables within this package using the standard `--full-refresh` flag, all manifest tables are protected from being dropped in production. Without dropping the manifest during a full refresh, the selected derived incremental tables would be dropped but the processing of events would resume from where the package left off (as captured by the `snowplow_web_incremental_manifest` table) rather than your `snowplow__start_date`.
+
+In order to drop all the manifest tables and start again set the `snowplow__allow_refresh` var to `true` at run time:
+
 
 ```bash
-dbt run --select +snowplow_mobile.screen_views
+dbt run --select snowplow_<package> tag:snowplow_<package>_incremental --full-refresh --vars 'snowplow__allow_refresh: true'
+# or using selector flag
+dbt run --selector snowplow_<package> --full-refresh --vars 'snowplow__allow_refresh: true'
 ```
 
-Currently however it is not possible during a dbt jobs start phase to deduce exactly what models are due to be executed from such a command. This means the package is unable to select the subset of models from the manifest. Instead all models from the standard and custom modules are selected from the manifest and the package will attempt to synchronize all models. This makes the above command unsuitable for asynchronous runs.
-
-However we can leverage dbt's `ls` command in conjunction with shell substitution to explicitly state what models to run, allowing a subset of models to be selected from the manifest and thus run independently.
+When doing a full refresh of the package, it will begin again from your `snowplow__start_date` and backfill based on the calculations explained in the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) page. Please ensure you trigger enough runs to catch back up with live data, or adjust your variables for these runs accordingly.
 
 
-For example to run just the screen views module asynchronously:
+## Refresh only some models in a package
 
-```bash
-dbt run --select +snowplow_mobile.screen_views --vars "{'models_to_run': '$(dbt ls --m  +snowplow_mobile.screen_views --output name)'}"
-```
+You may at times wish to refresh only some derived models in a package, either a built in one such as page views, or a [custom model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md). This may be due to changes you have made to variable, or some other reason. To achieve this:
+
+1. Manually drop the table(s) from your custom model(s) in your database (you may wish to simply rename them until the back-fill is completed in case of any issues).
+2. Remove the models from the manifest table (See the above section for an explanation as to why), this can be achieved either by:
+   1. *(Recommended)* using the `models_to_remove` variable at run time
+    ```bash
+    dbt run --select +snowplow_<package>_model_name --vars '{snowplow__start_date: "yyyy-mm-dd", models_to_remove: snowplow_<package>_model_name}'
+    ```
+    2. *(High Risk)* manually deleting the record from the `snowplow_<package>_incremental_manifest` table.
+
+By removing the `snowplow_<package>_model_name` model from the manifest the <package\> will be in [State 2](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#state-2-new-model-introduced) and will replay all events.
+
 ## Custom re-running of specific models
 
 There may be times where you need to re-run some or all of the models for a period of data, potentially due to incorrect supplemental data brought into a model, or in case of a mistake in your model code itself. There are two methods to do this: one is simpler but must complete in a single run, the other is more complex but can be executed over multiple runs. Either will work for any custom models, assuming they were built using [Snowplow incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md).
@@ -72,41 +84,3 @@ sources={{
 Manipulating the values in the manifest tables can cause unexpected outcomes if you don't understand the Snowplow [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md)). Where possible, use option 1.
 
 :::
-
-## Cluster Keys
-
-All the incremental models in the Snowplow packages have recommended cluster keys applied to them. Depending on your specific use case, you may want to change or disable these all together. This can be achieved by overriding the following macros with your own version within your project:
-
-<Tabs groupId="dbt-packages" queryString>
-<TabItem value="web" label="Snowplow Web" default>
-
-- `web_cluster_by_fields_sessions_lifecycle()`
-- `web_cluster_by_fields_page_views()`
-- `web_cluster_by_fields_sessions()`
-- `web_cluster_by_fields_users()`
-
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-- `mobile_cluster_by_fields_sessions_lifecycle()`
-- `mobile_cluster_by_fields_screen_views()`
-- `mobile_cluster_by_fields_sessions()`
-- `mobile_cluster_by_fields_users()`
-
-</TabItem>
-
-</Tabs>
-
-## Overriding Macros
-
-The cluster key macros (see above), the `allow_refresh()` and the `filter_bots` macro are among a few that can be overridden across our packages. These are all [dispatched macros](https://docs.getdbt.com/reference/dbt-jinja-functions/dispatch) and can be overridden by creating your own version of the macro and setting a project level dispatch config. More details can be found in [dbt's docs](https://docs.getdbt.com/reference/dbt-jinja-functions/dispatch#overriding-package-macros). 
-
-Alternatively, and simpler, you can prefix your version of the macro with `default__`:
-
-``` yaml
-# Your_dbt_project/macros/filter_bots.sql
-{% macro default__filter_bots() %}
-and ev.useragent not similar to '%(YOUR_CUSTOM_PATTERN|bot|crawl|slurp|spider|archiv|spinn|sniff|seo|audit|survey|pingdom|worm|capture|(browser|screen)shots|analyz|index|thumb|check|facebook|PingdomBot|PhantomJS|YandexBot|Twitterbot|a_archiver|facebookexternalhit|Bingbot|BingPreview|Googlebot|Baiduspider|360(Spider|User-agent)|semalt)%'
-{% endmacro %}
-```

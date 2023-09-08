@@ -181,7 +181,7 @@ As the code base for your custom incremental models evolves, you will likely nee
     ```
     2. *(High Risk)* manually deleting the record from the `snowplow_<package>_incremental_manifest` table.
 
-By removing the `snowplow_<package>_custom_incremental_model` model from the manifest the <package\> packages will be in [State 2](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#state-2-new-model-introduced) and will replay all events.
+By removing the `snowplow_<package>_custom_incremental_model` model from the manifest the <package\> will be in [State 2](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#state-2-new-model-introduced) and will replay all events.
 
 :::tip
 

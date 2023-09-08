@@ -150,3 +150,17 @@ dbt run --selector snowplow_<package> --full-refresh --vars 'snowplow__allow_ref
 If you want to backfill a previously disabled model, or refresh only a subset of models, check out the docs on [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md).
 
 :::
+
+## Refresh only some models in a package
+
+You may at time wish to refresh only some derived models in a package, either one of the built in or a [custom model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md). To achieve this:
+
+1. Manually drop the table(s) from your custom model(s) in your database (you may wish to simply rename them until the back-fill is completed in case of any issues).
+2. Remove the models from the manifest table (See the [Complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#complete-refresh-of-snowplow-package) section for an explanation as to why), this can be achieved either by:
+   1. *(Recommended)* using the `models_to_remove` variable at run time
+    ```bash
+    dbt run --select +snowplow_<package>_model_name --vars '{snowplow__start_date: "yyyy-mm-dd", models_to_remove: snowplow_<package>_model_name}'
+    ```
+    2. *(High Risk)* manually deleting the record from the `snowplow_<package>_incremental_manifest` table.
+
+By removing the `snowplow_<package>_model_name` model from the manifest the <package\> will be in [State 2](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#state-2-new-model-introduced) and will replay all events.

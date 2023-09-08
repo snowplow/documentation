@@ -1,7 +1,7 @@
 ---
 title: "Configuration"
 description: "Information for the configuration of our dbt packages"
-sidebar_position: 350
+sidebar_position: 40
 ---
 
 :::info

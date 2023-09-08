@@ -1,6 +1,6 @@
 ---
-title: "Snowplow dbt Packages"
-sidebar_position: 0.0
+title: "Our Packages"
+sidebar_position: 20
 description: "All Snowplow dbt packages"
 ---
 

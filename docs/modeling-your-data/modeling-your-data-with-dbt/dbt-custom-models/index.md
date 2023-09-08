@@ -1,7 +1,7 @@
 ---
-title: "Creating custom models"
+title: "Custom models"
 description: "How to create, update, and remove custom models in our dbt packages"
-sidebar_position: 500
+sidebar_position: 50
 ---
 
 ```mdx-code-block

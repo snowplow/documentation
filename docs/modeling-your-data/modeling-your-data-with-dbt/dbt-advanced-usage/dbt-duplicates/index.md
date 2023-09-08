@@ -1,13 +1,14 @@
 ---
 title: "Duplicates"
 description: "How we deal with duplicate events in our packages."
-sidebar_position: 200
+sidebar_position: 10
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+Duplicates in your data can happen, because of Snowplow's _At Least Once_ delivery approach. However, it's important for analysis and reporting that these duplicates are removed when doing any kind of data modeling. As part of our packages, we make sure to remove duplicate events at the very start to ensure any downstream data is correct.
 
 The e-commerce, web, and mobile packages perform de-duplication on both `event_id`'s and `page/screen_view_id`'s, in the base and page/screen views modules respectively. The normalize package only de-dupes on `event_id`. The de-duplication method for Redshift & Postgres is different to BigQuery, Snowflake, & Databricks due to their shredded table design. See below for a detailed explanation and how to process potential duplicates in any custom models.
 

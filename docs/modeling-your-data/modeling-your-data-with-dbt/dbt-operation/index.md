@@ -1,6 +1,6 @@
 ---
 title: "Operation"
-sidebar_position: 300
+sidebar_position: 40
 ---
 
 ```mdx-code-block
@@ -130,7 +130,7 @@ The `allow_refresh()` macro defines this behavior. As [dbt recommends](https://d
 
 To full refresh any of the manifest models in production, set the `snowplow__allow_refresh` to `true` at run time (see below).
 
-Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-advanced-operation/index.md#overriding-macros) section for more details.
+Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/index.md#overriding-macros) section for more details.
 
 ## Complete refresh of Snowplow package
 

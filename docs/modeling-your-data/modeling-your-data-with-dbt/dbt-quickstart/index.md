@@ -1,6 +1,6 @@
 ---
 title: "Quick Start"
-sidebar_position: -10
+sidebar_position: 30
 ---
 
 ```mdx-code-block

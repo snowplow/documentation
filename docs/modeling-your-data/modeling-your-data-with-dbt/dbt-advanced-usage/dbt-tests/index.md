@@ -1,7 +1,6 @@
 ---
 title: "Tests"
-date: "2022-10-05"
-sidebar_position: 400
+sidebar_position: 20
 ---
 
 ```mdx-code-block
@@ -13,8 +12,11 @@ import TabItem from '@theme/TabItem';
 On this page, `<package>` can be one of: `web`, `mobile`
 
 :::
+
+[Tests](https://docs.getdbt.com/docs/build/tests) are a useful feature in dbt to ensure that your data meets some expectations of it, such as certain fields should not be null. We provide a suite of tests with our packages to help test the output tables for any issues, however you could and should add your own as no one knows the required quality checks of your data better than you.
+
 ## Test Selection
-The packages contains tests for both the scratch and derived models. Depending on your use case you might not want to run all tests in production, for example to save costs. There are several tags included in the packages to help select subsets of tests. Tags:
+The packages contain tests for both the scratch and derived models. Depending on your use case you might not want to run all tests in production, for example to save costs. There are several tags included in the packages to help select subsets of tests. Tags:
 
 - `this_run`: Any model with the `_this_run` suffix
 - `scratch`: Any model in the scratch sub directories.
@@ -113,4 +115,3 @@ tests:
       not_null_snowplow_web_page_views_domain_sessionid:
         +where: "app_id != '<app_id_to_exclude_from_test>'"
 ```
-

@@ -1,7 +1,7 @@
 ---
 title: "Snowplow Optimized Materialization"
 description: "Details on our optimized version of the dbt incremental materialization and how to enable it."
-sidebar_position: 400
+sidebar_position: 50
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

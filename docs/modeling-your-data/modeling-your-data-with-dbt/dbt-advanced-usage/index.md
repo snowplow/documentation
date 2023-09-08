@@ -1,6 +1,6 @@
 ---
-title: "dbt Package Features"
-sidebar_position: 999
+title: "Package Features"
+sidebar_position: 10
 ---
 
 

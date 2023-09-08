@@ -28,7 +28,7 @@ To reduce the number of breaking changes within the web package, we made the dec
 
 ## Examples
 
-A deeper set of documentation is available in the [Advanced Usage of Snowplow Utils](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-utils-advanced-operation/index.md#customizing-session-identifiers) page, including how to provide a hierarchy of fields in case one is null, but here are two short example showcasing how you can use a field in a custom context, and how you can provide custom SQL to create your "session" identifier.
+A deeper set of documentation is available in the [Advanced Usage of Snowplow Utils](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/index.md?warehouse=redshift%2Bpostgres#utilizing-custom-contexts-or-sdes) page, including how to provide a hierarchy of fields in case one is null, but here are two short example showcasing how you can use a field in a custom context, and how you can provide custom SQL to create your "session" identifier.
 
 :::tip
 

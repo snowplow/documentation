@@ -40,12 +40,12 @@ export const versions = {
   // Data Modelling
   // dbt
   dbtSnowplowWeb: '0.15.2',
-  dbtSnowplowMobile: '0.7.1',
+  dbtSnowplowMobile: '0.7.2',
   dbtSnowplowUtils: '0.14.3',
   dbtSnowplowMediaPlayer: '0.5.3',
-  dbtSnowplowNormalize: '0.3.1',
-  dbtSnowplowFractribution: '0.3.4',
-  dbtSnowplowEcommerce: '0.5.2',
+  dbtSnowplowNormalize: '0.3.2',
+  dbtSnowplowFractribution: '0.3.5',
+  dbtSnowplowEcommerce: '0.5.3',
 
   // sql runner
   sqlRunner: '0.10.1',

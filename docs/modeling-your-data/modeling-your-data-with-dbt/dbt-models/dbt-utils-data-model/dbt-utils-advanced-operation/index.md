@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 :::info
 
-Throughout this page we refer to entity columns only by their major version (e.g. `com_mycompany_session_identifier_1`). If you use BigQuery, you will need to adjust these for the full version number, and may need to manage the combination of different versions yourself, details of how can be found below.
+Throughout this page we refer to entity columns only by their major version (e.g. `com_mycompany_session_identifier_1`). If you use BigQuery, you will need to adjust these for the full version number (or use the `_*` wildcard to denote all minor versions), and may need to manage the combination of different versions yourself, details of how can be found below.
 
 :::
 

@@ -439,9 +439,6 @@ vars:
     ...
 ...
 ```
-
-If you'd like to add multiple lines of SQL, you can do that as well by making this string a multi-line string. Any SQL included in the `snowplow__custom_sql` will be found in your `snowplow_base_events_this_run` table, and will be referenced at the end of the select statement, so there's no need to add a trailing comma. Any of the newly created fields can also be passed through to other tables created automatically by Snowplow's dbt packages.
-
 </TabItem>
 <TabItem value="bigquery" label="BigQuery" default>
 
@@ -452,9 +449,6 @@ vars:
     ...
 ...
 ```
-
-If you'd like to add multiple lines of SQL, you can do that as well by making this string a multi-line string. Any SQL included in the `snowplow__custom_sql` will be found in your `snowplow_base_events_this_run` table, and will be referenced at the end of the select statement, so there's no need to add a trailing comma. Any of the newly created fields can also be passed through to other tables created automatically by Snowplow's dbt packages.
-
 </TabItem>
 <TabItem value="redshift/postgres" label="Redshift & Postgres">
 
@@ -465,9 +459,23 @@ vars:
     ...
 ...
 ```
+</TabItem>
+</Tabs>
 
-If you'd like to add multiple lines of SQL, you can do that as well by making this string a multi-line string. Any SQL included in the `snowplow__custom_sql` will be found in your `snowplow_base_events_this_run` table, and will be referenced at the end of the select statement, so there's no need to add a trailing comma. Any of the newly created fields can also be passed through to other tables created automatically by Snowplow's dbt packages.
+Any SQL included in the `snowplow__custom_sql` will be found in your `snowplow_base_events_this_run` table, and will be referenced at the end of the select statement, so there's no need to add a trailing comma. Any of the newly created fields can also be passed through to other tables created automatically by Snowplow's dbt packages using the `passthrough` variables provided in those packages.
+If you'd like to add multiple lines of SQL, you can do that as well by making this string a multi-line string. You can do that as follows:
 
+```yml title="dbt_project.yml"
+vars:
+    ...
+    snowplow__custom_sql: |
+        com_mycompany_click_1.click_id || '_' || domain_sessionid as click_session_id,
+        COALESCE(com_mycompany_click_1.session_index, domain_sessionidx) as session_index
+    ...
+...
+```
+
+### Utilizing custom contexts or SDEs in Redshift/Postgres
 
 In Redshift & Postgres, due to the [shredded table design](https://docs.snowplow.io/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/#shredded-data) (meaning each context is loaded separately into a table), you need to specify which contexts you want to be included in the `snowplow_base_events_this_run` table, which you can do using the `snowplow__entities_or_sdes` variable. The `snowplow__entities_or_sdes` variable expects a list of key:value dictionary (dict) with the following keys:
 
@@ -508,8 +516,7 @@ vars:
 
 This would then allow you to leverage the `click_session_id` field within your `snowplow_base_events_this_run` table, as well as other tables downstream from this.
 
-</TabItem>
-</Tabs>
+
 
 ### Utilizing advanced custom SQL
 If you'd prefer to circumvent the need for using Snowplow variables to create advanced SQL transformations, you can instead use the `snowplow_create_base_events` macro as a CTE in your dbt model. Before looking at the code, let's suppose you've once again decided to extract a new field called `click_session_id` which is defined as in the previous example. Here is what your dbt model could look like:

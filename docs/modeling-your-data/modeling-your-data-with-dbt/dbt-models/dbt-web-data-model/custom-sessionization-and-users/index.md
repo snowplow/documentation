@@ -2,6 +2,10 @@
 title: "Custom Sessionization & Users"
 sidebar_position: 500
 ---
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
 
 :::info
 
@@ -42,11 +46,44 @@ Remember that any events with a null "session" identifier will be excluded from 
 
 This example uses a field called `session_id` in your `com_mycompany_session_identifier_1` context and will use this as the value in your `domain_sessionid` field for all tables (excluding the manifest tables, which uses a column named `session_identifier`).
 
+<Tabs groupId="warehouse" queryString>
+<TabItem value="bigquery" label="Bigquery" default>
+
+```yml title="dbt_project.yml"
+vars:
+    snowplow_web:
+        snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1_*', 'field': 'session_id'}]
+```
+
+:::info
+Note that for BigQuery, if you have multiple minor versions of a schema that you would like included (e.g. `com_mycompany_session_identifier_1_0_2`, `com_mycompany_session_identifier_1_0_1`, `com_mycompany_session_identifier_1_0_0`) you can specify that by including a trailing `_*` on the context schema that you'd like to include, and the package will automatically find all matching schemas and coalesce them.
+:::
+</TabItem>
+<TabItem value="databricks" label="Databricks" default>
+
+```yml title="dbt_project.yml"
+vars:
+    snowplow_web:
+        snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1', 'field': 'session_id'}]
+```
+</TabItem>
+<TabItem value="redshift" label="Redshift & Postgres" default>
+
 ```yml title="dbt_project.yml"
 vars:
     snowplow_web:
         snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1', 'field': 'session_id', 'prefix': 'si'}]
 ```
+</TabItem>
+<TabItem value="snowflake" label="Snowflake" default>
+
+```yml title="dbt_project.yml"
+vars:
+    snowplow_web:
+        snowplow__session_identifiers: [{'schema': 'com_mycompany_session_identifier_1', 'field': 'sessionId'}]
+```
+</TabItem>
+</Tabs>
 
 #### Custom SQL
 

@@ -15,7 +15,7 @@ Throughout this page we refer to entity columns only by their major version (e.g
 
 :::
 
-The general idea behind the Snowplow-utils base functionality is to be able to add custom identifiers, bespoke behaviour, and customize naming Snowplow tables that get created as part of the incremental process. Here you can get a better understanding of what kinds of behaviours the package supports, how those scenarios actually work in terms of implementation, and a better understanding of all of the variables that can be used for these macros to unlock the full customization capability that has been built into the Snowplow-utils base functionality.
+The general idea behind the Snowplow-utils base functionality is to be able to add custom identifiers, bespoke behaviour, and customize naming Snowplow tables that get created as part of the incremental process. Here you can get a better understanding of what kinds of behaviours the package supports, how those scenarios actually work in terms of implementation, and a better understanding of all of the variables that can be used for these macros to unlock the full customization capability that has been built into the Snowplow-utils base functionality. You can find some example projects in the following [repository](https://github.com/snowplow-incubator/dbt-example-project).
 
 ## Preface
 :::info
@@ -37,7 +37,7 @@ The way this is intended to be used is by either calling the macros that are hig
 ## Adding custom identifiers
 Adding custom identifiers allows you to decide how to identify sessions and users. By default, this is done using some variation of a `domain_sessionid` and `domain_userid` for sessions and users respectively, but there could be scenarios where you want to use your own custom identifiers that are embedded in global contexts to be modeled against. Rather than having to re-write your own data models, you can leverage some Snowplow provided variables in dbt to do the heavy lifting for you. Below you'll find two scenarios for customizing session and user identifiers, but these work in analogous ways.
 ### Customizing session identifiers
-To customize your session identifiers, you can make use of the `snowplow__session_identifiers` variable and define it in your project. This variable allows you to provide a list of identifiers that dbt will then try to use to create an identifying field for each session, which will always be saved under the `session_identifier` column in your tables.
+To customize your session identifiers, you can make use of the `snowplow__session_identifiers` variable and define it in your project. This variable allows you to provide a list of identifiers that dbt will then try to use to create an identifying field for each session, which will always be saved under the `session_identifier` column in your tables. You can find an example project that shows this [here](https://github.com/snowplow-incubator/dbt-example-project/tree/main/custom_sessions).
 #### Using additional atomic fields
 By default, your identifier will be the `domain_sessionid` field which is found in the atomic events table. If you wanted to instead use a different field, say the `domain_userid` field that can be found in the atomic events table, you could define your `snowplow__session_identifiers` as follows:
 
@@ -253,7 +253,7 @@ SELECT
 ```
 
 ### Customizing user identifiers
-Customizing user identifiers works in the exact same way as customizing session identifiers, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`. By default the user identifier is the `domain_userid` field which is found in the atomic events table.
+Customizing user identifiers works in the exact same way as customizing session identifiers, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`. By default the user identifier is the `domain_userid` field which is found in the atomic events table. You can find an example project that shows this [here](https://github.com/snowplow-incubator/dbt-example-project/tree/main/custom_users).
 
 <!-- #### Using additional atomic fields
 By default, your identifier will be the `domain_userid` field which is found in the atomic events table. If you wanted to instead use a different field, say the `network_userid` field that can be found in the atomic events table, you could define your `snowplow__user_identifiers` as follows:
@@ -423,7 +423,7 @@ SELECT
 ...
 ``` -->
 ## Introducing custom SQL logic to every event
-If there are certain SQL transformations you want to apply to events that are being processed by Snowplow's dbt packages you can leverage the `snowplow__custom_sql` variable to write out custom SQL that will be included in your `base_events_this_run` table, which can then be leveraged for any of your subsequent tables.
+If there are certain SQL transformations you want to apply to events that are being processed by Snowplow's dbt packages you can leverage the `snowplow__custom_sql` variable to write out custom SQL that will be included in your `base_events_this_run` table, which can then be leveraged for any of your subsequent tables. You can find an example project that shows this [here](https://github.com/snowplow-incubator/dbt-example-project/tree/main/custom_base).
 
 
 ### Utilizing custom contexts or SDEs

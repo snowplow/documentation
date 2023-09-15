@@ -14,12 +14,6 @@ import TabItem from '@theme/TabItem';
 
 You will typically find most of your Snowplow data in the `events` table. If you are using Redshift or Postgres, there will be extra tables for [self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md) — see [below](#self-describing-events).
 
-:::note
-
-Database and/or schema name will depend on your configuration, but we will use `atomic` as the schema name in the examples below.
-
-:::
-
 Please refer to [the structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md) for the principles behind our approach, as well as the descriptions of the various standard columns.
 
 :::tip Data models
@@ -31,9 +25,11 @@ Querying the `events` table directly can be useful for exploring your events or 
 The simplest query could look like this:
 
 ```sql
-SELECT * FROM atomic.events
+SELECT * FROM <events>
 WHERE event_name = 'page_view'
 ```
+
+You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your setup. See this [first steps section](/docs/first-steps/querying/index.md#connection-details) for details.
 
 :::caution
 
@@ -52,20 +48,20 @@ This ensures that you read from the minimum number of (micro-)partitions necessa
 [Self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) can contain their own set of fields, defined by their [schema](/docs/understanding-your-pipeline/schemas/index.md).
 
 <Tabs groupId="warehouse" queryString>
-<TabItem value="redshift/postgres" label="Redshift/Postgres" default>
+<TabItem value="redshift/postgres" label="Redshift, Postgres" default>
 
-For Redshift and Postgres users, self-describing events are not part of the standard `atomic.events` table. Instead, each type of event is in its own table. The table name and the fields in the table will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
+For Redshift and Postgres users, self-describing events are not part of the standard `events` table. Instead, each type of event is in its own table. The table name and the fields in the table will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
 
-You can query just the table for that particular self-describing event, if that's all that's required for your analysis, or join that table back to the `atomic.events` table:
+You can query just the table for that particular self-describing event, if that's all that's required for your analysis, or join that table back to the `events` table:
 
 ```sql
-select 
+SELECT
     ...
-from 
+FROM
     atomic.events ev
-left join 
+LEFT JOIN
     atomic.my_example_event_table sde
-    on sde.root_id = ev.event_id and sde.root_tstamp = ev.collector_tstamp
+    ON sde.root_id = ev.event_id AND sde.root_tstamp = ev.collector_tstamp
 ```
 
 :::caution
@@ -82,11 +78,11 @@ Each type of self-describing event is in a dedicated `RECORD`-type column. The c
 You can query fields in the self-describing event like so:
 
 ```sql
-select
-...
-unstruct_event_my_example_event_1_0_0.my_field,
-...
-from 
+SELECT
+    ...
+    unstruct_event_my_example_event_1_0_0.my_field,
+    ...
+FROM
     atomic.events
 ```
 
@@ -98,28 +94,44 @@ Each type of self-describing event is in a dedicated `OBJECT`-type column. The c
 You can query fields in the self-describing event like so:
 
 ```sql
-select
-...
-unstruct_event_my_example_event_1:myField::varchar, -- field will be variant type so important to cast
-...
-from 
+SELECT
+    ...
+    unstruct_event_my_example_event_1:myField::varchar, -- field will be variant type so important to cast
+    ...
+FROM
     atomic.events
 ```
 
 </TabItem>
-<TabItem value="databricks" label="Databricks">
+<TabItem value="databricks" label="Databricks, Spark SQL">
 
 Each type of self-describing event is in a dedicated `STRUCT`-type column. The column name and the fields in the `STRUCT` will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
 
 You can query fields in the self-describing event by extracting them like so:
 
 ```sql
-select
-...
-unstruct_event_my_example_event_1.my_field,
-...
-from 
+SELECT
+    ...
+    unstruct_event_my_example_event_1.my_field,
+    ...
+FROM
     atomic.events
+```
+
+</TabItem>
+<TabItem value="synapse" label="Synapse Analytics 🧪">
+
+Each type of self-describing event is in a dedicated column in JSON format. The column name will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
+
+You can query fields in the self-describing event like so:
+
+```sql
+SELECT
+    ...
+    JSON_VALUE(unstruct_event_my_example_event_1, '$.myField')
+    ...
+FROM
+    OPENROWSET(...) AS [result]
 ```
 
 </TabItem>
@@ -130,20 +142,20 @@ from
 [Entities](/docs/understanding-your-pipeline/entities/index.md) (also known as contexts) provide extra information about the event, such as data describing a product or a user.
 
 <Tabs groupId="warehouse" queryString>
-<TabItem value="redshift/postgres" label="Redshift/Postgres" default>
+<TabItem value="redshift/postgres" label="Redshift, Postgres" default>
 
 For Redshift and Postgres users, entities are not part of the standard `atomic.events` table. Instead, each type of entity is in its own table. The table name and the fields in the table will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
 
 The entities can be joined back to the core `atomic.events` table by the following, which is a one-to-one join (for a single record entity) or a one-to-many join (for a multi-record entity), assuming no duplicates.
 
 ```sql
-select 
+SELECT
     ...
-from 
+FROM
     atomic.events ev
-left join -- assumes no duplicates, and will return all events regardless of if they have this entity
+LEFT JOIN -- assumes no duplicates, and will return all events regardless of if they have this entity
     atomic.my_entity ent
-    on ent.root_id = ev.event_id and ent.root_tstamp = ev.collector_tstamp
+    ON ent.root_id = ev.event_id AND ent.root_tstamp = ev.collector_tstamp
 ```
 
 :::caution
@@ -160,22 +172,25 @@ Each type of entity is in a dedicated `REPEATED RECORD`-type column. The column 
 You can query a single entity’s fields by extracting them like so:
 
 ```sql
-select
+SELECT
     ...
-    contexts_my_entity_1_0_0[SAFE_OFFSET(0)].my_field as my_field,
+    contexts_my_entity_1_0_0[SAFE_OFFSET(0)].my_field AS my_field,
     ...
-from 
+FROM
     atomic.events
 ```
 
 Alternatively, you can use the [`unnest`](https://cloud.google.com/bigquery/docs/reference/standard-sql/arrays#flattening_arrays) function to explode out the array into one row per entity value.
 
 ```sql
-select 
-    ...,
-    my_ent.my_field as my_field
-from atomic.events
-left join unnest(contexts_my_entity_1_0_0) as my_ent -- left join to avoid discarding events without values in this entity
+SELECT
+    ...
+    my_ent.my_field AS my_field,
+    ...
+FROM
+    atomic.events
+LEFT JOIN
+    unnest(contexts_my_entity_1_0_0) AS my_ent -- left join to avoid discarding events without values in this entity
 ```
 
 </TabItem>
@@ -186,52 +201,80 @@ Each type of entity is in a dedicated `ARRAY`-type column. The column name will 
 You can query a single entity’s fields by extracting them like so:
 
 ```sql
-select
+SELECT
     ...
     contexts_my_entity_1[0]:myField::varchar,  -- field will be variant type so important to cast
     ...
-from 
+FROM
     atomic.events
 ```
 
 Alternatively, you can use the [`lateral flatten`](https://docs.snowflake.com/en/sql-reference/functions/flatten) function to explode out the array into one row per entity value.
 
 ```sql
-select
+SELECT
     ...
     r.value:myField::varchar,  -- field will be variant type so important to cast
     ...
-from 
-    atomic.events  as t,
+FROM
+    atomic.events AS t,
     LATERAL FLATTEN(input => t.contexts_my_entity_1) r
 ```
 
 </TabItem>
-<TabItem value="databricks" label="Databricks">
+<TabItem value="databricks" label="Databricks, Spark SQL">
 
 Each type of entity is in a dedicated `ARRAY<STRUCT>`-type column. The column name and the fields in the `STRUCT` will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
 
 You can query a single entity’s fields by extracting them like so:
 
 ```sql
-select
+SELECT
     ...
     contexts_my_entity_1[0].my_field,
     ...
-from 
+FROM
     atomic.events
 ```
 
 Alternatively, you can use the [`LATERAL VIEW`](https://docs.databricks.com/sql/language-manual/sql-ref-syntax-qry-select-lateral-view.html) clause combined with [`EXPLODE`](https://docs.databricks.com/sql/language-manual/functions/explode.html) to explode out the array into one row per entity value.
 
 ```sql
-select
+SELECT
     ...
     my_ent.my_field,
     ...
-from 
+FROM
     atomic.events
-    lateral view explode(contexts_my_entity_1) as my_ent
+    LATERAL VIEW EXPLODE(contexts_my_entity_1) AS my_ent
+```
+
+</TabItem>
+<TabItem value="synapse" label="Synapse Analytics 🧪">
+
+Each type of entity is in a dedicated column in JSON format. The column name will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
+
+You can query a single entity’s fields by extracting them like so:
+
+```sql
+SELECT
+    ...
+    JSON_VALUE(contexts_my_entity_1, '$[0].myField')
+    ...
+FROM
+    OPENROWSET(...) AS [result]
+```
+
+Alternatively, you can use the [`CROSS APPLY` clause combined with `OPENJSON`](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-parquet-nested-types#project-values-from-repeated-columns) to explode out the array into one row per entity value.
+
+```sql
+SELECT
+    ...
+    JSON_VALUE(my_ent.[value], '$.my_field')
+    ...
+FROM
+    OPENROWSET(...) as [result]
+    CROSS APPLY OPENJSON(contexts_my_entity_1) AS my_ent
 ```
 
 </TabItem>
@@ -248,24 +291,24 @@ In some cases, your data might contain duplicate events (full deduplication _bef
 While our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) deal with duplicates for you, there may be cases where you need to de-duplicate the events table yourself.
 
 <Tabs groupId="warehouse" queryString>
-<TabItem value="redshift/postgres" label="Redshift/Postgres" default>
+<TabItem value="redshift/postgres" label="Redshift, Postgres" default>
 
-In Redshift/Postgres you must first generate a `row_number()` on your events and use this to de-duplicate.
+In Redshift/Postgres you must first generate a `ROW_NUMBER()` on your events and use this to de-duplicate.
 
 ```sql
-with unique_events as (
-    select
+WITH unique_events AS (
+    SELECT
         ...
-        row_number() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index
-    from
+        ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) AS event_id_dedupe_index
+    FROM
         atomic.events a
 )
 
-select
+SELECT
     ...
-from
+FROM
     unique_events
-where 
+WHERE
     event_id_dedupe_index = 1
 ```
 
@@ -274,30 +317,30 @@ Things get a little more complicated if you want to join your event data with a 
 Suppose your entity is called `my_entity`. If you know that each of your events has at most 1 such entity attached, the de-duplication requires the use of a row number over `event_id` to get each unique event:
 
 ```sql
-with unique_events as (
-    select
+WITH unique_events AS (
+    SELECT
         ev.*,
-        row_number() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index
-    from 
+        ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) AS event_id_dedupe_index
+    FROM
         atomic.events ev
 ),
 
-unique_my_entity as (
-    select
+unique_my_entity AS (
+    SELECT
         ent.*,
-        row_number() over (partition by a.root_id order by a.root_tstamp) as my_entity_index
-    from 
+        ROW_NUMBER() OVER (PARTITION BY a.root_id ORDER BY a.root_tstamp) AS my_entity_index
+    FROM
         atomic.my_entity_1 ent
 )
 
-select 
+SELECT
     ...
-from 
+FROM
     unique_events u_ev
-left join 
+LEFT JOIN
     unique_my_entity u_ent
-    on u_ent.root_id = u_ev.event_id and u_ent.root_tstamp = u_ev.collector_tstamp and u_ent.my_entity_index = 1
-where
+    ON u_ent.root_id = u_ev.event_id AND u_ent.root_tstamp = u_ev.collector_tstamp AND u_ent.my_entity_index = 1
+WHERE
     u_ev.event_id_dedupe_index = 1
 ```
 
@@ -310,31 +353,31 @@ First, de-duplicate the events table in the same way as above, but also keep tra
 Unfortunately, listing all fields manually can be quite tedious, but we have added support for this in the [de-duplication logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/index.md#multiple-entity-contexts) of our dbt packages.
 
 ```sql
-with unique_events as (
-    select
+WITH unique_events AS (
+    SELECT
         ev.*,
-        row_number() over (partition by a.event_id order by a.collector_tstamp) as event_id_dedupe_index,
-        count(*) over (partition by a.event_id) as event_id_dedupe_count
-    from 
+        ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) AS event_id_dedupe_index,
+        COUNT(*) OVER (PARTITION BY a.event_id) AS event_id_dedupe_count
+    FROM
         atomic.events ev
 ),
 
-unique_my_entity as (
-    select
+unique_my_entity AS (
+    SELECT
         ent.*,
-        row_number() over (partition by a.root_id, a.root_tstamp, ... /*all columns listed here for your entity */ order by a.root_tstamp) as my_entity_index
-    from 
+        ROW_NUMBER() OVER (PARTITION BY a.root_id, a.root_tstamp, ... /*all columns listed here for your entity */ ORDER BY a.root_tstamp) AS my_entity_index
+    FROM
         atomic.my_entity_1 ent
 )
 
-select 
+SELECT
     ...
-from 
+FROM
     unique_events u_ev
-left join 
+LEFT JOIN
     unique_my_entity u_ent
-    on u_ent.root_id = u_ev.event_id and u_ent.root_tstamp = u_ev.collector_tstamp and mod(u_ent.my_entity_index, u_ev.event_id_dedupe_count) = 0
-where
+    ON u_ent.root_id = u_ev.event_id AND u_ent.root_tstamp = u_ev.collector_tstamp AND mod(u_ent.my_entity_index, u_ev.event_id_dedupe_count) = 0
+WHERE
     u_ev.event_id_dedupe_index = 1
 ```
 
@@ -343,13 +386,13 @@ where
 </TabItem>
 <TabItem value="bigquery" label="BigQuery">
 
-In BigQuery it is as simple as using a `qualify` statement over your initial query:
+In BigQuery it is as simple as using a `QUALIFY` statement over your initial query:
 
 ```sql
-select
+SELECT
     ...
-from atomic.events a
-qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
+FROM atomic.events a
+QUALIFY ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) = 1
 ```
 
 </TabItem>
@@ -358,22 +401,44 @@ qualify row_number() over (partition by a.event_id order by a.collector_tstamp) 
 In Snowflake it is as simple as using a `qualify` statement over your initial query:
 
 ```sql
-select
+SELECT
     ...
-from atomic.events a
-qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
+FROM atomic.events a
+QUALIFY ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) = 1
 ```
 
 </TabItem>
-<TabItem value="databricks" label="Databricks">
+<TabItem value="databricks" label="Databricks, Spark SQL">
 
 In Databricks it is as simple as using a `qualify` statement over your initial query:
 
 ```sql
-select
+SELECT
     ...
-from atomic.events a
-qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
+FROM atomic.events a
+QUALIFY ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) = 1
+```
+
+</TabItem>
+<TabItem value="synapse" label="Synapse Analytics 🧪">
+
+In Synapse you must first generate a `ROW_NUMBER()` on your events and use this to de-duplicate.
+
+```sql
+WITH unique_events AS (
+    SELECT
+        ...
+        ROW_NUMBER() OVER (PARTITION BY event_id ORDER BY collector_tstamp) AS event_id_dedupe_index
+    FROM
+        OPENROWSET(...) AS [result]
+)
+
+SELECT
+    ...
+FROM
+    unique_events
+WHERE
+    event_id_dedupe_index = 1
 ```
 
 </TabItem>

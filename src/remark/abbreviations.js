@@ -3,6 +3,7 @@ const flatMap = require('unist-util-flatmap')
 const plugin = () => {
   const config = {
     AAID: 'Android Advertising ID',
+    ADLS: 'Azure Data Lake Storage',
     AWS: 'Amazon Web Services',
     BDP: 'Behavioral Data Platform',
     CDP: 'Customer Data Platform',

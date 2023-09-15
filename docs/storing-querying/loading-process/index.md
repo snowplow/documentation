@@ -8,6 +8,7 @@ description: "A high level view of how Snowplow data is loaded into Redshift, Bi
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import AzureExperimental from '@site/docs/reusable/azure-experimental/_index.md';
 import RDBLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/_cross-cloud-diagram.md';
 import BigQueryLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/_diagram.md';
 ```
@@ -29,11 +30,16 @@ We load data into BigQuery using the [BigQuery Loader](/docs/pipeline-components
 <BigQueryLoaderDiagram/>
 
   </TabItem>
-  <TabItem value="databricks" label="Databricks">
+  <TabItem value="databricks" label="Databricks (direct)">
 
 We load data into Databricks using the [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md).
 
 <RDBLoaderDiagram format="Parquet" warehouse="Databricks"/>
+
+  </TabItem>
+  <TabItem value="databricks-lake" label="Databricks (via lake)">
+
+LAKELOADERLINK
 
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
@@ -41,6 +47,13 @@ We load data into Databricks using the [RDB Loader](/docs/pipeline-components-an
 We load data into Snowflake using the [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md).
 
 <RDBLoaderDiagram format="JSON" warehouse="Snowflake"/>
+
+  </TabItem>
+    <TabItem value="synapse" label="Synapse Analytics 🧪">
+
+<AzureExperimental/>
+
+LAKELOADERLINK
 
   </TabItem>
 </Tabs>

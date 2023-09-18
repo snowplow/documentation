@@ -78,6 +78,7 @@ Component | Latest version
 [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) | ${versions.bqLoader}
 [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | ${versions.gcsLoader}
 [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
 [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | ${versions.postgresLoader}
 `} remarkPlugins={[remarkGfm]} />
 
@@ -90,6 +91,7 @@ Component | Latest version
 [Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) | ${versions.collector}
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
 [RDB Loader (Snowflake)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>

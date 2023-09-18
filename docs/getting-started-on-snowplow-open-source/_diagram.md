@@ -12,11 +12,11 @@ flowchart LR
   iglu{{"<b>Iglu Server</b>\n(${props.compute})"}}
   igludb[("<b>Iglu Database</b>\n(${props.igludb})")]
   bad[["<b>Bad Stream</b>\n(${props.stream})"]]
-  ${props.warehouse == 'Postgres' ?
-    `loader{{"<b>Postgres Loader</b>\n(${props.compute})"}}` :
+  ${(props.warehouse == 'Postgres' || props.warehouse == 'Data Lake') ?
+    `loader{{"<b>${props.warehouse} Loader</b>\n(${props.compute})"}}` :
     `loader("<b>${props.warehouse} Loader</b>\n<i>(see below)</i>")`
   }
-  atomic[("<b>Events</b>\n(${props.warehouse})")]
+  atomic[("<b>Events</b>\n(${props.warehouse == 'Data Lake' ? props.bucket : props.warehouse})")]
   collect---iglu %% invisible link for alignment
   enrich-.-oiglu<-.->igludb
   collect-->|"<b>Raw Stream</b><br/>(${props.stream})"| enrich
@@ -55,7 +55,7 @@ flowchart LR
   </>
 }</>
 
-<>{props.warehouse != 'Postgres' && (<>
+<>{props.warehouse != 'Postgres' && props.warehouse != 'Data Lake' && (<>
   <h4>{props.warehouse} Loader</h4>
   <ReactMarkdown children={`
 For more information about the ${props.warehouse} Loader, see the [documentation on the loading process](/docs/storing-querying/loading-process/index.md?warehouse=${props.warehouse.toLowerCase()}&cloud=${props.cloud == 'aws' ? 'aws-micro-batching' : props.cloud}).

@@ -116,6 +116,23 @@ drop table (your_schema)_derived.snowplow_web_vitals_new;
 </Tabs>
 </details>
 
+### Upgrading to 0.15.0
+
+Some of the new fields that are added will contain nulls for existing records. To avoid failing out of the box tests please update your profiles.yml to disable those tests:
+
+```yml
+# dbt_project.yml
+...
+
+tests:
+  snowplow_web:
+    sessions:
+      not_null_snowplow_web_sessions_is_engaged:
+        +enabled: false
+      not_null_snowplow_web_sessions_total_events:
+        +enabled: false
+```
+
 
 ### Upgrading to 0.14.0
 

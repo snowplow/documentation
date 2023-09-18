@@ -58,9 +58,9 @@ You can query just the table for that particular self-describing event, if that'
 SELECT
     ...
 FROM
-    atomic.events ev
+    <schema>.<events> ev
 LEFT JOIN
-    atomic.my_example_event_table sde
+    <schema>.my_example_event_table sde
     ON sde.root_id = ev.event_id AND sde.root_tstamp = ev.collector_tstamp
 ```
 
@@ -83,7 +83,7 @@ SELECT
     unstruct_event_my_example_event_1_0_0.my_field,
     ...
 FROM
-    atomic.events
+    <events>
 ```
 
 </TabItem>
@@ -99,7 +99,7 @@ SELECT
     unstruct_event_my_example_event_1:myField::varchar, -- field will be variant type so important to cast
     ...
 FROM
-    atomic.events
+    <events>
 ```
 
 </TabItem>
@@ -115,7 +115,7 @@ SELECT
     unstruct_event_my_example_event_1.my_field,
     ...
 FROM
-    atomic.events
+    <events>
 ```
 
 </TabItem>
@@ -131,7 +131,7 @@ SELECT
     JSON_VALUE(unstruct_event_my_example_event_1, '$.myField')
     ...
 FROM
-    OPENROWSET(...) AS [result]
+    OPENROWSET(BULK 'events', DATA_SOURCE = '<events>', FORMAT = 'DELTA') AS events
 ```
 
 </TabItem>
@@ -144,17 +144,17 @@ FROM
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift/postgres" label="Redshift, Postgres" default>
 
-For Redshift and Postgres users, entities are not part of the standard `atomic.events` table. Instead, each type of entity is in its own table. The table name and the fields in the table will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
+For Redshift and Postgres users, entities are not part of the standard `events` table. Instead, each type of entity is in its own table. The table name and the fields in the table will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
 
-The entities can be joined back to the core `atomic.events` table by the following, which is a one-to-one join (for a single record entity) or a one-to-many join (for a multi-record entity), assuming no duplicates.
+The entities can be joined back to the core `events` table by the following, which is a one-to-one join (for a single record entity) or a one-to-many join (for a multi-record entity), assuming no duplicates.
 
 ```sql
 SELECT
     ...
 FROM
-    atomic.events ev
+    <schema>.<events> ev
 LEFT JOIN -- assumes no duplicates, and will return all events regardless of if they have this entity
-    atomic.my_entity ent
+    <schema>.my_entity ent
     ON ent.root_id = ev.event_id AND ent.root_tstamp = ev.collector_tstamp
 ```
 
@@ -177,7 +177,7 @@ SELECT
     contexts_my_entity_1_0_0[SAFE_OFFSET(0)].my_field AS my_field,
     ...
 FROM
-    atomic.events
+    <events>
 ```
 
 Alternatively, you can use the [`unnest`](https://cloud.google.com/bigquery/docs/reference/standard-sql/arrays#flattening_arrays) function to explode out the array into one row per entity value.
@@ -188,7 +188,7 @@ SELECT
     my_ent.my_field AS my_field,
     ...
 FROM
-    atomic.events
+    <events>
 LEFT JOIN
     unnest(contexts_my_entity_1_0_0) AS my_ent -- left join to avoid discarding events without values in this entity
 ```
@@ -206,7 +206,7 @@ SELECT
     contexts_my_entity_1[0]:myField::varchar,  -- field will be variant type so important to cast
     ...
 FROM
-    atomic.events
+    <events>
 ```
 
 Alternatively, you can use the [`lateral flatten`](https://docs.snowflake.com/en/sql-reference/functions/flatten) function to explode out the array into one row per entity value.
@@ -217,7 +217,7 @@ SELECT
     r.value:myField::varchar,  -- field will be variant type so important to cast
     ...
 FROM
-    atomic.events AS t,
+    <events> AS t,
     LATERAL FLATTEN(input => t.contexts_my_entity_1) r
 ```
 
@@ -234,7 +234,7 @@ SELECT
     contexts_my_entity_1[0].my_field,
     ...
 FROM
-    atomic.events
+    <events>
 ```
 
 Alternatively, you can use the [`LATERAL VIEW`](https://docs.databricks.com/sql/language-manual/sql-ref-syntax-qry-select-lateral-view.html) clause combined with [`EXPLODE`](https://docs.databricks.com/sql/language-manual/functions/explode.html) to explode out the array into one row per entity value.
@@ -245,7 +245,7 @@ SELECT
     my_ent.my_field,
     ...
 FROM
-    atomic.events
+    <events>
     LATERAL VIEW EXPLODE(contexts_my_entity_1) AS my_ent
 ```
 
@@ -262,7 +262,7 @@ SELECT
     JSON_VALUE(contexts_my_entity_1, '$[0].myField')
     ...
 FROM
-    OPENROWSET(...) AS [result]
+    OPENROWSET(BULK 'events', DATA_SOURCE = '<events>', FORMAT = 'DELTA') AS events
 ```
 
 Alternatively, you can use the [`CROSS APPLY` clause combined with `OPENJSON`](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-parquet-nested-types#project-values-from-repeated-columns) to explode out the array into one row per entity value.
@@ -273,7 +273,7 @@ SELECT
     JSON_VALUE(my_ent.[value], '$.my_field')
     ...
 FROM
-    OPENROWSET(...) as [result]
+    OPENROWSET(BULK 'events', DATA_SOURCE = '<events>', FORMAT = 'DELTA') as events
     CROSS APPLY OPENJSON(contexts_my_entity_1) AS my_ent
 ```
 
@@ -301,7 +301,7 @@ WITH unique_events AS (
         ...
         ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) AS event_id_dedupe_index
     FROM
-        atomic.events a
+        <events> a
 )
 
 SELECT
@@ -322,7 +322,7 @@ WITH unique_events AS (
         ev.*,
         ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) AS event_id_dedupe_index
     FROM
-        atomic.events ev
+        <schema>.<events> ev
 ),
 
 unique_my_entity AS (
@@ -330,7 +330,7 @@ unique_my_entity AS (
         ent.*,
         ROW_NUMBER() OVER (PARTITION BY a.root_id ORDER BY a.root_tstamp) AS my_entity_index
     FROM
-        atomic.my_entity_1 ent
+        <schema>.my_entity_1 ent
 )
 
 SELECT
@@ -359,7 +359,7 @@ WITH unique_events AS (
         ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) AS event_id_dedupe_index,
         COUNT(*) OVER (PARTITION BY a.event_id) AS event_id_dedupe_count
     FROM
-        atomic.events ev
+        <schema>.<events> ev
 ),
 
 unique_my_entity AS (
@@ -367,7 +367,7 @@ unique_my_entity AS (
         ent.*,
         ROW_NUMBER() OVER (PARTITION BY a.root_id, a.root_tstamp, ... /*all columns listed here for your entity */ ORDER BY a.root_tstamp) AS my_entity_index
     FROM
-        atomic.my_entity_1 ent
+        <schema>.my_entity_1 ent
 )
 
 SELECT
@@ -391,7 +391,7 @@ In BigQuery it is as simple as using a `QUALIFY` statement over your initial que
 ```sql
 SELECT
     ...
-FROM atomic.events a
+FROM <events> a
 QUALIFY ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) = 1
 ```
 
@@ -403,7 +403,7 @@ In Snowflake it is as simple as using a `qualify` statement over your initial qu
 ```sql
 SELECT
     ...
-FROM atomic.events a
+FROM <events> a
 QUALIFY ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) = 1
 ```
 
@@ -415,7 +415,7 @@ In Databricks it is as simple as using a `qualify` statement over your initial q
 ```sql
 SELECT
     ...
-FROM atomic.events a
+FROM <events> a
 QUALIFY ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) = 1
 ```
 
@@ -430,7 +430,7 @@ WITH unique_events AS (
         ...
         ROW_NUMBER() OVER (PARTITION BY event_id ORDER BY collector_tstamp) AS event_id_dedupe_index
     FROM
-        OPENROWSET(...) AS [result]
+        OPENROWSET(BULK 'events', DATA_SOURCE = '<events>', FORMAT = 'DELTA') AS events
 )
 
 SELECT

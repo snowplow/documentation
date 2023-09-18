@@ -90,6 +90,12 @@ To connect, you can use either Snowflake dashboard or [SnowSQL](https://docs.sno
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
+:::info Azure-specific instructions
+
+On Azure, you have created an external table in the [last step of the guide](/docs/getting-started-on-snowplow-open-source/quick-start/index.md#configure-the-destination). Use this table and ignore the text below.
+
+:::
+
 The database name and the schema name will be defined by the `databricks_database` and `databricks_schema` variables in Terraform.
 
 There are two different ways to login to the database:
@@ -100,6 +106,19 @@ See the [Databricks tutorial](https://docs.databricks.com/getting-started/quick-
 
   </TabItem>
 </Tabs>
+
+</TabItem>
+  <TabItem value="synapse" label="Synapse Analytics 🧪">
+
+In Synapse Analytics, you can connect directly to the data residing in ADLS. You will need to know the names of the storage account (set in the `storage_account_name` Terraform variable) and the storage container (it’s a fixed value: `lake-loader-container`).
+
+Follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function. If you created a data source in the [last step](/docs/getting-started-on-snowplow-open-source/quick-start/index.md#configure-the-destination) of the quick start guide, your queries will be a bit simpler.
+
+:::tip Fabric and OneLake
+
+If you created a OneLake shortcut in the [last step](/docs/getting-started-on-snowplow-open-source/quick-start/index.md#configure-the-destination) of the quick start guide, you will be able to explore Snowplow data in Fabric, for example, using Spark SQL.
+
+:::
 
   </TabItem>
 </Tabs>

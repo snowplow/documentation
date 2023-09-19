@@ -8,8 +8,6 @@ import Tabs from '@theme/Tabs';
 import CodeBlock from '@theme/CodeBlock';
 import DeployOverview from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/_deploy_overview.md';
 import LakeLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/_diagram.md';
-import GCPConfiguration from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/_gcp_configuration.md';
-import AzureConfiguration from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/_azure_configuration.md';
 ```
 
 ## Overview
@@ -27,7 +25,7 @@ Currently the lake loader supports [Delta format](https://delta.io/) only. Futur
     <LakeLoaderDiagram stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
     <DeployOverview cloud="GCP"/>
   </TabItem>
-  <TabItem value="aws" label="Azure" default>
+  <TabItem value="aws" label="Azure">
     <LakeLoaderDiagram stream="Kafka" bucket="ADLS Gen 2" cloud="Azure"/>
     <DeployOverview cloud="Azure"/>
   </TabItem>
@@ -41,31 +39,46 @@ The simplest possible config file just needs a description of your pipeline inpu
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="gcp" label="GCP" default>
-    <GCPConfiguration/>
+
+<!-- TODO: this file should get renamed to config.gcp.minimal.hocon -->
+
+```json reference
+https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.pubsub.minimal.hocon
+```
+
+
   </TabItem>
-  <TabItem value="aws" label="Azure" default>
-    <AzureConfiguration/>
+  <TabItem value="aws" label="Azure">
+
+```json reference
+https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.azure.minimal.hocon
+```
+
   </TabItem>
 </Tabs>
 
+See the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/index.md) for all possible configuration parameters.
+
 ### Windowing
 
-"Windowing" is an important config setting, which controls how often the lake loader commits a batch of events to the data lake.
+"Windowing" is an important config setting, which controls how often the lake loader commits a batch of events to the data lake. If you adjust this config setting, you should be aware that data lake queries are most efficient when the size of the parquet files in the lake are relatively large.
 
-- If you set this to a **low** value, then you write events to the lake more frequently, but the output file size might be smaller than ideal.
-- If you set this to a **high** value, then you generate big output parquet files which are efficient for queries, but it adds a delay to events entering your lake.
+- If you set this to a **low** value, then you write events to the lake more frequently, but the output file sizes will be smaller.
+- If you set this to a **high** value, then you generate bigger output parquet files which are efficient for queries, but it adds a delay to events entering your lake.
 
-The default setting is `5 minutes` which is a nice balance between the need for large output parquet files and the need for reasonably low latency data.
+The default setting is `5 minutes`.  Above a certain event volume,  this default setting strikes a nice balance between the need for large output parquet files and the need for reasonably low latency data.
 
-<CodeBlock>{`{
-    "windowing": "5 minutes"
-}`}</CodeBlock>
+```
+{
+  "windowing": "5 minutes"
+}
+```
 
-If you tune this setting correctly, then your lake can support efficient analytic queries without the need to run a `OPTIMIZE` job on the files.
+If you tune this setting correctly, then your lake can support efficient analytic queries without the need to run an `OPTIMIZE` job on the files.
 
 ### Iglu
 
-The lake loader requires a [Iglu resolver file](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) which describes the Iglu repositories that host your schemas.  This should be the same Iglu configuration file that you used in the Enrichment process.
+The lake loader requires an [Iglu resolver file](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) which describes the Iglu repositories that host your schemas.  This should be the same Iglu configuration file that you used in the Enrichment process.
 
 
 ```mdx-code-block

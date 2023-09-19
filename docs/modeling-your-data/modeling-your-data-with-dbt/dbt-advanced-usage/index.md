@@ -1,7 +1,6 @@
 ---
-title: "Advanced Usage of Snowplow dbt models"
-date: "2022-10-05"
-sidebar_position: 999
+title: "Package Features"
+sidebar_position: 10
 ---
 
 

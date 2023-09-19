@@ -1,6 +1,6 @@
 ---
 title: "Mobile"
-sidebar_position: 102
+sidebar_position: 200
 ---
 
 ```mdx-code-block
@@ -18,7 +18,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 
 :::
 
-### Warehouse and tracker 
+### Warehouse and tracker
 | Variable Name     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                | Default                                   |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------- |
 | `atomic_schema`   | The schema (dataset for BigQuery) that contains your atomic events table.                                                                                                                                                                                                                                                                                                                                                                  | `atomic`                                  |
@@ -53,7 +53,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `has_log_enabled`            | When executed, the package logs information about the current run to the CLI. This can be disabled by setting to `false`. | `true`                    |
 | `platform`                   | A list of `platform`s to filter the events table on for processing within the package.                                    | `['mob']`                 |
 
-### Warehouse Specific 
+### Warehouse Specific
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="databricks" label="Databricks" default>

@@ -1,6 +1,6 @@
 ---
 title: "Core Web Vitals Module"
-sidebar_position: 101
+sidebar_position: 300
 hide_title: true
 ---
 
@@ -47,8 +47,7 @@ It is assumed that the dbt_snowplow_web package is already installed and configu
 
 You can enable the custom module through the `snowplow__enable_cwv` variable in your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
+```yml title="dbt_project.yml"
 
 vars:
   snowplow_web:
@@ -59,7 +58,7 @@ vars:
 
 :::tip
 
-For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-advanced-operation/index.md#overriding-macros)
+For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/index.md#overriding-macros)
 
 :::
 

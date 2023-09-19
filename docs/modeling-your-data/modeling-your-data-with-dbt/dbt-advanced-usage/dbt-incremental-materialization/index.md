@@ -1,7 +1,7 @@
 ---
 title: "Snowplow Optimized Materialization"
 description: "Details on our optimized version of the dbt incremental materialization and how to enable it."
-sidebar_position: 400
+sidebar_position: 50
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -17,9 +17,7 @@ To enable the materialization on a model you need to ensure a `unique_key` and `
 
 In addition, the following must be added to your `dbt_project.yml` file once.
 
-```yaml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 dispatch:
   - macro_namespace: dbt
     search_order: ['snowplow_utils', 'dbt']

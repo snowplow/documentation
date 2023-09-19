@@ -1,6 +1,6 @@
 ---
 title: "E-commerce"
-sidebar_position: 105
+sidebar_position: 600
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -17,7 +17,7 @@ To enable modeling mobile events, set `snowplow__enable_mobile_events` to `true`
 
 Two of the derived tables need to be altered for existing Snowflake, Databricks or Redshift users. Please modify the below script to fit your schemas and apply them before running the upgraded package.
 
-The other option is to do a [complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#complete-refresh-of-snowplow-package) of the package.
+The other option is to do a [complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#complete-refresh-of-snowplow-package) of the package.
 
 <details>
   <summary>SQL scripts</summary>
@@ -164,9 +164,7 @@ alter table (your_schema)_derived.snowplow_ecommerce_transaction_interactions_ne
 ### Upgrading to 0.4.0
 - Version 1.4.0 of `dbt-core` now required
 - You must add the following to the top level of your project yaml
-    ```yml
-    # dbt_project.yml
-    ...
+    ```yml title="dbt_project.yml"
     dispatch:
       - macro_namespace: dbt
         search_order: ['snowplow_utils', 'dbt']

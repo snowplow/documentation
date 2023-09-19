@@ -1,14 +1,12 @@
 ---
 title: "Normalize"
-sidebar_position: 104
+sidebar_position: 500
 ---
 
 ### Upgrading to 0.3.0
 - Version 1.4.0 of `dbt-core` now required
 - You must add the following to the top level of your project yaml
-    ```yml
-    # dbt_project.yml
-    ...
+    ```yml title="dbt_project.yml"
     dispatch:
       - macro_namespace: dbt
         search_order: ['snowplow_utils', 'dbt']

@@ -510,3 +510,7 @@ fieldset {
 .JsonValidator .collapsibleContent_i85q{
   padding-top: 0px;
 }
+
+.JsonValidator .MuiFormControl-root.MuiTextField-root.css-i44wyl {
+  margin-bottom: 16px;
+}

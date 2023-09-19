@@ -1,6 +1,6 @@
 ---
 title: "Consent Module"
-sidebar_position: 101
+sidebar_position: 200
 hide_title: true
 ---
 
@@ -47,8 +47,7 @@ It is assumed that the dbt_snowplow_web package is already installed and configu
 
 You can enable the custom module through the `snowplow__enable_consent` variable most conveniently set in your dbt_project.yml file:
 
-```yml
-# dbt_project.yml
+```yml title="dbt_project.yml"
 
 vars:
   snowplow_web:

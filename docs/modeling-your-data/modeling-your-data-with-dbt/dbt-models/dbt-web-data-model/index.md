@@ -1,6 +1,6 @@
 ---
 title: "Web"
-sidebar_position: 101
+sidebar_position: 100
 hide_title: true
 ---
 
@@ -54,7 +54,7 @@ This model consists of a series of modules, each producing a table which serves 
 
 :::tip
 
-For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-advanced-operation/index.md#overriding-macros)
+For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/index.md#overriding-macros)
 
 :::
 

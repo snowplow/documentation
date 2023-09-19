@@ -3717,10 +3717,7 @@ The value relevant to the target environment
 <h4>Usage</h4>
 
 
-```yml
-
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
 snowplow_web:
     snowplow__backfill_limit_days: "{{ snowplow_utils.get_value_by_target(dev_value=1, default_value=30, dev_target_name='dev') }}"
@@ -6669,4 +6666,3 @@ This macro does not currently have a description.
 </TabItem>
 </Tabs>
 </DbtDetails>
-

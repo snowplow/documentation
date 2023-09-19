@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Mobile"
-sidebar_position: 102
+sidebar_position: 200
 title: "Mobile Quickstart"
 ---
 
@@ -36,9 +36,7 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 ### 1. Override the dispatch order in your project
 To take advantage of the optimized upsert that the Snowplow packages offer you need to ensure that certain macros are called from `snowplow_utils` first before `dbt-core`. This can be achieved by adding the following to the top level of your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 dispatch:
   - macro_namespace: dbt
     search_order: ['snowplow_utils', 'dbt']
@@ -56,9 +54,7 @@ These are defined in the `selectors.yml` file ([source](https://github.com/snowp
 
 This package will by default assume your Snowplow events data is contained in the `atomic` schema of your [target.database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile), in the table labeled `events`. In order to change this, please add the following to your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_mobile:
     snowplow__atomic_schema: schema_with_snowplow_events
@@ -82,9 +78,7 @@ The mobile package has the option to join in data from the following 4 Snowplow 
 
 By default these are **all disabled** in the mobile package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please modify the following in your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_mobile:
     snowplow__enable_mobile_context: true
@@ -101,9 +95,7 @@ The mobile package has the option to join in data from the following 1 Snowplow 
 
 By default this module is **disabled** in the mobile package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the module within the package please modify the following in your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_mobile:
     snowplow__enable_app_errors_module: true
@@ -113,9 +105,7 @@ vars:
 
 You can specify both `start_date` at which to start processing events and the `app_id`'s to filter for. By default the `start_date` is set to `2020-01-01` and all `app_id`'s are selected. To change this please add/modify the following in your `dbt_project.yml` file:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_mobile:
     snowplow__start_date: 'yyyy-mm-dd'
@@ -126,9 +116,7 @@ vars:
 :::info BigQuery Only
 Verify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_mobile:
     snowplow__derived_tstamp_partitioned: false
@@ -140,9 +128,7 @@ vars:
 
 Add the following variable to your dbt project's `dbt_project.yml` file
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_mobile:
     snowplow__databricks_catalog: 'hive_metastore'

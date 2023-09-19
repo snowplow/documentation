@@ -1,15 +1,13 @@
 ---
 title: "Mobile"
-sidebar_position: 102
+sidebar_position: 300
 ---
 
 ### Upgrading to 0.7.0
 
 - Version 1.4.0 of `dbt-core` now required
 - You must add the following to the top level of your project yaml
-    ```yml
-    # dbt_project.yml
-    ...
+    ```yml title="dbt_project.yml"
     dispatch:
       - macro_namespace: dbt
         search_order: ['snowplow_utils', 'dbt']

@@ -2,9 +2,7 @@
 
 When using multiple dbt packages you must be careful to specify which scope a variable or configuration is defined within. In general, always specify each value in your `dbt_project.yml` nested under the specific package e.g.
 
-```yml
-# dbt_project.yml
-...
+```yml title="dbt_project.yml"
 vars:
   snowplow_web:
     snowplow__atomic_schema: schema_with_snowplow_web_events

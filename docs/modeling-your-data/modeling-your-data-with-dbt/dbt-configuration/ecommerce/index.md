@@ -1,6 +1,6 @@
 ---
 title: "E-commerce"
-sidebar_position: 105
+sidebar_position: 600
 ---
 
 ```mdx-code-block
@@ -19,7 +19,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 :::
 
 
-### Warehouse and tracker 
+### Warehouse and tracker
 | Variable Name            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Default           |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | `atomic_schema`          | The schema (dataset for BigQuery) that contains your atomic events table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `atomic`          |
@@ -56,7 +56,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `disable_ecommerce_transactions` | Flag to exclude the `Snowplow E-commerce` [transaction entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/index.md#transaction-entity) context in case this is disabled or not used in your tracking. | `false`                   |
 | `disable_ecommerce_user_context` | Flag to exclude the `Snowplow E-commerce` [user entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/snowplow-ecommerce/index.md#ecommerce-user-entity) context in case this is disabled or not used in your tracking.     | `false`                   |
 
-### Warehouse Specific 
+### Warehouse Specific
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="databricks" label="Databricks" default>

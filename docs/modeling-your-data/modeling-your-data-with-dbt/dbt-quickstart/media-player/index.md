@@ -123,18 +123,18 @@ This option applied in case you are tracking media events with either the Snowpl
 vars:
   snowplow_media_player:
     # don't use the older version 1 of the media player context schema
-    enable_media_player_v1: false
+    snowplow__enable_media_player_v1: false
     # use the version 2 of the media player context schema
-    enable_media_player_v2: true
+    snowplow__enable_media_player_v2: true
     # use the media session context schema (unless disabled on the tracker)
-    enable_media_session: true
+    snowplow__enable_media_session: true
     # depending on whether you track ads, ad breaks and progress within ads:
-    enable_media_ad: true
-    enable_media_ad_break: true
-    enable_ad_quartile_event: true
+    snowplow__enable_media_ad: true
+    snowplow__enable_media_ad_break: true
+    snowplow__enable_ad_quartile_event: true
     # depending on whether you track events from web or mobile apps:
-    enable_web_events: true
-    enable_mobile_events: true
+    snowplow__enable_web_events: true
+    snowplow__enable_mobile_events: true
 ```
 
 #### 6b. Using the HTML5 media tracking plugin for JavaScript tracker
@@ -144,11 +144,11 @@ vars:
 vars:
   snowplow_media_player:
     # use the version 1 of the media player context schema used by the YouTube plugin
-    enable_media_player_v1: true
+    snowplow__enable_media_player_v1: true
     # don't use the version 2 of the media player context schema as it is not tracked by the plugin
-    enable_media_player_v2: false
+    snowplow__enable_media_player_v2: false
     # don't use the media session context schema as it is not tracked by the plugin
-    enable_media_session: false
+    snowplow__enable_media_session: false
     # set to true if the HTML5 media element context schema is enabled
     snowplow__enable_whatwg_media: true
     # set to true if the HTML5 video element context schema is enabled
@@ -162,11 +162,11 @@ vars:
 vars:
   snowplow_media_player:
     # use the version 1 of the media player context schema used by the YouTube plugin
-    enable_media_player_v1: true
+    snowplow__enable_media_player_v1: true
     # don't use the version 2 of the media player context schema as it is not tracked by the plugin
-    enable_media_player_v2: false
+    snowplow__enable_media_player_v2: false
     # don't use the media session context schema as it is not tracked by the plugin
-    enable_media_session: false
+    snowplow__enable_media_session: false
     # set to true if the YouTube context schema is enabled
     snowplow__enable_youtube: true
 ```

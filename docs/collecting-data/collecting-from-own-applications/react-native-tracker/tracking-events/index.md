@@ -1,129 +1,56 @@
 ---
-title: "Tracking events"
+title: "Tracking out-of-the-box events"
 date: "2021-08-06"
 sidebar_position: 20
 ---
 
-[![Tracker Maintenance Classification](https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Actively%20Maintained&color=6638b8&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC)](/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification/index.md)
+The React Native tracker captures two types of out-of-the-box events, automatically captured and manual events.
 
-[![Latest tracker version](https://img.shields.io/npm/v/@snowplow/react-native-tracker)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
+## Auto-tracked events and entities
 
-[![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
-
-The React Native tracker captures two types of events, automatically captured and manual events.
-
-## Auto Tracking Features
-
-Many of the automatic tracking options available on iOS and Android are also available in React Native – these can be enabled or disabled in the TrackerConfiguration passed to `createTracker` as part of the TrackerController configuration object.
-
-### Events
-
-The React Native Tracker can be configured to automatically track the following events:
-
-- App Lifecycle Tracking
-    - Captures application foreground and application background events
-- Screen View Tracking
-    - Captures each time a new “screen” is loaded
-- Exception Tracking
-    - Captures any unhandled exceptions within the application
-- Installation Tracking
-    - Captures an install event which occurs the first time an application is opened
-- Deep Link Received
-    - Captures a deep link event which is passed to the app
-- Message (push or local) Notification
-    - Captures a notification received by the app
-
-### Contexts
-
-The contexts that can be set to be automatically attached to all events are:
-
-- Application context
-- Platform context
-- Geolocation context
-- Session context
-- Screen context
-
-For more information on the enabled autotracking features by default, see also the Tracker Configuration section.
-
-## Manual tracking
-
-All tracker's `track` methods take two arguments: An object of key-value pairs for the event’s properties, and an optional array of custom event contexts.
-
-### Custom event contexts
-
-```mdx-code-block
-import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.md"
-
-<DefineCustomEntity/>
-```
-
-Custom contexts can be optionally added as an extra argument to any of the Tracker’s `track..()` methods.
-
-**Note:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array. Also an empty array is acceptable, which will attach no entities to the event.
-
-For example, a custom context to describe a screen could be:
+Many of the automatic tracking options available on iOS and Android are also available in React Native – these can be enabled or disabled in the TrackerConfiguration passed to `createTracker` as part of the TrackerController configuration object:
 
 ```typescript
-const myScreenContext: EventContext = {
-    schema: 'iglu:com.example/screen/jsonschema/1-2-1',
-    data: {
-        screenType: 'test',
-        lastUpdated: '2021-06-11'
+const tracker = createTracker(
+    'appTracker',
+    {
+      endpoint: COLLECTOR_URL,
+    },
+    {
+        trackerConfig: {
+            // auto-tracked events:
+            screenViewAutotracking: false, // only iOS UIKit or Android Activity screens
+            lifecycleAutotracking: false,
+            installAutotracking: true,
+            exceptionAutotracking: true, // only errors in native app code
+            diagnosticAutotracking: false,
+
+            // auto-tracked context entities:
+            applicationContext: true,
+            platformContext: true,
+            geoLocationContext: false,
+            sessionContext: true,
+            deepLinkContext: true,
+            screenContext: true,
+        },
     }
-};
-```
-
-Another example custom context to describe a user on a screen could be:
-
-```typescript
-const myUserEntity: EventContext = {
-    schema: 'iglu:com.example/user/jsonschema/2-0-0',
-    data: {
-        userType: 'tester'
-    }
-};
-```
-
-Then, to track, for example, a screenViewEvent with both of these contexts attached:
-
-```typescript
-tracker.trackScreenViewEvent(
-   { name: 'myScreenName' },
-   [ myScreenContext, myUserEntity ]
 );
 ```
 
-It is also possible to add custom contexts globally, so that they are applied to all events within an application. For more information, see the Global Contexts section below.
+The automatically captured data are:
 
-### Events
+* [**Platform and Application Context Tracking**](./platform-and-application-context/index.md): Captures contextual information about the device and the app.
+* [**Session Tracking**](./session-tracking/index.md): Captures the session which helps to keep track of the user activity in the app.
+* [**App Lifecycle Tracking**](./lifecycle-tracking/index.md): Captures application lifecycle state changes (foreground/background transitions).
+* [**Screen View Tracking**](./screen-tracking/index.md): Captures each time a new “screen” is loaded.
+* [**Exception Tracking**](./exception-tracking/index.md): Captures any unhandled exceptions within the application.
+* [**Installation Tracking**](./installation-tracking/index.md): Captures an install event which occurs the first time an application is opened.
 
-#### Self-describing events
+## Manually-tracked events
 
-```mdx-code-block
-import DefineCustomEvent from "@site/docs/reusable/define-custom-event/_index.md"
+All tracker's `track` methods take two arguments: An object of key-value pairs for the event’s properties, and an optional array of [custom event contexts](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/custom-tracking-using-schemas/index.md).
 
-<DefineCustomEvent/>
-```
-
-A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/).
-
-**Required properties**
-
-- `schema`: (string) – A valid Iglu schema path. This must point to the location of the custom event’s schema, of the format: `iglu:{vendor}/{name}/{format}/{version}`.
-- `data`: (object) – The custom data for your event. This data must conform to the schema specified in the `schema` argument, or the event will fail validation and land in bad rows.
-
-To track a custom self-describing event, use the `trackSelfDescribingEvent` method of the tracker.
-
-For example, to track a link-click event, which is one whose schema is already published in [Iglu Central](https://github.com/snowplow/iglu-central):
-
-```typescript
-tracker.trackSelfDescribingEvent({
-    schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
-    data: {targetUrl: 'http://a-target-url.com'}
-});
-```
-
-#### Structured
+### Tracking structured events
 
 Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
 
@@ -177,7 +104,7 @@ tracker.trackTimingEvent({
 
 - `label`: An optional string to further identify the timing event
 
-#### Screen View
+### Tracking screen view events
 
 Track the user viewing a screen within the application.
 
@@ -207,17 +134,7 @@ The tracker will automatically assign references to the previously tracked scree
 - `previousType`: (string) - The type of screen that was viewed (assigned automatically)
 - `transitionType`: (string) - The type of transition that led to the screen being viewed
 
-##### Tracking screen views in React Navigation
-
-If you are using the [React Navigation](https://reactnavigation.org/) library for navigation in your app, you can implement automatic screen view tracking by adding a callback to your `NavigationContainer`.
-The steps are explained [in the documentation for React Navigation](https://reactnavigation.org/docs/screen-tracking/).
-
-##### Tracking screen views in React Native Navigation
-
-When using the [React Native Navigation](https://wix.github.io/react-native-navigation/docs/before-you-start/) library for navigation in your app, you can automatically track screen views by registering a listener when your component appears on screen.
-Use the `Navigation.events().registerComponentDidAppearListener` callback to subscribe the listener and track screen views as [documented here](https://wix.github.io/react-native-navigation/api/events/#componentdidappear).
-
-#### Page View
+### Tracking page view events
 
 Track a page view event with the `trackPageViewEvent()` method. Typically this is uncommon in apps, but is sometimes used where fitting data into an existing page views model is required. To track page views from an in-app browser, it is advisable to use the javascript tracker in-browser.
 
@@ -240,7 +157,7 @@ Optional properties
 - `pageTitle`: (string) – Page Title for the page view event.
 - `referrer`: (string) – Url for the referring page to the page view event. Must be a vaild url.
 
-#### Consent Granted
+### Tracking consent granted events
 
 Use the `trackConsentGrantedEvent` method to track a user opting into data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied.
 
@@ -267,7 +184,7 @@ tracker.trackConsentGrantedEvent({
 - `name`: (string) - The consent document name
 - `documentDescription`: (string) - The consent document description
 
-#### Consent Withdrawn
+### Tracking consent withdrawn events
 
 Use the `trackConsentWithdrawnEvent` method to track a user withdrawing consent for data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied. To specify that a user opts out of all data collection, `all` should be set to `true`.
 
@@ -294,7 +211,7 @@ tracker.trackConsentWithdrawnEvent({
 - `name`: (string) - The consent document name
 - `documentDescription`: (string) - The consent document description
 
-#### Ecommerce Transaction
+### Tracking ecommerce transaction events
 
 Modelled on Google Analytics ecommerce tracking capability, an ecommerce-transaction event can be tracked as follows:
 
@@ -306,7 +223,7 @@ The procedured outlined above will result in the following events being tracked:
 1. An EcommerceTransaction event
 2. As many as EcommerceItem events as the items passed to the EcommerceTransaction object, that will also inherit the `orderId` from the parent transaction event
 
-##### EcommerceItem
+#### EcommerceItem
 
 More specifically, to start with, the properties of an `EcommerceItem` are:
 
@@ -335,7 +252,7 @@ const ecomItem: EcommerceItem = {
 };
 ```
 
-##### EcommerceTransaction
+#### EcommerceTransaction
 
 An ecommerce transaction object has the following properties:
 
@@ -370,7 +287,7 @@ const ecomTransaction: EcommerceTransactionProps = {
 };
 ```
 
-##### `trackEcommerceTransaction`
+#### `trackEcommerceTransaction`
 
 Then, to track the ecommerce transaction as described in the above examples:
 
@@ -378,7 +295,7 @@ Then, to track the ecommerce transaction as described in the above examples:
 tracker.trackEcommerceTransactionEvent(ecomTransaction);
 ```
 
-#### Deep Link Received
+### Tracking deep link received events
 
 The Deep Link is received by the mobile operating system and passed to the related app. Our React Native tracker can't automatically track the Deep Link, but we provide an out-of-the-box event that can be used by the developer to manually track it as soon as the Deep Link is received in the app.
 
@@ -420,7 +337,7 @@ Optional properties
 
 - `referrer`: (string) – Referrer URL, source of this deep-link
 
-#### Push and Local Notification
+### Tracking push and local notification events
 
 Push Notifications are a cornerstone of the user experience on mobile. A Push Notification is a message (like an SMS or a mobile alert) that can quickly show information to the user even if an app is closed or the phone is in stand-by. Push Notifications can be used in many different ways: they can notify of a new message in a chat, rather than informing of a news or just notify of an achievement in a fitness app.
 
@@ -481,7 +398,7 @@ Optional properties
 - `titleLocArgs`: (array of string) – Variable string values to be used in place of the format specifiers in titleLocArgs to use to localize the title text to the user's current localization.
 - `titleLocKey`: (string) – The key to the title string in the app's string resources to use to localize the title text to the user's current localization.
 
-##### MessageNotificationAttachmentProps
+#### MessageNotificationAttachmentProps
 
 Attachment object that identifies an attachment in the Message Notification event.
 
@@ -499,140 +416,4 @@ const attachment: MessageNotificationAttachmentProps = {
     type: 'type',
     url: 'http://att.url',
 };
-```
-
-## Setting the Subject data
-
-The subject is a persistent object containing global data that applies to all events, such as a manually set userId. As also described in the SubjectConfiguration section, you can set properties of the subject on tracker initailization.
-
-It is also possible to set or change the subject properties at runtime, using the `set..` methods of the React Native Tracker. The available methods are:
-
-1. `setUserId`
-
-With this method you can set the userId to a new string. To unset the userId, pass a null value as an argument.
-
-```typescript
-tracker.setUserId('newUser');
-```
-
-2. `setNetworkUserId`
-
-With this method you can set the `network_userid` to a new string(UUIDv4). To unset, pass a null value as an argument.
-
-```typescript
-tracker.setNetworkUserId('44df44bc-8844-4067-9a89-f83c4fe1e62f');
-```
-
-3. `setDomainUserId`
-
-With this method you can set the `domain_userid` to a new string(UUIDv4). To unset, pass a null value as an argument.
-
-```typescript
-tracker.setDomainUserId('0526be47-32cb-44b2-a9e6-fefeaa5ec6fa');
-```
-
-4. `setIpAddress`
-
-With this method you can set the `user_ipaddress` to a new string. To unset, pass a null value as an argument.
-
-```typescript
-tracker.setIpAddress('123.45.67.89');
-```
-
-5. `setUseragent`
-
-With this method you can set the `useragent` to a new string. To unset, pass a null value as an argument.
-
-```typescript
-tracker.setUseragent('some-useragent-string');
-```
-
-6. `setTimezone`
-
-With this method you can set the `os_timezone` to a new string. To unset, pass a null value as an argument.
-
-```typescript
-tracker.setTimezone('Africa/Cairo');
-```
-
-7. `setLanguage`
-
-With this method you can set the `br_lang` to a new string. To unset, pass a null value as an argument.
-
-```typescript
-tracker.setLanguage('fr');
-```
-
-8. `setScreenResolution`
-
-With this method you can set the `dvce_screenwidth` and `dvce_screenheight` fields to new integer values. The argument to this method is an array that represents the ScreenSize as `[width, height]`. For example:
-
-```typescript
-tracker.setScreenResolution([123, 456]);
-```
-
-9. `setScreenViewport`
-
-With this method you can set the `br_viewwidth` and `br_viewheight` fields to new integer values. The argument to this method is an array that represents the ScreenSize as `[width, height]`. For example:
-
-```typescript
-tracker.setScreenViewport([123, 456]);
-```
-
-10. `setColorDepth`
-
-With this method you can set the `br_colordepth` to a new value. For example:
-
-```typescript
-tracker.setColorDepth(20);
-```
-
-Finally, there is an extra "wrapper" method to set may subject properties at once:
-
-- `setSubjectData`
-
-This method accepts as an argument a SubjectConfiguration, with the new values as needed. For example:
-
-```typescript
-tracker.setSubjectData({
-    userId: 'tester',
-    domainUserId: '5d79770b-015b-4af8-8c91-b2ed6faf4b1e',
-    language: 'es',
-    colorDepth: 50,
-    screenResolution: [300, 300],
-});
-```
-
-## Global Contexts
-
-As mentioned in the GCConfiguration section, you can set global contexts when initializing the tracker.
-
-However, as the user journey evolves, you may need to remove or add global contexts at runtime.
-
-### Removing Global Contexts
-
-A set of global contexts is identified by its tag, which was set when the global contexts was added, either as part of tracker initial configuration or manually (see below).
-
-To remove the global contexts associated with a tag, you can use the `removeGlobalContexts` tracker method, which takes as argument the tag. For example:
-
-```typescript
-tracker.removeGlobalContexts('my-old-tag');
-```
-
-### Adding Global Contexts
-
-Similarly, you can add global contexts at runtime using the `addGlobalContexts` tracker method. This method takes as argument the GlobalContext to add.
-
-For example:
-
-```typescript
-tracker.addGlobalContexts({
-    tag: 'my-new-tag',
-    globalContexts: [
-        {
-            schema: 'iglu:com.snowplowanalytics.snowplow/ad_impression/jsonschema/1-0-0',
-            data: {impressionId: 'my-ad-impression-id'},
-        },
-    ]
-});
 ```

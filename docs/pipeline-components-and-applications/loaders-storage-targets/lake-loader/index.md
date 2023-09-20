@@ -64,7 +64,7 @@ See the [configuration reference](/docs/pipeline-components-and-applications/loa
 "Windowing" is an important config setting, which controls how often the lake loader commits a batch of events to the data lake. If you adjust this config setting, you should be aware that data lake queries are most efficient when the size of the parquet files in the lake are relatively large.
 
 - If you set this to a **low** value, the loader will write events to the lake more frequently, reducing latency. However, the output parquet files will be smaller, which will make querying the data less efficient.
-- If you set this to a **high** value, then you generate bigger output parquet files which are efficient for queries, but it adds a delay to events entering your lake.
+- Conversely, if you set this to a **high** value, the loader will generate bigger output parquet files, which are efficient for queries — at the cost of events arriving to the lake with more delay.
 
 The default setting is `5 minutes`.  Above a certain event volume,  this default setting strikes a nice balance between the need for large output parquet files and the need for reasonably low latency data.
 

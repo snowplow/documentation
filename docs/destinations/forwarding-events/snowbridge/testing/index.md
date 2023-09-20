@@ -61,12 +61,11 @@ The output (in `output.txt`) will contain more than the data itself. There will 
 
 ### Adding configuration
 
-To add a specific configuration to test, create a configuration file (`config.hcl`) and pass it to the Docker container. You will need to [mount the file](https://docs.docker.com/storage/bind-mounts/) and set the `SNOWBRIDGE_CONFIG_FILE` environment variable to the path _inside_ the container:
+To add a specific configuration to test, create a configuration file (`config.hcl`) and pass it to the Docker container. You will need to [mount the file](https://docs.docker.com/storage/bind-mounts/) to the default config path of `/tmp/config.hcl`:
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i \\
     --mount type=bind,source=$(pwd)/config.hcl,target=/tmp/config.hcl \\
-    --env SNOWBRIDGE_CONFIG_FILE=/tmp/config.hcl \\
     snowplow/snowbridge:${versions.snowbridge} > output.txt`
 }</CodeBlock>
 
@@ -84,7 +83,6 @@ You can add custom scripts by mounting a file, similarly to the above. Assuming 
 `cat data.tsv | docker run -i \\
     --mount type=bind,source=$(pwd)/config.hcl,target=/tmp/config.hcl \\
     --mount type=bind,source=$(pwd)/script.js,target=/tmp/script.js \\
-    --env SNOWBRIDGE_CONFIG_FILE=/tmp/config.hcl \\
     snowplow/snowbridge:${versions.snowbridge} > output.txt`
 }</CodeBlock>
 

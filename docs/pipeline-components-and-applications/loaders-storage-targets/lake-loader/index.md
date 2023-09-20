@@ -66,7 +66,7 @@ See the [configuration reference](/docs/pipeline-components-and-applications/loa
 - If you set this to a **low** value, the loader will write events to the lake more frequently, reducing latency. However, the output parquet files will be smaller, which will make querying the data less efficient.
 - Conversely, if you set this to a **high** value, the loader will generate bigger output parquet files, which are efficient for queries — at the cost of events arriving to the lake with more delay.
 
-The default setting is `5 minutes`.  Above a certain event volume,  this default setting strikes a nice balance between the need for large output parquet files and the need for reasonably low latency data.
+The default setting is `5 minutes`.  For moderate to high volumes, this value strikes a nice balance between the need for large output parquet files and the need for reasonably low latency data.
 
 ```
 {

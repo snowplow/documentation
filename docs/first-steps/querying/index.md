@@ -110,7 +110,7 @@ See the [Databricks tutorial](https://docs.databricks.com/getting-started/quick-
 </TabItem>
   <TabItem value="synapse" label="Synapse Analytics 🧪">
 
-In Synapse Analytics, you can connect directly to the data residing in ADLS. You will need to know the names of the storage account (set in the `storage_account_name` Terraform variable) and the storage container (it’s a fixed value: `lake-loader-container`).
+In Synapse Analytics, you can connect directly to the data residing in ADLS. You will need to know the names of the storage account (set in the `storage_account_name` Terraform variable) and the storage container (it’s a fixed value: `lake-container`).
 
 Follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function. If you created a data source in the [last step](/docs/getting-started-on-snowplow-open-source/quick-start/index.md#configure-the-destination) of the quick start guide, your queries will be a bit simpler.
 

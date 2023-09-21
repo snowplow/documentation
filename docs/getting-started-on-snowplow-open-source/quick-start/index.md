@@ -661,13 +661,13 @@ First, follow the [Databricks documentation](https://docs.databricks.com/en/stor
 
 You will need to know a couple of things:
 * Storage account name — this is the value of the `storage_account_name` variable in the pipeline `terraform.tvars` file
-* Storage container name — `lake-loader-container`
+* Storage container name — `lake-container`
 
 Once authentication is set up, you can create an external table using Spark SQL (replace `<storage-account-name>` with the corredponding value):
 
 ```sql
 CREATE TABLE events
-LOCATION 'abfss://lake-loader-container@<storage-account-name>.dfs.core.windows.net/events/';
+LOCATION 'abfss://lake-container@<storage-account-name>.dfs.core.windows.net/events/';
 ```
 
 :::
@@ -679,7 +679,7 @@ Your data is loaded into ADLS. To access it, follow [the Synapse documentation](
 
 You will need to know a couple of things:
 * Storage account name — this is the value of the `storage_account_name` variable in the pipeline `terraform.tvars` file
-* Storage container name — `lake-loader-container`
+* Storage container name — `lake-container`
 
 <details>
 <summary>Example query</summary>
@@ -687,7 +687,7 @@ You will need to know a couple of things:
 ```sql
 SELECT TOP 10 *
 FROM OPENROWSET(
-    BULK 'https://<storage-account-name>.blob.core.windows.net/lake-loader-container/events/',
+    BULK 'https://<storage-account-name>.blob.core.windows.net/lake-container/events/',
     FORMAT = 'delta'
 ) AS events;
 ```
@@ -698,7 +698,7 @@ We recommend [creating a data source](https://learn.microsoft.com/en-us/azure/sy
 
 ```sql
 CREATE EXTERNAL DATA SOURCE SnowplowData
-WITH (LOCATION = 'https://<storage-account-name>.blob.core.windows.net/lake-loader-container/');
+WITH (LOCATION = 'https://<storage-account-name>.blob.core.windows.net/lake-container/');
 ```
 
 <details>
@@ -720,7 +720,7 @@ FROM OPENROWSET(
 You can also consume your ADLS data via Fabric and OneLake:
 
 * First, [create a Lakehouse](https://learn.microsoft.com/en-us/fabric/onelake/create-lakehouse-onelake#create-a-lakehouse) or use an existing one.
-* Next, [create a OneLake shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-adls-shortcut) to your storage account. In the URL field, specify `https://<storage-account-name>.blob.core.windows.net/lake-loader-container/events/`.
+* Next, [create a OneLake shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-adls-shortcut) to your storage account. In the URL field, specify `https://<storage-account-name>.blob.core.windows.net/lake-container/events/`.
 * You can now [use Spark notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore) to explore your Snowplow data.
 
 Do note that currently not all Fabric services support nested fields present in the Snowplow data.

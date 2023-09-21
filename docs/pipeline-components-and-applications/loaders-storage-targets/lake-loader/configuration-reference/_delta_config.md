@@ -1,6 +1,6 @@
 <tr>
     <td><code>output.good.location</code></td>
-    <td>Required, e.g. <code>gs://mybucket/events</code>.  URI of the bucket location to which to write Snowplow enriched events in Delta format. For GCP use a <code>gs://</code> URI and for Azure use a <code>abfs://</code> URI.</td>
+    <td>Required, e.g. <code>gs://mybucket/events</code>.  URI of the bucket location to which to write Snowplow enriched events in Delta format. For GCP use a <code>gs://</code> URI and for Azure use an <code>abfs://</code> URI.</td>
 </tr>
 <tr>
     <td><code>output.good.dataSkippingColumns</code></td>

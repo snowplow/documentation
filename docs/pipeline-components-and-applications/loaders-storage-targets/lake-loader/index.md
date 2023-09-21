@@ -16,7 +16,7 @@ The Lake Loader is an application that loads Snowplow events to a cloud storage 
 
 :::info Open Table Formats
 
-Currently the lake loader supports [Delta format](https://delta.io/) only. Future releases will add support for [Iceberg](https://iceberg.apache.org/) and [Hudi](https://hudi.apache.org/) formats.
+Currently the Lake Loader supports [Delta format](https://delta.io/) only. Future releases will add support for [Iceberg](https://iceberg.apache.org/) and [Hudi](https://hudi.apache.org/) formats.
 
 :::
 
@@ -31,7 +31,7 @@ Currently the lake loader supports [Delta format](https://delta.io/) only. Futur
   </TabItem>
 </Tabs>
 
-## Configure the loader
+## Configuring the loader
 
 The loader config file is in HOCON format, and it allows configuring many different properties of how the loader runs.
 
@@ -40,12 +40,9 @@ The simplest possible config file just needs a description of your pipeline inpu
 <Tabs groupId="cloud" queryString>
   <TabItem value="gcp" label="GCP" default>
 
-<!-- TODO: this file should get renamed to config.gcp.minimal.hocon -->
-
 ```json reference
-https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.pubsub.minimal.hocon
+https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.gcp.minimal.hocon
 ```
-
 
   </TabItem>
   <TabItem value="aws" label="Azure">
@@ -61,7 +58,7 @@ See the [configuration reference](/docs/pipeline-components-and-applications/loa
 
 ### Windowing
 
-"Windowing" is an important config setting, which controls how often the lake loader commits a batch of events to the data lake. If you adjust this config setting, you should be aware that data lake queries are most efficient when the size of the parquet files in the lake are relatively large.
+"Windowing" is an important config setting, which controls how often the Lake Loader commits a batch of events to the data lake. If you adjust this config setting, you should be aware that data lake queries are most efficient when the size of the parquet files in the lake are relatively large.
 
 - If you set this to a **low** value, the loader will write events to the lake more frequently, reducing latency. However, the output parquet files will be smaller, which will make querying the data less efficient.
 - Conversely, if you set this to a **high** value, the loader will generate bigger output parquet files, which are efficient for queries — at the cost of events arriving to the lake with more delay.
@@ -78,7 +75,7 @@ If you tune this setting correctly, then your lake can support efficient analyti
 
 ### Iglu
 
-The lake loader requires an [Iglu resolver file](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) which describes the Iglu repositories that host your schemas.  This should be the same Iglu configuration file that you used in the Enrichment process.
+The Lake Loader requires an [Iglu resolver file](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) which describes the Iglu repositories that host your schemas.  This should be the same Iglu configuration file that you used in the Enrichment process.
 
 
 ```mdx-code-block

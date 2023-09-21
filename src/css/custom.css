@@ -466,6 +466,13 @@ img.shield {
   transition: 0.4s cubic-bezier(0.38, 0.14, 0.58, 1) all;
 }
 
+.tabs__item {
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 abbr[data-title] {
   position: relative;
   cursor: help;

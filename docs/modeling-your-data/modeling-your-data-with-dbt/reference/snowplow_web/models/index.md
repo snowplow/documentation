@@ -325,28 +325,28 @@ You may obtain a copy of the Snowplow Community License Version 1.0 at https://d
 {# dbt passed variables by reference so need to use copy to avoid altering the list multiple times #}
 {% set contexts = var('snowplow__entities_or_sdes', []).copy() %}
 
-{% do contexts.append({'name': var('snowplow__page_view_context'), 'prefix': 'page_view', 'single_entity': True}) %}
+{% do contexts.append({'schema': var('snowplow__page_view_context'), 'prefix': 'page_view', 'single_entity': True}) %}
 
 {% if var('snowplow__enable_iab', false) -%}
-  {% do contexts.append({'name': var('snowplow__iab_context'), 'prefix': 'iab', 'single_entity': True}) %}
+  {% do contexts.append({'schema': var('snowplow__iab_context'), 'prefix': 'iab', 'single_entity': True}) %}
 {% endif -%}
 
 {% if var('snowplow__enable_ua', false) -%}
-  {% do contexts.append({'name': var('snowplow__ua_parser_context'), 'prefix': 'ua', 'single_entity': True}) %}
+  {% do contexts.append({'schema': var('snowplow__ua_parser_context'), 'prefix': 'ua', 'single_entity': True}) %}
 {% endif -%}
 
 {% if var('snowplow__enable_yauaa', false) -%}
-  {% do contexts.append({'name': var('snowplow__yauaa_context'), 'prefix': 'yauaa', 'single_entity': True}) %}
+  {% do contexts.append({'schema': var('snowplow__yauaa_context'), 'prefix': 'yauaa', 'single_entity': True}) %}
 {% endif -%}
 
 
 {% if var('snowplow__enable_consent', false) -%}
-  {% do contexts.append({'name': var('snowplow__consent_cmp_visible'), 'prefix': 'cmp_visible', 'single_entity': True}) %}
-  {% do contexts.append({'name': var('snowplow__consent_preferences'), 'prefix': 'consent_pref', 'single_entity': True}) %}
+  {% do contexts.append({'schema': var('snowplow__consent_cmp_visible'), 'prefix': 'cmp_visible', 'single_entity': True}) %}
+  {% do contexts.append({'schema': var('snowplow__consent_preferences'), 'prefix': 'consent_pref', 'single_entity': True}) %}
 {% endif -%}
 
 {% if var('snowplow__enable_cwv', false) -%}
-  {% do contexts.append({'name': var('snowplow__cwv_context'), 'prefix': 'cwv', 'single_entity': True}) %}
+  {% do contexts.append({'schema': var('snowplow__cwv_context'), 'prefix': 'cwv', 'single_entity': True}) %}
 {% endif -%}
 
 {% set base_events_query = snowplow_utils.base_create_snowplow_events_this_run(
@@ -459,9 +459,6 @@ from base_query a
 - [macro.snowplow_utils.return_limits_from_model](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_limits_from_model)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
-- [macro.snowplow_web.get_iab_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_iab_context_fields)
-- [macro.snowplow_web.get_ua_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_ua_context_fields)
-- [macro.snowplow_web.get_yauaa_context_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.get_yauaa_context_fields)
 
 </TabItem>
 </Tabs>
@@ -471,7 +468,6 @@ from base_query a
 <Tabs groupId="reference">
 <TabItem value="model" label="Models">
 
-- [model.snowplow_media_player.snowplow_media_player_interactions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_interactions_this_run)
 - [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
 - [model.snowplow_web.snowplow_web_page_views_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_page_views_this_run)
 - [model.snowplow_web.snowplow_web_pv_engaged_time](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_pv_engaged_time)
@@ -579,7 +575,6 @@ You may obtain a copy of the Snowplow Community License Version 1.0 at https://d
 <Tabs groupId="reference">
 <TabItem value="model" label="Models">
 
-- [model.snowplow_media_player.snowplow_media_player_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base)
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 - [model.snowplow_web.snowplow_web_base_sessions_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_this_run)
 - [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
@@ -2348,7 +2343,6 @@ You may obtain a copy of the Snowplow Community License Version 1.0 at https://d
 <Tabs groupId="reference">
 <TabItem value="model" label="Models">
 
-- [model.snowplow_media_player.snowplow_media_player_base](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/models/index.md#model.snowplow_media_player.snowplow_media_player_base)
 - [model.snowplow_web.snowplow_web_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_new_event_limits)
 - [model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_base_sessions_lifecycle_manifest)
 - [model.snowplow_web.snowplow_web_consent_events_this_run](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/models/index.md#model.snowplow_web.snowplow_web_consent_events_this_run)
@@ -9022,7 +9016,6 @@ from prep p
 - macro.dbt.type_string
 - [macro.snowplow_utils.get_field](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_field)
 - [macro.snowplow_utils.get_optional_fields](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_optional_fields)
-- [macro.snowplow_utils.get_sde_or_context](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.get_sde_or_context)
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
 - [macro.snowplow_web.filter_bots](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_web/macros/index.md#macro.snowplow_web.filter_bots)

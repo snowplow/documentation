@@ -1,6 +1,6 @@
 <tr>
     <td><code>input.subscription</code></td>
-    <td>Required, e.g. <code>projects/myproject/subscriptions/snowplow-enriched</code>. Name of the Pubsub subscription with the enriched events</td>
+    <td>Required, e.g. <code>projects/myproject/subscriptions/snowplow-enriched</code>. Name of the Pub/Sub subscription with the enriched events</td>
 </tr>
 <tr>
     <td><code>input.parallelPullCount</code></td>
@@ -24,13 +24,13 @@
 </tr>
 <tr>
     <td><code>output.bad.topic</code></td>
-    <td>Required, e.g. <code>projects/myproject/topics/snowplow-bad</code>. Name of the PubSub topic that will receive failed events.</td>
+    <td>Required, e.g. <code>projects/myproject/topics/snowplow-bad</code>. Name of the Pub/Sub topic that will receive failed events.</td>
 </tr>
 <tr>
     <td><code>output.bad.batchSize</code></td>
-    <td>Optional.  Default value 100.  Bad events are sent to Pubsub in batches not exceeding this count.</td>
+    <td>Optional.  Default value 100.  Bad events are sent to Pub/Sub in batches not exceeding this count.</td>
 </tr>
 <tr>
     <td><code>output.bad.requestByteThreshold</code></td>
-    <td>Optional.  Default value 1000000.  Bad events are sent to Pubsub in batches with a total size not exceeding this byte threshold</td>
+    <td>Optional.  Default value 1000000.  Bad events are sent to Pub/Sub in batches with a total size not exceeding this byte threshold</td>
 </tr>

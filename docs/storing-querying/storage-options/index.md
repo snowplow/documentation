@@ -48,8 +48,8 @@ The cloud selection is for where your Snowplow pipeline runs. The warehouse itse
 | Destination | Type | Loader application | Status |
 | --- | --- | --- | --- |
 | Snowflake | Micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Early release |
-| Databricks | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | LAKELOADERLINK | Early release |
-| Synapse Analytics | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | LAKELOADERLINK | Early release |
+| Databricks | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
+| Synapse Analytics | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
 
   </TabItem>
 </Tabs>
@@ -70,7 +70,7 @@ All lake loaders are micro-batching.
 
 | Lake | Format | Compatibility | Loader application | Status |
 | --- | --- | --- | --- | --- |
-| GCS | Delta | Databricks | LAKELOADERLINK | Early release |
+| GCS | Delta | Databricks | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
 | GCS | JSON | BigQuery | [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | Only recommended for [failed events](/docs/understanding-your-pipeline/failed-events/index.md) |
 
   </TabItem>
@@ -80,7 +80,7 @@ All lake loaders are micro-batching.
 
 | Lake | Format | Compatibility | Loader application | Status |
 | --- | --- | --- | --- | --- |
-| ADLS Gen2 | Delta | Synapse Analytics, Fabric, Databricks | LAKELOADERLINK | Early release |
+| ADLS Gen2 | Delta | Synapse Analytics, Fabric, Databricks | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
 
   </TabItem>
 </Tabs>

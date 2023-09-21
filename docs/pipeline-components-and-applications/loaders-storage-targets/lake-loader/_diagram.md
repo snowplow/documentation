@@ -2,7 +2,7 @@
 import Mermaid from '@theme/Mermaid';
 ```
 
-<p>The lake loader on {props.cloud} is a fully streaming application that continually pulls events from {props.stream} and writes to {props.bucket}.</p>
+<p>The Lake Loader on {props.cloud} is a fully streaming application that continually pulls events from {props.stream} and writes to {props.bucket}.</p>
 
 <Mermaid value={`
 flowchart LR
@@ -12,5 +12,11 @@ flowchart LR
     table[("<b>Events table</b>")]
   end
   stream-->loader-->bucket
+  ${props.warehouse ? `
+    subgraph warehouse ["${props.warehouse}"]
+      external[("<b>External table<br/>or data source<b>")]
+    end
+    bucket-.->warehouse
+  ` : ''}
 `}/>
 

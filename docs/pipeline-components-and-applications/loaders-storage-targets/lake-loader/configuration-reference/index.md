@@ -35,7 +35,7 @@ import CommonConfig from '@site/docs/pipeline-components-and-applications/loader
 
 :::note Coming soon
 
-Currently the lake loader supports [Delta format](https://delta.io/) only. Future releases will add support for [Iceberg](https://iceberg.apache.org/) format.
+Currently the Lake Loader supports [Delta format](https://delta.io/) only. Future releases will add support for [Iceberg](https://iceberg.apache.org/) format.
 
 :::
 

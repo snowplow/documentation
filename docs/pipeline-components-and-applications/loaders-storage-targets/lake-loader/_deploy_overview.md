@@ -3,7 +3,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-<p>The lake loader is published as a Docker image which you can run on any {props.cloud} VM.  You do not need a Spark cluster to run this loader.</p>
+<p>The Lake Loader is published as a Docker image which you can run on any {props.cloud} VM.  You do not need a Spark cluster to run this loader.</p>
 
 <CodeBlock language="bash">{
 `docker pull snowplow/lake-loader-${props.cloud.toLowerCase()}:${versions.lakeLoader}

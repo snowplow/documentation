@@ -40,12 +40,9 @@ The simplest possible config file just needs a description of your pipeline inpu
 <Tabs groupId="cloud" queryString>
   <TabItem value="gcp" label="GCP" default>
 
-<!-- TODO: this file should get renamed to config.gcp.minimal.hocon -->
-
 ```json reference
-https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.pubsub.minimal.hocon
+https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.gcp.minimal.hocon
 ```
-
 
   </TabItem>
   <TabItem value="aws" label="Azure">

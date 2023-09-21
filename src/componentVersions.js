@@ -36,7 +36,7 @@ export const versions = {
   rdbLoader: '5.7.3',
   s3Loader: '2.2.7',
   s3Loader22x: '2.2.7',
-  lakeLoader: '0.1.2',
+  lakeLoader: '0.1.3',
 
   // Data Modelling
   // dbt

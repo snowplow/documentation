@@ -30,7 +30,7 @@ We load data into BigQuery using the [BigQuery Loader](/docs/pipeline-components
 <BigQueryLoaderDiagram/>
 
   </TabItem>
-  <TabItem value="databricks" label="Databricks (direct)">
+  <TabItem value="databricks" label="Databricks">
 
 We load data into Databricks using the [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md).
 

@@ -20,7 +20,7 @@ Currently the Lake Loader supports [Delta format](https://delta.io/) only. Futur
 
 :::
 
-<Tabs groupId="cloud" queryString>
+<Tabs groupId="cloud" queryString lazy>
   <TabItem value="gcp" label="GCP" default>
     <LakeLoaderDiagram stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
     <DeployOverview cloud="GCP"/>

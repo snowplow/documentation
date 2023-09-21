@@ -88,7 +88,7 @@ input.consumerConf: {
   </TabItem>
 </Tabs>
 
-## Other processing config options
+## Other configuration options
 
 <table>
     <thead>

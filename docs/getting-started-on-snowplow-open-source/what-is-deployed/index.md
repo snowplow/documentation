@@ -312,18 +312,18 @@ See the following Terraform modules for further details on the resources, defaul
   </TabItem>
   <TabItem value="databricks-lake" label="Databricks (via lake)">
 
-LAKELOADERLINK is an application that loads enriched events into a data lake so that they can be queried via Databricks (or other means).
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is an application that loads enriched events into a data lake so that they can be queried via Databricks (or other means).
 
-See the Lake Loader LAKELOADERLINK for further details on the resources, default and required input variables, and outputs.
+See the Lake Loader [Terraform module](https://registry.terraform.io/modules/snowplow-devops/lake-loader-vmss/azurerm/latest) for further details on the resources, default and required input variables, and outputs.
 
 The Terraform stack for the pipeline will deploy a storage account and a storage container where the loader will write the data.
 
   </TabItem>
   <TabItem value="synapse" label="Synapse Analytics 🧪">
 
-LAKELOADERLINK is an application that loads enriched events into a data lake so that they can be queried via Synapse Analytics (or Fabric, OneLake, etc).
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is an application that loads enriched events into a data lake so that they can be queried via Synapse Analytics (or Fabric, OneLake, etc).
 
-See the Lake Loader LAKELOADERLINK for further details on the resources, default and required input variables, and outputs.
+See the Lake Loader [Terraform module](https://registry.terraform.io/modules/snowplow-devops/lake-loader-vmss/azurerm/latest) for further details on the resources, default and required input variables, and outputs.
 
 The Terraform stack for the pipeline will deploy a storage account and a storage container where the loader will write the data.
 

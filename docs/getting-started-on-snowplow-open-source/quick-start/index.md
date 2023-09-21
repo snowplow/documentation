@@ -419,26 +419,9 @@ CREATE SCHEMA IF NOT EXISTS ${schema_name}
 <details>
 <summary>Advanced security configuration (optional)</summary>
 
-The security principal used by the loader needs a `Databricks SQL access` permission, which can be enabled in the _Admin Console_.
+When you first run the quick start, the Databricks loader requires certain privileges so it is able to create the tables.  But after the setup is complete, you may choose to revoke some of those privileges from the Databricks user.
 
-Databricks does not have table access enabled by default. Enable it with an
-initialization script:
-
-```scala
-dbutils.fs.put("dbfs:/databricks/init/set_spark_params.sh","""
-|#!/bin/bash
-|
-|cat << 'EOF' > /databricks/driver/conf/00-custom-table-access.conf
-|[driver] {
-|  "spark.databricks.acl.sqlOnly" = "true"
-|}
-|EOF
-""".stripMargin, true)
-```
-
-After adding the script, you need to restart the cluster. Verify that changes took effect by evaluating `spark.conf.get("spark.databricks.acl.sqlOnly")`, which should return `true`.
-
-Follow the rest of the quick start guide so that the loader creates the required tables. Afterwards, reconfigure the permissions:
+Here is a script you can run in Databricks to reset the user to have the minimal privileges needed to load events into the tables:
 
 ```sql
 -- Clean initial permissions from tables

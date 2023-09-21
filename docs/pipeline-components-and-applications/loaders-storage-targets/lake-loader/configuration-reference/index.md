@@ -17,7 +17,7 @@ import CommonConfig from '@site/docs/pipeline-components-and-applications/loader
 
 ### Table configuration
 
-<Tabs groupId="format" queryString>
+<Tabs groupId="lake-format" queryString>
   <TabItem value="delta" label="Delta Lake" default>
     <table>
         <thead>

@@ -1022,7 +1022,8 @@ Nothing, sql is executed which creates the UDFs in the target database and schem
 <h4>Usage</h4>
 
 
-```yml title="dbt_project.yml"
+```yml
+-- dbt_project.yml
 ...
 on-run-start: "{{ create_udfs() }}"
 ...
@@ -2373,3 +2374,4 @@ from
 </TabItem>
 </Tabs>
 </DbtDetails>
+

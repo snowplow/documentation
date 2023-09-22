@@ -24,15 +24,17 @@ To find out more about the support services offered to Snowplow BDP customers se
 | • Redshift | ✅ | ✅| ✅ |
 | • BigQuery | ✅ | ❌ | ✅ |
 | • Databricks | ✅ | ✅ | ✅ |
+| • Synapse Analytics 🧪 | ✅ | ❌ | _coming soon_ |
 | • Elasticsearch | ✅ | ❌ | ✅ |
 | • Postgres | ✅<br/>_(not suitable for high volumes)_ | ❌ | ❌ |
 | • S3 | ✅ | ❌ | ✅ |
 | • GCS | ✅ | ❌ | ✅ |
+| • ADLS 🧪 | ✅ | ❌ | _coming soon_ |
 | **Real-time streams** | | | |
 | • Kinesis | ✅ | ❌ | ✅ |
 | • Pubsub | ✅ | ❌ | ✅ |
-| • Kafka | do-it-yourself | ❌ | bolt-on |
-| • Azure Eventhubs | do-it-yourself | ❌ | bolt-on |
+| • Azure Event Hubs | ✅ | ❌ | ✅<br/>_(bolt-on)_ |
+| • Kafka | ✅ | ❌ | ✅<br/>_(bolt-on)_ |
 | <h3>Build more trust in your data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
 | [Failed Events](/docs/understanding-your-pipeline/failed-events/index.md) | ✅ | ❌ | ✅ |
 | [Data quality monitoring & API](/docs/managing-data-quality/monitoring-failed-events/index.md) | ❌ | ❌ | ✅ |
@@ -50,11 +52,14 @@ To find out more about the support services offered to Snowplow BDP customers se
 | [Tracking scenarios](/docs/understanding-tracking-design/tracking-plans/index.md) | ❌ | ✅<br/>_(UI only)_ | ✅ |
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md) | ❌ | _coming soon_ | ✅ |
 | [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ❌ | ❌ | ✅ |
-| <h3>Deployment & security</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) | 
-| Deployment method | self-hosted<br/>(AWS, GCP, Azure 🧪) | Snowplow-hosted cloud | private cloud<br/>(AWS, GCP) |
+| <h3>Deployment & security</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
+| Deployment method | self-hosted | Snowplow-hosted cloud | private cloud |
+| • AWS | ✅ | — | ✅ |
+| • GCP | ✅ | — | ✅ |
+| • Azure 🧪 | ✅ | — | _coming soon_ |
 | Single Sign-On | ❌ | ❌ | ✅ |
 | Fine grained user permissions (ACLs) | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| Custom VPC integration | ❌ | ❌ | bolt-on |
+| Custom VPC integration | ❌ | ❌ | ✅<br/>_(bolt-on)_ |
 | AWS Infra security bundle | ❌ | ❌ | ✅<br/>_(top tier only)_ |
 | <h3>Services</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
 | Self-help support website, FAQs and educational materials | ✅ | ✅ | ✅ |

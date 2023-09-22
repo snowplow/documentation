@@ -78,7 +78,17 @@ You can very easily edit the script or run each of the Terraform modules indepen
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="snowflake" label="Snowflake" default>
 
-<Diagram cloud="azure" warehouse="Snowflake" compute="VMSS" stream="Event Hubs" bucket="Azure Blob" igludb="Postgres"/>
+<Diagram cloud="azure" warehouse="Snowflake" compute="VMSS" stream="Event Hubs" bucket="ADLS Gen2" igludb="Postgres"/>
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks" default>
+
+<Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Event Hubs" bucket="ADLS Gen2" igludb="Postgres"/>
+
+  </TabItem>
+  <TabItem value="synapse" label="Synapse Analytics 🧪" default>
+
+<Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Event Hubs" bucket="ADLS Gen2" igludb="Postgres"/>
 
   </TabItem>
 </Tabs>
@@ -290,7 +300,7 @@ See the following Terraform modules for further details on the resources, defaul
 
 
   </TabItem>
-  <TabItem value="databricks" label="Databricks">
+  <TabItem value="databricks" label="Databricks (direct)">
 
 [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Databricks.
 
@@ -298,6 +308,24 @@ See the following Terraform modules for further details on the resources, defaul
 * [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
 * [Databricks Loader](https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest)
 
+
+  </TabItem>
+  <TabItem value="databricks-lake" label="Databricks (via lake)">
+
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is an application that loads enriched events into a data lake so that they can be queried via Databricks (or other means).
+
+See the Lake Loader [Terraform module](https://registry.terraform.io/modules/snowplow-devops/lake-loader-vmss/azurerm/latest) for further details on the resources, default and required input variables, and outputs.
+
+The Terraform stack for the pipeline will deploy a storage account and a storage container where the loader will write the data.
+
+  </TabItem>
+  <TabItem value="synapse" label="Synapse Analytics 🧪">
+
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is an application that loads enriched events into a data lake so that they can be queried via Synapse Analytics (or Fabric, OneLake, etc).
+
+See the Lake Loader [Terraform module](https://registry.terraform.io/modules/snowplow-devops/lake-loader-vmss/azurerm/latest) for further details on the resources, default and required input variables, and outputs.
+
+The Terraform stack for the pipeline will deploy a storage account and a storage container where the loader will write the data.
 
   </TabItem>
 </Tabs>

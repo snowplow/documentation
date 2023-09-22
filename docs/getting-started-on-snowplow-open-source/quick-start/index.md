@@ -93,10 +93,10 @@ The sections below will guide you through setting up your destination to receive
 |:----------|:---:|:---:|:-----:|
 | Postgres | :white_check_mark: | :white_check_mark: | :x: |
 | Snowflake | :white_check_mark: | :x: |:white_check_mark: |
-| Databricks | :white_check_mark: | :x: | _coming soon_ |
+| Databricks | :white_check_mark: | :x: | :white_check_mark: |
 | Redshift | :white_check_mark: | — | — |
 | BigQuery | — | :white_check_mark: | — |
-| Synapse | — | — | _coming soon_ |
+| Synapse Analytics 🧪 | — | — | :white_check_mark: |
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
@@ -113,7 +113,9 @@ There are two alternative storage options for you to select: Postgres and BigQue
   </TabItem>
   <TabItem value="azure" label="Azure 🧪">
 
-There is currently only one option: Snowflake.
+There are two storage options for you to select: Snowflake and data lake (ADLS). The latter option enables querying data from Databricks and Synapse Analytics.
+
+We recommend to only load data into a single destination (Snowflake or data lake), but nothing prevents you from loading into both with the same pipeline (e.g. for testing purposes).
 
   </TabItem>
 </Tabs>
@@ -346,6 +348,12 @@ GRANT ROLE ${snowflake_loader_role} TO ROLE SYSADMIN;
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
+:::info Azure-specific instructions
+
+On Azure, we currently support loading data into Databricks via a data lake. You can still follow Step 1 below to create the cluster, however you should skip the rest of these steps. Instead, proceed with [deploying the pipeline](#set-up-the-pipeline) — we will return to configuring Databricks [at the end of this guide](#configure-the-destination).
+
+:::
+
 #### Step 1: Create a cluster
 
 :::note
@@ -413,7 +421,7 @@ CREATE SCHEMA IF NOT EXISTS ${schema_name}
 
 The security principal used by the loader needs a `Databricks SQL access` permission, which can be enabled in the _Admin Console_.
 
-Databricks does not have table access enabled by default. Enable it with an 
+Databricks does not have table access enabled by default. Enable it with an
 initialization script:
 
 ```scala
@@ -454,6 +462,11 @@ GRANT MODIFY, SELECT ON TABLE  <catalog>.<schema>.rdb_folder_monitoring TO `<pri
 ```
 
 </details>
+
+  </TabItem>
+  <TabItem value="synapse" label="Synapse Analytics 🧪">
+
+No extra steps needed. Proceed with [deploying the pipeline](#set-up-the-pipeline) — we will return to configuring Synapse [at the end of this guide](#configure-the-destination).
 
   </TabItem>
 </Tabs>
@@ -546,13 +559,13 @@ Set the `postgres_db_authorized_networks` to a list of CIDR addresses that will 
   </TabItem>
   <TabItem value="azure" label="Azure 🧪">
 
-As mentioned [above](#storage-options), there is currently only one option for the pipeline’s destination database: Snowflake. Set `snowflake_enabled` to `true` and fill all the relevant configuration options (starting with `<snowflake>_`).
+As mentioned [above](#storage-options), there are two options for the pipeline’s destination: Snowflake and data lake (the latter enabling Databricks and Synapse Analytics). For each destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `snowflake_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
 
 When in doubt, refer back to the [destination setup](#prepare-the-destination) section where you have picked values for many of the variables.
 
 :::caution
 
-Change the `snowflake_loader_password` setting to a value that _only you_ know.
+If loading into Snowflake, change the `snowflake_loader_password` setting to a value that _only you_ know.
 
 :::
 
@@ -599,7 +612,7 @@ This will output your `collector_lb_ip_address` and `collector_lb_fqdn`.
   </TabItem>
 </Tabs>
 
-Make a note of the outputs: you'll need them when sending events and connecting to your database.
+Make a note of the outputs: you'll need them when sending events and (in some cases) connecting to your data.
 
 :::tip Empty outputs
 
@@ -614,5 +627,109 @@ If you have attached a custom SSL certificate and set up your own DNS records, t
 For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/getting-started-on-snowplow-open-source/faq/index.md#troubleshooting-terraform-errors).
 
 :::
+
+## Configure the destination
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="postgres" label="Postgres" default>
+
+No extra steps needed.
+
+  </TabItem>
+  <TabItem value="redshift" label="Redshift">
+
+No extra steps needed.
+
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
+
+No extra steps needed.
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+No extra steps needed.
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+:::info Azure-specific instructions
+
+On Azure, we currently support loading data into Databricks via a data lake. To complete the setup, you will need to configure Databricks to access your data on ADLS.
+
+First, follow the [Databricks documentation](https://docs.databricks.com/en/storage/azure-storage.html) to set up authentication using either Azure service principal, shared access signature tokens or account keys. _(The latter mechanism is not recommended, but is arguably the easiest for testing purposes.)_
+
+You will need to know a couple of things:
+* Storage account name — this is the value of the `storage_account_name` variable in the pipeline `terraform.tvars` file
+* Storage container name — `lake-container`
+
+Once authentication is set up, you can create an external table using Spark SQL (replace `<storage-account-name>` with the corredponding value):
+
+```sql
+CREATE TABLE events
+LOCATION 'abfss://lake-container@<storage-account-name>.dfs.core.windows.net/events/';
+```
+
+:::
+
+  </TabItem>
+  <TabItem value="synapse" label="Synapse Analytics 🧪">
+
+Your data is loaded into ADLS. To access it, follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function.
+
+You will need to know a couple of things:
+* Storage account name — this is the value of the `storage_account_name` variable in the pipeline `terraform.tvars` file
+* Storage container name — `lake-container`
+
+<details>
+<summary>Example query</summary>
+
+```sql
+SELECT TOP 10 *
+FROM OPENROWSET(
+    BULK 'https://<storage-account-name>.blob.core.windows.net/lake-container/events/',
+    FORMAT = 'delta'
+) AS events;
+```
+
+</details>
+
+We recommend [creating a data source](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format#data-source-usage), which simplifies future queries (note that unlike the previous URL, this one does not end with `/events/`):
+
+```sql
+CREATE EXTERNAL DATA SOURCE SnowplowData
+WITH (LOCATION = 'https://<storage-account-name>.blob.core.windows.net/lake-container/');
+```
+
+<details>
+<summary>Example query with data source</summary>
+
+```sql
+SELECT TOP 10 *
+FROM OPENROWSET(
+    BULK 'events',
+    DATA_SOURCE = 'SnowplowData',
+    FORMAT = 'delta'
+) AS events;
+```
+
+</details>
+
+:::tip Fabric and OneLake
+
+You can also consume your ADLS data via Fabric and OneLake:
+
+* First, [create a Lakehouse](https://learn.microsoft.com/en-us/fabric/onelake/create-lakehouse-onelake#create-a-lakehouse) or use an existing one.
+* Next, [create a OneLake shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-adls-shortcut) to your storage account. In the URL field, specify `https://<storage-account-name>.blob.core.windows.net/lake-container/events/`.
+* You can now [use Spark notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore) to explore your Snowplow data.
+
+Do note that currently not all Fabric services support nested fields present in the Snowplow data.
+
+:::
+
+  </TabItem>
+</Tabs>
+
+---
 
 If you are curious, here’s [what has been deployed](/docs/getting-started-on-snowplow-open-source/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/first-steps/tracking/index.md)!

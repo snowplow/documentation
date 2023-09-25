@@ -3,9 +3,10 @@ title: "Available enrichments"
 sidebar_position: 20
 ---
 
-Snowplow offers a large number of enrichments that can be used to enhance your event data. An enrichment either updates or populates fields of the [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) event or adds a [self-describing](https://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/) context to [derived_contexts](https://github.com/snowplow/snowplow-scala-analytics-sdk/blob/2.1.0/src/main/scala/com.snowplowanalytics.snowplow.analytics.scalasdk/Event.scala#L165).
 
-The order of enrichments is hard-coded and cannot be changed, below table lists available enrichments in order they are executed.
+Snowplow offers a large number of enrichments that can be used to enhance your event data. Most enrichments attach data to the event as [entities](/docs/understanding-your-pipeline/entities/index.md), although some enrichments fill or modify event fields directly.
+
+The order of enrichments is hard-coded and cannot be changed, the below table lists available enrichments in order they are executed.
 
 :::note
 

@@ -86,7 +86,7 @@ Set the application ID using the `appId` field of the configuration object. Th
 
 #### Setting the platform
 
-Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#Application_parameters).
+Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters).
 
 #### Configuring the cookie domain
 
@@ -186,7 +186,7 @@ This mode will no longer track any user identifiers or session information, and 
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled. However for an experience that doesn't use any browser storage (cookieless), set `stateStorageStrategy` to `none`. This can be later toggled on, once a user accepts a cookie policy.
 
-Anonymous tracking can be toggled on and off. The methods to control this behavior are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/additional-options/index.md#Toggling_Anonymous_Tracking).
+Anonymous tracking can be toggled on and off. The methods to control this behavior are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/additional-options/index.md#toggling-anonymous-tracking).
 
 ##### Anonymous Session Tracking
 
@@ -228,7 +228,7 @@ Three strategies are made available to store the Tracker’s state: cookies, loc
 
 When choosing local storage, the Tracker will additionally store events in local storage before sending them so that they can be recovered if the user leaves the page before they are sent.
 
-See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/index.md#Local_Storage) for an explanation of how the tracker can later recover and send unsent events.
+See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/index.md) for an explanation of how the tracker can later recover and send unsent events.
 
 #### Adding predefined contexts
 

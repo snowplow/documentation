@@ -219,7 +219,7 @@ You can add new custom enrichments via the Control Plane tab. The only thing you
 
 Since Mini 0.8.0 deprecated Swagger UI of Iglu Server, we have 2 options:
 
-- Use igluctl [static push](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static_push) to put our custom schema into the Iglu Server
+- Use igluctl [static push](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md#static-push) to put our custom schema into the Iglu Server
 - Use any HTTP client e.g. cURL
 
 Let's have examples for both options.

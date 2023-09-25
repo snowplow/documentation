@@ -86,4 +86,4 @@ Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "sp")
                     .build();
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#Common_parameters_platform_and_event_independent).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#common-parameters).

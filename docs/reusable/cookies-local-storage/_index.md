@@ -1,4 +1,4 @@
-By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and Local Storage. The behavior of each of these cookies and local storage keys are described here. The base name of each cookie can be configured by following these [instructions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Configuring_the_cookie_name).
+By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and Local Storage. The behavior of each of these cookies and local storage keys are described here. The base name of each cookie can be configured by following these [instructions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#configuring-the-cookie-name).
 
 # Cookies
 
@@ -39,9 +39,9 @@ The below table shows which parameters the cookie values map to:
 
 The JavaScript tracker offers two methods that allow the users to opt out of using cookies (and local storage in the case of _sp_id and _sp_ses).
 
-- [Anonymous Tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Anonymous_Tracking)
-- [Respecting Do Not Track](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Respecting_Do_Not_Track)
-- [Set an opt out cookie](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#Opt-out_cookie)
+- [Anonymous Tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#anonymous-tracking)
+- [Respecting Do Not Track](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#respecting-do-not-track)
+- [Set an opt out cookie](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#opt-out-cookie)
 
 # Further Information
 

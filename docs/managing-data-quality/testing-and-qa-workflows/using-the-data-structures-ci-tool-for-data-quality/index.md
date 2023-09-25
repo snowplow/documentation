@@ -9,7 +9,7 @@ sidebar_custom_props:
 
 The Data Structures CI is a command-line tool which integrates Data Structures API into your CI/CD pipelines and currently has one task which verifies that all schema dependencies for a project are already deployed into a specified environment (e.g. "DEV", "PROD").
 
-This is available as a [Github Action](#Setting_up_as_a_Github_Action) and as a [universal install for other deployment pipelines](#Setting_up_for_other_deployment_pipelines) e.g. Travis CI, CircleCI, Gitlab, Azure Pipelines, Jenkins…
+This is available as a [Github Action](#setting-up-as-a-github-action) and as a [universal install for other deployment pipelines](#setting-up-for-other-deployment-pipelines) e.g. Travis CI, CircleCI, Gitlab, Azure Pipelines, Jenkins…
 
 ## Authorization
 

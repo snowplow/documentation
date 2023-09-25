@@ -904,9 +904,9 @@ enableFormTracking();
 
 Snowplow automatic form tracking detects three event types:
 
-1. `[change_form](#change_form)` – form field changed.
-2. `[submit_form](#submit_form)` – form submitted.
-3. `[focus_form](#focus_form)` – form field focused.
+1. [change_form](#change_form) – form field changed.
+2. [submit_form](#submit_form) – form submitted.
+3. [focus_form](#focus_form) – form field focused.
 
 By default, all three event types are tracked. However, it is possible to subscribe only to specific event types using the `options.events` option when enabling form tracking:
 

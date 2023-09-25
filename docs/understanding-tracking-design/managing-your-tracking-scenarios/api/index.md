@@ -21,9 +21,9 @@ Each request will need to include your company's `organizationId` which is a UUI
 ![](images/orgID.png)
 
 ```mdx-code-block
-import Block14551 from "@site/docs/reusable/14551/_index.md"
+import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"
 
-<Block14551/>
+<GetConsoleApiKey/>
 ```
 
 ## Response Format

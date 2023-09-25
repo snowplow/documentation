@@ -1,6 +1,5 @@
 ---
 title: "Retrieving data model execution data via the API"
-date: "2020-12-28"
 sidebar_position: 400
 ---
 
@@ -28,9 +27,9 @@ Each request will need to include your company’s `organizationID` which is a
 ![](images/orgID.png)
 
 ```mdx-code-block
-import Block14551 from "@site/docs/reusable/14551/_index.md"
+import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"
 
-<Block14551/>
+<GetConsoleApiKey/>
 ```
 
 ## Retrieving job run information

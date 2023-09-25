@@ -1,6 +1,6 @@
-Anonymous tracking is a tracker feature that enables anonymising various user and session identifiers to support user privacy in case consent for tracking the identifiers is not given.
+Anonymous tracking is a tracker feature that enables anonymizing various user and session identifiers to support user privacy in case consent for tracking the identifiers is not given.
 
-On mobile, the following user and session identifiers can be anonymised:
+On mobile, the following user and session identifiers can be anonymized:
 
 * Client-side user identifiers:
    * `userId` in the [Session](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity

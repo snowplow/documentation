@@ -2,12 +2,12 @@ By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and 
 
 # Cookies
 
-Cookies are only stored if `stateStorageStrategy` is set to `cookie`, `cookieAndLocalStorage` (default) or if the deprecated tracker initialisation argument `configUseCookies` is set to `true` (default). When using `cookieAndLocalStorage` this will prefer cookie storage for `_sp_id` and `_sp_ses`.
+Cookies are only stored if `stateStorageStrategy` is set to `cookie`, `cookieAndLocalStorage` (default) or if the deprecated tracker initialization argument `configUseCookies` is set to `true` (default). When using `cookieAndLocalStorage` this will prefer cookie storage for `_sp_id` and `_sp_ses`.
 
 | Cookie Name | Expires | Description |
 | --- | --- | --- |
-| _sp_id | 2 years or `cookieLifetime` set on tracker initialisation | Stores user information that is created when a user first visits a site and updated on subsequent visits. It is used to identify users and track the users activity across a domain. This cookie stores a unique identifier for each user, a unique identifier for the users current session, the number of visits a user has made to the site, the timestamp of the users first visit, the timestamp of their previous visit and the timestamp of their current visit, references to previous session and first event in the current session, and index of the last event in the session. |
-| _sp_ses | 30 minutes or `sessionCookieTimeout` set on tracker initialisation | Used to identify if the user is in an active session on a site or if this is a new session for a user (i.e. cookie doesn't exist or has expired).  
+| _sp_id | 2 years or `cookieLifetime` set on tracker initialization | Stores user information that is created when a user first visits a site and updated on subsequent visits. It is used to identify users and track the users activity across a domain. This cookie stores a unique identifier for each user, a unique identifier for the users current session, the number of visits a user has made to the site, the timestamp of the users first visit, the timestamp of their previous visit and the timestamp of their current visit, references to previous session and first event in the current session, and index of the last event in the session. |
+| _sp_ses | 30 minutes or `sessionCookieTimeout` set on tracker initialization | Used to identify if the user is in an active session on a site or if this is a new session for a user (i.e. cookie doesn't exist or has expired).  
 When using `anonymousTracking: { withSessionTracking: true }` (2.15.0+) this key will contain a _salt_ value which is used to stitch page views into a session. The value is never sent to the collector. |
 | sp | 1 year or `collector.cookie.expiration` set in collector config | Stores a server-side collector generated unique identifier for a user that is sent with all subsequent tracking event events. Can be used as a first party cookie is the collector is on the same domain as the site. Can be disabled by setting `collector.cookie.enabled` to false (See [here](/docs/pipeline-components-and-applications/stream-collector/configure/index.md) for more information). |
 
@@ -15,7 +15,7 @@ When using `anonymousTracking: { withSessionTracking: true }` (2.15.0+) this key
 
 # Local Storage
 
-Local Storage will only be used if `stateStorageStrategy` is set to `localStorage`, `cookieAndLocalStorage` (default) or if the deprecated tracker initialisation argument `configUseLocaStorage` is set to `true` (default). Both cookies listed above can be stored in local storage rather than as cookies by setting `stateStorageStrategy` to `localStorage`. Local storage can be disabled by setting `stateStorageStrategy` to `cookie` or `none`.
+Local Storage will only be used if `stateStorageStrategy` is set to `localStorage`, `cookieAndLocalStorage` (default) or if the deprecated tracker initialization argument `configUseLocaStorage` is set to `true` (default). Both cookies listed above can be stored in local storage rather than as cookies by setting `stateStorageStrategy` to `localStorage`. Local storage can be disabled by setting `stateStorageStrategy` to `cookie` or `none`.
 
 | Storage Key | Description |
 | --- | --- |
@@ -45,4 +45,4 @@ The JavaScript tracker offers two methods that allow the users to opt out of usi
 
 # Further Information
 
-How the JavaScript tracker utilises these cookies to store state as well as information on how to retrieve the values can be found below.
+How the JavaScript tracker utilizes these cookies to store state as well as information on how to retrieve the values can be found below.

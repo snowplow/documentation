@@ -1,7 +1,7 @@
 ---
 title: "UA parser enrichment"
-date: "2020-02-14"
 sidebar_position: 1
+sidebar_label: UA parser 
 ---
 
 This enrichment uses the [ua-parser library](https://github.com/ua-parser/uap-core/) to parse the user agent and provide information about the user's device.

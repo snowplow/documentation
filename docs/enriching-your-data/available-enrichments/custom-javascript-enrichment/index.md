@@ -1,7 +1,7 @@
 ---
 title: "Custom JavaScript enrichment"
-date: "2020-02-14"
 sidebar_position: 10
+sidebar_label: Custom JavaScript
 ---
 
 With this enrichment, you can write a JavaScript function to be executed for each event. Use this enrichment to apply your own business logic to your events, including:

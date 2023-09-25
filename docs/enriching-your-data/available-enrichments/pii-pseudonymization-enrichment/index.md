@@ -1,7 +1,7 @@
 ---
 title: "PII pseudonymization enrichment"
-date: "2020-02-14"
 sidebar_position: 14
+sidebar_label: PII pseudonymization
 ---
 
 PII (personally identifiable information) pseudonymization enrichment runs after all the other enrichments and pseudonymizes the fields that are configured as PIIs.

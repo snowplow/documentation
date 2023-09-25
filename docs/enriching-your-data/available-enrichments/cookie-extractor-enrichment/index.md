@@ -1,7 +1,7 @@
 ---
 title: "Cookie extractor enrichment"
-date: "2020-02-14"
 sidebar_position: 6
+sidebar_label: Cookie extractor
 ---
 
 This enrichment extracts name-value pairs from cookies set on the collector domain, attaching them to the event as derived contexts.

@@ -1,7 +1,7 @@
 ---
 title: "YAUAA enrichment"
-date: "2020-02-14"
 sidebar_position: 8
+sidebar_label: YAUAA
 ---
 
 YAUAA (Yet Another User Agent Analyzer) enrichment is a powerful user agent parser and analyzer.

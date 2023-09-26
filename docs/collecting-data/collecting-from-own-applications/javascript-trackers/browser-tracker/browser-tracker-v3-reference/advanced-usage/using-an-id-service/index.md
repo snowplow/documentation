@@ -60,61 +60,15 @@ Below we showcase a couple of code samples for ID service API endpoints:
 <Tabs groupId="id-service" queryString>
 <TabItem value="nextjs" label="Next.js TypeScript" default>
 
-```ts
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<{ Ok: number }>
-) {
-  const { sp, spIdService } = req.cookies;
-  /* bumpExpiry is a placeholder method that returns the expiration time you require the network_userid to persist. */
-  const expiration = bumpExpiry();
-  const networkUserId = sp || spIdService || uuidv4();
-  /* In this example the domain will be the eTLD+1 of the website. */
-  const domain = "snowplow.io"
-
-  res.setHeader("Set-Cookie", [
-     /* 
-      * The cookie header attributes should have exactly the same values as the ones set on the collector configuration.
-      */
-    `spIdService=${networkUserId}; Expires=${expiration.toUTCString()}; Domain=${domain}; Path=/; Secure; SameSite=None; httpOnly;`,
-    `sp=${networkUserId}; Expires=${expiration.toUTCString()}; Domain=${domain}; Path=/; Secure; SameSite=None; httpOnly;`,
-  ]);
-
-  /* The response needs to return a 200 (OK) status code but any response payload is not necessary. */
-  res.status(200).json({ Ok: 200 });
-}
+```ts reference
+https://github.com/snowplow-incubator/id-service-examples/blob/main/examples/typescript/Next.js/api-route.ts
 ```
 
 </TabItem>
 <TabItem value="php" label="PHP">
 
-```php
-function id_service() {
-  $sp = $_COOKIE['sp'] ?? null;
-  $spIdService = $_COOKIE['spIdService'] ?? null;
-  /* bumpExpiry is a placeholder method that returns the expiration time you require the network_userid to persist. */
-  $expiration = bumpExpiry();
-  $networkUserId = $sp ?? $spIdService ?? gen_uuid4();
-  /* In this example the domain will be the eTLD+1 of the website. */
-  $domain = 'snowplow.io';
-
-  /* 
-   * The cookie header attributes should have exactly the same values as the ones set on the collector configuration.
-  */
-  $cookie_options = array(
-    'expires' => $expiration,
-    'path' => '/',
-    'domain' => $domain,
-    'secure' => true,
-    'httponly' => true,
-    'samesite' => 'None',
-  );
-  setcookie('sp', $networkUserId, $cookie_options);
-  setcookie('spIdService', $networkUserId, $cookie_options);
-
-  /* The response needs to return a 200 (OK) status code but any response payload is not necessary. */
-  return json_encode(['Ok' => 200]);
-}
+```php reference
+https://github.com/snowplow-incubator/id-service-examples/blob/main/examples/php/wordpress/api-route.php
 ```
 
 </TabItem>

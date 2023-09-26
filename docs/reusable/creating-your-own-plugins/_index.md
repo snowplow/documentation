@@ -62,7 +62,7 @@ The README should guide you through building, testing, publishing and using a pl
 
 ### Advanced Plugin Template
 
-This template shows how you can use all the available functions of a plugin, as well as how to make the plugin only repond to certain trackers in a multi-tracker setup. The template is written in TypeScript, so you'll need to build it before using it and/or publishing. We've also included some example Jest tests to help you write tests for your plugin.
+This template shows how you can use all the available functions of a plugin, as well as how to make the plugin only respond to certain trackers in a multi-tracker setup. The template is written in TypeScript, so you'll need to build it before using it and/or publishing. We've also included some example Jest tests to help you write tests for your plugin.
 
 [https://github.com/snowplow-incubator/snowplow-browser-plugin-advanced-template](https://github.com/snowplow-incubator/snowplow-browser-plugin-advanced-template)
 

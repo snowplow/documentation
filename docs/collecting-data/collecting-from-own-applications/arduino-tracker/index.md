@@ -1,13 +1,12 @@
 ---
 title: "Arduino Tracker"
-date: "2020-02-25"
 sidebar_position: 290
 ---
 
 ```mdx-code-block
-import Block2899 from "@site/docs/reusable/untitled-reusable-block-36/_index.md"
+import Badges from '@site/src/components/Badges';
 
-<Block2899/>
+<Badges badgeType="Unsupported"></Badges>
 ```
 
 The [Snowplow Arduino tracker](https://github.com/snowplow/snowplow-arduino-tracker) allows you to track Snowplow events from an IP-connected [Arduino](http://arduino.cc/) board.

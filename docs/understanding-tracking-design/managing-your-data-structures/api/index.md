@@ -1,6 +1,5 @@
 ---
 title: "Managing data structures via the API"
-date: "2021-12-22"
 sidebar_label: "Using the API"
 sidebar_position: 2
 sidebar_custom_props:
@@ -40,9 +39,9 @@ Each request will need to include your company's `organizationID` which is a UUI
 ![](images/orgID.png)
 
 ```mdx-code-block
-import Block14551 from "@site/docs/reusable/14551/_index.md"
+import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"
 
-<Block14551/>
+<GetConsoleApiKey/>
 ```
 
 ## Retrieving data structures

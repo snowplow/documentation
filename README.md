@@ -96,7 +96,7 @@ There are several key concepts in Snowplow: events (self-describing, structured)
 
 ### Reusable fragments
 
-You can create reusable fragments and include them in multiple files (see [this example](https://github.com/snowplow/documentation/blob/main/docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/index.md)).
+You can create reusable fragments and include them in multiple files (see [this example](https://github.com/snowplow/documentation/blob/303165da0698b15d7ad13a50e40eeacadcaea098/docs/storing-querying/storage-options/index.md)).
 
 ### Versioned modules
 

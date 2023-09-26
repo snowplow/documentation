@@ -1,6 +1,5 @@
 ---
 title: "Initialization options"
-date: "2020-03-03"
 sidebar_position: 10
 ---
 
@@ -35,12 +34,12 @@ _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-fo
 _Click [here](https://github.com/snowplow/snowplow/wiki/1-General-parameters-for-the-Javascript-tracker-v2.13) for the corresponding documentation for version 2.13.0._
 
 ```mdx-code-block
-import Block3067 from "@site/docs/reusable/untitled-reusable-block-41/_index.md"
 import DeprecatedV2 from "@site/docs/reusable/javascript-tracker-v2-deprecation/_index.md"
 import V2Init from "@site/docs/reusable/javascript-tracker-v2-initialization-options/_index.md"
 ```
 
-<Block3067/>
+[![](https://img.shields.io/github/v/release/snowplow/sp-js-assets?sort=semver&style=flat)](https://github.com/snowplow/snowplow-javascript-tracker/releases)
+
 
 <DeprecatedV2/>
 

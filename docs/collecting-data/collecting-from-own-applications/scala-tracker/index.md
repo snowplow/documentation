@@ -1,13 +1,12 @@
 ---
 title: "Scala Tracker"
-date: "2020-10-28"
 sidebar_position: 210
 ---
 
 ```mdx-code-block
-import Block2901 from "@site/docs/reusable/untitled-reusable-block-37/_index.md"
+import Badges from '@site/src/components/Badges';
 
-<Block2901/>
+<Badges badgeType="Maintained"></Badges>
 ```
 
 The Snowplow Scala Tracker allows you to track Snowplow events in your Scala apps and servers. The tracker should be straightforward to use if you are comfortable with Scala development.

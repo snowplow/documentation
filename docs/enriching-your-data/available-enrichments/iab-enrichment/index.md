@@ -1,7 +1,7 @@
 ---
 title: "IAB enrichment"
-date: "2020-02-14"
 sidebar_position: 0
+sidebar_label: IAB
 ---
 
 The IAB Spiders & Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.

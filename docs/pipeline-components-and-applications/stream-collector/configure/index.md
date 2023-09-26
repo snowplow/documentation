@@ -1,14 +1,7 @@
 ---
 title: "Configure the Stream Collector"
-date: "2020-09-16"
 sidebar_position: 30
 ---
-
-```mdx-code-block
-import Block3445 from "@site/docs/reusable/untitled-reusable-block-43/_index.md"
-
-<Block3445/>
-```
 
 This is a complete list of the options that can be configured in the collector HOCON config file. The [example configs in github](https://github.com/snowplow/stream-collector/tree/master/examples) show how to prepare an input file. Some features are described in more detail at the bottom of this page.
 

@@ -124,7 +124,7 @@ Page pings are identified by `e=pp`. As well as all the standard web fields, th
 
 #### Transaction tracking
 
-Trnasaction events allow you to track a transaction. The items of the transaction can be tracked using [Transaction Item events](#transaction-item-events).
+Transaction events allow you to track a transaction. The items of the transaction can be tracked using [Transaction Item events](#transaction-item-events).
 
 | **Parameter** | **Table Column**      | **Type** | **Description**                                      | **Example values** |
 |----------------|----------|------------------------------------------------------|--------------------|

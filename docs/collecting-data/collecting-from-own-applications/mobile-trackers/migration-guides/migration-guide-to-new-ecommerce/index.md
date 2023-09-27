@@ -189,4 +189,6 @@ Entities such as `ProductEntity` can be added to several of the new Ecommerce ev
 
 ## Using the DBT data model
 
+Since the structure of the events is so different, migrating to the new ecommerce events is a breaking change for any relevant data models.
+
 We provide a dbt package that creates a set of derived tables including carts, transactions, and products from the raw ecommerce event data. Find the details of configuring this inside the [Ecommerce Accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/).

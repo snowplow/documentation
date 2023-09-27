@@ -10,6 +10,10 @@ import TabItem from '@theme/TabItem';
 
 The [Ecommerce tracking package](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/ecommerce-tracking/index.md) was introduced in Android and iOS v5.4.0. It provides 11 out-of-the-box event types to make it easier to thoroughly track user activity in an e-commerce store. A complete setup journey, including data modeling and visualization, is showcased in the [Ecommerce Accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/).
 
+:::note
+Migrating to the new ecommerce events is a breaking change for any relevant data models.
+:::
+
 ## Replacing the deprecated events
 
 To update your existing tracking based on the now deprecated `Ecommerce` (iOS)/`EcommerceTransaction` (Android) and `EcommerceItem`/`EcommerceTransactionItem` event types, we recommend using `TransactionEvent`.
@@ -177,10 +181,12 @@ Note that address details and affiliation are not captured in `TransactionEvent`
 
 ## How the tracked events are different
 
+### Old events
 Using the old event types, an event is generated for each `EcommerceTransaction` event as well as each `EcommerceTransactionItem` attached. Therefore, tracking an `EcommerceTransaction` event with 3 items would result in 4 events being tracked. These events are not linked at all, unless the same `orderId` is provided to all the objects, adding potential challenges in data modeling.
 
 In the tracked data, the events have `event_name` `transaction` or `transaction_item`. The data is sent within the legacy event properties `tr_x` and `ti_x`, e.g. `tr_id` for the `EcommerceTransaction` `orderId` property. All of these properties are listed [here](docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md). Each one maps to a column in the warehouse table.
 
+### New events
 The new Ecommerce event types take advantage of the Snowplow entities/event context feature. Tracking `TransactionEvent` with 3 items results in a single event being tracked. The items, and the details of the transaction, are attached as entities. That single event would have one `TransactionEntity`, three `ProductEntity`, plus whichever out-of-the-box and/or custom entities are configured.
 
 All of the new events are `SelfDescribingEvent` with `event_name` `snowplow_ecommerce_action`. None of the data is sent as legacy properties; it is all within entities, which end up in their own table columns.

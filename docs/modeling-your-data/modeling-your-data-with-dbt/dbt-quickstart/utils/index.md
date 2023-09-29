@@ -40,7 +40,7 @@ import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation
 ## Setup
 
 :::info
-You can largely skip redundant copy + pasting by cloning the following dbt project repository that we have created in GitHub. You can find it [here](https://github.com/snowplow-incubator/dbt-example-project), and this has all of the boilerplate setup for you already. If you want to customise model names or parameter values, you can still follow the quickstart guide below to help you understand how to do that, and what changing each variable will mean for your models. Feel free to skip steps 1 and 2, however.
+You can largely skip redundant copy + pasting by cloning the following dbt project repository that we have created in GitHub. You can find it [here](https://github.com/snowplow-incubator/dbt-example-project), and this has all of the boilerplate setup for you already. If you want to customize model names or parameter values, you can still follow the quickstart guide below to help you understand how to do that, and what changing each variable will mean for your models. Feel free to skip steps 1 and 2, however.
 
 :::
 
@@ -242,7 +242,7 @@ If you have more than one session or user identifier, you can specify multiple e
 `}
 </code></pre>
 
-For Redshift & Postgres we also introduce the `prefix` and `alias` fields, where `prefix` is the `prefix` that is put infront of each field name in the context, and `alias` is the table alias used upon joining. This can be useful when you are using custom SQL. As an example, using the above configuration we could access the `internal_user_id` field using the following SQL:
+For Redshift & Postgres we also introduce the `prefix` and `alias` fields, where `prefix` is the `prefix` that is put in front of each field name in the context, and `alias` is the table alias used upon joining. This can be useful when you are using custom SQL. As an example, using the above configuration we could access the `internal_user_id` field using the following SQL:
 
 ```sql
 mcc_iud.mcc_internal_user_id as internal_user_id,
@@ -283,7 +283,7 @@ For the `snowplow_base_sessions_this_run` model, you will need to add a post-hoo
 
 Here the parameters that are called in both macros are only used to direct the macro to the right model names, so again if you've chosen to modify any of the table names then you should adjust the names in the right macros here. For the `base_quarantine_sessions` macro you simply pass the maximum session duration in days, which is taken from the `snowplow__max_session_days` variable, and you specify the name of the `snowplow_base_quarantined_sessions` table, specified by the `snowplow__quarantined_sessions` variable.
 
-For the `base_create_snowplow_sessions_this_run` macro call, you specify the name of the `lifecycle_manifest_table` and the `new_event_limits_table`. The boilerplate contains their default names, and so if you have not customised anything you can simply copy this code into your `snowplow_base_sessions_this_run` model.
+For the `base_create_snowplow_sessions_this_run` macro call, you specify the name of the `lifecycle_manifest_table` and the `new_event_limits_table`. The boilerplate contains their default names, and so if you have not customized anything you can simply copy this code into your `snowplow_base_sessions_this_run` model.
 
 ### 8. Setting up the events this run macro
 For the `snowplow_base_events_this_run` model, you will need to run the following two macros in your model:
@@ -310,7 +310,7 @@ For the `snowplow_base_events_this_run` model, you will need to run the followin
 Here you once again have a number of parameters that the macro can take, and to get an in-depth explanation of each variable passed here, please refer to the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/utils/index.md) page. The variables used here are largely either self-explanatory or overlapping with those in the [lifecycle manifest](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/utils/index.md#6-setting-up-the-sessions-lifecycle-manifest-macro) section, except that you can now specify custom names for your `snowplow_base_sessions_this_run` table through the `snowplow__base_sessions` variable.
 
 ### 9. Modify your `dbt_project.yml`
-To properly configure your dbt project to utilise and update the manifest tables correctly, you will need to add the following hooks to your `dbt_project.yml`
+To properly configure your dbt project to utilize and update the manifest tables correctly, you will need to add the following hooks to your `dbt_project.yml`
 
 ```yml
 # Completely or partially remove models from the manifest during run start.
@@ -319,10 +319,16 @@ on-run-start:
 
 # Update manifest table with last event consumed per sucessfully executed node/model
 on-run-end:
-  - "{{ snowplow_utils.snowplow_incremental_post_hook() }}"
+  - "{{ snowplow_utils.snowplow_incremental_post_hook(package_name='snowplow', incremental_manifest_table_name=var('snowplow__incremental_manifest', 'snowplow_incremental_manifest'), base_events_this_run_table_name='snowplow_base_events_this_run', session_timestamp=var('snowplow__session_timestamp')) }}"
 ```
 
-The `snowplow_delete_from_manifest` macro is called to remove models from manifest if specified using the `models_to_remove` variable, in case of a partial or full refresh. The `snowplow_incremental_post_hook` is used to update the manifest table with the timestamp of the last event consumed successfully for each Snowplow model.
+The `snowplow_delete_from_manifest` macro is called to remove models from manifest if specified using the `models_to_remove` variable, in case of a partial or full refresh. The `snowplow_incremental_post_hook` is used to update the manifest table with the timestamp of the last event consumed successfully for each Snowplow incremental model - make sure to change the `base_events_this_run_table_name` if you used a different table name.
+
+:::tip 
+
+The `package_name` variable here is not the name of your project, instead it is what is used to identify your tagged incremental models as they should be tagged with `<package_name>_incremental`. 
+
+:::
 
 ### 10. Run your models
 

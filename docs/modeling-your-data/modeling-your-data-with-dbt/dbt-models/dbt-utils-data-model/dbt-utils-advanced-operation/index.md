@@ -15,7 +15,7 @@ Throughout this page we refer to entity columns only by their major version (e.g
 
 :::
 
-The general idea behind the Snowplow-utils base functionality is to be able to add custom identifiers, bespoke behaviour, and customize naming Snowplow tables that get created as part of the incremental process. Here you can get a better understanding of what kinds of behaviours the package supports, how those scenarios actually work in terms of implementation, and a better understanding of all of the variables that can be used for these macros to unlock the full customization capability that has been built into the Snowplow-utils base functionality. You can find some example projects in the following [repository](https://github.com/snowplow-incubator/dbt-example-project).
+The general idea behind the Snowplow-utils base functionality is to be able to add custom identifiers, bespoke behavior, and customize naming Snowplow tables that get created as part of the incremental process. Here you can get a better understanding of what kinds of behaviors the package supports, how those scenarios actually work in terms of implementation, and a better understanding of all of the variables that can be used for these macros to unlock the full customization capability that has been built into the Snowplow-utils base functionality. You can find some example projects in the following [repository](https://github.com/snowplow-incubator/dbt-example-project).
 
 ## Preface
 :::info
@@ -503,7 +503,7 @@ vars:
 
 Note that you can simply add more entities or self-describing events to join by adding more dicts to the list.
 
-Once you've added in the entities or self-describing events that you want to leverage, you can use `snowplow__custom_sql` to transform them and surface that in your `snowplow_base_events_this_run` table. Similiarly to the example for other warehouses, suppose you have a custom context called `contexts_com_mycompany_click_1` which contains a `id` that you want to concat with Snowplow's `domain_sessionid`. You can add that transformation by adding the following to your `dbt_project.yml`:
+Once you've added in the entities or self-describing events that you want to leverage, you can use `snowplow__custom_sql` to transform them and surface that in your `snowplow_base_events_this_run` table. Similarly to the example for other warehouses, suppose you have a custom context called `contexts_com_mycompany_click_1` which contains a `id` that you want to concat with Snowplow's `domain_sessionid`. You can add that transformation by adding the following to your `dbt_project.yml`:
 
 ```yml title="dbt_project.yml"
 vars:

@@ -34,6 +34,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `days_late_allowed`     | The maximum allowed number of days between the event creation and it being sent to the collector. Exists to reduce lengthy table scans that can occur as a result of late arriving data. If set to `-1` disables this filter entirely, which can be useful if you have events with no `dvce_sent_tstamp` value.                                                                                                  | 3            |
 | `lookback_window_hours` | The number of hours to look before the latest event processed - to account for late arriving data, which comes out of order.                                                                                                                                                                                                                                                                                     | 6            |
 | `start_date`            | The date to start processing events from in the package on first run or a full refresh, based on `collector_tstamp`.                                                                                                                                                                                                                                                                                             | '2020-01-01' |
+| `session_timestamp`            | Determines which timestamp is used to process sessions of data. It's a good idea to have this timestamp be the same timestamp as the field you partition your events table on. | 'collector_tstamp' |
 | `upsert_lookback_days`  | Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md) section for more details. | 30           |
 
 ### Contexts, filters, and logs
@@ -113,6 +114,7 @@ export const GROUPS = [
                                           "snowplow__days_late_allowed",
                                           "snowplow__lookback_window_hours",
                                           "snowplow__start_date",
+                                          "snowplow__session_timestamp",
                                           "snowplow__upsert_lookback_days"] },
   { title: "Contexts, Filters, and Logs", fields: ["snowplow__app_id"] },
   { title: "Warehouse Specific", fields: ["snowplow__databricks_catalog",

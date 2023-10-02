@@ -2214,7 +2214,7 @@ with new_events_session_ids as (
   group by 1
   )
 
-{% if snowplow_utils.snowplow_is_incremental() %}
+{% if is_incremental() %}
 
 , previous_sessions as (
   select *
@@ -2321,7 +2321,7 @@ with session_context as (
   group by 1
   )
 
-{% if snowplow_utils.snowplow_is_incremental() %}
+{% if is_incremental() %}
 
 , previous_sessions as (
   select *
@@ -2384,6 +2384,7 @@ from session_lifecycle sl
 </TabItem>
 <TabItem value="macro" label="Macros">
 
+- macro.dbt.is_incremental
 - [macro.snowplow_mobile.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.allow_refresh)
 - [macro.snowplow_mobile.get_device_user_id_path_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.get_device_user_id_path_sql)
 - [macro.snowplow_mobile.get_session_id_path_sql](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_mobile/macros/index.md#macro.snowplow_mobile.get_session_id_path_sql)
@@ -2394,7 +2395,6 @@ from session_lifecycle sl
 - [macro.snowplow_utils.is_run_with_new_events](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.is_run_with_new_events)
 - [macro.snowplow_utils.return_base_new_event_limits](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.return_base_new_event_limits)
 - [macro.snowplow_utils.set_query_tag](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.set_query_tag)
-- [macro.snowplow_utils.snowplow_is_incremental](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.snowplow_is_incremental)
 - [macro.snowplow_utils.timestamp_add](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.timestamp_add)
 
 </TabItem>

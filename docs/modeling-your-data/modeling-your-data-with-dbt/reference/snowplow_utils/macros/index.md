@@ -237,6 +237,7 @@ This macro does not currently have a description.
         and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', days_late_allowed, 'a.dvce_created_tstamp') }}
         and a.{{ session_timestamp }} >= {{ lower_limit }}
         and a.{{ session_timestamp }} <= {{ upper_limit }}
+        and a.{{ session_timestamp }} >= b.start_tstamp -- deal with late loading events
 
         {% if derived_tstamp_partitioned and target.type == 'bigquery' | as_bool() %}
             and a.derived_tstamp >= {{ snowplow_utils.timestamp_add('hour', -1, lower_limit) }}
@@ -384,6 +385,7 @@ This macro does not currently have a description.
             and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', days_late_allowed, 'a.dvce_created_tstamp') }}
             and a.{{ session_timestamp }} >= {{ lower_limit }}
             and a.{{ session_timestamp }} <= {{ upper_limit }}
+            and a.{{ session_timestamp }} >= b.start_tstamp -- deal with late loading events
             and {{ snowplow_utils.app_id_filter(app_ids) }}
 
         )
@@ -549,7 +551,11 @@ This macro does not currently have a description.
     {% set create_quarantined_query %}
         with prep as (
         select
-            cast(null as {{ snowplow_utils.type_max_string() }}) session_identifier
+            {% if target.type == 'redshift' %} {# Done because max causes errors when used in subquery, #}
+                cast(null as varchar(6000)) session_identifier
+            {% else %}
+                cast(null as {{ snowplow_utils.type_max_string() }}) session_identifier
+            {% endif %}
         )
 
         select *
@@ -644,7 +650,7 @@ This macro does not currently have a description.
                     NULL
                 ) as session_identifier,
             {%- else -%}
-                {% do exceptions.raise_compiler_error("Need to specify either session identifiers or custom session code") %}
+                {% do exceptions.raise_compiler_error("Need to specify either session identifiers or custom session SQL") %}
             {%- endif %}
             {%- if user_sql -%}
                 {{ user_sql }} as user_identifier,
@@ -663,7 +669,7 @@ This macro does not currently have a description.
                     )
                 ) as user_identifier, -- Edge case 1: Arbitary selection to avoid window function like first_value.
             {% else %}
-                {% do exceptions.raise_compiler_error("Need to specify either session identifiers or custom session code") %}
+                {% do exceptions.raise_compiler_error("Need to specify either user identifiers or custom user SQL") %}
             {%- endif %}
                 min({{ session_timestamp }}) as start_tstamp,
                 max({{ session_timestamp }}) as end_tstamp
@@ -5102,7 +5108,7 @@ This macro does not currently have a description.
 <center><b><i><a href="https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/snowplow_incremental_post_hook.sql">Source</a></i></b></center>
 
 ```jinja2
-{% macro snowplow_incremental_post_hook(package_name='snowplow', incremental_manifest_table_name=none, base_events_this_run_table_name=none) %}
+{% macro snowplow_incremental_post_hook(package_name='snowplow', incremental_manifest_table_name=none, base_events_this_run_table_name=none, session_timestamp=var('snowplow__session_timestamp', 'load_tstamp')) %}
 
   {% set enabled_snowplow_models = snowplow_utils.get_enabled_snowplow_models(package_name) -%}
 
@@ -5120,7 +5126,7 @@ This macro does not currently have a description.
     {% set base_events_this_run_table = ref(package_name~'_base_events_this_run') -%}
   {%- endif -%}
 
-  {{ snowplow_utils.update_incremental_manifest_table(incremental_manifest_table, base_events_this_run_table, successful_snowplow_models) }}
+  {{ snowplow_utils.update_incremental_manifest_table(incremental_manifest_table, base_events_this_run_table, successful_snowplow_models, session_timestamp) }}
 
 {% endmacro %}
 ```
@@ -5742,9 +5748,9 @@ This macro does not currently have a description.
 <TabItem value="raw" label="raw" default>
 
 ```jinja2
-{% macro update_incremental_manifest_table(manifest_table, base_events_table, models) -%}
+{% macro update_incremental_manifest_table(manifest_table, base_events_table, models, session_timestamp=var('snowplow__session_timestamp', 'load_tstamp')) -%}
 
-  {{ return(adapter.dispatch('update_incremental_manifest_table', 'snowplow_utils')(manifest_table, base_events_table, models)) }}
+  {{ return(adapter.dispatch('update_incremental_manifest_table', 'snowplow_utils')(manifest_table, base_events_table, models, session_timestamp)) }}
 
 {% endmacro %}
 ```
@@ -5753,7 +5759,7 @@ This macro does not currently have a description.
 <TabItem value="default" label="default">
 
 ```jinja2
-{% macro default__update_incremental_manifest_table(manifest_table, base_events_table, models) -%}
+{% macro default__update_incremental_manifest_table(manifest_table, base_events_table, models, session_timestamp) -%}
 
   {% if models %}
 
@@ -5763,7 +5769,7 @@ This macro does not currently have a description.
         a.last_success
 
       from
-        (select max(collector_tstamp) as last_success from {{ base_events_table }}) a,
+        (select max({{ session_timestamp }}) as last_success from {{ base_events_table }}) a,
         ({% for model in models %} select '{{model}}' as model {%- if not loop.last %} union all {% endif %} {% endfor %}) b
 
       where a.last_success is not null -- if run contains no data don't add to manifest
@@ -5790,7 +5796,7 @@ This macro does not currently have a description.
 <TabItem value="postgres" label="postgres">
 
 ```jinja2
-{% macro postgres__update_incremental_manifest_table(manifest_table, base_events_table, models) -%}
+{% macro postgres__update_incremental_manifest_table(manifest_table, base_events_table, models, session_timestamp) -%}
 
   {% if models %}
 
@@ -5809,7 +5815,7 @@ This macro does not currently have a description.
             last_success
 
           from
-            (select max(collector_tstamp) as last_success from {{ base_events_table }}) as ls,
+            (select max({{ session_timestamp }}) as last_success from {{ base_events_table }}) as ls,
             ({% for model in models %} select '{{model}}' as model {%- if not loop.last %} union all {% endif %} {% endfor %}) as mod
 
           where last_success is not null -- if run contains no data don't add to manifest

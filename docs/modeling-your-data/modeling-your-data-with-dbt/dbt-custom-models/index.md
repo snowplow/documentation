@@ -53,6 +53,13 @@ models:
     snowplow_<package>_custom_models:
       +tags: snowplow_<package>_incremental #Adds tag to all models in the 'snowplow_<package>_custom_models' directory
 ```
+
+:::tip
+
+If you are using your own version of our `base` macros provided in our [`utils` package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/index.md), your tag will be `<package_name>_incremental` for what you set in the `snowplow_incremental_post_hook` hook.
+
+:::
+
 These models should also make use of the optimized `materialization` set such that `materialized='incremental` and `snowplow_optimize=true` in your model config. Finally, as well as referencing a `_this_run` table these models should make use of the `is_run_with_new_events` macro to only process the table when new events are available in the current run. This macro `snowplow_utils.is_run_with_new_events(package_name)` will evaluate whether the particular model, i.e. `{{ this }}`, has already processed the events in the given run of the model. This is returned as a boolean and effectively blocks the upsert to incremental models if the run only contains old data. This protects against your derived incremental tables being temporarily updated with incomplete data during batched back-fills of other models.
 
 ```jinja2 title="/models/snowplow_<package>_custom_models/my_custom_model.sql"

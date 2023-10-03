@@ -19,11 +19,25 @@ type CollectorEndpointError = {
 
 export async function getCollectorEndpointError(
   url: string,
-  appId: string
+  appId: string,
+  httpsOrLocalHostOnly: boolean = false
 ): Promise<CollectorEndpointError> {
   if (url === '') {
     return { collectorUrlError: 'Required', statusCode: 0 }
   }
+
+  if (
+    httpsOrLocalHostOnly &&
+    !url.startsWith('https://') &&
+    !url.startsWith('http://localhost')
+  ) {
+    return {
+      collectorUrlError:
+        'Please specify a valid protocol (https://, or http://localhost).',
+      statusCode: 0,
+    }
+  }
+
   if (!url.startsWith('http://') && !url.startsWith('https://')) {
     return {
       collectorUrlError: 'Please specify a valid protocol (usually, https://)',
@@ -37,7 +51,7 @@ export async function getCollectorEndpointError(
   if (status !== 200) {
     return {
       collectorUrlError:
-        'Invalid response from the Collector. Please ensure the URL is correct and the Collector is running',
+        'Invalid response from the Collector. Please ensure the URL is correct and the Collector is running.',
       statusCode: status,
     }
   } else {
@@ -83,6 +97,7 @@ async function checkCollectorEndpoint(
     const resp = await fetch(`${url}/i?e=pv&aid=${appId}`, {
       signal: controller.signal,
     })
+
     clearTimeout(timeoutId)
 
     return resp.status

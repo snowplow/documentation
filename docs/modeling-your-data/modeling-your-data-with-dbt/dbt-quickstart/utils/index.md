@@ -331,7 +331,11 @@ The `snowplow_delete_from_manifest` macro is called to remove models from manife
 
 :::tip 
 
+<<<<<<< HEAD
 The `package_name` variable here is not necessarily the name of your project (although it keeps things simple to make it the same), instead it is what is used to identify your tagged incremental models as they should be tagged with `<package_name>_incremental`. 
+=======
+The `package_name` variable here is not the name of your project, instead it is what is used to identify your tagged incremental models as they should be tagged with `<package_name>_incremental`. 
+>>>>>>> db4c1fb3 (Update utils dbt docs (#622))
 
 :::
 

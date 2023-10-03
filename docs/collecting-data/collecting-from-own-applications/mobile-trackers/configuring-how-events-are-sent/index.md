@@ -168,6 +168,35 @@ EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
   </TabItem>
 </Tabs>
 
+Starting from version 5.5.0, you can also completely disable retrying failed requests to the collector using the `EmitterConfiguration.retryFailedRequests` configuration option. If configured, events that fail to be sent in the first request to the collector will be dropped. This may be useful in situations where it's necessary to prevent traffic spikes with many events being sent at the same time.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let emitterConfig = EmitterConfiguration()
+    .retryFailedRequests(false) // don't retry any failed requests to the collector (defaults to true)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val emitterConfiguration = EmitterConfiguration()
+    .retryFailedRequests(false) // don't retry any failed requests to the collector (defaults to true)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
+      .retryFailedRequests(false); // don't retry any failed requests to the collector (defaults to true)
+```
+
+  </TabItem>
+</Tabs>
+
 ## Configuring how many events to send in one request
 
 The tracker sends events in batches. The tracker allows only a choice of 1 (`BufferOption.single`), 10 (`BufferOption.defaultGroup`), or 25 (`BufferOption.largeGroup`) events at maximum per request payload. 

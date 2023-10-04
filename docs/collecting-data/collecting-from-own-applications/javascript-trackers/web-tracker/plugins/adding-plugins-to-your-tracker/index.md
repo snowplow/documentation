@@ -1,5 +1,5 @@
 ---
-title: "Adding plugins to your tracker"
+title: "Adding plugins to your tracker TODO"
 date: "2021-04-19"
 sidebar_position: 500
 ---

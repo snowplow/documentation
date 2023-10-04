@@ -1,5 +1,5 @@
 ---
-title: "Cookies & Local Storage TODO"
+title: "Cookies & Local Storage"
 sidebar_position: 500
 ---
 

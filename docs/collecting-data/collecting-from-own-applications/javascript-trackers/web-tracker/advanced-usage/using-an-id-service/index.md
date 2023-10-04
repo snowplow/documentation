@@ -81,12 +81,28 @@ When the ID service has been deployed on a system with the same resolved IP as t
 
 This process is opt-in by using the `idService` option during tracker initialization:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```tsx
+window.snowplow("newTracker", "sp", "{{collector_url_here}}", {
+  /* ...Rest of the tracker options */
+  idService: "/id-service-endpoint"
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```tsx
 newTracker('sp1', 'c.customer.com', {
   idService: "/id-service-endpoint",
   /* ...Rest of the tracker options */
  });
 ```
+
+  </TabItem>
+</Tabs>
 
 When the tracker detects this option it will send an HTTP request during initialization on this endpoint to have the service set the required identifiers before sending any event.
 

@@ -1560,6 +1560,31 @@ trackLinkClick({
 
 ### Form tracking
 
+Snowplow automatic form tracking detects three event types:
+
+1. [change_form](#change_form) – form field changed.
+2. [submit_form](#submit_form) – form submitted.
+3. [focus_form](#focus_form) – form field focused.
+
+By default, all three event types are tracked. However, it is possible to subscribe only to specific event types using the `options.events` option when enabling form tracking:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('enableFormTracking');
+
+// subscribing to specific event types
+snowplow('enableFormTracking', {
+    options: {
+        events: ['submit_form', 'focus_form', 'change_form']
+    },
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 This is part of the `@snowplow/browser-plugin-form-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-form-tracking` and then initialize it:
 
 ```javascript
@@ -1572,23 +1597,17 @@ newTracker('sp', '{{collector_url_here}}', {
 });
 
 enableFormTracking();
-```
 
-Snowplow automatic form tracking detects three event types:
-
-1. [change_form](#change_form) – form field changed.
-2. [submit_form](#submit_form) – form submitted.
-3. [focus_form](#focus_form) – form field focused.
-
-By default, all three event types are tracked. However, it is possible to subscribe only to specific event types using the `options.events` option when enabling form tracking:
-
-```javascript
+// subscribing to specific event types
 enableFormTracking({
     options: {
         events: ['submit_form', 'focus_form', 'change_form']
     },
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 ##### `change_form`
 
@@ -1608,13 +1627,11 @@ When a user focuses on a form element, a [`focus_form`](https://github.com/snow
 
 Use the `enableFormTracking` method to turn on form tracking by adding event listeners to all form elements and to all interactive elements inside forms (that is, all `input`, `textarea`, and `select` elements).
 
-```javascript
-enableFormTracking();
-```
-
 This will only work for form elements which exist when it is called. If you are creating a form programmatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programmatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
 
-**Note:** that events on password fields will not be tracked.
+:::note
+Events on password fields will not be tracked.
+:::
 
 #### Custom form tracking
 
@@ -1626,7 +1643,7 @@ This is an array of strings used to prevent certain elements from being tracked.
 
 **Allowlists**
 
-This is an array of strings used to turn on certail. Any form with a CSS class in the array will be tracked. Any field in a tracked form whose name property is in the array will be tracked. All other elements will be ignored.
+This is an array of strings used to turn on tracking. Any form with a CSS class in the array will be tracked. Any field in a tracked form whose name property is in the array will be tracked. All other elements will be ignored.
 
 **Filter functions**
 
@@ -1636,34 +1653,84 @@ This is a function used to determine which elements are tracked. The element is 
 
 This is a function used to transform data in each form field. The value and element (2.15.0+ only) are passed as arguments to the function and the tracked value is replaced by the value returned.
 
-**Contexts**
+**Context**
 
-Contexts can be sent with all form tracking events by supplying them in an array in the `contexts` argument.
+Context entities can be sent with all form tracking events by supplying them in an array in the `context` argument.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
 snowplow('enableFormTracking', { options: {}, context: [] });
 ```
 
-These contexts can be dynamic, i.e. they can be traditional self-describing JSON objects, or callbacks that generate valid self-describing JSON objects.
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
+
+enableFormTracking({ options: {}, context: [] });
+```
+
+  </TabItem>
+</Tabs>
+
+These context entities can be dynamic, i.e. they can be traditional self-describing JSON objects, or callbacks that generate valid self-describing JSON objects.
 
 For form change events, context generators are passed `(elt, type, value)`, and form submission events are passed `(elt, innerElements)`.
 
 A dynamic context could therefore look something like this for form change events:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+let dynamicContext = function (elt, type, value) {
+  // perform operations here to construct the context entity
+  return context;
+};
+
+snowplow('enableFormTracking', { options: {}, context: [dynamicContext] });
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
 
 var dynamicContext = function (elt, type, value) {
-  // perform operations here to construct the context
+  // perform operations here to construct the context entity
   return context;
 };
 
 enableFormTracking({ options: {}, context: [dynamicContext] });
 ```
+  </TabItem>
+</Tabs>
 
 **Examples**
 
 To track every form element and every field except those fields named "password":
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+var opts = {
+  forms: {
+    denylist: []
+  },
+  fields: {
+    denylist: ['password']
+  }
+};
+
+snowplow('enableFormTracking', { options: opts });
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
@@ -1679,8 +1746,32 @@ var options = {
 
 enableFormTracking({ options });
 ```
+  </TabItem>
+</Tabs>
+
 
 To track only the forms with CSS class "tracked", and only those fields whose ID is not "private":
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+var opts = {
+  forms: {
+    allowlist: ["tracked"]
+  },
+  fields: {
+    filter: function (elt) {
+      return elt.id !== "private";
+    }
+  }
+};
+
+snowplow('enableFormTracking', { options: opts });
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
@@ -1699,7 +1790,35 @@ var opts = {
 enableFormTracking({ options: opts });
 ```
 
+  </TabItem>
+</Tabs>
+
 To transform the form fields with an MD5 hashing function:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+var opts = {
+  forms: {
+    allowlist: ["tracked"]
+  },
+  fields: {
+    filter: function (elt) {
+      return elt.id !== "private";
+    },
+    transform: function (value, elt) {
+      // can use elt to make transformation decisions
+      return MD5(value);
+    }
+  }
+};
+
+snowplow('enableFormTracking', { options: opts });
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
@@ -1722,6 +1841,9 @@ var options = {
 enableFormTracking({ options });
 ```
 
+  </TabItem>
+</Tabs>
+
 #### Tracking forms embedded inside iframes
 
 The options for tracking forms inside of iframes are limited – browsers block access to contents of iframes that are from different domains than the parent page. We are not able to provide a solution to track events using trackers initialized on the parent page in such cases. However, since version 3.4, it is possible to track events from forms embedded in iframes loaded from the same domain as the parent page or iframes created using JavaScript on the parent page (e.g., HubSpot forms).
@@ -1729,6 +1851,22 @@ The options for tracking forms inside of iframes are limited – browsers block 
 In case you are able to access form elements inside an iframe, you can pass them in the `options.forms` argument when calling `enableFormTracking` on the parent page. This will enable form tracking for the specific form elements. The feature may also be used for forms not embedded in iframes, but it's most useful in this particular case.
 
 The following example shows how to identify the form elements inside an iframe and pass them to the `enableFormTracking` function:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+let iframe = document.getElementById('form_iframe'); // find the element for the iframe
+let forms = iframe.contentWindow.document.getElementsByTagName('form'); // find form elements inside the iframe
+snowplow('enableFormTracking', {
+    options: {
+        forms: forms // pass the embedded forms when enabling form tracking
+    },
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 let iframe = document.getElementById('form_iframe'); // find the element for the iframe
@@ -1740,19 +1878,10 @@ enableFormTracking({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 ### Ecommerce tracking
-
-This is part of the `@snowplow/browser-plugin-ecommerce` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-ecommerce` and then initialize it:
-
-```javascript
-import { newTracker } from '@snowplow/browser-tracker';
-import { EcommercePlugin } from '@snowplow/browser-plugin-ecommerce';
-
-newTracker('sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
-  plugins: [ EcommercePlugin() ]
-});
-```
 
 This feature is modeled on Google Analytics ecommerce tracking capability, Snowplow uses three methods that have to be used together to track online transactions:
 
@@ -1778,6 +1907,40 @@ The `addTrans` method creates a transaction object. It takes nine possible par
 
 For example:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('addTrans', {
+    orderId: '1234',  // required
+    total: 11.99,   // required
+    affiliation: 'Acme Clothing', 
+    tax: 1.29,
+    shipping: 5,
+    city: 'San Jose',
+    state: 'California',
+    country: 'USA',
+    currency: 'USD'
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+This is part of the `@snowplow/browser-plugin-ecommerce` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-ecommerce` and then initialize it:
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { EcommercePlugin } from '@snowplow/browser-plugin-ecommerce';
+
+newTracker('sp', '{{collector_url_here}}', {
+  appId: 'my-app-id',
+  plugins: [ EcommercePlugin() ]
+});
+```
+
+Used like this for the first step:
+
 ```javascript
 import { addTrans } from '@snowplow/browser-plugin-ecommerce'
 
@@ -1794,7 +1957,10 @@ addTrans({
 });
 ```
 
-`addTrans` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+  </TabItem>
+</Tabs>
+
+`addTrans` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
 #### `addItem`
 
@@ -1814,6 +1980,23 @@ There are six potential parameters that can be passed with each call, four of wh
 
 For example:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('addItem', {
+    orderId: '1234', // required
+    sku: 'DD44',     // required
+    name: 'T-Shirt',      
+    category: 'Green Medium',
+    price: 11.99,
+    quantity: 1,
+    currency: 'USD'
+});
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 import { addItem } from '@snowplow/browser-plugin-ecommerce'
 
@@ -1828,17 +2011,140 @@ addItem({
 });
 ```
 
-`addItem` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+  </TabItem>
+</Tabs>
+
+`addItem` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
 #### trackTrans
 
 Once the transaction object has been created (using `addTrans`) and the relevant item data added to it using the `addItem` method, we are ready to send the data to the collector. This is initiated using the `trackTrans` method:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackTrans');
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import { trackTrans } from '@snowplow/browser-plugin-ecommerce';
 
 trackTrans();
 ```
+
+  </TabItem>
+</Tabs>
+
+#### Putting the three methods together: a complete example
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```html
+<html>
+<head>
+<title>Receipt for your clothing purchase from Acme Clothing</title>
+<script type="text/javascript">
+
+  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
+
+  snowplow('newTracker', 'sp', '{{collector_url_here}}', { appId: 'my-store' });
+  snowplow('enableActivityTracking',{ 
+    minimumVisitLength: 30, 
+    heartbeatDelay: 10 
+  });
+  snowplow('trackPageView');
+  snowplow('enableLinkClickTracking');
+
+  snowplow('addTrans', {
+    orderId: '1234',  // required
+    total: 11.99,   // required
+    affiliation: 'Acme Clothing', 
+    tax: 1.29,
+    shipping: 5,
+    city: 'San Jose',
+    state: 'California',
+    country: 'USA',
+    currency: 'USD'
+  });
+
+   // add item might be called for every item in the shopping cart
+   // where your ecommerce engine loops through each item in the cart and
+   // prints out _addItem for each
+  snowplow('addItem', {
+    orderId: '1234', // required
+    sku: 'DD44',     // required
+    name: 'T-Shirt',      
+    category: 'Green Medium',
+    price: 11.99,
+    quantity: 1,
+    currency: 'USD'
+  });
+
+  // trackTrans sends the transaction to Snowplow tracking servers.
+  // Must be called last to commit the transaction.
+  snowplow('trackTrans'); //submits transaction to the collector
+
+</script>
+</head>
+<body>
+
+  Thank you for your order.  You will receive an email containing all your order details.
+
+</body>
+</html>
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { EcommercePlugin, addTrans, addItem, trackTrans } from '@snowplow/browser-plugin-ecommerce';
+
+newTracker('sp', '{{collector_url_here}}', {
+  appId: 'my-app-id',
+  plugins: [ EcommercePlugin() ]
+});
+
+addTrans({
+    orderId: '1234',  // required
+    total: 11.99,   // required
+    affiliation: 'Acme Clothing', 
+    tax: 1.29,
+    shipping: 5,
+    city: 'San Jose',
+    state: 'California',
+    country: 'USA',
+    currency: 'USD'
+});
+
+// add item might be called for every item in the shopping cart
+// where your ecommerce engine loops through each item in the cart and
+// prints out _addItem for each
+addItem({
+    orderId: '1234', // required
+    sku: 'DD44',     // required
+    name: 'T-Shirt',      
+    category: 'Green Medium',
+    price: 11.99,
+    quantity: 1,
+    currency: 'USD'
+});
+
+// trackTrans sends the transaction to Snowplow tracking servers.
+// Must be called last to commit the transaction.
+trackTrans();
+```
+
+  </TabItem>
+</Tabs>
 
 #### `trackAddToCart` and `trackRemoveFromCart`
 
@@ -1854,6 +2160,32 @@ These methods are also part of `@snowplow/browser-plugin-ecommerce` and let you 
 | `currency`  | No            | Item price currency                    | string   |
 
 An example:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackAddToCart', {
+  sku: '000345', 
+  name: 'blue tie', 
+  category: 'clothing', 
+  unitPrice: 3.49, 
+  quantity: 2, 
+  currency: 'GBP'
+});
+
+snowplow('trackRemoveFromCart', {
+  sku: '000345', 
+  name: 'blue tie', 
+  category: 'clothing', 
+  unitPrice: 3.49, 
+  quantity: 2, 
+  currency: 'GBP'
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import { trackAddToCart, trackRemoveFromCart } from '@snowplow/browser-plugin-ecommerce';
@@ -1876,24 +2208,14 @@ trackRemoveFromCart({
   currency: 'GBP'
 });
 ```
+  </TabItem>
+</Tabs>
 
 Both methods are implemented as Snowplow self describing events. You can see schemas for the [`add_to_cart`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/add_to_cart/jsonschema/1-0-0) and [`remove_from_cart`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/remove_from_cart/jsonschema/1-0-0) events.
 
-Both methods can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+Both methods can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
 ### Social tracking
-
-This is part of the `@snowplow/browser-plugin-site-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-site-tracking` and then initialize it:
-
-```javascript
-import { newTracker } from '@snowplow/browser-tracker';
-import { SiteTrackingPlugin } from '@snowplow/browser-plugin-site-tracking';
-
-newTracker('sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
-  plugins: [ SiteTrackingPlugin() ]
-});
-```
 
 Social tracking will be used to track the way users interact with Facebook, Twitter and Google + widgets, e.g. to capture "like this" or "tweet this" events.
 
@@ -1909,6 +2231,44 @@ The `trackSocialInteraction` method takes three parameters:
 
 The method is executed in as:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackSocialInteraction', { 
+  action: string, 
+  network: string, 
+  target: string 
+});
+
+```
+
+For example:
+
+```javascript
+snowplow('trackSocialInteraction', {
+  action: 'like', 
+  network: 'facebook', 
+  target: 'pbz00123'
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+This is part of the `@snowplow/browser-plugin-site-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-site-tracking` and then initialize it:
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { SiteTrackingPlugin } from '@snowplow/browser-plugin-site-tracking';
+
+newTracker('sp', '{{collector_url_here}}', {
+  appId: 'my-app-id',
+  plugins: [ SiteTrackingPlugin() ]
+});
+```
+
+Definition:
 ```javascript
 import { trackSocialInteraction } from '@snowplow/browser-plugin-site-tracking';
 
@@ -1930,10 +2290,12 @@ trackSocialInteraction({
   target: 'pbz00123'
 });
 ```
+  </TabItem>
+</Tabs>
 
-`trackSocialInteraction` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+`trackSocialInteraction` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-#### `trackSiteSearch`
+### `trackSiteSearch`
 
 Use the `trackSiteSearch` method to track users searching your website. Here are its arguments:
 
@@ -1946,6 +2308,21 @@ Use the `trackSiteSearch` method to track users searching your website. Here a
 
 An example:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackSiteSearch', {
+    terms: ['unified', 'log'],
+    filters: {'category': 'books', 'sub-category': 'non-fiction'},
+    totalResults: 14,
+    pageResults: 8
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 import { trackSiteSearch } from '@snowplow/browser-plugin-site-tracking';
 
@@ -1957,11 +2334,14 @@ trackSiteSearch({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 Site search events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/site_search/jsonschema/1-0-0) is the schema for a `site_search` event.
 
-`trackSiteSearch` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+`trackSiteSearch` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-#### `trackTiming`
+### `trackTiming`
 
 Use the `trackTiming` method to track user timing events such as how long resources take to load. Here are its arguments:
 
@@ -1974,6 +2354,20 @@ Use the `trackTiming` method to track user timing events such as how long reso
 
 An example:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackTiming', {
+  category: 'load',
+  variable: 'map_loaded',
+  timing: 50,
+  label: 'Map loading time'
+});
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 import { trackTiming } from '@snowplow/browser-plugin-site-tracking';
 
@@ -1984,10 +2378,13 @@ trackTiming({
   label: 'Map loading time'
 });
 ```
+  </TabItem>
+</Tabs>
 
-Site search events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/timing/jsonschema/1-0-0) is the schema for a `timing` event.
 
-`trackTiming` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+Timing events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/timing/jsonschema/1-0-0) is the schema for a `timing` event.
+
+`trackTiming` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
 ### Campaign tracking
 
@@ -2034,21 +2431,65 @@ The parameters are described in the [Google Analytics help page](https://suppor
 
 ### Ad tracking methods
 
-This is part of the `@snowplow/browser-plugin-ad-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-ad-tracking` and then initialize it:
-
-```javascript
-import { newTracker } from '@snowplow/browser-tracker';
-import { AdTrackingPlugin } from '@snowplow/browser-plugin-ad-tracking';
-
-newTracker('sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
-  plugins: [ AdTrackingPlugin() ]
-});
-```
-
 Snowplow tracking code can be included in ad tags in order to track impressions and ad clicks. This is used by e.g. ad networks to identify which sites and web pages users visit across a network, so that they can be segmented, for example.
 
 Each ad tracking method has a `costModel` field and a `cost` field. If you provide the `cost` field, you must also provide one of `'cpa'`, `'cpc'`, and `'cpm'` for the `costModel` field.
+
+It may be the case that multiple ads from the same source end up on a single page. If this happens, it is important that the different Snowplow code snippets associated with those ads not interfere with one another. The best way to prevent this is to randomly name each tracker instance you create so that the probability of a name collision is negligible. See [Managing multiple trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/managing-multiple-trackers/index.md) for more on having more than one tracker instance on a single page.
+
+Below is an example of how to achieve this when using Snowplow ad impression tracking.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+<!-- Snowplow starts plowing -->
+<script type="text/javascript">
+
+// Wrap script in a closure.
+// This prevents rnd from becoming a global variable.
+// So if multiple copies of the script are loaded on the same page,
+// each instance of rnd will be inside its own namespace and will
+// not overwrite any of the others.
+// See http://benalman.com/news/2010/11/immediately-invoked-function-expression/
+(function(){
+  // Randomly generate tracker namespace to prevent clashes
+  var rnd = Math.random().toString(36).substring(2);
+
+  // Load Snowplow
+  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
+
+  // Create a new tracker namespaced to rnd
+  snowplow('newTracker', rnd, '{{COLLECTOR_URL}}', {
+    appId: 'myApp',
+  });
+
+  // Replace the values below with macros from your adserver
+  snowplow('trackAdImpression:' + rnd, {
+    impressionId: '67965967893',
+    costModel: 'cpm',          // 'cpa', 'cpc', or 'cpm'
+    cost: 5.5,
+    targetUrl: 'http://www.example.com',
+    bannerId: '23',
+    zoneId: '7',
+    advertiserId: '201',
+    campaignId: '12'
+  });
+}());
+</script>
+<!-- Snowplow stops plowing -->
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+TODO
+  </TabItem>
+</Tabs>
+
+Even if several copies of the above script appear on a page, the trackers created will all (probably) have different names and so will not interfere with one another. The same technique should be used when tracking ad clicks. The below examples for `trackAdImpression` and `trackAdClick` assume that `rnd` has been defined in this way.
 
 #### `trackAdImpression`
 
@@ -2065,10 +2506,43 @@ Ad impression tracking is accomplished using the `trackAdImpression` method. H
 | `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
 | `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
 
-NOTE: All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdImpression`.
+:::note
+All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdImpression`.
+:::
 
 An example:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackAdImpression', {
+    impressionId: '67965967893',
+    costModel: 'cpm', // 'cpa', 'cpc', or 'cpm'
+    cost: 5.5,
+    targetUrl: 'http://www.example.com',
+    bannerId: '23',
+    zoneId: '7',
+    advertiserId: '201',
+    campaignId: '12'
+});
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+This is part of the `@snowplow/browser-plugin-ad-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-ad-tracking` and then initialize it:
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { AdTrackingPlugin } from '@snowplow/browser-plugin-ad-tracking';
+
+newTracker('sp', '{{collector_url_here}}', {
+  appId: 'my-app-id',
+  plugins: [ AdTrackingPlugin() ]
+});
+```
+
+Example usage:
 ```javascript
 import { trackAdImpression } from '@snowplow/browser-plugin-ad-tracking';
 
@@ -2084,9 +2558,12 @@ trackAdImpression({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 Ad impression events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ad_impression/jsonschema/1-0-0) is the JSON schema for an ad impression event.
 
-`trackAdImpression` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+`trackAdImpression` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
 #### `trackAdClick`
 
@@ -2105,6 +2582,26 @@ Ad click tracking is accomplished using the `trackAdClick` method. Here are th
 
 An example:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackAdClick',
+  targetUrl: 'http://www.example.com',
+  clickId: '12243253',
+  costModel: 'cpm',
+  cost: 2.5,
+  bannerId: '23',
+  zoneId: '7',
+  impressionId: '67965967893', // the same as in trackAdImpression
+  advertiserId: '201',
+  campaignId: '12'
+);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 import { trackAdClick } from '@snowplow/browser-plugin-ad-tracking';
 
@@ -2121,9 +2618,12 @@ trackAdClick({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 Ad click events are implemented as Snowplow self describing events.[Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ad_click/jsonschema/1-0-0) is the JSON schema for an ad click event.
 
-`trackAdClick` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+`trackAdClick` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
 #### `trackAdConversion`
 
@@ -2141,9 +2641,31 @@ Use the `trackAdConversion` method to track ad conversions. Here are the argum
 | `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
 | `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
 
-NOTE: All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdConversion`.
+:::note
+All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdConversion`.
+:::
 
 An example:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackAdConversion', {
+    conversionId: '743560297',
+    costModel: 'cpa',
+    cost: 10,
+    category: 'ecommerce',
+    action: 'purchase',
+    property: '',
+    initialValue: 99,
+    advertiserId: '201',
+    campaignId: '12'
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import { trackAdConversion } from '@snowplow/browser-plugin-ad-tracking';
@@ -2161,9 +2683,12 @@ trackAdConversion({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 Ad conversion events are implemented as Snowplow self describing events. [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ad_conversion/jsonschema/1-0-0) is the schema for an ad conversion event.
 
-`trackAdConversion` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+`trackAdConversion` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
 ### Enhanced Ecommerce tracking
 
@@ -2199,9 +2724,27 @@ ga('ec:setAction', 'purchase', {
 });
 ```
 
-**NOTE**: The action type is passed with the action context in the Google Analytics example. We have separated this by asking you to call the trackEnhancedEcommerceAction function to actually send the context and the action.
+:::note
+The action type is passed with the action context in the Google Analytics example. We have separated this by asking you to call the `trackEnhancedEcommerceAction` function to actually send the context and the action.
+:::
 
 Adding an action using Snowplow:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('addEnhancedEcommerceActionContext', {
+  id: 'T12345',
+  affiliation: 'Google Store - Online',
+  revenue: '37.39', // Can also pass as number
+  tax: '2.85', // Can also pass as number
+  shipping: '5.34', // Can also pass as number
+  coupon: 'WINTER2016'
+});
+``
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 addEnhancedEcommerceActionContext({
@@ -2213,6 +2756,9 @@ addEnhancedEcommerceActionContext({
   coupon: 'WINTER2016'
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 #### `addEnhancedEcommerceImpressionContext`
 
@@ -2246,6 +2792,24 @@ ga('ec:addImpression', {
 
 Adding an impression using Snowplow:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('addEnhancedEcommerceImpressionContext', {
+  id: 'P12345',
+  name: 'Android Warhol T-Shirt',
+  list: 'Search Results',
+  brand: 'Google',
+  category: 'Apparel/T-Shirts',
+  variant: 'Black',
+  position: 1
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 addEnhancedEcommerceImpressionContext({
   id: 'P12345',
@@ -2257,6 +2821,9 @@ addEnhancedEcommerceImpressionContext({
   position: 1
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 #### `addEnhancedEcommerceProductContext`
 
@@ -2291,6 +2858,23 @@ ga('ec:addProduct', {
 
 Adding a product using Snowplow:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('addEnhancedEcommerceProductContext', {
+  id: 'P12345',
+  name: 'Android Warhol T-Shirt',
+  list: 'Search Results',
+  brand: 'Google',
+  category: 'Apparel/T-Shirts',
+  variant: 'Black',
+  quantity: 1
+});
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 addEnhancedEcommerceProductContext({
   id: 'P12345',
@@ -2302,6 +2886,9 @@ addEnhancedEcommerceProductContext({
   quantity: 1
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 #### `addEnhancedEcommercePromoContext`
 
@@ -2328,6 +2915,21 @@ ga('ec:addPromo', {
 
 Adding a promotion using Snowplow:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('addEnhancedEcommercePromoContext', {
+  id: 'PROMO_1234', // The Promotion ID
+  name: 'Summer Sale', // The name
+  creative: 'summer_banner2', // The name of the creative
+  position: 'banner_slot1' // The position
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 addEnhancedEcommercePromoContext({
   id: 'PROMO_1234', // The Promotion ID
@@ -2336,6 +2938,9 @@ addEnhancedEcommercePromoContext({
   position: 'banner_slot1' // The position
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 #### `trackEnhancedEcommerceAction`
 
@@ -2368,14 +2973,26 @@ ga('ec:setAction', 'refund', {
 
 Adding an action using Snowplow:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
 ```javascript
-addEnhancedEcommerceActionContext({
+snowplow('addEnhancedEcommerceActionContext', {
   id: 'T12345'
 });
 snowplow('trackEnhancedEcommerceAction', {
   action: 'refund'
 });
 ```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+addEnhancedEcommerceActionContext({ id: 'T12345' });
+trackEnhancedEcommerceAction({ action: 'refund' });
+```
+  </TabItem>
+</Tabs>
 
 ### Consent tracking
 
@@ -2397,6 +3014,22 @@ The `expiry` field specifies that the user consents to the attached documents 
 
 Tracking a consent granted event:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackConsentGranted', {
+  id: '1234',
+  version: '5',
+  name: 'consent_document',
+  description: 'a document granting consent',
+  expiry: '2020-11-21T08:00:00.000Z'
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 trackConsentGranted({
   id: '1234',
@@ -2406,6 +3039,9 @@ trackConsentGranted({
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 #### `trackConsentWithdrawn`
 
@@ -2425,6 +3061,22 @@ The method arguments are:
 
 Tracking a consent withdrawn event:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackConsentWithdrawn', {
+  all: false,
+  id: '1234',
+  version: '5',
+  name: 'consent_document',
+  description: 'a document withdrawing consent'
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 trackConsentWithdrawn({
   all: false,
@@ -2435,9 +3087,12 @@ trackConsentWithdrawn({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 #### Consent documents
 
-Consent documents are stored in the context of a consent event. Each consent method adds a consent document to the event. The consent document is a custom context storing the arguments supplied to the method (in both granted and withdrawn events, this will be: id, version, name, and description). In either consent method, additional documents can be appended to the event by passing an array of consent document self-describing JSONs in the context argument.
+Consent documents are stored in the context of a consent event. Each consent method adds a consent document to the event. The consent document is a custom context entity storing the arguments supplied to the method (in both granted and withdrawn events, this will be: id, version, name, and description). In either consent method, additional documents can be appended to the event by passing an array of consent document self-describing JSONs in the context argument.
 
 The fields of a consent document are:
 
@@ -2464,6 +3119,22 @@ A consent document self-describing JSON looks like this:
 
 As an example, `trackConsentGranted` will store one consent document as a custom context:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackConsentGranted',
+  id: '1234', 
+  version: '5', 
+  name: 'consent_document', 
+  description: 'a document granting consent', 
+  expiry: '2020-11-21T08:00:00.000Z'
+);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 trackConsentGranted({
   id: '1234', 
@@ -2473,6 +3144,9 @@ trackConsentGranted({
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 The method call will generate this event:
 
@@ -2505,7 +3179,7 @@ The method call will generate this event:
 
 ### GDPR context
 
-The GDPR context attaches a context with the GDPR basis for processing and the details of a related document (eg. a consent document) to all events which are fired after it is set.
+The GDPR context attaches a context entity with the GDPR basis for processing and the details of a related document (eg. a consent document) to all events which are fired after it is set.
 
 It takes the following arguments:
 
@@ -2543,9 +3217,24 @@ It takes the following arguments:
 }
 ```
 
-The required basisForProcessing accepts only the following literals: `consent`, `contract`, `legalObligation`, `vitalInterests`, `publicTask`, `legitimateInterests` - in accordance with the [five legal bases for processing](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/)
+The required `basisForProcessing` accepts only the following literals: `consent`, `contract`, `legalObligation`, `vitalInterests`, `publicTask`, `legitimateInterests` - in accordance with the [five legal bases for processing](https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/).
 
 The GDPR context is enabled by calling the `enableGdprContext` method once the tracker has been initialized, for example:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('enableGdprContext', {
+  basisForProcessing: 'consent',
+  documentId: 'consentDoc-abc123',
+  documentVersion: '0.1.0',
+  documentDescription: 'this document describes consent basis for processing'
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 enableGdprContext({
@@ -2556,13 +3245,37 @@ enableGdprContext({
 });
 ```
 
-#### Error tracking
+  </TabItem>
+</Tabs>
+
+### Error tracking
 
 Snowplow JS tracker provides two ways of tracking exceptions: manual tracking of handled exceptions using `trackError` and automatic tracking of unhandled exceptions using `enableErrorTracking`.
 
 ##### `trackError`
 
 Use the `trackError` method to track handled exceptions (application errors) in your JS code. This is its signature:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackError', {
+  /** The error message */
+  message: string;
+  /** The filename where the error occurred */
+  filename?: string;
+  /** The line number which the error occurred on */
+  lineno?: number;
+  /** The column number which the error occurred on */
+  colno?: number;
+  /** The error object */
+  error?: Error;
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 trackError({
@@ -2579,6 +3292,9 @@ trackError({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 | **Name**   | **Required?** | **Description**                     | **Type**   |
 |------------|---------------|-------------------------------------|------------|
 | `message`  | Yes           | Error message                       | string     |
@@ -2588,6 +3304,24 @@ trackError({
 | `error`    | No            | JS `ErrorEvent`                     | ErrorEvent |
 
 Of these arguments, only `message` is required. Signature of this method defined to match `window.onerror` callback in modern browsers.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+try {
+  var user = getUser()
+} catch(e) {
+  snowplow('trackError', {
+    message: 'Cannot get user object', 
+    filename: 'shop.js', 
+    error: e
+  });
+}
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 try {
@@ -2601,13 +3335,33 @@ try {
 }
 ```
 
-`trackError` can also be passed an array of custom context as an additional parameter. See [custom context](#custom-context) for more information.
+  </TabItem>
+</Tabs>
 
-Using `trackError` it's assumed that developer knows where error could happen, which is not often the case. Therefor it's recommended to use `enableErrorTracking` as it allows you to discover errors that weren't expected.
+`trackError` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
+
+Using `trackError` it's assumed that developer knows where errors could happen, which is not often the case. Therefor it's recommended to use `enableErrorTracking` as it allows you to discover errors that weren't expected.
 
 ##### `enableErrorTracking`
 
 Use the `enableErrorTracking` method to track unhandled exceptions (application errors) in your JS code. This is its signature:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('enableErrorTracking', {
+  /** A callback which allows on certain errors to be tracked */
+  filter?: (error: ErrorEvent) => boolean;
+  /** A callback to dynamically add extra context based on the error */
+  contextAdder?: (error: ErrorEvent) => Array<SelfDescribingJson>;
+  /** Context to be added to every error */
+  context?: Array<SelfDescribingJson>;
+}
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 enableErrorTracking({
@@ -2620,6 +3374,9 @@ enableErrorTracking({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 | **Name**       | **Required?** | **Description**                 | **Type**                                    |
 |----------------|---------------|---------------------------------|---------------------------------------------|
 | `filter`       | No            | Predicate to filter exceptions  | `(ErrorEvent) => Boolean`                   |
@@ -2628,11 +3385,24 @@ enableErrorTracking({
 
 Unlike `trackError` you need enable error tracking only once:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('enableErrorTracking')
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 enableErrorTracking();
 ```
 
-Application error events are implemented as Snowplow self describing events. [Here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/application_error/jsonschema/1-0-1) is the schema for a `application_error` event.
+  </TabItem>
+</Tabs>
+
+Application error events are implemented as Snowplow self describing events. [Here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/application_error/jsonschema/1-0-1) is the schema for an `application_error` event.
 
 ### Setting the true timestamp
 
@@ -2645,21 +3415,55 @@ These are combined downstream in the Snowplow pipeline (with the `collector_tst
 
 In certain circumstances you might want to set the timestamp yourself e.g. if the JS tracker is being used to process historical event data, rather than tracking the events live. In this case you can set the `true_timestamp` for the event. When set, this will be used as the value in the `derived_tstamp` rather than a combination of the `device_created_tstamp`, `device_sent_tstamp` and `collector_tstamp`.
 
-To set the true timestamp add an extra argument to your track method:
+To set the true timestamp add an extra argument to your track method: `{type: 'ttm', value: unixTimestampInMs}`.
 
-```json
-{type: 'ttm', value: unixTimestampInMs}
+E.g. to set a true timestamp with a page view event:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackPageView', {
+  timestamp: { type: 'ttm', value: 1361553733371 }
+});
 ```
-
-e.g. to set a true timestamp with a page view event:
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 trackPageView({
   timestamp: { type: 'ttm', value: 1361553733371 }
 });
 ```
+  </TabItem>
+</Tabs>
 
-e.g. to set a true timestamp for a self-describing event:
+
+E.g. to set a true timestamp for a self-describing event:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackSelfDescribingEvent', {
+  event: {
+    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+    data: {
+        productId: 'ASO01043',
+        category: 'Dresses',
+        brand: 'ACME',
+        returning: true,
+        price: 49.95,
+        sizes: ['xs', 's', 'l', 'xl', 'xxl'],
+        availableSince: new Date(2013,3,7)
+    }
+  },
+  timestamp: { type: 'ttm', value: 1361553733371 }
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 trackSelfDescribingEvent({
@@ -2678,3 +3482,6 @@ trackSelfDescribingEvent({
   timestamp: { type: 'ttm', value: 1361553733371 }
 });
 ```
+
+  </TabItem>
+</Tabs>

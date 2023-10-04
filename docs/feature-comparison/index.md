@@ -11,7 +11,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | <h3>Create & consume behavioral data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
 |:--|:-:|:-:|:-:|
 | [35+ trackers & webhooks](/docs/collecting-data/index.md) | ✅ | ✅ | ✅ |
-| 1st party tracking | ✅ | _coming soon_ | ✅ |
+| 1st party tracking | ✅ | ✅ | ✅ |
 | [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ | ✅ |
 | Custom [events](/docs/understanding-your-pipeline/events/index.md#out-of-the-box-and-custom-events) & [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities) | ✅ | ✅ | ✅ |
 | [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ | ✅ |

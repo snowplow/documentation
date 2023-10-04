@@ -3,6 +3,12 @@ title: "Fractribution"
 sidebar_position: 700
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
+
 ## Package Configuration Variables
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.

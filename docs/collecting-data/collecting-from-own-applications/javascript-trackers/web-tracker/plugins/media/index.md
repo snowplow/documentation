@@ -1,5 +1,5 @@
 ---
-title: "Snowplow Media TODO reusable block"
+title: "Snowplow Media"
 sidebar_position: 12500
 ---
 
@@ -75,6 +75,19 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Overview
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```mdx-code-block
+<Media tracker="js-tag" />
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```mdx-code-block
 <Media tracker="js-browser" />
 ```
+
+  </TabItem>
+</Tabs>

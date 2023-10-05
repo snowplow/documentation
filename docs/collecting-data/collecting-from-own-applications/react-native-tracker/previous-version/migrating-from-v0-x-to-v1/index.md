@@ -1,7 +1,7 @@
 ---
 title: "Migrating from v0 to v1"
 date: "2021-08-09"
-sidebar_position: 10
+sidebar_position: 200
 ---
 
 This sections describes the differences between v0.2.0 and [v1.0.0](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md) of the Snowplow React Native Tracker and the steps needed to upgrade, which is also recommended.

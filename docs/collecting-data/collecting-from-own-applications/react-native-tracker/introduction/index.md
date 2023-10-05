@@ -1,21 +1,14 @@
 ---
-title: "Introduction"
+title: "Introduction and configuration"
 date: "2021-08-06"
-sidebar_position: 0
+sidebar_position: 10
 ---
 
 ```mdx-code-block
-import Badges from '@site/src/components/Badges';
 import {versions} from '@site/src/componentVersions';
-
-<Badges badgeType="Actively Maintained"></Badges>
 ```
 
-[![Latest tracker version](https://img.shields.io/npm/v/@snowplow/react-native-tracker)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
-
-[![Supported React Native versions](https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native)](https://www.npmjs.com/package/@snowplow/react-native-tracker)
-
-The Snowplow React Native Tracker is a module which imports the [Mobile Native Snowplow Trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) as native modules, available for use in React Native projects. More specifically it is built upon the [Mobile Native Trackers v2](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/mobile-trackers-v2-x/index.md), so as to leverage their tracking capabilities, API and configuration parameters.
+The Snowplow React Native Tracker is a module which imports the [Mobile Native Snowplow Trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) as native modules, available for use in React Native projects. More specifically it is built upon the [Mobile Native Trackers v5](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md), so as to leverage their tracking capabilities, API and configuration parameters.
 
 <p>The current version is {versions.reactNativeTracker}.</p>
 
@@ -115,8 +108,10 @@ interface TrackerConfiguration {
    */
   screenContext?: boolean;
   /**
-   * Whether enable automatic tracking of ScreenView events.
-   * @defaultValue true
+   * Whether enable automatic tracking of ScreenView events from the native side.
+   * Only tracking UIKit views on iOS and Activity on Android are supported.
+   * For tracking React Native views, see the tracker docs for manual and auto-tracking options.
+   * @defaultValue false
    */
   screenViewAutotracking?: boolean;
   /**
@@ -166,7 +161,7 @@ interface TrackerConfiguration {
 - **platformContext**: Whether mobile/platform context is sent with all the tracked events. Default value: `true`.
 - **geoLocationContext**: Whether geo-location context is sent with all the tracked events. Default value: `false`.
 - **screenContext**: Whether screen context is sent with all the tracked events. Default value: `true`.
-- **screenViewAutotracking**: Whether automatic tracking of ScreenView events is enabled. Default value: `true`.
+- **screenViewAutotracking**: Whether automatic tracking of ScreenView events from the native side (from UIKit on iOS or Activity on Android) is enabled. Default value: `false`.
 - **lifecycleAutotracking**: Whether automatic tracking of background and foreground transitions is enabled. Default value: `false`.
 - **installAutotracking**: Whether automatic tracking of install event is enabled. Default value: `true`.
 - **exceptionAutotracking**: Whether crash reporting is enabled. Default value: `false`.

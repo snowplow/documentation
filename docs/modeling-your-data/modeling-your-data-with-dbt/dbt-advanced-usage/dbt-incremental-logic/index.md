@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce`, `normalize`, `media_player`
+On this page, `<package>` can be one of: `unified`, `web`, `mobile`, `ecommerce`, `normalize`
 
 :::
 
@@ -92,7 +92,7 @@ In all states the `upper_limit` is limited by the `snowplow__backfill_limit_days
 
 If there are no enabled models already in the manifest then we process from the start date up to the backfill limit or now, whichever is older:
 
-**`lower_limit`**: `snowplow__start_date`  
+**`lower_limit`**: `snowplow__start_date`
 **`upper_limit`**: `least(current_tstamp, snowplow__start_date + snowplow__backfill_limit_days)`
 
 ```mermaid
@@ -118,7 +118,7 @@ gantt
 
 If there are enabled models that aren't in the manifest table then a new model tagged with `snowplow_<package>_incremental` has been added since the last run; this can happen with a new custom model, or you have enabled some previously disabled custom modules. In this case the package will replay all previously processed events in order to back-fill the new model.
 
-**`lower_limit`**: `snowplow__start_date`  
+**`lower_limit`**: `snowplow__start_date`
 **`upper_limit`**: `least(max_last_success, snowplow__start_date + snowplow__backfill_limit_days)`
 
 ```mermaid
@@ -145,7 +145,7 @@ gantt
 
 If the `min_last_success` is less than the `max_last_success` it means the tagged models are out of sync, for example due to a particular model failing to execute successfully during the previous run or as part of catching up on a new model. The package will attempt to sync all models as far as your backfill limit will allow.
 
-**`lower_limit`**: `min_last_success - snowplow__lookback_window_hours`  
+**`lower_limit`**: `min_last_success - snowplow__lookback_window_hours`
 **`upper_limit`**: `least(max_last_success, min_last_success + snowplow__backfill_limit_days)`
 
 ```mermaid
@@ -173,7 +173,7 @@ gantt
 
 If none of the above criteria are met, then we consider it a 'standard run' where all models are in sync and we carry on from the last processed event.
 
-**`lower_limit`**: `max_last_success - snowplow__lookback_window_hours`  
+**`lower_limit`**: `max_last_success - snowplow__lookback_window_hours`
 **`upper_limit`**: `least(current_tstamp, max_last_success + snowplow__backfill_limit_days)`
 
 

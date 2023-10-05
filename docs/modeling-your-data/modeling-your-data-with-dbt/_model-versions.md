@@ -9,14 +9,27 @@ import {versions} from '@site/src/componentVersions';
 <!-- Note the following tables are wrapped in the additional tags to correctly render the package version, but work the same as normal markdown tables -->
 
 <Tabs groupId="dbt-packages" queryString>
+
+<TabItem value="unified" label="Snowplow Unified" default>
+
+
+<ReactMarkdown children={`
+| snowplow-unified version       | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| -------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
+| ${versions.dbtSnowplowUnified} | >=1.6.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+`} remarkPlugins={[remarkGfm]} />
+
+
+</TabItem>
+
 <TabItem value="web" label="Snowplow Web" default>
 
 
 <ReactMarkdown children={`
 | snowplow-web version       | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | -------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowWeb} | >=1.5.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅^     |
-| 0.15.2                     | >=1.4.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅^     |
+| ${versions.dbtSnowplowWeb} | >=1.5.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.15.2                     | >=1.4.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.13.3*                     | >=1.3.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.11.0                     | >=1.0.0 to <1.3.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.5.1                      | >=0.20.0 to <1.0.0  |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
@@ -40,7 +53,7 @@ import {versions} from '@site/src/componentVersions';
 | 0.6.3                         | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.5.5                         | >=1.0.0 to <1.3.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.2.0                         | >=0.20.0 to <1.0.0 |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
-`} remarkPlugins={[remarkGfm]} /> 
+`} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
 <TabItem value="media" label="Snowplow Media Player">
@@ -54,7 +67,7 @@ import {versions} from '@site/src/componentVersions';
 | 0.4.1                              | >=0.12.0 to <0.13.0  | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.3.4                              | >=0.9.0 to <0.12.0   | >=1.0.0 to <1.3.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.1.0                              | >=0.6.0 to <0.7.0    | >=0.20.0 to <1.1.0 |    ❌     |     ❌      |    ✅     |     ❌     |    ✅     |
-`} remarkPlugins={[remarkGfm]} /> 
+`} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
 <TabItem value="normalize" label="Snowplow Normalize">
@@ -65,7 +78,7 @@ import {versions} from '@site/src/componentVersions';
 | ${versions.dbtSnowplowNormalize} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 | 0.2.3                            | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 | 0.1.0                            | >=1.0.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
-`} remarkPlugins={[remarkGfm]} /> 
+`} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
 <TabItem value="ecommerce" label="Snowplow E-commerce">
@@ -76,7 +89,7 @@ import {versions} from '@site/src/componentVersions';
 | ${versions.dbtSnowplowEcommerce} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ⚠️     |
 | 0.3.0                            | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 | 0.2.1                            | >=1.0.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
-`} remarkPlugins={[remarkGfm]} /> 
+`} remarkPlugins={[remarkGfm]} />
 
 > _Postgres is technically supported in the models within the package, however one of the contexts’ names is too long to be loaded via the Postgres Loader._
 
@@ -92,7 +105,7 @@ import {versions} from '@site/src/componentVersions';
 | 0.3.0                                | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 | 0.2.0                                | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
 | 0.1.0                                | >=1.0.0 to <2.0.0 |    ❌     |     ❌      |    ❌     |     ✅     |    ❌     |
-`} remarkPlugins={[remarkGfm]} /> 
+`} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
 </Tabs>

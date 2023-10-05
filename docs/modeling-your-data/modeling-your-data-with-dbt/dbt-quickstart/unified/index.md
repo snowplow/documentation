@@ -1,23 +1,25 @@
 ---
-sidebar_label: "Web"
+sidebar_label: "Unified"
 sidebar_position: 100
-title: "Web Quickstart"
+title: "Unified Quickstart"
 ---
-
-```mdx-code-block
-import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
-
-<Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
-```
 
 ## Requirements
 
-In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
+In addition to [dbt](https://github.com/dbt-labs/dbt) being installed:
 
+To model web events:
+
+- web events dataset being available in your database
 - [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context)).
-- [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#page-views) implemented.
-- From version v0.13.0 onwards you must be using [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
+- Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/index.md#webPage_context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#webPage_context)).
+- [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#page-views) implemented.
+
+To model mobile events:
+- mobile events dataset being available in your database
+- Snowplow [Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/index.md) or [iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 or later implemented.
+- Mobile session context enabled ([ios](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#session-context) or  [android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#session-tracking)).
+- Screen view events enabled ([ios](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#tracking-features) or [android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#tracking-features)).
 
 ```mdx-code-block
 import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
@@ -56,7 +58,7 @@ This package will by default assume your Snowplow events data is contained in th
 
 ```yml title="dbt_project.yml"
 vars:
-  snowplow_web:
+  snowplow_unified:
     snowplow__atomic_schema: schema_with_snowplow_events
     snowplow__database: database_with_snowplow_events
 ```
@@ -68,20 +70,34 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 ### 4. Enabled desired contexts
 
-The web package has the option to join in data from the following 3 Snowplow enrichments:
+The unified package has the option to join in data from the following Snowplow enrichments and out-of-the-box contexts:
 
 - [IAB enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md)
 - [UA Parser enrichment](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
 - [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md)
+- Browser context
+- Mobile context
+- Geolocation context
+- App context
+- Screen context
+- App Error event
+- Deep Link context
 
-By default these are **all disabled** in the web package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
+By default these are **all disabled** in the unified package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 
 ```yml title="dbt_project.yml"
 vars:
-  snowplow_web:
+  snowplow_unified:
     snowplow__enable_iab: true
     snowplow__enable_ua: true
     snowplow__enable_yauaa: true
+    snowplow__enable_browser_context: false
+    snowplow__enable_mobile_context: false
+    snowplow__enable_geolocation_context: false
+    snowplow__enable_app_context: false
+    snowplow__enable_screen_context: false
+    snowplow__enable_app_error_event: false
+    snowplow__enable_deep_link_context: false
 ```
 
 ### 5. Filter your data set
@@ -90,7 +106,7 @@ You can specify both `start_date` at which to start processing events and the `a
 
 ```yml title="dbt_project.yml"
 vars:
-  snowplow_web:
+  snowplow_unified:
     snowplow__start_date: 'yyyy-mm-dd'
     snowplow__app_id: ['my_app_1','my_app_2']
 ```
@@ -98,11 +114,11 @@ vars:
 
 ### 6. Verify page ping variables
 
-The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
+The unified package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
 
 ```yml title="dbt_project.yml"
 vars:
-  snowplow_web:
+  snowplow_unified:
     snowplow__min_visit_length: 5 # Default value
     snowplow__heartbeat: 10 # Default value
 ```
@@ -114,7 +130,7 @@ Verify which column your events table is partitioned on. It will likely be parti
 
 ```yml title="dbt_project.yml"
 vars:
-  snowplow_web:
+  snowplow_unified:
     snowplow__derived_tstamp_partitioned: false
 ```
 :::
@@ -125,7 +141,7 @@ Add the following variable to your dbt project's `dbt_project.yml` file
 
 ```yml title="dbt_project.yml"
 vars:
-  snowplow_web:
+  snowplow_unified:
     snowplow__databricks_catalog: 'hive_metastore'
 ```
 Depending on the use case it should either be the catalog (for Unity Catalog users from databricks connector 1.1.1 onwards, defaulted to 'hive_metastore') or the same value as your `snowplow__atomic_schema` (unless changed it should be 'atomic'). This is needed to handle the database property within `models/base/src_base.yml`.
@@ -136,18 +152,12 @@ Depending on the use case it should either be the catalog (for Unity Catalog use
 
 ### 8. Run your model
 
-You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package). As this package contains some seed files, you will need to seed these first
+You can run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package). As this package contains some seed files, you will need to seed these first
 
 ```bash
-dbt seed --select snowplow_web --full-refresh
-dbt run --selector snowplow_web
+dbt seed --select snowplow_unified --full-refresh
+dbt run --selector snowplow_unified
 ```
 
 ### 9. Enable extras
-The package comes with additional modules and functionality that you can enable, for more information see the [consent tracking](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/consent-module/index.md), [conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/conversions/index.md), and [core web vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/core-web-vitals-module/index.md) documentation.
-
-:::tip
-
-For some common analytical queries to run on the derived web data, take a look at our page [here](/docs/recipes/recipe-dbt-web-queries/index.md)!
-
-:::
+The package comes with additional modules and functionality that you can enable, for more information see the [consent tracking](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/index.md), [conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/index.md), and [core web vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md) documentation.

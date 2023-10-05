@@ -199,6 +199,7 @@ For the `snowplow_base_sessions_lifecycle_manifest` model, you have the followin
     days_late_allowed=var('snowplow__days_late_allowed', 3),
     max_session_days=var('snowplow__max_session_days', 3),
     app_ids=var('snowplow__app_ids', []),
+    snowplow_events_database=var('snowplow__events_schema', none),
     snowplow_events_schema=var('snowplow__events_schema', 'atomic'),
     snowplow_events_table=var('snowplow__events_table', 'events'),
     event_limits_table=var('snowplow__event_limits', 'snowplow_base_new_event_limits'),
@@ -304,6 +305,7 @@ For the `snowplow_base_events_this_run` model, you will need to run the followin
     days_late_allowed=var('snowplow__days_late_allowed', 3),
     max_session_days=var('snowplow__max_session_days', 3),
     app_ids=var('snowplow__app_ids', []),
+    snowplow_events_database=var('snowplow__events_schema', none),
     snowplow_events_schema=var('snowplow__events_schema', 'atomic'),
     snowplow_events_table=var('snowplow__events_table', 'events')) %}
 

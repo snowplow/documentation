@@ -5,6 +5,8 @@ sidebar_position: 12500
 ---
 
 ```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
 
 <Block5966/>
@@ -14,11 +16,44 @@ This plugin will allow the tracking of any HTML5 `<video>` or `<audio>` elem
 
 ## Installation
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+| Tracker Distribution | Included |
+|----------------------|----------|
+| `sp.js`              | ❌        |
+| `sp.lite.js`         | ❌        |
+
+**Download:**
+
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+
+**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 - `npm install @snowplow/browser-plugin-media-tracking`
 - `yarn add @snowplow/browser-plugin-media-tracking`
 - `pnpm add @snowplow/browser-plugin-media-tracking`
 
+
+  </TabItem>
+</Tabs>
+
 ## Initialization
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('addPlugin', 
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
+  ["snowplowMediaTracking", "MediaTrackingPlugin"]
+);
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
@@ -31,10 +66,29 @@ newTracker('sp1', '{{collector_url}}', {
 
 enableMediaTracking(/* options */);
 ```
+  </TabItem>
+</Tabs>
+
 
 ## Quick Start
 
 To start tracking media with default settings, use the snippet below, using your id and source:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+**`main.js`**
+
+```javascript
+window.snowplow('addPlugin', 
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
+  ["snowplowMediaTracking", "MediaTrackingPlugin"]
+);
+
+window.snowplow('enableMediaTracking', {
+  id: 'example-id'
+})
+```
 
 **`index.html`**
 
@@ -49,6 +103,9 @@ To start tracking media with default settings, use the snippet below, using your
 </html>
 ```
 
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 **`main.js`**
 
 ```javascript
@@ -59,9 +116,42 @@ enableMediaTracking({
 })
 ```
 
+**`index.html`**
+
+```html
+<html>
+  <head>
+    <title>Snowplow Media Tracking Example</title>
+  </head>
+  <body>
+    <video id='example-id' src='./example-video.mp4'></video>
+  </body>
+</html>
+```
+  </TabItem>
+</Tabs>
+
 ## The enableMediaTracking function
 
 The `enableMediaTracking` function takes the form:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableMediaTracking', { 
+  id, 
+  options?: { 
+    label?, 
+    captureEvents?, 
+    boundaries?, 
+    volumeChangeTrackingInterval? 
+  } 
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 enableMediaTracking({ 
@@ -74,6 +164,9 @@ enableMediaTracking({
   }
 })
 ```
+  </TabItem>
+</Tabs>
+
 
 | Parameter                              | Type       | Default             | Description                                                                                                    | Required |
 |----------------------------------------|------------|---------------------|----------------------------------------------------------------------------------------------------------------|----------|
@@ -83,7 +176,29 @@ enableMediaTracking({
 | `options.boundaries`                   | `number[]` | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                       | No       |
 | `options.volumeChangeTrackingInterval` | `number`   | `250`               | The rate at which volume events can be sent [[2]](#2)                                                        | No       |
 
+1. To track when a video ends, use the 'ended' event.
+
+2. When holding and dragging the volume slider, 'volumechange' events would be fired extremely quickly. This is used to limit the rate they can be sent out at. The default value is likely to be appropriate, but you can adjust it if you find you want fewer/more volume events through.
+
 Below is an example of the full `enableMediaTracking` function:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableMediaTracking', {
+  id: 'example-video',
+  options: {
+    label: 'My Custom Video Label',
+    captureEvents: ['play', 'pause', 'ended'],
+    boundaries: [20, 80],
+    volumeChangeTrackingInterval: 200,
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 enableMediaTracking({
@@ -97,13 +212,34 @@ enableMediaTracking({
 })
 ```
 
+  </TabItem>
+</Tabs>
+
 ## Usage
 
 For this plugin to find your media element, one of the following conditions must be true:
 
-Case 1
+1. The `<audio>` or `<video>` element has the HTML id passed into `enableMediaTracking`
 
-The `<audio>` or `<video>` element has the HTML id passed into `enableMediaTracking`
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+**`index.html`**
+
+```html
+...
+  <body>
+    <video id='example-id' src='./example-video.mp4'></video>
+    <script>
+      window.snowplow('enableMediaTracking', {
+        id: 'example-id'
+      })
+      </script>
+  </body>
+...
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 **`index.html`**
 
@@ -118,10 +254,34 @@ enableMediaTracking({
   id: 'example-id'
 })
 ```
+  </TabItem>
+</Tabs>
 
-Case 2
 
-The media element is the only `<audio>` or `<video>` child of a parent element with the HTML id passed into `enableMediaTracking`
+2. The media element is the only `<audio>` or `<video>` child of a parent element with the HTML id passed into `enableMediaTracking`
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+**`index.html`**
+
+```html
+...
+  <body>
+    <div id="example-id">
+      <video id='example-id' src='./example-video.mp4'></video>
+    </div>
+    <script>
+      window.snowplow('enableMediaTracking', {
+        id: 'example-id'
+      })
+      </script>
+  </body>
+...
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 **`index.html`**
 
@@ -138,6 +298,10 @@ enableMediaTracking({
   id: 'example-id'
 })
 ```
+
+  </TabItem>
+</Tabs>
+
 
 ## Events
 
@@ -175,13 +339,14 @@ Below is a table of all the events that can be used in `options.captureEvents`
 | cuechange             | When a text track has changed the currently displaying cues.                                                                                                                  |
 | percentprogress       | When a percentage boundary set in `options.boundaries` is reached.                                                                                                            |
 
-Note
+:::note
 
 Not all events are available in all browsers (though most are). To check, use the following links:
 
 [https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
 
 [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
+:::
 
 ### Event Groups
 
@@ -194,6 +359,21 @@ You can also use a pre-made event group in `options.captureEvents`:
 
 It is possible to extend an event group with any event in the Events table above. This could be useful if you want all the events contained in the 'DefaultEvents' group, along with the 'emptied' event (for example). This could be expressed in the following way:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableMediaTracking', {
+  id: 'example-video',
+  options: {
+    captureEvents: ['DefaultEvents', 'emptied'],
+  }
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 enableMediaTracking({
   id: 'example-video',
@@ -202,6 +382,9 @@ enableMediaTracking({
   }
 })
 ```
+
+  </TabItem>
+</Tabs>
 
 ## Schemas and Example Data
 
@@ -285,20 +468,15 @@ Four schemas are used with this plugin:
 }
 ```
 
-Note
+:::note
 
 Not all properties in the HTML5 Media/Video specific schemas will be available on all browsers. Use the following links to check availability:
 
 [https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
 
 [https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
+:::
 
-### Video Frameworks
+## Video Frameworks
 
-This plugin has been tested with [VideoJS](https://videojs.com/) and [Plyr](https://plyr.io/), but should work with almost any player framework that results in a `<video>` or `<audio>` element). You may find that some frameworks render out in a way that means the id given to the component doesn't exist in the actual DOM.
-
-* * *
-
-1. To track when a video ends, use the 'ended' event.
-
-2. When holding and dragging the volume slider, 'volumechange' events would be fired extremely quickly. This is used to limit the rate they can be sent out at. The default value is likely to be appropriate, but you can adjust it if you find you want fewer/more volume events through.
+This plugin has been tested with [VideoJS](https://videojs.com/) and [Plyr](https://plyr.io/), but should work with almost any player framework that results in a `<video>` or `<audio>` element. You may find that some frameworks render out in a way that means the id given to the component doesn't exist in the actual DOM.

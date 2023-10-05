@@ -10,6 +10,11 @@ import ThemedImage from '@theme/ThemedImage';
 import DocCardList from '@theme/DocCardList';
 
 ```
+
+:::danger
+The unified package is currently in pre-release state.
+:::
+
 <Badges badgeType="dbt-package Release" pkg="unified"></Badges>
 
 # Snowplow Unified Package
@@ -83,7 +88,7 @@ dark: require('./images/engaged_time_dark.drawio.png').default
 At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for [stray page pings](#stray-page-pings), but the underlying idea is the same.
 
 
-## Stray Page Pings
+## Stray Page Pings (Web only!)
 Stray Page Pings are pings within a session that do not have a corresponding `page_view` event within **the same session**. The most common cause of these is someone returning to a tab after their session has timed out but not refreshing the page. The `page_view` event exists in some other session, but there is no guarantee that both these sessions will be processed in the same run, which could lead to different results. Depending on your site content and user behavior the prevalence of sessions with stray page pings could vary greatly. For example with long-form content we have seen around 10% of all sessions contain only stray page pings (i.e. no `page_view` events).
 
 We take different approaches to adjust for these stray pings at the page view and sessions levels, which can lead to differences between the two tables, but each is as accurate as we can currently make it.

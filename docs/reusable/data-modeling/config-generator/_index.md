@@ -1,0 +1,3 @@
+Over time you may need to customise the package further. To help you generate the project variables code block you should put in your `dbt_project.yml` to overwrite the package defaults, we have provided a list of input fields with explanations in the expandable text blocks below. Based on the inputs given you can see the code being generated gradually.
+
+Any values not specified will use their default values from the package, therefore it is enough to modify the variables that fit your business needs. If your selections do not generate anything it means you specified default values in which case there is no need to overwrite them on your project level.

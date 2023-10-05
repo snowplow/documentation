@@ -1,6 +1,6 @@
 ---
-title: "Web"
-sidebar_position: 100
+title: "Unified"
+sidebar_position: 50
 ---
 
 ```mdx-code-block
@@ -8,15 +8,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::info
-
-Some variables are only available in the latest version of our package, or might have changed format from older versions. If you are unable to use the latest version, check the `dbt_project.yml` file of our package for the version you are using to see what options are available to you.
-
-:::
-
 ## Package Configuration Variables
 
-This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
+This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file. We have provided a [tool](#config-generator) below to help you with that.
 
 :::note
 
@@ -34,8 +28,8 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `events_table`        | The name of the table that contains your atomic events.                                                                                                                                                                                                                                                                                                                                                                              | `events`                                     |
 | `ga4_categories_seed` | Name of the model for the GA4 category mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).                                                                                                                                                                                                                                                                                 | `snowplow_unified_dim_ga4_source_categories`     |
 | `geo_mapping_seed`    | Name of the model for the Geo mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).                                                                                                                                                                                                                                                                                          | `snowplow_unified_dim_geo_country_mapping`       |
-| `heartbeat`           | Page ping heartbeat time as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#activity-tracking-page-pings).                                                                                                                                                                                      | `10`                                         |
-| `min_visit_length`    | Minimum visit length as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#activity-tracking-page-pings).                                                                                                                                                                                          | `5`                                          |
+| `heartbeat`           | Page ping heartbeat time as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings).                                                                                                                                                                                      | `10`                                         |
+| `min_visit_length`    | Minimum visit length as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings).                                                                                                                                                                                          | `5`                                          |
 | `rfc_5646_seed`       | Name of the model for the RFC 5646 (language) mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).                                                                                                                                                                                                                                                                          | `snowplow_unified_dim_rfc_5646_language_mapping` |
 | `sessions_table`      | The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref('snowplow_unified_sessions_custom') }}`.
 
@@ -43,7 +37,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | Variable Name                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Default                                                 |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | `allow_refresh`               | Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#manifest-tables) section for more details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `false`                                                 |
-| `backfill_limit_days`         | The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#identification-of-events-to-process) section for more details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `30`                                                    |
+| `backfill_limit_days`         | The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#package-state) section for more details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | `30`                                                    |
 | `conversion_events`           | (Version 0.15.0+) A list of dictionaries that define a conversion event for your modeling, to add the relevant columns to the sessions table. The dictionary keys are `name` (required), `condition` (required), `value`, `default_value`, and `list_events`. For more information see the [package documentation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/index.md).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                         |
 | `cwv_days_to_measure`         | The number of days to use for web vital measurements (if enabled).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `28`                                                    |
 | `cwv_percentile`              | The percentile that the web vitals measurements that are produced for all page views (if enabled).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | `75`                                                    |
@@ -78,7 +72,7 @@ All variables in Snowplow packages start with `snowplow__` but we have removed t
 | `enable_browser_context`            | Flag to include browser context data in the models.                                                                                                                                                                                                                                            | `false`                   |
 | `enable_mobile_context`            | Flag to include mobile context data in the models.                                                                                                                                                                                                                                            | `false`                   |
 | `enable_geolocation_context`            | Flag to include the geolocation data in the models.                                                                                                                                                                                                                                            | `false`                   |
-| `enable_app_context`            | Flag to include the app context data in the models.                                                                                                                                                                                                                                            | `false`                   |
+| `enable_application_context`            | Flag to include the app context data in the models.                                                                                                                                                                                                                                            | `false`                   |
 | `enable_screen_context`            | Flag to include the mobile screen data in the models.                                                                                                                                                                                                                                            | `false`                   |
 | `enable_app_error_event`            | Flag to include the mobile app error data in the models.                                                                                                                                                                                                                                            | `false`                   |
 | `enable_deep_link_context`            | Flag to include the deep link context data in the models.                                                                                                                                                                                                                                            | `false`                   |
@@ -111,7 +105,7 @@ Redshift and Postgres use a [shredded](/docs/pipeline-components-and-application
 | `ua_parser_context`   | `com_snowplowanalytics_snowplow_ua_parser_context_1`   |
 | `yauaa_context`       | `nl_basjes_yauaa_context_1`                            |
 | `consent_cmp_visible` | `com_snowplowanalytics_snowplow_cmp_visible_1`         |
-| `consent_preferences` | `com_snowplowanalytics_snowplow_consent_preferences_1` |
+| `consent_preferences_events` | `com_snowplowanalytics_snowplow_consent_preferences_1` |
 | `consent_cmp_visible` |`com_snowplowanalytics_snowplow_cmp_visible_1`          |
 | `browser_context`     | `com_snowplowanalytics_snowplow_browser_context_1`     |
 | `session_context`     | `com_snowplowanalytics_snowplow_client_session_1`      |
@@ -119,9 +113,10 @@ Redshift and Postgres use a [shredded](/docs/pipeline-components-and-application
 | `geolocation_context` | `com_snowplowanalytics_snowplow_geolocation_context_1` |
 | `application_context` | `com_snowplowanalytics_mobile_application_1`           |
 | `screen_context`      | `com_snowplowanalytics_mobile_screen_1`                |
-| `app_errors_table`    | `com_snowplowanalytics_snowplow_application_error_1`   |
+| `application_error_events`    | `com_snowplowanalytics_snowplow_application_error_1`   |
 | `screen_view_events`  | `com_snowplowanalytics_mobile_screen_view_1`           |
-| `deep_link_context`   | `contexts_com_snowplowanalytics_mobile_deep_link_1`    |
+| `deep_link_context`   | `com_snowplowanalytics_mobile_deep_link_1`    |
+| `cwv_events`          |  `com_snowplowanalytics_snowplow_web_vitals_1` |
 
 | Variable Name        | Description                                                                                                                                                                                                                                                                                                                                                                                                          | Default |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
@@ -149,11 +144,11 @@ Redshift and Postgres use a [shredded](/docs/pipeline-components-and-application
 ```mdx-code-block
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
 import CodeBlock from '@theme/CodeBlock';
-import { SchemaSetter } from '@site/src/components/DbtSchemaSelector';
+import { SchemaSetterWSeeds } from '@site/src/components/DbtSchemaSelector';
 
 <DbtSchemas/>
 
-export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema) => {
+export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema, seedSchema) => {
   return(
     <>
     <CodeBlock language="yaml">
@@ -177,14 +172,17 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
     page_views:
       +schema: ${derivedSchema}
       scratch:
-        +schema: ${scratchSchema}`}
+        +schema: ${scratchSchema}
+seeds:
+  snowplow_unified:
+    +schema: ${seedSchema}`}
         </CodeBlock>
     </>
   )
 }
 
 ```
-<SchemaSetter output={printSchemaVariables}/>
+<SchemaSetterWSeeds output={printSchemaVariables}/>
 
 ```mdx-code-block
 import { dump } from 'js-yaml';
@@ -244,10 +242,13 @@ export const GROUPS = [
                                           "snowplow__iab_context",
                                           "snowplow__ua_parser_context",
                                           "snowplow__yauaa_context",
-                                          "snowplow__consent_cmp_visible",
-                                          "snowplow__consent_preferences",
-                                          "snowplow__browser_context","snowplow__session_context","snowplow__mobile_context","snowplow__geolocation_context","snowplow__application_context","snowplow__screen_context","snowplow__app_errors_table","snowplow__screen_view_events","snowplow__deep_link_context",
+                                          "snowplow__cmp_visible_events",
+                                          "snowplow__consent_preferences_events",
+                                          "snowplow__browser_context",
+                                          "snowplow__session_context",
+                                          "snowplow__mobile_context","snowplow__geolocation_context","snowplow__application_context","snowplow__screen_context","snowplow__application_error_events","snowplow__screen_view_events","snowplow__deep_link_context",
                                           "snowplow__enable_load_tstamp",
+                                          "snowplow__cwv_events",
                                           "snowplow__derived_tstamp_partitioned"] }
 ];
 
@@ -262,8 +263,11 @@ export const printYamlVariables = (data) => {
 
 export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
 ```
-
 ## Config Generator
-You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
+```mdx-code-block
+import ConfigGenerator from "@site/docs/reusable/data-modeling/config-generator/_index.md"
+
+<ConfigGenerator/>
+```
 
 <JsonApp schema={dbtSnowplowWebConfigSchema} output={printYamlVariables} template={Template}/>

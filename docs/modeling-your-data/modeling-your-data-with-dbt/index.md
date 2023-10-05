@@ -36,7 +36,7 @@ For Snowplow BDP customers, dbt projects can be configured and scheduled in the 
 
 Our dbt packages come with powerful built-in features such as an [optimization to the incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md) to save you cost on warehouse compute resources compared to the standard method, a custom [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) to ensure we process just the required data for each run and keep your models in sync, plus the ability to build your own custom models using both of these!
 
-There are 5 core snowplow dbt packages:
+There are 6 core snowplow dbt packages:
 - [Snowplow Unified](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_unified)): for modeling your web and mobile data for page and screen views, sessions, users, and consent
 - [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web)): for modeling your web data for page views, sessions, users, and consent
 - [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile)): for modeling your mobile app data for screen views, sessions, users, and crashes

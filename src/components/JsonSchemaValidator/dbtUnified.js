@@ -225,7 +225,7 @@ export const dbtSnowplowUnifiedConfigSchema = {
       type: 'boolean',
       title: 'Enable Geolocation Context',
     },
-    snowplow__enable_app_context: {
+    snowplow__enable_application_context: {
       type: 'boolean',
       title: 'Enable App Context',
     },
@@ -233,7 +233,7 @@ export const dbtSnowplowUnifiedConfigSchema = {
       type: 'boolean',
       title: 'Enable Screen Context',
     },
-    snowplow__enable_app_error_event: {
+    snowplow__enable_app_errors: {
       type: 'boolean',
       title: 'Enable App Error Context',
     },
@@ -274,11 +274,11 @@ export const dbtSnowplowUnifiedConfigSchema = {
       type: 'string',
       title: '(Redshift) YAUAA Context Table',
     },
-    snowplow__consent_cmp_visible: {
+    snowplow__cmp_visible_events: {
       type: 'string',
       title: '(Redshift) CMP Visible Context Table',
     },
-    snowplow__consent_preferences: {
+    snowplow__consent_preferences_events: {
       type: 'string',
       title: '(Redshift) Consent Preferences Context Table',
     },
@@ -316,8 +316,9 @@ export const dbtSnowplowUnifiedConfigSchema = {
           type: 'object',
           title: "Identifier",
           properties: {
-            schema: { type: 'string' }, // TODO: add regex here to make valid context/unstruct or atomic?
-            field: { type: 'string' } // TODO: add regex here to make valid SQL name?
+            schema: { type: 'string', description: 'The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself' }, // TODO: add regex here to make valid context/unstruct or atomic?
+            field: { type: 'string', description: 'The name of the field to use as session identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted' } // TODO: add regex here to make valid SQL name?
+          },
           },
           required: ['schema', 'field'],
           additionalProperties: false
@@ -330,7 +331,8 @@ export const dbtSnowplowUnifiedConfigSchema = {
     },
     snowplow__session_timestamp: {
       type: 'string',
-      title: 'Timestamp used for incremental processing, should be your partition field',
+      title: 'Session Timestamp',
+      description: 'Timestamp used for incremental processing, should be your partition field'
     },
     snowplow__user_identifiers: {
       type: 'string',
@@ -342,8 +344,8 @@ export const dbtSnowplowUnifiedConfigSchema = {
           type: 'object',
           title: "Identifier",
           properties: {
-            schema: { type: 'string' }, // TODO: add regex here to make valid context/unstruct or atomic?
-            field: { type: 'string' } // TODO: add regex here to make valid SQL name?
+            schema: { type: 'string', description: 'The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself' }, // TODO: add regex here to make valid context/unstruct or atomic?
+            field: { type: 'string', description: 'The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted' } // TODO: add regex here to make valid SQL name?
           },
           required: ['schema', 'field'],
           additionalProperties: false
@@ -353,11 +355,13 @@ export const dbtSnowplowUnifiedConfigSchema = {
 
     snowplow__user_sql: {
       type: 'string',
-      title: 'SQL for your user identifier',
+      title: 'User sql',
+      description: 'SQL for your user identifier'
     },
     snowplow__user_stitching_id: {
       type: 'string',
-      title: 'Field used when stitching together users',
+      title: 'User Stitching Id',
+      description: 'Field used when stitching together users'
     },
 
 

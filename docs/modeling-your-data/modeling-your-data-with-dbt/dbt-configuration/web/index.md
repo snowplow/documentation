@@ -16,7 +16,7 @@ Some variables are only available in the latest version of our package, or might
 
 ## Package Configuration Variables
 
-This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
+This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file. We have provided a [tool](#config-generator) below to help you with that.
 
 :::note
 

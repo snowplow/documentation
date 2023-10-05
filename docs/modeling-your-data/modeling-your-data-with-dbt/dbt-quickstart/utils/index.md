@@ -132,7 +132,7 @@ Be sure to specify your `PACKAGE_NAME` when calling the `get_enabled_snowplow_mo
 :::
 
 ```jinja2
-{{ 
+{{
   config(
    post_hook=["{{snowplow_utils.print_run_limits(this)}}"]
    )
@@ -329,13 +329,9 @@ on-run-end:
 
 The `snowplow_delete_from_manifest` macro is called to remove models from manifest if specified using the `models_to_remove` variable, in case of a partial or full refresh. The `snowplow_incremental_post_hook` is used to update the manifest table with the timestamp of the last event consumed successfully for each Snowplow incremental model - make sure to change the `base_events_this_run_table_name` if you used a different table name.
 
-:::tip 
+:::tip
 
-<<<<<<< HEAD
-The `package_name` variable here is not necessarily the name of your project (although it keeps things simple to make it the same), instead it is what is used to identify your tagged incremental models as they should be tagged with `<package_name>_incremental`. 
-=======
-The `package_name` variable here is not the name of your project, instead it is what is used to identify your tagged incremental models as they should be tagged with `<package_name>_incremental`. 
->>>>>>> db4c1fb3 (Update utils dbt docs (#622))
+The `package_name` variable here is not necessarily the name of your project (although it keeps things simple to make it the same), instead it is what is used to identify your tagged incremental models as they should be tagged with `<package_name>_incremental`.
 
 :::
 

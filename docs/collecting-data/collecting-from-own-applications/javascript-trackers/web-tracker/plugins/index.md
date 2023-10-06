@@ -1,5 +1,5 @@
 ---
-title: "Plugins TODO"
+title: "Plugins"
 date: "2021-04-07"
 sidebar_position: 3000
 ---

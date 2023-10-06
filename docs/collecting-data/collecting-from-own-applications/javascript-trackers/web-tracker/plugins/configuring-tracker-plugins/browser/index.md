@@ -1,19 +1,19 @@
 ---
-title: "Adding plugins to your tracker TODO"
+title: "Browser (npm) tracker"
 date: "2021-04-19"
 sidebar_position: 500
 ---
 
 The Snowplow JavaScript Trackers v3 allow extension via plugins. There a number of official Snowplow plugins, but we also encourage building your own. You can either include them directly in your codebase or tag management tool, or you could publish them to npm as public packages that the whole community can use.
 
-There are two ways to add plugins:
+There are two ways to add plugins to the browser tracker:
 
-- During tracker intialization
-- Dynamically after tracker intialization
+- During tracker initialization
+- Dynamically after tracker initialization
 
-## Tracker Initialization
+## Tracker initialization
 
-To add a plugin at tracker intialisation, you include the plugin in the `Plugins` array:
+To add a plugin at tracker initialisation, you include the plugin in the `Plugins` array:
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -28,9 +28,9 @@ newTracker('sp', '{{collector_url_here}}', {
 });
 ```
 
-## After Tracker Initialization
+## After tracker initialization
 
-To add a plugin after tracker intialisation, you can call `addPlugin` and pass the plugin in:
+To add a plugin after tracker initialisation, you can call `addPlugin` and pass the plugin in:
 
 ```javascript
 import { newTracker, addPlugin } from '@snowplow/browser-tracker';

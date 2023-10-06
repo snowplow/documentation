@@ -1,5 +1,5 @@
 ---
-title: "Tracker Information"
+title: "Tracker information"
 date: "2021-04-07"
 sidebar_position: 2000
 ---

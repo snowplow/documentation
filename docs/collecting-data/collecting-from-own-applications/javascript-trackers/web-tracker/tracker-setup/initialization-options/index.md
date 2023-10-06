@@ -1,5 +1,5 @@
 ---
-title: "Initialization options TODO"
+title: "Initialization options TODO extras for browser?"
 date: "2021-03-31"
 sidebar_position: 2000
 ---

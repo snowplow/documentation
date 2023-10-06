@@ -17,11 +17,80 @@ This plugin will allow the tracking of an embedded YouTube IFrame.
 
 ## Installation
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+| Tracker Distribution | Included |
+|----------------------|----------|
+| `sp.js`              | ❌        |
+| `sp.lite.js`         | ❌        |
+
+**Download:**
+
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+
+**Note:** This plugin will not work if using GAv4 Enhanced Measurement Video engagement, as both the GAv4 and Snowplow trackers will attempt to attach to the Youtube video.
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 - `npm install @snowplow/browser-plugin-youtube-tracking`
 - `yarn add @snowplow/browser-plugin-youtube-tracking`
 - `pnpm add @snowplow/browser-plugin-youtube-tracking`
 
-## Initialization
+
+  </TabItem>
+</Tabs>
+
+## Quick Start
+
+The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker-from-npm/index.md).
+
+:::info The plugin's `id` attribute will accept:
+- The `id` of an `iframe` element
+- An existing instance of `YT.Player`, created with the [YouTube Iframe API](https://developers.google.com/youtube/iframe_api_reference)
+:::
+
+1. `iFrame`
+
+For this plugin to find your media element, your iFrame must be given the id that is passed into `enableYouTubeTracking`.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <iframe
+      id="yt-player"
+      src="https://www.youtube.com/embed/zSM4ZyVe8xs"
+    ></iframe>  
+
+    <script>
+      window.snowplow(
+        'addPlugin',
+        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
+        ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
+      );
+
+      window.snowplow('enableYouTubeTracking', {
+        id: 'yt-player'
+      });
+    </script>
+  </body>
+</html>
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```html
+<iframe
+  id="yt-player"
+  src="https://www.youtube.com/embed/zSM4ZyVe8xs"
+></iframe>
+```
 
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
@@ -32,47 +101,59 @@ newTracker('sp1', '{{collector_url}}', {
    plugins: [ YouTubeTrackingPlugin() ],
 });
 
-enableYouTubeTracking(/* options */);
-```
-
-## Quick Start
-
-The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracker-setup/installing-the-tracker-from-npm/index.md).
-
-:::info The plugin's `id` attribute will accept:
-
-- The `id` of an `iframe` element
-- An existing instance of `YT.Player`, created with the [YouTube Iframe API](https://developers.google.com/youtube/iframe_api_reference)
-
-:::
-
-<Tabs>
-  <TabItem value="iframe" label="Iframe" default>
-
-```html
-<iframe
-  id="yt-player"
-  src="https://www.youtube.com/embed/zSM4ZyVe8xs"
-></iframe>
-```
-
-```javascript
-import { enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking'
-
 enableYouTubeTracking({
   id: 'yt-player'
 })
 ```
 
-</TabItem>
-<TabItem value="player" label="YT.Player">
+  </TabItem>
+</Tabs>
+
+1. `YT.Player`
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="yt-player"></div>
+
+    <script>
+      window.snowplow(
+        'addPlugin',
+        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
+        ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
+      );
+
+      const player = new YT.Player('yt-player', {
+        videoId: 'zSM4ZyVe8xs'
+      });
+
+      window.snowplow('enableYouTubeTracking', {
+          id: player
+      });
+    </script>
+  </body>
+</html>
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```html
 <div id="yt-player"></div>
 ```
 
 ```javascript
-import { enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking'
+import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { YouTubeTrackingPlugin, enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
+
+newTracker('sp1', '{{collector_url}}', { 
+   appId: 'my-app-id', 
+   plugins: [ YouTubeTrackingPlugin() ],
+});
 
 const player = new YT.Player('yt-player', {
   videoId: 'zSM4ZyVe8xs'
@@ -90,9 +171,22 @@ enableYouTubeTracking({
 
 The `enableYouTubeTracking` function takes the form:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow("enableYouTubeTracking", { id, options?: { label?, captureEvents?, boundaries?, updateRate? } })
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, updateRate? } })
 ```
+  </TabItem>
+</Tabs>
+
 
 | Parameter               | Type                    | Default             | Description                                                                                                    | Required |
 | ----------------------- | ----------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------- | -------- |
@@ -103,6 +197,24 @@ enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, upd
 | `options.updateRate`    | `number`                | `250`               | The rate at which `seek` and `volumechange` events can occur [[2]](#2)                                         | No       |
 
 Below is an example of the full `enableYouTubeTracking` function:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableYouTubeTracking', {
+  id: 'example-video',
+  options: {
+    label: 'My Custom Video Label',
+    captureEvents: ['play', 'pause', 'ended'],
+    boundaries: [20, 80],
+    updateRate: 500,
+  }
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 enableYouTubeTracking({
@@ -116,30 +228,8 @@ enableYouTubeTracking({
 })
 ```
 
-## Usage
-
-For this plugin to find your media element, your IFrame must be given the id that is passed into `enableYouTubeTracking`:
-
-**`index.html`**
-
-```html
- <iframe
-      id="example-id"
-      src="https://www.youtube.com/embed/zSM4ZyVe8xs"
-></iframe>  
-```
-
-**`main.js`**
-
-```javascript
-enableYouTubeTracking({
-  id: 'example-id',
-  options: {
-    label: 'My Video Title',
-    boundaries: [10, 25, 50, 75]
-  }
-})
-```
+  </TabItem>
+</Tabs>
 
 ## Events
 
@@ -170,6 +260,21 @@ You can also use a pre-made event group in `options.captureEvents`:
 
 It is possible to extend an event group with any event in the Events table above. This could be useful if you want, for example, all the events contained in the 'DefaultEvents' group, along with the 'error' event. This is expressed in the following way:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableYouTubeTracking', {
+  id: "example-video",
+  options: {
+    captureEvents: ["DefaultEvents", "error"],
+  }
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 enableYouTubeTracking({
   id: 'example-video',
@@ -178,6 +283,9 @@ enableYouTubeTracking({
   }
 })
 ```
+
+  </TabItem>
+</Tabs>
 
 ## Schemas and Example Data
 

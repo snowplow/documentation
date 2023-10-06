@@ -4,23 +4,59 @@ sidebar_position: 16000
 ---
 
 ```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+
 <Block5966/>
 ```
 
 This plugin is the recommended way to track ecommerce events on your store. Functions, usage and a complete setup journey is showcased on the [E-commerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).
 
+:::note
+The plugin is available since version 3.8 of the tracker.
+:::
+
 ## Installation
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+| Tracker Distribution | Included |
+|----------------------|----------|
+| `sp.js`              | ❌        |
+| `sp.lite.js`         | ❌        |
+
+**Download:**
+
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-snowplow-ecommerce@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-snowplow-ecommerce@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 - `npm install @snowplow/browser-plugin-snowplow-ecommerce`
 - `yarn add @snowplow/browser-plugin-snowplow-ecommerce`
 - `pnpm add @snowplow/browser-plugin-snowplow-ecommerce`
 
-:::note
-The plugin is available since version 3.8 of the tracker.
-:::
+
+  </TabItem>
+</Tabs>
 
 ## Initialization
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow(
+    'addPlugin',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-snowplow-ecommerce@latest/dist/index.umd.min.js',
+    ['snowplowEcommerceAccelerator', 'SnowplowEcommercePlugin']
+);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -31,6 +67,9 @@ newTracker('sp1', '{{collector_url}}', {
    plugins: [ SnowplowEcommercePlugin() ],
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 ## Functions
 
@@ -56,6 +95,23 @@ API | Used for:
 
 To track a product view you can use the `trackProductView` method with the following attributes:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackProductView:{trackerName}", {
+    id: "12345",
+    name: "Baseball T",
+    brand: "Snowplow",
+    category: "apparel",
+    price: 200,
+    currency: "USD",
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```js
 import { trackProductView } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
@@ -69,9 +125,35 @@ trackProductView({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 ### trackAddToCart
 
 To track a product/s addition to the cart you can use the `trackAddToCart` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackAddToCart:{trackerName}", {
+  products: [
+    {
+      id: "P125",
+      name: "Baseball T",
+      brand: "Snowplow",
+      category: "Mens/Apparel",
+      price: 200,
+      currency: "USD",
+    },
+  ],
+  total_value: 200,
+  currency: "USD",
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackAddToCart } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -92,6 +174,9 @@ trackAddToCart({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `products` is an array with the product/s added to cart.
 - Where `total_value` is the value of the cart after the addition.
 - Where `currency` is the currency of the cart.
@@ -99,6 +184,29 @@ trackAddToCart({
 ### trackRemoveFromCart
 
 To track a product/s removal from the cart you can use the `trackRemoveFromCart` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackRemoveFromCart:{trackerName}", {
+  products: [
+    {
+      id: "P125",
+      name: "Baseball T",
+      brand: "Snowplow",
+      category: "Mens/Apparel",
+      price: 200,
+      currency: "USD",
+    },
+  ],
+  total_value: 0,
+  currency: "USD",
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackRemoveFromCart } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -119,6 +227,9 @@ trackRemoveFromCart({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `products` is an array with the product/s removed from the cart.
 - Where `total_value` is the value of the cart after the removal of the product/s.
 - Where `currency` is the currency of the cart.
@@ -126,6 +237,50 @@ trackRemoveFromCart({
 ### trackProductListView
 
 To track a product list view you can use the `trackProductListView` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackProductListView:{trackerName}", {
+  products: [
+    {
+      id: "P123",
+      name: "Fashion red",
+      brand: "Snowplow",
+      category: "Mens/Apparel",
+      price: 100,
+      inventory_status: "in stock",
+      currency: "USD",
+      position: 1,
+    },
+    {
+      id: "P124",
+      name: "Fashion green",
+      brand: "Snowplow",
+      category: "Mens/Apparel",
+      price: 119,
+      inventory_status: "in stock",
+      currency: "USD",
+      position: 2,
+    },
+    {
+      id: "P125",
+      name: "Baseball T",
+      brand: "Snowplow",
+      category: "Mens/Apparel",
+      price: 200,
+      inventory_status: "in stock",
+      currency: "USD",
+      position: 3,
+    },
+  ],
+  name: "Recommended Products",
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackProductListView } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -167,10 +322,35 @@ trackProductListView({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `products` is an array of products being viewed from the list.
 - Where `name` is the name of the list being viewed. For the list names, you can use any kind of friendly name or a codified language to express the labeling of the list. E.g. 'Shoes - Men - Sneakers','Search results: "unisex shoes"', 'Product page upsells'
 
 ### trackProductListClick
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackProductListClick:{trackerName}", {
+  product: {
+    id: "P124",
+    name: "Fashion green",
+    brand: "Snowplow",
+    category: "Mens/Apparel",
+    price: 119,
+    inventory_status: "in stock",
+    currency: "USD",
+    position: 2,
+  },
+  name: "Recommended Products",
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackProductListClick } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -190,10 +370,39 @@ trackProductListClick({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `product` is the product being clicked/selected from the list.
 - Where `name` is the name of the list the product is currently in. For the list names, you can use any kind of friendly name or a codified language to express the labeling of the list. E.g. 'Shoes - Men - Sneakers','Search results: "unisex shoes"', 'Product page upsells'
 
 ### trackPromotionView
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+/* Carousel slide 1 viewed */
+window.snowplow("trackPromotionView:{trackerName}", { 
+    id: 'IP1234',
+    name: 'promo_winter',
+    type: 'carousel',
+    position: 1,
+    product_ids: ['P1234'],
+});
+
+/* On carousel slide 2 view */
+window.snowplow("trackPromotionView:{trackerName}", { 
+    id: 'IP1234',
+    name: 'promo_winter',
+    type: 'carousel',
+    position: 2,
+    product_ids: ['P1235'],
+});
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```js
 import { trackPromotionView } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
@@ -216,7 +425,27 @@ trackPromotionView({
 });
 ```
 
+
+  </TabItem>
+</Tabs>
+
 ### trackPromotionClick
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackPromotionClick:{trackerName}", { 
+    id: 'IP1234',
+    name: 'promo_winter',
+    type: 'carousel',
+    position: 1,
+    product_ids: ['P1234'],
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackPromotionClick } from "@snowplow/browser-plugin-snowplow-ecommerce";
@@ -230,9 +459,33 @@ trackPromotionClick({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 ### trackCheckoutStep
 
 To track a checkout step you can use the `trackCheckoutStep` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+/* Step 1 - Account type selection */
+window.snowplow("trackCheckoutStep:{trackerName}", {
+  step: 1,
+  account_type: "guest checkout",
+});
+
+/* Step 2 - Billing options selection */
+window.snowplow("trackCheckoutStep:{trackerName}", {
+  step: 2,
+  payment_method: "credit card",
+  proof_of_payment: "invoice",
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackCheckoutStep } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -251,9 +504,41 @@ trackCheckoutStep({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 ### trackTransaction
 
 To track a completed transaction you can use the `trackTransaction` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackTransaction:{trackerName}", {
+  transaction_id: "T12345",
+  revenue: 230,
+  currency: "USD",
+  payment_method: "credit_card",
+  total_quantity: 1,
+  tax: 20,
+  shipping: 10,
+  products: [
+    {
+      id: "P125",
+      name: "Baseball T",
+      brand: "Snowplow",
+      category: "Mens/Apparel",
+      price: 200,
+      inventory_status: "in stock",
+      currency: "USD",
+    },
+  ],
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackTransaction } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -280,6 +565,10 @@ trackTransaction({
 });
 ```
 
+
+  </TabItem>
+</Tabs>
+
 - Where `products` is an array with the product/s taking part in the transaction.
 
 ### trackRefund
@@ -289,6 +578,32 @@ Available from version 3.10.
 :::
 
 To track a complete or partial refund you can use the `trackRefund` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackRefund:{trackerName}", {
+  transaction_id: "T12345",
+  currency: "USD",
+  refund_amount: 200,
+  refund_reason: "return",
+  products: [
+    {
+      id: "P125",
+      name: "Baseball T",
+      brand: "Snowplow",
+      category: "Mens/Apparel",
+      price: 200,
+      inventory_status: "in stock",
+      currency: "USD",
+    },
+  ],
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackRefund } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -312,6 +627,9 @@ trackRefund({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `products` is an array with the product/s taking part in the refund.
 
 ### trackTransactionError
@@ -321,6 +639,29 @@ Available from version 3.13.
 :::
 
 To track an error happening during a transaction process you can use the `trackTransactionError` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackTransactionError:{trackerName}", {
+  resolution: "rejection",
+  error_code: "E123",
+  error_shortcode: "CARD_DECLINE",
+  error_description: "Card has been declined by the issuing bank.",
+  error_type: "hard",
+  transaction: {
+    revenue: 45,
+    currency: "EUR",
+    transaction_id: "T12345",
+    payment_method: "card",
+    total_quantity: 1
+  }
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackTransactionError } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -340,12 +681,25 @@ trackTransactionError({
   }
 });
 ```
+  </TabItem>
+</Tabs>
+
 
 - Where `transaction` is the transaction entity being processed.
 
 ### setPageType
 
-To set a Page type context you can use the `setPageType` method with the following attributes:
+To set a Page type context entity you can use the `setPageType` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("setPageType:{trackerName}", { type, language, locale });
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { setPageType } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -353,11 +707,23 @@ import { setPageType } from '@snowplow/browser-plugin-snowplow-ecommerce';
 setPageType({ type, language, locale });
 ```
 
-After setting the Page context, it will be attached to every subsequent Snowplow event.
+  </TabItem>
+</Tabs>
+
+After setting the Page context entity, it will be attached to every subsequent Snowplow event.
 
 ### setEcommerceUser
 
-To set an Ecommerce User context you can use the `setEcommerceUser` method with the following attributes:
+To set an Ecommerce User context entity you can use the `setEcommerceUser` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("setEcommerceUser:{trackerName}", { id, is_guest, email });
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { setEcommerceUser } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -365,7 +731,10 @@ import { setEcommerceUser } from '@snowplow/browser-plugin-snowplow-ecommerce';
 setEcommerceUser({ id, is_guest, email });
 ```
 
-After setting the Page context, it will be attached to every subsequent Snowplow event.
+  </TabItem>
+</Tabs>
+
+After setting the User context entity, it will be attached to every subsequent Snowplow event.
 
 ## Entities
 
@@ -541,15 +910,38 @@ method({{dataLayer.ecommerce reference}} , { currency: "currency code" });
 
 To track an Enhanced Ecommerce product list view, you can use the `trackEnhancedEcommerceProductListView` method with the following attributes:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommerceProductListView:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```js
 import { trackEnhancedEcommerceProductListView } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
 trackEnhancedEcommerceProductListView({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackEnhancedEcommerceProductListClick
 
 To track an Enhanced Ecommerce product list click, you can use the `trackEnhancedEcommerceProductListClick` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommerceProductListClick:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackEnhancedEcommerceProductListClick } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -557,9 +949,22 @@ import { trackEnhancedEcommerceProductListClick } from '@snowplow/browser-plugin
 trackEnhancedEcommerceProductListClick({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackEnhancedEcommerceProductDetail
 
 To track an Enhanced Ecommerce product detail view, you can use the `trackEnhancedEcommerceProductDetail` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommerceProductDetail:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackEnhancedEcommerceProductDetail } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -567,9 +972,22 @@ import { trackEnhancedEcommerceProductDetail } from '@snowplow/browser-plugin-sn
 trackEnhancedEcommerceProductDetail({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackEnhancedEcommercePromoView
 
 To track an Enhanced Ecommerce internal promotion view, you can use the `trackEnhancedEcommercePromoView` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommercePromoView:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackEnhancedEcommercePromoView } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -577,9 +995,22 @@ import { trackEnhancedEcommercePromoView } from '@snowplow/browser-plugin-snowpl
 trackEnhancedEcommercePromoView({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackEnhancedEcommercePromoClick
 
 To track an Enhanced Ecommerce internal promotion click, you can use the `trackEnhancedEcommercePromoClick` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommercePromoClick:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackEnhancedEcommercePromoClick } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -587,9 +1018,24 @@ import { trackEnhancedEcommercePromoClick } from '@snowplow/browser-plugin-snowp
 trackEnhancedEcommercePromoClick({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackEnhancedEcommerceAddToCart
 
 To track an Enhanced Ecommerce add to cart event, you can use the `trackEnhancedEcommerceAddToCart` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommerceAddToCart:{trackerName}", {{dataLayer.ecommerce reference}}, {
+    finalCartValue: 20,
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackEnhancedEcommerceAddToCart } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -599,11 +1045,26 @@ trackEnhancedEcommerceAddToCart( {{dataLayer.ecommerce reference}}, {
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `finalCartValue` is the value of the cart after the addition.
 
 #### trackEnhancedEcommerceRemoveFromCart
 
 To track an Enhanced Ecommerce remove from cart event, you can use the `trackEnhancedEcommerceRemoveFromCart` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommerceRemoveFromCart:{trackerName}", {{dataLayer.ecommerce reference}}, {
+    finalCartValue: 20,
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackEnhancedEcommerceRemoveFromCart } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -613,11 +1074,26 @@ trackEnhancedEcommerceRemoveFromCart( {{dataLayer.ecommerce reference}}, {
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `finalCartValue` is the value of the cart after the removal.
 
 #### trackEnhancedEcommerceCheckoutStep
 
 To track an Enhanced Ecommerce remove from cart event, you can use the `trackEnhancedEcommerceCheckoutStep` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommerceCheckoutStep:{trackerName}", {{dataLayer.ecommerce reference}}, {
+    checkoutOption: { delivery_method: "express_delivery" },
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackEnhancedEcommerceCheckoutStep } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -627,11 +1103,26 @@ trackEnhancedEcommerceCheckoutStep( {{dataLayer.ecommerce reference}}, {
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `checkoutOption` is a key value pair object of available [Snowplow checkout options](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/checkout_step), except `step` which is retrieved from the dataLayer directly.
 
 #### trackEnhancedEcommercePurchase
 
 To track an Enhanced Ecommerce remove from cart event, you can use the `trackEnhancedEcommercePurchase` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackEnhancedEcommercePurchase:{trackerName}", {{dataLayer.ecommerce reference}}, {
+    paymentMethod: "bank_transfer",
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackEnhancedEcommercePurchase } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -640,6 +1131,9 @@ trackEnhancedEcommercePurchase( {{dataLayer.ecommerce reference}}, {
     paymentMethod: "bank_transfer",
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 - Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`. 
 
@@ -657,15 +1151,38 @@ method( {{dataLayer.ecommerce reference}} , { currency: "currency code" });
 
 To track an GA4 Ecommerce item list view, you can use the `trackGA4ViewItemList` method with the following attributes:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4ViewItemList:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```js
 import { trackGA4ViewItemList } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
 trackGA4ViewItemList({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackGA4SelectItem
 
 To track an GA4 Ecommerce item selection from a list, you can use the `trackGA4SelectItem` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4SelectItem:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4SelectItem } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -673,9 +1190,22 @@ import { trackGA4SelectItem } from '@snowplow/browser-plugin-snowplow-ecommerce'
 trackGA4SelectItem({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackGA4ViewItem
 
 To track an GA4 Ecommerce item view, you can use the `trackGA4ViewItem` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4ViewItem:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4ViewItem } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -683,9 +1213,22 @@ import { trackGA4ViewItem } from '@snowplow/browser-plugin-snowplow-ecommerce';
 trackGA4ViewItem({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackGA4ViewPromotion
 
 To track an GA4 Ecommerce internal promotion view, you can use the `trackGA4ViewPromotion` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4ViewPromotion:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4ViewPromotion } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -693,9 +1236,22 @@ import { trackGA4ViewPromotion } from '@snowplow/browser-plugin-snowplow-ecommer
 trackGA4ViewPromotion({{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackGA4SelectPromotion
 
 To track an GA4 Ecommerce internal promotion selection, you can use the `trackGA4SelectPromotion` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4SelectPromotion:{trackerName}", {{dataLayer.ecommerce reference}});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4SelectPromotion } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -703,9 +1259,24 @@ import { trackGA4SelectPromotion } from '@snowplow/browser-plugin-snowplow-ecomm
 trackGA4SelectPromotion( {{dataLayer.ecommerce reference}});
 ```
 
+  </TabItem>
+</Tabs>
+
 #### trackGA4AddToCart
 
 To track an GA4 Ecommerce add to cart event, you can use the `trackGA4AddToCart` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4AddToCart:{trackerName}", {{dataLayer.ecommerce reference}}, {
+    finalCartValue: 20,
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4AddToCart } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -715,11 +1286,26 @@ trackGA4AddToCart( {{dataLayer.ecommerce reference}}, {
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `finalCartValue` is the value of the cart after the addition.
 
 #### trackGA4RemoveFromCart
 
 To track an GA4 Ecommerce remove from cart event, you can use the `trackGA4RemoveFromCart` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4RemoveFromCart:{trackerName}", {{dataLayer.ecommerce reference}}, {
+    finalCartValue: 20,
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4RemoveFromCart } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -729,11 +1315,26 @@ trackGA4RemoveFromCart( {{dataLayer.ecommerce reference}}, {
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `finalCartValue` is the value of the cart after the removal.
 
 #### trackGA4BeginCheckout
 
 To track an GA4 Ecommerce checkout beginning, you can use the `trackGA4BeginCheckout` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4BeginCheckout:{trackerName}", {
+    step: 1,
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4BeginCheckout } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -743,11 +1344,26 @@ trackGA4BeginCheckout({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `step` is a number representing the step of the checkout funnel. Defaults to 1, mimicking the `begin_checkout` GA4 event.
 
 #### trackGA4AddShippingInfo
 
 To track an GA4 Ecommerce checkout shipping info step completion, you can use the `trackGA4AddShippingInfo` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4AddShippingInfo:{trackerName}", {
+    step: 1,
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4AddShippingInfo } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -757,11 +1373,26 @@ trackGA4AddShippingInfo({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `step` is a number representing the step of the checkout funnel.
 
 #### trackGA4AddPaymentOptions
 
 To track an GA4 Ecommerce checkout payment option step completion, you can use the `trackGA4AddPaymentOptions` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4AddPaymentOptions:{trackerName}", {
+    step: 1,
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4AddPaymentOptions } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -771,11 +1402,26 @@ trackGA4AddPaymentOptions({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
 - Where `step` is a number representing the step of the checkout funnel.
 
 #### trackGA4Transaction
 
 To track an GA4 Ecommerce checkout payment option step completion, you can use the `trackGA4Transaction` method with the following attributes:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```js
+window.snowplow("trackGA4Transaction:{trackerName}", {
+    paymentMethod: "bank_transfer",
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```js
 import { trackGA4Transaction } from '@snowplow/browser-plugin-snowplow-ecommerce';
@@ -784,5 +1430,8 @@ trackGA4Transaction({
     paymentMethod: "bank_transfer",
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 - Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`. 

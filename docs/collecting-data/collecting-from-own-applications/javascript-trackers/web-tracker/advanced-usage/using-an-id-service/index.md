@@ -1,5 +1,5 @@
 ---
-title: "Using an ID service"
+title: "ITP mitigation: using an ID service"
 sidebar_position: 3000
 ---
 

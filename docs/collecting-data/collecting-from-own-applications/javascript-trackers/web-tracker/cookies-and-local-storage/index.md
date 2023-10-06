@@ -1,6 +1,6 @@
 ---
 title: "Cookies and Local Storage"
-sidebar_position: 500
+sidebar_position: 3000
 ---
 
 ```mdx-code-block

@@ -1,7 +1,7 @@
 ---
 title: "Plugins"
 date: "2021-04-07"
-sidebar_position: 3000
+sidebar_position: 2800
 ---
 
 ```mdx-code-block

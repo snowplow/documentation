@@ -1,5 +1,5 @@
 ---
-title: "Advanced usage TODO white label perf nav"
+title: "Advanced usage TODO perf nav"
 date: "2021-04-07"
 sidebar_position: 4000
 ---

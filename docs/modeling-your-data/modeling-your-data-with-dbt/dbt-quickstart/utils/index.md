@@ -189,19 +189,22 @@ For the `snowplow_base_sessions_lifecycle_manifest` model, you have the followin
 ```jinja2
 
 {% set sessions_lifecycle_manifest_query = snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest(
-    var('snowplow__session_identifiers', '[{"schema": "atomic", "field": "domain_sessionid"}]'),
-    var('snowplow__session_timestamp', 'collector_tstamp'),
-    var('snowplow__user_identifiers', '[{"schema": "atomic", "field": "domain_userid"}]'),
-    var('snowplow__quarantined_sessions', 'snowplow_base_quarantined_sessions'),
-    var('snowplow__derived_tstamp_partitioned', true),
-    var('snowplow__days_late_allowed', 3),
-    var('snowplow__max_session_days', 3),
-    var('snowplow__app_ids', []),
-    var('snowplow__events_schema', 'atomic'),
-    var('snowplow__events_table', 'events'),
-    var('snowplow__event_limits', 'snowplow_base_new_event_limits'),
-    var('snowplow__incremental_manifest', 'snowplow_incremental_manifest'),
-    var('snowplow__package_name, 'snowplow')
+    session_identifiers=var('snowplow__session_identifiers', '[{"schema": "atomic", "field": "domain_sessionid"}]'),
+    session_sql=var('snowplow__session_sql', none),
+    session_timestamp=var('snowplow__session_timestamp', 'collector_tstamp'),
+    user_identifiers=var('snowplow__user_identifiers', '[{"schema": "atomic", "field": "domain_userid"}]'),
+    user_sql=var('snowplow__user_sql', none),
+    quarantined_sessions=var('snowplow__quarantined_sessions', 'snowplow_base_quarantined_sessions'),
+    derived_tstamp_partitioned=var('snowplow__derived_tstamp_partitioned', true),
+    days_late_allowed=var('snowplow__days_late_allowed', 3),
+    max_session_days=var('snowplow__max_session_days', 3),
+    app_ids=var('snowplow__app_ids', []),
+    snowplow_events_database=var('snowplow__events_schema', none),
+    snowplow_events_schema=var('snowplow__events_schema', 'atomic'),
+    snowplow_events_table=var('snowplow__events_table', 'events'),
+    event_limits_table=var('snowplow__event_limits', 'snowplow_base_new_event_limits'),
+    incremental_manifest_table=var('snowplow__incremental_manifest', 'snowplow_incremental_manifest'),
+    package_name=var('snowplow__package_name, 'snowplow')
  ) %}
 
 {{ sessions_lifecycle_manifest_query }}
@@ -294,15 +297,17 @@ For the `snowplow_base_events_this_run` model, you will need to run the followin
                                                                           'end_tstamp') %}
 
 {% set base_events_query = snowplow_utils.base_create_snowplow_events_this_run(
-    var('snowplow__base_sessions', 'snowplow_base_sessions_this_run'),
-    var('snowplow__session_identifiers', '[{"schema": "atomic", "field": "domain_sessionid"}]'),
-    var('snowplow__session_timestamp', 'collector_tstamp'),
-    var('snowplow__derived_tstamp_partitioned', true),
-    var('snowplow__days_late_allowed', 3),
-    var('snowplow__max_session_days', 3),
-    var('snowplow__app_ids', []),
-    var('snowplow__events_schema', 'atomic'),
-    var('snowplow__events_table', 'events')) %}
+    sessions_this_run_table=var('snowplow__base_sessions', 'snowplow_base_sessions_this_run'),
+    session_identifiers=var('snowplow__session_identifiers', '[{"schema": "atomic", "field": "domain_sessionid"}]'),
+    session_sql=var('snowplow__session_sql', none),
+    session_timestamp=var('snowplow__session_timestamp', 'collector_tstamp'),
+    derived_tstamp_partitioned=var('snowplow__derived_tstamp_partitioned', true),
+    days_late_allowed=var('snowplow__days_late_allowed', 3),
+    max_session_days=var('snowplow__max_session_days', 3),
+    app_ids=var('snowplow__app_ids', []),
+    snowplow_events_database=var('snowplow__events_schema', none),
+    snowplow_events_schema=var('snowplow__events_schema', 'atomic'),
+    snowplow_events_table=var('snowplow__events_table', 'events')) %}
 
 {{ base_events_query }}
 ```
@@ -326,7 +331,7 @@ The `snowplow_delete_from_manifest` macro is called to remove models from manife
 
 :::tip 
 
-The `package_name` variable here is not the name of your project, instead it is what is used to identify your tagged incremental models as they should be tagged with `<package_name>_incremental`. 
+The `package_name` variable here is not necessarily the name of your project (although it keeps things simple to make it the same), instead it is what is used to identify your tagged incremental models as they should be tagged with `<package_name>_incremental`. 
 
 :::
 

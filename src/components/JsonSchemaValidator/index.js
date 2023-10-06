@@ -67,6 +67,9 @@ export const JsonApp = (props) => {
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
         <div className="JsonValidator">
           <Form
+            experimental_defaultFormStateBehavior={{
+              arrayMinItems: { populate: 'requiredOnly' },
+            }}
             schema={props.schema}
             formData={formData}
             onChange={(e) => setFormData(e.formData)}

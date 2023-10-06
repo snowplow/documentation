@@ -2074,7 +2074,7 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@rjsf/core@^5.6.2":
+"@rjsf/core@~5.12.1":
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/@rjsf/core/-/core-5.12.1.tgz#ab879ffa9fa1dbd8d2cde77aba0bd43155563b1a"
   integrity sha512-1YFhZ90/uHRx1akQmDdIjBxGMjs/5gtuTLUFwl6GbOwTm2fhZRh3qXRFyTXz81Oy6TGcbrxBJEYvFg2iHjYKCA==
@@ -2085,12 +2085,12 @@
     nanoid "^3.3.6"
     prop-types "^15.8.1"
 
-"@rjsf/mui@^5.6.2":
+"@rjsf/mui@~5.12.1":
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/@rjsf/mui/-/mui-5.12.1.tgz#cd255b3bf31d2cba7cc5832bd25d815ad7975838"
   integrity sha512-d7cNFIdt6N24m5NPrNSqfCe2SUyUjX48Goo7z4J9vOHWxo5kdDfBEa3UwNA/DR9lo+9cYY7QTvKbgrTkxWU58A==
 
-"@rjsf/utils@^5.6.2":
+"@rjsf/utils@~5.12.1":
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/@rjsf/utils/-/utils-5.12.1.tgz#2edea90ff93cd7c810c7b52878dea56af6ac7ad2"
   integrity sha512-/k8+7WdLwhaYsOQvH5BQINipj2IJvjEW3QQv4jQQ7sXtkpdUjieZayRfaE8DHfRdm9HjgJURJFDy3EODkWPl6A==
@@ -2101,7 +2101,7 @@
     lodash-es "^4.17.21"
     react-is "^18.2.0"
 
-"@rjsf/validator-ajv8@^5.6.2":
+"@rjsf/validator-ajv8@~5.12.1":
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/@rjsf/validator-ajv8/-/validator-ajv8-5.12.1.tgz#58c15a56c26a6ce8f6763c16ed9747f8c7207480"
   integrity sha512-m4QO44yp60LTIfd4RPUu/h07B8U9umbD3I4Nh4iv9oyUudncaZFFXRopKcBm08v30VkN0tjMwuu0SxGDpzMtHA==
@@ -2111,10 +2111,10 @@
     lodash "^4.17.21"
     lodash-es "^4.17.21"
 
-"@saucelabs/theme-github-codeblock@^0.1.1":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@saucelabs/theme-github-codeblock/-/theme-github-codeblock-0.1.5.tgz#1bdbe9f93aa2bfdc07f7be23bfe7dfcd23c71f63"
-  integrity sha512-eJPbEDBGTBqUp572BC6bDF4WNe+oM7Jg4U1FXsf4OvTylycM6HWrLXFD10dM5QYdR7X47ItjiDY2PMgzsz6T0A==
+"@saucelabs/theme-github-codeblock@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@saucelabs/theme-github-codeblock/-/theme-github-codeblock-0.2.3.tgz#706a43292f600532271979941b0155db667c2c21"
+  integrity sha512-GSl3Lr/jOWm4OP3BPX2vXxc8FMSOXj1mJnls6cUqMwlGOfKQ1Ia9pq1O9/ES+5TrZHIzAws/n5FFSn1OkGJw/Q==
 
 "@sideway/address@^4.1.3":
   version "4.1.4"

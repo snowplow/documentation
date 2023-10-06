@@ -1,5 +1,5 @@
 ---
-title: "Tracker Setup TODO"
+title: "Tracker setup TODO"
 date: "2021-03-31"
 sidebar_position: 1000
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Tracking Events"
+title: "Tracking events"
 sidebar_position: 2000
 ---
 

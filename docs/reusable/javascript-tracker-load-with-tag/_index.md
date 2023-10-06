@@ -12,4 +12,8 @@ We also recommend renaming `sp.js` as this file name is commonly blocked by adbl
 
 _Important note regarding testing:_ If the URL to sp.js is protocol-relative i.e. beginning with // when fetching `sp.js`. It will work if the your web page is using the “http” or “https” protocol. But if you are testing locally and loading your page from your filesystem using the “file” protocol (so its URI looks something like “file:///home/joe/snowplow_test.html”), the protocol-relative URL will also use that protocol, preventing the script from loading. To avoid this, change the URL to `"http://.../sp.js"` when testing locally.
 
-As well as loading the JavaScript Tracker, this tag creates a global function called “snowplow” which you use to access the Tracker. You can replace the string “snowplow” with the function name of your choice. This is encouraged: if there are two JavaScript trackers on the same page, there won’t be any conflict between them as long as they have chosen different function names. The rest of the documentation will assume that the function is called “snowplow”.
+As well as loading the JavaScript Tracker, this tag creates a global function called “snowplow” which you use to access the Tracker. You can replace the string “snowplow” with the function name of your choice. This is encouraged: if there are two JavaScript trackers on the same page, there won’t be any conflict between them as long as they have chosen different function names. 
+
+:::note
+The rest of the documentation will assume that the function is called “snowplow”.
+:::

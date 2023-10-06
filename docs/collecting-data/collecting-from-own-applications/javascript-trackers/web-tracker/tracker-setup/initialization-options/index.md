@@ -1,10 +1,12 @@
 ---
-title: "Initialization options"
+title: "Initialization options TODO"
 date: "2021-03-31"
 sidebar_position: 2000
 ---
 
 ```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
 
 <Block5966/>
@@ -12,11 +14,28 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 
 Tracker initialization is started by calling the `"newTracker"` function and takes three arguments:
 
-1. The tracker namespace
+1. The tracker namespace (`sp` in the below example)
 2. The collector endpoint
 3. An optional configuration object containing other settings
 
 Here is a simple example of how to initialise a tracker:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+  appId: 'my-app-id',
+  discoverRootDomain: true,
+  cookieSameSite: 'Lax', // Recommended
+  contexts: {
+    webPage: true // default, can be omitted
+  }
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 newTracker('sp', '{{collector_url_here}}', {
@@ -29,9 +48,63 @@ newTracker('sp', '{{collector_url_here}}', {
 });
 ```
 
-The tracker will be named “sp” and will send events to the a collector url you specify by replacing `{{collector_url_here}}`. The final argument is the configuration object. Here it is just used to set the app ID and the common webPage context for each event. Each event the tracker sends will have an app ID field set to “my-app-id”.
+  </TabItem>
+</Tabs>
+
+The tracker will be named `sp` (tracker namespace) and will send events to the a collector url you specify by replacing `{{collector_url_here}}`. The final argument is the configuration object. Here it is just used to set the app ID and the common webPage context for each event. Each event the tracker sends will have an app ID field set to “my-app-id”.
 
 Here is a longer example in which every tracker configuration parameter is set:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+  appId: 'my-app-id',
+  platform: 'web',
+  cookieDomain: null,
+  discoverRootDomain: true,
+  cookieName: '_sp_',
+  cookieSameSite: 'Lax', // Recommended
+  cookieSecure: true,
+  encodeBase64: true,
+  respectDoNotTrack: false,
+  eventMethod: 'post',
+  bufferSize: 1,
+  maxPostBytes: 40000,
+  maxGetBytes: 1000, // available in v3.4+
+  postPath: '/custom/path', // Collector must be configured
+  crossDomainLinker: function (linkElement) {
+    return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
+  },
+  cookieLifetime: 63072000,
+  stateStorageStrategy: 'cookieAndLocalStorage',
+  maxLocalStorageQueueSize: 1000,
+  resetActivityTrackingOnPageView: true,
+  connectionTimeout: 5000,
+  anonymousTracking: false,
+  // anonymousTracking: { withSessionTracking: true },
+  // anonymousTracking: { withSessionTracking: true, withServerAnonymisation: true },
+  customHeaders: {}, // Use with caution. Available from v3.2.0+
+  withCredentials: true, // Available from v3.2.0+
+  contexts: {
+    webPage: true, // Default
+    session: false, // Adds client session context entity to events, off by default. Available in v3.5+.
+    browser: false, // Adds browser context entity to events, off by default. Available in v3.9+.
+    performanceTiming: true,
+    gaCookies: true,
+    geolocation: false,
+    clientHints: true,
+    // clientHints: { includeHighEntropy: true }, // Optional
+  },
+  retryStatusCodes: [],
+  dontRetryStatusCodes: [],
+  onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 newTracker('sp', '{{collector_url_here}}', {
@@ -70,6 +143,9 @@ newTracker('sp', '{{collector_url_here}}', {
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
 });
 ```
+
+  </TabItem>
+</Tabs>
 
 We will now go through the various configuration parameters. Note that these are all optional. In fact, you aren’t required to provide any configuration object at all.
 
@@ -171,7 +247,7 @@ Anonymous tracking can be toggled on and off. The methods to control this behavi
 
 `anonymousTracking: { withServerAnonymisation: true }`
 
-Server Anonymisation requires the Snowplow Stream Collector v2.1.0+. Using a lower version will cause events to fail to send until Server Anonymisatoin is disabled.
+Server Anonymisation requires the Snowplow Stream Collector v2.1.0+. Using a lower version will cause events to fail to send until Server Anonymisation is disabled.
 
 Server Anonymisation will not work when the tracker is initialized with `eventMethod: 'beacon'` as it requires additional custom headers which beacon does not support.
 
@@ -193,11 +269,26 @@ The Snowplow JavaScript Tracker performs sessionization client side. This allows
 
 Normally the protocol (http or https) used by the Tracker to send events to a collector is the same as the protocol of the current page. You can force the tracker to use https by prefixing the collector endpoint with the protocol. For example:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
 ```javascript
 newTracker('sp', 'https://{{collector_url_here}}', {
   appId: 'my-app-id'
 }
 ```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+newTracker('sp', 'https://{{collector_url_here}}', {
+  appId: 'my-app-id'
+}
+```
+
+  </TabItem>
+</Tabs>
 
 #### Configuring the session cookie duration
 
@@ -225,7 +316,7 @@ See also [How the Tracker uses `localStorage`](/docs/collecting-data/collectin
 
 #### Adding predefined contexts
 
-The JavaScript Tracker comes with many predefined contexts which you can automatically add to every event you send. To enable them, simply add them to the `contexts` field of the configuration object as above.
+The JavaScript Tracker comes with many predefined context entities which you can automatically add to every event you send. To enable them, simply add them to the `contexts` field of the configuration object as above.
 
 ##### webPage context
 
@@ -282,9 +373,53 @@ The [browser](https://github.com/snowplow/iglu-central/tree/master/schemas/com.
 Please note that the browser context entity is only available since version 3.9 of the tracker.
 :::
 
+TODO are these also for browser?
+##### performanceTiming context
+
+If this context is enabled, the JavaScript Tracker will use the create a context JSON from the `window.performance.timing` object, along with the Chrome `firstPaintTime` field (renamed to `"chromeFirstPaint"`) if it exists. This data can be used to calculate page performance metrics.
+
+Note that if you fire a page view event as soon as the page loads, the `domComplete`, `loadEventStart`, `loadEventEnd`, and `chromeFirstPaint` metrics in the Navigation Timing API may be set to zero. This is because those properties are only known once all scripts on the page have finished executing. See the [Advanced Usage](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/advanced-usage/getting-the-most-out-of-performance-timing/index.md) page for more information on circumventing this limitation. Additionally the `redirectStart`, `redirectEnd`, and `secureConnectionStart` are set to 0 if there is no redirect or a secure connection is not requested.
+
+For more information on the Navigation Timing API, see [the specification](http://www.w3.org/TR/2012/REC-navigation-timing-20121217/#sec-window.performance-attribute).
+
+##### gaCookies context
+
+If this context is enabled, the JavaScript Tracker will look for Google Analytics cookies (specifically the “__utma”, “__utmb”, “__utmc”, “__utmv”, “__utmz”, and “_ga” cookies) and combine their values into a JSON which gets sent with every event.
+
+##### clientHints context
+
+If this context is enabled, the JavaScript Tracker will capture the Client Hints data made available in the browser. See [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH#Browser_compatibility) for browser support.
+
+This is useful data to capture as browsers are moving away from high entropy User Agent strings. Client Hints offer useful information to understand browser usage without the potential to infringe on a users privacy as is often the case with the User Agent string.
+
+This context be enabled in two ways:
+
+1. `clientHints: true`
+    - This will capture the "basic" client hints
+2. `clientHints: { includeHighEntropy: true }`
+    - This will capture the "basic" client hints as well as hints that are deemed "High Entropy" and could be used to fingerprint users. Browsers may choose to prompt the user before making this data available.
+
+To see what will be captured please see the JsonSchema file [org.ietf/http_client_hints/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0).
+
+##### geolocation context
+
+If this context is enabled, the JavaScript Tracker will attempt to create a context from the visitor’s geolocation information. If the visitor has not already given or denied the website permission to use their geolocation information, a prompt will appear. If they give permission, then all events from that moment on will include their geolocation information.
+
+###### `enableGeolocationContext`
+
+If the geolocation context isn't enabled at tracker initialization, then it can be enabled at a later time by calling `enableGeolocationContext`. This is useful if you have other areas of your site where you require requesting geolocation access, as you can defer enabling this on your Snowplow events until you have permission to read the users geolocation for your other use case.
+
+For more information on the geolocation API, see [the specification](http://dev.w3.org/geo/api/spec-source.html).
+
+##### optimizelyXSummary context
+
+Support for OptimizelyX has been introduced in the tracker, you can have a look at the JsonSchema in [com.optimizely.optimizelyx/summary/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.optimizely.optimizelyx/summary/jsonschema/1-0-0) to see what is being captured.
+
+If you’re planning on leveraging the context’s variation names, you’ll have to untick ‘Mask descriptive names in project code and third-party integrations’ in the OptimizelyX menu -> Settings -> Privacy. Otherwise, all variation names will be `null`.
+TODO
 ##### Other contexts
 
-There are many other contexts which can be added to your tracking, which are available as [plugins](https://github.com/snowplow/snowplow-javascript-tracker/tree/release/3.0.0/plugins).
+There are many other context entities which can be added to your tracking, which are available as [plugins](https://github.com/snowplow/snowplow-javascript-tracker/tree/release/3.0.0/plugins).
 
 #### POST support
 
@@ -300,9 +435,22 @@ We recommend leaving the `bufferSize` as the default value of 1. This ensure tha
 
 If you have set `bufferSize` to greater than 1, you can flush the buffer using the `flushBuffer` method:
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('flushBuffer');
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 flushBuffer();
 ```
+
+  </TabItem>
+</Tabs>
 
 For instance, if you wish to send several events at once, you might make the API calls to create the events and store them and then and call `flushBuffer` afterwards to ensure they are all sent before the user leaves the page.
 
@@ -335,7 +483,18 @@ import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 import CrossDomain from "@site/docs/reusable/javascript-tracker-cross-domain/_index.md"
 ```
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+<CrossDomain lang="javascript" />
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 <CrossDomain lang="browser" />
+
+  </TabItem>
+</Tabs>
 
 #### Configuring the maximum payload size in bytes
 
@@ -368,6 +527,24 @@ If the optional `discoverRootDomain` field of the configuration object is set 
 
 Whenever tracker initialized on your domain – it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` configuration object parameter or `setVisitorCookieTimeout` method.
 
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('newTracker', 'cf', '{{COLLECTOR_URL}}', {
+  cookieLifetime: 86400 * 31,
+});
+```
+
+or
+
+```javascript
+snowplow('setVisitorCookieTimeout', 86400 * 30);  // 30 days
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
 ```javascript
 newTracker('cf', '{{COLLECTOR_URL}}', {
   cookieLifetime: 86400 * 31,
@@ -379,6 +556,9 @@ or
 ```javascript
 setVisitorCookieTimeout(86400 * 30);  // 30 days
 ```
+
+  </TabItem>
+</Tabs>
 
 If `cookieLifetime` is set to `0`, the cookie will expire at the end of the session (when the browser closes). If set to `-1`, the first-party cookies will be disabled.
 

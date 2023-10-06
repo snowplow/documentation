@@ -1,5 +1,5 @@
 ---
-title: "Cookies & Local Storage"
+title: "Cookies and Local Storage"
 sidebar_position: 500
 ---
 

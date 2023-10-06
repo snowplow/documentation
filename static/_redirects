@@ -2,7 +2,7 @@
 /accelerators/ https://snowplow.io/data-product-accelerators/ 302
 /accelerators/web/* https://data-product-accelerators.netlify.app/accelerators/web/:splat 200
 /accelerators/mobile/* https://data-product-accelerators.netlify.app/accelerators/mobile/:splat 200
-/accelerators/hybrid/* https://data-product-accelerators.netlify.app/accelerators/:splat 200
+/accelerators/hybrid/* https://data-product-accelerators.netlify.app/accelerators/hybrid/:splat 200
 /accelerators/template/* https://snowplow-axl-template.netlify.app/accelerators/template/:splat 200
 /accelerators/composable-cdp-with-predictive-ml-modeling/* https://data-product-accelerators.netlify.app/accelerators/composable-cdp-with-predictive-ml-modeling/:splat 200
 /accelerators/ecommerce/* https://data-product-accelerators.netlify.app/accelerators/ecommerce/:splat 200

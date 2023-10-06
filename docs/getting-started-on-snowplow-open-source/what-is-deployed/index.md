@@ -78,17 +78,17 @@ You can very easily edit the script or run each of the Terraform modules indepen
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="snowflake" label="Snowflake" default>
 
-<Diagram cloud="azure" warehouse="Snowflake" compute="VMSS" stream="Event Hubs" bucket="ADLS Gen2" igludb="Postgres"/>
+<Diagram cloud="azure" warehouse="Snowflake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
 
   </TabItem>
   <TabItem value="databricks" label="Databricks" default>
 
-<Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Event Hubs" bucket="ADLS Gen2" igludb="Postgres"/>
+<Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
 
   </TabItem>
   <TabItem value="synapse" label="Synapse Analytics 🧪" default>
 
-<Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Event Hubs" bucket="ADLS Gen2" igludb="Postgres"/>
+<Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
 
   </TabItem>
 </Tabs>
@@ -108,7 +108,7 @@ This is an application load balancer for your inbound HTTP(S) traffic. Traffic i
 
 ## Collector
 
-This is an application that receives raw Snowplow events over HTTP(S), serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to Kinesis (on AWS), Pub/Sub (on GCP) or Event Hubs (on Azure). More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/index.md).
+This is an application that receives raw Snowplow events over HTTP(S), serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to Kinesis (on AWS), Pub/Sub (on GCP) or Kafka / Event Hubs (on Azure). More details can be found [here](/docs/pipeline-components-and-applications/stream-collector/index.md).
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest"
@@ -162,7 +162,7 @@ This is the Iglu Server database (RDS on AWS, CloudSQL on GCP and PostgreSQL on 
 
 ## Streams
 
-The various streams (Kinesis on AWS, Pub/Sub on GCP and Event Hubs on Azure) are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
+The various streams (Kinesis on AWS, Pub/Sub on GCP and Kafka / Event Hubs on Azure) are a key component of ensuring a non-lossy pipeline, providing crucial back-up, as well as serving as a mechanism to drive real time use cases from the enriched stream.
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/kinesis-stream/aws/latest"
@@ -253,7 +253,7 @@ If you choose BigQuery as your destination, there will be a “dead letter” GC
   </TabItem>
   <TabItem value="azure" label="Azure 🧪">
 
-Currently, [failed events](/docs/understanding-your-pipeline/failed-events/index.md) are only available in the `bad` Event Hubs topic.
+Currently, [failed events](/docs/understanding-your-pipeline/failed-events/index.md) are only available in the `bad` Kafka / Event Hubs topic.
 
   </TabItem>
 </Tabs>
@@ -295,7 +295,7 @@ There will be a new dataset available in BigQuery with the suffix `_snowplow_db`
 [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Snowflake.
 
 See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
-* Transformer ([AWS — Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest), [Azure — Event Hubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest))
+* Transformer ([AWS — Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest), [Azure — Kafka / Event Hubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest))
 * Snowflake Loader ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest), [Azure](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest))
 
 

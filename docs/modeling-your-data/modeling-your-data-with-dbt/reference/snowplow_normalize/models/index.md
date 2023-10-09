@@ -22,7 +22,7 @@ This page is auto-generated from our dbt packages, some information may be incom
 ### Snowplow Normalize Base Events This Run {#model.snowplow_normalize.snowplow_normalize_base_events_this_run}
 
 <DbtDetails><summary>
-<code>models/base/scratch/&lt;adaptor&gt;/snowplow_normalize_base_events_this_run.sql</code>
+<code>models/base/scratch/snowplow_normalize_base_events_this_run.sql</code>
 </summary>
 
 <h4>Description</h4>
@@ -30,27 +30,6 @@ This page is auto-generated from our dbt packages, some information may be incom
 For any given run, this table contains all required events to be consumed by subsequent nodes in the Snowplow dbt normalize package. This is a cleaned, deduped dataset, containing all columns from the raw events table.
 
 **Note: This table should be used as the input to any custom modules that require event level data, rather than selecting straight from `atomic.events`**
-
-<h4>File Paths</h4>
-
-<Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery">
-
-`models/base/scratch/bigquery/snowplow_normalize_base_events_this_run.sql`
-
-</TabItem>
-<TabItem value="databricks" label="databricks">
-
-`models/base/scratch/databricks/snowplow_normalize_base_events_this_run.sql`
-
-</TabItem>
-<TabItem value="snowflake" label="snowflake">
-
-`models/base/scratch/snowflake/snowplow_normalize_base_events_this_run.sql`
-
-</TabItem>
-</Tabs>
-
 
 <h4>Details</h4>
 
@@ -200,86 +179,9 @@ Base event this run table column lists may be incomplete and is missing contexts
 <summary>Code</summary>
 
 <Tabs groupId="dispatched_sql">
-<TabItem value="bigquery" label="bigquery">
+<TabItem value="default" label="default" default>
 
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/models/base/scratch/bigquery/snowplow_normalize_base_events_this_run.sql">Source</a></i></b></center>
-
-```jinja2
-{{
-  config(
-    tags=["this_run"]
-  )
-}}
-
-{%- set lower_limit, upper_limit, session_start_limit = snowplow_utils.return_base_new_event_limits(ref('snowplow_normalize_base_new_event_limits')) %}
-
--- without downstream joins, it's safe to dedupe by picking the first event_id found.
-select
-  array_agg(e order by e.collector_tstamp limit 1)[offset(0)].*
-
-from (
-
-  select
-    a.*
-
-  from {{ var('snowplow__events') }} as a
-
-  where
-    {# dvce_sent_tstamp is an optional field and not all trackers/webhooks populate it, this means this filter needs to be optional #}
-    {% if var("snowplow__days_late_allowed") == -1 %}
-      1 = 1
-    {% else %}
-      a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'a.dvce_created_tstamp') }}
-    {% endif %}
-    and a.collector_tstamp >= {{ lower_limit }}
-    and a.collector_tstamp <= {{ upper_limit }}
-    {% if var('snowplow__derived_tstamp_partitioned', true) and target.type == 'bigquery' | as_bool() %}
-      and a.derived_tstamp >= {{ snowplow_utils.timestamp_add('hour', -1, lower_limit) }}
-      and a.derived_tstamp <= {{ upper_limit }}
-    {% endif %}
-    and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
-
-) e
-group by e.event_id
-```
-
-</TabItem>
-<TabItem value="databricks" label="databricks">
-
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/models/base/scratch/databricks/snowplow_normalize_base_events_this_run.sql">Source</a></i></b></center>
-
-```jinja2
-{{
-  config(
-    tags=["this_run"]
-  )
-}}
-
-{%- set lower_limit, upper_limit, session_start_limit = snowplow_utils.return_base_new_event_limits(ref('snowplow_normalize_base_new_event_limits')) %}
-
-select
-    a.*
-
-from {{ var('snowplow__events') }} as a
-
-where
-  {# dvce_sent_tstamp is an optional field and not all trackers/webhooks populate it, this means this filter needs to be optional #}
-    {% if var("snowplow__days_late_allowed") == -1 %}
-      1 = 1
-    {% else %}
-      a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'a.dvce_created_tstamp') }}
-    {% endif %}
-    and a.collector_tstamp >= {{ lower_limit }}
-    and a.collector_tstamp <= {{ upper_limit }}
-    and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
-
-qualify row_number() over (partition by a.event_id order by a.collector_tstamp, a.etl_tstamp) = 1
-```
-
-</TabItem>
-<TabItem value="snowflake" label="snowflake">
-
-<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/models/base/scratch/snowflake/snowplow_normalize_base_events_this_run.sql">Source</a></i></b></center>
+<center><b><i><a href="https://github.com/snowplow/dbt-snowplow-normalize/blob/main/models/base/scratch/snowplow_normalize_base_events_this_run.sql">Source</a></i></b></center>
 
 ```jinja2
 {{
@@ -292,23 +194,26 @@ qualify row_number() over (partition by a.event_id order by a.collector_tstamp, 
 {%- set lower_limit, upper_limit, session_start_limit = snowplow_utils.return_base_new_event_limits(ref('snowplow_normalize_base_new_event_limits')) %}
 
 select
-  a.*
+    a.*
 
 from {{ var('snowplow__events') }} as a
 
-
 where
   {# dvce_sent_tstamp is an optional field and not all trackers/webhooks populate it, this means this filter needs to be optional #}
-    {% if var("snowplow__days_late_allowed") == -1 %}
-      1 = 1
-    {% else %}
-      a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'a.dvce_created_tstamp') }}
-    {% endif %}
-    and a.collector_tstamp >= {{ lower_limit }}
-    and a.collector_tstamp <= {{ upper_limit }}
-    and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
+  {% if var("snowplow__days_late_allowed") == -1 %}
+    1 = 1
+  {% else %}
+    a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', var("snowplow__days_late_allowed", 3), 'a.dvce_created_tstamp') }}
+  {% endif %}
+  and a.{{ var('snowplow__session_timestamp', 'collector_tstamp') }} >= {{ lower_limit }}
+  and a.{{ var('snowplow__session_timestamp', 'collector_tstamp') }} <= {{ upper_limit }}
+  {% if var('snowplow__derived_tstamp_partitioned', true) and target.type == 'bigquery' | as_bool() %}
+    and a.derived_tstamp >= {{ snowplow_utils.timestamp_add('hour', -1, lower_limit) }}
+    and a.derived_tstamp <= {{ upper_limit }}
+  {% endif %}
+  and {{ snowplow_utils.app_id_filter(var("snowplow__app_id",[])) }}
 
-qualify row_number() over (partition by a.event_id order by a.collector_tstamp) = 1
+qualify row_number() over (partition by a.event_id order by a.collector_tstamp{% if target.type in ['databricks', 'spark'] -%}, a.etl_tstamp {%- endif %}) = 1
 ```
 
 </TabItem>
@@ -380,14 +285,15 @@ This table contains the lower and upper timestamp limits for the given run of th
 {% set min_last_success,
          max_last_success,
          models_matched_from_manifest,
-         has_matched_all_models = snowplow_utils.get_incremental_manifest_status(ref('snowplow_normalize_incremental_manifest'), models_in_run) -%}
+         has_matched_all_models = snowplow_utils.get_incremental_manifest_status(ref('snowplow_normalize_incremental_manifest'),
+                                                                                 models_in_run) -%}
 
 
 {% set run_limits_query = snowplow_utils.get_run_limits(min_last_success,
-                                                          max_last_success,
-                                                          models_matched_from_manifest,
-                                                          has_matched_all_models,
-                                                          var("snowplow__start_date","2020-01-01")) -%}
+                                                         max_last_success,
+                                                         models_matched_from_manifest,
+                                                         has_matched_all_models,
+                                                         var("snowplow__start_date","2020-01-01")) -%}
 
 
 {{ run_limits_query }}
@@ -471,16 +377,7 @@ This incremental table is a manifest of the timestamp of the latest event consum
 -- Boilerplate to generate table.
 -- Table updated as part of end-run hook
 
-with prep as (
-  select
-    cast(null as {{ snowplow_utils.type_max_string() }}) model,
-    cast('1970-01-01' as {{ type_timestamp() }}) as last_success
-)
-
-select *
-
-from prep
-where false
+{{ snowplow_utils.base_create_snowplow_incremental_manifest() }}
 ```
 
 </TabItem>
@@ -494,9 +391,8 @@ where false
 <Tabs groupId="reference">
 <TabItem value="macro" label="Macros">
 
-- macro.dbt.type_timestamp
 - [macro.snowplow_normalize.allow_refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_normalize/macros/index.md#macro.snowplow_normalize.allow_refresh)
-- [macro.snowplow_utils.type_max_string](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.type_max_string)
+- [macro.snowplow_utils.base_create_snowplow_incremental_manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_utils/macros/index.md#macro.snowplow_utils.base_create_snowplow_incremental_manifest)
 
 </TabItem>
 </Tabs>

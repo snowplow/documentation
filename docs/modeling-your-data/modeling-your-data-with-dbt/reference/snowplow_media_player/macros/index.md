@@ -380,7 +380,13 @@ select
         col_prefix='contexts_com_snowplowanalytics_snowplow_media_ad_break_1'
       ) }}
     {%- else -%}
-      null
+      {% if property is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ property }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ property.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif -%}
 {% endmacro %}
 ```
@@ -457,7 +463,13 @@ select
         col_prefix='contexts_com_snowplowanalytics_snowplow_media_ad_1'
       ) }}
     {%- else -%}
-      null
+      {% if property is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ property }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ property.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif -%}
 {% endmacro %}
 ```
@@ -535,7 +547,13 @@ select
         col_prefix='unstruct_event_com_snowplowanalytics_snowplow_media_ad_quartile_event_1'
       ) }}
     {%- else -%}
-      null
+      {% if property is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ property }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ property.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif -%}
 {% endmacro %}
 ```
@@ -617,7 +635,13 @@ select
         field='type'
       ) }}
     {%- else -%}
-      null
+      {% if media_player_event_type is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ media_player_event_type }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ media_player_event_type.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif %},
     -- for v2 media schemas, the type is the event name, remove underscores to match v1 event types
     case 
@@ -710,7 +734,13 @@ select
           col_prefix='contexts_com_youtube_youtube_1'
         ) }}
       {%- else -%}
-        null
+        {% if youtube_player_id is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ youtube_player_id }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ youtube_player_id.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %},
       {% if var("snowplow__enable_whatwg_media") -%}
         {{ field(
@@ -718,7 +748,13 @@ select
           col_prefix='contexts_org_whatwg_media_element_1'
         ) }}
       {%- else -%}
-        null
+        {% if media_player_id is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ media_player_id }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ media_player_id.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %},
       {% if var("snowplow__enable_media_player_v2") -%}
         {{ dbt_utils.generate_surrogate_key([
@@ -728,7 +764,13 @@ select
           )
         ]) }}
       {%- else -%}
-        null
+        {% if v2_player_label is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ v2_player_label }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ v2_player_label.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %}
     )
 {% endmacro %}
@@ -812,7 +854,13 @@ select
           col_prefix='contexts_com_snowplowanalytics_snowplow_media_player_2'
         ) }}
       {%- else -%}
-        null
+        {% if v2 is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ v2 }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ v2.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %},
       {%- if v1 is not none and var("snowplow__enable_media_player_v1") -%}
         {{ field(
@@ -820,7 +868,13 @@ select
           col_prefix='contexts_com_snowplowanalytics_snowplow_media_player_1'
         ) }}
       {%- else -%}
-        null
+        {% if v1 is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ v1 }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ v1.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %},
       {{ default }}
     )
@@ -904,7 +958,13 @@ select
           col_prefix='contexts_com_snowplowanalytics_snowplow_media_player_2'
         ) }}
       {%- else -%}
-        null
+        {% if v2_player_type is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ v2_player_type }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ v2_player_type.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %},
       {% if var("snowplow__enable_youtube") and var("snowplow__enable_whatwg_media") -%}
         case
@@ -923,7 +983,13 @@ select
       {% elif var("snowplow__enable_whatwg_media") -%}
         'org.whatwg-media_element'
       {%- else -%}
-        null
+        {% if youtube_player_id is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ youtube_player_id }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ youtube_player_id.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {% endif %}
     )
 {% endmacro %}
@@ -1000,7 +1066,13 @@ select
         col_prefix='contexts_com_snowplowanalytics_snowplow_media_session_1'
       ) }}
     {%- else -%}
-      null
+      {% if property is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ property }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ property.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif %}
 {% endmacro %}
 ```
@@ -1081,7 +1153,13 @@ select
         col_prefix='contexts_com_snowplowanalytics_snowplow_media_player_2'
       ) }}
     {%- else -%}
-      null
+      {% if v2_media_type is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ v2_media_type }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ v2_media_type.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif %},
     {% if var("snowplow__enable_whatwg_media") -%}
       case when {{ field(
@@ -1091,7 +1169,13 @@ select
     {%- elif var("snowplow__enable_youtube") -%}
       'video'
     {%- else -%}
-      null
+      {% if media_media_type is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ media_media_type }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ media_media_type.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif %}
   )
 {% endmacro %}
@@ -1198,7 +1282,13 @@ select
           ) }}
         end
       {%- else -%}
-        null
+        {% if v1_percent_progress is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ v1_percent_progress }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ v1_percent_progress.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %},
       {% if var("snowplow__enable_media_player_v2") -%}
         case
@@ -1222,7 +1312,13 @@ select
             else null
         end
       {%- else -%}
-        null
+        {% if v2_duration is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ v2_duration }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ v2_duration.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %}
     )
 {% endmacro %}
@@ -1308,7 +1404,13 @@ select
         col_prefix='contexts_com_snowplowanalytics_snowplow_media_player_2'
       ) }}
     {%- else -%}
-      null
+      {% if v2_quality is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ v2_quality }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ v2_quality.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif %},
     {% if var("snowplow__enable_youtube") -%}
       {{ field(
@@ -1316,7 +1418,13 @@ select
         col_prefix='contexts_com_youtube_youtube_1'
       ) }}
     {%- else -%}
-      null
+      {% if youtube_quality is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ youtube_quality }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ youtube_quality.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif %},
     {% if var("snowplow__enable_whatwg_media") and var("snowplow__enable_whatwg_video") -%}
       {{ field(
@@ -1327,7 +1435,13 @@ select
         col_prefix='contexts_org_whatwg_video_element_1'
       ) }}
     {%- else -%}
-      null
+      {% if video_width is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ video_width }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ video_width.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {% endif %},
     'N/A'
    )
@@ -1447,7 +1561,13 @@ select
         col_prefix='contexts_com_youtube_youtube_1'
       ) }}
     {%- else -%}
-      null
+      {% if youtube_url is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ youtube_url }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ youtube_url.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif %},
     {% if var("snowplow__enable_whatwg_media") -%}
       {{ field(
@@ -1455,7 +1575,13 @@ select
         col_prefix='contexts_org_whatwg_media_element_1'
       ) }}
     {%- else -%}
-      null
+      {% if media_current_src is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ media_current_src }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ media_current_src.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
     {%- endif %}
   )
 {% endmacro %}
@@ -1534,12 +1660,24 @@ select
       {% if var("snowplow__enable_web_events") -%}
         {{ field(web) }}
       {%- else -%}
-        null
+        {% if web is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ web }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ web.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %},
       {% if var("snowplow__enable_mobile_events") -%}
         {{ field(mobile) }}
       {%- else -%}
-        null
+        {% if mobile is string and target.type not in ['postgres', 'redshift'] -%}
+          {{ mobile }}
+        {% elif target.type not in ['postgres', 'redshift'] %}
+          cast(null as {{ mobile.get('dtype', 'string') }})
+        {%- else -%}
+          null
+        {% endif %}
       {%- endif %}
     )
 {% endmacro %}

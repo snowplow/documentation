@@ -531,7 +531,7 @@ with prep AS (
       domain_sessionid,
       derived_tstamp
 
-      {% if var('snowplow__enable_load_tstamp', true) %}
+      {% if not var('snowplow__enable_load_tstamp', true) %}
       , load_tstamp
       {% endif %}
     ),
@@ -945,7 +945,7 @@ prep as (
     {{ media_player_field(v1='mp.muted', v2='mp2.muted') }} as is_muted,
 
     -- media session properties
-    {{ media_session_field('ms.media_session_id') }} as media_session_id,
+    cast({{ media_session_field('ms.media_session_id') }} as {{ type_string() }}) as media_session_id, {# This is the only key actually used regardless, redshift doesn't like casting a null at a later time#}
     {{ media_session_field('ms.time_played') }} as media_session_time_played,
     {{ media_session_field('ms.time_played_muted') }} as media_session_time_played_muted,
     {{ media_session_field('ms.time_paused') }} as media_session_time_paused,
@@ -1267,6 +1267,7 @@ select
 <TabItem value="macro" label="Macros">
 
 - macro.dbt.type_int
+- macro.dbt.type_string
 - macro.dbt_utils.generate_surrogate_key
 - [macro.snowplow_media_player.event_name_filter](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/macros/index.md#macro.snowplow_media_player.event_name_filter)
 - [macro.snowplow_media_player.media_ad_break_field](/docs/modeling-your-data/modeling-your-data-with-dbt/reference/snowplow_media_player/macros/index.md#macro.snowplow_media_player.media_ad_break_field)
@@ -1313,7 +1314,7 @@ select
 
 This table contains the lower and upper timestamp limits for the given run of the web model. These limits are used to select new events from the events table.
 
-**Type**: View
+**Type**: Table
 
 <h4>Details</h4>
 
@@ -2199,7 +2200,7 @@ from session_lifecycle sl
 
 For any given run, this table contains all the required sessions.
 
-**Type**: View
+**Type**: Table
 
 <h4>Details</h4>
 
@@ -3546,7 +3547,7 @@ group by 1,2,4,5
     (n.avg_percent_played * n.plays / nullif((n.plays + coalesce(t.plays, 0)),0)) + (coalesce(t.avg_percent_played, 0) * coalesce(t.plays, 0) / nullif((n.plays + coalesce(t.plays, 0)), 0)) as avg_percent_played,
     (n.avg_retention_rate * n.plays / nullif((n.plays + coalesce(t.plays, 0)), 0)) + (coalesce(t.avg_retention_rate, 0) * coalesce(t.plays, 0) / nullif((n.plays + coalesce(t.plays, 0)), 0)) as avg_retention_rate,
     (n.avg_playback_rate * n.plays / nullif((n.plays + coalesce(t.plays, 0)), 0)) + (coalesce(t.avg_playback_rate, 0) * coalesce(t.plays, 0) / nullif((n.plays + coalesce(t.plays, 0)), 0)) as avg_playback_rate,
-    {{ media_session_field('(coalesce(n.avg_content_watched_sec, 0) / cast(60 as ' + type_float() + ') * n.plays + coalesce(t.avg_content_watched_mins, 0) * coalesce(t.plays, 0)) / nullif((n.plays + coalesce(t.plays, 0)), 0)') }} as avg_content_watched_mins
+    cast({{ media_session_field('(coalesce(n.avg_content_watched_sec, 0.0) / cast(60 as ' + type_float() + ') * n.plays + coalesce(t.avg_content_watched_mins, 0.0) * coalesce(t.plays, 0.0)) / nullif((n.plays + coalesce(t.plays, 0.0)), 0.0)') }} as {{ type_float() }}) as avg_content_watched_mins
 
   from new_data n
 
@@ -3650,11 +3651,11 @@ with prep as (
     avg(case when is_played then coalesce({{ media_session_field('p.content_watched_secs') }}, p.play_time_secs, 0) / nullif(p.duration_secs, 0) end) as avg_percent_played,
     avg(case when is_played then p.retention_rate end) as avg_retention_rate,
     avg(case when is_played then p.avg_playback_rate end) as avg_playback_rate,
-    {{ media_session_field('avg(
+    cast({{ media_session_field('avg(
       case
         when is_played and p.content_watched_secs is not null
         then p.content_watched_secs / cast(60 as ' + type_float() + ') end
-    )') }} as avg_content_watched_mins
+    )') }} as {{ type_float() }}) as avg_content_watched_mins
 
 
 from {{ ref("snowplow_media_player_base") }} p

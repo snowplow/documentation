@@ -8,7 +8,7 @@ sidebar_position: 4100
 
 Whilst we’re offering CDN options, Snowplow does not recommend using third party providers in production for hosting JavaScript assets that you use on your websites. We encourage all users to host `sp.js` on their own servers, and this will always be the recommended best practice.
 
-If you wish to follow our recommended best practices, please follow our [self hosting guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/index.md).
+If you wish to follow our recommended best practices, please follow our [self hosting guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/index.md).
 
 ## jsDelivr CDN
 

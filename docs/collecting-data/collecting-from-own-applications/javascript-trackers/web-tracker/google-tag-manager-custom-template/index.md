@@ -11,9 +11,7 @@ import Badges from '@site/src/components/Badges';
 <Badges badgeType="Actively Maintained"></Badges>
 ```
 
-Using the Snowplow GTM custom templates you can now deploy, implement, and configure the Snowplow JavaScript tracker directly on the website using Google Tag Manager.
-
-Snowplow JavaScript Tracker v3 can now be deployed directly with Google Tag Manager via a Custom Template. This is available in the [Tag Manager Template Gallery](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-tag-template-v3).
+Using the Snowplow GTM custom templates you can now deploy, implement, and configure the Snowplow JavaScript tracker directly on the website using Google Tag Manager, via a Custom Template. This is available in the [Tag Manager Template Gallery](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-tag-template-v3).
 
 There are two templates that you will need to use when setting up the Template for JavaScript Tracker v3.
 

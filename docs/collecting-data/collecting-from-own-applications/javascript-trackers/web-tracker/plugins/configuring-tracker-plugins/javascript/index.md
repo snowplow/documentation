@@ -4,7 +4,7 @@ date: "2023-03-22"
 sidebar_position: 400
 ---
 
-The [default releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) of the JavaScript Tracker include a full-featured `sp.js` version, and a smaller-filesize `sp.lite.js` version that includes fewer [plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/index.md).
+The [default releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) of the JavaScript Tracker include a full-featured `sp.js` version, and a smaller-filesize `sp.lite.js` version that includes fewer [plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md).
 
 While plugins can be loaded dynamically, self hosting the additional files adds complexity and the additional resource requests can negatively impact page performance.
 For this reason, it can be desirable to have your own version of `sp.js` that includes _just_ the features you need, to both reduce the filesize and not require loading additional script resources.
@@ -31,7 +31,7 @@ Once complete (it might take a minute or two), you'll find your brand new `sp.js
 
 ## Including Custom Plugins
 The above only works for the official plugins included in the `snowplow-javascript-tracker` repository.
-If you have [developed your own plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/creating-your-own-plugins/index.md), or want to include plugins from third parties, the process is similar, but with some additional small code changes:
+If you have [developed your own plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md), or want to include plugins from third parties, the process is similar, but with some additional small code changes:
 
 1. Include the plugin as a dependency in `trackers/javascript-tracker/package.json`
 1. Import the plugin in `trackers/javascript-tracker/src/features.ts`

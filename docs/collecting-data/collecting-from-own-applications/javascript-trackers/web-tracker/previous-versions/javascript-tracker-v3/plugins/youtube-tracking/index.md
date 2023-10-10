@@ -30,7 +30,7 @@ This plugin will allow the tracking of an embedded YouTube IFrame.
 
 ## Quick Start
 
-The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md). 
+The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracker-setup/loading/index.md). 
 
 :::info The plugin's `id` attribute will accept:
 

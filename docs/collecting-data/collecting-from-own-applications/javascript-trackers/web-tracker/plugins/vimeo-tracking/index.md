@@ -24,7 +24,7 @@ Source code for the app is [available here](https://github.com/snowplow-incubato
 
 ## Basic Usage
 
-The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker-from-npm/index.md).
+The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/index.md).
 
 :::info Accepted `video` attribute values
 The plugin's `video` attribute will accept either:
@@ -208,7 +208,7 @@ startVimeoTracking({
 
 ## Advanced Usage
 
-As the Vimeo plugin uses Snowplow Media internally, for more granular control over events, you can utilise any of the functions provided by the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media/index.md).
+As the Vimeo plugin uses Snowplow Media internally, for more granular control over events, you can utilise any of the functions provided by the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/media/index.md).
 
 For example, if you wish to include additional behaviour when a video is paused, you can create callback on the `pause` event of an instance of a Vimeo player.
 

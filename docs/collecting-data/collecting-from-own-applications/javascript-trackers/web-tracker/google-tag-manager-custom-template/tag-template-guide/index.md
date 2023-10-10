@@ -4,7 +4,7 @@ date: "2021-11-18"
 sidebar_position: 200
 ---
 
-This template implements the [Snowplow JavaScript tracker v3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/index.md). The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ sandboxed JavaScript.
+This template implements the Snowplow JavaScript tracker v3. The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ sandboxed JavaScript.
 
 ## Install the template
 
@@ -24,11 +24,11 @@ To begin with, some of the caveats of using the Custom Template.
 
 - Any methods that require the parsing of HTML elements (e.g. link tracking filter functions, cross domain linking) will not work and are thus disabled.
 - Automatic error tracking does not work due to lack of support for the `ErrorEvent` API.
-- There is no implementation for the [standard ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
+- There is no implementation for the [standard ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
 
 ## Instructions
 
-Here are basic instructions for how to instrument the JavaScript tracker v3. You are encouraged to consult the [technical documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/index.md) for more information on each individual feature.
+Here are basic instructions for how to instrument the JavaScript tracker v3.
 
 In general, when the tag fires, it first checks if the Snowplow JavaScript library has been loaded from the self-hosted URL provided in the template settings (more on this below). Then, the tag checks whether a tracker with the given **Tracker Name** has already been initialized. If not, it proceeds to initialize the new tracker.
 
@@ -36,7 +36,7 @@ Finally, the tag bundles a **command** from the settings in the tag, and sends i
 
 ### Settings Configuration
 
-The Tag template requires a [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/google-tag-manager-custom-template/template-for-javascript-tracker-v3/settings-variable-guide/index.md) Variable template to be configured which can be referenced within the Tag. This settings template contains the information required for the Tag to appropriate initialize the tracker.
+The Tag template requires a [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/settings-variable-guide/index.md) Variable template to be configured which can be referenced within the Tag. This settings template contains the information required for the Tag to appropriate initialize the tracker.
 
 Once a settings variable has been configured, it can be attached to the Tag in the **Tracker Initialisation** section.
 
@@ -46,7 +46,7 @@ You can also choose to override some of the parameters specifically for this tag
 
 #### Self Hosted JavaScript Tracker
 
-If you have the Snowplow library [self-hosted](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/self-hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
+If you have the Snowplow library [self-hosted](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
 
 ![modifying permissions](images/modifying_permissions.png)
 
@@ -60,7 +60,7 @@ Since v1.1.0, an alternative to prevent breaking the gallery update link is to u
 
 ![library host drop down 'Do not load' option](images/host_drop_down_no_load.png)
 
-Using this option means that the Snowplow v3 Tag will not inject the Snowplow JavaScript Tracker library on the page and can be used **only** when the Tracker Snippet is loaded with another technique, e.g. directly on the page or through another GTM tag. (This is also supported as a configuration option since v1.2.0 of the [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/google-tag-manager-custom-template/template-for-javascript-tracker-v3/settings-variable-guide/index.md) Variable.)
+Using this option means that the Snowplow v3 Tag will not inject the Snowplow JavaScript Tracker library on the page and can be used **only** when the Tracker Snippet is loaded with another technique, e.g. directly on the page or through another GTM tag. (This is also supported as a configuration option since v1.2.0 of the [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/settings-variable-guide/index.md) Variable.)
 
 :::
 
@@ -82,7 +82,7 @@ Tags that can derive their parameters from a Google Tag Manager variable are:
 - Structured Event
 - Timing
 
-You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
+You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
 
 ```javascript
 function() {
@@ -100,7 +100,7 @@ Alternatively, you can set the drop-down to the value `No`, and add the paramete
 
 ![adding parameters manually](images/adding_parameters_manually.png)
 
-Some tag types will add additional selections to this section. Follow the [official tracker documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md) for more information about what each option does.
+Some tag types will add additional selections to this section. Follow the [official tracker documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md) for more information about what each option does.
 
 #### Special tags
 
@@ -134,7 +134,7 @@ If you check **Track HTML Content Of Clicked Link**, then the full text content 
 
 ##### Page View
 
-You can provide a **Custom Page Title** if you wish, and you can add a [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#custom-context) to the request, as also described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#trackpageview).
+You can provide a **Custom Page Title** if you wish, and you can add a [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#custom-context) to the request, as also described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#trackpageview).
 
 If you enable **Page Activity Tracking**, the tag will setup a _heartbeat_ tracker, and send page pings to Snowplow at intervals that you can specify.
 
@@ -160,11 +160,11 @@ And then use this variable as your Command Argument:
 
 #### Add Custom Context Entities
 
-Using the **Context Entities** table allows you to attach [custom context entities](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
+Using the **Context Entities** table allows you to attach [custom context entities](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
 
 #### Set Custom Timestamp
 
-You can also choose to [set the True Timestamp](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#setting-the-true-timestamp) with this field. The format must be UNIX time in milliseconds.
+You can also choose to [set the True Timestamp](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#setting-the-true-timestamp) with this field. The format must be UNIX time in milliseconds.
 
 ## Acknowledgements
 

@@ -221,7 +221,7 @@ Three strategies are made available to store the Tracker’s state: cookies, loc
 
 When choosing local storage, the Tracker will additionally store events in local storage before sending them so that they can be recovered if the user leaves the page before they are sent.
 
-See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/index.md) for an explanation of how the tracker can later recover and send unsent events.
+See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/index.md) for an explanation of how the tracker can later recover and send unsent events.
 
 #### Adding predefined contexts
 

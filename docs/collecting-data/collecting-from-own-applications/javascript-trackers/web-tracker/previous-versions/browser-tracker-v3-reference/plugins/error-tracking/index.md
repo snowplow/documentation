@@ -34,7 +34,7 @@ enableErrorTracking();
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>trackError</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#trackError">Docum</a><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackError">entation</a></td></tr><tr><td><code>enableErrorTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#enableErrorTracking">Documentation</a></td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td><code>trackError</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackError">Documentation</a></td></tr><tr><td><code>enableErrorTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#enableErrorTracking">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

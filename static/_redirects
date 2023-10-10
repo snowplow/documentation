@@ -181,7 +181,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/upgrade-guide/ /docs/getting-started-on-snowplow-open-source/upgrade-guide/ 301
 
 # Combining JS tracker docs
-/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/* /docs/ 301
-/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/ /docs/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/:splat 301!
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/ /docs/ 301!
 
-/docs/collecting-data/collecting-from-own-applications/* /docs/ 301
+/docs/collecting-data/collecting-from-own-applications/* /docs/ 301!
+
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/cookies-and-local-storage/configuring-cookies/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/ 301!

@@ -48,7 +48,8 @@ import {versions} from '@site/src/componentVersions';
 <ReactMarkdown children={`
 | snowplow-media-player version      | snowplow-web version | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | ---------------------------------- | -------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowMediaPlayer} | >=0.14.0 to <0.16.0  | >=1.4.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| ${versions.dbtSnowplowMediaPlayer} |                      | >=1.4.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.5.3                              | >=0.14.0 to <0.16.0  | >=1.4.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.4.2                              | >=0.13.0 to <0.14.0  | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.4.1                              | >=0.12.0 to <0.13.0  | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.3.4                              | >=0.9.0 to <0.12.0   | >=1.0.0 to <1.3.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |

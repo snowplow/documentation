@@ -162,7 +162,7 @@ As these models are rebuilt fully each time the package is run, there is no spec
 
 Over time you may wish to add more custom incremental models to extend the functionality of this package. As you introduce new custom models into your project, assuming they are tagged correctly, the package will automatically replay all events up until the latest event to have been processed by the other models.
 
-During back-filling, the derived tables are blocked from updating. This is to protect against a batched back-fill temporarily introducing incomplete data into these derived tables. The batch size of this back-fill is limited as outlined in the [identification of events to process](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#identification-of-events-to-process) section, this means it might take several runs to complete the back-fill, **during which time no new events will be processed by the main models**.
+During back-filling, the derived tables are blocked from updating. This is to protect against a batched back-fill temporarily introducing incomplete data into these derived tables. The batch size of this back-fill is limited as outlined in the [identification of events to process](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#package-state) section, this means it might take several runs to complete the back-fill, **during which time no new events will be processed by the main models**.
 
 Back-filling a model can be performed either as part of the entire run of the Snowplow package, or in isolation to reduce cost (recommended):
 

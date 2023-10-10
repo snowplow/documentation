@@ -22,7 +22,7 @@ dbt run --select snowplow_<package> tag:snowplow_<package>_incremental --full-re
 dbt run --selector snowplow_<package> --full-refresh --vars 'snowplow__allow_refresh: true'
 ```
 
-When doing a full refresh of the package, it will begin again from your `snowplow__start_date` and backfill based on the calculations explained in the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) page. Please ensure you trigger enough runs to catch back up with live data, or adjust your variables for these runs accordingly.
+When doing a full refresh of the package, it will begin again from your `snowplow__start_date` and backfill based on the calculations explained in the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) page. Please ensure you trigger enough runs to catch back up with live data, or adjust your variables for these runs accordingly (see our page on [backfilling](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/index.md) for more information).
 
 
 ## Refresh only some models in a package

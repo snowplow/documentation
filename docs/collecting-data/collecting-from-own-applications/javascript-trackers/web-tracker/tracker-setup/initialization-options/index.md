@@ -376,25 +376,25 @@ Please note that the browser context entity is only available since version 3.9 
 TODO are these also for browser?
 ##### performanceTiming context
 
-If this context is enabled, the JavaScript Tracker will use the create a context JSON from the `window.performance.timing` object, along with the Chrome `firstPaintTime` field (renamed to `"chromeFirstPaint"`) if it exists. This data can be used to calculate page performance metrics.
+If this context is enabled, the JavaScript Tracker will use the create a context JSON from the `window.performance.timing` object, along with the Chrome `firstPaintTime` field (renamed to `chromeFirstPaint`) if it exists. This data can be used to calculate page performance metrics.
 
 Note that if you fire a page view event as soon as the page loads, the `domComplete`, `loadEventStart`, `loadEventEnd`, and `chromeFirstPaint` metrics in the Navigation Timing API may be set to zero. This is because those properties are only known once all scripts on the page have finished executing. 
 
 <details>
   <summary>Advanced PerformanceTiming usage</summary>
-The `domComplete`, `loadEventStart`, and `loadEventEnd` metrics in the NavigationTiming API are set to 0 until after every script on the page has finished executing, including sp.js. This means that the corresponding fields in the PerformanceTiming reported by the tracker will be 0.
+  The `domComplete`, `loadEventStart`, and `loadEventEnd` metrics in the NavigationTiming API are set to 0 until after every script on the page has finished executing, including sp.js. This means that the corresponding fields in the PerformanceTiming reported by the tracker will be 0.
 
-To get around this limitation, you can wrap all Snowplow code in a `setTimeout` call:
+  To get around this limitation, you can wrap all Snowplow code in a `setTimeout` call:
 
-```javascript
-setTimeout(function () {
+  ```javascript
+  setTimeout(function () {
 
- // Load Snowplow and call tracking methods here
+  // Load Snowplow and call tracking methods here
 
-}, 0);
-```
+  }, 0);
+  ```
 
-This delays its execution until after those NavigationTiming fields are set.
+  This delays its execution until after those NavigationTiming fields are set.
 
 </details>
 

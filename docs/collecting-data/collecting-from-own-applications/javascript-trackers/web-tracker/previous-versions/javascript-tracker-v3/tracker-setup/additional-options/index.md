@@ -11,7 +11,7 @@ import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_
 
 #### Toggling Anonymous Tracking
 
-The JavaScript Tracker can be initialized with `anonymousTracking: true` or `anonymousTracking: { withSessionTracking: true }` or `anonymousTracking: { withServerAnonymisation: true }`. You can read more about the anonymous tracking features [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#anonymous-tracking).
+The JavaScript Tracker can be initialized with `anonymousTracking: true` or `anonymousTracking: { withSessionTracking: true }` or `anonymousTracking: { withServerAnonymisation: true }`. You can read more about the anonymous tracking features [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracker-setup/initialization-options/index.md#anonymous-tracking).
 
 You may wish to toggle this functionality on or off during a page visit, for example when a user accepts a cookie banner you may not want to disable anonymous tracking, or when a user logs in to your site.
 

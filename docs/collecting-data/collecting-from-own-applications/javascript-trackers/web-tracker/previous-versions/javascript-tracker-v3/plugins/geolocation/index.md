@@ -33,7 +33,7 @@ window.snowplow('addPlugin',
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>enableGeolocationContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/#enableGeolocationContext">Documentation</a></td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td><code>enableGeolocationContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracker-setup/initialization-options/#enableGeolocationContext">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

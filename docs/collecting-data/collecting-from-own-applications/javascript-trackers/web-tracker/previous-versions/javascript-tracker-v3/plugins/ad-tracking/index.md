@@ -32,7 +32,7 @@ window.snowplow('addPlugin',
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>trackAdImpression</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#trackAdImpression">Documentation</a></td></tr><tr><td><code>trackAdClick</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#trackAdClick">Documentation</a></td></tr><tr><td><code>trackAdConversion</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#trackAdConversion">Documentation</a></td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td><code>trackAdImpression</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracking-events/#trackAdImpression">Documentation</a></td></tr><tr><td><code>trackAdClick</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracking-events/#trackAdClick">Documentation</a></td></tr><tr><td><code>trackAdConversion</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracking-events/#trackAdConversion">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

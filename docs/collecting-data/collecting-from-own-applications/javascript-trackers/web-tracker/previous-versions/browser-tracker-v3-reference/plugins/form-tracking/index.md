@@ -36,7 +36,7 @@ enableFormTracking();
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>enableFormTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracking-events/#enableFormTracking">Documentation</a></td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td><code>enableFormTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#enableFormTracking">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

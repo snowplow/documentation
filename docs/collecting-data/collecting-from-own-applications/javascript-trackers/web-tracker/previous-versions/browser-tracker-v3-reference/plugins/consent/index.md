@@ -30,7 +30,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>enableGdprContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracking-events/#gdpr-context">Documentation</a></td></tr><tr><td><code>trackConsentGranted</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracking-events/#trackConsentGranted">Documentation</a></td></tr><tr><td><code>trackConsentWithdrawn</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracking-events/#trackConsentWithdrawn">Documentation</a></td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td><code>enableGdprContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#gdpr-context">Documentation</a></td></tr><tr><td><code>trackConsentGranted</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackConsentGranted">Documentation</a></td></tr><tr><td><code>trackConsentWithdrawn</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackConsentWithdrawn">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

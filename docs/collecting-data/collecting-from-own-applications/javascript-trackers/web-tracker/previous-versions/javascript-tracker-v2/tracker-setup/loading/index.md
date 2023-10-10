@@ -13,4 +13,4 @@ import DeprecatedV2 from "@site/docs/reusable/javascript-tracker-v2-deprecation/
 
 <LoadWithTag/>
 
-Once the tracker is loaded via the tag, you can move on to [initializing the tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/index.md).
+Once the tracker is loaded via the tag, you can move on to [initializing the tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracker-setup/initializing-a-tracker-2/index.md).

@@ -37,7 +37,7 @@ enableYouTubeTracking(/* options */);
 
 ## Quick Start
 
-The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracker-setup/installing-the-tracker-from-npm/index.md).
+The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracker-setup/installing-the-tracker-from-npm/index.md).
 
 :::info The plugin's `id` attribute will accept:
 

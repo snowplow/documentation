@@ -813,7 +813,7 @@ snowplow('addTrans',
   );
 ```
 
-`addTrans` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
+`addTrans` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
 
 #### `addItem`
 
@@ -1017,7 +1017,7 @@ Snowplow tracking code can be included in ad tags in order to track impressions 
 
 Each ad tracking method has a `costModel` field and a `cost` field. If you provide the `cost` field, you must also provide one of `'cpa'`, `'cpc'`, and `'cpm'` for the `costModel` field.
 
-It may be the case that multiple ads from the same source end up on a single page. If this happens, it is important that the different Snowplow code snippets associated with those ads not interfere with one another. The best way to prevent this is to randomly name each tracker instance you create so that the probability of a name collision is negligible. See [Managing multiple trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracker-setup/managing-multiple-trackers/index.md) for more on having more than one tracker instance on a single page.
+It may be the case that multiple ads from the same source end up on a single page. If this happens, it is important that the different Snowplow code snippets associated with those ads not interfere with one another. The best way to prevent this is to randomly name each tracker instance you create so that the probability of a name collision is negligible. See [Managing multiple trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracker-setup/managing-multiple-trackers/index.md) for more on having more than one tracker instance on a single page.
 
 Below is an example of how to achieve this when using Snowplow ad impression tracking.
 
@@ -1138,7 +1138,7 @@ snowplow('trackAdClick:' + rnd,
 
 Ad click events are implemented as Snowplow self describing events.[Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ad_click/jsonschema/1-0-0) is the JSON schema for an ad click event.
 
-`trackAdClick` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
+`trackAdClick` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
 
 #### `trackAdConversion`
 
@@ -1682,7 +1682,7 @@ try {
 }
 ```
 
-`trackError` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
+`trackError` can also be passed an array of custom context as an additional final parameter. See [custom context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#custom-contexts) for more information.
 
 Using `trackError` it's assumed that developer knows where error could happen, which is not often the case. Therefor it's recommended to use `enableErrorTracking` as it allows you to discover errors that weren't expected.
 

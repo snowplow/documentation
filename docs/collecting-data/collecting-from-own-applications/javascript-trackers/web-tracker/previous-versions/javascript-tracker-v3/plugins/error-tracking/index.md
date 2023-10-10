@@ -32,7 +32,7 @@ window.snowplow('addPlugin',
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>trackError</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#trackError">Documentation</a></td></tr><tr><td><code>enableErrorTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#enableErrorTracking">Documentation</a></td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td><code>trackError</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracking-events/#trackError">Documentation</a></td></tr><tr><td><code>enableErrorTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracking-events/#enableErrorTracking">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

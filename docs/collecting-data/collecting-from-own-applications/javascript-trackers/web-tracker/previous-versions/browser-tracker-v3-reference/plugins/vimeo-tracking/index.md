@@ -30,7 +30,7 @@ Source code for the app is [available here](https://github.com/snowplow-incubato
 
 ## Basic Usage
 
-The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracker-setup/installing-the-tracker-from-npm/index.md).
+The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracker-setup/installing-the-tracker-from-npm/index.md).
 
 :::info Accepted `video` attribute values
 
@@ -168,7 +168,7 @@ video.on('pause', () => {
 
 ### Tracking Advertising Events
 
-Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/plugins/media/index.md#update-ad-and-ad-break-properties).
+Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/plugins/media/index.md#update-ad-and-ad-break-properties).
 
 ```javascript
 import { trackMediaAdBreakStart, trackMediaAdBreakEnd } from '@snowplow/browser-plugin-media';

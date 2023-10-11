@@ -17,7 +17,7 @@ See [our explanation](/docs/understanding-your-pipeline/schemas/index.md) on wha
 
 :::
 
-To track an event with a custom schema, you would need code like this (using the [Browser tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracking-events/index.md#tracking-custom-self-describing-events) as an example):
+To track an event with a custom schema, you would need code like this (using the [Browser tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#tracking-custom-self-describing-events) as an example):
 
 ```js
 import { trackSelfDescribingEvent } from '@snowplow/browser-tracker';

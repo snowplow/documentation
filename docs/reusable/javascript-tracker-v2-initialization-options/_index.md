@@ -155,7 +155,7 @@ This mode will no longer track any user identifiers or session information. Simi
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled.
 
-Anonymous tracking can be toggled on and off. The methods to control this behavior are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracker-setup/additional-options/index.md).
+Anonymous tracking can be toggled on and off. The methods to control this behavior are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracker-setup/other-parameters-2/index.md).
 
 ##### Full Anonymous/Cookieless Tracking (2.17.0+)
 
@@ -169,7 +169,7 @@ This mode will no longer track any user identifiers or session information, and 
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled. However for an experience that doesn't use any browser storage (cookieless), set `stateStorageStrategy` to `none`. This can be later toggled on, once a user accepts a cookie policy.
 
-Anonymous tracking can be toggled on and off. The methods to control this behavior are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracker-setup/additional-options/index.md).
+Anonymous tracking can be toggled on and off. The methods to control this behavior are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracker-setup/other-parameters-2/index.md).
 
 ##### Anonymous Session Tracking
 
@@ -185,7 +185,7 @@ Whenever the Snowplow Javascript Tracker fires an event, it automatically starts
 
 You can change the pause length (in milliseconds) using the `pageUnloadTimer` of the configuration object. The above example completely eliminates the pause. This does make it unlikely that events triggered by link clicks will be sent.
 
-See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/cookies-local-storage/index.md#local-storage) for an explanation of how the tracker can later recover and send unsent events.
+See also [How the Tracker uses `localStorage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/index.md#local-storage) for an explanation of how the tracker can later recover and send unsent events.
 
 #### Setting the event request protocol
 
@@ -231,7 +231,7 @@ When the JavaScript Tracker loads on a page, it generates a new page view UUID. 
 
 If this context is enabled, the JavaScript Tracker will use the create a context JSON from the `window.performance.timing` object, along with the Chrome `firstPaintTime` field (renamed to `"chromeFirstPaint"`) if it exists. This data can be used to calculate page performance metrics.
 
-Note that if you fire a page view event as soon as the page loads, the `domComplete`, `loadEventStart`, `loadEventEnd`, and `chromeFirstPaint` metrics in the Navigation Timing API may be set to zero. This is because those properties are only known once all scripts on the page have finished executing. See the [Advanced Usage](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v2/advanced-usage/getting-the-most-out-of-performance-timing/index.md) page for more information on circumventing this limitation. Additionally the `redirectStart`, `redirectEnd`, and `secureConnectionStart` are set to 0 if there is no redirect or a secure connection is not requested.
+Note that if you fire a page view event as soon as the page loads, the `domComplete`, `loadEventStart`, `loadEventEnd`, and `chromeFirstPaint` metrics in the Navigation Timing API may be set to zero. This is because those properties are only known once all scripts on the page have finished executing. See the [Advanced Usage](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/advanced-usage/getting-the-most-out-of-performance-timing/index.md) page for more information on circumventing this limitation. Additionally the `redirectStart`, `redirectEnd`, and `secureConnectionStart` are set to 0 if there is no redirect or a secure connection is not requested.
 
 For more information on the Navigation Timing API, see [the specification](http://www.w3.org/TR/2012/REC-navigation-timing-20121217/#sec-window.performance-attribute).
 

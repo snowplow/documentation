@@ -324,7 +324,7 @@ Any BI tool can then be connected to create charts of the output.
 Now that you have all the out of the box technology set up, you can discover the real power of Snowplow in fully owning all the data and logic behind your analytics and AI. Some suggestions for what you might try next:
 
 - Add additional marketing sources, such as ad impressions or emails
-- [Redefine sessions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#configuring-the-session-cookie-duration) to be more meaningful for your business rather than the default '30 minutes of inactivity'
+- [Redefine sessions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#configuring-the-session-cookie-duration) to be more meaningful for your business rather than the default '30 minutes of inactivity'
 - [Join acquisition costs](https://snowplow.io/blog/marketing-attribution-with-snowplow/), such as the average cpc for paid search based on the click and keyword performance reports from Google
 - Add the revenue associated with conversions from your transactional database, or [track these in a custom conversion event](http://snowplow.io/docs/recipes/recipe-marketing-attribution/#optional-for-more-confidence-track-a-dedicated-conversion-event)
 - Explore different attribution models and hone a custom one that maps to your customer journey and customers' buying behaviors

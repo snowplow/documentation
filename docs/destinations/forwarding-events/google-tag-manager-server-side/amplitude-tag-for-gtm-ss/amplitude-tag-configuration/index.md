@@ -6,7 +6,7 @@ sidebar_position: 100
 
 :::tip Populating the Amplitude Session ID
 
-The [Session ID in Amplitude](https://help.amplitude.com/hc/en-us/articles/115002323627-Track-sessions-in-Amplitude) is the session's start time in milliseconds since epoch, so it cannot be derived directly from the `session_id` of your forwarded Snowplow events, which is a UUID. Therefore, in order to populate the Session ID so that your events are stitched into sessions correctly in Amplitude, your Snowplow events need to have the [`client_session` context entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracker-setup/initialization-options/index.md#session-context) attached. Then the Amplitude Tag will automatically populate the Amplitude Session ID based on the `firstEventTimestamp` property of the session the event belongs to.
+The [Session ID in Amplitude](https://help.amplitude.com/hc/en-us/articles/115002323627-Track-sessions-in-Amplitude) is the session's start time in milliseconds since epoch, so it cannot be derived directly from the `session_id` of your forwarded Snowplow events, which is a UUID. Therefore, in order to populate the Session ID so that your events are stitched into sessions correctly in Amplitude, your Snowplow events need to have the [`client_session` context entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#session-context) attached. Then the Amplitude Tag will automatically populate the Amplitude Session ID based on the `firstEventTimestamp` property of the session the event belongs to.
 
 :::
 

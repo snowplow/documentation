@@ -30,7 +30,7 @@ Note: the ability to set `domainSessionId` was added in version 0.11.
 
 These properties are especially useful for client-side tracking, or for linking client-side and server-side tracking. We highly recommend tracking in both client-side and server-side, if it's relevant to your application. Read more about this in these [blog](https://snowplow.io/blog/2019/02/05/how-server-side-tracking-fills-holes-in-your-data-and-improves-your-analytics/) [posts](https://snowplow.io/blog/2021/11/09/the-unrivaled-power-of-joining-client-and-server-side-tracking/).
 
-If you are also using the Javascript tracker, it will set [cookies](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/cookies-and-local-storage/index.md) in the browser. The `Subject` properties `domainUserId`, and `domainSessionId` are intended to be used for extracted cookie values passed to the Java tracker. If you want to track other identification tokens, we recommend creating schemas and using context entities.
+If you are also using the Javascript tracker, it will set [cookies](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/index.md) in the browser. The `Subject` properties `domainUserId`, and `domainSessionId` are intended to be used for extracted cookie values passed to the Java tracker. If you want to track other identification tokens, we recommend creating schemas and using context entities.
 
 As always, be aware of privacy when tracking [personal identifiable information](https://snowplow.io/blog/2020/09/06/user-identification-and-privacy/) such as email addresses or IP addresses.
 

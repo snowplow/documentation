@@ -18,7 +18,7 @@ Add the event names (in separate lines) to be tracked as custom structured Snowp
 
 ## Self-describing events
 
-This section allows you to define [Snowplow self-describing events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/index.md#tracking-custom-self-describing-events).
+This section allows you to define [Snowplow self-describing events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#tracking-custom-self-describing-events).
 
 ![self describing events setup](images/self_describing_setup.png)
 

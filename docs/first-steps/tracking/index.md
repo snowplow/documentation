@@ -82,7 +82,7 @@ Now, let’s take a look at how to set up actual event tracking.
 
 ## Using the JavaScript tracker
 
-The [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md) is our most commonly used tracker. It’s a good choice for websites, and the installation process is similar to other tools like Google Analytics.
+The [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md) is our most commonly used tracker. It’s a good choice for websites, and the installation process is similar to other tools like Google Analytics.
 
 To use the JavaScript tracker on your site, you will need to obtain a code snippet first.
 
@@ -108,7 +108,7 @@ Take note of the Collector URL you’ve chosen when deploying your Open Source p
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 
-Then, follow the JavaScript tracker [quick start guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md) to create your snippet.
+Then, follow the JavaScript tracker [quick start guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md) to create your snippet.
   
   </TabItem>
 </Tabs>

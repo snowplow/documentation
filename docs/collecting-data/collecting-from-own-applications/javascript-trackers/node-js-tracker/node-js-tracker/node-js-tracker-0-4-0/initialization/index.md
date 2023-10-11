@@ -83,7 +83,7 @@ The `tracker` function takes four parameters:
 
 The `gotEmitter` is built against a standard `Emitter` interface which means if `got` isn't suitable for your project then you can create your own `Emitter`.
 
-As an example where this might be useful, as `got` only works in Node.js applications if you wanted to track on a browser based application and you have already considered the [Snowplow JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md), then you can build your own Emitter - two libraries which might be appropriate are `[ky](https://github.com/sindresorhus/ky)` (built by the same team as `got`) or `[axios](https://github.com/axios/axios)`.
+As an example where this might be useful, as `got` only works in Node.js applications if you wanted to track on a browser based application and you have already considered the [Snowplow JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/index.md), then you can build your own Emitter - two libraries which might be appropriate are `[ky](https://github.com/sindresorhus/ky)` (built by the same team as `got`) or `[axios](https://github.com/axios/axios)`.
 
 Emitters must conform to an [`Emitter` interface](https://snowplow.github.io/snowplow-nodejs-tracker/interfaces/_emitter_.emitter.html), which looks like:
 

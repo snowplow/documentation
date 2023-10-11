@@ -133,6 +133,8 @@ newTracker('sp', '{{collector_url_here}}', {
   anonymousTracking: false,
   // anonymousTracking: { withSessionTracking: true },
   // anonymousTracking: { withSessionTracking: true, withServerAnonymisation: true },
+  customHeaders: {}, // Use with caution. Available from v3.2.0+
+  withCredentials: true, // Available from v3.2.0+
   contexts: {
     webPage: true, // Default
     session: false, // Adds client session context entity to events, off by default. Available in v3.5+.
@@ -149,15 +151,15 @@ newTracker('sp', '{{collector_url_here}}', {
 
 We will now go through the various configuration parameters. Note that these are all optional. In fact, you aren’t required to provide any configuration object at all.
 
-## Setting the application ID
+## Application ID
 
 Set the application ID using the `appId` field of the configuration object. This will be attached to every event the tracker fires. You can set different application IDs on different parts of your site. You can then distinguish events that occur on different applications by grouping results based on `application_id`.
 
-## Setting the platform
+## Platform
 
 Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters).
 
-## Configuring the cookie domain
+## Cookie domain
 
 If your website spans multiple subdomains e.g.
 
@@ -173,13 +175,13 @@ Otherwise, set the cookie domain for the tracker instance using the `cookieDoma
 
 **WARNING**: _Changing the cookie domain will reset all existing cookies. As a result, it might be a major one-time disruption to data analytics because all visitors to the website will receive a new `domain_userid`._
 
-## Configuring the cookie name
+## Cookie name
 
 Set the cookie name for the tracker instance using the `cookieName` field of the configuration object. The default is “_sp_“. Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are “_sp_id” and “_sp_ses” respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
 
 Once set, you can retrieve a cookie name thanks to the `getCookieName(basename)` method where basename is id or ses for the domain and session cookie respectively. As an example, you can retrieve the complete name of the domain cookie with `getCookieName('id')`.
 
-## Configuring the cookie samesite attribute
+## Cookie samesite attribute
 
 Set the cookie samesite attribute for the tracker instance using the `cookieSameSite` field of the configuration object. The default is “None” for backward compatibility reasons, however ‘Lax’ is likely a better option for most use cases given the reasons below. Valid values are "Strict", "Lax", "None" or `null`. `null` will not set the SameSite attribute.
 
@@ -189,13 +191,13 @@ Safari 12 Issue with SameSite cookies
 
 It's been noted that Safari 12 doesn't persist cookies with `SameSite: None` as expected which can lead to rotation of the `domain_userid` from users using this browser. You should switch to `cookieSameSite: 'Lax'` in your tracker configuration to solve this, unless you are tracking inside a third party iframe.
 
-## Configuring the cookie secure attribute
+## Cookie secure attribute
 
 Set the cookie secure attribute for the tracker instance using the `cookieSecure` field of the configuration object. The default is "true". Valid values are "true" or "false".
 
 It is recommended to set this to "true". This must be set to "false" if using the tracker on non-secure HTTP.
 
-## Configuring base 64 encoding
+## Base 64 encoding
 
 By default, self-describing events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the `encodeBase64` field of the configuration object.
 
@@ -290,7 +292,7 @@ newTracker('sp', 'https://{{collector_url_here}}', {
   </TabItem>
 </Tabs>
 
-## Configuring the session cookie duration
+## Session cookie duration
 
 Whenever an event fires, the Tracker creates a session cookie. If the cookie didn’t previously exist, the Tracker interprets this as the start of a new session.
 
@@ -306,7 +308,7 @@ By default the session cookie expires after 30 minutes. This means that a user l
 
 would set the session cookie lifespan to an hour.
 
-## Configuring the storage strategy
+## Storage strategy
 
 Three strategies are made available to store the Tracker’s state: cookies, local storage or no storage at all. You can set the strategy with the help of the `stateStorageStrategy` parameter in the configuration object to “cookieAndLocalStorage” (the default), “cookie”, “localStorage” or “none” respectively.
 
@@ -500,7 +502,7 @@ import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 <PostPath/>
 ```
 
-## Configuring cross-domain tracking
+## Cross-domain tracking
 ```mdx-code-block
 import CrossDomain from "@site/docs/reusable/javascript-tracker-cross-domain/_index.md"
 ```
@@ -518,7 +520,7 @@ import CrossDomain from "@site/docs/reusable/javascript-tracker-cross-domain/_in
   </TabItem>
 </Tabs>
 
-## Configuring the maximum payload size in bytes
+## Maximum payload size in bytes
 
 **POST requests**
 
@@ -545,7 +547,7 @@ If the optional `discoverRootDomain` field of the configuration object is set 
 
 **This will then result in a different domain hash, so we recommend that if you have been setting this manually with a leading ‘.’ to continue to do so manually.**
 
-## Configuring the cookies lifetime
+## Cookies lifetime
 
 Whenever tracker initialized on your domain – it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using `cookieLifetime` configuration object parameter or `setVisitorCookieTimeout` method.
 
@@ -592,7 +594,7 @@ Because most browsers limit Local Storage to around 5mb per site, you may want t
 
 By default the tracker will reset the Page Ping timers, which were configured when `enableActivityTracking` is called, as well as reset the attached Page View contexts on all future Page Pings when a new `trackPageView` event occurs. This is enabled by default as of 2.13.0 and is particularly useful for Single Page Applications (SPA), if you previously relied on this behavior, you can disable this functionality by specifying `resetActivityTrackingOnPageView: false` in the configuration object on tracker initialisation.
 
-## Set connection timeout
+## Connection timeout
 
 When events are sent using POST or GET, they are given 5 seconds to complete by default. GET requests having a timeout is only available in 2.15.0.
 
@@ -602,7 +604,7 @@ This value is configurable when initialising the tracker and is specified in mil
 
 **Warning:** Setting this value too low may prevent events from successfully sending to your collector or the tracker may retry to send events that have already arrived at the collector, as the tracker will assume the request failed on timeout, leading to duplicate events in the warehouse. **We recommend 5000 milliseconds as the minimum value and 10000 as the maximum value.**
 
-## Setting custom header values
+## Custom header values
 
 From v3.2.0, you are able to set custom headers with an `eventMethod: "post"` and `eventMethod: "get"` (Except for IE9). This functionality should only be used in the case where a Proxy or other Collector type is being used which allows for custom headers to be set on the request. 
 
@@ -624,7 +626,7 @@ From v3.2.0, it's now possible to turn off the `withCredentials` flag on all req
 withCredentials: false
 ```
 
-## Setting custom retry HTTP status codes
+## Custom retry HTTP status codes
 
 The tracker provides a retry functionality that sends the same events repeatedly in case GET or POST requests to the Collector fail. This may happen due to connection issues or a non-successful HTTP status code in Collector response.
 

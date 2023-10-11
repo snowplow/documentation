@@ -66,10 +66,6 @@ These are defined in the `selectors.yml` file ([source](https://github.com/snowp
 
 This package will by default assume your Snowplow events data is contained in the `atomic` schema of your [target.database](https://docs.getdbt.com/docs/running-a-dbt-project/using-the-command-line-interface/configure-your-profile), in the table labeled `events`. In order to change this, please add the following to your `dbt_project.yml` file:
 
-### 4. Enable desired contexts
-
-If you have enabled a specific context you will need to enable it in your `dbt_project.yml` file:
-
 ```yml title="dbt_project.yml"
 vars:
   snowplow_media_player:

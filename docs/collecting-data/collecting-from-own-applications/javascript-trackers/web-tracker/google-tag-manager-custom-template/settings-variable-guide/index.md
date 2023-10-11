@@ -1,5 +1,5 @@
 ---
-title: "Settings Guide"
+title: "Settings guide"
 date: "2021-11-18"
 sidebar_position: 300
 ---

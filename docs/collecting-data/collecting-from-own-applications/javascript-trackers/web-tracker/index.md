@@ -14,7 +14,7 @@ The Browser Tracker is available via `npm` and can be directly bundled into your
 
 The Browser Tracker is available via npm as `@snowplow/browser-tracker` and the associated plugins as `@snowplow/browser-plugin-*`.
 
-The JavaScript Tracker supports both synchronous and asynchronous tags. We recommend the asynchronous tags in nearly all instances, as these do not slow down page load times.
+The JavaScript Tracker TODO
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

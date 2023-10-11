@@ -1,5 +1,5 @@
 ---
-title: "Tracking events TODO ad impressions snippet"
+title: "Tracking events"
 sidebar_position: 2000
 ---
 
@@ -2485,7 +2485,30 @@ Below is an example of how to achieve this when using Snowplow ad impression tra
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
-TODO
+
+```javascript
+import { newTracker } from "@snowplow/browser-tracker";
+import { trackAdImpression } from '@snowplow/browser-plugin-ad-tracking';
+
+var rnd = Math.random().toString(36).substring(2);
+
+newTracker(rnd, {{COLLECTOR_URL}}, {
+  appId: "myApp",
+  platform: "web"
+});
+
+trackAdImpression({
+  impressionId: '67965967893',
+  costModel: 'cpm',          // 'cpa', 'cpc', or 'cpm'
+  cost: 5.5,
+  targetUrl: 'http://www.example.com',
+  bannerId: '23',
+  zoneId: '7',
+  advertiserId: '201',
+  campaignId: '12',
+}, [rnd]);
+```
+
   </TabItem>
 </Tabs>
 

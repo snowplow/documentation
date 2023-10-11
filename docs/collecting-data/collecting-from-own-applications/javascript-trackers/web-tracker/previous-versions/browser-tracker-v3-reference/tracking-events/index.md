@@ -4,9 +4,9 @@ sidebar_position: 2000
 ---
 
 ```mdx-code-block
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 Snowplow has been built to enable users to track a wide range of events that occur when consumers interact with their websites and webapps.

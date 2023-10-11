@@ -5,9 +5,9 @@ sidebar_position: 10000
 ---
 
 ```mdx-code-block
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 If this plugin is used, the tracker will look for Google Analytics cookies (specifically the “__utma”, “__utmb”, “__utmc”, “__utmv”, “__utmz”, and “_ga” cookies) and combine their values into an event context which gets sent with every event.

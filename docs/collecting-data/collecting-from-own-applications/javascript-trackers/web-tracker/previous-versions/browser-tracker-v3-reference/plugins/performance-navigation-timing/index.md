@@ -5,9 +5,9 @@ sidebar_position: 14500
 ---
 
 ```mdx-code-block
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 Adds Performance Navigation Timing contexts to your Snowplow tracking. To learn more about the properties tracked, you can visit the [specification](https://www.w3.org/TR/navigation-timing-2/) or MDN [documentation site](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming).

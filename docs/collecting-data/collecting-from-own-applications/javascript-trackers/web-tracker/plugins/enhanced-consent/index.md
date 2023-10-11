@@ -6,9 +6,9 @@ sidebar_position: 6500
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 This plugin is the recommended way to track marketing consent events on your website. Functions, usage and a complete setup journey is showcased on the [Consent Tracking for Marketing accelerator](https://docs.snowplow.io/accelerators/consent/).

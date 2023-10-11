@@ -5,9 +5,9 @@ sidebar_position: 3000
 ---
 
 ```mdx-code-block
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 The Browser Tracker is based around a plugin architecture which allows new functionality to be added to the tracker. These plugins can be installed from npm or you can write your own in your codebase and then they are passed into the tracker.

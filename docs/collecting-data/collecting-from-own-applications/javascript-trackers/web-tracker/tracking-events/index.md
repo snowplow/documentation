@@ -6,9 +6,9 @@ sidebar_position: 2000
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 Snowplow has been built to enable users to track a wide range of events that occur when consumers interact with their websites and webapps.
@@ -36,7 +36,7 @@ This page goes on to discuss more advanced topics in tracking events:
 - [GDPR context](#gdpr-context)
 - [Setting the true timestamp](#setting-the-true-timestamp)
 
-### Page Views
+## Page Views
 
 Page views are tracked using the `trackPageView` method. This is generally part of the first Snowplow tag to fire on a particular web page. As a result, the `trackPageView` method is usually deployed straight after the tag that also invokes the Snowplow JavaScript (sp.js) e.g.
 
@@ -89,7 +89,7 @@ trackPageView();
   
 </Tabs>
 
-#### `trackPageView`
+### `trackPageView`
 
 Track pageview is called using the simple:
 
@@ -210,13 +210,13 @@ trackPageView({
 
 The page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
 
-### Activity Tracking: page pings
+## Activity tracking: page pings
 
 As well as tracking page views, we can monitor whether users continue to engage with pages over time, and record how they digest content on each page over time.
 
 That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc.) If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different browser tab), no page ping fires.
 
-#### `enableActivityTracking`
+### `enableActivityTracking`
 
 Page pings are enabled by:
 
@@ -286,7 +286,7 @@ Notes:
 - The `enableActivityTracking` method **must** be called _before_ the `trackPageView` method.
 - Activity tracking will be disabled if either `minimumVisitLength` or `heartbeatDelay` is not integer. This is to prevent relentless callbacks.
 
-#### `enableActivityTrackingCallback`
+### `enableActivityTrackingCallback`
 
 You can now perform edge analytics in the browser to reduce the number of events sent to you collector whilst still tracking user activity. The Snowplow JavaScript Tracker enables this by allowing a callback to be specified in place of a page ping being sent. This is enabled by:
 
@@ -460,7 +460,7 @@ The `iglu:com.acme_company/page_unload/jsonschema/1-0-0` schema used in the exam
 
 We are using `visibilitychange` events as `beforeunload` isn't a reliable option for mobile devices when using `beacon`. You can read more about this on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon#description). An idea on the different levels of compatibility of the different Page Visiblity API across browsers and mobile can here found [here](https://www.igvita.com/2015/11/20/dont-lose-user-and-app-state-use-page-visibility/).
 
-#### `updatePageActivity`
+### `updatePageActivity`
 
 You can also mark the user as active with:
 
@@ -487,7 +487,7 @@ On the next interval after this call, a ping will be generated even if the user 
 
 This is particularly useful when a user is passively engaging with your content, e.g. watching a video.
 
-#### `disableActivityTracking`
+### `disableActivityTracking`
 
 :::note
 
@@ -516,7 +516,7 @@ disableActivityTracking();
 
 Disabling activity tracking will stop page activity intervals and will not send additional activity tracking events.
 
-#### `disableActivityTrackingCallback`
+### `disableActivityTrackingCallback`
 
 :::note
 Available since version 3.14 of the tracker.
@@ -543,7 +543,7 @@ disableActivityTrackingCallback();
 
 This will stop any further activity tracking callback from being executed.
 
-### Tracking custom self-describing events
+## Custom self-describing events
 
 ```mdx-code-block
 import DefineCustomEvent from "@site/docs/reusable/define-custom-event/_index.md"
@@ -551,7 +551,7 @@ import DefineCustomEvent from "@site/docs/reusable/define-custom-event/_index.md
 <DefineCustomEvent/>
 ```
 
-#### `trackSelfDescribingEvent`
+### `trackSelfDescribingEvent`
 
 To track a self-describing event, you make use of the `trackSelfDescribingEvent` method:
 
@@ -612,7 +612,7 @@ The second argument or event property, depending on tracker, is a [self-describ
 
 `trackSelfDescribingEvent` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-### Tracking custom structured events
+## Custom structured events
 
 There are likely to be a large number of events that can occur on your site, for which a specific tracking method is part of Snowplow.
 
@@ -620,7 +620,7 @@ Our philosophy in creating Snowplow is that users should capture important consu
 
 However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructEvent`, if none of the other event-specific methods outlined above are appropriate.
 
-#### `trackStructEvent`
+### `trackStructEvent`
 
 There are five parameters can be associated with each structured event. Of them, only the first two are required:
 
@@ -700,7 +700,7 @@ Note that in the above example no value is set for the `event` property.
 
 `trackStructEvent` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-### Custom context
+## Custom context
 
 ```mdx-code-block
 import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.md"
@@ -735,7 +735,7 @@ and the other describes a user on that page:
 }
 ```
 
-#### Tracking events with Custom Context
+### Tracking events with custom context
 
 How to track a **page view** with both of these contexts attached:
 
@@ -844,7 +844,7 @@ trackSelfDescribingEvent({
 
 For more information on custom contexts, see [here](/docs/understanding-your-pipeline/entities/index.md#custom-entities).
 
-### Global context
+## Global context
 
 **Global context** lets you define your own contexts once (e.g. on tracker initialization) and then have this context sent with every single event subsequently recorded on the page. This saves having to manually build and send the context array with every single event fired.
 
@@ -890,7 +890,7 @@ You may not want to add the same context entity to all tracked events. There are
 2. Using **[filter functions](#filter-functions)** that filter which events to add global context entities to.
 3. Using **[rulesets](#rulesets)** that define rules which types of events to accept or reject when generating global context entities.
 
-#### Context generators
+### Context generators
 
 Generating context on-the-fly is accomplished with **context generators**. A context generator is a callback that will be evaluated with an optional argument that contains useful information.
 
@@ -937,7 +937,7 @@ The optional input is an associative array that contains three elements:
 
 Keep in mind that the arguments `eventType` and `eventSchema` are data found in `event`. `eventType` and `eventSchema` are provided for convenience, so that simple tasks don't require users to search through the event payload.
 
-##### `eventType`
+#### `eventType`
 
 This argument is a string taken from the event payload field, `e`.
 
@@ -955,7 +955,7 @@ This argument is a string taken from the event payload field, `e`.
 
 Further information about the event payload can be found in the [tracker protocol documentation](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
-##### `eventSchema`
+#### `eventSchema`
 
 Users should be aware of the behavior of the argument `eventSchema`. Since 'first-class events' (e.g. structured events, transactions, pageviews, etc.) lack a proper schema (their event type is determined by the `e` field), callbacks will be provided the upper-level schema that defines the payload of all events:
 
@@ -963,7 +963,7 @@ Users should be aware of the behavior of the argument `eventSchema`. Since 'fir
 
 For self describing events, `eventSchema` will be the schema that describes the self describing event, not the event payload. Again, this behavior isn't necessarily uniform, but provides more utility to differentiate events.
 
-#### Conditional context providers
+### Conditional context providers
 
 We can augment context primitives by allowing them to be sent conditionally. While it's possible to define this functionality within context generators (with conditional logic), conditional context providers simplify common ways of sending contexts that follow certain rules.
 
@@ -976,11 +976,11 @@ The conditional part is standardized into two options:
 - a filter function
 - a schema ruleset
 
-#### Filter functions
+### Filter functions
 
 Filter functions take the standard callback arguments defined for context generators, but instead of returning a Self Describing JSON, return a boolean value. As should be expected: `true` will attach the context part, `false` will not attach the context part.
 
-#### Example
+### Example
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -1009,7 +1009,7 @@ addGlobalContexts([globalContextDefinition]);
   </TabItem>
 </Tabs>
 
-#### Rulesets
+### Rulesets
 
 Rulesets define when to attach context primitives based on the event schema. This follows the standard behavior for all callbacks (the schema used to evaluate is the same provided in `eventSchema`, namely the payload schema for "first-class events" and otherwise the schema found within the self describing event).
 
@@ -1073,7 +1073,7 @@ addGlobalContexts([globalContextDefinition]);
   </TabItem>
 </Tabs>
 
-#### Rule requirements
+### Rule requirements
 
 All rules and schemas follow a standard form:
 
@@ -1090,7 +1090,7 @@ And rules must meet some requirements to be considered valid:
   - `com.acme.*.marketing.*` is invalid
   - `com.acme.*.*` is valid
 
-#### Global contexts methods
+### Global contexts methods
 
 These are the standard methods to add and remove global contexts:
 
@@ -1175,13 +1175,13 @@ To remove all global contexts:
   </TabItem>
 </Tabs>
 
-### Link click tracking
+## Link click tracking
 
 Link click tracking is enabled using the `enableLinkClickTracking` method. Use this method once and the Tracker will add click event listeners to all link elements. Link clicks are tracked as self describing events. Each link click event captures the link's href attribute. The event also has fields for the link's id, classes, and target (where the linked document is opened, such as a new tab or new window).
 
 [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1) is the JSON schema for a link click event.
 
-#### `enableLinkClickTracking`
+### `enableLinkClickTracking`
 
 Turn on link click tracking like this:
 
@@ -1455,7 +1455,7 @@ enableLinkClickTracking({ context: [ dynamicContext ] });
 
 See [custom context](#custom-context) for more information.
 
-#### `refreshLinkClickTracking`
+### `refreshLinkClickTracking`
 
 `enableLinkClickTracking` only tracks clicks on links which exist when the page has loaded. If new links can be added to the page after then which you wish to track, just use `refreshLinkClickTracking`. This will add Snowplow click listeners to all links which do not already have them (and which match the denylist, allowlist, or filter function you specified when `enableLinkClickTracking` was originally called). Use it like this:
 
@@ -1478,7 +1478,7 @@ refreshLinkClickTracking();
   </TabItem>
 </Tabs>
 
-#### `trackLinkClick`
+### `trackLinkClick`
 
 You can manually track individual link click events with the `trackLinkClick` method. This is its signature:
 
@@ -1558,7 +1558,7 @@ trackLinkClick({
 
 `trackLinkClick` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-### Form tracking
+## Form tracking
 
 Snowplow automatic form tracking detects three event types:
 
@@ -1609,7 +1609,7 @@ enableFormTracking({
   </TabItem>
 </Tabs>
 
-##### `change_form`
+#### `change_form`
 
 When a user changes the value of a `textarea`, `input`, or `select` element inside a form, a [`change_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/change_form/jsonschema/1-0-0) event will be fired. It will capture the name, type, and new value of the element, and the id of the parent form.
 
@@ -1619,11 +1619,11 @@ When a user submits a form, a [`submit_form`](https://github.com/snowplow/iglu-
 
 Note that this will only work if the original form submission event is actually fired. If you prevent it from firing, for example by using a jQuery event handler which returns `false` to handle clicks on the form's submission button, the Snowplow `submit_form` event will not be fired.
 
-##### `focus_form`
+#### `focus_form`
 
 When a user focuses on a form element, a [`focus_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/focus_form/jsonschema/1-0-0) event will be fired. It will capture the id and classes of the form and the name, type, and value of the `textarea`, `input`, or `select` element inside the form that received focus.
 
-#### `enableFormTracking`
+### `enableFormTracking`
 
 Use the `enableFormTracking` method to turn on form tracking by adding event listeners to all form elements and to all interactive elements inside forms (that is, all `input`, `textarea`, and `select` elements).
 
@@ -1633,7 +1633,7 @@ This will only work for form elements which exist when it is called. If you are 
 Events on password fields will not be tracked.
 :::
 
-#### Custom form tracking
+### Custom form tracking
 
 It may be that you do not want to track every field in a form, or every form on a page. You can customize form tracking by passing a configuration argument to the `enableFormTracking` method. This argument should be an object with two elements named "forms" and "fields". The "forms" element determines which forms will be tracked; the "fields" element determines which fields inside the tracked forms will be tracked. As with link click tracking, there are three ways to configure each field: a denylist, an allowlist, or a filter function. You do not have to use the same method for both fields.
 
@@ -1844,7 +1844,7 @@ enableFormTracking({ options });
   </TabItem>
 </Tabs>
 
-#### Tracking forms embedded inside iframes
+### Tracking forms embedded inside iframes
 
 The options for tracking forms inside of iframes are limited – browsers block access to contents of iframes that are from different domains than the parent page. We are not able to provide a solution to track events using trackers initialized on the parent page in such cases. However, since version 3.4, it is possible to track events from forms embedded in iframes loaded from the same domain as the parent page or iframes created using JavaScript on the parent page (e.g., HubSpot forms).
 
@@ -1881,7 +1881,7 @@ enableFormTracking({
   </TabItem>
 </Tabs>
 
-### Ecommerce tracking
+## Ecommerce tracking
 
 This feature is modeled on Google Analytics ecommerce tracking capability, Snowplow uses three methods that have to be used together to track online transactions:
 
@@ -1962,7 +1962,7 @@ addTrans({
 
 `addTrans` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-#### `addItem`
+### `addItem`
 
 The `addItem` method is used to capture the details of each product item included in the transaction. It should therefore be called once for each item.
 
@@ -2016,7 +2016,7 @@ addItem({
 
 `addItem` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-#### trackTrans
+### trackTrans
 
 Once the transaction object has been created (using `addTrans`) and the relevant item data added to it using the `addItem` method, we are ready to send the data to the collector. This is initiated using the `trackTrans` method:
 
@@ -2038,7 +2038,7 @@ trackTrans();
   </TabItem>
 </Tabs>
 
-#### Putting the three methods together: a complete example
+### Putting the three methods together: a complete example
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -2146,7 +2146,7 @@ trackTrans();
   </TabItem>
 </Tabs>
 
-#### `trackAddToCart` and `trackRemoveFromCart`
+### `trackAddToCart` and `trackRemoveFromCart`
 
 These methods are also part of `@snowplow/browser-plugin-ecommerce` and let you track users adding and removing items from a cart on an ecommerce site. Their arguments are identical:
 
@@ -2215,7 +2215,7 @@ Both methods are implemented as Snowplow self describing events. You can see sch
 
 Both methods can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-### Social tracking
+## Social tracking
 
 Social tracking will be used to track the way users interact with Facebook, Twitter and Google + widgets, e.g. to capture "like this" or "tweet this" events.
 
@@ -2295,7 +2295,7 @@ trackSocialInteraction({
 
 `trackSocialInteraction` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-### `trackSiteSearch`
+## `Site search tracking`
 
 Use the `trackSiteSearch` method to track users searching your website. Here are its arguments:
 
@@ -2341,7 +2341,7 @@ Site search events are implemented as Snowplow self describing events. [Here](h
 
 `trackSiteSearch` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-### `trackTiming`
+## `trackTiming`
 
 Use the `trackTiming` method to track user timing events such as how long resources take to load. Here are its arguments:
 
@@ -2386,7 +2386,7 @@ Timing events are implemented as Snowplow self describing events. [Here](https:
 
 `trackTiming` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-### Campaign tracking
+## Campaign tracking
 
 Campaign tracking is used to identify the source of traffic coming to a website.
 
@@ -2399,7 +2399,7 @@ If the query parameters are not present, Snowplow reasons that the user is from 
 1. If the URL is identified as a search engine, the traffic medium is set to "organic" and Snowplow tries to derive the search engine name from the referrer URL domain and the keywords from the query string.
 2. If the URL is a non-search 3rd party website, the medium is set to "referrer". Snowplow derives the source from the referrer URL domain.
 
-#### Identifying paid sources
+### Identifying paid sources
 
 Your different ad campaigns (PPC campaigns, display ads, email marketing messages, Facebook campaigns etc.) will include one or more links to your website e.g.:
 
@@ -2415,7 +2415,7 @@ We want to be able to identify people who've clicked on ads e.g. in a marketing 
 
 For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at <http://mysite.com/myproduct.html>.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
 
-#### Anatomy of the query parameters
+### Anatomy of the query parameters
 
 Snowplow uses the same query parameters used by Google Analytics. Because of this, Snowplow users who are also using GA do not need to do any additional work to make their campaigns trackable in Snowplow as well as GA. Those parameters are:
 
@@ -2429,7 +2429,7 @@ Snowplow uses the same query parameters used by Google Analytics. Because of thi
 
 The parameters are described in the [Google Analytics help page](https://support.google.com/analytics/answer/1033863). Google also provides a [urlbuilder](https://support.google.com/analytics/answer/1033867?hl=en) which can be used to construct the URL incl. query parameters to use in your campaigns.
 
-### Ad tracking methods
+## Ad tracking methods
 
 Snowplow tracking code can be included in ad tags in order to track impressions and ad clicks. This is used by e.g. ad networks to identify which sites and web pages users visit across a network, so that they can be segmented, for example.
 
@@ -2514,7 +2514,7 @@ trackAdImpression({
 
 Even if several copies of the above script appear on a page, the trackers created will all (probably) have different names and so will not interfere with one another. The same technique should be used when tracking ad clicks. The below examples for `trackAdImpression` and `trackAdClick` assume that `rnd` has been defined in this way.
 
-#### `trackAdImpression`
+### `trackAdImpression`
 
 Ad impression tracking is accomplished using the `trackAdImpression` method. Here are the arguments it accepts:
 
@@ -2588,7 +2588,7 @@ Ad impression events are implemented as Snowplow self describing events. [Here]
 
 `trackAdImpression` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-#### `trackAdClick`
+### `trackAdClick`
 
 Ad click tracking is accomplished using the `trackAdClick` method. Here are the arguments it accepts:
 
@@ -2648,7 +2648,7 @@ Ad click events are implemented as Snowplow self describing events.[Here](https:
 
 `trackAdClick` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-#### `trackAdConversion`
+### `trackAdConversion`
 
 Use the `trackAdConversion` method to track ad conversions. Here are the arguments it accepts:
 
@@ -2713,11 +2713,11 @@ Ad conversion events are implemented as Snowplow self describing events. [Here]
 
 `trackAdConversion` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
-### Enhanced Ecommerce tracking
+## Enhanced Ecommerce tracking
 
 For more information on the Enhanced Ecommerce functions please see the Google Analytics [documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce).
 
-#### `addEnhancedEcommerceActionContext`
+### `addEnhancedEcommerceActionContext`
 
 Use the `addEnhancedEcommerceActionContext` method to add a GA Enhanced Ecommerce Action Context to the Tracker:
 
@@ -2783,7 +2783,7 @@ addEnhancedEcommerceActionContext({
   </TabItem>
 </Tabs>
 
-#### `addEnhancedEcommerceImpressionContext`
+### `addEnhancedEcommerceImpressionContext`
 
 Use the `addEnhancedEcommerceImpressionContext` method to add a GA Enhanced Ecommerce Impression Context to the Tracker:
 
@@ -2848,7 +2848,7 @@ addEnhancedEcommerceImpressionContext({
   </TabItem>
 </Tabs>
 
-#### `addEnhancedEcommerceProductContext`
+### `addEnhancedEcommerceProductContext`
 
 Use the `addEnhancedEcommerceProductContext` method to add a GA Enhanced Ecommerce Product Field Context:
 
@@ -2913,7 +2913,7 @@ addEnhancedEcommerceProductContext({
   </TabItem>
 </Tabs>
 
-#### `addEnhancedEcommercePromoContext`
+### `addEnhancedEcommercePromoContext`
 
 Use the `addEnhancedEcommercePromoContext` method to add a GA Enhanced Ecommerce Promotion Field Context:
 
@@ -2965,7 +2965,7 @@ addEnhancedEcommercePromoContext({
   </TabItem>
 </Tabs>
 
-#### `trackEnhancedEcommerceAction`
+### `trackEnhancedEcommerceAction`
 
 Use the `trackEnhancedEcommerceAction` method to track a GA Enhanced Ecommerce Action. When this function is called all of the added Ecommerce Contexts are attached to this action and flushed from the Tracker.
 
@@ -3017,7 +3017,7 @@ trackEnhancedEcommerceAction({ action: 'refund' });
   </TabItem>
 </Tabs>
 
-### Consent tracking
+## Consent tracking
 
 #### `trackConsentGranted`
 
@@ -3066,7 +3066,7 @@ trackConsentGranted({
   </TabItem>
 </Tabs>
 
-#### `trackConsentWithdrawn`
+### `trackConsentWithdrawn`
 
 Use the `trackConsentWithdrawn` method to track a user withdrawing consent for data collection. A consent document context will be attached to the event if at least the `id` and `version` arguments are supplied. To specify that a user opts out of all data collection, `all` should be set to `true`.
 
@@ -3113,7 +3113,7 @@ trackConsentWithdrawn({
   </TabItem>
 </Tabs>
 
-#### Consent documents
+### Consent documents
 
 Consent documents are stored in the context of a consent event. Each consent method adds a consent document to the event. The consent document is a custom context entity storing the arguments supplied to the method (in both granted and withdrawn events, this will be: id, version, name, and description). In either consent method, additional documents can be appended to the event by passing an array of consent document self-describing JSONs in the context argument.
 
@@ -3200,7 +3200,7 @@ The method call will generate this event:
 }
 ```
 
-### GDPR context
+## GDPR context
 
 The GDPR context attaches a context entity with the GDPR basis for processing and the details of a related document (eg. a consent document) to all events which are fired after it is set.
 
@@ -3271,7 +3271,7 @@ enableGdprContext({
   </TabItem>
 </Tabs>
 
-### Error tracking
+## Error tracking
 
 Snowplow JS tracker provides two ways of tracking exceptions: manual tracking of handled exceptions using `trackError` and automatic tracking of unhandled exceptions using `enableErrorTracking`.
 
@@ -3365,7 +3365,7 @@ try {
 
 Using `trackError` it's assumed that developer knows where errors could happen, which is not often the case. Therefor it's recommended to use `enableErrorTracking` as it allows you to discover errors that weren't expected.
 
-##### `enableErrorTracking`
+#### `enableErrorTracking`
 
 Use the `enableErrorTracking` method to track unhandled exceptions (application errors) in your JS code. This is its signature:
 
@@ -3427,7 +3427,7 @@ enableErrorTracking();
 
 Application error events are implemented as Snowplow self describing events. [Here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/application_error/jsonschema/1-0-1) is the schema for an `application_error` event.
 
-### Setting the true timestamp
+## Setting the true timestamp
 
 As standard, every event tracked by the Javascript tracker will be recorded with two timestamps:
 

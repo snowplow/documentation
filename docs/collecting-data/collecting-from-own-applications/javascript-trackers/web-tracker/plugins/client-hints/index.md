@@ -7,9 +7,9 @@ sidebar_position: 3000
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 [Client Hints](https://www.chromium.org/updates/ua-ch) are being rolled out across a number of browsers and are an alternative to the tracking the User Agent, which is particularly useful in those browsers which are freezing the User Agent string.

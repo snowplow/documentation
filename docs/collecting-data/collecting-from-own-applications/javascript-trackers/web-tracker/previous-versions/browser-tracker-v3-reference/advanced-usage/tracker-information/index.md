@@ -5,9 +5,9 @@ sidebar_position: 2000
 ---
 
 ```mdx-code-block
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 When initialising a tracker, you can use the returned `tracker` instance to access various properties from this tracker instance.

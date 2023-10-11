@@ -4,10 +4,10 @@ sidebar_position: 12500
 ---
 
 ```mdx-code-block
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 import Media from "@site/docs/reusable/media/_index.md"
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 This plugin is the recommended way to manually track media events from video players.

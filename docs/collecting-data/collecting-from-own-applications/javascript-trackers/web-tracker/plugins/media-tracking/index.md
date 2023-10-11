@@ -7,9 +7,9 @@ sidebar_position: 12500
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Block5966 from "@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md"
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
 
-<Block5966/>
+<ReleaseBadge/>
 ```
 
 This plugin will allow the tracking of any HTML5 `<video>` or `<audio>` element, along with many HTML5 based video player frameworks.

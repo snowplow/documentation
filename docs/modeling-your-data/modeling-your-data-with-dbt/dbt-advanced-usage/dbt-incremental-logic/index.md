@@ -60,7 +60,7 @@ Your Snowplow dbt package can be considered to be in one of 4 states at any give
 3. Models out of sync
 4. Standard run
 
-This state determines the range of events to start with to process in the next run of the package (note that events easier than this range may be processed as part of a complete session, as detailed above). We use the `min_last_success` and `max_last_success` for models enabled in the current run, as well as the number of models in the manifest, as the base for our calculation.
+This state determines the range of events to start with to process in the next run of the package (note that events earlier than this range may be processed as part of a complete session, as detailed above). We use the `min_last_success` and `max_last_success` for models enabled in the current run, as well as the number of models in the manifest, as the base for our calculation.
 
 <details>
 <summary>Technical Details</summary>
@@ -108,7 +108,7 @@ gantt
     Future Runs :crit, c, after a1, 2d
 
     section Processing
-    ⬅snowplow__backfill_limit_days➡ :active, a1, 2020-01-01, 1d
+    snowplow__backfill_limit_days :active, a1, 2020-01-01, 1d
 
     section Processed
 
@@ -134,7 +134,7 @@ gantt
     Future Runs (new model) :crit, c, after a1 , 2d
 
     section Processing
-    ⬅snowplow__backfill_limit_days➡ :active, a1, 2020-01-01, 1d
+    snowplow__backfill_limit_days :active, a1, 2020-01-01, 1d
 
     section Processed
     Other models :c, 2020-01-01, 3d
@@ -161,8 +161,8 @@ gantt
     Future Runs (out of sync model) :crit, c, after a2, 2d
 
     section Processing
-    ⬅snowplow__lookback_window_hours➡ :active, a1, 2020-01-01 18:00:00, 6h
-    ⬅snowplow__backfill_limit_days➡ :active, a2, after b1, 1d
+    snowplow__lookback_window_hours :active, a1, 2020-01-01 18:00:00, 6h
+    snowplow__backfill_limit_days :active, a2, after b1, 1d
 
     section Processed
     Out of sync model :b1, 2020-01-01, 1d
@@ -187,11 +187,11 @@ gantt
     max_last_success :crit, m1, 2020-01-04, 4m
 
     section Unprocessed
-    Future Runs :crit, c, after a2 , 1d
+    Future Runs :crit, c, after a2 , 2d
 
     section Processing
-    ⬅snowplow__lookback_window_hours➡ :active, a1, 2020-01-03 18:00:00, 6h
-    ⬅snowplow__backfill_limit_days➡ :active, a2, after b1, 1d
+    snowplow__lookback_window_hours :active, a1, 2020-01-03 18:00:00, 6h
+    snowplow__backfill_limit_days :active, a2, after b1, 1d
 
     section Processed
     Previous Runs :b1, 2020-01-01, 3d

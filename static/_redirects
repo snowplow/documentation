@@ -173,7 +173,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/upgrade-guide/ /docs/getting-started-on-snowplow-open-source/upgrade-guide/ 301
 
 # Combining JS tracker docs
-/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/quick-start-guide/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/:splat 301
+<!-- 
+/quick-start-guide/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/cookies-and-local-storage/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/tracker-setup/installing-the-tracker-from-npm/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/browser-tracker-v3-reference/plugins/adding-plugins-to-your-tracker/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/browser/ 301
@@ -198,4 +200,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/google-tag-manager-custom-template/template-for-javascript-tracker-v3/tag-template-guide/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/tag-template-guide/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/google-tag-manager-custom-template/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/:splat 301
 
-/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/:splat 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/:splat 301 -->

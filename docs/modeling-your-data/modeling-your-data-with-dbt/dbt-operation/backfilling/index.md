@@ -12,7 +12,7 @@ By default our packages are set up to avoid processing large periods of data in 
 
 When backfilling your data, either from a full refresh, it is recommended to increase the `snowplow__backfill_limit_days` variable to as high as you feel comfortable with to reduce the number of runs that need to complete to get your processed data up to date. In general increasing this to cover 3-6 months is a good balance between speed and number of runs. 
 
-We also recommend doing this process manually, as until your data is up to date, no new data will be processed, so it may take many runs for your data to catch up with live tracking. Running locally you can do many back-to-back rather than wait for your scheduled runs to take place. You may also wish to warn any users of your data this is planned as it can lead to delays, and the initial full-refresh will drop the 
+We also recommend doing this process manually, as until your data is up to date, no new data will be processed, so it may take many runs for your data to catch up with live tracking. Running locally you can do many runs back-to-back rather than wait for your scheduled runs to take place. You may also wish to warn any users of your data this is planned as it can lead to delays, and an initial full-refresh will remove any existing data from the derived tables.
 
 :::tip
 
@@ -31,7 +31,7 @@ This process involves manually editing the manifest table, which is dangerous an
 :::
 
 
-Let's assume you have one schema named `prod` that is used by a regularly scheduled run of a project that uses one our package(s), and you want to introduce a new custom model backfilled with all your historic Snowplow data. We are going to first process this model in a `staging` schema before migrating it across.
+Let's assume you have one schema named `prod` that is used by a regularly scheduled run of a project that uses our package(s), and you want to introduce a new custom model backfilled with all your historic Snowplow data. We are going to first process this model in a `staging` schema before migrating it across.
 
 ```mermaid
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%

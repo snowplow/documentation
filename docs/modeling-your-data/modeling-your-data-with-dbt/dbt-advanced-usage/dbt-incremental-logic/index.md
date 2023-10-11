@@ -116,7 +116,7 @@ gantt
 
 ### State 2: New model introduced
 
-If there are enabled models that aren't in the manifest table then a new model tagged with `snowplow_<package>_incremental` has been added since the last run. The package will replay all previously processed events in order to back-fill the new model.
+If there are enabled models that aren't in the manifest table then a new model tagged with `snowplow_<package>_incremental` has been added since the last run; this can happen with a new custom model, or you have enabled some previously disabled custom modules. In this case the package will replay all previously processed events in order to back-fill the new model.
 
 **`lower_limit`**: `snowplow__start_date`  
 **`upper_limit`**: `least(max_last_success, snowplow__start_date + snowplow__backfill_limit_days)`
@@ -143,7 +143,7 @@ gantt
 
 ### State 3: Models out of sync
 
-If the `min_last_success` is less than the `max_last_success` it means the tagged models are out of sync, for example due to a particular model failing to execute successfully during the previous run or as part of catching up on a new model. The package will attempt to sync all models as far as it can.
+If the `min_last_success` is less than the `max_last_success` it means the tagged models are out of sync, for example due to a particular model failing to execute successfully during the previous run or as part of catching up on a new model. The package will attempt to sync all models as far as your backfill limit will allow.
 
 **`lower_limit`**: `min_last_success - snowplow__lookback_window_hours`  
 **`upper_limit`**: `least(max_last_success, min_last_success + snowplow__backfill_limit_days)`

@@ -115,6 +115,13 @@ By doing all of this you ensure your table will be managed correctly in the mani
 - Transaction level: `snowplow_ecommerce_transaction_interactions_this_run`
 
 </TabItem>
+<TabItem value="media_player" label="Snowplow Media Player">
+
+- Event level: `snowplow_media_player_base_events_this_run`
+- Page view level: `snowplow_media_player_base_this_run`
+- Ad view level: `snowplow_media_player_media_ad_views_this_run`
+
+</TabItem>
 </Tabs>
 
 ### This run models

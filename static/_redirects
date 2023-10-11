@@ -173,7 +173,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/upgrade-guide/ /docs/getting-started-on-snowplow-open-source/upgrade-guide/ 301
 
 # Combining JS tracker docs
-/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/:splat 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/:splat 301 *
+
 <!-- 
 /quick-start-guide/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/cookies-and-local-storage/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/ 301

@@ -155,7 +155,7 @@ gantt
     axisFormat  
     tickInterval 10day
     section  
-    min_last_success :crit, m1, 2020-01-02, 4m
+    min_last_success :crit, m1, 2020-01-02, 5m
 
     section Unprocessed
     Future Runs (out of sync model) :crit, c, after a2, 2d
@@ -184,7 +184,7 @@ gantt
     axisFormat  
     tickInterval 10day
     section  
-    max_last_success :crit, m1, 2020-01-04, 4m
+    max_last_success :crit, m1, 2020-01-04, 8m
 
     section Unprocessed
     Future Runs :crit, c, after a2 , 2d

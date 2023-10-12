@@ -49,10 +49,11 @@ The sections below go over the standard fields found in all Snowplow events. We 
 
 #### Application fields
 
-| Field      | Type | Description                                                                                                                                      | Reqd? | Example       | Source   |
-| ---------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ----- | ------------- | -------- |
-| `app_id`   | text | Application ID                                                                                                                                   | Yes   | 'angry-birds' | Tracking |
-| `platform` | text | Platform, limited to [specific values](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/#application-parameters) | Yes   | 'web'         | Tracking |
+| Field    | Type | Description                          | Reqd? | Example       | Source   | Web | Mobile |
+|----------|------|--------------------------------------|-------|---------------|----------|-----|--------|
+| app_id   | text | Application ID                       | Yes   | 'angry-birds' | Tracking | ✅   | ✅      |
+| platform | text | Platform, limited to specific values | Yes   | 'web'         | Tracking | ✅   | ✅      |
+
 
 The application ID is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. `production` versus `dev`.
 

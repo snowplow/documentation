@@ -13,7 +13,19 @@ This package makes use of the standard dbt `incremental` [materialization](https
 All other features of the `incremental` materialization are supported including `incremental_predicates` and `on_schema_change`. The code for the overridden macro can be found [here](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/materializations/base_incremental/common/get_merge_sql.sql).
 
 ## Usage
-To enable the materialization on a model you need to ensure a `unique_key` and `upsert_date_key` are provided in the model config, and that `snowplow_optimize=true` in the config as well. 
+To enable the materialization on a model you need to ensure a `unique_key` and `upsert_date_key` are provided in the model config, and that `snowplow_optimize=true` in the config as well, e.g.
+
+```jinja2 title="my_model.sql"
+{{
+  config(
+    materialized='incremental',
+    unique_key='page_view_id',
+    upsert_date_key='start_tstamp',
+    snowplow_optimize = true,
+    ...
+  )
+}}
+```
 
 In addition, the following must be added to your `dbt_project.yml` file once.
 

@@ -68,7 +68,7 @@ These are defined in each `selectors.yml` file within the packages, however in o
 
 You may wish to run the modules asynchronously, for instance run the page views module hourly but the sessions and users modules daily. You would assume this could be achieved using e.g.:
 
-```bash
+```bash title="Do not do this"
 dbt run --select +snowplow_web.page_views
 ```
 
@@ -79,6 +79,6 @@ However we can leverage dbt's `ls` command in conjunction with shell substitutio
 
 For example to run just the page views module asynchronously:
 
-```bash
+```bash title = "Do this instead"
 dbt run --select +snowplow_web.page_views --vars "{'models_to_run': '$(dbt ls --m  +snowplow_web.page_views --output name)'}"
 ```

@@ -115,6 +115,13 @@ By doing all of this you ensure your table will be managed correctly in the mani
 - Transaction level: `snowplow_ecommerce_transaction_interactions_this_run`
 
 </TabItem>
+<TabItem value="media_player" label="Snowplow Media Player">
+
+- Event level: `snowplow_media_player_base_events_this_run`
+- Page view level: `snowplow_media_player_base_this_run`
+- Ad view level: `snowplow_media_player_media_ad_views_this_run`
+
+</TabItem>
 </Tabs>
 
 ### This run models
@@ -162,7 +169,7 @@ As these models are rebuilt fully each time the package is run, there is no spec
 
 Over time you may wish to add more custom incremental models to extend the functionality of this package. As you introduce new custom models into your project, assuming they are tagged correctly, the package will automatically replay all events up until the latest event to have been processed by the other models.
 
-During back-filling, the derived tables are blocked from updating. This is to protect against a batched back-fill temporarily introducing incomplete data into these derived tables. The batch size of this back-fill is limited as outlined in the [identification of events to process](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#identification-of-events-to-process) section, this means it might take several runs to complete the back-fill, **during which time no new events will be processed by the main models**.
+During back-filling, the derived tables are blocked from updating. This is to protect against a batched back-fill temporarily introducing incomplete data into these derived tables. The batch size of this back-fill is limited as outlined in the [identification of events to process](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#package-state) section, this means it might take several runs to complete the back-fill, **during which time no new events will be processed by the main models**.
 
 Back-filling a model can be performed either as part of the entire run of the Snowplow package, or in isolation to reduce cost (recommended):
 

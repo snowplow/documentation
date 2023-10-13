@@ -1,10 +1,10 @@
 ---
-title: "Recommended Tracking Design for Web & Mobile Events"
+title: "Recommended Tracking Design for Web or Mobile Events"
 date: "2023-10-12"
 sidebar_position: 200
 ---
 
-# Recommended Tracking Design for Web & Mobile Events
+# Recommended Tracking Design for Web or Mobile Events
 
 Depending on your business needs you may decide to come up with your own custom context entities / self-describing events. However, for out-of-the-box solutions Snowplow designed a set of context entities specifically useful for web and mobile tracking which we used as a base for our data models, too. 
 

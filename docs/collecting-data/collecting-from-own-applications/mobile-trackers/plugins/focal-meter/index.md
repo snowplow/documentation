@@ -1,18 +1,21 @@
 ---
-title: "Sending user identifier to Kantar FocalMeter"
+title: "Sending user identifier to Kantar Focal Meter"
 date: "2023-01-04"
 sidebar_position: 20
 ---
 
-# Sending user identifier to Kantar FocalMeter
+# Sending user identifier to Kantar Focal Meter
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The tracker has the ability to send the user identifier (`userId` present in the session context) to a [Kantar FocalMeter](https://www.virtualmeter.co.uk/focalmeter) endpoint.
-This integration enables measuring the audience of content through the FocalMeter router meter.
+The mobile trackers provide integration with [Focal Meter by Kantar](https://www.virtualmeter.co.uk/focalmeter).
+Focal Meter is a box that connects directly to the broadband router and collects viewing information for the devices on your network.
+
+This integration enables measuring the audience of content through the Focal Meter router meter.
+The tracker has the ability to send the user identifier (`userId` present in the session context) to a [Kantar Focal Meter](https://www.virtualmeter.co.uk/focalmeter) endpoint.
 
 To enable this feature, you can pass the `FocalMeterConfiguration` configuration with the URL of the Kantar endpoint.
 For example:

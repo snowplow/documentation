@@ -6,12 +6,12 @@ sidebar_position: 200
 
 # Recommended Tracking Design for Web & Mobile Events
 
-Depending on your business needs you may decide to come up with your own custom contexts / self-describing events. However, for out-of-the-box solutions Snowplow designed a set of contexts specifically useful for web and mobile tracking which we used as a base for our data models, too. 
+Depending on your business needs you may decide to come up with your own custom context entities / self-describing events. However, for out-of-the-box solutions Snowplow designed a set of context entities specifically useful for web and mobile tracking which we used as a base for our data models, too. 
 
-The below table provides a list of our recommended web & mobile contexts and also shows how to enable them in your modeled data (the *snowplow-unified* package has all of them but the mobile and web only contexts are also available to use in their respective platform specific data models under the same variable names).
+The below table provides a list of our recommended web & mobile context entities and also shows how to enable them in your modeled data (the *snowplow-unified* package has all of them but the mobile and web only contexts are also available to use in their respective platform specific data models under the same variable names).
 
 :::tip
-Snowplow has started to move away from the wide, out-of-the-box canonical event structure and as part of this process some of these vital fields are now recommended to be tracked and used from purpose built topical contexts such as below. The snowplow-unified data model structure should enable this transition to be smooth: with a set of coalesce(..) statements you can change the source of a specific field in the `unify_fields_query()` macro, if necessary. You can check the full list of fields and from where we recommend taking them for both web and mobile [here](/docs/understanding-your-pipeline/canonical-event/index.md).
+Snowplow has started to move away from the wide, out-of-the-box canonical event structure and as part of this process some of these vital fields are now recommended to be tracked and used from purpose built topical context entities such as below. The snowplow-unified data model structure should enable this transition to be smooth: with a set of coalesce(..) statements you can change the source of a specific field in the `unify_fields_query()` macro, if necessary. You can check the full list of fields and from where we recommend taking them for both web and mobile [here](/docs/understanding-your-pipeline/canonical-event/index.md).
 :::
 
 | context                                                                                             | web | mobile | recommendation                                     | how to enable it in the unified model      | field name                                             |

@@ -69,7 +69,7 @@ In the data warehouse, each type of entity gets its own column (or its own table
 
 Snowplow provides a number of entities out of the box.
 
-Some of them are attached to the event by tracking SDKs. For example, with the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/), you can enable the collection of performance timing and other entities. The associated data will be added automatically to any Snowplow event fired on the page:
+Some of them are attached to the event by tracking SDKs. For example, with the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md), you can enable the collection of performance timing and other entities. The associated data will be added automatically to any Snowplow event fired on the page:
 
 ```javascript
 window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
@@ -98,7 +98,7 @@ Defining your own custom entities is useful when you have similar bits of busine
 
 To track an event with a custom entity, e.g. `product`, **you will first need to define its [schema](/docs/understanding-your-pipeline/schemas/index.md)** (see [managing data structures](/docs/understanding-tracking-design/managing-your-data-structures/index.md)). This schema might have fields such as `productId`, `brand`, etc.
 
-Then you can use one of the [tracking SDKs](/docs/collecting-data/collecting-from-own-applications/index.md) to add an array of entities to your event. For example, with the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/):
+Then you can use one of the [tracking SDKs](/docs/collecting-data/collecting-from-own-applications/index.md) to add an array of entities to your event. For example, with the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md):
 
 ```javascript
 snowplow('trackPageView', {

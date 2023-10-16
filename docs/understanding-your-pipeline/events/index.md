@@ -143,7 +143,7 @@ Some self-describing events were predefined by Snowplow and are natively support
 
 To track your own _custom_ self-describing event, e.g. `viewed_product`, **you will first need to define its [schema](/docs/understanding-your-pipeline/schemas/index.md)** (see [managing data structures](/docs/understanding-tracking-design/managing-your-data-structures/index.md)). This schema might have fields such as `productId`, `brand`, etc.
 
-Then you can use one of our [tracking SDKs](/docs/collecting-data/collecting-from-own-applications/index.md). For example, with the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/):
+Then you can use one of our [tracking SDKs](/docs/collecting-data/collecting-from-own-applications/index.md). For example, with the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md):
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {

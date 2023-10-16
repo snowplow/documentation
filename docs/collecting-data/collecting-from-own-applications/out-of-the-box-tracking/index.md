@@ -6,12 +6,12 @@ sidebar_position: 200
 
 # Out-of-the-box tracking for Web or Mobile Events
 
-Depending on your business needs you may decide to come up with your own events / custom context entities / self-describing events. However, for out-of-the-box solutions Snowplow designed a set of events and context entities specifically useful for web and mobile tracking which we used as a base for our data models, too.
+Depending on your business needs you may decide to come up with your own events / custom entities. However, for out-of-the-box solutions Snowplow designed a set of events and entities specifically useful for web and mobile tracking which we used as a base for our data models, too.
 
-In the below tables we have collected the list of such events and context entities and highlight where possible how you can enable them in the snowplow dbt packages for modeling purposes.
+In the below tables we have collected the list of such events and entities and highlight where possible how you can enable them in the snowplow dbt packages for modeling purposes.
 
 :::tip
-Snowplow has started to move away from the wide, out-of-the-box canonical event structure and as part of this process some of these vital fields are now recommended to be tracked and used from purpose built topical context entities such as below. The snowplow-unified data model structure should enable this transition to be smooth: with a set of coalesce(..) statements you can change the source of a specific field in the `unify_fields_query()` macro, if necessary. You can check the full list of fields and from where we recommend taking them for both web and mobile [here](/docs/understanding-your-pipeline/canonical-event/index.md).
+Snowplow has started to move away from the wide, out-of-the-box canonical event structure and as part of this process some of these vital fields are now recommended to be tracked and used from purpose built topical entities such as below. The snowplow-unified data model structure should enable this transition to be smooth: with a set of coalesce(..) statements you can change the source of a specific field in the `unify_fields_query()` macro, if necessary. You can check the full list of fields and from where we recommend taking them for both web and mobile [here](/docs/understanding-your-pipeline/canonical-event/index.md).
 :::
 
 ## Events
@@ -39,7 +39,7 @@ Snowplow has started to move away from the wide, out-of-the-box canonical event 
 | web performance [(schema)](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/web_vitals/jsonschema)                  | ✅   | ❌      | ?                                                                        | ?                                         | snowplow__enable_cwv: true (optional module)               | unstruct_event_com_snowplowanalytics_snowplow_web_vitals_1  |
 | app errors [(schema)](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/application_error/jsonschema/1-0-2)           | ✅    |  ✅      | web: error tracking plugin                                                                        | ?                                         | snowplow__enable_app_errors_module: true (optional module) |  com_snowplowanalytics_snowplow_application_error_1         |
 
-Below you will find more detailed information on the individual Snowplow events and context entities:
+Below you will find more detailed information on the individual Snowplow events and entities:
 
 #### page view context
 

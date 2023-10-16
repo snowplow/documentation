@@ -509,6 +509,24 @@ If you [used our `base` module](#set-up-a-vpc-to-deploy-into), you will need to 
 * `subnet_id_lb`: use the identifier of the `collector-agw1` subnet from `base`
 * `subnet_id_servers`: use the identifier of the `pipeline1` subnet from `base`
 
+<details>
+<summary>Confluent Cloud</summary>
+
+If you already use Confluent Cloud, you can opt to create the necessary message topics there, instead of relying on Azure Event Hubs. This way, you will also benefit from features like [Stream Lineage](https://docs.confluent.io/cloud/current/stream-governance/stream-lineage.html).
+
+To do this, you will need to:
+* Set the `stream_type` variable to `confluent_cloud`
+* Create 3 or 4 topics manually in your Confluent cluster and add their names in the respective variables (`confluent_cloud_..._topic_name`)
+* Create an API key and fill the relevant fields (`confluent_cloud_api_key`, `confluent_cloud_api_secret`)
+* Add a bootstrap server in `confluent_cloud_bootstrap_server`
+
+:::tip Topic partitions
+
+If you need to stay within the free tier for your Confluent cluster, make sure to select no more than 2 partitions for each topic.
+
+:::
+
+</details>
 
   </TabItem>
 </Tabs>

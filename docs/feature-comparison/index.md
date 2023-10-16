@@ -33,8 +33,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | **Real-time streams** | | | |
 | • Kinesis | ✅ | ❌ | ✅ |
 | • Pubsub | ✅ | ❌ | ✅ |
-| • Azure Event Hubs | ✅ | ❌ | ✅<br/>_(bolt-on)_ |
-| • Kafka | ✅ | ❌ | ✅<br/>_(bolt-on)_ |
+| • Kafka / Azure Event Hubs / Confluent Cloud | ✅ | ❌ | ✅<br/>_(bolt-on)_ |
 | <h3>Build more trust in your data</h3> | [Open Source](/docs/getting-started-on-snowplow-open-source/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
 | [Failed Events](/docs/understanding-your-pipeline/failed-events/index.md) | ✅ | ❌ | ✅ |
 | [Data quality monitoring & API](/docs/managing-data-quality/monitoring-failed-events/index.md) | ❌ | ❌ | ✅ |

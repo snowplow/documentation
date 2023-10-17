@@ -108,7 +108,9 @@ We recommend to only load data into a single destination, but nothing prevents y
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-There are two alternative storage options for you to select: Postgres and BigQuery (currently, you can’t choose both).
+There are two alternative storage options for you to select: Postgres and BigQuery.
+
+We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
 
   </TabItem>
   <TabItem value="azure" label="Azure 🧪">
@@ -564,7 +566,7 @@ If you are using Postgres, set the `postgres_db_ip_allowlist` to a list of CIDR 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-As mentioned [above](#storage-options), there are two options for pipeline’s destination database. Pick your destination, set the `<destination>_db_enabled` variable (e.g. `postgres_db_enabled`) to `true` and fill the respective `<destination>.terraform.tfvars` file. Only database-specific variables are different in the two `.tfvars` files.
+As mentioned [above](#storage-options), there are two options for pipeline’s destination database. For each destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `postgres_db_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
 
 :::caution Postgres only
 
@@ -610,11 +612,11 @@ This will output your `collector_dns_name`, `postgres_db_address`, `postgres_db_
 
 ```bash
 terraform init
-terraform plan -var-file=<destination>.terraform.tfvars
-terraform apply -var-file=<destination>.terraform.tfvars
+terraform plan
+terraform apply
 ```
 
-This will output your `collector_dns_name`, `db_address`, `db_port`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`.
+This will output your `collector_ip_address`, `postgres_db_address`, `postgres_db_port`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`.
 
   </TabItem>
   <TabItem value="azure" label="Azure 🧪">

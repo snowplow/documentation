@@ -68,10 +68,10 @@ Page views are tracked using the `trackPageView` method. This is generally par
   <TabItem value="browser" label="Browser (npm)" default>
 
 ```javascript
-import { 
-  newTracker, 
-  enableActivityTracking, 
-  trackPageView 
+import {
+  newTracker,
+  enableActivityTracking,
+  trackPageView
 } from '@snowplow/browser-tracker';
 
 newTracker('sp', '{{collector_url_here}}', {
@@ -86,7 +86,7 @@ enableActivityTracking({
 trackPageView();
 ```
   </TabItem>
-  
+
 </Tabs>
 
 ### `trackPageView`
@@ -174,9 +174,9 @@ snowplow('trackPageView', {
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { 
-  enableActivityTracking, 
-  trackPageView 
+import {
+  enableActivityTracking,
+  trackPageView
 } from '@snowplow/browser-tracker';
 
 // Turn on page pings every 10 seconds
@@ -224,22 +224,22 @@ Page pings are enabled by:
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('enableActivityTracking', { 
-  minimumVisitLength: number, 
-  heartbeatDelay: number 
+snowplow('enableActivityTracking', {
+  minimumVisitLength: number,
+  heartbeatDelay: number
 });
 ```
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { 
+import {
   enableActivityTracking
 } from '@snowplow/browser-tracker';
 
-enableActivityTracking({ 
-  minimumVisitLength: number, 
-  heartbeatDelay: number 
+enableActivityTracking({
+  minimumVisitLength: number,
+  heartbeatDelay: number
 });
 ```
 
@@ -252,9 +252,9 @@ where `minimumVisitLength` is the time period from page load before the first 
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('enableActivityTracking', { 
-  minimumVisitLength: 30, 
-  heartbeatDelay: 10 
+snowplow('enableActivityTracking', {
+  minimumVisitLength: 30,
+  heartbeatDelay: 10
 });
 
 snowplow('trackPageView');
@@ -263,14 +263,14 @@ snowplow('trackPageView');
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { 
-  enableActivityTracking, 
-  trackPageView 
+import {
+  enableActivityTracking,
+  trackPageView
 } from '@snowplow/browser-tracker';
 
-enableActivityTracking({ 
-  minimumVisitLength: 30, 
-  heartbeatDelay: 10 
+enableActivityTracking({
+  minimumVisitLength: 30,
+  heartbeatDelay: 10
 });
 
 trackPageView();
@@ -294,9 +294,9 @@ You can now perform edge analytics in the browser to reduce the number of events
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('enableActivityTrackingCallback', { 
-  minimumVisitLength: number, 
-  heartbeatDelay: number, 
+snowplow('enableActivityTrackingCallback', {
+  minimumVisitLength: number,
+  heartbeatDelay: number,
   callback: (data: ActivityCallbackData) => void
 });
 ```
@@ -305,13 +305,13 @@ snowplow('enableActivityTrackingCallback', {
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { 
+import {
   enableActivityTrackingCallback
 } from '@snowplow/browser-tracker';
 
-enableActivityTrackingCallback({ 
-  minimumVisitLength: number, 
-  heartbeatDelay: number, 
+enableActivityTrackingCallback({
+  minimumVisitLength: number,
+  heartbeatDelay: number,
   callback: (data: ActivityCallbackData) => void
 });
 ```
@@ -359,9 +359,9 @@ var aggregatedEvent = {
     maxYOffset: 0,
     numEvents: 0
 };
-snowplow('enableActivityTrackingCallback', { 
-  minimumVisitLength: 10, 
-  heartbeatDelay: 10, 
+snowplow('enableActivityTrackingCallback', {
+  minimumVisitLength: 10,
+  heartbeatDelay: 10,
   callback: function (event) {
     aggregatedEvent = {
         pageViewId: event.pageViewId,
@@ -394,9 +394,9 @@ window.snowplow('trackPageView');
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { 
-  newTracker, 
-  enableActivityTrackingCallback, 
+import {
+  newTracker,
+  enableActivityTrackingCallback,
   trackPageView,
   trackSelfDescribingEvent
 } from '@snowplow/browser-tracker';
@@ -413,9 +413,9 @@ var aggregatedEvent = {
     maxYOffset: 0,
     numEvents: 0
 };
-enableActivityTrackingCallback({ 
-  minimumVisitLength: 10, 
-  heartbeatDelay: 10, 
+enableActivityTrackingCallback({
+  minimumVisitLength: 10,
+  heartbeatDelay: 10,
   callback: function (event) {
     aggregatedEvent = {
         pageViewId: event.pageViewId,
@@ -672,9 +672,9 @@ An example of tracking a user listening to a music mix:
 
 ```javascript runnable
 snowplow('trackStructEvent', {
-  category: 'Mixes', 
-  action: 'Play', 
-  label: 'MrC/fabric-0503-mix', 
+  category: 'Mixes',
+  action: 'Play',
+  label: 'MrC/fabric-0503-mix',
   property: '',
   value: 0.0
 });
@@ -686,9 +686,9 @@ snowplow('trackStructEvent', {
 import { trackStructEvent } from '@snowplow/browser-tracker';
 
 trackStructEvent({
-  category: 'Mixes', 
-  action: 'Play', 
-  label: 'MrC/fabric-0503-mix', 
+  category: 'Mixes',
+  action: 'Play',
+  label: 'MrC/fabric-0503-mix',
   value: 0.0
 });
 ```
@@ -1112,7 +1112,7 @@ To add global contexts:
 
 #### `removeGlobalContexts`
 
-To remove a global context: 
+To remove a global context:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -1160,7 +1160,7 @@ removeGlobalContexts([entity]); // remove the global context
 
 #### `clearGlobalContexts`
 
-To remove all global contexts: 
+To remove all global contexts:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -1245,9 +1245,9 @@ This is its signature (where `?` is an optional property):
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
-  options?: FilterCriterion, 
-  pseudoClicks?: boolean, 
+snowplow('enableLinkClickTracking', {
+  options?: FilterCriterion,
+  pseudoClicks?: boolean,
   trackContent?: boolean
   context?: SelfDescribingJson[]
 });
@@ -1259,9 +1259,9 @@ snowplow('enableLinkClickTracking', {
 ```javascript
 import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-enableLinkClickTracking({ 
-  options?: FilterCriterion, 
-  pseudoClicks?: boolean, 
+enableLinkClickTracking({
+  options?: FilterCriterion,
+  pseudoClicks?: boolean,
   trackContent?: boolean
   context?: SelfDescribingJson[]
 });
@@ -1293,13 +1293,13 @@ This is an array of CSS classes which should be ignored by link click tracking. 
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
+snowplow('enableLinkClickTracking', {
   options: {
     denylist: ['barred', 'untracked']
   }
 });
 
-// If there is only one class name you wish to deny, 
+// If there is only one class name you wish to deny,
 // you should still put it in an array
 snowplow('enableLinkClickTracking', { options: { 'denylist': ['barred'] } });
 ```
@@ -1309,7 +1309,7 @@ snowplow('enableLinkClickTracking', { options: { 'denylist': ['barred'] } });
 ```javascript
 import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-enableLinkClickTracking({ 
+enableLinkClickTracking({
   options: {
     denylist: ['barred', 'untracked']
   }
@@ -1330,8 +1330,8 @@ The opposite of a denylist. This is an array of the CSS classes of links which y
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
-  options: { 
+snowplow('enableLinkClickTracking', {
+  options: {
     'allowlist': ['unbarred', 'tracked']
   }
 });
@@ -1346,8 +1346,8 @@ snowplow('enableLinkClickTracking', { options: { 'allowlist': ['unbarred'] } });
 ```javascript
 import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-enableLinkClickTracking({ 
-  options: { 
+enableLinkClickTracking({
+  options: {
     'allowlist': ['unbarred', 'tracked']
   }
 });
@@ -1530,10 +1530,10 @@ Of these arguments, only `targetUrl` is required. This is how to use `trackLi
 
 ```javascript
 snowplow('trackLinkClick', {
-  targetUrl: 'http://www.example.com', 
-  elementId: 'first-link', 
-  elementClasses: ['class-1', 'class-2'], 
-  elementTarget: '', 
+  targetUrl: 'http://www.example.com',
+  elementId: 'first-link',
+  elementClasses: ['class-1', 'class-2'],
+  elementTarget: '',
   elementContent: 'this page'
 });
 ```
@@ -1545,10 +1545,10 @@ snowplow('trackLinkClick', {
 import { trackLinkClick } from '@snowplow/browser-plugin-link-click-tracking';
 
 trackLinkClick({
-  targetUrl: 'http://www.example.com', 
-  elementId: 'first-link', 
-  elementClasses: ['class-1', 'class-2'], 
-  elementTarget: '', 
+  targetUrl: 'http://www.example.com',
+  elementId: 'first-link',
+  elementClasses: ['class-1', 'class-2'],
+  elementTarget: '',
   elementContent: 'this page'
 });
 ```
@@ -1652,6 +1652,86 @@ This is a function used to determine which elements are tracked. The element is 
 **Transform functions**
 
 This is a function used to transform data in each form field. The value and element (2.15.0+ only) are passed as arguments to the function and the tracked value is replaced by the value returned.
+
+:::note Behaviour prior to version 3.16 of the tracker
+
+**In versions prior to 3.16.0**, the transform function would receive 2 arguments, that were different between `submit_form` and `change_form` or `focus_form` events. More specifically, the transform function signature **was**:
+
+```typescript
+type transformFn = (x: string | null, elt: ElementData | TrackedHTMLElement) => string | null;
+```
+
+For `change_form` and `focus_form` events the `elt` argument was the tracked HTML element itself, while for `submit_form` events, the `elt` argument was an object of type `ElementData` with only some of the original element's attributes:
+
+```typescript
+interface ElementData extends Record<string, string | null | undefined> {
+  name: string;
+  value: string | null;
+  nodeName: string;
+  type?: string;
+}
+```
+
+:::
+
+**Since version 3.16.0**, the transform function receives three arguments:
+
+1. The value of the element.
+2. Either the HTML element (for `change_form` and `focus_form` events) or an instance of `ElementData` (for `submit_form` events).
+3. The HTML element (in all form tracking events).
+
+The function signature is:
+
+```typescript
+type transformFn = (
+  elementValue: string | null,
+  elementInfo: ElementData | TrackedHTMLElement,
+  elt: TrackedHTMLElement
+) => string | null;
+```
+
+This means that you can now specify a transform function that applies the exact same logic to all `submit_form`, `change_form` and `focus_form` events independent of the element's attributes the logic may depend on. For example:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+function redactPII(eltValue, _, elt) {
+  if (elt.id === 'pid') {
+    return 'redacted';
+  }
+  return eltValue;
+}
+
+snowplow('enableFormTracking', {
+  options: {
+    fields: { transform: redactPII },
+  },
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
+
+function redactPII(eltValue, _, elt) {
+  if (elt.id === 'pid') {
+    return 'redacted';
+  }
+  return eltValue;
+}
+
+enableFormTracking({
+  options: {
+    fields: { transform: redactPII },
+  },
+});
+```
+
+  </TabItem>
+</Tabs>
 
 **Context**
 
@@ -1799,6 +1879,18 @@ To transform the form fields with an MD5 hashing function:
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
+// For JavaScript tracker versions before 3.16.0
+// function hashMD5(value, elt) {
+//   // can use elt to make transformation decisions
+//   return MD5(value);
+// }
+
+// For JavaScript tracker versions 3.16.0+
+function hashMD5(value, _, elt) {
+  // can use elt to make transformation decisions
+  return MD5(value);
+}
+
 var opts = {
   forms: {
     allowlist: ["tracked"]
@@ -1807,10 +1899,7 @@ var opts = {
     filter: function (elt) {
       return elt.id !== "private";
     },
-    transform: function (value, elt) {
-      // can use elt to make transformation decisions
-      return MD5(value);
-    }
+    transform: hashMD5
   }
 };
 
@@ -1823,6 +1912,18 @@ snowplow('enableFormTracking', { options: opts });
 ```javascript
 import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
 
+// For Browser tracker versions before 3.16.0
+// function hashMD5(value, elt) {
+//   // can use elt to make transformation decisions
+//   return MD5(value);
+// }
+
+// For Browser tracker versions 3.16.0+
+function hashMD5(value, _, elt) {
+  // can use elt to make transformation decisions
+  return MD5(value);
+}
+
 var options = {
   forms: {
     allowlist: ["tracked"]
@@ -1831,10 +1932,7 @@ var options = {
     filter: function (elt) {
       return elt.id !== "private";
     },
-    transform: function (value, elt) {
-      // can use elt to make transformation decisions
-      return MD5(value);
-    }
+    transform: hashMD5
   }
 };
 
@@ -1914,7 +2012,7 @@ For example:
 snowplow('addTrans', {
     orderId: '1234',  // required
     total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
+    affiliation: 'Acme Clothing',
     tax: 1.29,
     shipping: 5,
     city: 'San Jose',
@@ -1947,7 +2045,7 @@ import { addTrans } from '@snowplow/browser-plugin-ecommerce'
 addTrans({
     orderId: '1234',  // required
     total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
+    affiliation: 'Acme Clothing',
     tax: 1.29,
     shipping: 5,
     city: 'San Jose',
@@ -1987,7 +2085,7 @@ For example:
 snowplow('addItem', {
     orderId: '1234', // required
     sku: 'DD44',     // required
-    name: 'T-Shirt',      
+    name: 'T-Shirt',
     category: 'Green Medium',
     price: 11.99,
     quantity: 1,
@@ -2003,7 +2101,7 @@ import { addItem } from '@snowplow/browser-plugin-ecommerce'
 addItem({
     orderId: '1234', // required
     sku: 'DD44',     // required
-    name: 'T-Shirt',      
+    name: 'T-Shirt',
     category: 'Green Medium',
     price: 11.99,
     quantity: 1,
@@ -2055,9 +2153,9 @@ trackTrans();
   n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
 
   snowplow('newTracker', 'sp', '{{collector_url_here}}', { appId: 'my-store' });
-  snowplow('enableActivityTracking',{ 
-    minimumVisitLength: 30, 
-    heartbeatDelay: 10 
+  snowplow('enableActivityTracking',{
+    minimumVisitLength: 30,
+    heartbeatDelay: 10
   });
   snowplow('trackPageView');
   snowplow('enableLinkClickTracking');
@@ -2065,7 +2163,7 @@ trackTrans();
   snowplow('addTrans', {
     orderId: '1234',  // required
     total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
+    affiliation: 'Acme Clothing',
     tax: 1.29,
     shipping: 5,
     city: 'San Jose',
@@ -2080,7 +2178,7 @@ trackTrans();
   snowplow('addItem', {
     orderId: '1234', // required
     sku: 'DD44',     // required
-    name: 'T-Shirt',      
+    name: 'T-Shirt',
     category: 'Green Medium',
     price: 11.99,
     quantity: 1,
@@ -2116,7 +2214,7 @@ newTracker('sp', '{{collector_url_here}}', {
 addTrans({
     orderId: '1234',  // required
     total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
+    affiliation: 'Acme Clothing',
     tax: 1.29,
     shipping: 5,
     city: 'San Jose',
@@ -2131,7 +2229,7 @@ addTrans({
 addItem({
     orderId: '1234', // required
     sku: 'DD44',     // required
-    name: 'T-Shirt',      
+    name: 'T-Shirt',
     category: 'Green Medium',
     price: 11.99,
     quantity: 1,
@@ -2166,20 +2264,20 @@ An example:
 
 ```javascript
 snowplow('trackAddToCart', {
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
   currency: 'GBP'
 });
 
 snowplow('trackRemoveFromCart', {
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
   currency: 'GBP'
 });
 ```
@@ -2191,20 +2289,20 @@ snowplow('trackRemoveFromCart', {
 import { trackAddToCart, trackRemoveFromCart } from '@snowplow/browser-plugin-ecommerce';
 
 trackAddToCart({
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
   currency: 'GBP'
 });
 
 trackRemoveFromCart({
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
   currency: 'GBP'
 });
 ```
@@ -2235,10 +2333,10 @@ The method is executed in as:
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('trackSocialInteraction', { 
-  action: string, 
-  network: string, 
-  target: string 
+snowplow('trackSocialInteraction', {
+  action: string,
+  network: string,
+  target: string
 });
 
 ```
@@ -2247,8 +2345,8 @@ For example:
 
 ```javascript
 snowplow('trackSocialInteraction', {
-  action: 'like', 
-  network: 'facebook', 
+  action: 'like',
+  network: 'facebook',
   target: 'pbz00123'
 });
 ```
@@ -2272,10 +2370,10 @@ Definition:
 ```javascript
 import { trackSocialInteraction } from '@snowplow/browser-plugin-site-tracking';
 
-trackSocialInteraction({ 
-  action: string, 
-  network: string, 
-  target: string 
+trackSocialInteraction({
+  action: string,
+  network: string,
+  target: string
 });
 ```
 
@@ -2285,8 +2383,8 @@ For example:
 import { trackSocialInteraction } from '@snowplow/browser-plugin-site-tracking';
 
 trackSocialInteraction({
-  action: 'like', 
-  network: 'facebook', 
+  action: 'like',
+  network: 'facebook',
   target: 'pbz00123'
 });
 ```
@@ -3147,10 +3245,10 @@ As an example, `trackConsentGranted` will store one consent document as a cust
 
 ```javascript
 snowplow('trackConsentGranted',
-  id: '1234', 
-  version: '5', 
-  name: 'consent_document', 
-  description: 'a document granting consent', 
+  id: '1234',
+  version: '5',
+  name: 'consent_document',
+  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 );
 ```
@@ -3160,10 +3258,10 @@ snowplow('trackConsentGranted',
 
 ```javascript
 trackConsentGranted({
-  id: '1234', 
-  version: '5', 
-  name: 'consent_document', 
-  description: 'a document granting consent', 
+  id: '1234',
+  version: '5',
+  name: 'consent_document',
+  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```
@@ -3336,8 +3434,8 @@ try {
   var user = getUser()
 } catch(e) {
   snowplow('trackError', {
-    message: 'Cannot get user object', 
-    filename: 'shop.js', 
+    message: 'Cannot get user object',
+    filename: 'shop.js',
     error: e
   });
 }
@@ -3351,8 +3449,8 @@ try {
   var user = getUser()
 } catch(e) {
   trackError({
-    message: 'Cannot get user object', 
-    filename: 'shop.js', 
+    message: 'Cannot get user object',
+    filename: 'shop.js',
     error: e
   });
 }

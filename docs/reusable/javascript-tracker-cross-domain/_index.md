@@ -165,7 +165,7 @@ if (/[?&]_sp=/.test(window.location.href)) {
 }</>
 <>{ props.lang === "javascript" && <>
 
-The URL updating code runs in a [Tracker Callback](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/advanced-usage/tracker-callbacks/index.md) to ensure it does not run before the page view event has a chance to capture the original URL.
+The URL updating code runs in a [Tracker Callback](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/advanced-usage/tracker-information/index.md) to ensure it does not run before the page view event has a chance to capture the original URL.
 ```javascript
 snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 snowplow(function(){

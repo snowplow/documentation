@@ -62,7 +62,7 @@ Over the years, it has become more idiomatic to use [entities](/docs/understandi
 <details>
 <summary>Tracking and storage format</summary>
 
-Snowplow [tracking SDKs](/docs/collecting-data/collecting-from-own-applications/index.md) provide a dedicated API for these events. For example, if you want to track a page view using the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md):
+Snowplow [tracking SDKs](/docs/collecting-data/collecting-from-own-applications/index.md) provide a dedicated API for these events. For example, if you want to track a page view using the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md):
 
 ```javascript
 window.snowplow('trackPageView');
@@ -97,7 +97,7 @@ Structured events have 5 fields:
 <details>
 <summary>Tracking and storage format</summary>
 
-To track a structured event, use one of the [tracking SDKs](/docs/collecting-data/collecting-from-own-applications/index.md). For example, with the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/web-quick-start-guide/index.md):
+To track a structured event, use one of the [tracking SDKs](/docs/collecting-data/collecting-from-own-applications/index.md). For example, with the [JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md):
 
 ```javascript
 snowplow('trackStructEvent', {

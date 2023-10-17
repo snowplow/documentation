@@ -293,8 +293,8 @@ interface SubjectConfiguration {
 ```
 
 - **userId**: The custom user identifier. Commonly used for user self-identification – for example after sign in.
-- **networkUserId**: Populates the `network_userid` field. Typically used to link native tracking to in-app browser events tracked using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md). Normally one would retrieve the network userid from the browser and pass it to the app. Should contain a valid UUID4 string.
-- **domainUserId**: Populates the `domain_userid` field. Typically used to link native tracking to in-app browser events tracked using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/index.md). Normally one would retrieve the domain userid from the browser and pass it to the app. Should contain a valid UUID4 string.
+- **networkUserId**: Populates the `network_userid` field. Typically used to link native tracking to in-app browser events tracked using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/index.md). Normally one would retrieve the network userid from the browser and pass it to the app. Should contain a valid UUID4 string.
+- **domainUserId**: Populates the `domain_userid` field. Typically used to link native tracking to in-app browser events tracked using the [JavaScript Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/index.md). Normally one would retrieve the domain userid from the browser and pass it to the app. Should contain a valid UUID4 string.
 - **useragent**: The custom useragent. It populates the `useragent` field.
 - **ipAddress**: The IP address of the user. It populates the `user_ipaddress` field.
 - **timezone** (set by the tracker): The current timezone label. Populates the `os_timezone` field.

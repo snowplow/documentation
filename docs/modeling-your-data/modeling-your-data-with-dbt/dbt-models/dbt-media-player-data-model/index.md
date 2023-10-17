@@ -20,10 +20,10 @@ import Badges from '@site/src/components/Badges';
 The package contains a fully incremental model that transforms raw media player event data into derived tables for easier querying. It can support media events tracked using the following tracking implementations on Web and mobile:
 
 * on Web using plugins for our [JavaScript trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md):
-  * [media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/media-tracking/index.md).
-  * [YouTube tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/youtube-tracking/index.md).
-  * [Vimeo tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/plugins/vimeo-tracking/index.md).
+  * [media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/media/index.md) that can be used to track events from any media player.
+  * [HTML5 media tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/media-tracking/index.md).
+  * [YouTube tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/youtube-tracking/index.md).
+  * [Vimeo tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/vimeo-tracking/index.md).
 * [media tracking APIs on our iOS and Android trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
 
 <details>

@@ -63,17 +63,12 @@ For Snowplow BDP customers, patching is disabled for production pipelines. Open 
 
 ## Marking the schema as superseded
 
-:::caution
-
-There is a known issue with this feature, please avoid using it until a fix is released in a future version of Iglu Server (at which point we will remove this warning).
-
-:::
 
 If your events are failing in production because of an incorrect schema, you might not be able to instantly update the tracking code to use a new schema version. This is a common situation for mobile tracking, for example. You can resolve this by marking the old schema version as superseded by the new schema version.
 
 :::note
 
-You need to be on Enrich 3.8.0+ and Iglu Server 0.10.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/overview/index.md) or [Snowplow Micro](/docs/testing-debugging/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
+You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/overview/index.md) or [Snowplow Micro](/docs/testing-debugging/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
 
 :::
 
@@ -244,23 +239,11 @@ Finally, if we [browse](/docs/understanding-tracking-design/managing-your-data-s
 
 ### Usage
 
-There are two ways to mark a schema version as superseded: `$supersedes` and `$supersededBy`.
-* The former attribute is applied to the _new_ schema, usually when the new schema is created.
-* The latter attribute is applied to the _old_ schema, which in most cases requires [patching](#patching-the-schema), and therefore is not recommended. This option exists for completeness.
-
 The `$supersedes` field states that the schema version defined in the `self` part supersedes the schema versions listed in the `$supersedes` field (one or more). Its value must be an array of strings (even if it only includes one item). For example:
 
 ```json
 ...
 "$supersedes": ["1-0-2", "1-0-3"],
-...
-```
-
-The `$supersededBy` field states that the schema version defined in the `self` part is superseded by the schema version listed in the `$supersededBy` field. Its value must be a string. For example:
-
-```json
-...
-"$supersededBy": "1-0-3",
 ...
 ```
 

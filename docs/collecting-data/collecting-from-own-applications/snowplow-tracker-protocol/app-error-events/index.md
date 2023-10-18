@@ -121,5 +121,5 @@ All tracked events are self-describing events that follow the `application_error
 Both our Web and mobile trackers provide an automatic exception tracking feature.
 Visit the following links to learn more about error tracking:
 
-1. **TODO:** link to unified JS tracker docs.
+1. On Web, using the [error tracking plugin for the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/error-tracking/index.md)
 2. [iOS and Android tracking documentation](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/exception-tracking/index.md).

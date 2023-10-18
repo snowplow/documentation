@@ -45,6 +45,9 @@ Property | Title | Type | Description
   </div>
 </details>
 
+#### How to track?
+
+Use the [Web vitals plugin for the JavaScript tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/web-vitals/).
 
 ### Performance navigation timing context entity
 
@@ -105,7 +108,7 @@ Property | Type | Description
 
 ### How to track?
 
-1. TODO Web tracker link
+1. Using the [Performance Navigation Timing plugin for the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/performance-navigation-timing/index.md).
 
 ## Manually tracked timing events
 
@@ -139,5 +142,5 @@ Property | Type | Description | Required
 
 ### How to track?
 
-1. TODO Web tracker link
-2. [iOS and Android trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/index.md#creating-a-timing-event)
+1. Using the [JavaScript tracker on Web](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#tracktiming).
+2. [iOS and Android trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/index.md#creating-a-timing-event).

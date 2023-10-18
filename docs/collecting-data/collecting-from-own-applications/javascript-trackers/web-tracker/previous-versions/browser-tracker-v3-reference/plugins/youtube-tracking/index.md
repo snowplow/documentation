@@ -183,7 +183,7 @@ enableYouTubeTracking({
 
 Three schemas are used with this plugin:
 
-### [An unstructured event with identifying information](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0)
+### [A self-describing event with identifying information](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0)
 
 ```json
 {

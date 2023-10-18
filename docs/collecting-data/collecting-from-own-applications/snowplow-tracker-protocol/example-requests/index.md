@@ -1,7 +1,5 @@
 ---
 title: "Example Tracker Requests"
-date: "2022-10-10"
-sidebar_position: 100
 ---
 
 # Example Tracker Requests

@@ -254,6 +254,10 @@ export const dbtSnowplowWebConfigSchema = {
       type: 'string',
       title: '(Redshift) Consent Preferences Context Table',
     },
+    snowplow__cwv_context: {
+      type: 'string',
+      title: '(Redshift) Core Web Vitals Table',
+    },
     snowplow__enable_load_tstamp: {
       type: 'boolean',
       title: '(Redshift) Enable load_tstamp',

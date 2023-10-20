@@ -110,6 +110,7 @@ Redshift and Postgres use a [shredded](/docs/pipeline-components-and-application
 | `yauaa_context`       | `nl_basjes_yauaa_context_1`                            |
 | `consent_cmp_visible` | `com_snowplowanalytics_snowplow_cmp_visible_1`         |
 | `consent_preferences` | `com_snowplowanalytics_snowplow_consent_preferences_1` |
+| `cwv_context`         | `com_snowplowanalytics_snowplow_web_vitals_1`          |
 
 
 | Variable Name        | Description                                                                                                                                                                                                                                                                                                                                                                                                          | Default |
@@ -237,6 +238,7 @@ export const GROUPS = [
                                           "snowplow__ua_parser_context",
                                           "snowplow__yauaa_context",
                                           "snowplow__consent_cmp_visible",
+                                          "snowplow__cwv_context",
                                           "snowplow__consent_preferences",
                                           "snowplow__enable_load_tstamp",
                                           "snowplow__derived_tstamp_partitioned"] }

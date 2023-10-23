@@ -2,6 +2,10 @@
 title: "App & tracker information"
 ---
 
+```mdx-code-block
+import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
+```
+
 Information about the app and the tracker instance that the events originate from is tracked using:
 
 1. Atomic event properties
@@ -16,7 +20,7 @@ Tracker payload parameter | Atomic table field | Type | Description | Example va
 `tna` | `name_tracker` | text | The tracker namespace | `tracker_1`
 `aid` | `app_id` | text | Unique identifier for website / application | `snow-game-android`
 `p` | `platform` | text | The platform the app runs on | `web`, `mob`, `app`
-`tv` | `v_tracker` | text | Identifier for Snowplow tracker | `js-2.16.2`
+`tv` | `v_tracker` | text | Identifier for Snowplow tracker. The format follows the convention of `TRACKER_NAME-TRACKER_VERSION` | `js-2.16.2`
 
 :::info Tracker namespace
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that _does not_ contain a colon or semi-colon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
@@ -47,34 +51,15 @@ TODO
 
 ## Application context entity on mobile apps
 
- | 
----|---
-Type | Context entity
-Schema | `iglu://com.snowplowanalytics.mobile/application/jsonschema/1-0-0` 
-Web | ❌
-Mobile | ✅
-Atomic table field name | `context_com_snowplowanalytics_mobile_application_1`
-Tracked automatically | ✅
+This context entity is automatically tracked with events on mobile apps and gives information about the app version and build number.
 
-### Example payload
-
-version | build
----|---
-1.1.0 | s9f2k2d
-
-<details>
-  <summary>Application context entity schema properties</summary>
-  <div>
-
-The [application context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) contains two properties:
-
-| Property | Type | Description | Required in schema |
-| --- | --- | --- | --- |
-| `version` | String | Version number of the application e.g `1.1.0` | Yes |
-| `build` | String | Build name of the application e.g `s9f2k2d` or `1.1.0 beta` | Yes |
-
-  </div>
-</details>
+<SchemaProperties
+  overview={{event: false, web: false, mobile: true, automatic: true}}
+  example={{
+    "version": "1.1.0",
+    "build": "s9f2k2d",
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application context which automatically tracks version number and build name when using our mobile SDK's.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "version": { "type": "string", "description": "Version number of the application e.g 1.1.0", "maxLength": 255 }, "build": { "type": "string", "description": "Build name of the application e.g s9f2k2d or 1.1.0 beta", "maxLength": 255 } }, "required": ["version", "build"], "additionalProperties": false }} />
 
 ### How to track?
 

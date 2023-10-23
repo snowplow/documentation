@@ -1,8 +1,6 @@
 ---
-title: "Page activity events"
+title: "Page activity events (page pings)"
 ---
-
-#### Page Pings
 
 Page pings are used to record users engaging with content on a web page after it has originally loaded. For example, it can be used to track how far down an article a user scrolls.
 

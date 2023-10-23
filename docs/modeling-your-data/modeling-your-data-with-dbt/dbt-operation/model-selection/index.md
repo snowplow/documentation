@@ -80,5 +80,5 @@ However we can leverage dbt's `ls` command in conjunction with shell substitutio
 For example to run just the page views module asynchronously:
 
 ```bash title = "Do this instead"
-dbt run --select +snowplow_web.page_views --vars "{'models_to_run': '$(dbt ls --m  +snowplow_web.page_views --output name)'}"
+dbt run --select +snowplow_web.page_views --vars "{'models_to_run': '$(dbt ls --select +snowplow_web.page_views --output name)'}"
 ```

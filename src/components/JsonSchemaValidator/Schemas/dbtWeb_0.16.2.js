@@ -7,8 +7,10 @@ export const Schema = {
       items: {
         title: "Type",
         oneOf: [
-          { type: 'string',
-            title: "Column Name" },
+          {
+            type: 'string',
+            title: "Column Name"
+          },
           {
             type: 'object',
             title: "SQL & Alias",
@@ -45,7 +47,7 @@ export const Schema = {
       title: 'Dev Target',
       description:
         'Target name of your development environment as defined in your `profiles.yml` file',
-        group: 'Warehouse and Tracker',
+      group: 'Warehouse and Tracker',
     },
     snowplow__events_table: {
       type: 'string',
@@ -74,7 +76,7 @@ export const Schema = {
       title: 'Sessions Table',
       description:
         'The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref("snowplow_web_sessions_custom") }}',
-        group: 'Warehouse and Tracker',
+      group: 'Warehouse and Tracker',
     },
     snowplow__allow_refresh: {
       type: 'boolean',
@@ -345,14 +347,14 @@ export const Schema = {
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
       items: {
-          type: 'object',
-          title: "Identifier",
-          properties: {
-            schema: { type: 'string' }, // TODO: add regex here to make valid context/unstruct or atomic?
-            field: { type: 'string' } // TODO: add regex here to make valid SQL name?
-          },
-          required: ['schema', 'field'],
-          additionalProperties: false
+        type: 'object',
+        title: "Identifier",
+        properties: {
+          schema: { type: 'string' }, // TODO: add regex here to make valid context/unstruct or atomic?
+          field: { type: 'string' } // TODO: add regex here to make valid SQL name?
+        },
+        required: ['schema', 'field'],
+        additionalProperties: false
       },
       uniqueItems: true,
     },
@@ -374,14 +376,14 @@ export const Schema = {
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
       items: {
-          type: 'object',
-          title: "Identifier",
-          properties: {
-            schema: { type: 'string' }, // TODO: add regex here to make valid context/unstruct or atomic?
-            field: { type: 'string' } // TODO: add regex here to make valid SQL name?
-          },
-          required: ['schema', 'field'],
-          additionalProperties: false
+        type: 'object',
+        title: "Identifier",
+        properties: {
+          schema: { type: 'string' }, // TODO: add regex here to make valid context/unstruct or atomic?
+          field: { type: 'string' } // TODO: add regex here to make valid SQL name?
+        },
+        required: ['schema', 'field'],
+        additionalProperties: false
       },
       uniqueItems: true,
     },
@@ -425,29 +427,29 @@ export const Schema = {
       type: 'string',
       title: '(Redshift) Entities or SDEs',
       warehouse: 'Redshift',
-      group: 'Warehouse Specific',
-      type: 'array',
-      description: '> Click the plus sign to add a new entry',
-      minItems: 0,
-      items: {
+        group: 'Warehouse Specific',
+        type: 'array',
+        description: '> Click the plus sign to add a new entry',
+        minItems: 0,
+        items: {
           type: 'object',
           title: "Entity or SDE",
-          properties: {
-            name: { type: 'string', description: 'Table name' }, // TODO: add regex here to make valid context/unstruct table name
-            prefix: { type: 'string', description: 'Prefix to add to columns' }, // TODO: add regex here to make valid SQL name?
-            alias: { type: 'string', description: 'Table alias for the subquery' }, // TODO: add regex here to make valid SQL alias?
-            single_entity: { type: 'boolean', title: 'Is single entity?'}
-          },
-          required: ['name', 'prefix'],
-          additionalProperties: false
-      },
+            properties: {
+              name: { type: 'string', description: 'Table name' }, // TODO: add regex here to make valid context/unstruct table name
+              prefix: { type: 'string', description: 'Prefix to add to columns' }, // TODO: add regex here to make valid SQL name?
+              alias: { type: 'string', description: 'Table alias for the subquery' }, // TODO: add regex here to make valid SQL alias?
+              single_entity: { type: 'boolean', title: 'Is single entity?'}
+            },
+            required: ['name', 'prefix'],
+            additionalProperties: false
+        },
       uniqueItems: true,
     },
 
     snowplow__page_view_stitching: {
       type: 'boolean',
       title: 'Enable Page View Stitching',
-      group: 'Operation and Logic',
+      group: 'Operation and Logic', 
     },
   },
 }

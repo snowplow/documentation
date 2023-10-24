@@ -37,9 +37,8 @@ export const ObjectFieldTemplateGroupsGenerator2 = () => (props) => {
   if (props.idSchema['$id'] === 'root') {
     // Get all the group names in a dict, with each field in the array that is the key
     const groupNames = {};
-    Object.keys(props.schema.properties).forEach((key, index) => 
-    {
-      if(props.schema.properties[key].group in groupNames) {
+    Object.keys(props.schema.properties).forEach((key, index) => {
+      if (props.schema.properties[key].group in groupNames) {
         groupNames[props.schema.properties[key].group].push(key)
       } else { //Need to add the key and the array
         groupNames[props.schema.properties[key].group] = [key]
@@ -89,30 +88,30 @@ export const lightTheme = createTheme({
 
 
 // Section for drop down button
-export function SelectSchemaVersion({onChange, versions, label}) {
-  
+export function SelectSchemaVersion({ onChange, versions, label }) {
+
   return (
     <>
-    <Autocomplete
-      disablePortal
-      id="dbt-select-schema-version"
-      options={versions}
-      onChange = {
-        (event, newValue) => {
-          {onChange(newValue)};
+      <Autocomplete
+        disablePortal
+        id="dbt-select-schema-version"
+        options={versions}
+        onChange={
+          (event, newValue) => {
+            { onChange(newValue) };
+          }
         }
-      }
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label={label} />}
-    />
-  </>
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label={label} />}
+      />
+    </>
   );
 }
 
 export const JsonSchemaGenerator = (props) => {
   const [formData, setFormData] = React.useState(null)
   const { colorMode, setColorMode } = useColorMode()
-  
+
   return (
     <>
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
@@ -143,67 +142,67 @@ export const JsonSchemaGenerator = (props) => {
   )
 }
 
-export function JsonToTable({data}) {
-    const properties = data.properties;
-    
-    // Initialize an empty object to store the grouped objects
-    const groupedObjects = {};
+export function JsonToTable({ data }) {
+  const properties = data.properties;
 
-    // Iterate through the keys of the main object
-    for (const key in properties) {
-      const innerObject = properties[key];
-      const group = innerObject.group;
+  // Initialize an empty object to store the grouped objects
+  const groupedObjects = {};
 
-      // If the group doesn't exist in the groupedObjects, create an empty array for it
-      if (!groupedObjects[group]) {
-        groupedObjects[group] = [];
-      }
+  // Iterate through the keys of the main object
+  for (const key in properties) {
+    const innerObject = properties[key];
+    const group = innerObject.group;
 
-      // Push the inner object into the corresponding group
-      groupedObjects[group].push(innerObject);
+    // If the group doesn't exist in the groupedObjects, create an empty array for it
+    if (!groupedObjects[group]) {
+      groupedObjects[group] = [];
     }
 
-    const columns = [
-      { 
-        field: 'variableName', 
-        headerName: 'Variable Name',
-        description: 'The name of the variable',
-        renderCell: (params) => (
-          <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
-        ),
-      },
-      {
-        field: 'longDescription',
-        headerName: 'Description',
-        description: 'A description of the variables usage',
-        renderCell: (params) => (
-          <Tooltip title={params.value}>
-            <span>{params.value}</span>
-          </Tooltip>
-        ),
-      },
-      {
-        field: 'default',
-        headerName: 'Default',
-        description: 'The default value in the package'
-      },
-    ];
+    // Push the inner object into the corresponding group
+    groupedObjects[group].push(innerObject);
+  }
 
-    const columnsWithWarehouse = [{
-      field: 'warehouse',
-      headerName: 'Warehouse',
-      description: 'The warehouse the field is relevant for',
-      filterable: true
-    },].concat(columns)
+  const columns = [
+    {
+      field: 'variableName',
+      headerName: 'Variable Name',
+      description: 'The name of the variable',
+      renderCell: (params) => (
+        <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
+      ),
+    },
+    {
+      field: 'longDescription',
+      headerName: 'Description',
+      description: 'A description of the variables usage',
+      renderCell: (params) => (
+        <Tooltip title={params.value}>
+          <span>{params.value}</span>
+        </Tooltip>
+      ),
+    },
+    {
+      field: 'default',
+      headerName: 'Default',
+      description: 'The default value in the package'
+    },
+  ];
 
-    const rows = Object.keys(properties).map((list, index) => (
-      {id: index, variableName: list.substring(10), longDescription: properties[list].description, default: properties[list].type, group: properties[list].group, warehouse: properties[list].warehouse}
-    ))
+  const columnsWithWarehouse = [{
+    field: 'warehouse',
+    headerName: 'Warehouse',
+    description: 'The warehouse the field is relevant for',
+    filterable: true
+  },].concat(columns)
 
-    return(
-      <>
-        {Object.keys(groupedObjects).map((header, index) => (
-          <>
+  const rows = Object.keys(properties).map((list, index) => (
+    { id: index, variableName: list.substring(10), longDescription: properties[list].description, default: properties[list].type, group: properties[list].group, warehouse: properties[list].warehouse }
+  ))
+
+  return (
+    <>
+      {Object.keys(groupedObjects).map((header, index) => (
+        <>
           <h3>{header}</h3>
           <DataGridPro
             autosizeOnMount
@@ -223,7 +222,7 @@ export function JsonToTable({data}) {
               .sort((a, b) => a.variableName.localeCompare(b.variableName)) // Sort based on 'variableName'
             }
             columns={header != 'Warehouse Specific' ? columns : columnsWithWarehouse}
-            slots={{ toolbar: GridToolbar }} 
+            slots={{ toolbar: GridToolbar }}
             disableColumnSelector
             disableExport
             slotProps={{
@@ -234,33 +233,33 @@ export function JsonToTable({data}) {
               },
             }}
           />
-          </>
-        ))}
-      </>
-    )
+        </>
+      ))}
+    </>
+  )
 };
 
-export const DbtCongfigurationPage = ({schemaName, versions, label, output, template, component}) => {
-    const [schemaVersion, setSchemaVersion] = React.useState(null);
+export const DbtCongfigurationPage = ({ schemaName, versions, label, output, template, component }) => {
+  const [schemaVersion, setSchemaVersion] = React.useState(null);
 
-    if (schemaVersion === null || schemaVersion === undefined) {
-      return(<>
-        <SelectSchemaVersion onChange={setSchemaVersion} versions={versions} label={label}/>
-        <p>Please select a version to see the configuration options</p>
-      </>
-      )
-    }
-    
-    const versionedSchema = schemaImports[schemaName + '_' + schemaVersion].Schema;
-    
-    return (
-        <>
-        <SelectSchemaVersion onChange={setSchemaVersion} versions={versions} label={label}/>
-        <JsonToTable data={versionedSchema}/>
-        <JsonSchemaGenerator versionedSchema={versionedSchema} template={template} output={output}/>
-        </>
+  if (schemaVersion === null || schemaVersion === undefined) {
+    return (<>
+      <SelectSchemaVersion onChange={setSchemaVersion} versions={versions} label={label} />
+      <p>Please select a version to see the configuration options</p>
+    </>
     )
-  
+  }
+
+  const versionedSchema = schemaImports[schemaName + '_' + schemaVersion].Schema;
+
+  return (
+    <>
+      <SelectSchemaVersion onChange={setSchemaVersion} versions={versions} label={label} />
+      <JsonToTable data={versionedSchema} />
+      <JsonSchemaGenerator versionedSchema={versionedSchema} template={template} output={output} />
+    </>
+  )
+
 }
 
 

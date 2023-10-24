@@ -48,7 +48,7 @@ export const ObjectFieldTemplateGroupsGenerator2 = () => (props) => {
       <>
         {Object.keys(groupNames).map((group, index) => {
           // filter to just the relevant props
-          const childProps = getPropsForGroup(groupNames[group], props)
+          const childProps = getPropsForGroup2(groupNames[group], props)
           return (
             <>
               <Details summary={group}>
@@ -64,9 +64,7 @@ export const ObjectFieldTemplateGroupsGenerator2 = () => (props) => {
 }
 
 // Filter props to where they have the name listed in the groups fields
-export const getPropsForGroup = (groupValues, props) => {
-  console.log(groupValues)
-  console.log(props)
+export const getPropsForGroup2 = (groupValues, props) => {
   return {
     ...props,
     properties: props.properties.filter((p) => groupValues.includes(p.name)).sort((a, b) => a.name.localeCompare(b.name)),
@@ -336,4 +334,13 @@ export const ObjectFieldTemplateGroupsGenerator = (groups) => (props) => {
     )
   }
   return <ObjectFieldTemplates {...props} />
+}
+
+// DEPRECATED, to remove from all places
+// Filter props to where they have the name listed in the groups fields
+export const getPropsForGroup = (group, props) => {
+  return {
+    ...props,
+    properties: props.properties.filter((p) => group.fields.includes(p.name)).sort((a, b) => a.name.localeCompare(b.name)),
+}
 }

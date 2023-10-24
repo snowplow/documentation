@@ -52,7 +52,7 @@ Now you will need to run the below script to run only what is needed for your ne
 
 
 ```bash
-dbt run --select +my_new_model --vars "{'models_to_run': '$(dbt ls --select  +my_new_model --output name)', 'snowplow__backfill_limit_days': 90}"
+dbt run --select +my_new_model --vars "{'models_to_run': '$(dbt ls --select  +my_new_model --output name | tail -n +4)', 'snowplow__backfill_limit_days': 90}"
 ```
 
 ```mermaid

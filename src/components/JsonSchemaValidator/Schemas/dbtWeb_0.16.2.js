@@ -32,14 +32,16 @@ export const Schema = {
       type: 'string',
       title: 'Schema',
       description: 'Schema (dataset) that contains your atomic events',
-      longDescription: 'Random blah blah',
-      packageDefault: 'test',
+      longDescription: 'The schema (dataset for BigQuery) that contains your atomic events table.',
+      packageDefault: 'atomic',
       group: 'Warehouse and Tracker',
     },
     snowplow__database: {
       type: 'string',
       title: 'Database',
       description: 'Database that contains your atomic events',
+      longDescription: 'The database that contains your atomic events table.',
+      packageDefault: 'target.database',
       group: 'Warehouse and Tracker',
     },
     snowplow__dev_target_name: {
@@ -47,12 +49,16 @@ export const Schema = {
       title: 'Dev Target',
       description:
         'Target name of your development environment as defined in your `profiles.yml` file',
+      longDescription: 'The [target name](https://docs.getdbt.com/reference/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#manifest-tables) section for more details.',
+      packageDefault: 'dev',
       group: 'Warehouse and Tracker',
     },
     snowplow__events_table: {
       type: 'string',
       title: 'Events Table',
       description: 'The name of the table that contains your atomic events',
+      longDescription: 'The name of the table that contains your atomic events.',
+      packageDefault: 'events',
       group: 'Warehouse and Tracker',
     },
     snowplow__heartbeat: {
@@ -61,6 +67,8 @@ export const Schema = {
       title: 'Heartbeat',
       description:
         'Page ping heartbeat time as defined in your tracker configuration',
+      longDescription: 'Page ping heartbeat time as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings).',
+      packageDefault: '10',
       group: 'Warehouse and Tracker',
     },
     snowplow__min_visit_length: {
@@ -69,6 +77,8 @@ export const Schema = {
       title: 'Min Visit length',
       description:
         'Minimum visit length as defined in your tracker configuration',
+      longDescription: 'Minimum visit length as defined in your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings).',
+      packageDefault: '5',
       group: 'Warehouse and Tracker',
     },
     snowplow__sessions_table: {
@@ -77,17 +87,23 @@ export const Schema = {
       description:
         'The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref("snowplow_web_sessions_custom") }}',
       group: 'Warehouse and Tracker',
+      longDescription: 'The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref(\'snowplow_web_sessions_custom\') }}`. Please see the [README](https://github.com/snowplow/dbt-snowplow-web/tree/main/custom_example) in the `custom_example` directory for more information on this sort of implementation.',
+      packageDefault: '"{{ ref( \'snowplow_web_sessions\' ) }}"',
     },
     snowplow__allow_refresh: {
       type: 'boolean',
       title: 'Allow Refresh',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
     },
     snowplow__backfill_limit_days: {
       type: 'number',
       minimum: 0,
       title: 'Backfill Limit',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
       description:
         'The maximum numbers of days of new data to be processed since the latest event processed',
     },
@@ -95,6 +111,8 @@ export const Schema = {
       title: 'Conversion Definition',
       group: 'Operation and Logic',
       description: '> Click the plus sign to add a new entry',
+      longDescription: '',
+      packageDefault: '',
       type: 'array',
       minItems: 0,
       items: {
@@ -136,6 +154,8 @@ export const Schema = {
       minimum: 1,
       title: 'CWV Days To Measure',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
       description:
         'The number of days to use for web vital measurements (if enabled)',
     },
@@ -145,6 +165,8 @@ export const Schema = {
       maximum: 100,
       title: 'CWV Percentile',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
       description:
         'The percentile that the web vitals measurements that are produced for all page views (if enabled)',
     },
@@ -153,23 +175,31 @@ export const Schema = {
       minimum: 0,
       title: 'Days Late Allowed',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
       description:
         'The maximum allowed number of days between the event creation and it being sent to the collector',
     },
     snowplow__limit_page_views_to_session: {
       type: 'boolean',
       title: 'Limit Page View to Session',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
     },
     snowplow__list_event_counts: {
       type: 'boolean',
       title: 'List Per-Event Counts',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
     },
     snowplow__lookback_window_hours: {
       type: 'number',
       minimum: 0,
       title: 'Event Lookback Window',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
       description:
         'The number of hours to look before the latest event processed - to account for late arriving data, which comes out of order',
@@ -178,6 +208,8 @@ export const Schema = {
       type: 'number',
       minimum: 0,
       title: 'Max Session Length',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
       description:
         'The maximum allowed session length in days. For a session exceeding this length, all events after this limit will stop being processed',
@@ -186,6 +218,8 @@ export const Schema = {
       type: 'number',
       minimum: 0,
       title: 'Session Lookback Window',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
       description:
         'Number of days to limit scan on `snowplow_web_base_sessions_lifecycle_manifest` manifest',
@@ -193,6 +227,8 @@ export const Schema = {
     snowplow__session_stitching: {
       type: 'boolean',
       title: 'Enable Session Stitching',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
     },
     snowplow__start_date: {
@@ -200,12 +236,16 @@ export const Schema = {
       format: 'date',
       title: 'Start Date',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
       description:
         'The date to start processing events from in the package on first run or a full refresh, based on `collector_tstamp`',
     },
     snowplow__total_all_conversions: {
       type: 'boolean',
       title: 'Total All Conversions',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
     },
     snowplow__upsert_lookback_days: {
@@ -213,6 +253,8 @@ export const Schema = {
       minimum: 0,
       title: 'Upsert Lookback Days',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
       description:
         'Number of days to look back over the incremental derived tables during the upsert',
     },
@@ -221,42 +263,58 @@ export const Schema = {
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
       title: 'App IDs',
+      longDescription: '',
+      packageDefault: '',
       group: 'Contexts, Filters, and Logs',
       items: { type: 'string' },
     },
     snowplow__enable_consent: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       title: 'Enable Consent Module',
     },
     snowplow__enable_cwv: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       title: 'Enable Core Web Vitals Module',
     },
     snowplow__enable_iab: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       title: 'Enable IAB',
     },
     snowplow__enable_ua: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       title: 'Enable UA',
     },
     snowplow__enable_yauaa: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       title: 'Enable YAUAA',
     },
     snowplow__has_log_enabled: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       title: 'Enable Run Logs',
     },
     snowplow__ua_bot_filter: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       title: 'Filter Bots',
     },
     snowplow__databricks_catalog: {
@@ -264,85 +322,109 @@ export const Schema = {
       title: '(Databricks) Catalog',
       warehouse: 'Databricks',
       group: 'Warehouse Specific',
+      longDescription: '',
+      packageDefault: '',
       description: 'The catalogue your atomic events table is in',
     },
     snowplow__page_view_context: {
       type: 'string',
       warehouse: 'Redshift',
       title: '(Redshift) Page View Context Table',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
     snowplow__iab_context: {
       type: 'string',
       warehouse: 'Redshift',
       title: '(Redshift) iab Context Table',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
     snowplow__ua_parser_context: {
       type: 'string',
       warehouse: 'Redshift',
       title: '(Redshift) UA Context Table',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
     snowplow__yauaa_context: {
       type: 'string',
       warehouse: 'Redshift',
       title: '(Redshift) YAUAA Context Table',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
     snowplow__consent_cmp_visible: {
       type: 'string',
       warehouse: 'Redshift',
       title: '(Redshift) CMP Visible Context Table',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
     snowplow__consent_preferences: {
       type: 'string',
       warehouse: 'Redshift',
       title: '(Redshift) Consent Preferences Context Table',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
     snowplow__cwv_context: {
       type: 'string',
       warehouse: 'Redshift',
       title: '(Redshift) Core Web Vitals Table',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
     snowplow__enable_load_tstamp: {
       type: 'boolean',
       warehouse: 'Redshift',
       title: '(Redshift) Enable load_tstamp',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
     snowplow__derived_tstamp_partitioned: {
       type: 'boolean',
       warehouse: 'Bigquery',
       title: '(Bigquery) Dervied Timestamp Partition',
+      longDescription: '',
+      packageDefault: '',
       group: 'Warehouse Specific',
     },
-
     snowplow__ga4_categories_seed: {
       type: 'string',
       title: 'Seed reference for GA4 Categories',
+      longDescription: 'Name of the model for the GA4 category mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).',
+      packageDefault: 'snowplow_web_dim_ga4_source_categories',
       group: 'Warehouse and Tracker',
     },
     snowplow__geo_mapping_seed: {
       type: 'string',
       title: 'Seed reference for geo mapping',
+      longDescription: 'Name of the model for the Geo mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).',
+      packageDefault: 'snowplow_web_dim_geo_country_mapping',
       group: 'Warehouse and Tracker',
     },
     snowplow__rfc_5646_seed: {
       type: 'string',
       title: 'Seed reference for rfc 5646 (language mapping)',
+      longDescription: 'Name of the model for the RFC 5646 (language) mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).',
+      packageDefault: 'snowplow_web_dim_rfc_5646_language_mapping',
       group: 'Warehouse and Tracker',
     },
-
-
-
     snowplow__session_identifiers: {
       type: 'string',
       title: 'Session Identifiers',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
       type: 'array',
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
@@ -361,17 +443,23 @@ export const Schema = {
     snowplow__session_sql: {
       type: 'string',
       title: 'SQL for your session identifier',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
     },
     snowplow__session_timestamp: {
       type: 'string',
       title: 'Timestamp used for incremental processing, should be your partition field',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
     },
     snowplow__user_identifiers: {
       type: 'string',
       title: 'User Identifiers',
       group: 'Operation and Logic',
+      longDescription: '',
+      packageDefault: '',
       type: 'array',
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
@@ -387,45 +475,53 @@ export const Schema = {
       },
       uniqueItems: true,
     },
-
     snowplow__user_sql: {
       type: 'string',
       title: 'SQL for your user identifier',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
     },
     snowplow__user_stitching_id: {
       type: 'string',
       title: 'Field used when stitching together users',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic',
     },
-
-
-
     snowplow__page_view_passthroughs: {
       title: 'Page View Passthroughs',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       $ref: '#/definitions/passthrough_vars'
     },
     snowplow__session_passthroughs: {
       title: 'Session Passthroughs',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       $ref: '#/definitions/passthrough_vars'
     },
     snowplow__user_first_passthroughs: {
       title: 'User First Passthroughs',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       $ref: '#/definitions/passthrough_vars'
     },
     snowplow__user_last_passthroughs: {
       title: 'User Last Passthroughs',
       group: 'Contexts, Filters, and Logs',
+      longDescription: '',
+      packageDefault: '',
       $ref: '#/definitions/passthrough_vars'
     },
-
-
     snowplow__entities_or_sdes: {
       type: 'string',
       title: '(Redshift) Entities or SDEs',
+      longDescription: '',
+      packageDefault: '',
       warehouse: 'Redshift',
         group: 'Warehouse Specific',
         type: 'array',
@@ -445,10 +541,11 @@ export const Schema = {
         },
       uniqueItems: true,
     },
-
     snowplow__page_view_stitching: {
       type: 'boolean',
       title: 'Enable Page View Stitching',
+      longDescription: '',
+      packageDefault: '',
       group: 'Operation and Logic', 
     },
   },

@@ -86,9 +86,8 @@ export const lightTheme = createTheme({
   },
 })
 
-
 // Section for drop down button
-export function SelectSchemaVersion({ onChange, versions, label }) {
+export function SelectSchemaVersion({ onChange, versions, label}) {
 
   return (
     <>
@@ -111,7 +110,7 @@ export function SelectSchemaVersion({ onChange, versions, label }) {
 export const JsonSchemaGenerator = (props) => {
   const [formData, setFormData] = React.useState(null)
   const { colorMode, setColorMode } = useColorMode()
-
+  console.log(props)
   return (
     <>
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
@@ -126,9 +125,9 @@ export const JsonSchemaGenerator = (props) => {
             validator={validator}
             showErrorList="bottom"
             templates={{
-              ObjectFieldTemplate: props.template
-                ? props.template
-                : ObjectFieldTemplateGroupsGenerator2,
+              ObjectFieldTemplate: props.group
+                ? ObjectFieldTemplateGroupsGenerator2()
+                : ObjectFieldTemplates,
             }}
             liveValidate
             {...props}
@@ -143,6 +142,7 @@ export const JsonSchemaGenerator = (props) => {
 }
 
 export function JsonToTable({ data }) {
+  const { colorMode, setColorMode } = useColorMode()
   const properties = data.properties;
 
   // Initialize an empty object to store the grouped objects
@@ -180,6 +180,7 @@ export function JsonToTable({ data }) {
           <span>{params.value}</span>
         </Tooltip>
       ),
+      flex: 1
     },
     {
       field: 'default',
@@ -196,7 +197,7 @@ export function JsonToTable({ data }) {
   },].concat(columns)
 
   const rows = Object.keys(properties).map((list, index) => (
-    { id: index, variableName: list.substring(10), longDescription: properties[list].description, default: properties[list].type, group: properties[list].group, warehouse: properties[list].warehouse }
+    { id: index, variableName: list.substring(10), longDescription: properties[list].longDescription, default: properties[list].packageDefault, group: properties[list].group, warehouse: properties[list].warehouse }
   ))
 
   return (
@@ -214,7 +215,7 @@ export function JsonToTable({ data }) {
             pagination
             initialState={{
               ...data.initialState,
-              pagination: { paginationModel: { pageSize: 5 } },
+              pagination: { paginationModel: { pageSize: 10 } },
             }}
             pageSizeOptions={[5, 10, 25, 50, 100]}
             rows={rows
@@ -232,6 +233,16 @@ export function JsonToTable({ data }) {
                 csvOptions: { disableToolbarButton: true },
               },
             }}
+            sx={{
+              ".MuiDataGrid-virtualScroller": {
+                borderTop: "1px solid rgba(224, 224, 224, 1)"
+              },
+              '.MuiDataGrid-cell': {
+                borderRight: `1px solid ${
+                  colorMode !== 'dark' ? '#E0E0E0' : '#303030'
+                }`,
+              },
+            }}
           />
         </>
       ))}
@@ -239,7 +250,7 @@ export function JsonToTable({ data }) {
   )
 };
 
-export const DbtCongfigurationPage = ({ schemaName, versions, label, output, template, component }) => {
+export const DbtCongfigurationPage = ({ schemaName, versions, label, output, group }) => {
   const [schemaVersion, setSchemaVersion] = React.useState(null);
 
   if (schemaVersion === null || schemaVersion === undefined) {
@@ -256,7 +267,7 @@ export const DbtCongfigurationPage = ({ schemaName, versions, label, output, tem
     <>
       <SelectSchemaVersion onChange={setSchemaVersion} versions={versions} label={label} />
       <JsonToTable data={versionedSchema} />
-      <JsonSchemaGenerator versionedSchema={versionedSchema} template={template} output={output} />
+      <JsonSchemaGenerator versionedSchema={versionedSchema} group={group} output={output} />
     </>
   )
 

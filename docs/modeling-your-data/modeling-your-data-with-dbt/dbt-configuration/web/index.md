@@ -11,6 +11,7 @@ import { dump } from 'js-yaml';
 
 export const packageVersions = ['0.16.2', '0.16.1']
 
+
 export const printYamlVariables = (data) => {
   return(
     <>
@@ -20,7 +21,7 @@ export const printYamlVariables = (data) => {
   )
 }
 
-<DbtCongfigurationPage schemaName='dbtWeb'  versions = {packageVersions} label = 'dbt web version' output={printYamlVariables} /> 
+<DbtCongfigurationPage schemaName='dbtWeb'  versions = {packageVersions} label = 'dbt web version' output={printYamlVariables} group /> 
 ```
 
 :::info
@@ -194,6 +195,10 @@ seeds:
 
 ```
 <SchemaSetterWSeeds output={printSchemaVariables}/>
+
+```mdx-code-block
+
+```
 
 
 ## Config Generator

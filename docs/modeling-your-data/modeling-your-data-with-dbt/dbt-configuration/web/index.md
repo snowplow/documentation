@@ -6,6 +6,21 @@ sidebar_position: 100
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import { DbtCongfigurationPage } from '@site/src/components/JsonSchemaValidator';
+import { dump } from 'js-yaml';
+
+export const packageVersions = ['0.16.2', '0.16.1']
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variables:</h4>
+    <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
+    </>
+  )
+}
+
+<DbtCongfigurationPage schemaName='dbtWeb'  versions = {packageVersions} label = 'dbt web version' output={printYamlVariables} /> 
 ```
 
 :::info
@@ -23,6 +38,7 @@ This package utilizes a set of variables that are configured to recommended valu
 All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
 
 :::
+
 
 ### Warehouse and tracker
 | Variable Name         | Description                                                                                                                                                                                                                                                                                                                                                                                                                          | Default                                      |
@@ -179,84 +195,6 @@ seeds:
 ```
 <SchemaSetterWSeeds output={printSchemaVariables}/>
 
-```mdx-code-block
-import { dump } from 'js-yaml';
-import { dbtSnowplowWebConfigSchema } from '@site/src/components/JsonSchemaValidator/dbtWeb.js';
-import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
-
-export const GROUPS = [
-  { title: "Warehouse and tracker", fields: ["snowplow__atomic_schema",
-                                            "snowplow__database",
-                                            "snowplow__dev_target_name",
-                                            "snowplow__events_table",
-                                            "snowplow__heartbeat",
-                                            "snowplow__ga4_categories_seed",
-                                            "snowplow__geo_mapping_seed",
-                                            "snowplow__min_visit_length",
-                                            "snowplow__rfc_5646_seed",
-                                            "snowplow__sessions_table"] },
-  { title: "Operation and Logic", fields: ["snowplow__allow_refresh",
-                                          "snowplow__backfill_limit_days",
-                                          "snowplow__conversion_events",
-                                          "snowplow__cwv_days_to_measure",
-                                          "snowplow__cwv_percentile",
-                                          "snowplow__days_late_allowed",
-                                          "snowplow__limit_page_views_to_session",
-                                          "snowplow__list_event_counts",
-                                          "snowplow__lookback_window_hours",
-                                          "snowplow__max_session_days",
-                                          "snowplow__page_view_stitching",
-                                          "snowplow__session_identifiers",
-                                          "snowplow__session_lookback_days",
-                                          "snowplow__session_sql",
-                                          "snowplow__session_stitching",
-                                          "snowplow__session_timestamp",
-                                          "snowplow__start_date",
-                                          "snowplow__total_all_conversions",
-                                          "snowplow__upsert_lookback_days",
-                                          "snowplow__user_identifiers",
-                                          "snowplow__user_sql",
-                                          "snowplow__user_stitching_id"
-                                          ] },
-  { title: "Contexts, Filters, and Logs", fields: ["snowplow__app_id",
-                                                  "snowplow__enable_consent",
-                                                  "snowplow__enable_cwv",
-                                                  "snowplow__enable_iab",
-                                                  "snowplow__enable_ua",
-                                                  "snowplow__enable_yauaa",
-                                                  "snowplow__has_log_enabled",
-                                                  "snowplow__page_view_passthroughs",
-                                                  "snowplow__session_passthroughs",
-                                                  "snowplow__ua_bot_filter",
-                                                  "snowplow__user_first_passthroughs",
-                                                  "snowplow__user_last_passthroughs",
-                                                  ] },
-  { title: "Warehouse Specific", fields: ["snowplow__databricks_catalog",
-                                          "snowplow__entities_or_sdes",
-                                          "snowplow__page_view_context",
-                                          "snowplow__iab_context",
-                                          "snowplow__ua_parser_context",
-                                          "snowplow__yauaa_context",
-                                          "snowplow__consent_cmp_visible",
-                                          "snowplow__cwv_context",
-                                          "snowplow__consent_preferences",
-                                          "snowplow__enable_load_tstamp",
-                                          "snowplow__derived_tstamp_partitioned"] }
-];
-
-export const printYamlVariables = (data) => {
-  return(
-    <>
-    <h4>Project Variables:</h4>
-    <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
-    </>
-  )
-}
-
-export const Template = ObjectFieldTemplateGroupsGenerator(GROUPS);
-```
 
 ## Config Generator
 You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
-
-<JsonApp schema={dbtSnowplowWebConfigSchema} output={printYamlVariables} template={Template}/>

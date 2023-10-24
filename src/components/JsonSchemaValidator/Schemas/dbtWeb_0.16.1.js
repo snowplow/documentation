@@ -1,4 +1,4 @@
-export const dbtSnowplowWebConfigSchema = {
+export const Schema = {
   "definitions": {
     passthrough_vars: {
       type: 'array',
@@ -29,9 +29,9 @@ export const dbtSnowplowWebConfigSchema = {
     snowplow__atomic_schema: {
       type: 'string',
       title: 'Schema',
-      description: 'Schema (dataset) that contains your atomic events',
+      description: 'Schema (dataset) that contains your atomic events hahahahahah',
       longDescription: 'Random blah blah',
-      package_default: 'test',
+      packageDefault: 'test',
     },
     snowplow__database: {
       type: 'string',

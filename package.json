@@ -26,6 +26,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.137",
     "@mui/material": "^5.12.3",
+    "@mui/x-data-grid-pro": "^6.16.3",
     "@rjsf/core": "~5.12.1",
     "@rjsf/mui": "~5.12.1",
     "@rjsf/utils": "~5.12.1",

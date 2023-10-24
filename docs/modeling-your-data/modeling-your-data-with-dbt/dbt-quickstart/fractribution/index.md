@@ -52,7 +52,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Set variables
 
-The package has some variables that need to be set before it can be run, you should edit these in your `dbt_project.yml` file. Further customization can be done via the variables listed in the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/fractribution/index.md).
+The package has some variables that need to be set before it can be run, you should edit these in your `dbt_project.yml` file. Further customization can be done via the variables listed in the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/fractribution/index.mdx).
 
 - `snowplow__conversion_window_start_date`: The start date in UTC for the window of conversions to include
 - `snowplow__conversion_window_end_date`: The end date in UTC for the window of conversions to include

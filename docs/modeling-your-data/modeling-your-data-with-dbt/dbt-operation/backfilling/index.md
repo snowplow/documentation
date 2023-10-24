@@ -10,7 +10,7 @@ When you first start using our packages, when you add [new custom models](/docs/
 
 By default our packages are set up to avoid processing large periods of data in one go, this helps to reduce the workload on your cloud, as well as reducing the impact of any issues in the data causing a single run to fail. This behavior is controlled by the `snowplow__backfill_limit_days` in all our incremental packages.
 
-When backfilling your data, either from a full refresh, it is recommended to increase the `snowplow__backfill_limit_days` variable to as high as you feel comfortable with to reduce the number of runs that need to complete to get your processed data up to date. In general increasing this to cover 3-6 months is a good balance between speed and number of runs. 
+When backfilling your data, either from a full refresh, it is recommended to increase the `snowplow__backfill_limit_days` variable to as high as you feel comfortable with to reduce the number of runs that need to complete to get your processed data up to date. In general increasing this to cover 3-6 months is a good balance between speed and number of runs.
 
 We also recommend doing this process manually, as until your data is up to date, no new data will be processed, so it may take many runs for your data to catch up with live tracking. Running locally you can do many runs back-to-back rather than wait for your scheduled runs to take place. You may also wish to warn any users of your data this is planned as it can lead to delays, and an initial full-refresh will remove any existing data from the derived tables.
 
@@ -22,7 +22,7 @@ If you have added a new model it will be processed from the value in your `snowp
 
 ## Blue-Green style Deployment
 
-As the process of backfilling data may take a long time depending on your data volumes, and during this time no new data will be processed, it may be preferable to backfill your model(s) in a staging environment and then deploy these derived tables into your production schema at a later date. 
+As the process of backfilling data may take a long time depending on your data volumes, and during this time no new data will be processed, it may be preferable to backfill your model(s) in a staging environment and then deploy these derived tables into your production schema at a later date.
 
 :::caution
 
@@ -37,7 +37,7 @@ Let's assume you have one schema named `prod` that is used by a regularly schedu
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    axisFormat  
+    axisFormat
     tickInterval 1day
     section New Model
     Unprocessed :crit, n1, 2020-01-01, 5d
@@ -46,20 +46,20 @@ gantt
 ```
 
 ### Step 1: Create and process new model only
-In a local environment, assuming you are using version control for your project, create a new branch and create your model in this branch. Next ensure you are using a profile/target and/or configure the package models so that they will write to the `staging` schema (or be prefixed with `staging` depending on your setup) instead of `prod`. 
+In a local environment, assuming you are using version control for your project, create a new branch and create your model in this branch. Next ensure you are using a profile/target and/or configure the package models so that they will write to the `staging` schema (or be prefixed with `staging` depending on your setup) instead of `prod`.
 
 Now you will need to run the below script to run only what is needed for your new model (see [specific model selection](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/#specific-model-selection) for more details on why). We've also increased the backfill limit days so this needs to be run fewer times.
 
 
 ```bash
-dbt run --select +my_new_model --vars "{'models_to_run': '$(dbt ls --m  +my_new_model --output name)', 'snowplow__backfill_limit_days': 90}"
+dbt run --select +my_new_model --vars "{'models_to_run': '$(dbt ls --select  +my_new_model --output name | tail -n +4)', 'snowplow__backfill_limit_days': 90}"
 ```
 
 ```mermaid
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    axisFormat  
+    axisFormat
     tickInterval 1day
     section New Model
     Unprocessed :crit, n1, after n2, 4d
@@ -74,7 +74,7 @@ Once you have run this enough times that the data is up-to-date, which you can i
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    axisFormat  
+    axisFormat
     tickInterval 1day
     section New Model
     Processed (in staging) :active, n2, 2020-01-01, 5d
@@ -99,7 +99,7 @@ Ensure your project is not running while you perform this step as it could cause
 
 :::
 
-If you were to now add this model to the project being run in `prod`, because the manifest table in `prod` (or more likely, `prod_snowplow_manifest`) has no record of this model, it will process it again from the start. To avoid this you need to add a record for this model into the manifest table. 
+If you were to now add this model to the project being run in `prod`, because the manifest table in `prod` (or more likely, `prod_snowplow_manifest`) has no record of this model, it will process it again from the start. To avoid this you need to add a record for this model into the manifest table.
 
 Again, some UIs may allow you to edit a table, but an `INSERT` statement is recommended e.g.
 

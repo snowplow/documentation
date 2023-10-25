@@ -115,7 +115,6 @@ module.exports = {
             label: 'GitHub',
             position: 'left',
           },
-
           {
             to: 'https://try.snowplowanalytics.com/?utm_content=hero-cta&utm_campaign=snowplow-docs',
             label: 'Try Snowplow for free',

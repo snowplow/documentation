@@ -9,11 +9,11 @@ import Form from '@rjsf/mui'
 import Details from '@theme/Details'
 import Tooltip from '@mui/material/Tooltip';
 
-import { DataGridPremium, GridToolbar,   useGridApiRef,  useKeepGroupedColumnsHidden, } from '@mui/x-data-grid-premium';
+import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, } from '@mui/x-data-grid-premium';
 
 import { LicenseInfo } from '@mui/x-license-pro';
 
-LicenseInfo.setLicenseKey(process.env.NEXT_PUBLIC_MUI_LICENSE_KEY);
+LicenseInfo.setLicenseKey('TODO: add the key here somehow');
 
 
 // Import all the schemas 
@@ -33,11 +33,9 @@ export const schemaImports = importAll(require.context('./Schemas/', false, /\.(
 export const ObjectFieldTemplates = Templates.ObjectFieldTemplate
 
 
-
-// template that uses the group part of each property?
+// template that uses the group part of each property as a detail block
 export const ObjectFieldTemplateGroupsGenerator2 = () => (props) => {
   // only apply difference at top level
-  // console.log(props);
   if (props.idSchema['$id'] === 'root') {
     // Get all the group names in a dict, with each field in the array that is the key
     const groupNames = {};
@@ -88,8 +86,8 @@ export const lightTheme = createTheme({
   },
 })
 
-// Section for drop down button
-export function SelectSchemaVersion({ onChange, versions, label}) {
+// Drop down button
+export function SelectSchemaVersion({ onChange, versions, label }) {
 
   return (
     <>
@@ -109,6 +107,7 @@ export function SelectSchemaVersion({ onChange, versions, label}) {
   );
 }
 
+// Config Generator
 export const JsonSchemaGenerator = (props) => {
   const [formData, setFormData] = React.useState(null)
   const { colorMode, setColorMode } = useColorMode()
@@ -143,6 +142,7 @@ export const JsonSchemaGenerator = (props) => {
   )
 }
 
+// Table of config details
 export function JsonToTable({ data }) {
   const { colorMode, setColorMode } = useColorMode()
   const properties = data.properties;
@@ -164,11 +164,13 @@ export function JsonToTable({ data }) {
     groupedObjects[group].push(innerObject);
   }
 
+  // column definitions for the MUI data grids
   const columns = [
     {
       field: 'variableName',
       headerName: 'Variable Name',
       description: 'The name of the variable',
+      // make these code format
       renderCell: (params) => (
         <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
       ),
@@ -177,6 +179,7 @@ export function JsonToTable({ data }) {
       field: 'longDescription',
       headerName: 'Description',
       description: 'A description of the variables usage',
+      // tooltip to show the full line on hover, doing auto-height means the columns can't be autosized
       renderCell: (params) => (
         <Tooltip title={params.value}>
           <span>{params.value}</span>
@@ -191,6 +194,7 @@ export function JsonToTable({ data }) {
     },
   ];
 
+  // only one table needs the warehouse column
   const columnsWithWarehouse = [{
     field: 'warehouse',
     headerName: 'Warehouse',
@@ -198,12 +202,13 @@ export function JsonToTable({ data }) {
     filterable: true
   },].concat(columns)
 
+  // generate the rows of data from the properties 
   const rows = Object.keys(properties).map((list, index) => (
     { id: index, variableName: list.substring(10), longDescription: properties[list].longDescription, default: properties[list].packageDefault, group: properties[list].group, warehouse: properties[list].warehouse }
   ))
 
+  // This just came from the MUI docs
   const apiRef = useGridApiRef();
-
   const initialState = useKeepGroupedColumnsHidden({
     apiRef,
     initialState: {
@@ -215,17 +220,18 @@ export function JsonToTable({ data }) {
     },
   });
 
+  // Loop over all the headers and output a table for each, filtering and sorting the rows per
   return (
     <>
       {Object.keys(groupedObjects).map((header, index) => (
         <>
           <h3>{header}</h3>
           <DataGridPremium
-            apiRef={apiRef} 
-            initialState={initialState} 
+            apiRef={apiRef}
+            initialState={initialState}
             autosizeOnMount
             autosizeOptions={{
-              columns: ['warehouse','variableName', 'longDescription', 'default'],
+              columns: ['warehouse', 'variableName', 'longDescription', 'default'],
               includeOutliers: true,
               includeHeaders: true,
             }}
@@ -251,9 +257,8 @@ export function JsonToTable({ data }) {
                 borderTop: "1px solid rgba(224, 224, 224, 1)"
               },
               '.MuiDataGrid-cell': {
-                borderRight: `1px solid ${
-                  colorMode !== 'dark' ? '#E0E0E0' : '#303030'
-                }`,
+                borderRight: `1px solid ${colorMode !== 'dark' ? '#E0E0E0' : '#303030'
+                  }`,
               },
             }}
           />
@@ -357,5 +362,5 @@ export const getPropsForGroup = (group, props) => {
   return {
     ...props,
     properties: props.properties.filter((p) => group.fields.includes(p.name)).sort((a, b) => a.name.localeCompare(b.name)),
-}
+  }
 }

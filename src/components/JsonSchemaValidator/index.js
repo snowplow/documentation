@@ -8,9 +8,13 @@ import validator from '@rjsf/validator-ajv8'
 import Form from '@rjsf/mui'
 import Details from '@theme/Details'
 import Tooltip from '@mui/material/Tooltip';
-import ReactMarkdown from 'react-markdown';
 
-import { DataGridPro, GridToolbar } from '@mui/x-data-grid-pro';
+import { DataGridPremium, GridToolbar,   useGridApiRef,  useKeepGroupedColumnsHidden, } from '@mui/x-data-grid-premium';
+
+import { LicenseInfo } from '@mui/x-license-pro';
+
+LicenseInfo.setLicenseKey(process.env.NEXT_PUBLIC_MUI_LICENSE_KEY);
+
 
 // Import all the schemas 
 function importAll(r) {
@@ -198,23 +202,34 @@ export function JsonToTable({ data }) {
     { id: index, variableName: list.substring(10), longDescription: properties[list].longDescription, default: properties[list].packageDefault, group: properties[list].group, warehouse: properties[list].warehouse }
   ))
 
+  const apiRef = useGridApiRef();
+
+  const initialState = useKeepGroupedColumnsHidden({
+    apiRef,
+    initialState: {
+      rowGrouping: {
+        model: ['warehouse'],
+      },
+      ...data.initialState,
+      pagination: { paginationModel: { pageSize: 10 } },
+    },
+  });
+
   return (
     <>
       {Object.keys(groupedObjects).map((header, index) => (
         <>
           <h3>{header}</h3>
-          <DataGridPro
+          <DataGridPremium
+            apiRef={apiRef} 
+            initialState={initialState} 
             autosizeOnMount
             autosizeOptions={{
-              columns: ['variableName', 'longDescription', 'default'],
+              columns: ['warehouse','variableName', 'longDescription', 'default'],
               includeOutliers: true,
-              includeHeaders: false,
+              includeHeaders: true,
             }}
             pagination
-            initialState={{
-              ...data.initialState,
-              pagination: { paginationModel: { pageSize: 10 } },
-            }}
             pageSizeOptions={[5, 10, 25, 50, 100]}
             rows={rows
               .filter(row => row.group === header) // Filter rows based on 'group' property

@@ -1,19 +1,18 @@
 ---
-title: "First party tracking"
+title: "First-party tracking"
 sidebar_position: 3
-
 ---
 
-# First party tracking
+# First-party tracking
 This feature lets you configure a custom collector domain to match your primary domain, enabling first-party cookies.
 
-When your collector domain (e.g. `collector.snwplow.net`) does not match your primary domain (e.g. `flowershop.ai`), web browsers can impose limitations on the collected data. For example, cookies set by the collector might be only kept for 7 days. 
+When your collector domain (e.g. `collector.snwplow.net`) does not match your primary domain (e.g. `flowershop.ai`), web browsers can impose limitations on the collected data. For example, cookies set by the collector might be only kept for 7 days.
 
 With first-party tracking, you can configure a custom collector domain (e.g. `c.flowershop.ai`) to match your primary domain (e.g. `flowershop.ai`), sidestepping these limitations.
 
 :::info
 Before starting, ensure you can access and edit the configuration of your hosting/DNS provider. This is necessary to complete the implementation.
-::: 
+:::
 
 ## Selecting the domain names
 When configuring first-party tracking, you first need to set a collector domain where the events will be sent to by the web browser. This must be a subdomain of your primary domain. For example, for `flowershop.ai` it could be `t.flowershop.ai` or `c.app.flowershop.ai`.
@@ -30,10 +29,10 @@ For Snowplow collector to be able to set the cookie, the cookie domain must be a
 
 Here are a few examples:
 
-| Collector domain    | Cookie domain     | Cookie available on                            |
-|:--------------------|:------------------|:-----------------------------------------------|
-| t.flowershop.ai     | flowershop.ai     | flowershop.ai, <br/>app.flowershop.ai, etc          |
-| c.app.flowershop.ai | app.flowershop.ai | app.flowershop.ai, <br/>beta.app.flowershop.ai, etc |
+| Collector domain      | Cookie domain       | Cookie available on                            |
+|:----------------------|:--------------------|:-----------------------------------------------|
+| `t.flowershop.ai`     | `flowershop.ai`     | `flowershop.ai`, <br/> `app.flowershop.ai`, etc          |
+| `c.app.flowershop.ai` | `app.flowershop.ai` | `app.flowershop.ai`, <br/> `beta.app.flowershop.ai`, etc |
 
 
 When you enter a collector domain, we will automatically suggest a cookie domain. You can edit it to suit your use case.
@@ -44,12 +43,12 @@ When you enter a collector domain, we will automatically suggest a cookie domain
 Setting the cookie domain to your primary domain has the benefit of allowing you to track users across any subdomains.
 For example, a cookie domain of `flowershop.ai` would work across all the following subdomains (and would allow you to track the same user ids):
 
-- docs.flowershop.ai
-- app.flowershop.ai
-- test.app.flowershop.ai
-- flowershop.ai
+- `docs.flowershop.ai`
+- `app.flowershop.ai`
+- `test.app.flowershop.ai`
+- `flowershop.ai`
 
-In some cases, you may wish to separate the tracking of user behaviour for different subdomains. 
+In some cases, you may wish to separate the tracking of user behaviour for different subdomains.
 
 For example, if you own both `gardening.primary-domain.co.uk` and `insurance.primary-domain.co.uk` and only want to track users on `gardening.primary-domain.co.uk`, you can select that as your cookie domain and `c.gardening.primary-domain.co.uk` as your collector domain.
 </details>
@@ -63,7 +62,7 @@ When the records are ready, you will receive a confirmation by email.
 
 ![create_dns_records](images/Screenshot_create_dns_records.png)
 
-Once the DNS records are available, copy them into your domain provider. 
+Once the DNS records are available, copy them into your domain provider.
 
 The set of DNS records will contain a special record that allows BDP Cloud to verify that the setup is correct.
 
@@ -75,9 +74,9 @@ Once BDP Cloud verifies your DNS setup, the status in the bottom left will chang
 
 ![dns_records](images/Screenshot_dns_records.png)
 
-## Updating your tracking code 
+## Updating your tracking code
 
-Once the new custom domain is verified, you can implement the tracking code. 
+Once the new custom domain is verified, you can implement the tracking code.
 
 This can be done in several ways:
 
@@ -86,4 +85,3 @@ This can be done in several ways:
 - If you wish to implement tracking or already have tracking with one of our other trackers then you will need to manually change the collector URL.
 
 ![implement_new_tracking_snippet](images/Screenshot_implement_new_tracking_snippet.png)
-

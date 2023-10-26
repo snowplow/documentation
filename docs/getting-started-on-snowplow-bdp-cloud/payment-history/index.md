@@ -1,6 +1,6 @@
 ---
 title: "Viewing your payment history"
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # Viewing your payment history

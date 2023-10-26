@@ -18,6 +18,7 @@ const plugin = () => {
     IAB: 'Interactive Advertising Bureau',
     IDFA: 'Identifier for Advertisers',
     IDFV: 'Identifier for Vendors',
+    ITP: 'Intelligent Tracking Prevention',
     KCL: 'Kinesis Client Library',
     OSS: 'Open Source Software',
     QA: 'Quality Assurance',

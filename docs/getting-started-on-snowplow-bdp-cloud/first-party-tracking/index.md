@@ -10,6 +10,8 @@ When your collector domain (e.g. `collector.snwplow.net`) does not match your pr
 
 With first-party tracking, you can configure a custom collector domain (e.g. `c.flowershop.ai`) to match your primary domain (e.g. `flowershop.ai`), sidestepping these limitations.
 
+Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use an ID service](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/advanced-usage/using-an-id-service/index.md) to fully persist the cookies.
+
 :::info
 Before starting, ensure you can access and edit the configuration of your hosting/DNS provider. This is necessary to complete the implementation.
 :::

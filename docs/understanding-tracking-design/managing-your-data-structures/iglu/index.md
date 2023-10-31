@@ -31,7 +31,7 @@ First, design the schema for your custom event (or entity). For example:
      "type": "object",
      "properties": {
          "id": {
-             "type": "string"
+             "type": "string",
              "minLength": 1
          },
          "target": {

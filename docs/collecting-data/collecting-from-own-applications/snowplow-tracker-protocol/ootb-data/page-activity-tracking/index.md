@@ -8,10 +8,13 @@ If enabled, the [activity tracking function](/docs/collecting-data/collecting-fr
 
 Page pings are identified by `e=pp`. As well as all the standard web fields, there are four additional fields that `pp` includes, which are used to identify how users are scrolling over web pages:
 
-| **Parameter** | **Table Column**      | **Type** | **Description**                                     | **Example values** |
-|----------------|----------|-----------------------------------------------------|--------------------|
-| `pp_mix`      | `pp_xoffset_min` | integer  | Minimum page x offset seen in the last ping period  | `0`                |
-| `pp_max`      | `pp_xoffset_max` | integer  | Maximum page x offset seen in the last ping period  | `100`              |
-| `pp_miy`      | `pp_yoffset_min` | integer  | Minimum page y offset seen in the last ping period  | `0`                |
-| `pp_may`      | `pp_yoffset_max` | integer  | Maximum page y offset seen in the last ping period  | `100`              |
+| **Atomic Table Column**      | **Type** | **Description**                                     | **Example values** |
+|----------|-----------------------------------------------------|--------------------|
+| `pp_xoffset_min` | integer  | Minimum page x offset seen in the last ping period  | `0`                |
+| `pp_xoffset_max` | integer  | Maximum page x offset seen in the last ping period  | `100`              |
+| `pp_yoffset_min` | integer  | Minimum page y offset seen in the last ping period  | `0`                |
+| `pp_yoffset_max` | integer  | Maximum page y offset seen in the last ping period  | `100`              |
 
+## Use in modeling
+
+Page ping events are used by our [Snowplow Web Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) to calculate page engagement metrics.

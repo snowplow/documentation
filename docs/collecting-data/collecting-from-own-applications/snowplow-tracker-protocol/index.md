@@ -12,6 +12,7 @@ Snowplow trackers fire _events_, which are either HTTP GET or POST requests
 
 This section aims to give an overview of Snowplow events.
 It lists the available data types and links to the tracking and modeling documentation for them.
+If you are interested in an overview of the properties in the atomic events table, [please refer to this page](/docs/understanding-your-pipeline/canonical-event/index.md).
 
 ## Custom events and context entities
 

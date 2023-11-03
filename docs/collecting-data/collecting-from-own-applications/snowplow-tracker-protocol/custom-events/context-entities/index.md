@@ -2,7 +2,11 @@
 title: "Context entities"
 ---
 
-Custom entities can be used to add additional context to an event.
+```mdx-code-block
+import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.md"
+
+<DefineCustomEntity/>
+```
 
 Each individual entity is a self-describing JSON such as:
 

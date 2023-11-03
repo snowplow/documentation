@@ -2,7 +2,11 @@
 title: "Self-describing events"
 ---
 
-[Structuring your data with schemas](/docs/understanding-your-pipeline/schemas/index.md) to perform self-describing event tracking is the defacto way to track events with Snowplow and allows any arbitrary name: value pairs to be captured with the event.
+```mdx-code-block
+import DefineCustomEvent from "@site/docs/reusable/define-custom-event/_index.md"
+
+<DefineCustomEvent/>
+```
 
 :::info
 

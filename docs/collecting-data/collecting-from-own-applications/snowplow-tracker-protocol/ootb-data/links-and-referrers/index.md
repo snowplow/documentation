@@ -14,9 +14,9 @@ import TOCInline from '@theme/TOCInline';
 Along with page view events, the tracker tracks the URL of the referring page that linked to the current page.
 The URL is tracked in the atomic event properties, under the `page_referrer` property.
 
-| **Parameter** | **Table Column**                                 | **Type** | **Description**                                               | **Example values**                                                                                                      |
-|---------------|---------------------------------------------|----------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| `refr`        | `page_referrer`                             | text     | Referrer URL                                                  | `http%3A%2F%2Fwww.snowplow.io%2F`                                                                                       |
+| **Table Column**                                 | **Type** | **Description**                                               | **Example values**                                                                                                      |
+|---------------------------------------------|----------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| `page_referrer`                             | text     | Referrer URL                                                  | `http://www.snowplow.io/`                                                                                       |
 
 ## Deep links in mobile apps
 
@@ -65,13 +65,11 @@ Link click tracking feature in the JavaScript tracker enables automatic capturin
 
 See the [link click tracking documentation for the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#link-click-tracking).
 
-:::note
-TODO add atomic events table with `refr_domain_userid` and `refr_tstamp`
-:::
-
 ## Cross-domain tracking on Web
 
 The JavaScript Tracker can add an additional parameter named “_sp” to the querystring of outbound links. This process is called “link decoration”. The `_sp` value includes the domain user ID for the current page and the time at which the link was clicked (according to the device's clock).
+
+When the `_sp` parameter is present in the page URL, enrichment uses it to assign two properties to events: `refr_domain_userid` with the user identifier and `refr_tstamp` with the timestamp of the click on the link.
 
 ### How to track?
 

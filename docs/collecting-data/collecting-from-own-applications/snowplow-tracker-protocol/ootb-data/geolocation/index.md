@@ -13,11 +13,15 @@ There are two options to attach geolocation information to Snowplow events:
 
 ## Geolocation based on the IP address
 
-:::note
-TODO
-:::
+Geolocation information can be automatically extracted from the IP address of the HTTP request to the collector.
+This is done during enrichment using the [IP Lookup Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md).
+
+You can see the information added to events as [atomic event properties in this table](/docs/understanding-your-pipeline/canonical-event/index.md#location-fields).
 
 ## Geolocation context entity tracked in apps
+
+Geolocation information can also be fetched in the app using our trackers and attached to events as a context entity.
+This is often more accurate than the IP-based geolocation but requires permission from the user.
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: true, automatic: true}}
@@ -33,3 +37,6 @@ TODO
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for client geolocation contexts", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "geolocation_context", "format": "jsonschema", "version": "1-1-0" }, "type": "object", "properties": { "latitude": { "type": "number", "minimum": -90, "maximum": 90 }, "longitude": { "type": "number", "minimum": -180, "maximum": 180 }, "latitudeLongitudeAccuracy": { "type": ["number", "null"] }, "altitude": { "type": ["number", "null"] }, "altitudeAccuracy": { "type": ["number", "null"] }, "bearing": { "type": ["number", "null"] }, "speed": { "type": ["number", "null"] }, "timestamp": { "type": ["integer", "null"] } }, "required": ["latitude", "longitude"], "additionalProperties": false }} />
 
 ### How to track?
+
+* [Using the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#geolocation-context).
+* Using the `TrackerConfiguration` object [on the Android tracker](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/-tracker-configuration/geo-location-context.html) and [the iOS tracker](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/trackerconfiguration/geolocationcontext(_:)).

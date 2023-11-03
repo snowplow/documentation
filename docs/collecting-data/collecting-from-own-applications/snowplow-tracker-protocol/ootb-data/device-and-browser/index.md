@@ -9,31 +9,17 @@ import TOCInline from '@theme/TOCInline';
 
 <TOCInline toc={toc} maxHeadingLevel={3} />
 
-## Atomic event platform parameters
+## Browser information in the atomic event properties
 
-The following properties are added to event using the atomic event properties.
-
-| **Parameter** | **Table Column**                                 | **Type** | **Description**                                               | **Example values**                                                                                                      |
-|---------------|---------------------------------------------|----------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| `url`         | `page_url`                                  | text     | Page URL                                                      | `http%3A%2F%2Ftest.psybazaar.com%2F2-tarot-cards`                                                                       |
-| `ua`          | `useragent`                                 | text     | Useragent                                                     | Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:105.0) Gecko/20100101 Firefox/105.0                                    |
-| `page`        | `page_title`                                | text     | Page title                                                    | `Snowplow%20Behavoral%20Data`                                                                                           |
-| `refr`        | `page_referrer`                             | text     | Referrer URL                                                  | `http%3A%2F%2Fwww.snowplow.io%2F`                                                                                       |
-| `cookie`      | `br_cookies`                                | boolean  | Does the browser permit cookies?                              | `1`                                                                                                                     |
-| `lang`        | `br_lang`                                   | text     | Language the browser is set to                                | `en-US`                                                                                                                 |
-| `f_pdf`       | `br_features` or `br_features_pdf`          | boolean  | Adobe PDF plugin installed?                                   | `1`                                                                                                                     |
-| `cd`          | `br_colordepth`                             | integer  | Browser color depth                                           | `24`                                                                                                                    |
-| `cs`          | `doc_charset`                               | text     | Web page's character encoding                                 | `UTF-8`                                                                                                                 |
-| `ds`          | `doc_width` and `doc_height`                | text     | Web page width and height                                     | `1090x1152`                                                                                                             |
-| `vp`          | `br_viewwidth` and `br_viewheight`          | text     | Browser viewport width and height                             | `1105x390`                                                                                                              |
-| `res`         | `dvce_screenwidth` and `dvce_screenheight`  | text     | Screen / monitor resolution                                   | `1280x1024`                                                                                                             |
-| `mac`         | `mac_address`                               | text     | MAC address for the device running the tracker                | `12:34:56:78:9A:BC`                                                                                                     |
+For an overview of the browser information that is tracked in the atomic event properties, [please refer to the table on this page](/docs/understanding-your-pipeline/canonical-event/index.md#browser-fields).
 
 ## Context entities added by the tracker
 
 The following context entities are attached at the tracker based on information provided by the browser or operating system.
 
 ### Browser context
+
+This is an optional feature on the JavaScript tracker that adds browser information that is normally tracked in the atomic event properties (see above) plus some extra information (such as the tab ID) as a context entity.
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: false, automatic: true}}
@@ -59,6 +45,9 @@ The following context entities are attached at the tracker based on information 
 [See the JavaScript tracker documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#browser-context) to learn how to configure the context entity.
 
 ### Mobile context
+
+The mobile context entity is tracked on mobile apps gives information about the mobile device platform including some identifiers (IDFA, IDFV).
+The context entity is enabled by default but the information that is included is configurable on the tracker.
 
 <SchemaProperties
   overview={{event: false, web: false, mobile: true, automatic: true}}
@@ -102,7 +91,7 @@ The following context entities are added during enrichment of events in the pipe
 
 ### YAUAA context for user-agent parsing
 
-[YAUAA (Yet Another User Agent Analyzer) enrichment](http://localhost:3000/docs/enriching-your-data/available-enrichments/yauaa-enrichment/) enables parsing the user-agent string tracked in Web events.
+[YAUAA (Yet Another User Agent Analyzer) enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) enables parsing the user-agent string tracked in Web events.
 It extract information about the user's device and browser, like for instance the device class (Phone, Tablet, etc.).
 
 <SchemaProperties

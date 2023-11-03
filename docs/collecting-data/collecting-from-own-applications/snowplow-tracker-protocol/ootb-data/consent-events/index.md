@@ -36,7 +36,7 @@ Enhanced consent is the recommended way to track marketing consent events on you
 
 ## How to track?
 
-To track enhanced consent events using the JavaScript tracker on Web, you can make use of [the Enhanced Consent plugin](http://localhost:3000/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/enhanced-consent/).
+To track enhanced consent events using the JavaScript tracker on Web, you can make use of [the Enhanced Consent plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/enhanced-consent/index.md).
 
 ## Modeled data using the snowplow-web dbt package
 

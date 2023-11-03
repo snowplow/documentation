@@ -32,13 +32,19 @@ import EventQuery from "@site/docs/reusable/event-query/_index.md"
             {props.overview.mobile ? '✅' : '❌'}
           </td>
           <td>
-            {props.overview.automatic ? '✅' : '❌'}
+            {(typeof props.overview.automatic === 'string') ? props.overview.automatic : (props.overview.automatic ? '✅' : '❌')}
           </td>
         </tr>
       </tbody>
     </table>) : null
     }
-    {props.example ? <><p><b>Example:</b></p> <PayloadExample example={props.example} /></> : null }
+
+  <>{props.example ? (<><details>
+    <summary>👀 <b>Example</b></summary>
+    <div>
+      <PayloadExample example={props.example} />
+    </div>
+  </details></>) : null }</>
 
   <details>
     <summary>📃 Schema properties definition</summary>

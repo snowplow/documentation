@@ -15,35 +15,16 @@ Information about the app and the tracker instance that the events originate fro
 
 These properties can be assigned across all our trackers regardless of the platform.
 
-Tracker payload parameter | Atomic table field | Type | Description | Example values
----|---|---|---|---
-`tna` | `name_tracker` | text | The tracker namespace | `tracker_1`
-`aid` | `app_id` | text | Unique identifier for website / application | `snow-game-android`
-`p` | `platform` | text | The platform the app runs on | `web`, `mob`, `app`
-`tv` | `v_tracker` | text | Identifier for Snowplow tracker. The format follows the convention of `TRACKER_NAME-TRACKER_VERSION` | `js-2.16.2`
+Atomic table field | Type | Description | Example values
+---|---|---|---
+`name_tracker` | text | The tracker namespace | `tracker_1`
+`app_id` | text | Unique identifier for website / application | `snow-game-android`
+`platform` | text | The platform the app runs on | `web`, `mob`, `app`
+`v_tracker` | text | Identifier for Snowplow tracker. The format follows the convention of `TRACKER_NAME-TRACKER_VERSION` | `js-2.16.2`
 
 :::info Tracker namespace
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that _does not_ contain a colon or semi-colon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
 :::
-
-<details>
-  <summary>Allowed values for the platform property</summary>
-  <div>
-
-Platform | `p` value
----|---
-Web (including Mobile Web) | `web`
-Mobile/Tablet | `mob`
-Desktop/Laptop/Netbook | `pc`
-Server-Side App | `srv`
-General App | `app`
-Connected TV | `tv`
-Games Console | `cnsl`
-Internet of Things | `iot`
-Headset | `headset`
-
-  </div>
-</details>
 
 ### How to track?
 

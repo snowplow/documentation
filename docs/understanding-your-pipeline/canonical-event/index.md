@@ -159,14 +159,14 @@ For more information on this topic please check out the relevant [Tracking Docum
 
 | Field | Type | Description | Reqd? | Example| Source| Web | Mobile|
 |-----------------|------|-----------------------------------------------------------|-------|----------------------|---------------|-----|---------|
-| geo_country | text | ISO 3166-1 code for the country the visitor is located in | No| 'GB', 'US' | IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_region| text | ISO-3166-2 code for country region the visitor is in| No| 'I9', 'TX' | IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_city| text | City the visitor is in| No| 'New York', 'London' | IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_zipcode | text | Postcode the visitor is in| No| '94109'| IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_latitude| text | Visitor location latitude | No| 37.443604| IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_longitude | text | Visitor location longitude| No| -122.4124| IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_region_name | text | Visitor region name | No| 'Florida'| IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_timezone| text | Visitor timezone name | No| 'Europe/London'| IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_country | text | ISO 3166-1 code for the country the visitor is located in | No| 'GB', 'US' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_region| text | ISO-3166-2 code for country region the visitor is in| No| 'I9', 'TX' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_city| text | City the visitor is in| No| 'New York', 'London' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_zipcode | text | Postcode the visitor is in| No| '94109'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_latitude| text | Visitor location latitude | No| 37.443604| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_longitude | text | Visitor location longitude| No| -122.4124| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_region_name | text | Visitor region name | No| 'Florida'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_timezone| text | Visitor timezone name | No| 'Europe/London'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
 
 For more information on this topic please check out the relevant [Tracking Documentation](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/geolocation/index.md).
 
@@ -174,10 +174,10 @@ For more information on this topic please check out the relevant [Tracking Docum
 
 | Field | Type | Description | Reqd? | Example| Source| Web | Mobile|
 |-----------------|------|-----------------------------------------------------------------------------------------------|-------|----------------------|---------------|-----|---------|
-| ip_isp| text | Visitor's ISP | No| 'FDN Communications' | IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| ip_organization | text | Organization associated with the visitor's IP address - defaults to ISP name if none is found | No| 'Bouygues Telecom' | IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| ip_domain | text | Second level domain name associated with the visitor's IP address | No| 'nuvox.net'| IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| ip_netspeed | text | Visitor's connection type | No| 'Cable/DSL'| IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| ip_isp| text | Visitor's ISP | No| 'FDN Communications' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| ip_organization | text | Organization associated with the visitor's IP address - defaults to ISP name if none is found | No| 'Bouygues Telecom' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| ip_domain | text | Second level domain name associated with the visitor's IP address | No| 'nuvox.net'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| ip_netspeed | text | Visitor's connection type | No| 'Cable/DSL'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
 
 
 #### Metadata fields

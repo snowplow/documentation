@@ -67,7 +67,7 @@ There are 3 manifest tables included in this package:
 </TabItem>
 </Tabs>
 
-The `allow_refresh()` macro defines the protection behavior. As [dbt recommends](https://docs.getdbt.com/faqs/target-names), target names are used here to differentiate between your prod and dev environment. By default, this macro assumes your dev target is named `dev`. This can be changed by setting the `snowplow__dev_target_name` var in your `dbt_project.yml` file.
+The `allow_refresh()` macro defines the protection behavior. As [dbt recommends](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles#understanding-targets-in-profiles), target names are used here to differentiate between your prod and dev environment. By default, this macro assumes your dev target is named `dev`. This can be changed by setting the `snowplow__dev_target_name` var in your `dbt_project.yml` file.
 
 To full refresh any of the manifest models in production, set the `snowplow__allow_refresh` to `true` at run time.
 

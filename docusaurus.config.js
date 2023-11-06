@@ -94,11 +94,9 @@ module.exports = {
         },
         items: [
           {
-            type: 'doc',
-            docId: 'introduction',
+            href: 'https://snowplow.io/data-product-accelerators/',
+            label: 'Accelerators',
             position: 'left',
-            className: 'nav-link__first',
-            label: 'Docs',
           },
           {
             href: 'https://discourse.snowplow.io',

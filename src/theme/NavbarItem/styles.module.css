@@ -17,8 +17,12 @@
   margin-right: 16px;
 }
 
-@media screen and (max-width: 996px) {
+@media screen and (max-width: 1070px) {
   :global(.navbar__inner) .customized {
     display: none !important;
+  }
+
+  :global(.navbar__items .navbar__toggle) {
+    display: block !important;
   }
 }

@@ -246,7 +246,13 @@ The `$supersedes` field states that the schema version defined in the `self` par
 "$supersedes": ["1-0-2", "1-0-3"],
 ...
 ```
+:::note Patching and superseding
 
+Once you’ve defined the `$supersedes` field for a schema version, you can’t update it — even in the development environment where [patching](#patching-the-schema) is allowed. However, you can change which schema version supersedes which by creating new schema versions.
+
+For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you create version `1-0-3` which also supersedes `1-0-1`, then `1-0-1` will be superseded by the newest version, i.e. `1-0-3`. See diagrams below for more information on how this is determined.
+
+:::
 ### Rules
 
 #### A schema version can only supersede previous versions

@@ -8,8 +8,9 @@ import validator from '@rjsf/validator-ajv8'
 import Form from '@rjsf/mui'
 import Details from '@theme/Details'
 import Tooltip from '@mui/material/Tooltip';
+import ReactMarkdown from 'react-markdown';
 
-import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, } from '@mui/x-data-grid-premium';
+import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, gridClasses, } from '@mui/x-data-grid-premium';
 
 import { LicenseInfo } from '@mui/x-license-pro';
 
@@ -87,11 +88,12 @@ export const lightTheme = createTheme({
 })
 
 // Drop down button
-export function SelectSchemaVersion({ onChange, versions, label }) {
+export function SelectSchemaVersion({ value, onChange, versions, label }) {
 
   return (
     <>
       <Autocomplete
+        value={value}
         disablePortal
         id="dbt-select-schema-version"
         options={versions}
@@ -111,7 +113,6 @@ export function SelectSchemaVersion({ onChange, versions, label }) {
 export const JsonSchemaGenerator = (props) => {
   const [formData, setFormData] = React.useState(null)
   const { colorMode, setColorMode } = useColorMode()
-  console.log(props)
   return (
     <>
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
@@ -172,8 +173,11 @@ export function JsonToTable({ data }) {
       description: 'The name of the variable',
       // make these code format
       renderCell: (params) => (
+        <div style={{ width: '100%' }}>
         <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
+        </div>
       ),
+      flex: 0.2,
     },
     {
       field: 'longDescription',
@@ -182,15 +186,21 @@ export function JsonToTable({ data }) {
       // tooltip to show the full line on hover, doing auto-height means the columns can't be autosized
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <span>{params.value}</span>
+          <ReactMarkdown children={params.value} />
         </Tooltip>
       ),
-      flex: 1
+      flex: 1,
     },
     {
       field: 'default',
       headerName: 'Default',
-      description: 'The default value in the package'
+      description: 'The default value in the package',
+      flex: 0.2,
+      renderCell: (params) => (
+        <div style={{ width: '100%' }}>
+        <Tooltip title={params.value}><em>{params.value}</em></Tooltip>
+        </div>
+      ),
     },
   ];
 
@@ -235,6 +245,7 @@ export function JsonToTable({ data }) {
               includeOutliers: true,
               includeHeaders: true,
             }}
+            getRowHeight={() => 'auto'}
             pagination
             pageSizeOptions={[5, 10, 25, 50, 100]}
             rows={rows
@@ -245,6 +256,7 @@ export function JsonToTable({ data }) {
             slots={{ toolbar: GridToolbar }}
             disableColumnSelector
             disableExport
+            flex
             slotProps={{
               toolbar: {
                 showQuickFilter: true,
@@ -257,11 +269,15 @@ export function JsonToTable({ data }) {
                 borderTop: "1px solid rgba(224, 224, 224, 1)"
               },
               '.MuiDataGrid-cell': {
-                borderRight: `1px solid ${colorMode !== 'dark' ? '#E0E0E0' : '#303030'
+                borderTop: `1px solid ${colorMode !== 'dark' ? '#303030' : '#A08ACA'
                   }`,
+              },
+              [`& .${gridClasses.cell}`]: {
+                py: 0.5,
               },
             }}
           />
+          <br/>
         </>
       ))}
     </>
@@ -269,24 +285,28 @@ export function JsonToTable({ data }) {
 };
 
 export const DbtCongfigurationPage = ({ schemaName, versions, label, output, group }) => {
-  const [schemaVersion, setSchemaVersion] = React.useState(null);
+  const [schemaVersion, setSchemaVersion] = React.useState(versions[0]);
 
   if (schemaVersion === null || schemaVersion === undefined) {
-    return (<>
-      <SelectSchemaVersion onChange={setSchemaVersion} versions={versions} label={label} />
-      <p>Please select a version to see the configuration options</p>
-    </>
+    return ([false, 
+    <>
+      <SelectSchemaVersion value={schemaVersion} onChange={setSchemaVersion} versions={versions} label={label} />
+      <p><em>Please select a version to see the configuration options</em></p>
+    </>,
+    <></>,
+    <></>]
     )
   }
 
   const versionedSchema = schemaImports[schemaName + '_' + schemaVersion].Schema;
 
   return (
-    <>
-      <SelectSchemaVersion onChange={setSchemaVersion} versions={versions} label={label} />
-      <JsonToTable data={versionedSchema} />
-      <JsonSchemaGenerator versionedSchema={versionedSchema} group={group} output={output} />
-    </>
+    [
+      true,
+      <SelectSchemaVersion value={schemaVersion} onChange={setSchemaVersion} versions={versions} label={label} />,
+      <JsonToTable data={versionedSchema} />,
+      <JsonSchemaGenerator versionedSchema={versionedSchema} group={group} output={output} />,
+    ]
   )
 
 }

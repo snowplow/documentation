@@ -1,6 +1,7 @@
 ---
 title: "Web"
 sidebar_position: 100
+hide_table_of_contents: true
 ---
 
 ```mdx-code-block
@@ -8,55 +9,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import { DbtCongfigurationPage } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
-
-export const packageVersions = ['0.16.2', '0.16.1']
-
-
-export const printYamlVariables = (data) => {
-  return(
-    <>
-    <h4>Project Variables:</h4>
-    <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
-    </>
-  )
-}
-
-<DbtCongfigurationPage schemaName='dbtWeb'  versions = {packageVersions} label = 'dbt web version' output={printYamlVariables} group /> 
-```
-
-:::info
-
-Some variables are only available in the latest version of our package, or might have changed format from older versions. If you are unable to use the latest version, check the `dbt_project.yml` file of our package for the version you are using to see what options are available to you.
-
-:::
-
-## Package Configuration Variables
-
-This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
-
-:::note
-
-All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
-
-:::
-
-
-
-:::tip
-
-When modifying the `session/user_identifiers` or using `session/user_sql` in the web package these will overwrite the `domain_sessionid` and `domain_userid` fields in tables, rather than being `session/user_identifier` as in the core utils implementation. This is for historic reasons to mitigate breaking changes. Original values for these fields can be found in `original_domain_session/userid` in each table.
-
-:::
-
-
-
-## Output Schemas
-```mdx-code-block
+import ReactMarkdown from 'react-markdown';
+import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
 import CodeBlock from '@theme/CodeBlock';
 import { SchemaSetterWSeeds } from '@site/src/components/DbtSchemaSelector';
-
-<DbtSchemas/>
 
 export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema, seedSchema) => {
   return(
@@ -91,10 +48,85 @@ seeds:
   )
 }
 
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variables:</h4>
+    <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
+    </>
+  )
+}
+
+export const MyMdxComponent = () => {
+  const schemaName = 'dbtWeb';
+  const versions = ['0.16.2', '0.16.1', '0.16.0', '0.15.2'];
+  const label = 'dbt web version';
+  const output = printYamlVariables;
+  const group = 'true';
+  const dbtConfigOutput = DbtCongfigurationPage({
+    schemaName,
+    versions,
+    label,
+    output,
+    group
+  });
+  if (dbtConfigOutput[0]) {
+    return (
+      <div>
+        {dbtConfigOutput[1]} {/* SelectSchemaVersion */}
+        <br/>
+        <h2 id="Variables">Package Configuration Variables</h2>
+        <p>This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.</p>
+        <Admonition type="note">
+          All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
+        </Admonition>
+        <br/>
+        {dbtConfigOutput[2]} {/* JsonToTable */}
+        <br/>
+        <Admonition type="tip">
+          When modifying the `session/user_identifiers` or using `session/user_sql` in the web package these will overwrite the `domain_sessionid` and `domain_userid` fields in tables, rather than being `session/user_identifier` as in the core utils implementation. This is for historic reasons to mitigate breaking changes. Original values for these fields can be found in `original_domain_session/userid` in each table.
+        </Admonition>
+        <br/>
+        <h2 id="Generator">Config Generator</h2>
+        <p>You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.</p>
+        {dbtConfigOutput[3]} {/* JsonSchemaGenerator */}
+        <br/>
+        <h2 id="Schemas">Output Schemas</h2>
+        <DbtSchemas/>
+        <SchemaSetterWSeeds output={printSchemaVariables}/>
+      </div>
+    );
+  } else {
+    return(
+      <div>
+        {dbtConfigOutput[1]} {/* SelectSchemaVersion */}
+      </div>
+    );
+  }
+};
+
+<MyMdxComponent/>
+
+export const toc = [
+{
+	"value": "Package Configuration Variables",
+	"id": "Variables",
+	"level": 2,
+	"children": []
+},
+{
+	"value": "Config Generator",
+	"id": "Generator",
+	"level": 2,
+	"children": []
+},
+{
+	"value": "Output Schemas",
+	"id": "Schemas",
+	"level": 2,
+	"children": []
+},
+];
+
 ```
-<SchemaSetterWSeeds output={printSchemaVariables}/>
-
-
-
-## Config Generator
-You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.

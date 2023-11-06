@@ -172,11 +172,17 @@ export function JsonToTable({ data }) {
       headerName: 'Variable Name',
       description: 'The name of the variable',
       // make these code format
-      renderCell: (params) => (
-        <div style={{ width: '100%' }}>
+      renderCell: (params) => {
+        if (params.value){
+        return(<div style={{ width: '100%' }}>
           <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
-        </div>
-      ),
+        </div>)
+        } else {
+        return(<div style={{ width: '100%' }}>
+          {params.value}
+        </div>)
+        }
+      },
       flex: 0.2,
     },
     {

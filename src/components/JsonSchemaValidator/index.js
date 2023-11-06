@@ -11,7 +11,9 @@ import Tooltip from '@mui/material/Tooltip';
 import ReactMarkdown from 'react-markdown';
 
 import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, gridClasses, } from '@mui/x-data-grid-premium';
+import { LicenseInfo } from '@mui/x-license-pro';
 
+LicenseInfo.setLicenseKey("a3d6a1e3cdca760ace01b65d01608642Tz03MTE1NixFPTE3MjE1NDQ2NzEwMDAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y");
 
 
 // Import all the schemas 
@@ -108,6 +110,8 @@ export function SelectSchemaVersion({ value, onChange, versions, label }) {
 export const JsonSchemaGenerator = (props) => {
   const [formData, setFormData] = React.useState(null)
   const { colorMode, setColorMode } = useColorMode()
+
+
   return (
     <>
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
@@ -168,14 +172,14 @@ export function JsonToTable({ data }) {
       description: 'The name of the variable',
       // make these code format
       renderCell: (params) => {
-        if (params.value){
-        return(<div style={{ width: '100%' }}>
-          <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
-        </div>)
+        if (params.value) {
+          return (<div style={{ width: '100%' }}>
+            <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
+          </div>)
         } else {
-        return(<div style={{ width: '100%' }}>
-          {params.value}
-        </div>)
+          return (<div style={{ width: '100%' }}>
+            {params.value}
+          </div>)
         }
       },
       flex: 0.2,

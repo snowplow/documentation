@@ -50,11 +50,9 @@ export const ObjectFieldTemplateGroupsGenerator2 = () => (props) => {
           // filter to just the relevant props
           const childProps = getPropsForGroup2(groupNames[group], props)
           return (
-            <>
-              <Details summary={group}>
-                <ObjectFieldTemplates key={group} {...childProps} />
-              </Details>
-            </>
+            <Details key={group} summary={group}>
+              <ObjectFieldTemplates key={group} {...childProps} />
+            </Details>
           )
         })}
       </>

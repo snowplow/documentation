@@ -171,7 +171,7 @@ export function JsonToTable({ data }) {
       // make these code format
       renderCell: (params) => {
         if (params.value){
-        return (<div style={{ width: '100%' }}>
+        return(<div style={{ width: '100%' }}>
           <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
         </div>)
         } else {

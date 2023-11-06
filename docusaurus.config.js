@@ -96,6 +96,7 @@ module.exports = {
           {
             href: 'https://snowplow.io/data-product-accelerators/',
             label: 'Accelerators',
+            className: 'nav-link__first',
             position: 'left',
           },
           {

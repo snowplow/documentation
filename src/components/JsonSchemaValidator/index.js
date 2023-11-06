@@ -12,9 +12,6 @@ import ReactMarkdown from 'react-markdown';
 
 import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, gridClasses, } from '@mui/x-data-grid-premium';
 
-import { LicenseInfo } from '@mui/x-license-pro';
-
-LicenseInfo.setLicenseKey('TODO: add the key here somehow');
 
 
 // Import all the schemas 

@@ -216,4 +216,4 @@ The data from these databases would then be loaded into the following columns:
 
 ## Output
 
-This enrichment adds a new context to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.iab.snowplow/spiders_and_robots/jsonschema/1-0-0).
+This enrichment populates atomic table fields prefixed with "geo_" and "ip_" [seen here](https://github.com/snowplow/iglu-central/blob/8ff48b2485b3c95447e38a9bb925ef3f5266112c/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0#L82).

@@ -6,39 +6,8 @@ hide_title: true
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
-import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import { dump } from 'js-yaml';
-import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
-
-export const schema = {
-  "title": "Conversion Definition",
-  "type": "array",
-  "default": [{}],
-  "minItems": 1,
-  "items": {
-    "type": "object",
-    "required": ["name", "condition"],
-    "properties": {
-      "name": { "type": "string", "title": "Name", "description": "Name of your conversion type" },
-      "condition": { "type": "string", "title": "Condition", "description": "SQL condition e.g. event_name = 'page_view'" },
-      "value": { "type": "string", "title": "Value", "description": "SQL value e.g. tr_total_base"  },
-      "default_value": { "type": "number", "title": "Default value", "description": "Default value e.g. 0" },
-      "list_events": { "type": "boolean", "title": "List all event ids?" }
-    }
-  }
-};
-
-export const printYamlVariables = (data) => {
-  return(
-    <>
-    <h4>Project Variable:</h4>
-    <CodeBlock language="yaml">snowplow__conversion_events: {JSON.stringify(data, null, 4)}</CodeBlock>
-    </>
-  )
-}
-
 ```
 
 <Badges badgeType="dbt-package Release" pkg="web"></Badges>
@@ -188,6 +157,4 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ## Configuration Generator
 
-You can use the below to generate the project variable `snowplow__conversion_events`, or you can use our full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/index.md).
-
-<JsonApp schema={schema} output={printYamlVariables} />
+You can use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/index.mdx) to help you generate your conversion event definitions.

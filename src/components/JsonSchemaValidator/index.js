@@ -174,7 +174,7 @@ export function JsonToTable({ data }) {
       // make these code format
       renderCell: (params) => (
         <div style={{ width: '100%' }}>
-        <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
+          <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
         </div>
       ),
       flex: 0.2,
@@ -198,7 +198,7 @@ export function JsonToTable({ data }) {
       flex: 0.2,
       renderCell: (params) => (
         <div style={{ width: '100%' }}>
-        <Tooltip title={params.value}><em>{params.value}</em></Tooltip>
+          <Tooltip title={params.value}><em>{params.value}</em></Tooltip>
         </div>
       ),
     },
@@ -277,7 +277,7 @@ export function JsonToTable({ data }) {
               },
             }}
           />
-          <br/>
+          <br />
         </>
       ))}
     </>
@@ -288,13 +288,13 @@ export const DbtCongfigurationPage = ({ schemaName, versions, label, output, gro
   const [schemaVersion, setSchemaVersion] = React.useState(versions[0]);
 
   if (schemaVersion === null || schemaVersion === undefined) {
-    return ([false, 
-    <>
-      <SelectSchemaVersion value={schemaVersion} onChange={setSchemaVersion} versions={versions} label={label} />
-      <p><em>Please select a version to see the configuration options</em></p>
-    </>,
-    <></>,
-    <></>]
+    return ([false,
+      <>
+        <SelectSchemaVersion value={schemaVersion} onChange={setSchemaVersion} versions={versions} label={label} />
+        <p><em>Please select a version to see the configuration options</em></p>
+      </>,
+      <></>,
+      <></>]
     )
   }
 

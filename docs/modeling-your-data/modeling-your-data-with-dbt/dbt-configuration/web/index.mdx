@@ -4,7 +4,6 @@ sidebar_position: 100
 hide_table_of_contents: true
 ---
 
-```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import { DbtCongfigurationPage } from '@site/src/components/JsonSchemaValidator';
@@ -48,12 +47,11 @@ seeds:
   )
 }
 
-
 export const printYamlVariables = (data) => {
   return(
     <>
-    <h4>Project Variables:</h4>
-    <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
+      <h4>Project Variables:</h4>
+      <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
     </>
   )
 }
@@ -110,23 +108,21 @@ export const MyMdxComponent = () => {
 
 export const toc = [
 {
-	"value": "Package Configuration Variables",
-	"id": "Variables",
-	"level": 2,
-	"children": []
+  "value": "Package Configuration Variables",
+  "id": "Variables",
+  "level": 2,
+  "children": []
 },
 {
-	"value": "Config Generator",
-	"id": "Generator",
-	"level": 2,
-	"children": []
+  "value": "Config Generator",
+  "id": "Generator",
+  "level": 2,
+  "children": []
 },
 {
-	"value": "Output Schemas",
-	"id": "Schemas",
-	"level": 2,
-	"children": []
+  "value": "Output Schemas",
+  "id": "Schemas",
+  "level": 2,
+  "children": []
 },
 ];
-
-```

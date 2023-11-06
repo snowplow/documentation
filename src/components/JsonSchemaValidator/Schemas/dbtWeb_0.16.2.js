@@ -523,22 +523,22 @@ export const Schema = {
       longDescription: 'A list of dictionaries defining the `entity` or `self-describing` event tables to join onto your base events table. Please use the tool below or see the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/?warehouse=redshift%2Bpostgres#utilizing-custom-contexts-or-sdes) for details of the structure.',
       packageDefault: '[]',
       warehouse: 'Redshift',
-        group: 'Warehouse Specific',
-        type: 'array',
-        description: '> Click the plus sign to add a new entry',
-        minItems: 0,
-        items: {
-          type: 'object',
-          title: "Entity or SDE",
-            properties: {
-              name: { type: 'string', description: 'Table name' }, // TODO: add regex here to make valid context/unstruct table name
-              prefix: { type: 'string', description: 'Prefix to add to columns' }, // TODO: add regex here to make valid SQL name?
-              alias: { type: 'string', description: 'Table alias for the subquery' }, // TODO: add regex here to make valid SQL alias?
-              single_entity: { type: 'boolean', title: 'Is single entity?'}
-            },
-            required: ['name', 'prefix'],
-            additionalProperties: false
+      group: 'Warehouse Specific',
+      type: 'array',
+      description: '> Click the plus sign to add a new entry',
+      minItems: 0,
+      items: {
+        type: 'object',
+        title: "Entity or SDE",
+        properties: {
+          name: { type: 'string', description: 'Table name' }, // TODO: add regex here to make valid context/unstruct table name
+          prefix: { type: 'string', description: 'Prefix to add to columns' }, // TODO: add regex here to make valid SQL name?
+          alias: { type: 'string', description: 'Table alias for the subquery' }, // TODO: add regex here to make valid SQL alias?
+          single_entity: { type: 'boolean', title: 'Is single entity?' }
         },
+        required: ['name', 'prefix'],
+        additionalProperties: false
+      },
       uniqueItems: true,
     },
     snowplow__page_view_stitching: {
@@ -546,7 +546,7 @@ export const Schema = {
       title: 'Enable Page View Stitching',
       longDescription: 'Determines whether to apply the user mapping to the page views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/) section for more details.',
       packageDefault: 'false',
-      group: 'Operation and Logic', 
+      group: 'Operation and Logic',
     },
   },
 }

@@ -110,8 +110,6 @@ export function SelectSchemaVersion({ value, onChange, versions, label }) {
 export const JsonSchemaGenerator = (props) => {
   const [formData, setFormData] = React.useState(null)
   const { colorMode, setColorMode } = useColorMode()
-
-
   return (
     <>
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
@@ -172,14 +170,14 @@ export function JsonToTable({ data }) {
       description: 'The name of the variable',
       // make these code format
       renderCell: (params) => {
-        if (params.value) {
-          return (<div style={{ width: '100%' }}>
-            <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
-          </div>)
+        if (params.value){
+        return (<div style={{ width: '100%' }}>
+          <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
+        </div>)
         } else {
-          return (<div style={{ width: '100%' }}>
-            {params.value}
-          </div>)
+        return(<div style={{ width: '100%' }}>
+          {params.value}
+        </div>)
         }
       },
       flex: 0.2,

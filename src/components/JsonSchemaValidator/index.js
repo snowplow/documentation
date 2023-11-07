@@ -110,6 +110,7 @@ export function SelectSchemaVersion({ value, onChange, versions, label }) {
 export const JsonSchemaGenerator = (props) => {
   const [formData, setFormData] = React.useState(null)
   const { colorMode, setColorMode } = useColorMode()
+  
   return (
     <>
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
@@ -368,11 +369,9 @@ export const ObjectFieldTemplateGroupsGenerator = (groups) => (props) => {
           // filter to just the relevant props
           const childProps = getPropsForGroup(group, props)
           return (
-            <>
-              <Details summary={group.title}>
+              <Details summary={group.title} key={group.title}>
                 <ObjectFieldTemplates key={group.title} {...childProps} />
               </Details>
-            </>
           )
         })}
       </>

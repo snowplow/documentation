@@ -11,10 +11,9 @@ import Tooltip from '@mui/material/Tooltip';
 import ReactMarkdown from 'react-markdown';
 
 import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, gridClasses, } from '@mui/x-data-grid-premium';
-
 import { LicenseInfo } from '@mui/x-license-pro';
 
-LicenseInfo.setLicenseKey('TODO: add the key here somehow');
+LicenseInfo.setLicenseKey("a3d6a1e3cdca760ace01b65d01608642Tz03MTE1NixFPTE3MjE1NDQ2NzEwMDAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y");
 
 
 // Import all the schemas 
@@ -53,11 +52,9 @@ export const ObjectFieldTemplateGroupsGenerator2 = () => (props) => {
           // filter to just the relevant props
           const childProps = getPropsForGroup2(groupNames[group], props)
           return (
-            <>
-              <Details summary={group}>
-                <ObjectFieldTemplates key={group} {...childProps} />
-              </Details>
-            </>
+            <Details key={group} summary={group}>
+              <ObjectFieldTemplates key={group} {...childProps} />
+            </Details>
           )
         })}
       </>

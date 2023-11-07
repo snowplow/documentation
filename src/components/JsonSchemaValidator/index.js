@@ -189,7 +189,9 @@ export function JsonToTable({ data }) {
       // tooltip to show the full line on hover, doing auto-height means the columns can't be autosized
       renderCell: (params) => (
         <Tooltip title={params.value}>
-          <ReactMarkdown children={params.value} />
+          <>
+            <ReactMarkdown children={params.value} />
+          </>
         </Tooltip>
       ),
       flex: 1,
@@ -237,7 +239,7 @@ export function JsonToTable({ data }) {
   return (
     <>
       {Object.keys(groupedObjects).map((header, index) => (
-        <>
+        <div key = {header}>
           <h3>{header}</h3>
           <DataGridPremium
             apiRef={apiRef}
@@ -281,7 +283,7 @@ export function JsonToTable({ data }) {
             }}
           />
           <br />
-        </>
+        </div>
       ))}
     </>
   )

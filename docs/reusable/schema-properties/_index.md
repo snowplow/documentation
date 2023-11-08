@@ -3,7 +3,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import Admonition from '@theme/Admonition';
-import PayloadExample from "@site/docs/reusable/payload-example/_index.md"
 import EventQuery from "@site/docs/reusable/event-query/_index.md"
 ```
 
@@ -42,7 +41,9 @@ import EventQuery from "@site/docs/reusable/event-query/_index.md"
   <>{props.example ? (<><details>
     <summary>👀 <b>Example</b></summary>
     <div>
-      <PayloadExample example={props.example} />
+      <CodeBlock language="json">
+      {JSON.stringify(props.example, null, 2)}
+      </CodeBlock>
     </div>
   </details></>) : null }</>
 

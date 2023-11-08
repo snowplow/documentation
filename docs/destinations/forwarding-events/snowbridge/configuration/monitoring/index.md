@@ -28,3 +28,28 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/mon
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/statsd-example.hcl
 ```
+
+Snowbridge sends the following metrcis to statsd:
+
+| Metric                   | Definitions                                                                                                                                             |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `target_success`         | Events successfully sent to target.                                                                                                                     |
+| `target_failed`          | Events which failed to reach the target, after 5 retries. Will be retried later.                                                                        |
+| `message_filtered`       | Events filtered out via transformation.                                                                                                                 |
+| `failure_target_success` | Events we could not send to the target, which are not retryable, successfully sent to the failure target.                             |
+| `failure_target_failed`  | Events we could not send to the target, which are not retryable, which we failed to send to the failure target. In this scenario Snowbridge will crash. |
+| `min_processing_latency` | Min time between entering Snowbridge and write to target/failure target.                                                                                |
+| `max_processing_latency` | Max time between entering Snowbridge and write to target/failure target.                                                                                |
+| `avg_processing_latency` | Avg time between entering Snowbridge and write to target/failure target.                                                                                |
+| `min_message_latency`    | Min time between entering the source stream and write to target/failure target.                                                                         |
+| `max_message_latency`    | Max time between entering the source stream and write to target/failure target.                                                                         |
+| `avg_message_latency`    | Avg time between entering the source stream and write to target/failure target.                                                                         |
+| `min_transform_latency`  | Min time between entering Snowbridge and completion of transformation.                                                                                   |
+| `max_transform_latency`  | Max time between entering Snowbridge and completion of transformation.                                                                                   |
+| `avg_transform_latency`  | Avg time between entering Snowbridge and completion of transformation.                                                                                   |
+| `min_filter_latency`     | Min time between entering Snowbridge and being filtered out.                                                                                             |
+| `max_filter_latency`     | Max time between entering Snowbridge and being filtered out.                                                                                             |
+| `avg_filter_latency`     | Avg time between entering Snowbridge and being filtered out.                                                                                             |
+| `min_request_latency`    | Min time between starting request to target and finishing request to target.                                                                             |
+| `max_request_latency`    | Max time between starting request to target and finishing request to target.                                                                             |
+| `avg_request_latency`    | Avg time between starting request to target and finishing request to target.                                                                             |

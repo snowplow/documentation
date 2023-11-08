@@ -383,7 +383,7 @@ If you’re planning on leveraging the context’s variation names, you’ll hav
 
 ### Other contexts
 
-There are many other context entities which can be added to your tracking, which are available as [plugins](https://github.com/snowplow/snowplow-javascript-tracker/tree/release/3.0.0/plugins).
+There are many other context entities which can be added to your tracking, which are available as [plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md).
 
 ## JavaScript tracker-specific contexts
 

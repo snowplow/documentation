@@ -1,10 +1,13 @@
 ---
 title: "Example Tracker Requests"
-date: "2022-10-10"
-sidebar_position: 100
 ---
 
 # Example Tracker Requests
+
+:::note
+This page gives examples of requests to the Snowplow collector. However, there is no need to perform these requests manually. Instead, we recommend using our Snowplow trackers that do them for you.
+The requests on this page are only relevant if you plan to write a new tracker implementation.
+:::
 
 Below are a number of example Tracker Protocol requests. All examples are POST requests with a JSON body.
 

@@ -135,10 +135,6 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
       +schema: ${derivedSchema}
       scratch:
         +schema: ${scratchSchema}
-    users:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}`}
         </CodeBlock>
     </>
   )

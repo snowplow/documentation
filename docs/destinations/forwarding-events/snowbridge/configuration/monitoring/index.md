@@ -23,21 +23,21 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/mon
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/sentry-example.hcl
 ```
-### StatsD stats reciever 
+### StatsD stats receiver 
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/statsd-example.hcl
 ```
 
-Snowbridge sends the following metrcis to statsd:
+Snowbridge sends the following metrics to statsd:
 
 | Metric                   | Definitions                                                                                                                                             |
 |--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `target_success`         | Events successfully sent to target.                                                                                                                     |
+| `target_success`         | Events successfully sent to the target.                                                                                                                     |
 | `target_failed`          | Events which failed to reach the target, after 5 retries. Will be retried later.                                                                        |
 | `message_filtered`       | Events filtered out via transformation.                                                                                                                 |
 | `failure_target_success` | Events we could not send to the target, which are not retryable, successfully sent to the failure target.                             |
-| `failure_target_failed`  | Events we could not send to the target, which are not retryable, which we failed to send to the failure target. In this scenario Snowbridge will crash. |
+| `failure_target_failed`  | Events we could not send to the target, which are not retryable, which we failed to send to the failure target. In this scenario, Snowbridge will crash. |
 | `min_processing_latency` | Min time between entering Snowbridge and write to target/failure target.                                                                                |
 | `max_processing_latency` | Max time between entering Snowbridge and write to target/failure target.                                                                                |
 | `avg_processing_latency` | Avg time between entering Snowbridge and write to target/failure target.                                                                                |

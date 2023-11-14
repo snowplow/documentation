@@ -250,7 +250,46 @@ It will be translated into a field called `last_name` (notice the underscore) in
 What happens when you evolve your schema to a [new version](/docs/understanding-tracking-design/versioning-your-data-structures/index.md)?
 
 <Tabs groupId="warehouse" queryString>
-  <TabItem value="redshift" label="Redshift, Postgres" default>
+  <TabItem value="redshift" label="Redshift" default>
+
+Because the table name for the self-describing event or entity includes the major schema version, each major version of a schema gets a new table:
+
+| Schema | Resulting table |
+|---|---|
+| `com.example/button_press/jsonschema/1-0-0` | `com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-2-0` | `com_example_button_press_1` |
+| `com.example/button_press/jsonschema/2-0-0` | `com_example_button_press_2` |
+
+When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing table automatically. For example, if you change the `maxLength` of a `string` field, the limit of the `VARCHAR` column would be updated accordingly.
+
+:::danger Breaking changes (for 5.8.0 and later)
+
+If you make a breaking schema change (e.g. change a type of a field from a `string` to a `number`) without creating a new major schema version, the loader will not be able to modify the table to accommodate the new data.
+
+In this case, _upon receiving the first event with the offending schema_, the loader will instead create a new table, with a name like `com_example_button_press_1_0_1_recovered_9999999`, where:
+* `1-0-1` is the version of the offending schema
+* `9999999` is a hash code unique to the schema (i.e. it will change if the schema is overwritten with a different one)
+
+To resolve this situation:
+* Create a new schema version (e.g. `1-0-2`) that reverts the offending changes and is again compatible with the original table. The data for events with that `1-0-2` schema will start going to the original table as expected.
+* You might also want to manually adapt the data in the `..._recovered_...` column and copy it to the original one.
+
+:::
+
+:::danger Breaking changes (before 5.8.0)
+
+If you make a breaking schema change (e.g. change a type of a field from a `string` to a `number`) without creating a new major schema version, the loader will not be able to adapt the table to receive new data. Your loading process will halt.
+
+:::
+
+:::info Nullability
+
+Once the loader creates a column for a given schema version as `NULLABLE` or `NOT NULL`, it will never alter the nullability constraint for that column. For example, if a field is nullable in schema version `1-0-0` and not nullable in version `1-0-1`, the column will remain nullable. (In this example, the Enrich application will still validate data according to the schema, accepting `null` values for `1-0-0` and rejecting them for `1-0-1`.)
+
+:::
+
+  </TabItem>
+  <TabItem value="postgres" label="Postgres">
 
 Because the table name for the self-describing event or entity includes the major schema version, each major version of a schema gets a new table:
 

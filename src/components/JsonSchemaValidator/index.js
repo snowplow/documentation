@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Children, useState, cloneElement } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { Autocomplete, TextField } from '@mui/material';
 import { useColorMode } from '@docusaurus/theme-common'
@@ -7,6 +7,8 @@ import Form from '@rjsf/mui'
 import Details from '@theme/Details'
 import Tooltip from '@mui/material/Tooltip';
 import ReactMarkdown from 'react-markdown';
+import { Templates } from '@rjsf/mui'
+
 
 import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, gridClasses, } from '@mui/x-data-grid-premium';
 import { LicenseInfo } from '@mui/x-license-pro';
@@ -21,6 +23,10 @@ function importAll(r) {
   });
   return mods;
 }
+
+// Allow for grouping of items into collapsible fields
+// Get default object field template to pass to
+export const ObjectFieldTemplates = Templates.ObjectFieldTemplate
 
 export const schemaImports = importAll(require.context('./Schemas/', false, /\.(js)$/));
 
@@ -37,30 +43,14 @@ export const lightTheme = createTheme({
   },
 })
 
-// Drop down button
-export function SelectSchemaVersion({ value, onChange, versions, label }) {
-  return (
-    <Autocomplete
-      value={value}
-      disablePortal
-      id="dbt-select-schema-version"
-      options={versions}
-      onChange={
-        (event, newValue) => {
-          { onChange(newValue) };
-        }
-      }
-
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label={label} />}
-    />
-  );
-}
-
 // Config Generator
-export const JsonSchemaGenerator = ({ versionedSchema, output }) => {
-  const [formData, setFormData] = React.useState(null)
+export function JsonSchemaGenerator({ output, children, schemaName, schemaVersion, versionedSchema }) {
+  const [formData, setFormData] = useState(null)
   const { colorMode, setColorMode } = useColorMode()
+
+  if (versionedSchema === null) {
+    return <></>
+  }
 
   const versionedSchemas = {}
   Object.keys(versionedSchema.properties).forEach((property) => {
@@ -78,6 +68,7 @@ export const JsonSchemaGenerator = ({ versionedSchema, output }) => {
 
   return (
     <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
+      {children}
       <div className="JsonValidator">
         {Object.keys(versionedSchemas).map((group) => (
           <Details key={group} summary={group}>
@@ -102,9 +93,14 @@ export const JsonSchemaGenerator = ({ versionedSchema, output }) => {
 }
 
 // Table of config details
-export function JsonToTable({ data }) {
+export function JsonToTable({ children, versionedSchema }) {
   const { colorMode, setColorMode } = useColorMode()
-  const properties = data.properties;
+
+  if (versionedSchema === null) {
+    return <></>
+  }
+
+  const properties = versionedSchema.properties;
 
   // Initialize an empty object to store the grouped objects
   const groupedObjects = {};
@@ -191,7 +187,6 @@ export function JsonToTable({ data }) {
       rowGrouping: {
         model: ['warehouse'],
       },
-      ...data.initialState,
       pagination: { paginationModel: { pageSize: 10 } },
     },
   });
@@ -199,6 +194,7 @@ export function JsonToTable({ data }) {
   // Loop over all the headers and output a table for each, filtering and sorting the rows per
   return (
     <>
+      {children}
       {Object.keys(groupedObjects).map((header, index) => (
         <div key={header}>
           <h3>{header}</h3>
@@ -250,34 +246,41 @@ export function JsonToTable({ data }) {
   )
 };
 
-export const DbtCongfigurationPage = ({ schemaName, versions, label, output, group }) => {
-  const [schemaVersion, setSchemaVersion] = React.useState(versions[0]);
+export function DbtCongfigurationPage({ schemaName, versions, label, children }) {
+  const [schemaVersion, setSchemaVersion] = useState(versions[0]);
+  var versionedSchema = null
 
-  if (schemaVersion === null || schemaVersion === undefined) {
-    return ([false,
-      <>
-        <SelectSchemaVersion value={schemaVersion} onChange={setSchemaVersion} versions={versions} label={label} />
-        <p><em>Please select a version to see the configuration options</em></p>
-      </>,
-      <></>,
-      <></>]
-    )
+  if ((schemaName + '_' + schemaVersion) in schemaImports) {
+    versionedSchema = schemaImports[schemaName + '_' + schemaVersion].Schema;
   }
 
-  const versionedSchema = schemaImports[schemaName + '_' + schemaVersion].Schema;
+  const childProps = Children.map(children, (child) => {
+    return cloneElement(child, { schemaVersion: schemaVersion, schemaName: schemaName, versionedSchema: versionedSchema })
+  })
+
+  function SelectSchemaVersion({ versions, label }) {
+    return (
+      <>
+        {schemaVersion === null ? <p><em>Please select a version to see the configuration options</em></p> : <></>}
+        <Autocomplete
+          value={schemaVersion}
+          onChange={(event, newValue) => {
+            setSchemaVersion(newValue);
+          }}
+          id="dbt-select-schema-version"
+          options={versions}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label={label} />}
+        />
+        {childProps}
+      </>
+    );
+  }
 
   return (
-    [
-      true,
-      <SelectSchemaVersion value={schemaVersion} onChange={setSchemaVersion} versions={versions} label={label} />,
-      <JsonToTable data={versionedSchema} />,
-      <JsonSchemaGenerator versionedSchema={versionedSchema} group={group} output={output} />,
-    ]
+    <SelectSchemaVersion versions={versions} label={label} />
   )
-
 }
-
-
 
 // DEPRECATED, to remove from all places
 export const JsonApp = (props) => {
@@ -285,7 +288,7 @@ export const JsonApp = (props) => {
   // props.schema - the schema to validate against
   // props.template - the template to use, if provided
   // props.output - a function that renders an output, taking the formData as an input
-  const [formData, setFormData] = React.useState(null)
+  const [formData, setFormData] = useState(null)
   const { colorMode, setColorMode } = useColorMode()
 
   return (

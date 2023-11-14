@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Templates } from '@rjsf/mui'
-import { RJSFSchema } from '@rjsf/utils'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { Autocomplete, TextField } from '@mui/material';
 import { useColorMode } from '@docusaurus/theme-common'
@@ -15,7 +13,6 @@ import { LicenseInfo } from '@mui/x-license-pro';
 
 LicenseInfo.setLicenseKey("a3d6a1e3cdca760ace01b65d01608642Tz03MTE1NixFPTE3MjE1NDQ2NzEwMDAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y");
 
-
 // Import all the schemas 
 function importAll(r) {
   const mods = {}
@@ -26,50 +23,6 @@ function importAll(r) {
 }
 
 export const schemaImports = importAll(require.context('./Schemas/', false, /\.(js)$/));
-
-
-// Allow for grouping of items into collapsible fields
-// Get default object field template to pass to
-export const ObjectFieldTemplates = Templates.ObjectFieldTemplate
-
-
-// template that uses the group part of each property as a detail block
-export const ObjectFieldTemplateGroupsGenerator2 = () => (props) => {
-  // only apply difference at top level
-  if (props.idSchema['$id'] === 'root') {
-    // Get all the group names in a dict, with each field in the array that is the key
-    const groupNames = {};
-    Object.keys(props.schema.properties).forEach((key, index) => {
-      if (props.schema.properties[key].group in groupNames) {
-        groupNames[props.schema.properties[key].group].push(key)
-      } else { //Need to add the key and the array
-        groupNames[props.schema.properties[key].group] = [key]
-      }
-    })
-    return (
-      <>
-        {Object.keys(groupNames).map((group, index) => {
-          // filter to just the relevant props
-          const childProps = getPropsForGroup2(groupNames[group], props)
-          return (
-            <Details key={group} summary={group}>
-              <ObjectFieldTemplates key={group} {...childProps} />
-            </Details>
-          )
-        })}
-      </>
-    )
-  }
-  return <ObjectFieldTemplates {...props} />
-}
-
-// Filter props to where they have the name listed in the groups fields
-export const getPropsForGroup2 = (groupValues, props) => {
-  return {
-    ...props,
-    properties: props.properties.filter((p) => groupValues.includes(p.name)).sort((a, b) => a.name.localeCompare(b.name)),
-  }
-}
 
 // Theming
 export const darkTheme = createTheme({
@@ -86,58 +39,65 @@ export const lightTheme = createTheme({
 
 // Drop down button
 export function SelectSchemaVersion({ value, onChange, versions, label }) {
-
   return (
-    <>
-      <Autocomplete
-        value={value}
-        disablePortal
-        id="dbt-select-schema-version"
-        options={versions}
-        onChange={
-          (event, newValue) => {
-            { onChange(newValue) };
-          }
+    <Autocomplete
+      value={value}
+      disablePortal
+      id="dbt-select-schema-version"
+      options={versions}
+      onChange={
+        (event, newValue) => {
+          { onChange(newValue) };
         }
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label={label} />}
-      />
-    </>
+      }
+
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label={label} />}
+    />
   );
 }
 
 // Config Generator
-export const JsonSchemaGenerator = (props) => {
+export const JsonSchemaGenerator = ({ versionedSchema, output }) => {
   const [formData, setFormData] = React.useState(null)
   const { colorMode, setColorMode } = useColorMode()
-  
+
+  const versionedSchemas = {}
+  Object.keys(versionedSchema.properties).forEach((property) => {
+    if (versionedSchema.properties[property].group in versionedSchemas) {
+      versionedSchemas[versionedSchema.properties[property].group] = { properties: { ...versionedSchemas[versionedSchema.properties[property].group].properties, [property]: versionedSchema.properties[property] }, definitions: versionedSchema.definitions }
+    } else {
+
+      if (versionedSchema.definitions) {
+        versionedSchemas[versionedSchema.properties[property].group] = { properties: { [property]: versionedSchema.properties[property] }, definitions: versionedSchema.definitions }
+      } else {
+        versionedSchemas[versionedSchema.properties[property].group] = { properties: { [property]: versionedSchema.properties[property] } }
+      }
+    }
+  })
+
   return (
-    <>
-      <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
-        <div className="JsonValidator">
-          <Form
-            experimental_defaultFormStateBehavior={{
-              arrayMinItems: { populate: 'requiredOnly' },
-            }}
-            schema={props.versionedSchema}
-            formData={formData}
-            onChange={(e) => setFormData(e.formData)}
-            validator={validator}
-            showErrorList="bottom"
-            templates={{
-              ObjectFieldTemplate: props.group
-                ? ObjectFieldTemplateGroupsGenerator2()
-                : ObjectFieldTemplates,
-            }}
-            liveValidate
-            {...props}
-          >
-            <div />
-          </Form>
-        </div>
-        {props.output(formData)}
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
+      <div className="JsonValidator">
+        {Object.keys(versionedSchemas).map((group) => (
+          <Details key={group} summary={group}>
+            <Form
+              experimental_defaultFormStateBehavior={{
+                arrayMinItems: { populate: 'requiredOnly' },
+              }}
+              schema={versionedSchemas[group]}
+              formData={formData}
+              onChange={(e) => setFormData(e.formData)}
+              validator={validator}
+              showErrorList="bottom"
+              liveValidate
+              children={true}
+            />
+          </Details>
+        ))}
+      </div>
+      {output(formData)}
+    </ThemeProvider>
   )
 }
 
@@ -171,14 +131,14 @@ export function JsonToTable({ data }) {
       description: 'The name of the variable',
       // make these code format
       renderCell: (params) => {
-        if (params.value){
-        return(<div style={{ width: '100%' }}>
-          <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
-        </div>)
+        if (params.value) {
+          return (<div style={{ width: '100%' }}>
+            <Tooltip title={'snowplow__' + params.value}><code>{params.value}</code></Tooltip>
+          </div>)
         } else {
-        return(<div style={{ width: '100%' }}>
-          {params.value}
-        </div>)
+          return (<div style={{ width: '100%' }}>
+            {params.value}
+          </div>)
         }
       },
       flex: 0.2,
@@ -240,7 +200,7 @@ export function JsonToTable({ data }) {
   return (
     <>
       {Object.keys(groupedObjects).map((header, index) => (
-        <div key = {header}>
+        <div key={header}>
           <h3>{header}</h3>
           <DataGridPremium
             apiRef={apiRef}
@@ -369,9 +329,9 @@ export const ObjectFieldTemplateGroupsGenerator = (groups) => (props) => {
           // filter to just the relevant props
           const childProps = getPropsForGroup(group, props)
           return (
-              <Details summary={group.title} key={group.title}>
-                <ObjectFieldTemplates key={group.title} {...childProps} />
-              </Details>
+            <Details summary={group.title} key={group.title}>
+              <ObjectFieldTemplates key={group.title} {...childProps} />
+            </Details>
           )
         })}
       </>

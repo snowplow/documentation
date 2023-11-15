@@ -12,7 +12,7 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-If this plugin is used, the tracker will look for Google Analytics cookies (specifically the `__utma`, `__utmb`, `__utmc`, `__utmv`, `__utmz`, and `_ga` cookies) and combine their values into an event context which gets sent with every event.
+If this plugin is used, the tracker will look for Google Analytics cookies (Universal Analytics and GA4 cookies) and combine their values into event contexts which gets sent with every event.
 
 ## Installation
 
@@ -43,11 +43,15 @@ If this plugin is used, the tracker will look for Google Analytics cookies (spec
 
 ## Initialization
 
+<details>
+
+<summary><i>pre-v3.17.0</i></summary>
+
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js",
   ["snowplowGaCookies", "GaCookiesPlugin"]
 );
@@ -60,8 +64,8 @@ window.snowplow('addPlugin',
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { GaCookiesPlugin } from '@snowplow/browser-plugin-ga-cookies';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ GaCookiesPlugin() ],
 });
 ```
@@ -69,10 +73,88 @@ newTracker('sp1', '{{collector_url}}', {
   </TabItem>
 </Tabs>
 
+</details>
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('addPlugin',
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js",
+  ["snowplowGaCookies", "GaCookiesPlugin"],
+  [pluginOptions]
+);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { GaCookiesPlugin } from '@snowplow/browser-plugin-ga-cookies';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ GaCookiesPlugin(pluginOptions) ],
+});
+```
+
+  </TabItem>
+</Tabs>
+
+The `pluginOptions` parameter allows to configure the plugin. It's type is:
+
+```javascript
+interface GACookiesPluginOptions {
+  ua?: boolean;
+  ga4?: boolean;
+  ga4MeasurementId?: string | string[];
+  cookiePrefix?: string | string[];
+}
+```
+
+| Name             | Default | Description                                                                                                                                                                                                                                                                                                                                                     |
+|------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ua               | `true`  | Send Universal Analytics specific cookie values.                                                                                                                                                                                                                                                                                                                |
+| ga4              | `false` | Send Google Analytics 4 specific cookie values.                                                                                                                                                                                                                                                                                                                 |
+| ga4MeasurementId | `""`    | Measurement id(s) to search the Google Analytics 4 session cookie. Can be a single measurement id as a string or an array of measurement id strings. The cookie has the form of `<cookie_prefix>_ga_<container-id>` where `<container-id>` is the data stream container id and `<cookie_prefix>` is the optional `cookie_prefix` option of the gtag.js tracker. |
+| cookiePrefix     | `[]`    | Cookie prefix set on the Google Analytics 4 cookies using the `cookie_prefix` option of the gtag.js  tracker.                                                                                                                                                                                                                                                   |
+
 ### Context
+
+<details>
+
+<summary><i>pre-v3.17.0</i></summary>
 
 Adding this plugin will automatically capture the following context:
 
 | Context                                                                                                                                                          | Example                                           |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
 | [iglu:com.google.analytics/cookies/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.analytics/cookies/jsonschema/1-0-0) | ![](images/Screenshot-2021-03-30-at-22.12.03.png) |
+
+</details>
+
+Adding this plugin will automatically capture the following contexts:
+
+1. For Universal Analytics cookies: `iglu:com.google.analytics/cookies/jsonschema/1-0-0`, e.g.
+
+   ```
+   {
+       "_ga": "GA1.2.3.4"
+   }
+   ```
+
+2. For GA4 cookies: `iglu:com.google.ga4/cookies/jsonschema/1-0-0`
+
+   ```
+   {
+       "_ga": "G-1234",
+       "cookie_prefix": "prefix",
+       "session_cookies": [
+           {
+               "measurement_id": "G-1234",
+               "session_cookie": "567"
+           }
+       ]
+   }
+   ```

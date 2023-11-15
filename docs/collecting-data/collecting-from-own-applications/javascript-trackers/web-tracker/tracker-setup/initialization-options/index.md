@@ -99,6 +99,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   },
   retryStatusCodes: [],
   dontRetryStatusCodes: [],
+  retryFailedRequests: true,
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
 });
 ```
@@ -142,6 +143,7 @@ newTracker('sp', '{{collector_url_here}}', {
   },
   retryStatusCodes: [],
   dontRetryStatusCodes: [],
+  retryFailedRequests: true,
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
 });
 ```
@@ -216,7 +218,7 @@ The Snowplow JavaScript tracker offers two techniques where tracking can be done
 Recommended configurations when using `anonymousTracking`:
 
 ```javascript
-anonymousTracking: true, 
+anonymousTracking: true,
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
 
@@ -392,7 +394,7 @@ The following context entities are only available as configuration options for t
 
 If this context is enabled, the JavaScript Tracker will use the create a context JSON from the `window.performance.timing` object, along with the Chrome `firstPaintTime` field (renamed to `chromeFirstPaint`) if it exists. This data can be used to calculate page performance metrics.
 
-Note that if you fire a page view event as soon as the page loads, the `domComplete`, `loadEventStart`, `loadEventEnd`, and `chromeFirstPaint` metrics in the Navigation Timing API may be set to zero. This is because those properties are only known once all scripts on the page have finished executing. 
+Note that if you fire a page view event as soon as the page loads, the `domComplete`, `loadEventStart`, `loadEventEnd`, and `chromeFirstPaint` metrics in the Navigation Timing API may be set to zero. This is because those properties are only known once all scripts on the page have finished executing.
 
 <details>
   <summary>Advanced PerformanceTiming usage</summary>
@@ -606,7 +608,7 @@ This value is configurable when initialising the tracker and is specified in mil
 
 ## Custom header values
 
-From v3.2.0, you are able to set custom headers with an `eventMethod: "post"` and `eventMethod: "get"` (Except for IE9). This functionality should only be used in the case where a Proxy or other Collector type is being used which allows for custom headers to be set on the request. 
+From v3.2.0, you are able to set custom headers with an `eventMethod: "post"` and `eventMethod: "get"` (Except for IE9). This functionality should only be used in the case where a Proxy or other Collector type is being used which allows for custom headers to be set on the request.
 
 :::caution
 Adding additional headers without returning the appropriate CORS Headers on the OPTIONS request will cause events to fail to send.
@@ -640,6 +642,8 @@ dontRetryStatusCodes: [418] // force retry on 418
 ```
 
 Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent. Take caution when choosing the `dontRetryStatusCodes`.
+
+Starting with version 3.17 of the tracker, it is also possible to completely disable retry functionality, using the `retryFailedRequests` boolean option. This option takes precedence over `retryStatusCodes` and `dontRetryStatusCodes`.
 
 ## On session update callback
 

@@ -4,11 +4,8 @@ sidebar_position: 400
 hide_table_of_contents: true
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import { DbtCongfigurationPage } from '@site/src/components/JsonSchemaValidator';
+import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
-import ReactMarkdown from 'react-markdown';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
 import CodeBlock from '@theme/CodeBlock';
@@ -60,65 +57,23 @@ export const MyMdxComponent = () => {
   const versions = ['0.6.1'];
   const label = 'dbt media player version';
   const output = printYamlVariables;
-  const group = 'true';
-  const dbtConfigOutput = DbtCongfigurationPage({
-    schemaName,
-    versions,
-    label,
-    output,
-    group
-  });
-  if (dbtConfigOutput[0]) {
     return (
-      <div>
-        {dbtConfigOutput[1]} {/* SelectSchemaVersion */}
-        <br/>
-        <h2 id="Variables">Package Configuration Variables</h2>
-        <p>This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your <code>dbt_project.yml</code> file.</p>
-        <Admonition type="note">
-          All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
-        </Admonition>
-        <br/>
-        {dbtConfigOutput[2]} {/* JsonToTable */}
-        <br/>
-        <br/>
-        <h2 id="Generator">Config Generator</h2>
-        <p>You can use the below inputs to generate the code that you need to place into your <code>dbt_project.yml</code> file to configure the package as you require. Any values not specified will use their default values from the package.</p>
-        {dbtConfigOutput[3]} {/* JsonSchemaGenerator */}
-        <br/>
-        <h2 id="Schemas">Output Schemas</h2>
+      <DbtCongfigurationPage schemaName={schemaName} versions={versions} label={label}>
+        <JsonToTable>
+            <h2 id="Variables">Package Configuration Variables</h2>
+            <p>This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your <code>dbt_project.yml</code> file.</p>
+            <Admonition type="note">
+              All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
+            </Admonition>
+        </JsonToTable>
+        <JsonSchemaGenerator output={output}>
+            <h2 id="Generator">Config Generator</h2>
+            <p>You can use the below inputs to generate the code that you need to place into your <code>dbt_project.yml</code> file to configure the package as you require. Any values not specified will use their default values from the package.</p>
+        </JsonSchemaGenerator>
         <DbtSchemas/>
-        <SchemaSetter output={printSchemaVariables}/>
-      </div>
+        <SchemaSetter output={printSchemaVariables} />
+      </DbtCongfigurationPage>
     );
-  } else {
-    return(
-      <div>
-        {dbtConfigOutput[1]} {/* SelectSchemaVersion */}
-      </div>
-    );
-  }
-};
+  };
 
 <MyMdxComponent/>
-
-export const toc = [
-{
-  "value": "Package Configuration Variables",
-  "id": "Variables",
-  "level": 2,
-  "children": []
-},
-{
-  "value": "Config Generator",
-  "id": "Generator",
-  "level": 2,
-  "children": []
-},
-{
-  "value": "Output Schemas",
-  "id": "Schemas",
-  "level": 2,
-  "children": []
-},
-];

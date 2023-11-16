@@ -4,11 +4,8 @@ sidebar_position: 100
 hide_table_of_contents: true
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import { DbtCongfigurationPage, SelectSchemaVersion, JsonToTable, JsonSchemaGenerator } from '@site/src/components/JsonSchemaValidator';
+import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
-import ReactMarkdown from 'react-markdown';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
 import CodeBlock from '@theme/CodeBlock';
@@ -84,25 +81,3 @@ export const MyMdxComponent = () => {
   };
 
 <MyMdxComponent/>
-
-
-export const toc = [
-{
-  "value": "Package Configuration Variables",
-  "id": "Variables",
-  "level": 2,
-  "children": []
-},
-{
-  "value": "Config Generator",
-  "id": "Generator",
-  "level": 2,
-  "children": []
-},
-{
-  "value": "Output Schemas",
-  "id": "Schemas",
-  "level": 2,
-  "children": []
-},
-];

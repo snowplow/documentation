@@ -272,7 +272,7 @@ export function DbtCongfigurationPage({ schemaName, versions, label, children })
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label={label} />}
         />
-        {childProps}
+        {versionedSchema !== null && childProps}
       </>
     );
   }

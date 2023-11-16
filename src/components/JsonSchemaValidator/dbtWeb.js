@@ -292,8 +292,8 @@ export const dbtSnowplowWebConfigSchema = {
           type: 'object',
           title: "Identifier",
           properties: {
-            schema: { type: 'string', description: 'The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself' }, // TODO: add regex here to make valid context/unstruct or atomic?
-            field: { type: 'string', description: 'The name of the field to use as session identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted' } // TODO: add regex here to make valid SQL name?
+            schema: { type: 'string' }, // TODO: add regex here to make valid context/unstruct or atomic?
+            field: { type: 'string' } // TODO: add regex here to make valid SQL name?
           },
           required: ['schema', 'field'],
           additionalProperties: false
@@ -306,8 +306,7 @@ export const dbtSnowplowWebConfigSchema = {
     },
     snowplow__session_timestamp: {
       type: 'string',
-      title: 'Session Timestamp',
-      description: 'Timestamp used for incremental processing, should be your partition field'
+      title: 'Timestamp used for incremental processing, should be your partition field',
     },
     snowplow__user_identifiers: {
       type: 'string',
@@ -319,8 +318,8 @@ export const dbtSnowplowWebConfigSchema = {
           type: 'object',
           title: "Identifier",
           properties: {
-            schema: { type: 'string', description: 'The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself' }, // TODO: add regex here to make valid context/unstruct or atomic?
-            field: { type: 'string', description: 'The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted' } // TODO: add regex here to make valid SQL name?
+            schema: { type: 'string' }, // TODO: add regex here to make valid context/unstruct or atomic?
+            field: { type: 'string' } // TODO: add regex here to make valid SQL name?
           },
           required: ['schema', 'field'],
           additionalProperties: false
@@ -330,14 +329,13 @@ export const dbtSnowplowWebConfigSchema = {
 
     snowplow__user_sql: {
       type: 'string',
-      title: 'User sql',
-      description: 'SQL for your user identifier'
+      title: 'SQL for your user identifier',
     },
     snowplow__user_stitching_id: {
       type: 'string',
-      title: 'User Stitching Id',
-      description: 'Field used when stitching together users'
+      title: 'Field used when stitching together users',
     },
+
 
 
     snowplow__page_view_passthroughs: {

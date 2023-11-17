@@ -5,7 +5,9 @@ title: "Unified Quickstart"
 ---
 
 :::danger
-The unified package is currently in pre-release state.
+Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
+
+The unified package is currently in public preview state.
 :::
 
 ## Requirements

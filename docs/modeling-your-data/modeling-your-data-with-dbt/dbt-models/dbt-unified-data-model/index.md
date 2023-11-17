@@ -10,10 +10,11 @@ import ThemedImage from '@theme/ThemedImage';
 import DocCardList from '@theme/DocCardList';
 
 ```
+:::info
+Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
+:::
 
 :::danger
-Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
-
 The unified package is currently in public preview state.
 :::
 

@@ -4,9 +4,11 @@ sidebar_position: 100
 title: "Unified Quickstart"
 ---
 
-:::danger
+:::info
 Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
+:::
 
+:::danger
 The unified package is currently in public preview state.
 :::
 

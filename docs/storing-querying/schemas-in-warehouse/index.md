@@ -752,7 +752,7 @@ _If content size is longer than 65535 it would be truncated when inserted into t
 }
 ```
 
-- Only works for `B`=2
+- Only works for `B`=0.01
 
 </td>
 <td>

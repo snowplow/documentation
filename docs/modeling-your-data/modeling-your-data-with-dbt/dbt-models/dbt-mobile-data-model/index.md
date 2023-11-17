@@ -53,12 +53,8 @@ By default they are disabled. They can be enabled by configuring the `dbt_projec
 
 Currently the App Errors module, used for crash reporting, is the only optional module. More will be added in the future as the tracker's functionality expands.
 
-### App Errors
+```mdx-code-block
+import Apperrors from "@site/docs/reusable/data-modeling/app-errors/_index.md"
 
-Assuming your tracker is capturing `application_error` events, the module can be enabled by configuring the `dbt_project.yml` file:
-
-```yml title="dbt_project.yml"
-vars:
-  snowplow_mobile:
-    snowplow__enable_app_errors_module: true
+<Apperrors packageName="mobile" variable="snowplow__enable_app_errors_module"/>
 ```

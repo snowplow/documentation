@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`, `ecommerce`, `normalize`, `media_player`
+On this page, `<package>` can be one of: `unified`, `web`, `mobile`, `ecommerce`, `normalize`
 
 :::
 

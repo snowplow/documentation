@@ -29,7 +29,7 @@ export const versions = {
   snowbridge: '2.2.0',
 
   // Loaders
-  bqLoader: '1.6.8',
+  bqLoader: '1.7.0',
   esLoader: '2.1.2',
   gcsLoader: '0.5.4',
   postgresLoader: '0.3.3',

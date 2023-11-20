@@ -36,13 +36,15 @@ For Snowplow BDP customers, dbt projects can be configured and scheduled in the 
 
 Our dbt packages come with powerful built-in features such as an [optimization to the incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md) to save you cost on warehouse compute resources compared to the standard method, a custom [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) to ensure we process just the required data for each run and keep your models in sync, plus the ability to build your own custom models using both of these!
 
-There are 6 core snowplow dbt packages:
+There are 4 core snowplow dbt packages:
 - [Snowplow Unified](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_unified)): for modeling your web and mobile data for page and screen views, sessions, users, and consent
-- [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web)): for modeling your web data for page views, sessions, users, and consent
-- [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile)): for modeling your mobile app data for screen views, sessions, users, and crashes
 - [Snowplow Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player)): for modeling your media elements for play statistics
 - [Snowplow E-commerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce)): for modeling your E-commerce interactions across carts, products, checkouts, and transactions
 - [Snowplow Fractribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-fractribution/#!/overview/fractribution)): used for Attribution Modeling with Snowplow
+
+There are also 2 legacy dbt packages for web and mobile (superceded by unified):
+- [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web)): for modeling your web data for page views, sessions, users, and consent
+- [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile)): for modeling your mobile app data for screen views, sessions, users, and crashes
 
 Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/collecting-data/collecting-from-own-applications/index.md) and produce tables aggregated to different levels, or to perform analysis for you. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
 

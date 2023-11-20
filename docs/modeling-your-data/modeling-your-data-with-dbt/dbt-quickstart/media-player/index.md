@@ -4,6 +4,10 @@ sidebar_position: 400
 title: "Media Player Quickstart"
 ---
 
+:::info
+Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
+:::
+
 ## Requirements
 
 

@@ -12,6 +12,9 @@ import Badges from '@site/src/components/Badges';
 ```
 <Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
 
+:::info
+Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
+:::
 
 # Snowplow Media Player Package
 

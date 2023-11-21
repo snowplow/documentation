@@ -4,6 +4,16 @@ sidebar_position: 400
 title: "Media Player Quickstart"
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import ThemedImage from '@theme/ThemedImage';
+import Badges from '@site/src/components/Badges';
+import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
+
+<Accelerator href="https://docs.snowplow.io/accelerators/media-player" name="Video and Media Analytics"/>
+```
+
 :::info
 Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
 :::

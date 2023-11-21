@@ -16,7 +16,7 @@ Overall, it suggests taking the following steps:
 ## Analyze your business use case and define reports
 
 Good tracking design comes from an understanding of the business use case.
-Identifying and analysing the use case should be the first step before we design our tracking.
+Identifying and analyzing the use case should be the first step before we design our tracking.
 This involves identifying the business outcomes that you want to achieve (e.g., acquire new customers, increase the number of signups, minimize abandoned carts)?
 It can often be answered by interviewing stakeholders who will consume the data in your organization.
 
@@ -67,7 +67,7 @@ The following are our recommendations, but in general, it's more important to be
 ## Start with entities
 
 A good practice when designing tracking is to start with [the entities](/docs/understanding-your-pipeline/entities/index.md).
-Entities contextualise and join events together, and they are often the levels of analysis a business is interested in (e.g., sale, user, organisation, location).
+Entities contextualize and join events together, and they are often the levels of analysis a business is interested in (e.g., sale, user, organization, location).
 
 When thinking about the information modeled using entities, ask these questions:
 

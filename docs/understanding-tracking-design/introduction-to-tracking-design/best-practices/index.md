@@ -31,7 +31,7 @@ For example, if one of the use cases is to identify abandoned carts, we may want
 * What are the most commonly abandoned products in carts?
 * What leads users to return to the store and continue their purchase?
 
-We need to go deeper into specifying what exactly should the derived tables for these reports contain.
+We need to go deeper into specifying what exactly the derived tables for these reports should contain.
 However, we can already see a few reusable entities that we need to track: user, cart, product, page referrer.
 The reports can also tell us what events we'll need as interactions of these entities: add product to cart, checkout step, transaction, page view.
 
@@ -59,7 +59,7 @@ Our [data product accelerators](https://snowplow.io/data-product-accelerators/) 
 Having a common standard for how to name events, entities and properties can make it easier to understand and extend the tracking design.
 The following are our recommendations, but in general, it's more important to be consistent across your schemas than to follow these recommendations:
 
-* Use snake case for both the schema and properties. This will ensure that the names consistent with how the properties end up in the warehouse (for some warehouses, property names are converted to snake case regardless of how they are defined in the schemas). Avoid using hyphens to separate words, instead use underscores.
+* Use snake case for both the schema and properties. This will ensure that the names are consistent with how the properties end up in the warehouse (for some warehouses, property names are converted to snake case regardless of how they are defined in the schemas). Avoid using hyphens to separate words, instead use underscores.
 * Use the verb – noun convention for event names. For instance, `add_to_cart`, `play_video`.
 * Be consistent about the tense (present or past). Make sure that all your events use the same tense (e.g., `play` and `pause` instead of `played` and `pause`).
 * Use singular in the entity name (e.g., `product` instead of `products`).
@@ -72,7 +72,7 @@ Entities contextualise and join events together, and they are often the levels o
 When thinking about the information modeled using entities, ask these questions:
 
 1. Is this information needed? Refer to the business reports identified earlier in order to assess what needs to be tracked and avoid unnecessary overhead and unused data.
-2. Can this information be reused across events? If an information is reusable for more events, it is a good indication that it should be modeled using an entity rather than an event.
+2. Can this information be reused across events? If information is reusable for more events, it is a good indication that it should be modeled using an entity rather than an event.
 
 ## Define the events
 
@@ -90,7 +90,7 @@ The last two questions above can be captured using [tracking scenarios in BDP En
 :::
 
 A common challenge in defining event schemas is the choice of their granularity.
-Should one define an event schema for every single action or choose to group actions into less event schemas.
+Should one define an event schema for every single action, or choose to group actions into fewer event schemas?
 This is a trade-off that does not have a single correct answer.
 Nevertheless, there are two recommendations that we can give.
 
@@ -101,7 +101,7 @@ A good rule of thumb is that the name of the event should be representative what
 <div style={{ width: "50%", float: "left", paddingRight: "5px" }}>
 
 :::warning Bad
-It is not obvious from the event name `website_action` what does it capture. The event also groups together two unrelated actions that are distinguished by the `type` property.
+It is not obvious from the event name `website_action` what it captures. The event also groups together two unrelated actions that are distinguished by the `type` property.
 
 ```json
 {

@@ -69,10 +69,14 @@ The following are our recommendations, but in general, it's more important to be
 A good practice when designing tracking is to start with [the entities](/docs/understanding-your-pipeline/entities/index.md).
 Entities contextualize and join events together, and they are often the levels of analysis a business is interested in (e.g., sale, user, organization, location).
 
-When thinking about the information modeled using entities, ask these questions:
+It may not be obvious whether some properties should be added to events or entities.
+In general, it is preferable to place information in entities as this will enable it to be reused across multiple events.
+It may often be the case that events do not have any properties – this is totally fine.
+Event properties should be limited only to information that is strictly related to the event and unlikely to be reused elsewhere (e.g., error message for an application error event).
 
-1. Is this information needed? Refer to the business reports identified earlier in order to assess what needs to be tracked and avoid unnecessary overhead and unused data.
-2. Can this information be reused across events? If information is reusable for more events, it is a good indication that it should be modeled using an entity rather than an event.
+Finally, it is a good practice to ask whether certain data really needs to be captured.
+Tracking unnecessary information uses extra bandwidth and batter power and may add extra overhead to manage.
+Refer to the business reports identified earlier in order to assess what data needs to be tracked.
 
 ## Define the events
 

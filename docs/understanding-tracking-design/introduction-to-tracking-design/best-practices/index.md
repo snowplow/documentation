@@ -63,6 +63,7 @@ The following are our recommendations, but in general, it's more important to be
 * Use the verb – noun convention for event names. For instance, `add_to_cart`, `play_video`.
 * Be consistent about the tense (present or past). Make sure that all your events use the same tense (e.g., `play` and `pause` instead of `played` and `pause`).
 * Use singular in the entity name (e.g., `product` instead of `products`).
+* Prefer not to use nested objects in the JSON schema as this will make it more difficult to work with the data in Redshift.
 
 ## Start with entities
 

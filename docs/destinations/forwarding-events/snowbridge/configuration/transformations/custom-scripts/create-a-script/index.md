@@ -46,7 +46,7 @@ The output of the script must be an object (Javascript) or a table (Lua) which m
 
 ## Transforming Data
 
-For all the below examples, the input is a string representation of the below JSON object. For Snowplow data, using `snowplow_mode` will produce a json object input - see [the snowplow example](../examples/snowplow/index.md).
+For all the below examples, the input is a string representation of the below JSON object. For Snowplow data, using `snowplow_mode` will produce a JSON object input - see [the snowplow example](../examples/snowplow/index.md).
 
 ```json
 {

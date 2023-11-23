@@ -1,7 +1,7 @@
 ---
-sidebar_label: "Unified"
+sidebar_label: "Unified Digital"
 sidebar_position: 100
-title: "Unified Quickstart"
+title: "Unified Digital Quickstart"
 ---
 
 :::info
@@ -9,7 +9,7 @@ Please note that this data model is under the Snowplow Personal & Academic Licen
 :::
 
 :::danger
-The unified package is currently in public preview state.
+The Unified Digital Model is currently in public preview state.
 :::
 
 ## Requirements
@@ -56,7 +56,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the unified model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the Unified Digital Model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-web/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -78,7 +78,7 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 ### 4. Enabled desired contexts
 
-The unified package has the option to join in data from the following Snowplow enrichments and out-of-the-box context entities:
+The Unified Digital Model has the option to join in data from the following Snowplow enrichments and out-of-the-box context entities:
 
 - [IAB enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md)
 - [UA Parser enrichment](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
@@ -93,7 +93,7 @@ The unified package has the option to join in data from the following Snowplow e
 - Core Web Vitals
 - Consent (Preferences & cmp visible)
 
-By default these are **all disabled** in the unified package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
+By default these are **all disabled** in the Unified Digital Model. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 
 ```yml title="dbt_project.yml"
 vars:
@@ -126,7 +126,7 @@ vars:
 
 ### 6. Verify page ping variables
 
-The unified package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
+The Unified Digital Model processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
 
 ```yml title="dbt_project.yml"
 vars:

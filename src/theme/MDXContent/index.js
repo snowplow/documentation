@@ -8,7 +8,7 @@ import _ from 'lodash'
 const offeringNames = {
   enterprise: "Snowplow BDP Enterprise",
   cloud: "Snowplow BDP Cloud",
-  opensource: "Snowplow Open Source",
+  community: "Snowplow Community Edition",
 }
 
 export default function MDXContentWrapper(props) {

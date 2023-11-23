@@ -1,10 +1,10 @@
 ---
-title: "What is Snowplow Open Source?"
+title: "What is Snowplow Community Edition?"
 date: "2020-11-24"
 sidebar_position: 0
 ---
 
-Snowplow Open Source is an event data collection platform for data teams who want to manage the collection and warehousing of data across all their platforms and channels, in real-time.
+Snowplow Community Edition is an event data collection platform for data teams who want to manage the collection and warehousing of data across all their platforms and channels, in real-time.
 
 Snowplow is a complete, loosely coupled platform that lets you capture, store and analyze granular customer-level and event-level data:
 

@@ -6,12 +6,12 @@ description: "How to choose and set up the right flavor of Snowplow"
 
 ## Snowplow offerings
 
-You can choose between Snowplow BDP Enterprise (paid, hosted in your cloud), Snowplow BDP Cloud (paid, hosted by Snowplow) and Snowplow Open Source (free, hosted in your cloud). See the [feature comparison page](/docs/feature-comparison/index.md) for more information.
+You can choose between Snowplow BDP Enterprise (paid, hosted in your cloud), Snowplow BDP Cloud (paid, hosted by Snowplow) and Snowplow Community Edition (free, hosted in your cloud). See the [feature comparison page](/docs/feature-comparison/index.md) for more information.
 
 Each offering has its own setup guide:
 * [Snowplow BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md)
 * [Snowplow BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md)
-* [Snowplow Open Source](/docs/getting-started-on-snowplow-open-source/index.md)
+* [Snowplow Community Edition](/docs/getting-started-on-snowplow-open-source/index.md)
 
 ## Other options
 

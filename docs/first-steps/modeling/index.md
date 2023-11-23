@@ -30,7 +30,7 @@ You will need to install dbt and run the models yourself — see the “quick st
 You will need to install dbt and run the models yourself — see the “quick start” links below.
 
   </TabItem>
-  <TabItem value="opensource" label="Open Source">
+  <TabItem value="community" label="Community Edition">
 
 You will need to install dbt and run the models yourself — see the “quick start” links below.
 

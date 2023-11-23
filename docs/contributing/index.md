@@ -8,7 +8,7 @@ The Snowplow team works with the open source community to deliver Snowplow, the 
 
 ## Contributing to Snowplow
 
-Snowplow is open source software — we welcome contributors! Some things you might like to help out with:
+The source code is available for a large portion of the Snowplow product — we welcome contributors! Some things you might like to help out with:
 
 - This documentation!
 - Feature development

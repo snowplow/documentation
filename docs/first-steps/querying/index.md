@@ -32,7 +32,7 @@ You can find the connection details in the [Try Snowplow UI](https://try.snowplo
 For a step-by-step guide on how to query data in Try Snowplow, see [this tutorial](/docs/recipes/querying-try-data/index.md).
 
   </TabItem>
-  <TabItem value="opensource" label="Open Source">
+  <TabItem value="community" label="Community Edition">
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>

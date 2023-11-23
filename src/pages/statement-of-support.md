@@ -26,9 +26,9 @@ We’re here to help, providing product support, answering questions, and giving
 
 ### Severity Definitions and SLAs
 
-Snowplow Support is committed to serving your needs within the bounds and exclusions of the Support Response and infrastructure SLAs laid out in the SLA section of our [Product Description](https://snowplow.io/snowplow-bdp-product-description/). 
+Snowplow Support is committed to serving your needs within the bounds and exclusions of the Support Response and infrastructure SLAs laid out in the SLA section of our [Product Description](https://snowplow.io/snowplow-bdp-product-description/).
 
-In the event we do not meet these SLAs in any particular month, we have a rebate policy in place for BDP Enterprise and Cloud customers. Details of this can also be found in the SLA rebate section our [Product Description](https://snowplow.io/snowplow-bdp-product-description/). 
+In the event we do not meet these SLAs in any particular month, we have a rebate policy in place for BDP Enterprise and Cloud customers. Details of this can also be found in the SLA rebate section our [Product Description](https://snowplow.io/snowplow-bdp-product-description/).
 
 ### Escalations
 
@@ -47,7 +47,7 @@ If you have feedback on any of our products including BDP Console, pipeline comp
 
 ## Snowplow BDP Pipelines
 
-The following services are provided for all BDP Cloud and BDP Enterprise customers, and for our Try Snowplow trial users. The support described here is not currently available to Open Source users or customers using our standalone product or service packages.
+The following services are provided for all BDP Cloud and BDP Enterprise customers, and for our Try Snowplow trial users. The support described here is not currently available to Community Edition users or customers using our standalone product or service packages.
 
 ### Major Incident Response
 
@@ -65,7 +65,7 @@ Our 24/7 team of engineers monitor your pipeline for errors, failures, and data 
 
 ### Pipeline Management
 
-For BDP Enterprise and Cloud customers we use proprietary means to manage the configuration of pipeline infrastructure and environments. Where appropriate, we’ll work with you to make and deploy certain configuration and secrets changes to the Snowplow pipeline setup on your behalf. 
+For BDP Enterprise and Cloud customers we use proprietary means to manage the configuration of pipeline infrastructure and environments. Where appropriate, we’ll work with you to make and deploy certain configuration and secrets changes to the Snowplow pipeline setup on your behalf.
 
 We encourage you to reach out to us if you are considering setting up new use cases, or are expecting seasonal or periodic (eg daily) peaks in volume or usage; we will work with you to ensure your pipeline is optimally tuned for performance and cost management according to your changing needs.
 
@@ -81,7 +81,7 @@ We recommend having a business level of support with your cloud provider. If you
 
 ## BDP Enterprise
 
-The following additional services are provided with BDP Enterprise (formerly Snowplow Insights). Services may differ between Snowplow BDP tiers and other bespoke contractual obligations. 
+The following additional services are provided with BDP Enterprise (formerly Snowplow Insights). Services may differ between Snowplow BDP tiers and other bespoke contractual obligations.
 
 ### Bad Data Recoveries
 
@@ -110,12 +110,12 @@ As part of our [Infrastructure Review service](https://snowplow.io/snowplow-bdp-
 
 Unless otherwise stated in your contract, we provide official support for software that’s either in its latest version or a version released within the last 18 months (rolling). You can find the [current versions of components](https://docs.snowplow.io/docs/pipeline-components-and-applications/versions/) in our documentation.
 
-### Open Source
+### Community Edition
 
-Customer Support is provided to our commercial customers. For support with your Open Source pipeline, we encourage you to make use of these resources:
+Customer Support is provided to our commercial customers. For support with your Community Edition pipeline, we encourage you to make use of these resources:
 
 - [Snowplow Docs](https://docs.snowplow.io/docs): Extensive product and engineering documentation of Snowplow features, functionality, and configuration.
-- [Snowplow Discourse](https://discourse.snowplow.io/): Community forum where free & open source users, customers, and our team come together to discuss everything Snowplow.
+- [Snowplow Discourse](https://discourse.snowplow.io/): Community forum where users, customers, and our team come together to discuss everything Snowplow.
 
 ## Access Needed to Support Your Pipeline
 

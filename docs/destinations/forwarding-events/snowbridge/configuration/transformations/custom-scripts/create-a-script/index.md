@@ -46,6 +46,16 @@ The output of the script must be an object (Javascript) or a table (Lua) which m
 
 ## Transforming Data
 
+For all the below examples, the input is a string representation of the below JSON object. For Snowplow data, using `snowplow_mode` will produce a JSON object input - see [the snowplow example](../examples/snowplow/index.md).
+
+```json
+{
+  "name": "Bruce",
+  "id": "b47m4n",
+  "batmobileCount": 1
+}
+```
+
 To modify the message data, return an object which conforms to EngineProtocol, with the `Data` field set to the modified data. The `Data` field may be returned as either a string, or an object (Javascript) / table (Lua).
 
 ```js reference

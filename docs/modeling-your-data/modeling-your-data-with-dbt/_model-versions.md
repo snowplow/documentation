@@ -10,7 +10,7 @@ import {versions} from '@site/src/componentVersions';
 
 <Tabs groupId="dbt-packages" queryString>
 
-<TabItem value="unified" label="Snowplow Unified" default>
+<TabItem value="unified" label="Snowplow Unified Digital" default>
 
 
 <ReactMarkdown children={`

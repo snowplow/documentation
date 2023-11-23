@@ -1,7 +1,7 @@
 ---
-sidebar_label: "Unified"
+sidebar_label: "Unified Digital"
 sidebar_position: 100
-title: "Unified Quickstart"
+title: "Unified Digital Quickstart"
 ---
 
 :::info

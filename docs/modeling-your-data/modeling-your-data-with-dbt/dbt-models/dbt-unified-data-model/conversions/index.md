@@ -6,37 +6,8 @@ hide_title: true
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
-import CodeBlock from '@theme/CodeBlock';
-import { dump } from 'js-yaml';
-import { ObjectFieldTemplateGroupsGenerator, JsonApp } from '@site/src/components/JsonSchemaValidator';
-
-export const schema = {
-  "title": "Conversion Definition",
-  "type": "array",
-  "default": [{}],
-  "minItems": 1,
-  "items": {
-    "type": "object",
-    "required": ["name", "condition"],
-    "properties": {
-      "name": { "type": "string", "title": "Name", "description": "Name of your conversion type" },
-      "condition": { "type": "string", "title": "Condition", "description": "SQL condition e.g. event_name = 'page_view'" },
-      "value": { "type": "string", "title": "Value", "description": "SQL value e.g. tr_total_base"  },
-      "default_value": { "type": "number", "title": "Default value", "description": "Default value e.g. 0" },
-      "list_events": { "type": "boolean", "title": "List all event ids?" }
-    }
-  }
-};
-
-export const printYamlVariables = (data) => {
-  return(
-    <>
-    <h4>Project Variable:</h4>
-    <CodeBlock language="yaml">snowplow__conversion_events: {JSON.stringify(data, null, 4)}</CodeBlock>
-    </>
-  )
-}
-
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 ```
 
 <Badges badgeType="dbt-package Release" pkg="unified"></Badges>
@@ -49,7 +20,7 @@ Because we know that each user may have a different concept of what a conversion
 
 :::caution
 
-Because this is part of the sessions table within the Unified Digital Model, we still expect your sessions to contain at least one `page_view` or `page_ping` event, and the events must all have a `session_identifier` to be included in the `base_events_this_run_table`. Without a `session_identifier` the event will not be visible to the model, and without a `page_view` or `page_ping` in the session there will be no session record for the model to attach the conversions to.
+Because this is part of the sessions table within the Unified dbt package, we still expect your sessions to contain at least one `page_view` or `page_ping` event, and the events must all have a `session_identifier` to be included in the `base_events_this_run_table`. Without a `session_identifier` the event will not be visible to the model, and without a `page_view` or `page_ping` in the session there will be no session record for the model to attach the conversions to.
 
 :::
 
@@ -98,7 +69,7 @@ The `snowplow__conversion_events` variable in our project takes a list of dictio
 
 :::tip
 
-Because the sessions table builds from our `_events_this_run` table, and both the `condition` and `value` fields will accept any valid sql that can go in a `case when...` and `select` block respectively, this means you can use any fields in a `contexts_` or `unstruct_` column in addition to the default `atomic.events` fields. However, it will not accept dbt code so you need to extract the relevant field yourself. You can see an example of this below.
+Because the sessions table builds from our `_events_this_run` table, and both the `condition` and `value` fields will accept any valid sql that can go in a `case when...` and `select` block respectively, this means you can use any fields in a `contexts_` or `unstruct_` column in addition to the default `atomic.events` fields. However, it will not accept dbt code so you need to extract the relevant field yourself. You can see an example of this below. 
 
 For Redshift and Postgres users currently you are limited to just the fields added by the IAB, UA, and YAUAA contexts without modifying the models yourself, however we plan to support adding arbitrary self-describing event and context fields to our base table in the future.
 
@@ -111,9 +82,9 @@ For Redshift and Postgres users currently you are limited to just the fields add
 
 ```json
     {
-    "name": "contact_page_view",
+    "name": "contact_page_view", 
     "condition": "event_name = 'page_view' and page_url like '%contact-us%",
-    "list_events": true
+    "list_events": true 
     }
 ```
 
@@ -127,8 +98,8 @@ For some self-describing event with a name of `sign_up`, where we do not want to
 
 ```json
     {
-    "name": "transact",
-    "condition": "event_name = 'sign_up'",
+    "name": "transact", 
+    "condition": "event_name = 'sign_up'", 
     }
 ```
 
@@ -139,16 +110,16 @@ For some self-describing event with a name of `sign_up`, where we do not want to
 <summary>Using a self-describing event and a context name</summary>
 
 
-Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/index.md:
+Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/index.md):
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>
 
 ```json
     {
-    "name": "transact",
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1:type::varchar = 'transaction'",
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0]:revenue::decimal(22,2)",
+    "name": "transact", 
+    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1:type::varchar = 'transaction'", 
+    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0]:revenue::decimal(22,2)", 
     "default_value":0
     }
 ```
@@ -158,7 +129,7 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ```json
     {
-    "name": "transact",
+    "name": "transact", 
     "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1_0_0.type = 'transaction'",
     "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1_0_0[SAFE_OFFSET(0)].revenue",
     "default_value":0
@@ -170,9 +141,9 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ```json
     {
-    "name": "transact",
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1.type = 'transaction'",
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue",
+    "name": "transact", 
+    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1.type = 'transaction'", 
+    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue", 
     "default_value":0
     }
 ```
@@ -186,6 +157,4 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ## Configuration Generator
 
-You can use the below to generate the project variable `snowplow__conversion_events`, or you can use our full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/index.md).
-
-<JsonApp schema={schema} output={printYamlVariables} />
+You can use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) to help you generate your conversion event definitions.

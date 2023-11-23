@@ -7,7 +7,6 @@ import Form from '@rjsf/mui'
 import Details from '@theme/Details'
 import Tooltip from '@mui/material/Tooltip';
 import ReactMarkdown from 'react-markdown';
-import { Templates } from '@rjsf/mui'
 
 
 import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, gridClasses, } from '@mui/x-data-grid-premium';
@@ -23,10 +22,6 @@ function importAll(r) {
   });
   return mods;
 }
-
-// Allow for grouping of items into collapsible fields
-// Get default object field template to pass to
-export const ObjectFieldTemplates = Templates.ObjectFieldTemplate
 
 export const schemaImports = importAll(require.context('./Schemas/', false, /\.(js)$/));
 
@@ -44,7 +39,7 @@ export const lightTheme = createTheme({
 })
 
 // Config Generator
-export function JsonSchemaGenerator({ output, children, schemaName, schemaVersion, versionedSchema }) {
+export function JsonSchemaGenerator({ output, children, versionedSchema }) {
   const [formData, setFormData] = useState(null)
   const { colorMode, setColorMode } = useColorMode()
 
@@ -280,74 +275,4 @@ export function DbtCongfigurationPage({ schemaName, versions, label, children })
   return (
     <SelectSchemaVersion versions={versions} label={label} />
   )
-}
-
-// DEPRECATED, to remove from all places
-export const JsonApp = (props) => {
-  // Props should contain:
-  // props.schema - the schema to validate against
-  // props.template - the template to use, if provided
-  // props.output - a function that renders an output, taking the formData as an input
-  const [formData, setFormData] = useState(null)
-  const { colorMode, setColorMode } = useColorMode()
-
-  return (
-    <>
-      <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
-        <div className="JsonValidator">
-          <Form
-            experimental_defaultFormStateBehavior={{
-              arrayMinItems: { populate: 'requiredOnly' },
-            }}
-            schema={props.schema}
-            formData={formData}
-            onChange={(e) => setFormData(e.formData)}
-            validator={validator}
-            showErrorList="bottom"
-            templates={{
-              ObjectFieldTemplate: props.template
-                ? props.template
-                : ObjectFieldTemplates,
-            }}
-            liveValidate
-            {...props}
-          >
-            <div />
-          </Form>
-        </div>
-        {props.output(formData)}
-      </ThemeProvider>
-    </>
-  )
-}
-
-// DEPRECATED, to remove from all places
-// generator to make a function that is a object field template valid function
-export const ObjectFieldTemplateGroupsGenerator = (groups) => (props) => {
-  // only apply difference at top level
-  if (props.idSchema['$id'] === 'root') {
-    return (
-      <>
-        {groups.map((group, index) => {
-          // filter to just the relevant props
-          const childProps = getPropsForGroup(group, props)
-          return (
-            <Details summary={group.title} key={group.title}>
-              <ObjectFieldTemplates key={group.title} {...childProps} />
-            </Details>
-          )
-        })}
-      </>
-    )
-  }
-  return <ObjectFieldTemplates {...props} />
-}
-
-// DEPRECATED, to remove from all places
-// Filter props to where they have the name listed in the groups fields
-export const getPropsForGroup = (group, props) => {
-  return {
-    ...props,
-    properties: props.properties.filter((p) => group.fields.includes(p.name)).sort((a, b) => a.name.localeCompare(b.name)),
-  }
 }

@@ -49,7 +49,7 @@ Because we know that each user may have a different concept of what a conversion
 
 :::caution
 
-Because this is part of the sessions table within the unified package, we still expect your sessions to contain at least one `page_view` or `page_ping` event, and the events must all have a `session_identifier` to be included in the `base_events_this_run_table`. Without a `session_identifier` the event will not be visible to the model, and without a `page_view` or `page_ping` in the session there will be no session record for the model to attach the conversions to.
+Because this is part of the sessions table within the Unified Digital Model, we still expect your sessions to contain at least one `page_view` or `page_ping` event, and the events must all have a `session_identifier` to be included in the `base_events_this_run_table`. Without a `session_identifier` the event will not be visible to the model, and without a `page_view` or `page_ping` in the session there will be no session record for the model to attach the conversions to.
 
 :::
 

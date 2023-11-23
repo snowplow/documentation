@@ -35,7 +35,7 @@ This mapping is applied to the sessions table by a post-hook which updates the `
 <TabItem value="unified" label="Snowplow Unified" default>
   <p align="center">
   <ThemedImage
-  alt='Session stitching in the unified package'
+  alt='Session stitching in the Unified Digital Model'
   sources={{
     light: require('./images/session_stitching_light_unified.drawio.png').default,
     dark: require('./images/session_stitching_dark_unified.drawio.png').default
@@ -101,7 +101,7 @@ dark: require('./images/stitching_scenarios.drawio.png').default
 />
 </p>
 
-(1) it is most convenient to use the unified package so that all of these events will be modelled into the same derived tables regardless of platform
+(1) it is most convenient to use the Unified Digital Model so that all of these events will be modelled into the same derived tables regardless of platform
 
 (2) if it is the same mobile/web device and the user identifies by logging in at a later stage while still retaining the same domain_userid/device_user_id, the model will update the stitched_user_id during session_stitching
  

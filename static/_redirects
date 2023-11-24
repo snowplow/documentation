@@ -202,3 +202,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/:splat 301
 /docs/getting-started-on-snowplow-open-source/* /docs/getting-started-on-community-edition/:splat 301
 /docs/getting-started-on-community-edition/what-is-snowplow-open-source/* /docs/getting-started-on-community-edition/what-is-community-edition/:splat 301
+
+# GTM docs
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/tag-template-guide/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/v3-tags/tag-template-guide/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/settings-variable-guide/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/v3-settings-variable/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/template-for-javascript-tracker-v2/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/previous-versions/template-for-javascript-tracker-v2/ 301

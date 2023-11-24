@@ -1,10 +1,12 @@
 ---
-title: "Tag guide"
+title: "Snowplow v3"
 date: "2021-11-18"
-sidebar_position: 200
+sidebar_position: 100
 ---
 
-This template implements the Snowplow JavaScript tracker v3. The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ sandboxed JavaScript.
+This template implements the [Snowplow JavaScript tracker v3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md).
+
+The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ [sandboxed JavaScript](https://developers.google.com/tag-platform/tag-manager/templates/sandboxed-javascript).
 
 ## Install the template
 
@@ -36,7 +38,7 @@ Finally, the tag bundles a **command** from the settings in the tag, and sends i
 
 ### Settings Configuration
 
-The Tag template requires a [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/settings-variable-guide/index.md) Variable template to be configured which can be referenced within the Tag. This settings template contains the information required for the Tag to appropriate initialize the tracker.
+The Tag template requires a [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/v3-settings-variable/index.md) Variable template to be configured which can be referenced within the Tag. This settings template contains the information required for the Tag to appropriately initialize the tracker.
 
 Once a settings variable has been configured, it can be attached to the Tag in the **Tracker Initialisation** section.
 
@@ -60,7 +62,7 @@ Since v1.1.0, an alternative to prevent breaking the gallery update link is to u
 
 ![library host drop down 'Do not load' option](images/host_drop_down_no_load.png)
 
-Using this option means that the Snowplow v3 Tag will not inject the Snowplow JavaScript Tracker library on the page and can be used **only** when the Tracker Snippet is loaded with another technique, e.g. directly on the page or through another GTM tag. (This is also supported as a configuration option since v1.2.0 of the [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/settings-variable-guide/index.md) Variable.)
+Using this option means that the Snowplow v3 Tag will not inject the Snowplow JavaScript Tracker library on the page and can be used **only** when the Tracker Snippet is loaded with another technique, e.g. directly on the page or through another GTM tag. (This is also supported as a configuration option since v1.2.0 of the [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/v3-settings-variable/index.md) Variable.)
 
 :::
 

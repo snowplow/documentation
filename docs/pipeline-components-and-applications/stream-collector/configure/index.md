@@ -49,8 +49,8 @@ This is a complete list of the options that can be configured in the collector H
 | `collector.terminationDeadline` (since *2.5.0*) | Optional. Default: `10 seconds`. The akka server's deadline for closing connections during graceful shutdown. |
 | `collector.prometheusMetrics.enabled` (deprecated since *2.6.0*) | Optional. Default: `false`. When enabled, all requests are logged as prometheus metrics and the `/metrics` endpoint returns the report about the metrics. |
 | `collector.prometheusMetrics.durationBucketsInSeconds` (deprecated since *2.6.0*) | Optional. E.g. `[0.1, 3, 10]`. Custom buckets for the `http_request_duration_seconds_bucket` duration prometheus metric. |
-| `collector.telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-snowplow-open-source/telemetry/index.md). |
-| `collector.telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-snowplow-open-source/telemetry/index.md#how-can-i-help) for more information. |
+| `collector.telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-community-edition/telemetry/index.md). |
+| `collector.telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-community-edition/telemetry/index.md#how-can-i-help) for more information. |
 | `collector.experimental.warmup.enable` (since *2.7.0*) | Optional. Default: `false`. Experimental feature. When enabled, the collector sends some "warm-up" requests to its own `/health` endpoint during start up. We have found from experiment this can cut down the number of `502`s returned from a load balancer in front of the collector in Kubernetes deployments. |
 | `collector.experimental.warmup.numRequests` (since *2.7.0*) | Optional. Default: `2000`. Number of requests to send if using the experimental warmup feature. |
 | `collector.experimental.warmup.maxConnections` (since *2.7.0*) | Optional. Default: `2000`. How many TCP connections to open simultaneously when using the experimental warmup feature. |

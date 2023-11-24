@@ -65,7 +65,7 @@ sidebar_custom_props:
 
 This will result in an icon appearing in the sidebar, as well as an automatic banner on the page, specifying that the docs only apply to a given offering.
 
-The available values are: `enterprise`, `cloud`, `community`. You can speficy just one value or combine several (currently, `enterprise` + `cloud` is the only supported combination, see `src/css/custom.css`). Do not specify all three values at once — if a piece of documentation is relevant to all offerings, there should be no `offerings` property as that’s the default.
+The available values are: `enterprise`, `cloud`, `community`. You can specify just one value or combine several (currently, `enterprise` + `cloud` is the only supported combination, see `src/css/custom.css`). Do not specify all three values at once — if a piece of documentation is relevant to all offerings, there should be no `offerings` property as that’s the default.
 
 Whenever the same functionality can be achieved in multiple offerings but in a different way (e.g. managing schemas), create a parent folder (“Managing schemas”) that’s offering-neutral, and then add offering-specific pages inside it. This way, other pages can link to the generic page without having to specify different methods for different offerings.
 

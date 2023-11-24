@@ -8,7 +8,7 @@ sidebar_custom_props:
     - community
 ---
 
-If you have installed Snowplow via [Quick Start](/docs/getting-started-on-snowplow-open-source/what-is-quick-start/index.md), you will have the following enrichments enabled by default:
+If you have installed Snowplow via [Quick Start](/docs/getting-started-on-community-edition/what-is-quick-start/index.md), you will have the following enrichments enabled by default:
 
 - [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
 - [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md)

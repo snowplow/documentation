@@ -11,7 +11,7 @@ You can choose between Snowplow BDP Enterprise (paid, hosted in your cloud), Sno
 Each offering has its own setup guide:
 * [Snowplow BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md)
 * [Snowplow BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md)
-* [Snowplow Community Edition](/docs/getting-started-on-snowplow-open-source/index.md)
+* [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md)
 
 ## Other options
 

@@ -64,7 +64,7 @@ where `service_name` can be one of the following: `collector`, `enrich`, `esLoad
 
 #### Configuring telemetry
 
-See our [telemetry principles](/docs/getting-started-on-snowplow-open-source/telemetry/index.md) for more information on telemetry.
+See our [telemetry principles](/docs/getting-started-on-community-edition/telemetry/index.md) for more information on telemetry.
 
 HTTP GET to get current configuration
 

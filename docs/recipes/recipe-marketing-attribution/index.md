@@ -285,7 +285,7 @@ Now that you've seen the principles in action, you've actually done the hardest 
 
 Now you just need to connect to your warehouse and starting building up an asset of customer data that you can get better and better attribution insights out of over time!
 
-To connect to your warehouse / lake, you need to go into the Snowplow UI, click 'Upgrade Now' and follow the setup wizard for BDP Cloud (you will need a credit card for this). BDP Cloud is a production-ready platform that can reliably load live events to your warehouse / lake, to continue without a credit card you can always set up [Snowplow Community Edition](/docs/getting-started-on-snowplow-open-source/index.md).
+To connect to your warehouse / lake, you need to go into the Snowplow UI, click 'Upgrade Now' and follow the setup wizard for BDP Cloud (you will need a credit card for this). BDP Cloud is a production-ready platform that can reliably load live events to your warehouse / lake, to continue without a credit card you can always set up [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md).
 
 ![](images/destination.png)
 

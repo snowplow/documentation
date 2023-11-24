@@ -164,8 +164,8 @@ Only Snowflake Loader can be run on Azure at the moment.
 | `initRetries.strategy`               | Backoff strategy used during retry. The possible values are `JITTER`, `CONSTANT`, `EXPONENTIAL`, `FIBONACCI`.                                                                                                                                                                                                                                                                                             |
 | `initRetries.attempts`               | Optional. How many attempts to make before sending the message into retry queue. If missing, `cumulativeBound` will be used.                                                                                                                                                                                                                                                                              |
 | `initRetries.cumulativeBound`        | Optional. When backoff reaches this delay, eg '1 hour', the loader will stop retrying. If both this and `attempts` are not set, the loader will retry indefinitely.                                                                                                                                                                                                                                       |
-| `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-snowplow-open-source/telemetry/index.md). |
-| `telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-snowplow-open-source/telemetry/index.md#how-can-i-help) for more information. |
+| `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-community-edition/telemetry/index.md). |
+| `telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-community-edition/telemetry/index.md#how-can-i-help) for more information. |
 
 ## Common monitoring settings
 

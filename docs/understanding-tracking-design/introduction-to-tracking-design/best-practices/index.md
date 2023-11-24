@@ -17,7 +17,7 @@ Overall, it suggests taking the following steps:
 
 Good tracking design comes from an understanding of the business use case.
 Identifying and analyzing the use case should be the first step before we design our tracking.
-This involves identifying the business outcomes that you want to achieve (e.g., acquire new customers, increase the number of signups, minimize abandoned carts)?
+This involves identifying the business outcomes that you want to achieve (e.g. acquire new customers, increase the number of signups, minimize abandoned carts)?
 It can often be answered by interviewing stakeholders who will consume the data in your organization.
 
 One of the ways to think about this is to sketch the reports that we want to have – the derived tables that the modeling process will extract from the raw events.
@@ -75,7 +75,7 @@ It may often be the case that events do not have any properties – this is tota
 Event properties should be limited only to information that is strictly related to the event and unlikely to be reused elsewhere (e.g., error message for an application error event).
 
 Finally, it is a good practice to ask whether certain data really needs to be captured.
-Tracking unnecessary information uses extra bandwidth and batter power and may add extra overhead to manage.
+Tracking unnecessary information uses extra bandwidth and battery power and may add extra overhead to manage. Schemas can be [evolved](/docs/understanding-tracking-design/versioning-your-data-structures/) to allow adding more information later.
 Refer to the business reports identified earlier in order to assess what data needs to be tracked.
 
 ## Define the events

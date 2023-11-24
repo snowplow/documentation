@@ -55,6 +55,11 @@ To get a comprehensive overview of the out-of-the-box provided schemas, [please 
 
 Our [data product accelerators](https://snowplow.io/data-product-accelerators/) are a great resource to develop your data product faster using out-of-the-box data structures based on best practices.
 
+:::note Check your existing entities for re-use
+Make sure that you are re-using entities that you previously defined in your other data products.
+The more entities that you can re-use across your data, the more consistent and easier it will be to perform analyses.
+:::
+
 ## Choose your naming convention
 
 Having a common standard for how to name events, entities and properties can make it easier to understand and extend the tracking design.

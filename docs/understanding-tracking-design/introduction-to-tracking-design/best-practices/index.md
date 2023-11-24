@@ -12,6 +12,7 @@ Overall, it suggests taking the following steps:
 3. Choose the naming convention to follow in your schemas.
 4. Define your entities first.
 5. Introduce events as interactions of the entities.
+6. Bring it all together in a tracking plan.
 
 ## Analyze your business use case and define reports
 
@@ -19,6 +20,7 @@ Good tracking design comes from an understanding of the business use case.
 Identifying and analyzing the use case should be the first step before we design our tracking.
 This involves identifying the business outcomes that you want to achieve (e.g. acquire new customers, increase the number of signups, minimize abandoned carts)?
 It can often be answered by interviewing stakeholders who will consume the data in your organization.
+These are not only the end stakeholders but also the analysts who are the experts in the data.
 
 One of the ways to think about this is to sketch the reports that we want to have – the derived tables that the modeling process will extract from the raw events.
 Based on the reports, one can identify the entities, events, and SQL queries to be performed on top of them.
@@ -42,12 +44,11 @@ The reports can also tell us what events we'll need as interactions of these ent
 Snowplow trackers and data models provide a rich set of events and entities to cover common use cases.
 These include:
 
-* user and session identification,
-* device and browser information,
-* e-commerce events and entities,
-* media playback events and entities,
-* error and performance tracking,
-* and much more.
+* User and session identification.
+* Device and browser information.
+* E-commerce events and entities.
+* Media playback events and entities.
+* Error and performance tracking.
 
 It is recommended to use and build on top of these data structures in order to save effort and make use of the existing Snowplow dbt packages and tooling.
 To get a comprehensive overview of the out-of-the-box provided schemas, [please refer to this page](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
@@ -75,8 +76,12 @@ In general, it is preferable to place information in entities as this will enabl
 It may often be the case that events do not have any properties – this is totally fine.
 Event properties should be limited only to information that is strictly related to the event and unlikely to be reused elsewhere (e.g., error message for an application error event).
 
+One useful way to think about events and entities is by relating them to the [star schema used in data warehouses](https://en.wikipedia.org/wiki/Star_schema) – entities can be thought of as the dimension tables, while events map more to the fact tables.
+Make sure that information that would be represented using dimension tables is contained in entities rather than events.
+
 Finally, it is a good practice to ask whether certain data really needs to be captured.
-Tracking unnecessary information uses extra bandwidth and battery power and may add extra overhead to manage. Schemas can be [evolved](/docs/understanding-tracking-design/versioning-your-data-structures/) to allow adding more information later.
+Tracking unnecessary information uses extra bandwidth and battery power and may add extra overhead to manage.
+Schemas can be [evolved](/docs/understanding-tracking-design/versioning-your-data-structures/index.md) to allow adding more information later.
 Refer to the business reports identified earlier in order to assess what data needs to be tracked.
 
 ## Define the events
@@ -101,11 +106,16 @@ Nevertheless, there are two recommendations that we can give.
 
 ### Recommendation 1: Avoid grouping multiple unrelated actions under the same schema
 
-A good rule of thumb is that the name of the event should be representative what it does without having to look into additional properties.
+A good rule of thumb is that the name of the event should be representative of what it does without having to look into additional properties.
+
+Consider the following example where we use the `website_action` schema for all events on the page.
+This makes it difficult to understand what the event captures based on the event name.
+Also, versioning of the schema is less unintuitive, because adding a new event type means updating the schema version for all other types as well.
+This makes the event schemas more difficult to evolve independently and may introduce undesired dependencies.
 
 <div style={{ width: "50%", float: "left", paddingRight: "5px" }}>
 
-:::warning Bad
+:::warning `website_action` groups unrelated events
 It is not obvious from the event name `website_action` what it captures. The event also groups together two unrelated actions that are distinguished by the `type` property.
 
 ```json
@@ -135,7 +145,7 @@ It is not obvious from the event name `website_action` what it captures. The eve
 </div>
 <div style={{ width: "50%", float: "left", paddingLeft: "5px" }}>
 
-:::tip Good
+:::tip `view_product` and `click_list_item` events
 Each action is represented using a single event schema.
 
 ```json
@@ -173,81 +183,28 @@ Each action is represented using a single event schema.
 <div style={{ clear: "both" }} />
 
 
-### Recommendation 2: Avoid more granularity than necessary
+### Recommendation 2: Consider the granularity needed for your reporting
 
 As stated in the previous recommendation, it is not desirable to group unrelated actions into a single event.
-However, when dealing with multiple events targeting the same type of action, it may be desirable to use a single event schema for them.
-Consider the following example.
+However, when dealing with multiple events targeting the same type of action, you may choose to define a single event schema or multiple event schemas depending on how you want to use the data.
 
-<div style={{ width: "50%", float: "left", paddingRight: "5px" }}>
+Consider the example of tracking button clicks on a page.
+There is a choice to be made whether we define separate schemas for each button on the page (e.g., `contact_button_click`, `event_button_click`) or use a single (`button_click`) schema for all the button clicks.
+The choice should be made based on how you want to use the events in your reports.
+If your reports look at the button clicks independently, it may be desirable to use separate schemas for them.
+However, if you want to report on interaction across the whole page, it may be preferable to use a single event schema for them.
 
-:::warning Bad
-Here we define two schemas covering the same type of action in different parts of the page.
+## Putting it all together in a tracking plan
 
-```json
-{
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-  "self": {
-    "vendor": "io.snowplow",
-    "name": "contact_button_click",
-    "format": "jsonschema",
-    "version": "1-0-0"
-  },
-  "type": "object",
-  "properties": {},
-  "additionalProperties": false
-}
-```
+Having identified your events and entities, you can now record them in a tracking plan.
+Tracking plans specify:
 
-```json
-{
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-  "self": {
-    "vendor": "io.snowplow",
-    "name": "events_button_click",
-    "format": "jsonschema",
-    "version": "1-0-0"
-  },
-  "type": "object",
-  "properties": {},
-  "additionalProperties": false
-}
-```
-:::
+1. What data (events, entities, and their properties) should be collected?
+2. Why does it need to be tracked (purpose of the data)?
+3. How should the tracking be implemented (what is the trigger for the events, which entities go with which events)?
+4. What is the implementation status of the tracking?
 
-</div>
-<div style={{ width: "50%", float: "left", paddingLeft: "5px" }}>
+Most commonly, they are in the form of a spreadsheet.
+You can make use of an [example template covering a few e-commerce events and entities available here](https://docs.google.com/spreadsheets/d/1yu0OgmxTZ5V3k362s5-kkyWBe0ZtXLPTGMVBp36fyIw/edit?usp=sharing).
 
-:::tip Good
-Instead, it may be beneficial to use a single schema covering all button clicks on the page.
-This makes it easier to build reports that measure interaction across the whole page.
-It can also make it easier to capture additional button click events.
-
-```json
-{
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
-  "self": {
-    "vendor": "io.snowplow",
-    "name": "button_click",
-    "format": "jsonschema",
-    "version": "1-0-0"
-  },
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string",
-      "description": "Name of the button"
-    }
-  },
-  "required": [ "name" ],
-  "additionalProperties": false
-}
-```
-:::
-
-</div>
-<div style={{ clear: "both" }} />
-
-The choice of the granularity of events should come from an analysis of the use case and reports that we want to produce.
-Some queries may benefit from having a higher granularity of the events.
-Nevertheless, keep in mind that grouping unrelated actions makes the event schemas more difficult to evolve independently and may introduce undesired dependencies.
+Finally, it is worth making sure that the events and entities in your tracking plan can answer the questions in the identified reports.

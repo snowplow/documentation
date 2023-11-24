@@ -8,4 +8,5 @@ all_packages = [
     ('snowplow/snowplow_fractribution', 'dbt-snowplow-fractribution'),
     ('snowplow/snowplow_ecommerce', 'dbt-snowplow-ecommerce'),
     ('snowplow/snowplow_media_player', 'dbt-snowplow-media-player'),
+    ('snowplow/snowplow_unified', 'dbt-snowplow-unified'),
 ]

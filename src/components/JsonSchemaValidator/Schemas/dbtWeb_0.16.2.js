@@ -531,7 +531,7 @@ export const Schema = {
         type: 'object',
         title: "Entity or SDE",
         properties: {
-          name: { type: 'string', description: 'Table name' }, // TODO: add regex here to make valid context/unstruct table name
+          schema: { type: 'string', description: 'Table name' }, // TODO: add regex here to make valid context/unstruct table name
           prefix: { type: 'string', description: 'Prefix to add to columns' }, // TODO: add regex here to make valid SQL name?
           alias: { type: 'string', description: 'Table alias for the subquery' }, // TODO: add regex here to make valid SQL alias?
           single_entity: { type: 'boolean', title: 'Is single entity?' }

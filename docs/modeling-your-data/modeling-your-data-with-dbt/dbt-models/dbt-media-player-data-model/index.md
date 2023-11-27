@@ -1,6 +1,6 @@
 ---
 title: "Media Player"
-sidebar_position: 400
+sidebar_position: 200
 hide_title: true
 ---
 
@@ -10,11 +10,9 @@ import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
-<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
-
-:::info
-Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
-:::
+<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>&nbsp;
+<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<Badges badgeType="SPAL"></Badges>
 
 # Snowplow Media Player Package
 

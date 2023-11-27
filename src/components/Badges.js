@@ -10,7 +10,7 @@ export default function Badges(props) {
           src={`https://img.shields.io/docker/pulls/${repo}`}
           alt="Docker Pulls"
           title="Docker Pulls"
-          className="shield"
+          className="img_ev3q"
         ></img>
       </a>
     )
@@ -144,7 +144,31 @@ export default function Badges(props) {
           loading="lazy"
           alt="Release Version"
           title="Release Version"
-          className="shield"
+          className="img_ev3q"
+        ></img>
+      </a>
+    )
+  }
+  if (props.badgeType === 'SCL') {
+    return (
+      <a href="/community-license-1.0">
+        <img
+          loading="lazy"
+          src="https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Community%20License&color=9e62dd&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC"
+          alt="Snowplow Community License"
+          title="Snowplow Community License badge"
+        ></img>
+      </a>
+    )
+  }
+  if (props.badgeType === 'SPAL') {
+    return (
+      <a href="/personal-and-academic-license-1.0/">
+        <img
+          loading="lazy"
+          src="https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Personal%20and%20Academic%20License&color=6737b7&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC"
+          alt="Snowplow Personal and Academic License"
+          title="Snowplow Personal and Academic License badge"
         ></img>
       </a>
     )

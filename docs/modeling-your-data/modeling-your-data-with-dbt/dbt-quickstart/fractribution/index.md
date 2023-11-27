@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Fractribution"
-sidebar_position: 700
+sidebar_position: 400
 title: "Fractribution Quickstart"
 ---
 

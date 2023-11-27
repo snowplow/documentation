@@ -8,17 +8,15 @@ hide_title: true
 import Badges from '@site/src/components/Badges';
 import ThemedImage from '@theme/ThemedImage';
 import DocCardList from '@theme/DocCardList';
-
 ```
-:::info
-Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
-:::
 
 :::danger
 The Unified Digital Model is currently in public preview state.
 :::
 
-<Badges badgeType="dbt-package Release" pkg="unified"></Badges>
+<Badges badgeType="dbt-package Release" pkg="unified"></Badges>&nbsp;
+<Badges badgeType="Early Release"></Badges>&nbsp;
+<Badges badgeType="SPAL"></Badges>
 
 # Snowplow Unified Digital Model
 

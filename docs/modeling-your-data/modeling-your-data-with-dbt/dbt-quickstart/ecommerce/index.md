@@ -1,6 +1,6 @@
 ---
 sidebar_label: "E-commerce"
-sidebar_position: 600
+sidebar_position: 300
 title: "E-commerce Quickstart"
 ---
 

@@ -10,7 +10,9 @@ import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
-<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>
+<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>&nbsp;
+<Badges badgeType="Maintained"></Badges>
+
 
 # Snowplow Normalize Package
 :::note

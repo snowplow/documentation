@@ -6,7 +6,7 @@ sidebar_position: 4
 
 Now that you have successfully spun up a Snowplow pipeline, you might want to upgrade your components when there are updates available.
 
-The Open Source Quick Start is updated in line with the Snowplow OS Distributions and here we describe the steps you need to take to upgrade between versions.
+The Community Edition Quick Start is updated in line with the Snowplow Community Edition Distributions and here we describe the steps you need to take to upgrade between versions.
 
 :::note
 
@@ -69,7 +69,7 @@ The database schemas created with a 21.04 Quick Start do not work well with even
 
 ## Updating Snowplow components
 
-If you are using a standard Quick Start deployment, you can follow the steps below to upgrade your Iglu Server and Pipeline. If you have deviated from the example, then you should compare the differences between the Snowplow OS Distributions in the examples and update your usage of the Terraform modules accordingly.
+If you are using a standard Quick Start deployment, you can follow the steps below to upgrade your Iglu Server and Pipeline. If you have deviated from the example, then you should compare the differences between the Snowplow Community Edition Distributions in the examples and update your usage of the Terraform modules accordingly.
 
 **Note:** You will experience some brief downtime when running these upgrades, as there is no redudency in the default deployment. If you want to run these upgrades with no downtime then you will need to extend the Quick Start examples to have redundant Iglu Servers and Snowplow Collectors at a minimum.
 

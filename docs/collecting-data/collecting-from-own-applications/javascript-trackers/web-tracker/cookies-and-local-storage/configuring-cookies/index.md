@@ -7,5 +7,5 @@ Snowplow allows for a highly configurable cookie set up. This allows for you to 
 
 Below you'll find a flow chart to help you with your cookie configuration, guiding you through the configuration options for both your [Snowplow Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) and the [Snowplow JavaScript Tracker](/docs//collecting-data/collecting-from-own-applications/javascript-trackers/index.md).
 
-- [Cookie configuration for Open Source](pathname:///assets/config-calculator-snowplow-open-source.pdf)
+- [Cookie configuration for Snowplow Community Edition](pathname:///assets/config-calculator-snowplow-ce.pdf)
 - [Cookie configuration for Snowplow BDP](pathname:///assets/config-calculator-snowplow-bdp.pdf)

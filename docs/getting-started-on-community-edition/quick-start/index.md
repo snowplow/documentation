@@ -10,7 +10,7 @@ import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md"
 import TrySnowplow from "@site/docs/reusable/try-snowplow/_index.md";
 ```
 
-This guide will take you through how to spin up an open source pipeline using the [Snowplow Terraform modules](https://registry.terraform.io/namespaces/snowplow-devops). _(Not familiar with Terraform? Take a look at [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started).)_
+This guide will take you through how to spin up a Snowplow Community Edition pipeline using the [Snowplow Terraform modules](https://registry.terraform.io/namespaces/snowplow-devops). _(Not familiar with Terraform? Take a look at [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started).)_
 
 <TrySnowplow/>
 
@@ -644,7 +644,7 @@ If you have attached a custom SSL certificate and set up your own DNS records, t
 
 :::tip Terraform errors
 
-For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/getting-started-on-snowplow-open-source/faq/index.md#troubleshooting-terraform-errors).
+For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/getting-started-on-community-edition/faq/index.md#troubleshooting-terraform-errors).
 
 :::
 
@@ -752,4 +752,4 @@ Do note that currently not all Fabric services support nested fields present in 
 
 ---
 
-If you are curious, here’s [what has been deployed](/docs/getting-started-on-snowplow-open-source/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/first-steps/tracking/index.md)!
+If you are curious, here’s [what has been deployed](/docs/getting-started-on-community-edition/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/first-steps/tracking/index.md)!

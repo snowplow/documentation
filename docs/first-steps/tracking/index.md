@@ -19,7 +19,7 @@ Once your pipeline is set up, you will want to send some events to it. Here’s 
 
 Keep in mind that some of our offerings have limits on the number of events you can send:
 * For Try Snowplow, there is cap of 50 events per second. Any events above this cap will be dropped
-* For Open Source, the default setup is sized for around 100 events per second
+* For Community Edition, the default setup is sized for around 100 events per second
 
 :::
 
@@ -49,9 +49,9 @@ You can find the Collector URL (Collector Endpoint) in the [Console](https://con
 You can find the Collector URL (Collector Endpoint) in the [Console](https://try.snowplowanalytics.com/).
 
   </TabItem>
-  <TabItem value="opensource" label="Open Source">
+  <TabItem value="community" label="Community Edition">
 
-Input the Collector URL you’ve chosen when deploying your Open Source pipeline.
+Input the Collector URL you’ve chosen when deploying your Community Edition pipeline.
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 
@@ -102,14 +102,14 @@ You can find the pre-generated snippet in the [Getting started](https://console.
 You can find the pre-generated snippet in the [Console](https://try.snowplowanalytics.com/).
 
   </TabItem>
-  <TabItem value="opensource" label="Open Source">
+  <TabItem value="community" label="Community Edition">
 
-Take note of the Collector URL you’ve chosen when deploying your Open Source pipeline.
+Take note of the Collector URL you’ve chosen when deploying your Community Edition pipeline.
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 
 Then, follow the JavaScript tracker [quick start guide](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md) to create your snippet.
-  
+
   </TabItem>
 </Tabs>
 

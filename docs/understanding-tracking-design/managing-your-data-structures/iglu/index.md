@@ -5,12 +5,12 @@ sidebar_label: "Using Iglu"
 sidebar_position: 4
 sidebar_custom_props:
   offerings:
-    - opensource
+    - community
 ---
 
 ## Setup
 
-To manage your [schemas](/docs/understanding-your-pipeline/schemas/index.md), you will need to have an [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) installed (you will already have one if you followed the [Open Source Quick Start](/docs/getting-started-on-snowplow-open-source/what-is-quick-start/index.md)).
+To manage your [schemas](/docs/understanding-your-pipeline/schemas/index.md), you will need to have an [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) installed (you will already have one if you followed the [Community Edition Quick Start](/docs/getting-started-on-community-edition/what-is-quick-start/index.md)).
 
 Alternatively, you can host a [static Iglu registry](docs/pipeline-components-and-applications/iglu/iglu-repositories/static-repo/index.md) in Amazon S3 or Google Cloud Storage.
 

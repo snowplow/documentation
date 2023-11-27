@@ -19,8 +19,8 @@ sidebar_position: 50
 | `monitoring.metrics.statsd.prefix` | Optional. Default: `snowplow.enrich`. Pefix of StatsD metric names. |
 | `monitoring.metrics.stdout.period` | Optional. E.g. `10 seconds`. If set, metrics will be printed in the logs with this frequency. |
 | `monitoring.metrics.stdout.prefix` | Optional. Default: `snowplow.enrich`. Prefix for the metrics appearing in the logs. |
-| `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-snowplow-open-source/telemetry/index.md). |
-| `telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-snowplow-open-source/telemetry/index.md#how-can-i-help) for more information. |
+| `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-community-edition/telemetry/index.md). |
+| `telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-community-edition/telemetry/index.md#how-can-i-help) for more information. |
 | `featureFlags.acceptInvalid` | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a bad row will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
 | `featureFlags.legacyEnrichmentOrder` | Optional. Default: `false`. In early versions of `enrich-kinesis` and `enrich-pubsub` (>= *3.1.5*), the Javascript enrichment incorrectly ran before the currency, weather, and IP Lookups enrichments. Set this flag to true to keep the erroneous behavior of those previous versions. |
 

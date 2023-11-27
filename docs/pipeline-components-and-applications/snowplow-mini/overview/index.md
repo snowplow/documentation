@@ -22,7 +22,7 @@ You might use Snowplow Mini when:
 
 Snowplow BDP users can request a Snowplow Mini instance through the console (go to `“Environments” → “Sandboxes” → “Setup a sandbox”`).
 
-For Open Source, see the setup guides for [AWS](/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-gcp/index.md).
+For Community Edition, see the setup guides for [AWS](/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/pipeline-components-and-applications/snowplow-mini/setup-guide-for-gcp/index.md).
 
 ## Conceptual diagram
 

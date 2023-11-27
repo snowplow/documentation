@@ -15,7 +15,7 @@ WHERE table_schema = 'badrows';
 
 :::info Database schema name
 
-The example above uses `badrows` as the database schema name in Postgres. This will depend on how you’ve set up your loader. Typically, it’s `badrows` for [Try Snowplow](/docs/try-snowplow/index.md) and `atomic_bad` for [Open Source Quick Start](/docs/getting-started-on-snowplow-open-source/what-is-quick-start/index.md).
+The example above uses `badrows` as the database schema name in Postgres. This will depend on how you’ve set up your loader. Typically, it’s `badrows` for [Try Snowplow](/docs/try-snowplow/index.md) and `atomic_bad` for [Community Edition Quick Start](/docs/getting-started-on-community-edition/what-is-quick-start/index.md).
 
 We will use `badrows` throughout the rest of this page — feel free to substitute your own schema name.
 

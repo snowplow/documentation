@@ -4,13 +4,13 @@ sidebar_label: "Before you begin"
 sidebar_position: 1
 ---
 
-We have built a set of [terraform](https://www.terraform.io/docs/language/modules/develop/index.html) modules, which automates the setup and deployment of the required infrastructure and applications for an operational Snowplow open source pipeline, with just a handful of input variables required on your side.
+We have built a set of [terraform](https://www.terraform.io/docs/language/modules/develop/index.html) modules, which automates the setup and deployment of the required infrastructure and applications for an operational Snowplow Community Edition pipeline, with just a handful of input variables required on your side.
 
 After following this guide, you will be able to: 
 
 - Collect granular, well-structured data with our suite of web, mobile and server side [SDKs](/docs/collecting-data/collecting-from-own-applications/index.md)
 - Create your own [custom events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities)
-- Easily enable and disable our suite of [out-of-the-box enrichments](/docs/enriching-your-data/available-enrichments/index.md) 
+- Easily enable and disable our suite of [out-of-the-box enrichments](/docs/enriching-your-data/available-enrichments/index.md)
 - Consume your rich data from the data warehouse, database, lake and/or real-time stream
 
 Here’s some key information.
@@ -32,12 +32,6 @@ To reduce the costs, you can tweak the configuration (e.g. use smaller instances
 ## Scale
 
 Out of the box, the deployed pipeline will handle up to ~100 events per second (~9 million events per day).
-
-:::tip
-
-You can tweak our terraform modules or the pipeline topology to your liking. See [Frequently Asked Questions](/docs/getting-started-on-snowplow-open-source/faq/index.md#how-do-i-make-the-pipeline-production-ready) for more information on which changes we recommend for larger scale production deployments.
-
-:::
 
 ## Getting help
 

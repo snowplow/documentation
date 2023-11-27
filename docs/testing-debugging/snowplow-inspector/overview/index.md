@@ -7,7 +7,7 @@ description: "Snowplow Inspector is a useful tool for debugging Snowplow events 
 
 We highly recommend using the [Snowplow Inspector Chrome extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en) for validating your tracking code.
 
-This extension is an [Open Source project](https://github.com/poplindata/chrome-snowplow-inspector) by [Poplin Data](https://poplindata.com/), one of our partners operating in Australia and New Zealand.
+This extension is an [open source project](https://github.com/poplindata/chrome-snowplow-inspector) by [Poplin Data](https://poplindata.com/), one of our partners operating in Australia and New Zealand.
 In 2023, Poplin Data [was acquired by Snowplow](https://snowplow.io/blog/snowplow-acquires-poplin-data/) and became Snowplow Australia.
 
 Once you add the extension to Chrome, you can view it by [opening Developer Tools](https://developer.chrome.com/docs/devtools/open/) (usually <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> or on Mac <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd>), where it has its own tab named ‘Snowplow’ (look for the tab adjacent to ‘Elements’, ‘Console’, ‘Network’, etc. - it may be necessary to expand the list of tabs using the `»` button). 

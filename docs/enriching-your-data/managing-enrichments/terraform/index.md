@@ -1,14 +1,14 @@
 ---
-title: "Managing enrichments in Snowplow Open Source"
+title: "Managing enrichments in Snowplow Community Edition"
 date: "2021-10-06"
 sidebar_label: "Using Terraform"
 sidebar_position: 15
 sidebar_custom_props:
   offerings:
-    - opensource
+    - community
 ---
 
-If you have installed Snowplow via [Quick Start](/docs/getting-started-on-snowplow-open-source/what-is-quick-start/index.md), you will have the following enrichments enabled by default:
+If you have installed Snowplow via [Quick Start](/docs/getting-started-on-community-edition/what-is-quick-start/index.md), you will have the following enrichments enabled by default:
 
 - [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
 - [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md)

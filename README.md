@@ -65,7 +65,7 @@ sidebar_custom_props:
 
 This will result in an icon appearing in the sidebar, as well as an automatic banner on the page, specifying that the docs only apply to a given offering.
 
-The available values are: `enterprise`, `cloud`, `opensource`. You can speficy just one value or combine several (currently, `enterprise` + `cloud` is the only supported combination, see `src/css/custom.css`). Do not specify all three values at once — if a piece of documentation is relevant to all offerings, there should be no `offerings` property as that’s the default.
+The available values are: `enterprise`, `cloud`, `community`. You can specify just one value or combine several (currently, `enterprise` + `cloud` is the only supported combination, see `src/css/custom.css`). Do not specify all three values at once — if a piece of documentation is relevant to all offerings, there should be no `offerings` property as that’s the default.
 
 Whenever the same functionality can be achieved in multiple offerings but in a different way (e.g. managing schemas), create a parent folder (“Managing schemas”) that’s offering-neutral, and then add offering-specific pages inside it. This way, other pages can link to the generic page without having to specify different methods for different offerings.
 
@@ -156,10 +156,10 @@ We need to ensure that all images are visible in both light and dark themes, if 
 ## VSCode Snippets
 
 We have created a selection of [VSCode Snippets](https://code.visualstudio.com/docs/editor/userdefinedsnippets) that cover some of the common, but fiddly, blocks of code you may require when writing docs. You can trigger these by starting to type their name and then pressing tab or use `Insert Snippet` in the Command Palette. All snippets we have created can be found [here](https://github.com/snowplow/documentation/blob/main/.vscode/snowplow-docs.code-snippets) and we currently have ones for:
-- [Admonitions](https://docusaurus.io/docs/markdown-features/admonitions) 
+- [Admonitions](https://docusaurus.io/docs/markdown-features/admonitions)
 - [Collapsible blocks](https://docusaurus.io/docs/markdown-features#details)
-- [Tabs](https://docusaurus.io/docs/markdown-features/tabs) 
+- [Tabs](https://docusaurus.io/docs/markdown-features/tabs)
 - [Themed images](https://docusaurus.io/docs/next/markdown-features/assets#themed-images)
 - [DocCards](https://docusaurus.io/docs/sidebar/items#embedding-generated-index-in-doc-page)
 - [Mdx blocks](https://docusaurus.io/docs/markdown-features/react#importing-components) for enabling tabs and themed images
-- [Front matter](https://docusaurus.io/docs/markdown-features#front-matter) 
+- [Front matter](https://docusaurus.io/docs/markdown-features#front-matter)

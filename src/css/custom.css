@@ -119,7 +119,7 @@
 /* All buttons */
 
 a.snowplow-button,
-button.snowplow-button { 
+button.snowplow-button {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -139,7 +139,7 @@ button.snowplow-button {
   font-size: 14px;
   line-height: 20px;
   text-decoration: none;
-  
+
   background: #f0ebf8;
   color: #412476;
 }
@@ -288,8 +288,8 @@ li.enterprise > div > a::before,
 li.enterprise > a::before,
 li.cloud > div > a::before,
 li.cloud > a::before,
-li.opensource > div > a::before,
-li.opensource > a::before {
+li.community > div > a::before,
+li.community > a::before {
   display: inline-block;
   vertical-align: middle;
   margin-right: 0.5em;
@@ -298,7 +298,7 @@ li.opensource > a::before {
 
 article.enterprise > a > p::before,
 article.cloud > a > p::before,
-article.opensource > a > p::before {
+article.community > a > p::before {
   display: inline-block;
   vertical-align: bottom;
   margin-right: 0.3em;
@@ -319,14 +319,14 @@ li.enterprise.cloud > a::before,
 article.enterprise.cloud > a > p::before {
   content: '🏭 ☁️';
 }
-li.enterprise.opensource > div > a::before,
-li.enterprise.opensource > a::before,
-article.enterprise.opensource > a > p::before {
+li.enterprise.community > div > a::before,
+li.enterprise.community > a::before,
+article.enterprise.community > a > p::before {
   content: '🏭 🛠️';
 }
-li.opensource > div > a::before,
-li.opensource > a::before,
-article.opensource > a > p::before {
+li.community > div > a::before,
+li.community > a::before,
+article.community > a > p::before {
   content: '🛠️';
 }
 
@@ -335,7 +335,7 @@ a.menu__link, a.card {
 }
 .enterprise a:hover::after,
 .cloud a:hover::after,
-.opensource a:hover::after {
+.community a:hover::after {
   position: absolute;
   left: 0;
   bottom: -30px;
@@ -355,7 +355,7 @@ a.card:hover::after {
   left: 2rem;
   bottom: auto;
 }
-.enterprise a:hover::after, 
+.enterprise a:hover::after,
 .cloud .enterprise:not(.cloud) a:hover::after {
   content: '🏭: For Snowplow BDP Enterprise customers';
 }
@@ -365,11 +365,11 @@ a.card:hover::after {
 .enterprise.cloud a:hover::after {
   content: '🏭 ☁️: For Snowplow BDP customers';
 }
-.enterprise.opensource a:hover::after {
+.enterprise.community a:hover::after {
   content: '🏭 🛠️: Not available to BDP Cloud customers';
 }
-.opensource a:hover::after {
-  content: '🛠️: For Snowplow Open Source users';
+.community a:hover::after {
+  content: '🛠️: For Snowplow Community Edition users';
 }
 
 .breadcrumbs__item:not(:last-child):after {

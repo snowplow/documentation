@@ -141,6 +141,13 @@ export const dbtVersions = {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
                 "snowplow/snowplow_utils": ">=0.14.0 <0.16.0"
             }
+        },
+        "0.3.6": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.14.0 <0.16.0"
+            }
         }
     },
     "snowplow/snowplow_media_player": {
@@ -482,6 +489,36 @@ export const dbtVersions = {
             "packages": {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
                 "snowplow/snowplow_utils": ">=0.15.1 <0.16.0"
+            }
+        }
+    },
+    "snowplow/snowplow_unified": {
+        "0.0.1": {
+            "dbtversion": ">=1.6.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
+            }
+        },
+        "0.1.0": {
+            "dbtversion": ">=1.6.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
+            }
+        },
+        "0.1.1": {
+            "dbtversion": ">=1.6.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
+            }
+        },
+        "0.1.2": {
+            "dbtversion": ">=1.6.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
             }
         }
     },

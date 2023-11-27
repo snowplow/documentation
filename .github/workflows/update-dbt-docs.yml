@@ -41,5 +41,4 @@ jobs:
         body: |
             Update auto-generated dbt docs. Note this is an auto-generated PR from a github action, see the action or utils/dbt_docs for further information.
         add-paths: |
-          ./docs/modeling-your-data/modeling-your-data-with-dbt/reference/*.md
           ./src/dbtVersions.js

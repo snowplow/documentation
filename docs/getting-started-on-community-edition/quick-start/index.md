@@ -16,13 +16,9 @@ This guide will take you through how to spin up a Snowplow Community Edition pip
 
 ## Prerequisites
 
+[Sign up](https://snowplow.io/pricing/) for Snowplow Community Edition and follow the link in the email to get a copy of the repository containing the Terraform code.
+
 Install [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher. Follow the instructions to make sure the `terraform` binary is available on your `PATH`. You can also use [tfenv](https://github.com/tfutils/tfenv) to manage your Terraform installation.
-
-Clone the repository at [https://github.com/snowplow/quickstart-examples](https://github.com/snowplow/quickstart-examples) to your machine:
-
-```bash
-git clone https://github.com/snowplow/quickstart-examples.git
-```
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
@@ -139,7 +135,7 @@ GCP provides a [default VPC](https://cloud.google.com/vpc/docs/vpc#default-netwo
 
 Azure does not provide a default VPC or resource group, so we have added a helper module to create a working network we can deploy into.
 
-To use our out-of-the-box network, you will need to navigate to the `terraform/azure/base` directory in the `quickstart-examples` repository and update the input variables in `terraform.tfvars`.
+To use our out-of-the-box network, you will need to navigate to the `terraform/azure/base` directory in the code repository and update the input variables in `terraform.tfvars`.
 
 Once that’s done, you can use Terraform to create your base network.
 
@@ -174,13 +170,13 @@ This will allow you to create and evolve your own [custom events](/docs/understa
 
 ### Step 1: Update the `iglu_server` input variables
 
-Once you have cloned the `quickstart-examples` repository, you will need to navigate to the `iglu_server` directory to update the input variables in `terraform.tfvars`.
+Once you have cloned the code repository, you will need to navigate to the `iglu_server` directory to update the input variables in `terraform.tfvars`.
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
 ```bash
-cd quickstart-examples/terraform/aws/iglu_server/default
+cd terraform/aws/iglu_server/default
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
@@ -188,7 +184,7 @@ nano terraform.tfvars # or other text editor of your choosing
   <TabItem value="gcp" label="GCP">
 
 ```bash
-cd quickstart-examples/terraform/gcp/iglu_server/default
+cd terraform/gcp/iglu_server/default
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
@@ -196,7 +192,7 @@ nano terraform.tfvars # or other text editor of your choosing
   <TabItem value="azure" label="Azure 🧪">
 
 ```bash
-cd quickstart-examples/terraform/azure/iglu_server
+cd terraform/azure/iglu_server
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
@@ -479,13 +475,13 @@ In this section, you will update the input variables for the Terraform module, a
 
 ### Step 1: Update the `pipeline` input variables
 
-Navigate to the `pipeline` directory in the `quickstart-examples` repository and update the input variables in `terraform.tfvars`.
+Navigate to the `pipeline` directory in the code repository and update the input variables in `terraform.tfvars`.
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
 ```bash
-cd quickstart-examples/terraform/aws/pipeline/default
+cd terraform/aws/pipeline/default
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
@@ -493,7 +489,7 @@ nano terraform.tfvars # or other text editor of your choosing
   <TabItem value="gcp" label="GCP">
 
 ```bash
-cd quickstart-examples/terraform/gcp/pipeline/default
+cd terraform/gcp/pipeline/default
 nano terraform.tfvars # or other text editor of your choosing
 ```
 
@@ -501,7 +497,7 @@ nano terraform.tfvars # or other text editor of your choosing
   <TabItem value="azure" label="Azure 🧪">
 
 ```bash
-cd quickstart-examples/terraform/azure/pipeline
+cd terraform/azure/pipeline
 nano terraform.tfvars # or other text editor of your choosing
 ```
 

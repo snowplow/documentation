@@ -1,9 +1,9 @@
 ---
-title: "Demo Applications"
+title: "Example Applications"
 sidebar_position: 9999
 ---
 
-Check out the following demo applications that can be used as a reference for how to use the tracker, or as a starting point for your own implementation.
+Check out the following exxample applications that can be used as a reference for how to use the tracker, or as a starting point for your own implementation.
 
 ## Android Tracker Demos
 

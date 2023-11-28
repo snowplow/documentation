@@ -17,5 +17,5 @@ The [examples repo](https://github.com/snowplow-incubator/snowplow-ios-tracker-e
 
 - A Swift SPM app
 - A Swift Cocoapods app
-- A ObjC Cocoapods app
+- An ObjC Cocoapods app
 - Iglu Central app in SwiftUI

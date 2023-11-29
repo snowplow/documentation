@@ -28,7 +28,9 @@ The tracker namespace parameter is used to distinguish between different tracker
 
 ### How to track?
 
-TODO
+You can specify the tracker namespace and app ID when creating a new tracker instance (the `newTracker` call in the JavaScript and `Snowplow.createTracker` in mobile trackers).
+The tracker platform is set automatically but can be overriden in most of our trackers.
+The tracker version is also set automatically.
 
 ## Application context entity on mobile apps
 

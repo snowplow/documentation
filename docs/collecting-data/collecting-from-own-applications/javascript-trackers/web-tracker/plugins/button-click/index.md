@@ -147,7 +147,29 @@ disableButtonClickTracking();
 
 ### Choosing which buttons to track
 
-There are three ways to configure which buttons are tracked:
+There are four ways to configure which buttons are tracked:
+
+#### No configuration
+
+If no configuration is specified, all buttons on the page will be tracked.
+
+<Tabs groupId="platform" queryString>
+<TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableButtonClickTracking');
+```
+
+</TabItem>
+<TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+enableButtonClickTracking();
+```
+
+</TabItem>
+</Tabs>
 
 #### Allowlist
 

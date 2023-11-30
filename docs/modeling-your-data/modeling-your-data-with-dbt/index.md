@@ -36,7 +36,7 @@ For Snowplow BDP customers, dbt projects can be configured and scheduled in the 
 
 :::info
 
-Our dbt packages are under a mix of licenses, including some under the [Snowplow Personal & Academic License](/personal-and-academic-license-1.0). For more information about what this means please see the [FAQ](/docs/contributing/personal-and-academic-license-faq/index.md) or contact us to gain access to our Data Models Pack that enables use of all our packages.
+Our dbt packages are under a mix of licenses, including some under the [Snowplow Personal & Academic License](/personal-and-academic-license-1.0). For more information about what this means please see the [FAQ](/docs/contributing/personal-and-academic-license-faq/index.md) or contact us to gain access to our [Data Models Pack](https://snowplow.io/snowplow-data-model-pack/) that enables use of all our packages.
 
 :::
 

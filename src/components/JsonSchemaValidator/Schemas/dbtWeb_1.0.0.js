@@ -433,7 +433,7 @@ export const Schema = {
         title: "Identifier",
         properties: {
           schema: { type: 'string', description: 'The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself' }, // TODO: add regex here to make valid context/unstruct or atomic?
-          field: { type: 'string', description: 'The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted' } // TODO: add regex here to make valid SQL name?
+          field: { type: 'string', description: 'The name of the field to use as session identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted' } // TODO: add regex here to make valid SQL name?
         },
         required: ['schema', 'field'],
         additionalProperties: false

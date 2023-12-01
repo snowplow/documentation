@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>
+<Badges badgeType="dbt-package Release" pkg="web"></Badges>
 
 :::info
 

@@ -8,7 +8,7 @@ sidebar_position: 400
 import Badges from '@site/src/components/Badges';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>
+<Badges badgeType="dbt-package Release" pkg="web"></Badges>
 
 :::info
 

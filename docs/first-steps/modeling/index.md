@@ -17,7 +17,7 @@ We recommend [dbt](https://www.getdbt.com/) for data modeling. Here’s how to g
 <Tabs groupId="offering" queryString>
   <TabItem value="enterprise" label="BDP Enterprise" default>
 
-Refer to the [setup instructions](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md) to add and configure your models in the Console, so that they can be run automatically by Snowplow BDP.
+Refer to the [setup instructions](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) to add and configure your models in the Console, so that they can be run automatically by Snowplow BDP.
 
   </TabItem>
   <TabItem value="cloud" label="BDP Cloud">

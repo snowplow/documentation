@@ -6,7 +6,7 @@ sidebar_position: 200
 
 :::note
 
-This documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for running data models via Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md#2-the-data-modeling-configuration).
+This documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for running data models via Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md#2-the-data-modeling-configuration).
 
 :::
 
@@ -32,6 +32,6 @@ If the error output shows a dbt call with a model ERROR, you will need to identi
 
 :::note
 
-Models are automatically retried on your schedule regardless of the last run outcome; if an issue is identified it is recommended to disable your model in the UI while you work on a fix. 
+Models are automatically retried on your schedule regardless of the last run outcome; if an issue is identified it is recommended to disable your model in the UI while you work on a fix.
 
 :::

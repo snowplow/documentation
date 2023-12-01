@@ -29,4 +29,4 @@ Snowplow recommends using **Google Tag Manager Server Side** to forward events
 
 ### [Processing Required (Reverse ETL)](/docs/destinations/reverse-etl/index.md)
 
-This option should be used to forwarding segments or other aggregated data to downstream destinations. Snowplow partners with two vendors to offer this capability, [Census](https://www.getcensus.com/) and [Hightouch](https://hightouch.io/), however there are a variety of other vendors which offer alternative solutions in the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/).
+This option should be used to forwarding segments or other aggregated data to downstream destinations. Snowplow partners with one vendor to offer this capability, [Census](https://www.getcensus.com/), however there are a variety of other vendors which offer alternative solutions in the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/).

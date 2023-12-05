@@ -47,22 +47,29 @@ The `EmitterConfiguration` class was added in v0.3.0.
 | `appId`              | `String?`         | Identifier of the app.                                                                                | ✔       | ✔   | ✔   | null on Web, bundle identifier on iOS/Android |
 | `devicePlatform`     | `DevicePlatform?` | The device platform the tracker runs on. Available options are provided by the `DevicePlatform` enum. | ✔       | ✔   | ✔   | "web" on Web, "mob" on iOS/Android            |
 | `base64Encoding`     | `bool?`           | Indicates whether payload JSON data should be base64 encoded.                                         | ✔       | ✔   | ✔   | true                                          |
-| `platformContext` | `bool?` | Indicates whether [platform](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-2) (mobile) context should be attached to tracked events. | ✔ | ✔ | | true |
-| `geoLocationContext` | `bool?` | Indicates whether [geo-location](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) context should be attached to tracked events. | ✔ | ✔ | ✔ | false |
-| `sessionContext` | `bool?` | Indicates whether [session](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context should be attached to tracked events. | ✔ | ✔ | ✔ | true |
-| `webPageContext` | `bool?` | Indicates whether context about current [web page](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) should be attached to tracked events. | | | ✔ | true |
-| `screenContext` | `bool?` | Indicates whether [screen](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) context should be attached to tracked events. | ✔ | ✔ | | true |
-| `applicationContext` | `bool?` | Indicates whether [application](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) context should be attached to tracked events. | ✔ | ✔ | | true |
+| `platformContext` | `bool?` | Indicates whether [platform](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-2) (mobile) entity should be attached to tracked events. | ✔ | ✔ | | true |
+| `geoLocationContext` | `bool?` | Indicates whether [geo-location](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) entity should be attached to tracked events. | ✔ | ✔ | ✔ | false |
+| `sessionContext` | `bool?` | Indicates whether [session](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) entity should be attached to tracked events. | ✔ | ✔ | ✔ | true |
+| `webPageContext` | `bool?` | Indicates whether a context entity about current [web page](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) should be attached to tracked events. | | | ✔ | true |
+| `screenContext` | `bool?` | Indicates whether [screen](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) entity should be attached to tracked events. | ✔ | ✔ | | true |
+| `applicationContext` | `bool?` | Indicates whether [application](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) entity should be attached to tracked events. | ✔ | ✔ | | true |
 | `webActivityTracking` | `WebActivityTracking?` | Enables activity tracking using page views and pings on the Web. |  |  | ✔ | true |
 | `userAnonymisation` | `bool?` | Anonymizes certain user identifiers. | ✔ | ✔ | ✔ | false |
+| `lifecycleAutotracking` | `bool?` | Indicates whether the [lifecycle](iglu:com.snowplowanalytics.mobile/application_lifecycle/jsonschema/1-0-0) entity and foreground and background events should be autotracked.    | ✔ | ✔ | | false                                         |
 
 :::note
 The ability to enable `userAnonymisation`, or the screen and application context entities, was added in v0.3.0.
 :::
 
+:::note
+The ability to enable `lifecycleAutotracking` was added in v0.5.0.
+:::
+
 The optional `WebActivityTracking` property configures page tracking on Web. Initializing the configuration will inform `SnowplowObserver` observers (see section on auto-tracking in "Tracking events") to auto track `PageViewEvent` events instead of `ScreenView` events on navigation changes. Further, setting the `minimumVisitLength` and `heartbeatDelay` properties of the `WebActivityTracking` instance will enable activity tracking using 'page ping' events on Web.
 
 Activity tracking monitors whether a user continues to engage with a page over time, and record how they digest content on the page over time. That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll etc.) If any of these things occur in a set period of time (`minimumVisitLength` seconds from page load and every `heartbeatDelay` seconds after that), a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different browser tab), no page ping fires.
+
+Lifecycle autotracking is only available on mobile apps (iOS and Android). When configured, a Lifecycle context entity is attached to all events. It records whether the app was visible or not when the event was tracked. In addition, a `Background` event will be tracked when the app is moved to background, and a `Foreground` event when the app moves back to foreground (becomes visible on the screen).
 
 See [this page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/anonymous-tracking/index.md) for information about anonymous tracking.
 

@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Mobile"
-sidebar_position: 200
+sidebar_position: 800
 title: "Mobile Quickstart"
 ---
 

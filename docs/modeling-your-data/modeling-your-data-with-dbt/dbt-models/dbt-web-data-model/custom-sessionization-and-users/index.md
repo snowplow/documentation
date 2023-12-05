@@ -3,9 +3,12 @@ title: "Custom Sessionization & Users"
 sidebar_position: 500
 ---
 ```mdx-code-block
+import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+<Badges badgeType="dbt-package Release" pkg="web"></Badges>
 
 :::info
 
@@ -36,7 +39,7 @@ A deeper set of documentation is available in the [Advanced Usage of Snowplow Ut
 
 :::tip
 
-Remember that any events with a null "session" identifier will be excluded from the `snowplow_base_events_this_run` table and any processing of the package, make sure your identifier has a value for all events you want to process!
+Remember that any events with a null "session" identifier will be excluded from the `snowplow_web_base_events_this_run` table and any processing of the package, make sure your identifier has a value for all events you want to process!
 
 :::
 
@@ -87,7 +90,7 @@ vars:
 
 #### Custom SQL
 
-This example creates a session identifier based off the combination of `app_id` and `domain_sessionid` which you may want if you use cross-domain tracking, but want to split the sessions for your analysis. Note that if you provide a value for `snowplow__session_sql` this will be used instead of `snowplow__session_identifiers`.
+This example creates a session identifier based off the concatenation of `app_id` and `domain_sessionid` which you may want if you use cross-domain tracking, but want to split the sessions for your analysis. Note that if you provide a value for `snowplow__session_sql` this will be used instead of `snowplow__session_identifiers`.
 
 ```yml title="dbt_project.yml"
 vars:

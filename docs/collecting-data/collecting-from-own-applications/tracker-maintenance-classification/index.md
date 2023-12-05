@@ -4,7 +4,7 @@ date: "2020-07-08"
 sidebar_position: 90
 ---
 
-Snowplow Trackers have been categorised into 4 maintenance groups. These groups are designed to give some expectations into how they will maintained in the future. Each tracker GitHub repository contains a "Snowplow" Badge that shows the maintenance group for that specific tracker and links back to this page.
+Snowplow Trackers and dbt packages have been categorized into 4 maintenance groups. These groups are designed to give some expectations into how they will maintained in the future. Each tracker GitHub repository contains a "Snowplow" Badge that shows the maintenance group for that specific tracker and links back to this page.
 
 * * *
 

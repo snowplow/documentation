@@ -29,7 +29,6 @@ Reverse ETL enables organizations to take the output of the intelligence they've
 
 Reverse ETL helps organizations operationalize the data in their warehouse by syncing it with other SaaS solutions such as Salesforce and Google Ads.
 
-Snowplow partners with and recommends Census and Hightouch as Reverse ETL platforms to allow organisations to achieve the use cases described above.
+Snowplow partners with and recommends Census as Reverse ETL platforms to allow organisations to achieve the use cases described above.
 
 - [Census](https://www.getcensus.com/)
-- [Hightouch](https://hightouch.io/)

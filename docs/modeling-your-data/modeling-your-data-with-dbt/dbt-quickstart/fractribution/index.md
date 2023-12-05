@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Fractribution"
-sidebar_position: 700
+sidebar_position: 400
 title: "Fractribution Quickstart"
 ---
 
@@ -133,7 +133,7 @@ import FractributionDbtMacros from "@site/docs/reusable/fractribution-dbt-macros
 ```
 ### 4. Run the model
 
-Execute the following either through your CLI, within dbt Cloud, or within [Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/using-dbt/index.md)
+Execute the following either through your CLI, within dbt Cloud, or within [Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md)
 
 ```yml
 dbt run --select snowplow_fractribution

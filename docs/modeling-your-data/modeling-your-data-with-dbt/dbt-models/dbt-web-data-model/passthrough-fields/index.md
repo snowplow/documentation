@@ -4,6 +4,12 @@ description: "Details for how to pass additional fields through to the derived t
 sidebar_position: 400
 ---
 
+```mdx-code-block
+import Badges from '@site/src/components/Badges';
+```
+
+<Badges badgeType="dbt-package Release" pkg="web"></Badges>
+
 :::info
 
 Passthrough fields are a feature only available in the web package versions 0.16.0 and higher
@@ -18,7 +24,7 @@ Which event the field(s) are taken from depends on the derived table:
 - Sessions uses the field value from the _first_ `page_view` or `page_ping` event (order is based on `derived_tstamp`, `dvce_created_tstamp`, then `event_id` in case of a tie)
 - Users uses the first and last sessions for that user, which means if you want a field passed through to the users table, you must first make it available in the sessions table
 
-As mentioned, the fields are passed through _as is_, which means it is not currently possible aggregate the value of a field across a page view or session as we do some other fields in the table, in the case where this is required, you should build a [custom model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) as in older versions of the package.
+As mentioned, the fields are passed through _as is_, which means it is not currently possible to aggregate the value of a field across a page view or session as we do some other fields in the table, in the case where this is required, you should build a [custom model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) as in older versions of the package.
 
 To enable the passthrough fields, you need to set the relevant variable in your root `dbt_project.yml` file; `snowplow__page_view_passthroughs`, `snowplow__session_passthroughs`, `snowplow__user_first_passthroughs`, and `snowplow__user_last_passthroughs` for page views, sessions, and users (first and lasts) respectively. The variables are lists of fields; either the name of the field or a dictionary specifying the SQL and alias for the field e.g.
 

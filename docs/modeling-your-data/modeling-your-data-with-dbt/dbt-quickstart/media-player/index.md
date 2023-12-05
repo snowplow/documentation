@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Media Player"
-sidebar_position: 400
+sidebar_position: 200
 title: "Media Player Quickstart"
 ---
 

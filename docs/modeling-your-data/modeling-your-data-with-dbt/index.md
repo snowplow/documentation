@@ -34,6 +34,13 @@ For Snowplow BDP customers, dbt projects can be configured and scheduled in the 
 
 # Snowplow dbt Packages
 
+:::info
+
+Our dbt packages are under a mix of licenses, including some under the [Snowplow Personal & Academic License](/personal-and-academic-license-1.0). For more information about what this means please see the [FAQ](/docs/contributing/personal-and-academic-license-faq/index.md) or contact us to gain access to our [Data Models Pack](https://snowplow.io/snowplow-data-model-pack/) that enables use of all our packages.
+
+:::
+
+
 Our dbt packages come with powerful built-in features such as an [optimization to the incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md) to save you cost on warehouse compute resources compared to the standard method, a custom [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) to ensure we process just the required data for each run and keep your models in sync, plus the ability to build your own custom models using both of these!
 
 There are 4 core snowplow dbt packages:
@@ -42,13 +49,17 @@ There are 4 core snowplow dbt packages:
 - [Snowplow E-commerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce)): for modeling your E-commerce interactions across carts, products, checkouts, and transactions
 - [Snowplow Fractribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-fractribution/#!/overview/fractribution)): used for Attribution Modeling with Snowplow
 
-There are also 2 legacy dbt packages for web and mobile (superceded by unified):
+We also have 2 utility packages:
+- [Snowplow Normalize](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-normalize-data-model/index.md) package that makes it easy for you to build models that transform your events data into a different structure that may be better suited for downstream consumers
+- [Snowplow Utils](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/index.md) contains all our shared macros and features used across our packages
+
+There are also 2 legacy dbt packages for web and mobile (superseded by unified):
 - [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web)): for modeling your web data for page views, sessions, users, and consent
 - [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile)): for modeling your mobile app data for screen views, sessions, users, and crashes
 
 Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/collecting-data/collecting-from-own-applications/index.md) and produce tables aggregated to different levels, or to perform analysis for you. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
 
-In addition to the other packages, there is a [Normalize](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-normalize-data-model/index.md) package that makes it easy for you to build models that transform your events data into a different structure that may be better suited for downstream consumers.
+
 
 The supported data warehouses per version can be seen below:
 

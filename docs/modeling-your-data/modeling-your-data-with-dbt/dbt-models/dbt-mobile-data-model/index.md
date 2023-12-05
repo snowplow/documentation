@@ -1,14 +1,25 @@
 ---
 title: "Mobile"
-sidebar_position: 200
+sidebar_position: 800
 hide_title: true
 ---
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
 import ThemedImage from '@theme/ThemedImage';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import {versions} from '@site/src/componentVersions';
 ```
-<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>
+<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>&nbsp;
+<Badges badgeType="Maintained"></Badges>&nbsp;
+<Badges badgeType="SCL"></Badges>
+
+:::info
+
+This package has been superseded by the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) that combines data from both web and mobile sources. For more information, see the Digital Unified page.
+
+:::
 
 # Snowplow Mobile Package
 
@@ -27,6 +38,16 @@ dark: require('./images/mobile-process-dark.drawio.png').default
 }}
 />
 </p>
+
+<ReactMarkdown children={`
+| snowplow-mobile version       | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| ----------------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: |
+| ${versions.dbtSnowplowMobile} | >=1.6.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.7.2                         | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.6.3                         | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.5.5                         | >=1.0.0 to <1.3.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.2.0                         | >=0.20.0 to <1.0.0 |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
+`} remarkPlugins={[remarkGfm]} />
 
 ## Overview
 

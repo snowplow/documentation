@@ -594,7 +594,7 @@ export const Schema = {
       type: 'boolean',
       title: 'Enable Mobile Data',
       longDescription: 'Flag to process mobile events throughout the package.',
-      packageDefault: 'false',
+      packageDefault: 'true',
       group: 'Warehouse and Tracker',
     },
     snowplow__enable_web: {

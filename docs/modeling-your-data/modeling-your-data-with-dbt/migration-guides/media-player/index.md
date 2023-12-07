@@ -3,8 +3,18 @@ title: "Media Player"
 sidebar_position: 400
 ---
 
+### Upgrading to 0.7.0
+**This version requires a [full refresh run](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/#complete-refresh-of-snowplow-package) if you have been using any previous versions.** You will not be able to upgrade and have the package work without doing a full refresh.
+
+**Breaking changes:**
+
+- A new and more robust `media_identifier` field to replace using `media_id` as a key in the derived tables.
+- The introduction of new base macro functionality means in places the session and user identifier fields have been renamed to `session_identifier` and `user_identifier`.
+- The default session identifier has been updated from using the `domain_sessionid`, to now be the media session id (or the page/screen view id if the media session entity is not set).
+-  Adds a primary key, `media_ad_view_id`, to the ad views table.
+
 ### Upgrading to 0.6.0
-**This version requires a full refresh run if you have been using any previous versions.** You will not be able to upgrade and have the package work without doing a full refresh.
+**This version requires a [full refresh run](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/#complete-refresh-of-snowplow-package) if you have been using any previous versions.** You will not be able to upgrade and have the package work without doing a full refresh.
 
 Please [check the quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/media-player/index.md) for a guide on which new configuration options to enable. If you remain tracking events using the HTML5 and YouTube tracking plugins for the JavaScript tracker, you should add the following configuration to your `dbt_project.yml`:
 

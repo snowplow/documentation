@@ -61,7 +61,7 @@ The package contains multiple staging models however the mart models are as foll
   - It also produces a `_pivot_base` table to calculate the percent_progress boundaries and weights that are used to calculate the total play_time and other related media fields.
 - **Media plays:** Removes impressions from the media base table while keeping the same structure as the `snowplow_media_player_base` table. Removing impressions means that only media sessions (identified by the `play_id` key) in which the user played the content are kept.
   - The media plays module outputs the `snowplow_media_player_plays_by_pageview` view.
-- **Media stats:** Aggregates the media base table to individual `media_id` level, calculating the main KPIs and overall video/audio metrics.
+- **Media stats:** Aggregates the media base table to individual `media_identifier` level, calculating the main KPIs and overall video/audio metrics.
   - It uses the native dbt incremental materialization on a pageview basis after a set time window passed. This is to prevent complex and expensive queries due to metrics which need to take the whole page_view events into calculation. This way the metrics will only be calculated once per pageview / media, after no new events are expected.
   - The media stats module outputs the `snowplow_media_player_media_stats` table.
 - **Media ad views:** Summarizes metadata and KPIs for each ad view within a media playback. Each ad a user viewed will result in a single row with information about the progress reached, whether the ad was skipped or clicked.
@@ -69,9 +69,23 @@ The package contains multiple staging models however the mart models are as foll
 - **Media ads:** Aggregates all ad views to produce a summary of the KPIs for each ad played within each media content. Produces total counts of views, skips, clicks and progress reached. It also counts the metrics in terms of unique users (e.g., number of users who clicked the ad).
   - It outputs the `snowplow_media_player_media_ads` table.
 
+## Identifiers
+
+The package generates robust identifiers for use in the incremental logic and keys for the derived tables.
+
+| Identifier | Definition |
+| ----------------------- | ----------------------------- |
+| `session_identifier` | The session  identifier as defined in your dbt project variables which is is used for the package's [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/). If not set, this defaults to the `mediaSessionId` from the media session entity if enabled, else to the page/screen view id. This ensures all media events for a play spanning multiple `domain_sessionid`s are modelled. The more traditional session identifier `domain_sessionid` can be extracted from the `domain_sessionid_array` field.  |
+| `user_identifier` | The user identifier as defined in your dbt project variables. If not set, this defaults to be `domain_userid` for web or the `userId` from the client session entity for mobile. |
+| `media_identifier` | Used to identify individual media elements/content. It is generated from the `player_id`, `media_label`, `media_type` and `media_player_type` fields. |
+| `play_id` | The unique identifier for each individual play of media content. This is the `mediaSessionId` from the media session entity if enabled. Otherwise this uses the page/screen view identifier together with the `media_identifer` to generate a unique play id. |
+| `media_ad_id` | Generated identifier that identifies an ad (identified using the `ad_id`) played with a specific media (identified using the `media_identifier`) and on a specific platform (based on the `platform` property). |
+| `media_ad_view_id` | The unique identifier for each individual ad view. It is generated from the `play_id`, `ad_break_id` and `media_ad_id` fields. |
+
+
 ## Mixing web and mobile events
 
-The package makes no distinction between events tracked from the web and those tracked from a mobile application, so long as you are tracking media events and from allowed `app_id`s. The `sessionId` from the `client_session` context, and the `id` from the `mobile_screen` context, overwrite the `session_identifier` and `page_view_id` fields respectively in our intermediate and derived tables, for events where they are populated. If you are just using web events, the package will work out the box. If you are using a mix of web and mobile events, you will need to set the `snowplow__enable_mobile_events` package variable to `true` and events will be processed from both sources. If you are only tracking mobile events, you can set the `snowplow__enable_web_events` to `false`.
+The package makes no distinction between events tracked from the web and those tracked from a mobile application, so long as you are tracking media events and from allowed `app_id`s. The `sessionId` from the `client_session` context, and the `id` from the `mobile_screen` context, overwrite the `domain_sessionid_array` and `page_view_id` fields respectively in our intermediate and derived tables, for events where they are populated. If you are just using web events, the package will work out the box. If you are using a mix of web and mobile events, you will need to set the `snowplow__enable_mobile_events` package variable to `true` and events will be processed from both sources. If you are only tracking mobile events, you can set the `snowplow__enable_web_events` to `false`.
 
 ## Custom models
 

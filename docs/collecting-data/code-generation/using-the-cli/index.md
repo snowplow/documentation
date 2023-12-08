@@ -116,7 +116,7 @@ import {
 } from "./{outpath}/snowplow";
 /* Track a WebPage event */
 trackWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-/* Track a WebPage event with a Product context */
+/* Track a WebPage event with a Product context entity */
 const product = createProduct({
   id: "Product id",
   name: "Snowplow product",
@@ -128,7 +128,7 @@ trackWebPage({
   id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
   context: [product],
 });
-/* You can enforce specific contexts on any `track` function using type arguments */
+/* You can enforce specific context entities on any `track` function using type arguments */
 const webPage = createWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
 trackWebPage<Product | WebPage>({
   id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
@@ -153,7 +153,7 @@ import {
 
 /* Track a WebPage event */
 trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
-/* Track a WebPage event with a Product context */
+/* Track a WebPage event with a Product context entity */
 const product = createProduct({
   id: "Product id",
   name: "Snowplow product",
@@ -165,12 +165,59 @@ trackWebPage(t, {
   id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
   context: [product],
 });
-/* You can enforce specific contexts on any `track` function using type arguments */
+/* You can enforce specific context entities on any `track` function using type arguments */
 const webPage = createWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
 trackWebPage<Product | WebPage>(t, {
   id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
   context: [product, webPage],
 });
+```
+
+</TabItem>
+
+<TabItem value="snowplow-android-tracker" label="snowplow-android-tracker" default>
+
+```kotlin
+import {{ specified package }}.Product
+import {{ specified package }}.WebPage
+
+/* Track a WebPage event */
+tracker.track(WebPage(id = "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent())
+
+/* Track a WebPage event with a Product context entity */
+val product = Product(
+    id = "Product id",
+    name = "Snowplow product",
+    currency = "EUR",
+    price = 10.0,
+    category = "Snowplow/Shoes",
+)
+val event = WebPage(id = "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent()
+event.entities.add(product.toEntity())
+tracker.track(event)
+```
+
+</TabItem>
+
+<TabItem value="snowplow-ios-tracker" label="snowplow-ios-tracker" default>
+
+```swift
+import SnowplowTracker
+
+/* Track a WebPage event */
+_ = tracker.track(WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent())
+
+/* Track a WebPage event with a Product context entity */
+let product = Product(
+    category: "Snowplow/Shoes",
+    currency: "EUR",
+    id: "Product id",
+    name: "Snowplow product",
+    price: 10
+)
+let event = WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43").toEvent()
+event.entities.append(product.toEntity())
+_ = tracker.track(event)
 ```
 
 </TabItem>

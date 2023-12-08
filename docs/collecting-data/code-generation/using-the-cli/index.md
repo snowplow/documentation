@@ -99,6 +99,84 @@ Following is the set of available trackers and languages the Snowtype CLI curren
 | `snowplow-ios-tracker` | swift |
 | `snowplow-android-tracker` | kotlin |
 
+### Example Usage
+
+Below we show example usage of the generated code. For demonstration, we assume the code was generated for the [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) and [product](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0) schemas.
+
+<Tabs groupId="example usage">
+<TabItem value="@snowplow/browser-tracker-typescript" label="@snowplow/browser-tracker TypeScript" default>
+
+```tsx
+import {
+  trackWebPage,
+  createProduct,
+  WebPage,
+  Product,
+  createWebPage,
+} from "./{outpath}/snowplow";
+/* Track a WebPage event */
+trackWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+/* Track a WebPage event with a Product context */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
+/* You can enforce specific contexts on any `track` function using type arguments */
+const webPage = createWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+trackWebPage<Product | WebPage>({
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product, webPage],
+});
+```
+
+</TabItem>
+
+<TabItem value="@snowplow/node-tracker-typescript" label="@snowplow/node-tracker TypeScript" default>
+
+```tsx
+import {
+  trackWebPage,
+  createProduct,
+  WebPage,
+  Product,
+  createWebPage,
+} from "./{outpath}/snowplow";
+
+/* `t` is the tracker instance created by the `tracker` function of the @snowplow/node-tracker package. */
+
+/* Track a WebPage event */
+trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+/* Track a WebPage event with a Product context */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
+/* You can enforce specific contexts on any `track` function using type arguments */
+const webPage = createWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+trackWebPage<Product | WebPage>(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product, webPage],
+});
+```
+
+</TabItem>
+
+</Tabs>
+
 ### Tracking Scenarios
 
 To add Tracking Scenario to the code generation, either manually or through the `snowtype patch` command, you would need the ID of the scenario. You can find the Scenario ID in the main page of the scenario as shown below:

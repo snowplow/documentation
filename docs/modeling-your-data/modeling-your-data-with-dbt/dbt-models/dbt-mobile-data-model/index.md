@@ -17,7 +17,7 @@ import {versions} from '@site/src/componentVersions';
 
 :::info
 
-This package has been superseded by the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) that combines data from both web and mobile sources. For more information, see the Digital Unified page.
+This package has been superseded by the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) that combines data from both web and mobile sources. For more information, see the Unified Digital page.
 
 :::
 

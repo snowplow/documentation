@@ -19,7 +19,7 @@ We'll give it the following details:
 
 :::info BDP Cloud
 
-If you are a BDP Cloud customer, use the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/builder/index.md) to follow along. You will not need the JSON code.
+If you are a BDP Cloud customer, use the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 
@@ -69,7 +69,7 @@ In the schema for this data structure, we would display these decisions as prope
 
 :::info BDP Cloud
 
-If you are a BDP Cloud customer, you can create an equivalent data structure in the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/builder/index.md).
+If you are a BDP Cloud customer, you can create an equivalent data structure in the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md).
 
 :::
 

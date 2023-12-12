@@ -1,7 +1,6 @@
 ---
-title: "Settings guide"
-date: "2021-11-18"
-sidebar_position: 300
+title: "Snowplow v3 Settings Variable"
+sidebar_position: 2000
 ---
 
 The **Snowplow v3 Settings** custom variable template is meant to be used with the Snowplow v3 tag template.

@@ -41,14 +41,14 @@ Since the Snowplow React Native Tracker is a wrapper around the native trackers 
 
 This is a better approach than creating a separate tracker instance for React Native and for native code because it enables all the events to share the same user and session identifiers.
 
-As an example, we have implemented this setup in a simple demo app [available here](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid). The app does the following:
+As an example, we have implemented this setup in [a simple demo app](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid). The app does the following:
 
-1. Adds a dependency for the React Native tracker [here](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/package.json#L3).
-2. Creates a tracker instance in the React Native code [here](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/App.tsx#L5).
-3. Tracks a screen view event in the React Native code [here](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/App.tsx#L9).
-4. Adds the Android tracker as a dependency in the Android app [here](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/android/app/build.gradle#L182-L183).
-5. Periodically tracks an event from the Android native code [here](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/android/app/src/main/java/com/snowplowanalytics/reactnativedemohybrid/MainActivity.java#L29-L37).
-6. Periodically tracks an event from the iOS native code [here](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/ios/snowplowreactnativedemohybrid/main.m#L9-L15).
+1. [Adds a dependency](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/package.json#L3) for the React Native tracker.
+2. [Creates a tracker instance](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/App.tsx#L5) in the React Native code.
+3. [Tracks a screen view event](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/App.tsx#L9) in the React Native code.
+4. [Adds the Android tracker as a dependency](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/android/app/build.gradle#L182-L183) in the Android app.
+5. [Periodically tracks an event](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/android/app/src/main/java/com/snowplowanalytics/reactnativedemohybrid/MainActivity.java#L29-L37) from the Android native code.
+6. [Periodically tracks an event](https://github.com/snowplow-incubator/snowplow-react-native-demo-hybrid/blob/main/ios/snowplowreactnativedemohybrid/main.m#L9-L15) from the iOS native code.
 
 When accessing the native tracker APIs in Swift, Objective-C, Java, or Kotlin, refer to the documentation for the [mobile trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md).
 

@@ -55,9 +55,3 @@ When accessing the native tracker APIs in Swift, Objective-C, Java, or Kotlin, r
 :::note
 Please note that in Android, you will need to add a dependency for the Android tracker to your `build.gradle` inside the Android codebase within your React Native app. Follow the instructions in the [mobile tracker documentation](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md). Make sure that you include the same version of the Android tracker as used by the React Native tracker.
 :::
-
-### Example usage in the demo app
-
-To see this use case implemented in a simple app, take a look at the [demo app provided in the React Native tracker](https://github.com/snowplow/snowplow-react-native-tracker#launching-the-demoapp). In addition to instantiating a tracker and tracking events in React Native, the tracker adds tracking of key presses as structured events in native Android and iOS code.
-
-It listens for key press events in the `MainActivity` class in Java and `ViewController` in Objective-C. It accesses the default tracker instance (instantiated in React Native) and tracks a simple structured event using the native tracker API.

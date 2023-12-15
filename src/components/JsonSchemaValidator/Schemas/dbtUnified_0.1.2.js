@@ -536,7 +536,7 @@ export const Schema = {
           alias: { type: 'string', description: 'Table alias for the subquery' }, // TODO: add regex here to make valid SQL alias?
           single_entity: { type: 'boolean', title: 'Is single entity?' }
         },
-        required: ['name', 'prefix'],
+        required: ['schema', 'prefix'],
         additionalProperties: false
       },
       uniqueItems: true,
@@ -594,7 +594,7 @@ export const Schema = {
       type: 'boolean',
       title: 'Enable Mobile Data',
       longDescription: 'Flag to process mobile events throughout the package.',
-      packageDefault: 'false',
+      packageDefault: 'true',
       group: 'Warehouse and Tracker',
     },
     snowplow__enable_web: {

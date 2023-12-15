@@ -161,17 +161,16 @@ In the first step, you can provide the data model name, a description, and the o
 
 When selecting a `dbt-core` version, below you'll find a table which contains the exact `dbt-adapter` versions that are bundled with each specific version of `dbt-core`:
 
-| dbt-core 	| BigQuery 	| Databricks 	| Postgres 	| Redshift 	| Snowflake 	|
-|:---:	|:---:	|:---:	|:---:	|:---:	|:---:	|
-| **1.0.0** 	| 1.0.0 	| - 	| 1.0.0 	| 1.0.0 	| 1.0.0 	|
-| **1.0.8** 	| 1.0.0 	| 1.0.3 	| 1.0.8 	| 1.0.1 	| 1.0.1 	|
-| **1.1.2** 	| 1.1.1 	| 1.1.6 	| 1.1.2 	| 1.1.0 	| 1.1.0 	|
-| **1.2.2** 	| 1.2.0 	| 1.2.4 	| 1.2.2 	| 1.2.1 	| 1.2.0 	|
-| **1.3.0** 	| 1.3.0 	| 1.3.1 	| 1.3.0 	| 1.3.0 	| 1.3.0 	|
-| **1.4.5** 	| 1.4.2 	| 1.4.2 	| 1.4.5 	| 1.4.0 	| 1.4.1 	|
-| **1.5.1** 	| 1.5.1 	| 1.5.4 	| 1.5.1 	| 1.5.9 	| 1.5.1 	|
-
-
+| dbt-core  | BigQuery | Databricks | Postgres | Redshift | Snowflake |
+| :-------: | :------: | :--------: | :------: | :------: | :-------: |
+| **1.0.0** | 1.0.0    | -          | 1.0.0    | 1.0.0    | 1.0.0     |
+| **1.0.8** | 1.0.0    | 1.0.3      | 1.0.8    | 1.0.1    | 1.0.1     |
+| **1.1.2** | 1.1.1    | 1.1.6      | 1.1.2    | 1.1.0    | 1.1.0     |
+| **1.2.2** | 1.2.0    | 1.2.4      | 1.2.2    | 1.2.1    | 1.2.0     |
+| **1.3.0** | 1.3.0    | 1.3.1      | 1.3.0    | 1.3.0    | 1.3.0     |
+| **1.4.5** | 1.4.2    | 1.4.2      | 1.4.5    | 1.4.0    | 1.4.1     |
+| **1.5.1** | 1.5.1    | 1.5.4      | 1.5.1    | 1.5.9    | 1.5.1     |
+| **1.6.9** | 1.6.9    | 1.6.7      | 1.6.9    | 1.6.4    | 1.6.5     |
 
 Please also note that the model name needs to match to the corresponding datamodeling subfolder name in GitHub. The dbt project for the model in the above example would therefore live under:
 

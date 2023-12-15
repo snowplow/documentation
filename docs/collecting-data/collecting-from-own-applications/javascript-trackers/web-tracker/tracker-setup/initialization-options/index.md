@@ -101,8 +101,8 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   dontRetryStatusCodes: [],
   retryFailedRequests: true,
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
-  onRequestSuccess: function(data) => { }, // Available in v3.18+
-  onRequestFailure: function(data) => { }, // Available in v3.18+
+  onRequestSuccess: function(data) => { }, // Available in v3.18.1+
+  onRequestFailure: function(data) => { }, // Available in v3.18.1+
 });
 ```
 
@@ -147,8 +147,8 @@ newTracker('sp', '{{collector_url_here}}', {
   dontRetryStatusCodes: [],
   retryFailedRequests: true,
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
-  onRequestSuccess: function(data) => { }, // Available in v3.18+
-  onRequestFailure: function(data) => { }, // Available in v3.18+
+  onRequestSuccess: function(data) => { }, // Available in v3.18.1+
+  onRequestFailure: function(data) => { }, // Available in v3.18.1+
 });
 ```
 
@@ -666,7 +666,7 @@ Please note that the session context entity is only available since version 3.11
 ## `onRequestSuccess` callback
 
 :::note
-Available from v3.18
+Available from v3.18.1
 :::
 
 The `onRequestSuccess` option allows you to supply a callback function to be executed whenever a request is successfully sent to the collector. In practice this means any request which returns a `2xx` status code will trigger this callback.
@@ -681,7 +681,7 @@ where `EventBatch` can be either:
 ## `onRequestFailure` callback
 
 :::note
-Available from v3.18
+Available from v3.18.1
 :::
 
 The `onRequestFailure` option allows you to supply a callback function to be executed whenever a request fails to be sent to the collector. This is the inverse of the `onRequestSuccess` callback, so any non `2xx` status code will trigger this callback.

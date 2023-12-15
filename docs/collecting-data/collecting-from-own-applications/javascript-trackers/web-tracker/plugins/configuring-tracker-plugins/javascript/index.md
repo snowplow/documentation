@@ -107,3 +107,48 @@ index a9ec92f7..be81d785 100644
 ```
 
 In this case the resulting `sp.js` file will contain the `my_context` entity from the plugin, but the generated `sp.lite.js` will not.
+
+## Usage
+
+Some plugins are configurable and take options in as parameters.
+The options available are described in each plugin's documentation.
+
+How you pass these options to the plugin varies by when the plugin is loaded:
+
+### Bundled Plugins
+
+Bundled plugins will automatically include any exposed methods.
+Additional configuration is typically passed through via the [`contexts`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#adding-predefined-contexts) configuration, which is extracted and passed to the plugin in `features.ts`, described in [Including Custom Plugins](#including-custom-plugins).
+
+```javascript
+snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+  appId: 'my-app-id',
+  contexts: {
+    gaCookies: { ga4: true, ua: false }
+  },
+  plugins:
+});
+```
+
+### Plugins After Initialization
+
+After calling `addPlugin`, the third parameter is an Array of arguments that will be passed to the plugin's constructor (which is named in the second parameter).
+
+```javascript
+snowplow(
+  'addPlugin',
+  'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js', // may also be an inline plugin
+  ['snowplowWebVitals', 'WebVitalsPlugin'],
+  [ // must be an Array in case the plugin takes multiple parameters
+    { // most plugins will just take a single Object parameter with different properties for each supported option
+      context: [
+        function(vitals) {
+          return { schema: "iglu:com.example/page_speed/jsonschema/1-0-0", data: { speed: vitals.fid < 2 ? "fast" : "slow" } };
+        },
+      ]
+    }
+  ]
+);
+```
+
+This method can also be used for [Inline Plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md#inline-plugins).

@@ -1,13 +1,17 @@
 ---
 title: "Managing data structures with the JSON Editor"
+description: "The JSON editor is best suited for defining complex data structures that require heavy nesting and advanced data types."
 sidebar_label: "Using the JSON Editor"
 sidebar_position: 1
+sidebar_custom_props:
+  offerings:
+    - enterprise
 ---
-For more complex data structures that require heavy nesting and more advanced data types. 
+:::info
+The JSON editor is ideal for more complex data structures that require heavy nesting and more advanced data types. For simple data structures use the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/).	
+:::
 
-*** 
-
-## Creating a new data structure with the JSON Editor
+## Creating a new data structure
 
 Select whether you'd like to create an [Event](/docs/understanding-your-pipeline/events/index.md) or an [Entity](/docs/understanding-your-pipeline/entities/index.md). You can always change this selection at a later date.    
 
@@ -23,9 +27,8 @@ Click **'Publish to development environment'** to publish your Data Structure to
 
 Your new Data Structure will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-and-qa-workflows/index.md).
 
-***
 
-## Editing a data structure with the JSON Editor
+## Editing a data structure
 
 Make the required edits to the JSON schema. You can use the 'Difference' toggle above the editor to see a 'diff' view against the latest Production version of your data structure.
 

@@ -53,7 +53,7 @@ To host schemas for your [custom self-described events](/docs/understanding-your
 ## The anatomy of a schema
 
 :::info
-If you are using BDP Cloud, you can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) without worrying about how it works under the hood.
+BDP Cloud and Enterprise customers can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) without worrying about how it works under the hood.
 :::
 
 Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). Let’s take a look at an example schema to talk about its constituent parts:

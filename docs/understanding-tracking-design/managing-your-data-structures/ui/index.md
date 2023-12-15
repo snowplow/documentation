@@ -12,7 +12,15 @@ To create a new [Data Structure](/docs/understanding-your-pipeline/schemas/index
 
 ![](images/image-1.png)
 
-When creating a new data structure, you can select from two options: **Create using builder** or **Create using JSON**.
+Enterprise customers can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](./builder/) only supports the following types: 
+
+- string
+- enumerated list
+- integer 
+- decimal
+- boolean
+
+For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](./json-editor/). BDP Cloud accounts will be automatically directed to the [Data Structures Builder](./builder/).
 
 
 ```mdx-code-block
@@ -24,8 +32,6 @@ import DocCardList from '@theme/DocCardList';
 
 ![](images/builder-or-json.png)
 
-***
-
 ## Editing a data structure
 
 To edit an existing data structure, navigate to **'Data Structures'** and locate the data structure you wish to edit. You can more easily find your Data Structure by:
@@ -34,7 +40,7 @@ To edit an existing data structure, navigate to **'Data Structures'** and locate
 - Ordering the Name column alphabetically
 - Filtering the listing by Type and / or Vendor
 
-Once located click on the name to view the Data Structure. You can then select from two options to edit the Data Structure: [**Edit with builder**](./builder/index.md#editing-a-data-structure-with-the-data-structures-builder) or [**Edit with JSON editor**](./json-editor/index.md#editing-a-data-structure-with-the-json-editor). 
+Once located, click on the name to view the Data Structure. You can then select from two options to edit the Data Structure: [**Edit with builder**](./builder/index.md#editing-a-data-structure-with-the-data-structures-builder) or [**Edit with JSON editor**](./json-editor/index.md#editing-a-data-structure-with-the-json-editor). 
 
 :::note
 The **Edit with builder** option will be unavailable if the Data Structure you're viewing is not supported. More complex Data Structures must be edited with the **JSON Editor**.
@@ -61,7 +67,7 @@ Navigate to **Data Structures** and locate the Data Structure you wish to promot
 - Ordering the Name column alphabetically
 - Filtering the listing by Type and / or Vendor
 
-Once located either click on the name to view the Data Structure and then click the '**Migrate to production**' button, or click the three dots to bring up the action menu where you can select **'Migrate to production'**.
+Once located, either click on the name to view the Data Structure and then click the "Migrate to production" button, or click the three dots to bring up the action menu where you can select "Migrate to production".
 
 ![](images/image-8.png)
 

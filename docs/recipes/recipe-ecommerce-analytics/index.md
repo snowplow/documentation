@@ -40,7 +40,9 @@ We have already created a custom `product` entity for you, and uploaded its data
 
 Snowplow uses self-describing JSON schemas to structure events and entities so that they can be validated in the pipeline and loaded into tidy tables in the warehouse. You can learn more about these data structures [here](/docs/understanding-your-pipeline/schemas/index.md), and about why we take this approach [here](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/).
 
-While Try Snowplow only ships with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) (and API).
+Snowplow BDP expands its capabilities beyond the pre-designed custom events and entities required for the recipes in Try Snowplow. The platform introduces the [Data Structures UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md), featuring the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md). This Builder streamlines the creation process of events and entities with a user-friendly, guided setup and automated versioning. For users requiring more control and customization, particularly for intricate data structures, a JSON editor is also available. This editor allows for precise and tailored data structure definitions, ensuring adaptability to complex tracking needs.
+
+As well as managing data structures through the Snowplow BDP Console, Enterprise customers can also manage them programmatically through the [Data structures API](docs/understanding-tracking-design/managing-your-data-structures/api/). 
 
 The `product` entity has the following fields:
 

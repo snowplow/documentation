@@ -8,7 +8,7 @@ sidebar_custom_props:
     - enterprise
 ---
 :::info
-The JSON editor is ideal for more complex data structures that require heavy nesting and more advanced data types. For simple data structures use the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/).	
+The JSON editor is ideal for more complex data structures that require heavy nesting and more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md).	
 :::
 
 ## Creating a new data structure

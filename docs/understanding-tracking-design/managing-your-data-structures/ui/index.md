@@ -12,7 +12,7 @@ To create a new [Data Structure](/docs/understanding-your-pipeline/schemas/index
 
 ![](images/image-1.png)
 
-Enterprise customers can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](./builder/) only supports the following types: 
+Enterprise customers can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) only supports the following types: 
 
 - string
 - enumerated list
@@ -20,7 +20,7 @@ Enterprise customers can select from two options: **Create using builder** or **
 - decimal
 - boolean
 
-For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](./json-editor/). BDP Cloud accounts will be automatically directed to the [Data Structures Builder](./builder/).
+For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](/docs/understanding-tracking-design/managing-your-data-structures/ui/json-editor/index.md). BDP Cloud accounts will be automatically directed to the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md).
 
 
 ```mdx-code-block

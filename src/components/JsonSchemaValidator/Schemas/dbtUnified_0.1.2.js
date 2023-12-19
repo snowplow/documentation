@@ -541,10 +541,10 @@ export const Schema = {
       },
       uniqueItems: true,
     },
-    snowplow__page_view_stitching: {
+    snowplow__view_stitching: {
       type: 'boolean',
-      title: 'Enable Page View Stitching',
-      longDescription: 'Determines whether to apply the user mapping to the page views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/) section for more details.',
+      title: 'Enable View Stitching',
+      longDescription: 'Determines whether to apply the user mapping to the views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/) section for more details.',
       packageDefault: 'false',
       group: 'Operation and Logic',
     },

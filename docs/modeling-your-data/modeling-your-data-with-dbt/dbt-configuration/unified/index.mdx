@@ -48,7 +48,7 @@ export const printYamlVariables = (data) => {
   return(
     <>
       <h4>Project Variables:</h4>
-      <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
+      <CodeBlock language="yaml">{dump({vars: {"snowplow_unified": data}}, { flowLevel: 3 })}</CodeBlock>
     </>
   )
 }

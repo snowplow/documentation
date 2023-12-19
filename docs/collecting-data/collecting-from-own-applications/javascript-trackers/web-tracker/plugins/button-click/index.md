@@ -82,7 +82,7 @@ The plugin is available from Version 3.18 of the tracker.
 window.snowplow(
     'addPlugin',
     'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
-    ['buttonClickTracking', 'SnowplowButtonClickTrackingPlugin']
+    ['snowplowButtonClickTracking', 'ButtonClickTrackingPlugin']
 );
 ```
 

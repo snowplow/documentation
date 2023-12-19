@@ -79,7 +79,7 @@ vars:
     snowplow__session_stitching: false
 ```
 
-In the web and unified packages, since version 0.16.0, it is also possible to stitch onto the page views table by setting the value of `snowplow__page_view_stitching` (for web) or `snowplow__view_stitching` (for unified) to `true`. It may be enough to apply this with less frequency than on sessions to keep costs down, by only enabling this at runtime (on the command line) on only some of the runs.
+In the Web (since version 0.16.0) and Unified Digital packages, it is also possible to stitch onto the page views table by setting the value of `snowplow__page_view_stitching` (for web) or `snowplow__view_stitching` (for unified) to `true`. It may be enough to apply this with less frequency than on sessions to keep costs down, by only enabling this at runtime (on the command line) on only some of the runs.
 
 #### Cross platform stitching
 

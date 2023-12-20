@@ -3,6 +3,10 @@ title: "Managing data structures in the console"
 date: "2020-02-15"
 sidebar_label: "Using the UI"
 sidebar_position: 1
+sidebar_custom_props:
+  offerings:
+    - enterprise
+    - cloud
 
 ---
 
@@ -12,11 +16,11 @@ To create a new [Data Structure](/docs/understanding-your-pipeline/schemas/index
 
 ![](images/image-1.png)
 
-Enterprise customers can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) only supports the following types: 
+Enterprise customers can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) only supports the following types:
 
 - string
 - enumerated list
-- integer 
+- integer
 - decimal
 - boolean
 
@@ -40,7 +44,7 @@ To edit an existing data structure, navigate to **'Data Structures'** and locate
 - Ordering the Name column alphabetically
 - Filtering the listing by Type and / or Vendor
 
-Once located, click on the name to view the Data Structure. You can then select from two options to edit the Data Structure: [**Edit with builder**](./builder/index.md#editing-a-data-structure-with-the-data-structures-builder) or [**Edit with JSON editor**](./json-editor/index.md#editing-a-data-structure-with-the-json-editor). 
+Once located, click on the name to view the Data Structure. You can then select from two options to edit the Data Structure: [**Edit with builder**](./builder/index.md#editing-a-data-structure-with-the-data-structures-builder) or [**Edit with JSON editor**](./json-editor/index.md#editing-a-data-structure-with-the-json-editor).
 
 :::note
 The **Edit with builder** option will be unavailable if the Data Structure you're viewing is not supported. More complex Data Structures must be edited with the **JSON Editor**.
@@ -99,7 +103,7 @@ Follow the modal instructions to confirm the action.
 
 Hiding a Data Structure will not remove it from the registry, it simply hides it from the console listing, this means:
 
-(1) events can still be sent against this structure  
+(1) events can still be sent against this structure
 (2) you cannot create a new structure of the same name
 
 :::

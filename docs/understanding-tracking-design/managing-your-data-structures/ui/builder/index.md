@@ -3,10 +3,6 @@ title: "Managing data structures with the Data Structures Builder"
 description: "The Data Structures Builder is ideal for quickly creating an event or entity with our guided setup and automated versioning."
 sidebar_label: "Using the Data Structures Builder"
 sidebar_position: 1
-sidebar_custom_props:
-  offerings:
-    - cloud
-    - enterprise
 ---
 
 :::info Supported properties
@@ -14,7 +10,7 @@ The builder only supports the following types:
 
 - string
 - enumerated list
-- integer 
+- integer
 - decimal
 - boolean
 

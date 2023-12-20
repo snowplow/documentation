@@ -21,9 +21,11 @@ You will then collect all funnel step interactions (whether they are page views 
 
 We have already created a custom `funnel_interaction` event for you in [Iglu Central](http://iglucentral.com/).
 
-Snowplow uses self-describing JSON schemas to structure events and entities so that they can be validated in the pipeline and loaded into tidy tables in the warehouse. You can learn more about these data structures [here](/docs/understanding-your-pipeline/schemas/index.md), and about why we take this approach [here](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/).
+```mdx-code-block
+import DataStructuresSharedBlock from "@site/docs/recipes/custom-events-entities/_index.md"
 
-While Try Snowplow only ships with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) (and API) for Enterprise and via [the Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/builder/index.md) for Cloud. 
+<DataStructuresSharedBlock/>
+```
 
 The `funnel_interaction` event has the following fields:
 

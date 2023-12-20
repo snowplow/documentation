@@ -38,9 +38,11 @@ You can then run a simple SQL query to model this data into a product table. Thi
 
 We have already created a custom `product` entity for you, and uploaded its data structure to [your Iglu server](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md).
 
-Snowplow uses self-describing JSON schemas to structure events and entities so that they can be validated in the pipeline and loaded into tidy tables in the warehouse. You can learn more about these data structures [here](/docs/understanding-your-pipeline/schemas/index.md), and about why we take this approach [here](https://snowplowanalytics.com/blog/2020/01/24/re-thinking-the-structure-of-event-data/).
+```mdx-code-block
+import DataStructuresSharedBlock from "@site/docs/recipes/custom-events-entities/_index.md"
 
-While Try Snowplow only ships with a pre-designed set of custom events and entities required for the recipes, Snowplow BDP lets you create an unlimited number of your own via the [Data Structures UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) (and API).
+<DataStructuresSharedBlock/>
+```
 
 The `product` entity has the following fields:
 

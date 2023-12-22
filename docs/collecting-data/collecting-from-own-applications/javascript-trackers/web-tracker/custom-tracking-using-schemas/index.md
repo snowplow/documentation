@@ -1,7 +1,7 @@
 ---
 title: "Custom event tracking"
 date: "2022-08-30"
-sidebar_position: 20
+sidebar_position: 2600
 ---
 
 # Custom event tracking

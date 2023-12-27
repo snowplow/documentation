@@ -10,60 +10,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Page views are tracked using the `trackPageView` method. This is generally part of the first Snowplow tag to fire on a particular web page. As a result, the `trackPageView` method is usually deployed straight after the tag that also invokes the Snowplow JavaScript (sp.js) e.g.
+Page view events are tracked using the `trackPageView` method. This is generally part of the first Snowplow tag to fire, or first method to be called, on a particular web page. As a result, the `trackPageView` method is usually deployed straight after the tag that also invokes the Snowplow JavaScript (sp.js).
 
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)">
+## Tracking a page view
 
-  ```javascript
-  <!-- Snowplow starts plowing -->
-  <script type="text/javascript">
-  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
-  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
-  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
-
-  snowplow('newTracker', 'sp', '{{collector_url_here}}', {
-      appId: 'my-app-id',
-  });
-
-  snowplow('enableActivityTracking', {
-    minimumVisitLength: 30,
-    heartbeatDelay: 10
-  });
-  snowplow('trackPageView');
-
-  </script>
-  <!-- Snowplow stops plowing -->
-  ```
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)" default>
-
-```javascript
-import {
-  newTracker,
-  enableActivityTracking,
-  trackPageView
-} from '@snowplow/browser-tracker';
-
-newTracker('sp', '{{collector_url_here}}', {
-    appId: 'my-app-id',
-});
-
-enableActivityTracking({
-  minimumVisitLength: 30,
-  heartbeatDelay: 10
-});
-
-trackPageView();
-```
-  </TabItem>
-
-</Tabs>
-
-### `trackPageView`
-
-Track pageview is called using the simple:
+Page view events must be **manually tracked**.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)">
@@ -105,11 +56,11 @@ trackPageView({ title: 'my custom page title' });
   </TabItem>
 </Tabs>
 
-`trackPageView` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information. TODO
+## Context callback
 
-Additionally, you can pass a function which returns an array of zero or more context entities to `trackPageView`. For the page view and for all subsequent page pings, the function will be called and the contexts it returns will be added to the event.
+As with all `trackX` methods, `trackPageView` can be passed an array of [custom context entities](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md) as an additional parameter.
 
-TODO page pings link
+Additionally, you can pass a function which returns an array of zero or more context entities to `trackPageView`. For the page view and for all subsequent [page pings](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md), the function will be called and the context entities it returns will be added to the event.
 
 For example:
 
@@ -124,14 +75,14 @@ snowplow('enableActivityTracking', {
 });
 
 snowplow('trackPageView', {
-  // The usual array of static contexts
+  // The usual array of static context entities
   context: [{
     schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
     data: {
       staticValue: new Date().toString()
     }
   }],
-  // Function which returns an array of custom context
+  // Function which returns an array of custom context entities
   // Gets called once per page view / page ping
   contextCallback: function() {
     return [{
@@ -144,8 +95,8 @@ snowplow('trackPageView', {
 });
 ```
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
+</TabItem>
+<TabItem value="browser" label="Browser (npm)">
 
 ```javascript
 import {
@@ -160,14 +111,14 @@ enableActivityTracking({
 });
 
 trackPageView({
-  // The usual array of static contexts
+  // The usual array of static context entities
   context: [{
     schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
     data: {
       staticValue: new Date().toString()
     }
   }],
-  // Function which returns an array of custom context
+  // Function which returns an array of custom context entities
   // Gets called once per page view / page ping
   contextCallback: function() {
     return [{
@@ -182,4 +133,4 @@ trackPageView({
   </TabItem>
 </Tabs>
 
-The page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
+In this example, the tracked page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.

@@ -10,9 +10,18 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Link click tracking is enabled using the `enableLinkClickTracking` method. Use this method once and the tracker will add click event listeners to all link elements. Link clicks are tracked as self describing events. Each link click event captures the link’s href attribute. The event also has fields for the link’s id, classes, and target (where the linked document is opened, such as a new tab or new window).
+Link click tracking adds click event listeners to all link elements.
 
-## Installation
+Link clicks are tracked as self describing events. Each link click event captures the link’s href attribute. The event also has fields for the link’s id, classes, and target (where the linked document is opened, such as a new tab or new window).
+
+Link click tracking need only be enabled once, all link elements will be updated . Use this method once and the tracker will add click event listeners to all link elements. TODO
+
+
+[Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1) is the JSON schema for a link click event.
+
+Link click events are **automatically tracked** once configured.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -39,7 +48,9 @@ Link click tracking is enabled using the `enableLinkClickTracking` method. Use
   </TabItem>
 </Tabs>
 
-## Initialization
+## Enable link click tracking
+
+Turn on link click tracking like this:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -49,47 +60,7 @@ window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@latest/dist/index.umd.min.js",
   ["snowplowLinkClickTracking", "LinkClickTrackingPlugin"]
 );
-```
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
-
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ LinkClickTrackingPlugin() ],
-});
-
-enableLinkClickTracking();
-```
-
-  </TabItem>
-</Tabs>
-
-### Functions
-
-<table class="has-fixed-layout"><tbody><tr><td><code>enableLinkClickTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#enablelinkclicktracking">Documentation</a></td></tr><tr><td><code>refreshLinkClickTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#enablelinkclicktracking">Documentation</a></td></tr><tr><td><code>trackLinkClick</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#tracklinkclick">Documentation</a></td></tr></tbody></table>
-
-### Context
-
-This plugin does not add any additional data to context of an event.
-
-
-Link click tracking is enabled using the `enableLinkClickTracking` method. Use this method once and the Tracker will add click event listeners to all link elements. Link clicks are tracked as self describing events. Each link click event captures the link's href attribute. The event also has fields for the link's id, classes, and target (where the linked document is opened, such as a new tab or new window).
-
-[Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1) is the JSON schema for a link click event.
-
-### `enableLinkClickTracking`
-
-Turn on link click tracking like this:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
 snowplow('enableLinkClickTracking');
 ```
 
@@ -100,22 +71,15 @@ Link click tracking is part of a separate plugin, `@snowplow/browser-plugin-link
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
-import { LinkClickTrackingPlugin } from '@snowplow/browser-plugin-link-click-tracking';
+import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-newTracker('sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
-  plugins: [ LinkClickTrackingPlugin() ]
+newTracker('sp1', '{{collector_url}}', { 
+   appId: 'my-app-id', 
+   plugins: [ LinkClickTrackingPlugin() ],
 });
-```
-
-The plugin can then be used like this:
-
-```javascript
-import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
 enableLinkClickTracking();
 ```
-
   </TabItem>
 </Tabs>
 
@@ -170,6 +134,10 @@ enableLinkClickTracking({
 
   </TabItem>
 </Tabs>
+
+### Allowlists, denylists, and filtering
+
+Control which links to track using the FilterCriterion object.
 
 Where FilterCriterion is an object:
 
@@ -356,9 +324,9 @@ enableLinkClickTracking({ context: [ dynamicContext ] });
 
 See [custom context](#custom-context) for more information.
 
-### `refreshLinkClickTracking`
+## Refresh link click tracking
 
-`enableLinkClickTracking` only tracks clicks on links which exist when the page has loaded. If new links can be added to the page after then which you wish to track, just use `refreshLinkClickTracking`. This will add Snowplow click listeners to all links which do not already have them (and which match the denylist, allowlist, or filter function you specified when `enableLinkClickTracking` was originally called). Use it like this:
+The `enableLinkClickTracking` method only tracks clicks on links that exist when the page has loaded. If new links can be added to the page after then that you wish to track, use `refreshLinkClickTracking`. This will add Snowplow click listeners to all links which do not already have them (and which match the denylist, allowlist, or filter function you specified when `enableLinkClickTracking` was originally called). Use it like this:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -379,7 +347,7 @@ refreshLinkClickTracking();
   </TabItem>
 </Tabs>
 
-### `trackLinkClick`
+## Manual link click tracking
 
 You can manually track individual link click events with the `trackLinkClick` method. This is its signature:
 
@@ -453,8 +421,5 @@ trackLinkClick({
   elementContent: 'this page'
 });
 ```
-
   </TabItem>
 </Tabs>
-
-`trackLinkClick` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.

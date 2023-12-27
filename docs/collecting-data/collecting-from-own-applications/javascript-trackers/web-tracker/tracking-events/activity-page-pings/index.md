@@ -3,7 +3,7 @@ title: "Activity (page pings)"
 sidebar_position: 30
 ---
 
-# Activity tracking: page pings
+# Activity tracking (page pings)
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -12,9 +12,13 @@ import TabItem from '@theme/TabItem';
 
 As well as tracking page views, we can monitor whether users continue to engage with pages over time, and record how they digest content on each page over time.
 
-That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc.) If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different browser tab), no page ping fires.
+That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it, e.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc. If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page, e.g. because the user is on a different browser tab, no page ping fires.
 
-### `enableActivityTracking`
+## Tracking page pings
+
+Page ping events are **automatically tracked** once configured.
+
+### Enable activity tracking
 
 Page pings are enabled by:
 
@@ -40,11 +44,20 @@ enableActivityTracking({
   heartbeatDelay: number
 });
 ```
-
   </TabItem>
 </Tabs>
 
-where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. So, if you executed:
+where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started.
+
+Activity tracking will be disabled if either `minimumVisitLength` or `heartbeatDelay` is not integer. This is to prevent relentless callbacks.
+
+You can elect to enable activity tracking on specific pages. It is executed as part of the main Snowplow tracking tag.
+
+The following example would generate the first ping event after 30 seconds, and subsequent pings every 10 seconds as long as the user continued to browse the page actively.
+
+:::warning
+The `enableActivityTracking` method **must** be called _before_ the `trackPageView` method.
+:::
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -76,17 +89,67 @@ trackPageView();
   </TabItem>
 </Tabs>
 
-The first ping would occur after 30 seconds, and subsequent pings every 10 seconds as long as the user continued to browse the page actively.
+### Disable activity tracking
 
-Notes:
+:::note
 
-- In general this is executed as part of the main Snowplow tracking tag. As a result, you can elect to enable this on specific pages.
-- The `enableActivityTracking` method **must** be called _before_ the `trackPageView` method.
-- Activity tracking will be disabled if either `minimumVisitLength` or `heartbeatDelay` is not integer. This is to prevent relentless callbacks.
+Available since version 3.14 of the tracker.
+:::
 
-### `enableActivityTrackingCallback`
+To disable activity tracking, you can use the `disableActivityTracking` method.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('disableActivityTracking');
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { disableActivityTracking } from '@snowplow/browser-tracker';
+
+disableActivityTracking();
+```
+  </TabItem>
+</Tabs>
+
+Disabling activity tracking will stop page activity intervals and will not send additional activity tracking events.
+
+### Page activity
+
+You can also mark the user as active with:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('updatePageActivity');
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { updatePageActivity } from '@snowplow/browser-tracker';
+
+updatePageActivity();
+```
+
+  </TabItem>
+</Tabs>
+
+On the next interval after this call, a ping will be generated even if the user had no other activity.
+
+This is particularly useful when a user is passively engaging with your content, e.g. watching a video.
+
+## Activity tracking callback
 
 You can now perform edge analytics in the browser to reduce the number of events sent to you collector whilst still tracking user activity. The Snowplow JavaScript Tracker enables this by allowing a callback to be specified in place of a page ping being sent. This is enabled by:
+
+### Enable callback
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -247,74 +310,16 @@ trackPageView();
 </Tabs>
 
 :::note
-
 For this technique of sending on visibility change to work reliably, we recommend initialising the Snowplow tracker with `eventMethod: 'beacon'` and/or `stateStorageStrategy: 'cookieAndLocalStorage'` (if navigating to a page that also contains the JS Tracker). Using the visibility change technique may not work as expected for Single Page Applications (SPA), you would need to send the aggregated event to the Snowplow collector on navigation within your application.
 :::
 
 :::caution
-
 The `iglu:com.acme_company/page_unload/jsonschema/1-0-0` schema used in the example is not a valid schema. Please define your own schema for these events. Otherwise, they will fail validation and go to the bad event queue.
 :::
 
 We are using `visibilitychange` events as `beforeunload` isn't a reliable option for mobile devices when using `beacon`. You can read more about this on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon#description). An idea on the different levels of compatibility of the different Page Visiblity API across browsers and mobile can here found [here](https://www.igvita.com/2015/11/20/dont-lose-user-and-app-state-use-page-visibility/).
 
-### `updatePageActivity`
-
-You can also mark the user as active with:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('updatePageActivity');
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { updatePageActivity } from '@snowplow/browser-tracker';
-
-updatePageActivity();
-```
-
-  </TabItem>
-</Tabs>
-
-On the next interval after this call, a ping will be generated even if the user had no other activity.
-
-This is particularly useful when a user is passively engaging with your content, e.g. watching a video.
-
-### `disableActivityTracking`
-
-:::note
-
-Available since version 3.14 of the tracker.
-:::
-
-To disable activity tracking, you can use the `disableActivityTracking` method.
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('disableActivityTracking');
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { disableActivityTracking } from '@snowplow/browser-tracker';
-
-disableActivityTracking();
-```
-  </TabItem>
-</Tabs>
-
-Disabling activity tracking will stop page activity intervals and will not send additional activity tracking events.
-
-### `disableActivityTrackingCallback`
+### Disable callback
 
 :::note
 Available since version 3.14 of the tracker.

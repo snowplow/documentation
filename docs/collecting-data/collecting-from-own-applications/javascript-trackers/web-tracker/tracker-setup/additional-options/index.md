@@ -391,3 +391,30 @@ newSession();
 ```
   </TabItem>
 </Tabs>
+
+
+
+
+## Starting a new session
+
+The tracker automatically tracks session information and implements session timeouts after which the session is reset.
+However, in case you want to trigger a new session manually (e.g., after logging out a user), you can use the `newSession` call to do that.
+This will expire the current session and start a new session.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('newSession');
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { newSession } from '@snowplow/browser-tracker';
+
+newSession();
+```
+  </TabItem>
+</Tabs>

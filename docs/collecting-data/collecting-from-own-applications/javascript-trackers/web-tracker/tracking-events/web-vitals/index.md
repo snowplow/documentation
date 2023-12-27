@@ -18,7 +18,9 @@ To collect the web vitals data, the plugin loads the [web-vitals](https://github
 The plugin is available since version 3.13 of the tracker.
 :::
 
-## Installation
+Web vitals events are **automatically tracked** once configured.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -32,22 +34,6 @@ The plugin is available since version 3.13 of the tracker.
 
 <table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-web-vitals`
-- `yarn add @snowplow/browser-plugin-web-vitals`
-- `pnpm add @snowplow/browser-plugin-web-vitals`
-
-
-  </TabItem>
-</Tabs>
-
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
 ```javascript
 window.snowplow(
     'addPlugin',
@@ -58,6 +44,11 @@ window.snowplow(
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
+
+- `npm install @snowplow/browser-plugin-web-vitals`
+- `yarn add @snowplow/browser-plugin-web-vitals`
+- `pnpm add @snowplow/browser-plugin-web-vitals`
+
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -72,7 +63,7 @@ newTracker('sp1', '{{collector_url}}', {
   </TabItem>
 </Tabs>
 
-## Plugin options
+## Configuration
 
 The Web Vitals plugin can be initialized with a couple of options allowing for customizing its behaviour:
 

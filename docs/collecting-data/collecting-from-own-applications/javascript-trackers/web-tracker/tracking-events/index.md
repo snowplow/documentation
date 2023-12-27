@@ -11,9 +11,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-To track an event, pass the relevant argument to `snowplow`, or call the relevant track method. 
-TODO
-For example, instrumenting a tracker and tracking a PageView:
+To track an event, the API is slightly different depending if you're using the JavaScript or Browser version of our web tracker.
+
+For example, instrumenting a tracker and manually tracking a PageView:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)">
@@ -41,7 +41,6 @@ For example, instrumenting a tracker and tracking a PageView:
 ```javascript
 import {
   newTracker,
-  enableActivityTracking,
   trackPageView
 } from '@snowplow/browser-tracker';
 
@@ -55,47 +54,66 @@ trackPageView();
 
 </Tabs>
 
-The tracker makes it easy to track different kinds of data. We provide a range of `track` methods for tracking out-of-the-box event types, as well as fully custom events. Some of these methods must be specifically included as plugins.
+The tracker makes it easy to track different kinds of data. We provide three kinds of base events - PageViews, Structured, and fully custom (Self-Describing) - that can be manually tracked. On top of this, we also provide a range of [plugins](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md) for automatic and manual tracking of different events and entities.
 
-Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the configuration, but you can attach your own [custom entities](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) as well. TODO
+Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the configuration, but you can attach your own [custom entities](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md) as well.
 
 Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. You can know more about how events and entities are structured [here](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
 
-See the full configuration and parameter options for all these classes and methods in the API docs. TODO
-
-## Auto-tracked events and entities
+## Auto-tracked entities
 
 The tracker can be set up to automatically track certain events, or automatically add entities to every event sent. Most autotracking is specifically configured using plugins, which are imported, enabled, and configured individually.
 
-However, certain autotracked context entities can be configured directly when instrumenting the tracker. To enable them, simply add them to the `contexts` field of the configuration object.
+However, the following autotracked context entities can be configured directly when instrumenting the tracker. To enable them, simply add their names to the `contexts` field of the configuration object.
 
-* **webPage**: a UUID for the page view.
-* **session**: data about the current session.
-* **browser**: properties of the user's browser.
+TODO add link to config here
 
-The following context entities can be configured when setting up the JavaScript tracker. To automatically track these context entities when using the browser tracker, use the plugin versions.
-* **performanceTiming**: no idea?.
-* **gaCookies**: no idea?.
-* **geolocation**: no idea?.
-* **clientHints**: no idea?.
+| Entity    | Usage                             | Enabled by default |
+|-----------|-----------------------------------|--------------------|
+| `webPage` | A UUID for the page view.         | `true`             |
+| `session` | Data about the current session.   | `false`            |
+| `browser` | Properties of the user's browser. | `false`            |
+
+The following context entities can be configured by plugin, or when setting up the JavaScript tracker only. To automatically track these context entities when using the Browser tracker, use the plugin versions.
+
+| Entity              | Usage                          | Enabled by default |
+|---------------------|--------------------------------|--------------------|
+| `performanceTiming` | Performance timing metrics.    | `true`             |
+| `gaCookies`         | Extract GA cookie values.      | `true`             |
+| `geolocation`       | User's geolocation.            | `false`            |
+| `clientHints`       | Chrome user-agent Client Hints | `true`             |
 
 The JavaScript Tracker comes with many predefined context entities which you can automatically add to every event you send. To enable them, simply add them to the `contexts` field of the configuration object as above.
 
-### webPage context
+### WebPage
 
-When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context is enabled (default), then a context containing this UUID is attached to every page view.
+When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context is enabled, then a context containing this UUID is attached to every page view.
 
-Enabled by default
+From v3 of the web tracker, the webPage entity is enabled by default. You can disable it if you don't require it but we advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
 
-From v3 of the JavaScript Tracker, the webPage context is enabled by default. You can disable it if you don't require it but we advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
+<details>
+    <summary>Web page entity properties</summary>
 
-### session context
+The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) context entity consists of the following property:
 
-If this context is enabled, the JavaScript tracker will add a context entity to events with information about the current session. The context entity repeats some of the session information stored in canonical event properties (e.g., `domain_userid`, `domain_sessionid`), but also adds new information. It adds a reference to the previous session (`previousSessionId`) and first event in the current session (`firstEventId`, `firstEventTimestamp`). It also adds an index of the event in the session useful for ordering events as they were tracked (`eventIndex`).
+| Attribute | Description                             | Required? |
+|-----------|-----------------------------------------|-----------|
+| `id`      | An identifier (UUID) for the page view. | Yes       |
 
-Anonymous tracking has to be disabled for the session context entities to be added to events.
+</details>
 
-The [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity consists of the following properties:
+### Session
+
+If this context is enabled, the JavaScript tracker will add a context entity to events with information about the current session. The context entity repeats some of the session information stored in canonical event properties (e.g. `domain_userid`, `domain_sessionid`), but also adds new information. It adds a reference to the previous session (`previousSessionId`) and first event in the current session (`firstEventId`, `firstEventTimestamp`). It also adds an index of the event in the session useful for ordering events as they were tracked (`eventIndex`).
+
+:::note
+No session context entities will be added to events if anonymous tracking is enabled.
+:::
+
+<details>
+    <summary>Client session entity properties</summary>
+
+The [client_session](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2/) context entity consists of the following properties:
 
 | Attribute             | Description                                                                                                   | Required? |
 |-----------------------|---------------------------------------------------------------------------------------------------------------|-----------|
@@ -111,8 +129,14 @@ The [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.sno
 :::note
 Please note that the session context entity is only available since version 3.5 of the tracker.
 :::
+</details>
 
-### browser context
+### Browser
+
+This entity records information about the user's browser.
+
+<details>
+    <summary>Browser entity properties</summary>
 
 The [browser](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/browser_context/jsonschema) context entity consists of the following properties:
 
@@ -135,14 +159,23 @@ The [browser](https://github.com/snowplow/iglu-central/tree/master/schemas/com.
 :::note
 Please note that the browser context entity is only available since version 3.9 of the tracker.
 :::
+</details>
 
-## Manually-tracked events TODO
+## Manually-tracked events
 
 The tracker provides methods for tracking different types of events.
 The events are divided into two groups: canonical events and self-describing events.
 <!-- You can read more about the difference between the two [here](TODO) -->
 
-### Creating a Structured event
+### PageView
+
+Read about PageView tracking [here](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/page-views/index.md).
+
+### Custom (Self-Describing)
+
+Read about custom event tracking [here](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md).
+
+### Structured
 
 There are likely to be a large number of events that can occur on your site, for which a specific tracking method is part of Snowplow.
 
@@ -230,6 +263,7 @@ Note that in the above example no value is set for the `event` property.
 
 `trackStructEvent` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
 
+
 ## Tracking data that is not event-type specific
 
 Some data, such as that relating to the user whose activity is being tracked, is relevant across all event types. The tracker provides two mechanisms for tracking this kind of data.
@@ -239,6 +273,10 @@ Certain properties, including `userId` or `ipAddress`, can be set as "atomic" pr
 A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](../custom-tracking-using-schemas/index.md).
 
 All events also provide the option for setting a custom timestamp, called `trueTimestamp`. See below for details.
+
+### Setting the userID
+
+### Setting a custom page URL and referrer URL
 
 ### Adding custom timestamps to events
 

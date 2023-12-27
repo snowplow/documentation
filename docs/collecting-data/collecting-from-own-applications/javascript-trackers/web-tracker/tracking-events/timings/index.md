@@ -119,7 +119,7 @@ Timing events are implemented as Snowplow self describing events. [Here](https:
 
 # Performance timing
 
-Adds Performance Timing context entities to your Snowplow tracking. There is a different version of this plugin called [`Performance Navigation Timing`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/performance-navigation-timing/index.md) that uses a newer API, therefore it is recommended to use that instead (it also adds some additional metrics like the compressed/decompressed page size, and information about the navigation that can contextualise cache usage that can impact the measured metrics, as well as server-side metrics, etc).
+Adds Performance Timing context entities to your Snowplow tracking. There is a different version of this plugin called `Performance Navigation Timing` that uses a newer API, therefore it is recommended to use that instead (it also adds some additional metrics like the compressed/decompressed page size, and information about the navigation that can contextualise cache usage that can impact the measured metrics, as well as server-side metrics, etc).
 
 ## Installation
 

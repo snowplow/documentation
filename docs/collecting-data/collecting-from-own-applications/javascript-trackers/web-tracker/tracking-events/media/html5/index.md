@@ -12,7 +12,9 @@ import TabItem from '@theme/TabItem';
 
 This plugin will allow the tracking of any HTML5 `<video>` or `<audio>` element, along with many HTML5 based video player frameworks.
 
-## Installation
+HTML5 media events and entities are **automatically tracked** once configured.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -28,30 +30,19 @@ This plugin will allow the tracking of any HTML5 `<video>` or `<audio>` elem
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-media-tracking`
-- `yarn add @snowplow/browser-plugin-media-tracking`
-- `pnpm add @snowplow/browser-plugin-media-tracking`
-
-
-  </TabItem>
-</Tabs>
-
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
 ```javascript
 window.snowplow('addPlugin', 
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
   ["snowplowMediaTracking", "MediaTrackingPlugin"]
 );
 ```
+
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
+
+- `npm install @snowplow/browser-plugin-media-tracking`
+- `yarn add @snowplow/browser-plugin-media-tracking`
+- `pnpm add @snowplow/browser-plugin-media-tracking`
 
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
@@ -64,8 +55,10 @@ newTracker('sp1', '{{collector_url}}', {
 
 enableMediaTracking(/* options */);
 ```
+
   </TabItem>
 </Tabs>
+
 
 
 ## Quick Start

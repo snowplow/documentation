@@ -20,7 +20,9 @@ There are examples for both the [iframe](https://snowplow-incubator.github.io/sn
 Source code for the app is [available here](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples).
 :::
 
-## Installation
+Vimeo media events and entities are **automatically tracked** once configured.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -34,23 +36,6 @@ Source code for the app is [available here](https://github.com/snowplow-incubato
 
 <table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-vimeo-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-vimeo-tracking`
-- `yarn add @snowplow/browser-plugin-vimeo-tracking`
-- `pnpm add @snowplow/browser-plugin-vimeo-tracking`
-
-
-  </TabItem>
-</Tabs>
-
-
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
 ```javascript
 window.snowplow(
     'addPlugin',
@@ -61,6 +46,10 @@ window.snowplow(
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
+
+- `npm install @snowplow/browser-plugin-vimeo-tracking`
+- `yarn add @snowplow/browser-plugin-vimeo-tracking`
+- `pnpm add @snowplow/browser-plugin-vimeo-tracking`
 
 ```javascript
 import { VimeoTrackingPlugin } from '@snowplow/browser-plugin-vimeo-tracking';
@@ -74,7 +63,7 @@ newTracker('sp1', '{{collector_url}}', {
   </TabItem>
 </Tabs>
 
-## Basic Usage
+## Basic usage
 
 The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/index.md).
 
@@ -247,7 +236,7 @@ startVimeoTracking({
   </TabItem>
 </Tabs>
 
-## Advanced Usage
+## Advanced usage
 
 As the Vimeo plugin uses Snowplow Media internally, for more granular control over events, you can utilise any of the functions provided by the [Snowplow Media Plugin](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md).
 
@@ -299,7 +288,7 @@ video.on('pause', () => {
   </TabItem>
 </Tabs>
 
-### Tracking Advertising Events
+### Tracking advertising events
 
 Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md#update-ad-and-ad-break-properties).
 

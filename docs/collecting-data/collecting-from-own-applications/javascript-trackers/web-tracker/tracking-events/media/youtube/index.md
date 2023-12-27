@@ -1,16 +1,18 @@
 ---
-title: "Youtube media"
+title: "YouTube media"
 sidebar_position: 20
 ---
 
-# Youtube iFrame media tracking
+# YouTube iFrame media tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin will allow the tracking of an embedded YouTube IFrame.
+This plugin will allow the tracking of an embedded YouTube iFrame.
+
+YouTube media events and entities are **automatically tracked** once configured.
 
 ## Installation
 

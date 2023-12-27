@@ -10,9 +10,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Snowplow automatic form tracking detects three event types: `change_form`, `submit_form` and `focus_form`. To enable automatic form tracking, use the `enableFormTracking` method. This will add event listeners to all form elements and to all interactive elements inside forms (that is, all `input`, `textarea`, and `select` elements).
+Snowplow form tracking creates three event types: `change_form`, `submit_form` and `focus_form`.  Using the `enableFormTracking` method adds event listeners to all form elements and to all interactive elements inside forms (that is, all `input`, `textarea`, and `select` elements).
 
-**Note:** that events on password fields will not be tracked.
+This will only work for form elements which exist when it is called. If you are creating a form programmatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programmatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
+
+:::note
+Events on password fields will not be tracked.
+:::
+
+Form events are **automatically tracked** once configured.
 
 ## Installation
 
@@ -40,7 +46,7 @@ Snowplow automatic form tracking detects three event types: `change_form`, `subm
   </TabItem>
 </Tabs>
 
-## Initialization
+## Enable form tracking
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -50,10 +56,14 @@ window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-form-tracking@latest/dist/index.umd.min.js",
   ["snowplowFormTracking", "FormTrackingPlugin"]
 );
+
+snowplow('enableFormTracking');
 ```
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
+
+This is part of the `@snowplow/browser-plugin-form-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-form-tracking` and then initialize it:
 
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
@@ -70,20 +80,7 @@ enableFormTracking();
   </TabItem>
 </Tabs>
 
-### Functions
-
-<table class="has-fixed-layout"><tbody><tr><td><code>enableFormTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#enableformtracking">Documentation</a></td></tr></tbody></table>
-
-### Context
-
-This plugin does not add any additional data to context of an event.
-
-
-Snowplow automatic form tracking detects three event types:
-
-1. [change_form](#change_form) – form field changed.
-2. [submit_form](#submit_form) – form submitted.
-3. [focus_form](#focus_form) – form field focused.
+This will only work for form elements which exist when it is called. If you are creating a form programmatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programmatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
 
 By default, all three event types are tracked. However, it is possible to subscribe only to specific event types using the `options.events` option when enabling form tracking:
 
@@ -91,8 +88,6 @@ By default, all three event types are tracked. However, it is possible to subscr
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('enableFormTracking');
-
 // subscribing to specific event types
 snowplow('enableFormTracking', {
     options: {
@@ -100,23 +95,10 @@ snowplow('enableFormTracking', {
     },
 });
 ```
-
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-This is part of the `@snowplow/browser-plugin-form-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-form-tracking` and then initialize it:
-
 ```javascript
-import { newTracker } from '@snowplow/browser-tracker';
-import { FormTrackingPlugin, enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
-
-newTracker('sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
-  plugins: [ FormTrackingPlugin() ]
-});
-
-enableFormTracking();
-
 // subscribing to specific event types
 enableFormTracking({
     options: {
@@ -124,35 +106,25 @@ enableFormTracking({
     },
 });
 ```
-
   </TabItem>
 </Tabs>
 
-#### `change_form`
+### `change_form`
 
 When a user changes the value of a `textarea`, `input`, or `select` element inside a form, a [`change_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/change_form/jsonschema/1-0-0) event will be fired. It will capture the name, type, and new value of the element, and the id of the parent form.
 
-##### `submit_form`
+### `submit_form`
 
 When a user submits a form, a [`submit_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/submit_form/jsonschema/1-0-0) event will be fired. It will capture the id and classes of the form and the name, type, and value of all `textarea`, `input`, and `select` elements inside the form.
 
 Note that this will only work if the original form submission event is actually fired. If you prevent it from firing, for example by using a jQuery event handler which returns `false` to handle clicks on the form's submission button, the Snowplow `submit_form` event will not be fired.
 
-#### `focus_form`
+### `focus_form`
 
 When a user focuses on a form element, a [`focus_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/focus_form/jsonschema/1-0-0) event will be fired. It will capture the id and classes of the form and the name, type, and value of the `textarea`, `input`, or `select` element inside the form that received focus.
 
-### `enableFormTracking`
 
-Use the `enableFormTracking` method to turn on form tracking by adding event listeners to all form elements and to all interactive elements inside forms (that is, all `input`, `textarea`, and `select` elements).
-
-This will only work for form elements which exist when it is called. If you are creating a form programmatically, call `enableFormTracking` again after adding it to the document to track it. You can call `enableFormTracking` multiple times without risk of duplicated events. **From v3.2.0**, if you are programmatically adding additional fields to a form after initially calling `enableFormTracking` then calling it again after the new form fields are added will include them in form tracking.
-
-:::note
-Events on password fields will not be tracked.
-:::
-
-### Custom form tracking
+## Configuration
 
 It may be that you do not want to track every field in a form, or every form on a page. You can customize form tracking by passing a configuration argument to the `enableFormTracking` method. This argument should be an object with two elements named "forms" and "fields". The "forms" element determines which forms will be tracked; the "fields" element determines which fields inside the tracked forms will be tracked. As with link click tracking, there are three ways to configure each field: a denylist, an allowlist, or a filter function. You do not have to use the same method for both fields.
 
@@ -168,7 +140,7 @@ This is an array of strings used to turn on tracking. Any form with a CSS class 
 
 This is a function used to determine which elements are tracked. The element is passed as the argument to the function and is tracked if and only if the value returned by the function is truthy.
 
-**Transform functions**
+### Transform functions
 
 This is a function used to transform data in each form field. The value and element (2.15.0+ only) are passed as arguments to the function and the tracked value is replaced by the value returned.
 
@@ -259,63 +231,9 @@ E.g. Send `"null"` over `null`.
 
 :::
 
-**Context**
 
-Context entities can be sent with all form tracking events by supplying them in an array in the `context` argument.
 
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('enableFormTracking', { options: {}, context: [] });
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
-
-enableFormTracking({ options: {}, context: [] });
-```
-
-  </TabItem>
-</Tabs>
-
-These context entities can be dynamic, i.e. they can be traditional self-describing JSON objects, or callbacks that generate valid self-describing JSON objects.
-
-For form change events, context generators are passed `(elt, type, value)`, and form submission events are passed `(elt, innerElements)`.
-
-A dynamic context could therefore look something like this for form change events:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-let dynamicContext = function (elt, type, value) {
-  // perform operations here to construct the context entity
-  return context;
-};
-
-snowplow('enableFormTracking', { options: {}, context: [dynamicContext] });
-```
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
-
-var dynamicContext = function (elt, type, value) {
-  // perform operations here to construct the context entity
-  return context;
-};
-
-enableFormTracking({ options: {}, context: [dynamicContext] });
-```
-  </TabItem>
-</Tabs>
-
-**Examples**
+### Examples
 
 To track every form element and every field except those fields named "password":
 
@@ -464,11 +382,10 @@ var options = {
 
 enableFormTracking({ options });
 ```
-
   </TabItem>
 </Tabs>
 
-### Tracking forms embedded inside iframes
+## Tracking forms embedded inside iframes
 
 The options for tracking forms inside of iframes are limited – browsers block access to contents of iframes that are from different domains than the parent page. We are not able to provide a solution to track events using trackers initialized on the parent page in such cases. However, since version 3.4, it is possible to track events from forms embedded in iframes loaded from the same domain as the parent page or iframes created using JavaScript on the parent page (e.g., HubSpot forms).
 
@@ -502,5 +419,60 @@ enableFormTracking({
 });
 ```
 
+  </TabItem>
+</Tabs>
+
+## Custom context entities
+
+Context entities can be sent with all form tracking events by supplying them in an array in the `context` argument.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('enableFormTracking', { options: {}, context: [] });
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
+
+enableFormTracking({ options: {}, context: [] });
+```
+  </TabItem>
+</Tabs>
+
+These context entities can be dynamic, i.e. they can be traditional self-describing JSON objects, or callbacks that generate valid self-describing JSON objects.
+
+For form change events, context generators are passed `(elt, type, value)`, and form submission events are passed `(elt, innerElements)`.
+
+A dynamic context could therefore look something like this for form change events:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+let dynamicContext = function (elt, type, value) {
+  // perform operations here to construct the context entity
+  return context;
+};
+
+snowplow('enableFormTracking', { options: {}, context: [dynamicContext] });
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
+
+var dynamicContext = function (elt, type, value) {
+  // perform operations here to construct the context entity
+  return context;
+};
+
+enableFormTracking({ options: {}, context: [dynamicContext] });
+```
   </TabItem>
 </Tabs>

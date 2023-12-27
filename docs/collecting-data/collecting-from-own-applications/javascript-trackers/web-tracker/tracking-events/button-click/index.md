@@ -16,7 +16,9 @@ This plugin enables the automatic tracking of clicks on buttons, covering both `
 The plugin is available from Version 3.18 of the tracker.
 :::
 
-## Installation
+Button click events are **automatically tracked** once configured.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
 <TabItem value="js" label="JavaScript (tag)" default>
@@ -72,35 +74,7 @@ The plugin is available from Version 3.18 of the tracker.
 </TabItem>
 </Tabs>
 
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-window.snowplow(
-    'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
-    ['snowplowButtonClickTracking', 'ButtonClickTrackingPlugin']
-);
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { ButtonClickTrackingPlugin } from '@snowplow/browser-plugin-button-click-tracking';
-
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ ButtonClickTrackingPlugin() ],
-});
-```
-
-  </TabItem>
-</Tabs>
-
-## Overview
+## Enable and disable tracking
 
 To start tracking all button clicks, call the `enableButtonClickTracking` function:
 
@@ -108,6 +82,12 @@ To start tracking all button clicks, call the `enableButtonClickTracking` functi
 <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
+window.snowplow(
+    'addPlugin',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
+    ['snowplowButtonClickTracking', 'ButtonClickTrackingPlugin']
+);
+
 window.snowplow('enableButtonClickTracking');
 ```
 
@@ -115,7 +95,13 @@ window.snowplow('enableButtonClickTracking');
 <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+import { enableButtonClickTracking, enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+
+newTracker('sp1', '{{collector_url}}', { 
+   appId: 'my-app-id', 
+   plugins: [ ButtonClickTrackingPlugin() ],
+});
+
 enableButtonClickTracking();
 ```
 
@@ -144,33 +130,9 @@ disableButtonClickTracking();
 
 ## Configuration
 
-### Choosing which buttons to track
+There are three ways to configure which buttons are tracked. If no configuration is specified, as shown above, all buttons on the page will be tracked.
 
-There are four ways to configure which buttons are tracked:
-
-#### No configuration
-
-If no configuration is specified, all buttons on the page will be tracked.
-
-<Tabs groupId="platform" queryString>
-<TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-window.snowplow('enableButtonClickTracking');
-```
-
-</TabItem>
-<TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
-enableButtonClickTracking();
-```
-
-</TabItem>
-</Tabs>
-
-#### Allowlist
+### Allowlist
 
 You can specify a list of CSS classes to match against the buttons you want to track. Only buttons that contain the class will be tracked.
 
@@ -196,7 +158,7 @@ enableButtonClickTracking({
 </TabItem>
 </Tabs>
 
-#### Denylist
+### Denylist
 
 Inversely, you can specify a list of CSS classes to match against the buttons you want to ignore. Only buttons that do not contain the class will be tracked.
 
@@ -222,7 +184,7 @@ enableButtonClickTracking({
 </TabItem>
 </Tabs>
 
-#### Filter function
+### Filter function
 
 Finally, you can specify a function that will be called for each button on the page. If the function returns `true`, the button will be tracked. If it returns `false`, the button will not be tracked.
 
@@ -253,7 +215,7 @@ enableButtonClickTracking({
 </TabItem>
 </Tabs>
 
-## Data
+## Tracked data
 
 The plugin will track the following data (if present on the element):
 
@@ -264,7 +226,9 @@ The plugin will track the following data (if present on the element):
 | `classes` | The classes of the button                           | `string[]` | No        |
 | `name`    | The name of the button                              | `string`   | No        |
 
-#### Overriding the label with `data-sp-button-label`
+[Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0) is the JSON schema for a button click event.
+
+### Overriding the label with `data-sp-button-label`
 
 By default, the plugin will use the text on the button as the label. However, you can override this by adding a `data-sp-button-label` attribute to the button:
 

@@ -14,9 +14,6 @@ Link click tracking adds click event listeners to all link elements.
 
 Link clicks are tracked as self describing events. Each link click event captures the link’s href attribute. The event also has fields for the link’s id, classes, and target (where the linked document is opened, such as a new tab or new window).
 
-Link click tracking need only be enabled once, all link elements will be updated . Use this method once and the tracker will add click event listeners to all link elements. TODO
-
-
 [Here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1) is the JSON schema for a link click event.
 
 Link click events are **automatically tracked** once configured.
@@ -83,6 +80,8 @@ enableLinkClickTracking();
   </TabItem>
 </Tabs>
 
+Use this method once and the tracker will add click event listeners to all link elements.
+
 An optional parameter is `pseudoClicks`. If this is not turned on, Firefox will not recognize middle clicks. If it is turned on, there is a small possibility of false positives (click events firing when they shouldn't). **Turning this feature on is recommended**:
 
 <Tabs groupId="platform" queryString>
@@ -135,7 +134,7 @@ enableLinkClickTracking({
   </TabItem>
 </Tabs>
 
-### Allowlists, denylists, and filtering
+## Configuration
 
 Control which links to track using the FilterCriterion object.
 
@@ -154,7 +153,7 @@ interface FilterCriterion {
 
 You can control which links are tracked using the second argument. There are three ways to do this: a denylist, an allowlist, and a filter function.
 
-**Denylists**
+### Denylist
 
 This is an array of CSS classes which should be ignored by link click tracking. For example, the below code will stop link click events firing for links with the class "barred" or "untracked", but will fire link click events for all other links:
 
@@ -191,7 +190,7 @@ enableLinkClickTracking({ options: { 'denylist': ['barred'] } });
   </TabItem>
 </Tabs>
 
-**Allowlists**
+### Allowlist
 
 The opposite of a denylist. This is an array of the CSS classes of links which you do want to be tracked. Only clicks on links with a class in the list will be tracked.
 
@@ -229,7 +228,7 @@ enableLinkClickTracking({ options: { 'allowlist': ['unbarred'] } });
 </Tabs>
 
 
-**Filter functions**
+### Filter function
 
 You can provide a filter function which determines which links should be tracked. The function should take one argument, the link element, and return either 'true' (in which case clicks on the link will be tracked) or 'false' (in which case they won't).
 

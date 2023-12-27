@@ -19,7 +19,7 @@ Typical Snowplow web tracking plans often leverage the following event types:
 
 - [Page Views](#page-views)
 - [Page Pings (Activity Tracking)](#activity-tracking-page-pings)
-- [Self Describing Events](#tracking-custom-self-describing-events)
+- [Self Describing Events](#custom-self-describing-events)
 - [Event with custom context](#custom-context)
 
 This page goes on to discuss more advanced topics in tracking events:

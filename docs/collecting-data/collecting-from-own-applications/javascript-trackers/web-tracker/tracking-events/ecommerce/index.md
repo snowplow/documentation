@@ -3,787 +3,26 @@ title: "Ecommerce"
 sidebar_position: 70
 ---
 
-# Ecommerce tracking
+# Snowplow ecommerce tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-## Installation
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-| Tracker Distribution | Included |
-|----------------------|----------|
-| `sp.js`              | ✅        |
-| `sp.lite.js`         | ❌        |
-
-**Download:**
-
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ecommerce@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-ecommerce@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
-
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-ecommerce`
-- `yarn add @snowplow/browser-plugin-ecommerce`
-- `pnpm add @snowplow/browser-plugin-ecommerce`
-
-
-  </TabItem>
-</Tabs>
-
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-window.snowplow('addPlugin', 
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ecommerce@latest/dist/index.umd.min.js",
-  ["snowplowEcommerce", "EcommercePlugin"]
-);
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { EcommercePlugin, addTrans, addItem, trackTrans } from '@snowplow/browser-plugin-ecommerce';
-
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ EcommercePlugin() ],
-});
-```
-
-  </TabItem>
-</Tabs>
-
-### Functions
-
-<table class="has-fixed-layout"><tbody><tr><td><code><code>addTrans</code></code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#addtrans">Documentation</a></td></tr><tr><td><code>addItem</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#additem">Documentation</a></td></tr><tr><td><code>trackTrans</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#tracktrans">Documentation</a></td></tr><tr><td><code>trackAddToCart</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#trackaddtocartandtrackremovefromcart">Documentation</a></td></tr><tr><td><code>trackRemoveFromCart</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#trackaddtocartandtrackremovefromcart">Documentation</a></td></tr></tbody></table>
-
-### Context
-
-This plugin does not add any additional data to context of an event.
-
-
-This feature is modeled on Google Analytics ecommerce tracking capability, Snowplow uses three methods that have to be used together to track online transactions:
-
-1. **Create a transaction object**. Use `addTrans()` method to initialize a transaction object. This will be the object that is loaded with all the data relevant to the specific transaction that is being tracked including all the items in the order, the prices of the items, the price of shipping and the `order_id`.
-2. **Add items to the transaction.** Use the `addItem()` method to add data about each individual item to the transaction object.
-3. **Submit the transaction to Snowplow** using the trackTrans() method, once all the relevant data has been loaded into the object.
-
-#### `addTrans`
-
-The `addTrans` method creates a transaction object. It takes nine possible parameters, two of which are required:
-
-| **Parameter** | **Description**                                      | **Required?** | **Example value** |
-|---------------|------------------------------------------------------|---------------|-------------------|
-| `orderId`     | Internal unique order id number for this transaction | Yes           | '1234'            |
-| `affiliation` | Partner or store affiliation                         | No            | 'Womens Apparel'  |
-| `total`       | Total amount of the transaction                      | Yes           | '19.99'           |
-| `tax`         | Tax amount of the transaction                        | No            | '1.00'            |
-| `shipping`    | Shipping charge for the transaction                  | No            | '2.99'            |
-| `city`        | City to associate with transaction                   | No            | 'San Jose'        |
-| `state`       | State or province to associate with transaction      | No            | 'California'      |
-| `country`     | Country to associate with transaction                | No            | 'USA'             |
-| `currency`    | Currency to associate with this transaction          | No            | 'USD'             |
-
-For example:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('addTrans', {
-    orderId: '1234',  // required
-    total: 11.99,   // required
-    affiliation: 'Acme Clothing',
-    tax: 1.29,
-    shipping: 5,
-    city: 'San Jose',
-    state: 'California',
-    country: 'USA',
-    currency: 'USD'
-});
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-This is part of the `@snowplow/browser-plugin-ecommerce` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-ecommerce` and then initialize it:
-
-```javascript
-import { newTracker } from '@snowplow/browser-tracker';
-import { EcommercePlugin } from '@snowplow/browser-plugin-ecommerce';
-
-newTracker('sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
-  plugins: [ EcommercePlugin() ]
-});
-```
-
-Used like this for the first step:
-
-```javascript
-import { addTrans } from '@snowplow/browser-plugin-ecommerce'
-
-addTrans({
-    orderId: '1234',  // required
-    total: 11.99,   // required
-    affiliation: 'Acme Clothing',
-    tax: 1.29,
-    shipping: 5,
-    city: 'San Jose',
-    state: 'California',
-    country: 'USA',
-    currency: 'USD'
-});
-```
-
-  </TabItem>
-</Tabs>
-
-`addTrans` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
-
-### `addItem`
-
-The `addItem` method is used to capture the details of each product item included in the transaction. It should therefore be called once for each item.
-
-There are six potential parameters that can be passed with each call, four of which are required:
-
-| **Parameter** | **Description**                                    | **Required?**                                       | **Example value** |
-|---------------|----------------------------------------------------|-----------------------------------------------------|-------------------|
-| `orderId`     | Order ID of the transaction to associate with item | Yes                                                 | '1234'            |
-| `sku`         | Item's SKU code                                    | Yes                                                 | 'pbz0001234'      |
-| `name`        | Product name                                       | No, but advisable (to make interpreting SKU easier) | 'Black Tarot'     |
-| `category`    | Product category                                   | No                                                  | 'Large'           |
-| `price`       | Product price                                      | Yes                                                 | 9.99              |
-| `quantity`    | Purchase quantity                                  | Yes                                                 | 1                 |
-| `currency`    | Product price currency                             | No                                                  | 'USD'             |
-
-For example:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('addItem', {
-    orderId: '1234', // required
-    sku: 'DD44',     // required
-    name: 'T-Shirt',
-    category: 'Green Medium',
-    price: 11.99,
-    quantity: 1,
-    currency: 'USD'
-});
-```
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { addItem } from '@snowplow/browser-plugin-ecommerce'
-
-addItem({
-    orderId: '1234', // required
-    sku: 'DD44',     // required
-    name: 'T-Shirt',
-    category: 'Green Medium',
-    price: 11.99,
-    quantity: 1,
-    currency: 'USD'
-});
-```
-
-  </TabItem>
-</Tabs>
-
-`addItem` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
-
-### trackTrans
-
-Once the transaction object has been created (using `addTrans`) and the relevant item data added to it using the `addItem` method, we are ready to send the data to the collector. This is initiated using the `trackTrans` method:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('trackTrans');
-```
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { trackTrans } from '@snowplow/browser-plugin-ecommerce';
-
-trackTrans();
-```
-
-  </TabItem>
-</Tabs>
-
-### Putting the three methods together: a complete example
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```html
-<html>
-<head>
-<title>Receipt for your clothing purchase from Acme Clothing</title>
-<script type="text/javascript">
-
-  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
-  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
-  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
-  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
-
-  snowplow('newTracker', 'sp', '{{collector_url_here}}', { appId: 'my-store' });
-  snowplow('enableActivityTracking',{
-    minimumVisitLength: 30,
-    heartbeatDelay: 10
-  });
-  snowplow('trackPageView');
-  snowplow('enableLinkClickTracking');
-
-  snowplow('addTrans', {
-    orderId: '1234',  // required
-    total: 11.99,   // required
-    affiliation: 'Acme Clothing',
-    tax: 1.29,
-    shipping: 5,
-    city: 'San Jose',
-    state: 'California',
-    country: 'USA',
-    currency: 'USD'
-  });
-
-   // add item might be called for every item in the shopping cart
-   // where your ecommerce engine loops through each item in the cart and
-   // prints out _addItem for each
-  snowplow('addItem', {
-    orderId: '1234', // required
-    sku: 'DD44',     // required
-    name: 'T-Shirt',
-    category: 'Green Medium',
-    price: 11.99,
-    quantity: 1,
-    currency: 'USD'
-  });
-
-  // trackTrans sends the transaction to Snowplow tracking servers.
-  // Must be called last to commit the transaction.
-  snowplow('trackTrans'); //submits transaction to the collector
-
-</script>
-</head>
-<body>
-
-  Thank you for your order.  You will receive an email containing all your order details.
-
-</body>
-</html>
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { newTracker } from '@snowplow/browser-tracker';
-import { EcommercePlugin, addTrans, addItem, trackTrans } from '@snowplow/browser-plugin-ecommerce';
-
-newTracker('sp', '{{collector_url_here}}', {
-  appId: 'my-app-id',
-  plugins: [ EcommercePlugin() ]
-});
-
-addTrans({
-    orderId: '1234',  // required
-    total: 11.99,   // required
-    affiliation: 'Acme Clothing',
-    tax: 1.29,
-    shipping: 5,
-    city: 'San Jose',
-    state: 'California',
-    country: 'USA',
-    currency: 'USD'
-});
-
-// add item might be called for every item in the shopping cart
-// where your ecommerce engine loops through each item in the cart and
-// prints out _addItem for each
-addItem({
-    orderId: '1234', // required
-    sku: 'DD44',     // required
-    name: 'T-Shirt',
-    category: 'Green Medium',
-    price: 11.99,
-    quantity: 1,
-    currency: 'USD'
-});
-
-// trackTrans sends the transaction to Snowplow tracking servers.
-// Must be called last to commit the transaction.
-trackTrans();
-```
-
-  </TabItem>
-</Tabs>
-
-### `trackAddToCart` and `trackRemoveFromCart`
-
-These methods are also part of `@snowplow/browser-plugin-ecommerce` and let you track users adding and removing items from a cart on an ecommerce site. Their arguments are identical:
-
-| **Name**    | **Required?** | **Description**                        | **Type** |
-|-------------|---------------|----------------------------------------|----------|
-| `sku`       | Yes           | Item SKU                               | string   |
-| `name`      | No            | Item name                              | string   |
-| `category`  | No            | Item category                          | string   |
-| `unitPrice` | Yes           | Item price                             | number   |
-| `quantity`  | Yes           | Quantity added to or removed from cart | number   |
-| `currency`  | No            | Item price currency                    | string   |
-
-An example:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('trackAddToCart', {
-  sku: '000345',
-  name: 'blue tie',
-  category: 'clothing',
-  unitPrice: 3.49,
-  quantity: 2,
-  currency: 'GBP'
-});
-
-snowplow('trackRemoveFromCart', {
-  sku: '000345',
-  name: 'blue tie',
-  category: 'clothing',
-  unitPrice: 3.49,
-  quantity: 2,
-  currency: 'GBP'
-});
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { trackAddToCart, trackRemoveFromCart } from '@snowplow/browser-plugin-ecommerce';
-
-trackAddToCart({
-  sku: '000345',
-  name: 'blue tie',
-  category: 'clothing',
-  unitPrice: 3.49,
-  quantity: 2,
-  currency: 'GBP'
-});
-
-trackRemoveFromCart({
-  sku: '000345',
-  name: 'blue tie',
-  category: 'clothing',
-  unitPrice: 3.49,
-  quantity: 2,
-  currency: 'GBP'
-});
-```
-  </TabItem>
-</Tabs>
-
-Both methods are implemented as Snowplow self describing events. You can see schemas for the [`add_to_cart`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/add_to_cart/jsonschema/1-0-0) and [`remove_from_cart`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/remove_from_cart/jsonschema/1-0-0) events.
-
-Both methods can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
-
-## Enhanced Ecommerce tracking
-
-For more information on the Enhanced Ecommerce functions please see the Google Analytics [documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce).
-
-### `addEnhancedEcommerceActionContext`
-
-Use the `addEnhancedEcommerceActionContext` method to add a GA Enhanced Ecommerce Action Context to the Tracker:
-
-| **Name**      | **Required?** | **Type**          |
-|---------------|---------------|-------------------|
-| `id`          | Yes           | string            |
-| `affiliation` | No            | string            |
-| `revenue`     | No            | number OR string  |
-| `tax`         | No            | number OR string  |
-| `shipping`    | No            | number OR string  |
-| `coupon`      | No            | string            |
-| `list`        | No            | string            |
-| `step`        | No            | integer OR string |
-| `option`      | No            | string            |
-| `currency`    | No            | string            |
-
-Adding an action using Google Analytics:
-
-```javascript
-ga('ec:setAction', 'purchase', {
-  'id': 'T12345',
-  'affiliation': 'Google Store - Online',
-  'revenue': '37.39',
-  'tax': '2.85',
-  'shipping': '5.34',
-  'coupon': 'SUMMER2013'
-});
-```
-
-:::note
-The action type is passed with the action context in the Google Analytics example. We have separated this by asking you to call the `trackEnhancedEcommerceAction` function to actually send the context and the action.
-:::
-
-Adding an action using Snowplow:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('addEnhancedEcommerceActionContext', {
-  id: 'T12345',
-  affiliation: 'Google Store - Online',
-  revenue: '37.39', // Can also pass as number
-  tax: '2.85', // Can also pass as number
-  shipping: '5.34', // Can also pass as number
-  coupon: 'WINTER2016'
-});
-``
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-addEnhancedEcommerceActionContext({
-  id: 'T12345',
-  affiliation: 'Google Store - Online',
-  revenue: '37.39', // Can also pass as number
-  tax: '2.85', // Can also pass as number
-  shipping: '5.34', // Can also pass as number
-  coupon: 'WINTER2016'
-});
-```
-
-  </TabItem>
-</Tabs>
-
-### `addEnhancedEcommerceImpressionContext`
-
-Use the `addEnhancedEcommerceImpressionContext` method to add a GA Enhanced Ecommerce Impression Context to the Tracker:
-
-| **Name**   | **Required?** | **Type**          |
-|------------|---------------|-------------------|
-| `id`       | Yes           | string            |
-| `name`     | No            | string            |
-| `list`     | No            | string            |
-| `brand`    | No            | string            |
-| `category` | No            | string            |
-| `variant`  | No            | string            |
-| `position` | No            | integer OR string |
-| `price`    | No            | number OR string  |
-| `currency` | No            | string            |
-
-Adding an impression using Google Analytics:
-
-```javascript
-ga('ec:addImpression', {
-  'id': 'P12345',
-  'name': 'Android Warhol T-Shirt',
-  'list': 'Search Results',
-  'brand': 'Google',
-  'category': 'Apparel/T-Shirts',
-  'variant': 'Black',
-  'position': 1
-});
-```
-
-Adding an impression using Snowplow:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('addEnhancedEcommerceImpressionContext', {
-  id: 'P12345',
-  name: 'Android Warhol T-Shirt',
-  list: 'Search Results',
-  brand: 'Google',
-  category: 'Apparel/T-Shirts',
-  variant: 'Black',
-  position: 1
-});
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-addEnhancedEcommerceImpressionContext({
-  id: 'P12345',
-  name: 'Android Warhol T-Shirt',
-  list: 'Search Results',
-  brand: 'Google',
-  category: 'Apparel/T-Shirts',
-  variant: 'Black',
-  position: 1
-});
-```
-
-  </TabItem>
-</Tabs>
-
-### `addEnhancedEcommerceProductContext`
-
-Use the `addEnhancedEcommerceProductContext` method to add a GA Enhanced Ecommerce Product Field Context:
-
-| **Name**   | **Required?** | **Type**          |
-|------------|---------------|-------------------|
-| `id`       | Yes           | string            |
-| `name`     | No            | string            |
-| `list`     | No            | string            |
-| `brand`    | No            | string            |
-| `category` | No            | string            |
-| `variant`  | No            | string            |
-| `price`    | No            | number OR string  |
-| `quantity` | No            | integer OR string |
-| `coupon`   | No            | string            |
-| `position` | No            | integer OR string |
-| `currency` | No            | string            |
-
-Adding a product using Google Analytics:
-
-```javascript
-ga('ec:addProduct', {
-  'id': 'P12345',
-  'name': 'Android Warhol T-Shirt',
-  'brand': 'Google',
-  'category': 'Apparel/T-Shirts',
-  'variant': 'Black',
-  'position': 1
-});
-```
-
-Adding a product using Snowplow:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('addEnhancedEcommerceProductContext', {
-  id: 'P12345',
-  name: 'Android Warhol T-Shirt',
-  list: 'Search Results',
-  brand: 'Google',
-  category: 'Apparel/T-Shirts',
-  variant: 'Black',
-  quantity: 1
-});
-```
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-addEnhancedEcommerceProductContext({
-  id: 'P12345',
-  name: 'Android Warhol T-Shirt',
-  list: 'Search Results',
-  brand: 'Google',
-  category: 'Apparel/T-Shirts',
-  variant: 'Black',
-  quantity: 1
-});
-```
-
-  </TabItem>
-</Tabs>
-
-### `addEnhancedEcommercePromoContext`
-
-Use the `addEnhancedEcommercePromoContext` method to add a GA Enhanced Ecommerce Promotion Field Context:
-
-| **Name**   | **Required?** | **Type** |
-|------------|---------------|----------|
-| `id`       | Yes           | string   |
-| `name`     | No            | string   |
-| `creative` | No            | string   |
-| `position` | No            | string   |
-| `currency` | No            | string   |
-
-Adding a promotion using Google Analytics:
-
-```javascript
-ga('ec:addPromo', {
-  'id': 'PROMO_1234',
-  'name': 'Summer Sale',
-  'creative': 'summer_banner2',
-  'position': 'banner_slot1'
-});
-```
-
-Adding a promotion using Snowplow:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('addEnhancedEcommercePromoContext', {
-  id: 'PROMO_1234', // The Promotion ID
-  name: 'Summer Sale', // The name
-  creative: 'summer_banner2', // The name of the creative
-  position: 'banner_slot1' // The position
-});
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-addEnhancedEcommercePromoContext({
-  id: 'PROMO_1234', // The Promotion ID
-  name: 'Summer Sale', // The name
-  creative: 'summer_banner2', // The name of the creative
-  position: 'banner_slot1' // The position
-});
-```
-
-  </TabItem>
-</Tabs>
-
-### `trackEnhancedEcommerceAction`
-
-Use the `trackEnhancedEcommerceAction` method to track a GA Enhanced Ecommerce Action. When this function is called all of the added Ecommerce Contexts are attached to this action and flushed from the Tracker.
-
-| **Name** | **Required?** | **Type** |
-|----------|---------------|----------|
-| `action` | Yes           | string   |
-
-The allowed actions:
-
-- `click`
-- `detail`
-- `add`
-- `remove`
-- `checkout`
-- `checkout_option`
-- `purchase`
-- `refund`
-- `promo_click`
-- `view`
-
-Adding an action using Google Analytics:
-
-```javascript
-ga('ec:setAction', 'refund', {
-  'id': 'T12345'
-});
-```
-
-Adding an action using Snowplow:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('addEnhancedEcommerceActionContext', {
-  id: 'T12345'
-});
-snowplow('trackEnhancedEcommerceAction', {
-  action: 'refund'
-});
-```
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-addEnhancedEcommerceActionContext({ id: 'T12345' });
-trackEnhancedEcommerceAction({ action: 'refund' });
-```
-  </TabItem>
-</Tabs>
-
-
-## Installation
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-| Tracker Distribution | Included |
-|----------------------|----------|
-| `sp.js`              | ✅        |
-| `sp.lite.js`         | ❌        |
-
-**Download:**
-
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-ecommerce@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-enhanced-ecommerce@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
-
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-enhanced-ecommerce`
-- `yarn add @snowplow/browser-plugin-enhanced-ecommerce`
-- `pnpm add @snowplow/browser-plugin-enhanced-ecommerce`
-
-
-  </TabItem>
-</Tabs>
-
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-window.snowplow('addPlugin', 
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-ecommerce@latest/dist/index.umd.min.js",
-  ["snowplowEnhancedEcommerce", "EnhancedEcommercePlugin"]
-);
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { EnhancedEcommercePlugin, trackEnhancedEcommerceAction } from '@snowplow/browser-plugin-enhanced-ecommerce';
-
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ EnhancedEcommercePlugin() ],
-});
-```
-
-  </TabItem>
-</Tabs>
-
-### Functions
-
-<table class="has-fixed-layout"><tbody><tr><td><code>trackEnhancedEcommerceAction</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#trackenhancedecommerceaction">Documentation</a></td></tr><tr><td><code>addEnhancedEcommerceActionContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#addenhancedecommerceactioncontext">Documentation</a></td></tr><tr><td><code>addEnhancedEcommerceImpressionContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#addenhancedecommerceimpressioncontext">Documentation</a></td></tr><tr><td><code>addEnhancedEcommerceProductContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#addenhancedecommerceproductcontext">Documentation</a></td></tr><tr><td><code>addEnhancedEcommercePromoContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#addenhancedecommercepromocontext">Documentation</a></td></tr></tbody></table>
-
-### Context
-
-This plugin does not add any additional data to context of an event.
-
-
-# Snowplow ecommerce
-
 This plugin is the recommended way to track ecommerce events on your store. Functions, usage and a complete setup journey is showcased on the [E-commerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).
+
+It provides several `trackX` methods, which each create a Snowplow ecommerce action event with the appropriate entities attached. The event itself has only one property, an enum describing the ecommerce action taken e.g. "add_to_cart". View the schema [here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2). All the provided data is sent in context entities.
+
+There are also two context entities that can be globally configured: ecommerce page and ecommerce user.
 
 :::note
 The plugin is available since version 3.8 of the tracker.
 :::
 
-## Installation
+Snowplow ecommerce events and entities must be **manually tracked**.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -797,22 +36,6 @@ The plugin is available since version 3.8 of the tracker.
 
 <table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-snowplow-ecommerce@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-snowplow-ecommerce@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-snowplow-ecommerce`
-- `yarn add @snowplow/browser-plugin-snowplow-ecommerce`
-- `pnpm add @snowplow/browser-plugin-snowplow-ecommerce`
-
-
-  </TabItem>
-</Tabs>
-
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
 ```javascript
 window.snowplow(
     'addPlugin',
@@ -823,6 +46,10 @@ window.snowplow(
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
+
+- `npm install @snowplow/browser-plugin-snowplow-ecommerce`
+- `yarn add @snowplow/browser-plugin-snowplow-ecommerce`
+- `pnpm add @snowplow/browser-plugin-snowplow-ecommerce`
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -837,10 +64,10 @@ newTracker('sp1', '{{collector_url}}', {
   </TabItem>
 </Tabs>
 
-## Functions
+## Events
 
 API                     | Used for:
-------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------
 `trackProductView`      | Tracking a visit to a product page. Known also as product detail view.
 `trackAddToCart`        | Track an addition to cart.
 `trackRemoveFromCart`   | Track a removal from cart.
@@ -852,12 +79,8 @@ API                     | Used for:
 `trackTransaction`      | Track a transaction/purchase completion.
 `trackRefund`           | Track a transaction partial or complete refund.
 `trackTransactionError` | Track an error happening during a transaction process.
-`setPageType`           | Set a Page type context which would allow the analyst to discern between types of pages with ecommerce value. E.g. Category Page, Product Page, Cart Page, etc.
-`setEcommerceUser`      | Set a User type context with a few standard user attributes.
 
-## Usage
-
-### trackProductView
+### Product view
 
 To track a product view you can use the `trackProductView` method with the following attributes:
 
@@ -894,7 +117,7 @@ trackProductView({
   </TabItem>
 </Tabs>
 
-### trackAddToCart
+### Add to cart
 
 To track a product/s addition to the cart you can use the `trackAddToCart` method with the following attributes:
 
@@ -947,7 +170,7 @@ trackAddToCart({
 - Where `total_value` is the value of the cart after the addition.
 - Where `currency` is the currency of the cart.
 
-### trackRemoveFromCart
+### Remove from cart
 
 To track a product/s removal from the cart you can use the `trackRemoveFromCart` method with the following attributes:
 
@@ -1000,7 +223,7 @@ trackRemoveFromCart({
 - Where `total_value` is the value of the cart after the removal of the product/s.
 - Where `currency` is the currency of the cart.
 
-### trackProductListView
+### Product list view
 
 To track a product list view you can use the `trackProductListView` method with the following attributes:
 
@@ -1094,7 +317,7 @@ trackProductListView({
 - Where `products` is an array of products being viewed from the list.
 - Where `name` is the name of the list being viewed. For the list names, you can use any kind of friendly name or a codified language to express the labeling of the list. E.g. 'Shoes - Men - Sneakers','Search results: "unisex shoes"', 'Product page upsells'
 
-### trackProductListClick
+### Product list click
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -1142,7 +365,7 @@ trackProductListClick({
 - Where `product` is the product being clicked/selected from the list.
 - Where `name` is the name of the list the product is currently in. For the list names, you can use any kind of friendly name or a codified language to express the labeling of the list. E.g. 'Shoes - Men - Sneakers','Search results: "unisex shoes"', 'Product page upsells'
 
-### trackPromotionView
+### Promotion view
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -1195,7 +418,7 @@ trackPromotionView({
   </TabItem>
 </Tabs>
 
-### trackPromotionClick
+### Promotion click
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -1228,7 +451,7 @@ trackPromotionClick({
   </TabItem>
 </Tabs>
 
-### trackCheckoutStep
+### Checkout step
 
 To track a checkout step you can use the `trackCheckoutStep` method with the following attributes:
 
@@ -1273,7 +496,7 @@ trackCheckoutStep({
   </TabItem>
 </Tabs>
 
-### trackTransaction
+### Transaction
 
 To track a completed transaction you can use the `trackTransaction` method with the following attributes:
 
@@ -1331,13 +554,12 @@ trackTransaction({
 });
 ```
 
-
   </TabItem>
 </Tabs>
 
 - Where `products` is an array with the product/s taking part in the transaction.
 
-### trackRefund
+### Refund
 
 :::note
 Available from version 3.10.
@@ -1398,7 +620,7 @@ trackRefund({
 
 - Where `products` is an array with the product/s taking part in the refund.
 
-### trackTransactionError
+### Transaction error
 
 :::note
 Available from version 3.13.
@@ -1453,7 +675,11 @@ trackTransactionError({
 
 - Where `transaction` is the transaction entity being processed.
 
-### setPageType
+## Page and user entities
+
+Once set, the ecommerce page or user context entity will be attached to **all* subsequent Snowplow events.
+
+### Page type
 
 To set a Page type context entity you can use the `setPageType` method with the following attributes:
 
@@ -1478,7 +704,17 @@ setPageType({ type, language, locale });
 
 After setting the Page context entity, it will be attached to every subsequent Snowplow event.
 
-### setEcommerceUser
+An ecommerce page entity can have the following attributes:
+
+| attribute |   type   |                                    description                                    | required |
+|:---------:|:--------:|:---------------------------------------------------------------------------------:|:--------:|
+|   type    | `string` | The type of the page that was visited E.g. homepage, product page, checkout page. |    ✅     |
+| language  | `string` |                    The language that the web page is based in.                    |    ✘     |
+|  locale   | `string` |                  The locale version of the site that is running.                  |    ✘     |
+
+<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/page/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
+
+### Ecommerce user
 
 To set an Ecommerce User context entity you can use the `setEcommerceUser` method with the following attributes:
 
@@ -1502,24 +738,6 @@ setEcommerceUser({ id, is_guest, email });
 
 After setting the User context entity, it will be attached to every subsequent Snowplow event.
 
-## Entities
-
-Below is the set of entities and attributes that can be used in the Snowplow Ecommerce implementation.
-
-### Ecommerce page entity
-
-An ecommerce page entity can have the following attributes:
-
-| attribute |   type   |                                    description                                    | required |
-|:---------:|:--------:|:---------------------------------------------------------------------------------:|:--------:|
-|   type    | `string` | The type of the page that was visited E.g. homepage, product page, checkout page. |    ✅     |
-| language  | `string` |                    The language that the web page is based in.                    |    ✘     |
-|  locale   | `string` |                  The locale version of the site that is running.                  |    ✘     |
-
-<a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/page/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
-
-### Ecommerce user entity
-
 An ecommerce user entity can have the following attributes:
 
 | attribute |   type    |             description             | required |
@@ -1530,7 +748,11 @@ An ecommerce user entity can have the following attributes:
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/user/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
-### Product entity
+## Automatically generated entities
+
+All the provided data is sent as context entities attached to the generic Snowplow ecommerce action event. For example, tracking a product view results in an ecommerce action event (type "product_view") with one product entity attached. 
+
+### Product
 
 Whenever there is a product entity involved in the ecommerce interaction event, the `product` or array of `products` can have the following attributes:
 
@@ -1552,7 +774,7 @@ Whenever there is a product entity involved in the ecommerce interaction event, 
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
-### Internal promotion entity
+### Internal promotion
 
 On internal promotion events, an internal promotion can have the following attributes:
 
@@ -1569,7 +791,7 @@ On internal promotion events, an internal promotion can have the following attri
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/promotion/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
-### Cart entity
+### Cart
 
 On cart interaction ecommerce events, a cart can have the following attributes:
 
@@ -1581,7 +803,7 @@ On cart interaction ecommerce events, a cart can have the following attributes:
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/cart/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
-### Checkout step entity
+### Checkout step
 
 Whenever there is a checkout entity involved in the ecommerce interaction event, it can have the following attributes:
 
@@ -1602,7 +824,7 @@ Whenever there is a checkout entity involved in the ecommerce interaction event,
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/checkout_step/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
-### Transaction entity
+### Transaction
 
 Whenever there is a transaction entity involved in the ecommerce interaction event, it can have the following attributes:
 
@@ -1621,7 +843,7 @@ Whenever there is a transaction entity involved in the ecommerce interaction eve
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
-### Refund entity
+### Refund
 
 Whenever there is a refund entity involved in the ecommerce interaction event, it can have the following attributes:
 
@@ -1634,7 +856,7 @@ Whenever there is a refund entity involved in the ecommerce interaction event, i
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/refund/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
-### Transaction Error entity
+### Transaction error
 
 Whenever there is a transaction error entity involved in the ecommerce interaction event, it can have the following attributes:
 

@@ -176,3 +176,46 @@ Please note that not retrying sending events to the Collector means that the eve
 
 Starting with version 3.17 of the tracker, it is also possible to completely disable retry functionality, using the `retryFailedRequests` boolean option. This option takes precedence over `retryStatusCodes` and `dontRetryStatusCodes`.
 
+
+
+## `onRequestSuccess` callback
+
+:::note
+Available from v3.18.1
+:::
+
+The `onRequestSuccess` option allows you to supply a callback function to be executed whenever a request is successfully sent to the collector. In practice this means any request which returns a `2xx` status code will trigger this callback.
+
+The callback's signature is:
+`(data: EventBatch) => void`
+where `EventBatch` can be either:
+
+- `Record<string, unknown>[]` for POST requests
+- `string[]` for GET requests
+
+## `onRequestFailure` callback
+
+:::note
+Available from v3.18.1
+:::
+
+The `onRequestFailure` option allows you to supply a callback function to be executed whenever a request fails to be sent to the collector. This is the inverse of the `onRequestSuccess` callback, so any non `2xx` status code will trigger this callback.
+
+The callback's signature is:
+`(data: RequestFailure) => void`
+where `RequestFailure` is:
+
+```ts
+export type RequestFailure = {
+  /** The batch of events that failed to send */
+  events: EventBatch;
+  /** The status code of the failed request */
+  status?: number;
+  /** The error message of the failed request */
+  message?: string;
+  /** Whether the tracker will retry the request */
+  willRetry: boolean;
+};
+```
+
+The format of `EventBatch` is the same as the `onRequestSuccess` callback.

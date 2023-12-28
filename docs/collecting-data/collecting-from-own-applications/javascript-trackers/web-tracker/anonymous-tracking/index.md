@@ -11,42 +11,30 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-TODO
+The Snowplow web tracker allows you to track events anonymously. It enables anonymizing various user and session identifiers to support user privacy in case consent for tracking the identifiers is not given. This means that no user identifiers are sent to the Snowplow event collector. By default, anonymous tracking is not enabled.
 
-## Respecting Do Not Track
+Anonymous tracking can be configured on initialization, but can be reset later. You may wish to toggle this functionality on or off during a page visit, for example when a user accepts a cookie banner you may not want to disable anonymous tracking, or when a user logs in to your site.
 
-Most browsers have a Do Not Track option which allows users to express a preference not to be tracked. You can respect that preference by setting the `respectDoNotTrack` field of the configuration object to `true`. This prevents cookies from being sent and events from being fired.
+For information about tracking user consent interactions and GDPR basis for processing, check out [this page](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md).
 
+On web, the following user and session identifiers can be anonymized:
 
-# Anonymous tracking
+* Client-side user identifiers:
+   * `userId` in the [Session](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/index.md) context entity.
+   * `userId`, `domainUserId`, `networkUserId`, `ipAddress` if they are set.
+* Client-side session identifiers: `sessionId` and `previousSessionId` in Session entity.
+* Server-side user identifiers: `network_userid` and `user_ipaddress` event properties.
 
-The Snowplow JavaScript tracker offers two techniques where tracking can be done anonymously. This means that no user identifiers are sent to the Snowplow Collector. By default `anonymousTracking: false`.
+## Configuring anonymous tracking
 
-Recommended configurations when using `anonymousTracking`:
+There are several levels to the anonymisation depending on which of the three categories are affected. Set this using the [initialization configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+
+### 1. Full client-side anonymisation
 
 ```javascript
 anonymousTracking: true,
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
-
-or
-
-```javascript
-anonymousTracking: { withSessionTracking: true },
-stateStorageStrategy: 'cookieAndLocalStorage'
-```
-
-or for a completely cookieless experience (from JavaScript Tracker 2.17.0+)
-
-```javascript
-anonymousTracking: { withServerAnonymisation: true },
-stateStorageStrategy: 'none',
-eventMethod: 'post'
-```
-
-### Client anonymous tracking
-
-`anonymousTracking: true`
 
 This mode will no longer track any user identifiers or session information. Similar in behavior to setting `stateStorageStrategy: 'none'`, as it will store no values in cookies or localStorage, however by using `anonymousTracking` you can toggle this behavior on and off (useful for allowing events to be sent without user identifiers until cookie banners have been accepted).
 
@@ -54,32 +42,34 @@ Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also
 
 Anonymous tracking can be toggled on and off. 
 
-### Full anonymous/cookieless tracking
+### 2. Client-side anonymisation with session
 
-`anonymousTracking: { withServerAnonymisation: true }`
-
-Server Anonymisation requires the Snowplow Stream Collector v2.1.0+. Using a lower version will cause events to fail to send until Server Anonymisation is disabled.
-
-Server Anonymisation will not work when the tracker is initialized with `eventMethod: 'beacon'` as it requires additional custom headers which beacon does not support.
-
-This mode will no longer track any user identifiers or session information, and will additionally prevent the Snowplow Collector from generating a `network_userid` cookie and capturing the users IP address. The same behavior described for above for Client side Anonymous tracking also applies.
-
-Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled. However for an experience that doesn't use any browser storage (cookieless), set `stateStorageStrategy` to `none`. This can be later toggled on, once a user accepts a cookie policy.
-
-Anonymous tracking can be toggled on and off. 
-
-### Anonymous session tracking
-
-`anonymousTracking: { withSessionTracking: true }`
+```javascript
+anonymousTracking: { withSessionTracking: true },
+stateStorageStrategy: 'cookieAndLocalStorage'
+```
 
 This mode will continue to track session information in the client side but will track no user identifiers. To achieve this, the tracker will use Cookies or Local Storage. For session tracking, `stateStorageStrategy` must be either `cookieAndLocalStorage` (default), `localStorage` or `cookie`. If this feature is enabled and the storage strategy is not appropriate, then full anonymous tracking will occur.
 
 The Snowplow JavaScript Tracker performs sessionization client side. This allows anonymous session tracking to be done using client side storage without sending any user identifier fields to the collector.
 
+### 3. Full anonymisation/cookieless
+
+```javascript
+anonymousTracking: { withServerAnonymisation: true },
+stateStorageStrategy: 'none',
+eventMethod: 'post'
+```
+
+This mode will no longer track any user identifiers or session information, and will additionally prevent the Snowplow Collector from generating a `network_userid` cookie and capturing the users IP address. The same behavior described for above for Client side Anonymous tracking also applies.
+
+Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled. However for an experience that doesn't use any browser storage (cookieless), set `stateStorageStrategy` to `none`. This can be later toggled on, once a user accepts a cookie policy.
+
+Server Anonymisation requires the Snowplow Stream Collector v2.1.0+. Using a lower version will cause events to fail to send until Server Anonymisation is disabled.
+
+Server Anonymisation will not work when the tracker is initialized with `eventMethod: 'beacon'` as it requires additional custom headers which beacon does not support.
 
 ## Toggling anonymous tracking
-
-The JavaScript Tracker can be initialized with `anonymousTracking: true` or `anonymousTracking: { withSessionTracking: true }` or `anonymousTracking: { withServerAnonymisation: true }`. You can read more about the anonymous tracking features [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/#anonymous-tracking).
 
 You may wish to toggle this functionality on or off during a page visit, for example when a user accepts a cookie banner you may not want to disable anonymous tracking, or when a user logs in to your site.
 
@@ -272,3 +262,10 @@ clearUserData({ preserveSession: true, preserveUser: true });
 
   </TabItem>
 </Tabs>
+
+
+
+
+## Respecting Do Not Track
+
+Most browsers have a Do Not Track option which allows users to express a preference not to be tracked. You can respect that preference by setting the `respectDoNotTrack` field of the [initialization configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `true`. This prevents cookies from being sent and events from being fired.

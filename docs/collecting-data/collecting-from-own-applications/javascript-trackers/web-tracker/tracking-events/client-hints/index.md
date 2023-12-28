@@ -1,18 +1,20 @@
 ---
-title: "Client hints"
+title: "Client Hints"
 sidebar_position: 150
 ---
 
-# Client hints tracking
+# Client Hints tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-[Client Hints](https://www.chromium.org/updates/ua-ch) are being rolled out across a number of browsers and are an alternative to the tracking the User Agent, which is particularly useful in those browsers which are freezing the User Agent string.
+User-agent [Client Hints](https://www.chromium.org/updates/ua-ch) are being rolled out across a number of browsers and are an alternative to the tracking the user-agent, which is particularly useful in those browsers which are freezing the user-agent string.
 
-## Installation
+The Client Hints context entity is **automatically tracked** once configured.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -28,22 +30,6 @@ import TabItem from '@theme/TabItem';
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-client-hints`
-- `yarn add @snowplow/browser-plugin-client-hints`
-- `pnpm add @snowplow/browser-plugin-client-hints`
-
-
-  </TabItem>
-</Tabs>
-
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
 ```javascript
 window.snowplow('addPlugin', 
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-client-hints@latest/dist/index.umd.min.js",
@@ -54,8 +40,12 @@ window.snowplow('addPlugin',
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
+- `npm install @snowplow/browser-plugin-client-hints`
+- `yarn add @snowplow/browser-plugin-client-hints`
+- `pnpm add @snowplow/browser-plugin-client-hints`
+
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { newTracker } from '@snowplow/browser-tracker';
 import { ClientHintsPlugin } from '@snowplow/browser-plugin-client-hints';
 
 newTracker('sp1', '{{collector_url}}', { 
@@ -68,17 +58,12 @@ newTracker('sp1', '{{collector_url}}', {
   </TabItem>
 </Tabs>
 
-### Functions
+## Context entity
 
-This plugin does not contain any new functions.
+Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0) context entity.
 
-### Context
+**Example information**:
 
-Adding this plugin will automatically capture the following context:
-
-**Context**                                                                                             [iglu:org.ietf/http_client_hints/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0) 
-
-**Example**
 ```json
 {
   "isMobile": false,
@@ -94,4 +79,3 @@ Adding this plugin will automatically capture the following context:
   ]
 }
 ```
-

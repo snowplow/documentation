@@ -207,4 +207,4 @@ enableErrorTracking();
   </TabItem>
 </Tabs>
 
-Application error events are implemented as Snowplow self describing events. [Here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/application_error/jsonschema/1-0-1) is the schema for an `application_error` event.
+Application error events are implemented as Snowplow self-describing events. [Here](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/com.snowplowanalytics.snowplow/application_error/jsonschema/1-0-1) is the schema for an `application_error` event.

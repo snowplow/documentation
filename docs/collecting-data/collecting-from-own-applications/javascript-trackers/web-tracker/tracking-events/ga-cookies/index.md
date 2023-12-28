@@ -10,9 +10,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-If this plugin is used, the tracker will look for Google Analytics cookies (Universal Analytics and GA4 cookies) and combine their values into event contexts which gets sent with every event.
+If this plugin is used, the tracker will look for Google Analytics cookies (Universal Analytics and GA4 cookies) and combine their values into event context entities that get sent with every event.
 
-## Installation
+GA cookies information is **automatically tracked** once configured.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -100,7 +102,7 @@ newTracker('sp1', '{{collector_url}}', {
   </TabItem>
 </Tabs>
 
-The `pluginOptions` parameter allows to configure the plugin. It's type is:
+The `pluginOptions` parameter allows to configure the plugin. Its type is:
 
 ```javascript
 interface GACookiesPluginOptions {
@@ -118,7 +120,7 @@ interface GACookiesPluginOptions {
 | ga4MeasurementId | `""`    | Measurement id(s) to search the Google Analytics 4 session cookie. Can be a single measurement id as a string or an array of measurement id strings. The cookie has the form of `<cookie_prefix>_ga_<container-id>` where `<container-id>` is the data stream container id and `<cookie_prefix>` is the optional `cookie_prefix` option of the gtag.js tracker. |
 | cookiePrefix     | `[]`    | Cookie prefix set on the Google Analytics 4 cookies using the `cookie_prefix` option of the gtag.js  tracker.                                                                                                                                                                                                                                                   |
 
-### Context
+## Context entities
 
 <details>
 
@@ -161,4 +163,3 @@ Adding this plugin will automatically capture the following contexts:
        ]
    }
    ```
-

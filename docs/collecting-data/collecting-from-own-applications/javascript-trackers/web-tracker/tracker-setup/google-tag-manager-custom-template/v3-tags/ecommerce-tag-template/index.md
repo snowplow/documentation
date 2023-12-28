@@ -3,7 +3,7 @@ title: "Snowplow v3 Ecommerce"
 sidebar_position: 2000
 ---
 
-This template implements the [Snowplow Ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/index.md) for the Snowplow JavaScript tracker v3 and is meant to be used alongside [the main Snowplow v3 tag template](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/v3-tags/tag-template-guide/index.md).
+This template implements the [Snowplow Ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) for the Snowplow JavaScript tracker v3 and is meant to be used alongside [the main Snowplow v3 tag template](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/v3-tags/tag-template-guide/index.md).
 
 ## Template Installation
 

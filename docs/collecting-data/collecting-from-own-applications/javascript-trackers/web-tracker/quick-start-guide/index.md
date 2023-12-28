@@ -14,9 +14,7 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 
 ## Quick start (plus modelling!)
 
-:::tip
-Check out the [Advanced Analytics for Web accelerator](https://docs.snowplow.io/accelerators/web/) to walk through tracking and modelling web events. It's a more in depth look at how to use Snowplow than this page.
-:::
+We recommend looking at the [Advanced Analytics for Web accelerator](https://docs.snowplow.io/accelerators/web/) to walk through tracking and modelling web events. It's a more in depth look at how to use Snowplow than this page.
 
 ## Quick start (basic)
 
@@ -30,7 +28,7 @@ Getting started with sending events using the JavaScript tracker is very similar
 The process involves the following high level steps:
 
   - Download the latest version of the Snowplow JavaScript tracker file, `sp.js`, which can be found [here](https://github.com/snowplow/snowplow-javascript-tracker/releases).
-  - If you are already hosting static files somewhere on your own domain, it should just be a matter of downloading and adding the `sp.js` file. Otherwise you can follow our [guides for self hosting](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/index.md), use another method of your choice, or leverage a [Third Party CDN](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/third-party-cdn-hosting/index.md) (useful for evaluation or testing).
+  - If you are already hosting static files somewhere on your own domain, it should just be a matter of downloading and adding the `sp.js` file. Otherwise you can follow our [guides for self hosting](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/index.md), use another method of your choice, or leverage a [Third Party CDN](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/third-party-cdn-hosting/index.md) (useful for evaluation or testing).
   - Once you have a JS tracker available, you can add the tag snippet to your site. There are also alternative options described below for adding the tracker to your website.
   - If manually inserting the tag into your website or tag management solution: Snowplow BDP users can generate a tag snippet in the Snowplow BDP Console [here](https://console.snowplowanalytics.com/tag-generator). Other users can use and edit the standard tag [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/index.md).
 
@@ -59,9 +57,9 @@ window.snowplow('trackPageView');
 
 Rather than adding the tag snippet directly, you may wish to use an alternative option for loading the JavaScript Tracker.
 
-- Users of Google Tag Manager can use the [Snowplow Analytics Custom Template](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/index.md).
+- Users of Google Tag Manager can use the [Snowplow Analytics Custom Template](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/index.md).
 
-- Use the Snowplow Plugin in the [analytics npm package](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/snowplow-plugin-for-analytics-npm-package/index.md).
+- Use the Snowplow Plugin in the [analytics npm package](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/snowplow-plugin-for-analytics-npm-package/index.md).
 
 
   </TabItem>
@@ -99,3 +97,7 @@ trackPageView();
 
   </TabItem>
 </Tabs>
+
+## What's tracked with the default configuration?
+
+TODO

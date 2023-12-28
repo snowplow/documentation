@@ -1,5 +1,5 @@
 ---
-title: "Initialization configuration"
+title: "Configuration"
 date: "2021-03-31"
 sidebar_position: 2000
 ---

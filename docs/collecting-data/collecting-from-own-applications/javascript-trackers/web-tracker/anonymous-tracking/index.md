@@ -263,9 +263,10 @@ clearUserData({ preserveSession: true, preserveUser: true });
   </TabItem>
 </Tabs>
 
-
-
-
 ## Respecting Do Not Track
 
 Most browsers have a Do Not Track option which allows users to express a preference not to be tracked. You can respect that preference by setting the `respectDoNotTrack` field of the [initialization configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `true`. This prevents cookies from being sent and events from being fired.
+
+## Opt-out cookie
+
+TODO

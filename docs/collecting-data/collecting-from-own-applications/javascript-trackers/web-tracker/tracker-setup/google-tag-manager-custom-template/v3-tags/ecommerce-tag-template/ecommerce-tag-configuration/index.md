@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ## Ecommerce API
 
-Use the native Snowplow Ecommerce API or [transitional GA4/UA ecommerce adapter APIs](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/index.md#ga4ua-ecommerce-transitional-api) for existing dataLayer implementations using those formats. To get full value from the [Snowplow Ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/index.md) we recommend using the native API when possible.
+Use the native Snowplow Ecommerce API or [transitional GA4/UA ecommerce adapter APIs](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) for existing dataLayer implementations using those formats. To get full value from the [Snowplow Ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) we recommend using the native API when possible.
 
 ![](images/01_ecommerce_api.png)
 
@@ -23,7 +23,7 @@ Use the native Snowplow Ecommerce API or [transitional GA4/UA ecommerce adapter 
 
 #### Snowplow Ecommerce Function
 
-In this section you can select the [Snowplow Ecommerce function](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/index.md#functions) to use.
+In this section you can select the [Snowplow Ecommerce function](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) to use.
 
 #### Snowplow Ecommerce Argument
 
@@ -46,7 +46,7 @@ Set this to a UNIX timestamp in case you want to [override the default timestamp
 
 #### GA4 Ecommerce Function
 
-In this section you can select the [Google Analytics 4 Ecommerce function](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/index.md#google-analytics-4-ecommerce) to use.
+In this section you can select the [Google Analytics 4 Ecommerce function](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) to use.
 
 #### GA4 Ecommerce Arguments
 
@@ -65,7 +65,7 @@ Here you can specify a variable returning an object holding additional informati
 
 #### Universal Analytics Enhanced Ecommerce Function
 
-In this section you can select the [Universal Analytics Enhanced Ecommerce function](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/index.md#universal-analytics-enhanced-ecommerce) to use.
+In this section you can select the [Universal Analytics Enhanced Ecommerce function](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) to use.
 
 #### Universal Analytics Enhanced Ecommerce Arguments
 
@@ -86,7 +86,7 @@ Here you can specify a variable returning an object holding additional informati
 
 ### Tracker Settings
 
-The Snowplow v3 Ecommerce tag template **requires** a Snowplow v3 Settings Variable to be setup. In this section you can select the Google Tag Manager variable of type [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/v3-settings-variable/index.md) to use.
+The Snowplow v3 Ecommerce tag template **requires** a Snowplow v3 Settings Variable to be setup. In this section you can select the Google Tag Manager variable of type [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/v3-settings-variable/index.md) to use.
 
 ### Plugin Settings
 
@@ -95,4 +95,4 @@ In this section you can select how the plugin will be added. The available optio
 - **jsDelivr**: To get the plugin URL from jsDelivr CDN. Choosing this option allows you to specify the plugin version to be used.
 - **unpkg**: To get the plugin URL from unpkg CDN. Choosing this option allows you to specify the plugin version to be used.
 - **Self-hosted**: To get the plugin library from a specified URL. This option requires a [Permission](https://developers.google.com/tag-platform/tag-manager/templates/permissions) change to allow injecting the plugin script from the specified URL.
-- **Do not add**: To not add the plugin (e.g. when using a [Custom Bundle](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/javascript/index.md) with the plugin already included)
+- **Do not add**: To not add the plugin (e.g. when using a [Custom Bundle](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/index.md) with the plugin already included)

@@ -1,7 +1,7 @@
 ---
-title: "Hosting the JavaScript Tracker"
+title: "Hosting the JavaScript tracker"
 date: "2021-03-24"
-sidebar_position: 2900
+sidebar_position: 3200
 ---
 
 We recommend self-hosting the Snowplow JavaScript tracker, `sp.js`, as it has some definite advantages over using a third-party-hosted JavaScript:
@@ -15,3 +15,9 @@ Below are guides for hosting the minified `sp.js` asset on Amazon Web Services
 The latest minified version of the Snowplow JavaScript Tracker, called `sp.js`, is available from the [JavaScript Tracker GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases).
 If you don't need all the functionality included in `sp.js`, there is also a `sp.lite.js` bundle for v3 that includes [fewer plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md).
 For more custom requirements, you can [build your own v3 bundle](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/javascript/index.md) using your own selection of plugins, which is only an option if you are self-hosting.
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+```

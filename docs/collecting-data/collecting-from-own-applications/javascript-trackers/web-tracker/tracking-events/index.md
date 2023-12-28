@@ -107,15 +107,13 @@ Every tracked event payload has a unique `event_id` UUID string set by the track
 
 The tracker can be set up to automatically track certain events, or automatically add entities to every event sent. Most autotracking is specifically configured using plugins, which are imported, enabled, and configured individually.
 
-However, the following autotracked context entities can be configured directly when instrumenting the tracker. To enable them, simply add their names to the `contexts` field of the configuration object.
-
-TODO add link to config here
+However, the following autotracked context entities can be configured directly when instrumenting the tracker. To enable them, simply add their names and boolean to the `contexts` field of the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 | Entity    | Usage                             | Enabled by default |
 |-----------|-----------------------------------|--------------------|
-| [`webPage`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/page-views/index.md#webpage-context-entity) | A UUID for the page view.         | `true`             |
-| [`session`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/index.md) | Data about the current session.   | `false`            |
-| [`browser`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md) | Properties of the user's browser. | `false`            |
+| [`webPage`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/page-views/index.md#webpage-context-entity) | A UUID for the page view.         | `true`             |
+| [`session`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/index.md) | Data about the current session.   | `false`            |
+| [`browser`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md) | Properties of the user's browser. | `false`            |
 
 The following context entities can be configured by plugin, or when setting up the **JavaScript tracker** only. To automatically track these context entities when using the Browser tracker, use the plugin versions.
 

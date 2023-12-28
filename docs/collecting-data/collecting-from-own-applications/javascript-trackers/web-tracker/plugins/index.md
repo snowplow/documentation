@@ -53,6 +53,8 @@ If you are using the JavaScript tracker with the full `sp.js` and your plugin is
 
 *The site tracking plugin provides events for [site search](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/site-search/index.md), [social media interactions](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/social-media/index.md), and [timing](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
 
+You can find the plugins code [here](https://github.com/snowplow/snowplow-javascript-tracker/tree/master/plugins) and also search for them on [npmjs.com](https://www.npmjs.com/).
+
 ## Debugger
 
 Adding this plugin will automatically start printing out `debug` logs to your Developer Tools console. This will help you debug what events are being tracked and what properties are included in each event that is being tracked and to what tracker instance.

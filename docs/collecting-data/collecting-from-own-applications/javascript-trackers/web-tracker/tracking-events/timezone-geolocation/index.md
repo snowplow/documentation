@@ -66,6 +66,10 @@ Once configured, all subsequent events will contain this property.
 
 If this plugin is enabled, the tracker will attempt to create a context from the visitor’s geolocation information. If the visitor has not already given or denied the website permission to use their geolocation information, a prompt will appear. If they give permission, then all events from that moment on will include their geolocation information, as a context entity.
 
+If the geolocation context isn't enabled at tracker initialization, then it can be enabled at a later time by calling `enableGeolocationContext`. This is useful if you have other areas of your site where you require requesting geolocation access, as you can defer enabling this on your Snowplow events until you have permission to read the users geolocation for your other use case.
+
+For more information on the geolocation API, see [the specification](http://dev.w3.org/geo/api/spec-source.html).
+
 Geolocation context entities are **automatically tracked** once configured.
 
 ### Install plugin

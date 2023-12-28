@@ -83,6 +83,32 @@ For actual rendering performance, the application will have to use the Performan
 
 This older plugin has been superseded by the Performance Navigation Timing plugin, which has a newer API and additional metrics such as the compressed/decompressed page size, and information about the navigation that can contextualise cache usage that can impact the measured metrics, as well as server-side metrics, etc.
 
+If this context entity is enabled, the JavaScript Tracker will use the create a context JSON from the `window.performance.timing` object, along with the Chrome `firstPaintTime` field (renamed to `chromeFirstPaint`) if it exists. This data can be used to calculate page performance metrics.
+
+Note that if you fire a page view event as soon as the page loads, the `domComplete`, `loadEventStart`, `loadEventEnd`, and `chromeFirstPaint` metrics in the Navigation Timing API may be set to zero. This is because those properties are only known once all scripts on the page have finished executing.
+
+<details>
+  <summary>Advanced PerformanceTiming usage</summary>
+  The `domComplete`, `loadEventStart`, and `loadEventEnd` metrics in the NavigationTiming API are set to 0 until after every script on the page has finished executing, including sp.js. This means that the corresponding fields in the PerformanceTiming reported by the tracker will be 0.
+
+  To get around this limitation, you can wrap all Snowplow code in a `setTimeout` call:
+
+  ```javascript
+  setTimeout(function () {
+
+  // Load Snowplow and call tracking methods here
+
+  }, 0);
+  ```
+
+  This delays its execution until after those NavigationTiming fields are set.
+
+</details>
+
+Additionally the `redirectStart`, `redirectEnd`, and `secureConnectionStart` are set to 0 if there is no redirect or a secure connection is not requested.
+
+For more information on the Navigation Timing API, see [the specification](http://www.w3.org/TR/2012/REC-navigation-timing-20121217/#sec-window.performance-attribute).
+
 Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceTiming/jsonschema/1-0-0) context entity.
 
 ### Install plugin

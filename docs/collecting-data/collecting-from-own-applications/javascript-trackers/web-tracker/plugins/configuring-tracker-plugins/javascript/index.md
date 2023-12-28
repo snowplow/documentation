@@ -11,6 +11,8 @@ If the plugin you want to use is present in the `sp.js` version you are using, y
 While plugins can be loaded dynamically, self hosting the additional files adds complexity and the additional resource requests can negatively impact page performance.
 For this reason, it can be desirable to have your own version of `sp.js` that includes _just_ the features you need, to both reduce the filesize and not require loading additional script resources.
 
+The UMD files (which work in the browser) can be downloaded from [GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) or they are available via [third party CDNs](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/third-party-cdn-hosting/index.md).
+
 ## Custom Plugin Selections
 To do this, you'll need to install [git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/) 14 or 16 (at the time of writing) then open a Terminal or Command Prompt and run the following:
 

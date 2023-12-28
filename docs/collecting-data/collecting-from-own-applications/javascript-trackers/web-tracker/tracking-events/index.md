@@ -113,18 +113,18 @@ TODO add link to config here
 
 | Entity    | Usage                             | Enabled by default |
 |-----------|-----------------------------------|--------------------|
-| `webPage` | A UUID for the page view.         | `true`             |
-| `session` | Data about the current session.   | `false`            |
-| `browser` | Properties of the user's browser. | `false`            |
+| [`webPage`](#webpage) | A UUID for the page view.         | `true`             |
+| [`session`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/index.md) | Data about the current session.   | `false`            |
+| [`browser`](#browser) | Properties of the user's browser. | `false`            |
 
 The following context entities can be configured by plugin, or when setting up the JavaScript tracker only. To automatically track these context entities when using the Browser tracker, use the plugin versions.
 
 | Entity              | Usage                          | Enabled by default |
 |---------------------|--------------------------------|--------------------|
-| `performanceTiming` | Performance timing metrics.    | `true`             |
-| `gaCookies`         | Extract GA cookie values.      | `true`             |
-| `geolocation`       | User's geolocation.            | `false`            |
-| `clientHints`       | Chrome user-agent Client Hints | `true`             |
+| [`performanceTiming`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/index.md) | Performance timing metrics.    | `true`             |
+| [`gaCookies`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ga-cookies/index.md)         | Extract GA cookie values.      | `true`             |
+| [`geolocation`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md)       | User's geolocation.            | `false`            |
+| [`clientHints`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/index.md)       | Chrome user-agent Client Hints | `true`             |
 
 The JavaScript Tracker comes with many predefined context entities which you can automatically add to every event you send. To enable them, simply add them to the `contexts` field of the configuration object as above.
 

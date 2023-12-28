@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-If this plugin is used, the tracker will look for Google Analytics cookies (Universal Analytics and GA4 cookies) and combine their values into event context entities that get sent with every event.
+If this plugin is used, the tracker will look for Google Analytics cookies (Universal Analytics and GA4, specifically the `__utma`, `__utmb`, `__utmc`, `__utmv`, `__utmz`, and `_ga` cookies) and combine their values into event context entities that get sent with every event.
 
 GA cookies information is **automatically tracked** once configured.
 

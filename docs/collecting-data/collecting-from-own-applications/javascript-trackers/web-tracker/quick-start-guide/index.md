@@ -12,6 +12,14 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
+## Quick start (plus modelling!)
+
+:::tip
+Check out the [Advanced Analytics for Web accelerator](https://docs.snowplow.io/accelerators/web/) to walk through tracking and modelling web events. It's a more in depth look at how to use Snowplow than this page.
+:::
+
+## Quick start (basic)
+
 Follow these instructions to quickly implement a Snowplow web tracker with default configuration, and track a page view.
 
 <Tabs groupId="platform" queryString>

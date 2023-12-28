@@ -1,15 +1,22 @@
 ---
-title: "Anonymous tracking"
-sidebar_position: 3000
+title: "Opt-outs and anonymous tracking"
+date: "2022-08-30"
+sidebar_position: 2860
 ---
+
+# Opt-outs and anonymous tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
-
-<ReleaseBadge/>
 ```
+
+TODO
+
+## Respecting Do Not Track
+
+Most browsers have a Do Not Track option which allows users to express a preference not to be tracked. You can respect that preference by setting the `respectDoNotTrack` field of the configuration object to `true`. This prevents cookies from being sent and events from being fired.
+
 
 # Anonymous tracking
 
@@ -45,7 +52,7 @@ This mode will no longer track any user identifiers or session information. Simi
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled.
 
-Anonymous tracking can be toggled on and off. The methods to control this behavior are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/additional-options/index.md).
+Anonymous tracking can be toggled on and off. 
 
 ### Full anonymous/cookieless tracking
 
@@ -59,7 +66,7 @@ This mode will no longer track any user identifiers or session information, and 
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled. However for an experience that doesn't use any browser storage (cookieless), set `stateStorageStrategy` to `none`. This can be later toggled on, once a user accepts a cookie policy.
 
-Anonymous tracking can be toggled on and off. The methods to control this behavior are described [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/additional-options/index.md).
+Anonymous tracking can be toggled on and off. 
 
 ### Anonymous session tracking
 

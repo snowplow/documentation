@@ -134,3 +134,26 @@ trackPageView({
 </Tabs>
 
 In this example, the tracked page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
+
+## WebPage context entity
+
+When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context entity is enabled, then an entity containing this UUID is attached to every page view.
+
+From v3 of the web tracker, the webPage entity is enabled by default. We advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
+
+To disable this entity, set `"webPage": false` in the `"contexts"` object within the tracker configuration object. TODO add link
+
+<details>
+    <summary>Web page entity properties</summary>
+
+The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) context entity consists of the following property:
+
+| Attribute | Description                             | Required? |
+|-----------|-----------------------------------------|-----------|
+| `id`      | An identifier (UUID) for the page view. | Yes       |
+
+</details>
+
+## Reset page ping on page view
+
+By default the tracker will reset the Page Ping timers, which were configured when [`enableActivityTracking`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) is called, as well as reset the attached webPage context entities on all future Page Pings when a new `trackPageView` event occurs. This is enabled by default as of 2.13.0 and is particularly useful for Single Page Applications (SPA). If you previously relied on this behavior, you can disable this functionality by specifying `resetActivityTrackingOnPageView: false` in the configuration object on tracker initialisation.

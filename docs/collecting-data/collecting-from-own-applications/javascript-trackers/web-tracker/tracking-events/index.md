@@ -113,11 +113,11 @@ TODO add link to config here
 
 | Entity    | Usage                             | Enabled by default |
 |-----------|-----------------------------------|--------------------|
-| [`webPage`](#webpage) | A UUID for the page view.         | `true`             |
+| [`webPage`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/page-views/index.md#webpage-context-entity) | A UUID for the page view.         | `true`             |
 | [`session`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/index.md) | Data about the current session.   | `false`            |
-| [`browser`](#browser) | Properties of the user's browser. | `false`            |
+| [`browser`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md) | Properties of the user's browser. | `false`            |
 
-The following context entities can be configured by plugin, or when setting up the JavaScript tracker only. To automatically track these context entities when using the Browser tracker, use the plugin versions.
+The following context entities can be configured by plugin, or when setting up the **JavaScript tracker** only. To automatically track these context entities when using the Browser tracker, use the plugin versions.
 
 | Entity              | Usage                          | Enabled by default |
 |---------------------|--------------------------------|--------------------|
@@ -127,57 +127,6 @@ The following context entities can be configured by plugin, or when setting up t
 | [`clientHints`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/index.md)       | Chrome user-agent Client Hints | `true`             |
 
 The JavaScript Tracker comes with many predefined context entities which you can automatically add to every event you send. To enable them, simply add them to the `contexts` field of the configuration object as above.
-
-### WebPage
-
-When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context is enabled, then a context containing this UUID is attached to every page view.
-
-From v3 of the web tracker, the webPage entity is enabled by default. You can disable it if you don't require it but we advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
-
-<details>
-    <summary>Web page entity properties</summary>
-
-The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) context entity consists of the following property:
-
-| Attribute | Description                             | Required? |
-|-----------|-----------------------------------------|-----------|
-| `id`      | An identifier (UUID) for the page view. | Yes       |
-
-</details>
-
-### Session
-
-Read about session tracking [here](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/index.md).
-
-### Browser
-
-This entity records information about the user's browser.
-
-<details>
-    <summary>Browser entity properties</summary>
-
-The [browser](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/browser_context/jsonschema) context entity consists of the following properties:
-
-| Attribute | Description | Required? |
-| : ------: | :--------: | :-----: |
-| `viewport` | Viewport dimensions of the browser. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes  |
-| `documentSize` | Document dimensions. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes  |
-| `resolution` | Device native resolution. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes |
-| `colorDepth` | The number of bits allocated to colors for a pixel in the output device, excluding the alpha channel. | Yes |
-| `devicePixelRatio` | Ratio of the resolution in physical pixels to the resolution in CSS pixels for the current display device. | No  |
-| `cookiesEnabled` | Indicates whether cookies are enabled or not. More info and caveats at the official [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/cookieEnabled). | Yes |
-| `online` | Returns the online status of the browser. Important caveats are described in [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine). | Yes |
-| `browserLanguage` | The preferred language of the user, usually the language of the browser UI. Defined in [RFC 5646](https://datatracker.ietf.org/doc/html/rfc5646). | No  |
-| `documentLanguage` | The language of the HTML document. Defined in [RFC 5646](https://datatracker.ietf.org/doc/html/rfc5646). | No  |
-| `webdriver` | Indicates whether the user agent is controlled by automation. | No  |
-| `deviceMemory` | Approximate amount of device memory in gigabytes. | No  |
-| `hardwareConcurrency` | Number of logical processors available to run threads on the user's computer. | No  |
-| `tabId` | A UUID identifier for the client browser tab the event is sent from. | No  |
-
-:::note
-Please note that the browser context entity is only available since version 3.9 of the tracker.
-:::
-</details>
 
 ## Manually-tracked events
 
@@ -414,7 +363,7 @@ setReferrerUrl(document.referrer);
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `Event` in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538). 
+Every `trackX...()` method in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538). 
 
 As standard, every event tracked by the Javascript tracker will be recorded with two timestamps:
 

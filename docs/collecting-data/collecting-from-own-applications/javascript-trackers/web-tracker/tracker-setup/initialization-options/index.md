@@ -68,7 +68,7 @@ TODO links for each
 | `cookieSecure`                    | Set the cookie secure attribute.                                                                     | true                    | `boolean`     |
 | `encodeBase64`                    | Enable Base64 encoding for JSONs (context entities and custom self-describing events).               | true                    | `boolean`     |
 | `respectDoNotTrack`               | Choose to respect browser Do Not Track option.                                                       | false        | `boolean`     |
-| `eventMethod`                     | Choose to send events by GET, POST, or Beacon.                                                       | `post`                  | `string` enum |
+| `eventMethod`                     | Choose to send events by GET, POST, or Beacon.                                                       | `get` TODO really?                 | `string` enum |
 | `bufferSize`                      | How many events to send in one request.                                                              | 1                       | `int`         |
 | `maxPostBytes`                    | Set a limit for the size of one request.                                                             | 40000                   | `int`         |
 | `maxGetBytes`                     | Set a limit for the size of one request.                                                             |                         | `int`         |

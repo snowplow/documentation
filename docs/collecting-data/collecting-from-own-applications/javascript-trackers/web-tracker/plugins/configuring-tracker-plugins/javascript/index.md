@@ -6,6 +6,8 @@ sidebar_position: 400
 
 The [default releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) of the JavaScript Tracker include a full-featured `sp.js` version, and a smaller-filesize `sp.lite.js` version that includes fewer [plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md).
 
+If the plugin you want to use is present in the `sp.js` version you are using, you can start using it without additional installation.
+
 While plugins can be loaded dynamically, self hosting the additional files adds complexity and the additional resource requests can negatively impact page performance.
 For this reason, it can be desirable to have your own version of `sp.js` that includes _just_ the features you need, to both reduce the filesize and not require loading additional script resources.
 

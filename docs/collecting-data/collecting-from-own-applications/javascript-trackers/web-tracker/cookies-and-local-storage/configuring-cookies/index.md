@@ -12,6 +12,8 @@ Below you'll find a flow chart to help you with your cookie configuration, guidi
 
 ## All the stuff from the initialisation options page
 
+TODO
+
 ## Cookie domain
 
 If your website spans multiple subdomains e.g.

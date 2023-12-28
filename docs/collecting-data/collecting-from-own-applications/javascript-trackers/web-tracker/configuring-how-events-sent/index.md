@@ -1,7 +1,7 @@
 ---
 title: "Configuring how events are sent"
 date: "2021-04-07"
-sidebar_position: 2950
+sidebar_position: 2750
 ---
 
 # Configuring how events are sent

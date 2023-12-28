@@ -1,6 +1,6 @@
 ---
 title: "Cookies and Local Storage"
-sidebar_position: 3000
+sidebar_position: 2850
 ---
 
 By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and Local Storage. The behavior of each of these cookies and local storage keys are described here. The base name of each cookie can be configured by following these [instructions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).

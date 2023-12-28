@@ -27,7 +27,7 @@ If you are using the JavaScript tracker with the full `sp.js` and your plugin is
 | [Client hints](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/index.md) | Entities | ✅ | ❌ | `browser-plugin-client-hints` |
 | [Consent (Enhanced)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-enhanced-consent` |
 | [Consent (original)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/index.md) | Events and entities | ✅ | ❌ | `browser-plugin-consent` |
-| [Debugger](#debugger) | Other | ❌ | ❌ | `browser-plugin-debugger` |
+| [Debugger](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/testing-debugging/index.md) | Other | ❌ | ❌ | `browser-plugin-debugger` |
 | [Ecommerce (Snowplow)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-snowplow-ecommerce` |
 | [Ecommerce (Enhanced)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/enhanced/index.md) | Events | ✅ | ❌ | `browser-plugin-enhanced-ecommerce` |
 | [Ecommerce (original)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/index.md) | Events | ✅ | ❌ | `browser-plugin-ecommerce` |
@@ -54,59 +54,6 @@ If you are using the JavaScript tracker with the full `sp.js` and your plugin is
 *The site tracking plugin provides events for [site search](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/site-search/index.md), [social media interactions](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/social-media/index.md), and [timing](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
 
 You can find the plugins code [here](https://github.com/snowplow/snowplow-javascript-tracker/tree/master/plugins) and also search for them on [npmjs.com](https://www.npmjs.com/).
-
-## Debugger
-
-Adding this plugin will automatically start printing out `debug` logs to your Developer Tools console. This will help you debug what events are being tracked and what properties are included in each event that is being tracked and to what tracker instance.
-
-**Note:** You may need to enable `Verbose` logs in your Developer Tools, as this plugin uses `console.debug` to output results.
-
-![](images/Screenshot-2021-03-28-at-20.08.35.png)
-
-An example of the output from this plugin.
-
-### Install plugin
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-| Tracker Distribution | Included |
-|----------------------|----------|
-| `sp.js`              | ❌        |
-| `sp.lite.js`         | ❌        |
-
-**Download:**
-
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-debugger@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-debugger@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
-
-**Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
-
-```javascript
-window.snowplow('addPlugin', 
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-debugger@latest/dist/index.umd.min.js",
-  ["snowplowDebugger", "DebuggerPlugin"]
-);
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-debugger`
-- `yarn add @snowplow/browser-plugin-debugger`
-- `pnpm add @snowplow/browser-plugin-debugger`
-
-```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { DebuggerPlugin } from '@snowplow/browser-plugin-debugger';
-
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ DebuggerPlugin() ],
-});
-```
-
-  </TabItem>
-</Tabs>
 
 ## Browser features plugin (deprecated)
 

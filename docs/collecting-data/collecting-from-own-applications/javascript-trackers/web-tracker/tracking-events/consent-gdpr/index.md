@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Track user consent preferences selection events using the Enhanced Consent plugin. Additionally, add a context entity containing GDPR details to every event using the original Consent plugin.
+Track user consent preferences selection events using the Enhanced Consent plugin. Additionally, add a context entity containing GDPR details to every event using the [original Consent plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/index.md).
 
 Enhanced consent events must be **manually tracked**. The GDPR context entity will be **automatically tracked** with all events if configured.
 
@@ -73,10 +73,10 @@ API                     | Used for:
 `trackConsentWithdrawn` | Track the withdrawal of user consent.
 `trackCmpVisible`       | Track the render time of a CMP banner.
 
-With the exception of the CMP visible event, these methods use the same [`consent_preferences`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_preferences/jsonschema/1-0-0) schema. It has the following properties:
+With the exception of the CMP visible event, these methods use the same [`consent_preferences`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_preferences/jsonschema/1-0-0) event schema. It has the following properties:
 
-|     attribute      |    type    |                                                              description                                                              | required |
-|:------------------:|:----------:|:-------------------------------------------------------------------------------------------------------------------------------------:|:--------:|
+|     Attribute      |    Type    |                                                              Description                                                              | Required |
+|:------------------:|:----------:|-------------------------------------------------------------------------------------------------------------------------------------|:--------:|
 | basisForProcessing |  `string`  |                                          GDPR lawful basis for data collection & processing.                                          |    ✅     |
 |     consentUrl     |  `string`  |                                              URI of the privacy policy related document.                                              |    ✅     |
 |   consentVersion   |  `string`  |                                            Version of the privacy policy related document.                                            |    ✅     |

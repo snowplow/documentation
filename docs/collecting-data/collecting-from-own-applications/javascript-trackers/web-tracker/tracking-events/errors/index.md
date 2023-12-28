@@ -10,9 +10,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This tracker plugin provides two ways of tracking exceptions: manual tracking of handled exceptions using `trackError` and automatic tracking of unhandled exceptions using `enableErrorTracking`.
+The Errors tracker plugin provides two ways of tracking exceptions: manual tracking of handled exceptions using `trackError` and automatic tracking of unhandled exceptions using `enableErrorTracking`.
 
-## Installation
+Error events can be **manually tracked** and/or **automatically tracked**.
+
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -28,22 +30,6 @@ This tracker plugin provides two ways of tracking exceptions: manual tracking of
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-error-tracking`
-- `yarn add @snowplow/browser-plugin-error-tracking`
-- `pnpm add @snowplow/browser-plugin-error-tracking`
-
-
-  </TabItem>
-</Tabs>
-
-## Initialization
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
 ```javascript
 window.snowplow('addPlugin', 
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-error-tracking@latest/dist/index.umd.min.js",
@@ -54,8 +40,12 @@ window.snowplow('addPlugin',
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
+- `npm install @snowplow/browser-plugin-error-tracking`
+- `yarn add @snowplow/browser-plugin-error-tracking`
+- `pnpm add @snowplow/browser-plugin-error-tracking`
+
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { newTracker } from '@snowplow/browser-tracker';
 import { ErrorTrackingPlugin, enableErrorTracking } from '@snowplow/browser-plugin-error-tracking';
 
 newTracker('sp1', '{{collector_url}}', { 
@@ -69,18 +59,7 @@ enableErrorTracking();
   </TabItem>
 </Tabs>
 
-### Functions
-
-<table class="has-fixed-layout"><tbody><tr><td><code>trackError</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#trackerror">Documentation</a></td></tr><tr><td><code>enableErrorTracking</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#enableerrortracking">Documentation</a></td></tr></tbody></table>
-
-### Context
-
-This plugin does not add any additional data to context of an event.
-
-
-Snowplow JS tracker provides two ways of tracking exceptions: manual tracking of handled exceptions using `trackError` and automatic tracking of unhandled exceptions using `enableErrorTracking`.
-
-##### `trackError`
+## Manual error tracking
 
 Use the `trackError` method to track handled exceptions (application errors) in your JS code. This is its signature:
 
@@ -166,11 +145,9 @@ try {
   </TabItem>
 </Tabs>
 
-`trackError` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
-
 Using `trackError` it's assumed that developer knows where errors could happen, which is not often the case. Therefor it's recommended to use `enableErrorTracking` as it allows you to discover errors that weren't expected.
 
-#### `enableErrorTracking`
+## Automatic error tracking
 
 Use the `enableErrorTracking` method to track unhandled exceptions (application errors) in your JS code. This is its signature:
 

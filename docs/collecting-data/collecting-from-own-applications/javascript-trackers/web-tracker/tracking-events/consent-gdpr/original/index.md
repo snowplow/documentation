@@ -3,7 +3,7 @@ title: "Original"
 sidebar_position: 100
 ---
 
-# Consent and GDPR tracking
+# Consent and GDPR tracking (original)
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

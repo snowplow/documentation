@@ -55,6 +55,10 @@ The tracker will be named `sp` (tracker namespace) and will send events to the a
 
 If `newTracker` is called multiple times with the same namespace, only the first call is taken into account. 
 
+:::tip For Single Page Apps
+Initialize one tracker per initial page load.
+:::
+
 The following table shows all the various configuration parameters. Note that these are all optional. In fact, you aren’t required to provide any configuration object at all.
 
 | Property                                                                                                                                                                                      | Description                                                                                          | Default (if applicable) | Type          |

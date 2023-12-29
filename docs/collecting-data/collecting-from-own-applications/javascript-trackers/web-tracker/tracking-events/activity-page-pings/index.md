@@ -14,9 +14,9 @@ As well as tracking page views, we can monitor whether users continue to engage 
 
 That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it e.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc. If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page, e.g. because the user is on a different browser tab, no page ping fires.
 
-## Tracking page pings
-
 Page ping events are **automatically tracked** once configured.
+
+## Tracking page pings
 
 ### Enable activity tracking
 

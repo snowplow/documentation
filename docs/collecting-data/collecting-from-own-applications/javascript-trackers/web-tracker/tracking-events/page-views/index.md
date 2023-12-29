@@ -34,9 +34,11 @@ trackPageView();
   </TabItem>
 </Tabs>
 
-This method automatically captures the URL, referrer and page title (inferred from the `<title>` tag).
+This method automatically captures the URL, referrer URL and page title (inferred from the `<title>` tag). The first page view tracked uses `document.referrer` for the referrer URL, while for subsequent page views it is the previous page URL.
 
-If you wish, you can override the title with a custom value:
+It's possible to [override the URL and referrer URL](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#setting-a-custom-page-url-and-referrer-url).
+
+If you wish, you can also override the title with a custom value:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)">

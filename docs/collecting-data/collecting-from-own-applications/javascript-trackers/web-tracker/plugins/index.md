@@ -16,7 +16,7 @@ The Javascript Tracker is based around a plugin architecture which allows new fu
 
 ## All plugins
 
-The following table lists the Snowplow plugins (alphabetical order), what kinds of data are created using them, and their distribution for the JavaScript (`sp.js` file or minimal version) and Browser (npm etc package) trackers. Read more about configuring plugins [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/index.md) or on the individual pages.
+The following table lists the Snowplow plugins (alphabetical order), what kinds of data are created using them, and their distribution for the JavaScript (`sp.js` file or minimal version) and Browser (`npm` etc. package) trackers. Read more about configuring plugins [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/index.md) or on the individual pages.
 
 If you are using the JavaScript tracker with the full `sp.js` and your plugin is included, no further installation or initialization is required.
 

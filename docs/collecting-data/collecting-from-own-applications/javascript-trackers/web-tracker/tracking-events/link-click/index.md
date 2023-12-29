@@ -134,6 +134,29 @@ enableLinkClickTracking({
   </TabItem>
 </Tabs>
 
+## Refresh link click tracking
+
+The `enableLinkClickTracking` method only tracks clicks on links that exist when the page has loaded. If new links can be added to the page after then that you wish to track, use `refreshLinkClickTracking`. This will add Snowplow click listeners to all links which do not already have them (and which match the denylist, allowlist, or filter function you specified when `enableLinkClickTracking` was originally called). Use it like this:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('refreshLinkClickTracking');
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { refreshLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
+
+refreshLinkClickTracking();
+```
+
+  </TabItem>
+</Tabs>
+
 ## Configuration
 
 Control which links to track using the FilterCriterion object.
@@ -321,30 +344,7 @@ enableLinkClickTracking({ context: [ dynamicContext ] });
 </Tabs>
 
 
-See [custom context](#custom-context) for more information.
-
-## Refresh link click tracking
-
-The `enableLinkClickTracking` method only tracks clicks on links that exist when the page has loaded. If new links can be added to the page after then that you wish to track, use `refreshLinkClickTracking`. This will add Snowplow click listeners to all links which do not already have them (and which match the denylist, allowlist, or filter function you specified when `enableLinkClickTracking` was originally called). Use it like this:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('refreshLinkClickTracking');
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { refreshLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
-
-refreshLinkClickTracking();
-```
-
-  </TabItem>
-</Tabs>
+See [this page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md) for more information about tracking context entities.
 
 ## Manual link click tracking
 

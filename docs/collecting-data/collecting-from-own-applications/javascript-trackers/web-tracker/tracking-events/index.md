@@ -349,7 +349,7 @@ console.log(userId);
 
 ### Setting a custom page URL and referrer URL
 
-The Snowplow JavaScript Tracker automatically tracks the page URL and referrerURL on any event tracked. However, in certain situations, you may want to override the one or both of these URLs with a custom value. For example, this might be desirable if your CMS spits out particularly ugly URLs that are hard to unpick at analysis time.
+The Snowplow JavaScript Tracker automatically tracks the page URL and referrer URL on any event tracked. However, in certain situations, you may want to override the one or both of these URLs with a custom value. For example, this might be desirable if your CMS spits out particularly ugly URLs that are hard to unpick at analysis time.
 
 To set a custom page URL, use the `setCustomUrl` method:
 
@@ -389,7 +389,10 @@ setReferrerUrl('http://custom-referrer.com');
   </TabItem>
 </Tabs>
 
-On a single-page app, the page URL might change without the page being reloaded. Whenever an event is fired, the Tracker checks whether the page URL has changed since the last event. If it has, the page URL is updated and the URL at the time of the last event is used as the referrer. If you use `setCustomUrl`, the page URL will no longer be updated in this way. If you use `setReferrerUrl`, the referrer URL will no longer be updated in this way.
+:::tip For Single Page Apps
+On a single-page app, the page URL might change without the page being reloaded. Whenever an event is fired, the Tracker checks whether the page URL has changed since the last event. If it has, the page URL is updated and the URL at the time of the last event is used as the referrer. If you use `setCustomUrl`, the page URL will no longer be updated in this way. Similarly if you use `setReferrerUrl`, the referrer URL will no longer be updated in this way.
+
+To use `setCustomUrl` within an SPA, call it before all `trackPageView` calls.
 
 If you want to ensure that the original referrer is preserved even though your page URL can change without the page being reloaded, use `setReferrerUrl` like this before sending any events:
 
@@ -408,6 +411,7 @@ setReferrerUrl(document.referrer);
 ```
   </TabItem>
 </Tabs>
+:::
 
 ### Adding custom timestamps to events
 

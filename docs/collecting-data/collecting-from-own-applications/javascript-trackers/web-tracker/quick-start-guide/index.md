@@ -100,4 +100,56 @@ trackPageView();
 
 ## What's tracked with the default configuration?
 
-TODO
+Using just the initialization snippets above won't result in any events, unless `trackPageView` is called.
+
+However, we recommend that [activity tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) (page pings) is enabled immediately following initialization.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)">
+
+  ```javascript
+  <!-- Snowplow starts plowing -->
+  <script type="text/javascript">
+  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
+
+  snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+      appId: 'my-app-id',
+  });
+
+  snowplow('enableActivityTracking', {
+    minimumVisitLength: 30,
+    heartbeatDelay: 10
+  });
+
+  // snowplow('trackPageView') can then be called
+
+  </script>
+  <!-- Snowplow stops plowing -->
+  ```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)" default>
+
+```javascript
+import {
+  newTracker,
+  trackPageView
+} from '@snowplow/browser-tracker';
+
+newTracker('sp', '{{collector_url_here}}', {
+    appId: 'my-app-id',
+});
+
+enableActivityTracking({
+  minimumVisitLength: 30,
+  heartbeatDelay: 10
+});
+
+// trackPageView() can then be called
+```
+  </TabItem>
+</Tabs>
+
+Adding this code to your site will cause [page ping events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) to be automatically tracked. If using the Browser tracker, the events will all have the webPage context entity attached, containing the page view ID. If using the JavaScript tracker, the page pings will have the webPage as well as performanceTiming, gaCookies, and clientHint entities. Read more about these entities [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#auto-tracked-entities).

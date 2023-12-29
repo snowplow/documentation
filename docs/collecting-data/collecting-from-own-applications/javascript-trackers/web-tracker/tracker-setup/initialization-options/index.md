@@ -18,7 +18,7 @@ Tracker initialization is started by calling the `"newTracker"` function and t
 2. The collector endpoint
 3. An optional configuration object containing other settings
 
-Here is a simple example of how to initialise a tracker, setting only one configuration option:
+Here is a simple example of how to initialise a tracker, setting a few configuration options:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

@@ -135,9 +135,9 @@ trackPageView({
 
 In this example, the tracked page view and every subsequent page ping will have both a static_context and a dynamic_context attached. The static_contexts will all have the same staticValue, but the dynamic_contexts will have different dynamicValues since a new context is created for every event.
 
-## WebPage context entity
+## WebPage (page view ID) context entity
 
-When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context entity is enabled, then an entity containing this UUID is attached to every page view.
+When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context entity is enabled, then an entity containing this UUID is attached to **all events**.
 
 From v3 of the web tracker, the webPage entity is enabled by default. We advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
 

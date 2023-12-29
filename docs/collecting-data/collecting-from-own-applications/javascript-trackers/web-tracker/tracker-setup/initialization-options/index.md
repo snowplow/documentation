@@ -1,5 +1,5 @@
 ---
-title: "Configuration"
+title: "Initialization and configuration"
 date: "2021-03-31"
 sidebar_position: 2000
 ---
@@ -52,6 +52,8 @@ newTracker('sp', '{{collector_url_here}}', {
 </Tabs>
 
 The tracker will be named `sp` (tracker namespace) and will send events to the a collector url you specify by replacing `{{collector_url_here}}`. The final argument is the configuration object. Here it is just used to set the app ID and the common webPage context for each event. Each event the tracker sends will have an app ID field set to “my-app-id”.
+
+If `newTracker` is called multiple times with the same namespace, only the first call is taken into account. 
 
 The following table shows all the various configuration parameters. Note that these are all optional. In fact, you aren’t required to provide any configuration object at all.
 

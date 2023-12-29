@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Social interaction tracking is provided as part of the Site tracking plugin. This plugin also provides events for [site search](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/site-search/index.md) and [timings](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
+Social interaction tracking is provided as part of the Site tracking plugin. This plugin also provides events for [site search](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/site-search/index.md) and [timings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
 
 Social media interaction events must be **manually tracked**.
 

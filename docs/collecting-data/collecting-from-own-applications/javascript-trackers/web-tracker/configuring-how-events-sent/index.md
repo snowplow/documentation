@@ -20,11 +20,11 @@ It's possible to add a fine-grained configuration for exactly how the web tracke
 
 ### Base64 encoding
 
-By default, context entities and custom self-describing events are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the `encodeBase64` field of the [tracker configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+By default, context entities and custom self-describing events are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the `encodeBase64` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 ### Number of events per request
 
-The default `bufferSize` is 1, i.e. an event will be processed into a single request and sent as soon as it is tracked. This can be increased to send events in batches, using the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+The default `bufferSize` is 1, i.e. an event will be processed into a single request and sent as soon as it is tracked. This can be increased to send events in batches, using the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 The `bufferSize` property is only relevant when making POST requests, [see below](#post-support).
 
@@ -32,7 +32,7 @@ The `bufferSize` property is only relevant when making POST requests, [see below
 
 **POST requests**
 
-Because the Snowplow Stream Collector can have a maximum request size, the Tracker limits POST requests to 40000 bytes. If the combined size of the events in `localStorage` is greater than this limit, they will be split into multiple POST requests. You can override this default using a `maxPostBytes` in the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+Because the Snowplow Stream Collector can have a maximum request size, the Tracker limits POST requests to 40000 bytes. If the combined size of the events in `localStorage` is greater than this limit, they will be split into multiple POST requests. You can override this default using a `maxPostBytes` in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 **GET requests**
 
@@ -61,11 +61,11 @@ customHeaders: {
 }
 ```
 
-Set this in the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+Set this in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 ### Disabling `withCredentials` flag
 
-From v3.2.0, it's now possible to turn off the `withCredentials` flag (in the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md)) on all requests to the collector. The default value is `true` which sets `withCredentials` to `true` on requests. Disabling this flag will have impact when using `eventMethod: "post"` and `eventMethod: "get"`. This flag has no effect on same site requests, but disabling it will prevent cookies being sent with requests to a Snowplow Collector running on a different domain. You can read more about this flag at [MDN](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials).
+From v3.2.0, it's now possible to turn off the `withCredentials` flag (in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md)) on all requests to the collector. The default value is `true` which sets `withCredentials` to `true` on requests. Disabling this flag will have impact when using `eventMethod: "post"` and `eventMethod: "get"`. This flag has no effect on same site requests, but disabling it will prevent cookies being sent with requests to a Snowplow Collector running on a different domain. You can read more about this flag at [MDN](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials).
 
 ```json
 withCredentials: false
@@ -101,17 +101,17 @@ newTracker('sp', 'https://{{collector_url_here}}', {
 
 ### GET support
 
-By default, events are sent by GET. This can be changed using the `eventMethod` field of the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). 
+By default, events are sent by GET. This can be changed using the `eventMethod` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). 
 
 ### POST support
 
-If you set the `eventMethod` field of the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `post`, the tracker will send events using POST requests rather than GET requests. In browsers which do not support cross-origin XMLHttpRequests (e.g. IE9), the tracker will fall back to using GET.
+If you set the `eventMethod` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `post`, the tracker will send events using POST requests rather than GET requests. In browsers which do not support cross-origin XMLHttpRequests (e.g. IE9), the tracker will fall back to using GET.
 
 `eventMethod` defaults to `post`, other options available are `get` for GET requests and `beacon` for using the Beacon API (**Note**: Beacon support is not available and/or unreliable in some browsers, in these cases the tracker will fallback to POST). See below for more about Beacon API.
 
 The main advantage of POST requests is that they circumvent Internet Explorer’s maximum URL length of 2083 characters by storing the event data in the body of the request rather than the querystring.
 
-You can also batch events sent by POST by setting a numeric `bufferSize` field in the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This is the number of events to buffer before sending them all in a single POST. If the user navigates away from the page while the buffer is only partially full, the tracker will attempt to send all stored events immediately, but this often doesn’t happen before the page unloads. Normally the tracker will store unsent events in `localStorage`, meaning that unsent events will be resent when the user next visits a page on the same domain. The `bufferSize` defaults to 1, meaning events are sent as soon as they are created.
+You can also batch events sent by POST by setting a numeric `bufferSize` field in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This is the number of events to buffer before sending them all in a single POST. If the user navigates away from the page while the buffer is only partially full, the tracker will attempt to send all stored events immediately, but this often doesn’t happen before the page unloads. Normally the tracker will store unsent events in `localStorage`, meaning that unsent events will be resent when the user next visits a page on the same domain. The `bufferSize` defaults to 1, meaning events are sent as soon as they are created.
 
 We recommend leaving the `bufferSize` as the default value of 1. This ensure that events are sent as they are created, and reduces the chance of events being unsent and left in local storage, if a user closes their browser before a flush can occur (which happens on page visibility changing).
 
@@ -140,7 +140,7 @@ Note that if `localStorage` is inaccessible or you are not using it to store d
 
 ### Beacon API support
 
-The Beacon interface is used to schedule asynchronous and non-blocking requests to a web server. This will allow events to be sent even after a webpage is closed. This browser interface can be used to send events by setting the `eventMethod` field in the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `beacon`.
+The Beacon interface is used to schedule asynchronous and non-blocking requests to a web server. This will allow events to be sent even after a webpage is closed. This browser interface can be used to send events by setting the `eventMethod` field in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `beacon`.
 
 Using Beacon will store a Session Cookie in the users browser for reliability reasons, and will always send the first request as a standard POST. This prevents data loss in a number of older browsers with broken Beacon implementations.
 
@@ -150,7 +150,7 @@ More information and documentation about the Beacon API can be found [here](htt
 
 ### Custom POST path
 
-The POST path that is used to send POST requests to a collector can be changed with the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) value `postPath`.
+The POST path that is used to send POST requests to a collector can be changed with the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) value `postPath`.
 
 `postPath` defaults to the standard path: `/com.snowplowanalytics.snowplow/tp2`
 
@@ -164,7 +164,7 @@ import PostPath from "@site/docs/reusable/trackers-post-path-note/_index.md"
 
 Unsuccessful requests are retried by default: the tracker retries on all 3xx, 4xx, and 5xx status codes except for 400, 401, 403, 410, and 422. Events in failed requests that are not retried are lost.
 
-Starting with version 3.17 of the tracker, it is also possible to completely disable retry functionality, using the `retryFailedRequests` boolean option in the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This option takes precedence over `retryStatusCodes` and `dontRetryStatusCodes` (see below).
+Starting with version 3.17 of the tracker, it is also possible to completely disable retry functionality, using the `retryFailedRequests` boolean option in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This option takes precedence over `retryStatusCodes` and `dontRetryStatusCodes` (see below).
 
 ### Connection timeout
 
@@ -172,7 +172,7 @@ When events are sent using POST or GET, they are given 5 seconds to complete by 
 
 `_connectionTimeout_: 5000`
 
-This value is configurable when initialising the tracker ([configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md)) and is specified in milliseconds. The value specified here will effect both POST and GET requests.
+This value is configurable when initialising the tracker ([configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md)) and is specified in milliseconds. The value specified here will effect both POST and GET requests.
 
 **Warning:** Setting this value too low may prevent events from successfully sending to your collector or the tracker may retry to send events that have already arrived at the collector, as the tracker will assume the request failed on timeout, leading to duplicate events in the warehouse. **We recommend 5000 milliseconds as the minimum value and 10000 as the maximum value.**
 
@@ -182,7 +182,7 @@ The tracker provides a retry functionality that sends the same events repeatedly
 
 Prior to version 3.5 of the tracker, requests receiving all 4xx and 5xx HTTP status codes in Collector response were retried. Since version 3.5, the behavior changed and became customizable:
 
-By default, the tracker retries on all 3xx, 4xx, and 5xx status codes except for 400, 401, 403, 410, and 422. The set of status codes for which events should be retried or not is customizable. You can make use of the `retryStatusCodes` and `dontRetryStatusCodes` lists to specify them ([configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md)). Retry behavior can only be configured for non-successful status codes (i.e., >= 300).
+By default, the tracker retries on all 3xx, 4xx, and 5xx status codes except for 400, 401, 403, 410, and 422. The set of status codes for which events should be retried or not is customizable. You can make use of the `retryStatusCodes` and `dontRetryStatusCodes` lists to specify them ([configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md)). Retry behavior can only be configured for non-successful status codes (i.e., >= 300).
 
 ```json
 retryStatusCodes: [403], // override default behavior and retry on 403
@@ -193,7 +193,7 @@ Please note that not retrying sending events to the Collector means that the eve
 
 ## Callbacks
 
-Provide callbacks within the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+Provide callbacks within the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 ### `onRequestSuccess` callback
 

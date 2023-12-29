@@ -12,11 +12,11 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-The Snowplow web tracker supports tracking in all modern browsers, including new browser features such as [Privacy Sandbox](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/privacy-sandbox/index.md) and [Client Hints](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/index.md).
+The Snowplow web tracker supports tracking in all modern browsers, including new browser features such as [Privacy Sandbox](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/privacy-sandbox/index.md) and [Client Hints](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/index.md).
 
 ## Browser context entity
 
-Add a context entity to every tracked event that records information about the user's browser. Configure it using the `"contexts"` object within the [tracker configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+Add a context entity to every tracked event that records information about the user's browser. Configure it using the `"contexts"` object within the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 <details>
     <summary>Browser entity properties</summary>

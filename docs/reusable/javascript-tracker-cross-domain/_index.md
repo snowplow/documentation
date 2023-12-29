@@ -4,7 +4,7 @@ The `_sp` value includes the domain user ID for the current page and the time at
 This makes these values visible in the “url” field of events sent by an instance of the JavaScript Tracker on the destination page.
 The enrichment process will use these values to populate the `refr_domain_userid` and `refr_dvce_tstamp` fields for all events fired on the destination page where the URL includes the `_sp` parameter.
 
-You can configure which links get decorated this way using the `crossDomainLinker` field of the configuration object.
+You can configure which links get decorated this way using the `crossDomainLinker` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 The value should be a function taking one argument (the link element) and return `true` if the link element should be decorated and `false` otherwise.
 For example, this function would only decorate those links whose destination is “[http://acme.de](http://acme.de/)” or whose HTML id is “crossDomainLink”:
 
@@ -165,7 +165,7 @@ if (/[?&]_sp=/.test(window.location.href)) {
 }</>
 <>{ props.lang === "javascript" && <>
 
-The URL updating code runs in a [Tracker Callback](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/advanced-usage/tracker-information/index.md) to ensure it does not run before the page view event has a chance to capture the original URL.
+The URL updating code runs in a [Tracker Callback](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#getting-user-id-once-set) to ensure it does not run before the page view event has a chance to capture the original URL.
 ```javascript
 snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 snowplow(function(){

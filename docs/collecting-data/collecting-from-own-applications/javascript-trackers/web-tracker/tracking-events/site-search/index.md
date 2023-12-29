@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Site search tracking are provided as part of the Site tracking plugin. This plugin also provides events for [social media interactions](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/social-media/index.md) and [timings](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
+Site search tracking are provided as part of the Site tracking plugin. This plugin also provides events for [social media interactions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/social-media/index.md) and [timings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
 
 Site search events must be **manually tracked**.
 

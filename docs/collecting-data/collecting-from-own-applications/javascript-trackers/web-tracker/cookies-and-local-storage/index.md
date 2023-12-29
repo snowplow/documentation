@@ -7,11 +7,11 @@ Unless you have enabled `respectDoNotTrack` during initialization, the tracker
 
 ## Cookies
 
-By default, information will be stored both in cookies and local storage, i.e. `stateStorageStrategy: 'cookieAndLocalStorage'` in the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This setting prefers cookie storage for `_sp_id` and `_sp_ses`.
+By default, information will be stored both in cookies and local storage, i.e. `stateStorageStrategy: 'cookieAndLocalStorage'` in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This setting prefers cookie storage for `_sp_id` and `_sp_ses`.
 
 Alternatively, you can specify `localStorage` to have the state stored only in local storage or `cookie` to only use cookies. Finally, you can set `stateStorageStrategy` to `none` in order not to store anything client-side. You may also leverage [`anonymousTracking`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) to control when values are stored in cookies or local storage.
 
-The stored state takes the form of two first party cookies: the session cookie and the ID cookie. By default their names are prefixed with `_sp_`, but you can change this using the `cookieName` field in the [configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). Their names are suffixed with a hash of the current domain, so the full cookie names might look something like `_sp_ses.4209` and `_sp_id.4209`.
+The stored state takes the form of two first party cookies: the session cookie and the ID cookie. By default their names are prefixed with `_sp_`, but you can change this using the `cookieName` field in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). Their names are suffixed with a hash of the current domain, so the full cookie names might look something like `_sp_ses.4209` and `_sp_id.4209`.
 
 | Cookie name | Expires                                                            | Description                                                                                                                                       |
 |-------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -44,7 +44,7 @@ If no session cookie is already present when an event fires, the tracker treats 
 
 Note: A new session can be started at any time by calling the function `newSession`.
 
-When using [anonymous tracking](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) with session (`anonymousTracking: { withSessionTracking: true }`; available from v2.15.0+) this key will contain a _salt_ value which is used to stitch page views into a session. The value is never sent to the collector. 
+When using [anonymous tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) with session (`anonymousTracking: { withSessionTracking: true }`; available from v2.15.0+) this key will contain a _salt_ value which is used to stitch page views into a session. The value is never sent to the collector. 
 
 ### Collector cookie `sp`
 

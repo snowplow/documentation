@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin has been superseded by the [Snowplow ecommerce plugin](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md).
+This plugin has been superseded by the [Snowplow ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md).
 
 It is modeled on Google Analytics ecommerce tracking capability. Snowplow uses three methods that have to be used together to track online transactions:
 

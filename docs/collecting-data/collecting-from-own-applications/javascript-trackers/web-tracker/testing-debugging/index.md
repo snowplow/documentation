@@ -12,33 +12,30 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-TODO
-
 ## Testing your tracking implementation
 
-TODO
+To prevent data loss and bad events, it's important to test and validate your tracking implementation. Snowplow provides two main tools for this, which work well together.
 
-### Browser Inspector
+### Snowplow Inspector for browsers
 
-TODO
+Use our [browser extension](/docs/testing-debugging/snowplow-inspector/overview/) to inspect event requests in the browser Developer Tools window.
 
-### Micro
+### Snowplow Micro
 
-TODO
+A [lightweight, local Snowplow pipeline](/docs/testing-debugging/snowplow-micro/what-is-micro/) ideal for sending test events into. It's used as a Docker container.
 
-### Mini
-
-TODO
 
 ## Debugging
 
 Use the debugger plugin to automatically start printing out `debug` logs to your Developer Tools console. This will help you debug what events are being tracked and what properties are included in each event that is being tracked and to what tracker instance.
 
-**Note:** You may need to enable `Verbose` logs in your Developer Tools, as this plugin uses `console.debug` to output results.
+:::note
+You may need to enable `Verbose` logs in your Developer Tools, as this plugin uses `console.debug` to output results.
+:::
+
+An example of the output from this plugin:
 
 ![](images/Screenshot-2021-03-28-at-20.08.35.png)
-
-An example of the output from this plugin.
 
 ### Install plugin
 

@@ -15,19 +15,19 @@ The Snowplow web tracker allows you to track events anonymously. It enables anon
 
 Anonymous tracking can be configured on initialization, but can be reset later. You may wish to toggle this functionality on or off during a page visit, for example when a user accepts a cookie banner you may not want to disable anonymous tracking, or when a user logs in to your site.
 
-For information about tracking user consent interactions and GDPR basis for processing, check out [this page](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md).
+For information about tracking user consent interactions and GDPR basis for processing, check out [this page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md).
 
 On web, the following user and session identifiers can be anonymized:
 
 * Client-side user identifiers:
-   * `userId` in the [Session](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/index.md) context entity.
+   * `userId` in the [Session](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/index.md) context entity.
    * `userId`, `domainUserId`, `networkUserId`, `ipAddress` if they are set.
 * Client-side session identifiers: `sessionId` and `previousSessionId` in Session entity.
 * Server-side user identifiers: `network_userid` and `user_ipaddress` event properties.
 
 ## Configuring anonymous tracking
 
-There are several levels to the anonymisation depending on which of the three categories are affected. Set this using the [initialization configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+There are several levels to the anonymisation depending on which of the three categories are affected. Set this using the [initialization configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 ### 1. Full client-side anonymisation
 
@@ -265,7 +265,7 @@ clearUserData({ preserveSession: true, preserveUser: true });
 
 ## Respecting Do Not Track
 
-Most browsers have a Do Not Track option which allows users to express a preference not to be tracked. You can respect that preference by setting the `respectDoNotTrack` field of the [initialization configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `true`. This prevents cookies from being sent and events from being fired.
+Most browsers have a Do Not Track option which allows users to express a preference not to be tracked. You can respect that preference by setting the `respectDoNotTrack` field of the [initialization configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `true`. This prevents cookies from being sent and events from being fired.
 
 ## Opt-out cookie
 

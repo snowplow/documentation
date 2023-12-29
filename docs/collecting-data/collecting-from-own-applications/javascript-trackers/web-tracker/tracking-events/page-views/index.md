@@ -58,9 +58,9 @@ trackPageView({ title: 'my custom page title' });
 
 ## Context callback
 
-As with all `trackX` methods, `trackPageView` can be passed an array of [custom context entities](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md) as an additional parameter.
+As with all `trackX` methods, `trackPageView` can be passed an array of [custom context entities](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md) as an additional parameter.
 
-Additionally, you can pass a function which returns an array of zero or more context entities to `trackPageView`. For the page view and for all subsequent [page pings](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md), the function will be called and the context entities it returns will be added to the event.
+Additionally, you can pass a function which returns an array of zero or more context entities to `trackPageView`. For the page view and for all subsequent [page pings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md), the function will be called and the context entities it returns will be added to the event.
 
 For example:
 
@@ -141,7 +141,7 @@ When the JavaScript Tracker loads on a page, it generates a new page view UUID. 
 
 From v3 of the web tracker, the webPage entity is enabled by default. We advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
 
-To disable this entity, set `"webPage": false` in the `"contexts"` object within the [tracker configuration object](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+To disable this entity, set `"webPage": false` in the `"contexts"` object within the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
 <details>
     <summary>Web page entity properties</summary>
@@ -156,18 +156,16 @@ The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com
 
 ## Reset page ping on page view
 
-By default the tracker will reset the Page Ping timers, which were configured when [`enableActivityTracking`](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) is called, as well as reset the attached webPage context entities on all future Page Pings when a new `trackPageView` event occurs. This is enabled by default as of 2.13.0 and is particularly useful for Single Page Applications (SPA). If you previously relied on this behavior, you can disable this functionality by specifying `resetActivityTrackingOnPageView: false` in the configuration object on tracker initialisation.
+By default the tracker will reset the Page Ping timers, which were configured when [`enableActivityTracking`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) is called, as well as reset the attached webPage context entities on all future Page Pings when a new `trackPageView` event occurs. This is enabled by default as of 2.13.0 and is particularly useful for Single Page Applications (SPA). If you previously relied on this behavior, you can disable this functionality by specifying `resetActivityTrackingOnPageView: false` in the configuration object on tracker initialisation.
 
 ## Get page view ID
 
-This is an advanced usage of the tracker.
-
 When the JavaScript Tracker loads on a page, it generates a new page view UUID as mentioned above.
 
-It's possible to retrieve certain tracker and cookie properties for use in your code, including the page view UUID.
+It's possible to retrieve certain properties for use in your code, including the page view UUID, [user ID](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#getting-user-id-once-set), and [cookie values](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
 
 ```mdx-code-block
-import RetrieveValues from "@site/docs/reusable/advanced-web-tracker-retrieve-values/_index.md"
+import RetrieveValues from "@site/docs/reusable/javascript-tracker-retrieve-values/_index.md"
 ```
 
 <Tabs groupId="platform" queryString>

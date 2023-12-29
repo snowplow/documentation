@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin has been partially superseded by the [Enhanced Consent](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md) plugin. This older plugin has only two `trackX` methods, but it does allow the addition of GDPR context entities to every event.
+This plugin has been partially superseded by the [Enhanced Consent](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md) plugin. This older plugin has only two `trackX` methods, but it does allow the addition of GDPR context entities to every event.
 
 This plugin is the recommended way to track marketing consent events on your website. Functions, usage and a complete setup journey is showcased on the [Consent Tracking for Marketing accelerator](https://docs.snowplow.io/accelerators/consent/).
 

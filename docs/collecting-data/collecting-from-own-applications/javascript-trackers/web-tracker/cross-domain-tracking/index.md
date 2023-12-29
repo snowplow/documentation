@@ -24,4 +24,3 @@ import CrossDomain from "@site/docs/reusable/javascript-tracker-cross-domain/_in
 
   </TabItem>
 </Tabs>
-

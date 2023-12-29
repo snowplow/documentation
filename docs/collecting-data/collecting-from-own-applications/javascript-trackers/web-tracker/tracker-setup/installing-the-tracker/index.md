@@ -64,4 +64,4 @@ trackPageView();
 
 ## Using plugins
 
-You can extend the tracker functionality by installing plugins. Read more about them [here](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md).
+You can extend the tracker functionality by installing plugins. Read more about them [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md).

@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 This plugin is based on Google Analytics' Enhanced Ecommerce package. For more information on the Enhanced Ecommerce functions please see the Google Analytics [documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce).
 
-We highly recommend using the [Snowplow ecommerce plugin](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) instead, which is more fully featured and allows you to use the DBT model we provide.
+We highly recommend using the [Snowplow ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) instead, which is more fully featured and allows you to use the DBT model we provide.
 
 Enhanced ecommerce events must be **manually tracked**.
 

@@ -12,46 +12,46 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-The Javascript Tracker is based around a plugin architecture which allows new functionality to be added to the tracker. There are a number of Snowplow maintained plugins, however you are also free to [build your own](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md) or leverage community plugins too.
+The Javascript Tracker is based around a plugin architecture which allows new functionality to be added to the tracker. There are a number of Snowplow maintained plugins, however you are also free to [build your own](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md) or leverage community plugins too.
 
 ## All plugins
 
-The following table lists the Snowplow plugins (alphabetical order), what kinds of data are created using them, and their distribution for the JavaScript (`sp.js` file or minimal version) and Browser (npm etc package) trackers. Read more about configuring plugins [here](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/index.md) or on the individual pages.
+The following table lists the Snowplow plugins (alphabetical order), what kinds of data are created using them, and their distribution for the JavaScript (`sp.js` file or minimal version) and Browser (npm etc package) trackers. Read more about configuring plugins [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/index.md) or on the individual pages.
 
 If you are using the JavaScript tracker with the full `sp.js` and your plugin is included, no further installation or initialization is required.
 
 | Plugin | Creates | `sp.js` | `sp.lite.js` | Package name |
 |---|---|---|---|---|
-| [Ads](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ads/index.md) | Events | ✅ | ❌ | `browser-plugin-ad-tracking` |
-| [Button click](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/button-click/index.md) | Events | ❌ | ❌ | `browser-plugin-button-click-tracking` |
-| [Client hints](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/index.md) | Entities | ✅ | ❌ | `browser-plugin-client-hints` |
-| [Consent (Enhanced)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-enhanced-consent` |
-| [Consent (original)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/index.md) | Events and entities | ✅ | ❌ | `browser-plugin-consent` |
+| [Ads](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ads/index.md) | Events | ✅ | ❌ | `browser-plugin-ad-tracking` |
+| [Button click](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/button-click/index.md) | Events | ❌ | ❌ | `browser-plugin-button-click-tracking` |
+| [Client hints](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/index.md) | Entities | ✅ | ❌ | `browser-plugin-client-hints` |
+| [Consent (Enhanced)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-enhanced-consent` |
+| [Consent (original)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/index.md) | Events and entities | ✅ | ❌ | `browser-plugin-consent` |
 | [Debugger](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/testing-debugging/index.md) | Other | ❌ | ❌ | `browser-plugin-debugger` |
-| [Ecommerce (Snowplow)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-snowplow-ecommerce` |
-| [Ecommerce (Enhanced)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/enhanced/index.md) | Events | ✅ | ❌ | `browser-plugin-enhanced-ecommerce` |
-| [Ecommerce (original)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/index.md) | Events | ✅ | ❌ | `browser-plugin-ecommerce` |
-| [Errors](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/errors/index.md) | Events | ✅ | ❌ | `browser-plugin-error-tracking` |
-| [Forms](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/form-tracking/index.md) | Events | ✅ | ❌ | `browser-plugin-form-tracking` |
-| [GA cookies](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ga-cookies/index.md) | Entities | ✅ | ❌ | `browser-plugin-ga-cookies` |
-| [Geolocation](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md) | Entities | ✅ | ❌ | `browser-plugin-geolocation` |
-| [Kantar Focal Meter](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/focalmeter/index.md) | Other | ❌ | ❌ | `browser-plugin-focalmeter@focalmeter_plugin` |
-| [Link click](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/link-click/index.md) | Events | ✅ | ❌ | `browser-plugin-link-click-tracking` |
-| [Media (Snowplow)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-media` |
-| [Media (HTML)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-media-tracking` |
-| [Media (Vimeo)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-vimeo-tracking` |
-| [Media (Youtube)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-youtube-tracking` |
-| [Optimizely Classic](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/optimizely/index.md) | Entities | ✅ | ❌ | `browser-plugin-optimizely` |
-| [Optimizely X](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/optimizely/index.md) | Entities | ✅ | ❌ | `browser-plugin-optimizely-x` |
-| [Performance navigation timing](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/index.md) | Entities | ❌ | ❌ | `browser-plugin-performance-navigation-timing` |
-| [Performance timing (original)](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/index.md) | Entities | ✅ | ❌ | `browser-plugin-performance-timing` |
-| [Privacy Sandbox](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/privacy-sandbox/index.md) | Entities |  ❌ | ❌ | `browser-plugin-privacy-sandbox` |
+| [Ecommerce (Snowplow)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-snowplow-ecommerce` |
+| [Ecommerce (Enhanced)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/enhanced/index.md) | Events | ✅ | ❌ | `browser-plugin-enhanced-ecommerce` |
+| [Ecommerce (original)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/index.md) | Events | ✅ | ❌ | `browser-plugin-ecommerce` |
+| [Errors](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/errors/index.md) | Events | ✅ | ❌ | `browser-plugin-error-tracking` |
+| [Forms](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/form-tracking/index.md) | Events | ✅ | ❌ | `browser-plugin-form-tracking` |
+| [GA cookies](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ga-cookies/index.md) | Entities | ✅ | ❌ | `browser-plugin-ga-cookies` |
+| [Geolocation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md) | Entities | ✅ | ❌ | `browser-plugin-geolocation` |
+| [Kantar Focal Meter](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/focalmeter/index.md) | Other | ❌ | ❌ | `browser-plugin-focalmeter@focalmeter_plugin` |
+| [Link click](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/link-click/index.md) | Events | ✅ | ❌ | `browser-plugin-link-click-tracking` |
+| [Media (Snowplow)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-media` |
+| [Media (HTML)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-media-tracking` |
+| [Media (Vimeo)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-vimeo-tracking` |
+| [Media (Youtube)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md) | Events and entities | ❌ | ❌ | `browser-plugin-youtube-tracking` |
+| [Optimizely Classic](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/optimizely/index.md) | Entities | ✅ | ❌ | `browser-plugin-optimizely` |
+| [Optimizely X](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/optimizely/index.md) | Entities | ✅ | ❌ | `browser-plugin-optimizely-x` |
+| [Performance navigation timing](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/index.md) | Entities | ❌ | ❌ | `browser-plugin-performance-navigation-timing` |
+| [Performance timing (original)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/index.md) | Entities | ✅ | ❌ | `browser-plugin-performance-timing` |
+| [Privacy Sandbox](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/privacy-sandbox/index.md) | Entities |  ❌ | ❌ | `browser-plugin-privacy-sandbox` |
 | Site* | Events | ✅ | ❌ | `browser-plugin-site-tracking` |
-| [Timezone](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md) | Other | ❌ | ❌ | `browser-plugin-timezone` |
-| [Web vitals](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/web-vitals/index.md) | Events | ❌ | ❌ | `browser-plugin-web-vitals` |
+| [Timezone](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md) | Other | ❌ | ❌ | `browser-plugin-timezone` |
+| [Web vitals](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/web-vitals/index.md) | Events | ❌ | ❌ | `browser-plugin-web-vitals` |
 | ~~[Browser features](#browser-features)~~ deprecated | Events | ❌ | ❌ | `browser-plugin-browser-features` |
 
-*The site tracking plugin provides events for [site search](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/site-search/index.md), [social media interactions](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/social-media/index.md), and [timing](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
+*The site tracking plugin provides events for [site search](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/site-search/index.md), [social media interactions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/social-media/index.md), and [timing](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
 
 You can find the plugins code [here](https://github.com/snowplow/snowplow-javascript-tracker/tree/master/plugins) and also search for them on [npmjs.com](https://www.npmjs.com/).
 

@@ -35,7 +35,7 @@ Source code for the app is [available here](https://github.com/snowplow-incubato
 
 ## Basic Usage
 
-The snippets below show how to get started with the plugin, after [setting up your tracker](docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracker-setup/index.md).
+The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/tracker-setup/index.md).
 
 :::info Accepted `video` attribute values
 

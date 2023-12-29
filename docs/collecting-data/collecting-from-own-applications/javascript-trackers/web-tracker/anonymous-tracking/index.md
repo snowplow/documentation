@@ -49,7 +49,7 @@ anonymousTracking: { withSessionTracking: true },
 stateStorageStrategy: 'cookieAndLocalStorage'
 ```
 
-This mode will continue to track session information in the client side but will track no user identifiers. To achieve this, the tracker will use Cookies or Local Storage. For session tracking, `stateStorageStrategy` must be either `cookieAndLocalStorage` (default), `localStorage` or `cookie`. If this feature is enabled and the storage strategy is not appropriate, then full anonymous tracking will occur.
+This mode will continue to track session information in the client side but will track no user identifiers. To achieve this, the tracker will use Cookies or local storage. For session tracking, `stateStorageStrategy` must be either `cookieAndLocalStorage` (default), `localStorage` or `cookie`. If this feature is enabled and the storage strategy is not appropriate, then full anonymous tracking will occur.
 
 The Snowplow JavaScript Tracker performs sessionization client side. This allows anonymous session tracking to be done using client side storage without sending any user identifier fields to the collector.
 
@@ -269,4 +269,4 @@ Most browsers have a Do Not Track option which allows users to express a prefere
 
 ## Opt-out cookie
 
-TODO
+Similar in function to Do Not Track, it's possible to set an [opt-out cookie](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/#opt-out-cookie) to prevent all events being tracked.

@@ -10,9 +10,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin has been superseded by the [Snowplow ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md).
+This plugin has been superseded by the [Snowplow ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the DBT model we provide.
 
-It is modeled on Google Analytics ecommerce tracking capability. Snowplow uses three methods that have to be used together to track online transactions:
+The original Ecommerce plugin is modeled on Google Analytics ecommerce tracking capability. Snowplow uses three methods that have to be used together to track online transactions:
 
 1. **Create a transaction object**. Use `addTrans()` method to initialize a transaction object. This will be the object that is loaded with all the data relevant to the specific transaction that is being tracked including all the items in the order, the prices of the items, the price of shipping and the `order_id`.
 2. **Add items to the transaction.** Use the `addItem()` method to add data about each individual item to the transaction object.

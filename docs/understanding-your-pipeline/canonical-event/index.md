@@ -96,7 +96,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | dvce_created_tstamp| timestamp | Timestamp for the event recorded on the client device| No| '2013-11-26 00:03:57.885' | Tracking | ✅ | ✅ |
 | dvce_sent_tstamp | timestamp | When the event was actually sent by the client device| No| '2013-11-26 00:03:58.032' | Tracking | ✅ | ✅ |
 | etl_tstamp | timestamp | Timestamp for when the event was validated and enriched. Note: the name is historical and does not mean that the event is loaded at this point (this is further downstream). | No| '2017-01-26 00:01:25.292' | Pipeline | ✅ | ✅ |
-| os_timezone (not available in BDP Cloud) | text| Client operating system timezone | No| 'Europe/London' | Tracking: [Timezone Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/timezone/index.md)| ✅ | ✅ |
+| os_timezone (not available in BDP Cloud) | text| Client operating system timezone | No| 'Europe/London' | Tracking: [Timezone Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md)| ✅ | ✅ |
 | derived_tstamp | timestamp | Timestamp making allowance for inaccurate device clock | No| '2013-11-26 00:02:04' | Default Enrichment | ✅ | ✅ |
 | true_tstamp| timestamp | User-set "true timestamp" for the event| No| '2013-11-26 00:02:04' | Tracking | ✅ | ✅ |
 | load_tstamp| timestamp | Timestamp for when the data was loaded into the warehouse, best choice for incremental processing| No| '2013-11-26 00:02:04' | Pipeline | ✅ | ✅ |
@@ -249,15 +249,15 @@ Fields containing information about the event type.
 | br_type (not available in BDP Cloud)| text| Browser type | No| 'Browser'| Deprecated | ❌ | ❌ |
 | br_renderengine (not available in BDP Cloud)| text| Browser rendering engine | No| 'GECKO'| Deprecated | ❌ | ❌ |
 | br_lang | text| Language the browser is set to | No| 'en-GB'| Tracking | ✅ | ❌ |
-| br_features_pdf (not available in BDP Cloud)| boolean | Whether the browser recognizes PDFs| No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
-| br_features_flash (not available in BDP Cloud)| boolean | Whether Flash is installed | No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
-| br_features_java (not available in BDP Cloud) | boolean | Whether Java is installed| No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
-| br_features_director (not available in BDP Cloud) | boolean | Whether Adobe Shockwave is installed | No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
-| br_features_quicktime (not available in BDP Cloud)| boolean | Whether QuickTime is installed | No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
-| br_features_realplayer (not available in BDP Cloud) | boolean | Whether RealPlayer is installed| No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
-| br_features_windowsmedia (not available in BDP Cloud) | boolean | Whether mplayer2 is installed| No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
-| br_features_gears (not available in BDP Cloud)| boolean | Whether Google Gears is installed| No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
-| br_features_silverlight (not available in BDP Cloud)| boolean | Whether Microsoft Silverlight is installed | No| 1| Tracking ([`browser_features`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/index.md) plugin) | ✅ | ❌ |
+| br_features_pdf (not available in BDP Cloud)| boolean | Whether the browser recognizes PDFs| No| 1| Deprecated | ✅ | ❌ |
+| br_features_flash (not available in BDP Cloud)| boolean | Whether Flash is installed | No| 1| Deprecated | ✅ | ❌ |
+| br_features_java (not available in BDP Cloud) | boolean | Whether Java is installed| No| 1| Deprecated | ✅ | ❌ |
+| br_features_director (not available in BDP Cloud) | boolean | Whether Adobe Shockwave is installed | No| 1| Deprecated | ✅ | ❌ |
+| br_features_quicktime (not available in BDP Cloud)| boolean | Whether QuickTime is installed | No| 1| Deprecated | ✅ | ❌ |
+| br_features_realplayer (not available in BDP Cloud) | boolean | Whether RealPlayer is installed| No| 1| Deprecated | ✅ | ❌ |
+| br_features_windowsmedia (not available in BDP Cloud) | boolean | Whether mplayer2 is installed| No| 1| Deprecated | ✅ | ❌ |
+| br_features_gears (not available in BDP Cloud)| boolean | Whether Google Gears is installed| No| 1| Deprecated | ✅ | ❌ |
+| br_features_silverlight (not available in BDP Cloud)| boolean | Whether Microsoft Silverlight is installed | No| 1| Deprecated | ✅ | ❌ |
 | br_cookies| boolean | Whether cookies are enabled| No| 1| Tracking | ✅ | ❌ |
 | br_colordepth | int | Bit depth of the browser color palette | No| 24 | Tracking | ✅ | ❌ |
 | br_viewheight | int | Viewport height| No| 1000 | Tracking | ✅ | ❌ |

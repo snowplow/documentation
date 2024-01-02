@@ -53,7 +53,7 @@ All functions that previously accepted multiple arguments now accept an Object i
 window.snowplow('setUserId', 'alex-d-123');
 ```
 
-You can find the complete list of all the functions and the new named arguments in the [v3 documentation](../javascript-tracker-v3/).
+You can find the complete list of all the functions and the new named arguments in the [v3 documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/index.md).
 
 ## Renamed Properties (BREAKING CHANGE)
 

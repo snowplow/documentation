@@ -26,7 +26,7 @@ _Performance navigation timeline from the [W3C specification](https://www.w3.org
 The plugin is available since version 3.10 of the tracker.
 :::
 
-Adding this plugin will automatically capture [this]((https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceNavigationTiming/jsonschema/1-0-0)) context entity.
+Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceNavigationTiming/jsonschema/1-0-0) context entity.
 
 Performance navigation timing context entities are **automatically tracked** once configured.
 

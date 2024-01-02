@@ -65,7 +65,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Basic usage
 
-The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/index.md).
+The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/index.md).
 
 :::info Accepted `video` attribute values
 The plugin's `video` attribute will accept either:

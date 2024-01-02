@@ -48,7 +48,7 @@ You can also choose to override some of the parameters specifically for this tag
 
 #### Self Hosted JavaScript Tracker
 
-If you have the Snowplow library [self-hosted](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
+If you have the Snowplow library [self-hosted](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
 
 ![modifying permissions](images/modifying_permissions.png)
 

@@ -7,6 +7,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+### Upgrading to 0.6.0
+
+Note the minimum `dbt-core` version now required is 1.5.0
+
+Most upgrades and new features should be available automatically after the first run of the new version of the package, however there are a few breaking changes to manage before this first run. To enable any other new optional features or make use of the new configuration options, please see the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/ecommerce/index.mdx) page.
+
+
+Both the quarantined sessions and the sessions lifecycle table have has a column renamed, please run the below statements to rename this column in your warehouse if not doing a full-refresh of the package.
+```sql
+alter table <your_schema>_snowplow_manifest.snowplow_ecommerce_base_sessions_lifecycle_manifest rename column session_id to session_identifier;
+alter table <your_schema>_snowplow_manifest.snowplow_ecommerce_base_quarantined_sessions rename column session_id to session_identifier;
+```
+
+
 ### Upgrading to 0.5.0
 
 **This version requires a full refresh run if you have been using any previous versions.** You will not be able to upgrade and have the package work without doing a full refresh.

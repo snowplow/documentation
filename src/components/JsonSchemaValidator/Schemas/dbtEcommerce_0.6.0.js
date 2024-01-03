@@ -194,6 +194,13 @@ export const Schema = {
       group: 'Contexts, Filters, and Logs',
       items: { type: 'string' },
     },
+    snowplow__use_product_quantity: {
+      type: 'boolean',
+      group: 'Operation and Logic',
+      longDescription: 'Flag to use the product quantity value for the number of products in a transaction, instead of the count of events.',
+      packageDefault: 'false',
+      title: 'Use Product Quantity',
+    },
     snowplow__disable_ecommerce_carts: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
@@ -333,12 +340,68 @@ export const Schema = {
       packageDefault: 'true',
       group: 'Warehouse Specific',
     },
-    snowplow__use_product_quantity: {
-      type: 'boolean',
+    snowplow__session_identifiers: {
+      type: 'string',
+      title: 'Session Identifiers',
       group: 'Operation and Logic',
-      longDescription: 'Flag to use the product quantity value for the number of products in a transaction, instead of the count of events.',
-      packageDefault: 'false',
-      title: 'Use Product Quantity',
+      longDescription: 'A list of key:value dictionaries which contain all of the contexts and fields where your session identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Utils advanced operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/) section for more details.',
+      packageDefault: '[{"schema" : "atomic", "field" : "domain_sessionid"}]',
+      type: 'array',
+      description: '> Click the plus sign to add a new entry',
+      minItems: 0,
+      items: {
+        type: 'object',
+        title: "Identifier",
+        properties: {
+          schema: { type: 'string', description: 'The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself' }, // TODO: add regex here to make valid context/unstruct or atomic?
+          field: { type: 'string', description: 'The name of the field to use as session identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted' } // TODO: add regex here to make valid SQL name?
+        },
+        required: ['schema', 'field'],
+        additionalProperties: false
+      },
+      uniqueItems: true,
+    },
+    snowplow__session_sql: {
+      type: 'string',
+      title: 'SQL for your session identifier',
+      longDescription: 'This allows you to override the `session_identifiers` SQL, to define completely custom SQL in order to build out a session identifier for your events. If you are interested in using this instead of providing identifiers through the `session_identifiers` variable, please see the [Utils advanced operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/) section for more details on how to do that.',
+      packageDefault: '',
+      group: 'Operation and Logic',
+    },
+    snowplow__session_timestamp: {
+      type: 'string',
+      title: 'Timestamp used for incremental processing, should be your partition field',
+      group: 'Operation and Logic',
+      longDescription: "Determines which timestamp is used to build the sessionization logic. It's a good idea to have this timestamp be the same timestamp as the field you partition your events table on.",
+      packageDefault: 'collector_tstamp',
+    },
+    snowplow__user_identifiers: {
+      type: 'string',
+      title: 'User Identifiers',
+      group: 'Operation and Logic',
+      longDescription: 'A list of key:value dictionaries which contain all of the contexts and fields where your user identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Utils advanced operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/) section for more details.',
+      packageDefault: '[{"schema" : "atomic", "field" : "domain_userid"}]',
+      type: 'array',
+      description: '> Click the plus sign to add a new entry',
+      minItems: 0,
+      items: {
+        type: 'object',
+        title: "Identifier",
+        properties: {
+          schema: { type: 'string', description: 'The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself' }, // TODO: add regex here to make valid context/unstruct or atomic?
+          field: { type: 'string', description: 'The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted' } // TODO: add regex here to make valid SQL name?
+        },
+        required: ['schema', 'field'],
+        additionalProperties: false
+      },
+      uniqueItems: true,
+    },
+    snowplow__user_sql: {
+      type: 'string',
+      title: 'SQL for your user identifier',
+      longDescription: 'This allows you to override the `user_identifiers` SQL, to define completely custom SQL in order to build out a user identifier for your events. If you are interested in using this instead of providing identifiers through the `user_identifiers` variable, please see the [Utils advanced operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/) section for more details on how to do that.',
+      packageDefault: '',
+      group: 'Operation and Logic',
     },
     snowplow__enable_load_tstamp: {
       type: 'boolean',
@@ -347,6 +410,41 @@ export const Schema = {
       longDescription: 'Flag to include the `load_tstamp` column in the base events this run model. This should be set to true (the default) unless you are using the Postgres loader or an RDB loader version less than 4.0.0. It must be true to use consent models on Postgres and Redshift.',
       packageDefault: 'true',
       group: 'Warehouse Specific',
+    },
+    snowplow__carts_passthroughs: {
+      title: 'Carts Passthroughs',
+      group: 'Contexts, Filters, and Logs',
+      longDescription: 'Field(s) to carry through from the events table to the derived table. The field is from the `add_to_cart`, `remove_from_cart`, or `transaction` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.',
+      packageDefault: '[ ] (no passthroughs)',
+      $ref: '#/definitions/passthrough_vars'
+    },
+    snowplow__checkouts_passthroughs: {
+      title: 'Checkouts Passthroughs',
+      group: 'Contexts, Filters, and Logs',
+      longDescription: 'Field(s) to carry through from the events table to the derived table. The field is from the `transaction` or `checkout_step` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.',
+      packageDefault: '[ ] (no passthroughs)',
+      $ref: '#/definitions/passthrough_vars'
+    },
+    snowplow__products_passthroughs: {
+      title: 'Products Passthroughs',
+      group: 'Contexts, Filters, and Logs',
+      longDescription: 'Field(s) to carry through from the events table to the derived table. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.',
+      packageDefault: '[ ] (no passthroughs)',
+      $ref: '#/definitions/passthrough_vars'
+    },
+    snowplow__session_passthroughs: {
+      title: 'Session Passthroughs',
+      group: 'Contexts, Filters, and Logs',
+      longDescription: 'Field(s) to carry through from the events table to the derived table. The field is from the first event record in the session based on `derived_tstamp` then `dvce_created_tstamp`. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.',
+      packageDefault: '[ ] (no passthroughs)',
+      $ref: '#/definitions/passthrough_vars'
+    },
+    snowplow__transaction_passthroughs: {
+      title: 'Transaction Passthroughs',
+      group: 'Contexts, Filters, and Logs',
+      longDescription: 'Field(s) to carry through from the events table to the derived table. The field is from the `transaction` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.',
+      packageDefault: '[ ] (no passthroughs)',
+      $ref: '#/definitions/passthrough_vars'
     },
   },
 }

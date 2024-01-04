@@ -8,60 +8,7 @@ sidebar_position: 5
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, gridClasses, } from '@mui/x-data-grid-premium';
-import { LicenseInfo } from '@mui/x-license-pro';
-LicenseInfo.setLicenseKey("a3d6a1e3cdca760ace01b65d01608642Tz03MTE1NixFPTE3MjE1NDQ2NzEwMDAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y");
 
-export const columns = [
-    {
-      field: 'id',
-      headerName: 'Field',
-      description: 'Name of the field',
-      flex: 0.2,
-    },
-    {
-      field: 'Type',
-      headerName: 'Type',
-      description: 'Type of the field (jsonschema, not warehouse specific)',
-      flex: 0.2,
-    },
-    {
-      field: 'Description',
-      headerName: 'Description',
-      description: 'Description of the field',
-      flex: 0.9,
-    },
-    {
-      field: 'Reqd',
-      headerName: 'Required?',
-      description: 'Is the field required i.e. not null?',
-      flex: 0.2,
-    },
-    {
-      field: 'Example',
-      headerName: 'Example',
-      description: 'Example value of the field',
-      flex: 0.3,
-    },
-    {
-      field: 'Source',
-      headerName: 'Source',
-      description: 'Source of the field',
-      flex: 0.2,
-    },
-    {
-      field: 'Web',
-      headerName: 'Web',
-      description: 'Is the field used in web tracking?',
-      flex: 0.2,
-    },
-    {
-      field: 'Mobile',
-      headerName: 'Mobile',
-      description: 'Is the field used in mobile tracking?',
-      flex: 0.2,
-    },
-  ];
 ```
 
 ## Overview
@@ -131,57 +78,11 @@ We also provide a `Source` for each field, however sometimes a field may have mu
 ### Common fields (platform and event independent)
 #### Application fields
 
-```mdx-code-block
-export const rows = [
-  {
-    id: 'app_id',
-    Type: 'text',
-    Description: 'Application',
-    Reqd: '✅',
-    Example: 'angry-birds',
-    Source: 'Tracking', 
-    Web: '✅',
-    Mobile: '✅', 
-  },
-  {
-    id:'platform',
-    Type:'text',
-    Description:'Platform, limited to specific values',
-    Reqd:'Yes',
-    Example:'web',
-    Source:'Tracking', 
-    Web:'✅',
-    Mobile: '✅', 
-  }
-];
-
-<DataGridPremium
-      autosizeOnMount
-      autosizeOptions={{
-        includeOutliers: true,
-        includeHeaders: true,
-      }}
-      getRowHeight={() => 'auto'}
-      pagination
-      pageSizeOptions={[5, 10, 25, 50, 100]}
-      rows= {rows}
-      columns= {columns}
-      slots={{ toolbar: GridToolbar }}
-      flex
-      slotProps={{
-        toolbar: {
-          showQuickFilter: true,
-          printOptions: { disableToolbarButton: true },
-          csvOptions: { disableToolbarButton: true },
-        },
-      }}
-    />
-```
 
 | Field| Type | Description| Reqd? | Example | Source | Web | Mobile|
 |----------|------|--------------------------------------|-------|---------------|----------|-----|---------|
 | app_id | text | Application ID | Yes | 'angry-birds' | Tracking | ✅ | ✅ |
-
+| platform | text | Platform, limited to specific values | Yes | 'web' | Tracking | ✅ | ✅ |
 
 The application ID is used to distinguish different applications that are being tracked by the same Snowplow stack, e.g. `production` versus `dev`.
 

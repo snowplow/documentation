@@ -8,7 +8,7 @@ This FAQ is not a substitute for reading [the license text](/community-license-1
 
 ## What is the Snowplow Community License?
 
-Snowplow is moving new versions of selected components of the Snowplow software to a source-available license. This license is based on the Confluent Community License, with changes to the license related to rights and restrictions.
+This is a source-available license based on the Confluent Community License, with changes related to rights and restrictions.
 
 ## How does the Snowplow Community License work in practice?
 
@@ -21,13 +21,17 @@ For purposes of this Agreement, “Excluded Purpose” means making available an
 
 </details>
 
-For example, this does not allow the hosting of Snowplow’s Snowbridge product, or other software licensed under the Snowplow Community License, as part of an online service or distribution of on-premises offerings, that compete with Snowplow products or services. 
+For example, this does not allow the hosting of Snowplow’s Snowbridge product, or other software licensed under the Snowplow Community License, as part of an online service or distribution of on-premises offerings, that compete with Snowplow products or services.
 
 If you are not doing what is excluded, this license change will not affect your current use.
 
 ## Is Snowplow moving away from open source?
 
-We remain committed to an Open Core model. Open Core means the core of our product is open source and available under either the Apache 2.0 license, or the Snowplow Community License.
+```mdx-code-block
+import MovingAway from '../_moving_away.md'
+```
+
+<MovingAway/>
 
 ## Can my company or I provide support to others who are running software under the Snowplow Community License?
 
@@ -43,4 +47,4 @@ No, if you have entered into a separate commercial licensing with Snowplow, for 
 
 ## How can I contact Snowplow in case of doubts?
 
-For any further questions on licensing of Snowplow software, please send us an email at ip-portfolio@snowplow.io.
+For any further questions on licensing of Snowplow software, please send us an email at [ip-portfolio@snowplow.io](mailto:ip-portfolio@snowplow.io).

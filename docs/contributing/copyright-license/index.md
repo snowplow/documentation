@@ -1,39 +1,101 @@
 ---
-title: "Copyright & License"
-date: "2020-11-24"
+title: "Licensing overview"
 sidebar_position: 10
+hide_table_of_contents: true
 ---
 
-## Copyright
+```mdx-code-block
+import Link from '@docusaurus/Link';
+```
 
-<p>Snowplow is copyright 2012–{new Date().getFullYear()} Snowplow Analytics Ltd.</p>
+## Source-available components
 
-## License
+:::tip Terminology
 
-In general, Snowplow components are licensed under one of the following 3 licenses:
-
-* [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) for trackers and various SDKs.
-* [Snowplow Community License](/community-license-1.0/) for core pipeline components, e.g. [RDB Loader](https://github.com/snowplow/snowplow-rdb-loader) or [Snowbridge](https://github.com/snowplow/snowbridge), as well as Terraform modules to run them. ([FAQ](/docs/contributing/community-license-faq/index.md))
-* [Snowplow Personal & Academic License](/personal-and-academic-license-1.0/) for selected data models and other commercial components. ([FAQ](/docs/contributing/personal-and-academic-license-faq/index.md))
-
-:::note
-
-Some components might not yet match the above approach, but are set to be updated in their next major or minor version.
+Since some of the below licenses are not approved by [OSI](https://opensource.org/licenses/), we do not refer to them as _Open Source_ licenses. However, the source code is still available.
 
 :::
 
-When in doubt, consult the each component’s GitHub repository for the LICENSE file.
+<table>
+<thead>
 
-### Snowplow JavaScript Tracker
+<tr>
+<th><Link to="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</Link></th>
+<th><Link to="/community-license-1.0/">Community License</Link></th>
+<th><Link to="/limited-use-license-1.0/">Limited Use License</Link></th>
+<th><Link to="/personal-and-academic-license-1.0/">Personal & Academic License</Link></th>
+</tr>
 
-[Snowplow JavaScript Tracker](https://github.com/snowplow/snowplow-javascript-tracker) is distributed under [BSD 3 Clause](https://opensource.org/licenses/BSD-3-Clause). This tracker was originally based on Anthon Pang's `piwik.js`, and has maintained the same license for distribution.
+</thead>
+<tbody>
 
-## Third-party, git-submoduled contributions
+<tr style={{verticalAlign: "top"}}>
+<td>
 
-The loosely-coupled architecture of Snowplow makes it easy to swap out individual sub-system implementations for first- or third-party alternatives.
+_Usage and distribution for any purpose_
 
-The Snowplow Analytics team curate some third-party sub-system implementations by git-submoduling those GitHub repositories into the Snowplow repositories.
+</td>
+<td>
 
-Please note that third-party, git-submoduled contributions to Snowplow remain the copyright of their respective authors.
+_Usage in non-competing products, no distribution_ ([FAQ](/docs/contributing/community-license-faq/index.md))
 
-Third-party, git-submoduled contributions may be released under a different license to [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0); please consult the licensing information in their original GitHub repositories for confirmation.
+</td>
+<td>
+
+_Usage in non-competing products, no high availability in production, no distribution_  ([FAQ](/docs/contributing/limited-use-license-faq/index.md))
+
+</td>
+<td>
+
+_Usage for personal and academic purposes only_ ([FAQ](/docs/contributing/personal-and-academic-license-faq/index.md))
+
+</td>
+</tr>
+
+<tr style={{verticalAlign: "top"}}>
+<td>
+
+* All tracker SDKs¹
+* All Google Tag Manager templates
+* Legacy data models (web, mobile)
+
+</td>
+<td>
+
+* Core libraries (schema-ddl, common-streams, etc)
+* Developer tools (Chrome Inspector, `igluctl`, etc)
+
+</td>
+<td>
+
+All pipeline apps:
+* Collector _(3.0.0+)_
+* Enrich _(4.0.0+)_
+* RDB Loader _(5.8.0+)_
+* BigQuery Loader _(2.0.0+)_
+* Lake Loader _(0.2.0+)_
+* Other loaders
+* Community Edition terraform modules _(2024+)_
+
+</td>
+<td>
+
+All data models (except web and mobile)
+
+</td>
+</tr>
+
+</tbody>
+</table>
+
+¹As an exception, [Snowplow JavaScript Tracker](https://github.com/snowplow/snowplow-javascript-tracker) is distributed under [BSD 3 Clause](https://opensource.org/licenses/BSD-3-Clause). This tracker was originally based on Anthon Pang’s `piwik.js`, and has maintained the same license for distribution.
+
+:::tip
+
+When in doubt, consult each component’s GitHub repository for the LICENSE file.
+
+:::
+
+## Proprietary components
+
+[Snowplow BDP](https://snowplow.io/snowplow-bdp/) is built upon the above components, but adds a vast set of proprietary, closed source ones (UI, API, highly available deployment logic, and so on). These are only available under a commercial license for Snowplow customers.

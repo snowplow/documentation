@@ -44,7 +44,11 @@ We need to run a sustainable business. Snowplow’s open source software develop
 
 ## Is Snowplow moving away from open source?
 
-We remain committed to an Open Core model. Open Core means the core of our product is open source and available under either the Apache 2.0 license, or the Snowplow Community License.
+```mdx-code-block
+import MovingAway from '../_moving_away.md'
+```
+
+<MovingAway/>
 
 ## Can I contribute to this software?
 

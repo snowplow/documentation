@@ -11,6 +11,7 @@ const plugin = () => {
     EC2: 'Amazon Elastic Compute Cloud',
     ECS: 'Amazon Elastic Container Service',
     ETL: 'Extract, Transform, Load',
+    FAQ: 'Frequently Asked Questions',
     GCP: 'Google Cloud Platform',
     GCS: 'Google Cloud Storage',
     GTM: 'Google Tag Manager',

@@ -39,7 +39,7 @@ You can enable the custom module through the `snowplow__enable_consent` variable
 <CodeBlock language='yaml' title="dbt_project.yml">{`
 vars:
   snowplow_${props.packageName}:
-    snowplow__enable_cwv: true
+    snowplow__enable_consent: true
     `}
 </CodeBlock>
 

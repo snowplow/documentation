@@ -1,9 +1,21 @@
 ---
 title: "Configure the Stream Collector"
-sidebar_position: 30
+sidebar_position: 2
 ---
 
 This is a complete list of the options that can be configured in the collector HOCON config file. The [example configs in github](https://github.com/snowplow/stream-collector/tree/master/examples) show how to prepare an input file. Some features are described in more detail at the bottom of this page.
+
+### License
+
+Stream Collector is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/contributing/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run the collector, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `collector.license.accept` option, like this:
+
+```hcl
+collector {
+  license { accept = true }
+}
+```
 
 ### Common options
 
@@ -46,17 +58,11 @@ This is a complete list of the options that can be configured in the collector H
 | `collector.cors.accessControlMaxAge` | Optional. Default: `60 minutes`. Configures how long a the results of a preflight request can be cached by the browser. `-1` seconds disables the cache. |
 | `collector.preTerminationPeriod` (since *2.5.0*) | Optional. Default: `10 seconds`. Configures how long the collector should pause after receiving a sigterm before starting the graceful shutdown. During this period the collector continues to accept new connections and respond to requests. |
 | `collector.preTerminationUnhealthy` (since *2.5.0*) | Optional. Default: `false`. During the `preTerminationPeriod`, the collector can be configured to return `503`s on the `/health` endpoint. Can be helpful for removing the collector from a load balancer's targets. |
-| `collector.terminationDeadline` (since *2.5.0*) | Optional. Default: `10 seconds`. The akka server's deadline for closing connections during graceful shutdown. |
+| `collector.terminationDeadline` (since *2.5.0*) | Optional. Default: `10 seconds`. The server's deadline for closing connections during graceful shutdown. |
 | `collector.prometheusMetrics.enabled` (deprecated since *2.6.0*) | Optional. Default: `false`. When enabled, all requests are logged as prometheus metrics and the `/metrics` endpoint returns the report about the metrics. |
 | `collector.prometheusMetrics.durationBucketsInSeconds` (deprecated since *2.6.0*) | Optional. E.g. `[0.1, 3, 10]`. Custom buckets for the `http_request_duration_seconds_bucket` duration prometheus metric. |
 | `collector.telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-community-edition/telemetry/index.md). |
 | `collector.telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-community-edition/telemetry/index.md#how-can-i-help) for more information. |
-| `collector.experimental.warmup.enable` (since *2.7.0*) | Optional. Default: `false`. Experimental feature. When enabled, the collector sends some "warm-up" requests to its own `/health` endpoint during start up. We have found from experiment this can cut down the number of `502`s returned from a load balancer in front of the collector in Kubernetes deployments. |
-| `collector.experimental.warmup.numRequests` (since *2.7.0*) | Optional. Default: `2000`. Number of requests to send if using the experimental warmup feature. |
-| `collector.experimental.warmup.maxConnections` (since *2.7.0*) | Optional. Default: `2000`. How many TCP connections to open simultaneously when using the experimental warmup feature. |
-| `collector.experimental.warmup.maxCycles` (since *2.8.1*) | Optional. Default: `3`. How many times to cycle through the experimental warmup procedure, when it is enabled. This is an upper limit; cycles are not repeated once the warmup is detected to be successful. |
-| `akka.*` | Optional. Set any standard akka http option. For example `akka.loglevel = INFO` |
-| `akka.ssl-config.*` | Deprecated since *2.4.0*. Since *2.4.0*, SSL config is instead configured via JVM system properties. See below for details. |
 
 ### Kinesis collector options
 
@@ -65,16 +71,17 @@ This is a complete list of the options that can be configured in the collector H
 | `collector.streams.good` | Required. Name of the output kinesis stream for successfully collected events. |
 | `collector.streams.bad` | Required. Name of the output kinesis stream for http requests which could not be written to the good stream. For example, if the event size exceeds the kinesis limit of 1MB. |
 | `collector.streams.useIpAddressAsPartitionKey` | Optional. Default: `false`. Whether to use the user's IP address as the kinesis partition key. |
-| `collector.streams.sink.region` | Optional. Default: `eu-central-1`. AWS region of the kinesis streams. |
-| `collector.streams.sink.customEndpoint` | Optional. Override aws kinesis endpoint. Can be helpful when using localstack for testing. |
-| `collector.streams.sink.threadPoolSize` | Optional. Default: `10`. Thread pool size used by the collector sink for asynchronous operations. |
-| `collector.streams.sink.sqsGoodBuffer` | Optional. Set to the name of a SQS topic to enable buffering of good output events. When messages cannot be sent to Kinesis, (e.g. because of exceeding api limits) then they get sent to SQS as a fallback. Helpful for smoothing over traffic spikes. |
-| `collector.streams.sink.sqsBadBuffer` | Optional. Like the `sqsGoodBuffer` but for failed events. |
-| `collector.streams.sink.aws.accessKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_ACCESS_KEY_ID` environment variable. |
-| `collector.streams.sink.aws.secretKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_SECRET_ACCESS_KEY` environment variable. |
-| `collector.streams.sink.maxBytes` (since *2.9.0*) | Optional. Default: `1000000` (1 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. If SQS buffer is activated, `sqsMaxBytes` is used instead. |
-| `collector.streams.sink.sqsMaxBytes` | Optional. Default: `192000` (192 kb). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. SQS has a record size limit of 256 kb, but records are encoded with Base64, which adds approximately 33% of the size, so we set the limit to `256 kb * 3/4`. |
-| `collector.streams.sink.startupCheckInterval` (since *2.9.0*) | Optional. Default: `1 second`.  When collector starts, it checks if Kinesis streams exist with `describeStreamSummary` and if SQS buffers exist with `getQueueUrl` (if configured). This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
+| `collector.streams.{good,bad}.region` | Optional. Default: `eu-central-1`. AWS region of the kinesis streams. |
+| `collector.streams.{good,bad}.customEndpoint` | Optional. Override aws kinesis endpoint. Can be helpful when using localstack for testing. |
+| `collector.streams.{good,bad}.threadPoolSize` | Optional. Default: `10`. Thread pool size used by the collector sink for asynchronous operations. |
+| `collector.streams.{good,bad}.sqsMaxBytes` | Optional. Set to the name of a SQS topic to enable buffering of good output events. When messages cannot be sent to Kinesis, (e.g. because of exceeding api limits) then they get sent to SQS as a fallback. Helpful for smoothing over traffic spikes. |
+| `collector.streams.good.sqsGoodBuffer` | Optional. Set to the name of a SQS topic to enable buffering of good output events. When messages cannot be sent to Kinesis, (e.g. because of exceeding api limits) then they get sent to SQS as a fallback. Helpful for smoothing over traffic spikes. |
+| `collector.streams.bad.sqsBadBuffer` | Optional. Like the `sqsGoodBuffer` but for failed events. |
+| `collector.streams.{good,bad}.aws.accessKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_ACCESS_KEY_ID` environment variable. |
+| `collector.streams.{good,bad}.aws.secretKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_SECRET_ACCESS_KEY` environment variable. |
+| `collector.streams.{good,bad}.maxBytes` (since *2.9.0*) | Optional. Default: `1000000` (1 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. If SQS buffer is activated, `sqsMaxBytes` is used instead. |
+| `collector.streams.{good,bad}.sqsMaxBytes` | Optional. Default: `192000` (192 kb). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. SQS has a record size limit of 256 kb, but records are encoded with Base64, which adds approximately 33% of the size, so we set the limit to `256 kb * 3/4`. |
+| `collector.streams.{good,bad}.startupCheckInterval` (since *2.9.0*) | Optional. Default: `1 second`.  When collector starts, it checks if Kinesis streams exist with `describeStreamSummary` and if SQS buffers exist with `getQueueUrl` (if configured). This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
 | `collector.streams.backoffPolicy.minBackoff` | Optional. Default: `3000`. Time (in milliseconds) for retrying sending to kinesis / SQS after failure. |
 | `collector.streams.backoffPolicy.maxBackoff` | Optional. Default: `600000`. Time (in milliseconds) for retrying sending to kinesis / SQS after failure. |
 | `collector.streams.buffer.byteLimit` | Optional. Default: `3145728`. Incoming events are stored in an internal buffer before being sent to Kinesis. This configures the maximum total size of pending events. |
@@ -88,12 +95,12 @@ This is a complete list of the options that can be configured in the collector H
 | `collector.streams.good` | Required. Name of the output SQS queue for successfully collected events. |
 | `collector.streams.bad` | Required. Name of the output SQS queue for http requests which could not be written to the good stream. For example, if the event size exceeds the SQS limit of 256KB. |
 | `collector.streams.useIpAddressAsPartitionKey` | Optional. Default: `false`. Whether to use the user's IP address as the Kinesis partition key. This is attached to the SQS message as an attribute, with the aim of using it if the events ultimately end up in Kinesis. |
-| `collector.streams.sink.region` | Optional. Default: `eu-central-1`. AWS region of the SQS queues. |
-| `collector.streams.sink.threadPoolSize` | Optional. Default: `10`. Thread pool size used by the collector sink for asynchronous operations. |
-| `collector.streams.sink.aws.accessKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_ACCESS_KEY_ID` environment variable. |
-| `collector.streams.sink.aws.secretKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_SECRET_ACCESS_KEY` environment variable. |
-| `collector.streams.sink.maxBytes` (since *2.9.0*) | Optional. Default: `192000` (192 kb). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. SQS has a record size limit of 256 kb, but records are encoded with Base64, which adds approximately 33% of the size, so we set the limit to `256 kb * 3/4`. |
-| `collector.streams.sink.startupCheckInterval` (since *2.9.0*) | Optional. Default: `1 second`.  When collector starts, it checks if SQS buffers exist with `getQueueUrl`. This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
+| `collector.streams.{good,bad}.region` | Optional. Default: `eu-central-1`. AWS region of the SQS queues. |
+| `collector.streams.{good,bad}.threadPoolSize` | Optional. Default: `10`. Thread pool size used by the collector sink for asynchronous operations. |
+| `collector.streams.{good,bad}.aws.accessKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_ACCESS_KEY_ID` environment variable. |
+| `collector.streams.{good,bad}.aws.secretKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_SECRET_ACCESS_KEY` environment variable. |
+| `collector.streams.{good,bad}.maxBytes` (since *2.9.0*) | Optional. Default: `192000` (192 kb). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. SQS has a record size limit of 256 kb, but records are encoded with Base64, which adds approximately 33% of the size, so we set the limit to `256 kb * 3/4`. |
+| `collector.streams.{good,bad}.startupCheckInterval` (since *2.9.0*) | Optional. Default: `1 second`.  When collector starts, it checks if SQS buffers exist with `getQueueUrl`. This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
 | `collector.streams.backoffPolicy.minBackoff` | Optional. Default: `3000`. Time (in milliseconds) for retrying sending to SQS after failure. |
 | `collector.streams.backoffPolicy.maxBackoff` | Optional. Default: `600000`. Time (in milliseconds) for retrying sending to SQS after failure. |
 | `collector.streams.buffer.byteLimit` | Optional. Default: `3145728`. Incoming events are stored in an internal buffer before being sent to SQS. This configures the maximum total size of pending events. |
@@ -106,39 +113,21 @@ This is a complete list of the options that can be configured in the collector H
 |-----------|-------------|
 | `collector.streams.good` | Required. Name of the output Pubsub topic for successfully collected events. |
 | `collector.streams.bad` | Required. Name of the output pubsub topic for http requests which could not be written to the good stream. For example, if the event size exceeds the Pubsub limit of 10MB. |
-| `collector.streams.sink.googleProjectId` | Required. GCP project name. |
-| `collector.streams.sink.backoffPolicy.minBackoff` | Optional. Default: `1000`. Time (in milliseconds) for retrying sending to Pubsub after failure. |
-| `collector.streams.sink.backoffPolicy.maxBackoff` | Optional. Default: `1000`. Time (in milliseconds) for retrying sending to Pubsub after failure |
-| `collector.streams.sink.backoffPolicy.totalBackoff` | Optional. Default: `9223372036854`. We set this to the maximum value so that we never give up on trying to send a message to pubsub. |
-| `collector.streams.sink.backoffPolicy.multipler` | Optional. Default: `2`. Multiplier between two periods. |
-| `collector.streams.sink.backoffPolicy.initialRpcTimeout` (since *2.5.0*) | Optional. Default: `10000`. Time (in milliseconds) before a RPC call to Pubsub is aborted and retried. |
-| `collector.streams.sink.backoffPolicy.maxRpcTimeout` (since *2.5.0*) | Optional. Default: `10000`. Maximum time (in milliseconds) before RPC call to Pubsub is aborted and retried. |
-| `collector.streams.sink.backoffPolicy.rpcTimeoutMultipler` (since *2.5.0*) | Optional. Default: `2`. How RPC timeouts increase as they are retried. |
-| `collector.streams.sink.maxBytes` (since *2.9.0*) | Optional. Default: `10000000` (10 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. |
-| `collector.streams.sink.startupCheckInterval` (since *2.9.0*) | Optional. Default: `1 second`.  When collector starts, it checks if PubSub topics exist with `listTopics`. This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
-| `collector.streams.sink.retryInterval` (since *2.9.0*) | Optional. Default: `10 seconds`. Collector uses built-in retry mechanism of PubSub API. In case of failure of these retries, the events are added to a buffer and every `retryInterval` collector retries to send them. |
-| `collector.streams.buffer.byteLimit` | Optional. Default: `1000000`. Incoming events are stored in an internal buffer before being sent to Pubsub. This configures the maximum total size of pending events |
-| `collector.streams.buffer.recordLimit` | Optional. Default: `40`. Maximum number of pending events before flushing to Pubsub. |
-| `collector.streams.buffer.timeLimit` | Optional. Default: `1000`. Maximum time (in milliseconds) before flushing pending buffered events to Pubsub. |
+| `collector.streams.sink.{good,bad}.googleProjectId` | Required. GCP project name. |
+| `collector.streams.sink.{good,bad}backoffPolicy.minBackoff` | Optional. Default: `1000`. Time (in milliseconds) for retrying sending to Pubsub after failure. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.maxBackoff` | Optional. Default: `1000`. Time (in milliseconds) for retrying sending to Pubsub after failure |
+| `collector.streams.sink.{good,bad}.backoffPolicy.totalBackoff` | Optional. Default: `9223372036854`. We set this to the maximum value so that we never give up on trying to send a message to pubsub. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.multipler` | Optional. Default: `2`. Multiplier between two periods. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.initialRpcTimeout` (since *2.5.0*) | Optional. Default: `10000`. Time (in milliseconds) before a RPC call to Pubsub is aborted and retried. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.maxRpcTimeout` (since *2.5.0*) | Optional. Default: `10000`. Maximum time (in milliseconds) before RPC call to Pubsub is aborted and retried. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.rpcTimeoutMultipler` (since *2.5.0*) | Optional. Default: `2`. How RPC timeouts increase as they are retried. |
+| `collector.streams.sink.{good,bad}..maxBytes` (since *2.9.0*) | Optional. Default: `10000000` (10 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. |
+| `collector.streams.sink.{good,bad}.startupCheckInterval` (since *2.9.0*) | Optional. Default: `1 second`.  When collector starts, it checks if PubSub topics exist with `listTopics`. This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
+| `collector.streams.sink.{good,bad}.retryInterval` (since *2.9.0*) | Optional. Default: `10 seconds`. Collector uses built-in retry mechanism of PubSub API. In case of failure of these retries, the events are added to a buffer and every `retryInterval` collector retries to send them. |
+| `collector.streams.{good,bad}.buffer.byteLimit` | Optional. Default: `1000000`. Incoming events are stored in an internal buffer before being sent to Pubsub. This configures the maximum total size of pending events |
+| `collector.streams.{good,bad}.buffer.recordLimit` | Optional. Default: `40`. Maximum number of pending events before flushing to Pubsub. |
+| `collector.streams.{good,bad}.buffer.timeLimit` | Optional. Default: `1000`. Maximum time (in milliseconds) before flushing pending buffered events to Pubsub. |
 
-### RabbitMQ collector options (experimental, available since 2.8.0)
-
-| parameter | description |
-|-----------|-------------|
-| `collector.streams.good` | Required. Name of the exchange where successfully collected events are sent. |
-| `collector.streams.bad` | Required. Name of the exchange where bad rows are sent. |
-| `collector.streams.sink.host` | Required. Host name of a node in RabbitMQ cluster. |
-| `collector.streams.sink.port` | Required. Port to connect to the cluster. |
-| `collector.streams.sink.username` | Required. Username to connect to the cluster. |
-| `collector.streams.sink.password` | Required. Password to connect to the cluster. |
-| `collector.streams.sink.virtualHost` | Required. Virtual host when connecting to the broker. |
-| `collector.streams.sink.routingKeyGood` | Required. Routing key for collector payloads exchange. |
-| `collector.streams.sink.routingKeyBad` | Required. Routing key for bad rows exchange. |
-| `collector.streams.sink.maxBytes` | Optional. Default: `128000000` (128 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation bad row is emitted instead. |
-| `collector.streams.backoffPolicy.minBackoff` | Optional. Default: `100`. Minimum backoff period (in milliseconds) to retry the writes to RabbitMQ. |
-| `collector.streams.backoffPolicy.maxBackoff` | Optional. Default: `10000`. Maximum backoff period (in milliseconds) to retry the writes to RabbitMQ. |
-| `collector.streams.backoffPolicy.multiplier` | Optional. Default: `2`. Multiplier between two periods. |
-| `collector.streams.threadPoolSize` | Optional. Size of the thread pool used to send the requests to RabbitMQ. The thread pool is shared by the writing of good and bad events. If this parameter is omitted, a cached thread pool is used. |
 
 ### Setting the domain name
 
@@ -278,3 +267,12 @@ To start using this feature, you will first need to set up the SQS queues. Two s
 sqsGoodBuffer = {good-sqs-queue-url}
 sqsBadBuffer = {bad-sqs-queue-url}
 ```
+
+### Networking
+
+Since version 3.0.0 networking settings are configured in its own `collector.networking` section:
+
+| parameter                                           | description |
+|-----------------------------------------------------|-------------|
+| collector.networking.maxConnections (since *3.0.0*) | Optional. Maximum number of concurrent active connection. |
+| collector.networking.idleTimeout (since *3.0.0*)    | Optional. Maximum inactivity time for a network connection. If no data is sent within that time, the connection is closed. |

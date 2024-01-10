@@ -3,14 +3,15 @@ title: "Original"
 sidebar_position: 70
 ---
 
-# Ecommerce tracking (original plugin)
+# Ecommerce tracking (original)
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
+:::tip
 This plugin has been superseded by the [Snowplow ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the DBT model we provide.
+:::
 
 The original Ecommerce plugin is modeled on Google Analytics ecommerce tracking capability. Snowplow uses three methods that have to be used together to track online transactions:
 

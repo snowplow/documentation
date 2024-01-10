@@ -1,33 +1,73 @@
 ---
-title: "Cookies and Local Storage"
-sidebar_position: 3000
+title: "Cookies and local storage"
+sidebar_position: 2850
 ---
 
-By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and Local Storage. The behavior of each of these cookies and local storage keys are described here. The base name of each cookie can be configured by following these [instructions](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+Unless you have enabled `respectDoNotTrack` during initialization, the tracker will persist information on the client. By default, the Snowplow JavaScript and Browser Tracker make use of Cookies and local storage. The behavior of each of these cookies and local storage keys are described here.
 
-# Cookies
+## Cookies
 
-Cookies are only stored if `stateStorageStrategy` is set to `cookie`, `cookieAndLocalStorage` (default) or if the deprecated tracker initialization argument `configUseCookies` is set to `true` (default). When using `cookieAndLocalStorage` this will prefer cookie storage for `_sp_id` and `_sp_ses`.
+By default, information will be stored both in cookies and local storage, i.e. `stateStorageStrategy: 'cookieAndLocalStorage'` in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This setting prefers cookie storage for `_sp_id` and `_sp_ses`.
 
-| Cookie Name | Expires                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-|-------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| _sp_id      | 2 years or `cookieLifetime` set on tracker initialization | Stores user information that is created when a user first visits a site and updated on subsequent visits. It is used to identify users and track the users activity across a domain. This cookie stores a unique identifier for each user, a unique identifier for the users current session, the number of visits a user has made to the site, the timestamp of the users first visit, the timestamp of their previous visit and the timestamp of their current visit, references to previous session and first event in the current session, and index of the last event in the session. |
-| _sp_ses | 30 minutes or `sessionCookieTimeout` set on tracker initialization | Used to identify if the user is in an active session on a site or if this is a new session for a user (i.e. cookie doesn't exist or has expired).  
-When using `anonymousTracking: { withSessionTracking: true }` (2.15.0+) this key will contain a _salt_ value which is used to stitch page views into a session. The value is never sent to the collector. |
-| sp | 1 year or `collector.cookie.expiration` set in collector config | Stores a server-side collector generated unique identifier for a user that is sent with all subsequent tracking event events. Can be used as a first party cookie is the collector is on the same domain as the site. Can be disabled by setting `collector.cookie.enabled` to false (See [here](/docs/pipeline-components-and-applications/stream-collector/configure/index.md) for more information). |
+Alternatively, you can specify `localStorage` to have the state stored only in local storage or `cookie` to only use cookies. Finally, you can set `stateStorageStrategy` to `none` in order not to store anything client-side. You may also leverage [`anonymousTracking`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) to control when values are stored in cookies or local storage.
+
+The stored state takes the form of two first party cookies: the session cookie and the ID cookie. By default their names are prefixed with `_sp_`, but you can change this using the `cookieName` field in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). Their names are suffixed with a hash of the current domain, so the full cookie names might look something like `_sp_ses.4209` and `_sp_id.4209`.
+
+| Cookie name | Expires                                                            | Description                                                                                                                                       |
+|-------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| `_sp_id`      | 2 years or `cookieLifetime` set on tracker initialization          | Stores user information that is created when a user first visits a site and updated on subsequent visits.                                         |
+| `_sp_ses`     | 30 minutes or `sessionCookieTimeout` set on tracker initialization | Used to identify if the user is in an active session on a site or if this is a new session for a user (i.e. cookie doesn't exist or has expired). |
+| `sp`          | 1 year or `collector.cookie.expiration` set in collector config    | Stores a server-side collector generated unique identifier for a user that is sent with all subsequent tracking event events.                     |
+
+### Domain ID cookie `_sp_id`
+
+This cookie is called `_sp_id.{{DOMAIN HASH}}` by default. It is used to persist information about a user’s activity on the domain between sessions. It contains the following information:
+
+- An ID for the user (`domainUserId`) based on a v4 (random) UUID. Generated by the [uuid](https://www.npmjs.com/package/uuid) library.
+- How many times the user has visited the domain
+- The timestamp of the user’s first visit
+- The timestamp of the current visit
+- The timestamp of the last visit
+- The ID of the current session
+- ID of the previous session (since version 3.5)
+- ID of the first event in the current session (since version 3.5)
+- Device created timestamp of the first event in the current session (since version 3.5)
+- Index of the last event in the session (used to inspect order of events) (since version 3.5)
 
 `_sp_id` is stored in the format: `{domainUserId}.{createdTime}.{visitCount}.{nowTime}.{lastVisitTime}.{sessionId}.{previousSessionId}.{firstEventId}.{firstEventTsInMs}.{eventIndex}`. Please note that the last 4 parts of the cookie (`previousSessionId`, `firstEventId`, `firstEventTsInMs`, `eventIndex`) are only available since version 3.5 of the tracker.
 
-# Local Storage
+### Session cookie `_sp_ses`
 
-Local Storage will only be used if `stateStorageStrategy` is set to `localStorage`, `cookieAndLocalStorage` (default) or if the deprecated tracker initialization argument `configUseLocaStorage` is set to `true` (default). Both cookies listed above can be stored in local storage rather than as cookies by setting `stateStorageStrategy` to `localStorage`. Local storage can be disabled by setting `stateStorageStrategy` to `cookie` or `none`.
+Called `_sp_ses.{{DOMAIN HASH}}` by default, the only purpose of this cookie is to differentiate between different visits. Whenever an event is fired, the session cookie is set to expire in 30 minutes. (This value can be altered using `setSessionCookieTimeout`)
 
-| Storage Key                                | Description                                                                                                                                                                                                                                                                        |
+If no session cookie is already present when an event fires, the tracker treats this as an indication that long enough has passed since the user last visited that this session should be treated as a new session rather than a continuation of the previous session. The `visitCount` (how many times the user has visited) is increased by one and the `lastVisitTs` (the timestamp for the last session) is updated.
+
+Note: A new session can be started at any time by calling the function `newSession`.
+
+When using [anonymous tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) with session (`anonymousTracking: { withSessionTracking: true }`; available from v2.15.0+) this key will contain a _salt_ value which is used to stitch page views into a session. The value is never sent to the collector. 
+
+### Collector cookie `sp`
+
+There is a third sort of Snowplow-related cookie: the cookie set by the Collector, independently of the JavaScript Tracker. The Collector cookie is called “sp”. It is either a first or third-party cookie, depending on the collector URL (it can be used as a first party cookie is the collector is on the same domain as the site), used to track users over multiple domains.
+
+This cookie can be disabled by setting `collector.cookie.enabled` to false (See [here](/docs/pipeline-components-and-applications/stream-collector/configure/index.md) for more information).
+
+### Opt-out cookie
+
+A fourth cookie can be set that overrides all other settings.
+
+It is possible to set an opt-out cookie in order not to track anything, similarly to Do Not Track, through `setOptOutCookie('opt-out');` where ‘opt-out’ is the name of your opt-out cookie. If this cookie is set, cookies won’t be stored and events won’t be fired.
+
+## Local storage
+
+Local storage will only be used if `stateStorageStrategy` is set to `localStorage` or `cookieAndLocalStorage` (default). Both the ID and session cookies listed above can be stored in local storage rather than as cookies by setting `stateStorageStrategy` to `localStorage`. Local storage can be disabled by setting `stateStorageStrategy` to `cookie` or `none`.
+
+| Storage key                                | Description                                                                                                                                                                                                                                                                        |
 |--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | snowplowOutQueue_{namespace}_post2         | Used to store a cache of unsent events. This is used to reduce the chance of events to be lost due to page navigation and events not being set to the collector before the navigation event occurs. Where GET requests are used, this key will end in `_get` rather than `_post2`. |
-| snowplowOutQueue_{namespace}_post2.expires | Used to match the concept of cookie expiry within Local Storage. This ensures a consistent behavior between cookie and local storage. Where GET requests are used, this key will end in `_get` rather than `_post2`.                                                               |
+| snowplowOutQueue_{namespace}_post2.expires | Used to match the concept of cookie expiry within local storage. This ensures a consistent behavior between cookie and local storage. Where GET requests are used, this key will end in `_get` rather than `_post2`.                                                               |
 
-# Mapping Values to Tracker Protocol
+## Mapping values to tracker protocol
 
 The values stored in the cookies listed above are mapped into the [tracker protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md) when events are sent to a Snowplow Collector.
 
@@ -39,17 +79,3 @@ The below table shows which parameters the cookie values map to:
 | nuid              | network_userid    | sp                  |
 | vid               | domain_sessionidx | _sp_id.visitCount   |
 | sid               | domain_sessionid  | _sp_id.sessionId    |
-
-# Allowing users to Opt Out
-
-The JavaScript tracker offers methods that allow the users to opt out of using cookies (and local storage in the case of _sp_id and _sp_ses).
-
-- Anonymous tracking
-- Respecting Do Not Track
-- Set an opt out cookie
-
-Read how to configure these [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
-
-# Further Information
-
-How the JavaScript tracker utilizes these cookies to store state as well as information on how to retrieve the values can be found below.

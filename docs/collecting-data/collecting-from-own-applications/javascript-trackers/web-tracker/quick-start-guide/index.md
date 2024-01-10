@@ -12,6 +12,12 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
+## Quick start (plus modelling!)
+
+We recommend looking at the [Advanced Analytics for Web accelerator](https://docs.snowplow.io/accelerators/web/) to walk through tracking and modelling web events. It's a more in depth look at how to use Snowplow than this page.
+
+## Quick start (basic)
+
 Follow these instructions to quickly implement a Snowplow web tracker with default configuration, and track a page view.
 
 <Tabs groupId="platform" queryString>
@@ -22,9 +28,9 @@ Getting started with sending events using the JavaScript tracker is very similar
 The process involves the following high level steps:
 
   - Download the latest version of the Snowplow JavaScript tracker file, `sp.js`, which can be found [here](https://github.com/snowplow/snowplow-javascript-tracker/releases).
-  - If you are already hosting static files somewhere on your own domain, it should just be a matter of downloading and adding the `sp.js` file. Otherwise you can follow our [guides for self hosting](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/index.md), use another method of your choice, or leverage a [Third Party CDN](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/third-party-cdn-hosting/index.md) (useful for evaluation or testing).
+  - If you are already hosting static files somewhere on your own domain, it should just be a matter of downloading and adding the `sp.js` file. Otherwise you can follow our [guides for self hosting](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/index.md), use another method of your choice, or leverage a [Third Party CDN](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/third-party-cdn-hosting/index.md) (useful for evaluation or testing).
   - Once you have a JS tracker available, you can add the tag snippet to your site. There are also alternative options described below for adding the tracker to your website.
-  - If manually inserting the tag into your website or tag management solution: Snowplow BDP users can generate a tag snippet in the Snowplow BDP Console [here](https://console.snowplowanalytics.com/tag-generator). Other users can use and edit the standard tag [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/index.md).
+  - If manually inserting the tag into your website or tag management solution: Snowplow BDP users can generate a tag snippet in the Snowplow BDP Console [here](https://console.snowplowanalytics.com/tag-generator). Other users can use and edit the standard tag [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/index.md).
 
 ```javascript
  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[]; p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments) };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1; n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow")); 
@@ -51,9 +57,9 @@ window.snowplow('trackPageView');
 
 Rather than adding the tag snippet directly, you may wish to use an alternative option for loading the JavaScript Tracker.
 
-- Users of Google Tag Manager can use the [Snowplow Analytics Custom Template](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/index.md).
+- Users of Google Tag Manager can use the [Snowplow Analytics Custom Template](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/index.md).
 
-- Use the Snowplow Plugin in the [analytics npm package](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/snowplow-plugin-for-analytics-npm-package/index.md).
+- Use the Snowplow Plugin in the [analytics npm package](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/snowplow-plugin-for-analytics-npm-package/index.md).
 
 
   </TabItem>
@@ -91,3 +97,61 @@ trackPageView();
 
   </TabItem>
 </Tabs>
+
+## What's tracked with the default configuration?
+
+Using just the initialization snippets above won't result in any events, unless `trackPageView` is called.
+
+However, we recommend that [activity tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) (page pings) is enabled immediately following initialization.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)">
+
+  ```javascript
+  <!-- Snowplow starts plowing -->
+  <script type="text/javascript">
+  ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
+  p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
+  };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1;
+  n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
+
+  snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+      appId: 'my-app-id',
+  });
+
+  snowplow('enableActivityTracking', {
+    minimumVisitLength: 30,
+    heartbeatDelay: 10
+  });
+
+  // snowplow('trackPageView') can then be called
+
+  </script>
+  <!-- Snowplow stops plowing -->
+  ```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)" default>
+
+```javascript
+import {
+  newTracker,
+  trackPageView
+} from '@snowplow/browser-tracker';
+
+newTracker('sp', '{{collector_url_here}}', {
+    appId: 'my-app-id',
+});
+
+enableActivityTracking({
+  minimumVisitLength: 30,
+  heartbeatDelay: 10
+});
+
+// trackPageView() can then be called
+```
+  </TabItem>
+</Tabs>
+
+Adding this code to your site will cause [page ping events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) to be automatically tracked and sent via POST.
+
+If using the Browser tracker, the events will all have the `webPage` context entity attached, containing the page view ID. If using the JavaScript tracker, the page pings will have the `webPage` as well as `performanceTiming`, `gaCookies`, and `clientHint` entities. Read more about these entities [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#auto-tracked-entities).

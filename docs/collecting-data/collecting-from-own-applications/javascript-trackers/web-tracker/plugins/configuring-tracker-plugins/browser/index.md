@@ -11,9 +11,17 @@ There are two ways to add plugins to the browser tracker:
 - During tracker initialization
 - Dynamically after tracker initialization
 
+## Installation
+
+Plugins must first be installed. For example, to use the Performance Timing plugin, run one of the following commands:
+
+- `npm install @snowplow/browser-plugin-performance-timing`
+- `yarn add @snowplow/browser-plugin-performance-timing`
+- `pnpm add @snowplow/browser-plugin-performance-timing`
+
 ## Tracker initialization
 
-To add a plugin at tracker initialisation, you include the plugin in the `Plugins` array:
+To add the plugin at tracker initialisation, you include the plugin in the `Plugins` array:
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -46,4 +54,20 @@ newTracker('sp', '{{collector_url_here}}', {
 ...
 
 addPlugin({ plugin: PerformanceTimingPlugin() });
+```
+
+## Usage
+
+Some plugins, such as the Performance Timing plugin shown above, work automatically after being added. Others provide methods that can be called once added.
+
+For example, form tracking:
+
+```javascript
+newTracker('sp1', '{{collector_url}}', { 
+  appId: 'my-app-id', 
+  plugins: [ FormTrackingPlugin() ],
+});
+
+// Use the new functions which this plugin includes
+enableFormTracking();
 ```

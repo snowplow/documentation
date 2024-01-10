@@ -311,10 +311,10 @@ They consist of the following events and context entities:
 ## How to track?
 
 * on Web using plugins for our [JavaScript trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md):
-  * [media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/media-tracking/index.md).
-  * [YouTube tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/youtube-tracking/index.md).
-  * [Vimeo tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/vimeo-tracking/index.md).
+  * [media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md) that can be used to track events from any media player.
+  * [HTML5 media tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/index.md).
+  * [YouTube tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md).
+  * [Vimeo tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md).
 * [media tracking APIs on our iOS and Android trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
 
 ## Modeled data using the snowplow-media-player dbt package

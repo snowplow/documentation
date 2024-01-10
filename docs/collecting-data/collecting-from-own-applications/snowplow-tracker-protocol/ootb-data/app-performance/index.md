@@ -38,7 +38,7 @@ Enables tracking web performance metrics categorized as [Web Vitals](https://web
 
 #### How to track?
 
-Use the [Web vitals plugin for the JavaScript tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/web-vitals/).
+Use the [Web vitals plugin for the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/web-vitals/index.md).
 
 #### Modeled data using the snowplow-web dbt package
 
@@ -62,7 +62,7 @@ This plugin will add Performance Navigation Timing contexts to tracked events.
 
 #### How to track?
 
-Using the [Performance Navigation Timing plugin for the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/performance-navigation-timing/index.md).
+Using the [Performance Navigation Timing plugin for the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/index.md).
 
 ## Manually tracked timing events
 

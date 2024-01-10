@@ -219,7 +219,7 @@ Anonymous tracking can be toggled on and off. The methods to control this behavi
 
 `anonymousTracking: { withSessionTracking: true }`
 
-This mode will continue to track session information in the client side but will track no user identifiers. To achieve this, the tracker will use Cookies or Local Storage. For session tracking, `stateStorageStrategy` must be either `cookieAndLocalStorage` (default), `localStorage` or `cookie`. If this feature is enabled and the storage strategy is not appropriate, then full anonymous tracking will occur.
+This mode will continue to track session information in the client side but will track no user identifiers. To achieve this, the tracker will use Cookies or local storage. For session tracking, `stateStorageStrategy` must be either `cookieAndLocalStorage` (default), `localStorage` or `cookie`. If this feature is enabled and the storage strategy is not appropriate, then full anonymous tracking will occur.
 
 The Snowplow JavaScript Tracker performs sessionization client side. This allows anonymous session tracking to be done using client side storage without sending any user identifier fields to the collector.
 
@@ -454,9 +454,9 @@ To explicitly enable tracking for prerendered pages you can use `setCountPreRen
 snowplow('setCountPreRendered', true);
 ```
 
-#### Limiting Local Storage queue size
+#### Limiting local storage queue size
 
-Because most browsers limit Local Storage to around 5mb per site, you may want to limit the number of events the tracker will queue in local storage if they fail to send. The default is a max queue size of 1000, but you may wish to reduce this if your web application also makes use local storage. To do so, you should set the optional `maxLocalStorageQueueSize` field of the configuration object is set to your desired value (e.g. 500).
+Because most browsers limit local storage to around 5mb per site, you may want to limit the number of events the tracker will queue in local storage if they fail to send. The default is a max queue size of 1000, but you may wish to reduce this if your web application also makes use local storage. To do so, you should set the optional `maxLocalStorageQueueSize` field of the configuration object is set to your desired value (e.g. 500).
 
 #### Reset Page Ping on Page View
 

@@ -203,6 +203,52 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/* /docs/getting-started-on-community-edition/:splat 301
 /docs/getting-started-on-community-edition/what-is-snowplow-open-source/* /docs/getting-started-on-community-edition/what-is-community-edition/:splat 301
 
+# Breaking up JS docs megapages
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/additional-options/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/installing-the-tracker/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/:splat 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/hosting-the-javascript-tracker/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/:splat 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/* /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/:splat 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/snowplow-plugin-for-analytics-npm-package/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/snowplow-plugin-for-analytics-npm-package/ 301
+
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/ad-tracking/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ads/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/button-click/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/button-click/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/client-hints/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/consent/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/debugger/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/testing-debugging/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/ecommerce/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/enhanced-consent/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/enhanced-ecommerce/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/enhanced/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/error-tracking/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/errors/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/form-tracking/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/form-tracking/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/ga-cookies/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ga-cookies/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/geolocation/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/focalmeter/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/focalmeter/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/link-click-tracking/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/link-click/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/media/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/media-tracking/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/optimizely-classic/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/optimizely/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/optimizely-x/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/optimizely/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/performance-timing/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/performance-navigation-timing/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/privacy-sandbox/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/privacy-sandbox/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/site-tracking/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/timezone/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/vimeo-tracking/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/web-vitals/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/web-vitals/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/youtube-tracking/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/* /docs/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/:splat 301
+
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/how-the-tracker-stores-state/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/getting-the-userid-from-the-snowplow-cookie/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/ 301
+
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/advanced-usage/using-an-id-service/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/advanced-usage/optional-timestamp-argument/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#adding-custom-timestamps-to-events 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/advanced-usage/tracker-information/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#getting-user-id-once-set 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/advanced-usage/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/ 301
+
 # DS Builder
 /docs/understanding-tracking-design/versioning-your-data-structures/cloud/* /docs/understanding-tracking-design/versioning-your-data-structures/builder/:splat 301
 /docs/understanding-tracking-design/managing-your-data-structures/builder/* /docs/understanding-tracking-design/managing-your-data-structures/ui/builder/:splat 301

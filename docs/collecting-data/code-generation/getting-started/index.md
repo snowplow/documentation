@@ -9,12 +9,10 @@ Snowtype is a command-line interface that assists developers in implementing cus
 
 ## Installation
 
-The Snowtype CLI is distributed through `npm` and `brew`. You can choose either one depending on your needs. 
+The Snowtype CLI is distributed through `npm` and soon `brew`. You can choose either one depending on your needs. 
 
 ```sh
-npm install @snowtype/cli --save-dev
-# or 
-brew install @snowtype/cli
+npm install @snowplow/snowtype --save-dev
 ```
 
 _We will show example commands using `npm` but it should work the same with either system._

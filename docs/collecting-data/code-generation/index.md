@@ -15,3 +15,7 @@ import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
 ```
+
+## Getting help or giving feedback
+
+If you run into any problems, have any questions or want to request a new feature please do sign up on [discourse](https://discourse.snowplow.io/) and add your topic.

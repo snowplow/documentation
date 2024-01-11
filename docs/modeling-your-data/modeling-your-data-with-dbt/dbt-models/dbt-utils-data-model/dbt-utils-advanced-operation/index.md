@@ -482,7 +482,7 @@ In Redshift & Postgres, due to the [shredded table design](https://docs.snowplow
 
 | Key | Description | Example |
 | ----------------------- | ----------------------------- | ----------------------------- |
-| `name` | The name denotes the name of the entity or SDE that you would like to join, which should also be the name of the table that is in your warehouse. | `contexts_com_mycompany_click_1` |
+| `schema` | The schema denotes the name of the entity or SDE that you would like to join, which should also be the name of the table that is in your warehouse. | `contexts_com_mycompany_click_1` |
 | `prefix` | The prefix that each field in the context will receive. E.g with a prefix of `my_click` and a field name of `id`, this field will be accessible in the `snowplow_base_events_this_run` table under the `my_click_id` column. | `my_click` |
 | `alias` | The alias that is used for the context table join, for reference in your custom SQL queries. | `mc` |
 | `single_entity` | A boolean to say whether this is a single entity or whether there can be multiple for each event. | `true` |
@@ -496,7 +496,7 @@ So, taking the example values from the table above, you could define your `snowp
 ```yml title="dbt_project.yml"
 vars:
     ...
-    snowplow__entities_or_sdes: [{'name': 'contexts_com_mycompany_click_1', 'prefix': 'click', 'alias': 'mc', 'single_entity': true}]
+    snowplow__entities_or_sdes: [{'schema': 'contexts_com_mycompany_click_1', 'prefix': 'click', 'alias': 'mc', 'single_entity': true}]
     ...
 ...
 ```
@@ -508,7 +508,7 @@ Once you've added in the entities or self-describing events that you want to lev
 ```yml title="dbt_project.yml"
 vars:
     ...
-    snowplow__entities_or_sdes: [{'name': 'contexts_com_mycompany_click_1', 'prefix': 'my_click', 'alias': 'mc', 'single_entity': true}]
+    snowplow__entities_or_sdes: [{'schema': 'contexts_com_mycompany_click_1', 'prefix': 'my_click', 'alias': 'mc', 'single_entity': true}]
     snowplow__custom_sql: "mc.my_click_id || '_' || domain_sessionid as click_session_id"
     ...
 ...
@@ -574,7 +574,7 @@ from base_events
 ```yml title="dbt_project.yml"
 vars:
     ...
-    snowplow__entities_or_sdes: [{'name': 'contexts_com_mycompany_click_1', 'prefix': 'my_click', 'alias': 'mc', 'single_entity': true}]
+    snowplow__entities_or_sdes: [{'schema': 'contexts_com_mycompany_click_1', 'prefix': 'my_click', 'alias': 'mc', 'single_entity': true}]
     ...
 ...
 ```

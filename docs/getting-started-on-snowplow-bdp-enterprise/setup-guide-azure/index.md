@@ -31,7 +31,7 @@ Snowplow deploys into your tenant using a verified [application service principl
 Snowplow requests customers grant our verified application service principle access into your Azure tenant. Once granted you should see the application service principle under Microsoft Entra ID ~> Enterprise Applications.
 
 1. Grab your Azure tenant ID by navigating to Microsoft Entra ID
-2. Complete the conset URL where `<TenantID>` == your tenant ID. The `client_id` set is for "Snoplow BDP Enterprise Deployment" application service principle
+2. Complete the consent URL where `<TenantID>` == your tenant ID. The `client_id` set is for "Snowplow BDP Enterprise Deployment" application service principle
     ```
     https://login.microsoftonline.com/<TenantID>/oauth2/authorize?client_id=0581feb4-b614-42c7-b8e7-b4e7fba9153a&response_type=code
     ```
@@ -40,7 +40,7 @@ Snowplow requests customers grant our verified application service principle acc
 
 #### Create and Assign Role to Application Service Principle
 
-Create a custom role and assign it to allow the Snowplow application service principle the ability to create roles to deploy and manage infrastructure resources that make up your pipeline.
+Create a custom role and assign it the "Snowplow BDP Enterprise Deployment" application service principle under your subscription. This allows the permission of creating distinct roles for deploying and managing infrastructure resources that make up your pipeline.
 
 1. Navigate to your newly created subscription
 2. Click into "Access Control (IAM)"
@@ -79,7 +79,7 @@ Create a custom role and assign it to allow the Snowplow application service pri
 
 ### Final checklist
 
-If you are sending a request to our team to set up deployment into your Azure account. Please ensure you provide the following information:
+If you are sending a request to our team to set up deployment into your Azure account, please ensure you provide the following information:
 1. The tenant ID
 2. The subscription ID
 3. Azure region to deploy into

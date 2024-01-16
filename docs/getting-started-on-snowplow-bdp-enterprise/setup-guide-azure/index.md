@@ -1,6 +1,5 @@
 ---
 title: "Setup Snowplow BDP on Azure"
-date: "2024-01-11"
 sidebar_position: 30
 ---
 
@@ -14,21 +13,21 @@ To get your cloud environment ready for your Snowplow pipeline to be installed:
 
 ### Create a new account
 
-Please create a new Azure account and tenant segregated from anything else you have running in Azure. For the latest documentation on setting up a new account and tenant please refer to the Azure documentation [here](https://azure.microsoft.com/).
+Please create a new Azure account and tenant segregated from anything else you have running in Azure. For the latest documentation on setting up a new account and tenant please refer to the [Azure documentation](https://azure.microsoft.com/).
 
 
 ### Enable billing for the account
 
-Please enable billing in the tenant by creating a subscription as failing to do so will prevent the pipeline from being installed. For details on enabling billing for your tenant, please refer to the Azure documentation for [subscriptions](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription).
+Please enable billing in the tenant by creating a subscription. Otherwise, the pipeline will fail to deploy. For details on enabling billing for your tenant, please refer to the Azure documentation for [subscriptions](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription).
 
 
 ### Set up Access and Required Permissions
 
-Snowplow deploys into your tenant using a verified [application service principle](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#service-principal-object) (Enterprise application). We require a custom role to be assigned to the application service principle to allow creation of custom pipeline roles needed for deploying and managing different components of your infrastructure.
+Snowplow deploys into your tenant using a verified [application service principal](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#service-principal-object) (Enterprise application). We require a custom role to be assigned to the application service principal. This will allow us to create custom pipeline roles needed for deploying and managing different components of your infrastructure.
 
 #### Consent to Snowplow BDP Enterprise Deployment application
 
-Snowplow requests customers grant our verified application service principle access into your Azure tenant. Once granted you should see the application service principle under Microsoft Entra ID ~> Enterprise Applications.
+You will need to grant our verified application service principal the access into your Azure tenant. Once that’s done, you should see the application service principal under _Microsoft Entra ID_ → _Enterprise Applications_.
 
 1. Grab your Azure tenant ID by navigating to Microsoft Entra ID
 2. Complete the consent URL where `<TenantID>` == your tenant ID. The `client_id` set is for "Snowplow BDP Enterprise Deployment" application service principle
@@ -40,12 +39,12 @@ Snowplow requests customers grant our verified application service principle acc
 
 #### Create and Assign Role to Application Service Principle
 
-Create a custom role and assign it the "Snowplow BDP Enterprise Deployment" application service principle under your subscription. This allows the permission of creating distinct roles for deploying and managing infrastructure resources that make up your pipeline.
+Create a custom role and assign it the "Snowplow BDP Enterprise Deployment" application service principal under your subscription. This grants the permission to create distinct roles for deploying and managing infrastructure resources that make up your pipeline.
 
 1. Navigate to your newly created subscription
 2. Click into "Access Control (IAM)"
-3. +Add custom role
-4. Create the following role which allows Snowplow to create various roles that are specific to components that make up your pipeline. The `customer_subscription_id` should be the subscription ID that Snowplow will deploy into
+3. Click “Add custom role”
+4. Create the following role, which allows Snowplow to create various roles that are specific to components that make up your pipeline. The `customer_subscription_id` should be the subscription ID that Snowplow will deploy into
     ```json
     {
         "properties": {
@@ -73,8 +72,8 @@ Create a custom role and assign it the "Snowplow BDP Enterprise Deployment" appl
         }
     }
     ```
-5. Within "Access Control (IAM)" click +Add role assignment
-6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principle "Snowplow BDP Enterprise Deployment"
+5. Within “Access Control (IAM)”, click “Add role assignment”
+6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”
 
 
 ### Final checklist

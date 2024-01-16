@@ -28,6 +28,12 @@ Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS a
 * For Community Edition, see [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
 * For Snowplow BDP, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through the Console.
 
+:::note
+
+Destinations Hub is the recommended way to setup GTM Server-side because it allows you to take full advantage of the Snowplow pipeline, and forward validated and enriched data to downstream destinations.
+
+:::
+
 ### Server Side Tag Manager (Pre-pipeline)
 
 Use GTM SS to relay raw events before the Snowplow pipeline to destinations, including to your Snowplow pipeline.
@@ -36,7 +42,7 @@ Use GTM SS to relay raw events before the Snowplow pipeline to destinations, inc
 
 :::info For Snowplow BDP customers
 
-GTM SS **should** be deployed into a different account to the Snowplow sub-account to maintain full segmentation of the infrastructure that Snowplow manages from that which is managed by the Snowplow customer.  
+GTM SS **should** be deployed into a different account to the Snowplow sub-account to maintain full segmentation of the infrastructure that Snowplow manages from that which is managed by the Snowplow customer.
 
 It would be possible to set up a separate VPC within the Snowplow sub-account but it is discouraged. VPC peering would be required to keep the traffic private otherwise traffic would go over public internet.
 

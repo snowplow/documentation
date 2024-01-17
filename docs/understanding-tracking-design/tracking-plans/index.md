@@ -1,6 +1,6 @@
 ---
 title: "Creating a tracking plan with tracking scenarios"
-sidebar_label: "Creating a tracking plan 🆕"
+sidebar_label: "Creating a tracking plan"
 sidebar_position: 25
 sidebar_custom_props:
   offerings:

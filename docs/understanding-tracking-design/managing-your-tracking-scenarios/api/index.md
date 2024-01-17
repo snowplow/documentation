@@ -1,6 +1,6 @@
 ---
 title: "Managing tracking scenarios via the API"
-sidebar_label: "Using the API 🆕"
+sidebar_label: "Using the API"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:

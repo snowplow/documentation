@@ -6,6 +6,18 @@ sidebar_position: 0
 
 This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [example configs in github](https://github.com/snowplow-incubator/iglu-server/tree/master/config) show how to prepare an input file.
 
+## License
+
+Iglu Server is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/contributing/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run Iglu Server, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
+
+```hcl
+license {
+  accept = true
+}
+```
+
 ## Common options
 
 | parameter | description |
@@ -13,6 +25,8 @@ This is a complete list of the options that can be configured in the Iglu Server
 | `repoServer.interface` | Optional. Default: `0.0.0.0`. Address on which the server listens to http connections. |
 | `repoServer.port` | Optional. Default: `8080`. Port on which the server listens. |
 | `repoServer.idleTimeout` | Default: `30 seconds`. TCP connections are dropped after this timeout expires. In case Iglu Server runs behind a load balancer, this should slightly exceed the load balancer's idle timeout. |
+| `repoServer.hsts.enable` _(since 0.12.0)_ | Default: `false`. Whether to send an [HSTS header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security). |
+| `repoServer.hsts.maxAge` _(since 0.12.0)_ | Default: `365 days`. The maximum age for the HSTS header. |
 | `database.type` | Optional. Default: `postgres`. Can be changed to `dummy` during development for in-memory only storage. |
 | `database.host` | Required. Host name for Postgres database. |
 | `database.port` | Optional. Default: `5432`. Port for Postgres database. |

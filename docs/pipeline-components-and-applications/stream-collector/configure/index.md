@@ -26,6 +26,8 @@ collector {
 | `collector.ssl.enable` | Optional. Default: `false`. The collector will also listen for https requests on a different port. |
 | `collector.ssl.port` | Optional. Default: `443`. The port on which to listen for https requests. |
 | `collector.ssl.redirect` | Optional. Default: `false`. If enabled, the collector redirects http requests to the https endpoint using a `301` status code. |
+| `collector.hsts.enable` _(since 3.1.0)_ | Default: `false`. Whether to send an [HSTS header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security). |
+| `collector.hsts.maxAge` _(since 3.1.0)_ | Default: `365 days`. The maximum age for the HSTS header. |
 | `collector.paths` | Optional. More details about this feature below. This is for customising the collector's endpoints. You can also map any valid (ie, two-segment) path to one of the three default paths. |
 | `collector.p3p.policyRef` | Optional. Default: `/w3c/p3p.xml`. Configures the p3p http header. |
 | `collector.p3p.CP` | Optional. Default: `NOI DSP COR NID PSA OUR IND COM NAV STA`. Configures the p3p http header. |

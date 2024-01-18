@@ -3,7 +3,6 @@ import Admonition from '@theme/Admonition';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import RDBLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/_diagram.md';
-import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md"
 ```
 
 <>{props.warehouse != 'Redshift' && (
@@ -23,7 +22,6 @@ import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md"
     <RDBLoaderDiagram {...props} stream="Pub/Sub" bucket="GCS" queue="Pub/Sub"/>
   </TabItem>)}
   {props.warehouse == 'Snowflake' && (<TabItem value="azure" label="Azure">
-    <AzureExperimental/>
     <RDBLoaderDiagram {...props} stream="Kafka" bucket="Azure Blob Storage" queue="Kafka"/>
   </TabItem>)}
 </Tabs>

@@ -73,7 +73,7 @@ You can very easily edit the script or run each of the Terraform modules indepen
 </Tabs>
 
 </TabItem>
-<TabItem value="azure" label="Azure 🧪">
+<TabItem value="azure" label="Azure">
 
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="snowflake" label="Snowflake" default>
@@ -86,7 +86,7 @@ You can very easily edit the script or run each of the Terraform modules indepen
 <Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
 
   </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics 🧪" default>
+  <TabItem value="synapse" label="Synapse Analytics" default>
 
 <Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
 
@@ -220,7 +220,7 @@ If you selected Redshift, Snowflake or Databricks as your destination, the loade
 If you selected BigQuery as your destination, the _Bad Rows_ stream will contain events that could not be inserted into BigQuery by the loader. This includes data that is not valid against its schema or that is somehow corrupted in a way that the loader cannot handle. In addition, the loader users a few streams internally, as explained in the [loading process](/docs/storing-querying/loading-process/index.md?warehouse=bigquery).
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 No other streams.
 
@@ -251,7 +251,7 @@ If you choose Postgres as your destination, the Postgres loader will load all [f
 If you choose BigQuery as your destination, there will be a “dead letter” GCS bucket. It will have the suffix `-bq-loader-dead-letter` and will contain events that the loader fails to be insert into BigQuery, _but not_ any other kind of failed events. To store all failed events, you will need to manually deploy the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 Currently, [failed events](/docs/understanding-your-pipeline/failed-events/index.md) are only available in the `bad` Kafka / Event Hubs topic.
 
@@ -319,7 +319,7 @@ See the Lake Loader [Terraform module](https://registry.terraform.io/modules/sno
 The Terraform stack for the pipeline will deploy a storage account and a storage container where the loader will write the data.
 
   </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics 🧪">
+  <TabItem value="synapse" label="Synapse Analytics">
 
 [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is an application that loads enriched events into a data lake so that they can be queried via Synapse Analytics (or Fabric, OneLake, etc).
 

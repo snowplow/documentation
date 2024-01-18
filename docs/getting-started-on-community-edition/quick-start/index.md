@@ -6,7 +6,6 @@ sidebar_position: 2
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md";
 import TrySnowplow from "@site/docs/reusable/try-snowplow/_index.md";
 ```
 
@@ -54,9 +53,7 @@ Configure a Google Cloud service account. See [details on using the service acco
 
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
-
-<AzureExperimental/>
+  <TabItem value="azure" label="Azure">
 
 Install the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
 
@@ -92,7 +89,7 @@ The sections below will guide you through setting up your destination to receive
 | Databricks | :white_check_mark: | :x: | :white_check_mark: |
 | Redshift | :white_check_mark: | — | — |
 | BigQuery | — | :white_check_mark: | — |
-| Synapse Analytics 🧪 | — | — | :white_check_mark: |
+| Synapse Analytics | — | — | :white_check_mark: |
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
@@ -109,7 +106,7 @@ There are two alternative storage options for you to select: Postgres and BigQue
 We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 There are two storage options for you to select: Snowflake and data lake (ADLS). The latter option enables querying data from Databricks and Synapse Analytics.
 
@@ -131,7 +128,7 @@ AWS provides a [default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/de
 GCP provides a [default VPC](https://cloud.google.com/vpc/docs/vpc#default-network) for your project. In the steps below, it is sufficient to set `network = default` and leave subnetworks empty, and Terraform will discover the correct network to deploy into.
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 Azure does not provide a default VPC or resource group, so we have added a helper module to create a working network we can deploy into.
 
@@ -189,7 +186,7 @@ nano terraform.tfvars # or other text editor of your choosing
 ```
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 ```bash
 cd terraform/azure/iglu_server
@@ -251,7 +248,7 @@ terraform apply
 ```
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 ```bash
 terraform init
@@ -462,7 +459,7 @@ GRANT MODIFY, SELECT ON TABLE  <catalog>.<schema>.rdb_folder_monitoring TO `<pri
 </details>
 
   </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics 🧪">
+  <TabItem value="synapse" label="Synapse Analytics">
 
 No extra steps needed. Proceed with [deploying the pipeline](#set-up-the-pipeline) — we will return to configuring Synapse [at the end of this guide](#configure-the-destination).
 
@@ -494,7 +491,7 @@ nano terraform.tfvars # or other text editor of your choosing
 ```
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 ```bash
 cd terraform/azure/pipeline
@@ -573,7 +570,7 @@ Set the `postgres_db_authorized_networks` to a list of CIDR addresses that will 
 :::
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 As mentioned [above](#storage-options), there are two options for the pipeline’s destination: Snowflake and data lake (the latter enabling Databricks and Synapse Analytics). For each destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `snowflake_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
 
@@ -615,7 +612,7 @@ terraform apply
 This will output your `collector_ip_address`, `postgres_db_address`, `postgres_db_port`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`.
 
   </TabItem>
-  <TabItem value="azure" label="Azure 🧪">
+  <TabItem value="azure" label="Azure">
 
 ```bash
 terraform init
@@ -689,7 +686,7 @@ LOCATION 'abfss://lake-container@<storage-account-name>.dfs.core.windows.net/eve
 :::
 
   </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics 🧪">
+  <TabItem value="synapse" label="Synapse Analytics">
 
 Your data is loaded into ADLS. To access it, follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function.
 

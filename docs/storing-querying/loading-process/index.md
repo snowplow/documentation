@@ -51,7 +51,7 @@ We load data into Snowflake using the [RDB Loader](/docs/pipeline-components-and
 <RDBLoaderDiagram format="JSON" warehouse="Snowflake"/>
 
   </TabItem>
-    <TabItem value="synapse" label="Synapse Analytics 🧪">
+    <TabItem value="synapse" label="Synapse Analytics">
 
 We load data into Synapse Analytics using the [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md).
 

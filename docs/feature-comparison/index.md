@@ -24,12 +24,12 @@ To find out more about the support services offered to Snowplow BDP customers se
 | • Redshift | ✅ | ✅| ✅ |
 | • BigQuery | ✅ | ❌ | ✅ |
 | • Databricks | ✅ | ✅ | ✅ |
-| • Synapse Analytics 🧪 | ✅ | ❌ | _coming soon_ |
+| • Synapse Analytics | ✅ | ❌ | ✅ |
 | • Elasticsearch | ✅ | ❌ | ✅ |
 | • Postgres | ✅<br/>_(not suitable for high volumes)_ | ❌ | ❌ |
 | • S3 | ✅ | ❌ | ✅ |
 | • GCS | ✅ | ❌ | ✅ |
-| • ADLS 🧪 | ✅ | ❌ | _coming soon_ |
+| • ADLS / OneLake | ✅ | ❌ | ✅ |
 | **Real-time streams** | | | |
 | • Kinesis | ✅ | ❌ | ✅ |
 | • Pubsub | ✅ | ❌ | ✅ |
@@ -55,7 +55,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | Deployment method | self-hosted | Snowplow-hosted cloud | private cloud |
 | • AWS | ✅ | — | ✅ |
 | • GCP | ✅ | — | ✅ |
-| • Azure 🧪 | ✅ | — | _coming soon_ |
+| • Azure | ✅ | — | ✅ |
 | Single Sign-On | ❌ | ❌ | ✅ |
 | Fine grained user permissions (ACLs) | ❌ | ❌ | ✅<br/>_(top tier only)_ |
 | Custom VPC integration | ❌ | ❌ | ✅<br/>_(bolt-on)_ |

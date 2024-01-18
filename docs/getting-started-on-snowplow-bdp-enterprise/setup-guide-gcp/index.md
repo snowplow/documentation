@@ -1,7 +1,7 @@
 ---
-title: "Setup Snowplow BDP on GCP" 
+title: "Setup Snowplow BDP on GCP"
 date: "2020-01-30"
-sidebar_position: 20
+sidebar_position: 30
 coverImage: "gcp_logo.png"
 ---
 

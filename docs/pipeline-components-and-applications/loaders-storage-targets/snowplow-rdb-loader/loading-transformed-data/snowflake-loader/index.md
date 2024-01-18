@@ -8,12 +8,9 @@ sidebar_position: 20
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 import AutoSchemaCreation from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/_automatic-schema-creation.md';
-import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md";
 ```
 
 It is possible to run Snowflake Loader on AWS, GCP and Azure.
-
-<AzureExperimental/>
 
 ### Setting up Snowflake
 

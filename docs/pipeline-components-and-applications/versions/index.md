@@ -83,7 +83,7 @@ Component | Latest version
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
-<TabItem value="azure" label="Azure 🧪">
+<TabItem value="azure" label="Azure">
 
 <ReactMarkdown children={`
 Component | Latest version

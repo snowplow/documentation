@@ -7,7 +7,6 @@ description: "An overview of the available options for storing Snowplow data in 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import AzureExperimental from "@site/docs/reusable/azure-experimental/_index.md";
 ```
 
 Data warehouses and data lakes are primary destinations for Snowplow data. For other options, see the [destinations overview](/docs/understanding-your-pipeline/destinations/index.md) page.
@@ -41,9 +40,7 @@ The cloud selection is for where your Snowplow pipeline runs. The warehouse itse
 | Postgres | Streaming | [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | Not recommended for production use |
 
   </TabItem>
-    <TabItem value="azure" label="Azure 🧪">
-
-<AzureExperimental/>
+    <TabItem value="azure" label="Azure">
 
 | Destination | Type | Loader application | Status |
 | --- | --- | --- | --- |
@@ -74,9 +71,7 @@ All lake loaders are micro-batching.
 | GCS | JSON | BigQuery | [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | Only recommended for [failed events](/docs/understanding-your-pipeline/failed-events/index.md) |
 
   </TabItem>
-    <TabItem value="azure" label="Azure 🧪">
-
-<AzureExperimental/>
+    <TabItem value="azure" label="Azure">
 
 | Lake | Format | Compatibility | Loader application | Status |
 | --- | --- | --- | --- | --- |

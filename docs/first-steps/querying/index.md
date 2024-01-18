@@ -105,7 +105,7 @@ There are two different ways to login to the database:
 See the [Databricks tutorial](https://docs.databricks.com/getting-started/quick-start.html) for more details on how to connect. The documentation on [Unity Catalog](https://docs.databricks.com/data-governance/unity-catalog/queries.html) is also useful.
 
   </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics 🧪">
+  <TabItem value="synapse" label="Synapse Analytics">
 
 In Synapse Analytics, you can connect directly to the data residing in ADLS. You will need to know the names of the storage account (set in the `storage_account_name` Terraform variable) and the storage container (it’s a fixed value: `lake-container`).
 

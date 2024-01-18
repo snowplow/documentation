@@ -119,7 +119,7 @@ FROM
 ```
 
 </TabItem>
-<TabItem value="synapse" label="Synapse Analytics 🧪">
+<TabItem value="synapse" label="Synapse Analytics">
 
 Each type of self-describing event is in a dedicated column in JSON format. The column name will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
 
@@ -250,7 +250,7 @@ FROM
 ```
 
 </TabItem>
-<TabItem value="synapse" label="Synapse Analytics 🧪">
+<TabItem value="synapse" label="Synapse Analytics">
 
 Each type of entity is in a dedicated column in JSON format. The column name will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
 
@@ -420,7 +420,7 @@ QUALIFY ROW_NUMBER() OVER (PARTITION BY a.event_id ORDER BY a.collector_tstamp) 
 ```
 
 </TabItem>
-<TabItem value="synapse" label="Synapse Analytics 🧪">
+<TabItem value="synapse" label="Synapse Analytics">
 
 In Synapse you must first generate a `ROW_NUMBER()` on your events and use this to de-duplicate.
 

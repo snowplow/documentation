@@ -196,7 +196,7 @@ For example, suppose you have the following field in the schema:
 It will be translated into an object with a `lastName` key that points to a value of type `VARIANT`.
 
   </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics 🧪">
+  <TabItem value="synapse" label="Synapse Analytics">
 
 Each type of self-describing event and each type of entity get their own dedicated columns in the underlying data lake table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
 
@@ -338,7 +338,7 @@ Also, creating a new major version of the schema (and hence a new column) is the
 :::
 
   </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics 🧪">
+  <TabItem value="synapse" label="Synapse Analytics">
 
 Because the column name for the self-describing event or entity includes the major schema version, each major version of a schema gets a new column:
 
@@ -450,7 +450,7 @@ In this case, the `RECORD` field will be nullable. It does not matter if `"null"
 All fields are nullable (because they are stored inside the `VARIANT` type).
 
   </TabItem>
-  <TabItem value="synapse" label="Synapse Analytics 🧪">
+  <TabItem value="synapse" label="Synapse Analytics">
 
 All fields are nullable (because they are stored inside the JSON-formatted column).
 
@@ -509,7 +509,7 @@ _If content size is longer than 4096 it would be truncated when inserted into th
 }
 ```
 
-OR 
+OR
 
 ```json
 {
@@ -1289,7 +1289,7 @@ _`P` is rounded up to either `9`, `18` or `38`._
 
 - `P` &gt;38, where is the maximum precision (total number of digits) of `M` and `N`, adjusted for scale (number of digits after the `.`) of `F`.
 - `S` is the maximum scale (number of digits after the `.`) in the enum list and it is greater than 0.
- 
+
 <details>
 <summary>More details</summary>
 
@@ -1634,7 +1634,7 @@ Arrays can be nullable. Nested fields can also be nullable (same rules as for ev
 }
 ```
 
-OR 
+OR
 
 ```json
 {
@@ -1725,7 +1725,7 @@ _Values will be quoted as in JSON._
 All types are `VARIANT`.
 
 </TabItem>
-<TabItem value="synapse" label="Synapse Analytics 🧪">
+<TabItem value="synapse" label="Synapse Analytics">
 
 All types are `NVARCHAR(4000)` when extracted with [`JSON_VALUE`](https://learn.microsoft.com/en-us/sql/t-sql/functions/json-value-transact-sql?view=azure-sqldw-latest#return-value).
 

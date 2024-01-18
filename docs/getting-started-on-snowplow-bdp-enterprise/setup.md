@@ -10,8 +10,10 @@ Follow the links below for guidance on what is necessary to configure. The proce
 
 * [AWS Setup Guide](/docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-aws/index.md)
 * [GCP Setup Guide](/docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-gcp/index.md)
+* [Azure Setup Guide](/docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-azure/index.md)
 
 Once you've set up your cloud environment, you can request the new pipeline to be added via the Snowplow BDP user interface:
 
 - [Request a pipeline on AWS](https://console.snowplowanalytics.com/pipelines/AWS/new)
 - [Request a pipeline on GCP](https://console.snowplowanalytics.com/pipelines/gcp/new)
+- [Request a pipeline on Azure](https://console.snowplowanalytics.com/pipelines/azure/new)

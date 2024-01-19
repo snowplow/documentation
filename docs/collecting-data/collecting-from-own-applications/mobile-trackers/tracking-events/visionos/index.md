@@ -1,29 +1,29 @@
 ---
-title: "VisionOS tracking"
+title: "isionOS tracking"
 sidebar_position: 110
 ---
 
-# VisionOS tracking
+# visionOS tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 :::note
-Snowplow VisionOS tracking was added in version 6.0.0.
+Snowplow visionOS tracking was added in version 6.0.0.
 :::
 
-The Snowplow iOS tracker supports tracking within VisionOS apps. All the usual events, including screen views, can be tracked as for any SwiftUI app. We've also provided additional events and entities to help you understand your VisionOS users.
+The Snowplow iOS tracker supports tracking within visionOS apps. All the usual events, including screen views, can be tracked as for any SwiftUI app. We've also provided additional events and entities to help you understand your visionOS users.
 
 The immersive space context entity can be semi-automatically added to all events.
 
-## VisionOS events
+## visionOS events
 
 The events are: `OpenWindowEvent`, `DismissWindowEvent`, `OpenImmersiveSpaceEvent`, and `DismissImmersiveSpaceEvent`.
 
 ### Window events
 
-Track the opening and dismissing of SwiftUI window groups using `OpenWindowEvent` and `DismissWindowEvent`. These events can be used in any SwiftUI app, not just VisionOS. The event data is sent as a window group context entity (see below) attached to these events; the events themselves have no properties.
+Track the opening and dismissing of SwiftUI window groups using `OpenWindowEvent` and `DismissWindowEvent`. These events can be used in any SwiftUI app, not just visionOS. The event data is sent as a window group context entity (see below) attached to these events; the events themselves have no properties.
 
 #### OpenWindowEvent
 
@@ -48,7 +48,7 @@ let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https:/
 
 let event = DismissWindowEvent(
     id: "group 1", // window group ID
-    uuid: UUID(), // optional UUID
+    windowId: UUID(), // optional UUID
     titleKey: "window 1", // optional window title
     windowStyle: WindowStyle.automatic // optional style of the window group
 )
@@ -91,7 +91,7 @@ let tracker = Snowplow.createTracker(
 
 let event = OpenImmersiveSpaceEvent(
     id: "group 1", // space ID
-    uuid: UUID(), // optional UUID
+    viewId: UUID(), // optional UUID
     immersionStyle: ImmersionStyle.automatic, // optional
     upperLimbVisibility: UpperLimbVisibility.hidden // optional
 )
@@ -110,9 +110,9 @@ tracker.track(DismissImmersiveSpaceEvent())
 
 If the immersive space entity autotracking is off (default), the `Open` and `Dismiss` events can still be tracked. However, only the `OpenImmersiveSpaceEvent` will have the entity. The events themselves have no properties.
 
-The VisionOS methods `openImmersiveSpace` and `dismissImmersiveSpace` are asynchronous. We advise that you write your tracking code such that the Snowplow immersive space events await those methods' completion, for accurate tracking.
+The visionOS methods `openImmersiveSpace` and `dismissImmersiveSpace` are asynchronous. We advise that you write your tracking code such that the Snowplow immersive space events await those methods' completion, for accurate tracking.
 
-## VisionOS entities
+## visionOS entities
 
 ### Window group entity
 
@@ -124,7 +124,7 @@ The window group entity contains information about the window group that the tra
 | Request Key | Required | Type/Format | Description                                                       |
 |-------------|----------|-------------|-------------------------------------------------------------------|
 | id          | Y        | string      | Uniquely identifies the window group.                             |
-| uuid        | N        | string uuid | UUID for the current window within the group.                     |
+| windowId    | N        | string uuid | UUID for the current window within the group.                     |
 | titleKey    | N        | string enum | The window's title in system menus and in the window's title bar. |
 | windowStyle | N        | string enum | The appearance and interaction style of a window.                 |
 
@@ -143,7 +143,7 @@ The immersive space entity contains information about the immersive space that t
 | Request Key         | Required | Type/Format | Description                                                      |
 |---------------------|----------|-------------|------------------------------------------------------------------|
 | id                  | Y        | string      | The immersive space ID.                                          |
-| uuid                | N        | string uuid | UUID for the view of the immersive space.                        |
+| viewId              | N        | string uuid | UUID for the view of the immersive space.                        |
 | immersionStyle      | N        | string enum | Immersive space style.                                           |
 | upperLimbVisibility | N        | string enum | Preferred visibility of the user's upper limbs within the space. |
 

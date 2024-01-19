@@ -74,7 +74,7 @@ Automatically captured data are:
 * [**Screen View Tracking**](./screen-tracking/index.md): Captures each time a new “screen” is loaded.
 * [**Exception Tracking**](./exception-tracking/index.md): Captures any unhandled exceptions within the application.
 * [**Installation Tracking**](./installation-tracking/index.md): Captures an install event which occurs the first time an application is opened.
-* [**Immersive Space Tracking**](./visionos/index.md): iOS only. Captures the VisionOS immersive space in which events occur.
+* [**Immersive Space Tracking**](./visionos/index.md): iOS only. Captures the visionOS immersive space in which events occur.
 
 Autotracking can be enabled in the tracker configuration. In this example, some helpful automatic entities and all autotracking is enabled:
 

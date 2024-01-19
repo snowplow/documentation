@@ -71,3 +71,27 @@ newTracker('sp1', '{{collector_url}}', {
 // Use the new functions which this plugin includes
 enableFormTracking();
 ```
+
+Others may accept configuration passed directly to the constructor, such as Web Vitals or Google Analytics Cookies:
+
+```javascript
+import { PerformanceTimingPlugin } from '@snowplow/browser-plugin-performance-timing';
+import { WebVitalsPlugin } from '@snowplow/browser-plugin-web-vitals';
+
+newTracker('sp', '{{collector_url_here}}', {
+  appId: 'my-app-id',
+  plugins: [ GaCookiesPlugin({ ga4: true, ua: false }) ]
+});
+
+// after initialization:
+addPlugin({
+  plugin: WebVitalsPlugin({ context: [
+    function(vitals) { return {
+      schema: "iglu:com.example/page_speed/jsonschema/1-0-0",
+      data: {
+        speed: vitals.fid < 2 ? "fast" : "slow"
+      }
+    };},
+  ]})
+});
+```

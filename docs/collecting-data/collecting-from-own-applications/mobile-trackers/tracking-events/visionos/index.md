@@ -15,11 +15,9 @@ Snowplow visionOS tracking was added in version 6.0.0.
 
 The Snowplow iOS tracker supports tracking within visionOS apps. All the usual events, including screen views, can be tracked as for any SwiftUI app. We've also provided additional events and entities to help you understand your visionOS users.
 
-The immersive space context entity can be semi-automatically added to all events.
+The immersive space context entity is semi-automatically added to all events.
 
-## visionOS events
-
-The events are: `OpenWindowEvent`, `DismissWindowEvent`, `OpenImmersiveSpaceEvent`, and `DismissImmersiveSpaceEvent`.
+The events are: `OpenWindowEvent`, `DismissWindowEvent`, `OpenImmersiveSpaceEvent`, and `DismissImmersiveSpaceEvent`. Find the schema details for the events and entities [here](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/visionos-swiftui/index.md).
 
 ### Window events
 
@@ -38,8 +36,6 @@ let event = OpenWindowEvent(
 )
 tracker.track(event)
 ```
-*Schema:*
-`iglu:com.apple.swiftui/open_window/jsonschema/1-0-0`.
 
 #### DismissWindowEvent
 
@@ -54,9 +50,6 @@ let event = DismissWindowEvent(
 )
 tracker.track(event)
 ```
-
-*Schema:*
-`iglu:com.apple.swiftui/dismiss_window/jsonschema/1-0-0`.
 
 Determining which events occurred in which window group can be done during modelling using these two event types and timestamps. You could also manually add a window group context entity to tracked events.
 
@@ -78,16 +71,13 @@ Read more about customized tracking [here](docs/collecting-data/collecting-from-
 
 ### Immersive space events
 
-Use the `OpenImmersiveSpaceEvent` and `DismissImmersiveSpaceEvent` to automatically add an immersive space context entity to all events occurring within an immersive space. The entity will identify the immersive space in which the events occurred. This feature is off by default.
+Use the `OpenImmersiveSpaceEvent` and `DismissImmersiveSpaceEvent` to automatically add an immersive space context entity to all events occurring within an immersive space. The entity will identify the immersive space in which the events occurred. This feature is enabled by default.
 
 ```swift
 let tracker = Snowplow.createTracker(
   namespace: "appTracker", 
   endpoint: "https://snowplow-collector-url.com"
-) {
-  // configure the automatic immersive space context entity
-  TrackerConfiguration().immersiveSpaceContext(true)
-}
+)
 
 let event = OpenImmersiveSpaceEvent(
     id: "group 1", // space ID
@@ -104,50 +94,8 @@ tracker.track(event)
 tracker.track(DismissImmersiveSpaceEvent())
 ```
 
-*Schemas:*
-`iglu:com.apple.swiftui/open_immersive_space/jsonschema/1-0-0` and 
-`iglu:com.apple.swiftui/dismiss_immersive_space/jsonschema/1-0-0`.
+If the immersive space entity autotracking is turned off, the `Open` and `Dismiss` events can still be tracked. However, only the `OpenImmersiveSpaceEvent` will have the entity. The events themselves have no properties.
 
-If the immersive space entity autotracking is off (default), the `Open` and `Dismiss` events can still be tracked. However, only the `OpenImmersiveSpaceEvent` will have the entity. The events themselves have no properties.
+The tracker automatically generates a `viewId` each time a new immersive space entity is created. You could also pass in your own UUID.
 
 The visionOS methods `openImmersiveSpace` and `dismissImmersiveSpace` are asynchronous. We advise that you write your tracking code such that the Snowplow immersive space events await those methods' completion, for accurate tracking.
-
-## visionOS entities
-
-### Window group entity
-
-The window group entity contains information about the window group that the tracked event occurred in.
-
-<details>
-    <summary>Window group entity properties</summary>
-
-| Request Key | Required | Type/Format | Description                                                       |
-|-------------|----------|-------------|-------------------------------------------------------------------|
-| id          | Y        | string      | Uniquely identifies the window group.                             |
-| windowId    | N        | string uuid | UUID for the current window within the group.                     |
-| titleKey    | N        | string enum | The window's title in system menus and in the window's title bar. |
-| windowStyle | N        | string enum | The appearance and interaction style of a window.                 |
-
-</details>
-
-*Schema:*
-`iglu:com.apple.swiftui/window_group/jsonschema/1-0-0`.
-
-### Immersive space entity
-
-The immersive space entity contains information about the immersive space that the tracked event occurred in.
-
-<details>
-    <summary>Immersive space entity properties</summary>
-
-| Request Key         | Required | Type/Format | Description                                                      |
-|---------------------|----------|-------------|------------------------------------------------------------------|
-| id                  | Y        | string      | The immersive space ID.                                          |
-| viewId              | N        | string uuid | UUID for the view of the immersive space.                        |
-| immersionStyle      | N        | string enum | Immersive space style.                                           |
-| upperLimbVisibility | N        | string enum | Preferred visibility of the user's upper limbs within the space. |
-
-</details>
-
-*Schema:*
-`iglu:com.apple.swiftui/immersive_space/jsonschema/1-0-0`.

@@ -74,4 +74,14 @@ import {versions} from '@site/src/componentVersions';
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
+
+<TabItem value="attribution" label="Snowplow Attribution">
+
+<ReactMarkdown children={`
+| snowplow-attribution version       | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| ------------------------------------ | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
+| ${versions.dbtSnowplowAttribution} | >=1.6.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |
+`} remarkPlugins={[remarkGfm]} />
+
+</TabItem>
 </Tabs>

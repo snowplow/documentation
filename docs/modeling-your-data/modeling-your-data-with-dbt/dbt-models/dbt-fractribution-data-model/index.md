@@ -86,7 +86,7 @@ The package currently offers 5 different attribution models, that can be chosen 
 ​
 <p align="center">
 <ThemedImage
-alt='Data processing model for the normalize package'
+alt='Data processing model for the fractibution package'
 sources={{
   light: require('./images/attribution_models_light.png').default,
   dark: require('./images/attribution_models_dark.png').default

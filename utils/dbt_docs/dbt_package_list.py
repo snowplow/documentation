@@ -5,6 +5,7 @@ all_packages = [
     ('snowplow/snowplow_web', 'dbt-snowplow-web'),
     ('snowplow/snowplow_mobile', 'dbt-snowplow-mobile'),
     ('snowplow/snowplow_normalize', 'dbt-snowplow-normalize'),
+    ('snowplow/snowplow_attribution', 'dbt-snowplow-attribution'),
     ('snowplow/snowplow_fractribution', 'dbt-snowplow-fractribution'),
     ('snowplow/snowplow_ecommerce', 'dbt-snowplow-ecommerce'),
     ('snowplow/snowplow_media_player', 'dbt-snowplow-media-player'),

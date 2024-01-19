@@ -1,5 +1,5 @@
 ---
-title: "isionOS tracking"
+title: "visionOS tracking"
 sidebar_position: 110
 ---
 

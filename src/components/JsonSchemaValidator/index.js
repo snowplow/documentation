@@ -203,7 +203,6 @@ export function JsonToTable({ children, versionedSchema }) {
               includeHeaders: true,
             }}
             getRowHeight={() => 'auto'}
-            pagination
             pageSizeOptions={[5, 10, 25, 50, 100]}
             rows={rows
               .filter(row => row.group === header) // Filter rows based on 'group' property

@@ -13,11 +13,11 @@ The Marketing Dashboards app contains all the visuals you need to perform a high
   - (**Recommended**) Running the [Snowplow Unified Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with:
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
-    - (optional) A conversion event defined, with `snowplow__total_all_conversions` set to `true`
+    - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`
   - Running the [Snowplow Web Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) with:
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
-    - (optional) A conversion event defined, with `snowplow__total_all_conversions` set to `true`
+    - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`
 - Access to the derived tables granted to the role used when setting up the data app
 
 ## Usage
@@ -39,7 +39,7 @@ All configurations can be found in the Setup page.
 - Toggle between using campaign or channel for reporting aggregation
 - Use tables produced by the web package instead of the unified package
 
-## Contents
+<!-- ## Contents
 ### Acquisition
 This page contains reporting relating to acquisition of users, both new and returning.
 
@@ -56,4 +56,4 @@ Reporting on the technology users are using to access your site/app are displaye
 Information about the Users such as their location is reported in this page.
 
 ### Setup
-This page contains all information to validate you have the correct data to run the app, as well as allowing you to change data sources and other configuration settings for the app.
+This page contains all information to validate you have the correct data to run the app, as well as allowing you to change data sources and other configuration settings for the app. -->

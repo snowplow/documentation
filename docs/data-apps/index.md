@@ -21,7 +21,7 @@ import DocCardList from '@theme/DocCardList';
 
 ## General Usage
 ### Help
-<Icon icon="fa-regular fa-circle-question"/> Our apps provide useful help text throughout the apps, keep an eye out for the help icon to provide more context or help in using some functionality.
+Our apps provide useful help text throughout the apps, keep an eye out for the help icon (<Icon icon="fa-regular fa-circle-question"/>) to provide more context or help in using some functionality.
 
 ### Log Out
 If you wish to Log out of the application, you can do this on the `Account` page of any application. Note this also logs you out of Console.

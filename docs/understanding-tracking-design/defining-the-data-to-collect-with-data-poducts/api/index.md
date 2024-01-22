@@ -1,5 +1,5 @@
 ---
-title: "Managing data products via the API"
+title: "Managing Data Products via the API"
 sidebar_label: "Using the API"
 sidebar_position: 2
 sidebar_custom_props:
@@ -17,7 +17,7 @@ Partnered with other tools like our [CI tool](/docs/managing-data-quality/testin
 
 You can have a look at and interact with all available endpoints in the [API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs).
 
-Authorizing in the API documentation
+### Authorizing in the API documentation
 
 To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual requests is overwritten by this authorization.
 
@@ -48,9 +48,13 @@ To retrieve a comprehensive list of all data products in your organization, you 
 
 `**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1`
 
+Query parameter `organizationId` is required.
+
 ### Retrieving Information about a Specific Data Product
 
 `**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}`
+
+Query parameters `organizationId` and `dataProductId` are required.
 
 ### Retrieve History Information for a Data Product
 
@@ -65,11 +69,13 @@ You can pass several parameters to control the result of the response:
 - **offset**: skip the first N results
 - **order**: order of returned records, `asc` or `desc`. Defaults to `desc`.
 
+Query parameter `organizationId` is required.
+
 ## Creating and updating Data Products
 
 ### Creating a Data Product
 
-This `POST`` request allows you to create a new data product within an organization.
+This `POST` request allows you to create a new data product within an organization.
 
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1`
 
@@ -95,7 +101,7 @@ See the [detailed API documentation](https://console.snowplowanalytics.com/api/m
 
 ### Delete a Data Product
 
-Use this request to delete a data product. The `dataProductId` is required.
+Use this request to delete a data product. The `dataProductId` and `organizationId` are both required.
 
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}`
 
@@ -103,36 +109,36 @@ Use this request to delete a data product. The `dataProductId` is required.
 
 ### Retrieve All Subscriptions for a Data Product
 
-To retrieve all subscriptions for a data product, use the following request. The `dataProductId` is required.
+To retrieve all subscriptions for a data product, use the following request. The `organizationId` and `dataProductId` are required.
 
 `**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions`
 
 ### Add a Subscription
 
-To add a subscription for a data product, use the following request. The `dataProductId` and a valid request body are required.
+To add a subscription for a data product, use the following request. The `organizationId`, `dataProductId` and a valid request body are required.
 
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions`
 
 ### Update a Subscription
 
-To update a subscription for a specific data product, use the following request. The `subscriptionId`, `dataProductId`, and a valid request body are required.
+To update a subscription for a specific data product, use the following request. The `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
 
 `**PUT** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}`
 
 ### Delete a Subscription
 
-To delete a subscription for a specific data product, use the following request. The `subscriptionId`, `dataProductId`, and a valid request body are required.
+To delete a subscription for a specific data product, use the following request. The `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
 
 `**DELETE** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}`
 
 ### Resend a Subscription Confirmation Email
 
-To resend a subscription confirmation email, use the following request.
+To resend a subscription confirmation email, use the following request. The `organizationId`, `subscriptionId`, `dataProductId` are required.
 
 `**POST** ​/api​/msc​/v1/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}/actions/resend-confirmation`
 
 ### Integration with the SDK Generator
 
-To send emails with instructions for the SDK generator, use the following request. The `dataProductId` and a valid request body are required.
+To send emails with instructions for the SDK generator, use the following request. The `organizationId` amd `dataProductId` and a valid request body are required.
 
 `**POST** /organizations/{organizationId}/data-products/v1/{dataProductId}/share-instructions`

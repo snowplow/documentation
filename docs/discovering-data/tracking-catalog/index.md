@@ -7,7 +7,7 @@ description: "The Tracking Catalog will provide your team with easy and self ser
 
 :::note
 
- Please note that the Tracking Catalog is available only for BDP Customers on selected Tiers. If you're unsure about your eligibility, please get in touch with your Customer Success Manager.
+Please note that the Tracking Catalog is available only for BDP Customers on selected Tiers. If you're unsure about your eligibility, please get in touch with your Customer Success Manager.
 
 :::
 

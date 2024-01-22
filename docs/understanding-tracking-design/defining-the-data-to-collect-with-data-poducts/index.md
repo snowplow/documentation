@@ -1,9 +1,10 @@
 ---
-title: "🆕 Defining the data to collect with Data Products"
+title: "Defining the Data to collect with Data Products"
 sidebar_position: 2
+sidebar_label: "🆕 Defining the Data to collect with Data Products"
 ---
 
-As described in [Data Products introduction](/docs/understanding-your-pipeline/data-products/), a data product is a logical grouping of the data you collect as an organisation by domain, with an explicit owner. 
+As described in [Data Products Introduction](/docs/understanding-your-pipeline/data-products/), a data product is a logical grouping of the data you collect as an organisation by domain, with an explicit owner. 
 
 With data products, you can:
 
@@ -13,9 +14,7 @@ With data products, you can:
 * More easily communicate what the data means and how to use it
 * Collaborate more effectively with the various teams involved in delivering value from your data
 
-## Elements of a data product
-
-![Elements of a data product](images/data-product-elements.png)
+## Elements of a Data Product
 
 **Data product**
 

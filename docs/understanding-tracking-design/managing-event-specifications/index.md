@@ -1,6 +1,6 @@
 ---
-title: "Managing Tracking Scenarios"
-sidebar_label: "Managing tracking scenarios"
+title: "Managing Event Specifications"
+sidebar_label: "🆕 Managing Event Specifications"
 sidebar_position: 95
 sidebar_custom_props:
   offerings:

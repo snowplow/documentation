@@ -1,6 +1,7 @@
 ---
-title: "🆕 Data Products introduction"
+title: "Data Products Introduction"
 sidebar_position: 7
+sidebar_label: "🆕 Data Products Introduction"
 description: "Snowplow's data products enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
 ---
 
@@ -37,9 +38,8 @@ With a data product, you can:
 * Subscribe to the data product to receive notifications when changes are being made
 * View a change log to understand how the data has changed over time
 
-## Key elements of a data product
 
-![Elements of a data product diagram](images/data-product-elements.png)
+## Key elements of a Data Product
 
 **An owner**; data products are typically split by domain with each data product having an explicit owner that is responsible for the maintenance and evolution of that data.
 
@@ -51,7 +51,7 @@ With a data product, you can:
 
 **Benefits:**
 
-* Provide implementation details to developers implementing tracking (see section on Snowtype for further details)
+* Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/collecting-data/code-generation) for further details)
 * Provide documentation around the semantics of the data that you are creating, to enable analysts, data scientists, analytics engineers with data discoverability
 
 **Subscribers;** these describe people who are interested in this Data product or who are actively using the data in other ways.
@@ -68,8 +68,6 @@ With a data product, you can:
 
 ## How data products help with governance, data quality and data discoverability
 
-![Data products and governance](images/data-product-governance.png)
-
 The **data structures** that you attach to your event specification describe the [structure of the data](/docs/understanding-your-pipeline/schemas/). They validate that the values of the properties contained within your events and entities are **valid** as they pass through your pipeline.
 
 The **event specification** describes a specific implementation of an event. It is a narrower definition of your event than a data structure - not only do they describe the structure of the data (by attaching the relevant data structure to validate against), they also allow you to define the **right values** for fields when the event gets triggered and the entities that need to be attached.
@@ -78,6 +76,6 @@ The **event specification** describes a specific implementation of an event. It 
 
 By adding screenshots, and descriptions to the event specification, you are also able to communicate the **semantics of the data** to those that want to analyse it. In this way you can ensure that the data is **represented accurately** when being used to derive insights and make decisions by the many teams using the data downstream.
 
-A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your ‘product’ entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products. 
+A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products. 
 
-To understand how to get started with data products, see [Defining the data to collect with Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/) for further details.
+To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/) for further details.

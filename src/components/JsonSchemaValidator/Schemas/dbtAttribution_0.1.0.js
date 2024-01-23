@@ -164,7 +164,7 @@ export const Schema = {
     snowplow__spend_source: {
       title: 'Conversions Source',
       description: 'Source of marketing spend table',
-      longDescription: 'The source (schema and table) of your marketing spend source. Optional, needed for the ROAS calculation of the snowplow_attribution_overview. Should be changed to a table reference with `spend` by `channel` and/or `campaign` by `spend_timestamp` (which denotes a timestamp field) information.',
+      longDescription: 'The source (schema and table) of your marketing spend source. Optional, needed for the ROAS calculation of the snowplow_attribution_overview. Should be changed to a table reference with `spend` by `channel` and/or `campaign` by `spend_tstamp` (which denotes a timestamp field) information.',
       type: 'string',
       packageDefault: "{{ source('atomic', 'events') }}",
       group: 'Warehouse and Tracker',

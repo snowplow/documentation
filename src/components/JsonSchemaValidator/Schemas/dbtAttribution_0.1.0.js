@@ -177,7 +177,7 @@ export const Schema = {
     snowplow__conversion_stitching: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
-      longDescription: 'This should align with the variable of the same name inside the unfied package. If allowed it will consider the stitched_user_id field, not the user_identifier in the source data for more accurate results.',
+      longDescription: 'This should align with the variable of the same name inside the unified package. If allowed it will consider the stitched_user_id field, not the user_identifier in the source data for more accurate results.',
       packageDefault: 'false',
       title: 'Conversion Stitching',
     },

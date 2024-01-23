@@ -135,7 +135,7 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 <AttributionDbtMacros/>
 ```
 ## Output
-### Incemental data models to prepare for attribution analysis:
+### Incremental data models to prepare for attribution analysis:
 
 1. The `derived.snowplow_attribution_paths_to_conversion` model will aggregate the paths the customer has followed that have lead to conversion based on the path transformation and other limitations such as the path_lookback_step or path_lookback_days variable. It basically combines the path and conversion source tables to produce an outcome like this:
 

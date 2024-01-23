@@ -31,7 +31,7 @@ The Snowplow Attribution dbt package produces a set of incremental derived table
 
 This package consists of a series of dbt models that produce the following tables:
 
-- `snowplow_attribution_paths_to_conversion`: Customer id and the the paths the customer has followed that have lead to conversion
+- `snowplow_attribution_paths_to_conversion`: Customer id and the paths the customer has followed that have led to conversion
 - `snowplow_attribution_campaign_attributions`: By campaign path and conversion level incremental table that attributes the conversion value based on various algorythms
 - `snowplow_attribution_channel_attributions`: By channel path and conversion level incremental table that attributes the conversion value based on various algorithms
 - `snowplow_attribution_overview`: The user defined report view (potenitally showing ROIs)

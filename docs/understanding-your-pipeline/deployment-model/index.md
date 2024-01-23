@@ -34,7 +34,7 @@ BDP Cloud differs from BDP Enterprise above in that the data pipeline is deploye
 
 ## Snowplow Community Edition
 
-With Snowplow Community Edition, everything is deployed and hosted by you. Note that the **control plane** functionality from above is not availble in Community Edition.
+With Snowplow Community Edition, everything is deployed and hosted by you. Note that the **control plane** functionality from above is not available in Community Edition.
 
 |   | Hosted by Snowplow | Hosted by you |
 |:--|:------------------:|:-------------:|

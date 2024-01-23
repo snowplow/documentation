@@ -1,13 +1,4 @@
 export const dbtVersions = {
-    "snowplow/snowplow_attribution": {
-        "0.1.0": {
-            "dbtversion": ">=1.6.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.15.3 <0.16.0"
-            }
-        }
-    },
     "snowplow/snowplow_ecommerce": {
         "0.1.0": {
             "dbtversion": ">=1.0.0 <2.0.0",

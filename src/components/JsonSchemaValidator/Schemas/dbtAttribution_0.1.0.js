@@ -44,15 +44,9 @@ export const Schema = {
       packageDefault: "{{ source('derived', 'snowplow_unified_views') }}",
       group: 'Warehouse and Tracker',
     },
-    snowplow__conversions_source_filter: {
-      type: 'string',
-      title: 'Conversions Source Filter',
-      group: 'Operation and Logic',
-      longDescription: ' A timestamp field the conversion source field is partitioned on (ideally) for optimized filtering, when left blank `derived_tstamp` is used.',
-      packageDefault: 'blank',
-    },
     snowplow__conversion_window_start_date: {
       type: 'string',
+      format: 'date',
       title: 'Conversion Window Start Date',
       group: 'Operation and Logic',
       longDescription: 'The start date in UTC for the window of conversions to include. It is only used for the drop and recompute report tables/views.',
@@ -60,6 +54,7 @@ export const Schema = {
     },
     snowplow__conversion_window_end_date: {
       type: 'string',
+      format: 'date',
       title: 'Conversion Window End Date',
       group: 'Operation and Logic',
       longDescription: 'The end date in UTC for the window of conversions to include. It is only used for the drop and recompute report tables/views.',
@@ -163,7 +158,7 @@ export const Schema = {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
       longDescription: 'If `false`, only considers the channel at the start of the session (i.e. first page view). If `true`, considers multiple channels in the conversion session as well as historically.',
-      packageDefault: 'false',
+      packageDefault: 'true',
       title: 'Consider Intrasession Channels',
     },
     snowplow__spend_source: {
@@ -194,11 +189,11 @@ export const Schema = {
       minItems: 1,
       title: 'Attribution List',
       longDescription: 'List of attribution types to use for reporting. Can be at least one of: first_touch, last_touch, linear, position_based).',
-      packageDefault: '[`first_touch`, `last_touch`, `linear`, `position_based`]',
+      packageDefault: "['first_touch', 'last_touch', 'linear', 'position_based']",
       group: 'Contexts, Filters, and Logs',
       items: { type: 'string' },
     },
-    snowplow_attribution_start_date: {
+    snowplow__attribution_start_date: {
       type: 'string',
       format: 'date',
       title: 'Attribution Start Date',

@@ -17,8 +17,10 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
     <CodeBlock language="yaml">
     {`models:
   snowplow_attribution:
-    +schema: ${derivedSchema}`}
-        </CodeBlock>
+    +schema: ${derivedSchema}
+      manifest:
+        +schema: ${manifestSchema}
+    </CodeBlock>
     </>
   )
 }

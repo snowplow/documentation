@@ -179,7 +179,7 @@ sources={{
 
 ### Drop and recompute reporting tables/views:
 
-1. The `derived.snowplow_attribution_path_summary` shows the campaign/channel paths and the assiciated conversions (an optionally non-conversions, if the `path_to_non_conversions` table is enabled through its related variable `enable_path_to_non_conversions`)
+1. The `derived.snowplow_attribution_path_summary` shows the campaign/channel paths and the associated conversions (an optionally non-conversions, if the `path_to_non_conversions` table is enabled through its related variable `enable_path_to_non_conversions`)
 
 | TRANSFORMED_PATH                   | CONVERSIONS | NON_CONVERSIONS | REVENUE  |
 |------------------------------------|-------------|-----------------|----------|

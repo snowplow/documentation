@@ -42,7 +42,7 @@ In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-qu
 
 ## What is Marketing Attribution?
 
-Marketing attribution determines which marketing tactics are contributing to sales or conversions by analysing the marketing touchpoints a consumer encounters on their journey to purchase. The aim is to determine which channels and marketing campaigns had the greatest impact on the decision to convert. There are many popular attribution models used by marketers which give insight into customers' behaviours, more specifically the pathways they took to purchase the product or service. This allows marketing teams to improve ROAS by changing marketing strategies and campaigns.
+Marketing attribution determines which marketing tactics are contributing to sales or conversions by analysing the marketing touchpoints a consumer encounters on their journey to purchase. The aim is to determine which channels and marketing campaigns had the greatest impact on the decision to convert. There are many popular attribution models used by marketers which give insight into customers' behaviors, more specifically the pathways they took to purchase the product or service. This allows marketing teams to improve ROAS by changing marketing strategies and campaigns.
 
 ## How to do Marketing Attribution with this package?
 
@@ -98,7 +98,11 @@ Once you have the sources ready you need to adjust the package settings that fit
 
 #### Decide on your sessionization logic
 
+<details>
+    <summary>Decide on your sessionization logic</summary>
+
 By default Snowplow only considers the first pageview of a session important from an attribution point of view and disregards campaign information from subsequent page_views. Google Analytics, on the other hand separates session as soon as campaign information is given. Set `var('consider_intrasession_channels')` variable to false in case you would like to follow Snowplow's logic, not GA's. If you opt for this calculation consider changing the `var('snowplow__conversion_path_source')` to `{{ target.schema }}.derived.snowplow_unified_sessions` for performance benefits.
+</details>
 
 #### Decide on your conversion hosts
 
@@ -106,14 +110,21 @@ Use the variable `snowplow__conversion_hosts` to restrict which hosts to take in
 
 #### Filter unwanted / wanted channels & campaigns
 
+<details>
+    <summary>Filter unwanted / wanted channels & campaigns</summary>
+
+
 You can specify a list of channels for the variable `snowplow__channels_to_exclude` to exclude them from analysis (if kept empty all channels are kept). For example, users may want to exclude the 'Direct' channel from the analysis.
 
 You can also do the opposite, filter on certain channels to include in your analysis. You can do so by specifying them in the list captured within the variable `snowplow__channels_to_include`.
 
 You can do either for campaigns, too, with the `snowplow__channels_to_exclude` and `snowplow__channels_to_include` variables.
-​
+</details>
+
 #### Reduce the number of paths to analyze
-​
+
+<details>
+    <summary>Reduce the number of paths to analyze</summary>
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​
  1. `exposure (default)`: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
@@ -124,6 +135,8 @@ You can do either for campaigns, too, with the `snowplow__channels_to_exclude` a
  
  Apart from this, you can also restrict how far in time (`var('snowplow_path_lookback_days')`) and steps (`var('snowplow_path_lookback_steps')`) you want to allow your path to go.
  
+ </details>
+
 #### Other, macro based setup
 
 ```mdx-code-block
@@ -134,7 +147,7 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 ## Output
 ### Incremental data models to prepare for attribution analysis:
 
-1. The `derived.snowplow_attribution_paths_to_conversion` model will aggregate the paths the customer has followed that have lead to conversion based on the path transformation and other limitations such as the path_lookback_step or path_lookback_days variable i.e. it combines the path and conversion source tables to produce an outcome. It looks like this:
+1. The **`derived.snowplow_attribution_paths_to_conversion`** model will aggregate the paths the customer has followed that have lead to conversion based on the path transformation and other limitations such as the path_lookback_step or path_lookback_days variable i.e. it combines the path and conversion source tables to produce an outcome. It looks like this:
 
 | CUSTOMER_ID          | CV_TSTAMP         | REVENUE | CHANNEL_PATH                              | CHANNEL_TRANSFORMED_PATH  | CAMPAIGN_PATH | CAMPAIGN_TRANSFORMED_PATH |
 |----------------------|-------------------|---------|-------------------------------------------|---------------------------|---------------|---------------------------|
@@ -143,7 +156,15 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 | f000170187170673177  | 2022-06-08 20:18  | 50      | Direct > Direct                           | Direct                    | camp2 > camp1 | camp2 > camp1             |
 | f0006148050225777094 | 2022-07-25 07:52  | 140     | Organic_Search > Direct > Organic_Search  | 
 
-2. The `derived.snowplow_attribution_channel_attributions` unnests the paths from paths_to_conversion into their separate rows and calculates the attribution amount for that specific path step for each of the sql based attribution models:
+2. The **`derived.snowplow_attribution_channel_attributions`** unnests the paths from paths_to_conversion into their separate rows and calculates the attribution amount for that specific path step for each of the sql based attribution models:
+
+
+| COMPOSITE_KEY                                       | EVENT_ID                             | CUSTOMER_ID          | CV_TSTAMP               | CV_TOTAL_REVENUE | CHANNEL_TRANSFORMED_PATH         | CHANNEL        | SOURCE_INDEX | PATH_LENGTH | FIRST_TOUCH_ATTRIBUTION | LAST_TOUCH_ATTRIBUTION | LINEAR_ATTRIBUTION | POSITION_BASED_ATTRIBUTION |
+|-----------------------------------------------------|--------------------------------------|----------------------|-------------------------|------------------|----------------------------------|----------------|--------------|-------------|-------------------------|------------------------|--------------------|----------------------------|
+| c3bf5de5-20c7-42d6-9543-afd9ecf133f5Video0          | c3bf5de5-20c7-42d6-9543-afd9ecf133f5 | f0008284662789123943 | 2023-07-07 13:05:55.000 | 200              | Video                            | Video          | 0            | 1           | 200                     | 200                    | 200                | 200                        |
+| 1487c09f-f17f-4c76-990e-55c46f8f621cDisplay_Other0  | 1487c09f-f17f-4c76-990e-55c46f8f621c | f0006911334202687206 | 2023-07-19 04:27:51.000 | 66.5             | Display_Other > Organic_Search   | Display_Other  | 0            | 2           | 66.5                    | 0                      | 33.25  | 33.25 |
+| 1487c09f-f17f-4c76-990e-55c46f8f621cOrganic_Search1 | 1487c09f-f17f-4c76-990e-55c46f8f621c | f0006911334202687206 | 2023-07-19 04:27:51.000 | 66.5 | Display_Other > Organic_Search | Organic_Search | 1 | 2 | 0| 66.5 | 33.25 | 33.25 |
+
 
 **Attribution Models**
 
@@ -164,12 +185,6 @@ sources={{
 />
 </p>
 
-
-| COMPOSITE_KEY                                       | EVENT_ID                             | CUSTOMER_ID          | CV_TSTAMP               | CV_TOTAL_REVENUE | CHANNEL_TRANSFORMED_PATH         | CHANNEL        | SOURCE_INDEX | PATH_LENGTH | FIRST_TOUCH_ATTRIBUTION | LAST_TOUCH_ATTRIBUTION | LINEAR_ATTRIBUTION | POSITION_BASED_ATTRIBUTION |
-|-----------------------------------------------------|--------------------------------------|----------------------|-------------------------|------------------|----------------------------------|----------------|--------------|-------------|-------------------------|------------------------|--------------------|----------------------------|
-| c3bf5de5-20c7-42d6-9543-afd9ecf133f5Video0          | c3bf5de5-20c7-42d6-9543-afd9ecf133f5 | f0008284662789123943 | 2023-07-07 13:05:55.000 | 200              | Video                            | Video          | 0            | 1           | 200                     | 200                    | 200                | 200                        |
-| 1487c09f-f17f-4c76-990e-55c46f8f621cDisplay_Other0  | 1487c09f-f17f-4c76-990e-55c46f8f621c | f0006911334202687206 | 2023-07-19 04:27:51.000 | 66.5             | Display_Other > Organic_Search   | Display_Other  | 0            | 2           | 66.5                    | 0                      | 33.25  | 33.25 |
-| 1487c09f-f17f-4c76-990e-55c46f8f621cOrganic_Search1 | 1487c09f-f17f-4c76-990e-55c46f8f621c | f0006911334202687206 | 2023-07-19 04:27:51.000 | 66.5 | Display_Other > Organic_Search | Organic_Search | 1 | 2 | 0| 66.5 | 33.25 | 33.25 |
 
 3. The `derived.snowplow_attribution_campaign_attributions` does the same, only for campaigns not channels.
 

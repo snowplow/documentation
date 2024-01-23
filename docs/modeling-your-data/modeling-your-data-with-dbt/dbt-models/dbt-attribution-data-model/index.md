@@ -40,6 +40,17 @@ This package consists of a series of dbt models that produce the following table
 
 In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) section you will find a step-by-step guide on how to operate the package as a whole.
 
+<p align="center">
+<ThemedImage
+alt='Package flow'
+sources={{
+  light: require('./images/attribution_package_flow_light.png').default,
+  dark: require('./images/attribution_package_flow_dark.png').default
+}}
+/>
+</p>
+
+
 ## What is Marketing Attribution?
 
 Marketing attribution determines which marketing tactics are contributing to sales or conversions by analysing the marketing touchpoints a consumer encounters on their journey to purchase. The aim is to determine which channels and marketing campaigns had the greatest impact on the decision to convert. There are many popular attribution models used by marketers which give insight into customers' behaviors, more specifically the pathways they took to purchase the product or service. This allows marketing teams to improve ROAS by changing marketing strategies and campaigns.
@@ -121,10 +132,10 @@ You can also do the opposite, filter on certain channels to include in your anal
 You can do either for campaigns, too, with the `snowplow__channels_to_exclude` and `snowplow__channels_to_include` variables.
 </details>
 
-#### Reduce the number of paths to analyze
+#### Transform paths
 
 <details>
-    <summary>Reduce the number of paths to analyze</summary>
+    <summary>Transform paths</summary>
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​
  1. `exposure (default)`: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
@@ -168,6 +179,9 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 
 **Attribution Models**
 
+<details>
+    <summary>Attribution Models</summary>
+
 The package currently offers 4 different attribution models all of which are calculated by default into both the incremental base tables and the report tables. If you would like to filter on them for reporting you can do so with `var('snowplow__attribution_list')`. Please note, however, that they will still be available for the incremental base tables.
 
 - `first_touch`: Assigns 100% attribution to the first channel in each path.
@@ -185,12 +199,13 @@ sources={{
 />
 </p>
 
+</details>
 
-3. The `derived.snowplow_attribution_campaign_attributions` does the same, only for campaigns not channels.
+3. The **`derived.snowplow_attribution_campaign_attributions`** does the same, only for campaigns not channels.
 
 ### Drop and recompute reporting tables/views:
 
-1. The `derived.snowplow_attribution_path_summary` shows the campaign/channel paths and the assiciated conversions (and optionally non-conversions, if the `path_to_non_conversions` table is enabled through its related variable `enable_path_to_non_conversions`)
+1. The **`derived.snowplow_attribution_path_summary`** shows the campaign/channel paths and the assiciated conversions (and optionally non-conversions, if the `path_to_non_conversions` table is enabled through its related variable `enable_path_to_non_conversions`)
 
 | TRANSFORMED_PATH                   | CONVERSIONS | NON_CONVERSIONS | REVENUE  |
 |------------------------------------|-------------|-----------------|----------|
@@ -201,7 +216,7 @@ sources={{
 | Organic_Search > Paid_Search_Other | 0           | 2               | 0        |
 
 
-2. The view called `derived.snowplow_attribution_overview` is tied to a dispatch macro of the same name which lets you overwrite it in your project, if needed. Given you specify your `var('snowplow__spend_source')` it will calculate the ROAS for you for each channel and campaign:
+2. The view called **`derived.snowplow_attribution_overview`** is tied to a dispatch macro of the same name which lets you overwrite it in your project, if needed. Given you specify your `var('snowplow__spend_source')` it will calculate the ROAS for you for each channel and campaign:
 
 
 | PATH_TYPE | ATTRIBUTION_TYPE | TOUCH_POINT| IN_N_CONVERSION_PATHS | ATTRIBUTED_CONVERSIONS | MIN_CV_TSTAMP | MAX_CV_TSTAMP | SPEND | SUM_CV_TOTAL_REVENUE | ATTRIBUTED_REVENUE | ROAS |
@@ -213,4 +228,4 @@ sources={{
 
 ### Manifest table
 
-We have included a manifest table to log information about the setup variables each time the `paths_to_conversion` incremental table runs to help prevent and debug issues.
+We have included a manifest table to log information about the setup variables each time the **`paths_to_conversion`** incremental table runs to help prevent and debug issues.

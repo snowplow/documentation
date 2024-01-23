@@ -62,18 +62,6 @@ import {versions} from '@site/src/componentVersions';
 
 </TabItem>
 
-<TabItem value="fractribution" label="Snowplow Fractribution">
-
-<ReactMarkdown children={`
-| snowplow-fractribution version       | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| ------------------------------------ | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowFractribution} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ❌     |
-| 0.3.0                                | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
-| 0.2.0                                | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
-| 0.1.0                                | >=1.0.0 to <2.0.0 |    ❌     |     ❌      |    ❌     |     ✅     |    ❌     |
-`} remarkPlugins={[remarkGfm]} />
-
-</TabItem>
 
 <TabItem value="attribution" label="Snowplow Attribution">
 

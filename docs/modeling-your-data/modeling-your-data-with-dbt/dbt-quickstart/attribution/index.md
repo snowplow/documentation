@@ -45,7 +45,7 @@ Each of such variables will be explained below, you should edit these in your `d
 - `snowplow__conversions_source`: The source table for the conversions & revenue information. By default it will take values from `{{target.schema ~ '_derived'}}.snowplow_unified_conversions`
 - `snowplow__conversion_hosts`: `url_hosts` to process, if left empty it will include all
 - `snowplow__conversion_clause`: A user defined sql script to filter on specific conversions if needed. Defaulted to 'cv_value > 0'
-- `snowplow__path_transforms`: A dictionary of path transforms and their arguments (see [Path Transform Options](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md#reduce-the-number-of-paths-to-analyze) section)
+- `snowplow__path_transforms`: A dictionary of path transforms and their arguments (see [Transform Paths](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md#transform-paths) section)
 - `snowplow__spend_source`: The optional source table for the spend information used to calculate ROAS in the `snowplow_attribution_overview`. By default it is empty and will not get processed
 
 

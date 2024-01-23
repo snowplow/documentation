@@ -53,7 +53,7 @@ We also have 2 utility packages:
 - [Snowplow Normalize](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-normalize-data-model/index.md) package that makes it easy for you to build models that transform your events data into a different structure that may be better suited for downstream consumers
 - [Snowplow Utils](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/index.md) contains all our shared macros and features used across our packages
 
-There are also 3 legacy dbt packages for web and mobile (superseded by unified):
+There are also 3 legacy dbt packages for web, mobile (superseded by unified) and fractribution (superseeded by attribution):
 - [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web)): for modeling your web data for page views, sessions, users, and consent
 - [Snowplow Mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile)): for modeling your mobile app data for screen views, sessions, users, and crashes
 - [Snowplow Fractribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-fractribution/#!/overview/fractribution)): used for Attribution Modeling with Snowplow

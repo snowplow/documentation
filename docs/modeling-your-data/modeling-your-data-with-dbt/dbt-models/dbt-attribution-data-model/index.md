@@ -48,7 +48,7 @@ Marketing attribution determines which marketing tactics are contributing to sal
 
 In the past have taken Google's attribution model as a base (fractribution) and converted it into a dbt based tool. We considered the dbt-snowplow-fractribution package as an exploratory tool for ad-hoc analysis. The data was modelled then the more complex attribution analysis was run on python for efficiency.
 
-Due to customer demand we have also created this package, where we are taking this a step further as the data model can be run on a continuous basis so that the attribution analysis can be done any time in a cost effective and timely manner without the need of python for several marketing attribution algorythms.
+Due to customer demand we have also created this package, where we are taking this a step further as the data model can be run on a continuous basis so that the attribution analysis can be done any time in a cost effective and timely manner without the need of python for several marketing attribution algorithms.
 
 In the below guide we will walk you through the data transformation process step-by-step in order for your to see how the source data changes downstream to give you and your team a transparent and easy-to-understand way to understand how this package will get you the valuable insights.
 

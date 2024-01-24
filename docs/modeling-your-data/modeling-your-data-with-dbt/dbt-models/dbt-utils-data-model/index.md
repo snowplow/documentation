@@ -10,7 +10,7 @@ import ThemedImage from '@theme/ThemedImage';
 ```
 <Badges badgeType="dbt-package Release" pkg="utils"></Badges>&nbsp;
 <Badges badgeType="Actively Maintained"></Badges>&nbsp;
-<Badges badgeType="SCL"></Badges>
+<Badges badgeType="SPAL"></Badges>
 
 # Snowplow Utils Package
 

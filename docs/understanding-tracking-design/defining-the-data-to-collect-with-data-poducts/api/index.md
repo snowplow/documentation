@@ -48,13 +48,41 @@ To retrieve a comprehensive list of all data products in your organization, you 
 
 `**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1`
 
-Query parameter `organizationId` is required.
+Path parameter `organizationId` is required.
 
 ### Retrieving Information about a Specific Data Product
 
 `**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}`
 
-Query parameters `organizationId` and `dataProductId` are required.
+Path parameters `organizationId` and `dataProductId` are required.
+
+When retrieving a data product, it could also contain an array field `data[].tracking_scenarios` that will include the `id` and `url` of the associated tracking scenarios. For example:
+
+```json
+"data": [
+  ...
+  "trackingScenarios": [
+    {
+      "id": "d1336abc-1b60-46f7-be2d-2105f2daf283",
+      "url": "https://next.console.snowplowanalytics.com/api/msc/v1/organizations/f51dada7-4f11-4b6a-bbbd-2cf6a3673035/tracking-scenarios/v1/d1336abc-1b60-46f7-be2d-2105f2daf283"
+      }
+  ]
+  ...
+]
+```
+
+Under the json path `includes.tracking_scenarios`, the API will also attach the whole tracking scenarios associated:
+
+```json
+"includes": {
+  ...
+  "trackingScenarios": [
+    "id": "d1336abc-1b60-46f7-be2d-2105f2daf283",
+     ...
+  ]
+  ...
+}
+```
 
 ### Retrieve History Information for a Data Product
 
@@ -69,7 +97,7 @@ You can pass several parameters to control the result of the response:
 - **offset**: skip the first N results
 - **order**: order of returned records, `asc` or `desc`. Defaults to `desc`.
 
-Query parameter `organizationId` is required.
+Path parameter `organizationId` is required.
 
 ## Creating and updating Data Products
 
@@ -80,6 +108,8 @@ This `POST` request allows you to create a new data product within an organizati
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1`
 
 The request body is mandatory and should be in JSON format. Here’s an example of how the request body might look:
+
+The request body is mandatory and should be in JSON format. The minimum payload would be a JSON with only the `name` of the data product. There rest of the fields are optional and not required on creation. Example:
 
 ```json
 {
@@ -94,6 +124,8 @@ The request body is mandatory and should be in JSON format. Here’s an example 
 ### Updating a Data Product
 
 Use this request to update a data product. The `dataProductId` is required, along with a valid request body.
+
+The minimum payload on update would be the same as on creation but with the addition of the required `status` field. On creation, by default, it will set the `status` to `draft`.
 
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}`
 
@@ -119,6 +151,25 @@ To add a subscription for a data product, use the following request. The `organi
 
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions`
 
+This is the minimum payload that will create a subscription to the data product of the user that the bearer token has been issued:
+
+```json
+{
+  "reason": "Get notified on breaking changes",
+  "receiveNotifications": true
+}
+```
+
+In case you want to subscribe a third user, you will need to provide another field `recipient` with the email of the user you want to subscribe.
+
+When a subscription is created, it will send a confirmation email to the recipient (default user or third user). When the user clicks the "Confirm button" of the email, it will call the:
+
+`**POST** /organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}/actions/confirm`
+
+endpoint and will set the `isConfirmed`` field to `true`.
+
+Once a subscription is created and the email has been confirmed, the subscriber will start receiving a daily feed email with all the data products that had changes in the last 24 hours.
+
 ### Update a Subscription
 
 To update a subscription for a specific data product, use the following request. The `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
@@ -127,7 +178,7 @@ To update a subscription for a specific data product, use the following request.
 
 ### Delete a Subscription
 
-To delete a subscription for a specific data product, use the following request. The `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
+To delete a subscription for a specific data product (unsubscribe action), use the following request. The `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
 
 `**DELETE** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}`
 

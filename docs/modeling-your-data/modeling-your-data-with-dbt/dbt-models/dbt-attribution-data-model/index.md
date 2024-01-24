@@ -165,7 +165,7 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 | f0009028775170427694 | 2022-06-11 15:33  | 20.42   | Direct                                    | Direct                    | camp1 > camp2 | camp1 > camp2             |
 | f0005094333993051683 | 2022-07-30 11:55  | 24      | Direct > Direct                           | Direct                    | camp1         | camp1                     |
 | f000170187170673177  | 2022-06-08 20:18  | 50      | Direct > Direct                           | Direct                    | camp2 > camp1 | camp2 > camp1             |
-| f0006148050225777094 | 2022-07-25 07:52  | 140     | Organic_Search > Direct > Organic_Search  | 
+| f0006148050225777094 | 2022-07-25 07:52  | 140     | Organic_Search > Direct > Organic_Search  | Organic_Search > Direct > Organic_Search | Campaign 2 > Campaign 2 > Campaign 1 > Campaign 1 | Campaign 2 > Campaign 1
 
 2. The **`derived.snowplow_attribution_channel_attributions`** unnests the paths from paths_to_conversion into their separate rows and calculates the attribution amount for that specific path step for each of the sql based attribution models:
 

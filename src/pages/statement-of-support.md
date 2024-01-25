@@ -24,6 +24,17 @@ You’ll receive notifications by email when a support ticket has been updated, 
 
 Inbound calling is not currently offered as a support channel, however, we may proactively schedule calls with you to troubleshoot complex issues.
 
+## Severity Levels
+
+When you raise a ticket through Snowplow Support, they are prioritized as levels 1 (highest) to 4 (lowest), depending on the severity and impact of the issue or question. These severity levels are defined as follows. Support SLAs are defined in your Product Description and are dependent on these severity levels.
+
+| Severity Level | Description |
+| --- | --- |
+| 1 (Urgent) | Product is not functioning reliably or securely in a production environment, rendering use of the service impossible with no alternative available. |
+| 2 (High) | An error manifests in the product such that production usage is unreliable; or significant product functions do not work or cannot be used. A workaround might exist, but it is complex, requires significant effort or doesn’t always work. Product is functional but data/functionality is partially impacted, or intermittently impacted. |
+| 3 (Normal) | General product usage questions and advice. Otherwise, a minor feature doesn’t work or fails eventually. The issue does not have a significant impact on product usage. There is an easy workaround that always avoids the problem or it happens rarely. |
+| 4 (Low) | Usability errors, screen or report errors that do not materially affect quality and correctness of function, intended use or results. |
+
 ### Version Support
 
 Unless otherwise stated in your contract, we provide official support for software that’s either in its latest version or the preceding version. If you need support for an older version, you may be asked to upgrade the component to a more recent version before we can provide assistance. You can find the [current versions of components](https://docs.snowplow.io/docs/pipeline-components-and-applications/versions/) in our documentation.
@@ -43,7 +54,7 @@ Snowplow Support is committed to serving your needs within the SLA terms outline
 
 Whatever happens, we will keep you in the loop on any changes to your support ticket or incident. If you wish to discuss the priority of a ticket, or otherwise request further attention on it, please reply to the ticket or use the *Please Prioritize* button on that ticket in the [Help Center](https://snowplow.zendesk.com/hc/en-us/requests/).
 
-For details on how we handle Service Level Agreements and Objectives, please see the accompanying [Product Description](#available-services).
+For details on your Service Level Agreements or Objectives, and any associated entitlements, please see the relevant [Product Description](#available-services).
 
 ### Cloud Provider Engagement
 
@@ -118,7 +129,7 @@ The following items are out of scope of the support services offered to Snowplow
 | User access management | Provisioning and removing IAM users in AWS, or Project users in GCP | Although users are managed directly by your team, roles are managed through your pipeline configuration and our team are available to help create and manage roles |
 | AWS reservations | Consulting with AWS and making reservations for AWS resources | We can investigate usage changes over time to provide recommendations so you can lead informed discussions with AWS about making reservations |
 | Proxy management | Managing CloudFlare, Akamai, Fastly reverse proxy in front of the collector endpoint with  custom domains and SSL in the proxy itself | Reverse proxies are supported: we can still add any custom records to our configurations, ensuring we can monitor that endpoints are responding |
-| Lifecycle rules | Configuring lifecycle rules and data retention policies for pipeline infrastructure (e.g. AWS S3) | Our team can provide general recommendations for select components such as AWS S3 buckets (see https://support.snowplow.io/hc/en-us/search/click?data=BAh7DjoHaWRsKwixyNnSUwA6D2FjY291bnRfaWRpAz3fBzoJdHlwZUkiDGFydGljbGUGOgZFVDoIdXJsSSJwaHR0cHM6Ly9zdXBwb3J0LnNub3dwbG93LmlvL2hjL2VuLXVzL2FydGljbGVzLzM2MDAxOTc3MzYxNy01NC0wMS1TMy1CdWNrZXRzLWFuZC1SZWNvbW1lbmRlZC1MaWZlY3ljbGUtUnVsZXMGOwhUOg5zZWFyY2hfaWRJIik5NWUxYzZmZC1hMjBjLTQxZjEtYTg2Zi05NTQyZWY1ZDQ4MjQGOwhGOglyYW5raQY6C2xvY2FsZUkiCmVuLXVzBjsIVDoKcXVlcnlJIg5saWZlY3ljbGUGOwhUOhJyZXN1bHRzX2NvdW50aQ4%3D--8f9d6f90c0372dda984c0052827dbff81b65621b) |
+| Lifecycle rules | Configuring lifecycle rules and data retention policies for pipeline infrastructure (e.g. AWS S3) | Our team can provide general recommendations for select components such as AWS S3 buckets (see [S3 Buckets and Recommended Lifecycle Rules]( https://support.snowplow.io/hc/en-us/articles/360019773617)) |
 | Cost management | Managing or monitoring the infrastructure costs associated with running your pipeline | We are able to provide general recommendations and best practice on right-sizing your infrastructure and storage. As part of our Infrastructure Review service, we are able to make more specific recommendations |
 | Data warehouse migrations | Migration of data from one data warehouse to another, or the loading of historical data into a new data warehouse | Helping you to understand best practices surrounding data reprocessing if it’s required for your pipeline |
 | Pipeline migrations | Migration of pipeline components between sub-accounts within your cloud provider or between cloud providers | Deployment and management of your pipeline in line with our https://snowplow.io/snowplow-bdp-product-description/ |

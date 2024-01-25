@@ -206,7 +206,7 @@ export const Schema = {
     snowplow__enable_paths_to_non_conversion: {
       type: 'boolean',
       group: 'Contexts, Filters, and Logs',
-      longDescription: 'If `true`, enable the paths_to_non_conversion model, which is a drop and recompute table that may be needed for more in-depth attribution analysis (used in the `path_summary` table as well',
+      longDescription: 'If `true`, enable the paths_to_non_conversion model, which is a drop and recompute table that may be needed for more in-depth attribution analysis (used in the `path_summary` table as well)',
       packageDefault: 'false',
       title: 'Enable Paths To Non Conversion',
     },

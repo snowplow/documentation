@@ -135,17 +135,22 @@ You can do either for campaigns, too, with the `snowplow__channels_to_exclude` a
 
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​
- 1. `exposure (default)`: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
+ 1. **`exposure (default)`**: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
 
- 2. `unique`: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
+ 2. **`unique`**: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
 
- 3. `first`: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
+ 3. **`first`**: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
 
- 4. `remove_if_last_and_not_all`: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as it is trying to reach a non-matching channel parameter: E.g target element: `A` path: `A → B → A → A` becomes `A → B`
+ 4. **`remove_if_last_and_not_all`**: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as it is trying to reach a non-matching channel parameter: E.g target element: `A` path: `A → B → A → A` becomes `A → B`
+ 
+ A common requirement is to take the **`last non-direct clicks`** only into account during attribution analysis. If you use the `remove_if_last_and_not_all` path transform with  `direct` as the parameter to remove it from the end of the path (unless they are all direct) the `last-touch` attribution results should show the outcome you need. You can also filter out the direct channels altogether with the `snowplow__channels_to_exclude` variable.
 
- 5. `remove_if_not_all`: requires a channel to be added as a parameter, which gets removed from the path altogether unless it would result in the whole path's removal: E.g target element: `A` path: `A → B → A → A` becomes `B`
+ 5. **`remove_if_not_all`**: requires a channel to be added as a parameter, which gets removed from the path altogether unless it would result in the whole path's removal: E.g target element: `A` path: `A → B → A → A` becomes `B`
 
  Apart from this, you can also restrict how far in time (`var('snowplow_path_lookback_days')`) and steps (`var('snowplow_path_lookback_steps')`) you want to allow your path to go.
+
+
+
 
 </details>
 
@@ -163,10 +168,10 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 
 | customer_id          | cv_tstamp | revenue | channel_path                              | channel_transformed_path  | campaign_path | campaign_transformed_path |
 |----------------------|-----------------------|---------|-------------------------------------------|---------------------------|---------------|---------------------------|
-| user_id1 | 2022-06-11 15:33  | 20.42   | Direct                                    | Direct                    | camp1 > camp2 | camp1 > camp2             |
-| user_id2 | 2022-07-30 11:55  | 24      | Direct > Direct                           | Direct                    | camp1         | camp1                     |
-| user_id3  | 2022-06-08 20:18  | 50      | Direct > Direct                           | Direct                    | camp2 > camp1 | camp2 > camp1             |
-| user_id1 | 2022-07-25 07:52  | 140     | Organic_Search > Direct > Organic_Search  | Organic_Search > Direct > Organic_Search | Campaign 2 > Campaign 2 > Campaign 1 > Campaign 1 | Campaign 2 > Campaign 1
+| user_id1 | '2022-06-11 15:33'  | 20.42   | Direct                                    | Direct                    | camp1 > camp2 | camp1 > camp2             |
+| user_id2 | '2022-07-30 11:55'  | 24      | Direct > Direct                           | Direct                    | camp1         | camp1                     |
+| user_id3  | '2022-06-08 20:18'  | 50      | Direct > Direct                           | Direct                    | camp2 > camp1 | camp2 > camp1             |
+| user_id1 | '2022-07-25 07:52'  | 140     | Organic_Search > Direct > Organic_Search  | Organic_Search > Direct > Organic_Search | Campaign 2 > Campaign 2 > Campaign 1 > Campaign 1 | Campaign 2 > Campaign 1
 
 2. The **`derived.snowplow_attribution_channel_attributions`** unnests the paths from paths_to_conversion into their separate rows and calculates the attribution amount for that specific path step for each of the sql based attribution models:
 

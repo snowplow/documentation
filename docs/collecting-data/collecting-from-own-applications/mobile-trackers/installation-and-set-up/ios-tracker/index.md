@@ -82,6 +82,7 @@ Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-coll
       .exceptionAutotracking(true)
       .installAutotracking(true)
       .userAnonymisation(false)
+      .immersiveSpaceContext(true)
   SessionConfiguration(
       foregroundTimeout: Measurement(value: 30, unit: .minutes),
       backgroundTimeout: Measurement(value: 30, unit: .minutes)

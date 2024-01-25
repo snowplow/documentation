@@ -168,10 +168,10 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 
 | customer_id          | cv_tstamp | revenue | channel_path                              | channel_transformed_path  | campaign_path | campaign_transformed_path |
 |----------------------|-----------------------|---------|-------------------------------------------|---------------------------|---------------|---------------------------|
-| user_id1 | '2022-06-11 15:33'  | 20.42   | Direct                                    | Direct                    | camp1 > camp2 | camp1 > camp2             |
-| user_id2 | '2022-07-30 11:55'  | 24      | Direct > Direct                           | Direct                    | camp1         | camp1                     |
-| user_id3  | '2022-06-08 20:18'  | 50      | Direct > Direct                           | Direct                    | camp2 > camp1 | camp2 > camp1             |
-| user_id1 | '2022-07-25 07:52'  | 140     | Organic_Search > Direct > Organic_Search  | Organic_Search > Direct > Organic_Search | Campaign 2 > Campaign 2 > Campaign 1 > Campaign 1 | Campaign 2 > Campaign 1
+| user_id1 | 2022-06-11 15:33  | 20.42   | Direct                                    | Direct                    | camp1 > camp2 | camp1 > camp2             |
+| user_id2 | 2022-07-30 11:55  | 24      | Direct > Direct                           | Direct                    | camp1         | camp1                     |
+| user_id3  | 2022-06-08 20:18  | 50      | Direct > Direct                           | Direct                    | camp2 > camp1 | camp2 > camp1             |
+| user_id1 | 2022-07-25 07:52  | 140     | Organic_Search > Direct > Organic_Search  | Organic_Search > Direct > Organic_Search | Campaign 2 > Campaign 2 > Campaign 1 > Campaign 1 | Campaign 2 > Campaign 1
 
 2. The **`derived.snowplow_attribution_channel_attributions`** unnests the paths from paths_to_conversion into their separate rows and calculates the attribution amount for that specific path step for each of the sql based attribution models:
 

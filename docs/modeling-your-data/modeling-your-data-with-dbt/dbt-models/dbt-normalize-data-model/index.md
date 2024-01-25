@@ -11,7 +11,8 @@ import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
 <Badges badgeType="dbt-package Release" pkg="normalize"></Badges>&nbsp;
-<Badges badgeType="Maintained"></Badges><Badges badgeType="SPAL"></Badges>
+<Badges badgeType="Maintained"></Badges>&nbsp;
+<Badges badgeType="SPAL"></Badges>
 
 
 # Snowplow Normalize Package

@@ -135,18 +135,24 @@ You can do either for campaigns, too, with the `snowplow__channels_to_exclude` a
 #### Transform paths
 
 <details>
+
     <summary>Transform paths</summary>
+
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​
  1. `exposure (default)`: the same events in succession are reduced to one: `A → A → B` becomes `A → B`, a compromise between first and unique
+
  2. `unique`: all events in a path are treated as unique (no reduction of complexity). Best for smaller datasets (small lookback window) without a lot of retargeting
+
  3. `first`: keep only the first occurrence of any event: `A → B → A` becomes `A → B`, best for brand awareness marketing
+
  4. `remove_if_last_and_not_all`: requires a channel to be added as a parameter, which gets removed from the latest paths unless it removes the whole path as it is trying to reach a non-matching channel parameter: E.g target element: `A` path: `A → B → A → A` becomes `A → B`
+
  5. `remove_if_not_all`: requires a channel to be added as a parameter, which gets removed from the path altogether unless it would result in the whole path's removal: E.g target element: `A` path: `A → B → A → A` becomes `B`
- 
+
  Apart from this, you can also restrict how far in time (`var('snowplow_path_lookback_days')`) and steps (`var('snowplow_path_lookback_steps')`) you want to allow your path to go.
- 
- </details>
+
+</details>
 
 #### Other, macro based setup
 

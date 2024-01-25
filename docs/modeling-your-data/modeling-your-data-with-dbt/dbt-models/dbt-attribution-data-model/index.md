@@ -9,6 +9,11 @@ import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
+
+export const datagridProps = {
+    hideFooter: true
+  };
 ```
 
 <Badges badgeType="dbt-package Release" pkg="attribution">&nbsp;</Badges>&nbsp;
@@ -67,11 +72,18 @@ In the below guide we will walk you through the data transformation process step
 
 You will also need a table where the conversion events are stored. If you use the snowplow_unified model and configure conversions to be modelled, you will have this information in your `derived.snowplow_unified_conversions` table:
 
+
+<div>
+  {MarkdownTableToMuiDataGrid(`
 | user_identifier                      | user_id | start_tstamp          | cv_value       |
 |--------------------------------------|---------|-----------------------|----------------|
 | user_id1 | user1   | 2022-06-08 08:11      | 94.42          |
 | user_id2| user2   | 2022-06-09 12:03      | 206.5          |
 | user_id3 | user3   | 2022-06-09 15:02      | 5              |
+`, datagridProps)}
+</div>
+
+
 
 :::tip
 To fully finish the config you could overwrite the `snowplow__conversion_clause` variable in your project.yml, in case you would want to filter on specific types of conversions. You should also set the `snowplow__conversion_stitching` variable to true, if you have stitched_user_id in your conversions table.

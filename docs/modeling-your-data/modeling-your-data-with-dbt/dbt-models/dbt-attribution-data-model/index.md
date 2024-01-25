@@ -74,7 +74,7 @@ You will also need a table where the conversion events are stored. If you use th
 | d1edd215-7da2-4e13-aa16-31e4cd74d417 | user3   | 2022-06-09 15:02      | 5              |
 
 :::tip
-To fully finish the config you could overwrite the `snowplow__conversion_clause` variable in your project.yml, in case you would want to filter on specific types of conversions. You should also set the `var('snowplow__conversion_stitching')` to true, if you have stitched_user_id in your conversions table.
+To fully finish the config you could overwrite the `snowplow__conversion_clause` variable in your project.yml, in case you would want to filter on specific types of conversions. You should also set the `snowplow__conversion_stitching` variable to true, if you have stitched_user_id in your conversions table.
 :::
 
 ### 2. Path source
@@ -107,7 +107,6 @@ We provided a sql script to create a reporting view in the `attribution_overview
 
 Once you have the sources ready you need to adjust the package settings that fit your business logic. This has to be done once, otherwise your data might be misaligned due to the incremental logic or you would need to run a full-refresh:
 
-#### Decide on your sessionization logic
 
 <details>
     <summary>Decide on your sessionization logic</summary>
@@ -115,11 +114,9 @@ Once you have the sources ready you need to adjust the package settings that fit
 By default Snowplow only considers the first pageview of a session important from an attribution point of view and disregards campaign information from subsequent page_views. Google Analytics, on the other hand separates session as soon as campaign information is given. Set `var('consider_intrasession_channels')` variable to false in case you would like to follow Snowplow's logic, not GA's. If you opt for this calculation consider changing the `var('snowplow__conversion_path_source')` to `{{ target.schema }}.derived.snowplow_unified_sessions` for performance benefits.
 </details>
 
-#### Decide on your conversion hosts
 
 Use the variable `snowplow__conversion_hosts` to restrict which hosts to take into account for conversions.
 
-#### Filter unwanted / wanted channels & campaigns
 
 <details>
     <summary>Filter unwanted / wanted channels & campaigns</summary>
@@ -132,11 +129,9 @@ You can also do the opposite, filter on certain channels to include in your anal
 You can do either for campaigns, too, with the `snowplow__channels_to_exclude` and `snowplow__channels_to_include` variables.
 </details>
 
-#### Transform paths
 
 <details>
-
-    <summary>Transform paths</summary>
+  <summary>Transform paths</summary>
 
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​

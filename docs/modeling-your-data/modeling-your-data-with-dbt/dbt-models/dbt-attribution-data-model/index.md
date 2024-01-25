@@ -93,11 +93,15 @@ To fully finish the config you could overwrite the `snowplow__conversion_clause`
 
 You will also need a source table to track your user journey / path with fields to be able to classify your marketing channels. The perfect table for this is your `derived.snowplow_unified_views` table:
 
-| user_identifier                      | user_id | start_tstamp     | mkt_medium | mkt_source  |
+<div>
+  {MarkdownTableToMuiDataGrid(`
+  | user_identifier                      | user_id | start_tstamp     | mkt_medium | mkt_source  |
 |--------------------------------------|---------|------------------|------------|-------------|
 | user_id1 | user1  | 2022-06-04 06:12  | organic    | google      |
 | user_id1 | user1  | 2022-06-05 14:45  | cpc        | youtube.com |
 | user_id2 | user2  | 2022-06-04 18:13  | referral   | quora.com   |
+`, datagridProps)}
+</div>
 
 Alternatively, you could use the `derived.snowplow_unified_sessions` table as well, but bare in mind that this will mean only the first channel/campaign will be counted within a session and you will have to make sure the correct field reference is used in the `snowplow_attribution_paths_to_conversion` table by overwriting the `paths_to_conversion()` macro in your project (e.g `first_page_urlhost` instead of `page_urlhost`).
 
@@ -108,10 +112,14 @@ To fully finish the config you might need to overwrite the `channel_classificati
 
 You most likely have a warehouse with marketing (ad) spend information by channel and date, something like this:
 
-| channel           | campaign  | spend | spend_tstamp     |
+<div>
+  {MarkdownTableToMuiDataGrid(`
+  | channel           | campaign  | spend | spend_tstamp     |
 |-------------------|-----------|-------|------------------|
 | Paid_Search_Other | campaign1 | 10000 | 2022-05-04 18:32 |
 | Video             | campaign2 | 10000 | 2022-05-04 18:32 |
+`, datagridProps)}
+</div>
 
 We provided a sql script to create a reporting view in the `attribution_overview()` macro that you can overwrite to suit your specific analytical needs, however as long as you name the fields the same in the `var('snowplow__spend_source')` it should work right away.
 
@@ -178,17 +186,19 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 
 1. The **`derived.snowplow_attribution_paths_to_conversion`** model will aggregate the paths the customer has followed that have lead to conversion based on the path transformation and other limitations such as the path_lookback_step or path_lookback_days variable i.e. it combines the path and conversion source tables to produce an outcome. It looks like this:
 
-| customer_id          | cv_tstamp | revenue | channel_path                              | channel_transformed_path  | campaign_path | campaign_transformed_path |
+
+  | customer_id          | cv_tstamp | revenue | channel_path                              | channel_transformed_path  | campaign_path | campaign_transformed_path |
 |----------------------|-----------------------|---------|-------------------------------------------|---------------------------|---------------|---------------------------|
 | user_id1 | 2022-06-11 15:33  | 20.42   | Direct                                    | Direct                    | camp1 > camp2 | camp1 > camp2             |
 | user_id2 | 2022-07-30 11:55  | 24      | Direct > Direct                           | Direct                    | camp1         | camp1                     |
 | user_id3  | 2022-06-08 20:18  | 50      | Direct > Direct                           | Direct                    | camp2 > camp1 | camp2 > camp1             |
 | user_id1 | 2022-07-25 07:52  | 140     | Organic_Search > Direct > Organic_Search  | Organic_Search > Direct > Organic_Search | Campaign 2 > Campaign 2 > Campaign 1 > Campaign 1 | Campaign 2 > Campaign 1
 
+
 2. The **`derived.snowplow_attribution_channel_attributions`** unnests the paths from paths_to_conversion into their separate rows and calculates the attribution amount for that specific path step for each of the sql based attribution models:
 
 
-| composite_key                 | event_id                             | customer_id          | cv_tstamp               | cv_total_revenue | channel_transformed_path         | channel        | source_index | path_length | first_touch_attribution | last_touch_attribution | linear_attribution | position_based_attribution |
+  | composite_key                 | event_id                             | customer_id          | cv_tstamp               | cv_total_revenue | channel_transformed_path         | channel        | source_index | path_length | first_touch_attribution | last_touch_attribution | linear_attribution | position_based_attribution |
 |-----------------------------------------------------|--------------------------------------|----------------------|-------------------------|------------------|----------------------------------|----------------|--------------|-------------|-------------------------|------------------------|--------------------|----------------------------|
 | id1_Video0          | event_1 | user_id1 | 2023-07-07 13:05:55.000 | 200              | Video                            | Video          | 0            | 1           | 200                     | 200                    | 200                | 200                        |
 | id2_Display_Other0  | event_2 | user_id2 | 2023-07-19 04:27:51.000 | 66.5             | Display_Other > Organic_Search   | Display_Other  | 0            | 2           | 66.5                    | 0                      | 33.25  | 33.25 |
@@ -225,7 +235,8 @@ sources={{
 
 1. The **`derived.snowplow_attribution_path_summary`** shows the campaign/channel paths and the assiciated conversions (and optionally non-conversions, if the `path_to_non_conversions` table is enabled through its related variable `enable_path_to_non_conversions`)
 
-| transformed_path                   | conversions | non_conversions | revenue  |
+
+  | transformed_path                   | conversions | non_conversions | revenue  |
 |------------------------------------|-------------|-----------------|----------|
 | Direct                             | 3           | 25              | 94.42    |
 | Organic_Search                     | 2           | 26              | 206.5    |
@@ -237,7 +248,7 @@ sources={{
 2. The view called **`derived.snowplow_attribution_overview`** is tied to a dispatch macro of the same name which lets you overwrite it in your project, if needed. Given you specify your `var('snowplow__spend_source')` it will calculate the ROAS for you for each channel and campaign:
 
 
-| path_type | attribution_type | touch_point| in_n_conversion_paths | attributed_conversions | min_cv_tstamp | max_cv_tstamp | spend | sum_cv_total_revenue | attributed_revenue | roas |
+  | path_type | attribution_type | touch_point| in_n_conversion_paths | attributed_conversions | min_cv_tstamp | max_cv_tstamp | spend | sum_cv_total_revenue | attributed_revenue | roas |
 |----------|-------------|----------------|---|----------------|-------------------------|-------------------------|--------|------------|------------------|----------------|
 | campaign | first_touch | Campaign 2     | 2 | 1 | 2023-07-19 04:27:51.000 | 2023-07-25 07:52:34.000 | 100,000 | 206.5 | 206.5 | 0.002065 |
 | campaign | last_touch  | Campaign 1     | 3 | 1 | 2023-07-07 13:05:55.000 | 2023-07-30 11:55:24.000 | 100,000 | 364 | 364| 0.00364 |

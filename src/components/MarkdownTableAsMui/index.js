@@ -33,7 +33,9 @@ const MarkdownTableToMuiDataGrid = (markdownTable, datagridProps = {}) => {
       <DataGridPremium
         rows={gridData}
         columns={columns}
-        {...datagridProps} 
+        autoHeight
+        density="compact"
+        {...datagridProps}
       />
       <br/>
     </div>

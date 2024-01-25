@@ -16,9 +16,7 @@ To create a new data product, navigate to the "Data products" option in the left
 
 ![Create data product](images/image-1.png)
 
-A form will appear on the page. Please enter your data product information into the form.
-
-Cliking on the "Create and continue" will brig you to the definition of event specifications page:
+A form will appear on the page. Enter your data product information and click "Create and continue" to navigate to the event specification page.
 
 ![Event specifications](images/image-2.png)
 

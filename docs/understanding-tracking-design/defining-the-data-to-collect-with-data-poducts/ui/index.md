@@ -36,7 +36,7 @@ In the image below, you can see an example of a data product. It not only provid
 
 - **Share**; allow other members of your organization to access the data product 
 - **Subscribe**; receive notifications of any changes in the data product
-- **Implement tracking**; allow to automatically generate the code for your data product to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/collecting-data/code-generation/index.md) 
+- **Implement tracking**; automatically generate the code for your data product to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/collecting-data/code-generation/index.md) 
 
 *Notes: sharing and subscribing is only available for users registered in Snowplow BDP Console.*
 

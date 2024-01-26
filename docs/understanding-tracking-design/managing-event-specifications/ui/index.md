@@ -78,7 +78,7 @@ A modal will appear, allowing you to upload an image and provide additional cont
 
 ### Implementation Instructions
 
-The Implementation Instructions section allows you to specify how each property for a selected data structure should be populated.
+This section allows you to specify how each property for a selected event data structure should be populated.
 
 The dialog displays the list of properties defined in the data structure associated with this event specification.
 

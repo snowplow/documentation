@@ -35,7 +35,7 @@ You can navigate to an overview of a data product by selecting its name in the b
 In the image below, you can see an example of a data product. It not only provides an overview of all the event specifications but also allows you to access three important functionalities.
 
 - **Share**; allow other members of your organization to access the data product 
-- **Subscribe**; allow other members to being notified of any changes in the data product
+- **Subscribe**; receive notifications of any changes in the data product
 - **Implement tracking**; allow to automatically generate the code for your data product to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/collecting-data/code-generation/index.md) 
 
 *Notes: sharing and subscribing is only available for users registered in Snowplow BDP Console.*

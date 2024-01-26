@@ -7,7 +7,7 @@ export const versions = {
   golangTracker: '3.0.0',
   googleAmpTracker: '1.1.0',
   iosTracker: '5.6.0',
-  javaTracker: '1.0.1',
+  javaTracker: '2.0.0',
   javaScriptTracker: '3.19.0',
   luaTracker: '0.2.0',
   phpTracker: '0.7.0',

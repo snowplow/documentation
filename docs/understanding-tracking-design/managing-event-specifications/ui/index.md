@@ -70,7 +70,7 @@ Moreover, the section not only allows you to select entities but also provides c
 
 This section defines the locations and circumstances under which this event is triggered.
 
-To create your first trigger, simply select the "Add trigger" button. To edit an existing trigger, click on the corresponding item in the trigger list.
+To create your first trigger, simply select the "Add trigger" button. You can edit or delete an existing trigger by clicking the dedicated buttons beside each entry in the triggers list.
 
 A modal will appear, allowing you to upload an image and provide additional context, such as the URL to the page on which this trigger applies.
 

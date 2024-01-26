@@ -246,19 +246,18 @@ The default thread pool uses non-daemon threads. To stop the threads and shut do
 
 ### Persisting cookies using a CookieJar
 
-As described [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-specific-client-side-properties/index.md), the event collector sets a third-party cookie. This cookie is extracted during event processing (enrichment phase) into the `network_userid` property, the server-side user identifier. To persist this cookie across requests, add a `CollectorCookieJar` when creating your `BatchEmitter` or `Tracker`. Note that the `CollectorCookieJar` is an in-memory cookie jar, so the cookies, and `network_userid`, will not persist when it goes out of memory.
-
-Any custom `OkHttp` `CookieJar` could be used instead.
+As described [here](/docs/collecting-data/collecting-from-own-applications/java-tracker/tracking-specific-client-side-properties/index.md), the event collector sets a third-party cookie. This cookie is extracted during event processing (enrichment phase) into the `network_userid` property, the server-side user identifier. To persist this cookie across requests, use the `OkHttpClientWithCookieJarAdapter` when creating your `BatchEmitter` or `Tracker`. Note that the `OkHttpClientWithCookieJarAdapter` uses an in-memory cookie jar, so the cookies, and `network_userid`, will not persist when it goes out of memory.
 
 The simplest implementation looks like this:
 ```java
 Tracker tracker = Snowplow.createTracker(
                   new TrackerConfiguration("namespace", "appId"),
-                  new NetworkConfiguration("http://collector").cookieJar(new CollectorCookieJar()));
+                  new NetworkConfiguration("http://collector").httpClientAdapter(new OkHttpClientWithCookieJarAdapter()));
 
 // A BatchEmitter can also be created directly                       
 BatchEmitter emitter = new BatchEmitter(networkConfig);
 ```
+
 The specified `CookieJar` will be ignored if a custom `HttpClientAdapter` is provided. To use a `CookieJar` with a custom `OkHttpClientAdapter`, it must be added using the `OkHttpClient.Builder`:
 
 ```java
@@ -271,6 +270,8 @@ Tracker tracker = Snowplow.createTracker(
                   new TrackerConfiguration("namespace", "appId"),
                   new NetworkConfiguration(adapter));
 ```
+
+Any custom `OkHttp` `CookieJar` (other than the `CollectorCookieJar` provided in the tracker) could be used instead.
 
 ### Using the Emitter callback
 

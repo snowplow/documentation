@@ -28,7 +28,7 @@ To create a new event specification, follow these steps:
 
 1. Select a data product
 2. Click the "Create event" button
-3. A modal will appear, allowing you to enter the event name
+3. A modal will appear, prompting you to enter a name for your event specification and click "Save and continue"
 4. Your first event specification will be displayed on the page
 
 ![Create an Event Specification](images/create-event-specification.png)

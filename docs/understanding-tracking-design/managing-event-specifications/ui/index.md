@@ -53,7 +53,7 @@ This section defines the structure of your data and specifies the types of prope
 
 You can choose from two types of data structures:
 
-- **Standard**; Provided by the SnowPlow tracker by default
+- **Standard**; Provided by the Snowplow tracker by default
 - **Custom**; Provided by your organization
 
 ![Event Data Structure](images/event-data-structure.png)

@@ -82,6 +82,8 @@ This section allows you to specify how each property for a selected event data s
 
 The dialog displays the list of properties defined in the data structure associated with this event specification.
 
-Click on any of the properties shown in the list to access a new view inside the dialog box. Here, you can configure the instructions for the Type of Condition, Value, and Comments properties.
+You can configure detailed instructions for any of the properties shown in the list by clicking the "Add" or "Edit" buttons. Once you have selected the type of instruction you wish to add and have filled in the required input fields, you are then able to click 'Add instruction' and return to the properties list. Following that, you can continue adding instructions for the remaining properties or you can submit your selection by clicking "Save and update instructions".
+
+*Notes: instructions for required properties are added by default and can be edited but they cannot be deleted.*
 
 ![Implementation Instructions](images/implementation-instructions.png)

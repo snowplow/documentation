@@ -11,9 +11,9 @@ Login to Snowplow BDP Console where you'll be able to follow a step-by-step guid
 
 To get your cloud environment ready for your Snowplow pipeline to be installed:
 
-### Create a new account
+### Create a new subscription
 
-Create a new Azure account and tenant segregated from anything else you have running in Azure. For the latest documentation on setting up a new account and tenant please refer to the [Azure documentation](https://azure.microsoft.com/).
+We require a new subscription which does not contain anything else that you have running in Azure.  If you don't have an Azure account, then you will need to create a new Azure account and tenant, along with a subscription for Snowplow to use. For the latest documentation on setting up a new account and tenant please refer to the [Azure documentation](https://azure.microsoft.com/).
 
 ### Enable billing for the account
 

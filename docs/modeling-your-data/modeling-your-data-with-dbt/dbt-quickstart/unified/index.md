@@ -92,6 +92,7 @@ The Unified Digital Model has the option to join in data from the following Snow
 - App Error context
 - Core Web Vitals
 - Consent (Preferences & cmp visible)
+- Mobile screen summary (used for screen engagement calculation)
 
 By default these are **all disabled** in the Unified Digital Model. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 
@@ -110,6 +111,7 @@ vars:
     snowplow__enable_consent: true
     snowplow__enable_cwv: true
     snowplow__enable_app_errors: true
+    snowplow__enable_screen_summary_context: true
 ```
 
 ### 5. Filter your data set

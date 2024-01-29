@@ -604,5 +604,12 @@ export const Schema = {
       packageDefault: 'true',
       group: 'Warehouse and Tracker',
     },
+    snowplow__enable_screen_summary_context: {
+      type: 'boolean',
+      title: 'Enable Screen Summary Context',
+      longDescription: 'Flag to process the screen engagement information in the screen summary context on mobile events.',
+      packageDefault: 'false',
+      group: 'Contexts, Filters, and Logs',
+    },
   },
 }

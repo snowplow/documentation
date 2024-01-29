@@ -28,7 +28,7 @@ To create a new event specification, follow these steps:
 
 1. Select a data product
 2. Click the "Create event" button
-3. A modal will appear, prompting you to enter a name for your event specification and click "Save and continue"
+3. A dialog will appear, prompting you to enter a name for your event specification and click "Save and continue"
 4. Your first event specification will be displayed on the page
 
 ![Create an Event Specification](images/create-event-specification.png)
@@ -72,7 +72,7 @@ This section defines the locations and circumstances under which this event is t
 
 To create your first trigger, simply select the "Add trigger" button. You can edit or delete an existing trigger by clicking the dedicated buttons beside each entry in the triggers list.
 
-A modal will appear, allowing you to upload an image and provide additional context, such as the URL to the page on which this trigger applies.
+A dialog will appear, allowing you to upload an image and provide additional context, such as the URL to the page on which this trigger applies.
 
 ![Event Triggers](images/event-triggers.png)
 

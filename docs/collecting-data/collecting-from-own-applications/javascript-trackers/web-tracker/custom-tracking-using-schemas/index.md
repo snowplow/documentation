@@ -91,6 +91,12 @@ import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.
 Custom context entities can be added as an extra argument to any of Snowplow's `trackX()` methods, e.g. `trackPageView` or `trackLinkClick`.
 :::
 
+:::note
+
+Tracker methods available through plugins do not necessarily support adding custom entities. For those please refer to the corresponding plugin documentation for details.
+
+:::
+
 Here are two examples of schema for custom entities.
 One describes a screen:
 

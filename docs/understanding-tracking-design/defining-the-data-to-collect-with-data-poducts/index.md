@@ -29,7 +29,7 @@ With data products, you can:
     * ** Triggers;** specific instructions on where the event gets triggered (i.e. when a user clicks the ‘Add to basket’ button)
     * **Event data structure;** the event data structure that this event will validate against as it is processed by your pipeline
     * **Entities;** the entities that should be attached to this event (i.e. user, product)
-    * **Implementation rules;** any specific rules for each property of the event or entities
+    * **Implementation instructions;** any specific rules for each property of the event or entities
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

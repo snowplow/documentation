@@ -9,9 +9,9 @@ Assuming you have completed the [Node.js Tracker Setup](/docs/collecting-data/c
 Require the Node.js Tracker module into your code like so:
 
 ```javascript
-var snowplow = require('@snowplow/node-tracker');
-var gotEmitter = snowplow.gotEmitter;
-var tracker = snowplow.tracker;
+const snowplow = require('@snowplow/node-tracker');
+const gotEmitter = snowplow.gotEmitter;
+const tracker = snowplow.tracker;
 ```
 
 or, if using ES Modules, you can import the module like so:
@@ -40,7 +40,7 @@ const e = gotEmitter(
 
 There are a number of additional parameters that the `gotEmitter` allows to be configured which are passed to the underlying `got` library which this emitter is built on.
 
-The full set of `gotEmitter` parameters can be found in our [API Documentation](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/trackers/node-tracker/docs/markdown/node-tracker.gotemitter.md). A complete example might look like:
+The full set of `gotEmitter` parameters can be found in our [API Documentation](http://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/markdown/node-tracker.gotemitter). A complete example might look like:
 
 ```javascript
 const e = snowplow.gotEmitter(
@@ -61,7 +61,9 @@ const e = snowplow.gotEmitter(
   {
     http: new http.Agent({ maxSockets: 6 }),
     https: new https.Agent({ maxSockets: 6 })
-  } // Node.js agentOptions object to tune performance
+  }, // Node.js agentOptions object to tune performance
+  false // Use anonymous server tracking. Available from 3.21.0 onwards
+);
 ```
 
 ### Configuring Tracker
@@ -91,6 +93,8 @@ Emitters must conform to an [`Emitter` interface](https://github.com/snowplow/sn
 interface Emitter {
   flush: () => void;
   input: (payload: PayloadDictionary) => void;
+  /** Set if the requests from the emitter should be anonymized. Read more about anonymization used at https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/going-deeper/http-headers/. Available from 3.21.0 onwards */
+  setAnonymization?: (shouldAnonymize: boolean) => void;
 }
 ```
 

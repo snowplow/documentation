@@ -1,5 +1,5 @@
 ---
-title: "Enrich Kafka (cloud agnostic)"
+title: "Enrich Kafka (Azure)"
 date: "2022-10-03"
 sidebar_position: 30
 ---

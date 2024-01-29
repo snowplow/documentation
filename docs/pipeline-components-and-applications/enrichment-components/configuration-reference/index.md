@@ -4,12 +4,24 @@ date: "2021-08-14"
 sidebar_position: 50
 ---
 
+## License
+
+Enrich is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/contributing/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
+
+```hcl
+license {
+  accept = true
+}
+```
+
 ## Common parameters
 
 | parameter | description |
 |-|-|
 | `concurrency.enrich` | Optional. Default: `256`. Number of events that can get enriched at the same time within a chunk (events are processed by chunks in the app). |
-| `concurrency.sink` | Optional. Default for `enrich-pubsub` and `enrich-rabbitmq`: `3`. Default for `enrich-kinesis`: `1`. Number of chunks that can get sunk at the same time. *WARNING* for `enrich-kinesis`: if greater than `1`, records can get checkpointed before they are sunk. |
+| `concurrency.sink` | Optional. Default for `enrich-pubsub`: `3`. Default for `enrich-kinesis`: `1`. Number of chunks that can get sunk at the same time. *WARNING* for `enrich-kinesis`: if greater than `1`, records can get checkpointed before they are sunk. |
 | `assetsUpdatePeriod` | Optional. E.g. `7 days`. Period after which enrich assets (e.g. the maxmind database for the IpLookups enrichment) should be checked for udpates. Assets will never be updated if this key is missing. |
 | `monitoring.sentry.dsn` | Optional. E.g. `http://sentry.acme.com`. To track uncaught runtime exceptions in Sentry. |
 | `monitoring.metrics.statsd.hostname` | Optional. E.g. `localhost`. Hostname of the StatsD server to send enrichment metrics (latency and event counts) to. |
@@ -23,6 +35,7 @@ sidebar_position: 50
 | `telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-community-edition/telemetry/index.md#how-can-i-help) for more information. |
 | `featureFlags.acceptInvalid` | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a bad row will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
 | `featureFlags.legacyEnrichmentOrder` | Optional. Default: `false`. In early versions of `enrich-kinesis` and `enrich-pubsub` (>= *3.1.5*), the Javascript enrichment incorrectly ran before the currency, weather, and IP Lookups enrichments. Set this flag to true to keep the erroneous behavior of those previous versions. |
+| `validation.atomicFieldsLimits` (since *4.0.0*) | Optional. For the defaults, see [here](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/resources/reference.conf). Configuration for custom maximum atomic fields (strings) length. It's a map-like structure with keys being atomic field names and values being their max allowed length. |
 
 Instead of a message queue, it's also possible to read collector payloads from files on disk. This can be used for instance for testing purposes. In this case the configuration needs to be as below.
 
@@ -152,6 +165,15 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.bad.topicName` | Optional. Name of the Kafka topic to write to |
 | `output.bad.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
 | `output.bad.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
+| `blobStorage.s3` (since *4.0.0*) | Optional. Set to `true` if S3 client should be initialized to download enrichments assets. |
+| `blobStorage.gcs` (since *4.0.0*) | Optional. Set to `true` if GCS client should be initialized to download enrichments assets. |
+| `blobStorage.azureStorage` (since *4.0.0*) | Optional. Azure Blob Storage client configuration. ABS client won't be enabled if it isn't given. |
+| `blobStorage.azureStorage.accounts` (since *4.0.0*) | Array of accounts to download from Azure Blob Storage. |
+
+Example values for the Azure storage accounts :
+- `{ "name": "storageAccount1"}`: public account with no auth
+- `{ "name": "storageAccount2", "auth": { "type": "default"} }`: private account using default auth chain
+- `{ "name": "storageAccount3",  "auth": { "type": "sas", "value": "tokenValue"}}`: private account using SAS token auth
 
 ## enrich-nsq
 
@@ -173,76 +195,10 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.pii.nsqdHost` | Optional. The host name of nsqd application. |
 | `output.pii.nsqdPort` | Optional. The port number of nsqd application. |
 
-## enrich-rabbitmq-experimental
-
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.rabbitmq.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.rabbitmq.extended.hocon).
-
-| parameter | description |
-|-|-|
-| `input.queue` | Required. E.g. `raw`. Queue to read collector payloads from. |
-| `input.cluster.nodes.host` | Required. E.g. `localhost`. Hostname of RabbitMQ cluster node. |
-| `input.cluster.nodes.port` | Required. E.g. `5672`. Port of RabbitMQ cluster node.|
-| `input.cluster.username` | Required. E.g. `guest`. Username to connect to the cluster. |
-| `input.cluster.password` | Required. E.g. `guest`. Password to connect to the cluster. |
-| `input.cluster.virtualHost` | Required. E.g. `"/"`. Virtual host to use when connecting to the cluster. |
-| `input.cluster.ssl` | Optional. Default: `false`. Whether to use SSL or not to communicate with the cluster. |
-| `input.cluster.connectionTimeout` | Optional. Default: `5`. Timeout for the connection to the cluster (in seconds). |
-| `input.cluster.internalQueueSize` | Optional. Default: `1000`. Size of the fs2’s bounded queue used internally to communicate with the AMQP Java driver. |
-| `input.cluster.automaticRecovery` | Optional. Default: `true`. Whether the AMQP Java driver should try to recover broken connections. |
-| `input.cluster.requestedHeartbeat` | Optional. Default: `100`. Interval to check that the TCP connection to the cluster is still alive. |
-| `input.checkpointBackoff.minBackoff` | Optional. Default: `100 ms`.  Minimum period before retrying to checkpoint. |
-| `input.checkpointBackoff.maxBackoff` | Optional. Default: `10 seconds`.  Maximum period to retry checkpoint. |
-| `input.checkpointBackoff.maxRetries` | Optional. Default: `10`. Maximum number of retries for checkpointing. |
-| `output.good.exchange` | Required. E.g. `enriched`. Exchange to send the enriched events to. |
-| `output.good.routingKey` | Required. E.g. `routingKey`. Routing key to use when sending the enriched events to the exchange. |
-| `output.good.cluster.nodes.host` | Required. E.g. `localhost`. Hostname of RabbitMQ cluster node. |
-| `output.good.cluster.nodes.port` | Required. E.g. `5672`. Port of RabbitMQ cluster node.|
-| `output.good.cluster.username` | Required. E.g. `guest`. Username to connect to the cluster. |
-| `output.good.cluster.password` | Required. E.g. `guest`. Password to connect to the cluster. |
-| `output.good.cluster.virtualHost` | Required. E.g. `"/"`. Virtual host to use when connecting to the cluster. |
-| `output.good.cluster.ssl` | Optional. Default: `false`. Whether to use SSL or not to communicate with the cluster. |
-| `output.good.cluster.connectionTimeout` | Optional. Default: `5`. Timeout for the connection to the cluster (in seconds). |
-| `output.good.cluster.internalQueueSize` | Optional. Default: `1000`. Size of the fs2’s bounded queue used internally to communicate with the AMQP Java driver. |
-| `output.good.cluster.automaticRecovery` | Optional. Default: `true`. Whether the AMQP Java driver should try to recover broken connections. |
-| `output.good.cluster.requestedHeartbeat` | Optional. Default: `100`. Interval to check that the TCP connection to the cluster is still alive. |
-| `output.good.backoffPolicy.minBackoff` | Optional. Default: `100 ms`. Minimum period before retrying if writing to RabbitMQ fails. |
-| `output.good.backoffPolicy.maxBackoff` | Optional. Default: `10 seconds`. Maximum period before retrying if writing to RabbitMQ fails. |
-| `output.good.backoffPolicy.retries` | Optional. Default: `10`. Maximum number of retry if writing to RabbitMQ fails. If `maxRetries` is reached the app crashes. |
-| `output.bad.exchange` | Like `output.good.exchange` for bad rows. |
-| `output.bad.routingKey` | Like `output.good.routingKey` for bad rows. |
-| `output.bad.cluster.nodes.host` | Like `output.good.cluster.nodes.host` for bad rows. |
-| `output.bad.cluster.nodes.port` | Like `output.good.cluster.nodes.port` for bad rows. |
-| `output.bad.cluster.username` | Like `output.good.cluster.username` for bad rows. |
-| `output.bad.cluster.password` | Like `output.good.cluster.password` for bad rows. |
-| `output.bad.cluster.virtualHost` | Like `output.good.cluster.virtualHost` for bad rows. |
-| `output.bad.cluster.ssl` | Like `output.good.cluster.ssl` for bad rows. |
-| `output.bad.cluster.connectionTimeout` | Like `output.good.cluster.connectionTimeout` for bad rows. |
-| `output.bad.cluster.internalQueueSize` | Like `output.good.cluster.internalQueueSize` for bad rows. |
-| `output.bad.cluster.automaticRecovery` | Like `output.good.cluster.automaticRecovery` for bad rows. |
-| `output.bad.cluster.requestedHeartbeat` | Like `output.good.cluster.requestedHeartbeat` for bad rows. |
-| `output.bad.backoffPolicy.minBackoff` | Like `output.good.backoffPolicy.minBackoff` for bad rows. |
-| `output.bad.backoffPolicy.maxBackoff` | Like `output.good.backoffPolicy.maxBackoff` for bad rows. |
-| `output.bad.backoffPolicy.retries` | Like `output.good.backoffPolicy.retries` for bad rows. |
-| `output.pii.exchange` | Like `output.good.exchange` for pii events. |
-| `output.pii.routingKey` | Like `output.good.routingKey` for pii events. |
-| `output.pii.cluster.nodes.host` | Like `output.good.cluster.nodes.host` for pii events. |
-| `output.pii.cluster.nodes.port` | Like `output.good.cluster.nodes.port` for pii events. |
-| `output.pii.cluster.username` | Like `output.good.cluster.username` for pii events. |
-| `output.pii.cluster.password` | Like `output.good.cluster.password` for pii events. |
-| `output.pii.cluster.virtualHost` | Like `output.good.cluster.virtualHost` for pii events. |
-| `output.pii.cluster.ssl` | Like `output.good.cluster.ssl` for pii events. |
-| `output.pii.cluster.connectionTimeout` | Like `output.good.cluster.connectionTimeout` for pii events. |
-| `output.pii.cluster.internalQueueSize` | Like `output.good.cluster.internalQueueSize` for pii events. |
-| `output.pii.cluster.automaticRecovery` | Like `output.good.cluster.automaticRecovery` for pii events. |
-| `output.pii.cluster.requestedHeartbeat` | Like `output.good.cluster.requestedHeartbeat` for pii events. |
-| `output.pii.backoffPolicy.minBackoff` | Like `output.good.backoffPolicy.minBackoff` for pii events. |
-| `output.pii.backoffPolicy.maxBackoff` | Like `output.good.backoffPolicy.maxBackoff` for pii events. |
-| `output.pii.backoffPolicy.retries` | Like `output.good.backoffPolicy.retries` for pii events. |
-
 ## Enriched events validation against atomic schema
 
 Enriched events are expected to match [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) schema.
-However, until 3.0.0, it was never checked that the enriched events emitted by enrich were valid.
+However, until `3.0.0`, it was never checked that the enriched events emitted by enrich were valid.
 If an event is not valid against `atomic` schema, a bad row should be emitted instead of the enriched event.
 However, this is a breaking change, and we want to give some time to users to adapt, in case today they are working downstream with enriched events that are not valid against `atomic`.
 For this reason, this new validation was added as a feature that can be deactivated like that:
@@ -253,7 +209,7 @@ For this reason, this new validation was added as a feature that can be deactiva
 }
 ```
 
-In this case, enriched events that are not valid against `atomic` schema will still be emitted as before, so that enrich 3.0.0 can be fully backward compatible.
+In this case, enriched events that are not valid against `atomic` schema will still be emitted as before, so that Enrich `3.0.0` can be fully backward compatible.
 It will be possible to know if the new validation would have had an impact by 2 ways:
 
 1. A new metric `invalid_enriched` has been introduced.
@@ -263,6 +219,24 @@ It will be possible to know if the new validation would have had an impact by 2 
 If `acceptInvalid` is set to `false`, a bad row will be emitted instead of the enriched event in case it's not valid against `atomic` schema.
 
 When we'll know that all our customers don't have any invalid enriched events any more, we'll remove the feature flags and it will be impossible to emit invalid enriched events.
+
+Since `4.0.0`, it is possible to configure the lengths of the atomic fields, below is an example:
+
+```hcl
+{
+  ...
+  # Optional. Configuration section for various validation-oriented settings.
+  "validation": {
+    # Optional. Configuration for custom maximum atomic fields (strings) length.
+    # Map-like structure with keys being field names and values being their max allowed length
+    "atomicFieldsLimits": {
+        "app_id": 5
+        "mkt_clickid": 100000
+        # ...and any other 'atomic' field with custom limit
+    }
+  }
+}
+```
 
 ## Enrichments
 

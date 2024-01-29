@@ -13,6 +13,11 @@ Two of the derived tables need to be altered for existing Snowflake, Databricks 
 
 The other option is to do a [complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#complete-refresh-of-snowplow-package) of the package.
 
+#### 1. Updates to the views table
+
+* New columns: `last_list_item_index`, `list_items_count`, `list_items_percentage_scrolled`
+* Changed type: `engaged_time_in_s`, `absolute_time_in_s`
+
 <details>
   <summary>SQL scripts</summary>
 <Tabs groupId="warehouse" queryString>
@@ -187,6 +192,8 @@ drop table (your_schema)_derived.snowplow_unified_views_new;
 </TabItem>
 <TabItem value="databricks" label="databricks">
 
+#### 1. Updates to the views table
+
 ```sql
 CREATE TABLE (your_schema)_derived.snowplow_unified_views_new (
   view_id STRING,
@@ -304,8 +311,10 @@ drop table (your_schema)_derived.snowplow_unified_views_new;
 </TabItem>
 <TabItem value="redshift" label="redshift" default>
 
+#### 1. Updates to the views table
+
 ```sql
-CREATE TABLE IF NOT EXISTS dbt_matus_derived.snowplow_unified_views_new
+CREATE TABLE IF NOT EXISTS (your_schema)_derived.snowplow_unified_views_new
 (
 	view_id VARCHAR(65535)   ENCODE lzo
 	,event_name VARCHAR(22)   ENCODE lzo
@@ -414,6 +423,41 @@ insert into (your_schema)_derived.snowplow_unified_views_new  select *, null as 
 drop table (your_schema)_derived.snowplow_unified_views;
 alter table (your_schema)_derived.snowplow_unified_views_new
 rename to snowplow_unified_views;
+```
+
+</TabItem>
+</Tabs>
+</details>
+
+#### 2. Updates to the users table
+
+* New column: `absolute_time_in_s`
+
+<details>
+  <summary>SQL scripts</summary>
+<Tabs groupId="warehouse" queryString>
+<TabItem value="snowflake" label="snowflake" default>
+
+```sql
+ALTER TABLE	(your_schema)_DERIVED.SNOWPLOW_UNIFIED_USERS ADD absolute_time_in_s NUMBER(34,0);
+```
+
+</TabItem>
+<TabItem value="databricks" label="databricks">
+
+#### 2. Updates to the users table
+
+```sql
+ALTER TABLE	(your_schema)_DERIVED.SNOWPLOW_UNIFIED_USERS ADD absolute_time_in_s BIGINT;
+```
+
+</TabItem>
+<TabItem value="redshift" label="redshift" default>
+
+#### 2. Updates to the users table
+
+```sql
+ALTER TABLE	(your_schema)_DERIVED.SNOWPLOW_UNIFIED_USERS ADD absolute_time_in_s BIGINT;
 ```
 
 </TabItem>

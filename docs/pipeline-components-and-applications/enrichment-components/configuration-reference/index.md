@@ -35,7 +35,7 @@ license {
 | `telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-community-edition/telemetry/index.md#how-can-i-help) for more information. |
 | `featureFlags.acceptInvalid` | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a bad row will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
 | `featureFlags.legacyEnrichmentOrder` | Optional. Default: `false`. In early versions of `enrich-kinesis` and `enrich-pubsub` (>= *3.1.5*), the Javascript enrichment incorrectly ran before the currency, weather, and IP Lookups enrichments. Set this flag to true to keep the erroneous behavior of those previous versions. |
-| `validation.atomicFieldsLimits` | Optional. For the defaults, see [here](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/resources/reference.conf). Configuration for custom maximum atomic fields (strings) length. It's a map-like structure with keys being atomic field names and values being their max allowed length. |
+| `validation.atomicFieldsLimits` (since *4.0.0*) | Optional. For the defaults, see [here](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/resources/reference.conf). Configuration for custom maximum atomic fields (strings) length. It's a map-like structure with keys being atomic field names and values being their max allowed length. |
 
 Instead of a message queue, it's also possible to read collector payloads from files on disk. This can be used for instance for testing purposes. In this case the configuration needs to be as below.
 
@@ -165,12 +165,12 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.bad.topicName` | Optional. Name of the Kafka topic to write to |
 | `output.bad.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
 | `output.bad.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
-| `blobStorage.s3` | Optional. Set to `true` if S3 client should be initialized to download enrichments assets. |
-| `blobStorage.gcs` | Optional. Set to `true` if GCS client should be initialized to download enrichments assets. |
-| `blobStorage.azureStorage` | Optional. Azure Blob Storage client configuration. ABS client won't be enabled if it isn't given. |
-| `blobStorage.azureStorage.accounts` | Array of accounts to download from Azure Blob Storage. |
+| `blobStorage.s3` (since *4.0.0*) | Optional. Set to `true` if S3 client should be initialized to download enrichments assets. |
+| `blobStorage.gcs` (since *4.0.0*) | Optional. Set to `true` if GCS client should be initialized to download enrichments assets. |
+| `blobStorage.azureStorage` (since *4.0.0*) | Optional. Azure Blob Storage client configuration. ABS client won't be enabled if it isn't given. |
+| `blobStorage.azureStorage.accounts` (since *4.0.0*) | Array of accounts to download from Azure Blob Storage. |
 
-Example values for the storage accounts :
+Example values for the Azure storage accounts :
 - `{ "name": "storageAccount1"}`: public account with no auth
 - `{ "name": "storageAccount2", "auth": { "type": "default"} }`: private account using default auth chain
 - `{ "name": "storageAccount3",  "auth": { "type": "sas", "value": "tokenValue"}}`: private account using SAS token auth
@@ -220,7 +220,23 @@ If `acceptInvalid` is set to `false`, a bad row will be emitted instead of the e
 
 When we'll know that all our customers don't have any invalid enriched events any more, we'll remove the feature flags and it will be impossible to emit invalid enriched events.
 
-Since `4.0.0`, it is possible to configure the lengths of the atomic fields with `validation.atomicFieldsLimits` (see above).
+Since `4.0.0`, it is possible to configure the lengths of the atomic fields, below is an example:
+
+```hcl
+{
+  ...
+  # Optional. Configuration section for various validation-oriented settings.
+  "validation": {
+    # Optional. Configuration for custom maximum atomic fields (strings) length.
+    # Map-like structure with keys being field names and values being their max allowed length
+    "atomicFieldsLimits": {
+        "app_id": 5
+        "mkt_clickid": 100000
+        # ...and any other 'atomic' field with custom limit
+    }
+  }
+}
+```
 
 ## Enrichments
 

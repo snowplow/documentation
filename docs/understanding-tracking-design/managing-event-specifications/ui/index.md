@@ -76,7 +76,7 @@ A modal will appear, allowing you to upload an image and provide additional cont
 
 ![Event Triggers](images/event-triggers.png)
 
-### Implementation Instructions
+### Properties
 
 This section allows you to specify how each property for a selected event data structure should be populated.
 

@@ -44,11 +44,15 @@ export const versions = {
   dbtSnowplowUnified: '0.2.0',
   dbtSnowplowWeb: '1.0.0',
   dbtSnowplowMobile: '1.0.0',
-  dbtSnowplowUtils: '0.15.1',
-  dbtSnowplowMediaPlayer: '0.7.0',
-  dbtSnowplowNormalize: '0.3.3',
+  dbtSnowplowUtils: '0.16.1',
+  dbtSnowplowMediaPlayer: '0.7.1',
+  dbtSnowplowNormalize: '0.3.4',
   dbtSnowplowFractribution: '0.3.6',
+<<<<<<< HEAD
   dbtSnowplowEcommerce: '0.7.0',
+=======
+  dbtSnowplowEcommerce: '0.7.1',
+>>>>>>> 20b249e8 (Update versions)
 
   // sql runner
   sqlRunner: '0.10.1',

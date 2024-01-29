@@ -41,7 +41,7 @@ To add more information or modify an existing event specification, follow these 
 
 This interface is divided into focused sections; explore each section below for more details.
 
-![Example of an Event Specification Overview](images/event-specification-overvioew.png)
+![Example of an Event Specification Overview](images/event-specification-overview.png)
 
 ### Event Information
 

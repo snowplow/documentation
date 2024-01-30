@@ -9,7 +9,7 @@ sidebar_custom_props:
 
 As well as managing [data products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through an API.
 
-This functionality is key to automating any existing process you may have, including workflows in version control systems like GitHub.
+This functionality is key to automating existing processes and frequent manual tasks, including workflows in version control systems like GitHub.
 
 Partnered with other tools like our [CI tool](/docs/managing-data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/index.md) and / or [Snowplow Micro](/docs/testing-debugging/snowplow-micro/what-is-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
 

@@ -107,7 +107,6 @@ This `POST` request allows you to create a new data product within an organizati
 
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1`
 
-The request body is mandatory and should be in JSON format. Here’s an example of how the request body might look:
 
 The request body is mandatory and should be in JSON format. The minimum payload would be a JSON with only the `name` of the data product. There rest of the fields are optional and not required on creation. Example:
 

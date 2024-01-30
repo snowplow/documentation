@@ -176,7 +176,7 @@ To update a subscription for a specific data product, use the following request.
 
 ### Delete a Subscription
 
-To delete a subscription for a specific data product (unsubscribe action), use the following request. The `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
+To delete a subscription for a specific data product (unsubscribe action), use the following request. Path parameters `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
 
 `**DELETE** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}`
 

@@ -60,8 +60,8 @@ With a data product, you can:
 
 Break down the barriers that exist between data producers and data consumers, by providing:
 
-* data producers with visibility of how the data is being used downstream and the implications of any changes
-* data consumers with notifications when changes are made to a Data Product so that they can make any necessary changes to their models, reports etc.
+* data producers, with visibility of how the data is being used downstream and the implications of any changes
+* data consumers, with notifications when changes are made to a Data Product so that they can make any necessary changes to their models, reports etc.
 
 **Change history**; a complete audit log of the changes that have been made to the data product, including changes to existing data and new data that has been added over time.
 

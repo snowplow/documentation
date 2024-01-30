@@ -14,7 +14,7 @@ As explained in [Introduction to tracking design](/docs/understanding-tracking-d
 - The decisions you make based on those events
 - What you need to know about those events to make those decisions
 
-While our [Schema](/docs/understanding-your-pipeline/schemas/index.md) technology and Data Structures UI can help you capture the structure and instructions for validating your data, we provide event specifications, which help capture additional information, such as:
+While our [Schema](/docs/understanding-your-pipeline/schemas/index.md) technology and Data Structures UI can help you capture the structure and instructions for validating your data, we also provide event specifications, which help capture additional information.
 
 ## Event Specifications Information
 

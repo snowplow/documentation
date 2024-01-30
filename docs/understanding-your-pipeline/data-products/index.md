@@ -54,7 +54,7 @@ With a data product, you can:
 * Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/collecting-data/code-generation) for further details)
 * Provide documentation around the semantics of the data that you are creating, to enable analysts, data scientists, analytics engineers with data discoverability
 
-**Subscribers;** these describe people who are interested in this Data product or who are actively using the data in other ways.
+**Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Data Product, usually because the data is being used in a downstream data model or data application. 
 
 **Benefits:**
 

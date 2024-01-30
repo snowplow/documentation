@@ -64,7 +64,7 @@ When retrieving a data product, it could also contain an array field `data[].tra
   "trackingScenarios": [
     {
       "id": "d1336abc-1b60-46f7-be2d-2105f2daf283",
-      "url": "https://next.console.snowplowanalytics.com/api/msc/v1/organizations/f51dada7-4f11-4b6a-bbbd-2cf6a3673035/tracking-scenarios/v1/d1336abc-1b60-46f7-be2d-2105f2daf283"
+      "url": "https://console.snowplowanalytics.com/api/msc/v1/organizations/f51dada7-4f11-4b6a-bbbd-2cf6a3673035/tracking-scenarios/v1/d1336abc-1b60-46f7-be2d-2105f2daf283"
       }
   ]
   ...

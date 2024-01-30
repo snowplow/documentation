@@ -19,7 +19,7 @@ With data products, you can:
 **Data product**
 
 - **Name;** a descriptive name for the data product
-- **Description;** a description of the data the data product captures
+- **Description;** a description of the data that the data product captures
 - **Owner;** the individual responsible for the data product 
 - **Domain;** the team or business domain that owns the data product
 - **Event specifications**

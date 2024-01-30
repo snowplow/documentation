@@ -71,7 +71,7 @@ When retrieving a data product, it could also contain an array field `data[].tra
 ]
 ```
 
-Under the json path `includes.tracking_scenarios`, the API will also attach the whole tracking scenarios associated:
+Under the json path `includes.tracking_scenarios`, the API will also attach associated event specifications in their entirety:
 
 ```json
 "includes": {

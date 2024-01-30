@@ -25,7 +25,7 @@ The endpoints focus on the main operations in the workflow around:
 
 1. Retrieving existing data products and their event specifications, also known as tracking scenarios in the current v1 API version
 2. Creating or editing new or existing data products
-3. Seeing the data product history
+3. Viewing the data product history
 4. Managing subscriptions for change notifications
 
 Each request will need to include your company's `organizationID` which is a UUID that can be retrieved from the URL immediately following the .com when visiting console:

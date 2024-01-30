@@ -166,7 +166,7 @@ When a subscription is created, it will send a confirmation email to the recipie
 `**POST** /organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}/actions/confirm`
 
 
-Once a subscription is created and the email has been confirmed, the subscriber will start receiving a daily feed email with all the data products that had changes in the last 24 hours.
+Once a subscription is created and the email has been confirmed, the subscriber will start receiving a daily email digest referencing all the data products that had changes in the last 24 hours.
 
 ### Update a Subscription
 

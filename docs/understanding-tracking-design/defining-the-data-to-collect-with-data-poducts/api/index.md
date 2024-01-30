@@ -23,7 +23,7 @@ To be able to post sample requests in the documentation you need to click the `A
 
 The endpoints focus on the main operations in the workflow around:
 
-1. Retrieving existing data products and their event specifications, also known as tracking scenarios in the current v1 API version
+1. Retrieving existing data products and their event specifications, also known as tracking scenarios in the current (v1) API version
 2. Creating new or editing existing data products
 3. Viewing the data product history
 4. Managing subscriptions for change notifications

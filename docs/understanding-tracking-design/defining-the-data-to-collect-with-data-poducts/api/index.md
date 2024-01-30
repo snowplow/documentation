@@ -56,7 +56,7 @@ Path parameter `organizationId` is required.
 
 Path parameters `organizationId` and `dataProductId` are required.
 
-When retrieving a data product, it could also contain an array field `data[].tracking_scenarios` that will include the `id` and `url` of the associated tracking scenarios. For example:
+When retrieving a data product, it could also contain an array field `data[].tracking_scenarios` that will include the `id` and `url` of the associated event specifications. For example:
 
 ```json
 "data": [

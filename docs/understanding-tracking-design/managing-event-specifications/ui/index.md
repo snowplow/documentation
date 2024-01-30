@@ -16,7 +16,7 @@ Event specifications serve as direct counterparts to [data structures](/docs/und
 Please note that the creation of event specifications is exclusive to data products.
 :::
 
-Create event specifications in tandem with the latest deployed data structure version in production. This ensures tracking implementation instructions align with the validation criteria in the event specification.
+Create event specifications in tandem with the latest deployed data structure version in development. This ensures tracking implementation instructions align with the validation criteria in the event specification.
 
 Your event specification guarantees compatibility with the associated data structure version, being a specialization of it. This ensures events tracked using specified instructions pass validation for the associated data structure.
 

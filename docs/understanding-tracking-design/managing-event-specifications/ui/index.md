@@ -80,7 +80,7 @@ This section allows you to specify how each property for a selected event data s
 
 The dialog displays the list of properties for the selected data structure will be listed here, with the ability to provide the exact value/s or a description of how to populate these properties when the event is triggered.
 
-You can configure detailed instructions for any of the properties shown in the list by clicking the "Add" or "Edit" buttons. Once you have selected the type of instruction you wish to add and have filled in the required input fields, you are then able to click "Add instruction" and return to the properties list. Following that, you can continue adding instructions for the remaining properties or you can submit your selection by clicking "Save and update instructions".
+You can configure detailed instructions for any of the properties shown in the list by clicking the "Add instruction" or "Edit" buttons. Once you have selected the type of instruction you wish to add/edit and have filled in the required input fields, you are then able to click "Save and update instruction" and return to the properties list.
 
 *Notes: instructions for required properties are added by default and can be edited but they cannot be deleted.*
 

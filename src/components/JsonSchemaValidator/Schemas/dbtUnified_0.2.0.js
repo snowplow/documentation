@@ -517,6 +517,13 @@ export const Schema = {
       packageDefault: '[ ] (no passthroughs)',
       $ref: '#/definitions/passthrough_vars'
     },
+    snowplow__conversion_passthroughs: {
+      title: 'User Conversion Passthroughs',
+      group: 'Contexts, Filters, and Logs',
+      longDescription: 'Field(s) to carry through from the events table to the derived table. The field is based on the events_this_run table therefore taking all events. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output. Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.',
+      packageDefault: '[ ] (no passthroughs)',
+      $ref: '#/definitions/passthrough_vars'
+    },
     snowplow__entities_or_sdes: {
       type: 'string',
       title: '(Redshift) Entities or SDEs',
@@ -545,6 +552,20 @@ export const Schema = {
       type: 'boolean',
       title: 'Enable View Stitching',
       longDescription: 'Determines whether to apply the user mapping to the views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/) section for more details.',
+      packageDefault: 'false',
+      group: 'Operation and Logic',
+    },
+    snowplow__conversion_stitching: {
+      type: 'boolean',
+      title: 'Enable Conversion Stitching',
+      longDescription: 'Determines whether to apply the user mapping to the conversions table. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/) section for more details.',
+      packageDefault: 'true',
+      group: 'Operation and Logic',
+    },
+    snowplow__list_event_counts: {
+      type: 'boolean',
+      title: 'List Per-Event Counts',
+      longDescription: 'A boolean whether to include a json-type (varies by warehouse) column in the sessions table with a count of events for each `event_type` in that session.',
       packageDefault: 'false',
       group: 'Operation and Logic',
     },
@@ -583,10 +604,24 @@ export const Schema = {
       packageDefault: 'false',
       group: 'Contexts, Filters, and Logs',
     },
+    snowplow__enable_conversions: {
+      type: 'boolean',
+      title: 'Enable Conversions',
+      longDescription: 'Flag to enable the conversions optional module.',
+      packageDefault: 'false',
+      group: 'Contexts, Filters, and Logs',
+    },
     snowplow__enable_deep_link_context: {
       type: 'boolean',
       title: 'Enable Deep Link Context',
       longDescription: 'Flag to include the deep link context data in the models.',
+      packageDefault: 'false',
+      group: 'Contexts, Filters, and Logs',
+    },
+    snowplow__enable_screen_summary_context: {
+      type: 'boolean',
+      title: 'Enable Screen Summary Context',
+      longDescription: 'Flag to include the screen summary context data in the models.',
       packageDefault: 'false',
       group: 'Contexts, Filters, and Logs',
     },

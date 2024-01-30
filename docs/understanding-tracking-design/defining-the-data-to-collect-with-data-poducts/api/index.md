@@ -170,7 +170,7 @@ Once a subscription is created and the email has been confirmed, the subscriber 
 
 ### Update a Subscription
 
-To update a subscription for a specific data product, use the following request. The `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
+To update a subscription for a specific data product, use the following request. Path parameters `organizationId`, `subscriptionId`, `dataProductId`, and a valid request body are required.
 
 `**PUT** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}`
 

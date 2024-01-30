@@ -188,6 +188,6 @@ To resend a subscription confirmation email, use the following request. Path par
 
 ### Integration with the SDK Generator
 
-To send emails with instructions for the SDK generator, use the following request. The `organizationId` amd `dataProductId` and a valid request body are required.
+To send emails with instructions for the SDK generator, use the following request. Path parameters `organizationId` and `dataProductId` and a valid request body are required.
 
 `**POST** /organizations/{organizationId}/data-products/v1/{dataProductId}/share-instructions`

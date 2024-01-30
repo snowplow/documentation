@@ -28,7 +28,7 @@ The endpoints focus on the main operations in the workflow around:
 3. Viewing the data product history
 4. Managing subscriptions for change notifications
 
-Each request will need to include your company's `organizationID` which is a UUID that can be retrieved from the URL immediately following the .com when visiting console:
+Each request will need to include your company's `organizationID`, the UUID that can be retrieved from the URL immediately following `snowplowanalytics.com` when visiting the BDP console:
 
 ![](images/orgID.png)
 

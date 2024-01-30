@@ -165,7 +165,6 @@ When a subscription is created, it will send a confirmation email to the recipie
 
 `**POST** /organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}/actions/confirm`
 
-endpoint and will set the `isConfirmed` field to `true`.
 
 Once a subscription is created and the email has been confirmed, the subscriber will start receiving a daily feed email with all the data products that had changes in the last 24 hours.
 

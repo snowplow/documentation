@@ -20,8 +20,6 @@ Create event specifications in tandem with the latest deployed data structure ve
 
 Your event specification guarantees compatibility with the associated data structure version, being a specialization of it. This ensures events tracked using specified instructions pass validation for the associated data structure.
 
-If a newer event specification version is deployed, consider upgrading event specification and tracking to the latest data structure, ensuring ongoing compliance with validation requirements.
-
 ## Creating and Editing Event Specifications
 
 To create a new event specification, follow these steps:

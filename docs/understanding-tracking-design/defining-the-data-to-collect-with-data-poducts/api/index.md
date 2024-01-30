@@ -116,7 +116,7 @@ The request body is mandatory and should be in JSON format. The minimum payload 
   "description": "Tracks performance",
   "domain": "Marketing",
   "owner": "IT department",
-  "accessInstructions": "The data can be accessed through company Superset"
+  "accessInstructions": "The data can be accessed in the warehouse, in the atomic.events table"
 }
 ```
 

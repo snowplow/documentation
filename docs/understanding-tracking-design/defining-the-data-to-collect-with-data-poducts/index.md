@@ -13,6 +13,7 @@ With data products, you can:
 * Deliver better governance around your data
 * More easily communicate what the data means and how to use it
 * Collaborate more effectively with the various teams involved in delivering value from your data
+* Drive a self-serve culture around data across your organization
 
 ## Elements of a Data Product
 

@@ -131,11 +131,11 @@ The `organizationId` parameter is required.
 
 You can filter the results based on the following query parameters:
 
-- `dataProductId`: filters the tracking scenarios associated with a particular data product 
-- `sourceId`: filters the tracking scenarios associated with a particular data structure, inferred from the `event.source` field
-- `sourceVersion`: filters the tracking scenarios associated with a specific data structure version when used with `dataStructureId`.
-- `withLatestHistory`: when `true`, it will return a list of tracking scenarios, with the latest change per scenario attached to the `includes` array field. The relation between tracking scenarios in `data` and history in `includes` can be determined by `id = scenarioId`.
-- `status`: filters the tracking scenarios that match the specified status
+- `dataProductId`: Filters the tracking scenarios associated with a particular data product 
+- `sourceId`: Filters the tracking scenarios associated with a particular data structure, inferred from the `event.source` field
+- `sourceVersion`: Filters the tracking scenarios associated with a specific data structure version when used with `dataStructureId`.
+- `withLatestHistory`: When `true`, it will return a list of tracking scenarios, with the latest change per scenario attached to the `includes` array field. The relation between tracking scenarios in `data` and history in `includes` can be determined by `id = scenarioId`.
+- `status`: Filters the tracking scenarios that match the specified status
 
 :::info
 If no query parameters are provided, it will return all the tracking scenarios for an organization.

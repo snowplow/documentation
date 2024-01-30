@@ -75,7 +75,7 @@ The **data structures** that you attach to your event specification describe the
 
 The **event specification** describes a specific implementation of an event. It is a narrower definition of your event than a data structure - not only do they describe the structure of the data (by attaching the relevant data structure to validate against), they also allow you to define the **right values** for fields when the event gets triggered and the entities that need to be attached.
 
-*NB: the event specifications are not enforced by your pipeline (for example, we don’t yet validate that the correct entities are attached to an event) - this is coming soon!*
+*NB: the event specifications are not enforced by your pipeline (for example, we don’t yet validate that the correct entities are attached to an event).*
 
 By adding screenshots, and descriptions to the event specification, you are also able to communicate the **semantics of the data** to those that want to analyse it. In this way you can ensure that the data is **represented accurately** when being used to derive insights and make decisions by the many teams using the data downstream.
 

@@ -32,7 +32,7 @@ When clicking on a event specification row, a page will allow you to enter addit
 
 The breadcrumb navigation allows you to quickly navigate to the data product overview as well as to the list of data products. Alternatively, you can access the list of available data products by clicking `Data products` prominently displayed in the navigation bar on the left.
 
-In the image below, you can see an example of a data product. It not only provides an overview of all the event specifications but also allows you to access three important functionalities.
+In the image below, you can see an example of a data product. It not only provides an overview of all the event specifications but also allows you to access three important pieces of functionality.
 
 - **Share**; allow other members of your organization to access the data product 
 - **Subscribe**; receive notifications of any changes in the data product

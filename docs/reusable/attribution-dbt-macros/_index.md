@@ -3,7 +3,7 @@
 
 To overwrite these macros correctly with those in your project, ensure you prefix the macro name by `default__` in the definition e.g.
 ```jinja2
-{% macro default__conversion_value() %}
+{% macro default__channel_classification() %}
     tr_total/100
 {% endmacro %}
 ```

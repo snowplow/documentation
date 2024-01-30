@@ -86,7 +86,7 @@ Under the json path `includes.tracking_scenarios`, the API will also attach asso
 
 ### Retrieve History Information for a Data Product
 
-If you wish to retrieve information about a specific data product, you can use the following GET request:
+If you wish to retrieve the change log of a specific data product, you can use the following GET request:
 
 `**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/history`
 

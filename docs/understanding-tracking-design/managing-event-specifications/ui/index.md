@@ -49,7 +49,7 @@ This section provides essential meta-information for your event specification, i
 
 ### Event Data Structure
 
-This section defines the structure of your data and specifies the types of properties associated with this event, along with its version.
+This section defines the event data structure that this event will validate against as it is processed by your pipeline.
 
 You can choose from two types of data structures:
 

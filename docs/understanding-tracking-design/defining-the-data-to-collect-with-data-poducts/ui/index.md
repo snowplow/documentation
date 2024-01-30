@@ -12,7 +12,7 @@ sidebar_custom_props:
 
 ## Creating and editing a new Data Product using Console
 
-To create a new data product, navigate to the "Data products" option in the left main menu and click the "Create data product" button. 
+To create a new data product, navigate to the "Data products" section from the navigation bar and click the "Create data product" button. 
 
 ![Create data product](images/image-1.png)
 

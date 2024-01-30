@@ -182,7 +182,7 @@ To delete a subscription for a specific data product (unsubscribe action), use t
 
 ### Resend a Subscription Confirmation Email
 
-To resend a subscription confirmation email, use the following request. The `organizationId`, `subscriptionId`, `dataProductId` are required.
+To resend a subscription confirmation email, use the following request. Path parameters `organizationId`, `subscriptionId`, `dataProductId` are required.
 
 `**POST** ​/api​/msc​/v1/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}/actions/resend-confirmation`
 

@@ -14,7 +14,7 @@ The builder only supports the following types:
 - decimal
 - boolean
 
-For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](../json-editor/index.md).
+For more complex data structures that require heavy nesting and more advanced data types, use the JSON Editor.
 :::
 
 ***

@@ -1,6 +1,6 @@
 ---
-title: "Creating a tracking plan with tracking scenarios"
-sidebar_label: "Creating a tracking plan 🆕"
+title: "Creating a tracking plan with event specifications"
+sidebar_label: "Creating a tracking plan"
 sidebar_position: 25
 sidebar_custom_props:
   offerings:
@@ -14,9 +14,9 @@ As explained in [Introduction to tracking design](/docs/understanding-tracking-d
 - The decisions you make based on those events
 - What you need to know about those events to make those decisions
 
-While our [Schema](/docs/understanding-your-pipeline/schemas/index.md) technology and Data Structures UI can help you capture the structure and instructions for validating your data, we provide Tracking Scenarios, which help capture additional information, such as:
+While our [Schema](/docs/understanding-your-pipeline/schemas/index.md) technology and Data Structures UI can help you capture the structure and instructions for validating your data, we also provide event specifications, which help capture additional information.
 
-## Tracking Scenarios Information
+## Event Specifications Information
 
 - The events you want to capture on your product
 - The channels or apps where they are created
@@ -25,11 +25,11 @@ While our [Schema](/docs/understanding-your-pipeline/schemas/index.md) technolog
 - The instructions that need to be applied to correctly populate the event's properties
 - The entities that should be captured together with this event
 
-This additional information represents the tracking requirements that are often lost in translation or difficult to keep up to date. With Tracking Scenarios, teams can create a shared understanding of your business' tracking needs.
+This additional information represents the tracking requirements that are often lost in translation or difficult to keep up to date. With event specifications, teams can create a shared understanding of your business' tracking needs.
 
-## Tracking Scenario Structure
+## Event Specifications
 
-A Tracking Scenario consists of three main parts.
+An Event Specification consists of three main parts.
 
 ### Descriptive
 
@@ -54,5 +54,5 @@ The event validation part allows you to set the instructions for tracking implem
 The [Entities](/docs/understanding-your-pipeline/entities/index.md) part allows you to declare which entities should be tracked with the event. You can also define whether the entity should be mandatory or optional, or whether more than one instance should be tracked with this event.
 
 :::info
-Snowplow BDP provides both a UI and an API to manage your Tracking Scenarios. For information about managing Tracking Scenarios see [How to manage Tracking Scenario](/docs/understanding-tracking-design/managing-your-tracking-scenarios/index.md).
+Snowplow BDP provides both a UI and an API to manage your Event Specifications. For information about managing event specifications see [How to manage Event Specifications](/docs/understanding-tracking-design/managing-event-specifications/index.md).
 :::

@@ -61,7 +61,7 @@ This token will be needed in any request to the API in the form of `Authorizati
 
 You can have a look at and interact with the collector configuration endpoint in the normative [API specification](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml#/configuration/getOrganizationsOrganizationidResourcesV1PipelinesPipelineidConfigurationCollector).
 
-Authorizing in the API documentation
+### Authorizing in the API documentation
 
 To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual requests is overwritten by this authorization.
 

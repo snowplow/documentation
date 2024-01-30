@@ -150,7 +150,7 @@ To add a subscription for a data product, use the following request. The `organi
 
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions`
 
-This is the minimum payload that will create a subscription to the data product of the user that the bearer token has been issued:
+The following is the minimum accepted payload. It will create a subscription for the user who issues the request, as inferred by the JWT in the request headers.
 
 ```json
 {

@@ -70,6 +70,8 @@ Break down the barriers that exist between data producers and data consumers, by
 
 * Enhances accountability and transparency by providing a clear audit trail of all data modifications, fostering confidence in data integrity
 
+![Key elements of a Data Product](images/key-elements-of-a-data-product.png)
+
 ## How data products help with governance, data quality and data discoverability
 
 The **data structures** that you attach to your event specification describe the [structure of the data](/docs/understanding-your-pipeline/schemas/). They validate that the values of the properties contained within your events and entities are **valid** as they pass through your pipeline.

@@ -24,7 +24,7 @@ At its core, a data product has:
 * An explicit owner; that is responsible for maintaining and updating the data over time
 * Consumers; who use the data to deliver use cases and are impacted by upstream changes 
 
-Data products at Snowplow are underpinned by the concept of a data contract. They provide an upfront agreement on what to expect from the data being collected and capture changes to that dataset over time. 
+Data products at Snowplow are underpinned by the concept of a data contract. They provide an upfront agreement on what to expect from the data being collected and capture changes to that dataset over time.
 
 We have always believed in the value of data contracts at Snowplow; our tech is underpinned by event and entity schemas that describe upfront the structure of the data and ensure that the data conforms to that structure as it is processed by your pipeline. This schema technology forms the foundations of a data contract, but data products take this to the next level to bring enhanced quality, governance and discoverability to the data that you create. 
 

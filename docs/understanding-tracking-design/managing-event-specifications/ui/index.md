@@ -60,7 +60,7 @@ You can choose from two types of data structures:
 
 ## Entity Data Structures
 
-Within this section, you have the flexibility to choose the specific entities that should be associated with the event when it is triggered.
+Within this section, you have the flexibility to define the entities that should be associated with the event when it is triggered.
 
 To facilitate making an informed selection of your entities, you are able to view a detailed breakdown of the properties associated with your chosen entity for a specific version.
 

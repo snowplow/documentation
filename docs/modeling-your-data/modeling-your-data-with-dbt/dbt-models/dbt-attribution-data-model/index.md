@@ -149,9 +149,14 @@ You can also do the opposite, filter on certain channels to include in your anal
 You can do either for campaigns, too, with the `snowplow__channels_to_exclude` and `snowplow__channels_to_include` variables.
 </details>
 
+#### Transform paths
+
+In order to reduce unnecesarily long paths your can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
+
+In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a list of dictionaries, with the transformation name as key and optionally the parameter as value (for `remove_if_last_and_not_all` and `remove_if_not_all`). If the transformation requires no parameter you can just use `null` as values for the dictionary. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: {'exposure_path': null, 'remove_if_last_and_not_all': 'direct'}
 
 <details>
-  <summary>Transform paths</summary>
+  <summary>Path transform options</summary>
 
  Paths to conversion are often similar, but not identical. As such, path transforms reduce unnecessary complexity in similar paths before running the attribution algorithm. The following transformations are available:
 ​

@@ -89,7 +89,7 @@ export const Schema = {
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
       title: 'Path Transforms',
-      longDescription: 'Dictionary of path transforms (and their argument, `null` if none) to perform on the full conversion path (see [udfs.sql file](https://github.com/snowplow/dbt-snowplow-attribution/blob/main/macros/path_transformations/create_udfs.sql)).',
+      longDescription: 'Dictionary of path transforms (and their argument, `null` if none) to perform on the full conversion path (see the transform path options in our [docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#manifest-tables)).',
       packageDefault: "{'exposure_path': null}",
       group: 'Contexts, Filters, and Logs',
       items: {

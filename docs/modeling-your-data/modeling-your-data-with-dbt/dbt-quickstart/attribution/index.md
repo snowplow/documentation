@@ -40,10 +40,14 @@ Marketing Attribution Analysis can be done in many different ways depending on y
 
 Each of such variables will be explained below, you should edit these in your `dbt_project.yml` file. Further customization can be done via the variables listed in the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx).
 
-- `snowplow_attribution_start_date`: The start date in UTC for the package to run. Please bear in mind it will process all paths from the path_source (snowplow_unified_views, unless changed) since this date until the timestamp of the last conversion event in the conversions_source for the first run of the package
+- `snowplow__attribution_start_date`: The start date in UTC for the package to run. Please bear in mind it will process all paths from the path_source (snowplow_unified_views, unless changed) since this date until the timestamp of the last conversion event in the conversions_source for the first run of the package
+
+Changes to make if not using the default `snowplow_unified` source tables (for path or conversions):
 - `snowplow__conversion_path_source`: The source table for the path information. By default it will take values from `{{target.schema ~ '_derived'}}.snowplow_unified_views`
 - `snowplow__conversions_source`: The source table for the conversions & revenue information. By default it will take values from `{{target.schema ~ '_derived'}}.snowplow_unified_conversions`
 - `snowplow__conversion_hosts`: `url_hosts` to process, if left empty it will include all
+
+Optional changes:
 - `snowplow__conversion_clause`: A user defined sql script to filter on specific conversions if needed. Defaulted to 'cv_value > 0'
 - `snowplow__path_transforms`: A dictionary of path transforms and their arguments (see [Transform Paths](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md#transform-paths) section)
 - `snowplow__spend_source`: The optional source table for the spend information used to calculate ROAS in the `snowplow_attribution_overview`. By default it is empty and will not get processed
@@ -52,7 +56,7 @@ Each of such variables will be explained below, you should edit these in your `d
 ```yml title="dbt_project.yml"
 vars:
   snowplow_attribution:
-    snowplow_attribution_start_date: '2023-01-01'
+    snowplow__attribution_start_date: '2023-01-01'
     snowplow__conversion_path_source: 'my_schema_derived.snowplow_unified_views'
     snowplow__conversions_source: 'my_schema_derived.snowplow_unified_conversions'
     snowplow__conversion_hosts: ['mysite.com']

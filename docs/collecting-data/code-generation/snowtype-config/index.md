@@ -15,9 +15,13 @@ The schema tracking URLs for schemas available in [Iglu Central](http://iglucent
 
 The schema tracking URLs for Data Structures published in the Console.
 
-### `trackingScenarioIds`
+### `eventSpecificationIds`
 
-The Tracking Scenario IDs you wish to generate tracking code for. The Tracking Scenario ID is a UUID that can be retrieved as the final part of the URL when visiting a tracking scenario main page.
+The Event Specification IDs you wish to generate tracking code for. The Event Specification ID is a UUID that can be retrieved as the final part of the URL when visiting an event specification main page.
+
+### `dataProductIds`
+
+The Data Product IDs you wish to generate tracking code for. By providing the Data Product Id, Snowtype will fetch all the event specifications for the Data Product and generate code for all of them. The Data Product ID is a UUID that can be retrieved as the final part of the URL when visiting a data product main page.
 
 ### `organizationId`
 
@@ -42,8 +46,11 @@ The outpath relative to the current working directory when running the script.
 {
   "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
   "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
-  "trackingScenarioIds": [
+  "eventSpecificationIds": [
     "a123456b-c222-11d1-e123-1f123456789g"
+  ],
+  "dataProductIds": [
+    "a123456b-c222-11d1-e123-1f12345678dp"
   ],
   "organizationId": "a654321b-c111-33d3-e321-1f123456789g",
   "tracker": "@snowplow/browser-tracker",

@@ -32,7 +32,7 @@ With a data product, you can:
 
 * Define the owner of a dataset
 * Specify in detail the events to collect including where they are triggered & on which applications
-* Define the entities to attach to those events (i.e. user, product etc) 
+* Define the entities to attach to those events (e.g. user, product etc) 
 * Easily communicate tracking requirements to developers implementing tracking
 * Provide important metadata to make the semantics of the data well understood across your business 
 * Subscribe to the data product to receive notifications when changes are being made

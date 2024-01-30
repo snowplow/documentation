@@ -159,7 +159,7 @@ The following is the minimum accepted payload. It will create a subscription for
 }
 ```
 
-In case you want to subscribe a third user, you will need to provide another field `recipient` with the email of the user you want to subscribe.
+If you want to subscribe a different user you will need to populate an additional field, `recipient`, with that user's email address.
 
 When a subscription is created, it will send a confirmation email to the recipient (default user or third user). When the user clicks the "Confirm button" of the email, it will call the:
 

@@ -40,7 +40,7 @@ import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"
 
 ## Retrieving Information about Data Products
 
-The following `GET` requests are designed to allow you to access information about data products. These data products could be stored in either your development environment registry or your production environment registry.
+The following `GET` requests are designed to allow you to access information about data products.
 
 ### Retrieve a List of All Data Products
 

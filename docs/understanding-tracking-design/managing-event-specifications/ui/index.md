@@ -8,7 +8,7 @@ sidebar_custom_props:
     - cloud
 ---
 
-## Crafting a New Event Specification through the Console
+## Creating a new Event Specification through Console
 
 Event specifications serve as direct counterparts to [data structures](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) and encapsulate the documented events within a data product.
 

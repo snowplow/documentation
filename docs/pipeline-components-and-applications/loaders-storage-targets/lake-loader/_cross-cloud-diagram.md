@@ -16,6 +16,9 @@ import LakeLoaderDiagram from '@site/docs/pipeline-components-and-applications/l
     <LakeLoaderDiagram {...props} stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
   </TabItem>)}
   <TabItem value="azure" label="Azure">
-    <LakeLoaderDiagram {...props} stream="Kafka" bucket="ADLS" queue="Azure"/>
+    <LakeLoaderDiagram {...props} stream="Kafka" bucket="ADLS" cloud="Azure"/>
+  </TabItem>
+  <TabItem value="aws" label="AWS">
+    <LakeLoaderDiagram {...props} stream="Kinesis" bucket="S3" cloud="AWS"/>
   </TabItem>
 </Tabs>

@@ -25,9 +25,13 @@ Currently the Lake Loader supports [Delta format](https://delta.io/) only. Futur
     <LakeLoaderDiagram stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
     <DeployOverview cloud="GCP"/>
   </TabItem>
-  <TabItem value="aws" label="Azure">
+  <TabItem value="azure" label="Azure">
     <LakeLoaderDiagram stream="Kafka" bucket="ADLS Gen 2" cloud="Azure"/>
     <DeployOverview cloud="Azure"/>
+  </TabItem>
+  <TabItem value="aws" label="AWS">
+    <LakeLoaderDiagram stream="Kinesis" bucket="S3" cloud="AWS"/>
+    <DeployOverview cloud="AWS"/>
   </TabItem>
 </Tabs>
 
@@ -45,10 +49,17 @@ https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/conf
 ```
 
   </TabItem>
-  <TabItem value="aws" label="Azure">
+  <TabItem value="azure" label="Azure">
 
 ```json reference
 https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.azure.minimal.hocon
+```
+
+  </TabItem>
+  <TabItem value="aws" label="AWS">
+
+```json reference
+https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.aws.minimal.hocon
 ```
 
   </TabItem>

@@ -94,13 +94,44 @@ export const Schema = {
       group: 'Contexts, Filters, and Logs',
       items: {
         type: 'object',
-        title: "Identifier",
-        properties: {
-          path_transform: { type: 'string' },
-          argument: { type: 'string' }
-        },
-        required: ['path_transform', 'argument'],
-        additionalProperties: false
+        title: "Path transform",
+        oneOf: [
+          {
+            title: "exposure",
+            required: ["exposure"],
+            properties: {
+              exposure: { type: "string", "default": "null" }
+            },
+          },
+          {
+            title: "first",
+            required: ["first"],
+            properties: {
+              first: { type: "string", "default": "null"}
+            },
+          },
+          {
+            title: "unique",
+            required: ["unique"],
+            properties: {
+              unique: { type: "string", "default": "null"}
+            },
+          },
+          {
+            title: "remove if last and not all",
+            required: ["remove_if_last_and_not_all"],
+            properties: {
+              remove_if_last_and_not_all: { type: "string" }
+            },
+          },
+          {
+            title: "remove if not all",
+            required: ["remove_if_not_all"],
+            properties: {
+              remove_if_not_all: { type: "string" }
+            },
+          }
+        ],
       },
       uniqueItems: true,
     },

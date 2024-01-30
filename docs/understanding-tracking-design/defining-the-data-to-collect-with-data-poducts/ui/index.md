@@ -28,7 +28,7 @@ When clicking on a event specification row, a page will allow you to enter addit
 - **Event data structure**; determines how your data is structured and define the types of properties of the event
 - **Entity data structures**; describes which entities to attach to the event when it is triggered
 - **Event triggers**; specify the places and circumstances under which the event is triggered
-- **Implementation instructions**; specify instructions about how each schema property should be set for this scenario
+- **Properties**; specify instructions about how each schema property should be set for this event specification
 
 The breadcrumb navigation allows you to quickly navigate to the data product overview as well as to the list of data products. Alternatively, you can access the list of available data products by clicking `Data products` prominently displayed in the left menu.
 

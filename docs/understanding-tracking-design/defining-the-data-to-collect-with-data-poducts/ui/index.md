@@ -30,7 +30,7 @@ When clicking on a event specification row, a page will allow you to enter addit
 - **Event triggers**; specify the places and circumstances under which the event is triggered
 - **Properties**; specify instructions about how each schema property should be set for this event specification
 
-The breadcrumb navigation allows you to quickly navigate to the data product overview as well as to the list of data products. Alternatively, you can access the list of available data products by clicking `Data products` prominently displayed in the left menu.
+The breadcrumb navigation allows you to quickly navigate to the data product overview as well as to the list of data products. Alternatively, you can access the list of available data products by clicking `Data products` prominently displayed in the navigation bar on the left.
 
 In the image below, you can see an example of a data product. It not only provides an overview of all the event specifications but also allows you to access three important functionalities.
 

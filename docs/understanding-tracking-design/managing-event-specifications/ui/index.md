@@ -35,7 +35,7 @@ To add more information or modify an existing event specification, follow these 
 
 1. Navigate to the appropriate data product
 2. Select the desired event specification
-3. This action will open on overview of the selected event specification containing the details that have been added to date.
+3. This action will open on overview of the selected event specification containing the details that have been added to date
 
 This interface is divided into focused sections; explore each section below for more details.
 

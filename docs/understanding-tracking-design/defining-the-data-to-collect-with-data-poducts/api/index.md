@@ -19,7 +19,7 @@ You can have a look at and interact with all available endpoints in the [API doc
 
 ### Authorizing in the API documentation
 
-To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual requests is overwritten by this authorization.
+To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual request is overwritten by this authorization.
 
 The endpoints focus on the main operations in the workflow around:
 

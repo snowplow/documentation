@@ -1,5 +1,5 @@
 ---
-title: "Creating a tracking plan with tracking scenarios"
+title: "Creating a tracking plan with event specifications"
 sidebar_label: "Creating a tracking plan"
 sidebar_position: 25
 sidebar_custom_props:

@@ -1,5 +1,5 @@
 ---
-title: "Screen view tracking"
+title: "Screen view and engagement tracking"
 sidebar_position: 40
 ---
 

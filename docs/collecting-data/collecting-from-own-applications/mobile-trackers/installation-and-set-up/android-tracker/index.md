@@ -22,7 +22,7 @@ Add into your `build.gradle` file:
 dependencies {
   ...
   // Snowplow Android Tracker
-  implementation 'com.snowplowanalytics:snowplow-android-tracker:5.+'
+  implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
   // In case 'lifecycleAutotracking' is enabled
   implementation 'androidx.lifecycle-extensions:2.2.+'
   ...

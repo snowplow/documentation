@@ -71,7 +71,7 @@ Automatically captured data are:
 * [**Platform and Application Context Tracking**](./platform-and-application-context/index.md): Captures contextual information about the device and the app.
 * [**Session Tracking**](./session-tracking/index.md): Captures the session which helps to keep track of the user activity in the app.
 * [**App Lifecycle Tracking**](./lifecycle-tracking/index.md): Captures application lifecycle state changes (foreground/background transitions).
-* [**Screen View Tracking**](./screen-tracking/index.md): Captures each time a new “screen” is loaded.
+* [**Screen View and Engagement Tracking**](./screen-tracking/index.md): Captures each time a new “screen” is loaded.
 * [**Exception Tracking**](./exception-tracking/index.md): Captures any unhandled exceptions within the application.
 * [**Installation Tracking**](./installation-tracking/index.md): Captures an install event which occurs the first time an application is opened.
 * [**Immersive Space Tracking**](./visionos/index.md): iOS only. Captures the visionOS immersive space in which events occur.
@@ -89,6 +89,7 @@ Snowplow.createTracker(namespace: "appTracker", network: networkConfig) {
         .lifecycleAutotracking(true)
         .sessionContext(true)
         .screenViewAutotracking(true)
+        .screenEngagementAutotracking(true) // available from v6 of the tracker
         .screenContext(true)
         .exceptionAutotracking(true)
         .installAutotracking(true)
@@ -106,6 +107,7 @@ val trackerConfig = TrackerConfiguration("appId")
     .lifecycleAutotracking(true)
     .sessionContext(true)
     .screenViewAutotracking(true)
+    .screenEngagementAutotracking(true) // available from v6 of the tracker
     .screenContext(true)
     .exceptionAutotracking(true)
     .installAutotracking(true)
@@ -128,6 +130,7 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .lifecycleAutotracking(true)
     .sessionContext(true)
     .screenViewAutotracking(true)
+    .screenEngagementAutotracking(true) // available from v6 of the tracker
     .screenContext(true)
     .exceptionAutotracking(true)
     .installAutotracking(true);

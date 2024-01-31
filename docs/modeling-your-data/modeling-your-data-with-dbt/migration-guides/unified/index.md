@@ -9,13 +9,12 @@ import TabItem from '@theme/TabItem';
 
 ### Upgrading to 0.2.0
 
-Two of the derived tables need to be altered for existing Snowflake, Databricks or Redshift users. Please modify the below script to fit your schemas and apply them before running the upgraded package.
+Two of the derived tables need to be altered for existing Snowflake, Databricks or Redshift users as the data type of `engaged_time_in_s`, `absolute_time_in_s` have changed. Please modify the below script to fit your schemas and apply them before running the upgraded package.
 
 The other option is to do a [complete refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#complete-refresh-of-snowplow-package) of the package.
 
 #### 1. Updates to the views table
 
-* New columns: `last_list_item_index`, `list_items_count`, `list_items_percentage_scrolled`
 * Changed type: `engaged_time_in_s`, `absolute_time_in_s`
 
 <details>

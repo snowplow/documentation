@@ -21,17 +21,17 @@ Currently the Lake Loader supports [Delta format](https://delta.io/) only. Futur
 :::
 
 <Tabs groupId="cloud" queryString lazy>
-  <TabItem value="gcp" label="GCP" default>
+  <TabItem value="aws" label="AWS" default>
+    <LakeLoaderDiagram stream="Kinesis" bucket="S3" cloud="AWS"/>
+    <DeployOverview cloud="AWS"/>
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
     <LakeLoaderDiagram stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
     <DeployOverview cloud="GCP"/>
   </TabItem>
   <TabItem value="azure" label="Azure">
     <LakeLoaderDiagram stream="Kafka" bucket="ADLS Gen 2" cloud="Azure"/>
     <DeployOverview cloud="Azure"/>
-  </TabItem>
-  <TabItem value="aws" label="AWS">
-    <LakeLoaderDiagram stream="Kinesis" bucket="S3" cloud="AWS"/>
-    <DeployOverview cloud="AWS"/>
   </TabItem>
 </Tabs>
 

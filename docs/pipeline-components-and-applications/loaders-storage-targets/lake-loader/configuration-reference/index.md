@@ -39,9 +39,9 @@ import Admonition from '@theme/Admonition';
     <Admonition type="note" title="Alternative Docker image">
     To use the Lake Loader with Hudi support, pull the appropriate alternative image from Docker Hub:
     <ul>
-        <li><code>snowplow/lake-loader-aws:{`${versions.lakeLoader}`}-biglake</code></li>
-        <li><code>snowplow/lake-loader-gcp:{`${versions.lakeLoader}`}-biglake</code></li>
-        <li><code>snowplow/lake-loader-azure:{`${versions.lakeLoader}`}-biglake</code></li>
+        <li><code>snowplow/lake-loader-aws:{`${versions.lakeLoader}`}-hudi</code></li>
+        <li><code>snowplow/lake-loader-gcp:{`${versions.lakeLoader}`}-hudi</code></li>
+        <li><code>snowplow/lake-loader-azure:{`${versions.lakeLoader}`}-hudi</code></li>
     </ul>
     </Admonition>
     <table>

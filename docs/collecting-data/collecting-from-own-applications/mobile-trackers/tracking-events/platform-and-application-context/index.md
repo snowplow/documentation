@@ -172,7 +172,7 @@ The Google Mobile Ads can be imported in the `dependencies` section of the `buil
 ```gradle
 dependencies {
     ...
-    implementation 'com.google.android.gms:play-services-ads:19.0.0'
+    implementation 'com.google.android.gms:play-services-ads:22.6.0'
     ...
 }
 ```

@@ -57,33 +57,33 @@ The [application context entity](https://github.com/snowplow/iglu-central/blob/m
 
 The [platform context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-3) contains the following properties:
 
-| Property | Type | Description | Required in schema |
-| --- | --- | --- | --- |
-| `osType` | String | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android") | Yes |
-| `osVersion` | String | Version of the mobile operating system. | Yes |
-| `deviceManufacturer` | String | Device vendor. | Yes |
-| `deviceModel` | String | Model of the device. | Yes |
-| `carrier` | String | Carrier of the SIM inserted in the device. | No |
-| `networkType` | String | One of: "mobile", "wifi", "offline" | No |
-| `networkTechnology` | String | Radio access technology that the device is using. | No |
-| `openIdfa` | String | Deprecated property. | No |
-| `appleIdfa` | String | Advertising identifier on iOS. | No |
-| `appleIdfv` | String | UUID [identifier for vendors](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor) on iOS. | No |
-| `androidIdfa` | String | Advertising identifier on Android. | No |
-| `physicalMemory` | Integer | Total physical system memory in bytes | No |
-| `systemAvailableMemory` | Integer | Available memory on the system in bytes (Android only) | No |
-| `appAvailableMemory` | Integer | Amount of memory in bytes available to the current app (iOS only) | No |
-| `batteryLevel` | Integer | Remaining battery level as an integer percentage of total battery capacity | No |
-| `batteryState` | String | Battery state for the device. One of: "unplugged", "charging", "full". | No |
-| `lowPowerMode` | Boolean | A Boolean indicating whether Low Power Mode is enabled (iOS only) | No |
-| `availableStorage` | Integer | Bytes of storage remaining | No |
-| `totalStorage` | Integer | Total size of storage in bytes | No |
-| `isPortrait` | Boolean | A Boolean indicating whether the device orientation is portrait (either upright or upside down) | No |
-| `resolution` | String | Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes | No |
-| `scale` | Number | Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android) | No |
-| `language` | String | System language currently used on the device (ISO 639) | No |
-| `appSetId` | String | Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id) | No |
-| `appSetIdScope` | String (either "app" or "developer") | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No |
+| Property | Type | Android | iOS | Description | Required in schema |
+| --- | --- | --- | --- | --- | --- |
+| `osType` | String | ✓ | ✓ | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android") | Yes |
+| `osVersion` | String | ✓ | ✓ | Version of the mobile operating system. | Yes |
+| `deviceManufacturer` | String | ✓ | ✓ | Device vendor. | Yes |
+| `deviceModel` | String | ✓ | ✓ | Model of the device. | Yes |
+| `carrier` | String | ✓ | ✓ | Carrier of the SIM inserted in the device. | No |
+| `networkType` | String | ✓ | ✓ | One of: "mobile", "wifi", "offline" | No |
+| `networkTechnology` | String | ✓ | ✓ | Radio access technology that the device is using. | No |
+| `openIdfa` | String | ✗ | ✗ | Deprecated property. | No |
+| `appleIdfa` | String | ✗ | ✓ | Advertising identifier on iOS. | No |
+| `appleIdfv` | String | ✗ | ✓ | UUID [identifier for vendors](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor) on iOS. | No |
+| `androidIdfa` | String | ✓ | ✗ | Advertising identifier on Android. | No |
+| `physicalMemory` | Integer | ✓ | ✓ | Total physical system memory in bytes | No |
+| `systemAvailableMemory` | Integer | ✓ | ✗ | Available memory on the system in bytes (Android only) | No |
+| `appAvailableMemory` | Integer | ✓ | ✗ | Amount of memory in bytes available to the current app (iOS only) | No |
+| `batteryLevel` | Integer | ✓ | ✓ | Remaining battery level as an integer percentage of total battery capacity | No |
+| `batteryState` | String | ✓ | ✓ | Battery state for the device. One of: "unplugged", "charging", "full". | No |
+| `lowPowerMode` | Boolean | ✗ | ✓ | A Boolean indicating whether Low Power Mode is enabled (iOS only) | No |
+| `availableStorage` | Integer | ✓ | ✗ | Bytes of storage remaining | No |
+| `totalStorage` | Integer | ✓ | ✗ | Total size of storage in bytes | No |
+| `isPortrait` | Boolean | ✓ | ✓ | A Boolean indicating whether the device orientation is portrait (either upright or upside down) | No |
+| `resolution` | String | ✓ | ✓ | Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes | No |
+| `scale` | Number | ✓ | ✓ | Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android) | No |
+| `language` | String | ✓ | ✓ | System language currently used on the device (ISO 639) | No |
+| `appSetId` | String | ✓ | ✗ | Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id) | No |
+| `appSetIdScope` | String (either "app" or "developer") | ✓ | ✗ | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No |
 
 ### Choosing which properties to track
 
@@ -113,6 +113,43 @@ val trackerConfig = TrackerConfiguration("appId")
 ```java
 TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .platformContextProperties(Collections.singletonList(PlatformContextProperty.BATTERY_LEVEL, PlatformContextProperty.IS_PORTRAIT));
+```
+
+  </TabItem>
+</Tabs>
+
+### Overriding platform context properties
+
+In case you want to override the values for certain properties of the platform context (or provide ones that are not tracked by default, such as the `totalStorage` on iOS), you can set the `platformContextRetriever` in `TrackerConfiguration` to provide these values.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let trackerConfig = TrackerConfiguration()
+    .platformContextRetriever(
+        PlatformContextRetriever(deviceVendor: { "my-custom-vendor" })
+    )
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val trackerConfiguration = TrackerConfiguration("appId")
+    .platformContextRetriever(
+        PlatformContextRetriever(deviceVendor = { "my-custom-vendor" })
+    )
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+PlatformContextRetriever platformContextRetriever = new PlatformContextRetriever();
+platformContextRetriever.setDeviceVendor(() -> "my-custom-vendor");
+TrackerConfiguration trackerConfiguration = new TrackerConfiguration("appId")
+    .platformContextRetriever(platformContextRetriever);
 ```
 
   </TabItem>

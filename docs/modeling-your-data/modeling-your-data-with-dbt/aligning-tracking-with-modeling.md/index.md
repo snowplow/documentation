@@ -21,6 +21,7 @@ Depending on the availability of your contexts, our dbt packages provide out-of-
 | application context   | ❌   | ✅      | snowplow__enable_application_context: true                         | unified / mobile|
 | screen context        | ❌   | ✅      | snowplow__enable_screen_context: true                      | unified  / mobile|
 | deep link context     | ❌   | ✅      | snowplow__enable_deep_link_context: true                   | unified |
+| screen summary context| ❌   | ✅ (iOS/Android tracker v6+) | snowplow__enable_screen_summary_context: true              | unified |
 | consent - cmp visible | ✅   | ❌      | snowplow__enable_consent: true                             | unified / web|
 | consent preferences   | ✅   | ❌      | snowplow__enable_consent: true (optional module)           | unified  / web |
 | cwv context           | ✅   | ❌      | snowplow__enable_cwv: true (optional module)               | unified / web|

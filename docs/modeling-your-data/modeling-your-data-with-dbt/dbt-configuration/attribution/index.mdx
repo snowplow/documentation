@@ -1,6 +1,6 @@
 ---
-title: "E-commerce"
-sidebar_position: 300
+title: "Attribution"
+sidebar_position: 400
 hide_table_of_contents: true
 ---
 
@@ -16,33 +16,11 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
     <>
     <CodeBlock language="yaml">
     {`models:
-  snowplow_ecommerce:
-    base:
+  snowplow_attribution:
+    +schema: ${derivedSchema}
       manifest:
-        +schema: ${manifestSchema}
-      scratch:
-        +schema: ${scratchSchema}
-    carts:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}
-    checkouts:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}
-    products:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}
-    sessions:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}
-    transactions:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}`}
-        </CodeBlock>
+        +schema: ${manifestSchema}`}
+    </CodeBlock>
     </>
   )
 }
@@ -51,15 +29,15 @@ export const printYamlVariables = (data) => {
   return(
     <>
       <h4>Project Variables:</h4>
-      <CodeBlock language="yaml">{dump({vars: {"snowplow_ecommerce": data}}, { flowLevel: 3 })}</CodeBlock>
+      <CodeBlock language="yaml">{dump({vars: {"snowplow_attribution": data}}, { flowLevel: 3 })}</CodeBlock>
     </>
   )
 }
 
 export const MyMdxComponent = () => {
-  const schemaName = 'dbtEcommerce';
-  const versions = ['0.7.1', '0.7.0', '0.6.1', '0.6.0', '0.5.4'];
-  const label = 'dbt e-commerce version';
+  const schemaName = 'dbtAttribution';
+  const versions = ['0.1.0'];
+  const label = 'dbt attribution version';
   const output = printYamlVariables;
     return (
       <DbtCongfigurationPage schemaName={schemaName} versions={versions} label={label}>
@@ -81,9 +59,4 @@ export const MyMdxComponent = () => {
     );
   };
 
-<Admonition icon="" title = "Contents">
-  <a href="#Variables">Variables Definitions</a><br/>
-  <a href="#Generator">Config Generator</a><br/>
-  <a href="#schemas">Schema Generator</a>
-</Admonition>
 <MyMdxComponent/>

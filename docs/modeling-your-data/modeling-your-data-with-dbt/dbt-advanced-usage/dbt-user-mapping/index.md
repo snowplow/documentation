@@ -10,7 +10,7 @@ import ThemedImage from '@theme/ThemedImage';
 ```
 
 :::tip
-On this page, `<package>` can be one of: `web`, `mobile`, `unified`
+On this page, `<package>` can be one of: `unified`, `web`, `mobile`
 
 :::
 

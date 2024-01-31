@@ -6,7 +6,7 @@ from dbt_package_list import all_packages
 
 def main():
     package_names = [x[0].split('/')[1] for x in all_packages]
-    # packages = ['utils', 'web', 'mobile', 'media_player', 'normalize', 'fractribution', 'ecommerce']
+    # packages = ['utils', 'web', 'mobile', 'media_player', 'normalize', 'attribution', 'fractribution', 'ecommerce']
     # Set your PAT key so you get the 5000 calls per hour for the github api
     # call with `token <YOUR_TOKEN> as cmd argument if using a local PAT key`
     headers = {'Authorization': f"{sys.argv[1]}"}

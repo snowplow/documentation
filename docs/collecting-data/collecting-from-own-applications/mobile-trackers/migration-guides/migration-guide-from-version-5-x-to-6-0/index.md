@@ -5,63 +5,78 @@ sidebar_position: -7
 
 # Migration guide from version 5.x to 6.0
 
-There were a few breaking changes within the new features and updates in v6, for both iOS and Android.
+There were a few breaking changes within v6, for both iOS and Android. These are described here, with a quick summary of the non-breaking changes at the end.
 
 ## Changes to events
 
-These changes probably won't affect your app code, but they will affect the events generated.
+These changes probably won't break your app code, but they will affect the events generated.
 
 ### Lifecycle autotracking
 
-Lifecycle autotracking is now on by default, for both trackers. This is because it's a prerequisite for the new screen engagement tracking, which is also on by default.
+Lifecycle autotracking ADD LINK is now on by default, for both trackers. This is because it's a prerequisite for the new screen engagement ADD LINK tracking, which is also on by default.
 
 ### Platform context entity (iOS only)
 
-To comply with 
+To comply with Apple's Privacy Manifest rules, we have removed the automatic tracking of `totalStorage` and `availableStorage` metrics from the [platform context entity](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/platform-and-application-context/index.md). We've also added a Privacy Manifest for the SDK.
 
+To track `totalStorage` or `availableStorage`, use the new `PlatformContextRetriever` callbacks class. The `PlatformContextRetriever` is available for both iOS and Android. It allows you to override any platform entity properties.
 
+### Preventing unnecessary ScreenView event for Android
 
-TODO
+Previously a screen view event was tracked again by the screen view autotracking ADD LINK feature when the app moved to foreground. This is not expected because the screen doesn't change when the app is in background, and it is not consistent with how the screen view autotracking works on iOS. The extra event will no longer be tracked.
 
-Although the trackers underwent a huge internal rewrite (from Objective-C to Swift and from Java to Kotlin), we tried to keep the API with as little breaking changes as possible.
+### Event entities API for iOS
 
-## iOS tracker
+To standardise the behaviour between trackers, we've changed how the `entities()` method of all events works on iOS. Previously, calling `event.entities(newListEntities)` replaced all the context entities currently attached to the event. Now, the new entities are appended instead.
 
-The supported platforms have changed on the iOS tracker:
+There's no change to the behaviour of the variable `entities`, so you could still replace them all using `event.entities = newListEntities`.
 
-* Minimum iOS deployment target changed from 9.0 to 11.0.
-* On macOS, from 10.10 to 10.13.
-* On tvOS, from 9.0 to 12.0.
-* On watchOS, from 2.0 to 6.0.
+## Non-optional tracker on iOS
 
-Additionally, there is a new way to enable tracking the IDFA identifier – instead of adding the `SNOWPLOW_IDFA_ENABLED` compiler flag, one now needs to implement a callback (`TrackerConfiguration.advertisingIdentifierRetriever`) that retrieves the value. See the [documentation for more information](../../tracking-events/platform-and-application-context/index.md#identifier-for-advertisers-idfaaaid).
+In the v5.x of the iOS tracker, `createTracker` returned an optional `TrackerController?`. This was an oversight. In v6, the iOS tracker again returns a non-optional `TrackerController`.
 
-If using `EmitterConfiguration` when creating a new tracker, the default buffer option configuration changed from `single` (max 1 event per batch) to `default` (max 10 events per batch). If not using an `EmitterConfiguration`, the buffer option was set to `default` also in tracker v4.
+## Concurrency on iOS
 
-## Android tracker
+The return type of the `Tracker.track()` method has changed from `UUID?` to `UUID`. Previously, `nil` could be returned if the tracker was paused, or if the event was filtered out and not actually tracked. From v6 onwards it will always return a UUID. If the event is tracked, this will be the `eventId`.
 
-We adopted using Kotlin properties instead of Java fields for public properties of the event classes. This doesn't change the API in Kotlin. On the other hand, in Java, the properties are now accessible through getter and setter methods instead of directly as Java fields.
+This change was necessary as part of the comprehensive refactoring of the tracker thread model. The iOS tracker now uses a global dispatch queue. This single queue makes the tracker much safer. Almost all actions are now performed concurrently. Network requests in Emitter are still asynchronous.
 
-For example, to set the true timestamp of events in Java the API changes as follows:
+## Changes to the `EventStore` interface
 
-```java
-// v4 API:
-event.trueTimestamp = 123456789L; // doesn't work anymore
-// v5 API:
-event.setTrueTimestamp(123456789L);
-```
+A new method, `removeOldEvents()` has been added to the `EventStore` protocol on both trackers. This method is used in the new feature that deletes events from storage if they get too old (by default, 30 days). Also, if too many events collect in the `EventStore`, the older ones will be deleted (default 1000 events).
 
-However, the API hasn't changed if you use the builder methods to set the properties. For example, this approach works in both the v4 and v5 tracker:
+For the Android tracker, we have updated the `EventStore` interface to remove the optional types.
 
-```java
-// works both in v4 and v5 API:
-event.trueTimestamp(123456789L);
-```
+## Non-breaking changes and bug fixes
 
-If using `EmitterConfiguration` when creating a new tracker, the default buffer option configuration changed from `single` (max 1 event per batch) to `default` (max 10 events per batch). If not using an `EmitterConfiguration`, the buffer option was set to `default` also in tracker v4.
+### New events
 
-## Renaming contexts to entities
+The screen engagement ADD LINK feature adds new events for both iOS and Android. For iOS only, there are new events (and a new demo app) for visionOS ADD LINK. For Android, the `PageView` event has been restored, after accidental deprecation in v5.
 
-The `contexts` property in events used to assign custom context entities to events has been renamed to `entities`. The previous naming is still available but it is deprecated.
+### Cross-device tracking
 
-In the Android tracker, the `customContexts` property in events has been deprecated in favor of the `entities` property.
+Decorate URIs in both trackers using the new `CrossDeviceParameterConfiguration`. ADD LINK 
+
+### Emitter and network connection behaviour
+
+The Android tracker default emit timeout has been increased to 30 seconds, from 5 seconds. This setting is configured ADD LINK using the `NetworkConfiguration`. The `timeout` option has been added to the iOS tracker.
+
+In both trackers, we have officially set the default batch size to 1 (`BufferOption.Single`), i.e. the events are sent as soon as they are tracked. This is consistent with the web tracker, and is a good default to use in client side apps to prevent some events hanging in the event store when the app is quit/uninstalled earlier than the event store is cleared. In theory, the previous behaviour was to send batches of 10 (`BufferOption.SmallGroup`), but due to a bug, they were always sent individually. We've also fixed a bug in which the `bufferOption` in `EmitterConfiguration` was not being used correctly, making it impossible to batch events. This is now possible.
+
+For Android, we've increased the number of threads in the `Executor` thread pool. The thread count is now properly configurable.
+
+For both trackers, network requests are now made serially. The new behaviour updates how the `EmitterConfiguration.emitRange` configuration is used – it now tells how many events should be added to one request. The new default `emitRange` is 25.
+
+In both trackers, the internal `Emitter` constructor has been updated. The change moves the namespace and event store into the constructor, enabling removing some optionals, and makes the properties immutable and safer.
+
+### Access to `EventStore` in iOS tracker
+
+The `EventStore` is now exposed as part of the `EmitterController`, allowing access for e.g. deleting all stored events like this `tracker?.emitter?.eventStore?.removeAllEvents()`. This was already possible on Android.
+
+### Codable structs in the iOS tracker
+
+The custom event and entity classes `SelfDescribing` and `SelfDescribingJson` now accept data represented using `Encodable` structs. This alllows you to define the data using typed structs, and track that directly instead of using untyped dictionaries.
+
+### Removed FMDB dependency for iOS
+
+The FMDB dependency has been removed from `SQLiteEventStore`. The built-in `sqlite` methods are used instead.

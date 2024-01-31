@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The Snowplow iOS Tracker SDK supports iOS 11.0+, macOS 10.13+, tvOS 12.0+ and watchOS 6.0+.
+The Snowplow iOS Tracker SDK supports iOS 11.0+, macOS 10.13+, tvOS 12.0+, watchOS 6.0+, and visionOS 1.0+.
 It can be used both in Swift as well as in Objective-C code.
 
 ## Installing
@@ -31,7 +31,7 @@ To install Snowplow Tracker with Cocoapods:
 2. Add the iOS Tracker SDK among the dependencies of your `Podfile`:
    
    ```ruby
-   pod 'SnowplowTracker', '~> 5.0'
+   pod 'SnowplowTracker', '~> 6.0'
    ```
 
 3. Run the command `pod install` to add the tracker to your app project.
@@ -58,7 +58,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
    
    ```swift
    let event = Structured(category: "Category_example", action: "Action_example")
-   tracker?.track(event)
+   tracker.track(event)
    ```
    
    If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :

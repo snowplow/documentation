@@ -2,9 +2,9 @@
     <td><code>output.good.location</code></td>
     <td>Required, e.g. <code>gs://mybucket/events</code>.  URI of the bucket location to which to write Snowplow enriched events in Delta format.  The URI should start with the following prefix:
     <ul>
+      <li><code>s3a://</code> on AWS</li>
       <li><code>gs://</code> on GCP</li>
       <li><code>abfs://</code> on Azure</li>
-      <li><code>s3a://</code> on AWS</li>
     </ul>
     </td>
 </tr>

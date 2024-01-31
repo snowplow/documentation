@@ -98,7 +98,20 @@ A future release of Lake Loader will add support for [Snowflake as an Iceberg ca
 ### Streams configuration
 
 <Tabs groupId="cloud" queryString>
-  <TabItem value="gcp" label="GCP" default>
+  <TabItem value="aws" label="AWS" default>
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+          <KinesisConfig/>
+        </tbody>
+    </table>
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
     <table>
         <thead>
             <tr>
@@ -138,19 +151,6 @@ You can use the `input.consumerConf` and `output.bad.producerConf` options to co
 
 :::
 
-  </TabItem>
-  <TabItem value="aws" label="AWS">
-    <table>
-        <thead>
-            <tr>
-                <th>Parameter</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-          <KinesisConfig/>
-        </tbody>
-    </table>
   </TabItem>
 </Tabs>
 

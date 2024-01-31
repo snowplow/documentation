@@ -135,10 +135,10 @@ Indeed, disabling the `screenViewAutotracking` only, the tracker can still attac
 ## Screen engagemement tracking
 
 :::note Available since version 6
-This version has been added in the version 6.0.0 of the iOS and Android trackers
+This feature has been added in the version 6.0.0 of the iOS and Android trackers.
 :::
 
-Screen engagement tracking is a feature that enabled tracking the user activity on the screen.
+Screen engagement tracking is a feature that enables tracking the user activity on the screen.
 This consists of the time spent and the amount of content viewed on the screen.
 
 Concretely, it consists of the following metrics:
@@ -188,9 +188,9 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
 Screen time is tracked automatically by the tracker based on the screen view events.
 
 Additionally, the tracker makes use of `application_background` and `application_foreground` events to distinguish between screen time in foreground (`foreground_sec` property in `screen_summary` entity) and screen time in background (`background_sec` property).
-Make sure that lifecycle autotracking enabled (it is by default) in order for the tracker to be able to distinguish between these two states.
+Make sure that lifecycle autotracking is enabled (it is by default) in order for the tracker to be able to distinguish between these two states.
 
-The foreground time is translated into the engaged time during modeling with the unified dbt package.
+The foreground time is translated into the engaged time during modeling with the unified dbt package (see below).
 Foreground and background time together result in the absolute time on screen.
 
 ### List item view tracking

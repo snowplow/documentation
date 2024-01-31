@@ -30,7 +30,7 @@ Page pings are identified by `e=pp`. As well as all the standard web fields, th
 ## On mobile
 
 :::note
-Screen engagement tracking is available on mobile apps starting with version 6.
+Screen engagement tracking is available for native Android and iOS apps starting with version 6 of the trackers.
 :::
 
 Screen engagement information is tracked on our mobile trackers in the `screen_summary` context entity.

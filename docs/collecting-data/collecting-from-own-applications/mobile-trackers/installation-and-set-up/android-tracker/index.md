@@ -22,7 +22,7 @@ Add into your `build.gradle` file:
 dependencies {
   ...
   // Snowplow Android Tracker
-  implementation 'com.snowplowanalytics:snowplow-android-tracker:5.+'
+  implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
   // In case 'lifecycleAutotracking' is enabled
   implementation 'androidx.lifecycle-extensions:2.2.+'
   ...
@@ -177,3 +177,18 @@ The trackers created with the above method are configured "locally" only. To cre
 :::
 
 The [Android tracker Github repository](https://github.com/snowplow/snowplow-android-tracker) includes demo apps in Java, Kotlin, and Kotlin with Jetpack Compose. They are provided as simple reference apps to help you set up the tracker.
+
+## Using the tracker with R8 optimization
+
+Depending on your app configuration, you may need to add ProGuard rules to prevent the R8 compiler removing code needed for tracker function. Fetching certain [platform context](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/platform-and-application-context/index.md) properties - AAID and app set ID - uses reflection. To include the necessary classes, add the following rules to the app's `proguard-rules.pro` file.
+
+```
+# Reflection for the appSetId
+-keep class com.google.android.gms.appset.AppSet { *; }
+-keep class com.google.android.gms.appset.AppSetIdInfo { *; }
+-keep class com.google.android.gms.internal.appset.zzr { *; }
+-keep class com.google.android.gms.tasks.Tasks { *; }
+
+# Reflection for the AAID (AndroidIdfa)
+-keep class com.google.android.gms.ads.identifier.** { *; }
+```

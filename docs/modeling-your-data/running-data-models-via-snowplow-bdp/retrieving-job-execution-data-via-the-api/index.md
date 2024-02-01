@@ -11,7 +11,7 @@ The exact same data about past and current jobs executions can be retrieved and 
 
 You can have a look at and interact with all available endpoints in the [API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml#/Jobs).
 
-Authorizing in the API documentation
+### Authorizing in the API documentation
 
 To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual requests is overwritten by this authorization.
 

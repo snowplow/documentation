@@ -16,33 +16,11 @@ Standalone JVM application that reads collector payloads events from a Kinesis s
 
 Standalone JVM application that reads collector payloads from a PubSub subscription and outputs back to PubSub.
 
-## [enrich-kafka](/docs/pipeline-components-and-applications/enrichment-components/enrich-kafka/index.md) (cloud agnostic)
+## [enrich-kafka](/docs/pipeline-components-and-applications/enrichment-components/enrich-kafka/index.md) (Azure)
 
 Standalone JVM application that reads collector payloads from a Kafka topic and outputs back to Kafka.
 
 ## [enrich-nsq](/docs/pipeline-components-and-applications/enrichment-components/enrich-nsq/index.md) (cloud agnostic)
 
-## [enrich-rabbitmq-experimental](/docs/pipeline-components-and-applications/enrichment-components/enrich-rabbitmq/index.md) (cloud agnostic)
-
-Standalone JVM application that reads collector payloads from a RabbitMQ subscription and outputs back to RabbitMQ.
-
-## [stream-enrich-kafka](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) (cloud agnostic)
-
-Standalone JVM application that reads collector payloads from a Kafka topic and outputs back to Kafka.
-
-:::caution
-
-In the near future, this app will get deprecated in favor of `enrich-kafka`.
-
-:::
-
-## [stream-enrich-kinesis](/docs/pipeline-components-and-applications/enrichment-components/stream-enrich/index.md) (AWS)
-
-Standalone JVM application that reads collector payloads from a Kinesis stream and outputs back to Kinesis.
-
-:::caution
-
-In the near future, this app will get deprecated in favor of `enrich-kinesis`.
-
-:::
+Standalone JVM application that reads collector payloads from NSQ and outputs back to NSQ.
 

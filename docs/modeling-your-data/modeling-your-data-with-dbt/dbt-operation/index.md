@@ -32,6 +32,15 @@ These manifest tables are critical to the package **and as such are protected fr
 :::
 
 <Tabs groupId="dbt-packages" queryString>
+<TabItem value="unified" label="Snowplow Unified Digital" default>
+
+There are 3 manifest tables included in this package:
+
+- `snowplow_unified_incremental_manifest`: Records the current state of the package
+- `snowplow_unified_base_sessions_lifecycle_manifest`: Records the start & end timestamp of all sessions
+- `snowplow_unified_base_quarantined_sessions`: Records sessions that have exceeded the maximum allowed session length, defined by `snowplow__max_session_days` (default 3 days)
+
+</TabItem>
 <TabItem value="web" label="Snowplow Web" default>
 
 There are 3 manifest tables included in this package:

@@ -35,7 +35,7 @@ export const printYamlVariables = (data) => {
 
 export const MyMdxComponent = () => {
   const schemaName = 'dbtUtils';
-  const versions = ['0.15.2'];
+  const versions = ['0.16.1', '0.16.0', '0.15.2'];
   const label = 'dbt utils version';
   const output = printYamlVariables;
   return (
@@ -52,10 +52,15 @@ export const MyMdxComponent = () => {
             <p>You can use the below inputs to generate the code that you need to place into your <code>dbt_project.yml</code> file to configure the package as you require. Any values not specified will use their default values from the package.</p>
         </JsonSchemaGenerator>
         <DbtSchemas/>
-        <h2 id="schemas">Ouput Schemas</h2> 
+        <h2 id="schemas">Output Schemas</h2> 
         <SchemaSetter output={printSchemaVariables} />
       </DbtCongfigurationPage>
     );
   };
 
+<Admonition icon="" title = "Contents">
+  <a href="#Variables">Variables Definitions</a><br/>
+  <a href="#Generator">Config Generator</a><br/>
+  <a href="#schemas">Schema Generator</a>
+</Admonition>
 <MyMdxComponent/>

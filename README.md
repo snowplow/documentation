@@ -73,6 +73,8 @@ Whenever the same functionality can be achieved in multiple offerings but in a d
 
 For links within this documentation, please end the link with `/index.md`. This way all links will be checked, and you’ll get an error if a link is broken at any point.
 
+If you forgot to do this, you can quickly fix a bunch of links by running `./make-links-validatable.sh`. (You might need to install the `moreutils` package via `brew install moreutils` to get the `sponge` command.)
+
 ### Concepts
 
 There are several key concepts in Snowplow: events (self-describing, structured), entities, schemas. We must ensure that we use and explain them consistently.
@@ -117,6 +119,20 @@ Some of our modules are versioned (e.g. trackers, loaders). Here are a few simpl
 
 When you move pages around, make sure to add a redirect in `static/_redirects`.
 This ensures that any external links pointing to the old URL still work.
+
+To easily accomplish this, you can use `./move.sh`. (You might need to install the `moreutils` package via `brew install moreutils` to get the `sponge` command.)
+
+```bash
+./move.sh docs/old/page/location docs/new/page/location
+```
+
+This command will automatically move the pages, create redirect rules, and add all changes to git.
+
+Note: the script is somewhat brittle, and you need to follow these rules:
+* Only run it from the root of the repo
+* Use relative paths, starting with `docs/` (like above)
+* End the path on a directory, rather than an `index.md`
+* Do not include trailing slashes
 
 ## Formatting content
 

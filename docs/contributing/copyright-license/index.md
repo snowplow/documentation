@@ -71,6 +71,7 @@ _Usage for personal and academic purposes only_ ([FAQ](/docs/contributing/person
 All pipeline apps:
 * Collector _(3.0.0+)_
 * Enrich _(4.0.0+)_
+* Iglu Server _(0.12.0+)_
 * RDB Loader _(5.8.0+)_
 * BigQuery Loader _(2.0.0+)_
 * Lake Loader _(0.2.0+)_

@@ -252,86 +252,6 @@ export const Schema = {
       packageDefault: 'hive_metastore',
       description: 'The catalogue your atomic events table is in',
     },
-    snowplow__context_ecommerce_user: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) E-commerce User Context Table',
-      longDescription: 'The table name for your e-commerce user entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_ecommerce_user_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__context_ecommerce_checkout_step: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) E-commerce Checkout Step Context Table',
-      longDescription: 'The table name for your e-commerce checkout step entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_ecommerce_checkout_step_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__context_ecommerce_page: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) E-commerce Page Context Table',
-      longDescription: 'The table name for your e-commerce page entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_ecommerce_page_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__context_ecommerce_transaction: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) E-commerce Transaction Context Table',
-      longDescription: 'The table name for your e-commerce transaction entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_ecommerce_transaction_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__context_ecommerce_cart: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) E-commerce Cart Context Table',
-      longDescription: 'The table name for your e-commerce cart entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_ecommerce_cart_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__context_web_page: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) Web Page Context Table',
-      longDescription: 'The table name for your web page entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_web_page_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__context_ecommerce_product: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) E-commerce Product Context Table',
-      longDescription: 'The table name for your e-commerce product entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_ecommerce_product_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__context_mobile_session: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) Mobile Session Context Table',
-      longDescription: 'The table name for your mobile session entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_client_session_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__context_screen: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) Mobile Screen Context Table',
-      longDescription: 'The table name for your mobile screen entity.',
-      packageDefault: 'com_snowplowanalytics_mobile_screen_1',
-      group: 'Warehouse Specific',
-    },
-    snowplow__sde_ecommerce_action: {
-      type: 'string',
-      warehouse: 'Redshift',
-      title: '(Redshift) E-commerce Action Context Table',
-      longDescription: 'The table name for your e-commerce action entity.',
-      packageDefault: 'com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1',
-      group: 'Warehouse Specific',
-    },
     snowplow__derived_tstamp_partitioned: {
       type: 'boolean',
       warehouse: 'Bigquery',
@@ -445,6 +365,30 @@ export const Schema = {
       longDescription: 'Field(s) to carry through from the events table to the derived table. The field is from the `transaction` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.',
       packageDefault: '[ ] (no passthroughs)',
       $ref: '#/definitions/passthrough_vars'
+    },
+    snowplow__entities_or_sdes: {
+      type: 'string',
+      title: '(Redshift) Entities or SDEs',
+      longDescription: 'A list of dictionaries defining the `entity` or `self-describing` event tables to join onto your base events table. Please use the tool below or see the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/?warehouse=redshift%2Bpostgres#utilizing-custom-contexts-or-sdes) for details of the structure.',
+      packageDefault: '[]',
+      warehouse: 'Redshift',
+      group: 'Warehouse Specific',
+      type: 'array',
+      description: '> Click the plus sign to add a new entry',
+      minItems: 0,
+      items: {
+        type: 'object',
+        title: "Entity or SDE",
+        properties: {
+          schema: { type: 'string', description: 'Table name' }, // TODO: add regex here to make valid context/unstruct table name
+          prefix: { type: 'string', description: 'Prefix to add to columns' }, // TODO: add regex here to make valid SQL name?
+          alias: { type: 'string', description: 'Table alias for the subquery' }, // TODO: add regex here to make valid SQL alias?
+          single_entity: { type: 'boolean', title: 'Is single entity?' }
+        },
+        required: ['schema', 'prefix'],
+        additionalProperties: false
+      },
+      uniqueItems: true,
     },
   },
 }

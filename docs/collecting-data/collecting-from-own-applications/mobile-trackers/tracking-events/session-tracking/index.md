@@ -208,7 +208,7 @@ Snowplow.createTracker(getApplicationContext(), namespace, networkConfig, sessio
   </TabItem>
 </Tabs>
 
-## Decorating outgoing links using user and session information for cross-navigation tracking
+## Decorating outgoing links using cross-navigation tracking
 
 :::note Not available before v6
 This feature was introduced in version 6.0.0 of the iOS and Android trackers.

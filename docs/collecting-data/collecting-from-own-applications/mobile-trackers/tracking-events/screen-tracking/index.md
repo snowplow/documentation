@@ -156,6 +156,8 @@ This information is attached using a [`screen_summary` context entity](/docs/col
 
 Screen engagement tracking is enabled by default, but can be configured using the `TrackerConfiguration.screenEngagementAutotracking` option.
 
+For a demo of how mobile screen engagement tracking works in action, **[please visit this demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/)**.
+
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 

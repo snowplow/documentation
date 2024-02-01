@@ -7,7 +7,7 @@ sidebar_custom_props:
     - enterprise
 ---
 
-Data applications are tools that help customers extract value from their data quickly by providing templated use-cases for data collection, modeling, and activation. They aim to reduce the technical barrier, making data analysis more accessible beyond just SQL users. These apps allow data teams to deliver new solutions to business stakeholders more efficiently, reducing time to value for your business. 
+Data applications are self-service analytics tools that help customers extract value from their data quickly by providing templated use-cases for data collection, modeling, and activation. They aim to reduce the technical barrier, making data analysis more accessible beyond just SQL users.
 
 Data apps can be installed via requests made in Console, they are deployed into your cloud, are authenticated against your Console account, and connect directly to your destinations to query your Snowplow data. Permissions can be managed in the [usual way](/docs/using-the-snowplow-console/managing-users/managing-permissions/index.md).
 

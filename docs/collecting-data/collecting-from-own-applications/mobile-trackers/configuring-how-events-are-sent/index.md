@@ -204,7 +204,7 @@ There are two options in the `EmitterConfiguration` that are relevant for config
 1. `bufferOption` – How many events to wait for before making a request. Defaults to 1.
 2. `emitRange` – The maximum amount of events to send in a request. Defaults to 25.
 
-The `bufferOption` tells the tracker how many events have to accumulate in the event store before it should make a request to collector.
+The `bufferOption` tells the tracker how many events have to accumulate in the event store before it should make a request to the collector.
 There are three options: 1 (`BufferOption.single`), 10 (`BufferOption.smallGroup`), or 25 (`BufferOption.largeGroup`) events.
 Choosing `BufferOption.smallGroup` means that 10 events need to be tracked before the first request to the collector is made.
 
@@ -267,7 +267,7 @@ If events accumulated in the event store without any limits, the size of the eve
 To prevent this, the tracker automatically removes old events from the event store.
 It removes old events based on two criteria that are configurable using `EmitterConfiguration`:
 
-1. Maximum event store size (`maxEventStoreSize`) – in case the number of events surpasses this threshold, oldest events will be removed until the number of events is under the threshold. Defaults to 1000.
+1. Maximum event store size (`maxEventStoreSize`) – in case the number of events surpasses this threshold, the oldest events will be removed until the number of events is under the threshold. Defaults to 1000.
 2. Maximum event age (`maxEventStoreAge`) – events older than this threshold are removed. Defaults to 30 days.
 
 The clean up is triggered before each emit attempt – before sending events to the collector.

@@ -233,7 +233,7 @@ The `decorateLink` function adds the following information to the link (configur
 - `subjectUserId` - The custom business user identifier (value of `SubjectController.userId`) – optional.
 - `sourceId` – The `appId` (value of `TrackerConfiguration.appId`) – optional.
 - `platform` - The platform of the current device (value of `TrackerController.devicePlatform` – optional.
-- `reason` – Optional identifier/information for cross-navigation – optional.
+- `reason` – Identifier/information for cross-navigation – optional.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

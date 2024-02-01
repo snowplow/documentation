@@ -366,5 +366,29 @@ export const Schema = {
       packageDefault: '[ ] (no passthroughs)',
       $ref: '#/definitions/passthrough_vars'
     },
+    snowplow__entities_or_sdes: {
+      type: 'string',
+      title: '(Redshift) Entities or SDEs',
+      longDescription: 'A list of dictionaries defining the `entity` or `self-describing` event tables to join onto your base events table. Please use the tool below or see the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/?warehouse=redshift%2Bpostgres#utilizing-custom-contexts-or-sdes) for details of the structure.',
+      packageDefault: '[]',
+      warehouse: 'Redshift',
+      group: 'Warehouse Specific',
+      type: 'array',
+      description: '> Click the plus sign to add a new entry',
+      minItems: 0,
+      items: {
+        type: 'object',
+        title: "Entity or SDE",
+        properties: {
+          schema: { type: 'string', description: 'Table name' }, // TODO: add regex here to make valid context/unstruct table name
+          prefix: { type: 'string', description: 'Prefix to add to columns' }, // TODO: add regex here to make valid SQL name?
+          alias: { type: 'string', description: 'Table alias for the subquery' }, // TODO: add regex here to make valid SQL alias?
+          single_entity: { type: 'boolean', title: 'Is single entity?' }
+        },
+        required: ['schema', 'prefix'],
+        additionalProperties: false
+      },
+      uniqueItems: true,
+    },
   },
 }

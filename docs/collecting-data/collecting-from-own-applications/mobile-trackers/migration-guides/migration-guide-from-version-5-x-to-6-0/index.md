@@ -71,7 +71,7 @@ For the Android tracker, we have updated the `EventStore` interface to remove th
 
 ## Other changes
 
-See the full changelog on Github, for iOS ADD LINK and Android ADD LINK.
+See the full changelog on Github, for [iOS](https://github.com/snowplow/snowplow-ios-tracker/releases/tag/6.0.0) and [Android](https://github.com/snowplow/snowplow-android-tracker/releases/tag/6.0.0).
 
 ### New events
 

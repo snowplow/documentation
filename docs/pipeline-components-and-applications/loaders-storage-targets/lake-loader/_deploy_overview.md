@@ -19,3 +19,4 @@ To run the loader, mount your config files into the docker image, and then provi
   --iglu-config=/myconfig/iglu.hocon
 `}</CodeBlock>
 
+For some output formats, you need to pull a slightly different tag to get a compatible docker image.  The [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/index.md) page explains when this is needed.

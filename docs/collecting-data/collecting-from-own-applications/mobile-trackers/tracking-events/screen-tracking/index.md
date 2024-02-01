@@ -132,7 +132,7 @@ The `Screen` entity is conditioned by the internal state of the tracker only. To
 
 Indeed, disabling the `screenViewAutotracking` only, the tracker can still attach `Screen` entities automatically based only to the manual tracking of `ScreenView` events, and vice versa.
 
-## Screen engagemement tracking
+## Screen engagement tracking
 
 :::note Available since version 6
 This feature has been added in the version 6.0.0 of the iOS and Android trackers.

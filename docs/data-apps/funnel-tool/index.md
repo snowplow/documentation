@@ -51,8 +51,6 @@ You can customize your funnel by changing the following values:
 - **Additional columns to group by -** Use this to visualize additional dimensions in your funnel analysis e.g. experiment groups
 - **Max days since funnel start** - Maximum days since the funnel's start for an event to still be considered part of that funnel. Set to 0 for unlimited
 - **Intra step time (hours)** - Maximum hours since an event for the next to be included in the same funnel. Set to 0 for unlimited
-- **Funnel count strategy** - First Funnel: Each user only has their first funnel considered even if a later one makes more progress. Unique Funnel: multiple funnels can be counted if they exist
-
 
 ### Outputs
 Clicking `Build Funnel Charts` will generate several interactive charts and tables. You can also download the generated SQL to edit or rerun in your own environment. Once you are happy with the settings of your funnel you can save it for anyone to open and use, and you can also save the results of a given run to a table in your warehouse in the settings tab.

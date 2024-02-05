@@ -338,7 +338,7 @@ export const Schema = {
       packageDefault: '[ ] (no passthroughs)',
       $ref: '#/definitions/passthrough_vars'
     },
-    snowplow__checkouts_passthroughs: {
+    snowplow__checkout_passthroughs: {
       title: 'Checkouts Passthroughs',
       group: 'Contexts, Filters, and Logs',
       longDescription: 'Field(s) to carry through from the events table to the derived table. The field is from the `transaction` or `checkout_step` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.',

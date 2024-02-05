@@ -1,7 +1,7 @@
 ---
 title: "User & Marketing Dashboards"
 sidebar_position: 2
-sidebar_label: "Marketing Dashboards (Coming Soon)"
+sidebar_label: "Marketing Dashboards"
 ---
 
 :::caution

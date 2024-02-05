@@ -1,7 +1,7 @@
 ---
 title: "Funnel Builder"
 sidebar_position: 2
-sidebar_label: "Funnel Builder (Coming Soon)"
+sidebar_label: "Funnel Builder"
 ---
 
 :::caution

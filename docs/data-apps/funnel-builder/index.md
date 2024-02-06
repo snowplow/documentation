@@ -36,7 +36,7 @@ We suggest you get started by viewing an example funnel, and we have included se
 Here you can select which warehouse schema and table you want to run the analysis on. If you select `atomic.events`, we have included some additional functionality allowing you to reference properties inside nested columns, otherwise you can only reference flat columns.
 
 
-#### Pre-filter
+#### Filter
 This applies a filter to all funnel events. To minimize query costs, we **highly** recommend including a filter on the partition key of your table. For `atomic.events`, this is usually `collector_tstamp` or `derived_tstamp` for BigQuery, but may more recently be `load_tstamp`.
 
 #### Funnel Steps

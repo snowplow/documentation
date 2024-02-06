@@ -1,7 +1,7 @@
 ---
-title: "User & Marketing Dashboards"
+title: "User & Marketing Analytics"
 sidebar_position: 2
-sidebar_label: "User & Marketing Dashboards"
+sidebar_label: "User & Marketing Analytics"
 ---
 
 :::caution
@@ -10,7 +10,7 @@ This data app is currently in Public Preview and features may changes without no
 
 :::
 
-The Marketing Dashboards app contains all the visuals you need to perform a high level analysis of your web and mobile performance. This includes: 
+The User & Marketing Analytics app contains all the visuals you need to perform a high level analysis of your web and mobile performance. This includes: 
 - Reports on user acquisition
 - Information relating to your traffic sources
 - Insight into user retention
@@ -51,22 +51,3 @@ All configurations can be found in the Setup page. Note that all these settings 
 - Select the currency symbol used throughout the app
 - Toggle between using campaign or channel for reporting aggregation
 - Use tables produced by the web package instead of the unified package, and select with tables to use.
-
-<!-- ## Contents
-### Acquisition
-This page contains reporting relating to acquisition of users, both new and returning.
-
-### Engagement
-Information relating to engagement is displayed in this page, including conversion volumes and Daily/Weekly/Monthly Active Users.
-
-### Retention
-This page contains information relating to user retention of 30 day windows.
-
-### Tech
-Reporting on the technology users are using to access your site/app are displayed in this page.
-
-### Users
-Information about the Users such as their location is reported in this page.
-
-### Setup
-This page contains all information to validate you have the correct data to run the app, as well as allowing you to change data sources and other configuration settings for the app. -->

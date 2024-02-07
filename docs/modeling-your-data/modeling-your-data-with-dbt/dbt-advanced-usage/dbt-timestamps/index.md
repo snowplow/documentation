@@ -19,7 +19,7 @@ On this page, `<package>` can be one of: `unified`, `web`, `mobile`, `ecommerce`
 `load_tstamp` - the time the event is added to the raw events table
 `dvce_created_tstamp` - the timestamp when the event was created
 `dvce_sent_tstamp` - the timestamp when the event was sent first
-`derived_tstamp` - the timestamp making allowance for innaccurate device clock, derived_tstamp = collector_tstamp - (dvce_sent_tstamp - dvce_created_tstamp), this should be regarded as the most reliable timestamp to take into account to know when the event actually happened
+`derived_tstamp` - the timestamp making allowance for inaccurate device clock, derived_tstamp = collector_tstamp - (dvce_sent_tstamp - dvce_created_tstamp), this should be regarded as the most reliable timestamp to take into account to know when the event actually happened
 
 For more details on timestamp check out this [Discourse forum](https://discourse.snowplow.io/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
 
@@ -51,7 +51,7 @@ Another way to avoid issues is to configure the package in a way that it avoids/
 
 ### Late arriving data
 
-Late arriving data can happen due to a number of things and can denote different things, therefore it is not easy to understand. The most common scenario is that the device the event is generated on goes offline making a larger than usual gap between the `dvce_created_tstamp` and the `dvce_created_tstamp`:
+Late arriving data can happen due to a number of things and can denote different things, therefore it is not easy to understand. The most common scenario is that the device the event is generated on goes offline making a larger than usual gap between the `dvce_created_tstamp` and the `dvce_sent_tstamp`:
 
 | stage 1             | hours | stage 2          | miliseconds | stage 3          | miliseconds | stage 4     | possible reasons    |
 |---------------------|-------|------------------|-------------|------------------|-------------|-------------|---------------------|
@@ -66,7 +66,7 @@ and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', days_late_allow
 #### Late loaded events
 Another case of "late arriving data" is when there is a data downtime (e.g. failed events reprocessing, servers in your ETL infrastructure going down):
 
-| stage 1             | miliseconds | stage 2          | miliseconds | stage 3          | days | stage 4     | possible reasons    |
+| stage 1             | miliseconds | stage 2          | miliseconds | stage 3          | days | stage 4     | possible reasons    | 
 |---------------------|-------|------------------|-------------|------------------|-------------|-------------|---------------------|
 | dvce_created_tstamp | ->    | dvce_sent_tstamp | ->          | collector_tstamp | ->          | load_tstamp | data downtime |
 
@@ -80,7 +80,9 @@ Any data model that user snowplow-utils >=0.15.1 to generate the `events_this_ru
         and a.{{ session_timestamp }} >= b.start_tstamp -- deal with late loading events
 ```
 
-Another parameter related to late arriving data in general is the `snowplow__lookback_window_hours`, which is an additional lookback window beyond the end of the last run. E.g.: If the newest processed data is from 5 days ago the package will start looking for new events from 5 days - 6hours ago. In most cases of late arriving data, this is not necessary to reset this as the downtime might effect all your new events, but if it was only a subset of events and the package was processed once or more times during that downtime period there might be rare cases where this needs to be reset as a one-off, to reprocess a larger period to include sessions that were completely missed or events that were missed from sessions during this time. The reason why this might be more rare than you would assume is that there can be longer running sessions that produce new events so that the reprocessing window will be large enough for multiple subsequent data model runs to reprocess those missed events. 
+Another parameter related to late arriving data in general is the `snowplow__lookback_window_hours`, which is an additional lookback window beyond the end of the last run. E.g.: If the newest processed data is from 5 days ago the package will start looking for new events from 5 days - 6hours ago. In most cases of late arriving data, this is not necessary to reset as either the new event will arrive when it arrives and the package will process it as normal new event, just later, or if the late arriving event is due to a late loaded event (bigger gap between collector and load_tstamp due to some infrastructure issues for instance) even if the data model has been processed already during the time the late arriving data is not in the warehouse, there can be longer running sessions that produce new events in subsequent runs so that the reprocessing window will usually be large enough to reprocess those missed events. For more details on this they can check out the: https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/
+
+In the rare event when this needs to be reset as a one-off still, you can just change this variable to reprocess and backfill a larger period to include sessions that were completely missed or events that were missed from sessions during this time.
 
 | stage 1             | miliseconds | stage 2          | miliseconds | stage 3          | days | stage 4     |
 |---------------------|-------------|------------------|-------------|------------------|------|-------------|

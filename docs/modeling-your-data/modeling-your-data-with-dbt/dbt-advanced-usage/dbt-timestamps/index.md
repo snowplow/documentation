@@ -63,7 +63,7 @@ graph LR
 
 ## Balancing variables
 
-Below we explain some use cases that are outside the normal flow, like late arriving data. Although some of these exceptions are quite rare, they have the ability to break the package by creating duplicates certain tables (manifest or derived tables). We try our best to prevent such rare events causing issues and interrupting the incremental flow in our packages but in case they may happen, our tests will likely detect them even if the model does not stop during execution. 
+Below we explain some use cases that are outside the normal flow, like late arriving data. Although some of these exceptions are quite rare, they have the ability to break the logic expected by our packages by creating duplicates records in certain tables. We try our best to prevent such rare events causing issues and interrupting the incremental flow in our packages but in case they may happen, our tests will likely detect them even if the model does not stop during execution. 
 
 Another way to avoid issues is to configure the package in a way that it avoids/handles exceptional use cases with a range of variables that you can use to specify lookback ranges and session periods. The key is to balance the risk with processing power to keep costs down:
 

@@ -34,11 +34,11 @@ For modeling reasons we try to use the `derived_tstamp` as this is the truest to
 ```mermaid
 graph LR
     style A color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
-    style B color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
-    style C color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
-    style D color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
+    style B color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
+    style C color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
+    style D color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
 
-    linkStyle default stroke-width:px,fill:#633EB5,stroke:#633EB5,color:#FEEEBD
+    linkStyle default stroke-width:px,fill:#633EB5,stroke:#633EB5,color:#633EB5
 
 
     A[dvce_created_tstamp] -->|millisecond| B[dvce_sent_tstamp]
@@ -48,7 +48,7 @@ graph LR
 
 ```mermaid
 graph LR
-    style A color:#3F2874, fill:#FEEEBD, stroke:#3F2874, stroke-width:1px;
+    style A color:#724512, fill:#FEEEBD, stroke:#724512, stroke-width:1px;
     style B color:#724512, fill:#FEEEBD, stroke:#724512, stroke-width:1px;
     style C color:#724512, fill:#FEEEBD, stroke:#724512, stroke-width:1px;
     style D color:#724512, fill:#FEEEBD, stroke:#724512, stroke-width:1px;
@@ -84,11 +84,11 @@ The most common scenario is that the device the event is generated on goes offli
 ```mermaid
 graph LR
     style A color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
-    style B color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
-    style C color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
-    style D color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
+    style B color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
+    style C color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
+    style D color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
 
-    linkStyle default stroke-width:px,fill:#633EB5,stroke:#633EB5,color:#FEEEBD
+    linkStyle default stroke-width:px,fill:#633EB5,stroke:#633EB5,color:#633EB5
 
 
     A[dvce_created_tstamp] -->|HOURS| B[dvce_sent_tstamp]
@@ -110,11 +110,11 @@ The other most common case is that of late loaded events, where the gap is betwe
 ```mermaid
 graph LR
     style A color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
-    style B color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
-    style C color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
-    style D color:#724512, fill:#F0EBF8, stroke:#724512, stroke-width:1px;
+    style B color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
+    style C color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
+    style D color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
 
-    linkStyle default stroke-width:px,fill:#633EB5,stroke:#633EB5,color:#FEEEBD
+    linkStyle default stroke-width:px,fill:#633EB5,stroke:#633EB5,color:#633EB5
 
 
     A[dvce_created_tstamp] -->|millisecond| B[dvce_sent_tstamp]

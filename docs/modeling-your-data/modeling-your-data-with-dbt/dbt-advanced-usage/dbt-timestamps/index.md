@@ -67,12 +67,12 @@ Below we explain some use cases that are outside the normal flow, like late arri
 
 To help manage these cases, our packages are built to handle these edge cases, and you can configure a range of variables to finetune this to balance your needs between risk and cost:
 
-- `snowplow__backfill_limit_days` (default= 30): to avoid processing too much at once
-- `snowplow__lookback_window_hours` (default= 6): to limit how far to look back (not really necessary to be more than 1 when doing historic runs as data can’t arrive “late” from months ago
-- `snowplow__start_date` to not process data older than you actually need, there has to be data between this date and the back_fill_limit_days in the warehouse
-- `snowplow__days_late_allowed`(default= 3): to configure how late is too late to be included. The maximum allowed number of days between the event creation and it being sent to the collector. If the `dvce_sent_tstamp` - `dvce_created_tstamp` > days_late_allowed, then the event is excluded.  
+- `snowplow__backfill_limit_days` (default= 30): to avoid processing too much data in one run
+- `snowplow__lookback_window_hours` (default= 6): to limit how far to look back for late arriving data (not really necessary to be more than 1 when doing historic runs as data can’t arrive _late_ from months ago)
+- `snowplow__start_date`: to not process data older than you actually need, there has to be data between this date and the back_fill_limit_days in the warehouse
+- `snowplow__days_late_allowed`(default= 3): to configure how late is too late to be included. The maximum allowed number of days between the event creation and it being sent to the collector. If the `dvce_sent_tstamp - dvce_created_tstamp > days_late_allowed`, then the event is excluded.  
 - `snowplow__upsert_lookback_days` (default= 730): Period of time (in days) to look back over the production table in order to find rows to delete when upserting data. Where performance is not a concern, should be set to as long a value as possible to avoid potential duplicates.
-- `snowplow__max_session_days` (default= 3): Bots can keep alive a session for quite some time and with each incremental run, if there is a new event for that session in the incremental lookback period the whole session will be reprocessed which can become a very costly operation on your events table over time, if kept "alive". This variable will prevent those ongoing sessions to be reprocessed over and over and if they are over the limit they will be migrated to the `base_quarantined_sessions` table to exlude from processing further.
+- `snowplow__max_session_days` (default= 3): Bots can keep alive a session for quite some time and with each incremental run, if there is a new event for that session the whole session will be reprocessed which can become a very costly operation on your events table over time, if kept "alive". This variable prevents those ongoing sessions to be reprocessed by tracking them in the `base_quarantined_sessions` table to exlude from processing further.
 
 ### Late arriving data
 

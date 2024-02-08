@@ -76,7 +76,10 @@ To help manage these cases, our packages are built to handle these edge cases, a
 
 ### Late arriving data
 
-Late arriving data can happen due to a number of things and can denote different things, therefore it is not easy to understand. The most common scenario is that the device the event is generated on goes offline making a larger than usual gap between the `dvce_created_tstamp` and the `dvce_sent_tstamp`:
+Late arriving data can mean a number of differnt things, depending on where the delay in the flow of data occurs. Here we cover the 2 most common.
+
+#### Late Sent Events
+The most common scenario is that the device the event is generated on goes offline, leading to a larger than usual gap between the `dvce_created_tstamp` and the `dvce_sent_tstamp`:
 
 ```mermaid
 graph LR
@@ -93,15 +96,16 @@ graph LR
     C[collector_tstamp] --> |millisecond|D[load_tstamp] 
 ```
 
-One variable to look at is the `snowplow__days_late_allowed`. To process these events this needs to be set to the maximum number of days you would like the events to be processed. This will take effect in the `events_this_run` table:
+In our packages, processing this type of data is managed by the `snowplow__days_late_allowed` variable. Any event with a delay greater than this value between being created and being sent will not be processed. This will take effect in the `events_this_run` table:
 
 ```sql
+...
 and a.dvce_sent_tstamp <= {{ snowplow_utils.timestamp_add('day', days_late_allowed, 'a.dvce_created_tstamp') }}
+...
 ```
 
-#### Late loaded events
-Another case of "late arriving data" is when there is a data downtime (e.g. failed events reprocessing, servers in your ETL infrastructure going down):
-
+#### Late Loaded Events
+The other most common case is that of late loaded events, where the gap is between the collector and load timestamps. This may be due to batch loading, or issues with your pipeline.
 
 ```mermaid
 graph LR
@@ -118,26 +122,11 @@ graph LR
     C[collector_tstamp] --> |HOURS|D[load_tstamp] 
 ```
 
-##### Rare use case of late loading events
-Any data model that user snowplow-utils >=0.15.1 to generate the `events_this_run` table is safe to handle a rare use case where there is:
-- some late loading data (large delay between collector and load_tstamp) for the first event in the session
-- late arriving event very close to the max session length cut off (which means other session lengths were capped at this close timeframe) causing the session to be reprocessed
-- another session in the same run starting before this session, but then being not reprocessed in a later run
+This type of late arriving data is an issue when the `snowplow__session_timestamp` uses the `collector_tstamp`, if you are using the `load_tstamp` instead this is not an issue as the manifest table will track the load timestmap instead. To manage this we use the `snowplow__lookback_window_hours` variable to add a _buffer_ to the previous maximum processed timestamp to account for some events being delayed.
 
-```sql
-        and a.{{ session_timestamp }} >= b.start_tstamp -- deal with late loading events
-```
+Note that this isn't an issue if _all_ events are delayed, because if all events are delayed the previous maximum processed timestamp would still be before any of these events. In the event of the model running part way through the loading of a set of out-of-order events (e.g. an event recovery), you can increase the `snowplow__lookback_window_hours` to forceably reprocess a larger window of data.
 
-Another parameter related to late arriving data in general is the `snowplow__lookback_window_hours`, which is an additional lookback window beyond the end of the last run. 
+For more details on this they can check out the docs on the [incremental logic](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#package-state).
 
-If the newest processed data is let's say from 5 days ago the package will start looking for new events from 5 days - 6hours ago. In most cases of late arriving data, this is not necessary to reset.
-
-<details>
-<summary>Expand for explanation</summary>
-Either the new event will arrive when it arrives and the package will process it as normal new event, just later, or if the late arriving event is due to a late loaded event (bigger gap between collector and load_tstamp due to some infrastructure issues for instance) even if the data model has been processed already during the time the late arriving data is not in the warehouse, there can be longer running sessions that produce new events in subsequent runs so that the reprocessing window will usually be large enough to reprocess those missed events. 
-For more details on this they can check out the docs on the [incremental logic](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/).
-</details>
-
-In the rare event when this needs to be reset as a one-off still, you can just change this variable to reprocess and backfill a larger period to include sessions that were completely missed or events that were missed from sessions during this time.
-
-Finally, we have the `snowplow__upsert_lookback_days` variable, which although minor due to the default number of days, might impact here too. If you wish to disable the buffer we apply to the upsert in the case of late arriving data either set the `snowplow__upsert_lookback_days` to `0` or if your package has it, you can set `disable_upsert_lookback` to `true` in your model config.
+#### Upserts
+Finally, we have the `snowplow__upsert_lookback_days` variable, which applies a buffer to the limit we use to scan on the target table for any incremental models in our package. If you wish to disable the buffer, for a slightly more optimized but higher risk upsert, either set the `snowplow__upsert_lookback_days` to `0` or if your package has it, you can set `disable_upsert_lookback` to `true` in your model config. To remove the optimized upsert entirely and scan the full table to be sure of no duplicates, set `snowplow_optimize` to false in the specific `model` configuration (note this is not a variable).

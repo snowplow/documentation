@@ -18,7 +18,7 @@ On this page, `<package>` can be one of: `unified`, `web`, `mobile`, `ecommerce`
 - `load_tstamp` - the time the event is added to the raw events table
 - `dvce_created_tstamp` - the timestamp when the event was created
 - `dvce_sent_tstamp` - the timestamp when the event was sent first
-- `derived_tstamp` - the timestamp making allowance for inaccurate device clock, derived_tstamp = collector_tstamp - (dvce_sent_tstamp - dvce_created_tstamp), this should be regarded as the most reliable timestamp to take into account to know when the event actually happened
+- `derived_tstamp` - the timestamp making allowance for inaccurate device clock, `derived_tstamp = collector_tstamp - (dvce_sent_tstamp - dvce_created_tstamp)`, this should be regarded as the most reliable timestamp to take into account to know when the event actually happened
 
 For more details on timestamp check out this [Discourse forum](https://discourse.snowplow.io/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
 

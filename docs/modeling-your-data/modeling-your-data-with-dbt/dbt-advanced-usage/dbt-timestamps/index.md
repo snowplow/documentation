@@ -23,7 +23,7 @@ On this page, `<package>` can be one of: `unified`, `web`, `mobile`, `ecommerce`
 For more details on timestamp check out this [Discourse forum](https://discourse.snowplow.io/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
 
 ## Timestamps used in our packages
-By default we filter the events table on `collector_tstamp` because that is what was historically more likely to be partitioned on. Nowadays `load_tstamp` is increasingly common as well. (Which field being used for partitioning will depend on the warehouse, in Snowflake for instance it is dependent on the ingestion timestamp). To accomodate this and make use of more efficient filtering we advise you to verify which field it is and set `snowplow__session_timestamp` to that field.
+By default we filter the events table on `collector_tstamp` because that is what was historically more likely to be partitioned on. Nowadays `load_tstamp` is increasingly common as well. (Which field being used for partitioning will depend on the warehouse, in Snowflake for instance it is dependent on the ingestion timestamp). To accommodate this and make use of more efficient filtering we advise you to verify which field it is and set `snowplow__session_timestamp` to that field.
 
 For modelling reasons we try to use the `derived_tstamp` as this is the truest to the actual timestamp of the event itself.
 

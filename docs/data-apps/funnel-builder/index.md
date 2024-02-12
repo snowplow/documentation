@@ -4,6 +4,14 @@ sidebar_position: 2
 sidebar_label: "Funnel Builder"
 ---
 
+```mdx-code-block
+import MainImage from './images/ecommerce-full-page.png';
+import TableAndSchemaImage from './images/table-and-schema.png';
+import FilterImage from './images/filter.png';
+import StepImage from './images/step.png';
+import SettingsImage from './images/settings.png';
+```
+
 :::caution
 
 This data app is currently in Public Preview and features may changes without notice. 
@@ -14,34 +22,50 @@ This data app is currently in Public Preview and features may changes without no
 
 Funnels are an essential tool for understanding user journeys on your app or website. They help to visualize how many users complete each event along a journey such as signing up or making a purchase, so you can understand which stages are leading to the most drop-off and make changes to improve conversion rates. 
 
-This data application provides an intuitive UI for building a funnel analysis and visualizing the results. You can specify any number of conditions and steps, and will receive the following outputs when you run the analysis: 
+This data application provides an intuitive UI for building a funnel analysis and visualizing the results. You can specify any number of conditions and steps, and will receive the following outputs when you run the analysis (see screenshots below): 
+
 - User Counts by Funnel Step Chart
 - Conversion Rates Chart
 - Abandonment Rates Chart
 - Summary Statistics Table
 
-It works on any table that Snowplow’s Data Modeling User has access to, including `atomic.events` and derived tables. It comes with some pre-built funnels based on out-of-the-box Snowplow events such as `page_views` and `link_clicks`, and you can save your own custom funnels to share with teammates.
+It works on any table that Snowplow’s Data Modeling User has access to, including the atomic events table and derived tables. It comes with some pre-built funnels based on out-of-the-box Snowplow events such as `page_views` and `link_clicks`, and you can save your own custom funnels to share with teammates.
 
 ### Requirements
 
 - Access to the table(s) you wish to run the tool on granted to the role used when setting up the data app
 
+![](./images/ecommerce-full-page.png)
+
 ## Usage
+
 ### Building a funnel
 
 We suggest you get started by viewing an example funnel, and we have included several out-of-the-box funnels based on standard Snowplow tracking on the `Welcome` tab. Selecting a saved funnel or creating a new funnel will take you to the `Define and View your Funnel` tab, which has the following options:
 
 #### Schema and Table
 
-Here you can select which warehouse schema and table you want to run the analysis on. If you select `atomic.events`, we have included some additional functionality allowing you to reference properties inside nested columns, otherwise you can only reference flat columns.
+Here you can select which warehouse schema and table you want to run the analysis on. If you select the atomic events table, we have included some additional functionality allowing you to reference properties inside nested columns, otherwise you can only reference flat columns.
 
+<img src={TableAndSchemaImage} style={{maxWidth: "400px"}} />
 
 #### Filter
-This applies a filter to all funnel events. To minimize query costs, we **highly** recommend including a filter on the partition key of your table. For `atomic.events`, this is usually `collector_tstamp` or `derived_tstamp` for BigQuery, but may more recently be `load_tstamp`.
+
+This applies a filter to all funnel events. To minimize query costs, we **highly** recommend including a filter on the partition key of your table. For the atomic events table, this is usually `collector_tstamp` or `derived_tstamp` for BigQuery, but may more recently be `load_tstamp`.
+
+<img src={FilterImage} style={{maxWidth: "400px"}} />
 
 #### Funnel Steps
 
 Here you can define an unlimited number of steps. Each step requires a name and one or more rules, which can be combined together using conditional logic. 
+
+<img src={StepImage} style={{maxWidth: "400px"}} />
+
+:::note The `Update Steps` button
+
+Whenever you make a change to the funnel steps or the filter rules, it is necessary to click the `Update Steps` button before saving the funnel or before building the charts.
+
+:::
 
 ### Additional Settings
 
@@ -52,8 +76,25 @@ You can customize your funnel by changing the following values:
 - **Max days since funnel start** - Maximum days since the funnel's start for an event to still be considered part of that funnel. Set to 0 for unlimited
 - **Intra step time (hours)** - Maximum hours since an event for the next to be included in the same funnel. Set to 0 for unlimited
 
+<img src={SettingsImage} style={{maxWidth: "400px"}} />
+
 ### Outputs
-Clicking `Build Funnel Charts` will generate several interactive charts and tables. You can also download the generated SQL to edit or rerun in your own environment. Once you are happy with the settings of your funnel you can save it for anyone to open and use, and you can also save the results of a given run to a table in your warehouse in the settings tab.
+
+Clicking `Build Funnel Charts` will generate several interactive charts and tables. You can also download the generated SQL to edit or rerun in your own environment.
+
+Once you are happy with the settings of your funnel you can save it for anyone to open and use using the `Save Funnel` button.
+The funnel configuration will be saved under the name used in the `Funnel Name` input at the top of the page.
+
+You can also save the results of a given run to a table in your warehouse in the settings tab.
+Use the `Output results to table` checkbox under the `Settings` tab on the page and choose the configuration for the output table.
+
+User counts by funnel step | Funnel conversion rates
+---|---
+![alt text](images/output-user-counts.png) | ![alt text](images/output-conversion-rates.png)
+
+Abandonment at each funnel step | Summary table
+---|---
+![alt text](images/output-abandonment.png) | ![alt text](images/output-summary.png)
 
 If you would like to visualize these funnels in a different tool, the `Next Steps` tab contains instructions on how to run the generated SQL and recreate the analysis in the following tools: 
 - Looker

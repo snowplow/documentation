@@ -35,68 +35,90 @@ It works on any table that Snowplow’s Data Modeling User has access to, includ
 
 - Access to the table(s) you wish to run the tool on granted to the role used when setting up the data app
 
-![](./images/ecommerce-full-page.png)
+![Screenshot of a funnel configuration with built funnel charts.](./images/ecommerce-full-page.png)
 
-## Usage
+## Usage – Building a funnel
 
-### Building a funnel
+The following steps will guide you through building a funnel using the app.
 
-We suggest you get started by viewing an example funnel, and we have included several out-of-the-box funnels based on standard Snowplow tracking on the `Welcome` tab. Selecting a saved funnel or creating a new funnel will take you to the `Define and View your Funnel` tab, which has the following options:
+### Step 1: Start from template or create a new funnel
 
-#### Schema and Table
+The main page of the app shows a list of example funnels for common use cases (e.g., e-commerce) to get you started.
 
-Here you can select which warehouse schema and table you want to run the analysis on. If you select the atomic events table, we have included some additional functionality allowing you to reference properties inside nested columns, otherwise you can only reference flat columns.
+You can choose to start using one of the templates or create a new funnel configuration from scratch.
 
-<img src={TableAndSchemaImage} style={{maxWidth: "400px"}} />
+### Step 2: Choose your funnel name, database schema and table
 
-#### Filter
+A page with the funnel configuration will be shown.
 
-This applies a filter to all funnel events. To minimize query costs, we **highly** recommend including a filter on the partition key of your table. For the atomic events table, this is usually `collector_tstamp` or `derived_tstamp` for BigQuery, but may more recently be `load_tstamp`.
+First, you are asked to provide a name for the funnel, which will be used to identify it.
 
-<img src={FilterImage} style={{maxWidth: "400px"}} />
+Next, you can select which warehouse schema and table you want to run the analysis on.
+If you select the atomic events table, we have included some additional functionality allowing you to reference properties inside nested columns, otherwise you can only reference flat columns.
 
-#### Funnel Steps
+<img src={TableAndSchemaImage} alt="Form to choose the funnel name, warehouse schema and table" style={{maxWidth: "400px"}} />
 
-Here you can define an unlimited number of steps. Each step requires a name and one or more rules, which can be combined together using conditional logic. 
+### Step 3: Configure filter conditions
 
-<img src={StepImage} style={{maxWidth: "400px"}} />
+To minimize query costs, we **highly** recommend including a filter on the partition key of your table.
+For the atomic events table, this is usually `collector_tstamp` or `derived_tstamp` for BigQuery, but may more recently be `load_tstamp`.
+
+You can add filter conditions to select a subset of events to be used by the funnel using the partition or other columns of the table.
+
+<img src={FilterImage} alt="Filter rules to select a subset of events to consider in the funnel." style={{maxWidth: "400px"}} />
+
+### Step 4: Define funnel steps
+
+Next, you are asked to define rules for the funnel steps.
+Each step requires a name and one or more rules, which can be combined together using conditional logic. 
+You can define an unlimited number of steps.
+
+<img src={StepImage} alt="An example funnel step configuration." style={{maxWidth: "400px"}} />
 
 :::note The `Update Steps` button
-
-Whenever you make a change to the funnel steps or the filter rules, it is necessary to click the `Update Steps` button before saving the funnel or before building the charts.
-
+Whenever you make a change to the funnel steps or the filter rules, it is necessary to click the `Update Steps` button.
 :::
 
-### Additional Settings
+### Step 5: Check additional settings
 
-You can customize your funnel by changing the following values: 
+There are a range of other options you can use to configure the funnel.
+Use the `Settings` tab to update the following configuration if you prefer (or keep the defaults):
+
 - **Order events by -** This must be a timestamp column. If you have added a date range pre-filter, make sure that it is the same field as this one
 - **Group funnels by -** Choose a field to group the funnels by - we recommend user or session identifiers
 - **Additional columns to group by -** Use this to visualize additional dimensions in your funnel analysis e.g. experiment groups
 - **Max days since funnel start** - Maximum days since the funnel's start for an event to still be considered part of that funnel. Set to 0 for unlimited
 - **Intra step time (hours)** - Maximum hours since an event for the next to be included in the same funnel. Set to 0 for unlimited
 
-<img src={SettingsImage} style={{maxWidth: "400px"}} />
+<img src={SettingsImage} alt="Additional settings configuration." style={{maxWidth: "400px"}} />
 
-### Outputs
+### Step 6: Build the funnel charts
 
-Clicking `Build Funnel Charts` will generate several interactive charts and tables. You can also download the generated SQL to edit or rerun in your own environment.
+Click the `Build Funnel Charts` to generate interactive funnel charts and tables.
+You can also download the generated SQL to edit or rerun in your own environment.
+
+User counts by funnel step | Funnel conversion rates
+---|---
+![Chart showing user counts by funnel step.](images/output-user-counts.png) | ![Chart showing funnel conversion rates.](images/output-conversion-rates.png)
+
+Abandonment at each funnel step | Summary table
+---|---
+![Chart showing abandonment at each funnel step.](images/output-abandonment.png) | ![Summary table with the funnel steps.](images/output-summary.png)
+
+### Step 7: Save your funnel configuration
 
 Once you are happy with the settings of your funnel you can save it for anyone to open and use using the `Save Funnel` button.
 The funnel configuration will be saved under the name used in the `Funnel Name` input at the top of the page.
 
+### Step 8 (optional): Output to a table
+
 You can also save the results of a given run to a table in your warehouse in the settings tab.
-Use the `Output results to table` checkbox under the `Settings` tab on the page and choose the configuration for the output table.
+Use the `Output results to table` checkbox under the `Settings` tab and choose the configuration for the output table.
 
-User counts by funnel step | Funnel conversion rates
----|---
-![alt text](images/output-user-counts.png) | ![alt text](images/output-conversion-rates.png)
+### Step 9: Export visualizations to a BI tool
 
-Abandonment at each funnel step | Summary table
----|---
-![alt text](images/output-abandonment.png) | ![alt text](images/output-summary.png)
+If you would like to visualize these funnels in a different tool, the `Export` page contains instructions on how to run the generated SQL and recreate the analysis in the following tools: 
 
-If you would like to visualize these funnels in a different tool, the `Next Steps` tab contains instructions on how to run the generated SQL and recreate the analysis in the following tools: 
 - Looker
 - PowerBI
 - Tableau

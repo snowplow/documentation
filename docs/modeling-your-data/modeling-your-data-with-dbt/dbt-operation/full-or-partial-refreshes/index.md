@@ -22,7 +22,7 @@ dbt run --select snowplow_<package> tag:snowplow_<package>_incremental --full-re
 dbt run --selector snowplow_<package> --full-refresh --vars 'snowplow__allow_refresh: true'
 ```
 
-When doing a full refresh of the package, it will begin again from your `snowplow__start_date` and backfill based on the calculations explained in the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) page. Please ensure you trigger enough runs to catch back up with live data, or adjust your variables for these runs accordingly (see our page on [backfilling](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/index.md) for more information).
+When doing a full refresh of the package, it will begin again from your `snowplow__start_date` and backfill based on the calculations explained in the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) page. Please ensure you trigger enough runs to catch back up with live data, or adjust your variables for these runs accordingly (see our page on [backfilling](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/index.md) for more information).
 
 
 ## Refresh only some models in a package
@@ -37,11 +37,11 @@ You may at times wish to refresh only some derived models in a package, either a
     ```
     2. *(High Risk)* manually deleting the record from the `snowplow_<package>_incremental_manifest` table.
 
-By removing the `snowplow_<package>_model_name` model from the manifest the <package\> will be in [State 2](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#state-2-new-model-introduced) and will replay all events.
+By removing the `snowplow_<package>_model_name` model from the manifest the <package\> will be in [State 2](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md#state-2-new-model-introduced) and will replay all events.
 
 ## Custom re-running of specific models
 
-There may be times where you need to re-run some or all of the models for a period of data, potentially due to incorrect supplemental data brought into a model, or in case of a mistake in your model code itself. There are two methods to do this: one is simpler but must complete in a single run, the other is more complex but can be executed over multiple runs. Either will work for any custom models, assuming they were built using [Snowplow incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md).
+There may be times where you need to re-run some or all of the models for a period of data, potentially due to incorrect supplemental data brought into a model, or in case of a mistake in your model code itself. There are two methods to do this: one is simpler but must complete in a single run, the other is more complex but can be executed over multiple runs. Either will work for any custom models, assuming they were built using [Snowplow incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/optimized-upserts/index.md).
 
 :::danger
 
@@ -50,7 +50,7 @@ Both methods are only suitable if the value of your source data in your `upsert`
 :::
 ### Option 1: Altering the look back window
 
-As defined in the [standard run incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#state-4-standard-run), the lower limit for the events to be processed in the models is `max_last_success - snowplow__lookback_window_hours`. If you increase the value of `snowplow__lookback_window_hours` to a number that goes beyond the period you wish to re-run from, then all events from that time will be reprocessed and fed through all models in the package.
+As defined in the [standard run incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md#state-4-standard-run), the lower limit for the events to be processed in the models is `max_last_success - snowplow__lookback_window_hours`. If you increase the value of `snowplow__lookback_window_hours` to a number that goes beyond the period you wish to re-run from, then all events from that time will be reprocessed and fed through all models in the package.
 
 For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00`, you would set your `snowplow__lookback_window_hours` to `137` (5 days × 24 hours + 11 hours, and 6 hours of an additional buffer the look back window would usually provide). This will reprocess all the events in a single run, which may be larger than the value you have set in `snowplow__backfill_limit_days`. If you wish to avoid going over the backfill limit you have set, please use option 2. Don't forget to change your value back once the run has completed!
 
@@ -81,6 +81,6 @@ sources={{
 
 :::danger
 
-Manipulating the values in the manifest tables can cause unexpected outcomes if you don't understand the Snowplow [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md)). Where possible, use option 1.
+Manipulating the values in the manifest tables can cause unexpected outcomes if you don't understand the Snowplow [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md)). Where possible, use option 1.
 
 :::

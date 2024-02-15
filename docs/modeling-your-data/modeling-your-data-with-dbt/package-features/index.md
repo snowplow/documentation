@@ -1,8 +1,8 @@
 ---
 title: "Package Features"
-sidebar_position: 10
+description: "Top level page for features contained in our packages"
+sidebar_position: 30
 ---
-
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

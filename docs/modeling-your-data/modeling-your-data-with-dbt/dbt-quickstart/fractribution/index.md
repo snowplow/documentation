@@ -92,7 +92,7 @@ By default the `snowplow__conversions_source` is your atomic events table. In mo
 
 Alternatively, if you are using Redshift/Postgres you may wish to include additional fields from a Self-Describing Event, or an Entity. To do this, you should create a new model in your project, e.g. `models/snowplow/snowplow_joined_events_table.sql` which should have something like the following content:
 
-> _For more information about dealing with duplicates and the macro in this code, make sure to see our [deduplication docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/index.md)._
+> _For more information about dealing with duplicates and the macro in this code, make sure to see our [deduplication docs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/deduplication/index.md)._
 
 ```jinja2
 with {{ snowplow_utils.get_sde_or_context('atomic',

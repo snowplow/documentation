@@ -14,9 +14,9 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 <Accelerator href="https://docs.snowplow.io/accelerators/media-player" name="Video and Media Analytics"/>
 ```
 
-:::info
-Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
-:::
+<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>&nbsp;
+<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<Badges badgeType="SPAL"></Badges>
 
 ## Requirements
 

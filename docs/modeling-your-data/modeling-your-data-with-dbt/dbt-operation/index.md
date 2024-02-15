@@ -1,6 +1,7 @@
 ---
 title: "Operation"
-sidebar_position: 40
+sidebar_position: 50
+description: "How to operate our dbt packages"
 ---
 
 ```mdx-code-block
@@ -23,7 +24,7 @@ import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 
 ## Manifest Tables
 
-Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) logic of our package, as well as thinks such as quarantined sessions. 
+Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) logic of our package, as well as thinks such as quarantined sessions. 
 
 :::danger
 

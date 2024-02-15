@@ -126,7 +126,7 @@ This type of late arriving data is an issue when the `snowplow__session_timestam
 
 Note that this isn't an issue if _all_ events are delayed, because if all events are delayed the previous maximum processed timestamp would still be before any of these events. In the event of the model running part way through the loading of a set of out-of-order events (e.g. an event recovery), you can increase the `snowplow__lookback_window_hours` to forceably reprocess a larger window of data.
 
-For more details on this they can check out the docs on the [incremental logic](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md#package-state).
+For more details on this they can check out the docs on the [incremental logic](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md#package-state).
 
 #### Upserts
 Finally, we have the `snowplow__upsert_lookback_days` variable, which applies a buffer to the limit we use to scan on the target table for any incremental models in our package. If you wish to disable the buffer, for a slightly more optimized but higher risk upsert, either set the `snowplow__upsert_lookback_days` to `0` or if your package has it, you can set `disable_upsert_lookback` to `true` in your model config. To remove the optimized upsert entirely and scan the full table to be sure of no duplicates, set `snowplow_optimize` to false in the specific `model` configuration (note this is not a variable).

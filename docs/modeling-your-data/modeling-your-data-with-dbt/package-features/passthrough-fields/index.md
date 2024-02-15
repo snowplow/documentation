@@ -4,13 +4,16 @@ description: "Details for how to pass additional fields through to the derived t
 sidebar_position: 400
 ---
 
-:::info
 
-Passthrough fields are a feature only available in the web package versions 0.16.0 and higher
+Passthrough fields are the term used to define any field from your `events_this_run` type table that you want available _as is_ in a derived table, i.e. these fields are *passed through* the processing to be available in your derived tables. There are many use cases for this, but the most common is the need to add a field from a custom context to the e.g. the page views table to use as an additional dimension in analysis. Previously you would have to write a custom model to join this field on, or join the original page view event at the time of the analysis, but with passthrough fields this is now far easier (and cheaper) to achieve.
 
-:::
+## Availability
 
-Passthrough fields are the term used to define any field from your `snowplow_unified_base_events_this_run` table that you want available _as is_ in a derived table, i.e. these fields are *passed through* the processing to be available in your derived tables. There are many use cases for this, but the most common is the need to add a field from a custom context to the e.g. the page views table to use as an additional dimension in analysis. Previously you would have to write a custom model to join this field on, or join the original page view event at the time of the analysis, but with passthrough fields this is now far easier (and cheaper) to achieve.
+## Usage
+
+
+
+## Usage Notes
 
 Which event the field(s) are taken from depends on the derived table:
 

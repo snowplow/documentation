@@ -1,6 +1,6 @@
 ---
 title: "Migration guides"
-sidebar_position: 60
+sidebar_position: 80
 description: "Migration guides for upgrading from previous versions of our packages"
 ---
 

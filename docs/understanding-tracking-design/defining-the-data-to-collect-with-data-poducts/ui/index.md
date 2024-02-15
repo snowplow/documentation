@@ -14,11 +14,11 @@ sidebar_custom_props:
 
 To create a new data product, navigate to the "Data products" section from the navigation bar and click the "Create data product" button. 
 
-![Create data product](images/image-1.png)
+![Create data product](images/create-data-product.png)
 
 A form will appear on the page. Enter your data product information and click "Create and continue" to navigate to the event specification page.
 
-![Event specifications](images/image-2.png)
+![Event specifications](images/event-specifications.png)
 
 This page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.
 
@@ -40,8 +40,8 @@ In the image below, you can see an example of a data product. It not only provid
 
 *Notes: sharing and subscribing is only available for users registered in Snowplow BDP Console.*
 
-![Data product overview](images/image-4.png)
+![Data product overview](images/data-product-overview.png)
 
-![Event specification details](images/image-3.png)
+![Event specification details](images/event-specification-details.png)
 
 If you need to edit a data product at any time, simply select it from the data products listing accessible from the main menu.

@@ -1,6 +1,7 @@
 ---
 title: "E-commerce"
 sidebar_position: 300
+description: "The Snowplow E-commerce dbt Package"
 hide_title: true
 ---
 

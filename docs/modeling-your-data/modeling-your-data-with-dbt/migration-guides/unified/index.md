@@ -7,6 +7,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+### Upgrading to 0.3.0
+
+The only change required is that if you currently use `snowplow__allow_refresh` without also adding a `--full-refresh` flag in any script this is now required to ensure the manifest tables are full refreshed.
+
+
 ### Upgrading to 0.2.0
 
 The views table needs to be altered for existing Snowflake, Databricks or Redshift users as the data type of `engaged_time_in_s`, `absolute_time_in_s` have changed. Please modify the below script to fit your schemas and apply them before running the upgraded package.

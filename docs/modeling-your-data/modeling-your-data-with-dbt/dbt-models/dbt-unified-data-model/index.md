@@ -1,6 +1,7 @@
 ---
 title: "Unified Digital"
 sidebar_position: 100
+description: "The Snowplow Unified dbt Package"
 hide_title: true
 ---
 

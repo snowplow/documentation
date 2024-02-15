@@ -180,13 +180,6 @@ export const Schema = {
       description:
         'The maximum allowed number of days between the event creation and it being sent to the collector',
     },
-    snowplow__limit_page_views_to_session: {
-      type: 'boolean',
-      title: 'Limit Page View to Session',
-      longDescription: 'A boolean whether to ensure page view aggregations are limited to pings in the same session as the `page_view` event, to ensure deterministic behavior. If false you may get different results for the same `page_view` depending on which sessions are included in a run. See the [stray page ping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/#stray-page-pings) section for more information.',
-      packageDefault: 'true',
-      group: 'Operation and Logic',
-    },
     snowplow__list_event_counts: {
       type: 'boolean',
       title: 'List Per-Event Counts',

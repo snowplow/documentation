@@ -1,5 +1,6 @@
 ---
 title: "Fractribution"
+description: "The Snowplow Fractribution dbt Package"
 sidebar_position: 900
 hide_title: true
 ---
@@ -11,7 +12,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="fractribution">&nbsp;</Badges> ​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>&nbsp;
+<Badges badgeType="dbt-package Release" pkg="fractribution"></Badges>&nbsp;
+​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>&nbsp;
 <Badges badgeType="Unsupported"></Badges>
 
 

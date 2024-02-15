@@ -1,5 +1,6 @@
 ---
 title: "Web"
+description: "The Snowplow Web dbt Package"
 sidebar_position: 700
 hide_title: true
 ---

@@ -9,7 +9,8 @@ import TabItem from '@theme/TabItem';
 
 ### Upgrading to 0.3.0
 
-The only change required is that if you currently use `snowplow__allow_refresh` without also adding a `--full-refresh` flag in any script this is now required to ensure the manifest tables are full refreshed.
+- `snowplow__page_view_passthroughs` has been renamed to `snowplow__view_passthroughs`. Please rename this in your project yaml if you have set any.
+- If you currently use `snowplow__allow_refresh` without also adding a `--full-refresh` flag in any script this is now required to ensure the manifest tables are full refreshed.
 
 
 ### Upgrading to 0.2.0

@@ -3,73 +3,28 @@ title: "Duplicates"
 description: "How we deal with duplicate events in our packages."
 sidebar_position: 10
 ---
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
 
 Duplicates in your data can happen, because of Snowplow's _At Least Once_ delivery approach. However, it's important for analysis and reporting that these duplicates are removed when doing any kind of data modeling. As part of our packages, we make sure to remove duplicate events at the very start to ensure any downstream data is correct.
 
-The e-commerce, web, and mobile packages perform de-duplication on both `event_id`'s and `page/screen_view_id`'s, in the base and page/screen views modules respectively. The normalize package only de-dupes on `event_id`. The de-duplication method for Redshift & Postgres is different to BigQuery, Snowflake, & Databricks due to their shredded table design. See below for a detailed explanation and how to process potential duplicates in any custom models.
+All our packages perform de-duplication on both `event_id`'s as part of the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run), and then ensure distinct counts and records are used for any higher level tables in the packages e.g. page views. The de-duplication method for Redshift & Postgres is different to BigQuery, Snowflake, & Databricks due to their shredded table design. 
 
 ## Redshift & Postgres
 
-:::note
-
-In earlier versions of the packages different de-duplication logic was used, see the changelog of each package for more information.
-
-:::
-
-### Single entity contexts
+### Single-valued entities
 When events are expected to only have at most a single entity in the attached context, any duplicate `event_id`s are removed from the atomic events table, and any context/self-describing event tables, by taking the earliest `collector_tstamp` record. In the case of multiple rows with this timestamp, we take one at random (as they will all be the same).
 
-While the `*_base_events_this_run` table now contains unique records, any custom models must make sure to de-duplicate contexts and/or self-describing events before joining to this table. The easiest way to do this is to use the `get_sde_or_context()` macro in the v0.14.0+ snowplow-utils package. Check out the [package documentation](https://snowplow.github.io/dbt-snowplow-utils/#!/overview/snowplow_utils) for how to use it. In this case it is only required to then join on `root_id` and `root_tstamp`, as we expect a 1-to-1 join.
-
-In this case, a custom model may look something like:
-
-```jinja2
-with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1', "'2023-01-01'", "'2023-02-01'")}}
-
-select
-    a.*,
-    b.yauaa_context_agent_name_version
-from {{ ref('snowplow_web_base_events_this_run') }} a
-left join nl_basjes_yauaa_context_1 b on 
-    a.event_id = b.yauaa_context__id 
-    and a.collector_tstamp = b.yauaa_context__tstamp
-```
+Any custom entities or self-describing events are able to be added to the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table, and are de-duped on by taking the earliest `collector_tstamp` record, by using the `snowplow__entities_or_sdes` variable in our package. See [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md) for more information and examples.
 
 
-### Multiple entity contexts
-In the case where it may be possible for a context to contain multiple entities (e.g. products returned in a search result) a more complex approach is taken to ensure that all of the entities in the attached context are still in the table before the join, even in the case where some of these entities may be identical. 
+### Multi-valued entities
+In the case where it may be possible for a entity to contain multiple instances (e.g. products returned in a search result) a more complex approach is taken to ensure that all of the instances in the attached entity are still in the table before the join, even in the case where some of these entities may be identical. 
 
-We de-duplicate the events table in the same way as with a single entity context, but we also keep the number of duplicates there were. In the context table we generate a row number per unique combination of **all** fields in the record. A join is then made on `root_id` and `root_tstamp` as before, but with an **additional** clause that the row number is a multiple of the number of duplicates to support the 1-to-many join. This ensures all duplicates are removed while retaining all original entities in the context. 
+When we de-duplicate the events this run table we keep the number of duplicates there were. In the de-duplication of the entity table we generate a row number per unique combination of **all** fields in the record. A join is then made on `root_id` and `root_tstamp` as before, but with an **additional** clause that the row number is a multiple of the number of duplicates to support the 1-to-many join. This ensures all duplicates are removed while retaining all original instances of the entity. Because this leads to multiple rows per event, this is only ever done in downstream models in our packages.
 
-The good news is we do most of this for you in the `get_sde_or_context()` macro when the `single_entity` argument is set to `false`, and you just need to add the extra condition to your join in a custom model. Any join using this can result in multiple rows per event and you may need to aggregate them into an array if this is not your intended use case.
-
-In this case, a custom model may look something like:
-
-```jinja2
-with {{ snowplow_utils.get_sde_or_context('atomic', 'nl_basjes_yauaa_context_1', "'2023-01-01'", "'2023-02-01'", single_entity = false)}}
-
-select`
-    a.*,
-    b.yauaa_context_agent_name_version
-from {{ ref('snowplow_web_base_events_this_run') }} a
-left join nl_basjes_yauaa_context_1 b on 
-    a.event_id = b.yauaa_context__id 
-    and a.collector_tstamp = b.yauaa_context__tstamp
-    and mod(b.yauaa_context__index, a.event_id_dedupe_count) = 0 -- ensure one version of each potentially duplicated entity in context
-```
-
-:::info
-
-Currently not all our packages provide the `event_id_dedupe_count` field in the `*_base_events_this_run` table, but it will be added in the future.
-
-:::
+If you need to make use of a multi-valued entity in a custom model, see the [using multi-valued entities](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/using-mulit-valued-entities/index.md) custom model example page.
 
 ## BigQuery, Snowflake, & Databricks
 
 Any duplicate `event_id`s are removed by taking the earliest `collector_tstamp` record. In the case of multiple rows with this timestamp, we take one at random (as they will all be the same). The same methodology is applied to `page/screen_view_id`s, however we order by `derived_tstamp`. 
 
-There should be no need to further de-duplicate the base `..._base_events_this_run_table` or any contexts for each row.
+There should be no need to further de-duplicate the base [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table or any contexts for each row.

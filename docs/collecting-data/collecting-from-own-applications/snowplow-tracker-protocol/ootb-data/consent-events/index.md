@@ -64,8 +64,6 @@ Visit the [Consent Tracking for Marketing accelerator](https://docs.snowplow.io/
 There is an option to track older consent granted and consent withdrawn events in our trackers.
 However, we recommend using the Enhanced Consent events as they are more up-to-date.
 
-<TrackedDataOverview event={true} web={true} mobile={true} automatic={false} />
-
 To learn how to track consent granted and withdrawn events, see:
 
 * On Web, make use of the [Consent plugin on the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/index.md).

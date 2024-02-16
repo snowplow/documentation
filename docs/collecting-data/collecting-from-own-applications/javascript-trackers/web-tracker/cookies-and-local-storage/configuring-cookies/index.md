@@ -3,6 +3,11 @@ title: "Configuring cookie and storage settings"
 sidebar_position: 100
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 Snowplow allows for a highly configurable cookie set up. This allows for you to create optimal first party tracking in a privacy-first world, including [anonymous](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) and cookieless tracking.
 
 ## Flow charts

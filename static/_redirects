@@ -275,4 +275,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/deduplication/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-timestamps/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/late-arriving-data/ 301
-/docs/modeling-your-data/modeling-your-data-with-dbt/aligning-tracking-with-modeling.md/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/supported-contexts/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/aligning-tracking-with-modeling.md/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/overridable-macros/ 301

@@ -10,7 +10,14 @@ This page details general configurations that can apply across many of our packa
 
 ::: 
 
-## Mixing Variables
+
+## Variables
+
+:::tip
+
+Please do not copy the project yaml from the package into your main project, this can lead to issues. Only add variables and model configurations that you wish to change from the default behavior. Each configuration page contains a UI to help to build your variables.
+
+:::
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

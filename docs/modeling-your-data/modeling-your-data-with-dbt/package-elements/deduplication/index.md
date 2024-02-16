@@ -8,6 +8,12 @@ Duplicates in your data can happen, because of Snowplow's _At Least Once_ delive
 
 All our packages perform de-duplication on both `event_id`'s as part of the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run), and then ensure distinct counts and records are used for any higher level tables in the packages e.g. page views. The de-duplication method for Redshift & Postgres is different to BigQuery, Snowflake, & Databricks due to their shredded table design. 
 
+## BigQuery, Snowflake, & Databricks
+
+Any duplicate `event_id`s are removed by taking the earliest `collector_tstamp` record. In the case of multiple rows with this timestamp, we take one at random (as they will all be the same). The same methodology is applied to `page/screen_view_id`s, however we order by `derived_tstamp`. 
+
+There should be no need to further de-duplicate the base [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table or any contexts for each row.
+
 ## Redshift & Postgres
 
 ### Single-valued entities
@@ -22,9 +28,3 @@ In the case where it may be possible for a entity to contain multiple instances 
 When we de-duplicate the events this run table we keep the number of duplicates there were. In the de-duplication of the entity table we generate a row number per unique combination of **all** fields in the record. A join is then made on `root_id` and `root_tstamp` as before, but with an **additional** clause that the row number is a multiple of the number of duplicates to support the 1-to-many join. This ensures all duplicates are removed while retaining all original instances of the entity. Because this leads to multiple rows per event, this is only ever done in downstream models in our packages.
 
 If you need to make use of a multi-valued entity in a custom model, see the [using multi-valued entities](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/using-mulit-valued-entities/index.md) custom model example page.
-
-## BigQuery, Snowflake, & Databricks
-
-Any duplicate `event_id`s are removed by taking the earliest `collector_tstamp` record. In the case of multiple rows with this timestamp, we take one at random (as they will all be the same). The same methodology is applied to `page/screen_view_id`s, however we order by `derived_tstamp`. 
-
-There should be no need to further de-duplicate the base [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table or any contexts for each row.

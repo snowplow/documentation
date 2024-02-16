@@ -3,7 +3,7 @@ title: "Using multi-valued entities"
 sidebar_position: 10
 ---
 
-RHTODO: other warehouses
+RHTODO
 
 ## Redshift
 

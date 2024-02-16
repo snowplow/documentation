@@ -8,12 +8,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::tip
-On this page, `<package>` can be one of: `web`, `mobile`
-
-:::
-
 [Tests](https://docs.getdbt.com/docs/build/tests) are a useful feature in dbt to ensure that your data meets some expectations of it, such as certain fields should not be null. We provide a suite of tests with our packages to help test the output tables for any issues, however you could and should add your own as no one knows the required quality checks of your data better than you.
+
+In most modern analytical data warehouses constraints are usually either unsupported or unenforced. For this reason it is better to use dbt to assert the data constraints without actually materializing them in the database using `dbt test`. Here you can test the constraint is unique and not null. The snowplow_web package already includes these dbt tests for primary keys, see the testing section for more details.
 
 ## Test Selection
 The packages contain tests for both the scratch and derived models. Depending on your use case you might not want to run all tests in production, for example to save costs. There are several tags included in the packages to help select subsets of tests. Tags:

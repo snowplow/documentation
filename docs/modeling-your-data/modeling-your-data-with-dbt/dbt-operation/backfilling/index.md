@@ -1,8 +1,8 @@
 ---
 title: "Backfilling"
+description: "Steps for backfilling the data models"
 sidebar_position: 0
 ---
-
 
 ## Backfilling
 
@@ -32,11 +32,13 @@ This process involves manually editing the manifest table, which is dangerous an
 
 Let's assume you have one schema named `prod` that is used by a regularly scheduled run of a project that uses our package(s), and you want to introduce a new custom model backfilled with all your historic Snowplow data. We are going to first process this model in a `staging` schema before migrating it across.
 
+
 ```mermaid
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    axisFormat %d
+    %% This comment is here to trigger a git change when spaces at the end of lines are removed, do not do that on this page it is required for the axis formatting    
+    axisFormat  
     tickInterval 1day
     section New Model
     Unprocessed :crit, n1, 2020-01-01, 5d
@@ -58,7 +60,7 @@ dbt run --select +my_new_model --vars "{'models_to_run': '$(dbt ls --select  +my
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    axisFormat %d
+    axisFormat  
     tickInterval 1day
     section New Model
     Unprocessed :crit, n1, after n2, 4d
@@ -73,7 +75,7 @@ Once you have run this enough times that the data is up-to-date, which you can i
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    axisFormat %d
+    axisFormat  
     tickInterval 1day
     section New Model
     Processed (in staging) :active, n2, 2020-01-01, 5d

@@ -45,7 +45,7 @@ vars:
 
 :::tip
 
-For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/index.md#overriding-macros)
+For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/overridable-macros/index.md#overriding-macros)
 
 :::
 

@@ -81,4 +81,4 @@ The `allow_refresh()` macro defines the protection behavior. As [dbt recommends]
 
 To full refresh any of the manifest models in production, set the `snowplow__allow_refresh` to `true` at run time.
 
-Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](//docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/index.md#overriding-macros) section for more details.
+Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/overridable-macros/index.md#overriding-macros) section for more details.

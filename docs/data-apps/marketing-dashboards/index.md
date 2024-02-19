@@ -25,7 +25,7 @@ The User & Marketing Analytics app contains all the visuals you need to perform 
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
     - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`
-  - Running the [Snowplow Web Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) with:
+  - Running the [Snowplow Web Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) with:
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
     - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`

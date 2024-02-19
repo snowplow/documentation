@@ -157,4 +157,4 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ## Configuration Generator
 
-You can use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/index.mdx) to help you generate your conversion event definitions.
+You can use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/index.mdx) to help you generate your conversion event definitions.

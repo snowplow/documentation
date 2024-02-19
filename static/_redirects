@@ -277,3 +277,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-timestamps/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/late-arriving-data/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/aligning-tracking-with-modeling.md/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/overridable-macros/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/fractribution/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/mobile/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301

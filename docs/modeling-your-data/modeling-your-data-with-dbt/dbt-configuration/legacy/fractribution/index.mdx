@@ -1,8 +1,12 @@
 ---
-title: "Mobile"
-sidebar_position: 800
+title: "Fractribution"
+sidebar_position: 400
 hide_table_of_contents: true
 ---
+
+:::warning
+The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/) for marketing attribution analysis with Snowplow
+:::
 
 import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
@@ -16,31 +20,8 @@ export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchem
     <>
     <CodeBlock language="yaml">
     {`models:
-  snowplow_mobile:
-    base:
-      manifest:
-        +schema: ${manifestSchema}
-      scratch:
-        +schema: ${scratchSchema}
-    optional_modules:
-      app_errors:
-        +schema: ${derivedSchema}
-        scratch:
-          +schema: ${scratchSchema}
-    screen_views:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}
-    sessions:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}
-    user_mapping:
-      +schema: ${derivedSchema}
-    users:
-      +schema: ${derivedSchema}
-      scratch:
-        +schema: ${scratchSchema}`}
+  snowplow_fractribution:
+    +schema: ${derivedSchema}`}
         </CodeBlock>
     </>
   )
@@ -50,15 +31,15 @@ export const printYamlVariables = (data) => {
   return(
     <>
       <h4>Project Variables:</h4>
-      <CodeBlock language="yaml">{dump({vars: {"snowplow_mobile": data}}, { flowLevel: 3 })}</CodeBlock>
+      <CodeBlock language="yaml">{dump({vars: {"snowplow_fractribution": data}}, { flowLevel: 3 })}</CodeBlock>
     </>
   )
 }
 
 export const MyMdxComponent = () => {
-  const schemaName = 'dbtMobile';
-  const versions = ['1.0.0', '0.7.4'];
-  const label = 'dbt mobile version';
+  const schemaName = 'dbtFractribution';
+  const versions = ['0.3.6', '0.3.5'];
+  const label = 'dbt fractribution version';
   const output = printYamlVariables;
     return (
       <DbtCongfigurationPage schemaName={schemaName} versions={versions} label={label}>

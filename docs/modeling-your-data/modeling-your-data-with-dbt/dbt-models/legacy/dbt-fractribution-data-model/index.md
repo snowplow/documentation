@@ -25,7 +25,7 @@ import TabItem from '@theme/TabItem';
 The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/) for marketing attribution analysis with Snowplow
 :::
 
-The Fractribution package is dependent on the `snowplow_web_page_views` model created by the [snowplow_web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) dbt package. Run [snowplow_web](https://github.com/snowplow/dbt-snowplow-web) if you do not have data in the `snowplow_web_page_views` table for the period of time you will run fractribution for.
+The Fractribution package is dependent on the `snowplow_web_page_views` model created by the [snowplow_web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/index.md) dbt package. Run [snowplow_web](https://github.com/snowplow/dbt-snowplow-web) if you do not have data in the `snowplow_web_page_views` table for the period of time you will run fractribution for.
 
 ## Overview
 ​

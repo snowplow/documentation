@@ -40,7 +40,7 @@ To track enhanced consent events using the JavaScript tracker on Web, you can ma
 
 ## Modeled data using the snowplow-web dbt package
 
-To process raw events created by the Snowplow Enhanced Consent plugin we have included an optional module to model consent events in the [snowplow-web dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/consent-module/index.md).
+To process raw events created by the Snowplow Enhanced Consent plugin we have included an optional module to model consent events in the [snowplow-web dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/consent-module/index.md).
 
 This custom module consists of a series of dbt models which produce the following aggregated models from the raw consent tracking events:
 

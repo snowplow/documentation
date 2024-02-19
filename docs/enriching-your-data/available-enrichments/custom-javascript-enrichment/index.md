@@ -1,6 +1,6 @@
 ---
 title: "Custom JavaScript enrichment"
-sidebar_position: 10
+sidebar_position: 11
 sidebar_label: Custom JavaScript
 ---
 
@@ -11,7 +11,7 @@ With this enrichment, you can write a JavaScript function to be executed for eac
 
 ## Configuration
 
-- [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-0)
+- [schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-1)
 - [example](https://github.com/snowplow/enrich/blob/master/config/enrichments/javascript_script_enrichment.json)
 
 :::note base64 encoding

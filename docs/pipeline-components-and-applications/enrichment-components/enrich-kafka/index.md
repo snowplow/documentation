@@ -33,15 +33,6 @@ Above assumes that you have following directory structure:
 
 It is possible to use environment variables in all of the above (for Iglu and enrichments starting from `3.7.0` only).
 
-Alternatively, you can download and run [a jar file from the github release](https://github.com/snowplow/enrich/releases).
-
-<CodeBlock language="bash">{
-`java -jar snowplow-enrich-kafka-${versions.enrich}.jar \\
-  --enrichments /snowplow/enrichments \\
-  --iglu-config /snowplow/resolver.json \\
-  --config /snowplow/config.hocon
-`}</CodeBlock>
-
 Configuration guide can be found on [this page](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md) and information about the monitoring on [this one](/docs/pipeline-components-and-applications/enrichment-components/monitoring/index.md).
 
 ```mdx-code-block

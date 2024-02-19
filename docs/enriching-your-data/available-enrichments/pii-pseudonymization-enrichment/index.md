@@ -1,6 +1,6 @@
 ---
 title: "PII pseudonymization enrichment"
-sidebar_position: 14
+sidebar_position: 15
 sidebar_label: PII pseudonymization
 ---
 

@@ -8,12 +8,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::info
-
-Custom Sessionization & Users are a feature only available in the web package versions 0.16.0 and higher
-
-:::
-
 :::danger
 
 As this changes the core logic of the package, you should make sure you have a good understanding of how the incremental sessionization logic works (including things such as quarantining sessions), and a good certainty around the tracking of any custom fields you plan to use.

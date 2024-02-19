@@ -67,6 +67,7 @@ Based on these the model is in one of the four states.
 In all states the `upper_limit` is limited by the `snowplow__backfill_limit_days` variable. This protects against back-fills with many rows causing very long run times.
 
 :::
+
 ### State 1: First run of the package
 
 If there are no enabled models already in the manifest then we process from the start date up to the backfill limit or now, whichever is older:
@@ -204,3 +205,5 @@ dbt run --select snowplow_<package>_base_new_event_limits
 In all states, although much more likely in state 1, it is possible that a run finds no incremental data to process. In this case you will see a warning in the logs of the form `Snowplow Warning: No data in <table> for date range from variables, please modify your run variables to include data if this is not expected.`. In this case you should increase your start date if no runs have completed, or increase your backfill limit days if there is a gap in your data before the next records.
 
 :::
+
+In reality, the events in your [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table will have a wider range of timestamps than those calculated here. For more details see the [full run calculation](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/full-run-calculation/index.md) page.

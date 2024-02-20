@@ -5,35 +5,30 @@ sidebar_position: 30
 ---
 RHTODO
 ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 ```
 
+**Identity stitching is the process of taking various user identifiers and combining them into a single user identifier, to better identify and track users throughout their journey on your site/app.**
+
+Stitching users together is not an easy task: depending on the typical user journey the complexity can range from having individually identified (logged in) users, thus not having to do any extra modeling to never identified users mainly using the same common public device (e.g. school or library) where it is technically impossible to do any user stitching. As stitching is a reiterative process as it constantly needs to be updated after each incremental run for a desirably large range of data, compute power and extra expenses as well as time constraints may limit and dictate the best course of action.
+
+## Session stitching
+
+For the out-of-the-box user stitching we opt for the sweet spot method: applying a logic that the majority of our users will benefit from while not introducing compute-heavy calculations.
+
+This works in many of our packages by having a `User Mapping` module that aims to link non-permanent user identifiers (typically the `domain_userid`/`device_user_id`) to the "official" identifier stored in the `user_id` field. The logic is to take the latest `user_id` per identifier.
+
+The `domain_userid`/`device_user_id` is cookie/device based and therefore expires/changes over time, whereas `user_id` is typically populated when a user logs in with your own internal identifier (dependent on your tracking implementation). 
+
 :::tip
-On this page, `<package>` can be one of: `unified`, `web`, `mobile`
+
+You must set a `user_id` in your tracking at some point, otherwise is it not possible to stitch together sessions that take place across multiple user identifiers.
 
 :::
 
-**Identity stitching is the process of taking various user identifiers and combining them into a single user identifier, to better identify and track users throughout their journey on your site/app.**
-
-Stitching users together is not an easy task: depending on the typical user journey the complexity can range from having individually identified (logged in) users, thus not having to do any extra modelling to never identified users mainly using the same common public device (e.g. school or library) where it is technically impossible to do any user stitching. As stitching is a reiterative process as it constantly needs to be updated after each incremental run for a desirably large range of data, compute power and extra expenses as well as time constraints may limit and dictate the best course of action.
-
-#### Session stitching
-
-For the out-of-the-box user stitching we opted for the sweet spot method: applying a logic that the majority of our users will benefit from while keeping in mind not to introduce compute-heavy calculations still reaping ideal benefits.
-
-How this works is that the unified, web, and mobile packages contain a `User Mapping` module that aims to lin non-permanent user identifiers, which is typically the `domain_userid`/`device_user_id` (but it can be altered to be any custom user identifier) to the "official" identifier stored within the `user_id` field. The logic is to take the latest `user_id` per `domain_userid`/`device_user_id`.
-
-The `domain_userid`/`device_user_id` is cookie/device based and therefore expires/changes over time, where as `user_id` is typically populated when a user logs in with your own internal identifier (dependent on your tracking implementation). If you do not currently set a `user_id` as part of your tracking for logged-in users, we recommend that you begin doing this as without some assigned ID it is not possible to stitch `domain_userid` together.
-
-This mapping is applied to the sessions table by a post-hook which updates the `stitched_user_id` column with the latest mapping. If no mapping is present, the default value for `stitched_user_id` is the `domain_userid`/`device_user_id`. This process is known as session stitching, and effectively allows you to attribute logged-in and non-logged-in sessions back to a single user.
+This mapping is applied to the sessions table by a post-hook which updates the `stitched_user_id` column with the latest mapping. If no mapping is present, the default value for `stitched_user_id` is the user identifier. This process is known as session stitching, and effectively allows you to attribute logged-in and non-logged-in sessions back to a single user. The same process takes place on the users table.
 
 
-
-<Tabs groupId="dbt-packages" queryString>
-
-<TabItem value="unified" label="Snowplow Unified" default>
   <p align="center">
   <ThemedImage
   alt='Session stitching in the Unified Digital Model'
@@ -43,33 +38,6 @@ This mapping is applied to the sessions table by a post-hook which updates the `
   }}
   />
   </p>
-</TabItem>
-
-<TabItem value="web" label="Snowplow Web">
-  <p align="center">
-  <ThemedImage
-  alt='Session stitching in the web package'
-  sources={{
-    light: require('./images/session_stitching_light_web.drawio.png').default,
-    dark: require('./images/session_stitching_dark_web.drawio.png').default
-  }}
-  />
-  </p>
-</TabItem>
-
-<TabItem value="mobile" label="Snowplow Mobile">
-  <p align="center">
-  <ThemedImage
-  alt='Session stitching in the mobile package'
-  sources={{
-    light: require('./images/session_stitching_light_mobile.drawio.png').default,
-    dark: require('./images/session_stitching_dark_mobile.drawio.png').default
-  }}
-  />
-  </p>
-</TabItem>
-
-</Tabs>
 
 
 If required, this update operation can be disabled by setting in your `dbt_project.yml` file (selecting one of web/mobile, or both, as appropriate):
@@ -80,17 +48,25 @@ vars:
     snowplow__session_stitching: false
 ```
 
-In the Web (since version 0.16.0) and Unified Digital packages, it is also possible to stitch onto the page views table by setting the value of `snowplow__page_view_stitching` (for web) or `snowplow__view_stitching` (for unified) to `true`. It may be enough to apply this with less frequency than on sessions to keep costs down, by only enabling this at runtime (on the command line) on only some of the runs.
+In Unified Digital package it is also possible to stitch onto the page views table by setting the value of `snowplow__view_stitching` to `true`. It may be enough to apply this with less frequency than on sessions to keep costs down, by only enabling this at runtime (on the command line) on only some of the runs.
 
-#### Cross platform stitching
+:::tip
 
-Since the arrival of the `snowplow_unified` package all the user data is modelled in one place. This makes it easy to effectively perform cross-platform stitching, which means that as soon as a user identifies themselves by logging in as the same user on separate platforms, all the user data will be found within one package making it really convenient for perform further analysis.
+Because we update the `stitched_session_id` field this is the best field to user instead of `user_id` which requires the user to be logged in on the first event of that session.
 
-#### Custom solutions
+:::
 
-User mapping is typically not a 'one size fits all' exercise. Depending on your tracking implementation, business needs and desired level of sophistication you may want to write bespoke logic. Please refer to this [blog post](https://snowplow.io/blog/developing-a-single-customer-view-with-snowplow/) for ideas. In addition, the web and unified packages offer the possibility to change what field is used as your stitched user id, so instead of `user_id` you can use any field you wish (note that it will still be called `user_id` in your mapping table), and by taking advantage of the [custom sessionization and users](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/index.md) you can also change the field used as the `domain_user_id` (for the web model) or user_identifier (unified model). We plan to add support for these features to the mobile package in the future.
+## Cross platform stitching
 
-#### Overview
+The `snowplow_unified` package means all the user data, from both web and mobile, is modeled in one place. This makes it easy to effectively perform cross-platform stitching, which means that as soon as a user identifies themselves by logging in as the same user on separate platforms, all the user data will be found within one package making it convenient for perform further analysis.
+
+### Custom solutions
+
+User mapping is typically not a one-size-fits-all exercise. Depending on your tracking implementation, business needs and desired level of sophistication you may want to write bespoke logic. Please refer to this [blog post](https://snowplow.io/blog/developing-a-single-customer-view-with-snowplow/) for ideas. The unified package offer the ability to change what field is used as your stitched user id, so instead of `user_id` you can use any field you wish (note that it will still be called `user_id` in your mapping table), and by taking advantage of the [custom sessionization and users](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/index.md) you can also change the field used as the user_identifier (unified model).
+
+### Overview
+
+The below diagram shows a potential flow your user may take across multiple devices. It does not matter if they are web or mobile events as Unified will correctly process and stitch both. As the user progresses through the (simplified) sessions table tracks their sessions, user identifier, user ID, and stitched user id. Once a user ID is identifier for specific user identifier it is backdated in the stitched column for all sessions with that identifier. Note that this is not possible _until_ the user logs in during a session.
 
 <p align="center">
 <ThemedImage
@@ -101,11 +77,3 @@ dark: require('./images/stitching_scenarios.drawio.png').default
 }}
 />
 </p>
-
-(1) it is most convenient to use the Unified Digital Model so that all of these events will be modelled into the same derived tables regardless of platform
-
-(2) if it is the same mobile/web device and the user identifies by logging in at a later stage while still retaining the same domain_userid/device_user_id, the model will update the stitched_user_id during session_stitching
- 
-(3) if it is the same mobile/web device and the user identifies by logging in while still retaining the same domain_userid/device_user_id, the model will update the stitched_user_id during session_stitching 
-
-(4) if it is the same mobile device cross-navigation tracking and stitching can be applied (coming soon!)

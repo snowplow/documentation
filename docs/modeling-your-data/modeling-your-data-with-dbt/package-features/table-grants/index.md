@@ -3,7 +3,6 @@ title: "Table Grants"
 description: "Details for granted access to our tables to other users/roles"
 sidebar_position: 10
 ---
-RHTODO
 
 :::tip
 
@@ -14,7 +13,7 @@ This functionality requires dispatching to our macros over dbt core, see how to 
 ## Availability
 :::tip
 
-Any package can make use of the table grants feature provided by the `snowplow__grant_select_list` variable so long as you are using at least version 0.16.2 of snowplow-utils, even if the variable is not listed in the configuration. Granting usage on schemas however requires specific package versions.
+Any package can make use of the table grants feature provided by the `snowplow__grant_select_list` variable if you are using at least version 0.16.2 of snowplow-utils, even if the variable is not listed in the configuration. Granting usage on schemas however requires specific package versions.
 
 :::
 
@@ -50,9 +49,9 @@ Note this will overwrite any existing grants applied to the table manually in th
 ### Granting usage on schemas
 In the case of some warehouses, users also need `usage` permissions on the schema a table is in to be able to access the data. We provide this functionality via a post-hook that grants usage on **any** schema interacted with during the `dbt run` to the users listed in `snowplow__grant_select_list`.
 
-:::caution
+:::danger
 
-Due to limitations with dbt, we are not able to scope this only to schemas interacted with by our package. This means if you any schemas in your top level project will also be have `usage` granted to these users.
+Due to limitations with dbt, we are not able to scope this only to schemas interacted with by our package. This means **ALL** schemas in the run will have `usage` granted to these users.
 
 :::
 

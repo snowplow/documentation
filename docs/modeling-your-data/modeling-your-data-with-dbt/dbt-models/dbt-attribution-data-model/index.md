@@ -62,7 +62,7 @@ Marketing attribution determines which marketing tactics are contributing to sal
 
 
 ## Benefits of using our package
-The package was implemented with a **glassbox philosophy** in mind, making it very **transparent** for data consumers how the data is transformed. It is processed **all in SQL** inside your warehouse, there is no need for extra python packages to run to process your data in a black box barely anyone understands.
+The package was implemented with a **glassbox philosophy** in mind, making it very **transparent** for data consumers how the data is transformed. It is processed **all in SQL** inside your warehouse, there are no external dependencies e.g. extra Python packages or black-box ML algorithms.
 
 It is also very **flexible**, there are no direct dependencies on data sources or limitations on the touchpoints (it works on all channels or campaigns). You can use ad spend data from any 3rd party data sources.
 

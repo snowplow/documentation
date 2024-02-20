@@ -37,7 +37,7 @@ import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
-<DbtPackageInstallation/>
+<DbtPackageInstallation package='fractribution' fullname='dbtSnowplowFractribution'/>
 ```
 
 ## Setup

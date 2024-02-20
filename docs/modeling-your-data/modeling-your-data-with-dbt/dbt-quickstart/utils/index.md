@@ -15,7 +15,7 @@ The models, functionality, and variables described below are only available from
 The `snowplow-utils` package allows you to create your own custom `snowplow_base_events_this_run` table using macros that generate the required SQL code for you, allowing you to incorporate whatever custom event types, contexts of Snowplow data. Using this package will allow you to leverage the [incremental nature](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) of the Snowplow packages, meaning you can more easily build data models using our other packages such as `snowplow-web` and `snowplow-mobile`, as well as build your own completely custom packages without having to do the initial heavy lifting yourself. This can, however, be a bit complicated to set up and so for that purpose we've create this quickstart page to guide you through this process.
 
 :::info
-It is only recommended that you use this if you are planning on heavily customizing your Snowplow data modeling setup, whilst still taking advantage of the incremental framework that the existing dbt packages offer. If you are going to be heavily leveraging the existing Snowplow packages (e.g. [snowplow-web](https://hub.getdbt.com/snowplow/snowplow_web/latest/) or [snowplow-mobile](https://hub.getdbt.com/snowplow/snowplow_mobile/latest/)) then you will not need to leverage this package for the creation of your base tables. Please instead follow the appropriate quickstart guides for the packages you are going to be utilizing instead, such as for [web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/index.md) or [mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/index.md).
+It is only recommended that you use this if you are planning on heavily customizing your Snowplow data modeling setup, whilst still taking advantage of the incremental framework that the existing dbt packages offer. If you are going to be heavily leveraging the existing Snowplow packages (e.g. snowplow-unified) then you will not need to leverage this package for the creation of your base tables. Please instead follow the appropriate quickstart guides for the packages you are going to be utilizing instead, such as for [web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/web/index.md) or [mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/mobile/index.md).
 
 :::
 
@@ -34,7 +34,7 @@ import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
-<DbtPackageInstallation/>
+<DbtPackageInstallation package='utils' fullname='dbtSnowplowUtils'/>
 ```
 
 ## Setup

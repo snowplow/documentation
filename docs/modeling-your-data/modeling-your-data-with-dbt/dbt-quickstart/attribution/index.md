@@ -26,10 +26,12 @@ import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 <DbtPrivs/>
 ```
 
+## Installation
+
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
-<DbtPackageInstallation/>
+<DbtPackageInstallation package='attribution' fullname='dbtSnowplowAttribution'/>
 ```
 
 ## Setup

@@ -311,8 +311,8 @@ snowplow("newTracker", "sp", "com-acme-saas1.collector.snplow.net", {
 
 When your connection is confirmed and tracking snippet updated, deploy our prebuilt dbt packages (note that you will need dbt Core or Cloud for this step) following the quickstart guides:
 
-1. Snowplow [web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/index.md)
-2. Snowplow [attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/fractribution/index.md)
+1. Snowplow [web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/web/index.md)
+2. Snowplow [attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/fractribution/index.md)
 
 With these dbt packages you will get a series of production ready tables that automatically aggregate and model the raw Snowplow events into BI ready tables. You can read more about our dbt packages in [the docs](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md).
 

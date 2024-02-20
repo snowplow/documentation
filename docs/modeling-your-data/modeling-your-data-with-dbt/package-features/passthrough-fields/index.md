@@ -4,27 +4,21 @@ description: "Details for how to pass additional fields through to the derived t
 sidebar_position: 400
 ---
 
-RHTODO
-
-Passthrough fields are the term used to define any field from your `events_this_run` type table that you want available _as is_ in a derived table, i.e. these fields are *passed through* the processing to be available in your derived tables. There are many use cases for this, but the most common is the need to add a field from a custom context to the e.g. the page views table to use as an additional dimension in analysis. Previously you would have to write a custom model to join this field on, or join the original page view event at the time of the analysis, but with passthrough fields this is now far easier (and cheaper) to achieve.
+Passthrough fields are the term used to define any field from your [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) type table that you want available _as is_ in a derived table, i.e. these fields are *passed through* the processing to be available in your derived tables. There are many use cases for this, but the most common is the need to add a field from a custom context to the e.g. the views table to use as an additional dimension in analysis. Previously you would have to write a custom model to join this field on, or join the original view event at the time of the analysis, but with passthrough fields this is now far easier (and cheaper) to achieve.
 
 ## Availability
 
+| Package | Minimum Required Version |
+|---------|--------------------------|
+| Unified | 0.3.0 |
+| Media Player | 0.7.0 |
+| Ecommerce | 0.6.0 |
+
 ## Usage
 
+To enable the passthrough fields, you need to set the relevant variable in your root `dbt_project.yml` file; e.g`snowplow__view_passthroughs` (see your package [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for a full list of passthrough variables). Note that in some cases you may be able to specify multiple variables for the same table for the first and last of a given record (e.g. first and last session for a user). 
 
-
-## Usage Notes
-
-Which event the field(s) are taken from depends on the derived table:
-
-- Page Views uses the field value from the `page_view` event itself, _not_ the pings
-- Sessions uses the field value from the _first_ `page_view` or `page_ping` event (order is based on `derived_tstamp`, `dvce_created_tstamp`, then `event_id` in case of a tie)
-- Users uses the first and last sessions for that user, which means if you want a field passed through to the users table, you must first make it available in the sessions table
-
-As mentioned, the fields are passed through _as is_, which means it is not currently possible aggregate the value of a field across a page view or session as we do some other fields in the table, in the case where this is required, you should build a [custom model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) as in older versions of the package.
-
-To enable the passthrough fields, you need to set the relevant variable in your root `dbt_project.yml` file; `snowplow__view_passthroughs`, `snowplow__session_passthroughs`, `snowplow__user_first_passthroughs`, and `snowplow__user_last_passthroughs` for page views, sessions, and users (first and lasts) respectively. The variables are lists of fields; either the name of the field or a dictionary specifying the SQL and alias for the field e.g.
+The variables are lists of fields; either the name of the field or a dictionary specifying the SQL and alias for the field e.g.
 
 ```yml title="dbt_project.yml"
 vars:
@@ -40,7 +34,17 @@ vars:
     snowplow__view_passthroughs: ['contexts_my_entity_1']
 ```
 
-Note that how to extract a field from your context column will depend on your warehouse (see our [querying guide](/docs/storing-querying/querying-data/index.md?warehouse=snowflake#entities) for more information), and you are unable to use dbt macros in this variable. For the users table, any basic field will have `first_` or `last_` prefixed to the field name automatically to avoid clashes, however if you are using the SQL approach, you will need to add these prefixes as part of your alias.
+Note that how to extract a field from your context column will depend on your warehouse (see our [querying guide](/docs/storing-querying/querying-data/index.md#entities) for more information), and you are unable to use dbt macros in this variable. For first/last variables, any basic field will have `first_` or `last_` prefixed to the field name automatically to avoid clashes, however if you are using the SQL approach, you will need to add these prefixes as part of your alias.
+
+## Usage Notes
+
+Which event the field(s) are taken from depends on the derived table for example in the Views table in the Unified package the the field value from the `page_view` event itself, _not_ the pings. 
+
+A general rule of thumb is that the field comes from the *first* event of that type at that table level. If you are unsure, you can always check the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for the variable description or the model sql.
+
+As mentioned, the fields are passed through _as is_, which means it is not currently possible aggregate the value of a field across a page view or session as we do some other fields in the table. In the case where this is required you should use the [custom aggregations](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-aggregations/index.md) if that is supported by the package, or build a [custom model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md).
+
+
 
 :::caution
 

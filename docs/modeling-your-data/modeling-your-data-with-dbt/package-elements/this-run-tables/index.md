@@ -14,6 +14,7 @@ This table of events is then used for all further processing in the package, we 
 In all cases where this table exists, it is in the `models/base/scratch/` directory within the package.
 
 | Package | Events This Run Name |
+|---------|----------------------|
 | unified | `snowplow_unified_events_this_run` |
 | ecommerce |`snowplow_ecommerce_base_events_this_run` |
 | media | `snowplow_media_player_base_events_this_run` |

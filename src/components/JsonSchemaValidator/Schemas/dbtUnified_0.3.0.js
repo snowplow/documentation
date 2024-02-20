@@ -65,7 +65,7 @@ export const Schema = {
       title: 'Dev Target',
       description:
         'Target name of your development environment as defined in your `profiles.yml` file',
-      longDescription: 'The [target name](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#manifest-tables) section for more details.',
+      longDescription: 'The [target name](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/) section for more details.',
       packageDefault: 'dev',
       group: 'Warehouse and Tracker',
     },
@@ -110,7 +110,7 @@ export const Schema = {
       type: 'boolean',
       title: 'Allow Refresh',
       group: 'Operation and Logic',
-      longDescription: 'Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#manifest-tables) section for more details.',
+      longDescription: 'Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/) section for more details.',
       packageDefault: 'false',
     },
     snowplow__backfill_limit_days: {
@@ -118,7 +118,7 @@ export const Schema = {
       minimum: 0,
       title: 'Backfill Limit',
       group: 'Operation and Logic',
-      longDescription: 'The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/#package-state) section for more details.',
+      longDescription: 'The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/#package-state) section for more details.',
       packageDefault: '30',
       description:
         'The maximum numbers of days of new data to be processed since the latest event processed',
@@ -236,7 +236,7 @@ export const Schema = {
     snowplow__session_stitching: {
       type: 'boolean',
       title: 'Enable Session Stitching',
-      longDescription: 'Determines whether to apply the user mapping to the sessions table. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/) section for more details.',
+      longDescription: 'Determines whether to apply the user mapping to the sessions table. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.',
       packageDefault: 'true',
       group: 'Operation and Logic',
     },
@@ -262,7 +262,7 @@ export const Schema = {
       minimum: 0,
       title: 'Upsert Lookback Days',
       group: 'Operation and Logic',
-      longDescription: 'Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/) section for more details.',
+      longDescription: 'Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/optimized-upserts/) section for more details.',
       packageDefault: '30',
       description:
         'Number of days to look back over the incremental derived tables during the upsert',
@@ -504,14 +504,14 @@ export const Schema = {
     snowplow__view_stitching: {
       type: 'boolean',
       title: 'Enable View Stitching',
-      longDescription: 'Determines whether to apply the user mapping to the views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/) section for more details.',
+      longDescription: 'Determines whether to apply the user mapping to the views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.',
       packageDefault: 'false',
       group: 'Operation and Logic',
     },
     snowplow__conversion_stitching: {
       type: 'boolean',
       title: 'Enable Conversion Stitching',
-      longDescription: 'Determines whether to apply the user mapping to the conversions table. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/) section for more details.',
+      longDescription: 'Determines whether to apply the user mapping to the conversions table. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.',
       packageDefault: 'true',
       group: 'Operation and Logic',
     },
@@ -628,6 +628,27 @@ export const Schema = {
       longDescription: ' Aggregations to calculate as part of the the derived table. A list of dictionaries defining the type (sum, avg, min, max, count, countd), field to aggregate, and what to alias the column.',
       packageDefault: '[ ] (no aggregations)',
       $ref: '#/definitions/passthrough_vars'
+    },
+    snowplow__grant_select_list: {
+      type: 'array',
+      description: '> Click the plus sign to add a new entry',
+      minItems: 0,
+      items: {
+        type: 'string',
+        title: "User/Role",
+      },
+      title: 'Grant Select List',
+      group: 'Warehouse and Tracker',
+      longDescription: 'A list of users to grant select to all tables created by this package to.',
+      packageDefault: '[]',
+    },
+    snowplow__enable_grant_usage: {
+      type: 'boolean',
+      description: 'Enable granting usage on schemas',
+      title: 'Enable grant usage',
+      group: 'Warehouse and Tracker',
+      longDescription: 'Enables granting usage on schemas interacted with on a dbt run',
+      packageDefault: 'true',
     },
   },
 }

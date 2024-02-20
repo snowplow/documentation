@@ -200,7 +200,7 @@ export const Schema = {
         snowplow__session_stitching: {
             type: 'boolean',
             title: 'Enable Session Stitching',
-            longDescription: 'Determines whether to apply the user mapping to the sessions table. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/index.md) section for more details.',
+            longDescription: 'Determines whether to apply the user mapping to the sessions table. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md) section for more details.',
             packageDefault: 'true',
             group: 'Operation and Logic',
         },
@@ -226,7 +226,7 @@ export const Schema = {
             minimum: 0,
             title: 'Upsert Lookback Days',
             group: 'Operation and Logic',
-            longDescription: 'Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/index.md) section for more details.',
+            longDescription: 'Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/optimized-upserts/index.md) section for more details.',
             packageDefault: '30',
             description:
                 'Number of days to look back over the incremental derived tables during the upsert',

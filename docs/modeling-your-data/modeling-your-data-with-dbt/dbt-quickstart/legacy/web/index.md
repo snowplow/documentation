@@ -19,11 +19,7 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web 
 - [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#page-views) implemented.
 - From version v0.13.0 onwards you must be using [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
-
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"

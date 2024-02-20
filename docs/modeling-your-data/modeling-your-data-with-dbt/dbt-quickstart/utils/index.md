@@ -25,11 +25,7 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and connec
 
 - A dataset of Snowplow events from one of the [Snowplow trackers](/docs/collecting-data/index.md)
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
-
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"

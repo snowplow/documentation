@@ -28,11 +28,8 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web 
     - any custom incremental table that is built on top of the `snowplow_web` model that results in an aggregated revenue dataset
 - `python` or `docker` installed (or you can use Snowpark on Snowflake)
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"

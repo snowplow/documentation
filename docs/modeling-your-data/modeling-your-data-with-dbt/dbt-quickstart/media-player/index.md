@@ -20,7 +20,6 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 ## Requirements
 
-
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web or mobile events dataset being available in your database:
 
 - A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md), [HTML5 media player plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/index.md), [YouTube plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/media-tracking/index.md)
@@ -45,11 +44,7 @@ The model is compatible with all versions of our media tracking APIs. These have
    - optional [media-session context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0).
    - optional [media-ad](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad/jsonschema/1-0-0) and [ad break](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_break/jsonschema/1-0-0) context schema.
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
-
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"

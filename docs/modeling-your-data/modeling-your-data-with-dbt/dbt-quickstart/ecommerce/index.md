@@ -19,11 +19,8 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web 
 - Have the following e-commerce contexts enabled: `cart`, `checkout_step`, `page` `transaction`, `user`
 - Track the e-commerce tracking action events on your website/mobile application
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"

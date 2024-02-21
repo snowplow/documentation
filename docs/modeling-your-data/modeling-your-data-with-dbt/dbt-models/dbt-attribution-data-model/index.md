@@ -60,6 +60,14 @@ sources={{
 
 Marketing attribution determines which marketing tactics are contributing to sales or conversions by analysing the marketing touchpoints a consumer encounters on their journey to purchase. The aim is to determine which channels and marketing campaigns had the greatest impact on the decision to convert. There are many popular attribution models used by marketers which give insight into customers' behaviors, more specifically the pathways they took to purchase the product or service. This allows marketing teams to improve ROAS by changing marketing strategies and campaigns.
 
+
+## Benefits of using our package
+The package was implemented with a **glassbox philosophy** in mind, making it very **transparent** for data consumers how the data is transformed. It is processed **all in SQL** inside your warehouse, there are no external dependencies e.g. extra Python packages or black-box ML algorithms.
+
+It is also very **flexible**, there are no direct dependencies on data sources or limitations on the touchpoints (it works on all channels or campaigns). You can use ad spend data from any 3rd party data sources.
+
+It also does the heavy-lifting for you and provides you with **incremental data models** reducing unnecessary costs even if you would like to regularly analyze the data based on a shifting time window in your reports (e.g. last 30 days).
+
 ## How to do Marketing Attribution with this package?
 
 The purpose of this package is to allow an incremental, efficient way to do marketing attribution without having to read all your data every time.

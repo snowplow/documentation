@@ -23,7 +23,7 @@ The first step is to identify the model limits for the run. This is accomplished
 This range is then printed to the console and stored in the `snowplow_<package_name>_base_new_event_limits` table for later use.
 
 ### Step 2: Update sessions lifecycle manifest
-Next, we need to now process the sessions with new events into the [sessions lifecycle manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md#sessions-lifecycle-manifest) table. Here we apply many filters to the events table before calculating the [identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/index.md) and minimum and maximum `snowplow__session_timestamp` for each session.
+Next, we need to now process the sessions with new events into the [sessions lifecycle manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md#sessions-lifecycle-manifest) table. Here we apply many filters to the events table before calculating the [identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md) and minimum and maximum `snowplow__session_timestamp` for each session.
 
 The filters that are applied are:
 #### Filter to events within the limits

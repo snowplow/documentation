@@ -16,7 +16,7 @@ Passthrough fields are the term used to define any field from your [events this 
 
 ## Usage
 
-To enable the passthrough fields, you need to set the relevant variable in your root `dbt_project.yml` file; e.g`snowplow__view_passthroughs` (see your package [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for a full list of passthrough variables). Note that in some cases you may be able to specify multiple variables for the same table for the first and last of a given record (e.g. first and last session for a user). 
+To enable the passthrough fields, you need to set the relevant variable in your root `dbt_project.yml` file; e.g `snowplow__view_passthroughs` (see your package [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for a full list of passthrough variables). Note that in some cases you may be able to specify multiple variables for the same table for the first and last of a given record (e.g. first and last session for a user). 
 
 The variables are lists of fields; either the name of the field or a dictionary specifying the SQL and alias for the field e.g.
 

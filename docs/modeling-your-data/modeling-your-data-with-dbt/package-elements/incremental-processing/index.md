@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## Efficient Sessionization
 
-The general principle behind an incremental model is to identify new events/rows since the previous run of the model, and only process these new events. This minimizes cost and reduces run times. This is great for basic event streams, however you begin to encounter issues for any aggregations you wish to do. To resolve this we treat a `session` as the atomic unit of the majority of our packages, ensuring that when we have a new event for a previously processed session, we have to reprocess all historic events for that session as well as the new events - otherwise our metrics would be incorrect. Note that because we allow [custom session identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/index.md) this does not have to be a true web-type `session`.
+The general principle behind an incremental model is to identify new events/rows since the previous run of the model, and only process these new events. This minimizes cost and reduces run times. This is great for basic event streams, however you begin to encounter issues for any aggregations you wish to do. To resolve this we treat a `session` as the atomic unit of the majority of our packages, ensuring that when we have a new event for a previously processed session, we have to reprocess all historic events for that session as well as the new events - otherwise our metrics would be incorrect. Note that because we allow [custom session identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md) this does not have to be a true web-type `session`.
 
 The logic we have implemented to achieve this is:
 

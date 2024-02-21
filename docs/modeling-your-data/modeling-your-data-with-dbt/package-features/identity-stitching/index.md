@@ -61,7 +61,7 @@ The `snowplow_unified` package means all the user data, from both web and mobile
 
 ### Custom solutions
 
-User mapping is typically not a one-size-fits-all exercise. Depending on your tracking implementation, business needs and desired level of sophistication you may want to write bespoke logic. Please refer to this [blog post](https://snowplow.io/blog/developing-a-single-customer-view-with-snowplow/) for ideas. The unified package offer the ability to change what field is used as your stitched user id, so instead of `user_id` you can use any field you wish (note that it will still be called `user_id` in your mapping table), and by taking advantage of the [custom sessionization and users](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/index.md) you can also change the field used as the user_identifier (unified model).
+User mapping is typically not a one-size-fits-all exercise. Depending on your tracking implementation, business needs and desired level of sophistication you may want to write bespoke logic. Please refer to this [blog post](https://snowplow.io/blog/developing-a-single-customer-view-with-snowplow/) for ideas. The unified package offer the ability to change what field is used as your stitched user id, so instead of `user_id` you can use any field you wish (note that it will still be called `user_id` in your mapping table), and by taking advantage of the [custom sessionization and users](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md) you can also change the field used as the user_identifier (unified model).
 
 ### Overview
 

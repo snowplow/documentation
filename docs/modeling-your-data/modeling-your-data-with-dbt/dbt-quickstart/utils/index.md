@@ -247,7 +247,7 @@ For Redshift & Postgres we also introduce the `prefix` and `alias` fields, where
 mcc_iud.mcc_internal_user_id as internal_user_id,
 ```
 
-This could be leveraged in the `snowplow__custom_sql` variable. For more examples, please see [the following page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/index.md).
+This could be leveraged in the `snowplow__custom_sql` variable. For more examples, please see [Custom Sessionization & Users](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md).
 </TabItem>
 </Tabs>
 

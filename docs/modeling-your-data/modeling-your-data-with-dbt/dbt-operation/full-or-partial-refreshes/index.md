@@ -2,16 +2,16 @@
 title: "Full or Partial Refreshes"
 sidebar_position: 1
 ---
-RHTODO
+
 ```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 ```
 
 ## Complete refresh of Snowplow package
 
-While you can drop and recompute the incremental tables within this package using the standard `--full-refresh` flag, all [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md) are protected from being dropped in production (as defined by a target not matching your `snowplow__dev_target_name`). Without dropping the manifest during a full refresh, the selected derived incremental tables would be dropped but the processing of events would resume from where the package left off (as captured by the `snowplow_<package_name>_incremental_manifest` table) rather than your `snowplow__start_date`.
+While you can drop and recompute the incremental tables within this package using the standard `--full-refresh` flag, all [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md) are protected from being dropped in production (as defined by a target not matching your `snowplow__dev_target_name`). 
+
+Without dropping the manifest during a full refresh, the selected derived incremental tables would be dropped but the processing of events would resume from where the package left off, as captured by the `snowplow_<package_name>_incremental_manifest` table, rather than your `snowplow__start_date`.
 
 In order to drop all the manifest tables and start again set the `snowplow__allow_refresh` var to `true` at run time:
 

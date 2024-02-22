@@ -4,8 +4,6 @@ description: "Steps for backfilling the data models"
 sidebar_position: 0
 ---
 
-## Backfilling
-
 When you first start using our packages, when you add [new custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), or following on from a [full refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md), you may have a large period of data that needs to be processed before your models are *caught up* with your live data and the package does a [standard run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#state-4-standard-run).
 
 As described in [incremental processing](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) by default our packages are set up to avoid processing large periods of data in one go, this helps to reduce the workload on your cloud, as well as reducing the impact of any issues in the data causing a single run to fail. 

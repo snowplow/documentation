@@ -99,7 +99,7 @@ dark: require('./images/engaged_time_dark.drawio.png').default
 At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for [stray page pings](#stray-page-pings), but the underlying idea is the same.
 
 ### Mobile Calculation
-For Mobile we use the `screen_summary` entity from the [mobile trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking) for the engaged time.
+For Mobile we use the `screen_summary` entity from the [mobile trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking) for the engaged time. Check out the [mobile engagement demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/) for a live view of this.
 
 
 ## Stray Page Pings (Web only)

@@ -3,23 +3,70 @@ title: "Adding Fields to a Derived Table"
 sidebar_position: 10
 ---
 
-RHTODO
+You may often wish to add fields onto the derived tables within our packages; perhaps there is some additional dimension you need for your analysis, or some extra calculation you wish to perform. In most cases this is relatively straight forward to do, and even in the most complex case you don't need to alter the logic for the derived table itself.
 
-<details>
-<summary>Custom SDEs or Contexts in Redshift</summary>
+## Option 1: Passthrough fields
+Where possible, if the field you want to add is attached to the original event for that table (e.g. the page/screen view for views) then you can make use of the [passthrough fields](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/index.md) feature in our packages.
 
-Since version 0.16.0 of `snowplow_web` it has been possible to include custom SDE or contexts in the `snowplow_web_base_events_this_run` table by making use of the `snowplow__entities_or_sdes` variable. See the section on Utilizing custom contexts or SDEs for details of the structure, but as an example to include the values from the `contexts_com_mycompany_click_1` context you would use:
+## Option 2: Custom aggregations
+If you require aggregation at the level of the table (e.g. session identifier for sessions) you can make use of the [custom aggregations](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-aggregations/index.md) feature in our packages that support it.
 
-```yml title="dbt_project.yml"
-vars:
-    ...
-    snowplow__entities_or_sdes: [{'schema': 'contexts_com_mycompany_click_1', 'prefix': 'click', 'alias': 'mc', 'single_entity': true}]
-    ...
+## Option 3: Custom derived table
+If none of the above options are suitable, the best approach is to build a custom version of our derived table, and read from the existing [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#other-this-run-tables) table to then add in your additional fields.
+
+:::tip
+
+For Redshift, if you need any additional self-describing event or entity fields in the events this run table, check out the [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md#custom-entities--events) page for how to add these.
+
+:::
+
+As an example, let's say we want to add some field to the sessions table in the unified package, that for simplicity is just going to be an `is_test` calculation based on the app_id.
+
+### Disable the derived model in the package
+The first step is to disable the derived model in the package itself. You do this in your top level project yaml:
+
+```yaml title=dbt_project.yml
 ...
+models:
+  snowplow_unified:
+    sessions:
+      snowplow_unified_sessions:
+        +enabled: false
+```
+### Add a new derived model
+Next we add a new model to replace the one we just disabled; the easiest thing to do is just copy the contents of the model we just disabled. While you could name this anything, it's easiest for downstream use cases to keep the original name
+
+```jinja2 title=models/custom_snowplow_models/snowplow_unified_sessions.sql
+{{
+  config(
+    ...
+  )
+}}
+
+select *
+  {% if target.type in ['databricks', 'spark'] -%}
+  , DATE(start_tstamp) as start_tstamp_date
+  {%- endif %}
+from {{ ref('snowplow_unified_sessions_this_run') }}
+where {{ snowplow_utils.is_run_with_new_events('snowplow_unified') }} --returns false if run doesn't contain new events.
 ```
 
-which will add all fields from that context, with field names prefixed by `click_` to the `snowplow_web_base_events_this_run` table, available to then use in any custom model. Note that you should only join _single entity_ context tables (i.e. those that only have a single object per event, rather than multiple) to avoid duplicates being generated in your base events table, which would then lead to incorrect processing of the rest of the package. Any multi-valued contexts should be joined directly in your custom model, making use of our `get_sde_or_context()` macro.
+### Modify the new model as needed
+```jinja2 title=models/custom_snowplow_models/snowplow_unified_sessions.sql
+{{
+  config(
+    ...
+  )
+}}
 
-We plan to add this feature to our other packages in the future.
+select *
+  , case when app_id like '%_test' then 'test' else 'prod' end as app_type
+  {% if target.type in ['databricks', 'spark'] -%}
+  , DATE(start_tstamp) as start_tstamp_date
+  {%- endif %}
+from {{ ref('snowplow_unified_sessions_this_run') }}
+where {{ snowplow_utils.is_run_with_new_events('snowplow_unified') }} --returns false if run doesn't contain new events.
+```
 
-</details>
+### (Optional) Backfill the model
+Follow the steps to [backfill models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/index.md) the model if you want this field to be populated historically.

@@ -6,7 +6,7 @@ sidebar_position: 10
 
 :::tip
 
-This functionality requires dispatching to our macros over dbt core, see how to do this on the [dispatch setup](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/dispatch/index.md) page.
+This functionality requires dispatching to our macros over dbt core, see how to do this on the [dispatch setup](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/dispatch/index.md) page.
 
 :::
 

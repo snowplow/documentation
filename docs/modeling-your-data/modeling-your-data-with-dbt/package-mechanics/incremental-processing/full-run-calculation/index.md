@@ -11,11 +11,11 @@ The following information is meant for educational purposes only, there should n
 :::
 
 ## Timestamps used in our packages
-When calculating the timestamps required for our [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) by default we use `collector_tstamp`; historically this was the field the events table was most likely to be partitioned on. Nowadays `load_tstamp` is increasingly common, and users may have changed the partition field of their table. To accommodate this and make use of more efficient filtering you can alter the field we use to identify new events using the `snowplow__session_timestamp` variable. Note that where possible this should match your partition key, and the choice will impact the calculation when looking for which events to process.
+When calculating the timestamps required for our [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) by default we use `collector_tstamp`; historically this was the field the events table was most likely to be partitioned on. Nowadays `load_tstamp` is increasingly common, and users may have changed the partition field of their table. To accommodate this and make use of more efficient filtering you can alter the field we use to identify new events using the `snowplow__session_timestamp` variable. Note that where possible this should match your partition key, and the choice will impact the calculation when looking for which events to process.
 
 ## Calculation for run timestamps
 
-The details provided above cover how we calculate the first step of the date range to process on a run, based on the state of models in the package and any new data. This is not the full story as in a given run the date range of specific events that are available in the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table will differ from this. What follows is the full details of how this is calculated and processed.
+The details provided above cover how we calculate the first step of the date range to process on a run, based on the state of models in the package and any new data. This is not the full story as in a given run the date range of specific events that are available in the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table will differ from this. What follows is the full details of how this is calculated and processed.
 
 ### Step 1: Calculate Base New Event Limits
 The first step is to identify the model limits for the run. This is accomplished by the `get_incremental_manifest_status`[<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_status.sql) macro to find the min and max last success in the manifest, and then uses the `get_run_limits`[<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_run_limits.sql) macro to identify which state the package is in and calculate the timestamp range for this run, as detailed above. 
@@ -23,7 +23,7 @@ The first step is to identify the model limits for the run. This is accomplished
 This range is then printed to the console and stored in the `snowplow_<package_name>_base_new_event_limits` table for later use.
 
 ### Step 2: Update sessions lifecycle manifest
-Next, we need to now process the sessions with new events into the [sessions lifecycle manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md#sessions-lifecycle-manifest) table. Here we apply many filters to the events table before calculating the [identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md) and minimum and maximum `snowplow__session_timestamp` for each session.
+Next, we need to now process the sessions with new events into the [sessions lifecycle manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md#sessions-lifecycle-manifest) table. Here we apply many filters to the events table before calculating the [identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md) and minimum and maximum `snowplow__session_timestamp` for each session.
 
 The filters that are applied are:
 #### Filter to events within the limits
@@ -48,7 +48,7 @@ and {{ snowplow_utils.app_id_filter(app_ids) }}
 ```
 
 #### Filter out quarantined sessions
-We also exclude any session identifiers listed in the [quarantine manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md#quarantine-table) table to avoid processing long running sessions. For a session to be quarantined it must have events spanning longer than the value in your `snowplow__max_session_days` variable.
+We also exclude any session identifiers listed in the [quarantine manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md#quarantine-table) table to avoid processing long running sessions. For a session to be quarantined it must have events spanning longer than the value in your `snowplow__max_session_days` variable.
 ```jinja2
 where session_identifier is not null
     and not exists (select 1 from {{ ref(quarantined_sessions) }} as a where a.session_identifier = e.session_identifier) 
@@ -64,16 +64,16 @@ We then include in the run any session that:
 - Starts before or at the upper limit for the run
 - Ends after the lower limit for the run
 
-The [base sessions this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#base-sessions-this-run) table then contains any sessions that satisfy these conditions from the lifecycle manifest, but with an `end_tstamp` capped at the upper limit.
+The [base sessions this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#base-sessions-this-run) table then contains any sessions that satisfy these conditions from the lifecycle manifest, but with an `end_tstamp` capped at the upper limit.
 
 ### Step 4: Build events this run
-Finally we query the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table and filter to events that satisfy the following conditions:
+Finally we query the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table and filter to events that satisfy the following conditions:
 - Session identifier is within the base sessions this run table created in Step 3
 - Timestamp is between the min start and max end of sessions in the base sessions this run table created in Step 3
 - Timestamp is greater than or equal to the start timestamp for that specific session identifier in base sessions this run table created in Step 3
 - (Optional) App ID is in the list provided
 
-This is the [deduplicated](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/deduplication/index.md) and other transformations are applied such as adding any entities, SDEs, or custom sql.
+This is the [deduplicated](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/deduplication/index.md) and other transformations are applied such as adding any entities, SDEs, or custom sql.
 
 :::tip
 

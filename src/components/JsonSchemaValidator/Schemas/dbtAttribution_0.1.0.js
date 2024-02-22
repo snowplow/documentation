@@ -89,7 +89,7 @@ export const Schema = {
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
       title: 'Path Transforms',
-      longDescription: 'Dictionary of path transforms (and their argument, `null` if none) to perform on the full conversion path (see the transform path options in our [docs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/)).',
+      longDescription: 'Dictionary of path transforms (and their argument, `null` if none) to perform on the full conversion path (see the transform path options in our [docs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/)).',
       packageDefault: "{'exposure_path': null}",
       group: 'Contexts, Filters, and Logs',
       items: {
@@ -246,7 +246,7 @@ export const Schema = {
       title: 'Dev Target',
       description:
         'Target name of your development environment as defined in your `profiles.yml` file',
-      longDescription: 'The [target name](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/) section for more details.',
+      longDescription: 'The [target name](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/) section for more details.',
       packageDefault: 'dev',
       group: 'Warehouse and Tracker',
     },

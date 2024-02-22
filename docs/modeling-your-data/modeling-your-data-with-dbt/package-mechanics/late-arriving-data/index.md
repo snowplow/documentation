@@ -83,4 +83,4 @@ To manage this we use the `snowplow__lookback_window_hours` variable to add a _b
 
 Note that this isn't an issue if _all_ events are delayed, because if all events are delayed the previous maximum processed timestamp would still be before any of these events. In the event of the model running part way through the loading of a set of out-of-order events (e.g. an event recovery), you can increase the `snowplow__lookback_window_hours` to forcibly reprocess a larger window of data.
 
-For more details on how all these variables combine, please see the docs on the [incremental logic](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) of our packages.
+For more details on how all these variables combine, please see the docs on the [incremental logic](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) of our packages.

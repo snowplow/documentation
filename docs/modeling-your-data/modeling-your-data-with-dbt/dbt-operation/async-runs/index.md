@@ -9,7 +9,7 @@ You may wish to run the modules asynchronously, for instance run the views modul
 dbt run --select +snowplow_web.page_views
 ```
 
-However, due to the models being listed in the [manifest table](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md) we would need to know which models are included in this at run time; this is not currently possible. Instead all models from the standard and custom modules are selected from the manifest table and the package will attempt to synchronize all models. This makes the above command unsuitable for asynchronous runs.
+However, due to the models being listed in the [manifest table](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md) we would need to know which models are included in this at run time; this is not currently possible. Instead all models from the standard and custom modules are selected from the manifest table and the package will attempt to synchronize all models. This makes the above command unsuitable for asynchronous runs.
 
 However you can leverage dbt's `ls` command in conjunction with shell substitution to explicitly state what models to run, allowing a subset of models to be selected from the manifest and thus run independently.
 

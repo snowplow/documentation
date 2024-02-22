@@ -6,20 +6,20 @@ sidebar_position: 10
 
 Duplicates in your data can happen, because of Snowplow's _At Least Once_ delivery approach. However, it's important for analysis and reporting that these duplicates are removed when doing any kind of data modeling. As part of our packages, we make sure to remove duplicate events at the very start to ensure any downstream data is correct.
 
-All our packages perform de-duplication on both `event_id`'s as part of the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run), and then ensure distinct counts and records are used for any higher level tables in the packages e.g. page views. The de-duplication method for Redshift & Postgres is different to BigQuery, Snowflake, & Databricks due to their shredded table design. 
+All our packages perform de-duplication on both `event_id`'s as part of the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run), and then ensure distinct counts and records are used for any higher level tables in the packages e.g. page views. The de-duplication method for Redshift & Postgres is different to BigQuery, Snowflake, & Databricks due to their shredded table design. 
 
 ## BigQuery, Snowflake, & Databricks
 
 Any duplicate `event_id`s are removed by taking the earliest `collector_tstamp` record. In the case of multiple rows with this timestamp, we take one at random (as they will all be the same). The same methodology is applied to `page/screen_view_id`s, however we order by `derived_tstamp`. 
 
-There should be no need to further de-duplicate the base [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table or any contexts for each row.
+There should be no need to further de-duplicate the base [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table or any contexts for each row.
 
 ## Redshift & Postgres
 
 ### Single-valued entities
 When events are expected to only have at most a single entity in the attached context, any duplicate `event_id`s are removed from the atomic events table, and any context/self-describing event tables, by taking the earliest `collector_tstamp` record. In the case of multiple rows with this timestamp, we take one at random (as they will all be the same).
 
-Any custom entities or self-describing events are able to be added to the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table, and are de-duped on by taking the earliest `collector_tstamp` record, by using the `snowplow__entities_or_sdes` variable in our package. See [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md) for more information and examples.
+Any custom entities or self-describing events are able to be added to the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table, and are de-duped on by taking the earliest `collector_tstamp` record, by using the `snowplow__entities_or_sdes` variable in our package. See [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md) for more information and examples.
 
 
 ### Multi-valued entities

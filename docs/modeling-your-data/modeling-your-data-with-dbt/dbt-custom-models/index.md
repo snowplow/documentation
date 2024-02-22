@@ -10,8 +10,8 @@ The Snowplow packages are designed to be easily customized or extended within yo
 
 In general there are 3 types of custom models you may end up building:
 1. **Drop+recompute/view models**: these models build from the derived tables but require a Drop+recompute each time they are built. This could include things like daily aggregations or rolling views.
-2. **Incremental models**: these models build from the existing (or custom) [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#other-this-run-tables) tables(s) and are incrementally upserted to each run. This could include things like a custom sessions table with additional user information. These are the most common types of custom models.
-3. **This run models**: these models build from the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table that contains all columns for events being (re)processed in the run. These can be used to feed custom incremental models.
+2. **Incremental models**: these models build from the existing (or custom) [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#other-this-run-tables) tables(s) and are incrementally upserted to each run. This could include things like a custom sessions table with additional user information. These are the most common types of custom models.
+3. **This run models**: these models build from the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table that contains all columns for events being (re)processed in the run. These can be used to feed custom incremental models.
 
 Alternatively, if you wish to only use the events this run logic and build everything on top of this yourself, you may be better looking at the [using different sessionisation example](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/using-different-sessionisation/index.md) for how to set up a new package from scratch.
 
@@ -29,7 +29,7 @@ The following best practices should be followed to ensure that updates and bug f
 
 In short, the standard models can be treated as the source code for a distinct piece of software, and custom models can be treated as self-maintained, additive plugins - in much the same way as a Java package may permit one to leverage public classes in their own API, and provide an entry point for custom programs to run, but will not permit one to modify the original API.
 
-The [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md) and derived tables are considered part of the 'public' class of tables in this model structure, and so we can give assurances that non-breaking releases won't alter them. The other tables may be used in custom SQL, but their logic and structure may change from release to release, or they may be removed. 
+The [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md) and derived tables are considered part of the 'public' class of tables in this model structure, and so we can give assurances that non-breaking releases won't alter them. The other tables may be used in custom SQL, but their logic and structure may change from release to release, or they may be removed. 
 
 ## Custom model usage
 An overview of the detail provided below is available in this summary table:
@@ -41,7 +41,7 @@ An overview of the detail provided below is available in this summary table:
 | This Run | `table`/`view`/ `ephemeral` | ✅ |❌ |❌ |❌ |❌ |
 
 ### Tagging Models
-Any incremental model, or one that builds from the events this run table, in the package requires tagging so that it can be tracked in the manifest table as part of the [incremental sessionisation logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md). If you do not correctly tag the model you may get an error, or your package may get stuck in State 2.
+Any incremental model, or one that builds from the events this run table, in the package requires tagging so that it can be tracked in the manifest table as part of the [incremental sessionisation logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md). If you do not correctly tag the model you may get an error, or your package may get stuck in State 2.
 
 The model(s) should be tagged with `snowplow_<package>_incremental`; the easiest way to achieve this is to place any custom models of this type in a specific directory in your project and tag the whole folder in your project yaml:
 
@@ -65,7 +65,7 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_<package>') }} --return
 ```
 
 ### Using `snowplow_optimize`
-To make use of our [efficient upsert](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/optimized-upserts/index.md) you should add `snowplow_optimize=true` to your custom model config for incremental models, setting an appropriate `upsert_date_key` and `unique_id`.
+To make use of our [efficient upsert](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/index.md) you should add `snowplow_optimize=true` to your custom model config for incremental models, setting an appropriate `upsert_date_key` and `unique_id`.
 
 ```jinja2 title="/models/snowplow_<package>_custom_models/my_custom_model.sql"
 {{
@@ -94,7 +94,7 @@ If you want to retire a custom model, you should delete the models from your pro
 There is no need to remove the models from the `snowplow_<package>_incremental_manifest` manifest table. The packages identifies **enabled** models tagged with `snowplow_<package>_incremental` within your project and selects these models from the manifest in order to calculate the state of the web model as described above.
 
 :::danger
- Do **NOT** just use `--exclude` on the retired models from your job in production. Currently the packages is unable to identify which models are due to be executed in a given run. As a result, if you exclude a model the package will get stuck in [State 3](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md#state-3-models-out-of-sync) and continue to attempt to sync your excluded with the remaining models.
+ Do **NOT** just use `--exclude` on the retired models from your job in production. Currently the packages is unable to identify which models are due to be executed in a given run. As a result, if you exclude a model the package will get stuck in [State 3](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#state-3-models-out-of-sync) and continue to attempt to sync your excluded with the remaining models.
 :::
 
 ## Tips for developing custom models

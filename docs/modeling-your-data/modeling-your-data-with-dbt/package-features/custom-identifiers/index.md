@@ -10,11 +10,11 @@ import TabItem from '@theme/TabItem';
 
 :::danger
 
-As this changes the core logic of the package, you should make sure you have a good understanding of how the [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) works (including things such as quarantining sessions), and a good certainty around the tracking of any custom fields you plan to use.
+As this changes the core logic of the package, you should make sure you have a good understanding of how the [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) works (including things such as quarantining sessions), and a good certainty around the tracking of any custom fields you plan to use.
 
 :::
 
-Our packages come with a very robust [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) that makes sure when a session has a new event in the latest run, that _all_ events within that session are processed as part of that run to ensure all aggregations are correct and valid. There are some exceptions, such as quarantined sessions to avoid large table scans, but in general this approach ensures that you can be confident that in each run you have the full scope of a given session to process in our models, as well as any [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) you build to take advantage of this feature.
+Our packages come with a very robust [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) that makes sure when a session has a new event in the latest run, that _all_ events within that session are processed as part of that run to ensure all aggregations are correct and valid. There are some exceptions, such as quarantined sessions to avoid large table scans, but in general this approach ensures that you can be confident that in each run you have the full scope of a given session to process in our models, as well as any [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) you build to take advantage of this feature.
 
 Traditionally a session in this sense has been a _true_ session i.e. it has been the `domain_sessionid` and `device_sessionid` value that has identified which events belong to the same session, however in our packages it is possible to overwrite the default field as part of the package logic and use your own session identifier, to ensure all events within a "session" are processed in the same run, whatever a "session" in this case means to you.
 
@@ -26,7 +26,7 @@ Throughout this page we refer to entity columns only by their major version (e.g
 
 :::tip
 
-Remember that any events with a null "session" identifier will be excluded from the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table and any processing of the package, make sure your identifier has a value for all events you want to process!
+Remember that any events with a null "session" identifier will be excluded from the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table and any processing of the package, make sure your identifier has a value for all events you want to process!
 
 :::
 

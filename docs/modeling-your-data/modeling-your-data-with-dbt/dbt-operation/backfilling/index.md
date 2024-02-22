@@ -6,9 +6,9 @@ sidebar_position: 0
 
 ## Backfilling
 
-When you first start using our packages, when you add [new custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), or following on from a [full refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md), you may have a large period of data that needs to be processed before your models are *caught up* with your live data and the package does a [standard run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md#state-4-standard-run).
+When you first start using our packages, when you add [new custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), or following on from a [full refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md), you may have a large period of data that needs to be processed before your models are *caught up* with your live data and the package does a [standard run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#state-4-standard-run).
 
-As described in [incremental processing](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) by default our packages are set up to avoid processing large periods of data in one go, this helps to reduce the workload on your cloud, as well as reducing the impact of any issues in the data causing a single run to fail. 
+As described in [incremental processing](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) by default our packages are set up to avoid processing large periods of data in one go, this helps to reduce the workload on your cloud, as well as reducing the impact of any issues in the data causing a single run to fail. 
 
 When backfilling your data, it is recommended to increase the `snowplow__backfill_limit_days` variable to as high as you feel comfortable with to reduce the number of runs that need to complete to get your processed data up to date. In general increasing this to cover 3-6 months is a good balance between speed and number of runs.
 
@@ -26,7 +26,7 @@ As the process of backfilling data may take a long time depending on your data v
 
 :::caution
 
-This process involves manually editing the manifest table, which is dangerous and should be done only with understanding of our [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) and [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md).
+This process involves manually editing the manifest table, which is dangerous and should be done only with understanding of our [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) and [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md).
 
 :::
 
@@ -100,7 +100,7 @@ Ensure your project is not running while you perform this step as it could cause
 
 :::
 
-If you were to now add this model to the project being run in `prod`, because the manifest table in `prod` (or more likely, `prod_snowplow_manifest`) has no record of this model, it will process it again from the start (as it will be in [state 2](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md#state-2-new-model-introduced)). To avoid this you need to add a record for this model into the manifest table.
+If you were to now add this model to the project being run in `prod`, because the manifest table in `prod` (or more likely, `prod_snowplow_manifest`) has no record of this model, it will process it again from the start (as it will be in [state 2](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#state-2-new-model-introduced)). To avoid this you need to add a record for this model into the manifest table.
 
 Again, some UIs may allow you to edit a table, but an `INSERT` statement is recommended e.g.
 

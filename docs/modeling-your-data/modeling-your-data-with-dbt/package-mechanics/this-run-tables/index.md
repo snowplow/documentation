@@ -7,7 +7,7 @@ sidebar_position: 10
 Our packages make use of a series of `this run` tables, named such because they are dropped and recreated each `dbt run` to only contain relevant information that that run. These tables allow for efficient re-use of information throughout a single run, and also allow you to debug any issues should a run fail.
 
 ## Events This Run
-As described in the [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md), the first thing we do in any given run is identify what events need to be processed as part of that run. These events are [deduplicated](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/deduplication/index.md), have relevant [entities and SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md) extracted and attached, and the appropriate [identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md) are calculated.
+As described in the [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), the first thing we do in any given run is identify what events need to be processed as part of that run. These events are [deduplicated](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/deduplication/index.md), have relevant [entities and SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md) extracted and attached, and the appropriate [identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md) are calculated.
 
 This table of events is then used for all further processing in the package, we refer to this table as `events this run`. This is the table to use in the case of building most [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) that require the event level data. 
 
@@ -28,7 +28,7 @@ Unified also contains a `snowplow_unified_base_events_this_run`, however this bu
 :::
 
 ## Base Sessions This Run
-The sessions this run table is built before the events this run table, and contains a list of all all the sessions that are being processed in the current run. It is a modified sub-set of the [sessions lifecycle manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/manifest-tables/index.md) with only the sessions within the run limits, and with the end timestamp capped to the upper limit of the run (in case of historic re-processing). 
+The sessions this run table is built before the events this run table, and contains a list of all all the sessions that are being processed in the current run. It is a modified sub-set of the [sessions lifecycle manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md) with only the sessions within the run limits, and with the end timestamp capped to the upper limit of the run (in case of historic re-processing). 
 
 In all packages that contain this table, it named of the form `snowplow_<package_name>_base_sessions_this_run` and is located in the `models/base/scratch` directory within the package.
 

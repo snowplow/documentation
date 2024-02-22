@@ -41,7 +41,7 @@ Our dbt packages are under a mix of licenses, including some under the [Snowplow
 :::
 
 
-Our dbt packages come with powerful built-in features such as an [optimization to the incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/optimized-upserts/index.md) to save you cost on warehouse compute resources compared to the standard method, a custom [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) to ensure we process just the required data for each run and keep your models in sync, plus the ability to build your own custom models using both of these!
+Our dbt packages come with powerful built-in features such as an [optimization to the incremental materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/index.md) to save you cost on warehouse compute resources compared to the standard method, a custom [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) to ensure we process just the required data for each run and keep your models in sync, plus the ability to build your own custom models using both of these!
 
 There are 4 core snowplow dbt packages:
 - [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_unified)): for modeling your web and mobile data for page and screen views, sessions, users, and consent

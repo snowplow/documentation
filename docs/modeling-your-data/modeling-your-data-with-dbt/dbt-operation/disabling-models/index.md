@@ -13,7 +13,7 @@ models:
       enabled: false
 ```
 
-For other models, you can identify the path to the models in your `dbt_packages` folder in your project. Note you should disable the entire folder, now just the derived model itself otherwise the [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#other-this-run-tables) tables will still process each run.
+For other models, you can identify the path to the models in your `dbt_packages` folder in your project. Note you should disable the entire folder, now just the derived model itself otherwise the [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#other-this-run-tables) tables will still process each run.
 
 :::tip
 

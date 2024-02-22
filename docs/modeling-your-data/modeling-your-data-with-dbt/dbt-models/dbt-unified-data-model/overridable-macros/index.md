@@ -7,7 +7,7 @@ hide_title: true
 
 :::tip
 
-For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/overridable-macros/index.md#overriding-macros)
+For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md#overriding-macros)
 
 :::
 

@@ -4,7 +4,7 @@ description: "Details around the manifest tables we use in our packages."
 sidebar_position: 10
 ---
 
-Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) logic of our package, as well as quarantining long running sessions. 
+Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) logic of our package, as well as quarantining long running sessions. 
 
 :::danger
 
@@ -16,10 +16,10 @@ The `allow_refresh()` macro defines the protection behavior. As [dbt recommends]
 
 To full refresh any of the manifest models in production as part of a `--full-refresh`, set the `snowplow__allow_refresh` to `true` at run time.
 
-Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/overridable-macros/index.md#overriding-macros) section for more details.
+Alternatively, you can amend the behavior of this macro entirely by overwriting it. See the [Overwriting Macros](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md#overriding-macros) section for more details.
 
 ## Incremental Manifest
-The majority of our packages have an incremental manifest table; by default this is in your `_snowplow_manifest` suffixed schema, and will have the name `snowplow_<package_name>_incremental_manifest`. This table exists to track the [state](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md#how-to-identify-the-current-state) of each of the models in the package, including any [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) that have been tagged.
+The majority of our packages have an incremental manifest table; by default this is in your `_snowplow_manifest` suffixed schema, and will have the name `snowplow_<package_name>_incremental_manifest`. This table exists to track the [state](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#how-to-identify-the-current-state) of each of the models in the package, including any [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) that have been tagged.
 
 This table has 2 columns:
 - `model`: The name of the model
@@ -44,4 +44,4 @@ Many of our packages have a quarantine table; by default this is in your `_snowp
 This table has 1 column:
 - `session_identifier`: The unique identifier for the session to not process in any further run.
 
-This table is updated on the post-hook of the [base sessions this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#base-sessions-this-run) table. If there are any additional sessions you identify you want to remove from processing, you can manually add them to this table but ensure they do not already exist.
+This table is updated on the post-hook of the [base sessions this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#base-sessions-this-run) table. If there are any additional sessions you identify you want to remove from processing, you can manually add them to this table but ensure they do not already exist.

@@ -25,7 +25,7 @@ vars:
   snowplow_unified:
     snowplow__view_passthroughs: [{'type': 'sum', 'field': "case when event_name = 'purchase' then 1 else 0 end", 'alias': 'num_purchase_events'}]
 ```
-The aggregation always runs on the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table so all events (with a session identifier) and columns are available for you to use.
+The aggregation always runs on the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table so all events (with a session identifier) and columns are available for you to use.
 
 Note that how to extract and use field from your entity or self-describing event columns will depend on your warehouse (see our [querying guide](/docs/storing-querying/querying-data/index.md#entities) for more information), and you are unable to use dbt macros in this variable. 
 

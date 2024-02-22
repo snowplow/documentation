@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Utils"
-sidebar_position: 600
+sidebar_position: 60
 title: "Utils Quickstart"
 ---
 ```mdx-code-block

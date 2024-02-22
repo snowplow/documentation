@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Unified Digital"
-sidebar_position: 100
+sidebar_position: 10
 title: "Unified Digital Quickstart"
 ---
 

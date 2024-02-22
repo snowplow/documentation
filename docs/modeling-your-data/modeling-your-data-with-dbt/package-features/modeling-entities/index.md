@@ -1,6 +1,6 @@
 ---
 title: "Modeling Entities and Self-Describing Events"
-sidebar_position: 10
+sidebar_position: 40
 ---
 
 ## Out-of-the-box Entities & Events

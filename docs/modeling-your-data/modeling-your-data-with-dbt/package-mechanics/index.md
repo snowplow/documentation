@@ -1,7 +1,7 @@
 ---
 title: "Package Mechanics"
 description: "Key mechanics of our packages"
-sidebar_position: 60
+sidebar_position: 70
 ---
 
 The following pages contain information relating to the core logic and processing of our packages, it is not required to understand these concepts to make use of our packages but they are provided for more advanced users who may wish to produce more complex [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) or better understand what's going on under the hood of the packages. We refer to these elements throughout the docs.

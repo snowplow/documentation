@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Attribution"
-sidebar_position: 400
+sidebar_position: 30
 title: "Attribution Quickstart"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Manifest Tables"
 description: "Details around the manifest tables we use in our packages."
-sidebar_position: 10
+sidebar_position: 50
 ---
 
 Each of our packages has a set of manifest tables that manage the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) logic of our package, as well as quarantining long running sessions. 

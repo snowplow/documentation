@@ -1,6 +1,6 @@
 ---
 title: "Custom Sessionization & Users"
-sidebar_position: 500
+sidebar_position: 50
 toc_max_heading_level: 5
 ---
 ```mdx-code-block

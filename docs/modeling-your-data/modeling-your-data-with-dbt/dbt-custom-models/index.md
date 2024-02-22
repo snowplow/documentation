@@ -1,7 +1,7 @@
 ---
 title: "Custom models"
 description: "How to create, update, and remove custom models in our dbt packages"
-sidebar_position: 70
+sidebar_position: 60
 ---
 
 ## Custom models

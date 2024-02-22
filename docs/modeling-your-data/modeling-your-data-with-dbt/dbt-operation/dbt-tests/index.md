@@ -1,6 +1,6 @@
 ---
 title: "Tests"
-sidebar_position: 20
+sidebar_position: 50
 ---
 
 [Tests](https://docs.getdbt.com/docs/build/tests) are a useful feature in dbt to ensure that your data meets some expectations of it, such as certain fields should not be null. We provide a suite of tests with our packages to help test the output tables for any issues, however you could and should add your own as no one knows the required quality checks of your data better than you.

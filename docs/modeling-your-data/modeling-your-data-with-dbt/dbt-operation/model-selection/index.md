@@ -1,6 +1,6 @@
 ---
 title: "Model Selection"
-sidebar_position: 2
+sidebar_position: 30
 ---
 
 ## YAML Selectors

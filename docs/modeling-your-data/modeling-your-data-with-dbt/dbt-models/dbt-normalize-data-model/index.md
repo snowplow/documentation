@@ -1,6 +1,6 @@
 ---
 title: "Normalize"
-sidebar_position: 500
+sidebar_position: 50
 description: "The Snowplow Normalize dbt Package"
 hide_title: true
 ---

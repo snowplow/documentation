@@ -1,7 +1,7 @@
 ---
 title: "Incremental Sessionization Logic"
 description: "A detailed overview of our incremental run logic using manifest tables."
-sidebar_position: 40
+sidebar_position: 10
 ---
 
 ```mdx-code-block

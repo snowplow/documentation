@@ -1,7 +1,7 @@
 ---
 title: "Custom Aggregations"
 description: "Details on custom aggregations in our packages"
-sidebar_position: 400
+sidebar_position: 60
 ---
 
 While [passthrough fields](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/index.md) enable you to add fields from the event itself into derived tables, you may at times also wish to do aggregations on the identifier for that table, e.g. session identifier, to provide more information in your derived tables without having to make a full [custom model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md). This is where Custom Aggregations come in; they allow you to calculate aggregations directly as part of the derived table logic, without having to build your own models.

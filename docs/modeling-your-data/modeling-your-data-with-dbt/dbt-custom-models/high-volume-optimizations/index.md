@@ -1,6 +1,6 @@
 ---
 title: "High Volume Optimizations"
-sidebar_position: 1
+sidebar_position: 20
 ---
 
 For users with very high data volumes (>100M daily events) you may find that, even with our [optimised upserts](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/index.md) and [incremental sessionisation](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), the package is still slow in any given run or the processing cost is high. There are a few specific things you can do to help optimize the package even further, which require various levels of effort on your part. In general we have taken the decision to not do these things as part of the "normal" deployment of our packages as there is a trade-off for each one and in the vast majority of use cases they aren't required.

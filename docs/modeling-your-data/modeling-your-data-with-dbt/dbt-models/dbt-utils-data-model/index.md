@@ -1,6 +1,6 @@
 ---
 title: "Utils"
-sidebar_position: 600
+sidebar_position: 60
 description: "The Snowplow Utils dbt Package"
 hide_title: true
 ---

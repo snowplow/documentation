@@ -1,7 +1,7 @@
 ---
 title: "Identity Stitching"
 description: "Details on mapping between `domain_userid` and `user_id` in our packages."
-sidebar_position: 30
+sidebar_position: 10
 ---
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';

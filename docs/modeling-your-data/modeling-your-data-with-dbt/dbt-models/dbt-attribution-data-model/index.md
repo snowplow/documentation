@@ -1,7 +1,7 @@
 ---
 title: "Attribution"
 description: "The Snowplow Attribution dbt Package"
-sidebar_position: 400
+sidebar_position: 30
 hide_title: true
 ---
 

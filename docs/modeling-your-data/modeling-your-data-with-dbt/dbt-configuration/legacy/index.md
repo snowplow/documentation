@@ -1,7 +1,7 @@
 ---
 title: "Legacy Packages"
-sidebar_position: 10
-description: "All legacySnowplow dbt packages"
+sidebar_position: 9999
+description: "All legacy Snowplow dbt packages"
 ---
 
 :::caution

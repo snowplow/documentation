@@ -1,6 +1,6 @@
 ---
 title: "Using multi-valued entities"
-sidebar_position: 10
+sidebar_position: 30
 ---
 
 RHTODO

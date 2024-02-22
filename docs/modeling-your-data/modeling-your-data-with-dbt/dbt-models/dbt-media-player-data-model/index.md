@@ -1,7 +1,7 @@
 ---
 title: "Media Player"
 description: "The Snowplow Media Player dbt Package"
-sidebar_position: 200
+sidebar_position: 20
 hide_title: true
 ---
 

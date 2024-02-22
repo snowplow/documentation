@@ -1,6 +1,6 @@
 ---
 title: "Asynchronous Runs"
-sidebar_position: 2
+sidebar_position: 60
 ---
 
 You may wish to run the modules asynchronously, for instance run the views module hourly but the sessions and users modules daily. You would assume this could be achieved using e.g.:

@@ -1,7 +1,7 @@
 ---
 title: "Late Arriving Data"
 description: "A detailed overview of how the data flows and how to manage variables for handling edge cases."
-sidebar_position: 40
+sidebar_position: 70
 ---
 
 ```mermaid

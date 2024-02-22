@@ -1,6 +1,6 @@
 ---
 title: "Full or Partial Refreshes"
-sidebar_position: 1
+sidebar_position: 20
 ---
 
 ```mdx-code-block

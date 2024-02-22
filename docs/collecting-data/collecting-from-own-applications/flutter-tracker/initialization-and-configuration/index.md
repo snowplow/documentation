@@ -55,7 +55,9 @@ The `EmitterConfiguration` class was added in v0.3.0.
 | `applicationContext` | `bool?` | Indicates whether [application](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) entity should be attached to tracked events. | ✔ | ✔ | | true |
 | `webActivityTracking` | `WebActivityTracking?` | Enables activity tracking using page views and pings on the Web. |  |  | ✔ | true |
 | `userAnonymisation` | `bool?` | Anonymizes certain user identifiers. | ✔ | ✔ | ✔ | false |
-| `lifecycleAutotracking` | `bool?` | Indicates whether the [lifecycle](iglu:com.snowplowanalytics.mobile/application_lifecycle/jsonschema/1-0-0) entity and foreground and background events should be autotracked.    | ✔ | ✔ | | false                                         |
+| `lifecycleAutotracking` | `bool?` | Indicates whether the [lifecycle](iglu:com.snowplowanalytics.mobile/application_lifecycle/jsonschema/1-0-0) entity and foreground and background events should be autotracked.    | ✔ | ✔ | | true                                         |
+| `screenEngagementAutotracking` | `bool?` | Indicates whether to enable tracking of the screen end event and the screen summary context entity.    | ✔ | ✔ | | true                                         |
+| `platformContextProperties` | `PlatformContextProperties?` | Overrides for the values for properties of the platform context entity.    | ✔ | ✔ | | null                                         |
 
 :::note
 The ability to enable `userAnonymisation`, or the screen and application context entities, was added in v0.3.0.
@@ -69,7 +71,9 @@ The optional `WebActivityTracking` property configures page tracking on Web. I
 
 Activity tracking monitors whether a user continues to engage with a page over time, and record how they digest content on the page over time. That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it. (E.g. is the tab in focus, does the mouse move over the page, does the user scroll etc.) If any of these things occur in a set period of time (`minimumVisitLength` seconds from page load and every `heartbeatDelay` seconds after that), a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page (e.g. because the user is on a different browser tab), no page ping fires.
 
-Lifecycle autotracking is only available on mobile apps (iOS and Android). When configured, a Lifecycle context entity is attached to all events. It records whether the app was visible or not when the event was tracked. In addition, a `Background` event will be tracked when the app is moved to background, and a `Foreground` event when the app moves back to foreground (becomes visible on the screen).
+Lifecycle autotracking is only available on mobile apps (iOS and Android). When configured (it is enabled by default), a Lifecycle context entity is attached to all events. It records whether the app was visible or not when the event was tracked. In addition, a `Background` event will be tracked when the app is moved to background, and a `Foreground` event when the app moves back to foreground (becomes visible on the screen).
+
+Screen engagement autotracking is also only available on mobile apps (iOS and Android). When configured (it is enabled by default), a screen summary context entity will be tracked along with screen end, foreground and background events. Make sure that you have lifecycle autotracking enabled for screen summary to have complete information.
 
 See [this page](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/anonymous-tracking/index.md) for information about anonymous tracking.
 

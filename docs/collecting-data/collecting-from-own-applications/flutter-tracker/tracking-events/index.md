@@ -170,6 +170,55 @@ tracker.track(ScreenView(
     transitionType: 'none'));
 ```
 
+### Screen engagement tracking
+
+Screen engagement tracking is a feature that enables tracking the user activity on the screen.
+This consists of the time spent and the amount of content viewed on the screen.
+
+Concretely, it consists of the following metrics:
+
+1. Time spent on screen while the app was in foreground (tracked automatically).
+2. Time spent on screen while the app was in background (tracked automatically).
+3. Number of list items scrolled out of all list items (requires some manual tracking).
+4. Scroll depth in pixels (requires some manual tracking).
+
+This information is attached using a [`screen_summary` context entity](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-activity-tracking/#screen-summary-entity) to the following events:
+
+1. [`screen_end` event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-end-event) that is automatically tracked before a new screen view event.
+2. [`application_background` event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#background-event).
+3. [`application_foreground` event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#foreground-event).
+
+Screen engagement tracking is enabled by default, but can be configured using the `TrackerConfiguration.screenEngagementAutotracking` option.
+
+For a demo of how mobile screen engagement tracking works in action, **[please visit this demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/)**.
+
+#### Updating list item view and scroll depth information
+
+To update the list item viewed and scroll depth information tracked in the screen summary entity, you can track the `ListItemView` and `ScrollChanged` events with this information.
+When tracked, the tracker won't send these events individually to the collector, but will process the information into the next `screen_summary` entity and discard the events.
+You may want to track the events every time a new list item is viewed on the screen, or whenever the scroll position changes.
+
+To update the list items viewed information:
+
+```dart
+Event event = const ListItemView(index: 1, itemsCount: 10);
+tracker.track(event);
+```
+
+To update the scroll depth information:
+
+```dart
+Event event = const ScrollChanged(
+  yOffset: 10,
+  xOffset: 20,
+  viewHeight: 100,
+  viewWidth: 200,
+  contentHeight: 300,
+  contentWidth: 400,
+);
+tracker.track(event);
+```
+
 ## Track timing events with `Timing`
 
 Use the `Timing` type to track user timing events such as how long resources take to load. These events take a timing `category`, the `variable` being measured, and the `timing` time measurement. An optional `label` can be added to further identify the timing event

@@ -68,5 +68,11 @@ from {{ ref('snowplow_unified_sessions_this_run') }}
 where {{ snowplow_utils.is_run_with_new_events('snowplow_unified') }} --returns false if run doesn't contain new events.
 ```
 
+:::tip
+
+If you are using BigQuery, you should look at the [combine column versions](https://github.com/snowplow/dbt-snowplow-utils?tab=readme-ov-file#combine_column_versions-source) macro we provide to automatically combine minor versions of your schemas in the model.
+
+:::
+
 ### (Optional) Backfill the model
 Follow the steps to [backfill models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/index.md) the model if you want this field to be populated historically.

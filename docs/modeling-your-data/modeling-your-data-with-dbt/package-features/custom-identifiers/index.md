@@ -31,7 +31,7 @@ Remember that any events with a null "session" identifier will be excluded from 
 :::
 
 ## Customizing session identifiers
-To customize your session identifiers, you can make use of the `snowplow__session_identifiers` variable. This variable allows you to provide a list of identifiers that dbt will then try to use to create an identifying field for each session, which will always be saved under the `session_identifier` column in your tables.
+To customize your session identifiers, you can make use of the `snowplow__session_identifiers` variable. This variable allows you to provide a list of identifiers that dbt will then try to use to create an identifying field for each session (by coalescing them in order), which will always be saved under the `session_identifier` column in your tables.
 
 ### Using additional atomic fields
 For web data by default, your identifier will be the `domain_sessionid` field which is found in the atomic events table (this will vary by package). If you wanted to instead use a different field, say the `domain_userid` field that can also be found in the flat fields of the atomic events table, you could define your `snowplow__session_identifiers` as follows:

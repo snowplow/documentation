@@ -38,7 +38,7 @@ Note that how to extract a field from your context column will depend on your wa
 
 ## Usage Notes
 
-Which event the field(s) are taken from depends on the derived table for example in the Views table in the Unified package the the field value from the `page_view` event itself, _not_ the pings. 
+Which event the field(s) are taken from depends on the derived table; for example in the Views table in the Unified package the the field value from the `page_view` event itself, _not_ the pings. 
 
 A general rule of thumb is that the field comes from the *first* event of that type at that table level. If you are unsure, you can always check the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for the variable description or the model sql.
 

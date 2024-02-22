@@ -13,7 +13,7 @@ This functionality requires dispatching to our macros over dbt core, see how to 
 ## Availability
 :::tip
 
-Any package can make use of the table grants feature provided by the `snowplow__grant_select_list` variable if you are using at least version 0.16.2 of snowplow-utils, even if the variable is not listed in the configuration. Granting usage on schemas however requires specific package versions.
+Any package can make use of the table grants feature provided by the `snowplow__grant_select_to` variable if you are using at least version 0.16.2 of snowplow-utils, even if the variable is not listed in the configuration. Granting usage on schemas however requires specific package versions.
 
 :::
 
@@ -25,12 +25,12 @@ Note that this feature is not supported for BigQuery due to the different approa
 
 ## Usage
 ### Granting select on tables
-To grant `select` on all tables created within our package, you can provide a list of the users/roles in the `snowplow__grant_select_list` variable e.g.
+To grant `select` on all tables created within our package, you can provide a list of the users/roles in the `snowplow__grant_select_to` variable e.g.
 
 ```yaml title=dbt_project.yml
 vars:
   snowplow_<package_name>:
-    snowplow__grant_select_list: ['myuser1', 'myuser2']
+    snowplow__grant_select_to: ['myuser1', 'myuser2']
 ```
 Note that these user/role names are case sensitive. Databricks Principals are also supported. If the user does not exist an error will occur when the grant tries to run. This feature is compatible with the built-in [dbt grants](https://docs.getdbt.com/reference/resource-configs/grants) functionality and we will grant to a combination of the two.
 
@@ -47,7 +47,7 @@ Note this will overwrite any existing grants applied to the table manually in th
 :::
 
 ### Granting usage on schemas
-In the case of some warehouses, users also need `usage` permissions on the schema a table is in to be able to access the data. We provide this functionality via a post-hook that grants usage on **any** schema interacted with during the `dbt run` to the users listed in `snowplow__grant_select_list`.
+In the case of some warehouses, users also need `usage` permissions on the schema a table is in to be able to access the data. We provide this functionality via a post-hook that grants usage on **any** schema interacted with during the `dbt run` to the users listed in `snowplow__grant_select_to`.
 
 :::danger
 
@@ -55,4 +55,4 @@ Due to limitations with dbt, we are not able to scope this only to schemas inter
 
 :::
 
-This functionality will only trigger if `snowplow__grant_select_list` is not empty, and you can disable this by setting `snowplow__enable_grant_usage` to false.
+This functionality will only trigger if `snowplow__grant_select_to` is not empty, and you can disable this by setting `snowplow__grant_schema_usage` to false.

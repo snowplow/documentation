@@ -629,7 +629,7 @@ export const Schema = {
       packageDefault: '[ ] (no aggregations)',
       $ref: '#/definitions/passthrough_vars'
     },
-    snowplow__grant_select_list: {
+    snowplow__grant_select_to: {
       type: 'array',
       description: '> Click the plus sign to add a new entry',
       minItems: 0,
@@ -642,7 +642,7 @@ export const Schema = {
       longDescription: 'A list of users to grant select to all tables created by this package to.',
       packageDefault: '[]',
     },
-    snowplow__enable_grant_usage: {
+    snowplow__grant_schema_usage: {
       type: 'boolean',
       description: 'Enable granting usage on schemas',
       title: 'Enable grant usage',

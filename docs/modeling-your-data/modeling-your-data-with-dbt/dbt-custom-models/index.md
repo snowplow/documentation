@@ -3,13 +3,6 @@ title: "Custom models"
 description: "How to create, update, and remove custom models in our dbt packages"
 sidebar_position: 70
 ---
-RHTODO
-
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 
 ## Custom models
 
@@ -21,6 +14,8 @@ In general there are 3 types of custom models you may end up building:
 3. **This run models**: these models build from the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md#events-this-run) table that contains all columns for events being (re)processed in the run. These can be used to feed custom incremental models.
 
 Alternatively, if you wish to only use the events this run logic and build everything on top of this yourself, you may be better looking at the [using different sessionisation example](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/using-different-sessionisation/index.md) for how to set up a new package from scratch.
+
+The best way to learn is by doing, so check out the [Examples](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/index.md) section for specific custom models.
 
 ## Guidelines & Best Practice
 
@@ -36,14 +31,14 @@ In short, the standard models can be treated as the source code for a distinct p
 
 The [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/this-run-tables/index.md) and derived tables are considered part of the 'public' class of tables in this model structure, and so we can give assurances that non-breaking releases won't alter them. The other tables may be used in custom SQL, but their logic and structure may change from release to release, or they may be removed. 
 
-## Creating a custom model
+## Custom model usage
 An overview of the detail provided below is available in this summary table:
 
-| Model Type | Requires Tagging | Requires backfilling | Requires specific refreshing |
-|-|-|-|-|
-| Drop+recompute/view | ❌ |❌ |❌ |
-| Incremental | ✅ |✅ |✅ |
-| This Run | ✅ |❌ |❌ |
+| Model Type | Materialization | Requires Tagging | Requires backfilling | Requires specific refreshing | Use is run with new events | Use `snowplow_optimize` |
+|-|-|-|-|-|-|-|
+| Drop+recompute/ view | `table`/`view` | ❌ |❌ |❌ |❌ |❌ |
+| Incremental | `incremental` | ✅ |✅ |✅ |✅ |✅ |
+| This Run | `table`/`view`/ `ephemeral` | ✅ |❌ |❌ |❌ |❌ |
 
 ### Tagging Models
 Any incremental model, or one that builds from the events this run table, in the package requires tagging so that it can be tracked in the manifest table as part of the [incremental sessionisation logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md). If you do not correctly tag the model you may get an error, or your package may get stuck in State 2.
@@ -59,6 +54,34 @@ models:
 
 Note that because Drop+recompute models are not tagged, they will not be run when using the `snowplow_<package>` selector.
 
+### Using `is_run_with_new_events`
+Incremental type custom models, those that reference a `_this_run` type table  should make use of the `is_run_with_new_events` macro to only process the table when new events are available in the current run.
+
+```jinja2 title="/models/snowplow_<package>_custom_models/my_custom_model.sql"
+select
+  ...
+from {{ ref('snowplow_<package>_<table>_this_run') }}
+where {{ snowplow_utils.is_run_with_new_events('snowplow_<package>') }} --returns false if run doesn't contain new events.
+```
+
+### Using `snowplow_optimize`
+To make use of our [efficient upsert](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/optimized-upserts/index.md) you should add `snowplow_optimize=true` to your custom model config for incremental models, setting an appropriate `upsert_date_key` and `unique_id`.
+
+```jinja2 title="/models/snowplow_<package>_custom_models/my_custom_model.sql"
+{{
+  config(
+    materialized='incremental',
+    upsert_date_key='my_date_field',
+    unique_key='unique_id_field',
+    snowplow_optimize=true,
+    ...
+  )
+}}
+
+select
+  ...
+```
+
 ### Backfilling Custom Models
 See our page on [backfilling](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/index.md).
 
@@ -73,101 +96,6 @@ There is no need to remove the models from the `snowplow_<package>_incremental_m
 :::danger
  Do **NOT** just use `--exclude` on the retired models from your job in production. Currently the packages is unable to identify which models are due to be executed in a given run. As a result, if you exclude a model the package will get stuck in [State 3](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md#state-3-models-out-of-sync) and continue to attempt to sync your excluded with the remaining models.
 :::
-
-### Incremental models
-
-:::
-
-These models should also make use of the optimized `materialization` set such that `materialized='incremental` and `snowplow_optimize=true` in your model config. Finally, as well as referencing a `_this_run` table these models should make use of the `is_run_with_new_events` macro to only process the table when new events are available in the current run. This macro `snowplow_utils.is_run_with_new_events(package_name)` will evaluate whether the particular model, i.e. `{{ this }}`, has already processed the events in the given run of the model. This is returned as a boolean and effectively blocks the upsert to incremental models if the run only contains old data. This protects against your derived incremental tables being temporarily updated with incomplete data during batched back-fills of other models.
-
-```jinja2 title="/models/snowplow_<package>_custom_models/my_custom_model.sql"
-{{
-  config(
-    materialized='incremental',
-    upsert_date_key='my_date_field',
-    unique_key='unique_id_field',
-    snowplow_optimize=true,
-    ...
-  )
-}}
-
-
-select
-  ...
-from {{ ref('snowplow_<package>_<table>_this_run') }}
-where {{ snowplow_utils.is_run_with_new_events('snowplow_<package>') }} --returns false if run doesn't contain new events.
-
-```
-
-By doing all of this you ensure your table will be managed correctly in the manifest tables and make use of the incremental logic of the package. Listed below are the recommended tables to reference as your input for a custom model, depending on the level of aggregation required:
-
-<Tabs groupId="dbt-packages" queryString>
-<TabItem value="web" label="Snowplow Web" default>
-
-- Event level: `snowplow_web_base_events_this_run`
-- Page view level: `snowplow_web_page_views_this_run`
-- Session level: `snowplow_web_sessions_this_run`
-- User level: `snowplow_web_users_this_run`
-
-</TabItem>
-<TabItem value="mobile" label="Snowplow Mobile">
-
-- Event level: `snowplow_mobile_base_events_this_run`
-- Screen view level: `snowplow_mobile_screen_views_this_run`
-- Session level: `snowplow_mobile_sessions_this_run`
-- User level: `snowplow_mobile_users_this_run`
-
-</TabItem>
-<TabItem value="normalize" label="Snowplow Normalize">
-
-- Event level: `snowplow_normalize_base_events_this_run`
-
-</TabItem>
-<TabItem value="ecommerce" label="Snowplow E-commerce">
-
-- Event level: `snowplow_ecommerce_base_events_this_run`
-- Cart level: `snowplow_ecommerce_cart_interactions_this_run`
-- Checkout level: `snowplow_ecommerce_checkout_interactions_this_run`
-- Product level: `snowplow_ecommerce_product_interactions_this_run`
-- Session level: `snowplow_ecommerce_sessions_this_run`
-- Transaction level: `snowplow_ecommerce_transaction_interactions_this_run`
-
-</TabItem>
-<TabItem value="media_player" label="Snowplow Media Player">
-
-- Event level: `snowplow_media_player_base_events_this_run`
-- Page view level: `snowplow_media_player_base_this_run`
-- Ad view level: `snowplow_media_player_media_ad_views_this_run`
-
-</TabItem>
-</Tabs>
-
-### This run models
-If you need to produce a custom `_this_run` type model you should build this model off the relevant package's `snowplow_<package>_base_events_this_run` table. This table has all the columns from your events table in, including any self describing events and custom contexts (except in Redshift). Note that this table has some custom logic in each package to identify which events to include in each run, including your `app_ids` filter. For more information about the way this works see the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-elements/incremental-processing/index.md) page, but the key takeaway is all events with a session ID that exists in events since the last processing are included in the next run - the session ID field varies by package and the normalize package does not have this filter.
-
-<details>
-<summary>Custom SDEs or Contexts in Redshift</summary>
-
-Since version 0.16.0 of `snowplow_web` it has been possible to include custom SDE or contexts in the `snowplow_web_base_events_this_run` table by making use of the `snowplow__entities_or_sdes` variable. See the section on Utilizing custom contexts or SDEs for details of the structure, but as an example to include the values from the `contexts_com_mycompany_click_1` context you would use:
-
-```yml title="dbt_project.yml"
-vars:
-    ...
-    snowplow__entities_or_sdes: [{'schema': 'contexts_com_mycompany_click_1', 'prefix': 'click', 'alias': 'mc', 'single_entity': true}]
-    ...
-...
-```
-
-which will add all fields from that context, with field names prefixed by `click_` to the `snowplow_web_base_events_this_run` table, available to then use in any custom model. Note that you should only join _single entity_ context tables (i.e. those that only have a single object per event, rather than multiple) to avoid duplicates being generated in your base events table, which would then lead to incorrect processing of the rest of the package. Any multi-valued contexts should be joined directly in your custom model, making use of our `get_sde_or_context()` macro.
-
-We plan to add this feature to our other packages in the future.
-
-</details>
-
-
-To build a custom `_this_run` table you need to ensure that this model is materialized as a `table` and you use `{{ ref(snowplow_<package>_base_events_this_run) }}`. This type of model also need to be tagged with `snowplow_<package>_incremental`. You can then use this model in other Incremental type custom models.
-
-
 
 ## Tips for developing custom models
 
@@ -200,7 +128,7 @@ vars:
 
 ### 2. Using Recent Data
 
-This can be achieved by setting `snowplow__start_date` to a recent date. To dynamically change the start date depending on your environment, you can use the following:
+This can be achieved by setting `snowplow__start_date` to a recent date. If a custom model only models newly tracked events, you should set this to the date that data started to be produced instead of your initial pipeline date. To dynamically change the start date depending on your environment, you can use the following:
 
 ```yml title="dbt_project.yml"
 vars:

@@ -24,6 +24,7 @@ The skeleton of the model would be to make an incremental model, ensure we add t
     materialized='incremental',
     unique_key='session_identifier',
     upsert_date_key='start_tstamp',
+    tags=['snowplow_unified_incremental', 'derived'],
     snowplow_optimize = true
   )
 }}

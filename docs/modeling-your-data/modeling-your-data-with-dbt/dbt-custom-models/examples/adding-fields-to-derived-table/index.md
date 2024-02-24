@@ -39,6 +39,7 @@ Next we add a new model to replace the one we just disabled; the easiest thing t
 ```jinja2 title=models/custom_snowplow_models/snowplow_unified_sessions.sql
 {{
   config(
+    tags=['snowplow_unified_incremental', 'derived'],
     ...
   )
 }}

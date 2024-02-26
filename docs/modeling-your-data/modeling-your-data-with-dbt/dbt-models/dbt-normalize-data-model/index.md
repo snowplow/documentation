@@ -1,6 +1,7 @@
 ---
 title: "Normalize"
-sidebar_position: 500
+sidebar_position: 50
+description: "The Snowplow Normalize dbt Package"
 hide_title: true
 ---
 
@@ -25,7 +26,7 @@ Normalize in this context means [database normalization](https://en.wikipedia.or
 
 The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools such as Census. See the [Model Design](#model-design) section for further details on these tables.
 
-The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
+The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
 
 :::note
 The incremental model is simplified compared to the standard web model, this package does not use sessions to identify which historic events to reprocess and just uses the `collector_tstamp` and package variables to identify which events to (re)process.

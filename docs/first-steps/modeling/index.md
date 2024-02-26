@@ -38,8 +38,7 @@ You will need to install dbt and run the models yourself — see the “quick st
 </Tabs>
 
 Next, add your first model:
-* The [Web model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) is a good starting point for websites, providing data about page views, sessions, users, and more ([quick start guide](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/index.md))
-* The [Mobile model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/index.md) is a good starting point for mobile applications, providing data about screen views, sessions, users, and more ([quick start guide](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/index.md))
+* The [Unified Digital model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) is a good starting point for websites and/or mobile applications, providing data about page and screen views, sessions, users, and more ([quick start guide](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/index.md))
 
 You can also explore the [full list of available models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md).
 

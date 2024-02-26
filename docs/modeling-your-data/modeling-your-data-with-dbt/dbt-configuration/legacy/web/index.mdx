@@ -1,0 +1,95 @@
+---
+title: "Web"
+sidebar_position: 100
+hide_table_of_contents: true
+---
+
+:::info
+
+This package has been superseded by the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) that combines data from both web and mobile sources. For more information, see the Unified Digital page.
+
+:::
+
+import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator } from '@site/src/components/JsonSchemaValidator';
+import { dump } from 'js-yaml';
+import Admonition from '@theme/Admonition';
+import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
+import CodeBlock from '@theme/CodeBlock';
+import { SchemaSetterWSeeds } from '@site/src/components/DbtSchemaSelector';
+
+export const printSchemaVariables = (manifestSchema, scratchSchema, derivedSchema, seedSchema) => {
+  return(
+    <>
+    <CodeBlock language="yaml">
+    {`models:
+  snowplow_web:
+    base:
+      manifest:
+        +schema: ${manifestSchema}
+      scratch:
+        +schema: ${scratchSchema}
+    sessions:
+      +schema: ${derivedSchema}
+      scratch:
+        +schema: ${scratchSchema}
+    user_mapping:
+      +schema: ${derivedSchema}
+    users:
+      +schema: ${derivedSchema}
+      scratch:
+        +schema: ${scratchSchema}
+    page_views:
+      +schema: ${derivedSchema}
+      scratch:
+        +schema: ${scratchSchema}
+seeds:
+  snowplow_web:
+    +schema: ${seedSchema}`}
+        </CodeBlock>
+    </>
+  )
+}
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+      <h4>Project Variables:</h4>
+      <CodeBlock language="yaml">{dump({vars: {"snowplow_web": data}}, { flowLevel: 3 })}</CodeBlock>
+    </>
+  )
+}
+
+export const MyMdxComponent = () => {
+  const schemaName = 'dbtWeb';
+  const versions = ['1.0.0', '0.16.2', '0.16.1', '0.16.0', '0.15.2'];
+  const label = 'dbt web version';
+  const output = printYamlVariables;
+  return (
+      <DbtCongfigurationPage schemaName={schemaName} versions={versions} label={label}>
+        <JsonToTable>
+            <h2 id="Variables">Package Configuration Variables</h2>
+            <p>This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your <code>dbt_project.yml</code> file.</p>
+            <Admonition type="note">
+              All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
+            </Admonition>
+            <Admonition type="tip">
+              When modifying the <code>session/user_identifiers</code> or using <code>session/user_sql</code> in the web package these will overwrite the <code>domain_sessionid</code> and <code>domain_userid</code> fields in tables, rather than being <code>session/user_identifier</code> as in the core utils implementation. This is for historic reasons to mitigate breaking changes. Original values for these fields can be found in `original_domain_session/userid` in each table.
+            </Admonition>
+        </JsonToTable>
+        <JsonSchemaGenerator output={output}>
+            <h2 id="Generator">Config Generator</h2>
+            <p>You can use the below inputs to generate the code that you need to place into your <code>dbt_project.yml</code> file to configure the package as you require. Any values not specified will use their default values from the package.</p>
+        </JsonSchemaGenerator>
+        <h2 id="schemas">Output Schemas</h2> 
+        <DbtSchemas/>
+        <SchemaSetterWSeeds output={printSchemaVariables} />
+      </DbtCongfigurationPage>
+    );
+  };
+
+<Admonition icon="" title = "Contents">
+  <a href="#Variables">Variables Definitions</a><br/>
+  <a href="#Generator">Config Generator</a><br/>
+  <a href="#schemas">Schema Generator</a>
+</Admonition>
+<MyMdxComponent/>

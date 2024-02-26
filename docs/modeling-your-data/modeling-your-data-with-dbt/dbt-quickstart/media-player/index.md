@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Media Player"
-sidebar_position: 200
+sidebar_position: 20
 title: "Media Player Quickstart"
 ---
 
@@ -14,12 +14,11 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 <Accelerator href="https://docs.snowplow.io/accelerators/media-player" name="Video and Media Analytics"/>
 ```
 
-:::info
-Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
-:::
+<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>&nbsp;
+<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<Badges badgeType="SPAL"></Badges>
 
 ## Requirements
-
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web or mobile events dataset being available in your database:
 
@@ -45,16 +44,12 @@ The model is compatible with all versions of our media tracking APIs. These have
    - optional [media-session context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0).
    - optional [media-ad](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad/jsonschema/1-0-0) and [ad break](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_break/jsonschema/1-0-0) context schema.
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
-
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
-<DbtPackageInstallation/>
+<DbtPackageInstallation package='media_player' fullname='dbtSnowplowMediaPlayer'/>
 ```
 
 ## Setup

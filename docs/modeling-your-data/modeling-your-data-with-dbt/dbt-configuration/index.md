@@ -10,7 +10,13 @@ This page details general configurations that can apply across many of our packa
 
 ::: 
 
-## Mixing Variables
+## Variables
+
+:::tip
+
+Do not copy the project yaml from the package into your main project, this can lead to issues. Only add variables and model configurations that you wish to change from the default behavior. Each configuration page contains a UI to help to build your variables.
+
+:::
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -23,24 +29,8 @@ import DbtVariables from "@site/docs/reusable/dbt-variables/_index.md"
 <DbtVariables/>
 ```
 
-## Disabling a standard module
-
-If you do not require certain modules provided by the package you have the option to disable them. For instance to disable the users module in the `snowplow_web` package:
-
-```yml title="dbt_project.yml"
-models:
-  snowplow_web:
-    users:
-      enabled: false
-```
-
-Note that any dependent modules will also need to be disabled - for instance if you disabled the sessions module in the web package, you will also have to disable the users module.
-
-
 ## Warehouse specific configurations
 ### Postgres
-
-In most modern analytical data warehouses constraints are usually either unsupported or unenforced. For this reason it is better to use dbt to assert the data constraints without actually materializing them in the database using `dbt test`. Here you can test the constraint is unique and not null. The snowplow_web package already includes these dbt tests for primary keys, see the testing section for more details.
 
 To optimism performance of large Postgres datasets you can create [indexes](https://docs.getdbt.com/reference/resource-configs/postgres-configs#indexes) in your dbt model config for columns that are commonly used in joins or where clauses. For example:
 
@@ -79,7 +69,7 @@ ALTER TABLE {TABLE_NAME} SET TBLPROPERTIES (delta.autoOptimize.optimizeWrite = t
 
 ### BigQuery
 
-As mentioned in the [Quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md), many of our packages allow you to specify which column your events table is partitioned on. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
+As mentioned in the [Quickstart](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md), many of our packages allow you to specify which column your events table is partitioned on using the `snowplow__session_timestamp` variable. It will likely be partitioned on `collector_tstamp` or `derived_tstamp`. If it is partitioned on `collector_tstamp` you should set `snowplow__derived_tstamp_partitioned` to `false`. This will ensure only the `collector_tstamp` column is used for partition pruning when querying the events table:
 
 ```yml title="dbt_project.yml"
 vars:

@@ -1,6 +1,7 @@
 ---
 title: "Utils"
-sidebar_position: 600
+sidebar_position: 60
+description: "The Snowplow Utils dbt Package"
 hide_title: true
 ---
 
@@ -20,7 +21,7 @@ The models, functionality, and variables described below are only available from
 
 **The package source code can be found in the [snowplow/dbt-snowplow-utils repo](https://github.com/snowplow/dbt-snowplow-utils).**
 
-The package contains a handful of useful macros that can help speed up development, as well as some handy macros to rebuild the `base` level tables that each Snowplow dbt package uses internally.
+The package contains a handful of useful macros that can help speed up development, as well as some handy macros to rebuild the `base` level tables that each Snowplow dbt package uses internally. We highly recommend looking at the package [readme](https://github.com/snowplow/dbt-snowplow-utils?tab=readme-ov-file#macros) for a list of all macros in the package that may be of use in any [custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) you may build.
 
 :::info
 This `base` functionality and the process flow described below is only available from `snowplow-utils v0.15.0` and above.

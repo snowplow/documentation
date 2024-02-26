@@ -15,7 +15,7 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 :::caution
 
-While this recipe is still relevant if you want to process the raw data yourself, we recommend you use our [snowplow-web dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) instead now to do all this for you!
+While this recipe is still relevant if you want to process the raw data yourself, we recommend you use our [snowplow-web dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) instead now to do all this for you!
 
 :::
 
@@ -143,7 +143,7 @@ FROM derived.sessions;
 
 ## Further reading
 
-For more information on how Snowplow models web data, take a look at [our dbt web data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
+For more information on how Snowplow models web data, take a look at [our dbt web data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/index.md).
 
 A general view of Snowplow for web can also be found on [our website](https://snowplowanalytics.com/web/).
 

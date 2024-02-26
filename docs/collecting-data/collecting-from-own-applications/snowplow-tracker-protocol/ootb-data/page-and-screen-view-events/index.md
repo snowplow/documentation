@@ -70,4 +70,4 @@ After a screen view event is tracked, the tracker attaches a screen context enti
 ## Use in modeling
 
 Page and screen view events are used by our dbt packages to model web and mobile data.
-The [Snowplow Web Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) as well as the [Snowplow Mobile Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md) use them to provided aggregated page and screen tables.
+The [Snowplow Web Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) as well as the [Snowplow Mobile Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-mobile-data-model/index.md) use them to provided aggregated page and screen tables.

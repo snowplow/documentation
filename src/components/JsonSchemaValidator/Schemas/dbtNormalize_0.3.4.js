@@ -49,7 +49,7 @@ export const Schema = {
       title: 'Dev Target',
       description:
         'Target name of your development environment as defined in your `profiles.yml` file',
-      longDescription: 'The [target name](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#manifest-tables) section for more details.',
+      longDescription: 'The [target name](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/) section for more details.',
       packageDefault: 'dev',
       group: 'Warehouse and Tracker',
     },
@@ -65,7 +65,7 @@ export const Schema = {
       type: 'boolean',
       title: 'Allow Refresh',
       group: 'Operation and Logic',
-      longDescription: 'Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#manifest-tables) section for more details.',
+      longDescription: 'Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/) section for more details.',
       packageDefault: 'false',
     },
     snowplow__backfill_limit_days: {
@@ -73,7 +73,7 @@ export const Schema = {
       minimum: 0,
       title: 'Backfill Limit',
       group: 'Operation and Logic',
-      longDescription: 'The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/#package-state) section for more details.',
+      longDescription: 'The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/#package-state) section for more details.',
       packageDefault: '30',
       description:
         'The maximum numbers of days of new data to be processed since the latest event processed',
@@ -122,7 +122,7 @@ export const Schema = {
       minimum: 0,
       title: 'Upsert Lookback Days',
       group: 'Operation and Logic',
-      longDescription: 'Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/) section for more details.',
+      longDescription: 'Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/) section for more details.',
       packageDefault: '30',
       description:
         'Number of days to look back over the incremental derived tables during the upsert',

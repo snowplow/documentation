@@ -1,6 +1,7 @@
 ---
 title: "Attribution"
-sidebar_position: 400
+description: "The Snowplow Attribution dbt Package"
+sidebar_position: 30
 hide_title: true
 ---
 
@@ -16,8 +17,9 @@ export const datagridProps = {
   };
 ```
 
-<Badges badgeType="dbt-package Release" pkg="attribution">&nbsp;</Badges>&nbsp;
-<Badges badgeType="Early Release"></Badges><Badges badgeType="SPAL"></Badges>
+<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>&nbsp;
+<Badges badgeType="Early Release"></Badges>&nbsp;
+<Badges badgeType="SPAL"></Badges>
 
 
 # Snowplow Attribution Package

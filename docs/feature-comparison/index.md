@@ -16,7 +16,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | Custom [events](/docs/understanding-your-pipeline/events/index.md#out-of-the-box-and-custom-events) & [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities) | ✅ | ✅ | ✅ |
 | [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ | ✅ |
 | Advanced stream transformations (JS, API, SQL enrichments) | ✅ | ❌ | ✅ |
-| [Out-of-the-box data models](/docs/modeling-your-data/what-is-data-modeling/index.md)  | ✅_(bolt-on)_ | ✅ | ✅ |
+| [Out-of-the-box data models](/docs/modeling-your-data/index.md)  | ✅_(bolt-on)_ | ✅ | ✅ |
 | [Data Applications](/docs/data-apps/index.md) | ❌ | ✅_(bolt-on)_ | ✅_(bolt-on)_ |
 | [Destinations hub](https://snowplow.io/destination-hub/) | do-it-yourself | ❌ | ✅ |
 | **Warehouse / lake destinations** | | | |

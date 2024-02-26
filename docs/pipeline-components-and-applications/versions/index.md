@@ -16,7 +16,7 @@ import {versions} from '@site/src/componentVersions';
 
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 
-You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md#consent-tracking-custom-module) might call for a reasonably recent version of the [warehouse loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md).
+You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md).
 
 :::tip
 

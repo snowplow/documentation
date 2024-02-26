@@ -6,6 +6,7 @@ sidebar_position: 1
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import DeltaConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_delta_config.md';
 import HudiConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_hudi_config.md';
 import IcebergBigLakeConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_iceberg_biglake_config.md';

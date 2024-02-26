@@ -181,4 +181,4 @@ This would produce an incremental conversions table where you will see the most 
 | event_2   | session_2 | f0009028775170427694 |user_2 | 20.42      | 2023-06-11 15:33:03.000 | 2023-06-11 15:33:03.000 | transactions |
 | event_3   | session_3| f0008284662789123943 | user_3| 200.00     | 2023-07-07 13:05:55.000 | 2023-07-07 13:05:55.000 | transactions |
 
-You can also apply user-stitching to your conversions table by setting the `snowplow__conversion_stitching` variable to `true`. For more details please refer to our guide on [Identity Stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/index.md).
+You can also apply user-stitching to your conversions table by setting the `snowplow__conversion_stitching` variable to `true`. For more details please refer to our guide on [Identity Stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md).

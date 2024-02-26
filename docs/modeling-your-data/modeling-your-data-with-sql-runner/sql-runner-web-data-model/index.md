@@ -6,7 +6,7 @@ sidebar_position: 100
 
 :::tip
 
-For any new developments we highly recommend using our [web package for dbt](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md) instead. SQL Runner is no longer under active development and will only receive bug fixes in the future.
+For any new developments we highly recommend using our [unified digital package for dbt](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) instead. SQL Runner is no longer under active development and will only receive bug fixes in the future.
 
 :::
 

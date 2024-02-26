@@ -89,7 +89,7 @@ In mobile apps, activity is detected using the tracked events.
 
 Identity stitching is the process of taking various user identifiers and combining them into a single user identifier, to better identify and track users throughout their journey on your site/app.
 It effectively allows you to attribute logged-in and non-logged-in sessions and page views back to a single user.
-Our dbt packages support identity stitching as [explained here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/index.md).
+Our dbt packages support identity stitching as [explained here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md).
 
 In order for identity stitching to be reliable, it is necessary to follow two recommendations in tracking:
 

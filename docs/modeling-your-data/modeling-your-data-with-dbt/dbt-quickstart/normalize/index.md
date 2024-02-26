@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Normalize"
-sidebar_position: 500
+sidebar_position: 50
 title: "Normalize Quickstart"
 ---
 
@@ -10,16 +10,12 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed:
 
 - Python 3.7 or later
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
-
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
-<DbtPackageInstallation/>
+<DbtPackageInstallation package='normalize' fullname='dbtSnowplowNormalize'/>
 ```
 ## Setup
 

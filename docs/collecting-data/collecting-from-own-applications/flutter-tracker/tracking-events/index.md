@@ -140,13 +140,13 @@ tracker.track(Structured(
 
 The `PageViewEvent` may be used to track page views on the Web. The event is designed to track web page views and automatically captures page title, referrer and URL. Being Web-only, it is not implemented on Android and iOS where the app is not displayed as a Web page.
 
-Page view events are the basic building blocks for the [Snowplow web data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md).
+Page view events are the basic building blocks for the [Snowplow web data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
 
 ## Track screen views with `ScreenView`
 
 Use `ScreenView` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages. The arguments are `name`, `id`, `type`, and `transitionType`. The `name` and `id` properties are required. "Name" is the human-readable screen name, and "ID" should be the unique screen ID (UUID v4).
 
-Screen view events are used in the [Snowplow mobile data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/index.md). Nevertheless, the Flutter tracker also implements them on Web. You may adopt the mobile data model and choose to track screen views instead of page views on Web to provide consistent event tracking across all platforms.
+Screen view events are used in the [Snowplow mobile data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-mobile-data-model/index.md). Nevertheless, the Flutter tracker also implements them on Web. You may adopt the mobile data model and choose to track screen views instead of page views on Web to provide consistent event tracking across all platforms.
 
 This method creates an unstruct event, by creating and tracking a self-describing event. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", and the data field will contain the parameters which you provide. That schema is hosted on the schema repository Iglu Central, and so will always be available to your pipeline.
 

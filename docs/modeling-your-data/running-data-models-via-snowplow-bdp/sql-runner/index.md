@@ -1,7 +1,6 @@
 ---
 title: "sql-runner"
-date: "2022-10-14"
-sidebar_position: 20
+sidebar_position: 3
 ---
 
 ```mdx-code-block

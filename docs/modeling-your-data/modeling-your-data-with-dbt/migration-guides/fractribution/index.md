@@ -1,6 +1,6 @@
 ---
 title: "Fractribution"
-sidebar_position: 700
+sidebar_position: 920
 ---
 
 ### Upgrading to 0.3.0

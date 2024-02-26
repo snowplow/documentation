@@ -11,7 +11,6 @@ const MarkdownTableToMuiDataGrid = (markdownTable, datagridProps = {}) => {
   // Extract header and data
   const header = rows[0].split('|').filter(cell => cell.trim() !== '');
   const data = rows.slice(2).map(row => row.split('|').filter(cell => cell.trim() !== ''));
-    console.log(header)
   // Create MUI DataGrid columns
   const columns = header.map((col, index) => ({
     field: `col${index}`,

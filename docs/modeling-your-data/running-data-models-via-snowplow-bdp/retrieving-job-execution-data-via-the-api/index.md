@@ -1,6 +1,6 @@
 ---
 title: "Retrieving data model execution data via the API"
-sidebar_position: 400
+sidebar_position: 2
 ---
 
 The API that powers the warehouse jobs monitoring view in Snowplow BDP Console (Jobs) is also available for consumption by other authenticated clients.

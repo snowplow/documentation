@@ -260,3 +260,29 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 # Data Products
 /docs/understanding-tracking-design/managing-your-tracking-scenarios/* /docs/understanding-tracking-design/managing-event-specifications/ 301
+
+#Data Models
+/docs/modeling-your-data/what-is-data-modeling/ /docs/modeling-your-data/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-obile-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/deduplication/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-timestamps/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/late-arriving-data/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/aligning-tracking-with-modeling.md/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/fractribution/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/mobile/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/fractribution/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/fractribution:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/web:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/mobile:splat 301

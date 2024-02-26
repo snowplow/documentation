@@ -1,11 +1,17 @@
 ---
 title: "Unified Digital"
-sidebar_position: 600
+sidebar_position: 10
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+### Upgrading to 0.3.0
+
+- `snowplow__page_view_passthroughs` has been renamed to `snowplow__view_passthroughs`. Please rename this in your project yaml if you have set any.
+- If you currently use `snowplow__allow_refresh` without also adding a `--full-refresh` flag in any script this is now required to ensure the manifest tables are fully refreshed.
+
 
 ### Upgrading to 0.2.0
 

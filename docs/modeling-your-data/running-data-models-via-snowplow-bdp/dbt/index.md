@@ -1,6 +1,6 @@
 ---
 title: "Using dbt"
-sidebar_position: 100
+sidebar_position: 1
 ---
 
 ```mdx-code-block

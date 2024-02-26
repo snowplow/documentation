@@ -1,6 +1,6 @@
 ---
 sidebar_label: "E-commerce"
-sidebar_position: 300
+sidebar_position: 40
 title: "E-commerce Quickstart"
 ---
 
@@ -19,16 +19,13 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web 
 - Have the following e-commerce contexts enabled: `cart`, `checkout_step`, `page` `transaction`, `user`
 - Track the e-commerce tracking action events on your website/mobile application
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
-<DbtPackageInstallation/>
+<DbtPackageInstallation package='ecommerce' fullname='dbtSnowplowEcommerce'/>
 ```
 
 ## Setup

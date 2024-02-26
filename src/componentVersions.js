@@ -13,7 +13,7 @@ export const versions = {
   phpTracker: '0.7.0',
   pixelTracker: '0.3.0',
   pythonTracker: '1.0.1',
-  reactNativeTracker: '2.0.0',
+  reactNativeTracker: '2.1.0',
   rokuTracker: '0.2.0',
   rubyTracker: '0.8.0',
   rustTracker: '0.2.0',

@@ -55,3 +55,53 @@ Automatic screen view tracking tracks two pieces of information:
 The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event, even if it was manually tracked and the app is in a different screen.
 
 Indeed, disabling the `screenViewAutotracking` only, the tracker can still attach `Screen` entities automatically based only to the manual tracking of `ScreenView` events, and vice versa.
+
+## Screen engagement tracking
+
+Screen engagement tracking is a feature that enables tracking the user activity on the screen.
+This consists of the time spent and the amount of content viewed on the screen.
+
+Concretely, it consists of the following metrics:
+
+1. Time spent on screen while the app was in foreground (tracked automatically).
+2. Time spent on screen while the app was in background (tracked automatically).
+3. Number of list items scrolled out of all list items (requires some manual tracking).
+4. Scroll depth in pixels (requires some manual tracking).
+
+This information is attached using a [`screen_summary` context entity](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-activity-tracking/#screen-summary-entity) to the following events:
+
+1. [`screen_end` event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-end-event) that is automatically tracked before a new screen view event.
+2. [`application_background` event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#background-event).
+3. [`application_foreground` event](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#foreground-event).
+
+Screen engagement tracking is enabled by default, but can be configured using the `TrackerConfiguration.screenEngagementAutotracking` option.
+
+For a demo of how mobile screen engagement tracking works in action, **[please visit this demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/)**.
+
+#### Updating list item view and scroll depth information
+
+To update the list item viewed and scroll depth information tracked in the screen summary entity, you can track the `ListItemView` and `ScrollChanged` events with this information.
+When tracked, the tracker won't send these events individually to the collector, but will process the information into the next `screen_summary` entity and discard the events.
+You may want to track the events every time a new list item is viewed on the screen, or whenever the scroll position changes.
+
+To update the list items viewed information:
+
+```js
+tracker.trackListItemViewEvent({
+    index: 1,
+    itemsCount: 10,
+});
+```
+
+To update the scroll depth information:
+
+```dart
+tracker.trackScrollChangedEvent({
+    yOffset: 10,
+    xOffset: 20,
+    viewHeight: 100,
+    viewWidth: 200,
+    contentHeight: 300,
+    contentWidth: 400,
+});
+```

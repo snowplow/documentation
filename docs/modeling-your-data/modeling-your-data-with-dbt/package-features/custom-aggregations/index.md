@@ -16,7 +16,7 @@ While [passthrough fields](/docs/modeling-your-data/modeling-your-data-with-dbt/
 
 To use a the custom aggregation, you need to set the relevant variable in your root `dbt_project.yml` file; e.g `snowplow__session_aggregations` (see your package [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for a full list of aggregation variables). 
 
-These variables are lists of objects that define your aggregations; they have keys of the `type` of aggression you wish to do, the `field` to aggregate over, and the `alias` to give your aggregation in the derived table.
+These variables are lists of objects that define your aggregations; they have keys of the `type` of aggregations you wish to do, the `field` to aggregate over, and the `alias` to give your aggregation in the derived table.
 
 The `field` can be any valid column sql, including `case when` statements or making use of other sql functions. For example, to count the number of `purchase` events over a session you would have:
 

@@ -571,13 +571,6 @@ export const Schema = {
       packageDefault: 'false',
       group: 'Contexts, Filters, and Logs',
     },
-    snowplow__enable_screen_summary_context: {
-      type: 'boolean',
-      title: 'Enable Screen Summary Context',
-      longDescription: 'Flag to include the screen summary context data in the models.',
-      packageDefault: 'false',
-      group: 'Contexts, Filters, and Logs',
-    },
     snowplow__enable_mobile: {
       type: 'boolean',
       title: 'Enable Mobile Data',

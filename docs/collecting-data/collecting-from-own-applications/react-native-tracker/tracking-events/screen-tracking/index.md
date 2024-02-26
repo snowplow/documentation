@@ -95,7 +95,7 @@ tracker.trackListItemViewEvent({
 
 To update the scroll depth information:
 
-```dart
+```js
 tracker.trackScrollChangedEvent({
     yOffset: 10,
     xOffset: 20,

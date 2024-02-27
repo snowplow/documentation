@@ -94,6 +94,7 @@ Following is the set of available trackers and languages the Snowtype CLI curren
 | --- | --- |
 | `@snowplow/browser-tracker` | javascript, typescript |
 | `@snowplow/node-tracker` | javascript, typescript |
+| `@snowplow/react-native-tracker` | typescript |
 | `@snowplow/javascript-tracker` | javascript |
 | `snowplow-golang-tracker` | go |
 | `snowplow-ios-tracker` | swift |
@@ -247,6 +248,43 @@ TrackWebPage(
 
 </TabItem>
 
+<TabItem value="@snowplow/react-native-tracker-typescript" label="@snowplow/react-native-tracker TypeScript" default>
+
+```tsx
+import {
+  trackWebPage,
+  createProduct,
+  WebPage,
+  Product,
+  createWebPage,
+} from "./{outpath}/snowplow";
+
+/* `t` is the tracker instance created by the `createTracker` function of the @snowplow/react-native-tracker package. */
+
+/* Track a WebPage event */
+trackWebPage(t, { id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+/* Track a WebPage event with a Product context entity */
+const product = createProduct({
+  id: "Product id",
+  name: "Snowplow product",
+  currency: "EUR",
+  price: 10,
+  category: "Snowplow/Shoes",
+});
+trackWebPage(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product],
+});
+/* You can enforce specific context entities on any `track` function using type arguments */
+const webPage = createWebPage({ id: "212a9b63-1af7-4e96-9f35-e2fca110ff43" });
+trackWebPage<Product | WebPage>(t, {
+  id: "212a9b63-1af7-4e96-9f35-e2fca110ff43",
+  context: [product, webPage],
+});
+```
+
+</TabItem>
+
 </Tabs>
 
 ### Event Specifications
@@ -272,6 +310,18 @@ To add a Data Structure to the code generation, either manually or through the `
 ![iglu central tracking url](images/iglu-url.png)
 
 Then you should add this Schema tracking URL to your `snowtype.config.json` `igluCentralSchemas` array.
+
+## Generating event specification instructions
+
+When generating code for Event Specifications, you have the option of delivering the implementation instructions and triggers for each scenario right on the developer's environment.
+
+By using the `--instructions` option on the `snowtype generate` command, you can generate a markdown file with all the required information about tracking an event specification.
+
+This includes:
+- Trigger description.
+- Images uploaded on your Event Specification triggers.
+- App identifiers and URLs this event should be triggered on.
+- Direct links to the code for this Event Specification.
 
 ## Keeping up with latest updates
 

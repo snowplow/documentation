@@ -27,6 +27,9 @@ Initialize the setup of Snowtype code generation in a project. Creates the `snow
 
 Generates tracking code based on configuration on the `snowtype.config.json` file. Can generate/modify the `.snowtype-lock.json` file.
 
+**Options**
+ -  `-is, --instructions` Generate event specification instructions.
+
 ### `snowtype update`
 
 Checks for latest version updates in Data Structures and Event Specifications.

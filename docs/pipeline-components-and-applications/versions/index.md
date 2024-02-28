@@ -59,6 +59,8 @@ Component | Latest version
 [Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) | ${versions.collector}
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
 [RDB Loader (Redshift, Snowflake, Databricks)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
+[Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
 [S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md) | ${versions.s3Loader}
 [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
 [Elasticsearch Loader](/docs/destinations/forwarding-events/elasticsearch/index.md) | ${versions.esLoader}
@@ -76,6 +78,8 @@ Component | Latest version
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
 [RDB Loader (Snowflake, Databricks)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
 [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) | ${versions.bqLoader}
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
+[Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
 [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | ${versions.gcsLoader}
 [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
 [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
@@ -92,6 +96,7 @@ Component | Latest version
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
 [RDB Loader (Snowflake)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
 [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
+[Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>

@@ -1,5 +1,6 @@
 ---
 title: "Lake Loader configuration reference"
+sidebar_label: "Configuration reference"
 sidebar_position: 1
 ---
 

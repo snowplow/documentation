@@ -196,13 +196,6 @@ export const Schema = {
       description:
         'The maximum allowed number of days between the event creation and it being sent to the collector',
     },
-    snowplow__list_event_counts: {
-      type: 'boolean',
-      title: 'List Per-Event Counts',
-      longDescription: 'A boolean whether to include a json-type (varies by warehouse) column in the sessions table with a count of events for each `event_type` in that session.',
-      packageDefault: 'false',
-      group: 'Operation and Logic',
-    },
     snowplow__lookback_window_hours: {
       type: 'number',
       minimum: 0,
@@ -373,7 +366,6 @@ export const Schema = {
       group: 'Warehouse and Tracker',
     },
     snowplow__session_identifiers: {
-      type: 'string',
       title: 'Session Identifiers',
       group: 'Operation and Logic',
       longDescription: 'A list of key:value dictionaries which contain all of the contexts and fields where your session identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.',
@@ -408,7 +400,6 @@ export const Schema = {
       packageDefault: 'collector_tstamp',
     },
     snowplow__user_identifiers: {
-      type: 'string',
       title: 'User Identifiers',
       group: 'Operation and Logic',
       longDescription: 'A list of key:value dictionaries which contain all of the contexts and fields where your user identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.',
@@ -478,7 +469,6 @@ export const Schema = {
       $ref: '#/definitions/passthrough_vars'
     },
     snowplow__entities_or_sdes: {
-      type: 'string',
       title: '(Redshift) Entities or SDEs',
       longDescription: 'A list of dictionaries defining the `entity` or `self-describing` event tables to join onto your base events table. Please use the tool below or see the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/) for details of the structure.',
       packageDefault: '[]',
@@ -568,13 +558,6 @@ export const Schema = {
       type: 'boolean',
       title: 'Enable Deep Link Context',
       longDescription: 'Flag to include the deep link context data in the models.',
-      packageDefault: 'false',
-      group: 'Contexts, Filters, and Logs',
-    },
-    snowplow__enable_screen_summary_context: {
-      type: 'boolean',
-      title: 'Enable Screen Summary Context',
-      longDescription: 'Flag to include the screen summary context data in the models.',
       packageDefault: 'false',
       group: 'Contexts, Filters, and Logs',
     },

@@ -23,7 +23,7 @@ The `field` can be any valid column sql, including `case when` statements or mak
 ```yml title="dbt_project.yml"
 vars:
   snowplow_unified:
-    snowplow__view_passthroughs: [{'type': 'sum', 'field': "case when event_name = 'purchase' then 1 else 0 end", 'alias': 'num_purchase_events'}]
+    snowplow__view_aggregations: [{'type': 'sum', 'field': "case when event_name = 'purchase' then 1 else 0 end", 'alias': 'num_purchase_events'}]
 ```
 The aggregation always runs on the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table so all events (with a session identifier) and columns are available for you to use.
 

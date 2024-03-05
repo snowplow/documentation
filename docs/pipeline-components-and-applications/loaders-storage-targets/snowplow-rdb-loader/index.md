@@ -7,6 +7,7 @@ sidebar_position: 1
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CrossCloudDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/_cross-cloud-diagram.md';
+import StreamingVsRDB from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/_snowflake-streaming-vs-rdb.md';
 ```
 
 We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift** (including Redshift serverless), **Snowflake** or **Databricks**. For other destinations, see [here](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md).
@@ -19,6 +20,7 @@ We use the name RDB Loader (from "relational database") for a set of application
     <CrossCloudDiagram format="Parquet" warehouse="Databricks"/>
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
+    <StreamingVsRDB/>
     <CrossCloudDiagram format="JSON" warehouse="Snowflake"/>
   </TabItem>
 </Tabs>

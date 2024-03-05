@@ -24,8 +24,9 @@ The cloud selection is for where your Snowplow pipeline runs. The warehouse itse
 
 | Destination | Type | Loader application | Status |
 | --- | --- | --- | --- |
-| Redshift<br/>_(including Redshift serverless)_ | Batching (recommended)<br/>or micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
+| Redshift<br/>_(including Redshift serverless)_ | Batching (recommended)<br/>or micro-batching | [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
 | Snowflake | Batching (recommended)<br/>or micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
+| Snowflake | Streaming 🆕 | [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | Early release |
 | Databricks | Batching (recommended)<br/>or micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
 | Postgres | Streaming | [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | Not recommended for production use |
 
@@ -35,8 +36,9 @@ The cloud selection is for where your Snowplow pipeline runs. The warehouse itse
 | Destination | Type | Loader application | Status |
 | --- | --- | --- | --- |
 | BigQuery | Streaming | [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) | Production-ready |
-| Snowflake | Micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
-| Databricks | Micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Early release |
+| Snowflake | Micro-batching | [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
+| Snowflake | Streaming 🆕 | [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | Early release |
+| Databricks | Micro-batching | [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Production-ready |
 | Postgres | Streaming | [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | Not recommended for production use |
 
   </TabItem>
@@ -44,7 +46,8 @@ The cloud selection is for where your Snowplow pipeline runs. The warehouse itse
 
 | Destination | Type | Loader application | Status |
 | --- | --- | --- | --- |
-| Snowflake | Micro-batching | [Snowplow RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Early release |
+| Snowflake | Micro-batching | [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | Early release |
+| Snowflake | Streaming 🆕 | [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | Early release |
 | Databricks | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
 | Synapse Analytics | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
 

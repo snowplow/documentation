@@ -6,7 +6,7 @@ import RDBLoaderDiagram from '@site/docs/pipeline-components-and-applications/lo
 ```
 
 <>{props.warehouse != 'Redshift' && (
-  <Admonition type="info">
+  <Admonition type="note" title="Cloud">
     <p>The cloud selection below is for your <i>pipeline</i>. We don’t have restrictions on where {props.warehouse} itself is deployed.</p>
   </Admonition>
 )}</>

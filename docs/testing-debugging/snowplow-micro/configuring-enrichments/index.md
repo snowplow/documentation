@@ -49,9 +49,8 @@ The directory _inside_ the container (what goes after `destination=`) must be ex
 Once Micro starts, you should see messages like these:
 
 ```
-[INFO] akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-[INFO] com.snowplowanalytics.snowplow.micro.Main$ - Downloading http://snowplow-hosted-assets.s3.amazonaws.com/third-party/maxmind/GeoLite2-City.mmdb...
-[INFO] com.snowplowanalytics.snowplow.micro.Main$ - Enabled enrichments: IpLookupsEnrichment
+[INFO] com.snowplowanalytics.snowplow.micro.Run - Downloading http://snowplow-hosted-assets.s3.amazonaws.com/third-party/maxmind/GeoLite2-City.mmdb...
+[INFO] com.snowplowanalytics.snowplow.micro.Run - Enabled enrichments: IpLookupsEnrichment
 ```
 
 :::tip

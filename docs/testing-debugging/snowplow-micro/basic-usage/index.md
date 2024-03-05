@@ -22,9 +22,9 @@ Run the following command:
 
 You should see output like this:
 ```
-[INFO] akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-[INFO] com.snowplowanalytics.snowplow.micro.Main$ - No enrichments enabled.
-[INFO] com.snowplowanalytics.snowplow.micro.Main$ - REST interface bound to /0.0.0.0:9090
+[INFO] com.snowplowanalytics.snowplow.micro.Run - No enrichments enabled
+[INFO] com.snowplowanalytics.snowplow.micro.MicroHttpServer - Building blaze server
+[INFO] org.http4s.blaze.channel.nio1.NIO1SocketServerGroup - Service bound to address /[0:0:0:0:0:0:0:0]:9090
 ```
 
 <details>

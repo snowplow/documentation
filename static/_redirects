@@ -267,7 +267,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
-/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-obile-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/ 301
@@ -285,3 +285,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/fractribution/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/fractribution:splat 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/web:splat 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/mobile:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/ docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/ 301

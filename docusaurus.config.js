@@ -110,12 +110,6 @@ module.exports = {
             position: 'left',
           },
           {
-            to: 'https://try.snowplowanalytics.com/?utm_content=hero-cta&utm_campaign=snowplow-docs',
-            label: 'Try Snowplow for free',
-            className: 'snowplow-button cta-button',
-            position: 'right',
-          },
-          {
             to: 'https://go.snowplowanalytics.com/l/571483/2021-02-19/3sn5nml',
             label: 'Book a demo',
             className: 'snowplow-button',

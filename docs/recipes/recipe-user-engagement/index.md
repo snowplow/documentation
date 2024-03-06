@@ -24,8 +24,6 @@ With all web events the Snowplow JavaScript tracker captures the following user 
 
 <table><tbody><tr><td><code>domain_userid</code></td><td>client side cookie ID set against the domain the tracking is on</td></tr><tr><td><code>network_userid</code></td><td>server side cookie ID set against the collector domain</td></tr><tr><td><code>user_ipaddress</code></td><td>the user’s IP address</td></tr></tbody></table>
 
-Please note that in Try Snowplow and BDP Cloud, these fields (as well as the `domain_sessionid`) are being hashed with Snowplow's [PII enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md) to protect user privacy. With Snowplow BDP, you are able to configure this enrichment to hash (or not hash) any number of out of the box or custom fields.
-
 We end by building a user engagement table to explore how you can develop a better understanding of how your users engage with you over time.
 
 ## Implement automatic tracking
@@ -58,8 +56,8 @@ CREATE TABLE derived.user_engagement AS(
         -- user information
         ev.domain_userid,
         ev.user_ipaddress AS ip_address,
-        ev.geo_country AS country, -- this field will be null in Try Snowplow and BDP Cloud, as we cannot enable MaxMind geo data due to CCPA regulation
-        ev.geo_city AS city, -- this field will be null in Try Snowplow and BDP Cloud, as we cannot enable MaxMind geo data due to CCPA regulation
+        ev.geo_country AS country,
+        ev.geo_city AS city,
         ua.useragent_family AS browser,
         ua.os_family AS operating_system,
 

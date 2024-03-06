@@ -82,7 +82,7 @@ export const Schema = {
       type: 'string',
       title: 'Custom SQL',
       group: 'Operation and Logic',
-      longDescription: 'This allows you to introduce custom sql to the `snowplow_base_events_this_run` table, which you can then leverage in downstream models. For more information on the usage, see the following page on the [advanced usage of the utils package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/).',
+      longDescription: 'This allows you to introduce custom sql to the `snowplow_base_events_this_run` table, which you can then leverage in downstream models. For more information on the usage, see the following page on the [advanced usage of the utils package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/additional-sql-on-events-this-run/).',
       packageDefault: '',
       description:
         'Custom SQL for your base events this run table.',

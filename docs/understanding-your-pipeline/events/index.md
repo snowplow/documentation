@@ -147,18 +147,16 @@ Then you can use one of our [tracking SDKs](/docs/collecting-data/collecting-fro
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
-  event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
-    data: {
-      productId: 'ASO01043',
-      category: 'Dresses',
-      brand: 'ACME',
-      returning: true,
-      price: 49.95,
-      sizes: ['xs', 's', 'l', 'xl', 'xxl'],
-      availableSince: new Date(2013,3,7)
+  schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+  data: {
+    productId: 'ASO01043',
+    category: 'Dresses',
+    brand: 'ACME',
+    returning: true,
+    price: 49.95,
+    sizes: ['xs', 's', 'l', 'xl', 'xxl'],
+    availableSince: new Date(2013,3,7)
     }
-  }
 });
 ```
 

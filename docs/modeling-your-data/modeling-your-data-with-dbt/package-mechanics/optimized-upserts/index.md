@@ -35,6 +35,6 @@ All our incremental models have this functionality enabled by default, but if yo
 }}
 ```
 
-## Disabling the 
+## Disabling the optimization
 To disable the optimized upsert entirely and use the default incremental materialization, set the `snowplow_optimize` to `false` in your model config.
 **Note this is a [model config](https://docs.getdbt.com/reference/model-configs), not a variable.**

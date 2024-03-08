@@ -18,7 +18,7 @@ By default, Snowplow captures identifiers with all events that can be considered
 Snowplow provides two ways for limiting the amount of PII you capture and store:
 
 - Not collecting the PII in the first place (this is covered in this recipe)
-- Pseudonymizing the PII during enrichment (on by default in Try Snowplow and BDP Cloud, but configurable with Snowplow BDP)
+- Pseudonymizing the PII during enrichment
 
 You will be updating your JavaScript tracker implementation to stop setting and collecting the following four fields:
 

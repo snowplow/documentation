@@ -13,12 +13,6 @@ Each offering has its own setup guide:
 * [Snowplow BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md)
 * [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md)
 
-## Other options
-
-### Try Snowplow
-
-If you want to experiment with Snowplow but don’t feel like installing anything, check out [Try Snowplow](/docs/try-snowplow/index.md) — it’s a free 14-day self-serve trial experience (similar to BDP Cloud). Try Snowplow comes with a Postgres database included, so you can start tracking and analyzing events immediately.
-
-### Snowplow Micro
+## Snowplow Micro
 
 While not a full substitute for a real Snowplow pipeline, [Snowplow Micro](/docs/testing-debugging/snowplow-micro/index.md) could be a quick way to get a feel for how Snowplow works for more technical users. Note that Micro does not store data in any warehouse or database, but you will be able to look at the available fields.

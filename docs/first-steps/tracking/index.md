@@ -15,14 +15,6 @@ import { sampleTrackingCode } from '@site/src/components/FirstSteps/sampleTracki
 
 Once your pipeline is set up, you will want to send some events to it. Here’s an overview of the different options.
 
-:::note Limits
-
-Keep in mind that some of our offerings have limits on the number of events you can send:
-* For Try Snowplow, there is cap of 50 events per second. Any events above this cap will be dropped
-* For Community Edition, the default setup is sized for around 100 events per second
-
-:::
-
 :::tip Latency
 
 Regardless of how you send the events, it might take a few minutes for them to reach your destination (e.g. data warehouse). This depends on which [destination and loader](/docs/storing-querying/storage-options/index.md) you have configured.
@@ -42,11 +34,6 @@ You can find the Collector URL (Collector Endpoint) in the [Console](https://con
   <TabItem value="cloud" label="BDP Cloud">
 
 You can find the Collector URL (Collector Endpoint) in the [Console](https://console.snowplowanalytics.com/environments).
-
-  </TabItem>
-  <TabItem value="try" label="Try Snowplow">
-
-You can find the Collector URL (Collector Endpoint) in the [Console](https://try.snowplowanalytics.com/).
 
   </TabItem>
   <TabItem value="community" label="Community Edition">
@@ -95,11 +82,6 @@ BDP Enterprise can automatically generate the snippet for you. Go to the [tag ge
   <TabItem value="cloud" label="BDP Cloud">
 
 You can find the pre-generated snippet in the [Getting started](https://console.snowplowanalytics.com/environments/start-tracking-events?fromDocs) section.
-
-  </TabItem>
-  <TabItem value="try" label="Try Snowplow">
-
-You can find the pre-generated snippet in the [Console](https://try.snowplowanalytics.com/).
 
   </TabItem>
   <TabItem value="community" label="Community Edition">

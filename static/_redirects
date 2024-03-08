@@ -33,8 +33,6 @@
 /docs/pipeline-components-and-applications/loaders-storage-targets/previous-versions/snowplow-rdb-loader-2/ /docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/ 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/ 301
 
-/docs/try-snowplow/recipes/* /docs/recipes/:splat 301
-
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-on-snowplow-bdp-enterprise/ 301
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/ /docs/feature-comparison/ 302
 /docs/getting-started-with-snowplow-bdp/aws-setup-guide/* /docs/getting-started-on-snowplow-bdp-enterprise/setup-guide-aws/:splat 301
@@ -159,11 +157,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/sending-test-events/ /docs/first-steps/tracking/ 301
 /docs/getting-started-on-snowplow-open-source/tracking-events/ /docs/first-steps/tracking/ 301
 /docs/getting-started-on-snowplow-bdp-cloud/tracking-events/ /docs/first-steps/tracking/ 301
-/docs/try-snowplow/tracking-events-with-try-snowplow/ /docs/first-steps/tracking/ 301
 
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/query-your-data/* /docs/first-steps/querying/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-data/* /docs/first-steps/querying/ 301
-/docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/ /docs/recipes/querying-try-data/ 301
 
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/ /docs/getting-started-on-snowplow-open-source/quick-start/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/ /docs/getting-started-on-snowplow-open-source/quick-start/ 301

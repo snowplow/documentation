@@ -6,12 +6,9 @@ sidebar_position: 2
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import TrySnowplow from "@site/docs/reusable/try-snowplow/_index.md";
 ```
 
 This guide will take you through how to spin up a Snowplow Community Edition pipeline using the [Snowplow Terraform modules](https://registry.terraform.io/namespaces/snowplow-devops). _(Not familiar with Terraform? Take a look at [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started).)_
-
-<TrySnowplow/>
 
 ## Prerequisites
 

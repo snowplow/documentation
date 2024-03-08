@@ -25,11 +25,6 @@ Refer to the [setup instructions](/docs/modeling-your-data/running-data-models-v
 You will need to install dbt and run the models yourself — see the “quick start” links below.
 
   </TabItem>
-  <TabItem value="try" label="Try Snowplow">
-
-You will need to install dbt and run the models yourself — see the “quick start” links below.
-
-  </TabItem>
   <TabItem value="community" label="Community Edition">
 
 You will need to install dbt and run the models yourself — see the “quick start” links below.

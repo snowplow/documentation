@@ -262,7 +262,7 @@ Because the table name for the self-describing event or entity includes the majo
 
 When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing table automatically. For example, if you change the `maxLength` of a `string` field, the limit of the `VARCHAR` column would be updated accordingly.
 
-:::danger Breaking changes (for 5.8.0 and later)
+:::info Breaking changes
 
 If you make a breaking schema change (e.g. change a type of a field from a `string` to a `number`) without creating a new major schema version, the loader will not be able to modify the table to accommodate the new data.
 
@@ -274,11 +274,7 @@ To resolve this situation:
 * Create a new schema version (e.g. `1-0-2`) that reverts the offending changes and is again compatible with the original table. The data for events with that `1-0-2` schema will start going to the original table as expected.
 * You might also want to manually adapt the data in the `..._recovered_...` table and copy it to the original one.
 
-:::
-
-:::danger Breaking changes (before 5.8.0)
-
-If you make a breaking schema change (e.g. change a type of a field from a `string` to a `number`) without creating a new major schema version, the loader will not be able to adapt the table to receive new data. Your loading process will halt.
+Note that this behavior was introduced in RDB Loader 5.8.0. In older versions, breaking changes will halt the loading process.
 
 :::
 

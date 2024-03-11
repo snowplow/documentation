@@ -14,9 +14,9 @@ To find out more about the support services offered to Snowplow BDP customers se
 | 1st party tracking | ✅ | ✅ |
 | [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ |
 | [ID service](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
-| High Availability & auto-scaling | ✅ | ❌ |
+| High availability & auto-scaling | ✅ | ❌ |
 | [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ |
-| [Raw Failed Events](/docs/understanding-your-pipeline/failed-events/index.md) | ✅ | ✅ | 
+| [Failed events](/docs/understanding-your-pipeline/failed-events/index.md) | ✅ | ✅ | 
 | [Data quality monitoring](/docs/managing-data-quality/monitoring-failed-events/index.md) | ✅ | ❌ |
 | Single Sign-On | ✅ | ❌ | 
 | Pipeline observability | ✅ | do-it-yourself | 
@@ -57,13 +57,13 @@ To find out more about the support services offered to Snowplow BDP customers se
 | Outage Protection | ✅ | ❌ |
 | Global Availability | ✅ | ❌ |
 | <h3>Infrastructure & Security</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
-| <h4>High</h4> | ✅  | ❌ |
+| **High** |  |  |
 | HTTP access controls | ✅ | ❌ |
 | VPC peering | ✅ | ❌ |
 | SSH access control | ✅ | ❌ |
 | CVE reporting | ✅ | ❌ |
 | Static collector IPs | ✅ | ❌ |
-| <h4>Advanced</h4> | ✅  | ❌ |
+| **Advanced** |   |   |
 | Custom VPC integration | ✅ | ❌ |
 | Custom IAM policy | ✅ | ❌ |
 | Custom security agents | ✅ | ❌ |

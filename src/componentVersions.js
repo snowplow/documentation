@@ -33,7 +33,7 @@ export const versions = {
   esLoader: '2.1.2',
   gcsLoader: '0.5.5',
   postgresLoader: '0.3.3',
-  rdbLoader: '5.7.4',
+  rdbLoader: '5.8.2',
   s3Loader: '2.2.8',
   s3Loader22x: '2.2.8',
   lakeLoader: '0.2.0',

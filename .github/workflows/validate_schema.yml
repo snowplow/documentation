@@ -22,6 +22,6 @@ jobs:
         with:
           comment: "true" # enable comment mode
           json_schema: ./src/components/JsonSchemaValidator/dbt-variables-meta-schema # validate JSON files against the schema
-          files: ./src/components/JsonSchemaValidator/Schemas/
+          base_dir: ./src/components/JsonSchemaValidator/Schemas/
           json_schema_version: "draft-07"
           ajv_strict_mode: false

@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "dbt-variables-meta-schema",
+    "title": "Core schema meta-schema",
+    "allOf": [
+        {
+            "$ref": "http://json-schema.org/draft-07/schema#"
+        },
+        {
+            "properties": {
+                "properties": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#"
+                    },
+                    "patternProperties": {
+                        "^snowplow__": {
+                            "type": "object",
+                            "oneOf": [
+                                {
+                                    "required": [
+                                        "type",
+                                        "title",
+                                        "longDescription",
+                                        "packageDefault",
+                                        "group"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                        "$ref",
+                                        "title",
+                                        "longDescription",
+                                        "packageDefault",
+                                        "group"
+                                    ]
+                                }
+                            ],
+                            "default": {}
+                        }
+                    },
+                    "default": {}
+                }
+            },
+            "default": true
+        }
+    ]
+}

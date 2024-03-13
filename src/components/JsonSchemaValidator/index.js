@@ -23,7 +23,9 @@ function importAll(r) {
   return mods;
 }
 
-export const schemaImports = importAll(require.context('./Schemas/', false, /\.(js)$/));
+export const schemaImports = importAll(require.context('./Schemas/', false, /\.(json)$/));
+
+console.log(schemaImports);
 
 // Theming
 export const darkTheme = createTheme({

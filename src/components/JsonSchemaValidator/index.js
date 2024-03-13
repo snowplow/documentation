@@ -25,8 +25,6 @@ function importAll(r) {
 
 export const schemaImports = importAll(require.context('./Schemas/', false, /\.(json)$/));
 
-console.log(schemaImports);
-
 // Theming
 export const darkTheme = createTheme({
   palette: {

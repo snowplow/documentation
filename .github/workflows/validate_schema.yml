@@ -1,0 +1,27 @@
+name: Validate metadata/data_apps_metadata.json against schema
+
+on:
+  pull_request:
+    paths:
+      - 'src/components/JsonSchemaValidator/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write # enable write permissions for pull request comments
+
+jobs:
+  verify-json-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: json-yaml-validate
+        id: json-yaml-validate
+        uses: GrantBirki/json-yaml-validate@v2.6.0
+        with:
+          comment: "true" # enable comment mode
+          json_schema: ./src/components/JsonSchemaValidator/dbt-variables-meta-schema # validate JSON files against the schema
+          base_dir: ./src/components/JsonSchemaValidator/Schemas/
+          json_schema_version: "draft-07"
+          ajv_strict_mode: false

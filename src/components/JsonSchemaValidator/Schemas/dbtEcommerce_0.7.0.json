@@ -36,6 +36,9 @@
   "type": "object",
   "properties": {
     "snowplow__atomic_schema": {
+      "recommendFullRefresh": true,
+      "order": 3,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Schema",
       "description": "Schema (dataset) that contains your atomic events",
@@ -44,6 +47,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__categories_separator": {
+      "recommendFullRefresh": true,
+      "order": 67,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Categories Separator",
       "description": "Separator used to split out your subcategories from your main subcategory",
@@ -52,6 +58,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__database": {
+      "recommendFullRefresh": true,
+      "order": 1,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Database",
       "description": "Database that contains your atomic events",
@@ -60,6 +69,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__dev_target_name": {
+      "recommendFullRefresh": false,
+      "order": 87,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Dev Target",
       "description": "Target name of your development environment as defined in your `profiles.yml` file",
@@ -68,6 +80,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__events_table": {
+      "recommendFullRefresh": true,
+      "order": 5,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Events Table",
       "description": "The name of the table that contains your atomic events",
@@ -76,6 +91,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__number_category_levels": {
+      "recommendFullRefresh": false,
+      "order": 112,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Number of Category Levels",
@@ -85,6 +103,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__number_checkout_steps": {
+      "recommendFullRefresh": true,
+      "order": 17,
+      "consoleGroup": "basic",
       "type": "number",
       "minimum": 0,
       "title": "Number of Checkout Steps",
@@ -94,6 +115,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__allow_refresh": {
+      "recommendFullRefresh": true,
+      "order": 39,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Allow Refresh",
       "group": "Operation and Logic",
@@ -101,6 +125,9 @@
       "packageDefault": "false"
     },
     "snowplow__backfill_limit_days": {
+      "recommendFullRefresh": false,
+      "order": 41,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Backfill Limit",
@@ -110,6 +137,9 @@
       "description": "The maximum numbers of days of new data to be processed since the latest event processed"
     },
     "snowplow__days_late_allowed": {
+      "recommendFullRefresh": true,
+      "order": 42,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Days Late Allowed",
@@ -119,6 +149,9 @@
       "description": "The maximum allowed number of days between the event creation and it being sent to the collector"
     },
     "snowplow__ecommerce_event_names": {
+      "recommendFullRefresh": false,
+      "order": 40,
+      "consoleGroup": "advanced",
       "type": "array",
       "title": "E-commerce Event Names",
       "group": "Operation and Logic",
@@ -131,6 +164,9 @@
       }
     },
     "snowplow__enable_mobile_events": {
+      "recommendFullRefresh": false,
+      "order": 13,
+      "consoleGroup": "required",
       "type": "boolean",
       "title": "Enable mobile events",
       "longDescription": "A boolean whether to use the mobile contexts for mobile e-commerce events in the processing (based on the client session and screen view context).",
@@ -138,6 +174,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__lookback_window_hours": {
+      "recommendFullRefresh": false,
+      "order": 43,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Event Lookback Window",
@@ -147,6 +186,9 @@
       "description": "The number of hours to look before the latest event processed - to account for late arriving data, which comes out of order"
     },
     "snowplow__max_session_days": {
+      "recommendFullRefresh": true,
+      "order": 110,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Max Session Length",
@@ -156,6 +198,9 @@
       "description": "The maximum allowed session length in days. For a session exceeding this length, all events after this limit will stop being processed"
     },
     "snowplow__session_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 121,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Session Lookback Window",
@@ -165,6 +210,9 @@
       "description": "Number of days to limit scan on `snowplow_ecommerce_base_sessions_lifecycle_manifest` manifest"
     },
     "snowplow__start_date": {
+      "recommendFullRefresh": false,
+      "order": 6,
+      "consoleGroup": "required",
       "type": "string",
       "format": "date",
       "title": "Start Date",
@@ -174,6 +222,9 @@
       "description": "The date to start processing events from in the package on first run or a full refresh, based on `collector_tstamp`"
     },
     "snowplow__upsert_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 126,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Upsert Lookback Days",
@@ -183,6 +234,9 @@
       "description": "Number of days to look back over the incremental derived tables during the upsert"
     },
     "snowplow__app_id": {
+      "recommendFullRefresh": false,
+      "order": 8,
+      "consoleGroup": "basic",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -195,6 +249,9 @@
       }
     },
     "snowplow__use_product_quantity": {
+      "recommendFullRefresh": true,
+      "order": 37,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Operation and Logic",
       "longDescription": "Flag to use the product quantity value for the number of products in a transaction, instead of the count of events.",
@@ -202,6 +259,9 @@
       "title": "Use Product Quantity"
     },
     "snowplow__disable_ecommerce_carts": {
+      "recommendFullRefresh": false,
+      "order": 88,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to exclude the `Snowplow E-commerce` [cart entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/#cart-entity) context in case this is disabled or not used in your tracking.",
@@ -209,6 +269,9 @@
       "title": "Disable Carts Module"
     },
     "snowplow__disable_ecommerce_checkouts": {
+      "recommendFullRefresh": false,
+      "order": 89,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to exclude the `Snowplow E-commerce` [checkout entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/#checkout-step-entity) context in case this is disabled or not used in your tracking.",
@@ -216,6 +279,9 @@
       "title": "Disable Checkouts Module"
     },
     "snowplow__disable_ecommerce_page_context": {
+      "recommendFullRefresh": false,
+      "order": 90,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to exclude the `Snowplow E-commerce` [page entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/#ecommerce-page-entity) context in case this is disabled or not used in your tracking.",
@@ -223,6 +289,9 @@
       "title": "Disable Page Context Module"
     },
     "snowplow__disable_ecommerce_products": {
+      "recommendFullRefresh": false,
+      "order": 91,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to exclude the `Snowplow E-commerce` [product entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/#product-entity) context in case this is disabled or not used in your tracking.",
@@ -230,6 +299,9 @@
       "title": "Disable Products Module"
     },
     "snowplow__disable_ecommerce_transactions": {
+      "recommendFullRefresh": false,
+      "order": 92,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to exclude the `Snowplow E-commerce` [transaction entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/#transaction-entity) context in case this is disabled or not used in your tracking.",
@@ -237,6 +309,9 @@
       "title": "Disable Transactions Module"
     },
     "snowplow__disable_ecommerce_user_context": {
+      "recommendFullRefresh": false,
+      "order": 93,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to exclude the `Snowplow E-commerce` [user entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/snowplow-ecommerce/#ecommerce-user-entity) context in case this is disabled or not used in your tracking.",
@@ -244,6 +319,9 @@
       "title": "Disable User Context Module"
     },
     "snowplow__databricks_catalog": {
+      "recommendFullRefresh": true,
+      "order": 2,
+      "consoleGroup": "required",
       "type": "string",
       "title": "(Databricks) Catalog",
       "warehouse": "Databricks",
@@ -253,6 +331,9 @@
       "description": "The catalogue your atomic events table is in"
     },
     "snowplow__derived_tstamp_partitioned": {
+      "recommendFullRefresh": false,
+      "order": 9,
+      "consoleGroup": "basic",
       "type": "boolean",
       "warehouse": "Bigquery",
       "title": "(Bigquery) Dervied Timestamp Partition",
@@ -261,6 +342,9 @@
       "group": "Warehouse Specific"
     },
     "snowplow__session_identifiers": {
+      "recommendFullRefresh": true,
+      "order": 46,
+      "consoleGroup": "advanced",
       "title": "Session Identifiers",
       "group": "Operation and Logic",
       "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your session identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.",
@@ -290,6 +374,9 @@
       "uniqueItems": true
     },
     "snowplow__session_sql": {
+      "recommendFullRefresh": true,
+      "order": 47,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "SQL for your session identifier",
       "longDescription": "This allows you to override the `session_identifiers` SQL, to define completely custom SQL in order to build out a session identifier for your events. If you are interested in using this instead of providing identifiers through the `session_identifiers` variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details on how to do that.",
@@ -297,6 +384,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__session_timestamp": {
+      "recommendFullRefresh": false,
+      "order": 55,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Timestamp used for incremental processing, should be your partition field",
       "group": "Operation and Logic",
@@ -304,6 +394,9 @@
       "packageDefault": "collector_tstamp"
     },
     "snowplow__user_identifiers": {
+      "recommendFullRefresh": true,
+      "order": 48,
+      "consoleGroup": "advanced",
       "title": "User Identifiers",
       "group": "Operation and Logic",
       "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your user identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.",
@@ -333,6 +426,9 @@
       "uniqueItems": true
     },
     "snowplow__user_sql": {
+      "recommendFullRefresh": true,
+      "order": 49,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "SQL for your user identifier",
       "longDescription": "This allows you to override the `user_identifiers` SQL, to define completely custom SQL in order to build out a user identifier for your events. If you are interested in using this instead of providing identifiers through the `user_identifiers` variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details on how to do that.",
@@ -340,6 +436,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__enable_load_tstamp": {
+      "recommendFullRefresh": false,
+      "order": 99,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "warehouse": "Redshift",
       "title": "(Redshift) Enable load_tstamp",
@@ -348,6 +447,9 @@
       "group": "Warehouse Specific"
     },
     "snowplow__carts_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 66,
+      "consoleGroup": "advanced",
       "title": "Carts Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Field(s) to carry through from the events table to the derived table. The field is from the `add_to_cart`, `remove_from_cart`, or `transaction` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
@@ -355,6 +457,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__checkout_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 70,
+      "consoleGroup": "advanced",
       "title": "Checkouts Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Field(s) to carry through from the events table to the derived table. The field is from the `transaction` or `checkout_step` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
@@ -362,6 +467,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__products_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 118,
+      "consoleGroup": "advanced",
       "title": "Products Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Field(s) to carry through from the events table to the derived table. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
@@ -369,6 +477,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__session_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 122,
+      "consoleGroup": "advanced",
       "title": "Session Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Field(s) to carry through from the events table to the derived table. The field is from the first event record in the session based on `derived_tstamp` then `dvce_created_tstamp`. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
@@ -376,6 +487,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__transaction_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 125,
+      "consoleGroup": "advanced",
       "title": "Transaction Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Field(s) to carry through from the events table to the derived table. The field is from the `transaction` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
@@ -383,6 +497,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__entities_or_sdes": {
+      "recommendFullRefresh": false,
+      "order": 104,
+      "consoleGroup": "advanced",
       "title": "(Redshift) Entities or SDEs",
       "longDescription": "A list of dictionaries defining the `entity` or `self-describing` event tables to join onto your base events table. Please use the tool below or see the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/) for details of the structure.",
       "packageDefault": "[]",

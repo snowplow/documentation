@@ -36,6 +36,9 @@
   "type": "object",
   "properties": {
     "snowplow__atomic_schema": {
+      "recommendFullRefresh": true,
+      "order": 3,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Schema",
       "description": "Schema (dataset) that contains your atomic events",
@@ -44,6 +47,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__database": {
+      "recommendFullRefresh": true,
+      "order": 1,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Database",
       "description": "Database that contains your atomic events",
@@ -52,6 +58,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__dev_target_name": {
+      "recommendFullRefresh": false,
+      "order": 87,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Dev Target",
       "description": "Target name of your development environment as defined in your `profiles.yml` file",
@@ -60,6 +69,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__events_table": {
+      "recommendFullRefresh": true,
+      "order": 5,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Events Table",
       "description": "The name of the table that contains your atomic events",
@@ -68,6 +80,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__heartbeat": {
+      "recommendFullRefresh": true,
+      "order": 14,
+      "consoleGroup": "basic",
       "type": "number",
       "minimum": 0,
       "title": "Heartbeat",
@@ -77,6 +92,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__min_visit_length": {
+      "recommendFullRefresh": true,
+      "order": 15,
+      "consoleGroup": "basic",
       "type": "number",
       "minimum": 0,
       "title": "Min Visit length",
@@ -86,6 +104,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__sessions_table": {
+      "recommendFullRefresh": true,
+      "order": 123,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Sessions Table",
       "description": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref(\"snowplow_web_sessions_custom\") }}",
@@ -94,6 +115,9 @@
       "packageDefault": "\"{{ ref( \\'snowplow_web_sessions\\' ) }}\""
     },
     "snowplow__allow_refresh": {
+      "recommendFullRefresh": true,
+      "order": 39,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Allow Refresh",
       "group": "Operation and Logic",
@@ -101,6 +125,9 @@
       "packageDefault": "false"
     },
     "snowplow__backfill_limit_days": {
+      "recommendFullRefresh": false,
+      "order": 41,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Backfill Limit",
@@ -110,6 +137,9 @@
       "description": "The maximum numbers of days of new data to be processed since the latest event processed"
     },
     "snowplow__conversion_events": {
+      "recommendFullRefresh": false,
+      "order": 45,
+      "consoleGroup": "advanced",
       "title": "Conversion Definition",
       "group": "Operation and Logic",
       "description": "> Click the plus sign to add a new entry",
@@ -155,6 +185,9 @@
       "uniqueItems": true
     },
     "snowplow__cwv_days_to_measure": {
+      "recommendFullRefresh": true,
+      "order": 85,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 1,
       "title": "CWV Days To Measure",
@@ -164,6 +197,9 @@
       "description": "The number of days to use for web vital measurements (if enabled)"
     },
     "snowplow__cwv_percentile": {
+      "recommendFullRefresh": true,
+      "order": 86,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "maximum": 100,
@@ -174,6 +210,9 @@
       "description": "The percentile that the web vitals measurements that are produced for all page views (if enabled)"
     },
     "snowplow__days_late_allowed": {
+      "recommendFullRefresh": true,
+      "order": 42,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Days Late Allowed",
@@ -183,6 +222,9 @@
       "description": "The maximum allowed number of days between the event creation and it being sent to the collector"
     },
     "snowplow__limit_page_views_to_session": {
+      "recommendFullRefresh": true,
+      "order": 108,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Limit Page View to Session",
       "longDescription": "A boolean whether to ensure page view aggregations are limited to pings in the same session as the `page_view` event, to ensure deterministic behavior. If false you may get different results for the same `page_view` depending on which sessions are included in a run. See the [stray page ping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/#stray-page-pings) section for more information.",
@@ -190,6 +232,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__list_event_counts": {
+      "recommendFullRefresh": false,
+      "order": 16,
+      "consoleGroup": "basic",
       "type": "boolean",
       "title": "List Per-Event Counts",
       "longDescription": "A boolean whether to include a json-type (varies by warehouse) column in the sessions table with a count of events for each `event_type` in that session.",
@@ -197,6 +242,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__lookback_window_hours": {
+      "recommendFullRefresh": false,
+      "order": 43,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Event Lookback Window",
@@ -206,6 +254,9 @@
       "description": "The number of hours to look before the latest event processed - to account for late arriving data, which comes out of order"
     },
     "snowplow__max_session_days": {
+      "recommendFullRefresh": true,
+      "order": 110,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Max Session Length",
@@ -215,6 +266,9 @@
       "description": "The maximum allowed session length in days. For a session exceeding this length, all events after this limit will stop being processed"
     },
     "snowplow__session_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 121,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Session Lookback Window",
@@ -224,6 +278,9 @@
       "description": "Number of days to limit scan on `snowplow_web_base_sessions_lifecycle_manifest` manifest"
     },
     "snowplow__session_stitching": {
+      "recommendFullRefresh": false,
+      "order": 51,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Enable Session Stitching",
       "longDescription": "Determines whether to apply the user mapping to the sessions table. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
@@ -231,6 +288,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__start_date": {
+      "recommendFullRefresh": false,
+      "order": 6,
+      "consoleGroup": "required",
       "type": "string",
       "format": "date",
       "title": "Start Date",
@@ -240,6 +300,9 @@
       "description": "The date to start processing events from in the package on first run or a full refresh, based on `collector_tstamp`"
     },
     "snowplow__total_all_conversions": {
+      "recommendFullRefresh": false,
+      "order": 44,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Total All Conversions",
       "longDescription": "A boolean flag whether to calculate and add the `cv__all_volume` and `cv__all_total` columns. For more information see the [package documentation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/conversions/).",
@@ -247,6 +310,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__upsert_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 126,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Upsert Lookback Days",
@@ -256,6 +322,9 @@
       "description": "Number of days to look back over the incremental derived tables during the upsert"
     },
     "snowplow__app_id": {
+      "recommendFullRefresh": false,
+      "order": 8,
+      "consoleGroup": "basic",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -268,6 +337,9 @@
       }
     },
     "snowplow__enable_consent": {
+      "recommendFullRefresh": false,
+      "order": 97,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to enable the [consent](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/consent-module/) module.",
@@ -275,6 +347,9 @@
       "title": "Enable Consent Module"
     },
     "snowplow__enable_cwv": {
+      "recommendFullRefresh": false,
+      "order": 98,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to enable the [Core Web Vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/core-web-vitals-module/) module.",
@@ -282,6 +357,9 @@
       "title": "Enable Core Web Vitals Module"
     },
     "snowplow__enable_iab": {
+      "recommendFullRefresh": false,
+      "order": 25,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to include the [IAB enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/) data in the models.",
@@ -289,6 +367,9 @@
       "title": "Enable IAB"
     },
     "snowplow__enable_ua": {
+      "recommendFullRefresh": false,
+      "order": 27,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to include the [UA Parser enrichment](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/) data in the models.",
@@ -296,6 +377,9 @@
       "title": "Enable UA"
     },
     "snowplow__enable_yauaa": {
+      "recommendFullRefresh": false,
+      "order": 26,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to include the [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/) data in the models.",
@@ -303,6 +387,9 @@
       "title": "Enable YAUAA"
     },
     "snowplow__has_log_enabled": {
+      "recommendFullRefresh": false,
+      "order": 107,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "When executed, the package logs information about the current run to the CLI. This can be disabled by setting to `false`.",
@@ -310,6 +397,9 @@
       "title": "Enable Run Logs"
     },
     "snowplow__ua_bot_filter": {
+      "recommendFullRefresh": true,
+      "order": 21,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Flag to filter out bots via the `useragent` string pattern match.",
@@ -317,6 +407,9 @@
       "title": "Filter Bots"
     },
     "snowplow__databricks_catalog": {
+      "recommendFullRefresh": true,
+      "order": 2,
+      "consoleGroup": "required",
       "type": "string",
       "title": "(Databricks) Catalog",
       "warehouse": "Databricks",
@@ -326,6 +419,9 @@
       "description": "The catalogue your atomic events table is in"
     },
     "snowplow__enable_load_tstamp": {
+      "recommendFullRefresh": false,
+      "order": 99,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "warehouse": "Redshift",
       "title": "(Redshift) Enable load_tstamp",
@@ -334,6 +430,9 @@
       "group": "Warehouse Specific"
     },
     "snowplow__derived_tstamp_partitioned": {
+      "recommendFullRefresh": false,
+      "order": 9,
+      "consoleGroup": "basic",
       "type": "boolean",
       "warehouse": "Bigquery",
       "title": "(Bigquery) Dervied Timestamp Partition",
@@ -342,6 +441,9 @@
       "group": "Warehouse Specific"
     },
     "snowplow__ga4_categories_seed": {
+      "recommendFullRefresh": false,
+      "order": 58,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Seed reference for GA4 Categories",
       "longDescription": "Name of the model for the GA4 category mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).",
@@ -349,6 +451,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__geo_mapping_seed": {
+      "recommendFullRefresh": false,
+      "order": 59,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Seed reference for geo mapping",
       "longDescription": "Name of the model for the Geo mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).",
@@ -356,6 +461,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__rfc_5646_seed": {
+      "recommendFullRefresh": false,
+      "order": 57,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Seed reference for rfc 5646 (language mapping)",
       "longDescription": "Name of the model for the RFC 5646 (language) mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).",
@@ -363,6 +471,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__session_identifiers": {
+      "recommendFullRefresh": true,
+      "order": 46,
+      "consoleGroup": "advanced",
       "title": "Session Identifiers",
       "group": "Operation and Logic",
       "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your session identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.",
@@ -392,6 +503,9 @@
       "uniqueItems": true
     },
     "snowplow__session_sql": {
+      "recommendFullRefresh": true,
+      "order": 47,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "SQL for your session identifier",
       "longDescription": "This allows you to override the `session_identifiers` SQL, to define completely custom SQL in order to build out a session identifier for your events. If you are interested in using this instead of providing identifiers through the `session_identifiers` variable, please see the [Custom Identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details on how to do that.",
@@ -399,6 +513,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__session_timestamp": {
+      "recommendFullRefresh": false,
+      "order": 55,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Timestamp used for incremental processing, should be your partition field",
       "group": "Operation and Logic",
@@ -406,6 +523,9 @@
       "packageDefault": "collector_tstamp"
     },
     "snowplow__user_identifiers": {
+      "recommendFullRefresh": true,
+      "order": 48,
+      "consoleGroup": "advanced",
       "title": "User Identifiers",
       "group": "Operation and Logic",
       "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your user identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.",
@@ -435,6 +555,9 @@
       "uniqueItems": true
     },
     "snowplow__user_sql": {
+      "recommendFullRefresh": true,
+      "order": 49,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "SQL for your user identifier",
       "longDescription": "This allows you to override the `user_identifiers` SQL, to define completely custom SQL in order to build out a user identifier for your events. If you are interested in using this instead of providing identifiers through the `user_identifiers` variable, please see the [Custom Identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details on how to do that.",
@@ -442,6 +565,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__user_stitching_id": {
+      "recommendFullRefresh": false,
+      "order": 50,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Field used when stitching together users",
       "longDescription": "This is the user_id you want to stitch to sessions (and/or page views) with matching domain_userids. It supports raw `sql` expressions.",
@@ -449,6 +575,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__page_view_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 114,
+      "consoleGroup": "advanced",
       "title": "Page View Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Field(s) to carry through from the events table to the derived table. The field is from the `page_view` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
@@ -456,6 +585,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__session_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 122,
+      "consoleGroup": "advanced",
       "title": "Session Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the first `page_view` or `page_ping` event for that session. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
@@ -463,6 +595,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__user_first_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 129,
+      "consoleGroup": "advanced",
       "title": "User First Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": " Field(s) to carry through from the events table to the derived table. The field is based on the first session record for that user. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
@@ -470,6 +605,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__user_last_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 130,
+      "consoleGroup": "advanced",
       "title": "User Last Passthroughs",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the last session record for that user. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output. Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.",
@@ -477,6 +615,9 @@
       "$ref": "#/definitions/passthrough_vars"
     },
     "snowplow__entities_or_sdes": {
+      "recommendFullRefresh": false,
+      "order": 104,
+      "consoleGroup": "advanced",
       "title": "(Redshift) Entities or SDEs",
       "longDescription": "A list of dictionaries defining the `context` or `self-describing` event tables to join onto your base events table. Please use the tool below or see the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/) for details of the structure.",
       "packageDefault": "[]",
@@ -515,6 +656,9 @@
       "uniqueItems": true
     },
     "snowplow__page_view_stitching": {
+      "recommendFullRefresh": false,
+      "order": 52,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Enable Page View Stitching",
       "longDescription": "Determines whether to apply the user mapping to the page views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",

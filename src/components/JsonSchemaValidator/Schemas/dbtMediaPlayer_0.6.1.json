@@ -36,6 +36,9 @@
   "type": "object",
   "properties": {
     "snowplow__atomic_schema": {
+      "recommendFullRefresh": true,
+      "order": 3,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Schema",
       "description": "Schema (dataset) that contains your atomic events",
@@ -44,6 +47,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__database": {
+      "recommendFullRefresh": true,
+      "order": 1,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Database",
       "description": "Database that contains your atomic events",
@@ -52,6 +58,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__dev_target_name": {
+      "recommendFullRefresh": false,
+      "order": 87,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Dev Target",
       "description": "Target name of your development environment as defined in your `profiles.yml` file",
@@ -60,6 +69,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__events_table": {
+      "recommendFullRefresh": true,
+      "order": 5,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Events Table",
       "description": "The name of the table that contains your atomic events",
@@ -68,6 +80,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__start_date": {
+      "recommendFullRefresh": false,
+      "order": 6,
+      "consoleGroup": "required",
       "type": "string",
       "format": "date",
       "title": "Start Date",
@@ -77,6 +92,9 @@
       "description": "The date to start processing events from in the package on first run or a full refresh, based on `collector_tstamp`"
     },
     "snowplow__backfill_limit_days": {
+      "recommendFullRefresh": false,
+      "order": 41,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Backfill Limit",
@@ -86,6 +104,9 @@
       "description": "The maximum numbers of days of new data to be processed since the latest event processed"
     },
     "snowplow__session_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 121,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Session Lookback Window",
@@ -95,6 +116,9 @@
       "description": "Number of days to limit scan on `snowplow_media_player_base_sessions_lifecycle_manifest` manifest"
     },
     "snowplow__days_late_allowed": {
+      "recommendFullRefresh": true,
+      "order": 42,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Days Late Allowed",
@@ -104,6 +128,9 @@
       "description": "The maximum allowed number of days between the event creation and it being sent to the collector"
     },
     "snowplow__max_session_days": {
+      "recommendFullRefresh": true,
+      "order": 110,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Max Session Length",
@@ -113,6 +140,9 @@
       "description": "The maximum allowed session length in days. For a session exceeding this length, all events after this limit will stop being processed"
     },
     "snowplow__upsert_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 126,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Upsert Lookback Days",
@@ -122,6 +152,9 @@
       "description": "Number of days to look back over the incremental derived tables during the upsert"
     },
     "snowplow__allow_refresh": {
+      "recommendFullRefresh": true,
+      "order": 39,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Allow Refresh",
       "group": "Operation and Logic",
@@ -129,6 +162,9 @@
       "packageDefault": "false"
     },
     "snowplow__session_timestamp": {
+      "recommendFullRefresh": false,
+      "order": 55,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Start Date",
       "group": "Operation and Logic",
@@ -137,6 +173,9 @@
       "description": "Determines which timestamp is used to process sessions of data"
     },
     "snowplow__media_event_names": {
+      "recommendFullRefresh": false,
+      "order": 111,
+      "consoleGroup": "advanced",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -149,6 +188,9 @@
       }
     },
     "snowplow__percent_progress_boundaries": {
+      "recommendFullRefresh": true,
+      "order": 20,
+      "consoleGroup": "basic",
       "type": "array",
       "title": "Percent Progress Boundaries",
       "group": "Warehouse and Tracker",
@@ -161,6 +203,9 @@
       }
     },
     "snowplow__complete_play_rate": {
+      "recommendFullRefresh": true,
+      "order": 71,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "maximum": 1,
@@ -171,6 +216,9 @@
       "description": "Percentage of a media needs to be played in order to consider that complete"
     },
     "snowplow__max_media_pv_window": {
+      "recommendFullRefresh": false,
+      "order": 109,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Max Media Page View Window",
@@ -180,6 +228,9 @@
       "description": "Number of hours that needs to pass before new page_view level media player metrics from the `snowplow_media_player_base` table are safe to be processed"
     },
     "snowplow__valid_play_sec": {
+      "recommendFullRefresh": true,
+      "order": 38,
+      "consoleGroup": "basic",
       "type": "number",
       "minimum": 0,
       "title": "Valid Play Seconds",
@@ -197,6 +248,9 @@
       "description": "Passed through to `dbt_utils` to match legacy surrogate key behavior."
     },
     "snowplow__app_id": {
+      "recommendFullRefresh": false,
+      "order": 8,
+      "consoleGroup": "basic",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -209,6 +263,9 @@
       }
     },
     "snowplow__enable_whatwg_media": {
+      "recommendFullRefresh": false,
+      "order": 34,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [HTML5 media element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0) is enabled. This variable is used to handle syntax depending on whether the context fields are available in the database or not.",
@@ -216,6 +273,9 @@
       "title": "Enable WhatWG Media Module"
     },
     "snowplow__enable_whatwg_video": {
+      "recommendFullRefresh": false,
+      "order": 35,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [HTML5 video element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/video_element/jsonschema/1-0-0) is enabled. This variable is used to handle syntax depending on whether the context fields are available in the database or not.",
@@ -223,6 +283,9 @@
       "title": "Enable WhatWG Video Module"
     },
     "snowplow__enable_youtube": {
+      "recommendFullRefresh": false,
+      "order": 36,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [YouTube context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.youtube/youtube/jsonschema/1-0-0) is enabled. This variable is used to handle syntax depending on whether the context fields are available in the database or not.",
@@ -230,6 +293,9 @@
       "title": "Enable YouTube Module"
     },
     "snowplow__enable_media_player_v1": {
+      "recommendFullRefresh": false,
+      "order": 31,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [version 1 of the media player context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0) is enabled. This schema was used in our older media plugins on the JavaScript tracker. It is not tracked in the latest versions.",
@@ -237,6 +303,9 @@
       "title": "Enable Media Player v1 Module"
     },
     "snowplow__enable_media_player_v2": {
+      "recommendFullRefresh": false,
+      "order": 32,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [version 2 of the media player context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/2-0-0) is enabled. This is tracked by our latest JavaScript and mobile trackers.",
@@ -244,6 +313,9 @@
       "title": "Enable Media Player v2 Module"
     },
     "snowplow__enable_media_session": {
+      "recommendFullRefresh": false,
+      "order": 33,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [media session context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0) is enabled. This is tracked by our latest JavaScript and mobile trackers (optional but enabled by default).",
@@ -251,6 +323,9 @@
       "title": "Enable Media Session Module"
     },
     "snowplow__enable_media_ad": {
+      "recommendFullRefresh": false,
+      "order": 29,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [media ad context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad/jsonschema/1-0-0) is enabled. This is tracked by our latest JavaScript and mobile trackers along with ad events.",
@@ -258,6 +333,9 @@
       "title": "Enable Media Ad Module"
     },
     "snowplow__enable_media_ad_break": {
+      "recommendFullRefresh": false,
+      "order": 30,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [media ad-break context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_break/jsonschema/1-0-0) is enabled. This is tracked by our latest JavaScript and mobile trackers when ad breaks are tracked along with ad events.",
@@ -265,6 +343,9 @@
       "title": "Enable Media Ad Break Module"
     },
     "snowplow__enable_web_events": {
+      "recommendFullRefresh": false,
+      "order": 11,
+      "consoleGroup": "required",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Whether to use the web contexts for web media events in the processing (based on the web page context).",
@@ -272,6 +353,9 @@
       "title": "Enable Web Events Module"
     },
     "snowplow__enable_mobile_events": {
+      "recommendFullRefresh": false,
+      "order": 13,
+      "consoleGroup": "required",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Whether to use the mobile contexts for mobile media events in the processing (based on the client session and screen view context).",
@@ -279,6 +363,9 @@
       "title": "Enable Mobile Events Module"
     },
     "snowplow__enable_ad_quartile_event": {
+      "recommendFullRefresh": false,
+      "order": 28,
+      "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if [ad quartile events](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0) are tracked during media ad playback.",
@@ -286,6 +373,9 @@
       "title": "Enable Ad Quartile Module"
     },
     "snowplow__enable_load_tstamp": {
+      "recommendFullRefresh": false,
+      "order": 99,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "warehouse": "Redshift",
       "title": "(Redshift) Enable load_tstamp",
@@ -294,6 +384,9 @@
       "group": "Warehouse Specific"
     },
     "snowplow__derived_tstamp_partitioned": {
+      "recommendFullRefresh": false,
+      "order": 9,
+      "consoleGroup": "basic",
       "type": "boolean",
       "warehouse": "Bigquery",
       "title": "(Bigquery) Dervied Timestamp Partition",

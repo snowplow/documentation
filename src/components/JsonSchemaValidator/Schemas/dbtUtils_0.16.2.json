@@ -36,6 +36,9 @@
   "type": "object",
   "properties": {
     "snowplow__database": {
+      "recommendFullRefresh": true,
+      "order": 1,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Database",
       "description": "Database that contains your atomic events",
@@ -44,6 +47,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__dev_target_name": {
+      "recommendFullRefresh": false,
+      "order": 87,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Dev Target",
       "description": "Target name of your development environment as defined in your `profiles.yml` file",
@@ -52,6 +58,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__events_table": {
+      "recommendFullRefresh": true,
+      "order": 5,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Events Table",
       "description": "The name of the table that contains your atomic events",
@@ -60,6 +69,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__events_schema": {
+      "recommendFullRefresh": true,
+      "order": 4,
+      "consoleGroup": "basic",
       "type": "string",
       "title": "Events Schema",
       "description": "The name of the schema that contains your atomic events",
@@ -68,6 +80,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__allow_refresh": {
+      "recommendFullRefresh": true,
+      "order": 39,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Allow Refresh",
       "group": "Operation and Logic",
@@ -75,6 +90,9 @@
       "packageDefault": "false"
     },
     "snowplow__backfill_limit_days": {
+      "recommendFullRefresh": false,
+      "order": 41,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Backfill Limit",
@@ -84,6 +102,9 @@
       "description": "The maximum numbers of days of new data to be processed since the latest event processed"
     },
     "snowplow__custom_sql": {
+      "recommendFullRefresh": false,
+      "order": 84,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Custom SQL",
       "group": "Operation and Logic",
@@ -92,6 +113,9 @@
       "description": "Custom SQL for your base events this run table."
     },
     "snowplow__days_late_allowed": {
+      "recommendFullRefresh": true,
+      "order": 42,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Days Late Allowed",
@@ -101,6 +125,9 @@
       "description": "The maximum allowed number of days between the event creation and it being sent to the collector"
     },
     "snowplow__max_session_days": {
+      "recommendFullRefresh": true,
+      "order": 110,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Max Session Length",
@@ -110,6 +137,9 @@
       "description": "The maximum allowed session length in days. For a session exceeding this length, all events after this limit will stop being processed"
     },
     "snowplow__package_name": {
+      "recommendFullRefresh": false,
+      "order": 113,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Package Name",
@@ -119,6 +149,9 @@
       "description": "The name of the package you are running this macro under"
     },
     "snowplow__session_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 121,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Session Lookback Window",
@@ -128,6 +161,9 @@
       "description": "Number of days to limit scan on `snowplow_web_base_sessions_lifecycle_manifest` manifest"
     },
     "snowplow__upsert_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 126,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Upsert Lookback Days",
@@ -137,6 +173,9 @@
       "description": "Number of days to look back over the incremental derived tables during the upsert"
     },
     "snowplow__app_id": {
+      "recommendFullRefresh": false,
+      "order": 8,
+      "consoleGroup": "basic",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -149,6 +188,9 @@
       }
     },
     "snowplow__session_identifiers": {
+      "recommendFullRefresh": true,
+      "order": 46,
+      "consoleGroup": "advanced",
       "title": "Session Identifiers",
       "group": "Operation and Logic",
       "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your session identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.",
@@ -176,6 +218,9 @@
       "uniqueItems": true
     },
     "snowplow__session_sql": {
+      "recommendFullRefresh": true,
+      "order": 47,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "SQL for your session identifier",
       "longDescription": "This allows you to override the `session_identifiers` SQL, to define completely custom SQL in order to build out a session identifier for your events. If you are interested in using this instead of providing identifiers through the `session_identifiers` variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details on how to do that.",
@@ -183,6 +228,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__session_timestamp": {
+      "recommendFullRefresh": false,
+      "order": 55,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Timestamp used for incremental processing, should be your partition field",
       "group": "Operation and Logic",
@@ -190,6 +238,9 @@
       "packageDefault": "collector_tstamp"
     },
     "snowplow__user_identifiers": {
+      "recommendFullRefresh": true,
+      "order": 48,
+      "consoleGroup": "advanced",
       "title": "User Identifiers",
       "group": "Operation and Logic",
       "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your user identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.",
@@ -217,6 +268,9 @@
       "uniqueItems": true
     },
     "snowplow__user_sql": {
+      "recommendFullRefresh": true,
+      "order": 49,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "SQL for your user identifier",
       "longDescription": "This allows you to override the `user_identifiers` SQL, to define completely custom SQL in order to build out a user identifier for your events. If you are interested in using this instead of providing identifiers through the `user_identifiers` variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details on how to do that.",
@@ -224,6 +278,9 @@
       "group": "Operation and Logic"
     },
     "snowplow__entities_or_sdes": {
+      "recommendFullRefresh": false,
+      "order": 104,
+      "consoleGroup": "advanced",
       "title": "(Redshift) Entities or SDEs",
       "longDescription": "A list of dictionaries defining the `context` or `self-describing` event tables to join onto your base events table. Please use the tool below or see the section on [Utilizing custom contexts or SDEs](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/) for details of the structure.",
       "packageDefault": "[]",

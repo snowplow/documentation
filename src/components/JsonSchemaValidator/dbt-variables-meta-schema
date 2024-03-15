@@ -15,6 +15,49 @@
                     "patternProperties": {
                         "^snowplow__": {
                             "type": "object",
+                            "properties": {
+                                "recommendFullRefresh": {
+                                    "type": "boolean"
+                                },
+                                "order": {
+                                    "type": "number"
+                                },
+                                "consoleGroup": {
+                                    "type": "string",
+                                    "enum": [
+                                        "basic",
+                                        "required",
+                                        "advanced"
+                                    ]
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "string",
+                                        "number",
+                                        "integer",
+                                        "object",
+                                        "array",
+                                        "boolean",
+                                        "null"
+                                    ]
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "longDescription": {
+                                    "type": "string"
+                                },
+                                "packageDefault": {
+                                    "type": "string"
+                                },
+                                "group": {
+                                    "type": "string"
+                                }
+                            },
                             "oneOf": [
                                 {
                                     "required": [
@@ -22,7 +65,10 @@
                                         "title",
                                         "longDescription",
                                         "packageDefault",
-                                        "group"
+                                        "group",
+                                        "recommendFullRefresh",
+                                        "order",
+                                        "consoleGroup"
                                     ]
                                 },
                                 {
@@ -31,7 +77,10 @@
                                         "title",
                                         "longDescription",
                                         "packageDefault",
-                                        "group"
+                                        "group",
+                                        "recommendFullRefresh",
+                                        "order",
+                                        "consoleGroup"
                                     ]
                                 }
                             ],

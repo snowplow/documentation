@@ -36,6 +36,9 @@
   "type": "object",
   "properties": {
     "snowplow__atomic_schema": {
+      "recommendFullRefresh": true,
+      "order": 3,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Schema",
       "description": "Schema (dataset) that contains your atomic events",
@@ -44,6 +47,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__database": {
+      "recommendFullRefresh": true,
+      "order": 1,
+      "consoleGroup": "required",
       "type": "string",
       "title": "Database",
       "description": "Database that contains your atomic events",
@@ -52,6 +58,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__dev_target_name": {
+      "recommendFullRefresh": false,
+      "order": 87,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Dev Target",
       "description": "Target name of your development environment as defined in your `profiles.yml` file",
@@ -60,6 +69,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__events": {
+      "recommendFullRefresh": false,
+      "order": 9999,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Events Table",
       "description": "Reference to your events table",
@@ -68,6 +80,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__allow_refresh": {
+      "recommendFullRefresh": true,
+      "order": 39,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Allow Refresh",
       "group": "Operation and Logic",
@@ -75,6 +90,9 @@
       "packageDefault": "false"
     },
     "snowplow__backfill_limit_days": {
+      "recommendFullRefresh": false,
+      "order": 41,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Backfill Limit",
@@ -84,6 +102,9 @@
       "description": "The maximum numbers of days of new data to be processed since the latest event processed"
     },
     "snowplow__days_late_allowed": {
+      "recommendFullRefresh": true,
+      "order": 42,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Days Late Allowed",
@@ -93,6 +114,9 @@
       "description": "The maximum allowed number of days between the event creation and it being sent to the collector"
     },
     "snowplow__lookback_window_hours": {
+      "recommendFullRefresh": false,
+      "order": 43,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Event Lookback Window",
@@ -102,6 +126,9 @@
       "description": "The number of hours to look before the latest event processed - to account for late arriving data, which comes out of order"
     },
     "snowplow__start_date": {
+      "recommendFullRefresh": false,
+      "order": 6,
+      "consoleGroup": "required",
       "type": "string",
       "format": "date",
       "title": "Start Date",
@@ -111,6 +138,9 @@
       "description": "The date to start processing events from in the package on first run or a full refresh, based on `collector_tstamp`"
     },
     "snowplow__session_timestamp": {
+      "recommendFullRefresh": false,
+      "order": 55,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Start Date",
       "group": "Operation and Logic",
@@ -119,6 +149,9 @@
       "description": "Determines which timestamp is used to process sessions of data"
     },
     "snowplow__upsert_lookback_days": {
+      "recommendFullRefresh": false,
+      "order": 126,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Upsert Lookback Days",
@@ -128,6 +161,9 @@
       "description": "Number of days to look back over the incremental derived tables during the upsert"
     },
     "snowplow__app_id": {
+      "recommendFullRefresh": false,
+      "order": 8,
+      "consoleGroup": "basic",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -140,6 +176,9 @@
       }
     },
     "snowplow__databricks_catalog": {
+      "recommendFullRefresh": true,
+      "order": 2,
+      "consoleGroup": "required",
       "type": "string",
       "title": "(Databricks) Catalog",
       "warehouse": "Databricks",
@@ -149,6 +188,9 @@
       "description": "The catalogue your atomic events table is in"
     },
     "snowplow__derived_tstamp_partitioned": {
+      "recommendFullRefresh": false,
+      "order": 9,
+      "consoleGroup": "basic",
       "type": "boolean",
       "warehouse": "Bigquery",
       "title": "(Bigquery) Dervied Timestamp Partition",

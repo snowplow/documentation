@@ -36,6 +36,9 @@
   "type": "object",
   "properties": {
     "snowplow__conversions_source": {
+      "recommendFullRefresh": true,
+      "order": 81,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Conversions Source",
       "description": "Source of conversion events",
@@ -44,6 +47,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__conversion_path_source": {
+      "recommendFullRefresh": true,
+      "order": 76,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Conversion Path Source",
       "description": "Source of paths (touchpoints) table",
@@ -52,6 +58,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__conversion_window_start_date": {
+      "recommendFullRefresh": true,
+      "order": 80,
+      "consoleGroup": "advanced",
       "type": "string",
       "format": "date",
       "title": "Conversion Window Start Date",
@@ -60,6 +69,9 @@
       "packageDefault": "current_date()-31"
     },
     "snowplow__conversion_window_end_date": {
+      "recommendFullRefresh": true,
+      "order": 79,
+      "consoleGroup": "advanced",
       "type": "string",
       "format": "date",
       "title": "Conversion Window End Date",
@@ -68,6 +80,9 @@
       "packageDefault": ""
     },
     "snowplow__conversion_window_days": {
+      "recommendFullRefresh": true,
+      "order": 78,
+      "consoleGroup": "advanced",
       "type": "number",
       "minimum": 0,
       "title": "Conversion Window Days",
@@ -76,6 +91,9 @@
       "packageDefault": "30"
     },
     "snowplow__path_lookback_days": {
+      "recommendFullRefresh": true,
+      "order": 18,
+      "consoleGroup": "basic",
       "type": "number",
       "minimum": 0,
       "title": "Path Lookback Days",
@@ -84,6 +102,9 @@
       "packageDefault": "30"
     },
     "snowplow__path_lookback_steps": {
+      "recommendFullRefresh": true,
+      "order": 19,
+      "consoleGroup": "basic",
       "type": "number",
       "minimum": 0,
       "title": "Path Lookback Steps",
@@ -92,6 +113,9 @@
       "packageDefault": "0 (unlimited)"
     },
     "snowplow__path_transforms": {
+      "recommendFullRefresh": false,
+      "order": 116,
+      "consoleGroup": "advanced",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -166,6 +190,9 @@
       "uniqueItems": true
     },
     "snowplow__channels_to_exclude": {
+      "recommendFullRefresh": true,
+      "order": 68,
+      "consoleGroup": "advanced",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -178,6 +205,9 @@
       }
     },
     "snowplow__channels_to_include": {
+      "recommendFullRefresh": true,
+      "order": 69,
+      "consoleGroup": "advanced",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -190,6 +220,9 @@
       }
     },
     "snowplow__campaigns_to_exclude": {
+      "recommendFullRefresh": true,
+      "order": 64,
+      "consoleGroup": "advanced",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -202,6 +235,9 @@
       }
     },
     "snowplow__campaigns_to_include": {
+      "recommendFullRefresh": true,
+      "order": 65,
+      "consoleGroup": "advanced",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -214,6 +250,9 @@
       }
     },
     "snowplow__conversion_hosts": {
+      "recommendFullRefresh": true,
+      "order": 74,
+      "consoleGroup": "advanced",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
@@ -226,6 +265,9 @@
       }
     },
     "snowplow__consider_intrasession_channels": {
+      "recommendFullRefresh": true,
+      "order": 72,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "If `false`, only considers the channel at the start of the session (i.e. first page view). If `true`, considers multiple channels in the conversion session as well as historically.",
@@ -233,6 +275,9 @@
       "title": "Consider Intrasession Channels"
     },
     "snowplow__spend_source": {
+      "recommendFullRefresh": true,
+      "order": 124,
+      "consoleGroup": "advanced",
       "title": "Conversions Source",
       "description": "Source of marketing spend table",
       "longDescription": "The source (schema and table) of your marketing spend source. Optional, needed for the ROAS calculation of the snowplow_attribution_overview. Should be changed to a table reference with `spend` by `channel` and/or `campaign` by `spend_tstamp` (which denotes a timestamp field) information.",
@@ -241,6 +286,9 @@
       "group": "Warehouse and Tracker"
     },
     "snowplow__conversion_stitching": {
+      "recommendFullRefresh": true,
+      "order": 77,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "This should align with the variable of the same name inside the unified package. If allowed it will consider the stitched_user_id field, not the user_identifier in the source data for more accurate results.",
@@ -248,6 +296,9 @@
       "title": "Conversion Stitching"
     },
     "snowplow__conversion_clause": {
+      "recommendFullRefresh": true,
+      "order": 73,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Conversions Clause",
       "group": "Operation and Logic",
@@ -255,6 +306,9 @@
       "packageDefault": "cv_value > 0"
     },
     "snowplow__attribution_list": {
+      "recommendFullRefresh": false,
+      "order": 61,
+      "consoleGroup": "advanced",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 1,
@@ -267,6 +321,9 @@
       }
     },
     "snowplow__attribution_start_date": {
+      "recommendFullRefresh": true,
+      "order": 7,
+      "consoleGroup": "basic",
       "type": "string",
       "format": "date",
       "title": "Attribution Start Date",
@@ -276,6 +333,9 @@
       "description": "The date to start processing events from in the package on first run or a full refresh, based on `cv_tstamp`"
     },
     "snowplow__enable_paths_to_non_conversion": {
+      "recommendFullRefresh": false,
+      "order": 101,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "If `true`, enable the paths_to_non_conversion model, which is a drop and recompute table that may be needed for more in-depth attribution analysis (used in the `path_summary` table as well)",
@@ -283,6 +343,9 @@
       "title": "Enable Paths To Non Conversion"
     },
     "snowplow__dev_target_name": {
+      "recommendFullRefresh": false,
+      "order": 87,
+      "consoleGroup": "advanced",
       "type": "string",
       "title": "Dev Target",
       "description": "Target name of your development environment as defined in your `profiles.yml` file",

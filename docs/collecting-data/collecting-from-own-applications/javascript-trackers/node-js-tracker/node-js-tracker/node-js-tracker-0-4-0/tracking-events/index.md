@@ -12,11 +12,11 @@ Tracking methods supported by the Node.js Tracker at a glance:
 
 | **Function** | **Description** |
 | --- | --- |
-| [`trackScreenView()`](#screen-view) | Track the user viewing a screen within the application |
-| [`trackPageView()`](#page-view) | Track and record views of web pages. |
-| [`trackEcommerceTransactionWithItems()`](#ecommerce-transaction) | Track an ecommerce transaction with items |
-| [`trackStructEvent()`](#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event |
+| [`trackScreenView()`](#track-screen-views-withtrackscreenview) | Track the user viewing a screen within the application |
+| [`trackPageView()`](#track-pageviews-withtrackpageview) | Track and record views of web pages. |
+| [`trackEcommerceTransactionWithItems()`](#track-ecommerce-transactions-withtrackecommercetransactionwithitems) | Track an ecommerce transaction with items |
+| [`trackStructEvent()`](#track-structured-events-with-trackstructevent) | Track a Snowplow custom structured event |
+| [`trackUnstructEvent()`](#track-unstructured-events-withtrackunstructevent) | Track a Snowplow custom unstructured event |
 
 Details of other tracking methods are available in the documentation for the [tracker core](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/node-js-tracker/node-js-tracker/javascript-tracker-core/index.md).
 

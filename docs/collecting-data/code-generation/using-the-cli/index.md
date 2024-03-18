@@ -8,26 +8,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-## Working with the Snowtype CLI
+## Snowtype CLI
 
 The Snowtype CLI is a tool which aims to speed up tracking implementations, provide type safety and inline documentation for developers and ultimately reduce the number of erroneous events. By integrating this tool in the development workflow we introduce a way to connect the additions and updates done in a Snowplow implementation with the corresponding tracking code of the project.
-
-## Initializing Snowtype for your project
-
-For the Snowtype CLI to work properly, it requires a [configuration file](../snowtype-config/index.md) to be initialized and present on your project's root folder. This file will be automatically generated using the `snowtype init` command, after adding the required input.
-
-```bash
-# Start prompting for configuration inputs
-npx snowtype init
-```
-
-The input required for the initialization to work, it the following:
-- The organization ID from the BDP console.
-- The [tracker](./index.md#available-trackerslanguages) you wish to generate code for.
--  _If applicable,_ the language for that tracker.
-- The output path you wish the CLI to generate the code to.
-
-These will all be prompted to you by default, but if needed you can call the `snowtype init` command with any or all the attributes passed as [optional flags](../commands/index.md#snowtype-init) so prompting is not required.
 
 ## Authenticating with the Console
 
@@ -61,6 +44,24 @@ From there, the ways for the CLI to recognize the key are either through the glo
 </Tabs>
 
 **Recommended:** We recommend that you use the `SNOWPLOW_CONSOLE_API_KEY` environment variable.
+
+## Initializing Snowtype for your project
+
+For the Snowtype CLI to work properly, it requires a [configuration file](../snowtype-config/index.md) to be initialized and present on your project's root folder. This file will be automatically generated using the `snowtype init` command, after adding the required input.
+
+```bash
+# Start prompting for configuration inputs
+npx snowtype init
+```
+
+The input required for the initialization to work, it the following:
+- The organization ID from the BDP console.
+- The [tracker](./index.md#available-trackerslanguages) you wish to generate code for.
+-  _If applicable,_ the language for that tracker.
+- The output path you wish the CLI to generate the code to.
+
+These will all be prompted to you by default, but if needed you can call the `snowtype init` command with any or all the attributes passed as [optional flags](../commands/index.md#snowtype-init) so prompting is not required.
+
 
 ## Generate tracking code
 

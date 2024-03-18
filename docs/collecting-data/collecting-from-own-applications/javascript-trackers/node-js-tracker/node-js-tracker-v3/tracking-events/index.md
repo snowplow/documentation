@@ -12,11 +12,11 @@ Tracking methods supported by the Node.js Tracker at a glance:
 
 | **Function** | **Description** |
 | --- | --- |
-| [`track()`](#track-event) | Tracks an event generated from a build functions |
-| [`buildScreenView()`](#screen-view) | Track the user viewing a screen within the application |
-| [`buildPageView()`](#page-view) | Track and record views of web pages. |
-| [`buildSelfDescribingEvent()`](#self-describing-event) | Track a Snowplow custom self describing event |
-| [`buildStructEvent()`](#struct-event) | Track a Snowplow custom structured event |
+| [`track()`](#track-events-with-the-track-function) | Tracks an event generated from a build functions |
+| [`buildScreenView()`](#track-screen-views-withbuildscreenview) | Track the user viewing a screen within the application |
+| [`buildPageView()`](#track-pageviews-withbuildpageview) | Track and record views of web pages. |
+| [`buildSelfDescribingEvent()`](#track-self-describing-events-withbuildselfdescribingevent) | Track a Snowplow custom self describing event |
+| [`buildStructEvent()`](#track-structured-events-with-buildstructevent) | Track a Snowplow custom structured event |
 
 ### Track events with the track() function
 
@@ -42,7 +42,7 @@ t.track(buildPageView({
   pageUrl: 'http://www.example.com', 
   referrer: 'http://www.referer.com'
 }),
-[ // Array of custom contexts ]);
+[]); // Array of custom contexts
 ```
 
 The `context` argument should consist of an array of zero or more context objects. Each object should be a self-describing JSON following the same pattern as an self describing event.

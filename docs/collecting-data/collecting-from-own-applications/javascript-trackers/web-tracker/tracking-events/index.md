@@ -46,7 +46,8 @@ For example, instrumenting a tracker and manually tracking a [page view](/docs/c
 ```javascript
 import {
   newTracker,
-  trackPageView
+  trackPageView,
+  enableActivityTracking
 } from '@snowplow/browser-tracker';
 
 newTracker('sp', '{{collector_url_here}}', {

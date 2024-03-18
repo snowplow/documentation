@@ -13,7 +13,7 @@ As a Snowplow user, you have the access to a wide selection of event types and a
 | [`track_form_change()`](#track-form-change) | Track form changes |
 | [`track_form_submit()`](#track-submitted-forms) | Track that a form was submitted |
 | [`track_site_search()`](#track-site-searches) | Track when a user searches your site |
-| [`track_screen_view()`](#track-screen-view) | Track screen views (non-web e.g. in-app) |
+| [`track_screen_view()`](#track-mobile-screen-view) | Track screen views (non-web e.g. in-app) |
 | [`track_mobile_screen_view()`](#track-mobile-screen-view) | Track mobile screen views |
 | [`track_ecommerce_transaction()`](#track-ecommerce-transactions) | Track ecommerce transaction |
 | [`track_ecommerce_transaction_item()`](#track-ecommerce-transaction-items) | Track an item of an ecommerce transaction |
@@ -161,8 +161,12 @@ All tracker methods will return the tracker instance, allowing tracker methods t
 e = AsyncEmitter("d3rkrsqld9gmqf.cloudfront.net")
 t = Tracker(e)
 
-t.track_page_view("http://www.example.com").track_screen_view("title screen")x
+t.track_page_view("http://www.example.com").track_screen_view("title screen")
 ```
+
+:::note
+Since v0.13.0 we recommend using `track_mobile_screen_view()` instead of the deprecated `track_screen_view()` method.
+:::
 
 ### Track self-describing event
 
@@ -243,7 +247,7 @@ Example:
 tracker.track_page_ping("http://mytesturl/test2", "Page title 2", "http://myreferrer.com", 0, 100, 0, 500, None)
 ```
 
-### Track screen view
+### Track mobile screen view
 
 Use `track_mobile_screen_view()` to track a user viewing a screen (or equivalent) within your app.
 

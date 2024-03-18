@@ -42,7 +42,7 @@ t.track(buildPageView({
   pageUrl: 'http://www.example.com', 
   referrer: 'http://www.referer.com'
 }),
-[ // Array of custom contexts ]);
+[]); // Array of custom contexts
 ```
 
 The `context` argument should consist of an array of zero or more context objects. Each object should be a self-describing JSON following the same pattern as an self describing event.

@@ -18,7 +18,11 @@ The configuration reference pages for previous versions can be found [here](/doc
 
 All applications use a common module for core functionality, so only the `storage` sections are different in their config.
 
-This is a complete list of the options that can be configured:
+```mdx-code-block
+import License from "@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/reusable/license/_index.mdx"
+
+<License/>
+```
 
 ## Redshift Loader `storage` section
 

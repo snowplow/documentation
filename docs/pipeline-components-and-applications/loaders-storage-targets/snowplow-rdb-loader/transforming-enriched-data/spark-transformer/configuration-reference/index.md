@@ -12,6 +12,11 @@ import {versions} from '@site/src/componentVersions';
 
 An example of the minimal required config for the Spark transformer can be found [here](https://github.com/snowplow/snowplow-rdb-loader/tree/master/config/transformer/aws/transformer.batch.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/tree/master/config/transformer/aws/transformer.batch.config.reference.hocon).
 
+```mdx-code-block
+import License from "@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/reusable/license/_index.mdx"
+
+<License/>
+```
 
 ```mdx-code-block
 import BatchOnly from "@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/reusable/batch-only/_index.mdx"

@@ -60,7 +60,7 @@ You will need to copy a configuration across environments when:
 
 ![](images/DisableEnrichment.gif)
 
-In the modal that appears, select which environments you wish to copy to and click _Deploy configuration._
+In the dialog that appears, select which environments you wish to copy to and click _Deploy configuration._
 
 Important!
 

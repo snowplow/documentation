@@ -75,7 +75,7 @@ Once located, either click on the name to view the Data Structure and then click
 
 ![](images/image-8.png)
 
-At this stage you will see the publish modal dialog, and depending on how you versioned your edits you will see one of two messages:
+At this stage you will see the publish dialog, and depending on how you versioned your edits you will see one of two messages:
 
 If you are **publishing a new schema,** or **have incremented** the version whilst editing then you will see a confirmation of the action. Click '**Migrate to Production**' to promote the data structure.
 
@@ -97,7 +97,7 @@ Navigate to **Data Structures** and locate the Data Structure you wish to hide. 
 
 Once located either click on the name to view the Data Structure and then click the '**Hide**' button, or click the three dots to bring up the action menu where you can select **'**Hide Data Structure****'.
 
-Follow the modal instructions to confirm the action.
+Follow the dialog instructions to confirm the action.
 
 :::note
 

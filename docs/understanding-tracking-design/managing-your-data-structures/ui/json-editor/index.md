@@ -23,7 +23,7 @@ You can now write the first version of your JSON schema for this Data Structure.
 
 Once you are done, click the **'Validate'** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation the 'Publish' button will activate.
 
-Click **'Publish to development environment'** to publish your Data Structure to your development environment. As this is the first version of your data structure it will be created as version `1-0-0`. Click publish again on the modal dialog to confirm the action.
+Click **'Publish to development environment'** to publish your Data Structure to your development environment. As this is the first version of your data structure it will be created as version `1-0-0`. Click publish again on the dialog to confirm the action.
 
 Your new Data Structure will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-and-qa-workflows/index.md).
 
@@ -40,7 +40,7 @@ Once you are happy with your changes, click **'Validate'** to ensure you have va
 
 ![](images/image-7.png)
 
-The versioning modal dialog will appear, at this point you have three options:
+The versioning dialog will appear, at this point you have three options:
 
 - Increment a minor version to indicate a non-breaking change to the schema. In our example, this would increment the schema to from `1-0-1` to `1-0-2`.
 - Increment a major version to indicate a breaking change to the schema. In our example, this would increment the schema from `1-0-1` to `2-0-0`.

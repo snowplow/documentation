@@ -8,11 +8,11 @@ Tracking methods supported by the PHP Tracker:
 
 | **Function** | **Description** |
 | --- | --- |
-| [`trackPageView`](#page-view) | Track and record views of web pages. |
-| [`trackEcommerceTransaction`](#ecommerce-transaction) | Track an ecommerce transaction |
-| [`trackScreenView`](#screen-view) | Track the user viewing a screen within the application |
-| [`trackStructEvent`](#struct-event) | Track a Snowplow custom structured event |
-| [`trackUnstructEvent`](#unstruct-event) | Track a Snowplow custom unstructured event |
+| [`trackPageView`](#trackpageview) | Track and record views of web pages. |
+| [`trackEcommerceTransaction`](#trackecommercetransaction) | Track an ecommerce transaction |
+| [`trackScreenView`](#trackscreenview) | Track the user viewing a screen within the application |
+| [`trackStructEvent`](#trackstructevent) | Track a Snowplow custom structured event |
+| [`trackUnstructEvent`](#trackunstructevent) | Track a Snowplow custom unstructured event |
 
 ### Optional Tracking Arguments
 

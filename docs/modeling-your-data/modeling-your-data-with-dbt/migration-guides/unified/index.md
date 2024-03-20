@@ -15,9 +15,9 @@ If you make use of the `conversion` module, and don't wish to do a full refresh,
 <TabItem value="redshift" label="Redshift" default>
 
 ```sql
-ALTER TABLE your_schema_derived.snowplow_unified_conversions add column conversion_id TEXT;
+ALTER TABLE your_schema_derived.snowplow_unified_conversions add column cv_id TEXT;
 
-UPDATE your_schema_derived.snowplow_unified_conversions set conversion_id = md5(cast(coalesce(cast(event_id as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as TEXT), '_dbt_utils_surrogate_key_null_') as TEXT))
+UPDATE your_schema_derived.snowplow_unified_conversions set cv_id = md5(cast(coalesce(cast(event_id as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as TEXT), '_dbt_utils_surrogate_key_null_') as TEXT))
 where 1=1;
 ```
 
@@ -25,9 +25,9 @@ where 1=1;
 <TabItem value="snowflake" label="Snowflake">
 
 ```sql
-ALTER TABLE your_schema_derived.snowplow_unified_conversions add column conversion_id TEXT;
+ALTER TABLE your_schema_derived.snowplow_unified_conversions add column cv_id TEXT;
 
-UPDATE your_schema_derived.snowplow_unified_conversions set conversion_id = md5(cast(coalesce(cast(event_id as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as TEXT), '_dbt_utils_surrogate_key_null_') as TEXT))
+UPDATE your_schema_derived.snowplow_unified_conversions set cv_id = md5(cast(coalesce(cast(event_id as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as TEXT), '_dbt_utils_surrogate_key_null_') as TEXT))
 where 1=1;
 ```
 
@@ -35,9 +35,9 @@ where 1=1;
 <TabItem value="bigquery" label="BigQuery">
 
 ```sql
-ALTER TABLE your_schema_derived.snowplow_unified_conversions add column conversion_id string;
+ALTER TABLE your_schema_derived.snowplow_unified_conversions add column cv_id string;
 
-UPDATE your_schema_derived.snowplow_unified_conversions set conversion_id = to_hex(md5(cast(coalesce(cast(event_id as string), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as string), '_dbt_utils_surrogate_key_null_') as string)))
+UPDATE your_schema_derived.snowplow_unified_conversions set cv_id = to_hex(md5(cast(coalesce(cast(event_id as string), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as string), '_dbt_utils_surrogate_key_null_') as string)))
 where 1=1;
 ```
 
@@ -45,9 +45,9 @@ where 1=1;
 <TabItem value="databricks" label="Databricks">
 
 ```sql
-ALTER TABLE your_schema_derived.snowplow_unified_conversions add column conversion_id string;
+ALTER TABLE your_schema_derived.snowplow_unified_conversions add column cv_id string;
 
-UPDATE your_schema_derived.snowplow_unified_conversions set conversion_id = md5(cast(coalesce(cast(event_id as string), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as string), '_dbt_utils_surrogate_key_null_') as string))
+UPDATE your_schema_derived.snowplow_unified_conversions set cv_id = md5(cast(coalesce(cast(event_id as string), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as string), '_dbt_utils_surrogate_key_null_') as string))
 where 1=1;
 ```
 

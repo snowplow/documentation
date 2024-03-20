@@ -1,3 +1,7 @@
+```mdx-code-block
+import Link from '@docusaurus/Link';
+```
+
 <tr>
     <td><code>output.good.type</code></td>
     <td>Required, set this to <code>Iceberg</code></td>
@@ -22,6 +26,6 @@
     <td><code>output.good.catalog.options.*</code></td>
     <td>
     Optional. A map of key/value strings which are passed to the catalog configuration.
-    These can be anything <a href="https://iceberg.apache.org/docs/latest/aws/" target="_blank">from the Iceberg catalog documentation</a> e.g. <code>"glue.id": "1234567"</code>
+    These can be anything <Link to="https://iceberg.apache.org/docs/latest/aws/">from the Iceberg catalog documentation</Link> e.g. <code>"glue.id": "1234567"</code>
     </td>
 </tr>

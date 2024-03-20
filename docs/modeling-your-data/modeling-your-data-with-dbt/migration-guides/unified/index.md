@@ -7,6 +7,54 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+### Upgrading to 0.4.0
+
+If you make use of the `conversion` module, and don't wish to do a full refresh, you will need to add the new column and update the existing records with the correct values for the model to run successfully incrementally.
+
+<Tabs groupId="warehouse" queryString>
+<TabItem value="redshift" label="Redshift" default>
+
+```sql
+ALTER TABLE your_schema_derived.snowplow_unified_conversions add column conversion_id TEXT;
+
+UPDATE your_schema_derived.snowplow_unified_conversions set conversion_id = md5(cast(coalesce(cast(event_id as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as TEXT), '_dbt_utils_surrogate_key_null_') as TEXT))
+where 1=1;
+```
+
+</TabItem>
+<TabItem value="snowflake" label="Snowflake">
+
+```sql
+ALTER TABLE your_schema_derived.snowplow_unified_conversions add column conversion_id TEXT;
+
+UPDATE your_schema_derived.snowplow_unified_conversions set conversion_id = md5(cast(coalesce(cast(event_id as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as TEXT), '_dbt_utils_surrogate_key_null_') as TEXT))
+where 1=1;
+```
+
+</TabItem>
+<TabItem value="bigquery" label="BigQuery">
+
+```sql
+ALTER TABLE your_schema_derived.snowplow_unified_conversions add column conversion_id string;
+
+UPDATE your_schema_derived.snowplow_unified_conversions set conversion_id = to_hex(md5(cast(coalesce(cast(event_id as string), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as string), '_dbt_utils_surrogate_key_null_') as string)))
+where 1=1;
+```
+
+</TabItem>
+<TabItem value="databricks" label="Databricks">
+
+```sql
+ALTER TABLE your_schema_derived.snowplow_unified_conversions add column conversion_id string;
+
+UPDATE your_schema_derived.snowplow_unified_conversions set conversion_id = md5(cast(coalesce(cast(event_id as string), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(cv_type as string), '_dbt_utils_surrogate_key_null_') as string))
+where 1=1;
+```
+
+</TabItem>
+</Tabs>
+
+
 ### Upgrading to 0.3.0
 
 - `snowplow__page_view_passthroughs` has been renamed to `snowplow__view_passthroughs`. Please rename this in your project yaml if you have set any.

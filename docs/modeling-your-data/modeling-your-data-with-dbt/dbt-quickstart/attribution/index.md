@@ -58,6 +58,14 @@ vars:
     snowplow__conversion_hosts: ['mysite.com']
     snowplow__path_transforms: {'exposure_path' : null}
 ```
+<details>
+    <summary>Decide on running optional reporting models</summary>
+
+By default the package creates a View used for BI reporting called `snowplow__enable_attribution_overview`. In case you would like to use the Attribution Modeling Data App, this is not required to be enabled as app will take care of querying this data for you directly.
+
+There is also a `snowplow__enable_paths_to_non_conversion` variable to produce a drop and recompute table for more advanced analysis which is disabled by default. The data app does not yet support recreating the same data, therefore, it needs to be enabled by setting the default variable to `true`.
+</details>
+
 
 ### 2. Configure macros
 
@@ -68,10 +76,45 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 
 <AttributionDbtMacros/>
 ```
-### 3. Run the model
+
+### 3. Good-to-know
+Please consider the below before running the package as it might help you save time in the long run.
+
+<details>
+    <summary>Configuring the spend_source</summary>
+
+To make setting up your attribution modeling package easier, we provided a `snowplow__spend_source` variable which you can use to directly reference a table or view where you store information about your marketing spends. We suggest you just create a view on top of your existing table, making sure you have the following fields in place:
+
+- a timestamp field called `spend_tstamp`
+- a varchar/text field callled `channel`
+- a varchar/text field callled `channel`
+- a numeric field called `spend`
+
+Your channel and spend data will be summed separately in the `attribution_overview` so it should not matter how you structure your data, it is fine to have channel twice for the same period even but do keep in mind that the model will not apply any deduplication.
+
+</details>
+
+<details>
+    <summary>Running both Unified and Attribution dbt packages from the same project</summary>
+Although auto-deployed packages managed via Console run in separate projects, for others there may be use cases when it is more practical to run both the Unified Digital and Attribution dbt packages from the same project. We purposefully did not directly link the two packages and this method of running is non-standard but there is a way to make it work. When specifying the sources just make sure you change the default source references to: ref('')  instead of hard coding the schema.table_name for these variables:
+
+```yml
+snowplow__conversion_path_source: "{{ ref(snowplow_unified_views') }}"
+snowplow__conversions_source: "{{ ref('snowplow_unified_conversions' }}"
+```
+
+Keep in mind that the manifest tables are still not linked, therefore both projects' statefulness is dictated by their own set of tables and values.
+</details>
+
+
+
+### 4. Run the model
 
 Execute the following either through your CLI, within dbt Cloud, or within [Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md)
 
 ```yml
 dbt run --select snowplow_attribution
 ```
+
+
+

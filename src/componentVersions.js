@@ -25,7 +25,7 @@ export const versions = {
   collector: '3.1.0',
   enrich: '4.1.0',
   sqs2kinesis: '1.0.4',
-  dataflowRunner: '0.7.4',
+  dataflowRunner: '0.7.5',
   snowbridge: '2.2.2',
 
   // Loaders

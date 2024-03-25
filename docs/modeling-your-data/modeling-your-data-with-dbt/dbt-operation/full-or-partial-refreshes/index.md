@@ -5,6 +5,8 @@ sidebar_position: 20
 
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 ```
 
 ## Complete refresh of Snowplow package
@@ -15,12 +17,26 @@ Without dropping the manifest during a full refresh, the selected derived increm
 
 In order to drop all the manifest tables and start again set the `snowplow__allow_refresh` var to `true` at run time:
 
+<Tabs groupId="refresh" queryString>
+<TabItem value="Other packages" label="Other packages">
 
 ```bash
 dbt run --select snowplow_<package_name> tag:snowplow_<package>_incremental --full-refresh --vars 'snowplow__allow_refresh: true'
 # or using selector flag
 dbt run --selector snowplow_<package_name> --full-refresh --vars 'snowplow__allow_refresh: true'
 ```
+
+</TabItem>
+
+<TabItem value="Attribution" label="Attribution">
+
+```bash
+dbt run --full-refresh --vars 'snowplow__allow_refresh: true'
+```
+
+</TabItem>
+</Tabs>
+
 
 When doing a full refresh of the package, it will begin again from your `snowplow__start_date` and backfill based on the calculations explained in the [Incremental Sessionization Logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) page. Please ensure you trigger enough runs to catch back up with live data, or adjust your variables for these runs accordingly (see our page on [backfilling](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/index.md) for more information).
 

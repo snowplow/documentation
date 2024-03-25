@@ -301,6 +301,10 @@ article.community > a > p::before {
   margin-right: 0.3em;
 }
 
+li.hidden, article.hidden {
+  display: none;
+}
+
 li.bdp > div > a::before,
 li.bdp > a::before,
 article.bdp > a > p::before {

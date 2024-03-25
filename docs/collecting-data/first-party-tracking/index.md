@@ -1,12 +1,15 @@
 ---
 title: "First-party tracking"
 sidebar_position: 40
-custom_sidebar_props:
+sidebar_custom_props:
   offerings:
-    - bdp # actually BDP Cloud Starter, but we ignore that for the sake of simplicity
+    - bdp
+  # hide from sidebar and external search until these instructions apply more universally
+  hidden: true
 ---
 
 # First-party tracking
+
 This feature lets you configure a custom collector domain to match your primary domain, enabling first-party cookies.
 
 When your collector domain (e.g. `collector.snwplow.net`) does not match your primary domain (e.g. `flowershop.ai`), web browsers can impose limitations on the collected data. For example, cookies set by the collector might be only kept for 7 days.
@@ -16,10 +19,19 @@ With first-party tracking, you can configure a custom collector domain (e.g. `c.
 Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use an ID service](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md#itp-mitigation) to fully persist the cookies.
 
 :::info
+
 Before starting, ensure you can access and edit the configuration of your hosting/DNS provider. This is necessary to complete the implementation.
+
+:::
+
+:::info
+
+The flow described below might differ depending on the version of Snowplow BDP you are using.
+
 :::
 
 ## Selecting the domain names
+
 When configuring first-party tracking, you first need to set a collector domain where the events will be sent to by the web browser. This must be a subdomain of your primary domain. For example, for `flowershop.ai` it could be `t.flowershop.ai` or `c.app.flowershop.ai`.
 
 :::tip

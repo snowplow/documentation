@@ -4,7 +4,7 @@ sidebar_position: 112
 sidebar_label: "🆕 Data Applications"
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 Data applications are self-service analytics tools, deployed in your cloud, that help customers extract value from their data quickly by providing templated use-cases for data collection, modeling, and activation. They aim to reduce the technical barrier, making data analysis more accessible beyond just SQL users.
@@ -19,9 +19,9 @@ import DocCardList from '@theme/DocCardList';
 
 ## Accessing the Applications
 
-You can find the Data Applications in the `Applications` tab in the left sidebar of your Snowplow Console. If the status is not `Live`, you can click on the tile and request access. A Snowplow Customer Success Manager will then get in contact with you to discuss the Snowplow Digital Analytics package. 
+You can find the Data Applications in the `Applications` tab in the left sidebar of your Snowplow Console. If the status is not `Live`, you can click on the tile and request access. A Snowplow Customer Success Manager will then get in contact with you to discuss the Snowplow Digital Analytics package.
 
-Once the application is installed, clicking on the tile will launch the application in a separate browser tab. By default, anyone in your Console organization will be able to access data applications. 
+Once the application is installed, clicking on the tile will launch the application in a separate browser tab. By default, anyone in your Console organization will be able to access data applications.
 
 If you wish to invite others to use data applications but not have access to the rest of Console, you can [create a new user](/docs/using-the-snowplow-console/managing-users/adding-removing/index.md) and add a user with the `Data applications user` role. That user will then only see the Data Applications tab within Console. This permissions can be managed in the [usual way](/docs/using-the-snowplow-console/managing-users/managing-permissions/index.md).
 
@@ -41,7 +41,7 @@ Many of our apps support the exporting of the SQL used to generate the charts. I
 
 :::info
 
-Note that some data is processed further after the query to get in the format required for plotting, which may include actions such as filtering, pivoting, etc.  
+Note that some data is processed further after the query to get in the format required for plotting, which may include actions such as filtering, pivoting, etc.
 
 :::
 

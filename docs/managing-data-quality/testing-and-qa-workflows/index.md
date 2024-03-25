@@ -10,7 +10,7 @@ There are a number of ways you can test and QA your pipeline to follow good data
 
 When implementing new tracking, or when making changes to your schemas or enrichments, we recommend you run testing by sending events to a sandbox environment before deploying your changes to Production environments.
 
-### For Snowplow BDP Enterprise Customers
+### For Snowplow BDP Customers
 
 1. Find the sandbox endpoint in Snowplow Console - this is accessible on the _Environments_ screen, as well as in the _'Testing details'_ dialog box on _Data Structures_ and _Enrichments_ screens.
 2. Send a few events from your application to the sandbox endpoint.

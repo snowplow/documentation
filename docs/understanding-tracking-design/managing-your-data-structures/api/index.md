@@ -4,7 +4,7 @@ sidebar_label: "Using the API"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 As well as managing [data structures](/docs/understanding-your-pipeline/schemas/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through the data structures API.
@@ -75,7 +75,7 @@ See the [detailed API documentation](https://console.snowplowanalytics.com/api/m
 
 To use the commands to retrieve information about a specific Data Structure, you need to encode its identifying parameters (`organization ID`, `vendor`, `name` and `format`) and hash it with SHA-256.
 
-**Example:**  
+**Example:**
 
 | Parameter | Value |
 |-----------|-------|
@@ -84,7 +84,7 @@ To use the commands to retrieve information about a specific Data Structure, you
 | Schema name | `search` |
 | Format | `jsonschema` |
 
-First concatenate the information with a dash (-) as the separator:  
+First concatenate the information with a dash (-) as the separator:
 `38e97db9-f3cb-404d-8250-cd227506e544-com.acme.event-search-jsonschema`
 
 And then hash them with SHA-256 to receive: `a41ef92847476c1caaf5342c893b51089a596d8ecd28a54d3f22d922422a6700`

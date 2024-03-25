@@ -28,7 +28,7 @@ When in doubt, feel free to start a thread on [Discourse](https://discourse.snow
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to deal with upgrading your pipeline, as we perform upgrades for you.
+If you are using Snowplow BDP, you don’t need to deal with upgrading your pipeline, as we perform upgrades for you.
 
 :::
 
@@ -46,7 +46,7 @@ We still keep the [documentation for legacy applications](/docs/pipeline-compone
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install any of the core pipeline components yourself. We deploy your pipeline and keep it up to date.
+If you are using Snowplow BDP, you don’t need to install any of the core pipeline components yourself. We deploy your pipeline and keep it up to date.
 
 :::
 
@@ -106,7 +106,7 @@ Component | Latest version
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/understanding-tracking-design/managing-your-data-structures/index.md).
+If you are using Snowplow BDP, you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/understanding-tracking-design/managing-your-data-structures/index.md).
 
 :::
 
@@ -183,7 +183,7 @@ import ModelVersionsSqlRunner from '@site/docs/modeling-your-data/modeling-your-
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install Snowplow Mini yourself. We (optionally) deploy it and keep it up to date for you.
+If you are using Snowplow BDP, you don’t need to install Snowplow Mini yourself. We (optionally) deploy it and keep it up to date for you.
 
 :::
 

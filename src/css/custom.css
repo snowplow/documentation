@@ -284,10 +284,8 @@ table h3 {
   line-height: 20px;
 }
 
-li.enterprise > div > a::before,
-li.enterprise > a::before,
-li.cloud > div > a::before,
-li.cloud > a::before,
+li.bdp > div > a::before,
+li.bdp > a::before,
 li.community > div > a::before,
 li.community > a::before {
   display: inline-block;
@@ -296,33 +294,17 @@ li.community > a::before {
   text-wrap: nowrap;
 }
 
-article.enterprise > a > p::before,
-article.cloud > a > p::before,
+article.bdp > a > p::before,
 article.community > a > p::before {
   display: inline-block;
   vertical-align: bottom;
   margin-right: 0.3em;
 }
 
-li.enterprise > div > a::before,
-li.enterprise > a::before,
-article.enterprise > a > p::before {
+li.bdp > div > a::before,
+li.bdp > a::before,
+article.bdp > a > p::before {
   content: '🏭';
-}
-li.cloud > div > a::before,
-li.cloud > a::before,
-article.cloud > a > p::before {
-  content: '☁️';
-}
-li.enterprise.cloud > div > a::before,
-li.enterprise.cloud > a::before,
-article.enterprise.cloud > a > p::before {
-  content: '🏭 ☁️';
-}
-li.enterprise.community > div > a::before,
-li.enterprise.community > a::before,
-article.enterprise.community > a > p::before {
-  content: '🏭 🛠️';
 }
 li.community > div > a::before,
 li.community > a::before,
@@ -333,8 +315,7 @@ article.community > a > p::before {
 a.menu__link, a.card {
   position: relative;
 }
-.enterprise a:hover::after,
-.cloud a:hover::after,
+.bdp a:hover::after,
 .community a:hover::after {
   position: absolute;
   left: 0;
@@ -355,18 +336,8 @@ a.card:hover::after {
   left: 2rem;
   bottom: auto;
 }
-.enterprise a:hover::after,
-.cloud .enterprise:not(.cloud) a:hover::after {
-  content: '🏭: For Snowplow BDP Enterprise customers';
-}
-.cloud a:hover::after {
-  content: '☁️: For Snowplow BDP Cloud customers';
-}
-.enterprise.cloud a:hover::after {
-  content: '🏭 ☁️: For Snowplow BDP customers';
-}
-.enterprise.community a:hover::after {
-  content: '🏭 🛠️: Not available to BDP Cloud customers';
+.bdp a:hover::after {
+  content: '🏭: For Snowplow BDP customers';
 }
 .community a:hover::after {
   content: '🛠️: For Snowplow Community Edition users';

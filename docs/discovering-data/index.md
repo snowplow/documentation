@@ -5,7 +5,7 @@ sidebar_position: 111
 sidebar_label: "Discovering data"
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 ```mdx-code-block

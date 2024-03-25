@@ -5,7 +5,7 @@ sidebar_label: "Using the UI or API"
 sidebar_position: 10
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 Having already set up [collectors in your pipeline](/docs/understanding-your-pipeline/architecture-overview/index.md) and trackers [to submit events](/docs/collecting-data/index.md) to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
@@ -44,14 +44,14 @@ Once you have these you can exchange credentials for a token.
 Here is an example CURL to use to fetch the token:
 
 ```bash
-curl --request POST \ 
-  --url 'https://id.snowplowanalytics.com/oauth/token' \ 
-  --header 'content-type: application/x-www-form-urlencoded' \ 
-  --data grant_type=password \ 
-  --data username=USER@DOMAIN.COM \ 
-  --data password='PASSWORD' \ 
-  --data audience=https://snowplowanalytics.com/api/ \ 
-  --data client_id='YOUR_CLIENT_ID' \ 
+curl --request POST \
+  --url 'https://id.snowplowanalytics.com/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=password \
+  --data username=USER@DOMAIN.COM \
+  --data password='PASSWORD' \
+  --data audience=https://snowplowanalytics.com/api/ \
+  --data client_id='YOUR_CLIENT_ID' \
   --data client_secret='YOUR_CLIENT_SECRET'
 ```
 
@@ -88,29 +88,29 @@ The Pipeline ID is the second UUID in the location bar.
 Invoking this API will return an object of the following form:
 
 ```json
-{ 
-    "cookieDomains": 
-    { 
-        "fallback": "mydomain.com", 
-        "domains": [] 
-    }, 
-    "paths": { 
-        "post": { 
-            "paths": [] 
-        }, 
-        "webhook": { 
-            "paths": [] 
-        }, 
-        "redirect": { 
-            "paths": [], 
-            "enabled": true 
-        } 
-    }, 
-    "cookieAttributes": { 
-        "secure": true, 
-        "sameSite": "None", 
-        "httpOnly": false 
-    }, 
+{
+    "cookieDomains":
+    {
+        "fallback": "mydomain.com",
+        "domains": []
+    },
+    "paths": {
+        "post": {
+            "paths": []
+        },
+        "webhook": {
+            "paths": []
+        },
+        "redirect": {
+            "paths": [],
+            "enabled": true
+        }
+    },
+    "cookieAttributes": {
+        "secure": true,
+        "sameSite": "None",
+        "httpOnly": false
+    },
     "blockUnencrypted": false
 }
 ```

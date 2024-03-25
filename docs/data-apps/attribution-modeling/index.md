@@ -50,7 +50,8 @@ Use this with caution, currently it uses the `snowplow_attribution_paths_to_non_
 2. After waiting for the update to take place you can revise if the auto-detected source tables are in line with your expectations, you can change them to any other existing tables you have in case they are not correct.
 3. Overwrite the attribution_manifest table. Most likely the schema name will have to be modified. Please keep the `schema_name.table_name` notation here. Make sure you press enter once modified.
 4. (Optional but recommended) Specify the Spend Source: this will most likely be a view you created on top of your table that holds your marketing spend data. The view should make sure you align the expected field names. It should have `campaign`, `channek`, `spend` and `spend_tstamp` for the analysis to work. Doing this will make sure you have return on advertising spend (ROAS) calculation in your overview. Make sure you press enter once modified.
-5. Once happy with all the imputs press Create View button. It will first run a validation against the data sources making sure it has all the fields it needs. After that it will run the queries that generate the data necessary to populate the dashboards. They will be saved as csv files that app will read from when selecting the View on the sidebar.
+
+Once happy with all the imputs press `Create View` button. It will first run a validation against the data sources making sure it has all the fields it needs. After that it will run the queries that generate the data necessary to populate the dashboards. They will be saved as csv files that app will read from when selecting the View on the sidebar.
 
 ### Defining a Custom Date Range (static) View
 Any other View that is not the Default will have to be given a name and will typically be used to generate a fixed dataset (e.g. Jan, Q1, 2023) to avoid having to recalculate the analysis for subsequent users.

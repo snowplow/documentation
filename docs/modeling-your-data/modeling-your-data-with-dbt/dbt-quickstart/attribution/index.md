@@ -61,7 +61,7 @@ vars:
 <details>
     <summary>Decide on running optional reporting models</summary>
 
-By default the package creates a View used for BI reporting called `snowplow__enable_attribution_overview`. In case you would like to use the [Attribution Modeling Data App](https://deploy-preview-817--snowplow-docs.netlify.app/docs/data-apps/attribution-modeling/), this is not required to be enabled as app will take care of querying this data for you directly.
+By default the package creates a View used for BI reporting called `snowplow__enable_attribution_overview`. In case you would like to use the Attribution Modeling Data App (coming soon!), this is not required to be enabled as app will take care of querying this data for you directly.
 
 There is also a `snowplow__enable_paths_to_non_conversion` variable to produce a drop and recompute table for more advanced analysis which is disabled by default. The data app does not yet support recreating the same data, therefore, it needs to be enabled by setting the default variable to `true`.
 </details>

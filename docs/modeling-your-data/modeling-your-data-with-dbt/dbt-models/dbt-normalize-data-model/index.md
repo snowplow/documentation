@@ -469,7 +469,7 @@ The config file is a JSON file which can be viewed by running the python script 
 
 An example configuration can be found in the `utils/example_normalize_config.json` file within the package.
 
-For [Snowplow BDP](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) customers you can use the [Tracking Catalog](/docs/discovering-data/tracking-catalog/index.md) to discover which events you are tracking and the contexts enabled for each event, however you will still need to get the schema urls from your Data Structures.
+In Snowplow BDP, you can use the [Tracking Catalog](/docs/discovering-data/tracking-catalog/index.md) to discover which events you are tracking and the contexts enabled for each event, however you will still need to get the schema urls from your Data Structures.
 
 :::tip
 You should keep your configuration file, and your resolver file if you have one, at your project level and not inside the the snowplow-normalize package to avoid them being overwritten/deleted when the package is updated.

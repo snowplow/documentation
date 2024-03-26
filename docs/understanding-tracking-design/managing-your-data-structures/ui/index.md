@@ -5,9 +5,7 @@ sidebar_label: "Using the UI"
 sidebar_position: 1
 sidebar_custom_props:
   offerings:
-    - enterprise
-    - cloud
-
+    - bdp
 ---
 
 ## Creating a new data structure
@@ -16,7 +14,7 @@ To create a new [Data Structure](/docs/understanding-your-pipeline/schemas/index
 
 ![](images/image-1.png)
 
-Enterprise customers can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) only supports the following types:
+You can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) only supports the following types:
 
 - string
 - enumerated list
@@ -24,7 +22,7 @@ Enterprise customers can select from two options: **Create using builder** or **
 - decimal
 - boolean
 
-For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](/docs/understanding-tracking-design/managing-your-data-structures/ui/json-editor/index.md). BDP Cloud accounts will be automatically directed to the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md).
+For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](/docs/understanding-tracking-design/managing-your-data-structures/ui/json-editor/index.md).
 
 
 ```mdx-code-block

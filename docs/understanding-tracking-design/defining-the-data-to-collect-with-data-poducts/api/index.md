@@ -4,7 +4,7 @@ sidebar_label: "Using the API"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 As well as managing [data products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through an API.

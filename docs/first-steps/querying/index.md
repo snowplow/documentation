@@ -17,7 +17,7 @@ Once you’ve tracked some events, you will want to look at them in your data wa
 <Tabs groupId="offering" queryString>
   <TabItem value="enterprise" label="BDP Enterprise" default>
 
-Use the connection details you provided when setting up BDP Enterprise.
+You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
 
   </TabItem>
   <TabItem value="cloud" label="BDP Cloud">

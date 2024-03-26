@@ -5,7 +5,7 @@ sidebar_label: "Using the Recovery Builder"
 sidebar_position: 0
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 ### What is the Recovery Builder?

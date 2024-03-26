@@ -4,8 +4,7 @@ sidebar_label: "🆕 Managing Event Specifications"
 sidebar_position: 95
 sidebar_custom_props:
   offerings:
-    - enterprise
-    - cloud
+    - bdp
 ---
 
 ```mdx-code-block

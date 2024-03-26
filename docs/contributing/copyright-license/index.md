@@ -72,7 +72,7 @@ All pipeline apps:
 * [Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) _(3.0.0+)_
 * [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) _(4.0.0+)_
 * [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) _(0.12.0+)_
-* [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) _(5.8.0+)_
+* [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) _(6.0.0+)_
 * [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md)
 * [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) _(2.0.0+)_
 * [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) _(0.2.0+)_

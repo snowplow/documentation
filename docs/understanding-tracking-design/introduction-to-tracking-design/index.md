@@ -19,7 +19,7 @@ This is where creating a **Tracking Plan** comes into play. It is a comprehensiv
 - Other relevant information.
 
 :::info
-Snowplow BDP Enterprise customers can create tracking plans directly in Snowplow instead of using an external document. See [Creating tracking plans](/docs/understanding-tracking-design/tracking-plans/index.md) for more information.
+Snowplow BDP customers can create tracking plans directly in Snowplow instead of using an external document. See [Creating tracking plans](/docs/understanding-tracking-design/tracking-plans/index.md) for more information.
 :::
 
 Snowplow also uses a **schema registry** to store the definition of these data structures.

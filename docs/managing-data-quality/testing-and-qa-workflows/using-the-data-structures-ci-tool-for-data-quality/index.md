@@ -4,7 +4,7 @@ date: "2020-06-01"
 sidebar_position: 2000
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 The Data Structures CI is a command-line tool which integrates Data Structures API into your CI/CD pipelines and currently has one task which verifies that all schema dependencies for a project are already deployed into a specified environment (e.g. "DEV", "PROD").
@@ -80,7 +80,7 @@ jobs:
       with:
         organization-id: ${{ secrets.SNOWPLOW_ORG_ID }}
         api-key: ${{ secrets.SNOWPLOW_API_KEY }}
-        manifest-path: 'snowplow-schemas.json'            
+        manifest-path: 'snowplow-schemas.json'
         environment: ${{ env.ENVIRONMENT }}
 ```
 

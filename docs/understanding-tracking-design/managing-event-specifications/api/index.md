@@ -4,7 +4,7 @@ sidebar_label: "Using the API"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 With the [**Event Specifications API**](https://console.snowplowanalytics.com/api/msc/v1/docs), you can efficiently manage event specifications programmatically. Whether you want to retrieve, create, edit, publish, deprecate, or delete event specifications, the API provides the necessary endpoints and functionalities.
@@ -131,7 +131,7 @@ The `organizationId` parameter is required.
 
 You can filter the results based on the following query parameters:
 
-- `dataProductId`: Filters the tracking scenarios associated with a particular data product 
+- `dataProductId`: Filters the tracking scenarios associated with a particular data product
 - `sourceId`: Filters the tracking scenarios associated with a particular data structure, inferred from the `event.source` field
 - `sourceVersion`: Filters the tracking scenarios associated with a specific data structure version when used with `dataStructureId`.
 - `withLatestHistory`: When `true`, it will return a list of tracking scenarios, with the latest change per scenario attached to the `includes` array field. The relation between tracking scenarios in `data` and history in `includes` can be determined by `id = scenarioId`.
@@ -245,7 +245,7 @@ By default, when a tracking scenario is created and no value is provided for `sc
 ```mermaid
 graph LR
     style Start fill:#633EB5, stroke:#000000, stroke-width:0px;
-    style Draft color:#724512, fill:#FEEEBD, stroke:#724512, stroke-width:1px; 
+    style Draft color:#724512, fill:#FEEEBD, stroke:#724512, stroke-width:1px;
     style Published color:#3F2874, fill:#F0EBF8, stroke:#3F2874, stroke-width:1px;
     style Deprecated color:#89251F, fill:#FDF3F2, stroke:#89251F, stroke-width:1px;
     style Deleted fill:#D63A31, stroke:#000000, stroke-width:1px;

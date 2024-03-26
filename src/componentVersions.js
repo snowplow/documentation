@@ -25,7 +25,7 @@ export const versions = {
   collector: '3.1.0',
   enrich: '4.1.0',
   sqs2kinesis: '1.0.4',
-  dataflowRunner: '0.7.4',
+  dataflowRunner: '0.7.5',
   snowbridge: '2.2.2',
 
   // Loaders
@@ -33,7 +33,7 @@ export const versions = {
   esLoader: '2.1.2',
   gcsLoader: '0.5.5',
   postgresLoader: '0.3.3',
-  rdbLoader: '5.8.2',
+  rdbLoader: '6.0.0',
   s3Loader: '2.2.8',
   s3Loader22x: '2.2.8',
   lakeLoader: '0.3.0',
@@ -42,7 +42,7 @@ export const versions = {
   // Data Modelling
   // dbt
   dbtSnowplowAttribution: '0.2.0',
-  dbtSnowplowUnified: '0.3.1',
+  dbtSnowplowUnified: '0.4.0',
   dbtSnowplowWeb: '1.0.0',
   dbtSnowplowMobile: '1.0.0',
   dbtSnowplowUtils: '0.16.3',

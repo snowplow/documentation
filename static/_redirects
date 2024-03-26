@@ -282,3 +282,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/web:splat 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/mobile:splat 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/ 301
+
+# Enterprise & Cloud refactor
+/docs/getting-started-on-snowplow-bdp-enterprise/setup/ /docs/getting-started-on-bdp/private-managed-cloud/ 301
+/docs/getting-started-on-snowplow-bdp-enterprise/* /docs/getting-started-on-bdp/private-managed-cloud/:splat 301
+/docs/getting-started-on-snowplow-bdp-cloud/first-party-tracking/ /docs/collecting-data/first-party-tracking/ 301
+/docs/getting-started-on-snowplow-bdp-cloud/* /docs/getting-started-on-bdp/cloud/ 301

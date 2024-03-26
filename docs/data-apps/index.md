@@ -49,4 +49,4 @@ Note that some data is processed further after the query to get in the format re
 Our apps provide useful help text throughout the apps, keep an eye out for the help icon (<Icon icon="fa-regular fa-circle-question"/>) to provide more context or help in using some functionality.
 
 ### Log Out
-If you wish to Log out of the application, you can do this on the `Account` page of any application. Note this also logs you out of Console.
+If you wish to Log out of the application, you can do this from the sidebar. Note this also logs you out of Console.

@@ -6,11 +6,11 @@ sidebar_label: "User & Marketing Analytics"
 
 :::caution
 
-This data app is currently in Public Preview and features may changes without notice. 
+This data app is currently in Public Preview and features may change without notice. 
 
 :::
 
-The User & Marketing Analytics app contains all the visuals you need to perform a high level analysis of your web and mobile performance. This includes: 
+The **User & Marketing Analytics** app contains all the visuals you need to perform a high level analysis of your web and mobile performance. This includes: 
 - Reports on user acquisition
 - Information relating to your traffic sources
 - Insight into user retention
@@ -20,12 +20,16 @@ The User & Marketing Analytics app contains all the visuals you need to perform 
 ## Requirements
 
 - [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) enabled
+- [Campaign Attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) enabled
+- [IP Lookup enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) enabled
+- [Referrer Parser enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md) enabled
+
 - One of:
-  - (**Recommended**) Running the [Snowplow Unified Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with:
+  - (**Recommended**) Running the [Snowplow Unified dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with:
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
     - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`
-  - Running the [Snowplow Web Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) with:
+  - Running the [Snowplow Web dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) with:
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
     - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`
@@ -44,7 +48,7 @@ Some charts in the app are only related to new or returning users, not both, so 
 ### Settings
 :::tip
 
-All configurations can be found in the Setup page. Note that all these settings are global for all users, meaning if you change them they will be changed for everyone.
+All configurations can be found in the `Settings` page. Note that all these settings are global for all users, meaning if you change them they will be changed for everyone.
 
 :::
 

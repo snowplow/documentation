@@ -6,8 +6,7 @@ import { useSidebarBreadcrumbs } from '@docusaurus/theme-common/internal'
 import _ from 'lodash'
 
 const offeringNames = {
-  enterprise: "Snowplow BDP Enterprise",
-  cloud: "Snowplow BDP Cloud",
+  bdp: "Snowplow BDP",
   community: "Snowplow Community Edition",
 }
 
@@ -24,6 +23,7 @@ export default function MDXContentWrapper(props) {
 
   const legacy = _.some(_.initial(breadcrumbs), item => item.customProps?.legacy)
   const outdated = !legacy && _.some(_.initial(breadcrumbs), item => item.customProps?.outdated)
+  const hidden = _.some(_.initial(breadcrumbs), item => item.customProps?.hidden)
   const offerings = _.findLast(breadcrumbs, item => item.customProps?.offerings)
 
   if (outdated) {
@@ -48,7 +48,7 @@ export default function MDXContentWrapper(props) {
 
   return (
     <>
-      {(legacy || outdated) && (
+      {(legacy || outdated || hidden) && (
         <Head>
           <meta name="robots" content="noindex, follow" />
         </Head>

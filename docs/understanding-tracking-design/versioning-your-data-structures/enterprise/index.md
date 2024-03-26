@@ -1,10 +1,10 @@
 ---
-title: "Versioning Data Structures in BDP Enterprise"
-sidebar_label: "Using the UI"
+title: "Versioning Data Structures with the JSON Editor"
+sidebar_label: "Using the JSON Editor"
 sidebar_position: 10
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 ## How do I version?

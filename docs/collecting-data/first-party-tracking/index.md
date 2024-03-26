@@ -1,9 +1,15 @@
 ---
 title: "First-party tracking"
-sidebar_position: 3
+sidebar_position: 40
+sidebar_custom_props:
+  offerings:
+    - bdp
+  # hide from sidebar and external search until these instructions apply more universally
+  hidden: true
 ---
 
 # First-party tracking
+
 This feature lets you configure a custom collector domain to match your primary domain, enabling first-party cookies.
 
 When your collector domain (e.g. `collector.snwplow.net`) does not match your primary domain (e.g. `flowershop.ai`), web browsers can impose limitations on the collected data. For example, cookies set by the collector might be only kept for 7 days.
@@ -13,10 +19,19 @@ With first-party tracking, you can configure a custom collector domain (e.g. `c.
 Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use an ID service](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md#itp-mitigation) to fully persist the cookies.
 
 :::info
+
 Before starting, ensure you can access and edit the configuration of your hosting/DNS provider. This is necessary to complete the implementation.
+
+:::
+
+:::info
+
+The flow described below might differ depending on the version of Snowplow BDP you are using.
+
 :::
 
 ## Selecting the domain names
+
 When configuring first-party tracking, you first need to set a collector domain where the events will be sent to by the web browser. This must be a subdomain of your primary domain. For example, for `flowershop.ai` it could be `t.flowershop.ai` or `c.app.flowershop.ai`.
 
 :::tip
@@ -58,7 +73,7 @@ For example, if you own both `gardening.primary-domain.co.uk` and `insurance.pri
 ![enter_domain](images/Screenshot_enter_domain.png)
 
 ## Configuring DNS records
-In the next step, BDP Cloud will generate the required DNS records. This may take several minutes.
+In the next step, BDP will generate the required DNS records. This may take several minutes.
 
 When the records are ready, you will receive a confirmation by email.
 
@@ -66,13 +81,13 @@ When the records are ready, you will receive a confirmation by email.
 
 Once the DNS records are available, copy them into your domain provider.
 
-The set of DNS records will contain a special record that allows BDP Cloud to verify that the setup is correct.
+The set of DNS records will contain a special record that allows BDP to verify that the setup is correct.
 
 :::info
-You will have to conclude this step within 72 hours. If BDP Cloud is unable to verify the setup within that timeframe, you will have to restart the process from the beginning.
+You will have to conclude this step within 72 hours. If BDP is unable to verify the setup within that timeframe, you will have to restart the process from the beginning.
 :::
 
-Once BDP Cloud verifies your DNS setup, the status in the bottom left will change and you will receive a confirmation by email.
+Once BDP verifies your DNS setup, the status in the bottom left will change and you will receive a confirmation by email.
 
 ![dns_records](images/Screenshot_dns_records.png)
 

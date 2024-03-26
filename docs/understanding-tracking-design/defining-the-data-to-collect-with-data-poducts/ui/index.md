@@ -5,14 +5,12 @@ sidebar_label: "Using the UI"
 sidebar_position: 1
 sidebar_custom_props:
   offerings:
-    - enterprise
-    - cloud
-
+    - bdp
 ---
 
 ## Creating and editing a new Data Product using Console
 
-To create a new data product, navigate to the "Data products" section from the navigation bar and click the "Create data product" button. 
+To create a new data product, navigate to the "Data products" section from the navigation bar and click the "Create data product" button.
 
 ![Create data product](images/create-data-product.png)
 
@@ -34,9 +32,9 @@ The breadcrumb navigation allows you to quickly navigate to the data product ove
 
 In the image below, you can see an example of a data product. It not only provides an overview of all the event specifications but also allows you to access three important pieces of functionality.
 
-- **Share**; allow other members of your organization to access the data product 
+- **Share**; allow other members of your organization to access the data product
 - **Subscribe**; receive notifications of any changes in the data product
-- **Implement tracking**; automatically generate the code for your data product to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/collecting-data/code-generation/index.md)) 
+- **Implement tracking**; automatically generate the code for your data product to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/collecting-data/code-generation/index.md))
 
 *Notes: sharing and subscribing is only available for users registered in Snowplow BDP Console.*
 

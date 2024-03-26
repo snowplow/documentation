@@ -2,10 +2,6 @@
 title: "Amending schemas"
 description: "Fixing a mistake in an existing schema version"
 sidebar_position: 40
-sidebar_custom_props:
-  offerings:
-    - enterprise
-    - community
 ---
 
 ```mdx-code-block

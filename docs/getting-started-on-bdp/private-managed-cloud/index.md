@@ -23,17 +23,17 @@ Consider [BDP Cloud](/docs/getting-started-on-bdp/cloud/index.md) for a faster s
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-Refer to the [AWS Setup Guide](/docs/getting-started-on-bdp/managed-cloud/setup-guide-aws/index.md). Once you’ve set up your cloud environment, you can [request a new pipeline](https://console.snowplowanalytics.com/pipelines/AWS/new) via the Snowplow BDP Console.
+Refer to the [AWS Setup Guide](/docs/getting-started-on-bdp/private-managed-cloud/setup-guide-aws/index.md). Once you’ve set up your cloud environment, you can [request a new pipeline](https://console.snowplowanalytics.com/pipelines/AWS/new) via the Snowplow BDP Console.
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
-Refer to the [Azure Setup Guide](/docs/getting-started-on-bdp/managed-cloud/setup-guide-azure/index.md). Once you’ve set up your cloud environment, you can [request a new pipeline](https://console.snowplowanalytics.com/pipelines/azure/new) via the Snowplow BDP Console.
+Refer to the [Azure Setup Guide](/docs/getting-started-on-bdp/private-managed-cloud/setup-guide-azure/index.md). Once you’ve set up your cloud environment, you can [request a new pipeline](https://console.snowplowanalytics.com/pipelines/azure/new) via the Snowplow BDP Console.
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-Refer to the [AWS Setup Guide](/docs/getting-started-on-bdp/managed-cloud/setup-guide-gcp/index.md). Once you’ve set up your cloud environment, you can [request a new pipeline](https://console.snowplowanalytics.com/pipelines/gcp/new) via the Snowplow BDP Console.
+Refer to the [AWS Setup Guide](/docs/getting-started-on-bdp/private-managed-cloud/setup-guide-gcp/index.md). Once you’ve set up your cloud environment, you can [request a new pipeline](https://console.snowplowanalytics.com/pipelines/gcp/new) via the Snowplow BDP Console.
 
   </TabItem>
 </Tabs>

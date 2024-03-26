@@ -21,6 +21,11 @@ export const datagridProps = {
 <Badges badgeType="Early Release"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>
 
+:::warning
+Make sure you upgrade to [v.0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) of Unified Package if you would like to use the v0.2.0 of Attribution Package
+
+:::
+
 
 # Snowplow Attribution Package
 ​
@@ -118,7 +123,7 @@ Alternatively, you could use the `derived.snowplow_unified_sessions` table as we
 :::tip
 To fully finish the config you might need to overwrite the `channel_classification()` macro. In case your classification logic for attribution analysis needs to be the same as the one already configured in the snowplow_unified model you can simply leave the default macro which refers to that field.
 :::
-### 3. Channel spend information (optional, for reporting)
+### 3. Channel spend information (optional, but recommended)
 
 You most likely have a warehouse with marketing (ad) spend information by channel and date, something like this:
 
@@ -131,7 +136,7 @@ You most likely have a warehouse with marketing (ad) spend information by channe
 `, datagridProps)}
 </div>
 
-We provided a sql script to create a reporting view in the `attribution_overview()` macro that you can overwrite to suit your specific analytical needs, however as long as you name the fields the same in the `var('snowplow__spend_source')` it should work right away.
+To make it flexible to use what you already have, we suggest creating a view on top of the table you have, rename the fields that the model will use and add that view reference in `var('snowplow__spend_source')`. For more details on how to do this check out our [Quick Start Guide](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/attribution/#3.good-to-know).
 
 ### One-off setup
 

@@ -19,10 +19,11 @@ Any package can make use of the table grants feature provided by the `snowplow__
 
 | Package | Minimum Required Version |
 |---------|--------------------------|
-| Unified | 0.3.0 |
+| Unified Digital | 0.3.0 |
 | E-commerce | 0.8.1 |
 | Media Player | 0.7.2 |
 | Normalize | 0.3.5 |
+| Attribution | 0.2.0|
 
 Note that this feature is not supported for BigQuery due to the different approach to permissions they take via IAM roles.
 

@@ -31,11 +31,11 @@ To run on Apache Beam in GCP Dataflow run it through a docker-deployment the opt
 ```bash
 -v {{path-to-local-key-file}}.json:/snowplow/config/credentials.json \
 -e GOOGLE_APPLICATION_CREDENTIALS=/snowplow/config/credentials.json \
-  snowplow/snowplow-event-recovery-beam:0.3.0-rc14 \
+  snowplow/snowplow-event-recovery-beam:0.6.1 \
 --runner=DataFlowRunner \
 --project={{your-gcp-project-name}} \
---name=event-recovery-rt-pipeline \
---zone={{your-project-zone}} \
+--jobName=event-recovery-rt-pipeline \
+--region={{your-project-region}} \
 --gcpTempLocation=gs://sp-storage-loader-tmp-{{pipeline_tag_e.g._prod1}}-{{pipeline_name}}/temp \
 --inputDirectory=gs://sp-storage-loader-bad-{{pipeline_tag_e.g._prod1}}-{{project_name}}/partitioned/** \
 --outputTopic=projects/{{project_name}}/topics/{{recovery-topic}} \

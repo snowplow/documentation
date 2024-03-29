@@ -1,6 +1,6 @@
 ---
-title: "Understanding the enriched TSV format"
-sidebar_label: "Enriched TSV format"
+title: "Snowplow Events Table in a Single Table"
+sidebar_label: "Events Table Format"
 sidebar_position: 1000
 ---
 

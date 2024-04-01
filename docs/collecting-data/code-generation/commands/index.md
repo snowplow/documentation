@@ -29,6 +29,7 @@ Generates tracking code based on configuration on the `snowtype.config.json` fil
 
 **Options**
  -  `-is, --instructions` Generate event specification instructions.
+ -  `-va, --validations` Add runtime validation on events. _Currently available for the Browser tracker_.
 
 ### `snowtype update`
 

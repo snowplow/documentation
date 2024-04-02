@@ -26,7 +26,7 @@ Once the application is installed, clicking on the tile will launch the applicat
 If you wish to invite others to use data applications but not have access to the rest of Console, you can [create a new user](/docs/using-the-snowplow-console/managing-users/adding-removing/index.md) and add a user with the `Data applications user` role. That user will then only see the Data Applications tab within Console. This permissions can be managed in the [usual way](/docs/using-the-snowplow-console/managing-users/managing-permissions/index.md).
 
 ## One off-setup
-To setup the app and have it connect to your warehouse we require a user/role to run the app via, please see the [setup page] for more details.
+To setup the app and have it connect to your warehouse we require a user/role to run the app via, please see the [setup page](/docs/data-apps/setup/index.md) for more details.
 
 ## General Usage
 ### Is the app running?

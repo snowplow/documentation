@@ -40,7 +40,7 @@ While possible to re-use the same user for each data app, it may be beneficial t
 
 Create and share a GCP Service Account with us that has the following roles attached to it:
 
-```go
+```hcl
 data_app_roles = [
   "roles/bigquery.dataViewer",
   "roles/bigquery.filteredDataViewer",

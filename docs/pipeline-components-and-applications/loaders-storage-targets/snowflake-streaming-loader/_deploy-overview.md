@@ -14,7 +14,7 @@ To run the loader, mount your config file into the docker image, and then provid
 <CodeBlock language="bash">{
 `docker run \\
   --mount=type=bind,source=/path/to/myconfig,destination=/myconfig \\
-  --env SNOWFLAKE_PRVIATE_KEY="$\{SNOWFLAKE_PRIVATE_KEY\}" \\
+  --env SNOWFLAKE_PRIVATE_KEY="$\{SNOWFLAKE_PRIVATE_KEY\}" \\
   snowplow/snowflake-loader-${props.stream}:${versions.snowflakeStreamingLoader} \\
   --config=/myconfig/loader.hocon
 `}</CodeBlock>

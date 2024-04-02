@@ -29,7 +29,7 @@ The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) a
 The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
 
 :::note
-The incremental model is simplified compared to the standard web model, this package does not use sessions to identify which historic events to reprocess and just uses the `collector_tstamp` and package variables to identify which events to (re)process.
+The incremental model is simplified compared to the standard unified model, this package does not use sessions to identify which historic events to reprocess and just uses the `collector_tstamp` and package variables to identify which events to (re)process.
 
 :::
 

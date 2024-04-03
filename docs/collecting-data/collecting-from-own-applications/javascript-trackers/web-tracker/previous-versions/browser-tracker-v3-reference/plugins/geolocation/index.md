@@ -24,8 +24,8 @@ If this plugin is enabled, the tracker will attempt to create a context from the
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { GeolocationPlugin, enableGeolocationContext } from '@snowplow/browser-plugin-geolocation';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ GeolocationPlugin() ],
 });
 
@@ -34,7 +34,11 @@ enableGeolocationContext();
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>enableGeolocationContext</code></td><td><a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracker-setup/initialization-options/index.md">Documentation</a></td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td><code>enableGeolocationContext</code></td><td>
+
+[Documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracker-setup/initialization-options/index.md)
+
+</td></tr></tbody></table>
 
 ### Context
 

@@ -294,7 +294,7 @@ There will be a new dataset available in BigQuery with the suffix `_snowplow_db`
 
 [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Snowflake.
 
-Alternatively, for AWS you can shoose the newer [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md), which is a single application.
+Alternatively, for AWS you can choose the newer [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md), which is a single application.
 
 See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
 * RDB Loader:

@@ -57,7 +57,6 @@ Once created share the following details back with us:
 3. BigQuery Dataset Region (indicator of where the app should default into but is configurable in most apps once launched)
 4. BigQuery Service Account JSON (**please send this in a secure format**)
 
-
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
 

@@ -1,5 +1,5 @@
 ---
-title: "Client-side validation"
+title: "Client-side validation (Beta)"
 sidebar_position: 5
 ---
 

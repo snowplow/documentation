@@ -91,7 +91,7 @@ The sections below will guide you through setting up your destination to receive
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
+There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. For Snowflake, you can choose between the newest [Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) (recommended) or [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md). Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
 
 We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
 
@@ -308,6 +308,10 @@ No extra steps needed.
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
+If you are going to use the [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) (currently, only provided for AWS), you will need to generate a key pair following the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key). Make sure to enter an empty passphrase, as the terraform module below does not support keys with passphrases (for simplicity).
+
+If you are not using the Snowflake Streaming Loader, you will need to pick a password.
+
 Execute the following SQL (replace the `${...}` variables with your desired values). You will need access to both `SYSADMIN` and `SECURITYADMIN` level roles to action this:
 
 ```sql
@@ -327,7 +331,9 @@ GRANT USAGE ON DATABASE ${snowflake_database} TO ROLE ${snowflake_loader_role};
 GRANT ALL ON SCHEMA ${snowflake_database}.${snowflake_schema} TO ROLE ${snowflake_loader_role};
 
 -- 5. Create a user that can be used for loading data
-CREATE USER IF NOT EXISTS ${snowflake_loader_user} PASSWORD='${snowflake_password}'
+CREATE USER IF NOT EXISTS ${snowflake_loader_user}
+  RSA_PUBLIC_KEY='MIIBIj...' -- fill out if using Snowflake Streaming Loader
+  PASSWORD='...'             -- fill out otherwise
   MUST_CHANGE_PASSWORD = FALSE
   DEFAULT_ROLE = ${snowflake_loader_role}
   EMAIL = 'loader@acme.com';
@@ -544,6 +550,26 @@ On most systems, you can generate an SSH Key with: `ssh-keygen -t rsa -b 4096`. 
 As mentioned [above](#storage-options), there are several options for the pipeline’s destination database. For each destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `redshift_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
 
 When in doubt, refer back to the [destination setup](#prepare-the-destination) section where you have picked values for many of the variables.
+
+<details>
+<summary>Snowflake + Streaming Loader</summary>
+
+If you are using Snowflake with the Streaming Loader, you will need to provide a private key you’ve generated during [destination setup](#prepare-the-destination).
+
+Here’s how to do it:
+
+```
+snowflake_streaming_loader_private_key = <<EOT
+-----BEGIN PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCd2dEYSUp3hdyK
+5hWwpkNGG56hLFWDK47oMf/Niu+Yh+8Wm4p9TlPje+UuKOnK5N4nAbM4hlhKyEJv
+...
+99Xil8uas3v7o2OSe7FfLA==
+-----END PRIVATE KEY-----
+EOT
+```
+
+</details>
 
 :::caution
 

@@ -766,7 +766,7 @@ Do note that currently not all Fabric services support nested fields present in 
   </TabItem>
 </Tabs>
 
-# Configure HTTPS (optional)
+## Configure HTTPS (optional)
 
 Now that you have a working pipeline, you can *optionally* configure your Collector and Iglu Server to have an HTTPS-enabled endpoint. This might be required in some cases to track events on strictly SSL-only websites, as well as to enable first-party tracking (by putting the Collector endpoint on the same sub-domain as your website).
 

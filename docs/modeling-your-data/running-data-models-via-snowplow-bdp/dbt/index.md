@@ -1,5 +1,5 @@
 ---
-title: "Using dbt"
+title: "Custom models"
 sidebar_position: 1
 ---
 

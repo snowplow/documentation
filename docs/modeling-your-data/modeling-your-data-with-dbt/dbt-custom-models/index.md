@@ -91,7 +91,7 @@ See our page on [full or partial refreshes](/docs/modeling-your-data/modeling-yo
 ### Retiring Custom Models
 If you want to retire a custom model, you should delete the models from your project or [disable](https://docs.getdbt.com/reference/resource-configs/enabled#disable-a-model-in-a-package-in-order-to-use-your-own-version-of-the-model) the models.
 
-There is no need to remove the models from the `snowplow_<package>_incremental_manifest` manifest table. The packages identifies **enabled** models tagged with `snowplow_<package>_incremental` within your project and selects these models from the manifest in order to calculate the state of the web model as described above.
+There is no need to remove the models from the `snowplow_<package>_incremental_manifest` manifest table. The packages identifies **enabled** models tagged with `snowplow_<package>_incremental` within your project and selects these models from the manifest in order to calculate the state of the package as described above.
 
 :::danger
  Do **NOT** just use `--exclude` on the retired models from your job in production. Currently the packages is unable to identify which models are due to be executed in a given run. As a result, if you exclude a model the package will get stuck in [State 3](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#state-3-models-out-of-sync) and continue to attempt to sync your excluded with the remaining models.

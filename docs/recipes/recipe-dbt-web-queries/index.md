@@ -1,11 +1,11 @@
 ---
 title: "Derived Web Analytics Queries"
 sidebar_position: -10
-description: A selection of useful SQL queries to run on the derived dbt web package data
+description: A selection of useful SQL queries to run on the derived dbt unified package data
 ---
 
 
-The [Snowplow web model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) enables analysts to more easily generate insights from their Snowplow data, without having to run potentially complicated, long-running and expensive queries over the raw event level data. This how-to guide is designed to give an inspiration of how the derived tables in the model (`page_views`, `sessions` and `users`) can be used to answer common web analytics questions. This guide is aimed at analysts using query tools (such as Redash, Metabase, Superset etc) to interrogate their Snowplow data, and to also highlight to other users how the Snowplow derived data can be used (potentially with SQL based BI tools such as Tableau, Looker, Power BI etc).
+The [Snowplow Unified data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) enables analysts to more easily generate insights from their Snowplow data, without having to run potentially complicated, long-running and expensive queries over the raw event level data. This how-to guide is designed to give an inspiration of how the derived tables in the model (`views`, `sessions` and `users`) can be used to answer common web analytics questions. This guide is aimed at analysts using query tools (such as Redash, Metabase, Superset etc) to interrogate their Snowplow data, and to also highlight to other users how the Snowplow derived data can be used (potentially with SQL based BI tools such as Tableau, Looker, Power BI etc).
 
 Most of these queries are relatively warehouse agnostic, however there may be small differences such the order of arguments in `date_trunc()` (which are reversed in BigQuery) or casting types you may need to edit. You will also need to substitute the relevant schema name into these queries.
 
@@ -17,8 +17,8 @@ In some cases, some of these queries can be merged to display multiple metrics o
 ```sql
 SELECT
     page_urlpath,
-    COUNT(DISTINCT page_view_id) AS page_views
-FROM derived.page_views
+    COUNT(DISTINCT view_id) AS page_views
+FROM derived.snowplow_unified_views
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 10
@@ -27,9 +27,9 @@ LIMIT 10
 ### Page Views by Device
 ```sql
 SELECT
-    device_class,
-    COUNT(DISTINCT page_view_id) AS page_views
-FROM derived.page_views
+    device_category,
+    COUNT(DISTINCT view_id) AS page_views
+FROM derived.snowplow_unified_views
 GROUP BY 1
 ORDER BY 2 DESC
 ```
@@ -38,8 +38,8 @@ ORDER BY 2 DESC
 ```sql
 SELECT
     date_trunc('day', start_tstamp) as date, 
-    COUNT(DISTINCT page_view_id) AS page_views
-FROM derived.page_views
+    COUNT(DISTINCT view_id) AS page_views
+FROM derived.snowplow_unified_views
 GROUP BY 1
 ```
 
@@ -47,9 +47,9 @@ GROUP BY 1
 ```sql
 SELECT
     page_urlpath,
-    COUNT(DISTINCT CASE WHEN page_view_in_session_index = page_views_in_session THEN page_view_id END) AS exits,
-    COUNT(DISTINCT CASE WHEN page_view_in_session_index = page_views_in_session THEN page_view_id END) / count(DISTINCT page_view_id) as exit_rate
-FROM derived.page_views
+    COUNT(DISTINCT CASE WHEN VIEW_IN_SESSION_INDEX = VIEWS_IN_SESSION THEN VIEW_ID END) AS exits,
+    COUNT(DISTINCT CASE WHEN VIEW_IN_SESSION_INDEX = VIEWS_IN_SESSION THEN VIEW_ID END) / count(DISTINCT VIEW_ID) as exit_rate
+FROM derived.snowplow_unified_views
 GROUP BY 1
 ```
 
@@ -58,8 +58,8 @@ GROUP BY 1
 WITH page_views_by_day AS
     (SELECT
         DATE_TRUNC('day', start_tstamp) AS date,
-        COUNT(DISTINCT page_view_id) AS page_views
-    FROM derived.page_views
+        COUNT(DISTINCT VIEW_ID) AS page_views
+    FROM derived.snowplow_unified_views
     GROUP BY 1)
 
 SELECT
@@ -73,9 +73,9 @@ FROM page_views_by_day
 ```sql
 SELECT
     page_title,
-    COUNT(DISTINCT page_view_id) AS page_views,
+    COUNT(DISTINCT VIEW_ID) AS page_views,
     AVG(vertical_percentage_scrolled) AS avg_scroll_depth
-FROM derived.page_views
+FROM derived.snowplow_unified_views
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 10
@@ -87,8 +87,8 @@ LIMIT 10
 WITH top_landing_pages AS
     (SELECT
         first_page_urlpath AS landing_page,
-        COUNT(DISTINCT domain_sessionid) AS n
-    FROM derived.sessions
+        COUNT(DISTINCT SESSION_IDENTIFIER) AS n
+    FROM derived.snowplow_unified_sessions
     WHERE start_tstamp > CURRENT_DATE - 30
     GROUP BY 1
     ORDER BY 2 DESC
@@ -97,8 +97,8 @@ WITH top_landing_pages AS
 SELECT
     DATE_TRUNC('day', start_tstamp) AS date,
     first_page_urlpath AS landing_page,
-    COUNT(DISTINCT domain_sessionid) AS sessions
-FROM derived.sessions a
+    COUNT(DISTINCT SESSION_IDENTIFIER) AS sessions
+FROM derived.snowplow_unified_sessions a
 WHERE 
     EXISTS (SELECT 1 from top_landing_pages b where a.first_page_urlpath = b.landing_page)
     AND start_tstamp > CURRENT_DATE - 30
@@ -109,8 +109,8 @@ GROUP BY 1, 2
 ```sql
 SELECT
     DATE_TRUNC('day', start_tstamp) AS date,
-    COUNT(DISTINCT domain_userid)   AS unique_users
-FROM derived.sessions
+    COUNT(DISTINCT USER_IDENTIFIER)   AS unique_users
+FROM derived.snowplow_unified_sessions
 WHERE start_tstamp > current_date - 30
 GROUP BY 1
 ```
@@ -119,9 +119,9 @@ GROUP BY 1
 ```sql
 WITH sessions_with_pageviews AS
     (SELECT
-        domain_sessionid,
-        page_views AS page_visited
-    FROM derived.sessions
+        SESSION_IDENTIFIER,
+        VIEWS AS page_visited
+    FROM derived.snowplow_unified_sessions
     WHERE start_tstamp > current_date - 30)
 
 SELECT
@@ -136,8 +136,8 @@ ORDER BY 1
 ```sql
 SELECT
     DATE_TRUNC('day', start_tstamp) AS date,
-    SUM(CASE WHEN page_views = 1 THEN 1 ELSE 0 END)::decimal / count(DISTINCT domain_sessionid)::decimal AS bounce_rate
-FROM derived.sessions
+    SUM(CASE WHEN VIEWS = 1 THEN 1 ELSE 0 END)::decimal / count(DISTINCT SESSION_IDENTIFIER)::decimal AS bounce_rate
+FROM derived.snowplow_unified_sessions
 WHERE start_tstamp > current_date - 30
 GROUP BY 1
 ```
@@ -146,9 +146,9 @@ GROUP BY 1
 ```sql
 SELECT
     DATE_TRUNC('day', start_tstamp)                                 AS date,
-    CASE WHEN domain_sessionidx = 1 THEN 'New' ELSE 'Returning' END AS new_returning,
-    COUNT(DISTINCT domain_sessionid)                                AS sessions
-FROM derived.sessions
+    CASE WHEN device_session_index = 1 THEN 'New' ELSE 'Returning' END AS new_returning,
+    COUNT(DISTINCT SESSION_IDENTIFIER)                                AS sessions
+FROM derived.snowplow_unified_sessions
 WHERE start_tstamp > current_date - 30
 GROUP BY 1, 2
 ```
@@ -157,8 +157,8 @@ GROUP BY 1, 2
 ```sql
 SELECT
     DATE_TRUNC('day', start_tstamp) AS date,
-    SUM(DISTINCT CASE WHEN domain_sessionidx = 1 THEN domain_sessionid ELSE null END)::decimal / count(DISTINCT domain_sessionid)::decimal AS pc_new_users
-FROM derived.sessions
+    count(DISTINCT CASE WHEN device_session_index = 1 THEN SESSION_IDENTIFIER ELSE null END)::decimal / count(DISTINCT SESSION_IDENTIFIER)::decimal AS pc_new_users
+FROM derived.snowplow_unified_sessions
 WHERE start_tstamp > current_date - 30
 GROUP BY 1
 ```
@@ -168,19 +168,19 @@ GROUP BY 1
 WITH absolute AS
     (SELECT
         DATE_TRUNC('day', start_tstamp) AS date,
-        domain_sessionid,
+        SESSION_IDENTIFIER,
         absolute_time_in_s              AS time,
         'Absolute Time in Seconds'      AS measure_name
-    FROM derived.sessions
+    FROM derived.snowplow_unified_sessions
     WHERE start_tstamp > current_date - 30),
 
 engaged AS
     (SELECT
         DATE_TRUNC('day', start_tstamp) AS date,
-        domain_sessionid,
+        SESSION_IDENTIFIER,
         engaged_time_in_s               AS time,
         'Engaged Time in Seconds'       AS measure_name
-    FROM derived.sessions
+    FROM derived.snowplow_unified_sessions
     WHERE start_tstamp > current_date - 30
     ),
 
@@ -204,8 +204,8 @@ GROUP BY 1, 2
 SELECT
     DATE_TRUNC('day', start_tstamp)   AS date,
     mkt_source || ' / ' || mkt_medium AS source_medium,
-    COUNT(DISTINCT domain_sessionid)  AS sessions
-FROM derived.sessions
+    COUNT(DISTINCT SESSION_IDENTIFIER)  AS sessions
+FROM derived.snowplow_unified_sessions
 WHERE 
     start_tstamp > current_date - 30
     AND mkt_source IS NOT NULL
@@ -221,8 +221,8 @@ SELECT
         WHEN mkt_clickid IS NOT NULL THEN 'PPC'
         WHEN refr_medium = 'search' THEN 'Organic'
     END                                            AS ppc_org,
-    COUNT(DISTINCT domain_sessionid)               AS sessions
-FROM derived.sessions
+    COUNT(DISTINCT SESSION_IDENTIFIER)               AS sessions
+FROM derived.snowplow_unified_sessions
 WHERE 
     start_tstamp > current_date - 30
     AND (mkt_clickid IS NOT NULL OR refr_medium = 'search')
@@ -235,8 +235,8 @@ GROUP BY 1, 2
 WITH most_recent_dates AS
     (SELECT
         DATE_TRUNC('day', end_tstamp) AS most_recently_seen,
-        COUNT(DISTINCT domain_userid) AS users
-    FROM derived.users
+        COUNT(DISTINCT USER_IDENTIFIER) AS users
+    FROM derived.snowplow_unified_users
     WHERE DATE_TRUNC('day', end_tstamp) > CURRENT_DATE - 30
     GROUP BY 1),
 
@@ -268,8 +268,8 @@ ORDER BY 1
 ```sql
 SELECT
     DATE_TRUNC('day', start_tstamp) AS first_seen,
-    COUNT(DISTINCT domain_userid)   AS users
-FROM derived.users
+    COUNT(DISTINCT USER_IDENTIFIER)   AS users
+FROM derived.snowplow_unified_users
 WHERE end_tstamp > current_date - 30
 GROUP BY 1
 ```
@@ -280,9 +280,9 @@ SELECT
     mkt_source,
     mkt_medium,
     mkt_campaign,
-    referrer,
-    COUNT(DISTINCT domain_userid) AS users
-FROM derived.users
+    refr_source,
+    COUNT(DISTINCT USER_IDENTIFIER) AS users
+FROM derived.snowplow_unified_users
 WHERE end_tstamp > current_date - 300
 GROUP BY 1, 2, 3, 4
 ```

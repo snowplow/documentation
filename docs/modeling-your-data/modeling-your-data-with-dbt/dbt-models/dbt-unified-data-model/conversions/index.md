@@ -166,7 +166,108 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ### Configuration Generator
 
-You can use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) to help you generate your conversion event definitions.
+You can use the below generator to generate the conversion events variable, make sure you combine this with existing conversions if you have any already. You can also use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) to help you generate all your package variables.
+
+```mdx-code-block
+import CodeBlock from '@theme/CodeBlock';
+import { useState } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useColorMode } from '@docusaurus/theme-common';
+import validator from '@rjsf/validator-ajv8';
+import Form from '@rjsf/mui';
+
+export const schema = {
+  "recommendFullRefresh": false,
+      "title": "Conversion Definition",
+      "description": "> Click the plus sign to add a new entry",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "condition"
+        ],
+        "title": "",
+        "description": "Conversion Event",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of your conversion type"
+          },
+          "condition": {
+            "type": "string",
+            "title": "Condition",
+            "description": "SQL condition e.g. event_name = 'page_view'"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value",
+            "description": "SQL value e.g. tr_total_base"
+          },
+          "default_value": {
+            "type": "number",
+            "title": "Default value",
+            "description": "Default value e.g. 0"
+          },
+          "list_events": {
+            "type": "boolean",
+            "title": "List all event ids?"
+          }
+        }
+      },
+      "uniqueItems": true
+};
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variable:</h4>
+    <CodeBlock language="yaml">{`vars:
+  snowplow_unified:
+    snowplow__conversion_events: ${JSON.stringify(data, null, 4)}`}</CodeBlock>
+    </>
+  )
+}
+
+export const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+export const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+});
+
+export function JsonSchemaGenerator({ output, children, schema }) {
+  const [formData, setFormData] = useState(null)
+  const { colorMode, setColorMode } = useColorMode()
+  return (
+    <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
+      <div className="JsonValidator">
+            <Form
+              schema={schema}
+              formData={formData}
+              onChange={(e) => setFormData(e.formData)}
+              validator={validator}
+              showErrorList="bottom"
+              liveValidate
+              uiSchema={{
+                    "ui:submitButtonOptions": { norender: true },
+                }}
+            />
+      </div>
+      {output(formData)}
+    </ThemeProvider>
+  )
+};
+```
+
+<JsonSchemaGenerator schema={schema} output={printYamlVariables} />
 
 
 ## 2. Enabling conversions in the Conversions Module

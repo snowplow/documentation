@@ -10,10 +10,10 @@ import TabItem from '@theme/TabItem';
 ```
 
 ### Overview
-Standard data models are authored and maintained by Snowplow. Follow below steps to create one.
+[Standard data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/) are authored and maintained by Snowplow. Follow the steps below to create and run one.
 
 ## Create a warehouse connection
-Begin by creating a new warehouse connection. It will be used by a data model to connect to your warehouse. Click on the "Setup new target" button on the [Data Models page](https://console.snowplowanalytics.com/data-modelling) and fill in all the necessary details.
+Begin by creating a new warehouse connection. It will be used by a data model to connect to your warehouse. Click on the "Set up new target" button on the [Data Models page](https://console.snowplowanalytics.com/data-modelling) and fill in all the necessary details.
 
 ![](images/warehouse-connections.png)
 

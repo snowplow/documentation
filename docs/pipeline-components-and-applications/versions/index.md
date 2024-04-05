@@ -199,9 +199,9 @@ Application | Latest version
 <ReactMarkdown children={`
 SDK | Latest version
 :--|:-:
-[Scala](/docs/modeling-your-data/analytics-sdk/analytics-sdk-scala/index.md) | ${versions.analyticsSdkScala}
-[Javascript](/docs/modeling-your-data/analytics-sdk/analytics-sdk-javascript/index.md) | ${versions.analyticsSdkJavascript}
-[Python](/docs/modeling-your-data/analytics-sdk/analytics-sdk-python/index.md) | ${versions.analyticsSdkPython}
-[.NET](/docs/modeling-your-data/analytics-sdk/analytics-sdk-net/index.md) | ${versions.analyticsSdkDotNet}
-[Go](/docs/modeling-your-data/analytics-sdk/analytics-sdk-go/index.md) | ${versions.analyticsSdkGo}
+[Scala](/docs/destinations/analytics-sdk/analytics-sdk-scala/index.md) | ${versions.analyticsSdkScala}
+[Javascript](/docs/destinations/analytics-sdk/analytics-sdk-javascript/index.md) | ${versions.analyticsSdkJavascript}
+[Python](/docs/destinations/analytics-sdk/analytics-sdk-python/index.md) | ${versions.analyticsSdkPython}
+[.NET](/docs/destinations/analytics-sdk/analytics-sdk-net/index.md) | ${versions.analyticsSdkDotNet}
+[Go](/docs/destinations/analytics-sdk/analytics-sdk-go/index.md) | ${versions.analyticsSdkGo}
 `} remarkPlugins={[remarkGfm]} />

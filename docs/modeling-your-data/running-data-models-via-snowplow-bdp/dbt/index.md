@@ -1,6 +1,7 @@
 ---
-title: "Custom models"
-sidebar_position: 1
+title: "Running custom dbt models via Snowplow BDP"
+sidebar_label: "Custom models"
+sidebar_position: 2
 ---
 
 ```mdx-code-block

@@ -17,8 +17,6 @@ For any new developments we highly recommend using our [dbt packages](/docs/mode
 
 [SQL Runner](https://github.com/snowplow/sql-runner) enables you to execute SQL scripts against the Snowplow data in your data warehouse. Specifically, it allows you to organize your SQL scripts in templatable playbooks, and execute them in series or in parallel on Snowflake, Amazon Redshift, GCP BigQuery and PostgreSQL.
 
-To set up SQL Runner, Snowplow Community Edition users can start from the [User guide](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md#user-guide) .
-
 A SQL Runner data model consists of:
 
 - SQL files (containing one or more SQL statements)

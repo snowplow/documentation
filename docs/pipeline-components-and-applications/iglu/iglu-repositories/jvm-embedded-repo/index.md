@@ -4,7 +4,7 @@ date: "2021-03-26"
 sidebar_position: 5000
 ---
 
-A JVM-embedded repo is an Iglu repository **embedded** inside a Java or Scala application, typically alongside the [Scala client](/docs/modeling-your-data/analytics-sdk/analytics-sdk-scala/index.md).
+A JVM-embedded repo is an Iglu repository **embedded** inside a Java or Scala application, typically alongside the [Scala client](/docs/destinations/analytics-sdk/analytics-sdk-scala/index.md).
 
 ## Technical architecture
 

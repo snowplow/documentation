@@ -74,7 +74,7 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 
 ### `on_success`
 
-`on_success` is an optional callback that will execute whenever the queue is flushed successfully, that is, whenever every request sent has status code 200. It will be passed one argument: the number of events that were successfully sent.
+`on_success` is an optional callback that will execute whenever the queue is flushed successfully, that is, whenever every request sent has status code 200. It will be passed one argument: an array of events that were successfully sent.
 
 ### `on_failure` 
 
@@ -83,8 +83,8 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 An example:
 
 ```python
-def success(num):
-    print(str(num) + " events sent successfully!")
+def success(arr):
+    print(str(len(arr)) + " events sent successfully!")
 
 def new_success(arr):
     for event_dict in arr:

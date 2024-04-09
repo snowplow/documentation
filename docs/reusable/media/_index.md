@@ -20,7 +20,7 @@ The media tracking works with a set of out-of-the-box event and entity schemas.
 Additionally, you can track custom entities along with the events.
 
 :::info Example app
-To illustrate the tracked events and entities, you can visit an example app that showcases the tracked media events and entities live as you watch a video.
+To illustrate the tracked events and entities, you can visit a React example app that showcases the tracked media events and entities live as you watch a video.
 
 [Visit the app here.](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/media)
 Source code for the app is [available here.](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples/tree/master/react)

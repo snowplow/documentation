@@ -346,7 +346,7 @@ player.setVolume(100); // Volume level`}
             playerType: 'html5', // The type of player
             playbackRate: 1.0, // Playback rate (1 is normal)
             quality: '1080p', // The quality level of the playback
-            volume: 100, // Volume level
+            volume: 100, // Volume percentage level
         )
     )
 );`}

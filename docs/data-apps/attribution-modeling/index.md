@@ -36,8 +36,8 @@ Our **Attribution modeling** app lowers the barrier to entry for your marketing 
 ## Preparing Views for the Dashboards
 Note that all these settings are global for all users, meaning if you change them they will be changed for everyone. The first user of the app will have to define at least one `View` which is the dataset needed to generate the charts. Defining a View can be done on the `Settings` page.
 
-### Defining a Last N Days (auto-refreshed) View
-The so-called `Default` view is to be used for generating a dataset that has a rolling conversion window of last nth day and will be refreshed automatically. The app will save the last-refreshed date with the View configurations and any subsequent day a user logs back in the app, a query will run in the background to look for any newly processed conversion event in the conversion source and if there is, the default dataset is refreshed by running all the queries that are needed to generate data for the charts to populate. Once the update finishes the conversion window should display the new date range.
+### Defining a Last N Days (Dynamic) View
+The so-called `Dynamic` views are to be used for generating datasets that have a rolling conversion window of last nth day and will be refreshed automatically (e.g. Last 30 days). The app will save the last-refreshed date with the View configurations and any subsequent day a user logs back in the app, a query will run in the background to look for any newly processed conversion event in the conversion source and if there is, the dynamic datasets are refreshed by running all the queries that are needed to generate data for the charts to populate. Once the update finishes the conversion window should display the new date range.
 
 #### Basic setup:
 1. Set the `auto-update days`: the number of days since the last conversion event defined here will define the conversion window.
@@ -54,7 +54,7 @@ Use this with caution, currently it uses the `snowplow_attribution_paths_to_non_
 Once happy with all the imputs press `Create View` button. It will first run a validation against the data sources making sure it has all the fields it needs. After that it will run the queries that generate the data necessary to populate the dashboards. They will be saved as csv files that app will read from when selecting the View on the sidebar.
 
 ### Defining a Custom Date Range (static) View
-Any other View that is not the Default will have to be given a name and will typically be used to generate a fixed dataset (e.g. Jan, Q1, 2023) to avoid having to recalculate the analysis for subsequent users.
+Non-dynamic views will have to be given a name and will typically be used to generate a fixed dataset (e.g. Jan, Q1, 2023) to avoid having to recalculate the analysis for subsequent users.
 
 Apart from giving it a name, the static views the steps are almost the same, but here instead of giving it an Nth number of refresh days you must define a fixed conversion window by selecting the appropriate date range with the date picker tool (which gets activated by clicking on the default date range). 
 

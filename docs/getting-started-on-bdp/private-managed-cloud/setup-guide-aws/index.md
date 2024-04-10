@@ -144,7 +144,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 ### Final checklist
 
 If you are sending a request to our team to set up your account for you. Please ensure you provide the following information:
-1.  role ARN
+1. SnowplowAdmin role ARN
 2. SnowplowDeployment role ARN
 3. AWS region to deploy into
 4. VPC CIDR requirements for VPC Peering (if applicable)

@@ -47,7 +47,7 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 4. Select the policy you created earlier
 5. Call the role "SnowplowAdmin" (please use this specific name)
 
-You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
+You will need to share this role with us as part of filling out the setup form in Snowplow BDP Console.
 
 ### JSON Policy Document
 

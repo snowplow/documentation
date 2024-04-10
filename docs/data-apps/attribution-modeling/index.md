@@ -29,8 +29,8 @@ Our **Attribution modeling** app (together with the [Snowplow Attribution dbt pa
 - [Referrer Parser enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md) enabled
 
 
-- Running the [Snowplow Unified Digital dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with `conversion event(s)` defined, with `snowplow__total_all_conversions` set to `true`
-- Running the [Snowplow Attribution dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) with `conversion event(s)` defined, with `snowplow__total_all_conversions` set to `true`
+- Running the [Snowplow Unified Digital dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with `conversion event(s)` defined and the optional conversion module enabled
+- Running the [Snowplow Attribution dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the data app
 
 ## Preparing Views for the Dashboards

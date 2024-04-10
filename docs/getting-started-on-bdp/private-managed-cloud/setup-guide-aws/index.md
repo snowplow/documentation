@@ -45,7 +45,7 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 3. Select "Another AWS account"  
     (Account ID: 793733611312 Require MFA: true)
 4. Select the policy you created earlier
-5. Call the role "SnowplowAdmin" (please use this specific name for this role)
+5. Call the role "SnowplowAdmin" (please use this specific name)
 
 You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
 

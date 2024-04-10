@@ -20,7 +20,7 @@ The media tracking works with a set of out-of-the-box event and entity schemas.
 Additionally, you can track custom entities along with the events.
 
 :::info Example app
-To illustrate the tracked events and entities, you can visit an example app that showcases the tracked media events and entities live as you watch a video.
+To illustrate the tracked events and entities, you can visit a React example app that showcases the tracked media events and entities live as you watch a video.
 
 [Visit the app here.](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/media)
 Source code for the app is [available here.](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples/tree/master/react)
@@ -173,6 +173,13 @@ TrackerController tracker = Snowplow.getDefaultTracker();
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(id, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`String id = "XXXXX";
+MediaTracking mediaTracking = tracker.startMediaTracking(
+    configuration: const MediaTrackingConfiguration(id: id)
+);`}
+</CodeBlock>)}</>
+
 Use the `endMediaTracking` call to end media tracking. This will clear the local state for the media tracking and stop any background updates.
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
@@ -195,6 +202,22 @@ endMediaTracking({ id });`}
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`tracker.getMedia().endMediaTracking(id);`}
 </CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`tracker.endMediaTracking(id: id);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<Admonition type="info" title="Configure the JS plugin URL on Web">
+    In order to be able to track media events using the Flutter tracker on Web, you will need to configure the URL for the <a href="/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media">media plugin for the JavaScript tracker</a>. Set the <code>jsMediaPluginURL</code> in the <code>TrackerConfiguration</code> to the URL for the script hosted on your server or on CDN.
+    <CodeBlock language="dart">
+    {`SnowplowTracker tracker = await Snowplow.createTracker(
+    namespace: namespace,
+    endpoint: endpoint,
+    trackerConfig: const TrackerConfiguration(
+        jsMediaPluginURL: "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media@latest/dist/index.umd.min.js"
+    ));`}
+    </CodeBlock>
+</Admonition>)}</>
 
 ### Configuration
 
@@ -303,6 +326,32 @@ player.setQuality("1080p"); // The quality level of the playback
 player.setVolume(100); // Volume level`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`MediaTracking mediaTracking = tracker.startMediaTracking(
+    configuration: const MediaTrackingConfiguration(
+        id: id,
+        player: MediaPlayerEntity(
+            currentTime: 0, // The current playback time
+            duration:
+                150, // A double-precision floating-point value indicating the duration of the media in seconds
+            ended: false, // If playback of the media has ended
+            livestream: false, // If the media is live
+            label: 'Sample video', // A human-readable title for the media
+            loop: false, // If the video should restart after ending
+            mediaType: MediaType.video, // The type of media
+            muted: false, // If the media element is muted
+            paused: false, // If the media element is paused
+            pictureInPicture:
+                false, // If the media is in picture-in-picture mode
+            playerType: 'html5', // The type of player
+            playbackRate: 1.0, // Playback rate (1 is normal)
+            quality: '1080p', // The quality level of the playback
+            volume: 100, // Volume percentage level
+        )
+    )
+);`}
+</CodeBlock>)}</>
+
 #### Media ping events
 
 Media ping events are events sent in a regular interval while media tracking is active.
@@ -356,6 +405,15 @@ configuration.setPingInterval(30);
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`MediaTracking mediaTracking = tracker.startMediaTracking(
+    configuration: const MediaTrackingConfiguration(
+        id: id,
+        pingInterval: 30 // Interval in seconds for sending ping events. Defaults to 30s. 
+    )
+);`}
+</CodeBlock>)}</>
+
 The ping events are sent in an interval that is unrelated to the media playback.
 However, to prevent sending too many events while the player is paused in background (e.g., in a background tab), there is a limit to how many ping events can be sent while the media is paused.
 By default, this is set to 1, but it is configurable:
@@ -396,6 +454,15 @@ configuration.setMaxPausedPings(3);
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`MediaTracking mediaTracking = tracker.startMediaTracking(
+    configuration: const MediaTrackingConfiguration(
+        id: id,
+        maxPausedPings: 3 // Maximum number of consecutive ping events to send when playback is paused. Defaults to 1.
+    )
+);`}
+</CodeBlock>)}</>
+
 You can disable ping events as follows:
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
@@ -426,6 +493,15 @@ val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
 {`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
 configuration.setPings(false);
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`MediaTracking mediaTracking = tracker.startMediaTracking(
+    configuration: const MediaTrackingConfiguration(
+        id: id,
+        pings: false
+    )
+);`}
 </CodeBlock>)}</>
 
 Media ping events have the following schema:
@@ -489,6 +565,15 @@ configuration.setSession(false);
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`MediaTracking mediaTracking = tracker.startMediaTracking(
+    configuration: const MediaTrackingConfiguration(
+        id: id,
+        session: false
+    )
+);`}
+</CodeBlock>)}</>
+
 #### Percentage progress events
 
 Percentage progress events are tracked when the playback reaches some percentage boundaries.
@@ -524,30 +609,37 @@ configuration.setBoundaries(Arrays.asList(10, 25, 50, 75));
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`MediaTracking mediaTracking = tracker.startMediaTracking(
+    configuration: const MediaTrackingConfiguration(
+        id: id,
+        boundaries: [10, 25, 50, 75]
+    )
+);`}
+</CodeBlock>)}</>
+
 Percentage progress events have the following schema:
 `iglu:com.snowplowanalytics.snowplow.media/percent_progress_event/jsonschema/1-0-0`.
 
-#### Filter captured events
-
+<>{(props.tracker != 'flutter') && (<>
+<h4>Filter captured events</h4>
+<p>
 In case you want to discard some of the events that are tracked during the media tracking, you can set the `captureEvents` property to a list of event types that are allowed (all other event types will be ignored):
-
+</p>
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('startMediaTracking', { id, captureEvents: ['play'] });`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`import { MediaEventType } from "@snowplow/browser-plugin-media";
 startMediaTracking({ id, captureEvents: [MediaEventType.Play] });
 `}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
 {`let configuration = MediaTrackingConfiguration(id: id)
     .captureEvents([MediaPlayEvent.self])
 let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
 `}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
 {`val configuration = MediaTrackingConfiguration(
     id = id,
@@ -555,12 +647,12 @@ let mediaTracking = tracker.media.startMediaTracking(configuration: configuratio
 )
 val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
 configuration.setCaptureEvents(Collections.singletonList(MediaPlayEvent.class));
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
+</>)}</>
 
 <>{(props.tracker == 'js-browser' || props.tracker == 'js-tag') && (<>
 <h4>Filter repeated events</h4>
@@ -691,6 +783,19 @@ configuration.setEntities(Collections.singletonList(
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`MediaTracking mediaTracking = tracker.startMediaTracking(
+    configuration: const MediaTrackingConfiguration(
+        id: id,
+        contexts: [
+          SelfDescribing(
+              schema: "iglu:org.schema/video/jsonschema/1-0-0",
+              data: {"creativeId": "value"})
+        ]
+    )
+);`}
+</CodeBlock>)}</>
+
 ## Updating playback properties
 
 Updates stored attributes of the media player such as the current playback.
@@ -725,6 +830,12 @@ updateMediaTracking({
 {`MediaPlayerEntity player = new MediaPlayerEntity();
 player.setCurrentTime(10.0);
 mediaTracking.update(player, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.update(
+    player: const MediaPlayerEntity(currentTime: 10.0)
+);`}
 </CodeBlock>)}</>
 
 ## Tracking media events
@@ -770,6 +881,13 @@ trackMediaSeekEnd({
 {`MediaPlayerEntity player = new MediaPlayerEntity();
 player.setCurrentTime(30.0);
 mediaTracking.track(new MediaSeekEndEvent(), player, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(
+    MediaPlayEvent(),
+    player: const MediaPlayerEntity(currentTime: 30.0)
+);`}
 </CodeBlock>)}</>
 
 #### Update ad and ad break properties
@@ -886,6 +1004,18 @@ adBreak.setBreakType(MediaAdBreakType.Linear);
 mediaTracking.track(new MediaAdBreakStartEvent(), null, null, adBreak);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(
+    MediaAdBreakStartEvent(),
+    adBreak: const MediaAdBreakEntity(
+        name: 'pre-roll', // Ad break name
+        breakId: '2345', // An identifier for the ad break
+        podSize: 2, // The number of ads to be played within the ad break
+        breakType: MediaAdBreakType.linear, // Type of ads within the break
+    )
+);`}
+</CodeBlock>)}</>
+
 #### Add context entities to tracked event
 
 You can add custom context entities to tracked events.
@@ -950,6 +1080,17 @@ trackMediaPlay({
 );`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(
+    MediaPlayEvent(),
+    contexts: [
+      const SelfDescribing(
+          schema: "iglu:org.schema/video/jsonschema/1-0-0",
+          data: {"creativeId": "1234"})
+    ]
+);`}
+</CodeBlock>)}</>
+
 ### Available event types
 
 #### Events for controlling the playback
@@ -976,6 +1117,10 @@ Tracks a media player ready event that is fired when the media tracking is succe
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaReadyEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaReadyEvent());`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1007,6 +1152,10 @@ Tracking this event will automatically set the `paused` property in the media pl
 {`mediaTracking.track(new MediaPlayEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaPlayEvent());`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/play_event/jsonschema/1-0-0`.
 
@@ -1034,6 +1183,10 @@ Tracking this event will automatically set the `paused` property in the media pl
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaPauseEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaPauseEvent());`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1065,6 +1218,10 @@ Tracking this event will automatically set the `ended` and `paused` properties i
 {`mediaTracking.track(new MediaEndEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaEndEvent());`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/end_event/jsonschema/1-0-0`.
 
@@ -1092,6 +1249,10 @@ Tracks a media player seek start event sent when a seek operation begins.
 {`mediaTracking.track(new MediaSeekStartEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaEndEvent());`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/seek_start_event/jsonschema/1-0-0`.
 
@@ -1117,6 +1278,10 @@ Tracks a media player seek end event sent when a seek operation completes.
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaSeekEndEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaSeekEndEvent());`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1158,6 +1323,10 @@ The `newRate` is passed when tracking the event and is automatically updated in 
 {`mediaTracking.track(new MediaPlaybackRateChangeEvent(null, 1.5), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(const MediaPlaybackRateChangeEvent(newRate: 1.5));`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/playback_rate_change_event/jsonschema/1-0-0`.
 
@@ -1195,6 +1364,10 @@ The `newVolume` is passed when tracking the event and is automatically updated i
 {`mediaTracking.track(new MediaVolumeChangeEvent(null, 80), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(const MediaVolumeChangeEvent(newVolume: 50));`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/volume_change_event/jsonschema/1-0-0`.
 
@@ -1228,6 +1401,10 @@ The `fullscreen` value is passed when tracking the event and is automatically up
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaFullscreenChangeEvent(true), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(const MediaFullscreenChangeEvent(fullscreen: true));`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1265,6 +1442,10 @@ The `pictureInPicture` value is passed when tracking the event and is automatica
 {`mediaTracking.track(new MediaPictureInPictureChangeEvent(true), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(const MediaPictureInPictureChangeEvent(pictureInPicture: false));`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/picture_in_picture_change_event/jsonschema/1-0-0`.
 
@@ -1296,6 +1477,10 @@ Tracking this event will increase the counter of `adBreaks` in the session entit
 {`mediaTracking.track(new MediaAdBreakStartEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaAdBreakStartEvent());`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_break_start_event/jsonschema/1-0-0`.
 
@@ -1321,6 +1506,10 @@ Tracks a media player ad break end event that signals the end of an ad break.
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaAdBreakEndEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaAdBreakEndEvent());`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1350,6 +1539,10 @@ Tracking this event will increase the counter of `ads` in the session entity.
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaAdStartEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaAdStartEvent());`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1387,6 +1580,10 @@ Tracking this event will increase the counter of `adsSkipped` in the session ent
 {`mediaTracking.track(new MediaAdSkipEvent(33), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(const MediaAdSkipEvent(percentProgress: 20));`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_skip_event/jsonschema/1-0-0`.
 
@@ -1420,6 +1617,10 @@ The event schema has one required property – it is set automatically to 25%:
 {`mediaTracking.track(new MediaAdFirstQuartileEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaAdFirstQuartileEvent());`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0`.
 
@@ -1451,6 +1652,10 @@ The event schema has one required property – it is set automatically to 50%:
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaAdMidpointEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaAdMidpointEvent());`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1487,6 +1692,10 @@ The event schema has one required property – it is set automatically to 75%:
 {`mediaTracking.track(new MediaAdThirdQuartileEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaAdMidpointEvent());`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_quartile/jsonschema/1-0-0`.
 
@@ -1512,6 +1721,10 @@ Tracks a media player ad complete event that signals the ad creative was played 
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaAdCompleteEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaAdCompleteEvent());`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1549,6 +1762,10 @@ Tracking this event will increase the counter of `adsClicked` in the session ent
 {`mediaTracking.track(new MediaAdClickEvent(33), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(const MediaAdClickEvent(percentProgress: 20));`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0`.
 
@@ -1582,6 +1799,10 @@ The event schema has one optional property:
 {`mediaTracking.track(new MediaAdPauseEvent(33), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(const MediaAdPauseEvent(percentProgress: 10));`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_pause_event/jsonschema/1-0-0`.
 
@@ -1607,6 +1828,10 @@ Tracks a media player ad resume event fired when the user resumed playing the ad
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaAdResumeEvent(33), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(const MediaAdResumeEvent(percentProgress: 15));`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1640,6 +1865,10 @@ The tracker will calculate the time since this event until either the buffer end
 {`mediaTracking.track(new MediaBufferStartEvent(), null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaBufferStartEvent());`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/buffer_start_event/jsonschema/1-0-0`.
 
@@ -1665,6 +1894,10 @@ Tracks a media player buffering end event fired when the the player finishes buf
 
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`mediaTracking.track(new MediaBufferEndEvent(), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(MediaBufferEndEvent());`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1734,6 +1967,18 @@ event.setAutomatic(false);
 mediaTracking.track(event, null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(
+    const MediaQualityChangeEvent(
+        previousQuality: '720p',
+        newQuality: '1080p',
+        bitrate: 1000,
+        framesPerSecond: 30,
+        automatic: false
+    )
+);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/quality_change_event/jsonschema/1-0-0`.
 
@@ -1791,6 +2036,17 @@ event.setErrorDescription("Failed to load media");
 mediaTracking.track(event, null, null, null);`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(
+    const MediaErrorEvent(
+        errorCode: '1001',
+        errorName: 'MEDIA_ERR_ABORTED',
+        errorDescription:
+            'The fetching process for the media resource was aborted by the user agent at the user\'s request.'
+    )
+);`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/error_event/jsonschema/1-0-0`.
 
@@ -1840,4 +2096,13 @@ When tracked within the context of a media tracking, the tracker will attach the
             put("foo", "bar");
         }}
 ), null, null, null);`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
+{`await mediaTracking.track(
+    const SelfDescribing(
+            schema: "iglu:com.acme/event/jsonschema/1-0-0",
+            data: {"foo": "bar"}
+    )
+);`}
 </CodeBlock>)}</>

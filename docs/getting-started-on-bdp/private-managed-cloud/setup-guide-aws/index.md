@@ -117,13 +117,13 @@ For complete documentation from Amazon go [here](https://docs.aws.amazon.com/org
 
 ### Set up Role and IAM Permissions with **CloudFormation**
 
-We also provide a CloudFormation template that will create a role named  with the full permission set [here](https://snowplow-hosted-assets.s3-eu-west-1.amazonaws.com/common/iam/Role_CF.yml).
+We also provide a CloudFormation template that will create a role named SnowplowAdmin with the full permission set [here](https://snowplow-hosted-assets.s3-eu-west-1.amazonaws.com/common/iam/SnowplowAdminRole_CF.yml).
 
 1. Access the CloudFormation service within the sub-account
 2. Go to Stacks select Create stack > With new resources (standard)
 3. Select Template is ready within the Prepare template block
-4. Specify an Amazon S3 URL with the full path to the  CloudFormation template and proceed
-5. Provide the stack with a meaningful name such as  stack
+4. Specify an Amazon S3 URL with the full path to the SnowplowAdmin CloudFormation template and proceed
+5. Provide the stack with a meaningful name such as SnowplowAdmin stack
 6. Now proceed through the remainder of the prompts and choose Create stack
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
@@ -137,7 +137,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 - Account ID: 793733611312
 - Do not require MFA, as Snowplow needs to be able to assume the role via headless jobs.
 3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
-- Role name: SnowplowDeployment (please use this specific name for this role)
+- Role name: SnowplowDeployment (please use this specific name)
 - Role description: Allows the Snowplow Team to programmatically deploy to this account.
 4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
 

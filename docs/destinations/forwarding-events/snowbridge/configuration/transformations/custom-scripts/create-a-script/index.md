@@ -17,6 +17,8 @@ type engineProtocol struct {
 	FilterOut    bool
 	PartitionKey string
 	Data         interface{}
+  HTTPHeaders  map[string]string
+}
 }
 ```
 
@@ -98,6 +100,14 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tra
 
 ```lua reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-setpk-modify-example.lua
+```
+
+## Setting a HTTP header (v)
+
+For the http target only, you can specify a set of http headers, which will be appended to the configured headers for the http target. Do so by prividing an object in the `HTTPHeaders` field:
+
+```js reference
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-header-example.js
 ```
 
 ## Configuration

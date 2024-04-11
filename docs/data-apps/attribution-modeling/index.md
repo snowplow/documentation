@@ -12,7 +12,7 @@ This data app is currently in Private Preview and features may change without no
 
 In today's increasingly complex digital world, users often take multi-channel journeys before converting. Assigning credit across multiple touchpoints is vital to getting an accurate picture of the efficacy of your marketing channels, yet requires merging disparate datasets and running complex calculations.
 
-Our **Attribution modeling** app (together with the [Snowplow Attribution dbt package]((/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md))) lowers the barrier to entry for your marketing team through the following features:
+Our **Attribution modeling** app (together with the [Snowplow Attribution dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)) lowers the barrier to entry for your marketing team through the following features:
 
 - Incremental SQL model in your warehouse for cost-effective computation
 - Choice of first-touch, last-touch, linear and positional methods, with additional filters and transforms available

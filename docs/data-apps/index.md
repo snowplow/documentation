@@ -98,8 +98,8 @@ data_app_roles = [
 Once created share the following details back with us:
 
 1. Project ID
-2. BigQuery Dataset ID
-3. BigQuery Dataset Region (indicator of where the app should default into but is configurable in most apps once launched)
+2. BigQuery Dataset ID (indicator of where the app should default into, but is configurable in most apps once launched)
+3. BigQuery Dataset Region (indicator of where the app should default into, but is configurable in most apps once launched)
 4. BigQuery Service Account JSON (**please send this in a secure format**)
 
 </TabItem>
@@ -143,7 +143,7 @@ Once created share the following details back with us:
 3. Snowflake Username
 4. Snowflake Password (**please send this in a secure format)**
 5. Snowflake Database
-6. Snowflake Schema (indicator of where the app should default into but is configurable in most apps once launched)
+6. Snowflake Schema (indicator of where the app should default into, but is configurable in most apps once launched)
 7. Snowflake Warehouse
 8. Snowflake Role
 
@@ -169,7 +169,7 @@ Once created share the following details back with us:
 1. [Warehouse server hostname](https://docs.databricks.com/en/integrations/compute-details.html)
 2. [The HTTP path to your SQL Warehouse](https://docs.databricks.com/en/integrations/compute-details.html)
 3. Connection catalog (likely `hive_metastore`)
-4. The default connection schema (indicator of where the app should default into but is configurable in most apps once launched)
+4. The default connection schema (indicator of where the app should default into, but is configurable in most apps once launched)
 5. [One of](https://docs.databricks.com/en/administration-guide/users-groups/service-principals.html#manage-tokens-for-a-service-principal) (**please send this in a secure format**):
     1. An OAUTH secret and client ID pair (Coming Soon)
     2. A Personal access token
@@ -193,7 +193,7 @@ Once created share the following details back with us:
 1. Redshift Username
 2. Redshift Password (**please send this in a secure format**)
 3. Redshift Database
-4. Redshift Schema (indicator of where the app should default into but is configurable in most apps once launched)
+4. Redshift Schema (indicator of where the app should default into, but is configurable in most apps once launched)
 5. Redshift Host
 6. Redshift Port (e.g. 5439)
 

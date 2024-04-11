@@ -80,7 +80,7 @@ Or, if modifying the data as well, return the modified data and PartitionKey fie
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-setpk-modify-example.js
 ```
 
-## Setting a HTTP header (v)
+## Setting a HTTP header
 
 For the http target only, you can specify a set of http headers, which will be appended to the configured headers for the http target. Do so by prividing an object in the `HTTPHeaders` field:
 

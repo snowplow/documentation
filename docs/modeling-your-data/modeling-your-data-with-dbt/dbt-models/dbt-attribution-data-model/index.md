@@ -81,6 +81,8 @@ The purpose of this package is to allow an incremental, efficient way to do mark
 
 In the below guide we will walk you through the data transformation process step-by-step in order for you to see how the source data changes downstream. This will give you and your team a transparent and easy-to-understand way to see how this package will lead you to valuable insights.
 
+We also provide the **[Attribution Data App](/docs/data-apps/attribution-modeling/index.md)** specifically to help your analysis by visualizing the output in the form of interactive dashboards as well as letting you capture datasets for comparison. It works in tandem with the package and will auto-update daily in case your package has been processed since then.
+
 ## Sources you are going to need
 
 ### 1. Conversion source
@@ -274,6 +276,7 @@ sources={{
 | campaign | last_touch  | Campaign 1     | 3 | 1 | 2023-07-07 13:05:55.000 | 2023-07-30 11:55:24.000 | 100,000 | 364 | 364| 0.00364 |
 | channel  | first_touch | Display_Other  | 1 | 1 | 2023-07-19 04:27:51.000 | 2023-07-19 04:27:51.000 | 100,000 | 66.5  | 66.5  | 0.000665 |
 | channel  | first_touch | Organic_Search | 2 | 0| 2023-07-19 04:27:51.000 | 2023-07-25 07:52:34.000 | 100,000 | 206.5  | 0  | 0 |
+
 
 ### Manifest table
 

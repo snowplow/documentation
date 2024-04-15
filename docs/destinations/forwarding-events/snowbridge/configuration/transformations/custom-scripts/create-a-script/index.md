@@ -19,10 +19,9 @@ type engineProtocol struct {
 	Data         interface{}
   HTTPHeaders  map[string]string
 }
-}
 ```
 
-This structure is represented as an object in the script engine, and serves as both the input and output of the script
+This structure is represented as an object in the script engine, and serves as both the input and output of the script.
 
 Scripts must define a main function with a single input argument:
 

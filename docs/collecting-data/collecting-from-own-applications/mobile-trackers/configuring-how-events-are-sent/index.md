@@ -247,7 +247,7 @@ EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
   </TabItem>
 </Tabs>
 
-:::note Behaviour before version 6.0.0 of the tracker
+:::note Behavior before version 6.0.0 of the tracker
 Before version 6 of the iOS and Android tracker, the `bufferOption` and `emitRange` had a slightly different meaning.
 Events were sent right after they were tracked regardless of the `bufferOption` used.
 The `bufferOption` was used to specify the maximum number of events per request and the `emitRange` specified the maximum number of total events to make in parallel requests at once.

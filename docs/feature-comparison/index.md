@@ -4,7 +4,7 @@ sidebar_position: 1
 hide_table_of_contents: true
 ---
 
-Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioural Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md). 
+Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md). 
 
 To find out more about the support services offered to Snowplow BDP customers see our [Statement of Support](/statement-of-support/).
 

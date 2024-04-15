@@ -144,7 +144,7 @@ This is a function used to determine which elements are tracked. The element is 
 
 This is a function used to transform data in each form field. The value and element (2.15.0+ only) are passed as arguments to the function and the tracked value is replaced by the value returned.
 
-:::note Behaviour prior to version 3.16 of the tracker
+:::note Behavior prior to version 3.16 of the tracker
 
 **In versions prior to 3.16.0**, the transform function would receive 2 arguments, that were different between `submit_form` and `change_form` or `focus_form` events. More specifically, the transform function signature **was**:
 

@@ -35,9 +35,9 @@ Previously a screen view event was tracked again by the [screen view autotrackin
 
 Affects: iOS ✅ Android ❌
 
-To standardise the behaviour between trackers, we've changed how the `entities()` method of all events works on iOS. Previously, calling `event.entities(newListEntities)` replaced all the context entities currently attached to the event. Now, the new entities are appended instead.
+To standardise the behavior between trackers, we've changed how the `entities()` method of all events works on iOS. Previously, calling `event.entities(newListEntities)` replaced all the context entities currently attached to the event. Now, the new entities are appended instead.
 
-There's no change to the behaviour of the variable `entities`, so you could still replace them all using `event.entities = newListEntities`.
+There's no change to the behavior of the variable `entities`, so you could still replace them all using `event.entities = newListEntities`.
 
 ## Event batching
 
@@ -93,7 +93,7 @@ The custom event and entity classes `SelfDescribing` and `SelfDescribingJson` no
 
 As mentioned above, the new `PlatformContextRetriever` callbacks class allows you to override any [platform entity](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/platform-and-application-context/index.md#overriding-platform-context-properties) properties. The `PlatformContextRetriever` is available for both iOS and Android.
 
-### Emitter and network connection behaviour
+### Emitter and network connection behavior
 
 The Android tracker default emit timeout has been increased to 30 seconds, from 5 seconds. This setting is configured using `NetworkConfiguration`. The `timeout` configuration option has been added to the iOS tracker.
 

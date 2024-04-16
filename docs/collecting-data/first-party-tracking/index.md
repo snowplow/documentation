@@ -65,7 +65,7 @@ For example, a cookie domain of `flowershop.ai` would work across all the follow
 - `test.app.flowershop.ai`
 - `flowershop.ai`
 
-In some cases, you may wish to separate the tracking of user behaviour for different subdomains.
+In some cases, you may wish to separate the tracking of user behavior for different subdomains.
 
 For example, if you own both `gardening.primary-domain.co.uk` and `insurance.primary-domain.co.uk` and only want to track users on `gardening.primary-domain.co.uk`, you can select that as your cookie domain and `c.gardening.primary-domain.co.uk` as your collector domain.
 </details>

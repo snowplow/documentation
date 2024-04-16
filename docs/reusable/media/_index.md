@@ -519,7 +519,7 @@ The media tracking plugin addresses this problem and automatically keeps the pag
 On the background, it calls the <code>updatePageActivity</code> function in activity tracking every time the media tracking is updated or a media event is tracked.
 </p>
 <p>
-The behaviour is enabled by default.
+The behavior is enabled by default.
 In case you don't want the page activity to be automatically updated when the video is playing, you can disable it as follows:
 </p>
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">

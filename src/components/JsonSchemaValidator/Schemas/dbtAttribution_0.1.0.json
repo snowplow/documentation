@@ -227,7 +227,7 @@
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
       "title": "Campaignes to Exclude",
-      "longDescription": "List of channels to exclude from analysis (empty to keep all campaigns).",
+      "longDescription": "List of campaigns to exclude from analysis (empty to keep all campaigns).",
       "packageDefault": "[ ] (no filter applied)",
       "group": "Contexts, Filters, and Logs",
       "items": {
@@ -242,7 +242,7 @@
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
       "title": "Campaigns to Include",
-      "longDescription": "List of channels to include in the analysis (empty to keep all campaigns).",
+      "longDescription": "List of campaigns to include in the analysis (empty to keep all campaigns).",
       "packageDefault": "[ ] (no filter applied)",
       "group": "Contexts, Filters, and Logs",
       "items": {

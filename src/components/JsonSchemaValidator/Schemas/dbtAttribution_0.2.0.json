@@ -226,8 +226,8 @@
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
-      "title": "Campaignes to Exclude",
-      "longDescription": "List of channels to exclude from analysis (empty to keep all campaigns).",
+      "title": "Campaigns to Exclude",
+      "longDescription": "List of campaigns to exclude from analysis (empty to keep all campaigns).",
       "packageDefault": "[ ] (no filter applied)",
       "group": "Contexts, Filters, and Logs",
       "items": {
@@ -242,7 +242,7 @@
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
       "title": "Campaigns to Include",
-      "longDescription": "List of channels to include in the analysis (empty to keep all campaigns).",
+      "longDescription": "List of campaigns to include in the analysis (empty to keep all campaigns).",
       "packageDefault": "[ ] (no filter applied)",
       "group": "Contexts, Filters, and Logs",
       "items": {
@@ -362,6 +362,16 @@
       "longDescription": "The [target name](https://docs.getdbt.com/docs/core/connect-data-platform/profiles.yml) of your development environment as defined in your `profiles.yml` file. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/) section for more details.",
       "packageDefault": "dev",
       "group": "Warehouse and Tracker"
+    },
+    "snowplow__allow_refresh": {
+      "recommendFullRefresh": true,
+      "order": 39,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Allow Refresh",
+      "group": "Operation and Logic",
+      "longDescription": "Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/) section for more details.",
+      "packageDefault": "false"
     }
   }
 }

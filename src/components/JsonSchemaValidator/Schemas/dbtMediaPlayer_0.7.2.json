@@ -492,7 +492,7 @@
       "consoleGroup": "basic",
       "type": "boolean",
       "warehouse": "Bigquery",
-      "title": "(Bigquery) Dervied Timestamp Partition",
+      "title": "(Bigquery) Derived Timestamp Partition",
       "longDescription": "Boolean to enable filtering the events table on `derived_tstamp` in addition to `collector_tstamp`.",
       "packageDefault": "true",
       "group": "Warehouse Specific"

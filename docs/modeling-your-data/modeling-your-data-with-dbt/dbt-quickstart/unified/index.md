@@ -20,7 +20,7 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed:
 </details>
 
 <details>
-<summary>To mode mobile events</summary>
+<summary>To model mobile events</summary>
 
 - mobile events dataset being available in your database
 - Snowplow [Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/index.md), [iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 (or later) or [React Native tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/react-native-tracker/) implemented

@@ -72,6 +72,16 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 :::
 
+Next, Unified Digital assumes you are modeling both web and mobile events and expects certain fields to exist based on this. If you are only tracking and modeling e.g. web data, you can disable the other as below:
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__enable_mobile: false
+    snowplow__enable_web: true
+```
+Note these are both `true` by default so you only need to add the one you wish to disable.
+
 ### 4. Enabled desired contexts
 
 The Unified Digital Model has the option to join in data from the following Snowplow enrichments and out-of-the-box context entities:

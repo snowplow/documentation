@@ -53,7 +53,7 @@ The [application context entity](https://github.com/snowplow/iglu-central/blob/m
 | `version` | String | Version number of the application e.g 1.1.0 | Yes |
 | `build` | String | Build name of the application e.g s9f2k2d or 1.1.0 beta | Yes |
 
-## Platform context
+## Platform (mobile) context
 
 The [platform context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-3) contains the following properties:
 
@@ -253,3 +253,17 @@ Read more about [Google Play Data safety here.](../../android-google-play-data-s
 
   </TabItem>
 </Tabs>
+
+### App set ID (Android only)
+
+To identify a set of apps owned by an organization, Google provides the app set ID. Read more about it [here](https://developer.android.com/training/articles/app-set-id).
+
+An extra dependency is required to populate the Android-specific properties `appSetId` and `appSetIdScope` within the platform context entity.
+
+```gradle
+dependencies {
+    ...
+    implementation 'com.google.android.gms:play-services-appset:16.0.2'
+    ...
+}
+```

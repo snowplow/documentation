@@ -52,7 +52,7 @@ import SwiftUI
 
 struct ProductDetail: View {
     var product: Product
-    
+
     var body: some View {
         List {
             ...
@@ -90,7 +90,7 @@ Using the Android `Application.ActivityLifecycleCallbacks` interface, the tracke
 
 Apps built with Jetpack Compose are constructed from Composable functions rather than Activities, and so the built-in ScreenViewAutotracking will not work.
 
-One possibility for an equivalent functionality is to add a navigation listener, which can track a screen view for each new destination. 
+One possibility for an equivalent functionality is to add a navigation listener, which can track a screen view for each new destination.
 
 
 ```kotlin
@@ -101,6 +101,8 @@ fun autoTrackScreenView(navController: NavController) {
 }
 ```
 Try out this example in the Compose demo inside the [Android codebase](https://github.com/snowplow/snowplow-android-tracker).
+
+Depending how your app is configured, this listener may result in a `ScreenView` being tracked when the app returns from background. This is not how the tracker is intended to work; our screen engagement feature tracks the time spent on a screen whether in foreground or background. If you are experiencing this extra `ScreenView` (and `ScreenEnd`) being tracked, consider adding a check to the listener callback.
 
   </TabItem>
   <TabItem value="android-java" label="Android (Java)">
@@ -230,7 +232,7 @@ import SwiftUI
 
 struct ProductList: View {
     var products: [Product]
-    
+
     var body: some View {
         List {
             ForEach(Array(products.enumerated()), id: \.1.url) { offset, product in

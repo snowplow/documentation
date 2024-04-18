@@ -11,63 +11,47 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-An event describes a single, transient activity. The context in which that event occurs - the relatively persistent environment - is also incredibly valuable data. 
+An event describes a single, transient activity. The context in which that event occurs - the relatively persistent environment - is also incredibly valuable data.
 
-The tracker allows to add a persistent set of information through the `SubjectConfiguration` which represents the basic information about the user and the app which will be attached on all the events as context entity.
+The tracker allows the addition of a persistent set of information through the `SubjectConfiguration`, which represents the basic information about the user and the app. This data is added to every event as part of the [canonical event properties](docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/going-deeper/event-parameters/index.md).
 
-- **userId** = null: The custom user identifier.
-    
-- **useragent** = null: The custom user-agent. It overrides the user-agent used by default.
-    
-- **ipAddress** = null: The IP address (not automatically set).
-    
-- **timezone** (set by the tracker): The current timezone label.
-    
-- **language** (set by the tracker): The language set in the device.
-    
-- **screenResolution** (set by the tracker): The screen resolution.
-    
-- **screenViewPort** = null: The screen viewport.
-    
-- **colorDepth** = null: The color depth.
-
-
-The fields tracked using `SubjectConfiguration` are relevant in client-side tracking. Some are set automatically in all events during enrichment, even when no _subject_  is added. These properties are marked with `*` below, and discussed below. Timezone, marked with `**`, is only set when a `Subject` is tracked with the event.
-
-Add these fields to an event using `Subject`:
-
-| Property         | Field in raw event | Column(s) in enriched event         |
-|------------------|--------------------|-------------------------------------|
-| userId           | uid                | user_id                             |
-| ipAddress*       | ip                 | user_ipaddress                      |
-| timezone**       | tz                 | os_timezone                         |
-| language         | lang               | br_lang                             |
-| useragent*       | ua                 | useragent                           |
-| viewport         | vp                 | br_viewheight, br_viewwidth         |
-| screenResolution | res                | dvce_screenheight, dvce_screenwidth |
-| colorDepth       | cd                 | br_colordepth                       |
-| networkUserId*   | tnuid              | network_userid                      |
-
+| Property | Description | Automatically added? | Column(s) in enriched event |
+| -------- | ----------- |: --------------------- :| ----------------------------------- |
+| `userId`           | User identifier.            | ❌                     | `user_id`                             |
+| `ipAddress`        | User IP address.            | ✅                     | `user_ipaddress`                      |
+| `timezone`         | Current timezone label.     | ✅                     | `os_timezone`                         |
+| `language`         | Language set in the device. | ✅                     | `br_lang`                             |
+| `useragent`        | User-agent.                 | ✅                     | `useragent`                           |
+| `viewport`         | Screen viewport.            | ✅ (iOS) / ❌ (Android) | `br_viewheight`, `br_viewwidth`         |
+| `screenResolution` | Screen resolution.          | ✅                     | `dvce_screenheight`, `dvce_screenwidth` |
+| `colorDepth`       | Screen color depth.         | ❌                     | `br_colordepth`                       |
+| `networkUserId`    | Network user ID.            | ✅                     | `network_userid`                      |
+| `domainUserId`     | Domain user ID.             | ❌                     | `domain_userid`                       |
 
 As always, be aware of privacy when tracking [personal identifiable information](https://snowplow.io/blog/2020/09/06/user-identification-and-privacy/) such as email addresses or IP addresses.
 The tracker provides anonymous tracking functionality to mask certain user identifiers. Refer to the [section on anonymous tracking to learn more](../anonymous-tracking/index.md).
 
+:::note Android screen resolution
+The default screen resolution values are fetched from `WindowManager`, an older Android API. Screen resolution is also reported in the [platform context entity](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/platform-and-application-context/index.md), which obtains the screen size from the Android context resources. The height value will likely be higher in `dvce_screenheight` than in the context entity, as the `WindowManager` size includes the menu bar.
+
+To use the modern API throughout the tracker and standardize the screen resolution between event and entity properties, set `useContextResourcesScreenResolution(true)` flag in `SubjectConfiguration`. This flag is off by default.
+:::
+
 ## Overriding autogenerated event properties
 
-All enriched Snowplow events contain values for `user_ipaddress`, `useragent`, and `network_userid`. 
+All enriched Snowplow events contain values for `user_ipaddress`, `useragent`, and `network_userid`.
 
-The `user_ipaddress` is automatically added to all enriched events (unless [anonymous tracking with server anonymisation](../anonymous-tracking/index.md) is enabled). To manually override this, use a `Subject` and set an `ipAddress` string; use an empty string to prevent IP address tracking. Alternatively, use the [IP anonymization enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md).
+Unless [anonymous tracking with server anonymisation](../anonymous-tracking/index.md) is enabled, the `user_ipaddress` is automatically added to all enriched events. To manually override this without using anonymous tracking, use a `SubjectConfiguration` and set an `ipAddress` string; use an empty string to prevent IP address tracking. Alternatively, use the [IP anonymization enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md).
 
-The `useragent` is also automatically added but it can be overriden on configuration. Snowplow pipelines provide multiple useragent-parsing [enrichments](/docs/enriching-your-data/available-enrichments/index.md). To manually override the detected useragent, use a `Subject` and set a `useragent` string.
+The `useragent` is also automatically added but it can be overriden on configuration. Snowplow pipelines provide multiple useragent-parsing [enrichments](/docs/enriching-your-data/available-enrichments/index.md). To manually override the detected useragent, set a `useragent` string.
 
-The `network_userid` is the cookie value for the event collector's third-party cookie. The cookie is named `sp` (or `micro` for Snowplow Micro pipelines). To override the collector cookie’s value with your own generated ID, use a `Subject` object and set `networkUserId`.
+The `network_userid` is the cookie value for the event collector's third-party cookie. The cookie is named `sp` (or `micro` for Snowplow Micro pipelines). To override the collector cookie’s value with your own generated ID, set `networkUserId`. Again, anonymous tracking with server anonymisation will prevent the addition of this property to events. The `network_userid` is stored in the tracker and is kept the same until the app is deleted or the collector endpoint is changed or the cookie is expired.
 
-The `network_userid` is stored in the tracker and it's kept the same until the app is deleted or the collector endpoint is changed or the cookie is expired. It is not assigned to events if anonymous tracking with server anonymisation is enabled.
+All other `Subject` properties can be also manually overriden via `SubjectConfiguration` and `SubjectController`.
 
-A further property, `timezone`, is generated automatically during Subject initialization, based on `Calendar.getInstance().getTimeZone()`. Therefore, this will be added to all events with a `Subject` attached. The default will be overriden if `timezone` is provided explicitly. 
+## Set the `Subject` properties
 
-## Set the `SubjectConfiguration`
-A simple `SubjectConfiguration` initialisation looks like this:
+Initialize the tracker with a `SubjectConfiguration` like this:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -75,6 +59,13 @@ A simple `SubjectConfiguration` initialisation looks like this:
 ```swift
 let subjectConfig = SubjectConfiguration()
     .userId("username")
+
+let networkConfig = NetworkConfiguration(endpoint: "https://snowplow-collector-url.com")
+Snowplow.createTracker(
+    namespace: "appTracker",
+    network: networkConfig,
+    configurations: [subjectConfig]
+)
 ```
 
 See the API docs for the full [list of options](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/subjectconfiguration).
@@ -85,6 +76,14 @@ See the API docs for the full [list of options](https://snowplow.github.io/snowp
 ```kotlin
 val subjectConfig = SubjectConfiguration()
     .userId("username")
+
+val networkConfig = NetworkConfiguration("[http:/endpoint](https://snowplow-collector-url.com)")
+Snowplow.createTracker(
+    applicationContext,
+    "namespace",
+    networkConfig,
+    subjectConfig
+)
 ```
 
 See the API docs for the full [list of options](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/-subject-configuration/index.html).
@@ -95,6 +94,16 @@ See the API docs for the full [list of options](https://snowplow.github.io/snowp
 ```java
 SubjectConfiguration subjectConfig = new SubjectConfiguration()
     .userId("username");
+
+NetworkConfiguration networkConfig = new NetworkConfiguration(
+    "https://snowplow-collector-url.com"
+);
+Snowplow.createTracker(
+    getApplicationContext(),
+    "appTracker",
+    networkConfig,
+    subjectConfig
+);
 ```
 
 See the API docs for the full [list of options](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/-subject-configuration/index.html).

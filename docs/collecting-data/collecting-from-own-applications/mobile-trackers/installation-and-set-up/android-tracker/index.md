@@ -25,7 +25,9 @@ dependencies {
   ...
 }
 ```
-No other dependencies are required to track events. However, some **optional** dependencies can be added: `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/installation-tracking/index.md), and the `Play Services` dependencies for [tracking the app set ID and AAID](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/platform-and-application-context/index.md).
+No other dependencies are required to track events. However, some **optional** dependencies can be added:
+- `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/installation-tracking/index.md).
+-  `Play Services` dependencies for [tracking the app set ID and AAID](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/platform-and-application-context/index.md).
 
 ## Setting up
 
@@ -161,7 +163,8 @@ SessionConfiguration sessionConfig = new SessionConfiguration(
     new TimeMeasure(30, TimeUnit.SECONDS),
     new TimeMeasure(30, TimeUnit.SECONDS)
 );
-Snowplow.createTracker(getApplicationContext(),
+Snowplow.createTracker(
+    getApplicationContext(),
     "appTracker",
     networkConfig,
     trackerConfig,

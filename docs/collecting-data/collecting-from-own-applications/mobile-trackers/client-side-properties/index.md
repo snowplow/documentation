@@ -47,7 +47,7 @@ The `useragent` is also automatically added but it can be overriden on configura
 
 The `network_userid` is the cookie value for the event collector's third-party cookie. The cookie is named `sp` (or `micro` for Snowplow Micro pipelines). To override the collector cookie’s value with your own generated ID, set `networkUserId`. Again, anonymous tracking with server anonymisation will prevent the addition of this property to events. The `network_userid` is stored in the tracker and is kept the same until the app is deleted or the collector endpoint is changed or the cookie is expired.
 
-All other `Subject` properties can be also manually overriden via `SubjectConfiguration` and `SubjectController`.
+All other `Subject` properties can also be manually overriden via `SubjectConfiguration` and `SubjectController`.
 
 ## Set the `Subject` properties
 

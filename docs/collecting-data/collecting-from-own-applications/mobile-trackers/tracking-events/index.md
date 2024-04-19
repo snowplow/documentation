@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-To track an event, pass an event to the tracker instance. 
+To track an event, pass an event to the tracker instance.
 
 For example, tracking a ScreenView:
 
@@ -49,14 +49,14 @@ TrackerController tracker = Snowplow.createTracker(
       "https://snowplow-collector-url.com" // Event collector URL
 );
 
-ScreenView event = new ScreenView("screen");         
+ScreenView event = new ScreenView("screen");
 tracker.track(event);
 ```
 
   </TabItem>
 </Tabs>
 
-The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types, as well as fully custom events. 
+The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types, as well as fully custom events.
 
 Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the configuration, but you can attach your own [custom entities](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) as well.
 
@@ -100,7 +100,7 @@ Snowplow.createTracker(namespace: "appTracker", network: networkConfig) {
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
-```java
+```kotlin
 val trackerConfig = TrackerConfiguration("appId")
     .platformContext(true)
     .applicationContext(true)
@@ -152,59 +152,18 @@ The tracker provides classes for tracking different types of events.
 The events are divided into two groups: canonical events and self-describing events.
 <!-- You can read more about the difference between the two [here](TODO) -->
 
-### Creating a Structured event
-
-Our philosophy in creating Snowplow is that users should design suitable data structures customised for their own consumer interactions data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md).
-
-However, as part of a Snowplow implementation there may be interactions where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="ios" label="iOS" default>
-
-```swift
-let event = Structured(category: "Example", action: "my-action")
-    .label("my-label")
-    .property("my-property")
-    .value(5)
-
-tracker.track(event)
-```
-
-  </TabItem>
-  <TabItem value="android" label="Android (Kotlin)">
-
-```kotlin
-val event = Structured("shop", "add-to-basket") // category and action
-    .label("Add To Basket")
-    .property("pcs")
-    .value(2.0)
-tracker.track(event)
-```
-
-  </TabItem>
-  <TabItem value="android-java" label="Android (Java)">
-
-```java
-Structured event = new Structured("shop", "add-to-basket") // category and action
-    .label("Add To Basket")
-    .property("pcs")
-    .value(2);
-tracker.track(event);
-```
-
-  </TabItem>
-</Tabs>
-
 ### Creating a Timing event
 
 Use the `Timing` events to track user timing events such as how long resources take to load.
+
+The event schema is `iglu:com.snowplowanalytics.snowplow/timing/jsonschema/1-0-0`.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
 let event = Timing(category: "timing-category", variable: "timing-variable", timing: 5)
-    .label("optional-label")       
+    .label("optional-label")
 
 tracker.track(event)
 ```
@@ -234,7 +193,9 @@ tracker.track(event);
 
 ### Creating a ScreenView event
 
-Track the user viewing a screen within the application. This type of tracking is typically used when automatic screen view tracking is not suitable within your application.
+Track the user viewing a screen within the application. This type of tracking is typically used when automatic [screen view tracking](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md) is not suitable within your application.
+
+The event schema is `iglu:com.snowplowanalytics.mobile/screen_view/jsonschema/1-0-0`.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -272,14 +233,16 @@ tracker.track(event);
 
 Use the `ConsentGranted` event to track a user opting into data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied.
 
+The event schema is `iglu:com.snowplowanalytics.snowplow/consent_granted/jsonschema/1-0-0`. The consent document schema is `iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0`.
+
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")       
+let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
@@ -312,6 +275,8 @@ tracker.track(event);
 
 Use the `ConsentWithdrawn` event to track a user withdrawing consent for data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied. To specify that a user opts out of all data collection, `all` should be set to `true`.
 
+The event schema is `iglu:com.snowplowanalytics.snowplow/consent_withdrawn/jsonschema/1-0-0`. The consent document schema is `iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0`.
+
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
@@ -319,10 +284,10 @@ Use the `ConsentWithdrawn` event to track a user withdrawing consent for data co
 let event = ConsentWithdrawn()
     .all(true)
     .documentId("1234abcd")
-    .version("1.2")       
+    .version("1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
@@ -353,7 +318,9 @@ tracker.track(event);
 
 ### Tracking Push and Local Notifications
 
-To track an event when a push (or local) notification is used, it is possible to use the `MessageNotification` event:
+To track an event when a push (or local) notification is used, it is possible to use the `MessageNotification` event.
+
+The event schema is `iglu:com.snowplowanalytics.mobile/message_notification/jsonschema/1-0-0`.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -411,6 +378,8 @@ tracker.track(event);
 ### Tracking Deep Links
 
 The Deep Link is received by the mobile operating system and passed to the related app. Our mobile tracker can't automatically track the Deep Link, but we provide an out-of-the-box event that can be used by the developer to manually track it as soon as the Deep Link is received in the app.
+
+The event schema is `iglu:com.snowplowanalytics.mobile/deep_link_received/jsonschema/1-0-0`.
 
 It will be the duty of the tracker to automatically attach the information of the Deep Link to the first ScreenView tracked.
 
@@ -534,13 +503,57 @@ The Campaign Attribution Enrichment can parse the DeepLinkReceived event extract
 
 The tracked `DeepLinkReceived` event and each subsequent `ScreenView` event also have the URL and referrer information added in the `page_url` and `page_referrer` atomic properties. This makes them compatible with data models and enrichments built for events tracked on the Web.
 
+
+### Creating a Structured event
+
+Our philosophy in creating Snowplow is that users should design suitable data structures customised for their own consumer interactions data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md).
+
+However, as part of a Snowplow implementation there may be interactions where [custom `SelfDescribing` events](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) are unwarranted. Those are candidates to track as `Structured` events. We do strongly recommend using fully custom `SelfDescribing` events.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let event = Structured(category: "Example", action: "my-action")
+    .label("my-label")
+    .property("my-property")
+    .value(5)
+
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val event = Structured("shop", "add-to-basket") // category and action
+    .label("Add To Basket")
+    .property("pcs")
+    .value(2.0)
+tracker.track(event)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+Structured event = new Structured("shop", "add-to-basket") // category and action
+    .label("Add To Basket")
+    .property("pcs")
+    .value(2);
+tracker.track(event);
+```
+
+  </TabItem>
+</Tabs>
+
 ## Tracking data that is not event-type specific
 
 Some data, such as that relating to the user whose activity is being tracked, is relevant across all event types. The tracker provides two mechanisms for tracking this kind of data.
 
 Certain properties, including `userId` or `ipAddress`, can be set as "atomic" properties in the raw event, using the [`Subject` class](../client-side-properties/index.md).
 
-A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](../custom-tracking-using-schemas/index.md).
+A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more about custom tracking [here](../custom-tracking-using-schemas/index.md).
 
 All events also provide the option for setting a custom timestamp, called `trueTimestamp`. See below for details.
 
@@ -548,7 +561,7 @@ All events also provide the option for setting a custom timestamp, called `trueT
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `Event` in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538). 
+Every `Event` in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
 
 A `trueTimestamp` can be added to any event using the `trueTimestamp()` method:
 

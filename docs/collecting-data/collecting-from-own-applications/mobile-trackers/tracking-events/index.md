@@ -508,7 +508,7 @@ The tracked `DeepLinkReceived` event and each subsequent `ScreenView` event also
 
 Our philosophy in creating Snowplow is that users should design suitable data structures customised for their own consumer interactions data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md).
 
-However, as part of a Snowplow implementation there may be interactions where custom `SelfDescribing` events are unwarranted. Those are candidates to track as `Structured` events. We do strongly recommend using fully custom `SelfDescribing` events.
+However, as part of a Snowplow implementation there may be interactions where [custom `SelfDescribing` events](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) are unwarranted. Those are candidates to track as `Structured` events. We do strongly recommend using fully custom `SelfDescribing` events.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -553,7 +553,7 @@ Some data, such as that relating to the user whose activity is being tracked, is
 
 Certain properties, including `userId` or `ipAddress`, can be set as "atomic" properties in the raw event, using the [`Subject` class](../client-side-properties/index.md).
 
-A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more on the [next page](../custom-tracking-using-schemas/index.md).
+A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more about custom tracking [here](../custom-tracking-using-schemas/index.md).
 
 All events also provide the option for setting a custom timestamp, called `trueTimestamp`. See below for details.
 

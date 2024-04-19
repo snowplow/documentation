@@ -88,7 +88,7 @@ The [platform context entity](https://github.com/snowplow/iglu-central/blob/mast
 :::note Android screen resolution
 The screen resolution for the platform entity is obtained from the Android context resources. The height value will likely be lower than that reported in the canonical `dvce_screenheight` [event property](docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/going-deeper/event-parameters/index.md), which is fetched from `WindowManager`, an older API that still includes the menu bar.
 
-To standardize the screen resolution between event and entity properties, provide a `SubjectConfiguration` with `useContextResourcesScreenResolution(true)` flag at tracker initialization. This flag is false by default. Read about configuring `Subject` properties [here](docs/collecting-data/collecting-from-own-applications/mobile-trackers/client-side-properties/index.md).
+To standardize the screen resolution between event and entity properties, provide a `SubjectConfiguration` with `useContextResourcesScreenResolution(true)` flag at tracker initialization. This flag is false by default, and available from Android tracker v6.0.3 onwards. Read about configuring `Subject` properties [here](docs/collecting-data/collecting-from-own-applications/mobile-trackers/client-side-properties/index.md).
 :::
 
 

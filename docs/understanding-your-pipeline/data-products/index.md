@@ -29,6 +29,11 @@ Data products at Snowplow are underpinned by the concept of a data contract. The
 
 We have always believed in the value of data contracts at Snowplow; our tech is underpinned by event and entity schemas that describe upfront the structure of the data and ensure that the data conforms to that structure as it is processed by your pipeline. This schema technology forms the foundations of a data contract, but data products take this to the next level to bring enhanced quality, governance and discoverability to the data that you create. 
 
+Examples of data products:
+
+* E-commerce Web
+* Media Web
+
 ## Key elements of a Data Product
 
 **An owner**; data products are typically split by domain with each data product having an explicit owner that is responsible for the maintenance and evolution of that data.

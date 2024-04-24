@@ -14,7 +14,11 @@ To create a new data product, navigate to the "Data products" section from the n
 
 ![Create data product](images/create-data-product.png)
 
-A form will appear on the page. Enter your data product information and click "Create and continue" to navigate to the event specification page.
+A modal will appear on the page, giving you the possibility to quickly create a data product from several templates or create one from scratch.
+
+![Create data product modal](images/create-data-product-modal.png)
+
+After selecting "Create from scratch" a form will appear on the page. Enter your data product information and click "Create and continue" to navigate to the event specification page.
 
 ![Event specifications](images/event-specifications.png)
 

@@ -23,7 +23,7 @@ You might have already set up a warehouse connection for loading the data. Data 
 
 :::
 
-Currently, only Snowflake connections can be created. However, support for other warehouses will be added soon.
+Currently, only Snowflake and Databricks connections can be created. However, support for other warehouses will be added soon.
 
 ## Create a data model
 To create a new data model, click the "Add data model" button. Then, select the data model you're interested in, such as [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md), and the warehouse connection it should use. You can also specify the owners of the data model who will be alerted in case of failure.

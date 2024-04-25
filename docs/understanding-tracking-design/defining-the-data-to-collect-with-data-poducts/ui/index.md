@@ -14,7 +14,7 @@ To create a new data product, navigate to the "Data products" section from the n
 
 ![Create data product](images/create-data-product.png)
 
-A modal will appear on the page, giving you the possibility to quickly create a data product from several templates or create one from scratch.
+A modal will appear on the page, giving you the possibility to quickly create a data product by using one of the existing templates or create one from scratch.
 
 ![Create data product modal](images/create-data-product-modal.png)
 

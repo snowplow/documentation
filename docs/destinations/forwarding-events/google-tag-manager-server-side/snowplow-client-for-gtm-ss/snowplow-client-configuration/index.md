@@ -111,3 +111,170 @@ You can use this table to specify the rules to set the `user_id` of the common e
 
 - **Priority**: Using this column you can set the priority (higher values mean higher priority) with which the Client will look into the Snowplow event to locate the value to set the `user_id`.
 - **Property name or path**: This column refers to the common event, so you can define alternative Snowplow properties using the `x-sp-` prefix before the enriched property name or nested path (using dot notation). For example: `x-sp-contexts_com_acme_user_entity_1.0.email`.
+
+### Snowplow Entities Mapping
+
+:::note
+
+This is an advanced feature and we recommend that you first explore the configuration options of your Tag(s) in case they are enough to cover your use case.
+
+:::
+
+#### Merge selected Snowplow entities
+
+Enable this option to allow merging of Snowplow context data to the Common Event. Checking this box reveals the following table:
+
+![](images/context_merging_overview.png)
+
+#### Context entities to merge
+
+Using this table you can specify the rules to merge Snowplow context entity data to the Common Event. The columns of this table are:
+
+![](images/context_merging_new_row.png)
+
+1. **Schema**: (Required) The schema of the context entity to merge.
+
+:::info
+
+The **Schema** can be specified in 3 ways:
+
+- Iglu URI (e.g. `iglu:com.acme/test/jsonschema/1-0-0` )
+- Enriched name (e.g. `contexts_com_acme_test_1`)
+- Common Event name (e.g. `x-sp-contexts_com_acme_test_1`)
+
+:::
+
+2. **Apply to all versions**: (False/True) Whether the rule applies to all versions of the context entity schema. Default is False.
+
+:::info
+
+When you set **Apply to all versions** to `True`, it will apply the same rule to all versions of the schema, independently of the one mentioned in the **Schema** field.
+
+:::
+
+3. **Prefix**: (Optional) Specify a prefix to use for property names when merging.
+
+4. **Merge to**: (Event Properties/Custom) Specify where to merge the context entity's properties. Default is Event Properties, i.e. to the root level of the common event.
+
+5. **Custom path**: (Optional) The path for custom merging.
+
+:::info
+
+The **Custom path** option applies only if the **Merge to** column is set to `Custom`, else the row is considered invalid.
+
+:::
+
+6. **Keep original mapping**: (True/False) Whether to keep the original context mapping. Default is True.
+
+7. **Custom transformation**: (Optional) Specify a Variable returning **a function** that represents a custom transformation of the context data to the desired object before merging. The default behaviour is the following: It first checks whether the context array contains a single entity object and if so, it merges this single object. In case the context specified contains multiples of entity objects, the rule is not applied (in those cases you will need to provide a custom transformation function through a Variable).
+
+:::info
+
+The function signature must be: `(contextArray, event) => Object`
+
+The Client guarantees that it will call this function providing as arguments the original context (Array) specified and the Common Event (Object) it has constructed. The event argument is provided in order to enable merging logic to optionally be based on event properties. Please note that it is not possible to modify the event inside the function you will define. The Client expects the function to return an Object, otherwise the value is ignored.
+
+:::
+
+#### Example: Custom transformation function for context mapping
+
+You can define and return the function in a **Variable Template**, which you can then use to create a **Variable** to reference.
+
+The following is an example code of such a **Variable Template**:
+
+```javascript
+// Variable template code
+function selectFirst(contextArray, event) {
+  // the function must return an object
+  return contextArray[0];
+}
+
+// The Variable must return the function
+return selectFirst;
+```
+
+### Snowplow Self-describing Event Mapping
+
+:::note
+
+This is an advanced feature and we recommend that you first explore the configuration options of your Tag(s) in case they are enough to cover your use case.
+
+:::
+
+#### Merge selected Snowplow self-describing event data
+
+Enable this option to allow merging of Snowplow self-describing event data to the Common Event. Checking this box reveals the following table:
+
+![](images/selfdesc_merging_overview.png)
+
+#### Self-describing events to merge
+
+Using this table you can specify the rules to merge Snowplow self-describing event data to the Common Event. The columns of this table are:
+
+![](images/selfdesc_merging_new_row.png)
+
+**Schema**: (Required) The schema of the self-describing event.
+
+:::info
+
+The **Schema** can be specified in 3 ways:
+
+- Iglu URI (e.g. `iglu:com.acme/myevent/jsonschema/1-0-0` )
+- Enriched name (e.g. `contexts_com_acme_myevent_1`)
+- Common Event name (e.g. `x-sp-contexts_com_acme_myevent_1`)
+
+:::
+
+**Apply to all versions**: (False/True) Whether the rule applies to all versions of the self-describing event schema. Default is False.
+
+:::info
+
+When you set **Apply to all versions** to `True`, it will apply the same rule to all versions of the schema, independently of the one mentioned in the **Schema** field.
+
+:::
+
+**Prefix**: (Optional) Specify a prefix to use for property names when merging.
+
+**Merge to**: (Event Properties/Custom) Specify where to merge the self-describing event’s properties. Default is Event Properties, i.e. to the root level of the common event.
+
+**Custom path**: (Optional) The path for custom merging.
+
+:::info
+
+The **Custom path** option applies only if the **Merge to** column is set to `Custom`, else the row is considered invalid.
+
+:::
+
+**Keep original mapping**: (True/False) Whether to keep the original context mapping. Default is True.
+
+**Custom transformation**: (Optional) Specify a Variable returning **a function** that represents a custom transformation of the self-describing data to the desired object before merging. The default behaviour is to merge the self-describing data object as is.
+
+:::info
+
+The function signature must be: `(selfDescObject, event) => Object`
+
+The Client guarantees that it will call this function providing as arguments the original self-describing data (Object) specified and the Common Event (Object) it has constructed. The event argument is provided in order to enable merging logic to optionally be based on other event properties. Please note that it is not possible to modify the event inside the function you will define. The Client expects the function to return an Object, otherwise the value is ignored.
+
+:::
+
+#### Example: Custom transformation function for self-describing event mapping
+
+You can define and return the function in a **Variable Template**, which you can then use to create a **Variable** to reference.
+
+The following is an example code of such a **Variable Template**:
+
+```javascript
+// Variable template code
+const Object = require('Object');
+
+function addKeySuffix(selfDescObject, event) {
+  // the function must return an object
+  return Object.keys(selfDescObject).reduce((acc, curr) => {
+    acc[curr.concat('_suffix')] = selfDescObject[curr];
+    return acc;
+  }, {});
+}
+
+// The Variable must return the function
+return addKeySuffix;
+```
